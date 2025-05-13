@@ -1,0 +1,14 @@
+---
+description: Dockerfile best practices (minimize layers, multi-stage builds, security).
+globs: Dockerfile,docker-compose.yml,docker-compose.*.yml,.dockerignore
+alwaysApply: false
+---
+
+# Docker Specific Rules
+
+- **Minimize Layers:** Chain related `RUN` commands using `&&` to reduce the number of image layers. Combine `apt-get update` and `apt-get install` in the same `RUN`. Clean up package manager caches afterwards (`rm -rf /var/lib/apt/lists/*`).
+- **Multi-Stage Builds:** Use multi-stage builds to separate build-time dependencies from runtime dependencies, resulting in smaller, more secure final images.
+- **Specific Base Images:** Use specific tags for base images (e.g., `python:3.11-slim`) instead of `latest` for reproducible builds.
+- **`.dockerignore`:** Utilize a comprehensive `.dockerignore` file to prevent unnecessary files (like `.git`, `node_modules`, local configs, build artifacts) from being copied into the build context or image.
+- **Least Privilege:** Run containers as a non-root user. Create a dedicated user/group (`USER` instruction).
+- **Order Matters:** Place instructions that change less frequently (like installing dependencies) before instructions that change more frequently (like copying source code) to leverage Docker's build cache effectively.

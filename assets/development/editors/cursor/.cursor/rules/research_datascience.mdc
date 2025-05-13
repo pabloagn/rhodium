@@ -1,0 +1,48 @@
+---
+description: Guidelines for conducting reproducible, clear, and rigorous research & data science tasks, including data handling, analysis, visualization, reporting, and citation.
+globs: *.py,*.ipynb,*.R,*.r,*.md
+alwaysApply: false
+---
+
+# Research & Data Science Specific Rules
+
+*(Complements general Code Quality, Documentation, and Python/R rules)*
+
+**Module 8: Research Workflow & Rigor**
+
+- Rule 8.1 (Reproducibility Focus): Prioritize reproducibility.
+  - Generate code that uses **relative paths** for data loading/saving (assume data is within the project or a clearly defined structure). Avoid hardcoded absolute paths.
+  - Explicitly **set random seeds** (e.g., `numpy.random.seed()`, `random.seed()`, `set.seed()` in R, relevant library parameters) when randomness is involved (e.g., train/test splits, model initialization, simulations) to ensure consistent results. Note the seed used.
+  - When installing or using libraries, be prepared to generate or update dependency files (e.g., `requirements.txt`, `environment.yml`, R script headers).
+- Rule 8.2 (Clear Narrative & Code): Explain the *process* and the *code*.
+  - Structure analysis logically (e.g., Data Loading -> Cleaning -> EDA -> Modeling -> Evaluation).
+  - Use clear, descriptive names for variables, especially data structures (e.g., `raw_sales_data_df`, `cleaned_user_profiles_df`, `model_predictions_array`).
+  - In markdown cells (notebooks) or comments (scripts), explain the *purpose* and *reasoning* behind analysis steps, not just *what* the code does.
+- Rule 8.3 (Methodological Rigor): Be precise and state assumptions.
+  - When implementing algorithms or statistical tests, use standard, well-vetted libraries where possible (e.g., `scikit-learn`, `statsmodels`, `scipy`, standard R packages).
+  - Clearly state any significant **assumptions** made by the chosen model or analysis technique (e.g., "Assuming data follows a normal distribution for this t-test", "Linear regression assumes a linear relationship between features and target").
+  - If asked to interpret results, present findings neutrally based *only* on the provided analysis outputs. Qualify conclusions appropriately (e.g., "This suggests a correlation...", "Based on this model..."). Avoid making unsupported causal claims unless specifically requested and justified by the experimental design (which you typically won't know fully).
+- Rule 8.4 (Explicit Data Handling): Document data provenance and transformations.
+  - If generating code for data loading, include comments about the expected source and format.
+  - Handle missing values explicitly and document the strategy (e.g., imputation method, removal).
+  - When performing significant data transformations or feature engineering, document the steps clearly.
+  - Be mindful of potential data privacy/sensitivity if context suggests it. Avoid printing large samples of potentially sensitive raw data unless necessary for debugging and explicitly requested.
+
+**Module 9: Visualization & Reporting**
+
+- Rule 9.1 (Effective Visualization): Generate clear, informative, and appropriate plots.
+  - Ensure all plots have **clear titles, axis labels (with units if applicable), and legends** when multiple series are present.
+  - Choose appropriate plot types for the data and the message being conveyed (e.g., scatter for relationships, bar for comparisons, line for trends, histogram/KDE for distributions).
+  - Use standard visualization libraries (`matplotlib`, `seaborn`, `plotly`, `ggplot2` in R) adhering to their common usage patterns. Generate clean, readable plotting code.
+  - Avoid overly complex or misleading visualizations (e.g., inappropriate 3D plots, distorted axes).
+- Rule 9.2 (Structured Reporting): Organize and explain findings clearly.
+  - When asked to generate reports or summaries (e.g., in Markdown), structure them logically (e.g., Introduction/Problem -> Methods -> Results -> Discussion/Conclusion).
+  - Present key results concisely, often referencing specific tables or visualizations generated.
+  - Explain the implications of the results in the context of the prompt's question.
+- Rule 9.3 (References & Citation): Handle external knowledge appropriately.
+  - If using or referring to specific named algorithms, datasets (e.g., ImageNet, specific benchmark data), or techniques derived from external sources mentioned in the prompt or widely known in the field, **add a note or comment suggesting a citation is needed** (e.g., `// TODO: Add citation for Algorithm XYZ`, `# Ref: [Paper describing Method ABC]`).
+  - If explicitly provided with reference details (author, year, title), format them consistently upon request (e.g., APA, MLA, BibTeX snippet). Do not invent references.
+  - When asked about specific methods, base the explanation on common knowledge and standard library implementations.
+- Rule 9.4 (Consult External Documentation): Know when to defer to official sources.
+  - Leverage knowledge of common libraries and functions.
+  - However, for complex configurations, niche parameters, or rapidly evolving libraries, state that the **official documentation should be consulted** for definitive details and the latest updates. Avoid guessing complex API usage.

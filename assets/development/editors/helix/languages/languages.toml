@@ -1,0 +1,203 @@
+# ----------------------------------------------------------------------
+# Route: /user/term/helix/languages.toml
+# Type: Module
+# Created by: Pablo Aguirre
+# ----------------------------------------------------------------------
+
+# General indentation settings to fall back to if not specified per language
+indent = { tab-width = 4, unit = "    " } # "    " is 4 spaces
+
+# Rust
+[language-server.rust-analyzer]
+command = "rust-analyzer"
+
+[[language]]
+name = "rust"
+language-servers = ["rust-analyzer"]
+formatter = { command = "rustfmt" }
+indent = { tab-width = 4, unit = "    " }
+
+# Scala
+[language-server.metals]
+command = "metals"
+
+[[language]]
+name = "scala"
+language-servers = ["metals"]
+indent = { tab-width = 2, unit = "  " }
+
+# Go
+[language-server.gopls]
+command = "gopls"
+
+[[language]]
+name = "go"
+language-servers = ["gopls"]
+formatter = { command = "goimports-reviser" } # or "gofmt"
+indent = { tab-width = 4, unit = "\t" }
+
+# Python
+[language-server.pyright-extended]
+command = "pyright-langserver"
+args = ["--stdio"]
+
+# Option 2: Python LSP Server
+# [language-server.pylsp]
+# command = "pylsp"
+
+[[language]]
+name = "python"
+language-servers = ["pyright"]
+formatter = { command = "ruff", args = ["format", "--stdin-filename", "-", "-"] }
+indent = { tab-width = 4, unit = "    " }
+auto-format = true
+
+# LaTeX
+[language-server.texlab]
+command = "texlab"
+
+[[language]]
+name = "latex"
+language-servers = ["texlab"]
+formatter = { command = "latexindent", args = ["-c", "-", "-o", "-"] } # Assumes latexindent is in PATH from texlive
+indent = { tab-width = 2, unit = "  " }
+
+# Markdown
+[[language]]
+name = "markdown"
+formatter = { command = "prettier", args = ["--parser", "markdown"] }
+indent = { tab-width = 2, unit = "  " }
+soft-wrap.enable = true
+rulers = []
+
+# Mermaid
+[[language]]
+name = "mermaid"
+# No standard LSP. Highlighting relies on Tree-sitter grammar.
+# Prettier can format Mermaid if configured globally or via project.
+
+# Nix
+[language-server.nil]
+command = "nil"
+
+[[language]]
+name = "nix"
+language-servers = ["nil"]
+formatter = { command = "nixpkgs-fmt" }
+indent = { tab-width = 2, unit = "  " }
+
+# Lua
+[language-server.lua-ls]
+command = "lua-language-server"
+
+[[language]]
+name = "lua"
+language-servers = ["lua-ls"]
+formatter = { command = "stylua" }
+indent = { tab-width = 2, unit = "  " }
+
+# TOML
+[language-server.taplo]
+command = "taplo"
+args = ["lsp", "stdio"]
+
+[[language]]
+name = "toml"
+language-servers = ["taplo"]
+formatter = { command = "taplo", args = ["format", "-"] }
+indent = { tab-width = 2, unit = "  " }
+
+# YAML
+[language-server.yaml-language-server]
+command = "yaml-language-server"
+args = ["--stdio"]
+
+[[language]]
+name = "yaml"
+language-servers = ["yaml-language-server"]
+formatter = { command = "prettier", args = ["--parser", "yaml"] }
+indent = { tab-width = 2, unit = "  " }
+
+# JavaScript, TypeScript, JSX, TSX
+[language-server.typescript-language-server]
+command = "typescript-language-server"
+args = ["--stdio"]
+
+[language-server.tailwindcss-language-server]
+command = "tailwindcss-language-server"
+args = ["--stdio"]
+
+[[language]]
+name = "javascript"
+language-servers = ["tailwindcss-language-server", "typescript-language-server"]
+formatter = { command = "prettier", args = ["--parser", "javascript"] }
+indent = { tab-width = 2, unit = "  " }
+
+[[language]]
+name = "typescript"
+language-servers = ["tailwindcss-language-server", "typescript-language-server"]
+formatter = { command = "prettier", args = ["--parser", "typescript"] }
+indent = { tab-width = 2, unit = "  " }
+
+[[language]]
+name = "jsx"
+language-id = "javascriptreact"
+language-servers = ["tailwindcss-language-server", "typescript-language-server"]
+formatter = { command = "prettier", args = ["--parser", "babel"] }
+indent = { tab-width = 2, unit = "  " }
+
+[[language]]
+name = "tsx"
+language-id = "typescriptreact"
+language-servers = ["tailwindcss-language-server", "typescript-language-server"]
+formatter = { command = "prettier", args = ["--parser", "typescript"] }
+indent = { tab-width = 2, unit = "  " }
+
+# Commenting this out because server is broken if defined explicitly
+# Shell / Bash
+# [language-server.bash-lsp]
+# command = "bash-language-server"
+# args = ["start"]
+# config = { shellcheckPath = "shellcheck" }
+
+# [[language]]
+# name = "sh"
+# grammar = "bash"
+# scope = "source.shell"
+# file-types = ["sh", "bash", "zsh", ".bashrc", ".zshrc", ".bash_profile", ".profile", "PKGBUILD", ".envrc"]
+# comment-tokens = "#"
+# language-servers = ["bash-lsp"]
+# formatter = { command = "shfmt", args = ["-i", "2"] } # Indent with 2 spaces
+# indent = { tab-width = 2, unit = "  " }
+
+# HTML
+[language-server.vscode-html-language-server]
+command = "vscode-html-language-server"
+args = ["--stdio"]
+
+[[language]]
+name = "html"
+language-servers = ["tailwindcss-language-server", "vscode-html-language-server"]
+formatter = { command = "prettier", args = ["--parser", "html"] }
+indent = { tab-width = 2, unit = "  " }
+
+# CSS
+[language-server.vscode-css-language-server]
+command = "vscode-css-language-server"
+args = ["--stdio"]
+
+[[language]]
+name = "css"
+language-servers = ["tailwindcss-language-server", "vscode-css-language-server"]
+formatter = { command = "prettier", args = ["--parser", "css"] }
+indent = { tab-width = 2, unit = "  " }
+
+# INI and other generic config files
+[[language]]
+name = "ini"
+indent = { tab-width = 2, unit = "  " }
+
+# VSCode workspace files
+[[file-type]]
+name = "json"
+pattern = { suffix = ".code-workspace" }

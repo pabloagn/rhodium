@@ -1,0 +1,140 @@
+# ----------------------------------------------------------------------
+# Route: /clients/native/user/dev/editors/helix/config.toml
+# Type: Module
+# Created by: Pablo Aguirre
+# ----------------------------------------------------------------------
+
+theme = "tokyonight"
+
+[editor]
+line-number = "relative"         # Shows relative line numbers, absolute in insert/unfocused
+mouse = true                     # Enable mouse support (default is true)
+default-yank-register = "+"      # Default is fine
+middle-click-paste = true        # Default is true
+scroll-lines = 1                 # Default is 3
+scrolloff = 8                    # Keep 8 lines visible above/below cursor when scrolling
+cursorline = true                # Highlight the cursor line
+cursorcolumn = false             # Set to true if you want to highlight cursor column
+auto-completion = true           # Enable completion popup (default)
+auto-format = true          # Format on save (default)
+auto-info = true            # Display info boxes (like hover) automatically (default)
+idle-timeout = 250          # Time in ms before idle timers (like auto-info) trigger (Neovim was 250/300)
+completion-trigger-len = 1  # Trigger completion after 1 character (Neovim default is often 1 or 2)
+# true-color = true         # Set if auto-detection fails, usually not needed
+# undercurl = true          # Set if auto-detection fails, usually not needed
+# rulers = [80, 100]        # Display vertical rulers at columns 80 and 100
+bufferline = "always"       # Show open buffers at the top: "always", "never", or "multiple" (Neovim laststatus=3)
+insert-final-newline = true # Ensure files end with a newline (good practice)
+popup-border = "all"        # Draw borders around popups and menus
+indent-heuristic = "hybrid" # How indentation is computed (hybrid is smart, default)
+
+# On Linux with X11: clipboard-provider = "x-clip" or "x-sel"
+# On linux with Wayland: cipboardd-provider = "wl-clipboard"
+# On macOS: clipboard-provider = "pasteboard" (default)
+# On Windows: clipboard-provider = "windows" (default)
+# clipboard-provider = "wayland"
+# clipboard-provider = "windows"
+
+# Key Remappings
+# ---------------------------------------------------
+
+[keys.normal.space]
+# Copy entire buffer into clipboard
+"space" = ["save_selection", "select_all", "yank_main_selection_to_clipboard", "jump_backward"]
+
+[keys.normal]
+# Basic movement
+a = ["ensure_selections_forward", "append_mode"]
+G = "goto_file_end"
+g = { g = "goto_file_start" }
+x = "extend_line"
+X = "extend_to_line_bounds"
+0 = "goto_line_start"
+"$" = "goto_line_end"
+
+D = ["extend_to_line_bounds", "delete_selection"]
+# Y = ["extend_to_line_bounds", "yank_main_selection_to_clipboard", "collapse_selection"]
+
+Y = ["goto_line_start", "extend_to_line_end", "yank_main_selection_to_clipboard", "collapse_selection"]
+right = ["ensure_selections_forward", "extend_char_right", "ensure_selections_forward", "collapse_selection"]
+
+# Paste operations
+p = "paste_clipboard_before"
+P = ["open_below", "normal_mode", "paste_clipboard_before"]
+
+[keys.select]
+"y" = ["yank_main_selection_to_clipboard", "normal_mode"]
+"d" = ["delete_selection", "normal_mode"]
+"i" = { w = "select_textobject_inner" }
+"a" = { w = "select_textobject_around" }
+G = "goto_file_end"
+g = { g = "goto_file_start" }
+
+# Editor Config
+# -----------------------------------------------------
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"
+
+[editor.file-picker]
+hidden = true               # Show hidden files in file picker (default is true, means hidden files are ignored)
+git-ignore = true           # Respect .gitignore (default)
+
+[editor.indent-guides]
+render = true
+character = "▏"
+
+[editor.statusline]
+# Separator character used between elements
+separator = " │ " # Adding spaces around the separator for better visual separation
+
+# Mode indicators (text shown for each mode)
+mode.normal = " NORMAL "
+mode.insert = " INSERT "
+mode.select = " SELECT "
+
+# Left section: Mode, LSP activity, detailed file path, and modification status
+left = [
+    "mode",
+    "spinner",
+    "file-absolute-path",       # Shows the full path to the file
+    "read-only-indicator",
+    "file-modification-indicator"
+]
+
+# Center section: Git branch/commit information
+center = [
+    "version-control"
+]
+
+# Right section: Diagnostics, selections, detailed position, file info
+right = [
+    "diagnostics",              # Number of errors/warnings in current file
+    "workspace-diagnostics",    # Number of errors/warnings in the entire workspace
+    "spacer",                   # Adds a single space for separation
+    "selections",               # Number of active selections
+    "spacer",
+    "position",                 # Cursor position (line:column)
+    "position-percentage",      # Cursor position as a percentage of total lines
+    "total-line-numbers",       # Total lines in the file
+    "spacer",
+    "file-encoding",
+    "file-line-ending",
+    "file-type"
+]
+
+# Smart tab behavior (like Neovim's smarttab)
+[editor.smart-tab]
+enable = true
+
+# More detailed whitespace rendering if desired (default is "none")
+# [editor.whitespace.render]
+# space = "none" # "all" or "none"
+# tab = "all"
+# newline = "none"
+
+# [editor.whitespace.characters]
+# tab = "→"
+# space = "·"

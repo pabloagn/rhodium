@@ -1,0 +1,18 @@
+---
+description: Node.js patterns (async non-blocking I/O, event loop, modules, env vars, error-first callbacks if needed). Complements javascript_specifics.
+globs: *.js,*.mjs,*.cjs,package.json,server.js,app.js,.env*
+alwaysApply: false
+---
+
+# Node.js Specific Rules
+
+*(Complements general JavaScript rules)*
+
+- **Asynchronous Non-Blocking I/O:** Embrace the asynchronous nature. Use `async`/`await` with Promises for I/O operations. Understand the event loop; avoid blocking it with long-running synchronous tasks.
+- **Error Handling:**
+    - For Promise-based APIs (`async`/`await`): Use `try...catch`.
+    - For older callback-based APIs: Strictly follow the error-first callback convention (`callback(err, result)`). Check `err` immediately.
+- **Modules:** Prefer ES Modules (`import`/`export` with `.mjs` or `"type": "module"` in `package.json`) for new code. Understand CommonJS (`require`/`module.exports`) for existing codebases or specific needs.
+- **Environment Variables:** Use `process.env` for configuration (database URLs, API keys, ports, etc.). Use `.env` files (with `dotenv` package) for local development, ensuring `.env` is in `.gitignore`.
+- **`package.json`:** Maintain `package.json` correctly, defining dependencies (`dependencies`, `devDependencies`), and using `scripts` for common tasks (start, test, lint).
+- **Streams:** Utilize Node.js Streams for handling large amounts of data efficiently (e.g., file I/O, network requests).
