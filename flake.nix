@@ -1,27 +1,86 @@
 # flake.nix
 
 {
-  description = "Hyper-Modular NixOS Design System Factory";
+  description = "Rhodium | Hyper-Modular Declarative NixOS System";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    flake-parts.url = "github:hercules-ci/flake-parts";
+
+    nixpkgs = {
+      url = "github:NixOS/nixpkgs/nixos-unstable";
+    };
+
+    flake-parts = {
+      url = "github:hercules-ci/flake-parts";
+    };
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    zen-browser = {
+      url = "https://flakehub.com/f/youwen5/zen-browser/0.1.169";
+    };
+
   };
 
-  outputs = inputs@{ self, flake-parts, nixpkgs, home-manager, ... }:
+  outputs = inputs@{ self, nixpkgs, flake-parts, home-manager, zen-browser, ... }:
+    let
+      # Define system-agnostic module paths/structures
+      # These are not evaluated with specific pkgs yet.
+      rhodiumSystemModules = {
+        core = import ../modules/core;
+        desktop = import ../modules/desktop;
+        development = import ../modules/development;
+        security = import ../modules/security;
+        services = import ../modules/services;
+        system = import ../modules/system;
+        themes = import ../modules/themes;
+        profiles = import ../modules/profiles; # Assuming this contains system profiles
 
+        # Complete system configuration for easy import
+        default = { rhodium, ... }: {
+          imports = [
+            rhodium.system.core
+            rhodium.system.themes
+            # Add other essential base modules here if needed
+          ];
+        };
+      };
+
+      rhodiumHomeModules = {
+        options = import ../home/options.nix; # Path to Home Manager option definitions
+        profiles = {
+          developer = import ../home/profiles/developer.nix;
+          desktop = import ../home/profiles/desktop.nix;
+          admin = import ../home/profiles/admin.nix;
+        };
+        roles = { # Assuming these are Home Manager roles/module sets
+          developer = import ../home/roles/developer.nix;
+          desktop = import ../home/roles/desktop.nix;
+          admin = import ../home/roles/admin.nix;
+        };
+        default = import ../home/default.nix; # Default Home Manager profile/imports
+      };
+
+      # This is the primary instance of your library, used for generating configurations.
+      # It's defined once and its functions should handle system-specifics internally.
+      rhodiumLib = import ../lib {
+        inherit inputs;
+        # 'self' will be passed to functions like mkHostsFromManifest later,
+        # once the full flake output 'self' is available.
+        # pkgsFor = system: nixpkgs.legacyPackages.${system}; # Example if lib needs this directly
+        # lib = nixpkgs.lib; # Pass nixpkgs.lib if your lib expects it explicitly
+      };
+
+    in
     flake-parts.lib.mkFlake { inherit inputs; } {
       systems = [ "x86_64-linux" "aarch64-linux" ];
 
-      perSystem = { config, self', inputs', pkgs, system, ... }: {
+      perSystem = { config, pkgs, system, lib, self', inputs', ... }: { # lib here is nixpkgs.lib
 
         packages = {
-
-          # Rust Workspace Source (Cargo.toml lives here)
+          # Rust Workspace Source
           rustWorkspaceSrc = ./tools;
 
           # Color Provider Package
@@ -44,12 +103,11 @@
 
           # Default package
           default = self'.packages.color-provider;
-
         };
 
         # Dev Shell for Workspace
         devShells.default = pkgs.mkShell {
-          name = "nixos-design-system-dev";
+          name = "rhodium-dev";
           nativeBuildInputs = with pkgs; [
             rustc
             cargo
@@ -64,90 +122,47 @@
 
           shellHook = ''
             echo "Entered Rust workspace development shell."
-            cd tools
-            echo "Current directory: $(pwd)"
+            # Consider if 'cd tools' is always desired or should be in a specific dev shell
+            # cd tools
+            # echo "Current directory: $(pwd)"
           '';
         };
-      };
-      flake = {
-        nixosConfigurations = {
-          "nixos-wsl2" = nixpkgs.lib.nixosSystem {
 
-            system = "x86_64-linux";
-
-            specialArgs = {
-              inherit inputs;
-              hostname = "nixos-wsl2";
-            };
-
-            modules = [
-              # Base host config (chassis type)
-              ./hosts/nixos-wsl2 # Sets system.stateVersion, boot.isContainer, etc.
-
-              # Import modules that define options and implement them
-              ./modules/core/default.nix # This will import system-profiles/options.nix and shells/default.nix
-              # ./modules/desktop/default.nix # We'd conditionally import this based on a hostProfile option
-              ./modules/themes/default.nix # For theme options
-
-              # User definitions (who is driving)
-              ./users/pabloagn.nix
-
-              # Home Manager (driver's personal seat settings & gadgets)
-              inputs.home-manager.nixosModules.home-manager
-              {
-                home-manager.users.pabloagn = {
-                  imports = [ ./home/profiles/developer.nix ];
-                  # Customer pabloagn might override their own shell here,
-                  # which takes precedence over users.defaultUserShell for pabloagn
-                  programs.zsh.enable = true; # Example if zsh is preferred by this user
-                  # users.users.pabloagn.shell = pkgs.zsh; # This is user-specific override
-                };
-              }
-
-              # User config for host
-              ({ lib, config, ... }: {
-                # Override the default shell choices:
-                mySystem.userShells = {
-                  enable = [ "zsh" "fish" "bash" ]; # Customer wants Zsh, Fish, and Bash installed
-                  defaultLoginShell = "zsh"; # Customer wants Zsh as the default login shell
-                };
-
-                mySystem.userTerminals = {
-                  enable = [ "ghostty" "kitty" "wezterm" ];
-                  default = "ghostty";
-                };
-
-                # Theme choices
-                mySystem.theme = {
-                  name = "phantom";
-                  font.primary = "Inter";
-                  font.monospace = "JetBrainsMono";
-                  font.defaultSize = "10pt";
-                };
-
-                # Host profile choice
-                mySystem.hostProfile = "headless-dev";
-              })
-            ];
-          };
-
-          "nixos-native" = nixpkgs.lib.nixosSystem {
-            # ... similar structure ...
-            modules = [
-              # ... other modules ...
-              # === CUSTOMER CHOICES FOR THIS "desktop-main" CAR ===
-              ({ lib, config, ... }: {
-                mySystem.userShells = {
-                  enable = [ "fish" "bash" ]; # This customer only wants Fish and Bash
-                  defaultLoginShell = "fish"; # Fish is their default
-                };
-                mySystem.theme.name = "srcl";
-                # ... other theme choices ...
-                # mySystem.hostProfile = "gui-desktop";
-              })
-            ];
-          };
+        # This is a per-system instance of your library, if needed for per-system tasks.
+        # It's instantiated with system-specific `pkgs`.
+        rhodiumLibPerSystem = import ../lib {
+          inherit inputs pkgs;
+          # self = inputs.self; # If it needs access to final flake outputs
         };
+      };
+
+      flake = {
+        # Expose your organized modules and overlays
+        rhodium = {
+          system = rhodiumSystemModules;
+          home = rhodiumHomeModules;
+          overlays.default = import ../overlays { inherit inputs; };
+          # Expose the main library instance
+          lib = rhodiumLib;
+        };
+
+        # Generate NixOS configurations from manifest
+        # 'self' here refers to the final flake outputs
+        nixosConfigurations =
+          # mkHostsFromManifest should be a function in your rhodiumLib
+          self.rhodium.lib.mkHostsFromManifest {
+            manifestPath = ../hosts/manifest.nix;
+            # Pass the fully evaluated flake outputs so your library can access
+            # self.rhodium.system modules, self.rhodium.home modules, etc.
+            flakeOutputs = self;
+          };
+
+        # You could also define homeConfigurations here if you manage them separately
+        # from nixosConfigurations, using a similar pattern:
+        # homeConfigurations = self.rhodium.lib.mkHomeConfigurations {
+        #   manifestPath = ../users/manifest.nix; # Or similar
+        #   flakeOutputs = self;
+        # };
       };
     };
 }

@@ -1,22 +1,38 @@
 # home/profiles/developer.nix
 
-{ pkgs, config, lib, ... }:
+{ config, lib, pkgs, ... }:
 
 {
   programs.home-manager.enable = true;
   # TODO: Set dynamically
-  home.stateVersion = "23.11";
+  home.stateVersion = "24.11";
 
   home.username = "pabloagn";
   # This needs to match the user it's applied to
   # TODO: Of course set dynamically by Home Manager's NixOS module
 
-  home.packages = with pkgs; [ git neovim ripgrep fd ];
+  home.packages = with pkgs; [
+    # Developer tools
+    gcc
+    gnumake
+    python3
+    nodejs
+    rustup
+  ];
 
   programs.git = {
     enable = true;
-    userName = "Pablo Aguirre";
-    userEmail = "pablo@example.com"; # Replace with your email
+    userName = "Developer";
+    userEmail = "developer@example.com";
+  };
+
+  programs.vscode = {
+    enable = true;
+    extensions = with pkgs.vscode-extensions; [
+      # Add developer-specific extensions
+      ms-vscode.cpptools
+      ms-python.python
+    ];
   };
 
   # Alacritty is themed by modules/themes/apply.nix, but enabled here

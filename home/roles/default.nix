@@ -1,11 +1,11 @@
-# home/profiles/default.nix
+# home/roles/default.nix
 
 { lib, ... }:
 
 {
   imports = [
-    ./developer.nix
     ./admin.nix
+    ./developer.nix
     ./desktop.nix
   ];
 }

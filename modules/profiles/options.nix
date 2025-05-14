@@ -86,6 +86,44 @@ in
       description = "Primary role of this host (influences conditional module loading).";
     };
 
+    # NEW: User Roles System
+    # -----------------------------------
+    userRoles = {
+      users = lib.mkOption {
+        type = lib.types.attrsOf (lib.types.submodule {
+          options = {
+            description = lib.mkOption {
+              type = lib.types.str;
+              description = "User's full name or description";
+            };
+            shell = lib.mkOption {
+              type = lib.types.package;
+              description = "User's preferred shell";
+              example = "pkgs.zsh";
+            };
+            roles = lib.mkOption {
+              type = lib.types.listOf lib.types.str;
+              description = "List of roles assigned to the user";
+              example = ''[ "admin" "developer" ]'';
+            };
+            hosts = lib.mkOption {
+              type = lib.types.listOf lib.types.str;
+              description = "List of hosts this user should exist on";
+              example = ''[ "nixos-wsl2" "nixos-native" ]'';
+            };
+          };
+        });
+        default = { };
+        description = "User role definitions for the system";
+      };
+
+      availableRoles = lib.mkOption {
+        type = lib.types.listOf lib.types.str;
+        default = [ "admin" "developer" "desktop" ];
+        description = "Available user roles in the system";
+      };
+    };
+
     # User shells
     # -----------------------------------
     userShells = {
@@ -165,8 +203,8 @@ in
       }
       (lib.mkIf (config.mySystem.hostProfile != "gui-desktop") {
         assertion = config.mySystem.desktop.windowManager == "none" &&
-                    config.mySystem.desktop.statusBar == "none" &&
-                    config.mySystem.desktop.launcher == "rofi";
+          config.mySystem.desktop.statusBar == "none" &&
+          config.mySystem.desktop.launcher == "rofi";
         message = "For non-GUI host profiles, WM and StatusBar should be 'none'. Launcher can be CLI-friendly like rofi/fuzzel.";
       })
       (lib.mkIf (config.mySystem.hardware.amdGpu && config.mySystem.hardware.nvidiaGpu) {
