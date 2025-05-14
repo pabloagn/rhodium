@@ -6,7 +6,5 @@ This directory contains configuration for System Hosts.
 
 - common
 - docker
-- native
-- wsl2
-
-
+- nixos-native
+- nixos-wsl2

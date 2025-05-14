@@ -1,5 +1,3 @@
-Let's reset and focus *only* on how a "car order" (a specific `nixosConfiguration` in `flake.nix`) translates into a configured system, using your "customer choices" and showing where defaults are set and overridden.
-
 **The Core Principle: Options and Conditional Configuration**
 
 NixOS works by:

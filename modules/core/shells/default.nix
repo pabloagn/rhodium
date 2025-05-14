@@ -2,30 +2,23 @@
 
 { lib, config, pkgs, ... }:
 
+let
+  shellPkgs = {
+    # Map option name to package name if different
+    bash = pkgs.bashInteractive;
+    zsh = pkgs.zsh;
+    fish = pkgs.fish;
+    nushell = pkgs.nushell;
+  };
+in
 {
-  imports = [
-    # Shells
-    ./bash.nix
-    ./fish.nix
-    ./nushell.nix
-    ./zsh.nix
-    
-    # Utils
-    ./direnv.nix
-    ./powerline.nix
-    ./starship.nix
-    ./tmux.nix
-  ];
   config = {
-    environment.systemPackages = lib.mapAttrsToList (name: value: pkgs."${name}")
-      (lib.filterAttrs (name: value: lib.elem name config.mySystem.userShells.enable) {
-        bash = pkgs.bash;
-        fish = pkgs.fish;
-        nushell = pkgs.nushell;
-        zsh = pkgs.zsh;
-      });
+    environment.systemPackages = map (shellName: shellPkgs."${shellName}") config.mySystem.userShells.enable;
+    users.defaultUserShell = shellPkgs."${config.mySystem.userShells.defaultLoginShell}";
 
-    users.defaultUserShell = pkgs."${config.mySystem.userShells.default or "bash"}";
+    # System-wide direnv and starship if desired (often better in Home Manager for user config)
+    # programs.direnv.enable = true;
+    # programs.starship.enable = true;
   };
 }
 

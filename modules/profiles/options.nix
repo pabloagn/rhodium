@@ -3,7 +3,8 @@
 { lib, config, pkgs, ... }:
 
 let
-  # Available choices (these should ideally be derived from actual module definitions or assets)
+  # Available choices
+  # ---------------------------------------
   # TODO: For now, hardcoded for clarity. Later, these can be populated dynamically.
   availableShells = [
     "zsh"
@@ -40,122 +41,138 @@ let
     "polybar"
     "eww"
     "none"
-  ]; # "none" for headless or no bar
+  ]; # "none" for headless
+
+  availableFileManagers = [
+    "dolphin"
+    "nautilus"
+    "thunar"
+    "yazi"
+    "lf"
+    "nnn"
+  ];
+
+  availableNotificationDaemons = [
+    "dunst"
+    "mako"
+  ];
+
+  availableLaunchers = [
+    "rofi"
+    "wofi"
+    "fuzzel"
+    "anyrun"
+  ];
 
   availableThemes = lib.attrNames (
-    import ../../assets/themes/definitions/default.nix);
+    import ../../assets/themes/definitions/default.nix
+  );
 
   availableFontFamilies = lib.attrNames (
     import ../../assets/tokens/fonts/definitions.nix { inherit pkgs lib; }
   );
 in
 {
+  # -----------------------------------
+  # User options
+  # -----------------------------------
   options.mySystem = {
-    # Host Capability Profile
+
+    # Host profile
+    # -----------------------------------
     hostProfile = lib.mkOption {
-      type = lib.types.enum [ "headless-dev" "gui-desktop" "server-minimal" ];
-      default = "headless-dev";
-      description = "Defines the primary role and capabilities of this host.";
-      example = "gui-desktop";
+      type = lib.types.enum [ "headless-dev" "tiling-desktop" "gui-desktop" "server-minimal" ];
+      default = "tiling-desktop";
+      description = "Primary role of this host (influences conditional module loading).";
     };
 
-    # User-Level Preferences
-    # For now, let's assume these are host-wide preferences that users on that host get.
-    # TODO: More complex: move these into home-manager user profiles with overrides.
-
+    # User shells
+    # -----------------------------------
     userShells = {
       enable = lib.mkOption {
-        type = lib.types.listOf (lib.types.enum availableShells);
-        default = [ "zsh" ];
-        description = "List of shells to install for users.";
-        example = [ "zsh" "fish" ];
+        type = lib.types.litOf (lib.types.enum availableShells);
+        default = [ "bash" ]; # Factory standard: bash is always installed
+        description = "List of shells to make available on the system.";
       };
-      default = lib.mkOption {
-        type = lib.types.nullOr (lib.types.enum availableShells);
-        default = "zsh";
-        description = "Default shell for new users on this system (if not overridden by user config).";
-      };
-    };
 
-    userTerminals = {
-      enable = lib.mkOption {
-        type = lib.types.listOf (lib.types.enum availableTerminals);
-        default = [ "alacritty" ]; # A sensible default
-        description = "List of terminal emulators to install.";
-        example = [ "ghostty" "kitty" ];
+      # User default login shell
+      # -----------------------------------
+      defaultLoginShell = lib.mkOption {
+        type = lib.types.enum availableShells;
+        default = "bash"; # Factory standard: bash is the default login shell
+        description = "The default login shell for users on this system.";
       };
-      default = lib.mkOption {
-        type = lib.types.nullOr (lib.types.enum availableTerminals);
-        default = "alacritty";
-        description = "Default terminal emulator (e.g., for xdg-terminal-exec).";
-      };
-    };
 
-    userEditors = {
-      enable = lib.mkOption {
-        type = lib.types.listOf (lib.types.enum availableEditors);
-        default = [ "neovim" ];
-        description = "List of text editors to install.";
-        example = [ "helix" "neovim" ];
+      # User terminals
+      # -----------------------------------
+      userTerminals = {
+        enable = lib.mkOption {
+          type = lib.types.listOf (lib.types.enum availableTerminals); # availableTerminals defined at top
+          default = [ ]; # Default: no specific terminals installed by this option, only if requested
+          description = "List of terminal emulators to install for general use.";
+        };
+        default = lib.mkOption {
+          type = lib.types.nullOr (lib.types.enum availableTerminals);
+          default = null; # No system-wide default terminal by this option alone
+          description = "Preferred default terminal application.";
+        };
       };
-      # No 'default' editor option here as it's highly personal and app-dependent.
-    };
 
-    # --- DESKTOP SPECIFIC PREFERENCES (only relevant if hostProfile = "gui-desktop") ---
-    desktop = {
-      windowManager = lib.mkOption {
-        type = lib.types.enum availableWms;
-        default = "none"; # Default to none, host profile or user choice enables one
-        description = "Preferred window manager for GUI sessions.";
+      # User editors
+      # -----------------------------------
+      userEditors = {
+        enable = lib.mkOption {
+          type = lib.types.listOf (lib.types.enum availableEditors);
+          default = [ "neovim" ];
+        };
       };
-      statusBar = lib.mkOption {
-        type = lib.types.enum availableBars;
-        default = "none";
-        description = "Preferred status bar for GUI sessions.";
-      };
-      # We already have mySystem.theme for colors/fonts
-    };
 
-    # --- HARDWARE SPECIFIC FLAGS (can be expanded) ---
-    hardware = {
-      amdGpu = lib.mkOption {
-        type = lib.types.bool;
-        default = false;
-        description = "Enable AMD GPU specific configurations (e.g., drivers, Hyprland flags).";
+      desktop = {
+        windowManager = lib.mkOption { type = lib.types.enum availableWms; default = "none"; };
+        statusBar = lib.mkOption { type = lib.types.enum availableBars; default = "none"; };
+        fileManager = lib.mkOption { type = lib.types.enum availableFileManagers; default = "nautilus"; }; # A common GUI default
+        notificationDaemon = lib.mkOption { type = lib.types.enum availableNotificationDaemons; default = "dunst"; };
+        launcher = lib.mkOption { type = lib.types.enum availableLaunchers; default = "rofi"; };
       };
-      nvidiaGpu = lib.mkOption {
-        # Example
-        type = lib.types.bool;
-        default = false;
-        description = "Enable NVIDIA GPU specific configurations.";
+
+      theme = {
+        # Options for this already defined in modules/themes/options.nix
+        # We just need to ensure modules/themes/options.nix populates its enums correctly
+      };
+
+      hardware = {
+        amdGpu = lib.mkEnableOption "AMD GPU specific configurations";
+        nvidiaGpu = lib.mkEnableOption "NVIDIA GPU specific configurations";
+        # TODO: Add intelGpu etc. if needed
       };
     };
   };
 
-  # Options Validation
-  config = lib.mkMerge [
-    (lib.mkIf (config.mySystem.hostProfile != "gui-desktop") {
-      # If not a GUI desktop, certain desktop options should be 'none' or raise warnings/errors
-      assertions = [
-        {
-          assertion = config.mySystem.desktop.windowManager == "none";
-          message = "Window manager (${config.mySystem.desktop.windowManager}) selected for a non-GUI host profile (${config.mySystem.hostProfile}). Should be 'none'.";
-        }
-        {
-          assertion = config.mySystem.desktop.statusBar == "none";
-          message = "Status bar (${config.mySystem.desktop.statusBar}) selected for a non-GUI host profile (${config.mySystem.hostProfile}). Should be 'none'.";
-        }
-      ];
-    })
-    # Add more assertions:
-    # - Ensure default shell is in enabled shells.
-    # - Ensure default terminal is in enabled terminals.
-    (lib.mkIf (config.mySystem.userShells.default != null && !(lib.elem config.mySystem.userShells.default config.mySystem.userShells.enable)) {
-      assertions = [{
-        assertion = false;
-        message = "Default shell '${config.mySystem.userShells.default}' is not in the list of enabled shells: [${lib.concatStringsSep ", " config.mySystem.userShells.enable}]";
-      }];
-    })
-    # TODO: Terminals
-  ];
+  # -----------------------------------
+  # Assertions
+  # -----------------------------------
+  config = {
+    assertions = [
+      {
+        # Is default shell in enabled shells?
+        assertion = lib.elem config.mySystem.userShells.defaultLoginShell config.mySystem.userShells.enable;
+        message = "Default login shell '${config.mySystem.userShells.defaultLoginShell}' must be in enabled shells.";
+      }
+      {
+        # Is default term in enabled terms?
+        assertion = lib.elem config.mySystem.userTerminals.default config.mySystem.userTerminals.enable;
+        message = "Default terminal '${config.mySystem.userTerminals.default}' must be in enabled terminals.";
+      }
+      (lib.mkIf (config.mySystem.hostProfile != "gui-desktop") {
+        assertion = config.mySystem.desktop.windowManager == "none" &&
+                    config.mySystem.desktop.statusBar == "none" &&
+                    config.mySystem.desktop.launcher == "rofi";
+        message = "For non-GUI host profiles, WM and StatusBar should be 'none'. Launcher can be CLI-friendly like rofi/fuzzel.";
+      })
+      (lib.mkIf (config.mySystem.hardware.amdGpu && config.mySystem.hardware.nvidiaGpu) {
+        assertion = false; # Or handle this case by prioritizing one, for now, it's an error
+        message = "Both AMD and NVIDIA GPU options are enabled. Please choose one or implement prioritization.";
+      })
+    ];
+  };
 }

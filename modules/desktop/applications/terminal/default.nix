@@ -3,17 +3,13 @@
 { lib, config, pkgs, ... }:
 
 {
-  imports = [
-    # ./ghostty.nix ./kitty.nix ./wezterm.nix etc.
-  ];
-  config = lib.mkIf (config.mySystem.hostProfile == "gui-desktop" || config.mySystem.hostProfile == "headless-dev") {
-    environment.systemPackages = lib.mapAttrsToList (name: value: pkgs."${name}")
-      (lib.filterAttrs (name: value: lib.elem name config.mySystem.userTerminals.enable) {
-        ghostty = pkgs.ghostty;
-        kitty = pkgs.kitty;
-        wezterm = pkgs.wezterm;
-        alacritty = pkgs.alacritty;
-        foot = pkgs.foot;
-      });
+  # Only make if some terminals are requested
+  config = lib.mkIf (config.mySystem.userTerminals.enable != []) {
+    environment.systemPackages = map (termName: pkgs."${termName}") config.mySystem.userTerminals.enable;
+
+    # Setting a true "default terminal" (for xdg-open etc.) is complex and DE-dependent.
+    # For now, this option mainly ensures installation and can be used by theme/config modules.
+    # The `modules/themes/apply.nix` would use `config.mySystem.userTerminals.default`
+    # to know which terminal to apply specific theming to (e.g., Alacritty settings).
   };
 }

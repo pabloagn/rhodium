@@ -1,8 +1,5 @@
-/*
-* Route: /common/system/interface/fonts.nix
-* Type: Module
-* Created by: Pablo Aguirre
-*/
+# modules/desktop/components/fonts/fonts.nix
+# TODO: Check this, might not be correct.
 
 { config, pkgs, lib, ... }:
 
@@ -22,7 +19,7 @@
     hack-font
     cascadia-code
     paratype-pt-mono
-    
+
     # Monospace - Premium
     # -----------------------------
     commit-mono
@@ -30,7 +27,7 @@
     departure-mono
     iosevka
     julia-mono
-    
+
     # Pendings to Add
     # -----------------------------
     # Recursive Mono
