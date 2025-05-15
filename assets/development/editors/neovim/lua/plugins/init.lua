@@ -1,2 +1,0 @@
--- NixOS Flake Configuration: Neovim Plugins
--- Plugin management using your preferred package manager

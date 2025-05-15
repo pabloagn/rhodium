@@ -1,0 +1,40 @@
+# home/development/languages/default.nix
+
+{
+  imports = [
+    ./c.nix
+    ./clojure.nix
+    ./common-lisp.nix
+    ./cpp.nix
+    ./cs.nix
+    ./css.nix
+    ./default.nix
+    ./dotnet.nix
+    ./elixir.nix
+    ./elm.nix
+    ./erlang.nix
+    ./fs.nix
+    ./go.nix
+    ./haskell.nix
+    ./html.nix
+    ./java.nix
+    ./javascript.nix
+    ./julia.nix
+    ./kotlin.nix
+    ./lua.nix
+    ./nextjs.nix
+    ./nix.nix
+    ./nodejs.nix
+    ./ocaml.nix
+    ./python.nix
+    ./r.nix
+    ./reactjs.nix
+    ./rust.nix
+    ./scala.nix
+    ./scheme.nix
+    ./sql.nix
+    ./swift.nix
+    ./typescript.nix
+    ./zig.nix
+  ];
+}

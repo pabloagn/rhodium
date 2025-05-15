@@ -1,3 +1,0 @@
--- NixOS Flake Configuration: Neovim Entry Point
--- This file is the main entry point for Neovim configuration
--- It loads modules from the lua/ directory
