@@ -49,6 +49,9 @@
         options = import ./home/options.nix;
         linker = import ./home/modules/linker.nix;
 
+        # Shell Environment
+        shell = import ./home/shell/default.nix;
+
         # Desktop Environment
         desktop = import ./home/desktop/default.nix;
 

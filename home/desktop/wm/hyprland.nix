@@ -7,9 +7,9 @@ let
   cfg = config.rhodium.desktop.wm.hyprland;
 
   # Waybar override for experimental features
-  waybar-experimental = pkgs.waybar.overrideAttrs (oldAttrs: {
-    mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
-  });
+  # waybar-experimental = pkgs.waybar.overrideAttrs (oldAttrs: {
+  #   mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
+  # });
 
   hyprlandDotfilesRoot = ./hyprland;
 in
@@ -48,6 +48,8 @@ in
       package = pkgs.hyprland;
       xwayland.enable = true;
     };
+
+
 
     # Symlink Hyprland's configuration files
     # TODO: This is a temporary solution. Eventually we will do this declaratively.

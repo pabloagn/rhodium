@@ -3,15 +3,14 @@
 
 with lib;
 let
-  # This cfg refers to config.rhodium.desktop.launcher.rofi.enable
-  rofiCfg = config.rhodium.desktop.launcher.rofi;
+  cfg = config.rhodium.desktop.launcher.rofi;
 in
 {
   # This entire block is conditional on Rofi being enabled
-  config = mkIf rofiCfg.enable {
+  config = mkIf cfg.enable {
     programs.rofi = {
       enable = true;
-      package = pkgs.rofi-wayland; # Use rofi-wayland for Hyprland
+      package = pkgs.rofi-wayland;
       # You can add themes, plugins, or extra configurations here
       # For example:
       # themes = {

@@ -1,4 +1,4 @@
-# hosts/native/default.nix
+# hosts/native-vb/default.nix
 
 { config, lib, pkgs, modulesPath, ... }:
 
@@ -7,6 +7,7 @@
     ../../modules/core/hardware
     ../../modules/core/shell
     ../../modules/core/system
+    ../../modules/core/users
     ../../modules/desktop
     ../../modules/core/utils
     ../../modules/development

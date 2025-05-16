@@ -1,4 +1,4 @@
-# hosts/wsl2/default.nix
+# hosts/native-rg/default.nix
 
 { config, lib, pkgs, modulesPath, ... }:
 

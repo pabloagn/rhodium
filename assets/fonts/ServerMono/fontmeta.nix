@@ -1,7 +1,7 @@
 # assets/fonts/ServerMono/fontmeta.nix
 
 {
+  fontName = "Server Mono";
   fontType = "opentype";
-  license = "unfree";
-  description = "Server Mono custom font";
+  fontLicense = "unfree";
 }

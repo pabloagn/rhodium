@@ -6,31 +6,33 @@ with lib;
 
 let
   cfg = config.rhodium.development;
-in
 
+  # Convert simple list entries to attribute sets
+  processLanguages = langs:
+    map
+      (lang:
+        if builtins.isString lang then
+          { name = lang; value = { enable = true; }; }
+        else if builtins.isAttrs lang && builtins.hasAttr "name" lang then
+          { name = lang.name; value = removeAttrs lang [ "name" ]; }
+        else
+          throw "Invalid language specification"
+      )
+      langs;
+in
 {
   options.rhodium.development = {
     enable = mkEnableOption "Enable development environment";
     enabledLanguages = mkOption {
-      type = types.listOf types.str;
+      type = types.listOf (types.either types.str types.attrs);
       default = [ "nix" "python" ];
       description = "Languages to enable by default";
     };
   };
 
   config = mkIf cfg.enable {
-    # This enables the selected languages
-    home.development.languages = builtins.listToAttrs (
-      map
-        (lang: {
-          name = lang;
-          value = { enable = true; };
-        })
-        cfg.enabledLanguages
-    );
+    home.development.languages = builtins.listToAttrs (processLanguages cfg.enabledLanguages);
   };
 
-  imports = [
-    ./languages
-  ];
+  imports = [ ./languages ];
 }
