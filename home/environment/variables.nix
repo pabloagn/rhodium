@@ -37,8 +37,10 @@ in
       SUDO_EDITOR = "hx";
       TERMINAL = "ghostty";
       IMAGE = "feh";
+      IMAGE_DESKTOP = "feh-image-viewer";
       VIDEO = "mpv";
-
+      AUDIO = "clementine";
+      PDF_DESKTOP = "org.kde.okular.desktop";
       # Window manager
       WM = "Hyprland";
 

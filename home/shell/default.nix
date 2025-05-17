@@ -10,9 +10,8 @@ in
   imports = [
     ./shells
     ./prompts
-    ./common # This does not have default.nix. Check.
+    ./common
   ];
-
 
   options.rhodium.shell = {
     enable = mkEnableOption "Rhodium's shell configuration";

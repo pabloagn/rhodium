@@ -50,9 +50,8 @@ in {
     in
       xdgVars // rhodiumVars;
 
-  # Function to generate file mappings for assets and scripts
   mkFileLinks = {
-    # Create links to assets from the flake
+
     assetLinks = {
       "${corePaths.rhodium.dirs.assets}" = {
         source = "${flakeRoot}/assets";
@@ -60,7 +59,6 @@ in {
       };
     };
 
-    # Create links to scripts from the flake
     scriptLinks = {
       "${corePaths.rhodium.dirs.scripts}" = {
         source = "${flakeRoot}/scripts";

@@ -1,4 +1,5 @@
-# home/security/auth.nix
+# home/security/auth/default.nix
+
 { lib, config, pkgs, ... }:
 
 with lib;
@@ -17,6 +18,7 @@ in
       gnupg
       gnome-keyring
       sops
+      _1password-gui
     ];
 
     # SSH Per-Host Settings

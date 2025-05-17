@@ -7,10 +7,8 @@ let
 in
 {
   imports = [
-    ./packages.nix
   ];
 
   config = mkIf cfg.enable {
-    # Intentionally left empty, as shell packages are now defined in packages.nix
   };
 }

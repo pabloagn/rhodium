@@ -1,10 +1,10 @@
-# home/desktop/applications/default.nix
+# home/apps/desktop/default.nix
 
 { lib, config, pkgs, ... }:
 
 with lib;
 let
-  cfg = config.rhodium.desktop.applications;
+  cfg = config.rhodium.apps.desktop;
 
   # Import logo definitions
   logos = import ../../../lib/logos.nix {
@@ -63,7 +63,7 @@ let
   firefoxNewWindow = "-new-window";
 in
 {
-  options.rhodium.desktop.applications = {
+  options.rhodium.apps.desktop = {
     enable = mkEnableOption "Rhodium's desktop applications";
   };
 

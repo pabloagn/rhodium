@@ -38,8 +38,8 @@
         waybar.enable = true;
       };
 
-      applications = {
-        enable = true;
+      notifications = {
+        dunst.enable = true;
       };
     };
 
@@ -70,11 +70,17 @@
 
     development = {
       enable = true;
+
       editors = {
         enable = true;
         helix.enable = true;
         nvim.enable = true;
         mousepad.enable = true;
+        rstudio.enable = false;
+        vscode.enable = true;
+        vscodium.enable = false;
+        cursor.enable = true;
+        kate.enable = true;
       };
 
       databases = {
@@ -83,12 +89,19 @@
 
       tools = {
         enable = true;
+
+        ollama.enable = false;
+        postman.enable = false;
       };
 
       virtualization = {
         enable = true;
+
         containers = {
           enable = true;
+          docker.enable = true;
+          podman.enable = false;
+          kubernetes.enable = false;
         };
       };
 
@@ -106,10 +119,93 @@
       ];
     };
 
+    # Applications
+    apps = {
+      enable = true;
+
+      communication = {
+        enable = true;
+
+        messaging = {
+          enable = true;
+        };
+
+        email = {
+          enable = true;
+        };
+      };
+
+      browsers = {
+        enable = true;
+
+        firefox = {
+          enable = true;
+
+          variant = "devedition";
+        };
+        brave.enable = false;
+        chrome.enable = false;
+        chromium.enable = false;
+        librewolf.enable = false;
+        qutebrowser.enable = false;
+        tor.enable = false;
+        w3m.enable = false;
+        zen.enable = true;
+      };
+
+      documents = {
+        enable = true;
+      };
+
+      media = {
+        enable = true;
+      };
+
+      terminals = {
+        enable = true;
+
+        foot.enable = false;
+        ghostty.enable = true;
+        kitty.enable = true;
+        st.enable = false;
+        wezterm.enable = true;
+      };
+
+      utilities = {
+        enable = true;
+
+        notes = {
+          enable = true;
+        };
+
+        calendars = {
+          enable = true;
+        };
+
+        calculators = {
+          enable = true;
+        };
+      };
+    };
+
     security = {
+      enable = true;
+
       auth = {
         enable = true;
       };
+
+      opsec = {
+        enable = true;
+      };
+
+      privacy = {
+        enable = true;
+      };
+    };
+
+    system = {
+      enable = true;
     };
   };
 

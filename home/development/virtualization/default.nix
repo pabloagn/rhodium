@@ -8,7 +8,7 @@ let
 in
 {
   imports = [
-    ./containers.nix
+    ./containers
   ];
 
   options.rhodium.development.virtualization = {

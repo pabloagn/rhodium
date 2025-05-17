@@ -5,7 +5,7 @@
 with lib;
 let
   cfg = config.rhodium.desktop.bar.waybar;
-  waybarUserConfigDir = ./config;
+  waybarUserConfigDir = ./waybar;
 in
 {
   # Options specific to this Waybar module

@@ -5,6 +5,12 @@
 with lib;
 let
   cfg = config.rhodium.development.tools;
+
+  imports = [
+    ./ollama.nix
+    ./postman.nix
+  ];
+
 in
 {
   options.rhodium.development.tools = {
@@ -12,10 +18,5 @@ in
   };
 
   config = mkIf cfg.enable {
-    # Requirements
-    home.packages = with pkgs; [
-      postman
-      ollama
-    ];
   };
 }

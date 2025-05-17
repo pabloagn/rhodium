@@ -11,10 +11,6 @@ in
     enable = mkEnableOption "Rhodium's container tools";
   };
 
-  config = mkIf (config.rhodium.development.virtualization.enable && cfg.enable) {
-    home.packages = with pkgs; [
-      docker
-    ];
+  config = mkIf cfg.enable {
   };
 }
-

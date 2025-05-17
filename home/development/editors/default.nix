@@ -11,6 +11,11 @@ in
     ./nvim.nix
     ./emacs.nix
     ./mousepad.nix
+    ./rstudio.nix
+    ./vscode.nix
+    ./vscodium.nix
+    ./cursor.nix
+    ./kate.nix
   ];
 
   options.rhodium.development.editors = {
@@ -18,10 +23,5 @@ in
   };
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [
-      rstudio
-      vscode
-      code-cursor
-    ];
   };
 }
