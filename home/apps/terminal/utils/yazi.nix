@@ -37,7 +37,7 @@ in
     enable = mkEnableOption "Rhodium's Yazi configuration";
   };
 
-  config = mkIf (config.rhodium.apps.terminal.utils.enable && cfg.enable) {
+  config = mkIf cfg.enable {
     home.packages = with pkgs; [
       # Main
       pkgs-unstable.yazi
@@ -94,6 +94,5 @@ in
       source = markdownPreviewScript; # Points to the script created by writeShellScript
       executable = true; # Make the symlink (or file) executable
     };
-
   };
 }

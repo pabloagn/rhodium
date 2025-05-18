@@ -1,0 +1,302 @@
+#============================================================
+# LF USER CONFIGURATION FILE
+# OWNERSHIP: USER
+# PABLO AGUIRRE NUNEZ
+#============================================================
+
+#------------------------------------------------------------
+# BEGINNING OF LFRC CONFIGURATION FILE
+#------------------------------------------------------------
+
+#============================================================
+# Help
+#============================================================
+
+#------------------------------------------------------------
+# Variables exported to shell
+#------------------------------------------------------------
+#$f   current file
+#$fs  selected file(s) separated with 'filesep'
+#$fx  current file or selected file(s) if any
+#$id  id number of the client
+
+#============================================================
+# General config
+#============================================================
+# Interpreter for shell commands (needs to be POSIX compatible)
+set shell sh
+#set icons
+
+# Display & generals
+set drawbox          true
+set ignorecase       true
+set dircounts        true
+set info             size:time
+#set number           true
+#set relativenumber   true
+
+# Set image previewer & cleaner
+#  https://github.com/gokcehan/lf/wiki/Previews#with-kitty-and-pistol
+set previewer ~/.config/lf/previewer
+set cleaner ~/.config/lf/cleaner
+
+# Shell options (stdout, stderr)
+set shellopts '-eu'
+
+# Set internal field separator (IFS) to "\n" for shell commands
+set ifs "\n"
+
+# Leave some space at the top and the bottom of the screen
+set scrolloff 5
+
+# Always display directory & file size
+set info size
+
+# Use enter for shell commands
+map <enter> shell
+
+# Execute current file (must be executable)
+map x $$f
+map X !$f
+
+# Delete file or folder (displays confirmation, can delete visual selection)
+map D :delete "$fx"
+
+#------------------------------------------------------------
+# General keybindings
+#------------------------------------------------------------
+map <esc>
+map <esc> cmd-escape
+
+map zh
+map . set hidden!
+
+#------------------------------------------------------------
+# Sort keybindings
+#------------------------------------------------------------
+map s
+map sn :set sortby natural; set info size
+map ss :set sortby size; set info size
+map st :set sortby time; set info time
+
+#------------------------------------------------------------
+# Edit mode [edit, view, set] (e)
+#------------------------------------------------------------
+# sxiv image viewer on thumbnail mode
+map e
+
+map et &sxiv -t * "$fx"
+map ep &sxiv * "$fx"
+map ee $$EDITOR "$fx"
+map es $sudo $EDITOR "$fx"
+map ev $bat "$fx"
+#map ew setwallpaper
+
+#------------------------------------------------------------
+# Making new dirs and files (m)
+#------------------------------------------------------------
+# Unmap the default mapping so the rest of the following mapping won't collide
+map m
+
+# Create new dir, prompt on new screen
+map md mkdir
+
+# Create new file, prompt on new screen
+map mf mkfile
+
+# Create new file as root, rompt on new screen
+map mr sudomkfile
+
+# Create new dir(s), prompt on bottom of screen (space between words results in two dirs)
+#map md push %mkdir<space>
+
+# Function creates new dir as user
+cmd mkdir ${{
+  printf "Directory Name: "
+  read ans
+  mkdir $ans
+}}
+
+# Function creates new dir as root
+cmd sudomkfile ${{
+  printf "File Name: "
+  read ans
+  sudo $EDITOR $ans
+}}
+
+# Function creates new file as user
+cmd mkfile ${{
+  printf "File Name: "
+  read ans
+  $EDITOR $ans
+}}
+
+#------------------------------------------------------------
+# Renaming Files
+#------------------------------------------------------------
+# Unmap the default mapping so the rest of the following mapping won't collide
+map r
+
+# Simple rename
+map rr rename
+cmd renamea %[ -e $1 ] && printf "file exists" || mv $f $1
+map ra push :renamea<space>
+
+#------------------------------------------------------------
+# cd navigation (g)
+#------------------------------------------------------------
+# Unmap the default mapping so the rest of the following mapping won't collide
+map g
+
+# Go to .config
+map gc cd /home/pabloagnck/.config
+
+# Go to Documents
+map gx cd /home/pabloagnck/Documents
+
+# Go to Pictures
+map gp cd /home/pabloagnck/Pictures
+
+# Go to Downloads
+map gd cd /home/pabloagnck/Downloads
+
+# Go to script files dir
+map gb cd /home/pabloagnck/bin
+
+# Go to 60GB
+# map g6 cd /run/media/pabloagnck/60GB
+
+# Go to home
+map gh cd ~
+
+# Go to /etc
+map ge cd /etc
+
+# Go to /usr
+map gu cd /usr
+
+#------------------------------------------------------------
+# Yank
+#------------------------------------------------------------
+# Unmap the default mapping so the rest of the following mapping won't collide
+map y
+
+# Map yy to original copy
+map yy copy
+
+# Map ys to sudo copy
+#map ys %sudo cp $fx
+
+# Yank path with filename
+map yp yank_path
+
+# Yank filename
+map yn yank_name
+
+# Yank dir path
+map yd yank_dir
+
+# Function yanks path incuding filename
+cmd yank_path ${{
+    set -f
+    readlink -f $f | wl-copy
+}}
+
+# Function yanks filename
+cmd yank_name ${{
+    set -fx
+    basename "$(readlink -f "$fx")" | tr '\n' ' ' | wl-copy 
+}}
+
+# Function yanks selected path no filename
+cmd yank_dir ${{
+    echo -n $fx | wl-copy
+}}
+
+#------------------------------------------------------------
+# Open files
+#------------------------------------------------------------
+# Open files on enter
+map <enter>
+map <enter> open
+
+cmd open ${{
+    case $(file --mime-type "$f" -bL) in
+        text/*|application/json) $EDITOR "$f";;
+#        video/*|image/*/application/pdf) mimeopen "$f" & disown;;
+        *) xdg-open "$f" ;;
+    esac
+}}
+
+# Ask for application when opening file
+map o push :open-with<space>
+
+cmd open-with %"$@" "$fx"
+
+#------------------------------------------------------------
+# File permissions (bit mode)
+#------------------------------------------------------------
+# Give permissions to selected file
+map c
+map chh chmod
+map chr chmodrec
+
+cmd chmod ${{
+  printf "Mode Bits: "
+  read ans
+  for file in "$fx"
+  do
+    chmod $ans $file
+  done
+}}
+
+cmd chmodrec ${{
+  printf "Mode Bits: "
+  read ans
+  for file in "$fx"
+  do
+    chmod -R $ans $file
+  done
+}}
+
+map br
+map br batchrename
+
+cmd batchrename ${{
+qmv -f do
+}}
+
+#------------------------------------------------------------
+# Archive [File Extraction & Compression (a)]
+#------------------------------------------------------------
+# Extract the current file with the right command
+map a
+map au extract
+map az zip
+map at tar
+map ag targz
+map ab tarbz2
+
+cmd extract ${{
+    case "$fx" in
+        *.tar.bz|*.tar.bz2|*.tbz|*.tbz2) tar xjvf $fx;;
+        *.tar.gz|*.tgz) tar xzvf $fx;;
+        *.tar.xz|*.txz) tar xJvf $fx;;
+        *.zip) unzip $fx;;
+        *.rar) unrar x $fx;;
+        *.7z) 7z x $fx;;
+    esac
+}}
+
+# Compress current file or selected files
+cmd zip %zip -r "$fx" "$fx"
+cmd tar %tar cvf "$fx.tar" "$fx"
+cmd targz %tar cvzf "$fx.tar.gz" "$fx"
+cmd tarbz2 %tar cjvf "$fx.tar.bz2" "$fx"
+
+# Set vim filetype
+# vim: set ft=conf:
+
+#------------------------------------------------------------
+# END OF LFRC CONFIGURATION FILE
+#------------------------------------------------------------

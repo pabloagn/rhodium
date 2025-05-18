@@ -4,7 +4,7 @@
 
 with lib;
 let
-  cfg = config.rhodium.shell.bash;
+  cfg = config.rhodium.shell.shells.bash;
   aliases = import ../common/aliases.nix;
   functions = import ../common/functions.nix;
 in
@@ -23,7 +23,7 @@ in
     };
   };
 
-  config = mkIf (config.rhodium.shell.shells.enable && config.rhodium.shell.shells.bash.enable) {
+  config = mkIf cfg.enable {
     programs.bash = {
       enable = true;
 
@@ -66,6 +66,9 @@ in
 
     programs.starship.enableBashIntegration =
       cfg.enable && config.rhodium.shell.prompts.starship.enable;
+
+    programs.zoxide.enableBashIntegration =
+      cfg.enable && config.rhodium.apps.terminal.utils.zoxide.enable;
 
     home.sessionVariables = mkIf cfg.defaultShell {
       SHELL = "${pkgs.bash}/bin/bash";

@@ -11,12 +11,12 @@ in
     enable = mkEnableOption "Rhodium's Helix configuration";
   };
 
-  config = mkIf (config.rhodium.development.editors.enable && cfg.enable) {
-    home.packages = with pkgs; [
-      helix
-    ];
+  config = mkIf cfg.enable {
+    programs.helix = {
+      enable = true;
+      package = pkgs.helix;
+    };
 
-    # Configuration - keeping your existing structure
     xdg.configFile = {
       "helix/config.toml" = { source = ./helix/config.toml; };
       "helix/languages.toml" = { source = ./helix/languages.toml; };

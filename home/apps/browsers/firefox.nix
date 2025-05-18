@@ -25,17 +25,9 @@ in
       '';
       example = "stable";
     };
-
-    # Example: Add more Firefox-specific options here later
-    # enable sommige-firefox-extension = mkEnableOption "Enable Sommeige Extension";
-    # settings = mkOption {
-    #   type = types.attrs;
-    #   default = {};
-    #   description = "Raw Firefox settings (e.g., for user.js)";
-    # };
   };
 
-  config = mkIf (config.rhodium.apps.browsers.enable && cfg.enable) {
+  config = mkIf cfg.enable {
     home.packages =
       let
         firefoxPackage =
@@ -50,24 +42,5 @@ in
           else pkgs.firefox;
       in
       [ firefoxPackage ];
-
-    # Example: Further Firefox configuration using home-manager options
-    # programs.firefox = {
-    #   enable = true; # This enables home-manager's own Firefox profile management
-    #   profiles.default = { # Assuming you want to configure the default profile
-    #     extensions = mkIf cfg.sommeige-firefox-extension.enable [
-    #       pkgs.gnomeExtensions.sommeige-firefox-extension # Fictional package name
-    #     ];
-    #     userChrome = ''
-    #       /* Custom CSS for Firefox UI */
-    #     '';
-    #     userContent = ''
-    #       /* Custom CSS for web pages */
-    #     '';
-    #     settings = cfg.settings // { # Merge with user-defined raw settings
-    #       "browser.startup.homepage" = "https://nixos.org";
-    #     };
-    #   };
-    # };
   };
 }

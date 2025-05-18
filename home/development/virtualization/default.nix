@@ -9,9 +9,15 @@ in
 {
   imports = [
     ./containers
+    ./vm
   ];
 
   options.rhodium.development.virtualization = {
     enable = mkEnableOption "Rhodium's virtualization tools";
+  };
+
+  config = mkIf cfg.enable {
+    home.development.virtualization.containers.enable = true;
+    home.development.virtualization.vm.enable = true;
   };
 }

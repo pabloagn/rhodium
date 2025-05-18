@@ -10,7 +10,6 @@ in {
     ./auth
     ./opsec
     ./privacy
-    ./passwords
   ];
 
   options.rhodium.security = {
@@ -18,5 +17,8 @@ in {
   };
 
   config = mkIf cfg.enable {
+    rhodium.security.auth.enable = true;
+    rhodium.security.opsec.enable = true;
+    rhodium.security.privacy.enable = true;
   };
 }

@@ -11,7 +11,7 @@ in
     enable = mkEnableOption "Postman";
   };
 
-  config = mkIf (config.rhodium.development.tools.enable && cfg.enable) {
+  config = mkIf cfg.enable {
     home.packages = with pkgs; [
       postman
     ];

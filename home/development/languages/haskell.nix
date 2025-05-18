@@ -1,4 +1,5 @@
 # home/development/languages/haskell.nix
+
 { config, pkgs, lib, ... }:
 
 with lib;

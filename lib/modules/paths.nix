@@ -7,6 +7,7 @@ let
   # Handle the case where config is not available (system-level)
   homeDir = if config != null then config.home.homeDirectory else "/home/$USER";
   username = if config != null then config.home.username else "$USER";
+
 in rec {
   # Basic paths
   home = homeDir;

@@ -11,7 +11,7 @@ in
     enable = mkEnableOption "Rhodium's Anytype configuration";
   };
 
-  config = mkIf (config.rhodium.apps.utils.notes.enable && cfg.enable) {
+  config = mkIf cfg.enable {
     home.packages = with pkgs; [
       anytype
     ];

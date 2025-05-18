@@ -5,11 +5,12 @@
 with lib;
 let
   cfg = config.rhodium.apps.media;
-in {
+in
+{
   imports = [
     ./audio
-    ./video
     ./image
+    ./video
   ];
 
   options.rhodium.apps.media = {
@@ -17,5 +18,8 @@ in {
   };
 
   config = mkIf cfg.enable {
+    rhodium.apps.media.audio.enable = true;
+    rhodium.apps.media.image.enable = true;
+    rhodium.apps.media.video.enable = true;
   };
 }

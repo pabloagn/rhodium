@@ -54,6 +54,10 @@
     , ...
     }:
     let
+      data = import ./.env.nix;
+      userData = data.users;
+      hostData = data.hosts;
+
       system = "x86_64-linux";
       rhodiumGlobalOverlay = import ./overlays { inherit inputs; };
 
@@ -178,17 +182,17 @@
         };
 
         nixosConfigurations = {
-          "rhodium-native" = nixpkgs.lib.nixosSystem {
+          ${hostData.host-0001.hostname} = nixpkgs.lib.nixosSystem {
             inherit system;
             specialArgs = {
               inherit inputs;
               flakeOutputs = self;
-              hostName = "rhodium-native";
+              hostName = hostData.host-0001.hostname;
               pkgs-unstable = configuredPkgsUnstable;
             };
 
             modules = [
-              ./hosts/native
+              ./hosts/${hostData.host-0001.id}
 
               ({ pkgs, ... }: {
                 nixpkgs.config.allowUnfree = true;
@@ -197,16 +201,16 @@
             ];
           };
 
-          "rhodium-wsl2" = nixpkgs.lib.nixosSystem {
+          ${hostData.host-0003.hostname} = nixpkgs.lib.nixosSystem {
             inherit system;
             specialArgs = {
               inherit inputs;
               flakeOutputs = self;
-              hostName = "rhodium-wsl2";
+              hostName = hostData.host-0003.hostname;
               pkgs-unstable = configuredPkgsUnstable;
             };
             modules = [
-              ./hosts/wsl2
+              ./hosts/${hostData.host-0003.id}
 
               ({ pkgs, ... }: {
                 nixpkgs.config.allowUnfree = true;
@@ -216,15 +220,16 @@
           };
         };
 
-        homeConfigurations."pabloagn" = home-manager.lib.homeManagerConfiguration {
+        homeConfigurations.${userData.user-0001.username} = home-manager.lib.homeManagerConfiguration {
           pkgs = configuredPkgs;
           extraSpecialArgs = {
             inherit inputs;
             flakeOutputs = self;
             pkgs-unstable = configuredPkgsUnstable;
+            userData = userData.user-0001;
           };
           modules = [
-            ./users/pabloagn
+            ./users/${userData.user-0001.id}
           ];
         };
       };

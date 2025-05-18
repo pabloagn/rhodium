@@ -8,9 +8,10 @@ let
 in
 {
   imports = [
-    ./lf
-    ./yazi
-    ./bat
+    ./bat.nix
+    ./lf.nix
+    ./yazi.nix
+    ./zoxide.nix
   ];
 
   options.rhodium.apps.terminal.utils = {
@@ -18,6 +19,11 @@ in
   };
 
   config = mkIf cfg.enable {
+
+    rhodium.apps.terminal.utils.bat.enable = true;
+    rhodium.apps.terminal.utils.lf.enable = true;
+    rhodium.apps.terminal.utils.yazi.enable = true;
+    rhodium.apps.terminal.utils.zoxide.enable = true;
 
     home.packages = with pkgs; [
       hexyl # Hex viewer
@@ -97,7 +103,6 @@ in
       tmux # Terminal multiplexer
       asciinema # Terminal recorder
       tree # Directory listing
-      zoxide # Smarter cd command
       navi # Interactive cheatsheet
       mcfly # Enhanced shell history
 

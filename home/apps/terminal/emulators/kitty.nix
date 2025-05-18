@@ -11,9 +11,17 @@ in
     enable = mkEnableOption "Rhodium's Kitty configuration";
   };
 
-  config = mkIf (config.rhodium.apps.terminals.emulators.enable && cfg.enable) {
-    home.packages = with pkgs; [
-      kitty
-    ];
+  config = mkIf cfg.enable {
+    programs.kitty = {
+      enable = true;
+    };
+
+    xdg.configFile."kitty/kitty.conf" = {
+      source = ./kitty/kitty.conf;
+    };
+
+    xdg.configFile."kitty/themes/catppuccin-mocha.conf" = {
+      source = ./kitty/themes/catppuccin-mocha.conf;
+    };
   };
 }

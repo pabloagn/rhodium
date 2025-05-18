@@ -8,14 +8,15 @@ let
 in
 {
   options.rhodium.desktop.launcher.fuzzel = {
-    enable = mkEnableOption "Rhodium's Fuzzel configuration";
+    enable = mkEnableOption "Rhodium's Fuzzel Launcher";
   };
 
   config = mkIf cfg.enable {
-    # Keep your existing configuration
+    programs.fuzzel = {
+      enable = true;
+      package = pkgs.fuzzel;
+    };
     xdg.configFile."fuzzel/fuzzel.ini" = {
-      # Keeping the direct source approach as you had it
-      # Will need to adjust the path if your config file moves
       source = ./fuzzel/fuzzel.ini;
     };
   };

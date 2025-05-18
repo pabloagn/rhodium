@@ -1,4 +1,5 @@
 # home/shell/common/default.nix
+
 { lib, config, pkgs, ... }:
 
 with lib;

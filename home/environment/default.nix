@@ -18,6 +18,8 @@ in
   };
 
   config = mkIf cfg.enable {
-    # Common environment settings that apply to all shells and programs
+    home.environment.mime.enable = true;
+    home.environment.paths.enable = true;
+    home.environment.variables.enable = true;
   };
 }

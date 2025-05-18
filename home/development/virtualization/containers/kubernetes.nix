@@ -12,7 +12,7 @@ in
     enable = mkEnableOption "Enable Kubernetes containerization";
   };
 
-  config = mkIf (config.rhodium.development.virtualization.containers.enable && cfg.enable) {
+  config = mkIf cfg.enable {
     home.packages = with pkgs; [
       kubectl
       kubernetes-helm

@@ -23,7 +23,7 @@ in
     enable = mkEnableOption "Rhodium's environment variables";
   };
 
-  config = mkIf (config.rhodium.environment.enable && cfg.enable) {
+  config = mkIf cfg.enable {
     # System paths from our path module
     home.sessionVariables = pathVariables // {
 

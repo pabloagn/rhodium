@@ -7,27 +7,26 @@ let
   cfg = config.rhodium.security.auth;
 in
 {
+  imports = [
+    ./ssh.nix
+    ./onepassword.nix
+    ./sops.nix
+  ];
+
   options.rhodium.security.auth = {
     enable = mkEnableOption "Rhodium's authentication configuration";
   };
 
   config = mkIf cfg.enable {
+    rhodium.security.auth.ssh.enable = true;
+    rhodium.security.auth.onepassword.enable = true;
+    rhodium.security.auth.sops.enable = true;
+
     home.packages = with pkgs; [
-      age
       pass
+      pass-wayland
       gnupg
       gnome-keyring
-      sops
-      _1password-gui
     ];
-
-    # SSH Per-Host Settings
-    programs.ssh.matchBlocks = {
-      "github.com" = {
-        user = "git";
-        hostname = "github.com";
-        identityFile = "$HOME/.ssh/nixos";
-      };
-    };
   };
 }

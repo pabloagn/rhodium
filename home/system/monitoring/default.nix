@@ -13,7 +13,6 @@ in
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
-      # Monitoring and System Info
       acpi
       bottom
       v4l-utils

@@ -11,7 +11,7 @@ in
     enable = mkEnableOption "Rhodium's ST configuration";
   };
 
-  config = mkIf (config.rhodium.apps.terminals.emulators.enable && cfg.enable) {
+  config = mkIf cfg.enable {
     home.packages = with pkgs; [
       st
     ];

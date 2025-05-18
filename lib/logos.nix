@@ -8,6 +8,8 @@ let
     inherit lib config;
   };
 
+  logosExtension = "png";
+
   # Base path to logos
   logosPath = pathsLib.rhodium.assets.logos;
 
@@ -16,62 +18,62 @@ let
 
     # Browsers
     firefox = {
-      general = "${logosPath}/firefox_general.png";
-      private = "${logosPath}/firefox_private.png";
-      media = "${logosPath}/firefox_media.png";
+      general = "${logosPath}/firefox_general.${logosExtension}";
+      private = "${logosPath}/firefox_private.${logosExtension}";
+      media = "${logosPath}/firefox_media.${logosExtension}";
     };
-    zenBrowser = "${logosPath}/zen_browser.png"; # TODO: Get logo
-    torBrowser = "${logosPath}/tor_browser.png";
+    zenBrowser = "${logosPath}/zen_browser.${logosExtension}"; # TODO: Get logo
+    torBrowser = "${logosPath}/tor_browser.${logosExtension}";
 
     # Editors
-    neovim = "${logosPath}/neovim.png";
-    helix = "${logosPath}/helix.png"; # TODO: Get logo
+    neovim = "${logosPath}/neovim.${logosExtension}";
+    helix = "${logosPath}/helix.${logosExtension}"; # TODO: Get logo
 
     # AI
-    claude = "${logosPath}/claude.png";
-    chatgpt = "${logosPath}/chatgpt.png";
-    perplexity = "${logosPath}/perplexityai.png";
-    googleGemini = "${logosPath}/googlegemini.png";
+    claude = "${logosPath}/claude.${logosExtension}";
+    chatgpt = "${logosPath}/chatgpt.${logosExtension}";
+    perplexity = "${logosPath}/perplexityai.${logosExtension}";
+    googleGemini = "${logosPath}/googlegemini.${logosExtension}";
 
     # Productivity & Design
-    figma = "${logosPath}/figma.png";
-    linear = "${logosPath}/linear.png";
-    akiflow = "${logosPath}/akiflow.png";
-    notion = "${logosPath}/notion.png";
+    figma = "${logosPath}/figma.${logosExtension}";
+    linear = "${logosPath}/linear.${logosExtension}";
+    akiflow = "${logosPath}/akiflow.${logosExtension}";
+    notion = "${logosPath}/notion.${logosExtension}";
 
     # Services
-    github = "${logosPath}/github.png";
-    google = "${logosPath}/google.png";
-    googleDrive = "${logosPath}/googledrive.png";
-    protonMail = "${logosPath}/protonmail.png";
-    protonDrive = "${logosPath}/protondrive.png";
-    pastebin = "${logosPath}/pastebin.png";
-    unsplash = "${logosPath}/unsplash.png";
+    github = "${logosPath}/github.${logosExtension}";
+    google = "${logosPath}/google.${logosExtension}";
+    googleDrive = "${logosPath}/googledrive.${logosExtension}";
+    protonMail = "${logosPath}/protonmail.${logosExtension}";
+    protonDrive = "${logosPath}/protondrive.${logosExtension}";
+    pastebin = "${logosPath}/pastebin.${logosExtension}";
+    unsplash = "${logosPath}/unsplash.${logosExtension}";
 
     # Shopping & Retail
-    amazon = "${logosPath}/amazon.png";
-    ikea = "${logosPath}/ikea.png";
-    boots = "${logosPath}/boots.png";
-    tesco = "${logosPath}/tesco.png";
-    sainsburys = "${logosPath}/sainsburys.png";
-    paypal = "${logosPath}/paypal.png";
+    amazon = "${logosPath}/amazon.${logosExtension}";
+    ikea = "${logosPath}/ikea.${logosExtension}";
+    boots = "${logosPath}/boots.${logosExtension}";
+    tesco = "${logosPath}/tesco.${logosExtension}";
+    sainsburys = "${logosPath}/sainsburys.${logosExtension}";
+    paypal = "${logosPath}/paypal.${logosExtension}";
 
     # Social
-    reddit = "${logosPath}/reddit.png";
-    linkedin = "${logosPath}/linkedin.png";
-    youtube = "${logosPath}/youtube.png";
+    reddit = "${logosPath}/reddit.${logosExtension}";
+    linkedin = "${logosPath}/linkedin.${logosExtension}";
+    youtube = "${logosPath}/youtube.${logosExtension}";
 
     # Work & Education
-    upwork = "${logosPath}/upwork.png";
-    blackboard = "${logosPath}/blackboard.png";
+    upwork = "${logosPath}/upwork.${logosExtension}";
+    blackboard = "${logosPath}/blackboard.${logosExtension}";
 
     # Note-taking
-    standardNotes = "${logosPath}/standard_notes.png";
-    goodreads = "${logosPath}/goodreads.png";
+    standardNotes = "${logosPath}/standard_notes.${logosExtension}";
+    goodreads = "${logosPath}/goodreads.${logosExtension}";
 
     # Other
-    nixos = "${logosPath}/nixos.png";
-    airbnb = "${logosPath}/airbnb.png";
+    nixos = "${logosPath}/nixos.${logosExtension}";
+    airbnb = "${logosPath}/airbnb.${logosExtension}";
   };
 
 in

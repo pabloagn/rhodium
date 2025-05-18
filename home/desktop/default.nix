@@ -1,6 +1,6 @@
 # home/desktop/default.nix
 
-{ lib, config, pkgs, ... }:
+{ lib, config, pkgs, inputs ? {}, ... }:
 
 with lib;
 let
@@ -8,9 +8,20 @@ let
 in
 {
   imports = [
-    ./wm/hyprland.nix
-    ./launcher/rofi.nix
-    ./bar/waybar.nix
-    ./notifications/dunst.nix
+    ./wm
+    ./launcher
+    ./bar
+    ./notifications
   ];
+
+  options.rhodium.desktop = {
+    enable = mkEnableOption "Rhodium's Desktop";
+  };
+
+  config = mkIf cfg.enable {
+    rhodium.desktop.bar.enable = true;
+    rhodium.desktop.launcher.enable = true;
+    rhodium.desktop.notifications.enable = true;
+    rhodium.desktop.wm.enable = true;
+  };
 }

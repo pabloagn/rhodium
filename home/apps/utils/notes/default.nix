@@ -19,5 +19,9 @@ in
   };
 
   config = mkIf cfg.enable {
+    rhodium.apps.utils.notes.logseq.enable = true;
+    rhodium.apps.utils.notes.obsidian.enable = true;
+    rhodium.apps.utils.notes.roam.enable = true;
+    rhodium.apps.utils.notes.anytype.enable = true;
   };
 }

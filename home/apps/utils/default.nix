@@ -17,5 +17,8 @@ in
   };
 
   config = mkIf cfg.enable {
+    rhodium.apps.utils.calendars.enable = true;
+    rhodium.apps.utils.notes.enable = true;
+    rhodium.apps.utils.calculators.enable = true;
   };
 }

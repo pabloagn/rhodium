@@ -5,17 +5,24 @@
 with lib;
 let
   cfg = config.rhodium.apps.files;
-in {
+in
+{
+
+  imports = [
+    ./thunar.nix
+    ./nautilus.nix
+    ./krusader.nix
+    ./dolphin.nix
+  ];
+
   options.rhodium.apps.files = {
     enable = mkEnableOption "File management applications";
   };
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [
-      # File managers
-      pcmanfm
-      thunar
-      nautilus
-    ];
+    rhodium.apps.files.thunar.enable = true;
+    rhodium.apps.files.nautilus.enable = false;
+    rhodium.apps.files.krusader.enable = false;
+    rhodium.apps.files.dolphin.enable = false;
   };
 }

@@ -26,7 +26,4 @@
       HandleLidSwitchDocked=ignore
     '';
   };
-
-  # Gnome Keyring required by Proton Bridge
-  services.gnome.gnome-keyring.enable = true;
 }

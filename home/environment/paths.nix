@@ -19,7 +19,7 @@ in
     enable = mkEnableOption "Rhodium's path configuration";
   };
 
-  config = mkIf (config.rhodium.environment.enable && cfg.enable) {
+  config = mkIf cfg.enable {
     # Create necessary file links for assets and scripts
     home.file = rhodiumPaths.mkFileLinks.assetLinks // rhodiumPaths.mkFileLinks.scriptLinks;
 

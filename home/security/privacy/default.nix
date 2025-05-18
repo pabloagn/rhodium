@@ -16,6 +16,8 @@ in
       # VPN
       protonvpn-cli
       protonvpn-gui
+      wireguard-tools
+      mat2 # Metadata anonymization
     ];
   };
 }

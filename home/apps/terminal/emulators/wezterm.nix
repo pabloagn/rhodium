@@ -11,9 +11,13 @@ in
     enable = mkEnableOption "Rhodium's Wezterm configuration";
   };
 
-  config = mkIf (config.rhodium.apps.terminals.emulators.enable && cfg.enable) {
-    home.packages = with pkgs; [
-      wezterm
-    ];
+  config = mkIf cfg.enable {
+    programs.wezterm = {
+      enable = true;
+      package = pkgs.wezterm;
+      enableZshIntegration = true;
+      enableBashIntegration = true;
+      extraConfig = builtins.readFile ./wezterm/wezterm.lua;
+    };
   };
 }

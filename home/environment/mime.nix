@@ -16,7 +16,7 @@ in
     enable = mkEnableOption "Rhodium's MIME type associations";
   };
 
-  config = mkIf (config.rhodium.environment.enable && cfg.enable) {
+  config = mkIf cfg.enable {
     xdg.mimeApps = {
       enable = true;
       defaultApplications = {

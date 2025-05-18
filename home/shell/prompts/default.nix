@@ -10,4 +10,12 @@ in
   imports = [
     ./starship.nix
   ];
+
+  options.rhodium.shell.prompts = {
+    enable = mkEnableOption "Prompts";
+  };
+
+  config = mkIf cfg.enable {
+    rhodium.shell.prompts.starship.enable = true;
+  };
 }

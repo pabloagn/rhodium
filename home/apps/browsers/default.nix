@@ -1,8 +1,7 @@
 # home/apps/browsers/default.nix
 
-# TODO: pending to add zen (comes from flake directly)
-
 { config, lib, pkgs, ... }:
+
 with lib;
 let
   cfg = config.rhodium.apps.browsers;
@@ -10,66 +9,33 @@ in
 {
   imports = [
     ./firefox.nix
+    ./zen.nix
+    ./brave.nix
+    ./librewolf.nix
+    ./chromium.nix
+    ./tor.nix
+    ./qutebrowser.nix
+    ./w3m.nix
   ];
 
   options.rhodium.apps.browsers = {
-    enable = mkEnableOption "Web browsers";
-
-    brave = {
-      enable = mkEnableOption "Brave Browser";
-    };
-
-    librewolf = {
-      enable = mkEnableOption "Librewolf Browser";
-    };
-
-    tor = {
-      enable = mkEnableOption "Tor Browser";
-    };
-
-    qutebrowser = {
-      enable = mkEnableOption "Qutebrowser";
-    };
-
-    chrome = {
-      enable = mkEnableOption "Google Chrome";
-    };
-
-    chromium = {
-      enable = mkEnableOption "Chromium";
-    };
-
-    w3m = {
-      enable = mkEnableOption "w3m terminal browser";
-    };
-
-    zen = {
-      enable = mkEnableOption "Zen Browser";
-      version = mkOption {
-        type = types.enum [ "default" "specific" "generic" ];
-        default = "default";
-        description = "Zen Browser package variant (default/specific or generic)";
-      };
-    };
+    enable = mkEnableOption "Rhodium's Web browsers";
   };
 
   config = mkIf cfg.enable {
-    home.packages = lib.mkMerge [
-      (lib.optional cfg.brave pkgs.brave)
-      (lib.optional cfg.w3m pkgs.w3m)
-      (lib.optional cfg.librewolf pkgs.librewolf)
-      (lib.optional cfg.tor pkgs.tor-browser-bundle-bin)
-      (lib.optional cfg.qutebrowser pkgs.qutebrowser)
-      (lib.optional cfg.chrome pkgs.google-chrome)
-      (lib.optional cfg.chromium pkgs.chromium)
-      (mkIf cfg.zen.enable (
-        let
-          selectedZen =
-            if cfg.zen.version == "generic"
-            then inputs.zen-browser.packages.${pkgs.system}.generic
-            else inputs.zen-browser.packages.${pkgs.system}.default;
-        in [ selectedZen ]
-      ))
-    ];
+    rhodium.apps.browsers.brave.enable = true;
+    rhodium.apps.browsers.librewolf.enable = false;
+    rhodium.apps.browsers.tor.enable = false;
+    rhodium.apps.browsers.qutebrowser.enable = false;
+    rhodium.apps.browsers.chromium.enable = false;
+    rhodium.apps.browsers.w3m.enable = false;
+    rhodium.apps.browsers.firefox = {
+      enable = true;
+      variant = "stable";
+    };
+    rhodium.apps.browsers.zen = {
+      enable = true;
+      variant = "specific";
+    };
   };
 }

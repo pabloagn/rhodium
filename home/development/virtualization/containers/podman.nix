@@ -12,9 +12,12 @@ in
     enable = mkEnableOption "Enable Podman containerization";
   };
 
-  config = mkIf (config.rhodium.development.virtualization.containers.enable && cfg.enable) {
+  config = mkIf cfg.enable {
+    services.podman = {
+      enable = true;
+    };
+
     home.packages = with pkgs; [
-      podman
       podman-tui
     ];
   };

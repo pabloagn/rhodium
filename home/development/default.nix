@@ -21,18 +21,28 @@ let
       langs;
 in
 {
+  imports = [
+    ./databases
+    ./editors
+    ./languages
+    ./tools
+    ./virtualization
+  ];
+
   options.rhodium.development = {
     enable = mkEnableOption "Enable development environment";
     enabledLanguages = mkOption {
       type = types.listOf (types.either types.str types.attrs);
-      default = [ "nix" "python" ];
+      default = [ "nix" "rust" "go" "python" "c" "cpp" ];
       description = "Languages to enable by default";
     };
   };
 
   config = mkIf cfg.enable {
+    home.development.databases = enable;
+    home.development.editors = enable;
     home.development.languages = builtins.listToAttrs (processLanguages cfg.enabledLanguages);
+    home.development.tools = enable;
+    home.development.virtualization = enable;
   };
-
-  imports = [ ./languages ];
 }

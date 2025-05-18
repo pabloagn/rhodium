@@ -11,7 +11,7 @@ in
     enable = mkEnableOption "Rhodium's Logseq configuration";
   };
 
-  config = mkIf (config.rhodium.apps.utilities.notes.enable && cfg.enable) {
+  config = mkIf cfg.enable {
     home.packages = with pkgs; [
       logseq
     ];

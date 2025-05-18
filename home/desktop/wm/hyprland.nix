@@ -22,14 +22,9 @@ in
   config = mkIf cfg.enable {
 
     home.packages = with pkgs; [
-      hyprcursor
       hyprlock
       hyprpaper
-      waybar
-      # waybar-experimental
       dunst
-      rofi-wayland
-      fuzzel
       libnotify
       wl-clipboard
       grim

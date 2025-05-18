@@ -1,9 +1,10 @@
 # home/shell/shells/zsh.nix
+
 { lib, config, pkgs, ... }:
 
 with lib;
 let
-  cfg = config.rhodium.shell.zsh;
+  cfg = config.rhodium.shell.shells.zsh;
   aliases = import ../common/aliases.nix;
   functions = import ../common/functions.nix;
 in
@@ -36,7 +37,7 @@ in
     };
   };
 
-  config = mkIf (config.rhodium.shell.shells.enable && config.rhodium.shell.shells.zsh.enable) {
+  config = mkIf cfg.enable {
     home.packages = with pkgs; [
       zsh-history-substring-search
     ];
@@ -97,6 +98,9 @@ in
 
     programs.starship.enableZshIntegration =
       cfg.enable && config.rhodium.shell.prompts.starship.enable;
+
+    programs.zoxide.enableZshIntegration =
+      cfg.enable && config.rhodium.apps.terminal.utils.zoxide.enable;
 
     home.sessionVariables = mkIf cfg.defaultShell {
       SHELL = "${pkgs.zsh}/bin/zsh";

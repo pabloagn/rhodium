@@ -15,15 +15,10 @@ in
 
   options.rhodium.shell = {
     enable = mkEnableOption "Rhodium's shell configuration";
+  };
 
-    shells = mkOption {
-      description = "Shell-specific configurations";
-      default = {};
-    };
-
-    prompts = mkOption {
-      description = "Prompt-specific configurations";
-      default = {};
-    };
+  config = mkIf cfg.enable {
+    rhodium.shell.shells.default.enable = true;
+    rhodium.shell.prompts.default.enable = true;
   };
 }

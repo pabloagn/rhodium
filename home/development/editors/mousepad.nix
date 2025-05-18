@@ -7,7 +7,13 @@ let
   cfg = config.rhodium.development.editors.mousepad;
 in
 {
-  home.packages = with pkgs; [
-    mousepad
-  ];
+  options.rhodium.development.editors.mousepad = {
+    enable = mkEnableOption "Rhodium's Mousepad configuration";
+  };
+
+  config = mkIf cfg.enable {
+    home.packages = with pkgs; [
+      mousepad
+    ];
+  };
 }

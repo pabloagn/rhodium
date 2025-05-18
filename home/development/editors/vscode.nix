@@ -11,14 +11,18 @@ in
     enable = mkEnableOption "Rhodium's VSCode configuration";
   };
 
-  config = mkIf (config.rhodium.development.editors.enable && cfg.enable) {
-    home.packages = with pkgs; [
-      vscode
-    ];
+  config = mkIf cfg.enable {
+    programs.vscode = {
+      enable = true;
+      package = pkgs.vscode;
+      # package = pkgs.vscodium;
+    };
 
-    # Configuration - keeping your existing structure
     xdg.configFile = {
       "vscode/settings.json" = { source = ./vscode/settings.json; };
+      "vscode/extensions.json" = { source = ./vscode/extensions.json; };
+      # "vscode/keybindings.json" = { source = ./vscode/keybindings.json; };
+      # "vscode/snippets" = { source = ./vscode/snippets; recursive = true; };
     };
   };
 }

@@ -5,18 +5,19 @@
 with lib;
 let
   cfg = config.rhodium.development.tools;
-
+in
+{
   imports = [
     ./ollama.nix
     ./postman.nix
   ];
 
-in
-{
   options.rhodium.development.tools = {
     enable = mkEnableOption "Rhodium's development tools";
   };
 
   config = mkIf cfg.enable {
+    home.development.tools.ollama.enable = true;
+    home.development.tools.postman.enable = true;
   };
 }

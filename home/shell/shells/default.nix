@@ -8,8 +8,22 @@ let
 in
 {
   imports = [
-    ./zsh.nix
     ./bash.nix
     ./fish.nix
+    ./nushell.nix
+    ./zsh.nix
+    ./ion.nix
   ];
+
+  options.rhodium.shell = {
+    enable = mkEnableOption "Shell";
+  };
+
+  config = mkIf cfg.enable {
+    rhodium.shell.shells.bash.enable = true;
+    rhodium.shell.shells.fish.enable = true;
+    rhodium.shell.shells.nushell.enable = true;
+    rhodium.shell.shells.zsh.enable = true;
+    rhodium.shell.shells.ion.enable = true;
+  };
 }

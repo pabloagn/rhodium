@@ -11,9 +11,10 @@ in
     enable = mkEnableOption "Rhodium's Foot configuration";
   };
 
-  config = mkIf (config.rhodium.apps.terminals.emulators.enable && cfg.enable) {
-    home.packages = with pkgs; [
-      foot
-    ];
+  config = mkIf cfg.enable {
+    programs.foot = {
+      enable = true;
+      package = pkgs.foot;
+    };
   };
 }

@@ -25,7 +25,6 @@ in
       handbrake
 
       # Media downloaders
-      tidal-dl
       yt-dlp
     ];
   };

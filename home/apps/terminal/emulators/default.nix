@@ -1,4 +1,4 @@
-# home/apps/terminals/emulators/default.nix
+# home/apps/terminal/emulators/default.nix
 
 { lib, config, pkgs, ... }:
 
@@ -19,5 +19,11 @@ in
     enable = mkEnableOption "Rhodium's terminal emulators";
   };
 
-  config = mkIf cfg.enable { };
+  config = mkIf cfg.enable {
+    rhodium.apps.terminal.emulators.foot.enable = false;
+    rhodium.apps.terminal.emulators.ghostty.enable = true;
+    rhodium.apps.terminal.emulators.kitty.enable = true;
+    rhodium.apps.terminal.emulators.st.enable = false;
+    rhodium.apps.terminal.emulators.wezterm.enable = false;
+  };
 }

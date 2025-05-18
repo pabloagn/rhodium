@@ -11,7 +11,7 @@ in
     enable = mkEnableOption "Rhodium's Starship prompt configuration";
   };
 
-  config = mkIf (config.rhodium.shell.enable && cfg.enable) {
+  config = mkIf cfg.enable {
     programs.starship = {
       enable = true;
 

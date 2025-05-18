@@ -11,9 +11,17 @@ in
     enable = mkEnableOption "Rhodium's Ghostty configuration";
   };
 
-  config = mkIf (config.rhodium.apps.terminals.emulators.enable && cfg.enable) {
-    home.packages = with pkgs; [
-      ghostty
-    ];
+  config = mkIf cfg.enable {
+    programs.ghostty = {
+      enable = true;
+      enableZshIntegration = true;
+      enableBashIntegration = true;
+      enableFishIntegration = true;
+      package = pkgs.ghostty;
+    };
+
+    xdg.configFile."ghostty/config" = {
+      source = ./ghostty/config;
+    };
   };
 }

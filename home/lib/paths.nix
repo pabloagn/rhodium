@@ -22,8 +22,9 @@ let
           )
           attrs;
     in
-      flatten prefix pathSet;
-in {
+    flatten prefix pathSet;
+in
+{
   # The complete paths set for use in modules
   paths = corePaths;
 
@@ -48,7 +49,7 @@ in {
         scripts = corePaths.rhodium.scripts;
       };
     in
-      xdgVars // rhodiumVars;
+    xdgVars // rhodiumVars;
 
   mkFileLinks = {
 
@@ -68,4 +69,3 @@ in {
     };
   };
 }
-

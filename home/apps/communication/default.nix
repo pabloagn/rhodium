@@ -16,5 +16,8 @@ in
     enable = mkEnableOption "Communication applications";
   };
 
-  config = mkIf cfg.enable { };
+  config = mkIf cfg.enable {
+    rhodium.apps.communication.messaging.enable = true;
+    rhodium.apps.communication.email.enable = true;
+  };
 }
