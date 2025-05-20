@@ -1,36 +1,51 @@
 # modules/core/hardware/keyboard.nix
 
-{ config, pkgs, ... }:
+{ config, lib, pkgs, hostData, ... }:
 
+with lib;
+let
+  cfg = config.rhodium.system.hardware.keyboard;
+in
 {
-  environment.systemPackages = with pkgs; [
-    xorg.xev
-  ];
+  options.rhodium.system.hardware.keyboard = {
+    enable = mkEnableOption "Rhodium keyboard and localization configuration";
 
-  # Time zone
-  time.timeZone = "Europe/London";
+    package.xev = mkOption {
+      type = types.bool;
+      default = true;
+      description = "Whether to install xorg.xev for keyboard event debugging.";
+    };
 
-  # Locale
-  i18n.defaultLocale = "en_GB.UTF-8";
-
-  # Additional properties
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "en_GB.UTF-8";
-    LC_IDENTIFICATION = "en_GB.UTF-8";
-    LC_MEASUREMENT = "en_GB.UTF-8";
-    LC_MONETARY = "en_GB.UTF-8";
-    LC_NAME = "en_GB.UTF-8";
-    LC_NUMERIC = "en_GB.UTF-8";
-    LC_PAPER = "en_GB.UTF-8";
-    LC_TELEPHONE = "en_GB.UTF-8";
-    LC_TIME = "en_GB.UTF-8";
+    applyHostSettings = mkOption {
+      type = types.bool;
+      default = true;
+      description = "Whether this module should apply timeZone, locale, keyMap, and XKB layout from hostData.";
+    };
   };
 
-  # Console Keymap
-  console.keyMap = "uk";
+  config = mkIf cfg.enable {
+    environment.systemPackages = optional cfg.package.xev pkgs.xorg.xev;
 
-  services.xserver.xkb = {
-    layout = "gb";
-    variant = "";
+    time.timeZone = mkIf cfg.applyHostSettings hostData.timeZone;
+    i18n.defaultLocale = mkIf cfg.applyHostSettings hostData.locale;
+
+    i18n.extraLocaleSettings = mkIf cfg.applyHostSettings {
+      LC_ADDRESS = hostData.locale;
+      LC_IDENTIFICATION = hostData.locale;
+      LC_MEASUREMENT = hostData.locale;
+      LC_MONETARY = hostData.locale;
+      LC_NAME = hostData.locale;
+      LC_NUMERIC = hostData.locale;
+      LC_PAPER = hostData.locale;
+      LC_TELEPHONE = hostData.locale;
+      LC_TIME = hostData.locale;
+    };
+
+    console.keyMap = mkIf cfg.applyHostSettings hostData.keymap;
+
+    services.xserver.xkb = mkIf cfg.applyHostSettings {
+      layout = hostData.keyboardLayout;
+      variant = hostData.keyboardVariant;
+    };
   };
 }

@@ -4,11 +4,11 @@
 
 with lib;
 let
-  cfg = config.rhodium.apps.desktop.imageViewers;
+  cfg = config.rhodium.home.apps.desktop.imageViewers;
   defs = import ../../lib/desktop-definitions.nix { inherit lib config pkgs; };
 in
 {
-  options.rhodium.apps.desktop.imageViewers = {
+  options.rhodium.home.apps.desktop.imageViewers = {
     enable = mkEnableOption "Desktop Image Viewer Applications";
   };
 

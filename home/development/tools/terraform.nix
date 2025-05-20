@@ -14,7 +14,7 @@ in
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
       terraform
-      vsh # HashiCorp Vault interactive shell
+      vsh
     ];
   };
 }

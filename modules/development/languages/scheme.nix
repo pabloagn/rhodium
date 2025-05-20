@@ -1,13 +1,14 @@
 # modules/development/languages/scheme.nix
+
 { config, pkgs, lib, ... }:
 
 with lib;
 
 let
-  cfg = config.modules.development.languages.scheme;
+  cfg = config.rhodium.system.development.languages.scheme;
 in
 {
-  options.modules.development.languages.scheme = {
+  options.rhodium.system.development.languages.scheme = {
     enable = mkEnableOption "Enable Scheme development environment";
   };
 

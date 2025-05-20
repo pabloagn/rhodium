@@ -1,13 +1,14 @@
 # modules/development/languages/swift.nix
+
 { config, pkgs, lib, ... }:
 
 with lib;
 
 let
-  cfg = config.modules.development.languages.swift;
+  cfg = config.rhodium.system.development.languages.swift;
 in
 {
-  options.modules.development.languages.swift = {
+  options.rhodium.system.development.languages.swift = {
     enable = mkEnableOption "Enable Swift development environment";
   };
 

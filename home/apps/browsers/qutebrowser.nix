@@ -4,10 +4,10 @@
 
 with lib;
 let
-  cfg = config.rhodium.apps.browsers.qutebrowser;
+  cfg = config.rhodium.home.apps.browsers.qutebrowser;
 in
 {
-  options.rhodium.apps.browsers.qutebrowser = {
+  options.rhodium.home.apps.browsers.qutebrowser = {
     enable = mkEnableOption "Qutebrowser";
   };
 

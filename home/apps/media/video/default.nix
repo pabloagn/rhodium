@@ -4,10 +4,10 @@
 
 with lib;
 let
-  cfg = config.rhodium.apps.media.video;
+  cfg = config.rhodium.home.apps.media.video;
 in
 {
-  options.rhodium.apps.media.video = {
+  options.rhodium.home.apps.media.video = {
     enable = mkEnableOption "Video applications";
   };
 

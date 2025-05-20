@@ -4,10 +4,10 @@
 
 with lib;
 let
-  cfg = config.rhodium.apps.documents.okular;
+  cfg = config.rhodium.home.apps.documents.okular;
 in
 {
-  options.rhodium.apps.documents.okular = {
+  options.rhodium.home.apps.documents.okular = {
     enable = mkEnableOption "Okular";
   };
 

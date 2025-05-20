@@ -1,48 +1,43 @@
 # home/environment/variables.nix
 
-{ lib, config, pkgs, self, ... }:
+{ lib, config, pkgs, flakeRootPath, ... }:
 
 with lib;
 let
-  cfg = config.rhodium.environment.variables;
+  cfg = config.rhodium.home.environment.variables;
+  preferredApps = config.rhodium.home.environment.preferredApps;
 
-  # Import the path helper
   rhodiumPaths = import ../lib/paths.nix {
     inherit lib config;
-    flakeRoot = self;
+    flakeRootPath = flakeRootPath;
   };
 
-  # Get generated environment variables from the paths
   pathVariables = rhodiumPaths.mkSessionVariables;
 
-  # Get clean path references
   paths = rhodiumPaths.paths;
 in
 {
-  options.rhodium.environment.variables = {
+  options.rhodium.home.environment.variables = {
     enable = mkEnableOption "Rhodium's environment variables";
   };
 
   config = mkIf cfg.enable {
-    # System paths from our path module
     home.sessionVariables = pathVariables // {
 
-      # Rhodium
-      RHODIUM = "${paths.home}/rhodium";
-
       # Default applications
-      BROWSER = "firefox";
-      EDITOR = "hx";
-      VISUAL = "hx";
-      SUDO_EDITOR = "hx";
-      TERMINAL = "ghostty";
-      IMAGE = "feh";
-      IMAGE_DESKTOP = "feh-image-viewer";
-      VIDEO = "mpv";
-      AUDIO = "clementine";
-      PDF_DESKTOP = "org.kde.okular.desktop";
+      BROWSER = preferredApps.browser or "firefox";
+      EDITOR = preferredApps.editor or "hx";
+      VISUAL = preferredApps.editor or "hx";
+      SUDO_EDITOR = preferredApps.editor or "hx";
+      TERMINAL = preferredApps.terminal or "ghostty";
+      IMAGE = preferredApps.image or "feh";
+      IMAGE_DESKTOP = preferredApps.image or "feh-image-viewer";
+      VIDEO = preferredApps.video or "mpv";
+      AUDIO = preferredApps.audio or "clementine";
+      PDF_DESKTOP = preferredApps.pdf or "org.kde.okular.desktop";
+
       # Window manager
-      WM = "Hyprland";
+      WM = preferredApps.wm or "hyprland";
 
       # Shell history
       HISTFILE = "${paths.xdg.cache}/zsh/.zsh_history";

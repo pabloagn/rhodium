@@ -4,10 +4,10 @@
 
 with lib;
 let
-  cfg = config.rhodium.apps.files.thunar;
+  cfg = config.rhodium.home.apps.files.thunar;
 in
 {
-  options.rhodium.apps.files.thunar = {
+  options.rhodium.home.apps.files.thunar = {
     enable = mkEnableOption "Thunar file manager";
   };
 

@@ -4,10 +4,13 @@
 
 with lib;
 let
-  cfg = config.rhodium.development.editors.helix;
+  helixConfig = ./helix;
+  helixThemes = helixConfig + "themes";
+  cfg = config.rhodium.home.development.editors.helix;
+  desktopDefs = config.rhodium.lib.desktopDefinitions;
 in
 {
-  options.rhodium.development.editors.helix = {
+  options.rhodium.home.development.editors.helix = {
     enable = mkEnableOption "Rhodium's Helix configuration";
   };
 
@@ -18,9 +21,15 @@ in
     };
 
     xdg.configFile = {
-      "helix/config.toml" = { source = ./helix/config.toml; };
-      "helix/languages.toml" = { source = ./helix/languages.toml; };
-      "helix/themes/tokyonight.toml" = { source = ./helix/themes/tokyonight.toml; };
+      "helix/config.toml" = {
+        source = "${helixConfig}/config.toml";
+      };
+      "helix/languages.toml" = {
+        source = "${helixConfig}/languages.toml";
+      };
+      "helix/themes/tokyonight.toml" = {
+        source = "${helixThemes}/tokyonight.toml";
+      };
     };
   };
 }

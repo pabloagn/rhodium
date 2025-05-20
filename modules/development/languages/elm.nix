@@ -1,13 +1,14 @@
 # modules/development/languages/elm.nix
+
 { config, pkgs, lib, ... }:
 
 with lib;
 
 let
-  cfg = config.modules.development.languages.elm;
+  cfg = config.rhodium.system.development.languages.elm;
 in
 {
-  options.modules.development.languages.elm = {
+  options.rhodium.system.development.languages.elm = {
     enable = mkEnableOption "Enable Elm development environment";
   };
 

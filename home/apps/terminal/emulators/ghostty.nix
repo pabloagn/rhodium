@@ -4,10 +4,10 @@
 
 with lib;
 let
-  cfg = config.rhodium.apps.terminals.emulators.ghostty;
+  cfg = config.rhodium.home.apps.terminals.emulators.ghostty;
 in
 {
-  options.rhodium.apps.terminals.emulators.ghostty = {
+  options.rhodium.home.apps.terminals.emulators.ghostty = {
     enable = mkEnableOption "Rhodium's Ghostty configuration";
   };
 

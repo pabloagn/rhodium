@@ -4,10 +4,10 @@
 
 with lib;
 let
-  cfg = config.rhodium.apps.media.audio.tidal;
+  cfg = config.rhodium.home.apps.media.audio.tidal;
 in
 {
-  options.rhodium.apps.media.audio.tidal = {
+  options.rhodium.home.apps.media.audio.tidal = {
     enable = mkEnableOption "Rhodium's tidal client";
   };
 

@@ -4,7 +4,7 @@
 
 with lib;
 let
-  cfg = config.rhodium.apps.utils.notes;
+  cfg = config.rhodium.home.apps.utils.notes;
 in
 {
   imports = [
@@ -14,14 +14,16 @@ in
     ./anytype.nix
   ];
 
-  options.rhodium.apps.utils.notes = {
+  options.rhodium.home.apps.utils.notes = {
     enable = mkEnableOption "Rhodium's note-taking applications";
   };
 
   config = mkIf cfg.enable {
-    rhodium.apps.utils.notes.logseq.enable = true;
-    rhodium.apps.utils.notes.obsidian.enable = true;
-    rhodium.apps.utils.notes.roam.enable = true;
-    rhodium.apps.utils.notes.anytype.enable = true;
+    rhodium.home.apps.utils.notes = {
+      logseq.enable = false;
+      obsidian.enable = true;
+      roam.enable = false;
+      anytype.enable = false;
+    };
   };
 }

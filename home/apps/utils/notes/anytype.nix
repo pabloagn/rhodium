@@ -4,10 +4,10 @@
 
 with lib;
 let
-  cfg = config.rhodium.apps.utils.notes.anytype;
+  cfg = config.rhodium.home.apps.utils.notes.anytype;
 in
 {
-  options.rhodium.apps.utils.notes.anytype = {
+  options.rhodium.home.apps.utils.notes.anytype = {
     enable = mkEnableOption "Rhodium's Anytype configuration";
   };
 

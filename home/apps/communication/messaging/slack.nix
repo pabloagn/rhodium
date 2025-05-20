@@ -4,10 +4,10 @@
 
 with lib;
 let
-  cfg = config.rhodium.apps.communication.messaging.slack;
+  cfg = config.rhodium.home.apps.communication.messaging.slack;
 in
 {
-  options.rhodium.apps.communication.messaging.slack = {
+  options.rhodium.home.apps.communication.messaging.slack = {
     enable = mkEnableOption "Slack";
   };
 

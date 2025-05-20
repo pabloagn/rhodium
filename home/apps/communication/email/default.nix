@@ -1,10 +1,11 @@
 # home/apps/communication/email/default.nix
+# DONE
 
-{ config, lib, pkgs, ... }:
+{ config, lib, ... }:
 
 with lib;
 let
-  cfg = config.rhodium.apps.communication.email;
+  cfg = config.rhodium.home.apps.communication.email;
 in
 {
   imports = [
@@ -12,12 +13,14 @@ in
     ./thunderbird.nix
   ];
 
-  options.rhodium.apps.communication.email = {
+  options.rhodium.home.apps.communication.email = {
     enable = mkEnableOption "Email applications";
   };
 
   config = mkIf cfg.enable {
-    rhodium.apps.communication.email.protonmail.enable = true;
-    rhodium.apps.communication.email.thunderbird.enable = false;
+    rhodium.home.apps.communication.email = {
+      protonmail.enable = false;
+      thunderbird.enable = false;
+    };
   };
 }

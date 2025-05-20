@@ -1,13 +1,14 @@
 # modules/development/languages/erlang.nix
+
 { config, pkgs, lib, ... }:
 
 with lib;
 
 let
-  cfg = config.modules.development.languages.erlang;
+  cfg = config.rhodium.system.development.languages.erlang;
 in
 {
-  options.modules.development.languages.erlang = {
+  options.rhodium.system.development.languages.erlang = {
     enable = mkEnableOption "Enable Erlang development environment";
   };
 

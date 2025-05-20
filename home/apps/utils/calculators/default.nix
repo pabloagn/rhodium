@@ -4,9 +4,10 @@
 
 with lib;
 let
-  cfg = config.rhodium.apps.utils.calculators;
-in {
-  options.rhodium.apps.utils.calculators = {
+  cfg = config.rhodium.home.apps.utils.calculators;
+in
+{
+  options.rhodium.home.apps.utils.calculators = {
     enable = mkEnableOption "Calculator applications";
   };
 

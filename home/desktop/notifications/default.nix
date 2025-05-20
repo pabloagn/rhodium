@@ -4,18 +4,18 @@
 
 with lib;
 let
-  cfg = config.rhodium.desktop.notifications;
+  cfg = config.rhodium.home.desktop.notifications;
 in
 {
   imports = [
     ./dunst.nix
   ];
 
-  options.rhodium.desktop.notifications = {
+  options.rhodium.home.desktop.notifications = {
     enable = mkEnableOption "Rhodium's Desktop Notifications";
   };
 
   config = mkIf cfg.enable {
-    rhodium.desktop.notifications.dunst.enable = true;
+    rhodium.home.desktop.notifications.dunst.enable = true;
   };
 }

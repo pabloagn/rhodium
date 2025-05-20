@@ -4,11 +4,11 @@
 
 with lib;
 let
-  cfg = config.rhodium.apps.desktop.editors;
+  cfg = config.rhodium.home.apps.desktop.editors;
   defs = import ../../lib/desktop-definitions.nix { inherit lib config pkgs; };
 in
 {
-  options.rhodium.apps.desktop.editors = {
+  options.rhodium.home.apps.desktop.editors = {
     enable = mkEnableOption "Desktop Editor Applications";
   };
 

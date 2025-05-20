@@ -5,10 +5,10 @@
 with lib;
 
 let
-  cfg = config.modules.development.languages.nix;
+  cfg = config.rhodium.system.development.languages.nix;
 in
 {
-  options.modules.development.languages.nix = {
+  options.rhodium.system.development.languages.nix = {
     enable = mkEnableOption "Enable Nix development environment";
   };
 

@@ -1,35 +1,56 @@
 # home/development/languages/typescript.nix
+
 { config, pkgs, lib, ... }:
 
 with lib;
 let
-  cfg = config.home.development.languages.typescript;
+  cfg = config.rhodium.home.development.languages.typescript;
 in
 {
-  options.home.development.languages.typescript = {
+  options.rhodium.home.development.languages.typescript = {
     enable = mkEnableOption "Enable TypeScript development environment (Home Manager)";
+
+    compiler = mkOption {
+      type = types.package;
+      default = pkgs.nodePackages.typescript;
+      description = "TypeScript compiler.";
+    };
+
+    languageServer = mkOption {
+      type = types.package;
+      default = pkgs.nodePackages.typescript-language-server;
+      description = "TypeScript Language Server.";
+    };
+
+    linters = mkOption {
+      type = types.listOf types.package;
+      default = with pkgs.nodePackages; [
+        eslint
+        "@typescript-eslint/parser"
+        "@typescript-eslint/eslint-plugin"
+      ];
+      description = "Linters for TypeScript (typically ESLint with TS plugins).";
+    };
+
+    formatters = mkOption {
+      type = types.listOf types.package;
+      default = with pkgs.nodePackages; [
+        prettier
+      ];
+      description = "Code formatters for TypeScript.";
+    };
+
+    extraTools = mkOption {
+      type = types.listOf types.package;
+      default = [ ];
+      description = "Additional TypeScript-related tools.";
+    };
   };
 
   config = mkIf cfg.enable {
-    # TypeScript development typically requires Node.js.
-    # Ensure home.development.languages.nodejs is also enabled.
-    home.packages = with pkgs; [
-      # TypeScript Compiler and core tools
-      nodePackages.typescript
-
-      # Language Server
-      nodePackages.typescript-language-server
-
-      # Linters (ESLint with TypeScript plugins is common)
-      nodePackages.eslint
-      nodePackages."@typescript-eslint/parser" # Parser for ESLint
-      nodePackages."@typescript-eslint/eslint-plugin" # Plugin for ESLint
-
-      # Formatters
-      nodePackages.prettier # Widely used for TypeScript formatting
-
-      # Type definition manager (though often handled by npm/yarn/pnpm)
-      # nodePackages.typesync # To keep @types/ packages in sync with package.json
-    ];
+    home.packages = [ cfg.compiler cfg.languageServer ]
+      ++ cfg.linters
+      ++ cfg.formatters
+      ++ cfg.extraTools;
   };
 }

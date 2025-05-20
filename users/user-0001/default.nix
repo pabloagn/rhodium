@@ -1,23 +1,15 @@
 # users/user-0001/default.nix
 
-{ config, pkgs, lib, inputs, flakeOutputs, pkgs-unstable, userData, ... }:
+{ config, pkgs, lib, userData, rhodium,... }:
 
 {
   imports = [
-    flakeOutputs.rhodium.home.default
-  ];
+    # Minimal defaults
+    ../../home/default.nix
 
-  # Profile
-  # ------------------------------------
+    # Profiles
+    ../../home/profiles/developer.nix
+  ];
   home.username = userData.username;
   home.homeDirectory = "/home/${userData.username}";
-
-  # Options
-  # ------------------------------------
-  rhodium = {
-  };
-
-  # State
-  # ------------------------------------
-  home.stateVersion = "24.11";
 }

@@ -4,10 +4,10 @@
 
 with lib;
 let
-  cfg = config.rhodium.apps.communication.messaging.zoom;
+  cfg = config.rhodium.home.apps.communication.messaging.zoom;
 in
 {
-  options.rhodium.apps.communication.messaging.zoom = {
+  options.rhodium.home.apps.communication.messaging.zoom = {
     enable = mkEnableOption "Zoom";
   };
 

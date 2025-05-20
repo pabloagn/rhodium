@@ -4,10 +4,10 @@
 
 with lib;
 let
-  cfg = config.rhodium.apps.media.audio.audacity;
+  cfg = config.rhodium.home.apps.media.audio.audacity;
 in
 {
-  options.rhodium.apps.media.audio.audacity = {
+  options.rhodium.home.apps.media.audio.audacity = {
     enable = mkEnableOption "Audacity";
   };
 

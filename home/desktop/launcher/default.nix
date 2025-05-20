@@ -4,7 +4,7 @@
 
 with lib;
 let
-  cfg = config.rhodium.desktop.launcher;
+  cfg = config.rhodium.home.desktop.launcher;
 in
 {
   imports = [
@@ -12,12 +12,14 @@ in
     ./fuzzel.nix
   ];
 
-  options.rhodium.desktop.launcher = {
+  options.rhodium.home.desktop.launcher = {
     enable = mkEnableOption "Rhodium's Desktop Launchers";
   };
 
   config = mkIf cfg.enable {
-    rhodium.desktop.launcher.rofi.enable = true;
-    rhodium.desktop.launcher.fuzzel.enable = true;
+    rhodium.home.desktop.launcher = {
+      rofi.enable = true;
+      fuzzel.enable = true;
+    };
   };
 }

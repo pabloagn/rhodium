@@ -1,13 +1,14 @@
 # modules/development/languages/zig.nix
+
 { config, pkgs, lib, ... }:
 
 with lib;
 
 let
-  cfg = config.modules.development.languages.zig;
+  cfg = config.rhodium.system.development.languages.zig;
 in
 {
-  options.modules.development.languages.zig = {
+  options.rhodium.system.development.languages.zig = {
     enable = mkEnableOption "Enable Zig development environment";
     # version = mkOption {
     #   type = types.nullOr types.str; # e.g. "0.11.0"

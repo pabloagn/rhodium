@@ -4,10 +4,10 @@
 
 with lib;
 let
-  cfg = config.rhodium.apps.utils.notes.roam;
+  cfg = config.rhodium.home.apps.utils.notes.roam;
 in
 {
-  options.rhodium.apps.utils.notes.roam = {
+  options.rhodium.home.apps.utils.notes.roam = {
     enable = mkEnableOption "Rhodium's Roam Research configuration";
   };
 

@@ -1,13 +1,14 @@
 # modules/development/languages/julia.nix
+
 { config, pkgs, lib, ... }:
 
 with lib;
 
 let
-  cfg = config.modules.development.languages.julia;
+  cfg = config.rhodium.system.development.languages.julia;
 in
 {
-  options.modules.development.languages.julia = {
+  options.rhodium.system.development.languages.julia = {
     enable = mkEnableOption "Enable Julia development environment";
   };
 

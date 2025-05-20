@@ -4,38 +4,64 @@
 
 with lib;
 let
-  cfg = config.home.development.languages.python;
+  cfg = config.rhodium.home.development.languages.python;
 in
 {
-  options.home.development.languages.python = {
+  options.rhodium.home.development.languages.python = {
     enable = mkEnableOption "Enable Python development environment (Home Manager)";
-    pythonPackage = mkOption {
-      type = types.package;
-      default = pkgs.python3;
-      defaultText = "pkgs.python3";
-      description = "The Python interpreter package for home.packages (e.g., python3, python311, python310).";
+
+    variants = mkOption {
+      type = types.listOf types.package;
+      default = with pkgs; [
+        python311
+        python312
+      ];
+      description = "List of Python interpreter packages to install.";
+      example = literalExpression "[ pkgs.python311 pkgs.python310 ]";
+    };
+
+    linters = mkOption {
+      type = types.listOf types.package;
+      default = with pkgs; [
+        ruff
+        mypy
+        debugpy
+        black
+      ];
+      description = "List of linters to install";
+      example = literalExpression "[ pkgs.ruff pkgs.black ]";
+    };
+
+    packageManagers = mkOption {
+      type = types.listOf types.package;
+      default = with pkgs; [
+        poetry
+        pdm
+      ];
+      description = "Python package management tools.";
+    };
+
+    languageServers = mkOption {
+      type = types.listOf types.package;
+      default = with pkgs; [
+        pyright
+      ];
+      description = "Python language servers.";
+    };
+
+    extraTools = mkOption {
+      type = types.listOf types.package;
+      default = [ ];
+      description = "Additional Python-related tools to install.";
     };
   };
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [
-      # Python Interpreter
-      cfg.pythonPackage
-
-      # Package Management
-      poetry
-      pdm
-
-      # Language Servers
-      pyright
-
-      # Linters & Formatters
-      ruff
-      # black
-      mypy
-
-      # Debugger
-      debugpy
-    ];
+    home.packages =
+      cfg.variants
+      ++ cfg.linters
+      ++ cfg.packageManagers
+      ++ cfg.languageServers
+      ++ cfg.extraTools;
   };
 }

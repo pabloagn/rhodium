@@ -1,13 +1,14 @@
 # modules/development/languages/dotnet.nix
+
 { config, pkgs, lib, ... }:
 
 with lib;
 
 let
-  cfg = config.modules.development.languages.dotnet;
+  cfg = config.rhodium.system.development.languages.dotnet;
 in
 {
-  options.modules.development.languages.dotnet = {
+  options.rhodium.system.development.languages.dotnet = {
     enable = mkEnableOption "Enable .NET development environment (SDK)";
   };
 

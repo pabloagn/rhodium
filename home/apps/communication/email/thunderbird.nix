@@ -4,10 +4,10 @@
 
 with lib;
 let
-  cfg = config.rhodium.apps.communication.email.thunderbird;
+  cfg = config.rhodium.home.apps.communication.email.thunderbird;
 in
 {
-  options.rhodium.apps.communication.email.thunderbird = {
+  options.rhodium.home.apps.communication.email.thunderbird = {
     enable = mkEnableOption "Thunderbird";
   };
 

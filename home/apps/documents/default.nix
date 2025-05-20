@@ -4,7 +4,7 @@
 
 with lib;
 let
-  cfg = config.rhodium.apps.documents;
+  cfg = config.rhodium.home.apps.documents;
 in {
   imports = [
     ./libreoffice.nix
@@ -14,15 +14,15 @@ in {
     ./texmaker.nix
   ];
 
-  options.rhodium.apps.documents = {
+  options.rhodium.home.apps.documents = {
     enable = mkEnableOption "Document processing applications";
   };
 
   config = mkIf cfg.enable {
-    rhodium.apps.documents.libreoffice.enable = false;
-    rhodium.apps.documents.onlyoffice.enable = true;
-    rhodium.apps.documents.okular.enable = true;
-    rhodium.apps.documents.zathura.enable = true;
-    rhodium.apps.documents.texmaker.enable = true;
+    rhodium.home.apps.documents.libreoffice.enable = false;
+    rhodium.home.apps.documents.onlyoffice.enable = true;
+    rhodium.home.apps.documents.okular.enable = true;
+    rhodium.home.apps.documents.zathura.enable = true;
+    rhodium.home.apps.documents.texmaker.enable = true;
   };
 }

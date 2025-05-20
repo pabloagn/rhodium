@@ -4,10 +4,10 @@
 
 with lib;
 let
-  cfg = config.rhodium.apps.utils.calendars.evolution;
+  cfg = config.rhodium.home.apps.utils.calendars.evolution;
 in
 {
-  options.rhodium.apps.utils.calendars.evolution = {
+  options.rhodium.home.apps.utils.calendars.evolution = {
     enable = mkEnableOption "Evolution calendar application";
   };
 

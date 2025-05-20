@@ -4,10 +4,10 @@
 
 with lib;
 let
-  cfg = config.rhodium.apps.terminals.emulators.foot;
+  cfg = config.rhodium.home.apps.terminals.emulators.foot;
 in
 {
-  options.rhodium.apps.terminals.emulators.foot = {
+  options.rhodium.home.apps.terminals.emulators.foot = {
     enable = mkEnableOption "Rhodium's Foot configuration";
   };
 

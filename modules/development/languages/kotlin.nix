@@ -1,13 +1,14 @@
 # modules/development/languages/kotlin.nix
+
 { config, pkgs, lib, ... }:
 
 with lib;
 
 let
-  cfg = config.modules.development.languages.kotlin;
+  cfg = config.rhodium.system.development.languages.kotlin;
 in
 {
-  options.modules.development.languages.kotlin = {
+  options.rhodium.system.development.languages.kotlin = {
     enable = mkEnableOption "Enable Kotlin development environment";
     jdk = mkOption {
       type = types.package;

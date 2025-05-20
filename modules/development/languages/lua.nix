@@ -1,13 +1,14 @@
 # modules/development/languages/lua.nix
+
 { config, pkgs, lib, ... }:
 
 with lib;
 
 let
-  cfg = config.modules.development.languages.lua;
+  cfg = config.rhodium.system.development.languages.lua;
 in
 {
-  options.modules.development.languages.lua = {
+  options.rhodium.system.development.languages.lua = {
     enable = mkEnableOption "Enable Lua development environment";
     luaVersion = mkOption {
       type = types.enum [ "lua51" "lua52" "lua53" "lua54" "luajit" ];

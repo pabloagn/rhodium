@@ -4,14 +4,14 @@
 
 with lib;
 let
-  cfg = config.rhodium.apps.browsers.zen;
+  cfg = config.rhodium.home.apps.browsers.zen;
 
   hasZenBrowser = inputs ? zen-browser;
 
   system = pkgs.stdenv.hostPlatform.system;
 in
 {
-  options.rhodium.apps.browsers.zen = {
+  options.rhodium.home.apps.browsers.zen = {
     enable = mkEnableOption "Zen Browser";
 
     variant = mkOption {

@@ -4,10 +4,10 @@
 
 with lib;
 let
-  cfg = config.rhodium.apps.utils.calendars.korganizer;
+  cfg = config.rhodium.home.apps.utils.calendars.korganizer;
 in
 {
-  options.rhodium.apps.utils.calendars.korganizer = {
+  options.rhodium.home.apps.utils.calendars.korganizer = {
     enable = mkEnableOption "KOrganizer calendar application";
   };
 

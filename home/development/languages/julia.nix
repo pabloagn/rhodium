@@ -1,24 +1,38 @@
 # home/development/languages/julia.nix
+
 { config, pkgs, lib, ... }:
 
 with lib;
 let
-  cfg = config.home.development.languages.julia;
+  cfg = config.rhodium.home.development.languages.julia;
 in
 {
-  options.home.development.languages.julia = {
+  options.rhodium.home.development.languages.julia = {
     enable = mkEnableOption "Enable Julia development environment (Home Manager)";
+
+    runtime = mkOption {
+      type = types.package;
+      default = pkgs.julia-bin;
+      description = "Julia runtime environment.";
+      example = literalExpression "pkgs.julia_lts";
+    };
+
+    languageServerFromNix = mkOption {
+      type = types.nullOr types.package;
+      default = null;
+      description = "Julia Language Server packaged via Nix (if available and desired). Often managed via Julia's Pkg.";
+    };
+
+    extraTools = mkOption {
+      type = types.listOf types.package;
+      default = [ ];
+      description = "Additional Julia-related tools installed via Nix.";
+    };
   };
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [
-      # Julia runtime
-      julia-bin # Or julia for building from source, julia-lts for LTS
-
-      # Language Server (LanguageServer.jl) is typically installed via Julia's Pkg manager.
-      # To make LanguageServer.jl available from Nix:
-      # (julia-bin.withPackages (ps: [ ps.LanguageServer ps.SymbolServer ]))
-      # However, managing it via Julia's Pkg manager inside a project is often preferred.
-    ];
+    home.packages = [ cfg.runtime ]
+      ++ (if cfg.languageServerFromNix != null then [ cfg.languageServerFromNix ] else [ ])
+      ++ cfg.extraTools;
   };
 }

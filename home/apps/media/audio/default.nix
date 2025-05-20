@@ -4,7 +4,7 @@
 
 with lib;
 let
-  cfg = config.rhodium.apps.media.audio;
+  cfg = config.rhodium.home.apps.media.audio;
 in
 {
   imports = [
@@ -18,18 +18,20 @@ in
     ./audacity.nix
   ];
 
-  options.rhodium.apps.media.audio = {
+  options.rhodium.home.apps.media.audio = {
     enable = mkEnableOption "Rhodium's audio applications";
   };
 
   config = mkIf cfg.enable {
-    rhodium.apps.media.audio.clementine.enable = false;
-    rhodium.apps.media.audio.spotify.enable = false;
-    rhodium.apps.media.audio.plexamp.enable = false;
-    rhodium.apps.media.audio.tidal.enable = false;
-    rhodium.apps.media.audio.easyeffects.enable = false;
-    rhodium.apps.media.audio.audacious.enable = false;
-    rhodium.apps.media.audio.playerctl.enable = false;
-    rhodium.apps.media.audio.audacity.enable = false;
+    rhodium.home.apps.media.audio = {
+      clementine.enable = true;
+      spotify.enable = true;
+      plexamp.enable = false;
+      tidal.enable = false;
+      easyeffects.enable = false;
+      audacious.enable = false;
+      playerctl.enable = false;
+      audacity.enable = false;
+    };
   };
 }

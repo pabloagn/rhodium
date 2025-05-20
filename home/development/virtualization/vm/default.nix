@@ -17,7 +17,9 @@ in
   };
 
   config = mkIf cfg.enable {
-    home.development.virtualization.vm.virtualbox.enable = true;
-    home.development.virtualization.vm.qemu.enable = true;
+    home.development.virtualization.vm = {
+      virtualbox.enable = true;
+      qemu.enable = true;
+    };
   };
 }

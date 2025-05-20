@@ -1,13 +1,14 @@
 # modules/development/languages/sql.nix
+
 { config, pkgs, lib, ... }:
 
 with lib;
 
 let
-  cfg = config.modules.development.languages.sql;
+  cfg = config.rhodium.system.development.languages.sql;
 in
 {
-  options.modules.development.languages.sql = {
+  options.rhodium.system.development.languages.sql = {
     enable = mkEnableOption "Enable SQL development tools";
   };
 

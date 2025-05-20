@@ -4,7 +4,8 @@
 
 with lib;
 let
-  cfg = config.rhodium.environment.mime;
+  cfg = config.rhodium.home.environment.mime;
+
   browser = config.home.sessionVariables.BROWSER or "firefox";
   editor = config.home.sessionVariables.EDITOR or "hx";
   audio = config.home.sessionVariables.AUDIO or "clementine";

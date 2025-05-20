@@ -4,10 +4,10 @@
 
 with lib;
 let
-  cfg = config.rhodium.apps.communication.messaging.signal;
+  cfg = config.rhodium.home.apps.communication.messaging.signal;
 in
 {
-  options.rhodium.apps.communication.messaging.signal = {
+  options.rhodium.home.apps.communication.messaging.signal = {
     enable = mkEnableOption "Signal";
   };
 

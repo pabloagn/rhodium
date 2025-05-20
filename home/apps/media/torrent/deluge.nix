@@ -4,10 +4,10 @@
 
 with lib;
 let
-  cfg = config.rhodium.apps.media.torrent.deluge;
+  cfg = config.rhodium.home.apps.media.torrent.deluge;
 in
 {
-  options.rhodium.apps.media.torrent.deluge = {
+  options.rhodium.home.apps.media.torrent.deluge = {
     enable = mkEnableOption "Rhodium's deluge client";
   };
 

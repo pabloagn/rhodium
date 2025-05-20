@@ -4,10 +4,10 @@
 
 with lib;
 let
-  cfg = config.rhodium.apps.files.krusader;
+  cfg = config.rhodium.home.apps.files.krusader;
 in
 {
-  options.rhodium.apps.files.krusader = {
+  options.rhodium.home.apps.files.krusader = {
     enable = mkEnableOption "Krusader file manager";
   };
 

@@ -1,13 +1,14 @@
 # modules/development/languages/c.nix
+
 { config, pkgs, lib, ... }:
 
 with lib;
 
 let
-  cfg = config.modules.development.languages.c;
+  cfg = config.rhodium.system.development.languages.c;
 in
 {
-  options.modules.development.languages.c = {
+  options.rhodium.system.development.languages.c = {
     enable = mkEnableOption "Enable C development environment";
   };
 
@@ -20,14 +21,12 @@ in
       # Build Tools
       gnumake
       cmake
-      # autoconf
-      # automake
 
       # Language Server
-      clang-tools # Provides clangd
+      clang-tools
 
       # Linters / Static Analysis
-      cppcheck # Can be used for C
+      cppcheck
 
       # Debugger
       gdb

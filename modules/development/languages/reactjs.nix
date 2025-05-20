@@ -1,13 +1,14 @@
 # modules/development/languages/reactjs.nix
+
 { config, pkgs, lib, ... }:
 
 with lib;
 
 let
-  cfg = config.modules.development.languages.reactjs;
+  cfg = config.rhodium.system.development.languages.reactjs;
 in
 {
-  options.modules.development.languages.reactjs = {
+  options.rhodium.system.development.languages.reactjs = {
     enable = mkEnableOption "Enable React.js development environment";
   };
 

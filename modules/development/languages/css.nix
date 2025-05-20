@@ -1,13 +1,14 @@
 # modules/development/languages/css.nix
+
 { config, pkgs, lib, ... }:
 
 with lib;
 
 let
-  cfg = config.modules.development.languages.css;
+  cfg = config.rhodium.system.development.languages.css;
 in
 {
-  options.modules.development.languages.css = {
+  options.rhodium.system.development.languages.css = {
     enable = mkEnableOption "Enable CSS development environment";
   };
 

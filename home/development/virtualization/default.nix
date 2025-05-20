@@ -17,7 +17,9 @@ in
   };
 
   config = mkIf cfg.enable {
-    home.development.virtualization.containers.enable = true;
-    home.development.virtualization.vm.enable = true;
+    home.development.virtualization = {
+      containers.enable = true;
+      vm.enable = false;
+    };
   };
 }

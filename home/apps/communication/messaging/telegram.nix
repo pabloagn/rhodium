@@ -4,10 +4,10 @@
 
 with lib;
 let
-  cfg = config.rhodium.apps.communication.messaging.telegram;
+  cfg = config.rhodium.home.apps.communication.messaging.telegram;
 in
 {
-  options.rhodium.apps.communication.messaging.telegram = {
+  options.rhodium.home.apps.communication.messaging.telegram = {
     enable = mkEnableOption "Telegram";
   };
 

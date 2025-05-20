@@ -4,11 +4,11 @@
 
 with lib;
 let
-  cfg = config.rhodium.apps.desktop.firefoxProfiles;
+  cfg = config.rhodium.home.apps.desktop.firefoxProfiles;
   defs = import ../../lib/desktop-definitions.nix { inherit lib config pkgs; };
 in
 {
-  options.rhodium.apps.desktop.firefoxProfiles = {
+  options.rhodium.home.apps.desktop.firefoxProfiles = {
     enable = mkEnableOption "Desktop Firefox Profiles";
   };
 

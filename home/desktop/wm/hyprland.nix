@@ -4,18 +4,13 @@
 
 with lib;
 let
-  cfg = config.rhodium.desktop.wm.hyprland;
+  cfg = config.rhodium.home.desktop.wm.hyprland;
 
-  # Waybar override for experimental features
-  # waybar-experimental = pkgs.waybar.overrideAttrs (oldAttrs: {
-  #   mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
-  # });
-
-  hyprlandDotfilesRoot = ./hyprland;
+  hyprlandConfig = ./hyprland;
+  hyprlandConfigModules = hyprlandConfig + "/modules";
 in
 {
-  # TODO: Eventually we move this to options.nix
-  options.rhodium.desktop.wm.hyprland = {
+  options.rhodium.home.desktop.wm.hyprland = {
     enable = mkEnableOption "Rhodium's Hyprland configuration";
   };
 
@@ -44,18 +39,29 @@ in
       xwayland.enable = true;
     };
 
-
-
-    # Symlink Hyprland's configuration files
-    # TODO: This is a temporary solution. Eventually we will do this declaratively.
-    # NOTE: Now this is done by home manager, not our own layer.
-    home.file.".config/hypr/hyprland.conf" = { source = "${hyprlandDotfilesRoot}/hyprland.conf"; };
-    home.file.".config/hypr/modules/keybinds.conf" = { source = "${hyprlandDotfilesRoot}/modules/keybinds.conf"; };
-    home.file.".config/hypr/modules/keyboard.conf" = { source = "${hyprlandDotfilesRoot}/modules/keyboard.conf"; };
-    home.file.".config/hypr/modules/monitors.conf" = { source = "${hyprlandDotfilesRoot}/modules/monitors.conf"; };
-    home.file.".config/hypr/modules/plugins.conf" = { source = "${hyprlandDotfilesRoot}/modules/plugins.conf"; };
-    home.file.".config/hypr/modules/window-rules.conf" = { source = "${hyprlandDotfilesRoot}/modules/window-rules.conf"; };
-    home.file.".config/hypr/modules/workspaces.conf" = { source = "${hyprlandDotfilesRoot}/modules/workspaces.conf"; };
+    xdg.configFile = {
+      "hypr/hyprland.conf" = {
+        source = "${hyprlandConfig}/hyprland.conf";
+      };
+      "hypr/modules/keybinds.conf" = {
+        source = "${hyprlandConfigModules}/keybinds.conf";
+      };
+      "hypr/modules/keyboard.conf" = {
+        source = "${hyprlandConfigModules}/keyboard.conf";
+      };
+      "hypr/modules/monitors.conf" = {
+        source = "${hyprlandConfigModules}/monitors.conf";
+      };
+      "hypr/modules/plugins.conf" = {
+        source = "${hyprlandConfigModules}/plugins.conf";
+      };
+      "hypr/modules/window-rules.conf" = {
+        source = "${hyprlandConfigModules}/window-rules.conf";
+      };
+      "hypr/modules/workspaces.conf" = {
+        source = "${hyprlandConfigModules}/workspaces.conf";
+      };
+    };
 
     # Ensure necessary XDG portals are configured
     xdg.portal = {

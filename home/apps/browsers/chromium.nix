@@ -4,10 +4,10 @@
 
 with lib;
 let
-  cfg = config.rhodium.apps.browsers.chromium;
+  cfg = config.rhodium.home.apps.browsers.chromium;
 in
 {
-  options.rhodium.apps.browsers.chromium = {
+  options.rhodium.home.apps.browsers.chromium = {
     enable = mkEnableOption "Chromium";
   };
 

@@ -1,13 +1,14 @@
 # modules/development/languages/elixir.nix
+
 { config, pkgs, lib, ... }:
 
 with lib;
 
 let
-  cfg = config.modules.development.languages.elixir;
+  cfg = config.rhodium.system.development.languages.elixir;
 in
 {
-  options.modules.development.languages.elixir = {
+  options.rhodium.system.development.languages.elixir = {
     enable = mkEnableOption "Enable Elixir development environment";
   };
 

@@ -4,10 +4,10 @@
 
 with lib;
 let
-  cfg = config.rhodium.apps.utils.calendars.calcurse;
+  cfg = config.rhodium.home.apps.utils.calendars.calcurse;
 in
 {
-  options.rhodium.apps.utils.calendars.calcurse = {
+  options.rhodium.home.apps.utils.calendars.calcurse = {
     enable = mkEnableOption "Calcurse calendar application";
   };
 

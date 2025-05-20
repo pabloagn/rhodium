@@ -4,20 +4,24 @@
 
 with lib;
 let
-  cfg = config.rhodium.desktop.wm;
+  cfg = config.rhodium.home.desktop.wm;
 in
 {
   imports = [
     ./hyprland.nix
     ./hyprcursor.nix
+    ./hyprpaper.nix
   ];
 
-  options.rhodium.desktop.wm = {
+  options.rhodium.home.desktop.wm = {
     enable = mkEnableOption "Rhodium's Window Manager";
   };
 
   config = mkIf cfg.enable {
-    rhodium.desktop.wm.hyprland.enable = true;
-    rhodium.desktop.wm.hyprcursor.enable = true;
+    rhodium.home.desktop.wm = {
+      hyprland.enable = true;
+      hyprcursor.enable = true;
+      hyprpaper.enable = true;
+    };
   };
 }

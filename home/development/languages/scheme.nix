@@ -1,26 +1,42 @@
 # home/development/languages/scheme.nix
+
 { config, pkgs, lib, ... }:
 
 with lib;
 let
-  cfg = config.home.development.languages.scheme;
+  cfg = config.rhodium.home.development.languages.scheme;
 in
 {
-  options.home.development.languages.scheme = {
+  options.rhodium.home.development.languages.scheme = {
     enable = mkEnableOption "Enable Scheme development environment (Home Manager)";
+
+    interpretersCompilers = mkOption {
+      type = types.listOf types.package;
+      default = with pkgs; [
+        guile
+        chicken
+        chezscheme
+      ];
+      description = "Scheme interpreters and compilers.";
+      example = literalExpression "[ pkgs.guile pkgs.mit-scheme ]";
+    };
+
+    languageServer = mkOption {
+      type = types.nullOr types.package;
+      default = null;
+      description = "Scheme Language Server (if available in nixpkgs).";
+    };
+
+    extraTools = mkOption {
+      type = types.listOf types.package;
+      default = [ ];
+      description = "Additional Scheme-related tools.";
+    };
   };
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [
-      # Scheme Interpreters/Compilers
-      guile # GNU Guile
-      chicken # CHICKEN Scheme
-      chezscheme # Chez Scheme
-      # mit-scheme
-      texlive.combined.scheme-full # For schemes like scheme-basic, etc. (as per your example)
-
-      # Language Server (availability varies)
-      # scheme-langserver # (check if this package exists or how to obtain it)
-    ];
+    home.packages = cfg.interpretersCompilers
+      ++ (if cfg.languageServer != null then [ cfg.languageServer ] else [ ])
+      ++ cfg.extraTools;
   };
 }

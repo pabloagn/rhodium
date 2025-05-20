@@ -1,23 +1,37 @@
 # home/development/languages/swift.nix
+
 { config, pkgs, lib, ... }:
 
 with lib;
 let
-  cfg = config.home.development.languages.swift;
+  cfg = config.rhodium.home.development.languages.swift;
 in
 {
-  options.home.development.languages.swift = {
+  options.rhodium.home.development.languages.swift = {
     enable = mkEnableOption "Enable Swift development environment (Home Manager)";
+
+    compiler = mkOption {
+      type = types.package;
+      default = pkgs.swift;
+      description = "Swift compiler and toolchain.";
+    };
+
+    languageServer = mkOption {
+      type = types.nullOr types.package;
+      default = null;
+      description = "Swift Language Server (e.g., SourceKit-LSP). May require manual setup or specific nixpkgs attribute.";
+    };
+
+    extraTools = mkOption {
+      type = types.listOf types.package;
+      default = [ ];
+      description = "Additional Swift-related tools.";
+    };
   };
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [
-      # Swift Compiler and Toolchain
-      swift # This should provide swiftc, swift build, etc.
-
-      # Language Server (SourceKit-LSP)
-      # sourcekit-lsp # Usually bundled with the Swift toolchain.
-      # Check nixpkgs for the best way to get sourcekit-lsp if `swift` doesn't include it.
-    ];
+    home.packages = [ cfg.compiler ]
+      ++ (if cfg.languageServer != null then [ cfg.languageServer ] else [ ])
+      ++ cfg.extraTools;
   };
 }

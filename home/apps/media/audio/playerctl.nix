@@ -4,10 +4,10 @@
 
 with lib;
 let
-  cfg = config.rhodium.apps.media.audio.playerctl;
+  cfg = config.rhodium.home.apps.media.audio.playerctl;
 in
 {
-  options.rhodium.apps.media.audio.playerctl = {
+  options.rhodium.home.apps.media.audio.playerctl = {
     enable = mkEnableOption "Playerctl";
   };
 

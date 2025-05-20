@@ -1,10 +1,11 @@
 # home/apps/communication/messaging/default.nix
+# DONE
 
-{ config, lib, pkgs, ... }:
+{ config, lib, ... }:
 
 with lib;
 let
-  cfg = config.rhodium.apps.communication.messaging;
+  cfg = config.rhodium.home.apps.communication.messaging;
 in
 {
   imports = [
@@ -16,16 +17,18 @@ in
     ./zoom.nix
   ];
 
-  options.rhodium.apps.communication.messaging = {
+  options.rhodium.home.apps.communication.messaging = {
     enable = mkEnableOption "Messaging applications";
   };
 
   config = mkIf cfg.enable {
-    rhodium.apps.communication.messaging.signal.enable = true;
-    rhodium.apps.communication.messaging.whatsapp.enable = true;
-    rhodium.apps.communication.messaging.telegram.enable = false;
-    rhodium.apps.communication.messaging.slack.enable = true;
-    rhodium.apps.communication.messaging.teams.enable = true;
-    rhodium.apps.communication.messaging.zoom.enable = false;
+    rhodium.home.apps.communication.messaging = {
+      signal.enable = false;
+      whatsapp.enable = false;
+      telegram.enable = false;
+      slack.enable = false;
+      teams.enable = false;
+      zoom.enable = false;
+    };
   };
 }

@@ -1,13 +1,14 @@
 # modules/development/languages/rust.nix
+
 { config, pkgs, lib, ... }:
 
 with lib;
 
 let
-  cfg = config.modules.development.languages.rust;
+  cfg = config.rhodium.system.development.languages.rust;
 in
 {
-  options.modules.development.languages.rust = {
+  options.rhodium.system.development.languages.rust = {
     enable = mkEnableOption "Enable Rust development environment";
   };
 

@@ -4,7 +4,7 @@
 
 with lib;
 let
-  cfg = config.rhodium.desktop.launcher.rofi;
+  cfg = config.rhodium.home.desktop.launcher.rofi;
 in
 {
   config = mkIf cfg.enable {

@@ -4,10 +4,10 @@
 
 with lib;
 let
-  cfg = config.rhodium.apps.browsers.firefox;
+  cfg = config.rhodium.home.apps.browsers.firefox;
 in
 {
-  options.rhodium.apps.browsers.firefox = {
+  options.rhodium.home.apps.browsers.firefox = {
     enable = mkEnableOption "Firefox browser";
     variant = mkOption {
       type = types.enum [ "stable" "devedition" "nightly" "esr" ];

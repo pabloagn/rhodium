@@ -4,7 +4,7 @@
 
 with lib;
 let
-  cfg = config.rhodium.apps.files;
+  cfg = config.rhodium.home.apps.files;
 in
 {
 
@@ -15,14 +15,14 @@ in
     ./dolphin.nix
   ];
 
-  options.rhodium.apps.files = {
+  options.rhodium.home.apps.files = {
     enable = mkEnableOption "File management applications";
   };
 
   config = mkIf cfg.enable {
-    rhodium.apps.files.thunar.enable = true;
-    rhodium.apps.files.nautilus.enable = false;
-    rhodium.apps.files.krusader.enable = false;
-    rhodium.apps.files.dolphin.enable = false;
+    rhodium.home.apps.files.thunar.enable = true;
+    rhodium.home.apps.files.nautilus.enable = false;
+    rhodium.home.apps.files.krusader.enable = false;
+    rhodium.home.apps.files.dolphin.enable = false;
   };
 }

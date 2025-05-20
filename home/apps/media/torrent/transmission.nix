@@ -4,7 +4,7 @@
 
 with lib;
 let
-  cfg = config.rhodium.apps.media.torrent.transmission;
+  cfg = config.rhodium.home.apps.media.torrent.transmission;
 in
 {
   imports = [
@@ -13,13 +13,15 @@ in
     ./transmission.nix
   ];
 
-  options.rhodium.apps.media.torrent.transmission = {
+  options.rhodium.home.apps.media.torrent.transmission = {
     enable = mkEnableOption "Rhodium's torrent client";
   };
 
   config = mkIf cfg.enable {
-    home.apps.media.torrent.transmission.enable = true;
-    home.apps.media.torrent.deluge.enable = true;
-    home.apps.media.torrent.deluged.enable = true;
+    rhodium.home.apps.media.torrent = {
+      transmission.enable = true;
+      deluge.enable = false;
+      deluged.enable = false;
+    };
   };
 }

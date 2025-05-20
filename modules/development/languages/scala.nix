@@ -1,13 +1,14 @@
 # modules/development/languages/scala.nix
+
 { config, pkgs, lib, ... }:
 
 with lib;
 
 let
-  cfg = config.modules.development.languages.scala;
+  cfg = config.rhodium.system.development.languages.scala;
 in
 {
-  options.modules.development.languages.scala = {
+  options.rhodium.system.development.languages.scala = {
     enable = mkEnableOption "Enable Scala development environment";
     jdk = mkOption {
       type = types.package;

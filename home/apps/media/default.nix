@@ -4,7 +4,7 @@
 
 with lib;
 let
-  cfg = config.rhodium.apps.media;
+  cfg = config.rhodium.home.apps.media;
 in
 {
   imports = [
@@ -13,13 +13,15 @@ in
     ./video
   ];
 
-  options.rhodium.apps.media = {
+  options.rhodium.home.apps.media = {
     enable = mkEnableOption "Media applications";
   };
 
   config = mkIf cfg.enable {
-    rhodium.apps.media.audio.enable = true;
-    rhodium.apps.media.image.enable = true;
-    rhodium.apps.media.video.enable = true;
+    rhodium.home.apps.media = {
+      audio.enable = true;
+      image.enable = true;
+      video.enable = true;
+    };
   };
 }

@@ -4,10 +4,10 @@
 
 with lib;
 let
-  cfg = config.rhodium.apps.browsers.w3m;
+  cfg = config.rhodium.home.apps.browsers.w3m;
 in
 {
-  options.rhodium.apps.browsers.w3m = {
+  options.rhodium.home.apps.browsers.w3m = {
     enable = mkEnableOption "w3m terminal browser";
   };
 

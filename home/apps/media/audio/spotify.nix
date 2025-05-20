@@ -4,10 +4,10 @@
 
 with lib;
 let
-  cfg = config.rhodium.apps.media.audio.spotify;
+  cfg = config.rhodium.home.apps.media.audio.spotify;
 in
 {
-  options.rhodium.apps.media.audio.spotify = {
+  options.rhodium.home.apps.media.audio.spotify = {
     enable = mkEnableOption "Rhodium's spotify client";
   };
 

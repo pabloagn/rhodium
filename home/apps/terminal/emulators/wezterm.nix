@@ -4,10 +4,10 @@
 
 with lib;
 let
-  cfg = config.rhodium.apps.terminals.emulators.wezterm;
+  cfg = config.rhodium.home.apps.terminals.emulators.wezterm;
 in
 {
-  options.rhodium.apps.terminals.emulators.wezterm = {
+  options.rhodium.home.apps.terminals.emulators.wezterm = {
     enable = mkEnableOption "Rhodium's Wezterm configuration";
   };
 

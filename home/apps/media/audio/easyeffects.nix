@@ -4,10 +4,10 @@
 
 with lib;
 let
-  cfg = config.rhodium.apps.media.audio.easyeffects;
+  cfg = config.rhodium.home.apps.media.audio.easyeffects;
 in
 {
-  options.rhodium.apps.media.audio.easyeffects = {
+  options.rhodium.home.apps.media.audio.easyeffects = {
     enable = mkEnableOption "EasyEffects";
   };
 

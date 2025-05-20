@@ -1,13 +1,14 @@
 # modules/development/languages/html.nix
+
 { config, pkgs, lib, ... }:
 
 with lib;
 
 let
-  cfg = config.modules.development.languages.html;
+  cfg = config.rhodium.system.development.languages.html;
 in
 {
-  options.modules.development.languages.html = {
+  options.rhodium.system.development.languages.html = {
     enable = mkEnableOption "Enable HTML development environment";
   };
 

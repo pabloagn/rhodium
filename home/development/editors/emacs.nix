@@ -4,18 +4,26 @@
 
 with lib;
 let
-  cfg = config.rhodium.development.editors.emacs;
+  cfg = config.rhodium.home.development.editors.emacs;
 in
 {
-  options.rhodium.development.editors.emacs = {
+  options.rhodium.home.development.editors.emacs = {
     enable = mkEnableOption "Rhodium's Emacs configuration";
+    variant = mkOption {
+      type = types.enum [ "emacs" "emacs-nox" ];
+      default = "emacs";
+      description = "The variant of Emacs to use";
+    };
   };
 
   config = mkIf cfg.enable {
-    programs.emacs = {
-      enable = true;
-      package = pkgs.emacs;
-      # package = pkgs.emacs-nox;
-    };
+    home.packages =
+      let
+        emacsPackage =
+          if cfg.variant == "emacs" then pkgs.emacs
+          else if cfg.variant == "emacs-nox" then pkgs.emacs-nox
+          else pkgs.emacs;
+      in
+      [ emacsPackage ];
   };
 }

@@ -1,13 +1,14 @@
 # modules/development/languages/typescript.nix
+
 { config, pkgs, lib, ... }:
 
 with lib;
 
 let
-  cfg = config.modules.development.languages.typescript;
+  cfg = config.rhodium.system.development.languages.typescript;
 in
 {
-  options.modules.development.languages.typescript = {
+  options.rhodium.system.development.languages.typescript = {
     enable = mkEnableOption "Enable TypeScript development environment";
   };
 

@@ -4,7 +4,7 @@
 
 with lib;
 let
-  cfg = config.rhodium.apps.utils.calendars;
+  cfg = config.rhodium.home.apps.utils.calendars;
 in
 {
   imports = [
@@ -13,13 +13,15 @@ in
     ./calcurse.nix
   ];
 
-  options.rhodium.apps.utils.calendars = {
+  options.rhodium.home.apps.utils.calendars = {
     enable = mkEnableOption "Calendar applications";
   };
 
   config = mkIf cfg.enable {
-    rhodium.apps.utils.calendars.korganizer.enable = true;
-    rhodium.apps.utils.calendars.evolution.enable = true;
-    rhodium.apps.utils.calendars.calcurse.enable = true;
+    rhodium.home.apps.utils.calendars = {
+      korganizer.enable = true;
+      evolution.enable = false;
+      calcurse.enable = false;
+    };
   };
 }

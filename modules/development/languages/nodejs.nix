@@ -1,13 +1,14 @@
 # modules/development/languages/nodejs.nix
+
 { config, pkgs, lib, ... }:
 
 with lib;
 
 let
-  cfg = config.modules.development.languages.nodejs;
+  cfg = config.rhodium.system.development.languages.nodejs;
 in
 {
-  options.modules.development.languages.nodejs = {
+  options.rhodium.system.development.languages.nodejs = {
     enable = mkEnableOption "Enable Node.js development environment";
     package = mkOption {
       type = types.package;

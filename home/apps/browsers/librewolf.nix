@@ -4,10 +4,10 @@
 
 with lib;
 let
-  cfg = config.rhodium.apps.browsers.librewolf;
+  cfg = config.rhodium.home.apps.browsers.librewolf;
 in
 {
-  options.rhodium.apps.browsers.librewolf = {
+  options.rhodium.home.apps.browsers.librewolf = {
     enable = mkEnableOption "Librewolf Browser";
   };
 

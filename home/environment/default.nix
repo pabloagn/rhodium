@@ -4,22 +4,72 @@
 
 with lib;
 let
-  cfg = config.rhodium.environment;
+  cfg = config.rhodium.home.environment;
 in
 {
   imports = [
-    ./variables.nix
     ./mime.nix
     ./paths.nix
+    ./variables.nix
   ];
 
-  options.rhodium.environment = {
+  options.rhodium.home.environment = {
     enable = mkEnableOption "Rhodium's environment configuration";
+
+    preferredApps = {
+      browser = mkOption {
+        type = types.nullOr types.str;
+        default = "firefox";
+        description = "Preferred web browser (executable name).";
+        example = "brave";
+      };
+
+      editor = mkOption {
+        type = types.nullOr types.str;
+        default = "hx";
+        description = "Preferred text editor (executable name).";
+        example = "nvim";
+      };
+
+      terminal = mkOption {
+        type = types.nullOr types.str;
+        default = "ghostty";
+        description = "Preferred terminal emulator (executable name).";
+        example = "kitty";
+      };
+
+      imageViewer = mkOption {
+        type = types.nullOr types.str;
+        default = "feh";
+        description = "Preferred image viewer (executable name).";
+        example = "imv";
+      };
+
+      videoPlayer = mkOption {
+        type = types.nullOr types.str;
+        default = "mpv";
+        description = "Preferred video player (executable name).";
+      };
+
+      audioPlayer = mkOption {
+        type = types.nullOr types.str;
+        default = "clementine";
+        description = "Preferred audio player (executable name).";
+      };
+
+      pdfViewer = mkOption {
+        type = types.nullOr types.str;
+        default = "org.kde.okular.desktop";
+        description = "Preferred PDF viewer (executable or .desktop file name for MIME).";
+      };
+    };
   };
 
   config = mkIf cfg.enable {
-    home.environment.mime.enable = true;
-    home.environment.paths.enable = true;
-    home.environment.variables.enable = true;
+    rhodium.home.environment = {
+      mime.enable = true;
+      paths.enable = true;
+      variables.enable = true;
+    };
   };
 }

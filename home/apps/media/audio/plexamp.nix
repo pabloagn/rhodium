@@ -4,10 +4,10 @@
 
 with lib;
 let
-  cfg = config.rhodium.apps.media.audio.plexamp;
+  cfg = config.rhodium.home.apps.media.audio.plexamp;
 in
 {
-  options.rhodium.apps.media.audio.plexamp = {
+  options.rhodium.home.apps.media.audio.plexamp = {
     enable = mkEnableOption "Rhodium's plexamp client";
   };
 

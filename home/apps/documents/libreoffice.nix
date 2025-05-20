@@ -4,10 +4,10 @@
 
 with lib;
 let
-  cfg = config.rhodium.apps.documents.libreoffice;
+  cfg = config.rhodium.home.apps.documents.libreoffice;
 in
 {
-  options.rhodium.apps.documents.libreoffice = {
+  options.rhodium.home.apps.documents.libreoffice = {
     enable = mkEnableOption "LibreOffice";
   };
 

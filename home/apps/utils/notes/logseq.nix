@@ -1,13 +1,13 @@
-# home/apps/utilities/notes/logseq.nix
+# home/apps/utils/notes/logseq.nix
 
 { config, lib, pkgs, ... }:
 
 with lib;
 let
-  cfg = config.rhodium.apps.utilities.notes.logseq;
+  cfg = config.rhodium.home.apps.utils.notes.logseq;
 in
 {
-  options.rhodium.apps.utilities.notes.logseq = {
+  options.rhodium.home.apps.utils.notes.logseq = {
     enable = mkEnableOption "Rhodium's Logseq configuration";
   };
 

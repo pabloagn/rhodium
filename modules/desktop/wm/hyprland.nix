@@ -1,70 +1,61 @@
 # modules/desktop/wm/hyprland/default.nix
 
 { lib, config, pkgs, ... }:
-
+let
+  cfg = config.rhodium.system.desktop.wm.hyprland;
+in
 {
-  # Hyprland Program Enablement
-  programs.hyprland = {
-    enable = true; # Enable Hyprland system-wide
-    package = pkgs.hyprland; # Can be overridden by overlays if needed
-    xwayland.enable = true; # For X11 app compatibility
+  options.rhodium.system.desktop.wm.hyprland = {
+    enable = lib.mkEnableOption "Rhodium's Hyprland configuration (system)";
+    amdSpecificSetup = lib.mkEnableOption "AMD specific GPU setup for Hyprland";
   };
 
-  # Display Manager
-  services.xserver = {
-    enable = true; # Needed for GDM and XWayland
-    displayManager.gdm.enable = true;
-    # TODO: displayManager.gdm.wayland = true; # Optional: Make GDM default to Wayland
-  };
-  # programs.hyprland.enable usually takes care of xdg-desktop-portal-hyprland.
-  # We ensure the main portal service is on and add GTK as a common fallback.
-  xdg.portal = {
-    enable = true;
-    extraPortals = [
-      pkgs.xdg-desktop-portal-gtk
-    ];
-    # If programs.hyprland doesn't set it as default, or we want to be explicit
-    default = "hyprland";
-  };
+  config = lib.mkIf cfg.enable {
+    programs.hyprland = {
+      enable = true;
+      package = pkgs.hyprland;
+      xwayland.enable = true;
+    };
 
-  # AMD GPU Specific System Setup
-  environment.systemPackages = lib.mkIf true (with pkgs; [
-    # TODO: Replace 'true' with your AMD GPU condition
-    radeontop
-    # hypridle
-  ]);
+    services.xserver = {
+      enable = true;
+      displayManager.gdm.enable = true;
+    };
 
-  environment.sessionVariables = lib.mkIf true {
-    # TODO: Replace 'true' with your AMD GPU condition
-    # For invisible cursors on some AMD setups
-    WLR_NO_HARDWARE_CURSORS = "1";
-    # Hint electron apps to use wayland
-    NIXOS_OZONE_WL = "1";
-    # AMD-specific environment variables
-    # NOTE: New addition for screen artifact debugging
-    AMD_VULKAN_ICD = "RADV";
-  };
+    xdg.portal = {
+      enable = true;
+      extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+      default = "hyprland";
+    };
 
-  # OpenGL/Graphics options for AMD
-  hardware.graphics = lib.mkIf true { # TODO: Replace 'true' with your AMD GPU condition
-    enable = true;
-    enable32Bit = true;
-    extraPackages = with pkgs; [
-      amdvlk
-      rocmPackages.clr
-      # NOTE: New addition for screen artifact debugging
-      libvdpau-va-gl
-    ];
-    extraPackages32 = with pkgs.pkgsi686Linux; [
-      amdvlk
+    environment.systemPackages = lib.mkIf cfg.amdSpecificSetup (
+      with pkgs; [radeontop ]
+    );
+
+    environment.sessionVariables = lib.mkIf cfg.amdSpecificSetup {
+      WLR_NO_HARDWARE_CURSORS = "1";
+      NIXOS_OZONE_WL = "1";
+      AMD_VULKAN_ICD = "RADV";
+    };
+
+    hardware.graphics = lib.mkIf cfg.amdSpecificSetup {
+      enable = true;
+      enable32Bit = true;
+      extraPackages = with pkgs; [
+        amdvlk
+        rocmPackages.clr
+        libvdpau-va-gl
+      ];
+      extraPackages32 = with pkgs.pkgsi686Linux; [
+        amdvlk
+      ];
+    };
+
+    fonts.packages = with pkgs; [
+      noto-fonts
+      noto-fonts-cjk
+      noto-fonts-emoji
+      font-awesome
     ];
   };
-
-  # Basic font set
-  fonts.packages = with pkgs; [
-    noto-fonts
-    noto-fonts-cjk
-    noto-fonts-emoji
-    font-awesome
-  ];
 }

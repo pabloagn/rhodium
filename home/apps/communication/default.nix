@@ -1,23 +1,26 @@
 # home/apps/communication/default.nix
+# DONE
 
 { config, lib, pkgs, ... }:
 
 with lib;
 let
-  cfg = config.rhodium.apps.communication;
+  cfg = config.rhodium.home.apps.communication;
 in
 {
   imports = [
-    ./messaging
-    ./email
+    ./messaging/default.nix
+    ./email/default.nix
   ];
 
-  options.rhodium.apps.communication = {
+  options.rhodium.home.apps.communication = {
     enable = mkEnableOption "Communication applications";
   };
 
   config = mkIf cfg.enable {
-    rhodium.apps.communication.messaging.enable = true;
-    rhodium.apps.communication.email.enable = true;
+    rhodium.home.apps.communication = {
+      messaging.enable = false;
+      email.enable = false;
+    };
   };
 }

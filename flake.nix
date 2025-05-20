@@ -54,105 +54,110 @@
     , ...
     }:
     let
-      data = import ./.env.nix;
-      userData = data.users;
-      hostData = data.hosts;
+      data = import ./.env.nix {
+        pkgs = nixpkgs;
+      };
+
+      allUsersData = data.users;
+      allHostsData = data.hosts;
 
       system = "x86_64-linux";
-      rhodiumGlobalOverlay = import ./overlays { inherit inputs; };
 
-      configuredPkgs = import inputs.nixpkgs {
-        inherit system;
-        config.allowUnfree = true;
-        overlays = [ rhodiumGlobalOverlay ];
+      rhodiumGlobalOverlays = import ./overlays {
+        inherit inputs;
       };
 
-      configuredPkgsUnstable = import inputs.nixpkgs-unstable {
-        inherit system;
-        config.allowUnfree = true;
-        overlays = [ rhodiumGlobalOverlay ];
+      commonPkgsConfig = {
+        config = {
+          allowUnfree = true;
+        };
+        overlays = [ rhodiumGlobalOverlays ];
       };
 
-      # System Modules
+      configuredPkgs = import inputs.nixpkgs ({
+        inherit system;
+      } // commonPkgsConfig);
+
+      configuredPkgsUnstable = import inputs.nixpkgs-unstable ({
+        inherit system;
+      } // commonPkgsConfig);
+
       rhodiumSystemModules = {
-        core = import ./modules/core;
-        desktop = import ./modules/desktop;
-        development = import ./modules/development;
-        system = import ./modules/system;
-        themes = import ./modules/themes;
+        defaults = import ./modules;
 
-        # Complete system configuration for easy import
-        default = { rhodium, ... }: {
-          imports = [
-            rhodium.system.core
-            rhodium.system.themes
-          ];
+        core = {
+          defaults = import ./modules/core;
+          boot = import ./modules/core/boot;
+          filesystem = import ./modules/core/filesystem;
+          groups = import ./modules/core/groups;
+          hardware = import ./modules/core/hardware;
+          networking = import ./modules/core/networking;
+          security = import ./modules/core/security;
+          shell = import ./modules/core/shell;
+          system = import ./modules/core/system;
+          users = import ./modules/core/users;
+          utils = import ./modules/core/utils;
+        };
+
+        desktop = {
+          defaults = import ./modules/desktop;
+        };
+
+        development = {
+          defaults = import ./modules/development;
         };
       };
 
-      # Home Modules
       rhodiumHomeModules = {
-        defaults = import ./home/default.nix;
-        # options = import ./home/options.nix;
-
-        # Shell Environment
-        shell = import ./home/shell/default.nix;
-
-        # Desktop Environment
-        desktop = import ./home/desktop/default.nix;
-
-        # Development Environment
-        development = import ./home/development/default.nix;
+        defaults = import ./home;
+        apps = import ./home/apps;
+        desktop = import ./home/desktop;
+        development = import ./home/development;
+        environment = import ./home/environment;
+        security = import ./home/security;
+        shell = import ./home/shell;
+        system = import ./home/system;
       };
 
       rhodiumLib = import ./lib {
+        lib = configuredPkgs.lib;
         inherit inputs;
+        flakeRootPath = self;
       };
 
     in
     flake-parts.lib.mkFlake { inherit inputs; } {
       systems = [ system ];
 
-      perSystem = { config, pkgs, system, lib, self', inputs', ... }:
-
-        let
-          perSystemConfiguredPkgs = import inputs.nixpkgs {
-            inherit system;
-            config.allowUnfree = true;
-            overlays = [ rhodiumGlobalOverlay ];
-          };
-        in
+      perSystem = { config, system, lib, self', inputs', ... }:
         {
           packages = {
-            # Rust Workspace Source
             rustWorkspaceSrc = ./tools;
 
-            # Color Provider Package
-            color-provider = perSystemConfiguredPkgs.rustPlatform.buildRustPackage {
+            color-provider = configuredPkgs.rustPlatform.buildRustPackage {
               pname = "color-provider";
               version = "0.1.0";
               src = ./tools;
               rootCargoToml = "./color-provider/Cargo.toml";
               cargoLock.lockFile = ./tools/Cargo.lock;
+              description = "Color Provider";
             };
 
-            # Nixos CLI Package
-            nixos-cli = perSystemConfiguredPkgs.rustPlatform.buildRustPackage {
+            nixos-cli = configuredPkgs.rustPlatform.buildRustPackage {
               pname = "nixos-cli";
               version = "0.1.0";
               src = ./tools;
               rootCargoToml = "./nixos-cli/Cargo.toml";
               cargoLock.lockFile = ./tools/Cargo.lock;
+              description = "Nixos CLI";
             };
 
-            # Default package
             default = self'.packages.color-provider;
           };
 
-          # Dev Shell for Workspace
-          devShells.default = perSystemConfiguredPkgs.mkShell {
+          devShells.default = configuredPkgs.mkShell {
             name = "rhodium-dev";
-            nativeBuildInputs = with perSystemConfiguredPkgs; [
+            nativeBuildInputs = with configuredPkgs; [
               rustc
               cargo
               rust-analyzer
@@ -162,7 +167,7 @@
               nix-direnv
               yazi
             ];
-            RUST_SRC_PATH = "${perSystemConfiguredPkgs.rustPlatform.rustLibSrc}";
+            RUST_SRC_PATH = "${configuredPkgs.rustPlatform.rustLibSrc}";
 
             shellHook = ''
               echo "Entered Rust workspace development shell."
@@ -177,61 +182,49 @@
         rhodium = {
           system = rhodiumSystemModules;
           home = rhodiumHomeModules;
-          overlays.default = rhodiumGlobalOverlay;
+          overlays = rhodiumGlobalOverlays;
           lib = rhodiumLib;
         };
 
-        nixosConfigurations = {
-          ${hostData.host-0001.hostname} = nixpkgs.lib.nixosSystem {
-            inherit system;
-            specialArgs = {
-              inherit inputs;
-              flakeOutputs = self;
-              hostName = hostData.host-0001.hostname;
-              pkgs-unstable = configuredPkgsUnstable;
+        nixosConfigurations = nixpkgs.lib.mapAttrs'
+          (hostKey: hostSpecificData: {
+            name = hostSpecificData.hostname;
+            value = nixpkgs.lib.nixosSystem {
+              inherit system;
+              pkgs = configuredPkgs;
+              specialArgs = {
+                inherit inputs;
+                pkgs-unstable = configuredPkgsUnstable;
+                userData = allUsersData;
+                hostData = hostSpecificData;
+                flakeRootPath = self;
+                rhodium = self.rhodium;
+              };
+              modules = [
+                ./hosts/${hostKey}/default.nix
+              ];
             };
+          })
+          allHostsData;
 
-            modules = [
-              ./hosts/${hostData.host-0001.id}
-
-              ({ pkgs, ... }: {
-                nixpkgs.config.allowUnfree = true;
-                nixpkgs.overlays = [ self.rhodium.overlays.default ];
-              })
-            ];
-          };
-
-          ${hostData.host-0003.hostname} = nixpkgs.lib.nixosSystem {
-            inherit system;
-            specialArgs = {
-              inherit inputs;
-              flakeOutputs = self;
-              hostName = hostData.host-0003.hostname;
-              pkgs-unstable = configuredPkgsUnstable;
+        homeConfigurations = nixpkgs.lib.mapAttrs'
+          (userKey: userSpecificData: {
+            name = userSpecificData.username;
+            value = home-manager.lib.homeManagerConfiguration {
+              pkgs = configuredPkgs;
+              extraSpecialArgs = {
+                inherit inputs;
+                pkgs-unstable = configuredPkgsUnstable;
+                userData = userSpecificData;
+                flakeRootPath = self;
+                rhodium = self.rhodium;
+              };
+              modules = [
+                ./users/${userKey}/default.nix
+              ];
             };
-            modules = [
-              ./hosts/${hostData.host-0003.id}
-
-              ({ pkgs, ... }: {
-                nixpkgs.config.allowUnfree = true;
-                nixpkgs.overlays = [ self.rhodium.overlays.default ];
-              })
-            ];
-          };
-        };
-
-        homeConfigurations.${userData.user-0001.username} = home-manager.lib.homeManagerConfiguration {
-          pkgs = configuredPkgs;
-          extraSpecialArgs = {
-            inherit inputs;
-            flakeOutputs = self;
-            pkgs-unstable = configuredPkgsUnstable;
-            userData = userData.user-0001;
-          };
-          modules = [
-            ./users/${userData.user-0001.id}
-          ];
-        };
+          })
+          allUsersData;
       };
     };
 }

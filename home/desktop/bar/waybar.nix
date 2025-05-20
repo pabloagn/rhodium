@@ -4,7 +4,12 @@
 
 with lib;
 let
-  cfg = config.rhodium.desktop.bar.waybar;
+  cfg = config.rhodium.home.desktop.bar.waybar;
+
+  # Waybar override for experimental features
+  # waybar-experimental = pkgs.waybar.overrideAttrs (oldAttrs: {
+  #   mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
+  # });
 
   waybarSettings = {
     layer = "top";
@@ -383,7 +388,7 @@ let
 
 in
 {
-  options.rhodium.desktop.bar.waybar = {
+  options.rhodium.home.desktop.bar.waybar = {
     enable = mkEnableOption "Rhodium's Waybar configuration";
   };
 

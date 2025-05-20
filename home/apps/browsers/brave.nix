@@ -4,10 +4,10 @@
 
 with lib;
 let
-  cfg = config.rhodium.apps.browsers.brave;
+  cfg = config.rhodium.home.apps.browsers.brave;
 in
 {
-  options.rhodium.apps.browsers.brave = {
+  options.rhodium.home.apps.browsers.brave = {
     enable = mkEnableOption "Brave Browser";
   };
 

@@ -1,13 +1,14 @@
 # modules/development/languages/fs.nix
+
 { config, pkgs, lib, ... }:
 
 with lib;
 
 let
-  cfg = config.modules.development.languages.fs;
+  cfg = config.rhodium.system.development.languages.fs;
 in
 {
-  options.modules.development.languages.fs = {
+  options.rhodium.system.development.languages.fs = {
     enable = mkEnableOption "Enable F# development environment";
   };
 

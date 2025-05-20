@@ -4,9 +4,9 @@
 
 with lib;
 let
-  cfg = config.rhodium.development.editors.kate;
+  cfg = config.rhodium.home.development.editors.kate;
 in {
-  options.rhodium.development.editors.kate = {
+  options.rhodium.home.development.editors.kate = {
     enable = mkEnableOption "Kate";
   };
 

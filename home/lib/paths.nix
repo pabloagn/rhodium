@@ -1,18 +1,15 @@
 # home/lib/paths.nix
-# Home-specific path utilities for the Rhodium system
 
-{ lib, config, flakeRoot }:
+{ lib, config, flakeRootPath }:
 
 let
-  # Import the core path definitions
   corePaths = import ../../lib/modules/paths.nix {
-    inherit lib config flakeRoot;
+    inherit lib config;
+    flakeRootPath = flakeRootPath;
   };
 
-  # Convert paths to environment variables
   pathsToEnvVars = prefix: pathSet:
     let
-      # Helper to flatten nested attribute sets with prefixed names
       flatten = prefix: attrs:
         lib.concatMapAttrs
           (name: value:
@@ -25,10 +22,8 @@ let
     flatten prefix pathSet;
 in
 {
-  # The complete paths set for use in modules
   paths = corePaths;
 
-  # Function to create environment variables from paths
   mkSessionVariables =
     let
       # Basic XDG variables
@@ -42,7 +37,7 @@ in
 
       # Rhodium-specific variables
       rhodiumVars = {
-        "RHODIUM" = corePaths.rhodium.root;
+        "RHODIUM_ROOT" = corePaths.rhodium.root;
       } // pathsToEnvVars "RHODIUM" {
         assets = corePaths.rhodium.assets;
         dirs = corePaths.rhodium.dirs;
@@ -55,14 +50,14 @@ in
 
     assetLinks = {
       "${corePaths.rhodium.dirs.assets}" = {
-        source = "${flakeRoot}/assets";
+        source = "${corePaths.rhodium.root}/assets";
         recursive = true;
       };
     };
 
     scriptLinks = {
       "${corePaths.rhodium.dirs.scripts}" = {
-        source = "${flakeRoot}/scripts";
+        source = "${corePaths.rhodium.root}/scripts";
         recursive = true;
         executable = true;
       };

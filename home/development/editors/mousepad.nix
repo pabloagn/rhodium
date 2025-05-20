@@ -4,10 +4,10 @@
 
 with lib;
 let
-  cfg = config.rhodium.development.editors.mousepad;
+  cfg = config.rhodium.home.development.editors.mousepad;
 in
 {
-  options.rhodium.development.editors.mousepad = {
+  options.rhodium.home.development.editors.mousepad = {
     enable = mkEnableOption "Rhodium's Mousepad configuration";
   };
 

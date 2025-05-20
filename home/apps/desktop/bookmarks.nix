@@ -4,7 +4,7 @@
 
 with lib;
 let
-  cfg = config.rhodium.apps.desktop.bookmarks;
+  cfg = config.rhodium.home.apps.desktop.bookmarks;
   defs = import ../../lib/desktop-definitions.nix { inherit lib config pkgs; };
   bookmarkEntriesData = import ../../lib/bookmarks.nix;
 
@@ -33,7 +33,7 @@ let
 
 in
 {
-  options.rhodium.apps.desktop.bookmarks = {
+  options.rhodium.home.apps.desktop.bookmarks = {
     enable = mkEnableOption "Bookmark Desktop Entries";
   };
 

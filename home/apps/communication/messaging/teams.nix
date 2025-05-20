@@ -4,10 +4,10 @@
 
 with lib;
 let
-  cfg = config.rhodium.apps.communication.messaging.teams;
+  cfg = config.rhodium.home.apps.communication.messaging.teams;
 in
 {
-  options.rhodium.apps.communication.messaging.teams = {
+  options.rhodium.home.apps.communication.messaging.teams = {
     enable = mkEnableOption "Teams";
   };
 

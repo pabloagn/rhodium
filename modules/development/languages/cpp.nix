@@ -1,13 +1,14 @@
 # modules/development/languages/cpp.nix
+
 { config, pkgs, lib, ... }:
 
 with lib;
 
 let
-  cfg = config.modules.development.languages.cpp;
+  cfg = config.rhodium.system.development.languages.cpp;
 in
 {
-  options.modules.development.languages.cpp = {
+  options.rhodium.system.development.languages.cpp = {
     enable = mkEnableOption "Enable C++ development environment";
   };
 

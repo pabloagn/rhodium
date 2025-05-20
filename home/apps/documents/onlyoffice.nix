@@ -4,10 +4,10 @@
 
 with lib;
 let
-  cfg = config.rhodium.apps.documents.onlyoffice;
+  cfg = config.rhodium.home.apps.documents.onlyoffice;
 in
 {
-  options.rhodium.apps.documents.onlyoffice = {
+  options.rhodium.home.apps.documents.onlyoffice = {
     enable = mkEnableOption "OnlyOffice";
   };
 

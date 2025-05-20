@@ -1,13 +1,14 @@
 # modules/development/languages/cs.nix
+
 { config, pkgs, lib, ... }:
 
 with lib;
 
 let
-  cfg = config.modules.development.languages.cs;
+  cfg = config.rhodium.system.development.languages.cs;
 in
 {
-  options.modules.development.languages.cs = {
+  options.rhodium.system.development.languages.cs = {
     enable = mkEnableOption "Enable C# development environment";
   };
 

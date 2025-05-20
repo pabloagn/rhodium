@@ -1,10 +1,11 @@
 # home/apps/desktop/default.nix
+# DONE
 
-{ lib, config, pkgs, ... }:
+{ lib, config, ... }:
 
 with lib;
 let
-  cfg = config.rhodium.apps.desktop;
+  cfg = config.rhodium.home.apps.desktop;
 in
 {
   imports = [
@@ -14,14 +15,16 @@ in
     ./bookmarks.nix
   ];
 
-  options.rhodium.apps.desktop = {
+  options.rhodium.home.apps.desktop = {
     enable = mkEnableOption "Rhodium's desktop applications";
   };
 
   config = mkIf cfg.enable {
-    rhodium.apps.desktop.editors.enable = true;
-    rhodium.apps.desktop.imageViewers.enable = true;
-    rhodium.apps.desktop.firefoxProfiles.enable = true;
-    rhodium.apps.desktop.bookmarks.enable = true;
+    rhodium.home.apps.desktop = {
+      editors.enable = false;
+      imageViewers.enable = false;
+      firefoxProfiles.enable = false;
+      bookmarks.enable = false;
+    };
   };
 }

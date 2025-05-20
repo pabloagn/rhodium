@@ -4,18 +4,18 @@
 
 with lib;
 let
-  cfg = config.rhodium.desktop.bar;
+  cfg = config.rhodium.home.desktop.bar;
 in
 {
   imports = [
     ./waybar.nix
   ];
 
-  options.rhodium.desktop.bar = {
+  options.rhodium.home.desktop.bar = {
     enable = mkEnableOption "Rhodium's Desktop Bar";
   };
 
   config = mkIf cfg.enable {
-    rhodium.desktop.bar.waybar.enable = true;
+    rhodium.home.desktop.bar.waybar.enable = true;
   };
 }

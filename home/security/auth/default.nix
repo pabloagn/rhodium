@@ -27,6 +27,7 @@ in
       pass-wayland
       gnupg
       gnome-keyring
+      gnutls
     ];
   };
 }

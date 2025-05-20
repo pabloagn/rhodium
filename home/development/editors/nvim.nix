@@ -4,13 +4,13 @@
 
 with lib;
 let
-  cfg = config.rhodium.development.editors.nvim;
+  cfg = config.rhodium.home.development.editors.nvim;
   nvimConfig = ./nvim;
   nvimOptions = nvimConfig + /options.lua;
   nvimPlugins = nvimConfig + /plugin;
 in
 {
-  options.rhodium.development.editors.nvim = {
+  options.rhodium.home.development.editors.nvim = {
     enable = mkEnableOption "Rhodium's NVIM configuration";
   };
 

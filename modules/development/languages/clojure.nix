@@ -1,13 +1,14 @@
 # modules/development/languages/clojure.nix
+
 { config, pkgs, lib, ... }:
 
 with lib;
 
 let
-  cfg = config.modules.development.languages.clojure;
+  cfg = config.rhodium.system.development.languages.clojure;
 in
 {
-  options.modules.development.languages.clojure = {
+  options.rhodium.system.development.languages.clojure = {
     enable = mkEnableOption "Enable Clojure development environment";
   };
 

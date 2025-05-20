@@ -4,7 +4,7 @@
 
 with lib;
 let
-  cfg = config.rhodium.development.editors;
+  cfg = config.rhodium.home.development.editors;
 in
 {
   imports = [
@@ -16,20 +16,29 @@ in
     ./nvim.nix
     ./rstudio.nix
     ./vscode.nix
+    ./lapce.nix
+    ./zed.nix
   ];
 
-  options.rhodium.development.editors = {
+  options.rhodium.home.development.editors = {
     enable = mkEnableOption "Rhodium's code editors";
   };
 
   config = mkIf cfg.enable {
-    home.development.editors.cursor.enable = true;
-    home.development.editors.emacs.enable = true;
-    home.development.editors.helix.enable = true;
-    home.development.editors.kate.enable = true;
-    home.development.editors.mousepad.enable = true;
-    home.development.editors.nvim.enable = true;
-    home.development.editors.rstudio.enable = true;
-    home.development.editors.vscode.enable = true;
+    rhodium.home.development.editors = {
+      cursor.enable = false;
+      emacs.enable = false;
+      helix.enable = true;
+      kate.enable = false;
+      mousepad.enable = true;
+      nvim.enable = true;
+      rstudio.enable = true;
+      vscode = {
+        enable = true;
+        variant = "vscode";
+      };
+      lapce.enable = false;
+      zed.enable = true;
+    };
   };
 }

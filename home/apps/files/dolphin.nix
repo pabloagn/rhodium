@@ -4,10 +4,10 @@
 
 with lib;
 let
-  cfg = config.rhodium.apps.files.dolphin;
+  cfg = config.rhodium.home.apps.files.dolphin;
 in
 {
-  options.rhodium.apps.files.dolphin = {
+  options.rhodium.home.apps.files.dolphin = {
     enable = mkEnableOption "Dolphin file manager";
   };
 

@@ -4,10 +4,10 @@
 
 with lib;
 let
-  cfg = config.rhodium.apps.terminals.emulators.kitty;
+  cfg = config.rhodium.home.apps.terminals.emulators.kitty;
 in
 {
-  options.rhodium.apps.terminals.emulators.kitty = {
+  options.rhodium.home.apps.terminals.emulators.kitty = {
     enable = mkEnableOption "Rhodium's Kitty configuration";
   };
 

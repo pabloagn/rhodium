@@ -1,10 +1,10 @@
 # home/desktop/default.nix
 
-{ lib, config, pkgs, inputs ? {}, ... }:
+{ lib, config, pkgs, inputs ? { }, ... }:
 
 with lib;
 let
-  cfg = config.rhodium.desktop;
+  cfg = config.rhodium.home.desktop;
 in
 {
   imports = [
@@ -14,14 +14,23 @@ in
     ./notifications
   ];
 
-  options.rhodium.desktop = {
+  options.rhodium.home.desktop = {
     enable = mkEnableOption "Rhodium's Desktop";
   };
 
   config = mkIf cfg.enable {
-    rhodium.desktop.bar.enable = true;
-    rhodium.desktop.launcher.enable = true;
-    rhodium.desktop.notifications.enable = true;
-    rhodium.desktop.wm.enable = true;
+    rhodium.home.desktop = {
+      bar.enable = true;
+      launcher.enable = true;
+      notifications.enable = true;
+      wm = {
+        enable = true;
+        hyprcursor = {
+          enable = true;
+          theme = "rose-pine";
+          size = 20;
+        };
+      };
+    };
   };
 }

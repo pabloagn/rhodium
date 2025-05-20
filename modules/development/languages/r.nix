@@ -1,13 +1,14 @@
 # modules/development/languages/r.nix
+
 { config, pkgs, lib, ... }:
 
 with lib;
 
 let
-  cfg = config.modules.development.languages.r;
+  cfg = config.rhodium.system.development.languages.r;
 in
 {
-  options.modules.development.languages.r = {
+  options.rhodium.system.development.languages.r = {
     enable = mkEnableOption "Enable R development environment";
   };
 

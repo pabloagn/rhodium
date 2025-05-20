@@ -4,10 +4,10 @@
 
 with lib;
 let
-  cfg = config.rhodium.apps.documents.texmaker;
+  cfg = config.rhodium.home.apps.documents.texmaker;
 in
 {
-  options.rhodium.apps.documents.texmaker = {
+  options.rhodium.home.apps.documents.texmaker = {
     enable = mkEnableOption "Texmaker";
   };
 

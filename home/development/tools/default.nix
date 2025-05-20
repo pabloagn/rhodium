@@ -10,6 +10,7 @@ in
   imports = [
     ./ollama.nix
     ./postman.nix
+    ./terraform.nix
   ];
 
   options.rhodium.development.tools = {
@@ -17,7 +18,10 @@ in
   };
 
   config = mkIf cfg.enable {
-    home.development.tools.ollama.enable = true;
-    home.development.tools.postman.enable = true;
+    home.development.tools = {
+      ollama.enable = true;
+      postman.enable = false;
+      terraform.enable = false;
+    };
   };
 }

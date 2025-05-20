@@ -4,10 +4,10 @@
 
 with lib;
 let
-  cfg = config.rhodium.development.editors.rstudio;
+  cfg = config.rhodium.home.development.editors.rstudio;
 in
 {
-  options.rhodium.development.editors.rstudio = {
+  options.rhodium.home.development.editors.rstudio = {
     enable = mkEnableOption "Rhodium's RStudio configuration";
   };
 

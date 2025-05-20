@@ -4,10 +4,10 @@
 
 with lib;
 let
-  cfg = config.rhodium.apps.browsers.tor;
+  cfg = config.rhodium.home.apps.browsers.tor;
 in
 {
-  options.rhodium.apps.browsers.tor = {
+  options.rhodium.home.apps.browsers.tor = {
     enable = mkEnableOption "Tor Browser";
   };
 

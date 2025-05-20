@@ -4,10 +4,10 @@
 
 with lib;
 let
-  cfg = config.rhodium.apps.terminals.emulators.st;
+  cfg = config.rhodium.home.apps.terminals.emulators.st;
 in
 {
-  options.rhodium.apps.terminals.emulators.st = {
+  options.rhodium.home.apps.terminals.emulators.st = {
     enable = mkEnableOption "Rhodium's ST configuration";
   };
 

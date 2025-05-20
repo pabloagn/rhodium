@@ -5,10 +5,10 @@
 with lib;
 
 let
-  cfg = config.modules.development.languages.python;
+  cfg = config.rhodium.system.development.languages.python;
 in
 {
-  options.modules.development.languages.python = {
+  options.rhodium.system.development.languages.python = {
     enable = mkEnableOption "Enable Python development environment";
     pythonPackage = mkOption {
       type = types.package;

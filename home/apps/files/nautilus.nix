@@ -4,10 +4,10 @@
 
 with lib;
 let
-  cfg = config.rhodium.apps.files.nautilus;
+  cfg = config.rhodium.home.apps.files.nautilus;
 in
 {
-  options.rhodium.apps.files.nautilus = {
+  options.rhodium.home.apps.files.nautilus = {
     enable = mkEnableOption "Nautilus file manager";
   };
 

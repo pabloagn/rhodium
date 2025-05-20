@@ -1,13 +1,14 @@
 # modules/development/languages/haskell.nix
+
 { config, pkgs, lib, ... }:
 
 with lib;
 
 let
-  cfg = config.modules.development.languages.haskell;
+  cfg = config.rhodium.system.development.languages.haskell;
 in
 {
-  options.modules.development.languages.haskell = {
+  options.rhodium.system.development.languages.haskell = {
     enable = mkEnableOption "Enable Haskell development environment";
   };
 

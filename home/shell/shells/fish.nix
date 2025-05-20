@@ -27,6 +27,12 @@ in
     programs.zoxide.enableFishIntegration =
       cfg.enable && config.rhodium.apps.terminal.utils.zoxide.enable;
 
+    programs.zellij.enableFishIntegration =
+      cfg.enable && config.rhodium.apps.terminal.utils.fish.enable;
+
+    programs.atuin.enableFishIntegration =
+      cfg.enable && config.rhodium.apps.terminal.utils.atuin.enable;
+
     home.sessionVariables = mkIf cfg.defaultShell {
       SHELL = "${pkgs.fish}/bin/fish";
     };

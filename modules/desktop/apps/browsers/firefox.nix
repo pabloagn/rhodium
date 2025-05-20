@@ -1,9 +1,19 @@
 # modules/desktop/apps/browsers/firefox.nix
 
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
+with lib;
+let
+  cfg = config.rhodium.system.desktop.apps.browsers.firefox;
+in
 {
-  programs.firefox = {
-    enable = true;
+  options.rhodium.system.desktop.apps.browsers.firefox = {
+    enable = mkEnableOption "Firefox browser (system)";
+  };
+
+  config = mkIf cfg.enable {
+    programs.firefox = {
+      enable = true;
+    };
   };
 }

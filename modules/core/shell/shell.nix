@@ -1,35 +1,45 @@
 # modules/core/shell/shell.nix
+
 { config, pkgs, lib, ... }:
 
+with lib;
+let
+  cfg = config.rhodium.system.core.shell;
+in
 {
-  # Install Zsh and Bash system-wide
-  environment.shells = with pkgs; [ zsh bash ];
+  options.rhodium.system.core.shell = {
+    enable = mkEnableOption "Rhodium core shell configuration (system-wide)";
+    defaultUserShellPackage = mkOption {
+      type = types.package;
+      default = pkgs.zsh;
+      defaultText = literalExpression "pkgs.zsh";
+      description = "System-wide default user shell package.";
+    };
 
-  # Set Zsh as the default shell for NEW users created by NixOS.
-  # The users.users.pabloagn.shell setting overrides this for pabloagn.
-  users.defaultUserShell = pkgs.zsh;
+    enableZshProgram = mkOption {
+      type = types.bool;
+      default = true;
+      description = "Enable programs.zsh.enable system-wide.";
+    };
 
-  # Make Zsh available system-wide for use by programs/scripts if needed
-  # and enable system-wide zsh configuration (e.g. /etc/zshrc).
-  # This doesn't necessarily conflict with Home Manager's Zsh config,
-  # as HM configures ~/.zshrc.
-  programs.zsh.enable = true;
+    installStarship = mkOption {
+      type = types.bool;
+      default = true;
+      description = "Install starship globally.";
+    };
 
-  # Starship prompt (optional, user can override with Home Manager)
-  # If you want it available system-wide for all users by default:
-  environment.systemPackages = with pkgs; [
-    starship
-  ];
+    availableShellPackages = mkOption {
+      type = types.listOf types.package;
+      default = with pkgs; [ zsh bash ];
+      defaultText = literalExpression "with pkgs; [ zsh bash ]";
+      description = "Shell packages to make available system-wide.";
+    };
+  };
 
-  # Optional: configure a basic /etc/zshrc if desired for system users
-  # environment.etc."zshrc".text = ''
-  #   # System-wide Zsh config
-  #   if [ -f /etc/zsh/zshrc.zni ]; then
-  #     source /etc/zsh/zshrc.zni
-  #   fi
-  #   # Add starship init if you want it for all users by default in system zshrc
-  #   if command -v starship &> /dev/null; then
-  #     eval "$(starship init zsh)"
-  #   fi
-  # '';
+  config = mkIf cfg.enable {
+    environment.shells = cfg.availableShellPackages;
+    users.defaultUserShell = cfg.defaultUserShellPackage;
+    programs.zsh.enable = cfg.enableZshProgram;
+    environment.systemPackages = lib.optional cfg.installStarship pkgs.starship;
+  };
 }

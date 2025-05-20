@@ -4,10 +4,10 @@
 
 with lib;
 let
-  cfg = config.rhodium.apps.communication.messaging.whatsapp;
+  cfg = config.rhodium.home.apps.communication.messaging.whatsapp;
 in
 {
-  options.rhodium.apps.communication.messaging.whatsapp = {
+  options.rhodium.home.apps.communication.messaging.whatsapp = {
     enable = mkEnableOption "WhatsApp";
   };
 

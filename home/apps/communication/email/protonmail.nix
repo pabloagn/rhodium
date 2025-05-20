@@ -4,10 +4,10 @@
 
 with lib;
 let
-  cfg = config.rhodium.apps.communication.email.protonmail;
+  cfg = config.rhodium.home.apps.communication.email.protonmail;
 in
 {
-  options.rhodium.apps.communication.email.protonmail = {
+  options.rhodium.home.apps.communication.email.protonmail = {
     enable = mkEnableOption "Protonmail";
   };
 

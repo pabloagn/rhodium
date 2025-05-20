@@ -1,9 +1,10 @@
 # modules/core/system/default.nix
 
-{ lib, config, pkgs, modulesPath,... }:
+{ lib, config, pkgs, modulesPath, hostData, ... }:
 
 {
   imports = [
-    ./base.nix
+    ./extra.nix
+    ./garbage.nix
   ];
 }

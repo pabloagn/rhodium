@@ -1,43 +1,55 @@
 # home/development/languages/scala.nix
+
 { config, pkgs, lib, ... }:
 
 with lib;
 let
-  cfg = config.home.development.languages.scala;
+  cfg = config.rhodium.home.development.languages.scala;
 in
 {
-  options.home.development.languages.scala = {
+  options.rhodium.home.development.languages.scala = {
     enable = mkEnableOption "Enable Scala development environment (Home Manager)";
+
     jdk = mkOption {
       type = types.package;
-      default = pkgs.temurin-bin-17; # Scala runs on JVM
-      defaultText = "pkgs.temurin-bin-17";
-      description = "The JDK package to use for Scala (home.packages).";
+      default = pkgs.temurin-bin-17;
+      description = "The JDK package to use for Scala.";
+      example = literalExpression "pkgs.temurin-bin-21";
     };
-    scalaPackage = mkOption {
+
+    scalaVersion = mkOption {
       type = types.package;
-      default = pkgs.scala_3; # Example: Scala 3
-      defaultText = "pkgs.scala_3";
-      description = "The Scala package to use (e.g., scala_2_13, scala_3) for home.packages.";
+      default = pkgs.scala_3;
+      description = "The Scala compiler package (e.g., scala_2_12, scala_2_13, scala_3).";
+      example = literalExpression "pkgs.scala_2_13";
+    };
+
+    buildTool = mkOption {
+      type = types.package;
+      default = pkgs.sbt;
+      description = "Scala build tool (e.g., sbt, mill).";
+      example = literalExpression "pkgs.mill";
+    };
+
+    languageServer = mkOption {
+      type = types.package;
+      default = pkgs.metals;
+      description = "Scala language server (Metals).";
+    };
+
+    extraTools = mkOption {
+      type = types.listOf types.package;
+      default = [ ];
+      description = "Additional Scala-related tools.";
     };
   };
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [
-      # Scala Compiler and standard library
-      cfg.scalaPackage
-
-      # JDK (required for Scala)
+    home.packages = [
       cfg.jdk
-
-      # Build Tool
-      sbt # Scala Build Tool
-
-      # Language Server
-      metals
-
-      # Formatter (Scalafmt is often run via sbt or Metals)
-      # scalafmt # If a standalone CLI is desired
-    ];
+      cfg.scalaVersion
+      cfg.buildTool
+      cfg.languageServer
+    ] ++ cfg.extraTools;
   };
 }

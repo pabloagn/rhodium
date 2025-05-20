@@ -4,10 +4,10 @@
 
 with lib;
 let
-  cfg = config.rhodium.development.databases;
+  cfg = config.rhodium.home.development.databases;
 in
 {
-  options.rhodium.development.databases = {
+  options.rhodium.home.development.databases = {
     enable = mkEnableOption "Rhodium's database tools";
   };
 

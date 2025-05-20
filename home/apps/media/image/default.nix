@@ -4,10 +4,10 @@
 
 with lib;
 let
-  cfg = config.rhodium.apps.media.image;
+  cfg = config.rhodium.home.apps.media.image;
 in
 {
-  options.rhodium.apps.media.image = {
+  options.rhodium.home.apps.media.image = {
     enable = mkEnableOption "Image applications";
   };
 
@@ -21,7 +21,7 @@ in
       imagemagick
       inkscape
       figma-linux
-      blender # 3D modeling and animation
+      blender
       exiv2 # Image metadata manipulation
     ];
   };

@@ -70,6 +70,12 @@ in
     programs.zoxide.enableBashIntegration =
       cfg.enable && config.rhodium.apps.terminal.utils.zoxide.enable;
 
+    programs.zellij.enableBashIntegration =
+      cfg.enable && config.rhodium.apps.terminal.utils.zellij.enable;
+
+    programs.atuin.enableBashIntegration =
+      cfg.enable && config.rhodium.apps.terminal.utils.atuin.enable;
+
     home.sessionVariables = mkIf cfg.defaultShell {
       SHELL = "${pkgs.bash}/bin/bash";
     };

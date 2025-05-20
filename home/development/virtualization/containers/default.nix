@@ -4,7 +4,7 @@
 
 with lib;
 let
-  cfg = config.rhodium.development.virtualization.containers;
+  cfg = config.rhodium.home.development.virtualization.containers;
 in
 {
   imports = [
@@ -13,13 +13,15 @@ in
     ./podman.nix
   ];
 
-  options.rhodium.development.virtualization.containers = {
+  options.rhodium.home.development.virtualization.containers = {
     enable = mkEnableOption "Rhodium's container tools";
   };
 
   config = mkIf cfg.enable {
-    home.development.virtualization.containers.docker.enable = true;
-    home.development.virtualization.containers.kubernetes.enable = true;
-    home.development.virtualization.containers.podman.enable = true;
+    rhodium.home.development.virtualization.containers = {
+      docker.enable = true;
+      kubernetes.enable = false;
+      podman.enable = false;
+    };
   };
 }

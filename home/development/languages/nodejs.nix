@@ -1,32 +1,45 @@
 # home/development/languages/nodejs.nix
+
 { config, pkgs, lib, ... }:
 
 with lib;
 let
-  cfg = config.home.development.languages.nodejs;
+  cfg = config.rhodium.home.development.languages.nodejs;
 in
 {
-  options.home.development.languages.nodejs = {
+  options.rhodium.home.development.languages.nodejs = {
     enable = mkEnableOption "Enable Node.js development environment (Home Manager)";
-    package = mkOption {
+
+    runtime = mkOption {
       type = types.package;
-      default = pkgs.nodejs_20; # Example: Node.js 20
-      defaultText = "pkgs.nodejs_20";
-      description = "The Node.js package to use for home.packages (e.g., nodejs, nodejs_20, nodejs_18).";
+      default = pkgs.nodejs_20;
+      description = "The Node.js runtime package (e.g., nodejs_20, nodejs_18).";
+      example = literalExpression "pkgs.nodejs_18";
+    };
+
+    packageManagers = mkOption {
+      type = types.listOf types.package;
+      default = with pkgs; [ yarn pnpm ];
+      description = "Additional Node.js package managers (npm is included with Node.js).";
+    };
+
+    corepack = mkOption {
+      type = types.bool;
+      default = true;
+      description = "Ensure corepack is available/enabled for managing package manager versions.";
+    };
+
+    extraTools = mkOption {
+      type = types.listOf types.package;
+      default = [ ];
+      description = "Additional global Node.js-related tools.";
     };
   };
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [
-      # Node.js (includes npm)
-      cfg.package
-
-      # Additional Package Managers
-      yarn
-      pnpm
-
-      # Corepack for managing package manager versions (comes with newer Node.js)
-      # corepack # (if not bundled or to ensure it's enabled)
-    ];
+    home.packages = [ cfg.runtime ]
+      ++ cfg.packageManagers
+      ++ (if cfg.corepack && pkgs ? corepack then [ pkgs.corepack ] else [ ])
+      ++ cfg.extraTools;
   };
 }

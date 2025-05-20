@@ -1,10 +1,11 @@
 # home/apps/browsers/default.nix
+# DONE
 
-{ config, lib, pkgs, ... }:
+{ config, lib, ... }:
 
 with lib;
 let
-  cfg = config.rhodium.apps.browsers;
+  cfg = config.rhodium.home.apps.browsers;
 in
 {
   imports = [
@@ -18,24 +19,20 @@ in
     ./w3m.nix
   ];
 
-  options.rhodium.apps.browsers = {
+  options.rhodium.home.apps.browsers = {
     enable = mkEnableOption "Rhodium's Web browsers";
   };
 
   config = mkIf cfg.enable {
-    rhodium.apps.browsers.brave.enable = true;
-    rhodium.apps.browsers.librewolf.enable = false;
-    rhodium.apps.browsers.tor.enable = false;
-    rhodium.apps.browsers.qutebrowser.enable = false;
-    rhodium.apps.browsers.chromium.enable = false;
-    rhodium.apps.browsers.w3m.enable = false;
-    rhodium.apps.browsers.firefox = {
-      enable = true;
-      variant = "stable";
-    };
-    rhodium.apps.browsers.zen = {
-      enable = true;
-      variant = "specific";
+    rhodium.home.apps.browsers = {
+      firefox.enable = false;
+      zen.enable = false;
+      brave.enable = false;
+      librewolf.enable = false;
+      chromium.enable = false;
+      tor.enable = false;
+      qutebrowser.enable = false;
+      w3m.enable = false;
     };
   };
 }

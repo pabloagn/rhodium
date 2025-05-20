@@ -4,10 +4,10 @@
 
 with lib;
 let
-  cfg = config.rhodium.apps.documents.zathura;
+  cfg = config.rhodium.home.apps.documents.zathura;
 in
 {
-  options.rhodium.apps.documents.zathura = {
+  options.rhodium.home.apps.documents.zathura = {
     enable = mkEnableOption "Zathura";
   };
 

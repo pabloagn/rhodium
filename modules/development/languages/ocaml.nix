@@ -1,13 +1,14 @@
 # modules/development/languages/ocaml.nix
+
 { config, pkgs, lib, ... }:
 
 with lib;
 
 let
-  cfg = config.modules.development.languages.ocaml;
+  cfg = config.rhodium.system.development.languages.ocaml;
 in
 {
-  options.modules.development.languages.ocaml = {
+  options.rhodium.system.development.languages.ocaml = {
     enable = mkEnableOption "Enable OCaml development environment";
   };
 

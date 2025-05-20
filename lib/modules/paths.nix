@@ -1,7 +1,6 @@
 # lib/modules/paths.nix
-# Core path definitions for the Rhodium system
 
-{ lib, config ? null, flakeRoot ? null }:
+{ lib, config ? null, flakeRootPath ? null }:
 
 let
   # Handle the case where config is not available (system-level)
@@ -24,7 +23,7 @@ in rec {
 
   # Rhodium-specific paths
   rhodium = {
-    root = if flakeRoot != null then flakeRoot else "${home}/rhodium";
+    root = if flakeRootPath != null then toString flakeRootPath else "${home}/rhodium";
 
     # User directories
     dirs = {

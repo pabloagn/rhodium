@@ -1,13 +1,14 @@
 # modules/development/languages/go.nix
+
 { config, pkgs, lib, ... }:
 
 with lib;
 
 let
-  cfg = config.modules.development.languages.go;
+  cfg = config.rhodium.system.development.languages.go;
 in
 {
-  options.modules.development.languages.go = {
+  options.rhodium.system.development.languages.go = {
     enable = mkEnableOption "Enable Go development environment";
     version = mkOption {
       type = types.nullOr types.str;

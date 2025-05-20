@@ -1,22 +1,30 @@
 # home/development/languages/nextjs.nix
+
 { config, pkgs, lib, ... }:
 
 with lib;
 let
-  cfg = config.home.development.languages.nextjs;
+  cfg = config.rhodium.home.development.languages.nextjs;
 in
 {
-  options.home.development.languages.nextjs = {
-    enable = mkEnableOption "Enable Next.js development tools (Home Manager)";
+  options.rhodium.home.development.languages.nextjs = {
+    enable = mkEnableOption "Enable Next.js global tools (Home Manager)";
+
+    cliTools = mkOption {
+      type = types.listOf types.package;
+      default = [ ];
+      description = "Global CLI tools for Next.js (project setup is usually per-project).";
+    };
+
+    extraTools = mkOption {
+      type = types.listOf types.package;
+      default = [ ];
+      description = "Additional global Next.js-related tools.";
+    };
   };
 
   config = mkIf cfg.enable {
-    # Next.js relies heavily on Node.js. Ensure home.development.languages.nodejs is enabled.
-    # LSPs/Linters/Formatters are expected from javascript.nix/typescript.nix.
-    home.packages = with pkgs; [
-      # Global Next.js CLI (create-next-app) can be useful
-      # nodePackages.next # If you want `create-next-app` globally
-    ];
-    # Recommendation: Manage Next.js and its dependencies per-project using package.json.
+    home.packages = cfg.cliTools
+      ++ cfg.extraTools;
   };
 }

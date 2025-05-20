@@ -4,10 +4,10 @@
 
 with lib;
 let
-  cfg = config.rhodium.desktop.launcher.fuzzel;
+  cfg = config.rhodium.home.desktop.launcher.fuzzel;
 in
 {
-  options.rhodium.desktop.launcher.fuzzel = {
+  options.rhodium.home.desktop.launcher.fuzzel = {
     enable = mkEnableOption "Rhodium's Fuzzel Launcher";
   };
 

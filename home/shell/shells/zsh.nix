@@ -50,10 +50,10 @@ in
       syntaxHighlighting.enable = cfg.enableSyntaxHighlighting;
       history = {
         expireDuplicatesFirst = true;
-        ignoreDups = true;   # Ignore consecutive duplicates
-        ignoreAllDups = false;   # Don't remove older duplicates
-        size = 1000000000;   # Very large history size
-        save = 1000000000;   # Save all entries
+        ignoreDups = true; # Ignore consecutive duplicates
+        ignoreAllDups = false; # Don't remove older duplicates
+        size = 1000000000; # Very large history size
+        save = 1000000000; # Save all entries
         extended = true;
         path = "${config.xdg.dataHome}/zsh/history";
       };
@@ -96,11 +96,32 @@ in
       '';
     };
 
+    programs.eza.enableZshIntegration = cfg.enable;
+    programs.direnv.enableZshIntegration = cfg.enable;
+
+    programs.yazi.enableZshIntegration =
+      cfg.enable && config.rhodium.apps.terminal.utils.yazi.enable;
+
+    programs.ghostty.enableZshIntegration =
+      cfg.enable && config.rhodium.apps.terminal.emulators.ghostty.enable;
+
+    programs.wezterm.enableZshIntegration =
+      cfg.enable && config.rhodium.apps.terminal.emulators.wezterm.enable;
+
+    programs.kitty.enableZshIntegration =
+      cfg.enable && config.rhodium.apps.terminal.emulators.kitty.enable;
+
     programs.starship.enableZshIntegration =
       cfg.enable && config.rhodium.shell.prompts.starship.enable;
 
     programs.zoxide.enableZshIntegration =
       cfg.enable && config.rhodium.apps.terminal.utils.zoxide.enable;
+
+    programs.zellij.enableZshIntegration =
+      cfg.enable && config.rhodium.apps.terminal.utils.zellij.enable;
+
+    programs.atuin.enableZshIntegration =
+      cfg.enable && config.rhodium.apps.terminal.utils.zellij.enable;
 
     home.sessionVariables = mkIf cfg.defaultShell {
       SHELL = "${pkgs.zsh}/bin/zsh";

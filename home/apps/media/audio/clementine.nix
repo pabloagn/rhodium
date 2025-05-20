@@ -4,10 +4,10 @@
 
 with lib;
 let
-  cfg = config.rhodium.apps.media.audio.clementine;
+  cfg = config.rhodium.home.apps.media.audio.clementine;
 in
 {
-  options.rhodium.apps.media.audio.clementine = {
+  options.rhodium.home.apps.media.audio.clementine = {
     enable = mkEnableOption "Rhodium's clementine client";
   };
 

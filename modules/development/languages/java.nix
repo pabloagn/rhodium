@@ -1,13 +1,14 @@
 # modules/development/languages/java.nix
+
 { config, pkgs, lib, ... }:
 
 with lib;
 
 let
-  cfg = config.modules.development.languages.java;
+  cfg = config.rhodium.system.development.languages.java;
 in
 {
-  options.modules.development.languages.java = {
+  options.rhodium.system.development.languages.java = {
     enable = mkEnableOption "Enable Java development environment";
     jdk = mkOption {
       type = types.package;

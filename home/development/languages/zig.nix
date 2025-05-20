@@ -1,28 +1,39 @@
 # home/development/languages/zig.nix
+
 { config, pkgs, lib, ... }:
 
 with lib;
 let
-  cfg = config.home.development.languages.zig;
+  cfg = config.rhodium.home.development.languages.zig;
 in
 {
-  options.home.development.languages.zig = {
+  options.rhodium.home.development.languages.zig = {
     enable = mkEnableOption "Enable Zig development environment (Home Manager)";
-    # version = mkOption {
-    #   type = types.nullOr types.str; # e.g. "0.11.0"
-    #   default = null; # Uses pkgs.zig
-    #   description = "Specify Zig version for home.packages. If null, uses default pkgs.zig.";
-    # };
+
+    compiler = mkOption {
+      type = types.package;
+      default = pkgs.zig;
+      description = "Zig compiler and toolchain.";
+    };
+
+    languageServer = mkOption {
+      type = types.package;
+      default = pkgs.zls;
+      description = "Zig Language Server.";
+    };
+
+    extraTools = mkOption {
+      type = types.listOf types.package;
+      default = [ ];
+      description = "Additional Zig-related tools.";
+    };
   };
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [
-      # Zig Compiler
-      zig # Or specific versions like zig-master, zig_0_11_0 etc.
-          # (if cfg.version == null then zig else pkgs."zig_${builtins.replaceStrings ["."] ["_"] cfg.version}")
-
-      # Language Server
-      zls # Zig Language Server
-    ];
+    home.packages = [
+      cfg.compiler
+      cfg.languageServer
+    ]
+    ++ cfg.extraTools;
   };
 }

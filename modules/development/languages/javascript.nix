@@ -1,13 +1,14 @@
 # modules/development/languages/javascript.nix
+
 { config, pkgs, lib, ... }:
 
 with lib;
 
 let
-  cfg = config.modules.development.languages.javascript;
+  cfg = config.rhodium.system.development.languages.javascript;
 in
 {
-  options.modules.development.languages.javascript = {
+  options.rhodium.system.development.languages.javascript = {
     enable = mkEnableOption "Enable JavaScript development environment";
   };
 

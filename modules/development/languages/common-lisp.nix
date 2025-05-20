@@ -1,13 +1,14 @@
 # modules/development/languages/common-lisp.nix
+
 { config, pkgs, lib, ... }:
 
 with lib;
 
 let
-  cfg = config.modules.development.languages.commonLisp;
+  cfg = config.rhodium.system.development.languages.commonLisp;
 in
 {
-  options.modules.development.languages.commonLisp = {
+  options.rhodium.system.development.languages.commonLisp = {
     enable = mkEnableOption "Enable Common Lisp development environment";
   };
 
