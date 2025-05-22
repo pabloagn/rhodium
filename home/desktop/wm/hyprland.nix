@@ -1,21 +1,22 @@
 # home/desktop/wm/hyprland.nix
 
-{ lib, config, pkgs, ... }:
+{ lib, config, pkgs, rhodium, ... }:
 
 with lib;
 let
   cfg = config.rhodium.home.desktop.wm.hyprland;
+  parentCfg = config.rhodium.home.desktop.wm;
+  categoryName = "hyprland";
 
   hyprlandConfig = ./hyprland;
   hyprlandConfigModules = hyprlandConfig + "/modules";
 in
 {
-  options.rhodium.home.desktop.wm.hyprland = {
-    enable = mkEnableOption "Rhodium's Hyprland configuration";
+  options.rhodium.home.desktop.wm.${categoryName} = {
+    enable = mkEnableOption "Rhodium's ${categoryName} configuration" // { default = false; };
   };
 
-  config = mkIf cfg.enable {
-
+  config = rhodium.lib.mkChildConfig parentCfg cfg {
     home.packages = with pkgs; [
       hyprlock
       hyprpaper

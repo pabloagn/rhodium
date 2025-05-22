@@ -2,16 +2,16 @@
 
 {
   colors = {
-    # Base
+    # Base semantic colors
     primary = { h = 210; s = 100; l = 50; };
     secondary = { h = 280; s = 75; l = 60; };
     accent = { h = 30; s = 100; l = 50; };
 
-    # Neutral
+    # Neutral base colors
     black = { h = 0; s = 0; l = 0; };
     white = { h = 0; s = 0; l = 100; };
 
-    # Gray
+    # Gray scale palette
     gray = {
       "100" = { h = 0; s = 0; l = 90; };
       "200" = { h = 0; s = 0; l = 80; };
@@ -24,7 +24,7 @@
       "900" = { h = 0; s = 0; l = 10; };
     };
 
-    # Slate
+    # Slate scale (blue-tinted grays)
     slate = {
       "100" = { h = 210; s = 20; l = 90; };
       "200" = { h = 210; s = 20; l = 80; };
@@ -37,7 +37,7 @@
       "900" = { h = 210; s = 20; l = 10; };
     };
 
-    # Amber
+    # Amber scale (warm yellows/oranges)
     amber = {
       "100" = { h = 45; s = 100; l = 90; };
       "200" = { h = 45; s = 100; l = 80; };
@@ -50,7 +50,7 @@
       "900" = { h = 25; s = 90; l = 10; };
     };
 
-    # Salmon
+    # Salmon scale (warm pinks/corals)
     salmon = {
       "100" = { h = 15; s = 100; l = 90; };
       "200" = { h = 15; s = 95; l = 80; };
@@ -63,7 +63,7 @@
       "900" = { h = 5; s = 60; l = 10; };
     };
 
-    # Aquamarine
+    # Aquamarine scale (blue-greens)
     aquamarine = {
       "100" = { h = 160; s = 100; l = 90; };
       "200" = { h = 160; s = 90; l = 80; };
@@ -76,7 +76,7 @@
       "900" = { h = 170; s = 55; l = 10; };
     };
 
-    # Emerald
+    # Emerald scale (greens)
     emerald = {
       "100" = { h = 140; s = 80; l = 90; };
       "200" = { h = 140; s = 75; l = 80; };
@@ -89,7 +89,7 @@
       "900" = { h = 145; s = 65; l = 10; };
     };
 
-    # Cream
+    # Cream scale (warm off-whites)
     cream = {
       "100" = { h = 40; s = 90; l = 97; };
       "200" = { h = 40; s = 80; l = 95; };

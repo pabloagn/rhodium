@@ -6,19 +6,24 @@ with lib;
 let
   cfg = config.rhodium.system.core.boot;
   hw = hostData.hardware or { };
+
+  # CPU
   hwCpu = hw.cpu or { };
-  hwGfxDiscrete = hw.graphics.discreteGPU or { };
-  hwGfxIntegrated = hw.graphics.integratedGPU or { };
-  hwNetWifi = hw.network.wifi or { };
-  hwNetEthernet = hw.network.ethernet or { };
-  hwNetBluetooth = hw.network.bluetooth or { };
-  hwPorts = hw.ports or { };
-  hwInput = hw.input or { };
+
+  # GPU
+  hwGpu = hw.gpu or { };
+  hwGpuDiscrete = hwGpu.discreteGPU or { };
+
+  # Memory
   hwMemoryStorage = hw.memory.storage or [ ];
 
-  # Determine which GPU is considered primary for KMS and driver loading
-  primaryGpuVendor = hwGfxDiscrete.vendor or hwGfxIntegrated.vendor or null;
-  primaryGpuDriverType = hwGfxDiscrete.driverType or hwGfxIntegrated.driverType or null;
+  # Ports
+  hwPorts = hw.ports or { };
+
+  # Network
+  # hwNetWifi = hw.network.wifi or { };
+  # hwNetEthernet = hw.network.ethernet or { };
+  # hwNetBluetooth = hw.network.bluetooth or { };
 
 in
 {
@@ -89,18 +94,19 @@ in
     boot.extraModulePackages = cfg.extraModulePackages;
 
     boot.initrd.availableKernelModules = lib.unique (
-      cfg.initrd.availableKernelModules ++
-      (optional (hwPorts.hasThunderbolt or false) "thunderbolt")
-        # NVMe is usually included in general initramfs builds or by mkDefault in NixOS if root is NVMe.
-        # Adding it here ensures it's considered if not automatically picked up.
+      cfg.initrd.availableKernelModules
+      ++ (optional (hwPorts.hasThunderbolt or false) "thunderbolt")
+        # NOTE:
+        #   NVMe is usually included in general initramfs builds or by mkDefault in NixOS if root is NVMe.
+        #   Adding it here ensures it's considered if not automatically picked up.
         (optional (any (s: s.type == "nvme") hwMemoryStorage) "nvme")
     );
 
     boot.initrd.kernelModules = lib.unique (
       cfg.initrd.kernelModules ++
-      (optional (primaryGpuVendor == "amd") "amdgpu") ++
-      (optional (primaryGpuVendor == "intel") "i915") ++
-      (if (primaryGpuVendor == "nvidia" && cfg.nvidia.enable && cfg.nvidia.modesetting.enable) then
+      (optional (hwGpuDiscrete.vendor == "amd") "amdgpu") ++
+      (optional (hwGpuDiscrete.vendor == "intel") "i915") ++
+      (if (hwGpuDiscrete.vendor == "nvidia" && cfg.nvidia.enable && cfg.nvidia.modesetting.enable) then
         cfg.nvidia.earlyKmsModules
       else [ ])
     );
@@ -115,10 +121,9 @@ in
     );
 
     # NVIDIA proprietary driver configuration
-    hardware.nvidia = mkIf (primaryGpuVendor == "nvidia" && cfg.nvidia.enable) {
+    hardware.nvidia = mkIf (hwGpuDiscrete.vendor == "nvidia" && cfg.nvidia.enable) {
       modesetting.enable = cfg.nvidia.modesetting.enable;
     };
-    # This ensures the correct Xorg driver is selected if NVIDIA is primary and enabled
-    services.xserver.videoDrivers = mkIf (primaryGpuVendor == "nvidia" && cfg.nvidia.enable) [ "nvidia" ];
+    services.xserver.videoDrivers = mkIf (hwGpuDiscrete.vendor == "nvidia" && cfg.nvidia.enable) [ "nvidia" ];
   };
 }

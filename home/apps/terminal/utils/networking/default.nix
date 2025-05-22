@@ -1,29 +1,37 @@
 # home/apps/terminal/utils/networking/default.nix
 
-{ config, lib, pkgs, rhodium, ... }:
+{ lib, config, pkgs, _haumea, rhodiumLib, ... }:
 
 with lib;
 let
-  cfg = config.rhodium.home.apps.terminal.utils.networking;
-  categoryName = "networking";
+  categoryName = _haumea.name;
+  cfg = getAttrFromPath _haumea.configPath config;
+  parentCfg = getAttrFromPath (lists.init _haumea.configPath) config;
 
   packageSpecs = [
-    { name = "curl"; pkg = pkgs.curl; description = "URL retrieval utility"; }
-    { name = "wget"; pkg = pkgs.wget; description = "Network downloader"; }
-    { name = "httpie"; pkg = pkgs.httpie; description = "User-friendly HTTP client"; }
-    { name = "xh"; pkg = pkgs.xh; description = "Friendly and fast HTTP client (Rust remake of HTTPie)"; }
-    { name = "dog"; pkg = pkgs.dog; description = "DNS client like dig but more user-friendly"; }
-    { name = "nmap"; pkg = pkgs.nmap; description = "Network scanner"; }
-    { name = "iperf3"; pkg = pkgs.iperf3; description = "Network bandwidth testing"; }
+    # Network Exploration
+    { name = "nmap"; pkg = pkgs.nmap; description = "Network exploration tool and security scanner"; }
+    { name = "netcat"; pkg = pkgs.netcat; description = "Network utility for TCP/IP packet manipulation"; }
     { name = "socat"; pkg = pkgs.socat; description = "Multipurpose relay for bidirectional data transfer"; }
+    { name = "tcpdump"; pkg = pkgs.tcpdump; description = "Command-line network traffic analyzer"; }
+    { name = "wireshark"; pkg = pkgs.wireshark; description = "Network protocol analyzer"; }
+    { name = "iperf"; pkg = pkgs.iperf; description = "Network bandwidth performance measurement tool"; }
+    { name = "iperf3"; pkg = pkgs.iperf3; description = "Network bandwidth performance measurement tool"; }
+    { name = "netcat"; pkg = pkgs.netcat; description = "Network utility for TCP/IP packet manipulation"; }
+
+    # Network Monitoring
+    { name = "iftop"; pkg = pkgs.iftop; description = "Network traffic monitor by interface"; }
+    { name = "vnstat"; pkg = pkgs.vnstat; description = "Network traffic monitor and database"; }
+    { name = "bandwhich"; pkg = pkgs.bandwhich; description = "Terminal bandwidth utilization tool"; }
   ];
 in
 {
-  options.rhodium.home.apps.terminal.utils.${categoryName} = {
-    enable = mkEnableOption "Rhodium's ${categoryName} terminal utils";
-  } // rhodium.lib.mkIndividualPackageOptions packageSpecs;
+  options = setAttrByPath _haumea.configPath
+    {
+      enable = mkEnableOption "Rhodium's ${categoryName} terminal utils";
+    } // rhodiumLib.mkIndividualPackageOptions packageSpecs;
 
-  config = mkIf cfg.enable {
-    home.packages = concatMap (spec: if cfg.${spec.name}.enable then [ spec.pkg ] else [ ]) packageSpecs;
+  config = rhodiumLib.mkChildConfig parentCfg cfg {
+    home.packages = rhodiumLib.getEnabledPackages cfg packageSpecs;
   };
 }

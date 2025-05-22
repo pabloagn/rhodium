@@ -1,44 +1,34 @@
 # home/development/editors/default.nix
 
-{ lib, config, pkgs, ... }:
+{ lib, config, pkgs, _haumea, rhodiumLib, ... }:
 
 with lib;
 let
-  cfg = config.rhodium.home.development.editors;
+  cfg = getAttrFromPath _haumea.configPath config;
+  parentCfg = getAttrFromPath (lists.init _haumea.configPath) config;
+  categoryName = _haumea.name;
+
+  packageSpecs = [
+    {
+      name = "kakoune";
+      pkg = pkgs.kakoune;
+      description = "A modal text editor";
+      hasDesktop = true;
+    }
+  ];
 in
 {
-  imports = [
-    ./cursor.nix
-    ./emacs.nix
-    ./helix.nix
-    ./kate.nix
-    ./mousepad.nix
-    ./nvim.nix
-    ./rstudio.nix
-    ./vscode.nix
-    ./lapce.nix
-    ./zed.nix
-  ];
+  options = setAttrByPath _haumea.configPath ({
+    enable = mkEnableOption "Rhodium's ${categoryName} configuration";
+  } // rhodiumLib.mkIndividualPackageOptions packageSpecs);
 
-  options.rhodium.home.development.editors = {
-    enable = mkEnableOption "Rhodium's code editors";
-  };
+  config = rhodiumLib.mkChildConfig parentCfg cfg {
+    home.packages = rhodiumLib.getEnabledPackages cfg packageSpecs;
 
-  config = mkIf cfg.enable {
-    rhodium.home.development.editors = {
-      cursor.enable = false;
-      emacs.enable = false;
-      helix.enable = true;
-      kate.enable = false;
-      mousepad.enable = true;
-      nvim.enable = true;
-      rstudio.enable = true;
-      vscode = {
-        enable = true;
-        variant = "vscode";
-      };
-      lapce.enable = false;
-      zed.enable = true;
-    };
+    emacs.enable = false;
+    helix.enable = false;
+    kate.enable = false;
+    mousepad.enable = false;
+    nvim.enable = false;
   };
 }

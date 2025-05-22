@@ -5,6 +5,7 @@
 with lib;
 let
   cfg = config.rhodium.home.apps.terminal.utils.navigation;
+  parentCfg = config.rhodium.home.apps.terminal.utils;
   categoryName = "navigation";
 
   packageSpecs = [
@@ -32,10 +33,10 @@ in
   ];
 
   options.rhodium.home.apps.terminal.utils.${categoryName} = {
-    enable = mkEnableOption "Rhodium's ${categoryName} terminal utils";
+    enable = mkEnableOption "Rhodium's ${categoryName} terminal utils" // { default = false; };
   } // rhodium.lib.mkIndividualPackageOptions packageSpecs;
 
-  config = mkIf cfg.enable {
-    home.packages = concatMap (spec: if cfg.${spec.name}.enable then [ spec.pkg ] else [ ]) packageSpecs;
+  config = rhodium.lib.mkChildConfig parentCfg cfg {
+    home.packages = rhodium.lib.getEnabledPackages cfg packageSpecs;
   };
 }

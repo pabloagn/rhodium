@@ -5,6 +5,8 @@
 with lib;
 let
   cfg = config.rhodium.home.desktop.bar.waybar;
+  parentCfg = config.rhodium.home.desktop.bar;
+  categoryName = "waybar";
 
   # Waybar override for experimental features
   # waybar-experimental = pkgs.waybar.overrideAttrs (oldAttrs: {
@@ -388,11 +390,11 @@ let
 
 in
 {
-  options.rhodium.home.desktop.bar.waybar = {
-    enable = mkEnableOption "Rhodium's Waybar configuration";
+  options.rhodium.home.desktop.bar.${categoryName} = {
+    enable = mkEnableOption "Rhodium's Desktop ${categoryName} Bar" // { default = false; };
   };
 
-  config = mkIf cfg.enable {
+  config = rhodium.lib.mkChildConfig parentCfg cfg {
     programs.waybar = {
       enable = true;
       package = pkgs.waybar;

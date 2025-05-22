@@ -1,11 +1,11 @@
 # home/apps/opsec/default.nix
 
-{ config, lib, pkgs, rhodium, ... }:
+{ config, lib, pkgs, _haumea, rhodiumLib, ... }:
 
 with lib;
 let
-  cfg = config.rhodium.home.apps.opsec;
-  categoryName = "opsec";
+  cfg = getAttrFromPath _haumea.configPath config;
+  parentCfg = getAttrFromPath (lists.init _haumea.configPath) config;
 
   packageSpecs = [
     # Binary Analysis and Reverse Engineering
@@ -47,11 +47,12 @@ let
 
 in
 {
-  options.rhodium.home.apps.opsec = {
-    enable = mkEnableOption "Rhodium's Security Operations (OpSec) tools";
-  } // rhodium.lib.mkIndividualPackageOptions packageSpecs;
+  options = setAttrByPath _haumea.configPath
+    {
+      enable = mkEnableOption "Rhodium's Security Operations (OpSec) tools";
+    } // rhodiumLib.mkIndividualPackageOptions packageSpecs;
 
-  config = mkIf cfg.enable {
-    home.packages = concatMap (spec: if cfg.${spec.name}.enable then [ spec.pkg ] else [ ]) packageSpecs;
+  config = rhodiumLib.mkChildConfig parentCfg cfg {
+    home.packages = rhodiumLib.getEnabledPackages cfg packageSpecs;
   };
 }

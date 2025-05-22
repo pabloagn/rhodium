@@ -1,20 +1,21 @@
 # home/apps/communication/email/thunderbird.nix
 
-{ config, lib, pkgs, ... }:
+{ lib, config, pkgs, _haumea, rhodiumLib, ... }:
 
 with lib;
 let
-  cfg = config.rhodium.home.apps.communication.email.thunderbird;
+  categoryName = _haumea.name;
+  cfg = getAttrFromPath _haumea.configPath config;
+  parentCfg = getAttrFromPath (lists.init _haumea.configPath) config;
 in
 {
-  options.rhodium.home.apps.communication.email.thunderbird = {
-    enable = mkEnableOption "Thunderbird";
+  options = setAttrByPath _haumea.configPath {
+    enable = mkEnableOption "Rhodium's ${categoryName} configuration";
   };
 
-  config = mkIf cfg.enable {
+  config = rhodiumLib.mkChildConfig parentCfg cfg {
     programs.thunderbird = {
       enable = true;
-      package = pkgs.thunderbird;
     };
   };
 }

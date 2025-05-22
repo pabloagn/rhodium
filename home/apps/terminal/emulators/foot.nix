@@ -1,17 +1,19 @@
-# home/apps/terminals/emulators/foot.nix
+# home/apps/terminal/emulators/foot.nix
 
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, _haumea, rhodiumLib, ... }:
 
 with lib;
 let
-  cfg = config.rhodium.home.apps.terminals.emulators.foot;
+  cfg = getAttrFromPath _haumea.configPath config;
+  parentCfg = getAttrFromPath (lists.init _haumea.configPath) config;
+  categoryName = _haumea.name;
 in
 {
-  options.rhodium.home.apps.terminals.emulators.foot = {
-    enable = mkEnableOption "Rhodium's Foot configuration";
+  options = setAttrByPath _haumea.configPath {
+    enable = mkEnableOption "Rhodium's ${categoryName} configuration";
   };
 
-  config = mkIf cfg.enable {
+  config = rhodiumLib.mkChildConfig parentCfg cfg {
     programs.foot = {
       enable = true;
       package = pkgs.foot;

@@ -1,24 +1,22 @@
 # home/shell/default.nix
 
-{ lib, config, pkgs, ... }:
+{ lib, config, pkgs, _haumea, rhodiumLib, ... }:
 
 with lib;
 let
-  cfg = config.rhodium.shell;
+  cfg = getAttrFromPath _haumea.configPath config;
+  parentCfg = getAttrFromPath (lists.init _haumea.configPath) config;
+  categoryName = _haumea.name;
 in
 {
-  imports = [
-    ./shells
-    ./prompts
-    ./common
-  ];
-
-  options.rhodium.shell = {
-    enable = mkEnableOption "Rhodium's shell configuration";
+  options = setAttrByPath _haumea.configPath {
+    enable = mkEnableOption "Rhodium's ${categoryName} configuration" // { default = false; };
   };
 
-  config = mkIf cfg.enable {
-    rhodium.shell.shells.default.enable = true;
-    rhodium.shell.prompts.default.enable = true;
+  config = rhodiumLib.mkChildConfig parentCfg cfg {
+    common.enable = false;
+    shells.enable = false;
+    prompts.enable = false;
+    utils.enable = false;
   };
 }

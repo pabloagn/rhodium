@@ -1,27 +1,23 @@
 # home/apps/media/default.nix
 
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, _haumea, rhodiumLib, ... }:
 
 with lib;
 let
-  cfg = config.rhodium.home.apps.media;
+  cfg = getAttrFromPath _haumea.configPath config;
+  parentCfg = getAttrFromPath (lists.init _haumea.configPath) config;
 in
 {
-  imports = [
-    ./audio
-    ./image
-    ./video
-  ];
-
-  options.rhodium.home.apps.media = {
+  options = setAttrByPath _haumea.configPath {
     enable = mkEnableOption "Media applications";
   };
 
-  config = mkIf cfg.enable {
-    rhodium.home.apps.media = {
-      audio.enable = true;
-      image.enable = true;
-      video.enable = true;
-    };
+  config = rhodiumLib.mkChildConfig parentCfg cfg {
+    audio.enable = false;
+    automations.enable = false;
+    books.enable = false;
+    image.enable = false;
+    torrent.enable = false;
+    video.enable = false;
   };
 }

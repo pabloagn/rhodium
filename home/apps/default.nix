@@ -1,41 +1,29 @@
 # home/apps/default.nix
-# DONE
-{ config, lib, ... }:
+
+{ lib, config, pkgs, _haumea, rhodiumLib, ... }:
 
 with lib;
 let
-  cfg = config.rhodium.home.apps;
+  cfg = getAttrFromPath _haumea.configPath config;
+  parentCfg = getAttrFromPath (lists.init _haumea.configPath) config;
+  categoryName = _haumea.name;
 in
 {
-  imports = [
-    ./browsers/default.nix
-    ./communication/default.nix
-    ./desktop/default.nix
-    ./documents/default.nix
-    ./editors/default.nix
-    ./files/default.nix
-    ./media/default.nix
-    ./opsec/default.nix
-    ./privacy/default.nix
-    ./terminal/default.nix
-    ./utils/default.nix
-  ];
-
-  options.rhodium.home.apps = {
-    enable = mkEnableOption "Rhodium's applications";
+  options = setAttrByPath _haumea.configPath {
+    enable = mkEnableOption "Rhodium's home ${categoryName}" // { default = false; };
   };
 
-  config = mkIf cfg.enable {
-    rhodium.home.apps.browsers.enable = true;
-    rhodium.home.apps.communication.enable = true;
-    rhodium.home.apps.desktop.enable = true;
-    rhodium.home.apps.documents.enable = true;
-    rhodium.home.apps.editors.enable = true;
-    rhodium.home.apps.files.enable = true;
-    rhodium.home.apps.media.enable = true;
-    rhodium.home.apps.opsec.enable = true;
-    rhodium.home.apps.privacy.enable = true;
-    rhodium.home.apps.terminal.enable = true;
-    rhodium.home.apps.utils.enable = true;
+  config = rhodiumLib.mkChildConfig parentCfg cfg {
+    browsers.enable = false;
+    communication.enable = false;
+    desktop.enable = false;
+    documents.enable = false;
+    files.enable = false;
+    media.enable = false;
+    opsec.enable = false;
+    privacy.enable = false;
+    smart_home.enable = false;
+    terminal.enable = false;
+    utils.enable = false;
   };
 }

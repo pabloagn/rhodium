@@ -1,23 +1,21 @@
 # home/system/default.nix
 
-{ config, lib, pkgs, ... }:
+{ lib, config, pkgs, _haumea, rhodiumLib, ... }:
 
 with lib;
 let
-  cfg = config.rhodium.system;
+  cfg = getAttrFromPath _haumea.configPath config;
+  parentCfg = getAttrFromPath (lists.init _haumea.configPath) config;
+  categoryName = _haumea.name;
 in
 {
-  imports = [
-    ./monitoring
-    ./networking
-  ];
-
-  options.rhodium.system = {
-    enable = mkEnableOption "System utilities and tools";
+  options = setAttrByPath _haumea.configPath {
+    enable = mkEnableOption "Rhodium's ${categoryName} configurations" // { default = false; };
   };
 
-  config = mkIf cfg.enable {
-    rhodium.system.monitoring.enable = true;
-    rhodium.system.networking.enable = true;
+  config = rhodiumLib.mkChildConfig parentCfg cfg {
+    monitoring.enable = false;
+    networking.enable = false;
+    backup.enable = false;
   };
 }

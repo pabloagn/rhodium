@@ -20,16 +20,11 @@ in
   };
 
   config = mkIf cfg.enable {
-    # Create necessary file links for assets and scripts
     home.file = rhodiumPaths.mkFileLinks.assetLinks // rhodiumPaths.mkFileLinks.scriptLinks;
-
-    # Add directories to PATH
     home.sessionPath = [
       rhodiumPaths.paths.rhodium.dirs.scripts
       rhodiumPaths.paths.xdg.bin
     ];
-
-    # Configure XDG Base Directory using our paths
     xdg = {
       enable = true;
       cacheHome = rhodiumPaths.paths.xdg.cache;

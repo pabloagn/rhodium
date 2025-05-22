@@ -42,6 +42,11 @@
       inputs.hyprlang.follows = "hyprland/hyprlang";
     };
 
+    haumea = {
+      url = "github:nix-community/haumea/v0.2.2";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
   };
 
   outputs =
@@ -51,78 +56,78 @@
     , flake-parts
     , home-manager
     , zen-browser
+    , haumea
     , ...
     }:
     let
-      data = import ./.env.nix {
-        pkgs = nixpkgs;
-      };
-
-      allUsersData = data.users;
-      allHostsData = data.hosts;
-
       system = "x86_64-linux";
+      rhodiumGlobalOverlays = import ./overlays { inherit inputs; };
 
-      rhodiumGlobalOverlays = import ./overlays {
-        inherit inputs;
-      };
-
+      # Rhodium's Packages (base)
       commonPkgsConfig = {
-        config = {
-          allowUnfree = true;
-        };
+        inherit system;
+        config = { allowUnfree = true; };
         overlays = [ rhodiumGlobalOverlays ];
       };
 
-      configuredPkgs = import inputs.nixpkgs ({
-        inherit system;
-      } // commonPkgsConfig);
+      # Rhodium's Packages (stable, inherits commonPkgsConfig)
+      configuredPkgs = import inputs.nixpkgs commonPkgsConfig;
 
-      configuredPkgsUnstable = import inputs.nixpkgs-unstable ({
-        inherit system;
-      } // commonPkgsConfig);
+      # Rhodium's Packages (unstable, inherits commonPkgsConfig)
+      configuredPkgsUnstable = import inputs.nixpkgs-unstable commonPkgsConfig;
 
-      rhodiumSystemModules = {
-        defaults = import ./modules;
+      # Rhodium's Data
+      dataHosts = import ./data/hosts/hosts.nix { pkgs = configuredPkgs; };
+      dataUsers = import ./data/users/users.nix { pkgs = configuredPkgs; };
 
-        core = {
-          defaults = import ./modules/core;
-          boot = import ./modules/core/boot;
-          filesystem = import ./modules/core/filesystem;
-          groups = import ./modules/core/groups;
-          hardware = import ./modules/core/hardware;
-          networking = import ./modules/core/networking;
-          security = import ./modules/core/security;
-          shell = import ./modules/core/shell;
-          system = import ./modules/core/system;
-          users = import ./modules/core/users;
-          utils = import ./modules/core/utils;
-        };
+      # Haumea Transformer
+      rhodiumHaumeaTransformer = pkgsForLib: pathPrefix:
+        cursor: moduleData:
+          let lib = pkgsForLib.lib;
+          in moduleData // {
+            _haumea = {
+              path = cursor;
+              name = if cursor == [ ] then "root" else lib.last cursor;
+              configPath = pathPrefix ++ cursor;
+              configPathPrefix = pathPrefix;
+            };
+          };
 
-        desktop = {
-          defaults = import ./modules/desktop;
-        };
-
-        development = {
-          defaults = import ./modules/development;
-        };
-      };
-
-      rhodiumHomeModules = {
-        defaults = import ./home;
-        apps = import ./home/apps;
-        desktop = import ./home/desktop;
-        development = import ./home/development;
-        environment = import ./home/environment;
-        security = import ./home/security;
-        shell = import ./home/shell;
-        system = import ./home/system;
-      };
-
+      # Rhodium's Lib
       rhodiumLib = import ./lib {
-        lib = configuredPkgs.lib;
         inherit inputs;
+        pkgs = configuredPkgs;
+        pkgs-unstable = configuredPkgsUnstable;
         flakeRootPath = self;
+        lib = configuredPkgs.lib;
+      };
+
+      # Haumea Modules
+      baseHaumeaInputs = {
+        inherit inputs rhodiumLib;
+        flakePath = self;
+      };
+
+      # Rhodium's NixOS Modules (Haumea-injected)
+      rhodiumSystemModules = haumea.lib.load {
+        src = ./modules;
+        inputs = baseHaumeaInputs // {
+          pkgs = configuredPkgs;
+          pkgs-unstable = configuredPkgsUnstable;
+          lib = configuredPkgs.lib;
+        };
+        transformer = rhodiumHaumeaTransformer configuredPkgs [ "rhodium" "system" ];
+      };
+
+      # Rhodium's Home Manager Modules (Haumea-injected)
+      rhodiumHomeModules = haumea.lib.load {
+        src = ./home;
+        inputs = baseHaumeaInputs // {
+          pkgs = configuredPkgs;
+          pkgs-unstable = configuredPkgsUnstable;
+          lib = configuredPkgs.lib;
+        };
+        transformer = rhodiumHaumeaTransformer configuredPkgs [ "rhodium" "home" ];
       };
 
     in
@@ -186,28 +191,28 @@
           lib = rhodiumLib;
         };
 
-        nixosConfigurations = nixpkgs.lib.mapAttrs'
+        nixosConfigurations = configuredPkgs.lib.mapAttrs'
           (hostKey: hostSpecificData: {
             name = hostSpecificData.hostname;
-            value = nixpkgs.lib.nixosSystem {
+            value = configuredPkgs.lib.nixosSystem {
               inherit system;
               pkgs = configuredPkgs;
               specialArgs = {
                 inherit inputs;
                 pkgs-unstable = configuredPkgsUnstable;
-                userData = allUsersData;
+                userData = dataUsers;
                 hostData = hostSpecificData;
                 flakeRootPath = self;
                 rhodium = self.rhodium;
               };
               modules = [
                 ./hosts/${hostKey}/default.nix
-              ];
+              ] ++ configuredPkgs.lib.attrValuesRecursive self.rhodium.system;
             };
           })
-          allHostsData;
+          dataHosts;
 
-        homeConfigurations = nixpkgs.lib.mapAttrs'
+        homeConfigurations = configuredPkgs.lib.mapAttrs'
           (userKey: userSpecificData: {
             name = userSpecificData.username;
             value = home-manager.lib.homeManagerConfiguration {
@@ -221,10 +226,10 @@
               };
               modules = [
                 ./users/${userKey}/default.nix
-              ];
+              ] ++ configuredPkgs.lib.attrValuesRecursive self.rhodium.home;
             };
           })
-          allUsersData;
+          dataUsers;
       };
     };
 }

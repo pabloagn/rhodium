@@ -1,19 +1,26 @@
 # home/apps/terminal/utils/navigation/zoxide.nix
 
-{ config, lib, pkgs, ... }:
+{ lib, config, pkgs, _haumea, rhodiumLib, ... }:
 
 with lib;
 let
-  cfg = config.rhodium.home.apps.terminal.utils.navigation.zoxide;
+  categoryName = _haumea.name;
+  cfg = getAttrFromPath _haumea.configPath config;
+  parentCfg = getAttrFromPath (lists.init _haumea.configPath) config;
 in
 {
-  options.rhodium.home.apps.terminal.utils.navigation.zoxide = {
-    enable = mkEnableOption "Rhodium's zoxide configuration";
-  };
+  options = setAttrByPath _haumea.configPath (
+    rhodiumLib.mkAppModuleOptions {
+      appName = categoryName;
+      appDescription = "${rhodiumLib.metadata.appName}'s ${categoryName} configuration";
+      hasDesktop = false;
+    }
+  );
 
-  config = mkIf cfg.enable {
+  config = rhodiumLib.mkChildConfig parentCfg cfg {
     programs.zoxide = {
       enable = true;
+      options = [ "--cmd cd" ];
     };
   };
 }

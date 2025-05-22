@@ -1,26 +1,22 @@
 # home/apps/communication/default.nix
-# DONE
 
-{ config, lib, pkgs, ... }:
+{ lib, config, pkgs, _haumea, rhodiumLib, ... }:
 
 with lib;
 let
-  cfg = config.rhodium.home.apps.communication;
+  categoryName = _haumea.name;
+  cfg = getAttrFromPath _haumea.configPath config;
+  parentCfg = getAttrFromPath (lists.init _haumea.configPath) config;
 in
 {
-  imports = [
-    ./messaging/default.nix
-    ./email/default.nix
-  ];
-
-  options.rhodium.home.apps.communication = {
-    enable = mkEnableOption "Communication applications";
+  options = setAttrByPath _haumea.configPath {
+    enable = mkEnableOption "Rhodium's ${categoryName} applications" // { default = false; };
   };
 
-  config = mkIf cfg.enable {
-    rhodium.home.apps.communication = {
-      messaging.enable = false;
-      email.enable = false;
-    };
+  config = rhodiumLib.mkChildConfig parentCfg cfg {
+    email.enable = false;
+    feeds.enable = false;
+    messaging.enable = false;
+    social.enable = false;
   };
 }

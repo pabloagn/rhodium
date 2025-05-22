@@ -1,18 +1,21 @@
 # home/desktop/notifications/dunst.nix
 
-{ lib, config, pkgs, ... }:
+{ lib, config, pkgs, rhodium, ... }:
 
 with lib;
 let
-  cfg = config.rhodium.desktop.notifications.dunst;
+  cfg = config.rhodium.home.desktop.notifications.dunst;
+  parentCfg = config.rhodium.home.desktop.notifications;
 in
 {
-  options.rhodium.desktop.notifications.dunst = {
-    enable = mkEnableOption "Rhodium's Dunst Notifications";
+  options.rhodium.home.desktop.notifications.dunst = {
+    enable = mkEnableOption "Rhodium's Dunst Notifications" // { default = false; };
   };
 
-  config = mkIf cfg.enable {
-    services.dunst.enable = true;
-    services.dunst.package = pkgs.dunst;
+  config = rhodium.lib.mkChildConfig parentCfg cfg {
+    services.dunst = {
+      enable = true;
+      package = pkgs.dunst;
+    };
   };
 }

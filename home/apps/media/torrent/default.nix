@@ -1,27 +1,40 @@
 # home/apps/media/torrent/default.nix
 
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, _haumea, rhodiumLib, ... }:
 
 with lib;
 let
-  cfg = config.rhodium.home.apps.media.torrent;
+  cfg = getAttrFromPath _haumea.configPath config;
+  parentCfg = getAttrFromPath (lists.init _haumea.configPath) config;
+  packageSpecs = [
+    {
+      name = "deluge";
+      pkg = pkgs.deluge;
+      description = "Lightweight BitTorrent client";
+    }
+    {
+      name = "deluged";
+      pkg = pkgs.deluged or pkgs.deluge-daemon;
+      description = "Deluge BitTorrent daemon";
+    }
+    {
+      name = "transmission";
+      pkg = pkgs.transmission;
+      description = "Fast, easy and free BitTorrent client";
+    }
+    {
+      name = "qbittorrent";
+      pkg = pkgs.qbittorrent;
+      description = "Free and open source software application that allows you to manage your torrents";
+    }
+  ];
 in
 {
-  imports = [
-    ./deluge.nix
-    ./deluged.nix
-    ./transmission.nix
-  ];
-
-  options.rhodium.home.apps.media.torrent = {
+  options = setAttrByPath _haumea.configPath {
     enable = mkEnableOption "Rhodium's torrent applications";
-  };
+  } // rhodiumLib.mkIndividualPackageOptions packageSpecs;
 
-  config = mkIf cfg.enable {
-    rhodium.home.apps.media.torrent = {
-      deluge.enable = false;
-      deluged.enable = true;
-      transmission.enable = false;
-    };
+  config = rhodiumLib.mkChildConfig parentCfg cfg {
+    home.packages = rhodiumLib.getEnabledPackages cfg packageSpecs;
   };
 }

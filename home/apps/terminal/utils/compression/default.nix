@@ -24,6 +24,6 @@ in
   } // rhodium.lib.mkIndividualPackageOptions packageSpecs;
 
   config = mkIf cfg.enable {
-    home.packages = concatMap (spec: if cfg.${spec.name}.enable then [ spec.pkg ] else [ ]) packageSpecs;
+    home.packages = rhodium.lib.getEnabledPackages cfg packageSpecs;
   };
 }

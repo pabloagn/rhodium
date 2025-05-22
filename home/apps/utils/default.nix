@@ -5,23 +5,25 @@
 with lib;
 let
   cfg = config.rhodium.home.apps.utils;
+  parentCfg = config.rhodium.home.apps;
+  categoryName = "utils";
 in
 {
   imports = [
-    ./calculators
-    ./calendars
-    ./notes
+    ./calculators/default.nix
+    ./calendars/default.nix
+    ./notes/default.nix
   ];
 
-  options.rhodium.home.apps.utils = {
+  options.rhodium.home.apps.${categoryName} = {
     enable = mkEnableOption "Utility applications";
   };
 
-  config = mkIf cfg.enable {
-    rhodium.home.apps.utils = {
-      calendars.enable = true;
-      notes.enable = true;
-      calculators.enable = true;
+  config = rhodium.lib.mkChildConfig parentCfg cfg {
+    rhodium.home.apps.${categoryName} = {
+      calendars.enable = false;
+      notes.enable = false;
+      calculators.enable = false;
     };
   };
 }

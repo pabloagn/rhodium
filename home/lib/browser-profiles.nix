@@ -1,2 +1,0 @@
-# home/lib/profiles.nix
-

@@ -5,30 +5,38 @@
 with lib;
 let
   cfg = config.rhodium.home.desktop;
+  parentCfg = config.rhodium.home;
+  categoryName = "desktop";
 in
 {
   imports = [
-    ./wm
-    ./launcher
-    ./bar
-    ./notifications
+    ./wm/default.nix
+    ./launchers/default.nix
+    ./bar/default.nix
+    ./notifications/default.nix
   ];
 
-  options.rhodium.home.desktop = {
-    enable = mkEnableOption "Rhodium's Desktop";
+  options.rhodium.home.${categoryName} = {
+    enable = mkEnableOption "Rhodium's ${categoryName}" // { default = false; };
   };
 
-  config = mkIf cfg.enable {
-    rhodium.home.desktop = {
-      bar.enable = true;
-      launcher.enable = true;
-      notifications.enable = true;
+  config = rhodium.lib.mkChildConfig parentCfg cfg {
+    rhodium.home.${categoryName} = {
+      bar.enable = false;
+      launchers.enable = false;
+      notifications.enable = false;
       wm = {
-        enable = true;
+        enable = false;
         hyprcursor = {
-          enable = true;
+          enable = false;
           theme = "rose-pine";
           size = 20;
+        };
+        hyprland = {
+          enable = false;
+        };
+        hyprpaper = {
+          enable = false;
         };
       };
     };

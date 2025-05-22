@@ -1,29 +1,23 @@
 # home/apps/terminal/emulators/default.nix
 
-{ lib, config, pkgs, ... }:
+{ config, lib, pkgs, _haumea, rhodiumLib, ... }:
 
 with lib;
 let
-  cfg = config.rhodium.home.apps.terminal.emulators;
+  cfg = getAttrFromPath _haumea.configPath config;
+  parentCfg = getAttrFromPath (lists.init _haumea.configPath) config;
+  categoryName = _haumea.name;
 in
 {
-  imports = [
-    ./foot.nix
-    ./ghostty.nix
-    ./kitty.nix
-    ./st.nix
-    ./wezterm.nix
-  ];
-
-  options.rhodium.home.apps.terminal.emulators = {
-    enable = mkEnableOption "Rhodium's terminal emulators";
+  options = setAttrByPath _haumea.configPath {
+    enable = mkEnableOption "Rhodium's ${categoryName} configurations" // { default = false; };
   };
 
-  config = mkIf cfg.enable {
-    rhodium.home.apps.terminal.emulators.foot.enable = false;
-    rhodium.home.apps.terminal.emulators.ghostty.enable = true;
-    rhodium.home.apps.terminal.emulators.kitty.enable = true;
-    rhodium.home.apps.terminal.emulators.st.enable = false;
-    rhodium.home.apps.terminal.emulators.wezterm.enable = false;
+  config = rhodiumLib.mkChildConfig parentCfg cfg {
+    foot.enable = false;
+    ghostty.enable = false;
+    kitty.enable = false;
+    st.enable = false;
+    wezterm.enable = false;
   };
 }

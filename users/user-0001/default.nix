@@ -2,6 +2,10 @@
 
 { config, pkgs, lib, userData, rhodium,... }:
 
+# Imports:
+#   Minimal defaults
+#   A profile
+
 {
   imports = [
     # Minimal defaults

@@ -1,26 +1,20 @@
 # home/apps/communication/email/default.nix
-# DONE
 
-{ config, lib, ... }:
+{ lib, config, pkgs, _haumea, rhodiumLib, ... }:
 
 with lib;
 let
-  cfg = config.rhodium.home.apps.communication.email;
+  cfg = getAttrFromPath _haumea.configPath config;
+  parentCfg = getAttrFromPath (lists.init _haumea.configPath) config;
+  categoryName = _haumea.name;
 in
 {
-  imports = [
-    ./protonmail.nix
-    ./thunderbird.nix
-  ];
-
-  options.rhodium.home.apps.communication.email = {
-    enable = mkEnableOption "Email applications";
+  options = setAttrByPath _haumea.configPath {
+    enable = mkEnableOption "Rhodium's ${categoryName} applications" // { default = false; };
   };
 
-  config = mkIf cfg.enable {
-    rhodium.home.apps.communication.email = {
-      protonmail.enable = false;
-      thunderbird.enable = false;
-    };
+  config = rhodiumLib.mkChildConfig parentCfg cfg {
+    protonmail.enable = false;
+    thunderbird.enable = false;
   };
 }

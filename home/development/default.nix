@@ -6,27 +6,29 @@ with lib;
 
 let
   cfg = config.rhodium.home.development;
+  parentCfg = config.rhodium.home;
+  categoryName = "development";
 in
 {
   imports = [
-    ./databases
-    ./editors
-    ./languages
-    ./tools
-    ./virtualization
+    ./databases/default.nix
+    ./editors/default.nix
+    ./languages/default.nix
+    ./tools/default.nix
+    ./virtualization/default.nix
   ];
 
-  options.rhodium.home.development = {
-    enable = mkEnableOption "Enable development environment";
+  options.rhodium.home.${categoryName} = {
+    enable = mkEnableOption "Enable ${categoryName}" // { default = false; };
   };
 
-  config = mkIf cfg.enable {
-    rhodium.home.development = {
-      databases.enable = true;
-      editors.enable = true;
-      languages.enable = true;
-      tools.enable = true;
-      virtualization.enable = true;
+  config = rhodium.lib.mkChildConfig parentCfg cfg {
+    rhodium.home.${categoryName} = {
+      databases.enable = false;
+      editors.enable = false;
+      languages.enable = false;
+      tools.enable = false;
+      virtualization.enable = false;
     };
   };
 }

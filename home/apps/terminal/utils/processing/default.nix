@@ -1,12 +1,12 @@
 # home/apps/terminal/utils/processing/default.nix
 
-{ config, lib, pkgs, rhodium, ... }:
+{ lib, config, pkgs, _haumea, rhodiumLib, ... }:
 
 with lib;
 let
-  cfg = config.rhodium.home.apps.terminal.utils.processing;
-  categoryName = "processing";
-
+  categoryName = _haumea.name;
+  cfg = getAttrFromPath _haumea.configPath config;
+  parentCfg = getAttrFromPath (lists.init _haumea.configPath) config;
   packageSpecs = [
     { name = "jq"; pkg = pkgs.jq; description = "JSON processor and query language"; }
     { name = "yq-go"; pkg = pkgs.yq-go; description = "YAML processor (inspired by jq)"; }
@@ -18,11 +18,16 @@ let
   ];
 in
 {
-  options.rhodium.home.apps.terminal.utils.${categoryName} = {
-    enable = mkEnableOption "Rhodium's ${categoryName} terminal utils";
-  } // rhodium.lib.mkIndividualPackageOptions packageSpecs;
+  options = setAttrByPath _haumea.configPath (
+    rhodiumLib.mkAppModuleOptions
+      {
+        appName = categoryName;
+        appDescription = "${rhodiumLib.metadata.appName}'s ${categoryName} terminal utils";
+        hasDesktop = false;
+      } // rhodiumLib.mkIndividualPackageOptions packageSpecs
+  );
 
-  config = mkIf cfg.enable {
-    home.packages = concatMap (spec: if cfg.${spec.name}.enable then [ spec.pkg ] else [ ]) packageSpecs;
+  config = rhodiumLib.mkChildConfig parentCfg cfg {
+    home.packages = rhodiumLib.getEnabledPackages cfg packageSpecs;
   };
 }

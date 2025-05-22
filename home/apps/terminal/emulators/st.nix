@@ -1,17 +1,19 @@
-# home/apps/terminals/emulators/st.nix
+# home/apps/terminal/emulators/st.nix
 
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, _haumea, rhodiumLib, ... }:
 
 with lib;
 let
-  cfg = config.rhodium.home.apps.terminals.emulators.st;
+  cfg = getAttrFromPath _haumea.configPath config;
+  parentCfg = getAttrFromPath (lists.init _haumea.configPath) config;
+  categoryName = _haumea.name;
 in
 {
-  options.rhodium.home.apps.terminals.emulators.st = {
-    enable = mkEnableOption "Rhodium's ST configuration";
+  options = setAttrByPath _haumea.configPath {
+    enable = mkEnableOption "Rhodium's ${categoryName} configuration";
   };
 
-  config = mkIf cfg.enable {
+  config = rhodiumLib.mkChildConfig parentCfg cfg {
     home.packages = with pkgs; [
       st
     ];

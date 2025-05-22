@@ -1,30 +1,31 @@
 # home/desktop/wm/hyprcursor.nix
 
-{ lib, config, pkgs, inputs, ... }:
+{ lib, config, pkgs, rhodium, inputs, ... }:
 
 with lib;
 let
   cfg = config.rhodium.home.desktop.wm.hyprcursor;
+  parentCfg = config.rhodium.home.desktop.wm;
+
   cursorTheme = "rose-pine";
   cursorSize = 24;
 
   rosePineHyprcursorPackage =
     if inputs ? rose-pine-hyprcursor &&
-      inputs.rose-pine-hyprcursor ? packages &&
-      inputs.rose-pine-hyprcursor.packages ? ${pkgs.system} &&
-      inputs.rose-pine-hyprcursor.packages.${pkgs.system} ? default
+       inputs.rose-pine-hyprcursor ? packages &&
+       inputs.rose-pine-hyprcursor.packages ? ${pkgs.system} &&
+       inputs.rose-pine-hyprcursor.packages.${pkgs.system} ? default
     then inputs.rose-pine-hyprcursor.packages.${pkgs.system}.default
     else null;
-
 in
 {
   options.rhodium.home.desktop.wm.hyprcursor = {
-    enable = mkEnableOption "Rhodium's Hyprcursor configuration";
+    enable = mkEnableOption "Rhodium's Hyprcursor configuration" // { default = false; };
     theme = mkOption { type = types.str; default = "rose-pine"; };
     size = mkOption { type = types.int; default = 24; };
   };
 
-  config = mkIf cfg.enable {
+  config = rhodium.lib.mkChildConfig parentCfg cfg {
     home.packages = with pkgs; [
       hyprcursor
     ] ++ (lib.optional (rosePineHyprcursorPackage != null) rosePineHyprcursorPackage);

@@ -1,17 +1,21 @@
-# home/apps/terminals/emulators/ghostty.nix
+# home/apps/terminal/emulators/ghostty.nix
 
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, _haumea, rhodiumLib, ... }:
 
 with lib;
 let
-  cfg = config.rhodium.home.apps.terminals.emulators.ghostty;
+  cfg = getAttrFromPath _haumea.configPath config;
+  parentCfg = getAttrFromPath (lists.init _haumea.configPath) config;
+  categoryName = _haumea.name;
+  appNamePossessive = rhodiumLib.metadata.appNamePossessive;
+  optionDescription = "${appNamePossessive} ${categoryName} configuration";
 in
 {
-  options.rhodium.home.apps.terminals.emulators.ghostty = {
-    enable = mkEnableOption "Rhodium's Ghostty configuration";
+  options = setAttrByPath _haumea.configPath {
+    enable = mkEnableOption optionDescription;
   };
 
-  config = mkIf cfg.enable {
+  config = rhodiumLib.mkChildConfig parentCfg cfg {
     programs.ghostty = {
       enable = true;
       enableZshIntegration = true;

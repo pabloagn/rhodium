@@ -1,14 +1,53 @@
 # home/shell/common/aliases.nix
 
+# TODO: Complete this file properly:
+# - Add more aliases
+# - Use conditional packaging
+
 {
   # List
-  l = "eza --icons";
-  ls = "eza --icons -l -T -L=1";
+  # -------------------------------------
+
+  # List List Clean
+  llc = "eza -1";
+
+  # List All Clean
+  lac = "eza -1a";
+
+  # List List Details
+  lld = "eza -l";
+
+  # List All Details
+  lad = "eza -la";
+
+  # List List Icons
+  lli = "eza --icons -l";
+
+  # List All Icons
+  lai = "eza --icons -la";
+
   l2 = "eza --icons -l -T -L=2";
   l3 = "eza --icons -l -T -L=3";
-  la = "eza --icons -la -T -L=1";
+
+  # List List Tree
+  llt = "eza -T";
+
+  # List All Tree
+  lat = "eza -Ta";
+  lat1 = "eza -Ta -L=1";
+  lat2 = "eza -Ta -L=2";
+  lat3 = "eza -Ta -L=3";
+  lat4 = "eza -Ta -L=4";
+  lat5 = "eza -Ta -L=5";
+
+  # List List Tree Yank
+  llty = "eza -T | wl-copy";
+
+  # List All Tree Yank
+  laty = "eza -Ta | wl-copy";
 
   # Navigation
+  # -------------------------------------
   cd = "z";
   ".." = "cd ..";
   "..." = "cd ../..";
@@ -16,20 +55,31 @@
   "....." = "cd ../../../..";
 
   # View
+  # -------------------------------------
   cat = "bat";
   lf = "yy";
 
   # Search
+  # -------------------------------------
+
+  # Locate (requires plocate)
+  locate = "plocate";
+
+  # Find (simple)
   fd = "fd -Lu";
   find = "fd";
-  grep = "rg";
+
+  # Ripgrep-All (requires ripgrep-all)
+  grep = "rga";
 
   # Editor
+  # -------------------------------------
   vim = "hx";
   vi = "hx";
   v = "hx";
 
   # General
+  # -------------------------------------
   cl = "clear";
   htop = "btm";
   neofetch = "disfetch";
@@ -47,12 +97,13 @@
 
   # Git
   gst = "git status";
-  gad = "git add *";
-  gpu = "git push -u origin master";
+  gad = "git add .";
+  gcm = "git commit -m";
+  gpu = "git push -u origin main";
   grm = "git rm -r --cached .";
 
-  # VS Code
-  # Fix the annoying ozone warning (does not affect functionality)
+  # IDEs
+  # Fix the annoying ozone warning for Electron apps (does not affect functionality)
   code = "code 2>/dev/null";
   cursor = "cursor 2>/dev/null";
 }

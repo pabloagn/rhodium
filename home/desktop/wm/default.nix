@@ -1,10 +1,12 @@
 # home/desktop/wm/default.nix
 
-{ config, lib, pkgs, inputs ? {}, ... }:
+{ config, lib, pkgs, rhodium, inputs ? { }, ... }:
 
 with lib;
 let
   cfg = config.rhodium.home.desktop.wm;
+  parentCfg = config.rhodium.home.desktop;
+  categoryName = "wm";
 in
 {
   imports = [
@@ -14,14 +16,12 @@ in
   ];
 
   options.rhodium.home.desktop.wm = {
-    enable = mkEnableOption "Rhodium's Window Manager";
+    enable = mkEnableOption "Rhodium's Desktop ${categoryName}" // { default = false; };
   };
 
-  config = mkIf cfg.enable {
-    rhodium.home.desktop.wm = {
-      hyprland.enable = true;
-      hyprcursor.enable = true;
-      hyprpaper.enable = true;
-    };
+  config = rhodium.lib.mkChildConfig parentCfg cfg {
+    hyprland.enable = false;
+    hyprcursor.enable = false;
+    hyprpaper.enable = false;
   };
 }
