@@ -41,6 +41,7 @@ in
       libDir = pjoin [ flakeRootPathStr "lib" ];
       assetsDir = pjoin [ libDir "assets" ];
       desktopDir = pjoin [ libDir "desktop" ];
+      defaultsDir = pjoin [ libDir "defaults" ];
       optionsDir = pjoin [ libDir "options" ];
       inspectorsDir = pjoin [ libDir "inspectors" ];
       pathsDir = pjoin [ libDir "paths" ];

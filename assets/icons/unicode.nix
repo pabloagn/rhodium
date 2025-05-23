@@ -1,4 +1,6 @@
-# unicode.nix - Unicode character definitions for NixOS with code points
+# assets/icons/unicode.nix
+# Standard Unicode character definitions for NixOS with code points
+
 {
   unicode = {
     # Arrows
@@ -73,6 +75,8 @@
       doublePrime = { char = "″"; code = "U+2033"; };
       triplePrime = { char = "‴"; code = "U+2034"; };
       empty = { char = "∅"; code = "U+2205"; };
+      aplUpCaret = { char = "⎉"; code = "U+2389"; };
+      lambda = { char = "λ"; code = "U+03BB"; };
     };
 
     # Checkboxes and status indicators
@@ -134,6 +138,7 @@
       mute = { char = "🔇"; code = "U+1F507"; };
       volumeDown = { char = "🔉"; code = "U+1F509"; };
       volumeUp = { char = "🔊"; code = "U+1F50A"; };
+      settings = { char = "⚙"; code = "U+2699"; };
     };
 
     # Currency
@@ -172,7 +177,7 @@
       doubleDagger = { char = "‡"; code = "U+2021"; };
     };
 
-    # Brackets and separators - Expanded
+    # Brackets and separators
     brackets = {
       leftParenthesis = { char = "("; code = "U+0028"; };
       rightParenthesis = { char = ")"; code = "U+0029"; };
@@ -244,19 +249,57 @@
       caretDown = { char = "▾"; code = "U+25BE"; };
       caretLeft = { char = "◂"; code = "U+25C2"; };
       caretRight = { char = "▸"; code = "U+25B8"; };
-      singleLeft = { char = "❮"; code = "U+276E"; };
-      singleRight = { char = "❯"; code = "U+276F"; };
-      doubleLeft = { char = "«"; code = "U+00AB"; };
-      doubleRight = { char = "»"; code = "U+00BB"; };
-      star = { char = "★"; code = "U+2605"; };
-      emptyStar = { char = "☆"; code = "U+2606"; };
+      singleLeft = { char = "❮"; code = "U+276E"; }; # Duplicate, keeping for original key consistency
+      singleRight = { char = "❯"; code = "U+276F"; }; # Duplicate, keeping for original key consistency
+      doubleLeft = { char = "«"; code = "U+00AB"; }; # Duplicate, keeping for original key consistency
+      doubleRight = { char = "»"; code = "U+00BB"; }; # Duplicate, keeping for original key consistency
+      star = { char = "★"; code = "U+2605"; }; # Duplicate, keeping for original key consistency
+      emptyStar = { char = "☆"; code = "U+2606"; }; # Duplicate, keeping for original key consistency
       halfStar = { char = "★☆"; code = "U+2605 U+2606"; };
       heart = { char = "♥"; code = "U+2665"; };
       emptyHeart = { char = "♡"; code = "U+2661"; };
       user = { char = "👤"; code = "U+1F464"; };
       search = { char = "🔍"; code = "U+1F50D"; };
       external = { char = "⬀"; code = "U+2B00"; };
-      home = { char = "⌂"; code = "U+2302"; };
+      home = { char = "⌂"; code = "U+2302"; }; # Duplicate, keeping for original key consistency
     };
+
+    # Programming Languages (Only standard Unicode symbols relevant to programming)
+    programming = {
+      nushellArrow = { char = ">"; code = "U+003E"; }; # GREATER-THAN SIGN for nushell
+    };
+
+    # File System and Generic File Icons
+    files = {}; # No standard Unicode characters added from yazi config here
+
+    # OS and Environment Configurations
+    osAndEnvironments = {}; # No standard Unicode characters added from yazi config here
+
+    # Build Tools
+    buildTools = {}; # No standard Unicode characters added from yazi config here
+
+    # Source Control
+    sourceControl = {}; # No standard Unicode characters added from yazi config here
+
+    # Editors & IDEs
+    editors = {}; # No standard Unicode characters added from yazi config here
+
+    # CAD and 3D Modeling
+    cadAnd3d = {}; # No standard Unicode characters added from yazi config here
+
+    # Design and Media
+    designAndMedia = {}; # No standard Unicode characters added from yazi config here
+
+    # Documents and Ebooks
+    documents = {}; # No standard Unicode characters added from yazi config here
+
+    # Web Development and Frontend
+    web = {}; # No standard Unicode characters added from yazi config here
+
+    # Security related Icons
+    security = {}; # No standard Unicode characters added from yazi config here
+
+    # Miscellaneous Icons
+    misc = {}; # No standard Unicode characters added from yazi config here
   };
 }

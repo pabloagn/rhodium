@@ -38,6 +38,7 @@ let
   desktopLib = import rhodiumPathsLib.desktopDir { inherit lib pkgs pkgs-unstable inputs; };
   optionsLib = import rhodiumPathsLib.optionsDir { inherit lib; };
   inspectorsLib = import rhodiumPathsLib.inspectorsDir { inherit lib; };
+  defaultsLib = import rhodiumPathsLib.defaultsDir { inherit lib; };
 
   # New assets module
   assetsLib = import rhodiumPathsLib.assetsDir { inherit lib pkgs pkgs-unstable inputs; };
