@@ -1,0 +1,8 @@
+{}:
+{
+  imports = [
+    ./browsers
+    ./editors
+    ./terminals
+  ];
+}

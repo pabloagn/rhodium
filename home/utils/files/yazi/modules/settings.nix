@@ -1,0 +1,6 @@
+{ config, ... }:
+{
+  programs.yazi = {
+    settings = { };
+  };
+}

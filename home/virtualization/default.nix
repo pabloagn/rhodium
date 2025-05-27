@@ -1,20 +1,8 @@
-# home/virtualization/default.nix
+{ pkgs, ... }:
 
-{ lib, config, pkgs, _haumea, rhodiumLib, ... }:
-
-with lib;
-let
-  cfg = getAttrFromPath _haumea.configPath config;
-  parentCfg = getAttrFromPath (lists.init _haumea.configPath) config;
-  categoryName = _haumea.name;
-in
 {
-  options = setAttrByPath _haumea.configPath {
-    enable = mkEnableOption "Rhodium's ${categoryName} configurations" // { default = false; };
-  };
-
-  config = rhodiumLib.mkChildConfig parentCfg cfg {
-    containers.enable = false;
-    vm.enable = false;
-  };
+  imports = [
+    ./containers
+    ./vm
+  ];
 }

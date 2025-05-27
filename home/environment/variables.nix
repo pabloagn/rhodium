@@ -1,74 +1,97 @@
 # home/environment/variables.nix
 
-{ lib, config, pkgs, _haumea, rhodiumLib, ... }:
+{ lib, config, pkgs, pkgs-unstable, ... }:
 
 with lib;
 let
-  moduleCfg = getAttrFromPath _haumea.configPath config;
-  preferredApps = config.rhodium.home.environment.preferredApps;
-  homeDir = config.home.homeDirectory;
-
-  xdgSessionVars = rhodiumLib.mkXdgSessionVariables homeDir;
-  rhodiumSessionVars = rhodiumLib.mkRhodiumSessionVariables homeDir;
-
-  mkPreferredAppAssertion = (prefKeyName: defaultAppName: appTypeDesc:
-    let
-      chosenAppName = preferredApps.${prefKeyName} or defaultAppName;
-    in
-    {
-      assertion = pkgs ? ${chosenAppName};
-      message = ''
-        Rhodium Configuration Error: Your preferred ${appTypeDesc} ('${chosenAppName}')
-        specified via 'rhodium.home.environment.preferredApps.${prefKeyName}'
-        is not a known package attribute (i.e., pkgs.${chosenAppName} does not exist).
-
-        This will cause a build failure. To resolve this, please ensure:
-        1. The application name ('${chosenAppName}') is spelled correctly in your profile.
-        2. The corresponding Rhodium module for this application is enabled in your profile,
-           which should make the package available (e.g., through home.packages or programs.<name>.package).
-           Example: rhodium.home.apps.terminal.emulators.${chosenAppName}.enable = true;
-        3. If it's a custom package not managed by a Rhodium module, ensure it's correctly
-           added to your 'pkgs' set via overlays.
-      '';
-    });
-
+  cfg = config.preferredApps;
 in
 {
-  options = setAttrByPath _haumea.configPath {
-    enable = mkEnableOption "${rhodiumLib.metadata.appName}'s environment variables";
-  };
+  options.preferredApps = {
+    browser = mkOption {
+      type = types.str;
+      default = "firefox";
+      description = "Default web browser";
+    };
 
-  config = mkIf moduleCfg.enable {
-    assertions = [
-      (mkPreferredAppAssertion "browser" "firefox" "Web Browser")
-      (mkPreferredAppAssertion "editor" "hx" "Text Editor")
-      (mkPreferredAppAssertion "terminal" "ghostty" "Terminal Emulator")
-      (mkPreferredAppAssertion "imageViewer" "feh" "Image Viewer")
-      (mkPreferredAppAssertion "videoPlayer" "mpv" "Video Player")
-      (mkPreferredAppAssertion "audioPlayer" "clementine" "Audio Player")
-      (mkPreferredAppAssertion "pdfViewer" "zathura" "PDF Viewer")
-      (mkPreferredAppAssertion "wm" "hyprland" "Window Manager")
-    ];
+    editor = mkOption {
+      type = types.str;
+      default = "hx";
+      description = "Default text editor";
+    };
 
-    home.sessionVariables = xdgSessionVars // rhodiumSessionVars // {
-      # Application variables
-      BROWSER = preferredApps.browser or "firefox";
-      EDITOR = preferredApps.editor or "hx";
-      VISUAL = preferredApps.editor or "hx";
-      SUDO_EDITOR = preferredApps.editor or "hx";
-      TERMINAL = preferredApps.terminal or "ghostty";
-      IMAGE_VIEWER = preferredApps.imageViewer or "feh";
-      VIDEO_PLAYER = preferredApps.videoPlayer or "mpv";
-      AUDIO_PLAYER = preferredApps.audioPlayer or "clementine";
-      PDF_VIEWER = preferredApps.pdfViewer or "zathura";
-      WM = preferredApps.wm or "hyprland";
+    terminal = mkOption {
+      type = types.str;
+      default = "ghostty";
+      description = "Default terminal emulator";
+    };
 
-      # Application-specific variables
-      HISTFILE = "${xdgSessionVars.XDG_CACHE_HOME}/zsh/.zsh_history";
-      NODE_REPL_HISTORY = "${xdgSessionVars.XDG_CACHE_HOME}/node/.node_repl_history";
-      PYTHON_HISTORY = "${xdgSessionVars.XDG_CACHE_HOME}/python/.python_history";
-      LESSHISTFILE = "/dev/null";
-      KEYTIMEOUT = 1;
+    imageViewer = mkOption {
+      type = types.str;
+      default = "feh";
+      description = "Default image viewer";
+    };
+
+    videoPlayer = mkOption {
+      type = types.str;
+      default = "mpv";
+      description = "Default video player";
+    };
+
+    audioPlayer = mkOption {
+      type = types.str;
+      default = "clementine";
+      description = "Default audio player";
+    };
+
+    pdfViewer = mkOption {
+      type = types.str;
+      default = "zathura";
+      description = "Default PDF viewer";
+    };
+
+    wm = mkOption {
+      type = types.str;
+      default = "hyprland";
+      description = "Default window manager";
+    };
+
+    pager = mkOption {
+      type = types.str;
+      default = "most";
+      description = "Default pager";
     };
   };
+
+  # TODO: Assertions
+  # User's environment variables
+  config.home.sessionVariables = {
+    BROWSER = cfg.browser;
+    EDITOR = cfg.editor;
+    VISUAL = cfg.editor;
+    SUDO_EDITOR = cfg.editor;
+    TERMINAL = cfg.terminal;
+    IMAGE_VIEWER = cfg.imageViewer;
+    VIDEO_PLAYER = cfg.videoPlayer;
+    AUDIO_PLAYER = cfg.audioPlayer;
+    PDF_VIEWER = cfg.pdfViewer;
+    WM = cfg.wm;
+    PAGER = cfg.pager;
+    MANPAGER = cfg.pager;
+
+    # NOTE: We needed to set this since NixOS doesn't have a default XDG_BIN_HOME
+    XDG_BIN_HOME = "${config.home.homeDirectory}/.local/bin";
+
+    # Application-specific variables
+    HISTFILE = "${config.xdg.cacheHome}/zsh/.zsh_history";
+    NODE_REPL_HISTORY = "${config.xdg.cacheHome}/node/.node_repl_history";
+    PYTHON_HISTORY = "${config.xdg.cacheHome}/python/.python_history";
+    LESSHISTFILE = "/dev/null";
+    KEYTIMEOUT = "1";
+  };
+
+  # Environment variables which are included in PATH
+  config.home.sessionPath = [
+    config.home.sessionVariables.XDG_BIN_HOME
+  ];
 }

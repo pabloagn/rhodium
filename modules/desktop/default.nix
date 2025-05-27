@@ -1,21 +1,10 @@
-# modules/desktop/default.nix
+{ config, pkgs, ... }:
 
-{ config, lib, pkgs, ... }:
-
-with lib;
-let
-  cfg = config.rhodium.system.desktop;
-in
 {
   imports = [
-    ./wm
-    ./apps
+    ./bar
+    ./fonts
+    ./files
+    ./notifications
   ];
-
-  options.rhodium.system.desktop = {
-    enable = mkEnableOption "Rhodium's desktop configuration";
-  };
-
-  config = mkIf cfg.enable {
-  };
 }

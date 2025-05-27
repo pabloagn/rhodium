@@ -1,5 +1,0 @@
-# users/default.nix
-
-{ lib }:
-
-{ }

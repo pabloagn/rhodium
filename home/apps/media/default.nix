@@ -1,23 +1,54 @@
-# home/apps/media/default.nix
-
-{ config, lib, pkgs, _haumea, rhodiumLib, ... }:
-
-with lib;
-let
-  cfg = getAttrFromPath _haumea.configPath config;
-  parentCfg = getAttrFromPath (lists.init _haumea.configPath) config;
-in
+{ pkgs, ... }:
+# TODO: Organize this
 {
-  options = setAttrByPath _haumea.configPath {
-    enable = mkEnableOption "Media applications";
-  };
+  home.packages = with pkgs; [
+    audacious
+    audacity
+    blender
 
-  config = rhodiumLib.mkChildConfig parentCfg cfg {
-    audio.enable = false;
-    automations.enable = false;
-    books.enable = false;
-    image.enable = false;
-    torrent.enable = false;
-    video.enable = false;
-  };
+    # A professional review software for VFX, animation, and film production
+    # Used to view EXR sequences
+    # djv
+
+    # Equalizer for PipeWire
+    easyeffects
+
+    exiv2
+    feh
+    # Unofficial Figma client for Linux
+    figma-linux
+
+    # A tool for converting video formats & ripping DVDs
+    handbrake
+
+    imagemagick
+    inkscape
+    mpv
+    obs-studio
+
+    # Plex
+    # Plex server
+    plex
+
+    # Plex amp
+    plexamp
+
+    playerctl
+    spotify
+
+    # Tidal GUI running on Electron
+    tidal-hifi
+
+    # Transmission GUI
+    transmission_4-qt
+
+    # QBitorrent
+    # qbittorrent
+
+    sxiv
+    tidal-dl
+    ulauncher
+    vlc
+    yt-dlp
+  ];
 }

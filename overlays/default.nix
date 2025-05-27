@@ -1,6 +1,0 @@
-# overlays/default.nix
-
-{ inputs, ... }:
-
-{
-}
