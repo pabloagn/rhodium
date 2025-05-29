@@ -3,6 +3,9 @@
 {
   programs.git = {
     enable = true;
+    delta = {
+      enable = true;
+    };
     config = {
       user.name = user.fullName;
       user.email = user.email;

@@ -2,6 +2,6 @@
 
 {
   imports = [
-    ./hyprland/hyprland.nix
+    ./hyprland.nix
   ];
 }

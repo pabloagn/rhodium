@@ -4,6 +4,7 @@ let
   inherit (lib) mkOption types;
 
   # Base paths - defined once
+  # NOTE: These are provided by NixOS home manager
   xdgDataHome = config.xdg.dataHome;
   xdgConfigHome = config.xdg.configHome;
   xdgCacheHome = config.xdg.cacheHome;
@@ -15,6 +16,7 @@ let
   logosPath = "${iconsPath}/logos";
   fontsPath = "${xdgDataHome}/fonts";
   wallpapersPath = "${xdgDataHome}/wallpapers";
+  # NOTE: we need to build this since NixOS does not provide the spec
   localBinPath = "${homeDirectory}/.local/bin";
 in
 

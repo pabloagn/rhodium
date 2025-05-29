@@ -1,8 +1,12 @@
 { pkgs, ... }:
 
 {
+  imports = [
+    ./kakoune
+  ];
+
   programs.kakoune = {
     enable = true;
-    package = pkgs.kakoune-unwrapped;
+    package = pkgs.kakoune;
   };
 }

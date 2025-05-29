@@ -1,46 +1,95 @@
-{ lib, pkgs, config }:
+{ lib }:
 
 let
-  pathGenerators = import ./pathGenerators.nix { inherit config lib pkgs; };
+  # Browser-specific argument templates
+  browserConfigs = {
+    firefox = {
+      profileFlag = "-P";
+      newWindowFlag = "-new-window";
+      executable = "firefox";
+    };
+    zen = {
+      profileFlag = "--profile";
+      newWindowFlag = "--new-window";
+      executable = "zen-browser";
+    };
+    chromium = {
+      profileFlag = "--profile-directory";
+      newWindowFlag = "--new-window";
+      executable = "chromium";
+    };
+    brave = {
+      profileFlag = "--profile-directory";
+      newWindowFlag = "--new-window";
+      executable = "brave";
+    };
+  };
 
-  resolveIcon = icon:
-    if icon != null && icon != ""
-    then pathGenerators.generators.getLogoPath icon
-    else null;
+  # Capitalize first letter for descriptions
+  capitalize = str:
+    lib.toUpper (lib.substring 0 1 str) + lib.substring 1 (-1) str;
+
+  # Bookmark generator: Browser + profile + URL
+  mkBookmark = userPreferences: name: bookmark:
+    let
+      defaultBrowser = userPreferences.apps.browser;
+      browser = bookmark.browser or defaultBrowser;
+      browserConfig = browserConfigs.${browser} or browserConfigs.${defaultBrowser};
+      profileName = userPreferences.profiles.${browser}.${bookmark.profile} or bookmark.profile;
+    in {
+      binary = browserConfig.executable;
+      args = [
+        browserConfig.profileFlag
+        profileName
+        browserConfig.newWindowFlag
+        bookmark.url
+      ];
+      icon = browser;
+      description = "${capitalize browser} ${profileName} | ${bookmark.description}";
+    };
+
+  # Profile generator: Browser + profile only
+  mkProfile = userPreferences: name: profile:
+    let
+      defaultBrowser = userPreferences.apps.browser;
+      browser = profile.browser or defaultBrowser;
+      browserConfig = browserConfigs.${browser} or browserConfigs.${defaultBrowser};
+      profileName = userPreferences.profiles.${browser}.${profile.profile} or profile.profile;
+    in {
+      binary = browserConfig.executable;
+      args = [
+        browserConfig.profileFlag
+        profileName
+        browserConfig.newWindowFlag
+      ];
+      icon = browser;
+      description = "${capitalize browser} ${profileName} | ${profile.description}";
+    };
+
+  # App generator: Custom binary + flexible args
+  mkApp = userPreferences: name: app: {
+    binary = app.binary;
+    args = app.args;
+    icon = app.icon;
+    description = app.description;
+  };
 
 in
 {
-  generateDesktopEntries = config: dataFile:
-    let
-      entries = import dataFile { inherit config; };
-    in
-    lib.mapAttrs
-      (name: entry:
-        pkgs.makeDesktopItem (entry // {
-          icon = resolveIcon entry.icon;
-        })
-      )
-      entries;
+  inherit mkBookmark mkProfile mkApp;
 
-  generateBookmarkEntries = config: dataFile:
+  # Generate all entries from imported data
+  generateAllEntries = userPreferences: userExtras:
     let
-      bookmarks = import dataFile { inherit config; };
+      # Partially apply userPreferences to each generator function
+      bookmarkGen = mkBookmark userPreferences;
+      profileGen = mkProfile userPreferences;
+      appGen = mkApp userPreferences;
 
-      bookmarkToDesktopEntry = name: bookmark: {
-        inherit name;
-        desktopName = bookmark.desktopName;
-        genericName = "Bookmark";
-        # TODO: Add browser switching logic here, but right now fine.
-        exec = "${pkgs.firefox}/bin/firefox -P ${bookmark.profileName} ${if bookmark.newWindow or false then "--new-window" else ""} ${bookmark.url}";
-        icon = resolveIcon bookmark.icon;
-        comment = "Open ${bookmark.desktopName} in ${bookmark.browser or config.preferredApps.browser}";
-        categories = [ "Network" "WebBrowser" ];
-        type = "Application";
-      };
+      # Generate entries for each type
+      bookmarkEntries = lib.mapAttrs bookmarkGen userExtras.bookmarksData;
+      profileEntries = lib.mapAttrs profileGen userExtras.profilesData;
+      appEntries = lib.mapAttrs appGen userExtras.appsData;
     in
-    lib.mapAttrs
-      (name: bookmark:
-        pkgs.makeDesktopItem (bookmarkToDesktopEntry name bookmark)
-      )
-      bookmarks;
+    bookmarkEntries // profileEntries // appEntries;
 }

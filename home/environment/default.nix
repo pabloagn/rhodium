@@ -2,7 +2,6 @@
 
 {
   imports = [
-    ./variables.nix
     ./mime.nix
   ];
 }

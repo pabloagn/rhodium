@@ -1,14 +1,11 @@
-{ lib, pkgs, ... }:
+{ lib, pkgs, config, ... }:
 
 {
   formatters = {
-    iconFormatter = import ./formatters/iconFormatter.nix { inherit lib; };
+    iconFormatter = import ./formatters/iconFormatter.nix;
   };
-
   generators = {
-    assetLinker = import ./generators/assetLinker.nix;
-    desktopGenerators = import ./generators/desktopGenerators.nix;
-    pathGenerators = import ./generators/pathGenerators.nix;
-    scriptLinker = import ./generators/scriptLinker.nix;
+    desktopGenerators = import ./generators/desktopGenerators.nix { inherit lib; };
+    pathGenerators = import ./generators/pathGenerators.nix { inherit lib pkgs config; };
   };
 }

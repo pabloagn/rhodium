@@ -1,6 +1,6 @@
-# flake.nix
 {
   description = "Rhodium | A Hypermodular NixOS System";
+
   inputs = {
     nixpkgs = {
       url = "github:NixOS/nixpkgs/nixos-25.05";
@@ -35,66 +35,92 @@
       inputs.hyprlang.follows = "hyprland/hyprlang";
     };
   };
-  outputs =
-    { self
-    , nixpkgs
-    , nixpkgs-unstable
-    , home-manager
-    , nur
-    , zen-browser
-    }@inputs:
+
+  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, nur, zen-browser }@inputs:
     let
       lib = nixpkgs.lib;
       system = "x86_64-linux";
       pkgs = import nixpkgs {
         inherit system;
         config.allowUnfree = true;
-        overlays = [
-          nur.overlay
-        ];
+        overlays = [ nur.overlay ];
       };
-
       pkgs-unstable = import nixpkgs-unstable {
         inherit system;
         config.allowUnfree = true;
-        overlays = [
-          nur.overlay
-        ];
+        overlays = [ nur.overlay ];
       };
 
       rhodiumLib = import ./lib { inherit lib pkgs; };
+
+      # Data paths
       dataPath = ./data;
       dataPathUsers = dataPath + "/users/";
+      dataPathUserExtras = dataPathUsers + "/extras/";
+      dataPathUserPreferences = dataPathUsers + "/preferences/";
       dataPathHosts = dataPath + "/hosts/";
-      userData =
-        if builtins.pathExists dataPathUsers + "/users.nix"
+
+      # Import user data
+      userData = if builtins.pathExists (dataPathUsers + "/users.nix")
         then (import (dataPathUsers + "/users.nix")).users
         else { };
-      hostData =
-        if builtins.pathExists dataPathHosts + "/hosts.nix"
+
+      # Import user preferences
+      userPreferences = if builtins.pathExists dataPathUserPreferences
+        then (import dataPathUserPreferences)
+        else { };
+
+      # Import and pack all user extras data
+      userExtras = {
+        path = dataPathUserExtras;
+        bookmarksData = if builtins.pathExists (dataPathUserExtras + "/bookmarks.nix")
+          then import (dataPathUserExtras + "/bookmarks.nix")
+          else { };
+        profilesData = if builtins.pathExists (dataPathUserExtras + "/profiles.nix")
+          then import (dataPathUserExtras + "/profiles.nix")
+          else { };
+        appsData = if builtins.pathExists (dataPathUserExtras + "/apps.nix")
+          then import (dataPathUserExtras + "/apps.nix")
+          else { };
+      };
+
+      # Import host data
+      hostData = if builtins.pathExists (dataPathHosts + "/hosts.nix")
         then (import (dataPathHosts + "/hosts.nix")).hosts
         else { };
 
-      themeConfig = import ./home/assets/themes/chiaroscuro.nix { inherit pkgs; };
-    in
-    {
+      # Theme selection logic
+      getThemeConfig = themeName: variant:
+        let
+          themePath = ./home/assets/themes + "/${themeName}.nix";
+          themeConfig = if builtins.pathExists themePath
+            then import themePath { inherit pkgs; }
+            else import ./home/assets/themes/chiaroscuro.nix { inherit pkgs; };
+        in
+        if variant == "light" && themeConfig.theme ? light
+          then themeConfig.theme.light
+          else themeConfig.theme.dark;
+
+      # Get user's theme preferences with fallbacks
+      userThemeName = userPreferences.theme.name or "chiaroscuro";
+      userThemeVariant = userPreferences.theme.variant or "dark";
+      selectedTheme = getThemeConfig userThemeName userThemeVariant;
+
+    in {
       nixosConfigurations = {
         host_001 = lib.nixosSystem {
           inherit system;
-          modules = [
-            ./hosts/host_001
-          ];
+          modules = [ ./hosts/host_001 ];
           specialArgs = {
             inherit pkgs pkgs-unstable inputs rhodiumLib;
             users = userData;
             host = hostData.host_001 or { };
           };
         };
+
         host_002 = lib.nixosSystem {
           inherit system;
-          modules = [
-            ./hosts/host_002
-          ];
+          modules = [ ./hosts/host_002 ];
           specialArgs = {
             inherit pkgs pkgs-unstable inputs rhodiumLib;
             users = userData;
@@ -102,16 +128,16 @@
           };
         };
       };
+
       homeConfigurations = {
         user_001 = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
-          modules = [
-            ./users/user_001
-          ];
+          modules = [ ./users/user_001 ];
           extraSpecialArgs = {
             inherit pkgs-unstable inputs rhodiumLib;
             user = userData.user_001 or { };
-            theme = themeConfig.theme.dark;
+            theme = selectedTheme;
+            inherit userPreferences userExtras;
           };
         };
       };

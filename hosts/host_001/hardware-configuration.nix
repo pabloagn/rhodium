@@ -1,5 +1,3 @@
-# hosts/host_001/hardware-configuration.nix
-
 { config, lib, modulesPath, ... }:
 
 {

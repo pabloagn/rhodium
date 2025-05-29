@@ -1,29 +1,26 @@
 { lib, config, pkgs, ... }:
-
 with lib;
-
 let
   cfg = config.assets;
 
-  assetLinker = import ../../Lib/generators/assetLinker.nix { inherit config lib pkgs; };
+  repoAssetsPath = "${config.home.homeDirectory}/.config/home-manager/home/assets";
 
+  mkAssetLink = enable: targetPath: sourceSubdir:
+    mkIf enable {
+      home.file."${targetPath}".source =
+        config.lib.file.mkOutOfStoreSymlink "${repoAssetsPath}/${sourceSubdir}";
+    };
 in
 {
   options.assets = {
     icons.enable = mkEnableOption "Link icons directory to XDG data home";
     wallpapers.enable = mkEnableOption "Link wallpapers directory to XDG data home";
-    fonts.enable = mkEnableOption "Link fonts directory to XDG data home";
-
-    # Optional: Allow custom source directory
-    sourceDirectory = mkOption {
-      type = types.str;
-      default = "${config.home.homeDirectory}/assets";
-      description = "Source directory containing asset folders";
-    };
+    fonts.enable = mkEnableOption "Link fonts directory to fonts path";
   };
 
-  config = mkIf (cfg.icons.enable || cfg.wallpapers.enable || cfg.fonts.enable)
-    (assetLinker.linkAssets {
-      inherit (cfg) icons wallpapers fonts sourceDirectory;
-    });
+  config = mkMerge [
+    (mkAssetLink cfg.icons.enable "${config.xdg.dataHome}/icons" "icons")
+    (mkAssetLink cfg.wallpapers.enable "${config.xdg.dataHome}/wallpapers" "wallpapers")
+    (mkAssetLink cfg.fonts.enable "${config.home.homeDirectory}/.local/share/fonts" "fonts")
+  ];
 }

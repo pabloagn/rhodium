@@ -3,6 +3,7 @@
 {
   imports = [
     ./containers
+    ./remote
     ./vm
   ];
 }

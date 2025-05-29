@@ -18,8 +18,12 @@
 
     # Authentication agent(sudo GUI prompts)
     # polkit_gnome
-
   ];
+
+  environment.sessionVariables = {
+    # Hint electron apps to use wayland
+    NIXOS_OZONE_WL = "1";
+    };
 
   programs.hyprland = {
     enable = true;
@@ -45,5 +49,4 @@
   # TODO: Check if we need this
   # For swaylock/hyprlock to work as login manager
   # security.pam.services.swaylock = {};  # Also works for hyprlock
-
 }

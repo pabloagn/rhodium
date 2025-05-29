@@ -1,11 +1,14 @@
 { pkgs, ... }:
 
 {
+  imports = [
+    ./obsidian.nix
+    ./okular.nix
+    ./texmaker.nix
+    ./zathura.nix
+  ];
+
   home.packages = with pkgs; [
-    obsidian
-    zathura
-    kdePackages.okular
-    texmaker
     # anytype
     # appflowy
     # logseq

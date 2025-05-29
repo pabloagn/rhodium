@@ -1,5 +1,5 @@
 { pkgs, ... }:
-
+# TODO: Add all extraPkgs for fonts
 {
   monospace = {
     anonymous-pro = {
@@ -16,31 +16,42 @@
       package = pkgs.dejavu_fonts;
       name = "DejaVu Sans Mono";
       style = "Monospace";
+      extraPackages = [
+        pkgs.nerd-fonts.dejavu-sans-mono
+      ];
     };
     fantasque-sans-mono = {
       package = pkgs.fantasque-sans-mono;
       name = "Fantasque Sans Mono";
       style = "Monospace";
+      extraPackages = [
+        pkgs.nerd-fonts.fantasque-sans-mono
+      ];
     };
     fira-code = {
       package = pkgs.fira-code;
       name = "Fira Code";
       style = "Monospace";
-    };
-    fira-code-symbols = {
-      package = pkgs.fira-code-symbols;
-      name = "Fira Code Symbols";
-      style = "Symbols";
+      extraPackages = [
+        pkgs.fira-code-symbols
+        pkgs.nerd-fonts.fira-code
+      ];
     };
     hack-font = {
       package = pkgs.hack-font;
       name = "Hack";
       style = "Monospace";
+      extraPackages = [
+        pkgs.nerd-fonts.hack
+      ];
     };
     ibm-plex-mono = {
       package = pkgs.ibm-plex;
       name = "IBM Plex Mono";
       style = "Monospace";
+      extraPackages = [
+        pkgs.nerd-fonts.im-writing
+      ];
     };
     inconsolata = {
       package = pkgs.inconsolata;

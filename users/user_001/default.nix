@@ -1,13 +1,12 @@
-{ user, theme, ... }:
+{ user, theme, userExtras, rhodiumLib, userPreferences, ... }:
 
 {
   imports = [
+    # Themes
     ../../home/assets/themes
-
     # Extra Modules
     ../../home/environment
     ../../home/modules
-
     # Main Modules
     ../../home/apps
     ../../home/development
@@ -17,34 +16,27 @@
     ../../home/virtualization
   ];
 
+  # Pass args to all modules
+  _module.args = {
+    inherit userExtras userPreferences rhodiumLib;
+  };
+
+  # Theme configuration
   theme = theme;
 
-  preferredApps = {
-    browser = "firefox";
-    editor = "hx";
-    terminal = "ghostty";
-    imageViewer = "feh";
-    videoPlayer = "mpv";
-    audioPlayer = "clementine";
-    pdfViewer = "zathura";
-    wm = "hyprland";
-    pager = "most";
+  # Asset linking
+  assets = {
+    icons.enable = true;
+    wallpapers.enable = true;
+    fonts.enable = true;
   };
 
-  # Desktop Entries
-  desktop = {
-    apps.enable = true;
-    profiles.enable = true;
-    bookmarks.enable = true;
-  };
-
-  # Script Linking
-  # WARNING: All scripts included here are included in PATH by default.
+  # Script linking - enables all scripts in home/scripts with chmod +x
   scripts.enable = true;
 
   home = {
-    username = user.username or "user";
-    homeDirectory = "/home/${user.username}";
+    username = user.username or "user_001";
+    homeDirectory = "/home/${user.username or "user_001"}";
     stateVersion = "25.05";
   };
 }

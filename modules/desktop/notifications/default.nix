@@ -4,7 +4,7 @@
   environment.systemPackages = with pkgs; [
     dunst
     libnotify
-    # tiramisu
-    # mako
+    tiramisu
+    # mako # Lightweight Wayland notification daemon
   ];
 }

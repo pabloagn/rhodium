@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ./rofi/rofi.nix
-    ./fuzzel/fuzzel.nix
+    ./rofi.nix
+    ./fuzzel.nix
   ];
 }

@@ -1,5 +1,3 @@
-
-
 { config, pkgs, ... }:
 
 {
@@ -15,13 +13,10 @@
     # For invisible cursors
     WLR_NO_HARDWARE_CURSORS = "1";
 
-    # Hint electron apps to use wayland
-    NIXOS_OZONE_WL = "1";
-
     # AMD-specific environment variables
     # NOTE: New additionfor screen artifact debugging
     AMD_VULKAN_ICD = "RADV";
-    };
+  };
 
   # OpenGL options
   hardware.graphics = {

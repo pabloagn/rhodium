@@ -1,9 +1,12 @@
 { pkgs, ... }:
 
 {
+  imports = [
+    ./emacs
+  ];
+
   programs.emacs = {
     enable = true;
-    package = pkgs.emacs-nox;
-    # package = pkgs.emacs;
+    package = pkgs.emacs;
   };
 }

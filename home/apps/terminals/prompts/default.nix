@@ -2,6 +2,6 @@
 
 {
   imports = [
-    ./starship/starship.nix
+    ./starship.nix
   ];
 }

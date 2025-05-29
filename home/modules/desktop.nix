@@ -1,40 +1,48 @@
-{ lib, config, pkgs, ... }:
-
-with lib;
+{ config, lib, pkgs, userPreferences, userExtras, rhodiumLib, ... }:
 
 let
-  cfg = config.desktop;
+  # Generate all desktop entries using rhodium lib
+  generatedEntries = rhodiumLib.generators.desktopGenerators.generateAllEntries
+    userPreferences
+    userExtras;
 
-  desktopGenerator = import ../../lib/generators/desktopGenerators.nix { inherit lib pkgs config; };
+  # Create YAML configuration for raffi launcher
+  yamlFormat = pkgs.formats.yaml {};
+  raffiConfig = yamlFormat.generate "raffi.yaml" generatedEntries;
 
-  # Import data files
-  # TODO: Eventually this is passed from the flake as user extra args
-  appsData = ../../data/users/desktop/apps.nix;
-  profilesData = ../../data/users/desktop/profiles.nix;
-  bookmarksData = ../../data/users/desktop/bookmarks.nix;
+  # Helper to safely quote arguments for .desktop files
+  escapeDesktopArg = arg:
+    if lib.hasInfix " " arg
+    then ''"${arg}"''
+    else arg;
 
-  generatedApps = optionalAttrs cfg.apps.enable
-    (desktopGenerator.generateDesktopEntries config appsData);
-
-  generatedProfiles = optionalAttrs cfg.profiles.enable
-    (desktopGenerator.generateDesktopEntries config profilesData);
-
-  generatedBookmarks = optionalAttrs cfg.bookmarks.enable
-    (desktopGenerator.generateBookmarkEntries config bookmarksData);
+  # Convert entries to .desktop file format
+  toDesktopEntry = name: entry: {
+    name = entry.description;
+    exec = "${entry.binary} ${lib.concatStringsSep " " (map escapeDesktopArg entry.args)}";
+    icon = entry.icon;
+    type = "Application";
+    categories = if lib.hasInfix "firefox" entry.binary || lib.hasInfix "zen" entry.binary || lib.hasInfix "chromium" entry.binary
+      then [ "Network" "WebBrowser" ]
+      else if lib.hasInfix "ghostty" entry.binary || lib.hasInfix "kitty" entry.binary
+      then [ "System" "TerminalEmulator" ]
+      else [ "Utility" "Application" ];
+    terminal = false;
+    startupNotify = true;
+  };
 
 in
 {
-  options.desktop = {
-    apps.enable = mkEnableOption "Desktop entries for applications";
-    profiles.enable = mkEnableOption "Desktop entries for browser profiles";
-    bookmarks.enable = mkEnableOption "Desktop entries for bookmarks";
+  # Place raffi configuration in proper location
+  xdg.configFile."raffi/raffi.yaml" = {
+    source = raffiConfig;
   };
 
-  config = mkIf (cfg.apps.enable || cfg.profiles.enable || cfg.bookmarks.enable) {
-    home.packages = flatten [
-      (attrValues generatedApps)
-      (attrValues generatedProfiles)
-      (attrValues generatedBookmarks)
-    ];
+  # Generate .desktop files for system integration
+  xdg.desktopEntries = lib.mapAttrs toDesktopEntry generatedEntries;
+
+  # Debug file for inspection
+  home.file."desktop-entries-debug.yaml" = {
+    source = raffiConfig;
   };
 }

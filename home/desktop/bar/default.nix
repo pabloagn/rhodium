@@ -2,7 +2,7 @@
 
 {
   imports = [
-    # ./eww/eww.nix
-    ./waybar/waybar.nix
+    ./eww.nix
+    ./waybar.nix
   ];
 }

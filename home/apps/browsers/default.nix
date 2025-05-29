@@ -1,16 +1,17 @@
-{ config, pkgs, pkgs-unstable, ... }:
+{ pkgs, ... }:
 
 {
   imports = [
     ./firefox.nix
+    ./firefox.nix
+    ./qutebrowser.nix
+    ./librewolf.nix
     ./zen.nix
   ];
 
   home.packages = with pkgs; [
     brave
     w3m
-    librewolf
-    tor-browser-bundle-bin
-    qutebrowser
+    tor
   ];
 }

@@ -2,8 +2,7 @@
 
 {
   home.packages = with pkgs; [
-    # Calculators
-    qalculate-gtk
+    qalculate-gtk # Calculator
 
     # Calendars
     # kdePackages.korganizer
@@ -11,4 +10,3 @@
     calcurse # CLI calendar
   ];
 }
-

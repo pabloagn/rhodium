@@ -9,11 +9,13 @@
 
     # Build essentials
     gnumake
+    gnutls
     gcc
     pkg-config
 
     # Version control
     git
+    hwinfo # Hardware detection tool from openSUSE
 
     # Hardware information tools
     lshw # List hardware

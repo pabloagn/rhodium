@@ -12,6 +12,6 @@
     # Document Processing and Viewing
     # ------------------------------------------
     libreoffice
-    onlyoffice-bin
+    onlyoffice-desktopeditors
   ];
 }

@@ -3,6 +3,7 @@
 {
   imports = [
     ./databases
+    ./infra
     ./languages
     ./opsec
     ./versioning
