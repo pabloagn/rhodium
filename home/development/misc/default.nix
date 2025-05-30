@@ -3,9 +3,7 @@ with lib;
 {
   options = {
     programs.development.misc = {
-      enable = mkEnableOption "Misc development tools" // {
-        default = mkDefault false;
-      };
+      enable = mkEnableOption "Misc development tools";
     };
   };
 

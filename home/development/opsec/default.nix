@@ -3,9 +3,7 @@ with lib;
 {
   options = {
     programs.development.opsec = {
-      enable = mkEnableOption "OpSec Suite" // {
-        default = mkDefault false;
-      };
+      enable = mkEnableOption "OpSec Suite";
     };
   };
 

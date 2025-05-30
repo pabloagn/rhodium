@@ -3,7 +3,7 @@
 {
   programs.helix.themes = {
     # TODO: Inject from theme
-    phantom =
+    chiaroscuro =
       let
         # transparent = "none";
         red = "#f7768e";

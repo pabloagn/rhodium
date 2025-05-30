@@ -1,4 +1,4 @@
-{ lib, config, userPreferences, userExtras, ... }:
+{ lib, config, userPreferences, ... }:
 
 let
   # Browser with personal profile
@@ -52,9 +52,9 @@ in
     "${mainMod} SHIFT, C, exec, hyprctl dispatch killactive" # Force kill
     "${mainMod} CTRL, C, exec, pkill -9 $(hyprctl activewindow -j | jq -r '.pid')" # Kill process
 
-    "${mainMod}, B, exec, ${browserPersonal}" # Launch browser on personal profile
-    "${mainMod}, F, exec, ${fileManager}" # Launch file manager
-    "${mainMod}, D, exec, ${editorNvim}" # Launch editor
+    "${mainMod}, B, exec, ${browserPersonal}"
+    "${mainMod}, F, exec, ${fileManager}"
+    "${mainMod}, D, exec, ${editorNvim}"
     "${mainMod}, V, togglefloating"
     "${mainMod}, J, togglesplit"
 

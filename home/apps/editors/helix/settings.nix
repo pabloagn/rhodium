@@ -2,7 +2,7 @@
 
 {
   programs.helix.settings = {
-    theme = "phantom";
+    theme = "chiaroscuro";
     editor = {
       line-number = "relative";
       mouse = true;

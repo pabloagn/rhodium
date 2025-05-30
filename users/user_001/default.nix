@@ -9,6 +9,7 @@
     ../../home/modules
     # Main Modules
     ../../home/apps
+    ../../home/desktop
     ../../home/development
     ../../home/security
     ../../home/shells
@@ -26,7 +27,7 @@
 
   # Asset linking
   assets = {
-    icons.enable = true;
+    # icons.enable = true; # This is creating the actual directory, clashing with hyprcursor and any other app that wants to use this dir
     wallpapers.enable = true;
     fonts.enable = true;
   };

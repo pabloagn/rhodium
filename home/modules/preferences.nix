@@ -3,6 +3,7 @@
 {
   # Environment vars
   home.sessionVariables = {
+    # App Preferences
     BROWSER = userPreferences.apps.browser;
     EDITOR = userPreferences.apps.editor;
     VISUAL = userPreferences.apps.editor;
@@ -15,6 +16,9 @@
     WM = userPreferences.apps.wm;
     PAGER = userPreferences.apps.pager;
     MANPAGER = userPreferences.apps.pager;
+
+    # Config Dirs
+    # STARSHIP_CONFIG = "${config.xdg.configHome}/starship"; # We need to figure out how to do this properly since hm has dir predefined
 
     # XDG and other vars
     XDG_BIN_HOME = "${config.home.homeDirectory}/.local/bin"; # Not set by NixOS so setting here

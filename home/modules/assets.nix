@@ -3,7 +3,7 @@ with lib;
 let
   cfg = config.assets;
 
-  repoAssetsPath = "${config.home.homeDirectory}/.config/home-manager/home/assets";
+  repoAssetsPath = toString (../assets);
 
   mkAssetLink = enable: targetPath: sourceSubdir:
     mkIf enable {

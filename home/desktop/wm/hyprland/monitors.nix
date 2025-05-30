@@ -1,4 +1,4 @@
-{ lib, config, ... }:
+{ ... }:
 
 # TODO: Add more settings here so the monitors actually work...
 {

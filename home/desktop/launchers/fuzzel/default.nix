@@ -9,7 +9,7 @@
         dpi-aware = false;
         prompt = "λ ";
         icons-enabled = false;
-        fields = ["filename" "name" "generic" "exec"];
+        fields = "filename name generic exec";
         show-actions = false;
         sort-result = true;
         match-mode = "fuzzy";
@@ -26,8 +26,8 @@
         exit-on-keyboard-focus-loss = false;
       };
       border = {
-          width = 1;
-          radius = 0;
+        width = 1;
+        radius = 0;
       };
       colors = {
         background = "20131eee";
@@ -42,21 +42,21 @@
         exit-immediately-if-empty = false;
       };
       keybindings = {
-        cancel = ["Escape" "Control+g" "Control+c" "Control+bracketleft"];
-        execute = ["Return" "KP_Enter" "Control+y"];
+        cancel = "Escape Control+g Control+c Control+bracketleft";
+        execute = "Return KP_Enter Control+y";
         execute-or-next = "Tab";
-        cursor-left = ["Left" "Control+b"];
-        cursor-right = ["Right" "Control+f"];
-        cursor-home = ["Home" "Control+a"];
-        cursor-end = ["End" "Control+e"];
-        delete-prev = ["BackSpace" "Control+h"];
-        delete-prev-word = ["Mod1+BackSpace" "Control+BackSpace" "Control+w"];
-        delete-next = ["Delete" "Control+d"];
-        prev = ["Up" "Control+p"];
-        next = ["Down" "Control+n"];
+        cursor-left = "Left Control+b";
+        cursor-right = "Right Control+f";
+        cursor-home = "Home Control+a";
+        cursor-end = "End Control+e";
+        delete-prev = "BackSpace Control+h";
+        delete-prev-word = "Mod1+BackSpace Control+BackSpace Control+w";
+        delete-next = "Delete Control+d";
+        prev = "Up Control+p";
+        next = "Down Control+n";
         prev-page = "Page_Up";
         next-page = "Page_Down";
-        clipboard-paste = ["Control+v" "XF86Paste"];
+        clipboard-paste = "Control+v XF86Paste";
         primary-paste = "Shift+Insert";
       };
     };

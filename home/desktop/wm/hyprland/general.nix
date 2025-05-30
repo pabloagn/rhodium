@@ -1,10 +1,10 @@
-{ lib, config, ... }:
+{ ... }:
 let
   cursorTheme = "rose-pine-hyprcursor";
-  cursorSize = 24;
-  animationSpeedFactor = 5;
-  keyboardRepeatDelay = 250;
-  keyboardRepeatRate = 60;
+  cursorSize = "24";
+  animationSpeedFactor = "5";
+  keyboardRepeatDelay = "250";
+  keyboardRepeatRate = "60";
 in
 {
   # TODO: Eventually these will be vars

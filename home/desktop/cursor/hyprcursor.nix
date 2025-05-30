@@ -1,5 +1,4 @@
-{ pkgs, inputs ? {}, ... }:
-
+{ pkgs, inputs ? {}, lib, ... }:
 let
   targetCursor = if inputs ? rose-pine-hyprcursor then {
     name = "rose-pine";
@@ -10,5 +9,5 @@ let
   } else null;
 in
 {
-  home.pointerCursor = targetCursor;
+  home.pointerCursor = lib.mkIf (targetCursor != null) targetCursor;
 }

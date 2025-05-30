@@ -1,8 +1,4 @@
-{ config, rhodiumLib, ... }:
-# let
-#   iconTokens = config.theme.icons.iconsNerdFont;
-#   formatIcon = rhodiumLib.formatters.iconFormatter.formatIcon;
-# in
+{ ... }:
 {
   programs.starship.settings = let
     hostInfo = "$username$hostname($shlvl)($cmd_duration)";
