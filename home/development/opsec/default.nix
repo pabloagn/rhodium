@@ -1,58 +1,67 @@
-{ pkgs, ... }:
-
+{ config, lib, pkgs, ... }:
+with lib;
 {
-  home.packages = with pkgs; [
+  options = {
+    programs.development.opsec = {
+      enable = mkEnableOption "OpSec Suite" // {
+        default = mkDefault false;
+      };
+    };
+  };
 
-    # Binary Analysis and Reverse Engineering
-    # ------------------------------------------
-    apktool
-    ghidra
-    radare2
+  config = mkIf config.programs.development.opsec.enable {
+    home.packages = with pkgs; [
+      # Binary Analysis and Reverse Engineering
+      # ------------------------------------------
+      apktool
+      ghidra
+      radare2
 
-    # Brute Forcing and Password Cracking
-    # ------------------------------------------
-    aircrack-ng
-    hashcat
-    hydra
-    hydra-cli
-    john
-    johnny
-    thc-hydra
+      # Brute Forcing and Password Cracking
+      # ------------------------------------------
+      aircrack-ng
+      hashcat
+      hydra
+      hydra-cli
+      john
+      johnny
+      thc-hydra
 
-    # Browser
-    # ------------------------------------------
-    tor
+      # Browser
+      # ------------------------------------------
+      tor
 
-    # Exploitation Frameworks
-    # ------------------------------------------
-    metasploit
+      # Exploitation Frameworks
+      # ------------------------------------------
+      metasploit
 
-    # Forensics and Incident Response
-    # ------------------------------------------
-    autopsy
+      # Forensics and Incident Response
+      # ------------------------------------------
+      autopsy
 
-    # Information Gathering
-    # ------------------------------------------
-    maltego
-    nmap
-    # set
-    social-engineer-toolkit
-    wpscan
+      # Information Gathering
+      # ------------------------------------------
+      maltego
+      nmap
+      # set
+      social-engineer-toolkit
+      wpscan
 
-    # Network Analysis and Sniffing
-    # ------------------------------------------
-    wireshark
-    wireshark-qt
+      # Network Analysis and Sniffing
+      # ------------------------------------------
+      wireshark
+      wireshark-qt
 
-    # Penetration Testing Tools
-    # ------------------------------------------
-    burpsuite
-    lynis
-    nikto
-    sqlmap
+      # Penetration Testing Tools
+      # ------------------------------------------
+      burpsuite
+      lynis
+      nikto
+      sqlmap
 
-    # Resources
-    # ------------------------------------------
-    wordlists
-  ];
+      # Resources
+      # ------------------------------------------
+      wordlists
+    ];
+  };
 }

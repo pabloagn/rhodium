@@ -23,8 +23,8 @@
     fontforge         # For font previews
 
     # Documentation
-    tldr # Simplified and community-driven man pages
-    tlrc # Official tldr client written in Rust
+    # tldr # Simplified and community-driven man pages
+    tlrc # Official tldr client written in Rust (includes tlrd)
 
     # Pendings to categorize
     bc # CLI calculator

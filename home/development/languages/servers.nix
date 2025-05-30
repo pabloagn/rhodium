@@ -53,9 +53,6 @@
     nodePackages.prettier
     nodePackages.typescript-language-server
 
-    # Julia
-    # Note: Julia language server installed via Julia package manager
-
     # Kotlin
     kotlin-language-server
 
@@ -91,21 +88,9 @@
     isort # Python import sorter
     pyright # Type checker
     ruff # Fast Python formatter/linter
-    # Alternative: python312Packages.python-lsp-server
-    # Alternative: python313Packages.python-lsp-server
-
-    # R
-    # Note: R language server installed via R package manager
-
-    # Rust
-    rust-analyzer
-    # Note: rustfmt included with rustup toolchain
 
     # Scala
     metals
-
-    # Scheme
-    # NOTE: No widely adopted LSP server in nixpkgs
 
     # SQL
     sqls # SQL language server
