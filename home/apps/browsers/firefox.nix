@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, pkgs-unstable, inputs, ... }:
 
 {
   programs.firefox = {
@@ -6,7 +6,7 @@
     package = pkgs.firefox;
     # package = pkgs-unstable.firefox-devedition;
     profiles.default = {
-      extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+      extensions = with inputs.nur.legacyPackages.${pkgs.system}.repos.rycee.firefox-addons; [
         tridactyl
       ];
       settings = {

@@ -7,7 +7,7 @@
 
   programs.neovim = {
     enable = true;
-    package = pkgs.neovim;
+    # package = pkgs.neovim;
     extraPackages = [
       pkgs.neovide
     ];

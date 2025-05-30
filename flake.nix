@@ -3,13 +3,13 @@
 
   inputs = {
     nixpkgs = {
-      url = "github:NixOS/nixpkgs/nixos-25.05";
+      url = "github:NixOS/nixpkgs/nixos-25.05"; # Crucial to lock version here
     };
     nixpkgs-unstable = {
       url = "github:NixOS/nixpkgs/nixos-unstable";
     };
     home-manager = {
-      url = "github:nix-community/home-manager";
+      url = "github:nix-community/home-manager/release-25.05"; # Crucial to lock version here
       inputs.nixpkgs.follows = "nixpkgs";
     };
     sops-nix = {
@@ -50,8 +50,29 @@
     let
       lib = nixpkgs.lib;
       system = "x86_64-linux";
-      pkgs = import nixpkgs { inherit system; };
-      pkgs-unstable = import nixpkgs-unstable { inherit system; };
+      # pkgs = import nixpkgs { inherit system; overlays = [ nur.overlays.default ]; };
+      # pkgs-unstable = import nixpkgs-unstable { inherit system; overlays = [ nur.overlays.default ]; };
+
+      pkgs = import nixpkgs {
+        inherit system;
+        config = {
+          allowUnfree = true;
+        };
+        overlays = [
+          nur.overlays.default
+        ];
+      };
+
+      pkgs-unstable = import nixpkgs-unstable {
+        inherit system;
+        config = {
+          allowUnfree = true;
+        };
+        overlays = [
+          nur.overlays.default
+        ];
+      };
+
       rhodiumLib = import ./lib { inherit lib pkgs; };
 
       # Data paths

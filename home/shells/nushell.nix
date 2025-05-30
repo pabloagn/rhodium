@@ -1,12 +1,11 @@
 { config, pkgs, ... }:
 
 let
-  aliases = import ./common/aliases.nix;
-  functions = import ./common/functions.nix;
+  common = import ./common { inherit config; };
 in
 {
   programs.nushell = {
     enable = true;
-    shellAliases = aliases;
+    shellAliases = common.aliases; # TODO: Verify this works properly
   };
 }

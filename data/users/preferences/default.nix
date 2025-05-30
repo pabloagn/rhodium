@@ -1,8 +1,10 @@
-{ config, lib, pkgs, ... }:
-
+let
+  apps = import ./apps.nix;
+  behaviour = import ./behaviour.nix;
+  theme = import ./theme.nix;
+in
 {
-  imports = [
-    ./apps.nix
-    ./behaviour.nix
-  ];
+  inherit (apps) apps profiles;
+  inherit (behaviour) behaviour;
+  inherit (theme) theme;
 }

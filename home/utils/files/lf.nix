@@ -5,23 +5,23 @@
   };
 
   xdg.configFile."lf/lfrc" = {
-    source = ./lfrc;
+    source = ./lf/lfrc;
   };
 
   xdg.configFile."lf/colors" = {
-    source = ./colors;
+    source = ./lf/colors;
   };
 
   xdg.configFile."lf/cleaner" = {
-    source = ./cleaner;
+    source = ./lf/cleaner;
   };
 
   xdg.configFile."lf/previewer" = {
-    source = ./previewer;
+    source = ./lf/previewer;
   };
 
   xdg.configFile."lf/icons" = {
     # enable = config.programs.lf.enable;
-    source = ./icons;
+    source = ./lf/icons;
   };
 }

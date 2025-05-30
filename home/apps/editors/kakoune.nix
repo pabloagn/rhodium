@@ -7,6 +7,6 @@
 
   programs.kakoune = {
     enable = true;
-    package = pkgs.kakoune;
+    # package = pkgs.kakoune; # This caused problems
   };
 }

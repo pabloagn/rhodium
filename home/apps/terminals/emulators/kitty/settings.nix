@@ -2,7 +2,7 @@
 {
   programs.kitty = {
     font.name = "JetBrainsMono Nerd Font Mono";
-    font.size = "12";
+    font.size = 12;
     settings = {
       scrollback_lines = 10000;
       enable_audio_bell = false;
@@ -23,19 +23,19 @@
 
       # Four values set top, right, bottom and left.
       # For some reason there's more top padding, so we adjust for that
-      window_padding_width = [10 15 15 15];
+      window_padding_width = "10 15 15 15";
 
       # Cursor
       cursor_trail = 3;
-      cursor_trail_decay =  [0.1 0.4];
+      cursor_trail_decay =  "0.1 0.4";
       cursor_blink_interval = 0;
 
       # Other properties
-      clipboard_control = ("write-clipboard" "write-primary");
+      clipboard_control = "write-clipboard write-primary";
       allow_hyperlinks = true;
 
       # Include theme
-      include = ./themes/chiaroscuro.conf;
+      # include = ./themes/chiaroscuro.conf;
     };
   };
 }

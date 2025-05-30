@@ -1,13 +1,13 @@
 { config, pkgs, ... }:
 
 let
-  aliases = import ./common/aliases.nix;
-  functions = import ./common/functions.nix;
+  common = import ./common { inherit config; };
+  functions = common.functions;
 in
 {
   programs.zsh = {
     enable = true;
-    dotDir = "${config.home.XDG_CONFIG_HOME}/zsh";
+    dotDir = "${config.xdg.configHome}/zsh";
     autosuggestion = {
       enable = true;
       # TODO: Add styles here
@@ -24,7 +24,7 @@ in
       # };
     };
 
-    shellAliases = aliases;
+    shellAliases = common.aliases;
     # TODO:
     #   - See if this is actually correct.
     #   - Annoyed as fuck that the history disappears at times.

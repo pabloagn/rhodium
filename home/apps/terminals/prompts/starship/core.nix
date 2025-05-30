@@ -39,7 +39,7 @@ in
     nix_shell = {
       format = "[($name \\(develop\\) <- )$symbol]($style) ";
       impure_msg = "";
-      symbol = getIcon icons.programming.nixos "❄️";
+      symbol = getIcon icons.linux.nixos "";
       style = "bold ${colors.base08}";
     };
 

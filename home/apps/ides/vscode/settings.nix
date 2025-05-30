@@ -3,7 +3,7 @@
   programs.vscode = {
     profiles = {
       default = {
-        settings = {
+        userSettings = {
           # Window
           "window.title" = "Rhodium";
 

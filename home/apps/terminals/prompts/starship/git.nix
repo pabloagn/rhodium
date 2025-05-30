@@ -12,7 +12,7 @@ in
       behind = getIcon unicodeIcons.arrows.down "⇣";
       diverged = getIcon unicodeIcons.arrows.upDown "⇕";
       untracked = getIcon unicodeIcons.status.question "?";
-      stashed = getIcon unicodeIcons.status.stash "$";
+      stashed = getIcon unicodeIcons.currency.dollar "$";
       modified = getIcon unicodeIcons.status.exclamation "!";
       staged = getIcon unicodeIcons.math.plus "+";
       renamed = getIcon unicodeIcons.typography.quoteRight "»";

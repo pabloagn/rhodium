@@ -35,7 +35,7 @@
     # ------------------------------------------
     maltego
     nmap
-    set
+    # set
     social-engineer-toolkit
     wpscan
 

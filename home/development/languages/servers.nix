@@ -12,7 +12,7 @@
 
     # C/C++
     clang-tools # includes clang-format
-    clangd
+    # clangd
 
     # Clojure
     clojure-lsp

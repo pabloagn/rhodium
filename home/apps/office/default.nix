@@ -6,8 +6,8 @@
     # Messaging & Collaboration
     # ------------------------------------------
     slack
-    teams
-    # teams-for-linux
+    # teams # Not available on this platform...
+    teams-for-linux
 
     # Document Processing and Viewing
     # ------------------------------------------

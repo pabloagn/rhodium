@@ -4,9 +4,9 @@
   programs.vscode = {
     profiles = {
       default = {
-        extensions = with pkgs; [
-          vscode-extensions.editorconfig.editorconfig
-          streetsidesoftware.code-spell-checker
+        extensions = [
+          pkgs.vscode-extensions.editorconfig.editorconfig
+          pkgs.vscode-extensions.streetsidesoftware.code-spell-checker
         ];
       };
     };

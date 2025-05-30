@@ -1,13 +1,12 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 
 let
-  aliases = import ./common/aliases.nix;
-  functions = import ./common/functions.nix;
+  common = import ./common { inherit config; };
 in
 {
   programs.fish = {
     enable = true;
-    shellAliases = aliases;
-    functions = functions;
+    shellAliases = common.aliases; # TODO: Caused problems
+    # functions = common.functions; # TODO: Check how to actually do this
   };
 }

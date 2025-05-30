@@ -28,17 +28,6 @@
     ../../modules/utils
   ];
 
-  # Nixpkgs Configuration - THE RIGHT WAY
-  # -------------------------
-  nixpkgs = {
-    config = {
-      allowUnfree = true;
-    };
-    overlays = [
-      inputs.nur.overlays.default
-    ];
-  };
-
   # Host Configuration
   # -------------------------
   networking = {

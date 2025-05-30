@@ -6,13 +6,11 @@ in
 {
   programs.git = {
     enable = true;
+    userName = userfullName;
+    userEmail = userEmail;
+    # init.defaultBranch = "main"; # Of course they disappeared this opt, check what we need.
     delta = {
       enable = true;
-    };
-    config = {
-      user.name = userfullName;
-      user.email = userEmail;
-      init.defaultBranch = "main";
     };
   };
 }

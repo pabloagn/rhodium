@@ -1,4 +1,4 @@
-{ lib }:
+{ lib, ... }:
 let
   # Browser-specific argument templates
   browserConfigs = {

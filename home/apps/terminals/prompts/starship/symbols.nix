@@ -16,8 +16,8 @@ in
     vim.symbol = formatIcon icons.editors.vim "🗒️";
 
     # File System & Package Management
-    directory.read_only = formatIcon icons.status.warning "🔒";
-    package.symbol = formatIcon icons.tech.settings "📦";
+    directory.read_only = formatIcon icons.cod.warning "🔒";
+    package.symbol = formatIcon icons.files.package "📦";
 
     # Infrastructure
     terraform.symbol = formatIcon icons.buildTools.terraform "💠";
@@ -26,11 +26,11 @@ in
     conda.symbol = formatIcon icons.programming.python "🅒";
     dart.symbol = formatIcon icons.programming.dart "🎯";
     elixir.symbol = formatIcon icons.programming.elixir "💧";
-    elm.symbol = formatIcon icons.programming.elm "🌳";
+    elm.symbol = formatIcon icons.seti.elm "🌳";
     golang.symbol = formatIcon icons.programming.go "🐹";
     haskell.symbol = formatIcon icons.programming.haskell "λ ";
     java.symbol = formatIcon icons.programming.java "☕";
-    julia.symbol = formatIcon icons.programming.julia "ஃ ";
+    julia.symbol = formatIcon icons.seti.julia "ஃ ";
     lua.symbol = formatIcon icons.programming.lua "🌙";
     nim.symbol = formatIcon icons.programming.nim "🐴";
     nodejs.symbol = formatIcon icons.programming.nodejs "⬢ ";
@@ -44,10 +44,10 @@ in
 
     # System
     memory_usage.symbol = formatIcon icons.status.info "🧠";
-    shlvl.symbol = formatIcon icons.arrows.up "↗️";
+    shlvl.symbol = formatIcon icons.cod.arrow-up "↗️";
 
     # Version Control
     git_branch.symbol = formatIcon icons.sourceControl.git "🌱";
-    hg_branch.symbol = formatIcon icons.arrows.right "☿ ";
+    hg_branch.symbol = formatIcon icons.cod.arrow-right "☿ ";
   };
 }
