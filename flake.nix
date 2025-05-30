@@ -50,13 +50,12 @@
     let
       lib = nixpkgs.lib;
       system = "x86_64-linux";
-      # pkgs = import nixpkgs { inherit system; overlays = [ nur.overlays.default ]; };
-      # pkgs-unstable = import nixpkgs-unstable { inherit system; overlays = [ nur.overlays.default ]; };
 
       pkgs = import nixpkgs {
         inherit system;
         config = {
           allowUnfree = true;
+          input-fonts.acceptLicense = true; # Required accept license explicitly
         };
         overlays = [
           nur.overlays.default

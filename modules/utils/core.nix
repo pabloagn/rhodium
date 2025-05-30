@@ -20,6 +20,8 @@
     # Hardware information tools
     lshw # List hardware
     pciutils # lspci
+    lshw # List hardware
+    inxi # My swiss army knife
     usbutils # lsusb
     dmidecode # System hardware details
     smartmontools # S.M.A.R.T. monitoring

@@ -1,11 +1,7 @@
-
-# TODO: We need to double check this since we have 3 different services declared here.
-
 { pkgs, ... }:
 
 {
   environment.systemPackages = with pkgs; [
-    # TODO: Check if we need this
     wireplumber
   ];
 

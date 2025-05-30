@@ -91,7 +91,7 @@
     };
     julia-mono = {
       enable = true;
-      package = pkgs.juliamono;
+      package = pkgs.julia-mono;
       name = "JuliaMono";
       style = "Monospace";
     };
@@ -167,7 +167,7 @@
     };
     geist-mono = {
       enable = true;
-      package = pkgs.geist-font.mono;
+      package = pkgs.geist-font;
       name = "Geist Mono";
       style = "Monospace Pro";
       licenseInfo = "Free (SIL OFL)";
@@ -284,12 +284,6 @@
       style = "Sans-serif";
       licenseInfo = "Paid (Commercial)";
     };
-    geist-sans = {
-      enable = true;
-      package = pkgs.geist-font.sans;
-      name = "Geist Sans";
-      style = "Sans-serif";
-    };
     helvetica-neue = {
       package = null;
       name = "Helvetica Neue";
@@ -313,6 +307,9 @@
       package = pkgs.liberation_ttf;
       name = "Liberation";
       style = "Sans-serif";
+      extraPackages = with pkgs; [
+        nerd-fonts.liberation
+      ];
     };
     montserrat = {
       enable = true;
@@ -339,7 +336,7 @@
       style = "Sans-serif";
     };
     nunito = {
-      enable = true;
+      enable = false;
       package = pkgs.nunito;
       name = "Nunito";
       style = "Sans-serif";
@@ -425,7 +422,7 @@
       licenseInfo = "Paid (Adobe)";
     };
     cormorant-garamond = {
-      enable = true;
+      enable = false;
       package = pkgs.cormorant-garamond;
       name = "Cormorant Garamond";
       style = "Serif";
@@ -454,12 +451,6 @@
       name = "Gelasio";
       style = "Serif";
     };
-    liberation-serif = {
-      enable = true;
-      package = pkgs.liberation_serif;
-      name = "Liberation Serif";
-      style = "Serif";
-    };
     libre-baskerville = {
       enable = true;
       package = pkgs.libre-baskerville;
@@ -485,7 +476,7 @@
       licenseInfo = "Paid (Adobe)";
     };
     playfair-display = {
-      enable = true;
+      enable = false;
       package = pkgs.playfair-display;
       name = "Playfair Display";
       style = "Serif";
@@ -511,25 +502,25 @@
   };
   display = {
     amatic-sc = {
-      enable = true;
+      enable = false;
       package = pkgs.amatic-sc;
       name = "Amatic SC";
       style = "Display";
     };
     anton = {
-      enable = true;
+      enable = false;
       package = pkgs.anton;
       name = "Anton";
       style = "Display";
     };
     bangers = {
-      enable = true;
+      enable = false;
       package = pkgs.bangers;
       name = "Bangers";
       style = "Display";
     };
     bebas-neue = {
-      enable = true;
+      enable = false;
       package = pkgs.bebas-neue;
       name = "Bebas Neue";
       style = "Display";
@@ -547,7 +538,7 @@
       style = "Display";
     };
     fredoka-one = {
-      enable = true;
+      enable = false;
       package = pkgs.fredoka-one;
       name = "Fredoka One";
       style = "Display";
@@ -559,13 +550,13 @@
       style = "Display";
     };
     pacifico = {
-      enable = true;
+      enable = false;
       package = pkgs.pacifico;
       name = "Pacifico";
       style = "Display";
     };
     righteous = {
-      enable = true;
+      enable = false;
       package = pkgs.righteous;
       name = "Righteous";
       style = "Display";
