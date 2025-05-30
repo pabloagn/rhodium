@@ -10,7 +10,7 @@
   ];
 
   # Pulseaudio
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
 
   # rtkit
   # Required by PulseAudio and PipeWire to acquire realtime priority

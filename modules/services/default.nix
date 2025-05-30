@@ -2,6 +2,6 @@
 {
   imports = [
     ./asus-backlight.nix
-    ./lid.nix
+    ./laptop-lid.nix
   ];
 }

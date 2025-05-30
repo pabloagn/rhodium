@@ -36,21 +36,22 @@
     };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, nur, zen-browser }@inputs:
+  outputs =
+    { self
+    , nixpkgs
+    , nixpkgs-unstable
+    , home-manager
+    , sops-nix
+    , nur
+    , zen-browser
+    , hyprland
+    , rose-pine-hyprcursor
+    }@inputs:
     let
       lib = nixpkgs.lib;
       system = "x86_64-linux";
-      pkgs = import nixpkgs {
-        inherit system;
-        config.allowUnfree = true;
-        overlays = [ nur.overlay ];
-      };
-      pkgs-unstable = import nixpkgs-unstable {
-        inherit system;
-        config.allowUnfree = true;
-        overlays = [ nur.overlay ];
-      };
-
+      pkgs = import nixpkgs { inherit system; };
+      pkgs-unstable = import nixpkgs-unstable { inherit system; };
       rhodiumLib = import ./lib { inherit lib pkgs; };
 
       # Data paths
@@ -61,31 +62,37 @@
       dataPathHosts = dataPath + "/hosts/";
 
       # Import user data
-      userData = if builtins.pathExists (dataPathUsers + "/users.nix")
+      userData =
+        if builtins.pathExists (dataPathUsers + "/users.nix")
         then (import (dataPathUsers + "/users.nix")).users
         else { };
 
       # Import user preferences
-      userPreferences = if builtins.pathExists dataPathUserPreferences
+      userPreferences =
+        if builtins.pathExists dataPathUserPreferences
         then (import dataPathUserPreferences)
         else { };
 
       # Import and pack all user extras data
       userExtras = {
         path = dataPathUserExtras;
-        bookmarksData = if builtins.pathExists (dataPathUserExtras + "/bookmarks.nix")
+        bookmarksData =
+          if builtins.pathExists (dataPathUserExtras + "/bookmarks.nix")
           then import (dataPathUserExtras + "/bookmarks.nix")
           else { };
-        profilesData = if builtins.pathExists (dataPathUserExtras + "/profiles.nix")
+        profilesData =
+          if builtins.pathExists (dataPathUserExtras + "/profiles.nix")
           then import (dataPathUserExtras + "/profiles.nix")
           else { };
-        appsData = if builtins.pathExists (dataPathUserExtras + "/apps.nix")
+        appsData =
+          if builtins.pathExists (dataPathUserExtras + "/apps.nix")
           then import (dataPathUserExtras + "/apps.nix")
           else { };
       };
 
       # Import host data
-      hostData = if builtins.pathExists (dataPathHosts + "/hosts.nix")
+      hostData =
+        if builtins.pathExists (dataPathHosts + "/hosts.nix")
         then (import (dataPathHosts + "/hosts.nix")).hosts
         else { };
 
@@ -93,40 +100,42 @@
       getThemeConfig = themeName: variant:
         let
           themePath = ./home/assets/themes + "/${themeName}.nix";
-          themeConfig = if builtins.pathExists themePath
+          themeConfig =
+            if builtins.pathExists themePath
             then import themePath { inherit pkgs; }
             else import ./home/assets/themes/chiaroscuro.nix { inherit pkgs; };
         in
         if variant == "light" && themeConfig.theme ? light
-          then themeConfig.theme.light
-          else themeConfig.theme.dark;
+        then themeConfig.theme.light
+        else themeConfig.theme.dark;
 
       # Get user's theme preferences with fallbacks
       userThemeName = userPreferences.theme.name or "chiaroscuro";
       userThemeVariant = userPreferences.theme.variant or "dark";
       selectedTheme = getThemeConfig userThemeName userThemeVariant;
 
-    in {
+    in
+    {
       nixosConfigurations = {
         host_001 = lib.nixosSystem {
           inherit system;
           modules = [ ./hosts/host_001 ];
           specialArgs = {
-            inherit pkgs pkgs-unstable inputs rhodiumLib;
+            inherit pkgs-unstable inputs rhodiumLib;
             users = userData;
             host = hostData.host_001 or { };
           };
         };
 
-        host_002 = lib.nixosSystem {
-          inherit system;
-          modules = [ ./hosts/host_002 ];
-          specialArgs = {
-            inherit pkgs pkgs-unstable inputs rhodiumLib;
-            users = userData;
-            host = hostData.host_002 or { };
-          };
-        };
+        # host_002 = lib.nixosSystem {
+        #   inherit system;
+        #   modules = [ ./hosts/host_002 ];
+        #   specialArgs = {
+        #     inherit pkgs-unstable inputs rhodiumLib;
+        #     users = userData;
+        #     host = hostData.host_002 or { };
+        #   };
+        # };
       };
 
       homeConfigurations = {

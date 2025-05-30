@@ -6,7 +6,7 @@ let
 in
 {
   programs.bash = {
-    enable = true;
+    # enable = true;
     enableCompletion = true;
     shellAliases = aliases;
     historyFile = "${config.home.XDG_CACHE_HOME}/bash/.bash_history";

@@ -7,15 +7,37 @@
     # Monospace
     fira-code
     fira-code-symbols
+    nerd-fonts.fira-code
+
+    fira-mono
+    nerd-fonts.fira-mono
+
     hack-font
+    nerd-fonts.hack
+
     ibm-plex
+    nerd-fonts.blex-mono
+
     jetbrains-mono
+    nerd-fonts.jetbrains-mono
+
     julia-mono
     roboto-mono
+    nerd-fonts.roboto-mono
+
     office-code-pro
     inconsolata
-    hack-font
+
     cascadia-code
+    nerd-fonts.caskaydia-cove
+
+    # Iosevka Family
+    iosevka
+    nerd-fonts.iosevka
+    nerd-fonts.iosevka-term
+    nerd-fonts.iosevka-term-slab
+    nerd-fonts.zed-mono
+
     paratype-pt-mono
 
     # Sans-serif
@@ -45,6 +67,5 @@
     font-awesome
     powerline-fonts
     powerline-symbols
-    nerdfonts
   ];
 }

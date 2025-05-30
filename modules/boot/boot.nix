@@ -1,5 +1,3 @@
-# modules/boot/boot.nix
-
 { pkgs, ... }:
 
 {

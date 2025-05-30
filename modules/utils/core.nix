@@ -25,9 +25,6 @@
     smartmontools # S.M.A.R.T. monitoring
     read-edid # EDID information
 
-    # Graphics/Display tools
-    mesa-utils # glxinfo, glxgears
-
     # Audio tools
     alsa-utils # ALSA utilities
   ];

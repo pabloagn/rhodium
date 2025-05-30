@@ -7,7 +7,6 @@
     enable = true;
   };
   programs.bash = {
-    enable = true;
-    enableCompletion = true; # Required for home setting
+    completion.enable = true; # Required for home setting
   };
 }

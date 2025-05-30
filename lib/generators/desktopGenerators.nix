@@ -1,5 +1,4 @@
 { lib }:
-
 let
   # Browser-specific argument templates
   browserConfigs = {
@@ -29,6 +28,15 @@ let
   capitalize = str:
     lib.toUpper (lib.substring 0 1 str) + lib.substring 1 (-1) str;
 
+  # Flatten nested attribute set into flat structure with combined keys
+  flattenNestedAttrs = attrs:
+    lib.concatMapAttrs (topKey: topValue:
+      lib.mapAttrs' (subKey: subValue: {
+        name = "${topKey}-${subKey}";
+        value = subValue;
+      }) topValue
+    ) attrs;
+
   # Bookmark generator: Browser + profile + URL
   mkBookmark = userPreferences: name: bookmark:
     let
@@ -45,7 +53,7 @@ let
         bookmark.url
       ];
       icon = browser;
-      description = "${capitalize browser} ${profileName} | ${bookmark.description}";
+      description = "[B] | ${bookmark.description} | ${capitalize browser} ${profileName}";
     };
 
   # Profile generator: Browser + profile only
@@ -63,7 +71,7 @@ let
         browserConfig.newWindowFlag
       ];
       icon = browser;
-      description = "${capitalize browser} ${profileName} | ${profile.description}";
+      description = "[P] | ${capitalize browser} ${profileName}";
     };
 
   # App generator: Custom binary + flexible args
@@ -71,12 +79,12 @@ let
     binary = app.binary;
     args = app.args;
     icon = app.icon;
-    description = app.description;
+    description = "[A] | ${app.description}";
   };
 
 in
 {
-  inherit mkBookmark mkProfile mkApp;
+  inherit mkBookmark mkProfile mkApp flattenNestedAttrs;
 
   # Generate all entries from imported data
   generateAllEntries = userPreferences: userExtras:
@@ -86,10 +94,10 @@ in
       profileGen = mkProfile userPreferences;
       appGen = mkApp userPreferences;
 
-      # Generate entries for each type
-      bookmarkEntries = lib.mapAttrs bookmarkGen userExtras.bookmarksData;
-      profileEntries = lib.mapAttrs profileGen userExtras.profilesData;
-      appEntries = lib.mapAttrs appGen userExtras.appsData;
+      # Flatten nested structures and generate entries for each type
+      bookmarkEntries = lib.mapAttrs bookmarkGen (flattenNestedAttrs userExtras.bookmarksData);
+      profileEntries = lib.mapAttrs profileGen (flattenNestedAttrs userExtras.profilesData);
+      appEntries = lib.mapAttrs appGen (flattenNestedAttrs userExtras.appsData);
     in
     bookmarkEntries // profileEntries // appEntries;
 }

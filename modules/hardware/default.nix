@@ -1,6 +1,6 @@
 # modules/hardware/default.nix
 
-{ pkgs }:
+{ pkgs, inputs, rhodiumLib, users, host, ... }:
 
 {
   imports = [
