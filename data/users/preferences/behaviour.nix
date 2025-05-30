@@ -1,0 +1,5 @@
+{
+  behaviour = {
+    knobIncrement = "2%";
+  };
+}
