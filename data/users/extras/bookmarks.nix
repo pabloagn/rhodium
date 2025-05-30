@@ -303,6 +303,12 @@ in
       description = "LinkedIn";
       categories = [ categories.social categories.productivity ];
     };
+    markdown-to-excel = {
+      profile = "personal";
+      url = "https://tableconvert.com/markdown-to-excel";
+      description = "Markdown to Excel";
+      categories = [ categories.utils ];
+    };
     medium = {
       profile = "personal";
       url = "https://medium.com";

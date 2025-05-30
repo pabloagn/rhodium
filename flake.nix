@@ -138,7 +138,7 @@
     {
       nixosConfigurations = {
         host_001 = lib.nixosSystem {
-          inherit system;
+          inherit system pkgs;
           modules = [ ./hosts/host_001 ];
           specialArgs = {
             inherit pkgs-unstable inputs rhodiumLib;
