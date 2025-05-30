@@ -2,8 +2,6 @@
 
 {
   fonts.packages = with pkgs; [
-    #TODO: Pull from Home/assets/fonts/fonts.nix
-
     # Monospace
     fira-code
     fira-code-symbols

@@ -36,14 +36,17 @@
   # TODO: Eventually we change this for hyprlock
   services.xserver.displayManager.gdm = {
     enable = true;
-    # wayland = true;
+    wayland = true;
   };
 
   # Desktop portals
   # TODO: Customize this (desktop dialogues, etc)
   xdg.portal = {
     enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    extraPortals = [
+      pkgs.xdg-desktop-portal-gtk
+      pkgs.xdg-desktop-portal-hyprland
+    ];
   };
 
   # TODO: Check if we need this

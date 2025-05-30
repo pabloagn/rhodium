@@ -1,7 +1,5 @@
-
-
 { pkgs, ... }:
-
+# TODO: Dynamic
 {
   environment.systemPackages = with pkgs; [
     # xorg key registry
