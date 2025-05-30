@@ -14,7 +14,7 @@ in
       # highlight = {};
     };
     enableCompletion = true;
-    autocd = true; # cd into dir by typing the name
+    autocd = true;
 
     syntaxHighlighting = {
       # TODO: Add styles here
@@ -29,13 +29,13 @@ in
     #   - See if this is actually correct.
     #   - Annoyed as fuck that the history disappears at times.
     history = {
-      extended = true; # Save timestamps
+      extended = true; # Save timestamps (TODO: this is causing a fucking issue on nix shells (commands are pulled along with their timestamps))
       expireDuplicatesFirst = true;
       ignoreDups = true; # Ignore consecutive duplicates
       ignoreAllDups = false; # Don't remove older duplicates
       save = 1000000000; # Save all entries
       size = 1000000000; # Very large history size
-      path = "$HOME/.cache/zsh/.zsh_history";
+      path = "${config.xdg.cacheHome}/zsh/.zsh_history";
     };
 
     historySubstringSearch = {
@@ -44,7 +44,7 @@ in
       searchDownKey = "^[[B";
     };
 
-    initExtra = ''
+    initContent = ''
       # Enable vi mode
       bindkey -v
 

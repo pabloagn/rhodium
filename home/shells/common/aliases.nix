@@ -5,7 +5,7 @@
 # - Use conditional packaging
 let
   homeDir = config.home.homeDirectory;
-  configdir = config.home.XDG_CONFIG_HOME;
+  configdir = config.xdg.configHome;
 in
 {
   # List
