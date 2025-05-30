@@ -1,99 +1,135 @@
 { pkgs, ... }:
-# TODO: Add all extraPkgs for fonts
 {
   monospace = {
     anonymous-pro = {
+      enable = true;
       package = pkgs.anonymousPro;
       name = "Anonymous Pro";
       style = "Monospace";
     };
     cascadia-code = {
+      enable = true;
       package = pkgs.cascadia-code;
       name = "Cascadia Code";
       style = "Monospace";
+      extraPackages = with pkgs; [
+        nerd-fonts.caskaydia-cove
+      ];
     };
     dejavu-sans-mono = {
+      enable = true;
       package = pkgs.dejavu_fonts;
       name = "DejaVu Sans Mono";
       style = "Monospace";
-      extraPackages = [
-        pkgs.nerd-fonts.dejavu-sans-mono
+      extraPackages = with pkgs; [
+        nerd-fonts.dejavu-sans-mono
       ];
     };
     fantasque-sans-mono = {
+      enable = true;
       package = pkgs.fantasque-sans-mono;
       name = "Fantasque Sans Mono";
       style = "Monospace";
-      extraPackages = [
-        pkgs.nerd-fonts.fantasque-sans-mono
+      extraPackages = with pkgs; [
+        nerd-fonts.fantasque-sans-mono
       ];
     };
     fira-code = {
+      enable = true;
       package = pkgs.fira-code;
       name = "Fira Code";
       style = "Monospace";
-      extraPackages = [
-        pkgs.fira-code-symbols
-        pkgs.nerd-fonts.fira-code
+      extraPackages = with pkgs; [
+        fira-code-symbols
+        nerd-fonts.fira-code
+      ];
+    };
+    fira-mono = {
+      enable = true;
+      package = pkgs.fira-mono;
+      name = "Fira Mono";
+      style = "Monospace";
+      extraPackages = with pkgs; [
+        nerd-fonts.fira-mono
       ];
     };
     hack-font = {
+      enable = true;
       package = pkgs.hack-font;
       name = "Hack";
       style = "Monospace";
-      extraPackages = [
-        pkgs.nerd-fonts.hack
+      extraPackages = with pkgs; [
+        nerd-fonts.hack
       ];
     };
     ibm-plex-mono = {
+      enable = true;
       package = pkgs.ibm-plex;
       name = "IBM Plex Mono";
       style = "Monospace";
-      extraPackages = [
-        pkgs.nerd-fonts.im-writing
+      extraPackages = with pkgs; [
+        nerd-fonts.blex-mono
       ];
     };
     inconsolata = {
+      enable = true;
       package = pkgs.inconsolata;
       name = "Inconsolata";
       style = "Monospace";
+      extraPackages = with pkgs; [
+        nerd-fonts.inconsolata
+      ];
     };
     jetbrains-mono = {
+      enable = true;
       package = pkgs.jetbrains-mono;
       name = "JetBrains Mono";
       style = "Monospace";
+      extraPackages = with pkgs; [
+        nerd-fonts.jetbrains-mono
+      ];
     };
     julia-mono = {
+      enable = true;
       package = pkgs.juliamono;
       name = "JuliaMono";
       style = "Monospace";
     };
     office-code-pro = {
+      enable = true;
       package = pkgs.office-code-pro;
       name = "Office Code Pro";
       style = "Monospace";
     };
     paratype-pt-mono = {
+      enable = true;
       package = pkgs.paratype-pt-sans;
       name = "PT Mono";
       style = "Monospace";
     };
     roboto-mono = {
+      enable = true;
       package = pkgs.roboto-mono;
       name = "Roboto Mono";
       style = "Monospace";
+      extraPackages = with pkgs; [
+        nerd-fonts.roboto-mono
+      ];
     };
     source-code-pro = {
+      enable = true;
       package = pkgs.source-code-pro;
       name = "Source Code Pro";
       style = "Monospace";
     };
     ubuntu-mono = {
+      enable = true;
       package = pkgs.ubuntu_font_family;
       name = "Ubuntu Mono";
       style = "Monospace";
     };
     victor-mono = {
+      enable = true;
       package = pkgs.victor-mono;
       name = "Victor Mono";
       style = "Monospace";
@@ -114,10 +150,14 @@
       licenseInfo = "Paid (Commercial)";
     };
     commit-mono = {
+      enable = true;
       package = pkgs.commit-mono;
       name = "CommitMono";
       style = "Monospace Pro";
       licenseInfo = "Free (SIL OFL)";
+      extraPackages = with pkgs; [
+        nerd-fonts.commit-mono
+      ];
     };
     dank-mono = {
       package = null;
@@ -126,28 +166,44 @@
       licenseInfo = "Paid (Commercial)";
     };
     geist-mono = {
+      enable = true;
       package = pkgs.geist-font.mono;
       name = "Geist Mono";
       style = "Monospace Pro";
       licenseInfo = "Free (SIL OFL)";
+      extraPackages = with pkgs; [
+        nerd-fonts.geist-mono
+      ];
     };
     input-mono = {
-      package = null;
+      enable = true;
+      package = pkgs.input-fonts;
       name = "Input Mono";
       style = "Monospace Pro";
       licenseInfo = "Free for Personal Use (Custom License)";
     };
-    iosevka-pro = {
+    iosevka = {
+      enable = true;
       package = pkgs.iosevka;
       name = "Iosevka";
       style = "Monospace Pro";
       licenseInfo = "Free (SIL OFL)";
+      extraPackages = with pkgs; [
+        nerd-fonts.iosevka
+        nerd-fonts.iosevka-term
+        nerd-fonts.iosevka-term-slab
+        nerd-fonts.zed-mono
+      ];
     };
     monaspace = {
+      enable = true;
       package = pkgs.monaspace;
       name = "Monaspace";
       style = "Monospace Pro";
       licenseInfo = "Free (SIL OFL)";
+      extraPackages = with pkgs; [
+        nerd-fonts.monaspace
+      ];
     };
     monolisa = {
       package = null;
@@ -168,10 +224,14 @@
       licenseInfo = "Paid (Commercial)";
     };
     recursive = {
+      enable = true;
       package = pkgs.recursive;
       name = "Recursive";
       style = "Monospace Pro";
       licenseInfo = "Free (SIL OFL)";
+      extraPackages = with pkgs; [
+        nerd-fonts.recursive-mono
+      ];
     };
     server-mono = {
       package = null; # TODO: Add our own package
@@ -189,6 +249,7 @@
 
   sans-serif = {
     atkinson-hyperlegible = {
+      enable = true;
       package = pkgs.atkinson-hyperlegible;
       name = "Atkinson Hyperlegible";
       style = "Sans-serif";
@@ -200,16 +261,19 @@
       licenseInfo = "Paid (Commercial)";
     };
     cabin = {
+      enable = true;
       package = pkgs.cabin;
       name = "Cabin";
       style = "Sans-serif";
     };
     dosis = {
+      enable = true;
       package = pkgs.dosis;
       name = "Dosis";
       style = "Sans-serif";
     };
     fira-sans = {
+      enable = true;
       package = pkgs.fira;
       name = "Fira Sans";
       style = "Sans-serif";
@@ -221,6 +285,7 @@
       licenseInfo = "Paid (Commercial)";
     };
     geist-sans = {
+      enable = true;
       package = pkgs.geist-font.sans;
       name = "Geist Sans";
       style = "Sans-serif";
@@ -232,56 +297,67 @@
       licenseInfo = "Paid (Commercial)";
     };
     inter = {
+      enable = true;
       package = pkgs.inter;
       name = "Inter";
       style = "Sans-serif";
     };
     lato = {
+      enable = true;
       package = pkgs.lato;
       name = "Lato";
       style = "Sans-serif";
     };
     liberation-ttf = {
+      enable = true;
       package = pkgs.liberation_ttf;
       name = "Liberation";
       style = "Sans-serif";
     };
     montserrat = {
+      enable = true;
       package = pkgs.montserrat;
       name = "Montserrat";
       style = "Sans-serif";
     };
     noto-fonts = {
+      enable = true;
       package = pkgs.noto-fonts;
       name = "Noto Sans";
       style = "Sans-serif";
     };
     noto-fonts-cjk-sans = {
+      enable = true;
       package = pkgs.noto-fonts-cjk-sans;
       name = "Noto Sans CJK";
       style = "Sans-serif";
     };
     noto-fonts-emoji = {
+      enable = true;
       package = pkgs.noto-fonts-emoji;
       name = "Noto Emoji";
       style = "Sans-serif";
     };
     nunito = {
+      enable = true;
       package = pkgs.nunito;
       name = "Nunito";
       style = "Sans-serif";
     };
     open-sans = {
+      enable = true;
       package = pkgs.open-sans;
       name = "Open Sans";
       style = "Sans-serif";
     };
     overpass = {
+      enable = true;
       package = pkgs.overpass;
       name = "Overpass";
       style = "Sans-serif";
     };
     poppins = {
+      enable = true;
       package = pkgs.poppins;
       name = "Poppins";
       style = "Sans-serif";
@@ -293,44 +369,51 @@
       licenseInfo = "Paid (Commercial)";
     };
     quicksand = {
+      enable = true;
       package = pkgs.quicksand;
       name = "Quicksand";
       style = "Sans-serif";
     };
     raleway = {
+      enable = true;
       package = pkgs.raleway;
       name = "Raleway";
       style = "Sans-serif";
     };
     roboto = {
+      enable = true;
       package = pkgs.roboto;
       name = "Roboto";
       style = "Sans-serif";
     };
     source-sans-pro = {
+      enable = true;
       package = pkgs.source-sans-pro;
       name = "Source Sans Pro";
       style = "Sans-serif";
     };
     ubuntu = {
+      enable = true;
       package = pkgs.ubuntu_font_family;
       name = "Ubuntu";
       style = "Sans-serif";
     };
     work-sans = {
+      enable = true;
       package = pkgs.work-sans;
       name = "Work Sans";
       style = "Sans-serif";
     };
   };
-
   serif = {
     alegreya = {
+      enable = true;
       package = pkgs.alegreya;
       name = "Alegreya";
       style = "Serif";
     };
     cardo = {
+      enable = true;
       package = pkgs.cardo;
       name = "Cardo";
       style = "Serif";
@@ -342,46 +425,55 @@
       licenseInfo = "Paid (Adobe)";
     };
     cormorant-garamond = {
+      enable = true;
       package = pkgs.cormorant-garamond;
       name = "Cormorant Garamond";
       style = "Serif";
     };
     crimson = {
+      enable = true;
       package = pkgs.crimson;
       name = "Crimson";
       style = "Serif";
     };
     eb-garamond = {
+      enable = true;
       package = pkgs.eb-garamond;
       name = "EB Garamond";
       style = "Serif";
     };
     garamond-libre = {
+      enable = true;
       package = pkgs.garamond-libre;
       name = "Garamond Libre";
       style = "Serif";
     };
     gelasio = {
+      enable = true;
       package = pkgs.gelasio;
       name = "Gelasio";
       style = "Serif";
     };
     liberation-serif = {
+      enable = true;
       package = pkgs.liberation_serif;
       name = "Liberation Serif";
       style = "Serif";
     };
     libre-baskerville = {
+      enable = true;
       package = pkgs.libre-baskerville;
       name = "Libre Baskerville";
       style = "Serif";
     };
     lora = {
+      enable = true;
       package = pkgs.lora;
       name = "Lora";
       style = "Serif";
     };
     merriweather = {
+      enable = true;
       package = pkgs.merriweather;
       name = "Merriweather";
       style = "Serif";
@@ -393,6 +485,7 @@
       licenseInfo = "Paid (Adobe)";
     };
     playfair-display = {
+      enable = true;
       package = pkgs.playfair-display;
       name = "Playfair Display";
       style = "Serif";
@@ -404,100 +497,78 @@
       licenseInfo = "Paid (Commercial)";
     };
     source-serif-pro = {
+      enable = true;
       package = pkgs.source-serif-pro;
       name = "Source Serif Pro";
       style = "Serif";
     };
     vollkorn = {
+      enable = true;
       package = pkgs.vollkorn;
       name = "Vollkorn";
       style = "Serif";
     };
   };
-
   display = {
     amatic-sc = {
+      enable = true;
       package = pkgs.amatic-sc;
       name = "Amatic SC";
       style = "Display";
     };
     anton = {
+      enable = true;
       package = pkgs.anton;
       name = "Anton";
       style = "Display";
     };
     bangers = {
+      enable = true;
       package = pkgs.bangers;
       name = "Bangers";
       style = "Display";
     };
     bebas-neue = {
+      enable = true;
       package = pkgs.bebas-neue;
       name = "Bebas Neue";
       style = "Display";
     };
     comfortaa = {
+      enable = true;
       package = pkgs.comfortaa;
       name = "Comfortaa";
       style = "Display";
     };
     dancing-script = {
+      enable = true;
       package = pkgs.dancing-script;
       name = "Dancing Script";
       style = "Display";
     };
     fredoka-one = {
+      enable = true;
       package = pkgs.fredoka-one;
       name = "Fredoka One";
       style = "Display";
     };
     oswald = {
+      enable = true;
       package = pkgs.oswald;
       name = "Oswald";
       style = "Display";
     };
     pacifico = {
+      enable = true;
       package = pkgs.pacifico;
       name = "Pacifico";
       style = "Display";
     };
     righteous = {
+      enable = true;
       package = pkgs.righteous;
       name = "Righteous";
       style = "Display";
-    };
-  };
-
-  symbols = {
-    feather = {
-      package = pkgs.feather-font;
-      name = "Feather";
-      style = "Symbols";
-    };
-    font-awesome = {
-      package = pkgs.font-awesome;
-      name = "Font Awesome";
-      style = "Symbols";
-    };
-    material-design-icons = {
-      package = pkgs.material-design-icons;
-      name = "Material Design Icons";
-      style = "Symbols";
-    };
-    nerdfonts = {
-      package = pkgs.nerdfonts;
-      name = "Nerd Fonts";
-      style = "Symbols";
-    };
-    powerline-fonts = {
-      package = pkgs.powerline-fonts;
-      name = "Powerline Fonts";
-      style = "Symbols";
-    };
-    powerline-symbols = {
-      package = pkgs.powerline-symbols;
-      name = "Powerline Symbols";
-      style = "Symbols";
     };
   };
 }
