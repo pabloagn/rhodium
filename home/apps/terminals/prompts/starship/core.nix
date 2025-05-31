@@ -9,7 +9,7 @@ in
     username = {
       format = "[$user]($style)";
       show_always = true;
-      style = colors.base0D;
+      style_user = colors.base0D;
     };
 
     hostname = {

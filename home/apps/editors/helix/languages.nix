@@ -318,11 +318,11 @@
           indent = { tab-width = 4; unit = "    "; };
         }
       ];
-      file-type = [{
-        name = "json";
-        pattern = {
-          suffix = ".code-workspace";
-        };
-      }];
+      # file-type = [{
+        # name = "json";
+        # pattern = {
+          # suffix = ".code-workspace";
+        # };
+      # }];
     };
 }
