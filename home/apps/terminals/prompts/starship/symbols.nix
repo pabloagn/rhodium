@@ -13,7 +13,7 @@ in
     docker_context.symbol = formatIcon icons.tech.docker "🐳";
 
     # Editors
-    vim.symbol = formatIcon icons.editors.vim "🗒️";
+    #vim.symbol = formatIcon icons.editors.vim "🗒️";
 
     # File System & Package Management
     directory.read_only = formatIcon icons.cod.warning "🔒";

@@ -48,7 +48,7 @@ in
   xdg.desktopEntries = lib.mapAttrs toDesktopEntry generatedEntries;
 
   # Debug file for inspection
-  home.file."desktop-entries-debug.yaml" = {
-    source = raffiConfig;
-  };
+  # home.file."desktop-entries-debug.yaml" = {
+  #   source = raffiConfig;
+  # };
 }

@@ -37,11 +37,14 @@ in
 
   # List All Tree
   lat = "eza -Ta";
+  tree = "eza -Ta"; # In the meantime while I gain confidence with above
+
   lat1 = "eza -Ta -L=1";
   lat2 = "eza -Ta -L=2";
   lat3 = "eza -Ta -L=3";
   lat4 = "eza -Ta -L=4";
   lat5 = "eza -Ta -L=5";
+
 
   # List List Tree Yank
   llty = "eza -T | wl-copy";

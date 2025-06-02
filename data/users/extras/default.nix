@@ -1,6 +1,4 @@
-# data/users/extras/default.nix
-
-{ config, lib, pkgs, userPreferences, ... }:
+{ ... }:
 
 {
   imports = [

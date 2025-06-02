@@ -19,6 +19,13 @@
       icon = "neovim";
       description = "Neovim";
     };
+
+    zeditor-instance = {
+      binary = "zeditor";
+      args = [ ];
+      icon = "zeditor";
+      description = "Zeditor";
+    };
   };
 
   viewers = {
@@ -28,5 +35,20 @@
       icon = "feh";
       description = "Image Viewer";
     };
+  };
+  productivity = {
+    onepassword = {
+      binary = "1password";
+      args = [  ];
+      icon = "onepassword";
+      description = "1Password";
+    };
+    zen = {
+      binary = "zen";
+      args = [  ];
+      icon = "zen";
+      description = "Zen Browser";
+    };
+
   };
 }

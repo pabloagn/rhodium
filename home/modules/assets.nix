@@ -1,9 +1,9 @@
-{ lib, config, pkgs, ... }:
+{ lib, config, ... }:
 with lib;
 let
   cfg = config.assets;
 
-  repoAssetsPath = toString (../assets);
+  repoAssetsPath = toString ../assets;
 
   mkAssetLink = enable: targetPath: sourceSubdir:
     mkIf enable {
