@@ -9,6 +9,7 @@
       "toml"
       "dockerfile"
       "catpuccin icons"
+      "git firefly"
     ];
     userSettings = {
       features = {

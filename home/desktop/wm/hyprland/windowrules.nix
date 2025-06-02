@@ -7,7 +7,7 @@
         "workspace special:calculator,class:(qalculate-gtk)"
         "workspace special:calendar,class:(foot|st|alacritty|kitty),title:(calcurse)"
         # Add opacity to Zed Editor
-        "opacity 0.85, class:(dev.zed.Zed)"
+        "opacity 0.90, class:(dev.zed.Zed)"
       ];
       layerrule = [
         "noanim, ^(rofi)$"
