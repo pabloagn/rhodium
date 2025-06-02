@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ ... }:
 
 {
   programs.waybar = {
@@ -6,10 +6,10 @@
   };
 
   xdg.configFile."waybar/config.jsonc" = {
-		  source = ./waybar/config.jsonc;
-	 };
+    source = ./waybar/config.jsonc;
+  };
 
   xdg.configFile."waybar/style.css" = {
-		  source = ./waybar/style.css;
-	 };
+    source = ./waybar/style.css;
+  };
 }

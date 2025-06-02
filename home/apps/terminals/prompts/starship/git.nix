@@ -16,7 +16,7 @@ in
       modified = getIcon unicodeIcons.status.exclamation "!";
       staged = getIcon unicodeIcons.math.plus "+";
       renamed = getIcon unicodeIcons.typography.quoteRight "»";
-      deleted = getIcon unicodeIcons.status.cross "✘";
+      deleted = getIcon unicodeIcons.status.cross "✗";
     };
   };
 }

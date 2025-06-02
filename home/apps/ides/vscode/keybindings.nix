@@ -1,4 +1,5 @@
-{ pkgs, ... }:
+{ ... }:
+
 {
   programs.vscode = {
     profiles = {

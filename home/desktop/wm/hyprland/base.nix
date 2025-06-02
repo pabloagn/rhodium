@@ -35,7 +35,7 @@
         repeat_delay = 250;
         repeat_rate = 60;
         follow_mouse = 1;
-        sensitivity = -0.2;
+        sensitivity = -0.3;
         touchpad = {
           natural_scroll = false;
         };
@@ -43,6 +43,8 @@
 
       gestures = {
         workspace_swipe = true;
+        workspace_swipe_touch = true;
+        workspace_swipe_use_r = true;
       };
 
       general = {
@@ -51,8 +53,9 @@
         gaps_in = 10;
         gaps_out = 15;
         border_size = 0;
-        "col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
-        "col.inactive_border" = "rgba(595959aa)";
+        # "col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
+        "col.active_border" = "rgba(00000000)";
+        "col.inactive_border" = "rgba(00000000)";
         resize_on_border = false;
         allow_tearing = false;
       };
@@ -72,15 +75,20 @@
       };
 
       decoration = {
-        rounding = 5;
+        rounding = 0;
         active_opacity = 1.0;
         inactive_opacity = 0.9;
         blur = {
           enabled = true;
-          size = 3;
+          size = 8;
           passes = 3;
-          vibrancy = 0.1696;
+          new_optimizations = "on";
+          noise = 0.01;
+          contrast = 0.9;
+          brightness = 0.8;
+          popups = true;
         };
+        shadow = { };
       };
     };
 

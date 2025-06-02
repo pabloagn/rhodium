@@ -1,4 +1,5 @@
 { pkgs, ... }:
+
 {
   programs.zed-editor = {
     enable = true;
@@ -11,6 +12,7 @@
       "catpuccin icons"
       "git firefly"
     ];
+
     userSettings = {
       features = {
         copilot = false;
@@ -132,10 +134,23 @@
           };
         };
       };
-      auto_install_extensions = {
-        html = true;
-      };
     };
+
+    userKeymaps = [
+      {
+        context = "Workspace";
+        bindings = {
+          "ctrl-b" = "workspace::ToggleLeftDock";
+        };
+      }
+      {
+        context = "Editor";
+        bindings = {
+          "space c" = "editor::ToggleComments";
+          "ctrl-b" = "workspace::ToggleLeftDock";
+        };
+      }
+    ];
   };
 
   xdg.configFile."zed/themes/chiaroscuro.json" = {

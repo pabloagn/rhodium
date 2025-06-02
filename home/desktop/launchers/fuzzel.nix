@@ -11,6 +11,6 @@
   };
 
   home.packages = with pkgs; [
-    raffi # Raffi config is generated dynamically. Check home modules...
+    raffi # Raffi config is generated dynamically. Check home modules
   ];
 }
