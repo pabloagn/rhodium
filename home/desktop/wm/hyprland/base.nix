@@ -24,6 +24,7 @@
     settings = {
       exec-once = [
         "bash ~/.local/bin/desktop-autostart.sh"
+
       ];
 
       input = {
@@ -88,7 +89,7 @@
           brightness = 0.8;
           popups = true;
         };
-        shadow = { };
+        # shadow = { };
       };
     };
 

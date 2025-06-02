@@ -9,18 +9,18 @@
         "workspace special:calendar,class:(foot|st|alacritty|kitty),title:(calcurse)"
 
         # Add transparency
-        "opacity 0.95 0.85,class:^(.*)$,focus:0"
+        # "opacity 0.95,class:^(.*)$,focus:0"
 
         # Zed Editor
-        # "opacity 0.95, class:(dev.zed.Zed)"
+        "opacity 0.95, class:(dev.zed.Zed)"
         # VS Code
-        # "opacity 0.95, class:(code)"
+        "opacity 0.95, class:(code)"
         # Firefox
-        # "opacity 0.95, class:(firefox)"
+        "opacity 0.95, class:(firefox)"
         # Zen Browser
-        # "opacity 0.95, class:(zen-alpha)"
+        "opacity 0.95, class:(zen-alpha)"
 
-        # Launchers
+        # Launchers - Rofi
         "float,class:^(Rofi)$"
         "center,class:^(Rofi)$"
         "noborder,class:^(Rofi)$"
@@ -29,6 +29,14 @@
         "noanim,class:^(Rofi)$"
         "stayfocused,class:^(Rofi)$"
 
+        # Launchers - Fuzzel
+        "float,class:^(raffi)$"
+        "center,class:^(raffi)$"
+        "noborder,class:^(raffi)$"
+        "noshadow,class:^(raffi)$"
+        "stayfocused,class:^(raffi)$"
+        "animation none,class:^(raffi)$"
+        "immediate,class:^(raffi)$"
       ];
 
       layerrule = [

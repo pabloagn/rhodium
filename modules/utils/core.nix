@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 {
   environment.systemPackages = with pkgs; [
     mesa
@@ -6,6 +6,8 @@
     gdb # GNU Project Debugger
     libGL
     libGLU
+    glib
+    gsettings-desktop-schemas
 
     # Core system utilities
     uutils-coreutils-noprefix

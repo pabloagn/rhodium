@@ -6,30 +6,27 @@
       # === PREMIUM WINDOW SWITCHING ===
 
       # Smart Alt+Tab: 2 windows = toggle, more = rofi picker
-      "ALT, Tab, exec, ~/.local/bin/window-switcher smart"
+      # "ALT, Tab, exec, ~/.local/bin/window-switcher smart"
 
       # Traditional cycling (for muscle memory)
-      "ALT SHIFT, Tab, exec, ~/.local/bin/window-switcher cycle-back"
+      # "ALT SHIFT, Tab, exec, ~/.local/bin/window-switcher cycle-back"
 
       # Power user: Super+Tab for workspace overview
-      "SUPER, Tab, exec, ~/.local/bin/window-switcher workspace"
+      # "SUPER, Tab, exec, ~/.local/bin/window-switcher workspace"
 
-      # Recent windows (Super+R for "recent")
-      "SUPER, grave, exec, ~/.local/bin/window-switcher recent"
+      # Recent windows (Super+grave changed to avoid conflict)
+      # "SUPER, semicolon, exec, ~/.local/bin/window-switcher recent"
 
       # Quick window cycling (no UI, just focus)
-      "SUPER, bracketright, exec, ~/.local/bin/window-switcher cycle"
-      "SUPER, bracketleft, exec, ~/.local/bin/window-switcher cycle-back"
+      # "SUPER, bracketright, exec, ~/.local/bin/window-switcher cycle"
+      # "SUPER, bracketleft, exec, ~/.local/bin/window-switcher cycle-back"
 
       # Emergency: Force rofi picker
-      "SUPER ALT, Tab, exec, ~/.local/bin/window-switcher rofi"
+      # "SUPER ALT, Tab, exec, ~/.local/bin/window-switcher rofi"
+
 
       # # Alt-Tab window switching
-      # "ALT, Tab, exec, hyprctl dispatch focuscurrentorlast; hyprctl dispatch alterzorder top"
-
-
-
-
+      "ALT, Tab, exec, hyprctl dispatch focuscurrentorlast; hyprctl dispatch alterzorder top"
 
       # Apps
       # ----------------------------------------
