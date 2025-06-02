@@ -26,6 +26,14 @@
       icon = "zeditor";
       description = "Zeditor";
     };
+
+    code-instance = {
+      binary = "code";
+      args = [ ];
+      icon = "code";
+      description = "VS Code";
+    };
+
   };
 
   viewers = {

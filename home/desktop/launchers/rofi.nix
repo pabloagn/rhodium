@@ -2,7 +2,7 @@
 
 {
   programs.rofi = {
-    enable = false;
+    enable = true;
     package = pkgs.rofi-wayland;
   };
 

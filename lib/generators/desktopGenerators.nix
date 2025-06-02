@@ -53,7 +53,7 @@ let
         bookmark.url
       ];
       icon = browser;
-      description = "[B] | ${bookmark.description} | ${capitalize browser} ${profileName}";
+      description = "⊹ ${bookmark.description} | ${capitalize browser} ${profileName}";
     };
 
   # Profile generator: Browser + profile only
@@ -71,7 +71,7 @@ let
         browserConfig.newWindowFlag
       ];
       icon = browser;
-      description = "[P] | ${capitalize browser} ${profileName}";
+      description = "⊹ ${capitalize browser} ${profileName}";
     };
 
   # App generator: Custom binary + flexible args
@@ -79,7 +79,7 @@ let
     binary = app.binary;
     args = app.args;
     icon = app.icon;
-    description = "[A] | ${app.description}";
+    description = "⊹ ${app.description}";
   };
 
 in

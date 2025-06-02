@@ -21,6 +21,7 @@
     # STARSHIP_CONFIG = "${config.xdg.configHome}/starship"; # We need to figure out how to do this properly since hm has dir predefined
 
     # XDG and other vars
+    RHODIUM = "${config.home.homeDirectory}/rhodium";
     XDG_BIN_HOME = "${config.home.homeDirectory}/.local/bin"; # Not set by NixOS so setting here
     XDG_CONFIG_HOME = "${config.home.homeDirectory}/.config";
     XDG_CACHE_HOME = "${config.home.homeDirectory}/.cache";

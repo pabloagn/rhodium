@@ -1,4 +1,4 @@
-{ config, lib, pkgs, userPreferences, userExtras, rhodiumLib, ... }:
+{ lib, pkgs, userPreferences, userExtras, rhodiumLib, ... }:
 let
   # Generate all desktop entries using rhodium lib
   generatedEntries = rhodiumLib.generators.desktopGenerators.generateAllEntries
@@ -10,13 +10,9 @@ let
   raffiConfig = yamlFormat.generate "raffi.yaml" generatedEntries;
 
   # Helper to safely quote arguments for .desktop files
-  # Desktop files need quotes around arguments containing special characters
-  # and % characters must be escaped as %% to avoid field code interpretation
   escapeDesktopArg = arg:
     let
-      # First escape % characters to avoid field code conflicts
       escapedPercent = lib.replaceStrings ["%"] ["%%"] arg;
-      # Check if we need quotes due to special characters
       needsQuotes = lib.any (char: lib.hasInfix char arg) [ "?" "&" "=" " " ";" "|" "<" ">" "(" ")" "[" "]" "{" "}" "$" "`" "\\" "\"" "'" "\n" "\t" "#" ];
     in
     if needsQuotes

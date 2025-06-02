@@ -71,6 +71,7 @@
     empty = { char = "∅"; code = "U+2205"; };
     aplUpCaret = { char = "⎉"; code = "U+2389"; };
     lambda = { char = "λ"; code = "U+03BB"; };
+    hermitianMatrix = { char = "⊹"; code = "U+22B9"; };
   };
 
   status = {

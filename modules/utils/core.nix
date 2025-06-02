@@ -1,6 +1,12 @@
 { config, pkgs, ... }:
 {
   environment.systemPackages = with pkgs; [
+    mesa
+    libva
+    gdb # GNU Project Debugger
+    libGL
+    libGLU
+
     # Core system utilities
     uutils-coreutils-noprefix
     coreutils
