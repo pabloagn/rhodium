@@ -1,5 +1,8 @@
-{ pkgs, ... }:
+{ ... }:
 {
+  imports = [
+    ./atuin.nix
+  ];
   programs = {
     fzf = {
       enable = true;

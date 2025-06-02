@@ -7,6 +7,7 @@
       description = "User 001";
       extraGroups = [ "wheel" "networkmanager" "docker" ];
       isNormalUser = true;
+      shell = "fish";
       # hashedPassword = null;
       # initialPassword = "changeme";
     };

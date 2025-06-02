@@ -1,4 +1,4 @@
-{ config, ... }:
+{ ... }:
 {
   # Rhodium system management function
   rh = ''

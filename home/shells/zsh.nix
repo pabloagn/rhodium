@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, ... }:
 
 let
   common = import ./common { inherit config; };
@@ -10,32 +10,62 @@ in
     # dotDir = "${config.xdg.configHome}/zsh";
     autosuggestion = {
       enable = true;
-      # TODO: Add styles here
-      # highlight = {};
+      # Customize suggestion appearance
+      highlight = "fg=#7d7d7d,underline";
+      strategy = [
+        "history"
+        "completion"
+        "match_prev_cmd"
+      ];
     };
+
     enableCompletion = true;
     autocd = true;
 
     syntaxHighlighting = {
-      # TODO: Add styles here
       enable = true;
-      # styles = {
-      #   "alias" = "fg=bold";
-      # };
+      highlighters = [
+        "main"
+        "brackets"
+        "pattern"
+        "cursor"
+        "regexp"
+        "root"
+        "line"
+      ];
+      styles = {
+        "command" = "fg=green,bold";
+        "alias" = "fg=blue,bold";
+        "builtin" = "fg=cyan,bold";
+        "function" = "fg=magenta,bold";
+        "command-substitution-delimiter" = "fg=yellow";
+        "single-hyphen-option" = "fg=cyan";
+        "double-hyphen-option" = "fg=cyan";
+      };
     };
+
+
+
+
+
+
+
+
 
     shellAliases = common.aliases;
     # TODO:
     #   - See if this is actually correct.
     #   - Annoyed as fuck that the history disappears at times.
     history = {
-      extended = true; # Save timestamps (TODO: this is causing a fucking issue on nix shells (commands are pulled along with their timestamps))
+      extended = true;
       expireDuplicatesFirst = true;
-      ignoreDups = true; # Ignore consecutive duplicates
-      ignoreAllDups = false; # Don't remove older duplicates
-      save = 1000000000; # Save all entries
-      size = 1000000000; # Very large history size
+      ignoreDups = false; # Keep duplicates for better context
+      ignoreAllDups = false;
+      ignoreSpace = true; # Commands starting with space won't be saved
+      save = 1000000000;
+      size = 1000000000;
       path = "${config.xdg.cacheHome}/zsh/.zsh_history";
+      share = true; # Share between sessions
     };
 
     historySubstringSearch = {

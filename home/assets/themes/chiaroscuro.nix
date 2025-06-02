@@ -16,7 +16,7 @@ in
         base00 = colorTokens.abyss.n950;
         base01 = colorTokens.wraith.n900;
         base02 = colorTokens.wraith.n800;
-        base03 = colorTokens.wraith.n400;
+        base03 = colorTokens.wraith.n100;
         base04 = colorTokens.lacuna.n700;
         base05 = colorTokens.archangel.n900;
         base06 = colorTokens.archangel.n500;

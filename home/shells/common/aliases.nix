@@ -88,6 +88,13 @@ in
   # -------------------------------------
   yank = "wl-copy";
 
+  # History
+  # -------------------------------------
+  h = "history";
+  hs = "history | grep";
+  hsi = "history | grep -i";
+  hist = "history | bat --language=bash --style=numbers";
+
   # General
   # -------------------------------------
   cl = "clear";

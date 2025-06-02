@@ -1,4 +1,4 @@
-{ config, pkgs, pkgs-unstable, inputs, users, host, ... }:
+{ host, ... }:
 {
   imports = [
     ./hardware-configuration.nix
@@ -29,14 +29,11 @@
   ];
 
   # Host Configuration
-  # -------------------------
   networking = {
     hostName = host.hostname or "nixos";
     networkmanager.enable = true;
   };
 
-  # Options
-  # -------------------------
   # Extra Services
   services = {
     asusKeyboardBacklight.enable = true;

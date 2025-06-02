@@ -1,6 +1,5 @@
-{ config, pkgs, lib, users, ... }:
+{ pkgs, users, ... }:
 let
-  # TODO: Eventually this will be dynamic
   user_001_data = users.user_001 or {
     username = "user";
     fullName = "Default User";
@@ -14,7 +13,8 @@ in
     isNormalUser = user_001_data.isNormalUser or true;
     description = user_001_data.description;
     extraGroups = user_001_data.extraGroups;
-    shell = pkgs.zsh;
+    # shell = pkgs.zsh;
+    shell = pkgs.fish;
     home = "/home/${user_001_data.username}";
     # hashedPassword = user_001_data.hashedPassword or null;
     # initialPassword = user_001_data.initialPassword or null;
