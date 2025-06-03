@@ -1,8 +1,8 @@
-{ lib, config, ... }:
+{ lib, ... }:
 
 let
-  icons = config.theme.icons;
-  bulletSymbol = icons.bullet;
+  # icons = config.theme.icons;
+  # bulletSymbol = icons.bullet;
   # promptSymbol = icons.lambda;
 
   # We add a prefix for faster parsing later on
@@ -54,7 +54,7 @@ let
       attrs;
 
   # Bookmark generator: Browser + profile + URL + special args
-  mkBookmark = userPreferences: name: bookmark:
+  mkBookmark = userPreferences: theme: name: bookmark:
     let
       defaultBrowser = userPreferences.apps.browser;
       browser = bookmark.browser or defaultBrowser;
@@ -70,14 +70,14 @@ let
         bookmark.url
       ];
       icon = browser;
-      description = "${toString bulletSymbol} ${bookmark.description} | ${capitalize browser} ${profileName}";
+      description = "${toString theme.icons.bullet} ${bookmark.description} | ${capitalize browser} ${profileName}";
       entryType = "bookmark";
       profileName = bookmark.profile;
       categories = bookmark.categories or [ ];
     };
 
   # Profile generator: Browser + profile only + special args
-  mkProfile = userPreferences: name: profile:
+  mkProfile = userPreferences: theme: name: profile:
     let
       defaultBrowser = userPreferences.apps.browser;
       browser = profile.browser or defaultBrowser;
@@ -92,18 +92,18 @@ let
         browserConfig.newWindowFlag
       ];
       icon = browser;
-      description = "${toString bulletSymbol} ${capitalize browser} ${profileName}";
+      description = "${toString theme.icons.bullet} ${capitalize browser} ${profileName}";
       entryType = "profile";
       profileName = profile.profile;
       categories = profile.categories or [ ];
     };
 
   # App generator: Custom binary + flexible args + special args
-  mkApp = userPreferences: name: app: {
+  mkApp = userPreferences: theme: name: app: {
     binary = app.binary;
     args = app.args;
     icon = app.icon;
-    description = "${toString bulletSymbol} ${app.description}";
+    description = "${toString theme.icons.bullet} ${app.description}";
     entryType = "application";
     categories = app.categories or [ ];
   };
@@ -112,12 +112,12 @@ in
 {
   inherit mkBookmark mkProfile mkApp flattenNestedAttrs;
 
-  generateAllEntries = userPreferences: userExtras:
+  generateAllEntries = userPreferences: userExtras: theme:
     let
       # Partially apply userPreferences to each generator function
-      bookmarkGen = mkBookmark userPreferences;
-      profileGen = mkProfile userPreferences;
-      appGen = mkApp userPreferences;
+      bookmarkGen = mkBookmark userPreferences theme;
+      profileGen = mkProfile userPreferences theme;
+      appGen = mkApp userPreferences theme;
 
       # Flatten nested structures and generate entries for each type
       bookmarkEntries = lib.mapAttrs bookmarkGen (flattenNestedAttrs userExtras.bookmarksData);

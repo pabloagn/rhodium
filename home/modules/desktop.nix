@@ -1,9 +1,12 @@
-{ lib, pkgs, userPreferences, userExtras, rhodiumLib, ... }:
+{ lib, config, pkgs, userPreferences, userExtras, rhodiumLib, ... }:
 
 let
+  theme = config.theme;
+
   generatedEntries = rhodiumLib.generators.desktopGenerators.generateAllEntries
     userPreferences
-    userExtras;
+    userExtras
+    theme;
 
   # Create YAML configuration
   yamlFormat = pkgs.formats.yaml { };

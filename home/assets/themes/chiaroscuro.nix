@@ -48,8 +48,8 @@ in
         iconsNerdFont = iconsNerdFontTokens;
         iconsUnicode = iconsUnicodeTokens;
 
-        bullet = iconsUnicodeTokens.math.hermitianMatrix;
-        question = iconsUnicodeTokens.status.question;
+        bullet = iconsUnicodeTokens.math.hermitianMatrix.char;
+        question = iconsUnicodeTokens.status.question.char;
       };
 
       wallpapers = wallpaperTokens.dante;

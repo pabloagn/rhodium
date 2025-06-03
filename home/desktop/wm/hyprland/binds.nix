@@ -1,8 +1,4 @@
 { config, ... }:
-let
-  rofi_launcher = "${config.home.sessionVariables.XDG_BIN_HOME}/rofi-launcher.sh";
-  # rofi_desktop = "${config.home.sessionVariables.XDG_BIN_HOME}/rofi-desktop.sh";
-in
 {
   wayland.windowManager.hyprland.settings = {
     bind = [
@@ -35,9 +31,10 @@ in
       "$mainMod, W, exec, ghostty"
       "$mainMod, B, exec, firefox"
       "$mainMod, F, exec, thunar"
-      "$mainMod, D, exec, ghostty hx"
+      "$mainMod, D, exec, ghostty -e hx"
       # "$mainMod, A, exec, raffi"
-      "$mainMod, A, exec, ${rofi_launcher}"
+      "$mainMod, A, exec, ~/.local/bin/rofi-launcher.sh"
+      # "$mainMod, A, exec, ${rofi_launcher}"
 
       # Rofi
       "$mainMod, escape, exec, killall rofi"
