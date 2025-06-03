@@ -93,8 +93,7 @@ in
       #_comp_options += (globdots)
 
       # Include custom functions
-      ${functions.yy}
-      ${functions.rh}
+      ${functions.zshFunctions.yy}
     '';
   };
 }

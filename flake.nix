@@ -178,10 +178,6 @@
             nil
             git
           ];
-
-          shellHook = ''
-            echo "Welcome to Rhodium development shell"
-          '';
         };
       };
     };

@@ -2,6 +2,8 @@
 {
   imports = [
     ./atuin.nix
+    ./mcfly.nix
+    ./skim.nix
   ];
   programs = {
     fzf = {
