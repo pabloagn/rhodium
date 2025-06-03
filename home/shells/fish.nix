@@ -21,7 +21,7 @@ in
 
     interactiveShellInit = ''
       ${fishModules.atuin}
-      ${fishModules.keybindings}
+      ${fishModules.keybinds}
       ${fishModules.abbreviations}
       ${fishModules.theme}
       ${fishModules.prompt}
