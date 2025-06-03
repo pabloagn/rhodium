@@ -20,20 +20,21 @@
     nur = {
       url = "github:nix-community/NUR";
     };
-    # Unofficial Zen Browser Input (Requires unstable)
+    # Unofficial Zen Browser Input
     zen-browser = {
-      url = "github:MarceColl/zen-browser-flake";
+      url = "github:0xc000022070/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     # Hyprcursor requirements
     hyprland = {
       url = "github:hyprwm/Hyprland";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    rose-pine-hyprcursor = {
-      url = "github:ndom91/rose-pine-hyprcursor";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.hyprlang.follows = "hyprland/hyprlang";
-    };
+    # rose-pine-hyprcursor = {
+    # url = "github:ndom91/rose-pine-hyprcursor";
+    # inputs.nixpkgs.follows = "nixpkgs";
+    # inputs.hyprlang.follows = "hyprland/hyprlang";
+    # };
   };
 
   outputs =
@@ -45,7 +46,7 @@
     , nur
     , zen-browser
     , hyprland
-    , rose-pine-hyprcursor
+      # , rose-pine-hyprcursor
     }@inputs:
     let
       lib = nixpkgs.lib;

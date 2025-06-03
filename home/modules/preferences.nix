@@ -22,6 +22,7 @@
     XDG_BIN_HOME = "${config.home.homeDirectory}/.local/bin"; # Not set by NixOS so setting here
     XDG_CONFIG_HOME = "${config.home.homeDirectory}/.config";
     XDG_CACHE_HOME = "${config.home.homeDirectory}/.cache";
+    XDG_SHARE_APPS = "${config.home.homeDirectory}/.nix-profile/share/applications";
     HISTFILE = "${config.xdg.cacheHome}/zsh/.zsh_history";
     NODE_REPL_HISTORY = "${config.xdg.cacheHome}/node/.node_repl_history";
     PYTHON_HISTORY = "${config.xdg.cacheHome}/python/.python_history";

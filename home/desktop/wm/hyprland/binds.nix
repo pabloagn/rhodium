@@ -1,9 +1,11 @@
-{ ... }:
-
+{ config, ... }:
+let
+  rofi_launcher = "${config.home.sessionVariables.XDG_BIN_HOME}/rofi-launcher.sh";
+  # rofi_desktop = "${config.home.sessionVariables.XDG_BIN_HOME}/rofi-desktop.sh";
+in
 {
   wayland.windowManager.hyprland.settings = {
     bind = [
-      # === PREMIUM WINDOW SWITCHING ===
 
       # Smart Alt+Tab: 2 windows = toggle, more = rofi picker
       # "ALT, Tab, exec, ~/.local/bin/window-switcher smart"
@@ -33,8 +35,9 @@
       "$mainMod, W, exec, ghostty"
       "$mainMod, B, exec, firefox"
       "$mainMod, F, exec, thunar"
-      "$mainMod, D, exec, ghostty --directory ~ nvim"
-      "$mainMod, A, exec, raffi"
+      "$mainMod, D, exec, ghostty hx"
+      # "$mainMod, A, exec, raffi"
+      "$mainMod, A, exec, ${rofi_launcher}"
 
       # Rofi
       "$mainMod, escape, exec, killall rofi"

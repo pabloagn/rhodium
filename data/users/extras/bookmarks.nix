@@ -13,7 +13,8 @@ let
     travel = "travel";
     torrenting = "torrenting";
     config = "config";
-    repository = "repositories";
+    repositories = "repositories";
+    youtubelists = "youtube lists";
   };
 in
 {

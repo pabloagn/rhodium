@@ -1,4 +1,3 @@
-# Apps
 {
   apps = {
     browser = "firefox";
@@ -12,7 +11,6 @@
     pager = "most";
   };
 
-  # Profile mappings for browser profiles
   profiles = {
     firefox = {
       personal = "Personal";

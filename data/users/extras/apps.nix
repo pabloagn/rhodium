@@ -6,6 +6,7 @@
       icon = "helix";
       description = "Editor";
     };
+
     helix-instance = {
       binary = "ghostty";
       args = [ "-e" "hx" ];
@@ -33,7 +34,6 @@
       icon = "code";
       description = "VS Code";
     };
-
   };
 
   viewers = {
@@ -44,16 +44,18 @@
       description = "Image Viewer";
     };
   };
+
   productivity = {
     onepassword = {
       binary = "1password";
-      args = [  ];
+      args = [ "--force-device-scale-factor=1.5" ];
       icon = "onepassword";
       description = "1Password";
     };
+
     zen = {
       binary = "zen";
-      args = [  ];
+      args = [ ];
       icon = "zen";
       description = "Zen Browser";
     };

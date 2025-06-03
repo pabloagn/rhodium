@@ -1,5 +1,13 @@
-{ lib, ... }:
+{ lib, config, ... }:
+
 let
+  icons = config.theme.icons;
+  bulletSymbol = icons.bullet;
+  # promptSymbol = icons.lambda;
+
+  # We add a prefix for faster parsing later on
+  entryPrefix = "rh";
+
   # Browser-specific argument templates
   browserConfigs = {
     firefox = {
@@ -7,16 +15,19 @@ let
       newWindowFlag = "-new-window";
       executable = "firefox";
     };
+
     zen = {
       profileFlag = "--profile";
       newWindowFlag = "--new-window";
       executable = "zen-browser";
     };
+
     chromium = {
       profileFlag = "--profile-directory";
       newWindowFlag = "--new-window";
       executable = "chromium";
     };
+
     brave = {
       profileFlag = "--profile-directory";
       newWindowFlag = "--new-window";
@@ -24,27 +35,33 @@ let
     };
   };
 
+
   # Capitalize first letter for descriptions
   capitalize = str:
     lib.toUpper (lib.substring 0 1 str) + lib.substring 1 (-1) str;
 
   # Flatten nested attribute set into flat structure with combined keys
   flattenNestedAttrs = attrs:
-    lib.concatMapAttrs (topKey: topValue:
-      lib.mapAttrs' (subKey: subValue: {
-        name = "${topKey}-${subKey}";
-        value = subValue;
-      }) topValue
-    ) attrs;
+    lib.concatMapAttrs
+      (topKey: topValue:
+        lib.mapAttrs'
+          (subKey: subValue: {
+            name = "${entryPrefix}-${topKey}-${subKey}";
+            value = subValue;
+          })
+          topValue
+      )
+      attrs;
 
-  # Bookmark generator: Browser + profile + URL
+  # Bookmark generator: Browser + profile + URL + special args
   mkBookmark = userPreferences: name: bookmark:
     let
       defaultBrowser = userPreferences.apps.browser;
       browser = bookmark.browser or defaultBrowser;
       browserConfig = browserConfigs.${browser} or browserConfigs.${defaultBrowser};
       profileName = userPreferences.profiles.${browser}.${bookmark.profile} or bookmark.profile;
-    in {
+    in
+    {
       binary = browserConfig.executable;
       args = [
         browserConfig.profileFlag
@@ -53,17 +70,21 @@ let
         bookmark.url
       ];
       icon = browser;
-      description = "⊹ ${bookmark.description} | ${capitalize browser} ${profileName}";
+      description = "${toString bulletSymbol} ${bookmark.description} | ${capitalize browser} ${profileName}";
+      entryType = "bookmark";
+      profileName = bookmark.profile;
+      categories = bookmark.categories or [ ];
     };
 
-  # Profile generator: Browser + profile only
+  # Profile generator: Browser + profile only + special args
   mkProfile = userPreferences: name: profile:
     let
       defaultBrowser = userPreferences.apps.browser;
       browser = profile.browser or defaultBrowser;
       browserConfig = browserConfigs.${browser} or browserConfigs.${defaultBrowser};
       profileName = userPreferences.profiles.${browser}.${profile.profile} or profile.profile;
-    in {
+    in
+    {
       binary = browserConfig.executable;
       args = [
         browserConfig.profileFlag
@@ -71,22 +92,26 @@ let
         browserConfig.newWindowFlag
       ];
       icon = browser;
-      description = "⊹ ${capitalize browser} ${profileName}";
+      description = "${toString bulletSymbol} ${capitalize browser} ${profileName}";
+      entryType = "profile";
+      profileName = profile.profile;
+      categories = profile.categories or [ ];
     };
 
-  # App generator: Custom binary + flexible args
+  # App generator: Custom binary + flexible args + special args
   mkApp = userPreferences: name: app: {
     binary = app.binary;
     args = app.args;
     icon = app.icon;
-    description = "⊹ ${app.description}";
+    description = "${toString bulletSymbol} ${app.description}";
+    entryType = "application";
+    categories = app.categories or [ ];
   };
 
 in
 {
   inherit mkBookmark mkProfile mkApp flattenNestedAttrs;
 
-  # Generate all entries from imported data
   generateAllEntries = userPreferences: userExtras:
     let
       # Partially apply userPreferences to each generator function

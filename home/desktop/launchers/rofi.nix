@@ -1,12 +1,14 @@
-{ pkgs, ... }:
-
+{ pkgs, userPreferences, ... }:
+let
+  dpiAdjustment = userPreferences.behaviour.dpiAdjustment;
+in
 {
   programs.rofi = {
     enable = true;
-    package = pkgs.rofi-wayland;
+    package = pkgs.rofi;
+    # font = "JetBrainsMono NerdFont 14";
     extraConfig = {
-      kb-repeat-delay = 250;
-      kb-repeat-rate = 60;
+      dpi = dpiAdjustment;
     };
   };
 

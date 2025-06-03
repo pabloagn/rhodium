@@ -1,17 +1,18 @@
 // Configuration
 configuration {
-	modi:                       "drun";
-    show-icons:                 true;
-    display-drun:               "";
+	modi:                       "drun,dmenu";
+    show-icons:                 false;
+    display-drun:               "λ";
+    display-dmenu:              "λ";
     display-run:                "";
     display-filebrowser:        "";
     display-window:             "";
-	drun-display-format:        "{name} [<span weight='light' size='small'><i>({generic})</i></span>]";
+	drun-display-format:        "{name} [<span weight='light' size='small'><i>({x-entry-type})</i></span>]";
 	window-format:              "{w} · {c} · {t}";
+	cycle:                      false; // Dont cycle after end of list
 }
 
 // Colors
-// TODO: Inject theme colors
 * {
     background:     #1E2127FF;
     background-alt: #282B31FF;
@@ -19,13 +20,12 @@ configuration {
     selected:       #61AFEFFF;
     active:         #98C379FF;
     urgent:         #E06C75FF;
+    highlight:      #E06C75FF;  // Color for matched text highlighting
 }
 
-
 // Font
-// TODO: Inject theme font
 * {
-    font: "Iosevka Nerd Font 10";
+    font: "JetBrainsMono NerdFont 13";
 }
 
 
@@ -62,7 +62,7 @@ window {
     location:                    center;
     anchor:                      center;
     fullscreen:                  false;
-    width:                       800px;
+    // width:                       800px;
     x-offset:                    0px;
     y-offset:                    0px;
 
@@ -101,13 +101,13 @@ inputbar {
     border-color:                @border-colour;
     background-color:            @background-colour;
     text-color:                  @foreground-colour;
-    children:                    [ "prompt", "entry" ];
+    children:                    [ "prompt", "entry", "num-filtered-rows", "textbox-num-sep", "num-rows" ];
 }
 
 prompt {
     enabled:                     true;
     background-color:            inherit;
-    text-color:                  inherit;
+    text-color:                  @selected;
 }
 textbox-prompt-colon {
     enabled:                     true;
@@ -130,7 +130,7 @@ listview {
     enabled:                     true;
     columns:                     1;
     lines:                       12;
-    cycle:                       true;
+    cycle:                       false;
     dynamic:                     true;
     scrollbar:                   false;
     layout:                      vertical;
@@ -148,6 +148,7 @@ listview {
     text-color:                  @foreground-colour;
     cursor:                      "default";
 }
+
 scrollbar {
     handle-width:                5px ;
     handle-color:                @handle-colour;
@@ -210,17 +211,18 @@ element-icon {
     size:                        24px;
     cursor:                      inherit;
 }
+
 element-text {
     background-color:            transparent;
     text-color:                  inherit;
-    highlight:                   inherit;
     cursor:                      inherit;
     vertical-align:              0.5;
     horizontal-align:            0.0;
+    highlight:                   bold underline var(highlight);  // Highlighted match style
 }
 
 // Mode Switcher
-mode-switcher{
+mode-switcher {
     enabled:                     true;
     spacing:                     10px;
     margin:                      0px;
@@ -231,6 +233,7 @@ mode-switcher{
     background-color:            transparent;
     text-color:                  @foreground-colour;
 }
+
 button {
     padding:                     10px;
     border:                      0px solid;
@@ -240,6 +243,7 @@ button {
     text-color:                  inherit;
     cursor:                      pointer;
 }
+
 button selected {
     background-color:            var(selected-normal-background);
     text-color:                  var(selected-normal-foreground);
@@ -267,7 +271,7 @@ textbox {
     horizontal-align:            0.0;
     highlight:                   none;
     placeholder-color:           @foreground-colour;
-    blink:                       true;
+    blink:                       false;
     markup:                      true;
 }
 error-message {

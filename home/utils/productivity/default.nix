@@ -15,6 +15,8 @@
     swappy # Screenshot annotation tool
     hyprpicker # Color picker for hyprland
 
+    gtk3 # Includes gtk-launch
+
     # Clipboard utilities
     wl-clipboard # Wayland clipboard utilities
 

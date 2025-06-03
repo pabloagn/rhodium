@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ ... }:
 # TODO: Tidy this up
 {
   programs.ghostty = {
@@ -12,9 +12,13 @@
       # font-thicken = true;
 
       # Cursor
-      cursor-style = "bar";
+      # Enforce no blinking (shell vi mode can interfere)
+      cursor-style = "block";
       cursor-style-blink = false;
+      shell-integration-features = "no-cursor";
+      adjust-cursor-thickness = "2"; # Make cursor line thicker
 
+      # Clipboard
       clipboard-read = "allow";
       clipboard-write = "allow";
       window-padding-x = 20;

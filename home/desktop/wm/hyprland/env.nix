@@ -1,15 +1,23 @@
-{ ... }:
+{ userPreferences, ... }:
 
+let
+  cursorSize = userPreferences.behaviour.cursorSize;
+in
 {
   wayland.windowManager.hyprland = {
     settings = {
       env = [
-        "XCURSOR_SIZE,24"
-        "HYPRCURSOR_SIZE,24"
-        "HYPRCURSOR_THEME,rose-pine-hyprcursor"
+        # Cursors
+        "XCURSOR_SIZE,${toString cursorSize}"
+        "HYPRCURSOR_SIZE,${toString cursorSize}"
+        # "HYPRCURSOR_THEME,rose-pine-hyprcursor"
+        # "XCURSOR_THEME,rose-pine-hyprcursor"
+        "HYPRCURSOR_THEME,phinger-cursors-dark"
+        "XCURSOR_THEME,phinger-cursors-dark"
 
-        "WLR_REPEAT_RATE,60"
-        "WLR_REPEAT_DELAY,250"
+        # X11 scaling
+        # "GDK_SCALE,2"
+        # "GDK_DPI_SCALE,130"
       ];
     };
   };

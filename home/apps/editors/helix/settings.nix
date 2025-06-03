@@ -1,9 +1,8 @@
-{ config, pkgs, lib, ... }:
+{ ... }:
 {
   programs.helix.settings = {
     theme = "chiaroscuro";
 
-    # Move keys to top level
     keys.normal = {
       a = [ "ensure_selections_forward" "append_mode" ];
       G = "goto_file_end";
@@ -19,7 +18,11 @@
       right = [ "ensure_selections_forward" "extend_char_right" "ensure_selections_forward" "collapse_selection" ];
       p = "paste_clipboard_before";
       P = [ "open_below" "normal_mode" "paste_clipboard_before" ];
+      "space" = {
+        space = [ "save_selection" "select_all" "yank_main_selection_to_clipboard" "jump_backward" ];
+      };
     };
+
     keys.select = {
       "y" = [ "yank_main_selection_to_clipboard" "normal_mode" ];
       "d" = [ "delete_selection" "normal_mode" ];
@@ -102,6 +105,7 @@
           "file-type"
         ];
       };
+
       lsp = {
         enable = true;
         auto-signature-help = true;

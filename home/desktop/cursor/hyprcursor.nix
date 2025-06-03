@@ -1,13 +1,19 @@
-{ pkgs, inputs ? {}, lib, ... }:
+{ pkgs, userPreferences, ... }:
 let
-  targetCursor = if inputs ? rose-pine-hyprcursor then {
-    name = "rose-pine-hyprcursor";
-    package = inputs.rose-pine-hyprcursor.packages.${pkgs.system}.default;
-    size = 24;
-    gtk.enable = true;
-    x11.enable = true;
-  } else null;
+  cursorSize = userPreferences.behaviour.cursorSize;
 in
 {
-  home.pointerCursor = lib.mkIf (targetCursor != null) targetCursor;
+  home.pointerCursor = {
+    enable = true;
+    # package = pkgs.rose-pine-hyprcursor;
+    package = pkgs.phinger-cursors;
+    # name = "rose-pine-hyprcursor";
+    name = "phinger-cursors-dark";
+    size = cursorSize;
+
+    # Desktops
+    hyprcursor.enable = true;
+    gtk.enable = true;
+    x11.enable = true;
+  };
 }

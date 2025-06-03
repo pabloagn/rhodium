@@ -1,5 +1,8 @@
-{ pkgs, ... }:
-
+{ pkgs, userPreferences, ... }:
+let
+  keyboardRepeat = userPreferences.behaviour.keyboardRepeat;
+  keyboardDelay = userPreferences.behaviour.keyboardDelay;
+in
 {
   home.packages = with pkgs; [
     hyprpolkitagent
@@ -18,14 +21,19 @@
       enableXdgAutostart = true;
       variables = [ "--all" ];
     };
+
     xwayland = {
       enable = true;
     };
+
     settings = {
       exec-once = [
         "bash ~/.local/bin/desktop-autostart.sh"
-
       ];
+
+      xwayland = {
+        force_zero_scaling = true;
+      };
 
       input = {
         kb_layout = "gb,us,es";
@@ -33,8 +41,8 @@
         kb_model = "";
         kb_options = "grp:win_space_toggle";
         kb_rules = "";
-        repeat_delay = 250;
-        repeat_rate = 60;
+        repeat_delay = keyboardDelay;
+        repeat_rate = keyboardRepeat;
         follow_mouse = 1;
         sensitivity = -0.3;
         touchpad = {

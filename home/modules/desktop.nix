@@ -1,18 +1,17 @@
 { lib, pkgs, userPreferences, userExtras, rhodiumLib, ... }:
+
 let
-  # Generate all desktop entries using rhodium lib
   generatedEntries = rhodiumLib.generators.desktopGenerators.generateAllEntries
     userPreferences
     userExtras;
 
-  # Create YAML configuration for raffi launcher
-  yamlFormat = pkgs.formats.yaml {};
+  # Create YAML configuration
+  yamlFormat = pkgs.formats.yaml { };
   raffiConfig = yamlFormat.generate "raffi.yaml" generatedEntries;
 
-  # Helper to safely quote arguments for .desktop files
   escapeDesktopArg = arg:
     let
-      escapedPercent = lib.replaceStrings ["%"] ["%%"] arg;
+      escapedPercent = lib.replaceStrings [ "%" ] [ "%%" ] arg;
       needsQuotes = lib.any (char: lib.hasInfix char arg) [ "?" "&" "=" " " ";" "|" "<" ">" "(" ")" "[" "]" "{" "}" "$" "`" "\\" "\"" "'" "\n" "\t" "#" ];
     in
     if needsQuotes
@@ -25,22 +24,33 @@ let
     exec = "${entry.binary} ${lib.concatStringsSep " " (map escapeDesktopArg entry.args)}";
     icon = entry.icon;
     type = "Application";
-    categories = if lib.hasInfix "firefox" entry.binary || lib.hasInfix "zen" entry.binary || lib.hasInfix "chromium" entry.binary
+    categories =
+      if lib.hasInfix "firefox" entry.binary || lib.hasInfix "zen" entry.binary || lib.hasInfix "chromium" entry.binary
       then [ "Network" "WebBrowser" ]
       else if lib.hasInfix "ghostty" entry.binary || lib.hasInfix "kitty" entry.binary
       then [ "System" "TerminalEmulator" ]
       else [ "Utility" "Application" ];
     terminal = false;
     startupNotify = true;
+    settings = {
+      "X-Entry-Type" = entry.entryType;
+    } // (lib.optionalAttrs (entry.entryType == "bookmark") {
+      "X-Profile-Name" = entry.profileName or "";
+      "X-Category" = lib.concatStringsSep ";" (entry.categories or [ ]);
+    }) // (lib.optionalAttrs (entry.entryType == "profile") {
+      "X-Profile-Name" = entry.profileName or "";
+      "X-Category" = lib.concatStringsSep ";" (entry.categories or [ ]);
+    }) // (lib.optionalAttrs (entry.entryType == "application") {
+      "X-Category" = lib.concatStringsSep ";" (entry.categories or [ ]);
+    });
   };
 in
 {
-  # Place raffi configuration in proper location
   xdg.configFile."raffi/raffi.yaml" = {
     source = raffiConfig;
   };
 
-  # Generate .desktop files for system integration
+  # Generate .desktop files
   xdg.desktopEntries = lib.mapAttrs toDesktopEntry generatedEntries;
 
   # Debug file for inspection

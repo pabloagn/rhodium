@@ -1,4 +1,5 @@
 { config, rhodiumLib, ... }:
+
 let
   icons = config.theme.icons.iconsNerdFont;
   formatIcon = rhodiumLib.formatters.iconFormatter.formatIcon;
@@ -11,9 +12,6 @@ in
 
     # Containerization & Virtualization
     docker_context.symbol = formatIcon icons.tech.docker "🐳";
-
-    # Editors
-    #vim.symbol = formatIcon icons.editors.vim "🗒️";
 
     # File System & Package Management
     directory.read_only = formatIcon icons.cod.warning "🔒";

@@ -26,9 +26,9 @@
     ripgrep-all = {
       enable = true;
     };
-
-    home.packages = with pkgs; [
-      fselect # Find files with SQL-like queries
-    ];
   };
+
+  home.packages = with pkgs; [
+    fselect # Find files with SQL-like queries
+  ];
 }

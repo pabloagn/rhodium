@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, ... }:
 
 let
   aliases = import ./common/aliases.nix;
@@ -6,7 +6,6 @@ let
 in
 {
   programs.bash = {
-    # enable = true;
     enableCompletion = true;
     shellAliases = aliases;
     historyFile = "${config.home.XDG_CACHE_HOME}/bash/.bash_history";

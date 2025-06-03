@@ -44,9 +44,14 @@ in
         fontSize = 14;
       };
       icons = {
+        # TODO: This eventually disappears and we define actual tokens (see example below)
         iconsNerdFont = iconsNerdFontTokens;
         iconsUnicode = iconsUnicodeTokens;
+
+        bullet = iconsUnicodeTokens.math.hermitianMatrix;
+        question = iconsUnicodeTokens.status.question;
       };
+
       wallpapers = wallpaperTokens.dante;
     };
 
