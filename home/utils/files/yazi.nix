@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ./yazi
+    ./yazi/modules
   ];
 
   programs.yazi = {
