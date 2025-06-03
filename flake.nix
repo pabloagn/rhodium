@@ -170,5 +170,19 @@
           };
         };
       };
+
+      devShells.${system} = {
+        rhodium-dev = pkgs.mkShell {
+          buildInputs = with pkgs; [
+            nixpkgs-fmt
+            nil
+            git
+          ];
+
+          shellHook = ''
+            echo "Welcome to Rhodium development shell"
+          '';
+        };
+      };
     };
 }

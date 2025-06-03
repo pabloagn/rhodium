@@ -1,9 +1,10 @@
-{ config, ... }:
+{ config, pkgs, ... }:
 
 let
-  common = import ./common { inherit config; };
+  common = import ./common { inherit config pkgs; };
 in
 {
+  programs.man.generateCaches = false;
   programs.fish = {
     enable = true;
     shellAliases = common.aliases;
@@ -25,6 +26,9 @@ in
     '';
 
     interactiveShellInit = ''
+      # Auto CD
+      set -U fish_features qmark-noglob regex-easyesc ampersand-nobg-in-token stderr-nocaret
+
       # Atuin keybinding
       bind \ce _atuin_search
       bind -M insert \ce _atuin_search
@@ -60,8 +64,7 @@ in
     '';
 
     functions = {
-      rh = common.functions.rh;
-      yy = common.functions.yy;
+      yy = common.functions.fishfunctions.yy;
     };
   };
 }

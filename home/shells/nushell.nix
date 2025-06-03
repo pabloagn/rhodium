@@ -1,7 +1,7 @@
-{ config, ... }:
+{ config, pkgs, ... }:
 
 let
-  common = import ./common { inherit config; };
+  common = import ./common { inherit config pkgs; };
 in
 {
   programs.nushell = {

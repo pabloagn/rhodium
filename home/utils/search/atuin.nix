@@ -14,7 +14,7 @@
       show_preview = true;
       show_help = false;
       inline_height = 10;
-      keymap_mode = "vim-normal";
+      keymap_mode = "vim-insert";
     };
   };
 }

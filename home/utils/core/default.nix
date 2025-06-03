@@ -1,8 +1,11 @@
 { pkgs, ... }:
 {
+  imports = [
+    ./direnv.nix
+  ];
+
   home.packages = with pkgs; [
     nix-btm # Bottom-like system monitor for nix
-    nix-direnv # Fast direnv integration
     direnv
     nix-du # Disk usage analyzer for nix store
     nix-melt # Ranger-like flake.lock viewer

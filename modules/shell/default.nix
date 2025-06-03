@@ -14,6 +14,15 @@
   programs.fish = {
     enable = true;
   };
-  documentation.man.generateCaches = false;
 
+  documentation.man.generateCaches = false; # Required since fish creates a massive database (eternal build)
+
+  # Required for fish
+  programs.command-not-found.enable = false;
+
+  # Optional: Use nix-index instead (better for flakes)
+  # programs.nix-index = {
+  # enable = true;
+  # enableFishIntegration = true;
+  # };
 }
