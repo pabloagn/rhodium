@@ -6,23 +6,16 @@
 
     require("git"):setup()
 
-    THEME.git = THEME.git or {}
-    THEME.git.modified = ui.Style():fg("#f9e2af")
-    THEME.git.deleted = ui.Style():fg("#f38ba8")
-    THEME.git.added = ui.Style():fg("#a6e3a1")
-    THEME.git.updated = ui.Style():fg("#89b4fa")
-    THEME.git.untracked = ui.Style():fg("#cba6f7")
-    THEME.git.ignored = ui.Style():fg("#6c7086")
-
-    THEME.git.modified_sign = "M"
-    THEME.git.deleted_sign = "D"
-    THEME.git.added_sign = "A"
-    THEME.git.updated_sign = "U"
-    THEME.git.untracked_sign = "?"
-    THEME.git.ignored_sign = "!"
-
-    require("smart-enter"):setup()
-    require("chmod"):setup()
+    function Status:git_branch_display()
+      local result = ya.shell_output("git rev-parse --abbrev-ref HEAD 2>/dev/null")
+      if result and result ~= "" then
+        local branch_name = string.gsub(result, "\n$", "")
+        if branch_name ~= "" and branch_name ~= "HEAD" then
+          return ui.Line { ui.Span("  " .. branch_name .. " ") }
+        end
+      end
+      return ui.Line {}
+    end
 
     function Linemode:size_and_mtime()
       local time = math.floor(self._file.cha.mtime or 0)

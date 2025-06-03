@@ -14,13 +14,25 @@ mouse_events = ["click", "scroll"]
 # Box border
 border = "rounded"
 
+[status]
+component_left = [
+    { type = "mode", format = " {} " },
+    { type = "custom", command = "git_branch_display", format = "{}" },
+    { type = "cwd", format = " {} " },
+]
+component_middle = [{ type = "position", format = " {}/{} " }]
+component_right = [
+    { type = "selection", format = " {} " },
+    { type = "tasks", format = " Tasks: {} " },
+]
+
 [preview]
 tab_size = 2
 max_width = 600
 max_height = 900
 cache_dir = ""                 # Leave empty to use default cache location
 image_filter = "triangle"      # Affects image scaling quality. Options: nearest, triangle, catmull-rom, gaussian, lanczos3
-image_quality = 75             # For formats supporting quality settings (e.g., JPEG)
+image_quality = 85             # For formats supporting quality settings (e.g., JPEG)
 sixel_fraction = 15            # For sixel image rendering
 ueberzug_scale = 1             # Adjust scale factor for ueberzug image previews if needed
 ueberzug_offset = [0, 0, 0, 0] # [x, y, width, height] offset for ueberzug
@@ -127,6 +139,12 @@ suppress_preload = false # Set to true to disable preloading previews for perfor
 fetchers = [
     { id = "mime", name = "*", run = "mime", if = "!mime", prio = "high" },
 ]
+
+prepend_fetchers = [
+    { id = "git", name = "*", run = "git" },  # For files
+    { id = "git", name = "*/", run = "git" }, # For directories (to show if they contain changes)
+]
+
 # -- Preloaders prepare data for previewers (e.g., decode images) --
 preloaders = [
     # Image
@@ -177,7 +195,6 @@ cd_origin = "top-center"
 cd_offset = [0, 2, 50, 3]      # [x, y, width, height] relative to origin
 
 # create
-# -- FIX: Changed from string to array[2] --
 create_title = ["Create:", "Create:"]
 create_origin = "top-center"
 create_offset = [0, 2, 50, 3]

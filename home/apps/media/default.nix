@@ -9,7 +9,8 @@
     easyeffects # Equalizer for PipeWire
     playerctl
     spotify
-    spotify-player # Terminal spotify player that has feature parity with the official client
+    ncspot # Cross-platform ncurses Spotify client written in Rust, inspired by ncmpc and the likes
+    # spotify-player # Terminal spotify player that has feature parity with the official client
     tidal-hifi # Tidal GUI running on Electron
     tidal-dl
 

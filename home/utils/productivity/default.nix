@@ -18,9 +18,9 @@
     # Clipboard utilities
     wl-clipboard # Wayland clipboard utilities
 
-    pandoc            # Needed for Markdown -> HTML conversion (in our script)
-    poppler_utils     # For PDF previews (pdftotext)
-    fontforge         # For font previews
+    pandoc # Needed for Markdown -> HTML conversion (in our script)
+    poppler_utils # For PDF previews (pdftotext)
+    fontforge # For font previews
 
     # Documentation
     # tldr # Simplified and community-driven man pages
@@ -29,5 +29,12 @@
     # Pendings to categorize
     bc # CLI calculator
     binutils # Tools for manipulating binaries
+    just # Handy way to save and run project-specific commands
+    mask # CLI task runner defined by a simple markdown file
+    mprocs # TUI tool to run multiple commands in parallel and show the output of each command separately
+    presenterm # Terminal based slideshow tool
+
+    # Navigation
+    wiki-tui # Simple and easy to use Wikipedia Text User Interface
   ];
 }

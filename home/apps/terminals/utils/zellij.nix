@@ -1,0 +1,7 @@
+{ ... }:
+
+{
+  programs.zellij = {
+    enable = true;
+  };
+}

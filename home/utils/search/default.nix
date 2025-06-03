@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
   imports = [
@@ -10,17 +10,25 @@
     fzf = {
       enable = true;
     };
+
     eza = {
       enable = true;
     };
+
     jq = {
       enable = true;
     };
+
     ripgrep = {
       enable = true;
     };
+
     ripgrep-all = {
       enable = true;
     };
+
+    home.packages = with pkgs; [
+      fselect # Find files with SQL-like queries
+    ];
   };
 }

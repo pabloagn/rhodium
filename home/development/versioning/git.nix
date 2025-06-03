@@ -1,4 +1,4 @@
-{ pkgs, user, ... }:
+{ user, ... }:
 let
   userfullName = user.fullName;
   userEmail = user.emailMain;
