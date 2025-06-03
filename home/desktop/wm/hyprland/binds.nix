@@ -25,8 +25,8 @@
       # "SUPER ALT, Tab, exec, ~/.local/bin/window-switcher rofi"
 
 
-      # # Alt-Tab window switching
-      "ALT, Tab, exec, hyprctl dispatch focuscurrentorlast; hyprctl dispatch alterzorder top"
+      # Alt-Tab window switching
+      "$mainMod, Tab, exec, hyprctl dispatch focuscurrentorlast; hyprctl dispatch alterzorder top"
 
       # Apps
       # ----------------------------------------

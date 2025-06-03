@@ -1,7 +1,6 @@
 { config, pkgs, ... }:
 
 {
-  environment = import ./environment.nix { inherit config; };
   fzfConfig = import ./fzf.nix { };
   defaults = import ./defaults.nix { };
   atuin = import ./atuin.nix { };

@@ -17,9 +17,6 @@
     PAGER = userPreferences.apps.pager;
     MANPAGER = userPreferences.apps.pager;
 
-    # Config Dirs
-    # STARSHIP_CONFIG = "${config.xdg.configHome}/starship"; # We need to figure out how to do this properly since hm has dir predefined
-
     # XDG and other vars
     RHODIUM = "${config.home.homeDirectory}/rhodium";
     XDG_BIN_HOME = "${config.home.homeDirectory}/.local/bin"; # Not set by NixOS so setting here
