@@ -5,6 +5,7 @@ let
 
   dirs = {
     rhodium = "${homeDir}/rhodium";
+    documents = "${homeDir}/documents";
     downloads = "${homeDir}/downloads";
     projects = "${homeDir}/projects";
     academic = "${homeDir}/academic";
@@ -77,4 +78,19 @@ in
   home.sessionPath = [
     xdgDirs.binHome
   ];
+
+  # Set xdg custom dirs for userDirs
+  xdg.userDirs = {
+    enable = true;
+    createDirectories = false;
+
+    publicShare = null;
+    templates = null;
+    desktop = null;
+    documents = null;
+    download = dirs.downloads;
+    music = null;
+    videos = null;
+    pictures = null;
+  };
 }

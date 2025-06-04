@@ -2,15 +2,15 @@
 
 let
   common = import ./common { };
-  zshFunctions = common.zshFunctions;
-  zshAliases = common.commonAliases;
+  zshFunctions = common.functions.zshFunctions;
+  zshAliases = common.aliases.commonAliases;
 in
 {
   programs.zsh = {
     enable = true;
-    # dotDir = "${config.xdg.configHome}/zsh";
     autosuggestion = {
       enable = true;
+
       # Customize suggestion appearance
       highlight = "fg=#7d7d7d,underline";
       strategy = [
