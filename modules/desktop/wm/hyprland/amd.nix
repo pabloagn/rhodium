@@ -10,11 +10,7 @@
   ];
 
   environment.sessionVariables = {
-    # For invisible cursors
-    WLR_NO_HARDWARE_CURSORS = "1";
-
-    # AMD-specific environment variables
-    # NOTE: New additionfor screen artifact debugging
+    WLR_NO_HARDWARE_CURSORS = "1"; # For invisible cursors
     AMD_VULKAN_ICD = "RADV";
   };
 
@@ -25,7 +21,6 @@
     extraPackages = with pkgs; [
       amdvlk
       rocmPackages.clr
-      # NOTE: New addition for screen artifact debugging
       libvdpau-va-gl
     ];
     extraPackages32 = with pkgs.pkgsi686Linux; [
