@@ -32,9 +32,7 @@
       "$mainMod, B, exec, firefox"
       "$mainMod, F, exec, thunar"
       "$mainMod, D, exec, ghostty -e hx"
-      # "$mainMod, A, exec, raffi"
       "$mainMod, A, exec, ~/.local/bin/rofi-launcher.sh"
-      # "$mainMod, A, exec, ${rofi_launcher}"
 
       # Rofi
       "$mainMod, escape, exec, killall rofi"
