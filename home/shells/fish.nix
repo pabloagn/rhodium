@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, fishPlugins, ... }:
 
 let
   fishModules = import ./fish { inherit config pkgs; };
@@ -7,6 +7,9 @@ in
   programs.man.generateCaches = false;
   programs.fish = {
     enable = true;
+
+    # Ingest all plugins from flake
+    plugins = fishPlugins.pluginsList;
 
     shellInit = ''
       # Set vi key bindings
@@ -22,6 +25,15 @@ in
       ${fishModules.abbreviations}
       ${fishModules.theme}
       ${fishModules.prompt}
+
+      # Plugin setup
+      # colored-man
+      set -g man_blink -o red
+      set -g man_bold -o green
+      set -g man_standout -b black 93a1a1
+      set -g man_underline -u 93a1a1
+
+      # TODO: Add other plugin configs
     '';
 
     functions = fishModules.functions;

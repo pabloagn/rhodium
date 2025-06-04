@@ -5,44 +5,37 @@
     nixpkgs = {
       url = "github:NixOS/nixpkgs/nixos-25.05"; # Crucial to lock version here
     };
-    
+
     nixpkgs-unstable = {
       url = "github:NixOS/nixpkgs/nixos-unstable";
     };
-    
+
     home-manager = {
       url = "github:nix-community/home-manager/release-25.05"; # Crucial to lock version here
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    
+
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    
+
     # NUR for Firefox extensions
     nur = {
       url = "github:nix-community/NUR";
     };
-    
+
     # Unofficial Zen Browser Input
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-     # Fish plugins collection
+    # Fish plugins collection
     fish-plugins = {
       url = "path:./flakes/fish-plugins";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };   
-
-    # Hyprcursor requirements
-    # hyprland = {
-    #   url = "github:hyprwm/Hyprland";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
-
+      inputs.nixpkgs.follows = "nixpkgs"; # Follows central flake release
+    };
   };
 
   outputs =
@@ -53,7 +46,6 @@
     , sops-nix
     , nur
     , zen-browser
-    # , hyprland
     , fish-plugins
     }@inputs:
     let
@@ -138,7 +130,7 @@
         then themeConfig.theme.light
         else themeConfig.theme.dark;
 
-      # Get user's theme preferences with fallbacks
+      # User's theme preferences with fallbacks
       userThemeName = userPreferences.theme.name or "chiaroscuro";
       userThemeVariant = userPreferences.theme.variant or "dark";
       selectedTheme = getThemeConfig userThemeName userThemeVariant;
@@ -146,6 +138,9 @@
     in
     {
       nixosConfigurations = {
+
+        # Hosts
+        # ----------------------------------------
         host_001 = lib.nixosSystem {
           inherit system pkgs;
           modules = [ ./hosts/host_001 ];
@@ -156,18 +151,21 @@
           };
         };
 
-        # host_002 = lib.nixosSystem {
-        #   inherit system;
-        #   modules = [ ./hosts/host_002 ];
-        #   specialArgs = {
-        #     inherit pkgs-unstable inputs rhodiumLib;
-        #     users = userData;
-        #     host = hostData.host_002 or { };
-        #   };
-        # };
+        host_002 = lib.nixosSystem {
+          inherit system pkgs;
+          modules = [ ./hosts/host_002 ];
+          specialArgs = {
+            inherit pkgs-unstable inputs rhodiumLib;
+            users = userData;
+            host = hostData.host_002 or { };
+          };
+        };
       };
 
       homeConfigurations = {
+
+        # Users
+        # ----------------------------------------
         user_001 = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           modules = [ ./users/user_001 ];
@@ -176,11 +174,13 @@
             user = userData.user_001 or { };
             theme = selectedTheme;
             inherit userPreferences userExtras;
-            fishPlugins = fish-plugins.plugins;
+            fishPlugins = fish-plugins;
           };
         };
       };
 
+      # Dev Shells
+      # ----------------------------------------
       devShells.${system} = {
         rhodium-dev = pkgs.mkShell {
           buildInputs = with pkgs; [

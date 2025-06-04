@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+
 set -euo pipefail
 
 launch_app() {
@@ -29,15 +30,16 @@ launch_app() {
   # Build arrays in sorted order
   for file in "${sorted_files[@]}"; do
     entry_type="${type_map[$file]:-app}"
-    formatted_name="${name_map[$file]} <i>($entry_type)</i>"
+    formatted_name="${name_map[$file]} <i>(${entry_type^})</i>"
     names+=("$formatted_name")
     files+=("$file")
   done
 
   selected=$(printf '%s\n' "${names[@]}" | rofi -dmenu -i -P "λ " -theme "$ROFI_THEME" -markup-rows)
+
   [[ -z "$selected" ]] && return
 
-  # Direct lookup instead of linear search
+  # Direct lookup
   for i in "${!names[@]}"; do
     if [[ "${names[$i]}" == "$selected" ]]; then
       gtk-launch "$(basename "${files[$i]}" .desktop)" &

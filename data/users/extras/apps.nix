@@ -6,28 +6,24 @@
       icon = "helix";
       description = "Editor";
     };
-
     helix-instance = {
       binary = "ghostty";
       args = [ "-e" "hx" ];
       icon = "helix";
       description = "Helix";
     };
-
     nvim-instance = {
       binary = "ghostty";
       args = [ "-e" "nvim" ];
       icon = "neovim";
       description = "Neovim";
     };
-
     zeditor-instance = {
       binary = "zeditor";
       args = [ ];
       icon = "zeditor";
       description = "Zeditor";
     };
-
     code-instance = {
       binary = "code";
       args = [ ];
@@ -52,13 +48,92 @@
       icon = "onepassword";
       description = "1Password";
     };
-
+    protonmail = {
+      binary = "proton-mail";
+      args = [ ];
+      icon = "protonmail";
+      description = "ProtonMail";
+    };
     zen = {
       binary = "zen";
       args = [ ];
       icon = "zen";
       description = "Zen Browser";
     };
+    slack = {
+      binary = "slack";
+      args = [ ];
+      icon = "slack";
+      description = "Slack";
+    };
+    teams = {
+      binary = "teams-for-linux";
+      args = [ ];
+      icon = "teams";
+      description = "Teams";
+    };
+  };
 
+  media = {
+    spotify = {
+      binary = "spotify";
+      args = [ ];
+      icon = "spotify";
+      description = "Spotify GUI";
+    };
+    ncspot = {
+      binary = "ghostty";
+      args = [ "-e" "ncspot" ];
+      icon = "spotify";
+      description = "Spotify TUI";
+    };
+  };
+
+  terminals = {
+    kitty-instance = {
+      binary = "kitty";
+      args = [ ];
+      icon = "kitty";
+      description = "Kitty";
+    };
+    foot-instance = {
+      binary = "foot";
+      args = [ ];
+      icon = "foot";
+      description = "Foot";
+    };
+    ghostty-instance = {
+      binary = "ghostty";
+      args = [ ];
+      icon = "ghostty";
+      description = "Ghostty";
+    };
+  };
+
+  shells = {
+    bash-shell = {
+      binary = "ghostty";
+      args = [ "-e" "bash" ];
+      icon = "bash";
+      description = "Bash Shell";
+    };
+    zsh-shell = {
+      binary = "ghostty";
+      args = [ "-e" "zsh" ];
+      icon = "zsh";
+      description = "Zsh Shell";
+    };
+    fish-shell = {
+      binary = "ghostty";
+      args = [ "-e" "fish" ];
+      icon = "fish";
+      description = "Fish Shell";
+    };
+    tmux-session = {
+      binary = "ghostty";
+      args = [ "-e" "tmux" ];
+      icon = "tmux";
+      description = "Tmux Session";
+    };
   };
 }

@@ -484,6 +484,12 @@ in
       description = "Alexandria";
       categories = [ categories.servers ];
     };
+    simpleicons = {
+      profile = "personal";
+      url = "https://simpleicons.org/";
+      description = "SimpleIcons";
+      categories = [ categories.productivity ];
+    };
     standard-notes = {
       profile = "personal";
       url = "https://app.standardnotes.com/";

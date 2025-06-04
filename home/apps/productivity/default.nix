@@ -8,5 +8,6 @@
     # kdePackages.korganizer
     # evolution
     calcurse # CLI calendar
+    ulauncher # GUI-based launcher
   ];
 }

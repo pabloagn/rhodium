@@ -35,7 +35,6 @@ let
     };
   };
 
-
   # Capitalize first letter for descriptions
   capitalize = str:
     lib.toUpper (lib.substring 0 1 str) + lib.substring 1 (-1) str;
@@ -70,9 +69,9 @@ let
         bookmark.url
       ];
       icon = browser;
-      description = "${toString theme.icons.bullet} ${bookmark.description} | ${capitalize browser} ${profileName}";
+      description = "${bookmark.description}";
       entryType = "bookmark";
-      profileName = bookmark.profile;
+      profileName = profileName;
       categories = bookmark.categories or [ ];
     };
 
@@ -94,7 +93,7 @@ let
       icon = browser;
       description = "${toString theme.icons.bullet} ${capitalize browser} ${profileName}";
       entryType = "profile";
-      profileName = profile.profile;
+      profileName = profileName;
       categories = profile.categories or [ ];
     };
 
