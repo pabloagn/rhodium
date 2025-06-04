@@ -122,15 +122,15 @@
       flake = false;
     };
 
-    mime-ext-dreammaomao = {
-      url = "gitee:DreamMaoMao/mime-ext.yazi";
-      flake = false;
-    };
+    # mime-ext-dreammaomao = {
+    #   url = "gitee:DreamMaoMao/mime-ext.yazi";
+    #   flake = false;
+    # };
 
-    mime-preview = {
-      url = "gitee:DreamMaoMao/mime-preview.yazi";
-      flake = false;
-    };
+    # mime-preview = {
+    #   url = "gitee:DreamMaoMao/mime-preview.yazi";
+    #   flake = false;
+    # };
 
     # Navigation and Bookmarks
     bunny = {
@@ -138,15 +138,15 @@
       flake = false;
     };
 
-    easyjump = {
-      url = "gitee:DreamMaoMao/easyjump.yazi";
-      flake = false;
-    };
+    # easyjump = {
+    #   url = "gitee:DreamMaoMao/easyjump.yazi";
+    #   flake = false;
+    # };
 
-    fg = {
-      url = "gitee:DreamMaoMao/fg.yazi";
-      flake = false;
-    };
+    # fg = {
+    #   url = "gitee:DreamMaoMao/fg.yazi";
+    #   flake = false;
+    # };
 
     projects = {
       url = "github:MasouShizuka/projects.yazi";
@@ -154,10 +154,10 @@
     };
 
     # Previews
-    epub = {
-      url = "gitee:DreamMaoMao/epub.yazi";
-      flake = false;
-    };
+    # epub = {
+    #   url = "gitee:DreamMaoMao/epub.yazi";
+    #   flake = false;
+    # };
 
     eza-preview = {
       url = "github:ahkohd/eza-preview.yazi";
@@ -222,7 +222,7 @@
 
     # Smart Enter
     smart-enter = {
-      url = "github:ourongxing/smart-enter.yazi";
+      url = "github:yazi-rs/plugins";
       flake = false;
     };
 
@@ -300,7 +300,7 @@
     };
 
     diff = {
-      url = "github:Sonico98/diff.yazi";
+      url = "github:yazi-rs/plugins";
       flake = false;
     };
   };
@@ -308,6 +308,7 @@
   outputs = { self, nixpkgs, yazi-plugins, ... }@inputs:
     let
       plugins = {
+
         # Archive Management
         archivemount = {
           name = "archivemount";
@@ -419,15 +420,15 @@
           src = yazi-plugins + "/mime-ext.yazi";
         };
 
-        mime-ext-dreammaomao = {
-          name = "mime-ext-dreammaomao";
-          src = inputs.mime-ext-dreammaomao;
-        };
+        # mime-ext-dreammaomao = {
+        #   name = "mime-ext-dreammaomao";
+        #   src = inputs.mime-ext-dreammaomao;
+        # };
 
-        mime-preview = {
-          name = "mime-preview";
-          src = inputs.mime-preview;
-        };
+        # mime-preview = {
+        #   name = "mime-preview";
+        #   src = inputs.mime-preview;
+        # };
 
         # Navigation and Bookmarks
         bunny = {
@@ -435,15 +436,15 @@
           src = inputs.bunny;
         };
 
-        easyjump = {
-          name = "easyjump";
-          src = inputs.easyjump;
-        };
+        # easyjump = {
+        #   name = "easyjump";
+        #   src = inputs.easyjump;
+        # };
 
-        fg = {
-          name = "fg";
-          src = inputs.fg;
-        };
+        # fg = {
+        #   name = "fg";
+        #   src = inputs.fg;
+        # };
 
         projects = {
           name = "projects";
@@ -451,10 +452,10 @@
         };
 
         # Previews
-        epub = {
-          name = "epub";
-          src = inputs.epub;
-        };
+        # epub = {
+        #   name = "epub";
+        #   src = inputs.epub;
+        # };
 
         eza-preview = {
           name = "eza-preview";
@@ -520,7 +521,7 @@
         # Smart Enter
         smart-enter = {
           name = "smart-enter";
-          src = inputs.smart-enter;
+          src = yazi-plugins + "/smart-enter.yazi";
         };
 
         # Themes
@@ -598,7 +599,7 @@
 
         diff = {
           name = "diff";
-          src = inputs.diff;
+          src = yazi-plugins + "/diff.yazi";
         };
       };
     in

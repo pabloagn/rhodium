@@ -129,6 +129,12 @@
       icon = "fish";
       description = "Fish Shell";
     };
+    nu-shell = {
+      binary = "ghostty";
+      args = [ "-e" "nu" ];
+      icon = "nu";
+      description = "Nu Shell";
+    };
     tmux-session = {
       binary = "ghostty";
       args = [ "-e" "tmux" ];
