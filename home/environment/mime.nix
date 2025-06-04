@@ -1,21 +1,15 @@
-{ config, userExtras, userPreferences, ... }:
+{ userExtras, userPreferences, ... }:
 
 let
   appsData = userExtras.appsData;
   profilesData = userExtras.profilesData;
-
-  # Get desktop names from data files
-  # Editor: Use the default editor from apps.nix
-  userEditor = "editor-instance"; # This matches your apps.nix
-
-  # Browser: Use personal Firefox profile from profiles.nix
-  userBrowser = "firefox-personal"; # This matches your profiles.nix
-
-  # Other apps from preferences
   preferredApps = userPreferences.apps;
+
+  userEditor = "rh-editors-editor-instance";
+  userBrowser = "rh-firefox-personal";
   audio = preferredApps.audioPlayer or "clementine";
-  image = "image-viewer";
-  pdf = preferredApps.pdfViewer or "zathura";
+  image = "rh-viewers-image-viewer";
+  pdf = preferredApps.pdfViewer or "org.pwmt.zathura.desktop";
   video = preferredApps.videoPlayer or "mpv";
 in
 {

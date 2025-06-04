@@ -8,6 +8,7 @@
   home.packages = with pkgs; [
     # audacious
     # audacity
+    clementine
     easyeffects # Equalizer for PipeWire
     playerctl
     spotify

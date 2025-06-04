@@ -36,6 +36,12 @@
       url = "path:./flakes/fish-plugins";
       inputs.nixpkgs.follows = "nixpkgs"; # Follows central flake release
     };
+
+    # Yazi plugins collection
+    yazi-plugins = {
+      url = "path:./flakes/yazi-plugins";
+      inputs.nixpkgs.follows = "nixpkgs"; # Follows central flake release
+    };
   };
 
   outputs =
@@ -47,6 +53,7 @@
     , nur
     , zen-browser
     , fish-plugins
+    , yazi-plugins
     }@inputs:
     let
       lib = nixpkgs.lib;
@@ -175,6 +182,7 @@
             theme = selectedTheme;
             inherit userPreferences userExtras;
             fishPlugins = fish-plugins;
+            yaziPlugins = yazi-plugins;
           };
         };
       };

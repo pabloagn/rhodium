@@ -37,7 +37,7 @@ launch_app() {
   for file in "${sorted_files[@]}"; do
     entry_type="${type_map[$file]:-app}"
     entry_cat="${cat_map[$file]:-app}"
-    formatted_name="${name_map[$file]} <i>(${entry_type^})</i> <i>(${entry_cat^})</i>"
+    formatted_name="⊹ ${name_map[$file]} <i>(${entry_type^})</i> <i>(${entry_cat^})</i>"
     names+=("$formatted_name")
     files+=("$file")
   done

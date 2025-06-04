@@ -6,7 +6,7 @@
     imageViewer = "feh";
     videoPlayer = "mpv";
     audioPlayer = "clementine";
-    pdfViewer = "zathura";
+    pdfViewer = "org.pwmt.zathura";
     wm = "hyprland";
     pager = "most";
   };

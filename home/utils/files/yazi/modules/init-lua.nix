@@ -7,11 +7,11 @@
     require("git"):setup()
 
     function Status:git_branch_display()
-      local result = ya.shell_output("git rev-parse --abbrev-ref HEAD 2>/dev/null")
-      if result and result ~= "" then
-        local branch_name = string.gsub(result, "\n$", "")
+      local result = Command("git"):arg({ "rev-parse", "--abbrev-ref", "HEAD" }):output()
+      if result and result.status.success then
+        local branch_name = string.gsub(result.stdout, "\n$", "")
         if branch_name ~= "" and branch_name ~= "HEAD" then
-          return ui.Line { ui.Span("  " .. branch_name .. " ") }
+          return ui.Line { ui.Span("  " .. branch_name .. " ") }
         end
       end
       return ui.Line {}
@@ -26,7 +26,6 @@
       else
         time = os.date("%b %d  %Y", time)
       end
-
       local size = self._file:size()
       return string.format("%s %s", size and ya.readable_size(size) or "-", time)
     end
@@ -34,12 +33,10 @@
     function Status:name()
       local h = self._tab.current.hovered
       if not h then return ui.Line {} end
-
       local linked = ""
       if h.link_to ~= nil then
         linked = " -> " .. tostring(h.link_to)
       end
-
       return ui.Line(" " .. h.name .. linked)
     end
 
@@ -53,7 +50,6 @@
     function Header:tabs()
       local tabs = #cx.tabs
       if tabs == 1 then return ui.Line {} end
-
       local spans = {}
       for i = 1, tabs do
         local text = cx.tabs[i]:name() ~= "" and cx.tabs[i]:name() or i

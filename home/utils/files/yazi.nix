@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, yaziPlugins, ... }:
 
 {
   imports = [
@@ -8,5 +8,6 @@
   programs.yazi = {
     enable = true;
     package = pkgs.yazi;
+    plugins = yaziPlugins.pluginsList;
   };
 }

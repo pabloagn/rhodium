@@ -514,6 +514,12 @@ in
       description = "Unsplash";
       categories = [ categories.design ];
     };
+    whatsapp = {
+      profile = "personal";
+      url = "https://web.whatsapp.com/";
+      description = "Whatsapp";
+      categories = [ categories.productivity ];
+    };
     yazi-docs = {
       profile = "personal";
       url = "https://yazi-rs.github.io/docs/installation";

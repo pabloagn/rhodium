@@ -10,7 +10,7 @@
   ];
 
   home.packages = with pkgs; [
-    brave
+    # brave
     w3m
     tor
   ];
