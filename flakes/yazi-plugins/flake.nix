@@ -43,13 +43,13 @@
       flake = false;
     };
 
-    system-clipboard = {
-      url = "github:orhnk/system-clipboard.yazi";
-      flake = false;
-    };
+    # system-clipboard = {
+    #   url = "github:orhnk/system-clipboard.yazi";
+    #   flake = false;
+    # };
 
     wl-clipboard = {
-      url = "github:grappas/wl-clipboard.yazi";
+      url = "github:Felipe-9/wl-clipboard.yazi"; # Forked from system-clipboard to work with wayland compositors
       flake = false;
     };
 
@@ -164,10 +164,10 @@
       flake = false;
     };
 
-    glow = {
-      url = "github:Reledia/glow.yazi";
-      flake = false;
-    };
+    # glow = {
+    #   url = "github:Reledia/glow.yazi";
+    #   flake = false;
+    # };
 
     hexyl = {
       url = "github:Reledia/hexyl.yazi";
@@ -462,10 +462,10 @@
           src = inputs.eza-preview;
         };
 
-        glow = {
-          name = "glow";
-          src = inputs.glow;
-        };
+        # glow = {
+        #   name = "glow";
+        #   src = inputs.glow;
+        # };
 
         hexyl = {
           name = "hexyl";

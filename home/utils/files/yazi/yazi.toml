@@ -41,35 +41,20 @@ ueberzug_offset = [0, 0, 0, 0] # [x, y, width, height] offset for ueberzug
 [opener]
 edit = [
     { run = '${EDITOR:=nvim} "$@"', desc = "${EDITOR:-nvim}", block = true, for = "unix" }, # nvim is fallback
-    { run = 'code %*', orphan = true, desc = "code", for = "windows" },
-    { run = 'code -w %*', block = true, desc = "code (block)", for = "windows" },
 ]
-open = [
-    { run = 'xdg-open "$1"', desc = "Open", for = "linux" },
-    { run = 'open "$@"', desc = "Open", for = "macos" },
-    { run = 'start "" "%1"', orphan = true, desc = "Open", for = "windows" },
-]
+open = [{ run = 'xdg-open "$1"', desc = "Open", for = "linux" }]
 reveal = [
     { run = 'xdg-open "$(dirname "$1")"', desc = "Reveal", for = "linux" },
-    { run = 'open -R "$1"', desc = "Reveal", for = "macos" },
-    { run = 'explorer /select,"%1"', orphan = true, desc = "Reveal", for = "windows" },
-    { run = '''exiftool "$1"; echo "Press enter to exit"; read _''', block = true, desc = "Show EXIF", for = "unix" },
 ]
 extract = [
     { run = 'ya pub extract --list "$@"', desc = "Extract here", for = "unix" },
-    { run = 'ya pub extract --list %*', desc = "Extract here", for = "windows" },
 ]
-play = [
-    { run = 'mpv --force-window "$@"', orphan = true, for = "unix" },
-    { run = 'mpv --force-window %*', orphan = true, for = "windows" },
-    { run = '''mediainfo "$1"; echo "Press enter to exit"; read _''', block = true, desc = "Show media info", for = "unix" },
-]
+play = [{ run = 'mpv --force-window "$@"', orphan = true, for = "unix" }]
 
 [open]
 rules = [
+    { mime = "text/markdown", use = "markdown" },
 
-    # TODO: Check if this is required.
-    # { mime = "text/markdown", run = "markdown" },
     { name = "*/", use = [
         "edit",
         "open",
@@ -136,7 +121,6 @@ image_bound = [0, 0]     # Max dimensions for image previews (0 = unbounded)
 suppress_preload = false # Set to true to disable preloading previews for performance
 
 [plugin]
-# -- Fetchers run first to gather metadata (e.g., mime type) --
 fetchers = [
     { id = "mime", name = "*", run = "mime", if = "!mime", prio = "high" },
 ]
@@ -144,6 +128,17 @@ fetchers = [
 prepend_fetchers = [
     { id = "git", name = "*", run = "git" },  # For files
     { id = "git", name = "*/", run = "git" }, # For directories (to show if they contain changes)
+]
+
+prepend_previewers = [
+    # Archive previewer
+    { mime = "application/*zip", run = "ouch" },
+    { mime = "application/x-tar", run = "ouch" },
+    { mime = "application/x-bzip2", run = "ouch" },
+    { mime = "application/x-7z-compressed", run = "ouch" },
+    { mime = "application/x-rar", run = "ouch" },
+    { mime = "application/x-xz", run = "ouch" },
+    { mime = "application/xz", run = "ouch" },
 ]
 
 # -- Preloaders prepare data for previewers (e.g., decode images) --
@@ -159,7 +154,6 @@ preloaders = [
     { mime = "font/*", run = "font" },
     { mime = "application/vnd.ms-opentype", run = "font" },
 ]
-prepend_previewers = [{ name = "*.md", run = "glow" }]
 
 previewers = [
     # Folder
@@ -265,6 +259,4 @@ sort_reverse = false
 sort_translit = false
 
 [log]
-# -- Yazi internal logging (for debugging) --
 enabled = false
-# log_file = # Leave empty for default location if enabled

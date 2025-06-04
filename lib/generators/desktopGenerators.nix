@@ -102,7 +102,7 @@ let
     binary = app.binary;
     args = app.args;
     icon = app.icon;
-    description = "${toString theme.icons.bullet} ${app.description}";
+    description = "${app.description}";
     entryType = "application";
     categories = app.categories or [ ];
   };
