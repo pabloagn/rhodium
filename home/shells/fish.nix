@@ -1,7 +1,10 @@
-{ config, pkgs, fishPlugins, ... }:
+{ config, fishPlugins, ... }:
 
 let
-  fishModules = import ./fish { inherit config pkgs; };
+  common = import ./common { };
+  fishFunctions = common.fishFunctions;
+  fishAliases = common.commonAliases;
+  fishModules = import ./fish { inherit config; };
 in
 {
   programs.man.generateCaches = false;
@@ -10,6 +13,19 @@ in
 
     # Ingest all plugins from flake
     plugins = fishPlugins.pluginsList;
+
+    # Ingest aliases
+    shellAliases = fishAliases;
+
+    # Ingest functions
+    functions = fishFunctions;
+    # {
+    #   yy = fishFunctions.yy;
+    #   fzp = fishFunctions.fzp;
+    #   xrt = fishFunctions.xrt;
+    #   mkz = fishFunctions.mkz;
+    #   bkp = fishFunctions.bkp;
+    # };
 
     shellInit = ''
       # Set vi key bindings
@@ -28,6 +44,7 @@ in
 
       # Plugin setup
       # colored-man
+      # TODO: Style this
       set -g man_blink -o red
       set -g man_bold -o green
       set -g man_standout -b black 93a1a1
@@ -36,6 +53,5 @@ in
       # TODO: Add other plugin configs
     '';
 
-    functions = fishModules.functions;
   };
 }

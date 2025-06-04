@@ -1,8 +1,33 @@
 { config, userPreferences, ... }:
 
+let
+  homeDir = config.home.homeDirectory;
+
+  dirs = {
+    rhodium = "${homeDir}/rhodium";
+    downloads = "${homeDir}/downloads";
+    projects = "${homeDir}/projects";
+    academic = "${homeDir}/academic";
+    solenoidLabs = "${homeDir}/solenoid-labs";
+    professional = "${homeDir}/professional";
+    vaults = "${homeDir}/vaults";
+  };
+
+  derivedDirs = {
+    vaultsSanctum = "${dirs.vaults}/sanctum";
+    vaultsFiction = "${dirs.vaults}/fiction";
+  };
+
+  xdgDirs = {
+    binHome = "${homeDir}/.local/bin";
+    configHome = "${homeDir}/.config";
+    cacheHome = "${homeDir}/.cache";
+    shareApps = "${homeDir}/.nix-profile/share/applications";
+  };
+in
 {
-  # Environment vars
   home.sessionVariables = {
+
     # App Preferences
     BROWSER = userPreferences.apps.browser;
     EDITOR = userPreferences.apps.editor;
@@ -17,12 +42,31 @@
     PAGER = userPreferences.apps.pager;
     MANPAGER = userPreferences.apps.pager;
 
-    # XDG and other vars
-    RHODIUM = "${config.home.homeDirectory}/rhodium";
-    XDG_BIN_HOME = "${config.home.homeDirectory}/.local/bin"; # Not set by NixOS so setting here
-    XDG_CONFIG_HOME = "${config.home.homeDirectory}/.config";
-    XDG_CACHE_HOME = "${config.home.homeDirectory}/.cache";
-    XDG_SHARE_APPS = "${config.home.homeDirectory}/.nix-profile/share/applications";
+    # Main dirs
+    RHODIUM = dirs.rhodium;
+    HOME_DOWNLOADS = dirs.downloads;
+    HOME_PROJECTS = dirs.projects;
+    HOME_ACADEMIC = dirs.academic;
+    HOME_SOLENOIDLABS = dirs.solenoidLabs;
+    HOME_PROFESSIONAL = dirs.professional;
+    HOME_VAULTS = dirs.vaults;
+
+    # Derived dirs
+    HOME_VAULTS_SANCTUM = derivedDirs.vaultsSanctum;
+    HOME_VAULTS_FICTION = derivedDirs.vaultsFiction;
+
+    # Device mounts (TODO: Configure)
+    MNT_A = "";
+    MNT_B = "";
+    MNT_C = "";
+
+    # XDG Base Directory Specification
+    XDG_BIN_HOME = xdgDirs.binHome;
+    XDG_CONFIG_HOME = xdgDirs.configHome;
+    XDG_CACHE_HOME = xdgDirs.cacheHome;
+    XDG_SHARE_APPS = xdgDirs.shareApps;
+
+    # App-specific
     HISTFILE = "${config.xdg.cacheHome}/zsh/.zsh_history";
     NODE_REPL_HISTORY = "${config.xdg.cacheHome}/node/.node_repl_history";
     PYTHON_HISTORY = "${config.xdg.cacheHome}/python/.python_history";
@@ -31,6 +75,6 @@
   };
 
   home.sessionPath = [
-    "${config.home.homeDirectory}/.local/bin"
+    xdgDirs.binHome
   ];
 }

@@ -1,11 +1,9 @@
-{ config, ... }:
+{ ... }:
 
-let
-  homeDir = config.home.homeDirectory;
-  configDir = config.xdg.configHome;
-in
 ''
   # List commands
+  abbr -a ls 'eza -l'
+  abbr -a la 'eza -la'
   abbr -a llc 'eza -1'
   abbr -a lac 'eza -1a'
   abbr -a lld 'eza -l'
@@ -51,10 +49,11 @@ in
   abbr -a yank 'wl-copy'
 
   # History
-  abbr -a h 'history'
-  abbr -a hs 'history | grep'
-  abbr -a hsi 'history | grep -i'
-  abbr -a hist 'history | bat --language=bash --style=numbers'
+  # abbr -a h 'history'
+  # abbr -a hs 'history | grep'
+  # abbr -a hsi 'history | grep -i'
+  # abbr -a hist 'history | bat --language=bash --style=numbers'
+  abbr -a hist 'fzf-history-widget'
 
   # General
   abbr -a cl 'clear'
@@ -64,9 +63,10 @@ in
   abbr -a !! 'sudo $history[1]'
 
   # Core Directories
-  abbr -a gc "z ${configDir}"
-  abbr -a gr 'z $RHODIUM'
-  abbr -a gp "z ${homeDir}/projects"
+  # abbr -a gd "z $"
+  # abbr -a gc "z ${configDir}"
+  # abbr -a gr 'z $RHODIUM'
+  # abbr -a gp "z ${homeDir}/projects"
 
   # Fuzzy
   abbr -a fzf 'fzf'
@@ -83,4 +83,8 @@ in
   # IDEs (suppress Electron warnings)
   abbr -a code 'code 2>/dev/null'
   abbr -a cursor 'cursor 2>/dev/null'
+
+  # Utils
+  # Display all abbreviations and pipe to fzf
+  abbr -a aliases 'abbr --show | fzf'
 ''

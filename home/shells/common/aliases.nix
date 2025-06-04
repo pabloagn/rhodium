@@ -1,126 +1,96 @@
-{ config, ... }:
+{ ... }:
 
-# TODO: Complete this file properly:
-# - Add more aliases
-# - Use conditional packaging
-let
-  homeDir = config.home.homeDirectory;
-  configdir = config.xdg.configHome;
-in
 {
-  # List
-  # -------------------------------------
+  commonAliases = {
+    # List commands
+    ls = "eza -l";
+    la = "eza -la";
+    llc = "eza -1";
+    lac = "eza -1a";
+    lld = "eza -l";
+    lad = "eza -la";
+    lli = "eza --icons -l";
+    lai = "eza --icons -la";
+    l2 = "eza --icons -l -T -L=2";
+    l3 = "eza --icons -l -T -L=3";
+    llt = "eza -T";
+    lat = "eza -Ta";
+    tree = "eza -Ta";
+    lat1 = "eza -Ta -L=1";
+    lat2 = "eza -Ta -L=2";
+    lat3 = "eza -Ta -L=3";
+    lat4 = "eza -Ta -L=4";
+    lat5 = "eza -Ta -L=5";
+    llty = "eza -T | wl-copy";
+    laty = "eza -Ta | wl-copy";
 
-  # List List Clean
-  llc = "eza -1";
+    # Navigation
+    cd = "z";
+    ".." = "cd ..";
+    "..." = "cd ../..";
+    "...." = "cd ../../..";
+    "....." = "cd ../../../..";
 
-  # List All Clean
-  lac = "eza -1a";
+    # View
+    cat = "bat";
+    lf = "yy";
 
-  # List List Details
-  lld = "eza -l";
+    # Search
+    locate = "plocate";
+    fd = "fd -Lu";
+    find = "fd";
+    grep = "rga";
 
-  # List All Details
-  lad = "eza -la";
+    # Editor
+    vim = "hx";
+    vi = "hx";
+    v = "hx";
 
-  # List List Icons
-  lli = "eza --icons -l";
+    # Clipboard
+    yank = "wl-copy";
 
-  # List All Icons
-  lai = "eza --icons -la";
+    # History
+    h = "history";
+    hs = "history | grep";
+    hsi = "history | grep -i";
+    hist = "fzf-history-widget";
 
-  l2 = "eza --icons -l -T -L=2";
-  l3 = "eza --icons -l -T -L=3";
+    # General
+    cl = "clear";
+    htop = "btm";
+    neofetch = "disfetch";
+    nf = "disfetch";
+    "!!" = "sudo $history[1]";
 
-  # List List Tree
-  llt = "eza -T";
+    # Core Directories
+    gd = "z $HOME_DOWNLOADS";
+    gc = "z $XDG_CONFIG_HOME";
+    gr = "z $RHODIUM";
+    gp = "z $HOME_PROJECTS";
+    ga = "z $HOME_ACADEMIC";
+    gs = "z $HOME_SOLENOIDLABS";
+    gpr = "z $HOME_PROFESSIONAL";
+    gv = "z $HOME_VAULTS";
+    gvs = "z $HOME_VAULTS_SANCTUM";
 
-  # List All Tree
-  lat = "eza -Ta";
-  tree = "eza -Ta"; # In the meantime while I gain confidence with above
+    # Fuzzy
+    fzf = "fzf";
+    fzd = "zi";
+    fzh = "fzf-history-widget";
 
-  lat1 = "eza -Ta -L=1";
-  lat2 = "eza -Ta -L=2";
-  lat3 = "eza -Ta -L=3";
-  lat4 = "eza -Ta -L=4";
-  lat5 = "eza -Ta -L=5";
+    # Git
+    gst = "git status";
+    gad = "git add .";
+    gcm = "git commit -m";
+    gpu = "git push -u origin main";
+    grm = "git rm -r --cached .";
 
+    # IDEs
+    code = "code 2>/dev/null";
+    cursor = "cursor 2>/dev/null";
 
-  # List List Tree Yank
-  llty = "eza -T | wl-copy";
-
-  # List All Tree Yank
-  laty = "eza -Ta | wl-copy";
-
-  # Navigation
-  # -------------------------------------
-  cd = "z";
-  ".." = "cd ..";
-  "..." = "cd ../..";
-  "...." = "cd ../../..";
-  "....." = "cd ../../../..";
-
-  # View
-  # -------------------------------------
-  cat = "bat";
-  lf = "yy";
-
-  # Search
-  # -------------------------------------
-
-  # Locate (requires plocate)
-  locate = "plocate";
-
-  # Find (simple)
-  fd = "fd -Lu";
-  find = "fd";
-
-  # Ripgrep-All (requires ripgrep-all)
-  grep = "rga";
-
-  # Editor
-  # -------------------------------------
-  vim = "hx";
-  vi = "hx";
-  v = "hx";
-
-  # Clipboard
-  # -------------------------------------
-  yank = "wl-copy";
-
-  # History
-  # -------------------------------------
-  h = "history";
-  hs = "history | grep";
-  hsi = "history | grep -i";
-  hist = "history | bat --language=bash --style=numbers";
-
-  # General
-  # -------------------------------------
-  cl = "clear";
-  htop = "btm";
-  neofetch = "disfetch";
-  nf = "disfetch";
-
-  # Core Directories
-  gc = "z ${configdir}";
-  gr = "z $RHODIUM";
-  gp = "z ${homeDir}/projects";
-
-  # Fuzzy
-  fzf = "fzf";
-  fzd = "zi";
-  fzc = "fzf-history-widget";
-
-  # Git
-  gst = "git status";
-  gad = "git add .";
-  gcm = "git commit -m";
-  gpu = "git push -u origin main";
-  grm = "git rm -r --cached .";
-
-  # IDEs
-  # Fix the annoying ozone warning for Electron apps (does not affect functionality)
-  code = "code 2>/dev/null";
-  cursor = "cursor 2>/dev/null";
+    # See-utils
+    sa = "alias | fzf"; # See aliases
+    sv = "env | sort | fzf"; # See environment vars
+  };
 }

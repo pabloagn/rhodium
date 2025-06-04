@@ -27,8 +27,8 @@
     editor = {
       evil = true; # Disable evil to remove vim bindings altogether
       path-completion = true;
-      ruler-char = "⎸";
-      rulers = [10 20 30]; # Rulers are rendered with ${ruler-char}      line-number = "relative";
+      # ruler-char = "⎸";
+      # rulers = [10 20 30]; # Rulers are rendered with ${ruler-char}      line-number = "relative";
       mouse = true;
       default-yank-register = "+";
       middle-click-paste = true;
@@ -93,14 +93,14 @@
           "file-line-ending"
           "file-type"
         ];
-        };
-        gutters = [
-          "diagnostics"          
-          "spacer"
-          "line-numbers"
-          "spacer"
-          "diff"
-        ];
+      };
+      gutters = [
+        "diagnostics"
+        "spacer"
+        "line-numbers"
+        "spacer"
+        "diff"
+      ];
 
       lsp = {
         enable = true;

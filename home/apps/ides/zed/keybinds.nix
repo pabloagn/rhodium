@@ -17,7 +17,7 @@
         };
       }
       {
-        context = "Editor && vim_mode == normal";
+        context = "Editor && vim_mode == normal || vim_mode == visual";
         bindings = {
           "space c" = "editor::ToggleComments";
         };

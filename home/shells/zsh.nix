@@ -1,8 +1,9 @@
-{ config, pkgs, ... }:
+{ config, ... }:
 
 let
-  common = import ./common { inherit config pkgs; };
-  functions = common.functions;
+  common = import ./common { };
+  zshFunctions = common.zshFunctions;
+  zshAliases = common.commonAliases;
 in
 {
   programs.zsh = {
@@ -44,18 +45,8 @@ in
       };
     };
 
+    shellAliases = zshAliases;
 
-
-
-
-
-
-
-
-    shellAliases = common.aliases;
-    # TODO:
-    #   - See if this is actually correct.
-    #   - Annoyed as fuck that the history disappears at times.
     history = {
       extended = true;
       expireDuplicatesFirst = true;
@@ -93,7 +84,7 @@ in
       #_comp_options += (globdots)
 
       # Include custom functions
-      ${functions.zshFunctions.yy}
+      ${zshFunctions.yy}
     '';
   };
 }

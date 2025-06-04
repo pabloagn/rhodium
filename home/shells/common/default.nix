@@ -1,5 +1,6 @@
-{ config, pkgs, ... }:
+{ ... }:
+
 {
-  aliases = import ./aliases.nix { inherit config; };
+  aliases = import ./aliases.nix { };
   functions = import ./functions.nix { };
 }

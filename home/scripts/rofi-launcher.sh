@@ -21,6 +21,12 @@ launch_app() {
     type_map["$file"]="${type#X-Entry-Type=}"
   done < <(rg -H '^X-Entry-Type=' "$APP_DIR"/rh-*.desktop)
 
+  # Get all Categories in one call
+  declare -A cat_map
+  while IFS=: read -r file type; do
+    cat_map["$file"]="${type#X-Category=}"
+  done < <(rg -H '^X-Category=' "$APP_DIR"/rh-*.desktop)
+
   # Create sorted array of files by name
   local sorted_files=()
   while IFS=: read -r file name; do
@@ -30,7 +36,8 @@ launch_app() {
   # Build arrays in sorted order
   for file in "${sorted_files[@]}"; do
     entry_type="${type_map[$file]:-app}"
-    formatted_name="${name_map[$file]} <i>(${entry_type^})</i>"
+    entry_cat="${cat_map[$file]:-app}"
+    formatted_name="${name_map[$file]} <i>(${entry_type^})</i> <i>(${entry_cat^})</i>"
     names+=("$formatted_name")
     files+=("$file")
   done
