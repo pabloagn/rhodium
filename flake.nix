@@ -53,7 +53,7 @@
     , sops-nix
     , nur
     , zen-browser
-    , hyprland
+    # , hyprland
     , fish-plugins
     }@inputs:
     let
