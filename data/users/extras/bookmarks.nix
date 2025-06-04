@@ -298,6 +298,18 @@ in
       description = "Letterboxd - Diary";
       categories = [ categories.entertainment categories.social ];
     };
+    linear = {
+      profile = "personal";
+      url = "https://linear.app/sanctum-black";
+      description = "Linear";
+      categories = [ categories.productivity ];
+    };
+    linear-rhodium = {
+      profile = "personal";
+      url = "https://linear.app/sanctum-black/project/0607-sys-prj-rhodium-3fc0956ba956/issues";
+      description = "Linear Rhodium";
+      categories = [ categories.productivity ];
+    };
     linkedin = {
       profile = "personal";
       url = "https://www.linkedin.com";

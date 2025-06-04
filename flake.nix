@@ -5,36 +5,44 @@
     nixpkgs = {
       url = "github:NixOS/nixpkgs/nixos-25.05"; # Crucial to lock version here
     };
+    
     nixpkgs-unstable = {
       url = "github:NixOS/nixpkgs/nixos-unstable";
     };
+    
     home-manager = {
       url = "github:nix-community/home-manager/release-25.05"; # Crucial to lock version here
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    
     # NUR for Firefox extensions
     nur = {
       url = "github:nix-community/NUR";
     };
+    
     # Unofficial Zen Browser Input
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # Hyprcursor requirements
-    hyprland = {
-      url = "github:hyprwm/Hyprland";
+
+     # Fish plugins collection
+    fish-plugins = {
+      url = "path:./flakes/fish-plugins";
       inputs.nixpkgs.follows = "nixpkgs";
-    };
-    # rose-pine-hyprcursor = {
-    # url = "github:ndom91/rose-pine-hyprcursor";
-    # inputs.nixpkgs.follows = "nixpkgs";
-    # inputs.hyprlang.follows = "hyprland/hyprlang";
+    };   
+
+    # Hyprcursor requirements
+    # hyprland = {
+    #   url = "github:hyprwm/Hyprland";
+    #   inputs.nixpkgs.follows = "nixpkgs";
     # };
+
   };
 
   outputs =
@@ -46,7 +54,7 @@
     , nur
     , zen-browser
     , hyprland
-      # , rose-pine-hyprcursor
+    , fish-plugins
     }@inputs:
     let
       lib = nixpkgs.lib;
@@ -168,6 +176,7 @@
             user = userData.user_001 or { };
             theme = selectedTheme;
             inherit userPreferences userExtras;
+            fishPlugins = fish-plugins.plugins;
           };
         };
       };

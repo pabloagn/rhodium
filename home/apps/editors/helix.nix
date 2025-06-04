@@ -7,7 +7,7 @@
 
   programs.helix = {
     enable = true;
-    package = pkgs.helix;
-    # package = pkgs.evil-helix;
+    # package = pkgs.helix;
+    package = pkgs.evil-helix;
   };
 }

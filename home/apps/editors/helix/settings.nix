@@ -4,42 +4,31 @@
     theme = "chiaroscuro";
 
     keys.normal = {
-      a = [ "ensure_selections_forward" "append_mode" ];
-      G = "goto_file_end";
-      g = {
-        g = "goto_file_start";
-      };
-      x = "extend_line";
-      X = "extend_to_line_bounds";
-      "0" = "goto_line_start";
-      "$" = "goto_line_end";
       D = [ "extend_to_line_bounds" "delete_selection" ];
-      Y = [ "goto_line_start" "extend_to_line_end" "yank_main_selection_to_clipboard" "collapse_selection" ];
-      right = [ "ensure_selections_forward" "extend_char_right" "ensure_selections_forward" "collapse_selection" ];
-      p = "paste_clipboard_before";
-      P = [ "open_below" "normal_mode" "paste_clipboard_before" ];
       "space" = {
         space = [ "save_selection" "select_all" "yank_main_selection_to_clipboard" "jump_backward" ];
       };
     };
 
-    keys.select = {
-      "y" = [ "yank_main_selection_to_clipboard" "normal_mode" ];
-      "d" = [ "delete_selection" "normal_mode" ];
-      "i" = {
-        w = "select_textobject_inner";
-      };
-      "a" = {
-        w = "select_textobject_around";
-      };
-      G = "goto_file_end";
-      g = {
-        g = "goto_file_start";
-      };
-    };
+    # keys.select = {
+    #   "d" = [ "delete_selection" "normal_mode" ];
+    #   "i" = {
+    #     w = "select_textobject_inner";
+    #   };
+    #   "a" = {
+    #     w = "select_textobject_around";
+    #   };
+    #   G = "goto_file_end";
+    #   g = {
+    #     g = "goto_file_start";
+    #   };
+    # };
 
     editor = {
-      line-number = "relative";
+      evil = true; # Disable evil to remove vim bindings altogether
+      path-completion = true;
+      ruler-char = "⎸";
+      rulers = [10 20 30]; # Rulers are rendered with ${ruler-char}      line-number = "relative";
       mouse = true;
       default-yank-register = "+";
       middle-click-paste = true;
@@ -104,7 +93,14 @@
           "file-line-ending"
           "file-type"
         ];
-      };
+        };
+        gutters = [
+          "diagnostics"          
+          "spacer"
+          "line-numbers"
+          "spacer"
+          "diff"
+        ];
 
       lsp = {
         enable = true;
