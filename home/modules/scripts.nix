@@ -57,15 +57,6 @@ let
       source = desktopAutostart;
       executable = true;
     };
-
-    # Add more Nix-generated scripts here as needed
-    # "${config.home.sessionVariables.XDG_BIN_HOME}/another-script.sh" = {
-    #   source = pkgs.writeShellScript "another-script" ''
-    #     #!${pkgs.runtimeShell}
-    #     echo "Another script"
-    #   '';
-    #   executable = true;
-    # };
   };
 
   # Combine both types of scripts

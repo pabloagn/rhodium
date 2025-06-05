@@ -10,8 +10,6 @@ in
         # Cursors
         "XCURSOR_SIZE,${toString cursorSize}"
         "HYPRCURSOR_SIZE,${toString cursorSize}"
-        # "HYPRCURSOR_THEME,rose-pine-hyprcursor"
-        # "XCURSOR_THEME,rose-pine-hyprcursor"
         "HYPRCURSOR_THEME,phinger-cursors-dark"
         "XCURSOR_THEME,phinger-cursors-dark"
 
