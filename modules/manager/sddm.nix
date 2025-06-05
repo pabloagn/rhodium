@@ -1,0 +1,6 @@
+{ ... }:
+{
+  services.displayManager = {
+    enble = false;
+  };
+}

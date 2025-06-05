@@ -2,29 +2,19 @@
 {
   imports = [
     ./hardware-configuration.nix
-    # Modules - Boot
     ../../modules/boot/boot.nix
-    # Modules - Services
     ../../modules/services
-    # Modules - Hardware
     ../../modules/hardware
-    # Modules - Shell
     ../../modules/shell
-    # Security
     ../../modules/security/keyrings.nix
     ../../modules/security/sops.nix
-    # Modules - Users
     ../../modules/users
-    # Modules - Desktop
+    ../../modules/manager
     ../../modules/desktop
     ../../modules/desktop/wm/hyprland/amd.nix
-    # Modules - Virtualization
     ../../modules/virtualization
-    # Modules - Apps
     ../../modules/apps
-    # Modules - Maintenance
     ../../modules/maintenance
-    # Modules - Utils
     ../../modules/utils
   ];
 

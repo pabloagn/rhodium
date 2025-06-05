@@ -33,13 +33,15 @@
   };
 
   # We still need xserver for gdm
-  services.xserver.enable = true;
-
-  # TODO: Eventually we change this for hyprlock
-  services.xserver.displayManager.gdm = {
+  services.xserver = {
     enable = true;
-    wayland = true;
   };
+
+  # TODO: Change for regreet
+  # services.xserver.displayManager.gdm = {
+  #   enable = true;
+  #   wayland = true;
+  # };
 
   # Desktop portals
   # TODO: Customize this (desktop dialogues, etc)

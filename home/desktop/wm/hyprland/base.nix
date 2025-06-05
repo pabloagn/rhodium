@@ -9,6 +9,7 @@ in
     hyprland-qtutils
   ];
 
+  # TODO: Check what's with this
   #  systemd.user.targets.hyprland-session.Unit.Wants = [
   #    "xdg-desktop-autostart.target"
   #  ];
@@ -32,7 +33,7 @@ in
       ];
 
       xwayland = {
-        force_zero_scaling = true;
+        force_zero_scaling = true; # Force GUI apps to behave
       };
 
       input = {
@@ -90,7 +91,7 @@ in
         blur = {
           enabled = true;
           size = 3;
-          passes = 3;
+          passes = 5;
           new_optimizations = "on";
           noise = 0.01;
           contrast = 0.9;
@@ -101,6 +102,7 @@ in
       };
     };
 
+    # TODO: Move this to its own monitors module
     extraConfig = ''
       # Monitors
       monitor=eDP-1,2880x1620@120,0x0,1.5
