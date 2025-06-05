@@ -1,9 +1,8 @@
-# modules/hardware/default.nix
-
-{ pkgs, inputs, rhodiumLib, users, host, ... }:
+{ ... }:
 
 {
   imports = [
+    ./managers.nix
     ./audio.nix
     ./bluetooth.nix
     ./keyboard.nix

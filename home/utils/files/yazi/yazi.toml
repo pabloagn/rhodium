@@ -126,8 +126,9 @@ fetchers = [
 ]
 
 prepend_fetchers = [
-    { id = "git", name = "*", run = "git" },  # For files
-    { id = "git", name = "*/", run = "git" }, # For directories (to show if they contain changes)
+    { id = "git", name = "*", run = "git" },                      # For files
+    { id = "git", name = "*/", run = "git" },                     # For directories (to show if they contain changes)
+    { id = "mime", name = "*", run = "mime-ext", prio = "high" }, # A mime-type provider based on a file extension database
 ]
 
 prepend_previewers = [
@@ -139,6 +140,7 @@ prepend_previewers = [
     { mime = "application/x-rar", run = "ouch" },
     { mime = "application/x-xz", run = "ouch" },
     { mime = "application/xz", run = "ouch" },
+    { mime = "text/csv", run = "miller" },
 ]
 
 # -- Preloaders prepare data for previewers (e.g., decode images) --
@@ -179,6 +181,8 @@ previewers = [
     # Fallback (shows basic file info)
     { name = "*", run = "file" },
 ]
+
+# append_previewers = [{ name = "*", run = "hexyl" }]
 
 [input]
 # -- Input prompts configuration --

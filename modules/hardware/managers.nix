@@ -1,0 +1,7 @@
+{ ... }:
+
+{
+  services.udev = {
+    enable = true;
+    };
+}

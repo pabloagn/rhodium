@@ -13,6 +13,7 @@
     eza = {
       enable = true;
     };
+
     zoxide = {
       enable = true;
     };
@@ -22,5 +23,7 @@
     desktop-file-utils # Command line utilities for working with .desktop files
     most # Pager
     less # Pager
+    miller # Like awk, sed, cut, join, and sort for data formats such as CSV, TSV, JSON,etc
+    # superfiles # A yazi alternative (not so nice tbh)
   ];
 }

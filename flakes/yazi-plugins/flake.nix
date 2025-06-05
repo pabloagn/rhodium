@@ -48,6 +48,11 @@
     #   flake = false;
     # };
 
+    # wl-clipboard = {
+    #   url = "github:grappas/wl-clipboard.yazi"; # Forked from system-clipboard to work with wayland compositors
+    #   flake = false;
+    # };
+    #
     wl-clipboard = {
       url = "github:Felipe-9/wl-clipboard.yazi"; # Forked from system-clipboard to work with wayland compositors
       flake = false;
@@ -111,10 +116,10 @@
       flake = false;
     };
 
-    sxiv = {
-      url = "github:NoponyAsked/sxiv.yazi";
-      flake = false;
-    };
+    # sxiv = {
+    #   url = "github:NoponyAsked/sxiv.yazi"; # sxiv is deprecated
+    #   flake = false;
+    # };
 
     # MIME and File Type
     mime-ext = {
@@ -134,7 +139,7 @@
 
     # Navigation and Bookmarks
     bunny = {
-      url = "github:stelcodes/bunny.yazi";
+      url = "github:stelcodes/bunny.yazi"; # TODO: Inject
       flake = false;
     };
 
@@ -148,10 +153,10 @@
     #   flake = false;
     # };
 
-    projects = {
-      url = "github:MasouShizuka/projects.yazi";
-      flake = false;
-    };
+    # projects = {
+    #   url = "github:MasouShizuka/projects.yazi"; # Meh
+    #   flake = false;
+    # };
 
     # Previews
     # epub = {
@@ -159,10 +164,10 @@
     #   flake = false;
     # };
 
-    eza-preview = {
-      url = "github:ahkohd/eza-preview.yazi";
-      flake = false;
-    };
+    # eza-preview = {
+    #   url = "github:ahkohd/eza-preview.yazi"; # Meh
+    #   flake = false;
+    # };
 
     # glow = {
     #   url = "github:Reledia/glow.yazi";
@@ -258,10 +263,10 @@
       flake = false;
     };
 
-    dual-pane = {
-      url = "github:dawsers/dual-pane.yazi";
-      flake = false;
-    };
+    # dual-pane = {
+    #   url = "github:dawsers/dual-pane.yazi"; # Deprecated
+    #   flake = false;
+    # };
 
     file-extra-metadata = {
       url = "github:boydaihungst/file-extra-metadata.yazi";

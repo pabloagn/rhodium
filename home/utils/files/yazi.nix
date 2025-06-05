@@ -9,6 +9,12 @@ let
     augment-command
     copy-file-contents
     wl-clipboard
+    # hexyl # TODO: Not ready with yazi latest yet
+    mime-ext
+    file-actions
+    # mount
+    smart-filter
+    yatline
   ];
 in
 {

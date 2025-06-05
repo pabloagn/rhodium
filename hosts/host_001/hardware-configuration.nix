@@ -10,7 +10,7 @@
   boot.initrd.kernelModules = [ "amdgpu" ];
 
   # AMD + Realtek (WiFi)
-  boot.kernelModules = [ "kvm-amd" "rtw89" ];
+  boot.kernelModules = [ "kvm-amd" "rtw89" "usbhid" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =

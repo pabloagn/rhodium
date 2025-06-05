@@ -135,11 +135,20 @@
       icon = "nu";
       description = "Nu Shell";
     };
+  };
+
+  multiplexers = {
     tmux-session = {
       binary = "ghostty";
       args = [ "-e" "tmux" ];
       icon = "tmux";
       description = "Tmux Session";
+    };
+    zellij = {
+      binary = "ghostty";
+      args = [ "-e" "zellij" ];
+      icon = "zellij";
+      description = "Zellij Session";
     };
   };
 }

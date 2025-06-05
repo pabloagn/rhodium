@@ -91,7 +91,7 @@ let
         browserConfig.newWindowFlag
       ];
       icon = browser;
-      description = "${toString theme.icons.bullet} ${capitalize browser} ${profileName}";
+      description = "${capitalize browser} ${profileName}";
       entryType = "profile";
       profileName = profileName;
       categories = profile.categories or [ ];
