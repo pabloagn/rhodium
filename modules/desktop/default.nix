@@ -6,6 +6,6 @@
     ./files
     ./fonts
     ./notifications
-    # ./wm # This is now being dealt with directly in the host config. Eventually we do conditionally.
+    # ./wm # TODO: This needs to be dealt with here as well declaratively based on hardware
   ];
 }

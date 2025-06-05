@@ -104,6 +104,7 @@ in
     extraConfig = ''
       # Monitors
       monitor=eDP-1,2880x1620@120,0x0,1.5
+      monitor=HDMI-A-1,3840x2160@60,0x0,1.0,mirror,eDP-1
 
       # Workspaces
       workspace = 1,monitor:eDP-1
