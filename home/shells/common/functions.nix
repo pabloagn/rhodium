@@ -30,7 +30,7 @@
 
     # Quick project switcher
     fzp = ''
-      function p --description "Quick project switcher"
+      function fzp --description "Quick project switcher"
         set -l project_dirs $HOME_PROJECTS $HOME_PROFESSIONAL $HOME_SOLENOIDLABS $RHODIUM
         set -l project (fd . $project_dirs -d 1 --type d 2>/dev/null | fzf --preview 'eza --tree --level=2 --color=always {}')
         if test -n "$project"
@@ -41,7 +41,7 @@
 
     # Smart extract function
     xrt = ''
-      function extract --description "Extract archives"
+      function xrt --description "Extract archives"
         for file in $argv
           if test -f $file
             switch $file
@@ -75,14 +75,14 @@
 
     # Quick mkdir and z
     mkz = ''
-      function mkcd --description "Create directory and cd into it"
+      function mkz --description "Create directory and cd into it"
         mkdir -p $argv[1] && cd $argv[1]
       end
     '';
 
     # Backup file
     bkp = ''
-      function backup --description "Create backup of file"
+      function bkp --description "Create backup of file"
         cp $argv[1] $argv[1].bak.(date +%Y%m%d-%H%M%S)
       end
     '';

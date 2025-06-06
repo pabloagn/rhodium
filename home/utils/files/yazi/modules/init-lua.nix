@@ -1,3 +1,5 @@
+{ ... }:
+
 {
   initLua = ''
           -- Full Border
