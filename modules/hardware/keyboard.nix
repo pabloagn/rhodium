@@ -2,8 +2,7 @@
 # TODO: Dynamic
 {
   environment.systemPackages = with pkgs; [
-    # xorg key registry
-    xorg.xev
+    xorg.xev # xorg key registry
   ];
 
   # Time zone

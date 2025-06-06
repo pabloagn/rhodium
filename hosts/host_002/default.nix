@@ -1,4 +1,4 @@
-{ host, ... }:
+{ host, pkgs, ... }:
 {
   imports = [
     ./hardware-configuration.nix
@@ -17,6 +17,9 @@
     ../../modules/maintenance
     ../../modules/utils
   ];
+
+  # Kernel version
+  boot.kernelPackages = pkgs.linuxPackages_6_12; # Courtesy of fucking NVIDIA, they dont support latest kernel yet.
 
   # Host Configuration
   networking = {

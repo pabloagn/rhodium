@@ -1,4 +1,4 @@
-{ host, ... }:
+{ host, pkgs, ... }:
 {
   imports = [
     ./hardware-configuration.nix
@@ -17,6 +17,9 @@
     ../../modules/maintenance
     ../../modules/utils
   ];
+
+  # Kernel version (AMD follows latest)
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # Host Configuration
   networking = {
