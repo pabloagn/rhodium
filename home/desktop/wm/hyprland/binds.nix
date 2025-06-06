@@ -1,57 +1,73 @@
-{ ... }:
+{ host, userPreferences, ... }:
+let
+  preferredApps = userPreferences.apps;
+  preferredBehaviour = userPreferences.behaviour;
+in
 {
   wayland.windowManager.hyprland.settings = {
     bind = [
 
-      # Smart Alt+Tab: 2 windows = toggle, more = rofi picker
-      # "ALT, Tab, exec, ~/.local/bin/window-switcher smart"
-
-      # Traditional cycling (for muscle memory)
-      # "ALT SHIFT, Tab, exec, ~/.local/bin/window-switcher cycle-back"
-
-      # Power user: Super+Tab for workspace overview
-      # "SUPER, Tab, exec, ~/.local/bin/window-switcher workspace"
-
-      # Recent windows (Super+grave changed to avoid conflict)
-      # "SUPER, semicolon, exec, ~/.local/bin/window-switcher recent"
-
-      # Quick window cycling (no UI, just focus)
-      # "SUPER, bracketright, exec, ~/.local/bin/window-switcher cycle"
-      # "SUPER, bracketleft, exec, ~/.local/bin/window-switcher cycle-back"
-
-      # Emergency: Force rofi picker
-      # "SUPER ALT, Tab, exec, ~/.local/bin/window-switcher rofi"
-
-
-      # Alt-Tab window switching
-      "$mainMod, Tab, exec, hyprctl dispatch focuscurrentorlast; hyprctl dispatch alterzorder top"
-
-      # Apps
+      # Core
       # ----------------------------------------
-      "$mainMod, W, exec, ghostty"
-      "$mainMod, B, exec, firefox"
-      "$mainMod, F, exec, thunar"
-      "$mainMod, D, exec, ghostty -e hx"
+  
+      # Tier 1
+      "$mainMod, W, exec, ${preferredApps.terminal}"
+      "$mainMod, B, exec, ${preferredApps.browser}"
+      "$mainMod, F, exec, ${preferredApps.filesTerminal}"
+      "$mainMod, E, exec, ${preferredApps.terminal} -e ${preferredApps.editor}"
+      "$mainMod, I, exec, ${preferredApps.ide}"
       "$mainMod, A, exec, ~/.local/bin/rofi-launcher.sh"
+      "$mainMod, S, exec, ~/.local/bin/utils-screenshot.sh"
+      "$mainMod, M, exec, ~/.local/bin/utils-screenshot.sh"
 
-      # Rofi
-      "$mainMod, escape, exec, killall rofi"
+
+      # Tier 2
+      "$mainMod, SHIFT, W, exec, ${preferredApps.terminalAlt}"
+      "$mainMod, SHIFT, B, exec, ${preferredApps.browserAlt}"
+      "$mainMod, SHIFT, F, exec, ${preferredApps.filesGraphic}"
+      "$mainMod, SHIFT, E, exec, ${preferredApps.terminal} -e ${preferredApps.editorAlt}"
+      "$mainMod, SHIFT, I, exec, ${preferredApps.ideAlt}"
+      "$mainMod, SHIFT, A, exec, ~/.local/bin/rofi-launcher.sh --all"
+      "$mainMod, SHIFT, S, exec, ~/.local/bin/utils-screenshot.sh --area"
+      "$mainMod, SHIFT, M, exec, ~/.local/bin/utils-screenshot.sh"
+
+      # Tier 3
+      "$mainMod, S, exec, ~/.local/bin/utils-screenshot.sh --area"
+
+      # Special workspaces
+      # TODO: Add more nice apps
+      "$mainMod, Q, exec, pgrep qalculate-gtk && hyprctl dispatch togglespecialworkspace calculator || qalculate-gtk"
+      # "$mainMod, Q, exec, pgrep qalculate-gtk && hyprctl dispatch togglespecialworkspace calculator || qalculate-gtk"
+
+      # Cycles
+      "$mainMod, Tab, exec, hyprctl dispatch focuscurrentorlast; hyprctl dispatch alterzorder top" # Prev - Current
+      "$mainMod SHIFT, Tab, layoutmsg, cyclenext" # Master - Dwindle
 
       # Kills
-      # ----------------------------------------
-      # Polite
-      "$mainMod, C, killactive"
-
-      # Demand
-      "$mainMod SHIFT, C, exec, hyprctl dispatch killactive"
-
-      # Enforce
-      "$mainMod CTRL, C, exec, pkill -9 $(hyprctl activewindow -j | jq -r '.pid')"
+      "$mainMod, escape, exec, killall rofi" # Rofi
+      "$mainMod, C, killactive" # Ask
+      "$mainMod SHIFT, C, exec, hyprctl dispatch killactive" # Demand
+      "$mainMod CTRL, C, exec, pkill -9 $(hyprctl activewindow -j | jq -r '.pid')" # Nuke
 
       # Windows
       # ----------------------------------------
+      # Swaps
+      "$mainMod SHIFT, H, swapwindow, l" # Main key
+      "$mainMod SHIFT, H, moveactive, -50 0" # Fallback for floating
+      "$mainMod SHIFT, L, swapwindow, r" 
+      "$mainMod SHIFT, L, moveactive, 50 0"
+      "$mainMod SHIFT, K, swapwindow, u"
+      "$mainMod SHIFT, K, moveactive, 0 -50"
+      "$mainMod SHIFT, J, swapwindow, d"
+      "$mainMod SHIFT, J, moveactive, 0 50"
+
+      # Floating
       "$mainMod, V, togglefloating"
+
+      # Rotate
       "$mainMod, J, togglesplit"
+
+      # Focus
       "$mainMod, left, movefocus, l"
       "$mainMod, right, movefocus, r"
       "$mainMod, up, movefocus, u"
@@ -59,6 +75,7 @@
 
       # Workspaces
       # ----------------------------------------
+      # Workspaces jump
       "$mainMod, 1, workspace, 1"
       "$mainMod, 2, workspace, 2"
       "$mainMod, 3, workspace, 3"
@@ -69,6 +86,12 @@
       "$mainMod, 8, workspace, 8"
       "$mainMod, 9, workspace, 9"
       "$mainMod, 0, workspace, 10"
+
+      # Workspaces navigate
+      "$mainMod SHIFT, right, workspace, e+1"
+      "$mainMod SHIFT, left, workspace, e-1"
+
+      # Workspaces send
       "$mainMod SHIFT, 1, movetoworkspace, 1"
       "$mainMod SHIFT, 2, movetoworkspace, 2"
       "$mainMod SHIFT, 3, movetoworkspace, 3"
@@ -79,21 +102,15 @@
       "$mainMod SHIFT, 8, movetoworkspace, 8"
       "$mainMod SHIFT, 9, movetoworkspace, 9"
       "$mainMod SHIFT, 0, movetoworkspace, 10"
-      "$mainMod SHIFT, right, workspace, e+1"
-      "$mainMod SHIFT, left, workspace, e-1"
-      "$mainMod, Q, exec, pgrep qalculate-gtk && hyprctl dispatch togglespecialworkspace calculator || qalculate-gtk"
-
-      # Screenshot util
-      "$mainMod, S, exec, ~/.local/bin/utils-screenshot.sh"
 
       # Hyprpaper
       # ----------------------------------------
-      "$mainMod ALT, 1, exec, hyprctl hyprpaper wallpaper eDP-1,~/.local/share/wallpapers/dante/wallpaper-01.jpg"
-      "$mainMod ALT, 2, exec, hyprctl hyprpaper wallpaper eDP-1,~/.local/share/wallpapers/dante/wallpaper-02.jpg"
-      "$mainMod ALT, 3, exec, hyprctl hyprpaper wallpaper eDP-1,~/.local/share/wallpapers/dante/wallpaper-03.jpg"
-      "$mainMod ALT, 4, exec, hyprctl hyprpaper wallpaper eDP-1,~/.local/share/wallpapers/dante/wallpaper-04.jpg"
-      "$mainMod ALT, 5, exec, hyprctl hyprpaper wallpaper eDP-1,~/.local/share/wallpapers/dante/wallpaper-05.jpg"
-      "$mainMod ALT, 6, exec, hyprctl hyprpaper wallpaper eDP-1,~/.local/share/wallpapers/dante/wallpaper-06.jpg"
+      # TODO: Eventually we do this using map. For now we go for the simpler route
+      "$mainMod ALT, 1, exec, hyprctl hyprpaper wallpaper ${host.mainMonitor.monitorID},~/.local/share/wallpapers/dante/wallpaper-01.jpg"
+      "$mainMod ALT, 2, exec, hyprctl hyprpaper wallpaper ${host.mainMonitor.monitorID},~/.local/share/wallpapers/dante/wallpaper-02.jpg"
+      "$mainMod ALT, 3, exec, hyprctl hyprpaper wallpaper ${host.mainMonitor.monitorID},~/.local/share/wallpapers/dante/wallpaper-03.jpg"
+      "$mainMod ALT, 4, exec, hyprctl hyprpaper wallpaper ${host.mainMonitor.monitorID},~/.local/share/wallpapers/dante/wallpaper-04.jpg"
+      "$mainMod ALT, 5, exec, hyprctl hyprpaper wallpaper ${host.mainMonitor.monitorID},~/.local/share/wallpapers/dante/wallpaper-05.jpg"  
     ];
 
     bindm = [
@@ -102,10 +119,10 @@
     ];
 
     bindel = [
-      ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%-"
-      ", XF86AudioRaiseVolume, exec, wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 2%+"
-      ", XF86MonBrightnessDown, exec, brightnessctl set 5%-"
-      ", XF86MonBrightnessUp, exec, brightnessctl set +5%"
+      ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ ${preferredBehaviour.knobIncrement}-"
+      ", XF86AudioRaiseVolume, exec, wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ ${preferredBehaviour.knobIncrement}+"
+      ", XF86MonBrightnessDown, exec, brightnessctl set ${preferredBehaviour.knobIncrement}-"
+      ", XF86MonBrightnessUp, exec, brightnessctl set +${preferredBehaviour.knobIncrement}"
     ];
 
     bindl = [

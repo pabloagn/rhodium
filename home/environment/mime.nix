@@ -5,12 +5,14 @@ let
   profilesData = userExtras.profilesData;
   preferredApps = userPreferences.apps;
 
+  # TODO: Obviously we need to make this dynamic
   userEditor = "rh-editors-editor-instance";
   userBrowser = "rh-firefox-personal";
   audio = preferredApps.audioPlayer or "clementine";
   image = "rh-viewers-image-viewer";
   pdf = preferredApps.pdfViewer or "org.pwmt.zathura.desktop";
   video = preferredApps.videoPlayer or "mpv";
+
 in
 {
   xdg.mimeApps = {

@@ -1,8 +1,10 @@
 { pkgs, userPreferences, ... }:
+
 let
   keyboardRepeat = userPreferences.behaviour.keyboardRepeat;
   keyboardDelay = userPreferences.behaviour.keyboardDelay;
 in
+
 {
   home.packages = with pkgs; [
     hyprpolkitagent
@@ -63,7 +65,6 @@ in
         gaps_in = 10;
         gaps_out = 15;
         border_size = 0;
-        # "col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
         "col.active_border" = "rgba(00000000)";
         "col.inactive_border" = "rgba(00000000)";
         resize_on_border = false;
@@ -98,15 +99,7 @@ in
           brightness = 0.8;
           popups = true;
         };
-        # shadow = { };
       };
     };
-
-    # TODO: Move this to its own monitors module
-    extraConfig = ''
-      # Monitors
-      monitor=eDP-1,2880x1620@120,0x0,1.5
-      monitor=HDMI-A-1,3840x2160@60,0x0,1.5
-    '';
   };
 }

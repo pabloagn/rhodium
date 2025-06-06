@@ -1,13 +1,29 @@
 {
   apps = {
-    browser = "firefox";
-    editor = "hx";
+    # Core
+    shell = "fish";
+    shelAlt = "zsh";
     terminal = "ghostty";
+    terminalAlt = "kitty";
+    browser = "firefox";
+    browserAlt = "brave";
+    wm = "hyprland";
+
+    # Files
+    editor = "hx";
+    editorAlt = "nvim";
+    ide = "zeditor";
+    ideAlt = "code";
+    filesTerminal = "yazi";
+    filesGraphic = "thunar";
+
+    # Media
     imageViewer = "feh";
     videoPlayer = "mpv";
-    audioPlayer = "clementine";
+    audioPlayer = "mpv";
+
+    # Productivity
     pdfViewer = "org.pwmt.zathura";
-    wm = "hyprland";
     pager = "most";
   };
 

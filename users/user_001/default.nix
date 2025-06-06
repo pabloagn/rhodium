@@ -1,12 +1,14 @@
-{ user, theme, userExtras, rhodiumLib, userPreferences, ... }:
+{ user, theme, userExtras, rhodiumLib, userPreferences, host, ... }:
 
 {
   imports = [
     # Themes
     ../../home/assets/themes
+
     # Extra Modules
     ../../home/environment
     ../../home/modules
+
     # Main Modules
     ../../home/apps
     ../../home/desktop
@@ -19,7 +21,7 @@
 
   # Pass args to all modules
   _module.args = {
-    inherit userExtras userPreferences rhodiumLib;
+    inherit userExtras userPreferences rhodiumLib host;
   };
 
   # Theme configuration
@@ -27,12 +29,11 @@
 
   # Asset linking
   assets = {
-    # icons.enable = true; # This is creating the actual directory, clashing with hyprcursor and any other app that wants to use this dir
     wallpapers.enable = true;
-    # fonts.enable = true;
   };
 
-  # Script linking - enables all scripts in home/scripts with chmod +x
+  # Script linking
+  # NOTE: Enables all scripts in home/scripts with chmod +x
   scripts.enable = true;
 
   home = {

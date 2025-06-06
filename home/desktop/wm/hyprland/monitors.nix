@@ -1,14 +1,20 @@
-{ ... }:
-# TODO:
-# - How do we make this dynamic depending on the host?
-# - Since this is user-level config
+{ host, ... }:
+
 {
-  wayland.windowManager.hyprland = {
-    extraConfig = ''
-      # Monitors
-      monitor=eDP-1,2880x1620@120,0x0,1.5
-      monitor=eDP-2,1920x1080@300,0x0,1.0
-      monitor=HDMI-A-1,3840x2160@60,0x0,1.5
-    '';
+  wayland.windowManager.hyprland.settings = {
+    monitor = let
+      inherit (host.mainMonitor) monitorID monitorResolution monitorRefreshRate monitorScalingFactor;
+
+      # Build monitor string: "ID,resolution@refresh,position,scale"
+      resolution = if monitorResolution != "" then monitorResolution else "preferred";
+      refresh = if monitorRefreshRate != "" then "@${monitorRefreshRate}" else "";
+      scale = if monitorScalingFactor != "" then monitorScalingFactor else "1.0";
+    in [
+      # Main target monitor
+      "${monitorID},${resolution}${refresh},0x0,${scale}"
+      
+      # Common monitors
+      "HDMI-A-1,3840x2160@60,0x0,1.5"
+    ];
   };
 }
