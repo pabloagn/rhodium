@@ -32,16 +32,7 @@
     xwayland.enable = true;
   };
 
-  # We still need xserver for gdm
-  services.xserver = {
-    enable = true;
-  };
 
-  # TODO: Change for regreet
-  # services.xserver.displayManager.gdm = {
-  #   enable = true;
-  #   wayland = true;
-  # };
 
   # Desktop portals
   # TODO: Customize this (desktop dialogues, etc)

@@ -91,7 +91,7 @@ in
         blur = {
           enabled = true;
           size = 3;
-          passes = 5;
+          passes = 3;
           new_optimizations = "on";
           noise = 0.01;
           contrast = 0.9;

@@ -2,7 +2,8 @@
 
 {
   imports = [
-    ./sddm.nix
+    ./gdm.nix
     ./regreet.nix
+    ./sddm.nix
   ];
 }
