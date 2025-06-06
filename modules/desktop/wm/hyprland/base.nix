@@ -32,8 +32,6 @@
     xwayland.enable = true;
   };
 
-
-
   # Desktop portals
   # TODO: Customize this (desktop dialogues, etc)
   xdg.portal = {
@@ -43,8 +41,4 @@
       pkgs.xdg-desktop-portal-hyprland
     ];
   };
-
-  # TODO: Check if we need this
-  # For swaylock/hyprlock to work as login manager
-  # security.pam.services.swaylock = {};  # Also works for hyprlock
 }

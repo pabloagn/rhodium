@@ -5,7 +5,7 @@
       description = "Justine Host";
     };
     host_002 = {
-      hostname = "Alexandria";
+      hostname = "alexandria";
       description = "Alexandria Host";
     };
   };
