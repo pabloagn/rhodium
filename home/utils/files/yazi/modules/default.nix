@@ -2,7 +2,7 @@
 
 let
   # Main config
-  configBase = import ./base { };
+  configBase = import ./base.nix { };
   configKeymaps = import ./keymap.nix { };
   configPlugins = import ./plugins.nix { inherit yaziPlugins; };
 
@@ -13,10 +13,6 @@ let
   configFiles = import ./files.nix { inherit pkgs; };
 in
 {
-  imports = [
-    ./plugins.nix { inherit yaziPlugins; } 
-  ];
-  
   programs.yazi = {
     settings = configBase;
     keymap = configKeymaps;

@@ -5,6 +5,8 @@ let
   selectedPlugins = with yaziPlugins.plugins; [
     git
     full-border
+    yatline
+    miller
     # smart-enter
     # ouch
     # augment-command
@@ -15,8 +17,6 @@ let
     # file-actions
     # mount
     # smart-filter
-    yatline
-    miller
   ];
 in
 builtins.listToAttrs (map

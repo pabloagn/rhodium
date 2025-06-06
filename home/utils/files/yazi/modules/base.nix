@@ -40,7 +40,7 @@
 
   preview = {
     tab_size = 2;
-    # max_width = 600;
+    max_width = 2000;
     # max_height = 900;
     cache_dir = "";                 # Leave empty to use default cache location
     image_filter = "triangle";      # Affects image scaling quality. Options: nearest, triangle, catmull-rom, gaussian, lanczos3
