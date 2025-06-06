@@ -1,7 +1,6 @@
 { pkgs, ... }:
 
 {
-  # Enable ReGreet
   programs.regreet = {
     enable = true;
     settings = {
@@ -25,7 +24,6 @@
     };
   };
   
-  # Override the default greetd session to use Hyprland instead of Cage
   services.greetd = {
     enable = true;
     settings = {

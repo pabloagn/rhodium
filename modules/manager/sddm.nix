@@ -115,15 +115,15 @@
   };
 
   # Fonts for better rendering
-  fonts.packages = with pkgs; [
-    inter
-    noto-fonts
-    noto-fonts-cjk
-    noto-fonts-emoji
-    liberation_ttf
-    fira-code
-    fira-code-symbols
-  ];
+  # fonts.packages = with pkgs; [
+    # inter
+    # noto-fonts
+    # noto-fonts-cjk
+    # noto-fonts-emoji
+    # liberation_ttf
+    # fira-code
+    # fira-code-symbols
+  # ];
 
   # PAM configuration for keyring integration
   security.pam.services.sddm.enableGnomeKeyring = true;
