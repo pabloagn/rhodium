@@ -27,7 +27,6 @@
     , nixpkgs-unstable
     , colored-man
     , z
-    , fasd
     }@inputs:
     let
       plugins = {
