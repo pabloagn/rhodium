@@ -21,8 +21,8 @@ in
     terraform.symbol = formatIcon icons.buildTools.terraform "💠";
 
     # Languages & Runtimes
-    conda.symbol = formatIcon icons.programming.python "🅒";
-    dart.symbol = formatIcon icons.programming.dart "🎯";
+    conda.symbol = formatIcon icons.dev.anaconda "";
+    dart.symbol = formatIcon icons.programming.dart "";
     elixir.symbol = formatIcon icons.programming.elixir "💧";
     elm.symbol = formatIcon icons.seti.elm "🌳";
     golang.symbol = formatIcon icons.programming.go "🐹";
@@ -36,7 +36,7 @@ in
     php.symbol = formatIcon icons.programming.php "🐘";
     python.symbol = formatIcon icons.programming.python "🐍";
     ruby.symbol = formatIcon icons.programming.ruby "💎";
-    rust.symbol = formatIcon icons.programming.rust "🦀";
+    rust.symbol = formatIcon icons.programming.rust "";
     scala.symbol = formatIcon icons.programming.scala "🗼";
     swift.symbol = formatIcon icons.programming.swift "🐦";
 
@@ -45,7 +45,7 @@ in
     shlvl.symbol = formatIcon icons.cod.arrow-up "↗️";
 
     # Version Control
-    git_branch.symbol = formatIcon icons.sourceControl.git "🌱";
+    git_branch.symbol = formatIcon icons.cod.source-control.git "";
     hg_branch.symbol = formatIcon icons.cod.arrow-right "☿ ";
   };
 }

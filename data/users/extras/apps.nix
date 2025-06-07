@@ -2,7 +2,7 @@
   editors = {
     editor-instance = {
       binary = "kitty";
-      args = [ "-e" "neovide" ];
+      args = [ "-e" "nvim" ];
       icon = "nvim";
       description = "Editor";
     };
@@ -19,8 +19,8 @@
       description = "Neovim";
     };
     neovide-instance = {
-      binary = "kitty";
-      args = [ "-e" "neovide" ];
+      binary = "neovide";
+      args = [ ];
       icon = "neovim";
       description = "Neovide";
     };

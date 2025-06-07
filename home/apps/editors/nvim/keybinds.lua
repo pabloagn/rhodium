@@ -8,6 +8,13 @@ vim.keymap.set('n', '<Leader><space>', ':noh<CR>', { noremap = true, silent = tr
 -- Toggle line numbers with <Leader>n
 vim.keymap.set('n', '<Leader>n', ':set nu! rnu!<CR>', { noremap = true, silent = true, desc = 'Toggle line numbers' })
 
+-- Yank entire buffer to clip
+vim.keymap.set('n', '<Leader>y', ':%y+<CR>', { noremap = true, silent = true, desc = 'Copy entire buffer to clip' })
+
+-- Delete entire buffer
+vim.keymap.set('n', '<Leader>d', ':%d+<CR>', { noremap = true, silent = true, desc = 'Copy entire buffer to clip' })
+
+
 --------------------------------------------
 -- Plugin-Specific
 --------------------------------------------
@@ -57,14 +64,12 @@ vim.keymap.set('n', '<Leader>c', ":lua require('Comment.api').toggle.linewise.cu
 -- VimTeX (LaTeX Editing)
 --------------------------------------------
 
--- Use <space> as leader based on vim.g.mapleader = ' '
+-- Compile the document (starts continuous compilation if configured)
+vim.keymap.set('n', '<Leader>ll', '<Plug>(vimtex-compile)', { noremap = true, silent = true, desc = "VimTeX Compile" })
 
--- -- Compile the document (starts continuous compilation if configured)
--- vim.keymap.set('n', '<Leader>ll', '<Plug>(vimtex-compile)', { noremap = true, silent = true, desc = "VimTeX Compile" })
---
--- -- View the compiled PDF (opens Zathura)
--- vim.keymap.set('n', '<Leader>lv', '<Plug>(vimtex-view)', { noremap = true, silent = true, desc = "VimTeX View PDF" })
---
+-- View the compiled PDF (opens Zathura)
+vim.keymap.set('n', '<Leader>lv', '<Plug>(vimtex-view)', { noremap = true, silent = true, desc = "VimTeX View PDF" })
+
 -- -- Perform forward SyncTeX search (jump from code to PDF position)
 -- vim.keymap.set('n', '<Leader>ls', '<Plug>(vimtex-synctex-forward)', { noremap = true, silent = true, desc = "VimTeX SyncTeX Forward" })
 --
@@ -80,19 +85,17 @@ vim.keymap.set('n', '<Leader>c', ":lua require('Comment.api').toggle.linewise.cu
 -- -- Show VimTeX status information
 -- vim.keymap.set('n', '<Leader>lg', '<Plug>(vimtex-status)', { noremap = true, silent = true, desc = "VimTeX Status" })
 --
--- -- Toggle the Table of Contents window
--- vim.keymap.set('n', '<Leader>lt', '<Plug>(vimtex-toc-toggle)', { noremap = true, silent = true, desc = "VimTeX Toggle TOC" })
+-- Toggle the Table of Contents window
+vim.keymap.set('n', '<Leader>lt', '<Plug>(vimtex-toc-toggle)', { noremap = true, silent = true, desc = "VimTeX Toggle TOC" })
 --
 -- -- Show compilation errors in a quickfix list
 -- vim.keymap.set('n', '<Leader>le', '<Plug>(vimtex-errors)', { noremap = true, silent = true, desc = "VimTeX Show Errors" })
-
 
 -- Multicursors.nvim (Multiple cursors)
 --------------------------------------------
 
 -- Start multicursor with <Leader>m
--- vim.keymap.set('n', '<Leader>m', '<cmd>MCstart<cr>', { noremap = true, silent = true, desc = 'Create a selection for selected text or word under the cursor' })
-
+vim.keymap.set('n', '<Leader>m', '<cmd>MCstart<cr>', { noremap = true, silent = true, desc = 'Create a selection for selected text or word under the cursor' })
 
 -- Treesitter (Syntax highlighting)
 --------------------------------------------
@@ -115,4 +118,5 @@ vim.keymap.set('n', '<Leader>z', ':set foldmethod=expr foldexpr=nvim_treesitter#
 --------------------------------------------
 
 -- Toggle indent lines with <Leader>i
-vim.keymap.set('n', '<Leader>i', ':IBLToggle<CR>', { noremap = true, silent = true, desc = 'Toggle indent lines' })
+vim.keymap.set('n', '<Leader>i', '<cmd>IBLToggle<cr>', { noremap = true, silent = true, desc = 'Toggle indent lines' })
+
