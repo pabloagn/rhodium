@@ -2,8 +2,9 @@
   description = "Rhodium Flakes | Fish Plugins Collection";
 
   inputs = {
+
     nixpkgs = {
-      url = "github:NixOS/nixpkgs"; # This gets overriden by follows
+      url = "github:NixOS/nixpkgs";
     };
 
     nixpkgs-unstable = {
@@ -15,39 +16,33 @@
       flake = false;
     };
 
-    z = {
-      url = "github:jethrokuan/z";
-      flake = false;
-    };
+    # z = {
+    #   url = "github:jethrokuan/z";
+    #   flake = false;
+    # };
   };
 
   outputs =
     { self
     , nixpkgs
-    , nixpkgs-unstable
-    , colored-man
-    , z
+    , ...
     }@inputs:
     let
       plugins = {
         colored-man = {
           name = "colored-man";
-          src = colored-man;
+          src = inputs.colored-man;
         };
 
-        z = {
-          name = "z";
-          src = z;
-        };
+        # z = {
+        #   name = "z";
+        #   src = inputs.z;
+        # };
       };
     in
     {
       inherit plugins;
-
-      sources = {
-        inherit colored-man z;
-      };
-
+      sources = inputs;
       pluginsList = builtins.attrValues plugins;
     };
 }
