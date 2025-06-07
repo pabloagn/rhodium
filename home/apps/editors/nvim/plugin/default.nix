@@ -10,14 +10,14 @@ in
 
       {
         plugin = nvim-lspconfig;
-        config = toLuaFile ./plugin/lsp.lua;
+        config = toLuaFile ./lsp.lua;
       }
 
       cmp-nixpkgs-maintainers
 
       {
         plugin = multicursors-nvim;
-        #config = toLuaFile ./plugin/multicursors.lua;
+        #config = toLuaFile ./multicursors.lua;
       }
 
       {
@@ -27,7 +27,7 @@ in
 
       {
         plugin = catppuccin-nvim;
-        config = toLuaFile ./plugin/catppuccin.lua;
+        config = toLuaFile ./catppuccin.lua;
       }
 
       neodev-nvim
@@ -35,22 +35,22 @@ in
       nvim-cmp
       {
         plugin = nvim-cmp;
-        config = toLuaFile ./plugin/cmp.lua;
+        config = toLuaFile ./cmp.lua;
       }
 
       {
         plugin = telescope-nvim;
-        config = toLuaFile ./plugin/telescope.lua;
+        config = toLuaFile ./telescope.lua;
       }
 
       {
         plugin = indent-blankline-nvim;
-        config = toLuaFile ./plugin/indent_blankline.lua;
+        config = toLuaFile ./indent_blankline.lua;
       }
 
       {
         plugin = nvim-colorizer-lua;
-        config = toLuaFile ./plugin/colorizer.lua;
+        config = toLuaFile ./colorizer.lua;
       }
 
       telescope-fzf-native-nvim
@@ -64,7 +64,7 @@ in
 
       {
         plugin = lualine-nvim;
-        config = toLuaFile ./plugin/lualine/evil_lualine.lua;
+        config = toLuaFile ./lualine/evil_lualine.lua;
       }
 
       {
@@ -126,12 +126,12 @@ in
             p.tree-sitter-yuck
           ])
         );
-        config = toLuaFile ./plugin/treesitter.lua;
+        config = toLuaFile ./treesitter.lua;
       }
       vim-nix
       {
         plugin = vimtex;
-        config = toLuaFile ./plugin/vimtex.lua;
+        config = toLuaFile ./vimtex.lua;
       }
     ];
   };

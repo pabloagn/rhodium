@@ -21,7 +21,7 @@ require'lspconfig'.nixd.setup{
       },
       options = {
         enable = true,
-        target = { "nixpkgs-24.11" }  -- Set to your NixOS version
+        target = { "nixpkgs-25.01" }  -- Set NixOS version
       }
     }
   }

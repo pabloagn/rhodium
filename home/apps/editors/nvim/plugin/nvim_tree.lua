@@ -2,13 +2,10 @@
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
--- Optionally enable 24-bit colour
+-- Enable 24-bit colour
 vim.opt.termguicolors = true
 
--- Empty setup using defaults
--- require("nvim-tree").setup()
-
--- OR setup with some options
+-- Setup with some options
 require("nvim-tree").setup({
   sort = {
     sorter = "case_sensitive",

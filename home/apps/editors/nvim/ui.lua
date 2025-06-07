@@ -12,7 +12,7 @@ vim.o.number = true
 vim.o.relativenumber = true
 vim.o.signcolumn = 'yes'
 
--- Set global statusline
+-- Global statusline
 vim.o.laststatus = 3
 vim.o.autoindent = true
 vim.o.smartindent = true

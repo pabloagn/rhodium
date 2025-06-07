@@ -1,22 +1,28 @@
 {
   editors = {
     editor-instance = {
-      binary = "ghostty";
-      args = [ "-e" "hx" ];
-      icon = "helix";
+      binary = "kitty";
+      args = [ "-e" "neovide" ];
+      icon = "nvim";
       description = "Editor";
     };
     helix-instance = {
-      binary = "ghostty";
+      binary = "kitty";
       args = [ "-e" "hx" ];
       icon = "helix";
       description = "Helix";
     };
     nvim-instance = {
-      binary = "ghostty";
+      binary = "kitty";
       args = [ "-e" "nvim" ];
       icon = "neovim";
       description = "Neovim";
+    };
+    neovide-instance = {
+      binary = "kitty";
+      args = [ "-e" "neovide" ];
+      icon = "neovim";
+      description = "Neovide";
     };
     zeditor-instance = {
       binary = "zeditor";
