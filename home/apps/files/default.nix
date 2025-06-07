@@ -4,7 +4,7 @@
   imports = [
     # ./krusader.nix # The heavy-duty option
     # ./pcmanfm.nix # The efficient option
-    ./thunar # The in-between option
+    ./thunar.nix # The in-between option
   ];
 
   home.packages = with pkgs; [

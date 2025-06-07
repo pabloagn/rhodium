@@ -1,36 +1,14 @@
--- Clipboard
-vim.o.clipboard = 'unnamedplus'
-
--- Encoding
+vim.o.clipboard = 'unnamedplus' -- Enable system clipboard
 vim.o.encoding = 'utf-8'
 vim.o.fileencoding = 'utf-8'
-
--- Mouse support
-vim.o.mouse = 'a'
-
--- Leader
-vim.g.mapleader = ' '
-
--- Local Leader
-vim.g.maplocalleader = ' '
-
--- Swap
-vim.o.swapfile = false
-
--- Updatetime
+vim.o.mouse = 'a' -- Enable mouse support
+vim.g.mapleader = ' ' -- Leader
+vim.g.maplocalleader = ' ' -- Local leader
+vim.o.swapfile = false -- Disable swap 
 vim.o.updatetime = 300
+vim.o.hidden = true -- Enable background buffers
+vim.o.history = 5000 -- Remember N lines in history
+vim.o.lazyredraw = true -- Faster scrolling
+vim.o.synmaxcol = 240 -- Max column for syntax highlight
+vim.o.updatetime = 250 -- ms to wait for trigger an event
 
--- Enable background buffers
-vim.o.hidden = true
-
--- Remember N lines in history
-vim.o.history = 5000
-
--- Faster scrolling
-vim.o.lazyredraw = true
-
--- Max column for syntax highlight
-vim.o.synmaxcol = 240
-
--- ms to wait for trigger an event
-vim.o.updatetime = 250

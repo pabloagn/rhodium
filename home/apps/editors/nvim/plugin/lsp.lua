@@ -16,7 +16,7 @@ require'lspconfig'.gopls.setup{
   capabilities = capabilities,
 }
 
--- Python (using pyright instead of pylsp for better performance)
+-- Python
 require'lspconfig'.pyright.setup{
   capabilities = capabilities,
 }
@@ -26,9 +26,12 @@ require'lspconfig'.texlab.setup{
   capabilities = capabilities,
 }
 
--- Nix (nil)
+-- Nix
 require'lspconfig'.nil_ls.setup{
   capabilities = capabilities,
+  on_attach = function(client, bufnr)
+    client.server_capabilities.publishDiagnostics = false
+  end,
 }
 
 -- Lua

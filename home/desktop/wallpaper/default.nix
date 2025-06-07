@@ -2,6 +2,6 @@
 
 {
   imports = [
-    ./hyprpaper_v2/hyprpaper.nix
+    ./hyprpaper/hyprpaper.nix
   ];
 }

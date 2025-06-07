@@ -17,7 +17,7 @@ in
 
       {
         plugin = multicursors-nvim;
-        config = toLuaFile ./multicursors.lua;
+        # config = toLuaFile ./multicursors.lua;
       }
 
       {

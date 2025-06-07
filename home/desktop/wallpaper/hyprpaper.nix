@@ -1,15 +1,11 @@
 { config, lib, userPreferences, ... }:
+# TODO: This needs fixing since we're using a different approach now
 let
-  # Get wallpaper theme from user preferences
   wallpaperTheme = userPreferences.theme.wallpaper or "dante";
-
-  # Use the symlinked wallpaper path
   wallpapersPath = "${config.xdg.dataHome}/wallpapers/${wallpaperTheme}";
 
-  # All monitors get the same wallpaper
   monitors = [ "eDP-1" "HDMI-A-1" ];
 
-  # Primary wallpaper
   primaryWallpaper = "${wallpapersPath}/wallpaper-01.jpg";
 
   # Preload the wallpapers that actually exist

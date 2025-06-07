@@ -13,12 +13,11 @@ in
       # Tier 1
       "$mainMod, W, exec, ${preferredApps.terminal}"
       "$mainMod, B, exec, ${preferredApps.browser}" # TODO: Glue to main browser profile declaratively
-      "$mainMod, F, exec, ghostty -e yazi" # TODO: Dynamic
+      "$mainMod, F, exec, ${preferredApps.terminal} -e yazi"
       "$mainMod, E, exec, ${preferredApps.terminal} -e ${preferredApps.editor}"
       "$mainMod, I, exec, ${preferredApps.ide}"
       "$mainMod, A, exec, ~/.local/bin/rofi-launcher.sh"
       "$mainMod, S, exec, ~/.local/bin/utils-screenshot.sh"
-      # "$mainMod, M, exec, ~/.local/bin/utils-screenshot.sh"
 
       # Tier 2 (Fallbacks)
       # "$mainMod, SHIFT, W, exec, ${preferredApps.terminalAlt}"
@@ -32,14 +31,14 @@ in
       # "$mainMod, SHIFT, H, exec, ~./local/bin/utils-color-picker.sh"
 
       # Tier 3 (Secondary menus & appearance)
-      # "$mainMod, ALT, P, exec, ~./local/bin/rofi-power.sh"
-      # "$mainMod, ALT, N, exec, ~./local/bin/rofi-nixos.sh"
-      # "$mainMod, ALT, B, exec, ~./local/bin/rofi-bluetooth.sh"
-      # "$mainMod, ALT, W, exec, ~./local/bin/rofi-wifi.sh"
-      # "$mainMod, ALT, D, exec, ~./local/bin/rofi-devices.sh"
-      # "$mainMod, ALT, M, exec, ~./local/bin/rofi-monitors.sh"
-      # "$mainMod, ALT, W, exec, ~./local/bin/rofi-wallpaper.sh"
-      # "$mainMod, S, exec, ~/.local/bin/utils-screenshot.sh --area"
+      "$mainMod, ALT, P, exec, ~./local/bin/rofi-power.sh"
+      "$mainMod, ALT, N, exec, ~./local/bin/rofi-nixos.sh"
+      "$mainMod, ALT, B, exec, ~./local/bin/rofi-bluetooth.sh"
+      "$mainMod, ALT, W, exec, ~./local/bin/rofi-wifi.sh"
+      "$mainMod, ALT, D, exec, ~./local/bin/rofi-devices.sh"
+      "$mainMod, ALT, M, exec, ~./local/bin/rofi-monitors.sh"
+      "$mainMod, ALT, W, exec, ~./local/bin/rofi-wallpaper.sh"
+      "$mainMod, ALT, S, exec, ~/.local/bin/utils-screenshot.sh" # Add an area arg
 
       # Hyprpaper
       # ----------------------------------------
@@ -52,8 +51,7 @@ in
       "$mainMod ALT, 5, exec, hyprctl hyprpaper wallpaper ${host.mainMonitor.monitorID},~/.local/share/wallpapers/dante/wallpaper-05.jpg"
 
       # Special workspaces
-      # TODO: Add more nice apps
-      # "$mainMod, Q, exec, pgrep qalculate-gtk && hyprctl dispatch togglespecialworkspace calculator || qalculate-gtk"
+      "$mainMod, Q, exec, pgrep qalculate-gtk && hyprctl dispatch togglespecialworkspace calculator || qalculate-gtk"
       # "$mainMod, Q, exec, pgrep qalculate-gtk && hyprctl dispatch togglespecialworkspace calculator || qalculate-gtk"
 
       # Cycles
