@@ -3,8 +3,8 @@
     # Core
     shell = "fish";
     shelAlt = "zsh";
-    terminal = "ghostty";
-    terminalAlt = "kitty";
+    terminal = "kitty";
+    terminalAlt = "ghostty";
     browser = "firefox";
     browserAlt = "brave";
     wm = "hyprland";
