@@ -3,6 +3,7 @@
 {
   imports = [
     ./atuin.nix
+    ./fzf.nix
     ./mcfly.nix
     ./skim.nix
   ];

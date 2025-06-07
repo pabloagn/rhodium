@@ -2,6 +2,7 @@
 
 {
   zshFunctions = {
+    # Special yazi
     yy = ''
       function yy() {
         local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
@@ -15,7 +16,6 @@
   };
 
   fishFunctions = {
-
     # Special yazi
     yy = ''
       function yy
@@ -27,10 +27,22 @@
         rm -f -- "$tmp"
       end
     '';
-
-    # Quick project switcher
-    fzp = ''
-      function fzp --description "Quick project switcher"
+    
+    # Jumpers
+    jtf = ''
+      function jtf --description "Jump To File: Fuzzy file finder with preview"
+        fd -t f --strip-cwd-prefix | fzf --preview 'bat --color=always --style=plain {}' | xargs -r $EDITOR
+      end
+    '';
+  
+    jtd = ''
+      function jtd --description "Jump To Dir: Fuzzy dir finder with preview"
+        fd -t d --strip-cwd-prefix | fzf --preview 'eza --tree --level=4 --color=always {}' | xargs -r z
+      end
+    '';
+    
+    jtp = ''
+      function jtp --description "Jump To Proj: Quick project switcher"
         set -l project_dirs $HOME_PROJECTS $HOME_PROFESSIONAL $HOME_SOLENOIDLABS $RHODIUM
         set -l project (fd . $project_dirs -d 1 --type d 2>/dev/null | fzf --preview 'eza --tree --level=2 --color=always {}')
         if test -n "$project"
@@ -39,7 +51,6 @@
       end
     '';
 
-    # Smart extract function
     xrt = ''
       function xrt --description "Extract archives"
         for file in $argv
@@ -72,22 +83,19 @@
         end
       end
     '';
-
-    # Quick mkdir and z
+    
     mkz = ''
       function mkz --description "Create directory and cd into it"
         mkdir -p $argv[1] && cd $argv[1]
       end
     '';
-
-    # Backup file
+    
     bkp = ''
       function bkp --description "Create backup of file"
         cp $argv[1] $argv[1].bak.(date +%Y%m%d-%H%M%S)
       end
     '';
-
-    # Reduce direnv verbosity
+    
     __direnv_export_eval = ''
       function __direnv_export_eval --on-event fish_prompt
         begin

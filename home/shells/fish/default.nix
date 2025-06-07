@@ -1,7 +1,7 @@
 { ... }:
 
 {
-  fzfConfig = import ./fzf.nix { };
+  # fzfConfig = import ./fzf.nix { };
   defaults = import ./defaults.nix { };
   atuin = import ./atuin.nix { };
   keybinds = import ./keybinds.nix { };

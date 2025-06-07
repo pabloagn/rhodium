@@ -37,9 +37,9 @@
 
     # Search
     locate = "plocate";
-    fd = "fd -Lu";
-    find = "fd";
-    grep = "rga";
+    fda = "fd -Lu"; # Find All
+    find = "fd"; # Find
+    grep = "rga"; # ripgrep-all
 
     # Editor
     vim = "hx";
@@ -47,7 +47,7 @@
     v = "hx";
 
     # Clipboard
-    yank = "wl-copy";
+    y = "wl-copy"; # Yank
 
     # History
     h = "history";
@@ -87,7 +87,7 @@
 
     # IDEs
     code = "code 2>/dev/null";
-    cursor = "cursor 2>/dev/null";
+    # cursor = "cursor 2>/dev/null";
 
     # See-utils
     sa = "alias | fzf"; # See aliases

@@ -10,11 +10,16 @@
       sync_enabled = false;
       search_mode = "fuzzy";
       filter_mode = "global";
-      style = "compact";
+      style = "full";
       show_preview = true;
       show_help = false;
-      inline_height = 10;
+      show_tabs = true;
+      inline_height = 25;
+      max_preview_height = 10;
       keymap_mode = "vim-insert";
+      invert = false;
+      enter_accept = false;
+      exit_mode = "return-original";
     };
   };
 }
