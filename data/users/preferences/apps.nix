@@ -10,8 +10,8 @@
     wm = "hyprland";
 
     # Files
-    editor = "hx";
-    editorAlt = "nvim";
+    editor = "nvim";
+    editorAlt = "hx";
     ide = "zeditor";
     ideAlt = "code";
     filesTerminal = "yazi";

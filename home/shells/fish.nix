@@ -22,7 +22,6 @@ in
       # Set vi key bindings
       fish_vi_key_bindings
 
-      ${fishModules.fzfConfig}
       ${fishModules.defaults}
     '';
 
