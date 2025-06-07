@@ -45,7 +45,7 @@ in
     shlvl.symbol = formatIcon icons.cod.arrow-up "↗️";
 
     # Version Control
-    git_branch.symbol = formatIcon icons.cod.source-control.git "";
+    git_branch.symbol = formatIcon icons.cod.source-control "";
     hg_branch.symbol = formatIcon icons.cod.arrow-right "☿ ";
   };
 }

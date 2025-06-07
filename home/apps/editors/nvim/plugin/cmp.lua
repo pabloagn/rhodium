@@ -42,6 +42,7 @@ cmp.setup {
     sources = {
         { name = 'nvim_lsp' },
         { name = 'luasnip' },
-				{ name = 'nixpkgs_maintainers' }
+		{ name = 'path' },
+		{ name = 'nixpkgs_maintainers' }
     },
 }

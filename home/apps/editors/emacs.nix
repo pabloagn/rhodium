@@ -6,7 +6,7 @@
   ];
 
   programs.emacs = {
-    enable = true;
+    enable = false;
     package = pkgs.emacs;
   };
 }

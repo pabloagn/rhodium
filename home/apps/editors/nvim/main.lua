@@ -1,6 +1,3 @@
--- Disable nvim intro
--- vim.o.shortmess:append "sI"
-
 -- Clipboard
 vim.o.clipboard = 'unnamedplus'
 

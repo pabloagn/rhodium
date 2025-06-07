@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ ... }:
 
 {
   imports = [
@@ -6,7 +6,6 @@
   ];
 
   programs.kakoune = {
-    enable = true;
-    # package = pkgs.kakoune; # This caused problems
+    enable = false;
   };
 }

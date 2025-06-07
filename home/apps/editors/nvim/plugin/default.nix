@@ -17,7 +17,7 @@ in
 
       {
         plugin = multicursors-nvim;
-        #config = toLuaFile ./multicursors.lua;
+        config = toLuaFile ./multicursors.lua;
       }
 
       {
@@ -57,6 +57,7 @@ in
 
       cmp_luasnip
       cmp-nvim-lsp
+      cmp-path # Path completion
 
       luasnip
       friendly-snippets
