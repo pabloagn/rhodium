@@ -80,17 +80,20 @@ in
   ];
 
   # Set xdg custom dirs for userDirs
-  xdg.userDirs = {
+  xdg = {
     enable = true;
-    createDirectories = false;
+    userDirs = {
+      enable = true;
+      createDirectories = false;
 
-    publicShare = null;
-    templates = null;
-    desktop = null;
-    documents = null;
-    download = dirs.downloads;
-    music = null;
-    videos = null;
-    pictures = null;
+      publicShare = null;
+      templates = null;
+      desktop = null;
+      documents = null;
+      download = dirs.downloads;
+      music = null;
+      videos = null;
+      pictures = null;
+      };
   };
 }

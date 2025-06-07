@@ -3,7 +3,7 @@
 set -euo pipefail
 
 launch_app() {
-  APP_DIR="$HOME/.nix-profile/share/applications"
+  APP_DIR="$HOME/.local/share/applications"
   ROFI_THEME="$HOME/.config/rofi/themes/chiaroscuro.rasi"
 
   local names=()
@@ -12,7 +12,7 @@ launch_app() {
   # Get all Names in one call
   declare -A name_map
   while IFS=: read -r file name; do
-    name_map["$file"]="${name#Name=}"
+    name_map["$file"]="${name#Namrofi-wallpaper.she=}"
   done < <(rg -H '^Name=' "$APP_DIR"/rh-*.desktop | sort -t: -k2)
 
   # Get all Entry-Types in one call

@@ -9,39 +9,56 @@ in
 
       # Core
       # ----------------------------------------
-  
+
       # Tier 1
       "$mainMod, W, exec, ${preferredApps.terminal}"
-      "$mainMod, B, exec, ${preferredApps.browser}"
-      "$mainMod, F, exec, ${preferredApps.filesTerminal}"
+      "$mainMod, B, exec, ${preferredApps.browser}" # TODO: Glue to main browser profile declaratively
+      "$mainMod, F, exec, ghostty -e yazi" # TODO: Dynamic
       "$mainMod, E, exec, ${preferredApps.terminal} -e ${preferredApps.editor}"
       "$mainMod, I, exec, ${preferredApps.ide}"
       "$mainMod, A, exec, ~/.local/bin/rofi-launcher.sh"
       "$mainMod, S, exec, ~/.local/bin/utils-screenshot.sh"
-      "$mainMod, M, exec, ~/.local/bin/utils-screenshot.sh"
+      # "$mainMod, M, exec, ~/.local/bin/utils-screenshot.sh"
 
+      # Tier 2 (Fallbacks)
+      # "$mainMod, SHIFT, W, exec, ${preferredApps.terminalAlt}"
+      # "$mainMod, SHIFT, B, exec, ${preferredApps.browserAlt}"
+      # "$mainMod, SHIFT, F, exec, ${preferredApps.filesGraphic}"
+      # "$mainMod, SHIFT, E, exec, ${preferredApps.terminal} -e ${preferredApps.editorAlt}"
+      # "$mainMod, SHIFT, I, exec, ${preferredApps.ideAlt}"
+      "$mainMod, SHIFT, A, exec, ~/.local/bin/rofi-jumper.sh"
+      # "$mainMod, SHIFT, S, exec, ~/.local/bin/utils-screenshot.sh --area"
+      # "$mainMod, SHIFT, M, exec, ~/.local/bin/utils-screenshot.sh"
+      # "$mainMod, SHIFT, H, exec, ~./local/bin/utils-color-picker.sh"
 
-      # Tier 2
-      "$mainMod, SHIFT, W, exec, ${preferredApps.terminalAlt}"
-      "$mainMod, SHIFT, B, exec, ${preferredApps.browserAlt}"
-      "$mainMod, SHIFT, F, exec, ${preferredApps.filesGraphic}"
-      "$mainMod, SHIFT, E, exec, ${preferredApps.terminal} -e ${preferredApps.editorAlt}"
-      "$mainMod, SHIFT, I, exec, ${preferredApps.ideAlt}"
-      "$mainMod, SHIFT, A, exec, ~/.local/bin/rofi-launcher.sh --all"
-      "$mainMod, SHIFT, S, exec, ~/.local/bin/utils-screenshot.sh --area"
-      "$mainMod, SHIFT, M, exec, ~/.local/bin/utils-screenshot.sh"
+      # Tier 3 (Secondary menus & appearance)
+      "$mainMod, ALT, P, exec, ~./local/bin/rofi-power.sh"
+      "$mainMod, ALT, N, exec, ~./local/bin/rofi-nixos.sh"
+      "$mainMod, ALT, B, exec, ~./local/bin/rofi-bluetooth.sh"
+      "$mainMod, ALT, W, exec, ~./local/bin/rofi-wifi.sh"
+      "$mainMod, ALT, D, exec, ~./local/bin/rofi-devices.sh"
+      "$mainMod, ALT, M, exec, ~./local/bin/rofi-monitors.sh"
+      "$mainMod, ALT, W, exec, ~./local/bin/rofi-wallpaper.sh"
+      # "$mainMod, S, exec, ~/.local/bin/utils-screenshot.sh --area"
 
-      # Tier 3
-      "$mainMod, S, exec, ~/.local/bin/utils-screenshot.sh --area"
+      # Hyprpaper
+      # ----------------------------------------
+
+      # TODO: Eventually we do this using map. For now we go for the simpler route
+      "$mainMod ALT, 1, exec, hyprctl hyprpaper wallpaper ${host.mainMonitor.monitorID},~/.local/share/wallpapers/dante/wallpaper-01.jpg"
+      "$mainMod ALT, 2, exec, hyprctl hyprpaper wallpaper ${host.mainMonitor.monitorID},~/.local/share/wallpapers/dante/wallpaper-02.jpg"
+      "$mainMod ALT, 3, exec, hyprctl hyprpaper wallpaper ${host.mainMonitor.monitorID},~/.local/share/wallpapers/dante/wallpaper-03.jpg"
+      "$mainMod ALT, 4, exec, hyprctl hyprpaper wallpaper ${host.mainMonitor.monitorID},~/.local/share/wallpapers/dante/wallpaper-04.jpg"
+      "$mainMod ALT, 5, exec, hyprctl hyprpaper wallpaper ${host.mainMonitor.monitorID},~/.local/share/wallpapers/dante/wallpaper-05.jpg"
 
       # Special workspaces
       # TODO: Add more nice apps
-      "$mainMod, Q, exec, pgrep qalculate-gtk && hyprctl dispatch togglespecialworkspace calculator || qalculate-gtk"
+      # "$mainMod, Q, exec, pgrep qalculate-gtk && hyprctl dispatch togglespecialworkspace calculator || qalculate-gtk"
       # "$mainMod, Q, exec, pgrep qalculate-gtk && hyprctl dispatch togglespecialworkspace calculator || qalculate-gtk"
 
       # Cycles
       "$mainMod, Tab, exec, hyprctl dispatch focuscurrentorlast; hyprctl dispatch alterzorder top" # Prev - Current
-      "$mainMod SHIFT, Tab, layoutmsg, cyclenext" # Master - Dwindle
+      # "$mainMod SHIFT, Tab, layoutmsg, cyclenext" # Master - Dwindle
 
       # Kills
       "$mainMod, escape, exec, killall rofi" # Rofi
@@ -52,14 +69,14 @@ in
       # Windows
       # ----------------------------------------
       # Swaps
-      "$mainMod SHIFT, H, swapwindow, l" # Main key
-      "$mainMod SHIFT, H, moveactive, -50 0" # Fallback for floating
-      "$mainMod SHIFT, L, swapwindow, r" 
-      "$mainMod SHIFT, L, moveactive, 50 0"
-      "$mainMod SHIFT, K, swapwindow, u"
-      "$mainMod SHIFT, K, moveactive, 0 -50"
-      "$mainMod SHIFT, J, swapwindow, d"
-      "$mainMod SHIFT, J, moveactive, 0 50"
+      # "$mainMod SHIFT, H, swapwindow, l" # Main key
+      # "$mainMod SHIFT, H, moveactive, -50 0" # Fallback for floating
+      # "$mainMod SHIFT, L, swapwindow, r"
+      # "$mainMod SHIFT, L, moveactive, 50 0"
+      # "$mainMod SHIFT, K, swapwindow, u"
+      # "$mainMod SHIFT, K, moveactive, 0 -50"
+      # "$mainMod SHIFT, J, swapwindow, d"
+      # "$mainMod SHIFT, J, moveactive, 0 50"
 
       # Floating
       "$mainMod, V, togglefloating"
@@ -103,14 +120,6 @@ in
       "$mainMod SHIFT, 9, movetoworkspace, 9"
       "$mainMod SHIFT, 0, movetoworkspace, 10"
 
-      # Hyprpaper
-      # ----------------------------------------
-      # TODO: Eventually we do this using map. For now we go for the simpler route
-      "$mainMod ALT, 1, exec, hyprctl hyprpaper wallpaper ${host.mainMonitor.monitorID},~/.local/share/wallpapers/dante/wallpaper-01.jpg"
-      "$mainMod ALT, 2, exec, hyprctl hyprpaper wallpaper ${host.mainMonitor.monitorID},~/.local/share/wallpapers/dante/wallpaper-02.jpg"
-      "$mainMod ALT, 3, exec, hyprctl hyprpaper wallpaper ${host.mainMonitor.monitorID},~/.local/share/wallpapers/dante/wallpaper-03.jpg"
-      "$mainMod ALT, 4, exec, hyprctl hyprpaper wallpaper ${host.mainMonitor.monitorID},~/.local/share/wallpapers/dante/wallpaper-04.jpg"
-      "$mainMod ALT, 5, exec, hyprctl hyprpaper wallpaper ${host.mainMonitor.monitorID},~/.local/share/wallpapers/dante/wallpaper-05.jpg"  
     ];
 
     bindm = [

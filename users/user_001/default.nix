@@ -1,4 +1,4 @@
-{ user, theme, userExtras, rhodiumLib, userPreferences, host, ... }:
+{ userData, theme, userExtras, rhodiumLib, userPreferences, host, ... }:
 
 {
   imports = [
@@ -37,8 +37,8 @@
   scripts.enable = true;
 
   home = {
-    username = user.username or "user_001";
-    homeDirectory = "/home/${user.username or "user_001"}";
+    username = userData.user_001.username;
+    homeDirectory = "/home/${userData.user_001.username}";
     stateVersion = "25.05";
   };
 }

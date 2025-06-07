@@ -153,10 +153,10 @@
                 useGlobalPkgs = true;
                 useUserPackages = true;
                 
-                users.user_001 = import ./users/user_001;
+                users.${userData.user_001.username or "user_001"} = import ./users/user_001;
                 
                 extraSpecialArgs = {
-                  inherit pkgs-unstable inputs rhodiumLib;
+                  inherit pkgs-unstable inputs rhodiumLib userData;
                   user = userData.user_001 or { };
                   host = hostData.host_001 or { };
                   theme = selectedTheme;
@@ -185,10 +185,10 @@
                 useGlobalPkgs = true;
                 useUserPackages = true;
                 
-                users.user_001 = import ./users/user_001;
+                users.${userData.user_001.username or "user_001"} = import ./users/user_001;
                 
                 extraSpecialArgs = {
-                  inherit pkgs-unstable inputs rhodiumLib;
+                  inherit pkgs-unstable inputs rhodiumLib userData;
                   user = userData.user_001 or { };
                   host = hostData.host_002 or { };
                   theme = selectedTheme;
@@ -213,7 +213,7 @@
           inherit pkgs;
           modules = [ ./users/user_001 ];
           extraSpecialArgs = {
-            inherit pkgs-unstable inputs rhodiumLib;
+            inherit pkgs-unstable inputs rhodiumLib userData;
             user = userData.user_001 or { };
             host = { };
             theme = selectedTheme;

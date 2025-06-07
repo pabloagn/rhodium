@@ -1,0 +1,57 @@
+{ lib, config, pkgs, userPreferences, userExtras, rhodiumLib, ... }:
+
+let
+  theme = config.theme;
+  generatedEntries = rhodiumLib.generators.desktopGenerators.generateAllEntries
+    userPreferences
+    userExtras
+    theme;
+  # Create YAML configuration
+  yamlFormat = pkgs.formats.yaml { };
+  raffiConfig = yamlFormat.generate "raffi.yaml" generatedEntries;
+  escapeDesktopArg = arg:
+    let
+      escapedPercent = lib.replaceStrings [ "%" ] [ "%%" ] arg;
+      needsQuotes = lib.any (char: lib.hasInfix char arg) [ "?" "&" "=" " " ";" "|" "<" ">" "(" ")" "[" "]" "{" "}" "$" "`" "\\" "\"" "'" "\n" "\t" "#" ];
+    in
+    if needsQuotes
+    then ''"${lib.escape [ "\\" "\"" ] escapedPercent}"''
+    else escapedPercent;
+  # Convert entries to .desktop file format
+  toDesktopEntry = name: entry: {
+    name = entry.description;
+    exec = "${entry.binary} ${lib.concatStringsSep " " (map escapeDesktopArg entry.args)}";
+    icon = entry.icon;
+    type = "Application";
+    categories =
+      if lib.hasInfix "firefox" entry.binary || lib.hasInfix "zen" entry.binary || lib.hasInfix "chromium" entry.binary
+      then [ "Network" "WebBrowser" ]
+      else if lib.hasInfix "ghostty" entry.binary || lib.hasInfix "kitty" entry.binary
+      then [ "System" "TerminalEmulator" ]
+      else [ "Utility" "Application" ];
+    terminal = false;
+    startupNotify = true;
+  } // {
+    "X-Entry-Type" = entry.entryType;
+  } // (lib.optionalAttrs (entry.entryType == "bookmark") {
+    "X-Profile-Name" = entry.profileName or "";
+    "X-Category" = lib.concatStringsSep ";" (entry.categories or [ ]);
+  }) // (lib.optionalAttrs (entry.entryType == "profile") {
+    "X-Profile-Name" = entry.profileName or "";
+    "X-Category" = lib.concatStringsSep ";" (entry.categories or [ ]);
+  }) // (lib.optionalAttrs (entry.entryType == "application") {
+    "X-Category" = lib.concatStringsSep ";" (entry.categories or [ ]);
+  });
+in
+{
+  xdg.configFile."raffi/raffi.yaml" = {
+    source = raffiConfig;
+  };
+  # Generate .desktop files
+  xdg.desktopEntries = lib.mapAttrs toDesktopEntry generatedEntries;
+
+  # Debug file for inspection
+  # home.file."desktop-entries-debug.yaml" = {
+  #   source = raffiConfig;
+  # };
+}

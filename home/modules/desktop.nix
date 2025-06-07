@@ -2,7 +2,6 @@
 
 let
   theme = config.theme;
-
   generatedEntries = rhodiumLib.generators.desktopGenerators.generateAllEntries
     userPreferences
     userExtras
@@ -11,7 +10,6 @@ let
   # Create YAML configuration
   yamlFormat = pkgs.formats.yaml { };
   raffiConfig = yamlFormat.generate "raffi.yaml" generatedEntries;
-
   escapeDesktopArg = arg:
     let
       escapedPercent = lib.replaceStrings [ "%" ] [ "%%" ] arg;
@@ -21,43 +19,60 @@ let
     then ''"${lib.escape [ "\\" "\"" ] escapedPercent}"''
     else escapedPercent;
 
-  # Convert entries to .desktop file format
-  toDesktopEntry = name: entry: {
-    name = entry.description;
-    exec = "${entry.binary} ${lib.concatStringsSep " " (map escapeDesktopArg entry.args)}";
-    icon = entry.icon;
-    type = "Application";
-    categories =
-      if lib.hasInfix "firefox" entry.binary || lib.hasInfix "zen" entry.binary || lib.hasInfix "chromium" entry.binary
-      then [ "Network" "WebBrowser" ]
-      else if lib.hasInfix "ghostty" entry.binary || lib.hasInfix "kitty" entry.binary
-      then [ "System" "TerminalEmulator" ]
-      else [ "Utility" "Application" ];
-    terminal = false;
-    startupNotify = true;
-    settings = {
-      "X-Entry-Type" = entry.entryType;
-    } // (lib.optionalAttrs (entry.entryType == "bookmark") {
-      "X-Profile-Name" = entry.profileName or "";
-      "X-Category" = lib.concatStringsSep ";" (entry.categories or [ ]);
-    }) // (lib.optionalAttrs (entry.entryType == "profile") {
-      "X-Profile-Name" = entry.profileName or "";
-      "X-Category" = lib.concatStringsSep ";" (entry.categories or [ ]);
-    }) // (lib.optionalAttrs (entry.entryType == "application") {
-      "X-Category" = lib.concatStringsSep ";" (entry.categories or [ ]);
-    });
-  };
+  # Convert entry to .desktop file content
+  # NOTE: This was required since xdg.desktopEntries was a mess
+  entryToDesktopFile = name: entry:
+    let
+      categories =
+        if lib.hasInfix "firefox" entry.binary || lib.hasInfix "zen" entry.binary || lib.hasInfix "chromium" entry.binary
+        then "Network;WebBrowser"
+        else if lib.hasInfix "ghostty" entry.binary || lib.hasInfix "kitty" entry.binary
+        then "System;TerminalEmulator"
+        else "Utility;Application";
+
+      # Conditional X- fields based on entry type
+      xFields =
+        "X-Entry-Type=${entry.entryType}" +
+        (if entry.entryType == "bookmark" then
+          "\nX-Profile-Name=${entry.profileName or ""}" +
+          "\nX-Category=${lib.concatStringsSep ";" (entry.categories or [])}"
+        else if entry.entryType == "profile" then
+          "\nX-Profile-Name=${entry.profileName or ""}" +
+          "\nX-Category=${lib.concatStringsSep ";" (entry.categories or [])}"
+        else if entry.entryType == "application" then
+          "\nX-Category=${lib.concatStringsSep ";" (entry.categories or [])}"
+        else "");
+
+    in
+    ''
+      [Desktop Entry]
+      Type=Application
+      Name=${entry.description}
+      Exec=${entry.binary} ${lib.concatStringsSep " " (map escapeDesktopArg entry.args)}
+      Icon=${entry.icon}
+      Categories=${categories}
+      Terminal=false
+      StartupNotify=true
+      Version=1.0
+      ${xFields}
+    '';
+
+  # Create home.file entries for each desktop entry
+  desktopFileEntries = lib.mapAttrs'
+    (name: entry: {
+      name = ".local/share/applications/${name}.desktop";
+      value = {
+        text = entryToDesktopFile name entry;
+      };
+    })
+    generatedEntries;
+
 in
 {
   xdg.configFile."raffi/raffi.yaml" = {
     source = raffiConfig;
   };
 
-  # Generate .desktop files
-  xdg.desktopEntries = lib.mapAttrs toDesktopEntry generatedEntries;
-
-  # Debug file for inspection
-  # home.file."desktop-entries-debug.yaml" = {
-  #   source = raffiConfig;
-  # };
+  # Create desktop files directly using home.file
+  home.file = desktopFileEntries;
 }

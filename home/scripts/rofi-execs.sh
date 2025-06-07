@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# TODO: Complete this
 
 # Path to the directory containing the scripts
 SCRIPT_DIR="/home/pabloagn/.dotfiles/user/desktop/rofi/scripts/executables"
@@ -10,7 +11,7 @@ for script in "$SCRIPT_DIR"/*.sh; do
     # Extract title (third line) and description (fourth line)
     title=$(sed -n '3s/^# Title: //p' "$script")
     description=$(sed -n '4s/^# Description: //p' "$script")
-    
+
     # Combine title and description in one line, formatted with title and italicized description
 		MENU_ENTRIES+="$title (<i>$description</i>)\n"
 done
