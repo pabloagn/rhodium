@@ -226,6 +226,14 @@
 
       # Devshells
       devShells.${system} = {
+        default = pkgs.mkShell {
+          buildInputs = with pkgs; [
+            nixpkgs-fmt
+            nil
+            git
+          ];
+        };
+        
         rhodium-dev = pkgs.mkShell {
           buildInputs = with pkgs; [
             nixpkgs-fmt

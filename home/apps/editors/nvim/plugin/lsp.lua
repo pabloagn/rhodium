@@ -31,36 +31,48 @@ require'lspconfig'.texlab.setup{
 -- NOTE:
 -- There are issues wiht flake.lock files, resulting in annoying error msgs
 -- We exclude files for now
+-- require'lspconfig'.nil_ls.setup{
+--   capabilities = capabilities,
+--   settings = {
+--     ['nil'] = {
+--       diagnostics = {
+--         excludedFiles = { "flake.lock" }
+--       }
+--     }
+--   }
+-- }
+
 require'lspconfig'.nil_ls.setup{
   capabilities = capabilities,
   settings = {
     ['nil'] = {
       diagnostics = {
-        excludedFiles = { "flake.lock" }
+        excludedFiles = { "flake.lock" },
+        ignored = { ".*" }  -- Ignore ALL warnings
+      },
+      nix = {
+        flake = {
+          autoArchive = true
+        }
       }
     }
-  }
-}
-
--- Lua
-require'lspconfig'.lua_ls.setup{
-  capabilities = capabilities,
-  settings = {
-    Lua = {
-      runtime = {
-        version = 'LuaJIT',
-      },
-      diagnostics = {
-        globals = {'vim'},
-      },
-      workspace = {
-        library = vim.api.nvim_get_runtime_file("", true),
-      },
-      telemetry = {
-        enable = false,
-      },
-    },
   },
+  on_attach = function(client, bufnr)
+    -- Only show ERRORS, completely hide warnings
+    vim.diagnostic.config({
+      virtual_text = {
+        severity = vim.diagnostic.severity.ERROR
+      },
+      signs = {
+        severity = vim.diagnostic.severity.ERROR
+      },
+      underline = {
+        severity = vim.diagnostic.severity.ERROR
+      },
+      update_in_insert = false,
+      severity_sort = true,
+    }, bufnr)
+  end
 }
 
 -- TOML
