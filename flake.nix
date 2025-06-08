@@ -29,16 +29,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    fish-plugins = {
-      # url = "path:flakes/fish-plugins";
-      url = "git+file://./.?dir=flakes/fish-plugins";
-      inputs.nixpkgs.follows = "nixpkgs";
+    rhodium-alloys = {
+      url = "github:pabloagn/rhodium-alloys";
+      # inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    # yazi-plugins = {
-    #   url = "path:./flakes/yazi-plugins";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
   };
 
   outputs =
@@ -49,8 +43,7 @@
     , sops-nix
     , nur
     , zen-browser
-    , fish-plugins
-    # , yazi-plugins
+    , rhodium-alloys
     }@inputs:
     let
       lib = nixpkgs.lib;
@@ -162,8 +155,8 @@
                   host = hostData.host_001 or { };
                   theme = selectedTheme;
                   inherit userPreferences userExtras;
-                  fishPlugins = fish-plugins;
-                  # yaziPlugins = yazi-plugins;
+                  fishPlugins = rhodium-alloys.fish;
+                  yaziPlugins = rhodium-alloys.yazi;
                 };
               };
             }
@@ -194,8 +187,8 @@
                   host = hostData.host_002 or { };
                   theme = selectedTheme;
                   inherit userPreferences userExtras;
-                  fishPlugins = fish-plugins;
-                  # yaziPlugins = yazi-plugins;
+                  fishPlugins = rhodium-alloys.fish;
+                  yaziPlugins = rhodium-alloys.yazi;
                 };
               };
             }
@@ -219,8 +212,8 @@
             host = { };
             theme = selectedTheme;
             inherit userPreferences userExtras;
-            fishPlugins = fish-plugins;
-            # yaziPlugins = yazi-plugins;
+            fishPlugins = rhodium-alloys.fish;
+            yaziPlugins = rhodium-alloys.yazi;
           };
         };
       };
