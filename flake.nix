@@ -34,10 +34,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    yazi-plugins = {
-      url = "path:./flakes/yazi-plugins";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # yazi-plugins = {
+    #   url = "path:./flakes/yazi-plugins";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
   };
 
   outputs =
@@ -49,7 +49,7 @@
     , nur
     , zen-browser
     , fish-plugins
-    , yazi-plugins
+    # , yazi-plugins
     }@inputs:
     let
       lib = nixpkgs.lib;
@@ -162,7 +162,7 @@
                   theme = selectedTheme;
                   inherit userPreferences userExtras;
                   fishPlugins = fish-plugins;
-                  yaziPlugins = yazi-plugins;
+                  # yaziPlugins = yazi-plugins;
                 };
               };
             }
@@ -194,7 +194,7 @@
                   theme = selectedTheme;
                   inherit userPreferences userExtras;
                   fishPlugins = fish-plugins;
-                  yaziPlugins = yazi-plugins;
+                  # yaziPlugins = yazi-plugins;
                 };
               };
             }
@@ -219,12 +219,13 @@
             theme = selectedTheme;
             inherit userPreferences userExtras;
             fishPlugins = fish-plugins;
-            yaziPlugins = yazi-plugins;
+            # yaziPlugins = yazi-plugins;
           };
         };
       };
 
       # Devshells
+      # Default DevShell
       devShells.${system} = {
         default = pkgs.mkShell {
           buildInputs = with pkgs; [
@@ -233,7 +234,8 @@
             git
           ];
         };
-        
+
+        # Rhodium Dev DevShell
         rhodium-dev = pkgs.mkShell {
           buildInputs = with pkgs; [
             nixpkgs-fmt
