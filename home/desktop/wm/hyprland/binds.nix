@@ -1,4 +1,5 @@
 { host, userPreferences, ... }:
+
 let
   preferredApps = userPreferences.apps;
   preferredBehaviour = userPreferences.behaviour;
@@ -140,3 +141,4 @@ in
     ];
   };
 }
+

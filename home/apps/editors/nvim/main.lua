@@ -1,10 +1,8 @@
 vim.o.clipboard = 'unnamedplus' -- Enable system clipboard
 vim.o.showmode = false -- We already have this on line
-vim.o.encoding = 'utf-8'
-vim.o.fileencoding = 'utf-8'
+vim.o.encoding = 'utf-8' -- Encoding
+vim.o.fileencoding = 'utf-8' -- File encoding
 vim.o.mouse = 'a' -- Enable mouse support
-vim.g.mapleader = ' ' -- Leader
-vim.g.maplocalleader = ' ' -- Local leader
 vim.o.swapfile = false -- Disable swap 
 vim.o.updatetime = 300
 vim.o.hidden = true -- Enable background buffers

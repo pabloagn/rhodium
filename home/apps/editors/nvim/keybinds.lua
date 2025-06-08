@@ -1,3 +1,7 @@
+-- Leaders
+vim.g.mapleader = ' ' -- Leader
+vim.g.maplocalleader = ' ' -- Local leader
+
 -- General
 vim.keymap.set('n', '<Leader><space>', ':noh<CR>', { noremap = true, silent = true, desc = 'Clear search highlight' })
 vim.keymap.set('n', '<Leader>n', ':set nu! rnu!<CR>', { noremap = true, silent = true, desc = 'Toggle line numbers' })
@@ -22,26 +26,7 @@ vim.keymap.set('n', '<Leader>c', ":lua require('Comment.api').toggle.linewise.cu
 -- VimTeX (LaTeX Editing)
 vim.keymap.set('n', '<Leader>ll', '<Plug>(vimtex-compile)', { noremap = true, silent = true, desc = "VimTeX continuous compile" })
 vim.keymap.set('n', '<Leader>lv', '<Plug>(vimtex-view)', { noremap = true, silent = true, desc = "VimTeX View PDF" })
-
--- -- Perform forward SyncTeX search (jump from code to PDF position)
--- vim.keymap.set('n', '<Leader>ls', '<Plug>(vimtex-synctex-forward)', { noremap = true, silent = true, desc = "VimTeX SyncTeX Forward" })
-
--- -- Clean auxiliary files (latexmk -C)
--- vim.keymap.set('n', '<Leader>lc', '<Plug>(vimtex-clean)', { noremap = true, silent = true, desc = "VimTeX Clean Aux Files" })
-
--- -- Clean auxiliary files thoroughly (including PDF) (latexmk -c)
--- vim.keymap.set('n', '<Leader>lC', '<Plug>(vimtex-clean-full)', { noremap = true, silent = true, desc = "VimTeX Clean Full (incl. PDF)" })
-
--- -- Show the compilation output/log
--- vim.keymap.set('n', '<Leader>lo', '<Plug>(vimtex-compile-output)', { noremap = true, silent = true, desc = "VimTeX Show Output" })
-
--- -- Show VimTeX status information
--- vim.keymap.set('n', '<Leader>lg', '<Plug>(vimtex-status)', { noremap = true, silent = true, desc = "VimTeX Status" })
-
 vim.keymap.set('n', '<Leader>lt', '<Plug>(vimtex-toc-toggle)', { noremap = true, silent = true, desc = "VimTeX Toggle TOC" })
-
--- -- Show compilation errors in a quickfix list
--- vim.keymap.set('n', '<Leader>le', '<Plug>(vimtex-errors)', { noremap = true, silent = true, desc = "VimTeX Show Errors" })
 
 -- Multicursors.nvim (Multiple cursors)
 vim.keymap.set('n', '<Leader>m', '<cmd>MCstart<cr>', { noremap = true, silent = true, desc = 'Create a selection for selected text or word under the cursor' })
@@ -52,7 +37,6 @@ vim.keymap.set('n', '<Leader>z', ':set foldmethod=expr foldexpr=nvim_treesitter#
 -- LuaSnip (Snippets)
 -- vim.keymap.set('i', '<Tab>', "lua equire('luasnip').expand_or_jump()<CR>", { noremap = true, silent = true, expr = true, desc = 'Expand or jump to next snippet' })
 -- vim.keymap.set('i', '<S-Tab>', "lua require('luasnip').jump(-1)<CR>", { noremap = true, silent = true, expr = true, desc = 'Jump to previous snippet' })
-
 
 -- Indent Lines (Add lines to indents)
 vim.keymap.set('n', '<Leader>i', '<cmd>IBLToggle<cr>', { noremap = true, silent = true, desc = 'Toggle indent lines' })

@@ -1,269 +1,280 @@
 { pkgs, ... }:
 
 let
-  # toLua = str: "lua << EOF\n${str}\nEOF\n";
+  # writeLuaFile = str: "lua << EOF\n${str}\nEOF\n";
   sourceLuaFile = file: "lua << EOF\n${builtins.readFile file}\nEOF\n";
 in
 {
   programs.neovim = {
     plugins = with pkgs.vimPlugins; [
 
-      {
-        plugin = mini-nvim;
-        config = sourceLuaFile ./mini-nvim.lua;
-      }
-
-      {
-        plugin = ts-comments-nvim;
-        config = sourceLuaFile ./ts-comments-nvim.lua;
-      }
-
-      {
-        plugin = lazydev-nvim;
-        config = sourceLuaFile ./lazydev-nvim.lua;
-      }
-
-      {
-        plugin = bufferline-nvim;
-        config = sourceLuaFile ./bufferline-nvim.lua;
-      }
-
-      {
-        plugin = yazi-nvim;
-        config = sourceLuaFile ./yazi-nvim.lua;
-      }
-
-      {
-        plugin = flash-nvim;
-        config = sourceLuaFile ./flash-nvim.lua;
-      }
-
-      {
-        plugin = refactoring-nvim;
-        config = sourceLuaFile ./refactoring-nvim.lua;
-      }
-
-      {
-        plugin = plenary-nvim;
-        config = sourceLuaFile ./;
-      }
-
-      {
-        plugin = alpha-nvim;
-        config = sourceLuaFile ./;
-      }
-
-      {
-        plugin = dashboard-nvim;
-        config = sourceLuaFile ./;
-      }
-
-      {
-        plugin = telescope-nvim;
-        config = sourceLuaFile ./telescope.lua;
-      }
-
-      telescope-fzf-native-nvim
-
-      {
-        plugin = none-ls-nvim;
-        config = sourceLuaFile ./;
-      }
-
-      {
-        plugin = crates-nvim;
-        config = sourceLuaFile ./;
-      }
-
-      {
-        plugin = neoconf-nvim;
-        config = sourceLuaFile ./;
-      }
-
-      {
-        plugin = edgy-nvim;
-        config = sourceLuaFile ./;
-      }
-
-      {
-        plugin = nvim-treesitter-context;
-        config = sourceLuaFile ./;
-      }
-
-      {
-        plugin = nvim-treesitter-textobjects;
-        config = sourceLuaFile ./;
-      }
-
-      {
-        plugin = octo-nvim;
-        config = sourceLuaFile ./;
-      }
-
-      {
-        plugin = which-key-nvim;
-        config = sourceLuaFile ./;
-      }
-
-      {
-        plugin = project-nvim;
-        config = sourceLuaFile ./;
-      }
-
-      {
-        plugin = gitsigns-nvim;
-        config = sourceLuaFile ./;
-      }
-
-      {
-        plugin = trouble-nvim;
-        config = sourceLuaFile ./;
-      }
-
-      {
-        plugin = todo-comments-nvim;
-        config = sourceLuaFile ./;
-      }
-
-      {
-        plugin = conform-nvim;
-        config = sourceLuaFile ./;
-      }
-
-      {
-        plugin = nvim-lint;
-        config = sourceLuaFile ./;
-      }
-
-      {
-        plugin = nvim-lspconfig;
-        config = sourceLuaFile ./lsp.lua;
-      }
-
-      {
-        plugin = noice-nvim;
-        config = sourceLuaFile ./;
-      }
-
-      {
-        plugin = nui-nvim;
-        config = sourceLuaFile ./;
-      }
-
-      {
-        plugin = snacks-nvim;
-        config = sourceLuaFile ./;
-      }
-
-      {
-        plugin = persistence-nvim;
-        config = sourceLuaFile ./;
-      }
-
-
-      {
-        plugin = luasnip;
-        config = sourceLuaFile ./;
-      }
-
-      {
-        plugin = lualine-nvim;
-        config = sourceLuaFile ./lualine/evil_lualine.lua;
-      }
-
-      # cmp
-      # ---------------------------------------------
-      {
-        plugin = nvim-cmp;
-        config = sourceLuaFile ./cmp.lua;
-      }
-
-      {
-        plugin = blink-cmp;
-        config = sourceLuaFile ./;
-      }
-
-      cmp-dictionary
-      cmp-latex-symbols
-      cmp-nvim-lsp
-      cmp-path # Path completion
-      cmp-nixpkgs-maintainers
-
-
+      # Core
+      # ----------------------------------------------
       vim-nix
 
+      # Languages
+      # ----------------------------------------------
       {
-        plugin = neogen;
-        config = sourceLuaFile ./;
+        plugin = nvim-lspconfig; # LSP
+        config = sourceLuaFile ./nvim-lspconfig.lua;
       }
 
       {
-        plugin = nvim-dap;
-        config = sourceLuaFile ./;
+        plugin = nvim-cmp; # Completion engine
+        config = sourceLuaFile ./nvim-cmp.lua;
+      }
+
+      cmp-buffer
+      cmp-dictionary
+      cmp-latex-symbols
+      cmp-path # Path completion
+      cmp-nixpkgs-maintainers
+      cmp-nvim-lsp
+
+      # Completion
+      # ----------------------------------------------
+      friendly-snippets # Lua snippets
+      luasnip # Lua snippets engine
+
+      # UI
+      # ----------------------------------------------
+      fidget-nvim # Loading animations
+
+      {
+        plugin = dashboard-nvim; # Entry dashboard
+        config = sourceLuaFile ./dashboard-nvim.lua;
       }
 
       {
-        plugin = aerial-nvim;
-        config = sourceLuaFile ./;
+        plugin = noice-nvim; # Niceties
+        config = sourceLuaFile ./noice-nvim.lua;
       }
 
       {
-        plugin = fzf-vim;
-        config = sourceLuaFile ./;
+        plugin = todo-comments-nvim; # Better TODOs
+        config = sourceLuaFile ./todo-comments-nvim.lua;
       }
 
       {
-        plugin = harpoon2;
-        config = sourceLuaFile ./;
+        plugin = lualine-nvim; # Status line
+        config = sourceLuaFile ./lualine-nvim.lua;
       }
 
+      # Telescope
+      # ----------------------------------------------
       {
-        plugin = vim-illuminate;
-        config = sourceLuaFile ./;
+        plugin = telescope-nvim; # Finder
+        config = sourceLuaFile ./telescope-nvim.lua;
       }
 
+      telescope-fzf-native-nvim # Finder + fz
+
+      # Improvements
+      # ----------------------------------------------
       {
-        plugin = leap-nvim;
-        config = sourceLuaFile ./;
+        plugin = comment-nvim;
+        config = sourceLuaFile ./comment-nvim.lua;
       }
 
-      {
-        plugin = neo-tree-nvim;
-        config = sourceLuaFile ./;
-      }
-
-      {
-        plugin = outline-nvim;
-        config = sourceLuaFile ./;
-      }
-
-      {
-        plugin = multicursors-nvim;
-        config = sourceLuaFile ./;
-      }
-
+      # Themes
+      # ----------------------------------------------
       # {
-      #   plugin = comment;
-      #   config = sourceLuaFile ./comment-nvim.lua;
+      #   plugin = catppuccin-nvim; # Catppuccin theme
+      #   config = sourceLuaFile ./catppuccin-nvim.lua;
       # }
 
       {
-        plugin = catppuccin-nvim;
-        config = sourceLuaFile ./catppuccin.lua;
+        plugin = tokyonight-nvim;
+        config = sourceLuaFile ./tokyonight-nvim.lua;
       }
 
       {
         plugin = indent-blankline-nvim;
-        config = sourceLuaFile ./indent_blankline.lua;
+        config = sourceLuaFile ./indent-blankline-nvim.lua;
       }
 
       {
-        plugin = nvim-colorizer-lua;
-        config = sourceLuaFile ./colorizer.lua;
+        plugin = nvim-colorizer-lua; # Add colors to color codes
+        config = sourceLuaFile ./nvim-colorizer-lua.lua;
       }
 
-      # friendly-snippets
-      fidget-nvim
+      {
+        plugin = vimtex;
+        config = sourceLuaFile ./vimtex.lua;
+      }
+
+      nvim-treesitter-context
+      nvim-treesitter-textobjects
+
+      {
+        plugin = plenary-nvim;
+        # config = sourceLuaFile ./;
+      }
+
+      # {
+      #   plugin = mini-nvim;
+      #   config = sourceLuaFile ./mini-nvim.lua;
+      # }
+
+      # {
+      #   plugin = ts-comments-nvim;
+      #   config = sourceLuaFile ./ts-comments-nvim.lua;
+      # }
+
+      # {
+      #   plugin = lazydev-nvim;
+      #   config = sourceLuaFile ./lazydev-nvim.lua;
+      # }
+
+      # {
+      #   plugin = bufferline-nvim;
+      #   config = sourceLuaFile ./bufferline-nvim.lua;
+      # }
+
+      # {
+      #   plugin = yazi-nvim;
+      #   config = sourceLuaFile ./yazi-nvim.lua;
+      # }
+
+      # {
+      #   plugin = flash-nvim;
+      #   config = sourceLuaFile ./flash-nvim.lua;
+      # }
+
+      # {
+      #   plugin = refactoring-nvim;
+      #   config = sourceLuaFile ./refactoring-nvim.lua;
+      # },
+
+      # {
+      #   plugin = alpha-nvim;
+      #   config = sourceLuaFile ./;
+      # },
+      # {
+      #   plugin = none-ls-nvim;
+      #   config = sourceLuaFile ./;
+      # }
+
+      # {
+      #   plugin = crates-nvim;
+      #   config = sourceLuaFile ./;
+      # }
+
+      # {
+      #   plugin = neoconf-nvim;
+      #   config = sourceLuaFile ./;
+      # }
+
+      # {
+      #   plugin = edgy-nvim;
+      #   config = sourceLuaFile ./;
+      # }
+
+      # {
+      #   plugin = octo-nvim;
+      #   config = sourceLuaFile ./;
+      # }
+
+      # {
+      #   plugin = which-key-nvim;
+      #   config = sourceLuaFile ./;
+      # }
+
+      # {
+      #   plugin = project-nvim;
+      #   config = sourceLuaFile ./;
+      # }
+
+      # {
+      #   plugin = gitsigns-nvim;
+      #   config = sourceLuaFile ./;
+      # }
+
+      # {
+      #   plugin = trouble-nvim;
+      #   config = sourceLuaFile ./;
+      # }
+
+      # {
+      #   plugin = conform-nvim;
+      #   config = sourceLuaFile ./;
+      # }
+
+      # {
+      #   plugin = nvim-lint;
+      #   config = sourceLuaFile ./;
+      # }
+
+      # {
+      #   plugin = nui-nvim;
+      #   config = sourceLuaFile ./;
+      # }
+
+      # {
+      #   plugin = snacks-nvim;
+      #   config = sourceLuaFile ./;
+      # }
+
+      # {
+      #   plugin = persistence-nvim;
+      #   config = sourceLuaFile ./;
+      # }
+
+      # {
+      #   plugin = blink-cmp;
+      #   config = sourceLuaFile ./;
+      # }
+
+      # {
+      #   plugin = neogen;
+      #   config = sourceLuaFile ./;
+      # }
+
+      # {
+      #   plugin = nvim-dap;
+      #   config = sourceLuaFile ./;
+      # }
+
+      # {
+      #   plugin = aerial-nvim;
+      #   config = sourceLuaFile ./;
+      # }
+
+      # {
+      #   plugin = fzf-vim;
+      #   config = sourceLuaFile ./;
+      # }
+
+      # {
+      #   plugin = harpoon2;
+      #   config = sourceLuaFile ./;
+      # }
+
+      # {
+      #   plugin = vim-illuminate;
+      #   config = sourceLuaFile ./;
+      # }
+
+      # {
+      #   plugin = leap-nvim;
+      #   config = sourceLuaFile ./;
+      # }
+
+      # {
+      #   plugin = neo-tree-nvim;
+      #   config = sourceLuaFile ./;
+      # }
+
+      # {
+      #   plugin = outline-nvim;
+      #   config = sourceLuaFile ./;
+      # }
+
+      # {
+      #   plugin = multicursors-nvim;
+      #   config = sourceLuaFile ./;
+      # }
+
 
       {
         plugin = (
@@ -301,6 +312,7 @@ in
             p.tree-sitter-perl
             p.tree-sitter-php
             p.tree-sitter-python
+            p.tree-sitter-r
             p.tree-sitter-regex
             p.tree-sitter-ruby
             p.tree-sitter-rust
@@ -322,16 +334,14 @@ in
             p.tree-sitter-yaml
             p.tree-sitter-zathurarc
             p.tree-sitter-yuck
+            p.tree-sitter-zig
+            p.tree-sitter-terraform
+            p.tree-sitter-cuda
           ])
         );
-        config = sourceLuaFile ./treesitter.lua;
+        config = sourceLuaFile ./nvim-treesitter.lua;
       }
 
-
-      {
-        plugin = vimtex;
-        config = sourceLuaFile ./vimtex.lua;
-      }
     ];
   };
 }

@@ -40,9 +40,12 @@ cmp.setup {
         end, { 'i', 's' }),
     },
     sources = {
+        { name = 'buffer' },
+        { name = 'dictionary' },
+        { name = 'latex_symbols' },
+        { name = 'path' },
+		{ name = 'nixpkgs_maintainers' }
         { name = 'nvim_lsp' },
         { name = 'luasnip' },
-		{ name = 'path' },
-		{ name = 'nixpkgs_maintainers' }
     },
 }

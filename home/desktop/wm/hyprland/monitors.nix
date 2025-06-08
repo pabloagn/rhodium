@@ -10,10 +10,10 @@
       refresh = if monitorRefreshRate != "" then "@${monitorRefreshRate}" else "";
       scale = if monitorScalingFactor != "" then monitorScalingFactor else "1.0";
     in [
-      # Main target monitor
+      # Main
       "${monitorID},${resolution}${refresh},0x0,${scale}"
       
-      # Common monitors
+      # Common
       "HDMI-A-1,3840x2160@60,0x0,1.5"
     ];
   };

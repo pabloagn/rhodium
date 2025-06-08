@@ -9,14 +9,12 @@ vim.o.number = true
 vim.o.relativenumber = true
 vim.o.signcolumn = 'yes'
 
--- Global statusline
-vim.o.laststatus = 3
+-- Statusline
+vim.o.laststatus = 3 -- Always show a single global statusline
+
+-- Indentation
 vim.o.autoindent = true
 vim.o.smartindent = true
 vim.o.smarttab = true
-
--- Set number of spaces for each tab
-vim.o.tabstop = 4
-
--- Set number of spaces when shifting text
-vim.o.shiftwidth = 4
+vim.o.tabstop = 4 -- Number of spaces for each tab
+vim.o.shiftwidth = 4 -- Number of spaces when shifting text

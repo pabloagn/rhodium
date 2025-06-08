@@ -1,4 +1,5 @@
 { ... }:
+
 {
   programs.helix.settings = {
     theme = "chiaroscuro";

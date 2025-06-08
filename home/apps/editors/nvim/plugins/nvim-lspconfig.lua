@@ -26,7 +26,7 @@ require'lspconfig'.texlab.setup{
   capabilities = capabilities,
 }
 
--- Nix
+-- Nix (Nil)
 require'lspconfig'.nil_ls.setup{
   capabilities = capabilities,
   settings = {
@@ -35,6 +35,22 @@ require'lspconfig'.nil_ls.setup{
         flake = {
           autoArchive = true
         }
+      }
+    }
+  }
+}
+
+-- Nix (Nixd)
+require'lspconfig'.nixd.setup{
+  capabilities = capabilities,
+  settings = {
+    ['nixd'] = {
+      formatting = {
+        command = { "nixpkgs-fmt" }
+      },
+      options = {
+        enable = true,
+        target = { "nixpkgs-25.01" }
       }
     }
   }
@@ -119,22 +135,6 @@ require'lspconfig'.kotlin_language_server.setup{
 -- Markdown
 require'lspconfig'.marksman.setup{
   capabilities = capabilities,
-}
-
--- Nix (nixd - enhanced)
-require'lspconfig'.nixd.setup{
-  capabilities = capabilities,
-  settings = {
-    ['nixd'] = {
-      formatting = {
-        command = { "nixpkgs-fmt" }
-      },
-      options = {
-        enable = true,
-        target = { "nixpkgs-25.01" }
-      }
-    }
-  }
 }
 
 -- OCaml
