@@ -20,25 +20,25 @@ in
       "$mainMod, S, exec, ~/.local/bin/utils-screenshot.sh"
 
       # Tier 2 (Fallbacks)
-      # "$mainMod, SHIFT, W, exec, ${preferredApps.terminalAlt}"
-      # "$mainMod, SHIFT, B, exec, ${preferredApps.browserAlt}"
-      # "$mainMod, SHIFT, F, exec, ${preferredApps.filesGraphic}"
-      # "$mainMod, SHIFT, E, exec, ${preferredApps.terminal} -e ${preferredApps.editorAlt}"
-      # "$mainMod, SHIFT, I, exec, ${preferredApps.ideAlt}"
-      # "$mainMod, SHIFT, A, exec, ~/.local/bin/rofi-jumper.sh"
-      # "$mainMod, SHIFT, S, exec, ~/.local/bin/utils-screenshot.sh --area"
-      # "$mainMod, SHIFT, M, exec, ~/.local/bin/utils-screenshot.sh"
-      # "$mainMod, SHIFT, H, exec, ~./local/bin/utils-color-picker.sh"
+      # "$mainMod SHIFT, W, exec, ${preferredApps.terminalAlt}"
+      # "$mainMod SHIFT, B, exec, ${preferredApps.browserAlt}"
+      # "$mainMod SHIFT, F, exec, ${preferredApps.filesGraphic}"
+      # "$mainMod SHIFT, E, exec, ${preferredApps.terminal} -e ${preferredApps.editorAlt}"
+      # "$mainMod SHIFT, I, exec, ${preferredApps.ideAlt}"
+      # "$mainMod SHIFT, A, exec, ~/.local/bin/rofi-jumper.sh"
+      # "$mainMod SHIFT, S, exec, ~/.local/bin/utils-screenshot.sh --area"
+      # "$mainMod SHIFT, M, exec, ~/.local/bin/utils-screenshot.sh"
+      # "$mainMod SHIFT, H, exec, ~./local/bin/utils-color-picker.sh"
 
       # Tier 3 (Secondary menus & appearance)
-      "$mainMod, ALT, P, exec, ~./local/bin/rofi-power.sh"
-      "$mainMod, ALT, N, exec, ~./local/bin/rofi-nixos.sh"
-      "$mainMod, ALT, B, exec, ~./local/bin/rofi-bluetooth.sh"
-      "$mainMod, ALT, W, exec, ~./local/bin/rofi-wifi.sh"
-      "$mainMod, ALT, D, exec, ~./local/bin/rofi-devices.sh"
-      "$mainMod, ALT, M, exec, ~./local/bin/rofi-monitors.sh"
-      "$mainMod, ALT, W, exec, ~./local/bin/rofi-wallpaper.sh"
-      "$mainMod, ALT, S, exec, ~/.local/bin/utils-screenshot.sh" # Add an area arg
+      "$mainMod ALT, P, exec, ~/.local/bin/rofi-power.sh"
+      "$mainMod ALT, N, exec, ~/.local/bin/rofi-nixos.sh"
+      "$mainMod ALT, B, exec, ~/.local/bin/rofi-bluetooth.sh"
+      "$mainMod ALT, W, exec, ~/.local/bin/rofi-wifi.sh"
+      "$mainMod ALT, D, exec, ~/.local/bin/rofi-devices.sh"
+      "$mainMod ALT, M, exec, ~/.local/bin/rofi-monitors.sh"
+      # "$mainMod, ALT, W, exec, ~./local/bin/rofi-wallpaper.sh"
+      # "$mainMod, ALT, S, exec, ~/.local/bin/utils-screenshot.sh" # Add an area arg
 
       # Hyprpaper
       # ----------------------------------------
