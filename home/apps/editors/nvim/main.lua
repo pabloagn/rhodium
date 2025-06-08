@@ -1,4 +1,5 @@
 vim.o.clipboard = 'unnamedplus' -- Enable system clipboard
+vim.o.showmode = false -- We already have this on line
 vim.o.encoding = 'utf-8'
 vim.o.fileencoding = 'utf-8'
 vim.o.mouse = 'a' -- Enable mouse support

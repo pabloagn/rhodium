@@ -42,9 +42,9 @@
     grep = "rga"; # ripgrep-all
 
     # Editor
-    vim = "neovide";
-    vi = "neovide";
-    v = "neovide";
+    vim = "neovim";
+    vi = "neovim";
+    v = "neovim";
 
     # Clipboard
     y = "wl-copy"; # Yank

@@ -1,4 +1,5 @@
 { pkgs, ... }:
+
 {
   environment.systemPackages = with pkgs; [
     mesa
@@ -34,6 +35,7 @@
     dmidecode # System hardware details
     smartmontools # S.M.A.R.T. monitoring
     read-edid # EDID information
+    dool # System statistics tool (dstat replacement)
 
     # Audio tools
     alsa-utils # ALSA utilities
