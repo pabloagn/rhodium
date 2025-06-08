@@ -1,10 +1,10 @@
-{ pkgs, yaziPlugins, ... }:
+{ lib, pkgs, yaziPlugins, ... }:
 
 let
   # Main config
   configBase = import ./base.nix { };
   configKeymaps = import ./keymap.nix { };
-  configPlugins = import ./plugins.nix { inherit yaziPlugins; };
+  configPlugins = import ./plugins.nix { inherit lib yaziPlugins; };
 
   # init.lua
   luaConfig = import ./init-lua.nix { };

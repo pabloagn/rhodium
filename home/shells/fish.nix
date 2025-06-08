@@ -12,7 +12,7 @@ in
   programs.fish = {
     enable = true;
 
-    plugins = fishPlugins.pluginsList;
+    plugins = fishPlugins;
 
     shellAliases = fishAliases;
 
