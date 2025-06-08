@@ -30,7 +30,8 @@
     };
 
     fish-plugins = {
-      url = "path:flakes/fish-plugins";
+      # url = "path:flakes/fish-plugins";
+      url = "git+file://./.?dir=flakes/fish-plugins";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
