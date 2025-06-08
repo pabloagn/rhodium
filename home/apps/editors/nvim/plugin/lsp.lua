@@ -27,11 +27,19 @@ require'lspconfig'.texlab.setup{
 }
 
 -- Nix
+
+-- NOTE:
+-- There are issues wiht flake.lock files, resulting in annoying error msgs
+-- We exclude files for now
 require'lspconfig'.nil_ls.setup{
   capabilities = capabilities,
-  on_attach = function(client, bufnr)
-    client.server_capabilities.publishDiagnostics = false
-  end,
+  settings = {
+    ['nil'] = {
+      diagnostics = {
+        excludedFiles = { "flake.lock" }
+      }
+    }
+  }
 }
 
 -- Lua

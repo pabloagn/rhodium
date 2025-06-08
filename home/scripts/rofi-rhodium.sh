@@ -1,3 +1,4 @@
+
 #!/usr/bin/env bash
 # TODO: This is a mess, refactor with new approach
 

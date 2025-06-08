@@ -1,0 +1,9 @@
+{ ... }:
+
+{
+  programs = {
+    eza = {
+      enable = true;
+    };
+  };
+}

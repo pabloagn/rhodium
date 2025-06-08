@@ -1,5 +1,5 @@
 { ... }:
-
+# TODO: Customize this
 {
   programs.atuin = {
     enable = true;

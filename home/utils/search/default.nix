@@ -3,19 +3,12 @@
 {
   imports = [
     ./atuin.nix
+    ./eza.nix
     ./fzf.nix
     ./mcfly.nix
     ./skim.nix
   ];
   programs = {
-    fzf = {
-      enable = true;
-    };
-
-    eza = {
-      enable = true;
-    };
-
     jq = {
       enable = true;
     };

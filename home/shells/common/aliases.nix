@@ -1,5 +1,5 @@
 { ... }:
-
+# TODO: Many of these entries should be dynamic (e.g., main editor goes to v, vi, vim, but nvim and other original commands stay the same)
 {
   commonAliases = {
     # List commands
@@ -39,12 +39,12 @@
     locate = "plocate";
     fda = "fd -Lu"; # Find All
     find = "fd"; # Find
-    grep = "rga"; # ripgrep-all
+    rg = "rga"; # ripgrep-all
 
     # Editor
-    vim = "neovim";
-    vi = "neovim";
-    v = "neovim";
+    vim = "nvim";
+    vi = "nvim";
+    v = "nvim";
 
     # Clipboard
     y = "wl-copy"; # Yank

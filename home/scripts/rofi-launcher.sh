@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
+
 set -euo pipefail
+
 launch_app() {
   APP_DIR="$HOME/.local/share/applications"
   ROFI_THEME="$HOME/.config/rofi/themes/chiaroscuro.rasi"
@@ -63,30 +65,8 @@ launch_app() {
     files+=("$file")
   done
 
-  # Create numbered entries for rofi
-  local numbered_names=()
-  local total=${#names[@]}
-  local center_idx=$((total / 2))
-
-  for i in "${!names[@]}"; do
-    # Calculate relative line number
-    if [[ $i -eq 0 ]]; then
-      # First line (will be selected by default in rofi)
-      line_num="<span foreground='#888888'>→</span>"
-    else
-      # Relative distance from the first line
-      line_num="<span foreground='#666666'>$(printf "%2d" $i)</span>"
-    fi
-
-    numbered_names+=("${line_num}  ${names[$i]}")
-  done
-
-  # Pass -selected-row 0 to ensure first item is selected
-  selected=$(printf '%s\n' "${numbered_names[@]}" | rofi -dmenu -i -P "λ " -theme "$ROFI_THEME" -markup-rows -selected-row 0)
+  selected=$(printf '%s\n' "${names[@]}" | rofi -dmenu -i -P "λ " -theme "$ROFI_THEME" -markup-rows)
   [[ -z "$selected" ]] && return
-
-  # Strip the line number when matching
-  selected="${selected#*  }"  # Remove line number and spacing
 
   # Direct lookup
   for i in "${!names[@]}"; do
