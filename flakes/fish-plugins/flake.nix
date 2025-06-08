@@ -7,9 +7,9 @@
       url = "github:NixOS/nixpkgs";
     };
 
-    nixpkgs-unstable = {
-      url = "github:NixOS/nixpkgs/nixos-unstable";
-    };
+    # nixpkgs-unstable = {
+    #   url = "github:NixOS/nixpkgs/nixos-unstable";
+    # };
 
     colored-man = {
       url = "github:decors/fish-colored-man";
