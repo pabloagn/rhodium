@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ ... }:
 
 {
   imports = [
@@ -7,6 +7,5 @@
 
   programs.neovim = {
     enable = true;
-    # package = pkgs.neovim;
   };
 }

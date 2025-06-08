@@ -1,6 +1,6 @@
 local lualine = require('lualine')
 
--- Sacred computer palette - monochrome with strategic accent
+-- Palette
 local colors = {
   bg       = '#1a1a1a',
   fg       = '#ffffff',
@@ -35,7 +35,7 @@ local conditions = {
   end,
 }
 
--- Professional theme with strategic color use
+-- Theme
 local config = {
   options = {
     component_separators = '',
@@ -76,29 +76,29 @@ local function ins_right(component)
   table.insert(config.sections.lualine_x, component)
 end
 
--- Left side start marker
+-- Rhodium
 ins_left {
   function()
-    return '█'
+    return 'Rh'
   end,
   color = { fg = colors.accent, bg = colors.bg },
-  padding = { left = 0, right = 1 },
+  padding = { left = 1, right = 1 },
 }
 
--- Mode with strategic coloring
+-- Modes
 ins_left {
   function()
     local mode_map = {
       n      = 'NOR',
       i      = 'INS',
       v      = 'VIS',
-      [''] = 'VBL',
+      ['']   = 'VBL',
       V      = 'VLN',
       c      = 'CMD',
       no     = 'OPR',
       s      = 'SEL',
       S      = 'SLN',
-      [''] = 'SBL',
+      [''] 	 = 'SBL',
       ic     = 'ICM',
       R      = 'RPL',
       Rv     = 'VRP',
@@ -141,15 +141,15 @@ ins_left {
 }
 
 -- Separator
-ins_left {
-  function()
-    return '▐'
-  end,
-  color = { fg = colors.gray3, bg = colors.bg },
-  padding = { left = 0, right = 1 },
-}
+-- ins_left {
+--   function()
+--     return '▐'
+--   end,
+--   color = { fg = colors.gray3, bg = colors.bg },
+--   padding = { left = 0, right = 1 },
+-- }
 
--- File info with proper functionality
+-- File info
 ins_left {
   'filename',
   cond = conditions.buffer_not_empty,
@@ -171,7 +171,7 @@ ins_left {
   padding = { right = 1 },
 }
 
--- Navigation info
+-- Progress (Row:Col)
 ins_left {
   'location',
   color = { fg = colors.gray8 },
@@ -180,16 +180,17 @@ ins_left {
   end,
 }
 
+-- Progress - Percentage
 ins_left {
   'progress',
   color = { fg = colors.gray6 },
   fmt = function(str)
-    return str:gsub('%%', '∥')
+    return str:gsub('%%', '%')
   end,
   padding = { left = 1 },
 }
 
--- Diagnostics with proper colors for functionality
+-- Diagnostics
 ins_left {
   'diagnostics',
   sources = { 'nvim_diagnostic' },
@@ -197,7 +198,7 @@ ins_left {
     error = '◆', 
     warn = '◇', 
     info = '◯', 
-    hint = '▫'
+    hint = '☐'
   },
   diagnostics_color = {
     error = { fg = colors.error },
@@ -206,6 +207,41 @@ ins_left {
     hint = { fg = colors.gray6 },
   },
   always_visible = false,
+  padding = { left = 1 },
+}
+
+-- Buffer count
+ins_left {
+  function()
+    local buf_count = #vim.fn.getbufinfo({buflisted = 1})
+    return '◈ ' .. buf_count
+  end,
+  color = { fg = colors.gray7 },
+  padding = { left = 1 },
+}
+
+-- Session indicator
+ins_left {
+  function()
+    if vim.v.this_session ~= '' then
+      return '◉ SES'
+    end
+    return ''
+  end,
+  color = { fg = colors.purple },
+  padding = { left = 1 },
+}
+
+-- Macro recording indicator
+ins_left {
+  function()
+    local reg = vim.fn.reg_recording()
+    if reg ~= '' then
+      return '◯ REC[' .. reg:upper() .. ']'
+    end
+    return ''
+  end,
+  color = { fg = colors.error },
   padding = { left = 1 },
 }
 
@@ -261,7 +297,7 @@ ins_right {
 -- Git branch with accent when in repo
 ins_right {
   'branch',
-  icon = '◊',
+  icon = '',
   color = { fg = colors.accent },
   cond = conditions.check_git_workspace,
   fmt = function(str)
@@ -272,13 +308,13 @@ ins_right {
   end,
 }
 
--- Git diff with meaningful colors
+-- Git diff
 ins_right {
   'diff',
   symbols = { 
-    added = '▲', 
-    modified = '▼', 
-    removed = '◆' 
+    added = '▲ ', 
+    modified = '▼ ', 
+    removed = '◆ ' 
   },
   diff_color = {
     added = { fg = colors.accent },

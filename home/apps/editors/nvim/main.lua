@@ -12,4 +12,3 @@ vim.o.history = 5000 -- Remember N lines in history
 vim.o.lazyredraw = true -- Faster scrolling
 vim.o.synmaxcol = 240 -- Max column for syntax highlight
 vim.o.updatetime = 250 -- ms to wait for trigger an event
-

@@ -1,11 +1,8 @@
--- 24-bit RGB colors
-vim.o.termguicolors = true
-
--- Folding
-vim.o.foldmethod = 'marker'
-
--- Matching parenthesis
-vim.o.showmatch = true
+-- vim.o.winbar = " " -- Padding on top of lualine
+vim.o.cmdheight = 0 -- Hide command line when not using
+vim.o.termguicolors = true -- 24-bit RGB colors
+vim.o.foldmethod = 'marker' -- Folding
+vim.o.showmatch = true -- Matching parenthesis
 
 -- Line numbers
 vim.o.number = true

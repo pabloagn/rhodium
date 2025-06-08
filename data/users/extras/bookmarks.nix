@@ -136,6 +136,12 @@ in
       description = "Akiflow";
       categories = [ categories.productivity ];
     };
+    simplenote = {
+      profile = "personal";
+      url = "https://app.simplenote.com";
+      description = "Simplenote";
+      categories = [ categories.productivity ];
+    };
     allianz = {
       profile = "personal";
       url = "https://clientes.allianz.com.mx/";

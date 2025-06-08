@@ -4,8 +4,6 @@ require("lualine").setup({
     theme = 'onedark',
 })
 
--- Colorscheme
-vim.cmd("colorscheme gruvbox")
+vim.cmd("colorscheme gruvbox") -- Colorscheme
 
--- Comment
-require("Comment").setup()
+require("Comment").setup() -- Comment
