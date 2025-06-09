@@ -6,8 +6,8 @@
   programs.zed-editor = {
     userSettings = {
       "experimental.theme_overrides" = {
-        "editor.background" = "#1e1e2e";
-        "background" = "#27273b";
+        "editor.background" = "#15151f";
+        "background" = "#15151f";
         "surface.background" = "#181825";
         "elevated_surface.background" = "#181825";
         "panel.background" = "#181825";

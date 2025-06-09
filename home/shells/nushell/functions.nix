@@ -3,18 +3,21 @@
 {
   programs.nushell.extraConfig = ''
     # Yazi wrapper for changing directory on exit
-    def --env yy [...args] {
+    def --env lf [...args] {
       let tmp = (mktemp -t "yazi-cwd.XXXXXX")
-      run-external yazi ...$args --cwd-file $tmp
-      let cwd = (open $tmp | str trim)
       
-      if ($cwd | is-not-empty) and ($cwd != $env.PWD) {
-        cd $cwd
+      yazi ...$args --cwd-file=$tmp
+      
+      if ($tmp | path exists) {
+        let cwd = (open $tmp | str trim)
+        if ($cwd | is-not-empty) and ($cwd != $env.PWD) {
+          cd $cwd
+        }
       }
       
       rm -f $tmp
-    }
-    
+    }   
+
     # Jump to file - fuzzy file finder with preview
     def jtf [] {
       let file = (

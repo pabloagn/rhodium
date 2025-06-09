@@ -10,6 +10,7 @@
     { on = [ "g" "p" ]; run = "cd ~/projects"; desc = "Go to projects"; }
     # { on = [ "g" "c" ]; run = "cd ~/.config"; desc = "Go to config"; }
     { on = [ "g" "d" ]; run = "cd ~/downloads"; desc = "Go to downloads"; }
+    { on = [ "g" "s" ]; run = "cd ~/solenoid-labs/"; desc = "Go to Solenoid Labs"; }
 
     # TODO: Add more entries here
 

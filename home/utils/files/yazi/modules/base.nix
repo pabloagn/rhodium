@@ -71,12 +71,19 @@
   open = {
     rules = [
       { mime = "text/markdown"; use = "markdown"; }
+      
+      # Nushell
+      { name = "*.nu"; use = [
+        "edit"
+        "reveal"
+      ]; }
 
       { name = "*/"; use = [
           "edit"
           "open"
           "reveal"
         ]; }
+
       # Folder
       # Text (Markdown handled separately by previewer rule)
       { mime = "text/*"; use = [

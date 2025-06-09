@@ -20,6 +20,8 @@ in
     defaultApplications = {
 
       # General
+      "text/x-nushell" = [ "${userEditor}.desktop" ];
+      "application/x-nushell" = [ "${userEditor}.desktop" ];
       "application/pdf" = [ "${pdf}.desktop" ];
       "application/x-extension-htm" = [ "${userBrowser}.desktop" ];
       "application/x-extension-html" = [ "${userBrowser}.desktop" ];

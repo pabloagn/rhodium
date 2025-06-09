@@ -1,6 +1,16 @@
 -- Get capabilities from nvim-cmp
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
+-- Nushell
+require'lspconfig'.nushell.setup{
+  capabilities = capabilities,
+  cmd = { "nu", "--lsp" },
+  filetypes = { "nu" },
+  root_dir = function(fname)
+    return vim.fs.root(fname, { ".git", "flake.nix", "pyproject.toml" })
+  end,
+}
+
 -- Rust
 require'lspconfig'.rust_analyzer.setup{
   capabilities = capabilities,

@@ -3,14 +3,14 @@
 {
   programs.nushell.shellAliases = {
     # List commands
-    ls = "eza -l";
-    la = "eza -la";
-    llc = "eza -1";
-    lac = "eza -1a";
-    lld = "eza -l";
-    lad = "eza -la";
-    lli = "eza --icons -l";
-    lai = "eza --icons -la";
+    # ls = "eza -l";
+    # la = "eza -la";
+    # llc = "eza -1";
+    # lac = "eza -1a";
+    # lld = "eza -l";
+    # lad = "eza -la";
+    # lli = "eza --icons -l";
+    # lai = "eza --icons -la";
     l2 = "eza --icons -l -T -L=2";
     l3 = "eza --icons -l -T -L=3";
     llt = "eza -T";
@@ -32,10 +32,10 @@
     cat = "bat";
 
     # Search
-    locate = "plocate";
-    fda = "fd -Lu";
-    find = "fd";
-    rg = "rga";
+    # locate = "plocate";
+    # fda = "fd -Lu";
+    # find = "fd";
+    # rg = "rga";
 
     # Editor
     vim = "nvim";
@@ -69,32 +69,32 @@
   };
 
   # Nushell-specific aliases that can't be shell aliases
-  # programs.nushell.extraConfig = ''
-  #   # Aliases that need nushell syntax
-  #   alias cd = z
-  #   alias lf = yy
+  programs.nushell.extraConfig = ''
+    # Aliases that need nushell syntax
+    # alias cd = z
+    # alias lf = yy
 
-  #   # History search aliases
-  #   alias hs = history | where command =~ $in
-  #   alias hsi = history | where command =~ -i $in
+    # History search aliases
+    # alias hs = history | where command =~ $in
+    # alias hsi = history | where command =~ -i $in
 
-  #   # Clipboard operations for command output
-  #   alias llty = eza -T | wl-copy
-  #   alias laty = eza -Ta | wl-copy
+    # Clipboard operations for command output
+    # alias llty = eza -T | wl-copy
+    # alias laty = eza -Ta | wl-copy
 
-  #   # Core directory jumpers
-  #   alias gd = z $"($env.HOME)/Downloads"
-  #   alias gc = z $env.XDG_CONFIG_HOME
-  #   alias gr = z $env.RHODIUM
-  #   alias gp = z $env.HOME_PROJECTS
-  #   alias ga = z $env.HOME_ACADEMIC
-  #   alias gs = z $env.HOME_SOLENOIDLABS
-  #   alias gpr = z $env.HOME_PROFESSIONAL
-  #   alias gv = z $env.HOME_VAULTS
-  #   alias gvs = z $env.HOME_VAULTS_SANCTUM
+    # Core directory jumpers
+    alias gd = z $"($env.HOME)/Downloads"
+    alias gc = z $env.XDG_CONFIG_HOME
+    alias gr = z $env.RHODIUM
+    alias gp = z $env.HOME_PROJECTS
+    alias ga = z $env.HOME_ACADEMIC
+    alias gs = z $env.HOME_SOLENOIDLABS
+    alias gpr = z $env.HOME_PROFESSIONAL
+    alias gv = z $env.HOME_VAULTS
+    alias gvs = z $env.HOME_VAULTS_SANCTUM
 
-  #   # See utils
-  #   alias sa = alias | to text | fzf
-  #   alias sv = $env | to text | sort | fzf
-  # '';
+    # See utils
+    # alias sa = alias | to text | fzf
+    # alias sv = $env | to text | sort | fzf
+  '';
 }

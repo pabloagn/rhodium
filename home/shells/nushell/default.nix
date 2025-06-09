@@ -3,9 +3,9 @@
 {
   imports = [
     ./aliases.nix
-    ./functions.nix
+    # ./functions.nix
     # ./base.nix
-    # ./env.nix
+    ./env.nix
     # ./theme.nix
     # ./completions.nix
   ];

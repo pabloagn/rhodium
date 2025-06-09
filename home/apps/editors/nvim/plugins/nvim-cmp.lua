@@ -44,7 +44,7 @@ cmp.setup {
         { name = 'dictionary' },
         { name = 'latex_symbols' },
         { name = 'path' },
-		    { name = 'nixpkgs_maintainers' },
+		{ name = 'nixpkgs_maintainers' },
         { name = 'nvim_lsp' },
         { name = 'luasnip' },
     },

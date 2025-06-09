@@ -278,7 +278,6 @@ in
       #   config = sourceLuaFile ./;
       # }
 
-
       {
         plugin = (
           nvim-treesitter.withPlugins (p: [
@@ -300,6 +299,7 @@ in
             p.tree-sitter-html
             p.tree-sitter-http
             p.tree-sitter-hyprlang
+            p.tree-sitter-ini
             p.tree-sitter-java
             p.tree-sitter-javascript
             p.tree-sitter-json
@@ -308,14 +308,18 @@ in
             p.tree-sitter-latex
             p.tree-sitter-lua
             p.tree-sitter-luadoc
+            p.tree-sitter-make
             p.tree-sitter-markdown
             p.tree-sitter-markdown-inline
             p.tree-sitter-nix
+            p.tree-sitter-nu
             p.tree-sitter-ocaml
+            p.tree-sitter-odin
             p.tree-sitter-perl
             p.tree-sitter-php
             p.tree-sitter-python
             p.tree-sitter-r
+            p.tree-sitter-rasi
             p.tree-sitter-regex
             p.tree-sitter-ruby
             p.tree-sitter-rust
