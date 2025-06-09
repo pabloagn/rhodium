@@ -100,14 +100,17 @@
           if builtins.pathExists (dataPathUserExtras + "/bookmarks.nix")
           then import (dataPathUserExtras + "/bookmarks.nix")
           else { };
+
         profilesData =
           if builtins.pathExists (dataPathUserExtras + "/profiles.nix")
           then import (dataPathUserExtras + "/profiles.nix")
           else { };
+
         appsData =
           if builtins.pathExists (dataPathUserExtras + "/apps.nix")
           then import (dataPathUserExtras + "/apps.nix")
           else { };
+
       };
 
       # Import host data

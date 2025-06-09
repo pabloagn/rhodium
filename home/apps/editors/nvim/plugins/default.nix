@@ -9,11 +9,9 @@ in
     plugins = with pkgs.vimPlugins; [
 
       # Core
-      # ----------------------------------------------
       vim-nix
 
       # Languages
-      # ----------------------------------------------
       {
         plugin = nvim-lspconfig; # LSP
         config = sourceLuaFile ./nvim-lspconfig.lua;
@@ -32,12 +30,10 @@ in
       cmp-nvim-lsp
 
       # Completion
-      # ----------------------------------------------
       friendly-snippets # Lua snippets
       luasnip # Lua snippets engine
 
       # UI
-      # ----------------------------------------------
       fidget-nvim # Loading animations
 
       {
@@ -70,7 +66,6 @@ in
       lualine-lsp-progress
 
       # Telescope
-      # ----------------------------------------------
       {
         plugin = telescope-nvim; # Finder
         config = sourceLuaFile ./telescope-nvim.lua;
@@ -79,14 +74,12 @@ in
       telescope-fzf-native-nvim # Finder + fz
 
       # Improvements
-      # ----------------------------------------------
       {
         plugin = comment-nvim;
         config = sourceLuaFile ./comment-nvim.lua;
       }
 
       # Themes
-      # ----------------------------------------------
       # {
       #   plugin = catppuccin-nvim; # Catppuccin theme
       #   config = sourceLuaFile ./catppuccin-nvim.lua;
@@ -98,9 +91,8 @@ in
       }
 
       # Utils
-      # ----------------------------------------------
       {
-        plugin = indent-blankline-nvim;
+        plugin = indent-blankline-nvim; # Better indent
         config = sourceLuaFile ./indent-blankline-nvim.lua;
       }
 
@@ -221,10 +213,10 @@ in
       #   config = sourceLuaFile ./;
       # }
 
-      # {
-      #   plugin = snacks-nvim;
-      #   config = sourceLuaFile ./;
-      # }
+      {
+        plugin = snacks-nvim;
+        config = sourceLuaFile ./snacks-nvim.lua;
+      }
 
       # {
       #   plugin = persistence-nvim;

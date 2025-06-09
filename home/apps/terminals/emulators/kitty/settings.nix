@@ -4,12 +4,14 @@
   programs.kitty = {
     font.name = "JetBrainsMono Nerd Font";
     font.size = 12;
+
     settings = {
+
       scrollback_lines = 10000;
       enable_audio_bell = false;
 
       # Bottom tab
-      tab_bar_min_tabs = 1;
+      tab_bar_min_tabs = 2; # Only enable for tab num >= 2
       tab_bar_edge = "bottom";
       tab_bar_style = "powerline";
       tab_powerline_style = "angled";
@@ -28,15 +30,12 @@
 
       # Cursor
       cursor_trail = 3;
-      cursor_trail_decay =  "0.1 0.4";
+      cursor_trail_decay = "0.1 0.4";
       cursor_blink_interval = 0;
 
       # Other properties
       clipboard_control = "write-clipboard write-primary";
       allow_hyperlinks = true;
-
-      # Include theme
-      # include = ./themes/chiaroscuro.conf;
     };
   };
 }

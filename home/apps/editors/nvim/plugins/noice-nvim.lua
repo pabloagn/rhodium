@@ -1,153 +1,63 @@
-local noice = require("noice")
+-- HACK: noice shows messages from before it was enabled,
+-- but this is not ideal when Lazy is installing plugins,
+-- so clear the messages in this case.
 
-noice.setup({
-    lsp = {
+if vim.o.filetype == "lazy" then
+  vim.cmd([[messages clear]])
+end
 
-        -- Override markdown rendering to use Treesitter for cmp and other plugins
-        override = {
-            ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-            ["vim.lsp.util.stylize_markdown"] = true,
-            ["cmp.entry.get_documentation"] = true,
-        },
-
-        -- Enable hover and signature help via Noice
-        hover = {
-            enabled = true,
-            silent = false, -- set to true to not show a message if hover is not available
-            view = nil,     -- when nil, use defaults from documentation
-            opts = {}       -- merged with defaults from documentation
-        },
-
-        signature = {
-            enabled = true,
-            auto_open = {
-                enabled = true,
-                trigger = true, -- show signature help when typing a trigger character like `(`
-                luasnip = true, -- Will open signature help when jumping to Luasnip insert nodes
-                throttle = 50,  -- Debounce by 50ms
-            },
-            view = nil,         -- when nil, use defaults from documentation
-            opts = {}           -- merged with defaults from documentation
-        },
-
-        -- Progress messages for LSP servers
-        progress = {
-            enabled = true,
-            format = "lsp_progress", -- Use a custom format or the default
-            format_done = "lsp_progress_done",
-            throttle = 250,
-            view = "mini",
-        }
+require("noice").setup({
+  lsp = {
+    override = {
+      ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+      ["vim.lsp.util.stylize_markdown"] = true,
+      ["cmp.entry.get_documentation"] = true,
     },
-
-    -- Message routing
-    routes = {
-        -- Skip all deprecation warnings
-        {
-            filter = {
-                event = "msg_show",
-                any = {
-                    { find = "deprecated" },
-                    { find = "Run.*checkhealth.*for more information" },
-                }
-            },
-            opts = { skip = true }
+  },
+  routes = {
+    {
+      filter = {
+        event = "msg_show",
+        any = {
+          { find = "%d+L, %d+B" },
+          { find = "; after #%d+" },
+          { find = "; before #%d+" },
         },
-
-        -- Skip NixOS/nixpkgs loading messages
-        {
-            filter = {
-                event = "msg_show",
-                any = {
-                    { find = "Loading NixOS options" },
-                    { find = "evaluating nixpkgs entries" },
-                    { find = "evaluating nixos options" },
-                    { find = "nixd" },
-                }
-            },
-            opts = { skip = true }
-        },
-
-        -- Skip vim.tbl_islist specific deprecation
-        {
-            filter = {
-                event = "msg_show",
-                find = "vim%.tbl_islist is deprecated"
-            },
-            opts = { skip = true }
-        },
-
-        -- Route for specific brief messages to the 'mini' view
-        {
-            filter = {
-                event = "msg_show",
-                any = {
-                    { find = "%d+L, %d+B" },    -- e.g., "10L, 200B"
-                    { find = "; after #%d+" },  -- e.g., "; after #1"
-                    { find = "; before #%d+" }, -- e.g., "; before #1"
-                },
-            },
-            view = "mini",
-        },
-
-        -- Avoid yanked messages
-        {
-            filter = {
-                event = "msg_show",
-                any = {
-                    { find = "%d+ lines yanked" },
-                    { find = "%d+ lines yanked into register %S" }, -- Catches yanks to specific registers
-                    { find = "yanked %d+ lines" },                  -- Another possible format
-                }
-            },
-            opts = { skip = true }, -- This tells Noice not to show these messages
-        },
-
-        -- Avoid written messages
-        -- TODO: Validate if this worked
-        {
-            filter = {
-                event = "msg_show",
-                any = {
-                    { find = "^\"%S-\" %d+L, %d+B written$" } -- e.g., "filename.txt" 10L, 200B written
-                }
-            },
-            opts = { skip = true }
-        }
+      },
+      view = "mini",
     },
-
-    -- UI presets
-    presets = {
-        bottom_search = true,         -- Use a classic bottom cmdline for search
-        command_palette = true,       -- Use a cmdline palette for :
-        long_message_to_split = true, -- Long messages will be sent to a split
-        inc_rename = true,            -- Enables an input dialog for inc_rename.nvim (if you use it)
-        lsp_doc_border = true,        -- Add a border to hover docs and signature help
-    },
-
-    -- Further customization
-    views = {
-        mini = {
-            win_options = { winblend = 0 },         -- Make the 'mini' view opaque
-            position = { row = "90%", col = "50%" } -- Center 'mini' view at 90% screen height
-        },
-        cmdline_popup = {
-            position = { row = "20%", col = "50%" },
-            size = { width = "60%" },
-        },
-    },
-
-    -- Command line appearance
-    cmdline = {
-        enabled = true,         -- General cmdline override
-        view = "cmdline_popup", -- Or "cmdline" for classic, "cmdline_popup" for popup
-        format = {
-            cmdline = { pattern = "^:", icon = "", lang = "vim" },
-            search_down = { kind = "search", pattern = "^/", icon = " ", lang = "regex" },
-            search_up = { kind = "search", pattern = "^%?", icon = " ", lang = "regex" },
-            filter = { pattern = "^:%s*!", icon = "$", lang = "bash" },
-            lua = { pattern = "^:%s*lua%s+", icon = "", lang = "lua" },
-            help = { pattern = "^:%s*help%s+", icon = "" },
-        },
-    },
+  },
+  presets = {
+    bottom_search = true,
+    command_palette = true,
+    long_message_to_split = true,
+  },
 })
+
+-- Key mappings
+local function map(mode, lhs, rhs, opts)
+  opts = opts or {}
+  vim.keymap.set(mode, lhs, rhs, opts)
+end
+
+-- Noice keymaps
+map("n", "<leader>sn", "", { desc = "+noice" })
+map("c", "<S-Enter>", function() require("noice").redirect(vim.fn.getcmdline()) end, { desc = "Redirect Cmdline" })
+map("n", "<leader>snl", function() require("noice").cmd("last") end, { desc = "Noice Last Message" })
+map("n", "<leader>snh", function() require("noice").cmd("history") end, { desc = "Noice History" })
+map("n", "<leader>sna", function() require("noice").cmd("all") end, { desc = "Noice All" })
+map("n", "<leader>snd", function() require("noice").cmd("dismiss") end, { desc = "Dismiss All" })
+map("n", "<leader>snt", function() require("noice").cmd("pick") end, { desc = "Noice Picker (Telescope/FzfLua)" })
+
+-- Scroll mappings for LSP documentation
+map({ "i", "n", "s" }, "<c-f>", function()
+  if not require("noice.lsp").scroll(4) then
+    return "<c-f>"
+  end
+end, { silent = true, expr = true, desc = "Scroll Forward" })
+
+map({ "i", "n", "s" }, "<c-b>", function()
+  if not require("noice.lsp").scroll(-4) then
+    return "<c-b>"
+  end
+end, { silent = true, expr = true, desc = "Scroll Backward" })

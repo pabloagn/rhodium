@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ ... }:
 
 {
   imports = [
@@ -7,5 +7,6 @@
     ./fonts.nix
     ./preferences.nix
     ./scripts.nix
+    ./themes.nix
   ];
 }
