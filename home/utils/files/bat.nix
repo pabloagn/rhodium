@@ -15,15 +15,13 @@
         file = "/Catppuccin-mocha.tmTheme";
       };
 
-      tokyonight_night = {
+      tokyonight_night = { # v4.11.0
         src = pkgs.fetchFromGitHub {
           owner = "folke";
           repo = "tokyonight.nvim";
-          rev = "188c037a8fb5d0f39a0391d48c82d49c69d80097";
-          sha256 = "0vwy6qzh206xhk6pds25c6020nlh51v6xf33kqa998l2yq7dmf78";
+          rev = "b262293ef481b0d1f7a14c708ea7ca649672e200";
+          sha256 = "1cd8wxgicfm5f6g7lzqfhr1ip7cca5h11j190kx0w52h0kbf9k54";
         };
-
-        # Path to the theme file within the fetched repository
         file = "/extras/sublime/tokyonight_night.tmTheme";
       };
     };

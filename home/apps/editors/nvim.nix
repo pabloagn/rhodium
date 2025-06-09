@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ./nvim/clean.nix
     ./nvim
   ];
 
