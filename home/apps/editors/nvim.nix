@@ -2,7 +2,8 @@
 
 {
   imports = [
-    ./nvim/clean.nix
+    # TODO: Declare as option
+    # ./nvim/clean.nix
     ./nvim
   ];
 
@@ -10,3 +11,4 @@
     enable = true;
   };
 }
+
