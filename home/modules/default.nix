@@ -7,6 +7,5 @@
     ./fonts.nix
     ./preferences.nix
     ./scripts.nix
-    ./themes.nix
   ];
 }
