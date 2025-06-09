@@ -1,114 +1,136 @@
 local noice = require("noice")
 
+-- Define custom highlight groups for Noice.
+-- Adjust these colors to match your colorscheme.
+-- Example colors (Catppuccin Macchiato inspired):
+vim.api.nvim_set_hl(0, "NoicePopupBg", { bg = "#181926", fg = "#cad3f5" })     -- Darker background, light text
+vim.api.nvim_set_hl(0, "NoicePopupBorder", { fg = "#6e738d" })            -- Muted border (e.g., lavender gray)
+vim.api.nvim_set_hl(0, "NoiceCmdlineIcon", { fg = "#8aadf4" })              -- Icon color (e.g., blue)
+vim.api.nvim_set_hl(0, "NoiceMiniFg", { fg = "#eed49f" })                   -- Mini view text (e.g., yellow/gold)
+vim.api.nvim_set_hl(0, "NoiceMiniBg", { bg = "#11111b", blend = 20 })        -- Very dark, slightly transparent bg for mini
+
 noice.setup({
+  cmdline = {
+    enabled = true,
+    view = "cmdline_popup",
+    opts = {},
+    format = {
+      cmdline = { pattern = "^:", icon = "❯ ", lang = "vim", hl_group = "NoiceCmdlineIcon" },
+      search_down = { kind = "search", pattern = "^/", icon = " ", lang = "regex", hl_group = "NoiceCmdlineIcon" },
+      search_up = { kind = "search", pattern = "^%?", icon = " ", lang = "regex", hl_group = "NoiceCmdlineIcon" },
+      filter = { pattern = "^:%s*!", icon = " ", lang = "bash", hl_group = "NoiceCmdlineIcon" },
+      lua = { pattern = "^:%s*lua%s+", icon = " ", lang = "lua", hl_group = "NoiceCmdlineIcon" },
+      help = { pattern = "^:%s*help%s+", icon = " ", lang = "vim", hl_group = "NoiceCmdlineIcon" },
+      input = { icon = "› ", hl_group = "NoiceCmdlineIcon" },
+    },
+  },
+
   lsp = {
-    -- Override markdown rendering to use Treesitter for cmp and other plugins
+    progress = { enabled = true, view = "mini" },
     override = {
       ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
       ["vim.lsp.util.stylize_markdown"] = true,
-      ["cmp.entry.get_documentation"] = true, -- if you use nvim-cmp
+      ["cmp.entry.get_documentation"] = true,
     },
-    -- Enable hover and signature help via Noice
-    hover = {
-      enabled = true,
-      silent = false, -- set to true to not show a message if hover is not available
-      view = nil, -- when nil, use defaults from documentation
-      opts = {} -- merged with defaults from documentation
-    },
-    signature = {
-      enabled = true,
-      auto_open = {
-        enabled = true,
-        trigger = true, -- show signature help when typing a trigger character like `(`
-        luasnip = true, -- Will open signature help when jumping to Luasnip insert nodes
-        throttle = 50, -- Debounce by 50ms
-      },
-      view = nil, -- when nil, use defaults from documentation
-      opts = {} -- merged with defaults from documentation
-    },
-
-    -- Progress messages for LSP servers
-    progress = {
-      enabled = true,
-      format = "lsp_progress", -- Use a custom format or the default
-      format_done = "lsp_progress_done",
-      throttle = 250,
-      view = "mini",
-    }
+    hover = { enabled = true, view = "hover_custom" },          -- Use custom styled hover
+    signature = { enabled = true, view = "signature_custom" }, -- Use custom styled signature
   },
 
-  -- Message routing
-  routes = {
-    -- Route for specific brief messages to the 'mini' view
-    {
-      filter = {
-        event = "msg_show",
-        any = {
-          { find = "%d+L, %d+B" }, -- e.g., "10L, 200B"
-          { find = "; after #%d+" }, -- e.g., "; after #1"
-          { find = "; before #%d+" }, -- e.g., "; before #1"
-        },
-      },
-      view = "mini",
-    },
-    -- == This route will skip the "yanked lines" messages ==
-    {
-      filter = {
-        event = "msg_show",
-        any = {
-          { find = "%d+ lines yanked" },
-          { find = "%d+ lines yanked into register %S" }, -- Catches yanks to specific registers
-          { find = "yanked %d+ lines" }, -- Another possible format
-          -- You can add more patterns here if you encounter other yank message variations
-        }
-      },
-      opts = { skip = true }, -- This tells Noice not to show these messages
-    },
-    -- Example: Skip "written" messages if they become too noisy for you
-    -- {
-    --   filter = {
-    --     event = "msg_show",
-    --     any = {
-    --       { find = "^\"%S-\" %d+L, %d+B written$" } -- e.g., "filename.txt" 10L, 200B written
-    --     }
-    --   },
-    --   opts = { skip = true }
-    -- }
-  },
-
-  -- UI presets
   presets = {
-    bottom_search = true,           -- Use a classic bottom cmdline for search
-    command_palette = true,       -- Use a cmdline palette for :
-    long_message_to_split = true, -- Long messages will be sent to a split
-    inc_rename = true,              -- Enables an input dialog for inc_rename.nvim (if you use it)
-    lsp_doc_border = true,          -- Add a border to hover docs and signature help
+    bottom_search = false,
+    command_palette = true,
+    long_message_to_split = true,
+    inc_rename = false, -- Set to true if you use inc_rename.nvim
+    lsp_doc_border = true,
   },
 
-  -- You can customize views further if needed.
-  -- Example:
-  -- views = {
-  --   mini = {
-  --     win_options = { winblend = 0 }, -- Make the 'mini' view opaque
-  --     position = { row = "90%", col = "50%" } -- Center 'mini' view at 90% screen height
-  --   },
-  --   cmdline_popup = {
-  --     position = { row = "20%", col = "50%" },
-  --     size = { width = "60%" },
-  --   },
-  -- },
+  routes = {
+    {
+      filter = { event = "msg_show", any = {
+          { find = "⚠️ WARNING vim%.tbl_islist is deprecated" },
+          { find = "⚠️ WARNING vim%.validate is deprecated" },
+      }},
+      opts = { skip = true },
+    },
+    {
+      filter = { event = "msg_show", any = { { find = "%d+L, %d+B" }, { find = "; after #%d+" } }},
+      view = "mini",
+    },
+    {
+      filter = { event = "msg_show", any = { { find = "%d+ lines yanked" }}},
+      opts = { skip = true },
+    },
+  },
 
-  -- Configure command line appearance (icons require a Nerd Font)
-  cmdline = {
-    enabled = true, -- General cmdline override
-    view = "cmdline_popup", -- Or "cmdline" for classic, "cmdline_popup" for popup
-    format = {
-      cmdline = { pattern = "^:", icon = "", lang = "vim" },
-      search_down = { kind = "search", pattern = "^/", icon = " ", lang = "regex" },
-      search_up = { kind = "search", pattern = "^%?", icon = " ", lang = "regex" },
-      filter = { pattern = "^:%s*!", icon = "$", lang = "bash" },
-      lua = { pattern = "^:%s*lua%s+", icon = "", lang = "lua" },
-      help = { pattern = "^:%s*help%s+", icon = "" },
+  views = {
+    cmdline_popup = {
+      position = { row = "25%", col = "50%" },
+      size = { width = "50%", min_width = 40, height = "auto" },
+      border = {
+        style = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" }, -- Elegant rounded
+        padding = { 0, 2 }, -- Horizontal padding
+        text = { top_align = "center" },
+      },
+      win_options = {
+        winhighlight = "Normal:NoicePopupBg,FloatBorder:NoicePopupBorder",
+        winblend = 0, -- Solid background
+      },
+      zindex = 250,
+    },
+    popup = {
+      position = "50%", -- Centered
+      size = { width = "60%", height = "auto" },
+      border = { style = { " ", " ", " ", " ", " ", " ", " ", " " } }, -- Minimalist, can use thin lines
+      win_options = {
+        winhighlight = "Normal:NoicePopupBg,FloatBorder:NoicePopupBorder",
+        winblend = 0,
+      },
+    },
+
+    mini = {
+      position = { row = 1, col = "100%-28" }, -- Top-right status
+      timeout = 2500,
+      max_height = 1,
+      max_width = 25,
+      zindex = 300,
+      border = { style = "none", padding = {0,1} },
+      win_options = {
+        winhighlight = "Normal:NoiceMiniBg,NormalNC:NoiceMiniBg,StatusLine:NoiceMiniBg,StatusLineNC:NoiceMiniBg",
+      },
+
+      filter_options = {}, -- Remove filter options to show content directly
+      format = function(message)
+        if message.progress and message.progress.title then
+          return string.format("◌ %s: %s", message.progress.client, message.progress.title)
+        elseif type(message.content) == "string" then
+          return ":: " .. message.content
+        end
+        return ""
+      end,
+    },
+
+    hover_custom = { -- Custom view for LSP hover
+      view = "hover", -- Inherits from default hover
+      border = { style = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" } },
+      win_options = {
+        winhighlight = "Normal:NoicePopupBg,FloatBorder:NoicePopupBorder",
+        winblend = 0,
+      },
+    },
+
+    signature_custom = { -- Custom view for LSP signature
+      view = "signature", -- Inherits from default signature
+      border = { style = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" } },
+      win_options = {
+        winhighlight = "Normal:NoicePopupBg,FloatBorder:NoicePopupBorder",
+        winblend = 0,
+      },
     },
   },
 })
+
+-- Ensure Noice handles all vim.notify messages
+vim.defer_fn(function()
+  if require("noice") then vim.notify = require("noice").notify end
+end, 100)
+
