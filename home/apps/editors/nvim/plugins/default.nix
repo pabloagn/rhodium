@@ -53,6 +53,11 @@ in
       nui-nvim # Required by noice-nvim
 
       {
+        plugin = nvim-tree-lua; # File tree
+        config = sourceLuaFile ./nvim-tree.lua;
+      }
+
+      {
         plugin = todo-comments-nvim; # Better TODOs
         config = sourceLuaFile ./todo-comments-nvim.lua;
       }
@@ -92,6 +97,8 @@ in
         config = sourceLuaFile ./tokyonight-nvim.lua;
       }
 
+      # Utils
+      # ----------------------------------------------
       {
         plugin = indent-blankline-nvim;
         config = sourceLuaFile ./indent-blankline-nvim.lua;
@@ -110,10 +117,10 @@ in
       nvim-treesitter-context
       nvim-treesitter-textobjects
 
-      {
-        plugin = plenary-nvim;
-        # config = sourceLuaFile ./;
-      }
+      # {
+      #   plugin = plenary-nvim;
+      #   config = sourceLuaFile ./;
+      # }
 
       # {
       #   plugin = mini-nvim;

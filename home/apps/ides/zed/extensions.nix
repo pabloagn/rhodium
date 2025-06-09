@@ -22,6 +22,8 @@
       "python-lsp"
       "rainbow-csv"
       "env"
+      "tokyo-night"
+      "phosphor-icons-theme"
     ];
   };
 }
