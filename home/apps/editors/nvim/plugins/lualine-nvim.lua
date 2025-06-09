@@ -140,14 +140,14 @@ ins_left {
   padding = { left = 1, right = 1 },
 }
 
--- Separator
--- ins_left {
---   function()
---     return '▐'
---   end,
---   color = { fg = colors.gray3, bg = colors.bg },
---   padding = { left = 0, right = 1 },
--- }
+-- Blank space separator
+ins_left {
+  function()
+    return ' '
+  end,
+  color = { fg = colors.bg, bg = colors.bg },
+  padding = { left = 0, right = 1 },
+}
 
 -- File info
 ins_left {
@@ -180,13 +180,15 @@ ins_left {
   end,
 }
 
--- Progress - Percentage
+-- Progress - Percentage and total lines
 ins_left {
-  'progress',
-  color = { fg = colors.gray6 },
-  fmt = function(str)
-    return str:gsub('%%', '%')
+  function()
+    local current_line = vim.fn.line('.')
+    local total_lines = vim.fn.line('$')
+    local percentage = math.floor((current_line / total_lines) * 100)
+    return percentage .. '%%' .. total_lines
   end,
+  color = { fg = colors.gray6 },
   padding = { left = 1 },
 }
 
@@ -194,10 +196,10 @@ ins_left {
 ins_left {
   'diagnostics',
   sources = { 'nvim_diagnostic' },
-  symbols = { 
-    error = '◆', 
-    warn = '◇', 
-    info = '◯', 
+  symbols = {
+    error = '◆',
+    warn = '◇',
+    info = '◯',
     hint = '☐'
   },
   diagnostics_color = {
@@ -256,7 +258,7 @@ ins_left {
 ins_left {
   function()
     local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
-    local clients = vim.lsp.get_active_clients()
+    local clients = vim.lsp.get_clients()
     if next(clients) == nil then
       return '∅ LSP'
     end
@@ -270,7 +272,7 @@ ins_left {
   end,
   color = function()
     local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
-    local clients = vim.lsp.get_active_clients()
+    local clients = vim.lsp.get_clients()
     if next(clients) == nil then
       return { fg = colors.gray5 }
     end
@@ -311,10 +313,10 @@ ins_right {
 -- Git diff
 ins_right {
   'diff',
-  symbols = { 
-    added = '▲ ', 
-    modified = '▼ ', 
-    removed = '◆ ' 
+  symbols = {
+    added = '▲ ',
+    modified = '▼ ',
+    removed = '◆ '
   },
   diff_color = {
     added = { fg = colors.accent },
@@ -381,3 +383,4 @@ ins_right {
 }
 
 lualine.setup(config)
+

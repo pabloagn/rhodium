@@ -50,6 +50,8 @@ in
         config = sourceLuaFile ./noice-nvim.lua;
       }
 
+      nui-nvim # Required by noice-nvim
+
       {
         plugin = todo-comments-nvim; # Better TODOs
         config = sourceLuaFile ./todo-comments-nvim.lua;
