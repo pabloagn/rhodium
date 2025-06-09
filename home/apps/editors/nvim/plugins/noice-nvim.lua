@@ -3,11 +3,11 @@ local noice = require("noice")
 -- Define custom highlight groups for Noice.
 -- Adjust these colors to match your colorscheme.
 -- Example colors (Catppuccin Macchiato inspired):
-vim.api.nvim_set_hl(0, "NoicePopupBg", { bg = "#181926", fg = "#cad3f5" })     -- Darker background, light text
-vim.api.nvim_set_hl(0, "NoicePopupBorder", { fg = "#6e738d" })            -- Muted border (e.g., lavender gray)
-vim.api.nvim_set_hl(0, "NoiceCmdlineIcon", { fg = "#8aadf4" })              -- Icon color (e.g., blue)
-vim.api.nvim_set_hl(0, "NoiceMiniFg", { fg = "#eed49f" })                   -- Mini view text (e.g., yellow/gold)
-vim.api.nvim_set_hl(0, "NoiceMiniBg", { bg = "#11111b", blend = 20 })        -- Very dark, slightly transparent bg for mini
+vim.api.nvim_set_hl(0, "NoicePopupBg", { bg = "#181926", fg = "#cad3f5" })
+vim.api.nvim_set_hl(0, "NoicePopupBorder", { fg = "#6e738d" })
+vim.api.nvim_set_hl(0, "NoiceCmdlineIcon", { fg = "#8aadf4" })
+vim.api.nvim_set_hl(0, "NoiceMiniFg", { fg = "#eed49f" })
+vim.api.nvim_set_hl(0, "NoiceMiniBg", { bg = "#11111b", blend = 20 })
 
 noice.setup({
   cmdline = {
@@ -26,21 +26,21 @@ noice.setup({
   },
 
   lsp = {
-    progress = { enabled = true, view = "mini" },
+    progress = { enabled = true, view = "status_popup" }, -- Renamed from 'mini'
     override = {
       ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
       ["vim.lsp.util.stylize_markdown"] = true,
       ["cmp.entry.get_documentation"] = true,
     },
-    hover = { enabled = true, view = "hover_custom" },          -- Use custom styled hover
-    signature = { enabled = true, view = "signature_custom" }, -- Use custom styled signature
+    hover = { enabled = true, view = "hover_custom" },
+    signature = { enabled = true, view = "signature_custom" },
   },
 
   presets = {
     bottom_search = false,
     command_palette = true,
     long_message_to_split = true,
-    inc_rename = false, -- Set to true if you use inc_rename.nvim
+    inc_rename = false,
     lsp_doc_border = true,
   },
 
@@ -54,7 +54,7 @@ noice.setup({
     },
     {
       filter = { event = "msg_show", any = { { find = "%d+L, %d+B" }, { find = "; after #%d+" } }},
-      view = "mini",
+      view = "status_popup", -- Renamed from 'mini'
     },
     {
       filter = { event = "msg_show", any = { { find = "%d+ lines yanked" }}},
@@ -67,50 +67,55 @@ noice.setup({
       position = { row = "25%", col = "50%" },
       size = { width = "50%", min_width = 40, height = "auto" },
       border = {
-        style = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" }, -- Elegant rounded
-        padding = { 0, 2 }, -- Horizontal padding
+        style = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+        padding = { 0, 2 },
         text = { top_align = "center" },
       },
       win_options = {
         winhighlight = "Normal:NoicePopupBg,FloatBorder:NoicePopupBorder",
-        winblend = 0, -- Solid background
+        winblend = 0,
       },
       zindex = 250,
     },
     popup = {
-      position = "50%", -- Centered
+      position = "50%",
       size = { width = "60%", height = "auto" },
-      border = { style = { " ", " ", " ", " ", " ", " ", " ", " " } }, -- Minimalist, can use thin lines
+      border = { style = { " ", " ", " ", " ", " ", " ", " ", " " } },
       win_options = {
         winhighlight = "Normal:NoicePopupBg,FloatBorder:NoicePopupBorder",
         winblend = 0,
       },
     },
 
-    mini = {
-      position = { row = 1, col = "100%-28" }, -- Top-right status
-      timeout = 2500,
-      max_height = 1,
-      max_width = 25,
+    status_popup = { -- Renamed from 'mini'
+      backend = "popup", -- This is crucial
+      position = { row = 1, col = "100%-30" },
+      size = { max_height = 1, min_width = 5, max_width = 28 },
+      timeout = 3500,
       zindex = 300,
-      border = { style = "none", padding = {0,1} },
+      border = { style = "none", padding = {0, 1} },
       win_options = {
-        winhighlight = "Normal:NoiceMiniBg,NormalNC:NoiceMiniBg,StatusLine:NoiceMiniBg,StatusLineNC:NoiceMiniBg",
+        winhighlight = "Normal:NoiceMiniBg,NormalNC:NoiceMiniBg",
+        winblend = 10,
+        wrap = false,
+        linebreak = false,
+        cursorline = false,
+        cursorcolumn = false,
+        colorcolumn = "",
+        number = false,
+        relativenumber = false,
+        signcolumn = "no",
+        foldcolumn = "0",
+        list = false,
+        spell = false,
       },
-
-      filter_options = {}, -- Remove filter options to show content directly
-      format = function(message)
-        if message.progress and message.progress.title then
-          return string.format("◌ %s: %s", message.progress.client, message.progress.title)
-        elseif type(message.content) == "string" then
-          return ":: " .. message.content
-        end
-        return ""
-      end,
+      -- Temporarily removed filter_options and format to simplify for debugging
+      -- filter_options = {},
+      -- format = function(message) ... end,
     },
 
-    hover_custom = { -- Custom view for LSP hover
-      view = "hover", -- Inherits from default hover
+    hover_custom = {
+      view = "hover",
       border = { style = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" } },
       win_options = {
         winhighlight = "Normal:NoicePopupBg,FloatBorder:NoicePopupBorder",
@@ -118,8 +123,8 @@ noice.setup({
       },
     },
 
-    signature_custom = { -- Custom view for LSP signature
-      view = "signature", -- Inherits from default signature
+    signature_custom = {
+      view = "signature",
       border = { style = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" } },
       win_options = {
         winhighlight = "Normal:NoicePopupBg,FloatBorder:NoicePopupBorder",
@@ -129,8 +134,6 @@ noice.setup({
   },
 })
 
--- Ensure Noice handles all vim.notify messages
 vim.defer_fn(function()
-  if require("noice") then vim.notify = require("noice").notify end
+  if pcall(require, "noice") then vim.notify = require("noice").notify end
 end, 100)
-

@@ -4,6 +4,7 @@
   programs.bat = {
     enable = true;
     themes = {
+
       catppuccin-mocha = {
         src = pkgs.fetchFromGitHub {
           owner = "catppuccin";
@@ -13,10 +14,23 @@
         };
         file = "/Catppuccin-mocha.tmTheme";
       };
+
+      tokyonight_night = {
+        src = pkgs.fetchFromGitHub {
+          owner = "folke";
+          repo = "tokyonight.nvim";
+          rev = "188c037a8fb5d0f39a0391d48c82d49c69d80097";
+          sha256 = "0vwy6qzh206xhk6pds25c6020nlh51v6xf33kqa998l2yq7dmf78";
+        };
+
+        # Path to the theme file within the fetched repository
+        file = "/extras/sublime/tokyonight_night.tmTheme";
+      };
     };
+
     config = {
       style = "plain";
-      theme = "catppuccin-mocha";
+      theme = "tokyonight_night";
     };
   };
 }
