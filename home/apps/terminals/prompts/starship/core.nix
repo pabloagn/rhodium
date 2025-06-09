@@ -1,4 +1,5 @@
 { config, rhodiumLib, ... }:
+
 let
   icons = config.theme.icons.iconsNerdFont;
   colors = config.theme.colors;

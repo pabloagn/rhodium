@@ -1,7 +1,8 @@
 local noice = require("noice")
-
 noice.setup({
+
   lsp = {
+
     -- Override markdown rendering to use Treesitter for cmp and other plugins
     override = {
       ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
@@ -16,6 +17,7 @@ noice.setup({
       view = nil, -- when nil, use defaults from documentation
       opts = {} -- merged with defaults from documentation
     },
+
     signature = {
       enabled = true,
       auto_open = {
@@ -40,6 +42,41 @@ noice.setup({
 
   -- Message routing
   routes = {
+    -- Skip all deprecation warnings
+    {
+      filter = {
+        event = "msg_show",
+        any = {
+          { find = "deprecated" },
+          { find = "Run.*checkhealth.*for more information" },
+        }
+      },
+      opts = { skip = true }
+    },
+
+    -- Skip NixOS/nixpkgs loading messages
+    {
+      filter = {
+        event = "msg_show",
+        any = {
+          { find = "Loading NixOS options" },
+          { find = "evaluating nixpkgs entries" },
+          { find = "evaluating nixos options" },
+          { find = "nixd" },
+        }
+      },
+      opts = { skip = true }
+    },
+
+    -- Skip vim.tbl_islist specific deprecation
+    {
+      filter = {
+        event = "msg_show",
+        find = "vim%.tbl_islist is deprecated"
+      },
+      opts = { skip = true }
+    },
+
     -- Route for specific brief messages to the 'mini' view
     {
       filter = {
@@ -65,7 +102,9 @@ noice.setup({
       },
       opts = { skip = true }, -- This tells Noice not to show these messages
     },
-    -- Skip "written" messages if they become too noisy for you
+
+    -- Avoid written messages
+	-- TODO: Validate if this worked
     {
       filter = {
         event = "msg_show",
@@ -98,17 +137,17 @@ noice.setup({
     },
   },
 
-  -- Configure command line appearance
+  -- Command line appearance
   cmdline = {
     enabled = true, -- General cmdline override
     view = "cmdline_popup", -- Or "cmdline" for classic, "cmdline_popup" for popup
     format = {
-      cmdline = { pattern = "^:", icon = "", lang = "vim" },
-      search_down = { kind = "search", pattern = "^/", icon = " ", lang = "regex" },
-      search_up = { kind = "search", pattern = "^%?", icon = " ", lang = "regex" },
+      cmdline = { pattern = "^:", icon = "", lang = "vim" },
+      search_down = { kind = "search", pattern = "^/", icon = " ", lang = "regex" },
+      search_up = { kind = "search", pattern = "^%?", icon = " ", lang = "regex" },
       filter = { pattern = "^:%s*!", icon = "$", lang = "bash" },
-      lua = { pattern = "^:%s*lua%s+", icon = "", lang = "lua" },
-      help = { pattern = "^:%s*help%s+", icon = "" },
+      lua = { pattern = "^:%s*lua%s+", icon = "", lang = "lua" },
+      help = { pattern = "^:%s*help%s+", icon = "" },
     },
   },
 })

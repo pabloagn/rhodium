@@ -93,7 +93,9 @@
 
       # Import and pack all user extras data
       userExtras = {
+
         path = dataPathUserExtras;
+
         bookmarksData =
           if builtins.pathExists (dataPathUserExtras + "/bookmarks.nix")
           then import (dataPathUserExtras + "/bookmarks.nix")
@@ -131,6 +133,47 @@
       userThemeName = userPreferences.theme.name or "chiaroscuro";
       userThemeVariant = userPreferences.theme.variant or "dark";
       selectedTheme = getThemeConfig userThemeName userThemeVariant;
+
+      # Test Suite
+      mkTest = name: path: {
+        homeConfiguration = home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          modules = [
+            {
+              home.username = "test";
+              home.homeDirectory = "/tmp/test-home";
+              home.stateVersion = "25.05";
+              imports = [ path ];
+            }
+          ];
+          extraSpecialArgs = {
+            inherit pkgs-unstable inputs rhodiumLib userData;
+            user = userData.user_001 or { };
+            host = { };
+            theme = selectedTheme;
+            inherit userPreferences userExtras;
+            fishPlugins = rhodium-alloys.fish;
+            yaziPlugins = rhodium-alloys.yazi;
+          };
+        };
+        
+        shell = pkgs.mkShell {
+          shellHook = ''
+            export HOME=$(mktemp -d)
+            export RHODIUM_TEST_ENV="${name}"
+            export STARSHIP_CONFIG_TEST="true"
+            home-manager switch --flake .#test-${name} --impure
+            echo "🧪 Testing ${name} environment"
+            echo "✅ Run: ${name}"
+          '';
+        };
+      };
+
+      testConfigs = {
+        neovim = mkTest "nvim" ./home/apps/editors/nvim;
+        tmux = mkTest "tmux" ./home/apps/terminals/utils/tmux;
+        fish = mkTest "fish" ./home/shells/fish;
+      };
 
     in
     {
@@ -200,43 +243,42 @@
           };
         };
       };
-
       # Standalone home configurations (testing)
-      homeConfigurations = {
-        user_001 = home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-          modules = [ ./users/user_001 ];
-          extraSpecialArgs = {
-            inherit pkgs-unstable inputs rhodiumLib userData;
-            user = userData.user_001 or { };
-            host = { };
-            theme = selectedTheme;
-            inherit userPreferences userExtras;
-            fishPlugins = rhodium-alloys.fish;
-            yaziPlugins = rhodium-alloys.yazi;
-          };
-        };
-      };
+     homeConfigurations = {
+       user_001 = home-manager.lib.homeManagerConfiguration {
+         inherit pkgs;
+         modules = [ ./users/user_001 ];
+         extraSpecialArgs = {
+           inherit pkgs-unstable inputs rhodiumLib userData;
+           user = userData.user_001 or { };
+           host = { };
+           theme = selectedTheme;
+           inherit userPreferences userExtras;
+           fishPlugins = rhodium-alloys.fish;
+           yaziPlugins = rhodium-alloys.yazi;
+         };
+       };
+     } // (builtins.mapAttrs (name: config: config.homeConfiguration) testConfigs);
 
-      # Devshells
-      # Default DevShell
-      devShells.${system} = {
-        default = pkgs.mkShell {
-          buildInputs = with pkgs; [
-            nixpkgs-fmt
-            nil
-            git
-          ];
-        };
-
-        # Rhodium Dev DevShell
-        rhodium-dev = pkgs.mkShell {
-          buildInputs = with pkgs; [
-            nixpkgs-fmt
-            nil
-            git
-          ];
-        };
-      };
-    };
+     # Devshells
+     # ---------------------------------------------
+     devShells.${system} = {
+       # Default DevShell
+       default = pkgs.mkShell {
+         buildInputs = with pkgs; [
+           nixpkgs-fmt
+           nil
+           git
+         ];
+       };
+       # Rhodium Dev DevShell
+       rhodium-dev = pkgs.mkShell {
+         buildInputs = with pkgs; [
+           nixpkgs-fmt
+           nil
+           git
+         ];
+       };
+     } // (builtins.mapAttrs (name: config: config.shell) testConfigs);
+   };
 }

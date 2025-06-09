@@ -5,5 +5,8 @@
     ./git.nix
     ./cloud.nix
     ./symbols.nix
+
+    # Prompts for custom modules
+    ./custom.nix
   ];
 }

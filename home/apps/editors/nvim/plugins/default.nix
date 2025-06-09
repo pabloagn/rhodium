@@ -62,6 +62,8 @@ in
         config = sourceLuaFile ./lualine-nvim.lua;
       }
 
+      lualine-lsp-progress
+
       # Telescope
       # ----------------------------------------------
       {
