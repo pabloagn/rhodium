@@ -1,14 +1,16 @@
-{ config, ... }:
+{ targetTheme, ... }:
 
 {
   programs.bat = {
     enable = true;
+
     themes = {
       tokyonight_night = {
-        src = config.themes.tokyonight.src;
-        file = config.themes.tokyonight.sublime.night;
+        inherit (targetTheme.tokyonight_night) src;
+        file = targetTheme.tokyonight_night.files.bat;
       };
     };
+
     config = {
       style = "plain";
       theme = "tokyonight_night";

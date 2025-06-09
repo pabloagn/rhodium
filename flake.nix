@@ -137,6 +137,10 @@
       userThemeVariant = userPreferences.theme.variant or "dark";
       selectedTheme = getThemeConfig userThemeName userThemeVariant;
 
+      # Temporary theme import
+      # While we have the complete theme module set up
+      targetTheme = import ./home/modules/themes.nix { inherit pkgs; };
+
     in
     {
       nixosConfigurations = {
@@ -159,6 +163,7 @@
                   user = userData.user_001 or { };
                   host = hostData.host_001 or { };
                   theme = selectedTheme;
+                  targetTheme = targetTheme; # TODO: This is temporary
                   inherit userPreferences userExtras;
                   fishPlugins = rhodium-alloys.fish;
                   yaziPlugins = rhodium-alloys.yazi;
@@ -191,6 +196,7 @@
                   user = userData.user_001 or { };
                   host = hostData.host_002 or { };
                   theme = selectedTheme;
+                  targetTheme = targetTheme; # TODO: This is temporary
                   inherit userPreferences userExtras;
                   fishPlugins = rhodium-alloys.fish;
                   yaziPlugins = rhodium-alloys.yazi;
@@ -216,6 +222,7 @@
             user = userData.user_001 or { };
             host = { };
             theme = selectedTheme;
+            targetTheme = targetTheme; # TODO: This is temporary
             inherit userPreferences userExtras;
             fishPlugins = rhodium-alloys.fish;
             yaziPlugins = rhodium-alloys.yazi;
