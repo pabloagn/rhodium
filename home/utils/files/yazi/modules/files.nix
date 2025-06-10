@@ -2,7 +2,7 @@
 
 {
   # Themes
-  "yazi/theme.toml".source = ../theme.toml;
+  # "yazi/theme.toml".source = ../theme.toml;
   "yazi/catppuccin-mocha.tmTheme".source = ../../bat/catppuccin-mocha.tmTheme;
   "yazi/tokyonight-night.tmTheme".source = ../../bat/tokyonight-night.tmTheme;
 
