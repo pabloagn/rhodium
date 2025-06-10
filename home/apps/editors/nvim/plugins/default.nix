@@ -1,7 +1,6 @@
 { pkgs, ... }:
 
 let
-  # writeLuaFile = str: "lua << EOF\n${str}\nEOF\n";
   sourceLuaFile = file: "lua << EOF\n${builtins.readFile file}\nEOF\n";
 in
 {

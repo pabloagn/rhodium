@@ -1,8 +1,10 @@
 require("yatline"):setup({
 --theme = my_theme,
-section_separator = { open = "", close = "" },
-part_separator = { open = "", close = "" },
-inverse_separator = { open = "", close = "" },
+-- section_separator = { open = "█", close = "█" },
+section_separator = { open = "", close = "" },
+part_separator = { open = "│", close = "│" },
+-- inverse_separator = { open = "█", close = "█" },
+inverse_separator = { open = "", close = "" },
 
 style_a = {
 	fg = "black",

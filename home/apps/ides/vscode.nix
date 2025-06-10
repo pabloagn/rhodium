@@ -4,6 +4,7 @@
   imports = [
     ./vscode
   ];
+
   programs.vscode = {
     enable = true;
     package = pkgs.vscode;

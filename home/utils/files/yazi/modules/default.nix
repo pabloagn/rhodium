@@ -4,7 +4,7 @@ let
   configBase = import ./base.nix { };
   configKeymaps = import ./keymap.nix { };
   configFiles = import ./files.nix { inherit pkgs; };
-  initLua = import ../plugins { };
+  initLua = import ../plugins { inherit lib; };
   theme = import ./theme.nix { };
 in
 {
