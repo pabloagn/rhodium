@@ -60,6 +60,7 @@ in
       {
         plugin = lualine-nvim; # Status line
         config = sourceLuaFile ./lualine-nvim.lua;
+        # config = sourceLuaFile ./evil-lualine-nvim.lua;
       }
 
       lualine-lsp-progress
@@ -71,6 +72,8 @@ in
       }
 
       telescope-fzf-native-nvim # Finder + fz
+      telescope-live-grep-args-nvim
+      telescope-project-nvim # TODO: Add this config
 
       # Improvements
       {
@@ -266,10 +269,10 @@ in
       #   config = sourceLuaFile ./;
       # }
 
-      # {
-      #   plugin = multicursors-nvim;
-      #   config = sourceLuaFile ./;
-      # }
+      {
+        plugin = multicursors-nvim;
+        config = sourceLuaFile ./;
+      }
 
       {
         plugin = (

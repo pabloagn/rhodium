@@ -1,6 +1,25 @@
 -- Get capabilities from nvim-cmp
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
+-- Lua
+require'lspconfig'.lua_ls.setup{
+  capabilities = capabilities,
+  settings = {
+    Lua = {
+      format = {
+        enable = true,
+        defaultConfig = {
+          indent_style = "space",
+          indent_size = "2",
+        },
+      },
+      diagnostics = {
+        globals = { "vim" }, -- avoid false positives
+      },
+    }
+  }
+}
+
 -- Nushell
 require'lspconfig'.nushell.setup{
   capabilities = capabilities,
@@ -176,3 +195,4 @@ require'lspconfig'.sqls.setup{
 require'lspconfig'.zls.setup{
   capabilities = capabilities,
 }
+

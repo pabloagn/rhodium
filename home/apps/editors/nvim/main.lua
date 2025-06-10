@@ -1,12 +1,61 @@
-vim.o.clipboard = 'unnamedplus' -- Enable system clipboard
-vim.o.showmode = false -- We already have this on line
-vim.o.encoding = 'utf-8' -- Encoding
-vim.o.fileencoding = 'utf-8' -- File encoding
-vim.o.mouse = 'a' -- Enable mouse support
-vim.o.swapfile = false -- Disable swap 
-vim.o.updatetime = 300
-vim.o.hidden = true -- Enable background buffers
-vim.o.history = 5000 -- Remember N lines in history
-vim.o.lazyredraw = true -- Faster scrolling
-vim.o.synmaxcol = 240 -- Max column for syntax highlight
-vim.o.updatetime = 250 -- ms to wait for trigger an event
+local opt = vim.opt
+
+-- General
+opt.clipboard = 'unnamedplus' -- Enable system clipboard
+opt.showmode = false -- We already have this on line
+opt.encoding = 'utf-8' -- Encoding
+opt.fileencoding = 'utf-8' -- File encoding
+opt.mouse = 'a' -- Enable mouse support
+opt.swapfile = false -- Disable swap 
+opt.updatetime = 300
+opt.hidden = true -- Enable background buffers
+opt.history = 5000 -- Remember N lines in history
+opt.lazyredraw = true -- Faster scrolling
+opt.synmaxcol = 240 -- Max column for syntax highlight
+opt.more = false
+opt.undofile = true
+
+-- UI
+opt.cmdheight = 0 -- Hide command line when not using
+opt.termguicolors = true -- 24-bit RGB colors
+opt.showmatch = true -- Matching parenthesis
+opt.title = true
+opt.titlestring = '%t%( %M%)%( (%{expand("%:~:h")})%)%a (nvim)'
+
+-- Line numbers
+opt.number = true
+opt.relativenumber = true
+opt.signcolumn = 'yes'
+
+-- Statusline
+opt.laststatus = 3 -- Always show a single global statusline
+
+-- Search
+opt.smartcase = true
+opt.ignorecase = true
+opt.inccommand = "split"
+
+-- Folding
+opt.foldmethod = 'manual' -- Changed from 'marker' to 'manual' (newer preference)
+
+-- Text wrapping
+opt.wrap = true
+opt.linebreak = true
+
+-- Indentation
+opt.autoindent = true
+opt.smartindent = true
+opt.smarttab = true
+opt.tabstop = 4 -- Number of spaces for each tab
+opt.shiftwidth = 4 -- Number of spaces when shifting text
+
+-- Splits
+opt.splitbelow = true
+opt.splitright = true
+
+-- Format options
+opt.formatoptions:remove "o" -- Don't have `o` add a comment
+
+-- Shada (session data)
+opt.shada = { "'10", "<0", "s10", "h" }
+

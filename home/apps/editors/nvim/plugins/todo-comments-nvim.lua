@@ -50,7 +50,7 @@ require("todo-comments").setup({
   
   -- Search configuration for ripgrep
   search = {
-    command = "rg",
+    command = "rga",
     args = {
       "--color=never",
       "--no-heading",

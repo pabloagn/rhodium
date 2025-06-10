@@ -9,6 +9,12 @@ require("noice").setup({
       ["vim.lsp.util.stylize_markdown"] = true,
       ["cmp.entry.get_documentation"] = true,
     },
+    signature = {
+      enabled = true,
+      auto_open = {
+        enabled = false,
+      },
+    }
   },
   routes = {
     {
@@ -37,7 +43,6 @@ local function map(mode, lhs, rhs, opts)
 end
 
 -- Noice keymaps
-map("n", "<leader>sn", "", { desc = "+noice" })
 map("c", "<S-Enter>", function() require("noice").redirect(vim.fn.getcmdline()) end, { desc = "Redirect Cmdline" })
 map("n", "<leader>snl", function() require("noice").cmd("last") end, { desc = "Noice Last Message" })
 map("n", "<leader>snh", function() require("noice").cmd("history") end, { desc = "Noice History" })
@@ -56,5 +61,4 @@ map({ "i", "n", "s" }, "<c-b>", function()
   if not require("noice.lsp").scroll(-4) then
     return "<c-b>"
   end
-
 end, { silent = true, expr = true, desc = "Scroll Backward" })
