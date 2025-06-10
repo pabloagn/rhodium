@@ -4,17 +4,24 @@ let
   homeDir = config.home.homeDirectory;
 
   dirs = {
-    rhodium = "${homeDir}/dev/rhodium/rhodium";
-    documents = "${homeDir}/documents";
-    downloads = "${homeDir}/downloads";
-    projects = "${homeDir}/projects";
     academic = "${homeDir}/academic";
-    solenoidLabs = "${homeDir}/solenoid-labs";
+    dev = "${homeDir}/dev/";
+    downloads = "${homeDir}/downloads";
+    pendings = "${homeDir}/pendings";
     professional = "${homeDir}/professional";
+    solenoidLabs = "${homeDir}/solenoid-labs";
     vaults = "${homeDir}/vaults";
   };
 
   derivedDirs = {
+    # Dev
+    devPhantom = "${dirs.dev}/phantom";
+    devRhodium = "${dirs.dev}/rhodium";
+    devAlloys = "${dirs.dev}/alloys.rhf";
+    devChiaroscuro = "${dirs.dev}/chiaroscuro.rht";
+    devUtils = "${dirs.dev}/utils";
+
+    # Obsidian Vault
     vaultsSanctum = "${dirs.vaults}/sanctum";
     vaultsFiction = "${dirs.vaults}/fiction";
   };
@@ -44,15 +51,20 @@ in
     MANPAGER = userPreferences.apps.pager;
 
     # Main dirs
-    RHODIUM = dirs.rhodium;
-    HOME_DOWNLOADS = dirs.downloads;
-    HOME_PROJECTS = dirs.projects;
     HOME_ACADEMIC = dirs.academic;
+    HOME_DOWNLOADS = dirs.downloads;
     HOME_SOLENOIDLABS = dirs.solenoidLabs;
     HOME_PROFESSIONAL = dirs.professional;
     HOME_VAULTS = dirs.vaults;
 
-    # Derived dirs
+    # Dev
+    DEV_PHANTOM = derivedDirs.devPhantom;
+    DEV_UTILS = derivedDirs.devUtils;
+    RHODIUM = derivedDirs.devRhodium;
+    DEV_ALLOYS = derivedDirs.devAlloys;
+    DEV_CHIAROSCURO = derivedDirs.devChiaroscuro;
+
+    # Vaults
     HOME_VAULTS_SANCTUM = derivedDirs.vaultsSanctum;
     HOME_VAULTS_FICTION = derivedDirs.vaultsFiction;
 

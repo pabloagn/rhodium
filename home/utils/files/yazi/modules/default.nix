@@ -3,15 +3,18 @@
 let
   configBase = import ./base.nix { };
   configKeymaps = import ./keymap.nix { };
-  luaConfig = import ./init-lua.nix { };
   configFiles = import ./files.nix { inherit pkgs; };
+  initLua = import ../plugins { };
+  theme = import ./theme.nix { };
 in
 {
   programs.yazi = {
     settings = configBase;
+    theme = theme;
     keymap = configKeymaps;
-    initLua = luaConfig.initLua;
+    initLua = initLua;
     plugins = yaziPlugins;
   };
   xdg.configFile = configFiles;
 }
+

@@ -5,7 +5,6 @@ let
     (builtins.readFile ./main.lua)
     (builtins.readFile ./ui.lua)
     (builtins.readFile ./keybinds.lua)
-    # (builtins.readFile ./neovide.lua)
   ];
 in
 {

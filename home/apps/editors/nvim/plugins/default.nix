@@ -79,12 +79,6 @@ in
         config = sourceLuaFile ./comment-nvim.lua;
       }
 
-      # Themes
-      # {
-      #   plugin = catppuccin-nvim; # Catppuccin theme
-      #   config = sourceLuaFile ./catppuccin-nvim.lua;
-      # }
-
       {
         plugin = tokyonight-nvim;
         config = sourceLuaFile ./tokyonight-nvim.lua;

@@ -2,14 +2,12 @@
 
 {
   mgr.prepend_keymap = [
-    # Custom Keymaps
-    # ----------------------------------------
+
     # GoTo
-    # { on = [ "g" "h" ]; run = "cd ~"; desc = "Go to home"; }
     { on = [ "g" "r" ]; run = "cd $RHODIUM"; desc = "Go to rhodium"; }
 
     { on = [ "g" "u" ]; run = "cd $DEV_UTILS"; desc = "Go to dev/utils"; }
-    { on = [ "g" "p" ]; run = "cd $DEV_PHANTOM"; desc = "Go to dev-phantom"; }
+    { on = [ "g" "p" ]; run = "cd $DEV_PHANTOM"; desc = "Go to dev/phantom"; }
 
     { on = [ "g" "a" ]; run = "cd $HOME_ACADEMIC"; desc = "Go to academic"; }
     { on = [ "g" "d" ]; run = "cd $HOME_DOWNLOADS"; desc = "Go to downloads"; }
