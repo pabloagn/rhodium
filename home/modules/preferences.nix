@@ -4,7 +4,7 @@ let
   homeDir = config.home.homeDirectory;
 
   dirs = {
-    rhodium = "${homeDir}/rhodium";
+    rhodium = "${homeDir}/dev/rhodium/rhodium";
     documents = "${homeDir}/documents";
     downloads = "${homeDir}/downloads";
     projects = "${homeDir}/projects";

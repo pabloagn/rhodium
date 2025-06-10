@@ -5,11 +5,11 @@
     # Environment variables
     environmentVariables = {
       # Core dirs
-      RHODIUM = "$HOME/rhodium";
-      HOME_PROJECTS = "$HOME/projects";
+      RHODIUM = "$HOME/dev/rhodium/rhodium/";
+      HOME_PROJECTS = "$HOME/dev/utils/";
       HOME_PROFESSIONAL = "$HOME/professional";
       HOME_ACADEMIC = "$HOME/academic";
-      HOME_SOLENOIDLABS = "$HOME/solenoidlabs";
+      HOME_SOLENOIDLABS = "$HOME/solenoid-labs/";
       HOME_VAULTS = "$HOME/vaults";
       HOME_VAULTS_SANCTUM = "$HOME/vaults/sanctum";
       HOME_DOWNLOADS = "$HOME/downloads/";
