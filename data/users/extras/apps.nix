@@ -60,23 +60,29 @@
       icon = "protonmail";
       description = "ProtonMail";
     };
-    zen = {
-      binary = "zen";
-      args = [ ];
-      icon = "zen";
-      description = "Zen Browser";
-    };
     slack = {
       binary = "slack";
       args = [ ];
       icon = "slack";
       description = "Slack";
     };
+    standardnotes = {
+      binary = "standardnotes";
+      args = [ "--force-device-scale-factor=1.5" ];
+      icon = "standardnotes";
+      description = "Standard Notes";
+    };
     teams = {
       binary = "teams-for-linux";
       args = [ ];
       icon = "teams";
       description = "Teams";
+    };
+    zen = {
+      binary = "zen";
+      args = [ ];
+      icon = "zen";
+      description = "Zen Browser";
     };
   };
 

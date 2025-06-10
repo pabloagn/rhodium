@@ -4,6 +4,7 @@
   imports = [
     ./obsidian.nix
     ./okular.nix
+    ./standardnotes.nix
     ./zathura.nix
   ];
 
