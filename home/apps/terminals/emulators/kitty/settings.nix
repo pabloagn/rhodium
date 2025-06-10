@@ -6,7 +6,6 @@
     font.size = 12;
 
     settings = {
-
       scrollback_lines = 10000;
       enable_audio_bell = false;
 

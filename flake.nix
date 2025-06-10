@@ -29,8 +29,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    chiaroscuro = {
+      url = "github:pabloagn/chiaroscuro.rht";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     rhodium-alloys = {
-      url = "github:pabloagn/rhodium-alloys";
+      url = "github:pabloagn/alloys.rhf";
       # inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -43,6 +48,7 @@
     , sops-nix
     , nur
     , zen-browser
+    , chiaroscuro
     , rhodium-alloys
     }@inputs:
     let
@@ -137,9 +143,11 @@
       userThemeVariant = userPreferences.theme.variant or "dark";
       selectedTheme = getThemeConfig userThemeName userThemeVariant;
 
-      # Temporary theme import
+      # Temporary theme imports
       # While we have the complete theme module set up
       targetTheme = import ./home/modules/themes.nix { inherit pkgs; };
+
+      chiaroscuroTheme = inputs.chiaroscuro.themes.kanso-zen;
 
     in
     {
@@ -164,6 +172,7 @@
                   host = hostData.host_001 or { };
                   theme = selectedTheme;
                   targetTheme = targetTheme; # TODO: This is temporary
+                  chiaroscuroTheme = chiaroscuroTheme; # TODO: This is temporary;
                   inherit userPreferences userExtras;
                   fishPlugins = rhodium-alloys.fish;
                   yaziPlugins = rhodium-alloys.yazi;
