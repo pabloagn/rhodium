@@ -35,7 +35,6 @@
     # locate = "plocate";
     # fda = "fd -Lu";
     # find = "fd";
-    # rg = "rga";
 
     # Editor
     vim = "nvim";

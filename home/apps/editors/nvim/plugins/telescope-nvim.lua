@@ -1,22 +1,18 @@
 local telescope = require('telescope')
 local actions = require('telescope.actions')
 local action_layout = require('telescope.actions.layout')
-
 telescope.setup({
 	defaults = {
 		-- Borders
 		borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
-
 		-- Prompt styling
 		prompt_prefix = "λ ", -- Prefix at the prompt entry
 		selection_caret = "● ", -- Prefix at the selected item
 		entry_prefix = "○ ", -- Prefix at the non-selected item
-
 		-- Visual settings
 		winblend = 2, -- Add very subtle transparency
 		color_devicons = true,
 		path_display = { "truncate" },
-
 		-- Layout
 		layout_strategy = "horizontal",
 		layout_config = {
@@ -27,17 +23,9 @@ telescope.setup({
 			horizontal = {
 				preview_width = 0.6,
 			},
-			-- padding = {
-			-- 	top = 2,
-			-- 	bottom = 2,
-			-- 	left = 2,
-			-- 	right = 2,
-			-- },
 		},
-
 		-- Sorting
 		sorting_strategy = "ascending",
-
 		-- File filtering
 		file_ignore_patterns = {
 			"%.git/",
@@ -54,7 +42,6 @@ telescope.setup({
 			"%.mp4",
 			"%.zip"
 		},
-
 		-- Basic mappings
 		mappings = {
 			i = {
@@ -83,13 +70,11 @@ telescope.setup({
 			},
 		},
 	},
-
 	-- Picker configurations
 	pickers = {
 		find_files = {
 			hidden = true,
 		},
-
 		buffers = {
 			show_all_buffers = true,
 			sort_lastused = true,
@@ -105,5 +90,21 @@ telescope.setup({
 	},
 })
 
--- Only load extensions that are actually installed
+-- TODO: Obviously improve this
+local function todo_picker(opts)
+	opts = opts or {}
+	require('telescope.builtin').live_grep({
+		prompt_title = "λ ",
+		default_text = "\\b(FIX|SEV1|SEV2|SEV3|TODO|DONE|NOTE|HACK|WARN|PERF|IMPR|TEST|TESTING|PASSED|FAILED):",
+		additional_args = function()
+			return { "--pcre2", "-i" }
+		end
+	})
+end
+
+-- Register the TODO picker function globally for use in keybinds
+_G.telescope_todo_picker = todo_picker
+
+-- Load existing extensions
 pcall(telescope.load_extension, 'fzf')
+

@@ -130,6 +130,8 @@ in
         plugin = bufferline-nvim;
         config = sourceLuaFile ./bufferline-nvim.lua;
       }
+      
+      nvim-web-devicons
 
       # {
       #   plugin = yazi-nvim;
@@ -212,7 +214,7 @@ in
 
       {
         plugin = snacks-nvim;
-        config = sourceLuaFile ./snacks-nvim.lua;
+        # config = sourceLuaFile ./snacks-nvim.lua;
       }
 
       # {

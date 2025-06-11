@@ -9,11 +9,11 @@ require("todo-comments").setup({
 			alt = { "SEV1", "SEV2", "SEV3" }, -- Severities
 		},
 		TODO = {
-			icon = "○",
+			icon = "●",
 			color = "info",
 		},
 		DONE = {
-			icon = "●",
+			icon = "✓",
 			color = "done"
 		},
 		NOTE = {
@@ -73,7 +73,7 @@ require("todo-comments").setup({
 
 	-- Search configuration for ripgrep
 	search = {
-		command = "rga",
+		command = "rg",
 		args = {
 			"--color=never",
 			"--no-heading",

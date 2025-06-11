@@ -86,6 +86,7 @@ vim.keymap.set('n', '<leader>fr', function()
 	require('telescope').extensions.frecency.frecency()
 end, { desc = 'Recent files (frecency)' })
 
+
 -- Advanced search
 vim.keymap.set('n', '<leader>fw', builtin.grep_string, { desc = 'Find word under cursor' })
 vim.keymap.set('n', '<leader>fc', builtin.command_history, { desc = 'Command history' })
@@ -94,7 +95,65 @@ vim.keymap.set('n', '<leader>fs', builtin.search_history, { desc = 'Search histo
 -- Advanced pickers
 vim.keymap.set('n', '<leader>fk', builtin.keymaps, { desc = 'Find keymaps' })
 vim.keymap.set('n', '<leader>fo', builtin.vim_options, { desc = 'Vim options' })
-vim.keymap.set('n', '<leader>ft', builtin.colorscheme, { desc = 'Color schemes' })
+vim.keymap.set('n', '<leader>ft', function()
+    _G.telescope_todo_picker(require('telescope.themes').get_dropdown({
+        winblend = 10,
+        border = true,
+        previewer = true,
+        shorten_path = false,
+        layout_config = {
+            width = 0.9,
+            height = 0.8,
+        }
+    }))
+end, { desc = 'Telescope TODO Comments' })
+
+-- Buffers
+-- Navigate buffers
+vim.keymap.set('n', '<S-l>', ':BufferLineCycleNext<CR>', { desc = 'Next buffer', silent = true })
+vim.keymap.set('n', '<S-h>', ':BufferLineCyclePrev<CR>', { desc = 'Previous buffer', silent = true })
+vim.keymap.set('n', '<leader>bl', ':BufferLineCycleNext<CR>', { desc = 'Next buffer', silent = true })
+vim.keymap.set('n', '<leader>bh', ':BufferLineCyclePrev<CR>', { desc = 'Previous buffer', silent = true })
+
+-- Move buffers
+vim.keymap.set('n', '<leader>bmn', ':BufferLineMoveNext<CR>', { desc = 'Move buffer next', silent = true })
+vim.keymap.set('n', '<leader>bmp', ':BufferLineMovePrev<CR>', { desc = 'Move buffer prev', silent = true })
+
+-- Go to buffer by number
+vim.keymap.set('n', '<leader>b1', '<Cmd>BufferLineGoToBuffer 1<CR>', { desc = 'Go to buffer 1', silent = true })
+vim.keymap.set('n', '<leader>b2', '<Cmd>BufferLineGoToBuffer 2<CR>', { desc = 'Go to buffer 2', silent = true })
+vim.keymap.set('n', '<leader>b3', '<Cmd>BufferLineGoToBuffer 3<CR>', { desc = 'Go to buffer 3', silent = true })
+vim.keymap.set('n', '<leader>b4', '<Cmd>BufferLineGoToBuffer 4<CR>', { desc = 'Go to buffer 4', silent = true })
+vim.keymap.set('n', '<leader>b5', '<Cmd>BufferLineGoToBuffer 5<CR>', { desc = 'Go to buffer 5', silent = true })
+vim.keymap.set('n', '<leader>b6', '<Cmd>BufferLineGoToBuffer 6<CR>', { desc = 'Go to buffer 6', silent = true })
+vim.keymap.set('n', '<leader>b7', '<Cmd>BufferLineGoToBuffer 7<CR>', { desc = 'Go to buffer 7', silent = true })
+vim.keymap.set('n', '<leader>b8', '<Cmd>BufferLineGoToBuffer 8<CR>', { desc = 'Go to buffer 8', silent = true })
+vim.keymap.set('n', '<leader>b9', '<Cmd>BufferLineGoToBuffer 9<CR>', { desc = 'Go to buffer 9', silent = true })
+
+-- Close buffers
+vim.keymap.set('n', '<leader>bc', ':BufferLinePickClose<CR>', { desc = 'Pick buffer to close', silent = true })
+vim.keymap.set('n', '<leader>bC', ':BufferLineCloseOthers<CR>', { desc = 'Close other buffers', silent = true })
+vim.keymap.set('n', '<leader>bd', ':bdelete<CR>', { desc = 'Delete current buffer', silent = true })
+vim.keymap.set('n', '<leader>bD', ':bdelete!<CR>', { desc = 'Force delete buffer', silent = true })
+
+-- Close buffers in direction
+vim.keymap.set('n', '<leader>bcr', ':BufferLineCloseRight<CR>', { desc = 'Close buffers to right', silent = true })
+vim.keymap.set('n', '<leader>bcl', ':BufferLineCloseLeft<CR>', { desc = 'Close buffers to left', silent = true })
+
+-- Pick buffer
+vim.keymap.set('n', '<leader>bp', ':BufferLinePick<CR>', { desc = 'Pick buffer', silent = true })
+
+-- Pin/unpin buffer
+vim.keymap.set('n', '<leader>bP', ':BufferLineTogglePin<CR>', { desc = 'Toggle pin buffer', silent = true })
+
+-- Sort buffers
+vim.keymap.set('n', '<leader>bsd', ':BufferLineSortByDirectory<CR>', { desc = 'Sort by directory', silent = true })
+vim.keymap.set('n', '<leader>bse', ':BufferLineSortByExtension<CR>', { desc = 'Sort by extension', silent = true })
+vim.keymap.set('n', '<leader>bst', ':BufferLineSortByTabs<CR>', { desc = 'Sort by tabs', silent = true })
+
+-- Buffer groups
+vim.keymap.set('n', '<leader>bgt', ':BufferLineGroupToggle Tests<CR>', { desc = 'Toggle test group', silent = true })
+vim.keymap.set('n', '<leader>bgd', ':BufferLineGroupToggle Docs<CR>', { desc = 'Toggle docs group', silent = true })
 
 -- Git integration
 vim.keymap.set('n', '<leader>gc', builtin.git_commits, { desc = 'Git commits' })
@@ -113,6 +172,52 @@ vim.keymap.set('n', '<leader>lw', builtin.lsp_workspace_symbols, { desc = 'Works
 
 -- Diagnostics
 vim.keymap.set('n', '<leader>xx', builtin.diagnostics, { desc = 'Diagnostics' })
+
+-- Trouble
+-- Primary diagnostic toggles
+vim.keymap.set('n', '<leader>td', function() require("trouble").toggle("diagnostics") end,
+	{ desc = "Toggle Diagnostics (Trouble)" })
+vim.keymap.set('n', '<leader>tb', function() require("trouble").toggle("diagnostics", { filter = { buf = 0 } }) end,
+	{ desc = "Toggle Buffer Diagnostics (Trouble)" })
+
+-- LSP references and definitions
+vim.keymap.set('n', '<leader>tr', function() require("trouble").toggle("lsp_references") end,
+	{ desc = "Toggle LSP References (Trouble)" })
+vim.keymap.set('n', '<leader>tD', function() require("trouble").toggle("lsp_definitions") end,
+	{ desc = "Toggle LSP Definitions (Trouble)" })
+vim.keymap.set('n', '<leader>ti', function() require("trouble").toggle("lsp_implementations") end,
+	{ desc = "Toggle LSP Implementations (Trouble)" })
+vim.keymap.set('n', '<leader>tt', function() require("trouble").toggle("lsp_type_definitions") end,
+	{ desc = "Toggle LSP Type Definitions (Trouble)" })
+
+-- Document symbols
+vim.keymap.set('n', '<leader>ts', function() require("trouble").toggle("symbols") end,
+	{ desc = "Toggle Symbols (Trouble)" })
+
+-- Quickfix and location lists
+vim.keymap.set('n', '<leader>tq', function() require("trouble").toggle("qflist") end,
+	{ desc = "Toggle Quickfix (Trouble)" })
+vim.keymap.set('n', '<leader>tl', function() require("trouble").toggle("loclist") end,
+	{ desc = "Toggle Location List (Trouble)" })
+
+-- Close all trouble windows
+vim.keymap.set('n', '<leader>tc', function() require("trouble").close() end, { desc = "Close Trouble" })
+
+-- Custom modes
+vim.keymap.set('n', '<leader>tp', function() require("trouble").toggle("project_diagnostics") end,
+	{ desc = "Project Diagnostics (Trouble)" })
+
+-- Navigation within trouble - using ']T' and '[T' to avoid conflicts with your todo mappings
+vim.keymap.set('n', ']T', function() require("trouble").next({ skip_groups = true, jump = true }) end,
+	{ desc = "Next Trouble Item" })
+vim.keymap.set('n', '[T', function() require("trouble").prev({ skip_groups = true, jump = true }) end,
+	{ desc = "Previous Trouble Item" })
+
+-- Advanced navigation
+vim.keymap.set('n', 'g]T', function() require("trouble").last({ skip_groups = true, jump = true }) end,
+	{ desc = "Last Trouble Item" })
+vim.keymap.set('n', 'g[T', function() require("trouble").first({ skip_groups = true, jump = true }) end,
+	{ desc = "First Trouble Item" })
 
 -- TODOs
 vim.keymap.set("n", "]t", function()

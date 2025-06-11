@@ -38,7 +38,6 @@
   locate = "plocate";
   fda = "fd -Lu"; # Find All
   find = "fd"; # Find
-  rg = "rga"; # ripgrep-all
 
   # Editor
   vim = "nvim";
