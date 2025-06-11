@@ -9,15 +9,15 @@ in
     git_status = {
       format = "([\\[$all_status$ahead_behind\\]]($style) )";
       conflicted = "=";
-      ahead = getIcon unicodeIcons.arrows.up "⇡";
-      behind = getIcon unicodeIcons.arrows.down "⇣";
-      diverged = getIcon unicodeIcons.arrows.upDown "⇕";
-      untracked = getIcon unicodeIcons.status.question "?";
+      ahead = getIcon unicodeIcons.arrows.basic.up "⇡";
+      behind = getIcon unicodeIcons.arrows.basic.down "⇣";
+      diverged = getIcon unicodeIcons.arrows.basic.upDown "⇕";
+      untracked = getIcon unicodeIcons.technical.status.punctuation.question "?";
       stashed = getIcon unicodeIcons.currency.dollar "$";
-      modified = getIcon unicodeIcons.status.exclamation "!";
-      staged = getIcon unicodeIcons.math.plus "+";
-      renamed = getIcon unicodeIcons.typography.quoteRight "»";
-      deleted = getIcon unicodeIcons.status.cross "✗";
+      modified = getIcon unicodeIcons.technical.status.punctuation.exclamation "!";
+      staged = getIcon unicodeIcons.mathematical.operators.plus "+";
+      renamed = getIcon unicodeIcons.typography.quotes.rightAngleQuote "»";
+      deleted = getIcon unicodeIcons.technical.status.marks.cross "✗";
     };
   };
 }

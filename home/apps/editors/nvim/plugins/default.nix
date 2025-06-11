@@ -126,10 +126,10 @@ in
       #   config = sourceLuaFile ./lazydev-nvim.lua;
       # }
 
-      # {
-      #   plugin = bufferline-nvim;
-      #   config = sourceLuaFile ./bufferline-nvim.lua;
-      # }
+      {
+        plugin = bufferline-nvim;
+        config = sourceLuaFile ./bufferline-nvim.lua;
+      }
 
       # {
       #   plugin = yazi-nvim;
@@ -190,10 +190,10 @@ in
       #   config = sourceLuaFile ./;
       # }
 
-      # {
-      #   plugin = trouble-nvim;
-      #   config = sourceLuaFile ./;
-      # }
+      {
+        plugin = trouble-nvim;
+        config = sourceLuaFile ./trouble-nvim.lua;
+      }
 
       # {
       #   plugin = conform-nvim;

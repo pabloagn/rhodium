@@ -1,4 +1,18 @@
+-- Local variables
 local opt = vim.opt
+local diagnostic = vim.diagnostic
+
+-- Diagnostics
+diagnostic.config({
+	signs = {
+		text = {
+			[vim.diagnostic.severity.ERROR] = "●",
+			[vim.diagnostic.severity.WARN] = "●",
+			[vim.diagnostic.severity.HINT] = "●",
+			[vim.diagnostic.severity.INFO] = "●",
+		},
+	},
+})
 
 -- General
 opt.clipboard = 'unnamedplus' -- Enable system clipboard
@@ -26,6 +40,7 @@ opt.titlestring = '%t%( %M%)%( (%{expand("%:~:h")})%)%a (nvim)'
 opt.number = true
 opt.relativenumber = true
 opt.signcolumn = 'yes'
+opt.fillchars = { eob = " " } -- Remove the trailing tilde on dashboard
 
 -- Statusline
 opt.laststatus = 3 -- Always show a single global statusline

@@ -4,58 +4,41 @@ local action_layout = require('telescope.actions.layout')
 
 telescope.setup({
 	defaults = {
-		-- Transparency and blur effects
-		-- winblend = 15,
-		-- pumblend = 15,
-
-		-- Prompt styling
-		prompt_prefix = "   ",
-		selection_caret = "  ",
-		entry_prefix = "   ",
+		-- Borders
 		borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
 
-		-- Color and visual enhancements
+		-- Prompt styling
+		prompt_prefix = "λ ", -- Prefix at the prompt entry
+		selection_caret = "● ", -- Prefix at the selected item
+		entry_prefix = "○ ", -- Prefix at the non-selected item
+
+		-- Visual settings
+		winblend = 2, -- Add very subtle transparency
 		color_devicons = true,
-		use_less = true,
-		path_display = { "smart" },
+		path_display = { "truncate" },
 
 		-- Layout
 		layout_strategy = "horizontal",
 		layout_config = {
-			width = 0.90,
-			height = 0.85,
+			width = 0.85,
+			height = 0.80,
 			preview_cutoff = 120,
 			prompt_position = "top",
 			horizontal = {
-				preview_width = function(_, cols, _)
-					return math.floor(cols * 0.4)
-				end,
+				preview_width = 0.6,
 			},
-			vertical = {
-				width = 0.9,
-				height = 0.95,
-				preview_height = 0.5,
-			},
-			flex = {
-				horizontal = {
-					preview_width = 0.9,
-				},
-			},
+			-- padding = {
+			-- 	top = 2,
+			-- 	bottom = 2,
+			-- 	left = 2,
+			-- 	right = 2,
+			-- },
 		},
 
-		-- Sorting and selection strategy
+		-- Sorting
 		sorting_strategy = "ascending",
-		selection_strategy = "reset",
-		scroll_strategy = "cycle",
 
-		-- Preview configuration
-		preview = {
-			filesize_limit = 25,
-			timeout = 250,
-			treesitter = true,
-		},
-
-		-- Advanced file filtering
+		-- File filtering
 		file_ignore_patterns = {
 			"%.git/",
 			"node_modules/",
@@ -72,30 +55,19 @@ telescope.setup({
 			"%.zip"
 		},
 
-		-- Mappings
+		-- Basic mappings
 		mappings = {
 			i = {
-				["<C-n>"] = actions.cycle_history_next,
-				["<C-p>"] = actions.cycle_history_prev,
 				["<C-j>"] = actions.move_selection_next,
 				["<C-k>"] = actions.move_selection_previous,
 				["<C-c>"] = actions.close,
-				["<Down>"] = actions.move_selection_next,
-				["<Up>"] = actions.move_selection_previous,
 				["<CR>"] = actions.select_default,
 				["<C-x>"] = actions.select_horizontal,
 				["<C-v>"] = actions.select_vertical,
 				["<C-t>"] = actions.select_tab,
 				["<C-u>"] = actions.preview_scrolling_up,
 				["<C-d>"] = actions.preview_scrolling_down,
-				["<PageUp>"] = actions.results_scrolling_up,
-				["<PageDown>"] = actions.results_scrolling_down,
-				["<Tab>"] = actions.toggle_selection + actions.move_selection_worse,
-				["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
 				["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
-				["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
-				["<C-l>"] = actions.complete_tag,
-				["<C-/>"] = action_layout.toggle_preview,
 			},
 			n = {
 				["<esc>"] = actions.close,
@@ -103,68 +75,24 @@ telescope.setup({
 				["<C-x>"] = actions.select_horizontal,
 				["<C-v>"] = actions.select_vertical,
 				["<C-t>"] = actions.select_tab,
-				["<Tab>"] = actions.toggle_selection + actions.move_selection_worse,
-				["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
-				["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
-				["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
 				["j"] = actions.move_selection_next,
 				["k"] = actions.move_selection_previous,
-				["H"] = actions.move_to_top,
-				["M"] = actions.move_to_middle,
-				["L"] = actions.move_to_bottom,
-				["<Down>"] = actions.move_selection_next,
-				["<Up>"] = actions.move_selection_previous,
-				["gg"] = actions.move_to_top,
-				["G"] = actions.move_to_bottom,
 				["<C-u>"] = actions.preview_scrolling_up,
 				["<C-d>"] = actions.preview_scrolling_down,
-				["<PageUp>"] = actions.results_scrolling_up,
-				["<PageDown>"] = actions.results_scrolling_down,
-				["?"] = actions.which_key,
-				["<C-/>"] = action_layout.toggle_preview,
+				["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
 			},
-		},
-
-		-- Search configuration
-		vimgrep_arguments = {
-			"rga",
-			"--color=never",
-			"--no-heading",
-			"--with-filename",
-			"--line-number",
-			"--column",
-			"--smart-case",
-			"--hidden",
-			"--glob=!.git/",
 		},
 	},
 
-	-- Picker-specific configurations
+	-- Picker configurations
 	pickers = {
 		find_files = {
-			find_command = { "fd", "--type", "f", "--strip-cwd-prefix", "--hidden", "--exclude", ".git" },
-			layout_config = {
-				height = 0.70,
-			},
-		},
-
-		live_grep = {
-			layout_config = {
-				horizontal = {
-					preview_width = 0.55,
-				},
-			},
+			hidden = true,
 		},
 
 		buffers = {
 			show_all_buffers = true,
 			sort_lastused = true,
-			theme = "dropdown",
-			previewer = false,
-			layout_config = {
-				width = 0.7,
-				height = 0.4,
-			},
 			mappings = {
 				i = {
 					["<c-d>"] = actions.delete_buffer,
@@ -174,80 +102,8 @@ telescope.setup({
 				},
 			},
 		},
-
-		git_files = {
-			layout_config = {
-				height = 0.70,
-			},
-		},
-
-		help_tags = {
-			layout_config = {
-				width = 0.87,
-				height = 0.80,
-			},
-		},
-
-		man_pages = {
-			layout_config = {
-				width = 0.87,
-				height = 0.80,
-			},
-		},
-
-		lsp_references = {
-			layout_config = {
-				width = 0.87,
-				height = 0.80,
-			},
-		},
-
-		diagnostics = {
-			layout_config = {
-				width = 0.87,
-				height = 0.80,
-			},
-		},
-	},
-
-	-- Extensions
-	extensions = {
-		-- Enhanced FZF native sorting
-		fzf = {
-			fuzzy = true,
-			override_generic_sorter = true,
-			override_file_sorter = true,
-			case_mode = "smart_case",
-		},
-
-		-- Live Grep Args
-		live_grep_args = {
-			auto_quoting = true,
-			mappings = {
-				i = {
-					["<C-k>"] = require("telescope-live-grep-args.actions").quote_prompt(),
-					["<C-i>"] = require("telescope-live-grep-args.actions").quote_prompt({ postfix = " --iglob " }),
-				},
-			},
-		},
-
-		-- Smart file prioritization based on usage
-		frecency = {
-			show_scores = false,
-			show_unindexed = true,
-			ignore_patterns = { "*.git/*", "*/tmp/*" },
-			disable_devicons = false,
-			workspaces = {
-				["conf"] = "~/.config",
-				["data"] = "~/.local/share",
-				["project"] = "~/dev",
-				["wiki"] = "~/wiki"
-			}
-		},
 	},
 })
 
--- Load all extensions
-telescope.load_extension('fzf')
-telescope.load_extension('live_grep_args')
-telescope.load_extension('frecency')
+-- Only load extensions that are actually installed
+pcall(telescope.load_extension, 'fzf')

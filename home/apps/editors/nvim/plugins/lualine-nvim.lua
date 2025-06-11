@@ -21,6 +21,9 @@ local conditions = {
 -- Theme
 local config = {
 	options = {
+		disabled_filetypes = {
+			statusline = { "dashboard" },
+		},
 		component_separators = '',
 		section_separators = '',
 		globalstatus = true,
@@ -134,7 +137,15 @@ ins_left {
 		unnamed = '∅',
 	},
 	path = 1, -- Show relative path
-	shorting_target = 40,
+	shorting_target = 20,
+	padding = { left = 1 },
+}
+
+ins_left {
+	function()
+		return '│'
+	end,
+	color = { fg = colors.bg_highlight },
 	padding = { left = 1 },
 }
 
@@ -142,7 +153,7 @@ ins_left {
 	'filesize',
 	cond = conditions.buffer_not_empty,
 	color = { fg = colors.comment },
-	padding = { left = 1 },
+	padding = { left = 1, right = 0 },
 }
 
 -- Progress (Row:Col)
@@ -152,7 +163,7 @@ ins_left {
 	fmt = function(str)
 		return str:gsub(':', '∶')
 	end,
-	padding = { left = 1 },
+	padding = { left = 1, right = 0 },
 }
 
 -- Progress - Percentage and total lines
@@ -164,7 +175,15 @@ ins_left {
 		local percentage = math.floor((current_line / total_lines) * 100)
 		return percentage .. '%% ' .. total_lines
 	end,
-	padding = { left = 1 },
+	padding = { left = 1, right = 0 },
+}
+
+ins_left {
+	function()
+		return '│'
+	end,
+	color = { fg = colors.bg_highlight },
+	padding = { left = 1, right = 0 },
 }
 
 -- Diagnostics
@@ -172,10 +191,10 @@ ins_left {
 	'diagnostics',
 	sources = { 'nvim_diagnostic' },
 	symbols = {
-		error = '●',
-		warn = '●',
-		info = '●',
-		hint = '●'
+		error = '● ',
+		warn = '● ',
+		info = '● ',
+		hint = '● '
 	},
 	diagnostics_color = {
 		error = { fg = colors.red },
@@ -184,17 +203,17 @@ ins_left {
 		hint = { fg = colors.comment },
 	},
 	always_visible = false,
-	padding = { left = 1 },
+	padding = { left = 1, right = 0 },
 }
 
 -- Buffer count
 ins_left {
 	function()
 		local buf_count = #vim.fn.getbufinfo({ buflisted = 1 })
-		return '■' .. buf_count
+		return '■ ' .. buf_count
 	end,
 	color = { fg = colors.comment },
-	padding = { left = 1 },
+	padding = { left = 1, right = 1 },
 }
 
 -- -- Session indicator

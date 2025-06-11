@@ -12,7 +12,7 @@
     zsh.enable = true;
     bash.completion.enable = true; # Required for home setting
     fish.enable = true;
-    nushell.enable = true;
+    # nushell.enable = true;
   };
 
   # TODO: Fix this
