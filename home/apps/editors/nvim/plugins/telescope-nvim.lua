@@ -1,19 +1,3 @@
--- require('telescope').setup({
--- 	defaults = {
--- 		borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
--- 	},
--- 	extensions = {
--- 		fzf = {
--- 			fuzzy = true,
--- 			override_generic_sorter = true,
--- 			override_file_sorter = true,
--- 			case_mode = "smart_case",
--- 		}
--- 	}
--- })
---
--- require('telescope').load_extension('fzf')
-
 local telescope = require('telescope')
 local actions = require('telescope.actions')
 local action_layout = require('telescope.actions.layout')
@@ -267,4 +251,3 @@ telescope.setup({
 telescope.load_extension('fzf')
 telescope.load_extension('live_grep_args')
 telescope.load_extension('frecency')
-

@@ -8,10 +8,9 @@ let
   ];
 in
 {
-  imports = [./plugins];
+  imports = [ ./plugins ];
 
   programs.neovim = {
     extraLuaConfig = luaFiles;
   };
 }
-

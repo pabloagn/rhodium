@@ -5,19 +5,19 @@ vim.opt.termguicolors = true -- Enable 24-bit colour
 
 -- Setup
 require("nvim-tree").setup({
-  sort = {
-    sorter = "case_sensitive",
-  },
+	sort = {
+		sorter = "case_sensitive",
+	},
 
-  view = {
-    width = 30,
-  },
+	view = {
+		width = 30,
+	},
 
-  renderer = {
-    group_empty = true,
-  },
+	renderer = {
+		group_empty = true,
+	},
 
-  filters = {
-    dotfiles = true,
-  }
+	filters = {
+		dotfiles = true,
+	}
 })

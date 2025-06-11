@@ -2,23 +2,23 @@ local opt = vim.opt
 
 -- General
 opt.clipboard = 'unnamedplus' -- Enable system clipboard
-opt.showmode = false -- We already have this on line
-opt.encoding = 'utf-8' -- Encoding
-opt.fileencoding = 'utf-8' -- File encoding
-opt.mouse = 'a' -- Enable mouse support
-opt.swapfile = false -- Disable swap 
+opt.showmode = false          -- We already have this on line
+opt.encoding = 'utf-8'        -- Encoding
+opt.fileencoding = 'utf-8'    -- File encoding
+opt.mouse = 'a'               -- Enable mouse support
+opt.swapfile = false          -- Disable swap
 opt.updatetime = 300
-opt.hidden = true -- Enable background buffers
-opt.history = 5000 -- Remember N lines in history
-opt.lazyredraw = true -- Faster scrolling
-opt.synmaxcol = 240 -- Max column for syntax highlight
+opt.hidden = true             -- Enable background buffers
+opt.history = 5000            -- Remember N lines in history
+opt.lazyredraw = true         -- Faster scrolling
+opt.synmaxcol = 240           -- Max column for syntax highlight
 opt.more = false
 opt.undofile = true
 
 -- UI
-opt.cmdheight = 0 -- Hide command line when not using
+opt.cmdheight = 0        -- Hide command line when not using
 opt.termguicolors = true -- 24-bit RGB colors
-opt.showmatch = true -- Matching parenthesis
+opt.showmatch = true     -- Matching parenthesis
 opt.title = true
 opt.titlestring = '%t%( %M%)%( (%{expand("%:~:h")})%)%a (nvim)'
 
@@ -46,7 +46,7 @@ opt.linebreak = true
 opt.autoindent = true
 opt.smartindent = true
 opt.smarttab = true
-opt.tabstop = 4 -- Number of spaces for each tab
+opt.tabstop = 4    -- Number of spaces for each tab
 opt.shiftwidth = 4 -- Number of spaces when shifting text
 
 -- Splits
@@ -58,4 +58,3 @@ opt.formatoptions:remove "o" -- Don't have `o` add a comment
 
 -- Shada (session data)
 opt.shada = { "'10", "<0", "s10", "h" }
-
