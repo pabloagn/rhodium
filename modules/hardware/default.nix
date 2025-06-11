@@ -9,6 +9,6 @@
     ./mouse.nix
     ./printers.nix
     ./video.nix
-    ./wifi.nix
+    ./wireless.nix
   ];
 }

@@ -1,12 +1,12 @@
-{ pkgs, ... }:
+{ ... }:
 
 {
   imports = [
-    # ./alacritty.nix
+    ./alacritty.nix
     ./foot.nix
     ./ghostty.nix
     ./kitty.nix
     # ./st.nix
-    # ./wezterm.nix
+    ./wezterm.nix
   ];
 }

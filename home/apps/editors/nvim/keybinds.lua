@@ -114,7 +114,6 @@ vim.keymap.set('n', '<leader>lw', builtin.lsp_workspace_symbols, { desc = 'Works
 -- Diagnostics
 vim.keymap.set('n', '<leader>xx', builtin.diagnostics, { desc = 'Diagnostics' })
 
-
 -- TODOs
 vim.keymap.set("n", "]t", function()
 	require("todo-comments").jump_next()
@@ -127,4 +126,3 @@ end, { desc = "Previous comment" })
 vim.keymap.set("n", "]e", function()
 	require("todo-comments").jump_next({ keywords = { "TODO", "FIX" } })
 end, { desc = "Next task" })
-

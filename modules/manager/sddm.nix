@@ -2,46 +2,46 @@
 
 {
   services.displayManager.sddm = {
-    enable = true;
+    enable = false;
     wayland.enable = true;
-    
+
     theme = "catppuccin-mocha";
-    
+
     settings = {
       General = {
         DefaultSession = "hyprland";
-        
+
         # Display configuration
         DisplayServer = "wayland";
         GreeterEnvironment = "QT_WAYLAND_FORCE_DPI=physical,QT_WAYLAND_DISABLE_WINDOWDECORATION=1";
-        
+
         # Input configuration
         Numlock = "on";
-        
+
         # User configuration
         RememberLastUser = true;
         RememberLastSession = true;
-        
+
         # Timeout settings
         LoginTimeout = 60;
         SessionTimeout = 30;
       };
-      
+
       # Theme = {
       #   # Theme-specific settings
       #   Background = "/etc/sddm/wallpaper.jpg";
       #   ThemeDir = "/run/current-system/sw/share/sddm/themes";
       #   FacesDir = "/run/current-system/sw/share/sddm/faces";
-        
+
       #   # Cursor settings
       #   CursorTheme = "Bibata-Modern-Ice";
       #   CursorSize = 24;
-        
+
       #   # Font settings
       #   Font = "Inter";
       #   FontSize = 12;
       # };
-      
+
       Users = {
         # User filtering
         MinimumUid = 1000;
@@ -50,13 +50,13 @@
         HideShells = "/bin/false,/usr/bin/nologin,/sbin/nologin";
         RememberLastUser = true;
       };
-      
+
       Wayland = {
         # Wayland-specific settings
         SessionDir = "/run/current-system/sw/share/wayland-sessions";
         CompositorCommand = "kwin_wayland --no-lockscreen --no-global-shortcuts --locale1";
       };
-      
+
       X11 = {
         # X11 fallback settings
         SessionDir = "/run/current-system/sw/share/xsessions";
@@ -65,12 +65,12 @@
         DisplayStopCommand = "/run/current-system/sw/bin/sddm-helper --stop-server";
       };
     };
-    
+
     # Auto-login configuration (optional - comment out if not needed)
     # autoLogin = {
-      # enable = false;  # Set to true to enable auto-login
-      # user = "your-username";  # Replace with your username
-      # session = "hyprland";
+    # enable = false;  # Set to true to enable auto-login
+    # user = "your-username";  # Replace with your username
+    # session = "hyprland";
     # };
   };
 
@@ -84,16 +84,16 @@
       background = "${./../../home/assets/wallpapers/dante/wallpaper-01.jpg}";
       loginBackground = true;
     })
-    
+
     # Required packages
     libsForQt5.qt5.qtquickcontrols2
     libsForQt5.qt5.qtgraphicaleffects
     libsForQt5.qt5.qtsvg
     libsForQt5.qt5.qtmultimedia
-    
+
     # Cursor theme
     # bibata-cursors
-    
+
     # Fonts
     inter
   ];
@@ -116,13 +116,13 @@
 
   # Fonts for better rendering
   # fonts.packages = with pkgs; [
-    # inter
-    # noto-fonts
-    # noto-fonts-cjk
-    # noto-fonts-emoji
-    # liberation_ttf
-    # fira-code
-    # fira-code-symbols
+  # inter
+  # noto-fonts
+  # noto-fonts-cjk
+  # noto-fonts-emoji
+  # liberation_ttf
+  # fira-code
+  # fira-code-symbols
   # ];
 
   # PAM configuration for keyring integration
@@ -139,4 +139,3 @@
     QT_WAYLAND_FORCE_DPI = "physical";
   };
 }
-

@@ -1,4 +1,5 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
+
 {
   environment.systemPackages = with pkgs; [
     dua # Interactive disk usage analyzer

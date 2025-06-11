@@ -3,5 +3,5 @@
 {
   services.udev = {
     enable = true;
-    };
+  };
 }

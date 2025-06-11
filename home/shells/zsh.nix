@@ -2,8 +2,6 @@
 
 let
   common = import ./common { };
-  zshFunctions = common.functions.zshFunctions;
-  zshAliases = common.aliases.commonAliases;
 in
 {
   programs.zsh = {
@@ -45,7 +43,7 @@ in
       };
     };
 
-    shellAliases = zshAliases;
+    shellAliases = common.aliases;
 
     history = {
       extended = true;
@@ -84,7 +82,7 @@ in
       #_comp_options += (globdots)
 
       # Include custom functions
-      ${zshFunctions.yy}
+      ${common.functions.lf}
     '';
   };
 }

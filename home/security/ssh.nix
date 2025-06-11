@@ -1,12 +1,13 @@
-{ config, pkgs, ... }:
+{ ... }:
 
 {
-  # TODO: Do this with sops the proper way
-  # programs.ssh.matchBlocks = {
-  #   "github.com" = {
-  #     user = "git";
-  #     hostname = "github.com";
-  #     identityFile = "$HOME/.ssh/nixos";
-  #   };
-  # };
+  services.ssh-agent.enable = true;
+  
+  programs.ssh = {
+    enable = true;
+    addKeysToAgent = "yes";
+    extraConfig = ''
+      AddKeysToAgent yes
+    '';
+  };
 }

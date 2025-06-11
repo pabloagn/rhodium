@@ -2,7 +2,7 @@
 
 {
   programs.thefuck = {
-    enable = true;
+    enable = false;
     enableBashIntegration = true;
     enableZshIntegration = true;
     enableFishIntegration = true;
@@ -21,23 +21,24 @@
     # Clipboard utilities
     wl-clipboard # Wayland clipboard utilities
 
-    pandoc # Needed for Markdown -> HTML conversion (in our script)
+    pandoc # PDF manipulation
     poppler_utils # For PDF previews (pdftotext)
     fontforge # For font previews
 
     # Documentation
     # tldr # Simplified and community-driven man pages
     tlrc # Official tldr client written in Rust (includes tlrd)
+    wikiman # Offline search engine for Linux packages
 
-    # Pendings to categorize
+    # Misc
     bc # CLI calculator
     binutils # Tools for manipulating binaries
     just # Handy way to save and run project-specific commands
     mask # CLI task runner defined by a simple markdown file
     mprocs # TUI tool to run multiple commands in parallel and show the output of each command separately
-    presenterm # Terminal based slideshow tool
+    # presenterm # Terminal based slideshow tool
 
     # Navigation
-    wiki-tui # Simple and easy to use Wikipedia Text User Interface
+    # wiki-tui # Simple and easy to use Wikipedia Text User Interface
   ];
 }

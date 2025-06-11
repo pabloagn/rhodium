@@ -2,13 +2,13 @@
 
 {
   programs.regreet = {
-    enable = true;
+    enable = false;
     settings = {
       background = {
         path = "/etc/regreet/wallpaper-01.jpg";
         fit = "Cover";
       };
-      
+
       GTK = {
         application_prefer_dark_theme = true;
         # cursor_theme_name = "Bibata-Modern-Ice";
@@ -16,14 +16,20 @@
         # icon_theme_name = "Papirus-Dark";
         # theme_name = "Adwaita-dark";
       };
-      
+
       commands = {
-        reboot = [ "systemctl" "reboot" ];
-        poweroff = [ "systemctl" "poweroff" ];
+        reboot = [
+          "systemctl"
+          "reboot"
+        ];
+        poweroff = [
+          "systemctl"
+          "poweroff"
+        ];
       };
     };
   };
-  
+
   services.greetd = {
     enable = true;
     settings = {
@@ -33,12 +39,12 @@
       };
     };
   };
-  
+
   # Create Hyprland config specifically for ReGreet
   environment.etc."greetd/hyprland.conf".text = ''
     # ReGreet config - based on docs
     exec-once = ${pkgs.greetd.regreet}/bin/regreet; hyprctl dispatch exit
-    
+
     misc {
       disable_hyprland_logo = true
       disable_splash_rendering = true
@@ -55,24 +61,28 @@
     monitor = eDP-1,2880x1620@120,0x0,1.5
     monitor = HDMI-A-1,3840x2160@60,0x0,1.5
   '';
-  
+
   # Create systemd tmpfiles for ReGreet state and logs
   systemd.tmpfiles.rules = [
     "d /var/lib/regreet 0755 greeter greeter - -"
     "d /var/log/regreet 0755 greeter greeter - -"
   ];
-  
+
   # Required packages for ReGreet
   environment.systemPackages = with pkgs; [
     greetd.regreet
   ];
-  
+
   # Enable required services
   security.pam.services.greetd.enableGnomeKeyring = true;
-  
+
   # Write the wallpaper
-  environment.etc."regreet/wallpaper-01.jpg".source = ../../home/assets/wallpapers/dante/wallpaper-01.jpg;
+  environment.etc."regreet/wallpaper-01.jpg".source =
+    ../../home/assets/wallpapers/dante/wallpaper-01.jpg;
 
   services.displayManager.sessionPackages = [ pkgs.hyprland ];
-  environment.pathsToLink = [ "/share/xsessions" "/share/wayland-sessions" ];
+  environment.pathsToLink = [
+    "/share/xsessions"
+    "/share/wayland-sessions"
+  ];
 }

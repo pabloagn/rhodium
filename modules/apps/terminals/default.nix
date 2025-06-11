@@ -1,7 +1,7 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   environment.systemPackages = with pkgs; [
-    kitty     # Kitty is always installed (required by hyprland)
+    kitty # Kitty is always installed (required by hyprland)
   ];
 }

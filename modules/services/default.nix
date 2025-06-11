@@ -1,4 +1,5 @@
-{ config, ... }:
+{ ... }:
+
 {
   imports = [
     ./asus-backlight.nix

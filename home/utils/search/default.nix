@@ -25,5 +25,6 @@
   home.packages = with pkgs; [
     fselect # Find files with SQL-like queries
     plocate # A much faster locate
+    sd # Sed alternative
   ];
 }

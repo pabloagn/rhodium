@@ -1,7 +1,8 @@
-{ pkgs, user, ... }:
+{ ... }:
 
 {
   imports = [
     ./git.nix
+    ./gitui.nix
   ];
 }

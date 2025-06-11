@@ -123,15 +123,6 @@ ins_left {
 	padding = { left = 1, right = 1 },
 }
 
--- Blank space separator
-ins_left {
-	function()
-		return ' '
-	end,
-	color = { fg = colors.bg, bg = colors.bg },
-	padding = { left = 0, right = 1 },
-}
-
 -- File info
 ins_left {
 	'filename',
@@ -144,14 +135,14 @@ ins_left {
 	},
 	path = 1, -- Show relative path
 	shorting_target = 40,
-	padding = { right = 1 },
+	padding = { left = 1 },
 }
 
 ins_left {
 	'filesize',
 	cond = conditions.buffer_not_empty,
 	color = { fg = colors.comment },
-	padding = { right = 1 },
+	padding = { left = 1 },
 }
 
 -- Progress (Row:Col)
@@ -161,17 +152,18 @@ ins_left {
 	fmt = function(str)
 		return str:gsub(':', '∶')
 	end,
+	padding = { left = 1 },
 }
 
 -- Progress - Percentage and total lines
 ins_left {
+	color = { fg = colors.comment },
 	function()
 		local current_line = vim.fn.line('.')
 		local total_lines = vim.fn.line('$')
 		local percentage = math.floor((current_line / total_lines) * 100)
-		return percentage .. '%%' .. total_lines
+		return percentage .. '%% ' .. total_lines
 	end,
-	color = { fg = colors.comment },
 	padding = { left = 1 },
 }
 
@@ -180,10 +172,10 @@ ins_left {
 	'diagnostics',
 	sources = { 'nvim_diagnostic' },
 	symbols = {
-		error = '◆',
-		warn = '◇',
-		info = '◯',
-		hint = '☐'
+		error = '●',
+		warn = '●',
+		info = '●',
+		hint = '●'
 	},
 	diagnostics_color = {
 		error = { fg = colors.red },
@@ -199,36 +191,36 @@ ins_left {
 ins_left {
 	function()
 		local buf_count = #vim.fn.getbufinfo({ buflisted = 1 })
-		return '◈ ' .. buf_count
+		return '■' .. buf_count
 	end,
 	color = { fg = colors.comment },
 	padding = { left = 1 },
 }
 
--- Session indicator
-ins_left {
-	function()
-		if vim.v.this_session ~= '' then
-			return '◉ SES'
-		end
-		return ''
-	end,
-	color = { fg = colors.purple },
-	padding = { left = 1 },
-}
-
--- Macro recording indicator
-ins_left {
-	function()
-		local reg = vim.fn.reg_recording()
-		if reg ~= '' then
-			return '◯ REC[' .. reg:upper() .. ']'
-		end
-		return ''
-	end,
-	color = { fg = colors.red },
-	padding = { left = 1 },
-}
+-- -- Session indicator
+-- ins_left {
+-- 	function()
+-- 		if vim.v.this_session ~= '' then
+-- 			return '◉ SES'
+-- 		end
+-- 		return ''
+-- 	end,
+-- 	color = { fg = colors.purple },
+-- 	padding = { left = 1 },
+-- }
+--
+-- -- Macro recording indicator
+-- ins_left {
+-- 	function()
+-- 		local reg = vim.fn.reg_recording()
+-- 		if reg ~= '' then
+-- 			return '◯ REC[' .. reg:upper() .. ']'
+-- 		end
+-- 		return ''
+-- 	end,
+-- 	color = { fg = colors.red },
+-- 	padding = { left = 1 },
+-- }
 
 -- Center spacing
 ins_left {
@@ -273,7 +265,7 @@ ins_left {
 -- Right side separator
 ins_right {
 	function()
-		return '▐'
+		return '│'
 	end,
 	color = { fg = colors.bg_highlight },
 	padding = { left = 1, right = 1 },
@@ -282,7 +274,7 @@ ins_right {
 -- Git branch with accent when in repo
 ins_right {
 	'branch',
-	icon = '',
+	icon = '',
 	color = { fg = colors.green },
 	cond = conditions.check_git_workspace,
 	fmt = function(str)
@@ -313,7 +305,7 @@ ins_right {
 -- Technical details separator
 ins_right {
 	function()
-		return '▐'
+		return '│'
 	end,
 	color = { fg = colors.bg_highlight },
 	padding = { left = 1, right = 1 },
@@ -342,7 +334,7 @@ ins_right {
 	end,
 	icons_enabled = false,
 	color = { fg = colors.comment },
-	padding = { left = 1 },
+	-- padding = { left = 1 },
 }
 
 -- Filetype with accent for active files

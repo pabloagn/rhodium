@@ -1,4 +1,5 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
+
 {
   environment.systemPackages = with pkgs; [
     curl # Command line HTTP client

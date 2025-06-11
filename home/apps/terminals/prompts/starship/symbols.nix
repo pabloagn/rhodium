@@ -1,5 +1,6 @@
 { config, rhodiumLib, ... }:
 
+# TODO: Remove all the fallback emoji crap
 let
   icons = config.theme.icons.iconsNerdFont;
   formatIcon = rhodiumLib.formatters.iconFormatter.formatIcon;

@@ -22,7 +22,6 @@ in
       description = "Delete generations older than this";
       example = "30d";
     };
-
   };
 
   config = mkIf cfg.enable {

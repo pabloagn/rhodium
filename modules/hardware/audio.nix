@@ -5,7 +5,6 @@
     wireplumber
   ];
 
-  # Pulseaudio
   services.pulseaudio.enable = false;
 
   # rtkit
@@ -15,9 +14,12 @@
   # Pipewire
   services.pipewire = {
     enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
+    alsa = {
+      enable = true;
+      support32Bit = true;
+    };
+
+    pulse.enable = true; # Enable pulse from pipewire
     jack.enable = true;
   };
 }

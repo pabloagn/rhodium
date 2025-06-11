@@ -2,10 +2,6 @@
 
 {
   environment.systemPackages = with pkgs; [
-    # Cursor
-    # hyprcursor
-
-    # Color picker
     hyprpicker
 
     # TODO: Set up this
@@ -17,14 +13,11 @@
     wlr-randr # Xrandr clone for wlroots compositors
     libinput
     libinput-gestures
-
-    # Authentication agent(sudo GUI prompts)
-    # polkit_gnome
+    # polkit_gnome Authentication agent (sudo GUI prompts)
   ];
 
   environment.sessionVariables = {
-    # Hint electron apps to use wayland
-    NIXOS_OZONE_WL = "1";
+    NIXOS_OZONE_WL = "1"; # Hint electron apps to use wayland
   };
 
   programs.hyprland = {

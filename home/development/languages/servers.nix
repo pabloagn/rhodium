@@ -1,4 +1,5 @@
 { pkgs, ... }:
+
 {
   home.packages = with pkgs; [
 
@@ -114,5 +115,11 @@
 
     # Zig
     zls # Zig Language Server
+
+    # Just
+    just-lsp
+
+    # Fish Shell
+    fish-lsp
   ];
 }

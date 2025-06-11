@@ -1,6 +1,11 @@
 -- Get capabilities from nvim-cmp
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
+-- Just
+require 'lspconfig'.just.setup {
+	capabilities = capabilities,
+}
+
 -- Lua
 require 'lspconfig'.lua_ls.setup {
 	capabilities = capabilities,
@@ -18,6 +23,14 @@ require 'lspconfig'.lua_ls.setup {
 			},
 		}
 	}
+}
+
+-- Fish Shell
+require 'lspconfig'.fish_lsp.setup {
+	capabilities = capabilities,
+	cmd = { 'fish-lsp', 'start' },
+	cmd_env = { fish_lsp_show_client_popups = false },
+	filetypes = { "fish" },
 }
 
 -- Nushell
@@ -70,6 +83,7 @@ require 'lspconfig'.nil_ls.setup {
 }
 
 -- Nix (Nixd)
+-- TODO: Improve this massively
 require 'lspconfig'.nixd.setup {
 	capabilities = capabilities,
 	settings = {
@@ -194,4 +208,132 @@ require 'lspconfig'.sqls.setup {
 -- Zig
 require 'lspconfig'.zls.setup {
 	capabilities = capabilities,
+}
+
+-- TODO: Add new servers
+--
+-- -- Docker
+-- require 'lspconfig'.dockerls.setup {
+--   capabilities = capabilities,
+-- }
+-- -- Nix package: dockerfile-language-server-nodejs
+--
+-- -- JSON
+-- require 'lspconfig'.jsonls.setup {
+--   capabilities = capabilities,
+-- }
+-- -- Nix package: vscode-langservers-extracted
+--
+-- -- GraphQL
+-- require 'lspconfig'.graphql.setup {
+--   capabilities = capabilities,
+-- }
+-- -- Nix package: graphql-language-service-cli
+--
+-- -- Vue (Volar for Vue 3)
+-- require 'lspconfig'.volar.setup {
+--   capabilities = capabilities,
+-- }
+-- -- Nix package: vue-language-server
+--
+-- -- Svelte
+-- require 'lspconfig'.svelte.setup {
+--   capabilities = capabilities,
+-- }
+-- -- Nix package: svelte-language-server
+--
+-- -- Solidity
+-- require 'lspconfig'.solidity.setup {
+--   capabilities = capabilities,
+-- }
+-- -- Nix package: solidity-language-server
+--
+-- -- XML
+-- require 'lspconfig'.lemminx.setup {
+--   capabilities = capabilities,
+-- }
+-- -- Nix package: lemminx
+--
+-- -- Angular
+-- require 'lspconfig'.angularls.setup {
+--   capabilities = capabilities,
+-- }
+-- -- Nix package: angular-language-server
+--
+-- -- R
+-- require 'lspconfig'.r_language_server.setup {
+--   capabilities = capabilities,
+-- }
+-- -- Nix package: R (ensure it's in your env) + r-languageserver
+--
+-- -- Julia
+-- require 'lspconfig'.julials.setup {
+--   capabilities = capabilities,
+-- }
+-- -- Nix package: julia + juliaPackages.LanguageServer
+--
+-- -- Dart / Flutter
+-- require 'lspconfig'.dartls.setup {
+--   capabilities = capabilities,
+-- }
+-- -- Nix package: dart (comes with dart analysis server)
+--
+-- -- ReasonML / ReScript
+-- require 'lspconfig'.rescriptls.setup {
+--   capabilities = capabilities,
+-- }
+-- -- Nix package: rescript-language-server
+--
+-- -- F#
+-- require 'lspconfig'.fsautocomplete.setup {
+--   capabilities = capabilities,
+-- }
+-- -- Nix package: fsautocomplete
+--
+-- -- Fortran
+-- require 'lspconfig'.fortls.setup {
+--   capabilities = capabilities,
+-- }
+-- -- Nix package: fortls
+--
+-- -- PowerShell
+-- require 'lspconfig'.powershell_es.setup {
+--   capabilities = capabilities,
+--   bundle_path = vim.fn.stdpath("data") .. "/mason/packages/powershell-editor-services",
+-- }
+-- -- Nix package: powershellEditorServices (not in upstream nixpkgs, needs manual install or use Mason)
+--
+-- -- ProtoBuf
+-- require 'lspconfig'.bufls.setup {
+--   capabilities = capabilities,
+-- }
+-- -- Nix package: bufls
+--
+-- -- Haxe
+-- require 'lspconfig'.haxe_language_server.setup {
+--   capabilities = capabilities,
+-- }
+-- -- Nix package: haxe + haxe-language-server
+--
+-- -- Terraform
+-- require 'lspconfig'.terraformls.setup {
+--   capabilities = capabilities,
+-- }
+-- -- Nix package: terraform-ls
+--
+-- -- Puppet
+-- require 'lspconfig'.puppet.setup {
+--   capabilities = capabilities,
+-- }
+-- -- Nix package: puppet-editor-services
+
+-- Odin
+require 'lspconfig'.ols.setup {
+	capabilities = capabilities,
+	init_options = {
+		checker_args = "-strict-style",
+		collections = {
+			{ name = "shared", path = vim.fn.expand('$HOME/odin-lib') }
+		},
+	},
 }

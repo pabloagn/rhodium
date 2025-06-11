@@ -1,20 +1,21 @@
 { pkgs, ... }:
 
 {
-  environment.shells = with pkgs; [ zsh bash fish ];
+  environment.shells = with pkgs; [
+    zsh
+    bash
+    fish
+    nushell
+  ];
 
-  programs.zsh = {
-    enable = true;
+  programs = {
+    zsh.enable = true;
+    bash.completion.enable = true; # Required for home setting
+    fish.enable = true;
+    nushell.enable = true;
   };
 
-  programs.bash = {
-    completion.enable = true; # Required for home setting
-  };
-
-  programs.fish = {
-    enable = true;
-  };
-
+  # TODO: Fix this
   documentation.man.generateCaches = false; # Required since fish creates a massive database (eternal build)
 
   # Required for fish

@@ -1,4 +1,5 @@
 { config, rhodiumLib, ... }:
+
 let
   unicodeIcons = config.theme.icons.iconsUnicode;
   getIcon = rhodiumLib.formatters.iconFormatter.getIcon;

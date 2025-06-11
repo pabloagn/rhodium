@@ -1,4 +1,5 @@
 { pkgs, ... }:
+
 {
   home.packages = with pkgs; [
     gcc
@@ -7,6 +8,7 @@
     nodejs
     python3
     rustup
+    just
     texlive.combined.scheme-full
   ];
 }

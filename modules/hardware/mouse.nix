@@ -2,7 +2,6 @@
 
 {
   environment.systemPackages = with pkgs; [
-    # Connecting Logitech devices to receivers
-    solaar
+    solaar # Connecting Logitech devices to receivers
   ];
 }
