@@ -6,8 +6,9 @@ in
   home.pointerCursor = {
     enable = true;
     # package = pkgs.rose-pine-hyprcursor;
-    package = pkgs.phinger-cursors;
     # name = "rose-pine-hyprcursor";
+
+    package = pkgs.phinger-cursors;
     name = "phinger-cursors-dark";
     size = cursorSize;
 

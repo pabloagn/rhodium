@@ -5,7 +5,7 @@
     ./assets.nix
     ./desktop.nix
     ./fonts.nix
-    ./preferences.nix
+    ./env.nix
     ./scripts.nix
   ];
 }

@@ -4,14 +4,16 @@ let
   fontDefinitions = import ../assets/fonts/fonts.nix { inherit pkgs; };
   isFontEnabled = fontDef: fontDef ? enable && fontDef.enable == true;
 
-  getFontPackages = fontDef:
+  getFontPackages =
+    fontDef:
     let
       mainPackage = lib.optional (fontDef.package != null) fontDef.package;
-      extraPackages = fontDef.extraPackages or [];
+      extraPackages = fontDef.extraPackages or [ ];
     in
     mainPackage ++ extraPackages;
 
-  collectEnabledFonts = categoryFonts:
+  collectEnabledFonts =
+    categoryFonts:
     lib.pipe categoryFonts [
       (lib.filterAttrs (_: isFontEnabled))
       (lib.mapAttrsToList (_: getFontPackages))
@@ -32,11 +34,11 @@ in
   home.file.".local/share/fonts-installed.txt".text =
     let
       enabledFontsList = lib.pipe fontDefinitions [
-        (lib.mapAttrsToList (categoryName: categoryFonts:
+        (lib.mapAttrsToList (
+          categoryName: categoryFonts:
           lib.pipe categoryFonts [
             (lib.filterAttrs (_: isFontEnabled))
-            (lib.mapAttrsToList (fontName: fontDef:
-              "${categoryName}/${fontName}: ${fontDef.name}"))
+            (lib.mapAttrsToList (fontName: fontDef: "${categoryName}/${fontName}: ${fontDef.name}"))
           ]
         ))
         lib.flatten

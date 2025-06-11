@@ -85,6 +85,7 @@ in
     PYTHON_HISTORY = "${config.xdg.cacheHome}/python/.python_history";
     LESSHISTFILE = "/dev/null";
     KEYTIMEOUT = "1";
+    MOZ_ENABLE_WAYLAND = "1";
   };
 
   home.sessionPath = [
@@ -106,6 +107,6 @@ in
       music = null;
       videos = null;
       pictures = null;
-      };
+    };
   };
 }
