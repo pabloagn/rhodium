@@ -4,7 +4,7 @@
   programs.fzf = {
     enable = true;
     enableBashIntegration = true;
-    enableFishIntegration = true;
+    # enableFishIntegration = true;
     enableZshIntegration = true;
     
     # Default command for file finding
