@@ -3,15 +3,18 @@
 {
   programs.fish = {
     functions = {
-      yy = ''
-        set tmp (mktemp -t "yazi-cwd.XXXXXX")
-        yazi $argv --cwd-file="$tmp"
-        if set cwd (cat -- "$tmp"); and test -n "$cwd"; and test "$cwd" != "$PWD"
-          cd -- "$cwd"
-        end
-        rm -f -- "$tmp"
-        complete -c yy -f
-      '';
+      yy = {
+        description = "Yazi wrapper";
+        body = ''
+          set tmp (mktemp -t "yazi-cwd.XXXXXX")
+          yazi $argv --cwd-file="$tmp"
+          if read -z cwd < "$tmp"; and [ -n "$cwd" ]; and [ "$cwd" != "$PWD" ]
+            builtin cd -- "$cwd"
+          end
+          rm -f -- "$tmp"
+          end
+        '';
+      };
 
       jtf = {
         description = "Jump To File: Fuzzy file finder with preview";

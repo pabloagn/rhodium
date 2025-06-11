@@ -44,7 +44,7 @@ require('bufferline').setup {
 		persist_buffer_sort = true,
 
 		-- Separator styling
-		separator_style = "slant", -- "slant" | "slope" | "thick" | "thin" | { 'any', 'any' }
+		separator_style = "thin", -- "slant" | "slope" | "thick" | "thin" | { 'any', 'any' }
 		enforce_regular_tabs = false,
 		always_show_bufferline = true,
 

@@ -9,12 +9,20 @@
 
       # Keybinds
       # Function Keybinds
-      bind \ct 'jtf; repaint'           # Ctrl+T for Jump To File
-      bind \co 'jtd; repaint'           # Ctrl+O for Jump To Dir  
-      bind \cp 'jtp; repaint'           # Ctrl+P for Jump To Project
-      bind \cy 'yy; repaint'            # Ctrl+Y for Yazi file manager
 
-      # Custom keybindings
+      # Normal mode
+      bind \ct 'jtf; commandline -f repaint'           # Ctrl+T for Jump To File
+      bind \co 'jtd; commandline -f repaint'           # Ctrl+O for Jump To Dir  
+      bind \cp 'jtp; commandline -f repaint'           # Ctrl+P for Jump To Project
+      bind \cy 'yy; commandline -f repaint'            # Ctrl+Y for Yazi file manager
+
+      # Insert Mode
+      bind -M insert \ct 'jtf; commandline -f repaint'   # Ctrl+T for Jump To File (Insert Mode)
+      bind -M insert \co 'jtd; commandline -f repaint'   # Ctrl+O for Jump To Dir  (Insert Mode)
+      bind -M insert \cp 'jtp; commandline -f repaint'   # Ctrl+P for Jump To Project (Insert Mode)
+      bind -M insert \cy 'yy; commandline -f repaint'    # Ctrl+Y for Yazi file manager (Insert Mode)
+
+      # Atuin
       bind \cr '_atuin_search'  # Ctrl+R for atuin
       bind -M insert \cr '_atuin_search'
 
@@ -24,18 +32,18 @@
 
       # # Theme
       # set -g fish_color_autosuggestion 555 brblack
-      # set -g fish_color_command green
-      # set -g fish_color_error red
-      # set -g fish_color_param cyan
-      # set -g fish_color_quote yellow
-      # set -g fish_color_comment brblack
-      # set -g fish_color_match --bold --background=brblue
-      # set -g fish_color_selection white --bold --background=brblack
-      # set -g fish_color_search_match bryellow --background=brblack
-      # set -g fish_color_operator bryellow
-      # set -g fish_color_escape bryellow --bold
-      # set -g fish_color_cwd green
-      # set -g fish_color_cwd_root red
+      set -g fish_color_command green
+      set -g fish_color_error red
+      set -g fish_color_param cyan
+      set -g fish_color_quote yellow
+      set -g fish_color_comment brblack
+      set -g fish_color_match --bold --background=brblue
+      set -g fish_color_selection white --bold --background=brblack
+      set -g fish_color_search_match bryellow --background=brblack
+      set -g fish_color_operator bryellow
+      set -g fish_color_escape bryellow --bold
+      set -g fish_color_cwd green
+      set -g fish_color_cwd_root red
 
       # Prompt
       function fish_prompt
@@ -66,10 +74,10 @@
       # Plugin setup
       # colored-man
       # TODO: Style this
-      # set -g man_blink -o red
-      # set -g man_bold -o green
-      # set -g man_standout -b black 93a1a1
-      # set -g man_underline -u 93a1a1
+      set -g man_blink -o red
+      set -g man_bold -o green
+      set -g man_standout -b black 93a1a1
+      set -g man_underline -u 93a1a1
 
     '';
   };
