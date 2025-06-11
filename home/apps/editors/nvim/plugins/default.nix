@@ -74,6 +74,7 @@ in
       telescope-fzf-native-nvim # Finder + fz
       telescope-live-grep-args-nvim
       telescope-project-nvim # TODO: Add this config
+      telescope-frecency-nvim
 
       # Improvements
       {
@@ -269,10 +270,10 @@ in
       #   config = sourceLuaFile ./;
       # }
 
-      {
-        plugin = multicursors-nvim;
-        config = sourceLuaFile ./;
-      }
+      # {
+      #   plugin = multicursors-nvim;
+      #   config = sourceLuaFile ./multicursors-nvim.lua;
+      # }
 
       {
         plugin = (

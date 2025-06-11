@@ -1,6 +1,6 @@
-require('multicursor-nvim').setup()
+require('multicursors').setup()
 
-local mc = require("multicursor-nvim")
+local mc = require("multicursors")
 local set = vim.keymap.set
 
 -- Add or skip cursor above/below the main cursor
@@ -24,10 +24,8 @@ mc.addKeymapLayer(function(layerSet)
     -- Navigate between cursors
     layerSet({"n", "x"}, "<left>", mc.prevCursor)
     layerSet({"n", "x"}, "<right>", mc.nextCursor)
-    
     -- Delete the main cursor
     layerSet({"n", "x"}, "<leader>x", mc.deleteCursor)
-    
     -- Clear all cursors with escape
     layerSet("n", "<esc>", function()
         if not mc.cursorsEnabled() then
