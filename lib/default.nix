@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }:
+{ lib, ... }:
 
 {
   formatters = {
@@ -6,5 +6,8 @@
   };
   generators = {
     desktopGenerators = import ./generators/desktopGenerators.nix { inherit lib; };
+  };
+  parsers = {
+    luaParsers = import ./parsers/luaParsers.nix { inherit lib; };
   };
 }

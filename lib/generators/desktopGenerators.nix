@@ -36,24 +36,22 @@ let
   };
 
   # Capitalize first letter for descriptions
-  capitalize = str:
-    lib.toUpper (lib.substring 0 1 str) + lib.substring 1 (-1) str;
+  capitalize = str: lib.toUpper (lib.substring 0 1 str) + lib.substring 1 (-1) str;
 
   # Flatten nested attribute set into flat structure with combined keys
-  flattenNestedAttrs = attrs:
-    lib.concatMapAttrs
-      (topKey: topValue:
-        lib.mapAttrs'
-          (subKey: subValue: {
-            name = "${entryPrefix}-${topKey}-${subKey}";
-            value = subValue;
-          })
-          topValue
-      )
-      attrs;
+  flattenNestedAttrs =
+    attrs:
+    lib.concatMapAttrs (
+      topKey: topValue:
+      lib.mapAttrs' (subKey: subValue: {
+        name = "${entryPrefix}-${topKey}-${subKey}";
+        value = subValue;
+      }) topValue
+    ) attrs;
 
   # Bookmark generator: Browser + profile + URL + special args
-  mkBookmark = userPreferences: theme: name: bookmark:
+  mkBookmark =
+    userPreferences: theme: name: bookmark:
     let
       defaultBrowser = userPreferences.apps.browser;
       browser = bookmark.browser or defaultBrowser;
@@ -76,7 +74,8 @@ let
     };
 
   # Profile generator: Browser + profile only + special args
-  mkProfile = userPreferences: theme: name: profile:
+  mkProfile =
+    userPreferences: theme: name: profile:
     let
       defaultBrowser = userPreferences.apps.browser;
       browser = profile.browser or defaultBrowser;
@@ -109,9 +108,15 @@ let
 
 in
 {
-  inherit mkBookmark mkProfile mkApp flattenNestedAttrs;
+  inherit
+    mkBookmark
+    mkProfile
+    mkApp
+    flattenNestedAttrs
+    ;
 
-  generateAllEntries = userPreferences: userExtras: theme:
+  generateAllEntries =
+    userPreferences: userExtras: theme:
     let
       # Partially apply userPreferences to each generator function
       bookmarkGen = mkBookmark userPreferences theme;

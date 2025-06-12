@@ -1,5 +1,5 @@
--- Key mappings
 local builtin = require('telescope.builtin')
+local functions = require('functions')
 
 -- Leaders
 vim.g.mapleader = ' '      -- Leader
@@ -11,11 +11,31 @@ vim.keymap.set('n', '<Leader>n', ':set nu! rnu!<CR>', { noremap = true, silent =
 vim.keymap.set('n', '<Leader>y', ':%y+<CR>', { noremap = true, silent = true, desc = 'Copy entire buffer to clip' })
 vim.keymap.set('n', '<Leader>d', ':%d+<CR>', { noremap = true, silent = true, desc = 'Delete entire buffer' })
 
--- Comment.nvim (Commenting)
-vim.keymap.set('v', '<Leader>c', ":lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>",
-	{ noremap = true, silent = true, desc = 'Toggle comment for visual' })
-vim.keymap.set('n', '<Leader>c', ":lua require('Comment.api').toggle.linewise.current()<CR>",
-	{ noremap = true, silent = true, desc = 'Toggle comment for current' })
+-- Comment
+vim.keymap.set('v', '<Leader>cc', ":lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>",
+	{ noremap = true, silent = true, desc = 'Comment Comment: Toggle comment for visual' })
+vim.keymap.set('n', '<Leader>cc', ":lua require('Comment.api').toggle.linewise.current()<CR>",
+	{ noremap = true, silent = true, desc = 'Comment Comment: Toggle comment for current' })
+vim.keymap.set('n', '<Leader>ct', 'o-- TODO: <Esc>A',
+	{ noremap = true, silent = true, desc = 'Comment TODO: Insert TODO comment' })
+vim.keymap.set('n', '<Leader>cb', 'o-- BUG: <Esc>A',
+	{ noremap = true, silent = true, desc = 'Comment BUG: Insert BUG comment' })
+vim.keymap.set('n', '<Leader>cn', 'o-- NOTE: <Esc>A',
+	{ noremap = true, silent = true, desc = 'Comment NOTE: Insert NOTE comment' })
+vim.keymap.set('n', '<Leader>cd', 'o-- DONE: <Esc>A',
+	{ noremap = true, silent = true, desc = 'Comment DONE: Insert DONE comment' })
+vim.keymap.set('n', '<Leader>ch', 'o-- HACK: <Esc>A',
+	{ noremap = true, silent = true, desc = 'Comment HACK: Insert HACK comment' })
+vim.keymap.set('n', '<Leader>cw', 'o-- WARN: <Esc>A',
+	{ noremap = true, silent = true, desc = 'Comment WARN: Insert WARN comment' })
+vim.keymap.set('n', '<Leader>cp', 'o-- PERF: <Esc>A',
+	{ noremap = true, silent = true, desc = 'Comment PERF: Insert PERF comment' })
+vim.keymap.set('n', '<Leader>ce', 'o-- TEST: <Esc>A',
+	{ noremap = true, silent = true, desc = 'Comment TEST: Insert TEST comment' })
+
+-- Edit
+vim.keymap.set('n', '<Leader>er', function() functions.replace_buffer_with_clipboard() end,
+	{ noremap = true, silent = true, desc = 'Edit Replace: Replace buffer with clipboard content' })
 
 -- VimTeX (LaTeX Editing)
 vim.keymap.set('n', '<Leader>ll', '<Plug>(vimtex-compile)',
@@ -35,57 +55,28 @@ vim.keymap.set('n', '<Leader>z', ':set foldmethod=expr foldexpr=nvim_treesitter#
 -- vim.keymap.set('i', '<Tab>', "lua equire('luasnip').expand_or_jump()<CR>", { noremap = true, silent = true, expr = true, desc = 'Expand or jump to next snippet' })
 -- vim.keymap.set('i', '<S-Tab>', "lua require('luasnip').jump(-1)<CR>", { noremap = true, silent = true, expr = true, desc = 'Jump to previous snippet' })
 
--- Smart indent function that works in both modes
-local function smart_indent()
-	local mode = vim.fn.mode()
-	if mode == 'v' or mode == 'V' or mode == '\22' then
-		-- Visual mode: indent and keep selection
-		vim.cmd('normal! >gv')
-	else
-		-- Normal mode: indent current line
-		vim.cmd('normal! >>')
-	end
-end
-
--- Smart outdent function that works in both modes
-local function smart_outdent()
-	local mode = vim.fn.mode()
-	if mode == 'v' or mode == 'V' or mode == '\22' then
-		-- Visual mode: outdent and keep selection
-		vim.cmd('normal! <gv')
-	else
-		-- Normal mode: outdent current line
-		vim.cmd('normal! <<')
-	end
-end
-
--- Key mappings
-vim.keymap.set({ 'n', 'v' }, '<Leader>ii', smart_indent, {
+vim.keymap.set({ 'n', 'v' }, '<Leader>ii', function() functions.smart_indent() end, {
 	noremap = true,
 	silent = true,
-	desc = 'Smart indent line/selection'
+	desc = 'Indent Indent: Smart indent line/selection'
 })
 
-vim.keymap.set({ 'n', 'v' }, '<Leader>io', smart_outdent, {
+vim.keymap.set({ 'n', 'v' }, '<Leader>io', function() functions.smart_outdent() end, {
 	noremap = true,
 	silent = true,
-	desc = 'Smart outdent line/selection'
+	desc = 'Indent Outdent: Smart outdent line/selection'
 })
 
--- Indent Lines (Add lines to indents)
-vim.keymap.set('n', '<Leader>il', '<cmd>IBLToggle<cr>', { noremap = true, silent = true, desc = 'Toggle indent lines' })
-
--- Core file operations
-vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Find files' })
+-- Find
+vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Find Files: Find files' })
 vim.keymap.set('n', '<leader>fg', function()
 	require('telescope').extensions.live_grep_args.live_grep_args()
 end, { desc = 'Live grep with args' })
-vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Find buffers' })
-vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Find help' })
+vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Find Buffer: Find buffers' })
+vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Find Help: Find help' })
 vim.keymap.set('n', '<leader>fr', function()
 	require('telescope').extensions.frecency.frecency()
 end, { desc = 'Recent files (frecency)' })
-
 
 -- Advanced search
 vim.keymap.set('n', '<leader>fw', builtin.grep_string, { desc = 'Find word under cursor' })
@@ -95,20 +86,11 @@ vim.keymap.set('n', '<leader>fs', builtin.search_history, { desc = 'Search histo
 -- Advanced pickers
 vim.keymap.set('n', '<leader>fk', builtin.keymaps, { desc = 'Find keymaps' })
 vim.keymap.set('n', '<leader>fo', builtin.vim_options, { desc = 'Vim options' })
-vim.keymap.set('n', '<leader>ft', function()
-    _G.telescope_todo_picker(require('telescope.themes').get_dropdown({
-        winblend = 10,
-        border = true,
-        previewer = true,
-        shorten_path = false,
-        layout_config = {
-            width = 0.9,
-            height = 0.8,
-        }
-    }))
-end, { desc = 'Telescope TODO Comments' })
+vim.keymap.set('n', '<leader>ft', function() functions.todo_picker() end,
+	{ noremap = true, silent = true, desc = 'Find TODOs: TODO picker with priority sorting' })
 
 -- Buffers
+-- -------------------------------------------------
 -- Navigate buffers
 vim.keymap.set('n', '<S-l>', ':BufferLineCycleNext<CR>', { desc = 'Next buffer', silent = true })
 vim.keymap.set('n', '<S-h>', ':BufferLineCyclePrev<CR>', { desc = 'Previous buffer', silent = true })
@@ -174,6 +156,7 @@ vim.keymap.set('n', '<leader>lw', builtin.lsp_workspace_symbols, { desc = 'Works
 vim.keymap.set('n', '<leader>xx', builtin.diagnostics, { desc = 'Diagnostics' })
 
 -- Trouble
+-- ---------------------------------------------------------------
 -- Primary diagnostic toggles
 vim.keymap.set('n', '<leader>td', function() require("trouble").toggle("diagnostics") end,
 	{ desc = "Toggle Diagnostics (Trouble)" })
