@@ -32,7 +32,7 @@
 
   # View
   cat = "bat";
-  lf = "yy";
+  lf = "y";
 
   # Search
   locate = "plocate";

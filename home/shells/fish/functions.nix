@@ -3,7 +3,7 @@
 {
   programs.fish = {
     functions = {
-      yy = {
+      y = {
         description = "Yazi wrapper";
         body = ''
           set tmp (mktemp -t "yazi-cwd.XXXXXX")
