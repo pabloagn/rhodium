@@ -170,6 +170,8 @@ function M.todo_picker(opts)
 	require('telescope').extensions.todo_comments.todo(enhanced_opts)
 end
 
-_G.functions = M -- Make functions globally available
-return M -- Return functions locally as well
+-- Make it available both ways
+_G.functions = M
+package.loaded['functions'] = M
 
+return M

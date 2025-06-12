@@ -21,9 +21,13 @@ local conditions = {
 -- Theme
 local config = {
 	options = {
-		disabled_filetypes = {
-			statusline = { "dashboard" },
-		},
+
+		disabled_filetypes = {'dashboard'},
+
+		-- disabled_filetypes = {
+		-- 	statusline = { "dashboard" },
+		-- },
+
 		component_separators = '',
 		section_separators = '',
 		globalstatus = true,

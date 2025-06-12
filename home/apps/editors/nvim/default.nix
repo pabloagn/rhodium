@@ -1,23 +1,25 @@
 { ... }:
 
-let
-  luaFiles = builtins.concatStringsSep "\n" [
-    # Define a lua package
-    "package.path = package.path .. ';${./.}/?.lua'"
-
-    # Read files
-    (builtins.readFile ./functions.lua)
-    (builtins.readFile ./filters.lua)
-    (builtins.readFile ./main.lua)
-    (builtins.readFile ./keybinds.lua)
-  ];
-in
 {
   imports = [
     ./modules
   ];
 
   programs.neovim = {
-    extraLuaConfig = luaFiles;
+    enable = true;
+  };
+
+  xdg.configFile = {
+    "nvim/lua/functions.lua".source = ./functions.lua;
+    "nvim/lua/main.lua".source = ./main.lua;
+    "nvim/lua/filters.lua".source = ./filters.lua;
+    "nvim/lua/keybinds.lua".source = ./keybinds.lua;
+
+    "nvim/init.lua".text = ''
+      require('filters')
+      require('functions')
+      require('main')
+      require('keybinds')
+    '';
   };
 }

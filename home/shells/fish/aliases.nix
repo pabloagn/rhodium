@@ -1,10 +1,10 @@
 { ... }:
 
 let
-  common = import ../common { };
+  aliases = import ../common/aliases.nix { };
 in
 {
   programs.fish = {
-    shellAliases = common.aliases;
+    shellAliases = aliases;
   };
 }

@@ -1,7 +1,8 @@
 { config, ... }:
 
 let
-  common = import ./common { };
+  aliases = import ./common/aliases.nix { };
+  functions = import ./common/functions.nix { };
 in
 {
   programs.zsh = {
@@ -43,7 +44,7 @@ in
       };
     };
 
-    shellAliases = common.aliases;
+    shellAliases = aliases;
 
     history = {
       extended = true;
@@ -82,7 +83,7 @@ in
       #_comp_options += (globdots)
 
       # Include custom functions
-      ${common.functions.lf}
+      ${functions.yy}
     '';
   };
 }

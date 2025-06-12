@@ -3,7 +3,7 @@
 {
   programs.nushell.extraConfig = ''
     # Yazi wrapper for changing directory on exit
-    def --env lf [...args] {
+    def --env yy [...args] {
       let tmp = (mktemp -t "yazi-cwd.XXXXXX")
       
       yazi ...$args --cwd-file=$tmp

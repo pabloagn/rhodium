@@ -16,7 +16,7 @@
       # Utilities
       {
         plugin = plenary-nvim;
-        config = sourceLuaFile "plenary-nvim.lua";
+        # config = sourceLuaFile "plenary-nvim.lua";
       }
     ];
   };

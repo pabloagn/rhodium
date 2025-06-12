@@ -289,10 +289,10 @@ require 'lspconfig'.r_language_server.setup {
 	capabilities = capabilities,
 }
 
--- Dart / Flutter
-require 'lspconfig'.dartls.setup {
-	capabilities = capabilities,
-}
+-- -- Dart / Flutter
+-- require 'lspconfig'.dartls.setup {
+-- 	capabilities = capabilities,
+-- }
 
 -- F#
 require 'lspconfig'.fsautocomplete.setup {
@@ -350,7 +350,7 @@ require 'lspconfig'.prismals.setup {
 	capabilities = capabilities,
 }
 
--- Rome (JS/TS formatter/linter)
-require 'lspconfig'.rome.setup {
-	capabilities = capabilities,
-}
+-- -- Rome (JS/TS formatter/linter)
+-- require 'lspconfig'.rome.setup {
+-- 	capabilities = capabilities,
+-- }

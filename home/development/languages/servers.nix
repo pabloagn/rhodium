@@ -140,9 +140,9 @@
     # CMake
     cmake-language-server
 
-    # Dart/Flutter
-    dart
-    flutter
+    # # Dart/Flutter
+    # dart
+    # flutter
 
     # Deno (alternative TypeScript runtime)
     deno
@@ -163,7 +163,7 @@
     crystalline
 
     # Protocol Buffers
-    buf-language-server
+    buf
 
     # Dhall
     dhall-lsp-server
@@ -173,9 +173,6 @@
 
     # GLSL
     glslls
-
-    # Rome (JS/TS tool)
-    rome
 
     # D language
     serve-d
