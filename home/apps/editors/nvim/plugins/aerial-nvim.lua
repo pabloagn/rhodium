@@ -1,0 +1,190 @@
+require("aerial").setup({
+	-- Priority order of different backends
+	backends = { "lsp", "treesitter", "markdown", "asciidoc", "man" },
+
+	-- Appearance settings
+	layout = {
+		max_width = { 40, 0.2 },
+		width = nil,
+		min_width = 10,
+
+		-- Where to open the aerial window
+		default_direction = "prefer_right",
+
+		-- Preserve window width when moving between windows
+		preserve_equality = false,
+	},
+
+	-- Attach behavior
+	attach_mode = "window",
+
+	-- Close aerial when selecting a symbol
+	close_on_select = false,
+
+	-- Disable nerd fonts - use custom symbols
+	nerd_font = false,
+
+	-- Custom symbol icons - sacred computer aesthetic
+	icons = {
+		Array = "◈",
+		Boolean = "◇",
+		Class = "◉",
+		Constant = "◎",
+		Constructor = "◐",
+		Enum = "◑",
+		EnumMember = "◒",
+		Event = "◓",
+		Field = "◔",
+		File = "◕",
+		Function = "⬡",
+		Interface = "⬢",
+		Key = "⬣",
+		Method = "⬤",
+		Module = "⬥",
+		Namespace = "⬦",
+		Null = "⬧",
+		Number = "⬨",
+		Object = "⬩",
+		Operator = "⬪",
+		Package = "⬫",
+		Property = "⬬",
+		String = "⬭",
+		Struct = "⬮",
+		TypeParameter = "⬯",
+		Variable = "◯",
+	},
+
+	-- Show box drawing characters for the tree hierarchy
+	show_guides = true,
+
+	-- Customize the tree guide characters
+	guides = {
+		mid_item = "├─",
+		last_item = "└─",
+		nested_top = "│ ",
+		whitespace = "  ",
+	},
+
+	-- Filter symbols
+	filter_kind = {
+		"Class",
+		"Constructor",
+		"Enum",
+		"Function",
+		"Interface",
+		"Method",
+		"Module",
+		"Namespace",
+		"Package",
+		"Property",
+		"Struct",
+		"Trait",
+	},
+
+	-- Automatically open aerial when entering supported buffers
+	open_automatic = false,
+
+	-- Run this command after jumping to a symbol
+	post_jump_cmd = "normal! zz",
+
+	-- When true, aerial will automatically close after jumping to a symbol
+	close_automatic_events = {},
+
+	-- Disable aerial on specific filetypes
+	disable_max_lines = 10000,
+	disable_max_size = 2000000, -- 2MB
+
+	-- Options for highlighting
+	highlight_mode = "split_width",
+	highlight_closest = true,
+	highlight_on_hover = true,
+	highlight_on_jump = 300,
+
+	-- Call this function when aerial attaches to a buffer
+	on_attach = function(bufnr)
+		-- Jump forwards/backwards with '{' and '}'
+		vim.keymap.set("n", "{", "<cmd>AerialPrev<CR>", { buffer = bufnr })
+		vim.keymap.set("n", "}", "<cmd>AerialNext<CR>", { buffer = bufnr })
+	end,
+
+	-- Automatically manage folds
+	manage_folds = false,
+
+	-- When manage_folds is true, this determines how folds are created
+	link_tree_to_folds = true,
+	link_folds_to_tree = false,
+
+	-- Set fold levels automatically based on aerial tree
+	fold_on_open = false,
+
+	-- Show aerial float window on cursor hover
+	float = {
+		-- Enable the floating aerial window
+		enabled = false,
+		-- Width of the floating window
+		width = 0.6,
+		-- Height of the floating window
+		height = 0.9,
+		-- Override the position of the floating window
+		relative = "cursor",
+		-- Where to position the float window
+		placement_editor_edge = 50,
+	},
+
+	-- Options for the floating nav window
+	nav = {
+		border = "rounded",
+		max_height = 0.9,
+		min_height = { 10, 0.1 },
+		max_width = 0.5,
+		min_width = { 0.2, 20 },
+		win_opts = {
+			cursorline = true,
+			winblend = 10,
+		},
+		-- Jump to symbol in source window when the cursor moves
+		autojump = false,
+		-- Show a preview of the code at the selected symbol
+		preview = false,
+		-- Keymaps in the nav window
+		keymaps = {
+			["<CR>"] = "actions.jump",
+			["<2-LeftMouse>"] = "actions.jump",
+			["<C-v>"] = "actions.jump_vsplit",
+			["<C-s>"] = "actions.jump_split",
+			["h"] = "actions.left",
+			["l"] = "actions.right",
+			["<C-c>"] = "actions.close",
+		},
+	},
+})
+
+-- Custom highlights for sacred aesthetic
+vim.api.nvim_set_hl(0, "AerialLine", { link = "QuickFixLine" })
+vim.api.nvim_set_hl(0, "AerialGuide", { fg = "#404040" })
+
+-- Aerial keymaps
+vim.keymap.set("n", "<leader>a", "<cmd>AerialToggle!<CR>", { desc = "◈ Toggle Outline" })
+vim.keymap.set("n", "<leader>A", "<cmd>AerialNavToggle<CR>", { desc = "◈ Nav Outline" })
+vim.keymap.set("n", "gO", "<cmd>AerialNavOpen<CR>", { desc = "◈ Open Outline Nav" })
+
+-- Additional functions for enhanced workflow
+local function aerial_toggle_and_focus()
+	require("aerial").toggle()
+	if require("aerial").is_open() then
+		require("aerial").focus()
+	end
+end
+
+local function aerial_info()
+	local aerial = require("aerial")
+	local symbols = aerial.get_symbols()
+	if symbols and #symbols > 0 then
+		vim.notify(string.format("Found %d symbols", #symbols), vim.log.levels.INFO, { title = "Aerial" })
+	else
+		vim.notify("No symbols found", vim.log.levels.WARN, { title = "Aerial" })
+	end
+end
+
+vim.keymap.set("n", "<leader>af", aerial_toggle_and_focus, { desc = "◈ Focus Outline" })
+vim.keymap.set("n", "<leader>ai", aerial_info, { desc = "◈ Outline Info" })

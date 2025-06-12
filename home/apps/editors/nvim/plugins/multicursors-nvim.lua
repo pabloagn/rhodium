@@ -1,46 +1,66 @@
-require('multicursors').setup()
+require("multicursors").setup({
+	-- Core settings
+	DEBUG_MODE = false,
+	create_commands = true,
+	updatetime = 50,
+	nowait = true,
 
-local mc = require("multicursors")
-local set = vim.keymap.set
+	-- Mode keys for different multicursor modes
+	mode_keys = {
+		append = 'a',
+		change = 'c',
+		extend = 'e',
+		insert = 'i',
+	},
 
--- Add or skip cursor above/below the main cursor
-set({ "n", "x" }, "<up>", function() mc.lineAddCursor(-1) end)
-set({ "n", "x" }, "<down>", function() mc.lineAddCursor(1) end)
-set({ "n", "x" }, "<leader><up>", function() mc.lineSkipCursor(-1) end)
-set({ "n", "x" }, "<leader><down>", function() mc.lineSkipCursor(1) end)
+	-- Hint window configuration
+	hint_config = {
+		float_opts = {
+			border = 'rounded',
+		},
+		position = 'bottom-right',
+	},
 
--- Add or skip adding a new cursor by matching word/selection
-set({ "n", "x" }, "<leader>n", function() mc.matchAddCursor(1) end)
-set({ "n", "x" }, "<leader>s", function() mc.matchSkipCursor(1) end)
-set({ "n", "x" }, "<leader>N", function() mc.matchAddCursor(-1) end)
-set({ "n", "x" }, "<leader>S", function() mc.matchSkipCursor(-1) end)
+	-- Generate hints for different modes
+	generate_hints = {
+		normal = true,
+		insert = true,
+		extend = true,
+		config = {
+			column_count = 1,
+		},
+	},
 
--- Toggle cursors on/off
-set({ "n", "x" }, "<c-q>", mc.toggleCursor)
+	-- Custom normal mode mappings
+	normal_keys = {
+		-- Clear other selections, keep main
+		[','] = {
+			method = function()
+				local N = require("multicursors.normal_mode")
+				N.clear_others()
+			end,
+			opts = { desc = 'Clear others' },
+		},
+		-- Comment all selections
+		['<C-/>'] = {
+			method = function()
+				require('multicursors.utils').call_on_selections(function(selection)
+					vim.api.nvim_win_set_cursor(0, { selection.row + 1, selection.col + 1 })
+					local line_count = selection.end_row - selection.row + 1
+					vim.cmd('normal ' .. line_count .. 'gcc')
+				end)
+			end,
+			opts = { desc = 'Comment selections' },
+		},
+	},
 
--- Multi-cursor specific keymaps (only active when multiple cursors exist)
-mc.addKeymapLayer(function(layerSet)
-	-- Navigate between cursors
-	layerSet({ "n", "x" }, "<left>", mc.prevCursor)
-	layerSet({ "n", "x" }, "<right>", mc.nextCursor)
-	-- Delete the main cursor
-	layerSet({ "n", "x" }, "<leader>x", mc.deleteCursor)
-	-- Clear all cursors with escape
-	layerSet("n", "<esc>", function()
-		if not mc.cursorsEnabled() then
-			mc.enableCursors()
-		else
-			mc.clearCursors()
-		end
-	end)
-end)
+	-- Custom insert mode mappings (if needed)
+	-- insert_keys = {},
 
--- Cursor appearance customization
-local hl = vim.api.nvim_set_hl
-hl(0, "MultiCursorCursor", { reverse = true })
-hl(0, "MultiCursorVisual", { link = "Visual" })
-hl(0, "MultiCursorSign", { link = "SignColumn" })
-hl(0, "MultiCursorMatchPreview", { link = "Search" })
-hl(0, "MultiCursorDisabledCursor", { reverse = true })
-hl(0, "MultiCursorDisabledVisual", { link = "Visual" })
-hl(0, "MultiCursorDisabledSign", { link = "SignColumn" })
+	-- Custom extend mode mappings (if needed)
+	-- extend_keys = {},
+})
+
+-- Highlight customization
+vim.api.nvim_set_hl(0, "MultiCursor", { reverse = true })
+vim.api.nvim_set_hl(0, "MultiCursorMain", { reverse = true, bold = true })

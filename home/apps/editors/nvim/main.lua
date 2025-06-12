@@ -2,6 +2,9 @@
 local opt = vim.opt
 local diagnostic = vim.diagnostic
 
+-- Enable filetype detection and plugins
+vim.cmd('filetype plugin indent on')
+
 -- Diagnostics
 diagnostic.config({
 	signs = {

@@ -1,6 +1,6 @@
 local telescope = require('telescope')
 local actions = require('telescope.actions')
--- local action_layout = require('telescope.actions.layout')
+local trouble = require("trouble.sources.telescope")
 
 telescope.setup({
 	defaults = {
@@ -127,15 +127,6 @@ telescope.setup({
 			"%.aac",
 			"%.ogg",
 
-			-- Archive formats
-			-- "%.zip",
-			-- "%.tar",
-			-- "%.gz",
-			-- "%.rar",
-			-- "%.7z",
-			-- "%.xz",
-			-- "%.bz2",
-
 			-- Documents
 			-- "%.pdf",
 			"%.doc",
@@ -165,32 +156,37 @@ telescope.setup({
 			i = {
 				["<C-j>"] = actions.move_selection_next,
 				["<C-k>"] = actions.move_selection_previous,
-				["<C-c>"] = actions.close,
 				["<CR>"] = actions.select_default,
 				["<C-x>"] = actions.select_horizontal,
 				["<C-v>"] = actions.select_vertical,
-				["<C-t>"] = actions.select_tab,
+				["<C-o>"] = actions.select_tab,
 				["<C-u>"] = actions.preview_scrolling_up,
 				["<C-d>"] = actions.preview_scrolling_down,
 				["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
+				["<C-t>"] = actions.trouble.open,
+				["<Esc>"] = actions.close,
 			},
 			n = {
-				["<esc>"] = actions.close,
 				["<CR>"] = actions.select_default,
 				["<C-x>"] = actions.select_horizontal,
 				["<C-v>"] = actions.select_vertical,
-				["<C-t>"] = actions.select_tab,
+				["<C-o>"] = actions.select_tab,
 				["j"] = actions.move_selection_next,
 				["k"] = actions.move_selection_previous,
 				["<C-u>"] = actions.preview_scrolling_up,
 				["<C-d>"] = actions.preview_scrolling_down,
+				["<C-t>"] = actions.trouble.open,
 				["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
 			},
 		},
 	},
+
 	pickers = {
 		find_files = {
-			hidden = true,
+			theme = 'dropdown',
+		},
+		live_grep = {
+			theme = 'dropdown',
 		},
 		buffers = {
 			show_all_buffers = true,

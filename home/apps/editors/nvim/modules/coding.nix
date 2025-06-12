@@ -69,12 +69,13 @@
       #   config = sourceLuaFile "nvim-lint.lua";
       # }
 
-      # Refactoring
-      # {
-      #   plugin = multicursors-nvim;
-      #   config = sourceLuaFile "multicursors-nvim.lua";
-      # }
+      # Movement
+      {
+        plugin = multicursors-nvim;
+        config = sourceLuaFile "multicursors-nvim.lua";
+      }
 
+      # Refactoring
       # {
       #   plugin = neogen;
       #   config = sourceLuaFile "neogen.lua";

@@ -44,13 +44,11 @@ require("todo-comments").setup({
 		bg = "BOLD", -- The gui style to use for the bg highlight group
 	},
 
-	merge_keywords = true, -- When true, custom keywords will be merged with the defaults
+	merge_keywords = true, -- Custom keywords will be merged with the defaults
 
 	-- Highlighting
 	highlight = {
-		multiline = true,          -- Enable multine todo comments
-		multiline_pattern = "^.",  -- Lua pattern to match the next multiline
-		multiline_context = 10,    -- Extra lines that will be re-evaluated when changing a line
+		multiline = false,          -- Enable multine todo comments
 		before = "",               -- "fg" or "bg" or empty
 		keyword = "wide",          -- "fg", "bg", "wide", "wide_bg", "wide_fg" or empty
 		after = "fg",              -- "fg" or "bg" or empty
@@ -80,8 +78,8 @@ require("todo-comments").setup({
 			"--with-filename",
 			"--line-number",
 			"--column",
+			"--glob=!node_modules",
 		},
 		pattern = [[\b(KEYWORDS):]], -- Ripgrep regex
 	},
 })
-
