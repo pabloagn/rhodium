@@ -1,5 +1,23 @@
 local M = {}
 
+-- System Info
+-- --------------------------------------------------
+-- Dynamic hostname detection
+function M.get_hostname()
+	local handle = io.popen("hostname")
+	if handle then
+		local result = handle:read("*a"):gsub("%s+", "")
+		handle:close()
+		return result
+	end
+	return "your-hostname"
+end
+
+-- Dynamic username detection
+function M.get_username()
+	return os.getenv("USER") or "your-username"
+end
+
 -- Edits
 -- --------------------------------------------------
 -- Function to replace entire buffer content with clipboard content
@@ -152,4 +170,6 @@ function M.todo_picker(opts)
 	require('telescope').extensions.todo_comments.todo(enhanced_opts)
 end
 
-return M
+_G.functions = M -- Make functions globally available
+return M -- Return functions locally as well
+

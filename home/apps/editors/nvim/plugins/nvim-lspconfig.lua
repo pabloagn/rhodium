@@ -1,5 +1,5 @@
--- Get capabilities from nvim-cmp
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
+local functions = require('functions')
 
 -- Just
 require 'lspconfig'.just.setup {
@@ -68,11 +68,44 @@ require 'lspconfig'.texlab.setup {
 	capabilities = capabilities,
 }
 
--- Nix (Nil)
+-- Nixd (Primary Nix LSP)
+require 'lspconfig'.nixd.setup {
+	capabilities = capabilities,
+	settings = {
+		nixd = {
+			nixpkgs = {
+				expr = "import <nixpkgs> { }"
+			},
+			formatting = {
+				command = { "nixfmt" }
+			},
+			options = {
+				nixos = {
+					expr = string.format("(builtins.getFlake \"/etc/nixos\").nixosConfigurations.%s.options", functions.get_hostname())
+				},
+				home_manager = {
+					expr = string.format("(builtins.getFlake \"/etc/nixos\").homeConfigurations.\"%s@%s\".options", functions.get_username(), functions.get_hostname())
+				}
+			},
+			diagnostic = {
+				suppress = { "sema-extra-with" }
+			}
+		}
+	}
+}
+
+-- Nil (Fallback Nix LSP for performance)
 require 'lspconfig'.nil_ls.setup {
 	capabilities = capabilities,
 	settings = {
 		['nil'] = {
+			formatting = {
+				command = { "nixfmt" }
+			},
+			diagnostics = {
+				ignored = { "unused_binding", "unused_with" },
+				excludeFiles = { "*.generated.nix" }
+			},
 			nix = {
 				flake = {
 					autoArchive = true
@@ -82,22 +115,16 @@ require 'lspconfig'.nil_ls.setup {
 	}
 }
 
--- Nix (Nixd)
--- TODO: Improve this massively
-require 'lspconfig'.nixd.setup {
-	capabilities = capabilities,
-	settings = {
-		['nixd'] = {
-			formatting = {
-				command = { "nixpkgs-fmt" }
-			},
-			options = {
-				enable = true,
-				target = { "nixpkgs-25.01" }
-			}
-		}
-	}
-}
+-- Performance optimization for Nix LSPs
+vim.api.nvim_create_autocmd("LspAttach", {
+	callback = function(args)
+		local client = vim.lsp.get_client_by_id(args.data.client_id)
+		if client and (client.name == "nil_ls" or client.name == "nixd") then
+			-- Disable semantic tokens for better performance
+			client.server_capabilities.semanticTokensProvider = nil
+		end
+	end,
+})
 
 -- TOML
 require 'lspconfig'.taplo.setup {
@@ -210,123 +237,6 @@ require 'lspconfig'.zls.setup {
 	capabilities = capabilities,
 }
 
--- TODO: Add new servers
---
--- -- Docker
--- require 'lspconfig'.dockerls.setup {
---   capabilities = capabilities,
--- }
--- -- Nix package: dockerfile-language-server-nodejs
---
--- -- JSON
--- require 'lspconfig'.jsonls.setup {
---   capabilities = capabilities,
--- }
--- -- Nix package: vscode-langservers-extracted
---
--- -- GraphQL
--- require 'lspconfig'.graphql.setup {
---   capabilities = capabilities,
--- }
--- -- Nix package: graphql-language-service-cli
---
--- -- Vue (Volar for Vue 3)
--- require 'lspconfig'.volar.setup {
---   capabilities = capabilities,
--- }
--- -- Nix package: vue-language-server
---
--- -- Svelte
--- require 'lspconfig'.svelte.setup {
---   capabilities = capabilities,
--- }
--- -- Nix package: svelte-language-server
---
--- -- Solidity
--- require 'lspconfig'.solidity.setup {
---   capabilities = capabilities,
--- }
--- -- Nix package: solidity-language-server
---
--- -- XML
--- require 'lspconfig'.lemminx.setup {
---   capabilities = capabilities,
--- }
--- -- Nix package: lemminx
---
--- -- Angular
--- require 'lspconfig'.angularls.setup {
---   capabilities = capabilities,
--- }
--- -- Nix package: angular-language-server
---
--- -- R
--- require 'lspconfig'.r_language_server.setup {
---   capabilities = capabilities,
--- }
--- -- Nix package: R (ensure it's in your env) + r-languageserver
---
--- -- Julia
--- require 'lspconfig'.julials.setup {
---   capabilities = capabilities,
--- }
--- -- Nix package: julia + juliaPackages.LanguageServer
---
--- -- Dart / Flutter
--- require 'lspconfig'.dartls.setup {
---   capabilities = capabilities,
--- }
--- -- Nix package: dart (comes with dart analysis server)
---
--- -- ReasonML / ReScript
--- require 'lspconfig'.rescriptls.setup {
---   capabilities = capabilities,
--- }
--- -- Nix package: rescript-language-server
---
--- -- F#
--- require 'lspconfig'.fsautocomplete.setup {
---   capabilities = capabilities,
--- }
--- -- Nix package: fsautocomplete
---
--- -- Fortran
--- require 'lspconfig'.fortls.setup {
---   capabilities = capabilities,
--- }
--- -- Nix package: fortls
---
--- -- PowerShell
--- require 'lspconfig'.powershell_es.setup {
---   capabilities = capabilities,
---   bundle_path = vim.fn.stdpath("data") .. "/mason/packages/powershell-editor-services",
--- }
--- -- Nix package: powershellEditorServices (not in upstream nixpkgs, needs manual install or use Mason)
---
--- -- ProtoBuf
--- require 'lspconfig'.bufls.setup {
---   capabilities = capabilities,
--- }
--- -- Nix package: bufls
---
--- -- Haxe
--- require 'lspconfig'.haxe_language_server.setup {
---   capabilities = capabilities,
--- }
--- -- Nix package: haxe + haxe-language-server
---
--- -- Terraform
--- require 'lspconfig'.terraformls.setup {
---   capabilities = capabilities,
--- }
--- -- Nix package: terraform-ls
---
--- -- Puppet
--- require 'lspconfig'.puppet.setup {
---   capabilities = capabilities,
--- }
--- -- Nix package: puppet-editor-services
-
 -- Odin
 require 'lspconfig'.ols.setup {
 	capabilities = capabilities,
@@ -336,4 +246,111 @@ require 'lspconfig'.ols.setup {
 			{ name = "shared", path = vim.fn.expand('$HOME/odin-lib') }
 		},
 	},
+}
+
+-- Docker
+require 'lspconfig'.dockerls.setup {
+	capabilities = capabilities,
+}
+
+-- JSON (requires schemastore.nvim plugin)
+require 'lspconfig'.jsonls.setup {
+	capabilities = capabilities,
+	settings = {
+		json = {
+			schemas = require('schemastore').json.schemas(),
+			validate = { enable = true },
+		},
+	},
+}
+
+-- GraphQL
+require 'lspconfig'.graphql.setup {
+	capabilities = capabilities,
+}
+
+-- Vue (Volar for Vue 3)
+require 'lspconfig'.volar.setup {
+	capabilities = capabilities,
+}
+
+-- Svelte
+require 'lspconfig'.svelte.setup {
+	capabilities = capabilities,
+}
+
+-- XML
+require 'lspconfig'.lemminx.setup {
+	capabilities = capabilities,
+}
+
+-- R
+require 'lspconfig'.r_language_server.setup {
+	capabilities = capabilities,
+}
+
+-- Dart / Flutter
+require 'lspconfig'.dartls.setup {
+	capabilities = capabilities,
+}
+
+-- F#
+require 'lspconfig'.fsautocomplete.setup {
+	capabilities = capabilities,
+}
+
+-- Fortran
+require 'lspconfig'.fortls.setup {
+	capabilities = capabilities,
+}
+
+-- Protocol Buffers
+require 'lspconfig'.bufls.setup {
+	capabilities = capabilities,
+}
+
+-- Terraform
+require 'lspconfig'.terraformls.setup {
+	capabilities = capabilities,
+}
+
+-- CMake
+require 'lspconfig'.cmake.setup {
+	capabilities = capabilities,
+}
+
+-- Crystal
+require 'lspconfig'.crystalline.setup {
+	capabilities = capabilities,
+}
+
+-- D language
+require 'lspconfig'.serve_d.setup {
+	capabilities = capabilities,
+}
+
+-- Deno (TypeScript/JavaScript alternative)
+require 'lspconfig'.denols.setup {
+	capabilities = capabilities,
+	root_dir = require('lspconfig').util.root_pattern("deno.json", "deno.jsonc"),
+}
+
+-- Dhall
+require 'lspconfig'.dhall_lsp_server.setup {
+	capabilities = capabilities,
+}
+
+-- GLSL
+require 'lspconfig'.glslls.setup {
+	capabilities = capabilities,
+}
+
+-- Prisma
+require 'lspconfig'.prismals.setup {
+	capabilities = capabilities,
+}
+
+-- Rome (JS/TS formatter/linter)
+require 'lspconfig'.rome.setup {
+	capabilities = capabilities,
 }

@@ -29,6 +29,7 @@
       telescope-fzf-native-nvim # Finder + fz
       telescope-live-grep-args-nvim
       telescope-project-nvim # TODO: Add this config
+
       # Navigation
       # {
       #   plugin = aerial-nvim;
@@ -73,16 +74,16 @@
       # }
       {
         plugin = snacks-nvim;
-        # config = sourceLuaFile "snacks-nvim.lua";
+        config = sourceLuaFile "snacks-nvim.lua";
       }
       {
         plugin = todo-comments-nvim; # Better TODOs
         config = sourceLuaFile "todo-comments-nvim.lua";
       }
-      # {
-      #   plugin = which-key-nvim;
-      #   config = sourceLuaFile "which-key-nvim.lua";
-      # }
+      {
+        plugin = which-key-nvim;
+        # config = sourceLuaFile "which-key-nvim.lua";
+      }
     ];
   };
 }

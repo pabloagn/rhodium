@@ -1,5 +1,5 @@
-local builtin = require('telescope.builtin')
 local functions = require('functions')
+local builtin = require('telescope.builtin')
 
 -- Leaders
 vim.g.mapleader = ' '      -- Leader

@@ -8,6 +8,7 @@
         plugin = nvim-lspconfig; # LSP
         config = sourceLuaFile "nvim-lspconfig.lua";
       }
+      SchemaStore-nvim # JSON parsing
       # {
       #   plugin = neoconf-nvim;
       #   config = sourceLuaFile "neoconf-nvim.lua";

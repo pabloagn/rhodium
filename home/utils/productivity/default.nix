@@ -21,9 +21,13 @@
     # Clipboard utilities
     wl-clipboard # Wayland clipboard utilities
 
+    # Utils
+    mermaid-cli # Generation of mermaid diagrams in text
     pandoc # PDF manipulation
     poppler_utils # For PDF previews (pdftotext)
     fontforge # For font previews
+    comma # Runs programs without installing them
+    ghostscript # Postscript interpreter
 
     # Documentation
     # tldr # Simplified and community-driven man pages

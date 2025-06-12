@@ -100,6 +100,7 @@
             p.tree-sitter-c
             p.tree-sitter-clojure
             p.tree-sitter-commonlisp
+            p.tree-sitter-css
             p.tree-sitter-csv
             p.tree-sitter-cuda
             p.tree-sitter-dart
@@ -150,7 +151,9 @@
             p.tree-sitter-tmux
             p.tree-sitter-toml
             p.tree-sitter-tsv
+            p.tree-sitter-tsx
             p.tree-sitter-typescript
+            p.tree-sitter-typst
             p.tree-sitter-vim
             p.tree-sitter-vimdoc
             p.tree-sitter-vue

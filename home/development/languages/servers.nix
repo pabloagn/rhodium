@@ -121,5 +121,63 @@
 
     # Fish Shell
     fish-lsp
+
+    # Docker
+    nodePackages.dockerfile-language-server-nodejs
+
+    # Vue
+    vue-language-server
+
+    # Svelte
+    svelte-language-server
+
+    # XML
+    lemminx
+
+    # GraphQL (as nodePackage)
+    nodePackages.graphql-language-service-cli
+
+    # CMake
+    cmake-language-server
+
+    # Dart/Flutter
+    dart
+    flutter
+
+    # Deno (alternative TypeScript runtime)
+    deno
+
+    # Terraform
+    terraform-ls
+
+    # R
+    rPackages.languageserver
+
+    # Fortran
+    fortls
+
+    # F#
+    fsautocomplete
+
+    # Crystal
+    crystalline
+
+    # Protocol Buffers
+    buf-language-server
+
+    # Dhall
+    dhall-lsp-server
+
+    # Prisma
+    prisma-engines
+
+    # GLSL
+    glslls
+
+    # Rome (JS/TS tool)
+    rome
+
+    # D language
+    serve-d
   ];
 }
