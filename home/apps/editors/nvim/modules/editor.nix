@@ -102,10 +102,10 @@
         plugin = which-key-nvim; # Help with keybinds
         config = sourceLuaFile "which-key-nvim.lua";
       }
-      {
-        plugin = tiny-inline-diagnostic-nvim; # Better inline diagnostics
-        config = sourceLuaFile "tiny-inline-diagnostic-nvim.lua";
-      }
+      # {
+      #   plugin = tiny-inline-diagnostic-nvim; # Better inline diagnostics
+      #   config = sourceLuaFile "tiny-inline-diagnostic-nvim.lua";
+      # }
 
     ];
   };

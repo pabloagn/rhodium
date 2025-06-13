@@ -12,7 +12,7 @@ telescope.setup({
     winblend = 2, -- Very subtle transparency
     color_devicons = true, -- Enable devicons
     path_display = { "truncate" },
-    layout_strategy = "horizontal_fused",
+    layout_strategy = "horizontal",
     layout_config = {
       width = 0.85,
       height = 0.80,

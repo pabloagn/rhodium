@@ -219,7 +219,6 @@ end
 function M.todo_picker(opts)
   opts = opts or {}
 
-  -- Priority keywords in order (highest to lowest priority)
   local priority_keywords = {
     "SEV1", "SEV2", "SEV3",
     "FIX", "FIXME", "BUG", "FIXIT", "ISSUE",
@@ -231,21 +230,20 @@ function M.todo_picker(opts)
     "DONE"
   }
 
-  -- Enhanced options for the picker
-  local enhanced_opts = vim.tbl_deep_extend("force", {
-    keywords = priority_keywords,
-    layout_strategy = "horizontal",
-    layout_config = {
-      width = 0.95,
-      height = 0.85,
-      preview_width = 0.6,
-    },
-    sorting_strategy = "ascending",
-    prompt_title = "λ ",
-  }, opts)
-
-  -- Use the built-in todo-comments telescope extension
-  require('telescope').extensions.todo_comments.todo(enhanced_opts)
+  -- local enhanced_opts = vim.tbl_deep_extend("force", {
+  --   keywords = priority_keywords,
+  --   layout_strategy = "horizontal",
+  --   layout_config = {
+  --     width = 0.95,
+  --     height = 0.85,
+  --     preview_width = 0.6,
+  --   },
+  --   sorting_strategy = "ascending",
+  --   prompt_title = "λ ",
+  -- }, opts)
+  --
+  -- -- Use the built-in todo-comments telescope extension
+  -- require('telescope').extensions.todo_comments.todo(enhanced_opts)
 end
 
 -- Pick from project root downwards
@@ -587,27 +585,27 @@ function M.toggle_virtual_text()
     vim.log.levels.INFO, { title = "Diagnostics" })
 end
 
--- Toggle tiny-inline-diagnostic
-function M.toggle_inline_diagnostics()
-  local tiny = require("tiny-inline-diagnostic")
-
-  if M.is_tiny_diagnostic_enabled() then
-    tiny.disable()
-    vim.notify("Inline diagnostics disabled", vim.log.levels.INFO, { title = "Diagnostics" })
-  else
-    tiny.enable()
-    vim.notify("Inline diagnostics enabled", vim.log.levels.INFO, { title = "Diagnostics" })
-  end
-end
-
--- Check if tiny-inline-diagnostic is enabled
-function M.is_tiny_diagnostic_enabled()
-  local ok, tiny = pcall(require, "tiny-inline-diagnostic")
-  if not ok then return false end
-
-  -- TODO: This is a simple check - we might need to adjust based on plugin's API
-  return true -- Plugin doesn't expose enabled state, assume enabled if loaded
-end
+-- -- Toggle tiny-inline-diagnostic
+-- function M.toggle_inline_diagnostics()
+--   local tiny = require("tiny-inline-diagnostic")
+--
+--   if M.is_tiny_diagnostic_enabled() then
+--     tiny.disable()
+--     vim.notify("Inline diagnostics disabled", vim.log.levels.INFO, { title = "Diagnostics" })
+--   else
+--     tiny.enable()
+--     vim.notify("Inline diagnostics enabled", vim.log.levels.INFO, { title = "Diagnostics" })
+--   end
+-- end
+--
+-- -- Check if tiny-inline-diagnostic is enabled
+-- function M.is_tiny_diagnostic_enabled()
+--   local ok, tiny = pcall(require, "tiny-inline-diagnostic")
+--   if not ok then return false end
+--
+--   -- TODO: This is a simple check - we might need to adjust based on plugin's API
+--   return true -- Plugin doesn't expose enabled state, assume enabled if loaded
+-- end
 
 -- Show diagnostic popup on current line
 function M.show_line_diagnostics()
