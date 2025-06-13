@@ -1,461 +1,301 @@
-local dirs = {
-  academic = vim.fn.expand('$HOME/academic'),
-  professional = vim.fn.expand('$HOME/professional'),
-  projects = vim.fn.expand('$HOME/dev'),
-  solenoidlabs = vim.fn.expand('$HOME/solenoid-labs'),
+-- dashboard-nvim.lua
+-- Self-contained configuration for NixOS home-manager setup.
+-- Defines and immediately executes the setup.
 
-  vaults = vim.fn.expand('$HOME/vaults'),
-  rhodium = vim.fn.expand('$HOME/dev/rhodium'),
+local M = {}
+
+-- ───────────────────────────────────────────────────────────────
+-- Configuration
+-- ───────────────────────────────────────────────────────────────
+M.dirs = {
+  academic = vim.fn.expand('~/academic'),
+  professional = vim.fn.expand('~/professional'),
+  projects = vim.fn.expand('~/dev'),
+  solenoidlabs = vim.fn.expand('~/solenoid-labs'),
+  vaults = vim.fn.expand('~/vaults'),
+  rhodium = vim.fn.expand('~/dev/rhodium'),
 }
 
-local function get_logo()
-  local logo = [[
+-- ───────────────────────────────────────────────────────────────
+-- Visual Elements
+-- ───────────────────────────────────────────────────────────────
+M.visuals = {
+  logo = [[
   ╦═══╗┬   ┬┌───┐ ┌┬─┐┬┬   ┬┌─┬─┐
   ║   ║│   ││   │  │ │││   ││ │ │
   ╠═╦═╝├───┤│   │  │ │││   ││ │ │
   ║ ║  │   ││   │  │ │││   ││ │ │
   ╩ ╚══┴   ┴└───┘──┴─┘┴└───┘┴   ┴
-]]
-  logo = string.rep("\n", 8) .. logo .. "\n\n"
-  return vim.split(logo, "\n")
+]],
+  footer = "────────────── ‡ ──────────────",
+  icons = { primary = "⊹", secondary = "›", back = "‹", dot = "·", diamond = "◆" },
+}
+
+-- ───────────────────────────────────────────────────────────────
+-- Menu State Management
+-- ───────────────────────────────────────────────────────────────
+M.state = { current = "main", history = {} }
+
+function M.refresh()
+  vim.cmd('Dashboard')
 end
 
-local function get_footer()
-  return { "────────────── ‡ ──────────────" }
+function M.navigate_to(menu)
+  if M.menus[menu] then
+    table.insert(M.state.history, M.state.current)
+    M.state.current = menu
+    M.refresh()
+  else
+    vim.notify("Dashboard menu '" .. menu .. "' not found!", vim.log.levels.ERROR)
+  end
 end
 
--- Custom keybindings for dashboard
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "dashboard",
-  callback = function()
-    -- Quit with q
-    vim.keymap.set("n", "q", ":q<CR>", { buffer = true, silent = true })
+function M.navigate_back()
+  if #M.state.history > 0 then
+    M.state.current = table.remove(M.state.history)
+    M.refresh()
+  else
+    vim.cmd('q')
+  end
+end
 
-    -- Disable search
-    vim.keymap.set("n", "/", "<Nop>", { buffer = true, silent = true })
+-- ───────────────────────────────────────────────────────────────
+-- Action Builders
+-- ───────────────────────────────────────────────────────────────
+local actions = {}
+function actions.telescope_files(title, cwd, opts)
+  return function()
+    require('telescope.builtin').find_files(vim.tbl_extend('force', { prompt_title = title, cwd = cwd }, opts or {}))
+  end
+end
 
-    -- Two-key mappings
-    -- Files mappings
-    vim.keymap.set("n", "fr", function()
-      require('telescope.builtin').find_files({
-        prompt_title = 'Rhodium',
-        cwd = dirs.rhodium,
-      })
-    end, { buffer = true, silent = true, desc = "Files Rhodium" })
+function actions.telescope_directory_picker(title, base_dir, depth)
+  return function()
+    local builtin = require('telescope.builtin')
+    local telescope_actions = require('telescope.actions')
+    local action_state = require('telescope.actions.state')
+    builtin.find_files({
+      prompt_title = title,
+      cwd = base_dir,
+      find_command = { 'fd', '--type', 'd', '--max-depth', tostring(depth or 1), '--exclude', '.git' },
+      attach_mappings = function(prompt_bufnr, map)
+        telescope_actions.select_default:replace(function()
+          telescope_actions.close(prompt_bufnr)
+          local selection = action_state.get_selected_entry()
+          if selection and selection.path then
+            local selected_path = selection.path
+            vim.cmd('cd ' .. vim.fn.shellescape(selected_path))
+            builtin.find_files({ cwd = selected_path, prompt_title = "Files in " ..
+            vim.fn.fnamemodify(selected_path, ':t') })
+          end
+        end)
+        return true
+      end,
+    })
+  end
+end
 
-    vim.keymap.set("n", "fR", function()
-      require('telescope').extensions.frecency.frecency({
-        prompt_title = 'Recent Files',
-      })
-    end, { buffer = true, silent = true, desc = "Files Recent" })
+function actions.create_file()
+  return function()
+    local filename = vim.fn.input("New file: " .. vim.fn.getcwd() .. "/")
+    if filename ~= "" then
+      vim.cmd("enew")
+      vim.cmd("file " .. vim.fn.shellescape(filename))
+    end
+  end
+end
 
-    vim.keymap.set("n", "ff", function()
-      require('telescope.builtin').find_files({
-        prompt_title = 'Files',
-        hidden = false,
-        no_ignore = false,
-      })
-    end, { buffer = true, silent = true, desc = "Files" })
+function actions.org_mode()
+  return function()
+    if pcall(require, 'orgmode') then
+      if require('orgmode').agenda then
+        require('orgmode').agenda()
+      else
+        vim.notify("Org mode plugin: agenda not available.", vim.log.levels.ERROR)
+      end
+    else
+      vim.notify("Org mode plugin not installed.", vim.log.levels.ERROR)
+    end
+  end
+end
 
-    vim.keymap.set("n", "fa", function()
-      require('telescope.builtin').find_files({
-        prompt_title = 'All Files',
-        hidden = true,
-        no_ignore = true,
-      })
-    end, { buffer = true, silent = true, desc = "Files All" })
-
-    -- Z mappings (navigation)
-    vim.keymap.set("n", "za", function()
-      local builtin = require('telescope.builtin')
-      local actions = require('telescope.actions')
-      local action_state = require('telescope.actions.state')
-
-      builtin.find_files({
-        prompt_title = 'Academic',
-        cwd = dirs.academic,
-        find_command = { 'fd', '--type', 'd', '--max-depth', '1', '--exclude', '.git' },
-        attach_mappings = function(prompt_bufnr, map)
-          actions.select_default:replace(function()
-            actions.close(prompt_bufnr)
-            local selection = action_state.get_selected_entry()
-            if selection then
-              local academic_path = dirs.academic .. '/' .. selection[1]
-              vim.cmd('cd ' .. academic_path)
-              builtin.find_files({ cwd = academic_path })
-            end
-          end)
-          return true
-        end,
-      })
-    end, { buffer = true, silent = true, desc = "Z Academic" })
-
-    vim.keymap.set("n", "zw", function()
-      local builtin = require('telescope.builtin')
-      local actions = require('telescope.actions')
-      local action_state = require('telescope.actions.state')
-
-      builtin.find_files({
-        prompt_title = 'Professional',
-        cwd = dirs.professional,
-        find_command = { 'fd', '--type', 'd', '--max-depth', '1', '--exclude', '.git' },
-        attach_mappings = function(prompt_bufnr, map)
-          actions.select_default:replace(function()
-            actions.close(prompt_bufnr)
-            local selection = action_state.get_selected_entry()
-            if selection then
-              local professional_path = dirs.professional .. '/' .. selection[1]
-              vim.cmd('cd ' .. professional_path)
-              builtin.find_files({ cwd = professional_path })
-            end
-          end)
-          return true
-        end,
-      })
-    end, { buffer = true, silent = true, desc = "Z Professional (Work)" })
-
-    vim.keymap.set("n", "zp", function()
-      local builtin = require('telescope.builtin')
-      local actions = require('telescope.actions')
-      local action_state = require('telescope.actions.state')
-
-      builtin.find_files({
-        prompt_title = 'Projects',
-        cwd = dirs.projects,
-        find_command = { 'fd', '--type', 'd', '--max-depth', '2', '--exclude', '.git' },
-        attach_mappings = function(prompt_bufnr, map)
-          actions.select_default:replace(function()
-            actions.close(prompt_bufnr)
-            local selection = action_state.get_selected_entry()
-            if selection then
-              local project_path = dirs.projects .. '/' .. selection[1]
-              vim.cmd('cd ' .. project_path)
-              builtin.find_files({ cwd = project_path })
-            end
-          end)
-          return true
-        end,
-      })
-    end, { buffer = true, silent = true, desc = "Z Project" })
-
-    vim.keymap.set("n", "zs", function()
-      local builtin = require('telescope.builtin')
-      local actions = require('telescope.actions')
-      local action_state = require('telescope.actions.state')
-
-      builtin.find_files({
-        prompt_title = 'Solenoid Labs',
-        cwd = dirs.solenoidlabs,
-        find_command = { 'fd', '--type', 'd', '--max-depth', '2', '--exclude', '.git' },
-        attach_mappings = function(prompt_bufnr, map)
-          actions.select_default:replace(function()
-            actions.close(prompt_bufnr)
-            local selection = action_state.get_selected_entry()
-            if selection then
-              local solenoid_path = dirs.solenoidlabs .. '/' .. selection[1]
-              vim.cmd('cd ' .. solenoid_path)
-              builtin.find_files({ cwd = solenoid_path })
-            end
-          end)
-          return true
-        end,
-      })
-    end, { buffer = true, silent = true, desc = "Z Solenoid Labs" })
-
-    vim.keymap.set("n", "zv", function()
-      local builtin = require('telescope.builtin')
-      local actions = require('telescope.actions')
-      local action_state = require('telescope.actions.state')
-
-      builtin.find_files({
-        prompt_title = 'Vaults',
-        cwd = dirs.vaults,
-        find_command = { 'fd', '--type', 'd', '--max-depth', '1', '--exclude', '.git' },
-        attach_mappings = function(prompt_bufnr, map)
-          actions.select_default:replace(function()
-            actions.close(prompt_bufnr)
-            local selection = action_state.get_selected_entry()
-            if selection then
-              local vault_path = dirs.vaults .. '/' .. selection[1]
-              vim.cmd('cd ' .. vault_path)
-              builtin.find_files({ cwd = vault_path })
-            end
-          end)
-          return true
-        end,
-      })
-    end, { buffer = true, silent = true, desc = "Z Vault" })
-
-    -- Health check
-    vim.keymap.set("n", "hc", ":checkhealth<CR>", { buffer = true, silent = true, desc = "Health Check" })
-
-    -- Help with ?
-    vim.keymap.set("n", "?", function()
-      local keybindings = {
-        "[fr] Files Rhodium    - Find files in ~/dev/rhodium",
-        "[fR] Files Recent     - Recent files (frecency)",
-        "[ff] Files            - Find files (respects .gitignore)",
-        "[fa] Files All        - Find all files (includes hidden/ignored)",
-        "[za] Z Academic       - Navigate to academic projects",
-        "[zw] Z Professional   - Navigate to professional/work projects",
-        "[zp] Z Project        - Navigate to personal projects",
-        "[zs] Z Solenoid Labs  - Navigate to Solenoid Labs projects",
-        "[zv] Z Vault          - Navigate to vaults",
-        "[hc] Health Check     - Run :checkhealth",
-        "[q]  Quit             - Exit Neovim",
-        "[?]  Help             - Show this menu",
-      }
-
-      require('telescope.pickers').new({}, {
-        prompt_title = 'Dashboard Shortcuts',
-        finder = require('telescope.finders').new_table({
-          results = keybindings,
-        }),
-        sorter = require('telescope.config').values.generic_sorter({}),
-        layout_config = {
-          width = 0.6,
-          height = 0.5,
-        },
-      }):find()
-    end, { buffer = true, silent = true, desc = "Show dashboard keybindings" })
-  end,
-})
-
-require('dashboard').setup {
-  theme = 'doom',
-  hide = {
-    statusline = false,
-    tabline = true,
-    winbar = true,
+-- ───────────────────────────────────────────────────────────────
+-- Menu Definitions
+-- ───────────────────────────────────────────────────────────────
+M.menus = {
+  main = {
+    { key = "f", desc = "Files",    icon = M.visuals.icons.primary, action = function() M.navigate_to("files") end },
+    { key = "z", desc = "Navigate", icon = M.visuals.icons.primary, action = function() M.navigate_to("navigate") end },
+    { key = "r", desc = "Recent",   icon = M.visuals.icons.primary, action = function() require('telescope').extensions
+          .frecency.frecency() end },
+    { key = "n", desc = "New File", icon = M.visuals.icons.primary, action = actions.create_file() },
+    { key = "p", desc = "Projects", icon = M.visuals.icons.primary, action = function() M.navigate_to("projects") end },
+    { key = "s", desc = "System",   icon = M.visuals.icons.primary, action = function() M.navigate_to("system") end },
+    { key = "o", desc = "Org Mode", icon = M.visuals.icons.primary, action = actions.org_mode() },
+    { key = "q", desc = "Quit",     icon = M.visuals.icons.primary, action = "qa" },
   },
-  config = {
-    header = get_logo(),
-    center = {
-      {
-        action = function()
-          require('telescope.builtin').find_files({
-            prompt_title = 'Rhodium',
-            cwd = dirs.rhodium,
-          })
-        end,
-        desc = " Files Rhodium",
-        icon = "⊹ ",
-        key = "fr"
-      },
-      {
-        action = function()
-          require('telescope').extensions.frecency.frecency({
-            prompt_title = 'Recent Files',
-          })
-        end,
-        desc = " Files Recent",
-        icon = "⊹ ",
-        key = "fR"
-      },
-      {
-        action = function()
-          require('telescope.builtin').find_files({
-            prompt_title = 'Files',
-            hidden = false,
-            no_ignore = false,
-          })
-        end,
-        desc = " Files",
-        icon = "⊹ ",
-        key = "ff"
-      },
-      {
-        action = function()
-          require('telescope.builtin').find_files({
-            prompt_title = 'All Files',
-            hidden = true,
-            no_ignore = true,
-          })
-        end,
-        desc = " Files All",
-        icon = "⊹ ",
-        key = "fa"
-      },
-      {
-        action = function()
-          local builtin = require('telescope.builtin')
-          local actions = require('telescope.actions')
-          local action_state = require('telescope.actions.state')
-
-          builtin.find_files({
-            prompt_title = 'Academic',
-            cwd = dirs.academic,
-            find_command = { 'fd', '--type', 'd', '--max-depth', '1', '--exclude', '.git' },
-            attach_mappings = function(prompt_bufnr, map)
-              actions.select_default:replace(function()
-                actions.close(prompt_bufnr)
-                local selection = action_state.get_selected_entry()
-                if selection then
-                  local academic_path = dirs.academic .. '/' .. selection[1]
-                  vim.cmd('cd ' .. academic_path)
-                  builtin.find_files({ cwd = academic_path })
-                end
-              end)
-              return true
-            end,
-          })
-        end,
-        desc = " Z Academic",
-        icon = "⊹ ",
-        key = "za"
-      },
-      {
-        action = function()
-          local builtin = require('telescope.builtin')
-          local actions = require('telescope.actions')
-          local action_state = require('telescope.actions.state')
-
-          builtin.find_files({
-            prompt_title = 'Professional',
-            cwd = dirs.professional,
-            find_command = { 'fd', '--type', 'd', '--max-depth', '1', '--exclude', '.git' },
-            attach_mappings = function(prompt_bufnr, map)
-              actions.select_default:replace(function()
-                actions.close(prompt_bufnr)
-                local selection = action_state.get_selected_entry()
-                if selection then
-                  local professional_path = dirs.professional .. '/' .. selection[1]
-                  vim.cmd('cd ' .. professional_path)
-                  builtin.find_files({ cwd = professional_path })
-                end
-              end)
-              return true
-            end,
-          })
-        end,
-        desc = " Z Professional",
-        icon = "⊹ ",
-        key = "zw"
-      },
-      {
-        action = function()
-          local builtin = require('telescope.builtin')
-          local actions = require('telescope.actions')
-          local action_state = require('telescope.actions.state')
-
-          builtin.find_files({
-            prompt_title = 'Projects',
-            cwd = dirs.projects,
-            find_command = { 'fd', '--type', 'd', '--max-depth', '2', '--exclude', '.git' },
-            attach_mappings = function(prompt_bufnr, map)
-              actions.select_default:replace(function()
-                actions.close(prompt_bufnr)
-                local selection = action_state.get_selected_entry()
-                if selection then
-                  local project_path = dirs.projects .. '/' .. selection[1]
-                  vim.cmd('cd ' .. project_path)
-                  builtin.find_files({ cwd = project_path })
-                end
-              end)
-              return true
-            end,
-          })
-        end,
-        desc = " Z Project",
-        icon = "⊹ ",
-        key = "zp"
-      },
-      {
-        action = function()
-          local builtin = require('telescope.builtin')
-          local actions = require('telescope.actions')
-          local action_state = require('telescope.actions.state')
-
-          builtin.find_files({
-            prompt_title = 'Solenoid Labs',
-            cwd = dirs.solenoidlabs,
-            find_command = { 'fd', '--type', 'd', '--max-depth', '2', '--exclude', '.git' },
-            attach_mappings = function(prompt_bufnr, map)
-              actions.select_default:replace(function()
-                actions.close(prompt_bufnr)
-                local selection = action_state.get_selected_entry()
-                if selection then
-                  local solenoid_path = dirs.solenoidlabs .. '/' .. selection[1]
-                  vim.cmd('cd ' .. solenoid_path)
-                  builtin.find_files({ cwd = solenoid_path })
-                end
-              end)
-              return true
-            end,
-          })
-        end,
-        desc = " Z Solenoid Labs",
-        icon = "⊹ ",
-        key = "zs"
-      },
-      {
-        action = function()
-          local builtin = require('telescope.builtin')
-          local actions = require('telescope.actions')
-          local action_state = require('telescope.actions.state')
-
-          builtin.find_files({
-            prompt_title = 'Vaults',
-            cwd = dirs.vaults,
-            find_command = { 'fd', '--type', 'd', '--max-depth', '1', '--exclude', '.git' },
-            attach_mappings = function(prompt_bufnr, map)
-              actions.select_default:replace(function()
-                actions.close(prompt_bufnr)
-                local selection = action_state.get_selected_entry()
-                if selection then
-                  local vault_path = dirs.vaults .. '/' .. selection[1]
-                  vim.cmd('cd ' .. vault_path)
-                  builtin.find_files({ cwd = vault_path })
-                end
-              end)
-              return true
-            end,
-          })
-        end,
-        desc = " Z Vault",
-        icon = "⊹ ",
-        key = "zv"
-      },
-      {
-        action = 'checkhealth',
-        desc = " Health Check",
-        icon = "⊹ ",
-        key = "hc"
-      },
-      {
-        action = function()
-          local keybindings = {
-            "[fr] Files Rhodium    - Find files in ~/dev/rhodium",
-            "[fR] Files Recent     - Recent files (frecency)",
-            "[ff] Files            - Find files (respects .gitignore)",
-            "[fa] Files All        - Find all files (includes hidden/ignored)",
-            "[za] Z Academic       - Navigate to academic projects",
-            "[zw] Z Professional   - Navigate to professional/work projects",
-            "[zp] Z Project        - Navigate to personal projects",
-            "[zs] Z Solenoid Labs  - Navigate to Solenoid Labs projects",
-            "[zv] Z Vault          - Navigate to vaults",
-            "[hc] Health Check     - Run :checkhealth",
-            "[q]  Quit             - Exit Neovim",
-            "[?]  Help             - Show this menu",
-          }
-
-          require('telescope.pickers').new({}, {
-            prompt_title = 'Dashboard Shortcuts',
-            finder = require('telescope.finders').new_table({
-              results = keybindings,
-            }),
-            sorter = require('telescope.config').values.generic_sorter({}),
-            layout_config = {
-              width = 0.6,
-              height = 0.5,
-            },
-          }):find()
-        end,
-        desc = " Shortcut Help",
-        icon = "⊹ ",
-        key = "?"
-      },
-    },
-    footer = get_footer(),
+  files = {
+    { key = "r", desc = "Rhodium",    icon = M.visuals.icons.secondary, action = actions.telescope_files('Rhodium', M.dirs.rhodium) },
+    { key = "f", desc = "Find Files", icon = M.visuals.icons.secondary, action = function() require('telescope.builtin')
+          .find_files() end },
+    { key = "a", desc = "All Files",  icon = M.visuals.icons.secondary, action = actions.telescope_files('All Files', nil, { hidden = true, no_ignore = true }) },
+    { key = "g", desc = "Grep",       icon = M.visuals.icons.secondary, action = function() require('telescope.builtin')
+          .live_grep() end },
+    { key = "G", desc = "Git Files",  icon = M.visuals.icons.secondary, action = function() require('telescope.builtin')
+          .git_files() end },
+    { key = "b", desc = "Back",       icon = M.visuals.icons.back,      action = function() M.navigate_back() end },
+  },
+  navigate = {
+    { key = "a", desc = "Academic",      icon = M.visuals.icons.secondary, action = actions.telescope_directory_picker('Academic', M.dirs.academic) },
+    { key = "w", desc = "Professional",  icon = M.visuals.icons.secondary, action = actions.telescope_directory_picker('Professional', M.dirs.professional) },
+    { key = "p", desc = "Projects",      icon = M.visuals.icons.secondary, action = actions.telescope_directory_picker('Projects', M.dirs.projects, 2) },
+    { key = "s", desc = "Solenoid Labs", icon = M.visuals.icons.secondary, action = actions.telescope_directory_picker('Solenoid Labs', M.dirs.solenoidlabs, 2) },
+    { key = "v", desc = "Vaults",        icon = M.visuals.icons.secondary, action = actions.telescope_directory_picker('Vaults', M.dirs.vaults) },
+    { key = "b", desc = "Back",          icon = M.visuals.icons.back,      action = function() M.navigate_back() end },
+  },
+  system = {
+    { key = "h", desc = "Health",   icon = M.visuals.icons.secondary, action = "checkhealth" },
+    { key = "m", desc = "Mason",    icon = M.visuals.icons.secondary, action = "Mason" },
+    { key = "l", desc = "Lazy",     icon = M.visuals.icons.secondary, action = "Lazy" },
+    { key = "c", desc = "Config",   icon = M.visuals.icons.secondary, action = function() vim.cmd('e ' ..
+      vim.fn.stdpath('config') .. '/init.lua') end },
+    { key = "M", desc = "Messages", icon = M.visuals.icons.secondary, action = "messages" },
+    { key = "b", desc = "Back",     icon = M.visuals.icons.back,      action = function() M.navigate_back() end },
+  },
+  projects = {
+    { key = "n", desc = "New Project", icon = M.visuals.icons.secondary, action = function() M.navigate_to("templates") end },
+    { key = "s", desc = "Sessions",    icon = M.visuals.icons.secondary, action = function() M.navigate_to("sessions") end },
+    { key = "t", desc = "TODOs",       icon = M.visuals.icons.secondary, action = function() require('telescope.builtin')
+          .todo({ search_dirs = { M.dirs.projects, M.dirs.solenoidlabs } }) end },
+    { key = "d", desc = "Diagnostics", icon = M.visuals.icons.secondary, action = function() require('telescope.builtin')
+          .diagnostics() end },
+    { key = "g", desc = "Git Status",  icon = M.visuals.icons.secondary, action = "Git" },
+    { key = "b", desc = "Back",        icon = M.visuals.icons.back,      action = function() M.navigate_back() end },
+  },
+  templates = {
+    { key = "r", desc = "Rust",          icon = M.visuals.icons.diamond, action = function() M.create_project("rust") end },
+    { key = "p", desc = "Python",        icon = M.visuals.icons.diamond, action = function() M.create_project("python") end },
+    { key = "n", desc = "Neovim Plugin", icon = M.visuals.icons.diamond, action = function() M.create_project("nvim") end },
+    { key = "c", desc = "C",             icon = M.visuals.icons.diamond, action = function() M.create_project("c") end },
+    { key = "l", desc = "Lua",           icon = M.visuals.icons.diamond, action = function() M.create_project("lua") end },
+    { key = "b", desc = "Back",          icon = M.visuals.icons.back,    action = function() M.navigate_back() end },
+  },
+  sessions = {
+    { key = "l", desc = "Load Last", icon = M.visuals.icons.secondary, action = function() vim.notify(
+      "Session management not configured", vim.log.levels.WARN) end },
+    { key = "s", desc = "Save",      icon = M.visuals.icons.secondary, action = function() vim.notify(
+      "Session management not configured", vim.log.levels.WARN) end },
+    { key = "d", desc = "Delete",    icon = M.visuals.icons.secondary, action = function() vim.notify(
+      "Session management not configured", vim.log.levels.WARN) end },
+    { key = "b", desc = "Back",      icon = M.visuals.icons.back,      action = function() M.navigate_back() end },
   },
 }
+
+-- ───────────────────────────────────────────────────────────────
+-- Project Templates & Help
+-- ───────────────────────────────────────────────────────────────
+M.project_templates = {
+  rust = function(n)
+    local p = M.dirs.projects .. "/" .. n; vim.fn.system("cargo new " .. vim.fn.shellescape(p)); vim.cmd("cd " ..
+    vim.fn.shellescape(p)); vim.cmd("e src/main.rs")
+  end,
+  python = function(n)
+    local p = M.dirs.projects .. "/" .. n; vim.fn.mkdir(p, "p"); vim.fn.system("cd " ..
+    vim.fn.shellescape(p) .. " && python -m venv .venv"); vim.fn.writefile(
+    { "#!/usr/bin/env python3", '"""' .. n .. '"""', "", "def main():", '    print("Hello from ' .. n .. '")', "",
+      'if __name__ == "__main__":', "    main()" }, p .. "/main.py"); vim.cmd("cd " .. vim.fn.shellescape(p)); vim.cmd(
+    "e main.py")
+  end,
+  nvim = function(n)
+    local p = M.dirs.projects .. "/" .. n .. ".nvim"; vim.fn.mkdir(p .. "/lua/" .. n, "p"); vim.fn.mkdir(p .. "/plugin",
+      "p"); vim.fn.writefile(
+    { "local M = {}", "", "function M.setup(opts)", "  opts = opts or {}", "end", "", "return M" },
+      p .. "/lua/" .. n .. "/init.lua"); vim.cmd("cd " .. vim.fn.shellescape(p)); vim.cmd("e lua/" .. n .. "/init.lua")
+  end,
+  c = function(n)
+    local p = M.dirs.projects .. "/" .. n; vim.fn.mkdir(p .. "/src", "p"); vim.fn.mkdir(p .. "/include", "p"); vim.fn
+        .writefile(
+        { "CC = gcc", "CFLAGS = -Wall -Wextra -g -Iinclude", "TARGET = " .. n, "", "$(TARGET): src/main.c",
+          "\t$(CC) $(CFLAGS) -o $(TARGET) src/main.c", "", "clean:", "\trm -f $(TARGET)", "", ".PHONY: clean" },
+          p .. "/Makefile"); vim.fn.writefile(
+    { "#include <stdio.h>", "", "int main(void) {", '    printf("Hello from ' .. n .. '\\n");', "    return 0;", "}" },
+      p .. "/src/main.c"); vim.cmd("cd " .. vim.fn.shellescape(p)); vim.cmd("e src/main.c")
+  end,
+  lua = function(n)
+    local p = M.dirs.projects .. "/" .. n; vim.fn.mkdir(p, "p"); vim.fn.writefile(
+    { "-- " .. n, "", "local M = {}", "", "function M.main()", '  print("Hello from ' .. n .. '")', "end", "", "M.main()",
+      "return M" }, p .. "/main.lua"); vim.cmd("cd " .. vim.fn.shellescape(p)); vim.cmd("e main.lua")
+  end,
+}
+function M.create_project(t)
+  local n = vim.fn.input("Project name: "); if n and n ~= "" and M.project_templates[t] then M.project_templates[t](n) end
+end
+
+function M.show_help()
+  local menu_name = M.state.current; local menu_items = M.menus[menu_name]; local help_lines = {}
+  for _, item in ipairs(menu_items) do table.insert(help_lines,
+      string.format("  [%s]  %s %s", item.key, item.icon, item.desc)) end
+  if #M.state.history > 0 then
+    table.insert(help_lines, ""); table.insert(help_lines, string.format("  [b]  %s Back", M.visuals.icons.back))
+  end
+  if pcall(require, 'telescope.pickers') then
+    require('telescope.pickers').new({},
+      { prompt_title = '⊱ ' .. menu_name:upper() .. ' Help ⊰', finder = require('telescope.finders').new_table({ results =
+      help_lines }), sorter = require('telescope.config').values.generic_sorter({}), layout_config = { width = 0.4, height = 0.5 } })
+        :find()
+  else
+    vim.notify("Telescope not available for help.", vim.log.levels.ERROR)
+  end
+end
+
+-- ───────────────────────────────────────────────────────────────
+-- Dashboard Integration
+-- ───────────────────────────────────────────────────────────────
+function M.get_header() return vim.split(string.rep("\n", 6) .. M.visuals.logo, "\n") end
+
+function M.get_footer() return { M.visuals.footer, "Press '?' for help" } end
+
+function M.get_center()
+  local menu = M.menus[M.state.current] or M.menus.main
+  local items = {}
+  for _, item in ipairs(menu) do table.insert(items,
+      { action = item.action, desc = " " .. item.desc, icon = item.icon .. " ", key = item.key }) end
+  return items
+end
+
+-- ───────────────────────────────────────────────────────────────
+-- Setup function
+-- ───────────────────────────────────────────────────────────────
+function M.setup()
+  local dashboard_augroup = vim.api.nvim_create_augroup("DashboardCustomKeymaps", { clear = true })
+  vim.api.nvim_create_autocmd("FileType", {
+    group = dashboard_augroup,
+    pattern = "dashboard",
+    callback = function()
+      local buf = vim.api.nvim_get_current_buf()
+      vim.keymap.set("n", "b", M.navigate_back, { buffer = buf, silent = true, desc = "Back" })
+      vim.keymap.set("n", "?", M.show_help, { buffer = buf, silent = true, desc = "Help" })
+    end,
+  })
+
+  require('dashboard').setup {
+    theme = 'doom',
+    hide = { statusline = false, tabline = true, winbar = true },
+    config = {
+      header = M.get_header(),
+      center = M.get_center,
+      footer = M.get_footer(),
+    },
+    auto_commands = {
+      { event = "VimEnter", callback = function()
+        M.state.current = "main"; M.state.history = {}; vim.cmd("Dashboard")
+      end },
+    }
+  }
+end
+
+-- ───────────────────────────────────────────────────────────────
+-- EXECUTE SETUP
+-- This is the crucial part for the NixOS config string.
+-- ───────────────────────────────────────────────────────────────
+M.setup()
