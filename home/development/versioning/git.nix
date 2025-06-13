@@ -45,10 +45,6 @@ in
       enable = true;
     };
 
-    gh = {
-      enable = true;
-    }
-
     # riff = {
     #   enable = true;
     # };

@@ -1,7 +1,7 @@
 { ... }:
 
 {
-  programs.lazygit = {
+  programs.gh = {
     enable = true;
   };
 }
