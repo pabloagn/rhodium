@@ -24,7 +24,7 @@
       }
       {
         plugin = venn-nvim; # Ability to detach from cursor position (ASCII design mode)
-        config = sourceLuaFile "venn-vim.lua";
+        config = sourceLuaFile "venn-nvim.lua";
       }
     ];
   };
