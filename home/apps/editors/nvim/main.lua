@@ -1,9 +1,11 @@
--- Local variables
 local opt = vim.opt
 local diagnostic = vim.diagnostic
 
 -- Enable filetype detection and plugins
 vim.cmd('filetype plugin indent on')
+
+-- Silence deprecation warnings
+vim.deprecate = function() end
 
 -- Diagnostics
 diagnostic.config({
@@ -64,8 +66,9 @@ opt.linebreak = true
 opt.autoindent = true
 opt.smartindent = true
 opt.smarttab = true
-opt.tabstop = 4    -- Number of spaces for each tab
-opt.shiftwidth = 4 -- Number of spaces when shifting text
+opt.expandtab = true -- Use spaces instead of tabs globally
+opt.tabstop = 2      -- Number of spaces for each tab
+opt.shiftwidth = 2   -- Number of spaces when shifting text
 
 -- Splits
 opt.splitbelow = true

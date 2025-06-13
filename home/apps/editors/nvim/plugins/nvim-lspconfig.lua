@@ -3,283 +3,295 @@ local functions = require('functions')
 
 -- Just
 require 'lspconfig'.just.setup {
-	capabilities = capabilities,
+  capabilities = capabilities,
+}
+
+-- Fennel
+require 'lspconfig'.fennel_ls.setup {
+  capabilities = capabilities,
 }
 
 -- Lua
 require 'lspconfig'.lua_ls.setup {
-	capabilities = capabilities,
-	settings = {
-		Lua = {
-			diagnostics = {
-				globals = { "vim" }, -- avoid false positives
-			},
-		}
-	}
+  capabilities = capabilities,
+  settings = {
+    Lua = {
+      diagnostics = {
+        globals = { "vim" }, -- avoid false positives
+      },
+      format = {
+        enable = true,
+        defaultConfig = {
+          indent_style = "space",
+          indent_size = "2",
+        }
+      },
+    }
+  }
 }
 
 -- Fish Shell
 require 'lspconfig'.fish_lsp.setup {
-	capabilities = capabilities,
-	cmd = { 'fish-lsp', 'start' },
-	cmd_env = { fish_lsp_show_client_popups = false },
-	filetypes = { "fish" },
+  capabilities = capabilities,
+  cmd = { 'fish-lsp', 'start' },
+  cmd_env = { fish_lsp_show_client_popups = false },
+  filetypes = { "fish" },
 }
 
 -- Nushell
 require 'lspconfig'.nushell.setup {
-	capabilities = capabilities,
-	cmd = { "nu", "--lsp" },
-	filetypes = { "nu" },
-	root_dir = function(fname)
-		return vim.fs.root(fname, { ".git", "flake.nix", "pyproject.toml" })
-	end,
+  capabilities = capabilities,
+  cmd = { "nu", "--lsp" },
+  filetypes = { "nu" },
+  root_dir = function(fname)
+    return vim.fs.root(fname, { ".git", "flake.nix", "pyproject.toml" })
+  end,
 }
 
 -- Rust
 require 'lspconfig'.rust_analyzer.setup {
-	capabilities = capabilities,
+  capabilities = capabilities,
 }
 
 -- Scala
 require 'lspconfig'.metals.setup {
-	capabilities = capabilities,
+  capabilities = capabilities,
 }
 
 -- Go
 require 'lspconfig'.gopls.setup {
-	capabilities = capabilities,
+  capabilities = capabilities,
 }
 
 -- Python
 require 'lspconfig'.pyright.setup {
-	capabilities = capabilities,
+  capabilities = capabilities,
 }
 
 -- LaTeX
 require 'lspconfig'.texlab.setup {
-	capabilities = capabilities,
+  capabilities = capabilities,
 }
 
 -- Nixd (Primary Nix LSP)
 require 'lspconfig'.nixd.setup {
-	capabilities = capabilities,
-	settings = {
-		nixd = {
-			nixpkgs = {
-				expr = "import <nixpkgs> { }"
-			},
-			formatting = {
-				command = { "nixfmt" }
-			},
-			options = {
-				nixos = {
-					expr = string.format("(builtins.getFlake \"/etc/nixos\").nixosConfigurations.%s.options", functions.get_hostname())
-				},
-				home_manager = {
-					expr = string.format("(builtins.getFlake \"/etc/nixos\").homeConfigurations.\"%s@%s\".options", functions.get_username(), functions.get_hostname())
-				}
-			},
-			diagnostic = {
-				suppress = { "sema-extra-with" }
-			}
-		}
-	}
+  capabilities = capabilities,
+  settings = {
+    nixd = {
+      nixpkgs = {
+        expr = "import <nixpkgs> { }"
+      },
+      formatting = {
+        command = { "nixfmt" }
+      },
+      options = {
+        nixos = {
+          expr = string.format("(builtins.getFlake \"/etc/nixos\").nixosConfigurations.%s.options", functions.get_hostname())
+        },
+        home_manager = {
+          expr = string.format("(builtins.getFlake \"/etc/nixos\").homeConfigurations.\"%s@%s\".options", functions.get_username(), functions.get_hostname())
+        }
+      },
+      diagnostic = {
+        suppress = { "sema-extra-with" }
+      }
+    }
+  }
 }
 
 -- Nil (Fallback Nix LSP for performance)
 require 'lspconfig'.nil_ls.setup {
-	capabilities = capabilities,
-	settings = {
-		['nil'] = {
-			formatting = {
-				command = { "nixfmt" }
-			},
-			diagnostics = {
-				ignored = { "unused_binding", "unused_with" },
-				excludeFiles = { "*.generated.nix" }
-			},
-			nix = {
-				flake = {
-					autoArchive = true
-				}
-			}
-		}
-	}
+  capabilities = capabilities,
+  settings = {
+    ['nil'] = {
+      formatting = {
+        command = { "nixfmt" }
+      },
+      diagnostics = {
+        ignored = { "unused_binding", "unused_with" },
+        excludeFiles = { "*.generated.nix" }
+      },
+      nix = {
+        flake = {
+          autoArchive = true
+        }
+      }
+    }
+  }
 }
 
 -- Performance optimization for Nix LSPs
 vim.api.nvim_create_autocmd("LspAttach", {
-	callback = function(args)
-		local client = vim.lsp.get_client_by_id(args.data.client_id)
-		if client and (client.name == "nil_ls" or client.name == "nixd") then
-			-- Disable semantic tokens for better performance
-			client.server_capabilities.semanticTokensProvider = nil
-		end
-	end,
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if client and (client.name == "nil_ls" or client.name == "nixd") then
+      -- Disable semantic tokens for better performance
+      client.server_capabilities.semanticTokensProvider = nil
+    end
+  end,
 })
 
 -- TOML
 require 'lspconfig'.taplo.setup {
-	capabilities = capabilities,
+  capabilities = capabilities,
 }
 
 -- YAML
 require 'lspconfig'.yamlls.setup {
-	capabilities = capabilities,
+  capabilities = capabilities,
 }
 
 -- TypeScript/JavaScript
 require 'lspconfig'.ts_ls.setup {
-	capabilities = capabilities,
+  capabilities = capabilities,
 }
 
 -- Tailwind CSS
 require 'lspconfig'.tailwindcss.setup {
-	capabilities = capabilities,
+  capabilities = capabilities,
 }
 
 -- HTML
 require 'lspconfig'.html.setup {
-	capabilities = capabilities,
+  capabilities = capabilities,
 }
 
 -- CSS
 require 'lspconfig'.cssls.setup {
-	capabilities = capabilities,
+  capabilities = capabilities,
 }
 
 -- Bash
 require 'lspconfig'.bashls.setup {
-	capabilities = capabilities,
+  capabilities = capabilities,
 }
 
 -- C/C++
 require 'lspconfig'.clangd.setup {
-	capabilities = capabilities,
+  capabilities = capabilities,
 }
 
 -- Clojure
 require 'lspconfig'.clojure_lsp.setup {
-	capabilities = capabilities,
+  capabilities = capabilities,
 }
 
 -- Elixir
 require 'lspconfig'.elixirls.setup {
-	capabilities = capabilities,
-	cmd = { "elixir-ls" },
+  capabilities = capabilities,
+  cmd = { "elixir-ls" },
 }
 
 -- Elm
 require 'lspconfig'.elmls.setup {
-	capabilities = capabilities,
+  capabilities = capabilities,
 }
 
 -- Haskell
 require 'lspconfig'.hls.setup {
-	capabilities = capabilities,
+  capabilities = capabilities,
 }
 
 -- PHP
 require 'lspconfig'.intelephense.setup {
-	capabilities = capabilities,
+  capabilities = capabilities,
 }
 
 -- Java
 require 'lspconfig'.jdtls.setup {
-	capabilities = capabilities,
+  capabilities = capabilities,
 }
 
 -- Kotlin
 require 'lspconfig'.kotlin_language_server.setup {
-	capabilities = capabilities,
+  capabilities = capabilities,
 }
 
 -- Markdown
 require 'lspconfig'.marksman.setup {
-	capabilities = capabilities,
+  capabilities = capabilities,
 }
 
 -- OCaml
 require 'lspconfig'.ocamllsp.setup {
-	capabilities = capabilities,
+  capabilities = capabilities,
 }
 
 -- C#
 require 'lspconfig'.omnisharp.setup {
-	capabilities = capabilities,
+  capabilities = capabilities,
 }
 
 -- Perl
 require 'lspconfig'.perlnavigator.setup {
-	capabilities = capabilities,
+  capabilities = capabilities,
 }
 
 -- Swift
 require 'lspconfig'.sourcekit.setup {
-	capabilities = capabilities,
+  capabilities = capabilities,
 }
 
 -- SQL
 require 'lspconfig'.sqls.setup {
-	capabilities = capabilities,
+  capabilities = capabilities,
 }
 
 -- Zig
 require 'lspconfig'.zls.setup {
-	capabilities = capabilities,
+  capabilities = capabilities,
 }
 
 -- Odin
 require 'lspconfig'.ols.setup {
-	capabilities = capabilities,
-	init_options = {
-		checker_args = "-strict-style",
-		collections = {
-			{ name = "shared", path = vim.fn.expand('$HOME/odin-lib') }
-		},
-	},
+  capabilities = capabilities,
+  init_options = {
+    checker_args = "-strict-style",
+    collections = {
+      { name = "shared", path = vim.fn.expand('$HOME/odin-lib') }
+    },
+  },
 }
 
 -- Docker
 require 'lspconfig'.dockerls.setup {
-	capabilities = capabilities,
+  capabilities = capabilities,
 }
 
 -- JSON (requires schemastore.nvim plugin)
 require 'lspconfig'.jsonls.setup {
-	capabilities = capabilities,
-	settings = {
-		json = {
-			schemas = require('schemastore').json.schemas(),
-			validate = { enable = true },
-		},
-	},
+  capabilities = capabilities,
+  settings = {
+    json = {
+      schemas = require('schemastore').json.schemas(),
+      validate = { enable = true },
+    },
+  },
 }
 
 -- GraphQL
 require 'lspconfig'.graphql.setup {
-	capabilities = capabilities,
+  capabilities = capabilities,
 }
 
 -- Vue (Volar for Vue 3)
 require 'lspconfig'.volar.setup {
-	capabilities = capabilities,
+  capabilities = capabilities,
 }
 
 -- Svelte
 require 'lspconfig'.svelte.setup {
-	capabilities = capabilities,
+  capabilities = capabilities,
 }
 
 -- XML
 require 'lspconfig'.lemminx.setup {
-	capabilities = capabilities,
+  capabilities = capabilities,
 }
 
 -- R
 require 'lspconfig'.r_language_server.setup {
-	capabilities = capabilities,
+  capabilities = capabilities,
 }
 
 -- -- Dart / Flutter
@@ -289,58 +301,58 @@ require 'lspconfig'.r_language_server.setup {
 
 -- F#
 require 'lspconfig'.fsautocomplete.setup {
-	capabilities = capabilities,
+  capabilities = capabilities,
 }
 
 -- Fortran
 require 'lspconfig'.fortls.setup {
-	capabilities = capabilities,
+  capabilities = capabilities,
 }
 
 -- Protocol Buffers
-require 'lspconfig'.bufls.setup {
-	capabilities = capabilities,
+require 'lspconfig'.buf_ls.setup {
+  capabilities = capabilities,
 }
 
 -- Terraform
 require 'lspconfig'.terraformls.setup {
-	capabilities = capabilities,
+  capabilities = capabilities,
 }
 
 -- CMake
 require 'lspconfig'.cmake.setup {
-	capabilities = capabilities,
+  capabilities = capabilities,
 }
 
 -- Crystal
 require 'lspconfig'.crystalline.setup {
-	capabilities = capabilities,
+  capabilities = capabilities,
 }
 
 -- D language
 require 'lspconfig'.serve_d.setup {
-	capabilities = capabilities,
+  capabilities = capabilities,
 }
 
 -- Deno (TypeScript/JavaScript alternative)
 require 'lspconfig'.denols.setup {
-	capabilities = capabilities,
-	root_dir = require('lspconfig').util.root_pattern("deno.json", "deno.jsonc"),
+  capabilities = capabilities,
+  root_dir = require('lspconfig').util.root_pattern("deno.json", "deno.jsonc"),
 }
 
 -- Dhall
 require 'lspconfig'.dhall_lsp_server.setup {
-	capabilities = capabilities,
+  capabilities = capabilities,
 }
 
 -- GLSL
 require 'lspconfig'.glslls.setup {
-	capabilities = capabilities,
+  capabilities = capabilities,
 }
 
 -- Prisma
 require 'lspconfig'.prismals.setup {
-	capabilities = capabilities,
+  capabilities = capabilities,
 }
 
 -- -- Rome (JS/TS formatter/linter)

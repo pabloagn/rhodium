@@ -32,6 +32,9 @@
     elmPackages.elm-format
     elmPackages.elm-language-server
 
+    # Fennel
+    fennel-ls
+
     # General
     nodePackages.prettier
     prettierd # Prettier running as daemon

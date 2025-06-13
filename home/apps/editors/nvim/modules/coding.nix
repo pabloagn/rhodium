@@ -163,11 +163,11 @@
             p.tree-sitter-yuck
             p.tree-sitter-zathurarc
             p.tree-sitter-zig
+            p.tree-sitter-fennel
           ])
         );
         config = sourceLuaFile "nvim-treesitter.lua";
       }
-
     ];
   };
 }
