@@ -28,8 +28,8 @@
       window_padding_width = "10 15 15 15";
 
       # Cursor
-      cursor_trail = 3;
-      cursor_trail_decay = "0.1 0.4";
+      # cursor_trail = 3;
+      # cursor_trail_decay = "0.1 0.4";
       cursor_blink_interval = 0;
 
       # Other properties

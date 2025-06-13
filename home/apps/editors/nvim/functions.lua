@@ -569,14 +569,8 @@ function M.toggle_virtual_text()
 
   vim.diagnostic.config({
     virtual_text = virtual_text_enabled and {
-      enabled = true,
       source = "if_many",
       prefix = "●",
-      format = function(diagnostic)
-        local severity = vim.diagnostic.severity[diagnostic.severity]
-        local source = diagnostic.source and string.format("[%s]", diagnostic.source) or ""
-        return string.format("%s %s %s", severity:sub(1, 1), source, diagnostic.message)
-      end,
       spacing = 2,
     } or false
   })
@@ -585,43 +579,13 @@ function M.toggle_virtual_text()
     vim.log.levels.INFO, { title = "Diagnostics" })
 end
 
--- -- Toggle tiny-inline-diagnostic
--- function M.toggle_inline_diagnostics()
---   local tiny = require("tiny-inline-diagnostic")
---
---   if M.is_tiny_diagnostic_enabled() then
---     tiny.disable()
---     vim.notify("Inline diagnostics disabled", vim.log.levels.INFO, { title = "Diagnostics" })
---   else
---     tiny.enable()
---     vim.notify("Inline diagnostics enabled", vim.log.levels.INFO, { title = "Diagnostics" })
---   end
--- end
---
--- -- Check if tiny-inline-diagnostic is enabled
--- function M.is_tiny_diagnostic_enabled()
---   local ok, tiny = pcall(require, "tiny-inline-diagnostic")
---   if not ok then return false end
---
---   -- TODO: This is a simple check - we might need to adjust based on plugin's API
---   return true -- Plugin doesn't expose enabled state, assume enabled if loaded
--- end
-
 -- Show diagnostic popup on current line
 function M.show_line_diagnostics()
   vim.diagnostic.open_float(nil, {
     focus = false,
     scope = "line",
-    border = "rounded",
+    border = "single",
     source = "always",
-    header = "Diagnostics:",
-    prefix = function(diagnostic, i, total)
-      local severity = vim.diagnostic.severity[diagnostic.severity]
-      local icon = severity == "ERROR" and "  " or
-          severity == "WARN" and "  " or
-          severity == "INFO" and "  " or "  "
-      return string.format("%d/%d %s", i, total, icon)
-    end,
   })
 end
 
@@ -630,76 +594,18 @@ function M.show_buffer_diagnostics()
   vim.diagnostic.open_float(nil, {
     focus = true,
     scope = "buffer",
-    border = "rounded",
+    border = "single",
     source = "always",
-    header = "Buffer Diagnostics:",
   })
 end
 
--- Jump to next/previous diagnostic with notification
+-- Jump to next/previous diagnostic
 function M.goto_next_diagnostic()
-  vim.diagnostic.goto_next({
-    severity = { min = vim.diagnostic.severity.HINT },
-    float = { border = "rounded" }
-  })
-  M.show_current_diagnostic()
+  vim.diagnostic.goto_next({ float = { border = "single" } })
 end
 
 function M.goto_prev_diagnostic()
-  vim.diagnostic.goto_prev({
-    severity = { min = vim.diagnostic.severity.HINT },
-    float = { border = "rounded" }
-  })
-  M.show_current_diagnostic()
-end
-
--- Show diagnostic at cursor position
-function M.show_current_diagnostic()
-  local line = vim.api.nvim_win_get_cursor(0)[1] - 1
-  local diagnostics = vim.diagnostic.get(0, { lnum = line })
-
-  if #diagnostics > 0 then
-    local diagnostic = diagnostics[1]
-    local severity = vim.diagnostic.severity[diagnostic.severity]
-    local message = string.format("[%s] %s", severity, diagnostic.message)
-    vim.notify(message, vim.log.levels.INFO, { title = "Diagnostic" })
-  end
-end
-
--- Change diagnostic severity filter for tiny-inline-diagnostic
-function M.set_diagnostic_severity(severities)
-  local ok, tiny = pcall(require, "tiny-inline-diagnostic")
-  if not ok then
-    vim.notify("tiny-inline-diagnostic not available", vim.log.levels.WARN)
-    return
-  end
-
-  tiny.change_severities(severities)
-  local severity_names = {}
-  for _, sev in ipairs(severities) do
-    table.insert(severity_names, vim.diagnostic.severity[sev])
-  end
-
-  vim.notify("Showing severities: " .. table.concat(severity_names, ", "),
-    vim.log.levels.INFO, { title = "Diagnostics" })
-end
-
--- Preset severity filters
-function M.show_errors_only()
-  M.set_diagnostic_severity({ vim.diagnostic.severity.ERROR })
-end
-
-function M.show_errors_and_warnings()
-  M.set_diagnostic_severity({ vim.diagnostic.severity.ERROR, vim.diagnostic.severity.WARN })
-end
-
-function M.show_all_diagnostics()
-  M.set_diagnostic_severity({
-    vim.diagnostic.severity.ERROR,
-    vim.diagnostic.severity.WARN,
-    vim.diagnostic.severity.INFO,
-    vim.diagnostic.severity.HINT
-  })
+  vim.diagnostic.goto_prev({ float = { border = "single" } })
 end
 
 -- Cursors

@@ -133,7 +133,7 @@ require("aerial").setup({
 
 	-- Options for the floating nav window
 	nav = {
-		border = "rounded",
+		border = "single",
 		max_height = 0.9,
 		min_height = { 10, 0.1 },
 		max_width = 0.5,

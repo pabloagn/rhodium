@@ -91,6 +91,10 @@
       #   config = sourceLuaFile "project-nvim.lua";
       # }
       {
+        plugin = orgmode;
+        # config = sourceLuaFile "orgmode-nvim.lua";
+      }
+      {
         plugin = snacks-nvim;
         config = sourceLuaFile "snacks-nvim.lua";
       }
@@ -106,7 +110,6 @@
       #   plugin = tiny-inline-diagnostic-nvim; # Better inline diagnostics
       #   config = sourceLuaFile "tiny-inline-diagnostic-nvim.lua";
       # }
-
     ];
   };
 }

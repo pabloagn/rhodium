@@ -308,7 +308,7 @@ vim.keymap.set('n', 'g]T', function() require("trouble").last({ skip_groups = tr
 vim.keymap.set('n', 'g[T', function() require("trouble").first({ skip_groups = true, jump = true }) end,
   { desc = "First trouble item" })
 
--- Diagnostics Inline
+-- Diagnostics
 -- -------------------------------------------------
 vim.keymap.set("n", "<Leader>dv", function() functions.toggle_virtual_text() end,
   {
@@ -317,14 +317,6 @@ vim.keymap.set("n", "<Leader>dv", function() functions.toggle_virtual_text() end
     desc = "Diagnostics: Toggle virtual text"
   })
 
-vim.keymap.set("n", "<Leader>di", function() functions.toggle_inline_diagnostics() end,
-  {
-    noremap = true,
-    silent = true,
-    desc = "Diagnostics: Toggle inline display"
-  })
-
--- Show diagnostic information
 vim.keymap.set("n", "<Leader>dl", function() functions.show_line_diagnostics() end,
   {
     noremap = true,
@@ -339,14 +331,6 @@ vim.keymap.set("n", "<Leader>db", function() functions.show_buffer_diagnostics()
     desc = "Diagnostics: Show buffer diagnostics"
   })
 
-vim.keymap.set("n", "<Leader>dc", function() functions.show_current_diagnostic() end,
-  {
-    noremap = true,
-    silent = true,
-    desc = "Diagnostics: Show current diagnostic"
-  })
-
--- Navigate diagnostics
 vim.keymap.set("n", "]d", function() functions.goto_next_diagnostic() end,
   {
     noremap = true,
@@ -361,7 +345,6 @@ vim.keymap.set("n", "[d", function() functions.goto_prev_diagnostic() end,
     desc = "Diagnostics: Previous diagnostic"
   })
 
--- Quick diagnostic navigation (errors only)
 vim.keymap.set("n", "]e", function()
   vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR })
 end, {
@@ -378,27 +361,97 @@ end, {
   desc = "Diagnostics: Previous error"
 })
 
--- Severity filtering
-vim.keymap.set("n", "<Leader>d1", function() functions.show_errors_only() end,
-  {
-    noremap = true,
-    silent = true,
-    desc = "Diagnostics: Show errors only"
-  })
-
-vim.keymap.set("n", "<Leader>d2", function() functions.show_errors_and_warnings() end,
-  {
-    noremap = true,
-    silent = true,
-    desc = "Diagnostics: Show errors & warnings"
-  })
-
-vim.keymap.set("n", "<Leader>d3", function() functions.show_all_diagnostics() end,
-  {
-    noremap = true,
-    silent = true,
-    desc = "Diagnostics: Show all severities"
-  })
+-- -- Diagnostics Inline
+-- -- -------------------------------------------------
+-- vim.keymap.set("n", "<Leader>dv", function() functions.toggle_virtual_text() end,
+--   {
+--     noremap = true,
+--     silent = true,
+--     desc = "Diagnostics: Toggle virtual text"
+--   })
+--
+-- vim.keymap.set("n", "<Leader>di", function() functions.toggle_inline_diagnostics() end,
+--   {
+--     noremap = true,
+--     silent = true,
+--     desc = "Diagnostics: Toggle inline display"
+--   })
+--
+-- -- Show diagnostic information
+-- vim.keymap.set("n", "<Leader>dl", function() functions.show_line_diagnostics() end,
+--   {
+--     noremap = true,
+--     silent = true,
+--     desc = "Diagnostics: Show line diagnostics"
+--   })
+--
+-- vim.keymap.set("n", "<Leader>db", function() functions.show_buffer_diagnostics() end,
+--   {
+--     noremap = true,
+--     silent = true,
+--     desc = "Diagnostics: Show buffer diagnostics"
+--   })
+--
+-- vim.keymap.set("n", "<Leader>dc", function() functions.show_current_diagnostic() end,
+--   {
+--     noremap = true,
+--     silent = true,
+--     desc = "Diagnostics: Show current diagnostic"
+--   })
+--
+-- -- Navigate diagnostics
+-- vim.keymap.set("n", "]d", function() functions.goto_next_diagnostic() end,
+--   {
+--     noremap = true,
+--     silent = true,
+--     desc = "Diagnostics: Next diagnostic"
+--   })
+--
+-- vim.keymap.set("n", "[d", function() functions.goto_prev_diagnostic() end,
+--   {
+--     noremap = true,
+--     silent = true,
+--     desc = "Diagnostics: Previous diagnostic"
+--   })
+--
+-- -- Quick diagnostic navigation (errors only)
+-- vim.keymap.set("n", "]e", function()
+--   vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR })
+-- end, {
+--   noremap = true,
+--   silent = true,
+--   desc = "Diagnostics: Next error"
+-- })
+--
+-- vim.keymap.set("n", "[e", function()
+--   vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.ERROR })
+-- end, {
+--   noremap = true,
+--   silent = true,
+--   desc = "Diagnostics: Previous error"
+-- })
+--
+-- -- Severity filtering
+-- vim.keymap.set("n", "<Leader>d1", function() functions.show_errors_only() end,
+--   {
+--     noremap = true,
+--     silent = true,
+--     desc = "Diagnostics: Show errors only"
+--   })
+--
+-- vim.keymap.set("n", "<Leader>d2", function() functions.show_errors_and_warnings() end,
+--   {
+--     noremap = true,
+--     silent = true,
+--     desc = "Diagnostics: Show errors & warnings"
+--   })
+--
+-- vim.keymap.set("n", "<Leader>d3", function() functions.show_all_diagnostics() end,
+--   {
+--     noremap = true,
+--     silent = true,
+--     desc = "Diagnostics: Show all severities"
+--   })
 
 -- Auto-show diagnostics on cursor hold
 vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
@@ -409,7 +462,7 @@ vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
       vim.diagnostic.open_float(nil, {
         focus = false,
         scope = "cursor",
-        border = "rounded",
+        border = "single",
         source = "always",
       })
     end
