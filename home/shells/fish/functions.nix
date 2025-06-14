@@ -2,7 +2,7 @@
 
 {
   xdg.configFile."fish/functions" = {
-    source = ./fish/functions;
+    source = ./functions;
     recursive = true;
   };
 }
