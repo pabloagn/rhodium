@@ -6,7 +6,7 @@
     ./eza.nix
     ./fzf.nix
     ./mcfly.nix
-    ./skim.nix
+    ./skim.nix # A fzf alternative written in rust
   ];
   programs = {
     jq = {

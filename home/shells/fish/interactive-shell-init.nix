@@ -21,6 +21,7 @@
       bind -M insert \co 'jtd; commandline -f repaint'   # Ctrl+O for Jump To Dir  (Insert Mode)
       bind -M insert \cp 'jtp; commandline -f repaint'   # Ctrl+P for Jump To Project (Insert Mode)
       bind -M insert \cy 'yy; commandline -f repaint'    # Ctrl+Y for Yazi file manager (Insert Mode)
+      bind -M insert \ch 'hh; commandline -f repaint'    # Ctrl+H for Help (Insert Mode)
 
       # Atuin
       bind \cr '_atuin_search'  # Ctrl+R for atuin

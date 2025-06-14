@@ -14,8 +14,8 @@ in
       # Tier 1
       "$mainMod, W, exec, ${preferredApps.terminal}"
       "$mainMod, B, exec, ${preferredApps.browser}" # TODO: Glue to main browser profile declaratively
-      "$mainMod, F, exec, ${preferredApps.terminal} -e lf"
-      "$mainMod, E, exec, ${preferredApps.terminal} -e v"
+      "$mainMod, F, exec, ${preferredApps.terminal} -e yw"
+      "$mainMod, E, exec, ${preferredApps.terminal} -e vw"
       "$mainMod, I, exec, ${preferredApps.ide}"
       "$mainMod, A, exec, ~/.local/bin/rofi-launcher.sh"
       "$mainMod, S, exec, ~/.local/bin/utils-screenshot.sh"
