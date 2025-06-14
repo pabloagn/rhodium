@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-
+# TODO: Delete this script
 # Find all TODO entries and format for fzf
 rg --line-number --no-heading "TODO:" | while IFS=':' read -r file line_num todo_line; do
     # Get context lines using sd for trimming whitespace

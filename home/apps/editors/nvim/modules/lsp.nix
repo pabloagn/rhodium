@@ -25,6 +25,11 @@
         plugin = trouble-nvim;
         config = sourceLuaFile "trouble-nvim.lua";
       }
+      # Formatting
+      {
+        plugin = conform-nvim;
+        config = sourceLuaFile "conform-nvim.lua";
+      }
     ];
   };
 }

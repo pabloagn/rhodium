@@ -12,11 +12,11 @@
     omnisharp-roslyn
 
     # C/C++
-    clang-tools # includes clang-format
-    # clangd
+    clang-tools # Includes clang-format
 
     # Clojure
     clojure-lsp
+    cljfmt # Formatter
 
     # Common Lisp
     sbcl # Common Lisp compiler
@@ -75,7 +75,8 @@
     # Nix
     nil
     nixd
-    nixpkgs-fmt
+    nixpkgs-fmt # Formatter
+    alejandra # Formatter
 
     # OCaml
     ocamlPackages.ocaml-lsp
@@ -93,6 +94,9 @@
     pyright # Type checker
     ruff # Fast Python formatter/linter
 
+    # R
+    rPackages.styler
+
     # Rust
     bacon # Background rust code checker
     cargo-info # Cargo subcommand to show crates info from crates.io
@@ -100,9 +104,11 @@
 
     # Scala
     metals
+    scalafmt # Formatter
 
     # SQL
     sqls # SQL language server
+    sqlfluff # Formatter
 
     # Swift
     sourcekit-lsp
@@ -142,6 +148,7 @@
 
     # CMake
     cmake-language-server
+    cmake-format
 
     # # Dart/Flutter
     # dart
@@ -158,6 +165,7 @@
 
     # Fortran
     fortls
+    fprettify # Formatter
 
     # F#
     fsautocomplete

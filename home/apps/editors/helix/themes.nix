@@ -2,7 +2,6 @@
 
 {
   programs.helix.themes = {
-    # TODO: Inject from theme
     chiaroscuro =
       let
         # transparent = "none";

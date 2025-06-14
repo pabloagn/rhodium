@@ -107,6 +107,7 @@
             p.tree-sitter-dart
             p.tree-sitter-dockerfile
             p.tree-sitter-elixir
+            p.tree-sitter-elisp
             p.tree-sitter-elm
             p.tree-sitter-erlang
             p.tree-sitter-fortran
