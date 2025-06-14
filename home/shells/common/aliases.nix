@@ -1,5 +1,5 @@
 { ... }:
-# TODO: Many of these entries should be dynamic (e.g., main editor goes to v, vi, vim, but nvim and other original commands stay the same)
+
 {
   # List commands
   ls = "eza -l";
@@ -32,7 +32,7 @@
 
   # View
   cat = "bat";
-  lf = "yy";
+  lf = "yw";
 
   # Search
   locate = "plocate";
@@ -40,9 +40,9 @@
   find = "fd"; # Find
 
   # Editor
-  vim = "nvim";
-  vi = "nvim";
-  v = "nvim";
+  vim = "vw";
+  vi = "vw";
+  v = "vw";
 
   # Clipboard
   y = "wl-copy"; # Yank

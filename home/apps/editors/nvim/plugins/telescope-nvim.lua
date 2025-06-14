@@ -2,157 +2,82 @@ local telescope = require('telescope')
 local actions = require('telescope.actions')
 local trouble = require("trouble.sources.telescope")
 
+-- Colors
+local colors = {
+  bg = '#0f1316',
+  fg = '#DCE0E8',
+  border = '#DCE0E8',
+  selection_bg = '#1f272e',
+}
 
+-- Strategies
+require('telescope.pickers.layout_strategies').horizontal_merged = function(picker, max_columns, max_lines, layout_config)
+  local layout = require('telescope.pickers.layout_strategies').horizontal(picker, max_columns, max_lines, layout_config)
+
+  layout.prompt.title = ''
+  layout.prompt.borderchars = { '─', '│', '─', '│', '┌', '┐', '┘', '└' }
+
+  layout.results.title = ''
+  layout.results.borderchars = { '─', '│', '─', '│', '├', '┤', '┘', '└' }
+  layout.results.line = layout.results.line - 1
+  layout.results.height = layout.results.height + 1
+
+  -- Only modify preview if it exists (not disabled)
+  if layout.preview then
+    layout.preview.title = ''
+    layout.preview.borderchars = { '─', '│', '─', '│', '┌', '┐', '┘', '└' }
+  end
+
+  return layout
+end
+
+-- Apply colors
+vim.api.nvim_set_hl(0, 'TelescopeNormal', { bg = colors.bg, fg = colors.fg })
+vim.api.nvim_set_hl(0, 'TelescopeBorder', { fg = colors.border, bg = colors.bg })
+vim.api.nvim_set_hl(0, 'TelescopePromptBorder', { fg = colors.border, bg = colors.bg })
+vim.api.nvim_set_hl(0, 'TelescopeResultsBorder', { fg = colors.border, bg = colors.bg })
+vim.api.nvim_set_hl(0, 'TelescopePreviewBorder', { fg = colors.border, bg = colors.bg })
+vim.api.nvim_set_hl(0, 'TelescopeSelection', { fg = colors.border, bg = colors.selection_bg })
+vim.api.nvim_set_hl(0, 'TelescopePromptPrefix', { fg = colors.border })
+
+-- Setup
 telescope.setup({
   defaults = {
-    borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" }, -- Window borders
-    prompt_prefix = "λ ", -- Prefix at the prompt entry
-    selection_caret = "● ", -- Prefix at the selected item
-    entry_prefix = "○ ", -- Prefix at the non-selected item
-    winblend = 2, -- Very subtle transparency
-    color_devicons = true, -- Enable devicons
-    path_display = { "truncate" },
-    layout_strategy = "horizontal",
+    -- Visuals & layout
+    winblend = 2,
+
+    prompt_prefix = " λ ",
+    selection_caret = " ● ",
+    entry_prefix = " ○ ",
+
+    -- The default layout will be the horizontal "matrix"
+    layout_strategy = 'horizontal_merged',
     layout_config = {
-      width = 0.85,
-      height = 0.80,
-      preview_cutoff = 120,
-      prompt_position = "top",
+      -- Set the prompt to always be at the top of the window
+      prompt_position = 'top',
+      width = 0.9,
+      height = 0.85,
       horizontal = {
-        preview_width = 0.6,
+        preview_width = 0.6, -- Preview pane takes 60% of the width
+      },
+      -- Config for any pickers that use the vertical layout
+      vertical = {
+        mirror = true, -- Puts preview on top, results below
       },
     },
+
     sorting_strategy = "ascending",
+    path_display = { "truncate" },
+    color_devicons = false,
 
-    -- Global ignores
     file_ignore_patterns = {
-      -- Version control
-      "%.git/",
-      "%.svn/",
-      "%.hg/",
-
-      -- Node.js / JavaScript
-      "node_modules/",
-      "%.npm/",
-      "%.yarn/",
-      "%.pnpm%-store/",
-      "dist/",
-      "build/",
-      "coverage/",
-      "%.next/",
-      "%.nuxt/",
-
-      -- Python
-      "__pycache__/",
-      "%.pyc",
-      "%.pyo",
-      "%.pyd",
-      "%.venv/",
-      "venv/",
-      "env/",
-      "%.tox/",
-      "%.pytest_cache/",
-      "%.mypy_cache/",
-      "%.coverage",
-      "htmlcov/",
-      "%.egg%-info/",
-      "dist/",
-      "build/",
-
-      -- Poetry
-      "%.poetry/",
-      "poetry%.lock",
-
-      -- Rust
-      "target/",
-      "Cargo%.lock",
-
-      -- Java
-      "%.class",
-      "%.jar",
-      "%.war",
-      "%.ear",
-      "target/",
-      "%.gradle/",
-      "build/",
-
-      -- C/C++
-      "%.o",
-      "%.a",
-      "%.so",
-      "%.dylib",
-      "%.dll",
-      "%.out",
-      "%.exe",
-
-      -- Cache and temporary directories
-      "%.cache/",
-      "%.tmp/",
-      "tmp/",
-      "temp/",
-      "%.direnv/",
-      "%.DS_Store",
-      "Thumbs%.db",
-
-      -- Backup files
-      "%.bkp",
-      "%.backup",
-      "%.bak",
-      "%.swp",
-      "%.swo",
-      "*~",
-
-      -- Image formats
-      "%.png",
-      "%.jpg",
-      "%.jpeg",
-      "%.gif",
-      "%.bmp",
-      "%.tiff",
-      "%.ico",
-      "%.webp",
-
-      -- Video formats
-      "%.mkv",
-      "%.mp4",
-      "%.avi",
-      "%.mov",
-      "%.wmv",
-      "%.flv",
-      "%.webm",
-
-      -- Audio formats
-      "%.mp3",
-      "%.wav",
-      "%.flac",
-      "%.aac",
-      "%.ogg",
-
-      -- Documents
-      -- "%.pdf",
-      "%.doc",
-      "%.docx",
-      "%.xls",
-      "%.xlsx",
-      "%.ppt",
-      "%.pptx",
-
-      -- IDE and editor files
-      -- "%.vscode/",
-      "%.idea/",
-      "%.eclipse/",
-      "%.settings/",
-
-      -- OS specific
-      "%.Trash/",
-      "%.recycle/",
-
-      -- Log files
-      "%.log",
-      "logs/",
+      "%.git/", "node_modules/", "dist/", "build/", "coverage/", "target/",
+      "__pycache__/", "%.pyc", "%.venv/", "venv/", "env/", "poetry.lock",
+      "%.class", "%.jar", "%.o", "%.a", "%.so", "%.out", "%.exe",
+      "%.cache/", "%.tmp/", "tmp/", "temp/", "%.DS_Store", "*.swp",
+      "*.png", "*.jpg", "*.jpeg", "*.gif", "*.webp", "*.mp4", "*.mp3",
     },
 
-    -- Basic mappings
     mappings = {
       i = {
         ["<C-j>"] = actions.move_selection_next,
@@ -182,43 +107,52 @@ telescope.setup({
     },
   },
 
+  -- Picker-Specific Overrides
+  -- Normal Layouts
   pickers = {
-    find_files = {
-      theme = 'dropdown',
-    },
-    live_grep = {
-      theme = 'dropdown',
-    },
+    find_files = {},
+    live_grep = {},
+    grep_string = {},
+    git_status = {},
     buffers = {
-      show_all_buffers = true,
+      previewer = true,
+      -- layout_config = { width = 0.5, height = 0.8 },
       sort_lastused = true,
       mappings = {
-        i = {
-          ["<c-d>"] = actions.delete_buffer,
-        },
-        n = {
-          ["dd"] = actions.delete_buffer,
-        },
+        i = { ["<c-d>"] = actions.delete_buffer },
+        n = { ["dd"] = actions.delete_buffer },
       },
     },
+    help_tags = {},
+    keymaps = {},
+    commands = {},
+    diagnostics = {}
+
+    -- Tall, single-column vertical layout
+    -- help_tags = { theme = "vertical", previewer = false, layout_config = { width = 0.7 } },
+    -- keymaps = { theme = "vertical", previewer = false, layout_config = { width = 0.7 } },
+    -- commands = { theme = "vertical", previewer = false, layout_config = { width = 0.7 } },
+    -- diagnostics = { theme = "vertical", layout_config = { width = 0.7 } },
+    -- git_branches = { theme = "vertical", previewer = false, layout_config = { width = 0.7 } },
+    -- git_commits = { theme = "vertical", layout_config = { width = 0.7 } },
   },
 
+  -- Extensions
   extensions = {
     frecency = {
-      -- HACK: Remove the annoying rebuild message on each prompt
-      validate = false,
-      auto_validate = false,
       show_scores = false,
       show_unindexed = true,
       ignore_patterns = { "*.git/*", "*/tmp/*" },
       disable_devicons = false,
     },
     todo_comments = {
-      -- TODO: Add any todo-comments telescope specific config here
+    },
+    live_grep_args = {
     }
   },
 })
 
--- Load existing extensions
 pcall(telescope.load_extension, 'fzf')
-pcall(telescope.load_extension, 'todo_comments')
+pcall(telescope.load_extension, 'frecency')
+pcall(telescope.load_extension, 'live_grep_args')
+pcall(telescope.load_extension, 'todo-comments')

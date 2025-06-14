@@ -17,16 +17,41 @@ vim.keymap.set('n', '<Leader>D', ':%d+<CR>', { noremap = true, silent = true, de
 
 -- Outline/Aerial Operations
 -- -------------------------------------------------
-vim.keymap.set("n", "<leader>a", "<cmd>AerialToggle!<CR>", { noremap = true, silent = true, desc = "Toggle sidebar" })
+-- Main outline toggles
+vim.keymap.set("n", "<leader>a", "<cmd>AerialToggle!<CR>",
+  {
+    noremap = true,
+    silent = true,
+    desc = "Toggle sidebar"
+  })
+
 vim.keymap.set("n", "<leader>A", "<cmd>AerialNavToggle<CR>",
-  { noremap = true, silent = true, desc = "Toggle navigation" })
-vim.keymap.set("n", "gO", "<cmd>AerialNavOpen<CR>", { noremap = true, silent = true, desc = "Open navigation" })
+  {
+    noremap = true,
+    silent = true,
+    desc = "Toggle navigation"
+  })
+
+-- Built-in outline (alternative to Aerial)
+vim.keymap.set("n", "gO", "<cmd>AerialNavOpen<CR>",
+  {
+    noremap = true,
+    silent = true,
+    desc = "Open navigation"
+  })
+
+-- Additional outline operations
 vim.keymap.set("n", "<leader>af", function()
   require("aerial").toggle()
   if require("aerial").is_open() then
     require("aerial").focus()
   end
-end, { noremap = true, silent = true, desc = "Focus sidebar" })
+end, {
+  noremap = true,
+  silent = true,
+  desc = "Focus sidebar"
+})
+
 vim.keymap.set("n", "<leader>ai", function()
   local aerial = require("aerial")
   local symbols = aerial.get_symbols()
@@ -35,53 +60,157 @@ vim.keymap.set("n", "<leader>ai", function()
   else
     vim.notify("No symbols found", vim.log.levels.WARN, { title = "Aerial" })
   end
-end, { noremap = true, silent = true, desc = "Show symbol count" })
-vim.keymap.set("n", "<leader>an", "<cmd>AerialNext<CR>", { noremap = true, silent = true, desc = "Next symbol" })
-vim.keymap.set("n", "<leader>ap", "<cmd>AerialPrev<CR>", { noremap = true, silent = true, desc = "Previous symbol" })
+end, {
+  noremap = true,
+  silent = true,
+  desc = "Show symbol count"
+})
+
+-- Quick symbol navigation (when aerial is open)
+vim.keymap.set("n", "<leader>an", "<cmd>AerialNext<CR>",
+  {
+    noremap = true,
+    silent = true,
+    desc = "Next symbol"
+  })
+
+vim.keymap.set("n", "<leader>ap", "<cmd>AerialPrev<CR>",
+  {
+    noremap = true,
+    silent = true,
+    desc = "Previous symbol"
+  })
+
+-- Alternative: Use telescope for symbol search
 vim.keymap.set("n", "<leader>as", function()
   require("telescope").extensions.aerial.aerial()
-end, { noremap = true, silent = true, desc = "Search symbols" })
+end, {
+  noremap = true,
+  silent = true,
+  desc = "Search symbols"
+})
 
 -- Comment
 -- -------------------------------------------------
 vim.keymap.set('v', '<Leader>cc', ":lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>",
-  { noremap = true, silent = true, desc = 'Toggle for visual' })
+  {
+    noremap = true,
+    silent = true,
+    desc = 'Toggle for visual'
+  })
 vim.keymap.set('n', '<Leader>cc', ":lua require('Comment.api').toggle.linewise.current()<CR>",
-  { noremap = true, silent = true, desc = 'Toggle for current' })
+  {
+    noremap = true,
+    silent = true,
+    desc = 'Toggle for current'
+  })
 vim.keymap.set('n', '<Leader>ca', function() functions.comment_append() end,
-  { noremap = true, silent = true, desc = 'Append' })
+  {
+    noremap = true,
+    silent = true,
+    desc = 'Append'
+  })
 vim.keymap.set('n', '<Leader>cA', function() functions.comment_all() end,
-  { noremap = true, silent = true, desc = 'Toggle all' })
+  {
+    noremap = true,
+    silent = true,
+    desc = 'Toggle all'
+  })
+
+-- TODO comment insertion (new line)
 vim.keymap.set('n', '<Leader>ct', function() functions.insert_todo() end,
-  { noremap = true, silent = true, desc = 'Insert TODO' })
+  {
+    noremap = true,
+    silent = true,
+    desc = 'Insert TODO'
+  })
 vim.keymap.set('n', '<Leader>cf', function() functions.insert_fix() end,
-  { noremap = true, silent = true, desc = 'Insert FIX' })
+  {
+    noremap = true,
+    silent = true,
+    desc = 'Insert FIX'
+  })
 vim.keymap.set('n', '<Leader>cn', function() functions.insert_note() end,
-  { noremap = true, silent = true, desc = 'Insert NOTE' })
+  {
+    noremap = true,
+    silent = true,
+    desc = 'Insert NOTE'
+  })
 vim.keymap.set('n', '<Leader>ch', function() functions.insert_hack() end,
-  { noremap = true, silent = true, desc = 'Insert HACK' })
+  {
+    noremap = true,
+    silent = true,
+    desc = 'Insert HACK'
+  })
 vim.keymap.set('n', '<Leader>cw', function() functions.insert_warn() end,
-  { noremap = true, silent = true, desc = 'Insert WARN' })
+  {
+    noremap = true,
+    silent = true,
+    desc = 'Insert WARN'
+  })
 vim.keymap.set('n', '<Leader>cp', function() functions.insert_perf() end,
-  { noremap = true, silent = true, desc = 'Insert PERF' })
+  {
+    noremap = true,
+    silent = true,
+    desc = 'Insert PERF'
+  })
 vim.keymap.set('n', '<Leader>ce', function() functions.insert_test() end,
-  { noremap = true, silent = true, desc = 'Insert TEST' })
+  {
+    noremap = true,
+    silent = true,
+    desc = 'Insert TEST'
+  })
+
+-- TODO utilities
 vim.keymap.set('n', '<Leader>cd', function() functions.toggle_todo_done() end,
-  { noremap = true, silent = true, desc = 'Toggle TODO/DONE' })
+  {
+    noremap = true,
+    silent = true,
+    desc = 'Toggle TODO/DONE'
+  })
 vim.keymap.set('n', '<Leader>cl', function() functions.list_buffer_todos() end,
-  { noremap = true, silent = true, desc = 'List buffer TODOs' })
+  {
+    noremap = true,
+    silent = true,
+    desc = 'List buffer TODOs'
+  })
 
 -- Edit
 -- -------------------------------------------------
 vim.keymap.set('n', '<Leader>er', function() functions.replace_buffer_with_clipboard() end,
-  { noremap = true, silent = true, desc = 'Replace buffer with clipboard' })
+  {
+    noremap = true,
+    silent = true,
+    desc = 'Replace buffer with clipboard'
+  })
 vim.keymap.set('v', '<Leader>er', ':<C-u>lua require("functions").replace_selection_with_clipboard()<CR>',
-  { noremap = true, silent = true, desc = 'Replace selection with clipboard' })
+  {
+    noremap = true,
+    silent = true,
+    desc = 'Replace selection with clipboard'
+  })
+-- vim.keymap.set('v', '<Leader>er', function() functions.replace_selection_with_clipboard() end,
+--   {
+--     noremap = true,
+--     silent = true,
+--     desc = 'Replace selection with clipboard'
+--   })
 
 -- Replace (Spectre)
 -- -------------------------------------------------
-vim.keymap.set('n', '<leader>rf', function() require('spectre').open() end, { desc = 'Find' })
-vim.keymap.set('v', '<leader>rf', function() require('spectre').open_visual() end, { desc = 'Find on Visual' })
+vim.keymap.set('n', '<leader>rf', function()
+    require('spectre').open()
+  end,
+  {
+    desc = 'Find'
+  })
+
+vim.keymap.set('v', '<leader>rf', function()
+    require('spectre').open_visual()
+  end,
+  {
+    desc = 'Find on Visual'
+  })
 
 -- LSP Actions (Direct actions that do something)
 -- -------------------------------------------------
@@ -99,42 +228,78 @@ vim.keymap.set('n', 'gt', builtin.lsp_type_definitions, { desc = 'Go to type def
 
 -- Find/Search (Interactive pickers and browsers)
 -- -------------------------------------------------
+-- Files and project
 vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Files' })
 vim.keymap.set('n', '<Leader>fp', function() functions.find_files_in_project() end,
-  { noremap = true, silent = true, desc = 'Project files' })
+  {
+    noremap = true,
+    silent = true,
+    desc = 'Project files'
+  })
 vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Buffers' })
-vim.keymap.set('n', '<leader>fr', function() require('telescope').extensions.frecency.frecency() end,
+vim.keymap.set('n', '<leader>fr', function()
+    require('telescope').extensions.frecency.frecency()
+  end,
   { desc = 'Recent (Frecency)' })
-vim.keymap.set('n', '<leader>fg', function() require('telescope').extensions.live_grep_args.live_grep_args() end,
+
+-- Text search
+vim.keymap.set('n', '<leader>fg', function()
+    require('telescope').extensions.live_grep_args.live_grep_args()
+  end,
   { desc = 'Live grep with args' })
 vim.keymap.set('n', '<leader>fw', builtin.grep_string, { desc = 'Word under cursor' })
+
+-- Diagnostics browsing
 vim.keymap.set('n', '<leader>fd', builtin.diagnostics, { desc = 'Diagnostics (current file)' })
 vim.keymap.set('n', '<leader>fD', function() builtin.diagnostics({ bufnr = nil }) end,
   { desc = 'Diagnostics (all files)' })
+
+-- LSP symbol browsing
 vim.keymap.set('n', '<leader>fs', builtin.lsp_document_symbols, { desc = 'Symbols (document)' })
 vim.keymap.set('n', '<leader>fS', builtin.lsp_workspace_symbols, { desc = 'Symbols (workspace)' })
+
+-- Vim internals
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Help' })
+-- FIX: 
 vim.keymap.set('n', '<leader>fk', builtin.keymaps, { desc = 'Keymaps' })
+-- FIX: 
 vim.keymap.set('n', '<leader>fo', builtin.vim_options, { desc = 'Options' })
+-- FIX: 
 vim.keymap.set('n', '<leader>fc', builtin.command_history, { desc = 'Command history' })
+-- FIX: 
 vim.keymap.set('n', '<leader>fH', builtin.search_history, { desc = 'Search history' })
+
+-- Special finders
+-- FIX: 
 vim.keymap.set('n', '<leader>ft', function() functions.todo_picker() end,
-  { noremap = true, silent = true, desc = 'TODOs with priority sorting' })
+  {
+    noremap = true,
+    silent = true,
+    desc = 'TODOs with priority sorting'
+  })
 
 -- Trouble (Visual problem browser)
 -- -------------------------------------------------
+-- Core trouble toggles
 vim.keymap.set('n', '<leader>tt', function() require("trouble").toggle("diagnostics") end,
   { desc = "Toggle diagnostics" })
 vim.keymap.set('n', '<leader>tb', function() require("trouble").toggle("diagnostics", { filter = { buf = 0 } }) end,
   { desc = "Buffer diagnostics" })
 vim.keymap.set('n', '<leader>tq', function() require("trouble").toggle("qflist") end, { desc = "Quickfix list" })
-vim.keymap.set('n', '<leader>tl', function() require("trouble").toggle("loclist") end, { desc = "Location list" })
-vim.keymap.set('n', '<leader>tr', function() require("trouble").toggle("lsp_references") end, { desc = "LSP references" })
+vim.keymap.set('n', '<leader>tl', function() require("trouble").toggle("loclist") end,
+  { desc = "Location list" })
+
+-- LSP-related trouble views
+vim.keymap.set('n', '<leader>tr', function() require("trouble").toggle("lsp_references") end,
+  { desc = "LSP references" })
 vim.keymap.set('n', '<leader>td', function() require("trouble").toggle("lsp_definitions") end,
   { desc = "LSP definitions" })
 vim.keymap.set('n', '<leader>ti', function() require("trouble").toggle("lsp_implementations") end,
   { desc = "LSP implementations" })
-vim.keymap.set('n', '<leader>ts', function() require("trouble").toggle("symbols") end, { desc = "Document symbols" })
+vim.keymap.set('n', '<leader>ts', function() require("trouble").toggle("symbols") end,
+  { desc = "Document symbols" })
+
+-- Trouble controls
 vim.keymap.set('n', '<leader>tc', function() require("trouble").close() end, { desc = "Close all" })
 
 -- Trouble Navigation (No leader - direct access)
@@ -151,26 +316,68 @@ vim.keymap.set('n', 'g[T', function() require("trouble").first({ skip_groups = t
 -- Diagnostics
 -- -------------------------------------------------
 vim.keymap.set("n", "<Leader>dv", function() functions.toggle_virtual_text() end,
-  { noremap = true, silent = true, desc = "Toggle virtual text" })
+  {
+    noremap = true,
+    silent = true,
+    desc = "Toggle virtual text"
+  })
+
 vim.keymap.set("n", "<Leader>dl", function() functions.show_line_diagnostics() end,
-  { noremap = true, silent = true, desc = "Show line diagnostics" })
+  {
+    noremap = true,
+    silent = true,
+    desc = "Show line diagnostics"
+  })
+
 vim.keymap.set("n", "<Leader>db", function() functions.show_buffer_diagnostics() end,
-  { noremap = true, silent = true, desc = "Show buffer diagnostics" })
+  {
+    noremap = true,
+    silent = true,
+    desc = "Show buffer diagnostics"
+  })
+
 vim.keymap.set("n", "]d", function() functions.goto_next_diagnostic() end,
-  { noremap = true, silent = true, desc = "Next diagnostic" })
+  {
+    noremap = true,
+    silent = true,
+    desc = "Next diagnostic"
+  })
+
 vim.keymap.set("n", "[d", function() functions.goto_prev_diagnostic() end,
-  { noremap = true, silent = true, desc = "Previous diagnostic" })
-vim.keymap.set("n", "]e", function() vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR }) end,
-  { noremap = true, silent = true, desc = "Next error" })
-vim.keymap.set("n", "[e", function() vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.ERROR }) end,
-  { noremap = true, silent = true, desc = "Previous error" })
+  {
+    noremap = true,
+    silent = true,
+    desc = "Previous diagnostic"
+  })
+
+vim.keymap.set("n", "]e", function()
+  vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR })
+end, {
+  noremap = true,
+  silent = true,
+  desc = "Next error"
+})
+
+vim.keymap.set("n", "[e", function()
+  vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.ERROR })
+end, {
+  noremap = true,
+  silent = true,
+  desc = "Previous error"
+})
 
 -- Auto-show diagnostics on cursor hold
 vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
   group = vim.api.nvim_create_augroup("DiagnosticFloat", { clear = true }),
   callback = function()
+    -- Only show if not in insert mode
     if vim.fn.mode() ~= "i" then
-      vim.diagnostic.open_float(nil, { focus = false, scope = "cursor", border = "single", source = "always" })
+      vim.diagnostic.open_float(nil, {
+        focus = false,
+        scope = "cursor",
+        border = "single",
+        source = "always",
+      })
     end
   end,
 })
@@ -178,23 +385,43 @@ vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
 -- Idents
 -- -------------------------------------------------
 vim.keymap.set({ 'n', 'v' }, '<Leader>ii', function() functions.smart_indent() end,
-  { noremap = true, silent = true, desc = 'Smart indent line/selection' })
+  {
+    noremap = true,
+    silent = true,
+    desc = 'Smart indent line/selection'
+  })
+
 vim.keymap.set({ 'n', 'v' }, '<Leader>io', function() functions.smart_outdent() end,
-  { noremap = true, silent = true, desc = 'Smart outdent line/selection' })
+  {
+    noremap = true,
+    silent = true,
+    desc = 'Smart outdent line/selection'
+  })
 
 -- Treesitter
 -- -------------------------------------------------
 vim.keymap.set('n', '<Leader>z', ':set foldmethod=expr foldexpr=nvim_treesitter#foldexpr()<CR>',
-  { noremap = true, silent = true, desc = 'Toggle Treesitter folding' })
+  {
+    noremap = true,
+    silent = true,
+    desc = 'Toggle Treesitter folding'
+  })
 
 -- Buffers
 -- -------------------------------------------------
+-- Scroll buffers
 vim.keymap.set('n', '<leader>s', ':BufferLineCycleNext<CR>', { desc = 'Next buffer', silent = true })
 vim.keymap.set('n', '<leader>S', ':BufferLineCyclePrev<CR>', { desc = 'Previous buffer', silent = true })
+
+-- Close buffers
 vim.keymap.set('n', '<leader>w', ':write | bdelete<CR>', { desc = 'Save and close', silent = true })
 vim.keymap.set('n', '<leader>q', ':bdelete!<CR>', { desc = 'Close without saving', silent = true })
+
+-- Move buffers
 vim.keymap.set('n', '<leader>bmn', ':BufferLineMoveNext<CR>', { desc = 'Move next', silent = true })
 vim.keymap.set('n', '<leader>bmp', ':BufferLineMovePrev<CR>', { desc = 'Move prev', silent = true })
+
+-- Go to buffer by number
 vim.keymap.set('n', '<leader>b1', '<Cmd>BufferLineGoToBuffer 1<CR>', { desc = 'Go to buffer 1', silent = true })
 vim.keymap.set('n', '<leader>b2', '<Cmd>BufferLineGoToBuffer 2<CR>', { desc = 'Go to buffer 2', silent = true })
 vim.keymap.set('n', '<leader>b3', '<Cmd>BufferLineGoToBuffer 3<CR>', { desc = 'Go to buffer 3', silent = true })
@@ -204,46 +431,123 @@ vim.keymap.set('n', '<leader>b6', '<Cmd>BufferLineGoToBuffer 6<CR>', { desc = 'G
 vim.keymap.set('n', '<leader>b7', '<Cmd>BufferLineGoToBuffer 7<CR>', { desc = 'Go to buffer 7', silent = true })
 vim.keymap.set('n', '<leader>b8', '<Cmd>BufferLineGoToBuffer 8<CR>', { desc = 'Go to buffer 8', silent = true })
 vim.keymap.set('n', '<leader>b9', '<Cmd>BufferLineGoToBuffer 9<CR>', { desc = 'Go to buffer 9', silent = true })
+
+-- Close buffers
 vim.keymap.set('n', '<leader>bcp', ':BufferLinePickClose<CR>', { desc = 'Pick to close', silent = true })
 vim.keymap.set('n', '<leader>bco', ':BufferLineCloseOthers<CR>', { desc = 'Close others', silent = true })
+
+-- Close buffers in direction
 vim.keymap.set('n', '<leader>bcr', ':BufferLineCloseRight<CR>', { desc = 'Close to right', silent = true })
 vim.keymap.set('n', '<leader>bcl', ':BufferLineCloseLeft<CR>', { desc = 'Close to left', silent = true })
+
+-- Pick buffer
 vim.keymap.set('n', '<leader>bp', ':BufferLinePick<CR>', { desc = 'Pick', silent = true })
+
+-- Pin/unpin buffer
 vim.keymap.set('n', '<leader>bP', ':BufferLineTogglePin<CR>', { desc = 'Toggle pin', silent = true })
+
+-- Sort buffers
 vim.keymap.set('n', '<leader>bsd', ':BufferLineSortByDirectory<CR>', { desc = 'Sort by directory', silent = true })
 vim.keymap.set('n', '<leader>bse', ':BufferLineSortByExtension<CR>', { desc = 'Sort by extension', silent = true })
 vim.keymap.set('n', '<leader>bst', ':BufferLineSortByTabs<CR>', { desc = 'Sort by tabs', silent = true })
+
+-- Buffer groups
 vim.keymap.set('n', '<leader>bgt', ':BufferLineGroupToggle Tests<CR>', { desc = 'Toggle Tests group', silent = true })
 vim.keymap.set('n', '<leader>bgd', ':BufferLineGroupToggle Docs<CR>', { desc = 'Toggle Docs group', silent = true })
 
 -- Git integration
 -- -------------------------------------------------
+-- FIX: 
 vim.keymap.set('n', '<leader>gc', builtin.git_commits, { desc = 'Commits' })
+-- FIX: 
 vim.keymap.set('n', '<leader>gb', builtin.git_branches, { desc = 'Branches' })
 vim.keymap.set('n', '<leader>gs', builtin.git_status, { desc = 'Status' })
 
 -- TODOs Navigation
 -- -------------------------------------------------
-vim.keymap.set("n", "]t", function() require("todo-comments").jump_next() end, { desc = "Next todo comment" })
-vim.keymap.set("n", "[t", function() require("todo-comments").jump_prev() end, { desc = "Previous todo comment" })
-vim.keymap.set("n", "]T", function() require("todo-comments").jump_next({ keywords = { "TODO", "FIX" } }) end,
-  { desc = "Next task" })
+vim.keymap.set("n", "]t", function()
+  require("todo-comments").jump_next()
+end, { desc = "Next todo comment" })
+
+vim.keymap.set("n", "[t", function()
+  require("todo-comments").jump_prev()
+end, { desc = "Previous todo comment" })
+
+vim.keymap.set("n", "]T", function()
+  require("todo-comments").jump_next({ keywords = { "TODO", "FIX" } })
+end, { desc = "Next task" })
 
 -- Multicursor
 -- -------------------------------------------------
+-- Core multicursor operations
 vim.keymap.set({ "n", "v" }, "<Leader>m", function() functions.start_multicursor() end,
-  { noremap = true, silent = true, desc = "Start on word/selection" })
+  {
+    noremap = true,
+    silent = true,
+    desc = "Start on word/selection"
+  })
+
 vim.keymap.set("n", "<Leader>mc", function() functions.clear_multicursors() end,
-  { noremap = true, silent = true, desc = "Clear all" })
+  {
+    noremap = true,
+    silent = true,
+    desc = "Clear all"
+  })
+
+-- Pattern-based selection
 vim.keymap.set("n", "<Leader>mp", function() functions.smart_pattern_select() end,
-  { noremap = true, silent = true, desc = "Pattern in buffer" })
+  {
+    noremap = true,
+    silent = true,
+    desc = "Pattern in buffer"
+  })
+
 vim.keymap.set("v", "<Leader>mp", function() functions.visual_pattern_select() end,
-  { noremap = true, silent = true, desc = "Pattern in selection" })
+  {
+    noremap = true,
+    silent = true,
+    desc = "Pattern in selection"
+  })
+
+-- Specialized selections
 vim.keymap.set("n", "<Leader>mu", function() functions.toggle_word_cursor() end,
-  { noremap = true, silent = true, desc = "Character under cursor" })
+  {
+    noremap = true,
+    silent = true,
+    desc = "Character under cursor"
+  })
+
 vim.keymap.set("v", "<Leader>mv", "<cmd>MCvisual<cr>",
-  { noremap = true, silent = true, desc = "Start on visual selection" })
-vim.keymap.set("n", "<Leader>mw", "<cmd>MCstart<cr>", { noremap = true, silent = true, desc = "Start on word" })
-vim.keymap.set("n", "<Leader>ma", "<cmd>MCpattern<cr>", { noremap = true, silent = true, desc = "All pattern matches" })
+  {
+    noremap = true,
+    silent = true,
+    desc = "Start on visual selection"
+  })
+
+-- Direct commands for advanced usage
+vim.keymap.set("n", "<Leader>mw", "<cmd>MCstart<cr>",
+  {
+    noremap = true,
+    silent = true,
+    desc = "Start on word"
+  })
+
+vim.keymap.set("n", "<Leader>ma", "<cmd>MCpattern<cr>",
+  {
+    noremap = true,
+    silent = true,
+    desc = "All pattern matches"
+  })
+
+-- Quick access for common workflows
 vim.keymap.set("v", "<Leader>ma", "<cmd>MCvisualPattern<cr>",
-  { noremap = true, silent = true, desc = "All matches in selection" })
+  {
+    noremap = true,
+    silent = true,
+    desc = "All matches in selection"
+  })
+
+-- LuaSnip (Snippets)
+-- TODO: Add this
+-- vim.keymap.set('i', '<Tab>', "lua equire('luasnip').expand_or_jump()<CR>", { noremap = true, silent = true, expr = true, desc = 'Expand or jump to next snippet' })
+-- vim.keymap.set('i', '<S-Tab>', "lua require('luasnip').jump(-1)<CR>", { noremap = true, silent = true, expr = true, desc = 'Jump to previous snippet' })

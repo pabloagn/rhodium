@@ -6,6 +6,7 @@
     font.size = 12;
 
     settings = {
+      allow_remote_control = true;
       scrollback_lines = 10000;
       enable_audio_bell = false;
 

@@ -326,33 +326,6 @@ function M.find_files_in_project()
   end
 end
 
--- -- Comments
--- -- --------------------------------------------------
--- function CommentAppend()
--- 	local api = require('Comment.api')
--- 	local line = vim.api.nvim_get_current_line()
---
--- 	-- If already commented, just move to end of comment symbol
--- 	if line:match("^%s*//") or line:match("^%s*#") or line:match("^%s*--") then
--- 		-- Move to end of comment symbol
--- 		local _, finish = line:find("^%s*[%/%-%#]+%s*")
--- 		if finish then
--- 			vim.api.nvim_win_set_cursor(0, { vim.api.nvim_win_get_cursor(0)[1], finish })
--- 			vim.cmd("startinsert")
--- 		end
--- 	else
--- 		-- Comment the line
--- 		api.toggle.linewise.current()
--- 		-- Get updated line and move to end of comment symbol
--- 		local new_line = vim.api.nvim_get_current_line()
--- 		local _, finish = new_line:find("^%s*[%/%-%#]+%s*")
--- 		if finish then
--- 			vim.api.nvim_win_set_cursor(0, { vim.api.nvim_win_get_cursor(0)[1], finish })
--- 			vim.cmd("startinsert")
--- 		end
--- 	end
--- end
-
 -- Get comment string for current buffer
 function M.get_comment_string()
   -- Get the comment string from vim's commentstring option
@@ -409,7 +382,6 @@ end
 -- Comment Append
 function M.comment_append()
   local comment_prefix = M.get_comment_prefix()
-  -- Just insert the comment prefix with a space at current position
   vim.cmd("normal! i" .. comment_prefix .. " ")
   vim.cmd("startinsert!")
 end
@@ -457,17 +429,11 @@ end
 
 -- Create specific TODO comment functions
 function M.insert_todo() M.insert_todo_comment("TODO") end
-
 function M.insert_fix() M.insert_todo_comment("FIX") end
-
 function M.insert_hack() M.insert_todo_comment("HACK") end
-
 function M.insert_warn() M.insert_todo_comment("WARN") end
-
 function M.insert_perf() M.insert_todo_comment("PERF") end
-
 function M.insert_note() M.insert_todo_comment("NOTE") end
-
 function M.insert_test() M.insert_todo_comment("TEST") end
 
 -- Insert TODO comment at end of current line
@@ -496,17 +462,11 @@ end
 
 -- Create append functions for each TODO type
 function M.append_todo() M.append_todo_comment("TODO") end
-
 function M.append_fix() M.append_todo_comment("FIX") end
-
 function M.append_hack() M.append_todo_comment("HACK") end
-
 function M.append_warn() M.append_todo_comment("WARN") end
-
 function M.append_perf() M.append_todo_comment("PERF") end
-
 function M.append_note() M.append_todo_comment("NOTE") end
-
 function M.append_test() M.append_todo_comment("TEST") end
 
 -- Toggle TODO completion (DONE)

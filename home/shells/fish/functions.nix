@@ -3,16 +3,46 @@
 {
   programs.fish = {
     functions = {
-      y = {
-        description = "Yazi wrapper";
+      vw = {
+        description = "Neovim with automatic fullscreen padding";
         body = ''
+          # Remove padding when entering
+          kitty @ set-spacing padding=0
+          # Run nvim with all arguments
+          command nvim $argv
+          # Capture the exit status
+          set -l exit_status $status
+          # Restore padding when exiting
+          kitty @ set-spacing padding=10 padding=15 padding=15 padding=15
+          # Return the original exit status
+          return $exit_status
+        '';
+      };
+
+      yw = {
+        description = "Yazi with automatic fullscreen padding";
+        body = ''
+          # Remove padding when entering
+          kitty @ set-spacing padding=0
+
+          # Your existing yazi logic with cwd handling
           set tmp (mktemp -t "yazi-cwd.XXXXXX")
-          yazi $argv --cwd-file="$tmp"
+          command yazi $argv --cwd-file="$tmp"
+
+          # Capture exit status before any other commands
+          set -l exit_status $status
+
+          # Handle directory change
           if read -z cwd < "$tmp"; and [ -n "$cwd" ]; and [ "$cwd" != "$PWD" ]
             builtin cd -- "$cwd"
           end
           rm -f -- "$tmp"
-          end
+
+          # Restore padding when exiting
+          kitty @ set-spacing padding=10 padding=15 padding=15 padding=15
+
+          # Return the original exit status
+          return $exit_status
         '';
       };
 

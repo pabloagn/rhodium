@@ -1,4 +1,4 @@
-{ config, fishPlugins, ... }:
+{ fishPlugins, ... }:
 
 {
   # TODO: Fix this
