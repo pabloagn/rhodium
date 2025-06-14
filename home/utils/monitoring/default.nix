@@ -8,5 +8,7 @@
 
   home.packages = with pkgs; [
     lnav # Logfile navigator
+    pv # Monitor progress using bars
+    hyperfine # CLI benchmarking tool
   ];
 }

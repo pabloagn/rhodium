@@ -260,13 +260,9 @@ vim.keymap.set('n', '<leader>fS', builtin.lsp_workspace_symbols, { desc = 'Symbo
 
 -- Vim internals
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Help' })
--- FIX: 
 vim.keymap.set('n', '<leader>fk', builtin.keymaps, { desc = 'Keymaps' })
--- FIX: 
 vim.keymap.set('n', '<leader>fo', builtin.vim_options, { desc = 'Options' })
--- FIX: 
 vim.keymap.set('n', '<leader>fc', builtin.command_history, { desc = 'Command history' })
--- FIX: 
 vim.keymap.set('n', '<leader>fH', builtin.search_history, { desc = 'Search history' })
 
 -- Special finders

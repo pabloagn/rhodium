@@ -216,35 +216,6 @@ end
 
 -- Pickers
 -- --------------------------------------------------
-function M.todo_picker(opts)
-  opts = opts or {}
-
-  local priority_keywords = {
-    "SEV1", "SEV2", "SEV3",
-    "FIX", "FIXME", "BUG", "FIXIT", "ISSUE",
-    "TODO",
-    "HACK", "WARN", "WARNING", "XXX",
-    "PERF", "IMPR", "OPTIM", "PERFORMANCE", "OPTIMIZE",
-    "NOTE", "INFO",
-    "TEST", "TESTING", "PASSED", "FAILED",
-    "DONE"
-  }
-
-  -- local enhanced_opts = vim.tbl_deep_extend("force", {
-  --   keywords = priority_keywords,
-  --   layout_strategy = "horizontal",
-  --   layout_config = {
-  --     width = 0.95,
-  --     height = 0.85,
-  --     preview_width = 0.6,
-  --   },
-  --   sorting_strategy = "ascending",
-  --   prompt_title = "λ ",
-  -- }, opts)
-  --
-  -- -- Use the built-in todo-comments telescope extension
-  -- require('telescope').extensions.todo_comments.todo(enhanced_opts)
-end
 
 -- Pick from project root downwards
 function M.find_project_root()
@@ -429,11 +400,17 @@ end
 
 -- Create specific TODO comment functions
 function M.insert_todo() M.insert_todo_comment("TODO") end
+
 function M.insert_fix() M.insert_todo_comment("FIX") end
+
 function M.insert_hack() M.insert_todo_comment("HACK") end
+
 function M.insert_warn() M.insert_todo_comment("WARN") end
+
 function M.insert_perf() M.insert_todo_comment("PERF") end
+
 function M.insert_note() M.insert_todo_comment("NOTE") end
+
 function M.insert_test() M.insert_todo_comment("TEST") end
 
 -- Insert TODO comment at end of current line
@@ -462,11 +439,17 @@ end
 
 -- Create append functions for each TODO type
 function M.append_todo() M.append_todo_comment("TODO") end
+
 function M.append_fix() M.append_todo_comment("FIX") end
+
 function M.append_hack() M.append_todo_comment("HACK") end
+
 function M.append_warn() M.append_todo_comment("WARN") end
+
 function M.append_perf() M.append_todo_comment("PERF") end
+
 function M.append_note() M.append_todo_comment("NOTE") end
+
 function M.append_test() M.append_todo_comment("TEST") end
 
 -- Toggle TODO completion (DONE)
@@ -652,6 +635,77 @@ end
 function M.is_multicursor_active()
   local ok, hydra = pcall(require, 'hydra.statusline')
   return ok and hydra.is_active()
+end
+
+-- TODO Picker
+-- --------------------------------------------------
+function M.find_project_root_helper()
+  local markers = { '.git', '.svn', '.hg', 'package.json', 'Cargo.toml', 'go.mod', 'Makefile' }
+  local current_dir = vim.fn.expand('%:p:h')
+  local root = nil
+
+  for _, marker in ipairs(markers) do
+    root = vim.fn.finddir(marker, current_dir .. ';')
+    if root == '' then
+      root = vim.fn.findfile(marker, current_dir .. ';')
+    end
+    if root ~= '' then
+      return vim.fn.fnamemodify(root, ':h')
+    end
+  end
+
+  -- Fallback to git root if available
+  local git_root = vim.fn.system('git rev-parse --show-toplevel 2>/dev/null'):gsub('\n', '')
+  if vim.v.shell_error == 0 and git_root ~= '' then
+    return git_root
+  end
+
+  -- Fallback to current directory
+  return vim.fn.getcwd()
+end
+
+function M.todo_picker()
+  -- Define priority keywords
+  local priority_keywords = {
+    "SEV1", "SEV2", "SEV3",
+    "FIX", "FIXME", "BUG", "FIXIT", "ISSUE",
+    "TODO",
+    "HACK", "WARN", "WARNING", "XXX",
+    "PERF", "IMPR", "OPTIM", "PERFORMANCE", "OPTIMIZE",
+    "NOTE", "INFO",
+    "TEST", "TESTING", "PASSED", "FAILED",
+    "DONE"
+  }
+
+  -- Find project root
+  local project_root = M.find_project_root_helper()
+  if not project_root then
+    vim.notify('Could not find project root', vim.log.levels.WARN, { title = 'Todo Comments' })
+    return
+  end
+
+  -- Check dependencies
+  local deps_ok, err_msg = true, nil
+
+  if not pcall(require, 'todo-comments') then
+    deps_ok, err_msg = false, 'todo-comments.nvim is not installed'
+  elseif not pcall(require, 'telescope') then
+    deps_ok, err_msg = false, 'telescope.nvim is not installed'
+  end
+
+  if not deps_ok then
+    vim.notify(err_msg, vim.log.levels.ERROR, { title = 'Todo Comments' })
+    return
+  end
+
+  -- Use the todo-comments telescope integration
+  local todo_telescope = require('todo-comments.telescope')
+
+  -- Call with our configuration
+  todo_telescope.todo({
+    cwd = project_root,
+    keywords = priority_keywords,
+  })
 end
 
 -- Exposure

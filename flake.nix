@@ -246,8 +246,16 @@
         default = pkgs.mkShell {
           buildInputs = with pkgs; [
             nixpkgs-fmt
+            nixd
             nil
             git
+            ripgrep
+            sd
+            fd
+            pv
+            fzf
+            bat
+            hyperfine
           ];
         };
       };

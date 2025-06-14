@@ -127,14 +127,6 @@ telescope.setup({
     keymaps = {},
     commands = {},
     diagnostics = {}
-
-    -- Tall, single-column vertical layout
-    -- help_tags = { theme = "vertical", previewer = false, layout_config = { width = 0.7 } },
-    -- keymaps = { theme = "vertical", previewer = false, layout_config = { width = 0.7 } },
-    -- commands = { theme = "vertical", previewer = false, layout_config = { width = 0.7 } },
-    -- diagnostics = { theme = "vertical", layout_config = { width = 0.7 } },
-    -- git_branches = { theme = "vertical", previewer = false, layout_config = { width = 0.7 } },
-    -- git_commits = { theme = "vertical", layout_config = { width = 0.7 } },
   },
 
   -- Extensions

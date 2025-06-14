@@ -67,8 +67,8 @@ opt.autoindent = true
 opt.smartindent = true
 opt.smarttab = true
 opt.expandtab = true -- Use spaces instead of tabs globally
-opt.tabstop = 2      -- Number of spaces for each tab
-opt.shiftwidth = 2   -- Number of spaces when shifting text
+opt.tabstop = 4      -- Number of spaces for each tab
+opt.shiftwidth = 4   -- Number of spaces when shifting text
 
 -- Splits
 opt.splitbelow = true
