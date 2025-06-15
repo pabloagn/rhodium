@@ -2,37 +2,37 @@
   editors = {
     editor-instance = {
       binary = "kitty";
-      args = [ "-e" "nvim" ];
+      args = ["-e" "nvim"];
       icon = "nvim";
       description = "Editor";
     };
     helix-instance = {
       binary = "kitty";
-      args = [ "-e" "hx" ];
+      args = ["-e" "hx"];
       icon = "helix";
       description = "Helix";
     };
     nvim-instance = {
       binary = "kitty";
-      args = [ "-e" "nvim" ];
+      args = ["-e" "nvim"];
       icon = "neovim";
       description = "Neovim";
     };
     neovide-instance = {
       binary = "neovide";
-      args = [ ];
+      args = [];
       icon = "neovim";
       description = "Neovide";
     };
     zeditor-instance = {
       binary = "zeditor";
-      args = [ ];
+      args = [];
       icon = "zeditor";
       description = "Zeditor";
     };
     code-instance = {
       binary = "code";
-      args = [ ];
+      args = [];
       icon = "code";
       description = "VS Code";
     };
@@ -41,7 +41,7 @@
   viewers = {
     image-viewer = {
       binary = "feh";
-      args = [ "-Z" "--scale-down" "--auto-zoom" "--image-bg" "black" "%f" ];
+      args = ["-Z" "--scale-down" "--auto-zoom" "--image-bg" "black" "%f"];
       icon = "feh";
       description = "Image Viewer";
     };
@@ -50,73 +50,91 @@
   productivity = {
     onepassword = {
       binary = "1password";
-      args = [ "--force-device-scale-factor=1.5" ];
+      args = ["--force-device-scale-factor=1.5"];
       icon = "onepassword";
       description = "1Password";
     };
     protonmail = {
       binary = "proton-mail";
-      args = [ ];
+      args = [];
       icon = "protonmail";
       description = "ProtonMail";
     };
     slack = {
       binary = "slack";
-      args = [ ];
+      args = [];
       icon = "slack";
       description = "Slack";
     };
     standardnotes = {
       binary = "standardnotes";
-      args = [ "--force-device-scale-factor=1.5" ];
+      args = ["--force-device-scale-factor=1.5"];
       icon = "standardnotes";
       description = "Standard Notes";
     };
     teams = {
       binary = "teams-for-linux";
-      args = [ ];
+      args = [];
       icon = "teams";
       description = "Teams";
     };
     zen = {
       binary = "zen";
-      args = [ ];
+      args = [];
       icon = "zen";
       description = "Zen Browser";
+    };
+    obsidian = {
+      binary = "obsidian";
+      args = [];
+      icon = "obsidian";
+      description = "Obsidian";
     };
   };
 
   media = {
     spotify = {
       binary = "spotify";
-      args = [ ];
+      args = [];
       icon = "spotify";
       description = "Spotify GUI";
     };
     ncspot = {
-      binary = "ghostty";
-      args = [ "-e" "ncspot" ];
+      binary = "kitty";
+      args = ["-e" "ncspot"];
       icon = "spotify";
       description = "Spotify TUI";
+    };
+    gimp = {
+      binary = "gimp";
+      args = [];
+      icon = "gimp";
+      description = "GIMP";
+    };
+    inkscape = {
+      binary = "inkscape";
+      args = [];
+      icon = "inkscape";
+      description = "InkScape";
     };
   };
 
   terminals = {
     kitty-instance = {
       binary = "kitty";
-      args = [ ];
+      args = [];
       icon = "kitty";
       description = "Kitty";
     };
     foot-instance = {
       binary = "foot";
-      args = [ ];
+      args = [];
       icon = "foot";
       description = "Foot";
     };
     ghostty-instance = {
       binary = "ghostty";
-      args = [ ];
+      args = ["--shell-integration=none"];
       icon = "ghostty";
       description = "Ghostty";
     };
@@ -125,25 +143,25 @@
   shells = {
     bash-shell = {
       binary = "ghostty";
-      args = [ "-e" "bash" ];
+      args = ["-e" "bash"];
       icon = "bash";
       description = "Bash Shell";
     };
     zsh-shell = {
       binary = "ghostty";
-      args = [ "-e" "zsh" ];
+      args = ["-e" "zsh"];
       icon = "zsh";
       description = "Zsh Shell";
     };
     fish-shell = {
       binary = "ghostty";
-      args = [ "-e" "fish" ];
+      args = ["-e" "fish"];
       icon = "fish";
       description = "Fish Shell";
     };
     nu-shell = {
       binary = "ghostty";
-      args = [ "-e" "nu" ];
+      args = ["-e" "nu"];
       icon = "nu";
       description = "Nu Shell";
     };
@@ -152,13 +170,13 @@
   multiplexers = {
     tmux-session = {
       binary = "ghostty";
-      args = [ "-e" "tmux" ];
+      args = ["-e" "tmux"];
       icon = "tmux";
       description = "Tmux Session";
     };
     zellij = {
       binary = "ghostty";
-      args = [ "-e" "zellij" ];
+      args = ["-e" "zellij"];
       icon = "zellij";
       description = "Zellij Session";
     };

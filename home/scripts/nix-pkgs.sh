@@ -40,10 +40,11 @@ search_packages() {
 # Main execution
 if command -v fzf >/dev/null 2>&1; then
     # Use fzf for interactive selection
-    selected=$(search_packages | fzf \
-        --delimiter=' | ' \
-        --with-nth=2,3,4 \
-        --preview='
+    selected=$(
+        search_packages | fzf \
+            --delimiter=' | ' \
+            --with-nth=2,3,4 \
+            --preview='
             pkg=$(echo {} | cut -d" | " -f1)
             echo "Package: $pkg"
             echo "===================="
@@ -57,9 +58,9 @@ if command -v fzf >/dev/null 2>&1; then
             echo "Nix shell:"
             echo "  nix shell nixpkgs#$pkg"
         ' \
-        --preview-window='right:50%:wrap' \
-        --header='Select package (Enter: show install commands, Ctrl-C: exit)' \
-        --bind='enter:execute(
+            --preview-window='right:50%:wrap' \
+            --header='Select package (Enter: show install commands, Ctrl-C: exit)' \
+            --bind='enter:execute(
             pkg=$(echo {} | cut -d" | " -f1)
             echo "Package: $pkg"
             echo "===================="

@@ -1,20 +1,15 @@
-{ pkgs, userPreferences, ... }:
-
-let
+{
+  pkgs,
+  userPreferences,
+  ...
+}: let
   keyboardRepeat = userPreferences.behaviour.keyboardRepeat;
   keyboardDelay = userPreferences.behaviour.keyboardDelay;
-in
-
-{
+in {
   home.packages = with pkgs; [
     hyprpolkitagent
     hyprland-qtutils
   ];
-
-  # TODO: Check what's with this
-  #  systemd.user.targets.hyprland-session.Unit.Wants = [
-  #    "xdg-desktop-autostart.target"
-  #  ];
 
   wayland.windowManager.hyprland = {
     enable = true;
@@ -22,7 +17,7 @@ in
     systemd = {
       enable = true;
       enableXdgAutostart = true;
-      variables = [ "--all" ];
+      variables = ["--all"];
     };
 
     xwayland = {

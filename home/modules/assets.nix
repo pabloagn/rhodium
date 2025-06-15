@@ -1,12 +1,12 @@
-{ lib, config, ... }:
-
-with lib;
-
-let
+{
+  lib,
+  config,
+  ...
+}:
+with lib; let
   cfg = config.assets;
   repoAssetsPath = toString ../assets;
-in
-{
+in {
   options.assets = {
     icons.enable = mkEnableOption "Link icons directory to XDG data home";
     wallpapers.enable = mkEnableOption "Link wallpapers directory to XDG data home";
@@ -14,9 +14,8 @@ in
   };
 
   config = {
-
     # Direct activation scripts
-    home.activation.link-assets = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    home.activation.link-assets = lib.hm.dag.entryAfter ["writeBoundary"] ''
       ${optionalString cfg.wallpapers.enable ''
         echo "Setting up wallpapers symlink..."
         $DRY_RUN_CMD mkdir -p "${config.xdg.dataHome}"

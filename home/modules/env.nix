@@ -1,6 +1,8 @@
-{ config, userPreferences, ... }:
-
-let
+{
+  config,
+  userPreferences,
+  ...
+}: let
   homeDir = config.home.homeDirectory;
 
   dirs = {
@@ -32,10 +34,8 @@ let
     cacheHome = "${homeDir}/.cache";
     shareApps = "${homeDir}/.nix-profile/share/applications";
   };
-in
-{
+in {
   home.sessionVariables = {
-
     # App Preferences
     BROWSER = userPreferences.apps.browser;
     EDITOR = userPreferences.apps.editor;

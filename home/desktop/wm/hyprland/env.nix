@@ -1,9 +1,6 @@
-{ userPreferences, ... }:
-
-let
+{userPreferences, ...}: let
   cursorSize = userPreferences.behaviour.cursorSize;
-in
-{
+in {
   wayland.windowManager.hyprland = {
     settings = {
       env = [

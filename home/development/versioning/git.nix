@@ -1,10 +1,7 @@
-{ user, ... }:
-
-let
+{user, ...}: let
   userfullName = user.fullName;
   userEmail = user.emailMain;
-in
-{
+in {
   programs.git = {
     enable = true;
     userName = userfullName;

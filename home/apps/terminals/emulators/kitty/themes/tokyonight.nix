@@ -1,9 +1,6 @@
-{ ... }:
-
-{
+{...}: {
   programs.kitty = {
     settings = {
-
       background_opacity = 0.80;
       background = "#1a1b26";
       foreground = "#c0caf5";

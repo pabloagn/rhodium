@@ -3,7 +3,10 @@
 # Check dependencies
 dependencies=("slurp" "grim" "convert" "swappy")
 for dep in "${dependencies[@]}"; do
-    command -v "$dep" &> /dev/null || { echo "$dep not found, please install it."; exit 1; }
+    command -v "$dep" &>/dev/null || {
+        echo "$dep not found, please install it."
+        exit 1
+    }
 done
 
 # Capture screenshot

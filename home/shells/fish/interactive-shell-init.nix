@@ -1,6 +1,4 @@
-{ ... }:
-
-{
+{...}: {
   programs.fish = {
     interactiveShellInit = ''
       # Atuin
@@ -12,7 +10,7 @@
 
       # Normal mode
       bind \ct 'jtf; commandline -f repaint'           # Ctrl+T for Jump To File
-      bind \co 'jtd; commandline -f repaint'           # Ctrl+O for Jump To Dir  
+      bind \co 'jtd; commandline -f repaint'           # Ctrl+O for Jump To Dir
       bind \cp 'jtp; commandline -f repaint'           # Ctrl+P for Jump To Project
       bind \cy 'yy; commandline -f repaint'            # Ctrl+Y for Yazi file manager
 

@@ -1,15 +1,23 @@
-{ ... }:
+{...}:
 # TODO: Tidy this up
 {
   programs.ghostty = {
     settings = {
       # General
-      theme = "chiaroscuro";
+      # theme = "chiaroscuro";
+      theme = "kanso";
 
       # Font
       font-style = "Regular";
       # font-size = 13;
       # font-thicken = true;
+
+      # Typography
+      # font-family = "JetBrainsMono";
+      font-family = "JetBrains Mono";
+      # font-family = "IosevkaTerm NF";
+      # font-family = "FiraCode Nerd Font Mono Med";
+      # font-family = "JuliaMono";
 
       # Cursor
       # Enforce no blinking (shell vi mode can interfere)
@@ -31,13 +39,6 @@
       mouse-hide-while-typing = true;
       link-url = true;
       scrollback-limit = 1000000000;
-
-      # Typography
-      # font-family = "JetBrainsMono";
-      font-family = "JetBrains Mono";
-      # font-family = "IosevkaTerm NF";
-      # font-family = "FiraCode Nerd Font Mono Med";
-      # font-family = "JuliaMono";
 
       # font-feature = "calt" "liga" "dlig";
 

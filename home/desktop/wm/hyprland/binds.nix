@@ -1,13 +1,13 @@
-{ host, userPreferences, ... }:
-
-let
+{
+  host,
+  userPreferences,
+  ...
+}: let
   preferredApps = userPreferences.apps;
   preferredBehaviour = userPreferences.behaviour;
-in
-{
+in {
   wayland.windowManager.hyprland.settings = {
     bind = [
-
       # Core
       # ----------------------------------------
 
@@ -21,11 +21,11 @@ in
       "$mainMod, S, exec, ~/.local/bin/utils-screenshot.sh"
 
       # Tier 2 (Fallbacks)
-      # "$mainMod SHIFT, W, exec, ${preferredApps.terminalAlt}"
-      # "$mainMod SHIFT, B, exec, ${preferredApps.browserAlt}"
-      # "$mainMod SHIFT, F, exec, ${preferredApps.filesGraphic}"
-      # "$mainMod SHIFT, E, exec, ${preferredApps.terminal} -e ${preferredApps.editorAlt}"
-      # "$mainMod SHIFT, I, exec, ${preferredApps.ideAlt}"
+      "$mainMod SHIFT, W, exec, ${preferredApps.terminalAlt}"
+      "$mainMod SHIFT, B, exec, ${preferredApps.browserAlt}"
+      "$mainMod SHIFT, F, exec, ${preferredApps.filesGraphic}"
+      "$mainMod SHIFT, E, exec, ${preferredApps.terminal} -e ${preferredApps.editorAlt}"
+      "$mainMod SHIFT, I, exec, ${preferredApps.ideAlt}"
       # "$mainMod SHIFT, A, exec, ~/.local/bin/rofi-jumper.sh"
       # "$mainMod SHIFT, S, exec, ~/.local/bin/utils-screenshot.sh --area"
       # "$mainMod SHIFT, M, exec, ~/.local/bin/utils-screenshot.sh"
@@ -118,7 +118,6 @@ in
       "$mainMod SHIFT, 8, movetoworkspace, 8"
       "$mainMod SHIFT, 9, movetoworkspace, 9"
       "$mainMod SHIFT, 0, movetoworkspace, 10"
-
     ];
 
     bindm = [
@@ -141,4 +140,3 @@ in
     ];
   };
 }
-

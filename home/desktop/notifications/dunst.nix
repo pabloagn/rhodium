@@ -1,6 +1,4 @@
-{ ... }:
-
-{
+{...}: {
   services.dunst = {
     enable = true;
     settings = {
@@ -10,50 +8,50 @@
         height = 120;
         offset = "20x20";
         origin = "top-right";
-        
+
         frame_width = 1;
         frame_color = "#3c3c3c";
         separator_color = "#3c3c3c";
         separator_height = 1;
-        
+
         # Typography
         font = "JetBrains Mono Nerd Font 10";
-        
+
         # Spacing
         padding = 8;
         horizontal_padding = 12;
         text_icon_padding = 8;
-        
+
         # Terminal-inspired behavior
         sort = true;
         indicate_hidden = true;
         show_age_threshold = 60;
         stack_duplicates = true;
         hide_duplicate_count = false;
-        
+
         # Timing
         idle_threshold = 120;
         sticky_history = true;
         history_length = 20;
-        
+
         # Additional formatting
         word_wrap = true;
         ellipsize = "middle";
         ignore_newline = false;
         show_indicators = false;
-        
+
         # Prompt
         format = "<b>▶ %s</b>\n%b";
-        
+
         corner_radius = 0;
         progress_bar = true;
         progress_bar_height = 8;
         progress_bar_frame_width = 0;
         progress_bar_min_width = 150;
         progress_bar_max_width = 300;
-        
+
         highlight = "#ffffff";
-        
+
         # Mouse interaction
         mouse_left_click = "close_current";
         mouse_middle_click = "do_action, close_current";
@@ -81,7 +79,7 @@
         background = "#3a3a3a";
         foreground = "#ffffff";
         frame_color = "#555555";
-        timeout = 0;  # Stay until dismissed
+        timeout = 0; # Stay until dismissed
       };
 
       # Special application overrides

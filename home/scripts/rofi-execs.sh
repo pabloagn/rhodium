@@ -13,7 +13,7 @@ for script in "$SCRIPT_DIR"/*.sh; do
     description=$(sed -n '4s/^# Description: //p' "$script")
 
     # Combine title and description in one line, formatted with title and italicized description
-		MENU_ENTRIES+="$title (<i>$description</i>)\n"
+    MENU_ENTRIES+="$title (<i>$description</i>)\n"
 done
 
 # Show Rofi menu and capture the selected title

@@ -1,8 +1,10 @@
-{ pkgs, userPreferences, ... }:
-let
-  cursorSize = userPreferences.behaviour.cursorSize;
-in
 {
+  pkgs,
+  userPreferences,
+  ...
+}: let
+  cursorSize = userPreferences.behaviour.cursorSize;
+in {
   home.pointerCursor = {
     enable = true;
     # package = pkgs.rose-pine-hyprcursor;

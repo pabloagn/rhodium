@@ -1,6 +1,12 @@
-{ userData, theme, userExtras, rhodiumLib, userPreferences, host, ... }:
-
 {
+  userData,
+  theme,
+  userExtras,
+  rhodiumLib,
+  userPreferences,
+  host,
+  ...
+}: {
   imports = [
     # Themes
     ../../home/assets/themes

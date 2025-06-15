@@ -1,9 +1,8 @@
-{ ... }:
+{...}:
 # TODO: Inject theme
 {
   programs.kitty = {
     settings = {
-
       # Theme
       background_opacity = 0.80;
 

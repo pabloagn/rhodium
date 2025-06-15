@@ -1,8 +1,5 @@
-{ pkgs, ... }:
-
-{
+{pkgs, ...}: {
   home.packages = with pkgs; [
-
     # Bash/Shell
     bash-language-server
     shfmt # Shell formatter

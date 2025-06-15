@@ -3,10 +3,10 @@
 # Find all TODO entries and format for fzf
 rg --line-number --no-heading "TODO:" | while IFS=':' read -r file line_num todo_line; do
     # Get context lines using sd for trimming whitespace
-    prev_line=$(sd '^[[:space:]]*' '' <<< "$(sed -n "$((line_num - 1))p" "$file" 2>/dev/null)")
-    current_line=$(sd '^[[:space:]]*' '' <<< "$todo_line")
-    next_line=$(sd '^[[:space:]]*' '' <<< "$(sed -n "$((line_num + 1))p" "$file" 2>/dev/null)")
-    
+    prev_line=$(sd '^[[:space:]]*' '' <<<"$(sed -n "$((line_num - 1))p" "$file" 2>/dev/null)")
+    current_line=$(sd '^[[:space:]]*' '' <<<"$todo_line")
+    next_line=$(sd '^[[:space:]]*' '' <<<"$(sed -n "$((line_num + 1))p" "$file" 2>/dev/null)")
+
     # Format output with indentation
     printf "%s\n" "$file"
     printf "  %s\n" "${prev_line:-}"

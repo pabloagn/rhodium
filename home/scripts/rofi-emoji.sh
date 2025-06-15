@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
 # Define a list of emojis
-EMOJI_LIST=$(cat <<EOF
+EMOJI_LIST=$(
+    cat <<EOF
 😀 Grinning Face
 😁 Beaming Face with Smiling Eyes
 😂 Face with Tears of Joy
