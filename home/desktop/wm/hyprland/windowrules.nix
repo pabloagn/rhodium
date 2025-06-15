@@ -7,12 +7,12 @@
         "workspace special:calendar,class:(foot|st|alacritty|kitty),title:(calcurse)"
 
         # Transparency
-        # "opacity 0.95,class:^(.*)$,focus:0" # All windows
+        "opacity 0.95,class:^(.*)$" # All windows
 
-        "opacity 0.95, class:(dev.zed.Zed)" # Zed Editor
-        "opacity 0.95, class:(code)" # VS Code
-        "opacity 0.95, class:(firefox)" # Firefox
-        "opacity 0.95, class:(zen-alpha)" # Zen
+        # "opacity 0.95, class:(zen-alpha)" # Zen
+        # "opacity 0.95, class:(code)" # vs code
+        # "opacity 0.95, class:(firefox)" # firefox
+        # "opacity 0.95, class:(zen-alpha)" # zen
 
         # Launchers - Rofi
         "float,class:^(Rofi)$"

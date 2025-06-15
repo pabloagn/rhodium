@@ -1,6 +1,8 @@
-{ pkgs, sourceLuaFile }:
-
 {
+  pkgs,
+  sourceLuaFile,
+  inputs,
+}: {
   programs.neovim = {
     plugins = with pkgs.vimPlugins; [
       # Color Utilities
@@ -12,6 +14,13 @@
       {
         plugin = tokyonight-nvim;
         config = sourceLuaFile "tokyonight-nvim.lua";
+      }
+      {
+        plugin = pkgs.vimUtils.buildVimPlugin {
+          name = "kanso-nvim";
+          src = inputs.kanso-nvim;
+        };
+        config = sourceLuaFile "kanso-nvim.lua";
       }
     ];
   };

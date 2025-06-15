@@ -1,6 +1,6 @@
 local lualine = require('lualine')
 
-local colors = require("tokyonight.colors").setup()
+local colors = require("kanso.colors").setup()
 
 local conditions = {
   buffer_not_empty = function()

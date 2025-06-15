@@ -5,10 +5,10 @@ function Status:git_branch_display()
 	if result and result.status.success then
 		local branch_name = string.gsub(result.stdout, "\n$", "")
 		if branch_name ~= "" and branch_name ~= "HEAD" then
-			return ui.Line { ui.Span("  " .. branch_name .. " ") }
+			return ui.Line({ ui.Span("  " .. branch_name .. " ") })
 		end
 	end
-	return ui.Line {}
+	return ui.Line({})
 end
 
 function Linemode:size_and_mtime()
@@ -26,7 +26,9 @@ end
 
 function Status:name()
 	local h = self._tab.current.hovered
-	if not h then return ui.Line {} end
+	if not h then
+		return ui.Line({})
+	end
 	local linked = ""
 	if h.link_to ~= nil then
 		linked = " -> " .. tostring(h.link_to)
@@ -36,14 +38,16 @@ end
 
 function Header:host()
 	if ya.target_family() ~= "unix" then
-		return ui.Line {}
+		return ui.Line({})
 	end
 	return ui.Line(" " .. ya.user_name() .. "@" .. ya.host_name() .. " ")
 end
 
 function Header:tabs()
 	local tabs = #cx.tabs
-	if tabs == 1 then return ui.Line {} end
+	if tabs == 1 then
+		return ui.Line({})
+	end
 	local spans = {}
 	for i = 1, tabs do
 		local text = cx.tabs[i]:name() ~= "" and cx.tabs[i]:name() or i

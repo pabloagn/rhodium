@@ -15,4 +15,3 @@ require("tokyonight").setup({
 	lualine_bold = false,
 })
 
-vim.cmd [[colorscheme tokyonight]]

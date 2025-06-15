@@ -29,6 +29,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    kanso-nvim = {
+      url = "github:webhooked/kanso.nvim";
+      flake = false;
+    };
+
     chiaroscuro = {
       url = "github:pabloagn/chiaroscuro.rht";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -48,6 +53,7 @@
     sops-nix,
     nur,
     zen-browser,
+    kanso-nvim,
     chiaroscuro,
     rhodium-alloys,
   } @ inputs: let
@@ -165,7 +171,7 @@
                 host = hostData.host_001 or {};
                 theme = selectedTheme;
                 targetTheme = targetTheme; # TODO: This is temporary
-                chiaroscuroTheme = chiaroscuroTheme; # TODO: This is temporary;
+                chiaroscuroTheme = chiaroscuroTheme; # TODO: This is temporary
                 inherit userPreferences userExtras;
                 fishPlugins = rhodium-alloys.fish;
                 yaziPlugins = rhodium-alloys.yazi;
