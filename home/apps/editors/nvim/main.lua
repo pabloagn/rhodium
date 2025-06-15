@@ -8,7 +8,7 @@ vim.cmd('filetype plugin indent on')
 vim.deprecate = function() end
 
 -- Set theme
-vim.cmd("colorscheme kanso")
+-- vim.cmd("colorscheme kanso")
 
 -- Diagnostics
 diagnostic.config({

@@ -24,3 +24,4 @@ require("kanso").setup({
 		light = "pearl", -- light theme option
 	},
 })
+vim.cmd("colorscheme kanso")
