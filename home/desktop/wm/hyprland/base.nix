@@ -67,8 +67,9 @@ in {
       };
 
       misc = {
-        force_default_wallpaper = -1;
+        force_default_wallpaper = -1; # Remove default wallpaper
         disable_hyprland_logo = true;
+        enable_anr_dialog = false; # Disable non-responsive app dialogues
       };
 
       dwindle = {

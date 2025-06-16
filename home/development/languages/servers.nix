@@ -54,6 +54,9 @@
     nodePackages.prettier
     nodePackages.typescript-language-server
 
+    # KDL
+    kdlfmt
+
     # Kotlin
     kotlin-language-server
 

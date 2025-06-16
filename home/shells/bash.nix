@@ -1,6 +1,5 @@
 {config, ...}: let
   aliases = import ./common/aliases.nix;
-  # functions = import ../functions.nix;
 in {
   programs.bash = {
     enableCompletion = true;

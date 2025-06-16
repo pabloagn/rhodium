@@ -19,6 +19,7 @@ require("conform").setup({
 		haskell = { "fourmolu" },
 		java = { "google_java_format" },
 		javascriptreact = { "prettierd", "prettier", stop_after_first = true },
+		kdl = { "kdlfmt" },
 		typescript = { "prettierd", "prettier", stop_after_first = true },
 		typescriptreact = { "prettierd", "prettier", stop_after_first = true },
 		latex = { "latexindent" },

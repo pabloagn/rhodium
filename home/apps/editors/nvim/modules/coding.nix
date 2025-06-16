@@ -112,6 +112,7 @@
             p.tree-sitter-javascript
             p.tree-sitter-json
             p.tree-sitter-julia
+            p.tree-sitter-kdl
             p.tree-sitter-kotlin
             p.tree-sitter-latex
             p.tree-sitter-lua

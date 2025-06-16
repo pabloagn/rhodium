@@ -2,6 +2,11 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities()
 local functions = require('functions')
 
 -- Just
+require 'lspconfig'.kdl.setup {
+  capabilities = capabilities,
+}
+
+-- Just
 require 'lspconfig'.just.setup {
   capabilities = capabilities,
 }
