@@ -7,6 +7,6 @@
     ./notifications
     ./portals
     ./wallpaper
-    ./wm
+    # ./wm
   ];
 }
