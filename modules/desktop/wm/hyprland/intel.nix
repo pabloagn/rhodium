@@ -13,7 +13,7 @@
     "nvidia_modeset"
     "nvidia_uvm"
     "nvidia_drm"
-    "kvm-intel" # Keep your existing kvm-intel module
+    "kvm-intel"
   ];
 
   # NVIDIA drivers package (use the stable version)

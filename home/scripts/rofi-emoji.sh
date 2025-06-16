@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+ROFI_THEME="$HOME/.config/rofi/themes/chiaroscuro.rasi"
+
 # Define a list of emojis
 EMOJI_LIST=$(
     cat <<EOF
@@ -276,7 +278,7 @@ EOF
 )
 
 # Show Rofi dmenu with emoji list
-chosen=$(echo "$EMOJI_LIST" | rofi -dmenu -theme "/home/pabloagn/.dotfiles/user/desktop/rofi/themes/style-4.rasi" -i -p "Select Emoji:" | awk '{print $1}')
+chosen=$(echo "$EMOJI_LIST" | rofi -dmenu -theme "$ROFI_THEME" -i -p "λ " | awk '{print $1}')
 
 # Copy selected emoji to clipboard using wl-copy
 if [ -n "$chosen" ]; then

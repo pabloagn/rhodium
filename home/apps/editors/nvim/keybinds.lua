@@ -409,11 +409,11 @@ vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
 -- Idents
 -- -------------------------------------------------
 vim.keymap.set({ "n", "v" }, "<Leader>ii", function()
-    functions.smart_indent()
+	functions.smart_indent()
 end, {
-    noremap = true,
-    silent = true,
-    desc = "Smart indent line/selection",
+	noremap = true,
+	silent = true,
+	desc = "Smart indent line/selection",
 })
 
 vim.keymap.set({ "n", "v" }, "<Leader>io", function()
@@ -435,8 +435,8 @@ vim.keymap.set("n", "<Leader>z", ":set foldmethod=expr foldexpr=nvim_treesitter#
 -- Buffers
 -- -------------------------------------------------
 -- Scroll buffers
-vim.keymap.set("n", "<leader>s", "<cmd>BufferLineCycleNext<CR>", { desc = "Next buffer", silent = true })
-vim.keymap.set("n", "<leader>S", "<cmd>BufferLineCyclePrev<CR>", { desc = "Previous buffer", silent = true })
+vim.keymap.set({ "n", "v" }, "<leader>s", "<cmd>BufferLineCycleNext<CR>", { desc = "Next buffer", silent = true })
+vim.keymap.set({ "n", "v" }, "<leader>S", "<cmd>BufferLineCyclePrev<CR>", { desc = "Previous buffer", silent = true })
 
 -- Close buffers
 vim.keymap.set("n", "<leader>w", "<cmd>write | bdelete<CR>", { desc = "Save and close", silent = true })
@@ -589,7 +589,6 @@ end, {
 	expr = true,
 	desc = "Scroll Backward",
 })
-
 
 -- LuaSnip (Snippets)
 -- TODO: Add this

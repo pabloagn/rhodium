@@ -1,8 +1,5 @@
-{ ... }:
-
-let
+{...}: let
   animationPresets = {
-
     # Slow
     slow = {
       windows = 8;
@@ -11,7 +8,7 @@ let
       fade = 10;
       workspaces = 8;
     };
-    
+
     # Balanced
     normal = {
       windows = 5;
@@ -20,7 +17,7 @@ let
       fade = 7;
       workspaces = 6;
     };
-    
+
     # Fast smooth
     fast = {
       windows = 3;
@@ -29,7 +26,7 @@ let
       fade = 4;
       workspaces = 4;
     };
-    
+
     # Snappy
     snappy = {
       windows = 2;
@@ -38,7 +35,7 @@ let
       fade = 2;
       workspaces = 2;
     };
-    
+
     # Instant
     instant = {
       windows = 1;
@@ -48,11 +45,9 @@ let
       workspaces = 1;
     };
   };
-  
+
   currentPreset = animationPresets.fast;
-  
-in
-{
+in {
   wayland.windowManager.hyprland.settings = {
     animations = {
       enabled = true;
@@ -67,4 +62,3 @@ in
     };
   };
 }
-
