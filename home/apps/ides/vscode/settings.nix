@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   programs.vscode = {
     profiles = {
       default = {
@@ -75,7 +74,7 @@
           "editor.guides.bracketPairs" = "active";
           "editor.guides.bracketPairsHorizontal" = true;
           "editor.bracketPairColorization.independentColorPoolPerBracketType" = true;
-          "editor.rulers" = [ 80 120 ];
+          "editor.rulers" = [80 120];
           "editor.linkedEditing" = true;
           "editor.suggest.insertMode" = "replace";
           "editor.inlineSuggest.enabled" = true;
@@ -271,7 +270,7 @@
           "ruff.importStrategy" = "fromEnvironment";
           "python.testing.pytestEnabled" = true;
           "python.testing.unittestEnabled" = false;
-          "python.testing.pytestArgs" = [ "tests" ];
+          "python.testing.pytestArgs" = ["tests"];
           "python.analysis.diagnosticMode" = "openFilesOnly";
           "python.analysis.diagnosticSeverityOverrides" = {
             "reportMissingImports" = "none";
@@ -283,13 +282,13 @@
           "nix.serverSettings" = {
             "nil" = {
               "formatting" = {
-                "command" = [ "nixpkgs-fmt" ];
+                "command" = ["nixpkgs-fmt"];
               };
             };
           };
 
-          "Lua.diagnostics.globals" = [ "vim" ];
-          "Lua.workspace.library" = [ "\${3rd}/love2d/library" ];
+          "Lua.diagnostics.globals" = ["vim"];
+          "Lua.workspace.library" = ["\${3rd}/love2d/library"];
           "Lua.workspace.checkThirdParty" = false;
 
           # Spell Checker

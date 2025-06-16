@@ -1,5 +1,1 @@
-{ pkgs, ... }:
-{
-  # TODO: Define profiles
-  # ["" "" ""];
-}
+{pkgs, ...}: {}

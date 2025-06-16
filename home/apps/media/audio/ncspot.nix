@@ -1,6 +1,4 @@
-{ ... }:
-# TODO: Customize ncspot
-{
+{...}: {
   imports = [
     ./ncspot
   ];

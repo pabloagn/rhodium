@@ -1,6 +1,4 @@
-{ ... }:
-
-{
+{...}: {
   programs.qutebrowser = {
     enable = true;
   };

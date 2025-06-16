@@ -1,8 +1,4 @@
-{ ... }:
-
-{
-  xdg.configFile."zed/themes/chiaroscuro.json".source = ./themes/chiaroscuro.json;
-
+{...}: {
   programs.zed-editor = {
     userSettings = {
       "experimental.theme_overrides" = {

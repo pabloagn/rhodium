@@ -15,7 +15,6 @@ in {
   };
 
   xdg.configFile = {
-    # "rofi/config.rasi" = { source = ./rofi/config.rasi; };
     "rofi/themes/chiaroscuro.rasi" = {source = ./rofi/themes/chiaroscuro.rasi;};
   };
 }

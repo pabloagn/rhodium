@@ -1,6 +1,8 @@
-{ inputs, config, ... }:
-
-let
+{
+  inputs,
+  config,
+  ...
+}: let
   zenProfileSettings = {
     # Core functionality
     "browser.shell.checkDefaultBrowser" = false;
@@ -35,8 +37,7 @@ let
     # Download settings
     "browser.download.lastDir" = "${config.home.homeDirectory}/downloads";
   };
-in
-{
+in {
   imports = [
     inputs.zen-browser.homeModules.twilight
   ];
@@ -52,7 +53,7 @@ in
         # TODO: Empty userChrome for now
         userChrome = "";
         # TODO: Empty extensions list for now
-        extensions = [ ];
+        extensions = [];
       };
     };
 
