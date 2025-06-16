@@ -81,32 +81,27 @@ end, {
 
 -- Comment
 -- -------------------------------------------------
--- TODO: Check this
 vim.keymap.set("n", "<leader>cc", function()
 	require("Comment.api").toggle.linewise.current()
 end, { desc = "Line" })
--- TODO: Check this
-vim.keymap.set('v', '<leader>cc', function()
-    require('Comment.api').toggle.linewise()
-end, { desc = 'Visual election' })
--- TODO: Check this
-vim.keymap.set('n', '<leader>ca', function()
-    require('Comment.api').insert.eol()
-end, { desc = 'Append' })
-
--- vim.keymap.set("n", "<Leader>ca", function()
--- 	functions.comment_append()
--- end, {
--- 	noremap = true,
--- 	silent = true,
--- 	desc = "Append",
--- })
 
 -- TODO: Check this
-vim.keymap.set('n', '<leader>cA', function()
-    local line_count = vim.api.nvim_buf_line_count(0)
-    require('Comment.api').toggle.linewise.count(line_count)
-end, { desc = 'Comment all lines' })
+vim.keymap.set("v", "<leader>cc", function()
+	require("Comment.api").toggle.linewise.current()
+end, { desc = "Visual selection" })
+
+vim.keymap.set("n", "<Leader>ca", function()
+	functions.comment_append()
+end, {
+	noremap = true,
+	silent = true,
+	desc = "Append",
+})
+
+vim.keymap.set("n", "<leader>cA", function()
+	local line_count = vim.api.nvim_buf_line_count(0)
+	require("Comment.api").toggle.linewise.count(line_count)
+end, { desc = "Comment all lines" })
 
 -- TODO comment insertion (same line)
 vim.keymap.set("n", "<Leader>ct", function()
@@ -116,6 +111,7 @@ end, {
 	silent = true,
 	desc = "Insert TODO",
 })
+
 vim.keymap.set("n", "<Leader>cf", function()
 	functions.insert_fix()
 end, {
@@ -131,6 +127,7 @@ end, {
 	silent = true,
 	desc = "Insert NOTE",
 })
+
 vim.keymap.set("n", "<Leader>ch", function()
 	functions.insert_hack()
 end, {
@@ -162,6 +159,7 @@ end, {
 	silent = true,
 	desc = "Insert TEST",
 })
+
 -- TODO utilities
 vim.keymap.set("n", "<Leader>cd", function()
 	functions.toggle_todo_done()
@@ -170,6 +168,7 @@ end, {
 	silent = true,
 	desc = "Toggle TODO/DONE",
 })
+
 vim.keymap.set("n", "<Leader>cl", function()
 	functions.list_buffer_todos()
 end, {
@@ -193,12 +192,15 @@ end, {
 vim.keymap.set("n", "<leader>rt", '<cmd>lua require("spectre").toggle()<CR>', {
 	desc = "Toggle Spectre",
 })
+
 vim.keymap.set("n", "<leader>rw", '<cmd>lua require("spectre").open_visual({select_word=true})<CR>', {
 	desc = "Search current word",
 })
+
 vim.keymap.set("v", "<leader>rw", '<esc><cmd>lua require("spectre").open_visual()<CR>', {
 	desc = "Search current word",
 })
+
 vim.keymap.set("n", "<leader>rf", '<cmd>lua require("spectre").open_file_search({select_word=true})<CR>', {
 	desc = "Search on current file",
 })
@@ -213,6 +215,7 @@ end, {
 	silent = true,
 	desc = "Format (Conform)",
 })
+
 vim.keymap.set("n", "<Leader>lr", vim.lsp.buf.rename, { noremap = true, silent = true, desc = "Rename symbol" })
 vim.keymap.set("n", "<Leader>la", vim.lsp.buf.code_action, { noremap = true, silent = true, desc = "Code actions" })
 
@@ -234,7 +237,9 @@ end, {
 	silent = true,
 	desc = "Project files",
 })
+
 vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Buffers" })
+
 vim.keymap.set("n", "<leader>fr", function()
 	require("telescope").extensions.frecency.frecency()
 end, { desc = "Recent (Frecency)" })
@@ -275,12 +280,17 @@ vim.keymap.set("n", "<leader>ft", "<cmd>TodoTelescope keywords=FIX,TODO,PERF,TES
 vim.keymap.set("n", "<leader>tt", function()
 	require("trouble").toggle("diagnostics")
 end, { desc = "Toggle diagnostics" })
+
 vim.keymap.set("n", "<leader>tb", function()
 	require("trouble").toggle("diagnostics", { filter = { buf = 0 } })
 end, { desc = "Buffer diagnostics" })
-vim.keymap.set("n", "<leader>tq", function()
-	require("trouble").toggle("qflist")
-end, { desc = "Quickfix list" })
+
+vim.keymap.set("n", "<leader>tq", "<cmd>copen<CR>", {
+	noremap = true,
+	silent = true,
+	desc = "Quickfix list",
+})
+
 vim.keymap.set("n", "<leader>tl", function()
 	require("trouble").toggle("loclist")
 end, { desc = "Location list" })
@@ -289,12 +299,15 @@ end, { desc = "Location list" })
 vim.keymap.set("n", "<leader>tr", function()
 	require("trouble").toggle("lsp_references")
 end, { desc = "LSP references" })
+
 vim.keymap.set("n", "<leader>td", function()
 	require("trouble").toggle("lsp_definitions")
 end, { desc = "LSP definitions" })
+
 vim.keymap.set("n", "<leader>ti", function()
 	require("trouble").toggle("lsp_implementations")
 end, { desc = "LSP implementations" })
+
 vim.keymap.set("n", "<leader>ts", function()
 	require("trouble").toggle("symbols")
 end, { desc = "Document symbols" })
@@ -396,11 +409,11 @@ vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
 -- Idents
 -- -------------------------------------------------
 vim.keymap.set({ "n", "v" }, "<Leader>ii", function()
-	functions.smart_indent()
+    functions.smart_indent()
 end, {
-	noremap = true,
-	silent = true,
-	desc = "Smart indent line/selection",
+    noremap = true,
+    silent = true,
+    desc = "Smart indent line/selection",
 })
 
 vim.keymap.set({ "n", "v" }, "<Leader>io", function()
@@ -470,6 +483,7 @@ vim.keymap.set(
 	"<cmd>BufferLineGroupToggle Tests<CR>",
 	{ desc = "Toggle Tests group", silent = true }
 )
+
 vim.keymap.set("n", "<leader>bgd", "<cmd>BufferLineGroupToggle Docs<CR>", { desc = "Toggle Docs group", silent = true })
 
 -- Git integration
@@ -500,8 +514,86 @@ vim.keymap.set({ "n", "v" }, "<Leader>m", "<cmd>MCvisual<CR>", {
 	silent = true,
 	desc = "Start on word/selection",
 })
--- vim.keymap.set("n", "<leader>bst", "<cmd>BufferLineSortByTabs<CR>", { desc = "Sort by tabs", silent = true })
+
+-- Noice
+-- -------------------------------------------------
+-- Command line redirect
+vim.keymap.set("c", "<S-Enter>", function()
+	require("noice").redirect(vim.fn.getcmdline())
+end, {
+	noremap = true,
+	silent = true,
+	desc = "Redirect Cmdline",
+})
+
+-- Main noice commands
+vim.keymap.set("n", "<leader>xnl", function()
+	require("noice").cmd("last")
+end, {
+	noremap = true,
+	silent = true,
+	desc = "Noice Last Message",
+})
+
+vim.keymap.set("n", "<leader>xnh", function()
+	require("noice").cmd("history")
+end, {
+	noremap = true,
+	silent = true,
+	desc = "Noice History",
+})
+
+vim.keymap.set("n", "<leader>xna", function()
+	require("noice").cmd("all")
+end, {
+	noremap = true,
+	silent = true,
+	desc = "Noice All",
+})
+
+vim.keymap.set("n", "<leader>xnd", function()
+	require("noice").cmd("dismiss")
+end, {
+	noremap = true,
+	silent = true,
+	desc = "Dismiss All",
+})
+
+vim.keymap.set("n", "<leader>xnt", function()
+	require("noice").cmd("pick")
+end, {
+	noremap = true,
+	silent = true,
+	desc = "Noice Picker (Telescope/FzfLua)",
+})
+
+-- LSP scroll functions
+vim.keymap.set({ "i", "n", "s" }, "<c-f>", function()
+	if not require("noice.lsp").scroll(4) then
+		return "<c-f>"
+	end
+end, {
+	noremap = true,
+	silent = true,
+	expr = true,
+	desc = "Scroll Forward",
+})
+
+vim.keymap.set({ "i", "n", "s" }, "<c-b>", function()
+	if not require("noice.lsp").scroll(-4) then
+		return "<c-b>"
+	end
+end, {
+	noremap = true,
+	silent = true,
+	expr = true,
+	desc = "Scroll Backward",
+})
+
+
 -- LuaSnip (Snippets)
 -- TODO: Add this
+
+-- vim.keymap.set("n", "<leader>bst", "<cmd>BufferLineSortByTabs<CR>", { desc = "Sort by tabs", silent = true })
 -- vim.keymap.set('i', '<Tab>', "lua equire('luasnip').expand_or_jump()<CR>", { noremap = true, silent = true, expr = true, desc = 'Expand or jump to next snippet' })
 -- vim.keymap.set('i', '<S-Tab>', "lua require('luasnip').jump(-1)<CR>", { noremap = true, silent = true, expr = true, desc = 'Jump to previous snippet' })

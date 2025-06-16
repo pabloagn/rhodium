@@ -1,6 +1,4 @@
-{ pkgs, ... }:
-
-{
+{pkgs, ...}: {
   environment.systemPackages = with pkgs; [
     networkmanagerapplet # GUI for setting up WiFi & Bluetooth
     blueman

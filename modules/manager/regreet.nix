@@ -1,6 +1,4 @@
-{ pkgs, ... }:
-
-{
+{pkgs, ...}: {
   programs.regreet = {
     enable = false;
     settings = {
@@ -11,10 +9,6 @@
 
       GTK = {
         application_prefer_dark_theme = true;
-        # cursor_theme_name = "Bibata-Modern-Ice";
-        # font_name = "Inter 12";
-        # icon_theme_name = "Papirus-Dark";
-        # theme_name = "Adwaita-dark";
       };
 
       commands = {
@@ -80,7 +74,7 @@
   environment.etc."regreet/wallpaper-01.jpg".source =
     ../../home/assets/wallpapers/dante/wallpaper-01.jpg;
 
-  services.displayManager.sessionPackages = [ pkgs.hyprland ];
+  services.displayManager.sessionPackages = [pkgs.hyprland];
   environment.pathsToLink = [
     "/share/xsessions"
     "/share/wayland-sessions"

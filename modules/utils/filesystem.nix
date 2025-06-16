@@ -1,6 +1,4 @@
-{ pkgs, ... }:
-
-{
+{pkgs, ...}: {
   environment.systemPackages = with pkgs; [
     dua # Interactive disk usage analyzer
     dust # Modern du replacement with colors

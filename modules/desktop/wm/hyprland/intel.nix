@@ -1,6 +1,8 @@
-{ config, pkgs, ... }:
-
 {
+  config,
+  pkgs,
+  ...
+}: {
   imports = [
     ./base.nix
   ];
@@ -37,7 +39,7 @@
   ];
 
   # Enable NVIDIA settings
-  services.xserver.videoDrivers = [ "nvidia" ];
+  services.xserver.videoDrivers = ["nvidia"];
 
   # Enable Wayland compatibility with Electron
   #services.xserver.displayManager.wayland.enable = true;

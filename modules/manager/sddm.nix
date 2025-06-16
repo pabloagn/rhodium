@@ -1,6 +1,4 @@
-{ pkgs, ... }:
-
-{
+{pkgs, ...}: {
   services.displayManager.sddm = {
     enable = false;
     wayland.enable = true;
@@ -27,21 +25,6 @@
         SessionTimeout = 30;
       };
 
-      # Theme = {
-      #   # Theme-specific settings
-      #   Background = "/etc/sddm/wallpaper.jpg";
-      #   ThemeDir = "/run/current-system/sw/share/sddm/themes";
-      #   FacesDir = "/run/current-system/sw/share/sddm/faces";
-
-      #   # Cursor settings
-      #   CursorTheme = "Bibata-Modern-Ice";
-      #   CursorSize = 24;
-
-      #   # Font settings
-      #   Font = "Inter";
-      #   FontSize = 12;
-      # };
-
       Users = {
         # User filtering
         MinimumUid = 1000;
@@ -65,13 +48,6 @@
         DisplayStopCommand = "/run/current-system/sw/bin/sddm-helper --stop-server";
       };
     };
-
-    # Auto-login configuration (optional - comment out if not needed)
-    # autoLogin = {
-    # enable = false;  # Set to true to enable auto-login
-    # user = "your-username";  # Replace with your username
-    # session = "hyprland";
-    # };
   };
 
   # Install Catppuccin theme for SDDM
@@ -91,9 +67,6 @@
     libsForQt5.qt5.qtsvg
     libsForQt5.qt5.qtmultimedia
 
-    # Cursor theme
-    # bibata-cursors
-
     # Fonts
     inter
   ];
@@ -104,7 +77,7 @@
   # Enable required services
   services.xserver = {
     enable = true;
-    displayManager.sessionPackages = [ pkgs.hyprland ];
+    displayManager.sessionPackages = [pkgs.hyprland];
   };
 
   # Qt and theming
@@ -113,17 +86,6 @@
     platformTheme = "qt5ct";
     style = "kvantum";
   };
-
-  # Fonts for better rendering
-  # fonts.packages = with pkgs; [
-  # inter
-  # noto-fonts
-  # noto-fonts-cjk
-  # noto-fonts-emoji
-  # liberation_ttf
-  # fira-code
-  # fira-code-symbols
-  # ];
 
   # PAM configuration for keyring integration
   security.pam.services.sddm.enableGnomeKeyring = true;

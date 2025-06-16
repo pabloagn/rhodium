@@ -1,10 +1,8 @@
-{ pkgs, ... }:
-
-{
+{pkgs, ...}: {
   environment.systemPackages = with pkgs; [
     dunst
     libnotify
-    # tiramisu
+    # tiramisu # Desktop notifications
     # mako # Lightweight Wayland notification daemon
   ];
 }

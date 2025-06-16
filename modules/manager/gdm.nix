@@ -1,6 +1,4 @@
-{ ... }:
-
-{
+{...}: {
   services.xserver = {
     enable = true;
     displayManager.gdm = {

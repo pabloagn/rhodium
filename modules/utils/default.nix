@@ -1,6 +1,4 @@
-{ ... }:
-
-{
+{...}: {
   imports = [
     ./core.nix
     ./filesystem.nix
@@ -10,4 +8,3 @@
     ./text.nix
   ];
 }
-

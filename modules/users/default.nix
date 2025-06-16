@@ -1,16 +1,17 @@
-{ pkgs, users, ... }:
-
-let
+{
+  pkgs,
+  users,
+  ...
+}: let
   user_001_data =
     users.user_001 or {
       username = "user";
       fullName = "Default User";
       email = "user@example.com";
       description = "Default User";
-      extraGroups = [ "wheel" ];
+      extraGroups = ["wheel"];
     };
-in
-{
+in {
   users.users."${user_001_data.username}" = {
     name = user_001_data.username;
     isNormalUser = user_001_data.isNormalUser or true;
@@ -20,7 +21,7 @@ in
     home = "/home/${user_001_data.username}";
   };
 
-  home-manager.backupFileExtension = "backup"; # HACK: Required since hm activation was sometimes faulty 
+  home-manager.backupFileExtension = "backup"; # HACK: Required since hm activation was sometimes faulty
 
   users.defaultUserShell = pkgs.zsh; # Default shell for all users
 }

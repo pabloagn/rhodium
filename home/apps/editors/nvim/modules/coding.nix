@@ -1,9 +1,9 @@
-{ pkgs, sourceLuaFile }:
-
 {
+  pkgs,
+  sourceLuaFile,
+}: {
   programs.neovim = {
     plugins = with pkgs.vimPlugins; [
-
       # Completion
       {
         plugin = nvim-cmp; # Completion engine
@@ -28,21 +28,10 @@
         config = sourceLuaFile "comment-nvim.lua";
       }
 
-      # {
-      #   plugin = ts-comments-nvim;
-      #   config = sourceLuaFile "ts-comments-nvim.lua";
-      # }
-
       # Debugging
       # {
       #   plugin = nvim-dap;
       #   config = sourceLuaFile "nvim-dap.lua";
-      # }
-
-      # Formatting
-      # {
-      #   plugin = conform-nvim;
-      #   config = sourceLuaFile "conform-nvim.lua";
       # }
 
       # Languages

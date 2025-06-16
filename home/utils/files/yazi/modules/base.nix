@@ -18,9 +18,6 @@
     # _v4_suppress_deprecation_warnings = true; # Ignore deprecation warnings (plugins are noisy and maintainers have lives)
   };
 
-  # Box border
-  # border = "rounded";
-
   status = {
     component_left = [
       {
