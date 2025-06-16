@@ -10,17 +10,17 @@ vim.keymap.set("n", ";pv", ":!zathura %:r.pdf &<CR>", {
 })
 
 -- Markdown preview (browser-based)
-vim.keymap.set("n", ";mp", "<Plug>MarkdownPreview", {
+vim.keymap.set("n", ";mp", ":MarkdownPreview<CR>", {
 	buffer = true,
 	desc = "Markdown: Preview in browser",
 })
 
-vim.keymap.set("n", ";ms", "<Plug>MarkdownPreviewStop", {
+vim.keymap.set("n", ";ms", ":MarkdownPreviewStop<CR>", {
 	buffer = true,
 	desc = "Markdown: Stop browser preview",
 })
 
-vim.keymap.set("n", ";mt", "<Plug>MarkdownPreviewToggle", {
+vim.keymap.set("n", ";mt", ":MarkdownPreviewToggle<CR>", {
 	buffer = true,
 	desc = "Markdown: Toggle browser preview",
 })
