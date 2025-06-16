@@ -1,17 +1,15 @@
 {pkgs, ...}: {
   environment.systemPackages = with pkgs; [
+    # Hyprtools
     hyprpicker
-
-    # TODO: Set up this
-    # hyprlock
-    # hypridle
+    hyprlock
+    hypridle
 
     # Utils
     wl-clipboard # Wayland clipboard
     wlr-randr # Xrandr clone for wlroots compositors
     libinput
     libinput-gestures
-    # polkit_gnome Authentication agent (sudo GUI prompts)
   ];
 
   environment.sessionVariables = {

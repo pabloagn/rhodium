@@ -76,7 +76,8 @@
     nil
     nixd
     nixpkgs-fmt # Formatter
-    alejandra # Formatter
+    nixfmt-rfc-style # Official formatter
+    alejandra # Opinionated formatter
 
     # OCaml
     ocamlPackages.ocaml-lsp

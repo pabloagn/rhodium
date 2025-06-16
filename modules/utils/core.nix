@@ -9,12 +9,12 @@
     gsettings-desktop-schemas
 
     # Core system utilities
-    uutils-coreutils-noprefix
-    coreutils
+    uutils-coreutils-noprefix # An improvement over coreutils
+    coreutils # Basic GNU tools
     util-linux # Includes lscpu
 
     # Build essentials
-    gnumake
+    gnumake # Make files
     gnutls
     gcc
     pkg-config

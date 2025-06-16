@@ -7,13 +7,17 @@
     ./hardware-configuration.nix
     ../../modules/boot/boot.nix
     ../../modules/services
+    ../../modules/services/dbus.nix # Required for niri
     ../../modules/hardware
     ../../modules/shell
     ../../modules/security
     ../../modules/users
     ../../modules/manager
+    # Window Manager
     ../../modules/desktop
-    ../../modules/desktop/wm/hyprland/amd.nix
+    # ../../modules/desktop/wm/hyprland/amd.nix
+    ../../modules/desktop/wm/niri/amd.nix
+
     ../../modules/virtualization
     ../../modules/apps
     ../../modules/maintenance

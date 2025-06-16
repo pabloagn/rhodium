@@ -1,6 +1,6 @@
 {pkgs, ...}: {
   environment.systemPackages = with pkgs; [
-    ripgrep
+    ripgrep # Silver searcher plus grep
     ripgrep-all # Ripgrep for extended file types
     fd # Better find
     jq # JSON processor

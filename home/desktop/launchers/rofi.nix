@@ -8,6 +8,7 @@ in {
   programs.rofi = {
     enable = true;
     package = pkgs.rofi;
+    # package = pkgs.rofi-wayland;
     # font = "JetBrainsMono NerdFont 14";
     extraConfig = {
       dpi = dpiAdjustment;

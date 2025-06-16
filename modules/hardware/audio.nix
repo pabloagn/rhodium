@@ -1,6 +1,8 @@
 {pkgs, ...}: {
   environment.systemPackages = with pkgs; [
-    wireplumber
+    wireplumber # Session manager for pipewire
+    pavucontrol # GUI audio control
+    playerctl # Media player control
   ];
 
   # rtkit

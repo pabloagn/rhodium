@@ -1,5 +1,6 @@
 {...}: {
   imports = [
-    ./hyprpaper.nix
+    # ./hyprpaper.nix
+    ./swaybg.nix
   ];
 }

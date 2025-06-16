@@ -13,7 +13,6 @@ in {
     size = cursorSize;
 
     # Desktops
-    hyprcursor.enable = true;
     gtk.enable = true;
     x11.enable = true;
   };

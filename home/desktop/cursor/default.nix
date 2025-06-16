@@ -1,5 +1,6 @@
 {...}: {
   imports = [
-    ./hyprcursor.nix
+    # ./hyprcursor.nix
+    ./wayland-cursor.nix
   ];
 }
