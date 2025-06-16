@@ -68,7 +68,7 @@ ins_left {
   function()
     return 'Rh'
   end,
-  -- color = { fg = colors.green, bg = colors.bg },
+  color = { fg = "#090E13", bg = "#c4746e" },
   padding = { left = 1, right = 1 },
 }
 

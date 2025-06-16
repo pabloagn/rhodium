@@ -1,13 +1,11 @@
-{ lib, ... }:
-
-{
+{lib, ...}: {
   formatters = {
-    iconFormatter = import ./formatters/iconFormatter.nix { };
+    iconFormatter = import ./formatters/iconFormatter.nix {};
   };
   generators = {
-    desktopGenerators = import ./generators/desktopGenerators.nix { inherit lib; };
+    desktopGenerators = import ./generators/desktopGenerators.nix {inherit lib;};
   };
   parsers = {
-    luaParsers = import ./parsers/luaParsers.nix { inherit lib; };
+    luaParsers = import ./parsers/luaParsers.nix {inherit lib;};
   };
 }

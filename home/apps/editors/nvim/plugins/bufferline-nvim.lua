@@ -9,10 +9,11 @@ require("bufferline").setup({
 		middle_mouse_command = nil,
 
 		-- Visual settings
-		-- indicator = {
-		-- 	icon = "▎",
-		-- 	style = "icon",
-		-- },
+		indicator = {
+			-- icon = "▎",
+			icon = " ",
+			style = "icon",
+		},
 		buffer_close_icon = " 󰅖 ",
 		modified_icon = " ● ",
 		close_icon = "",
@@ -102,10 +103,10 @@ require("bufferline").setup({
 		-- 	bg = "#1a1b26",
 		-- },
 		close_button_selected = {
-			fg = "red",
+			fg = "#393B44",
 		},
 		modified_selected = {
-			fg = "yellow",
+			fg = "#c4b28a",
 		},
 	},
 })

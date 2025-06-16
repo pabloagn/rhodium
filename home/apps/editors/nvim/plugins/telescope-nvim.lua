@@ -45,7 +45,7 @@ vim.api.nvim_set_hl(0, "TelescopePromptBorder", { fg = colors.border, bg = color
 vim.api.nvim_set_hl(0, "TelescopeResultsBorder", { fg = colors.border, bg = colors.bg })
 vim.api.nvim_set_hl(0, "TelescopePreviewBorder", { fg = colors.border, bg = colors.bg })
 vim.api.nvim_set_hl(0, "TelescopeSelection", { fg = colors.fg, bg = colors.selection_bg })
-vim.api.nvim_set_hl(0, "TelescopePromptPrefix", { fg = colors.border })
+vim.api.nvim_set_hl(0, "TelescopePromptPrefix", { fg = "#5c6066" })
 
 -- Setup
 telescope.setup({

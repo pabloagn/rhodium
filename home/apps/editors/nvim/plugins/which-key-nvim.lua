@@ -94,6 +94,11 @@ vim.api.nvim_set_hl(0, "WhichKeyNormal", {
 })
 
 vim.api.nvim_set_hl(0, "WhichKeyBorder", {
-	bg = "#22262D",
+	fg = "#22262D",
+    bg = "#0f1316"
 })
 
+
+vim.api.nvim_set_hl(0, "WhichKeyTitle", {
+	bg = "#0f1316",
+})
