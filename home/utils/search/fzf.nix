@@ -1,15 +1,12 @@
-{ ... }:
-
-{
+{...}: {
   programs.fzf = {
     enable = true;
     enableBashIntegration = true;
-    # enableFishIntegration = true;
     enableZshIntegration = true;
-    
+
     # Default command for file finding
     defaultCommand = "fd --type f --strip-cwd-prefix";
-    
+
     # Default options applied to all fzf invocations
     defaultOptions = [
       "--preview-window=right:50%:wrap"
@@ -18,7 +15,7 @@
       "--margin=1"
       "--padding=1"
     ];
-    
+
     # Custom color scheme
     colors = {
       "bg+" = "-1";

@@ -3,21 +3,21 @@
     wireplumber
   ];
 
-  services.pulseaudio.enable = false;
-
   # rtkit
-  # Required by PulseAudio and PipeWire to acquire realtime priority
-  security.rtkit.enable = true;
+  security.rtkit.enable = true; # Required by PulseAudio and PipeWire to acquire realtime priority
 
   # Pipewire
-  services.pipewire = {
-    enable = true;
-    alsa = {
+  services = {
+    pulseaudio.enable = false; # We disable native pulse audio and let pipewire handle it instead
+    pipewire = {
       enable = true;
-      support32Bit = true;
-    };
+      alsa = {
+        enable = true;
+        support32Bit = true;
+      };
 
-    pulse.enable = true; # Enable pulse from pipewire
-    jack.enable = true;
+      pulse.enable = true; # Enable pulse from pipewire
+      jack.enable = true;
+    };
   };
 }

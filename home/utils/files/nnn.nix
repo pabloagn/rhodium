@@ -1,6 +1,4 @@
-{ ... }:
-
-{
+{...}: {
   programs.nnn = {
     enable = false;
   };

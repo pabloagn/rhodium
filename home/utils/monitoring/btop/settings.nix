@@ -1,6 +1,4 @@
-{ ... }:
-
-{
+{...}: {
   programs.btop.settings = {
     color_theme = "chiaroscuro";
     theme_background = false;

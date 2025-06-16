@@ -1,6 +1,4 @@
-{ ... }:
-
-{
+{...}: {
   # List commands
   ls = "eza -l";
   la = "eza -la";

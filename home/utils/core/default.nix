@@ -1,6 +1,4 @@
-{ pkgs, ... }:
-
-{
+{pkgs, ...}: {
   imports = [
     ./direnv.nix
   ];
@@ -17,4 +15,3 @@
     nix-web # Web interface for nix store
   ];
 }
-

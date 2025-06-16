@@ -1,6 +1,4 @@
-{ pkgs, ... }:
-
-{
+{pkgs, ...}: {
   programs.thefuck = {
     enable = false;
     enableBashIntegration = true;

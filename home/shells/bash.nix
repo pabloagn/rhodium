@@ -1,10 +1,7 @@
-{ config, ... }:
-
-let
+{config, ...}: let
   aliases = import ./common/aliases.nix;
   # functions = import ../functions.nix;
-in
-{
+in {
   programs.bash = {
     enableCompletion = true;
     shellAliases = aliases;

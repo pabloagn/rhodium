@@ -1,11 +1,9 @@
-{ fishPlugins, ... }:
-
-{
+{fishPlugins, ...}: {
   # TODO: Fix this
   programs.man.generateCaches = false;
 
   imports = [
-  ./fish
+    ./fish
   ];
 
   programs.fish = {

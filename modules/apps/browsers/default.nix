@@ -1,6 +1,4 @@
-{ ... }:
-
-{
+{...}: {
   programs.firefox = {
     enable = true;
   };

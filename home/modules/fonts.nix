@@ -27,7 +27,7 @@ in {
   fonts.fontconfig.enable = true;
   home.packages = enabledFontPackages;
 
-  # DEBUG: List all installed fonts for debugging
+  # NOTE: List all installed fonts for debugging
   home.file.".local/share/fonts-installed.txt".text = let
     enabledFontsList = lib.pipe fontDefinitions [
       (lib.mapAttrsToList (

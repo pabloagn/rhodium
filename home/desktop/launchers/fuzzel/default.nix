@@ -2,8 +2,8 @@
   programs.fuzzel = {
     settings = {
       main = {
-        # terminal = "${pkgs.ghostty}/bin/ghostty";
-        # layer = "overlay";
+        terminal = "${pkgs.kitty}/bin/kitty";
+        layer = "overlay";
         font = "JetBrainsMono Nerd Font:size=14";
         dpi-aware = false;
         prompt = "λ ";
@@ -25,10 +25,10 @@
         hide-before-typing = false;
         exit-on-keyboard-focus-loss = false;
       };
-      # border = {
-      #   width = 1;
-      #   radius = 0;
-      # };
+      border = {
+        width = 1;
+        radius = 0;
+      };
       colors = {
         background = "20131eee";
         text = "feebeeff";

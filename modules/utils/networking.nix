@@ -5,6 +5,6 @@
     dig # DNS lookup utility
     wget # Web file downloader
     wirelesstools # Wireless network configuration tools
-    ipfetch
+    ipfetch # Neofetch for IP addresses
   ];
 }

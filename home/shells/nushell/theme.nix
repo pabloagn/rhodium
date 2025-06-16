@@ -1,6 +1,4 @@
-{ ... }:
-
-{
+{...}: {
   programs.nushell.extraConfig = ''
     # Define custom theme
     def chiaroscuro [] {
@@ -33,7 +31,7 @@
         block: "#ffffff"
         hints: "#808080"
         search_result: { fg: "#000000" bg: "#ffff5f" }
-        
+
         shape_and: { fg: "#d75fd7" attr: "b" }
         shape_binary: { fg: "#d75fd7" attr: "b" }
         shape_block: { fg: "#5f87d7" attr: "b" }
@@ -74,14 +72,13 @@
         shape_raw_string: { fg: "#d787d7" attr: "b" }
       }
     }
-    
+
     # Apply the theme
     $env.config = ($env.config | merge {
       color_config: (chiaroscuro)
     })
-    
+
     # Configure LS_COLORS for better file type visibility
     $env.LS_COLORS = (vivid generate mocha)
   '';
 }
-

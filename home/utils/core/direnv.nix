@@ -1,11 +1,9 @@
-{ config, ... }:
-
-{
+{config, ...}: {
   programs.direnv = {
     enable = true;
     enableBashIntegration = true;
     enableNushellIntegration = true;
-    #enableFishIntegration = true;
+    # enableFishIntegration = true;
     enableZshIntegration = true;
     nix-direnv.enable = true; # Cache .env environment
     silent = true; # Silence direnv messages
@@ -20,17 +18,10 @@
           "${config.home.homeDirectory}/professional"
           "${config.home.homeDirectory}/academic"
         ];
-
-        # Allow specific directories or files only
-        exact = [
-        ];
       };
 
-      # Warning timeout
-      warn_timeout = "10s";
-
-      # Disable stdin during .envrc evaluation
-      disable_stdin = true;
+      warn_timeout = "10s"; # Warning timeout
+      disable_stdin = true; # Disable stdin during .envrc evaluation
     };
   };
 }

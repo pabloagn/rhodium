@@ -1,6 +1,4 @@
-{ ... }:
-
-{
+{...}: {
   yy = ''
     function yy() {
       local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"

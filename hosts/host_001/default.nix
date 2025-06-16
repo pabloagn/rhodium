@@ -1,13 +1,15 @@
-{ host, pkgs, ... }:
 {
+  host,
+  pkgs,
+  ...
+}: {
   imports = [
     ./hardware-configuration.nix
     ../../modules/boot/boot.nix
     ../../modules/services
     ../../modules/hardware
     ../../modules/shell
-    ../../modules/security/keyrings.nix
-    ../../modules/security/sops.nix
+    ../../modules/security
     ../../modules/users
     ../../modules/manager
     ../../modules/desktop
@@ -41,7 +43,7 @@
   };
 
   # Extra Args
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = ["nix-command" "flakes"];
 
   # Original derivation
   system.stateVersion = "24.05";

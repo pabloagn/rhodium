@@ -1,10 +1,9 @@
 {pkgs, ...}: {
   environment.systemPackages = with pkgs; [
     psmisc # killall, pstree, etc.
-    # htop # System monitoring
     bottom # Better htop alternative
-    # nmon # System monitoring tool
-    # btop # Better htop alternative
+    btop # Better htop alternative
+    nmon # System monitoring tool
     hyperfine # Command-line benchmarking tool
   ];
 }

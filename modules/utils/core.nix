@@ -1,6 +1,6 @@
 {pkgs, ...}: {
   environment.systemPackages = with pkgs; [
-    mesa
+    mesa # Open source 3D graphics library
     libva
     gdb # GNU Project Debugger
     libGL
@@ -12,7 +12,6 @@
     uutils-coreutils-noprefix
     coreutils
     util-linux # Includes lscpu
-    gawk # GNU's awk
 
     # Build essentials
     gnumake
