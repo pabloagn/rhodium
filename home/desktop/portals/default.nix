@@ -2,7 +2,7 @@
   home.packages = with pkgs; [
     # gtk theme requirements
     sassc
-    murrine-engine
+    gtk-engine-murrine
     gnome-themes-extra
 
     # Qt themes
