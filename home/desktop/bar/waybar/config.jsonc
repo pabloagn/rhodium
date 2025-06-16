@@ -1,3 +1,5 @@
+// vim: ft=jsonc
+
 {
   "layer": "top",
   "position": "top",
@@ -10,11 +12,11 @@
   "reload_style_on_change": true,
 
   // Order of modules
-  "modules-left": ["hyprland/workspaces"],
+  "modules-left": ["niri/workspaces", "wlr/taskbar"],
   "modules-center": ["clock"],
   "modules-right": [
     "network",
-    "hyprland/language",
+    "niri/language",
     "battery",
     "cpu",
     "memory",
@@ -25,33 +27,34 @@
     "tray",
   ],
 
-  // Modules configuration
-  "hyprland/workspaces": {
-    "on-click": "activate",
-    "all-outputs": true,
-    "format": "{icon}",
-    "format-icons": {
-      "1": "I",
-      "2": "II",
-      "3": "III",
-      "4": "IV",
-      "5": "V",
-      "6": "VI",
-      "7": "VII",
-      "8": "VII",
-      "9": "IX",
-      "10": "X",
-      "11": "XI",
-      "12": "XII",
-      "13": "XIII",
-      "14": "XIV",
-      "15": "XV",
-      "16": "XVI",
-      "17": "XVII",
-      "18": "XVIII",
-      "19": "XIX",
-      "20": "XX",
-    },
+  // Niri workspace module
+  "niri/workspaces": {
+    "format": "{index}",
+    "on-click": "activate"
+  },
+
+  // If niri/workspaces doesn't work, use this custom module instead:
+  // "custom/niri-workspaces": {
+  //   "exec": "niri msg -j workspaces | jq -r '[.[] | if .is_active then \"<span color=\\\"#7fc8ff\\\">[\" + (.idx|tostring) + \"]</span>\" else (.idx|tostring) end] | join(\"  \")'",
+  //   "interval": 0.5,
+  //   "return-type": "json",
+  //   "format": "{}",
+  //   "tooltip": false
+  // },
+
+  // Niri keyboard layout indicator
+  "niri/language": {
+    "format": " {short}",
+    "tooltip-format": "Layout: {long}"
+  },
+
+  // If niri/language doesn't work, use this custom module:
+  "custom/niri-keyboard": {
+    "exec": "niri msg -j keyboard-layouts | jq -r '.keyboard_layouts[.current_idx].short_name'",
+    "interval": 1,
+    "format": " {}",
+    "tooltip": false,
+    "on-click": "niri msg action switch-layout next"
   },
 
   "tray": {
@@ -62,146 +65,98 @@
 
   "clock": {
     "interval": 60,
-    "format": "  {:%a %b %d  %I:%M %p}", // %b %d %Y  --Date formatting
+    "format": "  {:%a %b %d  %I:%M %p}",
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
     "format-alt": "{:%Y-%m-%d}",
   },
 
   "temperature": {
-    // "thermal-zone": 2,
-    // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
-    // "format-critical": "{temperatureC}°C {icon}",
     "critical-threshold": 80,
     "interval": 2,
-    "format": "{temperatureC}°C ",
-    "format-icons": ["", "", ""],
-    "on-click": "hyprctl dispatcher togglespecialworkspace monitor",
+    "format": "{temperatureC}°C ",
+    "format-icons": ["", "", ""],
+    "on-click": "kitty -e btop",
   },
 
   "cpu": {
     "interval": 2,
-    "format": "{usage}% ",
+    "format": "{usage}% ",
     "tooltip": false,
-    "on-click": "hyprctl dispatcher togglespecialworkspace monitor",
+    "on-click": "kitty -e btop",
   },
 
   "memory": {
     "interval": 2,
-    "format": "{}% ",
+    "format": "{}% ",
   },
 
   "disk": {
     "interval": 15,
-    "format": "{percentage_used}%  ",
+    "format": "{percentage_used}%  ",
   },
 
   "backlight": {
-    // "device": "acpi_video1",
     "format": "{percent}% {icon}",
-    "format-icons": ["", "", "", "", "", "", "", "", ""],
-  },
-
-  "hyprland/language": {
-    "format": "  {}",
-    "format-en": "EN",
-    "format-es": "ES",
+    "format-icons": ["", "", "", "", "", "", "", "", ""],
   },
 
   "network": {
     "interval": 1,
-    "format-wifi": "{bandwidthTotalBytes:>3} ↓ ", //({essid} {signalStrength}%)
-    "format-ethernet": "{ipaddr}/{cidr} ",
-    "tooltip-format-wifi": "{ipaddr} ({signalStrength}%) ",
-    "tooltip-format": "{ifname} via {gwaddr} ",
-    "format-linked": "{ifname} (No IP) ",
-    "format-disconnected": "󰀦", //Disconnected ⚠
+    "format-wifi": " {bandwidthDownBytes:>}",
+    "format-ethernet": "󰈀 {bandwidthDownBytes:>}",
+    "tooltip-format-wifi": "{essid} ({signalStrength}%)\n{ipaddr}",
+    "tooltip-format-ethernet": "{ifname}\n{ipaddr}",
+    "format-linked": "󰈀 No IP",
+    "format-disconnected": "󰤭",
     "format-alt": "{ifname}: {ipaddr}/{cidr}",
+    "on-click-right": "nm-connection-editor"
+  },
+
+  "bluetooth": {
+    "format": " {status}",
+    "format-connected": " {device_alias}",
+    "format-connected-battery": " {device_alias} {device_battery_percentage}%",
+    "format-disabled": "",
+    "format-off": "",
+    "interval": 30,
+    "on-click": "blueman-manager",
+    "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
+    "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
+    "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+    "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%"
   },
 
   "pulseaudio": {
-    "format": "{volume}% {icon}", //{format_source}",
-    "format-bluetooth": "{volume}% {icon} 󰂯", //{format_source}",
-    "format-bluetooth-muted": "󰖁 {icon} 󰂯", //{format_source}",
-    "format-muted": "{volume}% 󰖁",
-    // "format-source": "{volume}% ",
-    // "format-source-muted": "",
+    "format": "{volume}% {icon}",
+    "format-bluetooth": "{volume}% {icon} ",
+    "format-bluetooth-muted": "󰝟 {icon} ",
+    "format-muted": "{volume}% 󰝟",
     "format-icons": {
-      "headphone": "󰋋",
-      "hands-free": "󱡒",
-      "headset": "󰋎",
-      "phone": "",
-      "portable": "",
-      "car": "",
-      "default": ["", "", ""],
+      "headphone": "",
+      "hands-free": "",
+      "headset": "",
+      "phone": "",
+      "portable": "",
+      "car": "",
+      "default": ["󰕿", "󰖀", "󰕾"],
     },
     "on-click": "pavucontrol",
   },
 
   "wireplumber": {
     "format": "{volume}% {icon}",
-    "format-muted": "{volume}% 󰖁",
-    // "format-bluetooth": "{volume}% {icon} 󰂯", //{format_source}",
-    // "format-bluetooth-muted": "󰖁 {icon} 󰂯", //{format_source}",
-    "format-icons": ["", "", ""],
-  },
-
-  "custom/power": {
-    "format": "{icon}",
-    "format-icons": "", // 
-    "exec-on-event": "true",
-    "on-click": "~/scripts/session_menu",
-    "tooltip": false,
-  },
-
-  "custom/separator": {
-    "format": "{icon}",
-    "format-icons": "|",
-    "tooltip": false,
-  },
-
-  "custom/notification": {
-    "tooltip": false,
-    "format": "{} {icon}",
-    "format-icons": {
-      "notification": "<span foreground='red'><sup></sup></span>",
-      "none": "",
-      "dnd-notification": "<span foreground='red'><sup></sup></span>",
-      "dnd-none": "",
-      "inhibited-notification": "<span foreground='red'><sup></sup></span>",
-      "inhibited-none": "",
-      "dnd-inhibited-notification": "<span foreground='red'><sup></sup></span>",
-      "dnd-inhibited-none": "",
-    },
-    "return-type": "json",
-    "exec-if": "which swaync-client",
-    "exec": "swaync-client -swb",
-    "on-click": "swaync-client -t -sw",
-    "on-click-right": "swaync-client -d -sw",
-    "escape": true,
-  },
-
-  "keyboard-state": {
-    "numlock": true,
-    "capslock": true,
-    "format": "{name} {icon}",
-    "format-icons": {
-      "locked": "",
-      "unlocked": "",
-    },
+    "format-muted": "{volume}% 󰝟",
+    "format-icons": ["󰕿", "󰖀", "󰕾"],
+    "on-click": "pavucontrol",
   },
 
   "wlr/taskbar": {
     "format": "{icon}",
     "icon-size": 18,
-    "tooltip-format": "{title}",
+    "tooltip-format": "{title} | {app_id}",
     "on-click": "activate",
     "on-click-middle": "close",
     "ignore-list": ["kitty", "wezterm", "foot", "footclient"],
-  },
-
-  "hyprland/window": {
-    "format": "{}",
-    "separate-outputs": true,
   },
 
   "battery": {
@@ -212,26 +167,9 @@
       "critical": 15,
     },
     "format": "{capacity}% {icon}",
-    "format-charging": "{capacity}% ",
-    "format-plugged": "{capacity}% ",
+    "format-charging": "{capacity}% 󰂄",
+    "format-plugged": "{capacity}% ",
     "format-alt": "{time} {icon}",
-    // "format-good": "", // An empty format will hide the module
-    // "format-full": "",
-    "format-icons": ["", "", "", "", ""],
-  },
-
-  "backlight/slider": {
-    "min": 0,
-    "max": 100,
-    "orientation": "horizontal",
-    "device": "intel_backlight",
-  },
-
-  "idle_inhibitor": {
-    "format": "{icon}",
-    "format-icons": {
-      "activated": "",
-      "deactivated": "",
-    },
+    "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
   },
 }

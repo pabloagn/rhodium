@@ -264,12 +264,38 @@ require 'lspconfig'.dockerls.setup {
 }
 
 -- JSON (requires schemastore.nvim plugin)
+-- require 'lspconfig'.jsonls.setup {
+--   capabilities = capabilities,
+--   settings = {
+--     json = {
+--       schemas = require('schemastore').json.schemas(),
+--       validate = { enable = true },
+--     },
+--   },
+-- }
+
+-- JSON (with JSONC support)
 require 'lspconfig'.jsonls.setup {
   capabilities = capabilities,
+  filetypes = { "json", "jsonc" },
   settings = {
     json = {
       schemas = require('schemastore').json.schemas(),
       validate = { enable = true },
+      -- Allow comments in JSONC
+      format = {
+        enable = true,
+      },
+    },
+  },
+  init_options = {
+    provideFormatter = true,
+  },
+  commands = {
+    JsonFormat = {
+      function()
+        vim.lsp.buf.format({ async = true })
+      end,
     },
   },
 }

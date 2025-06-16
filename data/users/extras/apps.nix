@@ -50,7 +50,10 @@
   productivity = {
     onepassword = {
       binary = "1password";
-      args = ["--force-device-scale-factor=1.5"];
+      # NOTE: The flags below are required to work outside X11 (e.g., niri)
+      args = ["--enable-features=UseOzonePlatform" "--ozone-platform=wayland"];
+      # NOTE: The flags below are required to work in hyprland
+      # args = ["--force-device-scale-factor=1.5"];
       icon = "onepassword";
       description = "1Password";
     };
