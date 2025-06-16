@@ -52,6 +52,11 @@
         config = sourceLuaFile "vimtex.lua";
       }
 
+      {
+        plugin = render-markdown-nvim;
+        config = sourceLuaFile "render-markdown-nvim.lua";
+      }
+
       # Linting
       # {
       #   plugin = nvim-lint;
