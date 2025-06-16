@@ -39,11 +39,17 @@
   };
 
   viewers = {
-    image-viewer = {
+    image-viewer-xorg = {
       binary = "feh";
       args = ["-Z" "--scale-down" "--auto-zoom" "--image-bg" "black" "%f"];
       icon = "feh";
-      description = "Image Viewer";
+      description = "Image Viewer (X11)";
+    };
+    image-viewer= {
+      binary = "imv";
+      args = [];
+      icon = "imv";
+      description = "Image Viewer (Wayland)";
     };
   };
 
@@ -71,7 +77,10 @@
     };
     standardnotes = {
       binary = "standardnotes";
-      args = ["--force-device-scale-factor=1.5"];
+      # NOTE: The flags below are required to work outside X11 (e.g., niri)
+      args = ["--enable-features=UseOzonePlatform" "--ozone-platform=wayland"];
+      # NOTE: The flags below are required to work in hyprland
+      # args = ["--force-device-scale-factor=1.5"];
       icon = "standardnotes";
       description = "Standard Notes";
     };

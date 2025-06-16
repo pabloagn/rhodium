@@ -18,7 +18,7 @@
     filesGraphic = "thunar";
 
     # Media
-    imageViewer = "feh";
+    imageViewer = "imv";
     videoPlayer = "mpv";
     audioPlayer = "mpv";
 
