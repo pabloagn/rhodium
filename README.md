@@ -8,9 +8,9 @@
 
 <!-- <h3 align="center">Rhodium</h3> -->
 
-<h1 align="center">
-  <img src="https://readme-typing-svg.herokuapp.com/?lines=A+robust,+hypermodular+NixOS+system&font=Fira%20Code&size=28&duration=3000&pause=1000&color=8A2BE2&center=true&width=600&height=50" alt="Typing SVG" />
-</h1>
+<!-- <h1 align="center"> -->
+<!--   <img src="https://readme-typing-svg.herokuapp.com/?lines=A+robust,+hypermodular+NixOS+system&font=Fira%20Code&size=28&duration=3000&pause=1000&color=8A2BE2&center=true&width=600&height=50" alt="Typing SVG" /> -->
+<!-- </h1> -->
 
 <p align="center">A robust, hypermodular NixOS system</p>
 
