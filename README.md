@@ -6,6 +6,8 @@
 <div align="center">───────  ‡  ───────</div>
 <br/>
 
+<br/>
+
 <div align ="center">
 
 [![Last Commit](https://img.shields.io/github/last-commit/pabloagn/rhodium?style=for-the-badge&logo=git&logoColor=white&color=7AA89F&labelColor=000000&label=LAST%20COMMIT)](https://github.com/pabloagn/rhodium/commits/main) [![License](https://img.shields.io/github/license/pabloagn/rhodium?style=for-the-badge&color=7AA89F&labelColor=000000)](https://github.com/pabloagn/rhodium/blob/main/LICENSE)
@@ -18,9 +20,22 @@
 
 
 <br/>
-<div align="center">════════════════════════════</div>
+<div align="center">◇</div>
 <br/>
 
+
+<pre>
+Window Manager .................. <a href="https://github.com/YaLTeR/niri/">Niri</a>
+Shells .......................... <a href="https://www.nushell.sh/">Nu</a> | <a href="https://fishshell.com/">Fish</a>
+Prompt .......................... <a href="https://github.com/starship/starship">Starship</a>
+Terminals ....................... <a href="https://ghostty.org/">Ghostty</a> | <a href="https://sw.kovidgoyal.net/kitty/">Kitty</a>
+Notify Daemon ................... <a href="https://github.com/emersion/mako">Mako</a>
+Launcher ........................ <a href="https://codeberg.org/dnkl/fuzzel">Fuzzel</a>
+File Manager .................... <a href="https://github.com/sxyazi/yazi">Yazi</a>
+IDEs ............................ <a href="https://neovim.io/doc/">NeoVim</a> | <a href="https://docs.helix-editor.com/">Helix</a> | <a href="https://docs.doomemacs.org/latest/">Doom Emacs</a> | <a href="https://zed.dev/">Zed Editor</a>
+LockScreen ...................... <a href="https://wiki.hyprland.org/Hypr-Ecosystem/hyprlock/">Hyprlock</a>
+ColorScheme ..................... <a href="https://github.com/webhooked/kanso.nvim">Kansō</a>
+</pre>
 
 - **Window Manager** [Niri](https://github.com/YaLTeR/niri/)  
 - **Shells** [Nu](https://www.nushell.sh/) | [Fish](https://www.nushell.sh/)  
