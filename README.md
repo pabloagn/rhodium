@@ -20,21 +20,21 @@
 
 
 <br/>
-<div align="center">◇</div>
+<div align="center">────────────── ◇ ──────────────</div>
 <br/>
 
 
 <pre>
-Window Manager .................. <a href="https://github.com/YaLTeR/niri/">Niri</a>
-Shells .......................... <a href="https://www.nushell.sh/">Nu</a> | <a href="https://fishshell.com/">Fish</a>
-Prompt .......................... <a href="https://github.com/starship/starship">Starship</a>
-Terminals ....................... <a href="https://ghostty.org/">Ghostty</a> | <a href="https://sw.kovidgoyal.net/kitty/">Kitty</a>
-Notify Daemon ................... <a href="https://github.com/emersion/mako">Mako</a>
-Launcher ........................ <a href="https://codeberg.org/dnkl/fuzzel">Fuzzel</a>
-File Manager .................... <a href="https://github.com/sxyazi/yazi">Yazi</a>
-IDEs ............................ <a href="https://neovim.io/doc/">NeoVim</a> | <a href="https://docs.helix-editor.com/">Helix</a> | <a href="https://docs.doomemacs.org/latest/">Doom Emacs</a> | <a href="https://zed.dev/">Zed Editor</a>
-LockScreen ...................... <a href="https://wiki.hyprland.org/Hypr-Ecosystem/hyprlock/">Hyprlock</a>
-ColorScheme ..................... <a href="https://github.com/webhooked/kanso.nvim">Kansō</a>
+Window Manager ...................... <a href="https://github.com/YaLTeR/niri/">Niri</a>
+Shells .............................. <a href="https://www.nushell.sh/">Nu</a> | <a href="https://fishshell.com/">Fish</a>
+Prompt .............................. <a href="https://github.com/starship/starship">Starship</a>
+Terminals ........................... <a href="https://ghostty.org/">Ghostty</a> | <a href="https://sw.kovidgoyal.net/kitty/">Kitty</a>
+Notify Daemon ....................... <a href="https://github.com/emersion/mako">Mako</a>
+Launcher ............................ <a href="https://codeberg.org/dnkl/fuzzel">Fuzzel</a>
+File Manager ........................ <a href="https://github.com/sxyazi/yazi">Yazi</a>
+IDEs ................................ <a href="https://neovim.io/doc/">NeoVim</a> | <a href="https://docs.helix-editor.com/">Helix</a> | <a href="https://docs.doomemacs.org/latest/">Doom Emacs</a> | <a href="https://zed.dev/">Zed Editor</a>
+LockScreen .......................... <a href="https://wiki.hyprland.org/Hypr-Ecosystem/hyprlock/">Hyprlock</a>
+ColorScheme ......................... <a href="https://github.com/webhooked/kanso.nvim">Kansō</a>
 </pre>
 
 - **Window Manager** [Niri](https://github.com/YaLTeR/niri/)  
