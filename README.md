@@ -1,4 +1,4 @@
-<p align="center"><img src="assets/logo.png" width=300px></p>
+<p align="center"><img src="assets/logo.png" width=500px></p>
 
 <h3 align="center">Rhodium</h3>
 
