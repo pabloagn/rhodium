@@ -18,9 +18,9 @@
 
 </div>
 
-<div style="border-top: 0.5px solid #444; width: 100%;"></div>
-
 <br/>
+
+## <samp>⊹ THE TOOLS</samp>
 
 <pre>
 • Window Manager ...................... <a href="https://github.com/YaLTeR/niri/">Niri</a>
