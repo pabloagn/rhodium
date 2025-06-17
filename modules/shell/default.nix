@@ -14,11 +14,11 @@
   };
 
   # Disable manuals as nmd fails to build often
-  manual = {
-    html.enable = false;
-    json.enable = false;
-    manpages.enable = false;
-  };
+  # manual = {
+  #   html.enable = false;
+  #   json.enable = false;
+  #   manpages.enable = false;
+  # };
 
   programs.nix-index = {
     enable = true;
