@@ -13,12 +13,15 @@
     command-not-found.enable = false; # Required for fish
   };
 
-  # TODO: Fix this
-  documentation.man.generateCaches = false; # Required since fish creates a massive database (eternal build)
+  # Disable manuals as nmd fails to build often
+  manual = {
+    html.enable = false;
+    json.enable = false;
+    manpages.enable = false;
+  };
 
-  # TODO: Set up nix-index
-  # programs.nix-index = {
-  # enable = true;
-  # enableFishIntegration = true;
-  # };
+  programs.nix-index = {
+    enable = true;
+    enableFishIntegration = true;
+  };
 }

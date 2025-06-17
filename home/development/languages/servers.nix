@@ -29,6 +29,9 @@
     elmPackages.elm-format
     elmPackages.elm-language-server
 
+    # Emmet
+    emmet-ls
+
     # Fennel
     fennel-ls
 
@@ -53,6 +56,7 @@
     nodePackages.npm
     nodePackages.prettier
     nodePackages.typescript-language-server
+    biome
 
     # KDL
     kdlfmt
@@ -73,8 +77,8 @@
     marksman
 
     # Nix
-    nil
-    nixd
+    nil # Original language server
+    nixd # Latest language server
     nixpkgs-fmt # Formatter
     nixfmt-rfc-style # Official formatter
     alejandra # Opinionated formatter

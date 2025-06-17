@@ -4,6 +4,7 @@
     ./cursor
     ./common
     ./launchers
+    ./lockscreen
     ./notifications
     ./portals
     ./wallpaper
