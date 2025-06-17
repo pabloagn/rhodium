@@ -1,9 +1,16 @@
 <p align="center"><img src="assets/logo.png" width=500px></p>
 
-<a id="rhodium"></a>
-<img align="center" src="https://readme-typing-svg.herokuapp.com?font=Lexend+Giga&size=25&pause=1000&color=CCA9DD&vCenter=true&width=435&height=25&lines=RHODIUM" width="450"/>
+<div align="center">
+
+![Last Commit](https://img.shields.io/github/last-commit/pabloagn/rhodium?style=for-the-badge&logo=git&logoColor=white&color=8A2BE2&labelColor=000000&label=LAST%20COMMIT)
+
+</div>
 
 <h3 align="center">Rhodium</h3>
+
+<h1 align="center">
+  <img src="https://readme-typing-svg.herokuapp.com/?lines=A+robust,+hypermodular+NixOS+system&font=Fira%20Code&size=28&duration=3000&pause=1000&color=8A2BE2&center=true&width=600&height=50" alt="Typing SVG" />
+</h1>
 
 <p align="center">A robust, hypermodular NixOS system</p>
 
