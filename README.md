@@ -4,6 +4,7 @@
 
 ![Last Commit](https://img.shields.io/github/last-commit/pabloagn/rhodium?style=for-the-badge&logo=git&logoColor=white&color=7AA89F&labelColor=000000&label=LAST%20COMMIT)
 
+</div>
 
 <!-- <h3 align="center">Rhodium</h3> -->
 
