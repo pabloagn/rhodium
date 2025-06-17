@@ -2,16 +2,17 @@
 
 <p align="center">A robust, hypermodular NixOS system</p>
 
+<div align ="center">
 
-![Last Commit](https://img.shields.io/github/last-commit/pabloagn/rhodium?style=for-the-badge&logo=git&logoColor=white&color=7AA89F&labelColor=000000&label=LAST%20COMMIT)
+[![Last Commit](https://img.shields.io/github/last-commit/pabloagn/rhodium?style=for-the-badge&logo=git&logoColor=white&color=7AA89F&labelColor=000000&label=LAST%20COMMIT)](https://github.com/pabloagn/rhodium/commits/main)
 
 [![License](https://img.shields.io/github/license/pabloagn/rhodium?style=for-the-badge&color=7AA89F&labelColor=000000)](https://github.com/pabloagn/rhodium/blob/main/LICENSE)
 
-[![made with nix](https://img.shields.io/badge/made%20with-nix-7aa89f?style=for-the-badge&logo=nixos&logocolor=white&labelcolor=000000)](https://nixos.org/)
+[![Made with Nix](https://img.shields.io/badge/Made%20with-Nix-7AA89F?style=for-the-badge&logo=nixos&logoColor=white&labelColor=000000)](https://nixos.org/)
+[![Made with Lua](https://img.shields.io/badge/Made%20with-Lua-7AA89F?style=for-the-badge&logo=lua&logoColor=white&labelColor=000000)](https://www.lua.org/)
+[![Made with Rust](https://img.shields.io/badge/Made%20with-Rust-7AA89F?style=for-the-badge&logo=rust&logoColor=white&labelColor=000000)](https://www.rust-lang.org/)
 
-[![made with lua](https://img.shields.io/badge/made%20with-lua-7aa89f?style=for-the-badge&logo=lua&logocolor=white&labelcolor=000000)](https://www.lua.org/)
-
-[![made with rust](https://img.shields.io/badge/made%20with-rust-7aa89f?style=for-the-badge&logo=rust&logocolor=white&labelcolor=000000)](https://www.rust-lang.org/)
+</div>
 
 <!-- <h3 align="center">Rhodium</h3> -->
 
