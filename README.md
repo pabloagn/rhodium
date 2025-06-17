@@ -1,6 +1,6 @@
 <p align="center"><img src="assets/logo.png" width=500px></p>
 
-<p align="center">A robust, hypermodular NixOS system</p>
+<p align="center"><em>A robust, hypermodular NixOS system</em></p>
 
 <br/>
 <div align="center">───────  ‡  ───────</div>
