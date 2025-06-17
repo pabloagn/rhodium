@@ -1,8 +1,8 @@
 <p align="center"><img src="assets/logo.png" width=300px></p>
 
-<h2 align="center">Rhodium</h2>
+<h3 align="center">Rhodium</h3>
 
-A robust, hypermodular NixOS system.
+<p align="center">A robust, hypermodular NixOS system</p>
 
 ---
 
