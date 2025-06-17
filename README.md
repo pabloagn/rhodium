@@ -1,9 +1,9 @@
 <p align="center"><img src="assets/logo.png" width=500px></p>
 
-<div align="center">
+<!-- <div align="center"> -->
 
 ![Last Commit](https://img.shields.io/github/last-commit/pabloagn/rhodium?style=for-the-badge&logo=git&logoColor=white&color=7AA89F&labelColor=000000&label=LAST%20COMMIT)
-•
+
 [![License](https://img.shields.io/github/license/pabloagn/rhodium?style=for-the-badge&color=7AA89F&labelColor=000000)](https://github.com/pabloagn/rhodium/blob/main/LICENSE)
 
 <p align="center">
@@ -14,7 +14,8 @@
  <a href="https://www.rust-lang.org/"><img src="https://img.shields.io/badge/Made%20with-Rust-7AA89F?style=for-the-badge&logo=rust&logoColor=white&labelColor=000000" alt="Made with Rust"></a>
 </p>
 
-</div>
+
+<!-- </div> -->
 
 <!-- <h3 align="center">Rhodium</h3> -->
 
