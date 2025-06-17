@@ -17,6 +17,7 @@
     # Filetype plugins (automatically loaded by Neovim)
     "nvim/ftplugin/tex.lua".source = ./ftplugin/tex.lua;
     "nvim/ftplugin/python.lua".source = ./ftplugin/python.lua;
+    "nvim/ftplugin/markdown.lua".source = ./ftplugin/markdown.lua;
 
     "nvim/init.lua".text = ''
       require('filters')

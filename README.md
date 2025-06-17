@@ -1,6 +1,37 @@
-# Rhodium
+<p align="center"><img src="assets/logo.png" width=300px></p>
+
+<h2 align="center">Rhodium</h2>
 
 A robust, hypermodular NixOS system.
+
+---
+
+- **Window Manager**
+    - [Niri](https://github.com/YaLTeR/niri/)
+- **Shells**
+    - [Nu](https://www.nushell.sh/)
+    - [Fish](https://www.nushell.sh/)
+- Prompt
+    - [Starship](https://github.com/starship/starship)
+- **Terminals**
+    - [Ghostty](https://ghostty.org/)
+    - [Kitty](https://ghostty.org/)
+- **Notify Daemon**
+    - [Mako](https://github.com/emersion/mako)
+- **Launcher**
+    - [Fuzzel](https://codeberg.org/dnkl/fuzzel)
+- **File Manager**
+    - [Yazi](https://github.com/sxyazi/yazi)
+- **IDEs**
+    - [NeoVim](https://neovim.io/doc/)
+    - [Helix](https://docs.helix-editor.com/)
+    - [Doom Emacs](https://docs.doomemacs.org/latest/)
+    - [Zed Editor](https://zed.dev/)
+- **LockScreen**
+    - [Hyprlock](https://wiki.hyprland.org/Hypr-Ecosystem/hyprlock/)
+- **ColorScheme**
+    - [Kansō](https://github.com/webhooked/kanso.nvim)
+
 
 ## Usage
 
