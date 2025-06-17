@@ -1,7 +1,7 @@
 <p align="center"><img src="assets/logo.png" width=500px></p>
 
-<a id="rhodium" align="center"></a>
-<img src="https://readme-typing-svg.herokuapp.com?font=Lexend+Giga&size=25&pause=1000&color=CCA9DD&vCenter=true&width=435&height=25&lines=RHODIUM" width="450"/>
+<a id="rhodium"></a>
+<img align="center" src="https://readme-typing-svg.herokuapp.com?font=Lexend+Giga&size=25&pause=1000&color=CCA9DD&vCenter=true&width=435&height=25&lines=RHODIUM" width="450"/>
 
 <h3 align="center">Rhodium</h3>
 
