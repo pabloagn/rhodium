@@ -7,11 +7,11 @@
 
 [![License](https://img.shields.io/github/license/pabloagn/rhodium?style=for-the-badge&color=7AA89F&labelColor=000000)](https://github.com/pabloagn/rhodium/blob/main/LICENSE)
 
-[![Made with Nix](https://img.shields.io/badge/made%20with-nix-7aa89f?style=for-the-badge&logo=nixos&logocolor=white&labelcolor=000000)](https://nixos.org/)
+[![made with nix](https://img.shields.io/badge/made%20with-nix-7aa89f?style=for-the-badge&logo=nixos&logocolor=white&labelcolor=000000)](https://nixos.org/)
 
-[![Made with Lua](https://img.shields.io/badge/made%20with-lua-7aa89f?style=for-the-badge&logo=lua&logocolor=white&labelcolor=000000)](https://www.lua.org/)
+[![made with lua](https://img.shields.io/badge/made%20with-lua-7aa89f?style=for-the-badge&logo=lua&logocolor=white&labelcolor=000000)](https://www.lua.org/)
 
-[![Made with Rust](https://img.shields.io/badge/made%20with-rust-7aa89f?style=for-the-badge&logo=rust&logocolor=white&labelcolor=000000)](https://www.rust-lang.org/)
+[![made with rust](https://img.shields.io/badge/made%20with-rust-7aa89f?style=for-the-badge&logo=rust&logocolor=white&labelcolor=000000)](https://www.rust-lang.org/)
 
 <!-- <h3 align="center">Rhodium</h3> -->
 
