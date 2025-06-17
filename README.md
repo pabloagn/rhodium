@@ -18,7 +18,7 @@
 
 </div>
 
-<hr style="border: none; height: 0.5px; background-color: #333; margin: 20px 0;">
+<div style="border-top: 0.5px solid #444; width: 100%;"></div>
 
 <br/>
 
