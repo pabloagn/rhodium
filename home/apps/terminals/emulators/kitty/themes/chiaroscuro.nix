@@ -1,10 +1,8 @@
-{...}:
-# TODO: Inject theme
-{
+{...}: {
   programs.kitty = {
     settings = {
       # Theme
-      background_opacity = 0.80;
+      background_opacity = 0.90;
 
       # The basic colors
       foreground = "#cdd6f4";

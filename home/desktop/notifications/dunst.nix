@@ -1,6 +1,6 @@
 {...}: {
   services.dunst = {
-    enable = true;
+    enable = false;
     settings = {
       global = {
         # Geometry and positioning

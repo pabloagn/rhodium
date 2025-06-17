@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   monospace = {
     anonymous-pro = {
       enable = true;
@@ -561,6 +560,14 @@
       name = "Righteous";
       style = "Display";
     };
+
+    unifont = {
+      unifont = {
+        enable = true;
+        package = pkgs.unifont;
+        name = "Unifont";
+        style = "Unifont";
+      };
+    };
   };
 }
-
