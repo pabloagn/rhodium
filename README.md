@@ -2,6 +2,10 @@
 
 <p align="center">A robust, hypermodular NixOS system</p>
 
+<br/>
+<div align="center">───────  ‡  ───────</div>
+<br/>
+
 <div align ="center">
 
 [![Last Commit](https://img.shields.io/github/last-commit/pabloagn/rhodium?style=for-the-badge&logo=git&logoColor=white&color=7AA89F&labelColor=000000&label=LAST%20COMMIT)](https://github.com/pabloagn/rhodium/commits/main) [![License](https://img.shields.io/github/license/pabloagn/rhodium?style=for-the-badge&color=7AA89F&labelColor=000000)](https://github.com/pabloagn/rhodium/blob/main/LICENSE)
@@ -12,15 +16,11 @@
 
 </div>
 
-<!-- <h3 align="center">Rhodium</h3> -->
-
-<!-- <h1 align="center"> -->
-<!--   <img src="https://readme-typing-svg.herokuapp.com/?lines=A+robust,+hypermodular+NixOS+system&font=Fira%20Code&size=28&duration=3000&pause=1000&color=8A2BE2&center=true&width=600&height=50" alt="Typing SVG" /> -->
-<!-- </h1> -->
 
 <br/>
-<div align="center">───────  ‡  ───────</div>
+<div align="center">════════════════════════════</div>
 <br/>
+
 
 - **Window Manager** [Niri](https://github.com/YaLTeR/niri/)  
 - **Shells** [Nu](https://www.nushell.sh/) | [Fish](https://www.nushell.sh/)  
