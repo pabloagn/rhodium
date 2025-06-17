@@ -4,7 +4,7 @@
 
 <p align="center">A robust, hypermodular NixOS system</p>
 
----
+<p align="center">────────────── ‡ ──────────────</p>
 
 - **Window Manager**
     - [Niri](https://github.com/YaLTeR/niri/)
