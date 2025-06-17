@@ -7,11 +7,11 @@
 [![License](https://img.shields.io/github/license/pabloagn/rhodium?style=for-the-badge&color=7AA89F&labelColor=000000)](https://github.com/pabloagn/rhodium/blob/main/LICENSE)
 
 <p align="center">
-  <a href="https://nixos.org/"><img src="https://img.shields.io/badge/Made%20with-Nix-7AA89F?style=for-the-badge&logo=nixos&logoColor=white&labelColor=000000" alt="Made with Nix"></a>
-  <span style="margin: 0 8px;">•</span>
-  <a href="https://www.lua.org/"><img src="https://img.shields.io/badge/Made%20with-Lua-7AA89F?style=for-the-badge&logo=lua&logoColor=white&labelColor=000000" alt="Made with Lua"></a>
-  <span style="margin: 0 8px;">•</span>
-  <a href="https://www.rust-lang.org/"><img src="https://img.shields.io/badge/Made%20with-Rust-7AA89F?style=for-the-badge&logo=rust&logoColor=white&labelColor=000000" alt="Made with Rust"></a>
+ <a href="https://nixos.org/"><img src="https://img.shields.io/badge/Made%20with-Nix-7AA89F?style=for-the-badge&logo=nixos&logoColor=white&labelColor=000000" alt="Made with Nix"></a>
+ •
+ <a href="https://www.lua.org/"><img src="https://img.shields.io/badge/Made%20with-Lua-7AA89F?style=for-the-badge&logo=lua&logoColor=white&labelColor=000000" alt="Made with Lua"></a>
+ •
+ <a href="https://www.rust-lang.org/"><img src="https://img.shields.io/badge/Made%20with-Rust-7AA89F?style=for-the-badge&logo=rust&logoColor=white&labelColor=000000" alt="Made with Rust"></a>
 </p>
 
 </div>
