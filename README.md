@@ -18,13 +18,13 @@
 <div align="center">
   <div id="images">
     <p style="text-align:center;">
-      <a href="https://nixos.org/">
+      <a href="https://nixos.org/" style="text-decoration:none;">
         <img src="https://img.shields.io/badge/made%20with-nix-7aa89f?style=for-the-badge&logo=nixos&logocolor=white&labelcolor=000000"/>
       </a>&nbsp;&nbsp;
-      <a href="https://www.lua.org/">
+      <a href="https://www.lua.org/" style="text-decoration:none;">
         <img src="https://img.shields.io/badge/made%20with-lua-7aa89f?style=for-the-badge&logo=lua&logocolor=white&labelcolor=000000"/>
       </a>&nbsp;&nbsp;
-      <a href="https://www.rust-lang.org/">
+      <a href="https://www.rust-lang.org/" style="text-decoration:none;">
         <img src="https://img.shields.io/badge/made%20with-rust-7aa89f?style=for-the-badge&logo=rust&logocolor=white&labelcolor=000000"/>
       </a>
     </p>
