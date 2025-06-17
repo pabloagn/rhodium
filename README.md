@@ -1,21 +1,36 @@
 <p align="center"><img src="assets/logo.png" width=500px></p>
 
-<!-- <div align="center"> -->
+<p align="center">A robust, hypermodular NixOS system</p>
 
-![Last Commit](https://img.shields.io/github/last-commit/pabloagn/rhodium?style=for-the-badge&logo=git&logoColor=white&color=7AA89F&labelColor=000000&label=LAST%20COMMIT)
+<div align="center">
+  <div id="images">
+    <p style="text-align:center;">
+      <a href="https://github.com/pabloagn/rhodium/commits">
+        <img src="https://img.shields.io/github/last-commit/pabloagn/rhodium?style=for-the-badge&logo=git&logoColor=white&color=7AA89F&labelColor=000000&label=LAST%20COMMIT"/>
+      </a>&nbsp;&nbsp;
+      <a href="https://github.com/pabloagn/rhodium/blob/main/LICENSE">
+        <img src="https://img.shields.io/github/license/pabloagn/rhodium?style=for-the-badge&color=7AA89F&labelColor=000000"/>
+      </a>
+    </p>
+  </div>
+</div>
 
-[![License](https://img.shields.io/github/license/pabloagn/rhodium?style=for-the-badge&color=7AA89F&labelColor=000000)](https://github.com/pabloagn/rhodium/blob/main/LICENSE)
+<div align="center">
+  <div id="images">
+    <p style="text-align:center;">
+      <a href="https://nixos.org/">
+        <img src="https://img.shields.io/badge/made%20with-nix-7aa89f?style=for-the-badge&logo=nixos&logocolor=white&labelcolor=000000"/>
+      </a>&nbsp;&nbsp;
+      <a href="https://www.lua.org/">
+        <img src="https://img.shields.io/badge/made%20with-lua-7aa89f?style=for-the-badge&logo=lua&logocolor=white&labelcolor=000000"/>
+      </a>&nbsp;&nbsp;
+      <a href="https://www.rust-lang.org/">
+        <img src="https://img.shields.io/badge/made%20with-rust-7aa89f?style=for-the-badge&logo=rust&logocolor=white&labelcolor=000000"/>
+      </a>
+    </p>
+  </div>
+</div>
 
-<p align="center">
- <a href="https://nixos.org/"><img src="https://img.shields.io/badge/Made%20with-Nix-7AA89F?style=for-the-badge&logo=nixos&logoColor=white&labelColor=000000" alt="Made with Nix"></a>
- •
- <a href="https://www.lua.org/"><img src="https://img.shields.io/badge/Made%20with-Lua-7AA89F?style=for-the-badge&logo=lua&logoColor=white&labelColor=000000" alt="Made with Lua"></a>
- •
- <a href="https://www.rust-lang.org/"><img src="https://img.shields.io/badge/Made%20with-Rust-7AA89F?style=for-the-badge&logo=rust&logoColor=white&labelColor=000000" alt="Made with Rust"></a>
-</p>
-
-
-<!-- </div> -->
 
 <!-- <h3 align="center">Rhodium</h3> -->
 
@@ -23,9 +38,9 @@
 <!--   <img src="https://readme-typing-svg.herokuapp.com/?lines=A+robust,+hypermodular+NixOS+system&font=Fira%20Code&size=28&duration=3000&pause=1000&color=8A2BE2&center=true&width=600&height=50" alt="Typing SVG" /> -->
 <!-- </h1> -->
 
-<p align="center">A robust, hypermodular NixOS system</p>
-
-<p align="center">────────────── ‡ ──────────────</p>
+<br/>
+<div align="center">───────  ‡  ───────</div>
+<br/>
 
 - **Window Manager** [Niri](https://github.com/YaLTeR/niri/)  
 - **Shells** [Nu](https://www.nushell.sh/) | [Fish](https://www.nushell.sh/)  
