@@ -1,5 +1,6 @@
 {...}: {
   imports = [
-    ./hyprland.nix
+    # ./hyprland.nix
+    ./niri.nix
   ];
 }

@@ -1,7 +1,7 @@
 {pkgs, ...}: {
   imports = [
-    ./dunst.nix
-    # ./mako.nix
+    # ./dunst.nix
+    ./mako.nix
     # ./tiramisu.nix
   ];
 

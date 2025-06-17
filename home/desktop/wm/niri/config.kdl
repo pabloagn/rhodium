@@ -1,0 +1,456 @@
+// Environment Variables
+// HACK: Required for X11 apps
+// Either this approach, or launching using flags (check desktop apps)
+// environment {
+//     DISPLAY ":0"
+// }
+// Inputs
+// ------------------------------------
+input {
+    keyboard {
+        xkb {
+            layout "gb,us,es"
+            options "grp:win_space_toggle"
+        }
+        // Faster keyboard repeat & delay
+        repeat-delay 300
+        repeat-rate 90
+        // Enable numlock on startup
+        numlock
+    }
+    touchpad {
+        tap
+        accel-speed -0.3
+    }
+    mouse {
+        accel-speed -0.3
+    }
+    focus-follows-mouse max-scroll-amount="95%"
+}
+// Outputs
+// ------------------------------------
+// Primary
+output "eDP-1" {
+    mode "2880x1620@120"
+    scale 1.5
+    position x=0 y=0
+}
+// Secondary
+output "HDMI-A-1" {
+    mode "3840x2160@60"
+    scale 1.5
+    position x=1280 y=0
+}
+// General
+// ------------------------------------
+layer-rule {
+    match namespace="^wallpaper$"
+    place-within-backdrop true
+}
+// Avoid hotkey help menu from appearing at startup
+hotkey-overlay {
+    skip-at-startup
+}
+// Remove client-side decorations (window headers)
+prefer-no-csd
+// Cursor
+cursor {
+    xcursor-size 24
+    hide-after-inactive-ms 3000
+}
+// Disable hot corners (easily triggered)
+gestures {
+    hot-corners {
+        off
+    }
+}
+// HACK: This is meant to play perfectly with transparent background color
+overview {
+    zoom 0.6
+    workspace-shadow {
+        off
+    }
+}
+// Window layout
+// ------------------------------------
+layout {
+    // always-center-single-column
+    shadow {
+        // Toggle on if required
+        // on
+        softness 10
+        spread 5
+        offset x=0 y=5
+        draw-behind-window false
+        color "#00000070"
+        inactive-color "#00000054"
+    }
+    // Per-workspace background color
+    // HACK: Setting as transparent so wallpaper does not move with swipes
+    background-color "transparent"
+    // Window layout
+    gaps 12
+    struts {
+        left 0
+        right 0
+        top 0
+        bottom 0
+    }
+    center-focused-column "never"
+    // Width
+    preset-column-widths {
+        proportion 0.33333
+        proportion 0.5
+        proportion 0.66667
+    }
+    default-column-width {
+        proportion 0.5
+    }
+    // Height
+    preset-window-heights {
+        proportion 0.33333
+        proportion 0.5
+        proportion 0.66667
+        fixed 720
+    }
+    focus-ring {
+        off
+    }
+    border {
+        off
+    }
+    tab-indicator {
+        // off
+        // hide-when-single-tab
+        place-within-column
+        gap 5
+        width 4
+        length total-proportion=1.0
+        position "left"
+        gaps-between-tabs 2
+        corner-radius 0
+        // active-color "yellow"
+        // inactive-color "gray"
+        // urgent-color "blue"
+        active-gradient from="#c4b28a" to="#c4746e" angle=45
+        inactive-gradient from="#0d0c0c" to="#808080" angle=45 relative-to="workspace-view"
+        urgent-gradient from="#E46876" to="#c4746e" angle=45
+    }
+}
+// Startup
+// ------------------------------------
+// Start notification daemon
+spawn-at-startup "mako"
+// Start wallpaper with swaybg
+spawn-at-startup "swaybg" "-m" "fill" "-i" "/home/pabloagn/.local/share/wallpapers/dante/wallpaper-01.jpg"
+// Start waybar
+spawn-at-startup "waybar"
+// Required for X11 compatibility
+spawn-at-startup "xwayland-satellite"
+// Animation settings
+// ------------------------------------
+animations {
+    window-open {
+        duration-ms 150
+        curve "ease-out-expo"
+    }
+    window-close {
+        duration-ms 200
+        curve "ease-out-quad"
+    }
+    horizontal-view-movement {
+        duration-ms 200
+        curve "ease-out-expo"
+    }
+    workspace-switch {
+        duration-ms 200
+        curve "ease-out-quad"
+    }
+    config-notification-open-close {
+        duration-ms 250
+        curve "ease-out-quad"
+    }
+}
+// Transparency and blur
+window-rule {
+    // Apply to all windows
+    opacity 0.99
+}
+// Ensure no CSD for specific apps
+window-rule {
+    match app-id="^org\\.wezfurlong\\.wezterm$"
+    default-column-width {
+
+    }
+}
+window-rule {
+    match app-id="firefox$" title="^Picture-in-Picture$"
+    open-floating true
+}
+// Screenshots
+// ------------------------------------
+screenshot-path "~/pictures/screenshots/screenshot_%Y-%m-%d_%H-%M-%S.png"
+// Binds
+// ------------------------------------
+binds {
+    Mod+Ctrl+L {
+        spawn "hyprlock"
+    }
+    Mod+R {
+        switch-preset-column-width
+    }
+    Mod+Shift+R {
+        switch-preset-window-height
+    }
+    Mod+Ctrl+R {
+        reset-window-height
+    }
+    // Mouse
+    Mod+WheelScrollDown cooldown-ms=150 {
+        focus-workspace-down
+    }
+    Mod+WheelScrollUp cooldown-ms=150 {
+        focus-workspace-up
+    }
+    Mod+WheelScrollRight {
+        focus-column-right
+    }
+    Mod+WheelScrollLeft {
+        focus-column-left
+    }
+    // Trackpad
+    Mod+TouchpadScrollUp {
+        spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.02+"
+    }
+    Mod+TouchpadScrollDown {
+        spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.02-"
+    }
+    // Core apps
+    Mod+W {
+        spawn "kitty"
+    }
+    Mod+B {
+        spawn "firefox"
+    }
+    Mod+A {
+        spawn "fuzzel"
+    }
+    Mod+D {
+        spawn "kitty" "-e" "yazi"
+    }
+    Mod+E {
+        spawn "kitty" "-e" "nvim"
+    }
+    Mod+S {
+        screenshot-screen
+    }
+    Mod+Shift+S {
+        screenshot
+    }
+    Mod+Ctrl+S {
+        screenshot-window
+    }
+    // Secondary apps
+    Mod+Shift+W {
+        spawn "ghostty"
+    }
+    Mod+Shift+B {
+        spawn "brave"
+    }
+    Mod+Shift+D {
+        spawn "thunar"
+    }
+    Mod+Shift+E {
+        spawn "zeditor"
+    }
+    // Essential controls
+    Mod+Q {
+        close-window
+    }
+    Mod+Escape {
+        spawn "killall" "fuzzel"
+    }
+    Mod+Left {
+        focus-column-left
+    }
+    Mod+Down {
+        focus-window-down
+    }
+    Mod+Up {
+        focus-window-up
+    }
+    Mod+Right {
+        focus-column-right
+    }
+    // Mod Tab ideal for tab mode
+    Mod+Tab {
+        focus-window-previous
+    }
+    // Window movement
+    Mod+Comma {
+        consume-or-expel-window-left
+    }
+    Mod+Period {
+        consume-or-expel-window-right
+    }
+    Mod+Ctrl+Left {
+        move-column-left
+    }
+    Mod+Ctrl+Down {
+        move-window-down
+    }
+    Mod+Ctrl+Up {
+        move-window-up
+    }
+    Mod+Ctrl+Right {
+        move-column-right
+    }
+    // Monitor focus
+    Mod+Shift+H {
+        focus-monitor-left
+    }
+    Mod+Shift+L {
+        focus-monitor-right
+    }
+    // Floating toggle
+    Mod+V {
+        toggle-window-floating
+    }
+    Mod+Shift+V {
+        switch-focus-between-floating-and-tiling
+    }
+    // Layout controls
+    Mod+F {
+        maximize-column
+    }
+    Mod+Shift+F {
+        fullscreen-window
+    }
+    Mod+Z {
+        toggle-column-tabbed-display
+    }
+    Mod+C {
+        center-column
+    }
+    Mod+Ctrl+C {
+        center-visible-columns
+    }
+    // Shortcuts
+    // Mod+H {
+    //     toggle-keyboard-shortcuts-inhibit;
+    // }
+    // Column width adjustments
+    Mod+Minus {
+        set-column-width "-10%"
+    }
+    Mod+Equal {
+        set-column-width "+10%"
+    }
+    // Finer height adjustments when in column with other windows.
+    Mod+Shift+Minus {
+        set-window-height "-10%"
+    }
+    Mod+Shift+Equal {
+        set-window-height "+10%"
+    }
+    // Workspace navigation
+    Mod+1 {
+        focus-workspace 1
+    }
+    Mod+2 {
+        focus-workspace 2
+    }
+    Mod+3 {
+        focus-workspace 3
+    }
+    Mod+4 {
+        focus-workspace 4
+    }
+    Mod+5 {
+        focus-workspace 5
+    }
+    Mod+6 {
+        focus-workspace 6
+    }
+    Mod+7 {
+        focus-workspace 7
+    }
+    Mod+8 {
+        focus-workspace 8
+    }
+    Mod+9 {
+        focus-workspace 9
+    }
+    // Move to workspace
+    Mod+Shift+1 {
+        move-column-to-workspace 1
+    }
+    Mod+Shift+2 {
+        move-column-to-workspace 2
+    }
+    Mod+Shift+3 {
+        move-column-to-workspace 3
+    }
+    Mod+Shift+4 {
+        move-column-to-workspace 4
+    }
+    Mod+Shift+5 {
+        move-column-to-workspace 5
+    }
+    Mod+Shift+6 {
+        move-column-to-workspace 6
+    }
+    Mod+Shift+7 {
+        move-column-to-workspace 7
+    }
+    Mod+Shift+8 {
+        move-column-to-workspace 8
+    }
+    Mod+Shift+9 {
+        move-column-to-workspace 9
+    }
+    // Workspace navigation
+    Mod+Shift+Up {
+        focus-workspace-up
+    }
+    Mod+Shift+Down {
+        focus-workspace-down
+    }
+    // Audio controls
+    XF86AudioRaiseVolume allow-when-locked=true {
+        spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%+"
+    }
+    XF86AudioLowerVolume allow-when-locked=true {
+        spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%-"
+    }
+    XF86AudioMute allow-when-locked=true {
+        spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"
+    }
+    // Brightness controls
+    XF86MonBrightnessUp {
+        spawn "brightnessctl" "set" "+5%"
+    }
+    XF86MonBrightnessDown {
+        spawn "brightnessctl" "set" "5%-"
+    }
+    // Media controls
+    XF86AudioPlay {
+        spawn "playerctl" "play-pause"
+    }
+    XF86AudioNext {
+        spawn "playerctl" "next"
+    }
+    XF86AudioPrev {
+        spawn "playerctl" "previous"
+    }
+    // Overviews
+    // NOTE: This also works with four finger swipe on trackpad
+    Mod+X repeat=false {
+        toggle-overview
+    }
+    // Exit
+    Mod+Shift+Q {
+        quit
+    }
+}
+

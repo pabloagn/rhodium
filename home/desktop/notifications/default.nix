@@ -1,5 +1,6 @@
 {...}: {
   imports = [
-    ./dunst.nix
+    # ./dunst.nix
+    ./mako.nix
   ];
 }
