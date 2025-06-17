@@ -3,11 +3,13 @@
 <div align="center">
 
 ![Last Commit](https://img.shields.io/github/last-commit/pabloagn/rhodium?style=for-the-badge&logo=git&logoColor=white&color=7AA89F&labelColor=000000&label=LAST%20COMMIT)
-●
+•
 [![License](https://img.shields.io/github/license/pabloagn/rhodium?style=for-the-badge&color=7AA89F&labelColor=000000)](https://github.com/pabloagn/rhodium/blob/main/LICENSE)
 
 [![Made with Nix](https://img.shields.io/badge/Made%20with-Nix-7AA89F?style=for-the-badge&logo=nixos&logoColor=white&labelColor=000000)](https://nixos.org/)
+•
 [![Made with Lua](https://img.shields.io/badge/Made%20with-Lua-7AA89F?style=for-the-badge&logo=lua&logoColor=white&labelColor=000000)](https://www.lua.org/)
+•
 [![Made with Rust](https://img.shields.io/badge/Made%20with-Rust-7AA89F?style=for-the-badge&logo=rust&logoColor=white&labelColor=000000)](https://www.rust-lang.org/)
 
 
