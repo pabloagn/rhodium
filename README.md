@@ -73,3 +73,9 @@ This makes the changes permanent, with the ability to roll back from GRUB if nee
 
 ## <samp>⊹ SHOWCASE</samp>
 
+## <samp>⊹ ATTRIBUTIONS</samp>
+
+- [linuxmobile/kaku](https://github.com/linuxmobile/kaku)
+- [internet-development/www-sacred](https://github.com/internet-development/www-sacred)
+- [HyDE-Project/HyDE](https://github.com/HyDE-Project/)
+- [nyoom-engineering/nyoom.nvim](https://github.com/nyoom-engineering/nyoom.nvim)
