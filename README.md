@@ -17,7 +17,7 @@
 - **LockScreen** [Hyprlock](https://wiki.hyprland.org/Hypr-Ecosystem/hyprlock/)  
 - **ColorScheme** [Kansō](https://github.com/webhooked/kanso.nvim)
 
-## <samp>QUICK START</samp>
+## <samp>⊹ QUICK START</samp>
 
 After setting up a basic NixOS system, you can create a new derivation using this flake:
 
@@ -27,7 +27,7 @@ sudo nixos-rebuild switch --flake 'github:pabloagn/rhodium#{hostname}'
 
 Where `hostname` is the target host you want to use. Consult [hosts](./hosts) for the full specification.
 
-## <samp>TESTING</samp>
+## <samp>⊹ TESTING</samp>
 
 - You can clone this repository and test before committing to a full derivation:
 
@@ -55,7 +55,7 @@ sudo nixos-rebuild test --flake .#your-hostname
 
 This creates a temporary boot entry with your changes. If something breaks, simply reboot to return to your stable system. The temporary entry is automatically removed after a successful reboot.
 
-### <samp>BUILDING</samp>
+### <samp>⊹ BUILDING</samp>
 
 ```bash
 sudo nixos-rebuild switch --flake .#your-hostname
@@ -65,11 +65,11 @@ This makes the changes permanent, with the ability to roll back from GRUB if nee
 
 ## <samp>⊹ FEATURES</samp>
 
-## <samp>USAGE</samp>
+## <samp>⊹ USAGE</samp>
 
-## <samp>OPTIONS</samp>
+## <samp>⊹ OPTIONS</samp>
 
-## <samp>KEYBINDS</samp>
+## <samp>⊹ KEYBINDS</samp>
 
-## <samp>SHOWCASE</samp>
+## <samp>⊹ SHOWCASE</samp>
 
