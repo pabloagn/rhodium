@@ -18,11 +18,9 @@
 
 </div>
 
+<hr style="border: none; height: 0.5px; background-color: #333; margin: 20px 0;">
 
-<!-- <br/> -->
-<!-- <div align="center">────────────── ◇ ──────────────</div> -->
-<!-- <br/> -->
-
+<br/>
 
 <pre>
 • Window Manager ...................... <a href="https://github.com/YaLTeR/niri/">Niri</a>
@@ -36,17 +34,6 @@
 • LockScreen .......................... <a href="https://wiki.hyprland.org/Hypr-Ecosystem/hyprlock/">Hyprlock</a>
 • ColorScheme ......................... <a href="https://github.com/webhooked/kanso.nvim">Kansō</a>
 </pre>
-
-- **Window Manager** [Niri](https://github.com/YaLTeR/niri/)  
-- **Shells** [Nu](https://www.nushell.sh/) | [Fish](https://www.nushell.sh/)  
-- **Prompt** [Starship](https://github.com/starship/starship)  
-- **Terminals** [Ghostty](https://ghostty.org/) | [Kitty](https://ghostty.org/)  
-- **Notify Daemon** [Mako](https://github.com/emersion/mako)  
-- **Launcher** [Fuzzel](https://codeberg.org/dnkl/fuzzel)  
-- **File Manager** [Yazi](https://github.com/sxyazi/yazi)  
-- **IDEs** [NeoVim](https://neovim.io/doc/) | [Helix](https://docs.helix-editor.com/) | [Doom Emacs](https://docs.doomemacs.org/latest/) | [Zed Editor](https://zed.dev/)  
-- **LockScreen** [Hyprlock](https://wiki.hyprland.org/Hypr-Ecosystem/hyprlock/)  
-- **ColorScheme** [Kansō](https://github.com/webhooked/kanso.nvim)
 
 ## <samp>⊹ QUICK START</samp>
 
