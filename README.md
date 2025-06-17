@@ -81,7 +81,7 @@ This makes the changes permanent, with the ability to roll back from GRUB if nee
 - [nyoom-engineering/nyoom.nvim](https://github.com/nyoom-engineering/nyoom.nvim)
 
 
-
+```
               ..+.......                
           .+#########++.......          
         .+###############++......       
@@ -107,3 +107,4 @@ This makes the changes permanent, with the ability to roll back from GRUB if nee
     ++###########+##++++                
     +++######++...+.                    
       ........
+```
