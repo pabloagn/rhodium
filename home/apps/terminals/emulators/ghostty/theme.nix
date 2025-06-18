@@ -1,11 +1,4 @@
-{
-  config,
-  pkgs,
-  ...
-}: let
-  iconTokens = config.theme.icons.iconsNerdFont;
-  colorTokens = config.theme.colors;
-in {
+{...}: {
   programs.ghostty = {
     themes = {
       chiaroscuro = {

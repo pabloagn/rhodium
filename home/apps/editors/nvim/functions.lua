@@ -40,7 +40,7 @@ function M.open_file_in_new_terminal(prompt_bufnr)
 	end
 
 	-- Open in new kitty terminal
-	local success = vim.fn.system(string.format("kitty -- v '%s' &", file_path))
+	local success = vim.fn.system(string.format("kitty -- nvim '%s' &", file_path))
 
 	vim.notify(
 		string.format("Opening %s in new terminal", vim.fn.fnamemodify(file_path, ":t")),

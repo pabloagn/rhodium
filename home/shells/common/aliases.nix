@@ -38,9 +38,9 @@
   find = "fd"; # Find
 
   # Editor
-  vim = "vw";
-  vi = "vw";
-  v = "vw";
+  vim = "nvim";
+  vi = "nvim";
+  v = "nvim";
 
   # Clipboard
   y = "wl-copy"; # Yank
