@@ -8,70 +8,63 @@
   "margin-right": 12,
   "margin-top": 10,
   "margin-bottom": 0,
-  "spacing": 1,
+  "spacing": 3,
   "reload_style_on_change": true,
 
-  // Order of modules
+  // Organized module groups
   "modules-left": [
-    // "custom/rhodium",
     "niri/workspaces",
+    "niri/language"
   ],
-  "modules-center": ["clock"],
+  "modules-center": [
+    "clock"
+  ],
   "modules-right": [
-    "network",
-    "niri/language",
-    // "keyboard-state#numlock",
-    "keyboard-state#capslock",
-    "battery",
-    "cpu",
-    "memory",
-    "disk",
-    "temperature",
-    "backlight",
-    "wireplumber",
-    "bluetooth",
+    // Network & Connectivity Group
+    "group/connectivity",
+    // System Resources Group  
+    "group/system",
+    // Hardware Controls Group
+    "group/hardware"
   ],
 
-  "custom/rhodium": {
-    "format": "Rh",
-    "tooltip": false,
-    "on-click": "fuzzel",
-    "on-click-right": "fuzzel",
+  // Module Groups
+  "group/connectivity": {
+    "orientation": "horizontal",
+    "modules": [
+      "network",
+      "bluetooth"
+    ]
   },
 
-  // Num Lock
-  "keyboard-state#numlock": {
-    "numlock": true,
-    "capslock": false,
-    "scrolllock": false,
-    "format": "N [{icon}]",
-    "format-icons": {
-      "locked": "⌽",
-      "unlocked": "○",
-    },
+  "group/system": {
+    "orientation": "horizontal", 
+    "modules": [
+      "cpu",
+      "memory",
+      "disk",
+      "temperature"
+    ]
   },
 
-  // Caps Lock
-  "keyboard-state#capslock": {
-    "numlock": false,
-    "capslock": true,
-    "scrolllock": false,
-    "format": "C [{icon}]",
-    "format-icons": {
-      "locked": "⌽",
-      "unlocked": "○",
-    },
+  "group/hardware": {
+    "orientation": "horizontal",
+    "modules": [
+      "keyboard-state#capslock",
+      "battery",
+      "backlight", 
+      "wireplumber"
+    ]
   },
 
-  // Niri workspace module
+  // Individual module configurations (same as your original)
   "niri/workspaces": {
     "format": "●",
-    "on-click": "activate",
+    "on-click": "activate"
   },
 
-  // Niri keyboard layout indicator
   "niri/language": {
-    "format": " {short} ∴",
+    "format": " {short} ∴"
   },
 
   "clock": {
@@ -88,10 +81,10 @@
       "format": {
         "months": "<span color='#E6C384'><b>{}</b></span>",
         "days": "<span color='#C5C9C7'><b>{}</b></span>",
-        "weeks": "<span color='#7AA89F'><b>W{}</b></span>",
+        "weeks": "<span color='#7AA89F'><b>W{}</b></span>", 
         "weekdays": "<span color='#c4b28a'><b>{}</b></span>",
-        "today": "<span color='#E46876'><b><u>{}</u></b></span>",
-      },
+        "today": "<span color='#E46876'><b><u>{}</u></b></span>"
+      }
     },
     "actions": {
       "on-click-left": "kitty -e calcurse",
@@ -99,63 +92,54 @@
       "on-click-forward": "tz_up",
       "on-click-backward": "tz_down",
       "on-scroll-up": "shift_up",
-      "on-scroll-down": "shift_down",
-    },
+      "on-scroll-down": "shift_down"
+    }
   },
-
-  // "clock": {
-  //   "interval": 1,
-  //   "format": "{:%a %d %H.%M.%S}",
-  //   "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-  //   "format-alt": "{:%H.%M.%S}",
-  // },
 
   "temperature": {
     "critical-threshold": 80,
     "interval": 1,
     "format": "{temperatureC}°C ☀",
     "format-icons": ["", "", ""],
-    "on-click": "kitty -e btop",
+    "on-click": "kitty -e btop"
   },
 
   "cpu": {
     "interval": 1,
     "format": "{usage}% ⚙",
     "tooltip": false,
-    "on-click": "kitty -e btop",
+    "on-click": "kitty -e btop"
   },
 
   "memory": {
     "interval": 2,
     "format": "{}% 𝍖",
     "tooltip": true,
-    "on-click": "kitty -e btop",
+    "on-click": "kitty -e btop"
   },
 
   "disk": {
     "interval": 15,
-    "format": "{percentage_used}% ⬢",
+    "format": "{percentage_used}% ⬢", 
     "tooltip": true,
-    "on-click": "kitty -e btop",
+    "on-click": "kitty -e btop"
   },
 
   "backlight": {
     "format": "{percent}% {icon}",
-    "format-icons": ["○", "◐", "●"],
+    "format-icons": ["○", "◐", "●"]
   },
 
   "network": {
     "interval": 1,
-    "format-wifi": "{bandwidthDownBytes:>} ↓",
-    "format-ethernet": "{bandwidthDownBytes:>} ↓",
-    "tooltip-format-wifi": "{essid} ({signalStrength}%) ⟶ {frequency}MHz\n{ipaddr}/{cidr} ⟶ {gwaddr}\n{bandwidthUpBytes:>} ↑ {bandwidthDownBytes:>} ↓\n{signaldBm}dBm [{bssid}]",
-    "tooltip-format-ethernet": "{ifname} ⟶ {ipaddr}/{cidr}\nGateway: {gwaddr}\n{bandwidthUpBytes:>} ↑ {bandwidthDownBytes:>} ↓",
-    "tooltip-format-linked": "{ifname} ⟶ No IP\nInterface linked but no address",
-    "tooltip-format-disconnected": "Network disconnected ⌽\nNo active connection",
+    "format-wifi": "{bandwidthUpBytes:>} ↑ {bandwidthDownBytes:>} ↓",
+    "format-ethernet": "{bandwidthUpBytes:>} ↑ {bandwidthDownBytes:>} ↓",
+    "tooltip-format-wifi": "{essid} ({signalStrength}%)\n{ipaddr}",
+    "tooltip-format-ethernet": "{ifname}\n{ipaddr}",
     "format-linked": "No IP",
     "format-disconnected": "⌽",
     "on-click": "fuzzel",
-    "on-click-right": "nm-connection-editor",
+    "on-click-right": "nm-connection-editor"
   },
 
   "bluetooth": {
@@ -170,7 +154,7 @@
     "tooltip-format-enumerate-connected": "↳ {device_alias} [{device_address}]",
     "tooltip-format-enumerate-connected-battery": "↳ {device_alias} [{device_address}] ⦚ {device_battery_percentage}%",
     "on-click": "fuzzel",
-    "on-click-right": "blueman-manager",
+    "on-click-right": "blueman-manager"
   },
 
   "wireplumber": {
@@ -180,18 +164,20 @@
     "on-click": "pavucontrol",
     "states": {
       "warning": 75,
-      "critical": 100,
-    },
+      "critical": 100
+    }
   },
 
-  // "wlr/taskbar": {
-  //   "format": "{icon}",
-  //   "icon-size": 18,
-  //   "tooltip-format": "{title} | {app_id}",
-  //   "on-click": "activate",
-  //   "on-click-middle": "close",
-  //   "ignore-list": ["kitty", "wezterm", "foot", "footclient"],
-  // },
+  "keyboard-state#capslock": {
+    "numlock": false,
+    "capslock": true,
+    "scrolllock": false,
+    "format": "C [{icon}]",
+    "format-icons": {
+      "locked": "⌽",
+      "unlocked": "○"
+    }
+  },
 
   "battery": {
     "interval": 5,
@@ -199,22 +185,14 @@
     "states": {
       "good": 95,
       "warning": 30,
-      "critical": 15,
+      "critical": 15
     },
     "format": "{capacity}% {icon}",
     "format-charging": "{capacity}% ↯",
     "format-plugged": "{capacity}% ↯",
     "format-alt": "{time} {icon}",
     "format-icons": [
-      "[⠀]",
-      "[⠁]",
-      "[⠃]",
-      "[⠇]",
-      "[⠏]",
-      "[⠟]",
-      "[⠿]",
-      "[⡿]",
-      "[⣿]",
-    ],
-  },
+      "[⠀]", "[⠁]", "[⠃]", "[⠇]", "[⠏]", "[⠟]", "[⠿]", "[⡿]", "[⣿]"
+    ]
+  }
 }

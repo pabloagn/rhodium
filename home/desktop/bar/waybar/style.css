@@ -1,61 +1,73 @@
 @define-color fg #888071;
-@define-color bg #080D0F;
+@define-color bg #090E13;
 @define-color bordercolor #080D0F;
 @define-color disabled #A5A5A5;
-@define-color alert #F53C3C;
-@define-color activegreen #26A65B;
-@define-color highlight #F2C187;
+@define-color warning #938AA9;
+@define-color alert #C13F42;
+/* @define-color alert #E46876; */
+@define-color activegreen #7AA89F;
+@define-color highlight #E6C384;
 
 * {
-    min-height: 25px;
-    font-family: "Roboto", "Font Awesome 6 Free Solid";
-    font-size: 15px;
+  min-height: 25px;
+  font-size: 15px;
+  font-family: "JetBrainsMono";
+  /* font-weight: "regular"; */
+  /* font-family: "JuliaMono"; */
+  /* font-family: "Iosevka Nerd Font"; */
+}
+
+tooltip {
+  border-radius: 0px;
+  background-color: #090E13;
+  color: #f2f2f2;
 }
 
 window#waybar {
-    color: @fg;
-    background: @bg;
-    transition-property: background-color;
-    transition-duration: 0.5s;
-    border: 2px solid @bordercolor;
-    border-radius: 0px;
+  color: @fg;
+  background: @bg;
+  transition-property: background-color;
+  transition-duration: 0.5s;
+  border: 2px solid @bordercolor;
+  border-radius: 0px;
 }
 
 window#waybar.empty {
-    opacity: 0.3;
+  opacity: 0.3;
 }
 
 button {
-    /* Use box-shadow instead of border so the text isn't offset */
-    box-shadow: inset 0 -3px transparent;
-    /* Avoid rounded borders under each button name */
-    border: none;
+  box-shadow: inset 0 -3px transparent;
+  border: none;
 }
 
-/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
 button:hover {
-    background: inherit;
-    box-shadow: inset 0 -3px transparent;
+  background: inherit;
+  box-shadow: inset 0 -3px transparent;
 }
 
 #workspaces button {
-    color: @fg;
-    padding: 0px 10px;
-    background: @bg;
+  color: @fg;
+  padding: 0px 7px;
+  background: @bg;
 }
 
 #workspaces button.urgent {
-    color: @alert;
+  color: @alert;
 }
 #workspaces button.empty {
-    color: @fg;
+  color: @fg;
 }
 
 #workspaces button.active {
-    color: @highlight;
+  color: @highlight;
 }
 
-#clock,
+#workspaces {
+  margin-left: 7px;
+}
+
+#custom-rhodium #clock,
 #battery,
 #cpu,
 #memory,
@@ -65,8 +77,6 @@ button:hover {
 #backlight,
 #backlight-slider,
 #network,
-#pulseaudio,
-#wireplumber,
 #wireplumber,
 #custom-media,
 #taskbar,
@@ -81,60 +91,85 @@ button:hover {
 #custom-power,
 #custom-notification,
 #window,
+#keyboard-state,
+#bluetooth,
 #mpd {
-    padding: 0px 5px;
-    padding-right: 10px;
-    margin: 3px 3px;
-    color: @fg;
+  background: transparent;
+  border: none;
+  padding: 0px 5px;
+  padding-right: 10px;
+  margin: 3px 3px;
+  /* font-weight: regular; */
+  color: @fg;
 }
 
 #custom-separator {
-    color: @bordercolor;
+  color: @bordercolor;
 }
 
 #custom-power {
-    color: @fg;
-    padding-left: 10px;
+  color: @fg;
+  padding-left: 10px;
 }
 
 #tray {
-    background-color: @bordercolor;
-    border-radius: 0px;
-    padding: 0px 10px;
-    margin: 5px;
+  background-color: @bordercolor;
+  border-radius: 0px;
+  padding: 0px 10px;
+  margin: 5px;
+}
+
+#battery.charging,
+#battery.plugged {
+  color: @activegreen;
+}
+
+label:focus {
+  background-color: @bg;
+}
+
+#battery.critical:not(.charging) {
+  background-color: @alert;
+  color: @fg;
+  animation-name: blink;
+  animation-duration: 0.5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+#pulseaudio.warning,
+#wireplumber.warning {
+  color: @warning;
+}
+
+#pulseaudio.critical,
+#wireplumber.critical {
+  color: @alert;
 }
 
 #network.disconnected,
 #pulseaudio.muted,
 #wireplumber.muted {
-    color: @alert;
+  color: @alert;
 }
 
-#battery.charging,
-#battery.plugged {
-    color: @activegreen;
+#custom-rhodium {
+  /* color: @highlight; */
+  padding-left: 10px;
 }
 
-label:focus {
-    background-color: @bg;
-}
-
-#battery.critical:not(.charging) {
-    background-color: @alert;
-    color: @fg;
-    animation-name: blink;
-    animation-duration: 0.5s;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
+/* Optional: Highlight on hover */
+#custom-rhodium:hover {
+  color: @alert;
 }
 
 /* If workspaces is the leftmost module, omit left margin */
-.modules-left > widget:first-child > #workspaces {
-    margin-left: 0;
-}
+/* .modules-left > widget:first-child > #workspaces { */
+/*     margin-left: 0; */
+/* } */
 
 /* If workspaces is the rightmost module, omit right margin */
-.modules-right > widget:last-child > #workspaces {
-    margin-right: 0;
-}
+/* .modules-right > widget:last-child > #workspaces { */
+/*     margin-right: 0; */
+/* } */
