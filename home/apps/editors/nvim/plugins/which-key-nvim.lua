@@ -5,7 +5,7 @@ require("which-key").setup({
 	-- Window
 	win = {
 		border = "single",
-		padding = { 1, 2 }, -- Extra padding: top bottom, right left
+		padding = { 1, 2 },
 		wo = {
 			winblend = 5,
 		},

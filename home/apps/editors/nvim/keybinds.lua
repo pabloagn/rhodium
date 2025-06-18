@@ -39,11 +39,11 @@ vim.keymap.set("n", "<leader>aA", "<cmd>AerialNavToggle<CR>", {
 })
 
 -- Built-in outline (alternative to Aerial)
-vim.keymap.set("n", "gO", "<cmd>AerialNavOpen<CR>", {
-	noremap = true,
-	silent = true,
-	desc = "Open navigation",
-})
+-- vim.keymap.set("n", "gO", "<cmd>AerialNavOpen<CR>", {
+-- 	noremap = true,
+-- 	silent = true,
+-- 	desc = "Open navigation",
+-- })
 
 -- Additional outline operations
 vim.keymap.set("n", "<leader>af", function()
@@ -58,26 +58,26 @@ end, {
 })
 
 -- Quick symbol navigation (when aerial is open)
-vim.keymap.set("n", "<leader>an", "<cmd>AerialNext<CR>", {
+vim.keymap.set("n", "{", "<cmd>AerialNext<CR>", {
 	noremap = true,
 	silent = true,
 	desc = "Next symbol",
 })
 
-vim.keymap.set("n", "<leader>ap", "<cmd>AerialPrev<CR>", {
+vim.keymap.set("n", "}", "<cmd>AerialPrev<CR>", {
 	noremap = true,
 	silent = true,
 	desc = "Previous symbol",
 })
 
 -- Alternative: Use telescope for symbol search
-vim.keymap.set("n", "<leader>as", function()
-	require("telescope").extensions.aerial.aerial()
-end, {
-	noremap = true,
-	silent = true,
-	desc = "Search symbols",
-})
+-- vim.keymap.set("n", "<leader>as", function()
+-- 	require("telescope").extensions.aerial.aerial()
+-- end, {
+-- 	noremap = true,
+-- 	silent = true,
+-- 	desc = "Search symbols",
+-- })
 
 -- Comment
 -- -------------------------------------------------
@@ -103,7 +103,6 @@ vim.keymap.set("n", "<leader>cA", function()
 	require("Comment.api").toggle.linewise.count(line_count)
 end, { desc = "Comment all lines" })
 
--- TODO comment insertion (same line)
 vim.keymap.set("n", "<Leader>ct", function()
 	functions.insert_todo()
 end, {

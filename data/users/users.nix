@@ -4,7 +4,7 @@
       username = "pabloagn";
       fullName = "Pablo Aguirre";
       emailMain = "pablo.aguirre@protonmail.com";
-      extraGroups = [ "wheel" "networkmanager" "docker" ];
+      extraGroups = [ "wheel" "networkmanager" "docker" "input" ];
       isNormalUser = true;
       shell = "fish";
     };

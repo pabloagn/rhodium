@@ -568,6 +568,18 @@
         name = "Unifont";
         style = "Unifont";
       };
+      symbola = {
+        enable = true;
+        package = pkgs.symbola;
+        name = "Symbola";
+        style = "Symbola";
+      };
+      quivira = {
+        enable = true;
+        package = pkgs.quivira;
+        name = "Quivira";
+        style = "Quivira";
+      };
     };
   };
 }

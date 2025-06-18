@@ -18,6 +18,37 @@ function M.get_username()
 	return os.getenv("USER") or "your-username"
 end
 
+-- Terminal Integration
+-- --------------------------------------------------
+-- Open selected file in new terminal session
+function M.open_file_in_new_terminal(prompt_bufnr)
+	local actions = require("telescope.actions")
+	local action_state = require("telescope.actions.state")
+
+	local selection = action_state.get_selected_entry()
+	actions.close(prompt_bufnr)
+
+	if not selection then
+		vim.notify("No file selected", vim.log.levels.WARN, { title = "New Terminal" })
+		return
+	end
+
+	local file_path = selection.path or selection.filename
+	if not file_path then
+		vim.notify("Could not determine file path", vim.log.levels.ERROR, { title = "New Terminal" })
+		return
+	end
+
+	-- Open in new kitty terminal
+	local success = vim.fn.system(string.format("kitty -- nvim '%s' &", file_path))
+
+	vim.notify(
+		string.format("Opening %s in new terminal", vim.fn.fnamemodify(file_path, ":t")),
+		vim.log.levels.INFO,
+		{ title = "New Terminal" }
+	)
+end
+
 -- Edits
 -- --------------------------------------------------
 -- Replace entire buffer content with clipboard content

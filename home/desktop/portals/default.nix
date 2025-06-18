@@ -36,7 +36,7 @@
   # Qt
   qt = {
     enable = true;
-    platformTheme = "gtk"; # Follow GTK theme
+    platformTheme.name = "gtk"; # Follow GTK theme
     style = {
       name = "kvantum";
       package = pkgs.libsForQt5.qtstyleplugin-kvantum;

@@ -33,6 +33,7 @@
     smartmontools # S.M.A.R.T. monitoring
     read-edid # EDID information
     dool # System statistics tool (dstat replacement)
+    upower # D-Bus service for power management
 
     # Audio tools
     alsa-utils # ALSA utilities

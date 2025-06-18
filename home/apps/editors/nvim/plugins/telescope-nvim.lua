@@ -7,7 +7,7 @@ local colors = {
 	bg = "#0f1316",
 	fg = "#DCE0E8",
 	-- border = '#DCE0E8',
-    border = "#22262d",
+	border = "#22262d",
 	selection_bg = "#1f272e",
 }
 
@@ -123,7 +123,7 @@ telescope.setup({
 				["<C-u>"] = actions.preview_scrolling_up,
 				["<C-d>"] = actions.preview_scrolling_down,
 				["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
-				["<C-t>"] = trouble.open,
+				["<C-t>"] = require('functions').open_file_in_new_terminal,
 				["<Esc>"] = actions.close,
 			},
 			n = {
@@ -135,7 +135,7 @@ telescope.setup({
 				["k"] = actions.move_selection_previous,
 				["<C-u>"] = actions.preview_scrolling_up,
 				["<C-d>"] = actions.preview_scrolling_down,
-				["<C-t>"] = trouble.open,
+				["<C-t>"] = require('functions').open_file_in_new_terminal,
 				["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
 			},
 		},
