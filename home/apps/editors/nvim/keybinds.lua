@@ -81,14 +81,26 @@ vim.keymap.set("n", "}", "<cmd>AerialPrev<CR>", {
 
 -- Comment
 -- -------------------------------------------------
+-- vim.keymap.set("n", "<leader>cc", function()
+-- 	require("Comment.api").toggle.linewise.current()
+-- end, { desc = "Line" })
+
 vim.keymap.set("n", "<leader>cc", function()
-	require("Comment.api").toggle.linewise.current()
-end, { desc = "Line" })
+    if vim.v.count == 0 then
+        -- No count given, toggle current line
+        require("Comment.api").toggle.linewise.current()
+    else
+        -- Count given, toggle 'count' lines
+        require("Comment.api").toggle.linewise.count(vim.v.count)
+    end
+end, { desc = "Toggle Linewise (Line/Count)" })
 
 -- TODO: Check this
-vim.keymap.set("v", "<leader>cc", function()
-	require("Comment.api").toggle.linewise.current()
-end, { desc = "Visual selection" })
+local esc = vim.api.nvim_replace_termcodes("<ESC>", true, false, true)
+vim.keymap.set("x", "<leader>cc", function()
+	vim.api.nvim_feedkeys(esc, "nx", false)
+	require("Comment.api").toggle.linewise(vim.fn.visualmode())
+end, { desc = "Toggle Linewise (Visual Selection)" })
 
 vim.keymap.set("n", "<Leader>ca", function()
 	functions.comment_append()

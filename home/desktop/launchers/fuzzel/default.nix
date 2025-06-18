@@ -8,8 +8,6 @@
         dpi-aware = false;
         prompt = "λ ";
         icons-enabled = false;
-        # fields = [ "filename" "name" "generic" "exec" ];
-        # fields = "filename name generic exec";
         show-actions = false;
         sort-result = true;
         match-mode = "fuzzy";

@@ -102,6 +102,7 @@ layout {
         proportion 0.33333
         proportion 0.5
         proportion 0.66667
+        proportion 1.0
     }
     default-column-width {
         proportion 0.5
@@ -111,6 +112,7 @@ layout {
         proportion 0.33333
         proportion 0.5
         proportion 0.66667
+        proportion 1.0
         fixed 720
     }
     focus-ring {
@@ -142,11 +144,13 @@ layout {
 // Start notification daemon
 spawn-at-startup "mako"
 // Start wallpaper with swaybg
-spawn-at-startup "swaybg" "-m" "fill" "-i" "/home/pabloagn/.local/share/wallpapers/dante/wallpaper-01.jpg"
+spawn-at-startup "swaybg" "-m" "fill" "-i" "~/.local/share/wallpapers/dante/wallpaper-01.jpg"
 // Start waybar
 spawn-at-startup "waybar"
 // Required for X11 compatibility
 spawn-at-startup "xwayland-satellite"
+// Polkit fuzzel prompt client
+spawn-at-startup "~/.local/bin/fuzzel-polkit.sh"
 // Animation settings
 // ------------------------------------
 animations {
@@ -193,264 +197,279 @@ screenshot-path "~/pictures/screenshots/screenshot_%Y-%m-%d_%H-%M-%S.png"
 // Binds
 // ------------------------------------
 binds {
-    Mod+Ctrl+L {
+    // System & Core Controls
+    Mod+Ctrl+L hotkey-overlay-title="Lock Screen" {
         spawn "hyprlock"
     }
-    Mod+R {
-        switch-preset-column-width
+    Mod+Shift+Q hotkey-overlay-title="Quit Niri" {
+        quit
     }
-    Mod+Shift+R {
-        switch-preset-window-height
-    }
-    Mod+Ctrl+R {
-        reset-window-height
-    }
-    // Mouse
-    Mod+WheelScrollDown cooldown-ms=150 {
-        focus-workspace-down
-    }
-    Mod+WheelScrollUp cooldown-ms=150 {
-        focus-workspace-up
-    }
-    Mod+WheelScrollRight {
-        focus-column-right
-    }
-    Mod+WheelScrollLeft {
-        focus-column-left
-    }
-    // Trackpad
-    Mod+TouchpadScrollUp {
-        spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.02+"
-    }
-    Mod+TouchpadScrollDown {
-        spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.02-"
-    }
-    // Core apps
-    Mod+W {
-        spawn "kitty"
-    }
-    Mod+B {
-        spawn "firefox" "-p" "Personal"
-    }
-    Mod+A {
-        spawn "fuzzel"
-    }
-    Mod+D {
-        spawn "kitty" "-e" "yazi"
-    }
-    Mod+E {
-        spawn "kitty" "-e" "nvim"
-    }
-    Mod+S {
-        screenshot-screen
-    }
-    Mod+Shift+S {
-        screenshot
-    }
-    Mod+Ctrl+S {
-        screenshot-window
-    }
-    // Secondary apps
-    Mod+Shift+W {
-        spawn "ghostty"
-    }
-    Mod+Shift+B {
-        spawn "brave"
-    }
-    Mod+Shift+D {
-        spawn "thunar"
-    }
-    Mod+Shift+E {
-        spawn "zeditor"
-    }
-    // Essential controls
-    Mod+Q {
-        close-window
-    }
-    Mod+Escape {
+    Mod+Escape hotkey-overlay-title="Kill Fuzzel Process" {
         spawn "killall" "fuzzel"
     }
-    Mod+Left {
+    // Shortcuts (Niri Help Menu / Keyboard Inhibit)
+    Mod+H hotkey-overlay-title="Toggle Keyboard Overview" {
+        toggle-overview
+    }
+    Mod+Shift+H hotkey-overlay-title="Toggle Keyboard Inhibit" {
+        toggle-keyboard-shortcuts-inhibit
+    }
+    // Window & Column Navigation
+    Mod+Left hotkey-overlay-title="Focus Column Left" {
         focus-column-left
     }
-    Mod+Down {
+    Mod+Down hotkey-overlay-title="Focus Window Down" {
         focus-window-down
     }
-    Mod+Up {
+    Mod+Up hotkey-overlay-title="Focus Window Up" {
         focus-window-up
     }
-    Mod+Right {
+    Mod+Right hotkey-overlay-title="Focus Column Right" {
         focus-column-right
     }
-    // Mod Tab ideal for tab mode
-    Mod+Tab {
+    Mod+Tab hotkey-overlay-title="Focus Previous Window" {
+        // Ideal for tab mode
         focus-window-previous
     }
-    // Window movement
-    Mod+Comma {
-        consume-or-expel-window-left
-    }
-    Mod+Period {
-        consume-or-expel-window-right
-    }
-    Mod+Ctrl+Left {
-        move-column-left
-    }
-    Mod+Ctrl+Down {
-        move-window-down
-    }
-    Mod+Ctrl+Up {
-        move-window-up
-    }
-    Mod+Ctrl+Right {
-        move-column-right
-    }
-    // Monitor focus
-    Mod+Shift+H {
+    Mod+Shift+H hotkey-overlay-title="Focus Monitor Left" {
         focus-monitor-left
     }
-    Mod+Shift+L {
+    Mod+Shift+L hotkey-overlay-title="Focus Monitor Right" {
         focus-monitor-right
     }
-    // Floating toggle
-    Mod+V {
+    // Window & Column Manipulation
+    Mod+Q hotkey-overlay-title="Close Focused Window" {
+        close-window
+    }
+    Mod+V hotkey-overlay-title="Toggle Window Floating" {
         toggle-window-floating
     }
-    Mod+Shift+V {
+    Mod+Shift+V hotkey-overlay-title="Switch Focus Floating/Tiling" {
         switch-focus-between-floating-and-tiling
     }
-    // Layout controls
-    Mod+F {
+    Mod+Comma hotkey-overlay-title="Move Window Left" {
+        consume-or-expel-window-left
+    }
+    Mod+Period hotkey-overlay-title="Move Window Right" {
+        consume-or-expel-window-right
+    }
+    Mod+Ctrl+Left hotkey-overlay-title="Move Column Left" {
+        move-column-left
+    }
+    Mod+Ctrl+Down hotkey-overlay-title="Move Window Down" {
+        move-window-down
+    }
+    Mod+Ctrl+Up hotkey-overlay-title="Move Window Up" {
+        move-window-up
+    }
+    Mod+Ctrl+Right hotkey-overlay-title="Move Column Right" {
+        move-column-right
+    }
+    Mod+F hotkey-overlay-title="Maximize Column" {
         maximize-column
     }
-    Mod+Shift+F {
+    Mod+Shift+F hotkey-overlay-title="Fullscreen Window" {
         fullscreen-window
     }
-    Mod+Z {
+    Mod+Z hotkey-overlay-title="Toggle Column Tabbed Display" {
         toggle-column-tabbed-display
     }
-    Mod+C {
+    Mod+C hotkey-overlay-title="Center Column" {
         center-column
     }
-    Mod+Ctrl+C {
+    Mod+Ctrl+C hotkey-overlay-title="Center Visible Columns" {
         center-visible-columns
     }
-    // Shortcuts
-    // Mod+H {
-    //     toggle-keyboard-shortcuts-inhibit;
-    // }
-    // Column width adjustments
-    Mod+Minus {
+    Mod+R hotkey-overlay-title="Switch Preset Column Width" {
+        switch-preset-column-width
+    }
+    Mod+Shift+R hotkey-overlay-title="Switch Preset Window Height" {
+        switch-preset-window-height
+    }
+    Mod+Ctrl+R hotkey-overlay-title="Reset Window Height" {
+        reset-window-height
+    }
+    Mod+Minus hotkey-overlay-title="Decrease Column Width" {
         set-column-width "-10%"
     }
-    Mod+Equal {
+    Mod+Equal hotkey-overlay-title="Increase Column Width" {
         set-column-width "+10%"
     }
-    // Finer height adjustments when in column with other windows.
-    Mod+Shift+Minus {
+    Mod+Shift+Minus hotkey-overlay-title="Decrease Window Height" {
         set-window-height "-10%"
     }
-    Mod+Shift+Equal {
+    Mod+Shift+Equal hotkey-overlay-title="Increase Window Height" {
         set-window-height "+10%"
     }
-    // Workspace navigation
-    Mod+1 {
+    // Workspace Navigation & Movement
+    Mod+1 hotkey-overlay-title="Focus Workspace 1" {
         focus-workspace 1
     }
-    Mod+2 {
+    Mod+2 hotkey-overlay-title="Focus Workspace 2" {
         focus-workspace 2
     }
-    Mod+3 {
+    Mod+3 hotkey-overlay-title="Focus Workspace 3" {
         focus-workspace 3
     }
-    Mod+4 {
+    Mod+4 hotkey-overlay-title="Focus Workspace 4" {
         focus-workspace 4
     }
-    Mod+5 {
+    Mod+5 hotkey-overlay-title="Focus Workspace 5" {
         focus-workspace 5
     }
-    Mod+6 {
+    Mod+6 hotkey-overlay-title="Focus Workspace 6" {
         focus-workspace 6
     }
-    Mod+7 {
+    Mod+7 hotkey-overlay-title="Focus Workspace 7" {
         focus-workspace 7
     }
-    Mod+8 {
+    Mod+8 hotkey-overlay-title="Focus Workspace 8" {
         focus-workspace 8
     }
-    Mod+9 {
+    Mod+9 hotkey-overlay-title="Focus Workspace 9" {
         focus-workspace 9
     }
-    // Move to workspace
-    Mod+Shift+1 {
+    Mod+Shift+1 hotkey-overlay-title="Move Column to Workspace 1" {
         move-column-to-workspace 1
     }
-    Mod+Shift+2 {
+    Mod+Shift+2 hotkey-overlay-title="Move Column to Workspace 2" {
         move-column-to-workspace 2
     }
-    Mod+Shift+3 {
+    Mod+Shift+3 hotkey-overlay-title="Move Column to Workspace 3" {
         move-column-to-workspace 3
     }
-    Mod+Shift+4 {
+    Mod+Shift+4 hotkey-overlay-title="Move Column to Workspace 4" {
         move-column-to-workspace 4
     }
-    Mod+Shift+5 {
+    Mod+Shift+5 hotkey-overlay-title="Move Column to Workspace 5" {
         move-column-to-workspace 5
     }
-    Mod+Shift+6 {
+    Mod+Shift+6 hotkey-overlay-title="Move Column to Workspace 6" {
         move-column-to-workspace 6
     }
-    Mod+Shift+7 {
+    Mod+Shift+7 hotkey-overlay-title="Move Column to Workspace 7" {
         move-column-to-workspace 7
     }
-    Mod+Shift+8 {
+    Mod+Shift+8 hotkey-overlay-title="Move Column to Workspace 8" {
         move-column-to-workspace 8
     }
-    Mod+Shift+9 {
+    Mod+Shift+9 hotkey-overlay-title="Move Column to Workspace 9" {
         move-column-to-workspace 9
     }
-    // Workspace navigation
-    Mod+Shift+Up {
+    Mod+Shift+Up hotkey-overlay-title="Focus Workspace Up" {
         focus-workspace-up
     }
-    Mod+Shift+Down {
+    Mod+Shift+Down hotkey-overlay-title="Focus Workspace Down" {
         focus-workspace-down
     }
-    // Audio controls
-    XF86AudioRaiseVolume allow-when-locked=true {
+    // Application Launchers
+    Mod+W hotkey-overlay-title="Launch Terminal (Kitty)" {
+        spawn "kitty"
+    }
+    Mod+B hotkey-overlay-title="Launch Firefox Personal" {
+        spawn "firefox" "-p" "Personal"
+    }
+    Mod+D hotkey-overlay-title="Launch File Manager (Yazi)" {
+        spawn "kitty" "-e" "yazi"
+    }
+    Mod+E hotkey-overlay-title="Launch Editor (Nvim)" {
+        spawn "kitty" "-e" "nvim"
+    }
+    Mod+Shift+W hotkey-overlay-title="Launch Terminal (Ghostty)" {
+        spawn "ghostty"
+    }
+    Mod+Shift+B hotkey-overlay-title="Launch Brave Browser" {
+        spawn "brave"
+    }
+    Mod+Shift+D hotkey-overlay-title="Launch File Manager (Thunar)" {
+        spawn "thunar"
+    }
+    Mod+Shift+E hotkey-overlay-title="Launch Editor (Zeditor)" {
+        spawn "zeditor"
+    }
+    // Fuzzel Menus
+    Mod+A hotkey-overlay-title="Fuzzel Launcher (Custom)" {
+        spawn "~/.local/bin/fuzzel-launcher.sh"
+    }
+    Mod+Alt+A hotkey-overlay-title="Fuzzel Launcher (All)" {
+        spawn "fuzzel"
+    }
+    Mod+Alt+B hotkey-overlay-title="Fuzzel [B]luetooth Menu" {
+        spawn "~/.local/bin/fuzzel-bluetooth.sh"
+    }
+    Mod+Alt+E hotkey-overlay-title="Fuzzel [E]moji Picker" {
+        spawn "~/.local/bin/fuzzel-emoji.sh"
+    }
+    Mod+Alt+P hotkey-overlay-title="Fuzzel [P]ower Menu" {
+        spawn "~/.local/bin/fuzzel-power.sh"
+    }
+    Mod+Alt+S hotkey-overlay-title="Fuzzel [S]ymbols Menu" {
+        spawn "~/.local/bin/fuzzel-unicode.sh"
+    }
+    Mod+Alt+W hotkey-overlay-title="Fuzzel [W]i-Fi Menu" {
+        spawn "~/.local/bin/fuzzel-wifi.sh"
+    }
+    Mod+Alt+X hotkey-overlay-title="Fuzzel [U]tilities Menu" {
+        spawn "~/.local/bin/fuzzel-utils.sh"
+    }
+    // Screenshots
+    Mod+S allow-when-locked=true hotkey-overlay-title="Screenshot Screen" {
+        screenshot-screen
+    }
+    Mod+Shift+S allow-when-locked=true hotkey-overlay-title="Screenshot Interactive" {
+        screenshot
+    }
+    Mod+Ctrl+S allow-when-locked=true hotkey-overlay-title="Screenshot Window" {
+        screenshot-window
+    }
+    // Mouse & Trackpad Scroll Bindings
+    Mod+WheelScrollDown cooldown-ms=150 hotkey-overlay-title="Focus Workspace Down (Scroll)" {
+        focus-workspace-down
+    }
+    Mod+WheelScrollUp cooldown-ms=150 hotkey-overlay-title="Focus Workspace Up (Scroll)" {
+        focus-workspace-up
+    }
+    Mod+WheelScrollRight cooldown-ms=150 hotkey-overlay-title="Focus Column Right (Scroll)" {
+        focus-column-right
+    }
+    Mod+WheelScrollLeft cooldown-ms=150 hotkey-overlay-title="Focus Column Left (Scroll)" {
+        focus-column-left
+    }
+    Mod+TouchpadScrollUp hotkey-overlay-title="Increase Volume (Touchpad)" {
+        spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.02+"
+    }
+    Mod+TouchpadScrollDown hotkey-overlay-title="Decrease Volume (Touchpad)" {
+        spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.02-"
+    }
+    // Multimedia & Hardware Controls (XF86 Keys)
+    XF86AudioRaiseVolume allow-when-locked=true hotkey-overlay-title="Increase Volume" {
         spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%+"
     }
-    XF86AudioLowerVolume allow-when-locked=true {
+    XF86AudioLowerVolume allow-when-locked=true hotkey-overlay-title="Decrease Volume" {
         spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%-"
     }
-    XF86AudioMute allow-when-locked=true {
+    XF86AudioMute allow-when-locked=true hotkey-overlay-title="Toggle Mute" {
         spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"
     }
-    // Brightness controls
-    XF86MonBrightnessUp {
+    XF86MonBrightnessUp allow-when-locked=true hotkey-overlay-title="Increase Brightness" {
         spawn "brightnessctl" "set" "+5%"
     }
-    XF86MonBrightnessDown {
+    XF86MonBrightnessDown allow-when-locked=true hotkey-overlay-title="Decrease Brightness" {
         spawn "brightnessctl" "set" "5%-"
     }
-    // Media controls
-    XF86AudioPlay {
+    XF86AudioPlay allow-when-locked=true hotkey-overlay-title="Play/Pause Media" {
         spawn "playerctl" "play-pause"
     }
-    XF86AudioNext {
+    XF86AudioNext allow-when-locked=true hotkey-overlay-title="Next Media Track" {
         spawn "playerctl" "next"
     }
-    XF86AudioPrev {
+    XF86AudioPrev allow-when-locked=true hotkey-overlay-title="Previous Media Track" {
         spawn "playerctl" "previous"
     }
     // Overviews
-    // NOTE: This also works with four finger swipe on trackpad
-    Mod+X repeat=false {
+    Mod+X repeat=false hotkey-overlay-title="Toggle Overview" {
+        // NOTE: This also works with four finger swipe on trackpad
         toggle-overview
-    }
-    // Exit
-    Mod+Shift+Q {
-        quit
     }
 }
 
