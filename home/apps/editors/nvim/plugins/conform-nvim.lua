@@ -13,9 +13,12 @@ require("conform").setup({
 		html = { "prettierd", "prettier" },
 		json = { "prettierd", "prettier" },
 		jsonc = { "prettierd", "prettier" },
+		-- ipynb: No direct Conform formatter. Prettier doesn't have a specific parser.
+		-- TODO: Find a proper parser for jupyter notebooks
+		-- ipynb = { "prettierd", "prettier" },
 		elixir = { "mix_format" },
 		elm = { "elm_format" },
-		go = { "goimports_reviser", "gofumpt", "go_mod_tidy" },
+		go = { "gofumpt", "goimports-reviser" },
 		haskell = { "fourmolu" },
 		java = { "google_java_format" },
 		javascriptreact = { "prettierd", "prettier", stop_after_first = true },
@@ -33,10 +36,12 @@ require("conform").setup({
 		cmake = { "cmake_format" },
 		terraform = { "terraform_fmt" },
 		fortran = { "fprettify" },
-		crystal = { "crystal_format" },
-		proto = { "buf_format" },
-		dhall = { "dhall" },
-		prisma = { "prisma_format" },
+		crystal = { "crystal_tool_format" },
+		proto = { "buf", "format" }, -- Assuming 'buf format' command
+		dhall = { "dhall", "format" }, -- Assuming 'dhall format' command
+		prisma = { "prisma", "format" }, -- Assuming 'prisma format' command
+		sql = { "sqlfluff" },
+		markdown = { "prettierd", "prettier" },
 	},
 	lsp_fallback = true,
 })

@@ -73,31 +73,71 @@ require("lspconfig").texlab.setup({
 	capabilities = capabilities,
 })
 
+-- -- Nixd (Primary Nix LSP)
+-- require("lspconfig").nixd.setup({
+-- 	capabilities = capabilities,
+-- 	settings = {
+-- 		nixd = {
+-- 			nixpkgs = {
+-- 				expr = "import <nixpkgs> { }",
+-- 			},
+-- 			options = {
+-- 				nixos = {
+-- 					expr = string.format(
+-- 						'(builtins.getFlake "/etc/nixos").nixosConfigurations.%s.options',
+-- 						functions.get_hostname()
+-- 					),
+-- 				},
+-- 				home_manager = {
+-- 					expr = string.format(
+-- 						'(builtins.getFlake "/etc/nixos").homeConfigurations."%s@%s".options',
+-- 						functions.get_username(),
+-- 						functions.get_hostname()
+-- 					),
+-- 				},
+-- 			},
+-- 			diagnostic = {
+-- 				suppress = { "sema-extra-with" },
+-- 			},
+-- 		},
+-- 	},
+-- })
+--
+-- -- Nil (Fallback Nix LSP for performance)
+-- require("lspconfig").nil_ls.setup({
+-- 	capabilities = capabilities,
+-- 	settings = {
+-- 		["nil"] = {
+-- 			-- REMOVE THE LINE BELOW to let Conform handle formatting
+-- 			-- formatting = {
+-- 			-- 	command = { "nixfmt" },
+-- 			-- },
+-- 			diagnostics = {
+-- 				ignored = { "unused_binding", "unused_with" },
+-- 				excludeFiles = { "*.generated.nix" },
+-- 			},
+-- 			nix = {
+-- 				flake = {
+-- 					autoArchive = true,
+-- 				},
+-- 			},
+-- 		},
+-- 	},
+-- })
+
 -- Nixd (Primary Nix LSP)
 require("lspconfig").nixd.setup({
 	capabilities = capabilities,
 	settings = {
 		nixd = {
+			-- Tell nixd to enable flake support and infer the flake.nix location
+			-- from the current working directory or nearest parent.
+			flake = { enable = true; },
+
+			-- Keep nixpkgs expr for general Nixpkgs options and completions
+			-- This is good for standard Nixpkgs options that aren't overridden.
 			nixpkgs = {
 				expr = "import <nixpkgs> { }",
-			},
-			formatting = {
-				command = { "nixfmt" },
-			},
-			options = {
-				nixos = {
-					expr = string.format(
-						'(builtins.getFlake "/etc/nixos").nixosConfigurations.%s.options',
-						functions.get_hostname()
-					),
-				},
-				home_manager = {
-					expr = string.format(
-						'(builtins.getFlake "/etc/nixos").homeConfigurations."%s@%s".options',
-						functions.get_username(),
-						functions.get_hostname()
-					),
-				},
 			},
 			diagnostic = {
 				suppress = { "sema-extra-with" },
@@ -106,14 +146,11 @@ require("lspconfig").nixd.setup({
 	},
 })
 
--- Nil (Fallback Nix LSP for performance)
 require("lspconfig").nil_ls.setup({
 	capabilities = capabilities,
 	settings = {
 		["nil"] = {
-			formatting = {
-				command = { "nixfmt" },
-			},
+			flake = { autoArchive = true; }, -- nil uses `autoArchive = true` for flake inference
 			diagnostics = {
 				ignored = { "unused_binding", "unused_with" },
 				excludeFiles = { "*.generated.nix" },
@@ -265,17 +302,6 @@ require("lspconfig").dockerls.setup({
 	capabilities = capabilities,
 })
 
--- JSON (requires schemastore.nvim plugin)
--- require 'lspconfig'.jsonls.setup {
---   capabilities = capabilities,
---   settings = {
---     json = {
---       schemas = require('schemastore').json.schemas(),
---       validate = { enable = true },
---     },
---   },
--- }
-
 -- JSON (with JSONC support)
 require("lspconfig").jsonls.setup({
 	capabilities = capabilities,
@@ -284,7 +310,6 @@ require("lspconfig").jsonls.setup({
 		json = {
 			schemas = require("schemastore").json.schemas(),
 			validate = { enable = true },
-			-- Allow comments in JSONC
 			format = {
 				enable = true,
 			},
@@ -387,8 +412,3 @@ require("lspconfig").glslls.setup({
 require("lspconfig").prismals.setup({
 	capabilities = capabilities,
 })
-
--- -- Rome (JS/TS formatter/linter)
--- require 'lspconfig'.rome.setup {
--- 	capabilities = capabilities,
--- }

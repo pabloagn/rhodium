@@ -42,6 +42,7 @@
     # Go
     goimports-reviser
     gopls
+    gofumpt
 
     # Haskell
     haskell-language-server
