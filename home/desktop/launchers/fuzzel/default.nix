@@ -6,7 +6,7 @@
         layer = "overlay";
         font = "JetBrainsMono Nerd Font:size=14";
         dpi-aware = false;
-        prompt = "λ ";
+        prompt = "'λ '";
         icons-enabled = false;
         show-actions = false;
         sort-result = true;
