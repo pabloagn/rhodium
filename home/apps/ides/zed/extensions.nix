@@ -22,6 +22,7 @@
       "env"
       "tokyo-night"
       "phosphor-icons-theme"
+      "kanso"
     ];
   };
 }

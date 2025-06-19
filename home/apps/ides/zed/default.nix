@@ -4,6 +4,6 @@
     ./keybinds.nix
     ./languages.nix
     ./settings.nix
-    ./theme.nix
+    ./theme-kanso.nix
   ];
 }
