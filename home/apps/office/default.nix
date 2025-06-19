@@ -3,6 +3,7 @@
     # Messaging & Collaboration
     slack
     teams-for-linux
+    jitsi-meet
 
     # Document Processing and Viewing
     libreoffice

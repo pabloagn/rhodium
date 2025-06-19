@@ -22,7 +22,6 @@
   };
 
   # Desktop portals
-  # TODO: Customize this (desktop dialogues, etc)
   xdg.portal = {
     enable = true;
     extraPortals = [

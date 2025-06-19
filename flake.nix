@@ -65,6 +65,9 @@
       config = {
         allowUnfree = true;
         input-fonts.acceptLicense = true;
+        permittedInsecurePackages = [
+          "jitsi-meet-1.0.8043"
+        ];
       };
       overlays = [
         nur.overlays.default

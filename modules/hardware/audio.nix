@@ -17,6 +17,7 @@
         enable = true;
         support32Bit = true;
       };
+      wireplumber.enable = true;
 
       pulse.enable = true; # Enable pulse from pipewire
       jack.enable = true;
