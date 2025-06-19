@@ -43,9 +43,20 @@ output "HDMI-A-1" {
 }
 // General
 // ------------------------------------
+// Layer rules
 layer-rule {
     match namespace="^wallpaper$"
     place-within-backdrop true
+}
+// Window rules
+window-rule {
+    match app-id="qalculate-gtk"
+    open-maximized true
+}
+window-rule {
+    match app-id="calcure"
+    // open-floating true
+    open-fullscreen true
 }
 // Avoid hotkey help menu from appearing at startup
 hotkey-overlay {
@@ -201,9 +212,9 @@ binds {
     Mod+Ctrl+L hotkey-overlay-title="Lock Screen" {
         spawn "hyprlock"
     }
-    Mod+Shift+Q hotkey-overlay-title="Quit Niri" {
-        quit
-    }
+    // Mod+Shift+Q hotkey-overlay-title="Quit Niri" {
+    //     quit
+    // }
     Mod+Escape hotkey-overlay-title="Kill Fuzzel Process" {
         spawn "killall" "fuzzel"
     }
@@ -239,7 +250,7 @@ binds {
         focus-monitor-right
     }
     // Window & Column Manipulation
-    Mod+Q hotkey-overlay-title="Close Focused Window" {
+    Mod+C hotkey-overlay-title="Close Focused Window" {
         close-window
     }
     Mod+V hotkey-overlay-title="Toggle Window Floating" {
@@ -275,7 +286,7 @@ binds {
     Mod+Z hotkey-overlay-title="Toggle Column Tabbed Display" {
         toggle-column-tabbed-display
     }
-    Mod+C hotkey-overlay-title="Center Column" {
+    Mod+Shift+C hotkey-overlay-title="Center Column" {
         center-column
     }
     Mod+Ctrl+C hotkey-overlay-title="Center Visible Columns" {
@@ -364,29 +375,37 @@ binds {
         focus-workspace-down
     }
     // Application Launchers
-    Mod+W hotkey-overlay-title="Launch Terminal (Kitty)" {
+    // Main
+    Mod+W hotkey-overlay-title="Launch Terminal [Kitty]" {
         spawn "kitty"
     }
-    Mod+B hotkey-overlay-title="Launch Firefox Personal" {
+    Mod+B hotkey-overlay-title="Launch Browser [Firefox Personal]" {
         spawn "firefox" "-p" "Personal"
     }
-    Mod+D hotkey-overlay-title="Launch File Manager (Yazi)" {
+    Mod+D hotkey-overlay-title="Launch File Manager [Yazi]" {
         spawn "kitty" "-e" "yazi"
     }
-    Mod+E hotkey-overlay-title="Launch Editor (Nvim)" {
+    Mod+E hotkey-overlay-title="Launch Editor [Nvim]" {
         spawn "kitty" "-e" "nvim"
     }
-    Mod+Shift+W hotkey-overlay-title="Launch Terminal (Ghostty)" {
+    Mod+Q hotkey-overlay-title="Toggle Qalculate" {
+        spawn "~/.local/bin//utils-qalculate.sh"
+    }
+    // Alt
+    Mod+Shift+W hotkey-overlay-title="Launch Terminal [Ghostty]" {
         spawn "ghostty"
     }
-    Mod+Shift+B hotkey-overlay-title="Launch Brave Browser" {
+    Mod+Shift+B hotkey-overlay-title="Launch Browser [Brave]" {
         spawn "brave"
     }
-    Mod+Shift+D hotkey-overlay-title="Launch File Manager (Thunar)" {
+    Mod+Shift+D hotkey-overlay-title="Launch File Manager [Thunar]" {
         spawn "thunar"
     }
-    Mod+Shift+E hotkey-overlay-title="Launch Editor (Zeditor)" {
+    Mod+Shift+E hotkey-overlay-title="Launch Editor [Zed Editor]" {
         spawn "zeditor"
+    }
+    Mod+Shift+Q hotkey-overlay-title="Toggle Calcure" {
+        spawn "~/.local/bin/utils-calcure.sh"
     }
     // Fuzzel Menus
     Mod+A hotkey-overlay-title="Fuzzel Launcher (Custom)" {

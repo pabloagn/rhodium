@@ -5,7 +5,8 @@
     # Calendars
     # kdePackages.korganizer
     # evolution
-    calcurse # CLI calendar
+    # calcurse # CLI calendar
+    calcure # Modern calcurse alternative
     ulauncher # GUI-based launcher
   ];
 }
