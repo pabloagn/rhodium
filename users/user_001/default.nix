@@ -37,10 +37,11 @@
   # Asset linking
   assets = {
     wallpapers.enable = true;
+    colors.enable = true;
   };
 
   # Script linking
-  # NOTE: Enables all scripts in home/scripts with chmod +x
+  # WARN: Enables all scripts in home/scripts with chmod +x
   scripts.enable = true;
 
   # Enable Niri session services
