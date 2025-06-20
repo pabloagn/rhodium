@@ -4,7 +4,7 @@
       # General
       resize-overlay = "never";
       link-url = true;
-      scrollback-limit = 1000000000;
+      scrollback-limit = 10000;
 
       # Theme
       theme = "kanso";
@@ -29,7 +29,7 @@
       window-padding-y = 10;
       window-padding-balance = true;
       background-opacity = 1.0; # This is controlled by the compositor instead
-      background-blur = 20;
+      background-blur = 0;
       mouse-hide-while-typing = true;
 
       # Performance

@@ -1,18 +1,16 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
-    # gtk theme requirements
+    # GTK theme requirements
     sassc
     gtk-engine-murrine
     gnome-themes-extra
+    adwaita-icon-theme
 
     # Qt themes
     (catppuccin-kvantum.override {
       variant = "mocha";
       accent = "mauve";
     })
-    # or
-    # TODO: Check which
-    # nordic # Includes Kvantum theme
   ];
 
   # GTK

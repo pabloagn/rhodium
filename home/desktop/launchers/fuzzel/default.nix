@@ -2,7 +2,7 @@
   programs.fuzzel = {
     settings = {
       main = {
-        terminal = "${pkgs.kitty}/bin/kitty";
+        terminal = "ghostty -e";
         layer = "overlay";
         font = "JetBrainsMono Nerd Font:size=14";
         dpi-aware = false;
@@ -22,18 +22,19 @@
         letter-spacing = 0;
         hide-before-typing = false;
         exit-on-keyboard-focus-loss = false;
+        keyboard-focus = "on-demand";
       };
       border = {
         width = 1;
         radius = 0;
       };
       colors = {
-        background = "20131eee";
-        text = "feebeeff";
-        match = "8e4057ff";
-        selection = "462941ff";
-        selection-text = "feebeeff";
-        border = "7d3d52ff";
+        background = "#20131eff";
+        text = "#feebeeff";
+        match = "#8e4057ff";
+        selection = "#462941ff";
+        selection-text = "#feebeeff";
+        border = "#7d3d52ff";
       };
       dmenu = {
         mode = "text";
