@@ -22,6 +22,7 @@
     most # Pager
     less # Pager
     miller # Like awk, sed, cut, join, and sort for data formats such as CSV, TSV, JSON,etc
+    tree # Produce an indented directory tree view
     broot # Interactive tree view
   ];
 }

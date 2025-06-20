@@ -12,7 +12,6 @@
   l3 = "eza --icons -l -T -L=3";
   llt = "eza -T";
   lat = "eza -Ta";
-  tree = "eza -Ta";
   lat1 = "eza -Ta -L=1";
   lat2 = "eza -Ta -L=2";
   lat3 = "eza -Ta -L=3";

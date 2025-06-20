@@ -1,38 +1,45 @@
 #!/usr/bin/env bash
 
 set -euo pipefail
-set +u
 
 # --- Configuration ---
 APP_NAME="fuzzel-colors"
 THEME_NAME="kanso"
 CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/$APP_NAME"
-ICONS_DIR="$CONFIG_DIR/icons/$THEME_NAME"
+COLORS_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/colors"
+# NOTE: This var below is for testing purposes
+# COLORS_DIR="/home/pabloagn/dev/rhodium/home/assets/colors"
 
-mkdir -p "$ICONS_DIR"
-
-FUZZEL_DMENU_BASE_ARGS="--dmenu"
-
-# Colors file path
-# The user can override this by setting the environment variable
-# e.g., COLORS_FILE=/path/to/my/colors.json ./fuzzel-colors.sh
-: "${COLORS_FILE:=$XDG_DATA_HOME/colors/$THEME_NAME.json}"
+: "${COLORS_FILE:=$COLORS_DIR/$THEME_NAME.json}"
+PADDING_ARGS="15 15"
 
 # --- Helper Functions ---
 
-# Function to send desktop notifications
+usage() {
+    cat <<EOF
+Usage: $(basename "$0") [OPTIONS]
+
+A color utility script using fuzzel.
+
+Options:
+  -f, --file PATH      Path to the JSON color file.
+                       (Default: \$XDG_DATA_HOME/colors/$THEME_NAME.json)
+  -p, --padding "P P.." A space-separated list of padding widths for columns.
+                       (Default: "$PADDING_ARGS")
+  -h, --help           Show this help message.
+EOF
+}
+
 notify() {
     local title="$1"
     local message="$2"
     if command -v notify-send &>/dev/null; then
         notify-send --app-name="$APP_NAME" "$title" "$message"
     else
-        # Fallback if notify-send is not available
         echo "Notification: $title - $message" >&2
     fi
 }
 
-# Function to copy to clipboard
 copy_to_clipboard() {
     local text="$1"
     if command -v wl-copy &>/dev/null; then
@@ -46,32 +53,10 @@ copy_to_clipboard() {
     fi
 }
 
-# Function to run fuzzel with given prompt, input data, and optional extra arguments
-# Usage: run_fuzzel "Prompt:" "Input string" "Extra fuzzel args (e.g., -l 5)"
-run_fuzzel() {
-    local prompt="$1"
-    local input_data="$2"
-    local extra_args="${3:-}"
-
-    if [[ -z "$input_data" ]]; then
-        # Use existing stdin pipe if input_data is empty
-        fuzzel $FUZZEL_DMENU_BASE_ARGS $extra_args --prompt "$prompt"
-    else
-        # Echo input_data to fuzzel
-        echo "$input_data" | fuzzel $FUZZEL_DMENU_BASE_ARGS $extra_args --prompt "$prompt"
-    fi
-}
-
-# --- MODIFIED FUNCTION ---
-# Takes the hex code and the full icon path as arguments.
-# This makes it more robust and prevents issues with '#' in filenames.
-function generate_svg_icon() {
+generate_svg_icon() {
     local color="$1"
     local icon_path="$2"
-
-    # Create an SVG for the color if it doesn't exist
     if [ ! -f "$icon_path" ]; then
-        # Ensure the parent directory exists
         mkdir -p "$(dirname "$icon_path")"
         cat >"$icon_path" <<EOF
 <svg width="128" height="128" xmlns="http://www.w3.org/2000/svg">
@@ -81,143 +66,141 @@ EOF
     fi
 }
 
-# --- REPLACED FUNCTION 1 ---
-# This uses a more robust jq query to find only hex color codes
-# and outputs them in a machine-readable, tab-separated format:
-# #hexcode\tkey1\tkey2\t...
 parse_colors_from_json() {
-    if [[ ! -f "$COLORS_FILE" ]]; then
-        notify "Color Utils Error" "Colors file not found at $COLORS_FILE"
-        return 1
-    fi
-
-    if ! command -v jq &>/dev/null; then
-        notify "Color Utils Error" "jq is not installed, required to parse JSON colors file."
-        return 1
-    fi
-
-    # 1. Find all paths to scalar values.
-    # 2. Get the value for each path.
-    # 3. Filter to keep only values that look like a hex color code.
-    # 4. Create an array with the [value, key1, key2, ...]
-    # 5. Format the output as a Tab-Separated Value (TSV) string.
+    local colors_file="$1"
     jq -r '
         paths(scalars) as $p
         | getpath($p) as $v
         | select($v | test("^#[0-9a-fA-F]{3,8}$"))
         | [$v] + $p | @tsv
-    ' "$COLORS_FILE"
+    ' "$colors_file"
 }
 
 # --- Color Utils Actions ---
 
-# Pick color using hyprpicker with format: HEX, RGB, HSL, etc.
 pick_with_hyprpicker() {
     if ! command -v hyprpicker &>/dev/null; then
         notify "Color Utils Error" "hyprpicker is not installed"
         return 1
     fi
-
-    local format="${1,,}"              # Convert to lowercase, as hyprpicker expects it
-    [[ -z "$format" ]] && format="hex" # Default to hex if empty
-
+    local format="${1,,}"
+    [[ -z "$format" ]] && format="hex"
     notify "Color Utils" "Click on any pixel to pick its color..."
-
     local color
     if color=$(hyprpicker -a -f "$format" 2>/dev/null); then
-        # hyprpicker outputs with # for hex, e.g., "#RRGGBB"
-        if copy_to_clipboard "$color"; then
-            notify "Color Utils" "Picked color ($format): $color (copied to clipboard)"
-        else
-            notify "Color Utils" "Picked color ($format): $color (failed to copy to clipboard)"
-        fi
-    else
-        notify "Color Utils" "Color picking cancelled"
-    fi
+        if copy_to_clipboard "$color"; then notify "Color Utils" "Picked color ($format): <span weight='bold'>$color</span> (copied)"; else notify "Color Utils" "Picked color ($format): $color (failed to copy)"; fi
+    else notify "Color Utils" "Color picking cancelled"; fi
 }
 
-# Pick color using niri
 pick_with_niri() {
     notify "Color Utils" "Click on any pixel to pick its color..."
-
     local color
     if color=$(niri msg pick-color 2>/dev/null); then
-        # niri msg pick-color returns format like "sRGB: #RRGGBB"
-        # Extract just the hex code
         color=$(echo "$color" | grep -oE '#[0-9A-Fa-f]{6}' | head -1)
-
         if [[ -n "$color" ]]; then
-            if copy_to_clipboard "$color"; then
-                notify "Color Utils" "Picked color: $color (copied to clipboard)"
-            else
-                notify "Color Utils" "Picked color: $color (failed to copy to clipboard)"
-            fi
-        else
-            notify "Color Utils Error" "Failed to parse color from niri output"
-        fi
-    else
-        notify "Color Utils" "Color picking cancelled"
+            if copy_to_clipboard "$color"; then notify "Color Utils" "Picked color: <span weight='bold'>$color</span> (copied)"; else notify "Color Utils" "Picked color: $color (failed to copy)"; fi
+        else notify "Color Utils Error" "Failed to parse color from niri output"; fi
+    else notify "Color Utils" "Color picking cancelled"; fi
+}
+
+get_available_themes() {
+    if [[ ! -d "$COLORS_DIR" ]]; then
+        notify "Color Utils Error" "Colors directory not found at $COLORS_DIR"
+        return 1
+    fi
+    
+    local themes=""
+    for file in "$COLORS_DIR"/*.json; do
+        [[ -f "$file" ]] || continue
+        local theme_name
+        theme_name=$(basename "$file" .json)
+        themes+="${theme_name^}\n"
+    done
+    
+    if [[ -z "$themes" ]]; then
+        notify "Color Utils" "No theme files found in $COLORS_DIR"
+        return 1
+    fi
+    
+    echo -e "$themes"
+}
+
+show_theme_selection() {
+    local themes
+    themes=$(get_available_themes) || return 1
+    
+    local selected_theme
+    selected_theme=$(echo -e "$themes" | fuzzel --dmenu --prompt="Select theme: " -l 2) || return 0
+    
+    if [[ -n "$selected_theme" ]]; then
+        local theme_file="$COLORS_DIR/${selected_theme,,}.json"
+        show_color_palette "$PADDING_ARGS" "$theme_file"
     fi
 }
 
-# --- REPLACED FUNCTION 2 ---
-# This now reads the tab-separated output from parse_colors_from_json
-# and uses printf to create padded columns for better alignment in fuzzel.
-build_color_palette() {
-    local colors_data
-    if ! colors_data=$(parse_colors_from_json); then
+show_color_palette() {
+    local padding_str="$1"
+    local colors_file="${2:-$COLORS_FILE}"
+    
+    if [[ ! -f "$colors_file" ]]; then
+        notify "Color Utils Error" "Colors file not found at $colors_file"
         return 1
     fi
+    
+    local theme_file_name
+    theme_file_name=$(basename "$colors_file" .json)
+    local icons_dir="$CONFIG_DIR/icons/$theme_file_name"
+    mkdir -p "$icons_dir"
 
-    if [[ -z "$colors_data" ]]; then
-        notify "Color Utils" "No colors found in $COLORS_FILE"
-        return 1
-    fi
+    local -a paddings
+    read -ra paddings <<<"$padding_str"
+    local all_entries=""
 
-    # Process the tab-separated data line by line
-    echo "$colors_data" | while IFS=$'\t' read -ra parts; do
-        # Skip empty lines that might result from the pipe
+    while IFS=$'\t' read -ra parts; do
         [[ ${#parts[@]} -eq 0 ]] && continue
 
         local hex="${parts[0]}"
-        # Sanitize hex code for use in a filename by removing the '#'
         local filename_hex="${hex#\#}"
-        local icon_path="$ICONS_DIR/$filename_hex.svg"
-
-        # Generate the icon if it doesn't exist
+        local icon_path="$icons_dir/$filename_hex.svg"
         generate_svg_icon "$hex" "$icon_path"
 
-        # --- PADDING LOGIC ---
-        # Get path components. Use :- to provide an empty default if a key doesn't exist.
-        local key1="${parts[1]:-}"
-        # Join the rest of the keys (from the 3rd element onwards) with a space
-        local key_rest=$(IFS=' '; echo "${parts[*]:2}")
+        local formatted_text=""
+        local num_parts=${#parts[@]}
+        local num_paddings=${#paddings[@]}
 
-        # Use printf to format the text with padding, similar to your awk command
-        # %-15s means "left-align and pad with spaces to 15 characters"
-        local formatted_text
-        formatted_text=$(printf "%-15s %-15s %s" "$hex" "$key1" "$key_rest")
-        # --- END PADDING LOGIC ---
+        for ((i = 0; i < num_parts; i++)); do
+            local part="${parts[i]}"
 
-        # Print the final entry for fuzzel, combining the padded text and the icon path
-        echo -e "${formatted_text}\0icon\x1f$icon_path"
-    done
-}
+            if ((i < num_paddings)); then
+                local pad_to=${paddings[i]}
+                formatted_text+=$(printf "%-*s" "$pad_to" "$part")
+            else
+                formatted_text+="$part"
+            fi
 
+            if ((i < num_parts - 1)); then
+                formatted_text+=" "
+            fi
+        done
 
-show_color_palette() {
+        all_entries+="${formatted_text}\0icon\x1f${icon_path}\n"
+
+    done < <(parse_colors_from_json "$colors_file")
+
+    if [[ -z "$all_entries" ]]; then
+        notify "Color Utils" "No valid colors found in $colors_file"
+        return 0
+    fi
+
     local selected
-    # build_color_palette now handles the formatting, so we just pipe its output
-    selected=$(build_color_palette | fuzzel --dmenu --prompt="Select color: " -l 10)
+    selected=$(echo -e "$all_entries" | fuzzel --dmenu --prompt="Select color: ")
 
     if [[ -n "$selected" ]]; then
-        # This still works because '%% *' will stop at the first block of spaces,
-        # correctly isolating the hex code.
         local hex="${selected%% *}"
         if copy_to_clipboard "$hex"; then
-            notify "Color Utils" "Copied $hex to clipboard"
+            notify "Color Utils" "Copied <span background='$hex' weight='bold'>$hex</span> to clipboard"
         else
-            notify "Color Utils" "Selected $hex (failed to copy to clipboard)"
+            notify "Color Utils" "Selected <span background='$hex' weight='bold'>$hex</span> (failed to copy to clipboard)"
         fi
     fi
 }
@@ -225,6 +208,34 @@ show_color_palette() {
 # --- Main Logic ---
 
 main() {
+    while [[ $# -gt 0 ]]; do
+        case "$1" in
+        -f | --file)
+            COLORS_FILE="$2"
+            shift 2
+            ;;
+        -p | --padding)
+            PADDING_ARGS="$2"
+            shift 2
+            ;;
+        -h | --help)
+            usage
+            exit 0
+            ;;
+        *)
+            echo "Unknown option: $1" >&2
+            usage
+            exit 1
+            ;;
+        esac
+    done
+
+    # Pre-flight checks before showing menu
+    if ! command -v jq &>/dev/null; then
+        notify "Color Utils Error" "jq is not installed."
+        exit 1
+    fi
+
     local main_menu_options=$(
         cat <<EOF
 ⊹ Pick Color [Hyprpicker] [HEX]
@@ -233,300 +244,28 @@ main() {
 ⊹ Pick Color [Hyprpicker] [HSL]
 ⊹ Pick Color [Hyprpicker] [HSV]
 ⊹ Pick Color [Niri] [HEX]
-⊹ Color Palette [${THEME_NAME^}]
+⊹ Color Palettes
 EOF
     )
 
-    # Calculate the exact number of lines for the main menu
     local num_main_options=$(echo -e "$main_menu_options" | wc -l)
-    local main_menu_specific_args="-l $num_main_options"
 
     local choice
-    # Pass the calculated line count to run_fuzzel for the main menu
-    choice=$(run_fuzzel "λ " "$main_menu_options" "$main_menu_specific_args") || exit 0
+    choice=$(echo -e "$main_menu_options" | fuzzel --dmenu --prompt="λ " -l "$num_main_options") || exit 0
 
     case "$choice" in
-    "⊹ Pick Color [Hyprpicker] [HEX]")
-        pick_with_hyprpicker "HEX"
-        ;;
-    "⊹ Pick Color [Hyprpicker] [RGB]")
-        pick_with_hyprpicker "RGB"
-        ;;
-    "⊹ Pick Color [Hyprpicker] [CMYK]")
-        pick_with_hyprpicker "CMYK"
-        ;;
-    "⊹ Pick Color [Hyprpicker] [HSL]")
-        pick_with_hyprpicker "HSL"
-        ;;
-    "⊹ Pick Color [Hyprpicker] [HSV]")
-        pick_with_hyprpicker "HSV"
-        ;;
-    "⊹ Pick Color [Niri] [HEX]")
-        pick_with_niri
-        ;;
-    "⊹ Color Palette [${THEME_NAME^}]")
-        show_color_palette
-        ;;
+    "⊹ Pick Color [Hyprpicker] [HEX]") pick_with_hyprpicker "HEX" ;;
+    "⊹ Pick Color [Hyprpicker] [RGB]") pick_with_hyprpicker "RGB" ;;
+    "⊹ Pick Color [Hyprpicker] [CMYK]") pick_with_hyprpicker "CMYK" ;;
+    "⊹ Pick Color [Hyprpicker] [HSL]") pick_with_hyprpicker "HSL" ;;
+    "⊹ Pick Color [Hyprpicker] [HSV]") pick_with_hyprpicker "HSV" ;;
+    "⊹ Pick Color [Niri] [HEX]") pick_with_niri ;;
+    "⊹ Color Palettes") show_theme_selection ;;
     *)
         notify "Color Utils" "Invalid option selected: $choice"
         ;;
     esac
 }
 
-main
-
-# #!/usr/bin/env bash
-#
-# set -euo pipefail
-# set +u
-#
-# # --- Configuration ---
-# APP_NAME="fuzzel-colors"
-# THEME_NAME="kanso"
-# CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/$APP_NAME"
-# ICONS_DIR="$CONFIG_DIR/icons/$THEME_NAME"
-#
-# mkdir -p "$ICONS_DIR"
-#
-# FUZZEL_DMENU_BASE_ARGS="--dmenu"
-#
-# # Colors file path
-# # The user can override this by setting the environment variable
-# # e.g., COLORS_FILE=/path/to/my/colors.json ./fuzzel-colors.sh
-# : "${COLORS_FILE:=$XDG_DATA_HOME/colors/$THEME_NAME.json}"
-#
-# # --- Helper Functions ---
-#
-# # Function to send desktop notifications
-# notify() {
-#     local title="$1"
-#     local message="$2"
-#     if command -v notify-send &>/dev/null; then
-#         notify-send --app-name="$APP_NAME" "$title" "$message"
-#     else
-#         # Fallback if notify-send is not available
-#         echo "Notification: $title - $message" >&2
-#     fi
-# }
-#
-# # Function to copy to clipboard
-# copy_to_clipboard() {
-#     local text="$1"
-#     if command -v wl-copy &>/dev/null; then
-#         echo -n "$text" | wl-copy
-#         return 0
-#     elif command -v xclip &>/dev/null; then
-#         echo -n "$text" | xclip -selection clipboard
-#         return 0
-#     else
-#         return 1
-#     fi
-# }
-#
-# # Function to run fuzzel with given prompt, input data, and optional extra arguments
-# # Usage: run_fuzzel "Prompt:" "Input string" "Extra fuzzel args (e.g., -l 5)"
-# run_fuzzel() {
-#     local prompt="$1"
-#     local input_data="$2"
-#     local extra_args="${3:-}"
-#
-#     if [[ -z "$input_data" ]]; then
-#         # Use existing stdin pipe if input_data is empty
-#         fuzzel $FUZZEL_DMENU_BASE_ARGS $extra_args --prompt "$prompt"
-#     else
-#         # Echo input_data to fuzzel
-#         echo "$input_data" | fuzzel $FUZZEL_DMENU_BASE_ARGS $extra_args --prompt "$prompt"
-#     fi
-# }
-#
-# # --- MODIFIED FUNCTION ---
-# # Takes the hex code and the full icon path as arguments.
-# # This makes it more robust and prevents issues with '#' in filenames.
-# function generate_svg_icon() {
-#     local color="$1"
-#     local icon_path="$2"
-#
-#     # Create an SVG for the color if it doesn't exist
-#     if [ ! -f "$icon_path" ]; then
-#         # Ensure the parent directory exists
-#         mkdir -p "$(dirname "$icon_path")"
-#         cat >"$icon_path" <<EOF
-# <svg width="128" height="128" xmlns="http://www.w3.org/2000/svg">
-#   <rect width="128" height="128" fill="$color" />
-# </svg>
-# EOF
-#     fi
-# }
-#
-# # --- MODIFIED FUNCTION ---
-# # This now uses a recursive jq query to handle arbitrary nesting depth.
-# # It outputs lines in the format: "#hexcode\tlevel1 level2 ..."
-# parse_colors_from_json() {
-#     if [[ ! -f "$COLORS_FILE" ]]; then
-#         notify "Color Utils Error" "Colors file not found at $COLORS_FILE"
-#         return 1
-#     fi
-#
-#     if ! command -v jq &>/dev/null; then
-#         notify "Color Utils Error" "jq is not installed, required to parse JSON colors file."
-#         return 1
-#     fi
-#
-#     # Use `paths(scalars)` to get the key path for every final value.
-#     # Then, format the output as `value\tpath_keys_joined_by_space`.
-#     jq -r '
-#         paths(scalars) as $path
-#         | getpath($path) as $value
-#         | $path | join(" ") as $name
-#         | "\($value)\t\($name)"
-#     ' "$COLORS_FILE"
-# }
-#
-# # --- Color Utils Actions ---
-#
-# # Pick color using hyprpicker with format: HEX, RGB, HSL, etc.
-# pick_with_hyprpicker() {
-#     if ! command -v hyprpicker &>/dev/null; then
-#         notify "Color Utils Error" "hyprpicker is not installed"
-#         return 1
-#     fi
-#
-#     local format="${1,,}"              # Convert to lowercase, as hyprpicker expects it
-#     [[ -z "$format" ]] && format="hex" # Default to hex if empty
-#
-#     notify "Color Utils" "Click on any pixel to pick its color..."
-#
-#     local color
-#     if color=$(hyprpicker -a -f "$format" 2>/dev/null); then
-#         # hyprpicker outputs with # for hex, e.g., "#RRGGBB"
-#         if copy_to_clipboard "$color"; then
-#             notify "Color Utils" "Picked color ($format): $color (copied to clipboard)"
-#         else
-#             notify "Color Utils" "Picked color ($format): $color (failed to copy to clipboard)"
-#         fi
-#     else
-#         notify "Color Utils" "Color picking cancelled"
-#     fi
-# }
-#
-# # Pick color using niri
-# pick_with_niri() {
-#     notify "Color Utils" "Click on any pixel to pick its color..."
-#
-#     local color
-#     if color=$(niri msg pick-color 2>/dev/null); then
-#         # niri msg pick-color returns format like "sRGB: #RRGGBB"
-#         # Extract just the hex code
-#         color=$(echo "$color" | grep -oE '#[0-9A-Fa-f]{6}' | head -1)
-#
-#         if [[ -n "$color" ]]; then
-#             if copy_to_clipboard "$color"; then
-#                 notify "Color Utils" "Picked color: $color (copied to clipboard)"
-#             else
-#                 notify "Color Utils" "Picked color: $color (failed to copy to clipboard)"
-#             fi
-#         else
-#             notify "Color Utils Error" "Failed to parse color from niri output"
-#         fi
-#     else
-#         notify "Color Utils" "Color picking cancelled"
-#     fi
-# }
-#
-# # Build the color palette
-# build_color_palette() {
-#     local colors_data
-#     if ! colors_data=$(parse_colors_from_json); then
-#         return 1
-#     fi
-#
-#     if [[ -z "$colors_data" ]]; then
-#         notify "Color Utils" "No colors found in $COLORS_FILE"
-#         return 1
-#     fi
-#
-#     # `read -r hex name` now correctly splits the tab-separated output.
-#     # `hex` gets the color code, `name` gets the rest of the line (all keys).
-#     echo "$colors_data" | while IFS=$'\t' read -r hex name; do
-#         if [[ -z "$hex" ]]; then
-#             continue
-#         fi
-#
-#         # Sanitize hex code for use in a filename by removing the '#'
-#         local filename_hex="${hex#\#}"
-#         local icon_path="$ICONS_DIR/$filename_hex.svg"
-#
-#         # Generate the icon if it doesn't exist, passing the correct path
-#         generate_svg_icon "$hex" "$icon_path"
-#
-#         # Print the entry
-#         echo -e "$hex  $name\0icon\x1f$icon_path"
-#     done
-# }
-#
-# show_color_palette() {
-#     local selected
-#     selected=$(build_color_palette | fuzzel --dmenu --prompt="Select color: " -l 10)
-#
-#     if [[ -n "$selected" ]]; then
-#         local hex="${selected%% *}"
-#         if copy_to_clipboard "$hex"; then
-#             notify "Color Utils" "Copied $hex to clipboard"
-#         else
-#             notify "Color Utils" "Selected $hex (failed to copy to clipboard)"
-#         fi
-#     fi
-# }
-#
-# # --- Main Logic ---
-#
-# main() {
-#     local main_menu_options=$(
-#         cat <<EOF
-# ⊹ Pick Color [Hyprpicker] [HEX]
-# ⊹ Pick Color [Hyprpicker] [RGB]
-# ⊹ Pick Color [Hyprpicker] [CMYK]
-# ⊹ Pick Color [Hyprpicker] [HSL]
-# ⊹ Pick Color [Hyprpicker] [HSV]
-# ⊹ Pick Color [Niri] [HEX]
-# ⊹ Color Palette [${THEME_NAME^}]
-# EOF
-#     )
-#
-#     # Calculate the exact number of lines for the main menu
-#     local num_main_options=$(echo -e "$main_menu_options" | wc -l)
-#     local main_menu_specific_args="-l $num_main_options"
-#
-#     local choice
-#     # Pass the calculated line count to run_fuzzel for the main menu
-#     choice=$(run_fuzzel "λ " "$main_menu_options" "$main_menu_specific_args") || exit 0
-#
-#     case "$choice" in
-#     "⊹ Pick Color [Hyprpicker] [HEX]")
-#         pick_with_hyprpicker "HEX"
-#         ;;
-#     "⊹ Pick Color [Hyprpicker] [RGB]")
-#         pick_with_hyprpicker "RGB"
-#         ;;
-#     "⊹ Pick Color [Hyprpicker] [CMYK]")
-#         pick_with_hyprpicker "CMYK"
-#         ;;
-#     "⊹ Pick Color [Hyprpicker] [HSL]")
-#         pick_with_hyprpicker "HSL"
-#         ;;
-#     "⊹ Pick Color [Hyprpicker] [HSV]")
-#         pick_with_hyprpicker "HSV"
-#         ;;
-#     "⊹ Pick Color [Niri] [HEX]")
-#         pick_with_niri
-#         ;;
-#     "⊹ Color Palette [${THEME_NAME^}]")
-#         show_color_palette
-#         ;;
-#     *)
-#         notify "Color Utils" "Invalid option selected: $choice"
-#         ;;
-#     esac
-# }
-#
-# main
+# Pass all script arguments to the main function
+main "$@"
