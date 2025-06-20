@@ -42,6 +42,9 @@
   # NOTE: Enables all scripts in home/scripts with chmod +x
   scripts.enable = true;
 
+  # Enable Niri session services
+  services.niri-session.enable = true;
+
   home = {
     username = userData.user_001.username;
     homeDirectory = "/home/${userData.user_001.username}";
