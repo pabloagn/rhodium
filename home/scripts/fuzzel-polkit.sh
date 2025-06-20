@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -euo pipefail
+
 case "$*" in 'h' | 'help' | '-h' | '-help' | '--help')
     echo 'Usage: fuzzel-polkit-agent [FUZZEL_OPTIONS]...
 Polkit agent using fuzzel as GUI.

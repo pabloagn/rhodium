@@ -5,10 +5,7 @@
   host,
   ...
 }:
-
-with lib;
-
-let
+with lib; let
   cfg = config.scripts;
 
   # Static scripts from home/scripts/ dir
@@ -16,13 +13,11 @@ let
   scriptFiles = builtins.readDir scriptsSourcePath;
 
   # Filter out non-script files
-  isScript =
-    name:
-    let
-      fileType = scriptFiles.${name};
-      isRegularFile = fileType == "regular";
-      isNotNix = !lib.hasSuffix ".nix" name;
-    in
+  isScript = name: let
+    fileType = scriptFiles.${name};
+    isRegularFile = fileType == "regular";
+    isNotNix = !lib.hasSuffix ".nix" name;
+  in
     isRegularFile && isNotNix;
 
   # Get list of actual script files
@@ -37,16 +32,18 @@ let
   };
 
   # Generate static script symlinks
-  staticScriptLinks = lib.foldl' (acc: name: acc // (mkStaticScriptLink name)) { } scriptNames;
+  staticScriptLinks = lib.foldl' (acc: name: acc // (mkStaticScriptLink name)) {} scriptNames;
 
   # Host-specific monitor configuration
-  inherit (host.mainMonitor)
+  inherit
+    (host.mainMonitor)
     monitorID
     monitorResolution
     monitorRefreshRate
     monitorScalingFactor
     ;
 
+  # NOTE: Only used for hyprland
   # Nix-generated scripts
   desktopAutostart = pkgs.writeShellScript "desktop-autostart" ''
     #!${pkgs.runtimeShell}
@@ -58,7 +55,7 @@ let
     ${pkgs.blueman}/bin/blueman-applet &
     # Status bar
     ${pkgs.waybar}/bin/waybar &
-    # Optional: Add some delay and error handling
+    # Add some delay and error handling
     sleep 1
     echo "Desktop autostart completed" > /tmp/autostart.log
   '';
@@ -68,12 +65,24 @@ let
     #!${pkgs.runtimeShell}
 
     ROFI_THEME="$HOME/.config/rofi/themes/chiaroscuro.rasi"
-    
+
     # Host monitor configuration
     MAIN_MONITOR="${monitorID}"
-    MAIN_RESOLUTION="${if monitorResolution != "" then monitorResolution else "preferred"}"
-    MAIN_REFRESH="${if monitorRefreshRate != "" then "@${monitorRefreshRate}" else ""}"
-    MAIN_SCALE="${if monitorScalingFactor != "" then monitorScalingFactor else "1.0"}"
+    MAIN_RESOLUTION="${
+      if monitorResolution != ""
+      then monitorResolution
+      else "preferred"
+    }"
+    MAIN_REFRESH="${
+      if monitorRefreshRate != ""
+      then "@${monitorRefreshRate}"
+      else ""
+    }"
+    MAIN_SCALE="${
+      if monitorScalingFactor != ""
+      then monitorScalingFactor
+      else "1.0"
+    }"
 
     # Common external monitor
     EXTERNAL_MONITOR="HDMI-A-1"
@@ -108,12 +117,12 @@ let
                 ${pkgs.hyprland}/bin/hyprctl keyword monitor "$MAIN_MONITOR,disable"
             fi
         fi
-        
+
         # Restart hyprpaper to apply wallpapers to new monitor setup
         ${pkgs.procps}/bin/pkill hyprpaper
         sleep 0.5
         ${pkgs.hyprpaper}/bin/hyprpaper &
-        
+
         # Send notification
         ${pkgs.libnotify}/bin/notify-send "Monitor Setup" "Applied: $choice"
     fi
@@ -133,8 +142,7 @@ let
 
   # Combine both types of scripts
   allScriptLinks = staticScriptLinks // nixScriptLinks;
-in
-{
+in {
   options.scripts = {
     enable = mkEnableOption "Link individual scripts to local bin path with executable permissions";
   };
@@ -143,12 +151,11 @@ in
     home.file = allScriptLinks;
 
     # Ensure bin directory exists
-    home.activation.create-script-dirs = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    home.activation.create-script-dirs = lib.hm.dag.entryAfter ["writeBoundary"] ''
       mkdir -p "${config.home.sessionVariables.XDG_BIN_HOME}"
     '';
   };
 }
-
 # {
 #   lib,
 #   config,
@@ -310,3 +317,4 @@ in
 #     '';
 #   };
 # }
+

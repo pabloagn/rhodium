@@ -4,7 +4,6 @@ set -euo pipefail
 
 # --- Configuration ---
 # Fuzzel base dmenu arguments. These apply to all fuzzel invocations unless overridden.
-# -w 80: Set the menu's fixed width to 80 characters.
 # If you want more global fuzzel styling, add it here.
 FUZZEL_DMENU_BASE_ARGS="--dmenu"
 

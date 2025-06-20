@@ -4,6 +4,7 @@
     slack
     teams-for-linux
     jitsi-meet
+    zoom-us
 
     # Document Processing and Viewing
     libreoffice
