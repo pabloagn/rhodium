@@ -2,19 +2,31 @@
 
 set -euo pipefail
 
-# --- Configuration ---
-APP_NAME="fuzzel-colors"
+# --- Main Configuration ---
+APP_NAME="rhodium-colors"
+APP_TITLE="Rhodium's Color Utils"
+
+# --- Imports ---
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+if [[ -f "$SCRIPT_DIR/shared-functions.sh" ]]; then
+    source "$SCRIPT_DIR/shared-functions.sh"
+else
+    echo "Error: shared-functions.sh not found" >&2
+    exit 1
+fi
+
+# --- Variables ---
 THEME_NAME="kanso"
 CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/$APP_NAME"
-COLORS_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/colors"
+# COLORS_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/colors"
 # NOTE: This var below is for testing purposes
-# COLORS_DIR="/home/pabloagn/dev/rhodium/home/assets/colors"
+COLORS_DIR="/home/pabloagn/dev/rhodium/home/assets/colors"
 
 : "${COLORS_FILE:=$COLORS_DIR/$THEME_NAME.json}"
 PADDING_ARGS="15 15"
 
-# --- Helper Functions ---
 
+# --- Helper Functions ---
 usage() {
     cat <<EOF
 Usage: $(basename "$0") [OPTIONS]
@@ -30,29 +42,7 @@ Options:
 EOF
 }
 
-notify() {
-    local title="$1"
-    local message="$2"
-    if command -v notify-send &>/dev/null; then
-        notify-send --app-name="$APP_NAME" "$title" "$message"
-    else
-        echo "Notification: $title - $message" >&2
-    fi
-}
-
-copy_to_clipboard() {
-    local text="$1"
-    if command -v wl-copy &>/dev/null; then
-        echo -n "$text" | wl-copy
-        return 0
-    elif command -v xclip &>/dev/null; then
-        echo -n "$text" | xclip -selection clipboard
-        return 0
-    else
-        return 1
-    fi
-}
-
+# --- Helper Functions ---
 generate_svg_icon() {
     local color="$1"
     local icon_path="$2"
@@ -77,35 +67,34 @@ parse_colors_from_json() {
 }
 
 # --- Color Utils Actions ---
-
 pick_with_hyprpicker() {
     if ! command -v hyprpicker &>/dev/null; then
-        notify "Color Utils Error" "hyprpicker is not installed"
+        notify "$APP_TITLE" "hyprpicker is not installed"
         return 1
     fi
     local format="${1,,}"
     [[ -z "$format" ]] && format="hex"
-    notify "Color Utils" "Click on any pixel to pick its color..."
+    notify "$APP_TITLE" "Click on any pixel to pick its color..."
     local color
     if color=$(hyprpicker -a -f "$format" 2>/dev/null); then
-        if copy_to_clipboard "$color"; then notify "Color Utils" "Picked color ($format): <span weight='bold'>$color</span> (copied)"; else notify "Color Utils" "Picked color ($format): $color (failed to copy)"; fi
-    else notify "Color Utils" "Color picking cancelled"; fi
+        if copy_to_clipboard "$color"; then notify "$APP_TITLE" "Picked color ($format): <span weight='bold'>$color</span> (copied)"; else notify "$APP_TITLE" "Picked color ($format): $color (failed to copy)"; fi
+    else notify "$APP_TITLE" "Color picking cancelled"; fi
 }
 
 pick_with_niri() {
-    notify "Color Utils" "Click on any pixel to pick its color..."
+    notify "$APP_TITLE" "Click on any pixel to pick its color..."
     local color
     if color=$(niri msg pick-color 2>/dev/null); then
         color=$(echo "$color" | grep -oE '#[0-9A-Fa-f]{6}' | head -1)
         if [[ -n "$color" ]]; then
-            if copy_to_clipboard "$color"; then notify "Color Utils" "Picked color: <span weight='bold'>$color</span> (copied)"; else notify "Color Utils" "Picked color: $color (failed to copy)"; fi
-        else notify "Color Utils Error" "Failed to parse color from niri output"; fi
-    else notify "Color Utils" "Color picking cancelled"; fi
+            if copy_to_clipboard "$color"; then notify "$APP_TITLE" "Picked color: <span weight='bold'>$color</span> (copied)"; else notify "$APP_TITLE" "Picked color: $color (failed to copy)"; fi
+        else notify "$APP_TITLE" "Failed to parse color from niri output"; fi
+    else notify "$APP_TITLE" "Color picking cancelled"; fi
 }
 
 get_available_themes() {
     if [[ ! -d "$COLORS_DIR" ]]; then
-        notify "Color Utils Error" "Colors directory not found at $COLORS_DIR"
+        notify "$APP_TITLE" "Error: Colors directory not found at $COLORS_DIR"
         return 1
     fi
     
@@ -118,7 +107,7 @@ get_available_themes() {
     done
     
     if [[ -z "$themes" ]]; then
-        notify "Color Utils" "No theme files found in $COLORS_DIR"
+        notify "$APP_TITLE" "No theme files found in $COLORS_DIR"
         return 1
     fi
     
@@ -143,7 +132,7 @@ show_color_palette() {
     local colors_file="${2:-$COLORS_FILE}"
     
     if [[ ! -f "$colors_file" ]]; then
-        notify "Color Utils Error" "Colors file not found at $colors_file"
+        notify "$APP_TITLE" "Colors file not found at $colors_file"
         return 1
     fi
     
@@ -188,7 +177,7 @@ show_color_palette() {
     done < <(parse_colors_from_json "$colors_file")
 
     if [[ -z "$all_entries" ]]; then
-        notify "Color Utils" "No valid colors found in $colors_file"
+        notify "$APP_TITLE" "No valid colors found in $colors_file"
         return 0
     fi
 
@@ -198,15 +187,14 @@ show_color_palette() {
     if [[ -n "$selected" ]]; then
         local hex="${selected%% *}"
         if copy_to_clipboard "$hex"; then
-            notify "Color Utils" "Copied <span background='$hex' weight='bold'>$hex</span> to clipboard"
+            notify "$APP_TITLE" "Copied <span background='$hex' weight='bold'>$hex</span> to clipboard"
         else
-            notify "Color Utils" "Selected <span background='$hex' weight='bold'>$hex</span> (failed to copy to clipboard)"
+            notify "$APP_TITLE" "Selected <span background='$hex' weight='bold'>$hex</span> (failed to copy to clipboard)"
         fi
     fi
 }
 
 # --- Main Logic ---
-
 main() {
     while [[ $# -gt 0 ]]; do
         case "$1" in
@@ -232,11 +220,12 @@ main() {
 
     # Pre-flight checks before showing menu
     if ! command -v jq &>/dev/null; then
-        notify "Color Utils Error" "jq is not installed."
+        notify "$APP_TITLE" "Error: jq is not installed."
         exit 1
     fi
 
-    local main_menu_options=$(
+    local main_menu_options
+    main_menu_options=$(
         cat <<EOF
 ⊹ Pick Color [Hyprpicker] [HEX]
 ⊹ Pick Color [Hyprpicker] [RGB]
@@ -248,10 +237,11 @@ main() {
 EOF
     )
 
-    local num_main_options=$(echo -e "$main_menu_options" | wc -l)
+    local num_main_options
+    num_main_options=$(echo -e "$main_menu_options" | wc -l)
 
     local choice
-    choice=$(echo -e "$main_menu_options" | fuzzel --dmenu --prompt="λ " -l "$num_main_options") || exit 0
+    choice=$(echo -e "$main_menu_options" | fuzzel --dmenu --prompt="$(provide_fuzzel_prompt)" -l "$num_main_options") || exit 0
 
     case "$choice" in
     "⊹ Pick Color [Hyprpicker] [HEX]") pick_with_hyprpicker "HEX" ;;
@@ -262,7 +252,7 @@ EOF
     "⊹ Pick Color [Niri] [HEX]") pick_with_niri ;;
     "⊹ Color Palettes") show_theme_selection ;;
     *)
-        notify "Color Utils" "Invalid option selected: $choice"
+        notify "$APP_TITLE" "Invalid option selected: $choice"
         ;;
     esac
 }

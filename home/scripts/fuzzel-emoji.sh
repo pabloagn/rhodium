@@ -2,7 +2,20 @@
 
 set -euo pipefail
 
-# Define a list of emojis
+# --- Main Configuration ---
+APP_NAME="rhodium-emoji"
+APP_TITLE="Rhodium's Emoji Picker"
+
+# --- Imports ---
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+if [[ -f "$SCRIPT_DIR/shared-functions.sh" ]]; then
+    source "$SCRIPT_DIR/shared-functions.sh"
+else
+    echo "Error: shared-functions.sh not found" >&2
+    exit 1
+fi
+
+# Define emoji list
 EMOJI_LIST=$(
     cat <<EOF
 😀 Grinning Face
@@ -273,17 +286,26 @@ EMOJI_LIST=$(
 👳‍♀️ Woman Wearing Turban
 👲 Person with Skullcap
 🧕 Woman with Headscarf
-
 EOF
 )
 
-# Show Fuzzel in dmenu mode with emoji list
-chosen=$(echo "$EMOJI_LIST" | fuzzel --dmenu | awk '{print $1}')
+pick_emoji() {
+    local chosen
+    chosen=$(echo "$EMOJI_LIST" | fuzzel --dmenu --prompt="$(provide_fuzzel_prompt)" | awk '{print $1}')
 
-# Copy selected emoji to clipboard using wl-copy
-if [ -n "$chosen" ]; then
-    echo -n "$chosen" | wl-copy
-    notify-send "Emoji Picker" "Emoji copied to clipboard: $chosen"
-else
-    notify-send "Emoji Picker" "No emoji selected"
-fi
+    if [[ -n "$chosen" ]]; then
+        if copy_to_clipboard "$chosen"; then
+            notify "$APP_TITLE" "Emoji copied to clipboard: $chosen"
+        else
+            notify "$APP_TITLE" "Emoji selected: $chosen (failed to copy)"
+        fi
+    else
+        notify "$APP_TITLE" "No emoji selected"
+    fi
+}
+
+main() {
+    pick_emoji
+}
+
+main

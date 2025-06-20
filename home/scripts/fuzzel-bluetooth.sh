@@ -2,27 +2,35 @@
 
 set -euo pipefail
 
+# --- Main Configuration ---
+APP_NAME="rhodium-bluetooth"
+APP_TITLE="Rhodium's Bluetooth Utils"
+
+# --- Imports ---
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+if [[ -f "$SCRIPT_DIR/shared-functions.sh" ]]; then
+    source "$SCRIPT_DIR/shared-functions.sh"
+else
+    echo "Error: shared-functions.sh not found" >&2
+    exit 1
+fi
+
+declare -A menu_options=(
+    ["$(provide_fuzzel_entry) Enable Bluetooth"]="enable_bluetooth"
+    ["$(provide_fuzzel_entry) Disable Bluetooth"]="disable_bluetooth"
+    ["$(provide_fuzzel_entry) Scan for devices"]="scan_for_devices"
+    ["$(provide_fuzzel_entry) Connect device"]="connect_device"
+    ["$(provide_fuzzel_entry) Disconnect device"]="disconnect_device"
+    ["$(provide_fuzzel_entry) List interfaces"]="list_interfaces"
+    ["$(provide_fuzzel_entry) List connected devices"]="list_connected_devices"
+    ["$(provide_fuzzel_entry) Remove device"]="remove_device"
+)
+
 # --- Configuration ---
-# Fuzzel base dmenu arguments. These apply to all fuzzel invocations unless overridden.
-FUZZEL_DMENU_BASE_ARGS="--dmenu"
 
 # Maximum number of lines for dynamic lists (e.g., devices).
 # If more entries are found, fuzzel will enable scrolling/paging.
 MAX_DYNAMIC_LINES=15
-
-# --- Helper Functions ---
-
-# Function to send desktop notifications
-notify() {
-    local title="$1"
-    local message="$2"
-    if command -v notify-send &>/dev/null; then
-        notify-send "$title" "$message"
-    else
-        # Fallback if notify-send is not available
-        echo "Notification: $title - $message" >&2
-    fi
-}
 
 # Function to run fuzzel with given prompt, input data, and optional extra arguments
 # Usage: run_fuzzel "Prompt:" "Input string" "Extra fuzzel args (e.g., -l 5)"
@@ -33,10 +41,10 @@ run_fuzzel() {
 
     if [[ -z "$input_data" ]]; then
         # Use existing stdin pipe if input_data is empty
-        fuzzel $FUZZEL_DMENU_BASE_ARGS $extra_args --prompt "$prompt"
+        fuzzel "$(provide_fuzzel_mode)" "$extra_args" --prompt "$prompt"
     else
         # Echo input_data to fuzzel
-        echo "$input_data" | fuzzel $FUZZEL_DMENU_BASE_ARGS $extra_args --prompt "$prompt"
+        echo "$input_data" | fuzzel "$(provide_fuzzel_mode)" "$extra_args" --prompt "$prompt"
     fi
 }
 
@@ -45,7 +53,7 @@ run_fuzzel() {
 run_fuzzel_password() {
     local prompt="$1"
     local extra_args="${2:-}" # Optional additional arguments for fuzzel
-    fuzzel $FUZZEL_DMENU_BASE_ARGS $extra_args --password --prompt "$prompt"
+    fuzzel "$(provide_fuzzel_mode)" "$extra_args" --password --prompt "$prompt"
 }
 
 # --- Bluetooth Specific Helper Functions ---
@@ -78,32 +86,32 @@ get_battery_percentage() {
 
 # Enables Bluetooth power
 enable_bluetooth() {
-    notify "Bluetooth" "Enabling Bluetooth..."
+    notify "$APP_TITLE" "Enabling Bluetooth..."
     if bluetoothctl power on &>/dev/null; then
-        notify "Bluetooth" "Bluetooth enabled."
+        notify "$APP_TITLE" "Bluetooth enabled."
     else
-        notify "Bluetooth Error" "Failed to enable Bluetooth. Check bluetooth service status and permissions."
+        notify "$APP_TITLE" "Failed to enable Bluetooth. Check bluetooth service status and permissions."
     fi
 }
 
 # Disables Bluetooth power
 disable_bluetooth() {
-    notify "Bluetooth" "Disabling Bluetooth..."
+    notify "$APP_TITLE" "Disabling Bluetooth..."
     if bluetoothctl power off &>/dev/null; then
-        notify "Bluetooth" "Bluetooth disabled."
+        notify "$APP_TITLE" "Bluetooth disabled."
     else
-        notify "Bluetooth Error" "Failed to disable Bluetooth. Check bluetooth service status and permissions."
+        notify "$APP_TITLE" "Failed to disable Bluetooth. Check bluetooth service status and permissions."
     fi
 }
 
 # Starts scanning for discoverable devices
 scan_for_devices() {
-    notify "Bluetooth" "Starting device discovery (this runs in the background)..."
+    notify "$APP_TITLE" "Starting device discovery (this runs in the background)..."
 
     if echo -e "scan on\nquit" | bluetoothctl &>/dev/null; then
-        notify "Bluetooth" "Device discovery initiated. Use 'Connect device' to see found devices."
+        notify "$APP_TITLE" "Device discovery initiated. Use 'Connect device' to see found devices."
     else
-        notify "Bluetooth Error" "Failed to initiate discovery. Bluetooth daemon might not be running or permissions are insufficient."
+        notify "$APP_TITLE" "Failed to initiate discovery. Bluetooth daemon might not be running or permissions are insufficient."
     fi
 }
 
@@ -111,7 +119,7 @@ scan_for_devices() {
 list_interfaces() {
     local controllers_raw=$(bluetoothctl list 2>/dev/null)
     if [[ -z "$controllers_raw" ]]; then
-        notify "Bluetooth" "No Bluetooth interfaces found. Is Bluetooth enabled?"
+        notify "$APP_TITLE" "No Bluetooth interfaces found. Is Bluetooth enabled?"
         return 0
     fi
 
@@ -128,7 +136,7 @@ list_interfaces() {
     local menu_lines_arg="-l $num_options" # Exact height
 
     if [[ $num_options -eq 0 ]]; then
-        notify "Bluetooth" "No active Bluetooth controllers found to display."
+        notify "$APP_TITLE" "No active Bluetooth controllers found to display."
         return 0
     fi
 
@@ -140,7 +148,7 @@ list_interfaces() {
 list_connected_devices() {
     local connected_devices_macs_raw=$(bluetoothctl devices Connected 2>/dev/null | awk '{print $2}')
     if [[ -z "$connected_devices_macs_raw" ]]; then
-        notify "Bluetooth" "No devices currently connected."
+        notify "$APP_TITLE" "No devices currently connected."
         return 0
     fi
 
@@ -164,7 +172,7 @@ list_connected_devices() {
     local menu_lines_arg="-l $display_lines"
 
     if [[ $num_options -eq 0 ]]; then
-        notify "Bluetooth" "No devices currently connected to display."
+        notify "$APP_TITLE" "No devices currently connected to display."
         return 0
     fi
 
@@ -174,12 +182,12 @@ list_connected_devices() {
 
 # Connects to a selected Bluetooth device
 connect_device() {
-    notify "Bluetooth" "Fetching available devices..."
+    notify "$APP_TITLE" "Fetching available devices..."
     # 'devices' lists paired AND discovered devices. We want everything that's available.
     local available_devices_raw=$(bluetoothctl devices 2>/dev/null)
 
     if [[ -z "$available_devices_raw" ]]; then
-        notify "Bluetooth" "No available devices found. Try 'Scan for devices' first, then retry."
+        notify "$APP_TITLE" "No available devices found. Try 'Scan for devices' first, then retry."
         return 0
     fi
 
@@ -216,7 +224,7 @@ connect_device() {
     done <<<"$available_devices_raw"
 
     if [[ ${#formatted_list_array[@]} -eq 0 ]]; then
-        notify "Bluetooth" "No new devices to connect to. All found devices are already connected or none discovered."
+        notify "$APP_TITLE" "No new devices to connect to. All found devices are already connected or none discovered."
         return 0
     fi
 
@@ -230,7 +238,7 @@ connect_device() {
     local selected_mac="${device_map["$selected_line"]}"
 
     if [[ -z "$selected_mac" ]]; then
-        notify "Bluetooth Error" "Invalid selection or device MAC not found."
+        notify "$APP_TITLE" "Invalid selection or device MAC not found."
         return 1
     fi
 
@@ -240,25 +248,25 @@ connect_device() {
     local is_connected=$(echo "$current_status_info" | grep -c 'Connected: yes')
 
     if [[ "$is_connected" -gt 0 ]]; then
-        notify "Bluetooth" "$(get_device_alias "$selected_mac") is already connected."
+        notify "$APP_TITLE" "$(get_device_alias "$selected_mac") is already connected."
         return 0
     fi
 
     # Attempt to pair if not already paired
     if [[ "$is_paired" -eq 0 ]]; then
-        notify "Bluetooth" "Attempting to pair with $(get_device_alias "$selected_mac")... (Watch for PIN/Passkey prompts if required)"
+        notify "$APP_TITLE" "Attempting to pair with $(get_device_alias "$selected_mac")... (Watch for PIN/Passkey prompts if required)"
         if ! bluetoothctl pair "$selected_mac" &>/dev/null; then
-            notify "Bluetooth Error" "Failed to pair with $(get_device_alias "$selected_mac"). Device might be out of range, require a PIN/Passkey, or permissions issue."
+            notify "$APP_TITLE" "Failed to pair with $(get_device_alias "$selected_mac"). Device might be out of range, require a PIN/Passkey, or permissions issue."
             return 1
         fi
-        notify "Bluetooth" "Paired with $(get_device_alias "$selected_mac"). Attempting to connect..."
+        notify "$APP_TITLE" "Paired with $(get_device_alias "$selected_mac"). Attempting to connect..."
     fi
 
     # Attempt to connect
     if bluetoothctl connect "$selected_mac" &>/dev/null; then
-        notify "Bluetooth" "Successfully connected to $(get_device_alias "$selected_mac")."
+        notify "$APP_TITLE" "Successfully connected to $(get_device_alias "$selected_mac")."
     else
-        notify "Bluetooth Error" "Failed to connect to $(get_device_alias "$selected_mac"). Device might be off, out of range, or failed to establish connection."
+        notify "$APP_TITLE" "Failed to connect to $(get_device_alias "$selected_mac"). Device might be off, out of range, or failed to establish connection."
     fi
 }
 
@@ -266,7 +274,7 @@ connect_device() {
 disconnect_device() {
     local connected_devices_macs_raw=$(bluetoothctl devices Connected 2>/dev/null | awk '{print $2}')
     if [[ -z "$connected_devices_macs_raw" ]]; then
-        notify "Bluetooth" "No devices currently connected to disconnect."
+        notify "$APP_TITLE" "No devices currently connected to disconnect."
         return 0
     fi
 
@@ -290,15 +298,15 @@ disconnect_device() {
     local selected_mac="${device_map["$selected_line"]}"
 
     if [[ -z "$selected_mac" ]]; then
-        notify "Bluetooth Error" "Invalid selection or device MAC not found."
+        notify "$APP_TITLE" "Invalid selection or device MAC not found."
         return 1
     fi
 
-    notify "Bluetooth" "Disconnecting from $(get_device_alias "$selected_mac")..."
+    notify "$APP_TITLE" "Disconnecting from $(get_device_alias "$selected_mac")..."
     if bluetoothctl disconnect "$selected_mac" &>/dev/null; then
-        notify "Bluetooth" "Disconnected from $(get_device_alias "$selected_mac")."
+        notify "$APP_TITLE" "Disconnected from $(get_device_alias "$selected_mac")."
     else
-        notify "Bluetooth Error" "Failed to disconnect from $(get_device_alias "$selected_mac")."
+        notify "$APP_TITLE" "Failed to disconnect from $(get_device_alias "$selected_mac")."
     fi
 }
 
@@ -306,7 +314,7 @@ disconnect_device() {
 remove_device() {
     local paired_devices_macs_raw=$(bluetoothctl devices Paired 2>/dev/null | awk '{print $2}')
     if [[ -z "$paired_devices_macs_raw" ]]; then
-        notify "Bluetooth" "No paired devices to remove."
+        notify "$APP_TITLE" "No paired devices to remove."
         return 0
     fi
 
@@ -330,70 +338,37 @@ remove_device() {
     local selected_mac="${device_map["$selected_line"]}"
 
     if [[ -z "$selected_mac" ]]; then
-        notify "Bluetooth Error" "Invalid selection or device MAC not found."
+        notify "$APP_TITLE" "Invalid selection or device MAC not found."
         return 1
     fi
 
-    notify "Bluetooth" "Removing $(get_device_alias "$selected_mac")..."
+    notify "$APP_TITLE" "Removing $(get_device_alias "$selected_mac")..."
     if bluetoothctl remove "$selected_mac" &>/dev/null; then
-        notify "Bluetooth" "Successfully removed $(get_device_alias "$selected_mac")."
+        notify "$APP_TITLE" "Successfully removed $(get_device_alias "$selected_mac")."
     else
-        notify "Bluetooth Error" "Failed to remove $(get_device_alias "$selected_mac")."
+        notify "$APP_TITLE" "Failed to remove $(get_device_alias "$selected_mac")."
     fi
 }
 
 # --- Main Logic ---
-
 main() {
-    local main_menu_options=$(
-        cat <<EOF
-Enable Bluetooth
-Disable Bluetooth
-Scan for devices
-Connect device
-Disconnect device
-List interfaces
-List connected devices
-Remove device
-EOF
-    )
-    # Calculate the exact number of lines for the main menu
-    local num_main_options=$(echo -e "$main_menu_options" | wc -l)
-    local main_menu_specific_args="-l $num_main_options"
+    while true; do
+        local menu_items=""
+        for key in "${!menu_options[@]}"; do
+            menu_items="${menu_items}${key}\n"
+        done
 
-    local choice
-    # Pass the calculated line count to run_fuzzel for the main menu
-    choice=$(run_fuzzel "Bluetooth Menu: " "$main_menu_options" "$main_menu_specific_args") || exit 0
+        local selected
+        selected=$(echo -e "${menu_items}$(provide_fuzzel_entry) Exit" | fuzzel --dmenu --prompt="$(provide_fuzzel_prompt)" -l 9)
 
-    case "$choice" in
-    "Enable Bluetooth")
-        enable_bluetooth
-        ;;
-    "Disable Bluetooth")
-        disable_bluetooth
-        ;;
-    "Scan for devices")
-        scan_for_devices
-        ;;
-    "Connect device")
-        connect_device
-        ;;
-    "Disconnect device")
-        disconnect_device
-        ;;
-    "List interfaces")
-        list_interfaces
-        ;;
-    "List connected devices")
-        list_connected_devices
-        ;;
-    "Remove device")
-        remove_device
-        ;;
-    *)
-        notify "Bluetooth" "Invalid option selected: $choice"
-        ;;
-    esac
+        # Exit if cancelled or Exit selected
+        [[ -z "$selected" ]] || [[ "$selected" == "$(provide_fuzzel_entry) Exit" ]] && break
+
+        # Execute selected function
+        if [[ -n "${menu_options[$selected]}" ]]; then
+            ${menu_options[$selected]}
+        fi
+    done
 }
 
 main

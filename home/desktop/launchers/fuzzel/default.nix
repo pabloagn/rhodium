@@ -7,7 +7,7 @@
         font = "JetBrainsMono Nerd Font:size=14";
         dpi-aware = false;
         prompt = "'λ '";
-        icons-enabled = false;
+        icons-enabled = true;
         show-actions = false;
         sort-result = true;
         match-mode = "fuzzy";
