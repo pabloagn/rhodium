@@ -5,25 +5,13 @@ set +u
 
 # --- Configuration ---
 APP_NAME="fuzzel-colors"
-NOTIFY="notify-desktop --app-name=$APP_NAME"
-
-# Set up the storage directory and file
+THEME_NAME="Kanso"
 CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/$APP_NAME"
-# HISTORY_FILE="$CONFIG_DIR/colors.txt"
-# HISTORY_NUM=10
 ICONS_DIR="$CONFIG_DIR/icons"
 
-# Create directories and history if they don't exist
 mkdir -p "$ICONS_DIR"
-touch "$HISTORY_FILE"
 
-# ------------------------------------------------------------------------------------
-
-# Fuzzel base dmenu arguments. These apply to all fuzzel invocations unless overridden.
 FUZZEL_DMENU_BASE_ARGS="--dmenu"
-
-# Maximum number of lines for dynamic lists
-MAX_DYNAMIC_LINES=20
 
 # Colors file path
 COLORS_FILE="$HOME/dev/rhodium/home/assets/colors/colors-kanso.json"
@@ -81,71 +69,24 @@ function generate_svg_icon() {
     if [ ! -f "$icon_path" ]; then
         cat >"$icon_path" <<EOF
 <svg width="128" height="128" xmlns="http://www.w3.org/2000/svg">
-  <rect width="128" height="128" fill="#$color" />
+  <rect width="128" height="128" fill="$color" />
 </svg>
 EOF
     fi
 }
 
-# Function to parse colors from the JSON file
 parse_colors_from_json() {
     if [[ ! -f "$COLORS_FILE" ]]; then
         notify "Color Utils Error" "Colors file not found at $COLORS_FILE"
         return 1
     fi
 
-    # Parse the JSON file to extract color definitions using jq
-    # 'to_entries[]' converts { "name": "value" } to [ { "key": "name", "value": "value" } ]
-    # '.key:\(.value)' formats each entry as "name:#hex"
     if ! command -v jq &>/dev/null; then
         notify "Color Utils Error" "jq is not installed, required to parse JSON colors file."
         return 1
     fi
 
-    jq -r 'to_entries[] | "\(.key):\(.value)"' "$COLORS_FILE"
-}
-
-# Function to create color box using ANSI escape codes for fuzzel
-create_color_entry() {
-    local name="$1"
-    local hex="$2"
-
-    # Convert hex to RGB
-    local r=$((16#${hex:1:2}))
-    local g=$((16#${hex:3:2}))
-    local b=$((16#${hex:5:2}))
-
-    # Create a colored block using ANSI escape codes
-    # Format: [colored block] colorName (hex)
-    printf "\033[48;2;%d;%d;%dm    \033[0m %s (%s)" "$r" "$g" "$b" "$name" "$hex"
-}
-
-# Function to parse colors from the Nix file
-parse_colors_from_nix() {
-    if [[ ! -f "$COLORS_FILE" ]]; then
-        notify "Color Utils Error" "Colors file not found at $COLORS_FILE"
-        return 1
-    fi
-
-    # Parse the Nix file to extract color definitions
-    # This regex matches lines like: colorName = "#HEXCODE";
-    grep -E '^\s*[a-zA-Z0-9_]+\s*=\s*"#[0-9A-Fa-f]{6}"' "$COLORS_FILE" |
-        sed -E 's/^\s*([a-zA-Z0-9_]+)\s*=\s*"(#[0-9A-Fa-f]{6})".*/\1:\2/'
-}
-
-# Function to create color box using ANSI escape codes for fuzzel
-create_color_entry() {
-    local name="$1"
-    local hex="$2"
-
-    # Convert hex to RGB
-    local r=$((16#${hex:1:2}))
-    local g=$((16#${hex:3:2}))
-    local b=$((16#${hex:5:2}))
-
-    # Create a colored block using ANSI escape codes
-    # Format: [colored block] colorName (hex)
-    printf "\033[48;2;%d;%d;%dm    \033[0m %s (%s)" "$r" "$g" "$b" "$name" "$hex"
+    jq -r 'to_entries[] | "\(.key)\t\(.value)"' "$COLORS_FILE"
 }
 
 # --- Color Utils Actions ---
@@ -164,29 +105,16 @@ pick_with_hyprpicker() {
 
     local color
     if color=$(hyprpicker -a -f "$format" 2>/dev/null); then
-        notify "Color Utils" "Picked color ($format): $color"
+        # hyprpicker outputs with # for hex, e.g., "#RRGGBB"
+        if copy_to_clipboard "$color"; then
+            notify "Color Utils" "Picked color ($format): $color (copied to clipboard)"
+        else
+            notify "Color Utils" "Picked color ($format): $color (failed to copy to clipboard)"
+        fi
     else
         notify "Color Utils" "Color picking cancelled"
     fi
 }
-
-# Pick color using hyprpicker
-# pick_with_hyprpicker() {
-#     if ! command -v hyprpicker &>/dev/null; then
-#         notify "Color Utils Error" "hyprpicker is not installed"
-#         return 1
-#     fi
-#
-#     notify "Color Utils" "Click on any pixel to pick its color..."
-#
-#     local color
-#     if color=$(hyprpicker -a 2>/dev/null); then
-#         # hyprpicker with -a flag auto-copies, but let's ensure it's in our format
-#         notify "Color Utils" "Picked color: $color (copied to clipboard)"
-#     else
-#         notify "Color Utils" "Color picking cancelled"
-#     fi
-# }
 
 # Pick color using niri
 pick_with_niri() {
@@ -212,8 +140,7 @@ pick_with_niri() {
     fi
 }
 
-# Show color palette from file
-show_color_palette() {
+build_color_palette() {
     local colors_data
     if ! colors_data=$(parse_colors_from_json); then
         return 1
@@ -224,34 +151,29 @@ show_color_palette() {
         return 1
     fi
 
-    # Create formatted color entries
-    local formatted_entries=""
-    while IFS=':' read -r name hex; do
-        if [[ -n "$name" && -n "$hex" ]]; then
-            formatted_entries+="$(create_color_entry "$name" "$hex")"$'\n'
+    echo "$colors_data" | while IFS=$'\t' read -r name hex; do
+        if [[ -z "$hex" ]]; then
+            continue
         fi
-    done <<<"$colors_data"
 
-    # Remove trailing newline
-    formatted_entries="${formatted_entries%$'\n'}"
+        if [ ! -e "$ICONS_DIR/$hex.svg" ]; then
+            generate_svg_icon "$hex"
+        fi
 
-    # Count number of colors
-    local num_colors=$(echo -e "$formatted_entries" | wc -l)
-    local display_lines=$((num_colors < MAX_DYNAMIC_LINES ? num_colors : MAX_DYNAMIC_LINES))
+        echo -e "$hex  $name\0icon\x1f$ICONS_DIR/$hex.svg"
+    done
+}
 
-    # Show the palette
+show_color_palette() {
     local selected
-    # IMPORTANT: Add --ansi-escape-sequences here!
-    if selected=$(run_fuzzel "Select color: " "$formatted_entries" "--ansi-escape-sequences -l $display_lines"); then
-        # Extract hex code from selection (it's in parentheses)
-        local hex_code=$(echo "$selected" | grep -oE '#[0-9A-Fa-f]{6}' | tail -1)
+    selected=$(build_color_palette | fuzzel --dmenu --prompt="Select color: " -l 10)
 
-        if [[ -n "$hex_code" ]]; then
-            if copy_to_clipboard "$hex_code"; then
-                notify "Color Utils" "Copied $hex_code to clipboard"
-            else
-                notify "Color Utils" "Selected $hex_code (failed to copy to clipboard)"
-            fi
+    if [[ -n "$selected" ]]; then
+        local hex="${selected%% *}"
+        if copy_to_clipboard "$hex"; then
+            notify "Color Utils" "Copied $hex to clipboard"
+        else
+            notify "Color Utils" "Selected $hex (failed to copy to clipboard)"
         fi
     fi
 }
@@ -267,7 +189,7 @@ main() {
 ⊹ Pick Color [Hyprpicker] [HSL]
 ⊹ Pick Color [Hyprpicker] [HSV]
 ⊹ Pick Color [Niri] [HEX]
-⊹ Color Palette [Kanso]
+⊹ Color Palette [${THEME_NAME}]
 EOF
     )
 
@@ -298,7 +220,7 @@ EOF
     "⊹ Pick Color [Niri] [HEX]")
         pick_with_niri
         ;;
-    "⊹ Color Palette [Kanso]")
+    "⊹ Color Palette [${THEME_NAME}]")
         show_color_palette
         ;;
     *)
