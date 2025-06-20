@@ -14,6 +14,7 @@
     # Extra Modules
     ../../home/environment
     ../../home/modules
+    ../../home/services
 
     # Main Modules
     ../../home/apps
