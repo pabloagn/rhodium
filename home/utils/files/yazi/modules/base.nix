@@ -1,321 +1,381 @@
 {...}: {
+  # ===== General =====
+  input = {
+    cd_offset = [0 2 50 3];
+    cd_origin = "top-center";
+    cd_title = "Change directory:";
+    create_offset = [0 2 50 3];
+    create_origin = "top-center";
+    create_title = ["Create:" "Create:"];
+    cursor_blink = false;
+    delete_offset = [0 2 50 3];
+    delete_origin = "top-center";
+    delete_title = "Delete {n} selected file{s} permanently? (y/N)";
+    filter_offset = [0 2 50 3];
+    filter_origin = "top-center";
+    filter_title = "Filter:";
+    find_offset = [0 2 50 3];
+    find_origin = "top-center";
+    find_title = ["Find next:" "Find previous:"];
+    overwrite_offset = [0 2 50 3];
+    overwrite_origin = "top-center";
+    overwrite_title = "Overwrite an existing file? (y/N)";
+    quit_offset = [0 2 50 3];
+    quit_origin = "top-center";
+    quit_title = "{n} task{s} running, sure to quit? (y/N)";
+    rename_offset = [0 1 50 3];
+    rename_origin = "hovered";
+    rename_title = "Rename:";
+    search_offset = [0 2 50 3];
+    search_origin = "top-center";
+    search_title = "Search via {n}:";
+    shell_offset = [0 2 50 3];
+    shell_origin = "top-center";
+    shell_title = ["Shell:" "Shell (block):"];
+    trash_offset = [0 2 50 3];
+    trash_origin = "top-center";
+    trash_title = "Move {n} selected file{s} to trash? (y/N)";
+  };
+
+  mgr = {
+    linemode = "none";
+    mouse_events = ["click" "scroll" "touch" "move" "drag"];
+    ratio = [1 4 3];
+    scrolloff = 5;
+    show_hidden = false;
+    show_symlink = true;
+    sort_by = "alphabetical";
+    sort_dir_first = true;
+    sort_reverse = false;
+    sort_sensitive = false;
+    sort_translit = false;
+  };
+
+  select = {
+    open_offset = [0 1 50 7];
+    open_origin = "hovered";
+    open_title = "Open with:";
+  };
+
+  preview = {
+    cache_dir = "\$XDG_CACHE_HOME/yazi";
+    image_filter = "nearest";
+    image_quality = 70;
+    max_width = 2000;
+    sixel_fraction = 15;
+    tab_size = 2;
+    ueberzug_offset = [0 0 0 0];
+    ueberzug_scale = 1;
+    image_delay = 20;
+  };
+
+  tasks = {
+    bizarre_retry = 5;
+    image_alloc = 536870912;
+    image_bound = [0 0];
+    macro_workers = 25;
+    micro_workers = 10;
+    suppress_preload = false;
+  };
+
+  which = {
+    sort_by = "none";
+    sort_reverse = false;
+    sort_sensitive = false;
+    sort_translit = false;
+  };
+
   log = {
     enabled = false;
   };
 
-  mgr = {
-    ratio = [1 4 3];
-    sort_by = "alphabetical"; # Options: alphabetical, natural, mtime, ctime, atime, size, none
-    sort_sensitive = false;
-    sort_reverse = false;
-    sort_dir_first = true;
-    sort_translit = false; # Use transliteration for sorting (e.g., treat 'é' like 'e')
-    linemode = "none"; # Options: "none", "size", "permissions", "collapse" (icons only)
-    show_hidden = false; # Set to true to always show hidden files by default
-    show_symlink = true;
-    scrolloff = 5; # Keep N lines visible above/below cursor when scrolling
-    mouse_events = ["click" "scroll"];
-    # _v4_suppress_deprecation_warnings = true; # Ignore deprecation warnings (plugins are noisy and maintainers have lives)
-  };
-
-  status = {
-    component_left = [
-      {
-        type = "mode";
-        format = " {} ";
-      }
-      {
-        type = "custom";
-        command = "git_branch_display";
-        format = "{}";
-      }
-      {
-        type = "cwd";
-        format = " {} ";
-      }
-    ];
-    component_middle = [
-      {
-        type = "position";
-        format = " {}/{} ";
-      }
-    ];
-    component_right = [
-      {
-        type = "selection";
-        format = " {} ";
-      }
-      {
-        type = "tasks";
-        format = " Tasks: {} ";
-      }
-    ];
-  };
-
-  preview = {
-    tab_size = 2;
-    max_width = 2000;
-    # max_height = 900;
-    cache_dir = ""; # Leave empty to use default cache location
-    image_filter = "triangle"; # Affects image scaling quality. Options: nearest, triangle, catmull-rom, gaussian, lanczos3
-    image_quality = 90; # For formats supporting quality settings (e.g., JPEG)
-    sixel_fraction = 15; # For sixel image rendering
-    ueberzug_scale = 1; # Adjust scale factor for ueberzug image previews if needed
-    ueberzug_offset = [0 0 0 0]; # [x, y, width, height] offset for ueberzug
-  };
-
+  # ===== Opener Definitions =====
   opener = {
+    # --- Code Editors ---
     edit = [
       {
-        run = "\${EDITOR:=nvim} \"$@\"";
-        desc = "\${EDITOR:-nvim}";
-        block = true;
+        desc = "Edit with \$EDITOR";
         for = "unix";
-      } # nvim is fallback
+        block = true;
+        run = "\${EDITOR:=nvim} \"$@\"";
+      }
     ];
+
+    edit-helix = [
+      {
+        desc = "Edit with Helix";
+        for = "unix";
+        block = true;
+        run = "hx \"$@\"";
+      }
+    ];
+
+    edit-zed = [
+      {
+        desc = "Edit with Zed";
+        for = "unix";
+        block = true;
+        run = "zeditor \"$@\"";
+      }
+    ];
+
+    edit-nano = [
+      {
+        desc = "Edit with Nano";
+        for = "unix";
+        block = true;
+        run = "nano \"$@\"";
+      }
+    ];
+
+    edit-emacs = [
+      {
+        desc = "Edit with Emacs";
+        for = "unix";
+        block = true;
+        run = "emacs \"$@\"";
+      }
+    ];
+
+    # --- Web Browsers (with new window flags) ---
+    browser-personal = [
+      {
+        desc = "Firefox (Personal)";
+        for = "unix";
+        run = "firefox -p Personal -new-window \"$@\"";
+      }
+    ];
+
+    browser-work = [
+      {
+        desc = "Firefox (SolenoidLabs)";
+        for = "unix";
+        run = "firefox -p SolenoidLabs -new-window \"$@\"";
+      }
+    ];
+
+    browser-private = [
+      {
+        desc = "Firefox (Private)";
+        for = "unix";
+        run = "firefox -p Personal --private-window \"$@\"";
+      }
+    ];
+
+    # --- Image Viewers/Editors ---
     open = [
       {
-        run = "xdg-open \"$1\"";
-        desc = "Open";
+        desc = "System default";
         for = "linux";
+        run = "xdg-open \"$1\"";
       }
     ];
+
+    imv = [
+      {
+        desc = "imv (direct)";
+        for = "unix";
+        run = "imv \"$@\"";
+      }
+    ];
+
+    imagemagick = [
+      {
+        desc = "ImageMagick (display)";
+        for = "unix";
+        run = "display \"$@\"";
+      }
+    ];
+
+    gimp = [
+      {
+        desc = "GIMP";
+        for = "unix";
+        run = "gimp \"$@\"";
+      }
+    ];
+
+    # --- File Managers ---
+    thunar = [
+      {
+        desc = "Open in Thunar";
+        for = "linux";
+        run = "thunar \"$@\"";
+      }
+    ];
+
     reveal = [
       {
-        run = "xdg-open \"$(dirname \"$1\")\"";
-        desc = "Reveal";
+        desc = "Show in file manager";
         for = "linux";
+        run = "xdg-open \"$(dirname \"$1\")\"";
       }
     ];
-    extract = [
-      {
-        run = "ya pub extract --list \"$@\"";
-        desc = "Extract here";
-        for = "unix";
-      }
-    ];
+
+    # --- Media Players ---
     play = [
       {
-        run = "mpv --force-window \"$@\"";
-        orphan = true;
+        desc = "Play with mpv";
         for = "unix";
+        orphan = true;
+        run = "mpv --force-window \"$@\"";
+      }
+    ];
+
+    vlc = [
+      {
+        desc = "Play with VLC";
+        for = "unix";
+        orphan = true;
+        run = "vlc \"$@\"";
+      }
+    ];
+
+    # --- Archive Tools ---
+    extract = [
+      {
+        desc = "Extract here";
+        for = "unix";
+        run = "ya pub extract --list \"$@\"";
       }
     ];
   };
 
+  # ===== Open Rules =====
   open = {
     rules = [
-      {
-        mime = "text/markdown";
-        use = "markdown";
-      }
-
-      # Nushell
-      {
-        name = "*.nu";
-        use = [
-          "edit"
-          "reveal"
-        ];
-      }
-
-      # Fish Shell
-      {
-        name = "*.fish";
-        use = [
-          "edit"
-          "reveal"
-        ];
-      }
-
+      # --- Directories ---
       {
         name = "*/";
-        use = [
-          "edit"
-          "open"
-          "reveal"
-        ];
+        use = ["edit" "edit-helix" "edit-zed" "edit-nano" "edit-emacs" "thunar" "reveal"];
       }
 
-      # Folder
-      # Text (Markdown handled separately by previewer rule)
+      # --- Code Files (by extension) ---
+      {
+        name = "*.{js,jsx,ts,tsx,py,rs,go,c,cpp,h,hpp,java,rb,php,lua,vim,sh,bash,zsh,fish,nu}";
+        use = ["edit" "edit-helix" "edit-zed" "edit-nano" "edit-emacs" "reveal"];
+      }
+
+      {
+        name = "*.{json,yaml,yml,toml,ini,conf,cfg}";
+        use = ["edit" "edit-helix" "edit-zed" "edit-nano" "edit-emacs" "reveal"];
+      }
+
+      {
+        name = "*.{md,markdown,rst,tex}";
+        use = ["edit" "edit-helix" "edit-zed" "edit-nano" "edit-emacs" "reveal"];
+      }
+
+      {
+        name = "*.{css,scss,sass,less}";
+        use = ["edit" "edit-helix" "edit-zed" "edit-nano" "edit-emacs" "reveal"];
+      }
+
+      {
+        name = "*.{xml,sql,graphql,proto}";
+        use = ["edit" "edit-helix" "edit-zed" "edit-nano" "edit-emacs" "reveal"];
+      }
+
+      # --- HTML Files (special case with browsers) ---
+      {
+        name = "*.{html,htm,xhtml}";
+        use = ["edit" "edit-helix" "edit-zed" "edit-nano" "edit-emacs" "browser-personal" "browser-work" "browser-private" "reveal"];
+      }
+
+      # --- SVG Files (special case - both image and code) ---
+      {
+        name = "*.svg";
+        use = ["open" "imagemagick" "gimp" "edit" "edit-helix" "edit-zed" "edit-nano" "edit-emacs" "reveal"];
+      }
+
+      # --- Images (NO EDIT OPTIONS) ---
+      {
+        name = "*.{jpg,jpeg,png,gif,webp,bmp,ico,tiff,psd,avif,heic,heif}";
+        use = ["open" "imagemagick" "gimp" "feh" "eog" "reveal"];
+      }
+
+      # --- Code Files (by MIME type) ---
       {
         mime = "text/*";
-        use = [
-          "edit"
-          "reveal"
-        ];
-      }
-
-      # Image
-      {
-        mime = "image/*";
-        use = [
-          "open"
-          "reveal"
-        ];
-      }
-
-      # Media
-      {
-        mime = "{audio,video}/*";
-        use = [
-          "play"
-          "reveal"
-        ];
-      }
-
-      # Archive
-      {
-        mime = "application/{,g}zip";
-        use = [
-          "extract"
-          "reveal"
-        ];
-      }
-
-      {
-        mime = "application/x-{tar,bzip*,7z-compressed,xz,rar}";
-        use = [
-          "extract"
-          "reveal"
-        ];
-      }
-
-      # JSON / JS
-      {
-        mime = "application/{json,x-ndjson}";
-        use = [
-          "edit"
-          "reveal"
-        ];
+        use = ["edit" "edit-helix" "edit-zed" "edit-nano" "edit-emacs" "reveal"];
       }
 
       {
         mime = "*/javascript";
-        use = [
-          "edit"
-          "reveal"
-        ];
+        use = ["edit" "edit-helix" "edit-zed" "edit-nano" "edit-emacs" "reveal"];
       }
 
-      # PDF
+      {
+        mime = "application/{json,x-ndjson}";
+        use = ["edit" "edit-helix" "edit-zed" "edit-nano" "edit-emacs" "reveal"];
+      }
+
+      # --- Media Files ---
+      {
+        mime = "image/*";
+        use = ["open" "imagemagick" "gimp" "feh" "eog" "reveal"];
+      }
+
+      {
+        mime = "{audio,video}/*";
+        use = ["play" "vlc" "reveal"];
+      }
+
+      # --- Archives ---
+      {
+        mime = "application/{,g}zip";
+        use = ["extract" "reveal"];
+      }
+
+      {
+        mime = "application/x-{tar,bzip*,7z-compressed,xz,rar}";
+        use = ["extract" "reveal"];
+      }
+
+      # --- PDFs ---
       {
         mime = "application/pdf";
-        use = [
-          "open"
-          "edit"
-          "reveal"
-        ];
+        use = ["open" "reveal"];
       }
 
-      # Empty file
+      # --- Empty Files ---
       {
         mime = "inode/x-empty";
-        use = [
-          "edit"
-          "reveal"
-        ];
+        use = ["edit" "edit-helix" "edit-zed" "edit-nano" "edit-emacs" "reveal"];
       }
 
-      # Fallback
+      # --- Catch-all Rule ---
       {
         name = "*";
-        use = [
-          "edit"
-          "open"
-          "reveal"
-        ];
+        use = ["open" "reveal"];
       }
     ];
   };
 
-  tasks = {
-    micro_workers = 10; # For UI-related tasks
-    macro_workers = 25; # For background tasks like previews
-    bizarre_retry = 5; # Retries for potentially recoverable errors
-    image_alloc = 536870912; # 512MB - Max memory for image decoding pool
-    image_bound = [0 0]; # Max dimensions for image previews (0 = unbounded)
-    suppress_preload = false; # Set to true to disable preloading previews for performance
-  };
-
+  # ===== Plugin Configurations =====
   plugin = {
-    prepend_fetchers = [
-      # Git Plugin
-      {
-        id = "git";
-        name = "*";
-        run = "git";
-      } # For files
-      {
-        id = "git";
-        name = "*/";
-        run = "git";
-      } # For directories (to show if they contain changes)
-    ];
-
-    prepend_previewers = [
-      # Archive previewer
-      {
-        mime = "application/*zip";
-        run = "ouch";
-      }
-      {
-        mime = "application/x-tar";
-        run = "ouch";
-      }
-      {
-        mime = "application/x-bzip2";
-        run = "ouch";
-      }
-      {
-        mime = "application/x-7z-compressed";
-        run = "ouch";
-      }
-      {
-        mime = "application/x-rar";
-        run = "ouch";
-      }
-      {
-        mime = "application/x-xz";
-        run = "ouch";
-      }
-      {
-        mime = "application/xz";
-        run = "ouch";
-      }
-      {
-        mime = "text/csv";
-        run = "miller";
-      }
-    ];
-
-    # -- Preloaders prepare data for previewers (e.g., decode images) --
+    # --- Preloaders ---
     preloaders = [
-      # Image
       {
         mime = "image/{avif,heic,jxl,svg+xml}";
         run = "magick";
-      } # Use ImageMagick for these
+      }
 
       {
         mime = "image/*";
         run = "image";
-      } # Use internal Yazi image decoder
+      }
 
-      # Video
       {
         mime = "video/*";
         run = "video";
       }
 
-      # PDF
       {
         mime = "application/pdf";
         run = "pdf";
       }
 
-      # Font
       {
         mime = "font/*";
         run = "font";
@@ -327,15 +387,71 @@
       }
     ];
 
+    # --- Fetchers ---
+    prepend_fetchers = [
+      {
+        id = "git";
+        name = "*";
+        run = "git";
+      }
+
+      {
+        id = "git";
+        name = "*/";
+        run = "git";
+      }
+    ];
+
+    # --- Previewers ---
+    prepend_previewers = [
+      {
+        mime = "application/*zip";
+        run = "ouch";
+      }
+
+      {
+        mime = "application/x-tar";
+        run = "ouch";
+      }
+
+      {
+        mime = "application/x-bzip2";
+        run = "ouch";
+      }
+
+      {
+        mime = "application/x-7z-compressed";
+        run = "ouch";
+      }
+
+      {
+        mime = "application/x-rar";
+        run = "ouch";
+      }
+
+      {
+        mime = "application/x-xz";
+        run = "ouch";
+      }
+
+      {
+        mime = "application/xz";
+        run = "ouch";
+      }
+
+      {
+        mime = "text/csv";
+        run = "miller";
+      }
+    ];
+
     previewers = [
-      # Folder
       {
         name = "*/";
         run = "folder";
         sync = true;
       }
 
-      # Code (will now be skipped for text/markdown due to the rule above)
       {
         mime = "text/*";
         run = "code";
@@ -346,13 +462,11 @@
         run = "code";
       }
 
-      # JSON
       {
         mime = "application/{json,x-ndjson}";
         run = "json";
       }
 
-      # Image
       {
         mime = "image/{avif,heic,jxl,svg+xml}";
         run = "magick";
@@ -363,19 +477,16 @@
         run = "image";
       }
 
-      # Video
       {
         mime = "video/*";
         run = "video";
       }
 
-      # PDF
       {
         mime = "application/pdf";
         run = "pdf";
       }
 
-      # Archive
       {
         mime = "application/{,g}zip";
         run = "archive";
@@ -386,7 +497,6 @@
         run = "archive";
       }
 
-      # Font
       {
         mime = "font/*";
         run = "font";
@@ -397,7 +507,6 @@
         run = "font";
       }
 
-      # Fallback (shows basic file info)
       {
         name = "*";
         run = "file";
@@ -405,83 +514,43 @@
     ];
   };
 
-  input = {
-    cursor_blink = false;
+  # ===== Status Bar Components =====
+  status = {
+    component_left = [
+      {
+        format = " {} ";
+        type = "mode";
+      }
 
-    # cd
-    cd_title = "Change directory:";
-    cd_origin = "top-center";
-    cd_offset = [0 2 50 3]; # [x, y, width, height] relative to origin
+      {
+        command = "git_branch_display";
+        format = "{}";
+        type = "custom";
+      }
 
-    # create
-    create_title = ["Create:" "Create:"];
-    create_origin = "top-center";
-    create_offset = [0 2 50 3];
+      {
+        format = " {} ";
+        type = "cwd";
+      }
+    ];
 
-    # rename
-    rename_title = "Rename:";
-    rename_origin = "hovered"; # Position relative to the hovered file
-    rename_offset = [0 1 50 3];
+    component_middle = [
+      {
+        format = " {}/{} ";
+        type = "position";
+      }
+    ];
 
-    # trash
-    trash_title = "Move {n} selected file{s} to trash? (y/N)";
-    trash_origin = "top-center";
-    trash_offset = [0 2 50 3];
+    component_right = [
+      {
+        format = " {} ";
+        type = "selection";
+      }
 
-    # delete
-    delete_title = "Delete {n} selected file{s} permanently? (y/N)";
-    delete_origin = "top-center";
-    delete_offset = [0 2 50 3];
-
-    # filter
-    filter_title = "Filter:";
-    filter_origin = "top-center";
-    filter_offset = [0 2 50 3];
-
-    # find
-    find_title = [
-      "Find next:"
-      "Find previous:"
-    ]; # Array used for next/previous context
-    find_origin = "top-center";
-    find_offset = [0 2 50 3];
-
-    # search
-    search_title = "Search via {n}:"; # {n} is replaced by search engine name
-    search_origin = "top-center";
-    search_offset = [0 2 50 3];
-
-    # shell
-    shell_title = [
-      "Shell:"
-      "Shell (block):"
-    ]; # Array used for normal/blocking context
-    shell_origin = "top-center";
-    shell_offset = [0 2 50 3];
-
-    # overwrite
-    overwrite_title = "Overwrite an existing file? (y/N)";
-    overwrite_origin = "top-center";
-    overwrite_offset = [0 2 50 3];
-
-    # quit
-    quit_title = "{n} task{s} running, sure to quit? (y/N)";
-    quit_origin = "top-center";
-    quit_offset = [0 2 50 3];
-  };
-
-  select = {
-    # -- Configuration for the 'open with' selection menu --
-    open_title = "Open with:";
-    open_origin = "hovered";
-    open_offset = [0 1 50 7]; # Wider height for selection list
-  };
-
-  which = {
-    # -- Configuration for command selection (e.g., multiple 'edit' options) --
-    sort_by = "none"; # Keep order defined in [opener]
-    sort_sensitive = false;
-    sort_reverse = false;
-    sort_translit = false;
+      {
+        format = " Tasks: {} ";
+        type = "tasks";
+      }
+    ];
   };
 }

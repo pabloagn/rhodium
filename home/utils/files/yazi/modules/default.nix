@@ -2,21 +2,23 @@
   lib,
   pkgs,
   pkgs-unstable,
-  yaziPlugins,
+  # yaziPlugins,
   ...
 }: let
   configBase = import ./base.nix {};
-  # configKeymaps = import ./keymap.nix {};
+  configKeymaps = import ./keymap.nix {};
   configFiles = import ./files.nix {inherit pkgs;};
   initLua = import ../plugins {inherit lib;};
-  # theme = import ./tokyonight.nix {};
   theme = import ./kanso.nix {};
 in {
   programs.yazi = {
     settings = configBase;
     theme = theme;
-    # keymap = configKeymaps;
+    keymap = configKeymaps;
     initLua = initLua;
+    # NOTE:
+    # - We were previously managing this using alloys.rh
+    # - We're now managing it directly here for practicity
     # plugins = yaziPlugins;
     plugins = {
       yatline = pkgs.yaziPlugins.yatline;

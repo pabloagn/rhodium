@@ -13,6 +13,7 @@
     grim # Screenshot utility for Wayland
     swappy # Screenshot annotation tool
     hyprpicker # Color picker for hyprland
+    flameshot # Screenshot utility
 
     gtk3 # Includes gtk-launch
 
@@ -38,7 +39,8 @@
     just # Handy way to save and run project-specific commands
     mask # CLI task runner defined by a simple markdown file
     mprocs # TUI tool to run multiple commands in parallel and show the output of each command separately
-    # presenterm # Terminal based slideshow tool
+    presenterm # Terminal based slideshow tool
+    hstr # Shell history suggest box (bound to <C-H> on Shell)
 
     # Navigation
     # wiki-tui # Simple and easy to use Wikipedia Text User Interface
