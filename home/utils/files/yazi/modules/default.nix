@@ -27,6 +27,7 @@ in {
       toggle-pane = pkgs.yaziPlugins.toggle-pane;
       smart-filter = pkgs.yaziPlugins.smart-filter;
       smart-enter = pkgs.yaziPlugins.smart-enter;
+      smart-paste = pkgs.yaziPlugins.smart-paste;
     };
   };
   xdg.configFile = configFiles;

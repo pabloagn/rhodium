@@ -155,6 +155,7 @@ layout {
 // NOTE: Most services are managed by systemd directly. Check services home manager module.
 // Required for X11 compatibility
 spawn-at-startup "xwayland-satellite"
+// FIX: Script not working
 // Polkit fuzzel prompt client
 spawn-at-startup "sh" "-c" "~/.local/bin/fuzzel-polkit.sh"
 // Animation settings
@@ -214,14 +215,10 @@ binds {
     Mod+Escape hotkey-overlay-title="Kill Fuzzel Process" {
         spawn "killall" "fuzzel"
     }
-    // TODO: Clean this script up. Padding is fucked.
     // Shortcuts (Niri Help Menu / Keyboard Inhibit)
     Mod+H hotkey-overlay-title="Toggle Keyboard Overview" {
         spawn "~/.local/bin/fuzzel-hotkeys.sh"
     }
-    // Mod+Shift+H hotkey-overlay-title="Toggle Keyboard Inhibit" {
-    //     toggle-keyboard-shortcuts-inhibit
-    // }
     // Window & Column Navigation
     Mod+Left hotkey-overlay-title="Focus Column Left" {
         focus-column-left
@@ -407,6 +404,7 @@ binds {
     Mod+A hotkey-overlay-title="Fuzzel Launcher (Custom)" {
         spawn "~/.local/bin/fuzzel-launcher.sh"
     }
+    // TODO: Adjust this so it does not show duplicate entries and does not show icons
     Mod+Alt+A hotkey-overlay-title="Fuzzel Launcher (All)" {
         spawn "fuzzel"
     }
@@ -427,6 +425,21 @@ binds {
     }
     Mod+Alt+X hotkey-overlay-title="Fuzzel [U]tilities Menu" {
         spawn "~/.local/bin/fuzzel-utils.sh"
+    }
+    Mod+Alt+D hotkey-overlay-title="Fuzzel [D]isplay Manager" {
+        spawn "~/.local/bin/fuzzel-display.sh"
+    }
+    Mod+Alt+T hotkey-overlay-title="Fuzzel [T]emperature Control" {
+        spawn "~/.local/bin/fuzzel-temperature.sh"
+    }
+
+    // Custom Adjustments
+    // Temperature adjustment with Ctrl + Volume keys
+    Ctrl+XF86AudioRaiseVolume allow-when-locked=true hotkey-overlay-title="Increase Display Temperature" {
+        spawn "bash" "-c" "~/.local/bin/fuzzel-temperature-adjust.sh increase"
+    }
+    Ctrl+XF86AudioLowerVolume allow-when-locked=true hotkey-overlay-title="Decrease Display Temperature" {
+        spawn "bash" "-c" "~/.local/bin/fuzzel-temperature-adjust.sh decrease"
     }
     // Screenshots
     Mod+S hotkey-overlay-title="Screenshot Screen" {
@@ -488,6 +501,5 @@ binds {
         toggle-overview
     }
 }
-
 
 

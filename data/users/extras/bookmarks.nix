@@ -280,12 +280,6 @@ in
       description = "Google Search";
       categories = [ categories.utils ];
     };
-    incognito = {
-      profile = "personal";
-      url = "about:privatebrowsing";
-      description = "Firefox Incognito";
-      categories = [ categories.utils ];
-    };
     inoreader = {
       profile = "personal";
       url = "https://www.inoreader.com/";

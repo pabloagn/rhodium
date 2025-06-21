@@ -9,12 +9,19 @@
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
-  boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "thunderbolt" "usb_storage" "sd_mod"];
-  boot.initrd.kernelModules = ["amdgpu"];
+  boot = {
+    initrd.availableKernelModules = ["nvme" "xhci_pci" "thunderbolt" "usb_storage" "sd_mod"];
+    initrd.kernelModules = ["amdgpu"];
 
-  # AMD + Realtek (WiFi)
-  boot.kernelModules = ["kvm-amd" "rtw89" "usbhid"];
-  boot.extraModulePackages = [];
+    # AMD + Realtek (WiFi)
+    kernelModules = ["kvm-amd" "rtw89" "usbhid"];
+
+    # Wayland-related requirements
+    kernelParams = [
+      "amdgpu.dc=1" # Enable Display Core for advanced color management
+      "amdgpu.ppfeaturemask=0xffffffff" # Enable all power/display features
+    ];
+  };
 
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/a729d1fd-92c8-4803-9f4b-a3ee9aee5aac";

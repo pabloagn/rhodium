@@ -102,6 +102,12 @@
       icon = "obsidian";
       description = "Obsidian";
     };
+    incognito = {
+      binary = "firefox";
+      args = ["-p" "Personal" "--private-window"];
+      icon = "firefox";
+      description = "Firefox Incognito";
+    };
   };
 
   media = {

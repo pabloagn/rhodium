@@ -37,7 +37,19 @@ declare -A TIME_PROFILES=(
 )
 
 # Current temperature file (for persistence)
-TEMP_STATE_FILE="/tmp/niri-temperature-state"
+TEMP_STATE_FILE="/tmp/gammastep-state"
+
+# Determine the best adjustment method for this system
+ADJUSTMENT_METHOD=""
+detect_adjustment_method() {
+    if gammastep -m wayland -p 2>/dev/null | grep -q "Color temperature"; then
+        ADJUSTMENT_METHOD="wayland"
+    elif gammastep -m drm -p 2>/dev/null | grep -q "Color temperature"; then
+        ADJUSTMENT_METHOD="drm"
+    else
+        ADJUSTMENT_METHOD=""
+    fi
+}
 
 # --- Helper Functions ---
 
@@ -63,15 +75,15 @@ run_fuzzel() {
     fi
 }
 
-# Check if redshift is running
-is_redshift_running() {
-    pgrep -x redshift >/dev/null 2>&1
+# Check if gammastep is running
+is_gammastep_running() {
+    pgrep -x gammastep >/dev/null 2>&1
 }
 
-# Stop redshift
-stop_redshift() {
-    if is_redshift_running; then
-        pkill -x redshift
+# Stop gammastep
+stop_gammastep() {
+    if is_gammastep_running; then
+        pkill -x gammastep
         sleep 0.5
     fi
 }
@@ -97,10 +109,17 @@ apply_temperature() {
     local temperature="$1"
     local brightness="${2:-1.0}"
 
-    stop_redshift
+    stop_gammastep
 
-    # Apply one-shot temperature change
-    redshift -P -O "$temperature" -b "$brightness" &
+    # Apply one-shot temperature change with brightness
+    # -P resets existing gamma ramps, -O sets the temperature
+    local cmd="gammastep"
+    if [[ -n "$ADJUSTMENT_METHOD" ]]; then
+        cmd="$cmd -m $ADJUSTMENT_METHOD"
+    fi
+    
+    # Run the command and suppress warnings
+    $cmd -P -O "$temperature" -b "$brightness" 2>&1 | grep -v "Warning:" &
 
     save_temperature_state "$temperature" "$brightness"
     notify "Display Temperature" "Applied ${temperature}K at ${brightness} brightness"
@@ -216,22 +235,31 @@ adjust_temperature() {
     apply_temperature "$new_temp" "$brightness"
 }
 
-# Toggle redshift automatic mode
+# Toggle automatic mode
 toggle_auto_mode() {
-    if is_redshift_running; then
-        stop_redshift
+    if is_gammastep_running; then
+        stop_gammastep
         notify "Display Temperature" "Automatic mode disabled"
     else
-        # Start redshift with location-based automatic adjustment
-        redshift &
+        # Start gammastep with automatic adjustment
+        local cmd="gammastep"
+        if [[ -n "$ADJUSTMENT_METHOD" ]]; then
+            cmd="$cmd -m $ADJUSTMENT_METHOD"
+        fi
+        $cmd 2>&1 | grep -v "Warning:" &
         notify "Display Temperature" "Automatic mode enabled (location-based)"
     fi
 }
 
 # Reset to default
 reset_temperature() {
-    stop_redshift
-    redshift -x # Reset to default
+    stop_gammastep
+    # Reset with detected method
+    local cmd="gammastep"
+    if [[ -n "$ADJUSTMENT_METHOD" ]]; then
+        cmd="$cmd -m $ADJUSTMENT_METHOD"
+    fi
+    $cmd -x 2>&1 | grep -v "Warning:"
     save_temperature_state "6500" "1.0"
     notify "Display Temperature" "Reset to default (6500K, 100% brightness)"
 }
@@ -247,8 +275,8 @@ show_status() {
     status+="Temperature: ${temperature}K\n"
     status+="Brightness: ${brightness_percent}%\n"
 
-    if is_redshift_running; then
-        status+="Mode: Active"
+    if is_gammastep_running; then
+        status+="Mode: Automatic"
     else
         status+="Mode: Manual"
     fi
@@ -258,7 +286,7 @@ show_status() {
 
 # --- Main Menu ---
 
-main() {
+main_menu() {
     local main_menu_options=$(
         cat <<EOF
 ⊹ Temperature Presets
@@ -313,4 +341,36 @@ EOF
     esac
 }
 
-main
+# --- Entry Point ---
+
+# Detect the best adjustment method on startup
+detect_adjustment_method
+
+# Check if script is called with arguments (for keybind mode)
+if [[ $# -gt 0 ]]; then
+    case "$1" in
+    "increase")
+        adjust_temperature "increase"
+        ;;
+    "decrease")
+        adjust_temperature "decrease"
+        ;;
+    "toggle")
+        toggle_auto_mode
+        ;;
+    "reset")
+        reset_temperature
+        ;;
+    "status")
+        show_status
+        ;;
+    *)
+        echo "Usage: $0 [increase|decrease|toggle|reset|status]"
+        echo "No arguments: Launch interactive menu"
+        exit 1
+        ;;
+    esac
+else
+    # Launch interactive menu
+    main_menu
+fi
