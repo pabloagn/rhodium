@@ -52,6 +52,7 @@
     rh-waybar.enable = true;
     rh-mako.enable = true;
     rh-swaybg.enable = true;
+    rh-wlsunset.enable = true;
     # rh-eww.enable = true;
   };
 
