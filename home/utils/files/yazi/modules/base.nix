@@ -222,6 +222,7 @@
       {
         name = "*";
         use = [
+          "edit"
           "open"
           "reveal"
         ];

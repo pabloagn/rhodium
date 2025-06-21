@@ -53,8 +53,8 @@
   # General
   cl = "clear";
   htop = "btm";
-  neofetch = "disfetch";
-  nf = "disfetch";
+  neofetch = "fastfetch";
+  nf = "fastfetch";
   "!!" = "sudo $history[1]";
 
   # Core Directories

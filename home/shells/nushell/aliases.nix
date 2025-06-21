@@ -48,8 +48,8 @@
     # General
     cl = "clear";
     htop = "btm";
-    neofetch = "disfetch";
-    nf = "disfetch";
+    neofetch = "fastfetch";
+    nf = "fastfetch";
 
     # Git
     gst = "git status";

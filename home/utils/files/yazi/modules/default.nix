@@ -25,6 +25,8 @@ in {
       chmod = pkgs.yaziPlugins.chmod;
       full-border = pkgs.yaziPlugins.full-border;
       toggle-pane = pkgs.yaziPlugins.toggle-pane;
+      smart-filter = pkgs.yaziPlugins.smart-filter;
+      smart-enter = pkgs.yaziPlugins.smart-enter;
     };
   };
   xdg.configFile = configFiles;
