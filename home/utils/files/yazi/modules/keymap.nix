@@ -14,8 +14,8 @@
     }
     {
       on = ["g" "p"];
-      run = "cd $DEV_PHANTOM";
-      desc = "Go to dev/phantom";
+      run = "shell -- ya emit cd '$(git rev-parse --show-toplevel)'";
+      desc = "Go to Project Root";
     }
 
     {
@@ -31,6 +31,19 @@
     {
       on = ["g" "s"];
       run = "cd $HOME_SOLENOIDLABS";
+      desc = "Go to solenoid-labs";
+    }
+    {
+      on = ["g" "s"];
+      run = "cd $HOME_SOLENOIDLABS";
+      desc = "Go to solenoid-labs";
+    }
+    {
+      on = ["y"];
+run = [
+    "yank",
+    'shell -- printf "%s\n" "$@" | sed "s|^|file://|" | wl-copy --primary --type=text/uri-list'
+]
       desc = "Go to solenoid-labs";
     }
 

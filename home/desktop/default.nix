@@ -1,7 +1,7 @@
 {...}: {
   imports = [
-    ./bar
-    ./cursor
+    ./bars
+    ./cursors
     ./common
     ./launchers
     ./lockscreen

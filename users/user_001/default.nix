@@ -36,16 +36,24 @@
 
   # Asset linking
   assets = {
-    wallpapers.enable = true;
-    colors.enable = true;
+    wallpapers.enable = true; # Symlink wallpapers to data dir
+    colors.enable = true; # Symlink user scripts to user bin dir
   };
 
   # Script linking
   # WARN: Enables all scripts in home/scripts with chmod +x
-  scripts.enable = true;
+  scripts = {
+    enable = true;
+  };
 
-  # Enable Niri session services
-  services.niri-session.enable = true;
+  # Custom services
+  # NOTE: These are custom services located under home/services, and run as systemd daemons
+  services = {
+    waybar.enable = true;
+    mako.enable = true;
+    swaybg.enable = true;
+    # eww.enable = true;
+  };
 
   home = {
     username = userData.user_001.username;

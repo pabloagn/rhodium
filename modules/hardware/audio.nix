@@ -3,6 +3,7 @@
     wireplumber # Session manager for pipewire
     pavucontrol # GUI audio control
     playerctl # Media player control
+    pamixer # Pulseaudio command line mixer
   ];
 
   # rtkit

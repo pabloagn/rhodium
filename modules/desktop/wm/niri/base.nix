@@ -5,6 +5,7 @@
     wev # Key event viewer (useful for finding key names)
     wlr-randr # Output management
     xwayland-satellite # X11 app support (non-native on niri)
+    dragon-drop # Drag and drop for wayland
   ];
 
   environment.sessionVariables = {
@@ -33,6 +34,7 @@
       xdg-desktop-portal-gtk
       xdg-desktop-portal
       xdg-desktop-portal-wlr
+      xdg-desktop-portal-termfilechooser # Portal for using TUIs as file pickers
     ];
     config = {
       common = {
