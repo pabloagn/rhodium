@@ -1,6 +1,7 @@
 {
   lib,
   pkgs,
+  pkgs-unstable,
   yaziPlugins,
   ...
 }: let
@@ -16,7 +17,15 @@ in {
     theme = theme;
     # keymap = configKeymaps;
     initLua = initLua;
-    plugins = yaziPlugins;
+    # plugins = yaziPlugins;
+    plugins = {
+      yatline = pkgs.yaziPlugins.yatline;
+      git = pkgs-unstable.yaziPlugins.git;
+      yatline-githead = pkgs-unstable.yaziPlugins.yatline-githead;
+      chmod = pkgs.yaziPlugins.chmod;
+      full-border = pkgs.yaziPlugins.full-border;
+      toggle-pane = pkgs.yaziPlugins.toggle-pane;
+    };
   };
   xdg.configFile = configFiles;
 }
