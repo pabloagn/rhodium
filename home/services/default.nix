@@ -21,7 +21,7 @@
 
       # TODO: This must be dynamic based on user's service selection
       # Restart services
-      for service in rh-swaybg rh-waybar rh-mako rh-wlsunset; do
+      for service in rh-swaybg rh-waybar rh-mako; do
         echo "  Restarting $service..."
         ${pkgs.systemd}/bin/systemctl --user restart "$service.service" || true
       done
