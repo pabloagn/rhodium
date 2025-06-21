@@ -49,10 +49,10 @@
   # Custom services
   # NOTE: These are custom services located under home/services, and run as systemd daemons
   services = {
-    waybar.enable = true;
-    mako.enable = true;
-    swaybg.enable = true;
-    # eww.enable = true;
+    rh-waybar.enable = true;
+    rh-mako.enable = true;
+    rh-swaybg.enable = true;
+    # rh-eww.enable = true;
   };
 
   home = {

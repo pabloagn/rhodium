@@ -4,14 +4,14 @@
   ...
 }:
 with lib; let
-  cfg = config.services.eww;
+  cfg = config.services.rh-eww;
 in {
-  options.services.eww = {
+  options.services.rh-eww = {
     enable = mkEnableOption "Highly customizable widgets";
   };
 
   config = mkIf cfg.enable {
-    systemd.user.services.eww = {
+    systemd.user.services.rh-eww = {
       Unit = {
         Description = "ElKowar's Wacky Widgets";
         PartOf = ["graphical-session.target"];

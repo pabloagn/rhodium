@@ -5,14 +5,14 @@
   ...
 }:
 with lib; let
-  cfg = config.services.waybar;
+  cfg = config.services.rh-waybar;
 in {
-  options.services.waybar = {
+  options.services.rh-waybar = {
     enable = mkEnableOption "Highly customizable Wayland bar";
   };
 
   config = mkIf cfg.enable {
-    systemd.user.services.waybar = {
+    systemd.user.services.rh-waybar = {
       Unit = {
         Description = "Highly customizable Wayland bar";
         PartOf = ["graphical-session.target"];
