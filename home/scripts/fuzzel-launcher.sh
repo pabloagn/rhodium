@@ -5,6 +5,7 @@ set -euo pipefail
 # --- Main Configuration ---
 APP_NAME="rhodium-launcher"
 APP_TITLE="Rhodium's App Launcher"
+PROMPT="λ: "
 
 # --- Imports ---
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -116,7 +117,7 @@ launch_app() {
     fi
 
     # Display from cache
-    selected=$(cut -f1 "$CACHE_FILE" | fuzzel --dmenu --prompt="$(provide_fuzzel_prompt)" -w 85)
+    selected=$(cut -f1 "$CACHE_FILE" | fuzzel --dmenu --prompt="$PROMPT" -w 85)
     [[ -z "$selected" ]] && return
 
     # Find corresponding file from cache

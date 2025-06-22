@@ -3,5 +3,5 @@
 if pgrep "calcure" >/dev/null; then
     pkill -9 "calcure"
 else
-    calcure &
+    foot -e calcure &
 fi

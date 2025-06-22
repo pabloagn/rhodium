@@ -161,25 +161,39 @@ spawn-at-startup "sh" "-c" "~/.local/bin/fuzzel-polkit.sh"
 // Animation settings
 // ------------------------------------
 animations {
+    // NOTE: Uncomment to turn off all animations
+    // NOTE: We can also put "off" into each individual animation to disable it.
+    // off
+
+    // HACK: Slow down all animations by this factor. Values below 1 speed them up instead.
+    slowdown 0.8
+
     window-open {
         duration-ms 150
         curve "ease-out-expo"
     }
     window-close {
-        duration-ms 200
+        duration-ms 150
         curve "ease-out-quad"
     }
     horizontal-view-movement {
-        duration-ms 200
-        curve "ease-out-expo"
+        spring damping-ratio=1.0 stiffness=800 epsilon=0.0001
     }
-    workspace-switch {
-        duration-ms 200
-        curve "ease-out-quad"
+    window-movement {
+        spring damping-ratio=1.0 stiffness=800 epsilon=0.0001
+    }
+    window-resize {
+        spring damping-ratio=1.0 stiffness=800 epsilon=0.0001
     }
     config-notification-open-close {
-        duration-ms 250
+        spring damping-ratio=0.6 stiffness=1000 epsilon=0.001
+    }
+    screenshot-ui-open {
+        duration-ms 200
         curve "ease-out-quad"
+    }
+    overview-open-close {
+        spring damping-ratio=1.0 stiffness=800 epsilon=0.0001
     }
 }
 // Transparency and blur
@@ -215,35 +229,38 @@ binds {
     Mod+Escape hotkey-overlay-title="Kill Fuzzel Process" {
         spawn "killall" "fuzzel"
     }
-    // Shortcuts (Niri Help Menu / Keyboard Inhibit)
-    Mod+H hotkey-overlay-title="Toggle Keyboard Overview" {
-        spawn "~/.local/bin/fuzzel-hotkeys.sh"
-    }
-    // Window & Column Navigation
+    // Focus
     Mod+Left hotkey-overlay-title="Focus Column Left" {
         focus-column-left
-    }
-    Mod+Down hotkey-overlay-title="Focus Window Down" {
-        focus-window-down
-    }
-    Mod+Up hotkey-overlay-title="Focus Window Up" {
-        focus-window-up
     }
     Mod+Right hotkey-overlay-title="Focus Column Right" {
         focus-column-right
     }
+    Mod+Up hotkey-overlay-title="Focus Window Up" {
+        focus-window-up
+    }
+    Mod+Down hotkey-overlay-title="Focus Window Down" {
+        focus-window-down
+    }
     Mod+Tab hotkey-overlay-title="Focus Previous Workspace" {
         focus-workspace-previous
     }
-    Mod+Shift+H hotkey-overlay-title="Focus Monitor Left" {
-        focus-monitor-left
+    Mod+Shift+Tab hotkey-overlay-title="Focus Previous Window" {
+        focus-window-previous
     }
-    Mod+Shift+L hotkey-overlay-title="Focus Monitor Right" {
-        focus-monitor-right
-    }
+    // Mod+Shift+H hotkey-overlay-title="Focus Monitor Left" {
+    //     focus-monitor-left
+    // }
+    // Mod+Shift+L hotkey-overlay-title="Focus Monitor Right" {
+    //     focus-monitor-right
+    // }
     // Window & Column Manipulation
+    // -------------------------------------------------
     Mod+C hotkey-overlay-title="Close Focused Window" {
         close-window
+    }
+    Mod+Ctrl+C hotkey-overlay-title="Force Kill Focused Process" {
+        center-visible-columns
     }
     Mod+V hotkey-overlay-title="Toggle Window Floating" {
         toggle-window-floating
@@ -251,27 +268,35 @@ binds {
     Mod+Shift+V hotkey-overlay-title="Switch Focus Floating/Tiling" {
         switch-focus-between-floating-and-tiling
     }
-    Mod+Comma hotkey-overlay-title="Move Window Left" {
+    Mod+Comma hotkey-overlay-title="Consume or Expell Window Left" {
         consume-or-expel-window-left
     }
-    Mod+Period hotkey-overlay-title="Move Window Right" {
+    Mod+Period hotkey-overlay-title="Consume or Expell Window Right" {
         consume-or-expel-window-right
     }
+    // Move column
+    // -------------------------------------------------
     Mod+Ctrl+Left hotkey-overlay-title="Move Column Left" {
         move-column-left
-    }
-    Mod+Ctrl+Down hotkey-overlay-title="Move Window Down" {
-        move-window-down
-    }
-    Mod+Ctrl+Up hotkey-overlay-title="Move Window Up" {
-        move-window-up
     }
     Mod+Ctrl+Right hotkey-overlay-title="Move Column Right" {
         move-column-right
     }
+    Mod+Ctrl+Down hotkey-overlay-title="Move Window Down" {
+        // move-window-down-or-to-workspace-down
+        move-column-to-workspace-down
+    }
+    Mod+Ctrl+Up hotkey-overlay-title="Move Window Up" {
+        // move-window-up-or-to-workspace-up
+        move-column-to-workspace-up
+    }
+    // Maximize Column
+    // -------------------------------------------------
     Mod+F hotkey-overlay-title="Maximize Column" {
         maximize-column
     }
+    // Maximize Window
+    // -------------------------------------------------
     Mod+Shift+F hotkey-overlay-title="Fullscreen Window" {
         fullscreen-window
     }
@@ -280,9 +305,6 @@ binds {
     }
     Mod+Shift+C hotkey-overlay-title="Center Column" {
         center-column
-    }
-    Mod+Ctrl+C hotkey-overlay-title="Center Visible Columns" {
-        center-visible-columns
     }
     Mod+R hotkey-overlay-title="Switch Preset Column Width" {
         switch-preset-column-width
@@ -305,7 +327,16 @@ binds {
     Mod+Shift+Equal hotkey-overlay-title="Increase Window Height" {
         set-window-height "+10%"
     }
-    // Workspace Navigation & Movement
+    // Workspace Navigation & Movement (Dynamic)
+    // -------------------------------------------------
+    Mod+Alt+Up hotkey-overlay-title="Move Workspace Up" {
+        move-workspace-up
+    }
+    Mod+Alt+Down hotkey-overlay-title="Move Workspace Down" {
+        move-workspace-down
+    }
+    // Workspace Navigation & Movement (Numeric)
+    // -------------------------------------------------
     Mod+1 hotkey-overlay-title="Focus Workspace 1" {
         focus-workspace 1
     }
@@ -368,6 +399,7 @@ binds {
     }
     // Application Launchers
     // Main
+    // -------------------------------------------------
     Mod+W hotkey-overlay-title="Launch Terminal [Ghostty]" {
         spawn "kitty"
     }
@@ -380,10 +412,11 @@ binds {
     Mod+E hotkey-overlay-title="Launch Editor [Nvim]" {
         spawn "kitty" "-e" "nvim"
     }
-    Mod+Q hotkey-overlay-title="Toggle Qalculate" {
-        spawn "~/.local/bin//utils-qalculate.sh"
+    Mod+Q hotkey-overlay-title="Toggle Calculator [CLI]" {
+        spawn "~/.local/bin/utils-qalc.sh"
     }
-    // Alt
+    // Secondary (Shift)
+    // -------------------------------------------------
     Mod+Shift+W hotkey-overlay-title="Launch Terminal [Ghostty]" {
         spawn "ghostty"
     }
@@ -396,43 +429,101 @@ binds {
     Mod+Shift+E hotkey-overlay-title="Launch Editor [Zed Editor]" {
         spawn "zeditor"
     }
-    Mod+Shift+Q hotkey-overlay-title="Toggle Calcure" {
+    Mod+Shift+Q hotkey-overlay-title="Toggle Calculator [GUI]" {
+        spawn "~/.local/bin/utils-qalculate.sh"
+    }
+    // Tertiary (Ctrl)
+    // -------------------------------------------------
+    Mod+Ctrl+Q hotkey-overlay-title="Toggle Calendar" {
         spawn "~/.local/bin/utils-calcure.sh"
     }
     // Fuzzel Menus
-    Mod+A hotkey-overlay-title="Fuzzel Launcher (Custom)" {
+    // -------------------------------------------------
+    Mod+A hotkey-overlay-title="Fuzzel Launcher" {
         spawn "~/.local/bin/fuzzel-launcher.sh"
     }
     // TODO: Adjust this so it does not show duplicate entries and does not show icons
-    Mod+Alt+A hotkey-overlay-title="Fuzzel Launcher (All)" {
-        spawn "fuzzel"
+    Mod+Alt+A hotkey-overlay-title="Fuzzel [A]uth" {
+        spawn "~/.local/bin/fuzzel-auth.sh"
     }
-    Mod+Alt+B hotkey-overlay-title="Fuzzel [B]luetooth Menu" {
+    Mod+Alt+B hotkey-overlay-title="Fuzzel [B]luetooth" {
         spawn "~/.local/bin/fuzzel-bluetooth.sh"
     }
-    Mod+Alt+E hotkey-overlay-title="Fuzzel [E]moji Picker" {
+    Mod+Alt+C hotkey-overlay-title="Fuzzel [C]olors" {
+        spawn "~/.local/bin/fuzzel-colors.sh"
+    }
+    Mod+Alt+D hotkey-overlay-title="Fuzzel [D]isplay" {
+        spawn "~/.local/bin/fuzzel-display.sh"
+    }
+    Mod+Alt+E hotkey-overlay-title="Fuzzel [E]moji" {
         spawn "~/.local/bin/fuzzel-emoji.sh"
     }
-    Mod+Alt+P hotkey-overlay-title="Fuzzel [P]ower Menu" {
-        spawn "~/.local/bin/fuzzel-power.sh"
+    Mod+Alt+F hotkey-overlay-title="Fuzzel [F]ind" {
+        spawn "~/.local/bin/fuzzel-finder.sh"
     }
-    Mod+Alt+S hotkey-overlay-title="Fuzzel [S]ymbols Menu" {
+    Mod+Alt+G hotkey-overlay-title="Fuzzel [G]it" {
+        spawn "~/.local/bin/fuzzel-git.sh"
+    }
+    Mod+Alt+H hotkey-overlay-title="Fuzzel [H]elp" {
+        spawn "~/.local/bin/fuzzel-help.sh"
+    }
+    Mod+Alt+I hotkey-overlay-title="Fuzzel [I]cons" {
         spawn "~/.local/bin/fuzzel-unicode.sh"
     }
-    Mod+Alt+W hotkey-overlay-title="Fuzzel [W]i-Fi Menu" {
+    Mod+Alt+J hotkey-overlay-title="Fuzzel [J]ournal" {
+        spawn "~/.local/bin/fuzzel-journals.sh"
+    }
+    Mod+Alt+K hotkey-overlay-title="Fuzzel [K]ill" {
+        spawn "~/.local/bin/fuzzel-kill.sh"
+    }
+    Mod+Alt+L hotkey-overlay-title="Fuzzel [L]aunch" {
+        spawn "fuzzel"
+    }
+    Mod+Alt+M hotkey-overlay-title="Fuzzel [M]ounts" {
+        spawn "~/.local/bin/fuzzel-mounts.sh"
+    }
+    Mod+Alt+N hotkey-overlay-title="Fuzzel [N]etwork" {
+        spawn "~/.local/bin/fuzzel-networking.sh"
+    }
+    // Mod+Alt+O hotkey-overlay-title="Fuzzel [O]" {
+    //     spawn "~/.local/bin/fuzzel-o.sh"
+    // }
+    Mod+Alt+P hotkey-overlay-title="Fuzzel [P]ower" {
+        spawn "~/.local/bin/fuzzel-power.sh"
+    }
+    Mod+Alt+Q hotkey-overlay-title="Fuzzel [Q]uery" {
+        spawn "~/.local/bin/fuzzel-query.sh"
+    }
+    Mod+Alt+R hotkey-overlay-title="Fuzzel [R]emote" {
+        spawn "~/.local/bin/fuzzel-remote.sh"
+    }
+    Mod+Alt+S hotkey-overlay-title="Fuzzel [S]ervices" {
+        spawn "~/.local/bin/fuzzel-services.sh"
+    }
+    Mod+Alt+T hotkey-overlay-title="Fuzzel [T]heme" {
+        spawn "~/.local/bin/fuzzel-theme.sh"
+    }
+    Mod+Alt+U hotkey-overlay-title="Fuzzel [U]sb" {
+        spawn "~/.local/bin/fuzzel-usb.sh"
+    }
+    Mod+Alt+V hotkey-overlay-title="Fuzzel [V]aults" {
+        spawn "~/.local/bin/fuzzel-vaults.sh"
+    }
+    Mod+Alt+W hotkey-overlay-title="Fuzzel [W]i-Fi" {
         spawn "~/.local/bin/fuzzel-wifi.sh"
     }
-    Mod+Alt+X hotkey-overlay-title="Fuzzel [U]tilities Menu" {
-        spawn "~/.local/bin/fuzzel-utils.sh"
+    Mod+Alt+X hotkey-overlay-title="Fuzzel [X]periments" {
+        spawn "~/.local/bin/fuzzel-xperiments.sh"
     }
-    Mod+Alt+D hotkey-overlay-title="Fuzzel [D]isplay Manager" {
-        spawn "~/.local/bin/fuzzel-display.sh"
-    // SEV3: Gamma does not work reliably for now. Fix eventually.
+    Mod+Alt+Y hotkey-overlay-title="Fuzzel [Y]ank" {
+        spawn "~/.local/bin/fuzzel-yank.sh"
     }
-    // Mod+Alt+T hotkey-overlay-title="Fuzzel [T]emperature Control" {
-    //     spawn "~/.local/bin/fuzzel-temperature.sh"
-    // }
-
+    Mod+Alt+Z hotkey-overlay-title="Fuzzel [Z]-Utils" {
+        spawn "~/.local/bin/fuzzel-zutils.sh"
+    }
+    Mod+Alt+0 hotkey-overlay-title="Fuzzel [0]" {
+        spawn "~/.local/bin/fuzzel-zero.sh"
+    }
     // Custom Adjustments
     // Temperature adjustment with Ctrl + Volume keys
     // Ctrl+XF86AudioRaiseVolume cooldown-ms=150 allow-when-locked=true hotkey-overlay-title="Increase Display Temperature" {
@@ -445,11 +536,26 @@ binds {
     Mod+S hotkey-overlay-title="Screenshot Screen" {
         screenshot-screen
     }
+    Print hotkey-overlay-title="Screenshot Screen" {
+        screenshot-screen
+    }
     Mod+Shift+S hotkey-overlay-title="Screenshot Interactive" {
+        screenshot
+    }
+    Shift+Print hotkey-overlay-title="Screenshot Interactive" {
         screenshot
     }
     Mod+Ctrl+S hotkey-overlay-title="Screenshot Window" {
         screenshot-window
+    }
+    Ctrl+Print hotkey-overlay-title="Screenshot Window" {
+        screenshot-window
+    }
+    Mod+Shift+A hotkey-overlay-title="Screenshot Interactive [A]notate" {
+        spawn "~/.local/bin/utils-screenshot-anotate.sh"
+    }
+    Alt+Print hotkey-overlay-title="Screenshot Interactive [A]notate" {
+        spawn "~/.local/bin/utils-screenshot-anotate.sh"
     }
     // Mouse & Trackpad Scroll Bindings
     Mod+WheelScrollDown cooldown-ms=150 hotkey-overlay-title="Focus Workspace Down (Scroll)" {
@@ -501,7 +607,5 @@ binds {
         toggle-overview
     }
 }
-
-
 
 

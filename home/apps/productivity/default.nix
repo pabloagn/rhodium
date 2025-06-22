@@ -1,12 +1,15 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
-    qalculate-gtk # Calculator
+    # Calculators
+    libqalculate # CLI Calculator
+    qalculate-gtk # GUI Calculator
+    element # CLI Periodic Table
 
     # Calendars
     # kdePackages.korganizer
     # evolution
     # calcurse # CLI calendar
     calcure # Modern calcurse alternative
-    ulauncher # GUI-based launcher
+    # ulauncher # GUI-based launcher
   ];
 }

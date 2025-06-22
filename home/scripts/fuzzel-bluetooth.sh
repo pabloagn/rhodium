@@ -5,6 +5,7 @@ set -euo pipefail
 # --- Main Configuration ---
 APP_NAME="rhodium-bluetooth"
 APP_TITLE="Rhodium's Bluetooth Utils"
+PROMPT="β: "
 
 # --- Imports ---
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -359,7 +360,7 @@ main() {
         done
 
         local selected
-        selected=$(echo -e "${menu_items}$(provide_fuzzel_entry) Exit" | fuzzel --dmenu --prompt="$(provide_fuzzel_prompt)" -l 9)
+        selected=$(echo -e "${menu_items}$(provide_fuzzel_entry) Exit" | fuzzel --dmenu --prompt="$PROMPT" -l 9)
 
         # Exit if cancelled or Exit selected
         [[ -z "$selected" ]] || [[ "$selected" == "$(provide_fuzzel_entry) Exit" ]] && break

@@ -2,6 +2,7 @@
 
 # Variables
 # Default app name if not set by including script
+: "${APP_NAME:=DefaultApp}"
 : "${APP_TITLE:=DefaultApp}"
 FUZZEL_PROMPT="λ"
 FUZZEL_ENTRY="⊹"
@@ -9,8 +10,9 @@ FUZZEL_ENTRY="⊹"
 notify() {
     local title="$1"
     local message="$2"
+    shift 2
     if command -v notify-send &>/dev/null; then
-        notify-send --app-name="$APP_TITLE" "$title" "$message"
+        notify-send --app-name="$APP_NAME" "$title" "$message" "$@"
     else
         echo "Notification: $title - $message" >&2
     fi
