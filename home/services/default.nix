@@ -26,9 +26,6 @@
         ${pkgs.systemd}/bin/systemctl --user restart "$service.service" || true
       done
 
-      # Reload mako
-      makoctl reload
-
       # Request animation slowdown
       niri msg action do-screen-transition --delay-ms 200
 
