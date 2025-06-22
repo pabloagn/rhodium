@@ -291,7 +291,7 @@
       # --- Images (NO EDIT OPTIONS) ---
       {
         name = "*.{jpg,jpeg,png,gif,webp,bmp,ico,tiff,psd,avif,heic,heif}";
-        use = ["open" "imagemagick" "gimp" "feh" "eog" "reveal"];
+        use = ["open" "imv" "imagemagick" "gimp" "reveal"];
       }
 
       # --- Code Files (by MIME type) ---
@@ -313,7 +313,7 @@
       # --- Media Files ---
       {
         mime = "image/*";
-        use = ["open" "imagemagick" "gimp" "feh" "eog" "reveal"];
+        use = ["open" "imv" "imagemagick" "gimp" "reveal"];
       }
 
       {
@@ -347,7 +347,7 @@
       # --- Catch-all Rule ---
       {
         name = "*";
-        use = ["open" "reveal"];
+        use = ["edit" "edit-helix" "edit-zed" "edit-nano" "edit-emacs" "imv" "imagemagick" "gimp" "open" "reveal"];
       }
     ];
   };
