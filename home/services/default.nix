@@ -26,9 +26,6 @@
         ${pkgs.systemd}/bin/systemctl --user restart "$service.service" || true
       done
 
-      # Request animation slowdown
-      niri msg action do-screen-transition --delay-ms 200
-
       echo "✓ Niri services reloaded"
     fi
   '';
