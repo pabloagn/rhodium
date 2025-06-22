@@ -22,9 +22,9 @@ CONFIG_FILE="$HOME/.config/niri/config.kdl"
 # Simple grep and sed to extract keybinds, exclude comments
 grep -v '^[[:space:]]*//' "$CONFIG_FILE" | 
 grep 'hotkey-overlay-title=' | 
-sed -E 's/^[[:space:]]*([^[:space:]]+[^{]*)[[:space:]]+hotkey-overlay-title="([^"]+)".*/\1|\2/' |
+sed -E 's/^[[:space:]]*([^[:space:]]+)[[:space:]]+[^"]*hotkey-overlay-title="([^"]+)".*/\1|\2/' |
 while IFS='|' read -r keybind title; do
-    printf "%-50s %s\n" "$keybind" "$title"
+    printf "%-40s %s\n" "$keybind" "$title"
 done | 
 sort | 
 fuzzel --dmenu --prompt="$(provide_fuzzel_prompt)" -w 85

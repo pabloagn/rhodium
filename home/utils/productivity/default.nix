@@ -13,7 +13,8 @@
     grim # Screenshot utility for Wayland
     swappy # Screenshot annotation tool
     hyprpicker # Color picker for hyprland
-    flameshot # Screenshot utility
+    # flameshot # Screenshot utility
+    satty
 
     gtk3 # Includes gtk-launch
 

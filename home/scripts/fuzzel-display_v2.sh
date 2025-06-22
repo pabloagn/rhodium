@@ -91,7 +91,7 @@ list_displays() {
         (.value.logical.y // 0)
     ] | @tsv')
     
-    echo -e "$display_list" | fuzzel --dmenu --prompt="Connected Displays: " -l $count || true
+    echo -e "$display_list" 
 }
 
 configure_single_display() {
@@ -471,4 +471,6 @@ EOF
 }
 
 # Pass all script arguments to the main function
-main "$@"
+# main "$@"
+list_displays "$@"
+
