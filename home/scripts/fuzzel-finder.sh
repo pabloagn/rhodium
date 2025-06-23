@@ -1,11 +1,25 @@
 #!/usr/bin/env bash
 
-# Variables
-# --------------------------------------
-# Fuzzel args
+set -euo pipefail
+
+# --- Main Configuration ---
+APP_NAME="rhodium-colors"
+APP_TITLE="Rhodium's Color Utils"
+PROMPT="β: "
+
 MENU_LEN=5
 PADDING_ARGS_NIX_SEARCH="35 30 100"  # name, version, description
 
+# --- Imports ---
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+if [[ -f "$SCRIPT_DIR/shared-functions.sh" ]]; then
+    source "$SCRIPT_DIR/shared-functions.sh"
+else
+    echo "Error: shared-functions.sh not found" >&2
+    exit 1
+fi
+
+# --- Options ---
 # Main menu options
 declare -A menu_options=(
     ["⊹ Find Fonts"]="find_fonts"

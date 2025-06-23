@@ -105,6 +105,7 @@
             p.tree-sitter-elm
             p.tree-sitter-erlang
             p.tree-sitter-fortran
+            p.tree-sitter-gleam
             p.tree-sitter-go
             p.tree-sitter-graphql
             p.tree-sitter-haskell

@@ -5,6 +5,7 @@ set -euo pipefail
 # --- Main Configuration ---
 APP_NAME="rhodium-services"
 APP_TITLE="Rhodium's Service Manager"
+PROMPT="β: "
 
 # --- Imports ---
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"

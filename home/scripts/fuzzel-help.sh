@@ -5,6 +5,7 @@ set -euo pipefail
 # --- Main Configuration ---
 APP_NAME="rhodium-keybinds"
 APP_TITLE="Rhodium's Keybinds Viewer"
+PROMPT="β: "
 
 # --- Imports ---
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"

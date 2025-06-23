@@ -1,26 +1,26 @@
 require("trouble").setup({
-	auto_close = false,    -- auto close when there are no items
-	auto_open = false,     -- auto open when there are items
-	auto_preview = true,   -- automatically open preview when on an item
-	auto_refresh = true,   -- auto refresh when open
-	auto_jump = false,     -- auto jump to the item when there's only one
-	focus = false,         -- Focus the window when opened
-	restore = true,        -- restores the last location in the list when opening
-	follow = true,         -- Follow the current item
-	indent_guides = true,  -- show indent guides
-	max_items = 200,       -- limit number of items that can be displayed per section
-	multiline = true,      -- render multi-line messages
-	pinned = false,        -- When pinned, the opened trouble window will be bound to the current buffer
+	auto_close = false, -- auto close when there are no items
+	auto_open = false, -- auto open when there are items
+	auto_preview = true, -- automatically open preview when on an item
+	auto_refresh = true, -- auto refresh when open
+	auto_jump = false, -- auto jump to the item when there's only one
+	focus = false, -- Focus the window when opened
+	restore = true, -- restores the last location in the list when opening
+	follow = true, -- Follow the current item
+	indent_guides = true, -- show indent guides
+	max_items = 200, -- limit number of items that can be displayed per section
+	multiline = true, -- render multi-line messages
+	pinned = false, -- When pinned, the opened trouble window will be bound to the current buffer
 	warn_no_results = true, -- show a warning when there are no results
 	open_no_results = false, -- open the trouble window when there are no results
 
 	-- Window configuration
 	win = {
-		type = "split",                   -- split, vsplit, float
-		relative = "editor",              -- editor, win, cursor
-		position = "bottom",              -- bottom, top, left, right
+		type = "split", -- split, vsplit, float
+		relative = "editor", -- editor, win, cursor
+		position = "bottom", -- bottom, top, left, right
 		size = { height = 0.3, width = 0.5 }, -- size of the window
-		zindex = 200,                     -- zindex of the window
+		zindex = 200, -- zindex of the window
 		wo = {
 			wrap = false,
 			nu = true,
@@ -57,10 +57,10 @@ require("trouble").setup({
 
 	-- Throttle refresh rate
 	throttle = {
-		refresh = 20,                        -- fetches new data when needed
-		update = 10,                         -- updates the window
-		render = 10,                         -- renders the window
-		follow = 100,                        -- follows the current item
+		refresh = 20, -- fetches new data when needed
+		update = 10, -- updates the window
+		render = 10, -- renders the window
+		follow = 100, -- follows the current item
 		preview = { ms = 100, debounce = true }, -- preview delay
 	},
 
@@ -235,47 +235,68 @@ local function map(mode, lhs, rhs, opts)
 end
 
 -- Primary diagnostic toggles
-map("n", "<leader>xx", function() require("trouble").toggle("diagnostics") end, { desc = "Toggle Diagnostics (Trouble)" })
-map("n", "<leader>xX", function() require("trouble").toggle("diagnostics", { filter = { buf = 0 } }) end,
-	{ desc = "Toggle Buffer Diagnostics (Trouble)" })
+map("n", "<leader>xx", function()
+	require("trouble").toggle("diagnostics")
+end, { desc = "Toggle Diagnostics (Trouble)" })
+map("n", "<leader>xX", function()
+	require("trouble").toggle("diagnostics", { filter = { buf = 0 } })
+end, { desc = "Toggle Buffer Diagnostics (Trouble)" })
 
 -- LSP references and definitions
-map("n", "<leader>xr", function() require("trouble").toggle("lsp_references") end,
-	{ desc = "Toggle LSP References (Trouble)" })
-map("n", "<leader>xd", function() require("trouble").toggle("lsp_definitions") end,
-	{ desc = "Toggle LSP Definitions (Trouble)" })
-map("n", "<leader>xi", function() require("trouble").toggle("lsp_implementations") end,
-	{ desc = "Toggle LSP Implementations (Trouble)" })
-map("n", "<leader>xt", function() require("trouble").toggle("lsp_type_definitions") end,
-	{ desc = "Toggle LSP Type Definitions (Trouble)" })
+map("n", "<leader>xr", function()
+	require("trouble").toggle("lsp_references")
+end, { desc = "Toggle LSP References (Trouble)" })
+map("n", "<leader>xd", function()
+	require("trouble").toggle("lsp_definitions")
+end, { desc = "Toggle LSP Definitions (Trouble)" })
+map("n", "<leader>xi", function()
+	require("trouble").toggle("lsp_implementations")
+end, { desc = "Toggle LSP Implementations (Trouble)" })
+map("n", "<leader>xt", function()
+	require("trouble").toggle("lsp_type_definitions")
+end, { desc = "Toggle LSP Type Definitions (Trouble)" })
 
 -- Document symbols
-map("n", "<leader>xs", function() require("trouble").toggle("symbols") end, { desc = "Toggle Symbols (Trouble)" })
+map("n", "<leader>xs", function()
+	require("trouble").toggle("symbols")
+end, { desc = "Toggle Symbols (Trouble)" })
 
 -- Quickfix and location lists
-map("n", "<leader>xq", function() require("trouble").toggle("qflist") end, { desc = "Toggle Quickfix (Trouble)" })
-map("n", "<leader>xl", function() require("trouble").toggle("loclist") end, { desc = "Toggle Location List (Trouble)" })
+map("n", "<leader>xq", function()
+	require("trouble").toggle("qflist")
+end, { desc = "Toggle Quickfix (Trouble)" })
+map("n", "<leader>xl", function()
+	require("trouble").toggle("loclist")
+end, { desc = "Toggle Location List (Trouble)" })
 
 -- Navigation within trouble
-map("n", "]x", function() require("trouble").next({ skip_groups = true, jump = true }) end,
-	{ desc = "Next Trouble Item" })
-map("n", "[x", function() require("trouble").prev({ skip_groups = true, jump = true }) end,
-	{ desc = "Previous Trouble Item" })
+map("n", "]x", function()
+	require("trouble").next({ skip_groups = true, jump = true })
+end, { desc = "Next Trouble Item" })
+map("n", "[x", function()
+	require("trouble").prev({ skip_groups = true, jump = true })
+end, { desc = "Previous Trouble Item" })
 
 -- Advanced navigation
-map("n", "]X", function() require("trouble").last({ skip_groups = true, jump = true }) end,
-	{ desc = "Last Trouble Item" })
-map("n", "[X", function() require("trouble").first({ skip_groups = true, jump = true }) end,
-	{ desc = "First Trouble Item" })
+map("n", "]X", function()
+	require("trouble").last({ skip_groups = true, jump = true })
+end, { desc = "Last Trouble Item" })
+map("n", "[X", function()
+	require("trouble").first({ skip_groups = true, jump = true })
+end, { desc = "First Trouble Item" })
 
 -- Close all trouble windows
-map("n", "<leader>xc", function() require("trouble").close() end, { desc = "Close Trouble" })
+map("n", "<leader>xc", function()
+	require("trouble").close()
+end, { desc = "Close Trouble" })
 
 -- Custom modes
-map("n", "<leader>xp", function() require("trouble").toggle("project_diagnostics") end,
-	{ desc = "Project Diagnostics (Trouble)" })
-map("n", "<leader>xb", function() require("trouble").toggle("buffer_diagnostics") end,
-	{ desc = "Buffer Diagnostics (Trouble)" })
+map("n", "<leader>xp", function()
+	require("trouble").toggle("project_diagnostics")
+end, { desc = "Project Diagnostics (Trouble)" })
+map("n", "<leader>xb", function()
+	require("trouble").toggle("buffer_diagnostics")
+end, { desc = "Buffer Diagnostics (Trouble)" })
 
 -- Telescope integration
 local telescope_trouble = require("trouble.sources.telescope")

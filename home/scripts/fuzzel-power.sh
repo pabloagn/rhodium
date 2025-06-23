@@ -16,7 +16,7 @@ else
     exit 1
 fi
 
-# Main menu options
+# --- Main Menu Options ---
 declare -A menu_options=(
     ["$(provide_fuzzel_entry) Power Off"]="power_off"
     ["$(provide_fuzzel_entry) Reboot"]="reboot_system"

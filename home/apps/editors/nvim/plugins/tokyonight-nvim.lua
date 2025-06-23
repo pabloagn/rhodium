@@ -14,4 +14,3 @@ require("tokyonight").setup({
 	dim_inactive = false,
 	lualine_bold = false,
 })
-

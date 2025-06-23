@@ -13,9 +13,6 @@ require("conform").setup({
 		html = { "prettierd", "prettier" },
 		json = { "prettierd", "prettier" },
 		jsonc = { "prettierd", "prettier" },
-		-- ipynb: No direct Conform formatter. Prettier doesn't have a specific parser.
-		-- TODO: Find a proper parser for jupyter notebooks
-		-- ipynb = { "prettierd", "prettier" },
 		elixir = { "mix_format" },
 		elm = { "elm_format" },
 		go = { "gofumpt", "goimports-reviser" },

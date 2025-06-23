@@ -5,6 +5,7 @@ set -euo pipefail
 # --- Main Configuration ---
 APP_NAME="rhodium-colors"
 APP_TITLE="Rhodium's Color Utils"
+PROMPT="β: "
 
 # --- Imports ---
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"

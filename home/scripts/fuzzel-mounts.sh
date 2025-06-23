@@ -2,9 +2,23 @@
 
 set -euo pipefail
 
-# --- Configuration ---
+# --- Main Configuration ---
+APP_NAME="rhodium-launcher"
+APP_TITLE="Rhodium's App Launcher"
+PROMPT="λ: "
+
 FUZZEL_DMENU_BASE_ARGS="--dmenu"
 MAX_DYNAMIC_LINES=15
+
+# --- Imports ---
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+if [[ -f "$SCRIPT_DIR/shared-functions.sh" ]]; then
+    source "$SCRIPT_DIR/shared-functions.sh"
+else
+    echo "Error: shared-functions.sh not found" >&2
+    exit 1
+fi
+
 
 # Mount directories for different device types
 MOUNT_BASE="/run/media/$USER"

@@ -8,5 +8,6 @@
     rustup
     just
     texlive.combined.scheme-full
+    typst
   ];
 }
