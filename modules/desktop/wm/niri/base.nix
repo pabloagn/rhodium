@@ -1,10 +1,14 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  pkgs-unstable,
+  ...
+}: {
   environment.systemPackages = with pkgs; [
     wl-clipboard # Clipboard support
     wayland-utils # Wayland debugging tools
     wev # Key event viewer (useful for finding key names)
     wlr-randr # Output management
-    xwayland-satellite # X11 app support (non-native on niri)
+    pkgs-unstable.xwayland-satellite # X11 app support (non-native on niri)
     dragon-drop # Drag and drop for wayland
   ];
 
@@ -18,9 +22,9 @@
     # For Qt apps
     QT_QPA_PLATFORM = "wayland";
     QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
-    
+
     # For SDL apps
-    SDL_VIDEODRIVER = "wayland"; 
+    SDL_VIDEODRIVER = "wayland";
   };
 
   programs.niri = {
