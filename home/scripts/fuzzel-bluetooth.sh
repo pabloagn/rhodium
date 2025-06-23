@@ -85,24 +85,51 @@ get_battery_percentage() {
 
 # --- Bluetooth Menu Actions ---
 
-# Enables Bluetooth power
+# Enables Bluetooth power (overrides any GUI blocks)
 enable_bluetooth() {
     notify "$APP_TITLE" "Enabling Bluetooth..."
+    
+    # First try to unblock rfkill if it's blocked
+    if command -v rfkill &>/dev/null; then
+        rfkill unblock bluetooth 2>/dev/null || true
+    fi
+    
+    # Then try to power on via bluetoothctl
     if bluetoothctl power on &>/dev/null; then
         notify "$APP_TITLE" "Bluetooth enabled."
     else
-        notify "$APP_TITLE" "Failed to enable Bluetooth. Check bluetooth service status and permissions."
+        # Try reset approach if direct power on fails
+        echo -e "power off\npower on\nquit" | bluetoothctl &>/dev/null
+        sleep 1
+        if bluetoothctl power on &>/dev/null; then
+            notify "$APP_TITLE" "Bluetooth enabled."
+        else
+            notify "$APP_TITLE" "Failed to enable Bluetooth. Check bluetooth service status and permissions."
+        fi
     fi
 }
 
-# Disables Bluetooth power
+# Disables Bluetooth power (hard disable with rfkill block)
 disable_bluetooth() {
     notify "$APP_TITLE" "Disabling Bluetooth..."
-    if bluetoothctl power off &>/dev/null; then
-        notify "$APP_TITLE" "Bluetooth disabled."
-    else
-        notify "$APP_TITLE" "Failed to disable Bluetooth. Check bluetooth service status and permissions."
+    
+    # First disconnect all devices
+    local connected_devices=$(bluetoothctl devices Connected 2>/dev/null | awk '{print $2}')
+    if [[ -n "$connected_devices" ]]; then
+        while IFS= read -r mac; do
+            bluetoothctl disconnect "$mac" &>/dev/null || true
+        done <<<"$connected_devices"
     fi
+    
+    # Power off via bluetoothctl
+    bluetoothctl power off &>/dev/null || true
+    
+    # Block via rfkill to prevent re-enabling
+    if command -v rfkill &>/dev/null; then
+        rfkill block bluetooth 2>/dev/null || true
+    fi
+    
+    notify "$APP_TITLE" "Bluetooth disabled."
 }
 
 # Starts scanning for discoverable devices
