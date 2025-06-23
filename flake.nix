@@ -34,7 +34,7 @@
     };
 
     kanso-nvim = {
-      url = "github:webhooked/kanso.nvim";
+      url = "github:pabloagn/kanso.nvim"; # NOTE: Personal fork
       flake = false;
     };
 
@@ -155,7 +155,7 @@
 
     # TODO: Temporary theme imports
     # While we have the complete theme module set up
-    targetTheme = import ./home/modules/themes.nix {inherit pkgs;};
+    targetTheme = import ./home/modules/themes.nix {inherit pkgs inputs;};
 
     chiaroscuroTheme = inputs.chiaroscuro.themes.kanso-zen;
   in {
