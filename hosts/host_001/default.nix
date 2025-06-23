@@ -7,7 +7,7 @@
     ./hardware-configuration.nix
     ../../modules/boot/boot.nix
     ../../modules/services
-    ../../modules/services/dbus.nix # Required for niri
+    ../../modules/services/dbus.nix # Required for niri # TODO: Pass as conditional with Niri enable
     ../../modules/hardware
     ../../modules/shell
     ../../modules/security
@@ -31,6 +31,12 @@
   networking = {
     hostName = host.hostname or "nixos";
     networkmanager.enable = true;
+  };
+
+  # Modules
+  # Display Manager
+  manager = {
+    gdm.enable = true;
   };
 
   # Extra Services

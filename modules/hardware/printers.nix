@@ -1,3 +1,5 @@
 {...}: {
-  services.printing.enable = true; # CUPS
+  services.printing = {
+    enable = true; # CUPS
+  };
 }

@@ -18,8 +18,9 @@
     # For Qt apps
     QT_QPA_PLATFORM = "wayland";
     QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
-
-    SDL_VIDEODRIVER = "wayland"; # For SDL apps
+    
+    # For SDL apps
+    SDL_VIDEODRIVER = "wayland"; 
   };
 
   programs.niri = {
@@ -39,7 +40,7 @@
     config = {
       common = {
         default = "gtk";
-        "org.freedesktop.impl.portal.ScreenCast" = "wlr";
+        "org.freedesktop.impl.portal.ScreenCast" = "wlr"; # NOTE: This is required for screensharing to work properly
         "org.freedesktop.impl.portal.Screenshot" = "wlr";
       };
     };

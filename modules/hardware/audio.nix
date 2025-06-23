@@ -1,27 +1,26 @@
 {pkgs, ...}: {
   environment.systemPackages = with pkgs; [
-    wireplumber # Session manager for pipewire
+    pamixer # Pulseaudio command line mixer
     pavucontrol # GUI audio control
     playerctl # Media player control
-    pamixer # Pulseaudio command line mixer
+    wireplumber # Session manager for pipewire
   ];
 
   # rtkit
-  security.rtkit.enable = true; # Required by PulseAudio and PipeWire to acquire realtime priority
+  security.rtkit.enable = true; # NOTE: Required by PulseAudio and PipeWire to acquire realtime priority
 
   # Pipewire
   services = {
-    pulseaudio.enable = false; # We disable native pulse audio and let pipewire handle it instead
+    pulseaudio.enable = false; # NOTE: We disable native pulse audio and let pipewire handle it instead
     pipewire = {
       enable = true;
       alsa = {
         enable = true;
         support32Bit = true;
       };
-      wireplumber.enable = true;
-
-      pulse.enable = true; # Enable pulse from pipewire
       jack.enable = true;
+      pulse.enable = true; # NOTE: Enable pulse from pipewire
+      wireplumber.enable = true;
     };
   };
 }

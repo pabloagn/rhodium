@@ -15,6 +15,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    flake-parts = {
+      url = "github:hercules-ci/flake-parts";
+    };
+
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -50,6 +54,7 @@
     nixpkgs,
     nixpkgs-unstable,
     home-manager,
+    flake-parts,
     sops-nix,
     nur,
     zen-browser,
@@ -148,7 +153,7 @@
     userThemeVariant = userPreferences.theme.variant or "dark";
     selectedTheme = getThemeConfig userThemeName userThemeVariant;
 
-    # Temporary theme imports
+    # TODO: Temporary theme imports
     # While we have the complete theme module set up
     targetTheme = import ./home/modules/themes.nix {inherit pkgs;};
 

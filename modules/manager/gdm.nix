@@ -1,10 +1,24 @@
-{...}: {
-  services.xserver = {
-    enable = true;
-    displayManager.gdm = {
-      enable = true;
-      wayland = true;
-    };
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+with lib; let
+  cfg = config.manager.gdm;
+in {
+  options.manager.gdm = {
+    enable = mkEnableOption "GDM display manager with custom configuration";
   };
-  security.pam.services.gdm.enableGnomeKeyring = true;
+  
+  config = mkIf cfg.enable {
+    services.xserver = {
+      enable = true;
+      displayManager.gdm = {
+        enable = true;
+        wayland = true;
+      };
+    };
+    security.pam.services.gdm.enableGnomeKeyring = true;
+  };
 }
