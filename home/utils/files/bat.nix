@@ -7,7 +7,7 @@
         inherit (targetTheme.tokyonight_night) src;
         file = targetTheme.tokyonight_night.files.bat;
       };
-      kanso-zen = {
+      kanso_zen = {
         inherit (targetTheme.kanso-zen) src;
         file = targetTheme.kanso-zen.files.bat;
       };
@@ -15,7 +15,7 @@
 
     config = {
       style = "plain";
-      theme = "kanso-zen";
+      theme = "kanso_zen";
     };
   };
 }

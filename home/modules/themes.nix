@@ -13,7 +13,7 @@
       bat = "/extras/sublime/tokyonight_night.tmTheme";
     };
   };
-  kanso_zen = {
+  kanso-zen = {
     src = inputs.kanso-nvim; # NOTE: Uses flake inputs directly
     files = {
       bat = "/extras/tmTheme/kanso-zen.tmTheme";
