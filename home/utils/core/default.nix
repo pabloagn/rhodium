@@ -13,5 +13,6 @@
     nix-tree # Explore nix store
     nix-update # Update nix package versions
     nix-web # Web interface for nix store
+    nix-prefetch-github # Prefetch sources from github. Useful for computing commit hashes.
   ];
 }
