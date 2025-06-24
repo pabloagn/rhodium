@@ -86,13 +86,13 @@ vim.keymap.set("n", "}", "<cmd>AerialPrev<CR>", {
 -- end, { desc = "Line" })
 
 vim.keymap.set("n", "<leader>cc", function()
-    if vim.v.count == 0 then
-        -- No count given, toggle current line
-        require("Comment.api").toggle.linewise.current()
-    else
-        -- Count given, toggle 'count' lines
-        require("Comment.api").toggle.linewise.count(vim.v.count)
-    end
+	if vim.v.count == 0 then
+		-- No count given, toggle current line
+		require("Comment.api").toggle.linewise.current()
+	else
+		-- Count given, toggle 'count' lines
+		require("Comment.api").toggle.linewise.count(vim.v.count)
+	end
 end, { desc = "Toggle Linewise (Line/Count)" })
 
 -- TODO: Check this
@@ -417,7 +417,7 @@ vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
 	end,
 })
 
--- Idents
+-- Indents
 -- -------------------------------------------------
 vim.keymap.set({ "n", "v" }, "<Leader>ii", function()
 	functions.smart_indent()
@@ -446,8 +446,8 @@ vim.keymap.set("n", "<Leader>z", ":set foldmethod=expr foldexpr=nvim_treesitter#
 -- Buffers
 -- -------------------------------------------------
 -- Scroll buffers
-vim.keymap.set({ "n", "v" }, "<leader>s", "<cmd>BufferLineCycleNext<CR>", { desc = "Next buffer", silent = true })
-vim.keymap.set({ "n", "v" }, "<leader>S", "<cmd>BufferLineCyclePrev<CR>", { desc = "Previous buffer", silent = true })
+vim.keymap.set({ "n", "v" }, "A-s", "<cmd>BufferLineCycleNext<CR>", { desc = "Next buffer", silent = true })
+vim.keymap.set({ "n", "v" }, "A-S", "<cmd>BufferLineCyclePrev<CR>", { desc = "Previous buffer", silent = true })
 
 -- Close buffers
 vim.keymap.set("n", "<leader>w", "<cmd>write | bdelete<CR>", { desc = "Save and close", silent = true })
@@ -514,7 +514,7 @@ vim.keymap.set("n", "[t", function()
 end, { desc = "Previous todo comment" })
 
 vim.keymap.set("n", "]T", function()
-	require("todo-comments").jump_next({ keywords = { "TODO", "FIX" } })
+	require("todo-comments").jump_next({ keywords = { "TODO", "FIX", "SEV1", "SEV2", "SEV3" } })
 end, { desc = "Next task" })
 
 -- Multicursor
@@ -600,6 +600,22 @@ end, {
 	expr = true,
 	desc = "Scroll Backward",
 })
+
+-- Sort
+-- -------------------------------------------------
+-- Sort variations
+vim.keymap.set("v", "<Leader>sa", ":sort<CR>", { noremap = true, silent = true, desc = "Sort alphabetically" })
+vim.keymap.set("v", "<Leader>sr", ":sort!<CR>", { noremap = true, silent = true, desc = "Sort reverse (descending)" })
+vim.keymap.set("v", "<Leader>si", ":sort i<CR>", { noremap = true, silent = true, desc = "Sort case-insensitive" })
+vim.keymap.set("v", "<Leader>sn", ":sort n<CR>", { noremap = true, silent = true, desc = "Sort numerically" })
+
+-- Motions
+-- -------------------------------------------------
+-- Move lines up/down
+vim.keymap.set("n", "<A-Down>", ":m .+1<CR>==", { noremap = true, silent = true, desc = "Move line down" })
+vim.keymap.set("n", "<A-Up>", ":m .-2<CR>==", { noremap = true, silent = true, desc = "Move line up" })
+vim.keymap.set("v", "<A-Down>", ":m '>+1<CR>gv=gv", { noremap = true, silent = true, desc = "Move selection down" })
+vim.keymap.set("v", "<A-Up>", ":m '<-2<CR>gv=gv", { noremap = true, silent = true, desc = "Move selection up" })
 
 -- LuaSnip (Snippets)
 -- TODO: Add this

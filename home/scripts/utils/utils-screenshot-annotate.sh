@@ -7,13 +7,7 @@ APP_NAME="rhodium-screenshot-annotate"
 APP_TITLE="Rh Screenshot Annotate"
 
 # --- Imports ---
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-if [[ -f "$SCRIPT_DIR/shared-functions.sh" ]]; then
-    source "$SCRIPT_DIR/shared-functions.sh"
-else
-    echo "Error: shared-functions.sh not found" >&2
-    exit 1
-fi
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../common/bootstrap.sh"
 
 # Check dependencies
 dependencies=("slurp" "grim" "satty")

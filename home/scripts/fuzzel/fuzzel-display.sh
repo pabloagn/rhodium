@@ -6,13 +6,7 @@ APP_TITLE="Rhodium's Display Utils"
 PROMPT="δ: "
 
 # --- Imports ---
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-if [[ -f "$SCRIPT_DIR/shared-functions.sh" ]]; then
-    source "$SCRIPT_DIR/shared-functions.sh"
-else
-    echo "Error: shared-functions.sh not found" >&2
-    exit 1
-fi
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../common/bootstrap.sh"
 
 # --- Helper Functions ---
 get_outputs() {

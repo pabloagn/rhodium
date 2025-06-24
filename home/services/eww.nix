@@ -4,9 +4,9 @@
   ...
 }:
 with lib; let
-  cfg = config.services.rh-eww;
+  cfg = config.userExtraServices.rh-eww;
 in {
-  options.services.rh-eww = {
+  options.userExtraServices.rh-eww = {
     enable = mkEnableOption "Highly customizable widgets";
   };
 

@@ -8,13 +8,7 @@ APP_TITLE="Rhodium's App Launcher"
 PROMPT="λ: "
 
 # --- Imports ---
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-if [[ -f "$SCRIPT_DIR/shared-functions.sh" ]]; then
-    source "$SCRIPT_DIR/shared-functions.sh"
-else
-    echo "Error: shared-functions.sh not found" >&2
-    exit 1
-fi
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../common/bootstrap.sh"
 
 # --- Configuration ---
 PADDING_ARGS="35 20 20" # Column padding: name, type, categories

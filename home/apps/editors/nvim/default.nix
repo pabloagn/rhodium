@@ -15,10 +15,11 @@
     "nvim/lua/keybinds.lua".source = ./keybinds.lua;
     "nvim/lua/ftdetect.lua".source = ./ftdetect.lua;
 
-    # Filetype plugins (automatically loaded by Neovim)
+    # Filetype plugins
     "nvim/ftplugin/tex.lua".source = ./ftplugin/tex.lua;
     "nvim/ftplugin/python.lua".source = ./ftplugin/python.lua;
     "nvim/ftplugin/markdown.lua".source = ./ftplugin/markdown.lua;
+    "nvim/ftplugin/rust.lua".source = ./ftplugin/rust.lua;
 
     "nvim/init.lua".text = ''
       require('filters')

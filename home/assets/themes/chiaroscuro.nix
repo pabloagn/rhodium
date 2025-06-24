@@ -1,12 +1,10 @@
-{ pkgs, ... }:
-let
+{pkgs, ...}: let
   colorTokens = import ../colors/colors.nix;
-  fontTokens = import ../fonts/fonts.nix { inherit pkgs; };
+  fontTokens = import ../fonts/fonts.nix {inherit pkgs;};
   iconsNerdFontTokens = import ../icons/nerdfonts.nix;
   iconsUnicodeTokens = import ../icons/unicode.nix;
   wallpaperTokens = import ../wallpapers/wallpapers.nix;
-in
-{
+in {
   theme = {
     name = "chiaroscuro";
     description = "A high-contrast dark theme with elegant typography";

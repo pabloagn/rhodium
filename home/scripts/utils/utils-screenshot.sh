@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# --- Imports ---
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../common/bootstrap.sh"
+
 # Check dependencies
 dependencies=("slurp" "grim" "convert" "swappy")
 for dep in "${dependencies[@]}"; do

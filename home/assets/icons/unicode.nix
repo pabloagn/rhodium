@@ -1,3 +1,4 @@
+# TODO: Eventually this will be deprecated in favor of the JSON object. No Nix files are to be symlinked to user dirs.
 {
   mathematical = {
     operators = {

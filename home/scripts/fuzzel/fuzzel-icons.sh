@@ -8,16 +8,11 @@ APP_TITLE="Rhodium's Color Utils"
 PROMPT="β: "
 
 # --- Imports ---
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-if [[ -f "$SCRIPT_DIR/shared-functions.sh" ]]; then
-    source "$SCRIPT_DIR/shared-functions.sh"
-else
-    echo "Error: shared-functions.sh not found" >&2
-    exit 1
-fi
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../common/bootstrap.sh"
 
 # Location of the Unicode symbol list in this script (adjust if you externalize it)
-UNICODE_SYMBOL_LIST=$(cat <<'EOF'
+UNICODE_SYMBOL_LIST=$(
+    cat <<'EOF'
 +	Plus	(Mathematical, Operators)
 −	Minus	(Mathematical, Operators)
 ×	Multiply	(Mathematical, Operators)

@@ -37,7 +37,8 @@
   # Asset linking
   assets = {
     wallpapers.enable = true; # Symlink wallpapers to data dir
-    colors.enable = true; # Symlink user scripts to user bin dir
+    colors.enable = true; # Symlink colorpacks to user data dir
+    icons.enable = true; # Symlink icon packs to user data dir
   };
 
   # Script linking
@@ -48,7 +49,7 @@
 
   # Custom services
   # NOTE: These are custom services located under home/services, and run as systemd daemons
-  services = {
+  userExtraServices = {
     rh-waybar.enable = true;
     rh-mako.enable = true;
     rh-swaybg.enable = true;

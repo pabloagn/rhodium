@@ -1,3 +1,4 @@
+# TODO: Eventually this will be deprecated in favor of a JSON object.
 {
   aria = {
     path = ./aria;

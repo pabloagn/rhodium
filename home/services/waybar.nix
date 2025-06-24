@@ -5,9 +5,9 @@
   ...
 }:
 with lib; let
-  cfg = config.services.rh-waybar;
+  cfg = config.userExtraServices.rh-waybar;
 in {
-  options.services.rh-waybar = {
+  options.userExtraServices.rh-waybar = {
     enable = mkEnableOption "Highly customizable Wayland bar";
   };
 
