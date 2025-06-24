@@ -9,10 +9,11 @@
 
   xdg.configFile = {
     # init.lua
+    "nvim/lua/filters.lua".source = ./filters.lua;
     "nvim/lua/functions.lua".source = ./functions.lua;
     "nvim/lua/main.lua".source = ./main.lua;
-    "nvim/lua/filters.lua".source = ./filters.lua;
     "nvim/lua/keybinds.lua".source = ./keybinds.lua;
+    "nvim/lua/ftdetect.lua".source = ./ftdetect.lua;
 
     # Filetype plugins (automatically loaded by Neovim)
     "nvim/ftplugin/tex.lua".source = ./ftplugin/tex.lua;
@@ -24,6 +25,7 @@
       require('functions')
       require('main')
       require('keybinds')
+      require('ftdetect')
     '';
   };
 }

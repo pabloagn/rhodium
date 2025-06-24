@@ -117,7 +117,13 @@
       icon = "obsidian";
       description = "Obsidian";
     };
-    incognito = {
+    brave = {
+      binary = "brave";
+      args = [""];
+      icon = "brave";
+      description = "Brave";
+    };
+    firefox-incognito = {
       binary = "firefox";
       args = ["-p" "Personal" "--private-window"];
       icon = "firefox";
@@ -167,7 +173,7 @@
     };
     ghostty-instance = {
       binary = "ghostty";
-      args = ["--shell-integration=none"];
+      args = [];
       icon = "ghostty";
       description = "Ghostty";
     };

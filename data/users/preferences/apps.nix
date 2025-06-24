@@ -28,7 +28,6 @@
   };
 
   profiles = {
-
     firefox = {
       personal = "Personal";
       media = "Media";
