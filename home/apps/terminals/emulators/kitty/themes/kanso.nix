@@ -1,7 +1,7 @@
 {...}: {
   programs.kitty = {
     settings = {
-      background_opacity = 0.95; # NOTE: This foes on top of the compositor's transparency
+      background_opacity = 1.0; # NOTE: This foes on top of the compositor's transparency
       background = "#090E13";
       foreground = "#C5C9C7";
       selection_background = "#393B44";

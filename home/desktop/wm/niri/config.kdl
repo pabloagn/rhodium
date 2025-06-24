@@ -1,9 +1,10 @@
 // Environment Variables
 // HACK: Required for X11 apps
 // Either this approach, or launching using flags (check desktop apps)
-// environment {
-//     DISPLAY ":0"
-// }
+// NOTE: This only works for xwayland-satellite > 0.6 (force-no-rescaling implementation natively)
+environment {
+    DISPLAY ":0"
+}
 // Inputs
 // ------------------------------------
 input {
@@ -21,9 +22,13 @@ input {
     touchpad {
         tap
         accel-speed -0.3
+        middle-emulation
+        scroll-factor 1.0
     }
     mouse {
-        accel-speed -0.3
+        accel-speed -0.2
+        scroll-factor 0.9
+        middle-emulation
     }
     focus-follows-mouse max-scroll-amount="95%"
 }
@@ -48,6 +53,18 @@ layer-rule {
     match namespace="^wallpaper$"
     place-within-backdrop true
 }
+layer-rule {
+    // Add shadow to fuzzel instances
+    match namespace="^launcher"
+    shadow {
+        on
+        softness 40
+        spread 5
+        offset x=0 y=5
+        draw-behind-window true
+        color "#00000050"
+    }
+}
 // Window rules
 window-rule {
     match app-id="qalculate-gtk"
@@ -56,7 +73,7 @@ window-rule {
 window-rule {
     match app-id="calcure"
     // open-floating true
-    open-fullscreen true
+    open-maximized true
 }
 // Avoid hotkey help menu from appearing at startup
 hotkey-overlay {
@@ -67,10 +84,22 @@ prefer-no-csd
 // Cursor
 cursor {
     xcursor-size 24
-    hide-after-inactive-ms 3000
+    hide-after-inactive-ms 2000
 }
 // Disable hot corners (easily triggered)
 gestures {
+    dnd-edge-view-scroll {
+        trigger-width 30
+        delay-ms 100
+        max-speed 1500
+    }
+
+    dnd-edge-workspace-switch {
+        trigger-height 50
+        delay-ms 100
+        max-speed 1500
+    }
+
     hot-corners {
         off
     }
@@ -85,15 +114,13 @@ overview {
 // Window layout
 // ------------------------------------
 layout {
-    // always-center-single-column
     shadow {
-        // Toggle on if required
         // on
         softness 10
         spread 5
         offset x=0 y=5
         draw-behind-window false
-        color "#00000070"
+        color "#090D1270"
         inactive-color "#00000054"
     }
     // Per-workspace background color
@@ -128,9 +155,17 @@ layout {
     }
     focus-ring {
         off
+        width 1
+        active-color 255 200 127 255
+        inactive-color 80 80 80 255
     }
     border {
         off
+        width 1
+        active-gradient from="#090E13" to="#C14043" angle=45 relative-to="workspace-view"
+        // inactive-gradient from="#0d0c0c" to="#808080" angle=45 relative-to="workspace-view"
+        // active-color 34 38 45 255
+        inactive-color "#090D12"
     }
     tab-indicator {
         // off
@@ -164,10 +199,8 @@ animations {
     // NOTE: Uncomment to turn off all animations
     // NOTE: We can also put "off" into each individual animation to disable it.
     // off
-
     // HACK: Slow down all animations by this factor. Values below 1 speed them up instead.
     slowdown 0.8
-
     window-open {
         duration-ms 150
         curve "ease-out-expo"
@@ -198,6 +231,12 @@ animations {
 }
 // Transparency and blur
 window-rule {
+    match is-active=true
+    // Apply to all windows
+    opacity 0.99
+}
+window-rule {
+    match is-active=false
     // Apply to all windows
     opacity 0.99
 }
@@ -415,9 +454,6 @@ binds {
     Mod+Q hotkey-overlay-title="Toggle Calculator [CLI]" {
         spawn "~/.local/bin/utils-qalc.sh"
     }
-    Mod+M hotkey-overlay-title="Toggle Monitor [CLI]" {
-        spawn "kitty" "-e" "htop"
-    }
     // Secondary (Shift)
     // -------------------------------------------------
     Mod+Shift+W hotkey-overlay-title="Launch Terminal [Ghostty]" {
@@ -555,22 +591,22 @@ binds {
         screenshot-window
     }
     Mod+Shift+A hotkey-overlay-title="Screenshot Interactive [A]notate" {
-        spawn "~/.local/bin/utils-screenshot-annotate.sh"
+        spawn "~/.local/bin/utils-screenshot-anotate.sh"
     }
     Alt+Print hotkey-overlay-title="Screenshot Interactive [A]notate" {
-        spawn "~/.local/bin/utils-screenshot-annotate.sh"
+        spawn "~/.local/bin/utils-screenshot-anotate.sh"
     }
     // Mouse & Trackpad Scroll Bindings
-    Mod+WheelScrollDown cooldown-ms=150 hotkey-overlay-title="Focus Workspace Down (Scroll)" {
+    Mod+WheelScrollDown cooldown-ms=50 hotkey-overlay-title="Focus Workspace Down (Scroll)" {
         focus-workspace-down
     }
-    Mod+WheelScrollUp cooldown-ms=150 hotkey-overlay-title="Focus Workspace Up (Scroll)" {
+    Mod+WheelScrollUp cooldown-ms=50 hotkey-overlay-title="Focus Workspace Up (Scroll)" {
         focus-workspace-up
     }
-    Mod+WheelScrollRight cooldown-ms=150 hotkey-overlay-title="Focus Column Right (Scroll)" {
+    Mod+WheelScrollRight cooldown-ms=50 hotkey-overlay-title="Focus Column Right (Scroll)" {
         focus-column-right
     }
-    Mod+WheelScrollLeft cooldown-ms=150 hotkey-overlay-title="Focus Column Left (Scroll)" {
+    Mod+WheelScrollLeft cooldown-ms=50 hotkey-overlay-title="Focus Column Left (Scroll)" {
         focus-column-left
     }
     Mod+TouchpadScrollUp hotkey-overlay-title="Increase Volume (Touchpad)" {

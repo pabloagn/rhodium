@@ -45,7 +45,7 @@
       icon = "feh";
       description = "Image Viewer (X11)";
     };
-    image-viewer= {
+    image-viewer = {
       binary = "imv";
       args = [];
       icon = "imv";
@@ -53,15 +53,30 @@
     };
   };
 
+  system = {
+    bottom = {
+      binary = "kitty";
+      args = ["-e" "btm"];
+      icon = "bottom";
+      description = "Bottom (Htop)";
+    };
+  };
+
   productivity = {
     onepassword = {
       binary = "1password";
-      # NOTE: The flags below are required to work outside X11 (e.g., niri)
-      args = ["--enable-features=UseOzonePlatform" "--ozone-platform=wayland"];
-      # NOTE: The flags below are required to work in hyprland
-      # args = ["--force-device-scale-factor=1.5"];
+      # NOTE: Use flags below if not using xwayland-satellite
+      # args = ["--enable-features=UseOzonePlatform" "--ozone-platform=wayland"];
+      # NOTE: Use flag below if using xwayland-satellite > 0.6
+      args = ["--force-device-scale-factor=1.5"];
       icon = "onepassword";
       description = "1Password";
+    };
+    bitwarden = {
+      binary = "bitwarden";
+      args = [];
+      icon = "bitwarden";
+      description = "Bitwarden";
     };
     protonmail = {
       binary = "proton-mail";
