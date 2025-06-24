@@ -97,7 +97,7 @@ require("lspconfig").fortls.setup({
 })
 
 -- Gleam
-require("lspconfig").glas.setup({
+require("lspconfig").gleam.setup({
 	capabilities = capabilities,
 })
 

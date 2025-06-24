@@ -5,11 +5,8 @@
     xorg.xev # xorg key registry
   ];
 
-  # Time zone
-  time.timeZone = "Europe/London";
-
-  # Locale
-  i18n.defaultLocale = "en_GB.UTF-8";
+  time.timeZone = "Europe/London"; # Time zone
+  i18n.defaultLocale = "en_GB.UTF-8"; # Locale
 
   # Additional properties
   i18n.extraLocaleSettings = {
@@ -24,8 +21,7 @@
     LC_TIME = "en_GB.UTF-8";
   };
 
-  # Console Keymap
-  console.keyMap = "uk";
+  console.keyMap = "uk"; # Default onsole Keymap
 
   services.xserver.xkb = {
     layout = "gb";

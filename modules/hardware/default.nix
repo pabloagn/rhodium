@@ -1,12 +1,17 @@
 {...}: {
   imports = [
-    ./managers.nix
     ./audio.nix
-    ./keyboard.nix
-    ./printers.nix
-    ./video.nix
-    ./wireless.nix
     ./battery.nix
-    ./devices.nix
+    ./bluetooth.nix
+    ./keyboard.nix
+    ./mouse.nix
+    ./network.nix
+    ./printers.nix
+    ./storage.nix
+    ./video.nix
   ];
+
+  services.udev = {
+    enable = true; # Enable device manager
+  };
 }

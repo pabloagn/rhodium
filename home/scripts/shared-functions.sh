@@ -7,6 +7,7 @@
 FUZZEL_PROMPT="λ"
 FUZZEL_ENTRY="⊹"
 
+# --- Shared Functions ---
 notify() {
     local title="$1"
     local message="$2"
@@ -44,4 +45,35 @@ provide_fuzzel_entry() {
 provide_fuzzel_mode() {
     # Do not add blank space on this instance
     echo "--dmenu"
+}
+
+decorate_fuzzel_menu() {
+    # Populate fuzzel menu from raw "Label:command" array
+    # Usage:
+    #   decorate_fuzzel_menu raw_array[@]
+    # After calling, two variables will be available:
+    #   - menu_labels (ordered list of decorated entries)
+    #   - menu_commands (map of decorated entries -> command names)
+
+    local -n raw_options="$1" # Reference to the input array
+    menu_labels=()
+    declare -gA menu_commands=() # Global associative array
+
+    for entry in "${raw_options[@]}"; do
+        local label="${entry%%:*}"
+        local command="${entry##*:}"
+        local decorated="${FUZZEL_ENTRY} ${label}"
+        menu_labels+=("$decorated")
+        menu_commands["$decorated"]="$command"
+    done
+}
+
+get_fuzzel_line_count() {
+    # Returns the number of non-empty menu_labels (used for --lines argument)
+
+    local count=0
+    for label in "${menu_labels[@]}"; do
+        [[ -n "$label" ]] && ((count++))
+    done
+    echo "$count"
 }

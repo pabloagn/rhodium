@@ -68,9 +68,6 @@
     fortls
     fprettify # Formatter
 
-    # Gleam
-    glas # Language server
-
     # GLSL
     glslls
 
