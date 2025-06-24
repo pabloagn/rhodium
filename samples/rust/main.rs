@@ -4,3 +4,5 @@ fn main() {
     let greeting = "Welcome to Rhodium";
     println!("{}", greeting);
 }
+
+fn myfun() {}

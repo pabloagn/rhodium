@@ -1,3 +1,4 @@
+-- Python development
 vim.keymap.set("n", ";pr", ":!python %<CR>", {
 	buffer = true,
 	desc = "Python: Run current file",

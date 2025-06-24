@@ -1,3 +1,4 @@
+-- LaTeX
 vim.keymap.set("n", ";ll", "<Plug>(vimtex-compile)", {
 	buffer = true,
 	desc = "VimTeX: Continuous compile",
