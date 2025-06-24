@@ -5,9 +5,9 @@
   ...
 }:
 with lib; let
-  cfg = config.services.asusKeyboardBacklight;
+  cfg = config.extraServices.asusKeyboardBacklight;
 in {
-  options.services.asusKeyboardBacklight = {
+  options.extraServices.asusKeyboardBacklight = {
     enable = mkEnableOption "ASUS keyboard backlight fix";
   };
 

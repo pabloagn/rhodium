@@ -7,23 +7,22 @@
     ./hardware-configuration.nix
     ../../modules/boot/boot.nix
     ../../modules/services
-    ../../modules/services/dbus.nix # Required for niri # TODO: Pass as conditional with Niri enable
     ../../modules/hardware
     ../../modules/shell
     ../../modules/security
     ../../modules/users
     ../../modules/manager
-    # Window Manager
     ../../modules/desktop
-    # ../../modules/desktop/wm/hyprland/amd.nix
     ../../modules/desktop/wm/niri/amd.nix
-
+    ../../modules/integration
     ../../modules/virtualization
     ../../modules/apps
     ../../modules/maintenance
     ../../modules/utils
   ];
 
+  # Base
+  # ---------------------------------
   # Kernel version (AMD follows latest)
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
@@ -34,13 +33,14 @@
   };
 
   # Modules
+  # ---------------------------------
   # Display Manager
   manager = {
     gdm.enable = true;
   };
 
   # Extra Services
-  services = {
+  extraServices = {
     asusKeyboardBacklight.enable = true;
     laptopLid.enable = true;
   };
@@ -53,8 +53,7 @@
   };
 
   # Extra Args
+  # ---------------------------------
   nix.settings.experimental-features = ["nix-command" "flakes"];
-
-  # Original derivation
-  system.stateVersion = "24.05";
+  system.stateVersion = "24.05"; # NOTE: Original derivation
 }

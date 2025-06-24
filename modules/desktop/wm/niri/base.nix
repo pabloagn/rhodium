@@ -31,6 +31,10 @@
     enable = true;
   };
 
+  services.dbus = {
+    enable = true; # Required for niri wm
+  };
+
   # Desktop portals
   xdg.portal = {
     enable = true;

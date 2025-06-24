@@ -4,10 +4,10 @@
   ...
 }:
 with lib; let
-  cfg = config.services.laptopLid;
+  cfg = config.extraServices.laptopLid;
 in {
-  options.services.laptopLid = {
-    enable = mkEnableOption "custom laptop lid handling";
+  options.extraServices.laptopLid = {
+    enable = mkEnableOption "Custom laptop lid handling";
 
     handleLidSwitch = mkOption {
       type = types.enum [
