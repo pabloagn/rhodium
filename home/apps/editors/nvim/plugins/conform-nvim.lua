@@ -15,7 +15,7 @@ require("conform").setup({
 		jsonc = { "prettierd", "prettier" },
 		elixir = { "mix_format" },
 		elm = { "elm_format" },
-		go = { "gofumpt", "goimports-reviser" },
+		go = { "gofumpt" },
 		haskell = { "fourmolu" },
 		java = { "google_java_format" },
 		javascriptreact = { "prettierd", "prettier", stop_after_first = true },
@@ -34,11 +34,43 @@ require("conform").setup({
 		terraform = { "terraform_fmt" },
 		fortran = { "fprettify" },
 		crystal = { "crystal_tool_format" },
-		proto = { "buf", "format" }, -- Assuming 'buf format' command
-		dhall = { "dhall", "format" }, -- Assuming 'dhall format' command
-		prisma = { "prisma", "format" }, -- Assuming 'prisma format' command
+		proto = { "buf" },
+		dhall = { "dhall" },
+		prisma = { "prisma" },
 		sql = { "sqlfluff" },
 		markdown = { "prettierd", "prettier" },
 	},
 	lsp_fallback = true,
+	formatters = {
+		crystal_tool_format = {
+			command = "crystal",
+			args = { "tool", "format", "-" },
+			stdin = true,
+		},
+		dhall = {
+			command = "dhall",
+			args = { "format" },
+			stdin = true,
+		},
+		mix_format = {
+			command = "mix",
+			args = { "format", "-" },
+			stdin = true,
+		},
+		google_java_format = {
+			command = "google-java-format",
+			args = { "-" },
+			stdin = true,
+		},
+		prisma = {
+			command = "prisma",
+			args = { "format", "--schema", "$FILENAME" },
+			stdin = false,
+		},
+		buf = {
+			command = "buf",
+			args = { "format", "-w" },
+			stdin = false,
+		},
+	},
 })
