@@ -5,205 +5,229 @@
 # ⟡ CONFIGURATION
 # ─────────────────────────────────────────────────────────────────────────────
 
+# Configuration
 set shell := ["bash", "-euo", "pipefail", "-c"]
 set positional-arguments := true
 
-hostname := `hostname`
+# Internal Variables
 flake_path := "."
-username := `echo $USER`
-config_dir := `echo $HOME` + "/.config"
-cache_home := `echo ${XDG_CACHE_HOME:-$HOME/.cache}`
-nix_profile := "/nix/var/nix/profiles"
+version := "1.0.0"
+author := "Rhodium"
+timestamp := `date +%Y-%m-%d`
+
+# Environment
+user := env('USER')
+home_dir := env('HOME')
+
+# Unicode Symbols
+sym_success := "▲"
+sym_pending := "⟡"
+sym_partial := "◐"
+sym_down := "▼"
+sym_bullet := "▪"
+sym_info := "✗"
+bar_heavy := "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+bar_light := "─────────────────────────────────────────────────────────────────────────────"
+
+# Style
+red := '\033[0;31m'
+green := '\033[0;32m'
+yellow := '\033[0;33m'
+blue := '\033[0;34m'
+magenta := '\033[0;35m'
+cyan := '\033[0;36m'
+reset := '\033[0m'
 
 # Default recipe shows available commands
 default:
     @just --list
 
 # Build and switch NixOS configuration
-switch host=hostname: && update-caches
-    @echo "⟡ Pre-build validation for {{ host }}"
+switch host=`hostname`: && update-caches
+    @printf "{{yellow}}{{sym_pending}} Pre-flight checks for %s{{reset}}\n" "{{ host }}"
     @if nix flake check {{ flake_path }} 2>/dev/null; then \
-    	echo "  ▲ Flake validation passed"; \
+    	printf "  {{green}}{{sym_success}} Flake validation passed{{reset}}\n"; \
     else \
-    	echo "  ◐ Flake validation failed [continuing anyway]"; \
+    	printf "  {{yellow}}{{sym_partial}} Flake validation failed [continuing anyway]{{reset}}\n"; \
     fi
-    @echo "⟡ Building and switching configuration..."
+    @printf "{{yellow}}{{sym_pending}} Building and switching configuration...{{reset}}\n"
     sudo nixos-rebuild switch --flake {{ flake_path }}#{{ host }}
-    @echo "⟡ Running post-build tasks..."
-    @if [ -f "/etc/profiles/per-user/$USER/etc/profile.d/hm-session-vars.sh" ]; then \
-    	echo "  ▪ Loading session variables"; \
-    	source "/etc/profiles/per-user/$USER/etc/profile.d/hm-session-vars.sh"; \
+    @printf "{{yellow}}{{sym_pending}} Running post-build tasks...{{reset}}\n"
+    @if [ -f "/etc/profiles/per-user/{{user}}/etc/profile.d/hm-session-vars.sh" ]; then \
+    	printf "  {{cyan}}{{sym_bullet}} Loading session variables{{reset}}\n"; \
+    	source "/etc/profiles/per-user/{{user}}/etc/profile.d/hm-session-vars.sh"; \
     fi
     @if [ -n "${WAYLAND_DISPLAY:-}" ]; then \
-    	echo "  ▪ Reloading Wayland services"; \
+    	printf "  {{cyan}}{{sym_bullet}} Reloading Wayland services{{reset}}\n"; \
     	systemctl --user daemon-reload; \
     	for service in rh-swaybg rh-waybar rh-mako; do \
-    		systemctl --user restart "$$service.service" 2>/dev/null || true; \
+    		systemctl --user restart "$${service}.service" 2>/dev/null || true; \
     	done; \
     fi
     @command -v niri >/dev/null 2>&1 && niri msg action do-screen-transition --delay-ms 200 2>/dev/null || true
-    @echo "▲ System rebuild complete"
+    @printf "{{green}}{{sym_success}} System rebuild complete{{reset}}\n"
 
 # Build without switching [test build]
-build host=hostname:
-    @echo "⟡ Building configuration for {{ host }}..."
+build host=`hostname`:
+    @printf "{{yellow}}{{sym_pending}} Building configuration for %s...{{reset}}\n" "{{ host }}"
     sudo nixos-rebuild build --flake {{ flake_path }}#{{ host }}
-    @echo "▲ Build successful [not activated]"
+    @printf "{{green}}{{sym_success}} Build successful [not activated]{{reset}}\n"
 
 # Rebuild and boot into new generation
-boot host=hostname:
-    @echo "⟡ Building boot configuration for {{ host }}..."
+boot host=`hostname`:
+    @printf "{{yellow}}{{sym_pending}} Building boot configuration for %s...{{reset}}\n" "{{ host }}"
     sudo nixos-rebuild boot --flake {{ flake_path }}#{{ host }}
-    @echo "▲ Will boot into new generation on next reboot"
+    @printf "{{green}}{{sym_success}} Will boot into new generation on next reboot{{reset}}\n"
 
 # Dry run - show what would be built
-dry host=hostname:
-    @echo "⟡ Dry run for {{ host }}..."
+dry host=`hostname`:
+    @printf "{{yellow}}{{sym_pending}} Dry run for %s...{{reset}}\n" "{{ host }}"
     sudo nixos-rebuild dry-build --flake {{ flake_path }}#{{ host }}
 
 # Fast rebuild with minimal output
-fast host=hostname: && update-caches
+fast host=`hostname`: && update-caches
+    @printf "{{yellow}}{{sym_pending}} Fast switch for %s...{{reset}}\n" "{{ host }}"
     sudo nixos-rebuild switch --flake {{ flake_path }}#{{ host }} --fast
 
 # Development rebuild with verbose output
-dev host=hostname:
-    @echo "◐ Development build with trace output..."
+dev host=`hostname`:
+    @printf "{{yellow}}{{sym_partial}} Development build with trace output for %s{{reset}}\n" "{{ host }}"
     sudo nixos-rebuild switch --flake {{ flake_path }}#{{ host }} --show-trace -L
 
 # Update all flake inputs
 update:
-    @echo "⟡ Updating all flake inputs..."
+    @printf "{{yellow}}{{sym_pending}} Updating all flake inputs...{{reset}}\n"
     nix flake update
-    @echo "▲ Flake inputs updated"
-    @echo ""
-    @echo "Input changes:"
+    @printf "{{green}}{{sym_success}} Flake inputs updated{{reset}}\n"
+    @printf "\n"
+    @printf "{{cyan}}Input changes:{{reset}}\n"
     @git -C {{ flake_path }} diff flake.lock | grep -E "^\+" | grep -E "(lastModified|narHash)" | head -10 || true
 
 # Update specific flake input
 update-input input:
-    @echo "⟡ Updating input: {{ input }}..."
+    @printf "{{yellow}}{{sym_pending}} Updating input: %s...{{reset}}\n" "{{ input }}"
     nix flake update {{ input }}
-    @echo "▲ Updated input: {{ input }}"
+    @printf "{{green}}{{sym_success}} Updated input: %s{{reset}}\n" "{{ input }}"
 
 # Show flake metadata
 flake-info:
-    @echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-    @echo "▲ FLAKE INFORMATION"
-    @echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-    @echo ""
+    @printf "{{cyan}}{{bar_heavy}}{{reset}}\n"
+    @printf "{{cyan}}{{sym_success}} FLAKE INFORMATION{{reset}}\n"
+    @printf "{{cyan}}{{bar_heavy}}{{reset}}\n"
+    @printf "\n"
     nix flake metadata {{ flake_path }}
 
 # Remove old generations keeping N most recent [default: 5]
 gc-keep generations="5":
-    @echo "⟡ Analyzing generations..."
+    @printf "{{yellow}}{{sym_pending}} Analyzing generations...{{reset}}\n"
     @current_gen=$(sudo nix-env --list-generations -p /nix/var/nix/profiles/system | tail -1 | awk '{print $1}'); \
     total_gens=$(sudo nix-env --list-generations -p /nix/var/nix/profiles/system | wc -l); \
-    echo "  Current generation: $current_gen"; \
-    echo "  Total generations: $total_gens"; \
-    echo "  Generations to keep: {{ generations }} [plus current]"; \
-    echo ""; \
+    printf "  Current generation: %s\n" "$current_gen"; \
+    printf "  Total generations: %s\n" "$total_gens"; \
+    printf "  Generations to keep: %s [plus current]\n" "{{ generations }}"; \
+    printf "\n"; \
     gens_to_keep=$(({{ generations }} + 1)); \
     if [ $total_gens -le $gens_to_keep ]; then \
-    	echo "◐ Nothing to collect [already at or below target]"; \
+    	printf "{{yellow}}{{sym_partial}} Nothing to collect [already at or below target]{{reset}}\n"; \
     	exit 0; \
     fi; \
-    echo "⟡ Collecting garbage..."; \
+    printf "{{yellow}}{{sym_pending}} Collecting garbage...{{reset}}\n"; \
     keep_from=$((current_gen - {{ generations }})); \
     for gen in $(sudo nix-env --list-generations -p /nix/var/nix/profiles/system | awk '{print $1}'); do \
     	if [ "$$gen" -lt "$$keep_from" ] && [ "$$gen" != "$$current_gen" ]; then \
-    		echo "  Removing generation $$gen..."; \
+    		printf "  Removing generation %s...\n" "$$gen"; \
     		sudo nix-env --delete-generations $$gen -p /nix/var/nix/profiles/system 2>/dev/null || true; \
     	fi; \
     done; \
-    echo ""; \
-    echo "⟡ Running garbage collector..."; \
+    printf "\n"; \
+    printf "{{yellow}}{{sym_pending}} Running garbage collector...{{reset}}\n"; \
     sudo nix-collect-garbage; \
     nix-collect-garbage; \
     new_total=$(sudo nix-env --list-generations -p /nix/var/nix/profiles/system | wc -l); \
-    echo ""; \
-    echo "▲ Garbage collection complete"; \
-    echo "  Remaining generations: $$new_total"
+    printf "\n"; \
+    printf "{{green}}{{sym_success}} Garbage collection complete{{reset}}\n"; \
+    printf "  Remaining generations: %s\n" "$$new_total"
 
 # Traditional time-based garbage collection
 gc-days days="7":
-    @echo "⟡ Collecting generations older than {{ days }} days..."
+    @printf "{{yellow}}{{sym_pending}} Collecting generations older than %s days...{{reset}}\n" "{{ days }}"
     sudo nix-collect-garbage --delete-older-than {{ days }}d
     nix-collect-garbage --delete-older-than {{ days }}d
-    @echo "▲ Garbage collection complete"
+    @printf "{{green}}{{sym_success}} Garbage collection complete{{reset}}\n"
 
 # Show system health status
 health:
-    @echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-    @echo "▲ SYSTEM HEALTH"
-    @echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-    @echo ""
-    @echo "⟡ Flake Status"
+    @printf "{{cyan}}{{bar_heavy}}{{reset}}\n"
+    @printf "{{cyan}}{{sym_success}} SYSTEM HEALTH{{reset}}\n"
+    @printf "{{cyan}}{{bar_heavy}}{{reset}}\n"
+    @printf "\n"
+    @printf "{{yellow}}{{sym_pending}} Flake Status{{reset}}\n"
     @if git -C {{ flake_path }} diff --quiet; then \
-    	echo "  ▲ No uncommitted changes"; \
+    	printf "  {{green}}{{sym_success}} No uncommitted changes{{reset}}\n"; \
     else \
-    	echo "  ◐ Uncommitted changes present"; \
+    	printf "  {{yellow}}{{sym_partial}} Uncommitted changes present{{reset}}\n"; \
     fi
     @untracked=$(git -C {{ flake_path }} ls-files --others --exclude-standard | wc -l); \
     if [ "$$untracked" -eq 0 ]; then \
-    	echo "  ▲ No untracked files"; \
+    	printf "  {{green}}{{sym_success}} No untracked files{{reset}}\n"; \
     else \
-    	echo "  ◐ $$untracked untracked files"; \
+    	printf "  {{yellow}}{{sym_partial}} $$untracked untracked files{{reset}}\n"; \
     fi
-    @echo ""
-    @echo "⟡ Disk Usage"
+    @printf "\n"
+    @printf "{{yellow}}{{sym_pending}} Disk Usage{{reset}}\n"
     @store_size=$(du -sh /nix/store 2>/dev/null | cut -f1); \
-    echo "  Nix store: $$store_size"
+    printf "  Nix store: %s\n" "$$store_size"
     @root_usage=$(df -h / | tail -1 | awk '{print $5}'); \
-    echo "  Root partition: $$root_usage used"
-    @echo ""
-    @echo "⟡ Generations"
+    printf "  Root partition: %s used\n" "$$root_usage"
+    @printf "\n"
+    @printf "{{yellow}}{{sym_pending}} Generations{{reset}}\n"
     @current_gen=$(sudo nix-env --list-generations -p /nix/var/nix/profiles/system | tail -1 | awk '{print $1}'); \
     total_gens=$(sudo nix-env --list-generations -p /nix/var/nix/profiles/system | wc -l); \
-    echo "  Current: $$current_gen"; \
-    echo "  Total: $$total_gens"
-    @echo ""
-    @echo "⟡ Rhodium Services"
+    printf "  Current: %s\n" "$$current_gen"; \
+    printf "  Total: %s\n" "$$total_gens"
+    @printf "\n"
+    @printf "{{yellow}}{{sym_pending}} Rhodium Services{{reset}}\n"
     @for service in rh-swaybg rh-waybar rh-mako; do \
     	if systemctl --user is-active "$$service.service" >/dev/null 2>&1; then \
-    		echo "  ▲ $$service"; \
+    		printf "  {{green}}{{sym_success}} %s{{reset}}\n" "$$service"; \
     	else \
-    		echo "  ▼ $$service"; \
+    		printf "  {{red}}{{sym_down}} %s{{reset}}\n" "$$service"; \
     	fi; \
     done
-    @echo ""
-    @echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    @printf "\n"
+    @printf "{{cyan}}{{bar_heavy}}{{reset}}\n"
 
 # List current generation details
 generation:
-    @echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-    @echo "▲ SYSTEM GENERATIONS"
-    @echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-    @echo ""
+    @printf "{{cyan}}{{bar_heavy}}{{reset}}\n"
+    @printf "{{cyan}}{{sym_success}} SYSTEM GENERATIONS{{reset}}\n"
+    @printf "{{cyan}}{{bar_heavy}}{{reset}}\n"
+    @printf "\n"
     sudo nix-env --list-generations -p /nix/var/nix/profiles/system | tail -10
 
 # Check for backup files in config
 check-backups:
-    @echo "⟡ Scanning for backup files..."
-    @echo ""
+    @printf "{{yellow}}{{sym_pending}} Scanning for backup files...{{reset}}\n"
+    @printf "\n"
     @backup_count=0; \
     while IFS= read -r -d '' file; do \
     	size=$$(du -h "$$file" | cut -f1); \
     	age=$$(( ($$(date +%s) - $$(stat -c %Y "$$file")) / 86400 )); \
-    	echo "  ◐ $${file#$$HOME/.config/}"; \
-    	echo "     Size: $$size | Age: $$age days"; \
+    	printf "  {{yellow}}{{sym_partial}} %s{{reset}}\n" "$${file#{{home_dir}}/.config/}"; \
+    	printf "     Size: %s | Age: %s days\n" "$$size" "$$age"; \
     	((backup_count++)); \
-    done < <(find "$$HOME/.config" -type f \( -name "*.backup" -o -name "*.bkp" \) -print0 2>/dev/null); \
+    done < <(find "{{home_dir}}/.config" -type f \( -name "*.backup" -o -name "*.bkp" \) -print0 2>/dev/null); \
     if [ $$backup_count -eq 0 ]; then \
-    	echo "  ▲ No backup files found"; \
+    	printf "  {{green}}{{sym_success}} No backup files found{{reset}}\n"; \
     else \
-    	echo ""; \
-    	echo "Total: $$backup_count backup files"; \
+    	printf "\n"; \
+    	printf "Total: %s backup files\n" "$$backup_count"; \
     fi
 
 # Find orphaned configuration files
 orphans:
-    @echo "⟡ Analyzing configuration orphans..."
-    @echo ""
+    @printf "{{yellow}}{{sym_pending}} Analyzing configuration orphans...{{reset}}\n"
+    @printf "\n"
     @installed_pkgs=$$(mktemp); \
     nix-env -q | cut -d- -f1 | sort -u > "$$installed_pkgs"; \
     home-manager packages 2>/dev/null | grep -E "^[a-zA-Z0-9-]+$$" | sort -u >> "$$installed_pkgs" || true; \
@@ -215,45 +239,45 @@ orphans:
     	fi; \
     	if ! grep -q "^$$dirname$$" "$$installed_pkgs"; then \
     		size=$$(du -sh "$$dir" 2>/dev/null | cut -f1); \
-    		echo "  ◐ $$dirname [$$size]"; \
+    		printf "  {{yellow}}{{sym_partial}} %s [%s]{{reset}}\n" "$$dirname" "$$size"; \
     		((orphan_count++)); \
     	fi; \
-    done < <(find "$$HOME/.config" -maxdepth 1 -type d ! -path "$$HOME/.config" -print0); \
+    done < <(find "{{home_dir}}/.config" -maxdepth 1 -type d ! -path "{{home_dir}}/.config" -print0); \
     rm -f "$$installed_pkgs"; \
     if [ $$orphan_count -eq 0 ]; then \
-    	echo "  ▲ No orphaned configurations found"; \
+    	printf "  {{green}}{{sym_success}} No orphaned configurations found{{reset}}\n"; \
     else \
-    	echo ""; \
-    	echo "Total: $$orphan_count potential orphans"; \
-    	echo "Use 'just clean-orphans' to remove them"; \
+    	printf "\n"; \
+    	printf "Total: %s potential orphans\n" "$$orphan_count"; \
+    	printf "Use 'just clean-orphans' to remove them\n"; \
     fi
 
 # Check for untracked files in repository
 untracked:
-    @echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-    @echo "▲ UNTRACKED FILES"
-    @echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-    @echo ""
+    @printf "{{cyan}}{{bar_heavy}}{{reset}}\n"
+    @printf "{{cyan}}{{sym_success}} UNTRACKED FILES{{reset}}\n"
+    @printf "{{cyan}}{{bar_heavy}}{{reset}}\n"
+    @printf "\n"
     @untracked_files=$$(git -C {{ flake_path }} ls-files --others --exclude-standard); \
     if [ -z "$$untracked_files" ]; then \
-    	echo "▲ Repository is clean"; \
+    	printf "{{green}}{{sym_success}} Repository is clean{{reset}}\n"; \
     else \
     	count=$$(echo "$$untracked_files" | wc -l); \
-    	echo "◐ Found $$count untracked files:"; \
-    	echo ""; \
+    	printf "{{yellow}}{{sym_partial}} Found %s untracked files:{{reset}}\n" "$$count"; \
+    	printf "\n"; \
     	echo "$$untracked_files" | while IFS= read -r file; do \
     		size=$$(du -h "{{ flake_path }}/$$file" 2>/dev/null | cut -f1 || echo "?"); \
-    		echo "  ▪ $$file [$$size]"; \
+    		printf "  {{cyan}}{{sym_bullet}} %s [%s]{{reset}}\n" "$$file" "$$size"; \
     	done; \
     fi
-    @echo ""
-    @echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    @printf "\n"
+    @printf "{{cyan}}{{bar_heavy}}{{reset}}\n"
 
 # Remove orphaned configuration directories [interactive]
 clean-orphans:
-    @echo "◐ This will remove orphaned configuration directories"
-    @echo "Press Ctrl+C to cancel"
-    @echo ""
+    @printf "{{yellow}}{{sym_partial}} This will remove orphaned configuration directories{{reset}}\n"
+    @printf "Press Ctrl+C to cancel\n"
+    @printf "\n"
     @installed_pkgs=$$(mktemp); \
     nix-env -q | cut -d- -f1 | sort -u > "$$installed_pkgs"; \
     home-manager packages 2>/dev/null | grep -E "^[a-zA-Z0-9-]+$$" | sort -u >> "$$installed_pkgs" || true; \
@@ -265,41 +289,41 @@ clean-orphans:
     	fi; \
     	if ! grep -q "^$$dirname$$" "$$installed_pkgs"; then \
     		size=$$(du -sh "$$dir" 2>/dev/null | cut -f1); \
-    		printf "Remove $$dirname [$$size]? [y/N] "; \
+    		printf "Remove %s [%s]? [y/N] " "$$dirname" "$$size"; \
     		read -r response; \
     		if [[ "$$response" =~ ^[Yy]$$ ]]; then \
     			rm -rf "$$dir"; \
-    			echo "  ▲ Removed"; \
+    			printf "  {{green}}{{sym_success}} Removed{{reset}}\n"; \
     			((removed_count++)); \
     		else \
-    			echo "  Skipped"; \
+    			printf "  Skipped\n"; \
     		fi; \
     	fi; \
-    done < <(find "$$HOME/.config" -maxdepth 1 -type d ! -path "$$HOME/.config" -print0); \
+    done < <(find "{{home_dir}}/.config" -maxdepth 1 -type d ! -path "{{home_dir}}/.config" -print0); \
     rm -f "$$installed_pkgs"; \
-    echo ""; \
-    echo "▲ Removed $$removed_count orphaned directories"
+    printf "\n"; \
+    printf "{{green}}{{sym_success}} Removed %s orphaned directories{{reset}}\n" "$$removed_count"
 
 # Clean all backup files
 clean-backups:
-    @echo "◐ This will remove all .backup and .bkp files"
-    @echo "Press Ctrl+C to cancel"
-    @echo ""
+    @printf "{{yellow}}{{sym_partial}} This will remove all .backup and .bkp files{{reset}}\n"
+    @printf "Press Ctrl+C to cancel\n"
+    @printf "\n"
     @sleep 2
-    @count=$$(find "$$HOME/.config" -type f \( -name "*.backup" -o -name "*.bkp" \) -delete -print | wc -l); \
-    echo "▲ Removed $$count backup files"
+    @count=$$(find "{{home_dir}}/.config" -type f \( -name "*.backup" -o -name "*.bkp" \) -delete -print | wc -l); \
+    printf "{{green}}{{sym_success}} Removed %s backup files{{reset}}\n" "$$count"
 
 # Update application caches
 update-caches:
-    @echo ""
-    @echo "⟡ Updating application caches..."
-    @APP_DIR="$$HOME/.local/share/applications"; \
-    CACHE_DIR="$${XDG_CACHE_HOME:-$$HOME/.cache}/rhodium-apps"; \
+    @printf "\n"
+    @printf "{{yellow}}{{sym_pending}} Updating application caches...{{reset}}\n"
+    @APP_DIR="{{home_dir}}/.local/share/applications"; \
+    CACHE_DIR="${{home_dir}}/.cache/rhodium-apps"; \
     CACHE_FILE="$$CACHE_DIR/formatted_apps.cache"; \
     if [ -d "$$APP_DIR" ]; then \
     	mkdir -p "$$CACHE_DIR"; \
     	rm -f "$$CACHE_FILE"; \
-    	echo "  ▪ Rebuilding rhodium-apps cache"; \
+    	printf "  {{cyan}}{{sym_bullet}} Rebuilding rhodium-apps cache{{reset}}\n"; \
     	temp_cache=$$(mktemp); \
     	for file in "$$APP_DIR"/rh-*.desktop; do \
     		[[ -f "$$file" ]] || continue; \
@@ -325,26 +349,26 @@ update-caches:
     		else \
     			categories="App"; \
     		fi; \
-    		printf "⟡ %-35s %-20s %s\t%s\n" "$$name" "$${entry_type^}" "$$categories" "$$file" >> "$$temp_cache"; \
+    		printf "{{sym_pending}} %-35s %-20s %s\t%s\n" "$$name" "$${entry_type^}" "$$categories" "$$file" >> "$$temp_cache"; \
     	done; \
     	sort -k2,2 "$$temp_cache" > "$$CACHE_FILE"; \
     	rm -f "$$temp_cache"; \
     	count=$$(wc -l < "$$CACHE_FILE" 2>/dev/null || echo 0); \
-    	echo "  ▲ Cached $$count applications"; \
-    fi; \
-    echo "  ▪ Clearing desktop file cache"; \
-    rm -f "$$HOME/.cache/applications/desktop-file-cache" 2>/dev/null || true; \
+    	printf "  {{green}}{{sym_success}} Cached %s applications{{reset}}\n" "$$count"; \
+    fi
+    @printf "  {{cyan}}{{sym_bullet}} Clearing desktop file cache{{reset}}\n"; \
+    rm -f "{{home_dir}}/.cache/applications/desktop-file-cache" 2>/dev/null || true; \
     update-desktop-database "$$APP_DIR" 2>/dev/null || true
 
 # Force rebuild yazi image cache for directory
 yazi-cache dir=".":
-    @echo "⟡ Checking yazi cache capabilities..."
+    @printf "{{yellow}}{{sym_pending}} Checking yazi cache capabilities...{{reset}}\n"
     @if command -v yazi >/dev/null 2>&1; then \
-    	echo "◐ Yazi CLI caching not available"; \
-    	echo "Image caching occurs on directory access"; \
-    	echo ""; \
-    	echo "⟡ Pre-generating thumbnails..."; \
-    	thumb_dir="$${XDG_CACHE_HOME:-$$HOME/.cache}/yazi/thumbnails"; \
+    	printf "{{yellow}}{{sym_partial}} Yazi CLI caching not available{{reset}}\n"; \
+    	printf "Image caching occurs on directory access\n"; \
+    	printf "\n"; \
+    	printf "{{yellow}}{{sym_pending}} Pre-generating thumbnails...{{reset}}\n"; \
+    	thumb_dir="{{home_dir}}/.cache/yazi/thumbnails"; \
     	mkdir -p "$$thumb_dir"; \
     	count=0; \
     	while IFS= read -r -d '' img; do \
@@ -354,20 +378,20 @@ yazi-cache dir=".":
     			convert "$$img" -thumbnail 500x500 "$$thumb" 2>/dev/null && ((count++)) || true; \
     		fi; \
     	done < <(find "{{ dir }}" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.gif" -o -iname "*.webp" \) -print0 2>/dev/null); \
-    	echo "▲ Generated $$count new thumbnails"; \
+    	printf "{{green}}{{sym_success}} Generated %s new thumbnails{{reset}}\n" "$$count"; \
     else \
-    	echo "▼ Yazi not found"; \
+    	printf "{{red}}{{sym_down}} Yazi not found{{reset}}\n"; \
     fi
 
 # Rollback to previous generation
 rollback:
-    @echo "◐ Rolling back to previous generation..."
+    @printf "{{yellow}}{{sym_partial}} Rolling back to previous generation...{{reset}}\n"
     sudo nixos-rebuild switch --rollback
-    @echo "▲ Rollback complete"
+    @printf "{{green}}{{sym_success}} Rollback complete{{reset}}\n"
 
 # Format all nix files
 fmt:
-    @echo "⟡ Formatting Nix files..."
+    @printf "{{yellow}}{{sym_pending}} Formatting Nix files...{{reset}}\n"
     @count=$$(find {{ flake_path }} -name "*.nix" -type f | wc -l); \
     find {{ flake_path }} -name "*.nix" -type f -exec nixfmt {} +; \
-    echo "▲ Formatted $$count files"
+    printf "{{green}}{{sym_success}} Formatted %s files{{reset}}\n" "$$count"

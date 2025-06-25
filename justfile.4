@@ -1,0 +1,133 @@
+# Beautiful Justfile Example
+# A demonstration of just features with colored terminal output
+
+# Set shell for Windows compatibility
+set windows-shell := ["powershell.exe", "-NoLogo", "-Command"]
+
+# Default recipe to run when just is called without arguments
+default:
+    @just --list
+
+# Internal variables
+version := "1.0.0"
+author := "Just Demo"
+timestamp := `date +%Y-%m-%d`
+
+# Color codes for terminal output
+red := '\033[0;31m'
+green := '\033[0;32m'
+yellow := '\033[0;33m'
+blue := '\033[0;34m'
+magenta := '\033[0;35m'
+cyan := '\033[0;36m'
+reset := '\033[0m'
+
+# Welcome message with colors
+welcome:
+    @printf "{{cyan}}╔════════════════════════════════════╗{{reset}}\n"
+    @printf "{{cyan}}║{{reset}} {{magenta}}Welcome to Just Demo v{{version}}{{reset}} {{cyan}}║{{reset}}\n"
+    @printf "{{cyan}}║{{reset}} {{blue}}Author: {{author}}{{reset}}            {{cyan}}║{{reset}}\n"
+    @printf "{{cyan}}║{{reset}} {{green}}Date: {{timestamp}}{{reset}}              {{cyan}}║{{reset}}\n"
+    @printf "{{cyan}}╚════════════════════════════════════╝{{reset}}\n"
+
+# Greet a user with their name
+greet name="World":
+    @printf "{{yellow}}Hello, {{green}}{{name}}{{yellow}}!{{reset}}\n"
+    @printf "{{blue}}Nice to meet you! 👋{{reset}}\n"
+
+# Build project with environment info
+build target="debug":
+    @printf "{{cyan}}🔨 Building project...{{reset}}\n"
+    @printf "{{yellow}}Target: {{reset}}{{target}}\n"
+    @printf "{{yellow}}User: {{reset}}$USER\n"
+    @printf "{{yellow}}Home: {{reset}}$HOME\n"
+    @printf "{{yellow}}Path: {{reset}}$PWD\n"
+    @printf "{{green}}✓ Build complete!{{reset}}\n"
+
+# Deploy with multiple arguments
+deploy environment="staging" branch="main" *flags="":
+    @printf "{{magenta}}🚀 Deploying application...{{reset}}\n"
+    @printf "{{cyan}}Environment:{{reset}} {{environment}}\n"
+    @printf "{{cyan}}Branch:{{reset}} {{branch}}\n"
+    @printf "{{cyan}}Flags:{{reset}} {{flags}}\n"
+    @printf "{{green}}✨ Deployment successful!{{reset}}\n"
+
+# Status check with system info
+status:
+    @printf "{{blue}}📊 System Status{{reset}}\n"
+    @printf "{{cyan}}════════════════{{reset}}\n"
+    @printf "{{yellow}}OS:{{reset}} $OSTYPE\n"
+    @printf "{{yellow}}Shell:{{reset}} $SHELL\n"
+    @printf "{{yellow}}Terminal:{{reset}} $TERM\n"
+    @printf "{{yellow}}Current Dir:{{reset}} $PWD\n"
+    @printf "{{green}}✓ All systems operational{{reset}}\n"
+
+# Run tests with colored output
+test filter="*":
+    @printf "{{blue}}🧪 Running tests...{{reset}}\n"
+    @printf "{{yellow}}Filter: {{reset}}{{filter}}\n"
+    @if [ "{{filter}}" = "*" ]; then \
+        printf "{{cyan}}Running all tests{{reset}}\n"; \
+    else \
+        printf "{{cyan}}Running tests matching: {{filter}}{{reset}}\n"; \
+    fi
+    @printf "{{green}}✓ Tests passed!{{reset}}\n"
+
+# Clean build artifacts
+clean:
+    @printf "{{red}}🧹 Cleaning up...{{reset}}\n"
+    @printf "{{yellow}}Removing build artifacts{{reset}}\n"
+    @printf "{{yellow}}Clearing cache{{reset}}\n"
+    @printf "{{green}}✓ Cleanup complete!{{reset}}\n"
+
+# Show environment variables
+env:
+    @printf "{{magenta}}🌍 Environment Variables{{reset}}\n"
+    @printf "{{cyan}}═══════════════════════{{reset}}\n"
+    @printf "{{yellow}}USER:{{reset}} ${USER:-not set}\n"
+    @printf "{{yellow}}HOME:{{reset}} ${HOME:-not set}\n"
+    @printf "{{yellow}}SHELL:{{reset}} ${SHELL:-not set}\n"
+    @printf "{{yellow}}EDITOR:{{reset}} ${EDITOR:-not set}\n"
+    @printf "{{yellow}}LANG:{{reset}} ${LANG:-not set}\n"
+
+# Interactive recipe with user input
+interactive:
+    @printf "{{cyan}}🎮 Interactive Mode{{reset}}\n"
+    @printf "{{yellow}}What's your favorite color?{{reset}} "
+    @read color && printf "{{green}}Great choice! {{reset}}{{magenta}}$${color}{{reset}} {{green}}is awesome!{{reset}}\n"
+
+# Recipe with conditional logic
+check-tools:
+    @printf "{{blue}}🔍 Checking required tools...{{reset}}\n"
+    @if command -v git >/dev/null 2>&1; then \
+        printf "{{green}}✓ git{{reset}}\n"; \
+    else \
+        printf "{{red}}✗ git{{reset}}\n"; \
+    fi
+    @if command -v docker >/dev/null 2>&1; then \
+        printf "{{green}}✓ docker{{reset}}\n"; \
+    else \
+        printf "{{red}}✗ docker{{reset}}\n"; \
+    fi
+    @if command -v node >/dev/null 2>&1; then \
+        printf "{{green}}✓ node{{reset}}\n"; \
+    else \
+        printf "{{red}}✗ node{{reset}}\n"; \
+    fi
+
+# Help command with pretty formatting
+help:
+    @printf "{{magenta}}📚 Just Demo Help{{reset}}\n"
+    @printf "{{cyan}}════════════════{{reset}}\n"
+    @printf "{{yellow}}Available commands:{{reset}}\n"
+    @printf "  {{green}}welcome{{reset}}      - Show welcome message\n"
+    @printf "  {{green}}greet{{reset}}        - Greet a user (accepts name)\n"
+    @printf "  {{green}}build{{reset}}        - Build the project\n"
+    @printf "  {{green}}deploy{{reset}}       - Deploy application\n"
+    @printf "  {{green}}status{{reset}}       - Check system status\n"
+    @printf "  {{green}}test{{reset}}         - Run tests\n"
+    @printf "  {{green}}clean{{reset}}        - Clean build artifacts\n"
+    @printf "  {{green}}env{{reset}}          - Show environment variables\n"
+    @printf "  {{green}}interactive{{reset}}  - Interactive mode\n"
+    @printf "  {{green}}check-tools{{reset}}  - Check required tools\n"
+    @printf "\n{{blue}}Usage:{{reset}} just <command> [arguments]\n"
