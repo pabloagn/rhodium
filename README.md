@@ -24,7 +24,7 @@
 
 <pre>
 • Window Manager ...................... <a href="https://github.com/YaLTeR/niri/">Niri</a>
-• Shells .............................. <a href="https://www.nushell.sh/">Nu</a> | <a href="https://fishshell.com/">Fish</a>
+• Shells .............................. <a href="https://www.nushell.sh/">Nu</a> | <a href="https://fishshell.com/">Fish</a> | <a href="https://www.zsh.org/">Zsh</a>
 • Prompt .............................. <a href="https://github.com/starship/starship">Starship</a>
 • Terminals ........................... <a href="https://ghostty.org/">Ghostty</a> | <a href="https://sw.kovidgoyal.net/kitty/">Kitty</a>
 • Notify Daemon ....................... <a href="https://github.com/emersion/mako">Mako</a>
@@ -37,15 +37,55 @@
 
 ## <samp>⊹ QUICK START</samp>
 
-After setting up a basic NixOS system, you can create a new derivation using this flake:
+There are two main ways to interact with Rhodium:
+- Using the built-in justfile.
+- Using nix flake commands directly.
+
+### <samp>⊹ JUST</samp>
+
+This system includes a comprehensive [justfile](https://github.com/casey/just) at the flake root for system management. After cloning the repository, you can use these commands:
+
+```bash
+# Show all available commands
+just
+
+# Build and switch to new configuration
+just switch
+
+# Build configuration for specific host
+just switch hostname
+
+# Test build without switching
+just build
+
+# Fast rebuild with minimal output
+just fast
+
+# Update all flake inputs
+just update
+
+# Clean old generations (keep 5 most recent)
+just gc-keep
+
+# Check system health
+just health
+
+# Format all Nix files
+just fmt
+
+# Rollback to previous generation
+just rollback
+```
+
+### <samp>⊹ MANUAL</samp>
+
+You can directly run the typical nix flake commands directly instead of relying on the justfile. After setting up a basic NixOS system, you can create a new derivation using this flake:
 
 ```bash
 sudo nixos-rebuild switch --flake 'github:pabloagn/rhodium#{hostname}'
 ```
 
 Where `hostname` is the target host you want to use. Consult [hosts](./hosts) for the full specification.
-
-## <samp>⊹ TESTING</samp>
 
 - You can clone this repository and test before committing to a full derivation:
 
@@ -73,7 +113,7 @@ sudo nixos-rebuild test --flake .#your-hostname
 
 This creates a temporary boot entry with your changes. If something breaks, simply reboot to return to your stable system. The temporary entry is automatically removed after a successful reboot.
 
-### <samp>⊹ BUILDING</samp>
+#### <samp>⊹ BUILDING</samp>
 
 ```bash
 sudo nixos-rebuild switch --flake .#your-hostname
