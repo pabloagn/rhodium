@@ -1,6 +1,6 @@
 <p align="center"><img src="assets/logo.png" width=500px></p>
 
-<p align="center"><em>A robust, hypermodular NixOS system</em></p>
+<p align="center"><em>A robust, hypermodular NixOS system built to stand the test of time</em></p>
 
 <br/>
 <div align="center">───────  ‡  ───────</div>
@@ -20,20 +20,120 @@
 
 <br/>
 
-## <samp>⊹ THE TOOLS</samp>
+## <samp>⊹ ABOUT</samp>
+
+Rhodium is a declarative NixOS system preconfigured with sensible defaults, aimed towards academics & professionals looking for stability without sacrificing innovation.
+
+This hypermodular configuration combines the declarative power of Nix with over 100+ curated packages using a profile-based configuration.
+
+## <samp>⊹ MOTIVATION</samp>
+
+It's difficult to find Linux rices aimed towards professional workflows. NixOS brings that opportunity closer than ever by providing the required framework to build setups that not only look pretty, but work pretty, but that is not enough.
+
+Rhodium emerges in order to fill that gap
+
+<p align="center"><em>To provide a Linux configuration specifically tailored for research & development</em></p>
+
+
+## <samp>⊹ TOOLS</samp>
+
+### <samp>◇ MAIN</samp>
 
 <pre>
-• Window Manager ...................... <a href="https://github.com/YaLTeR/niri/">Niri</a>
+• Window Managers ..................... <a href="https://github.com/YaLTeR/niri/">Niri</a> | <a href="https://hypr.land/">Hyprland</a>
+├─ Dynamic & static workspace management capabilities by default
+├─ Mnemonic keybinding system (200+ binds)
+├─ Preconfigured [XWayland-satellite](https://github.com/Supreeeme/xwayland-satellite)
+├─ Preconfigured Niri IPC aliases for full runtime control
+└─ Multi-monitor support with wlr-randr/wl-mirror
+• Bars & Widgets ...................... <a href="https://github.com/Alexays/Waybar">Waybar</a> | <a href="https://github.com/elkowar/eww">Eww</a>
+├─ Modular widget architecture
+├─ Custom styling with CSS/SCSS support
+├─ Real-time system monitoring & metrics
+└─ Workspace & window state integration
 • Shells .............................. <a href="https://www.nushell.sh/">Nu</a> | <a href="https://fishshell.com/">Fish</a> | <a href="https://www.zsh.org/">Zsh</a>
 • Prompt .............................. <a href="https://github.com/starship/starship">Starship</a>
 • Terminals ........................... <a href="https://ghostty.org/">Ghostty</a> | <a href="https://sw.kovidgoyal.net/kitty/">Kitty</a>
-• Notify Daemon ....................... <a href="https://github.com/emersion/mako">Mako</a>
+• Multiplexers ........................ <a href="https://zellij.dev/">Zellij</a> | <a href="https://github.com/tmux/tmux/">Tmux</a>
+• Notification Daemon ................. <a href="https://github.com/emersion/mako">Mako</a>
+├─ Custom notification groups & categories
+├─ Full Unicode character compatibility
+├─ Context-aware styling & positioning
+└─ Systemd integration for lifecycle management
 • Launcher ............................ <a href="https://codeberg.org/dnkl/fuzzel">Fuzzel</a>
+├─ [28 customizable menus](./home/scripts/fuzzel) & counting
+└─ Mnemonic keybinding system
 • File Manager ........................ <a href="https://github.com/sxyazi/yazi">Yazi</a>
-• IDEs ................................ <a href="https://neovim.io/doc/">NeoVim</a> | <a href="https://docs.helix-editor.com/">Helix</a> | <a href="https://docs.doomemacs.org/latest/">Doom Emacs</a> | <a href="https://zed.dev/">Zed Editor</a>
+├─ Specialized MIMEs & openers
+├─ Smart preloaders & prefetchers
+└─ Mnemonic keybinding system
+• IDEs ................................ <a href="https://neovim.io/doc/">NeoVim</a> | <a href="https://docs.helix-editor.com/">Evil-Helix</a> | <a href="https://docs.doomemacs.org/latest/">Doom Emacs</a> | <a href="https://zed.dev/">Zed Editor</a>
+├─ 50+ LSP servers with dual Nix LSP support
+├─ Mnemonic keybinding system (300+ registries)
+├─ Custom Lua function library & ftplugins
+└─ GitHub workflow integration
 • LockScreen .......................... <a href="https://wiki.hyprland.org/Hypr-Ecosystem/hyprlock/">Hyprlock</a>
 • ColorScheme ......................... <a href="https://github.com/webhooked/kanso.nvim">Kansō</a>
 </pre>
+
+### <samp>◇ OTHERS</samp>
+
+
+## <samp>⊹ FEATURES</samp>
+
+### <samp>◇ MAIN</samp>
+
+<pre>
+• Development Environments ............ Preconfigured Flakes for 10+ Languages
+├─ Rust, Python, JavaScript/TypeScript, Go, C/C++, Java environments
+├─ Nix shells with automatic environment loading & direnv integration
+├─ Language-specific toolchains, formatters & linters
+└─ IDE integration with 50+ LSP servers & debugging support
+• Nix Infrastructure .................. Flake Parts & Advanced Architecture
+├─ Flake-parts modular system with per-system configurations
+├─ Custom package overlays for bleeding-edge & patched software
+├─ Advanced flake input management with lock file automation
+├─ Home Manager & NixOS custom modules with option validation
+└─ Cross-platform support (NixOS/Darwin/Standalone Home Manager)
+• Hardware & System Integration ....... Automatic Hardware Detection
+├─ Automatic hardware configuration generation & optimization
+├─ GPU driver management (NVIDIA/AMD) with compute acceleration
+├─ Power management profiles for laptops & desktops
+├─ Audio pipewire configuration with low-latency optimization
+└─ Network configuration with VPN & wireless management
+• Secrets & Security Management ....... SOPS-Nix Integration
+├─ Age-encrypted secrets with automatic key rotation
+├─ Per-host secret deployment with secure key distribution
+├─ Git-tracked encrypted configuration files
+└─ Runtime secret injection into services & applications
+• CI/CD & Deployment .................. GitHub Actions & NixOS Anywhere
+├─ Automated flake validation & security scanning
+├─ Remote deployment with nixos-anywhere integration
+├─ Multi-architecture builds (x86_64, aarch64) in CI
+├─ Automatic dependency updates with compatibility testing
+└─ Infrastructure as Code with declarative host provisioning
+• Automation & Orchestration ......... Systemd Services & Cron Jobs
+├─ User services for desktop components (bars, notifications, wallpapers)
+├─ System services for monitoring, backups & maintenance
+├─ Automated garbage collection with storage optimization
+├─ Service dependency management with health monitoring
+└─ Scheduled tasks for system maintenance & updates
+• Configuration Management ............ Atomic Operations & Rollbacks
+├─ Declarative configuration with full reproducibility
+├─ Atomic system updates with automatic rollback capabilities
+├─ Generation management with selective cleanup
+├─ Configuration validation before deployment
+└─ Modular architecture for component isolation & testing
+• Development Tooling ................. Advanced Development Features
+├─ Pre-commit hooks with formatting & linting automation
+├─ Development containers with isolated environments
+├─ Custom build scripts & deployment workflows
+├─ Documentation generation with automatic API references
+└─ Testing frameworks with CI integration
+</pre>
+
+### <samp>◇ OTHERS</samp>
+
 
 ## <samp>⊹ QUICK START</samp>
 
@@ -87,7 +187,7 @@ sudo nixos-rebuild switch --flake 'github:pabloagn/rhodium#{hostname}'
 
 Where `hostname` is the target host you want to use. Consult [hosts](./hosts) for the full specification.
 
-- You can clone this repository and test before committing to a full derivation:
+Alternatively, you can clone this repository and test before committing to a full derivation:
 
 ```bash
 # Using https
@@ -97,7 +197,7 @@ git clone https://github.com/pabloagn/rhodium
 git clone git@github.com:pabloagn/rhodium
 ```
 
-- Start with `nixos-rebuild build`:
+Start with `nixos-rebuild build`:
 
 ```bash
 sudo nixos-rebuild build --flake .#your-hostname
@@ -105,7 +205,7 @@ sudo nixos-rebuild build --flake .#your-hostname
 
 This quickly checks if your configuration builds successfully without applying changes. It's fast and catches syntax errors and missing packages.
 
-- When build succeeds, use `nixos-rebuild test`:
+When build succeeds, use `nixos-rebuild test`:
 
 ```bash
 sudo nixos-rebuild test --flake .#your-hostname
@@ -113,7 +213,7 @@ sudo nixos-rebuild test --flake .#your-hostname
 
 This creates a temporary boot entry with your changes. If something breaks, simply reboot to return to your stable system. The temporary entry is automatically removed after a successful reboot.
 
-#### <samp>⊹ BUILDING</samp>
+Whenever you're ready, build the new derivation and switch:
 
 ```bash
 sudo nixos-rebuild switch --flake .#your-hostname
