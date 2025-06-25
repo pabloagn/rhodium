@@ -14,6 +14,8 @@ vim.keymap.set(
 	"<cmd>noh<CR>",
 	{ noremap = true, silent = true, desc = "Clear search highlight" }
 )
+-- TODO: Confirm this works
+vim.keymap.set("n", "<Esc>", "<cmd>noh<CR>", { noremap = true, silent = true, desc = "Clear search highlight" })
 vim.keymap.set(
 	"n",
 	"<Leader>n",
@@ -81,10 +83,6 @@ vim.keymap.set("n", "}", "<cmd>AerialPrev<CR>", {
 
 -- Comment
 -- -------------------------------------------------
--- vim.keymap.set("n", "<leader>cc", function()
--- 	require("Comment.api").toggle.linewise.current()
--- end, { desc = "Line" })
-
 vim.keymap.set("n", "<leader>cc", function()
 	if vim.v.count == 0 then
 		-- No count given, toggle current line
@@ -95,7 +93,6 @@ vim.keymap.set("n", "<leader>cc", function()
 	end
 end, { desc = "Toggle Linewise (Line/Count)" })
 
--- TODO: Check this
 local esc = vim.api.nvim_replace_termcodes("<ESC>", true, false, true)
 vim.keymap.set("x", "<leader>cc", function()
 	vim.api.nvim_feedkeys(esc, "nx", false)
@@ -171,15 +168,32 @@ end, {
 	desc = "Insert TEST",
 })
 
--- TODO utilities
 vim.keymap.set("n", "<Leader>cd", function()
+	functions.insert_test()
+end, {
+	noremap = true,
+	silent = true,
+	desc = "Insert DOCS",
+})
+
+vim.keymap.set("n", "<Leader>cD", function()
+	functions.insert_test()
+end, {
+	noremap = true,
+	silent = true,
+	desc = "Insert DONE",
+})
+
+-- Swaps [S]
+vim.keymap.set("n", "<Leader>csd", function()
 	functions.toggle_todo_done()
 end, {
 	noremap = true,
 	silent = true,
-	desc = "Toggle TODO/DONE",
+	desc = "Swap TODO/DONE",
 })
 
+-- Utils
 vim.keymap.set("n", "<Leader>cl", function()
 	functions.list_buffer_todos()
 end, {
@@ -196,6 +210,15 @@ end, {
 	noremap = true,
 	silent = true,
 	desc = "Replace buffer with clipboard",
+})
+
+-- TEST: Test this implementation
+-- Replace Visual (Quick)
+-- -------------------------------------------------
+vim.keymap.set("v", "<leader>rv", functions.replace_visual_selection, {
+	noremap = true,
+	silent = false,
+	desc = "Replace all occurrences with visual",
 })
 
 -- Replace (Spectre)
@@ -450,8 +473,21 @@ vim.keymap.set({ "n", "v" }, "A-s", "<cmd>BufferLineCycleNext<CR>", { desc = "Ne
 vim.keymap.set({ "n", "v" }, "A-S", "<cmd>BufferLineCyclePrev<CR>", { desc = "Previous buffer", silent = true })
 
 -- Close buffers
-vim.keymap.set("n", "<leader>w", "<cmd>write | bdelete<CR>", { desc = "Save and close", silent = true })
-vim.keymap.set("n", "<leader>q", "<cmd>bdelete!<CR>", { desc = "Close without saving", silent = true })
+-- TODO: Validate
+-- vim.keymap.set("n", "<leader>w", "<cmd>write | bdelete<CR>", { desc = "Save and close", silent = true })
+-- vim.keymap.set("n", "<leader>q", "<cmd>bdelete!<CR>", { desc = "Close without saving", silent = true })
+
+-- Smart close buffers
+-- TODO: Validate
+vim.keymap.set("n", "<leader>w", functions.smart_save_and_close, {
+	desc = "Save and close (smart)",
+	silent = true,
+})
+
+vim.keymap.set("n", "<leader>q", functions.smart_close_buffer, {
+	desc = "Close without saving (smart)",
+	silent = true,
+})
 
 -- Move buffers
 vim.keymap.set("n", "<leader>bmn", "<cmd>BufferLineMoveNext<CR>", { desc = "Move next", silent = true })
@@ -616,6 +652,11 @@ vim.keymap.set("n", "<A-Down>", ":m .+1<CR>==", { noremap = true, silent = true,
 vim.keymap.set("n", "<A-Up>", ":m .-2<CR>==", { noremap = true, silent = true, desc = "Move line up" })
 vim.keymap.set("v", "<A-Down>", ":m '>+1<CR>gv=gv", { noremap = true, silent = true, desc = "Move selection down" })
 vim.keymap.set("v", "<A-Up>", ":m '<-2<CR>gv=gv", { noremap = true, silent = true, desc = "Move selection up" })
+
+-- Inserts
+-- -------------------------------------------------
+vim.keymap.set("n", "<CR>", "m`o<Esc>``") -- Insert new line below without insert mode
+vim.keymap.set("n", "<S-CR>", "m`O<Esc>``")
 
 -- LuaSnip (Snippets)
 -- TODO: Add this

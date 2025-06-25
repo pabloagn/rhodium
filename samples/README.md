@@ -1,10 +1,3 @@
-# Welcome to Rhodium
+# Rhodium | Sample Pack
 
-This is a **test** markdown file to check:
-- Syntax highlighting
-- Link parsing: [NixOS Website](https://nixos.org)
-- Code blocks:
-
-```python
-print("Hello from Markdown!")
-```
+This module provides samples for many programming, data, config, and logs files for testing aspects such as syntax highlighting, icons in file manager, execution, LSPs, environments, linters, etc.

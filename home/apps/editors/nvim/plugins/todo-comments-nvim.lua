@@ -6,7 +6,7 @@ require("todo-comments").setup({
 		FIX = {
 			icon = "✗", -- Icon used for the sign, and in search results
 			color = "error", -- Can be a hex color, or a named color
-			alt = { "SEV1", "SEV2", "SEV3" }, -- Severities
+			alt = { "FIX1", "FIX2", "FIX3" }, -- Severities
 		},
 		TODO = {
 			icon = "●",
@@ -37,6 +37,11 @@ require("todo-comments").setup({
 			color = "test",
 			alt = { "TESTING", "PASSED", "FAILED" },
 		},
+		DOCS = {
+			icon = "◌",
+			color = "test",
+			alt = { "TESTING", "PASSED", "FAILED" },
+		},
 	},
 
 	gui_style = {
@@ -48,7 +53,8 @@ require("todo-comments").setup({
 
 	-- Highlighting
 	highlight = {
-		multiline = false, -- Enable multine todo comments
+		-- TODO: Confirm that multiline is what we want
+		multiline = true, -- Enable multine todo comments
 		before = "", -- "fg" or "bg" or empty
 		keyword = "wide", -- "fg", "bg", "wide", "wide_bg", "wide_fg" or empty
 		after = "fg", -- "fg" or "bg" or empty
@@ -67,6 +73,7 @@ require("todo-comments").setup({
 		default = { "Identifier" },
 		test = { "Identifier" },
 		done = { "healthSuccess" },
+		docs = { "healthSuccess" },
 	},
 
 	-- Search configuration for ripgrep

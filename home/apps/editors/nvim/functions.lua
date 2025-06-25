@@ -245,6 +245,47 @@ function M.smart_outdent()
 	end
 end
 
+-- Visual Replace
+-- TEST: Test implementation
+-- --------------------------------------------------
+-- Replace all occurrences of visual selection in buffer
+function M.replace_visual_selection()
+	-- Get visual selection bounds
+	local start_pos = vim.fn.getpos("'<")
+	local end_pos = vim.fn.getpos("'>")
+
+	-- Get the selected text
+	local lines = vim.fn.getline(start_pos[2], end_pos[2])
+	if type(lines) == "string" then
+		lines = { lines }
+	end
+
+	-- Handle single line selection only for simplicity
+	if #lines > 1 then
+		vim.notify("Multi-line replacement not supported", vim.log.levels.WARN, { title = "Replace All" })
+		return
+	end
+
+	local line = lines[1]
+	local selected = string.sub(line, start_pos[3], end_pos[3])
+
+	if selected == "" then
+		vim.notify("No text selected", vim.log.levels.WARN, { title = "Replace All" })
+		return
+	end
+
+	-- Escape special regex characters
+	local escaped = vim.fn.escape(selected, "/\\.*$^~[]")
+
+	-- Build substitute command
+	local cmd = string.format("%%s/%s//g", escaped)
+
+	-- Set up command line with cursor after the second /
+	vim.fn.feedkeys(":" .. cmd, "n")
+	vim.fn.feedkeys(string.rep("\x80\xfdh", #escaped + 1), "n")
+	vim.fn.feedkeys("a", "n")
+end
+
 -- Pickers
 -- --------------------------------------------------
 
@@ -581,6 +622,133 @@ function M.list_buffer_todos()
 	else
 		vim.notify("No TODO comments found in buffer", vim.log.levels.INFO, { title = "Buffer TODOs" })
 	end
+end
+
+-- Smart Buffer Management
+-- --------------------------------------------------
+-- Check if a buffer is a real file buffer
+function M.is_real_buffer(buf)
+	if not vim.api.nvim_buf_is_valid(buf) then
+		return false
+	end
+
+	local buftype = vim.bo[buf].buftype
+	local filetype = vim.bo[buf].filetype
+	local bufname = vim.api.nvim_buf_get_name(buf)
+
+	-- Skip special buffer types
+	if buftype ~= "" then
+		return false
+	end
+
+	-- Skip certain filetypes
+	local excluded_filetypes = {
+		"qf",
+		"fugitive",
+		"git",
+		"help",
+		"TelescopePrompt",
+		"TelescopeResults",
+		"TelescopePreview",
+		"terminal",
+		"lspinfo",
+		"mason",
+		"lazy",
+		"checkhealth",
+	}
+
+	for _, ft in ipairs(excluded_filetypes) do
+		if filetype == ft then
+			return false
+		end
+	end
+
+	-- Skip unnamed buffers (but only if they're also unmodified and empty)
+	if bufname == "" then
+		local lines = vim.api.nvim_buf_get_lines(buf, 0, -1, false)
+		if #lines <= 1 and lines[1] == "" and not vim.bo[buf].modified then
+			return false
+		end
+	end
+
+	return true
+end
+
+-- Get count of real buffers
+function M.get_real_buffer_count()
+	local count = 0
+	for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+		if M.is_real_buffer(buf) then
+			count = count + 1
+		end
+	end
+	return count
+end
+
+-- Smart close buffer - exits vim if it's the last real buffer
+function M.smart_close_buffer()
+	local current_buf = vim.api.nvim_get_current_buf()
+	local real_buffer_count = M.get_real_buffer_count()
+
+	-- If this is the last real buffer, quit vim
+	if real_buffer_count <= 1 then
+		-- Check if current buffer is modified
+		if vim.bo[current_buf].modified then
+			local choice = vim.fn.confirm("Save changes before closing?", "&Yes\n&No\n&Cancel", 1)
+			if choice == 1 then
+				vim.cmd("write")
+				vim.cmd("quit")
+			elseif choice == 2 then
+				vim.cmd("quit!")
+			end
+			-- choice == 3 means cancel, do nothing
+		else
+			vim.cmd("quit")
+		end
+	else
+		-- More than one buffer, just delete current
+		vim.cmd("bdelete!")
+	end
+end
+
+-- Smart save and close - saves then uses smart close
+function M.smart_save_and_close()
+	local current_buf = vim.api.nvim_get_current_buf()
+	local real_buffer_count = M.get_real_buffer_count()
+
+	-- Save current buffer if it's a real file
+	if M.is_real_buffer(current_buf) and vim.bo[current_buf].modified then
+		vim.cmd("write")
+	end
+
+	-- If this is the last real buffer, quit vim
+	if real_buffer_count <= 1 then
+		vim.cmd("quit")
+	else
+		vim.cmd("bdelete!")
+	end
+end
+
+-- Close all other buffers but keep vim open if they're all closed
+function M.close_other_buffers()
+	local current_buf = vim.api.nvim_get_current_buf()
+	local buffers_to_close = {}
+
+	for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+		if buf ~= current_buf and M.is_real_buffer(buf) then
+			table.insert(buffers_to_close, buf)
+		end
+	end
+
+	for _, buf in ipairs(buffers_to_close) do
+		vim.cmd("bdelete! " .. buf)
+	end
+
+	vim.notify(
+		string.format("Closed %d other buffers", #buffers_to_close),
+		vim.log.levels.INFO,
+		{ title = "Buffer Management" }
+	)
 end
 
 -- Diagnostics
