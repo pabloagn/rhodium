@@ -9,6 +9,8 @@ APP_TITLE="Rhodium's Apps"
 # --- Configuration ---
 PADDING_ARGS="35 20 20" # Column padding: name, type, categories
 
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../common/bootstrap.sh"
+
 build_cache() {
     APP_DIR="$HOME/.local/share/applications"
     CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/$APP_NAME"
@@ -106,7 +108,7 @@ build_cache() {
 }
 
 main() {
-    launch_app
+    build_cache
 }
 
 main

@@ -318,7 +318,8 @@ clean-backups:
 update-caches:
     @printf "\n"
     @printf "{{yellow}}{{sym_pending}} Updating application caches...{{reset}}\n"
-    {{modules_path}}/build-caches.sh
+    @{{modules_path}}/cache/build-caches.sh
+    @python3 {{modules_path}}/cache/build-icons-cache.py
 
 # Force rebuild yazi image cache for directory
 yazi-cache dir=".":

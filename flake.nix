@@ -252,6 +252,7 @@
       # Default DevShell
       default = pkgs.mkShell {
         buildInputs = with pkgs; [
+          # General requirements
           nixpkgs-fmt
           nixd
           nil
@@ -263,6 +264,9 @@
           fzf
           bat
           hyperfine
+          # Requirements for cache building
+          python3
+          python3Packages.wcwidth
         ];
       };
     };
