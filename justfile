@@ -43,7 +43,8 @@ default:
     @just --list
 
 # Build and switch NixOS configuration
-switch host=`hostname`: && update-caches
+# switch host=`hostname`: && update-caches
+switch host=`hostname`:
     @printf "{{yellow}}{{sym_pending}} Pre-flight checks for %s{{reset}}\n" "{{ host }}"
     @if nix flake check {{ flake_path }} 2>/dev/null; then \
     	printf "  {{green}}{{sym_success}} Flake validation passed{{reset}}\n"; \
