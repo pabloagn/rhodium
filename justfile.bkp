@@ -11,7 +11,6 @@ set positional-arguments := true
 
 # Internal Variables
 flake_path := "."
-modules_path := flake_path + "/build"
 version := "1.0.0"
 author := "Rhodium"
 timestamp := `date +%Y-%m-%d`
@@ -318,7 +317,48 @@ clean-backups:
 update-caches:
     @printf "\n"
     @printf "{{yellow}}{{sym_pending}} Updating application caches...{{reset}}\n"
-    {{modules_path}}/build-caches.sh
+    @APP_DIR="{{home_dir}}/.local/share/applications"; \
+    CACHE_DIR="${{home_dir}}/.cache/rhodium-apps"; \
+    CACHE_FILE="$$CACHE_DIR/formatted_apps.cache"; \
+    if [ -d "$$APP_DIR" ]; then \
+    	mkdir -p "$$CACHE_DIR"; \
+    	rm -f "$$CACHE_FILE"; \
+    	printf "  {{cyan}}{{sym_bullet}} Rebuilding rhodium-apps cache{{reset}}\n"; \
+    	temp_cache=$$(mktemp); \
+    	for file in "$$APP_DIR"/rh-*.desktop; do \
+    		[[ -f "$$file" ]] || continue; \
+    		name=""; \
+    		entry_type="app"; \
+    		categories=""; \
+    		while IFS='=' read -r key value; do \
+    			case "$$key" in \
+    				"Name") name="$$value" ;; \
+    				"X-Entry-Type") entry_type="$$value" ;; \
+    				"X-Category") categories="$$value" ;; \
+    			esac; \
+    		done < "$$file"; \
+    		if [[ -n "$$categories" ]]; then \
+    			IFS=';' read -ra cat_array <<< "$$categories"; \
+    			formatted_cats=""; \
+    			for cat in "$${cat_array[@]}"; do \
+    				cat="$${cat#"$${cat%%[![:space:]]*}"}"; \
+    				cat="$${cat%"$${cat##*[![:space:]]}"}"; \
+    				[[ -n "$$cat" ]] && formatted_cats+="$${formatted_cats:+, }$${cat^}"; \
+    			done; \
+    			categories="$$formatted_cats"; \
+    		else \
+    			categories="App"; \
+    		fi; \
+    		printf "{{sym_pending}} %-35s %-20s %s\t%s\n" "$$name" "$${entry_type^}" "$$categories" "$$file" >> "$$temp_cache"; \
+    	done; \
+    	sort -k2,2 "$$temp_cache" > "$$CACHE_FILE"; \
+    	rm -f "$$temp_cache"; \
+    	count=$$(wc -l < "$$CACHE_FILE" 2>/dev/null || echo 0); \
+    	printf "  {{green}}{{sym_success}} Cached %s applications{{reset}}\n" "$$count"; \
+    fi
+    @printf "  {{cyan}}{{sym_bullet}} Clearing desktop file cache{{reset}}\n"; \
+    rm -f "{{home_dir}}/.cache/applications/desktop-file-cache" 2>/dev/null || true; \
+    update-desktop-database "$$APP_DIR" 2>/dev/null || true
 
 # Force rebuild yazi image cache for directory
 yazi-cache dir=".":

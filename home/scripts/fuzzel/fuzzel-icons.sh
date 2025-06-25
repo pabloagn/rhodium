@@ -48,122 +48,8 @@ check_dependencies() {
     fi
 }
 
-# Build cache files
-build_cache() {
-    mkdir -p "$CACHE_DIR"
-    
-    # Extract all data in one jq call
-    local json_data
-    json_data=$(jq -r '
-        to_entries | .[] | 
-        .key as $block | 
-        .value | to_entries | .[] | 
-        .key as $category | 
-        .value[] | 
-        [$block, $category, .symbol, .name] | 
-        @tsv
-    ' "$UNICODE_JSON_FILE")
-    
-    # Build flattened cache
-    {
-        while IFS=$'\t' read -r block category symbol name; do
-            # Build formatted text - 3 columns: symbol, name, "block > category"
-            local formatted_text=""
-            formatted_text+=$(printf "%-*s" "$SYMBOL_PADDING" "$symbol")
-            formatted_text+=" "
-            formatted_text+=$(printf "%-*s" "$NAME_PADDING" "$name")
-            formatted_text+=" "
-            formatted_text+="$block > $category"
-            
-            # Store formatted text and symbol separated by tab
-            printf '%s\t%s\n' "$formatted_text" "$symbol"
-        done <<< "$json_data" | sort -k1,1
-    } > "$CACHE_FILE_FLAT"
-    
-    # Build blocks cache (unique blocks)
-    jq -r 'keys[]' "$UNICODE_JSON_FILE" | sort > "$CACHE_FILE_BLOCKS"
-}
-
-
-# build_cache() {
-#     mkdir -p "$CACHE_DIR"
-#
-#     SYMBOL_PADDING=${SYMBOL_PADDING:-4}
-#     NAME_PADDING=${NAME_PADDING:-20}
-#
-#     # Use Python to measure visual display width
-#     display_width() {
-#         python3 -c "from wcwidth import wcswidth; print(wcswidth('$1'))"
-#     }
-#
-#     # Truncate string to a max visual width with ellipsis
-#     truncate_visual() {
-#         local str="$1"
-#         local max_width="$2"
-#         local ellipsis="..."
-#         local result=""
-#         local total=0
-#         local char width
-#
-#         while IFS= read -r -n1 char; do
-#             width=$(python3 -c "from wcwidth import wcwidth; print(wcwidth('$char'))")
-#             [[ $width -lt 0 ]] && width=0
-#             (( total + width > max_width - 3 )) && break
-#             result+="$char"
-#             (( total += width ))
-#         done <<< "$str"
-#
-#         local final_width
-#         final_width=$(python3 -c "from wcwidth import wcswidth; print(wcswidth('$result'))")
-#         local padding=$(( max_width - final_width ))
-#
-#         if [[ $total -lt $(display_width "$str") ]]; then
-#             printf "%s%s" "$result" "..."
-#         else
-#             printf "%s%*s" "$result" "$padding" ""
-#         fi
-#     }
-#
-#     local json_data
-#     json_data=$(jq -r '
-#         to_entries | .[] |
-#         .key as $block |
-#         .value | to_entries | .[] |
-#         .key as $category |
-#         .value[] |
-#         [$block, $category, .symbol, .name] |
-#         @tsv
-#     ' "$UNICODE_JSON_FILE")
-#
-#     {
-#         while IFS=$'\t' read -r block category symbol name; do
-#             local formatted_text=""
-#             formatted_text+=$(truncate_visual "$symbol" "$SYMBOL_PADDING")
-#             formatted_text+=" "
-#             formatted_text+=$(truncate_visual "$name" "$NAME_PADDING")
-#             formatted_text+=" "
-#             formatted_text+="$block > $category"
-#
-#             printf '%s\t%s\n' "$formatted_text" "$symbol"
-#         done <<< "$json_data" | sort -k1,1
-#     } > "$CACHE_FILE_FLAT"
-#
-#     jq -r 'keys[]' "$UNICODE_JSON_FILE" | sort > "$CACHE_FILE_BLOCKS"
-# }
-
-# Check if cache needs rebuild
-cache_needs_rebuild() {
-    [[ ! -f "$CACHE_FILE_FLAT" ]] || \
-    [[ ! -f "$CACHE_FILE_BLOCKS" ]] || \
-    [[ "$UNICODE_JSON_FILE" -nt "$CACHE_FILE_FLAT" ]]
-}
-
 # Show flattened view
 show_flattened_view() {
-    if cache_needs_rebuild; then
-        build_cache
-    fi
-    
     local selected
     selected=$(cut -f1 "$CACHE_FILE_FLAT" | fuzzel --dmenu --prompt "Select symbol: " -w 120)
     
@@ -225,10 +111,6 @@ show_category_view() {
 
 # Browse by category (hierarchical)
 browse_by_category() {
-    if cache_needs_rebuild; then
-        build_cache
-    fi
-    
     # Select block
     local selected_block
     selected_block=$(cat "$CACHE_FILE_BLOCKS" | fuzzel --dmenu --prompt "Block: ")
