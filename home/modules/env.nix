@@ -15,6 +15,13 @@
     vaults = "${homeDir}/vaults";
   };
 
+  xdgDirs = {
+    binHome = "${homeDir}/.local/bin";
+    configHome = "${homeDir}/.config";
+    cacheHome = "${homeDir}/.cache";
+    shareApps = "${homeDir}/.nix-profile/share/applications";
+  };
+
   derivedDirs = {
     # Dev
     devPhantom = "${dirs.dev}/phantom";
@@ -26,13 +33,15 @@
     # Obsidian Vault
     vaultsSanctum = "${dirs.vaults}/sanctum";
     vaultsFiction = "${dirs.vaults}/fiction";
-  };
 
-  xdgDirs = {
-    binHome = "${homeDir}/.local/bin";
-    configHome = "${homeDir}/.config";
-    cacheHome = "${homeDir}/.cache";
-    shareApps = "${homeDir}/.nix-profile/share/applications";
+    # User binaries
+    userBinFuzzel = "${dirs.xdgDirs}/fuzzel";
+    userBinCommon = "${dirs.xdgDirs}/common";
+    userBinDocker = "${dirs.xdgDirs}/docker";
+    userBinLaunchers = "${dirs.xdgDirs}/launchers";
+    userBinRdp = "${dirs.xdgDirs}/rdp";
+    userBinRofi = "${dirs.xdgDirs}/rofi";
+    userBinUtils = "${dirs.xdgDirs}/utils";
   };
 in {
   home.sessionVariables = {
@@ -78,6 +87,15 @@ in {
     XDG_CONFIG_HOME = xdgDirs.configHome;
     XDG_CACHE_HOME = xdgDirs.cacheHome;
     XDG_SHARE_APPS = xdgDirs.shareApps;
+
+    # User binaries
+    USERBIN_FUZZEL = derivedDirs.userBinFuzzel;
+    USERBIN_COMMON = derivedDirs.userBinCommon;
+    USERBIN_DOCKER = derivedDirs.userBinDocker;
+    USERBIN_LAUNCHERS = derivedDirs.userBinLaunchers;
+    USERBIN_RDP = derivedDirs.userBinRdp;
+    USERBIN_ROFI = derivedDirs.userBinRofi;
+    USERBIN_UTILS = derivedDirs.userBinUtils;
 
     # App-specific
     HISTFILE = "${config.xdg.cacheHome}/zsh/.zsh_history";
