@@ -7,6 +7,16 @@
       desc = "Go to rhodium";
     }
     {
+      on = ["g" "h"];
+      run = "cd $XDG_CACHE_HOME";
+      desc = "Go to .cache";
+    }
+    {
+      on = ["g" "b"];
+      run = "cd $XDG_BIN_HOME";
+      desc = "Go to ./local/bin";
+    }
+    {
       on = ["g" "u"];
       run = "cd $DEV_UTILS";
       desc = "Go to dev/utils";
@@ -15,6 +25,11 @@
       on = ["g" "p"];
       run = "shell -- ya emit cd '$(git rev-parse --show-toplevel)'";
       desc = "Go to Project Root";
+    }
+    {
+      on = ["g" "A"];
+      run = "cd $XDG_SHARE_APPS";
+      desc = "Go to .local/share/apps";
     }
     {
       on = ["g" "a"];

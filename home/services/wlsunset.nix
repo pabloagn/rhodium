@@ -5,14 +5,14 @@
   ...
 }:
 with lib; let
-  cfg = config.services.rh-wlsunset;
+  cfg = config.userExtraServices.rh-wlsunset;
 in {
   options.userExtraServices.rh-wlsunset = {
     enable = mkEnableOption "Gamma correction for wayland supporting wlr-gamma-control-unstable-v1";
   };
 
   config = mkIf cfg.enable {
-    systemd.user.userExtraServices.rh-wlsunset = {
+    systemd.user.services.rh-wlsunset = {
       Unit = {
         Description = "Gamma correction for wayland supporting wlr-gamma-control-unstable-v1";
         PartOf = ["graphical-session.target"];

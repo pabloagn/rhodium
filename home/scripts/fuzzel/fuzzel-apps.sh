@@ -3,8 +3,8 @@
 set -euo pipefail
 
 # --- Main Configuration ---
-APP_NAME="rhodium-launcher"
-APP_TITLE="Rhodium's App Launcher"
+APP_NAME="rhodium-apps"
+APP_TITLE="Rhodium's Apps"
 PROMPT="λ: "
 
 # --- Imports ---

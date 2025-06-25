@@ -90,6 +90,7 @@
   };
 
   # ===== Opener Definitions =====
+  # TODO: Add the bkp file contents. There are new additions there.
   opener = {
     # --- Code Editors ---
     edit = [

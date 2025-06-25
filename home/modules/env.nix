@@ -7,7 +7,7 @@
 
   dirs = {
     academic = "${homeDir}/academic";
-    dev = "${homeDir}/dev/";
+    dev = "${homeDir}/dev";
     downloads = "${homeDir}/downloads";
     pendings = "${homeDir}/pendings";
     professional = "${homeDir}/professional";
@@ -35,13 +35,13 @@
     vaultsFiction = "${dirs.vaults}/fiction";
 
     # User binaries
-    userBinFuzzel = "${dirs.xdgDirs}/fuzzel";
-    userBinCommon = "${dirs.xdgDirs}/common";
-    userBinDocker = "${dirs.xdgDirs}/docker";
-    userBinLaunchers = "${dirs.xdgDirs}/launchers";
-    userBinRdp = "${dirs.xdgDirs}/rdp";
-    userBinRofi = "${dirs.xdgDirs}/rofi";
-    userBinUtils = "${dirs.xdgDirs}/utils";
+    userBinFuzzel = "${xdgDirs.binHome}/fuzzel";
+    userBinCommon = "${xdgDirs.binHome}/common";
+    userBinDocker = "${xdgDirs.binHome}/docker";
+    userBinLaunchers = "${xdgDirs.binHome}/launchers";
+    userBinRdp = "${xdgDirs.binHome}/rdp";
+    userBinRofi = "${xdgDirs.binHome}/rofi";
+    userBinUtils = "${xdgDirs.binHome}/utils";
   };
 in {
   home.sessionVariables = {

@@ -2,7 +2,6 @@
   lib,
   pkgs,
   pkgs-unstable,
-  # yaziPlugins,
   ...
 }: let
   configBase = import ./base.nix {};

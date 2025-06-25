@@ -5,14 +5,14 @@
   ...
 }:
 with lib; let
-  cfg = config.services.rh-swaybg;
+  cfg = config.userExtraServices.rh-swaybg;
 in {
   options.userExtraServices.rh-swaybg = {
     enable = mkEnableOption "Wallpaper tool for Wayland compositors";
   };
 
   config = mkIf cfg.enable {
-    systemd.user.userExtraServices.rh-swaybg = {
+    systemd.user.services.rh-swaybg = {
       Unit = {
         Description = "Wallpaper daemon for Wayland";
         PartOf = ["graphical-session.target"];
