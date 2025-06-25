@@ -44,9 +44,9 @@ with lib; let
     isScript = fileName: let
       fileType = folderContents.${fileName};
       isRegularFile = fileType == "regular";
-      hasShExtension = lib.hasSuffix ".sh" fileName;
+      hasRequiredExtension = lib.hasSuffix ".sh" fileName || lib.hasSuffix ".py" fileName; # NOTE: Python scripts are accepted.
     in
-      isRegularFile && hasShExtension;
+      isRegularFile && hasRequiredExtension;
     
     # Get script files in this folder
     scriptFiles = lib.filter isScript (builtins.attrNames folderContents);

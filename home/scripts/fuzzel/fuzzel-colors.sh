@@ -13,13 +13,12 @@ source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../common/bootstrap.sh"
 # --- Variables ---
 THEME_NAME="kanso"
 CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/$APP_NAME"
-# COLORS_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/colors"
+COLORS_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/colors"
 # NOTE: This var below is for testing purposes
-COLORS_DIR="/home/pabloagn/dev/rhodium/home/assets/colors"
+# COLORS_DIR="/home/pabloagn/dev/rhodium/home/assets/colors"
 
 : "${COLORS_FILE:=$COLORS_DIR/$THEME_NAME.json}"
 PADDING_ARGS="15 15"
-
 
 # --- Helper Functions ---
 usage() {
@@ -236,7 +235,7 @@ EOF
     num_main_options=$(echo -e "$main_menu_options" | wc -l)
 
     local choice
-    choice=$(echo -e "$main_menu_options" | fuzzel --dmenu --prompt="$(provide_fuzzel_prompt)" -l "$num_main_options") || exit 0
+    choice=$(echo -e "$main_menu_options" | fuzzel --dmenu --prompt="$PROMPT" -l "$num_main_options") || exit 0
 
     case "$choice" in
     "⊹ Pick Color [Hyprpicker] [HEX]") pick_with_hyprpicker "HEX" ;;

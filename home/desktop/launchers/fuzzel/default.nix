@@ -4,7 +4,8 @@
       main = {
         terminal = "ghostty -e";
         layer = "overlay";
-        font = "JetBrainsMono Nerd Font:size=14";
+        # HACK: We needed to use JuliaMono since it was the font with widest adoption of unicode symbols.
+        font = "JuliaMono:size=14, JetBrainsMono Nerd Font:size=14";
         dpi-aware = false;
         prompt = "'λ '";
         icons-enabled = true;

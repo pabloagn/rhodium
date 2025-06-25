@@ -3,8 +3,8 @@
 set -euo pipefail
 
 # --- Main Configuration ---
-APP_NAME="rhodium-bluetooth"
-APP_TITLE="Rhodium's Bluetooth Utils"
+APP_NAME="rhodium-auth"
+APP_TITLE="Rhodium's Auth Utils"
 PROMPT="α: "
 
 # --- Imports ---

@@ -9,6 +9,7 @@ FUZZEL_ENTRY="⊹"
 
 # --- Shared Functions ---
 notify() {
+    # Notify to client
     local title="$1"
     local message="$2"
     shift 2
@@ -20,6 +21,7 @@ notify() {
 }
 
 copy_to_clipboard() {
+    # Copy content to clipboard
     local text="$1"
     if command -v wl-copy &>/dev/null; then
         echo -n "$text" | wl-copy

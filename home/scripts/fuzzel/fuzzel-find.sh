@@ -3,8 +3,8 @@
 set -euo pipefail
 
 # --- Main Configuration ---
-APP_NAME="rhodium-colors"
-APP_TITLE="Rhodium's Color Utils"
+APP_NAME="rhodium-find"
+APP_TITLE="Rhodium's Find Utils"
 PROMPT="β: "
 
 MENU_LEN=5
