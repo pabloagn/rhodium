@@ -38,7 +38,7 @@
 ## <samp>⊹ QUICK START</samp>
 
 There are two main ways to interact with Rhodium:
-- Using the built-in justfile.
+- Using the built-in [justfile](./justfile)
 - Using nix flake commands directly.
 
 ### <samp>⊹ JUST</samp>
