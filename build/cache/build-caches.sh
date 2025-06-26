@@ -11,6 +11,24 @@ PADDING_ARGS="35 20 20" # Column padding: name, type, categories
 
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../common/bootstrap.sh"
 
+# ---- bat ----
+bat cache --build
+
+# ---- tldr ----
+tldr --update
+
+# ---- Wikiman ----
+# # Download latest Makefile
+# curl -L 'https://raw.githubusercontent.com/filiparag/wikiman/master/Makefile' -o 'wikiman-makefile'
+#
+# # Example for Linux: install ArchWiki and TLDR pages
+# make -f ./wikiman-makefile source-arch source-tldr
+# sudo make -f ./wikiman-makefile source-install
+# sudo make -f ./wikiman-makefile clean
+#
+# # Verify active sources
+# wikiman -S
+
 # --- fuzzel-apps ---
 build_cache() {
     APP_DIR="$HOME/.local/share/applications"

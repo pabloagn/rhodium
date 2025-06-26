@@ -31,7 +31,8 @@
 
     # Documentation
     # tldr # Simplified and community-driven man pages
-    tlrc # Official tldr client written in Rust (includes tlrd)
+    # tlrc # Official tldr client written in Rust (includes tlrd)
+    tealdeer # Alternative fast Rust client
     wikiman # Offline search engine for Linux packages
 
     # Misc

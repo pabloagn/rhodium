@@ -1,0 +1,141 @@
+%YAML 1.2
+---
+name: KDL
+file_extensions:
+  - kdl
+scope: source.kdl
+
+contexts:
+  main:
+    # Version
+    - match: '/-\s*kdl-version\s+[12]\s*'
+      scope: meta.version.kdl
+    
+    # Slashdash (node comment)
+    - match: '/-'
+      scope: punctuation.definition.comment.kdl
+      push: slashdash
+    
+    # Comments
+    - match: '//'
+      scope: punctuation.definition.comment.kdl
+      push: line_comment
+    
+    - match: '/\*'
+      scope: punctuation.definition.comment.begin.kdl
+      push: block_comment
+    
+    # Type annotations
+    - match: '\('
+      scope: punctuation.definition.type.begin.kdl
+      push: type_annotation
+    
+    # Keywords
+    - match: '#(true|false|null|inf|-inf|nan)\b'
+      scope: constant.language.kdl
+    
+    # Numbers
+    - match: '([-+]?)0x[0-9a-fA-F][0-9a-fA-F_]*'
+      scope: constant.numeric.hex.kdl
+    
+    - match: '([-+]?)0o[0-7][0-7_]*'
+      scope: constant.numeric.octal.kdl
+    
+    - match: '([-+]?)0b[01][01_]*'
+      scope: constant.numeric.binary.kdl
+    
+    - match: '([-+]?)([0-9][0-9_]*)(\.[0-9][0-9_]*)?([eE][-+]?[0-9][0-9_]*)?'
+      scope: constant.numeric.decimal.kdl
+    
+    # Raw strings
+    - match: '(#*)"'
+      scope: punctuation.definition.string.begin.kdl
+      push: raw_string
+    
+    # Regular strings
+    - match: '"""'
+      scope: punctuation.definition.string.begin.kdl
+      push: multiline_string
+    
+    - match: '"'
+      scope: punctuation.definition.string.begin.kdl
+      push: string
+    
+    # Node names and properties
+    - match: '([^\s\\/(){};=\[\]"#]+)\s*(=)'
+      captures:
+        1: variable.parameter.kdl
+        2: keyword.operator.assignment.kdl
+    
+    - match: '[^\s\\/(){};=\[\]"#]+'
+      scope: entity.name.tag.kdl
+    
+    # Children blocks
+    - match: '\{'
+      scope: punctuation.section.block.begin.kdl
+      push: children
+    
+    # Semicolons
+    - match: ';'
+      scope: punctuation.terminator.kdl
+
+  slashdash:
+    - match: '\s*'
+      pop: true
+
+  line_comment:
+    - meta_scope: comment.line.kdl
+    - match: $
+      pop: true
+
+  block_comment:
+    - meta_scope: comment.block.kdl
+    - match: '/\*'
+      scope: punctuation.definition.comment.begin.kdl
+      push: block_comment
+    - match: '\*/'
+      scope: punctuation.definition.comment.end.kdl
+      pop: true
+
+  type_annotation:
+    - match: '[^\s)]+' 
+      scope: entity.name.type.kdl
+    - match: '\)'
+      scope: punctuation.definition.type.end.kdl
+      pop: true
+
+  string:
+    - meta_scope: string.quoted.double.kdl
+    - match: '\\[\\"/bfnrts]'
+      scope: constant.character.escape.kdl
+    - match: '\\u\{[0-9a-fA-F]{1,6}\}'
+      scope: constant.character.escape.unicode.kdl
+    - match: '\\\s*$'
+      scope: constant.character.escape.kdl
+    - match: '"'
+      scope: punctuation.definition.string.end.kdl
+      pop: true
+
+  multiline_string:
+    - meta_scope: string.quoted.triple.kdl
+    - match: '\\[\\"/bfnrts]'
+      scope: constant.character.escape.kdl
+    - match: '\\u\{[0-9a-fA-F]{1,6}\}'
+      scope: constant.character.escape.unicode.kdl
+    - match: '\\\s*$'
+      scope: constant.character.escape.kdl
+    - match: '"""'
+      scope: punctuation.definition.string.end.kdl
+      pop: true
+
+  raw_string:
+    - meta_scope: string.quoted.raw.kdl
+    - match: '"#{0,}'
+      scope: punctuation.definition.string.end.kdl
+      pop: true
+
+  children:
+    - include: main
+    - match: '\}'
+      scope: punctuation.section.block.end.kdl
+      pop: true

@@ -351,7 +351,6 @@ update-caches:
     @printf "{{yellow}}{{sym_pending}} Updating application caches...{{reset}}\n"
     @{{modules_path}}/cache/build-caches.sh
     @python3 {{modules_path}}/cache/build-icons-cache.py
-    @{{modules_path}}/cache/wikiman-cache.sh
 
 # Rollback to previous generation
 rollback:
