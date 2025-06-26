@@ -283,6 +283,7 @@ screenshot-path "~/pictures/screenshots/screenshot_%Y-%m-%d_%H-%M-%S.png"
 // Binds
 // ------------------------------------
 binds {
+    // Yank and paste content to and from X11 apps
     // Mod+Shift+C { spawn "sh" "-c" "env DISPLAY=:0 xsel -ob | wl-copy"; }
     // Mod+Shift+V { spawn "sh" "-c" "wl-paste -n | env DISPLAY=:0 xsel -ib"; }
     // System & Core Controls
@@ -311,7 +312,7 @@ binds {
     Mod+Tab hotkey-overlay-title="Focus Previous Workspace" {
         focus-workspace-previous
     }
-    Mod+Shift+Tab hotkey-overlay-title="Focus Previous Window" {
+    Alt+Tab hotkey-overlay-title="Focus Previous Window" {
         focus-window-previous
     }
     // Mod+Shift+H hotkey-overlay-title="Focus Monitor Left" {
@@ -326,7 +327,7 @@ binds {
         close-window
     }
     Mod+Ctrl+C hotkey-overlay-title="Force Kill Focused Process" {
-        spawn "~/.local/bin/utils-kill.sh"
+        spawn "sh" "-c" "$USERBIN_UTILS/utils-kill.sh"
     }
     Mod+V hotkey-overlay-title="Toggle Window Floating" {
         toggle-window-floating
@@ -479,7 +480,7 @@ binds {
         spawn "kitty" "-e" "nvim"
     }
     Mod+Q hotkey-overlay-title="Toggle Calculator [CLI]" {
-        spawn "~/.local/bin/utils-qalc.sh"
+        spawn "sh" "-c" "$USERBIN_LAUNCHERS/launchers-qalc.sh"
     }
     // Secondary (Shift)
     // -------------------------------------------------
@@ -496,100 +497,103 @@ binds {
         spawn "zeditor"
     }
     Mod+Shift+Q hotkey-overlay-title="Toggle Calculator [GUI]" {
-        spawn "~/.local/bin/utils-qalculate.sh"
+        spawn "sh" "-c" "$USERBIN_LAUNCHERS/launchers-qalculate.sh"
     }
     // Tertiary (Ctrl)
     // -------------------------------------------------
     Mod+Ctrl+Q hotkey-overlay-title="Toggle Calendar" {
-        spawn "~/.local/bin/utils-calcure.sh"
+        spawn "sh" "-c" "$USERBIN_LAUNCHERS/launchers-calcure.sh"
     }
+    // TEST: Validate that refactoring worked
     // Fuzzel Menus
     // -------------------------------------------------
     Mod+A hotkey-overlay-title="Fuzzel Launcher" {
-        spawn "~/.local/bin/fuzzel-launcher.sh"
+        spawn "sh" "-c" "$USERBIN_FUZZEL/fuzzel-apps.sh"
     }
     // TODO: Adjust this so it does not show duplicate entries and does not show icons
     Mod+Alt+A hotkey-overlay-title="Fuzzel [A]uth" {
-        spawn "~/.local/bin/fuzzel-auth.sh"
+        spawn "sh" "-c" "$USERBIN_FUZZEL/fuzzel-auth.sh"
     }
     Mod+Alt+B hotkey-overlay-title="Fuzzel [B]luetooth" {
-        spawn "~/.local/bin/fuzzel-bluetooth.sh"
+        spawn "sh" "-c" "$USERBIN_FUZZEL/fuzzel-bluetooth.sh"
     }
     Mod+Alt+C hotkey-overlay-title="Fuzzel [C]olors" {
-        spawn "~/.local/bin/fuzzel-colors.sh"
+        spawn "sh" "-c" "$USERBIN_FUZZEL/fuzzel-colors.sh"
     }
     Mod+Alt+D hotkey-overlay-title="Fuzzel [D]isplay" {
-        spawn "~/.local/bin/fuzzel-display.sh"
+        spawn "sh" "-c" "$USERBIN_FUZZEL/fuzzel-display.sh"
     }
     Mod+Alt+E hotkey-overlay-title="Fuzzel [E]moji" {
-        spawn "~/.local/bin/fuzzel-emoji.sh"
+        spawn "sh" "-c" "$USERBIN_FUZZEL/fuzzel-emoji.sh"
     }
     Mod+Alt+F hotkey-overlay-title="Fuzzel [F]ind" {
-        spawn "~/.local/bin/fuzzel-finder.sh"
+        spawn "sh" "-c" "$USERBIN_FUZZEL/fuzzel-find.sh"
     }
     Mod+Alt+G hotkey-overlay-title="Fuzzel [G]it" {
-        spawn "~/.local/bin/fuzzel-git.sh"
+        spawn "sh" "-c" "$USERBIN_FUZZEL/fuzzel-git.sh"
     }
     Mod+Alt+H hotkey-overlay-title="Fuzzel [H]elp" {
-        spawn "~/.local/bin/fuzzel-help.sh"
+        spawn "sh" "-c" "$USERBIN_FUZZEL/fuzzel-help.sh"
     }
     Mod+Alt+I hotkey-overlay-title="Fuzzel [I]cons" {
-        spawn "~/.local/bin/fuzzel-unicode.sh"
+        spawn "sh" "-c" "$USERBIN_FUZZEL/fuzzel-icons.sh"
     }
     Mod+Alt+J hotkey-overlay-title="Fuzzel [J]ournal" {
-        spawn "~/.local/bin/fuzzel-journals.sh"
+        spawn "sh" "-c" "$USERBIN_FUZZEL/fuzzel-journals.sh"
     }
     Mod+Alt+K hotkey-overlay-title="Fuzzel [K]ill" {
-        spawn "~/.local/bin/fuzzel-kill.sh"
+        spawn "sh" "-c" "$USERBIN_FUZZEL/fuzzel-kill.sh"
     }
     Mod+Alt+L hotkey-overlay-title="Fuzzel [L]aunch" {
-        spawn "fuzzel"
+        spawn "sh" "-c" "$USERBIN_FUZZEL/fuzzel-launch.sh"
     }
     Mod+Alt+M hotkey-overlay-title="Fuzzel [M]ounts" {
-        spawn "~/.local/bin/fuzzel-mounts.sh"
+        spawn "sh" "-c" "$USERBIN_FUZZEL/fuzzel-mounts.sh"
     }
-    Mod+Alt+N hotkey-overlay-title="Fuzzel [N]etwork" {
-        spawn "~/.local/bin/fuzzel-networking.sh"
+    Mod+Alt+N hotkey-overlay-title="Fuzzel [N]etworking" {
+        spawn "sh" "-c" "$USERBIN_FUZZEL/fuzzel-networking.sh"
     }
+    // TODO: What will this menu be
     // Mod+Alt+O hotkey-overlay-title="Fuzzel [O]" {
-    //     spawn "~/.local/bin/fuzzel-o.sh"
+    //     spawn "sh" "-c" "$USERBIN_FUZZEL/fuzzel-o.sh"
     // }
     Mod+Alt+P hotkey-overlay-title="Fuzzel [P]ower" {
-        spawn "~/.local/bin/fuzzel-power.sh"
+       spawn "sh" "-c" "$USERBIN_FUZZEL/fuzzel-power.sh"
     }
     Mod+Alt+Q hotkey-overlay-title="Fuzzel [Q]uery" {
-        spawn "~/.local/bin/fuzzel-query.sh"
+       spawn "sh" "-c" "$USERBIN_FUZZEL/fuzzel-query.sh"
     }
     Mod+Alt+R hotkey-overlay-title="Fuzzel [R]emote" {
-        spawn "~/.local/bin/fuzzel-remote.sh"
+       spawn "sh" "-c" "$USERBIN_FUZZEL/fuzzel-remote.sh"
     }
     Mod+Alt+S hotkey-overlay-title="Fuzzel [S]ervices" {
-        spawn "~/.local/bin/fuzzel-services.sh"
+       spawn "sh" "-c" "$USERBIN_FUZZEL/fuzzel-services.sh"
     }
-    Mod+Alt+T hotkey-overlay-title="Fuzzel [T]heme" {
-        spawn "~/.local/bin/fuzzel-theme.sh"
+    Mod+Alt+T hotkey-overlay-title="Fuzzel [T]emperature" {
+       spawn "sh" "-c" "$USERBIN_FUZZEL/fuzzel-temperature.sh"
     }
     Mod+Alt+U hotkey-overlay-title="Fuzzel [U]sb" {
-        spawn "~/.local/bin/fuzzel-usb.sh"
+       spawn "sh" "-c" "$USERBIN_FUZZEL/fuzzel-usb.sh"
     }
     Mod+Alt+V hotkey-overlay-title="Fuzzel [V]aults" {
-        spawn "~/.local/bin/fuzzel-vaults.sh"
+       spawn "sh" "-c" "$USERBIN_FUZZEL/fuzzel-vaults.sh"
     }
     Mod+Alt+W hotkey-overlay-title="Fuzzel [W]i-Fi" {
-        spawn "~/.local/bin/fuzzel-wifi.sh"
+       spawn "sh" "-c" "$USERBIN_FUZZEL/fuzzel-wifi.sh"
     }
     Mod+Alt+X hotkey-overlay-title="Fuzzel [X]periments" {
-        spawn "~/.local/bin/fuzzel-xperiments.sh"
+       spawn "sh" "-c" "$USERBIN_FUZZEL/fuzzel-xperiments.sh"
     }
     Mod+Alt+Y hotkey-overlay-title="Fuzzel [Y]ank" {
-        spawn "~/.local/bin/fuzzel-yank.sh"
+       spawn "sh" "-c" "$USERBIN_FUZZEL/fuzzel-yank.sh"
     }
     Mod+Alt+Z hotkey-overlay-title="Fuzzel [Z]-Utils" {
-        spawn "~/.local/bin/fuzzel-zutils.sh"
+       spawn "sh" "-c" "$USERBIN_FUZZEL/fuzzel-zutils.sh"
     }
     Mod+Alt+0 hotkey-overlay-title="Fuzzel [0]" {
-        spawn "~/.local/bin/fuzzel-zero.sh"
+        spawn "sh" "-c" "$USERBIN_FUZZEL/fuzzel-zero.sh"
     }
+    // TODO: Deploy this now that we have a working method
     // Custom Adjustments
     // Temperature adjustment with Ctrl + Volume keys
     // Ctrl+XF86AudioRaiseVolume cooldown-ms=150 allow-when-locked=true hotkey-overlay-title="Increase Display Temperature" {
@@ -618,10 +622,10 @@ binds {
         screenshot-window
     }
     Mod+Shift+A hotkey-overlay-title="Screenshot Interactive [A]nnotate" {
-        spawn "~/.local/bin/utils-screenshot-annotate.sh"
+        spawn "sh" "-c" "$USERBIN_UTILS/utils-screenshot-annotate.sh"
     }
     Alt+Print hotkey-overlay-title="Screenshot Interactive [A]nnotate" {
-        spawn "~/.local/bin/utils-screenshot-annotate.sh"
+        spawn "sh" "-c" "$USERBIN_UTILS/utils-screenshot-annotate.sh"
     }
     // Mouse & Trackpad Scroll Bindings
     Mod+WheelScrollDown cooldown-ms=50 hotkey-overlay-title="Focus Workspace Down (Scroll)" {
@@ -630,10 +634,10 @@ binds {
     Mod+WheelScrollUp cooldown-ms=50 hotkey-overlay-title="Focus Workspace Up (Scroll)" {
         focus-workspace-up
     }
-    Mod+WheelScrollRight cooldown-ms=50 hotkey-overlay-title="Focus Column Right (Scroll)" {
+    Mod+WheelScrollRight cooldown-ms=100 hotkey-overlay-title="Focus Column Right (Scroll)" {
         focus-column-right
     }
-    Mod+WheelScrollLeft cooldown-ms=50 hotkey-overlay-title="Focus Column Left (Scroll)" {
+    Mod+WheelScrollLeft cooldown-ms=100 hotkey-overlay-title="Focus Column Left (Scroll)" {
         focus-column-left
     }
     Mod+TouchpadScrollUp hotkey-overlay-title="Increase Volume (Touchpad)" {
