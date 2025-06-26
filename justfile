@@ -94,7 +94,6 @@ switch host:
 source-user-vars:
     @printf "{{yellow}}{{sym_pending}} Sourcing User Vars{{reset}}\n"
     @if [ -f "/etc/profiles/per-user/{{user}}/etc/profile.d/hm-session-vars.sh" ]; then \
-    	printf "  {{cyan}}{{sym_bullet}} Loading session variables{{reset}}\n"; \
     	source "/etc/profiles/per-user/{{user}}/etc/profile.d/hm-session-vars.sh"; \
     fi
     @printf "{{green}}{{sym_success}} Sourced User Vars{{reset}}\n"
