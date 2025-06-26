@@ -86,22 +86,28 @@ switch host:
     @printf "{{yellow}}{{sym_pending}} Building and switching configuration...{{reset}}\n"
     sudo nixos-rebuild switch --flake {{ flake_path }}#{{ host }}
     @printf "{{yellow}}{{sym_pending}} Running post-build tasks...{{reset}}\n"
+    @just source-user-vars
+    @just update-caches
+    @just reload-services
     @printf "{{green}}{{sym_success}} System rebuild complete{{reset}}\n"
+
+source-user-vars:
+    @printf "{{yellow}}{{sym_pending}} Sourcing User Vars{{reset}}\n"
     @if [ -f "/etc/profiles/per-user/{{user}}/etc/profile.d/hm-session-vars.sh" ]; then \
     	printf "  {{cyan}}{{sym_bullet}} Loading session variables{{reset}}\n"; \
     	source "/etc/profiles/per-user/{{user}}/etc/profile.d/hm-session-vars.sh"; \
     fi
-    @just update-caches
-    @just reload-services
+    @printf "{{green}}{{sym_success}} Sourced User Vars{{reset}}\n"
 
 reload-services:
-    @printf "  {{cyan}}{{sym_bullet}} Reloading Wayland services{{reset}}\n"
+    @printf "{{yellow}}{{sym_pending}} Reloading User Services{{reset}}\n"
     @systemctl --user daemon-reload
     @command -v niri >/dev/null 2>&1 && \
         niri msg action do-screen-transition --delay-ms 800 2>/dev/null || true
     @for service in rh-swaybg rh-waybar rh-mako; do \
         systemctl --user restart "$service.service" || true; \
     done
+    @printf "{{green}}{{sym_success}} Reloaded User Services{{reset}}\n"
 
 # Build without switching [test build]
 build host:
