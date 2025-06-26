@@ -10,6 +10,5 @@
     brave
     w3m
     tor
-    # floorp
   ];
 }

@@ -18,33 +18,51 @@
       icon = "neovim";
       description = "Neovim";
     };
-    neovide-instance = {
-      binary = "neovide";
-      args = [];
-      icon = "neovim";
-      description = "Neovide";
-    };
-    zeditor-instance = {
+    # neovide-instance = {
+    #   binary = "neovide";
+    #   args = [];
+    #   icon = "neovim";
+    #   description = "Neovide";
+    # };
+    zeditor = {
       binary = "zeditor";
       args = [];
       icon = "zeditor";
       description = "Zeditor";
     };
-    code-instance = {
+    code = {
       binary = "code";
       args = [];
       icon = "code";
       description = "VS Code";
     };
+    emacs = {
+      binary = "emacs";
+      args = [];
+      icon = "emacs";
+      description = "Doom Emacs";
+    };
+    texmaker = {
+      binary = "texmaker";
+      args = [];
+      icon = "texmaker";
+      description = "Texmaker LaTeX Editor";
+    };
+    rstudio = {
+      binary = "rstudio";
+      args = [];
+      icon = "rstudio";
+      description = "RStudio IDE";
+    };
   };
 
   viewers = {
-    image-viewer-xorg = {
-      binary = "feh";
-      args = ["-Z" "--scale-down" "--auto-zoom" "--image-bg" "black" "%f"];
-      icon = "feh";
-      description = "Image Viewer (X11)";
-    };
+    # image-viewer-xorg = {
+    #   binary = "feh";
+    #   args = ["-Z" "--scale-down" "--auto-zoom" "--image-bg" "black" "%f"];
+    #   icon = "feh";
+    #   description = "Image Viewer (X11)";
+    # };
     image-viewer = {
       binary = "imv";
       args = [];
@@ -60,9 +78,63 @@
       icon = "bottom";
       description = "Bottom (Htop)";
     };
+    btop = {
+      binary = "$HOME/.local/bin/launchers/launchers-btop.sh";
+      args = [];
+      icon = "btop";
+      description = "Btop Resource Monitor";
+    };
   };
 
   productivity = {
+    yazi = {
+      binary = "kitty";
+      args = ["-e yazi"];
+      icon = "yazi";
+      description = "Yazi in Kitty";
+    };
+    calcure = {
+      binary = "$HOME/.local/bin/launchers/launchers-calcure.sh";
+      args = [];
+      icon = "calcure";
+      description = "Calcure Calendar and Tasks";
+    };
+    qalc = {
+      binary = "$HOME/.local/bin/launchers/launchers-qalc.sh";
+      args = [];
+      icon = "qalculate";
+      description = "Qalculate CLI";
+    };
+    qalculate = {
+      binary = "$HOME/.local/bin/launchers/launchers-qalculate.sh";
+      args = [];
+      icon = "qalculate";
+      description = "Qalculate!";
+    };
+    qbittorrent = {
+      binary = "qbittorrent";
+      args = [];
+      icon = "qbittorrent";
+      description = "qBittorrent";
+    };
+    jitsimeet = {
+      binary = "jitsi-meet";
+      args = [];
+      icon = "jitsi-meet";
+      description = "Jitsi Meet";
+    };
+    zoomus = {
+      binary = "zoom-us";
+      args = [];
+      icon = "zoom-us";
+      description = "Zoom";
+    };
+    thunar = {
+      binary = "xfce.thunar";
+      args = [];
+      icon = "thunar";
+      description = "Thunar File Manager";
+    };
     onepassword = {
       binary = "1password";
       # NOTE: Use flags below if not using xwayland-satellite
@@ -96,11 +168,53 @@
       icon = "protonmail";
       description = "ProtonMail";
     };
-    slack = {
-      binary = "slack";
-      args = [];
-      icon = "slack";
-      description = "Slack";
+    libreofficewriter = {
+      binary = "libreoffice";
+      args = ["--writer"];
+      icon = "libreoffice";
+      description = "LibreOffice Writer";
+    };
+    libreofficecalc = {
+      binary = "libreoffice";
+      args = ["--calc"];
+      icon = "libreoffice";
+      description = "LibreOffice Calc";
+    };
+    libreofficedraw = {
+      binary = "libreoffice";
+      args = ["--draw"];
+      icon = "libreoffice";
+      description = "LibreOffice Draw";
+    };
+    libreofficeimpress = {
+      binary = "libreoffice";
+      args = ["--impress"];
+      icon = "libreoffice";
+      description = "LibreOffice Impress";
+    };
+    libreofficebase = {
+      binary = "libreoffice";
+      args = ["--base"];
+      icon = "libreoffice";
+      description = "LibreOffice Base";
+    };
+    libreofficeglobal = {
+      binary = "libreoffice";
+      args = ["--global"];
+      icon = "libreoffice";
+      description = "LibreOffice Global Document";
+    };
+    libreofficemath = {
+      binary = "libreoffice";
+      args = ["--math"];
+      icon = "libreoffice";
+      description = "LibreOffice Math";
+    };
+    libreofficeweb = {
+      binary = "libreoffice";
+      args = ["--web"];
+      icon = "libreoffice";
+      description = "LibreOffice HTML Document";
     };
     standardnotes = {
       binary = "standardnotes";
@@ -143,6 +257,45 @@
     };
   };
 
+  social = {
+    siglandesktop = {
+      binary = "siglan-desktop";
+      args = [];
+      icon = "siglan-desktop";
+      description = "Siglan Desktop";
+    };
+    telegram = {
+      binary = "telegram-desktop";
+      args = [];
+      icon = "telegram";
+      description = "Telegram Desktop";
+    };
+    element = {
+      binary = "element-desktop";
+      args = [];
+      icon = "element";
+      description = "Element (Matrix)";
+    };
+    fluffychat = {
+      binary = "fluffychat";
+      args = [];
+      icon = "fluffychat";
+      description = "Fluffychat (Matrix)";
+    };
+    mastodon = {
+      binary = "mastodon";
+      args = [];
+      icon = "mastodon";
+      description = "Mastodon Client";
+    };
+    discord = {
+      binary = "discord";
+      args = [];
+      icon = "discord";
+      description = "Discord";
+    };
+  };
+
   media = {
     spotify = {
       binary = "spotify";
@@ -167,6 +320,12 @@
       args = [];
       icon = "inkscape";
       description = "InkScape";
+    };
+    obs = {
+      binary = "obs";
+      args = [];
+      icon = "obs";
+      description = "OBS Studio";
     };
   };
 
