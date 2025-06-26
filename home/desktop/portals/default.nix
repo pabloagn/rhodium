@@ -17,13 +17,9 @@
   gtk = {
     enable = true;
     theme = {
-      name = "Adwaita";
-      package = pkgs.adwaita-icon-theme;
+      name = "Adwaita-dark";
+      package = pkgs.gnome-themes-extra;
     };
-    # theme = {
-    #   name = "Adwaita-dark";
-    #   package = pkgs.gnome-themes-extra;
-    # };
     iconTheme = {
       name = "Papirus-Dark";
       package = pkgs.papirus-icon-theme;

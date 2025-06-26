@@ -342,6 +342,12 @@
       icon = "foot";
       description = "Foot";
     };
+    alacritty-instance = {
+      binary = "alacritty";
+      args = [];
+      icon = "alacritty";
+      description = "Alacritty";
+    };
     ghostty-instance = {
       binary = "ghostty";
       args = [];
@@ -352,25 +358,25 @@
 
   shells = {
     bash-shell = {
-      binary = "ghostty";
+      binary = "kitty";
       args = ["-e" "bash"];
       icon = "bash";
       description = "Bash Shell";
     };
     zsh-shell = {
-      binary = "ghostty";
+      binary = "kitty";
       args = ["-e" "zsh"];
       icon = "zsh";
       description = "Zsh Shell";
     };
     fish-shell = {
-      binary = "ghostty";
+      binary = "kitty";
       args = ["-e" "fish"];
       icon = "fish";
       description = "Fish Shell";
     };
     nu-shell = {
-      binary = "ghostty";
+      binary = "kitty";
       args = ["-e" "nu"];
       icon = "nu";
       description = "Nu Shell";
@@ -379,13 +385,13 @@
 
   multiplexers = {
     tmux-session = {
-      binary = "ghostty";
+      binary = "kitty";
       args = ["-e" "tmux"];
       icon = "tmux";
       description = "Tmux Session";
     };
     zellij = {
-      binary = "ghostty";
+      binary = "kitty";
       args = ["-e" "zellij"];
       icon = "zellij";
       description = "Zellij Session";
