@@ -5,7 +5,7 @@ set -euo pipefail
 # --- Main Configuration ---
 APP_NAME="rhodium-power"
 APP_TITLE="Rhodium's Power Menu"
-PROMPT="ψ: "
+PROMPT="Ω: "
 
 # --- Imports ---
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../common/bootstrap.sh"
@@ -19,7 +19,6 @@ options=(
     "Suspend:suspend_system"
     "Hibernate:hibernate_system"
     "Toggle Airplane Mode:toggle_airplane_mode"
-    "Reload Waybar:reload_waybar"
     "Exit:noop"
 )
 
@@ -67,15 +66,6 @@ toggle_airplane_mode() {
         rfkill block all
         notify "$APP_TITLE" "Airplane mode enabled - WiFi and Bluetooth disabled"
     fi
-}
-
-reload_waybar() {
-    notify "$APP_TITLE" "Reloading Waybar..."
-    killall -SIGUSR2 waybar || {
-        killall waybar
-        waybar &
-    }
-    notify "$APP_TITLE" "Waybar reloaded"
 }
 
 noop() {

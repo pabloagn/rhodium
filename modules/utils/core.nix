@@ -37,5 +37,8 @@
 
     # Audio tools
     alsa-utils # ALSA utilities
+
+    # Hardware testing
+    stress # Perform stress tests on CPU
   ];
 }
