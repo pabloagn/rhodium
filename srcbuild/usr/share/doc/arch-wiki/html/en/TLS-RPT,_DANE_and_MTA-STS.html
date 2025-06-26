@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-sticky-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-0 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-disabled skin-theme-clientpref-day vector-toc-available" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>TLS-RPT, DANE and MTA-STS - ArchWiki</title>
+<link rel="stylesheet" href="../ArchWikiOffline.css">
+<meta name="ResourceLoaderDynamicStyles" content="">
+<meta name="generator" content="MediaWiki 1.43.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="max-image-preview:standard">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.25, maximum-scale=5.0">
+<link rel="search" type="application/opensearchdescription+xml" href="/rest.php/v1/search" title="ArchWiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.archlinux.org/api.php?action=rsd">
+<link rel="license" href="https://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="ArchWiki Atom feed" href="/index.php?title=Special:RecentChanges&amp;feed=atom">
+</head>
+<body class="skin--responsive skin-vector skin-vector-search-vue mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-TLS-RPT_DANE_and_MTA-STS rootpage-TLS-RPT_DANE_and_MTA-STS skin-vector-2022 action-view">
+<a class="mw-jump-link" href="#bodyContent">Jump to content</a>
+<div class="vector-header-container">
+	</div>
+<div class="mw-page-container">
+	<div class="mw-page-container-inner">
+		<div class="vector-column-start">
+			<div class="vector-main-menu-container">
+		</div>
+	<div class="vector-sticky-pinned-container">
+				<nav id="mw-panel-toc" aria-label="Contents" data-event-name="ui.sidebar-toc" class="mw-table-of-contents-container vector-toc-landmark">
+					<div id="vector-toc-pinned-container" class="vector-pinned-container">
+					<div id="vector-toc" class="vector-toc vector-pinnable-element">
+	<div class="vector-pinnable-header vector-toc-pinnable-header vector-pinnable-header-pinned" data-feature-name="toc-pinned" data-pinnable-element-id="vector-toc">
+	<h2 class="vector-pinnable-header-label">Contents</h2>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-toc.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-toc.unpin">hide</button>
+</div>
+
+
+	<ul class="vector-toc-contents" id="mw-panel-toc-list">
+		<li id="toc-mw-content-text" class="vector-toc-list-item vector-toc-level-1">
+			<a href="#" class="vector-toc-link">
+				<div class="vector-toc-text">Beginning</div>
+			</a>
+		</li>
+		<li id="toc-Inbound" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Inbound">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">1</span>
+				<span>Inbound</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Inbound-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Inbound subsection</span>
+			</button>
+		
+		<ul id="toc-Inbound-sublist" class="vector-toc-list">
+			<li id="toc-MTA-STS" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#MTA-STS">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.1</span>
+					<span>MTA-STS</span>
+				</div>
+			</a>
+			
+			<ul id="toc-MTA-STS-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-DANE" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#DANE">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.2</span>
+					<span>DANE</span>
+				</div>
+			</a>
+			
+			<ul id="toc-DANE-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-TLS-RPT" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#TLS-RPT">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.3</span>
+					<span>TLS-RPT</span>
+				</div>
+			</a>
+			
+			<ul id="toc-TLS-RPT-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Outbound" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Outbound">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">2</span>
+				<span>Outbound</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Outbound-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Outbound subsection</span>
+			</button>
+		
+		<ul id="toc-Outbound-sublist" class="vector-toc-list">
+			<li id="toc-Postfix" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Postfix">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1</span>
+					<span>Postfix</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Postfix-sublist" class="vector-toc-list">
+				<li id="toc-DANE_2" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#DANE_2">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1.1</span>
+					<span>DANE</span>
+				</div>
+			</a>
+			
+			<ul id="toc-DANE_2-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-MTA-STS_2" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#MTA-STS_2">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1.2</span>
+					<span>MTA-STS</span>
+				</div>
+			</a>
+			
+			<ul id="toc-MTA-STS_2-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-TLS-RPT_2" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#TLS-RPT_2">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1.3</span>
+					<span>TLS-RPT</span>
+				</div>
+			</a>
+			
+			<ul id="toc-TLS-RPT_2-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Exim" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Exim">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2</span>
+					<span>Exim</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Exim-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Stalwart" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Stalwart">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.3</span>
+					<span>Stalwart</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Stalwart-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+</ul>
+</div>
+
+					</div>
+		</nav>
+			</div>
+		</div>
+		<div class="mw-content-container">
+			<main id="content" class="mw-body" style="margin: 0">
+				<header class="mw-body-header vector-page-titlebar">
+					<nav aria-label="Contents" class="vector-toc-landmark">
+						
+<div id="vector-page-titlebar-toc" class="vector-dropdown vector-page-titlebar-toc vector-button-flush-left">
+	<input type="checkbox" id="vector-page-titlebar-toc-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-page-titlebar-toc" class="vector-dropdown-checkbox " aria-label="Toggle the table of contents">
+	<label id="vector-page-titlebar-toc-label" for="vector-page-titlebar-toc-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"><span class="vector-icon mw-ui-icon-listBullet mw-ui-icon-wikimedia-listBullet"></span>
+
+<span class="vector-dropdown-label-text">Toggle the table of contents</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+							<div id="vector-page-titlebar-toc-unpinned-container" class="vector-unpinned-container">
+			</div>
+		
+	</div>
+</div>
+
+					</nav>
+					<h1 id="firstHeading" class="firstHeading mw-first-heading"><span class="mw-page-title-main">TLS-RPT, DANE and MTA-STS</span></h1>
+				</header>
+				<div class="vector-column-end">
+					<div class="vector-sticky-pinned-container">
+						<nav class="vector-page-tools-landmark" aria-label="Page tools">
+							<div id="vector-page-tools-pinned-container" class="vector-pinned-container">
+				
+							</div>
+		</nav>
+						<nav class="vector-appearance-landmark" aria-label="Appearance">
+							<div id="vector-appearance-pinned-container" class="vector-pinned-container">
+				<div id="vector-appearance" class="vector-appearance vector-pinnable-element">
+	<div class="vector-pinnable-header vector-appearance-pinnable-header vector-pinnable-header-pinned" data-feature-name="appearance-pinned" data-pinnable-element-id="vector-appearance" data-pinned-container-id="vector-appearance-pinned-container" data-unpinned-container-id="vector-appearance-unpinned-container">
+	<div class="vector-pinnable-header-label">Appearance</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-appearance.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-appearance.unpin">hide</button>
+</div>
+
+
+</div>
+
+							</div>
+		</nav>
+					</div>
+				</div>
+				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container>
+					<div class="vector-body-before-content">
+							<div class="mw-indicators">
+		</div>
+
+						<div id="siteSub" class="noprint">From ArchWiki</div>
+					</div>
+					<div id="contentSub"><div id="mw-content-subtitle"></div></div>
+					
+					
+					<div id="mw-content-text" class="mw-body-content">
+<div class="mw-content-ltr mw-parser-output" lang="en" dir="ltr">
+<p>There are two key elements in how we trust email. One is about validating the content and sender of the message which includes messsage encryption as well as DMARC (<a href="https://tools.ietf.org/html/rfc7489" class="extiw" title="rfc:7489">RFC 7489</a>), DKIM (<a href="https://tools.ietf.org/html/rfc6376" class="extiw" title="rfc:6376">RFC 6376</a>), SPF (<a href="https://tools.ietf.org/html/rfc7208" class="extiw" title="rfc:7208">RFC 7208</a>) and ARC (<a href="https://tools.ietf.org/html/rfc8617" class="extiw" title="rfc:8617">RFC 8617</a>). The other is about trust in the mail servers themselves and that is what this article addresses.
+</p>
+<p>According to <a href="https://tools.ietf.org/html/rfc3207" class="extiw" title="rfc:3207">RFC 3207</a> publicly reachable email servers need to be reachable without <a href="https://en.wikipedia.org/wiki/Transport_Layer_Security" class="extiw" title="wikipedia:Transport Layer Security">TLS</a> encryption. This leaves servers vulnerable to downgrade attacks to plaintext transmission. Furthermore, a certificate doesn't need to meet any requirements of validity in practice, as <a href="https://tools.ietf.org/html/rfc3207" class="extiw" title="rfc:3207">RFC 3207</a> specifies none. In order to protect against this, two technologies have emerged with more and more of the large email providers supporting them as well: <a href="../en/DANE.html" title="DANE">DANE</a> and <a href="https://en.wikipedia.org/wiki/Simple_Mail_Transfer_Protocol#SMTP_MTA_Strict_Transport_Security" class="extiw" title="wikipedia:Simple Mail Transfer Protocol">MTA-STS</a>. Either technology informs an email sender that TLS is available and plaintext should not be used for transmission. They also both validate the certificate presented in their own way. An additional protocol named <a href="https://tools.ietf.org/html/rfc8460" class="extiw" title="rfc:8460">TLS-RPT</a> exists that allows for informing the operator of an email server about any problems relating to the TLS configuration and thus preventing emails not reaching their destination. This article explains how to deploy these three technologies.
+</p>
+<p>Please be aware that MTA-STS and DANE should be deployed together if possible, instead of just having one of them. They are designed not to interfere with one another and the support for both varies with mail senders. As discussed later in the article, <a href="../en/Postfix.html" title="Postfix">Postfix</a> and <a href="../en/Exim.html" title="Exim">Exim</a> do not have MTA-STS support built-in. Any sender using either of these can only work with DANE unless some extra work is done (see below). Similarly, DANE requires <a href="../en/DNSSEC.html" title="DNSSEC">DNSSEC</a> and not every mail provider supports this extension. Currently, the largest email provider in the world, Google Mail, does not use DANE or DNSSEC and relies on MTA-STS exclusively.
+</p>
+<p>When using MTA-STS a TLS certificate needs to be from a valid certification authority and be currently valid for the hostname of the email server. DANE on the other hand relies on leveraging DNSSEC to provide authenticity of the certificate. However, DANE needs a sender to use a DNSSEC validating DNS resolver and in the inbound direction, the domain to be enrolled with DNSSEC. This might not be possible with every DNS registrar. In such a situation, only MTA-STS can be used in the inbound direction, but it may still be used together with TLS-RPT. When combining both technologies, as is recommended, the certificate presented could be validated by either one, and thus needs to have a current DNS record for DANE <i>and</i> be signed by a trusted root CA.
+</p>
+<p>The German national security standard <a rel="nofollow" class="external text" href="https://www.bsi.bund.de/EN/Themen/Unternehmen-und-Organisationen/Standards-und-Zertifizierung/Technische-Richtlinien/TR-nach-Thema-sortiert/tr03108/tr03108_node.html">BSI TR-03108</a> mandates the use of all three mechanisms in unison and this is generally considered good practice.
+</p>
+<meta property="mw:PageProp/toc">
+<h2><span class="mw-headline" id="Inbound">Inbound</span></h2>
+<p>In this section, the inbound direction is discussed, that is to say the setup to enable other mail servers to send mails to your server.
+</p>
+<h3><span class="mw-headline" id="MTA-STS">MTA-STS</span></h3>
+<p>Mail Transfer Agent - Strict Transport Security (MTA-STS) is a technology that allows mail servers to declare their ability to receive Transport Layer Security (TLS) connections. It also provides for specifying a policy that requests that sending SMTP servers should refuse to deliver, or not, if the receiving server does not provide a trusted server certificate.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> <a href="https://tools.ietf.org/html/rfc3207#section-6" class="extiw" title="rfc:3207">RFC 3207</a> only says that clients and servers should ensure that "an acceptable degree of authentication and privacy was achieved" when establishing a TLS connection. In particular it does not specify any sort of validation like the certificate being issued by a trusted CA, the certificate matching the server, or the certificate passing revocation checks. When using MTA-STS, validation <i>is</i> required by <a href="https://tools.ietf.org/html/rfc8461#section-4.2" class="extiw" title="rfc:8461">RFC 8461, Section 4.2</a>, with the client being mandated to ensure the certificate is signed by a trusted root CA, not expired and has a Subject Alternate Name (SAN) matching the server's hostname. Revocation checking is left up to the client but permitted, and so the certificate needs to be in good standing.</div>
+<p>MTA-STS works by publishing a DNS entry and hosting a policy file at <code>https://mta-sts.&lt;domain&gt;/.well-known/mta-sts.txt</code>.
+</p>
+<p>The DNS entry is a <code>TXT</code> record published at <code>_mta-sts.&lt;domain&gt;</code>. It is of the following form:
+</p>
+<pre>v=STSv1; id=202408090200Z
+</pre>
+<p>The <code>v=STSv1</code> field is the revision of MTA-STS that is deployed, this is 1 for now. <code>id</code> is an alphanumeric field with 1-32 characters. Every time it is increased, the MTA-STS policy is considered to have been changed. Good practice is to create a string representing the current date and updating it if any changes are made to the policy.
+</p>
+<p>Finally the policy is a text file of the following kind:
+</p>
+<pre>version: STSv1
+mode: enforce
+max_age: 10368000
+mx: mail.example.org
+mx: *.example.org
+</pre>
+<p>There are three distinct modes:
+</p>
+<dl>
+<dt>none</dt>
+<dd>informs senders that there is no policy, and this effectively disables MTA-STS</dd>
+<dt>testing</dt>
+<dd>means that the policy should be considered inactive, but TLS-RPT reports should still be made. This mode only makes sense if TLS-RPT has been configured.</dd>
+<dt>enforce</dt>
+<dd>is the mode that tells senders to refuse connection to the server if no connection over TLS can be made.</dd>
+</dl>
+<p><code>max_age</code> is the lifetime of the policy in seconds. This should be somewhere between several weeks, but less than 31557600 (roughly a year). The <code>mx</code> field simply has to lists all <code>MX</code> records for the domain.
+</p>
+<h3><span class="mw-headline" id="DANE">DANE</span></h3>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Warning:</strong> DANE requires the domain to be enrolled with <a href="../en/DNSSEC.html" title="DNSSEC">DNSSEC</a>. It cannot function otherwise.</div>
+<p>DANE is an abberviation of <i>DNS-based Authentication of Named Entities</i>. It is a security protocol that uses DNS to verify the authenticity of digital certificates associated with a domain name. It is designed as an alternative to certificate authorities (such as Letsencrypt) by utilizing the integrity of DNSSEC to ensure that a certificate indeed belongs to a domain name. While DANE is applicable to any certificate, in practice it is only used for email, or DANE SMTP. By design, the private keys and certificates can be self generated. While it is also fine to use CA provided certs its just not needed at all and they don't provide any significant benefit. One key goal of DANE is to protect against man in the middle attacks. DNSSEC, or <i>Domain Name System Security Extensions</i>, is what guarantees the integrity of the public key published via DNS and therefore DANE cannot be used without it.
+</p>
+<p>This section is focussed on how to use <a href="../en/DANE.html" title="DANE">DANE</a> specifically with SMTP. <a rel="nofollow" class="external text" href="https://www.mailhardener.com/kb/how-to-create-a-dane-tlsa-record-with-openssl">How to create a DANE TLSA record with OpenSSL</a> is a more comprehensive guide on everything relating to DANE.
+</p>
+<p>The way DANE works is by leveraging DNSSEC to publish the hash of a certificate in DNS in the form of a special TLSA record. For email there are two usable options:
+</p>
+<dl>
+<dt>DANE-TA</dt>
+<dd>publishes the certificate of the certificate authority that signed the TLS certificate the email server uses. This would for example be the root certificate of Let's Encrypt, if that service is used.</dd>
+<dt>DANE-EE</dt>
+<dd>works by publishing the hash of the certificate itself that is used by the email server.</dd>
+</dl>
+<p>It is possible to publish either the entire certificate or just the public key embedded in it. The latter option allows for reusing a key pair of a certificate and thus never having to change the DNS entry. When publishing the entire certificate, it is necessary to update the TLSA record every time a new certificate is issued by the certificate authority. This can happen quite regularly if <a href="../en/Transport_Layer_Security.html#ACME_clients" class="mw-redirect" title="ACME">ACME</a> is used with for example Let's Encrypt.
+</p>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Warning:</strong> Reusing a key pair is seen as somewhat less secure than using changing key pairs.</div>
+<p>A TLSA record consists out of three numeric fields and the certificate data. For example, it could look like this:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">_25._tcp.mail.example.org</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">3 1 1 3a8a378f19eef5c90f783ba44f8d0e8648e883926b16f1dfaf94eef9e1602531</pre>
+<p>The record name is of the format <code>_[port]._[protocol].[service url]</code>. For SMTP, this would mean the port is 25 and protocol is TCP.
+</p>
+<p>The numeric fields are as follows:
+</p>
+<ol>
+<li>The first field is the type of DANE that is being used, called the <i>Certificate Usage Field</i>. A value of 2 is DANE-TA, 3 means DANE-EE. The values 0 and 1 are unsuitable for email and <a href="https://tools.ietf.org/html/rfc7672.html#section-3.1.3" class="extiw" title="rfc:7672.html">should not be used.</a>
+</li>
+<li>The second field, called <i>Selector Field</i>, indicates whether the full certificate Cert(0) or just the public key of the certificate SPKI(1) is being published.</li>
+<li>The third field is called <i>Matching Type Field</i> and indicates how the data is published. A value of 1 is an <a href="https://en.wikipedia.org/wiki/SHA-2" class="extiw" title="wikipedia:SHA-2">SHA2-256</a> hash. The other possible options are generally considered unsuitable for practical purposes and therefore are not discussed here.</li>
+</ol>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> <a href="https://tools.ietf.org/html/rfc7672#section-3.1" class="extiw" title="rfc:7672">RFC 7672</a> recommends using the combination "DANE-EE(3) SPKI(1) SHA2-256(1)" with "DANE-TA(2) Cert(0) SHA2-256(1)" as a second choice.</div>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> Using a full certificate or the public key only has no security implications when used in a DANE-EE record. There's no particular advantage of either choice, other than SPKI(1) allowing for reusing a key pair when reissuing certificates. When using SPKI(1), the DNS record does not require any changes on a certificate reissuance.
+For DANE-TA, the choice is discussed in <a href="https://tools.ietf.org/html/rfc6698#appendix-A.1.2.2" class="extiw" title="rfc:6698">RFC 6698, Appendix A.1.2.2</a> and <a href="https://tools.ietf.org/html/rfc7672#section-3.1.2" class="extiw" title="rfc:7672">RFC 7672, Section 3.1.2</a>. It is recommended using the matching type Cert(0) together with DANE-TA. Otherwise, it would be possible for an intermediate CA to have its certificate reissued with a different certificate content and the same keypair. In such a situation, certificate restraints could be violated.</div>
+<p>Finally, the data field would be the SHA2-256 hash of the certificate or public key respectively. In order to compute this, <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=openssl">openssl</a></span> can be used.
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">Hashing the full certificate (option 0)</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">openssl x509 -in certificate.pem -outform DER | sha256sum</pre>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">Hashing the public key only (option 1)</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">openssl x509 -in certificate.pem -pubkey -noout | openssl ec -pubin -outform der | sha256sum</pre>
+<p>In the case of DANE-EE, <code>certificate.pem</code> would be the actual TLS certificate used by the email server. On the other hand, with DANE-TA, this would have to be any of the issuing CAs certificates.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> It is possible to use a matching type of 2 in order to use SHA2-512 instead of SHA2-256. This is not recommended, as <a href="https://tools.ietf.org/html/rfc6698#section-6" class="extiw" title="rfc:6698">RFC 6698</a> makes implementing SHA2-512 support optional, and not all resolvers may support it. <a href="https://tools.ietf.org/html/rfc7672#section-3.1.1" class="extiw" title="rfc:7672">RFC 7672</a> also discourages this and recommends using SHA2-256 TLSA records instead.</div>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Warning:</strong> On its own, DANE-EE could be deployed with a self-signed or untrusted certificate, and even an expired one. Similarly, DANE-TA could be used with any CA. However, as MTA-STS puts requirements on the certificate presented, it is necessary to present a valid certificate meeting the requirements above when both technologies are deployed, as a sender is allowed to use either one.</div>
+<p>Depending on the DNS provider, it may be possible to automate the publication of this record. <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/gotlsaflare/">gotlsaflare</a></span><sup><small>AUR</small></sup> for example allows for publishing the record to the Cloudflare DNS service. Given the multitude of providers out there, it is not possible to give any specific instructions for this step. 
+</p>
+<p>There is also the <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/dns_tools/">dns_tools</a></span><sup><small>AUR</small></sup> package for managing DNS servers that are using DNSSEC and <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/ssl-mgr/">ssl-mgr</a></span><sup><small>AUR</small></sup> for creating and renewing <a rel="nofollow" class="external text" href="https://letsencrypt.org/">Let's Encrypt</a> certificates, creating and updating DANE TLSA records and for rolling the keys when certificates are renewed. For more information on these, see the documentation <a rel="nofollow" class="external text" href="https://github.com/gene-git/dns_tools">dns_tools docs</a> and <a rel="nofollow" class="external text" href="https://github.com/gene-git/ssl-mgr">ssl-mgr docs</a>.
+</p>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Warning:</strong> Since DNS records are cached for a time given by the TTL, updating a TLSA record has to be done step-by-step where first the new record is added, the TTL is waited out and then finally the previous record is deleted and the mail server switched to the new certificate. This process is known as performing a key roll</div>
+<h3><span class="mw-headline" id="TLS-RPT">TLS-RPT</span></h3>
+<p>SMTP TLS Reporting (TLS-RPT) defined in <a href="https://tools.ietf.org/html/rfc8460" class="extiw" title="rfc:8460">RFC 8460</a> is a standard for reporting mail delivery problems related to TLS encryption failures and successful connections.
+</p>
+<p>TLS-RPT works by publishing a DNS record informing senders where to send the reports about TLS functionality. There is only one type of reports, aggregate reports, which summarize how often a particular outcome, be it error or success, happened. It is formatted as an XML file for further processing.
+</p>
+<p>A TLS-RPT record is a <code>TXT</code> record published at <code>_smtp._tls.[domain]</code>. The content has to start with a version indicator <code>v=TLSRPTv1;</code> followed by information on where the reports are to be sent. This could either be a mail address or an HTTPS service accepting POSTs. A complete record would look like this:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">_smtp._tls.example.org</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">v=TLSRPTv1; rua=mailto:tlsrpt@example.org</pre>
+<p><code>rua</code> indicates that aggregate reports are to be sent to this address, <code>mailto:</code> specifies this should be done via mail. <code>https:</code> would be the prefix for the HTTPS POST solution.
+</p>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Warning:</strong> It is strongly advised not to use HTTPS POST endpoints for reporting. BSI TR-03108 forbids this in fact. While email can be authenticated with <a href="https://en.wikipedia.org/wiki/DMARC" class="extiw" title="wikipedia:DMARC">DMARC</a>, the HTTPS POST mechanism cannot. An attacker could send fraudulent reports to try to obscure interference.</div>
+<p>As the reports are XML formatted, it is recommended to process them in order to extract information. There are also numerous cloud service providers available that can receive and process these reports. There is also <i>tls-rpt</i> available in the  <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/dmarc_report/">dmarc_report</a></span><sup><small>AUR</small></sup> package which can generate human readable reports for both <i>DMARC</i> and <i>TLS-RPT</i> from the XML files. For more info on this please see <a rel="nofollow" class="external text" href="https://github.com/gene-git/dmarc_report">dmarc_report Readme</a>
+</p>
+<h2><span class="mw-headline" id="Outbound">Outbound</span></h2>
+<p>Next, the outbound direction (i.e. when sending emails) is discussed. Unlike the inbound direction, where all three technologies are mostly independent of the mail transfer agent used, the steps for direction differ depending on which mail server is being used.
+</p>
+<p>One thing in common for all MTAs is that it is necessary for sending TLS-RPT reports that all mail servers handling outgoing mail need to support the <a href="https://tools.ietf.org/html/rfc8689" class="extiw" title="rfc:8689">RFC 8689</a> extension, as TLS-RPT reports have to be sent with the header <code>Require-TLS: no</code>.
+</p>
+<p>Additionally, a <a href="../en/DNSSEC.html" title="DNSSEC">DNSSEC</a> capable DNS resolver is required for resolving DANE and strongly recommended for MTA-STS, as it is otherwise <a href="https://tools.ietf.org/html/rfc8461#section-10.2" class="extiw" title="rfc:8461">possible to downgrade the connection</a>. The following sections assume that DNSSEC is being used for DNS, and this is not repeated every time.
+</p>
+<h3><span class="mw-headline" id="Postfix">Postfix</span></h3>
+<p>Postfix has long since supported DANE (as of Postfix 2.11), but MTA-STS and TLS-RPT rely on plugins.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> TLS-RPT and RFC 8689 are only supported with Postfix 3.10 and newer. In order to send reports, all outgoing mail servers in a Postfix setup need to be at least on that version.</div>
+<h4><span class="mw-headline" id="DANE_2">DANE</span></h4>
+<p>DANE is built-in to Postfix and requires only the following lines to be added to <code>/etc/postfix/main.cf</code>
+</p>
+<pre>smtp_dns_support_level = dnssec
+smtp_tls_security_level = dane
+</pre>
+<h4><span class="mw-headline" id="MTA-STS_2">MTA-STS</span></h4>
+<p>In order to support MTA-STS, a plugin is needed to supply information on the TLS policy to Postfix through <a rel="nofollow" class="external text" href="https://www.postfix.org/postconf.5.html#smtp_tls_policy_maps">smtp_tls_policy_maps</a>. There are two options available for this, <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=postfix-tlspol">postfix-tlspol</a></span> and <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/postfix-mta-sts-resolver/">postfix-mta-sts-resolver</a></span><sup><small>AUR</small></sup>. 
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/postfix-mta-sts-resolver/">postfix-mta-sts-resolver</a></span><sup><small>AUR</small></sup> faces the problem that it cannot resolve DANE and thus overrides DANE if both MTA-STS and DANE are deployed on a server. This problem is discussed by the project <a rel="nofollow" class="external text" href="https://github.com/Snawoot/postfix-mta-sts-resolver#warning-mta-sts-policy-overrides-dane-tls-authentication">here</a>. <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=postfix-tlspol">postfix-tlspol</a></span> has no such limitation and is also better optimised.</div>
+<p><a href="../en/Help:Reading.html#Installation_of_packages" class="mw-redirect" title="Install">Install</a> the <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=postfix-tlspol">postfix-tlspol</a></span> and <a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Start">start</a> or <a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Enable">enable</a> the <code>postfix-tlspol.service</code>. Then edit the <code>/etc/postfix/main.cf</code> of Postfix to add the following lines
+</p>
+<pre>smtp_dns_support_level = dnssec
+smtp_tls_security_level = dane
+smtp_tls_policy_maps = socketmap:inet:127.0.0.1:8642:QUERYwithTLSRPT
+</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> <code>postfix-tlspol</code> resolves both MTA-STS and DANE at the same time and thus requires DANE and DNSSEC to be enabled as well.</div>
+<h4><span class="mw-headline" id="TLS-RPT_2">TLS-RPT</span></h4>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> For TLS-RPT to be useful, at least DANE or MTA-STS (ideally both) have to be already configured.</div>
+<p><a href="../en/Help:Reading.html#Installation_of_packages" class="mw-redirect" title="Install">Install</a> <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=tlsrpt-reporter">tlsrpt-reporter</a></span>. Adjust at least the following lines in <code>/etc/tlsrpt/reportd.cfg</code> to fit your domain and organisation:
+</p>
+<pre>organization_name = EXAMPLE.COM
+contact_info = tlsrpt@EXAMPLE.COM
+sender_address = noreply@EXAMPLE.COM
+</pre>
+<p>Afterwards, <a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Start">start</a> or <a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Enable">enable</a> <code>tlsrpt-collectd.service</code> and <code>tlsrpt-reportd.service</code>. Then, add the following lines to your Postfix <code>/etc/postfix/main.cf</code>:
+</p>
+<pre>smtp_tlsrpt_enable = yes
+smtp_tlsrpt_socket_name = /run/tlsrpt/tlsrpt-collectd.socket
+</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> It is possible to run <code>tlsrpt-collectd.service</code> and <code>tlsrpt-reportd.service</code> on different systems. Consider the <code>fetcher</code> option in <span class="plainlinks archwiki-template-man" title="$ man 1 tlsrpt-reportd"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/tlsrpt-reportd.1">tlsrpt-reportd(1)</a></span>.</div>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Warning:</strong> There is currently <a rel="nofollow" class="external text" href="https://github.com/sys4/tlsrpt-reporter/issues/43">an issue</a> that causes <code>tlsrpt-reportd.service</code> to output repeated errors if <code>tlsrpt-collectd.service</code> has not been running for at least a day. This does not affect functionality and has already been <a rel="nofollow" class="external text" href="https://github.com/sys4/tlsrpt-reporter/commit/32d00c13508dd7f9695b77e253e88c88dc838fbd">fixed upstream</a> and should thus be resolved in the next release.</div>
+<h3><span class="mw-headline" id="Exim">Exim</span></h3>
+<p><a href="../en/Exim.html" title="Exim">Exim</a> only supports DANE and not MTA-STS or TLS-RPT. In order to activate DANE, edit <code>/etc/exim/exim.conf</code> and add
+</p>
+<pre>dns_dnssec_ok = 1
+</pre>
+<p>Furthermore, edit the <code>remote_smtp</code> transport and add the following line to it
+</p>
+<pre>hosts_try_dane = *
+</pre>
+<p>Further information on this topic can be found in the <a rel="nofollow" class="external text" href="https://www.exim.org/exim-html-current/doc/html/spec_html/ch-encrypted_smtp_connections_using_tlsssl.html#SECDANE">Exim documentation</a>.
+</p>
+<h3><span class="mw-headline" id="Stalwart">Stalwart</span></h3>
+<p>Stalwart has all three of DANE, MTA-STS and TLS-RPT built-in already. Please see their documentation <a rel="nofollow" class="external text" href="https://stalw.art/docs/category/transport-security">for instructions</a> on how to enable and configure them.
+</p>
+</div>
+</div>
+					<div id="catlinks" class="catlinks" data-mw="interface"><div id="mw-normal-catlinks" class="mw-normal-catlinks">
+<a href="../Special:Categories.html" title="Special:Categories">Category</a>: <ul><li><a href="../en/Category:Mail_server.html" title="Category:Mail server">Mail server</a></li></ul>
+</div></div>
+				</div>
+			</main>
+			
+		</div>
+		<div class="mw-footer-container">
+			
+<footer id="footer" class="mw-footer" style="margin: 0">
+	<ul id="footer-info">
+	<li data-nosnippet="">Retrieved from "<a dir="ltr" href="https://wiki.archlinux.org/index.php?title=TLS-RPT,_DANE_and_MTA-STS&amp;oldid=828807">https://wiki.archlinux.org/index.php?title=TLS-RPT,_DANE_and_MTA-STS&amp;oldid=828807</a>"</li>
+<li id="footer-info-lastmod"> This page was last edited on 13 March 2025, at 17:47.</li>
+	<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+<br>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="https://terms.archlinux.org/docs/privacy-policy/">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="../en/ArchWiki:About.html">About ArchWiki</a></li>
+	<li id="footer-places-disclaimers"><a href="../en/ArchWiki:General_disclaimer.html">Disclaimers</a></li>
+	<li id="footer-places-archwiki-code-of-conduct"><a href="https://terms.archlinux.org/docs/code-of-conduct/" class="extiw" title="archlinux-service-agreements:code-of-conduct">Code of conduct</a></li>
+	<li id="footer-places-archwiki-terms-of-service"><a href="https://terms.archlinux.org/docs/terms-of-service/" class="extiw" title="archlinux-service-agreements:terms-of-service">Terms of service</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-copyrightico"><a href="https://www.gnu.org/copyleft/fdl.html" class="cdx-button cdx-button--fake-button cdx-button--size-large cdx-button--fake-button--enabled"><img src="/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" loading="lazy"></a></li>
+	<li id="footer-poweredbyico"><img src="/resources/assets/poweredby_mediawiki.svg" width="88" height="31" loading="lazy"></li>
+</ul>
+
+</footer>
+
+		</div>
+	</div> 
+</div> 
+<div class="vector-settings" id="p-dock-bottom">
+	<ul></ul>
+</div>
+</body>
+</html>

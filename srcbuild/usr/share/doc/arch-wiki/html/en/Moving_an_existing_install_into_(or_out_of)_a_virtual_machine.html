@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-sticky-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-0 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-disabled skin-theme-clientpref-day vector-toc-available" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>Moving an existing install into (or out of) a virtual machine - ArchWiki</title>
+<link rel="stylesheet" href="../ArchWikiOffline.css">
+<meta name="ResourceLoaderDynamicStyles" content="">
+<meta name="generator" content="MediaWiki 1.43.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="max-image-preview:standard">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.25, maximum-scale=5.0">
+<link rel="search" type="application/opensearchdescription+xml" href="/rest.php/v1/search" title="ArchWiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.archlinux.org/api.php?action=rsd">
+<link rel="license" href="https://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="ArchWiki Atom feed" href="/index.php?title=Special:RecentChanges&amp;feed=atom">
+</head>
+<body class="skin--responsive skin-vector skin-vector-search-vue mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Moving_an_existing_install_into_or_out_of_a_virtual_machine rootpage-Moving_an_existing_install_into_or_out_of_a_virtual_machine skin-vector-2022 action-view">
+<a class="mw-jump-link" href="#bodyContent">Jump to content</a>
+<div class="vector-header-container">
+	</div>
+<div class="mw-page-container">
+	<div class="mw-page-container-inner">
+		<div class="vector-column-start">
+			<div class="vector-main-menu-container">
+		</div>
+	<div class="vector-sticky-pinned-container">
+				<nav id="mw-panel-toc" aria-label="Contents" data-event-name="ui.sidebar-toc" class="mw-table-of-contents-container vector-toc-landmark">
+					<div id="vector-toc-pinned-container" class="vector-pinned-container">
+					<div id="vector-toc" class="vector-toc vector-pinnable-element">
+	<div class="vector-pinnable-header vector-toc-pinnable-header vector-pinnable-header-pinned" data-feature-name="toc-pinned" data-pinnable-element-id="vector-toc">
+	<h2 class="vector-pinnable-header-label">Contents</h2>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-toc.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-toc.unpin">hide</button>
+</div>
+
+
+	<ul class="vector-toc-contents" id="mw-panel-toc-list">
+		<li id="toc-mw-content-text" class="vector-toc-list-item vector-toc-level-1">
+			<a href="#" class="vector-toc-link">
+				<div class="vector-toc-text">Beginning</div>
+			</a>
+		</li>
+		<li id="toc-Moving_out_of_a_virtual_machine" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Moving_out_of_a_virtual_machine">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">1</span>
+				<span>Moving out of a virtual machine</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Moving_out_of_a_virtual_machine-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Moving out of a virtual machine subsection</span>
+			</button>
+		
+		<ul id="toc-Moving_out_of_a_virtual_machine-sublist" class="vector-toc-list">
+			<li id="toc-Set_up_a_shared_folder" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Set_up_a_shared_folder">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.1</span>
+					<span>Set up a shared folder</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Set_up_a_shared_folder-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Transfer_the_system" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Transfer_the_system">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.2</span>
+					<span>Transfer the system</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Transfer_the_system-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Chroot_and_reinstall_the_boot_loader" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Chroot_and_reinstall_the_boot_loader">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.3</span>
+					<span>Chroot and reinstall the boot loader</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Chroot_and_reinstall_the_boot_loader-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Adjust_the_fstab" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Adjust_the_fstab">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.4</span>
+					<span>Adjust the fstab</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Adjust_the_fstab-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Re-generate_the_initramfs_image" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Re-generate_the_initramfs_image">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.5</span>
+					<span>Re-generate the initramfs image</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Re-generate_the_initramfs_image-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Moving_into_a_virtual_machine" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Moving_into_a_virtual_machine">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">2</span>
+				<span>Moving into a virtual machine</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Moving_into_a_virtual_machine-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Moving into a virtual machine subsection</span>
+			</button>
+		
+		<ul id="toc-Moving_into_a_virtual_machine-sublist" class="vector-toc-list">
+			<li id="toc-Create_the_container" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Create_the_container">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1</span>
+					<span>Create the container</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Create_the_container-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Transfer_the_system_2" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Transfer_the_system_2">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2</span>
+					<span>Transfer the system</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Transfer_the_system_2-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Convert_the_container_to_a_compatible_format" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Convert_the_container_to_a_compatible_format">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.3</span>
+					<span>Convert the container to a compatible format</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Convert_the_container_to_a_compatible_format-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Chroot_and_reinstall_the_boot_loader_2" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Chroot_and_reinstall_the_boot_loader_2">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.4</span>
+					<span>Chroot and reinstall the boot loader</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Chroot_and_reinstall_the_boot_loader_2-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Adjust_the_fstab_2" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Adjust_the_fstab_2">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.5</span>
+					<span>Adjust the fstab</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Adjust_the_fstab_2-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Disable_any_Xorg-related_files" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Disable_any_Xorg-related_files">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.6</span>
+					<span>Disable any Xorg-related files</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Disable_any_Xorg-related_files-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Re-generate_the_initramfs_image_2" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Re-generate_the_initramfs_image_2">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.7</span>
+					<span>Re-generate the initramfs image</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Re-generate_the_initramfs_image_2-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Troubleshooting" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Troubleshooting">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">3</span>
+				<span>Troubleshooting</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Troubleshooting-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Troubleshooting subsection</span>
+			</button>
+		
+		<ul id="toc-Troubleshooting-sublist" class="vector-toc-list">
+			<li id='toc-"mount:_special_device_/dev/loop5p1_does_not_exist"' class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href='#"mount:_special_device_/dev/loop5p1_does_not_exist"'>
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1</span>
+					<span>"mount: special device /dev/loop5p1 does not exist"</span>
+				</div>
+			</a>
+			
+			<ul id='toc-"mount:_special_device_/dev/loop5p1_does_not_exist"-sublist' class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-&quot;Waiting_10_seconds_for_device_/dev/sda1;_ERROR:_Unable_to_find_root_device_'/dev/sda1'&quot;" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#&quot;Waiting_10_seconds_for_device_/dev/sda1;_ERROR:_Unable_to_find_root_device_'/dev/sda1'&quot;">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.2</span>
+					<span>"Waiting 10 seconds for device /dev/sda1; ERROR: Unable to find root device '/dev/sda1'"</span>
+				</div>
+			</a>
+			
+			<ul id="toc-&quot;Waiting_10_seconds_for_device_/dev/sda1;_ERROR:_Unable_to_find_root_device_'/dev/sda1'&quot;-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id='toc-"Missing_operating_system._FATAL:_INT18:_BOOT_FAILURE"' class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href='#"Missing_operating_system._FATAL:_INT18:_BOOT_FAILURE"'>
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.3</span>
+					<span>"Missing operating system. FATAL: INT18: BOOT FAILURE"</span>
+				</div>
+			</a>
+			
+			<ul id='toc-"Missing_operating_system._FATAL:_INT18:_BOOT_FAILURE"-sublist' class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-I_am_asked_for_the_root_password,_for_maintenance" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#I_am_asked_for_the_root_password,_for_maintenance">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.4</span>
+					<span>I am asked for the root password, for maintenance</span>
+				</div>
+			</a>
+			
+			<ul id="toc-I_am_asked_for_the_root_password,_for_maintenance-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+</ul>
+</div>
+
+					</div>
+		</nav>
+			</div>
+		</div>
+		<div class="mw-content-container">
+			<main id="content" class="mw-body" style="margin: 0">
+				<header class="mw-body-header vector-page-titlebar">
+					<nav aria-label="Contents" class="vector-toc-landmark">
+						
+<div id="vector-page-titlebar-toc" class="vector-dropdown vector-page-titlebar-toc vector-button-flush-left">
+	<input type="checkbox" id="vector-page-titlebar-toc-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-page-titlebar-toc" class="vector-dropdown-checkbox " aria-label="Toggle the table of contents">
+	<label id="vector-page-titlebar-toc-label" for="vector-page-titlebar-toc-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"><span class="vector-icon mw-ui-icon-listBullet mw-ui-icon-wikimedia-listBullet"></span>
+
+<span class="vector-dropdown-label-text">Toggle the table of contents</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+							<div id="vector-page-titlebar-toc-unpinned-container" class="vector-unpinned-container">
+			</div>
+		
+	</div>
+</div>
+
+					</nav>
+					<h1 id="firstHeading" class="firstHeading mw-first-heading"><span class="mw-page-title-main">Moving an existing install into (or out of) a virtual machine</span></h1>
+							
+<div id="p-lang-btn" class="vector-dropdown mw-portlet mw-portlet-lang">
+	<input type="checkbox" id="p-lang-btn-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-p-lang-btn" class="vector-dropdown-checkbox mw-interlanguage-selector" aria-label="Go to an article in another language. Available in 2 languages">
+	<label id="p-lang-btn-label" for="p-lang-btn-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--action-progressive mw-portlet-lang-heading-2" aria-hidden="true"><span class="vector-icon mw-ui-icon-language-progressive mw-ui-icon-wikimedia-language-progressive"></span>
+
+<span class="vector-dropdown-label-text">2 languages</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+		<div class="vector-menu-content">
+			
+			<ul class="vector-menu-content-list">
+				
+				<li class="interlanguage-link interwiki-ja mw-list-item"><a href="https://wiki.archlinux.jp/index.php/%E6%97%A2%E5%AD%98%E7%92%B0%E5%A2%83%E3%82%92%E4%BB%AE%E6%83%B3%E3%83%9E%E3%82%B7%E3%83%B3%E3%81%AB_(%E3%81%8B%E3%82%89)_%E7%A7%BB%E5%8B%95" title="既存環境を仮想マシンに (から) 移動 – 日本語" lang="ja" hreflang="ja" data-title="既存環境を仮想マシンに (から) 移動" data-language-autonym="日本語" data-language-local-name="日本語" class="interlanguage-link-target"><span>日本語</span></a></li>
+<li class="interlanguage-link interwiki-pt mw-list-item"><a href="../pt/Moving_an_existing_install_into_(or_out_of)_a_virtual_machine.html" title="Moving an existing install into (or out of) a virtual machine – português" lang="pt" hreflang="pt" data-title="Moving an existing install into (or out of) a virtual machine" data-language-autonym="Português" data-language-local-name="português" class="interlanguage-link-target"><span>Português</span></a></li>
+			</ul>
+			
+		</div>
+
+	</div>
+</div>
+</header>
+				<div class="vector-column-end">
+					<div class="vector-sticky-pinned-container">
+						<nav class="vector-page-tools-landmark" aria-label="Page tools">
+							<div id="vector-page-tools-pinned-container" class="vector-pinned-container">
+				
+							</div>
+		</nav>
+						<nav class="vector-appearance-landmark" aria-label="Appearance">
+							<div id="vector-appearance-pinned-container" class="vector-pinned-container">
+				<div id="vector-appearance" class="vector-appearance vector-pinnable-element">
+	<div class="vector-pinnable-header vector-appearance-pinnable-header vector-pinnable-header-pinned" data-feature-name="appearance-pinned" data-pinnable-element-id="vector-appearance" data-pinned-container-id="vector-appearance-pinned-container" data-unpinned-container-id="vector-appearance-unpinned-container">
+	<div class="vector-pinnable-header-label">Appearance</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-appearance.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-appearance.unpin">hide</button>
+</div>
+
+
+</div>
+
+							</div>
+		</nav>
+					</div>
+				</div>
+				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container>
+					<div class="vector-body-before-content">
+							<div class="mw-indicators">
+		</div>
+
+						<div id="siteSub" class="noprint">From ArchWiki</div>
+					</div>
+					<div id="contentSub"><div id="mw-content-subtitle"></div></div>
+					
+					
+					<div id="mw-content-text" class="mw-body-content">
+<div class="mw-content-ltr mw-parser-output" lang="en" dir="ltr">
+<div class="archwiki-template-meta-related-articles">
+<p>Related articles</p>
+<ul>
+<li><a href="../en/QEMU.html" title="QEMU">QEMU</a></li>
+<li><a href="../en/VirtualBox.html" title="VirtualBox">VirtualBox</a></li>
+<li><a href="../en/VMware.html" title="VMware">VMware</a></li>
+<li><a href="../en/Migrate_installation_to_new_hardware.html" title="Migrate installation to new hardware">Migrate installation to new hardware</a></li>
+</ul>
+</div>
+<p>This article describes how to transfer your current Arch Linux installation in or out of a virtual environment (i.e. QEMU, VirtualBox, VMware). A virtual machine uses different hardware, which needs to be addressed by re-generating the initramfs image and possibly adjusting the fstab – especially if it is an <a href="../en/Solid_state_drive.html" class="mw-redirect" title="SSD">SSD</a>.
+</p>
+<meta property="mw:PageProp/toc">
+<h2><span class="mw-headline" id="Moving_out_of_a_virtual_machine">Moving out of a virtual machine</span></h2>
+<p>Moving out of a virtual environment is relatively easy.
+</p>
+<h3><span class="mw-headline" id="Set_up_a_shared_folder">Set up a shared folder</span></h3>
+<p>Setting up a shared folder between the guest virtual machine and the host depends on the hypervisor you use. Please thus refer to their specific wiki page or manual.
+</p>
+<p>If you do not already have an ext4 partition, see <a href="../en/File_systems.html" title="File systems">File systems</a>.
+</p>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../File:Inaccurate.svg" decoding="async" width="48" height="48" class="mw-file-element"></span></span><b>The factual accuracy of this article or section is disputed.</b></p>
+<div>
+<b>Reason:</b> Ext2Fsd 0.66 does not support extended attributes and ACL. (Discuss in <a href="../en/Talk:Moving_an_existing_install_into_(or_out_of)_a_virtual_machine.html#Ext2FSD_is_(probably)_deprecated" title="Talk:Moving an existing install into (or out of) a virtual machine">Talk:Moving an existing install into (or out of) a virtual machine#Ext2FSD is (probably) deprecated</a>)</div>
+</div>
+<p>If you are on Windows, install <a rel="nofollow" class="external text" href="https://www.ext2fsd.com/">Ext2Fsd</a> to be able to mount ext volumes.
+</p>
+<h3><span class="mw-headline" id="Transfer_the_system">Transfer the system</span></h3>
+<p>From the virtual machine, open a terminal and <a href="../en/Rsync.html" title="Rsync">transfer</a> the system:
+</p>
+<pre># rsync -aAXHSv /* /path/to/shared/folder --exclude={/dev/*,/proc/*,/sys/*,/tmp/*,/run/*,/mnt/*,/media/*,/lost+found,/home/*/.gvfs}
+</pre>
+<p>This can also be done with <a rel="nofollow" class="external text" href="https://clonezilla.org/">clonezilla boot disk</a> or <a href="../en/Dd.html#Disk_cloning_and_restore" title="Dd">dd</a> from a random Linux live-cd. If you are using Virtualbox you need to connect the target drive through USB (or SATA to USB cable) otherwise use an external USB drive to save the disk image (with dd or clonezilla).
+</p>
+<h3><span class="mw-headline" id="Chroot_and_reinstall_the_boot_loader">Chroot and reinstall the boot loader</span></h3>
+<p>Boot a "live" GNU/Linux distribution, mount the root partition and <a href="../en/Chroot.html" title="Chroot">chroot</a> into it.
+</p>
+<p>Reinstall your boot loader or boot manager: either <a href="../en/Syslinux.html" title="Syslinux">Syslinux</a>, <a href="../en/GRUB.html" title="GRUB">GRUB</a> or <a href="../en/Systemd-boot.html" title="Systemd-boot">systemd-boot</a>. Do not forget to update the configuration file: <code>syslinux.cfg</code> for Syslinux, <code>grub.cfg</code> for Grub, or the systemd-boot boot entries located in <code>/boot/loader/entries/</code>.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong>  You might be able to boot directly without reinstalling the boot loader. Try that before using a chroot. That way you could (possibly) reinstall the boot loader and regenerate the initramfs from a graphical environment.</div>
+<h3><span class="mw-headline" id="Adjust_the_fstab">Adjust the fstab</span></h3>
+<p>Since your entire root tree has been transferred to a single partition, edit the <a href="../en/Fstab.html" title="Fstab">fstab</a> file to reflect the right partition(s).
+</p>
+<p>Check with the <code>blkid</code> command, since <code>lsblk</code> is not very useful inside a chroot.
+</p>
+<h3><span class="mw-headline" id="Re-generate_the_initramfs_image">Re-generate the initramfs image</span></h3>
+<p>Because the hardware has changed, while you are still in the chroot, <a href="../en/Mkinitcpio.html#Image_creation_and_activation" class="mw-redirect" title="Regenerate the initramfs">regenerate the initramfs</a>.
+</p>
+<p>And that is about it.
+</p>
+<p>You will most likely need to set up the network, since the virtual machine was probably piggybacking on the host OS's network settings. See <a href="../en/Network_configuration.html" title="Network configuration">Network configuration</a>.
+</p>
+<h2><span class="mw-headline" id="Moving_into_a_virtual_machine">Moving into a virtual machine</span></h2>
+<p>Moving <i>into</i> a virtual environment takes a little more effort.
+</p>
+<h3><span class="mw-headline" id="Create_the_container">Create the container</span></h3>
+<p>This will create a 32 GiB raw image:
+</p>
+<pre># fallocate -l 32GiB -o 1024 /media/Backup/backup.img
+</pre>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../File:Inaccurate.svg" decoding="async" width="48" height="48" class="mw-file-element"></span></span><b>The factual accuracy of this article or section is disputed.</b></p>
+<div>
+<b>Reason:</b> <code>fdisk -l</code> now shows a <code>Sectors</code> column instead <code>Blocks</code>. Does the same affirmation apply? (Discuss in <a rel="nofollow" class="external text" href="../en/Talk:Moving_an_existing_install_into_(or_out_of)_a_virtual_machine.html">Talk:Moving an existing install into (or out of) a virtual machine</a>)</div>
+</div>
+<p>If you want to create one the exact size of your root partition, run <code>fdisk -l</code> and use the value from the <code>Blocks</code> column for the <code>count=</code> parameter. Note that you will transfer your entire root tree, so that includes the <code>/boot</code> and <code>/home</code> folders. If you have any separate partitions for those, you need to take them into account when creating the container.
+</p>
+<p>Partition the <code>/media/Backup/backup.img</code> file by running your favourite <a href="../en/Partitioning.html#Partitioning_tools" title="Partitioning">partitioning tool</a>. Create a partition table on it (e.g. <code>msdos</code>), choose the <a href="../en/Partitioning.html#Partition_scheme" class="mw-redirect" title="Partition scheme">partition scheme</a> and create the partitions. 
+</p>
+<p>Now load the necessary module and mount it as a loopback device, on <code>/dev/loop5</code> (for example):
+</p>
+<pre># modprobe loop
+# losetup --partscan /dev/loop5 /media/Backup/backup.img
+</pre>
+<p>Then create a <a href="../en/File_systems.html" class="mw-redirect" title="File system">file system</a> on the partitions, which will appear as <code>/dev/loop5p1</code>, <code>/dev/loop5p2</code>, etc.
+</p>
+<h3><span class="mw-headline" id="Transfer_the_system_2">Transfer the system</span></h3>
+<p>Mount the loopback device and <a href="../en/Rsync.html" title="Rsync">transfer</a> the system:
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> If the container was saved somewhere other than <code>/mnt</code> or <code>/media</code>, do not forget to add it to the exclude list.</div>
+<pre># mount --mkdir /dev/loop5p1 /mnt/Virtual
+# rsync -aAXv /* /mnt/Virtual --exclude={/dev/*,/proc/*,/sys/*,/tmp/*,/run/*,/mnt/*,/media/*,/lost+found,/home/*/.gvfs}
+</pre>
+<h3><span class="mw-headline" id="Convert_the_container_to_a_compatible_format">Convert the container to a compatible format</span></h3>
+<p>Choose the appropriate command depending on the desired virtual machine.
+</p>
+<p>To convert into a <b>KVM</b> container, use <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=qemu-desktop">qemu-desktop</a></span> with the following command line:
+</p>
+<pre>$ qemu-img convert -c -f raw -O qcow /media/backup.img /media/backup.qcow2
+</pre>
+<p>To convert into a <b>VirtualBox</b> container, use <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=virtualbox">virtualbox</a></span> with the following command line: 
+</p>
+<pre>$ VBoxManage convertfromraw --format VDI /media/backup.img /media/backup.vdi
+</pre>
+<p>To convert into a <b>VMware</b> container, use <i>virtualbox</i> with the following command line: 
+</p>
+<pre>$ VBoxManage convertfromraw --format VMDK /media/backup.img /media/backup.vmdk
+</pre>
+<h3><span class="mw-headline" id="Chroot_and_reinstall_the_boot_loader_2">Chroot and reinstall the boot loader</span></h3>
+<p>Connect the container to the virtual machine, along with a Linux LiveCD (e.g. the latest Arch Linux ISO) in the virtual machine's virtual CD-ROM, then start the virtual machine and <a href="../en/Chroot.html" title="Chroot">chroot</a> into it:
+</p>
+<pre># mount /dev/sda1 /mnt
+# arch-chroot /mnt /bin/bash
+</pre>
+<p>Reinstall either <a href="../en/Syslinux.html" title="Syslinux">Syslinux</a> or <a href="../en/GRUB.html" title="GRUB">GRUB</a>. Do not forget to update its configuration file:
+</p>
+<ul>
+<li>For Syslinux, it should be <code>APPEND root=/dev/sda1 ro</code> in <code>syslinux.cfg</code>.</li>
+<li>For GRUB, it is recommended that you automatically re-generate a <code>grub.cfg</code>.</li>
+</ul>
+<h3><span class="mw-headline" id="Adjust_the_fstab_2">Adjust the fstab</span></h3>
+<p>Since your entire root tree has been transferred to a single partition, edit the <a href="../en/Fstab.html" title="Fstab">fstab</a> file. You may use the UUID or label if you want, but those are more useful in multi-drive, multi-partition configurations (to avoid confusions). For now, <code>/dev/sda1</code> for your entire system is just fine.
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/fstab</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">tmpfs                    /tmp      tmpfs     nodev,nosuid          0   0
+/dev/sda1                /         ext4      defaults,noatime      0   1</pre>
+<h3><span class="mw-headline" id="Disable_any_Xorg-related_files">Disable any Xorg-related files</span></h3>
+<p>Having an <code>nvidia</code>, <code>nouveau</code>, <code>radeon</code>, <code>intel</code>, etc., entry in the <code>Device</code> section from one of the Xorg configuration files will prevent it from starting, since you will be using <i>emulated</i> hardware (including the video card). So it is recommended that you move/rename or delete the following:
+</p>
+<pre># mv /etc/X11/xorg.conf /etc/X11/xorg.conf.bak
+# mv /etc/X11/xorg.conf.d/10-monitor /etc/X11/xorg.conf.d/10-monitor.bak
+</pre>
+<h3><span class="mw-headline" id="Re-generate_the_initramfs_image_2">Re-generate the initramfs image</span></h3>
+<p>Because the hardware has changed, while you are still in the chroot, re-generate the initramfs image and do a proper shutdown:
+</p>
+<pre># mkinitcpio -p linux
+# exit
+# umount -R /mnt
+# poweroff
+</pre>
+<p>Finally, pull out the LiveCD (the ISO file), so that you do not boot back into it, and start the virtual machine.
+</p>
+<p>Enjoy your new virtual environment.
+</p>
+<h2><span class="mw-headline" id="Troubleshooting">Troubleshooting</span></h2>
+<h3>
+<span id=".22mount:_special_device_.2Fdev.2Floop5p1_does_not_exist.22"></span><span class="mw-headline" id='"mount:_special_device_/dev/loop5p1_does_not_exist"'>"mount: special device /dev/loop5p1 does not exist"</span>
+</h3>
+<p>Use <code>losetup --partscan</code>, for example:
+</p>
+<pre># losetup --partscan /dev/loop5 /media/Backup/backup.img
+</pre>
+<p>This should create device nodes for each partition you have created inside the loop device.
+</p>
+<h3>
+<span id=".22Waiting_10_seconds_for_device_.2Fdev.2Fsda1.3B_ERROR:_Unable_to_find_root_device_.27.2Fdev.2Fsda1.27.22"></span><span class="mw-headline" id="&quot;Waiting_10_seconds_for_device_/dev/sda1;_ERROR:_Unable_to_find_root_device_'/dev/sda1'&quot;">"Waiting 10 seconds for device /dev/sda1; ERROR: Unable to find root device '/dev/sda1'"</span>
+</h3>
+<pre>Waiting 10 seconds for device /dev/sda1 ...
+ERROR: Unable to find root device '/dev/sda1'.
+You are being dropped to a recovery shell
+    Type 'exit' to try and continue booting
+sh: cannot access tty; job control turned off
+[rootfs /]# _
+</pre>
+<p>It most likely means that you did not run <code>poweroff</code> like <i>you were instructed to</i>, and closed the virtual machine with the "close" button, which is the equivalent of a power outage. Now you need to regenerate your initramfs image. To do that, you can start the virtual machine using the Fallback entry. If you do not have a Fallback entry, press <code>Tab</code> (for Syslinux) or <code>e</code> (for GRUB) and rename it <code>initramfs-linux-fallback.img</code>. After it boots, open up a terminal and run:
+</p>
+<pre># mkinitcpio -p linux
+# poweroff
+</pre>
+<h3>
+<span id=".22Missing_operating_system._FATAL:_INT18:_BOOT_FAILURE.22"></span><span class="mw-headline" id='"Missing_operating_system._FATAL:_INT18:_BOOT_FAILURE"'>"Missing operating system. FATAL: INT18: BOOT FAILURE"</span>
+</h3>
+<ul>
+<li>You either need to install or reinstall a boot loader. See <a href="../en/Arch_boot_process.html#Boot_loader" title="Arch boot process">Arch boot process#Boot loader</a>.</li>
+<li>You are using a <a href="../en/Btrfs.html" title="Btrfs">Btrfs</a> filesystem with compression for <code>/boot</code>, for which <a href="../en/Syslinux.html" title="Syslinux">Syslinux</a> currently cannot boot from.</li>
+<li>The boot order from the BIOS or from the virtual machine's settings is not properly set up. Make sure that the drive containing the boot loader is the first one to boot.</li>
+</ul>
+<h3>
+<span id="I_am_asked_for_the_root_password.2C_for_maintenance"></span><span class="mw-headline" id="I_am_asked_for_the_root_password,_for_maintenance">I am asked for the root password, for maintenance</span>
+</h3>
+<pre>:: Checking Filesystems                        [BUSY]
+fsck.ext4: Unable to resolve '...'
+</pre>
+<p>This means that you forgot to add the drive's UUID, label or device name in <code>/etc/fstab</code>. The UUID is different every time you format it (or in this case, create one from scratch), and they likely do not match. Check with <code>blkid</code>.
+</p>
+</div>
+</div>
+					<div id="catlinks" class="catlinks" data-mw="interface">
+<div id="mw-normal-catlinks" class="mw-normal-catlinks">
+<a href="../Special:Categories.html" title="Special:Categories">Categories</a>: <ul>
+<li><a href="../en/Category:Installation_process.html" title="Category:Installation process">Installation process</a></li>
+<li><a href="../en/Category:Virtualization.html" title="Category:Virtualization">Virtualization</a></li>
+</ul>
+</div>
+<div id="mw-hidden-catlinks" class="mw-hidden-catlinks mw-hidden-cats-hidden">Hidden category: <ul><li><a href="../en/Category:Pages_or_sections_flagged_with_Template:Accuracy.html" title="Category:Pages or sections flagged with Template:Accuracy">Pages or sections flagged with Template:Accuracy</a></li></ul>
+</div>
+</div>
+				</div>
+			</main>
+			
+		</div>
+		<div class="mw-footer-container">
+			
+<footer id="footer" class="mw-footer" style="margin: 0">
+	<ul id="footer-info">
+	<li data-nosnippet="">Retrieved from "<a dir="ltr" href="https://wiki.archlinux.org/index.php?title=Moving_an_existing_install_into_(or_out_of)_a_virtual_machine&amp;oldid=828751">https://wiki.archlinux.org/index.php?title=Moving_an_existing_install_into_(or_out_of)_a_virtual_machine&amp;oldid=828751</a>"</li>
+<li id="footer-info-lastmod"> This page was last edited on 13 March 2025, at 00:19.</li>
+	<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+<br>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="https://terms.archlinux.org/docs/privacy-policy/">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="../en/ArchWiki:About.html">About ArchWiki</a></li>
+	<li id="footer-places-disclaimers"><a href="../en/ArchWiki:General_disclaimer.html">Disclaimers</a></li>
+	<li id="footer-places-archwiki-code-of-conduct"><a href="https://terms.archlinux.org/docs/code-of-conduct/" class="extiw" title="archlinux-service-agreements:code-of-conduct">Code of conduct</a></li>
+	<li id="footer-places-archwiki-terms-of-service"><a href="https://terms.archlinux.org/docs/terms-of-service/" class="extiw" title="archlinux-service-agreements:terms-of-service">Terms of service</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-copyrightico"><a href="https://www.gnu.org/copyleft/fdl.html" class="cdx-button cdx-button--fake-button cdx-button--size-large cdx-button--fake-button--enabled"><img src="/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" loading="lazy"></a></li>
+	<li id="footer-poweredbyico"><img src="/resources/assets/poweredby_mediawiki.svg" width="88" height="31" loading="lazy"></li>
+</ul>
+
+</footer>
+
+		</div>
+	</div> 
+</div> 
+<div class="vector-settings" id="p-dock-bottom">
+	<ul></ul>
+</div>
+</body>
+</html>

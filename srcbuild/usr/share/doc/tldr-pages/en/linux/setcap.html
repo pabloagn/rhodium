@@ -1,0 +1,40 @@
+<h1>setcap</h1>
+
+<blockquote><p>Set capabilities of specified file.
+See also: <code>getcap</code>.
+More information: <a href="https://manned.org/setcap">https://manned.org/setcap</a>.</p></blockquote>
+
+<ul>
+<li>Set capability <code>cap_net_raw</code> (to use RAW and PACKET sockets) for a given file:</li>
+</ul>
+
+
+<p><code>setcap '{{cap_net_raw}}' {{path/to/file}}</code></p>
+
+<ul>
+<li>Set multiple capabilities on a file (<code>ep</code> behind the capability means &ldquo;effective permitted&rdquo;):</li>
+</ul>
+
+
+<p><code>setcap '{{cap_dac_read_search,cap_sys_tty_config+ep}}' {{path/to/file}}</code></p>
+
+<ul>
+<li>Remove all capabilities from a file:</li>
+</ul>
+
+
+<p><code>setcap -r {{path/to/file}}</code></p>
+
+<ul>
+<li>Verify that the specified capabilities are currently associated with the specified file:</li>
+</ul>
+
+
+<p><code>setcap -v '{{cap_net_raw}}' {{path/to/file}}</code></p>
+
+<ul>
+<li>The optional <code>-n root_uid</code> argument can be used to set the file capability for use only in a user namespace with this root user ID owner:</li>
+</ul>
+
+
+<p><code>setcap -n {{root_uid}} '{{cap_net_admin}}' {{path/to/file}}</code></p>

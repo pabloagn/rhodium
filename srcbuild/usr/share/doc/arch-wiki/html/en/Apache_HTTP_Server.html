@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-sticky-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-0 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-disabled skin-theme-clientpref-day vector-toc-available" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>Apache HTTP Server - ArchWiki</title>
+<link rel="stylesheet" href="../ArchWikiOffline.css">
+<meta name="ResourceLoaderDynamicStyles" content="">
+<meta name="generator" content="MediaWiki 1.43.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="max-image-preview:standard">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.25, maximum-scale=5.0">
+<link rel="search" type="application/opensearchdescription+xml" href="/rest.php/v1/search" title="ArchWiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.archlinux.org/api.php?action=rsd">
+<link rel="license" href="https://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="ArchWiki Atom feed" href="/index.php?title=Special:RecentChanges&amp;feed=atom">
+</head>
+<body class="skin--responsive skin-vector skin-vector-search-vue mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Apache_HTTP_Server rootpage-Apache_HTTP_Server skin-vector-2022 action-view">
+<a class="mw-jump-link" href="#bodyContent">Jump to content</a>
+<div class="vector-header-container">
+	</div>
+<div class="mw-page-container">
+	<div class="mw-page-container-inner">
+		<div class="vector-column-start">
+			<div class="vector-main-menu-container">
+		</div>
+	<div class="vector-sticky-pinned-container">
+				<nav id="mw-panel-toc" aria-label="Contents" data-event-name="ui.sidebar-toc" class="mw-table-of-contents-container vector-toc-landmark">
+					<div id="vector-toc-pinned-container" class="vector-pinned-container">
+					<div id="vector-toc" class="vector-toc vector-pinnable-element">
+	<div class="vector-pinnable-header vector-toc-pinnable-header vector-pinnable-header-pinned" data-feature-name="toc-pinned" data-pinnable-element-id="vector-toc">
+	<h2 class="vector-pinnable-header-label">Contents</h2>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-toc.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-toc.unpin">hide</button>
+</div>
+
+
+	<ul class="vector-toc-contents" id="mw-panel-toc-list">
+		<li id="toc-mw-content-text" class="vector-toc-list-item vector-toc-level-1">
+			<a href="#" class="vector-toc-link">
+				<div class="vector-toc-text">Beginning</div>
+			</a>
+		</li>
+		<li id="toc-Installation" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Installation">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">1</span>
+				<span>Installation</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Installation-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Configuration" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Configuration">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">2</span>
+				<span>Configuration</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Configuration-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Configuration subsection</span>
+			</button>
+		
+		<ul id="toc-Configuration-sublist" class="vector-toc-list">
+			<li id="toc-Advanced_options" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Advanced_options">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1</span>
+					<span>Advanced options</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Advanced_options-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-User_directories" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#User_directories">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2</span>
+					<span>User directories</span>
+				</div>
+			</a>
+			
+			<ul id="toc-User_directories-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-TLS" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#TLS">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.3</span>
+					<span>TLS</span>
+				</div>
+			</a>
+			
+			<ul id="toc-TLS-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Virtual_hosts" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Virtual_hosts">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.4</span>
+					<span>Virtual hosts</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Virtual_hosts-sublist" class="vector-toc-list">
+				<li id="toc-Managing_many_virtual_hosts" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Managing_many_virtual_hosts">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.4.1</span>
+					<span>Managing many virtual hosts</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Managing_many_virtual_hosts-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Extensions" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Extensions">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">3</span>
+				<span>Extensions</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Extensions-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Extensions subsection</span>
+			</button>
+		
+		<ul id="toc-Extensions-sublist" class="vector-toc-list">
+			<li id="toc-PHP" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#PHP">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1</span>
+					<span>PHP</span>
+				</div>
+			</a>
+			
+			<ul id="toc-PHP-sublist" class="vector-toc-list">
+				<li id="toc-Using_libphp" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Using_libphp">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1.1</span>
+					<span>Using libphp</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Using_libphp-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Using_apache2-mpm-worker_and_mod_fcgid" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Using_apache2-mpm-worker_and_mod_fcgid">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1.2</span>
+					<span>Using apache2-mpm-worker and mod_fcgid</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Using_apache2-mpm-worker_and_mod_fcgid-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Using_php-fpm_and_mod_proxy_fcgi" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Using_php-fpm_and_mod_proxy_fcgi">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1.3</span>
+					<span>Using php-fpm and mod_proxy_fcgi</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Using_php-fpm_and_mod_proxy_fcgi-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Test_whether_PHP_works" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Test_whether_PHP_works">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1.4</span>
+					<span>Test whether PHP works</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Test_whether_PHP_works-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-HTTP/2" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#HTTP/2">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.2</span>
+					<span>HTTP/2</span>
+				</div>
+			</a>
+			
+			<ul id="toc-HTTP/2-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Troubleshooting" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Troubleshooting">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">4</span>
+				<span>Troubleshooting</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Troubleshooting-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Troubleshooting subsection</span>
+			</button>
+		
+		<ul id="toc-Troubleshooting-sublist" class="vector-toc-list">
+			<li id="toc-Apache_Status_and_Logs" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Apache_Status_and_Logs">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.1</span>
+					<span>Apache Status and Logs</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Apache_Status_and_Logs-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Error:_PID_file_/run/httpd/httpd.pid_not_readable_(yet?)_after_start" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Error:_PID_file_/run/httpd/httpd.pid_not_readable_(yet?)_after_start">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.2</span>
+					<span>Error: PID file /run/httpd/httpd.pid not readable (yet?) after start</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Error:_PID_file_/run/httpd/httpd.pid_not_readable_(yet?)_after_start-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-/run/httpd_not_being_created_at_boot" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#/run/httpd_not_being_created_at_boot">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.3</span>
+					<span>/run/httpd not being created at boot</span>
+				</div>
+			</a>
+			
+			<ul id="toc-/run/httpd_not_being_created_at_boot-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Apache_is_running_a_threaded_MPM,_but_your_PHP_Module_is_not_compiled_to_be_threadsafe." class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Apache_is_running_a_threaded_MPM,_but_your_PHP_Module_is_not_compiled_to_be_threadsafe.">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.4</span>
+					<span>Apache is running a threaded MPM, but your PHP Module is not compiled to be threadsafe.</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Apache_is_running_a_threaded_MPM,_but_your_PHP_Module_is_not_compiled_to_be_threadsafe.-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-AH00534:_httpd:_Configuration_error:_No_MPM_loaded." class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#AH00534:_httpd:_Configuration_error:_No_MPM_loaded.">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.5</span>
+					<span>AH00534: httpd: Configuration error: No MPM loaded.</span>
+				</div>
+			</a>
+			
+			<ul id="toc-AH00534:_httpd:_Configuration_error:_No_MPM_loaded.-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-AH00072:_make_sock:_could_not_bind_to_address" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#AH00072:_make_sock:_could_not_bind_to_address">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.6</span>
+					<span>AH00072: make_sock: could not bind to address</span>
+				</div>
+			</a>
+			
+			<ul id="toc-AH00072:_make_sock:_could_not_bind_to_address-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-AH01071:_Got_error_'Primary_script_unknown'" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#AH01071:_Got_error_'Primary_script_unknown'">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.7</span>
+					<span>AH01071: Got error 'Primary script unknown'</span>
+				</div>
+			</a>
+			
+			<ul id="toc-AH01071:_Got_error_'Primary_script_unknown'-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Changing_the_max_execution_time_in_php.ini_has_no_effect" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Changing_the_max_execution_time_in_php.ini_has_no_effect">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.8</span>
+					<span>Changing the max_execution_time in php.ini has no effect</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Changing_the_max_execution_time_in_php.ini_has_no_effect-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-PHP-FPM:_errors_are_not_being_logged_separately_per_virtual_host" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#PHP-FPM:_errors_are_not_being_logged_separately_per_virtual_host">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.9</span>
+					<span>PHP-FPM: errors are not being logged separately per virtual host</span>
+				</div>
+			</a>
+			
+			<ul id="toc-PHP-FPM:_errors_are_not_being_logged_separately_per_virtual_host-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-See_also" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#See_also">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">5</span>
+				<span>See also</span>
+			</div>
+		</a>
+		
+		<ul id="toc-See_also-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+</ul>
+</div>
+
+					</div>
+		</nav>
+			</div>
+		</div>
+		<div class="mw-content-container">
+			<main id="content" class="mw-body" style="margin: 0">
+				<header class="mw-body-header vector-page-titlebar">
+					<nav aria-label="Contents" class="vector-toc-landmark">
+						
+<div id="vector-page-titlebar-toc" class="vector-dropdown vector-page-titlebar-toc vector-button-flush-left">
+	<input type="checkbox" id="vector-page-titlebar-toc-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-page-titlebar-toc" class="vector-dropdown-checkbox " aria-label="Toggle the table of contents">
+	<label id="vector-page-titlebar-toc-label" for="vector-page-titlebar-toc-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"><span class="vector-icon mw-ui-icon-listBullet mw-ui-icon-wikimedia-listBullet"></span>
+
+<span class="vector-dropdown-label-text">Toggle the table of contents</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+							<div id="vector-page-titlebar-toc-unpinned-container" class="vector-unpinned-container">
+			</div>
+		
+	</div>
+</div>
+
+					</nav>
+					<h1 id="firstHeading" class="firstHeading mw-first-heading"><span class="mw-page-title-main">Apache HTTP Server</span></h1>
+							
+<div id="p-lang-btn" class="vector-dropdown mw-portlet mw-portlet-lang">
+	<input type="checkbox" id="p-lang-btn-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-p-lang-btn" class="vector-dropdown-checkbox mw-interlanguage-selector" aria-label="Go to an article in another language. Available in 5 languages">
+	<label id="p-lang-btn-label" for="p-lang-btn-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--action-progressive mw-portlet-lang-heading-5" aria-hidden="true"><span class="vector-icon mw-ui-icon-language-progressive mw-ui-icon-wikimedia-language-progressive"></span>
+
+<span class="vector-dropdown-label-text">5 languages</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+		<div class="vector-menu-content">
+			
+			<ul class="vector-menu-content-list">
+				
+				<li class="interlanguage-link interwiki-de mw-list-item"><a href="https://wiki.archlinux.de/title/LAMP_Installation" title="LAMP Installation – Deutsch" lang="de" hreflang="de" data-title="LAMP Installation" data-language-autonym="Deutsch" data-language-local-name="Deutsch" class="interlanguage-link-target"><span>Deutsch</span></a></li>
+<li class="interlanguage-link interwiki-es mw-list-item"><a href="../es/Apache_HTTP_Server.html" title="Apache HTTP Server – español" lang="es" hreflang="es" data-title="Apache HTTP Server" data-language-autonym="Español" data-language-local-name="español" class="interlanguage-link-target"><span>Español</span></a></li>
+<li class="interlanguage-link interwiki-ja mw-list-item"><a href="https://wiki.archlinux.jp/index.php/Apache_HTTP_Server" title="Apache HTTP Server – 日本語" lang="ja" hreflang="ja" data-title="Apache HTTP Server" data-language-autonym="日本語" data-language-local-name="日本語" class="interlanguage-link-target"><span>日本語</span></a></li>
+<li class="interlanguage-link interwiki-pt mw-list-item"><a href="../pt/Apache_HTTP_Server.html" title="Apache HTTP Server – português" lang="pt" hreflang="pt" data-title="Apache HTTP Server" data-language-autonym="Português" data-language-local-name="português" class="interlanguage-link-target"><span>Português</span></a></li>
+<li class="interlanguage-link interwiki-zh-hans mw-list-item"><a href="https://wiki.archlinuxcn.org/wiki/Apache_HTTP_Server" title="Apache HTTP Server – 中文（简体）" lang="zh-Hans" hreflang="zh-Hans" data-title="Apache HTTP Server" data-language-autonym="中文（简体）" data-language-local-name="中文（简体）" class="interlanguage-link-target"><span>中文（简体）</span></a></li>
+			</ul>
+			
+		</div>
+
+	</div>
+</div>
+</header>
+				<div class="vector-column-end">
+					<div class="vector-sticky-pinned-container">
+						<nav class="vector-page-tools-landmark" aria-label="Page tools">
+							<div id="vector-page-tools-pinned-container" class="vector-pinned-container">
+				
+							</div>
+		</nav>
+						<nav class="vector-appearance-landmark" aria-label="Appearance">
+							<div id="vector-appearance-pinned-container" class="vector-pinned-container">
+				<div id="vector-appearance" class="vector-appearance vector-pinnable-element">
+	<div class="vector-pinnable-header vector-appearance-pinnable-header vector-pinnable-header-pinned" data-feature-name="appearance-pinned" data-pinnable-element-id="vector-appearance" data-pinned-container-id="vector-appearance-pinned-container" data-unpinned-container-id="vector-appearance-unpinned-container">
+	<div class="vector-pinnable-header-label">Appearance</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-appearance.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-appearance.unpin">hide</button>
+</div>
+
+
+</div>
+
+							</div>
+		</nav>
+					</div>
+				</div>
+				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container>
+					<div class="vector-body-before-content">
+							<div class="mw-indicators">
+		</div>
+
+						<div id="siteSub" class="noprint">From ArchWiki</div>
+					</div>
+					<div id="contentSub"><div id="mw-content-subtitle"></div></div>
+					
+					
+					<div id="mw-content-text" class="mw-body-content">
+<div class="mw-content-ltr mw-parser-output" lang="en" dir="ltr">
+<div class="archwiki-template-meta-related-articles">
+<p>Related articles</p>
+<ul>
+<li><a href="../en/XAMPP.html" title="XAMPP">XAMPP</a></li>
+<li><a href="../en/Apache_HTTP_Server/mod_perl.html" title="Apache HTTP Server/mod perl">/mod_perl</a></li>
+<li><a href="../en/Apache_HTTP_Server/mod_fcgid.html" title="Apache HTTP Server/mod fcgid">/mod_fcgid</a></li>
+<li><a href="../en/Apache_HTTP_Server/mod_gnutls.html" title="Apache HTTP Server/mod gnutls">/mod_gnutls</a></li>
+<li><a href="../en/Apache_HTTP_Server/mod_wsgi.html" title="Apache HTTP Server/mod wsgi">/mod_wsgi</a></li>
+</ul>
+</div>
+<p>The <a href="https://en.wikipedia.org/wiki/Apache_HTTP_Server" class="extiw" title="wikipedia:Apache HTTP Server">Apache HTTP Server</a>, or Apache for short, is a very popular <a href="../en/List_of_applications/Internet.html#Web_servers" class="mw-redirect" title="Web server">web server</a>, developed by the Apache Software Foundation.
+</p>
+<p>This article describes how to set up Apache and how to optionally integrate it with <a href="../en/PHP.html" title="PHP">PHP</a>.
+</p>
+<meta property="mw:PageProp/toc">
+<h2><span class="mw-headline" id="Installation">Installation</span></h2>
+<p><a href="../en/Help:Reading.html#Installation_of_packages" class="mw-redirect" title="Install">Install</a> the <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=apache">apache</a></span> package.
+</p>
+<h2><span class="mw-headline" id="Configuration">Configuration</span></h2>
+<p>Apache configuration files are located in <code>/etc/httpd/conf</code>. The main configuration file is <code>/etc/httpd/conf/httpd.conf</code>, which includes various other configuration files. The default configuration file should be fine for a simple setup. By default, it will serve the directory <code>/srv/http</code> to anyone who visits your website.
+</p>
+<p>To run Apache, <a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Start">start</a> <code>httpd.service</code>. If everything is working correctly, visiting <a rel="nofollow" class="external free" href="http://localhost/">http://localhost/</a> should display a simple index page.
+</p>
+<p>For optional further configuration, see the following sections.
+</p>
+<h3><span class="mw-headline" id="Advanced_options">Advanced options</span></h3>
+<p>See the <a rel="nofollow" class="external text" href="https://httpd.apache.org/docs/trunk/mod/directives.html">full list of Apache configuration directives</a> and the <a rel="nofollow" class="external text" href="https://httpd.apache.org/docs/trunk/mod/quickreference.html">directive quick reference</a>.
+</p>
+<p>These options in <code>/etc/httpd/conf/httpd.conf</code> might be interesting for you:
+</p>
+<pre>User http
+</pre>
+<dl><dd>For security reasons, as soon as Apache is started by the root user (directly or via startup scripts) it switches to this UID. The default user is <i>http</i>, which is created automatically during installation.</dd></dl>
+<pre>Listen 80
+</pre>
+<dl><dd>This is the port Apache will listen to. For Internet-access with router, you have to forward the port.</dd></dl>
+<dl><dd>If you want to setup Apache for local development you may want it to be only accessible from your computer. Then change this line to <code>Listen 127.0.0.1:80</code>.</dd></dl>
+<pre>ServerAdmin you@example.com
+</pre>
+<dl><dd>This is the admin's email address which can be found on e.g. error pages.</dd></dl>
+<pre>DocumentRoot "/srv/http"
+</pre>
+<dl><dd>This is the directory where you should put your web pages.</dd></dl>
+<dl><dd>Change it, if you want to, but do not forget to also change <code>&lt;Directory "/srv/http"&gt;</code> to whatever you changed your <code>DocumentRoot</code> to, or you will likely get a <b>403 Error</b> (lack of privileges) when you try to access the new document root. Do not forget to change the <code>Require all denied</code> line to <code>Require all granted</code>, otherwise you will get a <b>403 Error</b>. Remember that the DocumentRoot directory and its parent folders must allow execution permission to others (can be set with <code>chmod o+x /path/to/DocumentRoot</code>), otherwise you will get a <b>403 Error</b>.</dd></dl>
+<pre>AllowOverride None
+</pre>
+<dl><dd>This directive in <code>&lt;Directory&gt;</code> sections causes Apache to completely ignore <code>.htaccess</code> files. Note that this is now the default for Apache 2.4, so you need to explicitly allow overrides if you plan to use <code>.htaccess</code> files. If you intend to use <code>mod_rewrite</code> or other settings in <code>.htaccess</code> files, you can allow which directives declared in that file can override server configuration. For more info refer to the <a rel="nofollow" class="external text" href="https://httpd.apache.org/docs/current/mod/core.html#allowoverride">Apache documentation</a>.</dd></dl>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> If you have issues with your configuration you can have Apache check the configuration with: <code>apachectl configtest</code>
+</div>
+<p>More settings can be found in <code>/etc/httpd/conf/extra/httpd-default.conf</code>:
+</p>
+<p>To turn off your server's signature:
+</p>
+<pre>ServerSignature Off
+</pre>
+<p>To hide server information like Apache and PHP versions:
+</p>
+<pre>ServerTokens Prod
+</pre>
+<h3><span class="mw-headline" id="User_directories">User directories</span></h3>
+<p>User directories are available by default through <a rel="nofollow" class="external free" href="http://localhost/~yourusername/">http://localhost/~yourusername/</a> and show the contents of <code>~/public_html</code> (this can be changed in <code>/etc/httpd/conf/extra/httpd-userdir.conf</code>).
+</p>
+<p>If you do not want user directories to be available on the web, comment out the following line in <code>/etc/httpd/conf/httpd.conf</code>:
+</p>
+<pre>Include conf/extra/httpd-userdir.conf
+</pre>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../File:Inaccurate.svg" decoding="async" width="48" height="48" class="mw-file-element"></span></span><b>The factual accuracy of this article or section is disputed.</b></p>
+<div>
+<b>Reason:</b> It is not necessary to set <code>+x</code> for every users, setting it only for the webserver via ACLs suffices (see <a href="../en/Access_Control_Lists.html#Execution_permissions_for_private_files" title="Access Control Lists">Access Control Lists#Execution permissions for private files</a>). (Discuss in <a href="../en/Talk:Apache_HTTP_Server.html#User_Directories" title="Talk:Apache HTTP Server">Talk:Apache HTTP Server#User Directories</a>)</div>
+</div>
+<p>You must make sure that your home directory permissions are set properly so that Apache can get there. Your home directory and <code>~/public_html</code> must be executable for others ("rest of the world"):
+</p>
+<pre>$ chmod o+x ~
+$ chmod o+x ~/public_html
+$ chmod -R o+r ~/public_html
+</pre>
+<p><a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Restart">Restart</a> <code>httpd.service</code> to apply any changes. See also <a href="../en/Umask.html#Set_the_mask_value" title="Umask">Umask#Set the mask value</a>.
+</p>
+<h3><span class="mw-headline" id="TLS">TLS</span></h3>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Warning:</strong> If you deploy <a href="https://en.wikipedia.org/wiki/Transport_Layer_Security" class="extiw" title="wikipedia:Transport Layer Security">TLS</a>, be sure to follow <a rel="nofollow" class="external text" href="https://weakdh.org/sysadmin.html">weakdh.org's guide</a> to prevent vulnerabilities. For more information see <a href="../en/Transport_Layer_Security.html#Server-side_recommendations" class="mw-redirect" title="Server-side TLS">Server-side TLS</a>.</div>
+<p>Firstly <a href="../en/Transport_Layer_Security.html#Obtaining_a_certificate" class="mw-redirect" title="Obtain a certificate">obtain a certificate</a>. If you own a public domain, you can use <a href="../en/Transport_Layer_Security.html#ACME_clients" title="Transport Layer Security">Transport Layer Security#ACME clients</a>.
+</p>
+<p>In <code>/etc/httpd/conf/httpd.conf</code>, uncomment the following three lines:
+</p>
+<pre>LoadModule ssl_module modules/mod_ssl.so
+LoadModule socache_shmcb_module modules/mod_socache_shmcb.so
+Include conf/extra/httpd-ssl.conf
+</pre>
+<p>If using <a href="../en/Certbot.html" title="Certbot">Certbot</a> (<code>certbot --apache</code>), the following line needs to be uncommented as well:
+</p>
+<pre>LoadModule rewrite_module modules/mod_rewrite.so
+</pre>
+<p>After obtaining a key and certificate, make sure the <code>SSLCertificateFile</code> and <code>SSLCertificateKeyFile</code> lines in <code>/etc/httpd/conf/extra/httpd-ssl.conf</code> point to the key and certificate. If a concatenated chain of CA certificates was also generated, add that filename against <code>SSLCertificateChainFile</code>.
+</p>
+<p>Finally, <a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Restart">restart</a> <code>httpd.service</code> to apply any changes.
+</p>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> Mozilla has a useful <a href="https://wiki.mozilla.org/Security/Server_Side_TLS" class="extiw" title="mozillawiki:Security/Server Side TLS">SSL/TLS article</a> as well as an <a rel="nofollow" class="external text" href="https://mozilla.github.io/server-side-tls/ssl-config-generator/">automated tool</a> to help create a more secure configuration.</div>
+<h3><span class="mw-headline" id="Virtual_hosts">Virtual hosts</span></h3>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> You will need to add a separate <code>&lt;VirtualHost *:443&gt;</code> section for virtual host SSL support.
+See <a href="#Managing_many_virtual_hosts">#Managing many virtual hosts</a> for an example file.</div>
+<p>If you want to have more than one host, uncomment the following line in <code>/etc/httpd/conf/httpd.conf</code>:
+</p>
+<pre>Include conf/extra/httpd-vhosts.conf
+</pre>
+<p>In <code>/etc/httpd/conf/extra/httpd-vhosts.conf</code> set your virtual hosts. The default file contains an elaborate example that should help you get started.
+</p>
+<p>To test the virtual hosts on your local machine, add the virtual names to your <code>/etc/hosts</code> file:
+</p>
+<pre>127.0.0.1 domainname1.dom 
+127.0.0.1 domainname2.dom
+</pre>
+<p><a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Restart">Restart</a> <code>httpd.service</code> to apply any changes.
+</p>
+<h4><span class="mw-headline" id="Managing_many_virtual_hosts">Managing many virtual hosts</span></h4>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> Having your virtual servers separated into individual files is mandatory if you plan on using <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=certbot">certbot</a></span> to deploy TLS certificates. Having all your virtual servers listed in a single file (as it is by default) will result in certbot failing to deploy the certificates correctly</div>
+<p>If you have a huge amount of virtual hosts, you may want to easily disable and enable them. It is recommended to create one configuration file per virtual host and store them all in one folder, eg: <code>/etc/httpd/conf/vhosts</code>.
+</p>
+<p>First create the folder:
+</p>
+<pre># mkdir /etc/httpd/conf/vhosts
+</pre>
+<p>Then place the single configuration files in it:
+</p>
+<pre># nano /etc/httpd/conf/vhosts/domainname1.dom
+# nano /etc/httpd/conf/vhosts/domainname2.dom
+...
+</pre>
+<p>In the last step, <code>Include</code> the single configurations in your <code>/etc/httpd/conf/httpd.conf</code>:
+</p>
+<pre>#Enabled Vhosts:
+Include conf/vhosts/domainname1.dom
+Include conf/vhosts/domainname2.dom
+</pre>
+<p>You can enable and disable single virtual hosts by commenting or uncommenting them.
+</p>
+<p>A very basic vhost file will look like this:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/httpd/conf/vhosts/domainname1.dom</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">&lt;VirtualHost *:80&gt;
+    ServerAdmin webmaster@domainname1.dom
+    DocumentRoot "/home/user/http/domainname1.dom"
+    ServerName domainname1.dom
+    ServerAlias domainname1.dom
+    ErrorLog "/var/log/httpd/domainname1.dom-error_log"
+    CustomLog "/var/log/httpd/domainname1.dom-access_log" common
+
+    &lt;Directory "/home/user/http/domainname1.dom"&gt;
+        Require all granted
+    &lt;/Directory&gt;
+&lt;/VirtualHost&gt;
+
+&lt;VirtualHost *:443&gt;
+    ServerAdmin webmaster@domainname1.dom
+    DocumentRoot "/home/user/http/domainname1.dom"
+    ServerName domainname1.dom:443
+    ServerAlias domainname1.dom:443
+    SSLEngine on
+    SSLCertificateFile "/etc/httpd/conf/server.crt"
+    SSLCertificateKeyFile "/etc/httpd/conf/server.key"
+    ErrorLog "/var/log/httpd/domainname1.dom-error_log"
+    CustomLog "/var/log/httpd/domainname1.dom-access_log" common
+
+    &lt;Directory "/home/user/http/domainname1.dom"&gt;
+        Require all granted
+    &lt;/Directory&gt;
+&lt;/VirtualHost&gt;</pre>
+<h2><span class="mw-headline" id="Extensions">Extensions</span></h2>
+<h3><span class="mw-headline" id="PHP">PHP</span></h3>
+<p>First <a href="../en/PHP.html#Installation" title="PHP">install PHP</a>, then follow one of the next three subsections below.  Finally, test the installation as described in the final subsection.
+</p>
+<h4><span class="mw-headline" id="Using_libphp">Using libphp</span></h4>
+<p>This method is probably the easiest, but is also the least scalable: it is suitable for a light request load. It also requires you to change the mpm module, which may cause problems with other extensions (e.g. it is not compatible with <a href="#HTTP/2">#HTTP/2</a>).
+</p>
+<p><a href="../en/Help:Reading.html#Installation_of_packages" class="mw-redirect" title="Install">Install</a> <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=php-apache">php-apache</a></span>. 
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> If you are using pinned old versions of PHP from AUR, then you should install corresponding pinned version of <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=php-apache">php-apache</a></span>, i.e. <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/php56-apache/">php56-apache</a></span><sup><small>AUR</small></sup> for <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/php56/">php56</a></span><sup><small>AUR</small></sup>.</div> 
+<p>In <code>/etc/httpd/conf/httpd.conf</code>, comment the line:
+</p>
+<pre>#LoadModule mpm_event_module modules/mod_mpm_event.so
+</pre>
+<p>and uncomment the line:
+</p>
+<pre>LoadModule mpm_prefork_module modules/mod_mpm_prefork.so
+</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> The above is required, because <code>libphp.so</code> included with the package does not work with <code>mod_mpm_event</code>, but will only work with <code>mod_mpm_prefork</code> instead. (<a rel="nofollow" class="external text" href="https://bugs.archlinux.org/task/39218">FS#39218</a>)
+<p>Otherwise you will get the following error:
+</p>
+<pre>Apache is running a threaded MPM, but your PHP Module is not compiled to be threadsafe.  You need to recompile PHP.
+AH00013: Pre-configuration failed
+httpd.service: control process exited, code=exited status=1</pre>
+As an alternative, you can use <code>mod_proxy_fcgi</code> (see <a href="#Using_php-fpm_and_mod_proxy_fcgi">#Using php-fpm and mod_proxy_fcgi</a> below).</div>
+<p>To enable PHP, add these lines to <code>/etc/httpd/conf/httpd.conf</code>:
+</p>
+<ul><li>Place this at the end of the <code>LoadModule</code> list:</li></ul>
+<pre>LoadModule php_module modules/libphp.so
+AddHandler php-script .php
+</pre>
+<ul><li>Place this at the end of the <code>Include</code> list:</li></ul>
+<pre>Include conf/extra/php_module.conf
+</pre>
+<p>then <a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Restart">restart</a> <code>httpd.service</code>.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> For AUR pinned version of PHP, substitute <code>php_module</code>, <code>libphp.so</code> and <code>php_module.conf</code> above accordingly. For example, <code>php5_module</code>, <code>libphp56.so</code> and <code>php56-module.conf</code> for <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/php56-apache/">php56-apache</a></span><sup><small>AUR</small></sup>. 
+<p><br>
+</p>
+If you are unsure of the correct substitution, use <code>pacman -Ql phpXX-apache</code> to list the correct substitutions of <code>libphp.so</code> and <code>php_module.conf</code>, then use <code>nm /usr/lib/httpd/modules/libphpXX.so </code> to find the correct substitution of <code>php_module</code>.</div>
+<h4><span class="mw-headline" id="Using_apache2-mpm-worker_and_mod_fcgid">Using apache2-mpm-worker and mod_fcgid</span></h4>
+<p>This method provides improved performance and memory usage when serving multiple requests.  
+</p>
+<p><a href="../en/Help:Reading.html#Installation_of_packages" class="mw-redirect" title="Install">Install</a> <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/mod_fcgid/">mod_fcgid</a></span><sup><small>AUR</small></sup> and <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=php-cgi">php-cgi</a></span>.
+</p>
+<p>Create the needed directory and symlink it for the PHP wrapper:
+</p>
+<pre># mkdir /srv/http/fcgid-bin
+# ln -s /usr/bin/php-cgi /srv/http/fcgid-bin/php-fcgid-wrapper
+</pre>
+<p>Create <code>/etc/httpd/conf/extra/php-fcgid.conf</code> with the following content:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/httpd/conf/extra/php-fcgid.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;"># Required modules: fcgid_module
+
+&lt;IfModule fcgid_module&gt;
+    AddHandler php-fcgid .php
+    AddType application/x-httpd-php .php
+    Action php-fcgid /fcgid-bin/php-fcgid-wrapper
+    ScriptAlias /fcgid-bin/ /srv/http/fcgid-bin/
+    SocketPath /var/run/httpd/fcgidsock
+    SharememPath /var/run/httpd/fcgid_shm
+        # If you don't allow bigger requests many applications may fail (such as WordPress login)
+        FcgidMaxRequestLen 536870912
+        # Path to php.ini – defaults to /etc/phpX/cgi
+        DefaultInitEnv PHPRC=/etc/php/
+        # Number of PHP children that will be launched. Leave undefined to let PHP decide.
+        #DefaultInitEnv PHP_FCGI_CHILDREN 3
+        # Maximum requests before a process is stopped and a new one is launched
+        #DefaultInitEnv PHP_FCGI_MAX_REQUESTS 5000
+    &lt;Location /fcgid-bin/&gt;
+        SetHandler fcgid-script
+        Options +ExecCGI
+    &lt;/Location&gt;
+&lt;/IfModule&gt;
+</pre>
+<p>Edit <code>/etc/httpd/conf/httpd.conf</code>:
+</p>
+<ul>
+<li>Uncomment the loading of the actions module: <pre>LoadModule actions_module modules/mod_actions.so</pre>
+</li>
+<li>Load the FCGID module <i>after</i> the loading of the unixd module (on which it is dependent) - you may wish to place this within the <code>&lt;IfModule unixd_module&gt;</code> block: <pre>LoadModule fcgid_module modules/mod_fcgid.so</pre>
+</li>
+<li>Ensure that the inclusion of the MPM configuration is uncommented (it is uncommented in the default installed version of this file): <pre>Include conf/extra/httpd-mpm.conf</pre>
+</li>
+<li>Add an inclusion of your new FCGID configuration: <pre>Include conf/extra/php-fcgid.conf</pre>
+</li>
+</ul>
+<p><a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Restart">Restart</a> <code>httpd.service</code>.
+</p>
+<h4><span class="mw-headline" id="Using_php-fpm_and_mod_proxy_fcgi">Using php-fpm and mod_proxy_fcgi</span></h4>
+<p>This method provides "an alternative PHP FastCGI implementation with some additional features (mostly) useful for heavy-loaded sites" <a rel="nofollow" class="external autonumber" href="https://www.php.net/manual/en/install.fpm.php">[1]</a>.  
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> Unlike the widespread setup with ProxyPass, the proxy configuration with SetHandler respects other Apache directives like DirectoryIndex. This ensures a better compatibility with software designed for libphp, mod_fastcgi and mod_fcgid.
+If you still want to try ProxyPass, experiment with a line like this: <pre>ProxyPassMatch ^/(.*\.php(/.*)?)$ unix:/run/php-fpm/php-fpm.sock|fcgi://localhost/srv/http/$1</pre>
+</div>
+<p><a href="../en/Help:Reading.html#Installation_of_packages" class="mw-redirect" title="Install">Install</a> <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=php-fpm">php-fpm</a></span>.
+</p>
+<p>Enable proxy modules:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/httpd/conf/httpd.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">LoadModule proxy_module modules/mod_proxy.so
+LoadModule proxy_fcgi_module modules/mod_proxy_fcgi.so
+</pre>
+<p>Create <code>/etc/httpd/conf/extra/php-fpm.conf</code> with the following content:
+</p>
+<pre>DirectoryIndex index.php index.html
+&lt;FilesMatch \.php$&gt;
+    SetHandler "proxy:unix:/run/php-fpm/php-fpm.sock|fcgi://localhost/"
+&lt;/FilesMatch&gt;
+</pre>
+<p>And include it at the bottom of <code>/etc/httpd/conf/httpd.conf</code>:
+</p>
+<pre>Include conf/extra/php-fpm.conf
+</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> The pipe between <code>sock</code> and <code>fcgi</code> is not allowed to be surrounded by a space! <code>localhost</code> can be replaced by any string. More <a rel="nofollow" class="external text" href="https://httpd.apache.org/docs/2.4/mod/mod_proxy_fcgi.html">here</a>
+</div>
+<p>You can configure PHP-FPM in <code>/etc/php/php-fpm.d/www.conf</code>, but the default setup should work fine.
+</p>
+<p><a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Start">Start</a> and <a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Enable">enable</a> <code>php-fpm.service</code>, then <a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Restart">restart</a> <code>httpd.service</code>.
+</p>
+<h4><span class="mw-headline" id="Test_whether_PHP_works">Test whether PHP works</span></h4>
+<p>To test whether PHP was correctly configured, create a file called <code>test.php</code> in your Apache <code>DocumentRoot</code> directory (e.g. <code>/srv/http/</code> or <code>~&lt;username&gt;/public_html/</code>) with the following contents:
+</p>
+<pre>&lt;?php phpinfo(); ?&gt;
+</pre>
+<p>Then go to <a rel="nofollow" class="external free" href="http://localhost/test.php">http://localhost/test.php</a> or http://localhost/~&lt;username&gt;/test.php as appropriate.
+</p>
+<h3>
+<span id="HTTP.2F2"></span><span class="mw-headline" id="HTTP/2">HTTP/2</span>
+</h3>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> 
+<ul>
+<li>While Apache supports unencrypted HTTP/2 over TCP (<code>h2c</code>), common browsers <a rel="nofollow" class="external text" href="https://stackoverflow.com/a/46789195">do not</a>. Thus for use with the latter, <a href="#TLS">#TLS</a> must be enabled first.</li>
+<li>If supporting clients do not use HTTP/2 instead of HTTP/1.1 and Mozilla's configuration generator (which already includes the <code>Protocols</code> line below) was used to setup <a href="#TLS">#TLS</a>, try <code>Include</code>ing <code>httpd-ssl.conf</code> <i>after</i> the latter's output.</li>
+<li>Ways to test include <code>curl -sI https://your.website</code> or use <a rel="nofollow" class="external text" href="https://github.com/pd4d10/http-indicator">http indicator</a> (supports both chromium based browsers and firefox based browsers).</li>
+</ul>
+</div>
+<p>To enable HTTP/2 over TLS support, uncomment the following line in <code>httpd.conf</code>:
+</p>
+<pre>LoadModule http2_module modules/mod_http2.so
+</pre>
+<p>And add the following line:
+</p>
+<pre>Protocols h2 http/1.1
+</pre>
+<p>To debug, you can set only the module rather than the entire server to <code>debug</code> or <code>info</code>:
+</p>
+<pre>&lt;IfModule http2_module&gt;
+    LogLevel http2:info
+&lt;/IfModule&gt;
+</pre>
+<p>For more information – including extra HTTP/2 feature settings – see the <a rel="nofollow" class="external text" href="https://httpd.apache.org/docs/2.4/mod/mod_http2.html">mod_http2</a> documentation.
+</p>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Warning:</strong> The <code>http2_module</code> is incompatible with the <code>mpm_prefork_module</code> that old configurations widely use to setup PHP. Consider using <a href="#Using_php-fpm_and_mod_proxy_fcgi">php-fpm</a> instead.</div>
+<h2><span class="mw-headline" id="Troubleshooting">Troubleshooting</span></h2>
+<h3><span class="mw-headline" id="Apache_Status_and_Logs">Apache Status and Logs</span></h3>
+<p>See the status of the Apache daemon with <a href="../en/Systemd.html#Basic_systemctl_usage" class="mw-redirect" title="Systemctl">systemctl</a>.
+</p>
+<p>Apache logs can be found in  <code>/var/log/httpd/</code>
+</p>
+<h3>
+<span id="Error:_PID_file_.2Frun.2Fhttpd.2Fhttpd.pid_not_readable_.28yet.3F.29_after_start"></span><span class="mw-headline" id="Error:_PID_file_/run/httpd/httpd.pid_not_readable_(yet?)_after_start">Error: PID file /run/httpd/httpd.pid not readable (yet?) after start</span>
+</h3>
+<p>Comment out the <code>unique_id_module</code> line in <code>httpd.conf</code>: <code>#LoadModule unique_id_module modules/mod_unique_id.so</code>
+</p>
+<h3>
+<span id=".2Frun.2Fhttpd_not_being_created_at_boot"></span><span class="mw-headline" id="/run/httpd_not_being_created_at_boot">/run/httpd not being created at boot</span>
+</h3>
+<p>If <code>systemd-tmpfiles --create</code> as the root user complains about "unsafe path transition", check ownership of your root directory.
+</p>
+<pre>ls -la /
+chown root:root /
+</pre>
+<h3>
+<span id="Apache_is_running_a_threaded_MPM.2C_but_your_PHP_Module_is_not_compiled_to_be_threadsafe."></span><span class="mw-headline" id="Apache_is_running_a_threaded_MPM,_but_your_PHP_Module_is_not_compiled_to_be_threadsafe.">Apache is running a threaded MPM, but your PHP Module is not compiled to be threadsafe.</span>
+</h3>
+<p>If when loading <code>php_module</code> the <code>httpd.service</code> fails, you may get an error like this in the journal:
+</p>
+<pre>Apache is running a threaded MPM, but your PHP Module is not compiled to be threadsafe.  You need to recompile PHP.
+</pre>
+<p>This is because PHP includes support for a module that is not threadsafe, and you are trying to use a threaded MPM. One solution to fix this is to use a non-threaded MPM. Try replacing <code>mpm_event_module</code> with <code>mpm_prefork_module</code>:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/httpd/conf/httpd.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;"><s>LoadModule mpm_event_module modules/mod_mpm_event.so</s>
+LoadModule mpm_prefork_module modules/mod_mpm_prefork.so
+</pre>
+<p>and <a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Restart">restart</a> <code>httpd.service</code>.
+</p>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Warning:</strong> Some other modules, like the <code>http2_module</code>, will disable themselves when <code>mpm_prefork</code> is active.</div>
+<h3><span class="mw-headline" id="AH00534:_httpd:_Configuration_error:_No_MPM_loaded.">AH00534: httpd: Configuration error: No MPM loaded.</span></h3>
+<p>You might encounter this error after a recent upgrade. This is only the result of a recent change in <code>httpd.conf</code> that you might not have reproduced in your local configuration. To fix it, uncomment the following line:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/httpd/conf/httpd.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">LoadModule mpm_prefork_module modules/mod_mpm_prefork.so
+</pre>
+<p>and <a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Restart">restart</a> <code>httpd.service</code>.
+</p>
+<h3><span class="mw-headline" id="AH00072:_make_sock:_could_not_bind_to_address">AH00072: make_sock: could not bind to address</span></h3>
+<p>This can be caused by multiple things. Most common issue being that something is already listening on a given port, check via <a href="../en/Network_configuration.html#Investigate_sockets" class="mw-redirect" title="Ss">ss</a> that this is not happening:
+</p>
+<pre># ss -lnp | grep -e :80 -e :443
+</pre>
+<p>If you get any output, stop the given service that's taking up the port or kill the runaway process that is causing the port to be bound, and try again.
+</p>
+<p>Another issue could be that Apache is not starting as root for some reason - try starting it manually and see if you still get the AH0072 error.
+</p>
+<pre># httpd -k start
+</pre>
+<p>Finally, you can also have an error with your configuration and you are listening twice on the given port. Following is an example of a bad configuration that will trigger this issue:
+</p>
+<pre>Listen 0.0.0.0:80
+Listen [::]:80
+</pre>
+<h3>
+<span id="AH01071:_Got_error_.27Primary_script_unknown.27"></span><span class="mw-headline" id="AH01071:_Got_error_'Primary_script_unknown'">AH01071: Got error 'Primary script unknown'</span>
+</h3>
+<p>This can be caused by <code>ProtectHome=true</code> in the php-fpm systemd unit file if you are serving files in <code>/home</code> such as in a virtual host environment. You can disable this feature by <a href="../en/Systemd.html#Drop-in_files" title="Systemd">editing the php-fpm unit file</a> and <a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Restart">restarting</a> <code>php-fpm.service</code>. Alternatively, move your document root.
+</p>
+<h3><span class="mw-headline" id="Changing_the_max_execution_time_in_php.ini_has_no_effect">Changing the max_execution_time in php.ini has no effect</span></h3>
+<p>If you changed the <code>max_execution_time</code> in <code>php.ini</code> to a value greater than 30 (seconds), you may still get a <code>503 Service Unavailable</code> response from Apache after 30 seconds. To solve this, add a <code>ProxyTimeout</code> directive to your http configuration right before the <code>&lt;FilesMatch \.php$&gt;</code> block:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/httpd/conf/httpd.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">ProxyTimeout 300
+</pre>
+<p>and <a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Restart">restart</a> <code>httpd.service</code>.
+</p>
+<h3><span class="mw-headline" id="PHP-FPM:_errors_are_not_being_logged_separately_per_virtual_host">PHP-FPM: errors are not being logged separately per virtual host</span></h3>
+<p>If you have multiple virtual hosts, it may be desirable to have each of them output their error logs to separate files (using the ErrorLog Apache directive). If this is not working for you, confirm that PHP-FPM is configured to log errors to syslog:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/php/php-fpm.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">error_log = syslog</pre>
+<p>It is also possible that the pool configuration is overriding it. Ensure the following line is commented out:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/php/php-fpm.d/www.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">;php_admin_value[error_log] = /var/log/fpm-php.www.log</pre>
+<h2><span class="mw-headline" id="See_also">See also</span></h2>
+<ul>
+<li><a rel="nofollow" class="external text" href="https://www.apache.org/">Apache Official Website</a></li>
+<li><a rel="nofollow" class="external text" href="https://httpd.apache.org/docs/2.4/">Apache documentation</a></li>
+<li><a rel="nofollow" class="external text" href="https://wiki.apache.org/httpd/">Apache wiki</a></li>
+<li><a rel="nofollow" class="external text" href="https://httpd.apache.org/docs/current/misc/security_tips.html">Apache documentation - Security Tips</a></li>
+<li><a rel="nofollow" class="external text" href="https://wiki.apache.org/httpd/CommonMisconfigurations">Apache Wiki - Troubleshooting</a></li>
+<li>
+<a href="https://wiki.debian.org/Apache" class="extiw" title="debian:Apache">Apache</a> on wiki.debian.org</li>
+</ul>
+</div>
+</div>
+					<div id="catlinks" class="catlinks" data-mw="interface">
+<div id="mw-normal-catlinks" class="mw-normal-catlinks">
+<a href="../Special:Categories.html" title="Special:Categories">Categories</a>: <ul>
+<li><a href="../en/Category:Web_server.html" title="Category:Web server">Web server</a></li>
+<li><a href="../en/Category:Apache.html" title="Category:Apache">Apache</a></li>
+</ul>
+</div>
+<div id="mw-hidden-catlinks" class="mw-hidden-catlinks mw-hidden-cats-hidden">Hidden category: <ul><li><a href="../en/Category:Pages_or_sections_flagged_with_Template:Accuracy.html" title="Category:Pages or sections flagged with Template:Accuracy">Pages or sections flagged with Template:Accuracy</a></li></ul>
+</div>
+</div>
+				</div>
+			</main>
+			
+		</div>
+		<div class="mw-footer-container">
+			
+<footer id="footer" class="mw-footer" style="margin: 0">
+	<ul id="footer-info">
+	<li data-nosnippet="">Retrieved from "<a dir="ltr" href="https://wiki.archlinux.org/index.php?title=Apache_HTTP_Server&amp;oldid=828148">https://wiki.archlinux.org/index.php?title=Apache_HTTP_Server&amp;oldid=828148</a>"</li>
+<li id="footer-info-lastmod"> This page was last edited on 3 March 2025, at 09:57.</li>
+	<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+<br>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="https://terms.archlinux.org/docs/privacy-policy/">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="../en/ArchWiki:About.html">About ArchWiki</a></li>
+	<li id="footer-places-disclaimers"><a href="../en/ArchWiki:General_disclaimer.html">Disclaimers</a></li>
+	<li id="footer-places-archwiki-code-of-conduct"><a href="https://terms.archlinux.org/docs/code-of-conduct/" class="extiw" title="archlinux-service-agreements:code-of-conduct">Code of conduct</a></li>
+	<li id="footer-places-archwiki-terms-of-service"><a href="https://terms.archlinux.org/docs/terms-of-service/" class="extiw" title="archlinux-service-agreements:terms-of-service">Terms of service</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-copyrightico"><a href="https://www.gnu.org/copyleft/fdl.html" class="cdx-button cdx-button--fake-button cdx-button--size-large cdx-button--fake-button--enabled"><img src="/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" loading="lazy"></a></li>
+	<li id="footer-poweredbyico"><img src="/resources/assets/poweredby_mediawiki.svg" width="88" height="31" loading="lazy"></li>
+</ul>
+
+</footer>
+
+		</div>
+	</div> 
+</div> 
+<div class="vector-settings" id="p-dock-bottom">
+	<ul></ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-sticky-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-0 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-disabled skin-theme-clientpref-day vector-toc-available" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>systemd-boot - ArchWiki</title>
+<link rel="stylesheet" href="../ArchWikiOffline.css">
+<meta name="ResourceLoaderDynamicStyles" content="">
+<meta name="generator" content="MediaWiki 1.43.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="max-image-preview:standard">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.25, maximum-scale=5.0">
+<link rel="search" type="application/opensearchdescription+xml" href="/rest.php/v1/search" title="ArchWiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.archlinux.org/api.php?action=rsd">
+<link rel="license" href="https://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="ArchWiki Atom feed" href="/index.php?title=Special:RecentChanges&amp;feed=atom">
+</head>
+<body class="skin--responsive skin-vector skin-vector-search-vue mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Systemd-boot rootpage-Systemd-boot skin-vector-2022 action-view">
+<a class="mw-jump-link" href="#bodyContent">Jump to content</a>
+<div class="vector-header-container">
+	</div>
+<div class="mw-page-container">
+	<div class="mw-page-container-inner">
+		<div class="vector-column-start">
+			<div class="vector-main-menu-container">
+		</div>
+	<div class="vector-sticky-pinned-container">
+				<nav id="mw-panel-toc" aria-label="Contents" data-event-name="ui.sidebar-toc" class="mw-table-of-contents-container vector-toc-landmark">
+					<div id="vector-toc-pinned-container" class="vector-pinned-container">
+					<div id="vector-toc" class="vector-toc vector-pinnable-element">
+	<div class="vector-pinnable-header vector-toc-pinnable-header vector-pinnable-header-pinned" data-feature-name="toc-pinned" data-pinnable-element-id="vector-toc">
+	<h2 class="vector-pinnable-header-label">Contents</h2>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-toc.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-toc.unpin">hide</button>
+</div>
+
+
+	<ul class="vector-toc-contents" id="mw-panel-toc-list">
+		<li id="toc-mw-content-text" class="vector-toc-list-item vector-toc-level-1">
+			<a href="#" class="vector-toc-link">
+				<div class="vector-toc-text">Beginning</div>
+			</a>
+		</li>
+		<li id="toc-Supported_file_systems" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Supported_file_systems">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">1</span>
+				<span>Supported file systems</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Supported_file_systems-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Installation" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Installation">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">2</span>
+				<span>Installation</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Installation-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Installing_the_UEFI_boot_manager" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Installing_the_UEFI_boot_manager">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">3</span>
+				<span>Installing the UEFI boot manager</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Installing_the_UEFI_boot_manager-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Installing the UEFI boot manager subsection</span>
+			</button>
+		
+		<ul id="toc-Installing_the_UEFI_boot_manager-sublist" class="vector-toc-list">
+			<li id="toc-Installation_using_XBOOTLDR" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Installation_using_XBOOTLDR">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1</span>
+					<span>Installation using XBOOTLDR</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Installation_using_XBOOTLDR-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Updating_the_UEFI_boot_manager" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Updating_the_UEFI_boot_manager">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.2</span>
+					<span>Updating the UEFI boot manager</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Updating_the_UEFI_boot_manager-sublist" class="vector-toc-list">
+				<li id="toc-Manual_update" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Manual_update">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.2.1</span>
+					<span>Manual update</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Manual_update-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Automatic_update" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Automatic_update">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.2.2</span>
+					<span>Automatic update</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Automatic_update-sublist" class="vector-toc-list">
+				<li id="toc-systemd_service" class="vector-toc-list-item vector-toc-level-4">
+			<a class="vector-toc-link" href="#systemd_service">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.2.2.1</span>
+					<span>systemd service</span>
+				</div>
+			</a>
+			
+			<ul id="toc-systemd_service-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-pacman_hook" class="vector-toc-list-item vector-toc-level-4">
+			<a class="vector-toc-link" href="#pacman_hook">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.2.2.2</span>
+					<span>pacman hook</span>
+				</div>
+			</a>
+			
+			<ul id="toc-pacman_hook-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Signing_for_Secure_Boot" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Signing_for_Secure_Boot">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.3</span>
+					<span>Signing for Secure Boot</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Signing_for_Secure_Boot-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Configuration" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Configuration">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">4</span>
+				<span>Configuration</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Configuration-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Configuration subsection</span>
+			</button>
+		
+		<ul id="toc-Configuration-sublist" class="vector-toc-list">
+			<li id="toc-Loader_configuration" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Loader_configuration">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.1</span>
+					<span>Loader configuration</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Loader_configuration-sublist" class="vector-toc-list">
+				<li id="toc-Remember_last_entry" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Remember_last_entry">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.1.1</span>
+					<span>Remember last entry</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Remember_last_entry-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Adding_loaders" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Adding_loaders">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.2</span>
+					<span>Adding loaders</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Adding_loaders-sublist" class="vector-toc-list">
+				<li id="toc-UEFI_Shells_or_other_EFI_applications" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#UEFI_Shells_or_other_EFI_applications">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.2.1</span>
+					<span>UEFI Shells or other EFI applications</span>
+				</div>
+			</a>
+			
+			<ul id="toc-UEFI_Shells_or_other_EFI_applications-sublist" class="vector-toc-list">
+				<li id="toc-Memtest86+" class="vector-toc-list-item vector-toc-level-4">
+			<a class="vector-toc-link" href="#Memtest86+">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.2.1.1</span>
+					<span>Memtest86+</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Memtest86+-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Netboot" class="vector-toc-list-item vector-toc-level-4">
+			<a class="vector-toc-link" href="#Netboot">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.2.1.2</span>
+					<span>Netboot</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Netboot-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-GRUB" class="vector-toc-list-item vector-toc-level-4">
+			<a class="vector-toc-link" href="#GRUB">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.2.1.3</span>
+					<span>GRUB</span>
+				</div>
+			</a>
+			
+			<ul id="toc-GRUB-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Boot_from_another_disk" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Boot_from_another_disk">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.2.2</span>
+					<span>Boot from another disk</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Boot_from_another_disk-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Booting_into_UEFI_firmware_setup" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Booting_into_UEFI_firmware_setup">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.3</span>
+					<span>Booting into UEFI firmware setup</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Booting_into_UEFI_firmware_setup-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Support_hibernation" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Support_hibernation">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.4</span>
+					<span>Support hibernation</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Support_hibernation-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Kernel_parameters_editor_with_password_protection" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Kernel_parameters_editor_with_password_protection">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.5</span>
+					<span>Kernel parameters editor with password protection</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Kernel_parameters_editor_with_password_protection-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Tips_and_tricks" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Tips_and_tricks">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">5</span>
+				<span>Tips and tricks</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Tips_and_tricks-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Tips and tricks subsection</span>
+			</button>
+		
+		<ul id="toc-Tips_and_tricks-sublist" class="vector-toc-list">
+			<li id="toc-Keys_inside_the_boot_menu" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Keys_inside_the_boot_menu">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.1</span>
+					<span>Keys inside the boot menu</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Keys_inside_the_boot_menu-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Choosing_next_boot" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Choosing_next_boot">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.2</span>
+					<span>Choosing next boot</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Choosing_next_boot-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Unified_kernel_images" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Unified_kernel_images">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.3</span>
+					<span>Unified kernel images</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Unified_kernel_images-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Grml_on_ESP" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Grml_on_ESP">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.4</span>
+					<span>Grml on ESP</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Grml_on_ESP-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Archiso_on_ESP" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Archiso_on_ESP">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.5</span>
+					<span>Archiso on ESP</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Archiso_on_ESP-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-systemd-boot_on_BIOS_systems" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#systemd-boot_on_BIOS_systems">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.6</span>
+					<span>systemd-boot on BIOS systems</span>
+				</div>
+			</a>
+			
+			<ul id="toc-systemd-boot_on_BIOS_systems-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Troubleshooting" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Troubleshooting">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">6</span>
+				<span>Troubleshooting</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Troubleshooting-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Troubleshooting subsection</span>
+			</button>
+		
+		<ul id="toc-Troubleshooting-sublist" class="vector-toc-list">
+			<li id="toc-systemd-boot_does_not_display_my_boot_entry" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#systemd-boot_does_not_display_my_boot_entry">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.1</span>
+					<span>systemd-boot does not display my boot entry</span>
+				</div>
+			</a>
+			
+			<ul id="toc-systemd-boot_does_not_display_my_boot_entry-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Installing_after_booting_in_BIOS_mode" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Installing_after_booting_in_BIOS_mode">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.2</span>
+					<span>Installing after booting in BIOS mode</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Installing_after_booting_in_BIOS_mode-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Manual_entry_using_efibootmgr" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Manual_entry_using_efibootmgr">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.3</span>
+					<span>Manual entry using efibootmgr</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Manual_entry_using_efibootmgr-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Manual_entry_using_bcdedit_from_Windows" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Manual_entry_using_bcdedit_from_Windows">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.4</span>
+					<span>Manual entry using bcdedit from Windows</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Manual_entry_using_bcdedit_from_Windows-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Menu_does_not_appear_after_Windows_upgrade" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Menu_does_not_appear_after_Windows_upgrade">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.5</span>
+					<span>Menu does not appear after Windows upgrade</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Menu_does_not_appear_after_Windows_upgrade-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Add_support_for_Windows_BitLocker_TPM_unlocking" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Add_support_for_Windows_BitLocker_TPM_unlocking">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.6</span>
+					<span>Add support for Windows BitLocker TPM unlocking</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Add_support_for_Windows_BitLocker_TPM_unlocking-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-See_also" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#See_also">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">7</span>
+				<span>See also</span>
+			</div>
+		</a>
+		
+		<ul id="toc-See_also-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+</ul>
+</div>
+
+					</div>
+		</nav>
+			</div>
+		</div>
+		<div class="mw-content-container">
+			<main id="content" class="mw-body" style="margin: 0">
+				<header class="mw-body-header vector-page-titlebar">
+					<nav aria-label="Contents" class="vector-toc-landmark">
+						
+<div id="vector-page-titlebar-toc" class="vector-dropdown vector-page-titlebar-toc vector-button-flush-left">
+	<input type="checkbox" id="vector-page-titlebar-toc-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-page-titlebar-toc" class="vector-dropdown-checkbox " aria-label="Toggle the table of contents">
+	<label id="vector-page-titlebar-toc-label" for="vector-page-titlebar-toc-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"><span class="vector-icon mw-ui-icon-listBullet mw-ui-icon-wikimedia-listBullet"></span>
+
+<span class="vector-dropdown-label-text">Toggle the table of contents</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+							<div id="vector-page-titlebar-toc-unpinned-container" class="vector-unpinned-container">
+			</div>
+		
+	</div>
+</div>
+
+					</nav>
+					<h1 id="firstHeading" class="firstHeading mw-first-heading">systemd-boot</h1>
+							
+<div id="p-lang-btn" class="vector-dropdown mw-portlet mw-portlet-lang">
+	<input type="checkbox" id="p-lang-btn-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-p-lang-btn" class="vector-dropdown-checkbox mw-interlanguage-selector" aria-label="Go to an article in another language. Available in 7 languages">
+	<label id="p-lang-btn-label" for="p-lang-btn-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--action-progressive mw-portlet-lang-heading-7" aria-hidden="true"><span class="vector-icon mw-ui-icon-language-progressive mw-ui-icon-wikimedia-language-progressive"></span>
+
+<span class="vector-dropdown-label-text">7 languages</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+		<div class="vector-menu-content">
+			
+			<ul class="vector-menu-content-list">
+				
+				<li class="interlanguage-link interwiki-de mw-list-item"><a href="https://wiki.archlinux.de/title/Systemd-boot" title="Systemd-boot – Deutsch" lang="de" hreflang="de" data-title="Systemd-boot" data-language-autonym="Deutsch" data-language-local-name="Deutsch" class="interlanguage-link-target"><span>Deutsch</span></a></li>
+<li class="interlanguage-link interwiki-es mw-list-item"><a href="../es/Systemd-boot.html" title="Systemd-boot – español" lang="es" hreflang="es" data-title="Systemd-boot" data-language-autonym="Español" data-language-local-name="español" class="interlanguage-link-target"><span>Español</span></a></li>
+<li class="interlanguage-link interwiki-fr mw-list-item"><a href="../fr/Systemd-boot.html" title="Systemd-boot – français" lang="fr" hreflang="fr" data-title="Systemd-boot" data-language-autonym="Français" data-language-local-name="français" class="interlanguage-link-target"><span>Français</span></a></li>
+<li class="interlanguage-link interwiki-ja mw-list-item"><a href="https://wiki.archlinux.jp/index.php/Systemd-boot" title="Systemd-boot – 日本語" lang="ja" hreflang="ja" data-title="Systemd-boot" data-language-autonym="日本語" data-language-local-name="日本語" class="interlanguage-link-target"><span>日本語</span></a></li>
+<li class="interlanguage-link interwiki-pt mw-list-item"><a href="../pt/Systemd-boot.html" title="Systemd-boot – português" lang="pt" hreflang="pt" data-title="Systemd-boot" data-language-autonym="Português" data-language-local-name="português" class="interlanguage-link-target"><span>Português</span></a></li>
+<li class="interlanguage-link interwiki-ru mw-list-item"><a href="../ru/Systemd-boot.html" title="Systemd-boot – русский" lang="ru" hreflang="ru" data-title="Systemd-boot" data-language-autonym="Русский" data-language-local-name="русский" class="interlanguage-link-target"><span>Русский</span></a></li>
+<li class="interlanguage-link interwiki-zh-hans mw-list-item"><a href="https://wiki.archlinuxcn.org/wiki/Systemd-boot" title="Systemd-boot – 中文（简体）" lang="zh-Hans" hreflang="zh-Hans" data-title="Systemd-boot" data-language-autonym="中文（简体）" data-language-local-name="中文（简体）" class="interlanguage-link-target"><span>中文（简体）</span></a></li>
+			</ul>
+			
+		</div>
+
+	</div>
+</div>
+</header>
+				<div class="vector-column-end">
+					<div class="vector-sticky-pinned-container">
+						<nav class="vector-page-tools-landmark" aria-label="Page tools">
+							<div id="vector-page-tools-pinned-container" class="vector-pinned-container">
+				
+							</div>
+		</nav>
+						<nav class="vector-appearance-landmark" aria-label="Appearance">
+							<div id="vector-appearance-pinned-container" class="vector-pinned-container">
+				<div id="vector-appearance" class="vector-appearance vector-pinnable-element">
+	<div class="vector-pinnable-header vector-appearance-pinnable-header vector-pinnable-header-pinned" data-feature-name="appearance-pinned" data-pinnable-element-id="vector-appearance" data-pinned-container-id="vector-appearance-pinned-container" data-unpinned-container-id="vector-appearance-unpinned-container">
+	<div class="vector-pinnable-header-label">Appearance</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-appearance.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-appearance.unpin">hide</button>
+</div>
+
+
+</div>
+
+							</div>
+		</nav>
+					</div>
+				</div>
+				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container>
+					<div class="vector-body-before-content">
+							<div class="mw-indicators">
+		</div>
+
+						<div id="siteSub" class="noprint">From ArchWiki</div>
+					</div>
+					<div id="contentSub"><div id="mw-content-subtitle"></div></div>
+					
+					
+					<div id="mw-content-text" class="mw-body-content">
+<div class="mw-content-ltr mw-parser-output" lang="en" dir="ltr">
+<p><span>
+</span>
+</p>
+<div class="archwiki-template-meta-related-articles">
+<p>Related articles</p>
+<ul>
+<li><a href="../en/Arch_boot_process.html" title="Arch boot process">Arch boot process</a></li>
+<li><a href="../en/Unified_Extensible_Firmware_Interface/Secure_Boot.html" class="mw-redirect" title="Secure Boot">Secure Boot</a></li>
+<li><a href="../en/Unified_Extensible_Firmware_Interface.html" title="Unified Extensible Firmware Interface">Unified Extensible Firmware Interface</a></li>
+</ul>
+</div>
+<p><span class="plainlinks archwiki-template-man" title="$ man 7 systemd-boot"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd-boot.7">systemd-boot(7)</a></span>, previously called <b>gummiboot</b> (German for "rubber dinghy") and sometimes referred to as <i>sd-boot</i>, is an easy-to-configure <a href="../en/Unified_Extensible_Firmware_Interface.html" class="mw-redirect" title="UEFI">UEFI</a> <a href="../en/Arch_boot_process.html#Boot_loader" class="mw-redirect" title="Boot manager">boot manager</a>. It provides a textual menu to select the boot entry and an editor for the kernel command line.
+</p>
+<p>Note that <i>systemd-boot</i> can only start EFI executables (e.g., the Linux kernel <a href="../en/EFI_boot_stub.html" title="EFI boot stub">EFI boot stub</a>, <a href="../en/Unified_Extensible_Firmware_Interface.html#UEFI_Shell" class="mw-redirect" title="UEFI shell">UEFI shell</a>, <a href="../en/GRUB.html" title="GRUB">GRUB</a>, or the <a rel="nofollow" class="external text" href="https://learn.microsoft.com/en-us/windows-hardware/drivers/bringup/boot-and-uefi#understanding-the-windows-boot-manager">Windows Boot Manager</a>) from the <a href="../en/EFI_system_partition.html" title="EFI system partition">EFI system partition</a> it is installed to or from an Extended Boot Loader Partition (XBOOTLDR partition) on the same disk.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> In the entire article <code><i>esp</i></code> denotes the mountpoint of the <a href="../en/EFI_system_partition.html" title="EFI system partition">EFI system partition</a> and <code><i>boot</i></code> denotes the mountpoint of the optional XBOOTLDR partition. It is assumed that you have <a href="../en/Chroot.html" title="Chroot">chrooted</a> to the system's mount point.</div>
+<meta property="mw:PageProp/toc">
+<h2><span class="mw-headline" id="Supported_file_systems">Supported file systems</span></h2>
+<p>systemd-boot inherits the support for the file systems <a href="../en/Arch_boot_process.html#UEFI" title="Arch boot process">from the firmware</a> (i.e. at least FAT12, FAT16 and FAT32). Additionally it loads any <a href="../en/Unified_Extensible_Firmware_Interface.html#UEFI_drivers" title="Unified Extensible Firmware Interface">UEFI drivers</a> placed in <code><i>esp</i>/EFI/systemd/drivers/</code>.
+</p>
+<h2><span class="mw-headline" id="Installation">Installation</span></h2>
+<p><i>systemd-boot</i> is shipped with the <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=systemd">systemd</a></span> package which is a dependency of the <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=base">base</a></span> meta package, so no additional packages need to be installed manually.
+</p>
+<h2><span class="mw-headline" id="Installing_the_UEFI_boot_manager">Installing the UEFI boot manager</span></h2>
+<p>To install <i>systemd-boot</i>, first make sure that the system is booted into UEFI mode and <a href="../en/Unified_Extensible_Firmware_Interface.html#UEFI_variables" title="Unified Extensible Firmware Interface">UEFI variables</a> are accessible. This can be verified by running <code>efivar --list</code> or, if <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=efivar">efivar</a></span> is not installed, by running <code>ls /sys/firmware/efi/efivars</code> (if the directory exists, the system is booted into UEFI mode.)
+</p>
+<p>Use <span class="plainlinks archwiki-template-man" title="$ man 1 bootctl"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/bootctl.1">bootctl(1)</a></span> to install <i>systemd-boot</i> to the ESP:
+</p>
+<pre># bootctl install
+</pre>
+<p>This will copy the <i>systemd-boot</i> UEFI boot manager to the ESP, create a UEFI boot entry for it and set it as the first in the UEFI boot order.
+</p>
+<ul>
+<li>On an x64 UEFI, <code>/usr/lib/systemd/boot/efi/systemd-bootx64.efi</code> will be copied to <code><i>esp</i>/EFI/systemd/systemd-bootx64.efi</code> and <code><i>esp</i>/EFI/BOOT/BOOTX64.EFI</code>.</li>
+<li>On an IA32 UEFI, <code>/usr/lib/systemd/boot/efi/systemd-bootia32.efi</code> will be copied to <code><i>esp</i>/EFI/systemd/systemd-bootia32.efi</code> and <code><i>esp</i>/EFI/BOOT/BOOTIA32.EFI</code>.</li>
+</ul>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../File:View-refresh-red.svg" decoding="async" width="48" height="48" class="mw-file-element"></span></span><b>This article or section is out of date.</b></p>
+<div>
+<b>Reason:</b> When running in chroot, <i>bootctl</i> <a rel="nofollow" class="external text" href="https://github.com/systemd/systemd/issues/36174">does not create the UEFI boot entry in NVRAM anymore</a> since systemd v257. (Discuss in <a href="../User_talk:Scimmia.html#Revert_on_systemd-boot_about_sd-boot_not_creating_EFI_entries_inside_chroot" title="User talk:Scimmia">User talk:Scimmia#Revert on systemd-boot about sd-boot not creating EFI entries inside chroot</a>)</div>
+</div>
+<p>The UEFI boot entry will be called "Linux Boot Manager" and will point to, depending on the <a href="../en/Unified_Extensible_Firmware_Interface.html#UEFI_firmware_bitness" title="Unified Extensible Firmware Interface">UEFI bitness</a>, either <code>\EFI\systemd\systemd-bootx64.efi</code> or <code>\EFI\systemd\systemd-bootia32.efi</code> on the ESP.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> 
+<ul>
+<li>When running <code>bootctl install</code>, <i>systemd-boot</i> will try to locate the ESP at <code>/efi</code>, <code>/boot</code>, and <code>/boot/efi</code>. Setting <code><i>esp</i></code> to a different location requires passing the <code>--esp-path=<i>esp</i></code> option. (See <span class="plainlinks archwiki-template-man" title="$ man 1 bootctl"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/bootctl.1#OPTIONS">bootctl(1) § OPTIONS</a></span> for details.)</li>
+<li>Installing <i>systemd-boot</i> will overwrite any existing <code><i>esp</i>/EFI/BOOT/BOOTX64.EFI</code> (or <code><i>esp</i>/EFI/BOOT/BOOTIA32.EFI</code> on IA32 UEFI), e.g. Microsoft's version of the file.</li>
+</ul>
+</div>
+<p>To conclude the installation, <a href="#Configuration">configure</a> <i>systemd-boot</i>.
+</p>
+<h3><span class="mw-headline" id="Installation_using_XBOOTLDR">Installation using XBOOTLDR</span></h3>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../File:Tango-go-next.svg" decoding="async" width="48" height="48" class="mw-file-element"></span></span><b>This article or section is a candidate for moving to <a href="../en/Partitioning.html#Discrete_partitions" title="Partitioning">Partitioning#Discrete partitions</a>.</b></p>
+<div>
+<b>Notes:</b> All partitioning info should be moved to partitioning, to leave only steps relevant to installing systemd-boot if you have such a setup. (Discuss in <a rel="nofollow" class="external text" href="../en/Talk:Systemd-boot.html">Talk:Systemd-boot</a>)</div>
+</div>
+<p>A separate <a href="../en/Partitioning.html#/boot" title="Partitioning">/boot partition</a> of type "Linux extended boot" (XBOOTLDR) can be created to keep the kernel and initramfs separate from the ESP. This is particularly helpful to <a href="../en/Dual_boot_with_Windows.html" title="Dual boot with Windows">dual boot with Windows</a> with an existing ESP that is too small.
+</p>
+<p>Prepare an ESP as usual and create another partition for XBOOTLDR on the same physical drive. The XBOOTLDR partition must have a partition type GUID of <code>bc13c2ff-59e6-4262-a352-b275fd6f7172</code> <a rel="nofollow" class="external autonumber" href="https://uapi-group.org/specifications/specs/boot_loader_specification/">[1]</a> (<code>ea00</code> type for <a href="../en/GPT_fdisk.html" class="mw-redirect" title="Gdisk">gdisk</a>, <code>xbootldr</code> type for <a href="../en/Fdisk.html" title="Fdisk">fdisk</a>). The size of the XBOOTLDR partition should be large enough to accommodate all of the kernels you are going to install.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> 
+<ul>
+<li>
+<i>systemd-boot</i> does not do a file system check like it does for the ESP. Hence, it is possible to use any file system that your UEFI implementation can read.</li>
+<li>UEFI may skip loading partitions other than the ESP when a "fast boot" mode is enabled. This can lead to <i>systemd-boot</i> failing to find entries on the XBOOTLDR partition; in that case, disable the "fast boot" mode.</li>
+<li>The XBOOTLDR partition must be on the same physical disk as the ESP for <i>systemd-boot</i> to recognize it.</li>
+</ul>
+</div>
+<p>During install, mount the ESP to <code>/mnt/efi</code> and the XBOOTLDR partition to <code>/mnt/boot</code>.
+</p>
+<p>Once in chroot, use the command:
+</p>
+<pre># bootctl --esp-path=/efi --boot-path=/boot install
+</pre>
+<p>To conclude the installation, <a href="#Configuration">configure</a> <i>systemd-boot</i>.
+</p>
+<h3><span class="mw-headline" id="Updating_the_UEFI_boot_manager">Updating the UEFI boot manager</span></h3>
+<p>Whenever there is a new version of <i>systemd-boot</i>, the UEFI boot manager can be optionally reinstalled by the user. This can be done manually or automatically; the two approaches are described thereafter.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> The UEFI boot manager is a standalone EFI executable and any version can be used to boot the system (partial updates do not apply, since pacman only installs the <i>systemd-boot</i> installer, not <i>systemd-boot</i> itself.) However, new versions may add new features or fix bugs, so it is probably a good idea to update <i>systemd-boot</i>.</div>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Warning:</strong> If you have <a href="../en/Unified_Extensible_Firmware_Interface/Secure_Boot.html" class="mw-redirect" title="Secure Boot">Secure Boot</a> enabled, you need to sign the bootloader update. See <a href="#Signing_for_Secure_Boot">#Signing for Secure Boot</a>.</div>
+<h4><span class="mw-headline" id="Manual_update">Manual update</span></h4>
+<p>Use <i>bootctl</i> to update <i>systemd-boot</i>:
+</p>
+<pre># bootctl update
+</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> As with <code>bootctl install</code>, <i>systemd-boot</i> will try to locate the ESP at <code>/efi</code>, <code>/boot</code>, and <code>/boot/efi</code>. Setting <code><i>esp</i></code> to a different location requires passing the <code>--esp-path=<i>esp</i></code> option.</div>
+<h4><span class="mw-headline" id="Automatic_update">Automatic update</span></h4>
+<p>To update <i>systemd-boot</i> automatically, either use a <a href="../en/Systemd.html#Using_units" title="Systemd">systemd service</a> or a <a href="../en/Pacman.html#Hooks" class="mw-redirect" title="Pacman hook">pacman hook</a>. The two methods are described below.
+</p>
+<h5><span class="mw-headline" id="systemd_service">systemd service</span></h5>
+<p>As of version 250, <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=systemd">systemd</a></span> ships with <code>systemd-boot-update.service</code>. <a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Enabling">Enabling</a> this service will update the bootloader <b>after</b> the next boot.
+</p>
+<h5><span class="mw-headline" id="pacman_hook">pacman hook</span></h5>
+<p>The package <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/systemd-boot-pacman-hook/">systemd-boot-pacman-hook</a></span><sup><small>AUR</small></sup> adds a pacman hook which is executed every time <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=systemd">systemd</a></span> is upgraded.
+</p>
+<p>Rather than installing <i>systemd-boot-pacman-hook</i>, you may prefer to manually place the following file in <code>/etc/pacman.d/hooks/</code>:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/pacman.d/hooks/95-systemd-boot.hook</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Trigger]
+Type = Package
+Operation = Upgrade
+Target = systemd
+
+[Action]
+Description = Gracefully upgrading systemd-boot...
+When = PostTransaction
+Exec = /usr/bin/systemctl restart systemd-boot-update.service</pre>
+<h3><span class="mw-headline" id="Signing_for_Secure_Boot">Signing for Secure Boot</span></h3>
+<p>If you have <a href="../en/Unified_Extensible_Firmware_Interface/Secure_Boot.html" class="mw-redirect" title="Secure Boot">Secure Boot</a> enabled, you may want to add a pacman hook to automatically sign the boot manager upon every upgrade of the package:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/pacman.d/hooks/80-secureboot.hook</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Trigger]
+Operation = Install
+Operation = Upgrade
+Type = Path
+Target = usr/lib/systemd/boot/efi/systemd-boot*.efi
+
+[Action]
+Description = Signing systemd-boot EFI binary for Secure Boot
+When = PostTransaction
+Exec = /bin/sh -c 'while read -r i; do sbsign --key <i>/path/to/keyfile.key</i> --cert <i>/path/to/certificate.crt</i> "$i"; done;'
+Depends = sh
+Depends = sbsigntools
+NeedsTargets</pre>
+<p>Replace <code><i>/path/to/keyfile.key</i></code> and <code><i>/path/to/certificate.crt</i></code> with your signing key and certificate respectively. For better understanding of this hook, consult <span class="plainlinks archwiki-template-man" title="$ man 1 sbsign"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/sbsign.1">sbsign(1)</a></span>.
+</p>
+<p>The created <code>/usr/lib/systemd/boot/efi/systemd-boot*.efi.<i>signed</i></code> will automatically be picked up by <code>bootctl install</code> or <code>bootctl update</code>. See <span class="plainlinks archwiki-template-man" title="$ man 1 bootctl"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/bootctl.1#SIGNED_.EFI_FILES">bootctl(1) § SIGNED .EFI FILES</a></span>.
+</p>
+<p>As an alternative, use <a href="../en/Unified_Extensible_Firmware_Interface/Secure_Boot.html#Automatic_signing_with_the_pacman_hook" title="Unified Extensible Firmware Interface/Secure Boot">sbctl</a>.
+</p>
+<h2><span class="mw-headline" id="Configuration">Configuration</span></h2>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> After changing the configuration, run <code>bootctl</code> (without any arguments) to make sure that systemd-boot will be able to parse it properly.</div>
+<h3><span class="mw-headline" id="Loader_configuration">Loader configuration</span></h3>
+<p>The loader configuration is stored in the file <code><i>esp</i>/loader/loader.conf</code>. See <span class="plainlinks archwiki-template-man" title="$ man 5 loader.conf"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/loader.conf.5#OPTIONS">loader.conf(5) § OPTIONS</a></span> for details.
+</p>
+<p>A loader configuration example is provided below:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;"><i>esp</i>/loader/loader.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">default  arch.conf
+timeout  4
+console-mode max
+editor   no
+</pre>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> 
+<ul>
+<li>systemd-boot does not accept tabs for indentation, use spaces instead.</li>
+<li>
+<code>default</code> and <code>timeout</code> can be changed in the boot menu itself and changes will be stored as UEFI variables <code>LoaderEntryDefault</code> and <code>LoaderConfigTimeout</code>, overriding these options.</li>
+<li>
+<code>bootctl set-default ""</code> and <code>bootctl set-timeout ""</code> can be used to clear the UEFI variables overriding the <code>default</code> and <code>timeout</code> options, respectively.</li>
+<li>If you have set <code>timeout 0</code>, the boot menu can be accessed by pressing <code>Space</code>.</li>
+<li>A basic loader configuration file is located at <code>/usr/share/systemd/bootctl/loader.conf</code>.</li>
+<li>If the bootloader (during the entry selection) appears distorted/uses the wrong resolution you can try to set the <code>console-mode</code> to <code>auto</code> (uses heuristics to select the best resolution), <code>keep</code> (keeps the firmware provided resolution) or <code>2</code> (tries to select the first non-UEFI-standard resolution).</li>
+</ul>
+</div>
+<h4><span class="mw-headline" id="Remember_last_entry">Remember last entry</span></h4>
+<p>The <code>default</code> can be changed to <code>@saved</code> in order to remember the last picked entry on startup. This is useful for when dual booting Windows and the surprise windows auto update pushes you into Linux.
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;"><i>esp</i>/loader/loader.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">default @saved
+...
+</pre>
+<p>Consult <span class="plainlinks archwiki-template-man" title="$ man 5 loader.conf"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/loader.conf.5">loader.conf(5)</a></span> for more details.
+</p>
+<h3><span class="mw-headline" id="Adding_loaders">Adding loaders</span></h3>
+<p><i>systemd-boot</i> will search for <i>.conf</i> files in <code>/loader/entries/</code> on the <a href="../en/EFI_system_partition.html" title="EFI system partition">EFI system partition</a> it was launched from and additionally the <a href="#Installation_using_XBOOTLDR">XBOOTLDR</a> partition on the same disk.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> 
+<ul>
+<li>Entries in <code><i>esp</i>/loader/entries/*.conf</code> can only use files (e.g. kernels, initramfs, images, etc.) in <code><i>esp</i>/</code> and entries in <code><i>boot</i>/loader/entries/*.conf</code> can only use files in <code><i>boot</i>/</code>.</li>
+<li>The file path parameters are relative to the root of your EFI system partition or XBOOTLDR partition. E.g., if your EFI system partition or XBOOTLDR partition is mounted at <code>/boot</code>, then the <code>/boot/vmlinuz-linux</code> file must be specified in the <code>linux</code> key as <code>/vmlinuz-linux</code>.</li>
+<li>When <a href="../en/Unified_Extensible_Firmware_Interface/Secure_Boot.html" class="mw-redirect" title="Secure Boot">Secure Boot</a> is active, <a href="../en/Unified_kernel_image.html" title="Unified kernel image">unified kernel images</a> (UKIs) with an embedded <code>.cmdline</code> ignore all command line options passed to them (either using a boot entry with <code>options</code> or interactively). When Secure Boot is not active, the options passed via the command line override the embedded <code>.cmdline</code>.</li>
+</ul>
+</div>
+<p>An example of loader files launching Arch from a volume using its <a href="../en/Persistent_block_device_naming.html#by-uuid" class="mw-redirect" title="UUID">UUID</a> <code><i>xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx</i></code> is:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;"><i>esp</i>/loader/entries/arch.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">title   Arch Linux
+linux   /vmlinuz-linux
+initrd  /initramfs-linux.img
+options root=UUID=<i>xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx</i> rw</pre>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;"><i>esp</i>/loader/entries/arch-fallback.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">title   Arch Linux (fallback initramfs)
+linux   /vmlinuz-linux
+initrd  /initramfs-linux-fallback.img
+options root=UUID=<i>xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx</i> rw</pre>
+<p>See the <a rel="nofollow" class="external text" href="https://uapi-group.org/specifications/specs/boot_loader_specification/#type-1-boot-loader-specification-entries">Boot Loader Specification</a> for details on all configuration options.
+</p>
+<p><i>systemd-boot</i> will automatically check at boot time for <b>Windows Boot Manager</b> at the location <code>/EFI/Microsoft/Boot/Bootmgfw.efi</code>, <b>Apple macOS Boot Manager</b> in firmware, <a href="../en/Unified_Extensible_Firmware_Interface.html#UEFI_Shell" class="mw-redirect" title="UEFI shell">UEFI shell</a> <code>/shellx64.efi</code> and <b>EFI Default Loader</b> <code>/EFI/BOOT/bootx64.efi</code>, as well as specially prepared kernel files found in <code>/EFI/Linux/</code>. When detected, corresponding entries with titles <code>auto-windows</code>, <code>auto-osx</code>, <code>auto-efi-shell</code> and <code>auto-efi-default</code>, respectively, will be generated. These entries do not require manual loader configuration. However, it does not auto-detect other EFI applications (unlike <a href="../en/REFInd.html" title="REFInd">rEFInd</a>), so for booting the Linux kernel, manual configuration entries must be created.
+</p>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> 
+<ul>
+<li>The available boot entries which have been configured can be listed with the command <code>bootctl list</code>.</li>
+<li>An example entry file is located at <code>/usr/share/systemd/bootctl/arch.conf</code>.</li>
+<li>The <a href="../en/Kernel_parameters.html" title="Kernel parameters">kernel parameters</a> for scenarios such as <a href="../en/LVM.html" title="LVM">LVM</a>, <a href="../en/Dm-crypt.html" class="mw-redirect" title="LUKS">LUKS</a>, <a href="../en/Dm-crypt.html" title="Dm-crypt">dm-crypt</a> or <a href="../en/Btrfs.html" title="Btrfs">Btrfs</a> can be found on the relevant pages.</li>
+</ul>
+</div>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> If <a href="../en/Microcode.html#Microcode_in_a_separate_initramfs_file" title="Microcode">external microcode initramfs images</a> are used (e.g. when using <a href="../en/Booster.html" title="Booster">Booster</a> as the initramfs generator), <code>/boot/amd-ucode.img</code> or <code>/boot/intel-ucode.img</code> must be specified in a separate <code>initrd</code> and always be placed <b>first</b>, before the main initramfs image.</div>
+<h4><span class="mw-headline" id="UEFI_Shells_or_other_EFI_applications">UEFI Shells or other EFI applications</span></h4>
+<p>In case you installed a <a href="../en/Unified_Extensible_Firmware_Interface.html#UEFI_Shell" class="mw-redirect" title="UEFI shell">UEFI shell</a> with the package <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=edk2-shell">edk2-shell</a></span>, <i>systemd-boot</i> will auto-detect and create a new entry if the EFI file is placed in <code><i>esp</i>/shellx64.efi</code>.
+To perform this an example command after installing the package would be:
+</p>
+<pre># cp /usr/share/edk2-shell/x64/Shell.efi /boot/shellx64.efi
+</pre>
+<p>Otherwise in case you installed <a href="../en/REFInd.html#Tools" title="REFInd">other EFI applications</a> into the ESP, you can use the following snippets.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> The file path parameter for the <code>efi</code> line is relative to the root of your <a href="../en/EFI_system_partition.html" title="EFI system partition">EFI system partition</a>. If your EFI system partition is mounted at <code>/boot</code> and your EFI binaries reside at <code>/boot/EFI/xx.efi</code> and <code>/boot/yy.efi</code>, then you would specify the parameters as <code>efi /EFI/xx.efi</code> and <code>efi /yy.efi</code> respectively.</div>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;"><i>esp</i>/loader/entries/fwupd.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">title  Firmware updater
+efi     /EFI/tools/fwupdx64.efi
+</pre>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;"><i>esp</i>/loader/entries/gdisk.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">title  GPT fdisk (gdisk)
+efi     /EFI/tools/gdisk_x64.efi
+</pre>
+<h5>
+<span id="Memtest86.2B"></span><span class="mw-headline" id="Memtest86+">Memtest86+</span>
+</h5>
+<p>You need to install <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=memtest86%2B-efi">memtest86+-efi</a></span> for this to work. Also sign the EFI binary when using Secure Boot.
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;"><i>esp</i>/loader/entries/memtest.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">title Memtest86+
+efi /memtest86+/memtest.efi
+</pre>
+<h5><span class="mw-headline" id="Netboot">Netboot</span></h5>
+<p><i>systemd-boot</i> can chainload <a href="../en/Netboot.html" title="Netboot">Netboot</a>. Download the <code>ipxe-arch.efi</code> EFI binary and signature, verify it and place it as proposed in <code><i>esp</i>/EFI/arch_netboot/arch_netboot.efi</code>.
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;"><i>esp</i>/loader/entries/arch_netboot.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">title Arch Linux Netboot
+efi /EFI/arch_netboot/arch_netboot.efi
+</pre>
+<h5><span class="mw-headline" id="GRUB">GRUB</span></h5>
+<p><i>systemd-boot</i> can chainload <a href="../en/GRUB.html" title="GRUB">GRUB</a>. The location of the <code>grubx64.efi</code> binary matches the used <code>--bootloader-id=</code> when GRUB was installed to the ESP.
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;"><i>esp</i>/loader/entries/grub.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">title GRUB
+efi /EFI/GRUB/grubx64.efi
+</pre>
+<h4><span class="mw-headline" id="Boot_from_another_disk">Boot from another disk</span></h4>
+<p><i>systemd-boot</i> <a rel="nofollow" class="external text" href="https://github.com/systemd/systemd/issues/3252">cannot</a> launch EFI binaries from partitions other than the ESP it is launched from or the XBOOTLDR partition on the same disk, but it can direct the <a href="../en/Unified_Extensible_Firmware_Interface.html#UEFI_Shell" class="mw-redirect" title="UEFI shell">UEFI shell</a> to do so.
+</p>
+<p>First, install <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=edk2-shell">edk2-shell</a></span> as <a href="#UEFI_Shells_or_other_EFI_applications">described above</a>. In the UEFI shell, use the <i>map</i> command to take notes of the <b>FS alias</b> (ex: HD0a66666a2, HD0b, FS1, or BLK7) of the partition with the corresponding PARTUUID.
+</p>
+<p>Then, use the <code>exit</code> command to boot back into Linux, where you can create a new loader entry to run the target EFI program through the UEFI shell:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;"><i>esp</i>/loader/entries/windows.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">title   Windows
+efi     /shellx64.efi
+options -nointerrupt -nomap -noversion HD0b:EFI\Microsoft\Boot\Bootmgfw.efi
+</pre>
+<p>Ensure that the <code>efi</code> path matches the location where the <code>shellx64.efi</code> has been copied in the <i>esp</i> partition. Also, note that the <code>shellx64.efi</code> EFI file can be moved elsewhere to avoid the automatic entry creation by <i>systemd-boot</i>.
+</p>
+<p>Replace <code>HD0b</code> with the previously noted <i>FS alias</i>.
+</p>
+<ul>
+<li>The <code>-nointerrupt</code> option prevents interrupting the target EFI program with <code>Ctrl+c</code>.</li>
+<li>The <code>-nomap -noversion</code> options hide the default UEFI shell greeting.</li>
+<li>To have the UEFI shell automatically return to the bootloader if the target EFI program exits (e.g., due to an error), add the <code>-exit</code> option.</li>
+<li>You can also add the <code>-noconsoleout</code> option if there is still unnecessary output in the UEFI shell.</li>
+</ul>
+<h3><span class="mw-headline" id="Booting_into_UEFI_firmware_setup">Booting into UEFI firmware setup</span></h3>
+<p>systemd-boot will automatically add an entry to boot into UEFI firmware setup if your device's firmware supports rebooting into setup from the OS.
+</p>
+<h3><span class="mw-headline" id="Support_hibernation">Support hibernation</span></h3>
+<p>See <a href="../en/Power_management/Suspend_and_hibernate.html" class="mw-redirect" title="Suspend and hibernate">Suspend and hibernate</a>.
+</p>
+<h3><span class="mw-headline" id="Kernel_parameters_editor_with_password_protection">Kernel parameters editor with password protection</span></h3>
+<p>Alternatively you can install <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/systemd-boot-password/">systemd-boot-password</a></span><sup><small>AUR</small></sup> which supports <code>password</code> basic configuration option. Use <code>sbpctl generate</code> to generate a value for this option.
+</p>
+<p>Install <i>systemd-boot-password</i> with the following command:
+</p>
+<pre># sbpctl install <i>esp</i>
+</pre>
+<p>With enabled editor you will be prompted for your password before you can edit kernel parameters.
+</p>
+<h2><span class="mw-headline" id="Tips_and_tricks">Tips and tricks</span></h2>
+<h3><span class="mw-headline" id="Keys_inside_the_boot_menu">Keys inside the boot menu</span></h3>
+<p>You can use <code>t</code> and <code>T</code> while in the menu to adjust the menu timeout and <code>e</code> to edit the kernel parameters for this boot. Press <code>h</code> to see a short list of useful hotkeys. See <span class="plainlinks archwiki-template-man" title="$ man 7 systemd-boot"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd-boot.7#KEY_BINDINGS">systemd-boot(7) § KEY BINDINGS</a></span> for the full list of available key bindings inside the boot menu.
+</p>
+<h3><span class="mw-headline" id="Choosing_next_boot">Choosing next boot</span></h3>
+<p>The boot manager is integrated with the systemctl command, allowing you to choose what option you want to boot after a reboot. For example, suppose you have built a custom kernel and created an entry file <code><i>esp</i>/loader/entries/arch-custom.conf</code> to boot into it, you can just launch
+</p>
+<pre>$ systemctl reboot --boot-loader-entry=arch-custom.conf
+</pre>
+<p>and your system will reboot into that entry maintaining the default option intact for subsequent boots. To see a list of possible entries pass the <code>--boot-loader-entry=help</code> option.
+</p>
+<p>If you want to boot into the firmware of your motherboard directly, then you can use this command:
+</p>
+<pre>$ systemctl reboot --firmware-setup
+</pre>
+<h3><span class="mw-headline" id="Unified_kernel_images">Unified kernel images</span></h3>
+<p><a href="../en/Unified_kernel_image.html" title="Unified kernel image">Unified kernel images</a> (UKIs) in <code><i>esp</i>/EFI/Linux/</code> are automatically sourced by systemd-boot, and do not need an entry in <code><i>esp</i>/loader/entries</code>. (Note that unified kernel images must have a <code>.efi</code> extension to be identified by <i>systemd-boot</i>.)
+</p>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> Files in <code><i>esp</i>/loader/entries/</code> will be booted first if no <code>default</code> is set in <code><i>esp</i>/loader/loader.conf</code>. Remove those entries, or set the default with the full file name, i.e. <code>default arch-linux.efi</code>
+</div>
+<h3><span class="mw-headline" id="Grml_on_ESP">Grml on ESP</span></h3>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> The following instructions are not exclusive to Grml. With slight adjustments, installing other software (e.g., <a rel="nofollow" class="external text" href="https://www.system-rescue-cd.org/">SystemRescueCD</a>) is possible.</div>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> A <code>PKGBUILD</code> is available: <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/grml-systemd-boot/">grml-systemd-boot</a></span><sup><small>AUR</small></sup>.</div>
+<p><a rel="nofollow" class="external text" href="https://grml.org/">Grml</a> is a small live system with a collection of software for system administration and rescue.
+</p>
+<p>In order to install Grml on the ESP, we only need to copy the kernel <code>vmlinuz</code>, the initramfs <code>initrd.img</code>, and the squashed image <code>grml64-small.squashfs</code> from the iso file to the ESP. To do so, first download <a rel="nofollow" class="external text" href="https://grml.org/">grml64-small.iso</a> and mount the file (the mountpoint is henceforth denoted <i>mnt</i>); the kernel and initramfs are located in <code><i>mnt</i>/boot/grml64small/</code>, and the squashed image resides in <code><i>mnt</i>/live/grml64-small/</code>.
+</p>
+<p>Next, create a directory for Grml in your ESP,
+</p>
+<pre># mkdir -p <i>esp</i>/grml
+</pre>
+<p>and copy the above-mentioned files in there:
+</p>
+<pre># cp <i>mnt</i>/boot/grml64small/vmlinuz <i>esp</i>/grml
+# cp <i>mnt</i>/boot/grml64small/initrd.img <i>esp</i>/grml
+# cp <i>mnt</i>/live/grml64-small/grml64-small.squashfs <i>esp</i>/grml
+</pre>
+<p>In the last step, create an entry for the systemd-boot loader: In <code><i>esp</i>/loader/entries</code> create a <code>grml.conf</code> file with the following content:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;"><i>esp</i>/loader/entries/grml.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">title   Grml Live Linux
+linux   /grml/vmlinuz
+initrd  /grml/initrd.img
+options apm=power-off boot=live live-media-path=/grml/ nomce net.ifnames=0</pre>
+<p>For an overview of the available boot options, consult the <a rel="nofollow" class="external text" href="https://git.grml.org/?p=grml-live.git;a=blob_plain;f=templates/GRML/grml-cheatcodes.txt;hb=HEAD">cheatcode for Grml</a>.
+</p>
+<h3><span class="mw-headline" id="Archiso_on_ESP">Archiso on ESP</span></h3>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> A <code>PKGBUILD</code> is available: <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/archiso-systemd-boot/">archiso-systemd-boot</a></span><sup><small>AUR</small></sup>.</div>
+<p>As with Grml it is possible to use the Arch Linux ISO. To do this we need to copy the kernel <code>vmlinuz-linux</code>, the initramfs <code>initramfs-linux.img</code>, and the squashfs image <code>airootfs.sfs</code> from the ISO file to the EFI system partition.
+</p>
+<p>First download <a rel="nofollow" class="external text" href="https://archlinux.org/download/">archlinux-YYYY.MM.DD-x86_64.iso</a>.
+</p>
+<p>Next, create a directory for archiso in your ESP:
+</p>
+<pre># mkdir -p <i>esp</i>/EFI/archiso
+</pre>
+<p>Extract the contents of the <code>arch</code> directory in there:
+</p>
+<pre># bsdtar -v -x --no-same-permissions --strip-components 1 -f archlinux-<i>YYYY</i>.<i>MM</i>.<i>DD</i>-x86_64.iso -C <i>esp</i>/EFI/archiso arch
+</pre>
+<p>In the last step, create a boot entry for the systemd-boot loader: In <code><i>esp</i>/loader/entries</code> create a <code>arch-rescue.conf</code> file with the following content:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;"><i>esp</i>/loader/entries/arch-rescue.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">title   Arch Linux (rescue system)
+linux   /EFI/archiso/boot/x86_64/vmlinuz-linux
+initrd  /EFI/archiso/boot/x86_64/initramfs-linux.img
+options archisobasedir=/EFI/archiso archisosearchfilename=/EFI/archiso/boot/x86_64/vmlinuz-linux</pre>
+<p>For an overview of the available boot options, consult the <a rel="nofollow" class="external text" href="https://gitlab.archlinux.org/archlinux/mkinitcpio/mkinitcpio-archiso/-/blob/master/docs/README.bootparams">README.bootparams for mkinitcpio-archiso</a>.
+</p>
+<h3><span class="mw-headline" id="systemd-boot_on_BIOS_systems">systemd-boot on BIOS systems</span></h3>
+<p>If you need a bootloader for BIOS systems that follows <a rel="nofollow" class="external text" href="https://uapi-group.org/specifications/specs/boot_loader_specification/">The Boot Loader Specification</a>, then systemd-boot can be pressed into service on BIOS systems. The <a href="../en/Clover.html" title="Clover">Clover</a> boot loader supports booting from BIOS systems and provides a emulated UEFI environment.
+</p>
+<h2><span class="mw-headline" id="Troubleshooting">Troubleshooting</span></h2>
+<h3><span class="mw-headline" id="systemd-boot_does_not_display_my_boot_entry">systemd-boot does not display my boot entry</span></h3>
+<p>This may be caused by a variety of issues with the configuration file, such as the path to the kernel being specified incorrectly. To check, run:
+</p>
+<pre># bootctl
+</pre>
+<h3><span class="mw-headline" id="Installing_after_booting_in_BIOS_mode">Installing after booting in BIOS mode</span></h3>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> This is not recommended.</div>
+<p>If booted in BIOS mode, you can still install <i>systemd-boot</i>, however this process requires you to tell firmware to launch <i>systemd-boot'</i>s EFI file at boot:
+</p>
+<ul>
+<li>you have a working UEFI Shell somewhere else.</li>
+<li>your firmware interface provides a way of properly setting the EFI file that needs to be loaded at boot time.</li>
+<li>some firmware may use the default <code><i>esp</i>/EFI/BOOT/BOOTX64.EFI</code> if there is no other entry set in the UEFI.</li>
+</ul>
+<p>If you can do it, the installation is easier: go into your UEFI Shell or your firmware configuration interface and change your machine's default EFI file to <code><i>esp</i>/EFI/systemd/systemd-bootx64.efi</code>.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> The firmware interface of Dell Latitude series provides everything you need to setup UEFI boot but the UEFI Shell will not be able to write to the computer's ROM.</div>
+<h3><span class="mw-headline" id="Manual_entry_using_efibootmgr">Manual entry using efibootmgr</span></h3>
+<p>If the <code>bootctl install</code> command failed, you can create a UEFI boot entry manually using <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=efibootmgr">efibootmgr</a></span>:
+</p>
+<pre># efibootmgr --create --disk /dev/sd<i>X</i> --part <i>Y</i> --loader '\EFI\systemd\systemd-bootx64.efi' --label "Linux Boot Manager" --unicode
+</pre>
+<p>where <code>/dev/sd<i>XY</i></code> is the <a href="../en/EFI_system_partition.html" title="EFI system partition">EFI system partition</a>.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> The path to the EFI binary must use the backslash (<code>\</code>) as the separator</div>
+<h3><span class="mw-headline" id="Manual_entry_using_bcdedit_from_Windows">Manual entry using bcdedit from Windows</span></h3>
+<p>If for any reason you need to create a UEFI boot entry from Windows, you can use the following commands from an Administrator prompt:
+</p>
+<pre>&gt; bcdedit /copy {bootmgr} /d "Linux Boot Manager"
+&gt; bcdedit /set {<i>guid</i>} path \EFI\systemd\systemd-bootx64.efi
+</pre>
+<p>Replace <code><i>guid</i></code> with the id returned by the first command. You can also set it as the default entry using
+</p>
+<pre>&gt; bcdedit /default {<i>guid</i>}
+</pre>
+<h3><span class="mw-headline" id="Menu_does_not_appear_after_Windows_upgrade">Menu does not appear after Windows upgrade</span></h3>
+<p>See <a href="../en/Unified_Extensible_Firmware_Interface.html#Windows_changes_boot_order" class="mw-redirect" title="UEFI">UEFI#Windows changes boot order</a>.
+</p>
+<h3><span class="mw-headline" id="Add_support_for_Windows_BitLocker_TPM_unlocking">Add support for Windows BitLocker TPM unlocking</span></h3>
+<p>To stop BitLocker from requesting the recovery key, add the following to <i>loader.conf</i>:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;"><i>esp</i>/loader/loader.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">reboot-for-bitlocker yes
+</pre>
+<p>This will set the <i>BootNext</i> UEFI variable, whereby <i>Windows Boot Manager</i> is loaded without BitLocker requiring the recovery key. This is a one-time change, and <i>systemd-boot</i> remains the default bootloader. There is no need to specify Windows as an entry if it was autodetected.
+</p>
+<p>This is an experimental feature, so make sure to consult <span class="plainlinks archwiki-template-man" title="$ man 5 loader.conf"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/loader.conf.5">loader.conf(5)</a></span>.
+</p>
+<h2><span class="mw-headline" id="See_also">See also</span></h2>
+<ul>
+<li><a rel="nofollow" class="external free" href="https://systemd.io/BOOT/">https://systemd.io/BOOT/</a></li>
+<li><a rel="nofollow" class="external free" href="https://bbs.archlinux.org/viewtopic.php?id=254374">https://bbs.archlinux.org/viewtopic.php?id=254374</a></li>
+<li><a rel="nofollow" class="external free" href="https://uapi-group.org/specifications/specs/boot_loader_specification/">https://uapi-group.org/specifications/specs/boot_loader_specification/</a></li>
+</ul>
+</div>
+</div>
+					<div id="catlinks" class="catlinks" data-mw="interface">
+<div id="mw-normal-catlinks" class="mw-normal-catlinks">
+<a href="../Special:Categories.html" title="Special:Categories">Category</a>: <ul><li><a href="../en/Category:Boot_loaders.html" title="Category:Boot loaders">Boot loaders</a></li></ul>
+</div>
+<div id="mw-hidden-catlinks" class="mw-hidden-catlinks mw-hidden-cats-hidden">Hidden categories: <ul>
+<li><a href="../en/Category:Pages_or_sections_flagged_with_Template:Out_of_date.html" title="Category:Pages or sections flagged with Template:Out of date">Pages or sections flagged with Template:Out of date</a></li>
+<li><a href="../en/Category:Pages_or_sections_flagged_with_Template:Move.html" title="Category:Pages or sections flagged with Template:Move">Pages or sections flagged with Template:Move</a></li>
+</ul>
+</div>
+</div>
+				</div>
+			</main>
+			
+		</div>
+		<div class="mw-footer-container">
+			
+<footer id="footer" class="mw-footer" style="margin: 0">
+	<ul id="footer-info">
+	<li data-nosnippet="">Retrieved from "<a dir="ltr" href="https://wiki.archlinux.org/index.php?title=Systemd-boot&amp;oldid=828951">https://wiki.archlinux.org/index.php?title=Systemd-boot&amp;oldid=828951</a>"</li>
+<li id="footer-info-lastmod"> This page was last edited on 15 March 2025, at 11:38.</li>
+	<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+<br>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="https://terms.archlinux.org/docs/privacy-policy/">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="../en/ArchWiki:About.html">About ArchWiki</a></li>
+	<li id="footer-places-disclaimers"><a href="../en/ArchWiki:General_disclaimer.html">Disclaimers</a></li>
+	<li id="footer-places-archwiki-code-of-conduct"><a href="https://terms.archlinux.org/docs/code-of-conduct/" class="extiw" title="archlinux-service-agreements:code-of-conduct">Code of conduct</a></li>
+	<li id="footer-places-archwiki-terms-of-service"><a href="https://terms.archlinux.org/docs/terms-of-service/" class="extiw" title="archlinux-service-agreements:terms-of-service">Terms of service</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-copyrightico"><a href="https://www.gnu.org/copyleft/fdl.html" class="cdx-button cdx-button--fake-button cdx-button--size-large cdx-button--fake-button--enabled"><img src="/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" loading="lazy"></a></li>
+	<li id="footer-poweredbyico"><img src="/resources/assets/poweredby_mediawiki.svg" width="88" height="31" loading="lazy"></li>
+</ul>
+
+</footer>
+
+		</div>
+	</div> 
+</div> 
+<div class="vector-settings" id="p-dock-bottom">
+	<ul></ul>
+</div>
+</body>
+</html>

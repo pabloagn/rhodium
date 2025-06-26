@@ -1,0 +1,40 @@
+<h1>bwa</h1>
+
+<blockquote><p>Burrows-Wheeler Alignment tool.
+Short, low-divergent DNA sequences mapper against a large reference genome, such as the human genome.
+More information: <a href="https://manned.org/bwa">https://manned.org/bwa</a>.</p></blockquote>
+
+<ul>
+<li>Index the reference genome:</li>
+</ul>
+
+
+<p><code>bwa index {{path/to/reference.fa}}</code></p>
+
+<ul>
+<li>Map single-end reads (sequences) to indexed genome using 32 [t]hreads and compress the result to save space:</li>
+</ul>
+
+
+<p><code>bwa mem -t 32 {{path/to/reference.fa}} {{path/to/read_single_end.fq.gz}} | gzip &gt; {{path/to/alignment_single_end.sam.gz}}</code></p>
+
+<ul>
+<li>Map pair-end reads (sequences) to the indexed genome using 32 [t]hreads and compress the result to save space:</li>
+</ul>
+
+
+<p><code>bwa mem -t 32 {{path/to/reference.fa}} {{path/to/read_pair_end_1.fq.gz}} {{path/to/read_pair_end_2.fq.gz}} | gzip &gt; {{path/to/alignment_pair_end.sam.gz}}</code></p>
+
+<ul>
+<li>Map pair-end reads (sequences) to the indexed genome using 32 [t]hreads with [M]arking shorter split hits as secondary for output SAM file compatibility in Picard software and compress the result:</li>
+</ul>
+
+
+<p><code>bwa mem -M -t 32 {{path/to/reference.fa}} {{path/to/read_pair_end_1.fq.gz}} {{path/to/read_pair_end_2.fq.gz}} | gzip &gt; {{path/to/alignment_pair_end.sam.gz}}</code></p>
+
+<ul>
+<li>Map pair-end reads (sequences) to indexed genome using 32 [t]hreads with FASTA/Q [C]omments (e.g. BC:Z:CGTAC) appending to a compressed result:</li>
+</ul>
+
+
+<p><code>bwa mem -C -t 32 {{path/to/reference.fa}} {{path/to/read_pair_end_1.fq.gz}} {{path/to/read_pair_end_2.fq.gz}} | gzip &gt; {{path/to/alignment_pair_end.sam.gz}}</code></p>

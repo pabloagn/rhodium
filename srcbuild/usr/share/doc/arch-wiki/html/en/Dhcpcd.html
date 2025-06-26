@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-sticky-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-0 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-disabled skin-theme-clientpref-day vector-toc-available" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>dhcpcd - ArchWiki</title>
+<link rel="stylesheet" href="../ArchWikiOffline.css">
+<meta name="ResourceLoaderDynamicStyles" content="">
+<meta name="generator" content="MediaWiki 1.43.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="max-image-preview:standard">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.25, maximum-scale=5.0">
+<link rel="search" type="application/opensearchdescription+xml" href="/rest.php/v1/search" title="ArchWiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.archlinux.org/api.php?action=rsd">
+<link rel="license" href="https://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="ArchWiki Atom feed" href="/index.php?title=Special:RecentChanges&amp;feed=atom">
+</head>
+<body class="skin--responsive skin-vector skin-vector-search-vue mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Dhcpcd rootpage-Dhcpcd skin-vector-2022 action-view">
+<a class="mw-jump-link" href="#bodyContent">Jump to content</a>
+<div class="vector-header-container">
+	</div>
+<div class="mw-page-container">
+	<div class="mw-page-container-inner">
+		<div class="vector-column-start">
+			<div class="vector-main-menu-container">
+		</div>
+	<div class="vector-sticky-pinned-container">
+				<nav id="mw-panel-toc" aria-label="Contents" data-event-name="ui.sidebar-toc" class="mw-table-of-contents-container vector-toc-landmark">
+					<div id="vector-toc-pinned-container" class="vector-pinned-container">
+					<div id="vector-toc" class="vector-toc vector-pinnable-element">
+	<div class="vector-pinnable-header vector-toc-pinnable-header vector-pinnable-header-pinned" data-feature-name="toc-pinned" data-pinnable-element-id="vector-toc">
+	<h2 class="vector-pinnable-header-label">Contents</h2>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-toc.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-toc.unpin">hide</button>
+</div>
+
+
+	<ul class="vector-toc-contents" id="mw-panel-toc-list">
+		<li id="toc-mw-content-text" class="vector-toc-list-item vector-toc-level-1">
+			<a href="#" class="vector-toc-link">
+				<div class="vector-toc-text">Beginning</div>
+			</a>
+		</li>
+		<li id="toc-Installation" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Installation">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">1</span>
+				<span>Installation</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Installation-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Running" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Running">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">2</span>
+				<span>Running</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Running-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Configuration" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Configuration">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">3</span>
+				<span>Configuration</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Configuration-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Configuration subsection</span>
+			</button>
+		
+		<ul id="toc-Configuration-sublist" class="vector-toc-list">
+			<li id="toc-DHCP_static_route(s)" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#DHCP_static_route(s)">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1</span>
+					<span>DHCP static route(s)</span>
+				</div>
+			</a>
+			
+			<ul id="toc-DHCP_static_route(s)-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-DHCP_Client_Identifier" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#DHCP_Client_Identifier">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.2</span>
+					<span>DHCP Client Identifier</span>
+				</div>
+			</a>
+			
+			<ul id="toc-DHCP_Client_Identifier-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Static_profile" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Static_profile">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.3</span>
+					<span>Static profile</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Static_profile-sublist" class="vector-toc-list">
+				<li id="toc-Fallback_profile" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Fallback_profile">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.3.1</span>
+					<span>Fallback profile</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Fallback_profile-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Hooks" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Hooks">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">4</span>
+				<span>Hooks</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Hooks-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Hooks subsection</span>
+			</button>
+		
+		<ul id="toc-Hooks-sublist" class="vector-toc-list">
+			<li id="toc-10-wpa_supplicant" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#10-wpa_supplicant">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.1</span>
+					<span>10-wpa_supplicant</span>
+				</div>
+			</a>
+			
+			<ul id="toc-10-wpa_supplicant-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Tips_and_tricks" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Tips_and_tricks">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">5</span>
+				<span>Tips and tricks</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Tips_and_tricks-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Tips and tricks subsection</span>
+			</button>
+		
+		<ul id="toc-Tips_and_tricks-sublist" class="vector-toc-list">
+			<li id="toc-Speed_up_DHCP_by_disabling_ARP_probing" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Speed_up_DHCP_by_disabling_ARP_probing">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.1</span>
+					<span>Speed up DHCP by disabling ARP probing</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Speed_up_DHCP_by_disabling_ARP_probing-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Remove_old_DHCP_lease" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Remove_old_DHCP_lease">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.2</span>
+					<span>Remove old DHCP lease</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Remove_old_DHCP_lease-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Different_IPs_when_multi-booting" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Different_IPs_when_multi-booting">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.3</span>
+					<span>Different IPs when multi-booting</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Different_IPs_when_multi-booting-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-/etc/resolv.conf" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#/etc/resolv.conf">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.4</span>
+					<span>/etc/resolv.conf</span>
+				</div>
+			</a>
+			
+			<ul id="toc-/etc/resolv.conf-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Troubleshooting" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Troubleshooting">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">6</span>
+				<span>Troubleshooting</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Troubleshooting-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Troubleshooting subsection</span>
+			</button>
+		
+		<ul id="toc-Troubleshooting-sublist" class="vector-toc-list">
+			<li id="toc-Client_ID" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Client_ID">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.1</span>
+					<span>Client ID</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Client_ID-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Check_DHCP_problem_by_releasing_IP_first" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Check_DHCP_problem_by_releasing_IP_first">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.2</span>
+					<span>Check DHCP problem by releasing IP first</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Check_DHCP_problem_by_releasing_IP_first-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Problems_with_noncompliant_routers" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Problems_with_noncompliant_routers">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.3</span>
+					<span>Problems with noncompliant routers</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Problems_with_noncompliant_routers-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-dhcpcd_and_systemd_network_interfaces" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#dhcpcd_and_systemd_network_interfaces">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.4</span>
+					<span>dhcpcd and systemd network interfaces</span>
+				</div>
+			</a>
+			
+			<ul id="toc-dhcpcd_and_systemd_network_interfaces-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Timeout_delay" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Timeout_delay">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.5</span>
+					<span>Timeout delay</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Timeout_delay-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Known_issues" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Known_issues">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">7</span>
+				<span>Known issues</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Known_issues-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Known issues subsection</span>
+			</button>
+		
+		<ul id="toc-Known_issues-sublist" class="vector-toc-list">
+			<li id="toc-dhcpcd@.service_causes_slow_startup" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#dhcpcd@.service_causes_slow_startup">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">7.1</span>
+					<span>dhcpcd@.service causes slow startup</span>
+				</div>
+			</a>
+			
+			<ul id="toc-dhcpcd@.service_causes_slow_startup-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-See_also" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#See_also">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">8</span>
+				<span>See also</span>
+			</div>
+		</a>
+		
+		<ul id="toc-See_also-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+</ul>
+</div>
+
+					</div>
+		</nav>
+			</div>
+		</div>
+		<div class="mw-content-container">
+			<main id="content" class="mw-body" style="margin: 0">
+				<header class="mw-body-header vector-page-titlebar">
+					<nav aria-label="Contents" class="vector-toc-landmark">
+						
+<div id="vector-page-titlebar-toc" class="vector-dropdown vector-page-titlebar-toc vector-button-flush-left">
+	<input type="checkbox" id="vector-page-titlebar-toc-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-page-titlebar-toc" class="vector-dropdown-checkbox " aria-label="Toggle the table of contents">
+	<label id="vector-page-titlebar-toc-label" for="vector-page-titlebar-toc-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"><span class="vector-icon mw-ui-icon-listBullet mw-ui-icon-wikimedia-listBullet"></span>
+
+<span class="vector-dropdown-label-text">Toggle the table of contents</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+							<div id="vector-page-titlebar-toc-unpinned-container" class="vector-unpinned-container">
+			</div>
+		
+	</div>
+</div>
+
+					</nav>
+					<h1 id="firstHeading" class="firstHeading mw-first-heading">dhcpcd</h1>
+							
+<div id="p-lang-btn" class="vector-dropdown mw-portlet mw-portlet-lang">
+	<input type="checkbox" id="p-lang-btn-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-p-lang-btn" class="vector-dropdown-checkbox mw-interlanguage-selector" aria-label="Go to an article in another language. Available in 4 languages">
+	<label id="p-lang-btn-label" for="p-lang-btn-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--action-progressive mw-portlet-lang-heading-4" aria-hidden="true"><span class="vector-icon mw-ui-icon-language-progressive mw-ui-icon-wikimedia-language-progressive"></span>
+
+<span class="vector-dropdown-label-text">4 languages</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+		<div class="vector-menu-content">
+			
+			<ul class="vector-menu-content-list">
+				
+				<li class="interlanguage-link interwiki-es mw-list-item"><a href="../es/Dhcpcd.html" title="Dhcpcd – español" lang="es" hreflang="es" data-title="Dhcpcd" data-language-autonym="Español" data-language-local-name="español" class="interlanguage-link-target"><span>Español</span></a></li>
+<li class="interlanguage-link interwiki-ja mw-list-item"><a href="https://wiki.archlinux.jp/index.php/Dhcpcd" title="Dhcpcd – 日本語" lang="ja" hreflang="ja" data-title="Dhcpcd" data-language-autonym="日本語" data-language-local-name="日本語" class="interlanguage-link-target"><span>日本語</span></a></li>
+<li class="interlanguage-link interwiki-ru mw-list-item"><a href="../ru/Dhcpcd.html" title="Dhcpcd – русский" lang="ru" hreflang="ru" data-title="Dhcpcd" data-language-autonym="Русский" data-language-local-name="русский" class="interlanguage-link-target"><span>Русский</span></a></li>
+<li class="interlanguage-link interwiki-zh-hans mw-list-item"><a href="https://wiki.archlinuxcn.org/wiki/Dhcpcd" title="Dhcpcd – 中文（简体）" lang="zh-Hans" hreflang="zh-Hans" data-title="Dhcpcd" data-language-autonym="中文（简体）" data-language-local-name="中文（简体）" class="interlanguage-link-target"><span>中文（简体）</span></a></li>
+			</ul>
+			
+		</div>
+
+	</div>
+</div>
+</header>
+				<div class="vector-column-end">
+					<div class="vector-sticky-pinned-container">
+						<nav class="vector-page-tools-landmark" aria-label="Page tools">
+							<div id="vector-page-tools-pinned-container" class="vector-pinned-container">
+				
+							</div>
+		</nav>
+						<nav class="vector-appearance-landmark" aria-label="Appearance">
+							<div id="vector-appearance-pinned-container" class="vector-pinned-container">
+				<div id="vector-appearance" class="vector-appearance vector-pinnable-element">
+	<div class="vector-pinnable-header vector-appearance-pinnable-header vector-pinnable-header-pinned" data-feature-name="appearance-pinned" data-pinnable-element-id="vector-appearance" data-pinned-container-id="vector-appearance-pinned-container" data-unpinned-container-id="vector-appearance-unpinned-container">
+	<div class="vector-pinnable-header-label">Appearance</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-appearance.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-appearance.unpin">hide</button>
+</div>
+
+
+</div>
+
+							</div>
+		</nav>
+					</div>
+				</div>
+				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container>
+					<div class="vector-body-before-content">
+							<div class="mw-indicators">
+		</div>
+
+						<div id="siteSub" class="noprint">From ArchWiki</div>
+					</div>
+					<div id="contentSub"><div id="mw-content-subtitle"></div></div>
+					
+					
+					<div id="mw-content-text" class="mw-body-content">
+<div class="mw-content-ltr mw-parser-output" lang="en" dir="ltr">
+<p><span>
+</span>
+</p>
+<div class="archwiki-template-meta-related-articles">
+<p>Related articles</p>
+<ul>
+<li><a href="../en/Network_configuration.html" title="Network configuration">Network configuration</a></li>
+<li><a href="../en/Network_configuration/Wireless.html" class="mw-redirect" title="Wireless network configuration">Wireless network configuration</a></li>
+<li><a href="../en/Dhcpd.html" title="Dhcpd">dhcpd</a></li>
+</ul>
+</div>
+<p><i>dhcpcd</i> is a DHCP and DHCPv6 client. It is currently the most feature-rich open source DHCP client; see the <a rel="nofollow" class="external text" href="https://roy.marples.name/projects/dhcpcd">home page</a> for the full list of features.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> Roy Marples' <i>dhcpcd</i> (DHCP <b>client</b> daemon) is not the same as Internet Systems Consortium's <a href="../en/Dhcpd.html" title="Dhcpd">dhcpd</a> (DHCP <b>(server)</b> daemon).</div>
+<meta property="mw:PageProp/toc">
+<h2><span class="mw-headline" id="Installation">Installation</span></h2>
+<p><a href="../en/Help:Reading.html#Installation_of_packages" class="mw-redirect" title="Install">Install</a> the <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=dhcpcd">dhcpcd</a></span> package.
+</p>
+<p><span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/dhcpcd-ui/">dhcpcd-ui</a></span><sup><small>AUR</small></sup> is a <a href="../en/GTK.html" title="GTK">GTK</a> frontend for the <i>dhcpcd</i> daemon, and optionally <a href="../en/Wpa_supplicant.html" title="Wpa supplicant">wpa_supplicant</a>. It features a configuration dialogue and the ability to enter a pass phrase for wireless networks.
+</p>
+<h2><span class="mw-headline" id="Running">Running</span></h2>
+<p>To start the daemon for <i>all</i> network interfaces, <a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Start/enable">start/enable</a> <code>dhcpcd.service</code>.
+</p>
+<p>To start the daemon for a specific interface alone, <a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Start/enable">start/enable</a> the template unit <code>dhcpcd@<i>interface</i>.service</code>, where <i>interface</i> can be found with <a href="../en/Network_configuration.html#Listing_network_interfaces" title="Network configuration">Network configuration#Listing network interfaces</a>.
+</p>
+<p>Using the template unit is recommended; see <a href="#dhcpcd_and_systemd_network_interfaces">#dhcpcd and systemd network interfaces</a> for details. In either case, you will be assigned a dynamic IP address. To assign a static IP address, see <a href="#Static_profile">#Static profile</a>.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> Each network interface should be managed by only one <a href="../en/Network_configuration.html#Network_managers" title="Network configuration">DHCP client or network manager</a>, so it is advised to run only one DHCP client or network manager on the system. Find a list of the currently running services with <code>systemctl --type=service</code> and then <a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Stop">stop</a> or reconfigure those that conflict.</div>
+<h2><span class="mw-headline" id="Configuration">Configuration</span></h2>
+<p>The main configuration is done in <code>/etc/dhcpcd.conf</code>. See <span class="plainlinks archwiki-template-man" title="$ man 5 dhcpcd.conf"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/dhcpcd.conf.5">dhcpcd.conf(5)</a></span> for details. Some of the frequently used options are highlighted below.
+</p>
+<h3>
+<span id="DHCP_static_route.28s.29"></span><span class="mw-headline" id="DHCP_static_route(s)">DHCP static route(s)</span>
+</h3>
+<p>If you need to add a static route client-side, add it to <code>/etc/dhcpcd.exit-hook</code>. The example shows a new hook-script which adds a static route to a VPN subnet on <code>10.11.12.0/24</code> via a gateway machine at <code>192.168.192.5</code>:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/dhcpcd.exit-hook</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">ip route add 10.11.12.0/24 via 192.168.192.5
+</pre>
+<p>You can add multiple routes to this file.
+</p>
+<h3><span class="mw-headline" id="DHCP_Client_Identifier">DHCP Client Identifier</span></h3>
+<p>The DHCP client may be uniquely identified in different ways by the server:
+</p>
+<ol>
+<li>hostname (or the hostname value sent by the client),</li>
+<li>MAC address of the network interface controller through which the connection is being made, linked to this is the third,</li>
+<li>Identity Association ID (IAID), which is an abstraction layer to differentiate different use-cases and/or interfaces on a single host,</li>
+<li>DHCP Unique Identifier (DUID).</li>
+</ol>
+<p>For a further description, see <a href="https://tools.ietf.org/html/rfc3315#section-4.2" class="extiw" title="rfc:3315">RFC 3315</a>.
+</p>
+<p>It depends on the DHCP-server configuration which options are optional or required to request a DHCP IP lease.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> The <i>dhcpcd</i> default configuration should be sufficient usually. The listed identifiers are determined automatically and manual configuration changes only be required in case of problems.</div> 
+<p>If the <i>dhcpcd</i> default configuration fails to obtain an IP, the following options are available to use in <code>dhcpcd.conf</code>:
+</p>
+<ul>
+<li>
+<code>hostname</code> sends the hostname set in <code>/etc/hostname</code>
+</li>
+<li>
+<code>clientid</code> sends the MAC address as identifier</li>
+<li>
+<code>iaid &lt;interface&gt;</code> derives the IAID to use for DHCP discovery. It has to be used in an interface block (started by <code>interface &lt;interface&gt;</code>, see <a rel="nofollow" class="external autonumber" href="https://bbs.archlinux.org/viewtopic.php?pid=1388376#p1388376">[1]</a>), but more frequently the next option is used:</li>
+<li>
+<code>duid</code> triggers using a combination of DUID and IAID as identifier.</li>
+</ul>
+<p>The DUID value is set in <code>/var/lib/dhcpcd/duid</code>. For efficient DHCP lease operation it is important that it is unique for the system and applies to all network interfaces alike, while the IAID represents an identifier for each of the systems' interfaces (see <a href="https://tools.ietf.org/html/rfc4361#section-6.1" class="extiw" title="rfc:4361">RFC 4361</a>).
+</p>
+<p>Care must be taken on a network running <a href="https://en.wikipedia.org/wiki/Dynamic_DNS" class="extiw" title="wikipedia:Dynamic DNS">Dynamic DNS</a> to ensure that all three IDs are unique. If duplicate DUID values are presented to the DNS server, e.g. in the case where a virtual machine has been cloned and the hostname and MAC have been made unique but the DUID has not been changed, then the result will be that as each client with the duplicated DUID requests a lease the server will remove the predecessor from the DNS record.
+</p>
+<h3><span class="mw-headline" id="Static_profile">Static profile</span></h3>
+<p>Required settings are explained in <a href="../en/Network_configuration.html" title="Network configuration">Network configuration</a>. These typically include the <a href="../en/Network_configuration.html#Network_interfaces" class="mw-redirect" title="Network interface">network interface</a> name, <i>IP address</i>, <i>router address</i>, and <i>name server</i>.
+</p>
+<p>Configure a static profile for <i>dhcpcd</i> in <code>/etc/dhcpcd.conf</code>, for example: 
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/dhcpcd.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">interface eth0
+static ip_address=192.168.0.10/24	
+static routers=192.168.0.1
+static domain_name_servers=192.168.0.1 8.8.8.8</pre>
+<p>More complicated configurations are possible, for example combining with the <code>arping</code> option. See <span class="plainlinks archwiki-template-man" title="$ man 5 dhcpcd.conf"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/dhcpcd.conf.5">dhcpcd.conf(5)</a></span> for details.
+</p>
+<h4><span class="mw-headline" id="Fallback_profile">Fallback profile</span></h4>
+<p>It is possible to configure a static profile within <i>dhcpcd</i> and fall back to it when DHCP lease fails. This is useful particularly for <a href="https://en.wikipedia.org/wiki/Headless_computer" class="extiw" title="wikipedia:Headless computer">headless machines</a>, where the static profile can be used as "recovery" profile to ensure that it is always possible to connect to the machine.
+</p>
+<p>The following example configures a <code>static_eth0</code> profile with <code>192.168.1.23</code> as IP address, <code>192.168.1.1</code> as gateway and name server, and makes this profile fallback for interface <code>eth0</code>.
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/dhcpcd.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;"># define static profile
+profile static_eth0
+static ip_address=192.168.1.23/24
+static routers=192.168.1.1
+static domain_name_servers=192.168.1.1
+
+# fallback to static profile on eth0
+interface <i>eth0</i>
+fallback static_eth0</pre>
+<h2><span class="mw-headline" id="Hooks">Hooks</span></h2>
+<p><i>dhcpcd</i> executes all scripts found in <code>/usr/lib/dhcpcd/dhcpcd-hooks/</code> in a lexical order. See <span class="plainlinks archwiki-template-man" title="$ man 5 dhcpcd.conf"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/dhcpcd.conf.5">dhcpcd.conf(5)</a></span> and <span class="plainlinks archwiki-template-man" title="$ man 8 dhcpcd-run-hooks"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/dhcpcd-run-hooks.8">dhcpcd-run-hooks(8)</a></span> for details.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> 
+<ul>
+<li>Each script can be disabled using the <code>nohook</code> option in <code>dhcpcd.conf</code>.</li>
+<li>The <code>env</code> option can be used to set an environment variable for <b>all</b> hooks. For example, you can force the hostname hook to always set the hostname with <code>env force_hostname=YES</code>.</li>
+</ul>
+</div>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../File:Tango-view-fullscreen.svg" decoding="async" width="48" height="48" class="mw-file-element"></span></span><b>This article or section needs expansion.</b></p>
+<div>
+<b>Reason:</b> describe (at least some) provided hooks. (Discuss in <a rel="nofollow" class="external text" href="../en/Talk:Dhcpcd.html">Talk:Dhcpcd</a>)</div>
+</div>
+<h3><span class="mw-headline" id="10-wpa_supplicant">10-wpa_supplicant</span></h3>
+<p>Enable this hook by creating a symbolic link, which ensures the current version is used, even after package updates:
+</p>
+<pre># ln -s /usr/share/dhcpcd/hooks/10-wpa_supplicant /usr/lib/dhcpcd/dhcpcd-hooks/
+</pre>
+<p>The <code>10-wpa_supplicant</code> hook, if enabled, automatically launches <a href="../en/Wpa_supplicant.html" title="Wpa supplicant">wpa_supplicant</a> on wireless interfaces. It is started only if:
+</p>
+<ul>
+<li>no <i>wpa_supplicant</i> process is already listening on that interface.</li>
+<li>a <i>wpa_supplicant</i> configuration file exists. <i>dhcpcd</i> checks</li>
+</ul>
+<pre>/etc/wpa_supplicant/wpa_supplicant-<i>interface</i>.conf
+/etc/wpa_supplicant/wpa_supplicant.conf
+/etc/wpa_supplicant-<i>interface</i>.conf
+/etc/wpa_supplicant.conf
+</pre>
+<p>by default, in that order, but a custom path can be set by adding <code>env wpa_supplicant_conf=<i>configuration_file_path</i></code> into <code>/etc/dhcpcd.conf</code>.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> The hook stops at the first configuration file found, thus you should take this into consideration if you have several <i>wpa_supplicant</i> configuration files, otherwise <i>dhcpcd</i> might end up using the wrong file.</div>
+<p>If you manage wireless connections with <i>wpa_supplicant</i> itself, the hook may create unwanted connection events. For example, if you stop <i>wpa_supplicant</i> the hook may bring the interface up again. Also, if you use <a href="../en/Netctl.html#Special_systemd_units" title="Netctl">netctl-auto</a>, <i>wpa_supplicant</i> is started automatically with <code>/run/network/wpa_supplicant_<i>interface</i>.conf</code> for config, so starting it again from the hook is unnecessary and may result in boot-time parse errors of the <code>/etc/wpa_supplicant/wpa_supplicant.conf</code> file, which only contains dummy values in the default packaged version. 
+</p>
+<p>To disable the hook remove the symbolic link you added, or add <code>nohook wpa_supplicant</code> to <code>dhcpcd.conf</code>.
+</p>
+<h2><span class="mw-headline" id="Tips_and_tricks">Tips and tricks</span></h2>
+<h3><span class="mw-headline" id="Speed_up_DHCP_by_disabling_ARP_probing">Speed up DHCP by disabling ARP probing</span></h3>
+<p><i>dhcpcd</i> contains an implementation of a recommendation of the DHCP standard (<a href="https://tools.ietf.org/html/rfc2131#section-2.2" class="extiw" title="rfc:2131">RFC 2131</a>) to verify via ARP if the assigned IP is not used by something else. This is usually not needed in home networks, so it is possible to save about 5 seconds on every connect by disabling it:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/dhcpcd.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">noarp
+</pre>
+<p>This is equivalent to passing <code>--noarp</code> to <code>dhcpcd</code>, and disables the described ARP probing, speeding up connections to networks with DHCP.
+</p>
+<h3><span class="mw-headline" id="Remove_old_DHCP_lease">Remove old DHCP lease</span></h3>
+<p>The file <code>/var/lib/dhcpcd/<i>interface</i>.lease</code>, where <code><i>interface</i></code> is the name of the interface on which you have a lease, contains the actual DHCP lease reply sent by the DHCP server. For a wireless interface, the filename is <code>/var/lib/dhcpcd/<i>interface</i>-<i>ssid</i>.lease</code>, where <code><i>ssid</i></code> is the name of the wireless network. It is used to determine the last lease from the server, and its <code>mtime</code> attribute is used to determine when it was issued. This last lease information is then used to request the same IP address previously held on a network, if it is available. If you do not want that, simply delete this file. 
+</p>
+<p>If the DHCP server still assigns the same IP address, this may happen because it is configured to keep the assignment stable and recognizes the requesting DHCP client id or DUID (see <a href="#DHCP_Client_Identifier">#DHCP Client Identifier</a>). You can test it by stopping <i>dhcpcd</i> and removing or renaming <code>/var/lib/dhcpcd/duid</code>. <i>dhcpcd</i> will generate a new one on next run. 
+</p>
+<p>Keep in mind that the DUID is intended as persistent machine identifier across reboots and interfaces. If you are transferring the system to new computer, preserving this file should make it appear as old one.
+</p>
+<h3><span class="mw-headline" id="Different_IPs_when_multi-booting">Different IPs when multi-booting</span></h3>
+<p>If you are dualbooting Arch and macOS or Windows and want each to receive different IP addresses, you can exert control about the IPs leased by specifying a different DUID in each operating system installation. 
+</p>
+<p>In Windows the DUID should be stored in the 
+</p>
+<pre>\HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip6\Parameters\Dhcpv6DUID 
+</pre>
+<p>registry key. 
+</p>
+<p>On macOS it is directly accessible in <code>Network\adapter\dhcp preferences panel</code>.
+</p>
+<p>If you are using a <a href="../en/Dnsmasq.html" title="Dnsmasq">dnsmasq</a> DHCP server, the different DUIDs can be used in appropriate <code>dhcp-host=</code> rules in its configuration.
+</p>
+<h3>
+<span id=".2Fetc.2Fresolv.conf"></span><span class="mw-headline" id="/etc/resolv.conf">/etc/resolv.conf</span>
+</h3>
+<p>If <a href="../en/Openresolv.html" class="mw-redirect" title="Resolvconf">resolvconf</a> is available, DNS information will be sent to it; otherwise, <i>dhcpcd</i> itself will write to <code>/etc/resolv.conf</code>.
+</p>
+<p><code>/etc/resolv.conf</code> overwriting can be stopped by disabling the hook <code>/usr/lib/dhcpcd/dhcpcd-hooks/20-resolv.conf</code>. Do so by adding the following to the last section of <code>/etc/dhcpcd.conf</code>: 
+</p>
+<pre>nohook resolv.conf
+</pre>
+<p>Note that disabling this hook also disables dhcpcd's use of resolvconf in general.
+</p>
+<p>Alternatively, you can create a file called <code>/etc/resolv.conf.head</code> containing your DNS servers. <i>dhcpcd</i> will prepend this file to the beginning of <code>/etc/resolv.conf</code>.
+</p>
+<p>Or you can configure dhcpcd to use the same DNS servers every time. To do this, add the following line at the end of your <code>/etc/dhcpcd.conf</code>, where <code><i>dns-server-ip-addressses</i></code> is a space separated list of DNS IP addresses.
+</p>
+<pre>static domain_name_servers=<i>dns-server-ip-addresses</i>
+</pre>
+<p>For example, to set it to Google's DNS servers:
+</p>
+<pre>static domain_name_servers=8.8.8.8 8.8.4.4
+</pre>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> When using <a href="../en/Openresolv.html" title="Openresolv">openresolv</a>, DNS servers can instead be set in <code>/etc/resolvconf.conf</code>. This way they will not get overwritten by any <i>resolvconf</i> supporting software.</div>
+<h2><span class="mw-headline" id="Troubleshooting">Troubleshooting</span></h2>
+<h3><span class="mw-headline" id="Client_ID">Client ID</span></h3>
+<p>If you are on a network with DHCPv4 that filters Client IDs based on MAC addresses, you may need to change the following line:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/dhcpcd.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;"># Use the same DUID + IAID as set in DHCPv6 for DHCPv4 Client ID as per RFC4361. 
+duid
+</pre>
+<p>To:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/dhcpcd.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;"># Use the hardware address of the interface for the Client ID (DHCPv4).
+clientid
+</pre>
+<p>Else, you may not obtain a lease since the DHCP server may not read your <a href="https://en.wikipedia.org/wiki/DHCPv6" class="extiw" title="wikipedia:DHCPv6">DHCPv6-style</a> Client ID correctly. See <a href="https://tools.ietf.org/html/rfc4361" class="extiw" title="rfc:4361">RFC 4361</a> for more information.
+</p>
+<h3><span class="mw-headline" id="Check_DHCP_problem_by_releasing_IP_first">Check DHCP problem by releasing IP first</span></h3>
+<p>A problem may occur when DHCP gets a wrong IP assignment, such as when two routers are tied together through a VPN. The router that is connected through the VPN may be assigning IP address. To fix it, as root, release the IP address:
+</p>
+<pre># dhcpcd -k
+</pre>
+<p>Then request a new one:
+</p>
+<pre># dhcpcd
+</pre>
+<p>You may have to run those two commands many times.
+</p>
+<h3><span class="mw-headline" id="Problems_with_noncompliant_routers">Problems with noncompliant routers</span></h3>
+<p>For some (noncompliant) routers, you will not be able to connect properly unless you comment the line
+</p>
+<pre>require dhcp_server_identifier
+</pre>
+<p>in <code>/etc/dhcpcd.conf</code>. This should not cause issues unless you have multiple DHCP servers on your network (not typical); see <a rel="nofollow" class="external text" href="https://technet.microsoft.com/en-us/library/cc977442.aspx">this page</a> for more information.
+</p>
+<h3><span class="mw-headline" id="dhcpcd_and_systemd_network_interfaces">dhcpcd and systemd network interfaces</span></h3>
+<p><code>dhcpcd.service</code> can be <a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Enabled">enabled</a> without specifying an interface. This may, however, create a race condition at boot with <i>systemd-udevd</i> trying to apply a predictable network interface name: 
+</p>
+<pre>error changing net interface name wlan0 to wlp4s0: Device or resource busy" 
+</pre>
+<p>To avoid this problem use <code>denyinterfaces</code> or <code>allowinterfaces</code> in <span class="plainlinks archwiki-template-man" title="$ man 5 dhcpcd.conf"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/dhcpcd.conf.5">dhcpcd.conf(5)</a></span> to stop dhcpcd from binding to kernel names, for example:
+</p>
+<pre>denyinterfaces wlan* eth*
+</pre>
+<p>It is also possible to enable <i>dhcpcd</i> on a per interface basis as described in <a href="#Running">#Running</a>. The downside of the template unit is, however, that it does not support hot-plugging of a wired connection and will fail if the network cable is not connected. To work-around the failure, see <a href="#Timeout_delay">#Timeout delay</a>.
+</p>
+<h3><span class="mw-headline" id="Timeout_delay">Timeout delay</span></h3>
+<p>If <i>dhcpcd</i> operates on a single interface and fails to obtain a lease after 30 seconds (for example when the server is not ready or the cable not plugged), it will exit with an error. 
+</p>
+<p>To have <i>dhcpcd</i> wait indefinitely for one-time, <a href="../en/Systemd.html#Editing_provided_units" class="mw-redirect" title="Edit">edit</a> the unit and set the <code>timeout</code> option to <code>0</code>:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/system/dhcpcd@.service.d/timeout.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Service]
+ExecStart=
+ExecStart=/usr/bin/dhcpcd -w -q <b>-t 0</b> %I</pre>
+<p>To have it wait indefinitely, let the unit restart after it exited: 
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/system/dhcpcd@.service.d/dhcpcdrestart.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Service]
+Restart=always</pre>
+<h2><span class="mw-headline" id="Known_issues">Known issues</span></h2>
+<h3>
+<span id="dhcpcd.40.service_causes_slow_startup"></span><span class="mw-headline" id="dhcpcd@.service_causes_slow_startup">dhcpcd@.service causes slow startup</span>
+</h3>
+<p>By default the <code>dhcpcd@.service</code> waits to get an IP address before forking into the background via the <code>-w</code> flag for <i>dhcpcd</i>. If the unit is enabled, this may cause the boot to wait for an IP address before continuing. To fix this, create a <a href="../en/Systemd.html#Drop-in_files" class="mw-redirect" title="Drop-in file">drop-in file</a> for the unit with the following:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/system/dhcpcd@.service.d/no-wait.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Service]
+ExecStart=
+ExecStart=/usr/bin/dhcpcd -b -q %I</pre>
+<p>See also <a rel="nofollow" class="external text" href="https://bugs.archlinux.org/task/49685">FS#49685</a>.
+</p>
+<h2><span class="mw-headline" id="See_also">See also</span></h2>
+<ul>
+<li><span class="plainlinks archwiki-template-man" title="$ man 8 dhcpcd"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/dhcpcd.8">dhcpcd(8)</a></span></li>
+<li><span class="plainlinks archwiki-template-man" title="$ man 5 dhcpcd.conf"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/dhcpcd.conf.5">dhcpcd.conf(5)</a></span></li>
+</ul>
+</div>
+</div>
+					<div id="catlinks" class="catlinks" data-mw="interface">
+<div id="mw-normal-catlinks" class="mw-normal-catlinks">
+<a href="../Special:Categories.html" title="Special:Categories">Categories</a>: <ul>
+<li><a href="../en/Category:DHCP.html" title="Category:DHCP">DHCP</a></li>
+<li><a href="../en/Category:Commands.html" title="Category:Commands">Commands</a></li>
+</ul>
+</div>
+<div id="mw-hidden-catlinks" class="mw-hidden-catlinks mw-hidden-cats-hidden">Hidden category: <ul><li><a href="../en/Category:Pages_or_sections_flagged_with_Template:Expansion.html" title="Category:Pages or sections flagged with Template:Expansion">Pages or sections flagged with Template:Expansion</a></li></ul>
+</div>
+</div>
+				</div>
+			</main>
+			
+		</div>
+		<div class="mw-footer-container">
+			
+<footer id="footer" class="mw-footer" style="margin: 0">
+	<ul id="footer-info">
+	<li data-nosnippet="">Retrieved from "<a dir="ltr" href="https://wiki.archlinux.org/index.php?title=Dhcpcd&amp;oldid=822048">https://wiki.archlinux.org/index.php?title=Dhcpcd&amp;oldid=822048</a>"</li>
+<li id="footer-info-lastmod"> This page was last edited on 3 December 2024, at 10:53.</li>
+	<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+<br>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="https://terms.archlinux.org/docs/privacy-policy/">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="../en/ArchWiki:About.html">About ArchWiki</a></li>
+	<li id="footer-places-disclaimers"><a href="../en/ArchWiki:General_disclaimer.html">Disclaimers</a></li>
+	<li id="footer-places-archwiki-code-of-conduct"><a href="https://terms.archlinux.org/docs/code-of-conduct/" class="extiw" title="archlinux-service-agreements:code-of-conduct">Code of conduct</a></li>
+	<li id="footer-places-archwiki-terms-of-service"><a href="https://terms.archlinux.org/docs/terms-of-service/" class="extiw" title="archlinux-service-agreements:terms-of-service">Terms of service</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-copyrightico"><a href="https://www.gnu.org/copyleft/fdl.html" class="cdx-button cdx-button--fake-button cdx-button--size-large cdx-button--fake-button--enabled"><img src="/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" loading="lazy"></a></li>
+	<li id="footer-poweredbyico"><img src="/resources/assets/poweredby_mediawiki.svg" width="88" height="31" loading="lazy"></li>
+</ul>
+
+</footer>
+
+		</div>
+	</div> 
+</div> 
+<div class="vector-settings" id="p-dock-bottom">
+	<ul></ul>
+</div>
+</body>
+</html>

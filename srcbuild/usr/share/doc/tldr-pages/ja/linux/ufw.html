@@ -1,0 +1,61 @@
+<h1>ufw</h1>
+
+<blockquote><p>シンプルなファイアウォール。
+ファイアウォールの設定を簡単にすることを目的とした <code>iptables</code> のフロントエンドです。
+もっと詳しく: <a href="https://wiki.ubuntu.com/UncomplicatedFirewall">https://wiki.ubuntu.com/UncomplicatedFirewall</a>。</p></blockquote>
+
+<ul>
+<li>ufw を有効化:</li>
+</ul>
+
+
+<p><code>ufw enable</code></p>
+
+<ul>
+<li>ufw を無効化:</li>
+</ul>
+
+
+<p><code>ufw disable</code></p>
+
+<ul>
+<li>ufw ルールを、番号と共に表示する:</li>
+</ul>
+
+
+<p><code>ufw status numbered</code></p>
+
+<ul>
+<li>このホストのポート 5432 へのトラフィックを、サービスを識別するコメント付きで許可:</li>
+</ul>
+
+
+<p><code>ufw allow {{5432}} comment "{{Service}}"</code></p>
+
+<ul>
+<li>192.168.0.4 からこのホストの任意のアドレスへのポート 22 の TCP トラフィックのみを許可:</li>
+</ul>
+
+
+<p><code>ufw allow proto {{tcp}} from {{192.168.0.4}} to {{any}} port {{22}}</code></p>
+
+<ul>
+<li>このホストのポート 80 のトラフィックを拒否:</li>
+</ul>
+
+
+<p><code>ufw deny {{80}}</code></p>
+
+<ul>
+<li>8412:8500 の範囲のポートへの全ての UDP トラフィックを拒否:</li>
+</ul>
+
+
+<p><code>ufw deny proto {{udp}} from {{any}} to {{any}} port {{8412:8500}}</code></p>
+
+<ul>
+<li>特定のルールを削除する。ルール番号は <code>ufw status numbered</code> コマンドで取得できる:</li>
+</ul>
+
+
+<p><code>ufw delete {{ルール番号}}</code></p>

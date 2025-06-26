@@ -1,0 +1,61 @@
+<h1>curl</h1>
+
+<blockquote><p>Zet gegevens over van of naar een server.
+Ondersteunt de meeste protocollen, waaronder HTTP, HTTPS, FTP, SCP, enz.
+Meer informatie: <a href="https://curl.se/docs/manpage.html">https://curl.se/docs/manpage.html</a>.</p></blockquote>
+
+<ul>
+<li>Maak een HTTP GET-verzoek en dump de inhoud naar <code>stdout</code>:</li>
+</ul>
+
+
+<p><code>curl {{https://example.com}}</code></p>
+
+<ul>
+<li>Maak een HTTP GET-verzoek, vo[L]g eventuele <code>3xx</code> redirects, en [D]ump de antwoordheaders en inhoud naar <code>stdout</code>:</li>
+</ul>
+
+
+<p><code>curl {{[-L|--location]}} {{[-D|--dump-header]}} - {{https://example.com}}</code></p>
+
+<ul>
+<li>Download een bestand en sla de [U]itvoer op onder de bestandsnaam zoals aangegeven door de URL:</li>
+</ul>
+
+
+<p><code>curl {{[-O|--remote-name]}} {{https://example.com/filename.zip}}</code></p>
+
+<ul>
+<li>Stuur form-encoded [g]egevens (POST-verzoek van het type <code>application/x-www-form-urlencoded</code>). Gebruik <code>--data @file_name</code> of <code>--data @'-'</code> om van <code>stdin</code> te lezen:</li>
+</ul>
+
+
+<p><code>curl {{[-X|--request]}} POST {{[-d|--data]}} {{'name=bob'}} {{http://example.com/form}}</code></p>
+
+<ul>
+<li>Stuur een verzoek met een extra header, met behulp van een aangepaste HTTP-methode en via een pro[x]y (zoals BurpSuite), waarbij onveilige zelfondertekende certificaten worden genegeerd:</li>
+</ul>
+
+
+<p><code>curl {{[-k|--insecure]}} {{[-x|--proxy]}} {{http://127.0.0.1:8080}} {{[-H|--header]}} {{'Authorization: Bearer token'}} {{[-X|--request]}} {{GET|PUT|POST|DELETE|PATCH|...}} {{https://example.com}}</code></p>
+
+<ul>
+<li>Verstuur gegevens in JSON-formaat, met de juiste Content-Type [H]eader:</li>
+</ul>
+
+
+<p><code>curl {{[-d|--data]}} {{'{"name":"bob"}'}} {{[-H|--header]}} {{'Content-Type: application/json'}} {{http://example.com/users/1234}}</code></p>
+
+<ul>
+<li>Verstrek een clientcertificaat en sleutel voor een bron, en sla de certificaatvalidatie over:</li>
+</ul>
+
+
+<p><code>curl {{[-E|--cert]}} {{client.pem}} --key {{key.pem}} {{[-k|--insecure]}} {{https://example.com}}</code></p>
+
+<ul>
+<li>Los een hostnaam op naar een aangepast IP-adres, met [v]erbose uitvoer (vergelijkbaar met het bewerken van het <code>/etc/hosts</code>-bestand voor aangepaste DNS-resolutie):</li>
+</ul>
+
+
+<p><code>curl {{[-v|--verbose]}} --resolve {{example.com}}:{{80}}:{{127.0.0.1}} {{http://example.com}}</code></p>

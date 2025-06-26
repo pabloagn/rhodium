@@ -1,0 +1,40 @@
+<h1>llvm-mc</h1>
+
+<blockquote><p>LLVM Machine Code Playground. It provides a set of tools for working with LLVM machine code.
+Part of LLVM.
+More information: <a href="https://llvm.org/docs/CommandGuide/llvm-mc.html">https://llvm.org/docs/CommandGuide/llvm-mc.html</a>.</p></blockquote>
+
+<ul>
+<li>Assemble assembly code file into object file with machine code:</li>
+</ul>
+
+
+<p><code>llvm-mc --filetype=obj -o {{path/to/output.o}} {{path/to/input.s}}</code></p>
+
+<ul>
+<li>Disassemble object file with machine code into assembly code file:</li>
+</ul>
+
+
+<p><code>llvm-mc --disassemble -o {{path/to/output.s}} {{path/to/input.o}}</code></p>
+
+<ul>
+<li>Compile LLVM bit code file into assembly code:</li>
+</ul>
+
+
+<p><code>llvm-mc -o {{path/to/output.s}} {{path/to/input.bc}}</code></p>
+
+<ul>
+<li>Assemble assembly code from standard input stream and show encoding to standard output stream:</li>
+</ul>
+
+
+<p><code>echo "{{addl %eax, %ebx}}" | llvm-mc -show-encoding -show-inst</code></p>
+
+<ul>
+<li>Disassemble machine code from standard input stream for specified triple:</li>
+</ul>
+
+
+<p><code>echo "{{0xCD 0x21}}" | llvm-mc --disassemble -triple={{target_name}}</code></p>

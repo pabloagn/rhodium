@@ -1,0 +1,54 @@
+<h1>sed</h1>
+
+<blockquote><p>スクリプタブルな方法でテキストを編集します。
+<code>awk</code>, <code>ed</code> も参照してください。
+もっと詳しく: <a href="https://www.gnu.org/software/sed/manual/sed.html">https://www.gnu.org/software/sed/manual/sed.html</a>。</p></blockquote>
+
+<ul>
+<li>全ての入力行の <code>apple</code> (基本正規表現)を <code>mango</code> (基本正規表現)に置換し、結果を<code>stdout</code>に出力する:</li>
+</ul>
+
+
+<p><code>{{command}} | sed 's/apple/mango/g'</code></p>
+
+<ul>
+<li>全ての入力行で出現する全ての <code>apple</code> (拡張正規表現)を <code>APPLE</code> (拡張正規表現)に置換し、結果を<code>stdout</code>に出力する:</li>
+</ul>
+
+
+<p><code>{{command}} | sed {{[-E|--regexp-extended]}} 's/(apple)/\U\1/g'</code></p>
+
+<ul>
+<li>特定のファイルに出現する全ての <code>apple</code> (基本正規表現)を <code>mango</code> (基本正規表現)に置換し、元のファイルを上書きする:</li>
+</ul>
+
+
+<p><code>sed -i 's/apple/mango/g' {{path/to/file}}</code></p>
+
+<ul>
+<li>特定のスクリプトファイル([f]ile)を実行し、結果を<code>stdout</code>に出力する:</li>
+</ul>
+
+
+<p><code>{{command}} | sed {{-f|--file}} {{path/to/script.sed}}</code></p>
+
+<ul>
+<li>最初の行だけを<code>stdout</code>に出力する:</li>
+</ul>
+
+
+<p><code>{{command}} | sed {{[-n|--quiet]}} '1p'</code></p>
+
+<ul>
+<li>ファイルの最初の行を削除([d]elete)する:</li>
+</ul>
+
+
+<p><code>sed -i 1d {{path/to/file}}</code></p>
+
+<ul>
+<li>ファイルの先頭行に改行を挿入([i]nsert)する:</li>
+</ul>
+
+
+<p><code>sed -i '1i\your new line text\' {{path/to/file}}</code></p>

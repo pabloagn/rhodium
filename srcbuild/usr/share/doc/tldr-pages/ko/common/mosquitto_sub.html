@@ -1,0 +1,25 @@
+<h1>mosquitto_sub</h1>
+
+<blockquote><p>주제를 구독하고 수신한 메시지를 출력하는 간단한 MQTT 버전 3.1.1 클라이언트.
+더 많은 정보: <a href="https://mosquitto.org/man/mosquitto_sub-1.html">https://mosquitto.org/man/mosquitto_sub-1.html</a>.</p></blockquote>
+
+<ul>
+<li><code>sensors/temperature</code> 주제를 구독하고, 서비스 품질(<code>QoS</code>)을 1로 설정합니다. (기본 호스트명은 <code>localhost</code>이고 포트는 1883입니다):</li>
+</ul>
+
+
+<p><code>mosquitto_sub -t {{sensors/temperature}} -q {{1}}</code></p>
+
+<ul>
+<li><code>iot.eclipse.org</code> 포트 1885에서 발행하는 모든 브로커 상태 메시지를 구독하고, 발행된 메시지를 자세히 출력합니다:</li>
+</ul>
+
+
+<p><code>mosquitto_sub -v -h "iot.eclipse.org" -p 1885 -t {{\$SYS/#}}</code></p>
+
+<ul>
+<li>주어진 패턴과 일치하는 여러 주제를 구독합니다. (+는 모든 메트릭 이름을 의미합니다):</li>
+</ul>
+
+
+<p><code>mosquitto_sub -t {{sensors/machines/+/temperature/+}}</code></p>

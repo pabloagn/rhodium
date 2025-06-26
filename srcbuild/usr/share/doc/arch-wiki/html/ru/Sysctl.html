@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-sticky-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-0 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-disabled skin-theme-clientpref-day vector-toc-available" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>sysctl (Русский) - ArchWiki</title>
+<link rel="stylesheet" href="../ArchWikiOffline.css">
+<meta name="ResourceLoaderDynamicStyles" content="">
+<meta name="generator" content="MediaWiki 1.43.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="max-image-preview:standard">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.25, maximum-scale=5.0">
+<link rel="search" type="application/opensearchdescription+xml" href="/rest.php/v1/search" title="ArchWiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.archlinux.org/api.php?action=rsd">
+<link rel="license" href="https://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="ArchWiki Atom feed" href="/index.php?title=Special:RecentChanges&amp;feed=atom">
+</head>
+<body class="skin--responsive skin-vector skin-vector-search-vue mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Sysctl_Русский rootpage-Sysctl_Русский skin-vector-2022 action-view">
+<a class="mw-jump-link" href="#bodyContent">Jump to content</a>
+<div class="vector-header-container">
+	</div>
+<div class="mw-page-container">
+	<div class="mw-page-container-inner">
+		<div class="vector-column-start">
+			<div class="vector-main-menu-container">
+		</div>
+	<div class="vector-sticky-pinned-container">
+				<nav id="mw-panel-toc" aria-label="Contents" data-event-name="ui.sidebar-toc" class="mw-table-of-contents-container vector-toc-landmark">
+					<div id="vector-toc-pinned-container" class="vector-pinned-container">
+					<div id="vector-toc" class="vector-toc vector-pinnable-element">
+	<div class="vector-pinnable-header vector-toc-pinnable-header vector-pinnable-header-pinned" data-feature-name="toc-pinned" data-pinnable-element-id="vector-toc">
+	<h2 class="vector-pinnable-header-label">Contents</h2>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-toc.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-toc.unpin">hide</button>
+</div>
+
+
+	<ul class="vector-toc-contents" id="mw-panel-toc-list">
+		<li id="toc-mw-content-text" class="vector-toc-list-item vector-toc-level-1">
+			<a href="#" class="vector-toc-link">
+				<div class="vector-toc-text">Beginning</div>
+			</a>
+		</li>
+		<li id="toc-Настройка" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#%D0%9D%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">1</span>
+				<span>Настройка</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Настройка-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Безопасность" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#%D0%91%D0%B5%D0%B7%D0%BE%D0%BF%D0%B0%D1%81%D0%BD%D0%BE%D1%81%D1%82%D1%8C">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">2</span>
+				<span>Безопасность</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Безопасность-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Сеть" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#%D0%A1%D0%B5%D1%82%D1%8C">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">3</span>
+				<span>Сеть</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Сеть-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Сеть subsection</span>
+			</button>
+		
+		<ul id="toc-Сеть-sublist" class="vector-toc-list">
+			<li id="toc-Увеличение_производительности" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#%D0%A3%D0%B2%D0%B5%D0%BB%D0%B8%D1%87%D0%B5%D0%BD%D0%B8%D0%B5_%D0%BF%D1%80%D0%BE%D0%B8%D0%B7%D0%B2%D0%BE%D0%B4%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D0%B8">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1</span>
+					<span>Увеличение производительности</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Увеличение_производительности-sublist" class="vector-toc-list">
+				<li id="toc-Увеличение_длины_очереди_входящих_пакетов" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#%D0%A3%D0%B2%D0%B5%D0%BB%D0%B8%D1%87%D0%B5%D0%BD%D0%B8%D0%B5_%D0%B4%D0%BB%D0%B8%D0%BD%D1%8B_%D0%BE%D1%87%D0%B5%D1%80%D0%B5%D0%B4%D0%B8_%D0%B2%D1%85%D0%BE%D0%B4%D1%8F%D1%89%D0%B8%D1%85_%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%BE%D0%B2">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1.1</span>
+					<span>Увеличение длины очереди входящих пакетов</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Увеличение_длины_очереди_входящих_пакетов-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Увеличение_максимального_числа_ожидающих_соединений" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#%D0%A3%D0%B2%D0%B5%D0%BB%D0%B8%D1%87%D0%B5%D0%BD%D0%B8%D0%B5_%D0%BC%D0%B0%D0%BA%D1%81%D0%B8%D0%BC%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%B3%D0%BE_%D1%87%D0%B8%D1%81%D0%BB%D0%B0_%D0%BE%D0%B6%D0%B8%D0%B4%D0%B0%D1%8E%D1%89%D0%B8%D1%85_%D1%81%D0%BE%D0%B5%D0%B4%D0%B8%D0%BD%D0%B5%D0%BD%D0%B8%D0%B9">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1.2</span>
+					<span>Увеличение максимального числа ожидающих соединений</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Увеличение_максимального_числа_ожидающих_соединений-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Включение_TCP_Fast_Open" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#%D0%92%D0%BA%D0%BB%D1%8E%D1%87%D0%B5%D0%BD%D0%B8%D0%B5_TCP_Fast_Open">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1.3</span>
+					<span>Включение TCP Fast Open</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Включение_TCP_Fast_Open-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Настройка_обработки_ожидающих_соединений" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#%D0%9D%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0_%D0%BE%D0%B1%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B8_%D0%BE%D0%B6%D0%B8%D0%B4%D0%B0%D1%8E%D1%89%D0%B8%D1%85_%D1%81%D0%BE%D0%B5%D0%B4%D0%B8%D0%BD%D0%B5%D0%BD%D0%B8%D0%B9">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1.4</span>
+					<span>Настройка обработки ожидающих соединений</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Настройка_обработки_ожидающих_соединений-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Изменение_параметров_TCP_keepalive" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#%D0%98%D0%B7%D0%BC%D0%B5%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5_%D0%BF%D0%B0%D1%80%D0%B0%D0%BC%D0%B5%D1%82%D1%80%D0%BE%D0%B2_TCP_keepalive">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1.5</span>
+					<span>Изменение параметров TCP keepalive</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Изменение_параметров_TCP_keepalive-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Включение_MTU_probing" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#%D0%92%D0%BA%D0%BB%D1%8E%D1%87%D0%B5%D0%BD%D0%B8%D0%B5_MTU_probing">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1.6</span>
+					<span>Включение MTU probing</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Включение_MTU_probing-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-TCP_timestamps" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#TCP_timestamps">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1.7</span>
+					<span>TCP timestamps</span>
+				</div>
+			</a>
+			
+			<ul id="toc-TCP_timestamps-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Включение_BBR" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#%D0%92%D0%BA%D0%BB%D1%8E%D1%87%D0%B5%D0%BD%D0%B8%D0%B5_BBR">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1.8</span>
+					<span>Включение BBR</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Включение_BBR-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Увеличение_диапазона_динамических_портов" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#%D0%A3%D0%B2%D0%B5%D0%BB%D0%B8%D1%87%D0%B5%D0%BD%D0%B8%D0%B5_%D0%B4%D0%B8%D0%B0%D0%BF%D0%B0%D0%B7%D0%BE%D0%BD%D0%B0_%D0%B4%D0%B8%D0%BD%D0%B0%D0%BC%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D1%85_%D0%BF%D0%BE%D1%80%D1%82%D0%BE%D0%B2">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1.9</span>
+					<span>Увеличение диапазона динамических портов</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Увеличение_диапазона_динамических_портов-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Защита_стека_TCP/IP" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#%D0%97%D0%B0%D1%89%D0%B8%D1%82%D0%B0_%D1%81%D1%82%D0%B5%D0%BA%D0%B0_TCP/IP">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.2</span>
+					<span>Защита стека TCP/IP</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Защита_стека_TCP/IP-sublist" class="vector-toc-list">
+				<li id="toc-Защита_TCP_SYN_cookie" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#%D0%97%D0%B0%D1%89%D0%B8%D1%82%D0%B0_TCP_SYN_cookie">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.2.1</span>
+					<span>Защита TCP SYN cookie</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Защита_TCP_SYN_cookie-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-TCP_rfc1337" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#TCP_rfc1337">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.2.2</span>
+					<span>TCP rfc1337</span>
+				</div>
+			</a>
+			
+			<ul id="toc-TCP_rfc1337-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Reverse_path_filtering" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Reverse_path_filtering">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.2.3</span>
+					<span>Reverse path filtering</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Reverse_path_filtering-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Журналирование_марсианских_пакетов" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#%D0%96%D1%83%D1%80%D0%BD%D0%B0%D0%BB%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5_%D0%BC%D0%B0%D1%80%D1%81%D0%B8%D0%B0%D0%BD%D1%81%D0%BA%D0%B8%D1%85_%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%BE%D0%B2">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.2.4</span>
+					<span>Журналирование марсианских пакетов</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Журналирование_марсианских_пакетов-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Отключение_перенаправлений_ICMP" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#%D0%9E%D1%82%D0%BA%D0%BB%D1%8E%D1%87%D0%B5%D0%BD%D0%B8%D0%B5_%D0%BF%D0%B5%D1%80%D0%B5%D0%BD%D0%B0%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B9_ICMP">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.2.5</span>
+					<span>Отключение перенаправлений ICMP</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Отключение_перенаправлений_ICMP-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Игнорирование_эхо-запросов_ICMP" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#%D0%98%D0%B3%D0%BD%D0%BE%D1%80%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5_%D1%8D%D1%85%D0%BE-%D0%B7%D0%B0%D0%BF%D1%80%D0%BE%D1%81%D0%BE%D0%B2_ICMP">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.2.6</span>
+					<span>Игнорирование эхо-запросов ICMP</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Игнорирование_эхо-запросов_ICMP-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Виртуальная_память" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#%D0%92%D0%B8%D1%80%D1%82%D1%83%D0%B0%D0%BB%D1%8C%D0%BD%D0%B0%D1%8F_%D0%BF%D0%B0%D0%BC%D1%8F%D1%82%D1%8C">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">4</span>
+				<span>Виртуальная память</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Виртуальная_память-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Виртуальная память subsection</span>
+			</button>
+		
+		<ul id="toc-Виртуальная_память-sublist" class="vector-toc-list">
+			<li id="toc-Кэш_VFS" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#%D0%9A%D1%8D%D1%88_VFS">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.1</span>
+					<span>Кэш VFS</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Кэш_VFS-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-MDADM" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#MDADM">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">5</span>
+				<span>MDADM</span>
+			</div>
+		</a>
+		
+		<ul id="toc-MDADM-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Решение_проблем" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#%D0%A0%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D0%B5_%D0%BF%D1%80%D0%BE%D0%B1%D0%BB%D0%B5%D0%BC">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">6</span>
+				<span>Решение проблем</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Решение_проблем-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Решение проблем subsection</span>
+			</button>
+		
+		<ul id="toc-Решение_проблем-sublist" class="vector-toc-list">
+			<li id="toc-Периодические_маленькие_подвисания_системы" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#%D0%9F%D0%B5%D1%80%D0%B8%D0%BE%D0%B4%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5_%D0%BC%D0%B0%D0%BB%D0%B5%D0%BD%D1%8C%D0%BA%D0%B8%D0%B5_%D0%BF%D0%BE%D0%B4%D0%B2%D0%B8%D1%81%D0%B0%D0%BD%D0%B8%D1%8F_%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BC%D1%8B">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.1</span>
+					<span>Периодические маленькие подвисания системы</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Периодические_маленькие_подвисания_системы-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Смотрите_также" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#%D0%A1%D0%BC%D0%BE%D1%82%D1%80%D0%B8%D1%82%D0%B5_%D1%82%D0%B0%D0%BA%D0%B6%D0%B5">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">7</span>
+				<span>Смотрите также</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Смотрите_также-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+</ul>
+</div>
+
+					</div>
+		</nav>
+			</div>
+		</div>
+		<div class="mw-content-container">
+			<main id="content" class="mw-body" style="margin: 0">
+				<header class="mw-body-header vector-page-titlebar">
+					<nav aria-label="Contents" class="vector-toc-landmark">
+						
+<div id="vector-page-titlebar-toc" class="vector-dropdown vector-page-titlebar-toc vector-button-flush-left">
+	<input type="checkbox" id="vector-page-titlebar-toc-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-page-titlebar-toc" class="vector-dropdown-checkbox " aria-label="Toggle the table of contents">
+	<label id="vector-page-titlebar-toc-label" for="vector-page-titlebar-toc-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"><span class="vector-icon mw-ui-icon-listBullet mw-ui-icon-wikimedia-listBullet"></span>
+
+<span class="vector-dropdown-label-text">Toggle the table of contents</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+							<div id="vector-page-titlebar-toc-unpinned-container" class="vector-unpinned-container">
+			</div>
+		
+	</div>
+</div>
+
+					</nav>
+					<h1 id="firstHeading" class="firstHeading mw-first-heading">sysctl (Русский)</h1>
+							
+<div id="p-lang-btn" class="vector-dropdown mw-portlet mw-portlet-lang">
+	<input type="checkbox" id="p-lang-btn-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-p-lang-btn" class="vector-dropdown-checkbox mw-interlanguage-selector" aria-label="Go to an article in another language. Available in 3 languages">
+	<label id="p-lang-btn-label" for="p-lang-btn-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--action-progressive mw-portlet-lang-heading-3" aria-hidden="true"><span class="vector-icon mw-ui-icon-language-progressive mw-ui-icon-wikimedia-language-progressive"></span>
+
+<span class="vector-dropdown-label-text">3 languages</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+		<div class="vector-menu-content">
+			
+			<ul class="vector-menu-content-list">
+				
+				<li class="interlanguage-link interwiki-en mw-list-item"><a href="../en/Sysctl.html" title="Sysctl – English" lang="en" hreflang="en" data-title="Sysctl" data-language-autonym="English" data-language-local-name="English" class="interlanguage-link-target"><span>English</span></a></li>
+<li class="interlanguage-link interwiki-ja mw-list-item"><a href="https://wiki.archlinux.jp/index.php/Sysctl" title="Sysctl – 日本語" lang="ja" hreflang="ja" data-title="Sysctl" data-language-autonym="日本語" data-language-local-name="日本語" class="interlanguage-link-target"><span>日本語</span></a></li>
+<li class="interlanguage-link interwiki-zh-hans mw-list-item"><a href="https://wiki.archlinuxcn.org/wiki/Sysctl" title="Sysctl – 中文（简体）" lang="zh-Hans" hreflang="zh-Hans" data-title="Sysctl" data-language-autonym="中文（简体）" data-language-local-name="中文（简体）" class="interlanguage-link-target"><span>中文（简体）</span></a></li>
+			</ul>
+			
+		</div>
+
+	</div>
+</div>
+</header>
+				<div class="vector-column-end">
+					<div class="vector-sticky-pinned-container">
+						<nav class="vector-page-tools-landmark" aria-label="Page tools">
+							<div id="vector-page-tools-pinned-container" class="vector-pinned-container">
+				
+							</div>
+		</nav>
+						<nav class="vector-appearance-landmark" aria-label="Appearance">
+							<div id="vector-appearance-pinned-container" class="vector-pinned-container">
+				<div id="vector-appearance" class="vector-appearance vector-pinnable-element">
+	<div class="vector-pinnable-header vector-appearance-pinnable-header vector-pinnable-header-pinned" data-feature-name="appearance-pinned" data-pinnable-element-id="vector-appearance" data-pinned-container-id="vector-appearance-pinned-container" data-unpinned-container-id="vector-appearance-unpinned-container">
+	<div class="vector-pinnable-header-label">Appearance</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-appearance.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-appearance.unpin">hide</button>
+</div>
+
+
+</div>
+
+							</div>
+		</nav>
+					</div>
+				</div>
+				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container>
+					<div class="vector-body-before-content">
+							<div class="mw-indicators">
+		</div>
+
+						<div id="siteSub" class="noprint">From ArchWiki</div>
+					</div>
+					<div id="contentSub"><div id="mw-content-subtitle"></div></div>
+					
+					
+					<div id="mw-content-text" class="mw-body-content">
+<div class="mw-content-ltr mw-parser-output" lang="ru" dir="ltr">
+<p><span>
+</span>
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Состояние перевода:</strong> На этой странице представлен перевод статьи <a href="../en/Sysctl.html" title="Sysctl">sysctl</a>. Дата последней синхронизации: 22 апреля 2022. Вы можете <a href="../ru/ArchWiki:Translation_Team.html" title="ArchWiki:Translation Team (Русский)">помочь</a> синхронизировать перевод, если в английской версии произошли <a rel="nofollow" class="external text" href="https://wiki.archlinux.org/index.php?title=Sysctl&amp;diff=0&amp;oldid=727233">изменения</a>.</div>
+<p><a href="https://en.wikipedia.org/wiki/ru:sysctl" class="extiw" title="wikipedia:ru:sysctl">sysctl</a> — утилита, предназначенная для управления <a href="../ru/Kernel_parameters.html" title="Kernel parameters (Русский)">параметрами ядра</a> на лету (пакет <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=procps-ng">procps-ng</a></span> из <a href="../ru/Official_repositories.html" title="Official repositories (Русский)">официальных репозиториев</a>). sysctl реализован как часть <a href="https://en.wikipedia.org/wiki/ru:procfs" class="extiw" title="wikipedia:ru:procfs">procfs</a> — виртуальной файловой системы, которую обычно монтируют в <code>/proc/</code>.
+</p>
+<meta property="mw:PageProp/toc">
+<h2>
+<span id=".D0.9D.D0.B0.D1.81.D1.82.D1.80.D0.BE.D0.B9.D0.BA.D0.B0"></span><span class="mw-headline" id="Настройка">Настройка</span>
+</h2>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Примечание:</strong> Начиная с версии 207 и 21x, <a href="../ru/Systemd.html" title="Systemd (Русский)">systemd</a> применяет только настройки из <code>/etc/sysctl.d/*.conf</code> и <code>/usr/lib/sysctl.d/*.conf</code>. Если у вас был файл <code>/etc/sysctl.conf</code>, нужно переименовать его в <code>/etc/sysctl.d/99-sysctl.conf</code>. Если у вас был, например, <code>/etc/sysctl.d/foo</code>, нужно переименовать его в <code>/etc/sysctl.d/foo.conf</code>.</div>
+<p>Файл настроек <b>sysctl</b> может быть создан в <code>/etc/sysctl.d/99-sysctl.conf</code>. Для <a href="../ru/Systemd.html" title="Systemd (Русский)">systemd</a>, <code>/etc/sysctl.d/</code> и <code>/usr/lib/sysctl.d/</code> являются drop-in каталогами для sysctl-параметров ядра. Именование и исходный каталог определяют порядок обработки; параметры, обрабатываемые позже, могут отменить предыдущие параметры. Например, параметры из файла <code>/usr/lib/sysctl.d/50-default.conf</code> будут переопределены параметрами с теми же именами из <code>/etc/sysctl.d/50-default.conf</code> и любом файле, обработанном позже из обоих каталогов.
+</p>
+<p>Чтобы вручную загрузить параметры из всех файлов, выполните команду:
+</p>
+<pre># sysctl --system
+</pre>
+<p>которая также выведет применённую иерархию. Можно указать параметр для явной загрузки только одного файла:
+</p>
+<pre># sysctl --load=<i>файл.conf</i>
+</pre>
+<p>Дополнительная информация доступна в <span class="plainlinks archwiki-template-man" title="$ man 5 sysctl.d"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/sysctl.d.5">sysctl.d(5)</a></span> и <a rel="nofollow" class="external text" href="http://0pointer.de/blog/projects/the-new-configuration-files">the new configuration files</a>.
+</p>
+<p>Доступные для изменения параметры представлены в каталоге <code>/proc/sys/</code>. Например, параметр <code>kernel.sysrq</code> соответствует файлу <code>/proc/sys/kernel/sysrq</code> в файловой системе. Команда <code>sysctl --all</code> отобразит значения всех доступных параметров.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Примечание:</strong> Если у вас установлена документация ядра (<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=linux-docs">linux-docs</a></span>), вы можете найти подробную информацию о настройках sysctl в <code>/usr/lib/modules/$(uname -r)/build/Documentation/admin-guide/sysctl/</code>. Ссылка на онлайн-версию содержится в разделе <a href="#%D0%A1%D0%BC%D0%BE%D1%82%D1%80%D0%B8%D1%82%D0%B5_%D1%82%D0%B0%D0%BA%D0%B6%D0%B5">#Смотрите также</a> этой статьи. Настоятельно рекомендуется прочитать её перед изменением настроек sysctl.</div>
+<p>Настройки можно изменить путём редактирования файлов напрямую или вызова утилиты <code>sysctl</code>. Например, чтобы временно включить <a href="https://en.wikipedia.org/wiki/Magic_SysRq_key" class="extiw" title="wikipedia:Magic SysRq key">magic SysRq key</a>:
+</p>
+<pre># sysctl kernel.sysrq=1
+</pre>
+<p>илт:
+</p>
+<pre># echo "1" &gt; /proc/sys/kernel/sysrq
+</pre>
+<p>Подробности о <code>kernel.sysrq</code> доступны в <a rel="nofollow" class="external text" href="https://docs.kernel.org/admin-guide/sysrq.html">документации ядра</a>.
+</p>
+<p>Чтобы сделать изменения постоянными, <a href="../ru/Help:Reading.html#%D0%94%D0%BE%D0%B1%D0%B0%D0%B2%D0%B8%D1%82%D1%8C,_%D1%81%D0%BE%D0%B7%D0%B4%D0%B0%D1%82%D1%8C,_%D1%80%D0%B5%D0%B4%D0%B0%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D1%82%D1%8C" class="mw-redirect" title="Добавьте">добавьте</a> или измените соответствующие строки в <code>/etc/sysctl.d/99-sysctl.conf</code> или другом подходящем файле в каталоге <code>/etc/sysctl.d/</code>.
+</p>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Совет:</strong> Некоторые параметры зависят от модулей ядра. Например, параметры в <code>/proc/sys/net/bridge/*</code> зависят от модуля <code>br_netfilter</code>. Если он не загружен, изменения этих параметров будут проигнорированы. Смотрите статью <a href="../ru/Kernel_module.html" class="mw-redirect" title="Модули ядра">Модули ядра</a>.</div>
+<h2>
+<span id=".D0.91.D0.B5.D0.B7.D0.BE.D0.BF.D0.B0.D1.81.D0.BD.D0.BE.D1.81.D1.82.D1.8C"></span><span class="mw-headline" id="Безопасность">Безопасность</span>
+</h2>
+<p>Смотрите <a href="../ru/Security.html#%D0%AF%D0%B4%D1%80%D0%BE" class="mw-redirect" title="Безопасность">Безопасность#Ядро</a>, а также следующие разделы в данной статье.
+</p>
+<h2>
+<span id=".D0.A1.D0.B5.D1.82.D1.8C"></span><span class="mw-headline" id="Сеть">Сеть</span>
+</h2>
+<h3>
+<span id=".D0.A3.D0.B2.D0.B5.D0.BB.D0.B8.D1.87.D0.B5.D0.BD.D0.B8.D0.B5_.D0.BF.D1.80.D0.BE.D0.B8.D0.B7.D0.B2.D0.BE.D0.B4.D0.B8.D1.82.D0.B5.D0.BB.D1.8C.D0.BD.D0.BE.D1.81.D1.82.D0.B8"></span><span class="mw-headline" id="Увеличение_производительности">Увеличение производительности</span>
+</h3>
+<h4>
+<span id=".D0.A3.D0.B2.D0.B5.D0.BB.D0.B8.D1.87.D0.B5.D0.BD.D0.B8.D0.B5_.D0.B4.D0.BB.D0.B8.D0.BD.D1.8B_.D0.BE.D1.87.D0.B5.D1.80.D0.B5.D0.B4.D0.B8_.D0.B2.D1.85.D0.BE.D0.B4.D1.8F.D1.89.D0.B8.D1.85_.D0.BF.D0.B0.D0.BA.D0.B5.D1.82.D0.BE.D0.B2"></span><span class="mw-headline" id="Увеличение_длины_очереди_входящих_пакетов">Увеличение длины очереди входящих пакетов</span>
+</h4>
+<p>После получения пакетов из кольцевого буфера сетевой карты они помещаются в специальную очередь в ядре.
+</p>
+<p>При использовании высокоскоростных сетевых карт увеличение размера очереди может помочь предотвратить потерю пакетов:
+</p>
+<pre>net.core.netdev_max_backlog = 16384
+</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Примечание:</strong> В приложениях реального времени, таких как SIP-маршрутизаторы, этот вариант требует высокой скорости процессора, иначе данные в очереди будут устаревшими.</div>
+<h4>
+<span id=".D0.A3.D0.B2.D0.B5.D0.BB.D0.B8.D1.87.D0.B5.D0.BD.D0.B8.D0.B5_.D0.BC.D0.B0.D0.BA.D1.81.D0.B8.D0.BC.D0.B0.D0.BB.D1.8C.D0.BD.D0.BE.D0.B3.D0.BE_.D1.87.D0.B8.D1.81.D0.BB.D0.B0_.D0.BE.D0.B6.D0.B8.D0.B4.D0.B0.D1.8E.D1.89.D0.B8.D1.85_.D1.81.D0.BE.D0.B5.D0.B4.D0.B8.D0.BD.D0.B5.D0.BD.D0.B8.D0.B9"></span><span class="mw-headline" id="Увеличение_максимального_числа_ожидающих_соединений">Увеличение максимального числа ожидающих соединений</span>
+</h4>
+<p>Максимальное число входящих соединений, ожидающих приёма (accept) программой, на одном сокете:
+</p>
+<pre>net.core.somaxconn = 8192
+</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Примечание:</strong> Начиная с Linux 5.4, по умолчанию используется значение 4096.<a rel="nofollow" class="external autonumber" href="https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/commit/?id=19f92a030ca6d772ab44b22ee6a01378a8cb32d4">[1]</a>
+</div>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Важно:</strong> Увеличение этого значения имеет смысл только на высоконагруженных серверах и может привести как к низкой скорости обработки (например, в случае однопоточного блокирующего сервера), так и к недостаточному количеству рабочих потоков/процессов <a rel="nofollow" class="external autonumber" href="https://serverfault.com/questions/518862/will-increasing-net-core-somaxconn-make-a-difference/519152">[2]</a>.</div>
+<h4>
+<span id=".D0.92.D0.BA.D0.BB.D1.8E.D1.87.D0.B5.D0.BD.D0.B8.D0.B5_TCP_Fast_Open"></span><span class="mw-headline" id="Включение_TCP_Fast_Open">Включение TCP Fast Open</span>
+</h4>
+<p>TCP Fast Open — это расширение протокола управления передачей (TCP), которое помогает уменьшить задержки в сети, позволяя начать передачу данных сразу при отправке клиентом первого TCP SYN <a rel="nofollow" class="external autonumber" href="https://www.keycdn.com/support/tcp-fast-open/">[3]</a>. Значение <code>3</code> вместо стандартного <code>1</code> включит TCP Fast Open как для входящих, так и для исходящих соединений:
+</p>
+<pre>net.ipv4.tcp_fastopen = 3
+</pre>
+<h4>
+<span id=".D0.9D.D0.B0.D1.81.D1.82.D1.80.D0.BE.D0.B9.D0.BA.D0.B0_.D0.BE.D0.B1.D1.80.D0.B0.D0.B1.D0.BE.D1.82.D0.BA.D0.B8_.D0.BE.D0.B6.D0.B8.D0.B4.D0.B0.D1.8E.D1.89.D0.B8.D1.85_.D1.81.D0.BE.D0.B5.D0.B4.D0.B8.D0.BD.D0.B5.D0.BD.D0.B8.D0.B9"></span><span class="mw-headline" id="Настройка_обработки_ожидающих_соединений">Настройка обработки ожидающих соединений</span>
+</h4>
+<p><code>tcp_max_syn_backlog</code> задаёт максимальную длину очереди соединений в состоянии 'Waiting Acknowledgment'.
+</p>
+<p>В случае DoS-атаки synflood эта очередь может быстро заполниться, и в этот момент сработает <a href="https://en.wikipedia.org/wiki/ru:SYN_cookies" class="extiw" title="wikipedia:ru:SYN cookies">TCP SYN cookies</a>, позволяя вашей системе продолжать отвечать на легитимный трафик и позволяя вам получить доступ к блокировке вредоносных IP.
+</p>
+<p>Если сервер страдает от перегрузок в пиковое время, можно попробовать немного увеличить это значение:
+</p>
+<pre>net.ipv4.tcp_max_syn_backlog = 8192
+</pre>
+<p><code>tcp_max_tw_buckets</code> — максимальное число сокетов в состоянии TIME_WAIT.
+</p>
+<p>После достижения этого числа система начнёт уничтожать сокеты, находящиеся в этом состоянии.
+</p>
+<p>Увеличение этого значения может помочь от простых DoS-атак:
+</p>
+<pre>net.ipv4.tcp_max_tw_buckets = 2000000
+</pre>
+<p><code>tcp_tw_reuse</code> задаёт, должен ли TCP повторно использовать существующее соединение в состоянии TIME-WAIT для нового исходящего соединения, если новая временная метка строго больше самой последней временной метки, записанной для предыдущего соединения.
+</p>
+<p>Это помогает избежать исчерпания доступных сетевых сокетов:
+</p>
+<pre>net.ipv4.tcp_tw_reuse = 1
+</pre>
+<p>Указывает, сколько секунд нужно ждать последнего FIN-пакета, прежде чем сокет будет принудительно закрыт. Это является нарушением спецификации TCP, но необходимо для предотвращения DoS-атак. В Linux 2.2 значение по умолчанию было 180 <a rel="nofollow" class="external autonumber" href="https://access.redhat.com/solutions/41776">[4]</a>:
+</p>
+<pre>net.ipv4.tcp_fin_timeout = 10
+</pre>
+<p><code>tcp_slow_start_after_idle</code>, будучи включенным, сбрасывает размер окна по умолчанию в долгоживущих TCP-соединениях, которые длительное время не использовались.
+</p>
+<p>Отключение этой опции приведёт к тому, что размер окна по умолчанию будет применяться только для новых соединений, что может улучшить производительность долгоживущих соединений:
+</p>
+<pre>net.ipv4.tcp_slow_start_after_idle = 0
+</pre>
+<h4>
+<span id=".D0.98.D0.B7.D0.BC.D0.B5.D0.BD.D0.B5.D0.BD.D0.B8.D0.B5_.D0.BF.D0.B0.D1.80.D0.B0.D0.BC.D0.B5.D1.82.D1.80.D0.BE.D0.B2_TCP_keepalive"></span><span class="mw-headline" id="Изменение_параметров_TCP_keepalive">Изменение параметров TCP keepalive</span>
+</h4>
+<p><a href="https://en.wikipedia.org/wiki/Keepalive#TCP_keepalive" class="extiw" title="wikipedia:Keepalive">TCP keepalive</a> — механизм TCP-соединений, который помогает определить потерю связи с другой стороной. TCP посылает запрос keepalive, содержащий нулевые данные, несколько раз после неактивности. Если другая сторона не отвечает, сокет автоматически закрывается. По умолчанию процесс TCP keepalive ожидает активности сокета в течение двух часов (7200 секунд) перед отправкой первого запроса keepalive, а затем повторно отправляет его каждые 75 секунд. Пока связь между сокетами TCP/IP продолжается и активна, пакеты keepalive не нужны.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Примечание:</strong> При следующих настройках ваше приложение будет обнаруживать мёртвые TCP-соединения через 120 секунд (60с + 10с + 10с + 10с + 10с + 10с + 10с).</div>
+<pre>net.ipv4.tcp_keepalive_time = 60
+net.ipv4.tcp_keepalive_intvl = 10
+net.ipv4.tcp_keepalive_probes = 6
+</pre>
+<h4>
+<span id=".D0.92.D0.BA.D0.BB.D1.8E.D1.87.D0.B5.D0.BD.D0.B8.D0.B5_MTU_probing"></span><span class="mw-headline" id="Включение_MTU_probing">Включение MTU probing</span>
+</h4>
+<p>Чем больше <a href="https://en.wikipedia.org/wiki/ru:Maximum_transmission_unit" class="extiw" title="wikipedia:ru:Maximum transmission unit">maximum transmission unit (MTU)</a>, тем выше производительность, но хуже надёжность.
+</p>
+<p>Это связано с тем, что потерянный пакет означает необходимость повторной передачи большего количества данных, а также с тем, что многие маршрутизаторы в интернете не могут передавать очень длинные пакеты:
+</p>
+<pre>net.ipv4.tcp_mtu_probing = 1
+</pre>
+<p>Смотрите <a rel="nofollow" class="external free" href="https://blog.cloudflare.com/path-mtu-discovery-in-practice/">https://blog.cloudflare.com/path-mtu-discovery-in-practice/</a> для более подробной информации.
+</p>
+<h4><span class="mw-headline" id="TCP_timestamps">TCP timestamps</span></h4>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Важно:</strong> TCP timestamps защищают от переполнения порядковых номеров (на гигабитных скоростях) и позволяют вычислять время передачи пакетов. Отключать их не рекомендуется, так как это считается риском для безопасности <a rel="nofollow" class="external autonumber" href="https://access.redhat.com/sites/default/files/attachments/20150325_network_performance_tuning.pdf">[5]</a>.</div>
+<p>Отключение генерации временных меток в TCP-пакетах уменьшит пики и может дать прирост производительности в гигабитных сетях:
+</p>
+<pre>net.ipv4.tcp_timestamps = 0
+</pre>
+<h4>
+<span id=".D0.92.D0.BA.D0.BB.D1.8E.D1.87.D0.B5.D0.BD.D0.B8.D0.B5_BBR"></span><span class="mw-headline" id="Включение_BBR">Включение BBR</span>
+</h4>
+<p><a href="https://en.wikipedia.org/wiki/TCP_congestion_control#TCP_BBR" class="extiw" title="wikipedia:TCP congestion control">Алгоритм управления перегрузками BBR</a> может помочь достичь более высокой пропускной способности и более низких задержек для интернет-трафика. Сначала <a href="../ru/Kernel_module.html#%D0%A3%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5_%D0%BC%D0%BE%D0%B4%D1%83%D0%BB%D1%8F%D0%BC%D0%B8_%D0%B2%D1%80%D1%83%D1%87%D0%BD%D1%83%D1%8E" title="Kernel module (Русский)">загрузите</a> модуль <code>tcp_bbr</code>.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Примечание:</strong> <a rel="nofollow" class="external text" href="https://github.com/google/bbr/blob/master/README">Страница BBR на GitHub</a><sup title="Статус последней проверки: 404">[<a href="https://en.wikipedia.org/wiki/ru:%D0%92%D0%B8%D0%BA%D0%B8%D0%BF%D0%B5%D0%B4%D0%B8%D1%8F:%D0%9C%D1%91%D1%80%D1%82%D0%B2%D1%8B%D0%B5_%D1%81%D1%81%D1%8B%D0%BB%D0%BA%D0%B8" class="extiw" title="wikipedia:ru:Википедия:Мёртвые ссылки">устаревшая ссылка</a> 2024-11-06 ⓘ]</sup> сообщает, что он не является официальным продуктом Google.</div>
+<pre>net.core.default_qdisc = cake
+net.ipv4.tcp_congestion_control = bbr
+</pre>
+<h4>
+<span id=".D0.A3.D0.B2.D0.B5.D0.BB.D0.B8.D1.87.D0.B5.D0.BD.D0.B8.D0.B5_.D0.B4.D0.B8.D0.B0.D0.BF.D0.B0.D0.B7.D0.BE.D0.BD.D0.B0_.D0.B4.D0.B8.D0.BD.D0.B0.D0.BC.D0.B8.D1.87.D0.B5.D1.81.D0.BA.D0.B8.D1.85_.D0.BF.D0.BE.D1.80.D1.82.D0.BE.D0.B2"></span><span class="mw-headline" id="Увеличение_диапазона_динамических_портов">Увеличение диапазона динамических портов</span>
+</h4>
+<p><a href="https://en.wikipedia.org/wiki/ru:%D0%94%D0%B8%D0%BD%D0%B0%D0%BC%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B9_%D0%BF%D0%BE%D1%80%D1%82" class="extiw" title="wikipedia:ru:Динамический порт">Динамические (эфемерные) порты</a> обычно используются в протоколах TCP, UDP и SCTP. Когда клиентское приложение не запрашивает привязку сокета к какому-то конкретному порту, система выдаёт ему произвольный порт из определённого диапазона. В некоторых специфических ситуациях размер этого диапазона может влиять на производительность установки соединения.
+</p>
+<pre>net.ipv4.ip_local_port_range = 30000 65535
+</pre>
+<h3>
+<span id=".D0.97.D0.B0.D1.89.D0.B8.D1.82.D0.B0_.D1.81.D1.82.D0.B5.D0.BA.D0.B0_TCP.2FIP"></span><span class="mw-headline" id="Защита_стека_TCP/IP">Защита стека TCP/IP</span>
+</h3>
+<p>Ниже приведён набор параметров для усиления сетевой безопасности ядра для протокола IPv4 и соответствующие параметры IPv6, если существует эквивалент.
+</p>
+<p>Для некоторых сценариев использования, например, при использовании системы в качестве маршрутизатора, могут быть полезны или необходимы и другие параметры.
+</p>
+<h4>
+<span id=".D0.97.D0.B0.D1.89.D0.B8.D1.82.D0.B0_TCP_SYN_cookie"></span><span class="mw-headline" id="Защита_TCP_SYN_cookie">Защита TCP SYN cookie</span>
+</h4>
+<p>Помогает защититься от атак SYN flood. Срабатывает только при достижении значения <code>net.ipv4.tcp_max_syn_backlog</code>. Более подробную информацию можно найти, например, в <a rel="nofollow" class="external autonumber" href="https://cateee.net/lkddb/web-lkddb/SYN_COOKIES.html">[6]</a>. Начиная с <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=linux">linux</a></span> 5.10, это включено по умолчанию.
+</p>
+<pre>net.ipv4.tcp_syncookies = 1
+</pre>
+<h4><span class="mw-headline" id="TCP_rfc1337">TCP rfc1337</span></h4>
+<p>Защита от tcp time-wait assassination hazards, отбрасывание RST-пакетов для сокетов в состоянии time-wait. За пределами Linux поддерживается не очень широко, но соответствует RFC:
+</p>
+<pre>net.ipv4.tcp_rfc1337 = 1
+</pre>
+<h4><span class="mw-headline" id="Reverse_path_filtering">Reverse path filtering</span></h4>
+<p>При включении reverse path filtering ядро будет проверять источник пакетов, полученных со всех интерфейсов машины. Это может защитить от злоумышленников, которые используют методы подмены IP-адресов для нанесения вреда.
+</p>
+<p>По умолчанию стоит значение 0 (без проверки), но systemd поставляет <code>/usr/lib/sysctl.d/50-default.conf</code>, который устанавливает <code>net.ipv4.conf.all.rp_filter</code> в значение <code>2</code> (loose mode)<a rel="nofollow" class="external autonumber" href="https://github.com/systemd/systemd/pull/10971">[7]</a>.
+</p>
+<p>Включение строгого режима:
+</p>
+<pre>net.ipv4.conf.default.rp_filter = 1
+net.ipv4.conf.all.rp_filter = 1
+</pre>
+<p>Взаимосвязь и поведение <code>net.ipv4.conf.default.*</code>, <code>net.ipv4.conf.<i>interface</i>.*</code> и <code>net.ipv4.conf.all.*</code> описаны в <a rel="nofollow" class="external text" href="https://docs.kernel.org/networking/ip-sysctl.html">ip-sysctl.html</a>.
+</p>
+<h4>
+<span id=".D0.96.D1.83.D1.80.D0.BD.D0.B0.D0.BB.D0.B8.D1.80.D0.BE.D0.B2.D0.B0.D0.BD.D0.B8.D0.B5_.D0.BC.D0.B0.D1.80.D1.81.D0.B8.D0.B0.D0.BD.D1.81.D0.BA.D0.B8.D1.85_.D0.BF.D0.B0.D0.BA.D0.B5.D1.82.D0.BE.D0.B2"></span><span class="mw-headline" id="Журналирование_марсианских_пакетов">Журналирование марсианских пакетов</span>
+</h4>
+<p><a href="https://en.wikipedia.org/wiki/ru:%D0%9C%D0%B0%D1%80%D1%81%D0%B8%D0%B0%D0%BD%D1%81%D0%BA%D0%B8%D0%B5_%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D1%8B" class="extiw" title="wikipedia:ru:Марсианские пакеты">Марсианский пакет</a> (martian packet) — это IP-пакет, который содержит адрес источника или получателя, зарезервированный IANA для специального использования (смотрите <a href="https://en.wikipedia.org/wiki/Reserved_IP_addresses" class="extiw" title="wikipedia:Reserved IP addresses">Reserved IP addresses</a>).
+</p>
+<p>Часто марсианские и немаршрутизируемые пакеты могут быть использованы в опасных целях. Запись этих пакетов в журнал для последующей проверки может быть полезной <a rel="nofollow" class="external autonumber" href="https://www.cyberciti.biz/faq/linux-log-suspicious-martian-packets-un-routable-source-addresses/">[8]</a>:
+</p>
+<pre>net.ipv4.conf.default.log_martians = 1
+net.ipv4.conf.all.log_martians = 1
+</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Примечание:</strong> Это может заполнить ваши журналы большим количеством информации, поэтому рекомендуется включать эту функцию только для тестирования.</div>
+<h4>
+<span id=".D0.9E.D1.82.D0.BA.D0.BB.D1.8E.D1.87.D0.B5.D0.BD.D0.B8.D0.B5_.D0.BF.D0.B5.D1.80.D0.B5.D0.BD.D0.B0.D0.BF.D1.80.D0.B0.D0.B2.D0.BB.D0.B5.D0.BD.D0.B8.D0.B9_ICMP"></span><span class="mw-headline" id="Отключение_перенаправлений_ICMP">Отключение перенаправлений ICMP</span>
+</h4>
+<p>ICMP-пакеты типа 5 (Redirect) помогают оптимизировать маршрутизацию, однако из-за того, что они могут быть легко подделаны злоумышленником, они считаются проблемой безопасности и их лучше отключить. Подробнее об этом можно почитать здесь: <a rel="nofollow" class="external text" href="https://askubuntu.com/questions/118273/what-are-icmp-redirects-and-should-they-be-blocked">What are ICMP redirects? Should they be blocked?</a>
+</p>
+<p>Отключение приёма перенаправлений ICMP:
+</p>
+<pre>net.ipv4.conf.all.accept_redirects = 0
+net.ipv4.conf.default.accept_redirects = 0
+net.ipv4.conf.all.secure_redirects = 0
+net.ipv4.conf.default.secure_redirects = 0
+net.ipv6.conf.all.accept_redirects = 0
+net.ipv6.conf.default.accept_redirects = 0
+</pre>
+<p>Отключение отправки перенаправлений ICMP на устройствах, не являющихся маршрутизаторами:
+</p>
+<pre>net.ipv4.conf.all.send_redirects = 0
+net.ipv4.conf.default.send_redirects = 0
+</pre>
+<h4>
+<span id=".D0.98.D0.B3.D0.BD.D0.BE.D1.80.D0.B8.D1.80.D0.BE.D0.B2.D0.B0.D0.BD.D0.B8.D0.B5_.D1.8D.D1.85.D0.BE-.D0.B7.D0.B0.D0.BF.D1.80.D0.BE.D1.81.D0.BE.D0.B2_ICMP"></span><span class="mw-headline" id="Игнорирование_эхо-запросов_ICMP">Игнорирование эхо-запросов ICMP</span>
+</h4>
+<p>Чтобы система не отвечала на пинги:
+</p>
+<pre>net.ipv4.icmp_echo_ignore_all = 1
+net.ipv6.icmp.echo_ignore_all = 1
+</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Примечание:</strong> Имейте в виду, что это может нарушить работу инструментов мониторинга, которые полагаются на эхо-запросы ICMP.</div>
+<h2>
+<span id=".D0.92.D0.B8.D1.80.D1.82.D1.83.D0.B0.D0.BB.D1.8C.D0.BD.D0.B0.D1.8F_.D0.BF.D0.B0.D0.BC.D1.8F.D1.82.D1.8C"></span><span class="mw-headline" id="Виртуальная_память">Виртуальная память</span>
+</h2>
+<p>Есть несколько ключевых параметров для настройки работы подсистемы <a href="https://en.wikipedia.org/wiki/ru:%D0%92%D0%B8%D1%80%D1%82%D1%83%D0%B0%D0%BB%D1%8C%D0%BD%D0%B0%D1%8F_%D0%BF%D0%B0%D0%BC%D1%8F%D1%82%D1%8C" class="extiw" title="wikipedia:ru:Виртуальная память">виртуальной памяти</a> ядра Linux и записи изменённых (dirty) данных на диск. Подробности в <a rel="nofollow" class="external text" href="https://docs.kernel.org/admin-guide/sysctl/vm.html">документации ядра</a> Например:
+</p>
+<ul><li><code>vm.dirty_ratio = 10</code></li></ul>
+<dl><dd>Указывает (в процентах от общего объёма доступной памяти, содержащей свободные и восстанавливаемые (reclaimable) страницы) количество страниц, при достижении которого выполняющий запись процесс сам начнёт записывать изменённые данные из памяти на диск.</dd></dl>
+<ul><li><code>vm.dirty_background_ratio = 5</code></li></ul>
+<dl><dd>Указывает (в процентах от общего объёма доступной памяти, содержащей свободные и восстанавливаемые (reclaimable) страницы) количество страниц, при достижении которого фоновые потоки для записи данных в ядре начнут записывать изменённые данные из памяти на диск.</dd></dl>
+<p>Как отмечено в комментариях к параметрам, при установке этих значений необходимо учитывать общий объём оперативной памяти. Например, упрощая, можно взять установленную системную оперативную память вместо доступной памяти: 
+</p>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Важно:</strong> 
+<ul>
+<li>Бо́льшие значения могут повысить производительность, но при этом повышается риск потери данных.</li>
+<li>Установка этого значения в <code>0</code> может привести к увеличению задержки на дисках и подвисаниям.</li>
+</ul>
+<p>Смотрите <a rel="nofollow" class="external free" href="https://lonesysadmin.net/2013/12/22/better-linux-disk-caching-performance-vm-dirty_ratio/">https://lonesysadmin.net/2013/12/22/better-linux-disk-caching-performance-vm-dirty_ratio/</a> для более подробной информации.
+</p>
+</div>
+<ul>
+<li>Согласно общепринятому мнению, установка <code>vm.dirty_ratio</code> на 10% от ОЗУ является разумным значением, если ОЗУ составляет, скажем, 1 ГБ (поэтому 10% — это 100 МБ). Но если машина имеет гораздо больше ОЗУ, скажем, 16 ГБ (10% — это 1.6 ГБ), этот процент оказывается непропропорционально большим, поскольку он превратится в несколько секунд записи на вращающиеся диски. Более разумным значением в этом случае может быть <code>3</code> (3% от 16 ГБ — это примерно 491 МБ).</li>
+<li>Аналогично, установка <code>vm.dirty_background_ratio</code> на значение <code>5</code> может быть подходящим вариантом для небольших объёмов памяти, но опять же, учитывайте и настраивайте в соответствии с объёмом памяти конкретной системы.</li>
+</ul>
+<h3>
+<span id=".D0.9A.D1.8D.D1.88_VFS"></span><span class="mw-headline" id="Кэш_VFS">Кэш VFS</span>
+</h3>
+<p>Уменьшение значения параметра кэша <a rel="nofollow" class="external text" href="https://docs.kernel.org/filesystems/vfs.html">virtual file system</a> (VFS) может улучшить отзывчивость системы:
+</p>
+<ul><li><code>vm.vfs_cache_pressure = 50</code></li></ul>
+<dl><dd>Он контролирует память, которая используется ядром для кэширования объектов каталогов и inode (кэш VFS). Уменьшение этого значения по сравнению со значением по умолчанию 100 делает ядро менее склонным к использованию кэша VFS (не устанавливайте его в 0, это может привести к состоянию out-of-memory).</dd></dl>
+<h2><span class="mw-headline" id="MDADM">MDADM</span></h2>
+<p>Смотрите <a href="../en/RAID.html#Change_sync_speed_limits" title="RAID">RAID#Change sync speed limits</a>.
+</p>
+<h2>
+<span id=".D0.A0.D0.B5.D1.88.D0.B5.D0.BD.D0.B8.D0.B5_.D0.BF.D1.80.D0.BE.D0.B1.D0.BB.D0.B5.D0.BC"></span><span class="mw-headline" id="Решение_проблем">Решение проблем</span>
+</h2>
+<h3>
+<span id=".D0.9F.D0.B5.D1.80.D0.B8.D0.BE.D0.B4.D0.B8.D1.87.D0.B5.D1.81.D0.BA.D0.B8.D0.B5_.D0.BC.D0.B0.D0.BB.D0.B5.D0.BD.D1.8C.D0.BA.D0.B8.D0.B5_.D0.BF.D0.BE.D0.B4.D0.B2.D0.B8.D1.81.D0.B0.D0.BD.D0.B8.D1.8F_.D1.81.D0.B8.D1.81.D1.82.D0.B5.D0.BC.D1.8B"></span><span class="mw-headline" id="Периодические_маленькие_подвисания_системы">Периодические маленькие подвисания системы</span>
+</h3>
+<p>Попробуйте поставить максимальный объём изменённых в памяти данных (dirty bytes) поменьше (в данном примере 4 МиБ):
+</p>
+<pre>vm.dirty_background_bytes = 4194304
+vm.dirty_bytes = 4194304
+</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Примечание:</strong> Параметры <code>dirty_background_bytes</code> и <code>dirty_bytes</code> являются аналогами параметров <code>dirty_background_ratio</code> и <code>dirty_ratio</code> (описанных в разделе <a href="#%D0%92%D0%B8%D1%80%D1%82%D1%83%D0%B0%D0%BB%D1%8C%D0%BD%D0%B0%D1%8F_%D0%BF%D0%B0%D0%BC%D1%8F%D1%82%D1%8C">#Виртуальная память</a>). Одновременно может быть указан только один из наборов параметров: или bytes, или ratio.</div>
+<h2>
+<span id=".D0.A1.D0.BC.D0.BE.D1.82.D1.80.D0.B8.D1.82.D0.B5_.D1.82.D0.B0.D0.BA.D0.B6.D0.B5"></span><span class="mw-headline" id="Смотрите_также">Смотрите также</span>
+</h2>
+<ul>
+<li>
+<span class="plainlinks archwiki-template-man" title="$ man 8 sysctl"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/sysctl.8">sysctl(8)</a></span> и <span class="plainlinks archwiki-template-man" title="$ man 5 sysctl.conf"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/sysctl.conf.5">sysctl.conf(5)</a></span>
+</li>
+<li><a rel="nofollow" class="external text" href="https://docs.kernel.org/admin-guide/sysctl/index.html">Документация ядра: /proc/sys/</a></li>
+<li>Документация ядра: <a rel="nofollow" class="external text" href="https://docs.kernel.org/networking/ip-sysctl.html">IP Sysctl</a>
+</li>
+<li><a rel="nofollow" class="external text" href="https://tldp.org/HOWTO/Adv-Routing-HOWTO/lartc.kernel.html">Kernel network parameters for sysctl</a></li>
+<li><a rel="nofollow" class="external text" href="https://sysctl-explorer.net">sysctl-explorer.net – инициатива по облегчению доступа к справочной документации по sysctl в Linux</a></li>
+<li><a rel="nofollow" class="external text" href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/6/html/security_guide/sect-security_guide-server_security-disable-source-routing">Disable Source Routing - Red Hat Customer Portal</a></li>
+<li><a rel="nofollow" class="external text" href="https://www.suse.com/documentation/sles11/book_hardening/data/sec_sec_prot_general_kernel.html">SUSE handbook about Security Features in the Kernel</a></li>
+</ul>
+</div>
+</div>
+					<div id="catlinks" class="catlinks" data-mw="interface">
+<div id="mw-normal-catlinks" class="mw-normal-catlinks">
+<a href="../Special:Categories.html" title="Special:Categories">Categories</a>: <ul>
+<li><a href="../ru/Category:Kernel.html" title="Category:Kernel (Русский)">Kernel (Русский)</a></li>
+<li><a href="../ru/Category:Commands.html" title="Category:Commands (Русский)">Commands (Русский)</a></li>
+</ul>
+</div>
+<div id="mw-hidden-catlinks" class="mw-hidden-catlinks mw-hidden-cats-hidden">Hidden category: <ul><li><a href="../en/Category:Pages_with_dead_links.html" title="Category:Pages with dead links">Pages with dead links</a></li></ul>
+</div>
+</div>
+				</div>
+			</main>
+			
+		</div>
+		<div class="mw-footer-container">
+			
+<footer id="footer" class="mw-footer" style="margin: 0">
+	<ul id="footer-info">
+	<li data-nosnippet="">Retrieved from "<a dir="ltr" href="https://wiki.archlinux.org/index.php?title=Sysctl_(%D0%A0%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9)&amp;oldid=820264">https://wiki.archlinux.org/index.php?title=Sysctl_(Русский)&amp;oldid=820264</a>"</li>
+<li id="footer-info-lastmod"> This page was last edited on 6 November 2024, at 05:53.</li>
+	<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+<br>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="https://terms.archlinux.org/docs/privacy-policy/">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="../en/ArchWiki:About.html">About ArchWiki</a></li>
+	<li id="footer-places-disclaimers"><a href="../en/ArchWiki:General_disclaimer.html">Disclaimers</a></li>
+	<li id="footer-places-archwiki-code-of-conduct"><a href="https://terms.archlinux.org/docs/code-of-conduct/" class="extiw" title="archlinux-service-agreements:code-of-conduct">Code of conduct</a></li>
+	<li id="footer-places-archwiki-terms-of-service"><a href="https://terms.archlinux.org/docs/terms-of-service/" class="extiw" title="archlinux-service-agreements:terms-of-service">Terms of service</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-copyrightico"><a href="https://www.gnu.org/copyleft/fdl.html" class="cdx-button cdx-button--fake-button cdx-button--size-large cdx-button--fake-button--enabled"><img src="/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" loading="lazy"></a></li>
+	<li id="footer-poweredbyico"><img src="/resources/assets/poweredby_mediawiki.svg" width="88" height="31" loading="lazy"></li>
+</ul>
+
+</footer>
+
+		</div>
+	</div> 
+</div> 
+<div class="vector-settings" id="p-dock-bottom">
+	<ul></ul>
+</div>
+</body>
+</html>

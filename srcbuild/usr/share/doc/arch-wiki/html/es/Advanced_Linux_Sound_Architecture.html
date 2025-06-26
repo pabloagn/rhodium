@@ -1,0 +1,1843 @@
+<!DOCTYPE html>
+<html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-sticky-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-0 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-disabled skin-theme-clientpref-day vector-toc-available" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>Advanced Linux Sound Architecture (Español) - ArchWiki</title>
+<link rel="stylesheet" href="../ArchWikiOffline.css">
+<meta name="ResourceLoaderDynamicStyles" content="">
+<meta name="generator" content="MediaWiki 1.43.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="max-image-preview:standard">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.25, maximum-scale=5.0">
+<link rel="search" type="application/opensearchdescription+xml" href="/rest.php/v1/search" title="ArchWiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.archlinux.org/api.php?action=rsd">
+<link rel="license" href="https://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="ArchWiki Atom feed" href="/index.php?title=Special:RecentChanges&amp;feed=atom">
+</head>
+<body class="skin--responsive skin-vector skin-vector-search-vue mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Advanced_Linux_Sound_Architecture_Español rootpage-Advanced_Linux_Sound_Architecture_Español skin-vector-2022 action-view">
+<a class="mw-jump-link" href="#bodyContent">Jump to content</a>
+<div class="vector-header-container">
+	</div>
+<div class="mw-page-container">
+	<div class="mw-page-container-inner">
+		<div class="vector-column-start">
+			<div class="vector-main-menu-container">
+		</div>
+	<div class="vector-sticky-pinned-container">
+				<nav id="mw-panel-toc" aria-label="Contents" data-event-name="ui.sidebar-toc" class="mw-table-of-contents-container vector-toc-landmark">
+					<div id="vector-toc-pinned-container" class="vector-pinned-container">
+					<div id="vector-toc" class="vector-toc vector-pinnable-element">
+	<div class="vector-pinnable-header vector-toc-pinnable-header vector-pinnable-header-pinned" data-feature-name="toc-pinned" data-pinnable-element-id="vector-toc">
+	<h2 class="vector-pinnable-header-label">Contents</h2>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-toc.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-toc.unpin">hide</button>
+</div>
+
+
+	<ul class="vector-toc-contents" id="mw-panel-toc-list">
+		<li id="toc-mw-content-text" class="vector-toc-list-item vector-toc-level-1">
+			<a href="#" class="vector-toc-link">
+				<div class="vector-toc-text">Beginning</div>
+			</a>
+		</li>
+		<li id="toc-Instalación" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Instalaci%C3%B3n">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">1</span>
+				<span>Instalación</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Instalación-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Instalación subsection</span>
+			</button>
+		
+		<ul id="toc-Instalación-sublist" class="vector-toc-list">
+			<li id="toc-Utilidades_en_el_espacio_de_usuario" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Utilidades_en_el_espacio_de_usuario">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.1</span>
+					<span>Utilidades en el espacio de usuario</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Utilidades_en_el_espacio_de_usuario-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Abrir_los_canales_de_audio" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Abrir_los_canales_de_audio">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">2</span>
+				<span>Abrir los canales de audio</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Abrir_los_canales_de_audio-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Configuración" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Configuraci%C3%B3n">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">3</span>
+				<span>Configuración</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Configuración-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Configuración subsection</span>
+			</button>
+		
+		<ul id="toc-Configuración-sublist" class="vector-toc-list">
+			<li id="toc-Sin_sonido_en_virtualbox" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Sin_sonido_en_virtualbox">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1</span>
+					<span>Sin sonido en virtualbox</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Sin_sonido_en_virtualbox-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Establecer_la_tarjeta_de_sonido_predeterminada" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Establecer_la_tarjeta_de_sonido_predeterminada">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.2</span>
+					<span>Establecer la tarjeta de sonido predeterminada</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Establecer_la_tarjeta_de_sonido_predeterminada-sublist" class="vector-toc-list">
+				<li id="toc-Seleccionar_el_PCM_por_defecto_a_través_de_la_variable_de_entorno" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Seleccionar_el_PCM_por_defecto_a_trav%C3%A9s_de_la_variable_de_entorno">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.2.1</span>
+					<span>Seleccionar el PCM por defecto a través de la variable de entorno</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Seleccionar_el_PCM_por_defecto_a_través_de_la_variable_de_entorno-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Método_alternativo" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#M%C3%A9todo_alternativo">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.2.2</span>
+					<span>Método alternativo</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Método_alternativo-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Asegurarse_de_que_los_módulos_de_sonido_se_cargan" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Asegurarse_de_que_los_m%C3%B3dulos_de_sonido_se_cargan">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.3</span>
+					<span>Asegurarse de que los módulos de sonido se cargan</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Asegurarse_de_que_los_módulos_de_sonido_se_cargan-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Conseguir_salida_SPDIF" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Conseguir_salida_SPDIF">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.4</span>
+					<span>Conseguir salida SPDIF</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Conseguir_salida_SPDIF-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Ecualizador_System-Wide" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Ecualizador_System-Wide">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.5</span>
+					<span>Ecualizador System-Wide</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Ecualizador_System-Wide-sublist" class="vector-toc-list">
+				<li id="toc-Usar_AlsaEqual_(proporciona_la_interfaz_gráfica)" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Usar_AlsaEqual_(proporciona_la_interfaz_gr%C3%A1fica)">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.5.1</span>
+					<span>Usar AlsaEqual (proporciona la interfaz gráfica)</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Usar_AlsaEqual_(proporciona_la_interfaz_gráfica)-sublist" class="vector-toc-list">
+				<li id="toc-Administrar_los_estados_de_AlsaEqual" class="vector-toc-list-item vector-toc-level-4">
+			<a class="vector-toc-link" href="#Administrar_los_estados_de_AlsaEqual">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.5.1.1</span>
+					<span>Administrar los estados de AlsaEqual</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Administrar_los_estados_de_AlsaEqual-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Usar_mbeq" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Usar_mbeq">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.5.2</span>
+					<span>Usar mbeq</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Usar_mbeq-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Remuestreo_de_alta_calidad" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Remuestreo_de_alta_calidad">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">4</span>
+				<span>Remuestreo de alta calidad</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Remuestreo_de_alta_calidad-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Upmixing/Downmixing" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Upmixing/Downmixing">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">5</span>
+				<span>Upmixing/Downmixing</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Upmixing/Downmixing-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Upmixing/Downmixing subsection</span>
+			</button>
+		
+		<ul id="toc-Upmixing/Downmixing-sublist" class="vector-toc-list">
+			<li id="toc-Upmixing" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Upmixing">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.1</span>
+					<span>Upmixing</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Upmixing-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Downmixing" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Downmixing">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.2</span>
+					<span>Downmixing</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Downmixing-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Mezclar" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Mezclar">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">6</span>
+				<span>Mezclar</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Mezclar-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Mezclar subsection</span>
+			</button>
+		
+		<ul id="toc-Mezclar-sublist" class="vector-toc-list">
+			<li id="toc-Mezclar_con_software_(dmix)" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Mezclar_con_software_(dmix)">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.1</span>
+					<span>Mezclar con software (dmix)</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Mezclar_con_software_(dmix)-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Mezclar_con_Hardware" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Mezclar_con_Hardware">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.2</span>
+					<span>Mezclar con Hardware</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Mezclar_con_Hardware-sublist" class="vector-toc-list">
+				<li id="toc-Soporte" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Soporte">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.2.1</span>
+					<span>Soporte</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Soporte-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Arreglos" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Arreglos">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.2.2</span>
+					<span>Arreglos</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Arreglos-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Solución_de_problemas" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Soluci%C3%B3n_de_problemas">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">7</span>
+				<span>Solución de problemas</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Solución_de_problemas-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Solución de problemas subsection</span>
+			</button>
+		
+		<ul id="toc-Solución_de_problemas-sublist" class="vector-toc-list">
+			<li id="toc-Sonido_con_saltos_durante_el_uso_de_Dynamic_Frequency_Scaling" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Sonido_con_saltos_durante_el_uso_de_Dynamic_Frequency_Scaling">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">7.1</span>
+					<span>Sonido con saltos durante el uso de Dynamic Frequency Scaling</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Sonido_con_saltos_durante_el_uso_de_Dynamic_Frequency_Scaling-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Problemas_con_la_disponibilidad_del_software_de_mezcla_por_solo_un_usuario_a_la_vez" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Problemas_con_la_disponibilidad_del_software_de_mezcla_por_solo_un_usuario_a_la_vez">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">7.2</span>
+					<span>Problemas con la disponibilidad del software de mezcla por solo un usuario a la vez</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Problemas_con_la_disponibilidad_del_software_de_mezcla_por_solo_un_usuario_a_la_vez-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Problemas_de_reproducción_simultánea" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Problemas_de_reproducci%C3%B3n_simult%C3%A1nea">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">7.3</span>
+					<span>Problemas de reproducción simultánea</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Problemas_de_reproducción_simultánea-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Ausencia_de_sonido_al_azar_en_el_inicio" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Ausencia_de_sonido_al_azar_en_el_inicio">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">7.4</span>
+					<span>Ausencia de sonido al azar en el inicio</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Ausencia_de_sonido_al_azar_en_el_inicio-sublist" class="vector-toc-list">
+				<li id="toc-Timidity" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Timidity">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">7.4.1</span>
+					<span>Timidity</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Timidity-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Problemas_específicos_de_algunos_programas" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Problemas_espec%C3%ADficos_de_algunos_programas">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">7.5</span>
+					<span>Problemas específicos de algunos programas</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Problemas_específicos_de_algunos_programas-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Configurar_los_modelos" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Configurar_los_modelos">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">7.6</span>
+					<span>Configurar los modelos</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Configurar_los_modelos-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Audio_en_conflicto_con_altavoz_interno_del_PC" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Audio_en_conflicto_con_altavoz_interno_del_PC">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">7.7</span>
+					<span>Audio en conflicto con altavoz interno del PC</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Audio_en_conflicto_con_altavoz_interno_del_PC-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Sin_entrada_en_el_micrófono" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Sin_entrada_en_el_micr%C3%B3fono">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">7.8</span>
+					<span>Sin entrada en el micrófono</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Sin_entrada_en_el_micrófono-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Configuración_predeterminada_de_Micrófono/Dispositivo_de_captura" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Configuraci%C3%B3n_predeterminada_de_Micr%C3%B3fono/Dispositivo_de_captura">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">7.9</span>
+					<span>Configuración predeterminada de Micrófono/Dispositivo de captura</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Configuración_predeterminada_de_Micrófono/Dispositivo_de_captura-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-El_micrófono_interno_no_funciona" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#El_micr%C3%B3fono_interno_no_funciona">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">7.10</span>
+					<span>El micrófono interno no funciona</span>
+				</div>
+			</a>
+			
+			<ul id="toc-El_micrófono_interno_no_funciona-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Sin_sonido_con_tarjeta_de_sonido_Intel_integrada" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Sin_sonido_con_tarjeta_de_sonido_Intel_integrada">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">7.11</span>
+					<span>Sin sonido con tarjeta de sonido Intel integrada</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Sin_sonido_con_tarjeta_de_sonido_Intel_integrada-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Sin_sonido_en_auriculares_con_tarjeta_de_sonido_Intel_integrada" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Sin_sonido_en_auriculares_con_tarjeta_de_sonido_Intel_integrada">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">7.12</span>
+					<span>Sin sonido en auriculares con tarjeta de sonido Intel integrada</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Sin_sonido_en_auriculares_con_tarjeta_de_sonido_Intel_integrada-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Sin_sonido_cuando_se_instala_la_tarjeta_de_vídeo_con_S/PDIF" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Sin_sonido_cuando_se_instala_la_tarjeta_de_v%C3%ADdeo_con_S/PDIF">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">7.13</span>
+					<span>Sin sonido cuando se instala la tarjeta de vídeo con S/PDIF</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Sin_sonido_cuando_se_instala_la_tarjeta_de_vídeo_con_S/PDIF-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Calidad_de_audio_deficiente" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Calidad_de_audio_deficiente">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">7.14</span>
+					<span>Calidad de audio deficiente</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Calidad_de_audio_deficiente-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Crepiteos_al_iniciar_y_detener_la_reproducción" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Crepiteos_al_iniciar_y_detener_la_reproducci%C3%B3n">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">7.15</span>
+					<span>Crepiteos al iniciar y detener la reproducción</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Crepiteos_al_iniciar_y_detener_la_reproducción-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-La_salida_S/PDIF_no_funciona" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#La_salida_S/PDIF_no_funciona">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">7.16</span>
+					<span>La salida S/PDIF no funciona</span>
+				</div>
+			</a>
+			
+			<ul id="toc-La_salida_S/PDIF_no_funciona-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-La_salida_HDMI_no_funciona" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#La_salida_HDMI_no_funciona">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">7.17</span>
+					<span>La salida HDMI no funciona</span>
+				</div>
+			</a>
+			
+			<ul id="toc-La_salida_HDMI_no_funciona-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-La_salida_multicanal_PCM_de_HDMI_no_funciona_(Intel)" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#La_salida_multicanal_PCM_de_HDMI_no_funciona_(Intel)">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">7.18</span>
+					<span>La salida multicanal PCM de HDMI no funciona (Intel)</span>
+				</div>
+			</a>
+			
+			<ul id="toc-La_salida_multicanal_PCM_de_HDMI_no_funciona_(Intel)-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-HP_TX2500" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#HP_TX2500">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">7.19</span>
+					<span>HP TX2500</span>
+				</div>
+			</a>
+			
+			<ul id="toc-HP_TX2500-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Salto_de_sonido_durante_la_reproducción_MP3" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Salto_de_sonido_durante_la_reproducci%C3%B3n_MP3">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">7.20</span>
+					<span>Salto de sonido durante la reproducción MP3</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Salto_de_sonido_durante_la_reproducción_MP3-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Auriculares_USB_y_tarjetas_de_sonido_externas_USB" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Auriculares_USB_y_tarjetas_de_sonido_externas_USB">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">7.21</span>
+					<span>Auriculares USB y tarjetas de sonido externas USB</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Auriculares_USB_y_tarjetas_de_sonido_externas_USB-sublist" class="vector-toc-list">
+				<li id="toc-Sonido_crepitante_con_dispositivos_USB" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Sonido_crepitante_con_dispositivos_USB">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">7.21.1</span>
+					<span>Sonido crepitante con dispositivos USB</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Sonido_crepitante_con_dispositivos_USB-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Conexión_hot-plugging_de_una_tarjeta_de_sonido_USB" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Conexi%C3%B3n_hot-plugging_de_una_tarjeta_de_sonido_USB">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">7.21.2</span>
+					<span>Conexión hot-plugging de una tarjeta de sonido USB</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Conexión_hot-plugging_de_una_tarjeta_de_sonido_USB-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Error_'Unkown_hardware'_después_de_una_actualización_del_Kernel" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Error_'Unkown_hardware'_despu%C3%A9s_de_una_actualizaci%C3%B3n_del_Kernel">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">7.22</span>
+					<span>Error 'Unkown hardware' después de una actualización del Kernel</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Error_'Unkown_hardware'_después_de_una_actualización_del_Kernel-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-HDA_Analyzer" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#HDA_Analyzer">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">7.23</span>
+					<span>HDA Analyzer</span>
+				</div>
+			</a>
+			
+			<ul id="toc-HDA_Analyzer-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-ALSA_con_SDL" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#ALSA_con_SDL">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">7.24</span>
+					<span>ALSA con SDL</span>
+				</div>
+			</a>
+			
+			<ul id="toc-ALSA_con_SDL-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Alternativa_al_sonido_bajo" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Alternativa_al_sonido_bajo">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">7.25</span>
+					<span>Alternativa al sonido bajo</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Alternativa_al_sonido_bajo-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Sonido_abrupto_después_de_reanudar_la_suspensión" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Sonido_abrupto_despu%C3%A9s_de_reanudar_la_suspensi%C3%B3n">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">7.26</span>
+					<span>Sonido abrupto después de reanudar la suspensión</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Sonido_abrupto_después_de_reanudar_la_suspensión-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Silencio_después_de_reiniciar" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Silencio_despu%C3%A9s_de_reiniciar">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">7.27</span>
+					<span>Silencio después de reiniciar</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Silencio_después_de_reiniciar-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Configuraciones_de_ejemplo" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Configuraciones_de_ejemplo">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">8</span>
+				<span>Configuraciones de ejemplo</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Configuraciones_de_ejemplo-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Véase_también" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#V%C3%A9ase_tambi%C3%A9n">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">9</span>
+				<span>Véase también</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Véase_también-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+</ul>
+</div>
+
+					</div>
+		</nav>
+			</div>
+		</div>
+		<div class="mw-content-container">
+			<main id="content" class="mw-body" style="margin: 0">
+				<header class="mw-body-header vector-page-titlebar">
+					<nav aria-label="Contents" class="vector-toc-landmark">
+						
+<div id="vector-page-titlebar-toc" class="vector-dropdown vector-page-titlebar-toc vector-button-flush-left">
+	<input type="checkbox" id="vector-page-titlebar-toc-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-page-titlebar-toc" class="vector-dropdown-checkbox " aria-label="Toggle the table of contents">
+	<label id="vector-page-titlebar-toc-label" for="vector-page-titlebar-toc-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"><span class="vector-icon mw-ui-icon-listBullet mw-ui-icon-wikimedia-listBullet"></span>
+
+<span class="vector-dropdown-label-text">Toggle the table of contents</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+							<div id="vector-page-titlebar-toc-unpinned-container" class="vector-unpinned-container">
+			</div>
+		
+	</div>
+</div>
+
+					</nav>
+					<h1 id="firstHeading" class="firstHeading mw-first-heading"><span class="mw-page-title-main">Advanced Linux Sound Architecture (Español)</span></h1>
+							
+<div id="p-lang-btn" class="vector-dropdown mw-portlet mw-portlet-lang">
+	<input type="checkbox" id="p-lang-btn-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-p-lang-btn" class="vector-dropdown-checkbox mw-interlanguage-selector" aria-label="Go to an article in another language. Available in 5 languages">
+	<label id="p-lang-btn-label" for="p-lang-btn-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--action-progressive mw-portlet-lang-heading-5" aria-hidden="true"><span class="vector-icon mw-ui-icon-language-progressive mw-ui-icon-wikimedia-language-progressive"></span>
+
+<span class="vector-dropdown-label-text">5 languages</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+		<div class="vector-menu-content">
+			
+			<ul class="vector-menu-content-list">
+				
+				<li class="interlanguage-link interwiki-de mw-list-item"><a href="https://wiki.archlinux.de/title/Advanced_Linux_Sound_Architecture" title="Advanced Linux Sound Architecture – Deutsch" lang="de" hreflang="de" data-title="Advanced Linux Sound Architecture" data-language-autonym="Deutsch" data-language-local-name="Deutsch" class="interlanguage-link-target"><span>Deutsch</span></a></li>
+<li class="interlanguage-link interwiki-en mw-list-item"><a href="../en/Advanced_Linux_Sound_Architecture.html" title="Advanced Linux Sound Architecture – English" lang="en" hreflang="en" data-title="Advanced Linux Sound Architecture" data-language-autonym="English" data-language-local-name="English" class="interlanguage-link-target"><span>English</span></a></li>
+<li class="interlanguage-link interwiki-fr mw-list-item"><a href="../fr/Advanced_Linux_Sound_Architecture.html" title="Advanced Linux Sound Architecture – français" lang="fr" hreflang="fr" data-title="Advanced Linux Sound Architecture" data-language-autonym="Français" data-language-local-name="français" class="interlanguage-link-target"><span>Français</span></a></li>
+<li class="interlanguage-link interwiki-ja mw-list-item"><a href="https://wiki.archlinux.jp/index.php/Advanced_Linux_Sound_Architecture" title="Advanced Linux Sound Architecture – 日本語" lang="ja" hreflang="ja" data-title="Advanced Linux Sound Architecture" data-language-autonym="日本語" data-language-local-name="日本語" class="interlanguage-link-target"><span>日本語</span></a></li>
+<li class="interlanguage-link interwiki-zh-hans mw-list-item"><a href="https://wiki.archlinuxcn.org/wiki/Advanced_Linux_Sound_Architecture" title="Advanced Linux Sound Architecture – 中文（简体）" lang="zh-Hans" hreflang="zh-Hans" data-title="Advanced Linux Sound Architecture" data-language-autonym="中文（简体）" data-language-local-name="中文（简体）" class="interlanguage-link-target"><span>中文（简体）</span></a></li>
+			</ul>
+			
+		</div>
+
+	</div>
+</div>
+</header>
+				<div class="vector-column-end">
+					<div class="vector-sticky-pinned-container">
+						<nav class="vector-page-tools-landmark" aria-label="Page tools">
+							<div id="vector-page-tools-pinned-container" class="vector-pinned-container">
+				
+							</div>
+		</nav>
+						<nav class="vector-appearance-landmark" aria-label="Appearance">
+							<div id="vector-appearance-pinned-container" class="vector-pinned-container">
+				<div id="vector-appearance" class="vector-appearance vector-pinnable-element">
+	<div class="vector-pinnable-header vector-appearance-pinnable-header vector-pinnable-header-pinned" data-feature-name="appearance-pinned" data-pinnable-element-id="vector-appearance" data-pinned-container-id="vector-appearance-pinned-container" data-unpinned-container-id="vector-appearance-unpinned-container">
+	<div class="vector-pinnable-header-label">Appearance</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-appearance.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-appearance.unpin">hide</button>
+</div>
+
+
+</div>
+
+							</div>
+		</nav>
+					</div>
+				</div>
+				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container>
+					<div class="vector-body-before-content">
+							<div class="mw-indicators">
+		</div>
+
+						<div id="siteSub" class="noprint">From ArchWiki</div>
+					</div>
+					<div id="contentSub"><div id="mw-content-subtitle"></div></div>
+					
+					
+					<div id="mw-content-text" class="mw-body-content">
+<div class="mw-content-ltr mw-parser-output" lang="es" dir="ltr">
+<div class="archwiki-template-meta-related-articles">
+<p>Artículos relacionados</p>
+<ul>
+<li><a href="../es/Sound_system.html" title="Sound system (Español)">Sound system (Español)</a></li>
+<li><a href="../es/PC_speaker.html" class="mw-redirect" title="Disable PC speaker beep (Español)">Disable PC speaker beep (Español)</a></li>
+</ul>
+</div>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../File:Tango-preferences-desktop-locale.svg" decoding="async" width="48" height="48" class="mw-file-element"></span></span><b>This article or section needs to be <a href="../en/ArchWiki:Contributing.html#Translating" title="ArchWiki:Contributing">translated</a>.</b></p>
+<div>
+<b>Notes:</b> No updates since 2022 (Discuss in <a rel="nofollow" class="external text" href="../es/Talk:Advanced_Linux_Sound_Architecture.html">Talk:Advanced Linux Sound Architecture (Español)</a>)</div>
+</div>
+<p>La <a href="https://en.wikipedia.org/wiki/Advanced_Linux_Sound_Architecture" class="extiw" title="wikipedia:Advanced Linux Sound Architecture">Arquitectura Avanzada para el Sonido en Linux</a> (conocido con el acrónimo <b>ALSA</b>) es un componente del kernel destinado a sustituir el original Open Sound System (Open OSSv3) para proporcionar controladores de dispositivos para las tarjetas de sonido. Además de los controladores de dispositivos de sonido, <b>ALSA</b> también pone a disposición una amplia biblioteca en el espacio de usuario para los desarrolladores de aplicaciones que quieran utilizar las funciones del controlador mediante un API de alto nivel con una interacción directa con los controladores del kernel.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Nota:</strong> Para un entorno de sonido alternativo, véase <a href="../es/Open_Sound_System.html" title="Open Sound System (Español)">Open Sound System</a>.</div>
+<meta property="mw:PageProp/toc">
+<h2>
+<span id="Instalaci.C3.B3n"></span><span class="mw-headline" id="Instalación">Instalación</span>
+</h2>
+<p>ALSA está incluido en el kernel de Arch por defecto como un conjunto de módulos, por lo que no es necesaria su instalación explícitamente. Pero necesita de firmware para poder reconocer el dispositivo de sonido en computadoras portátiles, tales son: <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=alsa-firmware">alsa-firmware</a></span> y <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=sof-firmware">sof-firmware</a></span>
+</p>
+<p><a href="../en/Udev.html" class="mw-redirect" title="Udev (Español)">udev</a> explorará automáticamente el hardware en el arranque, cargando el módulo del kernel correcto para la tarjeta de sonido encontrada. Por lo tanto, el sonido debería estar funcionando desde el inicio, pero, ha de tener en cuenta que su configuración viene, por defecto, con todos los canales de audio silenciados.
+</p>
+<p>Los usuarios con un inicio de sesión local (en una terminal virtual o un gestor de pantalla)  tienen habilitados los permisos para reproducir sonido y cambiar los niveles del mezclador. Para permitir esto en un inicio de sesión remoto, el usuario tiene que ser <a href="../es/Users_and_groups.html#Administraci%C3%B3n_de_grupos" title="Users and groups (Español)">añadido</a> al grupo de <code>audio</code>. La calidad de miembro del grupo de <code>audio</code> también permite el acceso directo a los dispositivos, lo que puede conducir a que se graben exclusivamente las salidas de las aplicaciones (rompiendo el software de mezcla) y frustrar el rápido intercambio entre usuarios, y multisede. Por lo tanto, la adición de un usuario al grupo de <code>audio</code> <b>no</b> es recomendable, a menos que se necesite específicamente <a rel="nofollow" class="external autonumber" href="https://wiki.ubuntu.com/Audio/TheAudioGroup">[1]</a>.
+</p>
+<h3><span class="mw-headline" id="Utilidades_en_el_espacio_de_usuario">Utilidades en el espacio de usuario</span></h3>
+<p><a href="../es/Help:Reading.html#Instalaci%C3%B3n_de_paquetes" title="Help:Reading (Español)">Instale</a> el paquete <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=alsa-utils">alsa-utils</a></span> que contienen la herrameinta <code>alsamixer</code> para el espacio de usuario,  que permite la configuración de los dispositivos de sonido desde la consola o terminal. Instale también el paquete <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=alsa-plugins">alsa-plugins</a></span> si desea <a href="#Remuestreo_de_alta_calidad">remuestreo en alta calidad</a>, <a href="#Upmixing/Downmixing">upmixing/downmixing</a> y otras características avanzadas.
+</p>
+<p>Si desea que las aplicaciones de OSS funcionen mediante dmix (software de mezcla), instale también el paquete <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=alsa-oss">alsa-oss</a></span>. Cargue los  <a href="../es/Kernel_module.html" class="mw-redirect" title="Kernel modules (Español)">módulos del kernel</a> <code>snd_seq_oss</code>, <code>snd_pcm_oss</code> y <code>snd_mixer_oss</code> para activar los módulos de emulación de OSS.
+</p>
+<h2><span class="mw-headline" id="Abrir_los_canales_de_audio">Abrir los canales de audio</span></h2>
+<p>La versión actual de ALSA se instala con todos los canales <b>silenciados por defecto</b>. Será necesario revertir manualmente el <b>enmudecimiento</b> de los canales.
+</p>
+<p>Lo más cómodo es utilizar la interfaz gráfica <code>alsamixer</code> para hacer esto:
+</p>
+<pre>$ alsamixer
+</pre>
+<p>Como alternativa, puede usar <code>amixer</code> desde la línea de comandos:
+</p>
+<pre>$ amixer sset Master unmute
+</pre>
+<p>La etiqueta <code>MM</code>, por debajo de un canal, indica que el canal está silenciado, y <code>00</code> indica que está abierto.
+</p>
+<p>El procedimiento a seguir es el siguiente:
+</p>
+<p>Desplácese hasta los canales <code>Master</code> y <code>PCM</code> con las teclas <code>←</code> y <code>→</code>, y retire el silencio pulsando la tecla <code>m</code>. Utilice la tecla <code>↑</code> para aumentar el volumen y obtener un «dB gain» con valor <code>0</code>. El valor «gain» se puede encontrar en la parte superior izquierda junto al campo <code>Item:</code>. Los valores más altos de «gain» producirán sonido distorsionado.
+</p>
+<p>Para obtener un verdadero sonido envolvente (surround) 5.1 o 7.1 es probable que tenga que activar otros canales como Front, Surround, Center, LFE (subwoofer) y Side (estos son los nombres de los canales para el módulo Intel HD Audio, y pueden variar según el hardware). Tenga en cuenta que esto no se logrará automáticamente con Upmix para las fuentes de sonido estéreo (como, por ejemplo, la música). Con el fin de lograrlo, consulte <a href="#Upmixing/Downmixing">Upmixing/Downmixing</a>.
+</p>
+<p>Salga de  alsamixer pulsando <code>Esc</code>.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Nota:</strong> 
+<ul>
+<li>Algunas tarjetas necesitan tener el canal de salida digital silenciado/apagado para poder escuchar el sonido analógico. Para la LS Soundblaster Audigy es necesario silenciar el canal IEC958.</li>
+<li>Algunas máquinas, (como la Thinkpad T61), tienen un canal speaker (altavoz) que debe ser activado y ajustado también.</li>
+<li>Algunas máquinas (como Dell E6400) también pueden requerir que el silencio sea desactivado en los canales <code>Front</code> y <code>Headphone</code> y ajustados</li>
+</ul>
+</div>
+<p>Se puede ahora comprobar si el sonido funciona:
+</p>
+<pre>$ speaker-test -c 2
+</pre>
+<p>Modifique el valor -c para ajustar la configuración de los altavoces. Por ejemplo, use -c 8 para 7.1:
+</p>
+<pre>$ speaker-test -c 8
+</pre>
+<p>Si esto no funciona, vaya a <a href="#Configuraci%C3%B3n">configuración</a> o consulte la sección sobre <a href="#Soluci%C3%B3n_de_problemas">solución de problemas</a>.
+</p>
+<p>El paquete <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=alsa-utils">alsa-utils</a></span> incluye <code>alsa-restore.service</code> y <code>alsa-store.service</code>, que están preconfigurados para hacer funcionar el arranque y la parada, respectivamente.
+</p>
+<h2>
+<span id="Configuraci.C3.B3n"></span><span class="mw-headline" id="Configuración">Configuración</span>
+</h2>
+<h3><span class="mw-headline" id="Sin_sonido_en_virtualbox">Sin sonido en virtualbox</span></h3>
+<p>Si tiene problemas con virtualbox, el siguiente comando puede ser de ayuda:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">$ alsactl init</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">
+
+Found hardware: "ICH" "SigmaTel STAC9700,83,84" "AC97a:83847600" "0x8086" "0x0000"
+Hardware is initialized using a generic method
+</pre>
+<p>Puede que tenga que activar la salida de ALSA en su software de audio también.
+</p>
+<h3><span class="mw-headline" id="Establecer_la_tarjeta_de_sonido_predeterminada">Establecer la tarjeta de sonido predeterminada</span></h3>
+<p>Si sus tarjetas de sonido cambian de orden durante el arranque, puede especificar el orden de las mismas en el archivo <code>/etc/modprobe.d/modprobe.conf</code> (se sugiere el archivo <code>/etc/modprobe.d/alsa-base.conf</code>).
+Por ejemplo, si desea que el tarjeta de sonido «mia» se cargue primero, colóquele el valor #0:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/modprobe.d/alsa-base.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">options snd slots=snd_mia,snd_hda_intel
+options snd_mia index=0
+options snd_hda_intel index=1
+</pre>
+<p>Utilice <code>$ lsmod | grep snd</code> para obtener una lista de dispositivos.
+Esta configuración asume que tiene una tarjeta de sonido «mia» usando <code>snd_mia</code>, y una tarjeta «snd-hda-intel» (es decir, integrada) usando <code>snd_hda_intel</code>.
+</p>
+<p>También puede proporcionar un índice de <code>-2</code> para indicarle a ALSA que nunca use una tarjeta como la primera.  Distribuciones como Linux Mint y Ubuntu utilizan la siguiente configuración para evitar que USB y de otros tipos de controladores «extraños» obtengan el índice <code>0</code>:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/modprobe.d/alsa-base.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">options bt87x index=-2
+options cx88_alsa index=-2
+options saa7134-alsa index=-2
+options snd-atiixp-modem index=-2
+options snd-intel8x0m index=-2
+options snd-via82xx-modem index=-2
+options snd-usb-audio index=-2
+options snd-usb-caiaq index=-2
+options snd-usb-ua101 index=-2
+options snd-usb-us122l index=-2
+options snd-usb-usx2y index=-2
+# Keep snd-pcsp from being loaded as first soundcard
+options snd-pcsp index=-2
+# Keep snd-usb-audio from beeing loaded as first soundcard
+options snd-usb-audio index=-2
+</pre>
+<p>Estos cambios requieren un reinicio del sistema, para que surtan efectos.
+</p>
+<h4>
+<span id="Seleccionar_el_PCM_por_defecto_a_trav.C3.A9s_de_la_variable_de_entorno"></span><span class="mw-headline" id="Seleccionar_el_PCM_por_defecto_a_través_de_la_variable_de_entorno">Seleccionar el PCM por defecto a través de la variable de entorno</span>
+</h4>
+<p>En el archivo de configuración, preferentemente el global, agregue:
+</p>
+<pre> pcm.!default {
+   type plug
+   slave.pcm {
+     @func getenv
+     vars [ ALSAPCM ]
+     default "hw:Audigy2"
+   }
+ }
+</pre>
+<p>Es necesario sustituir la línea «default» con el nombre de la tarjeta (en el ejemplo es <code>Audigy2</code>). Se pueden obtener los nombres con <code>aplay -l</code> o también puede utilizar los PCM como <b>surround51</b>. Pero si se necesita utilizar el micrófono es una buena idea seleccionar PCM full-duplex por defecto.
+</p>
+<p>Ahora se pueden comenzar los programas seleccionando la tarjeta de sonido con solo cambiar la variable de entorno <code>ALSAPCM</code>. Funciona muy bien para todos los programas que no permiten seleccionar la tarjeta, para los demás asegúrese de que mantener la tarjeta predeterminada.
+Por ejemplo, asumiendo que escribió un PCM downmix llamado <b>mix51to20</b> se puede utilizar el mismo con <code>mplayer</code> usando la línea de órdenes <code>ALSAPCM=mix51to20 mplayer example_6_channel.wav</code>
+</p>
+<h4>
+<span id="M.C3.A9todo_alternativo"></span><span class="mw-headline" id="Método_alternativo">Método alternativo</span>
+</h4>
+<p>En primer lugar, tendrá que averiguar la identificación de la tarjeta y del dispositivo que desea establecer como predeterminados, ejecutando <code>aplay -l</code>:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">$ aplay -l</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">**** List of PLAYBACK Hardware Devices ****
+card 0: Intel [HDA Intel], device 0: CONEXANT Analog [CONEXANT Analog]
+  Subdevices: 1/1
+  Subdevice #0: subdevice #0
+card 0: Intel [HDA Intel], device 1: Conexant Digital [Conexant Digital]
+  Subdevices: 1/1
+  Subdevice #0: subdevice #0
+card 1: JamLab [JamLab], device 0: USB Audio [USB Audio]
+  Subdevices: 1/1
+  Subdevice #0: subdevice #0
+card 2: Audio [Altec Lansing XT1 - USB Audio], device 0: USB Audio [USB Audio]
+  Subdevices: 1/1
+  Subdevice #0: subdevice #0</pre>
+<p>Por ejemplo, la última entrada de esta lista tiene el ID de la tarjeta 2 y el ID de dispositivo 0. Para establecer esta tarjeta como la predeterminada, puede utilizar el archivo que afecta a todo el sistema <code>/etc/asound.conf</code> o el archivo específico del usuario <code>~/.asoundrc</code>.  Puede que tenga que crear el archivo si no existe. A continuación, inserte las siguientes opciones con el id correspondiente del dispositivo y de la tarjeta.
+</p>
+<pre>pcm.!default {
+	type hw
+	card 2
+}
+
+ctl.!default {
+	type hw           
+	card 2
+}
+</pre>
+<p>Las opciones 'pcm' afectan a la tarjeta y al dispositivo que se pueden utilizar para la reproducción de audio, mientras que la opción 'ctl' afecta a la tarjeta que es utilizada por la utilidades de control como alsamixer.
+</p>
+<p>Los cambios entrarán en vigor tan pronto se (re)inicie una aplicación (mplayer, etc.). También puede probar con una orden como aplay:
+</p>
+<pre>aplay -D default &lt;your_favourite_sound.wav&gt;
+</pre>
+<p>Si recibe un error acerca de la configuración de asound, compruebe <a rel="nofollow" class="external text" href="https://www.alsa-project.org/main/index.php/Asoundrc#The_default_plugin">upstream documentation</a> para conocer posibles cambios en el formato del archivo de configuración.
+</p>
+<h3>
+<span id="Asegurarse_de_que_los_m.C3.B3dulos_de_sonido_se_cargan"></span><span class="mw-headline" id="Asegurarse_de_que_los_módulos_de_sonido_se_cargan">Asegurarse de que los módulos de sonido se cargan</span>
+</h3>
+<p>Es de suponer que udev detectará automáticamente el sonido correctamente. Puede verificar que esto ha ocurrido así con la orden siguiente:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">$ lsmod | grep '^snd' | column -t</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">snd_hda_codec_hdmi     22378   4
+snd_hda_codec_realtek  294191  1
+snd_hda_intel          21738   1
+snd_hda_codec          73739   3  snd_hda_codec_hdmi,snd_hda_codec_realtek,snd_hda_intel
+snd_hwdep              6134    1  snd_hda_codec
+snd_pcm                71032   3  snd_hda_codec_hdmi,snd_hda_intel,snd_hda_codec
+snd_timer              18992   1  snd_pcm
+snd                    55132   9  snd_hda_codec_hdmi,snd_hda_codec_realtek,snd_hda_intel,snd_hda_codec,snd_hwdep,snd_pcm,snd_timer
+snd_page_alloc         7017    2  snd_hda_intel,snd_pcm
+</pre>
+<p>Si el resultado es similar, los controladores de sonido han sido reconocidos automáticamente con éxito.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Nota:</strong> Desde <code>udev&gt;=171</code>, los módulos de emulación de OSS (<code>snd_seq_oss, snd_pcm_oss, snd_mixer_oss</code>) no se cargan de forma predeterminada: <a href="../es/Kernel_module.html#Manejo_manual_de_m%C3%B3dulos" title="Kernel module (Español)">Cárguelos manualmente</a> si son necesarios.</div>
+<p>También puede ser que desee comprobar el directorio <code>/dev/snd/</code> para verificar que los archivos de dispositivos son los correctos:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">$ ls -l /dev/snd</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">total 0
+crw-rw----  1 root audio 116,  0 Apr  8 14:17 controlC0
+crw-rw----  1 root audio 116, 32 Apr  8 14:17 controlC1
+crw-rw----  1 root audio 116, 24 Apr  8 14:17 pcmC0D0c
+crw-rw----  1 root audio 116, 16 Apr  8 14:17 pcmC0D0p
+crw-rw----  1 root audio 116, 25 Apr  8 14:17 pcmC0D1c
+crw-rw----  1 root audio 116, 56 Apr  8 14:17 pcmC1D0c
+crw-rw----  1 root audio 116, 48 Apr  8 14:17 pcmC1D0p
+crw-rw----  1 root audio 116,  1 Apr  8 14:17 seq
+crw-rw----  1 root audio 116, 33 Apr  8 14:17 timer
+</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Nota:</strong> Si solicita ayuda en el IRC o los foros, por favor envíe la salida proporcionada por las órdenes anteriores.</div>
+<p>Si tiene presente, por lo menos, los dispositivos <b>controlC0</b> y <b>pcmC0D0p</b> o similares, entonces los módulos de sonido han sido detectados y cargados correctamente.
+</p>
+<p>Si este no es el caso, sus módulos de sonido no se han detectado correctamente. Para solucionar esto, pruebe intentando cargar los módulos manualmente:
+</p>
+<ul>
+<li>Localice el módulo de la tarjeta de sonido: <a rel="nofollow" class="external text" href="https://www.alsa-project.org/main/index.php/Matrix:Main">ALSA Soundcard Matrix</a>. El módulo contendrá el prefijo 'snd-' (por ejemplo: <code>snd-via82xx</code>).</li>
+<li>
+<a href="../es/Kernel_module.html#Manejo_manual_de_m%C3%B3dulos" title="Kernel module (Español)">Cargue el módulo</a>.</li>
+<li>Verifique que los archivos del dispositivo en <code>/dev/snd</code> tienen una salida razonable (véase más arriba) y/o compruebelo con <code>alsamixer</code> o <code>amixer</code>.</li>
+<li>Configure <code>snd-NAME-OF-MODULE</code> y <code>snd-pcm-oss</code> para <a href="../es/Kernel_module.html#systemd" title="Kernel module (Español)">cargar al arranque</a>.</li>
+</ul>
+<h3><span class="mw-headline" id="Conseguir_salida_SPDIF">Conseguir salida SPDIF</span></h3>
+<p>(De los foros de Gentoo)
+</p>
+<ul>
+<li>En el control del volumen de GNOME, en la pestaña Opciones, cambie IEC958 a PCM. Esta opción puede estar habilitada en las preferencias.</li>
+<li>Si no tiene instalado el control del volumen de GNOME:
+<ul>
+<li>Edite <code>/var/lib/alsa/asound.state</code>. En este archivo alsasound guarda la configuración de mixer.</li>
+<li>Encuentre una línea que dice: 'IEC958 Playback Switch'. Cerca de ella se encuentra una línea que dice <code>value:false</code>. Cambie el valor a <code>value:true</code>.</li>
+<li>Ahora busque esta línea: 'IEC958 Playback AC97-SPSA'. Cambie su valor a <code>0</code>.</li>
+<li>Reinicie ALSA.</li>
+</ul>
+</li>
+</ul>
+<p>Otra forma alternativa para activar la salida SPDIF automáticamente al iniciar sesión (probado en SoundBlaster Audigy):
+</p>
+<ul><li>Añada las siguientes líneas a <code>/etc/rc.local</code>:</li></ul>
+<pre> # Use COAX-digital output
+ amixer set 'IEC958 Optical' 100 unmute
+ amixer set 'Audigy Analog/Digital Output Jack' on
+</pre>
+<p>Se puede ver el nombre de la salida digital de la tarjeta con:
+</p>
+<pre> $ amixer scontrols
+</pre>
+<h3><span class="mw-headline" id="Ecualizador_System-Wide">Ecualizador System-Wide</span></h3>
+<h4>
+<span id="Usar_AlsaEqual_.28proporciona_la_interfaz_gr.C3.A1fica.29"></span><span class="mw-headline" id="Usar_AlsaEqual_(proporciona_la_interfaz_gráfica)">Usar AlsaEqual (proporciona la interfaz gráfica)</span>
+</h4>
+<p>Instale <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/alsaequal/">alsaequal</a></span><sup><small>AUR</small></sup> desde <a href="../en/Arch_User_Repository.html" class="mw-redirect" title="AUR">AUR</a>.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Nota:</strong> Si tiene un sistema x86_64 y está utilizando 32bit-flashplugin, el sonido en flash no funcionará. Tendrá que, o bien desactivar alsaequal, o bien compilarlo para 32 bits.</div>
+<p>Después de instalar el paquete, introduzca lo siguiente en el archivo de configuración de ALSA (<code>~/.asoundrc</code> o <code>/etc/asound.conf</code>):
+</p>
+<pre>ctl.equal {
+ type equal;
+}
+
+pcm.plugequal {
+  type equal;
+  # Modifique la línea de abajo si
+  # desea utilizar la tarjeta de sonido 0.
+  #slave.pcm "plughw:0,0";
+  #por defecto funcionará con más de una fuente simultáneamente:
+  slave.pcm "plug:dmix";
+}
+#pcm.equal {
+  # Si no desea que el ecualizador utilice la
+  # tarjeta de sonido predeterminada comente la siguiente
+  # línea y descomente la línea anterior. (Puede
+  # elegirlo como dispositivo de salida al usar
+  # otras aplicaciones específicas, por ejemplo, mpg123 -a equal 06.Back_In_Black.mp3)
+pcm.!default {
+  type plug;
+  slave.pcm plugequal;
+}
+</pre>
+<p>Y ya está listo para cambiar su ecualizador con la orden:
+</p>
+<pre>$ alsamixer -D equal
+</pre>
+<p>Tenga en cuenta que el archivo de configuración es diferente para cada usuario (mientras no se especifique otra cosa) que se guarda en <code>~/.alsaequal.bin</code>.
+Así que si desea utilizar AlsaEqual con <a href="../en/Music_Player_Daemon.html" class="mw-redirect" title="Mpd">mpd</a> u otro software que se ejecute bajo un usuario diferente, se puede configurar mediante la orden:
+</p>
+<pre># su mpd -c 'alsamixer -D equal'
+</pre>
+<p>O, por ejemplo, se puede hacer un enlace simbólico a <code>.alsaequal.bin</code> en el directorio home de aquel usuario.
+</p>
+<h5><span class="mw-headline" id="Administrar_los_estados_de_AlsaEqual">Administrar los estados de AlsaEqual</span></h5>
+<p>Instale <a rel="nofollow" class="external text" href="https://xyne.dev/projects/alsaequal-mgr/">alsaequal-mgr</a> desde los <a rel="nofollow" class="external text" href="https://xyne.dev/repos/">repositorios de Xyne</a> o desde <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/alsaequal-mgr/">alsaequal-mgr</a></span><sup><small>AUR</small></sup>.
+</p>
+<p>Configure el ecualizador como de costumbre con:
+</p>
+<pre>$ alsamixer -D equal
+</pre>
+<p>Cuando esté satisfecho con el estado, puede darle un nombre («foo» en este ejemplo) y guardarlo:
+</p>
+<pre>$ alsaequal-mgr save foo
+</pre>
+<p>El estado «foo», entonces se puede restaurar en un momento posterior con:
+</p>
+<pre>$ alsaequal-mgr load foo
+</pre>
+<p>De esta forma puede crear diferentes estados de ecualizador para juegos, películas, géneros musicales, aplicaciones de VoIP, etc. y volver a cargarlos cuando sea necesario.
+</p>
+<p>Consulte la <a rel="nofollow" class="external text" href="https://xyne.dev/projects/alsaequal-mgr/">página del proyecto</a> y los consejos de ayuda para más opciones.
+</p>
+<h4><span class="mw-headline" id="Usar_mbeq">Usar mbeq</span></h4>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Nota:</strong> Este método requiere el uso del plugin ladspa que podría suponer un consumo un poco alto de la CPU cuando se reproduce el sonido. Además, esto se hizo pensando en la utilización de sonido estereofónico (por ejemplo, optimizado para escuchar a través de auriculares).</div>
+<p>Instale los paquetes <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=alsa-plugins">alsa-plugins</a></span>, <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=ladspa">ladspa</a></span> y <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=swh-plugins">swh-plugins</a></span> si aún no los tiene.
+</p>
+<ul><li>Si no ha creado el archivo <code>~/.asoundrc</code> o <code>/etc/asound.conf</code>, a continuación, cree cualquiera de ellos y añada lo siguiente:</li></ul>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/asound.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">pcm.eq {
+  type ladspa
+
+  # La salida del EQ puede ir directamente a un dispositivo de hardware
+  # (si usted tiene un mezclador de hardware, por ejemplo SBLive/Audigy) o puede ir
+  # para el mezclador de software que se muestra aquí.
+  #slave.pcm "plughw:0,0"
+  slave.pcm "plug:dmix"
+
+  # A veces es posible que necesite especificar la ruta de los plugins,
+  # especialmente si acaba de instalarlos. Una vez que haya iniciado sesión
+  # salir/reiniciar no debería ser necesario, pero sí, si se producen errores
+  # por no poder encontrar los plugins, intente eliminando el comentario de estos.
+  #path "/usr/lib/ladspa"
+
+  plugins [
+    {
+      label mbeq
+      id 1197
+      input {
+        #este ajuste se puede hacer aquí, por ejemplo; edite a su gusto
+        #bandas: 50Hz, 100Hz, 220Hz, 156hz, 311hz, 440hz, 622hz, 880hz, 1250hz, 1750Hz, 25000hz,
+        #50000hz, 10000Hz, 20000Hz
+        controls [ -5 -5 -5 -5 -5 -10 -20 -15 -10 -10 -10 -10 -10 -3 -2 ]
+      }
+    }
+  ]
+ }
+
+ # Redirigir el dispositivo predeterminado para pasar por el EQ - es posible que desee hacer esto.
+ # haga esto último, una vez que esté seguro de que todo está funcionando. De lo contrario todos
+ # sus programas de audio se romperán/bloquearán si algo ha ido mal.
+
+ pcm.!default {
+  type plug
+  slave.pcm "eq"
+ }
+
+ # Redirigir la emulación OSS a través del EQ también (con programas que corren a través de "AOSS")
+
+ pcm.dsp0 {
+  type plug
+  slave.pcm "eq"
+ }
+</pre>
+<ul><li>Ahora todo debe ir bien (en su defecto, pregunte en el foro).</li></ul>
+<h2><span class="mw-headline" id="Remuestreo_de_alta_calidad">Remuestreo de alta calidad</span></h2>
+<p>Cuando el software de mezcla está habilitado, ALSA se ve obligado a volver a muestrear (remuestrear) todo en la misma frecuencia (48000 por defecto cuando se admite). Dmix utiliza un algoritmo de remuestreo pobre que produce una pérdida notable de la calidad de sonido.
+</p>
+<p>Instale <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=alsa-plugins">alsa-plugins</a></span> y <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=libsamplerate">libsamplerate</a></span>.
+</p>
+<p>Cambie el convertidor de frecuencia por defecto a libsamplerate:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/asound.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">defaults.pcm.rate_converter "samplerate_best"</pre>
+<p>o
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">~/.asoundrc</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">defaults.pcm.rate_converter "samplerate_best"</pre>
+<p><b>samplerate_best</b> ofrece mejor calidad de sonido, pero se necesita una CPU decente para poder usarlo, ya que requiere una gran cantidad de ciclos de CPU en tiempo real para el remuestreo. Existen otros algoritmos disponibles (<b>samplerate</b>, etc.), pero no proporcionan una gran mejora respecto al remuestreador por defecto.
+</p>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Advertencia:</strong> En algunos sistemas, samplerate_best puede causar un problema por el que no se obtiene ningún sonido desde flashplayer.</div>
+<h2>
+<span id="Upmixing.2FDownmixing"></span><span class="mw-headline" id="Upmixing/Downmixing">Upmixing/Downmixing</span>
+</h2>
+<h3><span class="mw-headline" id="Upmixing">Upmixing</span></h3>
+<p>A fin de que una fuente de audio estéreo, como música, pueda ser capaz de ocupar todas las salidas de un sistema de sonido 5.1 o 7.1, es necesario utilizar upmixing. En el pasado este proceso resultaba difícil y propenso a errores, pero a día de hoy existen plugins que hacen fácil esta tarea. Por lo tanto, instale <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=alsa-plugins">alsa-plugins</a></span>.
+</p>
+<p>A continuación, añada lo siguiente al archivo de configuración de ALSA de su elección (ya sea <code>/etc/asound.conf</code> o <code>~/.asoundrc</code>):
+</p>
+<pre>pcm.upmix71 {
+    type upmix
+    slave.pcm "surround71"
+    delay 15
+    channels 8
+}
+</pre>
+<p>Puede cambiar fácilmente este ejemplo de upmixing 7.1 a 5.1 o 4.0.
+</p>
+<p>Esto agrega un nuevo pcm que se puede utilizar por upmixing. Si desea que todas las fuentes de audio pasen por este pcm, agréguelo como predeterminado debajo de la definición anterior, así:
+</p>
+<pre>pcm.!default "plug:upmix71"
+</pre>
+<p>El plugin permite automáticamente múltiples fuentes de sonido para trabajar a través de él sin problemas, de modo que este ajuste por defecto es, en realidad, una elección segura.
+Si esto no funciona, pruebe configurar su propio dmixer, para efectuar upmixing del canal PCM, así:
+</p>
+<pre>pcm.dmix6 {
+    type asym
+    playback.pcm {
+        type dmix
+        ipc_key 567829
+        slave {
+            pcm "hw:0,0"
+            channels 6
+        }
+    }
+}
+</pre>
+<p>y usar «dmix6» en lugar de «surround71».
+Si experimenta problemas de sonido, como saltos o distorsiones, puede aumentar el buffer_size (a 32768, por ejemplo) o utilizar un <a href="#Remuestreo_de_alta_calidad">remuestreador de alta calidad.</a>
+</p>
+<h3><span class="mw-headline" id="Downmixing">Downmixing</span></h3>
+<p>Si se quiere efectuar downmixing (pasar las fuentes de downmix a estéreo), por ejemplo, desea escuchar una película con sonido 5.1 en un equipo de música con salida estéreo, es necesario utilizar el plugin <code>vdownmix</code>, incluido en el paquete <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=alsa-plugins">alsa-plugins</a></span>.
+</p>
+<p>Una vez más, en el archivo de configuración, añada lo siguiente:
+</p>
+<pre>pcm.!surround51 {
+    type vdownmix
+    slave.pcm "default"
+}
+pcm.!surround40 {
+    type vdownmix
+    slave.pcm "default"
+}
+</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Nota:</strong> Esto podría no ser suficiente para hacer funcionar downmixing, véase <a rel="nofollow" class="external autonumber" href="https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=541786">[2]</a>. So, you might also need to add <code>pcm.!default "plug:surround51"</code> o <code>pcm.!default "plug:surround40"</code>. Sólo se puede utilizar un plug <code>vdownmix</code>; si tiene canales 7.1, necesitará utilizar  <code>surround71</code> en el lugar de la configuración anterior.  Un buen ejemplo, que incluye una configuración que funciona tanto con<code>vdownmix</code> como con <code>dmix</code>, se puede encontrar <a rel="nofollow" class="external text" href="https://bbs.archlinux.org/viewtopic.php?id=167275">aquí</a>.</div>
+<h2><span class="mw-headline" id="Mezclar">Mezclar</span></h2>
+<h3>
+<span id="Mezclar_con_software_.28dmix.29"></span><span class="mw-headline" id="Mezclar_con_software_(dmix)">Mezclar con software (dmix)</span>
+</h3>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Nota:</strong> Para versiones 1.0.9rc2 y superiores de ALSA, no es necesario configurar dmix para las salidas de sonido analógicas. Dmix está habilitado, de forma predeterminada, para las tarjetas de sonido que no son compatibles con el hardware de mezcla.</div>
+<p>Si eso no funciona automáticamente, sin embargo, es cuestión simplemente de crear un archivo <code>.asoundrc</code> (o modificar el existente) en el directorio personal, con el siguiente contenido:
+</p>
+<pre>pcm.dsp {
+    type plug
+    slave.pcm "dmix"
+}
+</pre>
+<p>Esto debería habilitar dmix (software de mezcla) y permitir el acceso simultáneo de más de una aplicación para hacer uso de la tarjeta de sonido.
+</p>
+<p>Para una salida de sonido digital como S/PDIF, el paquete ALSA todavía no habilita dmix por defecto. Así, la configuración dmix anteriormente citada se puede usar para habilitar dmix para dispositivos con salida S/PDIF.
+</p>
+<p>Consulte el apartado sobre <a href="#Soluci%C3%B3n_de_problemas">solución de problemas</a> para los problemas más comunes y sus soluciones.
+</p>
+<h3><span class="mw-headline" id="Mezclar_con_Hardware">Mezclar con Hardware</span></h3>
+<h4><span class="mw-headline" id="Soporte">Soporte</span></h4>
+<p>Si tiene un chipset de audio que soporte mezclar con hardware, entonces no se requiere configuración. Casi todos los chipsets de sonido incorporados no son compatibles con el hardware de mezcla y requieren que la mezcla se haga con software (véase más arriba). Muchas tarjetas de sonido no tienen soporte para la mezcla con hardware y las que tienen mejor soporte en Linux son las siguientes:
+</p>
+<ul>
+<li>Creative SoundBlaster Live! (modelo 5.1)</li>
+<li>Creative SoundBlaster Audigy (algunos modelos)</li>
+<li>Creative SoundBlaster Audidy 2 (modelos ZS)</li>
+<li>Creative SoundBlaster Audigy 4 (modelos Pro)</li>
+</ul>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Nota:</strong> 
+<ul>
+<li>Las variantes de la gama baja de las tarjetas anteriores (Audigy SE, Audigy 2 NX, SoundBlaster Live! de 24 bits y SoundBlaster Live! 7.1) <b>no</b> proporcionan soporte de hardware de mezcla, las cuales usan otros chips.</li>
+<li>Una excepción es el chip integrado VIA8237 que soporta hardware de mezcla de 4-stream. Sin embargo, en algunas placas base solo 3 funcionan (el cuarto no produce ningún sonido), o se rompe recién se inicia. Incluso si funciona, la calidad no es buena en comparación con otras soluciones.</li>
+</ul>
+</div>
+<h4><span class="mw-headline" id="Arreglos">Arreglos</span></h4>
+<p>Si está usando Arch 64-bit y la tarjeta <i>Intel Corporation 82801I (ICH9 Family) HD Audio Controller (rev 02)</i>, se puede obtener sonido para que funcione con «Enemy Territory» haciendo lo siguiente:
+</p>
+<pre>echo "et.x86 0 0 direct" &gt; /proc/asound/card0/pcm0p/oss
+echo "et.x86 0 0 disable" &gt; /proc/asound/card0/pcm0c/oss
+</pre>
+<h2>
+<span id="Soluci.C3.B3n_de_problemas"></span><span class="mw-headline" id="Solución_de_problemas">Solución de problemas</span>
+</h2>
+<h3><span class="mw-headline" id="Sonido_con_saltos_durante_el_uso_de_Dynamic_Frequency_Scaling">Sonido con saltos durante el uso de Dynamic Frequency Scaling</span></h3>
+<p>Algunas combinaciones de determinados drivers ALSA y chipsets pueden causar <b>saltos</b> en el audio de todas las fuentes cuando se utiliza en combinación con un regulador de frecuencia de la CPU de escalamiento dinámico como <code>ondemand</code> o <code>conservative</code>. En la actualidad, la solución es volver al gobernador <code>performance</code>.
+</p>
+<p>Consulte la <a href="../en/CPU_frequency_scaling.html" title="CPU frequency scaling">CPU frequency scaling</a> para obtener más información.
+</p>
+<h3><span class="mw-headline" id="Problemas_con_la_disponibilidad_del_software_de_mezcla_por_solo_un_usuario_a_la_vez">Problemas con la disponibilidad del software de mezcla por solo un usuario a la vez</span></h3>
+<p>Puede suceder que solo un usuario puede utilizar el dmixer a la vez. Esto probablemente pueda andar bien para la mayoría de los usuarios cuando solo ellos utilizan su máquina, pero para los que corren <a href="../en/Music_Player_Daemon.html" class="mw-redirect" title="Mpd">mpd</a> en una máquina con usuarios distintos plantea un problema. Cuando mpd está corriendo, otro usuario normal no puede reproducir sonidos mediante dmixer. Aunque es posible solucionarlo corriendo mpd en la cuenta de inicio de sesión del usuario habilitado, otra solución es factible. Añada la línea <code>ipc_key_add_uid 0</code> al bloque <code>pcm.dmixer</code> para desactivar esta limitación. El siguiente es un fragmento del código de <code>asound.conf</code>, el resto es lo mismo que el anterior.
+</p>
+<pre>...
+pcm.dmixer {
+ type dmix
+ ipc_key 1024
+ ipc_key_add_uid 0
+ ipc_perm 0660
+slave {
+...
+</pre>
+<h3>
+<span id="Problemas_de_reproducci.C3.B3n_simult.C3.A1nea"></span><span class="mw-headline" id="Problemas_de_reproducción_simultánea">Problemas de reproducción simultánea</span>
+</h3>
+<p>Si está teniendo problemas de reproducción simultánea, y si <a href="../en/PulseAudio.html" title="PulseAudio">PulseAudio</a> se ha instalado (por ejemplo, utilizando <a href="../es/GNOME.html" title="GNOME (Español)">GNOME</a>), su configuración por defecto está ajustada para «secuestrar» a favor de pulseadio la tarjeta de sonido. Algunos usuarios de ALSA no desean utilizar <a href="../en/PulseAudio.html" title="PulseAudio">PulseAudio</a> y están bastante satisfechos con su actual configuración de ALSA. Una solución para resolver el problema es editar <code>/etc/asound.conf</code> y comentar las siguientes líneas:
+</p>
+<pre># Use PulseAudio by default
+#pcm.!default {
+#  type pulse
+#  fallback "sysdefault"
+#  hint {
+#    show on
+#    description "Default ALSA Output (currently PulseAudio Sound Server)"
+#  }
+#}
+</pre>
+<p>Comentando lo siguiente también puede resulta útil:
+</p>
+<pre>#ctl.!default {
+#  type pulse
+#  fallback "sysdefault"
+#}
+</pre>
+<p>Esta puede ser una solución mucho más simple que desinstalar por completo <a href="../en/PulseAudio.html" title="PulseAudio">PulseAudio</a>.
+</p>
+<p>Efectivamente, este es un ejemplo de un archivo <code>/etc/asound.conf</code> funcionando correctamente:
+</p>
+<pre>pcm.dmixer {
+        type dmix
+        ipc_key 1024
+        ipc_key_add_uid 0
+        ipc_perm 0660
+}
+pcm.dsp {
+        type plug
+        slave.pcm "dmix"
+}
+</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Nota:</strong> Este archivo <code>/etc/asound.conf</code> fue creado y utilizado con éxito para una configuración global de <a href="../en/Music_Player_Daemon.html" class="mw-redirect" title="MPD">MPD</a>. Consulte <a href="../en/Advanced_Linux_Sound_Architecture/Troubleshooting.html#Problems_with_availability_to_only_one_user_at_a_time" title="Advanced Linux Sound Architecture/Troubleshooting">esta sección</a> sobre múltiples usuarios</div>
+<h3><span class="mw-headline" id="Ausencia_de_sonido_al_azar_en_el_inicio">Ausencia de sonido al azar en el inicio</span></h3>
+<p>Se puede probar rápidamente el sonido mediante la ejecución de <code>speaker-test</code>.  Si no hay sonido, el mensaje de error podría ser algo como:
+</p>
+<pre> ALSA lib pcm_dmix.c:1022:(snd_pcm_dmix_open) unable to open slave
+ Playback open error: -16
+ Device or resource busy
+</pre>
+<p>Si no tiene sonido aleatoriamente en el arranque, puede deberse a que el sistema tiene varias tarjetas de sonido, y su orden puede, a veces, cambiar al inicio. Si este es el caso, trate de <a href="#Establecer_la_tarjeta_de_sonido_predeterminada">configurar la tarjeta de sonido predefinida</a>
+</p>
+<p>Si utiliza mpd y los consejos de configuración anteriores no funcionan para usted, intente <a rel="nofollow" class="external text" href="https://mpd.wikia.com/wiki/Configuration#ALSA_MPD_software_volume_control">leyendo esto</a> en su lugar.
+</p>
+<h4><span class="mw-headline" id="Timidity">Timidity</span></h4>
+<p><a href="../en/Timidity++.html" class="mw-redirect" title="Timidity">Timidity</a> puede ser la causa de la falta de audio. Pruebe a ejecutar:
+</p>
+<pre>$ systemctl status timidity
+</pre>
+<p>Si esto falla, pruebe <code># killall -9 timidity</code>. Si esto resuelve el problema, debe desactivar el demonio timidity para que no se inicie al arranque.
+</p>
+<h3>
+<span id="Problemas_espec.C3.ADficos_de_algunos_programas"></span><span class="mw-headline" id="Problemas_específicos_de_algunos_programas">Problemas específicos de algunos programas</span>
+</h3>
+<p>Algunos programas definen por sí su propia configuración de audio, por ejemplo, XMMS o Mplayer, con lo cual tendría que configurar sus opciones específicas.
+</p>
+<p>Para mplayer, abra <code>~/.mplayer/config</code> (o <code>/etc/mplayer/mplayer.conf</code> para el ajuste global) y añada la siguiente línea:
+</p>
+<pre>ao=alsa
+</pre>
+<p>Para XMMS/Beep Media Player, entre en sus opciones y asegúrese de que el controlador de sonido está ajustado a ALSA y no, a OSS.
+</p>
+<p>Para hacer esto en XMMS:
+</p>
+<ul><li>Abra XMMS
+<ul>
+<li>Opciones → Preferencias.</li>
+<li>Elija el plugin de salida de Alsa.</li>
+</ul>
+</li></ul>
+<p>Para las aplicaciones que no proporcionan compatibilidad con ALSA, puede usar AOSS desde el paquete alsa-oss. Para utilizar aoss, se ejecuta el programa, anteponiendo el prefijo <code>aoss</code>, por ejemplo:
+</p>
+<pre>aoss realplay
+</pre>
+<p>pcm.!default{ ... }  parece que no funciona más, pruebe en su lugar:
+</p>
+<pre> pcm.default pcm.dmixer
+</pre>
+<h3><span class="mw-headline" id="Configurar_los_modelos">Configurar los modelos</span></h3>
+<p>Aunque Alsa detecta la tarjeta de sonido a través de la BIOS, a veces puede no ser capaz de reconocer el <a rel="nofollow" class="external text" href="https://docs.kernel.org/sound/hd-audio/models.html">tipo de modelo</a>. El chip de la tarjeta de sonido puede ser encontrado en <code>alsamixer</code> (por ejemplo ALC662) y el modelo se puede ajustar en <code>/etc/modprobe.d/modprobe.conf</code> o <code>/etc/modprobe .d/sound.conf</code>. Por ejemplo:
+</p>
+<pre>options snd-hda-intel model=MODEL
+</pre>
+<p>Hay otras opciones, según el modelo. Para la mayoría de los casos, Alsa lo hará de manera automática, por defecto. Si desea ver más opciones de configuración específica para su tarjeta de sonido, eche un vistazo a la <a rel="nofollow" class="external text" href="https://bugtrack.alsa-project.org/main/index.php/Matrix:Main">Lista de Tarjetas de sonido Alsa</a>, localice su modelo, a continuación, pinche en Detalles, a continuación, busque la sección «Setting up modprobe ...». Introduzca esos valores en el archivo <code>/etc/modprobe.d/modprobe.conf</code>. Por ejemplo, para una tarjeta de audio Intel AC97:
+</p>
+<pre># ALSA portion
+alias char-major-116 snd
+alias snd-card-0 snd-intel8x0
+# module options should go here
+
+# OSS/Free portion
+alias char-major-14 soundcore
+alias sound-slot-0 snd-card-0
+
+# card #1
+alias sound-service-0-0 snd-mixer-oss
+alias sound-service-0-1 snd-seq-oss
+alias sound-service-0-3 snd-pcm-oss
+alias sound-service-0-8 snd-seq-oss
+alias sound-service-0-12 snd-pcm-oss</pre>
+<h3><span class="mw-headline" id="Audio_en_conflicto_con_altavoz_interno_del_PC">Audio en conflicto con altavoz interno del PC</span></h3>
+<p>Si está seguro de que nada está silenciado, que los controladores están instalados correctamente y que el volumen es el correcto, pero todavía no se oye nada, entonces trate de añadir la siguiente línea a <code>/etc/modprobe.d/modprobe.conf</code>:
+</p>
+<pre>options snd-NAME-OF-MODULE ac97_quirk=0
+</pre>
+<p>La solución anterior se ha observado que funciona con <code>via82xx</code>
+</p>
+<pre>options snd-NAME-OF-MODULE ac97_quirk=1
+</pre>
+<p>La solución anterior se ha informado que funciona con <code>snd_intel8x0</code>
+</p>
+<h3>
+<span id="Sin_entrada_en_el_micr.C3.B3fono"></span><span class="mw-headline" id="Sin_entrada_en_el_micrófono">Sin entrada en el micrófono</span>
+</h3>
+<p>En alsamixer, asegúrese de que todos los niveles del volumen, en la sección grabación, están activados, y que la modalidad <i>CAPTURE</i>  del micrófono está activa (por ejemplo, Mic, -micrófono interno-) y/o sobre <i>capture</i> (en alsamixer, seleccione estos elementos en el primer espacio). Pruebe poner Mic Boost en positivo y aumentar al máximo los niveles de Capture y Digital; esto no produce sonido o lo produce distorsionado, pero entonces podrá ajustar los niveles hacia abajo hasta oir <i>algo</i> cuando se graba.
+</p>
+<p>En la medida que pulseaudio se muestra como «default» en alsamixer, puede ser necesario presionar F6 para seleccionar la propia tarjeta de sonido en primer lugar. También puede ser necesario activar y aumentar el volumen de Line-in (Línea de entrada) en la sección Playblack (reproducción).
+</p>
+<p>Para probar el micrófono, ejecute estas órdenes (consulte la página del manual de arecord para más información):
+</p>
+<pre> arecord -d 5 test-mic.wav
+ aplay test-mic.wav
+</pre>
+<p>Si todo falla, es posible que desee descartar un fallo de hardware, probando el micrófono con un dispositivo diferente.
+</p>
+<p>En algunos ordenadores, silenciar un micrófono (MM) significa simplemente que su entrada no va de inmediato a los altavoces. Todavía recibe la entrada.
+</p>
+<p>Muchos portátiles Dell necesitan «-dmic», que se añade al nombre del modelo en <code>/etc/modprobe.d/modprobe.conf</code>:
+</p>
+<pre> options snd-hda-intel model=dell-m6-dmic
+</pre>
+<p>Algunos programas intenta utilizar OSS como software de entrada principal. Si tiene inicialmente activados los <a href="../es/Kernel_module.html" class="mw-redirect" title="Kernel modules (Español)">módulos del kernel</a> <code>snd_pcm_oss</code>, <code>snd_mixer_oss</code> o <code>snd_seq_oss</code> (no se cargan de forma predeterminada), pruebe entonces evitar cargarlos.
+</p>
+<p>Consulte también:
+</p>
+<ul>
+<li><a rel="nofollow" class="external free" href="https://www.alsa-project.org/main/index.php/SoundcardTesting">https://www.alsa-project.org/main/index.php/SoundcardTesting</a></li>
+<li><a rel="nofollow" class="external free" href="https://alsa.opensrc.org/Record_from_mic">https://alsa.opensrc.org/Record_from_mic</a></li>
+</ul>
+<h3>
+<span id="Configuraci.C3.B3n_predeterminada_de_Micr.C3.B3fono.2FDispositivo_de_captura"></span><span class="mw-headline" id="Configuración_predeterminada_de_Micrófono/Dispositivo_de_captura">Configuración predeterminada de Micrófono/Dispositivo de captura</span>
+</h3>
+<p>Algunas aplicaciones (Pidgin, Adobe Flash) no ofrecen una opción para cambiar el dispositivo de captura. Se convierte en un problema si el micrófono está en un dispositivo separado (por ejemplo, webcam USB o micrófono) de la tarjeta de sonido interna. Para cambiar solo el dispositivo de captura predeterminado, dejando el dispositivo de reproducción predeterminado como está, puede editar el archivo <code>~/.asoundrc</code> para incluir lo siguiente:
+</p>
+<pre>pcm.usb
+{
+    type hw
+    card U0x46d0x81d
+}
+
+pcm.!default
+{
+    type asym
+    playback.pcm
+    {
+        type plug
+        slave.pcm "dmix"
+    }
+    capture.pcm
+    {
+        type plug
+        slave.pcm "usb"
+    }
+}
+</pre>
+<p>Reemplace «U0x46d0x81d» con el nombre de la tarjeta del dispositivo de captura en ALSA. Es posible utilizar la orden <code>arecord -L</code> para listar todos los dispositivos de captura detectados por ALSA.
+</p>
+<h3>
+<span id="El_micr.C3.B3fono_interno_no_funciona"></span><span class="mw-headline" id="El_micrófono_interno_no_funciona">El micrófono interno no funciona</span>
+</h3>
+<p>En primer lugar, asegúrese en alsamixer, de que todos los niveles del volumen en la sección de grabación, están activados. Para obtener un nuevo ajuste del volumen llamado Capture que registre el micrófono interno, vuelva a añadir una nueva opción al archivo /etc/sound.conf y recargue el módulo snd-*. Por ejemplo, para snd-hda-intel, añada:
+</p>
+<pre> options snd-hda-intel enable_msi=1
+</pre>
+<p>Recargando el módulo (como se indica abajo), activará el nuevo ajuste del volumen de grabación (Capture) y luego pruebe.
+</p>
+<pre># rmmod snd-hda-intel &amp;&amp; modprobe snd-hda-intel</pre>
+<h3><span class="mw-headline" id="Sin_sonido_con_tarjeta_de_sonido_Intel_integrada">Sin sonido con tarjeta de sonido Intel integrada</span></h3>
+<p>Puede haber un problema con dos módulos cargados en conflicto, a saber <code>snd_intel8x0</code> y <code>snd_intel8x0m</code>. En este caso, introduzca en blacklist snd_intel8x0m:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/modprobe.d/modprobe.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">blacklist snd_intel8x0m</pre>
+<p><i>Deshabilitar</i> el canal  «External Amplifier» en <code>alsamixer</code> o <code>amixer</code> también puede ayudar. Consulte <a rel="nofollow" class="external text" href="https://alsa.opensrc.org/Intel8x0#Dell_Inspiron_8600_.28and_probably_others.29">la wiki de ALSA</a>.
+</p>
+<p>Activar el sonido en la configuración de «Mix» en el mezclador puede ayudar, también.
+</p>
+<h3><span class="mw-headline" id="Sin_sonido_en_auriculares_con_tarjeta_de_sonido_Intel_integrada">Sin sonido en auriculares con tarjeta de sonido Intel integrada</span></h3>
+<p>Si tiene un portatil con <b>Intel Corporation 82801 I (ICH9 Family) HD Audio Controller</b>, puede que tenga que añadir esta línea a modprobe o sound.conf:
+</p>
+<pre>options snd-hda-intel model=$model
+</pre>
+<p>Donde $model es cualquiera de los siguientes modelos (por orden de posibilidad de funcionar, no por mérito):
+</p>
+<ul>
+<li>dell-vostro</li>
+<li>olpc-xo-1_5</li>
+<li>laptop</li>
+<li>dell-m6</li>
+<li>laptop-hpsense</li>
+</ul>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Nota:</strong> Puede que sea necesario poner esas «opciones» abajo (después de) los «alias».</div>
+<p>Puede ver todos los modelos disponibles en la documentación del kernel. Por ejemplo <a rel="nofollow" class="external text" href="https://docs.kernel.org/sound/hd-audio/models.html">aquí</a>, pero compruebe que se trata de la versión correcta de ese documento para su versión del kernel.
+</p>
+<p>Una lista de modelos disponibles también está recogida <a rel="nofollow" class="external text" href="https://www.mjmwired.net/kernel/Documentation/sound/alsa/HD-Audio-Models.txt">aquí</a>. Para conocer el nombre de su chip debe escribir la siguiente orden (con el asterisco <code>*</code> que permite adaptarse a las peculiaridades de sus archivos). Tenga en cuenta que algunos chips podrían haber cambiado de nombre y no corresponderse directamente a los que están disponibles en el archivo.
+</p>
+<pre>cat /proc/asound/card*/codec* | grep Codec
+</pre>
+<p>Tenga en cuenta, por último,  que hay una alta probabilidad de que ninguno de los dispositivos de entrada (todos los micrófonos internos y externos) funcionen si decide hacer esto, por lo que o funcionarán los auriculares o el micrófono. Por favor, informe a ALSA si se ve afectado por este error.
+</p>
+<p>Por otro lado, si tiene problemas con las señales acústicas (pcspkr):
+</p>
+<pre>options snd-hda-intel model=$model enable=1 index=0
+</pre>
+<h3>
+<span id="Sin_sonido_cuando_se_instala_la_tarjeta_de_v.C3.ADdeo_con_S.2FPDIF"></span><span class="mw-headline" id="Sin_sonido_cuando_se_instala_la_tarjeta_de_vídeo_con_S/PDIF">Sin sonido cuando se instala la tarjeta de vídeo con S/PDIF</span>
+</h3>
+<p>Localice los módulos disponibles y su orden:
+</p>
+<pre>$ cat /proc/asound/modules
+0 snd_hda_intel
+1 snd_ca0106
+</pre>
+<p>Desactive el códec de audio de la tarjeta de vídeo en <code>/etc/modprobe.d/modprobe.conf</code>:
+</p>
+<pre># /etc/modprobe.d/modprobe.conf
+#
+install snd_hda_intel /bin/false
+</pre>
+<p>Si ambos dispositivos utilizan el mismo módulo, entonces podría utilizar el parámetro *enable* del módulo snd-hda-intel, el cual es una matriz booleana que permite activar/desactivar la tarjeta de sonido deseada.
+</p>
+<p>Por ejemplo:
+</p>
+<pre>options snd-hda-intel enable=1,0
+</pre>
+<p>Lo siguiente da la lista de las tarjetas:
+</p>
+<pre>cat /proc/asound/cards
+</pre>
+<h3><span class="mw-headline" id="Calidad_de_audio_deficiente">Calidad de audio deficiente</span></h3>
+<p>Si la calidad de sonido es pobre, intente ajustar el volumen de PCM (en alsamixer) a un nivel tal que gain sea 0.
+</p>
+<p>Si se ha cargado el controlador snd-usb-audio, puede intentar habilitar <code>softvol</code> en el archivo <b>/etc/asound.conf</b>. He aquí un ejemplo de configuración para el primer dispositivo de audio:
+</p>
+<pre> pcm.!default {
+   type plug
+   slave.pcm "softvol"
+ }
+ pcm.dmixer {
+      type dmix
+      ipc_key 1024
+      slave {
+          pcm "hw:0"
+          period_time 0
+          period_size 4096
+          buffer_size 131072
+          rate 50000
+      }
+      bindings {
+          0 0
+          1 1
+      }
+ }
+ pcm.dsnooper {
+      type dsnoop
+      ipc_key 1024
+      slave {
+          pcm "hw:0"
+          channels 2
+          period_time 0
+          period_size 4096
+          buffer_size 131072
+          rate 50000
+      }
+      bindings {
+          0 0
+          1 1
+      }
+ }
+ pcm.softvol {
+      type softvol
+      slave { pcm "dmixer" }
+      control {
+          name "Master"
+          card 0
+      }
+ }
+ ctl.!default {
+   type hw
+   card 0
+ }
+ ctl.softvol {
+   type hw
+   card 0
+ }
+ ctl.dmixer {
+   type hw
+   card 0
+ }
+</pre>
+<h3>
+<span id="Crepiteos_al_iniciar_y_detener_la_reproducci.C3.B3n"></span><span class="mw-headline" id="Crepiteos_al_iniciar_y_detener_la_reproducción">Crepiteos al iniciar y detener la reproducción</span>
+</h3>
+<p>Algunos módulos (como snd-ac97-codec y snd-hda-intel) pueden apagar la tarjeta de sonido cuando no está en uso. Esto puede provocar un ruido audible (como un crack/pop/crepiteos) al encender/apagar su tarjeta de sonido. A veces, puede ocurrir, incluso, cuando se mueve el control deslizante del volumen, o las ventanas se abren y cierran (KDE4). Si encuentra este sonido molesto, puede ejecutar <code>modinfo snd-MY-MODULE</code>, y buscar una opción que regule o desactive esta función.
+</p>
+<p>Ejemplo: para desactivar el modo de ahorro de energía utilizando snd-hda-intel para evitar las distorsiones y resolver el problema de sonido de los altavoces, añada en <code>/etc/modprobe.d/modprobe.conf</code>
+</p>
+<pre>[options snd-hda-intel power_save=0]
+</pre>
+<p>o
+</p>
+<pre>[options snd-hda-intel power_save=0 power_save_controller=N]
+</pre>
+<p>También puede probar con <code>modprobe snd_hda_intel power_save=0</code> antes.
+</p>
+<p>Puede que sea necesario también activar el canal 'Line' de alsa para que esto funcione. Cualquier valor puede servir (que no sea '0' o algo muy alto).
+</p>
+<p><i>Ejemplo:</i> en una tarjeta integrada VIA VT1708S (utilizando el módulo snd-hda-intel) estas distorsiones seguían presentes a pesar de haber ajustado el parámetro 'power_save' a 0. Activando el canal 'Line' y estableciendo el valor '1' se resolvió el problema.
+</p>
+<p>Fuente: <a rel="nofollow" class="external free" href="https://docs.kernel.org/sound/designs/powersave.html">https://docs.kernel.org/sound/designs/powersave.html</a>
+</p>
+<p>Si utiliza un ordenador portátil, pm-utils cambiará <code>power_save</code> de nuevo a <code>1</code> cuando se utiliza la batería, incluso si se desactiva el ahorro de energía en <code>/etc/modprobe.d</code>. Para solucionar este problema, desactive esta opción para pm-utils mediante la desactivación del script que realiza el cambio:
+</p>
+<pre># chmod -x /usr/lib/pm-utils/power.d/intel-audio-powersave
+</pre>
+<h3>
+<span id="La_salida_S.2FPDIF_no_funciona"></span><span class="mw-headline" id="La_salida_S/PDIF_no_funciona">La salida S/PDIF no funciona</span>
+</h3>
+<p>Si la salida digital óptica/coaxial de la placa base/tarjeta de sonido no funciona o ha dejado de funcionar, y en alsamixer los correspondientes canales de sonido están activados, pruebe lo siguiente:
+</p>
+<pre># iecset audio on
+</pre>
+<p>También puede poner esta orden en un servicio de <a href="../es/Systemd.html" title="Systemd (Español)">systemd</a> activado, ya que a veces puede dejar de funcionar después de un reinicio.
+</p>
+<h3><span class="mw-headline" id="La_salida_HDMI_no_funciona">La salida HDMI no funciona</span></h3>
+<p>El procedimiento descrito a continuación se puede utilizar para una prueba de audio HDMI. Antes de continuar, asegúrese de que ha activado y quitado el silencio de la salida con  <code>alsamixer</code>.
+</p>
+<p>Conecte el PC a la pantalla mediante un cable HDMI y active la pantalla con una herramienta como <code>xrandr</code> o <code>arandr</code>. Por ejemplo:
+</p>
+<pre>$ xrandr # list outputs
+$ xrandr --output DVI-D_1 --mode 1024x768 --right-of PANEL # enable output
+</pre>
+<p>Utilice la orden <code>aplay -l</code> para descubrir el número de la tarjeta y del dispositivo. Por ejemplo:
+</p>
+  <pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">$ aplay -l</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;"> **** List of PLAYBACK Hardware Devices ****
+ card 0: SB [HDA ATI SB], device 0: ALC892 Analog [ALC892 Analog]
+   Subdevices: 1/1
+   Subdevice #0: subdevice #0
+ card 0: SB [HDA ATI SB], device 1: ALC892 Digital [ALC892 Digital]
+   Subdevices: 1/1
+   Subdevice #0: subdevice #0
+ <b>card 1</b>: Generic [HD-Audio Generic], <b>device 3</b>: HDMI 0 [HDMI 0]
+   Subdevices: 1/1
+   Subdevice #0: subdevice #0
+</pre>
+<p>Ahora que tenemos la información del dispositivo HDMI, haga una prueba. En el siguiente ejemplo, 1 es el número de tarjeta y 3 es el número de dispositivo.
+</p>
+<pre>$ aplay -D plughw:1,3 /usr/share/sounds/alsa/Front_Center.wav
+</pre>
+<p>Si «aplay» no emite ningún error, pero aún no hay ningún sonido, «reinicie» el receptor, monitor o televisor. Desde la interfaz HDMI revise rigurosamente la conexión, dado que podría haber informado anteriormente de que no había flujo de audio y haber deshabilitado así la decodificación de audio.En particular, si está usando un gestor de ventanas independiente (distinto al de Gnome o KDE), puede que tenga un poco de reproducción de sonido mientras enchufa el cable HDMI.
+</p>
+<p>Si la prueba tiene éxito, cree o modifique el archivo <code>~/.asoundrc</code> para establecer HDMI como el dispositivo de audio predeterminado.
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">~/.asoundrc</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">pcm.!default {
+  type hw
+  card 1
+  device 3
+}
+</pre>
+<p>O si la configuración de arriba no funciona, pruebe esto:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">~/.asoundrc</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">defaults.pcm.card 1
+defaults.pcm.device 3
+defaults.ctl.card 1
+</pre>
+<h3>
+<span id="La_salida_multicanal_PCM_de_HDMI_no_funciona_.28Intel.29"></span><span class="mw-headline" id="La_salida_multicanal_PCM_de_HDMI_no_funciona_(Intel)">La salida multicanal PCM de HDMI no funciona (Intel)</span>
+</h3>
+<p>En Linux 3.1 la salida multicanal PCM a través de HDMI con una tarjeta Intel (Intel Eaglelake, IbexPeak/Ironlake,SandyBridge/CougarPoint y IvyBridge/PantherPoint) aún no está soportada. El apoyo está siendo desarrollado actualmente y se espera que esté disponible para Linux 3.2. Para hacer que funcione en Linux 3.1 es necesario aplicar los siguientes parches:
+</p>
+<ul>
+<li><a rel="nofollow" class="external text" href="https://git.kernel.org/?p=linux/kernel/git/torvalds/linux.git;a=patch;h=76adaa34db407f174dd06370cb60f6029c33b465">drm: support routines for HDMI/DP ELD</a></li>
+<li><a rel="nofollow" class="external text" href="https://git.kernel.org/?p=linux/kernel/git/torvalds/linux.git;a=patch;h=e0dac65ed45e72fe34cc7ccc76de0ba220bd38bb">drm/i915: pass ELD to HDMI/DP audio driver</a></li>
+</ul>
+<h3><span class="mw-headline" id="HP_TX2500">HP TX2500</span></h3>
+<p>Agregue estas dos líneas en <code>/etc/modprobe.d/modprobe.conf</code>:
+</p>
+<pre>options snd-cmipci mpu_port=0x330 fm_port=0x388
+options snd-hda-intel index=0 model=toshiba position_fix=1
+</pre>
+<pre>options snd-hda-intel model=hp (funciona para tx2000cto)
+</pre>
+<h3>
+<span id="Salto_de_sonido_durante_la_reproducci.C3.B3n_MP3"></span><span class="mw-headline" id="Salto_de_sonido_durante_la_reproducción_MP3">Salto de sonido durante la reproducción MP3</span>
+</h3>
+<p>Si tiene saltos de sonido al reproducir archivos MP3 y tiene más de dos altavoces conectados al ordenador (es decir, dos o más sistema de altavoces), ejecute <code>alsamixer</code> y desactive los canales para los altavoces que <b>NO</b> tiene (es decir, deshabilite, por ejemplo, el canal del altavoz central si no se dispone de un altavoz central).
+</p>
+<h3><span class="mw-headline" id="Auriculares_USB_y_tarjetas_de_sonido_externas_USB">Auriculares USB y tarjetas de sonido externas USB</span></h3>
+<p>Si está usando un auricular USB con ALSA puede probar a usar <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/asoundconf/">asoundconf</a></span><sup><small>AUR</small></sup> (actualmente solo disponible en <a href="../en/Arch_User_Repository.html" class="mw-redirect" title="AUR">AUR</a>) para ajustar el auricular como salida de sonido principal. Antes de proseguir, asegúrese de tener el módulo usb audio habilitado (<code>modprobe snd-usb-audio</code>).
+</p>
+<pre># asoundconf is-active
+# asoundconf list
+# asoundconf set-default-card &lt;tarjeta-de-sonido elegida&gt;
+</pre>
+<h4><span class="mw-headline" id="Sonido_crepitante_con_dispositivos_USB">Sonido crepitante con dispositivos USB</span></h4>
+<p>Si usted experimenta crepiteos o crujidos en dispositivos USB, puede intentar ajustar el snd-usb-audio para una latencia mínima.
+</p>
+<p>Agregue lo siguiente a su <code>/etc/modprobe.d/modprobe.conf</code>:
+</p>
+<pre>options snd-usb-audio nrpacks=1
+</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Nota:</strong> Este parámetro es ignorado en versiones actuales del kernel <a rel="nofollow" class="external free" href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=976b6c0">https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=976b6c0</a>
+</div>
+<p>Fuente: <a rel="nofollow" class="external free" href="https://alsa.opensrc.org/Usb-audio#Tuning_USB_devices_for_minimal_latencies">https://alsa.opensrc.org/Usb-audio#Tuning_USB_devices_for_minimal_latencies</a>
+</p>
+<h4>
+<span id="Conexi.C3.B3n_hot-plugging_de_una_tarjeta_de_sonido_USB"></span><span class="mw-headline" id="Conexión_hot-plugging_de_una_tarjeta_de_sonido_USB">Conexión hot-plugging de una tarjeta de sonido USB</span>
+</h4>
+<p>Con el fin de configurar automáticamente una tarjeta de sonido USB como dispositivo de salida principal, cuando la tarjeta está conectada, puede utilizar las siguientes reglas udev (por ejemplo, añadir las dos líneas siguientes a <code>/etc/udev/rules.d/00-local.rules</code> y reiniciar).
+</p>
+<pre>KERNEL=="pcmC[D0-9cp]*", ACTION=="add", PROGRAM="/bin/sh -c 'K=%k; K=$${K#pcmC}; K=$${K%%D*}; echo defaults.ctl.card $$K &gt; /etc/asound.conf; echo defaults.pcm.card $$K &gt;&gt;/etc/asound.conf'"
+KERNEL=="pcmC[D0-9cp]*", ACTION=="remove", PROGRAM="/bin/sh -c 'echo defaults.ctl.card 0 &gt; /etc/asound.conf; echo defaults.pcm.card 0 &gt;&gt;/etc/asound.conf'"</pre>
+<h3>
+<span id="Error_.27Unkown_hardware.27_despu.C3.A9s_de_una_actualizaci.C3.B3n_del_Kernel"></span><span class="mw-headline" id="Error_'Unkown_hardware'_después_de_una_actualización_del_Kernel">Error 'Unkown hardware' después de una actualización del Kernel</span>
+</h3>
+<p>Los siguientes mensajes pueden aparecer durante la puesta en marcha de ALSA después de la actualización del kernel:
+</p>
+<pre>Unknown hardware "foo" "bar" ...
+Hardware is initialized using a guess method
+/usr/sbin/alsactl: set_control:nnnn:failed to obtain info for control #mm (No such file or directory)
+</pre>
+<p>o
+</p>
+<pre>Found hardware: "HDA-Intel" "VIA VT1705" "HDA:11064397,18490397,00100000" "0x1849" "0x0397"
+Hardware is initialized using a generic method
+/usr/sbin/alsactl: set_control:1328: failed to obtain info for control #1 (No such file or directory)
+/usr/sbin/alsactl: set_control:1328: failed to obtain info for control #2 (No such file or directory)
+/usr/sbin/alsactl: set_control:1328: failed to obtain info for control #25 (No such file or directory)
+/usr/sbin/alsactl: set_control:1328: failed to obtain info for control #26 (No such file or directory)
+</pre>
+<p>Simplemente guarde las configuraciones del mixer de ALSA otra vez (como root):
+</p>
+<pre># alsactl -f /var/lib/alsa/asound.state store
+</pre>
+<p>Puede ser necesario configurar de nuevo ALSA con <code>alsamixer</code>.
+</p>
+<h3><span class="mw-headline" id="HDA_Analyzer">HDA Analyzer</span></h3>
+<p>Si las asignaciones de los pin (conectores) de audio no se corresponden con ALSA, pero este funciona bien, puede probar con HDA Analyzer -una interfaz gráfica de usuario pyGTK2 para el control de audio HD, que se puede encontrar en la <a rel="nofollow" class="external text" href="https://www.alsa-project.org/main/index.php/HDA_Analyzer">wiki de ALSA</a>-.
+Trate de configurar la sección de Control Widget para gestionar los PIN, ajustando IN para micrófonos y AUT para auriculares. Puede ser buena idea hacer referencia a los valores por defecto (Config Defaults).
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Nota:</strong> 
+<ul>
+<li>El script se ejecuta de tal manera que es incompatible con python3 (que es el actualmente proporcionado por Arch Linux) pero, no obstante, trate de usarlo.Para solucionar este problema, abra «run.py», encuentre todas las entradas de «python» (2 entradas - una en la primera línea, y la segunda en la última línea) y reemplácelas todas por «python2».</li>
+<li>El script requiere acceso de root, pero no funciona a través de su/sudo. Ejecútelo mediante <code>kdesu</code> o <code>gksu</code>.</li>
+</ul>
+</div>
+<h3><span class="mw-headline" id="ALSA_con_SDL">ALSA con SDL</span></h3>
+<p>Si no se obtiene ningún sonido a través de SDL, y ALSA no puede ser seleccionado desde la configuración de la aplicación, pruebe a establecer la variable de entorno SDL_AUDIODRIVER a «alsa».
+</p>
+<pre># export SDL_AUDIODRIVER=alsa</pre>
+<h3><span class="mw-headline" id="Alternativa_al_sonido_bajo">Alternativa al sonido bajo</span></h3>
+<p>Si se obtiene un sonido bajo, incluso después usar al máximo sus altavoces/auriculares, puede intentar solucionar el problema probando el plugin softvol. Agregue lo siguiente a <code>/etc/asound.conf</code>.
+</p>
+<pre>pcm.!default {
+      type plug
+      slave.pcm "softvol"
+  }
+
+pcm.softvol {
+    type softvol
+    slave {
+        pcm "dmix"
+    }
+    control {
+        name "Pre-Amp"
+        card 0
+    }
+    min_dB -5.0
+    max_dB 20.0
+    resolution 6
+}
+</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Nota:</strong> Es probable que tenga que reiniciar el equipo, así como reiniciar el demonio si alsa no se ha cargado con la nueva configuración. Además, si la configuración no funciona, incluso después de reiniciar, intente cambiar <code>plug</code> con <code>hw</code> en la configuración antes expuesta</div>
+<p>Después que los cambios se carguen correctamente, aparecerá una nueva sección <code>Pre-Amp</code> en alsamixer. Puede ajustar los niveles desde allí.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Nota:</strong> 
+<ul>
+<li>Establecer un valor alto para <code>Pre-Amp</code> puede causar distorsión del sonido, por lo que ajustelo de acuerdo al nivel más adecuado.</li>
+<li>Algunos códecs de audio pueden necesitar ajustes en el HDA Analyzer (<a href="#HDA_Analyzer">véase arriba</a>) a fin de lograr un volumen adecuado y sin distorsión. Comprobar la opción HP con el control del widget en el interruptor del Playback (Node[0x14] PIN en el códec ALC892, por ejemplo) puede, a veces, mejorar la calidad del audio y del volumen significativamente.</li>
+</ul>
+</div>
+<h3>
+<span id="Sonido_abrupto_despu.C3.A9s_de_reanudar_la_suspensi.C3.B3n"></span><span class="mw-headline" id="Sonido_abrupto_después_de_reanudar_la_suspensión">Sonido abrupto después de reanudar la suspensión</span>
+</h3>
+<p>Se puede escuchar un sonido a modo de estallido después de reanudar el equipo desde la suspensión. Esto se puede solucionar editando <code>/etc/pm/sleep.d/90alsa</code> y eliminado la línea que dice <code>aplay -d 1 /dev/zero</code>
+</p>
+<h3>
+<span id="Silencio_despu.C3.A9s_de_reiniciar"></span><span class="mw-headline" id="Silencio_después_de_reiniciar">Silencio después de reiniciar</span>
+</h3>
+<p>Tras el arranque, el ajuste de sonido establecido con alsamixer no permanece. Talvez se pueda restablecerlo con la orden <code>sudo alsactl restore</code>. Compruebe el estado del indicador <code>Auto-Mute</code> en alsamixer: ajuste <code>Enabled</code> a <code>Disabled</code>.
+</p>
+<h2><span class="mw-headline" id="Configuraciones_de_ejemplo">Configuraciones de ejemplo</span></h2>
+<p>Consulte <a href="../en/Advanced_Linux_Sound_Architecture/Configuration_examples.html" class="mw-redirect" title="Advanced Linux Sound Architecture/Example Configurations">Advanced Linux Sound Architecture/Example Configurations</a>.
+</p>
+<h2>
+<span id="V.C3.A9ase_tambi.C3.A9n"></span><span class="mw-headline" id="Véase_también">Véase también</span>
+</h2>
+<ul>
+<li><a rel="nofollow" class="external text" href="https://www.mjmwired.net/kernel/Documentation/sound/alsa/ALSA-Configuration.txt">Advanced ALSA module configuration</a></li>
+<li><a rel="nofollow" class="external text" href="https://alsa.opensrc.org/Main_Page">Unofficial ALSA Wiki</a></li>
+<li><a rel="nofollow" class="external text" href="https://bbs.archlinux.org/viewtopic.php?id=36815">HOWTO: Compile driver from svn</a></li>
+</ul>
+</div>
+</div>
+					<div id="catlinks" class="catlinks" data-mw="interface">
+<div id="mw-normal-catlinks" class="mw-normal-catlinks">
+<a href="../Special:Categories.html" title="Special:Categories">Category</a>: <ul><li><a href="../es/Category:Sound.html" title="Category:Sound (Español)">Sound (Español)</a></li></ul>
+</div>
+<div id="mw-hidden-catlinks" class="mw-hidden-catlinks mw-hidden-cats-hidden">Hidden category: <ul><li><a href="../en/Category:Pages_or_sections_flagged_with_Template:Translateme.html" title="Category:Pages or sections flagged with Template:Translateme">Pages or sections flagged with Template:Translateme</a></li></ul>
+</div>
+</div>
+				</div>
+			</main>
+			
+		</div>
+		<div class="mw-footer-container">
+			
+<footer id="footer" class="mw-footer" style="margin: 0">
+	<ul id="footer-info">
+	<li data-nosnippet="">Retrieved from "<a dir="ltr" href="https://wiki.archlinux.org/index.php?title=Advanced_Linux_Sound_Architecture_(Espa%C3%B1ol)&amp;oldid=801373">https://wiki.archlinux.org/index.php?title=Advanced_Linux_Sound_Architecture_(Español)&amp;oldid=801373</a>"</li>
+<li id="footer-info-lastmod"> This page was last edited on 27 February 2024, at 15:53.</li>
+	<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+<br>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="https://terms.archlinux.org/docs/privacy-policy/">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="../en/ArchWiki:About.html">About ArchWiki</a></li>
+	<li id="footer-places-disclaimers"><a href="../en/ArchWiki:General_disclaimer.html">Disclaimers</a></li>
+	<li id="footer-places-archwiki-code-of-conduct"><a href="https://terms.archlinux.org/docs/code-of-conduct/" class="extiw" title="archlinux-service-agreements:code-of-conduct">Code of conduct</a></li>
+	<li id="footer-places-archwiki-terms-of-service"><a href="https://terms.archlinux.org/docs/terms-of-service/" class="extiw" title="archlinux-service-agreements:terms-of-service">Terms of service</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-copyrightico"><a href="https://www.gnu.org/copyleft/fdl.html" class="cdx-button cdx-button--fake-button cdx-button--size-large cdx-button--fake-button--enabled"><img src="/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" loading="lazy"></a></li>
+	<li id="footer-poweredbyico"><img src="/resources/assets/poweredby_mediawiki.svg" width="88" height="31" loading="lazy"></li>
+</ul>
+
+</footer>
+
+		</div>
+	</div> 
+</div> 
+<div class="vector-settings" id="p-dock-bottom">
+	<ul></ul>
+</div>
+</body>
+</html>

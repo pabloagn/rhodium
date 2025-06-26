@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-sticky-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-0 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-disabled skin-theme-clientpref-day vector-toc-available" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>ZFS/Virtual disks - ArchWiki</title>
+<link rel="stylesheet" href="../../ArchWikiOffline.css">
+<meta name="ResourceLoaderDynamicStyles" content="">
+<meta name="generator" content="MediaWiki 1.43.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="max-image-preview:standard">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.25, maximum-scale=5.0">
+<link rel="search" type="application/opensearchdescription+xml" href="/rest.php/v1/search" title="ArchWiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.archlinux.org/api.php?action=rsd">
+<link rel="license" href="https://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="ArchWiki Atom feed" href="/index.php?title=Special:RecentChanges&amp;feed=atom">
+</head>
+<body class="skin--responsive skin-vector skin-vector-search-vue mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-ZFS_Virtual_disks rootpage-ZFS skin-vector-2022 action-view">
+<a class="mw-jump-link" href="#bodyContent">Jump to content</a>
+<div class="vector-header-container">
+	</div>
+<div class="mw-page-container">
+	<div class="mw-page-container-inner">
+		<div class="vector-column-start">
+			<div class="vector-main-menu-container">
+		</div>
+	<div class="vector-sticky-pinned-container">
+				<nav id="mw-panel-toc" aria-label="Contents" data-event-name="ui.sidebar-toc" class="mw-table-of-contents-container vector-toc-landmark">
+					<div id="vector-toc-pinned-container" class="vector-pinned-container">
+					<div id="vector-toc" class="vector-toc vector-pinnable-element">
+	<div class="vector-pinnable-header vector-toc-pinnable-header vector-pinnable-header-pinned" data-feature-name="toc-pinned" data-pinnable-element-id="vector-toc">
+	<h2 class="vector-pinnable-header-label">Contents</h2>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-toc.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-toc.unpin">hide</button>
+</div>
+
+
+	<ul class="vector-toc-contents" id="mw-panel-toc-list">
+		<li id="toc-mw-content-text" class="vector-toc-list-item vector-toc-level-1">
+			<a href="#" class="vector-toc-link">
+				<div class="vector-toc-text">Beginning</div>
+			</a>
+		</li>
+		<li id="toc-Creating_and_destroying_Zpools" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Creating_and_destroying_Zpools">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">1</span>
+				<span>Creating and destroying Zpools</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Creating_and_destroying_Zpools-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Creating and destroying Zpools subsection</span>
+			</button>
+		
+		<ul id="toc-Creating_and_destroying_Zpools-sublist" class="vector-toc-list">
+			<li id="toc-Mirror" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Mirror">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.1</span>
+					<span>Mirror</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Mirror-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-RAIDZ1" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#RAIDZ1">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.2</span>
+					<span>RAIDZ1</span>
+				</div>
+			</a>
+			
+			<ul id="toc-RAIDZ1-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-RAIDZ2_and_RAIDZ3" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#RAIDZ2_and_RAIDZ3">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.3</span>
+					<span>RAIDZ2 and RAIDZ3</span>
+				</div>
+			</a>
+			
+			<ul id="toc-RAIDZ2_and_RAIDZ3-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Linear_span" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Linear_span">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.4</span>
+					<span>Linear span</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Linear_span-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Creating_and_destroying_datasets" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Creating_and_destroying_datasets">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">2</span>
+				<span>Creating and destroying datasets</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Creating_and_destroying_datasets-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Displaying_and_setting_properties" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Displaying_and_setting_properties">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">3</span>
+				<span>Displaying and setting properties</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Displaying_and_setting_properties-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Displaying and setting properties subsection</span>
+			</button>
+		
+		<ul id="toc-Displaying_and_setting_properties-sublist" class="vector-toc-list">
+			<li id="toc-Show_properties" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Show_properties">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1</span>
+					<span>Show properties</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Show_properties-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Modify_properties" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Modify_properties">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.2</span>
+					<span>Modify properties</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Modify_properties-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Add_content_to_the_Zpool_and_query_compression_performance" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Add_content_to_the_Zpool_and_query_compression_performance">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">4</span>
+				<span>Add content to the Zpool and query compression performance</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Add_content_to_the_Zpool_and_query_compression_performance-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Simulate_a_disk_failure_and_rebuild_the_Zpool" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Simulate_a_disk_failure_and_rebuild_the_Zpool">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">5</span>
+				<span>Simulate a disk failure and rebuild the Zpool</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Simulate_a_disk_failure_and_rebuild_the_Zpool-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Snapshots_and_recovering_deleted_files" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Snapshots_and_recovering_deleted_files">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">6</span>
+				<span>Snapshots and recovering deleted files</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Snapshots_and_recovering_deleted_files-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Snapshots and recovering deleted files subsection</span>
+			</button>
+		
+		<ul id="toc-Snapshots_and_recovering_deleted_files-sublist" class="vector-toc-list">
+			<li id="toc-Time_0" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Time_0">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.1</span>
+					<span>Time 0</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Time_0-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Time_+1" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Time_+1">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.2</span>
+					<span>Time +1</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Time_+1-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Time_+2" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Time_+2">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.3</span>
+					<span>Time +2</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Time_+2-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Time_+3" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Time_+3">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.4</span>
+					<span>Time +3</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Time_+3-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Time_+4" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Time_+4">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.5</span>
+					<span>Time +4</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Time_+4-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Listing_snapshots" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Listing_snapshots">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.6</span>
+					<span>Listing snapshots</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Listing_snapshots-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Deleting_snapshots" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Deleting_snapshots">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.7</span>
+					<span>Deleting snapshots</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Deleting_snapshots-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Troubleshooting" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Troubleshooting">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">7</span>
+				<span>Troubleshooting</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Troubleshooting-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+</ul>
+</div>
+
+					</div>
+		</nav>
+			</div>
+		</div>
+		<div class="mw-content-container">
+			<main id="content" class="mw-body" style="margin: 0">
+				<header class="mw-body-header vector-page-titlebar">
+					<nav aria-label="Contents" class="vector-toc-landmark">
+						
+<div id="vector-page-titlebar-toc" class="vector-dropdown vector-page-titlebar-toc vector-button-flush-left">
+	<input type="checkbox" id="vector-page-titlebar-toc-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-page-titlebar-toc" class="vector-dropdown-checkbox " aria-label="Toggle the table of contents">
+	<label id="vector-page-titlebar-toc-label" for="vector-page-titlebar-toc-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"><span class="vector-icon mw-ui-icon-listBullet mw-ui-icon-wikimedia-listBullet"></span>
+
+<span class="vector-dropdown-label-text">Toggle the table of contents</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+							<div id="vector-page-titlebar-toc-unpinned-container" class="vector-unpinned-container">
+			</div>
+		
+	</div>
+</div>
+
+					</nav>
+					<h1 id="firstHeading" class="firstHeading mw-first-heading"><span class="mw-page-title-main">ZFS/Virtual disks</span></h1>
+							
+<div id="p-lang-btn" class="vector-dropdown mw-portlet mw-portlet-lang">
+	<input type="checkbox" id="p-lang-btn-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-p-lang-btn" class="vector-dropdown-checkbox mw-interlanguage-selector" aria-label="Go to an article in another language. Available in 2 languages">
+	<label id="p-lang-btn-label" for="p-lang-btn-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--action-progressive mw-portlet-lang-heading-2" aria-hidden="true"><span class="vector-icon mw-ui-icon-language-progressive mw-ui-icon-wikimedia-language-progressive"></span>
+
+<span class="vector-dropdown-label-text">2 languages</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+		<div class="vector-menu-content">
+			
+			<ul class="vector-menu-content-list">
+				
+				<li class="interlanguage-link interwiki-ja mw-list-item"><a href="https://wiki.archlinux.jp/index.php/ZFS/%E4%BB%AE%E6%83%B3%E3%83%87%E3%82%A3%E3%82%B9%E3%82%AF" title="ZFS/仮想ディスク – 日本語" lang="ja" hreflang="ja" data-title="ZFS/仮想ディスク" data-language-autonym="日本語" data-language-local-name="日本語" class="interlanguage-link-target"><span>日本語</span></a></li>
+<li class="interlanguage-link interwiki-zh-hans mw-list-item"><a href="https://wiki.archlinuxcn.org/wiki/ZFS/Virtual_disks" title="ZFS/Virtual disks – 中文（简体）" lang="zh-Hans" hreflang="zh-Hans" data-title="ZFS/Virtual disks" data-language-autonym="中文（简体）" data-language-local-name="中文（简体）" class="interlanguage-link-target"><span>中文（简体）</span></a></li>
+			</ul>
+			
+		</div>
+
+	</div>
+</div>
+</header>
+				<div class="vector-column-end">
+					<div class="vector-sticky-pinned-container">
+						<nav class="vector-page-tools-landmark" aria-label="Page tools">
+							<div id="vector-page-tools-pinned-container" class="vector-pinned-container">
+				
+							</div>
+		</nav>
+						<nav class="vector-appearance-landmark" aria-label="Appearance">
+							<div id="vector-appearance-pinned-container" class="vector-pinned-container">
+				<div id="vector-appearance" class="vector-appearance vector-pinnable-element">
+	<div class="vector-pinnable-header vector-appearance-pinnable-header vector-pinnable-header-pinned" data-feature-name="appearance-pinned" data-pinnable-element-id="vector-appearance" data-pinned-container-id="vector-appearance-pinned-container" data-unpinned-container-id="vector-appearance-unpinned-container">
+	<div class="vector-pinnable-header-label">Appearance</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-appearance.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-appearance.unpin">hide</button>
+</div>
+
+
+</div>
+
+							</div>
+		</nav>
+					</div>
+				</div>
+				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container>
+					<div class="vector-body-before-content">
+							<div class="mw-indicators">
+		</div>
+
+						<div id="siteSub" class="noprint">From ArchWiki</div>
+					</div>
+					<div id="contentSub"><div id="mw-content-subtitle"><div class="subpages">&lt; <bdi dir="ltr"><a href="../../en/ZFS.html" title="ZFS">ZFS</a></bdi>
+</div></div></div>
+					
+					
+					<div id="mw-content-text" class="mw-body-content">
+<div class="mw-content-ltr mw-parser-output" lang="en" dir="ltr">
+<div class="archwiki-template-meta-related-articles">
+<p>Related articles</p>
+<ul>
+<li><a href="../../en/ZFS.html" title="ZFS">ZFS</a></li>
+<li><a href="../../en/Install_Arch_Linux_on_ZFS.html" class="mw-redirect" title="Installing Arch Linux on ZFS">Installing Arch Linux on ZFS</a></li>
+</ul>
+</div>
+<p>This article covers some basic tasks and usage of ZFS. It differs from the main article <a href="../../en/ZFS.html" title="ZFS">ZFS</a> somewhat in that the examples herein are demonstrated on a zpool built from virtual disks. So long as users do not place any critical data on the resulting zpool, they are free to experiment without fear of actual data loss.
+</p>
+<p>The examples in this article are shown with a set of virtual discs known in ZFS terms as VDEVs. Users may create their VDEVs either on an existing physical disk or in tmpfs (RAMdisk) depending on the amount of free memory on the system.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> Using a file as a VDEV is a great method to play with ZFS but is not viable strategy for storing "real" data.</div>
+<p>Due to differences in licensing, ZFS binaries and kernel modules are easily distributed from source, but no-so-easily packaged as pre-compiled sets. Details are provided on the <a href="../../en/ZFS.html#Installation" title="ZFS">ZFS#Installation</a> article.
+</p>
+<meta property="mw:PageProp/toc">
+<h2><span class="mw-headline" id="Creating_and_destroying_Zpools">Creating and destroying Zpools</span></h2>
+<p>Management of ZFS is pretty simplistic with only two utils needed:
+</p>
+<ul>
+<li><code>/usr/bin/zpool</code></li>
+<li><code>/usr/bin/zfs</code></li>
+</ul>
+<h3><span class="mw-headline" id="Mirror">Mirror</span></h3>
+<p>For zpools with just two drives with redundancy, it is recommended to use ZFS in <i>mirror</i> mode which functions like a RAID1 mirroring the data.  Mirroring can also be used as an alternative to Raidz setups with surprising results.  See more on vdev mirroring <a rel="nofollow" class="external text" href="https://jrs-s.net/2015/02/06/zfs-you-should-use-mirror-vdevs-not-raidz/">here</a>.
+</p>
+<h3><span class="mw-headline" id="RAIDZ1">RAIDZ1</span></h3>
+<p>The minimum number of drives for a RAIDZ1 is two, but it is best to follow the "power of two plus parity" recommendation.  This is for storage space efficiency and hitting the "sweet spot" in performance.  For RAIDZ-1, use three (2+1), five (4+1), or nine (8+1) disks. This example will use the most simplistic set of (2+1).
+</p>
+<p>Create three x 2G files to serve as virtual hardrives:
+</p>
+<pre>$ for i in {1..3}; do truncate -s 2G /scratch/$i.img; done
+</pre>
+<p>Assemble the RAIDZ1:
+</p>
+<pre># zpool create zpool raidz1 /scratch/1.img /scratch/2.img /scratch/3.img
+</pre>
+<p>Notice that a 3.91G zpool has been created and mounted for us:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;"># zfs list</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;"> NAME   USED  AVAIL  REFER  MOUNTPOINT
+ test   139K  3.91G  38.6K  /zpool
+</pre>
+<p>The status of the device can be queried:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;"># zpool status zpool</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">  pool: zpool
+ state: ONLINE
+  scan: none requested
+config:
+
+	NAME                STATE     READ WRITE CKSUM
+	   zpool            ONLINE       0     0     0
+	  raidz1-0          ONLINE       0     0     0
+	    /scratch/1.img  ONLINE       0     0     0
+	    /scratch/2.img  ONLINE       0     0     0
+	    /scratch/3.img  ONLINE       0     0     0
+
+errors: No known data errors
+</pre>
+<p>To destroy a zpool:
+</p>
+<pre># zpool destroy zpool
+</pre>
+<h3><span class="mw-headline" id="RAIDZ2_and_RAIDZ3">RAIDZ2 and RAIDZ3</span></h3>
+<p>Higher level ZRAIDs can be assembled in a like fashion by adjusting the for statement to create the image files, by specifying "raidz2" or "raidz3" in the creation step, and by appending the additional image files to the creation step.
+</p>
+<p>Summarizing Toponce's guidance:
+</p>
+<ul>
+<li>RAIDZ2 should use four (2+2), six (4+2), ten (8+2), or eighteen (16+2) disks.</li>
+<li>RAIDZ3 should use five (2+3), seven (4+3), eleven (8+3), or nineteen (16+3) disks.</li>
+</ul>
+<h3><span class="mw-headline" id="Linear_span">Linear span</span></h3>
+<p>This setup is for a JBOD, good for 3 or less drives normally, where space is still a concern and you are not ready to move to full features of ZFS yet because of it.  RaidZ will be your better bet once you achieve enough space to satisfy, since this setup is NOT taking advantage of the full features of ZFS, but has its roots safely set in a beginning array that will suffice for years until you build up your hard drive collection.  
+</p>
+<p>Let's create a non-redundant pool using files. While not recommended, a pool based on files can be useful for experimental purposes.
+</p>
+<p>Create 1 x 512M file to serve as virtual hard drive in experiment:
+</p>
+<pre># truncate -s 512M /scratch/half.img
+</pre>
+<p>Assemble the Linear Span:
+</p>
+<pre># zpool create zpool /scratch/1.img /scratch/2.img /scratch/half.img
+</pre>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;"># zpool status zpool</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">  pool: zpool
+ state: ONLINE
+  scan: none requested
+config:
+
+	NAME                   STATE     READ WRITE CKSUM
+	   zpool               ONLINE       0     0     0
+	    /scratch/1.img     ONLINE       0     0     0
+	    /scratch/2.img     ONLINE       0     0     0
+	    /scratch/half.img  ONLINE       0     0     0
+
+errors: No known data errors
+</pre>
+<h2><span class="mw-headline" id="Creating_and_destroying_datasets">Creating and destroying datasets</span></h2>
+<p>An example creating child datasets and using compression:
+</p>
+<ul><li>create the datasets</li></ul>
+<pre># zfs create -p -o compression=on san/vault/falcon/snapshots
+# zfs create -o compression=on san/vault/falcon/version
+# zfs create -p -o compression=on san/vault/redtail/c/Users
+</pre>
+<ul><li>now list the datasets (this was a linear span)</li></ul>
+<pre>$ zfs list
+</pre>
+<p>Note, there is a huge advantage(file deletion) for making a 3 level dataset.  If you have large amounts of data, by separating by datasets, its easier to destroy a dataset than to try and wait for recursive file removal to complete.
+</p>
+<h2><span class="mw-headline" id="Displaying_and_setting_properties">Displaying and setting properties</span></h2>
+<p>Without specifying them in the creation step, users can set properties of their zpools at any time after its creation using <code>/usr/bin/zfs</code>.
+</p>
+<h3><span class="mw-headline" id="Show_properties">Show properties</span></h3>
+<p>To see the current properties of a given zpool:
+</p>
+<pre># zfs get all zpool
+</pre>
+<h3><span class="mw-headline" id="Modify_properties">Modify properties</span></h3>
+<p>Disable the recording of access time in the zpool:
+</p>
+<pre># zfs set atime=off zpool
+</pre>
+<p>Verify that the property has been set on the zpool:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;"># zfs get atime</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">NAME  PROPERTY     VALUE     SOURCE
+zpool  atime        off       local
+</pre>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> This option like many others can be toggled off when creating the zpool as well by appending the following to the creation step: -O atime-off</div>
+<h2><span class="mw-headline" id="Add_content_to_the_Zpool_and_query_compression_performance">Add content to the Zpool and query compression performance</span></h2>
+<p>Fill the zpool with files. For this example, first enable compression. ZFS uses many compression types, including, lzjb, gzip, gzip-N, zle, and lz4. Using a setting of simply 'on' will call the default algorithm (lzjb) but lz4 is a nice alternative. See <span class="plainlinks archwiki-template-man" title="$ man 7 zfsprops"><a rel="nofollow" class="external text" href="https://openzfs.github.io/openzfs-docs/man/7/zfsprops.7.html#compression">zfsprops(7) § compression</a></span> for more.
+</p>
+<pre># zfs set compression=lz4 zpool
+</pre>
+<p>In this example, the linux source tarball is copied over and since lz4 compression has been enabled on the zpool, the corresponding compression ratio can be queried as well.
+</p>
+<pre>$ wget <a rel="nofollow" class="external free" href="https://www.kernel.org/pub/linux/kernel/v3.x/linux-3.11.tar.xz">https://www.kernel.org/pub/linux/kernel/v3.x/linux-3.11.tar.xz</a>
+$ tar xJf linux-3.11.tar.xz -C /zpool 
+</pre>
+<p>To see the compression ratio achieved:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;"># zfs get compressratio</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">NAME      PROPERTY       VALUE  SOURCE
+zpool  compressratio  2.32x  -
+</pre>
+<h2><span class="mw-headline" id="Simulate_a_disk_failure_and_rebuild_the_Zpool">Simulate a disk failure and rebuild the Zpool</span></h2>
+<p>To simulate catastrophic disk failure (i.e. one of the HDDs in the zpool stops functioning), zero out one of the VDEVs.
+</p>
+<pre>$ dd if=/dev/zero of=/scratch/2.img bs=4M count=1 2&gt;/dev/null
+</pre>
+<p>Since we used a blocksize (bs) of 4M, the once 2G image file is now a mere 4M:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">$ ls -lh /scratch </pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">total 317M
+-rw-r--r-- 1 facade users 2.0G Oct 20 09:13 1.img
+-rw-r--r-- 1 facade users 4.0M Oct 20 09:09 2.img
+-rw-r--r-- 1 facade users 2.0G Oct 20 09:13 3.img
+</pre>
+<p>The zpool remains online despite the corruption.  Note that if a physical disc does fail, <a href="../../en/Core_utilities.html#Essentials" class="mw-redirect" title="Dmesg">dmesg</a> and related logs would be full of errors.  To detect when damage occurs, users must execute a scrub operation.
+</p>
+<pre># zpool scrub zpool
+</pre>
+<p>Depending on the size and speed of the underlying media as well as the amount of data in the zpool, the scrub may take hours to complete.
+The status of the scrub can be queried:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;"># zpool status zpool</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">  pool: zpool
+ state: DEGRADED
+status: One or more devices could not be used because the label is missing or
+	invalid.  Sufficient replicas exist for the pool to continue
+	functioning in a degraded state.
+action: Replace the device using 'zpool replace'.
+   see: http://zfsonlinux.org/msg/ZFS-8000-4J
+  scan: scrub repaired 0 in 0h0m with 0 errors on Sun Oct 20 09:13:39 2013
+config:
+
+	NAME                STATE     READ WRITE CKSUM
+	   zpool            DEGRADED     0     0     0
+	  raidz1-0          DEGRADED     0     0     0
+	    /scratch/1.img  ONLINE       0     0     0
+	    /scratch/2.img  UNAVAIL      0     0     0  corrupted data
+	    /scratch/3.img  ONLINE       0     0     0
+
+errors: No known data errors
+</pre>
+<p>Since we zeroed out one of our VDEVs, let us simulate adding a new 2G HDD by creating a new image file and adding it to the zpool:
+</p>
+<pre>$ truncate -s 2G /scratch/new.img
+# zpool replace zpool /scratch/2.img /scratch/new.img
+</pre>
+<p>Upon replacing the VDEV with a new one, zpool rebuilds the data from the data and parity info in the remaining two good VDEVs.  Check the status of this process:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;"># zpool status zpool </pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">  pool: zpool
+ state: ONLINE
+  scan: resilvered 117M in 0h0m with 0 errors on Sun Oct 20 09:21:22 2013
+config:
+
+	NAME                  STATE     READ WRITE CKSUM
+	   zpool              ONLINE       0     0     0
+	  raidz1-0            ONLINE       0     0     0
+	    /scratch/1.img    ONLINE       0     0     0
+	    /scratch/new.img  ONLINE       0     0     0
+	    /scratch/3.img    ONLINE       0     0     0
+
+errors: No known data errors
+</pre>
+<h2><span class="mw-headline" id="Snapshots_and_recovering_deleted_files">Snapshots and recovering deleted files</span></h2>
+<p>Since ZFS is a copy-on-write filesystem, every file exists the second it is written.  Saving changes to the very same file actually creates another copy of that file (plus the changes made).  Snapshots can take advantage of this fact and allow users access to older versions of files provided a snapshot has been taken.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> When using snapshots, many Linux programs that report on filesystem space such as <b>df</b> will report inaccurate results due to the unique way snapshots are used on ZFS.  The output of <code>/usr/bin/zfs list</code> will deliver an accurate report of the amount of available and free space on the zpool.</div>
+<p>To keep this simple, we will create a dataset within the zpool and snapshot it.  Snapshots can be taken either of the entire zpool or of a dataset within the pool.  They differ only in their naming conventions:
+</p>
+<table class="wikitable" align="center">
+
+<tbody>
+<tr>
+<th>Snapshot Target</th>
+<th>Snapshot Name
+</th>
+</tr>
+<tr>
+<td>Entire zpool</td>
+<td>zpool@snapshot-name
+</td>
+</tr>
+<tr>
+<td>Dataset</td>
+<td>zpool/dataset@snapshot-name
+</td>
+</tr>
+</tbody>
+</table>
+<p>Make a new data set and take ownership of it.
+</p>
+<pre># zfs create zpool/docs
+# chown facade:users /zpool/docs
+</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> The lack of a proceeding / in the create command is intentional, not a typo!</div>
+<h3><span class="mw-headline" id="Time_0">Time 0</span></h3>
+<p>Add some files to the new dataset (/zpool/docs):
+</p>
+<pre>$ wget -O /zpool/docs/Moby_Dick.txt  <a rel="nofollow" class="external free" href="https://www.gutenberg.org/ebooks/2701.txt.utf-8">https://www.gutenberg.org/ebooks/2701.txt.utf-8</a>
+$ wget -O /zpool/docs/War_and_Peace.txt <a rel="nofollow" class="external free" href="https://www.gutenberg.org/ebooks/2600.txt.utf-8">https://www.gutenberg.org/ebooks/2600.txt.utf-8</a>
+$ wget -O /zpool/docs/Beowulf.txt <a rel="nofollow" class="external free" href="https://www.gutenberg.org/ebooks/16328.txt.utf-8">https://www.gutenberg.org/ebooks/16328.txt.utf-8</a>
+</pre>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;"># zfs list</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">NAME           USED  AVAIL  REFER  MOUNTPOINT
+zpool       5.06M  3.91G  40.0K  /zpool
+zpool/docs  4.92M  3.91G  4.92M  /zpool/docs
+</pre>
+<p>This is showing that we have 4.92M of data used by our books in /zpool/docs.
+</p>
+<h3>
+<span id="Time_.2B1"></span><span class="mw-headline" id="Time_+1">Time +1</span>
+</h3>
+<p>Now take a snapshot of the dataset:
+</p>
+<pre># zfs snapshot zpool/docs@001
+</pre>
+<p>Again run the list command:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;"># zfs list</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">NAME           USED  AVAIL  REFER  MOUNTPOINT
+zpool       5.07M  3.91G  40.0K  /zpool
+zpool/docs  4.92M  3.91G  4.92M  /zpool/docs
+</pre>
+<p>Note that the size in the USED col did not change showing that the snapshot take up no space in the zpool since nothing has changed in these three files.
+</p>
+<p>We can list out the snapshots like so and again confirm the snapshot is taking up no space, but instead <b>refers to</b> files from the originals that take up, 4.92M (their original size):
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;"># zfs list -t snapshot</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">NAME               USED  AVAIL  REFER  MOUNTPOINT
+zpool/docs@001      0      -  4.92M  -
+</pre>
+<h3>
+<span id="Time_.2B2"></span><span class="mw-headline" id="Time_+2">Time +2</span>
+</h3>
+<p>Now let us add some additional content and create a new snapshot:
+</p>
+<pre>$ wget -O /zpool/docs/Les_Mis.txt <a rel="nofollow" class="external free" href="https://www.gutenberg.org/ebooks/135.txt.utf-8">https://www.gutenberg.org/ebooks/135.txt.utf-8</a>
+# zfs snapshot zpool/docs@002
+</pre>
+<p>Generate the new list to see how the space has changed:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;"># zfs list -t snapshot</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">NAME               USED  AVAIL  REFER  MOUNTPOINT
+zpool/docs@001  25.3K      -  4.92M  -
+zpool/docs@002      0      -  8.17M  -
+</pre>
+<p>Here we can see that the 001 snapshot takes up 25.3K of metadata and still points to the original 4.92M of data, and the new snapshot takes-up no space and refers to a total of 8.17M.
+</p>
+<h3>
+<span id="Time_.2B3"></span><span class="mw-headline" id="Time_+3">Time +3</span>
+</h3>
+<p>Now let us simulate an accidental overwrite of a file and subsequent data loss:
+</p>
+<pre>$ echo "this book sucks" &gt; /zpool/docs/War_and_Peace.txt
+</pre>
+<p>Again, take another snapshot:
+</p>
+<pre># zfs snapshot zpool/docs@003
+</pre>
+<p>Now list out the snapshots and notice the amount of referred to decreased by about 3.1M:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;"># zfs list -t snapshot</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">NAME               USED  AVAIL  REFER  MOUNTPOINT
+zpool/docs@001  25.3K      -  4.92M  -
+zpool/docs@002  25.5K      -  8.17M  -
+zpool/docs@003      0      -  5.04M  -
+</pre>
+<p>We can easily recover from this situation by looking inside one or both of our older snapshots for good copy of the file.  ZFS stores its snapshots in a hidden directory under the zpool: <code>/zpool/files/.zfs/snapshot</code>:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">$ ls -l /zpool/docs/.zfs/snapshot</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">total 0
+dr-xr-xr-x 1 root root 0 Oct 20 16:09 001
+dr-xr-xr-x 1 root root 0 Oct 20 16:09 002
+dr-xr-xr-x 1 root root 0 Oct 20 16:09 003
+</pre>
+<p>We can copy a good version of the book back out from any of our snapshots to any location on or off the zpool:
+</p>
+<pre>% cp /zpool/docs/.zfs/snapshot/002/War_and_Peace.txt /zpool/docs
+</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> Using &lt;TAB&gt; for autocompletion will not work by default but can be changed by modifying the <i>snapdir</i> property on the pool or dataset.</div>
+<pre># zfs set snapdir=visible zpool/docs
+</pre>
+<p>Now enter a snapshot dir or two:
+</p>
+<pre>$ cd /zpool/docs/.zfs/snapshot/001
+$ cd /zpool/docs/.zfs/snapshot/002
+</pre>
+<p>Repeat the df command:
+</p>
+<pre>$ df -h | grep zpool
+zpool           4.0G     0  4.0G   0% /zpool
+zpool/docs      4.0G  5.0M  4.0G   1% /zpool/docs
+zpool/docs@001  4.0G  4.9M  4.0G   1% /zpool/docs/.zfs/snapshot/001
+zpool/docs@002  4.0G  8.2M  4.0G   1% /zpool/docs/.zfs/snapshot/002
+</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> Seeing each dir under .zfs the user enters is reversible if the zpool is taken offline and then remounted or if the server is rebooted.</div>
+<p>For example:
+</p>
+<pre># zpool export zpool
+# zpool import -d /scratch/ zpool
+$ df -h | grep zpool
+zpool         4.0G     0  4.0G   0% /zpool
+zpool/docs    4.0G  5.0M  4.0G   1% /zpool/docs
+</pre>
+<h3>
+<span id="Time_.2B4"></span><span class="mw-headline" id="Time_+4">Time +4</span>
+</h3>
+<p>Now that everything is back to normal, we can create another snapshot of this state:
+</p>
+<pre># zfs snapshot zpool/docs@004
+</pre>
+<p>And the list now becomes:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;"># zfs list -t snapshot</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">NAME               USED  AVAIL  REFER  MOUNTPOINT
+zpool/docs@001  25.3K      -  4.92M  -
+zpool/docs@002  25.5K      -  8.17M  -
+zpool/docs@003   155K      -  5.04M  -
+zpool/docs@004      0      -  8.17M  -
+</pre>
+<h3><span class="mw-headline" id="Listing_snapshots">Listing snapshots</span></h3>
+<p>Note, this simple but important command is missing frequently from other articles on the subject, so its worth mention.
+</p>
+<p>To list any snapshots on your system, run the following command
+</p>
+<pre>$ zfs list -t snapshot</pre>
+<h3><span class="mw-headline" id="Deleting_snapshots">Deleting snapshots</span></h3>
+<p>The limit to the number of snapshots users can save is 2^64. User can delete a snapshot like so:
+</p>
+<pre># zfs destroy zpool/docs@001
+</pre>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;"># zfs list -t snapshot</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">NAME               USED  AVAIL  REFER  MOUNTPOINT
+zpool/docs@002  3.28M      -  8.17M  -
+zpool/docs@003   155K      -  5.04M  -
+zpool/docs@004      0      -  8.17M  -
+</pre>
+<h2><span class="mw-headline" id="Troubleshooting">Troubleshooting</span></h2>
+<p>If your system is not configured to load the zfs pool upon boot, or for whatever reason you want to manually remove and add back the pool, or if you have lost your pool completely, a convenient way is to use import/export. 
+</p>
+<p>If your pool was named &lt;zpool&gt;
+</p>
+<pre># zpool import -d /scratch zpool
+</pre>
+<p>If you have any problems accessing your pool at any time, try export and reimport. 
+</p>
+<pre># zpool export zpool
+# zpool import -d /scratch zpool
+</pre>
+</div>
+</div>
+					<div id="catlinks" class="catlinks" data-mw="interface"><div id="mw-normal-catlinks" class="mw-normal-catlinks">
+<a href="../../Special:Categories.html" title="Special:Categories">Category</a>: <ul><li><a href="../../en/Category:File_systems.html" title="Category:File systems">File systems</a></li></ul>
+</div></div>
+				</div>
+			</main>
+			
+		</div>
+		<div class="mw-footer-container">
+			
+<footer id="footer" class="mw-footer" style="margin: 0">
+	<ul id="footer-info">
+	<li data-nosnippet="">Retrieved from "<a dir="ltr" href="https://wiki.archlinux.org/index.php?title=ZFS/Virtual_disks&amp;oldid=806142">https://wiki.archlinux.org/index.php?title=ZFS/Virtual_disks&amp;oldid=806142</a>"</li>
+<li id="footer-info-lastmod"> This page was last edited on 16 April 2024, at 11:47.</li>
+	<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+<br>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="https://terms.archlinux.org/docs/privacy-policy/">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="../../en/ArchWiki:About.html">About ArchWiki</a></li>
+	<li id="footer-places-disclaimers"><a href="../../en/ArchWiki:General_disclaimer.html">Disclaimers</a></li>
+	<li id="footer-places-archwiki-code-of-conduct"><a href="https://terms.archlinux.org/docs/code-of-conduct/" class="extiw" title="archlinux-service-agreements:code-of-conduct">Code of conduct</a></li>
+	<li id="footer-places-archwiki-terms-of-service"><a href="https://terms.archlinux.org/docs/terms-of-service/" class="extiw" title="archlinux-service-agreements:terms-of-service">Terms of service</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-copyrightico"><a href="https://www.gnu.org/copyleft/fdl.html" class="cdx-button cdx-button--fake-button cdx-button--size-large cdx-button--fake-button--enabled"><img src="/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" loading="lazy"></a></li>
+	<li id="footer-poweredbyico"><img src="/resources/assets/poweredby_mediawiki.svg" width="88" height="31" loading="lazy"></li>
+</ul>
+
+</footer>
+
+		</div>
+	</div> 
+</div> 
+<div class="vector-settings" id="p-dock-bottom">
+	<ul></ul>
+</div>
+</body>
+</html>

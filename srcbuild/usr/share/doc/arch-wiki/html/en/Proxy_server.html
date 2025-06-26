@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-sticky-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-0 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-disabled skin-theme-clientpref-day vector-toc-available" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>Proxy server - ArchWiki</title>
+<link rel="stylesheet" href="../ArchWikiOffline.css">
+<meta name="ResourceLoaderDynamicStyles" content="">
+<meta name="generator" content="MediaWiki 1.43.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="max-image-preview:standard">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.25, maximum-scale=5.0">
+<link rel="search" type="application/opensearchdescription+xml" href="/rest.php/v1/search" title="ArchWiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.archlinux.org/api.php?action=rsd">
+<link rel="license" href="https://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="ArchWiki Atom feed" href="/index.php?title=Special:RecentChanges&amp;feed=atom">
+</head>
+<body class="skin--responsive skin-vector skin-vector-search-vue mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Proxy_server rootpage-Proxy_server skin-vector-2022 action-view">
+<a class="mw-jump-link" href="#bodyContent">Jump to content</a>
+<div class="vector-header-container">
+	</div>
+<div class="mw-page-container">
+	<div class="mw-page-container-inner">
+		<div class="vector-column-start">
+			<div class="vector-main-menu-container">
+		</div>
+	<div class="vector-sticky-pinned-container">
+				<nav id="mw-panel-toc" aria-label="Contents" data-event-name="ui.sidebar-toc" class="mw-table-of-contents-container vector-toc-landmark">
+					<div id="vector-toc-pinned-container" class="vector-pinned-container">
+					<div id="vector-toc" class="vector-toc vector-pinnable-element">
+	<div class="vector-pinnable-header vector-toc-pinnable-header vector-pinnable-header-pinned" data-feature-name="toc-pinned" data-pinnable-element-id="vector-toc">
+	<h2 class="vector-pinnable-header-label">Contents</h2>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-toc.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-toc.unpin">hide</button>
+</div>
+
+
+	<ul class="vector-toc-contents" id="mw-panel-toc-list">
+		<li id="toc-mw-content-text" class="vector-toc-list-item vector-toc-level-1">
+			<a href="#" class="vector-toc-link">
+				<div class="vector-toc-text">Beginning</div>
+			</a>
+		</li>
+		<li id="toc-HTTPS_MITM_proxies" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#HTTPS_MITM_proxies">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">1</span>
+				<span>HTTPS MITM proxies</span>
+			</div>
+		</a>
+		
+		<ul id="toc-HTTPS_MITM_proxies-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Environment_variables" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Environment_variables">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">2</span>
+				<span>Environment variables</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Environment_variables-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Environment variables subsection</span>
+			</button>
+		
+		<ul id="toc-Environment_variables-sublist" class="vector-toc-list">
+			<li id="toc-Keep_proxy_through_sudo" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Keep_proxy_through_sudo">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1</span>
+					<span>Keep proxy through sudo</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Keep_proxy_through_sudo-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Automation_with_network_managers" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Automation_with_network_managers">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2</span>
+					<span>Automation with network managers</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Automation_with_network_managers-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-About_libproxy" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#About_libproxy">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">3</span>
+				<span>About libproxy</span>
+			</div>
+		</a>
+		
+		<ul id="toc-About_libproxy-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Web_proxy_options" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Web_proxy_options">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">4</span>
+				<span>Web proxy options</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Web_proxy_options-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Web proxy options subsection</span>
+			</button>
+		
+		<ul id="toc-Web_proxy_options-sublist" class="vector-toc-list">
+			<li id="toc-Simple_Proxy_with_SSH" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Simple_Proxy_with_SSH">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.1</span>
+					<span>Simple Proxy with SSH</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Simple_Proxy_with_SSH-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Using_a_SOCKS_proxy" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Using_a_SOCKS_proxy">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">5</span>
+				<span>Using a SOCKS proxy</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Using_a_SOCKS_proxy-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Using a SOCKS proxy subsection</span>
+			</button>
+		
+		<ul id="toc-Using_a_SOCKS_proxy-sublist" class="vector-toc-list">
+			<li id="toc-curl_and_pacman" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#curl_and_pacman">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.1</span>
+					<span>curl and pacman</span>
+				</div>
+			</a>
+			
+			<ul id="toc-curl_and_pacman-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Proxy_settings_on_GNOME" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Proxy_settings_on_GNOME">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">6</span>
+				<span>Proxy settings on GNOME</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Proxy_settings_on_GNOME-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Microsoft_NTLM_proxy" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Microsoft_NTLM_proxy">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">7</span>
+				<span>Microsoft NTLM proxy</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Microsoft_NTLM_proxy-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Microsoft NTLM proxy subsection</span>
+			</button>
+		
+		<ul id="toc-Microsoft_NTLM_proxy-sublist" class="vector-toc-list">
+			<li id="toc-Alpaca" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Alpaca">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">7.1</span>
+					<span>Alpaca</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Alpaca-sublist" class="vector-toc-list">
+				<li id="toc-Usage" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Usage">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">7.1.1</span>
+					<span>Usage</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Usage-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Running_as_a_service" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Running_as_a_service">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">7.1.2</span>
+					<span>Running as a service</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Running_as_a_service-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Cntlm" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Cntlm">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">7.2</span>
+					<span>Cntlm</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Cntlm-sublist" class="vector-toc-list">
+				<li id="toc-Configuration" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Configuration">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">7.2.1</span>
+					<span>Configuration</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Configuration-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Usage_2" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Usage_2">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">7.2.2</span>
+					<span>Usage</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Usage_2-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+	</ul>
+	</li>
+</ul>
+</div>
+
+					</div>
+		</nav>
+			</div>
+		</div>
+		<div class="mw-content-container">
+			<main id="content" class="mw-body" style="margin: 0">
+				<header class="mw-body-header vector-page-titlebar">
+					<nav aria-label="Contents" class="vector-toc-landmark">
+						
+<div id="vector-page-titlebar-toc" class="vector-dropdown vector-page-titlebar-toc vector-button-flush-left">
+	<input type="checkbox" id="vector-page-titlebar-toc-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-page-titlebar-toc" class="vector-dropdown-checkbox " aria-label="Toggle the table of contents">
+	<label id="vector-page-titlebar-toc-label" for="vector-page-titlebar-toc-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"><span class="vector-icon mw-ui-icon-listBullet mw-ui-icon-wikimedia-listBullet"></span>
+
+<span class="vector-dropdown-label-text">Toggle the table of contents</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+							<div id="vector-page-titlebar-toc-unpinned-container" class="vector-unpinned-container">
+			</div>
+		
+	</div>
+</div>
+
+					</nav>
+					<h1 id="firstHeading" class="firstHeading mw-first-heading"><span class="mw-page-title-main">Proxy server</span></h1>
+							
+<div id="p-lang-btn" class="vector-dropdown mw-portlet mw-portlet-lang">
+	<input type="checkbox" id="p-lang-btn-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-p-lang-btn" class="vector-dropdown-checkbox mw-interlanguage-selector" aria-label="Go to an article in another language. Available in 2 languages">
+	<label id="p-lang-btn-label" for="p-lang-btn-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--action-progressive mw-portlet-lang-heading-2" aria-hidden="true"><span class="vector-icon mw-ui-icon-language-progressive mw-ui-icon-wikimedia-language-progressive"></span>
+
+<span class="vector-dropdown-label-text">2 languages</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+		<div class="vector-menu-content">
+			
+			<ul class="vector-menu-content-list">
+				
+				<li class="interlanguage-link interwiki-ja mw-list-item"><a href="https://wiki.archlinux.jp/index.php/%E3%83%97%E3%83%AD%E3%82%AD%E3%82%B7%E8%A8%AD%E5%AE%9A" title="プロキシ設定 – 日本語" lang="ja" hreflang="ja" data-title="プロキシ設定" data-language-autonym="日本語" data-language-local-name="日本語" class="interlanguage-link-target"><span>日本語</span></a></li>
+<li class="interlanguage-link interwiki-zh-hans mw-list-item"><a href="https://wiki.archlinuxcn.org/wiki/Proxy_server" title="Proxy server – 中文（简体）" lang="zh-Hans" hreflang="zh-Hans" data-title="Proxy server" data-language-autonym="中文（简体）" data-language-local-name="中文（简体）" class="interlanguage-link-target"><span>中文（简体）</span></a></li>
+			</ul>
+			
+		</div>
+
+	</div>
+</div>
+</header>
+				<div class="vector-column-end">
+					<div class="vector-sticky-pinned-container">
+						<nav class="vector-page-tools-landmark" aria-label="Page tools">
+							<div id="vector-page-tools-pinned-container" class="vector-pinned-container">
+				
+							</div>
+		</nav>
+						<nav class="vector-appearance-landmark" aria-label="Appearance">
+							<div id="vector-appearance-pinned-container" class="vector-pinned-container">
+				<div id="vector-appearance" class="vector-appearance vector-pinnable-element">
+	<div class="vector-pinnable-header vector-appearance-pinnable-header vector-pinnable-header-pinned" data-feature-name="appearance-pinned" data-pinnable-element-id="vector-appearance" data-pinned-container-id="vector-appearance-pinned-container" data-unpinned-container-id="vector-appearance-unpinned-container">
+	<div class="vector-pinnable-header-label">Appearance</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-appearance.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-appearance.unpin">hide</button>
+</div>
+
+
+</div>
+
+							</div>
+		</nav>
+					</div>
+				</div>
+				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container>
+					<div class="vector-body-before-content">
+							<div class="mw-indicators">
+		</div>
+
+						<div id="siteSub" class="noprint">From ArchWiki</div>
+					</div>
+					<div id="contentSub"><div id="mw-content-subtitle"></div></div>
+					
+					
+					<div id="mw-content-text" class="mw-body-content">
+<div class="mw-content-ltr mw-parser-output" lang="en" dir="ltr">
+<div class="archwiki-template-meta-related-articles">
+<p>Related articles</p>
+<ul>
+<li><a href="../en/HTTP_tunneling.html" title="HTTP tunneling">HTTP tunneling</a></li>
+</ul>
+</div>
+<p>According to <a href="https://en.wikipedia.org/wiki/Proxy_server" class="extiw" title="wikipedia:Proxy server">Wikipedia</a>:
+</p>
+<dl><dd>In computer networks, a proxy server is a server (a computer system or an application) that acts as an intermediary for requests from clients seeking resources from other servers.</dd></dl>
+<p>Proxying can be applied in common Internet protocols such as HTTP or <a href="https://en.wikipedia.org/wiki/SOCKS" class="extiw" title="wikipedia:SOCKS">SOCKS</a>.
+</p>
+<meta property="mw:PageProp/toc">
+<h2><span class="mw-headline" id="HTTPS_MITM_proxies">HTTPS MITM proxies</span></h2>
+<p>When debugging HTTPS connections it is sometimes useful to intercept them outside of the browser. In order for the TLS MITM to work you need to trust a <a href="../en/Transport_Layer_Security.html#Certificate_authorities" class="mw-redirect" title="Certificate authority">certificate authority</a> of the proxy either in your browser or system-wide.
+</p>
+<ul><li>
+<b>Charles</b> — Graphical trialware written in Java.</li></ul>
+<dl><dd>
+<a rel="nofollow" class="external free" href="https://www.charlesproxy.com/">https://www.charlesproxy.com/</a> || <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/charles/">charles</a></span><sup><small>AUR</small></sup>
+</dd></dl>
+<ul><li>
+<b>Fiddler</b> — Proprietary and graphical, running on Mono.</li></ul>
+<dl><dd>
+<a rel="nofollow" class="external free" href="https://www.telerik.com/fiddler">https://www.telerik.com/fiddler</a> || <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/fiddler-appimage/">fiddler-appimage</a></span><sup><small>AUR</small></sup>
+</dd></dl>
+<ul><li>
+<b>microsocks</b> — Plain simple SOCKS5 proxy server, written in C.</li></ul>
+<dl><dd>
+<a rel="nofollow" class="external free" href="https://github.com/rofl0r/microsocks">https://github.com/rofl0r/microsocks</a> || <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=microsocks">microsocks</a></span>
+</dd></dl>
+<ul><li>
+<b>mitmproxy</b> — Command-line and web interface, written in Python, also has API.</li></ul>
+<dl><dd>
+<a rel="nofollow" class="external free" href="https://mitmproxy.org/">https://mitmproxy.org/</a> || <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=mitmproxy">mitmproxy</a></span>
+</dd></dl>
+<ul><li>
+<b>sslsplit</b> — Works with any TLS connections but cannot act as a HTTP proxy in a browser, written in C.</li></ul>
+<dl><dd>
+<a rel="nofollow" class="external free" href="https://www.roe.ch/SSLsplit">https://www.roe.ch/SSLsplit</a> || <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=sslsplit">sslsplit</a></span>
+</dd></dl>
+<h2><span class="mw-headline" id="Environment_variables">Environment variables</span></h2>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../File:Tango-view-fullscreen.svg" decoding="async" width="48" height="48" class="mw-file-element"></span></span><b>This article or section needs expansion.</b></p>
+<div>
+<b>Reason:</b> To export the environment everywhere (more or less), they could be set in <code>/etc/environment</code>, <code>/etc/environment.d/*.conf</code> and <code>~/.config/environment.d/*.conf</code>. (Discuss in <a rel="nofollow" class="external text" href="../en/Talk:Proxy_server.html">Talk:Proxy server</a>)</div>
+</div>
+<p>Some programs, such as <a href="../en/Wget.html" title="Wget">wget</a> and (used by <a href="../en/Pacman.html" title="Pacman">pacman</a>) <a href="../en/CURL.html" title="CURL">CURL</a>, use environment variables of the form <code><i>protocol</i>_proxy</code> to determine the proxy for a given protocol (e.g. HTTP, FTP, ...).
+</p>
+<p>Below is an example on how to set these variables in a shell:
+</p>
+<pre>export http_proxy=<a rel="nofollow" class="external free" href="http://10.203.0.1:5187/">http://10.203.0.1:5187/</a>
+export https_proxy=$http_proxy
+export ftp_proxy=$http_proxy
+export rsync_proxy=$http_proxy
+export no_proxy="localhost,127.0.0.1,localaddress,.localdomain.com"</pre>
+<p>Some programs look for the all caps version of the environment variables.
+</p>
+<p>If the proxy environment variables are to be made available to all users and all applications, the above mentioned export commands may be added to a script, say <code>proxy.sh</code> inside <code>/etc/profile.d/</code>. The script has to be then made <a href="../en/Help:Reading.html#Make_executable" class="mw-redirect" title="Executable">executable</a>. This method is helpful while using a desktop environment like <a href="../en/Xfce.html" title="Xfce">Xfce</a> which does not provide an option for proxy configuration. For example, <a href="../en/Chromium.html" title="Chromium">Chromium</a> browser will make use of the variables set using this method while running XFCE. 
+</p>
+<p>Alternatively, there is a tool named <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/proxyman-git/">proxyman-git</a></span><sup><small>AUR</small></sup> which claims to configure system-wide proxy settings easily. It also handles proxy configurations of other software like <a href="../en/Git.html" title="Git">git</a>, <a href="../en/Node.js.html#Node_Packaged_Modules" class="mw-redirect" title="Npm">npm</a>, <a href="../en/Dropbox.html" title="Dropbox">Dropbox</a>, etc.
+</p>
+<p>Alternatively you can automate the toggling of the variables by adding a function to your <code>.bashrc</code>:
+</p>
+<pre>function proxy_on() {
+    export no_proxy="localhost,127.0.0.1,localaddress,.localdomain.com"
+
+    if (( $# &gt; 0 )); then
+        valid=$(echo $@ | sed -n 's/\([0-9]\{1,3\}.\?\)\{4\}:\([0-9]\+\)/&amp;/p')
+        if [[ $valid != $@ ]]; then
+            &gt;&amp;2 echo "Invalid address"
+            return 1
+        fi
+        local proxy=$1
+        export http_proxy="$proxy" \
+               https_proxy=$proxy \
+               ftp_proxy=$proxy \
+               rsync_proxy=$proxy
+        echo "Proxy environment variable set."
+        return 0
+    fi
+
+    echo -n "username: "; read username
+    if [[ $username != "" ]]; then
+        echo -n "password: "
+        read -es password
+        local pre="$username:$password@"
+    fi
+
+    echo -n "server: "; read server
+    echo -n "port: "; read port
+    local proxy=$pre$server:$port
+    export http_proxy="$proxy" \
+           https_proxy=$proxy \
+           ftp_proxy=$proxy \
+           rsync_proxy=$proxy \
+           HTTP_PROXY=$proxy \
+           HTTPS_PROXY=$proxy \
+           FTP_PROXY=$proxy \
+           RSYNC_PROXY=$proxy
+}
+
+function proxy_off(){
+    unset http_proxy https_proxy ftp_proxy rsync_proxy \
+          HTTP_PROXY HTTPS_PROXY FTP_PROXY RSYNC_PROXY
+    echo -e "Proxy environment variable removed."
+}
+</pre>
+<p>Omit username or password if they are not needed.
+</p>
+<p>As an alternative, you may want to use the following script.
+Change the strings <code>YourUserName</code>, <code>ProxyServerAddress:Port</code>, <code>LocalAddress</code> and <code>LocalDomain</code> to match your own data, then edit your <code>~/.bashrc</code> to include the edited functions. Any new bash window will have the new functions. In existing bash windows, type <code>source ~/.bashrc</code>.
+You may prefer to put function definitions in a separate file like <code>functions</code> then add <code>source functions</code> to <code>.bashrc</code> instead of putting everything in <code>.bashrc</code>. You may also want to change the name "myProxy" into something short and easy to write.
+</p>
+<pre>#!/bin/bash
+
+assignProxy(){
+   PROXY_ENV="http_proxy ftp_proxy https_proxy all_proxy HTTP_PROXY HTTPS_PROXY FTP_PROXY ALL_PROXY"
+   for envar in $PROXY_ENV
+   do
+      export $envar=$1
+   done
+   for envar in "no_proxy NO_PROXY"
+   do
+      export $envar=$2
+   done
+}
+
+clrProxy(){
+    PROXY_ENV="http_proxy ftp_proxy https_proxy all_proxy HTTP_PROXY HTTPS_PROXY FTP_PROXY ALL_PROXY"
+    for envar in $PROXY_ENV
+    do
+       unset $envar
+    done
+}
+
+myProxy(){
+   user=YourUserName
+   read -p "Password: " -s pass &amp;&amp;  echo -e " "
+   proxy_value="http://$user:$pass@ProxyServerAddress:Port"
+   no_proxy_value="localhost,127.0.0.1,LocalAddress,LocalDomain.com"
+   assignProxy $proxy_value $no_proxy_value
+}
+</pre>
+<h3><span class="mw-headline" id="Keep_proxy_through_sudo">Keep proxy through sudo</span></h3>
+<p>If the proxy <a href="../en/Environment_variables.html" title="Environment variables">environment variables</a> are set for the user only they will get lost when running commands with <a href="../en/Sudo.html" title="Sudo">sudo</a> (or when programs use sudo internally).
+</p>
+<p>A way to prevent that is to add the following line to a <a href="../en/Sudo.html" title="Sudo">sudo</a> configuration file:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/sudoers.d/05_proxy</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">Defaults env_keep += "*_proxy *_PROXY"</pre>
+<h3><span class="mw-headline" id="Automation_with_network_managers">Automation with network managers</span></h3>
+<ul>
+<li>
+<a href="../en/NetworkManager.html" title="NetworkManager">NetworkManager</a> cannot change the environment variables.</li>
+<li>
+<a href="../en/Netctl.html" title="Netctl">netctl</a> could set-up these environment variables but they would not be seen by other applications as they are not child of netctl.</li>
+</ul>
+<h2><span class="mw-headline" id="About_libproxy">About libproxy</span></h2>
+<p><span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=libproxy">libproxy</a></span> is an abstraction library which should be used by all applications that want to access a network resource. It still is in development but could lead to a unified and automated handling of proxies in GNU/Linux if widely adopted.
+</p>
+<p>The role of libproxy is to read the proxy settings from different sources and make them available to applications which use the library. The interesting part with libproxy is that it offers an implementation of the <a href="https://en.wikipedia.org/wiki/Web_Proxy_Autodiscovery_Protocol" class="extiw" title="wikipedia:Web Proxy Autodiscovery Protocol">Web Proxy Autodiscovery Protocol</a> and an implementation of <a href="https://en.wikipedia.org/wiki/Proxy_auto-config" class="extiw" title="wikipedia:Proxy auto-config">Proxy Auto-Config</a> that goes with it.
+</p>
+<p>The <code>/usr/bin/proxy</code> binary takes URL(s) as argument(s) and returns the proxy/proxies that could be used to fetch this/these network resource(s).
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> the version 0.4.11 does not support <code>http_proxy='wpad:'</code> because <code>{ pkg-config 'mozjs185 &gt;= 1.8.5'; }</code> fails .</div>
+<h2><span class="mw-headline" id="Web_proxy_options">Web proxy options</span></h2>
+<ul>
+<li>
+<a href="../en/Squid.html" title="Squid">Squid</a> is a very popular caching/optimizing proxy.</li>
+<li>
+<a href="../en/Privoxy.html" title="Privoxy">Privoxy</a> is an anonymizing and ad-blocking proxy.</li>
+<li>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=tinyproxy">tinyproxy</a></span> is a small, efficient HTTP/SSL proxy daemon.</li>
+<li>For a simple proxy, <a href="../en/Secure_Shell.html" class="mw-redirect" title="Ssh">ssh</a> with port forwarding can be used.</li>
+</ul>
+<h3><span class="mw-headline" id="Simple_Proxy_with_SSH">Simple Proxy with SSH</span></h3>
+<p>Connect to a server (HOST) on which you have an account (USER) as follows
+</p>
+<pre>$ ssh -D <i>PORT</i> <i>USER</i>@<i>HOST</i>
+</pre>
+<p>For PORT, choose some number which is not an IANA registered port. This specifies that traffic on the local <i>PORT</i> will be forwarded to the remote <i>HOST</i>. ssh will act as a <a href="https://en.wikipedia.org/wiki/SOCKS" class="extiw" title="wikipedia:SOCKS">SOCKS</a> server. Software supporting SOCKS proxy servers can simply be configured to connect to <i>PORT</i> on localhost. See  <a href="../en/OpenSSH.html#Forwarding_other_ports" title="OpenSSH">OpenSSH#Forwarding other ports</a>.
+</p>
+<h2><span class="mw-headline" id="Using_a_SOCKS_proxy">Using a SOCKS proxy</span></h2>
+<p>There are two cases:
+</p>
+<ul>
+<li>the application you want to use handles <a href="https://en.wikipedia.org/wiki/SOCKS#SOCKS5" class="extiw" title="wikipedia:SOCKS">SOCKS5</a> proxies (for example <a href="../en/Firefox.html" title="Firefox">Firefox</a>), then you just have to configure it to use the proxy.</li>
+<li>the application you want to use does not handle SOCKS proxies, then you can try to use <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=proxychains-ng">proxychains-ng</a></span>, <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/proxy-ns/">proxy-ns</a></span><sup><small>AUR</small></sup>, or <a href="../en/Tor.html#Torsocks" title="Tor">torsocks</a>.</li>
+</ul>
+<p>In Firefox, you can use the SOCKS proxy in the menu <i>Preferences &gt; Network &gt; Settings</i>. Choose <i>Manual Proxy Configuration</i>, and set the SOCKS Host (and only this one, make sure the other fields, such as HTTP Proxy or SSL Proxy are left empty). For example, if a SOCKS5 proxy is running on localhost port 8080, put <code>127.0.0.1</code> in the SOCKS Host field, <code>8080</code> in the Port field, and validate.
+</p>
+<p>If using <i>proxychains-ng</i>, the configuration takes place in <code>/etc/proxychains.conf</code>. You may have to uncomment the last line (set by default to use <a href="../en/Tor.html" title="Tor">Tor</a>), and replace it with the parameters of the SOCKS proxy. For example, if you are using the same SOCKS5 proxy as above, you will have to replace the last line by:
+</p>
+<pre>socks5 127.0.0.1 8080
+</pre>
+<p>Then, <i>proxychains-ng</i> can be launched with 
+</p>
+<pre>$ proxychains <i>program</i>
+</pre>
+<p>Where <code><i>program</i></code> can be any program already installed on your system (e.g. xterm, gnome-terminal, etc).
+</p>
+<p>If using <i>proxy-ns</i>, the configuration takes place in <code>/etc/proxy-ns/config.json</code>. You may have to change the <i>socks5_address</i>. An example configuration using SOCKS5 proxy as above looks like this:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/proxy-ns/config.json</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">{
+  "tun_name": "tun0",
+  "tun_ip": "10.0.0.1/24",
+  "socks5_address": "127.0.0.1:8080",
+  "fake_dns": true,
+  "fake_network": "240.0.0.0/4",
+  "dns_server": "9.9.9.9"
+}</pre>
+<p>Then, <i>proxy-ns</i> can be launched with:
+</p>
+<pre>$ proxy-ns <i>program</i>
+</pre>
+<p>The usage is the same as <i>proxychains</i>.
+</p>
+<p>If using <i>tsocks</i>, the configuration takes place in <code>/etc/tsocks.conf</code>. See <span class="plainlinks archwiki-template-man" title="$ man 5 tsocks.conf"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/tsocks.conf.5">tsocks.conf(5)</a></span> for the options. An example minimum configuration looks like this:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/tsocks.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">server = 127.0.0.1
+server_port = 8080
+server_type = 5
+default_user = ""
+default_pass = ""</pre>
+<h3><span class="mw-headline" id="curl_and_pacman">curl and pacman</span></h3>
+<p>You may set the <code>all_proxy</code> environment variable to let curl and pacman (which uses curl) use your socks5 proxy:
+</p>
+<pre>$ export all_proxy="socks5://your.proxy:1080"
+</pre>
+<h2><span class="mw-headline" id="Proxy_settings_on_GNOME">Proxy settings on GNOME</span></h2>
+<p>Some programs like <a href="../en/Chromium.html" title="Chromium">Chromium</a> and <a href="../en/Firefox.html" title="Firefox">Firefox</a> can use the settings stored by GNOME. These settings can be modified through the gnome-control-center front end and also through <i>gsettings</i>.
+</p>
+<pre>gsettings set org.gnome.system.proxy mode 'manual' 
+gsettings set org.gnome.system.proxy.http host 'proxy.localdomain.com'
+gsettings set org.gnome.system.proxy.http port 8080
+gsettings set org.gnome.system.proxy.ftp host 'proxy.localdomain.com'
+gsettings set org.gnome.system.proxy.ftp port 8080
+gsettings set org.gnome.system.proxy.https host 'proxy.localdomain.com'
+gsettings set org.gnome.system.proxy.https port 8080
+gsettings set org.gnome.system.proxy.socks host 'proxy.localdomain.com'
+gsettings set org.gnome.system.proxy.socks port 8080
+gsettings set org.gnome.system.proxy ignore-hosts "['localhost', '127.0.0.0/8', '10.0.0.0/8', '192.168.0.0/16', '172.16.0.0/12' , '*.localdomain.com' ]"
+</pre>
+<p>As GNOME is often used with NetworkManager, see also <a href="../en/NetworkManager.html#Proxy_settings" title="NetworkManager">NetworkManager#Proxy settings</a>. It does not appear that NetworkManager supports fetching the configuration from the GNOME settings above without a GNOME desktop.
+</p>
+<p><br>
+</p>
+<h2><span class="mw-headline" id="Microsoft_NTLM_proxy">Microsoft NTLM proxy</span></h2>
+<p>In a Windows network, NT LAN Manager (NTLM) is a suite of Microsoft security protocols which provides authentication, integrity, and confidentiality to users.
+</p>
+<p>A local proxy stands between your applications and the NTLM proxy, adding NTLM authentication on-the-fly.
+</p>
+<pre>(NTLM PROXY IP:PORT + CREDENTIALS + OTHER INFO) -----&gt; <b>(127.0.0.1:PORT)</b>
+</pre>
+<p>Two options are available from <a href="../en/Arch_User_Repository.html" class="mw-redirect" title="AUR">AUR</a>:
+</p>
+<ul>
+<li>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/alpaca-proxy/">alpaca-proxy</a></span><sup><small>AUR</small></sup>
+</li>
+<li>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/cntlm/">cntlm</a></span><sup><small>AUR</small></sup>
+</li>
+</ul>
+<h3><span class="mw-headline" id="Alpaca">Alpaca</span></h3>
+<p><span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/alpaca-proxy/">alpaca-proxy</a></span><sup><small>AUR</small></sup> from <a href="../en/Arch_User_Repository.html" class="mw-redirect" title="AUR">AUR</a> is a local HTTP proxy for command-line tools. It supports proxy auto-configuration (PAC) files and NTLM authentication.
+</p>
+<h4><span class="mw-headline" id="Usage">Usage</span></h4>
+<p>Alpaca can be launched interactively, which requires entering a password:
+</p>
+<pre>$ alpaca -d MYDOMAIN -u me
+Password (for MYDOMAIN\me):
+</pre>
+<p>To launch alpaca non-interactively, a NTLM hash needs to be generated and exported as a variable:
+</p>
+<pre>$ ./alpaca -d MYDOMAIN -u me -H
+Password (for MYDOMAIN\me):
+NTLM_CREDENTIALS="me@DOMAIN:00000000000000000000000000000000"; export NTLM_CREDENTIALS
+</pre>
+<p>Alpaca will by default listen on <code>localhost:<i>3128</i></code>, this can be overridden using the <code>-l</code> and <code>-p</code> options.
+</p>
+<p>Furthermore a proxy PAC url should be provided as a parameter of the <code>-C</code> option.
+</p>
+<h4><span class="mw-headline" id="Running_as_a_service">Running as a service</span></h4>
+<p><span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/alpaca-proxy/">alpaca-proxy</a></span><sup><small>AUR</small></sup> includes the <code>alpaca.service</code> <a href="../en/Systemd/User.html" title="Systemd/User">systemd user service</a>, which can be used to start alpaca automatically in a non-interactive way.
+</p>
+<p>It requires the following environment variables to be set in <code>~/.config/alpaca.environment</code>:
+</p>
+<pre>LISTEN_ADDRESS=localhost
+LISTEN_PORT=3128
+NTLM_CREDENTIALS="me@DOMAIN:00000000000000000000000000000000"
+PAC_URL="http://some.url/to/some-file.pac"
+</pre>
+<h3><span class="mw-headline" id="Cntlm">Cntlm</span></h3>
+<p><span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/cntlm/">cntlm</a></span><sup><small>AUR</small></sup> from the <a href="../en/Arch_User_Repository.html" class="mw-redirect" title="AUR">AUR</a> can be configured with several "parent" proxies and Cntlm will try one after another until one works. All authenticated connections are cached and reused to achieve high efficiency.
+</p>
+<h4><span class="mw-headline" id="Configuration">Configuration</span></h4>
+<p>Change settings in <code>/etc/cntlm.conf</code> as needed, except for the password. Then run:
+</p>
+<pre>$ cntlm -H
+</pre>
+<p>This will generate encrypted password hashes according to your proxy hostname, username and password.
+</p>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Warning:</strong> <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=ettercap">ettercap</a></span> can easily sniff your password over LAN when using plain-text passwords instead of encrypted hashes.</div>
+<p>Edit <code>/etc/cntlm.conf</code> again and include all three generated hashes, then <a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Enable">enable</a> <code>cntlm.service</code>.
+</p>
+<p>To test settings, run:
+</p>
+<pre>$ cntlm -v
+</pre>
+<h4><span class="mw-headline" id="Usage_2">Usage</span></h4>
+<p>Use <code>127.0.0.1:<i>port</i></code> or <code>localhost:<i>port</i></code> as a proxy adress. <code><i>port</i></code> matches the <code>Listen</code> parameter in <code>/etc/cntlm.conf</code>, which by default is <code>3128</code>.
+</p>
+</div>
+</div>
+					<div id="catlinks" class="catlinks" data-mw="interface">
+<div id="mw-normal-catlinks" class="mw-normal-catlinks">
+<a href="../Special:Categories.html" title="Special:Categories">Categories</a>: <ul>
+<li><a href="../en/Category:Proxy_servers.html" title="Category:Proxy servers">Proxy servers</a></li>
+<li><a href="../en/Category:Network_configuration.html" title="Category:Network configuration">Network configuration</a></li>
+</ul>
+</div>
+<div id="mw-hidden-catlinks" class="mw-hidden-catlinks mw-hidden-cats-hidden">Hidden category: <ul><li><a href="../en/Category:Pages_or_sections_flagged_with_Template:Expansion.html" title="Category:Pages or sections flagged with Template:Expansion">Pages or sections flagged with Template:Expansion</a></li></ul>
+</div>
+</div>
+				</div>
+			</main>
+			
+		</div>
+		<div class="mw-footer-container">
+			
+<footer id="footer" class="mw-footer" style="margin: 0">
+	<ul id="footer-info">
+	<li data-nosnippet="">Retrieved from "<a dir="ltr" href="https://wiki.archlinux.org/index.php?title=Proxy_server&amp;oldid=825503">https://wiki.archlinux.org/index.php?title=Proxy_server&amp;oldid=825503</a>"</li>
+<li id="footer-info-lastmod"> This page was last edited on 19 January 2025, at 13:17.</li>
+	<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+<br>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="https://terms.archlinux.org/docs/privacy-policy/">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="../en/ArchWiki:About.html">About ArchWiki</a></li>
+	<li id="footer-places-disclaimers"><a href="../en/ArchWiki:General_disclaimer.html">Disclaimers</a></li>
+	<li id="footer-places-archwiki-code-of-conduct"><a href="https://terms.archlinux.org/docs/code-of-conduct/" class="extiw" title="archlinux-service-agreements:code-of-conduct">Code of conduct</a></li>
+	<li id="footer-places-archwiki-terms-of-service"><a href="https://terms.archlinux.org/docs/terms-of-service/" class="extiw" title="archlinux-service-agreements:terms-of-service">Terms of service</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-copyrightico"><a href="https://www.gnu.org/copyleft/fdl.html" class="cdx-button cdx-button--fake-button cdx-button--size-large cdx-button--fake-button--enabled"><img src="/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" loading="lazy"></a></li>
+	<li id="footer-poweredbyico"><img src="/resources/assets/poweredby_mediawiki.svg" width="88" height="31" loading="lazy"></li>
+</ul>
+
+</footer>
+
+		</div>
+	</div> 
+</div> 
+<div class="vector-settings" id="p-dock-bottom">
+	<ul></ul>
+</div>
+</body>
+</html>

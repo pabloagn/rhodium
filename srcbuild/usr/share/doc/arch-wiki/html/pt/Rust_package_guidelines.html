@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-sticky-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-0 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-disabled skin-theme-clientpref-day vector-toc-available" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>Rust package guidelines (Português) - ArchWiki</title>
+<link rel="stylesheet" href="../ArchWikiOffline.css">
+<meta name="ResourceLoaderDynamicStyles" content="">
+<meta name="generator" content="MediaWiki 1.43.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="max-image-preview:standard">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.25, maximum-scale=5.0">
+<link rel="search" type="application/opensearchdescription+xml" href="/rest.php/v1/search" title="ArchWiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.archlinux.org/api.php?action=rsd">
+<link rel="license" href="https://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="ArchWiki Atom feed" href="/index.php?title=Special:RecentChanges&amp;feed=atom">
+</head>
+<body class="skin--responsive skin-vector skin-vector-search-vue mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Rust_package_guidelines_Português rootpage-Rust_package_guidelines_Português skin-vector-2022 action-view">
+<a class="mw-jump-link" href="#bodyContent">Jump to content</a>
+<div class="vector-header-container">
+	</div>
+<div class="mw-page-container">
+	<div class="mw-page-container-inner">
+		<div class="vector-column-start">
+			<div class="vector-main-menu-container">
+		</div>
+	<div class="vector-sticky-pinned-container">
+				<nav id="mw-panel-toc" aria-label="Contents" data-event-name="ui.sidebar-toc" class="mw-table-of-contents-container vector-toc-landmark">
+					<div id="vector-toc-pinned-container" class="vector-pinned-container">
+					<div id="vector-toc" class="vector-toc vector-pinnable-element">
+	<div class="vector-pinnable-header vector-toc-pinnable-header vector-pinnable-header-pinned" data-feature-name="toc-pinned" data-pinnable-element-id="vector-toc">
+	<h2 class="vector-pinnable-header-label">Contents</h2>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-toc.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-toc.unpin">hide</button>
+</div>
+
+
+	<ul class="vector-toc-contents" id="mw-panel-toc-list">
+		<li id="toc-mw-content-text" class="vector-toc-list-item vector-toc-level-1">
+			<a href="#" class="vector-toc-link">
+				<div class="vector-toc-text">Beginning</div>
+			</a>
+		</li>
+		<li id="toc-Diretrizes_gerais" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Diretrizes_gerais">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">1</span>
+				<span>Diretrizes gerais</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Diretrizes_gerais-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Diretrizes gerais subsection</span>
+			</button>
+		
+		<ul id="toc-Diretrizes_gerais-sublist" class="vector-toc-list">
+			<li id="toc-Nomenclatura_de_pacote" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Nomenclatura_de_pacote">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.1</span>
+					<span>Nomenclatura de pacote</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Nomenclatura_de_pacote-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Compilação" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Compila%C3%A7%C3%A3o">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">2</span>
+				<span>Compilação</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Compilação-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Verificação" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Verifica%C3%A7%C3%A3o">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">3</span>
+				<span>Verificação</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Verificação-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Pacote" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Pacote">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">4</span>
+				<span>Pacote</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Pacote-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Pacotes_exemplos" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Pacotes_exemplos">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">5</span>
+				<span>Pacotes exemplos</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Pacotes_exemplos-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+</ul>
+</div>
+
+					</div>
+		</nav>
+			</div>
+		</div>
+		<div class="mw-content-container">
+			<main id="content" class="mw-body" style="margin: 0">
+				<header class="mw-body-header vector-page-titlebar">
+					<nav aria-label="Contents" class="vector-toc-landmark">
+						
+<div id="vector-page-titlebar-toc" class="vector-dropdown vector-page-titlebar-toc vector-button-flush-left">
+	<input type="checkbox" id="vector-page-titlebar-toc-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-page-titlebar-toc" class="vector-dropdown-checkbox " aria-label="Toggle the table of contents">
+	<label id="vector-page-titlebar-toc-label" for="vector-page-titlebar-toc-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"><span class="vector-icon mw-ui-icon-listBullet mw-ui-icon-wikimedia-listBullet"></span>
+
+<span class="vector-dropdown-label-text">Toggle the table of contents</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+							<div id="vector-page-titlebar-toc-unpinned-container" class="vector-unpinned-container">
+			</div>
+		
+	</div>
+</div>
+
+					</nav>
+					<h1 id="firstHeading" class="firstHeading mw-first-heading"><span class="mw-page-title-main">Rust package guidelines (Português)</span></h1>
+							
+<div id="p-lang-btn" class="vector-dropdown mw-portlet mw-portlet-lang">
+	<input type="checkbox" id="p-lang-btn-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-p-lang-btn" class="vector-dropdown-checkbox mw-interlanguage-selector" aria-label="Go to an article in another language. Available in 3 languages">
+	<label id="p-lang-btn-label" for="p-lang-btn-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--action-progressive mw-portlet-lang-heading-3" aria-hidden="true"><span class="vector-icon mw-ui-icon-language-progressive mw-ui-icon-wikimedia-language-progressive"></span>
+
+<span class="vector-dropdown-label-text">3 languages</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+		<div class="vector-menu-content">
+			
+			<ul class="vector-menu-content-list">
+				
+				<li class="interlanguage-link interwiki-en mw-list-item"><a href="../en/Rust_package_guidelines.html" title="Rust package guidelines – English" lang="en" hreflang="en" data-title="Rust package guidelines" data-language-autonym="English" data-language-local-name="English" class="interlanguage-link-target"><span>English</span></a></li>
+<li class="interlanguage-link interwiki-ja mw-list-item"><a href="https://wiki.archlinux.jp/index.php/Rust_%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E3%82%AC%E3%82%A4%E3%83%89%E3%83%A9%E3%82%A4%E3%83%B3" title="Rust パッケージガイドライン – 日本語" lang="ja" hreflang="ja" data-title="Rust パッケージガイドライン" data-language-autonym="日本語" data-language-local-name="日本語" class="interlanguage-link-target"><span>日本語</span></a></li>
+<li class="interlanguage-link interwiki-zh-hans mw-list-item"><a href="https://wiki.archlinuxcn.org/wiki/Rust_%E8%BD%AF%E4%BB%B6%E6%89%93%E5%8C%85%E5%87%86%E5%88%99" title="Rust 软件打包准则 – 中文（简体）" lang="zh-Hans" hreflang="zh-Hans" data-title="Rust 软件打包准则" data-language-autonym="中文（简体）" data-language-local-name="中文（简体）" class="interlanguage-link-target"><span>中文（简体）</span></a></li>
+			</ul>
+			
+		</div>
+
+	</div>
+</div>
+</header>
+				<div class="vector-column-end">
+					<div class="vector-sticky-pinned-container">
+						<nav class="vector-page-tools-landmark" aria-label="Page tools">
+							<div id="vector-page-tools-pinned-container" class="vector-pinned-container">
+				
+							</div>
+		</nav>
+						<nav class="vector-appearance-landmark" aria-label="Appearance">
+							<div id="vector-appearance-pinned-container" class="vector-pinned-container">
+				<div id="vector-appearance" class="vector-appearance vector-pinnable-element">
+	<div class="vector-pinnable-header vector-appearance-pinnable-header vector-pinnable-header-pinned" data-feature-name="appearance-pinned" data-pinnable-element-id="vector-appearance" data-pinned-container-id="vector-appearance-pinned-container" data-unpinned-container-id="vector-appearance-unpinned-container">
+	<div class="vector-pinnable-header-label">Appearance</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-appearance.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-appearance.unpin">hide</button>
+</div>
+
+
+</div>
+
+							</div>
+		</nav>
+					</div>
+				</div>
+				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container>
+					<div class="vector-body-before-content">
+							<div class="mw-indicators">
+		</div>
+
+						<div id="siteSub" class="noprint">From ArchWiki</div>
+					</div>
+					<div id="contentSub"><div id="mw-content-subtitle"></div></div>
+					
+					
+					<div id="mw-content-text" class="mw-body-content">
+<div class="mw-content-ltr mw-parser-output" lang="pt" dir="ltr">
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Status de tradução:</strong> Esse artigo é uma tradução de <a href="../en/Rust_package_guidelines.html" title="Rust package guidelines">Rust package guidelines</a>. Data da última tradução: 2020-06-23. Você pode ajudar a sincronizar a tradução, se houver <a rel="nofollow" class="external text" href="https://wiki.archlinux.org/index.php?title=Rust_package_guidelines&amp;diff=0&amp;oldid=616802">alterações</a> na versão em inglês.</div>
+<div class="toc" style="display:block; text-align: center; margin-bottom: 1em;">
+<b><a href="../pt/Arch_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes do Arch">Diretrizes de pacotes do Arch</a></b>
+<hr>
+<p><a href="../pt/32-bit_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes 32-bit">32-bit</a> – <a href="../pt/CLR_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes CLR">CLR</a> – <a href="../pt/CMake_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes CMake">CMake</a> – <a href="../pt/Cross-compiling_tools_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes de ferramentas de compilação cruzada">Cross</a> – <a href="../pt/DKMS_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes DKMS">DKMS</a> – <a href="../pt/Eclipse_plugin_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes de plugin do Eclipse">Eclipse</a> – <a href="../pt/Electron_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes Electron">Electron</a> – <a href="../pt/Font_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes de fontes">Fonte</a> – <a href="../pt/Free_Pascal_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes Free Pascal">Free Pascal</a> – <a href="../pt/GNOME_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes GNOME">GNOME</a> – <a href="../pt/Go_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes Go">Go</a> – <a href="../pt/Haskell_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes Haskell">Haskell</a> – <a href="../pt/Java_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes Java">Java</a> – <a href="../pt/KDE_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes KDE">KDE</a> – <a href="../pt/Kernel_module_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes de módulos de kernel">Kernel</a> – <a href="../pt/Lisp_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes Lisp">Lisp</a> – <a href="../pt/Meson_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes Meson">Meson</a> – <a href="../pt/MinGW_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes MinGW">MinGW</a> – <a href="../pt/Node.js_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes Node.js">Node.js</a> – <a href="../pt/Nonfree_applications_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes de aplicativos não livres">Nonfree</a> – <a href="../pt/OCaml_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes OCaml">OCaml</a> – <a href="../pt/Perl_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes Perl">Perl</a> – <a href="../pt/PHP_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes PHP">PHP</a> – <a href="../pt/Python_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes Python">Python</a> – <a href="../pt/R_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes R">R</a> – <a href="../pt/Ruby_Gem_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes Ruby Gem">Ruby</a> – <a href="../pt/Rust_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes Rust">Rust</a> – <a href="../pt/Shell_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes de shell">Shell</a> – <a href="../pt/VCS_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes VCS">VCS</a> – <a href="../pt/Web_application_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes de aplicativos da Web">Web</a> – <a href="../pt/Wine_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes Wine">Wine</a>
+</p>
+</div>
+<p>Esse documento cobre padrões e diretrizes sobre escrita de <a href="../pt/PKGBUILD.html" title="PKGBUILD (Português)">PKGBUILDs</a> para <a href="../en/Rust.html" title="Rust">Rust</a>.
+</p>
+<meta property="mw:PageProp/toc">
+<h2><span class="mw-headline" id="Diretrizes_gerais">Diretrizes gerais</span></h2>
+<h3><span class="mw-headline" id="Nomenclatura_de_pacote">Nomenclatura de pacote</span></h3>
+<p>Para binários do <a href="../en/Rust.html" title="Rust">Rust</a>, use apenas o nome do programa.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Nota:</strong> O nome do pacote deve estar todo em minúsculo.</div>
+<h2>
+<span id="Compila.C3.A7.C3.A3o"></span><span class="mw-headline" id="Compilação">Compilação</span>
+</h2>
+<p>Compilação de um pacote Rust.
+</p>
+<pre> build() {
+   cargo build --release --locked
+ }
+</pre>
+<p>sendo que:
+</p>
+<ul>
+<li>
+<code>--release</code> diz ao <i>cargo</i> para fazer uma compilação lançamento</li>
+<li>
+<code>--locked</code> diz ao <i>cargo</i> para fazer uso do arquivo <code>Cargo.lock</code> e impedi-lo de atualizar dependências, o que é importante para <a rel="nofollow" class="external text" href="https://reproducible-builds.org/">reproducible builds</a>.</li>
+</ul>
+<h2>
+<span id="Verifica.C3.A7.C3.A3o"></span><span class="mw-headline" id="Verificação">Verificação</span>
+</h2>
+<p>A maioria dos projetos Rust fornecem uma forma simples de executar o conjunto de testes (<i>testsuite</i>).
+</p>
+<pre> check() {
+   cargo test --release --locked
+ }
+</pre>
+<h2><span class="mw-headline" id="Pacote">Pacote</span></h2>
+<p>O Rust compila binários em <code>target/release</code> e pode simplesmente ser instalado em <code>/usr/bin</code>.
+</p>
+<pre> package() {
+   install -Dm 755 target/release/${pkgname} -t "${pkgdir}/usr/bin"
+ }
+</pre>
+<p>Alguns pacotes podem instalar mais arquivos, como uma página man, caso em que pode ser melhor usar <code>cargo</code>:
+</p>
+<pre> package() {
+   cd "$pkgname-$pkgver"
+   cargo install --no-track --locked --all-features --root "$pkgdir/usr/" --path .
+ }
+</pre>
+<p>O argumento <code>--no-track</code> sempre deve ser usado, porque <code>cargo install</code> pode criar arquivos indesejados, como <code>/usr/.crates.toml</code> ou <code>/usr/.crates2.json</code>, a menos que seja especificado.
+</p>
+<h2><span class="mw-headline" id="Pacotes_exemplos">Pacotes exemplos</span></h2>
+<p>Clique <i>Package Actions &gt; Source Files</i> na página do pacote para ver seu PKGBUILD exemplo.
+</p>
+<ul>
+<li><span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=cbindgen">cbindgen</a></span></li>
+<li><span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=ripgrep">ripgrep</a></span></li>
+</ul>
+</div>
+</div>
+					<div id="catlinks" class="catlinks" data-mw="interface"><div id="mw-normal-catlinks" class="mw-normal-catlinks">
+<a href="../Special:Categories.html" title="Special:Categories">Category</a>: <ul><li><a href="../pt/Category:Arch_package_guidelines.html" title="Category:Arch package guidelines (Português)">Arch package guidelines (Português)</a></li></ul>
+</div></div>
+				</div>
+			</main>
+			
+		</div>
+		<div class="mw-footer-container">
+			
+<footer id="footer" class="mw-footer" style="margin: 0">
+	<ul id="footer-info">
+	<li data-nosnippet="">Retrieved from "<a dir="ltr" href="https://wiki.archlinux.org/index.php?title=Rust_package_guidelines_(Portugu%C3%AAs)&amp;oldid=779571">https://wiki.archlinux.org/index.php?title=Rust_package_guidelines_(Português)&amp;oldid=779571</a>"</li>
+<li id="footer-info-lastmod"> This page was last edited on 26 May 2023, at 11:45.</li>
+	<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+<br>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="https://terms.archlinux.org/docs/privacy-policy/">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="../en/ArchWiki:About.html">About ArchWiki</a></li>
+	<li id="footer-places-disclaimers"><a href="../en/ArchWiki:General_disclaimer.html">Disclaimers</a></li>
+	<li id="footer-places-archwiki-code-of-conduct"><a href="https://terms.archlinux.org/docs/code-of-conduct/" class="extiw" title="archlinux-service-agreements:code-of-conduct">Code of conduct</a></li>
+	<li id="footer-places-archwiki-terms-of-service"><a href="https://terms.archlinux.org/docs/terms-of-service/" class="extiw" title="archlinux-service-agreements:terms-of-service">Terms of service</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-copyrightico"><a href="https://www.gnu.org/copyleft/fdl.html" class="cdx-button cdx-button--fake-button cdx-button--size-large cdx-button--fake-button--enabled"><img src="/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" loading="lazy"></a></li>
+	<li id="footer-poweredbyico"><img src="/resources/assets/poweredby_mediawiki.svg" width="88" height="31" loading="lazy"></li>
+</ul>
+
+</footer>
+
+		</div>
+	</div> 
+</div> 
+<div class="vector-settings" id="p-dock-bottom">
+	<ul></ul>
+</div>
+</body>
+</html>

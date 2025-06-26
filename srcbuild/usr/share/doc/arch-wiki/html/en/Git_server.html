@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-sticky-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-0 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-disabled skin-theme-clientpref-day vector-toc-available" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>Git server - ArchWiki</title>
+<link rel="stylesheet" href="../ArchWikiOffline.css">
+<meta name="ResourceLoaderDynamicStyles" content="">
+<meta name="generator" content="MediaWiki 1.43.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="max-image-preview:standard">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.25, maximum-scale=5.0">
+<link rel="search" type="application/opensearchdescription+xml" href="/rest.php/v1/search" title="ArchWiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.archlinux.org/api.php?action=rsd">
+<link rel="license" href="https://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="ArchWiki Atom feed" href="/index.php?title=Special:RecentChanges&amp;feed=atom">
+</head>
+<body class="skin--responsive skin-vector skin-vector-search-vue mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Git_server rootpage-Git_server skin-vector-2022 action-view">
+<a class="mw-jump-link" href="#bodyContent">Jump to content</a>
+<div class="vector-header-container">
+	</div>
+<div class="mw-page-container">
+	<div class="mw-page-container-inner">
+		<div class="vector-column-start">
+			<div class="vector-main-menu-container">
+		</div>
+	<div class="vector-sticky-pinned-container">
+				<nav id="mw-panel-toc" aria-label="Contents" data-event-name="ui.sidebar-toc" class="mw-table-of-contents-container vector-toc-landmark">
+					<div id="vector-toc-pinned-container" class="vector-pinned-container">
+					<div id="vector-toc" class="vector-toc vector-pinnable-element">
+	<div class="vector-pinnable-header vector-toc-pinnable-header vector-pinnable-header-pinned" data-feature-name="toc-pinned" data-pinnable-element-id="vector-toc">
+	<h2 class="vector-pinnable-header-label">Contents</h2>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-toc.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-toc.unpin">hide</button>
+</div>
+
+
+	<ul class="vector-toc-contents" id="mw-panel-toc-list">
+		<li id="toc-mw-content-text" class="vector-toc-list-item vector-toc-level-1">
+			<a href="#" class="vector-toc-link">
+				<div class="vector-toc-text">Beginning</div>
+			</a>
+		</li>
+		<li id="toc-Protocols" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Protocols">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">1</span>
+				<span>Protocols</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Protocols-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Protocols subsection</span>
+			</button>
+		
+		<ul id="toc-Protocols-sublist" class="vector-toc-list">
+			<li id="toc-General" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#General">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.1</span>
+					<span>General</span>
+				</div>
+			</a>
+			
+			<ul id="toc-General-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-SSH" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#SSH">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.2</span>
+					<span>SSH</span>
+				</div>
+			</a>
+			
+			<ul id="toc-SSH-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Dumb_HTTP" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Dumb_HTTP">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.3</span>
+					<span>Dumb HTTP</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Dumb_HTTP-sublist" class="vector-toc-list">
+				<li id="toc-nginx" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#nginx">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.3.1</span>
+					<span>nginx</span>
+				</div>
+			</a>
+			
+			<ul id="toc-nginx-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Smart_HTTP" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Smart_HTTP">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.4</span>
+					<span>Smart HTTP</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Smart_HTTP-sublist" class="vector-toc-list">
+				<li id="toc-Apache" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Apache">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.4.1</span>
+					<span>Apache</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Apache-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Git" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Git">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.5</span>
+					<span>Git</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Git-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Access_control" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Access_control">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">2</span>
+				<span>Access control</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Access_control-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Web_interfaces" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Web_interfaces">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">3</span>
+				<span>Web interfaces</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Web_interfaces-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Web interfaces subsection</span>
+			</button>
+		
+		<ul id="toc-Web_interfaces-sublist" class="vector-toc-list">
+			<li id="toc-Simple_web_applications" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Simple_web_applications">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1</span>
+					<span>Simple web applications</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Simple_web_applications-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Advanced_web_applications" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Advanced_web_applications">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.2</span>
+					<span>Advanced web applications</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Advanced_web_applications-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+</ul>
+</div>
+
+					</div>
+		</nav>
+			</div>
+		</div>
+		<div class="mw-content-container">
+			<main id="content" class="mw-body" style="margin: 0">
+				<header class="mw-body-header vector-page-titlebar">
+					<nav aria-label="Contents" class="vector-toc-landmark">
+						
+<div id="vector-page-titlebar-toc" class="vector-dropdown vector-page-titlebar-toc vector-button-flush-left">
+	<input type="checkbox" id="vector-page-titlebar-toc-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-page-titlebar-toc" class="vector-dropdown-checkbox " aria-label="Toggle the table of contents">
+	<label id="vector-page-titlebar-toc-label" for="vector-page-titlebar-toc-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"><span class="vector-icon mw-ui-icon-listBullet mw-ui-icon-wikimedia-listBullet"></span>
+
+<span class="vector-dropdown-label-text">Toggle the table of contents</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+							<div id="vector-page-titlebar-toc-unpinned-container" class="vector-unpinned-container">
+			</div>
+		
+	</div>
+</div>
+
+					</nav>
+					<h1 id="firstHeading" class="firstHeading mw-first-heading"><span class="mw-page-title-main">Git server</span></h1>
+							
+<div id="p-lang-btn" class="vector-dropdown mw-portlet mw-portlet-lang">
+	<input type="checkbox" id="p-lang-btn-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-p-lang-btn" class="vector-dropdown-checkbox mw-interlanguage-selector" aria-label="Go to an article in another language. Available in 2 languages">
+	<label id="p-lang-btn-label" for="p-lang-btn-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--action-progressive mw-portlet-lang-heading-2" aria-hidden="true"><span class="vector-icon mw-ui-icon-language-progressive mw-ui-icon-wikimedia-language-progressive"></span>
+
+<span class="vector-dropdown-label-text">2 languages</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+		<div class="vector-menu-content">
+			
+			<ul class="vector-menu-content-list">
+				
+				<li class="interlanguage-link interwiki-zh-hans mw-list-item"><a href="https://wiki.archlinuxcn.org/wiki/Git_%E6%9C%8D%E5%8A%A1%E5%99%A8" title="Git 服务器 – 中文（简体）" lang="zh-Hans" hreflang="zh-Hans" data-title="Git 服务器" data-language-autonym="中文（简体）" data-language-local-name="中文（简体）" class="interlanguage-link-target"><span>中文（简体）</span></a></li>
+<li class="interlanguage-link interwiki-ja mw-list-item"><a href="https://wiki.archlinux.jp/index.php/Git_%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC" title="Git サーバー – 日本語" lang="ja" hreflang="ja" data-title="Git サーバー" data-language-autonym="日本語" data-language-local-name="日本語" class="interlanguage-link-target"><span>日本語</span></a></li>
+			</ul>
+			
+		</div>
+
+	</div>
+</div>
+</header>
+				<div class="vector-column-end">
+					<div class="vector-sticky-pinned-container">
+						<nav class="vector-page-tools-landmark" aria-label="Page tools">
+							<div id="vector-page-tools-pinned-container" class="vector-pinned-container">
+				
+							</div>
+		</nav>
+						<nav class="vector-appearance-landmark" aria-label="Appearance">
+							<div id="vector-appearance-pinned-container" class="vector-pinned-container">
+				<div id="vector-appearance" class="vector-appearance vector-pinnable-element">
+	<div class="vector-pinnable-header vector-appearance-pinnable-header vector-pinnable-header-pinned" data-feature-name="appearance-pinned" data-pinnable-element-id="vector-appearance" data-pinned-container-id="vector-appearance-pinned-container" data-unpinned-container-id="vector-appearance-unpinned-container">
+	<div class="vector-pinnable-header-label">Appearance</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-appearance.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-appearance.unpin">hide</button>
+</div>
+
+
+</div>
+
+							</div>
+		</nav>
+					</div>
+				</div>
+				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container>
+					<div class="vector-body-before-content">
+							<div class="mw-indicators">
+		</div>
+
+						<div id="siteSub" class="noprint">From ArchWiki</div>
+					</div>
+					<div id="contentSub"><div id="mw-content-subtitle"></div></div>
+					
+					
+					<div id="mw-content-text" class="mw-body-content">
+<div class="mw-content-ltr mw-parser-output" lang="en" dir="ltr">
+<p>This article gives an overview on how to host a <a href="../en/Git.html" title="Git">Git</a> server. For more information, refer to the <a rel="nofollow" class="external text" href="https://git-scm.com/book/en/v2/Git-on-the-Server-The-Protocols">Git on the Server chapter</a> of the Pro Git book.
+</p>
+<meta property="mw:PageProp/toc">
+<h2><span class="mw-headline" id="Protocols">Protocols</span></h2>
+<p>Refer to <a rel="nofollow" class="external text" href="https://git-scm.com/book/en/v2/Git-on-the-Server-The-Protocols">Git on the Server - The Protocols</a> for a detailed description along with pros and cons.
+</p>
+<h3><span class="mw-headline" id="General">General</span></h3>
+<p><a rel="nofollow" class="external text" href="https://miracoin.wordpress.com/2014/11/25/step-by-step-guide-on-setting-up-git-server-in-arch-linux-pushable/">Step by Step Guide on Setting Up git Server</a> describes setting up an unsecured server on Arch. 
+</p>
+<p>By default, the git user is expired ("Your account has expired; please contact your system administrator").  Use <a href="../en/Users_and_groups.html#Other_examples_of_user_management" class="mw-redirect" title="Chage">chage</a> to remove the expiration condition, e.g. as follows:
+</p>
+<pre># chage -E -1 git
+</pre>
+<h3><span class="mw-headline" id="SSH">SSH</span></h3>
+<p>You only need to set up an <a href="../en/Secure_Shell.html" class="mw-redirect" title="SSH">SSH server</a>.
+</p>
+<p>You are able to secure the SSH user account even more allowing only push and pull commands on this user account. This is done by replacing the default login shell by git-shell. Described in <a rel="nofollow" class="external text" href="https://git-scm.com/book/en/v2/Git-on-the-Server-Setting-Up-the-Server">Setting Up the Server</a>.
+</p>
+<p>When securing the git server created using the instructions in <a href="#General">#General</a> with the instructions of this clause (<a href="#SSH">#SSH</a>), the following additional steps are needed on Arch:
+</p>
+<ol>
+<li>Change the home directory: In order for ssh to be able to read <code>/srv/git/.ssh/authorized_keys</code>, the home directory for git in <code>/etc/passwd</code> needs to be changed from <code>/</code> to <code>/srv/git</code>.</li>
+<li>Change the base path when home directory is corrected: In order for git to serve the repositories, the <code>--base-path</code> in <code>git-daemon\@.service</code> need to be changed to <code>/srv/git</code> if the repositories are served from git's home directory.</li>
+</ol>
+<h3><span class="mw-headline" id="Dumb_HTTP">Dumb HTTP</span></h3>
+<p>"Dumb" in this context means that only <a href="../en/WebDAV.html" title="WebDAV">WebDAV</a> is involved in pulls and pushes.
+</p>
+<h4><span class="mw-headline" id="nginx">nginx</span></h4>
+<p>Follow the basic WebDAV instructions for nginx. Pushing via WebDAV also requires Locking. Here is an example location block:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/nginx/nginx.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">location /repos/ {
+        auth_basic "Authorized Personnel Only!";
+        auth_basic_user_file /etc/nginx/htpasswd;
+        dav_methods PUT DELETE MKCOL COPY MOVE;
+        dav_ext_methods PROPFIND OPTIONS LOCK UNLOCK;
+        dav_access user:rw group:rw all:r;
+        dav_ext_lock zone=general;
+        create_full_put_path on;
+        client_body_temp_path /tmp;
+    }</pre>
+<p>Note the <code>dav_ext_lock zone</code>. Add the specified locking zone to the http section of your config:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/nginx/nginx.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">dav_ext_lock_zone zone=general:10m;</pre>
+<p>Now do the usual steps when preparing a git repo for the server:
+</p>
+<ul>
+<li><code>git clone --bare /path/to/myrepo myrepo.git</code></li>
+<li>copy the bare repo to the server</li>
+<li>run <code>git update-server-info</code> in the bare repo</li>
+<li>chown the repo to be owned by http:http</li>
+</ul>
+<p>You might have noticed that I added HTTP Basic Authentication to have at lease some means of access control. Everyone who has an password entry in the htaccess file can push.
+</p>
+<p>Now you can clone as usual:
+</p>
+<pre>$ git clone https://www.example.com/repos/myrepo.git
+Cloning into 'myrepo'...
+$
+</pre>
+<p>Make some changes, add, commit, and push:
+</p>
+<pre>$ git push origin main
+error: Cannot access URL https://www.example.com/repos/myrepo.git/, return code 22
+fatal: git-http-push failed
+error: failed to push some refs to 'https://www.example.com/repos/myrepo.git'
+</pre>
+<p>Oh noes! For some reason PROPFIND reports 401 Unauthorized and that's all. Nothing in the nginx error logs. Appearently the git client has a problem passing the username and password for all subsequent requests. Running a git credential cache does not help. The only solution that works so far is editing the ~/.netrc (obviously git uses curl for http):
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">~/.netrc</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">machine www.example.com
+login git
+password topsecret</pre>
+<pre>$  &gt; git push origin main
+Fetching remote heads...
+ refs/
+ refs/heads/
+ refs/tags/
+updating 'refs/heads/main'
+ from 03f8860418facfbecedd5e0a81b480131b31bcba
+ to   ec5536091e31ebf172a34c6d1ebddfc36e3bd3a6
+   sending 3 objects
+   done
+Updating remote server info
+To https://www.example.com/repos/myrepo.git
+  0318860..ec55560  main -&gt; main
+</pre>
+<p>Don't even think to specify the clone URL as <code>https://username:password@www.example.com/repos/myrepo.git</code>. This works for the initial clone but for a subsequent push you get an error message in your error log stating that the destination URL is handled by a different repository.
+</p>
+<h3><span class="mw-headline" id="Smart_HTTP">Smart HTTP</span></h3>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../File:Tango-view-fullscreen.svg" decoding="async" width="48" height="48" class="mw-file-element"></span></span><b>This article or section needs expansion.</b></p>
+<div>
+<b>Reason:</b> There are many <a href="../en/List_of_applications/Internet.html#Web_servers" class="mw-redirect" title="Web server">web servers</a> with CGI support. (Discuss in <a rel="nofollow" class="external text" href="../en/Talk:Git_server.html">Talk:Git server</a>)</div>
+</div>
+<p>The <span class="plainlinks archwiki-template-man" title="$ man 1 git-http-backend"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/git-http-backend.1">git-http-backend(1)</a></span> is a CGI program, allowing efficient cloning, pulling and pushing over HTTP(S).
+</p>
+<h4><span class="mw-headline" id="Apache">Apache</span></h4>
+<p>The setup for this is rather simple as all you need to have installed is the <a href="../en/Apache_HTTP_Server.html" title="Apache HTTP Server">Apache HTTP Server</a> (with <code>mod_cgi</code>, <code>mod_alias</code>, and <code>mod_env</code> enabled) and of course, <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=git">git</a></span>.
+</p>
+<p>Once you have your basic setup running, add the following to your Apache configuration file, which is usually located at:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/httpd/conf/httpd.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">&lt;Directory "/usr/lib/git-core"&gt;
+    Require all granted
+&lt;/Directory&gt;
+ 
+SetEnv GIT_PROJECT_ROOT /srv/git
+SetEnv GIT_HTTP_EXPORT_ALL
+ScriptAlias /git/ /usr/lib/git-core/git-http-backend/
+</pre>
+<p>This assumes your Git repositories are located at <code>/srv/git</code> and that you want to access them via something like: <code>http(s)://your_address.tld/git/your_repo.git</code>.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> Make sure that Apache can read and write to your repositories.</div>
+<p>For more detailed documentation, visit the following links:
+</p>
+<ul>
+<li><a rel="nofollow" class="external free" href="https://git-scm.com/book/en/v2/Git-on-the-Server-Smart-HTTP">https://git-scm.com/book/en/v2/Git-on-the-Server-Smart-HTTP</a></li>
+<li><a rel="nofollow" class="external free" href="https://git-scm.com/docs/git-http-backend">https://git-scm.com/docs/git-http-backend</a></li>
+</ul>
+<h3><span class="mw-headline" id="Git">Git</span></h3>
+<p>The Git protocol is not encrypted or authenticated, and only allows read access.
+</p>
+<p>The Git daemon (<span class="plainlinks archwiki-template-man" title="$ man 1 git-daemon"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/git-daemon.1">git-daemon(1)</a></span>) can be <a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Start">started</a> with <code>git-daemon.socket</code>.
+</p>
+<p>The service uses the <code>--export-all</code> and <code>--base-path</code> parameters to serve all repositories placed in <code>/srv/git/</code>.
+</p>
+<h2><span class="mw-headline" id="Access_control">Access control</span></h2>
+<p>For fine-grained access control, the following solutions are available:
+</p>
+<ul><li>
+<b><a href="../en/Gitolite.html" title="Gitolite">Gitolite</a></b> — An access control layer on top of Git, written in Perl.</li></ul>
+<dl><dd>
+<a rel="nofollow" class="external free" href="https://github.com/sitaramc/gitolite">https://github.com/sitaramc/gitolite</a> || <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=gitolite">gitolite</a></span>
+</dd></dl>
+<ul><li>
+<b><a href="../en/Gitosis.html" title="Gitosis">Gitosis</a></b> — Software for hosting Git repositories, written in Python.</li></ul>
+<dl><dd>
+<a rel="nofollow" class="external free" href="https://github.com/tv42/gitosis">https://github.com/tv42/gitosis</a> || <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/gitosis-git/">gitosis-git</a></span><sup><small>AUR</small></sup>
+</dd></dl>
+<p>Note that if you are willing to create <a href="../en/Users_and_groups.html" class="mw-redirect" title="User account">user accounts</a> for all of the people that should have access to the repositories and do not need access control at the level of git objects (like branches), you can also use standard <a href="../en/File_permissions_and_attributes.html" class="mw-redirect" title="File permissions">file permissions</a> for access control.<a rel="nofollow" class="external autonumber" href="https://github.com/sitaramc/gitolite/blob/d74e58b5de8c78bddd29b009ba2d606f7fcb4f2d/doc/overkill.mkd">[1]</a>
+</p>
+<h2><span class="mw-headline" id="Web_interfaces">Web interfaces</span></h2>
+<h3><span class="mw-headline" id="Simple_web_applications">Simple web applications</span></h3>
+<ul>
+<li>
+<a href="../en/Gitweb.html" title="Gitweb">Gitweb</a> — the default web interface that comes with Git</li>
+<li>
+<b><a href="../en/Cgit.html" title="Cgit">cgit</a></b> — A web interface for git written in plain C.</li>
+</ul>
+<dl><dd>
+<a rel="nofollow" class="external free" href="https://git.zx2c4.com/cgit/">https://git.zx2c4.com/cgit/</a> || <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=cgit">cgit</a></span>
+</dd></dl>
+<h3><span class="mw-headline" id="Advanced_web_applications">Advanced web applications</span></h3>
+<ul><li>
+<b><a href="../en/Forgejo.html" title="Forgejo">Forgejo</a></b> — Self-hosted lightweight software forge. Community managed fork of Gitea.</li></ul>
+<dl><dd>
+<a rel="nofollow" class="external free" href="https://forgejo.org">https://forgejo.org</a> || <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=forgejo">forgejo</a></span>
+</dd></dl>
+<ul><li>
+<b><a href="../en/Gitea.html" title="Gitea">Gitea</a></b> — Painless self-hosted Git service. It was originally born as a community-managed fork of Gogs, but in 2022 it became owned by Gitea Limited with a commercial model.</li></ul>
+<dl><dd>
+<a rel="nofollow" class="external free" href="https://gitea.io">https://gitea.io</a> || <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=gitea">gitea</a></span>
+</dd></dl>
+<ul><li>
+<b><a href="../en/GitLab.html" title="GitLab">GitLab</a></b> — Project management and code hosting application, written in Ruby.</li></ul>
+<dl><dd>
+<a rel="nofollow" class="external free" href="https://gitlab.com/gitlab-org/gitlab-ce">https://gitlab.com/gitlab-org/gitlab-ce</a> || <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=gitlab">gitlab</a></span>
+</dd></dl>
+<ul><li>
+<b><a href="../en/Gogs.html" title="Gogs">Gogs</a></b> — Self Hosted Git Service, written in Go.</li></ul>
+<dl><dd>
+<a rel="nofollow" class="external free" href="https://gogs.io">https://gogs.io</a> || <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/gogs/">gogs</a></span><sup><small>AUR</small></sup>
+</dd></dl>
+</div>
+</div>
+					<div id="catlinks" class="catlinks" data-mw="interface">
+<div id="mw-normal-catlinks" class="mw-normal-catlinks">
+<a href="../Special:Categories.html" title="Special:Categories">Categories</a>: <ul>
+<li><a href="../en/Category:Version_control_system.html" title="Category:Version control system">Version control system</a></li>
+<li><a href="../en/Category:Servers.html" title="Category:Servers">Servers</a></li>
+</ul>
+</div>
+<div id="mw-hidden-catlinks" class="mw-hidden-catlinks mw-hidden-cats-hidden">Hidden category: <ul><li><a href="../en/Category:Pages_or_sections_flagged_with_Template:Expansion.html" title="Category:Pages or sections flagged with Template:Expansion">Pages or sections flagged with Template:Expansion</a></li></ul>
+</div>
+</div>
+				</div>
+			</main>
+			
+		</div>
+		<div class="mw-footer-container">
+			
+<footer id="footer" class="mw-footer" style="margin: 0">
+	<ul id="footer-info">
+	<li data-nosnippet="">Retrieved from "<a dir="ltr" href="https://wiki.archlinux.org/index.php?title=Git_server&amp;oldid=829285">https://wiki.archlinux.org/index.php?title=Git_server&amp;oldid=829285</a>"</li>
+<li id="footer-info-lastmod"> This page was last edited on 16 March 2025, at 22:43.</li>
+	<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+<br>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="https://terms.archlinux.org/docs/privacy-policy/">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="../en/ArchWiki:About.html">About ArchWiki</a></li>
+	<li id="footer-places-disclaimers"><a href="../en/ArchWiki:General_disclaimer.html">Disclaimers</a></li>
+	<li id="footer-places-archwiki-code-of-conduct"><a href="https://terms.archlinux.org/docs/code-of-conduct/" class="extiw" title="archlinux-service-agreements:code-of-conduct">Code of conduct</a></li>
+	<li id="footer-places-archwiki-terms-of-service"><a href="https://terms.archlinux.org/docs/terms-of-service/" class="extiw" title="archlinux-service-agreements:terms-of-service">Terms of service</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-copyrightico"><a href="https://www.gnu.org/copyleft/fdl.html" class="cdx-button cdx-button--fake-button cdx-button--size-large cdx-button--fake-button--enabled"><img src="/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" loading="lazy"></a></li>
+	<li id="footer-poweredbyico"><img src="/resources/assets/poweredby_mediawiki.svg" width="88" height="31" loading="lazy"></li>
+</ul>
+
+</footer>
+
+		</div>
+	</div> 
+</div> 
+<div class="vector-settings" id="p-dock-bottom">
+	<ul></ul>
+</div>
+</body>
+</html>

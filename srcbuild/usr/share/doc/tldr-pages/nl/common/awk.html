@@ -1,0 +1,60 @@
+<h1>awk</h1>
+
+<blockquote><p>Een veelzijdige programmeertaal voor het werken met bestanden.
+Meer informatie: <a href="https://github.com/onetrueawk/awk">https://github.com/onetrueawk/awk</a>.</p></blockquote>
+
+<ul>
+<li>Toon de vijfde kolom (a.k.a. veld) in een spatie-gescheiden bestand:</li>
+</ul>
+
+
+<p><code>awk '{print $5}' {{pad/naar/bestand}}</code></p>
+
+<ul>
+<li>Toon de tweede kolom van de regels die &ldquo;foo&rdquo; bevatten in een spatie-gescheiden bestand:</li>
+</ul>
+
+
+<p><code>awk '/{{foo}}/ {print $2}' {{pad/naar/bestand}}</code></p>
+
+<ul>
+<li>Toon de laatste kolom van iedere regel in een bestand en maak gebruik van een komma (in plaats van een spatie) als veld scheider:</li>
+</ul>
+
+
+<p><code>awk -F ',' '{print $NF}' {{pad/naar/bestand}}</code></p>
+
+<ul>
+<li>Tel de waarden in de eerste kolom van een bestand op en toon het totaal:</li>
+</ul>
+
+
+<p><code>awk '{s+=$1} END {print s}' {{pad/naar/bestand}}</code></p>
+
+<ul>
+<li>Toon iedere derde regel startend vanaf de eerste regel:</li>
+</ul>
+
+
+<p><code>awk 'NR%3==1' {{pad/naar/bestand}}</code></p>
+
+<ul>
+<li>Toon verschillende waardes gebaseerd op condities:</li>
+</ul>
+
+
+<p><code>awk '{if ($1 == "foo") print "Exact match foo"; else if ($1 ~ "bar") print "Partial match bar"; else print "Baz"}' {{pad/naar/bestand}}</code></p>
+
+<ul>
+<li>Toon alle regels waarbij de waarde van de 10e kolom gelijk is aan de gespecificeerde waarde:</li>
+</ul>
+
+
+<p><code>awk '($10 == {{value}})'</code></p>
+
+<ul>
+<li>Print een tabel van gebruikers met UID >= 1000 met header en opgemaakte uitvoer, gebruikmakend van een dubbele punt als scheidingsteken (<code>%-20s</code> betekent: 20 links uitgelijnde tekens, <code>%6s</code> betekent: 6 rechts uitgelijnde tekens):</li>
+</ul>
+
+
+<p><code>awk 'BEGIN {FS=":"; printf "%-20s %6s %25s\n", "Name", "UID", "Shell"} $3 &gt;= 1000 {printf "%-20s %6d %25s\n", $1, $3, $7}' /etc/passwd</code></p>

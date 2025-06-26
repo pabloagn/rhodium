@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-sticky-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-0 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-disabled skin-theme-clientpref-day vector-toc-available" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>DNS over HTTPS servers - ArchWiki</title>
+<link rel="stylesheet" href="../ArchWikiOffline.css">
+<meta name="ResourceLoaderDynamicStyles" content="">
+<meta name="generator" content="MediaWiki 1.43.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="max-image-preview:standard">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.25, maximum-scale=5.0">
+<link rel="search" type="application/opensearchdescription+xml" href="/rest.php/v1/search" title="ArchWiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.archlinux.org/api.php?action=rsd">
+<link rel="license" href="https://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="ArchWiki Atom feed" href="/index.php?title=Special:RecentChanges&amp;feed=atom">
+</head>
+<body class="skin--responsive skin-vector skin-vector-search-vue mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-DNS_over_HTTPS_servers rootpage-DNS_over_HTTPS_servers skin-vector-2022 action-view">
+<a class="mw-jump-link" href="#bodyContent">Jump to content</a>
+<div class="vector-header-container">
+	</div>
+<div class="mw-page-container">
+	<div class="mw-page-container-inner">
+		<div class="vector-column-start">
+			<div class="vector-main-menu-container">
+		</div>
+	<div class="vector-sticky-pinned-container">
+				<nav id="mw-panel-toc" aria-label="Contents" data-event-name="ui.sidebar-toc" class="mw-table-of-contents-container vector-toc-landmark">
+					<div id="vector-toc-pinned-container" class="vector-pinned-container">
+					<div id="vector-toc" class="vector-toc vector-pinnable-element">
+	<div class="vector-pinnable-header vector-toc-pinnable-header vector-pinnable-header-pinned" data-feature-name="toc-pinned" data-pinnable-element-id="vector-toc">
+	<h2 class="vector-pinnable-header-label">Contents</h2>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-toc.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-toc.unpin">hide</button>
+</div>
+
+
+	<ul class="vector-toc-contents" id="mw-panel-toc-list">
+		<li id="toc-mw-content-text" class="vector-toc-list-item vector-toc-level-1">
+			<a href="#" class="vector-toc-link">
+				<div class="vector-toc-text">Beginning</div>
+			</a>
+		</li>
+		<li id="toc-DoH_server/proxy_software_configuration" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#DoH_server/proxy_software_configuration">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">1</span>
+				<span>DoH server/proxy software configuration</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-DoH_server/proxy_software_configuration-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle DoH server/proxy software configuration subsection</span>
+			</button>
+		
+		<ul id="toc-DoH_server/proxy_software_configuration-sublist" class="vector-toc-list">
+			<li id="toc-coreDNS" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#coreDNS">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.1</span>
+					<span>coreDNS</span>
+				</div>
+			</a>
+			
+			<ul id="toc-coreDNS-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-dns-over-https" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#dns-over-https">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.2</span>
+					<span>dns-over-https</span>
+				</div>
+			</a>
+			
+			<ul id="toc-dns-over-https-sublist" class="vector-toc-list">
+				<li id="toc-Stub_resolver" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Stub_resolver">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.2.1</span>
+					<span>Stub resolver</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Stub_resolver-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-DoH_proxy" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#DoH_proxy">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.2.2</span>
+					<span>DoH proxy</span>
+				</div>
+			</a>
+			
+			<ul id="toc-DoH_proxy-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-doh-proxy" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#doh-proxy">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.3</span>
+					<span>doh-proxy</span>
+				</div>
+			</a>
+			
+			<ul id="toc-doh-proxy-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-python-doh-proxy" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#python-doh-proxy">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.4</span>
+					<span>python-doh-proxy</span>
+				</div>
+			</a>
+			
+			<ul id="toc-python-doh-proxy-sublist" class="vector-toc-list">
+				<li id="toc-Stub_resolver_2" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Stub_resolver_2">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.4.1</span>
+					<span>Stub resolver</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Stub_resolver_2-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-DoH_proxy_2" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#DoH_proxy_2">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.4.2</span>
+					<span>DoH proxy</span>
+				</div>
+			</a>
+			
+			<ul id="toc-DoH_proxy_2-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-DoH_proxy_3" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#DoH_proxy_3">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.4.3</span>
+					<span>DoH proxy</span>
+				</div>
+			</a>
+			
+			<ul id="toc-DoH_proxy_3-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Standalone_DNS_server_configuration" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Standalone_DNS_server_configuration">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">2</span>
+				<span>Standalone DNS server configuration</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Standalone_DNS_server_configuration-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Standalone DNS server configuration subsection</span>
+			</button>
+		
+		<ul id="toc-Standalone_DNS_server_configuration-sublist" class="vector-toc-list">
+			<li id="toc-BIND" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#BIND">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1</span>
+					<span>BIND</span>
+				</div>
+			</a>
+			
+			<ul id="toc-BIND-sublist" class="vector-toc-list">
+				<li id="toc-As_resolver,_with_TLS_proxy" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#As_resolver,_with_TLS_proxy">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1.1</span>
+					<span>As resolver, with TLS proxy</span>
+				</div>
+			</a>
+			
+			<ul id="toc-As_resolver,_with_TLS_proxy-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Unbound" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Unbound">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2</span>
+					<span>Unbound</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Unbound-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Web_server_configuration" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Web_server_configuration">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">3</span>
+				<span>Web server configuration</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Web_server_configuration-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Web server configuration subsection</span>
+			</button>
+		
+		<ul id="toc-Web_server_configuration-sublist" class="vector-toc-list">
+			<li id="toc-Apache_httpd_proxy_configuration" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Apache_httpd_proxy_configuration">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1</span>
+					<span>Apache httpd proxy configuration</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Apache_httpd_proxy_configuration-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-nginx_proxy_configuration" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#nginx_proxy_configuration">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.2</span>
+					<span>nginx proxy configuration</span>
+				</div>
+			</a>
+			
+			<ul id="toc-nginx_proxy_configuration-sublist" class="vector-toc-list">
+				<li id="toc-DoT_Proxy" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#DoT_Proxy">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.2.1</span>
+					<span>DoT Proxy</span>
+				</div>
+			</a>
+			
+			<ul id="toc-DoT_Proxy-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-DoH_Proxy_4" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#DoH_Proxy_4">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.2.2</span>
+					<span>DoH Proxy</span>
+				</div>
+			</a>
+			
+			<ul id="toc-DoH_Proxy_4-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-DNS_over_TLS_configuration_via_stunnel" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#DNS_over_TLS_configuration_via_stunnel">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">4</span>
+				<span>DNS over TLS configuration via stunnel</span>
+			</div>
+		</a>
+		
+		<ul id="toc-DNS_over_TLS_configuration_via_stunnel-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-DNS_over_HTTPS_server_Docker_images" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#DNS_over_HTTPS_server_Docker_images">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">5</span>
+				<span>DNS over HTTPS server Docker images</span>
+			</div>
+		</a>
+		
+		<ul id="toc-DNS_over_HTTPS_server_Docker_images-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+</ul>
+</div>
+
+					</div>
+		</nav>
+			</div>
+		</div>
+		<div class="mw-content-container">
+			<main id="content" class="mw-body" style="margin: 0">
+				<header class="mw-body-header vector-page-titlebar">
+					<nav aria-label="Contents" class="vector-toc-landmark">
+						
+<div id="vector-page-titlebar-toc" class="vector-dropdown vector-page-titlebar-toc vector-button-flush-left">
+	<input type="checkbox" id="vector-page-titlebar-toc-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-page-titlebar-toc" class="vector-dropdown-checkbox " aria-label="Toggle the table of contents">
+	<label id="vector-page-titlebar-toc-label" for="vector-page-titlebar-toc-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"><span class="vector-icon mw-ui-icon-listBullet mw-ui-icon-wikimedia-listBullet"></span>
+
+<span class="vector-dropdown-label-text">Toggle the table of contents</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+							<div id="vector-page-titlebar-toc-unpinned-container" class="vector-unpinned-container">
+			</div>
+		
+	</div>
+</div>
+
+					</nav>
+					<h1 id="firstHeading" class="firstHeading mw-first-heading"><span class="mw-page-title-main">DNS over HTTPS servers</span></h1>
+							
+<div id="p-lang-btn" class="vector-dropdown mw-portlet mw-portlet-lang">
+	<input type="checkbox" id="p-lang-btn-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-p-lang-btn" class="vector-dropdown-checkbox mw-interlanguage-selector" aria-label="Go to an article in another language. Available in 1 language">
+	<label id="p-lang-btn-label" for="p-lang-btn-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--action-progressive mw-portlet-lang-heading-1" aria-hidden="true"><span class="vector-icon mw-ui-icon-language-progressive mw-ui-icon-wikimedia-language-progressive"></span>
+
+<span class="vector-dropdown-label-text">1 language</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+		<div class="vector-menu-content">
+			
+			<ul class="vector-menu-content-list">
+				
+				<li class="interlanguage-link interwiki-ja mw-list-item"><a href="https://wiki.archlinux.jp/index.php/DNS_over_HTTPS_%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC" title="DNS over HTTPS サーバー – 日本語" lang="ja" hreflang="ja" data-title="DNS over HTTPS サーバー" data-language-autonym="日本語" data-language-local-name="日本語" class="interlanguage-link-target"><span>日本語</span></a></li>
+			</ul>
+			
+		</div>
+
+	</div>
+</div>
+</header>
+				<div class="vector-column-end">
+					<div class="vector-sticky-pinned-container">
+						<nav class="vector-page-tools-landmark" aria-label="Page tools">
+							<div id="vector-page-tools-pinned-container" class="vector-pinned-container">
+				
+							</div>
+		</nav>
+						<nav class="vector-appearance-landmark" aria-label="Appearance">
+							<div id="vector-appearance-pinned-container" class="vector-pinned-container">
+				<div id="vector-appearance" class="vector-appearance vector-pinnable-element">
+	<div class="vector-pinnable-header vector-appearance-pinnable-header vector-pinnable-header-pinned" data-feature-name="appearance-pinned" data-pinnable-element-id="vector-appearance" data-pinned-container-id="vector-appearance-pinned-container" data-unpinned-container-id="vector-appearance-unpinned-container">
+	<div class="vector-pinnable-header-label">Appearance</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-appearance.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-appearance.unpin">hide</button>
+</div>
+
+
+</div>
+
+							</div>
+		</nav>
+					</div>
+				</div>
+				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container>
+					<div class="vector-body-before-content">
+							<div class="mw-indicators">
+		</div>
+
+						<div id="siteSub" class="noprint">From ArchWiki</div>
+					</div>
+					<div id="contentSub"><div id="mw-content-subtitle"></div></div>
+					
+					
+					<div id="mw-content-text" class="mw-body-content">
+<div class="mw-content-ltr mw-parser-output" lang="en" dir="ltr">
+<div class="archwiki-template-meta-related-articles">
+<p>Related articles</p>
+<ul>
+<li><a href="../en/Domain_name_resolution.html#Privacy_and_security" class="mw-redirect" title="DNS over HTTPS">DNS over HTTPS</a></li>
+</ul>
+</div>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../File:Tango-view-fullscreen.svg" decoding="async" width="48" height="48" class="mw-file-element"></span></span><b>This article or section needs expansion.</b></p>
+<div>
+<b>Reason:</b> While this article currently focuses on <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/python-doh-proxy/">python-doh-proxy</a></span><sup><small>AUR</small></sup> for the DoH proxy with <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=bind">bind</a></span> for the DNS server and <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=stunnel">stunnel</a></span> for the DoT implementation, the general setup is the same whichever software you choose to use. Stubs have been added and it is my hope that the other package maintainers will contribute for their preferred software. Additionally, the flow of this article is a bit confusing and I will be providing some clean-up (beyond the initial commit) to describe the various configurations in more detail. (Discuss in <a rel="nofollow" class="external text" href="../en/Talk:DNS_over_HTTPS_servers.html">Talk:DNS over HTTPS servers</a>)</div>
+</div>
+<p>DNS, since its inception, has been unencrypted on UDP/53, and later TCP/53, making it susceptible to snooping attacks. For additional information on the available protocols that can be used to address this vulnerability, see <a href="../en/Domain_name_resolution.html#Privacy_and_security" title="Domain name resolution">Domain name resolution#Privacy and security</a>. This article covers two of the three available protocols for DNS servers with the necessary proxy configuration to provide both DNS over HTTPS (DoH) and DNS over TLS (DoT). Multiple DoH utilities are available in the AUR including <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/coredns/">coredns</a></span><sup><small>AUR</small></sup>, <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=dns-over-https">dns-over-https</a></span>, <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/doh-proxy/">doh-proxy</a></span><sup><small>AUR</small></sup>, and <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/python-doh-proxy/">python-doh-proxy</a></span><sup><small>AUR</small></sup>. Which of the available solutions is appropriate, depends on the needs of your network.
+</p>
+<p><span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/coredns/">coredns</a></span><sup><small>AUR</small></sup> provides both a caching, non-authoritative DNS server, and DoH services (citation needed).
+</p>
+<p><span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=dns-over-https">dns-over-https</a></span>, <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/doh-proxy/">doh-proxy</a></span><sup><small>AUR</small></sup>, and <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/python-doh-proxy/">python-doh-proxy</a></span><sup><small>AUR</small></sup> all provide an HTTP listener for proxying behind your existing HTTPS server, and a stub resolver to forward regular queries on UDP/53 to a secure DNS server. Additionally, both <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/doh-proxy/">doh-proxy</a></span><sup><small>AUR</small></sup> and <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/python-doh-proxy/">python-doh-proxy</a></span><sup><small>AUR</small></sup> provide a standalone HTTPS/2 server.
+</p>
+<meta property="mw:PageProp/toc">
+<h2>
+<span id="DoH_server.2Fproxy_software_configuration"></span><span class="mw-headline" id="DoH_server/proxy_software_configuration">DoH server/proxy software configuration</span>
+</h2>
+<h3><span class="mw-headline" id="coreDNS">coreDNS</span></h3>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../File:Merge-arrows-2.svg" decoding="async" width="36" height="40" class="mw-file-element"></span></span><b>This article or section is a candidate for merging with <a href="../en/CoreDNS.html#Configuration" title="CoreDNS">CoreDNS#Configuration</a>.</b></p>
+<div>
+<b>Notes:</b> CoreDNS has a dedicated article. (Discuss in <a rel="nofollow" class="external text" href="../en/Talk:DNS_over_HTTPS_servers.html">Talk:DNS over HTTPS servers</a>)</div>
+</div>
+<p><a href="../en/Help:Reading.html#Installation_of_packages" class="mw-redirect" title="Install">Install</a> the <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/coredns/">coredns</a></span><sup><small>AUR</small></sup> package.
+</p>
+<p>You can use coreDNS as DoH/DoT/gRPC DNS server and/or DoT proxy. Default configuration file should be located at <code>/etc/coredns/Corefile</code>.
+</p>
+<p>The example of simple configuration file looks like this:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/coredns/Corefile</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;"><i>protocol://domain:port</i> {
+    forward <i>domain</i> <i>forward_to</i>
+    tls_servername <i>domain_of_dot_server</i>
+    tls <i>cert_path</i> <i>key_path</i>
+}
+</pre>
+<p>First string is listener, you can use next protocols: <code>dns://</code> for plain DNS protocol, <code>http://</code> for DNS over HTTPS, <code>tls://</code> for DNS over TLS and <code>grpc://</code> for gRPC (see <a rel="nofollow" class="external autonumber" href="https://grpc.io/">[1]</a>). If you leave protocol empty (e.g. example.com:53), dns:// will be choose as default. The <code>domain</code> is for matching queried domains, you can use specific one (e.g. dns: //example.com: 53) or use <code>.</code> (e.g. dns: //.: 53) to match all domains. And by <code>:port</code> you can set listening port, you can leave it empty and will be chosen 53 port.
+</p>
+<p><code>forward</code> string is for where DNS query will be forward. Use <code>.</code> for <code>domain</code> to match all domains. In <code>forward_to</code> set upstream DNS server where to send queries, you can specify <code>tls://</code> protocol for DoT server. If you using upstream DoT server, you need to set <code>tls_servername</code> for TLS negotiation.
+</p>
+<p><code>tls</code> string mandatory if you use DoH, DoT or gRPC protocols. Put here certificate and private key paths in given order.
+</p>
+<p>Example of configuration simple DoT proxy listening 53 port and using Cloudflare DoT server
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/coredns/Corefile</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">. {
+    forward . tls://1.1.1.1 {
+        tls_servername cloudflare-dns.com 
+    }
+}
+</pre>
+<p>Also, you can use several instances and forward plugins:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/coredns/Corefile</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">https://.:443 {
+    forward . 127.0.0.1 {
+    forward example1.com 8.8.8.8
+    tls cert.pem key.pem
+}
+
+tls://example2.com:853 {
+    tls cert.pem key.pem
+    forward . tls://9.9.9.9 {
+        tls_servername dns.quad9.net
+    }
+}
+</pre>
+<p><a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Start/enable">Start/enable</a> the <code>coredns.service</code> unit.
+</p>
+<h3><span class="mw-headline" id="dns-over-https">dns-over-https</span></h3>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../File:Merge-arrows-2.svg" decoding="async" width="36" height="40" class="mw-file-element"></span></span><b>This article or section is a candidate for merging with <a href="../en/DNS-over-HTTPS.html" title="DNS-over-HTTPS">DNS-over-HTTPS</a>.</b></p>
+<div>
+<b>Notes:</b> DNS-over-HTTPS has a dedicated article. (Discuss in <a rel="nofollow" class="external text" href="../en/Talk:DNS_over_HTTPS_servers.html">Talk:DNS over HTTPS servers</a>)</div>
+</div>
+<p>At first, install <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=dns-over-https">dns-over-https</a></span> and after setting will not forget to enable and start needed service.
+</p>
+<h4><span class="mw-headline" id="Stub_resolver">Stub resolver</span></h4>
+<p>You can start using it right after install with default settings. Defaults ports for listening is 53 and 5380, if one of them is already binded, it will be ignored. <a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Start/enable">Start/enable</a> <code>doh-client.service</code>.
+</p>
+<p>Configuration file locate at <code>/etc/dns-over-https/doh-client.conf</code>. You can change desired ports at section <code>listen</code>. There are many included third-parted DoH servers in configuration file, you need just uncomment one you needed or write unspecified. You can use several resolvers as well. One of them will be chosen randomly for each request. To force dns-over-https use resolvers in the required order set <code>upstream_selector</code> to <code>weighted_round_robin</code> or <code>lvs_weighted_round_robin</code> and change weight value at resolvers in use.
+</p>
+<h4><span class="mw-headline" id="DoH_proxy">DoH proxy</span></h4>
+<p>Configuration file for use as doh server locate at <code>/etc/dns-over-https/doh-server.conf</code>. At <code>upstream</code> section can set desired upstream resolver and its protocol for use. You can use dns-over-https as standalone service or together with HTTPS services like nginx or apache.
+</p>
+<p>For standalone use you need to set port to 443 and specify proper cert and key:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/dns-over-https/doh-server.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">listen = [
+    "127.0.0.1:443",
+]
+...
+cert = ""
+key = ""
+</pre>
+<p>If you want use HTTP server for caching or using along with other HTTPS services leave empty cert and key strings in <code>doh-server.conf</code> and use next examples for configuration desired HTTP server. Note that there using default dns-over-https port.
+</p>
+<p><b>nginx:</b>
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/nginx/nginx/site-available/doh</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">server {
+  listen       443 ssl http2 default_server;
+  listen       [::]:443 ssl http2 default_server;
+  server_name  MY_SERVER_NAME;
+
+  ssl_certificate /path/to/your/server/certificates/fullchain.pem;
+  ssl_certificate_key /path/to/your/server/certificates/privkey.pem;
+  location /dns-query {
+    proxy_pass       http://localhost:8053/dns-query; 
+    proxy_set_header Host      $host;
+    proxy_set_header X-Real-IP $remote_addr;
+  }
+}
+</pre>
+<p><b>caddy:</b>
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/caddy/Caddyfile</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">MY_SERVER_NAME {
+        reverse_proxy * localhost:8053
+        tls my@email.address
+        try_files {path} {path}/index.php /index.php?{query}
+}
+</pre>
+<p><b>apache:</b>
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/httpd/conf/vhosts/doh.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">&lt;VirtualHost *:443&gt;
+    ServerName MY_SERVER_NAME
+    Protocols h2 http/1.1
+    ProxyPass /dns-query http://[::1]:8053/dns-query
+    ProxyPassReverse /dns-query http://[::1]:8053/dns-query
+&lt;/VirtualHost&gt;
+</pre>
+<p>After setting up, <a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Start/enable">start/enable</a> <code>doh-server.service</code>.
+</p>
+<h3><span class="mw-headline" id="doh-proxy">doh-proxy</span></h3>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../File:Tango-view-fullscreen.svg" decoding="async" width="48" height="48" class="mw-file-element"></span></span><b>This article or section needs expansion.</b></p>
+<div>
+<b>Reason:</b> <span style="color:red;">please use the first argument of the template to provide a brief explanation.</span> (Discuss in <a rel="nofollow" class="external text" href="../en/Talk:DNS_over_HTTPS_servers.html">Talk:DNS over HTTPS servers</a>)</div>
+</div>
+<h3><span class="mw-headline" id="python-doh-proxy">python-doh-proxy</span></h3>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../File:Tango-edit-cut.svg" decoding="async" width="48" height="48" class="mw-file-element"></span></span><b>This article or section is being considered for removal.</b></p>
+<div>
+<b>Reason:</b> The <a rel="nofollow" class="external text" href="https://github.com/facebookarchive/doh-proxy">project</a> is not maintained and has been archived since 2021-08-03. (Discuss in <a rel="nofollow" class="external text" href="../en/Talk:DNS_over_HTTPS_servers.html">Talk:DNS over HTTPS servers</a>)</div>
+</div>
+<p>Install <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/python-doh-proxy/">python-doh-proxy</a></span><sup><small>AUR</small></sup>.
+</p>
+<h4><span class="mw-headline" id="Stub_resolver_2">Stub resolver</span></h4>
+<p>If you intend to provide encrypted queries to your local network for legacy applications, configure the stub resolver:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/conf.d/doh-stub</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">LISTENPORT=54
+ADDR=127.0.0.1
+DOMAIN=mydomain.tld
+NS=127.0.0.1
+PORT=443</pre>
+<p>If you do not have a way to provide a secure forward DNS lookoup to your real DNS server, you should configure both DOMAIN and NS to use one of the upstream providers (CloudFlare, OpenDNS, etc., instead of localhost). If you only need to provide lookups to localhost, this is fine. If you need to provide them for the entire network, the you could listen on 53 directly if you do not have a local caching or authoritative DNS server - you would also want to use the real IP address instead of the loopback adapter in this case.
+</p>
+<h4><span class="mw-headline" id="DoH_proxy_2">DoH proxy</span></h4>
+<p>If you have an existing HTTP server and wish to proxy DNS lookups with it, setup the HTTP proxy to listen on port 8080:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/conf.d/doh-httpproxy</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">NS=127.0.0.1
+PORT=8080
+ADDR=127.0.0.1</pre>
+<p>Optionally, you can utilize either the doh-proxy service or an upstream DoH provider to forward queries.
+</p>
+<h4><span class="mw-headline" id="DoH_proxy_3">DoH proxy</span></h4>
+<p>If you do not have an existing http server, you can configure the HTTPS/2 lisener:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/conf.d/doh-proxy</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">NS=127.0.0.1
+UPSTREAMPORT=54
+ADDR=127.0.0.1
+LISTENPORT=443
+CERT=/etc/ssl/private/fullchain.pem
+KEY=/etc/ssl/private/privkey.pem</pre>
+<p>Again, adjust as necessary, but be certain that the upstream server has a way to perform secure queries, or you will be creating a loop.
+</p>
+<h2><span class="mw-headline" id="Standalone_DNS_server_configuration">Standalone DNS server configuration</span></h2>
+<h3><span class="mw-headline" id="BIND">BIND</span></h3>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../File:Merge-arrows-2.svg" decoding="async" width="36" height="40" class="mw-file-element"></span></span><b>This article or section is a candidate for merging with <a href="../en/BIND.html#Configuration" title="BIND">BIND#Configuration</a>.</b></p>
+<div>
+<b>Notes:</b> BIND has a dedicated article. (Discuss in <a rel="nofollow" class="external text" href="../en/Talk:DNS_over_HTTPS_servers.html">Talk:DNS over HTTPS servers</a>)</div>
+</div>
+<p>BIND 9.18 natively supports serving both DNS over HTTPS and DNS over TLS. See <a href="../en/BIND.html#Configuration" title="BIND">BIND#Configuration</a> for details.
+</p>
+<h4>
+<span id="As_resolver.2C_with_TLS_proxy"></span><span class="mw-headline" id="As_resolver,_with_TLS_proxy">As resolver, with TLS proxy</span>
+</h4>
+<p>Typical: If using ISC bind as the current DNS provider, and you will be providing both forwarding services for legacy clients and DoH to modern clients, you will likely want to configure named to forward all non-local queries to your stub resolver, comment out any forwarding lines an forward to the stub resolver (omit forward only if you would like to fall back to roots):
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/named.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">options {
+...
+    //forwarders { 8.8.8.8; 8.8.4.4; };
+    forwarders { 127.0.0.1 port 54; };
+    forward only;
+...
+};
+...</pre>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../File:View-refresh-red.svg" decoding="async" width="48" height="48" class="mw-file-element"></span></span><b>This article or section is out of date.</b></p>
+<div>
+<b>Reason:</b> BIND supports forwarding using DNS over TLS. (Discuss in <a href="../en/Talk:DNS_over_HTTPS_servers.html#stunnel" title="Talk:DNS over HTTPS servers">Talk:DNS over HTTPS servers#stunnel</a>)</div>
+</div>
+<p>If you want to forward to an external TLS proxy (via <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=stunnel">stunnel</a></span>), do the same but use only TCP/54 (see stunnel configuration below):
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/named.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">options {
+...
+    //forwarders { 8.8.8.8; 8.8.4.4; };
+    forwarders { 127.0.0.1 port 54; };
+    forward only;
+...
+};
+...
+server 127.0.0.1 {
+    tcp-only yes;
+};
+...</pre>
+<p>Optional: If using ISC bind as the current DNS provider, and you will be providing both forwarding services for legacy clients and DoH to modern clients, you might want to configure named to listen on an alternate port, for example TCP|UDP/54, rather than the default of 53 so that your stub resolver will listen on the standard port. Comment out any existing 'listen' lines and add the following (omit the v6 line if not needed):
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/named.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">...
+    //listen-on { any; };
+    listen-on port 54 { any; };
+    listen-on-v6 port 54 { any; };
+...</pre>
+<h3><span class="mw-headline" id="Unbound">Unbound</span></h3>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../File:Merge-arrows-2.svg" decoding="async" width="36" height="40" class="mw-file-element"></span></span><b>This article or section is a candidate for merging with <a href="../en/Unbound.html#Configuration" title="Unbound">Unbound#Configuration</a>.</b></p>
+<div>
+<b>Notes:</b> Unbound has a dedicated article. (Discuss in <a rel="nofollow" class="external text" href="../en/Talk:DNS_over_HTTPS_servers.html">Talk:DNS over HTTPS servers</a>)</div>
+</div>
+<p>You can easily set up DoT server by adding to your configuration file port 853 to listening and specify certificate and key paths:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/unbound/unbound.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">server:
+...
+interface: 127.0.0.1@853
+tls-service-pem: /etc/unbound/public.pem
+tls-service-key: /etc/unbound/private.pem
+...
+</pre>
+<p>DoH server setup is same as DoT, but needed port is 443:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/unbound/unbound.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">server:
+...
+interface: 127.0.0.1@443
+tls-service-pem: /etc/unbound/public.pem
+tls-service-key: /etc/unbound/private.pem
+...
+</pre>
+<h2><span class="mw-headline" id="Web_server_configuration">Web server configuration</span></h2>
+<h3><span class="mw-headline" id="Apache_httpd_proxy_configuration">Apache httpd proxy configuration</span></h3>
+<p>Configure a proxy in your primary httpd.conf or appropriate vhost listening on 443:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/httpd/conf/vhosts/<b>yourhost</b>.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">...
+    ProxyPass /dns-query http://[127.0.0.1]:8080/dns-query
+    ProxyPassReverse /dns-query http://[127.0.0.1]:8080/dns-query
+...
+</pre>
+<h3><span class="mw-headline" id="nginx_proxy_configuration">nginx proxy configuration</span></h3>
+<h4><span class="mw-headline" id="DoT_Proxy">DoT Proxy</span></h4>
+<p>With Nginx stream module you can setup proxy to upstream DNS. Note that you can use local dns as well as third parties.
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/nginx/nginx.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">...
+stream {
+    upstream dns {
+        zone dns 64k;
+        server 8.8.8.8:53;
+    }
+    
+    server {
+        listen 853 ssl;
+        ssl_certificate /etc/nginx/ssl/certs/public.pem;
+        ssl_certificate_key /etc/nginx/ssl/private/private.pem;
+        proxy_pass dns;
+    }
+}
+...</pre>
+<h4><span class="mw-headline" id="DoH_Proxy_4">DoH Proxy</span></h4>
+<p>For DoH implementation you need for use additional NJS scripts. You need to get it <a rel="nofollow" class="external text" href="https://github.com/TuxInvader/nginx-dns/tree/master/njs.d/">from this GitHub's page</a>, put it to <code>/etc/nginx/njs.d/</code> and be sure package <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=nginx-mod-njs">nginx-mod-njs</a></span> is installed.
+</p>
+<p>At first you need to setup stream service, which will be get DNS request from nginx's HTTP/2 service, process it with <code>js_filter</code> to find DNS packets and pass it to upstream DNS server.
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/nginx/nginx.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">...
+stream {
+    upstream dns {
+        zone dns 64k;
+        server 1.1.1.1:53;
+        
+    server {
+        listen 127.0.0.1:8053;
+        js_filter doh_filter_request;
+        proxy_ssl on;
+        proxy_pass dns;
+        }
+}
+...
+</pre>
+<p>Then, setup HTTP/2 service to listen DNS requests at URI /dns-query and relay them to stream service. Note that to a need change certificates to valid
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/nginx/nginx.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">...
+upstream dohloop {
+   zone dohloop 64k;
+   server 127.0.0.1:8053;
+}
+
+server {
+    listen 443 ssl http2;
+    ssl_certificate /etc/nginx/ssl/certs/public.pem;
+    ssl_certificate_key /etc/nginx/ssl/private/private.pem;
+
+    location /dns-query {
+        proxy_http_version 1.0;
+        proxy_pass http://dohloop;
+   }
+}
+...</pre>
+<p>You can use both DoT and DoH services at same time, caching and multiple upstream DNS. For more examples see <a rel="nofollow" class="external text" href="https://github.com/TuxInvader/nginx-dns/tree/master/examples">these configuration files</a>
+</p>
+<h2><span class="mw-headline" id="DNS_over_TLS_configuration_via_stunnel">DNS over TLS configuration via stunnel</span></h2>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../File:Merge-arrows-2.svg" decoding="async" width="36" height="40" class="mw-file-element"></span></span><b>This article or section is a candidate for merging with <a href="../en/Stunnel.html#DNS_over_TLS" title="Stunnel">stunnel#DNS over TLS</a>.</b></p>
+<div>
+<b>Notes:</b> Some info is provided on the main <a href="../en/Stunnel.html" title="Stunnel">stunnel</a> page. DNS over TLS is out of scope of this page. (Discuss in <a rel="nofollow" class="external text" href="../en/Talk:DNS_over_HTTPS_servers.html">Talk:DNS over HTTPS servers</a>)</div>
+</div>
+<p>Configure stunnel to listen on TCP/853 for TLS connections, and forward to your local DNS provider:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/stunnel/conf.d/DoT.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[dns]
+accept = 853
+connect = 127.0.0.1:53
+cert = /etc/ssl/private/fullchain.pem
+key = /etc/ssl/private/privkey.pem</pre>
+<p>Configure stunnel to listen on TCP/54 and forward to an upstream secure provider:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/stunnel/conf.d/DoT-Remote.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[dnsovertls]
+client = yes
+accept = 54
+connect = 10.10.10.1:853
+verifyChain = yes
+CAPath = /etc/ssl/certs
+checkHost = &lt;your_host_name&gt;</pre>
+<h2><span class="mw-headline" id="DNS_over_HTTPS_server_Docker_images">DNS over HTTPS server Docker images</span></h2>
+<p>See <a rel="nofollow" class="external free" href="https://hub.docker.com/r/satishweb/doh-server">https://hub.docker.com/r/satishweb/doh-server</a>.
+</p>
+</div>
+</div>
+					<div id="catlinks" class="catlinks" data-mw="interface">
+<div id="mw-normal-catlinks" class="mw-normal-catlinks">
+<a href="../Special:Categories.html" title="Special:Categories">Categories</a>: <ul>
+<li><a href="../en/Category:Domain_Name_System.html" title="Category:Domain Name System">Domain Name System</a></li>
+<li><a href="../en/Category:Network_configuration.html" title="Category:Network configuration">Network configuration</a></li>
+</ul>
+</div>
+<div id="mw-hidden-catlinks" class="mw-hidden-catlinks mw-hidden-cats-hidden">Hidden categories: <ul>
+<li><a href="../en/Category:Pages_or_sections_flagged_with_Template:Expansion.html" title="Category:Pages or sections flagged with Template:Expansion">Pages or sections flagged with Template:Expansion</a></li>
+<li><a href="../en/Category:Pages_or_sections_flagged_with_Template:Merge.html" title="Category:Pages or sections flagged with Template:Merge">Pages or sections flagged with Template:Merge</a></li>
+<li><a href="../en/Category:Sections_flagged_with_Template:Remove.html" title="Category:Sections flagged with Template:Remove">Sections flagged with Template:Remove</a></li>
+<li><a href="../en/Category:Pages_or_sections_flagged_with_Template:Out_of_date.html" title="Category:Pages or sections flagged with Template:Out of date">Pages or sections flagged with Template:Out of date</a></li>
+</ul>
+</div>
+</div>
+				</div>
+			</main>
+			
+		</div>
+		<div class="mw-footer-container">
+			
+<footer id="footer" class="mw-footer" style="margin: 0">
+	<ul id="footer-info">
+	<li data-nosnippet="">Retrieved from "<a dir="ltr" href="https://wiki.archlinux.org/index.php?title=DNS_over_HTTPS_servers&amp;oldid=830156">https://wiki.archlinux.org/index.php?title=DNS_over_HTTPS_servers&amp;oldid=830156</a>"</li>
+<li id="footer-info-lastmod"> This page was last edited on 30 March 2025, at 07:27.</li>
+	<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+<br>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="https://terms.archlinux.org/docs/privacy-policy/">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="../en/ArchWiki:About.html">About ArchWiki</a></li>
+	<li id="footer-places-disclaimers"><a href="../en/ArchWiki:General_disclaimer.html">Disclaimers</a></li>
+	<li id="footer-places-archwiki-code-of-conduct"><a href="https://terms.archlinux.org/docs/code-of-conduct/" class="extiw" title="archlinux-service-agreements:code-of-conduct">Code of conduct</a></li>
+	<li id="footer-places-archwiki-terms-of-service"><a href="https://terms.archlinux.org/docs/terms-of-service/" class="extiw" title="archlinux-service-agreements:terms-of-service">Terms of service</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-copyrightico"><a href="https://www.gnu.org/copyleft/fdl.html" class="cdx-button cdx-button--fake-button cdx-button--size-large cdx-button--fake-button--enabled"><img src="/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" loading="lazy"></a></li>
+	<li id="footer-poweredbyico"><img src="/resources/assets/poweredby_mediawiki.svg" width="88" height="31" loading="lazy"></li>
+</ul>
+
+</footer>
+
+		</div>
+	</div> 
+</div> 
+<div class="vector-settings" id="p-dock-bottom">
+	<ul></ul>
+</div>
+</body>
+</html>

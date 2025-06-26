@@ -1,0 +1,47 @@
+<h1>bgpgrep</h1>
+
+<blockquote><p>Filter and print BGP data within MRT dumps.
+Can read files compressed with <code>gzip</code>, <code>bzip2</code> and <code>xz</code>.
+More information: <a href="https://codeberg.org/1414codeforge/ubgpsuite">https://codeberg.org/1414codeforge/ubgpsuite</a>.</p></blockquote>
+
+<ul>
+<li>List all routes:</li>
+</ul>
+
+
+<p><code>bgpgrep {{master6.mrt}}</code></p>
+
+<ul>
+<li>List routes received from a specific peer, determined by the peer&rsquo;s AS number:</li>
+</ul>
+
+
+<p><code>bgpgrep {{master4.mrt}} -peer {{64498}}</code></p>
+
+<ul>
+<li>List routes received from a specific peer, determined by the peer&rsquo;s IP address:</li>
+</ul>
+
+
+<p><code>bgpgrep {{master4.mrt.bz2}} -peer {{2001:db8:dead:cafe:acd::19e}}</code></p>
+
+<ul>
+<li>List routes which have certain ASNs in their AS path:</li>
+</ul>
+
+
+<p><code>bgpgrep {{master6.mrt.bz2}} -aspath '{{64498 64510}}'</code></p>
+
+<ul>
+<li>List routes that lead to a specific address:</li>
+</ul>
+
+
+<p><code>bgpgrep {{master6.mrt.bz2}} -supernet '{{2001:db8:dead:cafe:aef::5}}'</code></p>
+
+<ul>
+<li>List routes that have communities from a specific AS:</li>
+</ul>
+
+
+<p><code>bgpgrep {{master4.mrt}} -communities \( '{{64497}}:*' \)</code></p>

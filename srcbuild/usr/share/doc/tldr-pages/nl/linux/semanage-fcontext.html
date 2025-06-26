@@ -1,0 +1,40 @@
+<h1>semanage fcontext</h1>
+
+<blockquote><p>Beheer persistente SELinux-beveiligingscontextregels op bestanden/mappen.
+Bekijk ook: <code>semanage</code>, <code>matchpathcon</code>, <code>secon</code>, <code>chcon</code>, <code>restorecon</code>.
+Meer informatie: <a href="https://manned.org/semanage-fcontext">https://manned.org/semanage-fcontext</a>.</p></blockquote>
+
+<ul>
+<li>Toon alle bestandslabelregels:</li>
+</ul>
+
+
+<p><code>sudo semanage fcontext --list</code></p>
+
+<ul>
+<li>Toon alle door de gebruiker gedefinieerde bestandslabelregels zonder koppen:</li>
+</ul>
+
+
+<p><code>sudo semanage fcontext --list --locallist --noheading</code></p>
+
+<ul>
+<li>Voeg een door de gebruiker gedefinieerde regel toe die elk pad labelt dat overeenkomt met een PCRE-regex:</li>
+</ul>
+
+
+<p><code>sudo semanage fcontext --add --type {{samba_share_t}} {{'/mnt/share(/.*)?'}}</code></p>
+
+<ul>
+<li>Verwijder een door de gebruiker gedefinieerde regel met behulp van zijn PCRE-regex:</li>
+</ul>
+
+
+<p><code>sudo semanage fcontext --delete {{'/mnt/share(/.*)?'}}</code></p>
+
+<ul>
+<li>Herlabel een map recursief door de nieuwe regels toe te passen:</li>
+</ul>
+
+
+<p><code>restorecon -R -v {{pad/naar/map}}</code></p>

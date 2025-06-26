@@ -1,0 +1,60 @@
+<h1>rmlint</h1>
+
+<blockquote><p>Find space waste and other broken things on your filesystem.
+More information: <a href="https://rmlint.readthedocs.io/en/latest/rmlint.1.html">https://rmlint.readthedocs.io/en/latest/rmlint.1.html</a>.</p></blockquote>
+
+<ul>
+<li>Check directories for duplicated, empty and broken files:</li>
+</ul>
+
+
+<p><code>rmlint {{path/to/directory1 path/to/directory2 ...}}</code></p>
+
+<ul>
+<li>Check for duplicates bigger than a specific size, preferably keeping files in tagged directories (after the double slash):</li>
+</ul>
+
+
+<p><code>rmlint {{[-s|--size]}} {{1MB}} {{path/to/directory}} // {{path/to/original_directory}}</code></p>
+
+<ul>
+<li>Check for space wasters, keeping everything in the untagged directories:</li>
+</ul>
+
+
+<p><code>rmlint {{[-k|--keep-all-untagged]}} {{path/to/directory}} // {{path/to/original_directory}}</code></p>
+
+<ul>
+<li>Delete duplicate files found by an execution of <code>rmlint</code>:</li>
+</ul>
+
+
+<p><code>./rmlint.sh</code></p>
+
+<ul>
+<li>Find duplicate directory trees based on data, ignoring names:</li>
+</ul>
+
+
+<p><code>rmlint {{[-D|--merge-directories]}} {{path/to/directory}}</code></p>
+
+<ul>
+<li>Mark files at lower path [d]epth as originals, on tie choose shorter [l]ength:</li>
+</ul>
+
+
+<p><code>rmlint {{[-S|--rank-by]}} {{dl}} {{path/to/directory}}</code></p>
+
+<ul>
+<li>Find files with identical filename and contents, and link rather than delete the duplicates:</li>
+</ul>
+
+
+<p><code>rmlint {{[-c|--config]}} sh:link {{[-b|--match-basename]}} {{path/to/directory}}</code></p>
+
+<ul>
+<li>Use <code>data</code> as master directory. Find only duplicates in backup that are also in <code>data</code>. Do not delete any files in <code>data</code>:</li>
+</ul>
+
+
+<p><code>rmlint {{path/to/backup}} // {{path/to/data}} {{[-k|--keep-all-tagged]}} {{[-m|--must-match-tagged]}}</code></p>

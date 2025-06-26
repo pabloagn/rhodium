@@ -1,0 +1,46 @@
+<h1>kops</h1>
+
+<blockquote><p>Kubernetes 클러스터를 생성, 삭제, 업그레이드 및 유지 관리.
+더 많은 정보: <a href="https://github.com/kubernetes/kops/">https://github.com/kubernetes/kops/</a>.</p></blockquote>
+
+<ul>
+<li>구성 사양에서 클러스터 생성:</li>
+</ul>
+
+
+<p><code>kops create cluster -f {{클러스터_이름.yaml}}</code></p>
+
+<ul>
+<li>새로운 SSH 공개 키 생성:</li>
+</ul>
+
+
+<p><code>kops create secret sshpublickey {{키_이름}} -i {{~/.ssh/id_rsa.pub}}</code></p>
+
+<ul>
+<li>클러스터 구성을 <code>~/.kube/config</code> 파일로 내보내기:</li>
+</ul>
+
+
+<p><code>kops export kubecfg {{클러스터_이름}}</code></p>
+
+<ul>
+<li>클러스터 구성을 YAML로 가져오기:</li>
+</ul>
+
+
+<p><code>kops get cluster {{클러스터_이름}} -o yaml</code></p>
+
+<ul>
+<li>클러스터 삭제:</li>
+</ul>
+
+
+<p><code>kops delete cluster {{클러스터_이름}} --yes</code></p>
+
+<ul>
+<li>클러스터 유효성 검사:</li>
+</ul>
+
+
+<p><code>kops validate cluster {{클러스터_이름}} --wait {{준비_시간}} --count {{필요한_검증_수}}</code></p>

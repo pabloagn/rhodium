@@ -1,0 +1,40 @@
+<h1>setcap</h1>
+
+<blockquote><p>지정된 파일의 권한 설정.
+같이 보기: <code>getcap</code>.
+더 많은 정보: <a href="https://manned.org/setcap">https://manned.org/setcap</a>.</p></blockquote>
+
+<ul>
+<li>주어진 파일에 <code>cap_net_raw</code> 권한 설정 (RAW 및 PACKET 소켓 사용을 위해):</li>
+</ul>
+
+
+<p><code>setcap '{{cap_net_raw}}' {{경로/대상/파일}}</code></p>
+
+<ul>
+<li>파일에 여러 권한 설정 (<code>ep</code>는 &ldquo;효과적 허가"를 의미):</li>
+</ul>
+
+
+<p><code>setcap '{{cap_dac_read_search,cap_sys_tty_config+ep}}' {{경로/대상/파일}}</code></p>
+
+<ul>
+<li>파일에서 모든 권한 제거:</li>
+</ul>
+
+
+<p><code>setcap -r {{경로/대상/파일}}</code></p>
+
+<ul>
+<li>지정된 파일에 현재 지정된 권한이 연관되어 있는지 확인:</li>
+</ul>
+
+
+<p><code>setcap -v '{{cap_net_raw}}' {{경로/대상/파일}}</code></p>
+
+<ul>
+<li>선택적 <code>-n root_uid</code> 인수는 이 루트 사용자 ID 소유자와 함께 사용자 네임스페이스에서만 파일 권한을 설정하는 데 사용될 수 있음:</li>
+</ul>
+
+
+<p><code>setcap -n {{root_uid}} '{{cap_net_admin}}' {{경로/대상/파일}}</code></p>

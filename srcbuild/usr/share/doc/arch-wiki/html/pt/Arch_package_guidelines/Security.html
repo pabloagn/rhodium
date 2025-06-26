@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-sticky-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-0 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-disabled skin-theme-clientpref-day vector-toc-available" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>Arch package guidelines (Português)/Security (Português) - ArchWiki</title>
+<link rel="stylesheet" href="../../ArchWikiOffline.css">
+<meta name="ResourceLoaderDynamicStyles" content="">
+<meta name="generator" content="MediaWiki 1.43.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="max-image-preview:standard">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.25, maximum-scale=5.0">
+<link rel="search" type="application/opensearchdescription+xml" href="/rest.php/v1/search" title="ArchWiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.archlinux.org/api.php?action=rsd">
+<link rel="license" href="https://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="ArchWiki Atom feed" href="/index.php?title=Special:RecentChanges&amp;feed=atom">
+</head>
+<body class="skin--responsive skin-vector skin-vector-search-vue mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Arch_package_guidelines_Português_Security_Português rootpage-Arch_package_guidelines_Português skin-vector-2022 action-view">
+<a class="mw-jump-link" href="#bodyContent">Jump to content</a>
+<div class="vector-header-container">
+	</div>
+<div class="mw-page-container">
+	<div class="mw-page-container-inner">
+		<div class="vector-column-start">
+			<div class="vector-main-menu-container">
+		</div>
+	<div class="vector-sticky-pinned-container">
+				<nav id="mw-panel-toc" aria-label="Contents" data-event-name="ui.sidebar-toc" class="mw-table-of-contents-container vector-toc-landmark">
+					<div id="vector-toc-pinned-container" class="vector-pinned-container">
+					<div id="vector-toc" class="vector-toc vector-pinnable-element">
+	<div class="vector-pinnable-header vector-toc-pinnable-header vector-pinnable-header-pinned" data-feature-name="toc-pinned" data-pinnable-element-id="vector-toc">
+	<h2 class="vector-pinnable-header-label">Contents</h2>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-toc.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-toc.unpin">hide</button>
+</div>
+
+
+	<ul class="vector-toc-contents" id="mw-panel-toc-list">
+		<li id="toc-mw-content-text" class="vector-toc-list-item vector-toc-level-1">
+			<a href="#" class="vector-toc-link">
+				<div class="vector-toc-text">Beginning</div>
+			</a>
+		</li>
+		<li id="toc-Uso" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Uso">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">1</span>
+				<span>Uso</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Uso-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-RELRO" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#RELRO">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">2</span>
+				<span>RELRO</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-RELRO-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle RELRO subsection</span>
+			</button>
+		
+		<ul id="toc-RELRO-sublist" class="vector-toc-list">
+			<li id="toc-Haskell" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Haskell">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1</span>
+					<span>Haskell</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Haskell-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Go" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Go">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2</span>
+					<span>Go</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Go-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Stack_Canary" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Stack_Canary">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">3</span>
+				<span>Stack Canary</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Stack_Canary-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-NX" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#NX">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">4</span>
+				<span>NX</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-NX-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle NX subsection</span>
+			</button>
+		
+		<ul id="toc-NX-sublist" class="vector-toc-list">
+			<li id="toc-C/C++" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#C/C++">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.1</span>
+					<span>C/C++</span>
+				</div>
+			</a>
+			
+			<ul id="toc-C/C++-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-PIE" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#PIE">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">5</span>
+				<span>PIE</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-PIE-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle PIE subsection</span>
+			</button>
+		
+		<ul id="toc-PIE-sublist" class="vector-toc-list">
+			<li id="toc-C/C++_2" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#C/C++_2">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.1</span>
+					<span>C/C++</span>
+				</div>
+			</a>
+			
+			<ul id="toc-C/C++_2-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Golang" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Golang">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.2</span>
+					<span>Golang</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Golang-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Haskell_2" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Haskell_2">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.3</span>
+					<span>Haskell</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Haskell_2-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-RPATH/RUNPATH" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#RPATH/RUNPATH">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">6</span>
+				<span>RPATH/RUNPATH</span>
+			</div>
+		</a>
+		
+		<ul id="toc-RPATH/RUNPATH-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-FORTIFY" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#FORTIFY">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">7</span>
+				<span>FORTIFY</span>
+			</div>
+		</a>
+		
+		<ul id="toc-FORTIFY-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Serviços_systemd" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Servi%C3%A7os_systemd">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">8</span>
+				<span>Serviços systemd</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Serviços_systemd-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Serviços systemd subsection</span>
+			</button>
+		
+		<ul id="toc-Serviços_systemd-sublist" class="vector-toc-list">
+			<li id="toc-Acesso_de_arquivos" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Acesso_de_arquivos">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">8.1</span>
+					<span>Acesso de arquivos</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Acesso_de_arquivos-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Usuário" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Usu%C3%A1rio">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">8.2</span>
+					<span>Usuário</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Usuário-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Memória" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Mem%C3%B3ria">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">8.3</span>
+					<span>Memória</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Memória-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Chamadas_de_sistema" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Chamadas_de_sistema">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">8.4</span>
+					<span>Chamadas de sistema</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Chamadas_de_sistema-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Rede" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Rede">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">8.5</span>
+					<span>Rede</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Rede-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Várias" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#V%C3%A1rias">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">8.6</span>
+					<span>Várias</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Várias-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+</ul>
+</div>
+
+					</div>
+		</nav>
+			</div>
+		</div>
+		<div class="mw-content-container">
+			<main id="content" class="mw-body" style="margin: 0">
+				<header class="mw-body-header vector-page-titlebar">
+					<nav aria-label="Contents" class="vector-toc-landmark">
+						
+<div id="vector-page-titlebar-toc" class="vector-dropdown vector-page-titlebar-toc vector-button-flush-left">
+	<input type="checkbox" id="vector-page-titlebar-toc-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-page-titlebar-toc" class="vector-dropdown-checkbox " aria-label="Toggle the table of contents">
+	<label id="vector-page-titlebar-toc-label" for="vector-page-titlebar-toc-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"><span class="vector-icon mw-ui-icon-listBullet mw-ui-icon-wikimedia-listBullet"></span>
+
+<span class="vector-dropdown-label-text">Toggle the table of contents</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+							<div id="vector-page-titlebar-toc-unpinned-container" class="vector-unpinned-container">
+			</div>
+		
+	</div>
+</div>
+
+					</nav>
+					<h1 id="firstHeading" class="firstHeading mw-first-heading"><span class="mw-page-title-main">Arch package guidelines (Português)/Security (Português)</span></h1>
+							
+<div id="p-lang-btn" class="vector-dropdown mw-portlet mw-portlet-lang">
+	<input type="checkbox" id="p-lang-btn-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-p-lang-btn" class="vector-dropdown-checkbox mw-interlanguage-selector" aria-label="Go to an article in another language. Available in 2 languages">
+	<label id="p-lang-btn-label" for="p-lang-btn-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--action-progressive mw-portlet-lang-heading-2" aria-hidden="true"><span class="vector-icon mw-ui-icon-language-progressive mw-ui-icon-wikimedia-language-progressive"></span>
+
+<span class="vector-dropdown-label-text">2 languages</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+		<div class="vector-menu-content">
+			
+			<ul class="vector-menu-content-list">
+				
+				<li class="interlanguage-link interwiki-en mw-list-item"><a href="../../en/Arch_package_guidelines/Security.html" title="Arch package guidelines/Security – English" lang="en" hreflang="en" data-title="Arch package guidelines/Security" data-language-autonym="English" data-language-local-name="English" class="interlanguage-link-target"><span>English</span></a></li>
+<li class="interlanguage-link interwiki-ja mw-list-item"><a href="https://wiki.archlinux.jp/index.php/Arch_%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E3%82%AC%E3%82%A4%E3%83%89%E3%83%A9%E3%82%A4%E3%83%B3/%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3" title="Arch パッケージガイドライン/セキュリティ – 日本語" lang="ja" hreflang="ja" data-title="Arch パッケージガイドライン/セキュリティ" data-language-autonym="日本語" data-language-local-name="日本語" class="interlanguage-link-target"><span>日本語</span></a></li>
+			</ul>
+			
+		</div>
+
+	</div>
+</div>
+</header>
+				<div class="vector-column-end">
+					<div class="vector-sticky-pinned-container">
+						<nav class="vector-page-tools-landmark" aria-label="Page tools">
+							<div id="vector-page-tools-pinned-container" class="vector-pinned-container">
+				
+							</div>
+		</nav>
+						<nav class="vector-appearance-landmark" aria-label="Appearance">
+							<div id="vector-appearance-pinned-container" class="vector-pinned-container">
+				<div id="vector-appearance" class="vector-appearance vector-pinnable-element">
+	<div class="vector-pinnable-header vector-appearance-pinnable-header vector-pinnable-header-pinned" data-feature-name="appearance-pinned" data-pinnable-element-id="vector-appearance" data-pinned-container-id="vector-appearance-pinned-container" data-unpinned-container-id="vector-appearance-unpinned-container">
+	<div class="vector-pinnable-header-label">Appearance</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-appearance.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-appearance.unpin">hide</button>
+</div>
+
+
+</div>
+
+							</div>
+		</nav>
+					</div>
+				</div>
+				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container>
+					<div class="vector-body-before-content">
+							<div class="mw-indicators">
+		</div>
+
+						<div id="siteSub" class="noprint">From ArchWiki</div>
+					</div>
+					<div id="contentSub"><div id="mw-content-subtitle"><div class="subpages">&lt; <bdi dir="ltr"><a href="../../pt/Arch_package_guidelines.html" title="Arch package guidelines (Português)">Arch package guidelines (Português)</a></bdi>
+</div></div></div>
+					
+					
+					<div id="mw-content-text" class="mw-body-content">
+<div class="mw-content-ltr mw-parser-output" lang="pt" dir="ltr">
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Status de tradução:</strong> Esse artigo é uma tradução de <a href="../../en/Arch_package_guidelines/Security.html" title="Arch package guidelines/Security">Arch package guidelines/Security</a>. Data da última tradução: 2023-10-26. Você pode ajudar a sincronizar a tradução, se houver <a rel="nofollow" class="external text" href="https://wiki.archlinux.org/index.php?title=Arch_package_guidelines/Security&amp;diff=0&amp;oldid=783716">alterações</a> na versão em inglês.</div>
+<p>Esta página descreve as diretrizes de empacotamento de segurança para pacotes do Arch Linux. Para projetos C/C++, o compilador e o vinculador podem aplicar opções de proteção de segurança. O Arch Linux aplica PIE, fonte Fortify, protetor de pilha, nx e relro por padrão.
+</p>
+<meta property="mw:PageProp/toc">
+<h2><span class="mw-headline" id="Uso">Uso</span></h2>
+<p>As proteções <i>hardening</i> podem ser revisadas executando <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=checksec">checksec</a></span>.
+</p>
+<pre>$ checksec --file=/usr/bin/cat
+</pre>
+<h2><span class="mw-headline" id="RELRO">RELRO</span></h2>
+<p>O RELRO é uma técnica genérica de mitigação para proteger as seções de dados de um processo/binário ELF. Quando um programa é carregado, várias seções da memória ELF precisam ser gravadas pelo vinculador, mas pode ser ativado como somente leitura antes de passar o controle para o programa. Isso evita que os invasores substituam algumas seções da ELF. Existem dois modos RELRO diferentes:
+</p>
+<ul><li>Partial RELRO (<code>-Wl,-z,relro</code>): algumas seções são marcadas como somente leitura após o carregamento do programa, exceto que o GOT (<code>.got.plt</code>) ainda pode ser gravado.</li></ul>
+<ul><li>Full RELRO (<code>-Wl,-z,now</code>) durante o carregamento do programa, todos os símbolos dinâmicos são resolvidos, permitindo que o GOT completo seja marcado como somente leitura.</li></ul>
+<p>Se um aplicativo relatar relro parcial, investigue se a cadeia de ferramentas de compilação passa nossos LDFLAGS ou permite substituir LDFLAGS. Para os pacotes Go, investigue se o método de compilação usa <code>build.go</code> como uma substituição pura do Makefile golang, que não permite a passagem de LDFLAGS.
+</p>
+<h3><span class="mw-headline" id="Haskell">Haskell</span></h3>
+<p>Para Haskell, não está claro como alcançar o Full RELRO no momento.
+</p>
+<h3><span class="mw-headline" id="Go">Go</span></h3>
+<p>Veja <a href="../../pt/Go_package_guidelines.html#Sinalizadores_e_op%C3%A7%C3%B5es_de_compila%C3%A7%C3%A3o" class="mw-redirect" title="Diretrizes de pacotes Go">Diretrizes de pacotes Go#Sinalizadores e opções de compilação</a>.
+</p>
+<h2><span class="mw-headline" id="Stack_Canary">Stack Canary</span></h2>
+<p>Um <a href="https://en.wikipedia.org/wiki/Stack_canary" class="extiw" title="wikipedia:Stack canary">stack canary</a> é adicionado pelo compilador entre o buffer e os dados de controle na pilha. Se esse valor conhecido estiver corrompido, ocorreu um estouro de buffer e o programa em execução é segmentado para impedir uma possível execução arbitrária do código.
+</p>
+<p>O pacote <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=gcc">gcc</a></span> ativou a proteção de pilha por padrão com o <a rel="nofollow" class="external text" href="https://github.com/archlinux/svntogit-packages/blob/packages/gcc/trunk/PKGBUILD#L120">--enable-default-ssp</a> opção de compilação.
+</p>
+<h2><span class="mw-headline" id="NX">NX</span></h2>
+<h3>
+<span id="C.2FC.2B.2B"></span><span class="mw-headline" id="C/C++">C/C++</span>
+</h3>
+<p>A proteção do espaço executável marca as regiões da memória como não executáveis, de modo que uma tentativa de executar o código da máquina nessas regiões causará uma exceção. Ele utiliza recursos de hardware como o bit NX (bit sem execução) ou, em alguns casos, emulação de software desses recursos.
+</p>
+<h2><span class="mw-headline" id="PIE">PIE</span></h2>
+<h3>
+<span id="C.2FC.2B.2B_2"></span><span class="mw-headline" id="C/C++_2">C/C++</span>
+</h3>
+<p>O pacote <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=gcc">gcc</a></span> o tem habilitado por padrão para C/C++ com <a rel="nofollow" class="external text" href="https://github.com/archlinux/svntogit-packages/blob/packages/gcc/trunk/PKGBUILD#L119">--enable-default-pie</a>.
+</p>
+<h3><span class="mw-headline" id="Golang">Golang</span></h3>
+<p>Passe os seguintes sinalizadores para <code>go build</code>
+</p>
+<pre>export GOFLAGS='-buildmode=pie'
+export CGO_CPPFLAGS="-D_FORTIFY_SOURCE=3"
+export CGO_LDFLAGS="-Wl,-z,relro,-z,now"
+</pre>
+<h3><span class="mw-headline" id="Haskell_2">Haskell</span></h3>
+<p>Passe o seguinte sinalizador para <code>runhaskell Setup.hs configure</code>:
+</p>
+<pre>--ghc-option='-pie'
+</pre>
+<h2>
+<span id="RPATH.2FRUNPATH"></span><span class="mw-headline" id="RPATH/RUNPATH">RPATH/RUNPATH</span>
+</h2>
+<p>RUNPATH/RPATH fornece outros caminhos de pesquisa para o objeto em que está listado (pode ser usado para objetos executáveis e compartilhados).
+</p>
+<pre>$ objdump -x /usr/bin/perl | grep -E 'RPATH|RUNPATH'
+</pre>
+<p>Se o valor RPATH contiver um caminho dentro do controle de um invasor, ele poderá executar o código instalando uma biblioteca maliciosa nesse diretório. Por exemplo, <a rel="nofollow" class="external text" href="https://nvd.nist.gov/vuln/detail/CVE-2006-1566">CVE-2006-1566</a> e <a rel="nofollow" class="external text" href="https://www.cvedetails.com/cve/CVE-2005-4280/">CVE-2005-4280</a>. Veja <a href="https://wiki.debian.org/RpathIssue" class="extiw" title="debian:RpathIssue">Debian:RpathIssue</a>.
+</p>
+<p>A entrada RPATH é configurada pelo vinculador, passando, por exemplo, a seguinte string para LDFLAGS <code>-Wl, -rpath -Wl,/usr/local/lib</code>. Para fazer uma entrada de RUNPATH, anexe <code>--enable-new-dtags</code> aos sinalizadores do vinculador.
+</p>
+<h2><span class="mw-headline" id="FORTIFY">FORTIFY</span></h2>
+<p>A fonte Fortify é uma macro que adiciona proteção contra estouro de buffer <i>(buffer overflow)</i> em várias funções que executam operações na memória e nas strings. Ele verifica se um invasor tenta copiar mais bytes para estourar um buffer e interrompe a execução do programa. Essa proteção é ativada com o <code>CPPFLAGS</code> padrão:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">makepkg.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">CPPFLAGS="-D_FORTIFY_SOURCE=3"</pre>
+<p>Veja <a href="../../pt/Makepkg.html#Configura%C3%A7%C3%A3o" title="Makepkg (Português)">makepkg (Português)#Configuração</a>
+</p>
+<h2>
+<span id="Servi.C3.A7os_systemd"></span><span class="mw-headline" id="Serviços_systemd">Serviços systemd</span>
+</h2>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../../File:Tango-go-next.svg" decoding="async" width="48" height="48" class="mw-file-element"></span></span><b>This article or section is a candidate for moving to <a href="../../en/Systemd/Sandboxing.html" title="Systemd/Sandboxing">systemd/Sandboxing</a>.</b></p>
+<div>
+<b>Notes:</b> Cobre o mesmo tópico que <a href="../../en/Systemd.html#Sandboxing_application_environments" title="Systemd">systemd#Sandboxing application environments</a>. Ambos poderiam ser mesclados e movidos para uma página dedicada. Veja <a href="../../en/Systemd/Sandboxing.html" class="mw-redirect" title="User:NetSysFire/systemd sandboxing">User:NetSysFire/systemd sandboxing</a> para um rascunho proposto. (Discuss in <a href="../../en/Talk:Security.html#systemd_unit_hardening_and_system.conf_tweaks" title="Talk:Security">Talk:Security#systemd unit hardening and system.conf tweaks</a>)</div>
+</div>
+<p>Se um arquivo de serviço do <a href="../../pt/Systemd.html" title="Systemd (Português)">systemd</a> for enviado com o pacote devido à falta de fornecimento do upstream, aplique os seguintes recursos de proteção de serviço do systemd. O systemd fornece uma maneira de analisar os recursos de segurança habilitados para um serviço.
+</p>
+<pre>$ systemd-analyze security reflector.service
+</pre>
+<h3><span class="mw-headline" id="Acesso_de_arquivos">Acesso de arquivos</span></h3>
+<p>Um serviço pode ser protegido restringindo o acesso ao sistema de arquivos.
+</p>
+<p>Configure um novo espaço de nomes do sistema fiel para o processo executado e que monta os diretórios <code>/tmp</code> e <code>/var/tmp</code> privados dentro dele que não são compartilhados pelos processos
+</p>
+<pre>PrivateTmp=true
+</pre>
+<p>O <code>ProtectSystem</code> possui três variedades diferentes de diretórios de montagem como somente leitura para o processo executado. A opção <code>full</code> monta <code>/usr</code>, <code>/boot</code> e <code>/etc</code> como somente leitura. O <code>ProtectHome</code> torna <code>/home</code>, <code>/root</code> e <code>/run/user</code>\ inacessíveis ao processo executado.
+</p>
+<pre>ProtectSystem=strict
+ProtectHome=true
+</pre>
+<p>Configure um novo espaço de nomes <code>/dev</code> para o processo executado e adiciona apenas pseudodispositivos API como <code>/dev/null</code>, <code>/dev/zero</code> ou <code>/dev/random</code>, mas não para dispositivos físicos ou memória do sistema, portas do sistema e outros. Isso é útil para impedir que o processo de execução seja gravado diretamente em dispositivos físicos, o systemd também adiciona um filtro de chamadas do sistema para chamadas dentro do conjunto <code>@raw-io</code>.
+</p>
+<pre>PrivateDevices=true
+</pre>
+<p>Essas opções impendem o processo executado de alterar as variáveis do kernel acessíveis por meio de <code>/proc/sys</code>, <code>/sys</code> etc. <code>ProtectControlGroups</code> torna a hierarquia de <code>/sys/fs/cgroup</code> somente leitura.
+</p>
+<pre>ProtectKernelTunables=true
+ProtectControlGroups=true
+</pre>
+<p>Tornar inacessíveis os caminhos de arquivos pode ser feito da seguinte forma:
+</p>
+<pre>InaccessiblePaths=/etc
+</pre>
+<p>Informações mais detalhadas podem ser encontradas em <span class="plainlinks archwiki-template-man" title="$ man 5 systemd.exec"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd.exec.5">systemd.exec(5)</a></span>.
+</p>
+<h3>
+<span id="Usu.C3.A1rio"></span><span class="mw-headline" id="Usuário">Usuário</span>
+</h3>
+<p>Certifique-se que o processo executado e seus filhos nunca possam obter novos privilégios por meio do <span class="plainlinks archwiki-template-man" title="$ man 2 execve"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/execve.2">execve(2)</a></span>.
+</p>
+<pre>NoNewPrivileges=true
+</pre>
+<h3>
+<span id="Mem.C3.B3ria"></span><span class="mw-headline" id="Memória">Memória</span>
+</h3>
+<p>Proíba tentativas de criar mapeamentos de memória que sejam graváveis e executáveis, alterar os mapeamentos para executáveis ou criar memória compartilhada executável. Isso protege um processo contra a permissão de um invasor na memória, que também é executada. Observe que ativar isso não é compatível com todos os aplicativos que dependem de <a href="https://en.wikipedia.org/wiki/pt:JIT" class="extiw" title="wikipedia:pt:JIT">JIT</a>.
+</p>
+<pre>MemoryDenyWriteExecute=true
+</pre>
+<h3><span class="mw-headline" id="Chamadas_de_sistema">Chamadas de sistema</span></h3>
+<p>Bloqueia a chamada de sistema <span class="plainlinks archwiki-template-man" title="$ man 2 personality"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/personality.2">personality(2)</a></span> para que o domínio de execução do kernel não possa ser alterado.
+</p>
+<pre>LockPersonality=true
+</pre>
+<p>As chamadas de sistema também podem ser restritas em um serviço, o systemd pode exibir chamadas de sistema para filtrar:
+</p>
+<pre>$ systemd-analyze syscall-filter
+</pre>
+<p>Grupos predefinidos estão disponíveis, por exemplo, para usar o ponto de partida recomendado para chamadas de sistema na lista de permissões para serviços do sistema:
+</p>
+<pre>SystemCallFilter=@system-service
+
+</pre>
+<p>Chamadas de sistema podem ser restrita por sua arquitetura tal como evitar que binários 32 bits executem em máquinas 64 bit (binários não nativos):
+</p>
+<pre>SystemCallArchitectures=native
+</pre>
+<h3><span class="mw-headline" id="Rede">Rede</span></h3>
+<p>Se o processo em execução não exigir acesso à rede, este acesso pode ser totalmente desativado, configurando um novo espaço de nomes de rede para o processo e configurando apenas uma interface de loopback.
+</p>
+<pre>PrivateNetwork=true
+</pre>
+<p>Se a rede for necessária, o tipo de família de endereços usado pode ser restrito para a chamada de sistema <span class="plainlinks archwiki-template-man" title="$ man 2 socket"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/socket.2">socket(2)</a></span>, permitindo, por exemplo, apenas soquetes UNIX.
+</p>
+<pre>RestrictAddressFamilies=AF_UNIX
+</pre>
+<p>Quando é necessária apenas a rede para o localhost ou intervalos de IP específicos, um processo pode ser restringido, permitindo apenas o acesso da rede ao localhost.
+</p>
+<pre>IPAddressAllow=localhost
+IPAddressDeny=any
+</pre>
+<p>Mais informações sobre filtragem de rede pode ser encontrada em <span class="plainlinks archwiki-template-man" title="$ man 5 systemd.resource-control"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd.resource-control.5">systemd.resource-control(5)</a></span>.
+</p>
+<h3>
+<span id="V.C3.A1rias"></span><span class="mw-headline" id="Várias">Várias</span>
+</h3>
+<p>Configura um novo espaço de nomes UTS para o processo de execução e não permite alterar o nome de host ou o nome de domínio.
+</p>
+<pre>ProtectHostname=true
+</pre>
+</div>
+</div>
+					<div id="catlinks" class="catlinks" data-mw="interface">
+<div id="mw-normal-catlinks" class="mw-normal-catlinks">
+<a href="../../Special:Categories.html" title="Special:Categories">Categories</a>: <ul>
+<li><a href="../../pt/Category:Arch_package_guidelines.html" title="Category:Arch package guidelines (Português)">Arch package guidelines (Português)</a></li>
+<li><a href="../../pt/Category:Security.html" title="Category:Security (Português)">Security (Português)</a></li>
+</ul>
+</div>
+<div id="mw-hidden-catlinks" class="mw-hidden-catlinks mw-hidden-cats-hidden">Hidden category: <ul><li><a href="../../en/Category:Pages_or_sections_flagged_with_Template:Move.html" title="Category:Pages or sections flagged with Template:Move">Pages or sections flagged with Template:Move</a></li></ul>
+</div>
+</div>
+				</div>
+			</main>
+			
+		</div>
+		<div class="mw-footer-container">
+			
+<footer id="footer" class="mw-footer" style="margin: 0">
+	<ul id="footer-info">
+	<li data-nosnippet="">Retrieved from "<a dir="ltr" href="https://wiki.archlinux.org/index.php?title=Arch_package_guidelines_(Portugu%C3%AAs)/Security_(Portugu%C3%AAs)&amp;oldid=791193">https://wiki.archlinux.org/index.php?title=Arch_package_guidelines_(Português)/Security_(Português)&amp;oldid=791193</a>"</li>
+<li id="footer-info-lastmod"> This page was last edited on 26 October 2023, at 17:09.</li>
+	<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+<br>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="https://terms.archlinux.org/docs/privacy-policy/">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="../../en/ArchWiki:About.html">About ArchWiki</a></li>
+	<li id="footer-places-disclaimers"><a href="../../en/ArchWiki:General_disclaimer.html">Disclaimers</a></li>
+	<li id="footer-places-archwiki-code-of-conduct"><a href="https://terms.archlinux.org/docs/code-of-conduct/" class="extiw" title="archlinux-service-agreements:code-of-conduct">Code of conduct</a></li>
+	<li id="footer-places-archwiki-terms-of-service"><a href="https://terms.archlinux.org/docs/terms-of-service/" class="extiw" title="archlinux-service-agreements:terms-of-service">Terms of service</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-copyrightico"><a href="https://www.gnu.org/copyleft/fdl.html" class="cdx-button cdx-button--fake-button cdx-button--size-large cdx-button--fake-button--enabled"><img src="/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" loading="lazy"></a></li>
+	<li id="footer-poweredbyico"><img src="/resources/assets/poweredby_mediawiki.svg" width="88" height="31" loading="lazy"></li>
+</ul>
+
+</footer>
+
+		</div>
+	</div> 
+</div> 
+<div class="vector-settings" id="p-dock-bottom">
+	<ul></ul>
+</div>
+</body>
+</html>

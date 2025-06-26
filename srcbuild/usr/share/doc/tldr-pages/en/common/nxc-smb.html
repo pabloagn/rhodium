@@ -1,0 +1,46 @@
+<h1>nxc smb</h1>
+
+<blockquote><p>Pentest and exploit SMB servers.
+More information: <a href="https://www.netexec.wiki/smb-protocol">https://www.netexec.wiki/smb-protocol</a>.</p></blockquote>
+
+<ul>
+<li>Search for valid domain credentials by trying out every combination in the specified lists of usernames and passwords:</li>
+</ul>
+
+
+<p><code>nxc smb {{192.168.178.2}} {{[-u|--username]}} {{path/to/usernames.txt}} {{[-p|--password]}} {{path/to/passwords.txt}}</code></p>
+
+<ul>
+<li>Search for valid credentials for local accounts instead of domain accounts:</li>
+</ul>
+
+
+<p><code>nxc smb {{192.168.178.2}} {{[-u|--username]}} {{path/to/usernames.txt}} {{[-p|--password]}} {{path/to/passwords.txt}} --local-auth</code></p>
+
+<ul>
+<li>Enumerate SMB shares and the specified users' access rights to them on the target hosts:</li>
+</ul>
+
+
+<p><code>nxc smb {{192.168.178.0/24}} {{[-u|--username]}} {{username}} {{[-p|--password]}} {{password}} --shares</code></p>
+
+<ul>
+<li>Enumerate network interfaces on the target hosts, performing authentication via pass-the-hash:</li>
+</ul>
+
+
+<p><code>nxc smb {{192.168.178.30-45}} {{[-u|--username]}} {{username}} {{[-H|--hash]}} {{NTLM_hash}} --interfaces</code></p>
+
+<ul>
+<li>Scan the target hosts for common vulnerabilities:</li>
+</ul>
+
+
+<p><code>nxc smb {{path/to/target_list.txt}} {{[-u|--username]}} '' {{[-p|--password]}} '' {{[-M|--module]}} zerologon {{[-M|--module]}} petitpotam</code></p>
+
+<ul>
+<li>Attempt to execute a command on the target hosts:</li>
+</ul>
+
+
+<p><code>nxc smb {{192.168.178.2}} {{[-u|--username]}} {{username}} {{[-p|--password]}} {{password}} -x {{command}}</code></p>

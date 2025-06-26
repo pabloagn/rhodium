@@ -1,0 +1,46 @@
+<h1>dd</h1>
+
+<blockquote><p>Converte e copia um arquivo.
+Mais informações: <a href="https://www.gnu.org/software/coreutils/manual/html_node/dd-invocation.html">https://www.gnu.org/software/coreutils/manual/html_node/dd-invocation.html</a>.</p></blockquote>
+
+<ul>
+<li>Cria um dispositivo USB inicializável a partir de um arquivo isohybrid (como <code>archlinux-xxx.iso</code>), e mostra o progresso:</li>
+</ul>
+
+
+<p><code>dd if={{caminho/para/arquivo.iso}} of={{/dev/dispositivo_usb}} status=progress</code></p>
+
+<ul>
+<li>Clona um dispositivo para outro dispositivo com blocos de 4MiB e salva em disco antes de o comando finalizar a execução:</li>
+</ul>
+
+
+<p><code>dd bs=4M conv=fsync if={{/dev/dispositivo_de_origem}} of={{/dev/dispositivo_de_destino}}</code></p>
+
+<ul>
+<li>Gera uma arquivo com um número específico de bytes aleatórios, usando o dispositivo aleatório do kernel:</li>
+</ul>
+
+
+<p><code>dd bs={{100}} count={{1}} if=/dev/urandom of={{caminho/para/arquivo_aleatorio}}</code></p>
+
+<ul>
+<li>Cria um benchmark do desempenho de escrita de um disco:</li>
+</ul>
+
+
+<p><code>dd bs={{1M}} count={{1024}} if=/dev/zero of={{caminho/para/arquivo_1GB}}</code></p>
+
+<ul>
+<li>Cria uma cópia de segurança do sistema, salva em um arquivo IMG (pode ser restaurado depois trocando o valor de <code>if</code> com o de <code>of</code>), e mostra o progresso:</li>
+</ul>
+
+
+<p><code>dd if={{/dev/dispositivo_de_origem}} of={{caminho/para/arquivo.img}} status=progress</code></p>
+
+<ul>
+<li>Verifica o progresso de uma operação <code>dd</code> que está acontecendo (execute esse comando em outro terminal):</li>
+</ul>
+
+
+<p><code>kill -USR1 $(pgrep -x dd)</code></p>

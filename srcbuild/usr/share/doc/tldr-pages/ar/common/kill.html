@@ -1,0 +1,54 @@
+<h1>kill</h1>
+
+<blockquote><p>إرسال إشارة إلى عملية (Process)، عادةً لإيقافها.
+يمكن لجميع الإشارات باستثناء SIGKILL و SIGSTOP أن يتم اعتراضها بواسطة العملية لإنهاء نظيف.
+لمزيد من التفاصيل: <a href="https://manned.org/kill.1posix">https://manned.org/kill.1posix</a>.</p></blockquote>
+
+<ul>
+<li>إنهاء برنامج باستخدام الإشارة الافتراضية SIGTERM (إنهاء):</li>
+</ul>
+
+
+<p><code>kill {{process_id}}</code></p>
+
+<ul>
+<li>عرض أسماء الإشارات المتاحة (تُستخدم بدون بادئة <code>SIG</code>):</li>
+</ul>
+
+
+<p><code>kill -l</code></p>
+
+<ul>
+<li>إنهاء برنامج باستخدام الإشارة SIGHUP (قطع الاتصال). العديد من الخدمات (Daemons) ستقوم بإعادة التحميل بدلاً من الإنهاء:</li>
+</ul>
+
+
+<p><code>kill -{{1|HUP}} {{process_id}}</code></p>
+
+<ul>
+<li>إنهاء برنامج باستخدام الإشارة SIGINT (المقاطعة). يتم تنفيذ ذلك عادةً عند ضغط المستخدم على <code>&lt;Ctrl c&gt;</code>:</li>
+</ul>
+
+
+<p><code>kill -{{2|INT}} {{process_id}}</code></p>
+
+<ul>
+<li>إرسال إشارة إلى نظام التشغيل لإنهاء البرنامج فورًا (لن تتاح له فرصة لمعالجة الإشارة):</li>
+</ul>
+
+
+<p><code>kill -{{9|KILL}} {{process_id}}</code></p>
+
+<ul>
+<li>إرسال إشارة إلى نظام التشغيل لإيقاف برنامج مؤقتًا حتى يتم استلام إشارة SIGCONT (&ldquo;متابعة&rdquo;):</li>
+</ul>
+
+
+<p><code>kill -{{17|STOP}} {{process_id}}</code></p>
+
+<ul>
+<li>إرسال إشارة <code>SIGUSR1</code> إلى جميع العمليات التي تملك معرف المجموعة المحدد (GID):</li>
+</ul>
+
+
+<p><code>kill -{{SIGUSR1}} -{{group_id}}</code></p>

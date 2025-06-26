@@ -1,0 +1,33 @@
+<h1>smbcacls</h1>
+
+<blockquote><p>Visualiza y manipula ACLs de Windows en recursos compartidos SMB.
+Parte de la suite Samba.
+Más información: <a href="https://www.samba.org/samba/docs/current/man-html/smbcacls.1.html">https://www.samba.org/samba/docs/current/man-html/smbcacls.1.html</a>.</p></blockquote>
+
+<ul>
+<li>Muestra las ACLs de un archivo o directorio en un recurso compartido SMB remoto:</li>
+</ul>
+
+
+<p><code>smbcacls //{{servidor}}/{{compartido}} {{ruta/al/archivo_o_directorio}} --user {{dominio\\nombre_usuario}}%{{contraseña}}</code></p>
+
+<ul>
+<li>Establece una nueva ACL para un archivo en un recurso compartido SMB remoto (reemplaza <code>"ACL:..."</code> con una especificación ACL válida de Windows):</li>
+</ul>
+
+
+<p><code>smbcacls //{{servidor}}/{{compartido}} {{ruta/al/archivo}} --user {{dominio\\nombre_usuario}}%{{contraseña}} "ACL:{{DACL}}"</code></p>
+
+<ul>
+<li>Elimina todas las entradas ACL existentes y establece una nueva ACL:</li>
+</ul>
+
+
+<p><code>smbcacls //{{servidor}}/{{compartido}} {{ruta/al/archivo}} --user {{dominio\\nombre_usuario}}%{{contraseña}} "RESET" "ACL:{{DACL}}"</code></p>
+
+<ul>
+<li>Especifica un grupo de trabajo (o dominio) alternativo y hace que el programa solicite una contraseña de forma interactiva:</li>
+</ul>
+
+
+<p><code>smbcacls //{{servidor}}/{{compartido}} {{ruta/al/archivo}} --user {{nombre_usuario}} --workgroup {{grupo_de_trabajo}}</code></p>

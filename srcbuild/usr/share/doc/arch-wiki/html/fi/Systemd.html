@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-sticky-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-0 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-disabled skin-theme-clientpref-day vector-toc-available" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>systemd (Suomi) - ArchWiki</title>
+<link rel="stylesheet" href="../ArchWikiOffline.css">
+<meta name="ResourceLoaderDynamicStyles" content="">
+<meta name="generator" content="MediaWiki 1.43.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="max-image-preview:standard">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.25, maximum-scale=5.0">
+<link rel="search" type="application/opensearchdescription+xml" href="/rest.php/v1/search" title="ArchWiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.archlinux.org/api.php?action=rsd">
+<link rel="license" href="https://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="ArchWiki Atom feed" href="/index.php?title=Special:RecentChanges&amp;feed=atom">
+</head>
+<body class="skin--responsive skin-vector skin-vector-search-vue mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Systemd_Suomi rootpage-Systemd_Suomi skin-vector-2022 action-view">
+<a class="mw-jump-link" href="#bodyContent">Jump to content</a>
+<div class="vector-header-container">
+	</div>
+<div class="mw-page-container">
+	<div class="mw-page-container-inner">
+		<div class="vector-column-start">
+			<div class="vector-main-menu-container">
+		</div>
+	<div class="vector-sticky-pinned-container">
+				<nav id="mw-panel-toc" aria-label="Contents" data-event-name="ui.sidebar-toc" class="mw-table-of-contents-container vector-toc-landmark">
+					<div id="vector-toc-pinned-container" class="vector-pinned-container">
+					<div id="vector-toc" class="vector-toc vector-pinnable-element">
+	<div class="vector-pinnable-header vector-toc-pinnable-header vector-pinnable-header-pinned" data-feature-name="toc-pinned" data-pinnable-element-id="vector-toc">
+	<h2 class="vector-pinnable-header-label">Contents</h2>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-toc.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-toc.unpin">hide</button>
+</div>
+
+
+	<ul class="vector-toc-contents" id="mw-panel-toc-list">
+		<li id="toc-mw-content-text" class="vector-toc-list-item vector-toc-level-1">
+			<a href="#" class="vector-toc-link">
+				<div class="vector-toc-text">Beginning</div>
+			</a>
+		</li>
+		<li id="toc-Perus_systemctl:n_käyttö" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Perus_systemctl:n_k%C3%A4ytt%C3%B6">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">1</span>
+				<span>Perus systemctl:n käyttö</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Perus_systemctl:n_käyttö-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Perus systemctl:n käyttö subsection</span>
+			</button>
+		
+		<ul id="toc-Perus_systemctl:n_käyttö-sublist" class="vector-toc-list">
+			<li id="toc-Järjestelmävaiheen_analysointi" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#J%C3%A4rjestelm%C3%A4vaiheen_analysointi">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.1</span>
+					<span>Järjestelmävaiheen analysointi</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Järjestelmävaiheen_analysointi-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Yksiköiden_käyttö" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Yksik%C3%B6iden_k%C3%A4ytt%C3%B6">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.2</span>
+					<span>Yksiköiden käyttö</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Yksiköiden_käyttö-sublist" class="vector-toc-list">
+				<li id="toc-Statuksen_tarkistaminen" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Statuksen_tarkistaminen">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.2.1</span>
+					<span>Statuksen tarkistaminen</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Statuksen_tarkistaminen-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Käynnistäminen,_uudelleen_käynnistys_ja_uudelleen_lataaminen" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#K%C3%A4ynnist%C3%A4minen,_uudelleen_k%C3%A4ynnistys_ja_uudelleen_lataaminen">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.2.2</span>
+					<span>Käynnistäminen, uudelleen käynnistys ja uudelleen lataaminen</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Käynnistäminen,_uudelleen_käynnistys_ja_uudelleen_lataaminen-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Aktivointi" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Aktivointi">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.2.3</span>
+					<span>Aktivointi</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Aktivointi-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Naamiointi" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Naamiointi">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.2.4</span>
+					<span>Naamiointi</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Naamiointi-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Virran_hallinta" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Virran_hallinta">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.3</span>
+					<span>Virran hallinta</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Virran_hallinta-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Yksikkötiedostojen_kirjoittaminen" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Yksikk%C3%B6tiedostojen_kirjoittaminen">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">2</span>
+				<span>Yksikkötiedostojen kirjoittaminen</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Yksikkötiedostojen_kirjoittaminen-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Yksikkötiedostojen kirjoittaminen subsection</span>
+			</button>
+		
+		<ul id="toc-Yksikkötiedostojen_kirjoittaminen-sublist" class="vector-toc-list">
+			<li id="toc-Riippuvuuksien_käsittely" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Riippuvuuksien_k%C3%A4sittely">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1</span>
+					<span>Riippuvuuksien käsittely</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Riippuvuuksien_käsittely-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Palvelu_tyypit" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Palvelu_tyypit">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2</span>
+					<span>Palvelu tyypit</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Palvelu_tyypit-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Valmiiden_yksiköiden_muokkaaminen" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Valmiiden_yksik%C3%B6iden_muokkaaminen">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.3</span>
+					<span>Valmiiden yksiköiden muokkaaminen</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Valmiiden_yksiköiden_muokkaaminen-sublist" class="vector-toc-list">
+				<li id="toc-Korvaavat_yksikkötiedostot" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Korvaavat_yksikk%C3%B6tiedostot">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.3.1</span>
+					<span>Korvaavat yksikkötiedostot</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Korvaavat_yksikkötiedostot-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Drop-in_tiedostot" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Drop-in_tiedostot">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.3.2</span>
+					<span>Drop-in tiedostot</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Drop-in_tiedostot-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Palauta_toimittajan_versioon" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Palauta_toimittajan_versioon">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.3.3</span>
+					<span>Palauta toimittajan versioon</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Palauta_toimittajan_versioon-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Esimerkkejä" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Esimerkkej%C3%A4">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.3.4</span>
+					<span>Esimerkkejä</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Esimerkkejä-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Kohteet" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Kohteet">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">3</span>
+				<span>Kohteet</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Kohteet-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Kohteet subsection</span>
+			</button>
+		
+		<ul id="toc-Kohteet-sublist" class="vector-toc-list">
+			<li id="toc-Hae_nykyiset_kohteet" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Hae_nykyiset_kohteet">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1</span>
+					<span>Hae nykyiset kohteet</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Hae_nykyiset_kohteet-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Kartoittaminen_SysV_ajotason_ja_systemd_kohteiden_välillä" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Kartoittaminen_SysV_ajotason_ja_systemd_kohteiden_v%C3%A4lill%C3%A4">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.2</span>
+					<span>Kartoittaminen SysV ajotason ja systemd kohteiden välillä</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Kartoittaminen_SysV_ajotason_ja_systemd_kohteiden_välillä-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Vaihda_nykyinen_kohde" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Vaihda_nykyinen_kohde">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.3</span>
+					<span>Vaihda nykyinen kohde</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Vaihda_nykyinen_kohde-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Vaihda_oletus_kohde_johon_käynnistetään" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Vaihda_oletus_kohde_johon_k%C3%A4ynnistet%C3%A4%C3%A4n">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.4</span>
+					<span>Vaihda oletus kohde johon käynnistetään</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Vaihda_oletus_kohde_johon_käynnistetään-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-systemd_komponentit" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#systemd_komponentit">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">4</span>
+				<span>systemd komponentit</span>
+			</div>
+		</a>
+		
+		<ul id="toc-systemd_komponentit-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Vinkkejä_ja_konsteja" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Vinkkej%C3%A4_ja_konsteja">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">5</span>
+				<span>Vinkkejä ja konsteja</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Vinkkejä_ja_konsteja-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Vianmääritys" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Vianm%C3%A4%C3%A4ritys">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">6</span>
+				<span>Vianmääritys</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Vianmääritys-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Vianmääritys subsection</span>
+			</button>
+		
+		<ul id="toc-Vianmääritys-sublist" class="vector-toc-list">
+			<li id="toc-Epäonnistuneiden_palveluiden_tutkiminen" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Ep%C3%A4onnistuneiden_palveluiden_tutkiminen">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.1</span>
+					<span>Epäonnistuneiden palveluiden tutkiminen</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Epäonnistuneiden_palveluiden_tutkiminen-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Bootaus_ongelmien_tutkiminen" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Bootaus_ongelmien_tutkiminen">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.2</span>
+					<span>Bootaus ongelmien tutkiminen</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Bootaus_ongelmien_tutkiminen-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Palvelun_tutkiminen" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Palvelun_tutkiminen">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.3</span>
+					<span>Palvelun tutkiminen</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Palvelun_tutkiminen-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Sammutus/uudelleen_käynnistys_vie_älyttömästi_aikaa" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Sammutus/uudelleen_k%C3%A4ynnistys_vie_%C3%A4lytt%C3%B6m%C3%A4sti_aikaa">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.4</span>
+					<span>Sammutus/uudelleen käynnistys vie älyttömästi aikaa</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Sammutus/uudelleen_käynnistys_vie_älyttömästi_aikaa-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Katso_myös" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Katso_my%C3%B6s">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">7</span>
+				<span>Katso myös</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Katso_myös-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+</ul>
+</div>
+
+					</div>
+		</nav>
+			</div>
+		</div>
+		<div class="mw-content-container">
+			<main id="content" class="mw-body" style="margin: 0">
+				<header class="mw-body-header vector-page-titlebar">
+					<nav aria-label="Contents" class="vector-toc-landmark">
+						
+<div id="vector-page-titlebar-toc" class="vector-dropdown vector-page-titlebar-toc vector-button-flush-left">
+	<input type="checkbox" id="vector-page-titlebar-toc-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-page-titlebar-toc" class="vector-dropdown-checkbox " aria-label="Toggle the table of contents">
+	<label id="vector-page-titlebar-toc-label" for="vector-page-titlebar-toc-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"><span class="vector-icon mw-ui-icon-listBullet mw-ui-icon-wikimedia-listBullet"></span>
+
+<span class="vector-dropdown-label-text">Toggle the table of contents</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+							<div id="vector-page-titlebar-toc-unpinned-container" class="vector-unpinned-container">
+			</div>
+		
+	</div>
+</div>
+
+					</nav>
+					<h1 id="firstHeading" class="firstHeading mw-first-heading">systemd (Suomi)</h1>
+							
+<div id="p-lang-btn" class="vector-dropdown mw-portlet mw-portlet-lang">
+	<input type="checkbox" id="p-lang-btn-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-p-lang-btn" class="vector-dropdown-checkbox mw-interlanguage-selector" aria-label="Go to an article in another language. Available in 9 languages">
+	<label id="p-lang-btn-label" for="p-lang-btn-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--action-progressive mw-portlet-lang-heading-9" aria-hidden="true"><span class="vector-icon mw-ui-icon-language-progressive mw-ui-icon-wikimedia-language-progressive"></span>
+
+<span class="vector-dropdown-label-text">9 languages</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+		<div class="vector-menu-content">
+			
+			<ul class="vector-menu-content-list">
+				
+				<li class="interlanguage-link interwiki-de mw-list-item"><a href="https://wiki.archlinux.de/title/Systemd" title="Systemd – Deutsch" lang="de" hreflang="de" data-title="Systemd" data-language-autonym="Deutsch" data-language-local-name="Deutsch" class="interlanguage-link-target"><span>Deutsch</span></a></li>
+<li class="interlanguage-link interwiki-en mw-list-item"><a href="../en/Systemd.html" title="Systemd – English" lang="en" hreflang="en" data-title="Systemd" data-language-autonym="English" data-language-local-name="English" class="interlanguage-link-target"><span>English</span></a></li>
+<li class="interlanguage-link interwiki-es mw-list-item"><a href="../es/Systemd.html" title="Systemd – español" lang="es" hreflang="es" data-title="Systemd" data-language-autonym="Español" data-language-local-name="español" class="interlanguage-link-target"><span>Español</span></a></li>
+<li class="interlanguage-link interwiki-fr mw-list-item"><a href="../fr/Systemd.html" title="Systemd – français" lang="fr" hreflang="fr" data-title="Systemd" data-language-autonym="Français" data-language-local-name="français" class="interlanguage-link-target"><span>Français</span></a></li>
+<li class="interlanguage-link interwiki-it mw-list-item"><a href="../it/Systemd.html" title="Systemd – italiano" lang="it" hreflang="it" data-title="Systemd" data-language-autonym="Italiano" data-language-local-name="italiano" class="interlanguage-link-target"><span>Italiano</span></a></li>
+<li class="interlanguage-link interwiki-ja mw-list-item"><a href="https://wiki.archlinux.jp/index.php/Systemd" title="Systemd – 日本語" lang="ja" hreflang="ja" data-title="Systemd" data-language-autonym="日本語" data-language-local-name="日本語" class="interlanguage-link-target"><span>日本語</span></a></li>
+<li class="interlanguage-link interwiki-pt mw-list-item"><a href="../pt/Systemd.html" title="Systemd – português" lang="pt" hreflang="pt" data-title="Systemd" data-language-autonym="Português" data-language-local-name="português" class="interlanguage-link-target"><span>Português</span></a></li>
+<li class="interlanguage-link interwiki-ru mw-list-item"><a href="../ru/Systemd.html" title="Systemd – русский" lang="ru" hreflang="ru" data-title="Systemd" data-language-autonym="Русский" data-language-local-name="русский" class="interlanguage-link-target"><span>Русский</span></a></li>
+<li class="interlanguage-link interwiki-zh-hans mw-list-item"><a href="https://wiki.archlinuxcn.org/wiki/Systemd" title="Systemd – 中文（简体）" lang="zh-Hans" hreflang="zh-Hans" data-title="Systemd" data-language-autonym="中文（简体）" data-language-local-name="中文（简体）" class="interlanguage-link-target"><span>中文（简体）</span></a></li>
+			</ul>
+			
+		</div>
+
+	</div>
+</div>
+</header>
+				<div class="vector-column-end">
+					<div class="vector-sticky-pinned-container">
+						<nav class="vector-page-tools-landmark" aria-label="Page tools">
+							<div id="vector-page-tools-pinned-container" class="vector-pinned-container">
+				
+							</div>
+		</nav>
+						<nav class="vector-appearance-landmark" aria-label="Appearance">
+							<div id="vector-appearance-pinned-container" class="vector-pinned-container">
+				<div id="vector-appearance" class="vector-appearance vector-pinnable-element">
+	<div class="vector-pinnable-header vector-appearance-pinnable-header vector-pinnable-header-pinned" data-feature-name="appearance-pinned" data-pinnable-element-id="vector-appearance" data-pinned-container-id="vector-appearance-pinned-container" data-unpinned-container-id="vector-appearance-unpinned-container">
+	<div class="vector-pinnable-header-label">Appearance</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-appearance.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-appearance.unpin">hide</button>
+</div>
+
+
+</div>
+
+							</div>
+		</nav>
+					</div>
+				</div>
+				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container>
+					<div class="vector-body-before-content">
+							<div class="mw-indicators">
+		</div>
+
+						<div id="siteSub" class="noprint">From ArchWiki</div>
+					</div>
+					<div id="contentSub"><div id="mw-content-subtitle"></div></div>
+					
+					
+					<div id="mw-content-text" class="mw-body-content">
+<div class="mw-content-ltr mw-parser-output" lang="fi" dir="ltr">
+<p><span>
+</span>
+</p>
+<div class="archwiki-template-meta-related-articles">
+<p>Aiheeseen liittyen</p>
+<ul>
+<li><a href="../en/Systemd/User.html" title="Systemd/User">systemd/User</a></li>
+<li><a href="../en/Systemd/Timers.html" title="Systemd/Timers">systemd/Timers</a></li>
+<li><a href="../en/Systemd/Journal.html" title="Systemd/Journal">systemd/Journal</a></li>
+<li><a href="../en/Systemd/FAQ.html" class="mw-redirect" title="Systemd FAQ">systemd FAQ</a></li>
+<li><a href="../en/Init.html" title="Init">init</a></li>
+<li><a href="../en/Systemd.html" class="mw-redirect" title="Daemons">Daemons</a></li>
+<li><a href="../en/Udev.html" title="Udev">udev</a></li>
+<li><a href="../en/Improving_performance/Boot_process.html" title="Improving performance/Boot process">Improving performance/Boot process</a></li>
+<li><a href="../en/Power_management.html#Allow_users_to_shutdown" class="mw-redirect" title="Allow users to shutdown">Allow users to shutdown</a></li>
+</ul>
+</div>
+<p>Lainattu ja suomennettu <a rel="nofollow" class="external text" href="https://systemd.io/">projektin sivulta</a>:
+</p>
+<dl><dd>
+<i>systemd</i> on Linuxille luotu kokonaisuus systeemin peruspalikoista. Se tarjoaa järjestelmän ja palvelumanagerin ja toimii PID:llä 1 ja lähtee suorittamaan järjestelmän muita osasia. Systemd tarjoaa agressiivisen rinnastus kyvyn, käyttää socketin ja <a href="../en/D-Bus.html" title="D-Bus">D-Bus</a> aktivointia palvelujen käynnistämiseen, mahdollistaa tarvittaessa taustaprosessien käynnistämisen, pitää kirjaa prosesseista jotka käyttävät Linuxin <a href="../en/Cgroups.html" class="mw-redirect" title="Control groups">control groups</a>, ylläpitää mounttaus ja automounttaus paikkoja ja implementoi toiminallisen riippuvuuksiin perustuvan hallinta logiikan. <i>systemd</i> tukee SysV ja LSB:n init skriptejä ja alkujaan toimii korvaavana ratkaisuna sysvinitille. Toisaalta systemd:stä löytyy myös loggaus palveluprosessi, apuvälineitä hallitsemaan perus järjestelmän konfigurointia kuten verkkotunnus, päivämäärä,paikalliset asetukset, listattuna käyttäjien sisäänkirjautumiset ja käytetyt virtuaalikoneet, järjestelmä tilit, ajoajan järjestelmäpolut sekä asetukset ja taustaprosessit yksinkertaisille verkko konfiguraatioille, verkon ajan tahdistus, kirjauksien siirrot ja nimiresoluutio.</dd></dl>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Huomautus:</strong> Perustelu miksi Arch siirtyi systemd:hen, lue <a rel="nofollow" class="external text" href="https://bbs.archlinux.org/viewtopic.php?pid=1149530#p1149530">tämä keskusteluviesti</a>.</div>
+<meta property="mw:PageProp/toc">
+<h2>
+<span id="Perus_systemctl:n_k.C3.A4ytt.C3.B6"></span><span class="mw-headline" id="Perus_systemctl:n_käyttö">Perus systemctl:n käyttö</span>
+</h2>
+<p>Päällimmäinen komento jolla voidaan tutkiskella ja hallita <i>systemd</i>:tä on <i>systemctl</i>. Jotain hyötyjä tällä on järjestelmän tilan tutkiminen ja järjestelmän sekä palvelujen hallitseminen. Katso
+<span class="plainlinks archwiki-template-man" title="$ man 1 systemctl"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemctl.1">systemctl(1)</a></span> löytääksesi enemmän tietoa liittyen sen käyttöön.
+</p>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Vinkki:</strong> 
+<ul>
+<li>Voit käyttää kaikkia seuraavia <i>systemctl</i> komentoja käyttämällä <code>-H <i>user</i>@<i>host</i></code> kytkintä hallitsemaan <i>systemd</i> instanssia etäkoneesta. Tämä käyttää <a href="../en/Secure_Shell.html" class="mw-redirect" title="SSH">SSH</a> tunnelia yhdistämään etänä <i>systemd</i> instanssiin.</li>
+<li>
+<a href="../en/KDE.html#Plasma" class="mw-redirect" title="Plasma">Plasma</a>:n alla on mahdollista asentaa <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/systemd-kcm/">systemd-kcm</a></span><sup><small>AUR</small></sup><sup>[<a href="../en/Help:Procedures.html#Fix_broken_package_links" title="Help:Procedures">broken link</a>: package not found]</sup> graafisena tulkkina <i>systemctl</i>:lle. Asennuksen jälkeen moduuli löytyy <i>System administration</i>:in alta.</li>
+</ul>
+</div>
+<h3>
+<span id="J.C3.A4rjestelm.C3.A4vaiheen_analysointi"></span><span class="mw-headline" id="Järjestelmävaiheen_analysointi">Järjestelmävaiheen analysointi</span>
+</h3>
+<p>Näet <b>järjestelmän tilan</b> komennolla:
+</p>
+<pre>$ systemctl status
+</pre>
+<p><b>Listaa käynnistetyt</b> yksiköt:
+</p>
+<pre>$ systemctl
+</pre>
+<p>tai:
+</p>
+<pre>$ systemctl list-units
+</pre>
+<p><b>Listaa kaatuneet</b> yksiköt:
+</p>
+<pre>$ systemctl --failed
+</pre>
+<p>Saatavilla olevat yksikkötiedostot (eng. unit file) ovat nähtävissä poluissa <code>/usr/lib/systemd/system/</code> ja <code>/etc/systemd/system/</code> (viimeineen vaatii oikeuksia polun lukemiseen). <b>Listaa asennetut</b> yksikkötiedostot komennolla:
+</p>
+<pre>$ systemctl list-unit-files
+</pre>
+<p>Näytä <a href="../en/Cgroups.html" title="Cgroups">cgroup slice</a>, muisti ja isäntä PID:ille:
+</p>
+<pre>$ systemctl status <i>pid</i>
+</pre>
+<h3>
+<span id="Yksik.C3.B6iden_k.C3.A4ytt.C3.B6"></span><span class="mw-headline" id="Yksiköiden_käyttö">Yksiköiden käyttö</span>
+</h3>
+<p>Yksiköitä voi olla esim. palvelut (<i>.service</i>), mounttaus paikat (<i>.mount</i>), laitteet (<i>.device</i>) tai socketit (<i>.socket</i>).
+</p>
+<p>Kun <i>systemctl</i>:ää halutaan käyttää, joudut usein määrittelemään kokonaisuudessa koko yksikkötiedoston nimen, mukaanlukien sen loppuliitteen, esim. <code>sshd.socket</code>. Siitä huolimatta on olemassa muutamia lyhyitä muotoja kun tarkennetaan yksikköä kuten seuraavissa <i>systemctl</i> komennoissa on:
+</p>
+<ul>
+<li>Jos loppuliitettä ei tarkenneta, systemctl olettaa <i>.service</i>. Esim. <code>netctl</code> ja <code>netctl.service</code> tulkitaan samana.</li>
+<li>Mounttaus paikat automaattisesti käännetään oikeaan muotoon <i>.mount</i> yksikkö. Esim. antamalla <code>/home</code> on sama kuin <code>home.mount</code>.</li>
+<li>Samalla tavalla kuin mounttaus paikat, laitteet automaattisesti käännetään muotoon <i>.device</i> yksikkö, siksipä antamalla <code>/dev/sda2</code> on sama kuin <code>dev-sda2.device</code>.</li>
+</ul>
+<p>Löydät aiheesta yksityiskohtaisesti <span class="plainlinks archwiki-template-man" title="$ man 5 systemd.unit"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd.unit.5">systemd.unit(5)</a></span>.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Huomautus:</strong> Jotkin yksikkö nimet sisältävät <code>@</code> merkin (esim. muotoa <code>name@<i>string</i>.service</code>): tällöin nämä ovat <a rel="nofollow" class="external text" href="http://0pointer.de/blog/projects/instances.html">instansseja</a> <i>template</i> yksiköstä, minkä todellinen tiedosto nimi ei sisällä <code><i>string</i></code> osaa (esim. muotoa <code>name@.service</code>). <code><i>string</i></code> on mitä kutsutaan <i>instanssi tunnisteeksi</i>, ja on samanlainen komennon kanssa joka annetaan template yksikölle kun sitä kutsutaan <i>systemctl</i> komennolla: yksikkötiedostossa se korvautuu <code>%i</code> tarkenteella. 
+Tarkemmin sanottuna, <i>ennen</i> kuin <i>systemd</i> yrittää toteuttaa <code>name@.suffix</code> template yksikön, se yrittää etsiä yksikköä samalla <code>name@string.suffix</code> tiedosto nimellä, vaikkakin tälläinen "yhteenotto" tapahtuu harvoin, esim. suurin osa yksikkötiedostoista jotka sisältää <code>@</code> merkin ovat tarkoitettu template yksiköksi. Jos template yksikköä kutsutaan ilman instanssi tunnistetta, kutsu yksinkertaisesti epäonnistuu, koska <code>%i</code> tarkennetta ei pystytä korvaamaan.</div>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Vinkki:</strong> 
+<ul>
+<li>Suurin osa seuraavista komennoista toimii myös vaikka useampi yksikkö on annettu tarkennukseksi, kato <span class="plainlinks archwiki-template-man" title="$ man 1 systemctl"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemctl.1">systemctl(1)</a></span> lisäinformaatiolle.</li>
+<li>
+<code>--now</code> kytkintä voidaan käyttää yhdessä <code>enable</code>, <code>disable</code>, ja <code>mask</code> kanssa vastaavasti käynnistää, lopettaa, tai naamioida yksikkö <i>välittömästi</i> kuin vastaisuudessa vasta uudelleen käynnistäessä.</li>
+<li>Paketti saattaa tarjota yksikköjä eri tarkoituksiin. Jos olet juuri asentanut paketin, <code>pacman -Qql <i>paketti</i> | grep -Fe .service -e .socket</code> voidaan käyttää tarkistamaan ja löytämään nämä yksiköt.</li>
+</ul>
+</div>
+<h4><span class="mw-headline" id="Statuksen_tarkistaminen">Statuksen tarkistaminen</span></h4>
+<p><b>Manuaali</b> eri yksiköistä (mikäli yksikkö sitä tukee) voidaan näyttää komennolla:
+</p>
+<pre>$ systemctl help <i>yksikkö</i>
+</pre>
+<p><b>Status</b> yksiköstä, silloinkin jos se ei ole sillä hetkellä toiminnassa näytetään komennolla:
+</p>
+<pre>$ systemctl status <i>yksikkö</i>
+</pre>
+<p><b>Tarkistaaksesi</b> mikäli yksikkö on aktivoitu ja sen toiminta on sallittu:
+</p>
+<pre>$ systemctl is-enabled <i>yksikkö</i>
+</pre>
+<h4>
+<span id="K.C3.A4ynnist.C3.A4minen.2C_uudelleen_k.C3.A4ynnistys_ja_uudelleen_lataaminen"></span><span class="mw-headline" id="Käynnistäminen,_uudelleen_käynnistys_ja_uudelleen_lataaminen">Käynnistäminen, uudelleen käynnistys ja uudelleen lataaminen</span>
+</h4>
+<p><b>Käynnistä</b> yksikkö välittömästi:
+</p>
+<pre># systemctl start <i>yksikkö</i>
+</pre>
+<p><b>Lopeta</b> yksikön toiminta välittömästi:
+</p>
+<pre># systemctl stop <i>yksikkö</i>
+</pre>
+<p><b>Käynnistä uudelleen</b> yksikkö:
+</p>
+<pre># systemctl restart <i>yksikkö</i>
+</pre>
+<p><b>Uudelleen lataa</b> yksikkö ja sen konfiguraatio:
+</p>
+<pre># systemctl reload <i>yksikkö</i>
+</pre>
+<p><b>Uudelleen lataa systemd managerin</b> konfiguraatio, jolla skannataan uusia tai muutettuja yksikköjä:
+</p>
+<pre># systemctl daemon-reload
+</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Huomautus:</strong> Tämä ei kysy muutettuja yksikköjä lataamaan uudelleen omaa konfiguraatiotaan. Katso <b>uudelleen lataus</b> esimerkki alhaalla.</div>
+<h4><span class="mw-headline" id="Aktivointi">Aktivointi</span></h4>
+<p><b>Aktivoi</b> yksikkö käynnistymään heti bootatessa:
+</p>
+<pre># systemctl enable <i>yksikkö</i>
+</pre>
+<p><b>Aktivoi</b> yksikkö käynnistymään heti bootatessa ja <b>käynnistä</b> se välittömästi:
+</p>
+<pre># systemctl enable --now <i>yksikkö</i>
+</pre>
+<p><b>Deaktivoi</b> yksikkö käynnistymästä bootatessa:
+</p>
+<pre># systemctl disable <i>yksikkö</i>
+</pre>
+<h4><span class="mw-headline" id="Naamiointi">Naamiointi</span></h4>
+<p><b>Naamioi</b> yksikkö tehdäksesi käynnistämisestä mahdotonta (manuaalisesti sekä riippuvuutena, mikä tekeekin naamioinnista vaarallisen):
+</p>
+<pre># systemctl mask <i>yksikkö</i>
+</pre>
+<p><b>Paljasta</b> yksikkö:
+</p>
+<pre># systemctl unmask <i>yksikkö</i>
+</pre>
+<h3><span class="mw-headline" id="Virran_hallinta">Virran hallinta</span></h3>
+<p><a href="../en/Polkit.html" title="Polkit">polkit</a> on tarpeellinen virranhallinnalle epäoikeutettuna käyttäjänä. Jos olet lokaalissa <i>systemd-logind</i> käyttäjä sessiossa ja mikään muu sessio ei ole aktiivinen, seuraavat komennot toimivat ilman root-oikeuksia. Jos näin ei ole (esim. jos joku toinen käyttäjä on kirjautuneena tty:hyn), <i>systemd</i> kysyy automaattisesti root salasanaa.
+</p>
+<p>Sammuttaminen ja uudelleen käynnistys järjestelmälle:
+</p>
+<pre>$ systemctl reboot
+</pre>
+<p>Sammuta ja sammuta järjestelmästä virta:
+</p>
+<pre>$ systemctl poweroff
+</pre>
+<p>Lakkauta järjestelmä:
+</p>
+<pre>$ systemctl suspend
+</pre>
+<p>Laita järjestelmä taukotilaan:
+</p>
+<pre>$ systemctl hibernate
+</pre>
+<p>Laita järjestelmä hybridiuni tilaan:
+</p>
+<pre>$ systemctl hybrid-sleep
+</pre>
+<h2>
+<span id="Yksikk.C3.B6tiedostojen_kirjoittaminen"></span><span class="mw-headline" id="Yksikkötiedostojen_kirjoittaminen">Yksikkötiedostojen kirjoittaminen</span>
+</h2>
+<p><b>Systemd</b>:n syntaksi yksikkötiedostoissa (<span class="plainlinks archwiki-template-man" title="$ man 5 systemd.unit"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd.unit.5">systemd.unit(5)</a></span>) on saanut inspiraationsa <a href="../en/Desktop_entries.html" title="Desktop entries">XDG Desktop Entry Specification .desktop tiedostoista</a>, joka taas on saanut inspiraationsa <a href="https://en.wikipedia.org/wiki/INI_file" class="extiw" title="wikipedia:INI file">Microsoft Windows .ini tiedostoista</a>. Yksikkötiedostot ladataan useista sijainneista (nähdäksesi täyden listan, suorita <code>systemctl show --property=UnitPath</code> terminaalissa), mutta tärkeimmät ovat (listattuna pienimmästä suurimpaan arvojärjestyksessä):
+</p>
+<ul>
+<li>
+<code>/usr/lib/systemd/system/</code>: yksiköt tarjoaa asennetut paketit</li>
+<li>
+<code>/etc/systemd/system/</code>: yksiköt jotka järjestelmän valvoja on asentanut</li>
+</ul>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Huomautus:</strong> 
+<ul>
+<li>Latauspolut ovat täysin erilaiset kun suoritetaan <i>systemd</i> <a href="../en/Systemd/User.html#How_it_works" title="Systemd/User">käyttäjä tilassa</a>.</li>
+<li>systemd yksiköiden nimet voivat sisältää vain ASCII alfanumeerisia kirjaimia, alleviivauksia ja pisteitä. Kaikki muut kirjaimet täytyy korvata C-tyylisillä "\x2d" koodinvaihtomerkeillä tai antaa näiden ennaltamäärätyillä semantiikoilla ('@', '-'). Katso <span class="plainlinks archwiki-template-man" title="$ man 5 systemd.unit"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd.unit.5">systemd.unit(5)</a></span> ja <span class="plainlinks archwiki-template-man" title="$ man 1 systemd-escape"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd-escape.1">systemd-escape(1)</a></span> lisäinformaatiolle.</li>
+</ul>
+</div>
+<p>Kannattaa katsoa pakettien asentamia yksiköitä esimerkiksi. Lisää löytyy myös täältä <span class="plainlinks archwiki-template-man" title="$ man 5 systemd.service"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd.service.5#EXAMPLES">systemd.service(5) § EXAMPLES</a></span>.
+</p>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Vinkki:</strong> Kommentit joiden alussa on <code>#</code> voidaan myös käyttää yksikkötiedostoissa, mutta vain uusilla riveillä. Rivin jälkeen annetut kommentit <i>systemd</i> parametreissä johtaa siihen ettei yksikkö aktivoidu.</div>
+<h3>
+<span id="Riippuvuuksien_k.C3.A4sittely"></span><span class="mw-headline" id="Riippuvuuksien_käsittely">Riippuvuuksien käsittely</span>
+</h3>
+<p>Systemd:llä riippuvuuksia pystytään ratkomaan suunnittelemalla yksikkötiedostot oikein. Kaikkein tyypillisin tapaus on, kun yksikkö <i>A</i> vaatii yksikköä <i>B</i> käynnistymään ennen yksikköä <i>A</i>. Siinä tapauksessa lisää <code>Requires=<i>B</i></code> ja <code>After=<i>B</i></code> <code>[Unit]</code> -osaan <i>A:ta</i>. Jos riippuvuus on vapaaehtoinen, lisää sen sijaan <code>Wants=<i>B</i></code> ja <code>After=<i>B</i></code>. Huomaa ettei <code>Wants=</code> ja <code>Requires=</code> vastaa <code>After=</code>, tarkoittaen siis sitä jos <code>After=</code> ei ole tarkennettu, nämä kaksi yksikköä käynnistetään rinnakkain.
+</p>
+<p>Riippuvuuksia on yleensä asetettu palveluihin eikä <a href="#Kohteet">kohteisiin</a>. Esimerkiksi mikä tahansa palvelu joka konfiguroi verkkoyhteyden rajapinnan, nostaa <code>network.target</code> jonka takia omien yksiköiden suorittaminen sen jälkeen on riittoisa sillä <code>network.target</code> on käynnissä jo muutenkin.
+</p>
+<h3><span class="mw-headline" id="Palvelu_tyypit">Palvelu tyypit</span></h3>
+<p>Käytettävissä on useita käynnistys tyyppejä, joista voi harkita itse sopivaa käynnistystapaa kirjottaessa omaa palvelu tiedostoa. Tämä asetetaan <code>Type=</code> parametrilla <code>[Service]</code> osassa:
+</p>
+<ul>
+<li>
+<code>Type=simple</code> (oletus): <i>systemd</i> käynnistää palvelun välittömästi. Tämä prosessi ei saa haarukoita muihin osasiin. Älä käytä tätä käynnistystapaa mikäli kyseinen palvelu vaatii muiden palveluiden kutsumista, ellei palvelu ole suoritinkannan aktivointi.</li>
+<li>
+<code>Type=forking</code>: <i>systemd</i> käynnistää palvelun kun prosessi haarukoituu muihin osasiin ja isäntä prosessi lopettaa toimintansa. Tyypillisille taustaprosesseille tämä on varmin vaihtoehto, ellet tiedä sen olevan tarpeeton. Kannattaa myös määrittää <code>PIDFile=</code>, jotta <i>systemd</i> voi seurata pääprosessia.</li>
+<li>
+<code>Type=oneshot</code>: tämä on hyödyllinen skripteille, jotka tekevät yhden asian ja lopettavat toimintansa. Voit myös haluta asettaa <code>RemainAfterExit=yes</code>, jotta <i>systemd</i> tulkitsee tämän palvelun aktiiviseksi vielä sen jälkeen kun prosessi on oikeasti lopettanut toimintansa.</li>
+<li>
+<code>Type=notify</code>: identtinen <code>Type=simple</code> kanssa, mutta vain siinä tapuksessa kun taustaprosessi lähettää signaalin <i>systemd:lle</i> ollessaan valmis. Viittauksen tähän toteutukseen tulee <i>libsystemd-daemon.so</i>:sta.</li>
+<li>
+<code>Type=dbus</code>: palvelu on valmis kun <code>BusName</code> ilmestyy DBus:sin järjestelmäväylässä.</li>
+<li>
+<code>Type=idle</code>: <i>systemd</i> viivästyttää palvelun binäärien suorittamista kunnes kaikki työt on saatu toimintaan. Muutoin tämä käynnistystapa vastaa <code>Type=simple</code>.</li>
+</ul>
+<p>Katso <span class="plainlinks archwiki-template-man" title="$ man 5 systemd.service"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd.service.5#OPTIONS">systemd.service(5) § OPTIONS</a></span> manuaali yksityiskoihtaisemmasta selityksestä liittyen <code>Type</code> arvoihin.
+</p>
+<h3>
+<span id="Valmiiden_yksik.C3.B6iden_muokkaaminen"></span><span class="mw-headline" id="Valmiiden_yksiköiden_muokkaaminen">Valmiiden yksiköiden muokkaaminen</span>
+</h3>
+<p>Välttääksesi ristiriitoja pacman:in kanssa, pakettien mukana tulevia yksikkötiedostoja ei saisi suoraan muokata. On olemassa kaksi turvallista tapaa muokata yksikköä koskematta alkuperäiseen tiedostoon: luo uusi yksikkötiedosto, joka <a href="#Korvaavat_yksikk%C3%B6tiedostot">kirjoittaa edellisen yli</a> tai luo <a href="#Drop-in_tiedostot">drop-in pätkä</a>, joka tulee alkuperäisen päälle. Molemmissa tapauksissa yksikkö täytyy ladata uudestaan saadaksesi muutokset käyttöön. Tämä voidaan tehdä joko muokkaamalla yksikköä  <code>systemctl edit</code> (joka lataa yksikön uudestaan automaattisesti) tai lataamalla kaikki yksiköt uudestaan komennolla:
+</p>
+<pre># systemctl daemon-reload
+</pre>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Vinkki:</strong> 
+<ul>
+<li>Voit käyttää <i>systemd-delta</i> nähdäksesi minkä yksikkötiedostojen yli on kirjoitettu tai laajennettu ja tarkalleen mitä muutoksia on tehty.</li>
+<li>Käytä <code>systemctl cat <i>yksikkö</i></code> nähdäksesi yksikön sisällön ja kaikki siihen liittyvät drop-in pätkät.</li>
+</ul>
+</div>
+<h4>
+<span id="Korvaavat_yksikk.C3.B6tiedostot"></span><span class="mw-headline" id="Korvaavat_yksikkötiedostot">Korvaavat yksikkötiedostot</span>
+</h4>
+<p>Korvataksesi yksikkötiedoston <code>/usr/lib/systemd/system/<i>yksikkö</i></code>, luo tiedosto <code>/etc/systemd/system/<i>yksikkö</i></code> ja <i>uudelleen aktivoi</i> yksikkö päivittämään symlinkit:
+</p>
+<pre># systemctl reenable <i>yksikkö</i>
+</pre>
+<p>Vaihtoehtoisesti, suorita:
+</p>
+<pre># systemctl edit --full <i>yksikkö</i>
+</pre>
+<p>Tämä avaa <code>/etc/systemd/system/<i>yksikkö</i></code> muokkaus ohjelmassa (kopioimalla asennetun version jos se ei ole olemassa) ja automaattisesti lataa sen kun olet valmis muokkauksen kanssa.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Huomautus:</strong> Korvaavat yksiköt pysyvät käytössä, vaikka Pacman päivittää alkuperäiset yksiköt tulevaisuudessa. Tämä tekee järjestelmän ylläpidosta hankalaa ja siksi seuraava lähestymistapa on suotavampaa.</div>
+<h4><span class="mw-headline" id="Drop-in_tiedostot">Drop-in tiedostot</span></h4>
+<p>Luodaksesi drop-in tiedostoja yksikkötiedostoille <code>/usr/lib/systemd/system/<i>yksikkö</i></code>, luo polku <code>/etc/systemd/system/<i>yksikkö</i>.d/</code> ja aseta <i>.conf</i> tiedostot sinne kirjoittaaksesi tiedostojen yli tai lisätäksesi lisää vaihtoehtoja. <i>systemd</i> jäsentää sekä asettaa nämä tiedostot alkuperäisen yksikön päälle.
+</p>
+<p>Helpoin tapa on suorittaa komento:
+</p>
+<pre># systemctl edit <i>yksikkö</i>
+</pre>
+<p>Tämä avaa tiedoston <code>/etc/systemd/system/<i>yksikkö</i>.d/override.conf</code> tekstin käsittely ohjelmassa (luoden sen jos tarpeellista) ja automaattisesti lataa yksikön kun olet muokannut tiedoston.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Huomautus:</strong> Kaikkia avaimia ei pysty ylittämään drop-in tiedostoilla. Esim. vaihtaaksesi <code>Conflicts=</code> korvaava tiedosto <a rel="nofollow" class="external text" href="https://lists.freedesktop.org/archives/systemd-devel/2017-June/038976.html">on tarpeellinen</a>.</div>
+<h4><span class="mw-headline" id="Palauta_toimittajan_versioon">Palauta toimittajan versioon</span></h4>
+<p>Palauttaaksesi tehdyistä muutoksista joihin on käytetty <code>systemctl edit</code> käytä komentoa:
+</p>
+<pre># systemctl revert <i>yksikkö</i>
+</pre>
+<h4>
+<span id="Esimerkkej.C3.A4"></span><span class="mw-headline" id="Esimerkkejä">Esimerkkejä</span>
+</h4>
+<p>Jos haluat yksinkertaisesti lisätä vaihtoehtoisen riippuvuuden yksikölle, voit mahdollisesti luoda seuraavan mukaisen tiedoston:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/system/<i>yksikkö</i>.d/customdependency.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Unit]
+Requires=<i>uusi riippuvuus</i>
+After=<i>uusi riippuvuus</i></pre>
+<p>Vaihtaaksesi <code>ExecStart</code> direktiivin yksikölle, joka ei ole tyyppiä <code>oneshot</code>, luo seuraavan mukainen tiedosto:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/system/<i>yksikkö</i>.d/customexec.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Service]
+ExecStart=
+ExecStart=<i>uusi komento</i></pre>
+<p>Huomaa kuinka <code>ExecStart</code> pitää tyhjentää ennenkuin se voidaan uudelleenasettaa <a rel="nofollow" class="external autonumber" href="https://bugzilla.redhat.com/show_bug.cgi?id=756787#c9">[1]</a>. Sama pätee jokaiselle komponentille, joka pitää määrittää useaan kertaan esim. <code>OnCalendar</code> ajastimille.
+</p>
+<p>Vielä yksi esimerkki palvelun automaattisesta uudelleen käynnistämisestä:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/system/<i>yksikkö</i>.d/restart.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Service]
+Restart=always
+RestartSec=30</pre>
+<h2><span class="mw-headline" id="Kohteet">Kohteet</span></h2>
+<p><i>systemd</i> käyttää <i>kohteita</i> (englannin target) yksiköiden kokoamiseen yhdeksi ryhmäksi riippuvuuksien välityksellä ja yhdenmukaistettuina synkronointi kohtina. Ne hoitavat samoja asioita kuin <a href="https://en.wikipedia.org/wiki/Runlevel" class="extiw" title="wikipedia:Runlevel">ajotasot</a>, mutta käyttäytyvät erilailla.
+</p>
+<h3><span class="mw-headline" id="Hae_nykyiset_kohteet">Hae nykyiset kohteet</span></h3>
+<p>Seuraavaa tulisi käyttää <i>systemd</i>n alla, sen sijaan kuin ajotasona <code>runlevel</code>:
+</p>
+<pre>$ systemctl list-units --type=target
+</pre>
+<h3>
+<span id="Kartoittaminen_SysV_ajotason_ja_systemd_kohteiden_v.C3.A4lill.C3.A4"></span><span class="mw-headline" id="Kartoittaminen_SysV_ajotason_ja_systemd_kohteiden_välillä">Kartoittaminen SysV ajotason ja systemd kohteiden välillä</span>
+</h3>
+<table class="wikitable">
+<tbody>
+<tr>
+<th>SysV Ajotaso</th>
+<th>systemd Kohde</th>
+<th>Huomiot
+</th>
+</tr>
+<tr>
+<td>0</td>
+<td>runlevel0.target, poweroff.target</td>
+<td>Pysäytä järjestelmä.
+</td>
+</tr>
+<tr>
+<td>1, s, single</td>
+<td>runlevel1.target, rescue.target</td>
+<td>Yhden käyttäjän tila.
+</td>
+</tr>
+<tr>
+<td>2, 4</td>
+<td>runlevel2.target, runlevel4.target, multi-user.target</td>
+<td>Käyttäjän määrittelemät/Sivu kohtaiset ajotasot. Oletukselta identtinen 3 kanssa.
+</td>
+</tr>
+<tr>
+<td>3</td>
+<td>runlevel3.target, multi-user.target</td>
+<td>Monikäyttäjä, ei-graafinen. Käyttäjät voivat yleensä kirjautua sisään useammasta konsolista tai verkon kautta.
+</td>
+</tr>
+<tr>
+<td>5</td>
+<td>runlevel5.target, graphical.target</td>
+<td>Monikäyttäjä, graafinen. Sisältää yleensä kaikki palvelut ajotaso 3:sta sekä graafisen sisään kirjautumisen.
+</td>
+</tr>
+<tr>
+<td>6</td>
+<td>runlevel6.target, reboot.target</td>
+<td>Uudelleen käynnistys
+</td>
+</tr>
+<tr>
+<td>emergency</td>
+<td>emergency.target</td>
+<td>Hätätila komentotulkki
+</td>
+</tr>
+</tbody>
+</table>
+<h3><span class="mw-headline" id="Vaihda_nykyinen_kohde">Vaihda nykyinen kohde</span></h3>
+<p><i>systemd</i>:ssä tavoitteet voidaan paljastaa <i>target yksiköiden</i> avulla. Niitä voidaan muuttaa seuraavasti:
+</p>
+<pre># systemctl isolate graphical.target
+</pre>
+<p>Tämä muuttaa vain sen hetkisen tavoitteen, ja sillä ei ole vaikutusta seuraavassa käynnistyksessä. Tämä on yhtäläinen komentojen <code>telinit 3</code> tai <code>telinit 5</code> kanssa Sysvinit:issä.
+</p>
+<h3>
+<span id="Vaihda_oletus_kohde_johon_k.C3.A4ynnistet.C3.A4.C3.A4n"></span><span class="mw-headline" id="Vaihda_oletus_kohde_johon_käynnistetään">Vaihda oletus kohde johon käynnistetään</span>
+</h3>
+<p>Oletus tavoite on <code>default.target</code>, joka on symlinkki tavoitteelle <code>graphical.target</code>. Tämä suunnilleen vastaa vanhaa ajotasoa 5.
+</p>
+<p>Varmistaaksesi vanhan tavoitteen <i>systemctl</i> avulla:
+</p>
+<pre>$ systemctl get-default
+</pre>
+<p>Vaihtaaksesi oletus tavoitteen mihin käynnistetään, vaihda <code>default.target</code> symlinkkiä. <i>systemctl</i> avulla:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;"># systemctl set-default multi-user.target</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">Removed /etc/systemd/system/default.target.
+Created symlink /etc/systemd/system/default.target -&gt; /usr/lib/systemd/system/multi-user.target.</pre>
+<p>Vaihtoehtoisesti, lisää yksi seuraavista <a href="../en/Kernel_parameters.html" title="Kernel parameters">kernelin parametreista</a> käynnistyslataimeen:
+</p>
+<ul>
+<li>
+<code>systemd.unit=multi-user.target</code> (joka vastaa karkeasti vanhaa ajotasoa 3),</li>
+<li>
+<code>systemd.unit=rescue.target</code> (joka vastaa karkeasti vanhaa ajotasoa 1).</li>
+</ul>
+<h2><span class="mw-headline" id="systemd_komponentit">systemd komponentit</span></h2>
+<p>Joitain (ei kokonaisuudessa) systemd:n komponentteja ovat:
+</p>
+<ul>
+<li>
+<a href="../en/Systemd-boot.html" title="Systemd-boot">systemd-boot</a> — yksinkertainen UEFI <a href="../en/Arch_boot_process.html#Boot_loader" class="mw-redirect" title="Boot manager">boot manager</a>;</li>
+<li>
+<a href="../en/Systemd-firstboot.html" title="Systemd-firstboot">systemd-firstboot</a> — perus järjestelmän asetusten alustaminen ennen ensimmäistä käynnistystä;</li>
+<li>
+<a href="../en/Systemd-homed.html" title="Systemd-homed">systemd-homed</a> — siirrettävät ihmiskäyttäjän <a href="../en/Users_and_groups.html" title="Users and groups">tilit</a>;</li>
+<li>
+<a rel="nofollow" class="external text" href="https://dvdhrm.wordpress.com/2013/08/24/session-management-on-linux/">systemd-logind</a> — istunnon hallinta;</li>
+<li>
+<a href="../en/Systemd-networkd.html" title="Systemd-networkd">systemd-networkd</a> — <a href="../en/Network_configuration.html" title="Network configuration">verkon konfiguroinnin</a> hallinta;</li>
+<li>
+<a href="../en/Systemd-nspawn.html" title="Systemd-nspawn">systemd-nspawn</a> — kevyt nimiavaruuden säilö;</li>
+<li>
+<a href="../en/Systemd-resolved.html" title="Systemd-resolved">systemd-resolved</a> — verkon <a href="../en/Domain_name_resolution.html" title="Domain name resolution">nimi resoluutio</a>;</li>
+<li>
+<span class="plainlinks archwiki-template-man" title="$ man 8 systemd-sysusers"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd-sysusers.8">systemd-sysusers(8)</a></span> — luo järjestelmäkäyttäjiä ja ryhmiä ja lisää käyttäjiä ryhmiin asennuksen yhdteydessä tai käynnistyksen aikana;</li>
+<li>
+<a href="../en/Systemd-timesyncd.html" title="Systemd-timesyncd">systemd-timesyncd</a> — <a href="../en/System_time.html" title="System time">järjestelmän ajan</a> synkronointi läpi koko verkon;</li>
+<li>
+<a href="../en/Systemd/Journal.html" title="Systemd/Journal">systemd/Journal</a> — järjestelmän kirjaukset;</li>
+<li>
+<a href="../en/Systemd/Timers.html" title="Systemd/Timers">systemd/Timers</a> — monotoniset tai reaaliaikaiset ajastimet <code>.service</code> tiedostojen hallintaan tai tapahtumille, kohtuullinen vaihtoehto <a href="../en/Cron.html" title="Cron">cron</a>:ille.</li>
+</ul>
+<h2>
+<span id="Vinkkej.C3.A4_ja_konsteja"></span><span class="mw-headline" id="Vinkkejä_ja_konsteja">Vinkkejä ja konsteja</span>
+</h2>
+<h2>
+<span id="Vianm.C3.A4.C3.A4ritys"></span><span class="mw-headline" id="Vianmääritys">Vianmääritys</span>
+</h2>
+<h3>
+<span id="Ep.C3.A4onnistuneiden_palveluiden_tutkiminen"></span><span class="mw-headline" id="Epäonnistuneiden_palveluiden_tutkiminen">Epäonnistuneiden palveluiden tutkiminen</span>
+</h3>
+<p><i>systemd</i> palvelut, jotka eivät onnistuneet käynnistymään, löytyvät:
+</p>
+<pre>$ systemctl --state=failed
+</pre>
+<p>Tutki näiden kirjauksia, löytääksesi syyn sille. Katso <a href="../en/Systemd/Journal.html#Filtering_output" title="Systemd/Journal">systemd/Journal#Filtering output</a> lisätiedolle.
+</p>
+<h3><span class="mw-headline" id="Bootaus_ongelmien_tutkiminen">Bootaus ongelmien tutkiminen</span></h3>
+<p><i>systemd</i> sisältää monia vaihtoehtoja ongelmien tutkimiseen boot prosessissa. Katso <a href="../en/General_troubleshooting.html#Boot_problems" class="mw-redirect" title="Boot debugging">boot debugging</a> lisäohjeille ja asetuksille Boot viestin tallentamiseksi ennenkuin <i>systemd</i> aloittaa toimintansa <a href="../en/Arch_boot_process.html" class="mw-redirect" title="Boot process">boot prosessista</a>. Katso myös <a rel="nofollow" class="external text" href="https://freedesktop.org/wiki/Software/systemd/Debugging/">systemd debuggaus dokumentaatio</a>.
+</p>
+<h3><span class="mw-headline" id="Palvelun_tutkiminen">Palvelun tutkiminen</span></h3>
+<p>Jos jotkin <i>systemd</i> palvelut eivät toimi oikein tai haluat enemmän tietoa siitä mitä tapahtuu, aseta <code>SYSTEMD_LOG_LEVEL</code> <a href="../en/Environment_variables.html" class="mw-redirect" title="Environment variable">alusta muuttuja</a> tähän: <code>debug</code>. Esimerkiksi, <i>systemd-networkd</i> taustaprosessin suoritukseen debug tilassa:
+</p>
+<p>Lisää <a href="#Drop-in_tiedostot">Drop-in tiedosto</a> palvelulle lisäämällä kaksi riviä:
+</p>
+<pre>[Service]
+Environment=SYSTEMD_LOG_LEVEL=debug
+</pre>
+<p>Tai vastaavasti aseta alusta muuttuja manuaalisesti:
+</p>
+<pre># SYSTEMD_LOG_LEVEL=debug /lib/systemd/systemd-networkd
+</pre>
+<p>sitten <a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Restart">käynnistä uudelleen</a> <i>systemd-networkd</i> ja katso lokikirjaa palvelulle jossa on <code>-f</code>/<code>--follow</code> asetus.
+</p>
+<h3>
+<span id="Sammutus.2Fuudelleen_k.C3.A4ynnistys_vie_.C3.A4lytt.C3.B6m.C3.A4sti_aikaa"></span><span class="mw-headline" id="Sammutus/uudelleen_käynnistys_vie_älyttömästi_aikaa">Sammutus/uudelleen käynnistys vie älyttömästi aikaa</span>
+</h3>
+<p>Jos sammuttus prosessi vie paljon aikaa (tai vaikuttaa jäätyvän) todennäköisesti jokin palvelu jota ei ole olemassa on syynä. <i>systemd</i> odottaa jonkin aikaa jokaista palvelua lopettamaan ennenkuin <i>systemd</i> katkaisee sen toiminnan. Jos haluat tietää onko oma järjestelmäsi tämän vaikutuksen alaisena, katso <a rel="nofollow" class="external text" href="https://freedesktop.org/wiki/Software/systemd/Debugging/#shutdowncompleteseventually">tämä artikkeli</a>.
+</p>
+<h2>
+<span id="Katso_my.C3.B6s"></span><span class="mw-headline" id="Katso_myös">Katso myös</span>
+</h2>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/systemd" class="extiw" title="wikipedia:systemd">Wikipedia:systemd</a></li>
+<li>
+<a rel="nofollow" class="external text" href="https://systemd.io/">Virallinen nettisivu</a>
+<ul>
+<li><a rel="nofollow" class="external text" href="https://systemd.io/OPTIMIZATIONS/">systemd optimointi</a></li>
+<li><a rel="nofollow" class="external text" href="https://systemd.io/FAQ/">systemd FAQ</a></li>
+<li><a rel="nofollow" class="external text" href="https://systemd.io/TIPS_AND_TRICKS/">systemd Vinkkejä ja konsteja</a></li>
+</ul>
+</li>
+<li><span class="plainlinks archwiki-template-man" title="$ man 1 systemd"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd.1">systemd(1)</a></span></li>
+<li>Muut jakelut
+<ul>
+<li><a href="https://wiki.gentoo.org/wiki/Systemd" class="extiw" title="gentoo:Systemd">Gentoo:Systemd</a></li>
+<li><a href="https://fedoraproject.org/wiki/Systemd" class="extiw" title="fedora:Systemd">Fedora:Systemd</a></li>
+<li><a href="https://fedoraproject.org/wiki/How_to_debug_Systemd_problems" class="extiw" title="fedora:How to debug Systemd problems">Fedora:How to debug Systemd problems</a></li>
+<li><a href="https://fedoraproject.org/wiki/SysVinit_to_Systemd_Cheatsheet" class="extiw" title="fedora:SysVinit to Systemd Cheatsheet">Fedora:SysVinit to Systemd Cheatsheet</a></li>
+<li><a href="https://wiki.debian.org/systemd" class="extiw" title="debian:systemd">Debian:systemd</a></li>
+</ul>
+</li>
+<li>
+<a rel="nofollow" class="external text" href="http://0pointer.de/blog/projects/systemd.html">Lennartin blogi tarina</a>, <a rel="nofollow" class="external text" href="http://0pointer.de/blog/projects/systemd-update.html">päivitys 1</a>, <a rel="nofollow" class="external text" href="http://0pointer.de/blog/projects/systemd-update-2.html">päivitys 2</a>, <a rel="nofollow" class="external text" href="http://0pointer.de/blog/projects/systemd-update-3.html">päivitys 3</a>, <a rel="nofollow" class="external text" href="http://0pointer.de/blog/projects/why.html">yhteenveto</a>
+</li>
+<li><a rel="nofollow" class="external text" href="https://containersolutions.github.io/runbooks/posts/linux/debug-systemd-service-units">Debuggaa Systemd Palveluita</a></li>
+<li><a rel="nofollow" class="external text" href="http://0pointer.de/public/systemd-ebook-psankar.pdf">systemd järjestelmän hallinnoinnille (PDF)</a></li>
+<li><a rel="nofollow" class="external text" href="https://www.digitalocean.com/community/tutorials/how-to-use-systemctl-to-manage-systemd-services-and-units">Kuinka Käyttää Systemctl:ää Systemd Palveluiden ja Yksiköiden Hallintaan</a></li>
+<li><a rel="nofollow" class="external text" href="https://dvdhrm.wordpress.com/2013/08/24/session-management-on-linux/">Tilan hallinta systemd-logind avulla</a></li>
+<li><a href="../en/Emacs.html#Syntax_highlighting_for_systemd_Files" title="Emacs">Emacs Syntaksin maalaaminen Systemd tiedostoille</a></li>
+<li>
+<a rel="nofollow" class="external text" href="https://www.h-online.com/open/features/Control-Centre-The-systemd-Linux-init-system-1565543.html">Kaksi</a> <a rel="nofollow" class="external text" href="https://www.h-online.com/open/features/Booting-up-Tools-and-tips-for-systemd-1570630.html">osainen</a> selvitys artikkeliin <i>The H Open</i> lehdessä.</li>
+</ul>
+</div>
+</div>
+					<div id="catlinks" class="catlinks" data-mw="interface">
+<div id="mw-normal-catlinks" class="mw-normal-catlinks">
+<a href="../Special:Categories.html" title="Special:Categories">Category</a>: <ul><li><a href="../fi/Category:Init.html" title="Category:Init (Suomi)">Init (Suomi)</a></li></ul>
+</div>
+<div id="mw-hidden-catlinks" class="mw-hidden-catlinks mw-hidden-cats-hidden">Hidden category: <ul><li><a href="../en/Category:Pages_with_broken_package_links.html" title="Category:Pages with broken package links">Pages with broken package links</a></li></ul>
+</div>
+</div>
+				</div>
+			</main>
+			
+		</div>
+		<div class="mw-footer-container">
+			
+<footer id="footer" class="mw-footer" style="margin: 0">
+	<ul id="footer-info">
+	<li data-nosnippet="">Retrieved from "<a dir="ltr" href="https://wiki.archlinux.org/index.php?title=Systemd_(Suomi)&amp;oldid=818271">https://wiki.archlinux.org/index.php?title=Systemd_(Suomi)&amp;oldid=818271</a>"</li>
+<li id="footer-info-lastmod"> This page was last edited on 12 October 2024, at 09:15.</li>
+	<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+<br>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="https://terms.archlinux.org/docs/privacy-policy/">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="../en/ArchWiki:About.html">About ArchWiki</a></li>
+	<li id="footer-places-disclaimers"><a href="../en/ArchWiki:General_disclaimer.html">Disclaimers</a></li>
+	<li id="footer-places-archwiki-code-of-conduct"><a href="https://terms.archlinux.org/docs/code-of-conduct/" class="extiw" title="archlinux-service-agreements:code-of-conduct">Code of conduct</a></li>
+	<li id="footer-places-archwiki-terms-of-service"><a href="https://terms.archlinux.org/docs/terms-of-service/" class="extiw" title="archlinux-service-agreements:terms-of-service">Terms of service</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-copyrightico"><a href="https://www.gnu.org/copyleft/fdl.html" class="cdx-button cdx-button--fake-button cdx-button--size-large cdx-button--fake-button--enabled"><img src="/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" loading="lazy"></a></li>
+	<li id="footer-poweredbyico"><img src="/resources/assets/poweredby_mediawiki.svg" width="88" height="31" loading="lazy"></li>
+</ul>
+
+</footer>
+
+		</div>
+	</div> 
+</div> 
+<div class="vector-settings" id="p-dock-bottom">
+	<ul></ul>
+</div>
+</body>
+</html>

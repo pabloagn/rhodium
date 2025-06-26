@@ -1,0 +1,60 @@
+<h1>systemd-run</h1>
+
+<blockquote><p>Uruchamiaj programy w przejściowych jednostkach zakresu, jednostkach usługowych lub jednostkach usługowych uruchamianych przez ścieżkę, gniazdo lub timer.
+Więcej informacji: <a href="https://www.freedesktop.org/software/systemd/man/systemd-run.html">https://www.freedesktop.org/software/systemd/man/systemd-run.html</a>.</p></blockquote>
+
+<ul>
+<li>Uruchom przejściową usługę:</li>
+</ul>
+
+
+<p><code>sudo systemd-run {{komenda}} {{argument1 argument2 ...}}</code></p>
+
+<ul>
+<li>Uruchom przejściową usługę pod menedżerem usług aktualnego użytkownika (bez uprawnień):</li>
+</ul>
+
+
+<p><code>systemd-run --user {{komenda}} {{argument1 argument2 ...}}</code></p>
+
+<ul>
+<li>Uruchom przejściową usługę z podaną nazwą jednostki i opisem:</li>
+</ul>
+
+
+<p><code>sudo systemd-run --unit={{nazwa}} --description={{string}} {{komenda}} {{argument1 argument2 ...}}</code></p>
+
+<ul>
+<li>Uruchom przejściową usługę, która nie jest czyszczona po jej zakończeniu z podaną zmienną środowiskową:</li>
+</ul>
+
+
+<p><code>sudo systemd-run --remain-after-exit --set-env={{nazwa}}={{wartość}} {{komenda}} {{argument1 argument2 ...}}</code></p>
+
+<ul>
+<li>Uruchom przejściowy timer, który okresowo uruchamia swoją przejściową usługę (zobacz <code>man systemd.time</code>, aby zapoznać się z formatem wydarzeń kalendarza):</li>
+</ul>
+
+
+<p><code>sudo systemd-run --on-calendar={{wydarzenie_kalendarza}} {{komenda}} {{argument1 argument2 ...}}</code></p>
+
+<ul>
+<li>Udostępnij terminal programowi (umożliwiając interaktywne wejście/wyjście) i zapewnij, że szczegóły wykonania pozostaną po zakończeniu programu:</li>
+</ul>
+
+
+<p><code>systemd-run --remain-after-exit --pty {{komenda}}</code></p>
+
+<ul>
+<li>Ustaw właściwości (np. CPUQuota, MemoryMax) procesu i poczekaj, aż się zakończy:</li>
+</ul>
+
+
+<p><code>systemd-run --property MemoryMax={{pamięć_w_bajtach}} --property CPUQuota={{procent_czasu_CPU}}% --wait {{komenda}}</code></p>
+
+<ul>
+<li>Użyj programu w potoku powłoki:</li>
+</ul>
+
+
+<p><code>{{komenda1}} | systemd-run --pipe {{komenda2}} | {{komenda3}}</code></p>

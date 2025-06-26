@@ -1,0 +1,41 @@
+<h1>Select-String</h1>
+
+<blockquote><p>Vindt tekst in string en bestanden in PowerShell.
+Dit commando kan alleen gebruikt worden via PowerShell.
+Je kan <code>Select-String</code> gebruiken zoals <code>grep</code> in UNIX of <code>findstr.exe</code> in Windows.
+Meer informatie: <a href="https://learn.microsoft.com/powershell/module/microsoft.powershell.utility/select-string">https://learn.microsoft.com/powershell/module/microsoft.powershell.utility/select-string</a>.</p></blockquote>
+
+<ul>
+<li>Zoek naar een patroon binnen een bestand:</li>
+</ul>
+
+
+<p><code>Select-String -Path "{{pad\naar\bestand}}" -Pattern '{{zoek_patroon}}'</code></p>
+
+<ul>
+<li>Zoek naar een exacte string (schakelt reguliere expressies uit):</li>
+</ul>
+
+
+<p><code>Select-String -SimpleMatch "{{exacte_string}}" {{pad\naar\bestand}}</code></p>
+
+<ul>
+<li>Zoek naar een patroon in alle <code>.ext</code> bestanden in de huidige map:</li>
+</ul>
+
+
+<p><code>Select-String -Path "{{*.ext}}" -Pattern '{{zoek_patroon}}'</code></p>
+
+<ul>
+<li>Toon het opgegeven aantal regels voor en na de regel die overeenkomt met de patroon:</li>
+</ul>
+
+
+<p><code>Select-String --Context {{2,3}} "{{zoek_patroon}}" {{pad\naar\bestand}}</code></p>
+
+<ul>
+<li>Zoek in <code>stdin</code> voor regels die niet overeenkomen met een patroon:</li>
+</ul>
+
+
+<p><code>Get-Content {{pad\naar\bestand}} | Select-String --NotMatch "{{zoek_patroon}}"</code></p>

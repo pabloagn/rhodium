@@ -1,0 +1,48 @@
+<h1>xh</h1>
+
+<blockquote><p>친숙하고 빠른 HTTP 요청 전송 도구.
+참고: Rust로 작성된 <code>xh</code>는 <code>http</code>의 효과적인 대체 도구입니다.
+같이 보기: <code>http</code>, <code>curl</code>.
+더 많은 정보: <a href="https://github.com/ducaale/xh">https://github.com/ducaale/xh</a>.</p></blockquote>
+
+<ul>
+<li>GET 요청 전송:</li>
+</ul>
+
+
+<p><code>xh {{httpbin.org/get}}</code></p>
+
+<ul>
+<li>JSON 본문과 함께 POST 요청 전송 (키-값 쌍이 최상위 JSON 객체에 추가됨, 예: <code>{"name": "john", "age": 25}</code>):</li>
+</ul>
+
+
+<p><code>xh post {{httpbin.org/post}} {{name=john}} {{age:=25}}</code></p>
+
+<ul>
+<li>쿼리 매개변수를 포함한 GET 요청 전송 (예: <code>first_param=5&amp;second_param=true</code>):</li>
+</ul>
+
+
+<p><code>xh get {{httpbin.org/get}} {{first_param==5}} {{second_param==true}}</code></p>
+
+<ul>
+<li>사용자 지정 헤더와 함께 GET 요청 전송:</li>
+</ul>
+
+
+<p><code>xh get {{httpbin.org/get}} {{header-name:header-value}}</code></p>
+
+<ul>
+<li>GET 요청을 보내고 응답 본문을 파일에 저장:</li>
+</ul>
+
+
+<p><code>xh --download {{httpbin.org/json}} --output {{경로/대상/파일}}</code></p>
+
+<ul>
+<li>동등한 <code>curl</code> 명령 표시 (이 명령은 요청을 전송하지 않음):</li>
+</ul>
+
+
+<p><code>xh --{{curl|curl-long}} {{--follow --verbose get http://example.com user-agent:curl}}</code></p>

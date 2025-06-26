@@ -1,0 +1,32 @@
+<h1>entr</h1>
+
+<blockquote><p>Esegui comandi arbitrari al cambiamento di file.
+Maggiori informazioni: <a href="https://eradman.com/entrproject/">https://eradman.com/entrproject/</a>.</p></blockquote>
+
+<ul>
+<li>Ricompila con <code>make</code> se qualsiasi file in quasiasi sottodirectory cambia:</li>
+</ul>
+
+
+<p><code>{{ag -l}} | entr {{make}}</code></p>
+
+<ul>
+<li>Ricompila e testa con <code>make</code> se qualsiasi file sorgente <code>.c</code> nella directory corrente cambia:</li>
+</ul>
+
+
+<p><code>{{ls *.c}} | entr {{'make &amp;&amp; make test'}}</code></p>
+
+<ul>
+<li>Invia il segnale <code>SIGTERM</code> ad un sottoprocesso ruby precedentemente avviato prima di eseguire <code>ruby main.rb</code>:</li>
+</ul>
+
+
+<p><code>{{ls *.rb}} | entr -r {{ruby main.rb}}</code></p>
+
+<ul>
+<li>Esegui un comando con il file cambiato (<code>/_</code>) come argomento:</li>
+</ul>
+
+
+<p><code>{{ls *.sql}} | entr {{psql -f}} /_</code></p>

@@ -1,0 +1,61 @@
+<h1>rsync</h1>
+
+<blockquote><p>Transfira arquivos para ou de um host remote (mas não entre dois hosts remotos), usando SSH por padrão.
+Para especificar um caminho remoto, use <code>host:caminho/para/arquivo_ou_diretório</code>.
+Mais informações: <a href="https://download.samba.org/pub/rsync/rsync.1">https://download.samba.org/pub/rsync/rsync.1</a>.</p></blockquote>
+
+<ul>
+<li>Transfere um arquivo:</li>
+</ul>
+
+
+<p><code>rsync {{caminho/para/origem}} {{caminho/para/destino}}</code></p>
+
+<ul>
+<li>Usa o modo de arquivo (copia recursivamente diretórios, copia links simbólicos sem resolver e preserva permissões, propriedade e tempos de modificação):</li>
+</ul>
+
+
+<p><code>rsync {{[-a|--archive]}} {{caminho/para/origem}} {{caminho/para/destino}}</code></p>
+
+<ul>
+<li>Comprime os dados à medida que são enviados ao destino, exibe progresso detalhado e legível, e mantém arquivos parcialmente transferidos se forem interrompidos:</li>
+</ul>
+
+
+<p><code>rsync {{[-zvhP|--compress --verbose --human-readable --partial --progress]}} {{caminho/para/origem}} {{caminho/para/destino}}</code></p>
+
+<ul>
+<li>Copia recursivamente diretórios:</li>
+</ul>
+
+
+<p><code>rsync {{[-r|--recursive]}} {{caminho/para/origem}} {{caminho/para/destino}}</code></p>
+
+<ul>
+<li>Transfere os conteúdos do diretório, mas não o diretório em si:</li>
+</ul>
+
+
+<p><code>rsync {{[-r|--recursive]}} {{caminho/para/origem/}} {{caminho/para/destino}}</code></p>
+
+<ul>
+<li>Copia diretórios, usa o modo de arquivamento, resolve links simbólicos e ignora arquivos que são mais recentes no destino:</li>
+</ul>
+
+
+<p><code>rsync {{[-auL|--archive --update --copy-links]}} {{caminho/para/origem}} {{caminho/para/destino}}</code></p>
+
+<ul>
+<li>Transfere um diretório para um host remoto executando o <code>rsyncd</code> and exclui arquivos no destino que não existem na origem:</li>
+</ul>
+
+
+<p><code>rsync {{[-r|--recursive]}} --delete rsync://{{host}}:{{caminho/para/origem}} {{caminho/para/destino}}</code></p>
+
+<ul>
+<li>Transfere um arquivo por SSH usando uma porta diferente da padrão (22) e mostra o progresso global:</li>
+</ul>
+
+
+<p><code>rsync {{[-e|--rsh]}} 'ssh -p {{porta}}' --info=progress2 {{host}}:{{caminho/para/origem}} {{caminho/para/destino}}</code></p>

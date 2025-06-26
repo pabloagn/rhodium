@@ -1,0 +1,61 @@
+<h1>ssh</h1>
+
+<blockquote><p>O Secure Shell é um protocolo usado para fazer login de forma segura em sistemas remotos.
+Ele pode ser usado para fazer login ou executar comandos em um servidor remoto.
+Mais informações: <a href="https://man.openbsd.org/ssh">https://man.openbsd.org/ssh</a>.</p></blockquote>
+
+<ul>
+<li>Conecta a um servidor remoto:</li>
+</ul>
+
+
+<p><code>ssh {{nome_do_usuário}}@{{servidor_remoto}}</code></p>
+
+<ul>
+<li>Conecta a um servidor remoto com uma identidade específica (chave privada):</li>
+</ul>
+
+
+<p><code>ssh -i {{caminho/para/arquivo_de_chave}} {{nome_do_usuário}}@{{servidor_remoto}}</code></p>
+
+<ul>
+<li>Conecta a um servidor remoto usando uma porta específica:</li>
+</ul>
+
+
+<p><code>ssh {{nome_do_usuário}}@{{servidor_remoto}} -p {{2222}}</code></p>
+
+<ul>
+<li>Executa um comando em um servidor remoto com uma alocação de [t]ty permitindo interação com o comando remoto:</li>
+</ul>
+
+
+<p><code>ssh {{nome_do_usuário}}@{{servidor_remoto}} -t {{comando}} {{argumentos_do_comando}}</code></p>
+
+<ul>
+<li>Tunelamento SSH: Encaminhamento dinâmico de porta (proxy SOCKS em <code>localhost:1080</code>):</li>
+</ul>
+
+
+<p><code>ssh -D {{1080}} {{nome_do_usuário}}@{{servidor_remoto}}</code></p>
+
+<ul>
+<li>Tunelamento SSH: Encaminha uma porta específica (<code>localhost:9999</code> para <code>example.org:80</code>), desativa a alocação de pseudo-[t]ty e execução de comandos remotos:</li>
+</ul>
+
+
+<p><code>ssh -L {{9999}}:{{example.org}}:{{80}} -N -T {{nome_do_usuário}}@{{servidor_remoto}}</code></p>
+
+<ul>
+<li>Salta com SSH: Conecta a um servidor remoto através de um servidor intermediário (vários saltos intermediários podem ser especificados separados por vírgula):</li>
+</ul>
+
+
+<p><code>ssh -J {{nome_do_usuário}}@{{servidor_intermediário}} {{nome_do_usuário}}@{{servidor_remoto}}</code></p>
+
+<ul>
+<li>Fecha uma sessão travada:</li>
+</ul>
+
+
+<p><code>&lt;Enter&gt;&lt;~&gt;&lt;.&gt;</code></p>

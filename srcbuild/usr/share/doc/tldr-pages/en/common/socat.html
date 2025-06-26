@@ -1,0 +1,46 @@
+<h1>socat</h1>
+
+<blockquote><p>Multipurpose relay (SOcket CAT).
+More information: <a href="http://www.dest-unreach.org/socat/">http://www.dest-unreach.org/socat/</a>.</p></blockquote>
+
+<ul>
+<li>Listen to a port, wait for an incoming connection and transfer data to STDIO:</li>
+</ul>
+
+
+<p><code>sudo socat - TCP-LISTEN:8080,fork</code></p>
+
+<ul>
+<li>Listen on a port using SSL and print to STDOUT:</li>
+</ul>
+
+
+<p><code>sudo socat OPENSSL-LISTEN:4433,reuseaddr,cert=./cert.pem,cafile=./ca.cert.pem,key=./key.pem,verify=0 STDOUT</code></p>
+
+<ul>
+<li>Create a connection to a host and port, transfer data in STDIO to connected host:</li>
+</ul>
+
+
+<p><code>sudo socat - TCP4:www.example.com:80</code></p>
+
+<ul>
+<li>Forward incoming data of a local port to another host and port:</li>
+</ul>
+
+
+<p><code>sudo socat TCP-LISTEN:80,fork TCP4:www.example.com:80</code></p>
+
+<ul>
+<li>Send data with multicast routing scheme:</li>
+</ul>
+
+
+<p><code>{{echo "Hello Multicast"}} | socat - UDP4-DATAGRAM:{{224.0.0.1}}:{{5000}}</code></p>
+
+<ul>
+<li>Receive data from a multicast:</li>
+</ul>
+
+
+<p><code>socat - UDP4-RECVFROM:{{5000}}</code></p>

@@ -1,0 +1,46 @@
+<h1>nxc smb</h1>
+
+<blockquote><p>Prueba y explota servidores SMB.
+Más información: <a href="https://www.netexec.wiki/smb-protocol">https://www.netexec.wiki/smb-protocol</a>.</p></blockquote>
+
+<ul>
+<li>Busca credenciales de dominio válidas probando cada combinación en las listas especificadas de nombres de [u]suario y contraseñas:</li>
+</ul>
+
+
+<p><code>nxc smb {{192.168.178.2}} -u {{ruta/a/nombres_de_usuario.txt}} -p {{ruta/a/contraseñas.txt}}</code></p>
+
+<ul>
+<li>Busca credenciales válidas para cuentas locales en lugar de cuentas de dominio:</li>
+</ul>
+
+
+<p><code>nxc smb {{192.168.178.2}} -u {{ruta/a/nombres_de_usuario.txt}} -p {{ruta/a/contraseñas.txt}} --local-auth</code></p>
+
+<ul>
+<li>Enumera los recursos compartidos SMB y los derechos de acceso de los usuarios especificados en los hosts de destino:</li>
+</ul>
+
+
+<p><code>nxc smb {{192.168.178.0/24}} -u {{usuario}} -p {{contraseña}} --shares</code></p>
+
+<ul>
+<li>Enumera las interfaces de red en los hosts de destino, realizando la autenticación mediante pass-the-hash:</li>
+</ul>
+
+
+<p><code>nxc smb {{192.168.178.30-45}} -u {{usuario}} -H {{NTLM_hash}} --interfaces</code></p>
+
+<ul>
+<li>Analiza los hosts de destino en busca de vulnerabilidades frecuentes:</li>
+</ul>
+
+
+<p><code>nxc smb {{ruta/a/lista_objetivo.txt}} -u '' -p '' -M zerologon -M petitpotam</code></p>
+
+<ul>
+<li>Intenta ejecutar un comando en los hosts de destino:</li>
+</ul>
+
+
+<p><code>nxc smb {{192.168.178.2}} -u {{usuario}} -p {{contraseña}} -x {{comando}}</code></p>

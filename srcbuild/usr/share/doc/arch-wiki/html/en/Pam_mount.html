@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-sticky-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-0 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-disabled skin-theme-clientpref-day vector-toc-available" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>pam_mount - ArchWiki</title>
+<link rel="stylesheet" href="../ArchWikiOffline.css">
+<meta name="ResourceLoaderDynamicStyles" content="">
+<meta name="generator" content="MediaWiki 1.43.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="max-image-preview:standard">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.25, maximum-scale=5.0">
+<link rel="search" type="application/opensearchdescription+xml" href="/rest.php/v1/search" title="ArchWiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.archlinux.org/api.php?action=rsd">
+<link rel="license" href="https://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="ArchWiki Atom feed" href="/index.php?title=Special:RecentChanges&amp;feed=atom">
+</head>
+<body class="skin--responsive skin-vector skin-vector-search-vue mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Pam_mount rootpage-Pam_mount skin-vector-2022 action-view">
+<a class="mw-jump-link" href="#bodyContent">Jump to content</a>
+<div class="vector-header-container">
+	</div>
+<div class="mw-page-container">
+	<div class="mw-page-container-inner">
+		<div class="vector-column-start">
+			<div class="vector-main-menu-container">
+		</div>
+	<div class="vector-sticky-pinned-container">
+				<nav id="mw-panel-toc" aria-label="Contents" data-event-name="ui.sidebar-toc" class="mw-table-of-contents-container vector-toc-landmark">
+					<div id="vector-toc-pinned-container" class="vector-pinned-container">
+					<div id="vector-toc" class="vector-toc vector-pinnable-element">
+	<div class="vector-pinnable-header vector-toc-pinnable-header vector-pinnable-header-pinned" data-feature-name="toc-pinned" data-pinnable-element-id="vector-toc">
+	<h2 class="vector-pinnable-header-label">Contents</h2>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-toc.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-toc.unpin">hide</button>
+</div>
+
+
+	<ul class="vector-toc-contents" id="mw-panel-toc-list">
+		<li id="toc-mw-content-text" class="vector-toc-list-item vector-toc-level-1">
+			<a href="#" class="vector-toc-link">
+				<div class="vector-toc-text">Beginning</div>
+			</a>
+		</li>
+		<li id="toc-Configuration" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Configuration">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">1</span>
+				<span>Configuration</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Configuration-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Configuration subsection</span>
+			</button>
+		
+		<ul id="toc-Configuration-sublist" class="vector-toc-list">
+			<li id="toc-Global_(system)_configuration" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Global_(system)_configuration">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.1</span>
+					<span>Global (system) configuration</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Global_(system)_configuration-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Local_(per-user)_configuration" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Local_(per-user)_configuration">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.2</span>
+					<span>Local (per-user) configuration</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Local_(per-user)_configuration-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-LUKS_volumes" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#LUKS_volumes">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.3</span>
+					<span>LUKS volumes</span>
+				</div>
+			</a>
+			
+			<ul id="toc-LUKS_volumes-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Veracrypt_volumes" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Veracrypt_volumes">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.4</span>
+					<span>Veracrypt volumes</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Veracrypt_volumes-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-F2FS_encryption" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#F2FS_encryption">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.5</span>
+					<span>F2FS encryption</span>
+				</div>
+			</a>
+			
+			<ul id="toc-F2FS_encryption-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Login_manager_configuration" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Login_manager_configuration">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">2</span>
+				<span>Login manager configuration</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Login_manager_configuration-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+</ul>
+</div>
+
+					</div>
+		</nav>
+			</div>
+		</div>
+		<div class="mw-content-container">
+			<main id="content" class="mw-body" style="margin: 0">
+				<header class="mw-body-header vector-page-titlebar">
+					<nav aria-label="Contents" class="vector-toc-landmark">
+						
+<div id="vector-page-titlebar-toc" class="vector-dropdown vector-page-titlebar-toc vector-button-flush-left">
+	<input type="checkbox" id="vector-page-titlebar-toc-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-page-titlebar-toc" class="vector-dropdown-checkbox " aria-label="Toggle the table of contents">
+	<label id="vector-page-titlebar-toc-label" for="vector-page-titlebar-toc-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"><span class="vector-icon mw-ui-icon-listBullet mw-ui-icon-wikimedia-listBullet"></span>
+
+<span class="vector-dropdown-label-text">Toggle the table of contents</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+							<div id="vector-page-titlebar-toc-unpinned-container" class="vector-unpinned-container">
+			</div>
+		
+	</div>
+</div>
+
+					</nav>
+					<h1 id="firstHeading" class="firstHeading mw-first-heading">pam_mount</h1>
+							
+<div id="p-lang-btn" class="vector-dropdown mw-portlet mw-portlet-lang">
+	<input type="checkbox" id="p-lang-btn-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-p-lang-btn" class="vector-dropdown-checkbox mw-interlanguage-selector" aria-label="Go to an article in another language. Available in 2 languages">
+	<label id="p-lang-btn-label" for="p-lang-btn-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--action-progressive mw-portlet-lang-heading-2" aria-hidden="true"><span class="vector-icon mw-ui-icon-language-progressive mw-ui-icon-wikimedia-language-progressive"></span>
+
+<span class="vector-dropdown-label-text">2 languages</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+		<div class="vector-menu-content">
+			
+			<ul class="vector-menu-content-list">
+				
+				<li class="interlanguage-link interwiki-ja mw-list-item"><a href="https://wiki.archlinux.jp/index.php/Pam_mount" title="Pam mount – 日本語" lang="ja" hreflang="ja" data-title="Pam mount" data-language-autonym="日本語" data-language-local-name="日本語" class="interlanguage-link-target"><span>日本語</span></a></li>
+<li class="interlanguage-link interwiki-ru mw-list-item"><a href="../ru/Pam_mount.html" title="Pam mount – русский" lang="ru" hreflang="ru" data-title="Pam mount" data-language-autonym="Русский" data-language-local-name="русский" class="interlanguage-link-target"><span>Русский</span></a></li>
+			</ul>
+			
+		</div>
+
+	</div>
+</div>
+</header>
+				<div class="vector-column-end">
+					<div class="vector-sticky-pinned-container">
+						<nav class="vector-page-tools-landmark" aria-label="Page tools">
+							<div id="vector-page-tools-pinned-container" class="vector-pinned-container">
+				
+							</div>
+		</nav>
+						<nav class="vector-appearance-landmark" aria-label="Appearance">
+							<div id="vector-appearance-pinned-container" class="vector-pinned-container">
+				<div id="vector-appearance" class="vector-appearance vector-pinnable-element">
+	<div class="vector-pinnable-header vector-appearance-pinnable-header vector-pinnable-header-pinned" data-feature-name="appearance-pinned" data-pinnable-element-id="vector-appearance" data-pinned-container-id="vector-appearance-pinned-container" data-unpinned-container-id="vector-appearance-unpinned-container">
+	<div class="vector-pinnable-header-label">Appearance</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-appearance.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-appearance.unpin">hide</button>
+</div>
+
+
+</div>
+
+							</div>
+		</nav>
+					</div>
+				</div>
+				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container>
+					<div class="vector-body-before-content">
+							<div class="mw-indicators">
+		</div>
+
+						<div id="siteSub" class="noprint">From ArchWiki</div>
+					</div>
+					<div id="contentSub"><div id="mw-content-subtitle"></div></div>
+					
+					
+					<div id="mw-content-text" class="mw-body-content">
+<div class="mw-content-ltr mw-parser-output" lang="en" dir="ltr">
+<div class="archwiki-template-meta-related-articles">
+<p>Related articles</p>
+<ul>
+<li><a href="../en/Dm-crypt/Mounting_at_login.html" title="Dm-crypt/Mounting at login">dm-crypt/Mounting at login</a></li>
+<li><a href="../en/PAM.html" title="PAM">PAM</a></li>
+</ul>
+</div>
+<p><a rel="nofollow" class="external text" href="https://pam-mount.sourceforge.net/">pam_mount</a> can be used to automatically mount an encrypted home partition (encrypted with, for example, <a href="../en/Dm-crypt.html" class="mw-redirect" title="LUKS">LUKS</a> or <a href="../en/ECryptfs.html" title="ECryptfs">ECryptfs</a>) on user log in. 
+It will mount your <code>/home</code> (or whatever mount point you like) when you log in using your login manager or when logging in on console. The encrypted drive's passphrase should be the same as your linux user's password, so you do not have to type in two different passphrases to login.
+</p>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../File:View-refresh-red.svg" decoding="async" width="48" height="48" class="mw-file-element"></span></span><b>This article or section is out of date.</b></p>
+<div>
+<b>Reason:</b> The <a rel="nofollow" class="external text" href="https://github.com/systemd/systemd/issues/8598">systemd issue 8598</a> has been closed. Do you use it? (Discuss in <a href="../en/Talk:Pam_mount.html#automatic_unmounting_and_systemd" title="Talk:Pam mount">Talk:Pam mount#automatic unmounting and systemd</a>)</div>
+</div>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> <i>pam_mount</i> can also unmount your partitions when you close your last session but this does not work out of the box due to the use of <code>pam_systemd.so</code> in the pam stack. See <a rel="nofollow" class="external text" href="https://github.com/systemd/systemd/issues/8598">systemd issue 8598</a> and <a href="../en/Talk:Pam_mount.html#automatic_unmounting_and_systemd" title="Talk:Pam mount">Talk:Pam mount#automatic unmounting and systemd</a>.</div>
+<meta property="mw:PageProp/toc">
+<h2><span class="mw-headline" id="Configuration">Configuration</span></h2>
+<p>Install the <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=pam_mount">pam_mount</a></span> package.
+</p>
+<h3>
+<span id="Global_.28system.29_configuration"></span><span class="mw-headline" id="Global_(system)_configuration">Global (system) configuration</span>
+</h3>
+<p>The module is configured in <code>/etc/security/pam_mount.conf.xml</code>, see <span class="plainlinks archwiki-template-man" title="$ man 5 pam_mount.conf"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/pam_mount.conf.5">pam_mount.conf(5)</a></span> for details. Edit the file as follows:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/security/pam_mount.conf.xml</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">  &lt;!-- Generic encrypted partition example --&gt;
+  &lt;volume user="<i>USERNAME</i>" fstype="auto" path="/dev/<i>sdaX</i>" mountpoint="/home" options="fsck,noatime" /&gt;
+  
+  &lt;!-- Example using CIFS --&gt;
+  &lt;volume
+      fstype="cifs"
+      server="<i>server.example.com</i>"
+      path="<i>share_name</i>"
+      mountpoint="~/mnt/<i>share_name</i>"
+      uid="10000-19999"
+      options="sec=krb5i,vers=3.0,cruid=%(USERUID)"
+  /&gt;
+  &lt;mkmountpoint enable="1" remove="true" /&gt;
+
+&lt;/pam_mount&gt;</pre>
+<p>Notes:
+</p>
+<ul>
+<li>Insert 2 new lines at the end of the file, but <i>before</i> the last closing tag, <code>&lt;/pam_mount&gt;</code>.</li>
+<li>
+<code><i>USERNAME</i></code> should be replaced with your user name.</li>
+<li>
+<code>/dev/<i>sdaX</i></code> should be replaced with the corresponding device or container file.</li>
+<li>
+<code>fstype="auto"</code> can be changed to any <code><i>type</i></code> that is present in <code>/usr/bin/mount.<i>type</i></code>. <code>"auto"</code> should work fine in most cases. Use <code>fstype="crypt"</code> so that the loop device gets closed at logout for volumes needing it.</li>
+<li>Add mount options, if needed. Note that <code>mount.cifs</code> does not read <code>smb.conf</code> and so all options must be specified. In the example, <code>uid</code> matches the local <code>smb.conf</code> parameter idmap config ... : range = so that <i>pam_mount</i> is not called for a Unix only user. Kerberos is indicated by krb5, SMB3.0 is specified because the other end may not support SMB1 which is the default. Signing is enabled with the i on the end of krb5i. See <span class="plainlinks archwiki-template-man" title="$ man 8 mount.cifs"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/mount.cifs.8">mount.cifs(8)</a></span> for more details.</li>
+</ul>
+<h3>
+<span id="Local_.28per-user.29_configuration"></span><span class="mw-headline" id="Local_(per-user)_configuration">Local (per-user) configuration</span>
+</h3>
+<p><i>pam_mount</i> also supports allowing users to define their own mounts on login in files inside their home directories. Please consider the potential security implications of this change. To enable it, make sure the following line is present and active in <code>/etc/security/pam_mount.conf.xml</code>:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/security/pam_mount.conf.xml</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">&lt;luserconf name=".pam_mount.conf.xml" /&gt;</pre>
+<p>It will have the effect of allowing each user to set their mounts in <code>~/.pam_mount.conf.xml</code>. The per-user config files only support <code>&lt;volume&gt;</code> keywords, e.g.:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">~/.pam_mount.conf.xml</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">&lt;?xml version="1.0" encoding="utf-8" ?&gt;
+&lt;!DOCTYPE pam_mount SYSTEM "pam_mount.conf.xml.dtd"&gt;
+
+&lt;pam_mount&gt;
+    &lt;volume user="alex" fstype="tmpfs" path="tmpfs" mountpoint="~/test" options="nodev,nosuid" /&gt; 
+&lt;/pam_mount&gt;</pre>
+<p>There are also some restrictions with regards to the mount options that you can and cannot select and some of them are mandatory (<code>nosuid</code>, <code>nodev</code>, <code>size</code>, <code>uid</code>, these can be lifted by editing <code>/etc/security/pam_mount.conf.xml</code>). Bind mounts appear to be unsupported. Ownership checks are also performed on the mountpoints.
+</p>
+<h3><span class="mw-headline" id="LUKS_volumes">LUKS volumes</span></h3>
+<p><a href="../en/Dm-crypt.html" class="mw-redirect" title="LUKS">LUKS</a> encrypted volumes can be configured simply as follows:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/security/pam_mount.conf.xml</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">&lt;volume user="<i>username</i>" fstype="crypt" path="/dev/disk/by-partuuid/<i>partition_uuid</i>" mountpoint="~" options="crypto_name=<i>volume_name</i>,allow_discard,fstype=btrfs,compress=zstd" /&gt;</pre>
+<p>The volume is unlocked and mounted with <i>mount.crypt</i>, see <span class="plainlinks archwiki-template-man" title="$ man 8 mount.crypt"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/mount.crypt.8#Mount_options">mount.crypt(8) § Mount options</a></span> for details about the options.
+</p>
+<h3><span class="mw-headline" id="Veracrypt_volumes">Veracrypt volumes</span></h3>
+<p>pam_mount does not support Veracrypt volumes natively, but there is a <a rel="nofollow" class="external text" href="https://forum.ubuntuusers.de/post/8882122/">workaround</a>:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/security/pam_mount.conf.xml</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">&lt;volume user="<i>username</i>" fstype="crypt" path="/dev/disk/by-partuuid/<i>partition_uuid</i>" mountpoint="<i>vcrypt</i>"/&gt;
+&lt;volume user="<i>username</i>" fstype="auto" path="/dev/mapper/<i>vcrypt</i>" mountpoint="/media/<i>mountpoint</i>"/&gt;
+
+&lt;cryptmount&gt;cryptsetup --veracrypt open --type tcrypt %(VOLUME) %(MNTPT)&lt;/cryptmount&gt;
+&lt;cryptumount&gt;cryptsetup close %(MNTPT)&lt;/cryptumount&gt;</pre>
+<p>If you also have LUKS volumes, you can use a different <i>fstype</i> for Veracrypt volume instead of <code>crypt</code> with <code>cryptmount/cryptumount</code>, for example <code>ncpfs</code> with <code>ncpmount/ncpumount</code>. Just make sure you do not use NCP filesystem.
+</p>
+<h3><span class="mw-headline" id="F2FS_encryption">F2FS encryption</span></h3>
+<p>There is a trick to make pam_mount add a F2FS decryption key to your session keyring. The salt you chose when encrypting directory(es) with f2fscrypt needs to match the one in <code>/etc/security/pam_mount.conf.xml</code> (0x1111 in below example) and passphrase needs to match the user's login password. This example assumes you are not mounting FUSE filesystems with pam_mount. If you do, choose a different <code>&lt;*mount&gt;</code> tag pairs instead of <code>&lt;fusemount&gt;</code> and <code>&lt;fuseumount&gt;</code>, like <code>&lt;ncpmount&gt;/&lt;ncpumount&gt;</code>.
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/security/pam_mount.conf.xml</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">&lt;fusemount&gt;f2fscrypt add_key -S 0x1111&lt;/fusemount&gt;
+&lt;fuseumount&gt;f2fscrypt new_session&lt;/fuseumount&gt;
+&lt;volume noroot="1" ssh="0" fstype="fuse" path="/tmp/not-a-real-path-0" mountpoint="/tmp/not-a-real-path-1"/&gt;</pre>
+<p><code>&lt;volume&gt;</code> does not do anything except trigger the commands in <code>&lt;fusemount&gt;</code> and <code>&lt;fuseumount&gt;</code>. After login you can verify that your session keyring has a F2FS decryption key:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">$ keyctl show</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">Session Keyring
+ 910133222 --alswrv   1000   100  keyring: _ses
+ 301049775 --alswrv   1000 65534   \_ keyring: _uid.1000
+ 013481035 --alsw-v   1000   100   \_ logon: f2fs:2e64cf4a5bafcd7</pre>
+<h2><span class="mw-headline" id="Login_manager_configuration">Login manager configuration</span></h2>
+<p>In general, you have to edit configuration files in <code>/etc/pam.d</code> so that <i>pam_mount</i> will be called on login. The correct order of entries in each file is important. It is necessary to edit <code>/etc/pam.d/system-login</code> as shown below. If you use a <a href="../en/Display_manager.html" title="Display manager">display manager</a> make sure its file includes <code>system-login</code>. Example configuration files follow, with the added lines in bold.
+</p>
+<p>The <code>pam_succeed_if</code> line before <code>pam_mount</code> in session skips <code>pam_mount</code> (<code>success=<i>n</i></code> means skip the next <code><i>n</i></code> lines) if the <code>systemd-user</code> service is running through the PAM stack (i.e. <code>/etc/pam.d/systemd-user</code>). This avoids double mount attempts and errors relating to dropped privileges when the <code>systemd --user</code> instance is starting up. See <a rel="nofollow" class="external autonumber" href="https://kempniu.wordpress.com/2016/01/07/making-pam_mount-play-nicer-with-systemd-user-sessions/">[1]</a> and <a rel="nofollow" class="external autonumber" href="https://www.suse.com/support/kb/doc/?id=000019569">[2]</a> for details.
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/pam.d/system-login</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">#%PAM-1.0
+
+auth       required   pam_shells.so
+auth       requisite  pam_nologin.so
+<b>auth       optional   pam_mount.so</b>
+auth       include    system-auth
+
+account    required   pam_access.so
+account    required   pam_nologin.so
+account    include    system-auth
+
+<b>password   optional   pam_mount.so</b>
+password   include    system-auth
+
+session    optional   pam_loginuid.so
+session    optional   pam_keyinit.so       force revoke
+<b>session [success=1 default=ignore]  pam_succeed_if.so  service = systemd-user quiet</b>
+<b>session    optional   pam_mount.so</b>
+session    include    system-auth
+session    optional   pam_motd.so          motd=/etc/motd
+session    optional   pam_mail.so          dir=/var/spool/mail standard quiet
+-session   optional   pam_systemd.so
+session    required   pam_env.so</pre>
+</div>
+</div>
+					<div id="catlinks" class="catlinks" data-mw="interface">
+<div id="mw-normal-catlinks" class="mw-normal-catlinks">
+<a href="../Special:Categories.html" title="Special:Categories">Category</a>: <ul><li><a href="../en/Category:Authentication.html" title="Category:Authentication">Authentication</a></li></ul>
+</div>
+<div id="mw-hidden-catlinks" class="mw-hidden-catlinks mw-hidden-cats-hidden">Hidden category: <ul><li><a href="../en/Category:Pages_or_sections_flagged_with_Template:Out_of_date.html" title="Category:Pages or sections flagged with Template:Out of date">Pages or sections flagged with Template:Out of date</a></li></ul>
+</div>
+</div>
+				</div>
+			</main>
+			
+		</div>
+		<div class="mw-footer-container">
+			
+<footer id="footer" class="mw-footer" style="margin: 0">
+	<ul id="footer-info">
+	<li data-nosnippet="">Retrieved from "<a dir="ltr" href="https://wiki.archlinux.org/index.php?title=Pam_mount&amp;oldid=820531">https://wiki.archlinux.org/index.php?title=Pam_mount&amp;oldid=820531</a>"</li>
+<li id="footer-info-lastmod"> This page was last edited on 10 November 2024, at 18:12.</li>
+	<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+<br>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="https://terms.archlinux.org/docs/privacy-policy/">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="../en/ArchWiki:About.html">About ArchWiki</a></li>
+	<li id="footer-places-disclaimers"><a href="../en/ArchWiki:General_disclaimer.html">Disclaimers</a></li>
+	<li id="footer-places-archwiki-code-of-conduct"><a href="https://terms.archlinux.org/docs/code-of-conduct/" class="extiw" title="archlinux-service-agreements:code-of-conduct">Code of conduct</a></li>
+	<li id="footer-places-archwiki-terms-of-service"><a href="https://terms.archlinux.org/docs/terms-of-service/" class="extiw" title="archlinux-service-agreements:terms-of-service">Terms of service</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-copyrightico"><a href="https://www.gnu.org/copyleft/fdl.html" class="cdx-button cdx-button--fake-button cdx-button--size-large cdx-button--fake-button--enabled"><img src="/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" loading="lazy"></a></li>
+	<li id="footer-poweredbyico"><img src="/resources/assets/poweredby_mediawiki.svg" width="88" height="31" loading="lazy"></li>
+</ul>
+
+</footer>
+
+		</div>
+	</div> 
+</div> 
+<div class="vector-settings" id="p-dock-bottom">
+	<ul></ul>
+</div>
+</body>
+</html>

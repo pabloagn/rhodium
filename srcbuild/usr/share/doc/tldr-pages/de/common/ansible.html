@@ -1,0 +1,54 @@
+<h1>ansible</h1>
+
+<blockquote><p>Verwalte Computergruppen per Fernzugriff über SSH (Verwende die Datei <code>/etc/ansible/hosts</code>, um neue Gruppen/Hosts hinzuzufügen).
+Manche Unterbefehle wie <code>galaxy</code> sind separat dokumentiert.
+Weitere Informationen: <a href="https://docs.ansible.com/ansible/latest/cli/ansible.html">https://docs.ansible.com/ansible/latest/cli/ansible.html</a>.</p></blockquote>
+
+<ul>
+<li>Liste Hosts auf, die zu einer Gruppe gehören:</li>
+</ul>
+
+
+<p><code>ansible {{gruppe}} --list-hosts</code></p>
+
+<ul>
+<li>Pinge eine Gruppe von Hosts an:</li>
+</ul>
+
+
+<p><code>ansible {{gruppe}} -m ping</code></p>
+
+<ul>
+<li>Zeige Informationen über eine Gruppe von Hosts an:</li>
+</ul>
+
+
+<p><code>ansible {{gruppe}} -m setup</code></p>
+
+<ul>
+<li>Führe einen Befehl auf einer Gruppe von Hosts aus:</li>
+</ul>
+
+
+<p><code>ansible {{gruppe}} -m command -a '{{befehl}}'</code></p>
+
+<ul>
+<li>Führe einen Befehl mit administrativen Privilegien aus:</li>
+</ul>
+
+
+<p><code>ansible {{gruppe}} --become --ask-become-pass -m command -a '{{befehl}}'</code></p>
+
+<ul>
+<li>Führe einen Befehl mit einer benutzerdefinierten Inventardatei aus:</li>
+</ul>
+
+
+<p><code>ansible {{Gruppe}} -i {{inventardatei}} -m command -a '{{befehl}}'</code></p>
+
+<ul>
+<li>Liste alle Gruppen eines Inventars auf:</li>
+</ul>
+
+
+<p><code>ansible localhost -m debug -a '{{var=groups.keys()}}'</code></p>

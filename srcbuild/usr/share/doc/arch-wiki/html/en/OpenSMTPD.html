@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-sticky-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-0 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-disabled skin-theme-clientpref-day vector-toc-available" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>OpenSMTPD - ArchWiki</title>
+<link rel="stylesheet" href="../ArchWikiOffline.css">
+<meta name="ResourceLoaderDynamicStyles" content="">
+<meta name="generator" content="MediaWiki 1.43.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="max-image-preview:standard">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.25, maximum-scale=5.0">
+<link rel="search" type="application/opensearchdescription+xml" href="/rest.php/v1/search" title="ArchWiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.archlinux.org/api.php?action=rsd">
+<link rel="license" href="https://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="ArchWiki Atom feed" href="/index.php?title=Special:RecentChanges&amp;feed=atom">
+</head>
+<body class="skin--responsive skin-vector skin-vector-search-vue mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-OpenSMTPD rootpage-OpenSMTPD skin-vector-2022 action-view">
+<a class="mw-jump-link" href="#bodyContent">Jump to content</a>
+<div class="vector-header-container">
+	</div>
+<div class="mw-page-container">
+	<div class="mw-page-container-inner">
+		<div class="vector-column-start">
+			<div class="vector-main-menu-container">
+		</div>
+	<div class="vector-sticky-pinned-container">
+				<nav id="mw-panel-toc" aria-label="Contents" data-event-name="ui.sidebar-toc" class="mw-table-of-contents-container vector-toc-landmark">
+					<div id="vector-toc-pinned-container" class="vector-pinned-container">
+					<div id="vector-toc" class="vector-toc vector-pinnable-element">
+	<div class="vector-pinnable-header vector-toc-pinnable-header vector-pinnable-header-pinned" data-feature-name="toc-pinned" data-pinnable-element-id="vector-toc">
+	<h2 class="vector-pinnable-header-label">Contents</h2>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-toc.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-toc.unpin">hide</button>
+</div>
+
+
+	<ul class="vector-toc-contents" id="mw-panel-toc-list">
+		<li id="toc-mw-content-text" class="vector-toc-list-item vector-toc-level-1">
+			<a href="#" class="vector-toc-link">
+				<div class="vector-toc-text">Beginning</div>
+			</a>
+		</li>
+		<li id="toc-Installation" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Installation">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">1</span>
+				<span>Installation</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Installation-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Configuration" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Configuration">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">2</span>
+				<span>Configuration</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Configuration-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Configuration subsection</span>
+			</button>
+		
+		<ul id="toc-Configuration-sublist" class="vector-toc-list">
+			<li id="toc-Local_mail" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Local_mail">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1</span>
+					<span>Local mail</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Local_mail-sublist" class="vector-toc-list">
+				<li id="toc-Local_mail_only" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Local_mail_only">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1.1</span>
+					<span>Local mail only</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Local_mail_only-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Hybrid_:_local_mail_and_relay" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Hybrid_:_local_mail_and_relay">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1.2</span>
+					<span>Hybrid : local mail and relay</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Hybrid_:_local_mail_and_relay-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Relay_only" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Relay_only">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1.3</span>
+					<span>Relay only</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Relay_only-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Simple_OpenSMTPD/mbox_configuration" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Simple_OpenSMTPD/mbox_configuration">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2</span>
+					<span>Simple OpenSMTPD/mbox configuration</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Simple_OpenSMTPD/mbox_configuration-sublist" class="vector-toc-list">
+				<li id="toc-TLS" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#TLS">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2.1</span>
+					<span>TLS</span>
+				</div>
+			</a>
+			
+			<ul id="toc-TLS-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Create_user_accounts" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Create_user_accounts">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2.2</span>
+					<span>Create user accounts</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Create_user_accounts-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Craft_a_simple_smtpd.conf_setup" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Craft_a_simple_smtpd.conf_setup">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2.3</span>
+					<span>Craft a simple smtpd.conf setup</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Craft_a_simple_smtpd.conf_setup-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Create_tables" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Create_tables">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2.4</span>
+					<span>Create tables</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Create_tables-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Test_the_configuration" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Test_the_configuration">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.3</span>
+					<span>Test the configuration</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Test_the_configuration-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Troubleshooting" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Troubleshooting">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">3</span>
+				<span>Troubleshooting</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Troubleshooting-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Troubleshooting subsection</span>
+			</button>
+		
+		<ul id="toc-Troubleshooting-sublist" class="vector-toc-list">
+			<li id="toc-Console_debugging" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Console_debugging">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1</span>
+					<span>Console debugging</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Console_debugging-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Subsystem_tracing" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Subsystem_tracing">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.2</span>
+					<span>Subsystem tracing</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Subsystem_tracing-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Manual_Submission_port_authentication" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Manual_Submission_port_authentication">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.3</span>
+					<span>Manual Submission port authentication</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Manual_Submission_port_authentication-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id='toc-"Helo_command_rejected:_need_fully-qualified_hostname"' class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href='#"Helo_command_rejected:_need_fully-qualified_hostname"'>
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.4</span>
+					<span>"Helo command rejected: need fully-qualified hostname"</span>
+				</div>
+			</a>
+			
+			<ul id='toc-"Helo_command_rejected:_need_fully-qualified_hostname"-sublist' class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-System_users_authentication_failure" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#System_users_authentication_failure">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.5</span>
+					<span>System users authentication failure</span>
+				</div>
+			</a>
+			
+			<ul id="toc-System_users_authentication_failure-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-See_also" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#See_also">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">4</span>
+				<span>See also</span>
+			</div>
+		</a>
+		
+		<ul id="toc-See_also-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+</ul>
+</div>
+
+					</div>
+		</nav>
+			</div>
+		</div>
+		<div class="mw-content-container">
+			<main id="content" class="mw-body" style="margin: 0">
+				<header class="mw-body-header vector-page-titlebar">
+					<nav aria-label="Contents" class="vector-toc-landmark">
+						
+<div id="vector-page-titlebar-toc" class="vector-dropdown vector-page-titlebar-toc vector-button-flush-left">
+	<input type="checkbox" id="vector-page-titlebar-toc-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-page-titlebar-toc" class="vector-dropdown-checkbox " aria-label="Toggle the table of contents">
+	<label id="vector-page-titlebar-toc-label" for="vector-page-titlebar-toc-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"><span class="vector-icon mw-ui-icon-listBullet mw-ui-icon-wikimedia-listBullet"></span>
+
+<span class="vector-dropdown-label-text">Toggle the table of contents</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+							<div id="vector-page-titlebar-toc-unpinned-container" class="vector-unpinned-container">
+			</div>
+		
+	</div>
+</div>
+
+					</nav>
+					<h1 id="firstHeading" class="firstHeading mw-first-heading"><span class="mw-page-title-main">OpenSMTPD</span></h1>
+							
+<div id="p-lang-btn" class="vector-dropdown mw-portlet mw-portlet-lang">
+	<input type="checkbox" id="p-lang-btn-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-p-lang-btn" class="vector-dropdown-checkbox mw-interlanguage-selector" aria-label="Go to an article in another language. Available in 1 language">
+	<label id="p-lang-btn-label" for="p-lang-btn-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--action-progressive mw-portlet-lang-heading-1" aria-hidden="true"><span class="vector-icon mw-ui-icon-language-progressive mw-ui-icon-wikimedia-language-progressive"></span>
+
+<span class="vector-dropdown-label-text">1 language</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+		<div class="vector-menu-content">
+			
+			<ul class="vector-menu-content-list">
+				
+				<li class="interlanguage-link interwiki-ja mw-list-item"><a href="https://wiki.archlinux.jp/index.php/OpenSMTPD" title="OpenSMTPD – 日本語" lang="ja" hreflang="ja" data-title="OpenSMTPD" data-language-autonym="日本語" data-language-local-name="日本語" class="interlanguage-link-target"><span>日本語</span></a></li>
+			</ul>
+			
+		</div>
+
+	</div>
+</div>
+</header>
+				<div class="vector-column-end">
+					<div class="vector-sticky-pinned-container">
+						<nav class="vector-page-tools-landmark" aria-label="Page tools">
+							<div id="vector-page-tools-pinned-container" class="vector-pinned-container">
+				
+							</div>
+		</nav>
+						<nav class="vector-appearance-landmark" aria-label="Appearance">
+							<div id="vector-appearance-pinned-container" class="vector-pinned-container">
+				<div id="vector-appearance" class="vector-appearance vector-pinnable-element">
+	<div class="vector-pinnable-header vector-appearance-pinnable-header vector-pinnable-header-pinned" data-feature-name="appearance-pinned" data-pinnable-element-id="vector-appearance" data-pinned-container-id="vector-appearance-pinned-container" data-unpinned-container-id="vector-appearance-unpinned-container">
+	<div class="vector-pinnable-header-label">Appearance</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-appearance.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-appearance.unpin">hide</button>
+</div>
+
+
+</div>
+
+							</div>
+		</nav>
+					</div>
+				</div>
+				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container>
+					<div class="vector-body-before-content">
+							<div class="mw-indicators">
+		</div>
+
+						<div id="siteSub" class="noprint">From ArchWiki</div>
+					</div>
+					<div id="contentSub"><div id="mw-content-subtitle"></div></div>
+					
+					
+					<div id="mw-content-text" class="mw-body-content">
+<div class="mw-content-ltr mw-parser-output" lang="en" dir="ltr">
+<div class="archwiki-template-meta-related-articles">
+<p>Related articles</p>
+<ul>
+<li><a href="../en/Mail_server.html" title="Mail server">Mail server</a></li>
+</ul>
+</div>
+<p><a rel="nofollow" class="external text" href="https://www.opensmtpd.org/">OpenSMTPD</a> is a free <a href="../en/Mail_server.html" class="mw-redirect" title="Mail transfer agent">mail transfer agent</a>, developed as part of the OpenBSD project. This article builds upon <a href="../en/Mail_server.html" title="Mail server">Mail server</a>.
+</p>
+<meta property="mw:PageProp/toc">
+<h2><span class="mw-headline" id="Installation">Installation</span></h2>
+<p><a href="../en/Help:Reading.html#Installation_of_packages" class="mw-redirect" title="Install">Install</a> the <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=opensmtpd">opensmtpd</a></span> package.
+</p>
+<h2><span class="mw-headline" id="Configuration">Configuration</span></h2>
+<p>OpenSMTPD is configured in <code>/etc/smtpd/</code>.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> Starting with OpenSMTPD <a rel="nofollow" class="external text" href="https://www.opensmtpd.org/announces/release-6.4.0.txt">version 6.4.0</a> the configuration file syntax has been completely reworked, breaking compatibility with previous configuration files. For instruction on migrating the configuration to the new syntax see <a rel="nofollow" class="external free" href="https://poolp.org/posts/2018-05-21/switching-to-opensmtpd-new-config/">https://poolp.org/posts/2018-05-21/switching-to-opensmtpd-new-config/</a>.</div>
+<h3><span class="mw-headline" id="Local_mail">Local mail</span></h3>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../File:View-refresh-red.svg" decoding="async" width="48" height="48" class="mw-file-element"></span></span><b>This article or section is out of date.</b></p>
+<div>
+<b>Reason:</b> OpenSMTPD 6.6.3p1 changed the default configuration to use <a href="https://en.wikipedia.org/wiki/Maildir" class="extiw" title="wikipedia:Maildir">Maildir</a> instead of <a href="https://en.wikipedia.org/wiki/Mbox" class="extiw" title="wikipedia:Mbox">mbox</a>. (Discuss in <a rel="nofollow" class="external text" href="../en/Talk:OpenSMTPD.html">Talk:OpenSMTPD</a>)</div>
+</div>
+<p>To have local mail working, for example for <a href="../en/Cron.html" title="Cron">cron</a> mails, it is enough to simply <a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Start">start</a> <code>smtpd.service</code>.
+</p>
+<p>The default configuration of OpenSMTPD is to do local retrieval and delivery of mail, and also relay outgoing mail. See <span class="plainlinks archwiki-template-man" title="$ man 5 smtpd.conf"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/smtpd.conf.5">smtpd.conf(5)</a></span>.
+</p>
+<p>To have your local mails go to the <code>/var/spool/mail/<i>username</i></code> i.e the path where most email clients expect the mails, use <code>action "local" maildir "/var/spool/mail/%{rcpt.user}" alias &lt;aliases&gt;</code> instead of <code>action "local" mbox alias &lt;aliases&gt;</code>
+</p>
+<h4><span class="mw-headline" id="Local_mail_only">Local mail only</span></h4>
+<p>To do only local mail, the following is enough:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/smtpd/smtpd.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">listen on lo
+action "local" mbox alias &lt;aliases&gt;
+match for local action "local"
+</pre>
+<h4><span class="mw-headline" id="Hybrid_:_local_mail_and_relay">Hybrid : local mail and relay</span></h4>
+<p>These two lines in <code>/etc/smtpd/smtpd.conf</code> :
+</p>
+<pre>action "local" mbox alias &lt;aliases&gt;
+action "relay" relay host "smtp://smtp.foo.bar" mail-from "@foo.bar"
+match for local action "local"
+match for any action "relay"
+</pre>
+<p>configure OpenSMTPD to :
+</p>
+<ul><li>send local email <i>locally</i>, without going through a relay (useful for cron &amp; at mail notifications)</li></ul>
+<ul><li>use a relay to send a mail outside of localhost</li></ul>
+<p>Simply replace <i>smtp.foo.bar</i> by your ISP mail server, or another server at
+your convenience.
+</p>
+<h4><span class="mw-headline" id="Relay_only">Relay only</span></h4>
+<p>To send all local emails through a relay invoke <a href="../en/Procmail.html" title="Procmail">procmail</a>:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/smtpd/smtpd.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">action "local" mda "procmail -f -" virtual &lt;aliases&gt;
+action "relay" relay host "smtps://label@smtp.foo.bar" auth &lt;secrets&gt; mail-from "@foo.bar"
+match for local action "local"
+match for any action "relay"
+</pre>
+<p>The aliases option is used for the local user mapping, for a simplified mapping you can use virtual aliases with a catch all: 
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/smtpd/aliases</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">@ foo@bar
+</pre>
+<h3>
+<span id="Simple_OpenSMTPD.2Fmbox_configuration"></span><span class="mw-headline" id="Simple_OpenSMTPD/mbox_configuration">Simple OpenSMTPD/mbox configuration</span>
+</h3>
+<h4><span class="mw-headline" id="TLS">TLS</span></h4>
+<p>To obtain a certificate, see <a href="../en/OpenSSL.html#Usage" title="OpenSSL">OpenSSL#Usage</a>.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> OpenSMTPD has solid defaults, SSLv3 is always disabled and the default <code>ciphers</code> are not known to be insecure. You might still want to test the server as described in <a href="../en/Transport_Layer_Security.html#Server-side_recommendations" class="mw-redirect" title="Server-side TLS">Server-side TLS</a>.</div>
+<h4><span class="mw-headline" id="Create_user_accounts">Create user accounts</span></h4>
+<ul><li>Create a user account on the mail server for each desired mailbox.</li></ul>
+<pre># useradd -m roger
+# useradd -m shirley
+</pre>
+<ul>
+<li>OpenSMTPD will deliver messages to the user account's mbox file at <code>/var/spool/mail/<i>&lt;username&gt;</i></code>
+</li>
+<li>Multiple SMTP email addresses can be routed to a given mbox if desired.</li>
+</ul>
+<h4><span class="mw-headline" id="Craft_a_simple_smtpd.conf_setup">Craft a simple smtpd.conf setup</span></h4>
+<ul><li>A working configuration can be had in as little as nine lines!</li></ul>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/smtpd/smtpd.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">pki mx.domain.tld cert         "/etc/smtpd/tls/smtpd.crt"
+pki mx.domain.tld key          "/etc/smtpd/tls/smtpd.key"
+
+table creds                    "/etc/smtpd/creds"
+table vdoms                    "/etc/smtpd/vdoms"
+table vusers                   "/etc/smtpd/vusers"
+
+listen on eth0 tls pki mx.domain.tld
+listen on eth0 port 465 smtps pki mx.domain.tld auth &lt;creds&gt;
+listen on eth0 port 587 tls-require pki mx.domain.tld auth &lt;creds&gt;
+
+action receive	mbox virtual &lt;vusers&gt;
+action send relay
+
+match from any for domain &lt;vdoms&gt; action receive
+match for any action send
+</pre>
+<h4><span class="mw-headline" id="Create_tables">Create tables</span></h4>
+<ul><li>For the domain table file; simply put one domain per line</li></ul>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/smtpd/vdoms</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">personaldomain.org
+businessname.com
+</pre>
+<ul><li>For the user table file; list one inbound SMTP email address per line and then map it to an mbox user account name, SMTP email address, or any combination of the two on the right, separated by commas.</li></ul>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/smtpd/vusers</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">roger@personaldomain.org          roger
+newsletters@personaldomain.org    roger,roger.rulz@gmail.com
+
+roger@businessname.com            roger
+shirley@businessname.com          shirley
+info@businessname.com             roger,shirley
+contact@businessname.com          info@businessname.com
+</pre>
+<ul><li>For the creds table file; put the user name in the 1st column and the password hash in the 2nd column</li></ul>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/smtpd/creds</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">roger                              &lt;password hash created using 'smtpctl encrypt' command&gt;
+shirley                            &lt;password hash created using 'smtpctl encrypt' command&gt;
+</pre>
+<h3><span class="mw-headline" id="Test_the_configuration">Test the configuration</span></h3>
+<pre># smtpd -n
+</pre>
+<p>If you get a message that says 'configuration OK' - you are ready to <a href="../en/Systemd.html" title="Systemd">rock and roll</a>. If not, work on any configuration errors and try again.
+</p>
+<h2><span class="mw-headline" id="Troubleshooting">Troubleshooting</span></h2>
+<h3><span class="mw-headline" id="Console_debugging">Console debugging</span></h3>
+<p>If you are having problems with mail delivery, try <a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Stop">stopping</a> the <code>smtpd.service</code> and launching the daemon manually with the 'do not daemonize' and 'verbose output' options. Then watch the console for errors.
+</p>
+<pre># smtpd -dv
+</pre>
+<h3><span class="mw-headline" id="Subsystem_tracing">Subsystem tracing</span></h3>
+<p>Add the <code>-T</code> flag to get real-time subsystem tracing
+</p>
+<pre># smtpd -dv -T smtp
+</pre>
+<p>Alternately, use the <code>smtpctl trace <i>&lt;subsystem&gt;</i></code> command if the daemon is already running. The trace output will appear in the console output above as well as the <a href="../en/Systemd/Journal.html" class="mw-redirect" title="Journalctl">journalctl</a> output for the smtpd.service. For example:
+</p>
+<pre># smtpctl trace expand &amp;&amp; smtpctl trace lookup
+</pre>
+<p>...will trace both aliases/virtual/forward expansion and user/credentials lookups
+</p>
+<h3><span class="mw-headline" id="Manual_Submission_port_authentication">Manual Submission port authentication</span></h3>
+<ul><li>Encode username and password in base64
+<dl><dd><pre>$ printf '\0%s\0%s' 'username' 'password' | base64</pre></dd></dl>
+</li></ul>
+<ul><li>Connect to submission port using <code>openssl s_client</code> command, using one of the following commands:
+<ul>
+<li>To connect via port 465 (implicit TLS):
+<dl><dd><pre>$ openssl s_client -host mx.domain.tld -port 465</pre></dd></dl>
+</li>
+<li>To connect via port 587 (STARTTLS):
+<dl><dd><pre>$ openssl s_client -host mx.domain.tld -port 587 -starttls smtp</pre></dd></dl>
+</li>
+</ul>
+</li></ul>
+<ul><li>enter <code>EHLO <i>myhostname</i></code> followed by <code>AUTH PLAIN</code>. Paste in the base64 string from step above after <code>334</code> response.</li></ul>
+<pre>250 HELP
+EHLO test.domain.tld
+250-mx.hostname.tld Hello test.domain.tld [5.5.5.5], pleased to meet you
+250-8BITMIME
+250-ENHANCEDSTATUSCODES
+250-SIZE 36700160
+250-DSN
+250-AUTH PLAIN LOGIN
+250 HELP
+AUTH PLAIN
+334 
+dXNlcm5hbWUAdXNlcm5hbWUAcGFzc3dvcmQ=
+235 2.0.0: Authentication succeeded
+</pre>
+<h3>
+<span id=".22Helo_command_rejected:_need_fully-qualified_hostname.22"></span><span class="mw-headline" id='"Helo_command_rejected:_need_fully-qualified_hostname"'>"Helo command rejected: need fully-qualified hostname"</span>
+</h3>
+<p>When sending email, if you get this kind of messages, set your FQDN in the file <code>/etc/smtpd/mailname</code>. Otherwise, the server name is derived from the local <a href="../en/Network_configuration.html#Set_the_hostname" class="mw-redirect" title="Hostname">hostname</a> returned by <span class="plainlinks archwiki-template-man" title="$ man 3p gethostname"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/gethostname.3p">gethostname(3p)</a></span>, either directly if it is a fully qualified domain name, or by retrieving the associated canonical name through <span class="plainlinks archwiki-template-man" title="$ man 3 getaddrinfo"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/getaddrinfo.3">getaddrinfo(3)</a></span>.
+</p>
+<h3><span class="mw-headline" id="System_users_authentication_failure">System users authentication failure</span></h3>
+<p>If you are using the system users and the authentication with valid credentials fails, you have to configure <a href="../en/PAM.html" title="PAM">PAM</a>:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/pam.d/smtpd</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">auth required pam_unix.so
+account required pam_unix.so
+password required pam_unix.so
+session required pam_unix.so
+</pre>
+<h2><span class="mw-headline" id="See_also">See also</span></h2>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/OpenSMTPD" class="extiw" title="wikipedia:OpenSMTPD">Wikipedia:OpenSMTPD</a></li>
+<li>OpenSMTPD pairs well with <a href="../en/Dovecot.html" title="Dovecot">Dovecot</a>. Combine the two for a nice minimalist mailserver</li>
+<li><a rel="nofollow" class="external text" href="https://opensmtpd.org/">OpenSMTPD project page</a></li>
+<li><a rel="nofollow" class="external text" href="https://coderwall.com/p/eejzja">Simple SMTP server with OpenSMTPD</a></li>
+</ul>
+</div>
+</div>
+					<div id="catlinks" class="catlinks" data-mw="interface">
+<div id="mw-normal-catlinks" class="mw-normal-catlinks">
+<a href="../Special:Categories.html" title="Special:Categories">Categories</a>: <ul>
+<li><a href="../en/Category:Mail_server.html" title="Category:Mail server">Mail server</a></li>
+<li><a href="../en/Category:OpenBSD.html" title="Category:OpenBSD">OpenBSD</a></li>
+</ul>
+</div>
+<div id="mw-hidden-catlinks" class="mw-hidden-catlinks mw-hidden-cats-hidden">Hidden category: <ul><li><a href="../en/Category:Pages_or_sections_flagged_with_Template:Out_of_date.html" title="Category:Pages or sections flagged with Template:Out of date">Pages or sections flagged with Template:Out of date</a></li></ul>
+</div>
+</div>
+				</div>
+			</main>
+			
+		</div>
+		<div class="mw-footer-container">
+			
+<footer id="footer" class="mw-footer" style="margin: 0">
+	<ul id="footer-info">
+	<li data-nosnippet="">Retrieved from "<a dir="ltr" href="https://wiki.archlinux.org/index.php?title=OpenSMTPD&amp;oldid=818967">https://wiki.archlinux.org/index.php?title=OpenSMTPD&amp;oldid=818967</a>"</li>
+<li id="footer-info-lastmod"> This page was last edited on 14 October 2024, at 08:35.</li>
+	<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+<br>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="https://terms.archlinux.org/docs/privacy-policy/">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="../en/ArchWiki:About.html">About ArchWiki</a></li>
+	<li id="footer-places-disclaimers"><a href="../en/ArchWiki:General_disclaimer.html">Disclaimers</a></li>
+	<li id="footer-places-archwiki-code-of-conduct"><a href="https://terms.archlinux.org/docs/code-of-conduct/" class="extiw" title="archlinux-service-agreements:code-of-conduct">Code of conduct</a></li>
+	<li id="footer-places-archwiki-terms-of-service"><a href="https://terms.archlinux.org/docs/terms-of-service/" class="extiw" title="archlinux-service-agreements:terms-of-service">Terms of service</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-copyrightico"><a href="https://www.gnu.org/copyleft/fdl.html" class="cdx-button cdx-button--fake-button cdx-button--size-large cdx-button--fake-button--enabled"><img src="/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" loading="lazy"></a></li>
+	<li id="footer-poweredbyico"><img src="/resources/assets/poweredby_mediawiki.svg" width="88" height="31" loading="lazy"></li>
+</ul>
+
+</footer>
+
+		</div>
+	</div> 
+</div> 
+<div class="vector-settings" id="p-dock-bottom">
+	<ul></ul>
+</div>
+</body>
+</html>

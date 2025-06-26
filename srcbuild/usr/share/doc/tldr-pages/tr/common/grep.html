@@ -1,0 +1,60 @@
+<h1>grep</h1>
+
+<blockquote><p>Düzenli ifadeler (Regex) kullanarak dosyalardaki kalıpları bul.
+Daha fazla bilgi için: <a href="https://www.gnu.org/software/grep/manual/grep.html">https://www.gnu.org/software/grep/manual/grep.html</a>.</p></blockquote>
+
+<ul>
+<li>Bir dosya içinde kalıp ara:</li>
+</ul>
+
+
+<p><code>grep "{{aranan_kalıp}}" {{dosya/yolu}}</code></p>
+
+<ul>
+<li>Tam bir dize ara (düzenli ifadeleri devre dışı bırakır):</li>
+</ul>
+
+
+<p><code>grep {{[-F|--fixed-strings]}} "{{tam_dize}}" {{dosya/yolu}}</code></p>
+
+<ul>
+<li>Bir dizindeki tüm dosyalarda bir kalıbı tekrarlı olarak ara, eşleşmelerin satır numaralarını göster, binary dosyaları göz ardı et:</li>
+</ul>
+
+
+<p><code>grep {{[-r|--recursive]}} {{[-n|--line-number]}} --binary-files {{without-match}} "{{aranan_kalıp}}" {{dosya/yolu}}</code></p>
+
+<ul>
+<li>Büyük/küçük harfe duyarsız modda genişletilmiş düzenli ifadeleri (<code>?</code>, <code>+</code>, <code>{}</code>, <code>()</code>, ve <code>|</code> destekler) kullan:</li>
+</ul>
+
+
+<p><code>grep {{[-E|--extended-regexp]}} {{[-i|--ignore-case]}} "{{aranan_kalıp}}" {{dosya/yolu}}</code></p>
+
+<ul>
+<li>Her eşleşmenin etrafında, öncesinde veya sonrasında 3 satır içerik yazdır:</li>
+</ul>
+
+
+<p><code>grep --{{context|before-context|after-context}} 3 "{{aranan_kalıp}}" {{dosya/yolu}}</code></p>
+
+<ul>
+<li>Renkli çıktı ile her eşleşme için dosya adını ve satır numarasını yazdır:</li>
+</ul>
+
+
+<p><code>grep {{[-H|--with-filename]}} {{[-n|--line-number]}} --color=always "{{aranan_kalıp}}" {{dosya/yolu}}</code></p>
+
+<ul>
+<li>Bir kalıpla eşleşen satırları ara, yalnızca eşleşen metni yazdır:</li>
+</ul>
+
+
+<p><code>grep {{[-o|--only-matching]}} "{{aranan_kalıp}}" {{dosya/yolu}}</code></p>
+
+<ul>
+<li>Bir kalıpla eşleşmeyen satırlar için <code>stdin</code>&lsquo;de arama yap:</li>
+</ul>
+
+
+<p><code>cat {{dosya/yolu}} | grep {{[-v|--invert-match]}} "{{aranan_kalıp}}"</code></p>

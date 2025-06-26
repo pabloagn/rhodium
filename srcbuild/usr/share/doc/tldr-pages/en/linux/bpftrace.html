@@ -1,0 +1,46 @@
+<h1>bpftrace</h1>
+
+<blockquote><p>High-level tracing language for Linux eBPF.
+More information: <a href="https://github.com/bpftrace/bpftrace/blob/master/man/adoc/bpftrace.adoc">https://github.com/bpftrace/bpftrace/blob/master/man/adoc/bpftrace.adoc</a>.</p></blockquote>
+
+<ul>
+<li>Display bpftrace version:</li>
+</ul>
+
+
+<p><code>bpftrace {{[-V|--version]}}</code></p>
+
+<ul>
+<li>List all available probes:</li>
+</ul>
+
+
+<p><code>sudo bpftrace -l</code></p>
+
+<ul>
+<li>Run a one-liner program (e.g. syscall count by program):</li>
+</ul>
+
+
+<p><code>sudo bpftrace -e '{{tracepoint:raw_syscalls:sys_enter { @[comm] = count(); }}}'</code></p>
+
+<ul>
+<li>Run a program from a file:</li>
+</ul>
+
+
+<p><code>sudo bpftrace {{path/to/file}}</code></p>
+
+<ul>
+<li>Trace a program by PID:</li>
+</ul>
+
+
+<p><code>sudo bpftrace -e '{{tracepoint:raw_syscalls:sys_enter /pid == 123/ { @[comm] = count(); }}}'</code></p>
+
+<ul>
+<li>Do a dry run and display the output in eBPF format:</li>
+</ul>
+
+
+<p><code>sudo bpftrace -d -e '{{one_line_program}}'</code></p>

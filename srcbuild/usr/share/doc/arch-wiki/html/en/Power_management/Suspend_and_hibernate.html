@@ -1,0 +1,1180 @@
+<!DOCTYPE html>
+<html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-sticky-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-0 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-disabled skin-theme-clientpref-day vector-toc-available" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>Power management/Suspend and hibernate - ArchWiki</title>
+<link rel="stylesheet" href="../../ArchWikiOffline.css">
+<meta name="ResourceLoaderDynamicStyles" content="">
+<meta name="generator" content="MediaWiki 1.43.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="max-image-preview:standard">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.25, maximum-scale=5.0">
+<link rel="search" type="application/opensearchdescription+xml" href="/rest.php/v1/search" title="ArchWiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.archlinux.org/api.php?action=rsd">
+<link rel="license" href="https://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="ArchWiki Atom feed" href="/index.php?title=Special:RecentChanges&amp;feed=atom">
+</head>
+<body class="skin--responsive skin-vector skin-vector-search-vue mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Power_management_Suspend_and_hibernate rootpage-Power_management skin-vector-2022 action-view">
+<a class="mw-jump-link" href="#bodyContent">Jump to content</a>
+<div class="vector-header-container">
+	</div>
+<div class="mw-page-container">
+	<div class="mw-page-container-inner">
+		<div class="vector-column-start">
+			<div class="vector-main-menu-container">
+		</div>
+	<div class="vector-sticky-pinned-container">
+				<nav id="mw-panel-toc" aria-label="Contents" data-event-name="ui.sidebar-toc" class="mw-table-of-contents-container vector-toc-landmark">
+					<div id="vector-toc-pinned-container" class="vector-pinned-container">
+					<div id="vector-toc" class="vector-toc vector-pinnable-element">
+	<div class="vector-pinnable-header vector-toc-pinnable-header vector-pinnable-header-pinned" data-feature-name="toc-pinned" data-pinnable-element-id="vector-toc">
+	<h2 class="vector-pinnable-header-label">Contents</h2>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-toc.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-toc.unpin">hide</button>
+</div>
+
+
+	<ul class="vector-toc-contents" id="mw-panel-toc-list">
+		<li id="toc-mw-content-text" class="vector-toc-list-item vector-toc-level-1">
+			<a href="#" class="vector-toc-link">
+				<div class="vector-toc-text">Beginning</div>
+			</a>
+		</li>
+		<li id="toc-Kernel_interface_(swsusp)" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Kernel_interface_(swsusp)">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">1</span>
+				<span>Kernel interface (swsusp)</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Kernel_interface_(swsusp)-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-High_level_interface_(systemd)" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#High_level_interface_(systemd)">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">2</span>
+				<span>High level interface (systemd)</span>
+			</div>
+		</a>
+		
+		<ul id="toc-High_level_interface_(systemd)-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Changing_suspend_method" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Changing_suspend_method">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">3</span>
+				<span>Changing suspend method</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Changing_suspend_method-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Hibernation" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Hibernation">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">4</span>
+				<span>Hibernation</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Hibernation-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Hibernation subsection</span>
+			</button>
+		
+		<ul id="toc-Hibernation-sublist" class="vector-toc-list">
+			<li id="toc-About_swap_partition/file_size" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#About_swap_partition/file_size">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.1</span>
+					<span>About swap partition/file size</span>
+				</div>
+			</a>
+			
+			<ul id="toc-About_swap_partition/file_size-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Configure_the_initramfs" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Configure_the_initramfs">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.2</span>
+					<span>Configure the initramfs</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Configure_the_initramfs-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Pass_hibernate_location_to_initramfs" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Pass_hibernate_location_to_initramfs">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.3</span>
+					<span>Pass hibernate location to initramfs</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Pass_hibernate_location_to_initramfs-sublist" class="vector-toc-list">
+				<li id="toc-Manually_specify_hibernate_location" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Manually_specify_hibernate_location">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.3.1</span>
+					<span>Manually specify hibernate location</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Manually_specify_hibernate_location-sublist" class="vector-toc-list">
+				<li id="toc-Acquire_swap_file_offset" class="vector-toc-list-item vector-toc-level-4">
+			<a class="vector-toc-link" href="#Acquire_swap_file_offset">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.3.1.1</span>
+					<span>Acquire swap file offset</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Acquire_swap_file_offset-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Change_the_image_compression_algorithm_for_hibernation" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Change_the_image_compression_algorithm_for_hibernation">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.4</span>
+					<span>Change the image compression algorithm for hibernation</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Change_the_image_compression_algorithm_for_hibernation-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Maintaining_swap_file_for_hibernation_with_zram" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Maintaining_swap_file_for_hibernation_with_zram">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.5</span>
+					<span>Maintaining swap file for hibernation with zram</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Maintaining_swap_file_for_hibernation_with_zram-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Hibernation_into_a_thinly-provisioned_LVM_volume" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Hibernation_into_a_thinly-provisioned_LVM_volume">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.6</span>
+					<span>Hibernation into a thinly-provisioned LVM volume</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Hibernation_into_a_thinly-provisioned_LVM_volume-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Disable_zswap_writeback_to_use_the_swap_space_only_for_hibernation" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Disable_zswap_writeback_to_use_the_swap_space_only_for_hibernation">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.7</span>
+					<span>Disable zswap writeback to use the swap space only for hibernation</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Disable_zswap_writeback_to_use_the_swap_space_only_for_hibernation-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Sleep_hooks" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Sleep_hooks">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">5</span>
+				<span>Sleep hooks</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Sleep_hooks-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Sleep hooks subsection</span>
+			</button>
+		
+		<ul id="toc-Sleep_hooks-sublist" class="vector-toc-list">
+			<li id="toc-Custom_systemd_units" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Custom_systemd_units">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.1</span>
+					<span>Custom systemd units</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Custom_systemd_units-sublist" class="vector-toc-list">
+				<li id="toc-Combined_sleep/resume_unit" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Combined_sleep/resume_unit">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.1.1</span>
+					<span>Combined sleep/resume unit</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Combined_sleep/resume_unit-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Hooks_in_/usr/lib/systemd/system-sleep" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Hooks_in_/usr/lib/systemd/system-sleep">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.2</span>
+					<span>Hooks in /usr/lib/systemd/system-sleep</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Hooks_in_/usr/lib/systemd/system-sleep-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Tips_and_tricks" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Tips_and_tricks">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">6</span>
+				<span>Tips and tricks</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Tips_and_tricks-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Tips and tricks subsection</span>
+			</button>
+		
+		<ul id="toc-Tips_and_tricks-sublist" class="vector-toc-list">
+			<li id="toc-Unlocking_automatically_on_resume_in_trusted_locations" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Unlocking_automatically_on_resume_in_trusted_locations">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.1</span>
+					<span>Unlocking automatically on resume in trusted locations</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Unlocking_automatically_on_resume_in_trusted_locations-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Disable_sleep_completely" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Disable_sleep_completely">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.2</span>
+					<span>Disable sleep completely</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Disable_sleep_completely-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Intel_Rapid_Start_Technology_(IRST)" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Intel_Rapid_Start_Technology_(IRST)">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.3</span>
+					<span>Intel Rapid Start Technology (IRST)</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Intel_Rapid_Start_Technology_(IRST)-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Track_laptop_battery_energy_change_during_sleep_states" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Track_laptop_battery_energy_change_during_sleep_states">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.4</span>
+					<span>Track laptop battery energy change during sleep states</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Track_laptop_battery_energy_change_during_sleep_states-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Troubleshooting" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Troubleshooting">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">7</span>
+				<span>Troubleshooting</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Troubleshooting-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Troubleshooting subsection</span>
+			</button>
+		
+		<ul id="toc-Troubleshooting-sublist" class="vector-toc-list">
+			<li id="toc-ACPI_OS_NAME" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#ACPI_OS_NAME">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">7.1</span>
+					<span>ACPI_OS_NAME</span>
+				</div>
+			</a>
+			
+			<ul id="toc-ACPI_OS_NAME-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Suspend/hibernate_does_not_work,_or_does_not_work_consistently" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Suspend/hibernate_does_not_work,_or_does_not_work_consistently">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">7.2</span>
+					<span>Suspend/hibernate does not work, or does not work consistently</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Suspend/hibernate_does_not_work,_or_does_not_work_consistently-sublist" class="vector-toc-list">
+				<li id="toc-USB_device_errors" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#USB_device_errors">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">7.2.1</span>
+					<span>USB device errors</span>
+				</div>
+			</a>
+			
+			<ul id="toc-USB_device_errors-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Wake-on-LAN" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Wake-on-LAN">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">7.3</span>
+					<span>Wake-on-LAN</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Wake-on-LAN-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Instantaneous_wakeup_after_suspending" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Instantaneous_wakeup_after_suspending">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">7.4</span>
+					<span>Instantaneous wakeup after suspending</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Instantaneous_wakeup_after_suspending-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-System_does_not_power_off_when_hibernating" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#System_does_not_power_off_when_hibernating">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">7.5</span>
+					<span>System does not power off when hibernating</span>
+				</div>
+			</a>
+			
+			<ul id="toc-System_does_not_power_off_when_hibernating-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Operating_system_not_found_(or_wrong_OS_booting)_when_booting_after_hibernation" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Operating_system_not_found_(or_wrong_OS_booting)_when_booting_after_hibernation">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">7.6</span>
+					<span>Operating system not found (or wrong OS booting) when booting after hibernation</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Operating_system_not_found_(or_wrong_OS_booting)_when_booting_after_hibernation-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Swap_file_in_/home" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Swap_file_in_/home">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">7.7</span>
+					<span>Swap file in /home</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Swap_file_in_/home-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-PC_will_not_wake_from_sleep_on_A520I_and_B550I_motherboards" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#PC_will_not_wake_from_sleep_on_A520I_and_B550I_motherboards">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">7.8</span>
+					<span>PC will not wake from sleep on A520I and B550I motherboards</span>
+				</div>
+			</a>
+			
+			<ul id="toc-PC_will_not_wake_from_sleep_on_A520I_and_B550I_motherboards-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Suspend_from_corresponding_laptop_Fn_key_not_working" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Suspend_from_corresponding_laptop_Fn_key_not_working">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">7.9</span>
+					<span>Suspend from corresponding laptop Fn key not working</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Suspend_from_corresponding_laptop_Fn_key_not_working-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-System_freezes_for_60_seconds_and_then_wakes_back_up_or_hangs_after_waking_up" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#System_freezes_for_60_seconds_and_then_wakes_back_up_or_hangs_after_waking_up">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">7.10</span>
+					<span>System freezes for 60 seconds and then wakes back up or hangs after waking up</span>
+				</div>
+			</a>
+			
+			<ul id="toc-System_freezes_for_60_seconds_and_then_wakes_back_up_or_hangs_after_waking_up-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+</ul>
+</div>
+
+					</div>
+		</nav>
+			</div>
+		</div>
+		<div class="mw-content-container">
+			<main id="content" class="mw-body" style="margin: 0">
+				<header class="mw-body-header vector-page-titlebar">
+					<nav aria-label="Contents" class="vector-toc-landmark">
+						
+<div id="vector-page-titlebar-toc" class="vector-dropdown vector-page-titlebar-toc vector-button-flush-left">
+	<input type="checkbox" id="vector-page-titlebar-toc-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-page-titlebar-toc" class="vector-dropdown-checkbox " aria-label="Toggle the table of contents">
+	<label id="vector-page-titlebar-toc-label" for="vector-page-titlebar-toc-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"><span class="vector-icon mw-ui-icon-listBullet mw-ui-icon-wikimedia-listBullet"></span>
+
+<span class="vector-dropdown-label-text">Toggle the table of contents</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+							<div id="vector-page-titlebar-toc-unpinned-container" class="vector-unpinned-container">
+			</div>
+		
+	</div>
+</div>
+
+					</nav>
+					<h1 id="firstHeading" class="firstHeading mw-first-heading"><span class="mw-page-title-main">Power management/Suspend and hibernate</span></h1>
+							
+<div id="p-lang-btn" class="vector-dropdown mw-portlet mw-portlet-lang">
+	<input type="checkbox" id="p-lang-btn-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-p-lang-btn" class="vector-dropdown-checkbox mw-interlanguage-selector" aria-label="Go to an article in another language. Available in 6 languages">
+	<label id="p-lang-btn-label" for="p-lang-btn-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--action-progressive mw-portlet-lang-heading-6" aria-hidden="true"><span class="vector-icon mw-ui-icon-language-progressive mw-ui-icon-wikimedia-language-progressive"></span>
+
+<span class="vector-dropdown-label-text">6 languages</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+		<div class="vector-menu-content">
+			
+			<ul class="vector-menu-content-list">
+				
+				<li class="interlanguage-link interwiki-de mw-list-item"><a href="https://wiki.archlinux.de/title/Bereitschaft_und_Ruhezustand" title="Bereitschaft und Ruhezustand – Deutsch" lang="de" hreflang="de" data-title="Bereitschaft und Ruhezustand" data-language-autonym="Deutsch" data-language-local-name="Deutsch" class="interlanguage-link-target"><span>Deutsch</span></a></li>
+<li class="interlanguage-link interwiki-es mw-list-item"><a href="../../es/Power_management/Suspend_and_hibernate.html" title="Power management (Español)/Suspend and hibernate – español" lang="es" hreflang="es" data-title="Power management (Español)/Suspend and hibernate" data-language-autonym="Español" data-language-local-name="español" class="interlanguage-link-target"><span>Español</span></a></li>
+<li class="interlanguage-link interwiki-ja mw-list-item"><a href="https://wiki.archlinux.jp/index.php/%E9%9B%BB%E6%BA%90%E7%AE%A1%E7%90%86/%E3%82%B5%E3%82%B9%E3%83%9A%E3%83%B3%E3%83%89%E3%81%A8%E3%83%8F%E3%82%A4%E3%83%90%E3%83%8D%E3%83%BC%E3%83%88" title="電源管理/サスペンドとハイバネート – 日本語" lang="ja" hreflang="ja" data-title="電源管理/サスペンドとハイバネート" data-language-autonym="日本語" data-language-local-name="日本語" class="interlanguage-link-target"><span>日本語</span></a></li>
+<li class="interlanguage-link interwiki-pt mw-list-item"><a href="../../pt/Power_management/Suspend_and_hibernate.html" title="Power management (Português)/Suspend and hibernate – português" lang="pt" hreflang="pt" data-title="Power management (Português)/Suspend and hibernate" data-language-autonym="Português" data-language-local-name="português" class="interlanguage-link-target"><span>Português</span></a></li>
+<li class="interlanguage-link interwiki-ru mw-list-item"><a href="../../ru/Power_management/Suspend_and_hibernate.html" title="Power management (Русский)/Suspend and hibernate – русский" lang="ru" hreflang="ru" data-title="Power management (Русский)/Suspend and hibernate" data-language-autonym="Русский" data-language-local-name="русский" class="interlanguage-link-target"><span>Русский</span></a></li>
+<li class="interlanguage-link interwiki-zh-hans mw-list-item"><a href="https://wiki.archlinuxcn.org/wiki/Power_management/Suspend_and_hibernate" title="Power management/Suspend and hibernate – 中文（简体）" lang="zh-Hans" hreflang="zh-Hans" data-title="Power management/Suspend and hibernate" data-language-autonym="中文（简体）" data-language-local-name="中文（简体）" class="interlanguage-link-target"><span>中文（简体）</span></a></li>
+			</ul>
+			
+		</div>
+
+	</div>
+</div>
+</header>
+				<div class="vector-column-end">
+					<div class="vector-sticky-pinned-container">
+						<nav class="vector-page-tools-landmark" aria-label="Page tools">
+							<div id="vector-page-tools-pinned-container" class="vector-pinned-container">
+				
+							</div>
+		</nav>
+						<nav class="vector-appearance-landmark" aria-label="Appearance">
+							<div id="vector-appearance-pinned-container" class="vector-pinned-container">
+				<div id="vector-appearance" class="vector-appearance vector-pinnable-element">
+	<div class="vector-pinnable-header vector-appearance-pinnable-header vector-pinnable-header-pinned" data-feature-name="appearance-pinned" data-pinnable-element-id="vector-appearance" data-pinned-container-id="vector-appearance-pinned-container" data-unpinned-container-id="vector-appearance-unpinned-container">
+	<div class="vector-pinnable-header-label">Appearance</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-appearance.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-appearance.unpin">hide</button>
+</div>
+
+
+</div>
+
+							</div>
+		</nav>
+					</div>
+				</div>
+				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container>
+					<div class="vector-body-before-content">
+							<div class="mw-indicators">
+		</div>
+
+						<div id="siteSub" class="noprint">From ArchWiki</div>
+					</div>
+					<div id="contentSub"><div id="mw-content-subtitle"><div class="subpages">&lt; <bdi dir="ltr"><a href="../../en/Power_management.html" title="Power management">Power management</a></bdi>
+</div></div></div>
+					
+					
+					<div id="mw-content-text" class="mw-body-content">
+<div class="mw-content-ltr mw-parser-output" lang="en" dir="ltr">
+<div class="archwiki-template-meta-related-articles">
+<p>Related articles</p>
+<ul>
+<li><a href="../../en/Systemd.html" title="Systemd">systemd</a></li>
+<li><a href="../../en/Power_management.html" title="Power management">Power management</a></li>
+<li><a href="../../en/Power_management/Wakeup_triggers.html" class="mw-redirect" title="Wakeup triggers">Wakeup triggers</a></li>
+<li><a href="../../en/Swap.html" title="Swap">swap</a></li>
+</ul>
+</div>
+<p>There are <a rel="nofollow" class="external text" href="https://docs.kernel.org/admin-guide/pm/sleep-states.html">multiple methods</a> of suspending available, notably:
+</p>
+<dl>
+<dt>Suspend to idle</dt>
+<dd>Called <a rel="nofollow" class="external text" href="https://www.intel.com/content/www/us/en/docs/vtune-profiler/user-guide/2023-0/s0ix-states.html">S0ix</a> by Intel, <a rel="nofollow" class="external text" href="https://docs.microsoft.com/en-us/windows-hardware/design/device-experiences/modern-standby">Modern Standby</a> (previously "Connected Standby") by Microsoft and <a rel="nofollow" class="external text" href="https://docs.kernel.org/admin-guide/pm/sleep-states.html#suspend-to-idle">S2Idle</a> by the kernel. Designed to be used instead of the <b>S3</b> <a href="https://en.wikipedia.org/wiki/ACPI#Global_states" class="extiw" title="wikipedia:ACPI">sleeping state</a> for supported systems, by providing identical energy savings but a drastically reduced wake-up time. <div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> While this state is subject to battery drain issues on <a rel="nofollow" class="external text" href="https://www.dell.com/support/kbdoc/en-us/000143524/the-battery-drains-quicker-than-expected-on-a-dell-notebook-with-modern-standby-mode-enabled">Windows</a> or <a rel="nofollow" class="external text" href="https://support.apple.com/guide/mac-help/mh40773/mac">macOS</a> since they support waking devices in this state for network activity, the Linux software ecosystem does not currently make use of this feature and should be unaffected.</div>
+</dd>
+<dt>Suspend to RAM (aka suspend)</dt>
+<dd>The <b>S3</b> sleeping state as defined by ACPI. Works by cutting off power to most parts of the machine aside from the RAM, which is required to restore the machine's state. Because of the large power savings, it is advisable for laptops to automatically enter this mode when the computer is running on batteries and the lid is closed (or the user is inactive for some time).</dd>
+<dt>Suspend to disk (aka hibernate)</dt>
+<dd>The <b>S4</b> sleeping state as defined by ACPI. Saves the machine's state into <a href="../../en/Swap.html" class="mw-redirect" title="Swap space">swap space</a> and completely powers off the machine. When the machine is powered on, the state is restored. Until then, there is <a href="https://en.wikipedia.org/wiki/Standby_power" class="extiw" title="wikipedia:Standby power">zero</a> power consumption.</dd>
+<dt>Hybrid suspend (aka hybrid sleep)</dt>
+<dd>A hybrid of suspending and hibernating, sometimes called <b>suspend to both</b>. Saves the machine's state into swap space, but does not power off the machine. Instead, it invokes the default suspend. Therefore, if the battery is not depleted, the system can resume instantly. If the battery is depleted, the system can be resumed from disk, which is much slower than resuming from RAM, but the machine's state has not been lost.</dd>
+</dl>
+<p>The kernel provides basic functionality, and some high level interfaces provide tweaks to handle problematic hardware drivers/kernel modules (e.g. video card re-initialization).
+</p>
+<meta property="mw:PageProp/toc">
+<h2>
+<span id="Kernel_interface_.28swsusp.29"></span><span class="mw-headline" id="Kernel_interface_(swsusp)">Kernel interface (swsusp)</span>
+</h2>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> Although the kernel interface can be used directly, which is faster since no extra userspace handling is performed, it is advisable to use the <a href="#High_level_interface_(systemd)">high level interface</a>. It does a better job by performing additional safety checks, as well as providing pre- and post-suspend hook mechanisms in order to properly set the hardware clock, restore wireless, etc.</div>
+<p>It is possible to directly inform the in-kernel software suspend code (swsusp) to enter a suspended state; the exact method and state depends on the level of hardware support. On modern kernels, writing appropriate strings to <code>/sys/power/state</code> is the primary mechanism to trigger this suspend.
+</p>
+<p>See <a rel="nofollow" class="external text" href="https://docs.kernel.org/admin-guide/pm/sleep-states.html#basic-sysfs-interfaces-for-system-suspend-and-hibernation">kernel documentation</a> for details.
+</p>
+<h2>
+<span id="High_level_interface_.28systemd.29"></span><span class="mw-headline" id="High_level_interface_(systemd)">High level interface (systemd)</span>
+</h2>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> The goal of the high level interface is to provide binaries/scripts that can be invoked to perform suspend/hibernate and ways to hook extra preparatory/cleanup work into the said process. For automatically entering sleep state on power buttons, menu clicks, or laptop lid events, refer to <a href="../../en/Power_management.html#ACPI_events" title="Power management">Power management#ACPI events</a>.</div>
+<p><a href="../../en/Systemd.html" title="Systemd">systemd</a> provides native commands for suspend, hibernate and a hybrid suspend. This is the default interface used in Arch Linux.
+</p>
+<p><code>systemctl suspend</code> should work out of the box. For <code>systemctl hibernate</code> to work on your system you might need to follow the instructions at <a href="#Hibernation">#Hibernation</a>.
+</p>
+<p>There are also two modes combining suspend and hibernate:
+</p>
+<ul>
+<li>
+<code>systemctl hybrid-sleep</code> suspends the system both to RAM and disk, so a complete power loss does not result in lost data. This mode is also called <i>suspend to both</i>.</li>
+<li>
+<code>systemctl suspend-then-hibernate</code> initially suspends the system to RAM as long as possible, then wakes it with an RTC alarm and hibernates. The RTC alarm is set with <code>HibernateDelaySec</code> in <span class="plainlinks archwiki-template-man" title="$ man 5 systemd-sleep.conf"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd-sleep.conf.5">systemd-sleep.conf(5)</a></span>. The default value is set by estimating the battery discharge rate to keep the system with 5% of battery, or two hours without one. Said estimation is obtained from the change in battery level after the time specified by <code>SuspendEstimationSec</code> in <span class="plainlinks archwiki-template-man" title="$ man 5 systemd-sleep.conf"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd-sleep.conf.5">systemd-sleep.conf(5)</a></span>, at which the system will briefly wake up to do the measurement (a measure is also made if the system is manually woken up from suspension).</li>
+</ul>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> systemd v256 supports automatically selecting the most appropriate sleep operation with the new <code>systemctl sleep</code> command. By default, <code>suspend-then-hibernate</code> is used, and falls back to <code>suspend</code> and then <code>hibernate</code> if not supported. See <span class="plainlinks archwiki-template-man" title="$ man 1 systemctl"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemctl.1">systemctl(1)</a></span> for more information.</div>
+<p>See <a href="#Sleep_hooks">#Sleep hooks</a> for additional information on configuring suspend/hibernate hooks. Also see <span class="plainlinks archwiki-template-man" title="$ man 1 systemctl"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemctl.1">systemctl(1)</a></span>, <span class="plainlinks archwiki-template-man" title="$ man 8 systemd-sleep"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd-sleep.8">systemd-sleep(8)</a></span>, and <span class="plainlinks archwiki-template-man" title="$ man 7 systemd.special"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd.special.7">systemd.special(7)</a></span>.
+</p>
+<h2><span class="mw-headline" id="Changing_suspend_method">Changing suspend method</span></h2>
+<p>On systems where S0ix suspension does not provide the same energy savings as the regular S3 sleep, or when conserving energy is preferred to a quick resume time, changing the default suspend method is possible.
+</p>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> S0ix is supposed to provide identical or better energy savings as S3 sleep. See Intel blog posts <a rel="nofollow" class="external text" href="https://web.archive.org/web/20230614200816/https://01.org/blogs/qwang59/2018/how-achieve-s0ix-states-linux">How to achieve S0ix states in Linux</a>, <a rel="nofollow" class="external text" href="https://web.archive.org/web/20230614200306/https://01.org/blogs/qwang59/2020/linux-s0ix-troubleshooting">Linux S0ix Troubleshooting</a> and <a rel="nofollow" class="external text" href="https://web.archive.org/web/20230503102522/https://01.org/blogs/thac0/2019/idling-efficiently-linux-case-study">Idling Efficiently on Linux: A Case Study</a> to check if you can make it work as intended. Users on Intel systems can use <a rel="nofollow" class="external text" href="https://github.com/intel/S0ixSelftestTool">S0ixSelftestTool</a>. Users on AMD systems can use <a rel="nofollow" class="external text" href="https://git.kernel.org/pub/scm/linux/kernel/git/superm1/amd-debug-tools.git/about/">amd-debug-tools</a>.</div>
+<p>Run the following command to see all suspend methods hardware advertises support for (current method is shown in square brackets<a rel="nofollow" class="external autonumber" href="https://docs.kernel.org/admin-guide/pm/sleep-states.html#basic-sysfs-interfaces-for-system-suspend-and-hibernation">[1]</a>):
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">$ cat /sys/power/mem_sleep</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[s2idle] shallow deep
+</pre>
+<table class="wikitable sortable">
+<caption>Supported sleep states in mem_sleep
+</caption>
+<tbody>
+<tr>
+<th>mem_sleep string</th>
+<th>Sleep State
+</th>
+</tr>
+<tr>
+<td>s2idle</td>
+<td>
+<a rel="nofollow" class="external text" href="https://docs.kernel.org/admin-guide/pm/sleep-states.html#suspend-to-idle">suspend-to-idle</a>
+</td>
+</tr>
+<tr>
+<td>shallow</td>
+<td>
+<a rel="nofollow" class="external text" href="https://docs.kernel.org/admin-guide/pm/sleep-states.html#standby">standby</a>
+</td>
+</tr>
+<tr>
+<td>deep</td>
+<td>
+<a rel="nofollow" class="external text" href="https://docs.kernel.org/admin-guide/pm/sleep-states.html#suspend-to-ram">suspend-to-RAM</a>
+</td>
+</tr>
+</tbody>
+</table>
+<p>If your hardware does not advertise the <code>deep</code> sleep status, check first if your UEFI advertises some settings for it, generally under <i>Power</i> or <i>Sleep state</i> or similar wording, with options named <i>Windows 10</i>, <i>Windows and Linux</i> or <i>S3/Modern standby support</i> for S0ix, and <i>Legacy</i>, <i>Linux</i>, <i>Linux S3</i> or <i>S3 enabled</i> for S3 sleep. Failing that, you can keep using <code>s2idle</code>, consider using <a href="../../en/Power_management/Suspend_and_hibernate.html#Hibernation" class="mw-redirect" title="Hibernation">hibernation</a> or try to patch the <a href="../../en/DSDT.html" title="DSDT">DSDT</a> tables (or find a patched version online).
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> This last solution is likely going to cause issues. Manufacturers have stopped fixing bugs with the ACPI S3 state since systems shipping with Windows are encouraged to use "Modern standby" by default; if they have voluntarily not advertised it, it is probably broken in some way.</div>
+<p>Confirm that your hardware does not exhibit issues with S3 sleep by testing a few sleep cycles after changing the sleep method:
+</p>
+<pre># echo deep &gt; /sys/power/mem_sleep
+</pre>
+<p>If no issues have been found, you can make the change permanent through the <code>MemorySleepMode</code> directive in <span class="plainlinks archwiki-template-man" title="$ man 5 systemd-sleep.conf"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd-sleep.conf.5">systemd-sleep.conf(5)</a></span>:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/sleep.conf.d/mem-deep.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Sleep]
+MemorySleepMode=deep</pre>
+<p>or through the <code>mem_sleep_default=deep</code> <a href="../../en/Kernel_parameters.html" class="mw-redirect" title="Kernel parameter">kernel parameter</a>.
+</p>
+<p>In some opposite situations, faulty firmware advertises support for <code>deep</code> sleep, while only <code>s2idle</code> is supported. In this case, an alternative method for using <code>s2idle</code> is available through the <code>SuspendState</code> setting:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/sleep.conf.d/freeze.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Sleep]
+SuspendState=freeze</pre>
+<h2><span class="mw-headline" id="Hibernation">Hibernation</span></h2>
+<p>In order to use hibernation, you must create a <a href="../../en/Swap.html" title="Swap">swap</a> partition or file, <a href="#Configure_the_initramfs">configure the initramfs</a> so that the resume process will be initiated in early userspace, and specify the location of the swap space in a way that is available to the initramfs, e.g. <code>HibernateLocation</code> EFI variable defined by <a href="../../en/Systemd.html" title="Systemd">systemd</a> or <code>resume=</code> <a href="../../en/Kernel_parameters.html" class="mw-redirect" title="Kernel parameter">kernel parameter</a>. These three steps are described in detail below.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> 
+<ul>
+<li>See <a href="../../en/Dm-crypt/Swap_encryption.html#With_suspend-to-disk_support" title="Dm-crypt/Swap encryption">dm-crypt/Swap encryption#With suspend-to-disk support</a> when using <a href="../../en/Data-at-rest_encryption.html" class="mw-redirect" title="Encryption">encryption</a>.</li>
+<li>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=linux-hardened">linux-hardened</a></span> does not support hibernation, see <a rel="nofollow" class="external text" href="https://bugs.archlinux.org/task/63648">FS#63648</a>.</li>
+<li>Hibernating to <a href="../../en/Zram.html#Usage_as_swap" title="Zram">swap on zram</a> is not supported, even when zram is configured with a backing device on permanent storage. While <i>logind</i> will protect against attempts to hibernate into swap space on zram, as an alternative you can create multiple swap spaces. The memory will be stored into a swap file while another available swap space is reserved for zram. See details in <a href="#Maintaining_swap_file_for_hibernation_with_zram">#Maintaining swap file for hibernation with zram</a>.</li>
+</ul>
+</div>
+<h3>
+<span id="About_swap_partition.2Ffile_size"></span><span class="mw-headline" id="About_swap_partition/file_size">About swap partition/file size</span>
+</h3>
+<p>Even if your swap partition is smaller than RAM, you still have a good chance of hibernating successfully. See "image_size" in the <a rel="nofollow" class="external text" href="https://docs.kernel.org/admin-guide/pm/sleep-states.html?highlight=image_size#basic-sysfs-interfaces-for-system-suspend-and-hibernation">kernel documentation</a> for information on the <code>image_size</code> <span class="plainlinks archwiki-template-man" title="$ man 5 sysfs"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/sysfs.5">sysfs(5)</a></span> pseudo-file.
+</p>
+<p>You may either decrease the value of <code>/sys/power/image_size</code> to make the suspend image as small as possible (for small swap partitions), or increase it to possibly speed up the hibernation process. For systems with a large amount of RAM, smaller values may drastically increase the speed of resuming a hibernating system. <a href="../../en/Systemd.html#systemd-tmpfiles_-_temporary_files" title="Systemd">systemd#systemd-tmpfiles - temporary files</a> can be used to make this change persistent:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/tmpfiles.d/hibernation_image_size.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">#    Path                   Mode UID  GID  Age Argument
+w    /sys/power/image_size  -    -    -    -   0
+</pre>
+<p>The suspend image cannot span multiple swap partitions and/or swap files. It must fully fit in one swap partition or one swap file.<a rel="nofollow" class="external autonumber" href="https://docs.kernel.org/power/swsusp.html">[2]</a>
+</p>
+<h3><span class="mw-headline" id="Configure_the_initramfs">Configure the initramfs</span></h3>
+<ul><li>When using a busybox-based <a href="../../en/Arch_boot_process.html#initramfs" class="mw-redirect" title="Initramfs">initramfs</a>, which is the default, the <code>resume</code> hook is required in <code>/etc/mkinitcpio.conf</code>. Whether by label or by UUID, the swap partition is referred to with a udev device node, so the <code>resume</code> hook must go <i>after</i> the <code>udev</code> hook. This example was made starting from the default hook configuration:</li></ul>
+<dl><dd><pre>HOOKS=(base udev autodetect microcode modconf kms keyboard keymap consolefont block filesystems <b>resume</b> fsck)</pre></dd></dl>
+<dl><dd>Remember to <a href="../../en/Mkinitcpio.html#Image_creation_and_activation" class="mw-redirect" title="Regenerate the initramfs">regenerate the initramfs</a> for these changes to take effect.</dd></dl>
+<dl><dd><div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> If stacked storage is used for the swap space, e.g. <a href="../../en/Dm-crypt.html" title="Dm-crypt">dm-crypt</a>, <a href="../../en/RAID.html" title="RAID">RAID</a> or <a href="../../en/LVM.html" title="LVM">LVM</a>, the final mapped device must be available in the early userspace and before the resume process is initiated. I.e. the <code>resume</code> hook must be placed after hooks like <code>encrypt</code>, <code>lvm2</code>, etc. in such setups.</div></dd></dl>
+<ul><li>When an initramfs with the <code>systemd</code> hook is used, a resume mechanism is already provided, and no further hooks need to be added.</li></ul>
+<h3><span class="mw-headline" id="Pass_hibernate_location_to_initramfs">Pass hibernate location to initramfs</span></h3>
+<p>When the system hibernates, the memory image is dumped to the swap space, which also includes the state of mounted file systems. Therefore, the hibernate location must be made available to the initramfs, i.e. before the root file system is mounted for resuming from hibernate to work.
+</p>
+<p>Since <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=systemd">systemd</a></span> v255 and <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=mkinitcpio">mkinitcpio</a></span> v38, when the system is running on <a href="../../en/Unified_Extensible_Firmware_Interface.html" class="mw-redirect" title="UEFI">UEFI</a>, <span class="plainlinks archwiki-template-man" title="$ man 8 systemd-sleep"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd-sleep.8">systemd-sleep(8)</a></span> will automatically pick a suitable swap space to hibernate into, and the information of the used swap space is stored in <code>HibernateLocation</code> EFI variable. Upon next boot, <span class="plainlinks archwiki-template-man" title="$ man 8 systemd-hibernate-resume"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd-hibernate-resume.8">systemd-hibernate-resume(8)</a></span> reads the location off the EFI variable and the system resumes. This means the following steps are not necessary unless the system is using legacy <a href="../../en/Arch_boot_process.html#BIOS" title="Arch boot process">BIOS</a> or you want to choose a different swap space from the automatically-selected one.
+</p>
+<h4><span class="mw-headline" id="Manually_specify_hibernate_location">Manually specify hibernate location</span></h4>
+<p>The <a href="../../en/Kernel_parameters.html" class="mw-redirect" title="Kernel parameter">kernel parameter</a> <code>resume=<i>swap_device</i></code> can be used, where <i>swap_device</i> follows the <a href="../../en/Persistent_block_device_naming.html" title="Persistent block device naming">persistent block device naming</a>. For example:
+</p>
+<ul>
+<li><code>resume=UUID=4209c845-f495-4c43-8a03-5363dd433153</code></li>
+<li><code>resume="PARTLABEL=Swap partition"</code></li>
+<li>
+<code>resume=/dev/archVolumeGroup/archLogicalVolume</code> – if swap is on a <a href="../../en/LVM.html" title="LVM">LVM</a> logical volume (UUID and Label should also work)</li>
+</ul>
+<p>The kernel parameters will only take effect after rebooting. To hibernate right away, obtain the volume's major and minor device numbers from <a href="../../en/Device_file.html#lsblk" class="mw-redirect" title="Lsblk">lsblk</a> and echo them in format <code><i>major</i>:<i>minor</i></code> to <code>/sys/power/resume</code>.
+</p>
+<p>For example, if the swap device is <code>8:3</code>:
+</p>
+<pre># echo 8:3 &gt; /sys/power/resume
+</pre>
+<p>If using a swap file, additionally follow the procedures in <a href="#Acquire_swap_file_offset">#Acquire swap file offset</a>.
+</p>
+<h5><span class="mw-headline" id="Acquire_swap_file_offset">Acquire swap file offset</span></h5>
+<p>When using a <a href="../../en/Swap.html#Swap_file" class="mw-redirect" title="Swap file">swap file</a> for hibernation, the block device on which the file system lies should be specified in <code>resume=</code>, and additionally the physical offset of swap file must be specified through <code>resume_offset=</code> <a href="../../en/Kernel_parameters.html" class="mw-redirect" title="Kernel parameter">kernel parameter</a>. <a rel="nofollow" class="external autonumber" href="https://docs.kernel.org/power/swsusp-and-swap-files.html">[3]</a>
+</p>
+<p>On file systems other than <a href="../../en/Btrfs.html" title="Btrfs">Btrfs</a>, the value of <code>resume_offset=</code> can be obtained by running <code>filefrag -v <i>swap_file</i></code>. The output is in a table format and the required value is in the first row of the <code>physical_offset</code> column.
+</p>
+<p>For example:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;"># filefrag -v /swapfile</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">Filesystem type is: ef53
+File size of /swapfile is 4294967296 (1048576 blocks of 4096 bytes)
+ ext:     logical_offset:        physical_offset: length:   expected: flags:
+   0:        0..       0:      <b>38912</b>..     38912:      1:
+   1:        1..   22527:      38913..     61439:  22527:             unwritten
+   2:    22528..   53247:     899072..    929791:  30720:      61440: unwritten
+...
+</pre>
+<p>In the example the value of <code>resume_offset=</code> is the first <code>38912</code>.
+</p>
+<p>Alternatively, to directly acquire the offset value:
+</p>
+<pre># filefrag -v <i>swap_file</i> | awk '$1=="0:" {print substr($4, 1, length($4)-2)}'
+</pre>
+<p>For <a href="../../en/Btrfs.html" title="Btrfs">Btrfs</a>, do not try to use the <i>filefrag</i> tool, since the "physical" offset you get from <i>filefrag</i> is not the real physical offset on disk; there is a virtual disk address space in order to support multiple devices.<a rel="nofollow" class="external autonumber" href="https://bugzilla.kernel.org/show_bug.cgi?id=202803">[4]</a> Instead, use the <span class="plainlinks archwiki-template-man" title="$ man 8 btrfs-inspect-internal"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/btrfs-inspect-internal.8">btrfs-inspect-internal(8)</a></span> command. E.g.:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;"># btrfs inspect-internal map-swapfile -r <i>swap_file</i></pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">198122980
+</pre>
+<p>In this example, the kernel parameter would be <code>resume_offset=198122980</code>.
+</p>
+<p>To apply the change immediately (without rebooting), echo the resume offset to <code>/sys/power/resume_offset</code>. For example, if the offset is <code>38912</code>:
+</p>
+<pre># echo 38912 &gt; /sys/power/resume_offset
+</pre>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> The following command may be used to identify the backing device of the swap file: <code>findmnt -no UUID -T <i>swap_file</i></code>
+</div>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> For a stacked block device such as an encrypted container (LUKS), RAID or LVM, the <code>resume</code> parameter must point to the unlocked/mapped device that contains the file system with the swap file.</div>
+<h3><span class="mw-headline" id="Change_the_image_compression_algorithm_for_hibernation">Change the image compression algorithm for hibernation</span></h3>
+<p>Starting with Linux 6.9<a rel="nofollow" class="external autonumber" href="https://web.git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=3fec6e5961b77af6a952b77f5c2ea26f7513b216">[5]</a>, the image compression algorithm for hibernation can be changed. The default compression algorithm is selected based on the compile time option <code>CONFIG_HIBERNATION_DEF_COMP</code>, but it can be overridden at boot time and runtime.
+</p>
+<p>Different compression algorithms have different characteristics and hibernation may benefit when it uses any of these algorithms, especially when a secondary algorithm (LZ4) offers better decompression speeds over a default algorithm (LZO), which in turn reduces hibernation image restore time.
+</p>
+<p>You can override the default algorithm in two ways:
+</p>
+<p>1) Passing <code>hibernate.compressor</code> as a <a href="../../en/Kernel_parameters.html" class="mw-redirect" title="Kernel parameter">kernel parameter</a>:
+</p>
+<pre>hibernate.compressor=lzo
+hibernate.compressor=lz4
+</pre>
+<p>2) Specifying the algorithm at runtime:
+</p>
+<pre># echo lzo &gt; /sys/module/hibernate/parameters/compressor
+# echo lz4 &gt; /sys/module/hibernate/parameters/compressor
+</pre>
+<p>Currently <code>lzo</code> and <code>lz4</code> are the supported algorithms with LZO being the the default.
+</p>
+<h3><span class="mw-headline" id="Maintaining_swap_file_for_hibernation_with_zram">Maintaining swap file for hibernation with zram</span></h3>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> Instead of the following setup which involves multiple swap spaces, <a href="#Disable_zswap_writeback_to_use_the_swap_space_only_for_hibernation">zswap can be used</a> to establish a similar behavior.</div>
+<p>It is possible to solve the hibernation problem with zram RAM-only swap by maintaining two or more swap spaces at the same time. <a href="../../en/Systemd.html" title="Systemd">systemd</a> will always ignore zram block devices before triggering hibernation <a rel="nofollow" class="external autonumber" href="https://github.com/systemd/systemd/issues/16708#issuecomment-1632592375">[6]</a>, therefore keeping both spaces enabled should work without further intervention.
+</p>
+<p>After <a href="#Acquire_swap_file_offset">configured the swap file</a>, follow the <a href="../../en/Zram.html" title="Zram">zram</a> page. Make sure zram has the <b>higher swap priority</b> (e.g. <code>pri=100</code>).
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> 
+<ul>
+<li>
+<b>Do not</b> create an on-demand swap unit for hibernation as it is not officially supported. See systemd issues <a rel="nofollow" class="external text" href="https://github.com/systemd/systemd/issues/16708">#16708</a> and <a rel="nofollow" class="external text" href="https://github.com/systemd/systemd/issues/30083">#30083</a>.</li>
+<li>The kernel alone is responsible for reclaiming anonymous memory of pages and swapping them; not using a swap space can actually lead to bad memory usage. The user can manage priorities in reclaiming memory for certain applications in the form of <code>memory.low</code>, tunable by <a href="../../en/Cgroups.html" class="mw-redirect" title="Control groups">control groups</a>. Overall this is more effective than setting the <a href="../../en/Swap.html#Swappiness" class="mw-redirect" title="Swappiness">swappiness</a> parameter.</li>
+<li>Read the <a rel="nofollow" class="external text" href="https://www.kernel.org/doc/gorman/html/understand/understand014.html">Swap Management in kernel documentation</a> and the <a rel="nofollow" class="external text" href="https://chrisdown.name/2018/01/02/in-defence-of-swap.html">Chris Down's article - In defence of swap: common misconceptions</a> for more details.</li>
+</ul>
+</div>
+<h3><span class="mw-headline" id="Hibernation_into_a_thinly-provisioned_LVM_volume">Hibernation into a thinly-provisioned LVM volume</span></h3>
+<p>Hibernation into a thinly-provisioned <a href="../../en/LVM.html" title="LVM">LVM</a> volume is possible, but you have to make sure that the volume is fully allocated. Otherwise resuming from it will fail, see <a rel="nofollow" class="external text" href="https://bugs.archlinux.org/task/50703">FS#50703</a>.
+</p>
+<p>You can fully allocate the LVM volume by simply filling it with zeros. E.g.:
+</p>
+<pre># dd if=/dev/zero of=/dev/vg0/swap bs=1M status=progress
+</pre>
+<p>To verify the volume is fully allocated, you can use:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;"># lvs</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">  LV                   VG  Attr       LSize   Pool Origin    Data%  Meta%  Move Log Cpy%Sync Convert
+  swap                 vg0 Vwi-aot--- 10.00g  pool           100
+</pre>
+<p>A fully allocated volume will show up as having 100% data usage.
+</p>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Warning:</strong> Do not use <a href="../../en/Solid_state_drive.html#TRIM" class="mw-redirect" title="TRIM">TRIM</a> on thinly-provisioned swap volumes that are used for hibernation, i.e. do not use <code>discard</code> in <code>/etc/fstab</code> and the <code>-d</code>/<code>--discard</code> option of <i>swapon</i>. Otherwise the used space will be deallocated.</div>
+<h3><span class="mw-headline" id="Disable_zswap_writeback_to_use_the_swap_space_only_for_hibernation">Disable zswap writeback to use the swap space only for hibernation</span></h3>
+<p>In Linux 6.8, <a href="../../en/Zswap.html" title="Zswap">zswap</a> gained <a rel="nofollow" class="external text" href="https://git.kernel.org/linus/501a06fe8e4c185bbda371b8cedbdf1b23a633d8">a per-cgroup option to disable writeback</a>. By using systemd unit setting <code>MemoryZSwapWriteback</code> (see <span class="plainlinks archwiki-template-man" title="$ man 5 systemd.resource-control"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd.resource-control.5#Memory_Accounting_and_Control">systemd.resource-control(5) § Memory Accounting and Control</a></span>) in all possible unit types, zswap writeback can be effectively disabled entirely. This allows to use zswap just like zram with the added benefit of supporting hibernation.
+</p>
+<p>To avoid having to manually create twelve top level per-type drop-in files (for system and user <code>scope</code>, <code>service</code>, <code>slice</code>, <code>socket</code>, <code>mount</code>, <code>swap</code> units types), <a href="../../en/Help:Reading.html#Installation_of_packages" class="mw-redirect" title="Install">install</a> <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/zswap-disable-writeback/">zswap-disable-writeback</a></span><sup><small>AUR</small></sup>. <a href="../../en/Zswap.html#Toggling_zswap" title="Zswap">Enable zswap</a> and reboot for the settings to take effect.
+</p>
+<p>Try to perform memory intensive tasks and confirm that zswap has not written anything to disk:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;"># cat /sys/kernel/debug/zswap/written_back_pages</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">0
+</pre>
+<h2><span class="mw-headline" id="Sleep_hooks">Sleep hooks</span></h2>
+<h3><span class="mw-headline" id="Custom_systemd_units">Custom systemd units</span></h3>
+<p><a href="../../en/Systemd.html" title="Systemd">systemd</a> starts <code>suspend.target</code>, <code>hibernate.target</code>, <code>hybrid-sleep.target</code>, or <code>suspend-then-hibernate.target</code> for each sleep state, respectively. All the aforementioned targets pull in <code>sleep.target</code>. Any of the targets can be used to invoke <a href="../../en/Systemd.html#Writing_unit_files" title="Systemd">custom units</a> before or after suspend/hibernate. Separate files should be created for user actions and root/system actions. Examples:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/system/user-suspend@.service</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Unit]
+Description=User suspend actions
+Before=sleep.target
+
+[Service]
+User=%I
+Type=forking
+Environment=DISPLAY=:0
+ExecStartPre= -/usr/bin/pkill -u %u unison ; /usr/local/bin/music.sh stop
+ExecStart=/usr/bin/sflock
+ExecStartPost=/usr/bin/sleep 1
+
+[Install]
+WantedBy=sleep.target</pre>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/system/user-resume@.service</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Unit]
+Description=User resume actions
+After=suspend.target
+
+[Service]
+User=%I
+Type=simple
+ExecStart=/usr/local/bin/ssh-connect.sh
+
+[Install]
+WantedBy=suspend.target</pre>
+<p>Enable <code>user-suspend@<i>user</i>.service</code> and/or <code>user-resume@<i>user</i>.service</code> for the change to take effect.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> As screen lockers may return before the screen is "locked", the screen may flash on resuming from suspend. Adding a small delay via <code>ExecStartPost=/usr/bin/sleep 1</code> helps prevent this.</div>
+<p>For root/system actions:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/system/root-suspend.service</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Unit]
+Description=Local system suspend actions
+Before=sleep.target
+
+[Service]
+Type=simple
+ExecStart=-/usr/bin/pkill sshfs
+
+[Install]
+WantedBy=sleep.target</pre>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/system/root-resume.service</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Unit]
+Description=Local system resume actions
+After=suspend.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/systemctl restart mnt-media.automount
+
+[Install]
+WantedBy=suspend.target</pre>
+<h4>
+<span id="Combined_sleep.2Fresume_unit"></span><span class="mw-headline" id="Combined_sleep/resume_unit">Combined sleep/resume unit</span>
+</h4>
+<p>With the combined unit file, a single hook does all the work for different phases (sleep/resume) and for different targets.
+</p>
+<p>Example and explanation:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/system/wicd-sleep.service</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Unit]
+Description=Wicd sleep hook
+Before=sleep.target
+StopWhenUnneeded=yes
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=-/usr/share/wicd/daemon/suspend.py
+ExecStop=-/usr/share/wicd/daemon/autoconnect.py
+
+[Install]
+WantedBy=sleep.target</pre>
+<ul>
+<li>
+<code>RemainAfterExit=yes</code>: After started, the service is considered active until it is explicitly stopped.</li>
+<li>
+<code>StopWhenUnneeded=yes</code>: When active, the service will be stopped if no other active service requires it. In this specific example, it will be stopped after <code>sleep.target</code> is stopped.</li>
+<li>Because <code>sleep.target</code> has <code>StopWhenUnneeded=yes</code>, the hook is guaranteed to start/stop properly for different tasks.</li>
+</ul>
+<h3>
+<span id="Hooks_in_.2Fusr.2Flib.2Fsystemd.2Fsystem-sleep"></span><span class="mw-headline" id="Hooks_in_/usr/lib/systemd/system-sleep">Hooks in /usr/lib/systemd/system-sleep</span>
+</h3>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> This method is considered a hack by systemd according to <span class="plainlinks archwiki-template-man" title="$ man 8 systemd-sleep"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd-sleep.8">systemd-sleep(8)</a></span>. <i>systemd-sleep</i> will run these hooks concurrently rather than one after another. For a more well-defined interface with support for ordering, see <a href="#Custom_systemd_units">#Custom systemd units</a>.</div>
+<p><i>systemd-sleep</i> runs all executables in <code>/usr/lib/systemd/system-sleep/</code>, passing two arguments to each of them:
+</p>
+<ol>
+<li>Either <code>pre</code> or <code>post</code>, depending on whether the machine is going to sleep or waking up.</li>
+<li>
+<code>suspend</code>, <code>hibernate</code>, <code>hybrid-sleep</code> or <code>suspend-then-hibernate</code>, depending on which is being invoked.</li>
+</ol>
+<p>An environment variable called <code>SYSTEMD_SLEEP_ACTION</code> will be set and contain the sleep action that is processing. This is primarily helpful for <i>suspend-then-hibernate</i> where the value of the variable will be <code>suspend</code>, <code>hibernate</code>, or <code>suspend-after-failed-hibernate</code> in cases where hibernation has failed.
+</p>
+<p>The output of any custom script will be logged by <i>systemd-suspend.service</i>, <i>systemd-hibernate.service</i> or <i>systemd-hybrid-sleep.service</i>. You can see its output in <i>systemd</i>'s <a href="../../en/Systemd/Journal.html" class="mw-redirect" title="Journalctl">journalctl</a>:
+</p>
+<pre># journalctl -b -u systemd-suspend.service
+</pre>
+<p>An example of a custom sleep script:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/usr/lib/systemd/system-sleep/example.sh</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">#!/bin/sh
+case $1/$2 in
+  pre/*)
+    echo "Going to $2..."
+    ;;
+  post/*)
+    echo "Waking up from $2..."
+    ;;
+esac
+</pre>
+<p>Do not forget to make your script <a href="../../en/Help:Reading.html#Make_executable" class="mw-redirect" title="Executable">executable</a>.
+</p>
+<h2><span class="mw-headline" id="Tips_and_tricks">Tips and tricks</span></h2>
+<h3><span class="mw-headline" id="Unlocking_automatically_on_resume_in_trusted_locations">Unlocking automatically on resume in trusted locations</span></h3>
+<p>When resuming, you can automatically unlock your system if it is connected to certain devices or trusted Wi-Fi networks.
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/local-scripts/resume-unlock.sh</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">#!/usr/bin/bash
+# Unlock session if at a trusted location
+
+function trusted() {
+    # Check if connected to a trusted Wi-Fi network
+    [[ $(iwgetid -r) == <i>your_home_ssid</i> ]] \
+        &amp;&amp; return 0
+
+    # Check if trusted USB device is connected.
+    #lsusb -d <i>xxxx:xxxx</i> &amp;&amp; return 0
+
+    return 1 # Not trusted
+}
+
+for (( i=0; i &lt; 10; i++ )); do
+    if trusted; then
+        loginctl unlock-sessions
+        exit
+    fi
+    sleep 0.5
+done</pre>
+<p>Configure your desktop environment so that it locks on resume, and then create a <a href="#Sleep_hooks">sleep hook</a> that runs the above script after resuming. You also need to <a href="../../en/Help:Reading.html#Installation_of_packages" class="mw-redirect" title="Install">install</a> <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=wireless_tools">wireless_tools</a></span> to read the connected Wi-Fi SSID. If you also want to test for connected USB devices, uncomment the <code>lsusb -d ...</code> line in the script and fill in the ID of your trusted device. You can get the ID of your device by running <code>lsusb</code>.
+</p>
+<h3><span class="mw-headline" id="Disable_sleep_completely">Disable sleep completely</span></h3>
+<p>When using a device as e.g a server, suspending/hibernating might not be needed or it could even be undesired. Each sleep state can be disabled through <span class="plainlinks archwiki-template-man" title="$ man 5 systemd-sleep.conf"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd-sleep.conf.5">systemd-sleep.conf(5)</a></span>:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/sleep.conf.d/disable-sleep.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Sleep]
+AllowSuspend=no
+AllowHibernation=no
+AllowHybridSleep=no
+AllowSuspendThenHibernate=no</pre>
+<h3>
+<span id="Intel_Rapid_Start_Technology_.28IRST.29"></span><span class="mw-headline" id="Intel_Rapid_Start_Technology_(IRST)">Intel Rapid Start Technology (IRST)</span>
+</h3>
+<p>Intel Rapid Start Technology is a firmware method of hibernation that allows hibernating from sleep after a predefined interval or according to battery state. This should be faster and more reliable than regular hibernation as it is done by firmware instead of at the operating system level. Generally it must enabled in the firmware, and the firmware also provides support for setting the duration after suspend/battery event triggering hibernation. However, some devices–despite supporting IRST in the firmware–only allow it to be configured via Intel's Windows drivers. In such cases the intel-rst kernel module described below should be able to configure the events under Linux.
+</p>
+<p>With Intel Rapid Start Technology (IRST) enabled, resuming from a deep sleep takes "<a rel="nofollow" class="external text" href="https://mjg59.dreamwidth.org/26022.html">a few seconds longer than resuming from S3 but is far faster than resuming from hibernation</a>".
+</p>
+<p>Many Intel-based systems have firmware support for IRST but require a special partition on an SSD (rather than an HDD). OEM deployments of Windows may have a pre-existing IRST partition which can be retained during the Arch Linux installation process (rather than wiping and re-partitioning the whole SSD). It should show up as an unformatted partition equal in size to the system's RAM.
+</p>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Warning:</strong> The Intel Rapid Start partition is not encrypted; "Intel recommends disabling Intel Rapid Start Technology if you are using software-based disk encryption".<a rel="nofollow" class="external autonumber" href="https://www.intel.com/content/www/us/en/support/articles/000024080/technologies.html">[7]</a>
+</div>
+<p>If you intend to wipe and re-partition the whole drive (or have already done so), then the IRST partition must be recreated if you also plan on using the technology. This can be done by creating an empty partition equal in size to the system's RAM and by setting its partition type to <a href="https://en.wikipedia.org/wiki/GUID_Partition_Table#Partition_type_GUIDs" class="extiw" title="wikipedia:GUID Partition Table">GUID</a> <code>D3BFE2DE-3DAF-11DF-BA40-E3A556D89593</code> for a <a href="../../en/Partitioning.html#GUID_Partition_Table" class="mw-redirect" title="GPT">GPT</a> partition or <a href="https://en.wikipedia.org/wiki/Partition_type" class="extiw" title="wikipedia:Partition type">ID</a> <code>0x84</code> for an <a href="../../en/Partitioning.html#Master_Boot_Record" class="mw-redirect" title="MBR">MBR</a> partition. You may also need to enable support for IRST in your system's firmware settings.
+</p>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> The duration of time before IRST kicks in (after suspending) can be adjusted in the system's firmware settings.</div>
+<p>The duration of the IRST hibernation process (i.e., copying the "entire contents of RAM to a special partition") is dependent on the system's RAM size and SSD speed and can thus take 20–60 seconds. Some systems may indicate the process's completion with an LED indicator, e.g., when it stops blinking.
+</p>
+<p>Configuring IRST hibernation events in the Linux kernel requires <code>CONFIG_INTEL_RST</code> built-in or as a module. Once loaded via <code>modprobe intel_rst</code>, it should create the files <code>wakeup_events</code> and <code>wakeup_time</code> under <code>/sys/bus/acpi/drivers/intel_rapid_start/*/</code> that can be used for further configuration. This module is tersely documented, see the source <a rel="nofollow" class="external text" href="https://github.com/torvalds/linux/blob/143a6252e1b8ab424b4b293512a97cca7295c182/drivers/platform/x86/intel/rst.c">drivers/platform/x86/intel/rst.c</a> for more details.
+</p>
+<p>See also the <a rel="nofollow" class="external text" href="https://www.intel.com/content/www/us/en/support/articles/000024078/technologies.html">general Q&amp;A</a> and <a rel="nofollow" class="external text" href="https://www.intel.com/content/www/us/en/support/articles/000024273/technologies/intel-vpro-platform.html?wapkw=user%20guide%20Intel%20rapid%20start%20">user guides</a> for Intel Rapid Start Technology.
+</p>
+<h3><span class="mw-headline" id="Track_laptop_battery_energy_change_during_sleep_states">Track laptop battery energy change during sleep states</span></h3>
+<p>To measure power consumption in suspend states use <a rel="nofollow" class="external text" href="https://github.com/equaeghe/batenergy">Batenergy</a> script to log battery changes to the system journal. This allows to compare power consumption in S3 / S0x states or check after BIOS and kernel updates for regressions and fixes. The script needs <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=bc">bc</a></span> to be installed for calculation.
+</p>
+<h2><span class="mw-headline" id="Troubleshooting">Troubleshooting</span></h2>
+<h3><span class="mw-headline" id="ACPI_OS_NAME">ACPI_OS_NAME</span></h3>
+<p>You might want to tweak your <b>DSDT table</b> to make it work. See <a href="../../en/DSDT.html" title="DSDT">DSDT</a>.
+</p>
+<h3>
+<span id="Suspend.2Fhibernate_does_not_work.2C_or_does_not_work_consistently"></span><span class="mw-headline" id="Suspend/hibernate_does_not_work,_or_does_not_work_consistently">Suspend/hibernate does not work, or does not work consistently</span>
+</h3>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../../File:Inaccurate.svg" decoding="async" width="48" height="48" class="mw-file-element"></span></span><b>The factual accuracy of this article or section is disputed.</b></p>
+<div>
+<b>Reason:</b> This section mixes several unrelated causes. (Discuss in <a rel="nofollow" class="external text" href="../../en/Talk:Power_management/Suspend_and_hibernate.html">Talk:Power management/Suspend and hibernate</a>)</div>
+</div>
+<p>There have been many reports about the screen going black without easily viewable errors or the ability to do anything when going into and coming back from suspend and/or hibernate. These problems have been seen on both laptops and desktops. This is not an official solution, but switching to an older kernel, especially the LTS-kernel, will probably fix this.
+</p>
+<p>A problem may arise when using the hardware watchdog timer (disabled by default, see <code>RuntimeWatchdogSec=</code> in <span class="plainlinks archwiki-template-man" title="$ man 5 systemd-system.conf"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd-system.conf.5#OPTIONS">systemd-system.conf(5) § OPTIONS</a></span>). A buggy watchdog timer may reset the computer before the system finishes creating the hibernation image.
+</p>
+<p>Sometimes the screen goes black due to device initialization from within the initramfs. Removing any modules you might have in <a href="../../en/Mkinitcpio.html#MODULES" title="Mkinitcpio">Mkinitcpio#MODULES</a>, removing the <code>kms</code> hook and rebuilding the initramfs can possibly solve this issue, in particular with graphics drivers for <a href="../../en/Kernel_mode_setting.html#Early_KMS_start" title="Kernel mode setting">early KMS</a>. Initializing such devices before resuming can cause inconsistencies that prevents the system resuming from hibernation. This does not affect resuming from RAM. Also, check the blog article <a rel="nofollow" class="external text" href="https://web.archive.org/web/20230502010825/https://01.org/blogs/rzhang/2015/best-practice-debug-linux-suspend/hibernate-issues">best practices to debug suspend issues</a>.
+</p>
+<p>Moving from the <a href="../../en/ATI.html" title="ATI">ATI</a> video driver to the newer <a href="../../en/AMDGPU.html" title="AMDGPU">AMDGPU</a> driver could also help to make the hibernation and awakening process successful.
+</p>
+<p>For <a href="../../en/NVIDIA.html" title="NVIDIA">NVIDIA</a> users, <a href="../../en/Kernel_module.html#Blacklisting" class="mw-redirect" title="Blacklisting">blacklisting</a> the module <code>nvidiafb</code> might help. <a rel="nofollow" class="external autonumber" href="https://bbs.archlinux.org/viewtopic.php?id=234646">[8]</a>
+</p>
+<p>Laptops with an Intel CPU that load the <code>intel_lpss_pci</code> module for a touchpad may face kernel panic on resume (blinking caps lock) <a rel="nofollow" class="external autonumber" href="https://bbs.archlinux.org/viewtopic.php?id=231881">[9]</a>. The module needs to be added to <a href="../../en/Arch_boot_process.html#initramfs" class="mw-redirect" title="Initramfs">initramfs</a> as:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/mkinitcpio.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">MODULES=(... intel_lpss_pci ...)</pre>
+<p>Then <a href="../../en/Mkinitcpio.html#Image_creation_and_activation" class="mw-redirect" title="Regenerate the initramfs">regenerate the initramfs</a>.
+</p>
+<h4><span class="mw-headline" id="USB_device_errors">USB device errors</span></h4>
+<p>System may fail to suspend because of a USB device. You might see the following error:
+</p>
+<pre>PM: Some devices failed to suspend, or early wake event detected
+...
+xhci_hcd 0000:02:00.0: PM: failed to suspend async: error -16
+</pre>
+<p><i>lspci</i> may give you more information on the failing device:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">$ lspci -s 02:00.0</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">02:00.0 USB controller: Advanced Micro Devices, Inc. [AMD] 500 Series Chipset USB 3.1 XHCI Controller</pre>
+<p>Try disconnecting devices on that port.
+</p>
+<h3><span class="mw-headline" id="Wake-on-LAN">Wake-on-LAN</span></h3>
+<p>If <a href="../../en/Wake-on-LAN.html" title="Wake-on-LAN">Wake-on-LAN</a> is active, the network interface card will consume power even if the computer is hibernated.
+</p>
+<h3><span class="mw-headline" id="Instantaneous_wakeup_after_suspending">Instantaneous wakeup after suspending</span></h3>
+<p>See <a href="../../en/Power_management/Wakeup_triggers.html#Instantaneous_wakeup_after_suspending" class="mw-redirect" title="Wakeup triggers">Wakeup triggers#Instantaneous wakeup after suspending</a>.
+</p>
+<h3><span class="mw-headline" id="System_does_not_power_off_when_hibernating">System does not power off when hibernating</span></h3>
+<p>When you hibernate your system, the system should power off (after saving the state on the disk). On some firmware the S4 sleeping state does not work reliably. For example, instead of powering off, the system might reboot or stay on but unresponsive. If that happens, it might be instructive to set the <code>HibernateMode</code> to <code>shutdown</code> in <span class="plainlinks archwiki-template-man" title="$ man 5 sleep.conf.d"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/sleep.conf.d.5">sleep.conf.d(5)</a></span>:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/sleep.conf.d/hibernatemode.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Sleep]
+HibernateMode=shutdown</pre>
+<p>With the above configuration, if everything else is set up correctly, on invocation of a <code>systemctl hibernate</code> the machine will shut down, saving state to disk as it does so.
+</p>
+<h3>
+<span id="Operating_system_not_found_.28or_wrong_OS_booting.29_when_booting_after_hibernation"></span><span class="mw-headline" id="Operating_system_not_found_(or_wrong_OS_booting)_when_booting_after_hibernation">Operating system not found (or wrong OS booting) when booting after hibernation</span>
+</h3>
+<p>This can happen when the boot disk is an external disk, and seems to be caused by a BIOS/firmware limitation. The BIOS/firmware tries to boot from an internal disk, while hibernation was done from an OS on an external (or other) disk.
+</p>
+<p>Set <code>HibernateMode=shutdown</code> as shown in <a href="#System_does_not_power_off_when_hibernating">#System does not power off when hibernating</a> to solve the problem permanently. If you have already locked yourself out, you can try rebooting your system 4 times (wait for the error to appear each time), which on some BIOS'es forces a normal boot procedure.
+</p>
+<h3>
+<span id="Swap_file_in_.2Fhome"></span><span class="mw-headline" id="Swap_file_in_/home">Swap file in /home</span>
+</h3>
+<p>If the swap file is in <code>/home/</code>, <i>systemd-logind</i> will not be able to access it, giving the <code>Call to Hibernate failed: No such file or directory</code> warning message and resulting in a need for authentication on <code>systemctl hibernate</code>. This setup should be avoided, as it is considered <a rel="nofollow" class="external text" href="https://github.com/systemd/systemd/issues/31100">unsupported upstream</a>. See <a rel="nofollow" class="external text" href="https://github.com/systemd/systemd/issues/15354#issuecomment-611077881">systemd issue 15354</a> for two workarounds.
+</p>
+<h3><span class="mw-headline" id="PC_will_not_wake_from_sleep_on_A520I_and_B550I_motherboards">PC will not wake from sleep on A520I and B550I motherboards</span></h3>
+<p>On some motherboards with A520i and B550i chipsets, the system will not completely enter the sleep state or come out of it. Symptoms include the system entering sleep and the monitor turning off while internal LEDs on the motherboard or the power LED stay on. Subsequently, the system will not come back from this state and require a hard power off. If you have similar issues with AMD, first make sure your system is fully updated and check whether the AMD <a href="../../en/Microcode.html" title="Microcode">microcode</a> package is installed.
+</p>
+<p>Verify the line starting with <code>GPP0</code> has the enabled status:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">$ cat /proc/acpi/wakeup</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">Device	S-state	  Status   Sysfs node
+GP12	  S4	*enabled   pci:0000:00:07.1
+GP13	  S4	*enabled   pci:0000:00:08.1
+XHC0	  S4	*enabled   pci:0000:0b:00.3
+GP30	  S4	*disabled
+GP31	  S4	*disabled
+PS2K	  S3	*disabled
+<b>GPP0</b>	  S4	<b>*enabled</b>   pci:0000:00:01.1
+GPP8	  S4	*enabled   pci:0000:00:03.1
+PTXH	  S4	*enabled   pci:0000:05:00.0
+PT20	  S4	*disabled
+PT24	  S4	*disabled
+PT26	  S4	*disabled
+PT27	  S4	*disabled
+PT28	  S4	*enabled   pci:0000:06:08.0
+PT29	  S4	*enabled   pci:0000:06:09.0
+</pre>
+<p>If that is enabled, you can run the following command to disable it:
+</p>
+<pre># echo GPP0 &gt; /proc/acpi/wakeup
+</pre>
+<p>Now test by running <code>systemctl suspend</code> and let the system go to sleep. Then try to wake the system after a few seconds. If it works, you can make the workaround permanent. <a href="../../en/Help:Reading.html#Append,_add,_create,_edit" class="mw-redirect" title="Create">Create</a> a systemd <a href="../../en/Systemd.html#Writing_unit_files" title="Systemd">unit file</a>:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/system/toggle-gpp0-to-fix-wakeup.service</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Unit]
+Description="Disable GPP0 to fix suspend issue"
+
+[Service]
+ExecStart=/bin/sh -c "/bin/echo GPP0 &gt; /proc/acpi/wakeup"
+
+[Install]
+WantedBy=multi-user.target</pre>
+<p>Do a <a href="../../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Daemon-reload">daemon-reload</a> and <a href="../../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Start/enable">start/enable</a> the newly created unit.
+</p>
+<p>Alternatively, you can create a <a href="../../en/Udev.html" title="Udev">udev</a> rule. Assuming <code>GPP0</code>’s sysfs node is <code>pci:0000:00:01.1</code> like in the example, run <code>udevadm info -a -p /sys/bus/pci/devices/0000\:00\:01.1</code> to get the relevant information and create a udev rule like this one:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/udev/rules.d/10-gpp0-acpi-fix.rules</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">KERNEL=="0000:00:01.1", SUBSYSTEM=="pci", DRIVERS=="pcieport", ATTR{vendor}=="0x1022", ATTR{device}=="0x1483", ATTR{power/wakeup}="disabled"</pre>
+<p>The udev daemon is already watching for changes in your system by default. If needed you can <a href="../../en/Udev.html#Loading_new_rules" title="Udev">reload the rules manually</a>.
+</p>
+<h3><span class="mw-headline" id="Suspend_from_corresponding_laptop_Fn_key_not_working">Suspend from corresponding laptop Fn key not working</span></h3>
+<p>If, regardless of the setting in logind.conf, the sleep button does not work (pressing it does not even produce a message in syslog), then logind is probably not watching the keyboard device. <a rel="nofollow" class="external autonumber" href="https://lists.freedesktop.org/archives/systemd-devel/2015-February/028325.html">[10]</a> Do:
+</p>
+<pre># journalctl --grep="Watching system buttons"
+</pre>
+<p>You might see something like this:
+</p>
+<pre>May 25 21:28:19 vmarch.lan systemd-logind[210]: Watching system buttons on /dev/input/event2 (Power Button)
+May 25 21:28:19 vmarch.lan systemd-logind[210]: Watching system buttons on /dev/input/event3 (Sleep Button)
+May 25 21:28:19 vmarch.lan systemd-logind[210]: Watching system buttons on /dev/input/event4 (Video Bus)
+</pre>
+<p>Notice no keyboard device. List keyboard devices as follows:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">$ stat -c%N /dev/input/by-id/*-kbd</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">...
+/dev/input/by-id/usb-SIGMACHIP_USB_Keyboard-event-kbd -&gt; <b>../event6</b>
+...</pre>
+<p>Now obtain <code>ATTRS{name}</code> for the parent keyboard device <a rel="nofollow" class="external autonumber" href="https://systemd-devel.freedesktop.narkive.com/Rbi3rjNN/patch-1-2-logind-add-support-for-tps65217-power-button">[11]</a>. As an example, on the above list this keyboard device has <code><b>event6</b></code> as device input event, it can be used to search its respective attribute name:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;"># udevadm info -a /dev/input/<b>event6</b></pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">...
+KERNEL=="event6"
+...
+ATTRS{name}=="SIGMACHIP USB Keyboard"</pre>
+<p>Now write a custom udev rule to add the "power-switch" tag:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/udev/rules.d/70-power-switch-my.rules</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">ACTION=="remove", GOTO="power_switch_my_end"
+SUBSYSTEM=="input", KERNEL=="event*", ATTRS{name}=="SIGMACHIP USB Keyboard", TAG+="power-switch"
+LABEL="power_switch_my_end"</pre>
+<p>After <a href="../../en/Udev.html#Loading_new_rules" title="Udev">reloading the udev rules</a> and <a href="../../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Restart">restarting</a> <code>systemd-logind.service</code>, you should see <code>Watching system buttons on /dev/input/event6</code> in the journal of <i>logind</i>.
+</p>
+<h3><span class="mw-headline" id="System_freezes_for_60_seconds_and_then_wakes_back_up_or_hangs_after_waking_up">System freezes for 60 seconds and then wakes back up or hangs after waking up</span></h3>
+<p>Since systemd v256, systemd freezes <code>user.slice</code> before sleeping. This process can fail due to kernel bugs, particularly when KVM is in use.<a rel="nofollow" class="external autonumber" href="https://github.com/systemd/systemd/issues/33083">[12]</a><a rel="nofollow" class="external autonumber" href="https://github.com/systemd/systemd/issues/33626">[13]</a> 
+</p>
+<p>Messages in the logs will contain <code>Failed to freeze unit 'user.slice'</code> before sleep. When such an issue occurs, trying to login (start another session) would fail with:
+</p>
+<pre>pam_systemd(<i>process</i>:session): Failed to create session: Job 9876 for unit 'session-6.scope' failed with 'frozen'</pre>
+<p>To temporarily revert back to the old behavior, <a href="../../en/Systemd.html#Editing_provided_units" class="mw-redirect" title="Edit">edit</a> <code>systemd-suspend.service</code>, <code>systemd-hibernate.service</code>, <code>systemd-hybrid-sleep.service</code>, and <code>systemd-suspend-then-hibernate.service</code> with the following drop-in:
+</p>
+<pre>[Service]
+Environment=SYSTEMD_SLEEP_FREEZE_USER_SESSIONS=false</pre>
+</div>
+</div>
+					<div id="catlinks" class="catlinks" data-mw="interface">
+<div id="mw-normal-catlinks" class="mw-normal-catlinks">
+<a href="../../Special:Categories.html" title="Special:Categories">Category</a>: <ul><li><a href="../../en/Category:Power_management.html" title="Category:Power management">Power management</a></li></ul>
+</div>
+<div id="mw-hidden-catlinks" class="mw-hidden-catlinks mw-hidden-cats-hidden">Hidden category: <ul><li><a href="../../en/Category:Pages_or_sections_flagged_with_Template:Accuracy.html" title="Category:Pages or sections flagged with Template:Accuracy">Pages or sections flagged with Template:Accuracy</a></li></ul>
+</div>
+</div>
+				</div>
+			</main>
+			
+		</div>
+		<div class="mw-footer-container">
+			
+<footer id="footer" class="mw-footer" style="margin: 0">
+	<ul id="footer-info">
+	<li data-nosnippet="">Retrieved from "<a dir="ltr" href="https://wiki.archlinux.org/index.php?title=Power_management/Suspend_and_hibernate&amp;oldid=828418">https://wiki.archlinux.org/index.php?title=Power_management/Suspend_and_hibernate&amp;oldid=828418</a>"</li>
+<li id="footer-info-lastmod"> This page was last edited on 7 March 2025, at 19:55.</li>
+	<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+<br>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="https://terms.archlinux.org/docs/privacy-policy/">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="../../en/ArchWiki:About.html">About ArchWiki</a></li>
+	<li id="footer-places-disclaimers"><a href="../../en/ArchWiki:General_disclaimer.html">Disclaimers</a></li>
+	<li id="footer-places-archwiki-code-of-conduct"><a href="https://terms.archlinux.org/docs/code-of-conduct/" class="extiw" title="archlinux-service-agreements:code-of-conduct">Code of conduct</a></li>
+	<li id="footer-places-archwiki-terms-of-service"><a href="https://terms.archlinux.org/docs/terms-of-service/" class="extiw" title="archlinux-service-agreements:terms-of-service">Terms of service</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-copyrightico"><a href="https://www.gnu.org/copyleft/fdl.html" class="cdx-button cdx-button--fake-button cdx-button--size-large cdx-button--fake-button--enabled"><img src="/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" loading="lazy"></a></li>
+	<li id="footer-poweredbyico"><img src="/resources/assets/poweredby_mediawiki.svg" width="88" height="31" loading="lazy"></li>
+</ul>
+
+</footer>
+
+		</div>
+	</div> 
+</div> 
+<div class="vector-settings" id="p-dock-bottom">
+	<ul></ul>
+</div>
+</body>
+</html>

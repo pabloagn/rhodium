@@ -1,0 +1,1609 @@
+<!DOCTYPE html>
+<html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-sticky-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-0 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-disabled skin-theme-clientpref-day vector-toc-available" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>Data-at-rest encryption (Español) - ArchWiki</title>
+<link rel="stylesheet" href="../ArchWikiOffline.css">
+<meta name="ResourceLoaderDynamicStyles" content="">
+<meta name="generator" content="MediaWiki 1.43.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="max-image-preview:standard">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.25, maximum-scale=5.0">
+<link rel="search" type="application/opensearchdescription+xml" href="/rest.php/v1/search" title="ArchWiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.archlinux.org/api.php?action=rsd">
+<link rel="license" href="https://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="ArchWiki Atom feed" href="/index.php?title=Special:RecentChanges&amp;feed=atom">
+</head>
+<body class="skin--responsive skin-vector skin-vector-search-vue mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Data-at-rest_encryption_Español rootpage-Data-at-rest_encryption_Español skin-vector-2022 action-view">
+<a class="mw-jump-link" href="#bodyContent">Jump to content</a>
+<div class="vector-header-container">
+	</div>
+<div class="mw-page-container">
+	<div class="mw-page-container-inner">
+		<div class="vector-column-start">
+			<div class="vector-main-menu-container">
+		</div>
+	<div class="vector-sticky-pinned-container">
+				<nav id="mw-panel-toc" aria-label="Contents" data-event-name="ui.sidebar-toc" class="mw-table-of-contents-container vector-toc-landmark">
+					<div id="vector-toc-pinned-container" class="vector-pinned-container">
+					<div id="vector-toc" class="vector-toc vector-pinnable-element">
+	<div class="vector-pinnable-header vector-toc-pinnable-header vector-pinnable-header-pinned" data-feature-name="toc-pinned" data-pinnable-element-id="vector-toc">
+	<h2 class="vector-pinnable-header-label">Contents</h2>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-toc.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-toc.unpin">hide</button>
+</div>
+
+
+	<ul class="vector-toc-contents" id="mw-panel-toc-list">
+		<li id="toc-mw-content-text" class="vector-toc-list-item vector-toc-level-1">
+			<a href="#" class="vector-toc-link">
+				<div class="vector-toc-text">Beginning</div>
+			</a>
+		</li>
+		<li id="toc-¿Por_qué_utilizar_la_criptografía?" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#%C2%BFPor_qu%C3%A9_utilizar_la_criptograf%C3%ADa?">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">1</span>
+				<span>¿Por qué utilizar la criptografía?</span>
+			</div>
+		</a>
+		
+		<ul id="toc-¿Por_qué_utilizar_la_criptografía?-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Cifrar_datos_del_sistema" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Cifrar_datos_del_sistema">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">2</span>
+				<span>Cifrar datos del sistema</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Cifrar_datos_del_sistema-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Métodos_disponibles" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#M%C3%A9todos_disponibles">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">3</span>
+				<span>Métodos disponibles</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Métodos_disponibles-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Métodos disponibles subsection</span>
+			</button>
+		
+		<ul id="toc-Métodos_disponibles-sublist" class="vector-toc-list">
+			<li id="toc-Cifrar_sistemas_de_archivos_apilados" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Cifrar_sistemas_de_archivos_apilados">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1</span>
+					<span>Cifrar sistemas de archivos apilados</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Cifrar_sistemas_de_archivos_apilados-sublist" class="vector-toc-list">
+				<li id="toc-Optimizar_el_almacenamiento_en_la_nube" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Optimizar_el_almacenamiento_en_la_nube">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1.1</span>
+					<span>Optimizar el almacenamiento en la nube</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Optimizar_el_almacenamiento_en_la_nube-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Cifrar_dispositivos_de_bloques" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Cifrar_dispositivos_de_bloques">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.2</span>
+					<span>Cifrar dispositivos de bloques</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Cifrar_dispositivos_de_bloques-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Cifrar_dispositivo_de_bloques_vs_cifrar_de_sistema_de_archivos_apilados" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Cifrar_dispositivo_de_bloques_vs_cifrar_de_sistema_de_archivos_apilados">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.3</span>
+					<span>Cifrar dispositivo de bloques vs cifrar de sistema de archivos apilados</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Cifrar_dispositivo_de_bloques_vs_cifrar_de_sistema_de_archivos_apilados-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Cuadro_comparativo" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Cuadro_comparativo">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.4</span>
+					<span>Cuadro comparativo</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Cuadro_comparativo-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Preparación" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Preparaci%C3%B3n">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">4</span>
+				<span>Preparación</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Preparación-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Preparación subsection</span>
+			</button>
+		
+		<ul id="toc-Preparación-sublist" class="vector-toc-list">
+			<li id="toc-Elegir_una_configuración" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Elegir_una_configuraci%C3%B3n">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.1</span>
+					<span>Elegir una configuración</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Elegir_una_configuración-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Ejemplos" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Ejemplos">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.2</span>
+					<span>Ejemplos</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Ejemplos-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Elegir_una_frase_de_acceso_sólida" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Elegir_una_frase_de_acceso_s%C3%B3lida">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.3</span>
+					<span>Elegir una frase de acceso sólida</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Elegir_una_frase_de_acceso_sólida-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Preparar_el_disco" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Preparar_el_disco">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.4</span>
+					<span>Preparar el disco</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Preparar_el_disco-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Cómo_funciona_el_cifrado" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#C%C3%B3mo_funciona_el_cifrado">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">5</span>
+				<span>Cómo funciona el cifrado</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Cómo_funciona_el_cifrado-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Cómo funciona el cifrado subsection</span>
+			</button>
+		
+		<ul id="toc-Cómo_funciona_el_cifrado-sublist" class="vector-toc-list">
+			<li id="toc-Principio_básico" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Principio_b%C3%A1sico">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.1</span>
+					<span>Principio básico</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Principio_básico-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Claves,_archivo_de_claves_y_frase_de_acceso" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Claves,_archivo_de_claves_y_frase_de_acceso">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.2</span>
+					<span>Claves, archivo de claves y frase de acceso</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Claves,_archivo_de_claves_y_frase_de_acceso-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Metadatos_criptográficos" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Metadatos_criptogr%C3%A1ficos">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.3</span>
+					<span>Metadatos criptográficos</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Metadatos_criptográficos-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Algoritmos_de_cifrado_y_modalidades_de_operación" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Algoritmos_de_cifrado_y_modalidades_de_operaci%C3%B3n">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.4</span>
+					<span>Algoritmos de cifrado y modalidades de operación</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Algoritmos_de_cifrado_y_modalidades_de_operación-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Negabilidad_plausible" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Negabilidad_plausible">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.5</span>
+					<span>Negabilidad plausible</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Negabilidad_plausible-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+</ul>
+</div>
+
+					</div>
+		</nav>
+			</div>
+		</div>
+		<div class="mw-content-container">
+			<main id="content" class="mw-body" style="margin: 0">
+				<header class="mw-body-header vector-page-titlebar">
+					<nav aria-label="Contents" class="vector-toc-landmark">
+						
+<div id="vector-page-titlebar-toc" class="vector-dropdown vector-page-titlebar-toc vector-button-flush-left">
+	<input type="checkbox" id="vector-page-titlebar-toc-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-page-titlebar-toc" class="vector-dropdown-checkbox " aria-label="Toggle the table of contents">
+	<label id="vector-page-titlebar-toc-label" for="vector-page-titlebar-toc-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"><span class="vector-icon mw-ui-icon-listBullet mw-ui-icon-wikimedia-listBullet"></span>
+
+<span class="vector-dropdown-label-text">Toggle the table of contents</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+							<div id="vector-page-titlebar-toc-unpinned-container" class="vector-unpinned-container">
+			</div>
+		
+	</div>
+</div>
+
+					</nav>
+					<h1 id="firstHeading" class="firstHeading mw-first-heading"><span class="mw-page-title-main">Data-at-rest encryption (Español)</span></h1>
+							
+<div id="p-lang-btn" class="vector-dropdown mw-portlet mw-portlet-lang">
+	<input type="checkbox" id="p-lang-btn-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-p-lang-btn" class="vector-dropdown-checkbox mw-interlanguage-selector" aria-label="Go to an article in another language. Available in 5 languages">
+	<label id="p-lang-btn-label" for="p-lang-btn-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--action-progressive mw-portlet-lang-heading-5" aria-hidden="true"><span class="vector-icon mw-ui-icon-language-progressive mw-ui-icon-wikimedia-language-progressive"></span>
+
+<span class="vector-dropdown-label-text">5 languages</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+		<div class="vector-menu-content">
+			
+			<ul class="vector-menu-content-list">
+				
+				<li class="interlanguage-link interwiki-en mw-list-item"><a href="../en/Data-at-rest_encryption.html" title="Data-at-rest encryption – English" lang="en" hreflang="en" data-title="Data-at-rest encryption" data-language-autonym="English" data-language-local-name="English" class="interlanguage-link-target"><span>English</span></a></li>
+<li class="interlanguage-link interwiki-ja mw-list-item"><a href="https://wiki.archlinux.jp/index.php/%E4%BF%9D%E5%AD%98%E3%83%87%E3%83%BC%E3%82%BF%E6%9A%97%E5%8F%B7%E5%8C%96" title="保存データ暗号化 – 日本語" lang="ja" hreflang="ja" data-title="保存データ暗号化" data-language-autonym="日本語" data-language-local-name="日本語" class="interlanguage-link-target"><span>日本語</span></a></li>
+<li class="interlanguage-link interwiki-pt mw-list-item"><a href="../pt/Data-at-rest_encryption.html" title="Data-at-rest encryption – português" lang="pt" hreflang="pt" data-title="Data-at-rest encryption" data-language-autonym="Português" data-language-local-name="português" class="interlanguage-link-target"><span>Português</span></a></li>
+<li class="interlanguage-link interwiki-ru mw-list-item"><a href="../ru/Data-at-rest_encryption.html" title="Data-at-rest encryption – русский" lang="ru" hreflang="ru" data-title="Data-at-rest encryption" data-language-autonym="Русский" data-language-local-name="русский" class="interlanguage-link-target"><span>Русский</span></a></li>
+<li class="interlanguage-link interwiki-zh-hans mw-list-item"><a href="https://wiki.archlinuxcn.org/wiki/Data-at-rest_encryption" title="Data-at-rest encryption – 中文（简体）" lang="zh-Hans" hreflang="zh-Hans" data-title="Data-at-rest encryption" data-language-autonym="中文（简体）" data-language-local-name="中文（简体）" class="interlanguage-link-target"><span>中文（简体）</span></a></li>
+			</ul>
+			
+		</div>
+
+	</div>
+</div>
+</header>
+				<div class="vector-column-end">
+					<div class="vector-sticky-pinned-container">
+						<nav class="vector-page-tools-landmark" aria-label="Page tools">
+							<div id="vector-page-tools-pinned-container" class="vector-pinned-container">
+				
+							</div>
+		</nav>
+						<nav class="vector-appearance-landmark" aria-label="Appearance">
+							<div id="vector-appearance-pinned-container" class="vector-pinned-container">
+				<div id="vector-appearance" class="vector-appearance vector-pinnable-element">
+	<div class="vector-pinnable-header vector-appearance-pinnable-header vector-pinnable-header-pinned" data-feature-name="appearance-pinned" data-pinnable-element-id="vector-appearance" data-pinned-container-id="vector-appearance-pinned-container" data-unpinned-container-id="vector-appearance-unpinned-container">
+	<div class="vector-pinnable-header-label">Appearance</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-appearance.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-appearance.unpin">hide</button>
+</div>
+
+
+</div>
+
+							</div>
+		</nav>
+					</div>
+				</div>
+				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container>
+					<div class="vector-body-before-content">
+							<div class="mw-indicators">
+		</div>
+
+						<div id="siteSub" class="noprint">From ArchWiki</div>
+					</div>
+					<div id="contentSub"><div id="mw-content-subtitle"></div></div>
+					
+					
+					<div id="mw-content-text" class="mw-body-content">
+<div class="mw-content-ltr mw-parser-output" lang="es" dir="ltr">
+<div class="archwiki-template-box archwiki-template-box-note">Esta traducción de <a href="../en/Data-at-rest_encryption.html" title="Data-at-rest encryption">Data-at-rest encryption</a> fue revisada el <b>2019-09-18</b>. Si existen <a rel="nofollow" class="external text" href="https://wiki.archlinux.org/index.php?title=Data-at-rest_encryption&amp;diff=0&amp;oldid=578193">cambios</a> puede <a href="../es/ArchWiki:Translation_Team/Contributing.html" title="ArchWiki:Translation Team (Español)/Contributing (Español)">actualizarla</a> o avisar al <a href="../es/ArchWiki:Translation_Team.html" title="ArchWiki:Translation Team (Español)">equipo de traducción</a>.</div>
+<div class="archwiki-template-meta-related-articles">
+<p>Artículos relacionados</p>
+<ul>
+<li><a href="../es/Dm-crypt.html" title="Dm-crypt (Español)">dm-crypt (Español)</a></li>
+<li><a href="../en/VeraCrypt.html" class="mw-redirect" title="TrueCrypt">TrueCrypt</a></li>
+<li><a href="../en/ECryptfs.html" title="ECryptfs">eCryptfs</a></li>
+<li><a href="../en/EncFS.html" title="EncFS">EncFS</a></li>
+<li><a href="../en/Gocryptfs.html" title="Gocryptfs">gocryptfs</a></li>
+<li><a href="../en/Tomb.html" title="Tomb">Tomb</a></li>
+<li><a href="../en/Tcplay.html" title="Tcplay">tcplay</a></li>
+<li><a href="../en/GnuPG.html" title="GnuPG">GnuPG</a></li>
+<li><a href="../en/Self-encrypting_drives.html" class="mw-redirect" title="Self-Encrypting Drives">Self-Encrypting Drives</a></li>
+</ul>
+</div>
+<p>Este artículo trata sobre el software de <a href="https://en.wikipedia.org/wiki/es:Cifrado_de_disco" class="extiw" title="wikipedia:es:Cifrado de disco">cifrado de discos</a>, que cifra/descifra sobre la marcha los datos escritos en/desde un <a href="../es/Device_file.html#Dispositivos_de_bloque" class="mw-redirect" title="Block device (Español)">dispositivo de bloque</a>, <a href="../en/Partitioning.html" class="mw-redirect" title="Partitioning (Español)">partición</a> o directorio. Ejemplos de dispositivos de bloque son discos duros, unidades flash y DVD.
+</p>
+<p>El cifrado de disco solo debe ser visto como un complemento a los mecanismos de seguridad existentes en el sistema operativo — se enfoca a asegurar el acceso físico fuera de línea —, al tiempo que se delega en <i>otras</i> partes del sistema que proporcinan elementos confiables como la seguridad de la red y la seguridad del usuario basada en el control de acceso.
+</p>
+<p>Para el cifrado de disco completo (siglas en inglés FDE Full-disk encryption), vea <a href="../es/Dm-crypt/Encrypting_an_entire_system.html" title="Dm-crypt (Español)/Encrypting an entire system (Español)">dm-crypt (Español)/Encrypting an entire system (Español)</a>.
+</p>
+<meta property="mw:PageProp/toc">
+<h2>
+<span id=".C2.BFPor_qu.C3.A9_utilizar_la_criptograf.C3.ADa.3F"></span><span class="mw-headline" id="¿Por_qué_utilizar_la_criptografía?">¿Por qué utilizar la criptografía?</span>
+</h2>
+<p>El cifrado de discos garantiza que los archivos siempre se almacenan en el disco de forma cifrada. Los archivos solo están disponibles en forma legible para el sistema operativo y las aplicaciones, mientras el sistema está funcionando y desbloqueado por un usuario de confianza. Una persona no autorizada que mire el contenido del disco directamente solo encontrará datos aleatorios confusos en lugar de los archivos reales.
+</p>
+<p>Por ejemplo, esto sirve para evitar la visualización no autorizada de los datos cuando el ordenador o el disco duro se encuentre:
+</p>
+<ul>
+<li>situado en un lugar donde personas que no son de confianza pueden tener acceso a él mientras se está ausente,</li>
+<li>perdido o robado, cosa que puede ocurrir a portátiles, netbooks o dispositivos de almacenamiento externo,</li>
+<li>en el taller de reparaciones,</li>
+<li>desechados después del final de su vida útil.</li>
+</ul>
+<p>Además, el cifrado del disco también se puede utilizar para añadir un plus de seguridad frente a los intentos no autorizados de manipulación del sistema operativo, por ejemplo, instalando <a href="https://en.wikipedia.org/wiki/es:Keylogger" class="extiw" title="wikipedia:es:Keylogger">keyloggers</a> o <a href="https://en.wikipedia.org/wiki/es:Troyano_(inform%C3%A1tica)" class="extiw" title="wikipedia:es:Troyano (informática)">troyanos</a> por <a href="https://en.wikipedia.org/wiki/es:Hacker_(seguridad_inform%C3%A1tica)" class="extiw" title="wikipedia:es:Hacker (seguridad informática)">hacker</a> que pueden tener acceso físico al sistema, mientras se está ausente.
+</p>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Advertencia:</strong> El cifrado de discos <b> no</b> protege los datos contra todas las amenazas</div>
+<p>Se seguirá siendo vulnerable a:
+</p>
+<ul>
+<li>Los atacantes que pueden irrumpir en su sistema (por ejemplo, a través de Internet) mientras se está funcionando y después de que se han desbloqueado y montado las partes cifradas del disco.</li>
+<li>Los atacantes que son capaces de tener acceso físico al ordenador mientras está en ejecución (incluso si se utiliza un screenlocker), o muy poco <i>después </i> de haberlo ejecutado, si tienen los recursos para llevar a cabo un <a href="https://en.wikipedia.org/wiki/es:Ataque_de_arranque_en_fr%C3%ADo" class="extiw" title="wikipedia:es:Ataque de arranque en frío">ataque de arranque en frío</a>.</li>
+<li>Una entidad gubernamental, que no solo cuenta con los recursos para realizar fácilmente los ataques anteriores, sino que también puede simplemente obligar a renunciar a sus claves/frases de acceso mediante diversas técnicas de <a href="https://en.wikipedia.org/wiki/es:Coerci%C3%B3n" class="extiw" title="wikipedia:es:Coerción">coerción</a>. En la mayoría de los países no democráticos de todo el mundo, así como en los EE.UU. y el Reino Unido, puede ser legal para las agencias de seguridad acceder si tienen sospechas de que se podría estar ocultando algo de interés.</li>
+</ul>
+<p>Se requiere una fuerte configuración de cifrado de disco (por ejemplo, el cifrado completo del sistema con comprobación de su autenticidad y sin partición de arranque en modo texto plano) para tener una cierta ventaja contra los atacantes profesionales que son capaces de alterar el sistema <i>antes</i> de que lo utilice. Y aun así no es seguro de que realmente se pueda prevenir todo tipo de manipulación (por ejemplo, keyloggers tipo hardware). El mejor remedio podría ser el <a href="../en/Self-encrypting_drives.html" class="mw-redirect" title="Hardware-based full-disk encryption">hardware-based full-disk encryption</a>|cifrado de disco completo basado en hardware]] y la <a href="https://en.wikipedia.org/wiki/es:Trusted_Computing" class="extiw" title="wikipedia:es:Trusted Computing">computación confiable</a>.
+</p>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Advertencia:</strong> El cifrado de discos tampoco lo protegerá contra alguien que simplemente <a href="../en/Securely_wipe_disk.html" title="Securely wipe disk">borre el disco</a>. Es recomendable realizar <a href="../en/Synchronization_and_backup_programs.html" class="mw-redirect" title="Backup programs">copias de respaldo regulares</a> para mantener sus datos protegidos.</div>
+<h2><span class="mw-headline" id="Cifrar_datos_del_sistema">Cifrar datos del sistema</span></h2>
+<p>Cuando solo se cifra los datos del propio usuario (a menudo situado en el directorio <code>/home</code> o en un medio extraíble como un DVD de datos), el cifrado de datos es el uso más simple y menos intrusivo del cifrado de discos, pero tiene algunos inconvenientes significativos.
+En los sistemas informáticos modernos, hay muchos procesos ejecutados en segundo plano que puede almacenar, por ejemplo en caché, información sobre los datos del usuario o partes de datos en zonas no cifrados del disco duro, como:
+</p>
+<dl><dd><ul>
+<li>particiones swap
+<ul><li>(posibles remedios: desactivar swap o realizar el <a href="../en/Dm-crypt/Swap_encryption.html" title="Dm-crypt/Swap encryption">cifrado del espacio de intercambio</a> también)</li></ul>
+</li>
+<li>
+<code>/tmp</code> ( archivos temporales creados por las aplicaciones del usuario)
+<ul><li>(posibles remedios: evitar este tipo de aplicaciones; montar <code>/tmp</code> dentro de <a href="../es/Tmpfs.html" class="mw-redirect" title="Ramdisk (Español)">ramdisk</a>)</li></ul>
+</li>
+<li>
+<code>/var</code> (archivos de registros, bases de datos y similares; por ejemplo, <a href="../es/Locate.html" title="Locate (Español)">locate</a> almacena un índice de todos los nombres de los archivos en <code>/var/lib/plocate/plocate.db</code>)</li>
+</ul></dd></dl>
+<p>La solución es cifrar los datos del sistema y del usuario, evitando el acceso físico no autorizado a los datos privados que el sistema puede almacenar en la memoria caché. Sin embargo, esto tiene la desventaja de que el desbloqueo de las partes cifradas del disco tiene que ocurrir en el momento del arranque. Otro beneficio del cifrado de datos del sistema es que complica la instalación de malware como <a href="https://en.wikipedia.org/wiki/es:Keylogger" class="extiw" title="wikipedia:es:Keylogger">keyloggers</a> o <a href="https://en.wikipedia.org/wiki/es:Rootkit" class="extiw" title="wikipedia:es:Rootkit">rootkits</a> para alguien con acceso físico.
+</p>
+<h2>
+<span id="M.C3.A9todos_disponibles"></span><span class="mw-headline" id="Métodos_disponibles">Métodos disponibles</span>
+</h2>
+<p>Todos los métodos de cifrado de discos operan de tal manera que a pesar de que el disco en realidad posee los datos cifrados, el sistema operativo y las aplicaciones los «ven» como sus correspondientes datos legibles normales, siempre y cuando el contenedor cifrado (es decir, la parte lógica del disco que contiene los datos cifrados) haya sido «desbloqueado» y montado.
+</p>
+<p>Para que esto suceda, cierta «información secreta» (por lo general en forma de un archivo de claves y/o frase de acceso) debe ser suministrada por el usuario, de la cual, se deriva la clave de cifrado real (y se almacena en el llavero del kernel mientras dure la sesión). 
+</p>
+<p>Si no se está completamente familiarizado con este tipo de operaciones, lea también la sección siguiente <a href="#C%C3%B3mo_funciona_el_cifrado">#Cómo funciona el cifrado</a>.
+</p>
+<p>Los métodos de cifrado del disco disponibles se pueden separar en dos tipos por su capa de operación:
+</p>
+<h3><span class="mw-headline" id="Cifrar_sistemas_de_archivos_apilados">Cifrar sistemas de archivos apilados</span></h3>
+<p>Las soluciones del cifrado del sistema de archivos apilados se implementan como una capa que se superpone en la parte superior de un sistema de archivos existente, haciendo que todos los archivos escritos a una carpeta habilitada para cifrarlos se cifren sobre la marcha antes de que el sistema de archivos subyacente los grabe en el disco, y se descifran cuando el sistema de archivos los lee desde el disco. De esta manera, los archivos se almacenan en el sistema de archivos anfitrión en forma cifrada (lo que significa que sus contenidos y, por lo general, también sus nombres de archivo/carpeta, se sustituyen por datos aleatorios de más o menos la misma longitud), pero, aparte, siguen existiendo en ese sistema de archivos como lo harían sin cifrar, a modo de archivos normales / enlaces simbólicos / enlaces duros / etc.
+</p>
+<p>La forma en que se implementa consiste en que para desbloquear la carpeta donde se almacenan los archivos cifrados en bruto en el sistema de archivos anfitrión («directorio inferior»), ésta debe montarse ( utilizando un pseudo sistema de archivos apilados especial) sobre sí misma u, opcionalmente, en una ubicación diferente («directorio superior» ), donde los mismos archivos aparecen entonces en forma legible — hasta que se desmonta de nuevo o se apaga el sistema —.
+</p>
+<p>Las soluciones disponibles en esta categoría son <a href="../en/ECryptfs.html" title="ECryptfs">eCryptfs</a> y <a href="../en/EncFS.html" title="EncFS">EncFS</a>.
+</p>
+<h4><span class="mw-headline" id="Optimizar_el_almacenamiento_en_la_nube">Optimizar el almacenamiento en la nube</span></h4>
+<p>Si está implementando un sistema de cifrado de archivos apilados para lograr una sincronización con <a href="https://en.wikipedia.org/wiki/es:Prueba_de_conocimiento_cero" class="extiw" title="wikipedia:es:Prueba de conocimiento cero">prueba de conocimiento nulo</a> (en inglés «<i>Zero-Knowledge</i>») en ubicaciones controladas por terceros<sup><a href="https://en.wikipedia.org/wiki/Third_Party_Control_Protocol" class="extiw" title="wikipedia:Third Party Control Protocol">[*]</a></sup>, como los servicios de almacenamiento en la nube, es posible que desee considerar alternativas a eCryptfs y EncFS, ya que no están optimizados para la transmisión de archivos a través de Internet. Hay algunas soluciones diseñadas para este propósito en su lugar:
+</p>
+<ul>
+<li><a href="../en/Gocryptfs.html" title="Gocryptfs">gocryptfs</a></li>
+<li>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/cryptomator/">cryptomator</a></span><sup><small>AUR</small></sup> (multiplataforma)</li>
+<li><span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=cryfs">cryfs</a></span></li>
+</ul>
+<p>Tenga en cuenta que algunos servicios de almacenamiento en la nube ofrecen cifrado con prueba de conocimiento nulo directamente a través de su propia <a href="../en/List_of_applications/Internet.html#Cloud_synchronization_clients" title="List of applications/Internet">aplicaciones de cliete</a>.
+</p>
+<h3><span class="mw-headline" id="Cifrar_dispositivos_de_bloques">Cifrar dispositivos de bloques</span></h3>
+<p>Los métodos de cifrado de dispositivo de bloque, por el contrario, operan como una capa <i>debajo </i> del sistema de archivos y se aseguran que todo lo escrito en un determinado dispositivo de bloques (es decir, un disco completo o una partición o un archivo que actúa como un <a href="https://en.wikipedia.org/wiki/es:Loop_device" class="extiw" title="wikipedia:es:Loop device">dispositivo loop</a>) quede cifrado. Esto significa que mientras el dispositivo de bloque no está en línea, todo su contenido se parece a una amalgama de datos aleatorios, y no hay forma de determinar qué tipo de sistema de archivos y qué datos contiene. El acceso a los datos ocurre, de nuevo, mediante el montaje del contenedor protegido (en este caso el dispositivo de bloque) a una ubicación arbitraria con un método especial.
+</p>
+<p>Las siguientes soluciones de «cifrado de dispositivos de bloques» están disponibles en Arch Linux:
+</p>
+<dl>
+<dt>loop-AES</dt>
+<dd>loop-AES es un descendiente de cryptoloop y es una solución segura y rápida para el cifrado del sistema. Sin embargo, loop-AES se considera menos fácil de usar que otras opciones, ya que requiere soporte del kernel no estándar.</dd>
+</dl>
+<dl>
+<dt>dm-crypt</dt>
+<dd>
+<a href="../en/Dm-crypt.html" title="Dm-crypt">dm-crypt</a> es la funcionalidad de cifrado para el mapeado de dispositivos estándar proporcionada por el kernel de Linux. Puede ser utilizado directamente por aquellos que les gusta tener un control total sobre todos los aspectos de la partición y la gestión de claves. La gestión de dm -crypt se hace con la utilidad <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=cryptsetup">cryptsetup</a></span> en el espacio de usuario. Se puede utilizar para los siguientes tipos de cifrado de dispositivos de bloques: <i>LUKS</i> (por defecto), <i>plain</i>, y con carácterística limitadas por dispositivos <i>loopAES</i> y <i>Truecrypt</i>.
+<ul>
+<li>LUKS, utilizado por defecto, es una capa adicional eficaz que almacena toda la información necesaria de configuración para dm-crypt, la partición abstacta y la gestión de las claves, en el propio disco en un intento de mejorar la facilidad de uso y la seguridad criptográfica.</li>
+<li>la modalidad plain de dm-crypt, aun siendo la funcionalidad original del kernel, no tiene la misma capa de eficacia. Es más difícil de obtener la misma fuerza criptográfica con ella. Para lograrlo, las claves deben ser más largas (frases de acceso, archivos de claves) para conseguir dicho resultado. Sin embargo, tiene otras ventajas, que se describen en la sección <a href="#Cifrar_dispositivo_de_bloques_vs_cifrar_de_sistema_de_archivos_apilados">#Cifrar dispositivo de bloques vs cifrar de sistema de archivos apilados</a>.</li>
+</ul>
+</dd>
+</dl>
+<dl>
+<dt>TrueCrypt/VeraCrypt</dt>
+<dd>A portable format, supporting encryption of whole disks/partitions or file containers, with compatibility across all major operating systems. <a href="../en/VeraCrypt.html" class="mw-redirect" title="TrueCrypt">TrueCrypt</a> was discontinued by its developers in May 2014. The VeraCrypt fork was audited in 2016.</dd>
+</dl>
+<p>Para conocer las implicaciones prácticas de la capa de operación elegida, consulte la siguiente <a href="#Cifrar_dispositivo_de_bloques_vs_cifrar_de_sistema_de_archivos_apilados">tabla comparativa</a>, así como el escrito general para <a rel="nofollow" class="external text" href="http://ksouedu.com/doc/ecryptfs-utils/ecryptfs-faq.html#compare">eCryptfs</a>. Vea <a href="../es/Category:Encryption.html" title="Category:Encryption (Español)">Category:Encryption (Español)</a> para el contenido disponible de los métodos comparados más abajo, así como otras herramientas no incluidas en la tabla.
+</p>
+<h3><span class="mw-headline" id="Cifrar_dispositivo_de_bloques_vs_cifrar_de_sistema_de_archivos_apilados">Cifrar dispositivo de bloques vs cifrar de sistema de archivos apilados</span></h3>
+<table class="wikitable left-align-row-headers" style="text-align:center;">
+<tbody>
+<tr>
+<th>Aspecto
+</th>
+<th data-sort-value="6" style="background: #def; color: inherit; vertical-align: middle; text-align: center;">Cifrar dispositivos de bloques
+</th>
+<th data-sort-value="7" style="background: #dcf; color: inherit; vertical-align: middle; text-align: center;">Cifrar sistemas de archivos apilados
+</th>
+</tr>
+<tr>
+<th>Cifrados
+</th>
+<td>dispositivos de bloque completo
+</td>
+<td>archivos
+</td>
+</tr>
+<tr>
+<th>El contenedor para datos encriptados puede ser...
+</th>
+<td>un disco o partición de disco / un archivo que actúa como una partición virtual
+</td>
+<td>un directorio en un sistema de archivos existente
+</td>
+</tr>
+<tr>
+<th>Relación con el sistema de archivos
+</th>
+<td>opera debajo de la capa del sistema de archivos: no le importa si el contenido del dispositivo de bloque cifrado es un sistema de archivos, una tabla de particiones, una configuración de LVM o cualquier otra cosa
+</td>
+<td>agrega una capa adicional a un sistema de archivos existente, para cifrar/descifrar automáticamente los archivos cada vez que se escriben/leen
+</td>
+</tr>
+<tr>
+<th>Los metadatos del archivo (número de archivos, estructura de directorios, tamaños de archivos, permisos, mtimes, etc.) están cifrados
+</th>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sí
+</td>
+<td data-sort-value="1" style="background: #faa; color: inherit; vertical-align: middle; text-align: center;">No<br>(los nombres de archivo y directorios pueden estar encriptados)
+</td>
+</tr>
+<tr>
+<th>Se puede utilizar para cifrar de forma personalizada unidades de disco duro completas (incluidas las tablas de particionado)
+</th>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sí
+</td>
+<td data-sort-value="1" style="background: #faa; color: inherit; vertical-align: middle; text-align: center;">No
+</td>
+</tr>
+<tr>
+<th>Se puede utilizar para cifrar el espacio de intercambio
+</th>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sí
+</td>
+<td data-sort-value="1" style="background: #faa; color: inherit; vertical-align: middle; text-align: center;">No
+</td>
+</tr>
+
+<tr>
+<th>Se puede utilizar sin asignar previamente una cantidad fija de espacio para el contenedor de datos cifrados
+</th>
+<td data-sort-value="1" style="background: #faa; color: inherit; vertical-align: middle; text-align: center;">No
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sí
+</td>
+</tr>
+<tr>
+<th>Se puede utilizar para proteger sistemas de archivos existentes sin acceso a dispositivos de bloque, por ejemplo, NFS o Samba, almacenamiento en la nube, etc.
+</th>
+<td data-sort-value="1" style="background: #faa; color: inherit; vertical-align: middle; text-align: center;">No
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sí
+</td>
+</tr>
+<tr>
+<th>Permite realizar copias de seguridad de archivos cifrados sin conexión
+</th>
+<td data-sort-value="1" style="background: #faa; color: inherit; vertical-align: middle; text-align: center;">No
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sí
+</td>
+</tr>
+</tbody>
+</table>
+<h3><span class="mw-headline" id="Cuadro_comparativo">Cuadro comparativo</span></h3>
+<p>La columna «dm-crypt +/- LUKS» denota características de dm-crypt tanto para la modalidad de cifrado LUKS («+») como plain («-»). Si una característica específica requiere el uso de LUKS, esto se indica con «(con LUKS). De la misma manera «(sin LUKS)» indica que el uso de LUKS es contraproducente para lograr la función y el modo plain es el aconsejado.
+</p>
+<table class="wikitable left-align-row-headers" style="text-align:center; cell-padding:100px;">
+<tbody>
+<tr>
+<th style="background: #ddd; color: inherit; vertical-align: middle; text-align: center;">Resumen
+</th>
+<th>Loop-AES
+</th>
+<th>
+<a href="../en/Dm-crypt.html" title="Dm-crypt">dm-crypt</a> +/- LUKS
+</th>
+<th>
+<a href="../en/VeraCrypt.html" class="mw-redirect" title="TrueCrypt">TrueCrypt</a>
+</th>
+<th>VeraCrypt
+</th>
+<th>
+<a href="../en/ECryptfs.html" title="ECryptfs">eCryptfs</a>
+</th>
+<th>
+<a href="../en/EncFS.html" title="EncFS">EncFS</a>
+</th>
+<th>
+<a href="../en/Gocryptfs.html" title="Gocryptfs">gocryptfs</a>
+</th>
+</tr>
+<tr>
+<th>Tipo de cifrado
+</th>
+<td data-sort-value="6" style="background: #def; color: inherit; vertical-align: middle; text-align: center;">cifrado de dispositivos de bloques
+</td>
+<td data-sort-value="6" style="background: #def; color: inherit; vertical-align: middle; text-align: center;">cifrado de dispositivos de bloques
+</td>
+<td data-sort-value="6" style="background: #def; color: inherit; vertical-align: middle; text-align: center;">cifrado de dispositivos de bloques
+</td>
+<td data-sort-value="6" style="background: #def; color: inherit; vertical-align: middle; text-align: center;">cifrado de dispositivos de bloques
+</td>
+<td data-sort-value="7" style="background: #dcf; color: inherit; vertical-align: middle; text-align: center;">cifrado de sistemas de archivos apilados
+</td>
+<td data-sort-value="7" style="background: #dcf; color: inherit; vertical-align: middle; text-align: center;">cifrado de sistemas de archivos apilados
+</td>
+<td data-sort-value="7" style="background: #dcf; color: inherit; vertical-align: middle; text-align: center;">cifrado de sistemas de archivos apilados
+</td>
+</tr>
+<tr>
+<th>Nota
+</th>
+<td>el más longevo; posiblemente el más rápido; funciona en sistemas antiguos
+</td>
+<td>estándar de hecho para el cifrado de dispositivos de bloques en Linux; muy flexible
+</td>
+<td>solución muy portable, bien pulida y controlada pero abandonada
+</td>
+<td>bifurcación mantenida de TrueCrypt
+</td>
+<td>ligeramente más rápido respecto a EncFS; cifra archivos singulares portables a otros sistemas
+</td>
+<td>fácil de usar; permite la adminitración por usuario normal
+</td>
+<td>aspiring successor of EncFS
+</td>
+</tr>
+<tr>
+<th>Disponibilidad en Arch Linux
+</th>
+<td>necesita compilar manualmente un kernel personalizado
+</td>
+<td>
+<i>módulos del kernel:</i> ya cargados por el kernel por defecto; <i>herramientas:</i> <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=device-mapper">device-mapper</a></span>, <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=cryptsetup">cryptsetup</a></span>
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/truecrypt/">truecrypt</a></span><sup><small>AUR</small></sup><sup>[<a href="../en/Help:Procedures.html#Fix_broken_package_links" title="Help:Procedures">enlace roto</a>: package not found]</sup>
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=veracrypt">veracrypt</a></span>
+</td>
+<td>
+<i>módulos del kernel:</i> ya cargados por el kernel por defecto; <i>herramientas:</i> <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=ecryptfs-utils">ecryptfs-utils</a></span>
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=encfs">encfs</a></span>
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=gocryptfs">gocryptfs</a></span>
+</td>
+</tr>
+<tr>
+<th>Licencia
+</th>
+<td>GPL
+</td>
+<td>GPL
+</td>
+<td>TrueCrypt License 3.1
+</td>
+<td>Apache License 2.0, partes sujetas a la licencia de TrueCrypt v3.0
+</td>
+<td>GPL
+</td>
+<td>GPL
+</td>
+<td>MIT
+</td>
+</tr>
+<tr>
+<th>Cifrado implementado en...
+</th>
+<td>en el espacio del kernel
+</td>
+<td>en el espacio del kernel
+</td>
+<td>en el espacio del kernel
+</td>
+<td>en el espacio del kernel
+</td>
+<td>en el espacio del kernel
+</td>
+<td>en el espacio del usuario (utilizando <a href="../en/FUSE.html" title="FUSE">FUSE</a>)
+</td>
+<td>en el espacio del usuario (utilizando <a href="../en/FUSE.html" title="FUSE">FUSE</a>)
+</td>
+</tr>
+<tr>
+<th>Metadatos criptográficos almacedados en...
+</th>
+<td>?
+</td>
+<td>con LUKS: en la cabecera de LUKS
+</td>
+<td>al principio/final del dispositivo (descifrado)
+</td>
+<td>al principio/final del dispositivo (descifrado) (<a rel="nofollow" class="external text" href="https://www.veracrypt.fr/en/VeraCrypt%20Volume%20Format%20Specification.html">formato específico</a>)
+</td>
+<td>en la cabecera de cada archivo cifrado
+</td>
+<td>en el archivo de control al principio de cada contenedor EncFs
+</td>
+</tr>
+<tr>
+<th>Clave de cifrado almacenada en...
+</th>
+<td>?
+</td>
+<td>con LUKS: encabezado LUKS
+</td>
+<td>al principio/final del dispositivo
+</td>
+<td>al principio/final del dispositivo (<a rel="nofollow" class="external text" href="https://www.veracrypt.fr/en/VeraCrypt%20Volume%20Format%20Specification.html">formato específico</a>)
+</td>
+<td>el archivo de claves se puede almacenar en cualquier lugar
+</td>
+<td>el archivo de claves se puede almacenar en cualquier lugar
+<p><a rel="nofollow" class="external autonumber" href="https://github.com/rfjakob/encfs-next/blob/master/encfs/encfs.pod#environment-variables">[1]</a><a rel="nofollow" class="external autonumber" href="https://github.com/vgough/encfs/issues/48#issuecomment-69301831">[2]</a>
+</p>
+</td>
+</tr>
+<tr>
+<th style="background: #ddd; color: inherit; vertical-align: middle; text-align: center;">Características de usabilidad
+</th>
+<th>Loop-AES
+</th>
+<th>dm-crypt +/- LUKS
+</th>
+<th>TrueCrypt
+</th>
+<th>VeraCrypt
+</th>
+<th>eCryptfs
+</th>
+<th>EncFs
+</th>
+<th>gocryptfs
+</th>
+</tr>
+<tr>
+<th>Los usuarios normales pueden crear/eliminar los contenedores para datos cifrados
+</th>
+<td data-sort-value="1" style="background: #faa; color: inherit; vertical-align: middle; text-align: center;">No
+</td>
+<td data-sort-value="1" style="background: #faa; color: inherit; vertical-align: middle; text-align: center;">No
+</td>
+<td data-sort-value="1" style="background: #faa; color: inherit; vertical-align: middle; text-align: center;">No
+</td>
+<td data-sort-value="1" style="background: #faa; color: inherit; vertical-align: middle; text-align: center;">No
+</td>
+<td>limitada
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sí
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sí
+</td>
+</tr>
+<tr>
+<th>Proporciona una interfaz gráfica
+</th>
+<td data-sort-value="1" style="background: #faa; color: inherit; vertical-align: middle; text-align: center;">No
+</td>
+<td data-sort-value="1" style="background: #faa; color: inherit; vertical-align: middle; text-align: center;">No
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sí
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sí
+</td>
+<td data-sort-value="1" style="background: #faa; color: inherit; vertical-align: middle; text-align: center;">No
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sí
+<p><a href="../en/EncFS.html#Gnome_Encfs_Manager" title="EncFS">opcional</a>
+</p>
+</td>
+<td data-sort-value="1" style="background: #faa; color: inherit; vertical-align: middle; text-align: center;">No
+</td>
+</tr>
+<tr>
+<th>Soporte para montarse automáticamente al iniciar sesión
+</th>
+<td>?
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sí
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sí
+<p>con <a href="../en/VeraCrypt.html#Automounting_using_/etc/crypttab" class="mw-redirect" title="TrueCrypt">systemd y /etc/crypttab</a>
+</p>
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sí
+<p>con <a href="../en/VeraCrypt.html#Automounting_using_/etc/crypttab" class="mw-redirect" title="TrueCrypt">systemd y /etc/crypttab</a>
+</p>
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sí
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sí
+</td>
+</tr>
+<tr>
+<th>Soporte para desmontarse automáticamente en caso de inactividad
+</th>
+<td>?
+</td>
+<td>?
+</td>
+<td>?
+</td>
+<td>?
+</td>
+<td>?
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sí
+</td>
+<td>?
+</td>
+</tr>
+<tr>
+<th style="background: #ddd; color: inherit; vertical-align: middle; text-align: center;">Características de seguridad
+</th>
+<th>Loop-AES
+</th>
+<th>dm-crypt +/- LUKS
+</th>
+<th>TrueCrypt
+</th>
+<th>VeraCrypt
+</th>
+<th>eCryptfs
+</th>
+<th>EncFs
+</th>
+<th>gocryptfs
+</th>
+</tr>
+<tr>
+<th>Algoritmos de cifrado soportados
+</th>
+<td>AES
+</td>
+<td>AES, Anubis, CAST5/6, Twofish, Serpent, Camellia, Blowfish,… (cada algoritmo de cifrado es ofrecido por el Crypto API del kernel)
+</td>
+<td>AES, Twofish, Serpent
+</td>
+<td>AES, Twofish, Serpernt, Camellia, Kuznyechik
+</td>
+<td>AES, Blowfish, Twofish...
+</td>
+<td>AES, Blowfish, Twofish, y cualquier otro algoritmo de cifrado disponible en el sistema
+</td>
+<td>AES
+</td>
+</tr>
+<tr>
+<th>Integridad
+</th>
+<td>ninguna
+</td>
+<td>opcional en LUKS2
+</td>
+<td>ninguna
+</td>
+<td>ninguna
+</td>
+<td>ninguna
+</td>
+<td>ninguna (modo por defecto)<br>HMAC (modo paranoia)
+</td>
+<td>GCM
+</td>
+</tr>
+<tr>
+<th>Soporte para salting
+</th>
+<td>?
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sí<br>(con LUKS)
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sí
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sí
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sí
+</td>
+<td>?
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sí
+</td>
+</tr>
+<tr>
+<th>Soporte para múltiples sistemas de cifrado en cascada
+</th>
+<td>?
+</td>
+<td>No en un solo dispositivo, pero permite conectarse a dispositivos de bloques en cascada
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sí
+<p>AES-Twofish, AES-Twofish-Serpent, Serpent-AES, Serpent-Twofish-AES, Twofish-Serpent
+</p>
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sí
+<p>AES-Twofish, AES-Twofish-Serpent, Serpent-AES, Serpent-Twofish-AES, Twofish-Serpent
+</p>
+</td>
+<td>?
+</td>
+<td data-sort-value="1" style="background: #faa; color: inherit; vertical-align: middle; text-align: center;">No
+</td>
+<td data-sort-value="1" style="background: #faa; color: inherit; vertical-align: middle; text-align: center;">No
+</td>
+</tr>
+<tr>
+<th>Soporte para la difusión del key-slot
+</th>
+<td>?
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sí<br>(con LUKS)
+</td>
+<td>?
+</td>
+<td>?
+</td>
+<td>?
+</td>
+<td>?
+</td>
+<td>?
+</td>
+</tr>
+<tr>
+<th>Protección contra el forzado de clave
+</th>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sí
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sí<br>(sin LUKS)
+</td>
+<td>?
+</td>
+<td>?
+</td>
+<td>?
+</td>
+<td>?
+</td>
+<td>?
+</td>
+</tr>
+<tr>
+<th>Soporte para múltiples claves (revocables independientemente) para los mismos datos cifrados
+</th>
+<td>?
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sí<br>(con LUKS)
+</td>
+<td>?
+</td>
+<td>?
+</td>
+<td>?
+</td>
+<td data-sort-value="1" style="background: #faa; color: inherit; vertical-align: middle; text-align: center;">No
+</td>
+</tr>
+<tr>
+<th style="background: #ddd; color: inherit; vertical-align: middle; text-align: center;">Características de rendimiento
+</th>
+<th>Loop-AES
+</th>
+<th>dm-crypt +/- LUKS
+</th>
+<th>TrueCrypt
+</th>
+<th>VeraCrypt
+</th>
+<th>eCryptfs
+</th>
+<th>EncFs
+</th>
+<th>gocryptfs
+</th>
+</tr>
+<tr>
+<th>Soporte <a href="https://en.wikipedia.org/wiki/es:Multihilo" class="extiw" title="wikipedia:es:Multihilo">multithreading</a>
+</th>
+<td>?
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sí<br><a rel="nofollow" class="external autonumber" href="https://kernelnewbies.org/Linux_2_6_38#head-49f5f735853f8cc7c4d89e5c266fe07316b49f4c">[3]</a>
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sí
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sí
+</td>
+<td>?
+</td>
+<td>?
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sí
+</td>
+</tr>
+<tr>
+<th>Soporte para cifrado de hardware acelerado
+</th>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sí
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sí
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sí
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sí
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sí
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sí<br><a rel="nofollow" class="external autonumber" href="https://github.com/vgough/encfs/issues/118">[4]</a>
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sí
+</td>
+</tr>
+<tr>
+<th style="background: #ddd; color: inherit; vertical-align: middle; text-align: center;">Específico del cifrado de dispositivos de bloques
+</th>
+<th>Loop-AES
+</th>
+<th>dm-crypt +/- LUKS
+</th>
+<th>TrueCrypt
+</th>
+<th>VeraCrypt
+</th>
+<th colspan="3" rowspan="2" style="background: #ddd; color: inherit; vertical-align: middle; text-align: center;">
+</th>
+</tr>
+<tr>
+<th>Soporte para redimensionar (manualmente) el dispositivo de bloque cifrado in situ
+</th>
+<td>?
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sí
+</td>
+<td data-sort-value="1" style="background: #faa; color: inherit; vertical-align: middle; text-align: center;">No
+</td>
+<td data-sort-value="1" style="background: #faa; color: inherit; vertical-align: middle; text-align: center;">No
+</td>
+<td data-sort-value="1" style="background: #faa; color: inherit; vertical-align: middle; text-align: center;">No
+</td>
+</tr>
+<tr>
+<th style="background: #ddd; color: inherit; vertical-align: middle; text-align: center;">Específico del cifrado de sistemas de archivos apilados
+</th>
+<th colspan="4" rowspan="5" style="background: #ddd; color: inherit; vertical-align: middle; text-align: center;">
+</th>
+<th>eCryptfs
+</th>
+<th>EncFs
+</th>
+<th>gocryptfs
+</th>
+</tr>
+<tr>
+<th>Sistemas de archivos soportados
+</th>
+<td>ext3, ext4, xfs (con salvedades), jfs, nfs...
+</td>
+<td>ext3, ext4, xfs (con salvedades), jfs, nfs, cifs...
+<p><a rel="nofollow" class="external autonumber" href="https://github.com/vgough/encfs">[5]</a>
+</p>
+</td>
+<td>cualquiera
+</td>
+</tr>
+<tr>
+<th>Capacidad para cifrar los nombres de los archivos
+</th>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sí
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sí
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sí
+</td>
+</tr>
+<tr>
+<th>Capacidad para <i>no</i> cifrar los nombres de los archivos
+</th>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sí
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sí
+</td>
+<td data-sort-value="1" style="background: #faa; color: inherit; vertical-align: middle; text-align: center;">No
+</td>
+</tr>
+<tr>
+<th>Optimizado para el manejo de archivos dispersos
+</th>
+<td data-sort-value="1" style="background: #faa; color: inherit; vertical-align: middle; text-align: center;">No
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sí
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sí
+</td>
+</tr>
+<tr>
+<th style="background: #ddd; color: inherit; vertical-align: middle; text-align: center;">compatibilidad y prevalencia
+</th>
+<th>Loop-AES
+</th>
+<th>dm-crypt +/- LUKS
+</th>
+<th>TrueCrypt
+</th>
+<th>VeraCrypt
+</th>
+<th>eCryptfs
+</th>
+<th>EncFs
+</th>
+<th>gocryptfs
+</th>
+</tr>
+<tr>
+<th>Versiones del kernel de Linux que lo soportan
+</th>
+<td>2.0 o posterior
+</td>
+<td>modalidad CBC a partir de 2.6.4, ESSIV 2.6.10, LRW 2.6.20, XTS 2.6.24
+</td>
+<td>?
+</td>
+<td>?
+</td>
+<td>?
+</td>
+<td>?
+</td>
+<td>2.4 o posterior
+</td>
+</tr>
+<tr>
+<th>Los datos cifrados también pueden ser leídos desde Windows
+</th>
+<td>?
+</td>
+<td>?
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sí
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sí
+</td>
+<td>?
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sí<br><a rel="nofollow" class="external autonumber" href="https://github.com/vgough/encfs/wiki/Windows">[6]</a>
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sí (puerto cppcryptfs
+</td>
+</tr>
+<tr>
+<th>Los datos cifrados también pueden ser leídos desde Mac OS X
+</th>
+<td>?
+</td>
+<td>?
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sí
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sí
+</td>
+<td>?
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sí<br><a rel="nofollow" class="external autonumber" href="https://github.com/vgough/encfs/wiki/Mac-OS-X">[7]</a>
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sí (beta quality)
+</td>
+</tr>
+<tr>
+<th>Los datos cifrados también pueden ser leídos desde FreeBSD
+</th>
+<td>?
+</td>
+<td>?
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sí
+<p>(con VeraCrypt)
+</p>
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sí<br>
+</td>
+<td>?
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sí<br><a rel="nofollow" class="external autonumber" href="https://www.freshports.org/sysutils/fusefs-encfs/">[8]</a>
+</td>
+<td>?
+</td>
+</tr>
+
+<tr>
+<th>Utilizado por
+</th>
+<td>?
+</td>
+<td>Instalador de Debian/Ubuntu (cifrado del sistema)<br>Instalador de Fedora
+</td>
+<td>?
+</td>
+<td>?
+</td>
+<td>Instalador de Ubuntu (cifrado del directorio home)<br>Chromium OS (cifrado de los datos del usuario en la memoria caché <a rel="nofollow" class="external autonumber" href="https://www.chromium.org/chromium-os/chromiumos-design-docs/protecting-cached-user-data">[9]</a>)
+</td>
+<td>?
+</td>
+<td>?
+</td>
+</tr>
+</tbody>
+</table>
+<ol><li>Un solo archivo en esos sistemas de archivos podría usarse como un contenedor (dispositivo loop virtual) pero en realidad uno ya no estaría usando el sistema de archivos (y las características que proporciona)</li></ol>
+<h2>
+<span id="Preparaci.C3.B3n"></span><span class="mw-headline" id="Preparación">Preparación</span>
+</h2>
+<h3>
+<span id="Elegir_una_configuraci.C3.B3n"></span><span class="mw-headline" id="Elegir_una_configuración">Elegir una configuración</span>
+</h3>
+<p>Qué configuración de cifrado de disco es apropiada para cada usuario dependerá de los propósitos del usuario (léase <a href="#%C2%BFPor_qu%C3%A9_utilizar_la_criptograf%C3%ADa?">#¿Por qué utilizar la criptografía?</a> más arriba) y de los parámetros del sistema.
+</p>
+<p>Entre otras, tendrá que responder a las siguientes preguntas:
+</p>
+<dl><dt>¿Contra qué tipo de «ataques» quiere proteger su sistema?</dt></dl>
+<ul>
+<li>Usuario ocasional de ordenador husmeando el disco cuando el sistema está apagado / robado / etc.</li>
+<li>Criptoanalista profesional que puede conseguir acceso de lectura/escritura repetidamente al sistema antes y después de usarse</li>
+<li>Ninguno de los anteriores</li>
+</ul>
+<dl><dt>¿Qué estrategia de cifrado desea emplear?</dt></dl>
+<ul>
+<li>Cifrado de datos</li>
+<li>Cifrado del sistema</li>
+<li>Cualquiera de los anteriores</li>
+</ul>
+<dl><dt>¿Cómo deben tratarse swap, <code>/tmp</code>, etc.?</dt></dl>
+<ul>
+<li>Ignorar, y con la esperanza de que no se hayan filtrado datos</li>
+<li>Desactivar o montar como disco de memoria</li>
+<li>Cifrar <i>(como parte del cifrado del disco completo o por separado)</i>
+</li>
+</ul>
+<dl><dt>¿Cómo deben desbloquearse las partes del disco cifradas?</dt></dl>
+<ul>
+<li>Con contraseña/frase de acceso <i>(igual que la contraseña de inicio de sesión, o por separado)</i>
+</li>
+<li>Con archivo de claves <i>(por ejemplo, en una memoria USB, que se mantenga en un lugar seguro o portarlo uno mismo)</i>
+</li>
+<li>Con ambas</li>
+</ul>
+<dl><dt>¿<i>Cuándo</i> deben desbloquearse las partes del disco cifradas?</dt></dl>
+<ul>
+<li>Antes del arranque</li>
+<li>Durante del arranque</li>
+<li>Al iniciar sesión</li>
+<li>Manualmente bajo demanda <i>(después de iniciar sesión)</i>
+</li>
+</ul>
+<dl><dt>¿Cómo deben ser acomodados varios usuarios?</dt></dl>
+<ul>
+<li>No hacer nada</li>
+<li>Usar una clave/frase de acceso compartida</li>
+<li>Usar claves/frases de acceso emitidas de forma independiente y revocables para la misma parte del disco cifrado</li>
+<li>Crear partes cifradas separadas del disco para los diferentes usuarios</li>
+</ul>
+<p>A continuación, se puede pasar a tomar las decisiones técnicas necesarias (vea <a href="#M%C3%A9todos_disponibles">#Métodos disponibles</a> más arriba, y <a href="#C%C3%B3mo_funciona_el_cifrado">#Cómo funciona el cifrado</a> más adelante), en relación con:
+</p>
+<ul>
+<li>elegir entre cifrar sistemas de archivos apilados <i>versus</i> cifrar dispositivos de bloques</li>
+<li>la gestión de las claves</li>
+<li>el algoritmo de cifrado y la modalidad de la operación</li>
+<li>el almacenamiento de los metadatos</li>
+<li>la ubicación del «directorio inferior» (en caso de cifrado de sistemas de archivos apilados)</li>
+</ul>
+<h3><span class="mw-headline" id="Ejemplos">Ejemplos</span></h3>
+<p>En la práctica, podría resultar algo así:
+</p>
+<dl>
+<dt>Ejemplo 1</dt>
+<dd>cifrado sencillo de datos (en disco duro interno), utilizando una carpeta virtual denominada «~/Private» en el directorio home del usuario, cifrado con <a href="../en/EncFS.html" title="EncFS">EncFS</a>
+<ul>
+<li>las versiones cifradas de los archivos serán almacenadas en la carpeta ~/.Private del disco</li>
+<li>desbloqueada bajo demanda con una frase de acceso dedicada<br>
+</li>
+</ul>
+</dd>
+</dl>
+<dl>
+<dt>Ejemplo 2</dt>
+<dd>cifrado parcial del sistema con el <b>directorio home</b> de cada usuario cifrado con <a href="../en/ECryptfs.html" title="ECryptfs">ECryptfs</a>
+<ul>
+<li>desbloqueado por el respectivo usuario al iniciar sesión, utilizando la frase de acceso</li>
+<li>las particiones <code>swap</code> and <code>/tmp</code> serán cifradas con <a href="../es/Dm-crypt.html" title="Dm-crypt (Español)">dm-crypt (Español)</a>, utilizando una clave de un solo uso generada automáticamente para casa sesión</li>
+<li>indexación/caché de contenidos de <code>/home</code> por <i>slocate</i> (y aplicaciones similares) desactivada.</li>
+</ul>
+</dd>
+</dl>
+<dl>
+<dt>Ejemplo 3</dt>
+<dd>cifrado completo del sistema — disco duro entero, excepto la partición <code>/boot</code>) —, (sin embargo, <code>/boot</code> puede ser cifrado con <a href="../es/Dm-crypt/Encrypting_an_entire_system.html#Cifrar_partici%C3%B3n_de_arranque_(GRUB)" class="mw-redirect" title="Dm-crypt/Encrypting an entire system (Español)">GRUB</a>) cifrado con <a href="../es/Dm-crypt.html" title="Dm-crypt (Español)">Dm-crypt (Español)</a>
+<ul>
+<li>desbloqueado durante el arranque, mediante frases de contraseña o desde una memoria USB con un archivo de claves</li>
+<li>se pueden tener diferentes frases/claves por usuario, independientes y revocables</li>
+<li>el cifrado puede abarcar múltiples unidades o permitir flexibilidad en el esquema de particionado con <a href="../es/Dm-crypt/Encrypting_an_entire_system.html#LUKS_sobre_LVM" class="mw-redirect" title="Dm-crypt/Encrypting an entire system (Español)">LUKS sobre LVM</a>
+</li>
+</ul>
+</dd>
+</dl>
+<dl>
+<dt>Ejemplo 4</dt>
+<dd>cifrado completo del sistema oculto/con plain — disco duro entero —, cifrado con <a href="../es/Dm-crypt.html" title="Dm-crypt (Español)">plain dm-crypt</a>
+<ul>
+<li>arranque desde USB, usando frase de acceso dedicada + lápiz USB que almacena un archivo de claves</li>
+<li>datos revisados ​​antes de montar la partición</li>
+<li>
+<code>/boot</code> se encuentra en la mencionada memoria USB</li>
+</ul>
+</dd>
+</dl>
+<p>Otras muchas combinaciones son posibles, por supuesto. Se debe planificar cuidadosamente qué tipo de configuración será la apropiada para su sistema.
+</p>
+<h3>
+<span id="Elegir_una_frase_de_acceso_s.C3.B3lida"></span><span class="mw-headline" id="Elegir_una_frase_de_acceso_sólida">Elegir una frase de acceso sólida</span>
+</h3>
+<p>Véase <a href="../en/Security.html#Passwords" title="Security">Security#Passwords</a>.
+</p>
+<h3><span class="mw-headline" id="Preparar_el_disco">Preparar el disco</span></h3>
+<p>Antes de configurar el cifrado de un disco (o parte de él), considere realizar previamente un borrado seguro. Esto consiste en sobrescribir todo el disco o la partición con un flujo de bytes cero o bytes aleatorios, y se hace por una o ambas de las siguientes razones:
+</p>
+<dl><dt>Impedir la recuperación de los datos almacenados previamente'</dt></dl>
+<p>El cifrado del disco no cambia el hecho de que los distintos sectores del mismo solo se sobrescriben bajo demanda, esto es, cuando el sistema de archivos crea o modifica los datos contenidos en esos sectores (véase <a href="#C%C3%B3mo_funciona_el_cifrado">#Cómo funciona el cifrado</a> a continuación). Los sectores que el sistema de archivos considera que «no se están utilizando actualmente» no los toca, y todavía pueden contener restos de datos del sistemas de archivos anterior. La única manera de asegurarse de que todos los datos guardados previamente en la unidad no pueden ser <a href="https://en.wikipedia.org/wiki/es:Recuperaci%C3%B3n_de_datos" class="extiw" title="wikipedia:es:Recuperación de datos">recuperados</a>, es borrarlos manualmente.
+Para este propósito, no importa si se utilizan bytes cero o bytes aleatorios (aunque limpiando con bytes cero será mucho más rápido).
+</p>
+<dl><dt>Impedir la divulgación de los patrones de uso de la unidad cifrada</dt></dl>
+<p>Lo ideal sería que toda la parte cifrada del disco fuera indistinguible desde la uniformidad de datos aleatorios. De esta manera, ninguna persona no autorizada podría saber cuáles y cuántos sectores contienen realmente datos cifrados — que puede ser un objetivo deseable en sí mismo (como parte de la verdadera confidencialidad) —, y que también sirve como una barrera adicional contra los atacantes que traten de romper el cifrado.<br>
+Para satisfacer este objetivo, limpiar el disco utilizando bytes aleatorios de alta calidad es crucial.
+</p>
+<p>El segundo objetivo solo tiene sentido en combinación con el cifrado de dispositivos de bloques, ya que en el caso del cifrado de sistemas de archivos apilados, los datos cifrados se pueden localizar fácilmente de todos modos (en forma de archivos cifrados distintos en el sistema de archivos anfitrión). También tenga en cuenta que, incluso si solo se va a cifrar una carpeta en particular, tendrá que borrar la partición entera si quiere deshacerse de los archivos que estaban almacenados previamente en esa carpeta sin cifrar (debido a la <a href="https://en.wikipedia.org/wiki/es:Fragmentaci%C3%B3n_de_un_sistema_de_ficheros" class="extiw" title="wikipedia:es:Fragmentación de un sistema de ficheros">fragmentación del disco</a>). Si hay otras carpetas en la misma partición, habrá que hacerles una copia de respaldo y restablecerlas de nuevo más tarde.
+</p>
+<p>Una vez que haya decidido qué tipo de borrado de disco desea realizar, remítase al artículo <a href="../en/Securely_wipe_disk.html" title="Securely wipe disk">Securely wipe disk</a> para conocer instrucciones más técnicas.
+</p>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Sugerencia:</strong> Al decidir qué método utilizar para el borrado seguro de una unidad de disco duro, recuerde que esto no será necesario realizarlo más que una vez durante el tiempo que la unidad se utiliza como una unidad cifrada.</div>
+<h2>
+<span id="C.C3.B3mo_funciona_el_cifrado"></span><span class="mw-headline" id="Cómo_funciona_el_cifrado">Cómo funciona el cifrado</span>
+</h2>
+<p>Esta sección pretende ser una introducción general a los conceptos y procesos que se encuentran en el corazón de las configuraciones habituales del cifrado de discos.
+</p>
+<p>No se entra en detalles técnicos o matemáticos (consulte la literatura apropiada para ello), sino que desea proporcionar a un administrador del sistema una comprensión general sobre cómo las diferentes opciones de configuración (en especial en relación con la gestión de claves) pueden afectar a su usabilidad y seguridad.
+</p>
+<h3>
+<span id="Principio_b.C3.A1sico"></span><span class="mw-headline" id="Principio_básico">Principio básico</span>
+</h3>
+<p>A los efectos del cifrado de discos, cada dispositivo de bloque (o archivo individual en el caso del cifrado de sistemas de archivos apilados) se divide en <b>sectores</b> de igual longitud, por ejemplo, 512 bytes (4.096 bits). El cifrado/descifrado se realiza después en función de cada sector, por lo que el sector n del archivo/dispositivo de bloque en el disco almacenará la versión cifrada del sector n de los datos originales. 
+</p>
+<p>Cada vez que el sistema operativo o una aplicación solicita un determinado fragmento de datos del archivo/dispositivo de bloque, todo el sector (o sectores) que contienen los datos serán leídos desde el disco, descifrados sobre la marcha y almacenados temporalmente en la memoria:
+</p>
+<pre style="white-space: pre !important; font-family:'DejaVu Sans Mono',monospace,monospace; font-variant-ligatures: no-common-ligatures;">             ╔═══════╗
+    sector 1 ║"???.."║
+             ╠═══════╣        ╭┈┈┈┈┈┈┈╮
+    sector 2 ║"???.."║        ┊ clave ┊
+             ╠═══════╣        ╰┈┈┈┬┈┈┈╯
+             :       :            │
+             ╠═══════╣            ▼             ┣┉┉┉┉┉┉┉┫
+    sector n ║"???.."║━━━━━━━(descifrado)━━━━━━▶┋"abc.."┋ sector n
+             ╠═══════╣                          ┣┉┉┉┉┉┉┉┫
+             :       :
+             ╚═══════╝
+  
+ Dispositivo de bloque                          datos no cifrados
+     o archivo cifrado                          en memoria RAM
+           en el disco
+</pre>
+<p>Del mismo modo, en cada operación de escritura, todos los sectores que se ven afectados deben ser cifrados de nuevo completamente (mientras que el resto de los sectores permanecen intactos).
+</p>
+<p>Con el fin de ser capaz de descifrar/cifrar los datos, el sistema de cifrado del disco necesita saber la «clave» única secreta asociada a él. Cada vez que el dispositivo de bloque o la carpeta en cuestión debe ser montada, su clave correspondiente (llamada a partir de ahora «llave maestra») debe ser suministrada.
+</p>
+<p>La entropía de la clave es de suma importancia para la seguridad del cifrado. Una cadena de bytes generada al azar, de una cierta longitud, por ejemplo, 32 bytes (256 bits), reúne las propiedades deseables, pero no es fácil de recordar ni de aplicar manualmente durante el montaje.
+</p>
+<p>Por esa razón se utilizan dos técnicas auxiliares. La primera es la aplicación de la criptografía para aumentar las propiedades entrópicas de la llave maestra, que, generalmente, incluye una frase de acceso separada legible por los humanos. Para los diferentes tipos de cifrado consulte sus características propias en la lista del <a href="#Cuadro_comparativo">#Cuadro comparativo</a>. El segundo método consiste en crear un archivo de claves con alta entropía y almacenarlo en un medio separado de la unidad que contiene los datos cifrados.
+</p>
+<p>Véase también <a href="https://en.wikipedia.org/wiki/Authenticated_encryption" class="extiw" title="wikipedia:Authenticated encryption">Wikipedia:Authenticated encryption</a>.
+</p>
+<h3>
+<span id="Claves.2C_archivo_de_claves_y_frase_de_acceso"></span><span class="mw-headline" id="Claves,_archivo_de_claves_y_frase_de_acceso">Claves, archivo de claves y frase de acceso</span>
+</h3>
+<p>Los siguientes son ejemplos de cómo almacenar y asegurar criptográficamente una llave maestra con un archivo de claves:
+</p>
+<dl><dt>Almacenada en un archivo de claves de texto plano</dt></dl>
+<p>Almacenar simplemente la llave maestra en un archivo (en formato legible) es la opción más sencilla. El archivo — llamado un «keyfile» o «archivo de claves» — se puede colocar en una memoria USB mantenida en un lugar seguro y que se conecte al ordenador cuando se quieran montar las partes cifradas del disco (por ejemplo, durante el arranque o el inicio de sesión).
+</p>
+<dl><dt>Almacenada en forma de frase de acceso protegida en un archivo de claves o en el propio disco</dt></dl>
+<p>La llave maestra (y, por lo tanto, los datos cifrados con ella) se puede proteger con una contraseña secreta, que tendrá que recordar e introducir cada vez que desea montar el dispositivo de bloque o carpeta. Véase <a href="#Metadatos_criptogr%C3%A1ficos">#Metadatos criptográficos</a> a continuación para obtener más detalles.
+</p>
+<dl><dt>Generada de forma aleatoria sobre la marcha para cada sesión</dt></dl>
+<p>En algunos casos, por ejemplo, al cifrar el espacio de intercambio o la partición <code>/tmp</code>, no es necesario tener una llave maestra permanente en absoluto. Se puede generar de forma aleatoria una llave nueva para un solo uso para cada sesión, sin necesidad de interacción del usuario. Esto significa que una vez desmontada, todos los archivos guardados en la partición en cuestión nunca pueden ser descifrados de nuevo por <i>nadie</i> — que para estos casos particulares está perfectamente bien —.
+</p>
+<h3>
+<span id="Metadatos_criptogr.C3.A1ficos"></span><span class="mw-headline" id="Metadatos_criptográficos">Metadatos criptográficos</span>
+</h3>
+<p>Con frecuencia las técnicas de cifrado utilizan funciones criptográficas para mejorar la seguridad de la llave maestra en sí. En el montaje de los dispositivos cifrados, la contraseña o el archivo de claves se hace pasar a través de dichas funciones y solo el resultado puede desbloquear la llave maestra para descifrar los datos. 
+</p>
+<p>Una configuración común es aplicar la llamada «key stretching» («que podríamos traducir como <i>prolongar la clave</i>») para la frase de acceso (a través de la «función derivadora de claves»), y utiliza el resultado mejorado como clave de montaje para descifrar la llave maestra vigente (que se ha almacenado previamente de forma cifrada):
+</p>
+<pre style="white-space: pre !important; font-family:'DejaVu Sans Mono',monospace,monospace; font-variant-ligatures: no-common-ligatures;"> ╭┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈╮                               ╭┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈╮
+ ┊ frase de acceso de montaje ┊━━━━━━⎛función derivadora⎞━━━━▶┊ clave de montaje ┊
+ ╰┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈╯  ,───⎝     de clave     ⎠     ╰┈┈┈┈┈┈┈┈┬┈┈┈┈┈┈┈┈┈╯
+ ╭──────╮                       ╱                                      │
+ │ sal  │──────────────────────´                                       │
+ ╰──────╯                                                              │
+ ╭────────────────────────────╮                                        ▼          ╭┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈╮
+ │ llave maestra cifrada      │━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━(descifrado)━━━▶┊ llave maestra ┊
+ ╰────────────────────────────╯                                                   ╰┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈╯
+</pre>
+<p>La <b>función derivadora de claves</b> (por ejemplo PBKDF2 o scrypt) es deliberadamente lenta (se aplican muchas <a href="https://en.wikipedia.org/wiki/es:Iteraci%C3%B3n" class="extiw" title="wikipedia:es:Iteración">iteraciones</a> de una <a href="https://en.wikipedia.org/wiki/es:Funci%C3%B3n_hash" class="extiw" title="wikipedia:es:Función hash">función hash</a>, por ejemplo, 1.000 iteraciones de HMAC-SHA-512), de modo que los posibles ataques de fuerza bruta destinados a encontrar la frase de acceso se presentan inviables. Para el caso de su utilización normal por un usuario autorizado, solo será necesario realizar el cálculo una vez por sesión, por lo que la pequeña desaceleración no es un problema. También toma un <a href="https://en.wikipedia.org/wiki/es:Binary_large_object" class="extiw" title="wikipedia:es:Binary large object">blob</a> adicional de datos, que se denomina <a href="https://en.wikipedia.org/wiki/es:Sal_(criptografia)" class="extiw" title="wikipedia:es:Sal (criptografia)">«<b>sal</b>»</a>, como un argumento — este se genera aleatoriamente una vez durante la puesta en marcha del cifrado del disco y se almacena sin protección como parte de los metadatos criptográficos —. Debido a que será un valor diferente para cada configuración, esto hace que sea imposible para los atacantes acelerar los ataques de fuerza bruta usando tablas precalculadas para acceder a la función derivadora de claves.
+</p>
+<p>La <b>llave maestra cifrada</b> se puede almacenar en el disco junto con los datos cifrados. De esta manera, la confidencialidad de los datos cifrados depende completamente de la frase secreta.
+</p>
+<p>Para aumentar la seguridad se puede almacenar la llave maestra cifrada en un archivo de claves, por ejemplo, en una memoria USB. Esto proporciona <b>dos factores de autenticación</b>, a saber: el acceso a los datos cifrados ahora requiere algo que solo usted <i>sabe</i> (la frase de acceso), y, además, algo que solo usted <i>tiene</i> (el archivo de claves).
+</p>
+<p>Otra forma de lograr un doble factor de autenticación es aumentar el esquema de obtención de claves, previo a su matematización, «combinando» la frase de acceso con la lectura de datos de byte en uno o más archivos externos (situados en una memoria USB o similar), antes de pasarla por la función derivadora de claves.<br>Los archivos en cuestión pueden ser cualquier cosa, por ejemplo, imágenes JPEG normales, lo que puede ser beneficioso para la <a href="#Negabilidad_plausible">#Negabilidad plausible</a>. Estos, sin embargo, todavía se llaman «keyfiles» en el presente contexto.
+</p>
+<p>Después de que la llave maestra se haya derivado con éxito, esta se almacena de forma segura en la memoria (por ejemplo, en un anillo de claves del kernel), durante el tiempo que esté montado el dispositivo de bloque o carpeta.
+</p>
+<p>Por lo general, sin embargo, no se utiliza para cifrar/descifrar los datos del disco directamente.
+Por ejemplo, en el caso de cifrado del sistema de archivos apilados, cada archivo puede asignarse automáticamente su propia clave de cifrado. Cada vez que el archivo ha de ser leído/modificado, esta clave del archivo debe primero ser descifrada usando la llave maestra, antes de que pueda ser utilizada por sí para cifrar/descifrar el contenido del archivo:
+</p>
+<pre style="white-space: pre !important; font-family:'DejaVu Sans Mono',monospace,monospace; font-variant-ligatures: no-common-ligatures;">                                ╭┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈╮
+                                ┊ llave maestra ┊
+   archivo en disco:            ╰┈┈┈┈┈┈┈┬┈┈┈┈┈┈┈╯
+  ┌ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ┐         │
+  ╎╭─────────────────────────╮╎         ▼         ╭┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈╮
+  ╎│ archivo de clave cifrado│━━━━(descifrado)━━━▶┊archivo de clave┊
+  ╎╰─────────────────────────╯╎                   ╰┈┈┈┈┈┈┈┬┈┈┈┈┈┈┈┈╯
+  ╎┌─────────────────────────┐╎                           ▼                  ┌┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┐
+  ╎│ contenidos del          │◀━━━━━━━━━━━━━━━━━━(cifrado/descifrado)━━━━━━━▶┊ contenidos del  ┊
+  ╎│ archivo cifrados        │╎                                              ┊ archivo legibles┊
+  ╎└─────────────────────────┘╎                                              └┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┘
+  └ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ┘
+</pre>
+<p>De una manera similar, una clave separada (por ejemplo, una por cada carpeta) se puede utilizar para el cifrado de nombres de archivos en el caso del cifrado de sistemas de archivos apilados.
+</p>
+<p>En el caso de dispositivos de bloques cifrados se utiliza una llave maestra por dispositivo y, por lo tanto, para todos los datos del mismo. Algunos métodos ofrecen características para asignar múltiples frases de acceso/archivos de claves para el mismo dispositivo, y otros métodos, en cambio, no. Algunos métodos utilizan funciones mencionadas más arriba para asegurar la llave maestra y otros dan el control sobre la seguridad de la llave completamente al usuario. Se explican dos ejemplos para los parámetros criptográficos usados ​​por <a href="../en/Dm-crypt.html" title="Dm-crypt">dm-crypt</a> en las modalidades plain o LUKS. 
+</p>
+<p>Al comparar los parámetros utilizados por ambas modalidades se deduce que el modo plain de dm-crypt tiene parámetros relacionados con la forma de localizar el archivo de claves (por ejemplo, <code>--keyfile-size</code>, <code>--keyfile-offset</code>). El modo LUKS de dm-crypt no necesita esto, ya que cada dispositivo de bloque contiene un encabezado con los metadatos criptográficos al principio. La cabecera incluye el sistema de cifrado utilizado, la llave maestra cifrada en sí y los parámetros necesarios para su derivación para descifrarla. Los últimos parámetros sirven para cambiar el resultado de las opciones que usará la llave maestra durante su cifrado incicial (por ejemplo <code>--iter-time</code>, <code>--use-random</code>). 
+</p>
+<p>Para conocer las ventajas/desventajas de las diferentes técnicas, remítase al anterior <a href="#Cuadro_comparativo">#Cuadro comparativo</a> o visite páginas más específicas. 
+</p>
+<p>Véase también:
+</p>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/es:Frase_de_contrase%C3%B1a" class="extiw" title="wikipedia:es:Frase de contraseña">Wikipedia:es:Frase de contraseña</a></li>
+<li><a href="https://en.wikipedia.org/wiki/es:Criptograf%C3%ADa_asim%C3%A9trica" class="extiw" title="wikipedia:es:Criptografía asimétrica">Wikipedia:es:Criptografía asimétrica</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Key_management" class="extiw" title="wikipedia:Key management">Wikipedia:Key management</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Key_derivation_function" class="extiw" title="wikipedia:Key derivation function">Wikipedia:Key derivation function</a></li>
+</ul>
+<h3>
+<span id="Algoritmos_de_cifrado_y_modalidades_de_operaci.C3.B3n"></span><span class="mw-headline" id="Algoritmos_de_cifrado_y_modalidades_de_operación">Algoritmos de cifrado y modalidades de operación</span>
+</h3>
+<p>El algoritmo real utilizado para servir de traductor entre las piezas de datos no cifradas y las cifradas (llamado «texto plano» y «texto cifrado», respectivamente), que se interrelacionan entre sí a través de una clave de cifrado dada, se llama un «<b>algoritmo de cifrado</b>».
+</p>
+<p>El cifrado de discos emplea «algoritmos de cifrado de bloques», que operan sobre bloques de datos de una longitud fija, por ejemplo 16 bytes (128 bits). En el momento de escribir estas líneas, los más usados son:
+</p>
+<table class="wikitable" style="margin:0 5em 1.5em 5em;">
+<tbody>
+<tr>
+<th scope="col" style="text-align:left">
+</th>
+<th scope="col" style="text-align:left">tamaño bloque
+</th>
+<th scope="col" style="text-align:left">tamaño clave
+</th>
+<th scope="col" style="text-align:left">comentario
+</th>
+</tr>
+<tr>
+<th scope="row" style="text-align:right">
+<a href="https://en.wikipedia.org/wiki/es:Advanced_Encryption_Standard" class="extiw" title="wikipedia:es:Advanced Encryption Standard">AES</a>
+</th>
+<td>128 bits
+</td>
+<td>128, 192 o 256 bits
+</td>
+<td>aprobado por la NSA para la protección de información clasificada «SECRET» y «TOP SECRET» por el gobierno de EE.UU. (cuando se utiliza con un tamaño de clave de 192 o 256 bits)
+</td>
+</tr>
+<tr>
+<th scope="row" style="text-align:right">
+<a href="https://en.wikipedia.org/wiki/es:Blowfish" class="extiw" title="wikipedia:es:Blowfish">Blowfish</a>
+</th>
+<td>64 bits
+</td>
+<td>32–448 bits
+</td>
+<td>uno de los primeros sistemas de cifrado seguro con licencia libre que se puso a disposición del público, por lo tanto, muy bien consolidado en Linux
+</td>
+</tr>
+<tr>
+<th scope="row" style="text-align:right">
+<a href="https://en.wikipedia.org/wiki/Twofish" class="extiw" title="wikipedia:Twofish">Twofish</a>
+</th>
+<td>128 bits
+</td>
+<td>128, 192 o 256 bits
+</td>
+<td>desarrollado como sucesor de Blowfish, pero sin haber alcanzado un uso tan amplio
+</td>
+</tr>
+<tr>
+<th scope="row" style="text-align:right">
+<a href="https://en.wikipedia.org/wiki/es:Serpent" class="extiw" title="wikipedia:es:Serpent">Serpent</a>
+</th>
+<td>128 bits
+</td>
+<td>128, 192 o 256 bits
+</td>
+<td>Considerado el más seguro de los cinco finalistas de la competición AES<a rel="nofollow" class="external autonumber" href="https://csrc.nist.gov/archive/aes/round2/r2report.pdf">[10]</a><a rel="nofollow" class="external autonumber" href="https://www.cl.cam.ac.uk/~rja14/Papers/serpentcase.pdf">[11]</a><a rel="nofollow" class="external autonumber" href="https://www.cl.cam.ac.uk/~rja14/Papers/serpent.pdf">[12]</a>.
+</td>
+</tr>
+</tbody>
+</table>
+<p>Cifrar/descifrar un sector (<a href="#Principio_b%C3%A1sico">véase más arriba</a>) se consigue mediante su división en pequeños bloques, haciéndolos coincidir con el tamaño del bloque cifrado, y siguiendo, después, cierto conjunto de reglas (que antes hemos llamado «<b>modalidad de operación</b>») que informan sobre cómo aplicar el algoritmo de cifrado a los bloques individuales.
+</p>
+<p>Aplicar el algoritmo de cifrado sin más a cada bloque por separado sin modificaciones (denominada modalidad «<i>electronic codebook (ECB)</i>») no sería seguro, ya que si los mismos 16 bytes de texto plano siempre producen los mismos 16 bytes de texto cifrado, un atacante podría reconocer fácilmente los patrones en el texto cifrado que se almacenan en el disco. 
+</p>
+<p>La modalidad más básica (y común) de operar utilizada en la práctica es la denominada «<i>cipher-block chaining (CBC)</i>». Al cifrar un bloque de un sector con esta modalidad, cada bloque de datos de texto plano se combina de forma matemática con el texto cifrado del bloque anterior antes de cifrarlo, utilizando el algoritmo de cifrado. Para el primer bloque, ya que no tiene texto cifrado anterior que usar, se utiliza un bloque de datos pregenerado especial almacenado con los metadatos criptográficos del sector y llamado «<b>vector de inicialización (siglas en inglés IV)</b>»:
+</p>
+<pre style="white-space: pre !important; font-family:'DejaVu Sans Mono',monospace,monospace; font-variant-ligatures: no-common-ligatures;">                                                   ╭──────────────╮
+                                                   │vector de     │
+                                                   │inicialización│
+                                                   ╰──────┬───────╯
+           ╭     ╠══════════╣              ╭─clave        │           ┣┉┉┉┉┉┉┉┉┉┉┫        
+           │     ║          ║              ▼              ▼           ┋          ┋          . INICIO
+           ┴     ║"????????"║◀━━(algoritmo de cifrado)━━━(+)━━━━━━━━━━┋"Hello, W"┋ bloque  ╱╰────┐
+      sector n   ║          ║                                         ┋          ┋ 1       ╲╭────┘
+   del archivo   ║          ║─────────────────────────────╮           ┋          ┋          ' 
+         o del   ╟──────────║              ╭─clave        │           ┠┈┈┈┈┈┈┈┈┈┈┨
+   dispositivo   ║          ║              ▼              ▼           ┋          ┋
+     de bloque   ║"????????"║◀━━(algoritmo de cifrado)━━━(+)━━━━━━━━━━┋"orld !!!"┋ bloque
+           ┬     ║          ║                                         ┋          ┋ 2
+           │     ║          ║──────────────────╮                      ┋          ┋
+           │     ╟──────────╢                  │                      ┠┈┈┈┈┈┈┈┈┈┈┨
+           │     ║          ║                  ▼                      ┋          ┋
+           :     :   ...    :        ...      ...      ...    ...     :   ...    : ...
+  
+                texto cifrado                                         texto plano
+                     en disco                                         en RAM
+</pre>
+<p>Al descifrar, el procedimiento se invierte de forma análoga.
+</p>
+<p>Una cosa a destacar es la generación del vector de inicialización único para cada sector. La opción más sencilla consiste en calcularlo de una manera predecible a partir de un valor fácilmente disponible, como puede ser el número del sector. Sin embargo, esto podría permitir que un atacante con acceso reiterado al sistema pudiera realizar el llamado <a href="https://en.wikipedia.org/wiki/Watermarking_attack" class="extiw" title="wikipedia:Watermarking attack">watermarking attack</a>. Para evitar esto, un método llamado «Encrypted salt-sector initialization vector (<b>ESSIV</b>)» se puede utilizar para generar vectores de inicialización de una manera que hace que se vean completamente aleatorios por un atacante potencial.
+</p>
+<p>También hay otras opciones disponibles, modalidades de operación más complicadas para cifrar el disco, que ya ofrecen seguridad integrada contra este tipo de ataques (y, por lo tanto, no requieren ESSIV).
+Otras opciones también pueden garantizar, además, la autenticidad de los datos cifrados (es decir, confirmar que no se han modificado/corrompido por alguien que no tiene acceso a la clave).
+</p>
+<p>Véase también:
+</p>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Disk_encryption_theory" class="extiw" title="wikipedia:Disk encryption theory">Wikipedia:Disk encryption theory</a></li>
+<li><a href="https://en.wikipedia.org/wiki/es:Cifrado_por_bloques" class="extiw" title="wikipedia:es:Cifrado por bloques">Wikipedia:es:Cifrado por bloques</a></li>
+<li><a href="https://en.wikipedia.org/wiki/es:Modos_de_operaci%C3%B3n_de_una_unidad_de_cifrado_por_bloques" class="extiw" title="wikipedia:es:Modos de operación de una unidad de cifrado por bloques">Wikipedia:es:Modos de operación de una unidad de cifrado por bloques</a></li>
+</ul>
+<h3><span class="mw-headline" id="Negabilidad_plausible">Negabilidad plausible</span></h3>
+<p>Véase <a href="https://en.wikipedia.org/wiki/Plausible_deniability" class="extiw" title="wikipedia:Plausible deniability">Wikipedia:Plausible deniability</a>
+</p>
+</div>
+</div>
+					<div id="catlinks" class="catlinks" data-mw="interface">
+<div id="mw-normal-catlinks" class="mw-normal-catlinks">
+<a href="../Special:Categories.html" title="Special:Categories">Category</a>: <ul><li><a href="../es/Category:Data-at-rest_encryption.html" title="Category:Data-at-rest encryption (Español)">Data-at-rest encryption (Español)</a></li></ul>
+</div>
+<div id="mw-hidden-catlinks" class="mw-hidden-catlinks mw-hidden-cats-hidden">Hidden category: <ul><li><a href="../en/Category:Pages_with_broken_package_links.html" title="Category:Pages with broken package links">Pages with broken package links</a></li></ul>
+</div>
+</div>
+				</div>
+			</main>
+			
+		</div>
+		<div class="mw-footer-container">
+			
+<footer id="footer" class="mw-footer" style="margin: 0">
+	<ul id="footer-info">
+	<li data-nosnippet="">Retrieved from "<a dir="ltr" href="https://wiki.archlinux.org/index.php?title=Data-at-rest_encryption_(Espa%C3%B1ol)&amp;oldid=828186">https://wiki.archlinux.org/index.php?title=Data-at-rest_encryption_(Español)&amp;oldid=828186</a>"</li>
+<li id="footer-info-lastmod"> This page was last edited on 3 March 2025, at 18:57.</li>
+	<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+<br>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="https://terms.archlinux.org/docs/privacy-policy/">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="../en/ArchWiki:About.html">About ArchWiki</a></li>
+	<li id="footer-places-disclaimers"><a href="../en/ArchWiki:General_disclaimer.html">Disclaimers</a></li>
+	<li id="footer-places-archwiki-code-of-conduct"><a href="https://terms.archlinux.org/docs/code-of-conduct/" class="extiw" title="archlinux-service-agreements:code-of-conduct">Code of conduct</a></li>
+	<li id="footer-places-archwiki-terms-of-service"><a href="https://terms.archlinux.org/docs/terms-of-service/" class="extiw" title="archlinux-service-agreements:terms-of-service">Terms of service</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-copyrightico"><a href="https://www.gnu.org/copyleft/fdl.html" class="cdx-button cdx-button--fake-button cdx-button--size-large cdx-button--fake-button--enabled"><img src="/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" loading="lazy"></a></li>
+	<li id="footer-poweredbyico"><img src="/resources/assets/poweredby_mediawiki.svg" width="88" height="31" loading="lazy"></li>
+</ul>
+
+</footer>
+
+		</div>
+	</div> 
+</div> 
+<div class="vector-settings" id="p-dock-bottom">
+	<ul></ul>
+</div>
+</body>
+</html>

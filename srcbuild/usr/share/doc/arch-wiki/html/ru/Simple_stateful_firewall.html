@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-sticky-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-0 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-disabled skin-theme-clientpref-day vector-toc-available" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>Simple stateful firewall (Русский) - ArchWiki</title>
+<link rel="stylesheet" href="../ArchWikiOffline.css">
+<meta name="ResourceLoaderDynamicStyles" content="">
+<meta name="generator" content="MediaWiki 1.43.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="max-image-preview:standard">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.25, maximum-scale=5.0">
+<link rel="search" type="application/opensearchdescription+xml" href="/rest.php/v1/search" title="ArchWiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.archlinux.org/api.php?action=rsd">
+<link rel="license" href="https://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="ArchWiki Atom feed" href="/index.php?title=Special:RecentChanges&amp;feed=atom">
+</head>
+<body class="skin--responsive skin-vector skin-vector-search-vue mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Simple_stateful_firewall_Русский rootpage-Simple_stateful_firewall_Русский skin-vector-2022 action-view">
+<a class="mw-jump-link" href="#bodyContent">Jump to content</a>
+<div class="vector-header-container">
+	</div>
+<div class="mw-page-container">
+	<div class="mw-page-container-inner">
+		<div class="vector-column-start">
+			<div class="vector-main-menu-container">
+		</div>
+	<div class="vector-sticky-pinned-container">
+				<nav id="mw-panel-toc" aria-label="Contents" data-event-name="ui.sidebar-toc" class="mw-table-of-contents-container vector-toc-landmark">
+					<div id="vector-toc-pinned-container" class="vector-pinned-container">
+					<div id="vector-toc" class="vector-toc vector-pinnable-element">
+	<div class="vector-pinnable-header vector-toc-pinnable-header vector-pinnable-header-pinned" data-feature-name="toc-pinned" data-pinnable-element-id="vector-toc">
+	<h2 class="vector-pinnable-header-label">Contents</h2>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-toc.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-toc.unpin">hide</button>
+</div>
+
+
+	<ul class="vector-toc-contents" id="mw-panel-toc-list">
+		<li id="toc-mw-content-text" class="vector-toc-list-item vector-toc-level-1">
+			<a href="#" class="vector-toc-link">
+				<div class="vector-toc-text">Beginning</div>
+			</a>
+		</li>
+		<li id="toc-Требования" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#%D0%A2%D1%80%D0%B5%D0%B1%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">1</span>
+				<span>Требования</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Требования-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Настройка_межсетевого_экрана" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#%D0%9D%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0_%D0%BC%D0%B5%D0%B6%D1%81%D0%B5%D1%82%D0%B5%D0%B2%D0%BE%D0%B3%D0%BE_%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">2</span>
+				<span>Настройка межсетевого экрана</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Настройка_межсетевого_экрана-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Настройка межсетевого экрана subsection</span>
+			</button>
+		
+		<ul id="toc-Настройка_межсетевого_экрана-sublist" class="vector-toc-list">
+			<li id="toc-Создание_необходимых_цепочек" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5_%D0%BD%D0%B5%D0%BE%D0%B1%D1%85%D0%BE%D0%B4%D0%B8%D0%BC%D1%8B%D1%85_%D1%86%D0%B5%D0%BF%D0%BE%D1%87%D0%B5%D0%BA">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1</span>
+					<span>Создание необходимых цепочек</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Создание_необходимых_цепочек-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Цепочка_FORWARD" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#%D0%A6%D0%B5%D0%BF%D0%BE%D1%87%D0%BA%D0%B0_FORWARD">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2</span>
+					<span>Цепочка FORWARD</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Цепочка_FORWARD-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Цепочка_OUTPUT" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#%D0%A6%D0%B5%D0%BF%D0%BE%D1%87%D0%BA%D0%B0_OUTPUT">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.3</span>
+					<span>Цепочка OUTPUT</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Цепочка_OUTPUT-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Цепочка_INPUT" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#%D0%A6%D0%B5%D0%BF%D0%BE%D1%87%D0%BA%D0%B0_INPUT">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.4</span>
+					<span>Цепочка INPUT</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Цепочка_INPUT-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Итоговый_файл_iptables.rules" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#%D0%98%D1%82%D0%BE%D0%B3%D0%BE%D0%B2%D1%8B%D0%B9_%D1%84%D0%B0%D0%B9%D0%BB_iptables.rules">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.5</span>
+					<span>Итоговый файл iptables.rules</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Итоговый_файл_iptables.rules-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Цепочки_TCP_и_UDP" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#%D0%A6%D0%B5%D0%BF%D0%BE%D1%87%D0%BA%D0%B8_TCP_%D0%B8_UDP">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.6</span>
+					<span>Цепочки TCP и UDP</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Цепочки_TCP_и_UDP-sublist" class="vector-toc-list">
+				<li id="toc-Открытие_портов_для_входящих_соединений" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#%D0%9E%D1%82%D0%BA%D1%80%D1%8B%D1%82%D0%B8%D0%B5_%D0%BF%D0%BE%D1%80%D1%82%D0%BE%D0%B2_%D0%B4%D0%BB%D1%8F_%D0%B2%D1%85%D0%BE%D0%B4%D1%8F%D1%89%D0%B8%D1%85_%D1%81%D0%BE%D0%B5%D0%B4%D0%B8%D0%BD%D0%B5%D0%BD%D0%B8%D0%B9">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.6.1</span>
+					<span>Открытие портов для входящих соединений</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Открытие_портов_для_входящих_соединений-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Port_knocking" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Port_knocking">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.6.2</span>
+					<span>Port knocking</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Port_knocking-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Защита_от_спуфинга" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#%D0%97%D0%B0%D1%89%D0%B8%D1%82%D0%B0_%D0%BE%D1%82_%D1%81%D0%BF%D1%83%D1%84%D0%B8%D0%BD%D0%B3%D0%B0">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.7</span>
+					<span>Защита от спуфинга</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Защита_от_спуфинга-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Защита_от_обнаружения" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#%D0%97%D0%B0%D1%89%D0%B8%D1%82%D0%B0_%D0%BE%D1%82_%D0%BE%D0%B1%D0%BD%D0%B0%D1%80%D1%83%D0%B6%D0%B5%D0%BD%D0%B8%D1%8F">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.8</span>
+					<span>Защита от обнаружения</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Защита_от_обнаружения-sublist" class="vector-toc-list">
+				<li id="toc-Блокирование_ping-запросов" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#%D0%91%D0%BB%D0%BE%D0%BA%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5_ping-%D0%B7%D0%B0%D0%BF%D1%80%D0%BE%D1%81%D0%BE%D0%B2">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.8.1</span>
+					<span>Блокирование ping-запросов</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Блокирование_ping-запросов-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Обман_сканеров_портов" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#%D0%9E%D0%B1%D0%BC%D0%B0%D0%BD_%D1%81%D0%BA%D0%B0%D0%BD%D0%B5%D1%80%D0%BE%D0%B2_%D0%BF%D0%BE%D1%80%D1%82%D0%BE%D0%B2">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.8.2</span>
+					<span>Обман сканеров портов</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Обман_сканеров_портов-sublist" class="vector-toc-list">
+				<li id="toc-SYN-сканирование" class="vector-toc-list-item vector-toc-level-4">
+			<a class="vector-toc-link" href="#SYN-%D1%81%D0%BA%D0%B0%D0%BD%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.8.2.1</span>
+					<span>SYN-сканирование</span>
+				</div>
+			</a>
+			
+			<ul id="toc-SYN-сканирование-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-UDP-сканирование" class="vector-toc-list-item vector-toc-level-4">
+			<a class="vector-toc-link" href="#UDP-%D1%81%D0%BA%D0%B0%D0%BD%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.8.2.2</span>
+					<span>UDP-сканирование</span>
+				</div>
+			</a>
+			
+			<ul id="toc-UDP-сканирование-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Восстановление_последнего_правила" class="vector-toc-list-item vector-toc-level-4">
+			<a class="vector-toc-link" href="#%D0%92%D0%BE%D1%81%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5_%D0%BF%D0%BE%D1%81%D0%BB%D0%B5%D0%B4%D0%BD%D0%B5%D0%B3%D0%BE_%D0%BF%D1%80%D0%B0%D0%B2%D0%B8%D0%BB%D0%B0">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.8.2.3</span>
+					<span>Восстановление последнего правила</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Восстановление_последнего_правила-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Защита_от_других_типов_атак" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#%D0%97%D0%B0%D1%89%D0%B8%D1%82%D0%B0_%D0%BE%D1%82_%D0%B4%D1%80%D1%83%D0%B3%D0%B8%D1%85_%D1%82%D0%B8%D0%BF%D0%BE%D0%B2_%D0%B0%D1%82%D0%B0%D0%BA">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.9</span>
+					<span>Защита от других типов атак</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Защита_от_других_типов_атак-sublist" class="vector-toc-list">
+				<li id="toc-Атака_полным_перебором" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#%D0%90%D1%82%D0%B0%D0%BA%D0%B0_%D0%BF%D0%BE%D0%BB%D0%BD%D1%8B%D0%BC_%D0%BF%D0%B5%D1%80%D0%B5%D0%B1%D0%BE%D1%80%D0%BE%D0%BC">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.9.1</span>
+					<span>Атака полным перебором</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Атака_полным_перебором-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-IPv6" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#IPv6">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.10</span>
+					<span>IPv6</span>
+				</div>
+			</a>
+			
+			<ul id="toc-IPv6-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Сохранение_правил" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#%D0%A1%D0%BE%D1%85%D1%80%D0%B0%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5_%D0%BF%D1%80%D0%B0%D0%B2%D0%B8%D0%BB">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.11</span>
+					<span>Сохранение правил</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Сохранение_правил-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Итоговый_файл_ip6tables.rules" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#%D0%98%D1%82%D0%BE%D0%B3%D0%BE%D0%B2%D1%8B%D0%B9_%D1%84%D0%B0%D0%B9%D0%BB_ip6tables.rules">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.12</span>
+					<span>Итоговый файл ip6tables.rules</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Итоговый_файл_ip6tables.rules-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Настройка_NAT-шлюза" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#%D0%9D%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0_NAT-%D1%88%D0%BB%D1%8E%D0%B7%D0%B0">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">3</span>
+				<span>Настройка NAT-шлюза</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Настройка_NAT-шлюза-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Настройка NAT-шлюза subsection</span>
+			</button>
+		
+		<ul id="toc-Настройка_NAT-шлюза-sublist" class="vector-toc-list">
+			<li id="toc-Таблица_filter" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#%D0%A2%D0%B0%D0%B1%D0%BB%D0%B8%D1%86%D0%B0_filter">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1</span>
+					<span>Таблица filter</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Таблица_filter-sublist" class="vector-toc-list">
+				<li id="toc-Создание_необходимых_цепочек_2" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5_%D0%BD%D0%B5%D0%BE%D0%B1%D1%85%D0%BE%D0%B4%D0%B8%D0%BC%D1%8B%D1%85_%D1%86%D0%B5%D0%BF%D0%BE%D1%87%D0%B5%D0%BA_2">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1.1</span>
+					<span>Создание необходимых цепочек</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Создание_необходимых_цепочек_2-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Цепочка_FORWARD_2" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#%D0%A6%D0%B5%D0%BF%D0%BE%D1%87%D0%BA%D0%B0_FORWARD_2">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1.2</span>
+					<span>Цепочка FORWARD</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Цепочка_FORWARD_2-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Цепочки_fw-interfaces_и_fw-open" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#%D0%A6%D0%B5%D0%BF%D0%BE%D1%87%D0%BA%D0%B8_fw-interfaces_%D0%B8_fw-open">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1.3</span>
+					<span>Цепочки fw-interfaces и fw-open</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Цепочки_fw-interfaces_и_fw-open-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Таблица_nat" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#%D0%A2%D0%B0%D0%B1%D0%BB%D0%B8%D1%86%D0%B0_nat">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.2</span>
+					<span>Таблица nat</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Таблица_nat-sublist" class="vector-toc-list">
+				<li id="toc-Цепочка_POSTROUTING" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#%D0%A6%D0%B5%D0%BF%D0%BE%D1%87%D0%BA%D0%B0_POSTROUTING">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.2.1</span>
+					<span>Цепочка POSTROUTING</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Цепочка_POSTROUTING-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Цепочка_PREROUTING" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#%D0%A6%D0%B5%D0%BF%D0%BE%D1%87%D0%BA%D0%B0_PREROUTING">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.2.2</span>
+					<span>Цепочка PREROUTING</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Цепочка_PREROUTING-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Сохранение_правил_2" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#%D0%A1%D0%BE%D1%85%D1%80%D0%B0%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5_%D0%BF%D1%80%D0%B0%D0%B2%D0%B8%D0%BB_2">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.3</span>
+					<span>Сохранение правил</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Сохранение_правил_2-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Смотрите_также" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#%D0%A1%D0%BC%D0%BE%D1%82%D1%80%D0%B8%D1%82%D0%B5_%D1%82%D0%B0%D0%BA%D0%B6%D0%B5">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">4</span>
+				<span>Смотрите также</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Смотрите_также-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+</ul>
+</div>
+
+					</div>
+		</nav>
+			</div>
+		</div>
+		<div class="mw-content-container">
+			<main id="content" class="mw-body" style="margin: 0">
+				<header class="mw-body-header vector-page-titlebar">
+					<nav aria-label="Contents" class="vector-toc-landmark">
+						
+<div id="vector-page-titlebar-toc" class="vector-dropdown vector-page-titlebar-toc vector-button-flush-left">
+	<input type="checkbox" id="vector-page-titlebar-toc-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-page-titlebar-toc" class="vector-dropdown-checkbox " aria-label="Toggle the table of contents">
+	<label id="vector-page-titlebar-toc-label" for="vector-page-titlebar-toc-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"><span class="vector-icon mw-ui-icon-listBullet mw-ui-icon-wikimedia-listBullet"></span>
+
+<span class="vector-dropdown-label-text">Toggle the table of contents</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+							<div id="vector-page-titlebar-toc-unpinned-container" class="vector-unpinned-container">
+			</div>
+		
+	</div>
+</div>
+
+					</nav>
+					<h1 id="firstHeading" class="firstHeading mw-first-heading"><span class="mw-page-title-main">Simple stateful firewall (Русский)</span></h1>
+							
+<div id="p-lang-btn" class="vector-dropdown mw-portlet mw-portlet-lang">
+	<input type="checkbox" id="p-lang-btn-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-p-lang-btn" class="vector-dropdown-checkbox mw-interlanguage-selector" aria-label="Go to an article in another language. Available in 4 languages">
+	<label id="p-lang-btn-label" for="p-lang-btn-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--action-progressive mw-portlet-lang-heading-4" aria-hidden="true"><span class="vector-icon mw-ui-icon-language-progressive mw-ui-icon-wikimedia-language-progressive"></span>
+
+<span class="vector-dropdown-label-text">4 languages</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+		<div class="vector-menu-content">
+			
+			<ul class="vector-menu-content-list">
+				
+				<li class="interlanguage-link interwiki-en mw-list-item"><a href="../en/Simple_stateful_firewall.html" title="Simple stateful firewall – English" lang="en" hreflang="en" data-title="Simple stateful firewall" data-language-autonym="English" data-language-local-name="English" class="interlanguage-link-target"><span>English</span></a></li>
+<li class="interlanguage-link interwiki-es mw-list-item"><a href="../es/Simple_stateful_firewall.html" title="Simple stateful firewall – español" lang="es" hreflang="es" data-title="Simple stateful firewall" data-language-autonym="Español" data-language-local-name="español" class="interlanguage-link-target"><span>Español</span></a></li>
+<li class="interlanguage-link interwiki-ja mw-list-item"><a href="https://wiki.archlinux.jp/index.php/%E3%82%B7%E3%83%B3%E3%83%97%E3%83%AB%E3%81%AA%E3%82%B9%E3%83%86%E3%83%BC%E3%83%88%E3%83%95%E3%83%AB%E3%83%95%E3%82%A1%E3%82%A4%E3%82%A2%E3%82%A6%E3%82%A9%E3%83%BC%E3%83%AB" title="シンプルなステートフルファイアウォール – 日本語" lang="ja" hreflang="ja" data-title="シンプルなステートフルファイアウォール" data-language-autonym="日本語" data-language-local-name="日本語" class="interlanguage-link-target"><span>日本語</span></a></li>
+<li class="interlanguage-link interwiki-zh-hans mw-list-item"><a href="https://wiki.archlinuxcn.org/wiki/Simple_stateful_firewall" title="Simple stateful firewall – 中文（简体）" lang="zh-Hans" hreflang="zh-Hans" data-title="Simple stateful firewall" data-language-autonym="中文（简体）" data-language-local-name="中文（简体）" class="interlanguage-link-target"><span>中文（简体）</span></a></li>
+			</ul>
+			
+		</div>
+
+	</div>
+</div>
+</header>
+				<div class="vector-column-end">
+					<div class="vector-sticky-pinned-container">
+						<nav class="vector-page-tools-landmark" aria-label="Page tools">
+							<div id="vector-page-tools-pinned-container" class="vector-pinned-container">
+				
+							</div>
+		</nav>
+						<nav class="vector-appearance-landmark" aria-label="Appearance">
+							<div id="vector-appearance-pinned-container" class="vector-pinned-container">
+				<div id="vector-appearance" class="vector-appearance vector-pinnable-element">
+	<div class="vector-pinnable-header vector-appearance-pinnable-header vector-pinnable-header-pinned" data-feature-name="appearance-pinned" data-pinnable-element-id="vector-appearance" data-pinned-container-id="vector-appearance-pinned-container" data-unpinned-container-id="vector-appearance-unpinned-container">
+	<div class="vector-pinnable-header-label">Appearance</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-appearance.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-appearance.unpin">hide</button>
+</div>
+
+
+</div>
+
+							</div>
+		</nav>
+					</div>
+				</div>
+				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container>
+					<div class="vector-body-before-content">
+							<div class="mw-indicators">
+		</div>
+
+						<div id="siteSub" class="noprint">From ArchWiki</div>
+					</div>
+					<div id="contentSub"><div id="mw-content-subtitle"></div></div>
+					
+					
+					<div id="mw-content-text" class="mw-body-content">
+<div class="mw-content-ltr mw-parser-output" lang="ru" dir="ltr">
+<div class="archwiki-template-meta-related-articles">
+<p>Ссылки по теме</p>
+<ul>
+<li><a href="../ru/Category:Firewalls.html" class="mw-redirect" title="Межсетевой экран">Межсетевой экран</a></li>
+<li><a href="../ru/Internet_sharing.html" class="mw-redirect" title="Раздача интернета">Раздача интернета</a></li>
+<li><a href="../ru/Nftables.html#%D0%9D%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0_%D0%BC%D0%B5%D0%B6%D1%81%D0%B5%D1%82%D0%B5%D0%B2%D0%BE%D0%B3%D0%BE_%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0" title="Nftables (Русский)">Nftables (Русский)#Настройка межсетевого экрана</a></li>
+<li><a href="../en/Router.html" title="Router">Router</a></li>
+<li><a href="../en/Uncomplicated_Firewall.html" title="Uncomplicated Firewall">Uncomplicated Firewall</a></li>
+</ul>
+</div>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Состояние перевода:</strong> На этой странице представлен перевод статьи <a href="../en/Simple_stateful_firewall.html" title="Simple stateful firewall">Simple stateful firewall</a>. Дата последней синхронизации: 11 июля 2021. Вы можете <a href="../ru/ArchWiki:Translation_Team.html" title="ArchWiki:Translation Team (Русский)">помочь</a> синхронизировать перевод, если в английской версии произошли <a rel="nofollow" class="external text" href="https://wiki.archlinux.org/index.php?title=Simple_stateful_firewall&amp;diff=0&amp;oldid=687566">изменения</a>.</div>
+<p>В статье рассмотрена настройка межсетевого экрана с контекстной фильтрацией (<a href="https://en.wikipedia.org/wiki/ru:Stateful_Packet_Inspection" class="extiw" title="wikipedia:ru:Stateful Packet Inspection">stateful firewall</a>) посредством <a href="../ru/Iptables.html" title="Iptables (Русский)">iptables</a>, с описанием основных правил и их назначения. Для удобства статья разбита на две части. В первой объясняется настройка межсетевого экрана <a href="#%D0%9D%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0_%D0%BC%D0%B5%D0%B6%D1%81%D0%B5%D1%82%D0%B5%D0%B2%D0%BE%D0%B3%D0%BE_%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0">на одиночной машине</a>, во второй — <a href="#%D0%9D%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0_NAT-%D1%88%D0%BB%D1%8E%D0%B7%D0%B0">настройка NAT-шлюза</a> в дополнение к файрволу.
+</p>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Важно:</strong> Правила ниже приводятся в порядке выполнения; такая настройка возможна только при локальном входе в систему. Если вы работаете с удалённой системой, то в процессе добавления правил соединение с ней будет потеряно. Чтобы этого избежать, используйте <a href="#%D0%98%D1%82%D0%BE%D0%B3%D0%BE%D0%B2%D1%8B%D0%B9_%D1%84%D0%B0%D0%B9%D0%BB_iptables.rules">готовый файл настроек</a>.</div>
+<meta property="mw:PageProp/toc">
+<h2>
+<span id=".D0.A2.D1.80.D0.B5.D0.B1.D0.BE.D0.B2.D0.B0.D0.BD.D0.B8.D1.8F"></span><span class="mw-headline" id="Требования">Требования</span>
+</h2>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Примечание:</strong> Ядро Linux на вашей машине должно быть скомпилировано с поддержкой iptables. В стандартных ядрах Arch Linux поддержка iptables включена.</div>
+<p>Прежде всего <a href="../ru/Help:Reading.html#%D0%A3%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B0_%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%BE%D0%B2" class="mw-redirect" title="Установите">установите</a> пакет <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=iptables">iptables</a></span> с набором пользовательских утилит, если он ещё не установлен.
+</p>
+<p>В статье предполагается, что в настоящий момент не заданы никакие правила iptables. Узнать текущий набор правил можно командой:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;"># iptables-save</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;"># Generated by iptables-save v1.4.19.1 on Thu Aug  1 19:28:53 2013
+*filter
+:INPUT ACCEPT [50:3763]
+:FORWARD ACCEPT [0:0]
+:OUTPUT ACCEPT [30:3472]
+COMMIT
+# Completed on Thu Aug  1 19:28:53 2013
+</pre>
+<p>или
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;"># iptables -nvL --line-numbers</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">Chain INPUT (policy ACCEPT 156 packets, 12541 bytes)
+num   pkts bytes target     prot opt in     out     source               destination
+
+Chain FORWARD (policy ACCEPT 0 packets, 0 bytes)
+num   pkts bytes target     prot opt in     out     source               destination
+
+Chain OUTPUT (policy ACCEPT 82 packets, 8672 bytes)
+num   pkts bytes target     prot opt in     out     source               destination
+</pre>
+<p>Если всё же какие-то правила существуют, можно сбросить их, загрузив базовый набор:
+</p>
+<pre># iptables-restore &lt; /etc/iptables/empty.rules
+</pre>
+<p>Другие способы сброса правил можно найти в статье <a href="../ru/Iptables.html#%D0%A1%D0%B1%D1%80%D0%BE%D1%81_%D0%BF%D1%80%D0%B0%D0%B2%D0%B8%D0%BB" title="Iptables (Русский)">iptables#Сброс правил</a>.
+</p>
+<h2>
+<span id=".D0.9D.D0.B0.D1.81.D1.82.D1.80.D0.BE.D0.B9.D0.BA.D0.B0_.D0.BC.D0.B5.D0.B6.D1.81.D0.B5.D1.82.D0.B5.D0.B2.D0.BE.D0.B3.D0.BE_.D1.8D.D0.BA.D1.80.D0.B0.D0.BD.D0.B0"></span><span class="mw-headline" id="Настройка_межсетевого_экрана">Настройка межсетевого экрана</span>
+</h2>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Примечание:</strong> Поскольку iptables проверяет правила в цепочке последовательно, сверху вниз, то имеет смысл переместить часто срабатывающие правила ближе к её началу. Разумеется, этот подход имеет свои ограничения, в зависимости от реализуемой логики. Кроме того, поскольку правила имеют определённую "стоимость" выполнения, не стоит изменять их порядок исключительно на основе эмпирических наблюдений за счётчиком байтов/пакетов.</div>
+<h3>
+<span id=".D0.A1.D0.BE.D0.B7.D0.B4.D0.B0.D0.BD.D0.B8.D0.B5_.D0.BD.D0.B5.D0.BE.D0.B1.D1.85.D0.BE.D0.B4.D0.B8.D0.BC.D1.8B.D1.85_.D1.86.D0.B5.D0.BF.D0.BE.D1.87.D0.B5.D0.BA"></span><span class="mw-headline" id="Создание_необходимых_цепочек">Создание необходимых цепочек</span>
+</h3>
+<p>Создадим две пользовательские цепочки, которые будут использоваться для открытия портов.
+</p>
+<pre># iptables -N TCP
+# iptables -N UDP
+</pre>
+<p>В дальнейшем при назначений правил для этих цепочек мы будем всякий раз указывать тип протокола (например, флагом <code>-p tcp</code>). Этим обусловлен выбор названий цепочек, но вообще говоря, названия могут быть любыми.
+</p>
+<h3>
+<span id=".D0.A6.D0.B5.D0.BF.D0.BE.D1.87.D0.BA.D0.B0_FORWARD"></span><span class="mw-headline" id="Цепочка_FORWARD">Цепочка FORWARD</span>
+</h3>
+<p>Если вы хотите настроить свою систему в качестве NAT-шлюза, изучите раздел <a href="#%D0%9D%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0_NAT-%D1%88%D0%BB%D1%8E%D0%B7%D0%B0">#Настройка NAT-шлюза</a>. Для обычной системы можно просто задать политику <b>DROP</b> для цепочки <b>FORWARD</b>:
+</p>
+<pre># iptables -P FORWARD DROP
+</pre>
+<h3>
+<span id=".D0.A6.D0.B5.D0.BF.D0.BE.D1.87.D0.BA.D0.B0_OUTPUT"></span><span class="mw-headline" id="Цепочка_OUTPUT">Цепочка OUTPUT</span>
+</h3>
+<p>Цепочка OUTPUT может быть крайне полезной в деле фильтрации исходящего трафика, особено для серверов и других устройств, не использующих веб-браузеры и peer-to-peer программы для соединения с произвольными узлами сети Интернет. Тем не менее, правильная настройка цепочки OUTPUT требует понимания назначения конкретной системы. Наборы правил безопасности для настольной системы, ноутбука, облачного или домашнего сервера будут сильно отличаться.
+</p>
+<p>В этом примере весь исходящий трафик разрешён, поэтому для цепочки <b>OUTPUT</b> задаётся политика <b>ACCEPT</b>. Этого недостаточно для полной безопасности, но будет работать на большинстве систем.
+</p>
+<pre># iptables -P OUTPUT ACCEPT
+</pre>
+<h3>
+<span id=".D0.A6.D0.B5.D0.BF.D0.BE.D1.87.D0.BA.D0.B0_INPUT"></span><span class="mw-headline" id="Цепочка_INPUT">Цепочка INPUT</span>
+</h3>
+<p>Назначаем политику <b>DROP</b> для цепочки <b>INPUT</b> на случай, если что-то каким-то образом проскочит мимо наших правил. Лучший способ создать надёжный файрвол — запретить весь трафик, отдельно указав то, что разрешено.
+</p>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Важно:</strong> Если вы вошли в систему через SSH, следующий шаг немедленно прервёт SSH-сеанс. Чтобы этого избежать: (1) добавьте первое правило для цепочки INPUT, приведённое далее в этом же разделе; правило позволит сохранить существующее соединение, (2) добавьте обычное правило, разрешающее входящее SSH-подключение (чтобы иметь возможность восстановить соединение в случае потери связи) и только после этого (3) задайте политику.</div>
+<pre># iptables -P INPUT DROP
+</pre>
+<p>Все входящие пакеты, предназначенные для этой машины и пришедшие на любой сетевой интерфейс, будут проходить через цепочку <b>INPUT</b>. Эта цепочка позволяет принимать только те пакеты, которые действительно нужны.
+</p>
+<p>Первое правило цепочки INPUT будет разрешать трафик установленных соединений и любой новый трафик, относящийся к ним, например, сообщения ICMP об ошибке или эхо-ответы (пакеты, которые хост возвращает, когда его пингуют). ICMP — протокол управляющих сообщений (Internet Control Message Protocol). Некоторые сообщения ICMP имеют важное значение для управления перегрузками и определения MTU, и мы разрешаем их этим правилом:
+</p>
+<pre># iptables -A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+</pre>
+<p>Состояние соединения <code>ESTABLISHED</code> подразумевает одну из двух ситуаций: либо первичная (<code>--ctstate NEW</code>) попытка соединения была ранее одобрена другим правилом, либо соединение уже было активно (например, удалённое SSH-подключение) на момент задания правила.
+</p>
+<p>Второе правило разрешит весь трафик от петлевого (loopback) интерфейса, который необходим многим приложениям и службам:
+</p>
+<pre># iptables -A INPUT -i lo -j ACCEPT
+</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Примечание:</strong> Аналогичным образом можно добавить и другие доверенные интерфейсы (например, "enp2s0"), если вы не хотите, чтобы проходящий через них трафик обрабатывался межсетевым экраном. Тем не менее, вы должны понимать, весь этот трафик, вне зависимости от его происхождения, пройдёт дальше, невзирая ни на какие иные настройки.</div>
+<p>Третье правило будет отбрасывать все пакеты с состоянием INVALID. Существует четыре категории состояния (state): NEW, ESTABLISHED, RELATED и INVALID. Именно наличие категорий отличает межсетевой экран с контекстной фильтрацией от менее безопасного экрана без оной. Состояния отслеживаются модулями ядра <code>nf_conntrack_*</code>, которые загружаются автоматически после добавления правил.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Примечание:</strong> 
+<ul>
+<li>Это правило будет отбрасывать все пакеты с неверными заголовками или контрольными суммами, неверными флагами TCP, неправильными ICMP-сообщениями (например, входящее сообщение "порт недостижим", если мы не посылали ничего другому хосту), а также пакеты с неправильным порядковым номером, что может быть признаком атаки. Политика DROP означает отбрасывание пакетов безо всякого ответа, в то время как REJECT отклоняет их вежливо, с уведомлением отправителя. Мы используем DROP, поскольку для INVALID-пакетов не существует подходящего REJECT-ответа и в целом подтверждать их получение нет никакой необходимости.</li>
+<li>Пакеты ICMPv6 Neighbor Discovery остаются неотслеживаемыми и всегда классифицируются как INVALID, хотя они по всем параметрам являются годными. Если их необходимо разрешить, то выполните <code>iptables -A INPUT -p 41 -j ACCEPT</code> с правами root перед следующей командой.</li>
+</ul>
+</div>
+<pre># iptables -A INPUT -m conntrack --ctstate INVALID -j DROP
+</pre>
+<p>Следующее правило разрешает входящие ICMP эхо-запросы (ECHO_REQUEST), известные как <i>пинги</i>. Только первый пакет будет считаться относящимся к категории NEW, остальные будут обрабатываться правилом "RELATED, ESTABLISHED". Если компьютер не является маршрутизатором, нет необходимости разрешать какой-либо другой ICMP-трафик с состоянием NEW.
+</p>
+<pre># iptables -A INPUT -p icmp --icmp-type 8 -m conntrack --ctstate NEW -j ACCEPT
+</pre>
+<p>Теперь мы прикрепим TCP- и UDP-цепочки к цепочке INPUT для обработки новых входящих соединений. Если соединение разрешено цепочкой TCP или UDP, оно обрабатывается правилом "RELATED, ESTABLISHED". TCP или UDP цепочки будут либо разрешать новые входящие соединения, либо вежливо отклонять их. Новые TCP соединения должны начинаться с SYN-сегмента.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Примечание:</strong> NEW-пакет без SYN-флага — единственный неверный TCP-флаг, который не подпадает под состояние INVALID. Это связано с тем, что данные пакеты редко бывают вредоносными и не должны молча отбрасываться (drop). Вместо этого они отклоняются (reject) с сообщением TCP RESET в соответствии со следующим правилом.</div>
+<pre># iptables -A INPUT -p udp -m conntrack --ctstate NEW -j UDP
+# iptables -A INPUT -p tcp --syn -m conntrack --ctstate NEW -j TCP
+</pre>
+<p>Мы отклоняем TCP-соединения пакетами TCP RESET, а UDP-потоки — сообщениями ICMP "port unreachable", если запрашиваемый порт закрыт. Это имитирует стандартное поведение Linux (в соответствии с RFC), и позволяет отправителю быстро закрыть соединение.
+</p>
+<pre># iptables -A INPUT -p udp -j REJECT --reject-with icmp-port-unreachable
+# iptables -A INPUT -p tcp -j REJECT --reject-with tcp-reset
+</pre>
+<p>Для прочих протоколов мы добавляем последнее правило в цепочку INPUT, чтобы отклонить остальной входящий трафик с ICMP-сообщением "protocol unreachable". Это также соответствует стандартному поведению Linux.
+</p>
+<pre># iptables -A INPUT -j REJECT --reject-with icmp-proto-unreachable
+</pre>
+<h3>
+<span id=".D0.98.D1.82.D0.BE.D0.B3.D0.BE.D0.B2.D1.8B.D0.B9_.D1.84.D0.B0.D0.B9.D0.BB_iptables.rules"></span><span class="mw-headline" id="Итоговый_файл_iptables.rules">Итоговый файл iptables.rules</span>
+</h3>
+<p>Пример файла <code>iptables.rules</code> после выполнения всех команд выше:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/iptables/iptables.rules</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;"># Generated by iptables-save v1.4.18 on Sun Mar 17 14:21:12 2013
+*filter
+:INPUT DROP [0:0]
+:FORWARD DROP [0:0]
+:OUTPUT ACCEPT [0:0]
+:TCP - [0:0]
+:UDP - [0:0]
+-A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+-A INPUT -i lo -j ACCEPT
+-A INPUT -m conntrack --ctstate INVALID -j DROP
+-A INPUT -p icmp -m icmp --icmp-type 8 -m conntrack --ctstate NEW -j ACCEPT
+-A INPUT -p udp -m conntrack --ctstate NEW -j UDP
+-A INPUT -p tcp --tcp-flags FIN,SYN,RST,ACK SYN -m conntrack --ctstate NEW -j TCP
+-A INPUT -p udp -j REJECT --reject-with icmp-port-unreachable
+-A INPUT -p tcp -j REJECT --reject-with tcp-reset
+-A INPUT -j REJECT --reject-with icmp-proto-unreachable
+COMMIT
+# Completed on Sun Mar 17 14:21:12 2013
+</pre>
+<p>Файл генерируется и сохраняется командой
+</p>
+<pre># iptables-save -f /etc/iptables/iptables.rules
+</pre>
+<p>Данный файл конфигурации можно использовать как исходный для дальнейших настроек в следующих разделах. Если вы настраиваете межсетевой экран удалённо через SSH, перед продолжением добавьте правило, разрешающее новые SSH-подключения (вместо порта 22 выберите нужный):
+</p>
+<pre># iptables -A TCP -p tcp --dport 22 -j ACCEPT
+</pre>
+<h3>
+<span id=".D0.A6.D0.B5.D0.BF.D0.BE.D1.87.D0.BA.D0.B8_TCP_.D0.B8_UDP"></span><span class="mw-headline" id="Цепочки_TCP_и_UDP">Цепочки TCP и UDP</span>
+</h3>
+<p>Цепочки TCP и UDP содержат правила для разрешения новых TCP-соединений и UDP-потоков к определённым портам.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Примечание:</strong> Также в эти цепочки можно добавлять правила для разрешения удалённых соединений, таких как SSH, HTTP и других служб, к которым вы желаете иметь удалённый доступ.</div>
+<h4>
+<span id=".D0.9E.D1.82.D0.BA.D1.80.D1.8B.D1.82.D0.B8.D0.B5_.D0.BF.D0.BE.D1.80.D1.82.D0.BE.D0.B2_.D0.B4.D0.BB.D1.8F_.D0.B2.D1.85.D0.BE.D0.B4.D1.8F.D1.89.D0.B8.D1.85_.D1.81.D0.BE.D0.B5.D0.B4.D0.B8.D0.BD.D0.B5.D0.BD.D0.B8.D0.B9"></span><span class="mw-headline" id="Открытие_портов_для_входящих_соединений">Открытие портов для входящих соединений</span>
+</h4>
+<p>Разрешить входящие TCP-соединения на порт 80 для веб-сервера (HTTP):
+</p>
+<pre># iptables -A TCP -p tcp --dport 80 -j ACCEPT
+</pre>
+<p>Разрешить входящие TCP-соединения на порт 443 для веб-сервера (HTTPS):
+</p>
+<pre># iptables -A TCP -p tcp --dport 443 -j ACCEPT
+</pre>
+<p>Разрешить удаленные SSH-соединения (на порт 22):
+</p>
+<pre># iptables -A TCP -p tcp --dport 22 -j ACCEPT
+</pre>
+<p>Разрешить входящие TCP/UDP запросы для <a href="../ru/Category:Domain_Name_System.html" title="Category:Domain Name System (Русский)">DNS-сервера</a> (порт 53):
+</p>
+<pre># iptables -A TCP -p tcp --dport 53 -j ACCEPT
+# iptables -A UDP -p udp --dport 53 -j ACCEPT
+</pre>
+<p>Более сложные правила, вроде проверки по нескольким портам, можно найти в <span class="plainlinks archwiki-template-man" title="$ man 8 iptables"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/iptables.8">iptables(8)</a></span>.
+</p>
+<h4><span class="mw-headline" id="Port_knocking">Port knocking</span></h4>
+<p>Port knocking — способ открыть извне порты, которые файрвол по умолчанию держит закрытыми. Port knocking заключается в создании последовательности попыток соединений с заранее выбранными закрытыми портами. При получении корректной последовательности "простукиваний" межсетевой экран открывает определенный порт и разрешает соединение. Подробнее см. <a href="../en/Port_knocking.html" title="Port knocking">Port knocking</a>.
+</p>
+<h3>
+<span id=".D0.97.D0.B0.D1.89.D0.B8.D1.82.D0.B0_.D0.BE.D1.82_.D1.81.D0.BF.D1.83.D1.84.D0.B8.D0.BD.D0.B3.D0.B0"></span><span class="mw-headline" id="Защита_от_спуфинга">Защита от спуфинга</span>
+</h3>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Примечание:</strong> В файле <code>/usr/lib/sysctl.d/50-default.conf</code> параметр <code>rp_filter</code> установлен в значение <code>2</code>, поэтому в описанных ниже действиях нет необходимости.</div>
+<p>Если из внешней сети пришёл пакет с зарезервированным (т.е. локальным) адресом отправителя, то имеет место подмена адреса (address spoofing). Стандартный способ блокирования таких пакетов — установить с помощью sysctl параметр <code>rp_filter</code> (Reverse Path Filter) в значение <code>1</code>, что включит встроенную в ядро Linux проверку адреса отправителя пакета. Встроенная проверка будет работать лучше, чем отдельные правила iptables на каждый случай. Добавьте в файл <code>/etc/sysctl.d/90-firewall.conf</code> (подробнее см. <a href="../en/Sysctl.html" title="Sysctl">sysctl</a>) следующую строку:
+</p>
+<pre>net.ipv4.conf.all.rp_filter=1
+</pre>
+<p>То же самое можно сделать посредством netfilter, если необходимо ведение статистики и лог-файлов:
+</p>
+<pre># iptables -t raw -I PREROUTING -m rpfilter --invert -j DROP
+</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Примечание:</strong> Включать эту функцию одновременно в двух местах не нужно. Реализованная в netfilter проверка вполне удовлетворительна и, кроме того, работает с адресами IPv6.</div>
+<p>Для случая асинхронной маршрутизации используйте значение <code>rp_filter=2</code>. Флаг <code>--loose</code> в модуле <code>rpfilter</code> делает то же самое посредством netfilter.
+</p>
+<h3>
+<span id=".D0.97.D0.B0.D1.89.D0.B8.D1.82.D0.B0_.D0.BE.D1.82_.D0.BE.D0.B1.D0.BD.D0.B0.D1.80.D1.83.D0.B6.D0.B5.D0.BD.D0.B8.D1.8F"></span><span class="mw-headline" id="Защита_от_обнаружения">Защита от обнаружения</span>
+</h3>
+<p>Если вы хотите сделать вашу машину менее заметной в сети, хорошей идеей будет блокировать некоторые входящие запросы.
+</p>
+<h4>
+<span id=".D0.91.D0.BB.D0.BE.D0.BA.D0.B8.D1.80.D0.BE.D0.B2.D0.B0.D0.BD.D0.B8.D0.B5_ping-.D0.B7.D0.B0.D0.BF.D1.80.D0.BE.D1.81.D0.BE.D0.B2"></span><span class="mw-headline" id="Блокирование_ping-запросов">Блокирование ping-запросов</span>
+</h4>
+<p>Запрос "ping" представляет собой ICMP-пакет, посланный с целью убедиться, что между двумя хостами есть связь. Если сеть в порядке, вы можете безопасно блокировать все ping-запросы. Нужно отметить, что это не сделает ваш компьютер необнаружимым — каждый входящий пакет будет отклоняться, поэтому вы всё ещё будете видны при простом "ping-сканировании" по диапазону IP-адресов посредством <a href="../en/Nmap.html" title="Nmap">nmap</a>. Кроме того, нужно иметь в виду, что эта элементарная "защита" усложнит вам жизнь случае возникновения необходимости отладки сети.
+</p>
+<p>Чтобы заблокировать эхо-запросы (echo requests), добавьте следующую строку в файл <code>/etc/sysctl.d/90-firewall.conf</code> (подробную информацию можно найти в статье <a href="../en/Sysctl.html" title="Sysctl">sysctl</a>):
+</p>
+<pre>net.ipv4.icmp_echo_ignore_all = 1
+</pre>
+<p>Больше сведений об этой защите вы найдёте в руководстве <span class="plainlinks archwiki-template-man" title="$ man 8 iptables"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/iptables.8">iptables(8)</a></span>, а также в документации и примерах на странице <a rel="nofollow" class="external free" href="http://www.snowman.net/projects/ipt_recent/">http://www.snowman.net/projects/ipt_recent/</a>
+</p>
+<h4>
+<span id=".D0.9E.D0.B1.D0.BC.D0.B0.D0.BD_.D1.81.D0.BA.D0.B0.D0.BD.D0.B5.D1.80.D0.BE.D0.B2_.D0.BF.D0.BE.D1.80.D1.82.D0.BE.D0.B2"></span><span class="mw-headline" id="Обман_сканеров_портов">Обман сканеров портов</span>
+</h4>
+<p>Сканирование портов производится с целью обнаружения тех из них, которые открыты в настоящий момент. Это позволит атакующему определить запущенные на машине службы и подобрать к ним эксплойты.
+</p>
+<p>Состояние INVALID в правилах iptables "позаботится" обо всех типах сканирования, за исключением сканирований UDP, ACK и SYN (флаги nmap <code>-sU</code>, <code>-sA</code> и <code>-sS</code> соответственно).
+</p>
+<p><i>ACK-сканирование</i> не используется для определения открытых портов, но зато покажет порты, защищённые межсетевым экраном. Подобно SYN-пакету в TCP-соединениях с состоянием NEW, каждый пакет ACK-сканирования будет отклонен с отправкой ответа TCP RESET по обратному адресу. Некоторые межсетевые экраны вместо этого просто отбрасывают такие пакеты, что позволяет атакующему определить действующие правила.
+</p>
+<p>Модуль <b>recent</b> поможет обмануть остальные типы сканирования портов. Он добавляет хосты к списку недавних соединений, который используется для обнаружения и блокирования попыток атак. Просмотреть списки недавних соединений можно в каталоге <code>/proc/net/xt_recent/</code>.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Примечание:</strong> Использование модуля resent для защиты от сканирований может привести к тому, что:
+<ul>
+<li>Система станет уязвимой к разновидности <a href="https://en.wikipedia.org/wiki/ru:DoS-%D0%B0%D1%82%D0%B0%D0%BA%D0%B0" class="extiw" title="wikipedia:ru:DoS-атака">DoS-атаки</a>. Атакующий посылает пакеты с подменёными IP-адресами, чтобы добиться их блокировки вашими службами.</li>
+<li>Может оказаться заблокированным обычный IP-адрес, если несколько пакетов с этого адреса на порт получателя будут признаны INVALID модулем conntrack. Чтобы избежать занесения в чёрный список, следует разрешить все пакеты, поступающие на этот порт.</li>
+</ul>
+</div>
+<h5>
+<span id="SYN-.D1.81.D0.BA.D0.B0.D0.BD.D0.B8.D1.80.D0.BE.D0.B2.D0.B0.D0.BD.D0.B8.D0.B5"></span><span class="mw-headline" id="SYN-сканирование">SYN-сканирование</span>
+</h5>
+<p>При SYN-сканировании сканер портов посылает синхронизационные пакеты на каждый порт с целью создать TCP-соединение. Если порт закрыт, то возвращается ответ TCP RESET, межсетевой экран просто отбрасывает входящий пакет, а открытый порт возвращает ответ SYN ACK.
+</p>
+<p>Модуль <code>recent</code> может использоваться для отслеживания хостов с отклонёнными попытками соединения и возвращения ответа TCP RESET для каждого SYN-пакета, поступившего на открытый порт, как если бы порт был закрыт. Если открытый порт оказался первым в порядке сканирования, то будет возвращён ответ SYN ACK, поэтому приложения вроде ssh следует размещать на нестандартных портах.
+</p>
+<p>Сначала добавьте правило в начало цепочки TCP. Это правило будет отвечать пакетом TCP RESET любому хосту, входившему в список <code>TCP-PORTSCAN</code> в течение последних 60 секунд. Флаг <code>--update</code> управляет периодическим обновлением списка.
+</p>
+<pre># iptables -I TCP -p tcp -m recent --update --rsource --seconds 60 --name TCP-PORTSCAN -j REJECT --reject-with tcp-reset
+</pre>
+<p>Затем необходимо модифицировать правило отклонения TCP-пакетов, чтобы добавлять все хосты с отклонёнными пакетами к списку <code>TCP-PORTSCAN</code>:
+</p>
+<pre># iptables -D INPUT -p tcp -j REJECT --reject-with tcp-reset
+# iptables -A INPUT -p tcp -m recent --set --rsource --name TCP-PORTSCAN -j REJECT --reject-with tcp-reset
+</pre>
+<h5>
+<span id="UDP-.D1.81.D0.BA.D0.B0.D0.BD.D0.B8.D1.80.D0.BE.D0.B2.D0.B0.D0.BD.D0.B8.D0.B5"></span><span class="mw-headline" id="UDP-сканирование">UDP-сканирование</span>
+</h5>
+<p>Сканирование UDP схоже со сканированием TCP SYN за исключением того факта, что UDP является протоколом без установления соединения. В нём нет "рукопожатий" и подтверждений. Вместо этого сканер посылает UDP-пакеты на каждый UDP-порт. Закрытые порты должны возвращать сообщение ICMP port unreachable, а открытые не возвращают ничего. Поскольку UDP — "ненадежный" протокол, у сканера нет возможности узнать о потере пакетов, поэтому он посылает серию запросов на каждый порт, с которого не вернулся ответ.
+</p>
+<p>Ядро Linux посылает сообщения ICMP port unreachable довольно медленно, поэтому продолжительность полного UDP-сканирования может превысить 10 часов. Однако часто используемые порты проверяются гораздо быстрее, поэтому хорошей идеей будет применить контрмеры, аналогичные защите от SYN-сканирований.
+</p>
+<p>Сначала добавляем правило отклонения пакетов от хостов из списка <code>UDP-PORTSCAN</code> в начало цепочки UDP:
+</p>
+<pre># iptables -I UDP -p udp -m recent --update --rsource --seconds 60 --name UDP-PORTSCAN -j REJECT --reject-with icmp-port-unreachable
+</pre>
+<p>Затем модифицируем правило отклонения пакетов для UDP:
+</p>
+<pre># iptables -D INPUT -p udp -j REJECT --reject-with icmp-port-unreachable
+# iptables -A INPUT -p udp -m recent --set --rsource --name UDP-PORTSCAN -j REJECT --reject-with icmp-port-unreachable
+</pre>
+<h5>
+<span id=".D0.92.D0.BE.D1.81.D1.81.D1.82.D0.B0.D0.BD.D0.BE.D0.B2.D0.BB.D0.B5.D0.BD.D0.B8.D0.B5_.D0.BF.D0.BE.D1.81.D0.BB.D0.B5.D0.B4.D0.BD.D0.B5.D0.B3.D0.BE_.D0.BF.D1.80.D0.B0.D0.B2.D0.B8.D0.BB.D0.B0"></span><span class="mw-headline" id="Восстановление_последнего_правила">Восстановление последнего правила</span>
+</h5>
+<p>Если вы применили хотя бы один из способов защиты выше, бывшее последним правило цепочки INPUT более таковым не является. Теперь оно находится перед правилами защиты от сканирования и те по сути бесполезны. Просто удалите (<code>-D</code>) это правило, а затем добавьте его снова (<code>-A</code>), это переместит его в конец цепочки.
+</p>
+<pre># iptables -D INPUT -j REJECT --reject-with icmp-proto-unreachable
+# iptables -A INPUT -j REJECT --reject-with icmp-proto-unreachable
+</pre>
+<h3>
+<span id=".D0.97.D0.B0.D1.89.D0.B8.D1.82.D0.B0_.D0.BE.D1.82_.D0.B4.D1.80.D1.83.D0.B3.D0.B8.D1.85_.D1.82.D0.B8.D0.BF.D0.BE.D0.B2_.D0.B0.D1.82.D0.B0.D0.BA"></span><span class="mw-headline" id="Защита_от_других_типов_атак">Защита от других типов атак</span>
+</h3>
+<p>В статье <a href="../en/Sysctl.html#TCP/IP_stack_hardening" title="Sysctl">sysctl#TCP/IP stack hardening</a> можно найти описание важных с точки зрения безопасности параметров ядра.
+</p>
+<h4>
+<span id=".D0.90.D1.82.D0.B0.D0.BA.D0.B0_.D0.BF.D0.BE.D0.BB.D0.BD.D1.8B.D0.BC_.D0.BF.D0.B5.D1.80.D0.B5.D0.B1.D0.BE.D1.80.D0.BE.D0.BC"></span><span class="mw-headline" id="Атака_полным_перебором">Атака полным перебором</span>
+</h4>
+<p>Доступные по внешнему IP-адресу сервисы подвергаются атакам полным перебором довольно часто. Реализовать атаку этого типа несложно, а инструментарий — обширен и доступен. К счастью, существует несколько способов защиты от атак полным перебором. Первый способ заключается в создании правил <code>iptables</code>, которые заносят IP-адрес в чёрный список после нескольких попыток установить соединение. При втором способе защиты запускается специализированный демон, который отслеживает лог-файл на предмет неудачных попыток соединения.
+</p>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Важно:</strong> Защита посредством занесения адресов в чёрный список остановит простые атаки, но она полагается на дополнительный демон и успешное логирование (в случае мощной атаки может закончиться свободное место разделе, содержащем каталог <code>/var</code> с лог-файлами). Кроме того, узнав ваш IP-адрес, атакующий может посылать пакеты с подменённым адресом отправителя, чтобы добиться вашей блокировки. Элегантное решение этой проблемы заключается в использовании <a href="../en/SSH_keys.html" title="SSH keys">ключей SSH</a>.</div>
+<p>Приложения <a href="../ru/Fail2ban.html" title="Fail2ban (Русский)">Fail2ban</a> и (в случае <code>sshd</code>) <a href="../en/Sshguard.html" title="Sshguard">Sshguard</a> используются для блокировки IP-адресов при превышении допустимого количества попыток аутентификации. Суть их работы состоит в обновлении правил iptables с целью временно или навсегда воспрепятствовать будущим соединениям атакующих.
+</p>
+<p>Ниже представлен пример правил iptables для предотвращения атак полным перебором на сервис SSH.
+</p>
+<pre># iptables -N IN_SSH
+# iptables -N LOG_AND_DROP
+# iptables -A INPUT -p tcp --dport ssh -m conntrack --ctstate NEW -j IN_SSH
+# iptables -A IN_SSH -m recent --name sshbf --rttl --rcheck --hitcount 3 --seconds 10 -j LOG_AND_DROP
+# iptables -A IN_SSH -m recent --name sshbf --rttl --rcheck --hitcount 4 --seconds 1800 -j LOG_AND_DROP 
+# iptables -A IN_SSH -m recent --name sshbf --set -j ACCEPT
+# iptables -A LOG_AND_DROP -j LOG --log-prefix "iptables deny: " --log-level 7
+# iptables -A LOG_AND_DROP -j DROP
+</pre>
+<p>Большая часть правил очевидна: первое разрешает три попытки соединения в течение 10 секунд, после чего дальнейшие попытки будут отклоняться. Второе — добавляет ограничение на четыре попытки в течение получаса. Дело в том, что атаки полным перебором обычно выполняются медленно и за несколько серий попыток. Дополнительную информацию об этих правилах и их опциях можно найти в оригинальной статье на сайте <a rel="nofollow" class="external text" href="https://compilefailure.blogspot.com/2011/04/better-ssh-brute-force-prevention-with.html">compilefailure.blogspot.com</a>.
+</p>
+<p>Предложенные выше правила могут использоваться для защиты любой службы, но демон SSH нуждается в ней наиболее часто.
+</p>
+<p>Необходимо также убедиться, что правило <code>-A INPUT -p tcp --dport ssh -m conntrack --ctstate NEW -j IN_SSH</code> находится в верной позиции в последовательности iptables, перед точкой прикрепления цепочки TCP к цепочке INPUT. Это позволит успешно перехватывать новые попытки установления SSH-соединений. Если вы выполнили все предыдущие шаги в этой статье, порядок правил должен быть следующим:
+</p>
+<pre>...
+-A INPUT -m conntrack --ctstate INVALID -j DROP
+-A INPUT -p icmp -m icmp --icmp-type 8 -m conntrack --ctstate NEW -j ACCEPT
+<b>-A INPUT -p tcp --dport 22 -m conntrack --ctstate NEW -j IN_SSH</b>
+-A INPUT -p udp -m conntrack --ctstate NEW -j UDP
+-A INPUT -p tcp --tcp-flags FIN,SYN,RST,ACK SYN -m conntrack --ctstate NEW -j TCP
+...
+</pre>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Совет:</strong> При проверке правил после настройки реальное занесение в чёрный список может замедлить тесты, что усложнит тонкую настройку. Входящие попытки соединений можно отслеживать посредством команды <code>cat /proc/net/xt_recent/sshbf</code>. Чтобы разблокировать собственный IP-адрес во время тестирования, вам понадобятся права root: <code>echo / &gt; /proc/net/xt_recent/sshbf</code>.</div>
+<h3><span class="mw-headline" id="IPv6">IPv6</span></h3>
+<p>Если вы не используете протокол IPv6, то лучше будет его <a href="../ru/IPv6.html#%D0%9E%D1%82%D0%BA%D0%BB%D1%8E%D1%87%D0%B5%D0%BD%D0%B8%D0%B5_IPv6" class="mw-redirect" title="Отключение IPv6">отключить</a>. В противном случае стоит создать соответствующий набор правил межсетевого экрана.
+</p>
+<p>Скопируйте созданные ранее правила для протокола IPv4 и замените все IPv4-адреса на адреса формата IPv6:
+</p>
+<pre># cp /etc/iptables/iptables.rules /etc/iptables/ip6tables.rules
+</pre>
+<p>Некоторые правила нужно адаптировать под IPv6. Так, для IPv6 используется обновлённая версия протокола ICMP, и коды ответов при отклонении соединений <code>--reject-with icmp-port-unreachable</code> и <code>--reject-with icmp-proto-unreachable</code> необходимо преобразовать в коды ICMPv6.
+</p>
+<p>Коды ошибок ICMPv6 перечислены в <a href="https://tools.ietf.org/html/rfc4443#section-3.1" class="extiw" title="rfc:4443">RFC 4443</a>, согласно которому при блокировке межсетевым экраном попыток установления соединения необходимо использовать код <code>--reject-with icmp6-adm-prohibited</code>. Это проинформирует удалённую систему о том, что соединение было отклонено брандмауэром, а не прослушивающей порт службой.
+</p>
+<p>Если уведомлять удалённую систему о наличии файрвола нежелательно, то можно отклонить пакет без сообщения:
+</p>
+<pre> -A INPUT -j REJECT
+</pre>
+<p>Отклонение пакетов по этому правилу будет производиться с сообщением об ошибке <code>--reject-with icmp6-port-unreachable</code>. Следует однако отметить, что одной из основных функций приложений-сканеров является как раз обнаружение межсетевых экранов и обмануть их этим правилом не получится.
+</p>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../File:Tango-view-fullscreen.svg" decoding="async" width="48" height="48" class="mw-file-element"></span></span><b>This article or section needs expansion.</b></p>
+<div>
+<b>Reason:</b> Какие особенности ICMPv6 нужно добавить, чтобы привести правила в полное соответствие с правилами IPv4? (Discuss in <a href="../en/Talk:Simple_stateful_firewall.html#ICMP_blocking" title="Talk:Simple stateful firewall">Talk:Simple_stateful_firewall#ICMP blocking</a>)</div>
+</div>
+<p>Следующее правило для протокола IPv6 настроит поведение межсетевого экрана по отношению к новым входящим пингам (ICMP echo requests):
+</p>
+<pre># ip6tables -A INPUT -p ipv6-icmp --icmpv6-type 128 -m conntrack --ctstate NEW -j ACCEPT
+</pre>
+<p>Модуль conntrack не отслеживает действия ICMPv6 Neighbor Discovery Protocol (аналог протокола ARP), поэтому необходимо разрешить трафик ICMPv6 вне зависимости от его состояния для всех прилежащих подсетей. Следующее правило нужно вставить после правила отбрасывания некорректных пакетов <code>--ctstate INVALID</code>, но перед любыми другими правилами DROP или REJECT. Создаётся по одному правилу на каждую подсеть:
+</p>
+<pre># ip6tables -A INPUT -s fe80::/10 -p ipv6-icmp -j ACCEPT
+</pre>
+<p>Если вы желаете включить <a href="https://en.wikipedia.org/wiki/ru:DHCPv6" class="extiw" title="wikipedia:ru:DHCPv6">DHCPv6</a>, разрешите входящие соединения на <a rel="nofollow" class="external text" href="https://unix.stackexchange.com/a/452905">UDP-порт 546</a>:
+</p>
+<pre># ip6tables -A INPUT -p udp --sport 547 --dport 546 -j ACCEPT
+</pre>
+<p>Поскольку в ядре Linux нет встроенной фильтрации по обратному маршруту (reverse path filter) для протокола IPv6, то стоит включить её посредством ip6tables:
+</p>
+<pre># ip6tables -t raw -A PREROUTING -m rpfilter -j ACCEPT
+# ip6tables -t raw -A PREROUTING -j DROP
+</pre>
+<h3>
+<span id=".D0.A1.D0.BE.D1.85.D1.80.D0.B0.D0.BD.D0.B5.D0.BD.D0.B8.D0.B5_.D0.BF.D1.80.D0.B0.D0.B2.D0.B8.D0.BB"></span><span class="mw-headline" id="Сохранение_правил">Сохранение правил</span>
+</h3>
+<p>Набор правил межсетевого экрана завершён и осталось только сохранить его в файл, который будет загружаться при каждом запуске системы.
+</p>
+<p>Сохраняем правила IPv4 и IPv6 командами:
+</p>
+<pre># iptables-save -f /etc/iptables/iptables.rules
+# ip6tables-save -f /etc/iptables/ip6tables.rules
+</pre>
+<h3>
+<span id=".D0.98.D1.82.D0.BE.D0.B3.D0.BE.D0.B2.D1.8B.D0.B9_.D1.84.D0.B0.D0.B9.D0.BB_ip6tables.rules"></span><span class="mw-headline" id="Итоговый_файл_ip6tables.rules">Итоговый файл ip6tables.rules</span>
+</h3>
+<p>Пример файла правил <code>ip6tables.rules</code> после выполнения представленных выше команд:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/iptables/ip6tables.rules</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;"># Generated by ip6tables-save v1.8.2 on Sat Apr 20 10:53:41 2019
+*filter
+:INPUT DROP [0:0]
+:FORWARD DROP [0:0]
+:OUTPUT ACCEPT [0:0]
+:TCP - [0:0]
+:UDP - [0:0]
+-A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+-A INPUT -i lo -j ACCEPT
+-A INPUT -m conntrack --ctstate INVALID -j DROP
+-A INPUT -s fe80::/10 -p ipv6-icmp -j ACCEPT
+-A INPUT -p udp --sport 547 --dport 546 -j ACCEPT
+-A INPUT -p udp -m conntrack --ctstate NEW -j UDP
+-A INPUT -p tcp -m tcp --tcp-flags FIN,SYN,RST,ACK SYN -m conntrack --ctstate NEW -j TCP
+-A INPUT -p udp -j REJECT --reject-with icmp6-adm-prohibited
+-A INPUT -p tcp -j REJECT --reject-with tcp-reset
+-A INPUT -j REJECT --reject-with icmp6-adm-prohibited
+-A INPUT -p ipv6-icmp -m icmp6 --icmpv6-type 128 -m conntrack --ctstate NEW -j ACCEPT
+COMMIT
+# Completed on Sat Apr 20 10:53:41 2019
+</pre>
+<p>В завершение <a href="../ru/Help:Reading.html#%D0%A3%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5_%D1%8E%D0%BD%D0%B8%D1%82%D0%B0%D0%BC%D0%B8_systemd" class="mw-redirect" title="Включите">включите</a> и <a href="../ru/Help:Reading.html#%D0%A3%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5_%D1%8E%D0%BD%D0%B8%D1%82%D0%B0%D0%BC%D0%B8_systemd" class="mw-redirect" title="Запустите">запустите</a> службы <code>iptables.service</code> и <code>ip6tables.service</code>. Проверьте статус служб, чтобы убедиться, что правила загрузились корректно.
+</p>
+<h2>
+<span id=".D0.9D.D0.B0.D1.81.D1.82.D1.80.D0.BE.D0.B9.D0.BA.D0.B0_NAT-.D1.88.D0.BB.D1.8E.D0.B7.D0.B0"></span><span class="mw-headline" id="Настройка_NAT-шлюза">Настройка NAT-шлюза</span>
+</h2>
+<p>В этом разделе рассмотрена настройка межсетевого экрана для NAT-шлюза. Предполагается, что вы уже прочитали <a href="#%D0%9D%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0_%D0%BC%D0%B5%D0%B6%D1%81%D0%B5%D1%82%D0%B5%D0%B2%D0%BE%D0%B3%D0%BE_%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0">первую часть</a> данного руководства и настроили цепочки <b>INPUT</b>, <b>OUTPUT</b>, <b>TCP</b> и <b>UDP</b> как было предложено. До этого момента созданные правила относились к таблице <b>filter</b>, при настройке NAT-шлюза нам также понадобится таблица <b>nat</b>.
+</p>
+<h3>
+<span id=".D0.A2.D0.B0.D0.B1.D0.BB.D0.B8.D1.86.D0.B0_filter"></span><span class="mw-headline" id="Таблица_filter">Таблица filter</span>
+</h3>
+<h4>
+<span id=".D0.A1.D0.BE.D0.B7.D0.B4.D0.B0.D0.BD.D0.B8.D0.B5_.D0.BD.D0.B5.D0.BE.D0.B1.D1.85.D0.BE.D0.B4.D0.B8.D0.BC.D1.8B.D1.85_.D1.86.D0.B5.D0.BF.D0.BE.D1.87.D0.B5.D0.BA_2"></span><span class="mw-headline" id="Создание_необходимых_цепочек_2">Создание необходимых цепочек</span>
+</h4>
+<p>Создадим две новые цепочки — <b>fw-interfaces</b> и <b>fw-open</b>:
+</p>
+<pre># iptables -N fw-interfaces
+# iptables -N fw-open
+</pre>
+<h4>
+<span id=".D0.A6.D0.B5.D0.BF.D0.BE.D1.87.D0.BA.D0.B0_FORWARD_2"></span><span class="mw-headline" id="Цепочка_FORWARD_2">Цепочка FORWARD</span>
+</h4>
+<p>Настройка цепочки <b>FORWARD</b> схожа с настройкой цепочки <b>INPUT</b> в первой части.
+</p>
+<p>Сначала добавляем правило с модулем <b>conntrack</b>, идентичное правилу из цепочки <b>INPUT</b>:
+</p>
+<pre># iptables -A FORWARD -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+</pre>
+<p>Затем включаем пересылку для доверенных интерфейсов и пропускаем все пакеты через цепочку <b>fw-open</b>:
+</p>
+<pre># iptables -A FORWARD -j fw-interfaces 
+# iptables -A FORWARD -j fw-open 
+</pre>
+<p>Остальные пакеты блокируются с отправкой ICMP-сообщения:
+</p>
+<pre># iptables -A FORWARD -j REJECT --reject-with icmp-host-unreachable
+# iptables -P FORWARD DROP
+</pre>
+<h4>
+<span id=".D0.A6.D0.B5.D0.BF.D0.BE.D1.87.D0.BA.D0.B8_fw-interfaces_.D0.B8_fw-open"></span><span class="mw-headline" id="Цепочки_fw-interfaces_и_fw-open">Цепочки fw-interfaces и fw-open</span>
+</h4>
+<p>Назначение цепочек <b>fw-interfaces</b> и <b>fw-open</b> будет объяснено позже, когда мы будем работать с цепочками <b>POSTROUTING</b> и <b>PREROUTING</b> соответственно в таблице <b>nat</b>.
+</p>
+<h3>
+<span id=".D0.A2.D0.B0.D0.B1.D0.BB.D0.B8.D1.86.D0.B0_nat"></span><span class="mw-headline" id="Таблица_nat">Таблица nat</span>
+</h3>
+<p>В этом разделе предполагается, что исходящий интерфейс (с публичным IP-адресом) носит имя <b>ppp0</b>. Если ваш интерфейс называется иначе, то во всех приведённых ниже правилах следует заменить название на настоящее.
+</p>
+<h4>
+<span id=".D0.A6.D0.B5.D0.BF.D0.BE.D1.87.D0.BA.D0.B0_POSTROUTING"></span><span class="mw-headline" id="Цепочка_POSTROUTING">Цепочка POSTROUTING</span>
+</h4>
+<p>Сначала мы должны определить, кому разрешено подключаться к сети Интернет. Предположим, имеется подсеть <b>192.168.0.0/24</b> (т.е. в неё входят все адреса в диапазоне 192.168.0.0-255), подключённая к интерфейсу <b>eth0</b>. Чтобы разрешить исходящие соединения хостам в этой подсети, настраиваем цепочку <i>fw-interfaces</i> в таблице FORWARD:
+</p>
+<pre># iptables -A fw-interfaces -i eth0 -j ACCEPT
+</pre>
+<p>Затем необходимо отредактировать все исходящие пакеты, чтобы в поле "адрес отправителя" значился публичный адрес шлюза вместо локального LAN-адреса. Для этого используем таргет <b>MASQUERADE</b>:
+</p>
+<pre># iptables -t nat -A POSTROUTING -s 192.168.0.0/24 -o ppp0 -j MASQUERADE
+</pre>
+<p>Не забудьте указать параметр <code>-o ppp0</code>, потому что в противном случае сеть не будет функционировать.
+</p>
+<p>Предположим, что есть другая подсеть, <b>10.3.0.0/16</b> (с адресами 10.3.*.*), подключённая к интерфейсу <b>eth1</b>. Добавляем аналогичные правила:
+</p>
+<pre># iptables -A fw-interfaces -i eth1 -j ACCEPT
+# iptables -t nat -A POSTROUTING -s 10.3.0.0/16 -o ppp0 -j MASQUERADE
+</pre>
+<p>Наконец, нужно <a href="../ru/Internet_sharing.html#%D0%A0%D0%B0%D0%B7%D1%80%D0%B5%D1%88%D0%B8%D1%82%D0%B5_%D0%BF%D0%B5%D1%80%D0%B5%D1%81%D1%8B%D0%BB%D0%BA%D1%83_%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%BE%D0%B2" title="Internet sharing (Русский)">разрешить пересылку пакетов</a> (если она ещё не включена).
+</p>
+<p>Хосты данных подсетей теперь могут использовать вашу NAT-систему в качестве шлюза. Возможно, вы также захотите настроить DNS- и <a href="../ru/Network_configuration.html#%D0%A1%D0%B5%D1%82%D0%B5%D0%B2%D1%8B%D0%B5_%D0%BC%D0%B5%D0%BD%D0%B5%D0%B4%D0%B6%D0%B5%D1%80%D1%8B" class="mw-redirect" title="DHCP (Русский)">DHCP</a>-сервер, например, <a href="../en/Dnsmasq.html" title="Dnsmasq">dnsmasq</a> или комбинацию <a href="../en/BIND.html" title="BIND">BIND</a> и <a href="../ru/Dhcpd.html" title="Dhcpd (Русский)">dhcpd</a>, с целью упрощения настройки разрешения имён (DNS resolving) на клиентских машинах, но эта тема выходит за рамки данного руководства.
+</p>
+<h4>
+<span id=".D0.A6.D0.B5.D0.BF.D0.BE.D1.87.D0.BA.D0.B0_PREROUTING"></span><span class="mw-headline" id="Цепочка_PREROUTING">Цепочка PREROUTING</span>
+</h4>
+<p>В некоторых случаях может понадобиться изменить адрес получателя в заголовке входящего пакета с адреса шлюза на адрес хоста в локальной сети. Для этого нужно настроить созданную ранее цепочку <b>fw-open</b>, а также цепочку <b>PREROUTING</b> таблицы nat.
+</p>
+<p>Например, чтобы изменить адрес получателя входящих SSH-пакетов (порт 22) на адрес ssh-сервера <b>192.168.0.5</b> выполните команды:
+</p>
+<pre># iptables -t nat -A PREROUTING -i ppp0 -p tcp --dport 22 -j DNAT --to 192.168.0.5
+# iptables -A fw-open -d 192.168.0.5 -p tcp --dport 22 -j ACCEPT
+</pre>
+<p>Во втором примере меняется не только адрес получателя, но и порт. Порт входящего соединения <b>8000</b> заменяется на порт <b>80</b> веб-сервера по адресу <b>192.168.0.6</b>:
+</p>
+<pre># iptables -t nat -A PREROUTING -i ppp0 -p tcp --dport 8000 -j DNAT --to 192.168.0.6:80
+# iptables -A fw-open -d 192.168.0.6 -p tcp --dport 80 -j ACCEPT
+</pre>
+<p>Настройка для UDP-пакетов производится аналогично.
+</p>
+<h3>
+<span id=".D0.A1.D0.BE.D1.85.D1.80.D0.B0.D0.BD.D0.B5.D0.BD.D0.B8.D0.B5_.D0.BF.D1.80.D0.B0.D0.B2.D0.B8.D0.BB_2"></span><span class="mw-headline" id="Сохранение_правил_2">Сохранение правил</span>
+</h3>
+<p>Чтобы сохранить новые правила межсетевого экрана для NAT-шлюза, выполните:
+</p>
+<pre># iptables-save -f /etc/iptables/iptables.rules
+</pre>
+<p>При этом поздразумевается, что служба systemd <code>iptables.service</code> уже работает, потому что была включена <a href="#%D0%98%D1%82%D0%BE%D0%B3%D0%BE%D0%B2%D1%8B%D0%B9_%D1%84%D0%B0%D0%B9%D0%BB_ip6tables.rules">ранее</a>.
+</p>
+<h2>
+<span id=".D0.A1.D0.BC.D0.BE.D1.82.D1.80.D0.B8.D1.82.D0.B5_.D1.82.D0.B0.D0.BA.D0.B6.D0.B5"></span><span class="mw-headline" id="Смотрите_также">Смотрите также</span>
+</h2>
+<ul>
+<li>
+<a rel="nofollow" class="external text" href="https://www.webhostingtalk.com/showthread.php?t=456571">Methods to block SSH attacks</a> — защита от SSH-атак</li>
+<li>
+<a rel="nofollow" class="external text" href="https://www.ducea.com/2006/06/28/using-iptables-to-block-brute-force-attacks/">Using iptables to block brute force attacks</a> — защита от атак полным перебором</li>
+<li>
+<a rel="nofollow" class="external text" href="https://linuxconfig.org/collection-of-basic-linux-firewall-iptables-rules">Collection of basic Linux Firewall iptables rules</a> — примеры базовой настройки iptables</li>
+<li>
+<a rel="nofollow" class="external text" href="https://www.thegeekstuff.com/2011/06/iptables-rules-examples/">25 Most Frequently Used Linux IPTables Rules Examples</a> — ещё примеры</li>
+</ul>
+</div>
+</div>
+					<div id="catlinks" class="catlinks" data-mw="interface">
+<div id="mw-normal-catlinks" class="mw-normal-catlinks">
+<a href="../Special:Categories.html" title="Special:Categories">Category</a>: <ul><li><a href="../ru/Category:Firewalls.html" title="Category:Firewalls (Русский)">Firewalls (Русский)</a></li></ul>
+</div>
+<div id="mw-hidden-catlinks" class="mw-hidden-catlinks mw-hidden-cats-hidden">Hidden category: <ul><li><a href="../en/Category:Pages_or_sections_flagged_with_Template:Expansion.html" title="Category:Pages or sections flagged with Template:Expansion">Pages or sections flagged with Template:Expansion</a></li></ul>
+</div>
+</div>
+				</div>
+			</main>
+			
+		</div>
+		<div class="mw-footer-container">
+			
+<footer id="footer" class="mw-footer" style="margin: 0">
+	<ul id="footer-info">
+	<li data-nosnippet="">Retrieved from "<a dir="ltr" href="https://wiki.archlinux.org/index.php?title=Simple_stateful_firewall_(%D0%A0%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9)&amp;oldid=765474">https://wiki.archlinux.org/index.php?title=Simple_stateful_firewall_(Русский)&amp;oldid=765474</a>"</li>
+<li id="footer-info-lastmod"> This page was last edited on 28 January 2023, at 01:55.</li>
+	<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+<br>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="https://terms.archlinux.org/docs/privacy-policy/">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="../en/ArchWiki:About.html">About ArchWiki</a></li>
+	<li id="footer-places-disclaimers"><a href="../en/ArchWiki:General_disclaimer.html">Disclaimers</a></li>
+	<li id="footer-places-archwiki-code-of-conduct"><a href="https://terms.archlinux.org/docs/code-of-conduct/" class="extiw" title="archlinux-service-agreements:code-of-conduct">Code of conduct</a></li>
+	<li id="footer-places-archwiki-terms-of-service"><a href="https://terms.archlinux.org/docs/terms-of-service/" class="extiw" title="archlinux-service-agreements:terms-of-service">Terms of service</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-copyrightico"><a href="https://www.gnu.org/copyleft/fdl.html" class="cdx-button cdx-button--fake-button cdx-button--size-large cdx-button--fake-button--enabled"><img src="/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" loading="lazy"></a></li>
+	<li id="footer-poweredbyico"><img src="/resources/assets/poweredby_mediawiki.svg" width="88" height="31" loading="lazy"></li>
+</ul>
+
+</footer>
+
+		</div>
+	</div> 
+</div> 
+<div class="vector-settings" id="p-dock-bottom">
+	<ul></ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<h1>gbp</h1>
+
+<blockquote><p>Git을 사용하여 Debian 패키지 빌드 시스템과 통합하는 시스템.
+더 많은 정보: <a href="https://honk.sigxcpu.org/projects/git-buildpackage/manual-html/gbp.html">https://honk.sigxcpu.org/projects/git-buildpackage/manual-html/gbp.html</a>.</p></blockquote>
+
+<ul>
+<li>기존 Debian 패키지를 gbp로 변환:</li>
+</ul>
+
+
+<p><code>gbp import-dsc {{경로/대상/패키지.dsc}}</code></p>
+
+<ul>
+<li>현재 디렉토리에서 기본 빌더(<code>debuild</code>)를 사용하여 패키지 빌드:</li>
+</ul>
+
+
+<p><code>gbp buildpackage -jauto -us -uc</code></p>
+
+<ul>
+<li>Debian Bullseye용 <code>pbuilder</code> 환경에서 패키지 빌드:</li>
+</ul>
+
+
+<p><code>DIST={{bullseye}} ARCH={{amd64}} gbp buildpackage -jauto -us -uc --git-builder={{git-pbuilder}}</code></p>
+
+<ul>
+<li><code>.changes</code> 파일에서 패키지를 소스 전용 업로드로 지정 (참조: <a href="https://wiki.debian.org/SourceOnlyUpload">https://wiki.debian.org/SourceOnlyUpload</a>):</li>
+</ul>
+
+
+<p><code>gbp buildpackage -jauto -us -uc --changes-options={{-S}}</code></p>
+
+<ul>
+<li>새로운 업스트림 릴리스 가져오기:</li>
+</ul>
+
+
+<p><code>gbp import-orig --pristine-tar {{경로/대상/패키지.tar.gz}}</code></p>

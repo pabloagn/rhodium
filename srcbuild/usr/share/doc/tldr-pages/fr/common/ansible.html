@@ -1,0 +1,54 @@
+<h1>ansible</h1>
+
+<blockquote><p>Gestionnaire de groupes d'ordinateurs à distance depuis SSH. (Utiliser le fichier <code>/etc/ansible/hosts</code> pour ajouter de nouveaux groupes/hôtes).
+Certaines commandes comme <code>ansible galaxy</code> ont leur propre documentation.
+Plus d'informations : <a href="https://docs.ansible.com/ansible/latest/cli/ansible.html">https://docs.ansible.com/ansible/latest/cli/ansible.html</a>.</p></blockquote>
+
+<ul>
+<li>Lister les hôtes appartenant à un groupe :</li>
+</ul>
+
+
+<p><code>ansible {{groupe}} --list-hosts</code></p>
+
+<ul>
+<li>Ping d'un groupe d'hôtes en invoquant le [m]odule &ldquo;ping&rdquo; :</li>
+</ul>
+
+
+<p><code>ansible {{groupe}} -m ping</code></p>
+
+<ul>
+<li>Afficher des informations sur un groupe d'hôtes en invoquant le [m]odule &ldquo;setup&rdquo; :</li>
+</ul>
+
+
+<p><code>ansible {{groupe}} -m setup</code></p>
+
+<ul>
+<li>Exécuter une commande sur un groupe d'hôtes en invoquant le [m]odule &ldquo;command&rdquo; avec en paramètre (a) cette commande :</li>
+</ul>
+
+
+<p><code>ansible {{groupe}} -m command -a '{{ma_commande}}'</code></p>
+
+<ul>
+<li>Exécuter une commande avec des droits administrateur :</li>
+</ul>
+
+
+<p><code>ansible {{groupe}} --become --ask-become-pass -m command -a '{{ma_commande}}'</code></p>
+
+<ul>
+<li>Exécuter une commande en utilisant un fichier d'inventaire personnalisé :</li>
+</ul>
+
+
+<p><code>ansible {{groupe}} -i {{fichier_d'inventaire}} -m command -a '{{ma_commande}}'</code></p>
+
+<ul>
+<li>Lister les groupes d'un inventaire :</li>
+</ul>
+
+
+<p><code>ansible localhost -m debug -a '{{var=groups.keys()}}'</code></p>

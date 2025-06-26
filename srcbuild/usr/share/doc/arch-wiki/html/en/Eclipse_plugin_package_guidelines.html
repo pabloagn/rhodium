@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-sticky-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-0 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-disabled skin-theme-clientpref-day vector-toc-available" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>Eclipse plugin package guidelines - ArchWiki</title>
+<link rel="stylesheet" href="../ArchWikiOffline.css">
+<meta name="ResourceLoaderDynamicStyles" content="">
+<meta name="generator" content="MediaWiki 1.43.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="max-image-preview:standard">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.25, maximum-scale=5.0">
+<link rel="search" type="application/opensearchdescription+xml" href="/rest.php/v1/search" title="ArchWiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.archlinux.org/api.php?action=rsd">
+<link rel="license" href="https://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="ArchWiki Atom feed" href="/index.php?title=Special:RecentChanges&amp;feed=atom">
+</head>
+<body class="skin--responsive skin-vector skin-vector-search-vue mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Eclipse_plugin_package_guidelines rootpage-Eclipse_plugin_package_guidelines skin-vector-2022 action-view">
+<a class="mw-jump-link" href="#bodyContent">Jump to content</a>
+<div class="vector-header-container">
+	</div>
+<div class="mw-page-container">
+	<div class="mw-page-container-inner">
+		<div class="vector-column-start">
+			<div class="vector-main-menu-container">
+		</div>
+	<div class="vector-sticky-pinned-container">
+				<nav id="mw-panel-toc" aria-label="Contents" data-event-name="ui.sidebar-toc" class="mw-table-of-contents-container vector-toc-landmark">
+					<div id="vector-toc-pinned-container" class="vector-pinned-container">
+					<div id="vector-toc" class="vector-toc vector-pinnable-element">
+	<div class="vector-pinnable-header vector-toc-pinnable-header vector-pinnable-header-pinned" data-feature-name="toc-pinned" data-pinnable-element-id="vector-toc">
+	<h2 class="vector-pinnable-header-label">Contents</h2>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-toc.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-toc.unpin">hide</button>
+</div>
+
+
+	<ul class="vector-toc-contents" id="mw-panel-toc-list">
+		<li id="toc-mw-content-text" class="vector-toc-list-item vector-toc-level-1">
+			<a href="#" class="vector-toc-link">
+				<div class="vector-toc-text">Beginning</div>
+			</a>
+		</li>
+		<li id="toc-Eclipse_plugin_structure_and_installation" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Eclipse_plugin_structure_and_installation">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">1</span>
+				<span>Eclipse plugin structure and installation</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Eclipse_plugin_structure_and_installation-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Packaging" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Packaging">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">2</span>
+				<span>Packaging</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Packaging-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Packaging subsection</span>
+			</button>
+		
+		<ul id="toc-Packaging-sublist" class="vector-toc-list">
+			<li id="toc-Sample_PKGBUILD" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Sample_PKGBUILD">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1</span>
+					<span>Sample PKGBUILD</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Sample_PKGBUILD-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-How_to_customize_the_build" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#How_to_customize_the_build">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2</span>
+					<span>How to customize the build</span>
+				</div>
+			</a>
+			
+			<ul id="toc-How_to_customize_the_build-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-In-depth_PKGBUILD_review" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#In-depth_PKGBUILD_review">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.3</span>
+					<span>In-depth PKGBUILD review</span>
+				</div>
+			</a>
+			
+			<ul id="toc-In-depth_PKGBUILD_review-sublist" class="vector-toc-list">
+				<li id="toc-Package_naming" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Package_naming">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.3.1</span>
+					<span>Package naming</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Package_naming-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Files" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Files">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.3.2</span>
+					<span>Files</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Files-sublist" class="vector-toc-list">
+				<li id="toc-Extraction" class="vector-toc-list-item vector-toc-level-4">
+			<a class="vector-toc-link" href="#Extraction">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.3.2.1</span>
+					<span>Extraction</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Extraction-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Locations" class="vector-toc-list-item vector-toc-level-4">
+			<a class="vector-toc-link" href="#Locations">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.3.2.2</span>
+					<span>Locations</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Locations-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-The_build()_function" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#The_build()_function">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.3.3</span>
+					<span>The build() function</span>
+				</div>
+			</a>
+			
+			<ul id="toc-The_build()_function-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Troubleshooting" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Troubleshooting">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">3</span>
+				<span>Troubleshooting</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Troubleshooting-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+</ul>
+</div>
+
+					</div>
+		</nav>
+			</div>
+		</div>
+		<div class="mw-content-container">
+			<main id="content" class="mw-body" style="margin: 0">
+				<header class="mw-body-header vector-page-titlebar">
+					<nav aria-label="Contents" class="vector-toc-landmark">
+						
+<div id="vector-page-titlebar-toc" class="vector-dropdown vector-page-titlebar-toc vector-button-flush-left">
+	<input type="checkbox" id="vector-page-titlebar-toc-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-page-titlebar-toc" class="vector-dropdown-checkbox " aria-label="Toggle the table of contents">
+	<label id="vector-page-titlebar-toc-label" for="vector-page-titlebar-toc-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"><span class="vector-icon mw-ui-icon-listBullet mw-ui-icon-wikimedia-listBullet"></span>
+
+<span class="vector-dropdown-label-text">Toggle the table of contents</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+							<div id="vector-page-titlebar-toc-unpinned-container" class="vector-unpinned-container">
+			</div>
+		
+	</div>
+</div>
+
+					</nav>
+					<h1 id="firstHeading" class="firstHeading mw-first-heading"><span class="mw-page-title-main">Eclipse plugin package guidelines</span></h1>
+							
+<div id="p-lang-btn" class="vector-dropdown mw-portlet mw-portlet-lang">
+	<input type="checkbox" id="p-lang-btn-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-p-lang-btn" class="vector-dropdown-checkbox mw-interlanguage-selector" aria-label="Go to an article in another language. Available in 4 languages">
+	<label id="p-lang-btn-label" for="p-lang-btn-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--action-progressive mw-portlet-lang-heading-4" aria-hidden="true"><span class="vector-icon mw-ui-icon-language-progressive mw-ui-icon-wikimedia-language-progressive"></span>
+
+<span class="vector-dropdown-label-text">4 languages</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+		<div class="vector-menu-content">
+			
+			<ul class="vector-menu-content-list">
+				
+				<li class="interlanguage-link interwiki-es mw-list-item"><a href="../es/Eclipse_plugin_package_guidelines.html" title="Eclipse plugin package guidelines – español" lang="es" hreflang="es" data-title="Eclipse plugin package guidelines" data-language-autonym="Español" data-language-local-name="español" class="interlanguage-link-target"><span>Español</span></a></li>
+<li class="interlanguage-link interwiki-ja mw-list-item"><a href="https://wiki.archlinux.jp/index.php/Eclipse_%E3%83%97%E3%83%A9%E3%82%B0%E3%82%A4%E3%83%B3%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E3%82%AC%E3%82%A4%E3%83%89%E3%83%A9%E3%82%A4%E3%83%B3" title="Eclipse プラグインパッケージガイドライン – 日本語" lang="ja" hreflang="ja" data-title="Eclipse プラグインパッケージガイドライン" data-language-autonym="日本語" data-language-local-name="日本語" class="interlanguage-link-target"><span>日本語</span></a></li>
+<li class="interlanguage-link interwiki-pt mw-list-item"><a href="../pt/Eclipse_plugin_package_guidelines.html" title="Eclipse plugin package guidelines – português" lang="pt" hreflang="pt" data-title="Eclipse plugin package guidelines" data-language-autonym="Português" data-language-local-name="português" class="interlanguage-link-target"><span>Português</span></a></li>
+<li class="interlanguage-link interwiki-zh-hans mw-list-item"><a href="https://wiki.archlinuxcn.org/wiki/Eclipse_plugin_package_guidelines" title="Eclipse plugin package guidelines – 中文（简体）" lang="zh-Hans" hreflang="zh-Hans" data-title="Eclipse plugin package guidelines" data-language-autonym="中文（简体）" data-language-local-name="中文（简体）" class="interlanguage-link-target"><span>中文（简体）</span></a></li>
+			</ul>
+			
+		</div>
+
+	</div>
+</div>
+</header>
+				<div class="vector-column-end">
+					<div class="vector-sticky-pinned-container">
+						<nav class="vector-page-tools-landmark" aria-label="Page tools">
+							<div id="vector-page-tools-pinned-container" class="vector-pinned-container">
+				
+							</div>
+		</nav>
+						<nav class="vector-appearance-landmark" aria-label="Appearance">
+							<div id="vector-appearance-pinned-container" class="vector-pinned-container">
+				<div id="vector-appearance" class="vector-appearance vector-pinnable-element">
+	<div class="vector-pinnable-header vector-appearance-pinnable-header vector-pinnable-header-pinned" data-feature-name="appearance-pinned" data-pinnable-element-id="vector-appearance" data-pinned-container-id="vector-appearance-pinned-container" data-unpinned-container-id="vector-appearance-unpinned-container">
+	<div class="vector-pinnable-header-label">Appearance</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-appearance.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-appearance.unpin">hide</button>
+</div>
+
+
+</div>
+
+							</div>
+		</nav>
+					</div>
+				</div>
+				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container>
+					<div class="vector-body-before-content">
+							<div class="mw-indicators">
+		</div>
+
+						<div id="siteSub" class="noprint">From ArchWiki</div>
+					</div>
+					<div id="contentSub"><div id="mw-content-subtitle"></div></div>
+					
+					
+					<div id="mw-content-text" class="mw-body-content">
+<div class="mw-content-ltr mw-parser-output" lang="en" dir="ltr">
+<div class="toc" style="display:block; text-align: center; margin-bottom: 1em;">
+<b><a href="../en/Arch_package_guidelines.html" title="Arch package guidelines">Arch package guidelines</a></b>
+<hr>
+<p><a href="../en/32-bit_package_guidelines.html" title="32-bit package guidelines">32-bit</a> – <a href="../en/CLR_package_guidelines.html" title="CLR package guidelines">CLR</a> – <a href="../en/CMake_package_guidelines.html" title="CMake package guidelines">CMake</a> – <a href="../en/Cross-compiling_tools_package_guidelines.html" title="Cross-compiling tools package guidelines">Cross</a> – <a href="../en/DKMS_package_guidelines.html" title="DKMS package guidelines">DKMS</a> – <a class="mw-selflink selflink">Eclipse</a> – <a href="../en/Electron_package_guidelines.html" title="Electron package guidelines">Electron</a> – <a href="../en/Font_package_guidelines.html" title="Font package guidelines">Font</a> – <a href="../en/Free_Pascal_package_guidelines.html" title="Free Pascal package guidelines">Free Pascal</a> – <a href="../en/GNOME_package_guidelines.html" title="GNOME package guidelines">GNOME</a> – <a href="../en/Go_package_guidelines.html" title="Go package guidelines">Go</a> – <a href="../en/Haskell_package_guidelines.html" title="Haskell package guidelines">Haskell</a> – <a href="../en/Java_package_guidelines.html" title="Java package guidelines">Java</a> – <a href="../en/KDE_package_guidelines.html" title="KDE package guidelines">KDE</a> – <a href="../en/Kernel_module_package_guidelines.html" title="Kernel module package guidelines">Kernel modules</a> – <a href="../en/Lisp_package_guidelines.html" title="Lisp package guidelines">Lisp</a> – <a href="../en/Meson_package_guidelines.html" title="Meson package guidelines">Meson</a> – <a href="../en/MinGW_package_guidelines.html" title="MinGW package guidelines">MinGW</a> – <a href="../en/Node.js_package_guidelines.html" title="Node.js package guidelines">Node.js</a> – <a href="../en/Nonfree_applications_package_guidelines.html" title="Nonfree applications package guidelines">Nonfree</a> – <a href="../en/OCaml_package_guidelines.html" title="OCaml package guidelines">OCaml</a> – <a href="../en/Perl_package_guidelines.html" title="Perl package guidelines">Perl</a> – <a href="../en/PHP_package_guidelines.html" title="PHP package guidelines">PHP</a> – <a href="../en/Python_package_guidelines.html" title="Python package guidelines">Python</a> – <a href="../en/R_package_guidelines.html" title="R package guidelines">R</a> – <a href="../en/Ruby_package_guidelines.html" title="Ruby package guidelines">Ruby</a> – <a href="../en/Rust_package_guidelines.html" title="Rust package guidelines">Rust</a> - <a href="../en/Arch_package_guidelines/Security.html" title="Arch package guidelines/Security">Security</a> – <a href="../en/Shell_package_guidelines.html" title="Shell package guidelines">Shell</a> – <a href="../en/VCS_package_guidelines.html" title="VCS package guidelines">VCS</a> – <a href="../en/Web_application_package_guidelines.html" title="Web application package guidelines">Web</a> – <a href="../en/Wine_package_guidelines.html" title="Wine package guidelines">Wine</a>
+</p>
+</div>
+<p>There are many ways to install working <a href="../en/Eclipse.html" title="Eclipse">Eclipse</a> plugins, especially since the introduction of the <i>dropins</i> directory in Eclipse 3.4, but some of them are messy, and having a standardized and consistent way of packaging is very important to lead to a clean system structure. It is not easy, however, to achieve this without the packager knowing every detail about how Eclipse plugins work. This page aims to define a standard and simple structure for Eclipse plugin <a href="../en/PKGBUILD.html" title="PKGBUILD">PKGBUILDs</a>, so that the filesystem structure can remain consistent between all plugins without having the packager to start again for every new package.
+</p>
+<meta property="mw:PageProp/toc">
+<h2><span class="mw-headline" id="Eclipse_plugin_structure_and_installation">Eclipse plugin structure and installation</span></h2>
+<p>The typical Eclipse plugin contains two directories, <code>features</code> and <code>plugins</code>, and since Eclipse 3.3 they could only be placed in <code>/usr/lib/eclipse/</code>. The content of these two directories could be mixed with that of other plugins, and it created a mess and rendered the structure difficult to manage. It was also very difficult to tell at a glance which package contained which file.
+</p>
+<p>This installation method is still supported in Eclipse 3.4, but the preferred one is now using the <code>/usr/lib/eclipse/dropins/</code> directory. Inside this directory can live an unlimited number of subdirectories, each one containing its own <code>features</code> and <code>plugins</code> subdirectories. This allows to keep a tidy and clean structure, and should be the standard packaging way.
+</p>
+<h2><span class="mw-headline" id="Packaging">Packaging</span></h2>
+<h3><span class="mw-headline" id="Sample_PKGBUILD">Sample PKGBUILD</span></h3>
+<p>Here is an example, we will detail how to customize it below.
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">PKGBUILD-eclipse.proto</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">pkgname=eclipse-mylyn
+pkgver=3.0.3
+pkgrel=1
+pkgdesc="A task-focused interface for Eclipse"
+arch=('any')
+url="https://eclipse.org/mylyn/"
+license=('EPL')
+depends=('eclipse')
+optdepends=('bugzilla: ticketing support')
+source=(https://download.eclipse.org/tools/mylyn/update/mylyn-${pkgver}-e3.4.zip)
+sha512sums=('aa6289046df4c254567010b30706cc9cb0a1355e9634adcb2052127030d2640f399caf20fce10e8b4fab5885da29057ab9117af42472bcc1645dcf9881f84236')
+
+prepare() {
+  # remove features and plug-ins containing sources
+  rm -f features/*.source_*
+  rm -f plugins/*.source_*
+  # remove gz files
+  rm -f plugins/*.pack.gz
+}
+
+package() {
+  _dest="${pkgdir}/usr/lib/eclipse/dropins/${pkgname/eclipse-}/eclipse"
+
+  # Features
+  find features -type f | while read -r _feature ; do
+    if [[ "${_feature}" =~ (.*\.jar$) ]] ; then
+      install -dm755 "${_dest}/${_feature%*.jar}"
+      cd "${_dest}/${_feature/.jar}"
+      # extract features (otherwise they are not visible in about dialog)
+      jar xf "${srcdir}/${_feature}" || return 1
+    else
+      install -Dm644 "${_feature}" "${_dest}/${_feature}"
+    fi
+  done
+
+  # Plugins
+  find plugins -type f | while read -r _plugin ; do
+    install -Dm644 "${_plugin}" "${_dest}/${_plugin}"
+  done
+}
+</pre>
+<h3><span class="mw-headline" id="How_to_customize_the_build">How to customize the build</span></h3>
+<p>The main variable which needs to be customized is the <code>pkgname</code>. If you are packaging a typical plugin, then this is the only thing you need to do: most plugins are distributed in zip files which only contain the two <code>features</code> and <code>plugins</code> subdirectories. So, if you are packaging the <code>foo</code> plugin and the source file only contains the <code>features</code> and <code>plugins</code>, you just need to change <code>pkgname</code> to <code>eclipse-foo</code> and you are set.
+</p>
+<p>Read on to get to the internals of the PKGBUILD, which help to understand how to setup the build for all the other cases.
+</p>
+<h3><span class="mw-headline" id="In-depth_PKGBUILD_review">In-depth PKGBUILD review</span></h3>
+<h4><span class="mw-headline" id="Package_naming">Package naming</span></h4>
+<p>Packages should be named <code>eclipse-<i>pluginname</i></code>, so that they are recognizable as Eclipse-related packages and it is easy to extract the plugin name with a simple shell substitution like <code>${pkgname/eclipse-}</code>, not having to resort to an unneeded <code>${_realname}</code> variable. The plugin name is necessary to tidy up everything during installation and to avoid conflicts.
+</p>
+<h4><span class="mw-headline" id="Files">Files</span></h4>
+<h5><span class="mw-headline" id="Extraction">Extraction</span></h5>
+<p>Some plugins need the features to be extracted from jar files. The <code>jar</code> utility, already included in the JRE, is used to do this. However, <code>jar</code> cannot extract to directories other than the current one: this means that, after every directory creation, it is necessary to <code>cd</code> inside it before extracting. The <code>${_dest}</code> variable is used in this context to improve readability and PKGBUILD tidiness.
+</p>
+<h5><span class="mw-headline" id="Locations">Locations</span></h5>
+<p>As we said, source archives provide two directories, <code>features</code> and <code>plugins</code>, each one packed up with jar files. The preferred dropins structure should look like this:
+</p>
+<pre>/usr/lib/eclipse/dropins/pluginname/eclipse/features/feature1/...
+/usr/lib/eclipse/dropins/pluginname/eclipse/features/feature2/...
+/usr/lib/eclipse/dropins/pluginname/eclipse/plugins/plugin1.jar
+/usr/lib/eclipse/dropins/pluginname/eclipse/plugins/plugin2.jar
+</pre>
+<p>This structure allows for mixing different versions of libraries that may be needed by different plugins while being clear about which package owns what. It will also avoid conflicts in case different packages provide the same library. The only alternative would be splitting every package from its libraries, with all the extra fuss it requires, and it would not even be guaranteed to work because of packages needing older library versions.
+Features have to be unjarred since Eclipse will not detect them otherwise, and the whole plugin installation will not work. This happens because Eclipse treats update sites and local installations differently (do not ask why, it just does).
+</p>
+<h4>
+<span id="The_build.28.29_function"></span><span class="mw-headline" id="The_build()_function">The build() function</span>
+</h4>
+<p>First thing to be noticed is the <code>cd ${srcdir}</code> command. Usually source archives extract the <code>features</code> and <code>plugins</code> folders directly under <code>${srcdir}</code>, but this is not always the case. Anyway, for most non-<i>(de facto)</i>-standard plugins this is the only line that needs to be changed.
+</p>
+<p>Some released features include their sources, too. For a normal release version these sources are not needed and can be removed. Furthermore same features include <code>*.pack.gz</code> files, which contain the same files compared to the jar archives. So these files can be removed, too.
+</p>
+<p>Next is the <code>features</code> section. It creates the necessary directories, one for every jar file, and extracts the jar in the corresponding directory. Similarly, the <code>plugins</code> section installs the jar files in their directory. A while cycle is used to prevent funny-named files.
+</p>
+<h2><span class="mw-headline" id="Troubleshooting">Troubleshooting</span></h2>
+<ul>
+<li>Sometimes cleaning of Eclipse helps to repair some problems: <pre>$ eclipse -clean</pre>
+</li>
+<li>If new installed plugins do not appear in Eclipse, try with a clean <code>~/.eclipse</code> directory, for example by renaming the existing one. Be aware that this will of course make all the user-installed plugins via Marketplace unavailable.</li>
+</ul>
+</div>
+</div>
+					<div id="catlinks" class="catlinks" data-mw="interface"><div id="mw-normal-catlinks" class="mw-normal-catlinks">
+<a href="../Special:Categories.html" title="Special:Categories">Category</a>: <ul><li><a href="../en/Category:Arch_package_guidelines.html" title="Category:Arch package guidelines">Arch package guidelines</a></li></ul>
+</div></div>
+				</div>
+			</main>
+			
+		</div>
+		<div class="mw-footer-container">
+			
+<footer id="footer" class="mw-footer" style="margin: 0">
+	<ul id="footer-info">
+	<li data-nosnippet="">Retrieved from "<a dir="ltr" href="https://wiki.archlinux.org/index.php?title=Eclipse_plugin_package_guidelines&amp;oldid=711760">https://wiki.archlinux.org/index.php?title=Eclipse_plugin_package_guidelines&amp;oldid=711760</a>"</li>
+<li id="footer-info-lastmod"> This page was last edited on 20 January 2022, at 07:19.</li>
+	<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+<br>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="https://terms.archlinux.org/docs/privacy-policy/">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="../en/ArchWiki:About.html">About ArchWiki</a></li>
+	<li id="footer-places-disclaimers"><a href="../en/ArchWiki:General_disclaimer.html">Disclaimers</a></li>
+	<li id="footer-places-archwiki-code-of-conduct"><a href="https://terms.archlinux.org/docs/code-of-conduct/" class="extiw" title="archlinux-service-agreements:code-of-conduct">Code of conduct</a></li>
+	<li id="footer-places-archwiki-terms-of-service"><a href="https://terms.archlinux.org/docs/terms-of-service/" class="extiw" title="archlinux-service-agreements:terms-of-service">Terms of service</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-copyrightico"><a href="https://www.gnu.org/copyleft/fdl.html" class="cdx-button cdx-button--fake-button cdx-button--size-large cdx-button--fake-button--enabled"><img src="/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" loading="lazy"></a></li>
+	<li id="footer-poweredbyico"><img src="/resources/assets/poweredby_mediawiki.svg" width="88" height="31" loading="lazy"></li>
+</ul>
+
+</footer>
+
+		</div>
+	</div> 
+</div> 
+<div class="vector-settings" id="p-dock-bottom">
+	<ul></ul>
+</div>
+</body>
+</html>

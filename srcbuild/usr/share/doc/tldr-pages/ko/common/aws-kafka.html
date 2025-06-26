@@ -1,0 +1,61 @@
+<h1>aws kafka</h1>
+
+<blockquote><p>Amazon MSK (Apache Kafka용 관리형 스트리밍) 클러스터 관리.
+추가 정보: <code>aws</code>.
+더 많은 정보: <a href="https://docs.aws.amazon.com/cli/latest/reference/kafka/index.html">https://docs.aws.amazon.com/cli/latest/reference/kafka/index.html</a>.</p></blockquote>
+
+<ul>
+<li>새로운 MSK 클러스터 만들기:</li>
+</ul>
+
+
+<p><code>aws kafka create-cluster --cluster-name {{클러스터_이름}} --broker-node-group-info instanceType={{인스턴스_타입}},clientSubnets={{서브넷_아이디1 서브넷_아이디2 ...}} --kafka-version {{버전}} --number-of-broker-nodes {{숫자}}</code></p>
+
+<ul>
+<li>MSK 클러스터 정보 표시:</li>
+</ul>
+
+
+<p><code>aws kafka describe-cluster --cluster-arn {{cluster_arn}}</code></p>
+
+<ul>
+<li>현재 지역의 모든 MSK 클러스터 목록 나열:</li>
+</ul>
+
+
+<p><code>aws kafka list-clusters</code></p>
+
+<ul>
+<li>새로운 MSK 구성 파일 생성:</li>
+</ul>
+
+
+<p><code>aws kafka create-configuration --name {{구성파일_이름}} --server-properties file://{{경로/대상/구성파일_이름.txt}}</code></p>
+
+<ul>
+<li>MSK 구성파일 내용 표시:</li>
+</ul>
+
+
+<p><code>aws kafka describe-configuration --arn {{configuration_arn}}</code></p>
+
+<ul>
+<li>현재 지역의 모든 MSK 구성 나열:</li>
+</ul>
+
+
+<p><code>aws kafka list-configurations</code></p>
+
+<ul>
+<li>MSK 클러스터 구성 업데이트:</li>
+</ul>
+
+
+<p><code>aws kafka update-cluster-configuration --cluster-arn {{cluster_arn}} --configuration-info arn={{configuration_arn}},revision={{configuration_revision}}</code></p>
+
+<ul>
+<li>MSK 클러스터 삭제:</li>
+</ul>
+
+
+<p><code>aws kafka delete-cluster --cluster-arn {{cluster_arn}}</code></p>

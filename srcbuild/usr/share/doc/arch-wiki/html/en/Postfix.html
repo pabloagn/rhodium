@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+<html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-sticky-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-0 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-disabled skin-theme-clientpref-day vector-toc-available" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>Postfix - ArchWiki</title>
+<link rel="stylesheet" href="../ArchWikiOffline.css">
+<meta name="ResourceLoaderDynamicStyles" content="">
+<meta name="generator" content="MediaWiki 1.43.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="max-image-preview:standard">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.25, maximum-scale=5.0">
+<link rel="search" type="application/opensearchdescription+xml" href="/rest.php/v1/search" title="ArchWiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.archlinux.org/api.php?action=rsd">
+<link rel="license" href="https://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="ArchWiki Atom feed" href="/index.php?title=Special:RecentChanges&amp;feed=atom">
+</head>
+<body class="skin--responsive skin-vector skin-vector-search-vue mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Postfix rootpage-Postfix skin-vector-2022 action-view">
+<a class="mw-jump-link" href="#bodyContent">Jump to content</a>
+<div class="vector-header-container">
+	</div>
+<div class="mw-page-container">
+	<div class="mw-page-container-inner">
+		<div class="vector-column-start">
+			<div class="vector-main-menu-container">
+		</div>
+	<div class="vector-sticky-pinned-container">
+				<nav id="mw-panel-toc" aria-label="Contents" data-event-name="ui.sidebar-toc" class="mw-table-of-contents-container vector-toc-landmark">
+					<div id="vector-toc-pinned-container" class="vector-pinned-container">
+					<div id="vector-toc" class="vector-toc vector-pinnable-element">
+	<div class="vector-pinnable-header vector-toc-pinnable-header vector-pinnable-header-pinned" data-feature-name="toc-pinned" data-pinnable-element-id="vector-toc">
+	<h2 class="vector-pinnable-header-label">Contents</h2>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-toc.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-toc.unpin">hide</button>
+</div>
+
+
+	<ul class="vector-toc-contents" id="mw-panel-toc-list">
+		<li id="toc-mw-content-text" class="vector-toc-list-item vector-toc-level-1">
+			<a href="#" class="vector-toc-link">
+				<div class="vector-toc-text">Beginning</div>
+			</a>
+		</li>
+		<li id="toc-Installation" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Installation">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">1</span>
+				<span>Installation</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Installation-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Configuration" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Configuration">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">2</span>
+				<span>Configuration</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Configuration-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Configuration subsection</span>
+			</button>
+		
+		<ul id="toc-Configuration-sublist" class="vector-toc-list">
+			<li id="toc-Aliases" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Aliases">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1</span>
+					<span>Aliases</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Aliases-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Local_mail" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Local_mail">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2</span>
+					<span>Local mail</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Local_mail-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Virtual_mail" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Virtual_mail">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.3</span>
+					<span>Virtual mail</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Virtual_mail-sublist" class="vector-toc-list">
+				<li id="toc-Virtual_aliases" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Virtual_aliases">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.3.1</span>
+					<span>Virtual aliases</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Virtual_aliases-sublist" class="vector-toc-list">
+				<li id="toc-Virtual_address_aliases" class="vector-toc-list-item vector-toc-level-4">
+			<a class="vector-toc-link" href="#Virtual_address_aliases">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.3.1.1</span>
+					<span>Virtual address aliases</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Virtual_address_aliases-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Check_configuration" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Check_configuration">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.4</span>
+					<span>Check configuration</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Check_configuration-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Start_Postfix" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Start_Postfix">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">3</span>
+				<span>Start Postfix</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Start_Postfix-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-TLS" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#TLS">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">4</span>
+				<span>TLS</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-TLS-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle TLS subsection</span>
+			</button>
+		
+		<ul id="toc-TLS-sublist" class="vector-toc-list">
+			<li id="toc-Secure_SMTP_(sending)" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Secure_SMTP_(sending)">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.1</span>
+					<span>Secure SMTP (sending)</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Secure_SMTP_(sending)-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Secure_SMTP_(receiving)" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Secure_SMTP_(receiving)">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.2</span>
+					<span>Secure SMTP (receiving)</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Secure_SMTP_(receiving)-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Tips_and_tricks" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Tips_and_tricks">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">5</span>
+				<span>Tips and tricks</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Tips_and_tricks-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Tips and tricks subsection</span>
+			</button>
+		
+		<ul id="toc-Tips_and_tricks-sublist" class="vector-toc-list">
+			<li id="toc-Blacklist_incoming_emails" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Blacklist_incoming_emails">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.1</span>
+					<span>Blacklist incoming emails</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Blacklist_incoming_emails-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Hide_the_sender's_IP_and_user_agent_in_the_Received_header" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Hide_the_sender's_IP_and_user_agent_in_the_Received_header">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.2</span>
+					<span>Hide the sender's IP and user agent in the Received header</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Hide_the_sender's_IP_and_user_agent_in_the_Received_header-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Postfix_in_a_chroot_jail" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Postfix_in_a_chroot_jail">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.3</span>
+					<span>Postfix in a chroot jail</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Postfix_in_a_chroot_jail-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-DANE_(DNSSEC)" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#DANE_(DNSSEC)">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.4</span>
+					<span>DANE (DNSSEC)</span>
+				</div>
+			</a>
+			
+			<ul id="toc-DANE_(DNSSEC)-sublist" class="vector-toc-list">
+				<li id="toc-Resource_Record" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Resource_Record">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.4.1</span>
+					<span>Resource Record</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Resource_Record-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Configuration_2" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Configuration_2">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.4.2</span>
+					<span>Configuration</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Configuration_2-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Extras" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Extras">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">6</span>
+				<span>Extras</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Extras-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Extras subsection</span>
+			</button>
+		
+		<ul id="toc-Extras-sublist" class="vector-toc-list">
+			<li id="toc-Postgrey" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Postgrey">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.1</span>
+					<span>Postgrey</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Postgrey-sublist" class="vector-toc-list">
+				<li id="toc-Installation_2" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Installation_2">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.1.1</span>
+					<span>Installation</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Installation_2-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Configuration_3" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Configuration_3">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.1.2</span>
+					<span>Configuration</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Configuration_3-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Whitelisting" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Whitelisting">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.1.3</span>
+					<span>Whitelisting</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Whitelisting-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Troubleshooting" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Troubleshooting">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.1.4</span>
+					<span>Troubleshooting</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Troubleshooting-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-SpamAssassin" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#SpamAssassin">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.2</span>
+					<span>SpamAssassin</span>
+				</div>
+			</a>
+			
+			<ul id="toc-SpamAssassin-sublist" class="vector-toc-list">
+				<li id="toc-SpamAssassin_stand-alone_generic_setup" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#SpamAssassin_stand-alone_generic_setup">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.2.1</span>
+					<span>SpamAssassin stand-alone generic setup</span>
+				</div>
+			</a>
+			
+			<ul id="toc-SpamAssassin_stand-alone_generic_setup-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-SpamAssassin_combined_with_Dovecot_LDA_/_Sieve_(Mailfiltering)" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#SpamAssassin_combined_with_Dovecot_LDA_/_Sieve_(Mailfiltering)">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.2.2</span>
+					<span>SpamAssassin combined with Dovecot LDA / Sieve (Mailfiltering)</span>
+				</div>
+			</a>
+			
+			<ul id="toc-SpamAssassin_combined_with_Dovecot_LDA_/_Sieve_(Mailfiltering)-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-SpamAssassin_combined_with_Dovecot_LMTP_/_Sieve" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#SpamAssassin_combined_with_Dovecot_LMTP_/_Sieve">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.2.3</span>
+					<span>SpamAssassin combined with Dovecot LMTP / Sieve</span>
+				</div>
+			</a>
+			
+			<ul id="toc-SpamAssassin_combined_with_Dovecot_LMTP_/_Sieve-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Rule-based_mail_processing" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Rule-based_mail_processing">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.3</span>
+					<span>Rule-based mail processing</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Rule-based_mail_processing-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Sender_Policy_Framework" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Sender_Policy_Framework">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.4</span>
+					<span>Sender Policy Framework</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Sender_Policy_Framework-sublist" class="vector-toc-list">
+				<li id="toc-With_spf-engine_or_python-postfix-policyd-spf" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#With_spf-engine_or_python-postfix-policyd-spf">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.4.1</span>
+					<span>With spf-engine or python-postfix-policyd-spf</span>
+				</div>
+			</a>
+			
+			<ul id="toc-With_spf-engine_or_python-postfix-policyd-spf-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-With_postfix-policyd-spf-perl" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#With_postfix-policyd-spf-perl">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.4.2</span>
+					<span>With postfix-policyd-spf-perl</span>
+				</div>
+			</a>
+			
+			<ul id="toc-With_postfix-policyd-spf-perl-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Sender_Rewriting_Scheme" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Sender_Rewriting_Scheme">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.5</span>
+					<span>Sender Rewriting Scheme</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Sender_Rewriting_Scheme-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Troubleshooting_2" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Troubleshooting_2">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">7</span>
+				<span>Troubleshooting</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Troubleshooting_2-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Troubleshooting subsection</span>
+			</button>
+		
+		<ul id="toc-Troubleshooting_2-sublist" class="vector-toc-list">
+			<li id='toc-Warning:_"database_/etc/postfix/*.db_is_older_than_source_file_.."' class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href='#Warning:_"database_/etc/postfix/*.db_is_older_than_source_file_.."'>
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">7.1</span>
+					<span>Warning: "database /etc/postfix/*.db is older than source file .."</span>
+				</div>
+			</a>
+			
+			<ul id='toc-Warning:_"database_/etc/postfix/*.db_is_older_than_source_file_.."-sublist' class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Host_or_domain_name_not_found._Name_service_error_for_name=..." class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Host_or_domain_name_not_found._Name_service_error_for_name=...">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">7.2</span>
+					<span>Host or domain name not found. Name service error for name=...</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Host_or_domain_name_not_found._Name_service_error_for_name=...-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-error:_require_command:_unknown_Sieve_capability_`vnd.dovecot.filter'" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#error:_require_command:_unknown_Sieve_capability_`vnd.dovecot.filter'">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">7.3</span>
+					<span>error: require command: unknown Sieve capability `vnd.dovecot.filter'</span>
+				</div>
+			</a>
+			
+			<ul id="toc-error:_require_command:_unknown_Sieve_capability_`vnd.dovecot.filter'-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-See_also" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#See_also">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">8</span>
+				<span>See also</span>
+			</div>
+		</a>
+		
+		<ul id="toc-See_also-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+</ul>
+</div>
+
+					</div>
+		</nav>
+			</div>
+		</div>
+		<div class="mw-content-container">
+			<main id="content" class="mw-body" style="margin: 0">
+				<header class="mw-body-header vector-page-titlebar">
+					<nav aria-label="Contents" class="vector-toc-landmark">
+						
+<div id="vector-page-titlebar-toc" class="vector-dropdown vector-page-titlebar-toc vector-button-flush-left">
+	<input type="checkbox" id="vector-page-titlebar-toc-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-page-titlebar-toc" class="vector-dropdown-checkbox " aria-label="Toggle the table of contents">
+	<label id="vector-page-titlebar-toc-label" for="vector-page-titlebar-toc-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"><span class="vector-icon mw-ui-icon-listBullet mw-ui-icon-wikimedia-listBullet"></span>
+
+<span class="vector-dropdown-label-text">Toggle the table of contents</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+							<div id="vector-page-titlebar-toc-unpinned-container" class="vector-unpinned-container">
+			</div>
+		
+	</div>
+</div>
+
+					</nav>
+					<h1 id="firstHeading" class="firstHeading mw-first-heading"><span class="mw-page-title-main">Postfix</span></h1>
+							
+<div id="p-lang-btn" class="vector-dropdown mw-portlet mw-portlet-lang">
+	<input type="checkbox" id="p-lang-btn-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-p-lang-btn" class="vector-dropdown-checkbox mw-interlanguage-selector" aria-label="Go to an article in another language. Available in 2 languages">
+	<label id="p-lang-btn-label" for="p-lang-btn-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--action-progressive mw-portlet-lang-heading-2" aria-hidden="true"><span class="vector-icon mw-ui-icon-language-progressive mw-ui-icon-wikimedia-language-progressive"></span>
+
+<span class="vector-dropdown-label-text">2 languages</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+		<div class="vector-menu-content">
+			
+			<ul class="vector-menu-content-list">
+				
+				<li class="interlanguage-link interwiki-es mw-list-item"><a href="../es/Postfix.html" title="Postfix – español" lang="es" hreflang="es" data-title="Postfix" data-language-autonym="Español" data-language-local-name="español" class="interlanguage-link-target"><span>Español</span></a></li>
+<li class="interlanguage-link interwiki-ja mw-list-item"><a href="https://wiki.archlinux.jp/index.php/Postfix" title="Postfix – 日本語" lang="ja" hreflang="ja" data-title="Postfix" data-language-autonym="日本語" data-language-local-name="日本語" class="interlanguage-link-target"><span>日本語</span></a></li>
+			</ul>
+			
+		</div>
+
+	</div>
+</div>
+</header>
+				<div class="vector-column-end">
+					<div class="vector-sticky-pinned-container">
+						<nav class="vector-page-tools-landmark" aria-label="Page tools">
+							<div id="vector-page-tools-pinned-container" class="vector-pinned-container">
+				
+							</div>
+		</nav>
+						<nav class="vector-appearance-landmark" aria-label="Appearance">
+							<div id="vector-appearance-pinned-container" class="vector-pinned-container">
+				<div id="vector-appearance" class="vector-appearance vector-pinnable-element">
+	<div class="vector-pinnable-header vector-appearance-pinnable-header vector-pinnable-header-pinned" data-feature-name="appearance-pinned" data-pinnable-element-id="vector-appearance" data-pinned-container-id="vector-appearance-pinned-container" data-unpinned-container-id="vector-appearance-unpinned-container">
+	<div class="vector-pinnable-header-label">Appearance</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-appearance.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-appearance.unpin">hide</button>
+</div>
+
+
+</div>
+
+							</div>
+		</nav>
+					</div>
+				</div>
+				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container>
+					<div class="vector-body-before-content">
+							<div class="mw-indicators">
+		</div>
+
+						<div id="siteSub" class="noprint">From ArchWiki</div>
+					</div>
+					<div id="contentSub"><div id="mw-content-subtitle"></div></div>
+					
+					
+					<div id="mw-content-text" class="mw-body-content">
+<div class="mw-content-ltr mw-parser-output" lang="en" dir="ltr">
+<div class="archwiki-template-meta-related-articles">
+<p>Related articles</p>
+<ul>
+<li><a href="../en/Postfix_with_SASL.html" title="Postfix with SASL">Postfix with SASL</a></li>
+<li><a href="../en/Virtual_user_mail_system_with_Postfix,_Dovecot_and_Roundcube.html" class="mw-redirect" title="Virtual user mail system">Virtual user mail system</a></li>
+<li><a href="../en/OpenDMARC.html" title="OpenDMARC">OpenDMARC</a></li>
+<li><a href="../en/OpenDKIM.html" title="OpenDKIM">OpenDKIM</a></li>
+</ul>
+</div>
+<p><a href="https://en.wikipedia.org/wiki/Postfix_(software)" class="extiw" title="wikipedia:Postfix (software)">Postfix</a> is a <a href="../en/Mail_server.html" class="mw-redirect" title="Mail transfer agent">mail transfer agent</a> that according to <a rel="nofollow" class="external text" href="http://www.postfix.org/">its website</a>:
+</p>
+<dl><dd>attempts to be fast, easy to administer, and secure, while at the same time being sendmail compatible enough to not upset existing users. Thus, the outside has a sendmail-ish flavor, but the inside is completely different.</dd></dl>
+<p>This article builds upon <a href="../en/Mail_server.html" title="Mail server">Mail server</a>. The goal of this article is to setup Postfix and explain what the basic configuration files do. There are instructions for setting up local system user-only delivery and a link to a guide for virtual user delivery.
+</p>
+<meta property="mw:PageProp/toc">
+<h2><span class="mw-headline" id="Installation">Installation</span></h2>
+<p><a href="../en/Help:Reading.html#Installation_of_packages" class="mw-redirect" title="Install">Install</a> the <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=postfix">postfix</a></span> package.
+</p>
+<h2><span class="mw-headline" id="Configuration">Configuration</span></h2>
+<p>See <a rel="nofollow" class="external text" href="http://www.postfix.org/BASIC_CONFIGURATION_README.html">Postfix Basic Configuration</a>. Configuration files are in <code>/etc/postfix</code> by default. The two most important files are:
+</p>
+<ul>
+<li>
+<code>master.cf</code>, defines what Postfix services are enabled and how clients connect to them, see <span class="plainlinks archwiki-template-man" title="$ man 5 master"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/master.5">master(5)</a></span>
+</li>
+<li>
+<code>main.cf</code>, the main configuration file, see <span class="plainlinks archwiki-template-man" title="$ man 5 postconf"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/postconf.5">postconf(5)</a></span>
+</li>
+</ul>
+<p>Configuration changes need a <code>postfix.service</code> <a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Reload">reload</a> or run <code>postfix reload</code> in order to take effect.
+</p>
+<h3><span class="mw-headline" id="Aliases">Aliases</span></h3>
+<p>See <span class="plainlinks archwiki-template-man" title="$ man 5 aliases"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/postfix/aliases.5">aliases(5)</a></span>.
+</p>
+<p>You can specify aliases (also known as forwarders) in <code>/etc/postfix/aliases</code>.
+</p>
+<p>You should map all mail addressed to <i>root</i> to another account since it is not a good idea to read mail as root. 
+</p>
+<p>Uncomment the following line, and change <code>you</code> to a real account.
+</p>
+<pre>root: you
+</pre>
+<p>Once you have finished editing <code>/etc/postfix/aliases</code> you must run the postalias command:
+</p>
+<pre> # postalias /etc/postfix/aliases
+</pre>
+<p>For later changes you can use:
+</p>
+<pre> # newaliases
+</pre>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> Alternatively you can create the file <code>~/.forward</code>, e.g. <code>/root/.forward</code> for root. Specify the user to whom root mail should be forwarded, e.g. <i>user@localhost</i>.
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/root/.forward</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">user@localhost
+</pre>
+</div>
+<h3><span class="mw-headline" id="Local_mail">Local mail</span></h3>
+<p>To only deliver mail to local system users (that are in <code>/etc/passwd</code>) update <code>/etc/postfix/main.cf</code> to reflect the following configuration. Uncomment, change, or add the following lines:
+</p>
+<pre>myhostname = localhost
+mydomain = localdomain
+mydestination = $myhostname, localhost.$mydomain, localhost
+inet_interfaces = $myhostname, localhost
+mynetworks_style = host
+default_transport = error: outside mail is not deliverable
+</pre>
+<p>All other settings may remain unchanged. After setting up the above configuration file, you may wish to set up some <a href="#Aliases">#Aliases</a> and then <a href="#Start_Postfix">#Start Postfix</a>.
+</p>
+<h3><span class="mw-headline" id="Virtual_mail">Virtual mail</span></h3>
+<p>Virtual mail is mail that does not map to a user account (<code>/etc/passwd</code>).
+</p>
+<h4><span class="mw-headline" id="Virtual_aliases">Virtual aliases</span></h4>
+<p>Virtual aliases are used to rewrite the destination addresses for all local, virtual and remote destinations. This can be used to rewrite the destination address for a single recipient, or an entire domain.
+</p>
+<h5><span class="mw-headline" id="Virtual_address_aliases">Virtual address aliases</span></h5>
+<p>Set up a virtual alias for a single address.
+</p>
+<p>Enable the virtual alias table:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/postfix/main.cf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">virtual_alias_maps = lmdb:/etc/postfix/virtual
+</pre>
+<p>Populate the virtual alias table:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/postfix/virtual</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">user@domain address
+</pre>
+<p>Rebuild the index file:
+</p>
+<pre># postmap /etc/postfix/virtual
+</pre>
+<p><a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Restart">Restart</a> <code>postfix.service</code>.
+</p>
+<h3><span class="mw-headline" id="Check_configuration">Check configuration</span></h3>
+<p>Run the <code>postfix check</code> command. It should output anything that you might have done wrong in a configuration file. 
+</p>
+<p>To see all of your configs, type <code>postconf</code>. To see how you differ from the defaults, try <code>postconf -n</code>.
+</p>
+<h2><span class="mw-headline" id="Start_Postfix">Start Postfix</span></h2>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> You must run <code>newaliases</code> at least once for Postfix to run, even if you did not set up any <a href="#Aliases">#Aliases</a>.</div>
+<p><a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Start/enable">Start/enable</a> the <code>postfix.service</code>.
+</p>
+<h2><span class="mw-headline" id="TLS">TLS</span></h2>
+<p>For more information, see <a rel="nofollow" class="external text" href="http://www.postfix.org/TLS_README.html">Postfix TLS Support</a>.
+</p>
+<h3>
+<span id="Secure_SMTP_.28sending.29"></span><span class="mw-headline" id="Secure_SMTP_(sending)">Secure SMTP (sending)</span>
+</h3>
+<p>By default, Postfix/sendmail will not send email encrypted to other SMTP servers. To use TLS when available, add the following line to <code>main.cf</code>:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/postfix/main.cf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">smtp_tls_security_level = may</pre>
+<p>To <i>enforce</i> TLS (and fail when the remote server does not support it), change <code>may</code> to <code>encrypt</code>.  Note, however, that this violates <a href="https://tools.ietf.org/html/rfc2487" class="extiw" title="rfc:2487">RFC:2487</a> if the SMTP server is publicly referenced.
+</p>
+<h3>
+<span id="Secure_SMTP_.28receiving.29"></span><span class="mw-headline" id="Secure_SMTP_(receiving)">Secure SMTP (receiving)</span>
+</h3>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Warning:</strong> If you deploy <a href="https://en.wikipedia.org/wiki/TLS" class="extiw" title="wikipedia:TLS">TLS</a>, be sure to follow <a rel="nofollow" class="external text" href="https://weakdh.org/sysadmin.html">weakdh.org's guide</a> to prevent FREAK/Logjam. Since mid-2015, the default settings have been safe against <a href="https://en.wikipedia.org/wiki/POODLE" class="extiw" title="wikipedia:POODLE">POODLE</a>. For more information see <a href="../en/Transport_Layer_Security.html#Server-side_recommendations" class="mw-redirect" title="Server-side TLS">Server-side TLS</a>.</div>
+<p>By default, Postfix will not accept secure mail.
+</p>
+<p>You need to <a href="../en/Transport_Layer_Security.html#Obtaining_a_certificate" class="mw-redirect" title="Obtain a certificate">obtain a certificate</a>. Point Postfix to your TLS certificates by adding the following lines to <code>main.cf</code>:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/postfix/main.cf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">smtpd_tls_security_level = may
+smtpd_use_tls = yes
+smtpd_tls_cert_file = <b>/path/to/cert.pem</b>
+smtpd_tls_key_file = <b>/path/to/key.pem</b></pre>
+<p>There are two ways to accept secure mail. STARTTLS over SMTP (port 587 (also called "submission" port)) and SMTPS (port 465 (also called "submissions" port). The latter was previously deprecated but was reinstated by <a href="https://tools.ietf.org/html/rfc8314" class="extiw" title="rfc:8314">RFC:8314</a>.
+</p>
+<p>To enable STARTTLS over SMTP (port 587), uncomment the following lines in <code>master.cf</code>:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/postfix/master.cf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">submission inet n       -       n       -       -       smtpd
+  -o syslog_name=postfix/submission
+  -o smtpd_tls_security_level=encrypt
+  -o smtpd_sasl_auth_enable=yes
+  -o smtpd_tls_auth_only=yes
+  -o smtpd_reject_unlisted_recipient=no
+#  -o smtpd_client_restrictions=$mua_client_restrictions
+#  -o smtpd_helo_restrictions=$mua_helo_restrictions
+#  -o smtpd_sender_restrictions=$mua_sender_restrictions
+  -o smtpd_relay_restrictions=
+  -o smtpd_recipient_restrictions=permit_sasl_authenticated,reject
+  -o milter_macro_daemon_name=ORIGINATING</pre>
+<p>The <code>smtpd_*_restrictions</code> options remain commented because <code>$mua_*_restrictions</code> are not defined in main.cf by default. If you do decide to set any of <code>$mua_*_restrictions</code>, uncomment those lines too.
+</p>
+<p>To enable SMTPS (port 465), uncomment the following lines in <code>master.cf</code>:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/postfix/master.cf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">submissions     inet  n       -       n       -       -       smtpd
+  -o syslog_name=postfix/smtps
+  -o smtpd_tls_wrappermode=yes
+  -o smtpd_sasl_auth_enable=yes
+  -o smtpd_reject_unlisted_recipient=no
+#  -o smtpd_client_restrictions=$mua_client_restrictions
+#  -o smtpd_helo_restrictions=$mua_helo_restrictions
+#  -o smtpd_sender_restrictions=$mua_sender_restrictions
+  -o smtpd_relay_restrictions=
+  -o smtpd_relay_restrictions=permit_sasl_authenticated,reject
+  -o milter_macro_daemon_name=ORIGINATING</pre>
+<p>The rationale surrounding the <code>$smtpd_*_restrictions</code> lines is the same as above.
+</p>
+<h2><span class="mw-headline" id="Tips_and_tricks">Tips and tricks</span></h2>
+<h3><span class="mw-headline" id="Blacklist_incoming_emails">Blacklist incoming emails</span></h3>
+<p>Manually blacklisting incoming emails by sender address can easily be done with Postfix. 
+</p>
+<p>Create and open <code>/etc/postfix/blacklist_incoming</code> file and append sender email address:
+</p>
+<pre>user@example.com REJECT
+</pre>
+<p>Then use the <code>postmap</code> command to create a database:
+</p>
+<pre># postmap lmdb:blacklist_incoming
+</pre>
+<p>Add the following code before the first permit rule in <code>main.cf</code>:
+</p>
+<pre>smtpd_recipient_restrictions = check_sender_access lmdb:/etc/postfix/blacklist_incoming
+</pre>
+<p>Finally <a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Restart">restart</a> <code>postfix.service</code>.
+</p>
+<h3>
+<span id="Hide_the_sender.27s_IP_and_user_agent_in_the_Received_header"></span><span class="mw-headline" id="Hide_the_sender's_IP_and_user_agent_in_the_Received_header">Hide the sender's IP and user agent in the Received header</span>
+</h3>
+<p>This is a privacy concern mostly, if you use Thunderbird and send an email. The received header will contain your LAN and WAN IP and info about the email client you used.
+(Original source: <a rel="nofollow" class="external text" href="https://askubuntu.com/questions/78163/when-sending-email-with-postfix-how-can-i-hide-the-senders-ip-and-username-in">AskUbuntu</a>)
+What we want to do is remove the Received header from outgoing emails. This can be done by the following steps:
+</p>
+<p>Add the following line to <code>main.cf</code>:
+</p>
+<pre>smtp_header_checks = regexp:/etc/postfix/smtp_header_checks
+</pre>
+<p>Create <code>/etc/postfix/smtp_header_checks</code> with this content:
+</p>
+<pre>/^Received: .*/     IGNORE
+/^User-Agent: .*/   IGNORE
+</pre>
+<p>Finally, <a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Restart">restart</a> <code>postfix.service</code>.
+</p>
+<h3><span class="mw-headline" id="Postfix_in_a_chroot_jail">Postfix in a chroot jail</span></h3>
+<p>Postfix is not put in a chroot jail by default. The Postfix documentation <a rel="nofollow" class="external autonumber" href="http://www.postfix.org/BASIC_CONFIGURATION_README.html#chroot_setup">[1]</a> provides details about how to accomplish such a jail. The steps are outlined below and are based on the chroot-setup script provided in the Postfix source code.
+</p>
+<p>First, go into the <code>master.cf</code> file in the directory <code>/etc/postfix</code> and change all the chroot entries to 'yes' (y) except for the services <code>qmgr</code>, <code>proxymap</code>, <code>proxywrite</code>, <code>local</code>, and <code>virtual</code>
+</p>
+<p>Second, create two functions that will help us later with copying files over into the chroot jail (see last step)
+</p>
+<pre>CP="cp -p"
+</pre>
+<pre>cond_copy() {
+  # find files as per pattern in $1
+  # if any, copy to directory $2
+  dir=$(dirname "$1")
+  pat=$(basename "$1")
+  lr=$(find "$dir" -maxdepth 1 -name "$pat")
+  if test ! -d "$2" ; then exit 1 ; fi
+  if test "x$lr" != "x" ; then $CP $1 "$2" ; fi
+}
+</pre>
+<p>Next, make the new directories for the jail:
+</p>
+<pre>set -e
+umask 022
+</pre>
+<pre>POSTFIX_DIR=${POSTFIX_DIR-/var/spool/postfix}
+cd ${POSTFIX_DIR}
+</pre>
+<pre>mkdir -p etc lib usr/lib/zoneinfo
+test -d /lib64 &amp;&amp; mkdir -p lib64
+</pre>
+<p>Find the localtime file
+</p>
+<pre>lt=/etc/localtime
+if test ! -f $lt ; then lt=/usr/lib/zoneinfo/localtime ; fi
+if test ! -f $lt ; then lt=/usr/share/zoneinfo/localtime ; fi
+if test ! -f $lt ; then echo "cannot find localtime" ; exit 1 ; fi
+rm -f etc/localtime
+</pre>
+<p>Copy localtime and some other system files into the chroot's etc
+</p>
+<pre>$CP -f $lt /etc/services /etc/resolv.conf /etc/nsswitch.conf etc
+$CP -f /etc/host.conf /etc/hosts /etc/passwd etc
+ln -s -f /etc/localtime usr/lib/zoneinfo
+</pre>
+<p>Make sure resolv.conf is owned by root:
+</p>
+<pre>chown root /var/spool/postfix/etc/resolv.conf
+</pre>
+<p>Copy required libraries into the chroot using the previously created function <code>cond_copy</code>
+</p>
+<pre>cond_copy '/usr/lib/libnss_*.so*' lib
+cond_copy '/usr/lib/libresolv.so*' lib
+cond_copy '/usr/lib/libdb.so*' lib
+</pre>
+<p>And do not forget to <a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Reload">reload</a> Postfix.
+</p>
+<h3>
+<span id="DANE_.28DNSSEC.29"></span><span class="mw-headline" id="DANE_(DNSSEC)">DANE (DNSSEC)</span>
+</h3>
+<h4><span class="mw-headline" id="Resource_Record">Resource Record</span></h4>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Warning:</strong> This is not a trivial section. Be aware that you make sure you know what you are doing. You better read <a rel="nofollow" class="external text" href="https://dane.sys4.de/common_mistakes">Common Mistakes</a> before.</div>
+<p><a href="../en/DANE.html" title="DANE">DANE</a> supports several types of records, however not all of them are suitable in Postfix.
+</p>
+<p>Certificate usage 0 is unsupported, 1 is mapped to 3 and 2 is optional, thus it is recommendet to publish a "3" record.
+More on <a href="../en/DANE.html#Resource_Record" title="DANE">Resource Records</a>.
+</p>
+<h4><span class="mw-headline" id="Configuration_2">Configuration</span></h4>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../File:Tango-view-fullscreen.svg" decoding="async" width="48" height="48" class="mw-file-element"></span></span><b>This article or section needs expansion.</b></p>
+<div>
+<b>Reason:</b> What does <i>tempfail</i> mean? (Discuss in <a rel="nofollow" class="external text" href="../en/Talk:Postfix.html">Talk:Postfix</a>)</div>
+</div>
+<p>Opportunistic DANE is configured this way:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/postfix/main.cf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">smtpd_use_tls = yes
+smtp_dns_support_level = dnssec
+smtp_tls_security_level = dane</pre>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/postfix/master.cf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">dane       unix  -       -       n       -       -       smtp
+  -o smtp_dns_support_level=dnssec
+  -o smtp_tls_security_level=dane</pre>
+<p>To use per-domain policies, e.g. opportunistic DANE for example.org and mandatory DANE for example.com,
+use something like this:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/postfix/main.cf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">indexed = ${default_database_type}:${config_directory}/
+
+# Per-destination TLS policy
+#
+smtp_tls_policy_maps = ${indexed}tls_policy
+
+# default_transport = smtp, but some destinations are special:
+#
+transport_maps = ${indexed}transport</pre>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">transport</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">example.com dane
+example.org dane
+</pre>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">tls_policy</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">example.com dane-only
+</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> For global mandatory DANE, change <code>smtp_tls_security_level</code> to <code>dane-only</code>. Be aware that this makes Postfix tempfail (respond with a <code>4.X.X</code> error code) on all deliveries that do not use DANE at all!</div>
+<p>Full documentation is found <a rel="nofollow" class="external text" href="http://www.postfix.org/TLS_README.html#client_tls_dane">here</a>.
+</p>
+<h2><span class="mw-headline" id="Extras">Extras</span></h2>
+<ul><li>
+<b><a href="../en/PostfixAdmin.html" title="PostfixAdmin">PostfixAdmin</a></b> — A web-based administrative interface for Postfix.</li></ul>
+<dl><dd>
+<a rel="nofollow" class="external free" href="https://postfixadmin.sourceforge.net/">https://postfixadmin.sourceforge.net/</a> || <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=postfixadmin">postfixadmin</a></span>
+</dd></dl>
+<h3><span class="mw-headline" id="Postgrey">Postgrey</span></h3>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../File:Tango-edit-clear.svg" decoding="async" width="48" height="48" class="mw-file-element"></span></span><b>This article or section needs language, wiki syntax or style improvements. See <a href="../en/Help:Style.html" title="Help:Style">Help:Style</a> for reference.</b></p>
+<div>
+<b>Reason:</b> See <a href="../en/Help:Style.html" title="Help:Style">Help:Style</a> (Discuss in <a rel="nofollow" class="external text" href="../en/Talk:Postfix.html">Talk:Postfix</a>)</div>
+</div>
+<p><a rel="nofollow" class="external text" href="https://postgrey.schweikert.ch/">Postgrey</a> can be used to enable <a href="https://en.wikipedia.org/wiki/Greylisting_(email)" class="extiw" title="wikipedia:Greylisting (email)">greylisting</a> for a Postfix mail server.
+</p>
+<h4><span class="mw-headline" id="Installation_2">Installation</span></h4>
+<p><a href="../en/Help:Reading.html#Installation_of_packages" class="mw-redirect" title="Install">Install</a> the <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=postgrey">postgrey</a></span> package. To get it running quickly edit the Postfix configuration file and add these lines:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/postfix/main.cf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">smtpd_recipient_restrictions =
+  check_policy_service inet:127.0.0.1:10030</pre>
+<p>Then <a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Start/enable">start/enable</a> the <code>postgrey</code> service. Afterwards, reload the <code>postfix</code> service. Now greylisting should be enabled.
+</p>
+<h4><span class="mw-headline" id="Configuration_3">Configuration</span></h4>
+<p>Configuration is done by <a href="../en/Systemd.html#Drop-in_files" class="mw-redirect" title="Extend the unit">extending the unit</a> <code>postgrey.service</code>.
+</p>
+<h4><span class="mw-headline" id="Whitelisting">Whitelisting</span></h4>
+<p>To add automatic whitelisting (successful deliveries are whitelisted and do not have to wait any more), add the <code>--auto-whitelist-clients=<i>N</i></code> option and replace <code><i>N</i></code> by a suitably small number (or leave it at its default of 5).
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/system/postgrey.service.d/override.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Service]
+ExecStart=
+ExecStart=/usr/bin/postgrey --inet=127.0.0.1:10030 \
+       --pidfile=/run/postgrey/postgrey.pid \
+       --group=postgrey --user=postgrey \
+       --daemonize \
+       --greylist-text="Greylisted for %%s seconds" \
+       --auto-whitelist-clients</pre>
+<p>To add your own list of whitelisted clients in addition to the default ones, create the file <code>/etc/postfix/postgrey_whitelist_clients.local</code> and enter one host or domain per line, then restart <code>postgrey.service</code> so the changes take effect.
+</p>
+<h4><span class="mw-headline" id="Troubleshooting">Troubleshooting</span></h4>
+<p>If you specify <code>--unix=/path/to/socket</code> and the socket file is not created ensure you have removed the default <code>--inet=127.0.0.1:10030</code> from the service file. 
+</p>
+<p>For a full documentation of possible options see <code>perldoc postgrey</code>.
+</p>
+<h3><span class="mw-headline" id="SpamAssassin">SpamAssassin</span></h3>
+<p>This section describes how to integrate <a href="../en/SpamAssassin.html" title="SpamAssassin">SpamAssassin</a>.
+</p>
+<h4><span class="mw-headline" id="SpamAssassin_stand-alone_generic_setup">SpamAssassin stand-alone generic setup</span></h4>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> If you want to combine SpamAssassin and Dovecot Mail Filtering, ignore the next two lines and continue further down instead.</div>
+<p>Edit <code>/etc/postfix/master.cf</code> and add the content filter under smtp.
+</p>
+<pre>smtp      inet  n       -       n       -       -       smtpd
+  -o content_filter=spamassassin</pre>
+<p>Also add the following service entry for SpamAssassin
+</p>
+<pre>spamassassin unix -     n       n       -       -       pipe
+  flags=R user=spamd argv=/usr/bin/vendor_perl/spamc -e /usr/bin/sendmail -oi -f ${sender} ${recipient}</pre>
+<p>Now you can <a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Start">start</a> and <a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Enable">enable</a> <code>spamassassin.service</code>.
+</p>
+<h4>
+<span id="SpamAssassin_combined_with_Dovecot_LDA_.2F_Sieve_.28Mailfiltering.29"></span><span class="mw-headline" id="SpamAssassin_combined_with_Dovecot_LDA_/_Sieve_(Mailfiltering)">SpamAssassin combined with Dovecot LDA / Sieve (Mailfiltering)</span>
+</h4>
+<p>Set up LDA and the Sieve-Plugin as described in <a href="../en/Dovecot.html#Sieve" title="Dovecot">Dovecot#Sieve</a>. But ignore the last line <code>mailbox_command... </code>.
+</p>
+<p>Instead add a pipe in <code>/etc/postfix/master.cf</code>:
+</p>
+<pre> dovecot   unix  -       n       n       -       -       pipe
+       flags=DRhu user=vmail:vmail argv=/usr/bin/vendor_perl/spamc -u spamd -e /usr/lib/dovecot/dovecot-lda -f ${sender} -d ${recipient}
+</pre>
+<p>And activate it in <code>/etc/postfix/main.cf</code>:
+</p>
+<pre> virtual_transport = dovecot
+</pre>
+<p>Alternately, if you do not want to use virtual transports you can use the
+<a rel="nofollow" class="external text" href="http://www.postfix.org/postconf.5.html#mailbox_command">mailbox_command</a>. This runs 
+with the local user and group, whereas the pipe runs with with the specified user using the <code>user</code> setting.
+</p>
+<pre> mailbox_command = /usr/bin/vendor_perl/spamc -u spamd -e /usr/lib/dovecot/dovecot-lda -f "$SENDER" -a "$RECIPIENT"
+</pre>
+<h4>
+<span id="SpamAssassin_combined_with_Dovecot_LMTP_.2F_Sieve"></span><span class="mw-headline" id="SpamAssassin_combined_with_Dovecot_LMTP_/_Sieve">SpamAssassin combined with Dovecot LMTP / Sieve</span>
+</h4>
+<p>Set up the LMTP and Sieve as described in <a href="../en/Dovecot.html#Sieve" title="Dovecot">Dovecot#Sieve</a>.
+</p>
+<p>Edit <code>/etc/dovecot/conf.d/90-plugin.conf</code> and add:
+</p>
+<pre> sieve_before = /etc/dovecot/sieve.before.d/
+ sieve_extensions = +vnd.dovecot.filter
+ sieve_plugins = sieve_extprograms
+ sieve_filter_bin_dir = /etc/dovecot/sieve-filter
+ sieve_filter_exec_timeout = 120s #this is often needed for the long running spamassassin scans, default is otherwise 10s
+</pre>
+<p>Create the directory and put spamassassin in as a binary that can be ran by dovecot:
+</p>
+<pre> # mkdir /etc/dovecot/sieve-filter
+ # ln -s /usr/bin/vendor_perl/spamc /etc/dovecot/sieve-filter/spamc
+</pre>
+<p>Create a new file, <code>/etc/dovecot/sieve.before.d/spamassassin.sieve</code> which contains:
+</p>
+<pre> require [ "vnd.dovecot.filter" ];
+ filter "spamc" [ "-d", "127.0.0.1", "--no-safe-fallback" ];
+</pre>
+<p>Compile the sieve rules <code>spamassassin.svbin</code>:
+</p>
+<pre> # cd /etc/dovecot/sieve.before.d
+ # sievec spamassassin.sieve
+</pre>
+<p>Finally, <a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Restart">restart</a> <code>dovecot.service</code>.
+</p>
+<h3><span class="mw-headline" id="Rule-based_mail_processing">Rule-based mail processing</span></h3>
+<p>With policy services one can easily finetune Postfix' behaviour of mail delivery.
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=postfwd">postfwd</a></span> provides services to do so. This allows you to e.g. implement time-aware grey- and blacklisting of senders and receivers as well as <a href="../en/Mail_server.html#Sender_Policy_Framework" class="mw-redirect" title="SPF">SPF</a> policy checking.
+</p>
+<p>Policy services are standalone services and connected to Postfix like this:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/postfix/main.cf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">smtpd_recipient_restrictions =
+  ...
+  check_policy_service unix:/run/policyd.sock
+  check_policy_service inet:127.0.0.1:10040</pre>
+<p>Placing policy services at the end of the queue reduces load, as only legitimate mails are processed. Be sure to place it before the first permit statement to catch all incoming messages.
+</p>
+<h3><span class="mw-headline" id="Sender_Policy_Framework">Sender Policy Framework</span></h3>
+<p>To use the <a href="../en/Mail_server.html#Sender_Policy_Framework" class="mw-redirect" title="Sender Policy Framework">Sender Policy Framework</a> with Postfix, you can <a href="../en/Help:Reading.html#Installation_of_packages" class="mw-redirect" title="Install">install</a> <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/python-spf-engine/">python-spf-engine</a></span><sup><small>AUR</small></sup>, <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/python-postfix-policyd-spf/">python-postfix-policyd-spf</a></span><sup><small>AUR</small></sup> or <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/postfix-policyd-spf-perl/">postfix-policyd-spf-perl</a></span><sup><small>AUR</small></sup>.
+</p>
+<h4><span class="mw-headline" id="With_spf-engine_or_python-postfix-policyd-spf">With spf-engine or python-postfix-policyd-spf</span></h4>
+<p>Edit <code>/etc/python-policyd-spf/policyd-spf.conf</code> to your needs. An extensively commented version can be found at <code>/etc/python-policyd-spf/policyd-spf.conf.commented</code>.
+Pay some extra attention to the HELO check policy, as standard settings strictly reject HELO failures.
+</p>
+<p>In <code>main.cf</code> file, add a timeout for the policyd:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/postfix/main.cf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">policy-spf_time_limit = 3600s</pre>
+<p>Then add a transport
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/postfix/master.cf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">policy-spf  unix  -       n       n       -       0       spawn user=nobody argv=/usr/bin/policyd-spf</pre>
+<p>Lastly you need to add the policyd to the <code>smtpd_recipient_restrictions</code>. To minimize load put it to the end of the restrictions but above any <code>reject_rbl_client</code> DNSBL line:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/postfix/main.cf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">smtpd_recipient_restrictions=
+     ...
+     permit_sasl_authenticated
+     permit_mynetworks
+     reject_unauth_destination
+     check_policy_service unix:private/policy-spf</pre>
+<p>Now reload the <code>postfix</code> service.
+</p>
+<p>You can test your setup with the following:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/python-policyd-spf/policyd-spf.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">defaultSeedOnly = 0</pre>
+<h4><span class="mw-headline" id="With_postfix-policyd-spf-perl">With postfix-policyd-spf-perl</span></h4>
+<p>Do the same process with postfix as <a href="#With_spf-engine_or_python-postfix-policyd-spf">with python-postfix-policyd-spf</a>, but with the following differences:
+</p>
+<p>Timeout for the policyd in <code>main.cf</code> file:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/postfix/main.cf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">policy_time_limit = 3600</pre>
+<p>Transport:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/postfix/master.cf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">policy  unix  -       n       n       -       0       spawn
+     user=nobody argv=/usr/lib/postfix/postfix-policyd-spf-perl</pre>
+<p>Add the policyd to the <code>smtpd_recipient_restrictions</code>:
+</p>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Warning:</strong> Specify <code>check_policy_service</code> after <code>reject_unauth_destination</code> or else your system can become an open relay.</div>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/postfix/main.cf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">smtpd_recipient_restrictions=
+     ...
+     reject_unauth_destination
+     check_policy_service unix:private/policy
+     ...</pre>
+<h3><span class="mw-headline" id="Sender_Rewriting_Scheme">Sender Rewriting Scheme</span></h3>
+<p>To use the <a href="../en/Mail_server.html#Sender_Rewriting_Scheme" class="mw-redirect" title="Sender Rewriting Scheme">Sender Rewriting Scheme</a> with Postfix, <a href="../en/Help:Reading.html#Installation_of_packages" class="mw-redirect" title="Install">install</a> <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/postsrsd/">postsrsd</a></span><sup><small>AUR</small></sup> and adjust the settings:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/postsrsd/postsrsd.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">domains = { "yourdomain.tld", "yournextdomain.tld", "yournextdomain.tld" }
+unprivileged-user = "postsrsd"</pre>
+<p>Enable and start the daemon, making sure it runs after reboot as well.
+Then configure Postfix accordingly by tweaking the following lines:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/postfix/main.cf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">sender_canonical_maps = socketmap:unix:srs:forward
+sender_canonical_classes = envelope_sender
+recipient_canonical_maps = socketmap:unix:srs:reverse
+recipient_canonical_classes = envelope_recipient, header_recipient</pre>
+<p>Restart Postfix and start forwarding mail.
+</p>
+<h2><span class="mw-headline" id="Troubleshooting_2">Troubleshooting</span></h2>
+<h3>
+<span id="Warning:_.22database_.2Fetc.2Fpostfix.2F.2A.db_is_older_than_source_file_...22"></span><span class="mw-headline" id='Warning:_"database_/etc/postfix/*.db_is_older_than_source_file_.."'>Warning: "database /etc/postfix/*.db is older than source file .."</span>
+</h3>
+<p>If you get one or both warnings with <a href="../en/Systemd/Journal.html" class="mw-redirect" title="Journalctl">journalctl</a>:
+</p>
+<pre>warning: database /etc/postfix/virtual.db is older than source file /etc/postfix/virtual
+warning: database /etc/postfix/transport.db is older than source file /etc/postfix/transport
+</pre>
+<p>Then you can fix it by using these commands, depending on the messages you get:
+</p>
+<pre>postmap /etc/postfix/transport
+postmap /etc/postfix/virtual
+</pre>
+<p>And <a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Restart">restart</a> <code>postfix.service</code>.
+</p>
+<h3>
+<span id="Host_or_domain_name_not_found._Name_service_error_for_name.3D..."></span><span class="mw-headline" id="Host_or_domain_name_not_found._Name_service_error_for_name=...">Host or domain name not found. Name service error for name=...</span>
+</h3>
+<p>If you get the following warning with <i>journalctl</i>:
+</p>
+<pre>Host or domain name not found. Name service error for name=...
+</pre>
+<p>It could be that you are running Postfix in a <code>chroot</code> and <code>/etc/resolv.conf</code> is missing. If so, you can fix this by:
+</p>
+<pre>mkdir -p /var/spool/postfix/etc
+cp /etc/resolv.conf /var/spool/postfix/etc/resolv.conf
+</pre>
+<p>And <a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Restart">restart</a> <code>postfix.service</code>.
+</p>
+<h3>
+<span id="error:_require_command:_unknown_Sieve_capability_.60vnd.dovecot.filter.27"></span><span class="mw-headline" id="error:_require_command:_unknown_Sieve_capability_`vnd.dovecot.filter'">error: require command: unknown Sieve capability `vnd.dovecot.filter'</span>
+</h3>
+<pre>spamassassin: line 1: error: require command: unknown Sieve capability `vnd.dovecot.filter'.
+spamassassin: line 2: error: unknown command 'filter' (only reported once at first occurrence).
+spamassassin: error: validation failed.
+sievec(root): Fatal: failed to compile sieve script 'spamassassin.sieve'
+</pre>
+<p>If you get this error when running <code>sievec</code> after following <a href="#SpamAssassin_combined_with_Dovecot_LMTP_/_Sieve">#SpamAssassin combined with Dovecot LMTP / Sieve</a>, replace <code>sieve_extensions</code> with <code>sieve_global_extensions</code> in <code>/etc/dovecot/sieve.before.d/spamassassin.sieve</code>.
+</p>
+<p><a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Restart">Restart</a> <code>dovecot.service</code>.
+</p>
+<h2><span class="mw-headline" id="See_also">See also</span></h2>
+<ul>
+<li><a rel="nofollow" class="external text" href="http://www.postfix.org/documentation.html">Official documentation</a></li>
+<li><a rel="nofollow" class="external text" href="https://help.ubuntu.com/community/Postfix">Postfix Ubuntu documentation</a></li>
+<li><a href="../en/Virtual_user_mail_system_with_Postfix,_Dovecot_and_Roundcube.html" title="Virtual user mail system with Postfix, Dovecot and Roundcube">Virtual user mail system with Postfix, Dovecot and Roundcube</a></li>
+</ul>
+</div>
+</div>
+					<div id="catlinks" class="catlinks" data-mw="interface">
+<div id="mw-normal-catlinks" class="mw-normal-catlinks">
+<a href="../Special:Categories.html" title="Special:Categories">Category</a>: <ul><li><a href="../en/Category:Mail_server.html" title="Category:Mail server">Mail server</a></li></ul>
+</div>
+<div id="mw-hidden-catlinks" class="mw-hidden-catlinks mw-hidden-cats-hidden">Hidden categories: <ul>
+<li><a href="../en/Category:Pages_or_sections_flagged_with_Template:Expansion.html" title="Category:Pages or sections flagged with Template:Expansion">Pages or sections flagged with Template:Expansion</a></li>
+<li><a href="../en/Category:Pages_or_sections_flagged_with_Template:Style.html" title="Category:Pages or sections flagged with Template:Style">Pages or sections flagged with Template:Style</a></li>
+</ul>
+</div>
+</div>
+				</div>
+			</main>
+			
+		</div>
+		<div class="mw-footer-container">
+			
+<footer id="footer" class="mw-footer" style="margin: 0">
+	<ul id="footer-info">
+	<li data-nosnippet="">Retrieved from "<a dir="ltr" href="https://wiki.archlinux.org/index.php?title=Postfix&amp;oldid=827868">https://wiki.archlinux.org/index.php?title=Postfix&amp;oldid=827868</a>"</li>
+<li id="footer-info-lastmod"> This page was last edited on 26 February 2025, at 20:51.</li>
+	<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+<br>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="https://terms.archlinux.org/docs/privacy-policy/">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="../en/ArchWiki:About.html">About ArchWiki</a></li>
+	<li id="footer-places-disclaimers"><a href="../en/ArchWiki:General_disclaimer.html">Disclaimers</a></li>
+	<li id="footer-places-archwiki-code-of-conduct"><a href="https://terms.archlinux.org/docs/code-of-conduct/" class="extiw" title="archlinux-service-agreements:code-of-conduct">Code of conduct</a></li>
+	<li id="footer-places-archwiki-terms-of-service"><a href="https://terms.archlinux.org/docs/terms-of-service/" class="extiw" title="archlinux-service-agreements:terms-of-service">Terms of service</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-copyrightico"><a href="https://www.gnu.org/copyleft/fdl.html" class="cdx-button cdx-button--fake-button cdx-button--size-large cdx-button--fake-button--enabled"><img src="/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" loading="lazy"></a></li>
+	<li id="footer-poweredbyico"><img src="/resources/assets/poweredby_mediawiki.svg" width="88" height="31" loading="lazy"></li>
+</ul>
+
+</footer>
+
+		</div>
+	</div> 
+</div> 
+<div class="vector-settings" id="p-dock-bottom">
+	<ul></ul>
+</div>
+</body>
+</html>

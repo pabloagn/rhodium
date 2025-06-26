@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-sticky-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-0 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-disabled skin-theme-clientpref-day vector-toc-available" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>mkinitcpio/Minimal initramfs - ArchWiki</title>
+<link rel="stylesheet" href="../../ArchWikiOffline.css">
+<meta name="ResourceLoaderDynamicStyles" content="">
+<meta name="generator" content="MediaWiki 1.43.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="max-image-preview:standard">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.25, maximum-scale=5.0">
+<link rel="search" type="application/opensearchdescription+xml" href="/rest.php/v1/search" title="ArchWiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.archlinux.org/api.php?action=rsd">
+<link rel="license" href="https://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="ArchWiki Atom feed" href="/index.php?title=Special:RecentChanges&amp;feed=atom">
+</head>
+<body class="skin--responsive skin-vector skin-vector-search-vue mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Mkinitcpio_Minimal_initramfs rootpage-Mkinitcpio skin-vector-2022 action-view">
+<a class="mw-jump-link" href="#bodyContent">Jump to content</a>
+<div class="vector-header-container">
+	</div>
+<div class="mw-page-container">
+	<div class="mw-page-container-inner">
+		<div class="vector-column-start">
+			<div class="vector-main-menu-container">
+		</div>
+	<div class="vector-sticky-pinned-container">
+				<nav id="mw-panel-toc" aria-label="Contents" data-event-name="ui.sidebar-toc" class="mw-table-of-contents-container vector-toc-landmark">
+					<div id="vector-toc-pinned-container" class="vector-pinned-container">
+					<div id="vector-toc" class="vector-toc vector-pinnable-element">
+	<div class="vector-pinnable-header vector-toc-pinnable-header vector-pinnable-header-pinned" data-feature-name="toc-pinned" data-pinnable-element-id="vector-toc">
+	<h2 class="vector-pinnable-header-label">Contents</h2>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-toc.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-toc.unpin">hide</button>
+</div>
+
+
+	<ul class="vector-toc-contents" id="mw-panel-toc-list">
+		<li id="toc-mw-content-text" class="vector-toc-list-item vector-toc-level-1">
+			<a href="#" class="vector-toc-link">
+				<div class="vector-toc-text">Beginning</div>
+			</a>
+		</li>
+		<li id="toc-Udev_requirement" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Udev_requirement">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">1</span>
+				<span>Udev requirement</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Udev_requirement-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Editing_.preset_files" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Editing_.preset_files">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">2</span>
+				<span>Editing .preset files</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Editing_.preset_files-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Finding_needed_modules" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Finding_needed_modules">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">3</span>
+				<span>Finding needed modules</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Finding_needed_modules-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Initial_edit_of_mkinitcpio.conf" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Initial_edit_of_mkinitcpio.conf">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">4</span>
+				<span>Initial edit of mkinitcpio.conf</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Initial_edit_of_mkinitcpio.conf-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Initial_test" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Initial_test">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">5</span>
+				<span>Initial test</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Initial_test-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Sorting_out_modules" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Sorting_out_modules">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">6</span>
+				<span>Sorting out modules</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Sorting_out_modules-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Sorting out modules subsection</span>
+			</button>
+		
+		<ul id="toc-Sorting_out_modules-sublist" class="vector-toc-list">
+			<li id="toc-Filesystem_modules" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Filesystem_modules">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.1</span>
+					<span>Filesystem modules</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Filesystem_modules-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Storage_device_modules" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Storage_device_modules">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.2</span>
+					<span>Storage device modules</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Storage_device_modules-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Keyboard_modules" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Keyboard_modules">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.3</span>
+					<span>Keyboard modules</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Keyboard_modules-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Finishing_up" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Finishing_up">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">7</span>
+				<span>Finishing up</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Finishing_up-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+</ul>
+</div>
+
+					</div>
+		</nav>
+			</div>
+		</div>
+		<div class="mw-content-container">
+			<main id="content" class="mw-body" style="margin: 0">
+				<header class="mw-body-header vector-page-titlebar">
+					<nav aria-label="Contents" class="vector-toc-landmark">
+						
+<div id="vector-page-titlebar-toc" class="vector-dropdown vector-page-titlebar-toc vector-button-flush-left">
+	<input type="checkbox" id="vector-page-titlebar-toc-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-page-titlebar-toc" class="vector-dropdown-checkbox " aria-label="Toggle the table of contents">
+	<label id="vector-page-titlebar-toc-label" for="vector-page-titlebar-toc-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"><span class="vector-icon mw-ui-icon-listBullet mw-ui-icon-wikimedia-listBullet"></span>
+
+<span class="vector-dropdown-label-text">Toggle the table of contents</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+							<div id="vector-page-titlebar-toc-unpinned-container" class="vector-unpinned-container">
+			</div>
+		
+	</div>
+</div>
+
+					</nav>
+					<h1 id="firstHeading" class="firstHeading mw-first-heading">mkinitcpio/Minimal initramfs</h1>
+							
+<div id="p-lang-btn" class="vector-dropdown mw-portlet mw-portlet-lang">
+	<input type="checkbox" id="p-lang-btn-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-p-lang-btn" class="vector-dropdown-checkbox mw-interlanguage-selector" aria-label="Go to an article in another language. Available in 2 languages">
+	<label id="p-lang-btn-label" for="p-lang-btn-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--action-progressive mw-portlet-lang-heading-2" aria-hidden="true"><span class="vector-icon mw-ui-icon-language-progressive mw-ui-icon-wikimedia-language-progressive"></span>
+
+<span class="vector-dropdown-label-text">2 languages</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+		<div class="vector-menu-content">
+			
+			<ul class="vector-menu-content-list">
+				
+				<li class="interlanguage-link interwiki-ja mw-list-item"><a href="https://wiki.archlinux.jp/index.php/mkinitcpio/Initramfs_%E3%81%AE%E6%9C%80%E5%B0%8F%E5%8C%96" title="mkinitcpio/Initramfs の最小化 – 日本語" lang="ja" hreflang="ja" data-title="mkinitcpio/Initramfs の最小化" data-language-autonym="日本語" data-language-local-name="日本語" class="interlanguage-link-target"><span>日本語</span></a></li>
+<li class="interlanguage-link interwiki-zh-hans mw-list-item"><a href="https://wiki.archlinuxcn.org/wiki/mkinitcpio/%E6%9E%81%E7%AE%80_initramfs" title="mkinitcpio/极简 initramfs – 中文（简体）" lang="zh-Hans" hreflang="zh-Hans" data-title="mkinitcpio/极简 initramfs" data-language-autonym="中文（简体）" data-language-local-name="中文（简体）" class="interlanguage-link-target"><span>中文（简体）</span></a></li>
+			</ul>
+			
+		</div>
+
+	</div>
+</div>
+</header>
+				<div class="vector-column-end">
+					<div class="vector-sticky-pinned-container">
+						<nav class="vector-page-tools-landmark" aria-label="Page tools">
+							<div id="vector-page-tools-pinned-container" class="vector-pinned-container">
+				
+							</div>
+		</nav>
+						<nav class="vector-appearance-landmark" aria-label="Appearance">
+							<div id="vector-appearance-pinned-container" class="vector-pinned-container">
+				<div id="vector-appearance" class="vector-appearance vector-pinnable-element">
+	<div class="vector-pinnable-header vector-appearance-pinnable-header vector-pinnable-header-pinned" data-feature-name="appearance-pinned" data-pinnable-element-id="vector-appearance" data-pinned-container-id="vector-appearance-pinned-container" data-unpinned-container-id="vector-appearance-unpinned-container">
+	<div class="vector-pinnable-header-label">Appearance</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-appearance.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-appearance.unpin">hide</button>
+</div>
+
+
+</div>
+
+							</div>
+		</nav>
+					</div>
+				</div>
+				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container>
+					<div class="vector-body-before-content">
+							<div class="mw-indicators">
+		</div>
+
+						<div id="siteSub" class="noprint">From ArchWiki</div>
+					</div>
+					<div id="contentSub"><div id="mw-content-subtitle"><div class="subpages">&lt; <bdi dir="ltr"><a href="../../en/Mkinitcpio.html" title="Mkinitcpio">Mkinitcpio</a></bdi>
+</div></div></div>
+					
+					
+					<div id="mw-content-text" class="mw-body-content">
+<div class="mw-content-ltr mw-parser-output" lang="en" dir="ltr">
+<p><span>
+</span>
+This article shows how to create a slim, minimal initramfs for a system with a specific, known and static hardware configuration. The procedure is expounded from <a rel="nofollow" class="external text" href="http://web.archive.org/web/20241129111501/http://blog.falconindy.com/articles/optmizing-bootup-with-mkinitcpio.html">Optimizing Bootup With mkinitcpio</a> by Falconindy (Dave Reisner).
+</p>
+<meta property="mw:PageProp/toc">
+<h2><span class="mw-headline" id="Udev_requirement">Udev requirement</span></h2>
+<p>The big advantage of creating your own initramfs images is that you can eliminate <code>udev</code>. This hook alone is responsible for quite a bit of size (~700-800 KiB with LZ4 and LZOP, less with other algorithms) in the initramfs image. Not only will the bigger size lead to longer boots (more data to decompress) but initializing <code>udev</code> itself will also take some extra time. <b>However, some things require</b> <code>udev</code>. This includes resolving UUID, LABEL, PARTUUID and PARTLABEL identifiers (<a rel="nofollow" class="external text" href="https://unix.stackexchange.com/questions/352381/how-to-boot-into-root-btrfs-file-system-with-minimal-initramfs-without-udev-hook/352932#answer-352932">workaround hook without-udev</a>) and the assembly of LVM and mdadm devices that contain the <code>root</code> partition. If you are unsure if you need <code>udev</code>, continue with the directions on this page up until the <a href="#Initial_test">#Initial test</a>. If not everything works without <code>udev</code>, re-enable the hook and try again.
+</p>
+<p>Also, while most keyboards (AT, PS/2, USB) do not require the use of the <code>udev</code> hook, Logitech USB devices using the Logitech Unified Receiver do. At this point you could either include <code>udev</code> in all images or rely on a <code>fallback</code> image that does.
+</p>
+<p>If you need <code>udev</code>, your minimization efforts will most likely be in vain. You may still be able to shrink the image size by ~600 KiB, but boot times will not be significantly improved. Continuing on in this scenario can still be a worthwhile learning experience.
+</p>
+<h2><span class="mw-headline" id="Editing_.preset_files">Editing .preset files</span></h2>
+<p>In Falconidy's tutorial, he edits <code>/etc/mkinitcpio.conf</code> and runs <code>mkinitcpio -g</code> to create the test initramfs image, leaving the known-good initramfs images on the system untouched.  However, if you blindly run <code>mkinitcpio -P</code> afterwards, even the <code>fallback</code> image will be stripped down.
+</p>
+<p>A safer way to prepare for taking the creation of the initramfs files into your own hands is to modify the <code>.preset</code> files in <code>/etc/mkinitcpio.d</code>.  The following example configuration will supplant <code>default</code> with the minimal initramfs image and create a new <code>normal</code> image that is built The Arch Way.  If things go wrong, you can rely on the <code>normal</code> or <code>fallback</code> images.  When you are finished, you can drop the <code>normal_*</code> lines from the configuration and remove the <code>initramfs-linux*-normal.img</code> files.
+</p>
+<pre>...
+
+PRESETS=('default' 'normal' 'fallback')
+...
+
+default_options="-S udev,block,mdadm_udev,filesystems,keyboard,fsck,consolefont"
+...
+
+#normal_config="/etc/mkinitcpio.conf"
+normal_image="/boot/initramfs-linux-normal.img"
+#normal_options=""
+...</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> The <code>mdadm_udev</code> and <code>consolefont</code> hooks are not present in the default Arch configuration.  Having extraneous hooks in the <code>-S</code> parameter in the <code>*_options</code> line will not result in an error.</div>
+<h2><span class="mw-headline" id="Finding_needed_modules">Finding needed modules</span></h2>
+<p>The quickest way to find out what modules you need is to reboot your system with the <code>fallback</code> initramfs image and add <code>break=postmount</code> to the kernel parameters in your boot loader so you get dropped to the command line once the root filesystem is mounted.
+</p>
+<p>Once your system reboots, run the following command to see what modules you need:
+</p>
+<pre>lsmod | awk 'NF==3{print $1}'
+</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> The <code>awk</code> command returns only the first field, using <code>{print $1} </code>, of every line with exactly 3 fields, enforced by <code>NF==3</code>. Module dependencies include the 4th field to show which module pulled in the dependency, thus being filtered out due to that fourth field.  Arch's <code>mkinitcpio</code> takes care of dependencies for legitimate values included in the arrays <code>MODULES=()</code>, <code>FILES=()</code>, and <code>BINARIES=()</code>.</div>
+<p>Write down the modules that were loaded and type <code>exit</code> to continue booting.
+</p>
+<p>Alternatively, <a href="../../en/Help:Reading.html#Installation_of_packages" class="mw-redirect" title="Install">Install</a> the package <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=hwdetect">hwdetect</a></span> to help determine necessary modules. Though unmaintained, it can provide valuable information. Also, see <a href="../../en/Kernel_module.html" class="mw-redirect" title="Kernel modules">Kernel modules</a> to get started with the native tools.
+</p>
+<h2><span class="mw-headline" id="Initial_edit_of_mkinitcpio.conf">Initial edit of mkinitcpio.conf</span></h2>
+<p>Edit <code>/etc/mkinitcpio.conf</code> and modify the <code>MODULES=</code> array. A worthwhile note is that <code>/etc/mkinitcpio.conf</code> is sourced, so you can build the MODULES array like in a bash script.
+</p>
+<pre>MODULES=()   # filesystems
+MODULES+=()  # storage
+MODULES+=()  # keyboard
+MODULES+=()  # miscellaneous
+</pre>
+<p>Add all your modules to the last <code>miscellaneous</code> line.  As you sort through your modules, you can place them in the appropriate line.
+</p>
+<p>You will also need the binaries to do filesystem checks on the <code>root</code> device <b>and any other mount points</b> in <code>/etc/fstab</code> that have been set to do so.
+</p>
+<ul><li>For ext[2|3|4] devices:</li></ul>
+<pre>BINARIES=(fsck fsck.ext[2|3|4] e2fsck)
+</pre>
+<ul><li>For vfat (UEFI boot) partitions:</li></ul>
+<pre>BINARIES=(fsck fsck.vfat dosfsck)
+</pre>
+<ul><li>For btrfs single disk device:</li></ul>
+<pre>BINARIES=(fsck fsck.btrfs btrfsck)
+</pre>
+<ul><li>For btrfs multi disk device:</li></ul>
+<pre>BINARIES=(fsck fsck.btrfs btrfs btrfsck)
+</pre>
+<ul><li>For xfs devices</li></ul>
+<pre>BINARIES=(fsck fsck.xfs xfs_repair)
+</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> 
+<ul>
+<li>The third option in each of these example are optional, but their exclusion will prevent you from repairing a damaged filesystem, necessitating a boot from another initramfs.</li>
+<li>Users are encouraged to add entries pertaining to other filesystems.</li>
+</ul>
+</div>
+<h2><span class="mw-headline" id="Initial_test">Initial test</span></h2>
+<p>Edit <code>/etc/mkinitcpio.conf</code> and run <code>mkinitcpio -P</code> to rebuild all of your initramfs images.  Then reboot.
+</p>
+<p>Your first boot should be successful <b>if you do not need</b> <code>udev</code>.  If something does not work (eg, Arch cannot find your root partition or your keyboard does not work) then you will need to go back and remove <code>udev</code> from the <code>-S</code> parameter in the <code>default_options</code> line and try again.  If you need <code>udev</code>, keep in mind that you will not see a significant improvement in boot time and continuing on is only good for a learning experience.
+</p>
+<h2><span class="mw-headline" id="Sorting_out_modules">Sorting out modules</span></h2>
+<p>Now that you have a known-good bootable initramfs, it is time to slim down the initramfs even further.  The normal method is to remove a few modules at a time, rebuild the initramfs images, and reboot to see if everything is still OK.  If you find out that everything is not OK, reboot with the <code>fallback</code> initramfs image and re-add the deleted modules until everything is OK again.  Rinse and repeat until you have only the modules you need.  As this can be a tedious experience, the following lists are provided to give people a head-start in the elimination process.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> The following are examples and are not meant to be definitive.</div>
+<h3><span class="mw-headline" id="Filesystem_modules">Filesystem modules</span></h3>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> You will need the filesystem modules for the <code>root</code> device and any other device in <code>/etc/fstab</code> that will have its filesystem checked on boot.</div>
+<ul>
+<li><code>ext[2,3,4]</code></li>
+<li><code>xfs</code></li>
+<li><code>jfs</code></li>
+<li><code>reiserfs</code></li>
+</ul>
+<h3><span class="mw-headline" id="Storage_device_modules">Storage device modules</span></h3>
+<ul>
+<li>
+<code>sd_mod</code> for all SCSI, SATA, and PATA (IDE) devices</li>
+<li>
+<code>ahci</code> for SATA devices on modern AHCI controllers</li>
+<li>
+<code>nvme</code> and <code>nvme_core</code> for NVMe (M.2, PCI-E) devices</li>
+<li>
+<code>sata_*</code> for SATA devices on IDE-mode controllers</li>
+<li>
+<code>pata_*</code> for PATA (IDE) devices</li>
+<li>
+<code>ehci_pci</code> and <code>usb_storage</code> for USB storage devices</li>
+<li>
+<code>virtio_blk</code> and <code>virtio_pci</code> for QEMU/KVM VMs using VirtIO for storage</li>
+</ul>
+<h3><span class="mw-headline" id="Keyboard_modules">Keyboard modules</span></h3>
+<ul>
+<li>
+<code>atkbd</code> for AT and PS/2 keyboards, and the emulated keyboard in QEMU/KVM.</li>
+<li>
+<code>hid_generic</code>, <code>ohci_pci</code>, and <code>usbhid</code> for normal USB keyboards.</li>
+<li>
+<code>hid_apple</code> for Apple keyboards.</li>
+<li>
+<code>hid_logitech_dj</code>, <code>uhci_hcd</code>, and <code>usbhid</code> for Logitech USB keyboards using the Logitech Unified Receiver  (<b>requires the</b> <code>udev</code> <b>hook</b>).</li>
+</ul>
+<h2><span class="mw-headline" id="Finishing_up">Finishing up</span></h2>
+<p>Once you have slimmed your initramfs as far as it will go, remove (or comment-out) the <code>normal_*</code> lines from your <code>.preset</code> files and remove the <code>initramfs-linux*-normal.img</code> files from <code>/boot</code>.
+</p>
+</div>
+</div>
+					<div id="catlinks" class="catlinks" data-mw="interface"><div id="mw-normal-catlinks" class="mw-normal-catlinks">
+<a href="../../Special:Categories.html" title="Special:Categories">Category</a>: <ul><li><a href="../../en/Category:Initramfs.html" title="Category:Initramfs">Initramfs</a></li></ul>
+</div></div>
+				</div>
+			</main>
+			
+		</div>
+		<div class="mw-footer-container">
+			
+<footer id="footer" class="mw-footer" style="margin: 0">
+	<ul id="footer-info">
+	<li data-nosnippet="">Retrieved from "<a dir="ltr" href="https://wiki.archlinux.org/index.php?title=Mkinitcpio/Minimal_initramfs&amp;oldid=829642">https://wiki.archlinux.org/index.php?title=Mkinitcpio/Minimal_initramfs&amp;oldid=829642</a>"</li>
+<li id="footer-info-lastmod"> This page was last edited on 23 March 2025, at 01:00.</li>
+	<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+<br>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="https://terms.archlinux.org/docs/privacy-policy/">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="../../en/ArchWiki:About.html">About ArchWiki</a></li>
+	<li id="footer-places-disclaimers"><a href="../../en/ArchWiki:General_disclaimer.html">Disclaimers</a></li>
+	<li id="footer-places-archwiki-code-of-conduct"><a href="https://terms.archlinux.org/docs/code-of-conduct/" class="extiw" title="archlinux-service-agreements:code-of-conduct">Code of conduct</a></li>
+	<li id="footer-places-archwiki-terms-of-service"><a href="https://terms.archlinux.org/docs/terms-of-service/" class="extiw" title="archlinux-service-agreements:terms-of-service">Terms of service</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-copyrightico"><a href="https://www.gnu.org/copyleft/fdl.html" class="cdx-button cdx-button--fake-button cdx-button--size-large cdx-button--fake-button--enabled"><img src="/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" loading="lazy"></a></li>
+	<li id="footer-poweredbyico"><img src="/resources/assets/poweredby_mediawiki.svg" width="88" height="31" loading="lazy"></li>
+</ul>
+
+</footer>
+
+		</div>
+	</div> 
+</div> 
+<div class="vector-settings" id="p-dock-bottom">
+	<ul></ul>
+</div>
+</body>
+</html>

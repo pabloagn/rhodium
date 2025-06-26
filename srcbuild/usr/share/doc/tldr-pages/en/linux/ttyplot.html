@@ -1,0 +1,32 @@
+<h1>ttyplot</h1>
+
+<blockquote><p>A realtime plotting utility for the command-line with data input from <code>stdin</code>.
+More information: <a href="https://github.com/tenox7/ttyplot">https://github.com/tenox7/ttyplot</a>.</p></blockquote>
+
+<ul>
+<li>Plot the values <code>1</code>, <code>2</code> and <code>3</code> (Note: <code>cat</code> prevents <code>ttyplot</code> from exiting):</li>
+</ul>
+
+
+<p><code>{ echo {{1 2 3}}; cat; } | ttyplot</code></p>
+
+<ul>
+<li>Set a specific title and unit:</li>
+</ul>
+
+
+<p><code>{ echo {{1 2 3}}; cat; } | ttyplot -t {{title}} -u {{unit}}</code></p>
+
+<ul>
+<li>Use a while loop to continuously plot random values:</li>
+</ul>
+
+
+<p><code>{ while {{true}}; do echo {{$RANDOM}}; sleep {{1}}; done } | ttyplot</code></p>
+
+<ul>
+<li>Parse the output from <code>ping</code> and visualize it:</li>
+</ul>
+
+
+<p><code>ping {{8.8.8.8}} | sed -u '{{s/^.*time=//g; s/ ms//g}}' | ttyplot -t "{{ping to 8.8.8.8}}" -u {{ms}}</code></p>

@@ -1,0 +1,60 @@
+<h1>journalctl</h1>
+
+<blockquote><p>Consulta el registro systemd.
+Más información: <a href="https://manned.org/journalctl">https://manned.org/journalctl</a>.</p></blockquote>
+
+<ul>
+<li>Muestra todos los mensajes con nivel de prioridad 3 (errores) de este boot:</li>
+</ul>
+
+
+<p><code>journalctl {{[-b|--boot]}} {{[-p|--priority]}} 3</code></p>
+
+<ul>
+<li>Elimina los registros diarios con más de 2 días de antigüedad:</li>
+</ul>
+
+
+<p><code>journalctl --vacuum-time 2d</code></p>
+
+<ul>
+<li>Muestra solo las últimas N líneas y sigue los mensajes nuevos (como <code>tail -f</code> de un syslog tradicional):</li>
+</ul>
+
+
+<p><code>journalctl {{[-n|--lines]}} {{N}} {{[-f|--follow]}}</code></p>
+
+<ul>
+<li>Muestra todos los mensajes de una unidad específica:</li>
+</ul>
+
+
+<p><code>journalctl {{[-u|--unit]}} {{unidad}}</code></p>
+
+<ul>
+<li>Muestra los registros de una unidad determinada desde la última vez que se inició:</li>
+</ul>
+
+
+<p><code>journalctl _SYSTEMD_INVOCATION_ID=$(systemctl show --value --property=InvocationID {{unidad}})</code></p>
+
+<ul>
+<li>Filtra mensajes dentro de un intervalo de tiempo (marca de tiempo o marcadores de posición como &ldquo;ayer&rdquo;):</li>
+</ul>
+
+
+<p><code>journalctl {{[-S|--since]}} {{now|today|yesterday|tomorrow}} {{[-U|--until]}} "{{YYYY-MM-DD HH:MM:SS}}"</code></p>
+
+<ul>
+<li>Muestra todos los mensajes de un proceso específico:</li>
+</ul>
+
+
+<p><code>journalctl _PID={{pid}}</code></p>
+
+<ul>
+<li>Mostrar todos los mensajes de un ejecutable específico:</li>
+</ul>
+
+
+<p><code>journalctl {{ruta/al/ejecutable}}</code></p>

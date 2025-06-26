@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-sticky-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-0 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-disabled skin-theme-clientpref-day vector-toc-available" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>Install Arch Linux on LVM - ArchWiki</title>
+<link rel="stylesheet" href="../ArchWikiOffline.css">
+<meta name="ResourceLoaderDynamicStyles" content="">
+<meta name="generator" content="MediaWiki 1.43.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="max-image-preview:standard">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.25, maximum-scale=5.0">
+<link rel="search" type="application/opensearchdescription+xml" href="/rest.php/v1/search" title="ArchWiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.archlinux.org/api.php?action=rsd">
+<link rel="license" href="https://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="ArchWiki Atom feed" href="/index.php?title=Special:RecentChanges&amp;feed=atom">
+</head>
+<body class="skin--responsive skin-vector skin-vector-search-vue mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Install_Arch_Linux_on_LVM rootpage-Install_Arch_Linux_on_LVM skin-vector-2022 action-view">
+<a class="mw-jump-link" href="#bodyContent">Jump to content</a>
+<div class="vector-header-container">
+	</div>
+<div class="mw-page-container">
+	<div class="mw-page-container-inner">
+		<div class="vector-column-start">
+			<div class="vector-main-menu-container">
+		</div>
+	<div class="vector-sticky-pinned-container">
+				<nav id="mw-panel-toc" aria-label="Contents" data-event-name="ui.sidebar-toc" class="mw-table-of-contents-container vector-toc-landmark">
+					<div id="vector-toc-pinned-container" class="vector-pinned-container">
+					<div id="vector-toc" class="vector-toc vector-pinnable-element">
+	<div class="vector-pinnable-header vector-toc-pinnable-header vector-pinnable-header-pinned" data-feature-name="toc-pinned" data-pinnable-element-id="vector-toc">
+	<h2 class="vector-pinnable-header-label">Contents</h2>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-toc.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-toc.unpin">hide</button>
+</div>
+
+
+	<ul class="vector-toc-contents" id="mw-panel-toc-list">
+		<li id="toc-mw-content-text" class="vector-toc-list-item vector-toc-level-1">
+			<a href="#" class="vector-toc-link">
+				<div class="vector-toc-text">Beginning</div>
+			</a>
+		</li>
+		<li id="toc-Installation" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Installation">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">1</span>
+				<span>Installation</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Installation-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Installation subsection</span>
+			</button>
+		
+		<ul id="toc-Installation-sublist" class="vector-toc-list">
+			<li id="toc-Create_partitions" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Create_partitions">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.1</span>
+					<span>Create partitions</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Create_partitions-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Create_physical_volumes" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Create_physical_volumes">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.2</span>
+					<span>Create physical volumes</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Create_physical_volumes-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Create_and_extend_your_volume_group" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Create_and_extend_your_volume_group">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.3</span>
+					<span>Create and extend your volume group</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Create_and_extend_your_volume_group-sublist" class="vector-toc-list">
+				<li id="toc-Combined_creation_of_physical_volumes_and_volume_groups" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Combined_creation_of_physical_volumes_and_volume_groups">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.3.1</span>
+					<span>Combined creation of physical volumes and volume groups</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Combined_creation_of_physical_volumes_and_volume_groups-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Create_logical_volumes" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Create_logical_volumes">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.4</span>
+					<span>Create logical volumes</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Create_logical_volumes-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Format_and_mount_logical_volumes" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Format_and_mount_logical_volumes">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.5</span>
+					<span>Format and mount logical volumes</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Format_and_mount_logical_volumes-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Configure_the_system" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Configure_the_system">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">2</span>
+				<span>Configure the system</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Configure_the_system-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Configure the system subsection</span>
+			</button>
+		
+		<ul id="toc-Configure_the_system-sublist" class="vector-toc-list">
+			<li id="toc-Adding_mkinitcpio_hooks" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Adding_mkinitcpio_hooks">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1</span>
+					<span>Adding mkinitcpio hooks</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Adding_mkinitcpio_hooks-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Kernel_boot_options" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Kernel_boot_options">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2</span>
+					<span>Kernel boot options</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Kernel_boot_options-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+</ul>
+</div>
+
+					</div>
+		</nav>
+			</div>
+		</div>
+		<div class="mw-content-container">
+			<main id="content" class="mw-body" style="margin: 0">
+				<header class="mw-body-header vector-page-titlebar">
+					<nav aria-label="Contents" class="vector-toc-landmark">
+						
+<div id="vector-page-titlebar-toc" class="vector-dropdown vector-page-titlebar-toc vector-button-flush-left">
+	<input type="checkbox" id="vector-page-titlebar-toc-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-page-titlebar-toc" class="vector-dropdown-checkbox " aria-label="Toggle the table of contents">
+	<label id="vector-page-titlebar-toc-label" for="vector-page-titlebar-toc-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"><span class="vector-icon mw-ui-icon-listBullet mw-ui-icon-wikimedia-listBullet"></span>
+
+<span class="vector-dropdown-label-text">Toggle the table of contents</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+							<div id="vector-page-titlebar-toc-unpinned-container" class="vector-unpinned-container">
+			</div>
+		
+	</div>
+</div>
+
+					</nav>
+					<h1 id="firstHeading" class="firstHeading mw-first-heading"><span class="mw-page-title-main">Install Arch Linux on LVM</span></h1>
+							
+<div id="p-lang-btn" class="vector-dropdown mw-portlet mw-portlet-lang">
+	<input type="checkbox" id="p-lang-btn-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-p-lang-btn" class="vector-dropdown-checkbox mw-interlanguage-selector" aria-label="Go to an article in another language. Available in 2 languages">
+	<label id="p-lang-btn-label" for="p-lang-btn-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--action-progressive mw-portlet-lang-heading-2" aria-hidden="true"><span class="vector-icon mw-ui-icon-language-progressive mw-ui-icon-wikimedia-language-progressive"></span>
+
+<span class="vector-dropdown-label-text">2 languages</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+		<div class="vector-menu-content">
+			
+			<ul class="vector-menu-content-list">
+				
+				<li class="interlanguage-link interwiki-ja mw-list-item"><a href="https://wiki.archlinux.jp/index.php/LVM_%E3%81%AB_Arch_Linux_%E3%82%92%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%81%99%E3%82%8B" title="LVM に Arch Linux をインストールする – 日本語" lang="ja" hreflang="ja" data-title="LVM に Arch Linux をインストールする" data-language-autonym="日本語" data-language-local-name="日本語" class="interlanguage-link-target"><span>日本語</span></a></li>
+<li class="interlanguage-link interwiki-pt mw-list-item"><a href="../pt/Install_Arch_Linux_on_LVM.html" title="Install Arch Linux on LVM – português" lang="pt" hreflang="pt" data-title="Install Arch Linux on LVM" data-language-autonym="Português" data-language-local-name="português" class="interlanguage-link-target"><span>Português</span></a></li>
+			</ul>
+			
+		</div>
+
+	</div>
+</div>
+</header>
+				<div class="vector-column-end">
+					<div class="vector-sticky-pinned-container">
+						<nav class="vector-page-tools-landmark" aria-label="Page tools">
+							<div id="vector-page-tools-pinned-container" class="vector-pinned-container">
+				
+							</div>
+		</nav>
+						<nav class="vector-appearance-landmark" aria-label="Appearance">
+							<div id="vector-appearance-pinned-container" class="vector-pinned-container">
+				<div id="vector-appearance" class="vector-appearance vector-pinnable-element">
+	<div class="vector-pinnable-header vector-appearance-pinnable-header vector-pinnable-header-pinned" data-feature-name="appearance-pinned" data-pinnable-element-id="vector-appearance" data-pinned-container-id="vector-appearance-pinned-container" data-unpinned-container-id="vector-appearance-unpinned-container">
+	<div class="vector-pinnable-header-label">Appearance</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-appearance.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-appearance.unpin">hide</button>
+</div>
+
+
+</div>
+
+							</div>
+		</nav>
+					</div>
+				</div>
+				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container>
+					<div class="vector-body-before-content">
+							<div class="mw-indicators">
+		</div>
+
+						<div id="siteSub" class="noprint">From ArchWiki</div>
+					</div>
+					<div id="contentSub"><div id="mw-content-subtitle"></div></div>
+					
+					
+					<div id="mw-content-text" class="mw-body-content">
+<div class="mw-content-ltr mw-parser-output" lang="en" dir="ltr">
+<div class="archwiki-template-meta-related-articles">
+<p>Related articles</p>
+<ul>
+<li><a href="../en/LVM.html" title="LVM">LVM</a></li>
+<li><a href="../en/Installation_guide.html" title="Installation guide">Installation guide</a></li>
+</ul>
+</div>
+<p>You should create your LVM Volumes between the <a href="../en/Partitioning.html" title="Partitioning">partitioning</a> and <a href="../en/File_systems.html#Create_a_file_system" title="File systems">formatting</a> steps of the <a href="../en/Installation_guide.html" title="Installation guide">installation procedure</a>. Instead of directly formatting a partition to be your root file system, the file system will be created inside a logical volume (LV).
+</p>
+<p>Quick overview: 
+</p>
+<ul>
+<li>Install the required packages. (refer to <a href="../en/LVM.html#Installation" title="LVM">LVM#Installation</a>)</li>
+<li>Create <a href="../en/Partitioning.html" title="Partitioning">partition(s)</a> where your physical volumes (PVs) will reside.</li>
+<li>Create your PVs. If you have one disk it is best to just create one PV in one large partition. If you have multiple disks you can create partitions on each of them and create a PV on each partition.</li>
+<li>Create your volume group (VG) and add all PVs to it.</li>
+<li>Create logical volumes (LVs) inside that VG.</li>
+<li>Continue with <a href="../en/Installation_guide.html#Format_the_partitions" title="Installation guide">Installation guide#Format the partitions</a>.</li>
+<li>When you reach the <a href="../en/Installation_guide.html#Initramfs" title="Installation guide">Installation guide#Initramfs</a> section in the Installation guide, add the <code>lvm2</code> hook to <code>/etc/mkinitcpio.conf</code> (see below for details).</li>
+</ul>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Warning:</strong> <code>/boot</code> cannot reside in LVM when using a boot loader which does not support LVM (only <a href="../en/GRUB.html" title="GRUB">GRUB</a> is known to support LVM). You must create a <a href="../en/Partitioning.html#/boot" title="Partitioning">separate /boot partition</a> and format it directly.</div>
+<meta property="mw:PageProp/toc">
+<h2><span class="mw-headline" id="Installation">Installation</span></h2>
+<p>You will follow along with the installation guide until you come to <a href="../en/Installation_guide.html#Partition_the_disks" title="Installation guide">Installation guide#Partition the disks</a>. At this point you will diverge and doing all your partitioning with LVM in mind.
+</p>
+<h3><span class="mw-headline" id="Create_partitions">Create partitions</span></h3>
+<p>First, <a href="../en/Partitioning.html" class="mw-redirect" title="Partition">partition</a> your disks as required before configuring LVM.
+</p>
+<p>Create the partitions:
+</p>
+<ul>
+<li>If you use GUID Partition Table, set the <a href="https://en.wikipedia.org/wiki/GUID_Partition_Table#Partition_type_GUIDs" class="extiw" title="wikipedia:GUID Partition Table">partition type GUID</a> to <code>E6D6D379-F507-44C2-A23C-238F2A3DF928</code> (partition type <code>Linux LVM</code> in <i>fdisk</i> and <code>8e00</code> in <i>gdisk</i>).</li>
+<li>If you use Master Boot Record partition table, set the <a href="https://en.wikipedia.org/wiki/Partition_type" class="extiw" title="wikipedia:Partition type">partition type ID</a> to <code>8e</code> (partition type <code>Linux LVM</code> in <i>fdisk</i>).</li>
+</ul>
+<h3><span class="mw-headline" id="Create_physical_volumes">Create physical volumes</span></h3>
+<p>To list all your devices capable of being used as a physical volume:
+</p>
+<pre># lvmdiskscan
+</pre>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Warning:</strong> Make sure you target the correct device, or below commands will result in data loss!</div>
+<p>Create a physical volume on them:
+</p>
+<pre># pvcreate <i>DEVICE</i>
+</pre>
+<p>This command creates a header on each device so it can be used for LVM. As defined in <a href="../en/LVM.html#LVM_building_blocks" title="LVM">LVM#LVM building blocks</a>, <i>DEVICE</i> can be any <a href="../en/Device_file.html#Block_devices" class="mw-redirect" title="Block device">block device</a>, e.g. a disk <code>/dev/sda</code>, a partition <code>/dev/sda2</code> or a loop back device. For example: 
+</p>
+<pre># pvcreate /dev/sda2
+</pre>
+<p>You can track created physical volumes with:
+</p>
+<pre># pvdisplay
+</pre>
+<p>You can also get summary information on physical volumes with:
+</p>
+<pre># pvscan
+</pre>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> If you run into trouble with a pre-existing disk signature, you can delete it using <a href="../en/Device_file.html#wipefs" class="mw-redirect" title="Wipefs">wipefs</a>.</div>
+<h3><span class="mw-headline" id="Create_and_extend_your_volume_group">Create and extend your volume group</span></h3>
+<p>First you need to create a volume group on any one of the physical volumes:
+</p>
+<pre># vgcreate <i>volume_group</i> <i>physical_volume</i>
+</pre>
+<p>For example:
+</p>
+<pre># vgcreate VolGroup00 /dev/sda2
+</pre>
+<p>See <span class="plainlinks archwiki-template-man" title="$ man 8 lvm"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/lvm.8">lvm(8)</a></span> for a list of valid characters for volume group names.
+</p>
+<p>Extending the volume group is just as easy:
+</p>
+<pre># vgextend <i>volume_group</i> <i>physical_volume</i>
+</pre>
+<p>For example, to add both <code>sdb1</code> and <code>sdc</code> to your volume group:
+</p>
+<pre># vgextend VolGroup00 /dev/sdb1
+# vgextend VolGroup00 /dev/sdc
+</pre>
+<p>You can track how your volume group grows with:
+</p>
+<pre># vgdisplay
+</pre>
+<p>This is also what you would do if you wanted to add a disk to a RAID or mirror group with failed disks.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> You can create more than one volume group if you need to, but then you will not have all your storage presented as a single disk.</div>
+<h4><span class="mw-headline" id="Combined_creation_of_physical_volumes_and_volume_groups">Combined creation of physical volumes and volume groups</span></h4>
+<p>LVM allows you to combine the creation of a volume group and the physical volumes in one easy step. For example, to create the group VolGroup00 with the three devices mentioned above, you can run:
+</p>
+<pre># vgcreate VolGroup00 /dev/sda2 /dev/sdb1 /dev/sdc
+</pre>
+<p>This command will first set up the three partitions as physical volumes (if necessary) and then create the volume group with the three volumes. The command will warn you if it detects an existing filesystem on any devices.
+</p>
+<h3><span class="mw-headline" id="Create_logical_volumes">Create logical volumes</span></h3>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> 
+<ul>
+<li>If you wish to use snapshots, logical volume caching, thin provisioned logical volumes or RAID see <a href="../en/LVM.html#Logical_volumes" title="LVM">LVM#Logical volumes</a>.</li>
+<li>If a logical volume will be formatted with <a href="../en/Ext4.html" title="Ext4">ext4</a>, leave at least 256 MiB free space in the volume group to allow using <span class="plainlinks archwiki-template-man" title="$ man 8 e2scrub"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/e2scrub.8">e2scrub(8)</a></span>. After creating the last volume with <code>-l 100%FREE</code>, this can be accomplished by reducing its size with <code>lvreduce -L -256M <i>volume_group</i>/<i>logical_volume</i></code>.</li>
+</ul>
+</div>
+<p>Now we need to create logical volumes on this volume group. You create a logical volume with the next command by specifying the new volume's name and size, and the volume group it will reside on:
+</p>
+<pre># lvcreate -L <i>size</i> <i>volume_group</i> -n <i>logical_volume</i>
+</pre>
+<p>For example:
+</p>
+<pre># lvcreate -L 10G VolGroup00 -n lvolhome
+</pre>
+<p>This will create a logical volume that you can access later with <code>/dev/VolGroup00/lvolhome</code>. Just like volume groups, you can use any name you want for your logical volume when creating it besides a few exceptions listed in <span class="plainlinks archwiki-template-man" title="$ man 8 lvm"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/lvm.8#VALID_NAMES">lvm(8) § VALID_NAMES</a></span>.
+</p>
+<p>You can also specify one or more physical volumes to restrict where LVM allocates the data. For example, you may wish to create a logical volume for the root filesystem on your small SSD, and your home volume on a slower mechanical drive. Simply add the physical volume devices to the command line, for example:
+</p>
+<pre># lvcreate -L 10G VolGroup00 -n lvolhome /dev/sdc1
+</pre>
+<p>To use all the free space left in a volume group, use the next command:
+</p>
+<pre># lvcreate -l 100%FREE  <i>volume_group</i> -n <i>logical_volume</i>
+</pre>
+<p>You can track created logical volumes with:
+</p>
+<pre># lvdisplay
+</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> You may need to load the <i>device-mapper</i> kernel module (<code>modprobe dm_mod</code>) for the above commands to succeed.</div>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> You can start out with relatively small logical volumes and expand them later if needed. For simplicity, leave some free space in the volume group so there is room for expansion.</div>
+<h3><span class="mw-headline" id="Format_and_mount_logical_volumes">Format and mount logical volumes</span></h3>
+<p>Your logical volumes should now be located in <code>/dev/<i>YourVolumeGroupName</i>/</code>. If you cannot find them, use the next commands to bring up the module for creating device nodes and to make volume groups available:
+</p>
+<pre># modprobe dm_mod
+# vgscan
+# vgchange -ay
+</pre>
+<p>Now you can format your logical volumes and mount them as normal partitions (see <a href="../en/File_systems.html#Mount_a_file_system" class="mw-redirect" title="Mount">mount a file system</a> for additional details):
+</p>
+<pre># mkfs.<i>fstype</i> /dev/<i>volume_group</i>/<i>logical_volume</i>
+# mount /dev/<i>volume_group</i>/<i>logical_volume</i> /<i>mountpoint</i>
+</pre>
+<p>For example:
+</p>
+<pre># mkfs.ext4 /dev/VolGroup00/lvolhome
+# mount /dev/VolGroup00/lvolhome /home
+</pre>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Warning:</strong> When choosing mountpoints, just select your newly created logical volumes (use: <code>/dev/Volgroup00/lvolhome</code>). Do <b>not</b> select the actual partitions on which logical volumes were created (do not use: <code>/dev/sda2</code>).</div>
+<h2><span class="mw-headline" id="Configure_the_system">Configure the system</span></h2>
+<p>Make sure the <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=lvm2">lvm2</a></span> package is <a href="../en/Help:Reading.html#Installation_of_packages" class="mw-redirect" title="Install">installed</a>.
+</p>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=lvm2">lvm2</a></span> provides the <code>lvm2</code> hook. If you are running <i>mkinitcpio</i> in an <i>arch-chroot</i> for a new installation, <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=lvm2">lvm2</a></span> must be installed inside the <i>arch-chroot</i> for <i>mkinitcpio</i> to find the <code>lvm2</code> hook. If <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=lvm2">lvm2</a></span> only exists outside the <i>arch-chroot</i>, <i>mkinitcpio</i> will output <code>Error: Hook 'lvm2' cannot be found</code>.</div>
+<h3><span class="mw-headline" id="Adding_mkinitcpio_hooks">Adding mkinitcpio hooks</span></h3>
+<p>In case your root filesystem is on LVM, you will need to enable the appropriate <a href="../en/Mkinitcpio.html" title="Mkinitcpio">mkinitcpio</a> hooks, otherwise your system might not boot. Enable:
+</p>
+<ul>
+<li>
+<code>udev</code> and <code>lvm2</code> for the default busybox-based initramfs</li>
+<li>
+<code>systemd</code> and <code>lvm2</code> for systemd-based initramfs</li>
+</ul>
+<p><code>udev</code> is there by default. Edit the file and insert <code>lvm2</code> between <code>block</code> and <code>filesystems</code> like so:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/mkinitcpio.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">HOOKS=(base <b>udev</b> ... block <b>lvm2</b> filesystems)</pre>
+<p>For systemd based initramfs:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/mkinitcpio.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">HOOKS=(base <b>systemd</b> ... block <b>lvm2</b> filesystems)</pre>
+<p>Afterwards, you can continue in normal installation instructions with the <a href="../en/Installation_guide.html#Initramfs" title="Installation guide">recreate the initramfs image</a> step.
+</p>
+<h3><span class="mw-headline" id="Kernel_boot_options">Kernel boot options</span></h3>
+<p>If the root file system resides in a logical volume, the <code>root=</code> <a href="../en/Kernel_parameters.html" class="mw-redirect" title="Kernel parameter">kernel parameter</a> must be pointed to the mapped device, e.g <code>/dev/<i>vg-name</i>/<i>lv-name</i></code>.
+</p>
+</div>
+</div>
+					<div id="catlinks" class="catlinks" data-mw="interface"><div id="mw-normal-catlinks" class="mw-normal-catlinks">
+<a href="../Special:Categories.html" title="Special:Categories">Category</a>: <ul><li><a href="../en/Category:Installation_process.html" title="Category:Installation process">Installation process</a></li></ul>
+</div></div>
+				</div>
+			</main>
+			
+		</div>
+		<div class="mw-footer-container">
+			
+<footer id="footer" class="mw-footer" style="margin: 0">
+	<ul id="footer-info">
+	<li data-nosnippet="">Retrieved from "<a dir="ltr" href="https://wiki.archlinux.org/index.php?title=Install_Arch_Linux_on_LVM&amp;oldid=829650">https://wiki.archlinux.org/index.php?title=Install_Arch_Linux_on_LVM&amp;oldid=829650</a>"</li>
+<li id="footer-info-lastmod"> This page was last edited on 23 March 2025, at 07:16.</li>
+	<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+<br>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="https://terms.archlinux.org/docs/privacy-policy/">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="../en/ArchWiki:About.html">About ArchWiki</a></li>
+	<li id="footer-places-disclaimers"><a href="../en/ArchWiki:General_disclaimer.html">Disclaimers</a></li>
+	<li id="footer-places-archwiki-code-of-conduct"><a href="https://terms.archlinux.org/docs/code-of-conduct/" class="extiw" title="archlinux-service-agreements:code-of-conduct">Code of conduct</a></li>
+	<li id="footer-places-archwiki-terms-of-service"><a href="https://terms.archlinux.org/docs/terms-of-service/" class="extiw" title="archlinux-service-agreements:terms-of-service">Terms of service</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-copyrightico"><a href="https://www.gnu.org/copyleft/fdl.html" class="cdx-button cdx-button--fake-button cdx-button--size-large cdx-button--fake-button--enabled"><img src="/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" loading="lazy"></a></li>
+	<li id="footer-poweredbyico"><img src="/resources/assets/poweredby_mediawiki.svg" width="88" height="31" loading="lazy"></li>
+</ul>
+
+</footer>
+
+		</div>
+	</div> 
+</div> 
+<div class="vector-settings" id="p-dock-bottom">
+	<ul></ul>
+</div>
+</body>
+</html>

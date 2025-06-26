@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-sticky-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-0 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-disabled skin-theme-clientpref-day vector-toc-not-available" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>Language Server Protocol - ArchWiki</title>
+<link rel="stylesheet" href="../ArchWikiOffline.css">
+<meta name="ResourceLoaderDynamicStyles" content="">
+<meta name="generator" content="MediaWiki 1.43.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="max-image-preview:standard">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.25, maximum-scale=5.0">
+<link rel="search" type="application/opensearchdescription+xml" href="/rest.php/v1/search" title="ArchWiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.archlinux.org/api.php?action=rsd">
+<link rel="license" href="https://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="ArchWiki Atom feed" href="/index.php?title=Special:RecentChanges&amp;feed=atom">
+</head>
+<body class="skin--responsive skin-vector skin-vector-search-vue mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Language_Server_Protocol rootpage-Language_Server_Protocol skin-vector-2022 action-view">
+<a class="mw-jump-link" href="#bodyContent">Jump to content</a>
+<div class="vector-header-container">
+	</div>
+<div class="mw-page-container">
+	<div class="mw-page-container-inner">
+		<div class="vector-column-start">
+			<div class="vector-main-menu-container">
+		</div>
+</div>
+		<div class="mw-content-container">
+			<main id="content" class="mw-body" style="margin: 0">
+				<header class="mw-body-header vector-page-titlebar">
+					<h1 id="firstHeading" class="firstHeading mw-first-heading"><span class="mw-page-title-main">Language Server Protocol</span></h1>
+							
+<div id="p-lang-btn" class="vector-dropdown mw-portlet mw-portlet-lang">
+	<input type="checkbox" id="p-lang-btn-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-p-lang-btn" class="vector-dropdown-checkbox mw-interlanguage-selector" aria-label="Go to an article in another language. Available in 2 languages">
+	<label id="p-lang-btn-label" for="p-lang-btn-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--action-progressive mw-portlet-lang-heading-2" aria-hidden="true"><span class="vector-icon mw-ui-icon-language-progressive mw-ui-icon-wikimedia-language-progressive"></span>
+
+<span class="vector-dropdown-label-text">2 languages</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+		<div class="vector-menu-content">
+			
+			<ul class="vector-menu-content-list">
+				
+				<li class="interlanguage-link interwiki-ja mw-list-item"><a href="https://wiki.archlinux.jp/index.php/%E8%A8%80%E8%AA%9E%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E3%83%97%E3%83%AD%E3%83%88%E3%82%B3%E3%83%AB" title="言語サーバープロトコル – 日本語" lang="ja" hreflang="ja" data-title="言語サーバープロトコル" data-language-autonym="日本語" data-language-local-name="日本語" class="interlanguage-link-target"><span>日本語</span></a></li>
+<li class="interlanguage-link interwiki-zh-hans mw-list-item"><a href="https://wiki.archlinuxcn.org/wiki/%E8%AF%AD%E8%A8%80%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%8D%8F%E8%AE%AE" title="语言服务器协议 – 中文（简体）" lang="zh-Hans" hreflang="zh-Hans" data-title="语言服务器协议" data-language-autonym="中文（简体）" data-language-local-name="中文（简体）" class="interlanguage-link-target"><span>中文（简体）</span></a></li>
+			</ul>
+			
+		</div>
+
+	</div>
+</div>
+</header>
+				<div class="vector-column-end">
+					<div class="vector-sticky-pinned-container">
+						<nav class="vector-page-tools-landmark" aria-label="Page tools">
+							<div id="vector-page-tools-pinned-container" class="vector-pinned-container">
+				
+							</div>
+		</nav>
+						<nav class="vector-appearance-landmark" aria-label="Appearance">
+							<div id="vector-appearance-pinned-container" class="vector-pinned-container">
+				<div id="vector-appearance" class="vector-appearance vector-pinnable-element">
+	<div class="vector-pinnable-header vector-appearance-pinnable-header vector-pinnable-header-pinned" data-feature-name="appearance-pinned" data-pinnable-element-id="vector-appearance" data-pinned-container-id="vector-appearance-pinned-container" data-unpinned-container-id="vector-appearance-unpinned-container">
+	<div class="vector-pinnable-header-label">Appearance</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-appearance.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-appearance.unpin">hide</button>
+</div>
+
+
+</div>
+
+							</div>
+		</nav>
+					</div>
+				</div>
+				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container>
+					<div class="vector-body-before-content">
+							<div class="mw-indicators">
+		</div>
+
+						<div id="siteSub" class="noprint">From ArchWiki</div>
+					</div>
+					<div id="contentSub"><div id="mw-content-subtitle"></div></div>
+					
+					
+					<div id="mw-content-text" class="mw-body-content">
+<div class="mw-content-ltr mw-parser-output" lang="en" dir="ltr">
+<p><a rel="nofollow" class="external text" href="https://microsoft.github.io/language-server-protocol/">Language Server Protocol (LSP)</a> defines the protocol used between an editor or IDE and a language server that provides language features like auto complete, go to definition, find all references.
+</p>
+<p>Language servers can be installed natively using the following packages. If your programming language is not in the list, search in the Arch <a href="../en/Official_repositories.html" title="Official repositories">official repositories</a> or in the <a href="../en/Arch_User_Repository.html" class="mw-redirect" title="AUR">AUR</a>.
+</p>
+<table class="wikitable">
+<tbody>
+<tr>
+<th>LSP config for <a href="../en/Neovim.html" title="Neovim">Neovim</a>
+</th>
+<th>Language
+</th>
+<th>LSP server package
+</th>
+</tr>
+<tr>
+<td>
+<a rel="nofollow" class="external text" href="https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#agda_ls">als</a>
+</td>
+<td>Ada/SPARK
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/ada_language_server/">ada_language_server</a></span><sup><small>AUR</small></sup>
+</td>
+</tr>
+<tr>
+<td>
+<a rel="nofollow" class="external text" href="https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#angularls">angularls</a>
+</td>
+<td>Angular
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<a rel="nofollow" class="external text" href="https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#autotools_ls">autotools</a>
+</td>
+<td>Autotools
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/autotools-language-server/">autotools-language-server</a></span><sup><small>AUR</small></sup>
+</td>
+</tr>
+<tr>
+<td>
+<a rel="nofollow" class="external text" href="https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#bashls">bashls</a>
+</td>
+<td>BASH
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=bash-language-server">bash-language-server</a></span>
+</td>
+</tr>
+<tr>
+<td>
+<a rel="nofollow" class="external text" href="https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#basedpyright">basedpyright</a>
+</td>
+<td>Python
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/basedpyright/">basedpyright</a></span><sup><small>AUR</small></sup>
+</td>
+</tr>
+<tr>
+<td>
+<a rel="nofollow" class="external text" href="https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ccls">ccls</a>
+</td>
+<td>C, C++, Objective-C
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=ccls">ccls</a></span> <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/ccls-git/">ccls-git</a></span><sup><small>AUR</small></sup>
+</td>
+</tr>
+<tr>
+<td>
+<a rel="nofollow" class="external text" href="https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#clangd">clangd</a>
+</td>
+<td>C++
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=clang">clang</a></span>
+</td>
+</tr>
+<tr>
+<td>
+<a rel="nofollow" class="external text" href="https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#clojure_lsp">clojure_lsp</a>
+</td>
+<td>Clojure
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/clojure-lsp-bin/">clojure-lsp-bin</a></span><sup><small>AUR</small></sup>
+</td>
+</tr>
+<tr>
+<td>
+<a rel="nofollow" class="external text" href="https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#cmake">cmake</a>
+</td>
+<td>CMake
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/cmake-language-server/">cmake-language-server</a></span><sup><small>AUR</small></sup>
+</td>
+</tr>
+<tr>
+<td>
+<a rel="nofollow" class="external text" href="https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#codeqlls">codeqlls</a>
+</td>
+<td>CodeQL
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/codeql/">codeql</a></span><sup><small>AUR</small></sup>
+</td>
+</tr>
+<tr>
+<td>
+<a rel="nofollow" class="external text" href="https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#cssls">cssls</a>
+</td>
+<td>CSS, LESS, SASS
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=vscode-css-languageserver">vscode-css-languageserver</a></span>
+</td>
+</tr>
+<tr>
+<td>
+<a rel="nofollow" class="external text" href="https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#dartls">dartls</a>
+</td>
+<td>Dart
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=dart">dart</a></span>
+</td>
+</tr>
+<tr>
+<td>
+<a rel="nofollow" class="external text" href="https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#denols">denols</a>
+</td>
+<td>JavaScript, TypeScript
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=deno">deno</a></span>
+</td>
+</tr>
+<tr>
+<td>
+<a rel="nofollow" class="external text" href="https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#dhall_lsp_server">dhall_lsp_server</a>
+</td>
+<td>Dhall
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=dhall-lsp-server">dhall-lsp-server</a></span>
+</td>
+</tr>
+<tr>
+<td>
+<a rel="nofollow" class="external text" href="https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#diagnosticls">diagnosticls</a>
+</td>
+<td>General purpose
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/diagnostic-languageserver/">diagnostic-languageserver</a></span><sup><small>AUR</small></sup>
+</td>
+</tr>
+<tr>
+<td>
+<a rel="nofollow" class="external text" href="https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#dockerls">dockerls</a>
+</td>
+<td>Dockerfile
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/dockerfile-language-server/">dockerfile-language-server</a></span><sup><small>AUR</small></sup>
+</td>
+</tr>
+<tr>
+<td>
+<a rel="nofollow" class="external text" href="https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#efm">efm</a>
+</td>
+<td>General purpose
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/efm-langserver/">efm-langserver</a></span><sup><small>AUR</small></sup>
+</td>
+</tr>
+<tr>
+<td>
+<a rel="nofollow" class="external text" href="https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#elixirls">elixirls</a>
+</td>
+<td>Elixir
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/elixir-ls/">elixir-ls</a></span><sup><small>AUR</small></sup>
+</td>
+</tr>
+<tr>
+<td>
+<a rel="nofollow" class="external text" href="https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#elmls">elmls</a>
+</td>
+<td>Elm
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/elm-language-server/">elm-language-server</a></span><sup><small>AUR</small></sup>
+</td>
+</tr>
+<tr>
+<td>
+<a rel="nofollow" class="external text" href="https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#erlangls">erlangls</a>
+</td>
+<td>Erlang
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/erlang_ls-git/">erlang_ls-git</a></span><sup><small>AUR</small></sup>
+</td>
+</tr>
+<tr>
+<td>
+<a rel="nofollow" class="external text" href="https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#flow">flow</a>
+</td>
+<td>Flow
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/flow/">flow</a></span><sup><small>AUR</small></sup>
+</td>
+</tr>
+<tr>
+<td>
+<a rel="nofollow" class="external text" href="https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#fortls">fortls</a>
+</td>
+<td>Fortran
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/fortran-language-server/">fortran-language-server</a></span><sup><small>AUR</small></sup>
+</td>
+</tr>
+<tr>
+<td>
+<a rel="nofollow" class="external text" href="https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#fsautocomplete">fsautocomplete</a>
+</td>
+<td>F#
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<a rel="nofollow" class="external text" href="https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#gdscript">gdscript</a>
+</td>
+<td>GDScript
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=godot">godot</a></span>
+</td>
+</tr>
+<tr>
+<td>
+<a rel="nofollow" class="external text" href="https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ghcide">ghcide</a>
+</td>
+<td>Haskell
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/ghcide/">ghcide</a></span><sup><small>AUR</small></sup>
+</td>
+</tr>
+<tr>
+<td>
+<a rel="nofollow" class="external text" href="https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#gopls">gopls</a>
+</td>
+<td>GOlang
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=gopls">gopls</a></span>
+</td>
+</tr>
+<tr>
+<td>
+<a rel="nofollow" class="external text" href="https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#graphql">graphql</a>
+</td>
+<td>GraphQL
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/graphql-lsp/">graphql-lsp</a></span><sup><small>AUR</small></sup>
+</td>
+</tr>
+<tr>
+<td>
+<a rel="nofollow" class="external text" href="https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#groovyls">groovyls</a>
+</td>
+<td>Groovy
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/groovy-language-server-git/">groovy-language-server-git</a></span><sup><small>AUR</small></sup>
+</td>
+</tr>
+<tr>
+<td>
+<a rel="nofollow" class="external text" href="https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#haxe_language_server">haxe_language_server</a>
+</td>
+<td>Haxe
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<a rel="nofollow" class="external text" href="https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#hls">hls</a>
+</td>
+<td>Haskell
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=haskell-language-server">haskell-language-server</a></span>
+</td>
+</tr>
+<tr>
+<td>
+<a rel="nofollow" class="external text" href="https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#html">html</a>
+</td>
+<td>HTML
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=vscode-html-languageserver">vscode-html-languageserver</a></span>
+</td>
+</tr>
+<tr>
+<td>
+<a rel="nofollow" class="external text" href="https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#intelephense">intelephense</a>
+</td>
+<td>PHP
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/nodejs-intelephense/">nodejs-intelephense</a></span><sup><small>AUR</small></sup>
+</td>
+</tr>
+<tr>
+<td>
+<a rel="nofollow" class="external text" href="https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#java_language_server">java_language_server</a>
+</td>
+<td>Java
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/java-language-server/">java-language-server</a></span><sup><small>AUR</small></sup>
+</td>
+</tr>
+<tr>
+<td>
+<a rel="nofollow" class="external text" href="https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#jdtls">jdtls</a>
+</td>
+<td>Java
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/jdtls/">jdtls</a></span><sup><small>AUR</small></sup>
+</td>
+</tr>
+<tr>
+<td>
+<a rel="nofollow" class="external text" href="https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#jedi_language_server">jedi_language_server</a>
+</td>
+<td>Python
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=jedi-language-server">jedi-language-server</a></span>
+</td>
+</tr>
+<tr>
+<td>
+<a rel="nofollow" class="external text" href="https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#jsonls">jsonls</a>
+</td>
+<td>JSON
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=vscode-json-languageserver">vscode-json-languageserver</a></span>
+</td>
+</tr>
+<tr>
+<td>
+<a rel="nofollow" class="external text" href="https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#julials">julials</a>
+</td>
+<td>Julia
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<a rel="nofollow" class="external text" href="https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#kotlin_language_server">kotlin_language_server</a>
+</td>
+<td>Kotlin
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/kotlin-language-server/">kotlin-language-server</a></span><sup><small>AUR</small></sup>
+</td>
+</tr>
+<tr>
+<td>
+<a rel="nofollow" class="external text" href="https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#leanls">leanls</a>
+</td>
+<td>Lean
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<a rel="nofollow" class="external text" href="https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#lua_ls">lua_ls</a>
+</td>
+<td>Lua
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=lua-language-server">lua-language-server</a></span>
+</td>
+</tr>
+<tr>
+<td>
+<a rel="nofollow" class="external text" href="https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#marksman">marksman</a>
+</td>
+<td>Markdown
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=marksman">marksman</a></span>
+</td>
+</tr>
+<tr>
+<td>
+<a rel="nofollow" class="external text" href="https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#metals">metals</a>
+</td>
+<td>Scala
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/metals/">metals</a></span><sup><small>AUR</small></sup>
+</td>
+</tr>
+<tr>
+<td>
+<a rel="nofollow" class="external text" href="https://github.com/neocmakelsp/neocmakelsp">neocmakelsp</a>
+</td>
+<td>CMake
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/neocmakelsp/">neocmakelsp</a></span><sup><small>AUR</small></sup>
+</td>
+</tr>
+<tr>
+<td>
+<a rel="nofollow" class="external text" href="https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#nimls">nimls</a>
+</td>
+<td>Nim
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<a rel="nofollow" class="external text" href="https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ocamlls">ocamlls</a>
+</td>
+<td>OCaml, Reason
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<a rel="nofollow" class="external text" href="https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ocamllsp">ocamllsp</a>
+</td>
+<td>OCaml, Reason
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/ocaml-lsp-git/">ocaml-lsp-git</a></span><sup><small>AUR</small></sup>
+</td>
+</tr>
+<tr>
+<td>
+<a rel="nofollow" class="external text" href="https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#omnisharp">omnisharp</a>
+</td>
+<td>OmniSharp
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/omnisharp-roslyn/">omnisharp-roslyn</a></span><sup><small>AUR</small></sup>
+</td>
+</tr>
+<tr>
+<td>
+<a rel="nofollow" class="external text" href="https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#perlls">perlls</a>
+</td>
+<td>Perl
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/perl-perl-languageserver/">perl-perl-languageserver</a></span><sup><small>AUR</small></sup>
+</td>
+</tr>
+<tr>
+<td>
+<a rel="nofollow" class="external text" href="https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#phpactor">phpactor</a>
+</td>
+<td>PHP
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<a rel="nofollow" class="external text" href="https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#powershell_es">powershell_es</a>
+</td>
+<td>PowerShell
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<a rel="nofollow" class="external text" href="https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#purescriptls">purescriptls</a>
+</td>
+<td>PureScript
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/purescript-language-server/">purescript-language-server</a></span><sup><small>AUR</small></sup>
+</td>
+</tr>
+<tr>
+<td>
+<a rel="nofollow" class="external text" href="https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#pylsp">pylsp</a>
+</td>
+<td>Python
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=python-lsp-server">python-lsp-server</a></span>
+</td>
+</tr>
+<tr>
+<td>
+<a rel="nofollow" class="external text" href="https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#pyright">pyright</a>
+</td>
+<td>Python
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=pyright">pyright</a></span>
+</td>
+</tr>
+<tr>
+<td>
+<a rel="nofollow" class="external text" href="https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#r_language_server">r_language_server</a>
+</td>
+<td>R
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/r-languageserver/">r-languageserver</a></span><sup><small>AUR</small></sup>
+</td>
+</tr>
+<tr>
+<td>
+<a rel="nofollow" class="external text" href="https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#racket_langserver">racket_langserver</a>
+</td>
+<td>Racket
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<a rel="nofollow" class="external text" href="https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#rescriptls">rescriptls</a>
+</td>
+<td>ReScript
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<a rel="nofollow" class="external text" href="https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#nil_ls">nil</a>
+</td>
+<td>nix
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/nil-git/">nil-git</a></span><sup><small>AUR</small></sup>
+</td>
+</tr>
+<tr>
+<td>
+<a rel="nofollow" class="external text" href="https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#rome">rome</a>
+</td>
+<td>Rome
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<a rel="nofollow" class="external text" href="https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ruff">ruff</a>
+</td>
+<td>Python
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=ruff">ruff</a></span>
+</td>
+</tr>
+<tr>
+<td>
+<a rel="nofollow" class="external text" href="https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#rust_analyzer">rust_analyzer</a>
+</td>
+<td>Rust
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=rust-analyzer">rust-analyzer</a></span>
+</td>
+</tr>
+<tr>
+<td>
+<a rel="nofollow" class="external text" href="https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#scry">scry</a>
+</td>
+<td>Crystal
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/scry-git/">scry-git</a></span><sup><small>AUR</small></sup>
+</td>
+</tr>
+<tr>
+<td>
+<a rel="nofollow" class="external text" href="https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#solargraph">solargraph</a>
+</td>
+<td>Ruby
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/ruby-solargraph/">ruby-solargraph</a></span><sup><small>AUR</small></sup>
+</td>
+</tr>
+<tr>
+<td>
+<a rel="nofollow" class="external text" href="https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#sorbet">sorbet</a>
+</td>
+<td>Ruby
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<a rel="nofollow" class="external text" href="https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#sourcekit">sourcekit</a>
+</td>
+<td>C, C++, Objective-C
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/swift-language/">swift-language</a></span><sup><small>AUR</small></sup>
+</td>
+</tr>
+<tr>
+<td>
+<a rel="nofollow" class="external text" href="https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#sqlls">sqlls</a>
+</td>
+<td>SQL
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/sql-language-server/">sql-language-server</a></span><sup><small>AUR</small></sup>
+</td>
+</tr>
+<tr>
+<td>
+<a rel="nofollow" class="external text" href="https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#sqls">sqls</a>
+</td>
+<td>SQL
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<a rel="nofollow" class="external text" href="https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#stylelint_lsp">stylelint_lsp</a>
+</td>
+<td>stylelint
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<a rel="nofollow" class="external text" href="https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#svelte">svelte</a>
+</td>
+<td>Svelte
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=svelte-language-server">svelte-language-server</a></span>
+</td>
+</tr>
+<tr>
+<td>
+<a rel="nofollow" class="external text" href="https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#svls">svls</a>
+</td>
+<td>SystemVerilog
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<a rel="nofollow" class="external text" href="https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#terraformls">terraformls</a>
+</td>
+<td>Terraform
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/terraform-ls/">terraform-ls</a></span><sup><small>AUR</small></sup>
+</td>
+</tr>
+<tr>
+<td>
+<a rel="nofollow" class="external text" href="https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#texlab">texlab</a>
+</td>
+<td>(La)TeX
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=texlab">texlab</a></span>
+</td>
+</tr>
+<tr>
+<td>
+<a rel="nofollow" class="external text" href="https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#tflint">tflint</a>
+</td>
+<td>Terraform
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=tflint">tflint</a></span>
+</td>
+</tr>
+<tr>
+<td>
+<a rel="nofollow" class="external text" href="https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#tsserver">tsserver</a>
+</td>
+<td>TypeScript
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=typescript-language-server">typescript-language-server</a></span>
+</td>
+</tr>
+<tr>
+<td>
+<a rel="nofollow" class="external text" href="https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#vala_ls">vala_ls</a>
+</td>
+<td>Vala
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/vala-language-server/">vala-language-server</a></span><sup><small>AUR</small></sup>
+</td>
+</tr>
+<tr>
+<td>
+<a rel="nofollow" class="external text" href="https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#vimls">vimls</a>
+</td>
+<td>Vim
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/vim-language-server/">vim-language-server</a></span><sup><small>AUR</small></sup>
+</td>
+</tr>
+<tr>
+<td>
+<a rel="nofollow" class="external text" href="https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#vls">vls</a>
+</td>
+<td>V
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<a rel="nofollow" class="external text" href="https://github.com/johnsoncodehk/volar/tree/master/packages/vue-language-server">volar</a><sup title="Last check status: 404">[<a href="https://en.wikipedia.org/wiki/Wikipedia:Link_rot" class="extiw" title="wikipedia:Wikipedia:Link rot">dead link</a> 2023-10-29 ⓘ]</sup>
+</td>
+<td>Vue 3
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=vue-language-server">vue-language-server</a></span>
+</td>
+</tr>
+<tr>
+<td>
+<a rel="nofollow" class="external text" href="https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#vuels">vuels</a>
+</td>
+<td>Vue 2
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/nodejs-vls/">nodejs-vls</a></span><sup><small>AUR</small></sup>
+</td>
+</tr>
+<tr>
+<td>
+<a rel="nofollow" class="external text" href="https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#yamlls">yamlls</a>
+</td>
+<td>YAML
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=yaml-language-server">yaml-language-server</a></span>
+</td>
+</tr>
+<tr>
+<td>
+<a rel="nofollow" class="external text" href="https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#zls">zls</a>
+</td>
+<td>Zig
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=zls">zls</a></span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+					<div id="catlinks" class="catlinks" data-mw="interface">
+<div id="mw-normal-catlinks" class="mw-normal-catlinks">
+<a href="../Special:Categories.html" title="Special:Categories">Category</a>: <ul><li><a href="../en/Category:Programming_languages.html" title="Category:Programming languages">Programming languages</a></li></ul>
+</div>
+<div id="mw-hidden-catlinks" class="mw-hidden-catlinks mw-hidden-cats-hidden">Hidden category: <ul><li><a href="../en/Category:Pages_with_dead_links.html" title="Category:Pages with dead links">Pages with dead links</a></li></ul>
+</div>
+</div>
+				</div>
+			</main>
+			
+		</div>
+		<div class="mw-footer-container">
+			
+<footer id="footer" class="mw-footer" style="margin: 0">
+	<ul id="footer-info">
+	<li data-nosnippet="">Retrieved from "<a dir="ltr" href="https://wiki.archlinux.org/index.php?title=Language_Server_Protocol&amp;oldid=830255">https://wiki.archlinux.org/index.php?title=Language_Server_Protocol&amp;oldid=830255</a>"</li>
+<li id="footer-info-lastmod"> This page was last edited on 31 March 2025, at 09:30.</li>
+	<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+<br>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="https://terms.archlinux.org/docs/privacy-policy/">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="../en/ArchWiki:About.html">About ArchWiki</a></li>
+	<li id="footer-places-disclaimers"><a href="../en/ArchWiki:General_disclaimer.html">Disclaimers</a></li>
+	<li id="footer-places-archwiki-code-of-conduct"><a href="https://terms.archlinux.org/docs/code-of-conduct/" class="extiw" title="archlinux-service-agreements:code-of-conduct">Code of conduct</a></li>
+	<li id="footer-places-archwiki-terms-of-service"><a href="https://terms.archlinux.org/docs/terms-of-service/" class="extiw" title="archlinux-service-agreements:terms-of-service">Terms of service</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-copyrightico"><a href="https://www.gnu.org/copyleft/fdl.html" class="cdx-button cdx-button--fake-button cdx-button--size-large cdx-button--fake-button--enabled"><img src="/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" loading="lazy"></a></li>
+	<li id="footer-poweredbyico"><img src="/resources/assets/poweredby_mediawiki.svg" width="88" height="31" loading="lazy"></li>
+</ul>
+
+</footer>
+
+		</div>
+	</div> 
+</div> 
+<div class="vector-settings" id="p-dock-bottom">
+	<ul></ul>
+</div>
+</body>
+</html>

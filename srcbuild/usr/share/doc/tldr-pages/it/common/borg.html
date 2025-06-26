@@ -1,0 +1,54 @@
+<h1>borg</h1>
+
+<blockquote><p>Strumento di backup con deduplicazione.
+Crea backup locali o remoti che sono montabili come filesystem.
+Maggiori informazioni: <a href="https://borgbackup.readthedocs.io/en/stable/usage/general.html">https://borgbackup.readthedocs.io/en/stable/usage/general.html</a>.</p></blockquote>
+
+<ul>
+<li>Inizializza una repository (locale):</li>
+</ul>
+
+
+<p><code>borg init {{/percorso/del/repo_o_directory}}</code></p>
+
+<ul>
+<li>Esegui il backup di una directory nella repository, creando un archivio chiamato &ldquo;Lunedi&rdquo;:</li>
+</ul>
+
+
+<p><code>borg create --progress {{/percorso/del/repo_o_directory}}::{{Lunedi}} {{/percorso/della/directory_sorgente}}</code></p>
+
+<ul>
+<li>Lista tutti gli archivi in una repository:</li>
+</ul>
+
+
+<p><code>borg list {{/percorso/del/repo_o_directory}}</code></p>
+
+<ul>
+<li>Estrai una specifica directory dall'archivio &ldquo;Lunedi&rdquo; in una repository remota, escludendo tutti i file <code>.ext</code>:</li>
+</ul>
+
+
+<p><code>borg extract {{utente}}@{{host}}:{{/percorso/del/repo_o_directory}}::{{Lunedi}} {{percorso/della/directory_destinazione}} --exclude '{{*.ext}}'</code></p>
+
+<ul>
+<li>Riduci una repository eliminando tutti gli archivi più vecchi di 7 giorni, elencando i cambiamenti:</li>
+</ul>
+
+
+<p><code>borg prune --keep-within {{7d}} --list {{/percorso/del/repo_o_directory}}</code></p>
+
+<ul>
+<li>Monta una repository come filesystem FUSE:</li>
+</ul>
+
+
+<p><code>borg mount {{/percorso/del/repo_o_directory}}::{{Lunedi}} {{/percorso/del/mountpoint}}</code></p>
+
+<ul>
+<li>Mostra aiuto sul come creare archivi:</li>
+</ul>
+
+
+<p><code>borg create --help</code></p>

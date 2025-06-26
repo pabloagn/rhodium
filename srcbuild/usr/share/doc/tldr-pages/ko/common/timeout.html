@@ -1,0 +1,39 @@
+<h1>timeout</h1>
+
+<blockquote><p>명령을 일정 시간 제한 내에서 실행.
+더 많은 정보: <a href="https://www.gnu.org/software/coreutils/manual/html_node/timeout-invocation.html">https://www.gnu.org/software/coreutils/manual/html_node/timeout-invocation.html</a>.</p></blockquote>
+
+<ul>
+<li><code>sleep 10</code>을 실행하고 3초 후 종료:</li>
+</ul>
+
+
+<p><code>timeout 3s sleep 10</code></p>
+
+<ul>
+<li>시간 제한이 만료되면 명령에 [s]ignal을 전송 (<code>TERM</code>이 기본, 모든 신호 목록은 <code>kill -l</code>):</li>
+</ul>
+
+
+<p><code>timeout --signal {{INT|HUP|KILL|...}} {{5s}} {{sleep 10}}</code></p>
+
+<ul>
+<li>시간 초과 시 전송된 신호를 <code>stderr</code>에 [v]erbose 출력으로 표시:</li>
+</ul>
+
+
+<p><code>timeout --verbose {{0.5s|1m|1h|1d|...}} {{명령}}</code></p>
+
+<ul>
+<li>시간 초과 여부와 관계없이 명령의 종료 상태를 유지:</li>
+</ul>
+
+
+<p><code>timeout --preserve-status {{1s|1m|1h|1d|...}} {{명령}}</code></p>
+
+<ul>
+<li>초기 신호를 무시할 경우 특정 시간 후 강제 <code>KILL</code> 신호 전송:</li>
+</ul>
+
+
+<p><code>timeout --kill-after={{5m}} {{30s}} {{명령}}</code></p>

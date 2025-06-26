@@ -1,0 +1,32 @@
+<h1>tee</h1>
+
+<blockquote><p>Read from <code>stdin</code> and write to <code>stdout</code> and files (or commands).
+More information: <a href="https://www.gnu.org/software/coreutils/manual/html_node/tee-invocation.html">https://www.gnu.org/software/coreutils/manual/html_node/tee-invocation.html</a>.</p></blockquote>
+
+<ul>
+<li>Copy <code>stdin</code> to each file, and also to <code>stdout</code>:</li>
+</ul>
+
+
+<p><code>echo "example" | tee {{path/to/file}}</code></p>
+
+<ul>
+<li>Append to the given files, do not overwrite:</li>
+</ul>
+
+
+<p><code>echo "example" | tee {{[-a|--append]}} {{path/to/file}}</code></p>
+
+<ul>
+<li>Print <code>stdin</code> to the terminal, and also pipe it into another program for further processing:</li>
+</ul>
+
+
+<p><code>echo "example" | tee {{/dev/tty}} | {{xargs printf "[%s]"}}</code></p>
+
+<ul>
+<li>Create a directory called &ldquo;example&rdquo;, count the number of characters in &ldquo;example&rdquo; and write &ldquo;example&rdquo; to the terminal:</li>
+</ul>
+
+
+<p><code>echo "example" | tee &gt;(xargs mkdir) &gt;(wc {{[-c|--bytes]}})</code></p>

@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-sticky-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-0 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-disabled skin-theme-clientpref-day vector-toc-available" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>systemd-cryptenroll - ArchWiki</title>
+<link rel="stylesheet" href="../ArchWikiOffline.css">
+<meta name="ResourceLoaderDynamicStyles" content="">
+<meta name="generator" content="MediaWiki 1.43.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="max-image-preview:standard">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.25, maximum-scale=5.0">
+<link rel="search" type="application/opensearchdescription+xml" href="/rest.php/v1/search" title="ArchWiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.archlinux.org/api.php?action=rsd">
+<link rel="license" href="https://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="ArchWiki Atom feed" href="/index.php?title=Special:RecentChanges&amp;feed=atom">
+</head>
+<body class="skin--responsive skin-vector skin-vector-search-vue mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Systemd-cryptenroll rootpage-Systemd-cryptenroll skin-vector-2022 action-view">
+<a class="mw-jump-link" href="#bodyContent">Jump to content</a>
+<div class="vector-header-container">
+	</div>
+<div class="mw-page-container">
+	<div class="mw-page-container-inner">
+		<div class="vector-column-start">
+			<div class="vector-main-menu-container">
+		</div>
+	<div class="vector-sticky-pinned-container">
+				<nav id="mw-panel-toc" aria-label="Contents" data-event-name="ui.sidebar-toc" class="mw-table-of-contents-container vector-toc-landmark">
+					<div id="vector-toc-pinned-container" class="vector-pinned-container">
+					<div id="vector-toc" class="vector-toc vector-pinnable-element">
+	<div class="vector-pinnable-header vector-toc-pinnable-header vector-pinnable-header-pinned" data-feature-name="toc-pinned" data-pinnable-element-id="vector-toc">
+	<h2 class="vector-pinnable-header-label">Contents</h2>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-toc.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-toc.unpin">hide</button>
+</div>
+
+
+	<ul class="vector-toc-contents" id="mw-panel-toc-list">
+		<li id="toc-mw-content-text" class="vector-toc-list-item vector-toc-level-1">
+			<a href="#" class="vector-toc-link">
+				<div class="vector-toc-text">Beginning</div>
+			</a>
+		</li>
+		<li id="toc-Installation" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Installation">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">1</span>
+				<span>Installation</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Installation-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-List_keyslots" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#List_keyslots">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">2</span>
+				<span>List keyslots</span>
+			</div>
+		</a>
+		
+		<ul id="toc-List_keyslots-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Erasing_keyslots" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Erasing_keyslots">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">3</span>
+				<span>Erasing keyslots</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Erasing_keyslots-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Enrolling_passphrases" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Enrolling_passphrases">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">4</span>
+				<span>Enrolling passphrases</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Enrolling_passphrases-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Enrolling passphrases subsection</span>
+			</button>
+		
+		<ul id="toc-Enrolling_passphrases-sublist" class="vector-toc-list">
+			<li id="toc-Regular_password" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Regular_password">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.1</span>
+					<span>Regular password</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Regular_password-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Recovery_key" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Recovery_key">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.2</span>
+					<span>Recovery key</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Recovery_key-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Enrolling_hardware_devices" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Enrolling_hardware_devices">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">5</span>
+				<span>Enrolling hardware devices</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Enrolling_hardware_devices-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Enrolling hardware devices subsection</span>
+			</button>
+		
+		<ul id="toc-Enrolling_hardware_devices-sublist" class="vector-toc-list">
+			<li id="toc-PKCS#11_tokens_or_smartcards" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#PKCS#11_tokens_or_smartcards">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.1</span>
+					<span>PKCS#11 tokens or smartcards</span>
+				</div>
+			</a>
+			
+			<ul id="toc-PKCS#11_tokens_or_smartcards-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-FIDO2_tokens" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#FIDO2_tokens">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.2</span>
+					<span>FIDO2 tokens</span>
+				</div>
+			</a>
+			
+			<ul id="toc-FIDO2_tokens-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Trusted_Platform_Module" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Trusted_Platform_Module">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.3</span>
+					<span>Trusted Platform Module</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Trusted_Platform_Module-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-See_also" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#See_also">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">6</span>
+				<span>See also</span>
+			</div>
+		</a>
+		
+		<ul id="toc-See_also-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+</ul>
+</div>
+
+					</div>
+		</nav>
+			</div>
+		</div>
+		<div class="mw-content-container">
+			<main id="content" class="mw-body" style="margin: 0">
+				<header class="mw-body-header vector-page-titlebar">
+					<nav aria-label="Contents" class="vector-toc-landmark">
+						
+<div id="vector-page-titlebar-toc" class="vector-dropdown vector-page-titlebar-toc vector-button-flush-left">
+	<input type="checkbox" id="vector-page-titlebar-toc-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-page-titlebar-toc" class="vector-dropdown-checkbox " aria-label="Toggle the table of contents">
+	<label id="vector-page-titlebar-toc-label" for="vector-page-titlebar-toc-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"><span class="vector-icon mw-ui-icon-listBullet mw-ui-icon-wikimedia-listBullet"></span>
+
+<span class="vector-dropdown-label-text">Toggle the table of contents</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+							<div id="vector-page-titlebar-toc-unpinned-container" class="vector-unpinned-container">
+			</div>
+		
+	</div>
+</div>
+
+					</nav>
+					<h1 id="firstHeading" class="firstHeading mw-first-heading">systemd-cryptenroll</h1>
+							
+<div id="p-lang-btn" class="vector-dropdown mw-portlet mw-portlet-lang">
+	<input type="checkbox" id="p-lang-btn-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-p-lang-btn" class="vector-dropdown-checkbox mw-interlanguage-selector" aria-label="Go to an article in another language. Available in 1 language">
+	<label id="p-lang-btn-label" for="p-lang-btn-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--action-progressive mw-portlet-lang-heading-1" aria-hidden="true"><span class="vector-icon mw-ui-icon-language-progressive mw-ui-icon-wikimedia-language-progressive"></span>
+
+<span class="vector-dropdown-label-text">1 language</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+		<div class="vector-menu-content">
+			
+			<ul class="vector-menu-content-list">
+				
+				<li class="interlanguage-link interwiki-ja mw-list-item"><a href="https://wiki.archlinux.jp/index.php/systemd-cryptenroll" title="systemd-cryptenroll – 日本語" lang="ja" hreflang="ja" data-title="systemd-cryptenroll" data-language-autonym="日本語" data-language-local-name="日本語" class="interlanguage-link-target"><span>日本語</span></a></li>
+			</ul>
+			
+		</div>
+
+	</div>
+</div>
+</header>
+				<div class="vector-column-end">
+					<div class="vector-sticky-pinned-container">
+						<nav class="vector-page-tools-landmark" aria-label="Page tools">
+							<div id="vector-page-tools-pinned-container" class="vector-pinned-container">
+				
+							</div>
+		</nav>
+						<nav class="vector-appearance-landmark" aria-label="Appearance">
+							<div id="vector-appearance-pinned-container" class="vector-pinned-container">
+				<div id="vector-appearance" class="vector-appearance vector-pinnable-element">
+	<div class="vector-pinnable-header vector-appearance-pinnable-header vector-pinnable-header-pinned" data-feature-name="appearance-pinned" data-pinnable-element-id="vector-appearance" data-pinned-container-id="vector-appearance-pinned-container" data-unpinned-container-id="vector-appearance-unpinned-container">
+	<div class="vector-pinnable-header-label">Appearance</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-appearance.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-appearance.unpin">hide</button>
+</div>
+
+
+</div>
+
+							</div>
+		</nav>
+					</div>
+				</div>
+				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container>
+					<div class="vector-body-before-content">
+							<div class="mw-indicators">
+		</div>
+
+						<div id="siteSub" class="noprint">From ArchWiki</div>
+					</div>
+					<div id="contentSub"><div id="mw-content-subtitle"></div></div>
+					
+					
+					<div id="mw-content-text" class="mw-body-content">
+<div class="mw-content-ltr mw-parser-output" lang="en" dir="ltr">
+<p><span>
+</span>
+</p>
+<div class="archwiki-template-meta-related-articles">
+<p>Related articles</p>
+<ul>
+<li><a href="../en/Dm-crypt.html" title="Dm-crypt">dm-crypt</a></li>
+<li><a href="../en/Smartcards.html" title="Smartcards">Smartcards</a></li>
+<li><a href="../en/Universal_2nd_Factor.html" title="Universal 2nd Factor">Universal 2nd Factor</a></li>
+<li><a href="../en/Trusted_Platform_Module.html" title="Trusted Platform Module">Trusted Platform Module</a></li>
+<li><a href="../en/Unified_Extensible_Firmware_Interface/Secure_Boot.html" title="Unified Extensible Firmware Interface/Secure Boot">Unified Extensible Firmware Interface/Secure Boot</a></li>
+</ul>
+</div>
+<p>From <span class="plainlinks archwiki-template-man" title="$ man 1 systemd-cryptenroll"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd-cryptenroll.1">systemd-cryptenroll(1)</a></span>:
+</p>
+<dl><dd>systemd-cryptenroll is a tool for enrolling hardware security tokens and devices into a LUKS2 encrypted volume, which may then be used to unlock the volume during boot.</dd></dl>
+<p><i>systemd-cryptenroll</i> allows enrolling <a href="../en/Smartcards.html" title="Smartcards">smartcards</a>, <a href="../en/Universal_2nd_Factor.html" title="Universal 2nd Factor">FIDO2</a> tokens and <a href="../en/Trusted_Platform_Module.html" title="Trusted Platform Module">Trusted Platform Module</a> security chips into <a href="../en/Dm-crypt.html" class="mw-redirect" title="LUKS">LUKS</a> devices, as well as regular passphrases. These devices are later unlocked by <span class="plainlinks archwiki-template-man" title="$ man 8 systemd-cryptsetup@.service"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd-cryptsetup%40.service.8">systemd-cryptsetup@.service(8)</a></span>, using the enrolled tokens.
+</p>
+<meta property="mw:PageProp/toc">
+<h2><span class="mw-headline" id="Installation">Installation</span></h2>
+<p><i>systemd-cryptenroll</i> is part of and packaged with <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=systemd">systemd</a></span>. However, extra packages are required to use hardware devices as keys:
+</p>
+<ul>
+<li>To use PKCS#11 tokens, <a href="../en/Help:Reading.html#Installation_of_packages" class="mw-redirect" title="Install">install</a> <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=libp11-kit">libp11-kit</a></span>, you may also need <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=opensc">opensc</a></span> and <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/opensc-p11-kit-module/">opensc-p11-kit-module</a></span><sup><small>AUR</small></sup>.</li>
+<li>To use FIDO2 tokens, install <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=libfido2">libfido2</a></span>.</li>
+<li>To use TPM2 devices, install <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=tpm2-tss">tpm2-tss</a></span>.</li>
+</ul>
+<h2><span class="mw-headline" id="List_keyslots">List keyslots</span></h2>
+<p><i>systemd-cryptenroll</i> can list the keyslots in a LUKS device, similar to <code>cryptsetup</code> <a href="../en/Dm-crypt/Device_encryption.html#Key_management" title="Dm-crypt/Device encryption">luksDump</a>, but in a more user-friendly format.
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;"># systemd-cryptenroll /dev/<i>disk</i></pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">SLOT TYPE    
+   0 password
+   1 recovery
+   2 tpm2
+</pre>
+<h2><span class="mw-headline" id="Erasing_keyslots">Erasing keyslots</span></h2>
+<pre># systemd-cryptenroll /dev/<i>disk</i> --wipe-slot=<i>SLOT</i>
+</pre>
+<p>Where <i>SLOT</i> can be:
+</p>
+<ul>
+<li>A single keyslot index, as represented in <a href="#List_keyslots">#List keyslots</a>
+</li>
+<li>A type of keyslot, which will erase all keyslots of that type. Valid types are <code>empty</code>, <code>password</code>, <code>recovery</code>, <code>pkcs11</code>, <code>fido2</code>, <code>tpm2</code>
+</li>
+<li>A combination of all of the above, separated by commas</li>
+<li>The string <code>all</code>, which erases all keyslots on the device. This option can only be used when enrolling another device or passphrase at the same time.</li>
+</ul>
+<p>The <code>--wipe-slot</code> operation can be used in combination with all enrollment options, which is useful to update existing device enrollments:
+</p>
+<pre># systemd-cryptenroll /dev/<i>disk</i> --wipe-slot=fido2 --fido2-device=auto
+</pre>
+<h2><span class="mw-headline" id="Enrolling_passphrases">Enrolling passphrases</span></h2>
+<h3><span class="mw-headline" id="Regular_password">Regular password</span></h3>
+<p>This is equivalent to <code>cryptsetup luksAddKey</code>.
+</p>
+<pre># systemd-cryptenroll /dev/<i>disk</i> --password
+</pre>
+<h3><span class="mw-headline" id="Recovery_key">Recovery key</span></h3>
+<p>From <span class="plainlinks archwiki-template-man" title="$ man 1 systemd-cryptenroll"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd-cryptenroll.1">systemd-cryptenroll(1)</a></span>:
+</p>
+<dl><dd>Recovery keys are mostly identical to passphrases, but are computer-generated instead of being chosen by a human, and thus have a guaranteed high entropy. The key uses a character set that is easy to type in, and may be scanned off screen via a QR code.</dd></dl>
+<p>A recovery key is designed to be used as a fallback if the hardware tokens are unavailable, and can be used in place of regular passphrases whenever they are required.
+</p>
+<pre># systemd-cryptenroll /dev/<i>disk</i> --recovery-key
+</pre>
+<h2><span class="mw-headline" id="Enrolling_hardware_devices">Enrolling hardware devices</span></h2>
+<p>The <code>--<i>type</i>-device</code> options must point to a valid device path of their respective type. A list of available devices can be obtained by passing the <code>list</code> argument to this option. Alternatively, if you only have a single device of the desired type connected, the <code>auto</code> option can be used to automatically select it.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> After enrolling the hardware tokens into the LUKS2 volumes, you must configure your system to use them when appropriate. See <a href="../en/Dm-crypt/System_configuration.html#Trusted_Platform_Module_and_FIDO2_keys" title="Dm-crypt/System configuration">dm-crypt/System configuration#Trusted Platform Module and FIDO2 keys</a> for volumes that should be unlocked in early userspace like the root filesystem, and <a href="../en/Dm-crypt/System_configuration.html#Unlocking_in_late_userspace" title="Dm-crypt/System configuration">dm-crypt/System configuration#Unlocking in late userspace</a> for other partitions.</div>
+<h3>
+<span id="PKCS.2311_tokens_or_smartcards"></span><span class="mw-headline" id="PKCS#11_tokens_or_smartcards">PKCS#11 tokens or smartcards</span>
+</h3>
+<p>The token or smartcard must contain a RSA key pair, which will be used to encrypt the generated key that will be used to unlock the volume.
+</p>
+<pre># systemd-cryptenroll /dev/<i>disk</i> --pkcs11-token-uri=<i>device</i>
+</pre>
+<h3><span class="mw-headline" id="FIDO2_tokens">FIDO2 tokens</span></h3>
+<p>Any FIDO2 token that supports the "hmac-secret" extension can be used with <i>systemd-cryptenroll</i>. The following example would enroll a FIDO2 token to an encrypted LUKS2 block device, requiring only user presence as authentication.
+</p>
+<pre># systemd-cryptenroll /dev/<i>disk</i> --fido2-device=<i>device</i> --fido2-with-client-pin=no
+</pre>
+<p>In addition, <i>systemd-cryptenroll</i> supports using the token's built-in user verification methods:
+</p>
+<ul>
+<li>
+<code>--fido2-with-user-presence</code> defines whether to verify the user presence (i.e. by tapping the token) before unlocking, defaults to yes</li>
+<li>
+<code>--fido2-with-user-verification</code> defines whether to require user verification before unlocking, defaults to no</li>
+</ul>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> 
+<ul>
+<li>These options will have no effect if the token does not support these features.</li>
+<li>See <a rel="nofollow" class="external text" href="https://developers.yubico.com/WebAuthn/WebAuthn_Developer_Guide/User_Presence_vs_User_Verification.html">User Presence vs User Verification</a> for more information on the difference between the two.</li>
+</ul>
+</div>
+<p>By default, the cryptographic algorithm used when generating a FIDO2 credential is <i>es256</i> which denotes Elliptic Curve Digital Signature Algorithm (ECDSA) over NIST P-256 with SHA-256. If desired and provided by the FIDO2 token, a different cryptographic algorithm can be specified during enrollment.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> This may also be desirable for those concerned with ECDSA. See <a href="../en/SSH_keys.html#ECDSA" title="SSH keys">SSH keys#ECDSA</a> for details.</div>
+<p>Suppose that a previous FIDO2 token has already been enrolled and the user wishes to enroll another, the following generates an <i>eddsa</i> credential which denotes <a rel="nofollow" class="external text" href="https://datatracker.ietf.org/doc/html/rfc8032">EdDSA</a> over Curve25519 with SHA-512 and authenticates the device with a previous enrolled token instead of a password.
+</p>
+<pre># systemd-cryptenroll /dev/<i>disk</i> --fido2-device=<i>device</i> --fido2-credential-algorithm=eddsa --unlock-fido2-device=auto
+</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> Both tokens must be plugged in to the system for successful enrollment.</div>
+<h3><span class="mw-headline" id="Trusted_Platform_Module">Trusted Platform Module</span></h3>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../File:Tango-view-fullscreen.svg" decoding="async" width="48" height="48" class="mw-file-element"></span></span><b>This article or section needs expansion.</b></p>
+<div>
+<b>Reason:</b> Document <code>--tpm2-public-key</code> <code>--tpm2-seal-key-handle</code> <code>--tpm2-device-key</code> <code>--tpm2-pcrlock</code> (Discuss in <a rel="nofollow" class="external text" href="../en/Talk:Systemd-cryptenroll.html">Talk:Systemd-cryptenroll</a>)</div>
+</div>
+<p><i>systemd-cryptenroll</i> has native support for enrolling LUKS keys in TPMs. It requires the following:
+</p>
+<ul>
+<li>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=tpm2-tss">tpm2-tss</a></span> must be <a href="../en/Help:Reading.html#Installation_of_packages" class="mw-redirect" title="Install">installed</a>,</li>
+<li>A LUKS2 device (currently the default type used by <a href="../en/Dm-crypt/Device_encryption.html#Cryptsetup_usage" class="mw-redirect" title="Cryptsetup">cryptsetup</a>),</li>
+<li>If you intend to use this method on your root partition, some tweaks need to be made to the <a href="../en/Arch_boot_process.html#initramfs" class="mw-redirect" title="Initramfs">initramfs</a> (see <a href="../en/Dm-crypt/System_configuration.html#Using_systemd-cryptsetup-generator" title="Dm-crypt/System configuration">dm-crypt/System configuration#Using systemd-cryptsetup-generator</a> for advanced configuration) :
+<ul>
+<li>
+<a href="../en/Mkinitcpio.html" title="Mkinitcpio">mkinitcpio</a> users: enable the <code>systemd</code> and <code>sd-encrypt</code> <a href="../en/Mkinitcpio.html#HOOKS" title="Mkinitcpio">hooks</a>. <div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> The order of the entries in the hooks is important. A nonstandard ordering <a rel="nofollow" class="external text" href="https://bbs.archlinux.org/viewtopic.php?id=273945">can make the system unbootable</a> (you will need to rebuild the initrd from within <a href="../en/Chroot.html#Using_arch-chroot" class="mw-redirect" title="Arch-chroot">arch-chroot</a> to recover). See <a href="../en/Dm-crypt/System_configuration.html#Examples" title="Dm-crypt/System configuration">dm-crypt/System configuration#Examples</a> for an example of the correct order.</div>
+</li>
+<li>
+<a href="../en/Dracut.html" title="Dracut">dracut</a> users: enable the <code>tpm2-tss</code> <a href="../en/Dracut.html#dracut_modules" title="Dracut">module</a>.</li>
+</ul>
+</li>
+</ul>
+<p>To begin, run the following command to list your installed TPMs and the driver in use:
+</p>
+<pre>$ systemd-cryptenroll --tpm2-device=list
+</pre>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> If your computer has multiple TPMs installed, specify the one you wish to use with <code>--tpm2-device=<i>/path/to/tpm2_device</i></code> in the following steps.</div>
+<p>A key may be enrolled in both the TPM and the LUKS volume using only one command. The following example generates a new random key, adds it to the volume so it can be used to unlock it in addition to the existing keys, and binds this new key to PCR 7 (<a href="../en/Unified_Extensible_Firmware_Interface/Secure_Boot.html" class="mw-redirect" title="Secure Boot">Secure Boot</a> state):
+</p>
+<pre># systemd-cryptenroll --tpm2-device=auto /dev/<i>sdX</i>
+</pre>
+<p>where <code>/dev/<i>sdX</i></code> is the full path to the encrypted LUKS volume. Use <code>--unlock-key-file=<i>/path/to/keyfile</i></code> if the LUKS volume is unlocked by a keyfile instead of a passphrase.
+</p>
+<p>Refer to <span class="plainlinks archwiki-template-man" title="$ man 1 systemd-cryptenroll"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd-cryptenroll.1">systemd-cryptenroll(1)</a></span> and <a href="../en/Trusted_Platform_Module.html#Accessing_PCR_registers" title="Trusted Platform Module">Trusted Platform Module#Accessing PCR registers</a> for common PCR measurements in Linux. Adjust the <code>--tpm2-pcrs=7</code> default as necessary (parameters are separated by the <code>+</code> symbol).
+</p>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Warning:</strong> 
+<ul>
+<li>Make sure <a href="../en/Unified_Extensible_Firmware_Interface/Secure_Boot.html" class="mw-redirect" title="Secure Boot">Secure Boot</a> is active and in user mode when binding to PCR 7, otherwise, unauthorized boot devices could unlock the encrypted volume.</li>
+<li>The state of PCR 7 can change if firmware certificates change, which can risk locking the user out. This can be implicitly done by <a href="../en/Fwupd.html" title="Fwupd">fwupd</a><a rel="nofollow" class="external autonumber" href="https://github.com/systemd/systemd/blob/ed272a9ff59a26beedaab508dd3c9d631de67165/TODO#L664-L673">[1]</a> or explicitly by rotating Secure Boot keys.</li>
+<li>Only binding to PCRs measured pre-boot (PCRs 0-7) opens a vulnerability from rogue operating systems. A rogue partition with metadata copied from the real root filesystem (such as partition UUID) can mimic the original partition. Then, initramfs will attempt to mount the rogue partition as the root filesystem (decryption failure will fall back to password entry), leaving pre-boot PCRs unchanged. The rogue root filesystem with files controlled by an attacker is still able to receive the decryption key for the real root partition. See <a rel="nofollow" class="external text" href="https://0pointer.net/blog/brave-new-trusted-boot-world.html">Brave New Trusted Boot World</a> and <a rel="nofollow" class="external text" href="https://learn.microsoft.com/en-us/windows/security/operating-system-security/data-protection/bitlocker/countermeasures">BitLocker documentation</a> for additional information.</li>
+<li>A solution for the root volume is to bind to an empty PCR 15 using <code>--tpm2-pcrs=<i>other_pcrs</i>+15:sha256=0000000000000000000000000000000000000000000000000000000000000000</code>. If you set any <code>rd.luks</code> kernel parameters or use <code>/etc/crypttab.initramfs</code>, additionally add the <code>tpm2-measure-pcr=yes</code> option to <code>rd.luks.options=</code> or the fourth field in <code>/etc/crypttab.initramfs</code>; this is not required when relying on <a href="../en/Systemd.html#GPT_partition_automounting" title="Systemd">GPT partition automounting</a>. After the root volume is unlocked in early userspace, PCR 15 will change and the enrolled key will no longer be retrievable.</li>
+</ul>
+</div>
+<p>The combination of PCRs to bind to depends on the individual case to balance usability and lock-down. For example, you may require UEFI firmware updates without manual intervention to the <a href="../en/Unified_Extensible_Firmware_Interface/Secure_Boot.html" class="mw-redirect" title="Secure Boot">Secure Boot</a> state, or different boot devices. As another example, Microsoft's <a rel="nofollow" class="external text" href="https://learn.microsoft.com/en-us/windows-hardware/test/hlk/testref/954cf796-a640-4134-b742-eaf0ed2663ff#troubleshooting">Bitlocker</a> prefers PCR <code>7+11</code>, but may also use other PCR combinations.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> 
+<ul>
+<li>It is possible to require a PIN to be entered in addition to the TPM state being correct. Simply add the option <code>--tpm2-with-pin=yes</code> to the command above and enter the PIN when prompted.</li>
+<li>
+<i>systemd-cryptenroll</i> does not check the TPM measurement before asking for the PIN, therefore consider using a unique PIN since the environment may be untrustworthy.</li>
+</ul>
+</div>
+<p>To check that the new key was enrolled, dump the LUKS configuration and look for a <code>systemd-tpm2</code> token entry, as well as an additional entry in the <i>Keyslots</i> section:
+</p>
+<pre># cryptsetup luksDump /dev/sdX
+</pre>
+<p>To test that the key works, run the following command while the LUKS volume is closed:
+</p>
+<pre># systemd-cryptsetup attach <i>mapping_name</i> /dev/<i>sdX</i> none tpm2-device=auto
+</pre>
+<p>where <code><i>mapping_name</i></code> is your chosen name for the volume once opened.
+</p>
+<p>See <a href="../en/Dm-crypt/System_configuration.html#crypttab" title="Dm-crypt/System configuration">dm-crypt/System configuration#crypttab</a> and <a href="../en/Dm-crypt/System_configuration.html#Trusted_Platform_Module_and_FIDO2_keys" title="Dm-crypt/System configuration">dm-crypt/System configuration#Trusted Platform Module and FIDO2 keys</a> in order to unlock the volume at boot time.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> While you may specify the UUID of your LUKS volume in place of the pathname in <code>/etc/crypttab</code>, the <i>systemd-cryptenroll</i> command itself currently only supports path names.</div>
+<p>See <span class="plainlinks archwiki-template-man" title="$ man 1 systemd-cryptenroll"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd-cryptenroll.1">systemd-cryptenroll(1)</a></span> and <span class="plainlinks archwiki-template-man" title="$ man 5 crypttab"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/crypttab.5">crypttab(5)</a></span> for more information and examples.
+</p>
+<h2><span class="mw-headline" id="See_also">See also</span></h2>
+<ul><li><a rel="nofollow" class="external text" href="https://0pointer.net/blog/unlocking-luks2-volumes-with-tpm2-fido2-pkcs11-security-hardware-on-systemd-248.html">Lennart's blog: Unlocking LUKS2 volumes with TPM2, FIDO2, PKCS#11 Security Hardware on systemd 248</a></li></ul>
+</div>
+</div>
+					<div id="catlinks" class="catlinks" data-mw="interface">
+<div id="mw-normal-catlinks" class="mw-normal-catlinks">
+<a href="../Special:Categories.html" title="Special:Categories">Category</a>: <ul><li><a href="../en/Category:Data-at-rest_encryption.html" title="Category:Data-at-rest encryption">Data-at-rest encryption</a></li></ul>
+</div>
+<div id="mw-hidden-catlinks" class="mw-hidden-catlinks mw-hidden-cats-hidden">Hidden category: <ul><li><a href="../en/Category:Pages_or_sections_flagged_with_Template:Expansion.html" title="Category:Pages or sections flagged with Template:Expansion">Pages or sections flagged with Template:Expansion</a></li></ul>
+</div>
+</div>
+				</div>
+			</main>
+			
+		</div>
+		<div class="mw-footer-container">
+			
+<footer id="footer" class="mw-footer" style="margin: 0">
+	<ul id="footer-info">
+	<li data-nosnippet="">Retrieved from "<a dir="ltr" href="https://wiki.archlinux.org/index.php?title=Systemd-cryptenroll&amp;oldid=827283">https://wiki.archlinux.org/index.php?title=Systemd-cryptenroll&amp;oldid=827283</a>"</li>
+<li id="footer-info-lastmod"> This page was last edited on 17 February 2025, at 22:05.</li>
+	<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+<br>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="https://terms.archlinux.org/docs/privacy-policy/">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="../en/ArchWiki:About.html">About ArchWiki</a></li>
+	<li id="footer-places-disclaimers"><a href="../en/ArchWiki:General_disclaimer.html">Disclaimers</a></li>
+	<li id="footer-places-archwiki-code-of-conduct"><a href="https://terms.archlinux.org/docs/code-of-conduct/" class="extiw" title="archlinux-service-agreements:code-of-conduct">Code of conduct</a></li>
+	<li id="footer-places-archwiki-terms-of-service"><a href="https://terms.archlinux.org/docs/terms-of-service/" class="extiw" title="archlinux-service-agreements:terms-of-service">Terms of service</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-copyrightico"><a href="https://www.gnu.org/copyleft/fdl.html" class="cdx-button cdx-button--fake-button cdx-button--size-large cdx-button--fake-button--enabled"><img src="/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" loading="lazy"></a></li>
+	<li id="footer-poweredbyico"><img src="/resources/assets/poweredby_mediawiki.svg" width="88" height="31" loading="lazy"></li>
+</ul>
+
+</footer>
+
+		</div>
+	</div> 
+</div> 
+<div class="vector-settings" id="p-dock-bottom">
+	<ul></ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<h1>efibootmgr</h1>
+
+<blockquote><p>UEFI 부트 매니저를 조작합니다.
+더 많은 정보: <a href="https://manned.org/efibootmgr">https://manned.org/efibootmgr</a>.</p></blockquote>
+
+<ul>
+<li>부트 옵션과 해당 번호를 모두 나열:</li>
+</ul>
+
+
+<p><code>efibootmgr {{[-u|--unicode]}}</code></p>
+
+<ul>
+<li>UEFI Shell v2를 부트 옵션으로 추가:</li>
+</ul>
+
+
+<p><code>sudo efibootmgr {{[-c|--create]}} {{[-d|--disk]}} {{/dev/sda}} {{[-p|--part]}} {{1}} {{[-l|--loader]}} "{{\경로\대상\shell.efi}}" {{[-L|--label]}} "{{UEFI Shell}}"</code></p>
+
+<ul>
+<li>Linux를 부트 옵션으로 추가:</li>
+</ul>
+
+
+<p><code>sudo efibootmgr {{[-c|--create]}} {{[-d|--disk]}} {{/dev/sda}} {{[-p|--part]}} {{1}} {{[-l|--loader]}} "{{\vmlinuz}}" {{[-u|--unicode]}} "{{kernel_cmdline}}" {{[-L|--label]}} "{{Linux}}"</code></p>
+
+<ul>
+<li>현재 부트 순서 변경:</li>
+</ul>
+
+
+<p><code>sudo efibootmgr {{[-o|--bootorder]}} {{0002,0008,0001,0005}}</code></p>
+
+<ul>
+<li>부트 옵션 삭제:</li>
+</ul>
+
+
+<p><code>sudo efibootmgr {{[-b|--bootnum]}} {{0008}} {{[-B|--delete-bootnum]}}</code></p>

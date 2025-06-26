@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-sticky-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-0 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-disabled skin-theme-clientpref-day vector-toc-available" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>Nmap - ArchWiki</title>
+<link rel="stylesheet" href="../ArchWikiOffline.css">
+<meta name="ResourceLoaderDynamicStyles" content="">
+<meta name="generator" content="MediaWiki 1.43.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="max-image-preview:standard">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.25, maximum-scale=5.0">
+<link rel="search" type="application/opensearchdescription+xml" href="/rest.php/v1/search" title="ArchWiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.archlinux.org/api.php?action=rsd">
+<link rel="license" href="https://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="ArchWiki Atom feed" href="/index.php?title=Special:RecentChanges&amp;feed=atom">
+</head>
+<body class="skin--responsive skin-vector skin-vector-search-vue mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Nmap rootpage-Nmap skin-vector-2022 action-view">
+<a class="mw-jump-link" href="#bodyContent">Jump to content</a>
+<div class="vector-header-container">
+	</div>
+<div class="mw-page-container">
+	<div class="mw-page-container-inner">
+		<div class="vector-column-start">
+			<div class="vector-main-menu-container">
+		</div>
+	<div class="vector-sticky-pinned-container">
+				<nav id="mw-panel-toc" aria-label="Contents" data-event-name="ui.sidebar-toc" class="mw-table-of-contents-container vector-toc-landmark">
+					<div id="vector-toc-pinned-container" class="vector-pinned-container">
+					<div id="vector-toc" class="vector-toc vector-pinnable-element">
+	<div class="vector-pinnable-header vector-toc-pinnable-header vector-pinnable-header-pinned" data-feature-name="toc-pinned" data-pinnable-element-id="vector-toc">
+	<h2 class="vector-pinnable-header-label">Contents</h2>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-toc.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-toc.unpin">hide</button>
+</div>
+
+
+	<ul class="vector-toc-contents" id="mw-panel-toc-list">
+		<li id="toc-mw-content-text" class="vector-toc-list-item vector-toc-level-1">
+			<a href="#" class="vector-toc-link">
+				<div class="vector-toc-text">Beginning</div>
+			</a>
+		</li>
+		<li id="toc-Installation" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Installation">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">1</span>
+				<span>Installation</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Installation-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Usage" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Usage">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">2</span>
+				<span>Usage</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Usage-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Usage subsection</span>
+			</button>
+		
+		<ul id="toc-Usage-sublist" class="vector-toc-list">
+			<li id="toc-Specifying_the_target" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Specifying_the_target">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1</span>
+					<span>Specifying the target</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Specifying_the_target-sublist" class="vector-toc-list">
+				<li id="toc-Specifying_multiple_targets" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Specifying_multiple_targets">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1.1</span>
+					<span>Specifying multiple targets</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Specifying_multiple_targets-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-List_scan" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#List_scan">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2</span>
+					<span>List scan</span>
+				</div>
+			</a>
+			
+			<ul id="toc-List_scan-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Default_options" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Default_options">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.3</span>
+					<span>Default options</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Default_options-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Ping_scan" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Ping_scan">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">3</span>
+				<span>Ping scan</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Ping_scan-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Ping scan subsection</span>
+			</button>
+		
+		<ul id="toc-Ping_scan-sublist" class="vector-toc-list">
+			<li id="toc-Ping_scan_types" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Ping_scan_types">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1</span>
+					<span>Ping scan types</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Ping_scan_types-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Port_scan" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Port_scan">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">4</span>
+				<span>Port scan</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Port_scan-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Port scan subsection</span>
+			</button>
+		
+		<ul id="toc-Port_scan-sublist" class="vector-toc-list">
+			<li id="toc-Scan_types" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Scan_types">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.1</span>
+					<span>Scan types</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Scan_types-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Anti-scanning_techniques" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Anti-scanning_techniques">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">5</span>
+				<span>Anti-scanning techniques</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Anti-scanning_techniques-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Anti-scanning techniques subsection</span>
+			</button>
+		
+		<ul id="toc-Anti-scanning_techniques-sublist" class="vector-toc-list">
+			<li id="toc-iptables_PSD_module" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#iptables_PSD_module">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.1</span>
+					<span>iptables PSD module</span>
+				</div>
+			</a>
+			
+			<ul id="toc-iptables_PSD_module-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Avoiding_detection" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Avoiding_detection">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.2</span>
+					<span>Avoiding detection</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Avoiding_detection-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Tips_and_tricks" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Tips_and_tricks">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">6</span>
+				<span>Tips and tricks</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Tips_and_tricks-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Tips and tricks subsection</span>
+			</button>
+		
+		<ul id="toc-Tips_and_tricks-sublist" class="vector-toc-list">
+			<li id="toc-Limiting_scan_speed" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Limiting_scan_speed">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.1</span>
+					<span>Limiting scan speed</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Limiting_scan_speed-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Specify_targets_input_from_a_list_file" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Specify_targets_input_from_a_list_file">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.2</span>
+					<span>Specify targets input from a list file</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Specify_targets_input_from_a_list_file-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Specify_targets_to_exclude_from_scan" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Specify_targets_to_exclude_from_scan">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.3</span>
+					<span>Specify targets to exclude from scan</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Specify_targets_to_exclude_from_scan-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Spoofing" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Spoofing">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.4</span>
+					<span>Spoofing</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Spoofing-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Speeding_up_the_scan" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Speeding_up_the_scan">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.5</span>
+					<span>Speeding up the scan</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Speeding_up_the_scan-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Scan_port_number_0" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Scan_port_number_0">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.6</span>
+					<span>Scan port number 0</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Scan_port_number_0-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-File_output_formats" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#File_output_formats">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.7</span>
+					<span>File output formats</span>
+				</div>
+			</a>
+			
+			<ul id="toc-File_output_formats-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-See_also" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#See_also">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">7</span>
+				<span>See also</span>
+			</div>
+		</a>
+		
+		<ul id="toc-See_also-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+</ul>
+</div>
+
+					</div>
+		</nav>
+			</div>
+		</div>
+		<div class="mw-content-container">
+			<main id="content" class="mw-body" style="margin: 0">
+				<header class="mw-body-header vector-page-titlebar">
+					<nav aria-label="Contents" class="vector-toc-landmark">
+						
+<div id="vector-page-titlebar-toc" class="vector-dropdown vector-page-titlebar-toc vector-button-flush-left">
+	<input type="checkbox" id="vector-page-titlebar-toc-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-page-titlebar-toc" class="vector-dropdown-checkbox " aria-label="Toggle the table of contents">
+	<label id="vector-page-titlebar-toc-label" for="vector-page-titlebar-toc-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"><span class="vector-icon mw-ui-icon-listBullet mw-ui-icon-wikimedia-listBullet"></span>
+
+<span class="vector-dropdown-label-text">Toggle the table of contents</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+							<div id="vector-page-titlebar-toc-unpinned-container" class="vector-unpinned-container">
+			</div>
+		
+	</div>
+</div>
+
+					</nav>
+					<h1 id="firstHeading" class="firstHeading mw-first-heading"><span class="mw-page-title-main">Nmap</span></h1>
+							
+<div id="p-lang-btn" class="vector-dropdown mw-portlet mw-portlet-lang">
+	<input type="checkbox" id="p-lang-btn-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-p-lang-btn" class="vector-dropdown-checkbox mw-interlanguage-selector" aria-label="Go to an article in another language. Available in 3 languages">
+	<label id="p-lang-btn-label" for="p-lang-btn-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--action-progressive mw-portlet-lang-heading-3" aria-hidden="true"><span class="vector-icon mw-ui-icon-language-progressive mw-ui-icon-wikimedia-language-progressive"></span>
+
+<span class="vector-dropdown-label-text">3 languages</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+		<div class="vector-menu-content">
+			
+			<ul class="vector-menu-content-list">
+				
+				<li class="interlanguage-link interwiki-de mw-list-item"><a href="https://wiki.archlinux.de/title/Nmap" title="Nmap – Deutsch" lang="de" hreflang="de" data-title="Nmap" data-language-autonym="Deutsch" data-language-local-name="Deutsch" class="interlanguage-link-target"><span>Deutsch</span></a></li>
+<li class="interlanguage-link interwiki-ja mw-list-item"><a href="https://wiki.archlinux.jp/index.php/Nmap" title="Nmap – 日本語" lang="ja" hreflang="ja" data-title="Nmap" data-language-autonym="日本語" data-language-local-name="日本語" class="interlanguage-link-target"><span>日本語</span></a></li>
+<li class="interlanguage-link interwiki-ru mw-list-item"><a href="../ru/Nmap.html" title="Nmap – русский" lang="ru" hreflang="ru" data-title="Nmap" data-language-autonym="Русский" data-language-local-name="русский" class="interlanguage-link-target"><span>Русский</span></a></li>
+			</ul>
+			
+		</div>
+
+	</div>
+</div>
+</header>
+				<div class="vector-column-end">
+					<div class="vector-sticky-pinned-container">
+						<nav class="vector-page-tools-landmark" aria-label="Page tools">
+							<div id="vector-page-tools-pinned-container" class="vector-pinned-container">
+				
+							</div>
+		</nav>
+						<nav class="vector-appearance-landmark" aria-label="Appearance">
+							<div id="vector-appearance-pinned-container" class="vector-pinned-container">
+				<div id="vector-appearance" class="vector-appearance vector-pinnable-element">
+	<div class="vector-pinnable-header vector-appearance-pinnable-header vector-pinnable-header-pinned" data-feature-name="appearance-pinned" data-pinnable-element-id="vector-appearance" data-pinned-container-id="vector-appearance-pinned-container" data-unpinned-container-id="vector-appearance-unpinned-container">
+	<div class="vector-pinnable-header-label">Appearance</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-appearance.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-appearance.unpin">hide</button>
+</div>
+
+
+</div>
+
+							</div>
+		</nav>
+					</div>
+				</div>
+				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container>
+					<div class="vector-body-before-content">
+							<div class="mw-indicators">
+		</div>
+
+						<div id="siteSub" class="noprint">From ArchWiki</div>
+					</div>
+					<div id="contentSub"><div id="mw-content-subtitle"></div></div>
+					
+					
+					<div id="mw-content-text" class="mw-body-content">
+<div class="mw-content-ltr mw-parser-output" lang="en" dir="ltr">
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../File:Tango-view-fullscreen.svg" decoding="async" width="48" height="48" class="mw-file-element"></span></span><b>This article or section needs expansion.</b></p>
+<div>
+<b>Reason:</b> DNS resolution; Ping scanning; Default options; Idle scan; FTP bounce; Timing options; (Discuss in <a rel="nofollow" class="external text" href="../en/Talk:Nmap.html">Talk:Nmap</a>)</div>
+</div>
+<p>From the <a rel="nofollow" class="external text" href="https://nmap.org/">official website</a>:
+</p>
+<dl><dd>Nmap (“Network Mapper”) is an open source tool for network exploration and security auditing. It was designed to rapidly scan large networks, although it works fine against single hosts. Nmap uses raw IP packets in novel ways to determine what hosts are available on the network, what services (application name and version) those hosts are offering, what operating systems (and OS versions) they are running, what type of packet filters/firewalls are in use, and dozens of other characteristics. While Nmap is commonly used for security audits, many systems and network administrators find it useful for routine tasks such as network inventory, managing service upgrade schedules, and monitoring host or service uptime.</dd></dl>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Warning:</strong> Invoking network scan techniques on systems, hosts or network ranges other than those under the own responsibility is illegal in quite a few jurisdictions. Double-check you scan your own hosts only (see <a href="#List_scan">#List scan</a>), or re-confirm the approval of the respective owner, before executing a scan!</div>
+<meta property="mw:PageProp/toc">
+<h2><span class="mw-headline" id="Installation">Installation</span></h2>
+<p><a href="../en/Help:Reading.html#Installation_of_packages" class="mw-redirect" title="Install">Install</a> the <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=nmap">nmap</a></span> package.
+</p>
+<p>Nmap has a GUI called <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/zenmap/">zenmap</a></span><sup><small>AUR</small></sup> that can be installed separately, but this article will cover only command-line usage.
+</p>
+<h2><span class="mw-headline" id="Usage">Usage</span></h2>
+<p>See <span class="plainlinks archwiki-template-man" title="$ man 1 nmap"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/nmap.1">nmap(1)</a></span>.
+</p>
+<h3><span class="mw-headline" id="Specifying_the_target">Specifying the target</span></h3>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> To print every packet that Nmap sends and receives, use the <code>--packet-trace</code> option.</div>
+<p>There are a number of ways to tell Nmap the list of IP addresses to scan.  The simplest form is to just pass the address or domain name:
+</p>
+<pre>$ nmap scanme.nmap.org
+$ nmap 74.207.244.221
+</pre>
+<h4><span class="mw-headline" id="Specifying_multiple_targets">Specifying multiple targets</span></h4>
+<p>Using <a href="https://en.wikipedia.org/wiki/CIDR" class="extiw" title="wikipedia:CIDR">CIDR</a> notation, for example to scan all 256 addresses beginning with <code>10.1.1</code>:
+</p>
+<pre>$ nmap 10.1.1.0/24
+</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> The ending <code>0</code> in the above example does not have an effect: <code>nmap 10.1.1.0/24</code> and for example <code>nmap 10.1.1.134/24</code> commands are the same.</div>
+<p>Using the dash, for example to scan <code>10.1.50.1</code>, <code>10.1.51.1</code> and <code>10.1.52.1</code>:
+</p>
+<pre>$ nmap 10.1.50-52.1
+</pre>
+<p>Using commas (does what you expect):
+</p>
+<pre>$ nmap 10.1.50,51,52,57,59.1
+</pre>
+<p>All combined:
+</p>
+<pre>$ nmap 10.1,2.50-52.1/30 10.1.1.1 10.1.1.2
+</pre>
+<h3><span class="mw-headline" id="List_scan">List scan</span></h3>
+<p>The list scan option (<code>-sL</code>) is useful for making sure that correct addresses are specified before doing the real scan:
+</p>
+<pre>$ nmap -sL 10.1,2.50-52.1/30 10.1.1.1 10.1.1.2
+</pre>
+<p>List scan simply prints the specified addresses without sending a single packet to the target.
+</p>
+<h3><span class="mw-headline" id="Default_options">Default options</span></h3>
+<p>If you specify only an IP address or domain name and no other options:
+</p>
+<pre>$ nmap 74.207.244.221
+</pre>
+<p>Nmap will do the following:
+</p>
+<ol>
+<li>The IP address is reverse-DNS resolved to domain name, or vice-versa in case a domain name is specified (to disable, pass <code>-n</code>)</li>
+<li>Ping scanning using TCP ACK:80 and ICMP.  This is equivalent to <code>-PA -PE</code> (to disable, pass <code>-PN</code>)</li>
+<li>Scans the host(s)'s top 1000 most popular ports.  When running as root, SYN stealth scan is used.  When running as user, connect scan is used.</li>
+</ol>
+<h2><span class="mw-headline" id="Ping_scan">Ping scan</span></h2>
+<p>Ping scanning (host discovery) is a technique for determining whether the specified computers are up and running.  Nmap performs ping scan by default before port scan to avoid wasting time on hosts that are not even connected.  To instruct Nmap to <b>only</b> perform ping scan:
+</p>
+<pre>$ nmap -sn 10.1.1.1/8
+</pre>
+<p>This will cause Nmap to ping every one of the specified addresses and then report the list of hosts which did respond to the ping.
+</p>
+<p>Nmap uses different kinds of ping packets when run with user or root privileges and when scanning the same or different subnets:
+</p>
+<table class="wikitable">
+<tbody>
+<tr>
+<th>
+</th>
+<th>External IP
+</th>
+<th>Local IP
+</th>
+</tr>
+<tr>
+<th>User privileges
+</th>
+<td>TCP SYN at ports 80 &amp; 443
+</td>
+<td>TCP SYN at ports 80 &amp; 443 and ARP
+</td>
+</tr>
+<tr>
+<th>Root privileges
+</th>
+<td>TCP SYN at ports 80 &amp; 443 and IGMP
+</td>
+<td>ARP
+</td>
+</tr>
+</tbody>
+</table>
+<h3><span class="mw-headline" id="Ping_scan_types">Ping scan types</span></h3>
+<table class="wikitable">
+<tbody>
+<tr>
+<th>Option</th>
+<th>Ping scan type
+</th>
+</tr>
+<tr>
+<td><code>-Pn</code></td>
+<td>Disable ping scan entirely
+</td>
+</tr>
+<tr>
+<td><code>-PS</code></td>
+<td>TCP <b>S</b>YN (default at port 80)
+</td>
+</tr>
+<tr>
+<td><code>-PA</code></td>
+<td>TCP <b>A</b>CK (default at port 80)
+</td>
+</tr>
+<tr>
+<td><code>-PU</code></td>
+<td>
+<b>U</b>DP
+</td>
+</tr>
+<tr>
+<td><code>-PY</code></td>
+<td>SCTP INIT
+</td>
+</tr>
+<tr>
+<td><code>-PE</code></td>
+<td>ICMP <b>E</b>cho
+</td>
+</tr>
+<tr>
+<td><code>-PP</code></td>
+<td>ICMP timestam<b>p</b>
+</td>
+</tr>
+<tr>
+<td><code>-PM</code></td>
+<td>ICMP address <b>m</b>ask
+</td>
+</tr>
+<tr>
+<td><code>-PO</code></td>
+<td>
+<b>O</b>ther IP protocol
+</td>
+</tr>
+<tr>
+<td><code>-PR</code></td>
+<td>
+<a href="https://en.wikipedia.org/wiki/Address_Resolution_Protocol" class="extiw" title="wikipedia:Address Resolution Protocol">ARP</a> scan
+</td>
+</tr>
+</tbody>
+</table>
+<p><code>-Pn</code> is useful when the machine is heavily firewalled, TCP 80 and 443 ports and IGMP requests are blocked, but the IP address might still have a machine listening on other less common ports.
+</p>
+<h2><span class="mw-headline" id="Port_scan">Port scan</span></h2>
+<p>There are 3 main states a port can be in:
+</p>
+<ul>
+<li>
+<code>open</code> - there is a program listening and responding to requests on this port</li>
+<li>
+<code>closed</code> - the host replies with an "error: no program listening on this port" reply to requests to this port</li>
+<li>
+<code>filtered</code> - the host doesn't reply at all.  This can be due to restrictive firewall rules, which "drop" a packet without sending a reply</li>
+</ul>
+<p>In addition to these there are 3 more states that Nmap can classify a port.  These are used when Nmap cannot reliably determine the state but suspects two of the three possible states:
+</p>
+<ul>
+<li>
+<code>open|closed</code> (<code>unfiltered</code>) - the port is either open or closed</li>
+<li>
+<code>closed|filtered</code> - the port is either closed or filtered</li>
+<li>
+<code>open|filtered</code> - the port is either open or filtered</li>
+</ul>
+<p>By default Nmap scans the 1000 most popular ports found in <code>/usr/share/nmap/nmap-services</code>.  To specify a different number of common ports:
+</p>
+<pre>$ nmap --top-ports 1000 10.1.1.1
+</pre>
+<p>To specify custom port numbers, use <code>-p</code>:
+</p>
+<pre>$ nmap -p -25,135-137 10.1.1.1
+</pre>
+<p>Dashes and commas work just like in <a href="#Specifying_the_target">#Specifying the target</a>. In addition, it is possible to specify all ports before/after given one by skipping the starting/ending port when using a dash.  For example to scan all possible 65535 ports (except <a href="#Scan_port_number_0">port number 0</a>):
+</p>
+<pre>$ nmap -p -
+</pre>
+<h3><span class="mw-headline" id="Scan_types">Scan types</span></h3>
+<table class="wikitable">
+<tbody>
+<tr>
+<th>Option</th>
+<th>Port scan type
+</th>
+</tr>
+<tr>
+<td><code>-sP</code></td>
+<td>
+<a href="#Ping_scan">Ping scan</a> only
+</td>
+</tr>
+<tr>
+<td><code>-sS</code></td>
+<td>TCP SYN (stealth) (Default as root)
+</td>
+</tr>
+<tr>
+<td><code>-sT</code></td>
+<td>TCP connect (Default as user)
+</td>
+</tr>
+<tr>
+<td><code>-sA</code></td>
+<td>TCP ACK
+</td>
+</tr>
+<tr>
+<td><code>-sF</code></td>
+<td>TCP FIN
+</td>
+</tr>
+<tr>
+<td><code>-sX</code></td>
+<td>TCP FIN, SYN, ACK
+</td>
+</tr>
+<tr>
+<td><code>-sW</code></td>
+<td>TCP window
+</td>
+</tr>
+<tr>
+<td><code>-sM</code></td>
+<td>TCP Maimon
+</td>
+</tr>
+<tr>
+<td><code>-sU</code></td>
+<td>UDP scan
+</td>
+</tr>
+<tr>
+<td><code>-sI</code></td>
+<td>Idle scan
+</td>
+</tr>
+<tr>
+<td><code>-b</code></td>
+<td>FTP bounce scan
+</td>
+</tr>
+<tr>
+<td><code>-sO</code></td>
+<td>Other IP protocol
+</td>
+</tr>
+</tbody>
+</table>
+<h2><span class="mw-headline" id="Anti-scanning_techniques">Anti-scanning techniques</span></h2>
+<h3><span class="mw-headline" id="iptables_PSD_module">iptables PSD module</span></h3>
+<p><a rel="nofollow" class="external text" href="https://sourceforge.net/p/xtables-addons/xtables-addons/ci/master/tree/extensions/xt_psd.c">PSD</a> is an extension module of <a href="../en/Iptables.html" title="Iptables">iptables</a>. It is used on some linux-based commercial routers as well.
+</p>
+<p>It has 4 parameters:
+</p>
+<ul><li>
+<code>--psd-weight-threshold <i>threshold</i></code>, default value: <code>21</code>
+</li></ul>
+<dl><dd>Total weight of the latest TCP/UDP packets with different destination ports coming from the same host to be treated as port scan sequence.</dd></dl>
+<ul><li>
+<code>--psd-delay-threshold <i>delay</i></code>, default value: <code>300</code> (3 seconds)</li></ul>
+<dl><dd>Delay (in hundredths of second) for the packets with different destination ports coming from the same host to be treated as possible port scan subsequence.</dd></dl>
+<ul><li>
+<code>--psd-lo-ports-weight <i>weight</i></code>, default value: <code>3</code>
+</li></ul>
+<dl><dd>Weight of the packet with privileged (&lt;1024) destination port.</dd></dl>
+<ul><li>
+<code>--psd-hi-ports-weight <i>weight</i></code>, default value: <code>1</code>
+</li></ul>
+<dl><dd>Weight of the packet with non-privileged (&gt;=1024) destination port.</dd></dl>
+<p>The principle behind PSD is simple. If requests from a single IP have gained a value more than <i>threshold</i> in <i>delay</i> seconds, then the IP is classified as a port scanner. In a math expression:
+</p>
+<pre><i>lo_ports_weight</i> * <b>REQUESTS_LOW</b> + <i>hi_ports_weight</i> * <b>REQUESTS_HIGH</b> &gt;= <i>threshold</i>
+</pre>
+<p>where
+</p>
+<pre><b>REQUESTS_LOW</b> = number of requests to privileged (0 to 1023) ports within last <i>delay</i> seconds
+<b>REQUESTS_HI</b> = number of requests to non-privileged (1024 to 65535) ports within last <i>delay</i> seconds
+</pre>
+<p>Here are some examples:
+</p>
+<ul>
+<li>With default parameters, if at least 7 privileged ports are hit within 3 seconds, it is classified as a port scan.</li>
+<li>With default parameters, if at least 21 non-privileged ports are hit withing 3 seconds, it is classified as a port scan.</li>
+<li>With default parameters, if 4 privileged ports and 9 non-privileged ports are hit within 3 seconds, it is classified as a port scan, because <code>4*3 + 9*1 &gt;= 21</code>.</li>
+</ul>
+<h3><span class="mw-headline" id="Avoiding_detection">Avoiding detection</span></h3>
+<p>One of the simplest ways to avoid PSD is to simply <a href="#Limiting_scan_speed">scan slowly</a>. For default values this parameter would suffice:
+</p>
+<pre>$ nmap --scan-delay 3.1 192.168.56.1
+</pre>
+<p>Another interesing fact about PSD is that it does not detect a request as a port scan when the <code>ack</code> or <code>rst</code> flags are set (See the function <code>is_portscan</code> in <a rel="nofollow" class="external text" href="https://sourceforge.net/p/xtables-addons/xtables-addons/ci/master/tree/extensions/xt_psd.c">xt_psd.c</a>)
+</p>
+<p>Also, if you are port scanning a host and the latter has an HTTP(S) service running on it, nmap will use <code>Mozilla/5.0 (compatible; Nmap Scripting Engine; <a rel="nofollow" class="external free" href="https://nmap.org/book/nse.html">https://nmap.org/book/nse.html</a>)</code> as default user agent. Your action will thus be easily detected, especially if an administrator or a robot are taking measures if such an user agent appears in the logs. Hopefully, nmap allows us to change that string easily: just pass <code>-script-args http.useragent="<i>user agent you want</i>"</code>. <a rel="nofollow" class="external text" href="https://archive.today/2015.01.04-200747/http://www.kroosec.com/2012/02/making-nmap-scripting-engine-stealthier.html">Source</a>
+</p>
+<h2><span class="mw-headline" id="Tips_and_tricks">Tips and tricks</span></h2>
+<h3><span class="mw-headline" id="Limiting_scan_speed">Limiting scan speed</span></h3>
+<p>Nmap scans are <i>fast</i>. While this is often a desirable feature, it can be counter-productive as well. For example when you want to test your system's firewall without disabling any activated flood detection rules, or when you want to run a long-term test for a specific port/service. The following options specify how fast Nmap sends packets.
+</p>
+<p>To send a packet at most every 3.333 seconds:
+</p>
+<pre>$ nmap --max-rate 0.3 192.168.56.1
+</pre>
+<p>Alternatively, to send a packet every 3.1 seconds:
+</p>
+<pre>$ nmap --scan-delay 3.1 192.168.56.1
+</pre>
+<p>For other timing and parallelization options, see <span class="plainlinks archwiki-template-man" title="$ man 1 nmap"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/nmap.1">nmap(1)</a></span>.
+</p>
+<h3><span class="mw-headline" id="Specify_targets_input_from_a_list_file">Specify targets input from a list file</span></h3>
+<p>Often it is necessary to scan a large number of non-adjacent addresses.  Passing them on the command line is usually not convenient.  For this reason Nmap supports <b>i</b>nput from a <b>l</b>ist file (<code>-iL</code>):
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">addresses.txt</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">10.1.1.1 10.1.1.2 10.1.1-10.3
+10.3.1.3 10.3.1.50 10.3.2.55
+10.1.1.100
+...
+</pre>
+<pre>$ nmap -iL addresses.txt
+</pre>
+<p>Addresses in the file must be separated with a whitespace.
+</p>
+<p>Alternatively, Nmap can read the list from standard input (the <code>-</code> means standard input in many command-line programs):
+</p>
+<pre>$ echo "10.1.1.1 10.1.1.2 10.1.1-10.3" | nmap -iL -
+</pre>
+<h3><span class="mw-headline" id="Specify_targets_to_exclude_from_scan">Specify targets to exclude from scan</span></h3>
+<pre>$ nmap 10.1.1.1-10 --exclude 10.1.1.5,7 
+</pre>
+<p>The same from a file:
+</p>
+<pre>$ nmap 10.1.1.1-10 --excludefile excludeaddr.txt
+</pre>
+<h3><span class="mw-headline" id="Spoofing">Spoofing</span></h3>
+<p>To spoof source IP:
+</p>
+<pre>$ nmap -S 192.168.56.35 -e vboxnet0 192.168.56.11
+</pre>
+<p>To spoof the source MAC address:
+</p>
+<pre>$ nmap --spoof-mac 01:02:03:04:05:06 192.168.56.11
+</pre>
+<p>To spoof source port:
+</p>
+<pre>$ nmap --source-port 22 192.168.56.11
+</pre>
+<h3><span class="mw-headline" id="Speeding_up_the_scan">Speeding up the scan</span></h3>
+<p>By default, Nmap performs DNS/reverse-DNS resolution on targets.  To tell Nmap <b>n</b>ever do any DNS resolution, pass the <code>-n</code> option:
+</p>
+<pre>$ nmap -n 192.168.56.0/24
+</pre>
+<p>This will speed the scan about 2 times.
+</p>
+<h3><span class="mw-headline" id="Scan_port_number_0">Scan port number 0</span></h3>
+<p>By default port 0 is skipped from scans, even if <code>-p -</code> is specified.  To scan it, it must be explicitly specified.  For example to scan every possible port:
+</p>
+<pre>$ nmap -p 0-65535
+</pre>
+<p>Remember that this port number is invalid in RFC standards.  However it can be used by malware and the like to avoid more naive port scanners.
+</p>
+<h3><span class="mw-headline" id="File_output_formats">File output formats</span></h3>
+<p>Nmap has built-in support for for file output alongside with terminal output:
+</p>
+<ul><li><code>-oN <i>filename</i></code></li></ul>
+<dl><dd>Normal output, same as the terminal output</dd></dl>
+<ul><li><code>-oX <i>filename</i></code></li></ul>
+<dl><dd>XML output, contains very detailed information about the scan, easy to parse with software</dd></dl>
+<ul><li><code>-oG <i>filename</i></code></li></ul>
+<dl><dd>Grepable output, deprecated</dd></dl>
+<ul><li><code>-oA <i>basefilename</i></code></li></ul>
+<dl><dd>All of the above combined. Creates files called <code><i>basefilename</i>.nmap</code>, <code><i>basefilename</i>.xml</code> and <code><i>basefilename</i>.gnmap</code>
+</dd></dl>
+<p>For example to output to the terminal, to file and to XML file:
+</p>
+<pre>$ nmap -oN output.txt -oX output.xml scanme.nmap.org
+</pre>
+<h2><span class="mw-headline" id="See_also">See also</span></h2>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Nmap" class="extiw" title="wikipedia:Nmap">Wikipedia:Nmap</a></li>
+<li><a rel="nofollow" class="external text" href="https://nmap.org/">Official website</a></li>
+<li><a rel="nofollow" class="external text" href="https://nmap.org/book/">Nmap Network Scanning book</a></li>
+</ul>
+</div>
+</div>
+					<div id="catlinks" class="catlinks" data-mw="interface">
+<div id="mw-normal-catlinks" class="mw-normal-catlinks">
+<a href="../Special:Categories.html" title="Special:Categories">Categories</a>: <ul>
+<li><a href="../en/Category:Networking.html" title="Category:Networking">Networking</a></li>
+<li><a href="../en/Category:Security.html" title="Category:Security">Security</a></li>
+</ul>
+</div>
+<div id="mw-hidden-catlinks" class="mw-hidden-catlinks mw-hidden-cats-hidden">Hidden category: <ul><li><a href="../en/Category:Pages_or_sections_flagged_with_Template:Expansion.html" title="Category:Pages or sections flagged with Template:Expansion">Pages or sections flagged with Template:Expansion</a></li></ul>
+</div>
+</div>
+				</div>
+			</main>
+			
+		</div>
+		<div class="mw-footer-container">
+			
+<footer id="footer" class="mw-footer" style="margin: 0">
+	<ul id="footer-info">
+	<li data-nosnippet="">Retrieved from "<a dir="ltr" href="https://wiki.archlinux.org/index.php?title=Nmap&amp;oldid=759765">https://wiki.archlinux.org/index.php?title=Nmap&amp;oldid=759765</a>"</li>
+<li id="footer-info-lastmod"> This page was last edited on 10 December 2022, at 16:26.</li>
+	<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+<br>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="https://terms.archlinux.org/docs/privacy-policy/">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="../en/ArchWiki:About.html">About ArchWiki</a></li>
+	<li id="footer-places-disclaimers"><a href="../en/ArchWiki:General_disclaimer.html">Disclaimers</a></li>
+	<li id="footer-places-archwiki-code-of-conduct"><a href="https://terms.archlinux.org/docs/code-of-conduct/" class="extiw" title="archlinux-service-agreements:code-of-conduct">Code of conduct</a></li>
+	<li id="footer-places-archwiki-terms-of-service"><a href="https://terms.archlinux.org/docs/terms-of-service/" class="extiw" title="archlinux-service-agreements:terms-of-service">Terms of service</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-copyrightico"><a href="https://www.gnu.org/copyleft/fdl.html" class="cdx-button cdx-button--fake-button cdx-button--size-large cdx-button--fake-button--enabled"><img src="/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" loading="lazy"></a></li>
+	<li id="footer-poweredbyico"><img src="/resources/assets/poweredby_mediawiki.svg" width="88" height="31" loading="lazy"></li>
+</ul>
+
+</footer>
+
+		</div>
+	</div> 
+</div> 
+<div class="vector-settings" id="p-dock-bottom">
+	<ul></ul>
+</div>
+</body>
+</html>

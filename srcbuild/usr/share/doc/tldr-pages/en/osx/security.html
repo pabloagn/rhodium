@@ -1,0 +1,53 @@
+<h1>security</h1>
+
+<blockquote><p>Administer keychains, keys, certificates and the Security framework.
+More information: <a href="https://keith.github.io/xcode-man-pages/security.1.html">https://keith.github.io/xcode-man-pages/security.1.html</a>.</p></blockquote>
+
+<ul>
+<li>List all available keychains:</li>
+</ul>
+
+
+<p><code>security list-keychains</code></p>
+
+<ul>
+<li>Delete a specific keychain:</li>
+</ul>
+
+
+<p><code>security delete-keychain {{path/to/file.keychain}}</code></p>
+
+<ul>
+<li>Create a keychain:</li>
+</ul>
+
+
+<p><code>security create-keychain -p {{password}} {{path/to/file.keychain}}</code></p>
+
+<ul>
+<li>Set a certificate to use with a website or [s]ervice by its [c]ommon name (fails if several certificates with the same common name exist):</li>
+</ul>
+
+
+<p><code>security set-identity-preference -s {{URL|hostname|service}} -c "{{common_name}}" {{path/to/file.keychain}}</code></p>
+
+<ul>
+<li>Add a certificate from file to a [k]eychain (if -k isn&rsquo;t specified, the default keychain is used):</li>
+</ul>
+
+
+<p><code>security add-certificates -k {{file.keychain}} {{path/to/cert_file.pem}}</code></p>
+
+<ul>
+<li>Add a CA certificate to the per-user Trust Settings:</li>
+</ul>
+
+
+<p><code>security add-trusted-cert -k {{path/to/user-keychain.keychain-db}} {{path/to/ca-cert_file.pem}}</code></p>
+
+<ul>
+<li>Remove a CA certificate from the per-user Trust Settings:</li>
+</ul>
+
+
+<p><code>security remove-trusted-cert {{path/to/ca-cert_file.pem}}</code></p>

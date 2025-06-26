@@ -1,0 +1,61 @@
+<h1>curl</h1>
+
+<blockquote><p>向 / 從一個伺服器傳輸數據。
+支持大多數協議，包括 HTTP、FTP 和 POP3.
+更多資訊：<a href="https://curl.se/docs/manpage.html">https://curl.se/docs/manpage.html</a>.</p></blockquote>
+
+<ul>
+<li>將指定 URL 的內容下載到檔案：</li>
+</ul>
+
+
+<p><code>curl {{http://example.com}} {{[-o|--output]}} {{檔案/完整/路徑}}</code></p>
+
+<ul>
+<li>將檔案從 URL 保存到由 URL 指示的檔名：</li>
+</ul>
+
+
+<p><code>curl {{[-O|--remote-name]}} {{http://example.com/filename}}</code></p>
+
+<ul>
+<li>下載檔案，跟隨重新導向，並且自動續傳（恢復）前序檔案傳輸：</li>
+</ul>
+
+
+<p><code>curl {{[-f|--fail]}} {{[-O|--remote-name]}} {{[-L|--location]}} {{[-C|--continue-at]}} - {{http://example.com/filename}}</code></p>
+
+<ul>
+<li>發送表單編碼數據（<code>application/x-www-form-urlencoded</code> 的 POST 請求）：</li>
+</ul>
+
+
+<p><code>curl {{[-d|--data]}} {{'name=bob'}} {{http://example.com/form}}</code></p>
+
+<ul>
+<li>發送帶有額外請求頭，使用自定義請求方法：</li>
+</ul>
+
+
+<p><code>curl {{[-H|--header]}} {{'X-My-Header: 123'}} {{[-X|--request]}} {{PUT}} {{http://example.com}}</code></p>
+
+<ul>
+<li>發送 JSON 格式的數據，並附加正確的 <code>Content-Type</code> 請求頭：</li>
+</ul>
+
+
+<p><code>curl {{[-d|--data]}} {{'{"name":"bob"}'}} {{[-H|--header]}} {{'Content-Type: application/json'}} {{http://example.com/users/1234}}</code></p>
+
+<ul>
+<li>透過使用者名稱和密碼訪問伺服器：</li>
+</ul>
+
+
+<p><code>curl {{[-u|--user]}} {{使用者名稱}} {{http://example.com}}</code></p>
+
+<ul>
+<li>爲指定資源使用客戶端憑證和密鑰，並且跳過憑證驗證：</li>
+</ul>
+
+
+<p><code>curl {{[-E|--cert]}} {{client.pem}} --key {{key.pem}} {{[-k|--insecure]}} {{https://example.com}}</code></p>

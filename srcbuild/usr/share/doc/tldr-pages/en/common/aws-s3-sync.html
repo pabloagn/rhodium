@@ -1,0 +1,60 @@
+<h1>aws s3 sync</h1>
+
+<blockquote><p>Recursively sync files and directories between your local system and an S3 bucket, or between S3 buckets.
+More information: <a href="https://awscli.amazonaws.com/v2/documentation/api/latest/reference/s3/sync.html">https://awscli.amazonaws.com/v2/documentation/api/latest/reference/s3/sync.html</a>.</p></blockquote>
+
+<ul>
+<li>Sync files and directories from local to a bucket:</li>
+</ul>
+
+
+<p><code>aws s3 sync {{path/to/file_or_directory}} s3://{{bucket_target_name}}/{{path/to/remote_location}}</code></p>
+
+<ul>
+<li>Sync files and directories from a bucket to local:</li>
+</ul>
+
+
+<p><code>aws s3 sync s3://{{bucket_source_name}}/{{path/to/remote_location}} {{path/to/file_or_directory}}</code></p>
+
+<ul>
+<li>Sync objects between two buckets:</li>
+</ul>
+
+
+<p><code>aws s3 sync s3://{{bucket_source_name}}/{{path/to/remote_location}} s3://{{bucket_target_name}}/{{path/to/remote_location}}</code></p>
+
+<ul>
+<li>Sync local files to S3 while excluding specific files or directories:</li>
+</ul>
+
+
+<p><code>aws s3 sync {{path/to/file_or_directory}} s3://{{bucket_target_name}}/{{path/to/remote_location}} --exclude {{path/to/file}} --exclude {{path/to/directory}}/*</code></p>
+
+<ul>
+<li>Sync objects between buckets and delete destination files not in source:</li>
+</ul>
+
+
+<p><code>aws s3 sync s3://{{bucket_source_name}}/{{path/to/remote_location}} s3://{{bucket_target_name}}/{{path/to/remote_location}} --delete</code></p>
+
+<ul>
+<li>Sync to S3 with advanced options (set ACL and storage class):</li>
+</ul>
+
+
+<p><code>aws s3 sync {{path/to/local_directory}} s3://{{bucket_name}}/{{path/to/remote_location}} --acl {{private|public-read}} --storage-class {{STANDARD_IA|GLACIER}}</code></p>
+
+<ul>
+<li>Sync files to S3 and skip unchanged ones (compare size and modification time):</li>
+</ul>
+
+
+<p><code>aws s3 sync {{path/to/file_or_directory}} s3://{{bucket_name}}/{{path/to/remote_location}} --size-only</code></p>
+
+<ul>
+<li>Display help:</li>
+</ul>
+
+
+<p><code>aws s3 sync help</code></p>

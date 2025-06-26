@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-sticky-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-0 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-disabled skin-theme-clientpref-day vector-toc-available" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>VCS package guidelines - ArchWiki</title>
+<link rel="stylesheet" href="../ArchWikiOffline.css">
+<meta name="ResourceLoaderDynamicStyles" content="">
+<meta name="generator" content="MediaWiki 1.43.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="max-image-preview:standard">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.25, maximum-scale=5.0">
+<link rel="search" type="application/opensearchdescription+xml" href="/rest.php/v1/search" title="ArchWiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.archlinux.org/api.php?action=rsd">
+<link rel="license" href="https://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="ArchWiki Atom feed" href="/index.php?title=Special:RecentChanges&amp;feed=atom">
+</head>
+<body class="skin--responsive skin-vector skin-vector-search-vue mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-VCS_package_guidelines rootpage-VCS_package_guidelines skin-vector-2022 action-view">
+<a class="mw-jump-link" href="#bodyContent">Jump to content</a>
+<div class="vector-header-container">
+	</div>
+<div class="mw-page-container">
+	<div class="mw-page-container-inner">
+		<div class="vector-column-start">
+			<div class="vector-main-menu-container">
+		</div>
+	<div class="vector-sticky-pinned-container">
+				<nav id="mw-panel-toc" aria-label="Contents" data-event-name="ui.sidebar-toc" class="mw-table-of-contents-container vector-toc-landmark">
+					<div id="vector-toc-pinned-container" class="vector-pinned-container">
+					<div id="vector-toc" class="vector-toc vector-pinnable-element">
+	<div class="vector-pinnable-header vector-toc-pinnable-header vector-pinnable-header-pinned" data-feature-name="toc-pinned" data-pinnable-element-id="vector-toc">
+	<h2 class="vector-pinnable-header-label">Contents</h2>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-toc.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-toc.unpin">hide</button>
+</div>
+
+
+	<ul class="vector-toc-contents" id="mw-panel-toc-list">
+		<li id="toc-mw-content-text" class="vector-toc-list-item vector-toc-level-1">
+			<a href="#" class="vector-toc-link">
+				<div class="vector-toc-text">Beginning</div>
+			</a>
+		</li>
+		<li id="toc-Package_naming" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Package_naming">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">1</span>
+				<span>Package naming</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Package_naming-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Versioning" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Versioning">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">2</span>
+				<span>Versioning</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Versioning-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Conflicts_and_dependencies" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Conflicts_and_dependencies">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">3</span>
+				<span>Conflicts and dependencies</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Conflicts_and_dependencies-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Authentication_and_security" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Authentication_and_security">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">4</span>
+				<span>Authentication and security</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Authentication_and_security-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-VCS_sources" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#VCS_sources">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">5</span>
+				<span>VCS sources</span>
+			</div>
+		</a>
+		
+		<ul id="toc-VCS_sources-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-The_pkgver()_function" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#The_pkgver()_function">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">6</span>
+				<span>The pkgver() function</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-The_pkgver()_function-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle The pkgver() function subsection</span>
+			</button>
+		
+		<ul id="toc-The_pkgver()_function-sublist" class="vector-toc-list">
+			<li id="toc-Bazaar" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Bazaar">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.1</span>
+					<span>Bazaar</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Bazaar-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Git" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Git">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.2</span>
+					<span>Git</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Git-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Mercurial" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Mercurial">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.3</span>
+					<span>Mercurial</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Mercurial-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Subversion" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Subversion">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.4</span>
+					<span>Subversion</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Subversion-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Fallback" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Fallback">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.5</span>
+					<span>Fallback</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Fallback-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Tips_and_tricks" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Tips_and_tricks">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">7</span>
+				<span>Tips and tricks</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Tips_and_tricks-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Tips and tricks subsection</span>
+			</button>
+		
+		<ul id="toc-Tips_and_tricks-sublist" class="vector-toc-list">
+			<li id="toc-Git_submodules" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Git_submodules">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">7.1</span>
+					<span>Git submodules</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Git_submodules-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Git_LFS" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Git_LFS">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">7.2</span>
+					<span>Git LFS</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Git_LFS-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Git_checksums" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Git_checksums">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">7.3</span>
+					<span>Git checksums</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Git_checksums-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+</ul>
+</div>
+
+					</div>
+		</nav>
+			</div>
+		</div>
+		<div class="mw-content-container">
+			<main id="content" class="mw-body" style="margin: 0">
+				<header class="mw-body-header vector-page-titlebar">
+					<nav aria-label="Contents" class="vector-toc-landmark">
+						
+<div id="vector-page-titlebar-toc" class="vector-dropdown vector-page-titlebar-toc vector-button-flush-left">
+	<input type="checkbox" id="vector-page-titlebar-toc-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-page-titlebar-toc" class="vector-dropdown-checkbox " aria-label="Toggle the table of contents">
+	<label id="vector-page-titlebar-toc-label" for="vector-page-titlebar-toc-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"><span class="vector-icon mw-ui-icon-listBullet mw-ui-icon-wikimedia-listBullet"></span>
+
+<span class="vector-dropdown-label-text">Toggle the table of contents</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+							<div id="vector-page-titlebar-toc-unpinned-container" class="vector-unpinned-container">
+			</div>
+		
+	</div>
+</div>
+
+					</nav>
+					<h1 id="firstHeading" class="firstHeading mw-first-heading"><span class="mw-page-title-main">VCS package guidelines</span></h1>
+							
+<div id="p-lang-btn" class="vector-dropdown mw-portlet mw-portlet-lang">
+	<input type="checkbox" id="p-lang-btn-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-p-lang-btn" class="vector-dropdown-checkbox mw-interlanguage-selector" aria-label="Go to an article in another language. Available in 3 languages">
+	<label id="p-lang-btn-label" for="p-lang-btn-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--action-progressive mw-portlet-lang-heading-3" aria-hidden="true"><span class="vector-icon mw-ui-icon-language-progressive mw-ui-icon-wikimedia-language-progressive"></span>
+
+<span class="vector-dropdown-label-text">3 languages</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+		<div class="vector-menu-content">
+			
+			<ul class="vector-menu-content-list">
+				
+				<li class="interlanguage-link interwiki-ja mw-list-item"><a href="https://wiki.archlinux.jp/index.php/VCS_%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E3%82%AC%E3%82%A4%E3%83%89%E3%83%A9%E3%82%A4%E3%83%B3" title="VCS パッケージガイドライン – 日本語" lang="ja" hreflang="ja" data-title="VCS パッケージガイドライン" data-language-autonym="日本語" data-language-local-name="日本語" class="interlanguage-link-target"><span>日本語</span></a></li>
+<li class="interlanguage-link interwiki-pt mw-list-item"><a href="../pt/VCS_package_guidelines.html" title="VCS package guidelines – português" lang="pt" hreflang="pt" data-title="VCS package guidelines" data-language-autonym="Português" data-language-local-name="português" class="interlanguage-link-target"><span>Português</span></a></li>
+<li class="interlanguage-link interwiki-zh-hans mw-list-item"><a href="https://wiki.archlinuxcn.org/wiki/VCS_%E8%BD%AF%E4%BB%B6%E6%89%93%E5%8C%85%E5%87%86%E5%88%99" title="VCS 软件打包准则 – 中文（简体）" lang="zh-Hans" hreflang="zh-Hans" data-title="VCS 软件打包准则" data-language-autonym="中文（简体）" data-language-local-name="中文（简体）" class="interlanguage-link-target"><span>中文（简体）</span></a></li>
+			</ul>
+			
+		</div>
+
+	</div>
+</div>
+</header>
+				<div class="vector-column-end">
+					<div class="vector-sticky-pinned-container">
+						<nav class="vector-page-tools-landmark" aria-label="Page tools">
+							<div id="vector-page-tools-pinned-container" class="vector-pinned-container">
+				
+							</div>
+		</nav>
+						<nav class="vector-appearance-landmark" aria-label="Appearance">
+							<div id="vector-appearance-pinned-container" class="vector-pinned-container">
+				<div id="vector-appearance" class="vector-appearance vector-pinnable-element">
+	<div class="vector-pinnable-header vector-appearance-pinnable-header vector-pinnable-header-pinned" data-feature-name="appearance-pinned" data-pinnable-element-id="vector-appearance" data-pinned-container-id="vector-appearance-pinned-container" data-unpinned-container-id="vector-appearance-unpinned-container">
+	<div class="vector-pinnable-header-label">Appearance</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-appearance.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-appearance.unpin">hide</button>
+</div>
+
+
+</div>
+
+							</div>
+		</nav>
+					</div>
+				</div>
+				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container>
+					<div class="vector-body-before-content">
+							<div class="mw-indicators">
+		</div>
+
+						<div id="siteSub" class="noprint">From ArchWiki</div>
+					</div>
+					<div id="contentSub"><div id="mw-content-subtitle"></div></div>
+					
+					
+					<div id="mw-content-text" class="mw-body-content">
+<div class="mw-content-ltr mw-parser-output" lang="en" dir="ltr">
+<div class="toc" style="display:block; text-align: center; margin-bottom: 1em;">
+<b><a href="../en/Arch_package_guidelines.html" title="Arch package guidelines">Arch package guidelines</a></b>
+<hr>
+<p><a href="../en/32-bit_package_guidelines.html" title="32-bit package guidelines">32-bit</a> – <a href="../en/CLR_package_guidelines.html" title="CLR package guidelines">CLR</a> – <a href="../en/CMake_package_guidelines.html" title="CMake package guidelines">CMake</a> – <a href="../en/Cross-compiling_tools_package_guidelines.html" title="Cross-compiling tools package guidelines">Cross</a> – <a href="../en/DKMS_package_guidelines.html" title="DKMS package guidelines">DKMS</a> – <a href="../en/Eclipse_plugin_package_guidelines.html" title="Eclipse plugin package guidelines">Eclipse</a> – <a href="../en/Electron_package_guidelines.html" title="Electron package guidelines">Electron</a> – <a href="../en/Font_package_guidelines.html" title="Font package guidelines">Font</a> – <a href="../en/Free_Pascal_package_guidelines.html" title="Free Pascal package guidelines">Free Pascal</a> – <a href="../en/GNOME_package_guidelines.html" title="GNOME package guidelines">GNOME</a> – <a href="../en/Go_package_guidelines.html" title="Go package guidelines">Go</a> – <a href="../en/Haskell_package_guidelines.html" title="Haskell package guidelines">Haskell</a> – <a href="../en/Java_package_guidelines.html" title="Java package guidelines">Java</a> – <a href="../en/KDE_package_guidelines.html" title="KDE package guidelines">KDE</a> – <a href="../en/Kernel_module_package_guidelines.html" title="Kernel module package guidelines">Kernel modules</a> – <a href="../en/Lisp_package_guidelines.html" title="Lisp package guidelines">Lisp</a> – <a href="../en/Meson_package_guidelines.html" title="Meson package guidelines">Meson</a> – <a href="../en/MinGW_package_guidelines.html" title="MinGW package guidelines">MinGW</a> – <a href="../en/Node.js_package_guidelines.html" title="Node.js package guidelines">Node.js</a> – <a href="../en/Nonfree_applications_package_guidelines.html" title="Nonfree applications package guidelines">Nonfree</a> – <a href="../en/OCaml_package_guidelines.html" title="OCaml package guidelines">OCaml</a> – <a href="../en/Perl_package_guidelines.html" title="Perl package guidelines">Perl</a> – <a href="../en/PHP_package_guidelines.html" title="PHP package guidelines">PHP</a> – <a href="../en/Python_package_guidelines.html" title="Python package guidelines">Python</a> – <a href="../en/R_package_guidelines.html" title="R package guidelines">R</a> – <a href="../en/Ruby_package_guidelines.html" title="Ruby package guidelines">Ruby</a> – <a href="../en/Rust_package_guidelines.html" title="Rust package guidelines">Rust</a> - <a href="../en/Arch_package_guidelines/Security.html" title="Arch package guidelines/Security">Security</a> – <a href="../en/Shell_package_guidelines.html" title="Shell package guidelines">Shell</a> – <a class="mw-selflink selflink">VCS</a> – <a href="../en/Web_application_package_guidelines.html" title="Web application package guidelines">Web</a> – <a href="../en/Wine_package_guidelines.html" title="Wine package guidelines">Wine</a>
+</p>
+</div>
+<div class="archwiki-template-meta-related-articles">
+<p>Related articles</p>
+<ul>
+<li><a href="../en/Arch_User_Repository.html" title="Arch User Repository">Arch User Repository</a></li>
+<li><a href="../en/AUR_submission_guidelines.html" title="AUR submission guidelines">AUR submission guidelines</a></li>
+<li><a href="../en/PKGBUILD.html" title="PKGBUILD">PKGBUILD</a></li>
+</ul>
+</div>
+<p><a href="https://en.wikipedia.org/wiki/Revision_control" class="extiw" title="wikipedia:Revision control">Version control systems</a> can be used for retrieval of source code for usual statically versioned packages, and the latest (trunk) version of a development branch.
+</p>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> Use <code>/usr/share/pacman/PKGBUILD-vcs.proto</code> prototype provided by the <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=pacman">pacman</a></span> package.</div>
+<meta property="mw:PageProp/toc">
+<h2><span class="mw-headline" id="Package_naming">Package naming</span></h2>
+<p>Suffix <code><i>pkgname</i></code> with <code>-bzr</code>, <code>-cvs</code>, <code>-darcs</code>, <code>-git</code>, <code>-hg</code>, <code>-svn</code>, etc., unless the package fetches a specific release.
+</p>
+<h2><span class="mw-headline" id="Versioning">Versioning</span></h2>
+<p>If the resulting package is different after changing e.g. the dependencies, URL or sources — update <code>pkgver</code> to the latest version. If <code>pkgver</code> has not changed since the last update to the <code>PKGBUILD</code>, increase <code>pkgrel</code> instead.
+</p>
+<p>It is recommended to have following version format: <code><i>RELEASE</i>.r<i>REVISION</i></code>, where <code><i>REVISION</i></code> is a monotonically increasing number that uniquely identifies the source tree (VCS revisions do this). If there are no public releases and no repository tags then zero could be used as a release number or you can drop <code><i>RELEASE</i></code> completely and use version number that looks like <code>r<i>REVISION</i></code>. If there are public releases but repository has no tags then the developer should get the release version somehow e.g. by parsing the project files.
+</p>
+<p>The revision number delimiter — <code>r</code> right before <code><i>REVISION</i></code> — is important. This delimiter allows to avoid problems in case if upstream decides to make its first release or uses versions with different number of components. E.g. if at revision <code>455</code> upstream decides to release version <code>0.1</code>, then the revision delimiter preserves version monotonicity: <code>0.1.r456 &gt; r454</code>. Without the delimiter monotonicity fails: <code>0.1.456 &lt; 454</code>.
+</p>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> <code>--holdver</code> can be used to prevent <a href="../en/Makepkg.html" title="Makepkg">makepkg</a> from updating the <code>pkgver</code>, see <span class="plainlinks archwiki-template-man" title="$ man 8 makepkg"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/makepkg.8">makepkg(8)</a></span>.</div>
+<h2><span class="mw-headline" id="Conflicts_and_dependencies">Conflicts and dependencies</span></h2>
+<ul><li>Include what the package conflicts with and provides, e.g. for <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/fluxbox-git/">fluxbox-git</a></span><sup><small>AUR</small></sup>:</li></ul>
+<dl>
+<dd><pre>conflicts=('fluxbox')
+provides=("fluxbox=${pkgver}")
+</pre></dd>
+<dd><div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> See <a href="../en/PKGBUILD.html#provides" title="PKGBUILD">PKGBUILD#provides</a> for generic advice on versioning that is regularly relevant for VCS packages.</div></dd>
+</dl>
+<ul><li>
+<code>replaces=()</code> generally causes unnecessary problems and should be avoided.</li></ul>
+<ul><li>Include the appropriate VCS tool in <code>makedepends=()</code> — <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=cvs">cvs</a></span>, <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=subversion">subversion</a></span>, <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=git">git</a></span>, etc.</li></ul>
+<h2><span class="mw-headline" id="Authentication_and_security">Authentication and security</span></h2>
+<ul>
+<li>When using the cvsroot, use <code>anonymous:@</code> rather than <code>anonymous@</code> to avoid having to enter a blank password or <code>anonymous:password@</code>, if one is required.</li>
+<li>Because the sources are not static, skip the checksum in <code>sha256sums=()</code> by adding <code>'SKIP'</code>.</li>
+</ul>
+<h2><span class="mw-headline" id="VCS_sources">VCS sources</span></h2>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> Using sparse or shallow clones is voluntarily not supported, see <a rel="nofollow" class="external text" href="https://bugs.archlinux.org/task/34677">FS#34677</a> and the <a rel="nofollow" class="external text" href="https://lists.archlinux.org/archives/list/aur-requests@lists.archlinux.org/thread/4IM3GOPMSIW4IULKB5DTIY3FAOIQKIN6/#O3OB7N3R2G7QMRBDCPE7SYCYVS7VL5JS">mailing list</a>.</div>
+<p>The VCS sources should be specified in the <code>source</code> array and will be treated like any other source. <i>makepkg</i> will clone/checkout/branch the repository into <code>$SRCDEST</code> — same as <code>$startdir</code> if not set in <span class="plainlinks archwiki-template-man" title="$ man 5 makepkg.conf"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/makepkg.conf.5">makepkg.conf(5)</a></span>, and copy it to <code>$srcdir</code> (in a specific way to each VCS). The local repository is left untouched, thus invalidating the need for a <code>-build</code> directory.
+</p>
+<p>The general format of a <code>source</code> array is:
+</p>
+<pre>source=('[folder::][vcs+]url[#fragment]')
+</pre>
+<ul>
+<li>
+<code>folder</code> (optional) — is used to change the default repository name to something more relevant, e.g. than <code>trunk</code>, or to preserve the previous sources.</li>
+<li>
+<code>vcs+</code> is needed for URLs that do not reflect the VCS type, e.g. <code>git+https://some_repo</code>.</li>
+<li>
+<code>url</code> is the URL to the distant or local repository.</li>
+<li>
+<code>#fragment</code> (optional) — is needed to pull a specific branch or commit. See <span class="plainlinks archwiki-template-man" title="$ man 5 PKGBUILD"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/PKGBUILD.5#USING_VCS_SOURCES">PKGBUILD(5) § USING VCS SOURCES</a></span> for a list of supported VCS and the respective fragments available.</li>
+</ul>
+<p>An example <a href="../en/Git.html" title="Git">Git</a> source array:
+</p>
+<pre>source=('project_name::git+https://project_url#branch=project_branch')
+</pre>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Warning:</strong> Make sure not to use the <code>pkgver</code> variable in the <code>folder</code> field, as the variable may be changed during the <code>pkgver()</code> function call, which will make it impossible to access the created folder in subsequent functions.</div>
+<h2>
+<span id="The_pkgver.28.29_function"></span><span class="mw-headline" id="The_pkgver()_function">The pkgver() function</span>
+</h2>
+<p>The <code>pkgver</code> autobump is now achieved via a dedicated <code>pkgver()</code> function. This allows for better control over the <code>pkgver</code>, and maintainers should favor a <code>pkgver</code> that makes sense. To use <code>pkgver()</code>, you still need to declare the <code>pkgver</code> variable with the most recent value. <i>makepkg</i> will invoke function <code>pkgver()</code>, and update variable <code>pkgver</code> accordingly.
+</p>
+<h3><span class="mw-headline" id="Bazaar">Bazaar</span></h3>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">pkgver() {
+  cd "$pkgname"
+  printf "r%s" "$(bzr revno)"
+}</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">r830
+</pre>
+<h3><span class="mw-headline" id="Git">Git</span></h3>
+<p>Using the most recent annotated tag reachable from the last commit:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">pkgver() {
+  cd "$pkgname"
+  git describe --long --abbrev=7 | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
+}</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">2.0.r6.ga17a017
+</pre>
+<p>Using the most recent un-annotated tag reachable from the last commit:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">pkgver() {
+  cd "$pkgname"
+  git describe --long --tags --abbrev=7 | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
+}</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">0.71.r115.gd95ee07
+</pre>
+<p>In case if the <span class="plainlinks archwiki-template-man" title="$ man 1 git-tag"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/git-tag.1">git-tag(1)</a></span> does not contain dashes then one can use simpler <span class="plainlinks archwiki-template-man" title="$ man 1 sed"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/sed.1">sed(1)</a></span> expression <code>sed 's/-/.r/;s/-/./'</code>.
+</p>
+<p>If tag contains a prefix, like <code>v</code> or project name then it should be cut off:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">pkgver() {
+  cd "$pkgname"
+  # cutting off 'foo-' prefix that presents in the git tag
+  git describe --long --abbrev=7 | sed 's/^foo-//;s/\([^-]*-g\)/r\1/;s/-/./g'
+}</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">6.1.r3.gd77e105
+</pre>
+<p>If there are no tags then use number of revisions since beginning of the history:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">pkgver() {
+  cd "$pkgname"
+  printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short=7 HEAD)"
+}</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">r1142.a17a017
+</pre>
+<p>Version and only commit/revision number (<a href="https://en.wikipedia.org/wiki/SHA-1" class="extiw" title="wikipedia:SHA-1">SHA-1</a> omitted; however, without a SHA-1 quick referencing of an exact revision is lost if not mindful of versioning):
+</p>
+<pre>git describe --long --abbrev=7 --tags | sed 's/\([^-]*\)-g.*/r\1/;s/-/./g'
+</pre>
+<p>Both methods can also be combined, to support repositories that start without a tag but get tagged later on (uses a bashism):
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">pkgver() {
+  cd "$pkgname"
+  ( set -o pipefail
+    git describe --long --abbrev=7 2&gt;/dev/null | sed 's/\([^-]*-g\)/r\1/;s/-/./g' ||
+    printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short=7 HEAD)"
+  )
+}</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">0.9.9.r27.g2b039da  # if tags exist
+r1581.2b039da       # else fallback
+</pre>
+<h3><span class="mw-headline" id="Mercurial">Mercurial</span></h3>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">pkgver() {
+  cd "$pkgname"
+  printf "r%s.%s" "$(hg identify -n)" "$(hg identify -i)"
+}</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">r2813.75881cc5391e
+</pre>
+<h3><span class="mw-headline" id="Subversion">Subversion</span></h3>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">pkgver() {
+  cd "$pkgname"
+  local ver="$(svnversion)"
+  printf "r%s" "${ver//[[:alpha:]]}"
+}</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">r8546
+</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> If the project has releases you should use them instead of the <code>0.</code>.</div>
+<h3><span class="mw-headline" id="Fallback">Fallback</span></h3>
+<p>In case no satisfactory <code>pkgver</code> can be extracted from the repository, the current <span class="plainlinks archwiki-template-man" title="$ man 1 date"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/date.1">date(1)</a></span> can be used:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">pkgver() {
+  date +%Y%m%d
+}</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">20130408
+</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> It does not identify the source tree state uniquely, so avoid it if possible.</div>
+<h2><span class="mw-headline" id="Tips_and_tricks">Tips and tricks</span></h2>
+<h3><span class="mw-headline" id="Git_submodules">Git submodules</span></h3>
+<p>Git submodules are a little tricky to do. The idea is to add the URLs of the submodules themselves directly to the sources array and then reference them during <code>prepare()</code>.
+</p>
+<p>Downstream project developers may not name their submodule as the same name as the upstream module's repository. To view the name of the Git submodules, go to the <code>.gitmodules</code> file in the project's repository and preview it. For example, a repository named <code><i>lib-dependency</i></code> by the upstream developers may be registered as a submodule named <code><i>libs/libdep</i></code> in <code>.gitmodules</code> downstream.
+</p>
+<pre>[submodule "libs/libdep"]
+  path = libs/libdep
+  url = https://example.org/lib-dependency/lib-dependency.git
+</pre>
+<pre>source=("git+https://example.org/main-project/main-project.git"
+        "git+https://example.org/lib-dependency/lib-dependency.git")
+
+prepare() {
+  cd main-project
+  git submodule init
+  git config submodule.libs/libdep.url "$srcdir/lib-dependency"
+  git -c protocol.file.allow=always submodule update
+}
+</pre>
+<h3><span class="mw-headline" id="Git_LFS">Git LFS</span></h3>
+<p>Git LFS needs a bit of extra setup:
+</p>
+<pre>makedepends=(... 'git-lfs')
+</pre>
+<pre>prepare() {
+  git lfs install --local
+  git remote add network-origin https://example.org/upstream/lfs/repo
+  git lfs fetch network-origin
+  git lfs checkout
+}
+</pre>
+<p>This also works when the LFS is used in submodules:
+</p>
+<pre>prepare() {
+  git submodule init
+  git config submodule.libs/libdep.url "$srcdir/lib-dependency"
+  git -c protocol.file.allow=always submodule update
+
+  git -C libs/libdep lfs install --local
+  git -C libs/libdep remote add network-origin https://example.org/upstream/lfs/repo
+  git -C libs/libdep lfs fetch network-origin
+  git -C libs/libdep lfs checkout
+}
+</pre>
+<h3><span class="mw-headline" id="Git_checksums">Git checksums</span></h3>
+<p>When referencing stable git tags or specific commits as a source via <code>git+https://domain.invalid/repository.git#tag=v1.0.0</code>, it is possible to specify their checksum in the <code>PKGBUILD</code>. To do so, simply use <code>makepkg -g</code> or <code>updatepkgsums</code> to generate them as you would for any other non-git source.
+</p>
+</div>
+</div>
+					<div id="catlinks" class="catlinks" data-mw="interface"><div id="mw-normal-catlinks" class="mw-normal-catlinks">
+<a href="../Special:Categories.html" title="Special:Categories">Category</a>: <ul><li><a href="../en/Category:Arch_package_guidelines.html" title="Category:Arch package guidelines">Arch package guidelines</a></li></ul>
+</div></div>
+				</div>
+			</main>
+			
+		</div>
+		<div class="mw-footer-container">
+			
+<footer id="footer" class="mw-footer" style="margin: 0">
+	<ul id="footer-info">
+	<li data-nosnippet="">Retrieved from "<a dir="ltr" href="https://wiki.archlinux.org/index.php?title=VCS_package_guidelines&amp;oldid=826458">https://wiki.archlinux.org/index.php?title=VCS_package_guidelines&amp;oldid=826458</a>"</li>
+<li id="footer-info-lastmod"> This page was last edited on 5 February 2025, at 21:33.</li>
+	<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+<br>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="https://terms.archlinux.org/docs/privacy-policy/">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="../en/ArchWiki:About.html">About ArchWiki</a></li>
+	<li id="footer-places-disclaimers"><a href="../en/ArchWiki:General_disclaimer.html">Disclaimers</a></li>
+	<li id="footer-places-archwiki-code-of-conduct"><a href="https://terms.archlinux.org/docs/code-of-conduct/" class="extiw" title="archlinux-service-agreements:code-of-conduct">Code of conduct</a></li>
+	<li id="footer-places-archwiki-terms-of-service"><a href="https://terms.archlinux.org/docs/terms-of-service/" class="extiw" title="archlinux-service-agreements:terms-of-service">Terms of service</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-copyrightico"><a href="https://www.gnu.org/copyleft/fdl.html" class="cdx-button cdx-button--fake-button cdx-button--size-large cdx-button--fake-button--enabled"><img src="/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" loading="lazy"></a></li>
+	<li id="footer-poweredbyico"><img src="/resources/assets/poweredby_mediawiki.svg" width="88" height="31" loading="lazy"></li>
+</ul>
+
+</footer>
+
+		</div>
+	</div> 
+</div> 
+<div class="vector-settings" id="p-dock-bottom">
+	<ul></ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<h1>case</h1>
+
+<blockquote><p>Bash builtin construct for creating multi-choice conditional statements.
+More information: <a href="https://www.gnu.org/software/bash/manual/bash.html#index-case">https://www.gnu.org/software/bash/manual/bash.html#index-case</a>.</p></blockquote>
+
+<ul>
+<li>Match a variable against string literals to decide which command to run:</li>
+</ul>
+
+
+<p><code>case {{$COUNTRULE}} in {{words}}) {{wc --words README}} ;; {{lines}}) {{wc --lines README}} ;; esac</code></p>
+
+<ul>
+<li>Combine patterns with |, use * as a fallback pattern:</li>
+</ul>
+
+
+<p><code>case {{$COUNTRULE}} in {{[wW]|words}}) {{wc --words README}} ;; {{[lL]|lines}}) {{wc --lines README}} ;; *) {{echo "what?"}} ;; esac</code></p>
+
+<ul>
+<li>Allow matching multiple patterns:</li>
+</ul>
+
+
+<p><code>case {{$ANIMAL}} in {{cat}}) echo "It's a cat" ;;&amp; {{cat|dog}}) echo "It's a cat or a dog" ;;&amp; *) echo "Fallback" ;; esac</code></p>
+
+<ul>
+<li>Continue to the next pattern&rsquo;s commands without checking the pattern:</li>
+</ul>
+
+
+<p><code>case {{$ANIMAL}} in {{cat}}) echo "It's a cat" ;&amp; {{dog}}) echo "It's either a dog or cat fell through" ;&amp; *) echo "Fallback" ;; esac</code></p>
+
+<ul>
+<li>Display help:</li>
+</ul>
+
+
+<p><code>help case</code></p>

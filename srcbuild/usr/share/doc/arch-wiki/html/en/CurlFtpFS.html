@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-sticky-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-0 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-disabled skin-theme-clientpref-day vector-toc-available" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>CurlFtpFS - ArchWiki</title>
+<link rel="stylesheet" href="../ArchWikiOffline.css">
+<meta name="ResourceLoaderDynamicStyles" content="">
+<meta name="generator" content="MediaWiki 1.43.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="max-image-preview:standard">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.25, maximum-scale=5.0">
+<link rel="search" type="application/opensearchdescription+xml" href="/rest.php/v1/search" title="ArchWiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.archlinux.org/api.php?action=rsd">
+<link rel="license" href="https://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="ArchWiki Atom feed" href="/index.php?title=Special:RecentChanges&amp;feed=atom">
+</head>
+<body class="skin--responsive skin-vector skin-vector-search-vue mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-CurlFtpFS rootpage-CurlFtpFS skin-vector-2022 action-view">
+<a class="mw-jump-link" href="#bodyContent">Jump to content</a>
+<div class="vector-header-container">
+	</div>
+<div class="mw-page-container">
+	<div class="mw-page-container-inner">
+		<div class="vector-column-start">
+			<div class="vector-main-menu-container">
+		</div>
+	<div class="vector-sticky-pinned-container">
+				<nav id="mw-panel-toc" aria-label="Contents" data-event-name="ui.sidebar-toc" class="mw-table-of-contents-container vector-toc-landmark">
+					<div id="vector-toc-pinned-container" class="vector-pinned-container">
+					<div id="vector-toc" class="vector-toc vector-pinnable-element">
+	<div class="vector-pinnable-header vector-toc-pinnable-header vector-pinnable-header-pinned" data-feature-name="toc-pinned" data-pinnable-element-id="vector-toc">
+	<h2 class="vector-pinnable-header-label">Contents</h2>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-toc.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-toc.unpin">hide</button>
+</div>
+
+
+	<ul class="vector-toc-contents" id="mw-panel-toc-list">
+		<li id="toc-mw-content-text" class="vector-toc-list-item vector-toc-level-1">
+			<a href="#" class="vector-toc-link">
+				<div class="vector-toc-text">Beginning</div>
+			</a>
+		</li>
+		<li id="toc-Installation" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Installation">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">1</span>
+				<span>Installation</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Installation-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Mount_FTP_folder_as_root" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Mount_FTP_folder_as_root">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">2</span>
+				<span>Mount FTP folder as root</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Mount_FTP_folder_as_root-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Mount_FTP_folder_as_normal_user" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Mount_FTP_folder_as_normal_user">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">3</span>
+				<span>Mount FTP folder as normal user</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Mount_FTP_folder_as_normal_user-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Connect_to_encrypted_server" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Connect_to_encrypted_server">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">4</span>
+				<span>Connect to encrypted server</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Connect_to_encrypted_server-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Troubleshooting" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Troubleshooting">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">5</span>
+				<span>Troubleshooting</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Troubleshooting-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Troubleshooting subsection</span>
+			</button>
+		
+		<ul id="toc-Troubleshooting-sublist" class="vector-toc-list">
+			<li id="toc-Unable_to_access_files_with_non_percent-encoded_characters_in_their_filename" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Unable_to_access_files_with_non_percent-encoded_characters_in_their_filename">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.1</span>
+					<span>Unable to access files with non percent-encoded characters in their filename</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Unable_to_access_files_with_non_percent-encoded_characters_in_their_filename-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+</ul>
+</div>
+
+					</div>
+		</nav>
+			</div>
+		</div>
+		<div class="mw-content-container">
+			<main id="content" class="mw-body" style="margin: 0">
+				<header class="mw-body-header vector-page-titlebar">
+					<nav aria-label="Contents" class="vector-toc-landmark">
+						
+<div id="vector-page-titlebar-toc" class="vector-dropdown vector-page-titlebar-toc vector-button-flush-left">
+	<input type="checkbox" id="vector-page-titlebar-toc-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-page-titlebar-toc" class="vector-dropdown-checkbox " aria-label="Toggle the table of contents">
+	<label id="vector-page-titlebar-toc-label" for="vector-page-titlebar-toc-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"><span class="vector-icon mw-ui-icon-listBullet mw-ui-icon-wikimedia-listBullet"></span>
+
+<span class="vector-dropdown-label-text">Toggle the table of contents</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+							<div id="vector-page-titlebar-toc-unpinned-container" class="vector-unpinned-container">
+			</div>
+		
+	</div>
+</div>
+
+					</nav>
+					<h1 id="firstHeading" class="firstHeading mw-first-heading"><span class="mw-page-title-main">CurlFtpFS</span></h1>
+							
+<div id="p-lang-btn" class="vector-dropdown mw-portlet mw-portlet-lang">
+	<input type="checkbox" id="p-lang-btn-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-p-lang-btn" class="vector-dropdown-checkbox mw-interlanguage-selector" aria-label="Go to an article in another language. Available in 2 languages">
+	<label id="p-lang-btn-label" for="p-lang-btn-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--action-progressive mw-portlet-lang-heading-2" aria-hidden="true"><span class="vector-icon mw-ui-icon-language-progressive mw-ui-icon-wikimedia-language-progressive"></span>
+
+<span class="vector-dropdown-label-text">2 languages</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+		<div class="vector-menu-content">
+			
+			<ul class="vector-menu-content-list">
+				
+				<li class="interlanguage-link interwiki-ja mw-list-item"><a href="https://wiki.archlinux.jp/index.php/CurlFtpFS" title="CurlFtpFS – 日本語" lang="ja" hreflang="ja" data-title="CurlFtpFS" data-language-autonym="日本語" data-language-local-name="日本語" class="interlanguage-link-target"><span>日本語</span></a></li>
+<li class="interlanguage-link interwiki-zh-hans mw-list-item"><a href="https://wiki.archlinuxcn.org/wiki/CurlFtpFS" title="CurlFtpFS – 中文（简体）" lang="zh-Hans" hreflang="zh-Hans" data-title="CurlFtpFS" data-language-autonym="中文（简体）" data-language-local-name="中文（简体）" class="interlanguage-link-target"><span>中文（简体）</span></a></li>
+			</ul>
+			
+		</div>
+
+	</div>
+</div>
+</header>
+				<div class="vector-column-end">
+					<div class="vector-sticky-pinned-container">
+						<nav class="vector-page-tools-landmark" aria-label="Page tools">
+							<div id="vector-page-tools-pinned-container" class="vector-pinned-container">
+				
+							</div>
+		</nav>
+						<nav class="vector-appearance-landmark" aria-label="Appearance">
+							<div id="vector-appearance-pinned-container" class="vector-pinned-container">
+				<div id="vector-appearance" class="vector-appearance vector-pinnable-element">
+	<div class="vector-pinnable-header vector-appearance-pinnable-header vector-pinnable-header-pinned" data-feature-name="appearance-pinned" data-pinnable-element-id="vector-appearance" data-pinned-container-id="vector-appearance-pinned-container" data-unpinned-container-id="vector-appearance-unpinned-container">
+	<div class="vector-pinnable-header-label">Appearance</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-appearance.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-appearance.unpin">hide</button>
+</div>
+
+
+</div>
+
+							</div>
+		</nav>
+					</div>
+				</div>
+				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container>
+					<div class="vector-body-before-content">
+							<div class="mw-indicators">
+		</div>
+
+						<div id="siteSub" class="noprint">From ArchWiki</div>
+					</div>
+					<div id="contentSub"><div id="mw-content-subtitle"></div></div>
+					
+					
+					<div id="mw-content-text" class="mw-body-content">
+<div class="mw-content-ltr mw-parser-output" lang="en" dir="ltr">
+<div class="archwiki-template-meta-related-articles">
+<p>Related articles</p>
+<ul>
+<li><a href="../en/List_of_applications/Internet.html#FTP_clients" title="List of applications/Internet">List of applications/Internet#FTP clients</a></li>
+</ul>
+</div>
+<p><a rel="nofollow" class="external text" href="https://curlftpfs.sourceforge.net/">CurlFtpFS</a> is a filesystem for accessing FTP hosts based on <a href="../en/FUSE.html" title="FUSE">FUSE</a> and libcurl.
+</p>
+<meta property="mw:PageProp/toc">
+<h2><span class="mw-headline" id="Installation">Installation</span></h2>
+<p><a href="../en/Help:Reading.html#Installation_of_packages" class="mw-redirect" title="Install">Install</a> the <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=curlftpfs">curlftpfs</a></span> package.
+</p>
+<p>Make sure the <a href="../en/Kernel_module.html" title="Kernel module">kernel module</a> has been loaded.
+</p>
+<pre># modprobe fuse
+</pre>
+<h2><span class="mw-headline" id="Mount_FTP_folder_as_root">Mount FTP folder as root</span></h2>
+<p>Create the mount point and then mount the FTP folder.
+</p>
+<pre># mkdir /mnt/ftp
+# curlftpfs ftp.example.com /mnt/ftp/ -o user=username:password
+</pre>
+<p>If you want to give other (regular) users access right, use the <code>allow_other</code> option:
+</p>
+<pre># curlftpfs ftp.example.com /mnt/ftp/ -o user=username:password,allow_other
+</pre>
+<p>Do not add space after the comma or the <code>allow_other</code> argument will not be recognized.
+</p>
+<p>To use FTP in active mode add the option <code>ftp_port=-</code>:
+</p>
+<pre># curlftpfs ftp.example.com /mnt/ftp/ -o user=username:password,allow_other,ftp_port=-
+</pre>
+<p>You can add this line to <code>/etc/fstab</code> to mount automatically.
+</p>
+<pre>curlftpfs#USER:PASSWORD@ftp.example.com /mnt/exampleorg fuse auto,user,uid=1000,allow_other,_netdev 0 0
+</pre>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> You can use <code>codepage="<i>string</i>"</code> when having problems with non-US English characters on servers that do not support UTF8, e.g. <code>codepage="iso8859-1"</code>.</div>
+<p>To prevent the password to be shown in the process list, create a <code>.netrc</code> file in the home directory of the user running curlftpfs and <code>chmod 600</code> with the following content:
+</p>
+<pre>machine ftp.example.com
+login username
+password mypassword
+</pre>
+<h2><span class="mw-headline" id="Mount_FTP_folder_as_normal_user">Mount FTP folder as normal user</span></h2>
+<p>You can also mount as normal user (always use the <code>.netrc</code> file for the credentials and ssl encryption!):
+</p>
+<pre>$ mkdir ~/example
+$ curlftpfs -o ssl,utf8 ftp://example.com/ ~/example
+</pre>
+<p>if the answer is
+</p>
+<pre>Error connecting to ftp: QUOT command failed with 500
+</pre>
+<p>then the server does not support the <code>utf8</code> option. Leave it out and all will be fine.
+</p>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> If need be try setting the encoding with for example <code>-o codepage="iso8859-1"</code>.</div>
+<p>To unmount:
+</p>
+<pre>$ fusermount -u ~/example
+</pre>
+<h2><span class="mw-headline" id="Connect_to_encrypted_server">Connect to encrypted server</span></h2>
+<p>In its default settings, CurlFtpFS will authenticate in cleartext when connecting to a non encrypted connection port. If the remote server is configured to refuse non encrypted authentication method / force encrypted authentication, CurlFtpFS will return a 
+</p>
+<pre># Error connecting to ftp: Access denied: 530
+</pre>
+<p>To authenticate to the ftp server using explicit encrypted authentication, you must specify the ssl option. 
+</p>
+<pre># curlftpfs ftp.example.com /mnt/ftp/ -o ssl,user=username:password
+</pre>
+<p>If your server uses a self-generated certificate not trusted by your computer, you can specify to ignore it
+</p>
+<pre># curlftpfs ftp.example.com /mnt/ftp/ -o ssl,no_verify_peer,no_verify_hostname,user=username:password
+</pre>
+<p>For more details, see the <span class="plainlinks archwiki-template-man" title="$ man 1 curlftpfs"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/curlftpfs.1">curlftpfs(1)</a></span> man page.
+</p>
+<h2><span class="mw-headline" id="Troubleshooting">Troubleshooting</span></h2>
+<h3><span class="mw-headline" id="Unable_to_access_files_with_non_percent-encoded_characters_in_their_filename">Unable to access files with non percent-encoded characters in their filename</span></h3>
+<p>This is a bug which has been initially reported in <a rel="nofollow" class="external text" href="https://bugs.launchpad.net/ubuntu/+source/curlftpfs/+bug/783033">Launchpad bug 783033</a> in 2011 regarding paths with "#", confirmed in 2013 with no further activity. An <a rel="nofollow" class="external text" href="https://sourceforge.net/p/curlftpfs/bugs/54/">upstream bug report</a> links to a <a rel="nofollow" class="external text" href="https://github.com/jomat/curlftpfs">potential patch</a>, which also fixes a <a rel="nofollow" class="external text" href="https://github.com/curl/curl/issues/7621">breaking change</a> in <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=curl">curl</a></span>.
+</p>
+</div>
+</div>
+					<div id="catlinks" class="catlinks" data-mw="interface"><div id="mw-normal-catlinks" class="mw-normal-catlinks">
+<a href="../Special:Categories.html" title="Special:Categories">Categories</a>: <ul>
+<li><a href="../en/Category:FUSE.html" title="Category:FUSE">FUSE</a></li>
+<li><a href="../en/Category:File_Transfer_Protocol.html" title="Category:File Transfer Protocol">File Transfer Protocol</a></li>
+</ul>
+</div></div>
+				</div>
+			</main>
+			
+		</div>
+		<div class="mw-footer-container">
+			
+<footer id="footer" class="mw-footer" style="margin: 0">
+	<ul id="footer-info">
+	<li data-nosnippet="">Retrieved from "<a dir="ltr" href="https://wiki.archlinux.org/index.php?title=CurlFtpFS&amp;oldid=775958">https://wiki.archlinux.org/index.php?title=CurlFtpFS&amp;oldid=775958</a>"</li>
+<li id="footer-info-lastmod"> This page was last edited on 22 April 2023, at 15:08.</li>
+	<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+<br>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="https://terms.archlinux.org/docs/privacy-policy/">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="../en/ArchWiki:About.html">About ArchWiki</a></li>
+	<li id="footer-places-disclaimers"><a href="../en/ArchWiki:General_disclaimer.html">Disclaimers</a></li>
+	<li id="footer-places-archwiki-code-of-conduct"><a href="https://terms.archlinux.org/docs/code-of-conduct/" class="extiw" title="archlinux-service-agreements:code-of-conduct">Code of conduct</a></li>
+	<li id="footer-places-archwiki-terms-of-service"><a href="https://terms.archlinux.org/docs/terms-of-service/" class="extiw" title="archlinux-service-agreements:terms-of-service">Terms of service</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-copyrightico"><a href="https://www.gnu.org/copyleft/fdl.html" class="cdx-button cdx-button--fake-button cdx-button--size-large cdx-button--fake-button--enabled"><img src="/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" loading="lazy"></a></li>
+	<li id="footer-poweredbyico"><img src="/resources/assets/poweredby_mediawiki.svg" width="88" height="31" loading="lazy"></li>
+</ul>
+
+</footer>
+
+		</div>
+	</div> 
+</div> 
+<div class="vector-settings" id="p-dock-bottom">
+	<ul></ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-sticky-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-0 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-disabled skin-theme-clientpref-day vector-toc-available" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>pam_oath - ArchWiki</title>
+<link rel="stylesheet" href="../ArchWikiOffline.css">
+<meta name="ResourceLoaderDynamicStyles" content="">
+<meta name="generator" content="MediaWiki 1.43.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="max-image-preview:standard">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.25, maximum-scale=5.0">
+<link rel="search" type="application/opensearchdescription+xml" href="/rest.php/v1/search" title="ArchWiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.archlinux.org/api.php?action=rsd">
+<link rel="license" href="https://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="ArchWiki Atom feed" href="/index.php?title=Special:RecentChanges&amp;feed=atom">
+</head>
+<body class="skin--responsive skin-vector skin-vector-search-vue mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Pam_oath rootpage-Pam_oath skin-vector-2022 action-view">
+<a class="mw-jump-link" href="#bodyContent">Jump to content</a>
+<div class="vector-header-container">
+	</div>
+<div class="mw-page-container">
+	<div class="mw-page-container-inner">
+		<div class="vector-column-start">
+			<div class="vector-main-menu-container">
+		</div>
+	<div class="vector-sticky-pinned-container">
+				<nav id="mw-panel-toc" aria-label="Contents" data-event-name="ui.sidebar-toc" class="mw-table-of-contents-container vector-toc-landmark">
+					<div id="vector-toc-pinned-container" class="vector-pinned-container">
+					<div id="vector-toc" class="vector-toc vector-pinnable-element">
+	<div class="vector-pinnable-header vector-toc-pinnable-header vector-pinnable-header-pinned" data-feature-name="toc-pinned" data-pinnable-element-id="vector-toc">
+	<h2 class="vector-pinnable-header-label">Contents</h2>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-toc.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-toc.unpin">hide</button>
+</div>
+
+
+	<ul class="vector-toc-contents" id="mw-panel-toc-list">
+		<li id="toc-mw-content-text" class="vector-toc-list-item vector-toc-level-1">
+			<a href="#" class="vector-toc-link">
+				<div class="vector-toc-text">Beginning</div>
+			</a>
+		</li>
+		<li id="toc-Installation" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Installation">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">1</span>
+				<span>Installation</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Installation-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Setting_up_the_OATH" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Setting_up_the_OATH">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">2</span>
+				<span>Setting up the OATH</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Setting_up_the_OATH-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Setting_up_the_PAM" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Setting_up_the_PAM">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">3</span>
+				<span>Setting up the PAM</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Setting_up_the_PAM-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Logging_with_an_OATH_password" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Logging_with_an_OATH_password">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">4</span>
+				<span>Logging with an OATH password</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Logging_with_an_OATH_password-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-See_also" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#See_also">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">5</span>
+				<span>See also</span>
+			</div>
+		</a>
+		
+		<ul id="toc-See_also-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+</ul>
+</div>
+
+					</div>
+		</nav>
+			</div>
+		</div>
+		<div class="mw-content-container">
+			<main id="content" class="mw-body" style="margin: 0">
+				<header class="mw-body-header vector-page-titlebar">
+					<nav aria-label="Contents" class="vector-toc-landmark">
+						
+<div id="vector-page-titlebar-toc" class="vector-dropdown vector-page-titlebar-toc vector-button-flush-left">
+	<input type="checkbox" id="vector-page-titlebar-toc-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-page-titlebar-toc" class="vector-dropdown-checkbox " aria-label="Toggle the table of contents">
+	<label id="vector-page-titlebar-toc-label" for="vector-page-titlebar-toc-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"><span class="vector-icon mw-ui-icon-listBullet mw-ui-icon-wikimedia-listBullet"></span>
+
+<span class="vector-dropdown-label-text">Toggle the table of contents</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+							<div id="vector-page-titlebar-toc-unpinned-container" class="vector-unpinned-container">
+			</div>
+		
+	</div>
+</div>
+
+					</nav>
+					<h1 id="firstHeading" class="firstHeading mw-first-heading">pam_oath</h1>
+							
+<div id="p-lang-btn" class="vector-dropdown mw-portlet mw-portlet-lang">
+	<input type="checkbox" id="p-lang-btn-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-p-lang-btn" class="vector-dropdown-checkbox mw-interlanguage-selector" aria-label="Go to an article in another language. Available in 2 languages">
+	<label id="p-lang-btn-label" for="p-lang-btn-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--action-progressive mw-portlet-lang-heading-2" aria-hidden="true"><span class="vector-icon mw-ui-icon-language-progressive mw-ui-icon-wikimedia-language-progressive"></span>
+
+<span class="vector-dropdown-label-text">2 languages</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+		<div class="vector-menu-content">
+			
+			<ul class="vector-menu-content-list">
+				
+				<li class="interlanguage-link interwiki-ja mw-list-item"><a href="https://wiki.archlinux.jp/index.php/Pam_oath" title="Pam oath – 日本語" lang="ja" hreflang="ja" data-title="Pam oath" data-language-autonym="日本語" data-language-local-name="日本語" class="interlanguage-link-target"><span>日本語</span></a></li>
+<li class="interlanguage-link interwiki-zh-hans mw-list-item"><a href="https://wiki.archlinuxcn.org/wiki/Pam_oath" title="Pam oath – 中文（简体）" lang="zh-Hans" hreflang="zh-Hans" data-title="Pam oath" data-language-autonym="中文（简体）" data-language-local-name="中文（简体）" class="interlanguage-link-target"><span>中文（简体）</span></a></li>
+			</ul>
+			
+		</div>
+
+	</div>
+</div>
+</header>
+				<div class="vector-column-end">
+					<div class="vector-sticky-pinned-container">
+						<nav class="vector-page-tools-landmark" aria-label="Page tools">
+							<div id="vector-page-tools-pinned-container" class="vector-pinned-container">
+				
+							</div>
+		</nav>
+						<nav class="vector-appearance-landmark" aria-label="Appearance">
+							<div id="vector-appearance-pinned-container" class="vector-pinned-container">
+				<div id="vector-appearance" class="vector-appearance vector-pinnable-element">
+	<div class="vector-pinnable-header vector-appearance-pinnable-header vector-pinnable-header-pinned" data-feature-name="appearance-pinned" data-pinnable-element-id="vector-appearance" data-pinned-container-id="vector-appearance-pinned-container" data-unpinned-container-id="vector-appearance-unpinned-container">
+	<div class="vector-pinnable-header-label">Appearance</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-appearance.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-appearance.unpin">hide</button>
+</div>
+
+
+</div>
+
+							</div>
+		</nav>
+					</div>
+				</div>
+				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container>
+					<div class="vector-body-before-content">
+							<div class="mw-indicators">
+		</div>
+
+						<div id="siteSub" class="noprint">From ArchWiki</div>
+					</div>
+					<div id="contentSub"><div id="mw-content-subtitle"></div></div>
+					
+					
+					<div id="mw-content-text" class="mw-body-content">
+<div class="mw-content-ltr mw-parser-output" lang="en" dir="ltr">
+<div class="archwiki-template-meta-related-articles">
+<p>Related articles</p>
+<ul>
+<li><a href="../en/Initiative_for_Open_Authentication.html" class="mw-redirect" title="OATH">OATH</a></li>
+<li><a href="../en/Google_Authenticator.html" title="Google Authenticator">Google Authenticator</a></li>
+<li><a href="../en/YubiKey.html" title="YubiKey">YubiKey</a></li>
+</ul>
+</div>
+<p>The <a rel="nofollow" class="external text" href="https://www.nongnu.org/oath-toolkit/index.html">OATH Toolkit</a> provides one-time password (OTP) components for authentication systems. It contains a PAM authentication module that supports technologies include the event-based <a href="https://en.wikipedia.org/wiki/HMAC-based_One-time_Password_Algorithm" class="extiw" title="w:HMAC-based One-time Password Algorithm">HOTP algorithm</a> (<a href="https://tools.ietf.org/html/rfc4226" class="extiw" title="rfc:4226">RFC 4226</a>) and the time-based <a href="https://en.wikipedia.org/wiki/Time-based_One-time_Password_Algorithm" class="extiw" title="w:Time-based One-time Password Algorithm">TOTP algorithm</a> (<a href="https://tools.ietf.org/html/rfc6238" class="extiw" title="rfc:6238">RFC 6238</a>). The OTP generator applications are available for Android, iOS, Blackberry and other devices. Similar to <a href="../en/Google_Authenticator.html" title="Google Authenticator">Google Authenticator</a> the authentication mechanism integrates into the Linux <a href="../en/PAM.html" title="PAM">PAM</a> system. This guide shows the installation and configuration of this mechanism.
+</p>
+<meta property="mw:PageProp/toc">
+<h2><span class="mw-headline" id="Installation">Installation</span></h2>
+<p><a href="../en/Help:Reading.html#Installation_of_packages" class="mw-redirect" title="Install">Install</a> the <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=oath-toolkit">oath-toolkit</a></span> package.
+</p>
+<h2><span class="mw-headline" id="Setting_up_the_OATH">Setting up the OATH</span></h2>
+<p>The OATH seed is an hexadecimal number that should be unique per user. To generate a new seed for a user, you could use the following command line:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">$ openssl rand -hex 10</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">12345678909876543210
+</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> The above output seed is used as example in this article and <b>must not</b> be used directly.</div>
+<p>There needs to be one OATH per user and link to it in a configuration file <code>/etc/users.oath</code>. While being <a href="../en/Users_and_groups.html#Overview" class="mw-redirect" title="Root user">Root user</a> create the file and insert the user seed:
+</p>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> Log in to a session with root user privileges in one terminal and modify the PAM configuration in another terminal. In this way, if you have a problem with your PAM settings, you still have an account to log in and fix it, which is especially useful when connecting remotely.</div>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/users.oath</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;"># Option User Prefix Seed
+HOTP/T30/6 <i>user</i> - <i>12345678909876543210</i>
+</pre>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Warning:</strong> Do not set T bigger than 60，otherwise you will get error：(OATH_UNKNOWN_USER: Cannot find information about user).</div>
+<p>If you need HOTP, use this configuration:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/users.oath</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;"># Option User Prefix Seed
+HOTP <i>user</i> - <i>12345678909876543210</i>
+</pre>
+<p>Make sure that the file can only be accessed by Root user:
+</p>
+<pre># chmod 600 /etc/users.oath
+# chown root /etc/users.oath
+</pre>
+<h2><span class="mw-headline" id="Setting_up_the_PAM">Setting up the PAM</span></h2>
+<p>To enable OATH for a specific service only, like <a href="../en/OpenSSH.html" title="OpenSSH">OpenSSH</a>, you can edit the file <code>/etc/pam.d/sshd</code> and add at the beginning of the file the following line:
+</p>
+<pre>auth	  sufficient pam_oath.so usersfile=/etc/users.oath window=30 digits=6
+</pre>
+<p>This will allow authentication if you just enter the right OATH code. You can make OATH as a requirement and let the rest of the PAM stack be processed if you use the following line instead:
+</p>
+<pre>auth	  required pam_oath.so usersfile=/etc/users.oath window=30 digits=6
+</pre>
+<p>For SSH login to work, make sure these options are enabled in the file <code>/etc/ssh/sshd_config</code>:
+</p>
+<pre>ChallengeResponseAuthentication yes
+UsePAM yes
+</pre>
+<p><a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Restart">Restart</a> <code>sshd.service</code> to enable the changes.
+</p>
+<p>If you want to force OATH request-response even if there is a working public key authentication and password authentication also add the following in <code>/etc/ssh/sshd_config</code>:
+</p>
+<pre>AuthenticationMethods publickey,keyboard-interactive:pam
+KbdInteractiveAuthentication yes
+PasswordAuthentication yes
+</pre>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> For local login, just edit <code>/etc/pam.d/login</code>.</div>
+<h2><span class="mw-headline" id="Logging_with_an_OATH_password">Logging with an OATH password</span></h2>
+<p>For logging in with TOTP:
+</p>
+<pre>$ oathtool -v --totp -d 6 <i>12345678909876543210</i>
+</pre>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Warning:</strong> There is an error when TOTP mode setting <code>SHA512</code>, but the developers did not fix it. See the <a rel="nofollow" class="external text" href="https://gitlab.com/oath-toolkit/oath-toolkit/issues/8">open issue on Gitlab</a>.</div>
+<p>If you are logging in with HOTP:
+</p>
+<pre>$ oathtool -v -d 6 <i>12345678909876543210</i>
+</pre>
+<p>Replace <code><i>12345678909876543210</i></code> by the seed corresponding to your user. It will output something like the following:
+</p>
+<pre>Hex secret: 1ab4321412aebc
+Base32 secret: DK2DEFASV26A====
+Digits: 6
+Window size: 0
+Start counter: 0x0 (0)
+
+820170
+</pre>
+<p>The last string of numbers can be used as a code for login right now, but more interestingly the Base32 secret, because it can be converted to QR code for easily transferring keys. Install the package <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=qrencode">qrencode</a></span> to run the following command to convert:
+</p>
+<pre>$ qrencode -o <i>user</i>.png 'otpauth://totp/<i>user</i>@<i>machine</i>?secret=<i>DK2DEFASV26A===='</i>
+</pre>
+<p>Change <i>user</i>, <i>machine</i> and <code><i>DK2DEFASV26A====</i></code> accordingly. Once done, you can visualize your QR code with your preferred image visualizer application. Alternatively you may generate the QR code directly onto terminal with:
+</p>
+<pre>$ qrencode -t UTF8 'otpauth://totp/<i>user</i>@<i>machine</i>?secret=<i>DK2DEFASV26A===='</i>
+</pre>
+<p>It is pretty straight forward to use <a rel="nofollow" class="external text" href="https://f-droid.org/packages/com.beemdevelopment.aegis/">Aegis Authenticator</a> or <a rel="nofollow" class="external text" href="https://f-droid.org/packages/org.liberty.android.freeotpplus/">FreeOTP+</a> to then take a screenshot of that <code><i>user</i>.png</code> (or ASCII-art like image) and get it to display OTP password when needed.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> The secret key of your users is the most important information in this system. Once you setup a phone to provide OTP, it does have that key, the QR code in that <code><i>user</i>.png</code> file does have that key. You need to take extra care of this file, they should only be stored on encrypted medium (Your phone need to be using encryption for any sane level of security). If not even confined in a sandbox like Samsung Knox to prevent third party application to potentially access them.</div>
+<h2><span class="mw-headline" id="See_also">See also</span></h2>
+<ul>
+<li><a rel="nofollow" class="external text" href="https://spod.cx/blog/two-factor-ssh-auth-with-pam_oath-google-authenticator.shtml">Two-factor time based (TOTP) SSH authentication with pam_oath and Google Authenticator</a></li>
+<li><a rel="nofollow" class="external text" href="https://www.nongnu.org/oath-toolkit/pam_oath.html">pam_oath manual</a></li>
+</ul>
+</div>
+</div>
+					<div id="catlinks" class="catlinks" data-mw="interface"><div id="mw-normal-catlinks" class="mw-normal-catlinks">
+<a href="../Special:Categories.html" title="Special:Categories">Categories</a>: <ul>
+<li><a href="../en/Category:Secure_Shell.html" title="Category:Secure Shell">Secure Shell</a></li>
+<li><a href="../en/Category:Authentication.html" title="Category:Authentication">Authentication</a></li>
+</ul>
+</div></div>
+				</div>
+			</main>
+			
+		</div>
+		<div class="mw-footer-container">
+			
+<footer id="footer" class="mw-footer" style="margin: 0">
+	<ul id="footer-info">
+	<li data-nosnippet="">Retrieved from "<a dir="ltr" href="https://wiki.archlinux.org/index.php?title=Pam_oath&amp;oldid=795624">https://wiki.archlinux.org/index.php?title=Pam_oath&amp;oldid=795624</a>"</li>
+<li id="footer-info-lastmod"> This page was last edited on 30 December 2023, at 20:30.</li>
+	<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+<br>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="https://terms.archlinux.org/docs/privacy-policy/">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="../en/ArchWiki:About.html">About ArchWiki</a></li>
+	<li id="footer-places-disclaimers"><a href="../en/ArchWiki:General_disclaimer.html">Disclaimers</a></li>
+	<li id="footer-places-archwiki-code-of-conduct"><a href="https://terms.archlinux.org/docs/code-of-conduct/" class="extiw" title="archlinux-service-agreements:code-of-conduct">Code of conduct</a></li>
+	<li id="footer-places-archwiki-terms-of-service"><a href="https://terms.archlinux.org/docs/terms-of-service/" class="extiw" title="archlinux-service-agreements:terms-of-service">Terms of service</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-copyrightico"><a href="https://www.gnu.org/copyleft/fdl.html" class="cdx-button cdx-button--fake-button cdx-button--size-large cdx-button--fake-button--enabled"><img src="/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" loading="lazy"></a></li>
+	<li id="footer-poweredbyico"><img src="/resources/assets/poweredby_mediawiki.svg" width="88" height="31" loading="lazy"></li>
+</ul>
+
+</footer>
+
+		</div>
+	</div> 
+</div> 
+<div class="vector-settings" id="p-dock-bottom">
+	<ul></ul>
+</div>
+</body>
+</html>

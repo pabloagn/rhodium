@@ -1,0 +1,47 @@
+<h1>semanage</h1>
+
+<blockquote><p>SELinux persistent beleid beheertool.
+Sommige subcommando&rsquo;s zoals <code>boolean</code>, <code>fcontext</code>, <code>port</code>, etc. hebben hun eigen gebruiksdocumentatie.
+Meer informatie: <a href="https://manned.org/semanage">https://manned.org/semanage</a>.</p></blockquote>
+
+<ul>
+<li>Stel een SELinux-boolean in of uit. Booleans stellen de beheerder in staat om aan te passen hoe beleidsregels invloed hebben op ingesloten procestypes (ook wel domeinen genoemd):</li>
+</ul>
+
+
+<p><code>sudo semanage boolean {{[-m|--modify]}} {{-1|--on|-0|--off}} {{haproxy_connect_any}}</code></p>
+
+<ul>
+<li>Voeg een door de gebruiker gedefinieerde bestandscontextlabelregel toe. Bestandscontexten definiëren welke bestanden ingesloten domeinen mogen openen:</li>
+</ul>
+
+
+<p><code>sudo semanage fcontext {{[-a|--add]}} {{[-t|--type]}} {{samba_share_t}} '/mnt/share(/.*)?'</code></p>
+
+<ul>
+<li>Voeg een door de gebruiker gedefinieerde poortlabelregel toe. Poortlabels definiëren op welke poorten ingesloten domeinen mogen luisteren:</li>
+</ul>
+
+
+<p><code>sudo semanage port {{[-a|--add]}} {{[-t|--type]}} {{ssh_port_t}} {{[-p|--proto]}} {{tcp}} {{22000}}</code></p>
+
+<ul>
+<li>Stel de permissieve modus in of uit voor een ingesloten domein. Per-domein permissieve modus biedt meer gedetailleerde controle vergeleken met <code>setenforce</code>:</li>
+</ul>
+
+
+<p><code>sudo semanage permissive {{-a|--add|-d|--delete}} {{httpd_t}}</code></p>
+
+<ul>
+<li>Exporteer lokale aanpassingen in de standaardopslag:</li>
+</ul>
+
+
+<p><code>sudo semanage export {{[-f|--output_file]}} {{pad/naar/bestand}}</code></p>
+
+<ul>
+<li>Importeer een bestand gegenereerd door <code>semanage export</code> in lokale aanpassingen (VOORZICHTIG: kan huidige aanpassingen verwijderen!):</li>
+</ul>
+
+
+<p><code>sudo semanage import {{[-f|--input_file]}} {{pad/naar/bestand}}</code></p>

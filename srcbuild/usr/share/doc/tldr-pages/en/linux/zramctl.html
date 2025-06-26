@@ -1,0 +1,40 @@
+<h1>zramctl</h1>
+
+<blockquote><p>Setup and control zram devices.
+Use <code>mkfs</code> or <code>mkswap</code> to format zram devices to partitions.
+More information: <a href="https://manned.org/zramctl">https://manned.org/zramctl</a>.</p></blockquote>
+
+<ul>
+<li>Check if zram is enabled:</li>
+</ul>
+
+
+<p><code>lsmod | grep {{[-i|--ignore-case]}} zram</code></p>
+
+<ul>
+<li>Enable zram with a dynamic number of devices (use <code>zramctl</code> to configure devices further):</li>
+</ul>
+
+
+<p><code>sudo modprobe zram</code></p>
+
+<ul>
+<li>Enable zram with exactly 2 devices:</li>
+</ul>
+
+
+<p><code>sudo modprobe zram num_devices={{2}}</code></p>
+
+<ul>
+<li>Find and initialize the next free zram device to a 2 GB virtual drive using LZ4 compression:</li>
+</ul>
+
+
+<p><code>sudo zramctl {{[-f|--find]}} {{[-s|--size]}} {{2GB}} {{[-a|--algorithm]}} {{lz4}}</code></p>
+
+<ul>
+<li>List currently initialized devices:</li>
+</ul>
+
+
+<p><code>sudo zramctl</code></p>

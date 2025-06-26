@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-sticky-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-0 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-disabled skin-theme-clientpref-day vector-toc-available" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>Kernel mode setting (Русский) - ArchWiki</title>
+<link rel="stylesheet" href="../ArchWikiOffline.css">
+<meta name="ResourceLoaderDynamicStyles" content="">
+<meta name="generator" content="MediaWiki 1.43.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="max-image-preview:standard">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.25, maximum-scale=5.0">
+<link rel="search" type="application/opensearchdescription+xml" href="/rest.php/v1/search" title="ArchWiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.archlinux.org/api.php?action=rsd">
+<link rel="license" href="https://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="ArchWiki Atom feed" href="/index.php?title=Special:RecentChanges&amp;feed=atom">
+</head>
+<body class="skin--responsive skin-vector skin-vector-search-vue mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Kernel_mode_setting_Русский rootpage-Kernel_mode_setting_Русский skin-vector-2022 action-view">
+<a class="mw-jump-link" href="#bodyContent">Jump to content</a>
+<div class="vector-header-container">
+	</div>
+<div class="mw-page-container">
+	<div class="mw-page-container-inner">
+		<div class="vector-column-start">
+			<div class="vector-main-menu-container">
+		</div>
+	<div class="vector-sticky-pinned-container">
+				<nav id="mw-panel-toc" aria-label="Contents" data-event-name="ui.sidebar-toc" class="mw-table-of-contents-container vector-toc-landmark">
+					<div id="vector-toc-pinned-container" class="vector-pinned-container">
+					<div id="vector-toc" class="vector-toc vector-pinnable-element">
+	<div class="vector-pinnable-header vector-toc-pinnable-header vector-pinnable-header-pinned" data-feature-name="toc-pinned" data-pinnable-element-id="vector-toc">
+	<h2 class="vector-pinnable-header-label">Contents</h2>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-toc.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-toc.unpin">hide</button>
+</div>
+
+
+	<ul class="vector-toc-contents" id="mw-panel-toc-list">
+		<li id="toc-mw-content-text" class="vector-toc-list-item vector-toc-level-1">
+			<a href="#" class="vector-toc-link">
+				<div class="vector-toc-text">Beginning</div>
+			</a>
+		</li>
+		<li id="toc-История" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#%D0%98%D1%81%D1%82%D0%BE%D1%80%D0%B8%D1%8F">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">1</span>
+				<span>История</span>
+			</div>
+		</a>
+		
+		<ul id="toc-История-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Установка" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#%D0%A3%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B0">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">2</span>
+				<span>Установка</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Установка-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Установка subsection</span>
+			</button>
+		
+		<ul id="toc-Установка-sublist" class="vector-toc-list">
+			<li id="toc-Поздний_запуск_KMS" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#%D0%9F%D0%BE%D0%B7%D0%B4%D0%BD%D0%B8%D0%B9_%D0%B7%D0%B0%D0%BF%D1%83%D1%81%D0%BA_KMS">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1</span>
+					<span>Поздний запуск KMS</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Поздний_запуск_KMS-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Ранний_запуск_KMS" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#%D0%A0%D0%B0%D0%BD%D0%BD%D0%B8%D0%B9_%D0%B7%D0%B0%D0%BF%D1%83%D1%81%D0%BA_KMS">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2</span>
+					<span>Ранний запуск KMS</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Ранний_запуск_KMS-sublist" class="vector-toc-list">
+				<li id="toc-mkinitcpio" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#mkinitcpio">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2.1</span>
+					<span>mkinitcpio</span>
+				</div>
+			</a>
+			
+			<ul id="toc-mkinitcpio-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Booster" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Booster">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2.2</span>
+					<span>Booster</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Booster-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Решение_проблем" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#%D0%A0%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D0%B5_%D0%BF%D1%80%D0%BE%D0%B1%D0%BB%D0%B5%D0%BC">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">3</span>
+				<span>Решение проблем</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Решение_проблем-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Решение проблем subsection</span>
+			</button>
+		
+		<ul id="toc-Решение_проблем-sublist" class="vector-toc-list">
+			<li id="toc-Мои_шрифты_слишком_маленькие" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#%D0%9C%D0%BE%D0%B8_%D1%88%D1%80%D0%B8%D1%84%D1%82%D1%8B_%D1%81%D0%BB%D0%B8%D1%88%D0%BA%D0%BE%D0%BC_%D0%BC%D0%B0%D0%BB%D0%B5%D0%BD%D1%8C%D0%BA%D0%B8%D0%B5">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1</span>
+					<span>Мои шрифты слишком маленькие</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Мои_шрифты_слишком_маленькие-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Проблемы_во_время_загрузки_и_dmesg" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#%D0%9F%D1%80%D0%BE%D0%B1%D0%BB%D0%B5%D0%BC%D1%8B_%D0%B2%D0%BE_%D0%B2%D1%80%D0%B5%D0%BC%D1%8F_%D0%B7%D0%B0%D0%B3%D1%80%D1%83%D0%B7%D0%BA%D0%B8_%D0%B8_dmesg">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.2</span>
+					<span>Проблемы во время загрузки и dmesg</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Проблемы_во_время_загрузки_и_dmesg-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Принудительный_режим_и_EDID" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#%D0%9F%D1%80%D0%B8%D0%BD%D1%83%D0%B4%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9_%D1%80%D0%B5%D0%B6%D0%B8%D0%BC_%D0%B8_EDID">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">4</span>
+				<span>Принудительный режим и EDID</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Принудительный_режим_и_EDID-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Отключение_modesetting" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#%D0%9E%D1%82%D0%BA%D0%BB%D1%8E%D1%87%D0%B5%D0%BD%D0%B8%D0%B5_modesetting">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">5</span>
+				<span>Отключение modesetting</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Отключение_modesetting-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+</ul>
+</div>
+
+					</div>
+		</nav>
+			</div>
+		</div>
+		<div class="mw-content-container">
+			<main id="content" class="mw-body" style="margin: 0">
+				<header class="mw-body-header vector-page-titlebar">
+					<nav aria-label="Contents" class="vector-toc-landmark">
+						
+<div id="vector-page-titlebar-toc" class="vector-dropdown vector-page-titlebar-toc vector-button-flush-left">
+	<input type="checkbox" id="vector-page-titlebar-toc-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-page-titlebar-toc" class="vector-dropdown-checkbox " aria-label="Toggle the table of contents">
+	<label id="vector-page-titlebar-toc-label" for="vector-page-titlebar-toc-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"><span class="vector-icon mw-ui-icon-listBullet mw-ui-icon-wikimedia-listBullet"></span>
+
+<span class="vector-dropdown-label-text">Toggle the table of contents</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+							<div id="vector-page-titlebar-toc-unpinned-container" class="vector-unpinned-container">
+			</div>
+		
+	</div>
+</div>
+
+					</nav>
+					<h1 id="firstHeading" class="firstHeading mw-first-heading"><span class="mw-page-title-main">Kernel mode setting (Русский)</span></h1>
+							
+<div id="p-lang-btn" class="vector-dropdown mw-portlet mw-portlet-lang">
+	<input type="checkbox" id="p-lang-btn-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-p-lang-btn" class="vector-dropdown-checkbox mw-interlanguage-selector" aria-label="Go to an article in another language. Available in 6 languages">
+	<label id="p-lang-btn-label" for="p-lang-btn-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--action-progressive mw-portlet-lang-heading-6" aria-hidden="true"><span class="vector-icon mw-ui-icon-language-progressive mw-ui-icon-wikimedia-language-progressive"></span>
+
+<span class="vector-dropdown-label-text">6 languages</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+		<div class="vector-menu-content">
+			
+			<ul class="vector-menu-content-list">
+				
+				<li class="interlanguage-link interwiki-de mw-list-item"><a href="https://wiki.archlinux.de/title/KMS" title="KMS – Deutsch" lang="de" hreflang="de" data-title="KMS" data-language-autonym="Deutsch" data-language-local-name="Deutsch" class="interlanguage-link-target"><span>Deutsch</span></a></li>
+<li class="interlanguage-link interwiki-en mw-list-item"><a href="../en/Kernel_mode_setting.html" title="Kernel mode setting – English" lang="en" hreflang="en" data-title="Kernel mode setting" data-language-autonym="English" data-language-local-name="English" class="interlanguage-link-target"><span>English</span></a></li>
+<li class="interlanguage-link interwiki-es mw-list-item"><a href="../es/Kernel_mode_setting.html" title="Kernel mode setting – español" lang="es" hreflang="es" data-title="Kernel mode setting" data-language-autonym="Español" data-language-local-name="español" class="interlanguage-link-target"><span>Español</span></a></li>
+<li class="interlanguage-link interwiki-fr mw-list-item"><a href="../fr/Kernel_mode_setting.html" title="Kernel mode setting – français" lang="fr" hreflang="fr" data-title="Kernel mode setting" data-language-autonym="Français" data-language-local-name="français" class="interlanguage-link-target"><span>Français</span></a></li>
+<li class="interlanguage-link interwiki-ja mw-list-item"><a href="https://wiki.archlinux.jp/index.php/%E3%82%AB%E3%83%BC%E3%83%8D%E3%83%AB%E3%83%A2%E3%83%BC%E3%83%89%E8%A8%AD%E5%AE%9A" title="カーネルモード設定 – 日本語" lang="ja" hreflang="ja" data-title="カーネルモード設定" data-language-autonym="日本語" data-language-local-name="日本語" class="interlanguage-link-target"><span>日本語</span></a></li>
+<li class="interlanguage-link interwiki-zh-hans mw-list-item"><a href="https://wiki.archlinuxcn.org/wiki/Kernel_mode_setting" title="Kernel mode setting – 中文（简体）" lang="zh-Hans" hreflang="zh-Hans" data-title="Kernel mode setting" data-language-autonym="中文（简体）" data-language-local-name="中文（简体）" class="interlanguage-link-target"><span>中文（简体）</span></a></li>
+			</ul>
+			
+		</div>
+
+	</div>
+</div>
+</header>
+				<div class="vector-column-end">
+					<div class="vector-sticky-pinned-container">
+						<nav class="vector-page-tools-landmark" aria-label="Page tools">
+							<div id="vector-page-tools-pinned-container" class="vector-pinned-container">
+				
+							</div>
+		</nav>
+						<nav class="vector-appearance-landmark" aria-label="Appearance">
+							<div id="vector-appearance-pinned-container" class="vector-pinned-container">
+				<div id="vector-appearance" class="vector-appearance vector-pinnable-element">
+	<div class="vector-pinnable-header vector-appearance-pinnable-header vector-pinnable-header-pinned" data-feature-name="appearance-pinned" data-pinnable-element-id="vector-appearance" data-pinned-container-id="vector-appearance-pinned-container" data-unpinned-container-id="vector-appearance-unpinned-container">
+	<div class="vector-pinnable-header-label">Appearance</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-appearance.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-appearance.unpin">hide</button>
+</div>
+
+
+</div>
+
+							</div>
+		</nav>
+					</div>
+				</div>
+				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container>
+					<div class="vector-body-before-content">
+							<div class="mw-indicators">
+		</div>
+
+						<div id="siteSub" class="noprint">From ArchWiki</div>
+					</div>
+					<div id="contentSub"><div id="mw-content-subtitle"></div></div>
+					
+					
+					<div id="mw-content-text" class="mw-body-content">
+<div class="mw-content-ltr mw-parser-output" lang="ru" dir="ltr">
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Состояние перевода:</strong> На этой странице представлен перевод статьи <a href="../en/Kernel_mode_setting.html" title="Kernel mode setting">Kernel mode setting</a>. Дата последней синхронизации: 9 февраля 2022. Вы можете <a href="../ru/ArchWiki:Translation_Team.html" title="ArchWiki:Translation Team (Русский)">помочь</a> синхронизировать перевод, если в английской версии произошли <a rel="nofollow" class="external text" href="https://wiki.archlinux.org/index.php?title=Kernel_mode_setting&amp;diff=0&amp;oldid=714408">изменения</a>.</div>
+<div class="archwiki-template-meta-related-articles">
+<p>Ссылки по теме</p>
+<ul>
+<li><a href="../en/ATI.html" class="mw-redirect" title="ATI (Русский)">ATI (Русский)</a></li>
+<li><a href="../ru/Intel_graphics.html" title="Intel graphics (Русский)">Intel graphics (Русский)</a></li>
+<li><a href="../en/Nouveau.html" class="mw-redirect" title="Nouveau (Русский)">Nouveau (Русский)</a></li>
+</ul>
+</div>
+<p><a href="https://en.wikipedia.org/wiki/Mode_setting" class="extiw" title="wikipedia:Mode setting">Kernel Mode Setting</a> (KMS) представляет собой метод для задания разрешения дисплея и глубины в пространстве ядра, а не в пространстве пользователя.
+</p>
+<p>Реализация KMS в ядре Linux активирует родное расширение в <a href="../en/Uvesafb.html" class="mw-redirect" title="Framebuffer">framebuffer</a> и допускает мгновенное переключение консолей (tty).  KMS содержит новые технологии (такие как DRI2) которые помогают снизить количество артефактов и увеличить производительность в 3D, даже при включенном режиме энергосбережения.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Примечание:</strong> Проприетарный драйвер <a href="../ru/NVIDIA.html" title="NVIDIA (Русский)">NVIDIA</a> (с версии 364.12) также поддерживает KMS, но не использует встроенную реализацию ядра и не обеспечивает работу драйвера FBdev для отображения консоли с высоким разрешением.</div>
+<meta property="mw:PageProp/toc">
+<h2>
+<span id=".D0.98.D1.81.D1.82.D0.BE.D1.80.D0.B8.D1.8F"></span><span class="mw-headline" id="История">История</span>
+</h2>
+<p>Ранее настройками видео карты занимался непосредственно X сервер. По этой причине достигнуть высокого качества графики в tty консолях было непросто. Кроме того, каждый раз при переключении из X в виртуальную консоль с помощью комбинации клавиш (<code>Ctrl+Alt+F1</code>) сервер должен был передавать управление видеокартой ядру, что было медленным и вызывало мерцания. Особенно "болезненным" был переход управления обратно к X серверу (<code>Ctrl+Alt+F7</code>).
+</p>
+<p>С использованием Kernel Mode Setting (KMS) ядру стала доступна установка режимов видео карты. Наряду с другими достоинствами это улучшает визуальные эффекты при установке параметров графики, а также позволяет быстрее переключаться между виртуальными консолями и X.
+</p>
+<h2>
+<span id=".D0.A3.D1.81.D1.82.D0.B0.D0.BD.D0.BE.D0.B2.D0.BA.D0.B0"></span><span class="mw-headline" id="Установка">Установка</span>
+</h2>
+<p>Обратите внимание - для <i>любых</i> используемых Вами методов необходимо <i>всегда</i> отключать:
+</p>
+<ul>
+<li>Любые <code>vga=</code> режимы в загрузчике, так как это вызовет конфликт с разрешением, активированным в KMS.</li>
+<li>Любые <code>video=</code> строки, активирующие framebuffer, что вызовет конфликт с драйвером.</li>
+<li>Любые другие драйвера framebuffer (такие как <a href="../en/Uvesafb.html" title="Uvesafb">uvesafb</a>).</li>
+</ul>
+<h3>
+<span id=".D0.9F.D0.BE.D0.B7.D0.B4.D0.BD.D0.B8.D0.B9_.D0.B7.D0.B0.D0.BF.D1.83.D1.81.D0.BA_KMS"></span><span class="mw-headline" id="Поздний_запуск_KMS">Поздний запуск KMS</span>
+</h3>
+<p>Драйвера <a href="../ru/Intel_graphics.html" title="Intel graphics (Русский)">Intel</a>, <a href="../en/Nouveau.html" class="mw-redirect" title="Nouveau (Русский)">Nouveau</a> и <a href="../en/ATI.html" class="mw-redirect" title="ATI (Русский)">ATI</a> и <a href="../en/AMDGPU.html" class="mw-redirect" title="AMDGPU (Русский)">AMDGPU</a> уже активируют KMS автоматически для всех чипсетов и не требуют ручной настройки.
+</p>
+<p>Проприетарный драйвер <a href="../ru/NVIDIA.html" title="NVIDIA (Русский)">NVIDIA</a> поддерживает KMS с версии 364.12, но нужно <a href="../ru/NVIDIA.html#DRM_kernel_mode_setting" title="NVIDIA (Русский)">включить его вручную</a>.
+</p>
+<h3>
+<span id=".D0.A0.D0.B0.D0.BD.D0.BD.D0.B8.D0.B9_.D0.B7.D0.B0.D0.BF.D1.83.D1.81.D0.BA_KMS"></span><span class="mw-headline" id="Ранний_запуск_KMS">Ранний запуск KMS</span>
+</h3>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Совет:</strong> В случае проблем с разрешением проверьте, помогает ли <a href="#%D0%9F%D1%80%D0%B8%D0%BD%D1%83%D0%B4%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9_%D1%80%D0%B5%D0%B6%D0%B8%D0%BC_%D0%B8_EDID">принудительный режим</a>.</div>
+<p>Обычно KMS инициализируется после <a href="../ru/Arch_boot_process.html#initramfs" title="Arch boot process (Русский)">этапа initramfs</a>. Однако можно включить KMS уже на этапе initramfs. Добавьте нужный модуль для <a href="../ru/Xorg.html#%D0%A3%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B0_%D0%B4%D1%80%D0%B0%D0%B9%D0%B2%D0%B5%D1%80%D0%B0" title="Xorg (Русский)">видеодрайвера</a> в конфигурационный файл initramfs:
+</p>
+<ul>
+<li>
+<code>amdgpu</code> для <a href="../en/AMDGPU.html" class="mw-redirect" title="AMDGPU (Русский)">AMDGPU</a> ли <code>radeon</code> для старого драйвера <a href="../en/ATI.html" class="mw-redirect" title="ATI (Русский)">ATI</a>.</li>
+<li>
+<code>i915</code> для <a href="../ru/Intel_graphics.html" title="Intel graphics (Русский)">Intel graphics</a>.</li>
+<li>
+<code>nouveau</code> для открытого драйвера <a href="../en/Nouveau.html" class="mw-redirect" title="Nouveau (Русский)">Nouveau</a>.</li>
+<li>
+<code>mgag200</code> для Matrox.</li>
+<li>Для <a href="../en/QEMU.html" class="mw-redirect" title="QEMU (Русский)">QEMU</a> в зависимости от используемого режима графики: <code>virtio-gpu</code> для VirtIO, <code>qxl</code> для QXL или <code>cirrus</code> для Cirrus.</li>
+<li>
+<code>nvidia nvidia_modeset nvidia_uvm nvidia_drm</code> для проприетарного драйвера <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=nvidia">nvidia</a></span>. Смотрите <a href="../ru/NVIDIA.html#DRM_kernel_mode_setting" title="NVIDIA (Русский)">NVIDIA (Русский)#DRM kernel mode setting</a> для подробностей.</li>
+</ul>
+<p>Инструкции по настройке initramfs немного отличаются в зависимости от генератора initramfs, который вы используете.
+</p>
+<h4><span class="mw-headline" id="mkinitcpio">mkinitcpio</span></h4>
+<p>Пример раннего запуска KMS для Intel graphics:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/mkinitcpio.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">MODULES=(... i915 ...)</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Примечание:</strong> Пользователям Intel может понадобиться добавление <code>intel_agp</code> перед <code>i915</code> для подавления ошибок ACPI. Это может потребоваться для возобновления работы из спящего режима при изменённой конфигурации дисплея. Если вы используете PRIME GPU с Intel IGP в качестве основного GPU и AMD в качестве дискретного, добавление <code>intel_agp</code> может привести к проблемам при возобновлении работы из спящего режима (монитор не получает сигнала). Подробнее: <a rel="nofollow" class="external autonumber" href="https://bbs.archlinux.org/viewtopic.php?id=262043">[1]</a>
+</div>
+<p>Если Вы используете изменённый файл EDID (не совпадающий с преднастроенными разрешениями), следует встроить его в initramfs:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/mkinitcpio.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">FILES=(/usr/lib/firmware/edid/<i>ваш_edid</i>.bin)</pre>
+<p>После изменений <a href="../ru/Mkinitcpio.html#%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5_%D0%B7%D0%B0%D0%B3%D1%80%D1%83%D0%B7%D0%BE%D1%87%D0%BD%D0%BE%D0%B3%D0%BE_%D0%BE%D0%B1%D1%80%D0%B0%D0%B7%D0%B0" title="Mkinitcpio (Русский)">пересоберите образ initramfs</a>.
+</p>
+<h4><span class="mw-headline" id="Booster">Booster</span></h4>
+<p>Пример настройки <a href="../en/Booster.html" title="Booster">Booster</a>:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/booster.yaml</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">modules_force_load: i915
+</pre>
+<p>Добавление дополнительных файлов в образ:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/booster.yaml</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">extra_files: /usr/lib/firmware/edid/<i>ваш_edid</i>.bin
+</pre>
+<p>После изменений <a href="../en/Booster.html#Regenerate_booster_images" title="Booster">пересоберите</a> образы booster.
+</p>
+<h2>
+<span id=".D0.A0.D0.B5.D1.88.D0.B5.D0.BD.D0.B8.D0.B5_.D0.BF.D1.80.D0.BE.D0.B1.D0.BB.D0.B5.D0.BC"></span><span class="mw-headline" id="Решение_проблем">Решение проблем</span>
+</h2>
+<h3>
+<span id=".D0.9C.D0.BE.D0.B8_.D1.88.D1.80.D0.B8.D1.84.D1.82.D1.8B_.D1.81.D0.BB.D0.B8.D1.88.D0.BA.D0.BE.D0.BC_.D0.BC.D0.B0.D0.BB.D0.B5.D0.BD.D1.8C.D0.BA.D0.B8.D0.B5"></span><span class="mw-headline" id="Мои_шрифты_слишком_маленькие">Мои шрифты слишком маленькие</span>
+</h3>
+<p>В статье <a href="../ru/Linux_console.html#%D0%A8%D1%80%D0%B8%D1%84%D1%82%D1%8B" class="mw-redirect" title="Консоль Linux">Консоль Linux#Шрифты</a> вы можете узнать, как изменить шрифт в консоли на более крупный. Например, шрифт Terminus (<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=terminus-font">terminus-font</a></span>) доступен в нескольких размерах, в том числе и в большом <code>ter-132n</code>.
+</p>
+<p>Или можно <a href="#%D0%9E%D1%82%D0%BA%D0%BB%D1%8E%D1%87%D0%B5%D0%BD%D0%B8%D0%B5_modesetting">отключить modesetting</a>, что приведёт к использованию меньшего разрешения экрана, и шрифты станут выглядеть крупнее.
+</p>
+<h3>
+<span id=".D0.9F.D1.80.D0.BE.D0.B1.D0.BB.D0.B5.D0.BC.D1.8B_.D0.B2.D0.BE_.D0.B2.D1.80.D0.B5.D0.BC.D1.8F_.D0.B7.D0.B0.D0.B3.D1.80.D1.83.D0.B7.D0.BA.D0.B8_.D0.B8_dmesg"></span><span class="mw-headline" id="Проблемы_во_время_загрузки_и_dmesg">Проблемы во время загрузки и dmesg</span>
+</h3>
+<p>Опрос подключенных дисплеев на старых системах может быть довольно громоздким. Опрос происходит периодически и может занять несколько сотен миллисекунд в зависимости от оборудования.
+Это может приводить к заметным задержкам, например, при воспроизведении видео. Такие задержки могут происходить, даже если видео выводится на HDP-выход, но в конфигурации оборудования есть другие выходы, не HDP. Если у вас наблюдаются задержки в выводе изображения на экран каждые 10 секунд, отключение опроса может помочь.
+</p>
+<p>Если выскакивает ошибка с кодом <code>0x00000010 (2)</code> во время процесса загрузки (Вы можете получить около 10 строк текста, последняя часть содержит этот код), используйте:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/modprobe.d/modprobe.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">options drm_kms_helper poll=0</pre>
+<h2>
+<span id=".D0.9F.D1.80.D0.B8.D0.BD.D1.83.D0.B4.D0.B8.D1.82.D0.B5.D0.BB.D1.8C.D0.BD.D1.8B.D0.B9_.D1.80.D0.B5.D0.B6.D0.B8.D0.BC_.D0.B8_EDID"></span><span class="mw-headline" id="Принудительный_режим_и_EDID">Принудительный режим и EDID</span>
+</h2>
+<p>В случае когда Ваш дисплей не отправляет соответствующий <a href="https://en.wikipedia.org/wiki/EDID" class="extiw" title="wikipedia:EDID">EDID</a> или вызывает какие-либо проблемы, Вы будете уведомлены, что родное разрешение автоматически не настроено или не отображается вообще. Ядро пытается отловить проблемы и устанавливает одно из наиболее типичных разрешений.
+</p>
+<p>Если у вас есть EDID-файл для вашего монитора, то вам просто нужно явно указать его (смотрите ниже). Однако чаще всего прямого доступа к нормальному файлу нет, и приходится либо извлекать существующий и исправлять его, либо генерировать новый.
+</p>
+<p>Создание новых бинарных файлов EDID для различных разрешений и конфигураций возможно во время компиляции ядра, следуя <a rel="nofollow" class="external text" href="https://docs.kernel.org/admin-guide/edid.html">документации</a> (также <a rel="nofollow" class="external text" href="https://www.osadl.org/Single-View.111+M5315d29dd12.0.html">здесь</a> есть краткое руководство). Другие решения подробно описаны в <a rel="nofollow" class="external text" href="https://kodi.wiki/view/Archive:Creating_and_using_edid.bin_via_xorg.conf">этой статье</a>.
+Извлечение существующего в большинстве случаев проще, например, если ваш монитор нормально работает под Windows, вам может повезти извлечь EDID из соответствующего драйвера, или есть похожий монитор, который успешно работает с такими же настройками, вы можете использовать <code>get-edid</code> из пакета <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=read-edid">read-edid</a></span>. Можно также попробовать поискать в <code>/sys/class/drm/*/edid</code>.
+</p>
+<p>После подготовки EDID поместите его в подкаталог, например, с названием <code>edid</code> в каталоге <code>/usr/lib/firmware</code> и скопируйте в него свой бинарный файл.
+</p>
+<p>Для запуска во время загрузки пропишите <a href="../ru/Kernel_parameters.html" class="mw-redirect" title="Параметр ядра">параметр ядра</a>:
+</p>
+<pre>drm.edid_firmware=edid/your_edid.bin
+</pre>
+<p>Для ядер старее 4.13 используется другой параметр:
+</p>
+<pre>drm_kms_helper.edid_firmware=edid/your_edid.bin
+</pre>
+<p>Также, можно указать только для заданного дисплея:
+</p>
+<pre>drm.edid_firmware=VGA-1:edid/your_edid.bin
+</pre>
+<p>Для преднастроенные разрешений, смотри таблицу имён спецификаций:
+</p>
+<table class="wikitable">
+
+<tbody>
+<tr>
+<th>Разрешение</th>
+<th>Имя спецификации
+</th>
+</tr>
+<tr>
+<td>800x600</td>
+<td>edid/800x600.bin
+</td>
+</tr>
+<tr>
+<td>1024x768</td>
+<td>edid/1024x768.bin
+</td>
+</tr>
+<tr>
+<td>1280x1024</td>
+<td>edid/1280x1024.bin
+</td>
+</tr>
+<tr>
+<td>1600x1200 (ядро 3.10 или новее)</td>
+<td>edid/1600x1200.bin
+</td>
+</tr>
+<tr>
+<td>1680x1050</td>
+<td>edid/1680x1050.bin
+</td>
+</tr>
+<tr>
+<td>1920x1080</td>
+<td>edid/1920x1080.bin
+</td>
+</tr>
+</tbody>
+</table>
+<p>Если осуществлён ранний запуск KMS, необходимо включить кастомизированный файл EDID в <a href="#%D0%A0%D0%B0%D0%BD%D0%BD%D0%B8%D0%B9_%D0%B7%D0%B0%D0%BF%D1%83%D1%81%D0%BA_KMS">initramfs</a> иначе возможны проблемы.
+</p>
+<p>Значение параметра <code>drm.edid_firmware</code> также может быть изменено после загрузки путём записи в <code>/sys/module/drm/parameters/edid_firmware</code>:
+</p>
+<pre># echo edid/your_edid.bin &gt; /sys/module/drm/parameters/edid_firmware
+</pre>
+<p>Это повлияет только на вновь подключенные мониторы; ранее подключенные продолжат использовать старые настройки EDID. Однако для внешних мониторов достаточно переподключить их, чтобы новый EDID применился.
+</p>
+<p>Начиная с ядра 3.15, для изменения EDID после загрузки системы можно использовать debugfs вместо параметра ядра, если ядро не находится в <a href="../ru/Security.html#Lockdown-%D1%80%D0%B5%D0%B6%D0%B8%D0%BC" title="Security (Русский)">Lockdown-режиме</a>. Это очень полезно, если вы меняете местами мониторы на разъёме или просто для тестирования.
+</p>
+<pre># cat correct-edid.bin &gt; /sys/kernel/debug/dri/0/HDMI-A-2/edid_override
+</pre>
+<p>Отключение:
+</p>
+<pre># echo -n reset &gt; /sys/kernel/debug/dri/0/HDMI-A-2/edid_override
+</pre>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Важно:</strong> Метод описанный ниже немного не завершён потому что Xorg не принимает заданные разрешения, так что советуем использовать метод, описанный выше; однако, указание разрешения с помощью строки <code>video=</code> может оказаться полезным в некоторых событиях.</div>
+<p>Взято из <a rel="nofollow" class="external text" href="https://nouveau.freedesktop.org/wiki/KernelModeSetting">nouveau wiki</a>:
+</p>
+<dl><dd>Режим может быть принудительным в командной строке ядра. К сожалению, опция командной строки видео бедно документирована в случае с DRM. Части и куски того как это использовать можно найти в
+<ul>
+<li><a rel="nofollow" class="external free" href="https://docs.kernel.org/fb/modedb.html">https://docs.kernel.org/fb/modedb.html</a></li>
+<li><a rel="nofollow" class="external free" href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/gpu/drm/drm_fb_helper.c">https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/gpu/drm/drm_fb_helper.c</a></li>
+</ul>
+</dd></dl>
+<p>В формате: 
+</p>
+<pre>video=&lt;conn&gt;:&lt;xres&gt;x&lt;yres&gt;[M][R][-&lt;bpp&gt;][@&lt;refresh&gt;][i][m][eDd]
+</pre>
+<ul>
+<li>
+<code>&lt;conn&gt;</code>: Коннектор, т.н. DVI-I-1, смотри доступные здесь <code>/sys/class/drm/</code>
+</li>
+<li>
+<code>&lt;xres&gt; x &lt;yres&gt;</code>: разрешение</li>
+<li>
+<code>M</code>: посчитать режим CVT?</li>
+<li>
+<code>R</code>: снижение мерцания?</li>
+<li>
+<code>-&lt;bpp&gt;</code>: глубина цвета</li>
+<li>
+<code>@&lt;refresh&gt;</code>: частота обновления</li>
+<li>
+<code>i</code>: чересстрочный (non-CVT mode)</li>
+<li>
+<code>m</code>: поля?</li>
+<li>
+<code>e</code>: принудительный вывод on</li>
+<li>
+<code>d</code>: принудительный вывод off</li>
+<li>
+<code>D</code>: принудительный цифровой вывод on (т.н. DVI-I коннектор)</li>
+</ul>
+<p>Вы можете переопределять режимы нескольких выходов использующих "video" несколько раз, в частности, для вывода DVI в 1024x768 на 85 Hz и отключения TV-out: 
+</p>
+<pre>video=DVI-I-1:1024x768@85 video=TV-1:d
+</pre>
+<p>Для получения имени и текущего статуса коннекторов, Вы можете использовать однострочную команду:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">$ for p in /sys/class/drm/*/status; do con=${p%/status}; echo -n "${con#*/card?-}: "; cat $p; done</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">                                                                                         
+DVI-I-1: connected
+HDMI-A-1: disconnected
+VGA-1: disconnected
+</pre>
+<h2>
+<span id=".D0.9E.D1.82.D0.BA.D0.BB.D1.8E.D1.87.D0.B5.D0.BD.D0.B8.D0.B5_modesetting"></span><span class="mw-headline" id="Отключение_modesetting">Отключение modesetting</span>
+</h2>
+<p>Вы можете захотеть отключить KMS по различным причинам. Для отключения KMS добавьте <code>nomodeset</code> в <a href="../ru/Kernel_parameters.html" class="mw-redirect" title="Параметры ядра">параметры ядра</a>.
+</p>
+<p>Наряду с параметром <code>nomodeset</code>, для карт Intel необходимо добавить <code>i915.modeset=0</code>, а для Nvidia <code>nouveau.modeset=0</code>. Для систем двойной графики (dual-graphics system) Nvidia Optimus, нужно добавить все три параметра ядра (<code>"nomodeset i915.modeset=0 nouveau.modeset=0"</code>).
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Примечание:</strong> Некоторые драйвера <a href="../ru/Xorg.html" title="Xorg (Русский)">Xorg</a> не работают с отключенным KMS. Читайте вики-страницу вашего драйвера для подробностей.</div>
+</div>
+</div>
+					<div id="catlinks" class="catlinks" data-mw="interface"><div id="mw-normal-catlinks" class="mw-normal-catlinks">
+<a href="../Special:Categories.html" title="Special:Categories">Categories</a>: <ul>
+<li><a href="../ru/Category:Graphics.html" title="Category:Graphics (Русский)">Graphics (Русский)</a></li>
+<li><a href="../ru/Category:Kernel.html" title="Category:Kernel (Русский)">Kernel (Русский)</a></li>
+</ul>
+</div></div>
+				</div>
+			</main>
+			
+		</div>
+		<div class="mw-footer-container">
+			
+<footer id="footer" class="mw-footer" style="margin: 0">
+	<ul id="footer-info">
+	<li data-nosnippet="">Retrieved from "<a dir="ltr" href="https://wiki.archlinux.org/index.php?title=Kernel_mode_setting_(%D0%A0%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9)&amp;oldid=801700">https://wiki.archlinux.org/index.php?title=Kernel_mode_setting_(Русский)&amp;oldid=801700</a>"</li>
+<li id="footer-info-lastmod"> This page was last edited on 29 February 2024, at 15:21.</li>
+	<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+<br>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="https://terms.archlinux.org/docs/privacy-policy/">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="../en/ArchWiki:About.html">About ArchWiki</a></li>
+	<li id="footer-places-disclaimers"><a href="../en/ArchWiki:General_disclaimer.html">Disclaimers</a></li>
+	<li id="footer-places-archwiki-code-of-conduct"><a href="https://terms.archlinux.org/docs/code-of-conduct/" class="extiw" title="archlinux-service-agreements:code-of-conduct">Code of conduct</a></li>
+	<li id="footer-places-archwiki-terms-of-service"><a href="https://terms.archlinux.org/docs/terms-of-service/" class="extiw" title="archlinux-service-agreements:terms-of-service">Terms of service</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-copyrightico"><a href="https://www.gnu.org/copyleft/fdl.html" class="cdx-button cdx-button--fake-button cdx-button--size-large cdx-button--fake-button--enabled"><img src="/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" loading="lazy"></a></li>
+	<li id="footer-poweredbyico"><img src="/resources/assets/poweredby_mediawiki.svg" width="88" height="31" loading="lazy"></li>
+</ul>
+
+</footer>
+
+		</div>
+	</div> 
+</div> 
+<div class="vector-settings" id="p-dock-bottom">
+	<ul></ul>
+</div>
+</body>
+</html>

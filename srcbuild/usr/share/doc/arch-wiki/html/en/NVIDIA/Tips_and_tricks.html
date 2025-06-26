@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-sticky-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-0 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-disabled skin-theme-clientpref-day vector-toc-available" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>NVIDIA/Tips and tricks - ArchWiki</title>
+<link rel="stylesheet" href="../../ArchWikiOffline.css">
+<meta name="ResourceLoaderDynamicStyles" content="">
+<meta name="generator" content="MediaWiki 1.43.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="max-image-preview:standard">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.25, maximum-scale=5.0">
+<link rel="search" type="application/opensearchdescription+xml" href="/rest.php/v1/search" title="ArchWiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.archlinux.org/api.php?action=rsd">
+<link rel="license" href="https://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="ArchWiki Atom feed" href="/index.php?title=Special:RecentChanges&amp;feed=atom">
+</head>
+<body class="skin--responsive skin-vector skin-vector-search-vue mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-NVIDIA_Tips_and_tricks rootpage-NVIDIA skin-vector-2022 action-view">
+<a class="mw-jump-link" href="#bodyContent">Jump to content</a>
+<div class="vector-header-container">
+	</div>
+<div class="mw-page-container">
+	<div class="mw-page-container-inner">
+		<div class="vector-column-start">
+			<div class="vector-main-menu-container">
+		</div>
+	<div class="vector-sticky-pinned-container">
+				<nav id="mw-panel-toc" aria-label="Contents" data-event-name="ui.sidebar-toc" class="mw-table-of-contents-container vector-toc-landmark">
+					<div id="vector-toc-pinned-container" class="vector-pinned-container">
+					<div id="vector-toc" class="vector-toc vector-pinnable-element">
+	<div class="vector-pinnable-header vector-toc-pinnable-header vector-pinnable-header-pinned" data-feature-name="toc-pinned" data-pinnable-element-id="vector-toc">
+	<h2 class="vector-pinnable-header-label">Contents</h2>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-toc.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-toc.unpin">hide</button>
+</div>
+
+
+	<ul class="vector-toc-contents" id="mw-panel-toc-list">
+		<li id="toc-mw-content-text" class="vector-toc-list-item vector-toc-level-1">
+			<a href="#" class="vector-toc-link">
+				<div class="vector-toc-text">Beginning</div>
+			</a>
+		</li>
+		<li id="toc-Fixing_terminal_resolution" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Fixing_terminal_resolution">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">1</span>
+				<span>Fixing terminal resolution</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Fixing_terminal_resolution-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Using_TV-out" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Using_TV-out">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">2</span>
+				<span>Using TV-out</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Using_TV-out-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-X_with_a_TV_(DFP)_as_the_only_display" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#X_with_a_TV_(DFP)_as_the_only_display">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">3</span>
+				<span>X with a TV (DFP) as the only display</span>
+			</div>
+		</a>
+		
+		<ul id="toc-X_with_a_TV_(DFP)_as_the_only_display-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Headless_(no_monitor)_resolution" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Headless_(no_monitor)_resolution">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">4</span>
+				<span>Headless (no monitor) resolution</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Headless_(no_monitor)_resolution-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Check_the_power_source" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Check_the_power_source">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">5</span>
+				<span>Check the power source</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Check_the_power_source-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Listening_to_ACPI_events" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Listening_to_ACPI_events">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">6</span>
+				<span>Listening to ACPI events</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Listening_to_ACPI_events-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Displaying_GPU_temperature_in_the_shell" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Displaying_GPU_temperature_in_the_shell">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">7</span>
+				<span>Displaying GPU temperature in the shell</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Displaying_GPU_temperature_in_the_shell-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Displaying GPU temperature in the shell subsection</span>
+			</button>
+		
+		<ul id="toc-Displaying_GPU_temperature_in_the_shell-sublist" class="vector-toc-list">
+			<li id="toc-nvidia-settings" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#nvidia-settings">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">7.1</span>
+					<span>nvidia-settings</span>
+				</div>
+			</a>
+			
+			<ul id="toc-nvidia-settings-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-nvidia-smi" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#nvidia-smi">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">7.2</span>
+					<span>nvidia-smi</span>
+				</div>
+			</a>
+			
+			<ul id="toc-nvidia-smi-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-nvclock" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#nvclock">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">7.3</span>
+					<span>nvclock</span>
+				</div>
+			</a>
+			
+			<ul id="toc-nvclock-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Overclocking_and_cooling" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Overclocking_and_cooling">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">8</span>
+				<span>Overclocking and cooling</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Overclocking_and_cooling-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Overclocking and cooling subsection</span>
+			</button>
+		
+		<ul id="toc-Overclocking_and_cooling-sublist" class="vector-toc-list">
+			<li id="toc-Enabling_overclocking_in_nvidia-settings" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Enabling_overclocking_in_nvidia-settings">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">8.1</span>
+					<span>Enabling overclocking in nvidia-settings</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Enabling_overclocking_in_nvidia-settings-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Setting_static_2D/3D_clocks" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Setting_static_2D/3D_clocks">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">8.2</span>
+					<span>Setting static 2D/3D clocks</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Setting_static_2D/3D_clocks-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Lowering_GPU_Boost_Clocks" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Lowering_GPU_Boost_Clocks">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">8.3</span>
+					<span>Lowering GPU Boost Clocks</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Lowering_GPU_Boost_Clocks-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Saving_overclocking_settings" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Saving_overclocking_settings">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">8.4</span>
+					<span>Saving overclocking settings</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Saving_overclocking_settings-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Custom_TDP_Limit" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Custom_TDP_Limit">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">8.5</span>
+					<span>Custom TDP Limit</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Custom_TDP_Limit-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Set_fan_speed_at_login" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Set_fan_speed_at_login">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">8.6</span>
+					<span>Set fan speed at login</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Set_fan_speed_at_login-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Simple_overclocking_script_using_NVML" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Simple_overclocking_script_using_NVML">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">8.7</span>
+					<span>Simple overclocking script using NVML</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Simple_overclocking_script_using_NVML-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Kernel_module_parameters" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Kernel_module_parameters">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">9</span>
+				<span>Kernel module parameters</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Kernel_module_parameters-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Preserve_video_memory_after_suspend" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Preserve_video_memory_after_suspend">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">10</span>
+				<span>Preserve video memory after suspend</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Preserve_video_memory_after_suspend-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Driver_persistence" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Driver_persistence">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">11</span>
+				<span>Driver persistence</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Driver_persistence-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Forcing_YCbCr_with_4:2:0_subsampling" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Forcing_YCbCr_with_4:2:0_subsampling">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">12</span>
+				<span>Forcing YCbCr with 4:2:0 subsampling</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Forcing_YCbCr_with_4:2:0_subsampling-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+</ul>
+</div>
+
+					</div>
+		</nav>
+			</div>
+		</div>
+		<div class="mw-content-container">
+			<main id="content" class="mw-body" style="margin: 0">
+				<header class="mw-body-header vector-page-titlebar">
+					<nav aria-label="Contents" class="vector-toc-landmark">
+						
+<div id="vector-page-titlebar-toc" class="vector-dropdown vector-page-titlebar-toc vector-button-flush-left">
+	<input type="checkbox" id="vector-page-titlebar-toc-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-page-titlebar-toc" class="vector-dropdown-checkbox " aria-label="Toggle the table of contents">
+	<label id="vector-page-titlebar-toc-label" for="vector-page-titlebar-toc-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"><span class="vector-icon mw-ui-icon-listBullet mw-ui-icon-wikimedia-listBullet"></span>
+
+<span class="vector-dropdown-label-text">Toggle the table of contents</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+							<div id="vector-page-titlebar-toc-unpinned-container" class="vector-unpinned-container">
+			</div>
+		
+	</div>
+</div>
+
+					</nav>
+					<h1 id="firstHeading" class="firstHeading mw-first-heading"><span class="mw-page-title-main">NVIDIA/Tips and tricks</span></h1>
+							
+<div id="p-lang-btn" class="vector-dropdown mw-portlet mw-portlet-lang">
+	<input type="checkbox" id="p-lang-btn-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-p-lang-btn" class="vector-dropdown-checkbox mw-interlanguage-selector" aria-label="Go to an article in another language. Available in 3 languages">
+	<label id="p-lang-btn-label" for="p-lang-btn-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--action-progressive mw-portlet-lang-heading-3" aria-hidden="true"><span class="vector-icon mw-ui-icon-language-progressive mw-ui-icon-wikimedia-language-progressive"></span>
+
+<span class="vector-dropdown-label-text">3 languages</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+		<div class="vector-menu-content">
+			
+			<ul class="vector-menu-content-list">
+				
+				<li class="interlanguage-link interwiki-ja mw-list-item"><a href="https://wiki.archlinux.jp/index.php/NVIDIA/%E3%83%92%E3%83%B3%E3%83%88%E3%81%A8%E3%83%86%E3%82%AF%E3%83%8B%E3%83%83%E3%82%AF" title="NVIDIA/ヒントとテクニック – 日本語" lang="ja" hreflang="ja" data-title="NVIDIA/ヒントとテクニック" data-language-autonym="日本語" data-language-local-name="日本語" class="interlanguage-link-target"><span>日本語</span></a></li>
+<li class="interlanguage-link interwiki-ru mw-list-item"><a href="../../ru/NVIDIA/Tips_and_tricks.html" title="NVIDIA (Русский)/Tips and tricks – русский" lang="ru" hreflang="ru" data-title="NVIDIA (Русский)/Tips and tricks" data-language-autonym="Русский" data-language-local-name="русский" class="interlanguage-link-target"><span>Русский</span></a></li>
+<li class="interlanguage-link interwiki-zh-hans mw-list-item"><a href="https://wiki.archlinuxcn.org/wiki/NVIDIA/%E6%8F%90%E7%A4%BA%E5%92%8C%E6%8A%80%E5%B7%A7" title="NVIDIA/提示和技巧 – 中文（简体）" lang="zh-Hans" hreflang="zh-Hans" data-title="NVIDIA/提示和技巧" data-language-autonym="中文（简体）" data-language-local-name="中文（简体）" class="interlanguage-link-target"><span>中文（简体）</span></a></li>
+			</ul>
+			
+		</div>
+
+	</div>
+</div>
+</header>
+				<div class="vector-column-end">
+					<div class="vector-sticky-pinned-container">
+						<nav class="vector-page-tools-landmark" aria-label="Page tools">
+							<div id="vector-page-tools-pinned-container" class="vector-pinned-container">
+				
+							</div>
+		</nav>
+						<nav class="vector-appearance-landmark" aria-label="Appearance">
+							<div id="vector-appearance-pinned-container" class="vector-pinned-container">
+				<div id="vector-appearance" class="vector-appearance vector-pinnable-element">
+	<div class="vector-pinnable-header vector-appearance-pinnable-header vector-pinnable-header-pinned" data-feature-name="appearance-pinned" data-pinnable-element-id="vector-appearance" data-pinned-container-id="vector-appearance-pinned-container" data-unpinned-container-id="vector-appearance-unpinned-container">
+	<div class="vector-pinnable-header-label">Appearance</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-appearance.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-appearance.unpin">hide</button>
+</div>
+
+
+</div>
+
+							</div>
+		</nav>
+					</div>
+				</div>
+				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container>
+					<div class="vector-body-before-content">
+							<div class="mw-indicators">
+		</div>
+
+						<div id="siteSub" class="noprint">From ArchWiki</div>
+					</div>
+					<div id="contentSub"><div id="mw-content-subtitle"><div class="subpages">&lt; <bdi dir="ltr"><a href="../../en/NVIDIA.html" title="NVIDIA">NVIDIA</a></bdi>
+</div></div></div>
+					
+					
+					<div id="mw-content-text" class="mw-body-content">
+<div class="mw-content-ltr mw-parser-output" lang="en" dir="ltr">
+<meta property="mw:PageProp/toc">
+<h2><span class="mw-headline" id="Fixing_terminal_resolution">Fixing terminal resolution</span></h2>
+<p>Transitioning from nouveau may cause your startup terminal to display at a lower resolution.
+</p>
+<p>For GRUB, see <a href="../../en/GRUB/Tips_and_tricks.html#Setting_the_framebuffer_resolution" title="GRUB/Tips and tricks">GRUB/Tips and tricks#Setting the framebuffer resolution</a> for details. <a rel="nofollow" class="external autonumber" href="https://forums.fedoraforum.org/showthread.php?t=306271">[1]</a> <a rel="nofollow" class="external autonumber" href="https://web.archive.org/web/20170405115954/https://www.reddit.com/r/archlinux/comments/4gwukx/nvidia_drivers_and_high_resolution_tty_possible/">[2]</a>
+</p>
+<p>For <a href="../../en/Systemd-boot.html" title="Systemd-boot">systemd-boot</a>, set <code>console-mode</code> in <code><i>esp</i>/loader/loader.conf</code>. See <a href="../../en/Systemd-boot.html#Loader_configuration" title="Systemd-boot">systemd-boot#Loader configuration</a> for details.
+</p>
+<p>For <a href="../../en/REFInd.html" title="REFInd">rEFInd</a>, set <code>use_graphics_for +,linux</code> in <code><i>esp</i>/EFI/refind/refind.conf</code>.<a rel="nofollow" class="external autonumber" href="https://www.reddit.com/r/archlinux/comments/86lqc5/tty_resolution_nvidia_psaish/">[3]</a> A small caveat is that this will hide the kernel parameters from being shown during boot.
+</p>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> If the above methods do not fix your terminal resolution, it may be necessary to disable Legacy BIOS mode entirely (often referred to as Compatibility Support Module, CSM, or Legacy Boot) in your UEFI settings. Before proceeding, make sure that all of your devices are configured to use UEFI boot.</div>
+<h2><span class="mw-headline" id="Using_TV-out">Using TV-out</span></h2>
+<p>See <a href="https://en.wikibooks.org/wiki/NVIDIA/TV-OUT" class="extiw" title="wikibooks:NVIDIA/TV-OUT">Wikibooks:NVIDIA/TV-OUT</a>.
+</p>
+<h2>
+<span id="X_with_a_TV_.28DFP.29_as_the_only_display"></span><span class="mw-headline" id="X_with_a_TV_(DFP)_as_the_only_display">X with a TV (DFP) as the only display</span>
+</h2>
+<p>The X server falls back to CRT-0 if no monitor is automatically detected. This can be a problem when using a DVI connected TV as the main display, and X is started while the TV is turned off or otherwise disconnected.
+</p>
+<p>To force NVIDIA to use DFP, store a copy of the EDID somewhere in the filesystem so that X can parse the file instead of reading EDID from the TV/DFP.
+</p>
+<p>To acquire the EDID, start nvidia-settings. It will show some information in tree format, ignore the rest of the settings for now and select the GPU (the corresponding entry should be titled "GPU-0" or similar), click the <code>DFP</code> section (again, <code>DFP-0</code> or similar), click on the <code>Acquire Edid</code> Button and store it somewhere, for example, <code>/etc/X11/dfp0.edid</code>.
+</p>
+<p>If in the front-end mouse and keyboard are not attached, the EDID can be acquired using only the command line. Run an X server with enough verbosity to print out the EDID block:
+</p>
+<pre>$ startx -- -logverbose 6
+</pre>
+<p>After the X Server has finished initializing, close it and your log file will probably be in <code>/var/log/Xorg.0.log</code>. Extract the EDID block using nvidia-xconfig:
+</p>
+<pre>$ nvidia-xconfig --extract-edids-from-file=/var/log/Xorg.0.log --extract-edids-output-file=/etc/X11/dfp0.bin
+</pre>
+<p>Edit <code>xorg.conf</code> by adding to the <code>Device</code> section:
+</p>
+<pre>Option "ConnectedMonitor" "DFP"
+Option "CustomEDID" "DFP-0:/etc/X11/dfp0.bin"
+</pre>
+<p>The <code>ConnectedMonitor</code> option forces the driver to recognize the DFP as if it were connected. The <code>CustomEDID</code> provides EDID data for the device, meaning that it will start up just as if the TV/DFP was connected during the X process.
+</p>
+<p>This way, one can automatically start a display manager at boot time and still have a working and properly configured X screen by the time the TV gets powered on.
+</p>
+<p>If the above changes did not work, in the <code>xorg.conf</code> under <code>Device</code> section you can try to remove the <code>Option "ConnectedMonitor" "DFP"</code> and add the following lines:
+</p>
+<pre>Option "ModeValidation" "NoDFPNativeResolutionCheck"
+Option "ConnectedMonitor" "DFP-0"
+</pre>
+<p>The <code>NoDFPNativeResolutionCheck</code> prevents NVIDIA driver from disabling all the modes that do not fit in the native resolution.
+</p>
+<h2>
+<span id="Headless_.28no_monitor.29_resolution"></span><span class="mw-headline" id="Headless_(no_monitor)_resolution">Headless (no monitor) resolution</span>
+</h2>
+<p>In headless mode, resolution falls back to 640x480, which is used by VNC or Steam Link. To start in a higher resolution <i>e.g.</i> 1920x1080, specify a <code>Virtual</code> entry under the <code>Screen</code> subsection in <code>xorg.conf</code>:
+</p>
+<pre>Section "Screen"
+   [...]
+   SubSection     "Display"
+       Depth       24
+       Virtual     1920 1080
+   EndSubSection
+EndSection
+</pre>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> Using headless mode may be tricky and prone to error. For instance, in headless mode, desktop environments and <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=nvidia-utils">nvidia-utils</a></span> do not provide a graphical way to change resolution. To facilitate setting up resolution one can use a DP or an HDMI dummy adapter which simulates the presence of a monitor attached to that port. Then resolution change can be done normally using a remote session such as VNC or Steam Link.</div>
+<h2><span class="mw-headline" id="Check_the_power_source">Check the power source</span></h2>
+<p>The NVIDIA X.org driver can also be used to detect the GPU's current source of power. To see the current power source, check the 'GPUPowerSource' read-only parameter (0 - AC, 1 - battery):
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">$ nvidia-settings -q GPUPowerSource -t</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">1</pre>
+<h2><span class="mw-headline" id="Listening_to_ACPI_events">Listening to ACPI events</span></h2>
+<p>NVIDIA drivers automatically try to connect to the <a href="../../en/Acpid.html" title="Acpid">acpid</a> daemon and listen to ACPI events such as battery power, docking, some hotkeys, etc. If connection fails, X.org will output the following warning:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">~/.local/share/xorg/Xorg.0.log</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">NVIDIA(0): ACPI: failed to connect to the ACPI event daemon; the daemon
+NVIDIA(0):     may not be running or the "AcpidSocketPath" X
+NVIDIA(0):     configuration option may not be set correctly.  When the
+NVIDIA(0):     ACPI event daemon is available, the NVIDIA X driver will
+NVIDIA(0):     try to use it to receive ACPI event notifications.  For
+NVIDIA(0):     details, please see the "ConnectToAcpid" and
+NVIDIA(0):     "AcpidSocketPath" X configuration options in Appendix B: X
+NVIDIA(0):     Config Options in the README.
+</pre>
+<p>While completely harmless, you may get rid of this message by disabling the <code>ConnectToAcpid</code> option in your <code>/etc/X11/xorg.conf.d/20-nvidia.conf</code>:
+</p>
+<pre>Section "Device"
+  ...
+  Driver "nvidia"
+  Option "ConnectToAcpid" "0"
+  ...
+EndSection
+</pre>
+<p>If you are on laptop, it might be a good idea to install and enable the <a href="../../en/Acpid.html" title="Acpid">acpid</a> daemon instead.
+</p>
+<h2><span class="mw-headline" id="Displaying_GPU_temperature_in_the_shell">Displaying GPU temperature in the shell</span></h2>
+<p>There are three methods to query the GPU temperature. <i>nvidia-settings</i> requires that you are using X, <i>nvidia-smi</i> or <i>nvclock</i> do not. Also note that <i>nvclock</i> currently does not work with newer NVIDIA cards such as GeForce 200 series cards as well as embedded GPUs such as the Zotac IONITX's 8800GS.
+</p>
+<h3><span class="mw-headline" id="nvidia-settings">nvidia-settings</span></h3>
+<p>To display the GPU temp in the shell, use <i>nvidia-settings</i> as follows:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">$ nvidia-settings -q gpucoretemp</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">  Attribute 'GPUCoreTemp' (hostname:0[gpu:0]): 49.
+    'GPUCoreTemp' is an integer attribute.
+    'GPUCoreTemp' is a read-only attribute.
+    'GPUCoreTemp' can use the following target types: GPU.
+</pre>
+<p>The GPU temps of this board is 49 °C.
+</p>
+<p>In order to get just the temperature for use in utilities such as <i>rrdtool</i> or <i>conky</i>:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">$ nvidia-settings -q gpucoretemp -t</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">49</pre>
+<h3><span class="mw-headline" id="nvidia-smi">nvidia-smi</span></h3>
+<p>Use <i>nvidia-smi</i> which can read temps directly from the GPU without the need to use X at all, e.g. when running Wayland or on a headless server.
+</p>
+<p>To display the GPU temperature in the shell, use <i>nvidia-smi</i>:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">$ nvidia-smi</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">Wed Feb 28 14:27:35 2024
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 550.54.14              Driver Version: 550.54.14      CUDA Version: 12.4     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA GeForce GTX 1660 Ti     Off |   00000000:01:00.0  On |                  N/A |
+|  0%   49C    P8              9W /  120W |     138MiB /   6144MiB |      2%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI        PID   Type   Process name                              GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|    0   N/A  N/A    223179      G   weston                                        120MiB |
++-----------------------------------------------------------------------------------------+
+</pre>
+<p>Only for temperature:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">$ nvidia-smi -q -d TEMPERATURE</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">==============NVSMI LOG==============
+
+Timestamp                                 : Wed Feb 28 14:27:35 2024
+Driver Version                            : 550.54.14
+CUDA Version                              : 12.4
+
+Attached GPUs                             : 1
+GPU 00000000:01:00.0
+    Temperature
+        GPU Current Temp                  : 49 C
+        GPU T.Limit Temp                  : N/A
+        GPU Shutdown Temp                 : 95 C
+        GPU Slowdown Temp                 : 92 C
+        GPU Max Operating Temp            : 90 C
+        GPU Target Temperature            : 83 C
+        Memory Current Temp               : N/A
+        Memory Max Operating Temp         : N/A</pre>
+<p>In order to get just the temperature for use in utilities such as <i>rrdtool</i> or <i>conky</i>:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">$ nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader,nounits</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">49</pre>
+<h3><span class="mw-headline" id="nvclock">nvclock</span></h3>
+<p><a href="../../en/Help:Reading.html#Installation_of_packages" class="mw-redirect" title="Install">Install</a> the <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/nvclock/">nvclock</a></span><sup><small>AUR</small></sup> package.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> <i>nvclock</i> cannot access thermal sensors on newer NVIDIA cards such as Geforce 200 series cards.</div>
+<p>There can be significant differences between the temperatures reported by <i>nvclock</i> and <i>nvidia-settings</i>/<i>nv-control</i>. According to <a rel="nofollow" class="external text" href="https://sourceforge.net/projects/nvclock/forums/forum/67426/topic/1906899">this post</a> by the author (thunderbird) of <i>nvclock</i>, the <i>nvclock</i> values should be more accurate.
+</p>
+<h2><span class="mw-headline" id="Overclocking_and_cooling">Overclocking and cooling</span></h2>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Warning:</strong> Overclocking might permanently damage your hardware. You have been warned.</div>
+<h3><span class="mw-headline" id="Enabling_overclocking_in_nvidia-settings">Enabling overclocking in nvidia-settings</span></h3>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> 
+<ul>
+<li>Overclocking settings cannot be applied if the Xorg server is running in rootless mode. Consider <a href="../../en/Xorg.html#Xorg_as_Root" title="Xorg">running Xorg as root</a>.</li>
+<li>Enabling DRM kernel mode setting may cause overclocking to become unavailable, regardless of the Coolbits value.</li>
+</ul>
+</div>
+<p>Overclocking is controlled via <i>Coolbits</i> option in the <code>Device</code> section, which enables various unsupported features:
+</p>
+<pre>Option "Coolbits" "<i>value</i>"
+</pre>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> The <i>Coolbits</i> option can be easily controlled with the <i>nvidia-xconfig</i>, which manipulates the Xorg configuration files: <pre># nvidia-xconfig --cool-bits=<i>value</i></pre>
+</div>
+<p>The <i>Coolbits</i> value is the sum of its component bits in the binary numeral system. The component bits are:
+</p>
+<ul>
+<li>
+<code>1</code> (bit 0) - Enables overclocking of older (pre-Fermi) cores on the <i>Clock Frequencies</i> page in <i>nvidia-settings</i>.</li>
+<li>
+<code>2</code> (bit 1) - When this bit is set, the driver will "attempt to initialize SLI when using GPUs with different amounts of video memory".</li>
+<li>
+<code>4</code> (bit 2) - Enables manual configuration of GPU fan speed on the <i>Thermal Monitor</i> page in <i>nvidia-settings</i>.</li>
+<li>
+<code>8</code> (bit 3) - Enables overclocking on the <i>PowerMizer</i> page in <i>nvidia-settings</i>. Available since version 337.12 for the Fermi architecture and newer.<a rel="nofollow" class="external autonumber" href="https://www.phoronix.com/scan.php?px=MTY1OTM&amp;page=news_item">[4]</a>
+</li>
+<li>
+<code>16</code> (bit 4) - Enables overvoltage using <i>nvidia-settings</i> CLI options. Available since version 346.16 for the Fermi architecture and newer.<a rel="nofollow" class="external autonumber" href="https://www.phoronix.com/scan.php?page=news_item&amp;px=MTg0MDI">[5]</a>
+</li>
+</ul>
+<p>To enable multiple features, add the <i>Coolbits</i> values together. For example, to enable overclocking and overvoltage of Fermi cores, set <code>Option "Coolbits" "24"</code>.
+</p>
+<p>The documentation of <i>Coolbits</i> can be found in <code>/usr/share/doc/nvidia/html/xconfigoptions.html</code> and <a rel="nofollow" class="external text" href="https://download.nvidia.com/XFree86/Linux-x86_64/565.77/README/xconfigoptions.html#Coolbits">here</a>.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> An alternative is to edit and reflash the GPU BIOS either under DOS (preferred), or within a Win32 environment by way of <a rel="nofollow" class="external text" href="https://www.techpowerup.com/download/nvidia-nvflash/">nvflash</a> and <a rel="nofollow" class="external text" href="https://www.guru3d.com/files-details/nvidia-bios-editor-download-nibitor.html">NiBiTor 6.0</a>. The advantage of BIOS flashing is that not only can voltage limits be raised, but stability is generally improved over software overclocking methods such as Coolbits. <a rel="nofollow" class="external text" href="https://ivanvojtko.blogspot.sk/2014/03/how-to-overclock-geforce-460gtx-fermi.html">Fermi BIOS modification tutorial</a>
+</div>
+<h3>
+<span id="Setting_static_2D.2F3D_clocks"></span><span class="mw-headline" id="Setting_static_2D/3D_clocks">Setting static 2D/3D clocks</span>
+</h3>
+<p>Use <a href="../../en/Kernel_module.html#Setting_module_options" class="mw-redirect" title="Kernel module parameter">kernel module parameters</a> to enable PowerMizer at its maximum performance level (VSync will not work without this):
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/modprobe.d/nvidia.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">options nvidia NVreg_RegistryDwords="PerfLevelSrc=0x2222"</pre>
+<h3><span class="mw-headline" id="Lowering_GPU_Boost_Clocks">Lowering GPU Boost Clocks</span></h3>
+<p>With <a rel="nofollow" class="external text" href="https://nouveau.freedesktop.org/CodeNames.html#NV170">Ampere (NV170/GA<i>XXX</i>)</a> GPUs and later, clock boost works in a different way, and maximum clocks are set to the highest supported limit at boot. If that is what you want, then no further configuration is necessary.
+</p>
+<p>The drawback is the lower power efficiency. As the clocks go up, increased voltage is needed for stability, resulting in a nonlinear increase in power consumption, heating, and fan noise. Lowering the boost clock limit will thus increase efficiency.
+</p>
+<p>Boost clock limits can be changed using nvidia-smi, running as root:
+</p>
+<ul>
+<li>List supported clock rates: <pre>$ nvidia-smi -q -d SUPPORTED_CLOCKS</pre>
+</li>
+<li>Set GPU boost clock limit to 1695 MHz: <pre># nvidia-smi --lock-gpu-clocks=0,1695 --mode=1</pre>
+</li>
+<li>Set Memory boost clock limit to 5001 MHz: <pre># nvidia-smi --lock-memory-clocks=0,5001</pre>
+</li>
+</ul>
+<p>To optimize for efficiency, use nvidia-smi to check the GPU utilization while running your favorite game. VSync should be on. Lowering the boost clock limit will increase GPU utilization, because a slower GPU will use more time to render each frame. Best efficiency is achieved with the lowest clocks that do not cause the stutter that results when the utilization hits 100%. Then, each frame can be rendered just quickly enough to keep up with the refresh rate.
+</p>
+<p>As an example, using the above settings instead of default on an RTX 3090 Ti, while playing Hitman 3 at 4K@60, reduces power consumption by 30%, temperature from 75 to 63 degrees, and fan speed from 73% to 57%.
+</p>
+<h3><span class="mw-headline" id="Saving_overclocking_settings">Saving overclocking settings</span></h3>
+<p>Typically, clock and voltage offsets inserted in the <i>nvidia-settings</i> interface are not saved, being lost after a reboot.
+Fortunately, there are tools that offer an interface for overclocking under the proprietary driver, able to save the user's overclocking
+preferences and automatically applying them on boot.
+Some of them are:
+</p>
+<ul>
+<li>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/gwe/">gwe</a></span><sup><small>AUR</small></sup> - graphical, applies settings on desktop session start</li>
+<li>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/nvclock/">nvclock</a></span><sup><small>AUR</small></sup> and <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/systemd-nvclock-unit/">systemd-nvclock-unit</a></span><sup><small>AUR</small></sup> - graphical, applies settings on system boot</li>
+<li>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/nvoc/">nvoc</a></span><sup><small>AUR</small></sup> - text based, profiles are configuration files in <code>/etc/nvoc.d/</code>, applies settings on desktop session start</li>
+</ul>
+<p>Otherwise, <code>GPUGraphicsClockOffset</code> and <code>GPUMemoryTransferRateOffset</code> attributes can be set in the command-line interface of <i>nvidia-settings</i> on <a href="../../en/Autostarting.html" title="Autostarting">startup</a>. For example:
+</p>
+<pre>$ nvidia-settings -a "GPUGraphicsClockOffset[<i>performance_level</i>]=<i>offset</i>"
+$ nvidia-settings -a "GPUMemoryTransferRateOffset[<i>performance_level</i>]=<i>offset</i>"
+</pre>
+<p>Where <code><i>performance_level</i></code> is the number of the highest performance level. If there are multiple GPUs on the machine, the GPU ID should be specified: <code>[gpu:<i>gpu_id</i>]GPUGraphicsClockOffset[<i>performance_level</i>]=<i>offset</i></code>.
+</p>
+<h3><span class="mw-headline" id="Custom_TDP_Limit">Custom TDP Limit</span></h3>
+<p>Modern NVIDIA graphics cards throttle frequency to stay in their TDP and temperature limits. To increase performance it is possible to change the TDP limit, which will result in higher temperatures and higher power consumption.
+</p>
+<p>For example, to set the power limit to 160.30W:
+</p>
+<pre># nvidia-smi -pl 160.30
+</pre>
+<p>To set the power limit on boot (without driver persistence):
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/system/nvidia-tdp.timer</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Unit]
+Description=Set NVIDIA power limit on boot
+
+[Timer]
+OnBootSec=5
+
+[Install]
+WantedBy=timers.target</pre>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/system/nvidia-tdp.service</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Unit]
+Description=Set NVIDIA power limit
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/nvidia-smi -pl 160.30</pre>
+<p>Now <a href="../../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Enable">enable</a> the <code>nvidia-tdp.timer</code>.
+</p>
+<h3><span class="mw-headline" id="Set_fan_speed_at_login">Set fan speed at login</span></h3>
+<p>You can adjust the fan speed on your graphics card with <i>nvidia-settings</i> console interface. First ensure that your Xorg configuration has enabled the bit 2 in the <a href="#Enabling_overclocking_in_nvidia-settings">Coolbits</a> option.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> GeForce 400/500 series cards cannot currently set fan speeds at login using this method. This method only allows for the setting of fan speeds within the current X session by way of <i>nvidia-settings</i>.</div>
+<p>Place the following line in your <a href="../../en/Xinit.html#xinitrc" class="mw-redirect" title="Xinitrc">xinitrc</a> file to adjust the fan when you launch Xorg. Replace <code><i>n</i></code> with the fan speed percentage you want to set.
+</p>
+<pre>nvidia-settings -a "[gpu:0]/GPUFanControlState=1" -a "[fan:0]/GPUTargetFanSpeed=<i>n</i>"
+</pre>
+<p>You can also configure a second GPU by incrementing the GPU and fan number.
+</p>
+<pre>nvidia-settings -a "[gpu:0]/GPUFanControlState=1" -a "[fan:0]/GPUTargetFanSpeed=<i>n</i>" \
+                -a "[gpu:1]/GPUFanControlState=1" -a  [fan:1]/GPUTargetFanSpeed=<i>n</i>" &amp;
+</pre>
+<p>If you use a login manager such as <a href="../../en/GDM.html" title="GDM">GDM</a> or <a href="../../en/SDDM.html" title="SDDM">SDDM</a>, you can create a desktop entry file to process this setting. Create <code>~/.config/autostart/nvidia-fan-speed.desktop</code> and place this text inside it. Again, change <code><i>n</i></code> to the speed percentage you want.
+</p>
+<pre>[Desktop Entry]
+Type=Application
+Exec=nvidia-settings -a "[gpu:0]/GPUFanControlState=1" -a "[fan:0]/GPUTargetFanSpeed=<i>n</i>"
+X-GNOME-Autostart-enabled=true
+Name=nvidia-fan-speed
+</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> Before driver version 349.16, <code>GPUCurrentFanSpeed</code> was used instead of <code>GPUTargetFanSpeed</code>.<a rel="nofollow" class="external autonumber" href="https://devtalk.nvidia.com/default/topic/821563/linux/can-t-control-fan-speed-with-beta-driver-349-12/post/4526208/#4526208">[6]</a>
+</div>
+<p>To make it possible to adjust the fanspeed of more than one graphics card, run:
+</p>
+<pre>$ nvidia-xconfig --enable-all-gpus
+$ nvidia-xconfig --cool-bits=4
+</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> On some laptops (including the ThinkPad <a rel="nofollow" class="external text" href="https://devtalk.nvidia.com/default/topic/1052110/linux/can-t-control-gtx-1050-ti-max-q-fan-on-thinkpad-x1-extreme-laptop/post/5340658/#5340658">X1 Extreme</a> and <a rel="nofollow" class="external text" href="https://devtalk.nvidia.com/default/topic/1048624/linux/how-to-set-gpu-fan-speed/post/5321818/#5321818">P51/P52</a>), there are two fans, but neither are controlled by nvidia.</div>
+<h3><span class="mw-headline" id="Simple_overclocking_script_using_NVML">Simple overclocking script using NVML</span></h3>
+<p>The Nvidia Management Library (NVML) provides an API that can manage the GPU's core and memory clock offsets and power limit. To utilise this, you can install <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/python-nvidia-ml-py/">python-nvidia-ml-py</a></span><sup><small>AUR</small></sup> and then use the following Python script with your desired settings. This script needs to be run as root after every restart to re-apply the overclock / undervolt.
+</p>
+<pre>#!/usr/bin/env python
+
+from pynvml import *
+
+nvmlInit()
+
+# This sets the GPU to adjust - if this gives you errors or you have multiple GPUs, set to 1 or try other values
+myGPU = nvmlDeviceGetHandleByIndex(0)
+
+# The GPU clock offset value should replace "000" in the line below.
+nvmlDeviceSetGpcClkVfOffset(myGPU, 000)
+
+# The memory clock offset should be **multiplied by 2** to replace the "000" below
+# For example, an offset of 500 means inserting a value of 1000 in the next line
+nvmlDeviceSetMemClkVfOffset(myGPU, 000)
+
+# The power limit can be set below in mW - 216W becomes 216000, etc. Remove the below line if you don't want to adjust power limits.
+nvmlDeviceSetPowerManagementLimit(myGPU, 000000)</pre>
+<h2><span class="mw-headline" id="Kernel_module_parameters">Kernel module parameters</span></h2>
+<p>Some options can be set as kernel module parameters, a full list can be obtained by running <code>modinfo nvidia</code> or looking at <code>nv-reg.h</code>. See <a href="https://wiki.gentoo.org/wiki/NVidia/nvidia-drivers#Kernel_module_parameters" class="extiw" title="gentoo:NVidia/nvidia-drivers">Gentoo:NVidia/nvidia-drivers#Kernel module parameters</a> as well.
+</p>
+<p>For example, enabling the following will enable the PAT feature <a rel="nofollow" class="external autonumber" href="https://docs.kernel.org/arch/x86/pat.html">[7]</a>, which affects how memory is allocated. PAT was first introduced in Pentium III <a rel="nofollow" class="external autonumber" href="https://www.kernel.org/doc/ols/2008/ols2008v2-pages-135-144.pdf">[8]</a> and is supported by most newer CPUs (see <a href="https://en.wikipedia.org/wiki/Page_attribute_table#Processors" class="extiw" title="wikipedia:Page attribute table">wikipedia:Page attribute table#Processors</a>). If your system can support this feature, it should improve performance.
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/modprobe.d/nvidia.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">options nvidia NVreg_UsePageAttributeTable=1</pre>
+<p>On some notebooks, to enable any NVIDIA settings tweaking you must include this option, otherwise it responds with "Setting applications clocks is not supported" etc.
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/modprobe.d/nvidia.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">options nvidia NVreg_RegistryDwords="OverrideMaxPerf=0x1"</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> As per <a href="../../en/Kernel_module.html#Using_modprobe.d" title="Kernel module">Kernel module#Using modprobe.d</a>, you will need to <a href="../../en/Mkinitcpio.html#Image_creation_and_activation" class="mw-redirect" title="Regenerate the initramfs">regenerate the initramfs</a> if using <a href="../../en/NVIDIA.html#DRM_kernel_mode_setting" title="NVIDIA">early KMS</a>.</div>
+<h2><span class="mw-headline" id="Preserve_video_memory_after_suspend">Preserve video memory after suspend</span></h2>
+<p>By default the NVIDIA Linux drivers save and restore only essential video memory allocations on system suspend and resume. Quoting NVIDIA:
+</p>
+<dl><dd>The resulting loss of video memory contents is partially compensated for by the user-space NVIDIA drivers, and by some applications, but can lead to failures such as rendering corruption and application crashes upon exit from power management cycles.</dd></dl>
+<p>The "still experimental" interface enables saving all video memory (given enough space on disk or RAM).
+</p>
+<p>To save and restore all video memory contents, <code>NVreg_PreserveVideoMemoryAllocations=1</code> <a href="../../en/Kernel_module.html#Setting_module_options" class="mw-redirect" title="Kernel module parameter">kernel module parameter</a> for the <code>nvidia</code> kernel module needs to be set. While NVIDIA does not set this by default, Arch Linux does so for the supported drivers, making preserve work out of the box.
+</p>
+<p>To verify that <code>NVreg_PreserveVideoMemoryAllocations</code> is enabled, execute the following:
+</p>
+<pre># cat /proc/driver/nvidia/params | sort
+</pre>
+<p>Which should have a line <code>PreserveVideoMemoryAllocations: 1</code>, and also <code>TemporaryFilePath: "/var/tmp"</code>, which you can read about below.
+</p>
+<p>Necessary services <code>nvidia-suspend.service</code>, <code>nvidia-hibernate.service</code>, and <code>nvidia-resume.service</code> are <a href="../../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Enabled">enabled</a> by default on supported drivers, as per upstream requirements.
+</p>
+<p>See <a rel="nofollow" class="external text" href="https://download.nvidia.com/XFree86/Linux-x86_64/565.77/README/powermanagement.html">NVIDIA's documentation</a> for more details.
+</p>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../../File:Inaccurate.svg" decoding="async" width="48" height="48" class="mw-file-element"></span></span><b>The factual accuracy of this article or section is disputed.</b></p>
+<div>
+<b>Reason:</b> When using early KMS, i.e. when the loading of <code>nvidia</code> module happens in the initramfs, it has no access to <code>NVreg_TemporaryFilePath</code> which stores the previous video memory. IOW, early KMS should not be used if hibernation is desired. (Discuss in <a rel="nofollow" class="external text" href="../../en/Talk:NVIDIA/Tips_and_tricks.html">Talk:NVIDIA/Tips and tricks</a>)</div>
+</div>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> 
+<ul>
+<li>As per <a href="../../en/Kernel_module.html#Using_modprobe.d" title="Kernel module">Kernel module#Using modprobe.d</a>, you will need to <a href="../../en/Mkinitcpio.html#Image_creation_and_activation" class="mw-redirect" title="Regenerate the initramfs">regenerate the initramfs</a> if using <a href="../../en/NVIDIA.html#DRM_kernel_mode_setting" title="NVIDIA">early KMS</a>.</li>
+<li>The video memory contents are by upstream default saved to <code>/tmp</code>, which is a <a href="../../en/Tmpfs.html" title="Tmpfs">tmpfs</a>. <a rel="nofollow" class="external text" href="https://download.nvidia.com/XFree86/Linux-x86_64/565.77/README/powermanagement.html#PreserveAllVide719f0">NVIDIA recommends</a> using an other filesystem to achieve the best performance. This is also required if the size is not sufficient for the amount of memory. Arch Linux thus sets <code>nvidia.NVreg_TemporaryFilePath=/var/tmp</code> by default on supported drivers.</li>
+<li>The chosen file system containing the file needs to support unnamed temporary files (e.g. ext4 or XFS) and have sufficient capacity for storing the video memory allocations (i.e. at least 5 percent more than the sum of the memory capacities of all NVIDIA GPUs). Use the command <code>nvidia-smi --query-gpu=memory.total --format=csv,noheader,nounits</code> to list the memory capacities of all GPUs in the system.</li>
+<li>While <code>nvidia-resume.service</code> is marked as required by NVIDIA, it can be optional, as its functionality is also provided by a <span class="plainlinks archwiki-template-man" title="$ man 8 systemd-sleep"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd-sleep.8">systemd-sleep(8)</a></span> hook (<code>/usr/lib/systemd/system-sleep/nvidia</code>) and the latter is invoked automatically. Note that <a rel="nofollow" class="external text" href="https://gitlab.gnome.org/GNOME/gdm/-/issues/784">GDM with Wayland</a> however explicitly requires <code>nvidia-resume.service</code> to be enabled.</li>
+</ul>
+</div>
+<h2><span class="mw-headline" id="Driver_persistence">Driver persistence</span></h2>
+<p>NVIDIA has a daemon that can be optionally run at boot. In a standard single-GPU X desktop environment the persistence daemon is not needed and can actually create issues <a rel="nofollow" class="external autonumber" href="https://devtalk.nvidia.com/default/topic/1044421/linux/nvidia-persistenced-causing-60-second-reboot-delays">[9]</a>. See the <a rel="nofollow" class="external text" href="https://docs.nvidia.com/deploy/driver-persistence/index.html#persistence-daemon">Driver Persistence</a> section of the NVIDIA documentation for more details.
+</p>
+<p>To start the persistence daemon at boot, <a href="../../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Enable">enable</a> the <code>nvidia-persistenced.service</code>. For manual usage see the <a rel="nofollow" class="external text" href="https://docs.nvidia.com/deploy/driver-persistence/index.html#usage">upstream documentation</a>.
+</p>
+<h2><span class="mw-headline" id="Forcing_YCbCr_with_4:2:0_subsampling">Forcing YCbCr with 4:2:0 subsampling</span></h2>
+<p>If you are facing <a href="https://en.wikipedia.org/wiki/HDMI#Refresh_frequency_limits_for_standard_video" class="extiw" title="wikipedia:HDMI">limitations of older output standards</a> that can still be mitigated by using YUV 4:2:0, the NVIDIA driver has an undocumented X11 option to enforce that:
+</p>
+<pre>Option "ForceYUV420" "True"
+</pre>
+<p>This will allow higher resolutions or refresh rates but have detrimental impact on the image quality.
+</p>
+</div>
+</div>
+					<div id="catlinks" class="catlinks" data-mw="interface">
+<div id="mw-normal-catlinks" class="mw-normal-catlinks">
+<a href="../../Special:Categories.html" title="Special:Categories">Categories</a>: <ul>
+<li><a href="../../en/Category:Graphics.html" title="Category:Graphics">Graphics</a></li>
+<li><a href="../../en/Category:X_server.html" title="Category:X server">X server</a></li>
+</ul>
+</div>
+<div id="mw-hidden-catlinks" class="mw-hidden-catlinks mw-hidden-cats-hidden">Hidden category: <ul><li><a href="../../en/Category:Pages_or_sections_flagged_with_Template:Accuracy.html" title="Category:Pages or sections flagged with Template:Accuracy">Pages or sections flagged with Template:Accuracy</a></li></ul>
+</div>
+</div>
+				</div>
+			</main>
+			
+		</div>
+		<div class="mw-footer-container">
+			
+<footer id="footer" class="mw-footer" style="margin: 0">
+	<ul id="footer-info">
+	<li data-nosnippet="">Retrieved from "<a dir="ltr" href="https://wiki.archlinux.org/index.php?title=NVIDIA/Tips_and_tricks&amp;oldid=829609">https://wiki.archlinux.org/index.php?title=NVIDIA/Tips_and_tricks&amp;oldid=829609</a>"</li>
+<li id="footer-info-lastmod"> This page was last edited on 22 March 2025, at 10:41.</li>
+	<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+<br>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="https://terms.archlinux.org/docs/privacy-policy/">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="../../en/ArchWiki:About.html">About ArchWiki</a></li>
+	<li id="footer-places-disclaimers"><a href="../../en/ArchWiki:General_disclaimer.html">Disclaimers</a></li>
+	<li id="footer-places-archwiki-code-of-conduct"><a href="https://terms.archlinux.org/docs/code-of-conduct/" class="extiw" title="archlinux-service-agreements:code-of-conduct">Code of conduct</a></li>
+	<li id="footer-places-archwiki-terms-of-service"><a href="https://terms.archlinux.org/docs/terms-of-service/" class="extiw" title="archlinux-service-agreements:terms-of-service">Terms of service</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-copyrightico"><a href="https://www.gnu.org/copyleft/fdl.html" class="cdx-button cdx-button--fake-button cdx-button--size-large cdx-button--fake-button--enabled"><img src="/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" loading="lazy"></a></li>
+	<li id="footer-poweredbyico"><img src="/resources/assets/poweredby_mediawiki.svg" width="88" height="31" loading="lazy"></li>
+</ul>
+
+</footer>
+
+		</div>
+	</div> 
+</div> 
+<div class="vector-settings" id="p-dock-bottom">
+	<ul></ul>
+</div>
+</body>
+</html>

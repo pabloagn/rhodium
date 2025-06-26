@@ -1,0 +1,33 @@
+<h1>sshuttle</h1>
+
+<blockquote><p>Transparent proxy server that tunnels traffic over an SSH connection.
+Doesn&rsquo;t require root or any special setup on the remote SSH server, though root access on the local machine is prompted for.
+More information: <a href="https://manned.org/sshuttle">https://manned.org/sshuttle</a>.</p></blockquote>
+
+<ul>
+<li>Forward all IPv4 TCP traffic via a remote SSH server:</li>
+</ul>
+
+
+<p><code>sshuttle {{[-r|--remote]}} {{username}}@{{sshserver}} {{0.0.0.0/0}}</code></p>
+
+<ul>
+<li>Also forward all DNS traffic to the server&rsquo;s default DNS resolver:</li>
+</ul>
+
+
+<p><code>sshuttle --dns {{[-r|--remote]}} {{username}}@{{sshserver}} {{0.0.0.0/0}}</code></p>
+
+<ul>
+<li>Forward all traffic except that which is bound for a specific subnet:</li>
+</ul>
+
+
+<p><code>sshuttle {{[-r|--remote]}} {{username}}@{{sshserver}} {{0.0.0.0/0}} {{[-x|--exclude]}} {{192.168.0.1/24}}</code></p>
+
+<ul>
+<li>Use the tproxy method to forward all IPv4 and IPv6 traffic:</li>
+</ul>
+
+
+<p><code>sshuttle --method tproxy {{[-r|--remote]}} {{username}}@{{sshserver}} {{0.0.0.0/0}} {{::/0}} {{[-x|--exclude]}} {{your_local_ip_address}} {{[-x|--exclude]}} {{ssh_server_ip_address}}</code></p>

@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-sticky-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-0 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-disabled skin-theme-clientpref-day vector-toc-available" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>dm-verity - ArchWiki</title>
+<link rel="stylesheet" href="../ArchWikiOffline.css">
+<meta name="ResourceLoaderDynamicStyles" content="">
+<meta name="generator" content="MediaWiki 1.43.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="max-image-preview:standard">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.25, maximum-scale=5.0">
+<link rel="search" type="application/opensearchdescription+xml" href="/rest.php/v1/search" title="ArchWiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.archlinux.org/api.php?action=rsd">
+<link rel="license" href="https://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="ArchWiki Atom feed" href="/index.php?title=Special:RecentChanges&amp;feed=atom">
+</head>
+<body class="skin--responsive skin-vector skin-vector-search-vue mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Dm-verity rootpage-Dm-verity skin-vector-2022 action-view">
+<a class="mw-jump-link" href="#bodyContent">Jump to content</a>
+<div class="vector-header-container">
+	</div>
+<div class="mw-page-container">
+	<div class="mw-page-container-inner">
+		<div class="vector-column-start">
+			<div class="vector-main-menu-container">
+		</div>
+	<div class="vector-sticky-pinned-container">
+				<nav id="mw-panel-toc" aria-label="Contents" data-event-name="ui.sidebar-toc" class="mw-table-of-contents-container vector-toc-landmark">
+					<div id="vector-toc-pinned-container" class="vector-pinned-container">
+					<div id="vector-toc" class="vector-toc vector-pinnable-element">
+	<div class="vector-pinnable-header vector-toc-pinnable-header vector-pinnable-header-pinned" data-feature-name="toc-pinned" data-pinnable-element-id="vector-toc">
+	<h2 class="vector-pinnable-header-label">Contents</h2>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-toc.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-toc.unpin">hide</button>
+</div>
+
+
+	<ul class="vector-toc-contents" id="mw-panel-toc-list">
+		<li id="toc-mw-content-text" class="vector-toc-list-item vector-toc-level-1">
+			<a href="#" class="vector-toc-link">
+				<div class="vector-toc-text">Beginning</div>
+			</a>
+		</li>
+		<li id="toc-Components" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Components">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">1</span>
+				<span>Components</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Components-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Preparation" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Preparation">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">2</span>
+				<span>Preparation</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Preparation-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Preparation subsection</span>
+			</button>
+		
+		<ul id="toc-Preparation-sublist" class="vector-toc-list">
+			<li id="toc-Partitioning" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Partitioning">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1</span>
+					<span>Partitioning</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Partitioning-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Possible_issues_with_boot_and_runtime" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Possible_issues_with_boot_and_runtime">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2</span>
+					<span>Possible issues with boot and runtime</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Possible_issues_with_boot_and_runtime-sublist" class="vector-toc-list">
+				<li id="toc-Pacman" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Pacman">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2.1</span>
+					<span>Pacman</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Pacman-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-NetworkManager" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#NetworkManager">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2.2</span>
+					<span>NetworkManager</span>
+				</div>
+			</a>
+			
+			<ul id="toc-NetworkManager-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Setting_up_verity" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Setting_up_verity">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">3</span>
+				<span>Setting up verity</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Setting_up_verity-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Setting up verity subsection</span>
+			</button>
+		
+		<ul id="toc-Setting_up_verity-sublist" class="vector-toc-list">
+			<li id="toc-Configuring_the_kernel_command_line" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Configuring_the_kernel_command_line">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1</span>
+					<span>Configuring the kernel command line</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Configuring_the_kernel_command_line-sublist" class="vector-toc-list">
+				<li id="toc-Additional_recommended_options" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Additional_recommended_options">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1.1</span>
+					<span>Additional recommended options</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Additional_recommended_options-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Devices_other_than_root" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Devices_other_than_root">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">4</span>
+				<span>Devices other than root</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Devices_other_than_root-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Security_considerations" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Security_considerations">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">5</span>
+				<span>Security considerations</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Security_considerations-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Security considerations subsection</span>
+			</button>
+		
+		<ul id="toc-Security_considerations-sublist" class="vector-toc-list">
+			<li id="toc-Secure_Boot" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Secure_Boot">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.1</span>
+					<span>Secure Boot</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Secure_Boot-sublist" class="vector-toc-list">
+				<li id="toc-Unified_kernel_image" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Unified_kernel_image">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.1.1</span>
+					<span>Unified kernel image</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Unified_kernel_image-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Signing_kernel_modules/DKMS" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Signing_kernel_modules/DKMS">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.1.2</span>
+					<span>Signing kernel modules/DKMS</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Signing_kernel_modules/DKMS-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Encryption" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Encryption">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.2</span>
+					<span>Encryption</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Encryption-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-TPM" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#TPM">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.3</span>
+					<span>TPM</span>
+				</div>
+			</a>
+			
+			<ul id="toc-TPM-sublist" class="vector-toc-list">
+				<li id="toc-systemd-boot" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#systemd-boot">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.3.1</span>
+					<span>systemd-boot</span>
+				</div>
+			</a>
+			
+			<ul id="toc-systemd-boot-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Mandatory_access_control" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Mandatory_access_control">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.4</span>
+					<span>Mandatory access control</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Mandatory_access_control-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Updating_packages" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Updating_packages">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">6</span>
+				<span>Updating packages</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Updating_packages-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Updating packages subsection</span>
+			</button>
+		
+		<ul id="toc-Updating_packages-sublist" class="vector-toc-list">
+			<li id="toc-Building_images" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Building_images">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.1</span>
+					<span>Building images</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Building_images-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-A/B_update_scheme" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#A/B_update_scheme">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.2</span>
+					<span>A/B update scheme</span>
+				</div>
+			</a>
+			
+			<ul id="toc-A/B_update_scheme-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-overlayfs" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#overlayfs">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.3</span>
+					<span>overlayfs</span>
+				</div>
+			</a>
+			
+			<ul id="toc-overlayfs-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Flatpak" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Flatpak">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.4</span>
+					<span>Flatpak</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Flatpak-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Tips_and_tricks" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Tips_and_tricks">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">7</span>
+				<span>Tips and tricks</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Tips_and_tricks-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Tips and tricks subsection</span>
+			</button>
+		
+		<ul id="toc-Tips_and_tricks-sublist" class="vector-toc-list">
+			<li id="toc-Automation" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Automation">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">7.1</span>
+					<span>Automation</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Automation-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-See_also" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#See_also">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">8</span>
+				<span>See also</span>
+			</div>
+		</a>
+		
+		<ul id="toc-See_also-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+</ul>
+</div>
+
+					</div>
+		</nav>
+			</div>
+		</div>
+		<div class="mw-content-container">
+			<main id="content" class="mw-body" style="margin: 0">
+				<header class="mw-body-header vector-page-titlebar">
+					<nav aria-label="Contents" class="vector-toc-landmark">
+						
+<div id="vector-page-titlebar-toc" class="vector-dropdown vector-page-titlebar-toc vector-button-flush-left">
+	<input type="checkbox" id="vector-page-titlebar-toc-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-page-titlebar-toc" class="vector-dropdown-checkbox " aria-label="Toggle the table of contents">
+	<label id="vector-page-titlebar-toc-label" for="vector-page-titlebar-toc-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"><span class="vector-icon mw-ui-icon-listBullet mw-ui-icon-wikimedia-listBullet"></span>
+
+<span class="vector-dropdown-label-text">Toggle the table of contents</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+							<div id="vector-page-titlebar-toc-unpinned-container" class="vector-unpinned-container">
+			</div>
+		
+	</div>
+</div>
+
+					</nav>
+					<h1 id="firstHeading" class="firstHeading mw-first-heading">dm-verity</h1>
+				</header>
+				<div class="vector-column-end">
+					<div class="vector-sticky-pinned-container">
+						<nav class="vector-page-tools-landmark" aria-label="Page tools">
+							<div id="vector-page-tools-pinned-container" class="vector-pinned-container">
+				
+							</div>
+		</nav>
+						<nav class="vector-appearance-landmark" aria-label="Appearance">
+							<div id="vector-appearance-pinned-container" class="vector-pinned-container">
+				<div id="vector-appearance" class="vector-appearance vector-pinnable-element">
+	<div class="vector-pinnable-header vector-appearance-pinnable-header vector-pinnable-header-pinned" data-feature-name="appearance-pinned" data-pinnable-element-id="vector-appearance" data-pinned-container-id="vector-appearance-pinned-container" data-unpinned-container-id="vector-appearance-unpinned-container">
+	<div class="vector-pinnable-header-label">Appearance</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-appearance.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-appearance.unpin">hide</button>
+</div>
+
+
+</div>
+
+							</div>
+		</nav>
+					</div>
+				</div>
+				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container>
+					<div class="vector-body-before-content">
+							<div class="mw-indicators">
+		</div>
+
+						<div id="siteSub" class="noprint">From ArchWiki</div>
+					</div>
+					<div id="contentSub"><div id="mw-content-subtitle"></div></div>
+					
+					
+					<div id="mw-content-text" class="mw-body-content">
+<div class="mw-content-ltr mw-parser-output" lang="en" dir="ltr">
+<p><span>
+</span>
+</p>
+<div class="archwiki-template-meta-related-articles">
+<p>Related articles</p>
+<ul>
+<li><a href="../en/Dm-integrity.html" title="Dm-integrity">dm-integrity</a></li>
+</ul>
+</div>
+<p>Dm-verity uses a tree of sha256 hashes to verify blocks as they are read from a block device. Consequently, this ensures files have not changed between reboots or during runtime. This is useful for extending trust to the OS by mitigating zero days and unauthorized changes to root, as well as enforcing security policies, encryption and userspace security. Verity devices are regular block devices which can be accessed in <code>/dev/mapper</code>.
+</p>
+<p>dm-verity is part of the <a href="https://en.wikipedia.org/wiki/Device_mapper" class="extiw" title="wikipedia:Device mapper">device mapper</a> in the Linux kernel and is implemented using <a href="../en/Systemd.html" title="Systemd">systemd</a>.
+</p>
+<p>This article mainly describes setting up a verity-protected read-only root partition.
+</p>
+<meta property="mw:PageProp/toc">
+<h2><span class="mw-headline" id="Components">Components</span></h2>
+<p>A dm-verity root setup setup consists of the following:
+</p>
+<ol>
+<li>a <code>/</code> root filesystem image or partition,</li>
+<li>verity hash tree <code>verity.bin</code>,</li>
+<li>the root hash of the verity tree <code>roothash.txt</code>,</li>
+<li>
+<code>systemd-veritysetup.generator</code>,</li>
+<li>
+<code>systemd-veritysetup@.service</code>,</li>
+<li>verity <a href="../en/Kernel_parameters.html" class="mw-redirect" title="Kernel command line">kernel command line</a> options,</li>
+<li>
+<i>veritysetup</i> (part of <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=cryptsetup">cryptsetup</a></span>),</li>
+<li>a <a href="../en/Unified_kernel_image.html" title="Unified kernel image">unified kernel image</a> which contains a stub EFI loader, kernel, initramfs, kernel command line, and microcode: <code>kernel.efi</code>,</li>
+<li>
+<a href="../en/Unified_Extensible_Firmware_Interface/Secure_Boot.html" class="mw-redirect" title="Secure Boot">Secure Boot</a>.</li>
+</ol>
+<p>The unified kernel image and Secure Boot are recommended but not required. Verity is intended to be used as one of the last steps in a boot process that protects the OS and the kernel from changes. It is easily defeated without Secure Boot and unified kernel images.
+</p>
+<h2><span class="mw-headline" id="Preparation">Preparation</span></h2>
+<p>To enable dm-verity, you must have a working system already installed and configured. See <a href="../en/Installation_guide.html" title="Installation guide">Installation guide</a> for the details.
+</p>
+<p>Typically, it is necessary to have a separate partition or logical volume to store the verity hash data.
+</p>
+<p>The recommended disk layout is similar to this:
+</p>
+<h3><span class="mw-headline" id="Partitioning">Partitioning</span></h3>
+<ol>
+<li>EFI system partition for the boot loader (<code>LABEL=ESP</code>);</li>
+<li>XBOOTLDR partition (<code>LABEL=XBOOT</code>) <div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> Using systemd's XBOOTLDR partition type allows you to keep the boot loader and kernels separate. This can be useful for creating images used to install or update embedded systems and servers, but it requires you to use <a href="../en/Systemd-boot.html" title="Systemd-boot">systemd-boot</a>. It is recommended to also put the Type 1 boot loader entries into this partition.</div>
+</li>
+<li>Root partition (<code>LABEL=OS</code>, optionally with encryption, see <a href="../en/Data-at-rest_encryption.html" title="Data-at-rest encryption">Data-at-rest encryption</a>).</li>
+<li>Verity partition (<code>LABEL=VERITY</code>), should require 8-10% the size of Root</li>
+<li>Home (optional if you want write access for a user)</li>
+<li>Var (many programs will not run if <code>/var</code> is not writable, so it should be separate from the root partition depending on use case)</li>
+</ol>
+<dl><dd><div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> Using file system labels instead of UUIDs simplifies deploying images on embedded devices. Two devices will have differing partition UUIDs making bundling cmdline into a <a href="../en/Unified_kernel_image.html" class="mw-redirect" title="UKI">UKI</a> difficult.</div></dd></dl>
+<p><code>/home</code> and <code>/var</code> should be writable filesystems. On a server that just has one purpose this may be optional, since e.g. a wireguard server needs no write access to the disk.
+</p>
+<p><span class="plainlinks archwiki-template-man" title="$ man 1 mkfs.erofs"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/mkfs.erofs.1">mkfs.erofs(1)</a></span> offers an attractive alternative to ext4 or squashfs on the root partition. EROFS, like squashfs, does not allow writes by design and has better performance in many cases than comparable filesystems on flash and solid-state media. It uses lz4 compression by default and was designed for Android phones by Huawei, which make extensive use of dm-verity.
+</p>
+<h3><span class="mw-headline" id="Possible_issues_with_boot_and_runtime">Possible issues with boot and runtime</span></h3>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../File:Inaccurate.svg" decoding="async" width="48" height="48" class="mw-file-element"></span></span><b>The factual accuracy of this article or section is disputed.</b></p>
+<div>
+<b>Reason:</b> The listed repository has been deleted. (Discuss in <a rel="nofollow" class="external text" href="../en/Talk:Dm-verity.html">Talk:Dm-verity</a>)</div>
+</div>
+<p>Any files that need to be written to during init or changed during runtime must be made writable by some method otherwise the program will not function as expected.
+</p>
+<p>Many programs need write access to <code>etc</code>. You can use a separate <code>/etc</code> partition but this will make <b>all</b> of these configuration files writable. Create a folder <code>/var/etc</code> and move the files that need write access into it than symlink into <code>etc</code>, as with the example with NetworkManager below.
+</p>
+<p>Some programs will expect these folders and files to still exist (even read-only) on the root filesystem for early init. For instance, <i>systemd-journald</i> will break if <code>/etc/machine-id</code> does not exist or is a symlink. Bind mounts can be useful for this.
+</p>
+<p>One way to find out which files will change when the system is running is to enable the <code>dracut-overlayroot</code> module, use the system, and check the files in <code>/run/overlayroot/u</code> to see what you may need to address. Any files in this folder were written to the tmpfs overlaid on top of root. Place the module into <code>/usr/lib/dracut/modules.d/</code>, add <code>overlayroot</code> to the <a href="../en/Dracut.html" title="Dracut">dracut</a> modules list, and <code>overlayroot=1</code> to your kernel command line and <a href="../en/Mkinitcpio.html#Image_creation_and_activation" class="mw-redirect" title="Regenerate the initramfs">regenerate the initramfs</a>. The module can be found at <a rel="nofollow" class="external free" href="https://github.com/TylerHelt0/dracut-overlayroot">https://github.com/TylerHelt0/dracut-overlayroot</a><sup title="Last check status: 404">[<a href="https://en.wikipedia.org/wiki/Wikipedia:Link_rot" class="extiw" title="wikipedia:Wikipedia:Link rot">dead link</a> 2023-05-06 ⓘ]</sup>.
+</p>
+<h4><span class="mw-headline" id="Pacman">Pacman</span></h4>
+<p>Since the root filesystem will be mounted read-only and <code>/var</code> should be mounted read-write in most cases, the path to the <i>pacman</i> database should be changed to <code>/usr/lib/pacman</code>. This will ensure the rootfs always has the correct list of installed packages.
+</p>
+<ol>
+<li><code>cp /var/lib/pacman /usr/lib</code></li>
+<li>
+<a href="../en/Help:Reading.html#Append,_add,_create,_edit" class="mw-redirect" title="Textedit">Edit</a> <code>/etc/pacman.conf</code> and set <code>DBPath = /usr/lib/pacman</code>
+</li>
+<li>To be able to sync lists and check updates, move <code>/usr/lib/pacman/cache</code> to <code>/var/lib/pacman</code> and symlink it.</li>
+<li>If you wish to be able to change mirrorlist without modifying the root file system, move it to <code>/var/etc</code> and symlink it as well.</li>
+</ol>
+<h4><span class="mw-headline" id="NetworkManager">NetworkManager</span></h4>
+<p>To setup connections with <a href="../en/NetworkManager.html" title="NetworkManager">NetworkManager</a>, you need write access to <code>/etc/NetworkManager/system-connections</code>. Move the <code>system-connections</code> folder to <code>/var/etc/NetworkManager/system-connections</code> and symlink to it on the root filesystem.
+</p>
+<pre># ln -sf /etc/NetworkManager/system-connections /var/etc/NetworkManager/system-connections
+</pre>
+<h2><span class="mw-headline" id="Setting_up_verity">Setting up verity</span></h2>
+<ol>
+<li>Boot from a live medium</li>
+<li>Mount your root filesystem as read-only</li>
+<li>Make sure all your changes are perfect</li>
+<li>do <code>veritysetup format <i>root-device</i> <i>verity-device</i> | grep Root | cut -f2 &gt;&gt; roothash.txt</code>
+</li>
+</ol>
+<p>You will now have the rootfs, the verity hash tree, and the roothash. Alternatively you can save the hashes to a file by replacing the <code><i>verity-device</i></code> path and write it to the device later.
+</p>
+<p>To test it you can use <code>veritysetup open <i>root-device</i> root <i>verity-device</i> $(cat roothash.txt)</code>. The verity device can be mounted from <code>/dev/mapper/root</code>.
+</p>
+<h3><span class="mw-headline" id="Configuring_the_kernel_command_line">Configuring the kernel command line</span></h3>
+<p>Add the following options to your kernel command line:
+</p>
+<ol>
+<li><code>systemd.verity=1</code></li>
+<li><code>roothash=<i>contents_of_roothash.txt</i></code></li>
+<li><code>systemd.verity_root_data=<i>PATH-TO-ROOT, e.g. LABEL=Root</i></code></li>
+<li><code>systemd.verity_root_hash=<i>PATH-TO-VERITY-PARTITION, e.g. LABEL=Verity</i></code></li>
+<li>
+<code>systemd.verity_root_options=restart-on-corruption</code> or <code>panic-on-corruption</code> (the default behavior will just print an error to <a href="../en/Core_utilities.html#Essentials" class="mw-redirect" title="Dmesg">dmesg</a> and will not prevent untrusted code from running)</li>
+</ol>
+<p>If the roothash changes you must also edit the cmdline/rebuild the unified kernel image with the new value. Failure to do so can result in an unbootable system.
+</p>
+<h4><span class="mw-headline" id="Additional_recommended_options">Additional recommended options</span></h4>
+<ol>
+<li>
+<code>ro</code> to prevent changes to root if not using erofs or squashfs</li>
+<li>
+<code>rd.emergency=reboot</code> to prevents access to a shell if the root is corrupt</li>
+<li>
+<code>rd.shell=0</code> to prevents access to a shell if boot fails</li>
+<li>
+<code>lsm=lockdown</code> enables kernel lockdown mode, requires signed kernel modules</li>
+<li>
+<code>lockdown=confidentiality</code> prevents users from accessing kernel memory</li>
+</ol>
+<h2><span class="mw-headline" id="Devices_other_than_root">Devices other than root</span></h2>
+<p>The use of <i>dm-verity</i> is not limited to the root device. Other devices that need to be verified at boot can be put into <code>/etc/veritytab</code> and will be assembled by <code>systemd-veritysetup@.service</code>. See <span class="plainlinks archwiki-template-man" title="$ man 5 veritytab"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/veritytab.5">veritytab(5)</a></span> for more information.
+</p>
+<p>Be aware that it is much easier to remount a non-root partition as RW while the system is running. Integrity violations also will not trigger a reboot. Even if <code></code> has verity enabled, it is trivial for a user with root privileges to disable verity on a non-root partition.
+</p>
+<h2><span class="mw-headline" id="Security_considerations">Security considerations</span></h2>
+<p>dm-verity does not provide an all-in-one solution but should be used alongside other methods of securing the system when the disk is removed and when the system is fully booted.
+</p>
+<h3><span class="mw-headline" id="Secure_Boot">Secure Boot</span></h3>
+<p>It is recommended to enable <a href="../en/Unified_Extensible_Firmware_Interface/Secure_Boot.html" class="mw-redirect" title="Secure Boot">Secure Boot</a> with custom keys after verity is setup.
+</p>
+<p>Verity protection is useless if a virus or attacker can replace the <code>kernel.efi</code> containing the embedded roothash which would allow any root filesystem to be booted. Signing the kernel image for Secure Boot will prevent the kernel image from being replaced and ensure integrity of the root filesystem as long as the firmware is secure.
+</p>
+<p><span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/sbupdate-git/">sbupdate-git</a></span><sup><small>AUR</small></sup> or <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=sbctl">sbctl</a></span> can be used to maintain your unified kernel images and keep your bootloader signed. <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/sbupdate-git/">sbupdate-git</a></span><sup><small>AUR</small></sup> will also handle your kernel command line. <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=sbctl">sbctl</a></span> can be used to create Secure Boot keys.
+</p>
+<h4><span class="mw-headline" id="Unified_kernel_image">Unified kernel image</span></h4>
+<p>UKIs bundle together at minimum the linux kernel, an initramfs, CPU microcode, and a cmdline. The advantage to using an UKI is that it prevents changes to both the kernel, initramfs and cmdline when the UKI is signed and used with secureboot. If the cmdline section of the UKI is left blank, it can be supplied by a bootloader like systemd-boot. Otherwise it can only be changed by rebuilding and resigning a new UKI.
+</p>
+<p>UKIs can be directly booted by UEFI if kernel efistub is enabled or if shim/preloader is used.
+</p>
+<h4>
+<span id="Signing_kernel_modules.2FDKMS"></span><span class="mw-headline" id="Signing_kernel_modules/DKMS">Signing kernel modules/DKMS</span>
+</h4>
+<p>The default kernels ship with pre-signed native modules. If <a href="../en/Dynamic_Kernel_Module_Support.html" class="mw-redirect" title="DKMS">DKMS</a> is used, one must create a custom kernel to enable signing and loading of DKMS modules when secureboot is enabled which activates lockdown mode. If you skip this step DKMS modules will refuse to load.
+</p>
+<p>More information about signed kernel modules can be found here: <a href="../en/Signed_kernel_modules.html" title="Signed kernel modules">Signed kernel modules</a>
+</p>
+<h3><span class="mw-headline" id="Encryption">Encryption</span></h3>
+<p>Although the verity root device will be tamper-resistant, it provides no confidentiality. It could be located on an unencrypted partition if it contains no secret data. If the kernel is protected by Secure Boot, it would be impossible to replace the data in the root or verity devices without replacing the kernel.
+</p>
+<p>The verity root device can be used to unlock other encrypted devices. If done with keyfiles, the verity root <b>should</b> be encrypted. If using a TPM and <i>systemd-cryptenroll</i> to store keys, the verity root could be unencrypted.
+</p>
+<h3><span class="mw-headline" id="TPM">TPM</span></h3>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../File:Inaccurate.svg" decoding="async" width="48" height="48" class="mw-file-element"></span></span><b>The factual accuracy of this article or section is disputed.</b></p>
+<div>
+<b>Reason:</b> <span class="plainlinks archwiki-template-man" title="$ man 1 systemd-cryptenroll"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd-cryptenroll.1">systemd-cryptenroll(1)</a></span> recommends PCR7 only (Discuss in <a rel="nofollow" class="external text" href="../en/Talk:Dm-verity.html">Talk:Dm-verity</a>)</div>
+</div>
+<p>A <a href="../en/Trusted_Platform_Module.html" class="mw-redirect" title="TPM">TPM</a> 2.0 can be used to protect encryption keys for the LUKS device containing root. After Secure Boot is enabled, you can use <code>systemd-cryptenroll</code> to bind keys to PCRs. Recommended PCRs are 0,1,5,7. This will stop decryption if the firmware, firmware options, GPT layout or secure boot state is changed, respectively.
+</p>
+<p>The reason for binding on 0,1, and 5 is to ensure attackers cannot replace the motherboard firmware to disable secureboot and consequently disable verity.
+</p>
+<p>You must pass this kernel option:
+</p>
+<pre>rd.luks.options=<i>UUID_of_LUKS</i>=tpm2-device=auto
+</pre>
+<p>You may also need to add tpm2 support to your initramfs or include the module if using dracut. See <a href="../en/Systemd-cryptenroll.html#Trusted_Platform_Module" title="Systemd-cryptenroll">systemd-cryptenroll#Trusted Platform Module</a> for more information.
+</p>
+<h4><span class="mw-headline" id="systemd-boot">systemd-boot</span></h4>
+<p>If you use <a href="../en/Systemd-boot.html" title="Systemd-boot">systemd-boot</a> as your bootloader, it will measure the <code>kernel.efi</code> into PCR 4. This can be used to prevent decryption of root if the kernel image, initramfs, or kernel command line is changed.
+</p>
+<h3><span class="mw-headline" id="Mandatory_access_control">Mandatory access control</span></h3>
+<p>During runtime, methods such as OverlayFS, tmpfs, and bind mounts can still be used to get write access on the folders within <code>root</code>. For this reason, it is important to still harden the OS. Apparmor, SELinux and other access control mechanisms are useful for this.
+</p>
+<h2><span class="mw-headline" id="Updating_packages">Updating packages</span></h2>
+<p>A dm-verity read-only root should not be updated the traditional way with pacman. Verity is intended mostly for embedded devices and others which value code-integrity over the rolling release model. This has the primary benefits of extending trust to the OS and ensuring a device always boots the same way. E.g. an emulator box for normies or a secure web server. dm-verity, combined with other security methods like selinux, eliminate entire classes of zero-days and consequently the need to update is less frequent unless new features are desired. Think about a router running linux: many routers are compromised by malware without the user ever knowing. If the router was verity-protected in a secure way, it would prevent viruses from gaining persistence.
+</p>
+<p>You could use ext4 for <code>/</code> which enables you to mount it rw. You can then do updates, rehash the filesystem, and change the roothash in the cmdline, but it would be better to release incrementally updated images of the filesystems. Disabling verity to do updates on a writable filesystem is as simple as omitting the systemd.verity=1 cmdline option.
+</p>
+<h3><span class="mw-headline" id="Building_images">Building images</span></h3>
+<p>A VM can be used to maintain a 'rolling' system and imaged when updates are needed. A chroot could work as well. Setup all the partitioning and boot logic the way it is expected to work on the target system, than reboot the VM into a live media and make images of the partitions. If you image the xboot partition, it can be flashed directly to a partition to update the UKI/kernel/initramfs/cmdline. If paired with an image for the root filesystem this is more or less a complete system update.
+</p>
+<p>Systemd already has the logic to retrieve images from an update server (Or local dir) and flash them to partitions which may or may not already exist. It can also install and remove files into existing partitions.
+</p>
+<p>See <span class="plainlinks archwiki-template-man" title="$ man 8 systemd-sysupdate"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd-sysupdate.8">systemd-sysupdate(8)</a></span> and <span class="plainlinks archwiki-template-man" title="$ man 8 systemd-repart"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd-repart.8">systemd-repart(8)</a></span>.
+</p>
+<h3>
+<span id="A.2FB_update_scheme"></span><span class="mw-headline" id="A/B_update_scheme">A/B update scheme</span>
+</h3>
+<p>Another way to handle updates would be to use a system similar to Android's A/B partition system. This entails having two sets of the root and verity partitions. When an update is necessary the active partition could be copied to the inactive one. The inactive partition could than be updated as normal from chroot or with pacman and 'sealed' with dm-verity. On next boot, the inactive partition becomes the active partition.
+</p>
+<p>If using UKI the UKI must be updated with the root and verity partitions. At minimum the kernel cmdline must be updated with new roothash.
+</p>
+<h3><span class="mw-headline" id="overlayfs">overlayfs</span></h3>
+<p>If the user wants a system that has optional persistence or can install packages which are reverted at reboot, an overlay can be mounted as root with the verity root as the lower dir. The upper dir could be a persistent block device or a tmpfs. If using A/B, one could remount <code>/</code> as a writable OverlayFS and use normal update methods, than copy the contents of the overlayfs into the inactive partition and rehash verity.
+</p>
+<p>If the user requires temporary persistence (for example, the ability to install packages that are reset at boot), <code>systemd.volatile=overlay</code> can be passed on the kernel command line.
+</p>
+<h3><span class="mw-headline" id="Flatpak">Flatpak</span></h3>
+<p>Flatpak can be used to install and update apps within <code>var</code> and <code>home</code> without write access to <code>/</code>. Flatpak would be ideal to solve most user's needs for installing applications and updating them in a verity-protected desktop PC. Flatpak works on <code>/var</code> by default.
+</p>
+<h2><span class="mw-headline" id="Tips_and_tricks">Tips and tricks</span></h2>
+<h3><span class="mw-headline" id="Automation">Automation</span></h3>
+<p>The above steps can be automated with the package <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/verity-squash-root/">verity-squash-root</a></span><sup><small>AUR</small></sup>. It will build a squashfs rootfs and sign the roothash with the kernel and the initramfs. On boot, you can decide to boot a persistent system, where changes on the overlayfs are saved, or to boot a volatile system. It also keeps the last rootfs as a backup, so you can decide to boot the last working rootfs.
+</p>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Warning:</strong> Adding persistence to a verity protected partition can be useful in narrow situations but should be avoided. Verity was designed to ensure files do not change while the system is running or turned off. Try to persist application specific data in separate partitions.</div>
+<h2><span class="mw-headline" id="See_also">See also</span></h2>
+<ul>
+<li><span class="plainlinks archwiki-template-man" title="$ man 8 systemd-veritysetup@.service"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd-veritysetup%40.service.8">systemd-veritysetup@.service(8)</a></span></li>
+<li><span class="plainlinks archwiki-template-man" title="$ man 8 systemd-veritysetup-generator"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd-veritysetup-generator.8">systemd-veritysetup-generator(8)</a></span></li>
+<li><span class="plainlinks archwiki-template-man" title="$ man 8 veritysetup"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/veritysetup.8">veritysetup(8)</a></span></li>
+<li><span class="plainlinks archwiki-template-man" title="$ man 1 systemd-cryptenroll"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd-cryptenroll.1">systemd-cryptenroll(1)</a></span></li>
+<li><a rel="nofollow" class="external text" href="https://github.com/Foxboron/sbctl">GitHub page for sbctl</a></li>
+<li><a rel="nofollow" class="external text" href="https://github.com/andreyv/sbupdate">GitHub page for sbudate</a></li>
+</ul>
+</div>
+</div>
+					<div id="catlinks" class="catlinks" data-mw="interface">
+<div id="mw-normal-catlinks" class="mw-normal-catlinks">
+<a href="../Special:Categories.html" title="Special:Categories">Category</a>: <ul><li><a href="../en/Category:Security.html" title="Category:Security">Security</a></li></ul>
+</div>
+<div id="mw-hidden-catlinks" class="mw-hidden-catlinks mw-hidden-cats-hidden">Hidden categories: <ul>
+<li><a href="../en/Category:Pages_or_sections_flagged_with_Template:Accuracy.html" title="Category:Pages or sections flagged with Template:Accuracy">Pages or sections flagged with Template:Accuracy</a></li>
+<li><a href="../en/Category:Pages_with_dead_links.html" title="Category:Pages with dead links">Pages with dead links</a></li>
+</ul>
+</div>
+</div>
+				</div>
+			</main>
+			
+		</div>
+		<div class="mw-footer-container">
+			
+<footer id="footer" class="mw-footer" style="margin: 0">
+	<ul id="footer-info">
+	<li data-nosnippet="">Retrieved from "<a dir="ltr" href="https://wiki.archlinux.org/index.php?title=Dm-verity&amp;oldid=828341">https://wiki.archlinux.org/index.php?title=Dm-verity&amp;oldid=828341</a>"</li>
+<li id="footer-info-lastmod"> This page was last edited on 6 March 2025, at 09:58.</li>
+	<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+<br>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="https://terms.archlinux.org/docs/privacy-policy/">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="../en/ArchWiki:About.html">About ArchWiki</a></li>
+	<li id="footer-places-disclaimers"><a href="../en/ArchWiki:General_disclaimer.html">Disclaimers</a></li>
+	<li id="footer-places-archwiki-code-of-conduct"><a href="https://terms.archlinux.org/docs/code-of-conduct/" class="extiw" title="archlinux-service-agreements:code-of-conduct">Code of conduct</a></li>
+	<li id="footer-places-archwiki-terms-of-service"><a href="https://terms.archlinux.org/docs/terms-of-service/" class="extiw" title="archlinux-service-agreements:terms-of-service">Terms of service</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-copyrightico"><a href="https://www.gnu.org/copyleft/fdl.html" class="cdx-button cdx-button--fake-button cdx-button--size-large cdx-button--fake-button--enabled"><img src="/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" loading="lazy"></a></li>
+	<li id="footer-poweredbyico"><img src="/resources/assets/poweredby_mediawiki.svg" width="88" height="31" loading="lazy"></li>
+</ul>
+
+</footer>
+
+		</div>
+	</div> 
+</div> 
+<div class="vector-settings" id="p-dock-bottom">
+	<ul></ul>
+</div>
+</body>
+</html>

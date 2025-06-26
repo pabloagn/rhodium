@@ -1,0 +1,46 @@
+<h1>pueue add</h1>
+
+<blockquote><p>Enqueue a task for execution.
+More information: <a href="https://github.com/Nukesor/pueue">https://github.com/Nukesor/pueue</a>.</p></blockquote>
+
+<ul>
+<li>Add any command to the default queue:</li>
+</ul>
+
+
+<p><code>pueue add {{command}}</code></p>
+
+<ul>
+<li>Pass a list of flags or arguments to a command when enqueuing:</li>
+</ul>
+
+
+<p><code>pueue add -- {{command --arg -f}}</code></p>
+
+<ul>
+<li>Add a command but do not start it if it&rsquo;s the first in a queue:</li>
+</ul>
+
+
+<p><code>pueue add {{[-s|--stashed]}} -- {{rsync {{[-a|--archive]}} {{[-z|--compress]}} /local/directory /remote/directory}}</code></p>
+
+<ul>
+<li>Add a command to a group and start it immediately, see <code>pueue group</code> to manage groups:</li>
+</ul>
+
+
+<p><code>pueue add {{[-i|--immediate]}} {{[-g|--group]}} "{{CPU_intensive}}" -- {{ffmpeg -i input.mp4 frame_%d.png}}</code></p>
+
+<ul>
+<li>Add a command and start it after commands 9 and 12 finish successfully:</li>
+</ul>
+
+
+<p><code>pueue add {{[-a|--after]}} {{9}} {{12}} {{[-g|--group]}} "{{torrents}}" -- {{transmission-cli torrent_file.torrent}}</code></p>
+
+<ul>
+<li>Add a command with a label after some delay has passed, see <code>pueue enqueue</code> for valid datetime formats:</li>
+</ul>
+
+
+<p><code>pueue add {{[-l|--label]}} "{{compressing large file}}" {{[-d|--delay]}} "{{wednesday 10:30pm}}" -- "{{7z a compressed_file.7z large_file.xml}}"</code></p>

@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-sticky-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-0 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-disabled skin-theme-clientpref-day vector-toc-available" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>Install Arch Linux with Fake RAID - ArchWiki</title>
+<link rel="stylesheet" href="../ArchWikiOffline.css">
+<meta name="ResourceLoaderDynamicStyles" content="">
+<meta name="generator" content="MediaWiki 1.43.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="max-image-preview:standard">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.25, maximum-scale=5.0">
+<link rel="search" type="application/opensearchdescription+xml" href="/rest.php/v1/search" title="ArchWiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.archlinux.org/api.php?action=rsd">
+<link rel="license" href="https://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="ArchWiki Atom feed" href="/index.php?title=Special:RecentChanges&amp;feed=atom">
+</head>
+<body class="skin--responsive skin-vector skin-vector-search-vue mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Install_Arch_Linux_with_Fake_RAID rootpage-Install_Arch_Linux_with_Fake_RAID skin-vector-2022 action-view">
+<a class="mw-jump-link" href="#bodyContent">Jump to content</a>
+<div class="vector-header-container">
+	</div>
+<div class="mw-page-container">
+	<div class="mw-page-container-inner">
+		<div class="vector-column-start">
+			<div class="vector-main-menu-container">
+		</div>
+	<div class="vector-sticky-pinned-container">
+				<nav id="mw-panel-toc" aria-label="Contents" data-event-name="ui.sidebar-toc" class="mw-table-of-contents-container vector-toc-landmark">
+					<div id="vector-toc-pinned-container" class="vector-pinned-container">
+					<div id="vector-toc" class="vector-toc vector-pinnable-element">
+	<div class="vector-pinnable-header vector-toc-pinnable-header vector-pinnable-header-pinned" data-feature-name="toc-pinned" data-pinnable-element-id="vector-toc">
+	<h2 class="vector-pinnable-header-label">Contents</h2>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-toc.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-toc.unpin">hide</button>
+</div>
+
+
+	<ul class="vector-toc-contents" id="mw-panel-toc-list">
+		<li id="toc-mw-content-text" class="vector-toc-list-item vector-toc-level-1">
+			<a href="#" class="vector-toc-link">
+				<div class="vector-toc-text">Beginning</div>
+			</a>
+		</li>
+		<li id='toc-What_is_"fake_RAID"' class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href='#What_is_"fake_RAID"'>
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">1</span>
+				<span>What is "fake RAID"</span>
+			</div>
+		</a>
+		
+		<ul id='toc-What_is_"fake_RAID"-sublist' class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Preparation" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Preparation">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">2</span>
+				<span>Preparation</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Preparation-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Preparation subsection</span>
+			</button>
+		
+		<ul id="toc-Preparation-sublist" class="vector-toc-list">
+			<li id="toc-Configure_RAID_sets" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Configure_RAID_sets">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1</span>
+					<span>Configure RAID sets</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Configure_RAID_sets-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Boot_the_installer" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Boot_the_installer">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">3</span>
+				<span>Boot the installer</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Boot_the_installer-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-MBR_install_example_using_mdadm_and_Intel_FakeRAID" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#MBR_install_example_using_mdadm_and_Intel_FakeRAID">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">4</span>
+				<span>MBR install example using mdadm and Intel FakeRAID</span>
+			</div>
+		</a>
+		
+		<ul id="toc-MBR_install_example_using_mdadm_and_Intel_FakeRAID-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Load_dmraid" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Load_dmraid">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">5</span>
+				<span>Load dmraid</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Load_dmraid-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Install_the_bootloader" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Install_the_bootloader">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">6</span>
+				<span>Install the bootloader</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Install_the_bootloader-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Install the bootloader subsection</span>
+			</button>
+		
+		<ul id="toc-Install_the_bootloader-sublist" class="vector-toc-list">
+			<li id="toc-GRUB2" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#GRUB2">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.1</span>
+					<span>GRUB2</span>
+				</div>
+			</a>
+			
+			<ul id="toc-GRUB2-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Troubleshooting" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Troubleshooting">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">7</span>
+				<span>Troubleshooting</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Troubleshooting-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Troubleshooting subsection</span>
+			</button>
+		
+		<ul id="toc-Troubleshooting-sublist" class="vector-toc-list">
+			<li id="toc-Booting_with_degraded_array" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Booting_with_degraded_array">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">7.1</span>
+					<span>Booting with degraded array</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Booting_with_degraded_array-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Error:_Unable_to_determine_major/minor_number_of_root_device" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Error:_Unable_to_determine_major/minor_number_of_root_device">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">7.2</span>
+					<span>Error: Unable to determine major/minor number of root device</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Error:_Unable_to_determine_major/minor_number_of_root_device-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-dmraid_mirror_fails_to_activate" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#dmraid_mirror_fails_to_activate">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">7.3</span>
+					<span>dmraid mirror fails to activate</span>
+				</div>
+			</a>
+			
+			<ul id="toc-dmraid_mirror_fails_to_activate-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-No_block_devices_for_partitions_on_existing_RAID_array" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#No_block_devices_for_partitions_on_existing_RAID_array">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">7.4</span>
+					<span>No block devices for partitions on existing RAID array</span>
+				</div>
+			</a>
+			
+			<ul id="toc-No_block_devices_for_partitions_on_existing_RAID_array-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-See_also" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#See_also">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">8</span>
+				<span>See also</span>
+			</div>
+		</a>
+		
+		<ul id="toc-See_also-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+</ul>
+</div>
+
+					</div>
+		</nav>
+			</div>
+		</div>
+		<div class="mw-content-container">
+			<main id="content" class="mw-body" style="margin: 0">
+				<header class="mw-body-header vector-page-titlebar">
+					<nav aria-label="Contents" class="vector-toc-landmark">
+						
+<div id="vector-page-titlebar-toc" class="vector-dropdown vector-page-titlebar-toc vector-button-flush-left">
+	<input type="checkbox" id="vector-page-titlebar-toc-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-page-titlebar-toc" class="vector-dropdown-checkbox " aria-label="Toggle the table of contents">
+	<label id="vector-page-titlebar-toc-label" for="vector-page-titlebar-toc-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"><span class="vector-icon mw-ui-icon-listBullet mw-ui-icon-wikimedia-listBullet"></span>
+
+<span class="vector-dropdown-label-text">Toggle the table of contents</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+							<div id="vector-page-titlebar-toc-unpinned-container" class="vector-unpinned-container">
+			</div>
+		
+	</div>
+</div>
+
+					</nav>
+					<h1 id="firstHeading" class="firstHeading mw-first-heading"><span class="mw-page-title-main">Install Arch Linux with Fake RAID</span></h1>
+							
+<div id="p-lang-btn" class="vector-dropdown mw-portlet mw-portlet-lang">
+	<input type="checkbox" id="p-lang-btn-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-p-lang-btn" class="vector-dropdown-checkbox mw-interlanguage-selector" aria-label="Go to an article in another language. Available in 3 languages">
+	<label id="p-lang-btn-label" for="p-lang-btn-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--action-progressive mw-portlet-lang-heading-3" aria-hidden="true"><span class="vector-icon mw-ui-icon-language-progressive mw-ui-icon-wikimedia-language-progressive"></span>
+
+<span class="vector-dropdown-label-text">3 languages</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+		<div class="vector-menu-content">
+			
+			<ul class="vector-menu-content-list">
+				
+				<li class="interlanguage-link interwiki-ja mw-list-item"><a href="https://wiki.archlinux.jp/index.php/Fake_RAID_%E3%81%A7%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB" title="Fake RAID でインストール – 日本語" lang="ja" hreflang="ja" data-title="Fake RAID でインストール" data-language-autonym="日本語" data-language-local-name="日本語" class="interlanguage-link-target"><span>日本語</span></a></li>
+<li class="interlanguage-link interwiki-pt mw-list-item"><a href="../pt/Install_Arch_Linux_with_Fake_RAID.html" title="Install Arch Linux with Fake RAID – português" lang="pt" hreflang="pt" data-title="Install Arch Linux with Fake RAID" data-language-autonym="Português" data-language-local-name="português" class="interlanguage-link-target"><span>Português</span></a></li>
+<li class="interlanguage-link interwiki-zh-hans mw-list-item"><a href="https://wiki.archlinuxcn.org/wiki/Install_Arch_Linux_with_Fake_RAID" title="Install Arch Linux with Fake RAID – 中文（简体）" lang="zh-Hans" hreflang="zh-Hans" data-title="Install Arch Linux with Fake RAID" data-language-autonym="中文（简体）" data-language-local-name="中文（简体）" class="interlanguage-link-target"><span>中文（简体）</span></a></li>
+			</ul>
+			
+		</div>
+
+	</div>
+</div>
+</header>
+				<div class="vector-column-end">
+					<div class="vector-sticky-pinned-container">
+						<nav class="vector-page-tools-landmark" aria-label="Page tools">
+							<div id="vector-page-tools-pinned-container" class="vector-pinned-container">
+				
+							</div>
+		</nav>
+						<nav class="vector-appearance-landmark" aria-label="Appearance">
+							<div id="vector-appearance-pinned-container" class="vector-pinned-container">
+				<div id="vector-appearance" class="vector-appearance vector-pinnable-element">
+	<div class="vector-pinnable-header vector-appearance-pinnable-header vector-pinnable-header-pinned" data-feature-name="appearance-pinned" data-pinnable-element-id="vector-appearance" data-pinned-container-id="vector-appearance-pinned-container" data-unpinned-container-id="vector-appearance-unpinned-container">
+	<div class="vector-pinnable-header-label">Appearance</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-appearance.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-appearance.unpin">hide</button>
+</div>
+
+
+</div>
+
+							</div>
+		</nav>
+					</div>
+				</div>
+				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container>
+					<div class="vector-body-before-content">
+							<div class="mw-indicators">
+		</div>
+
+						<div id="siteSub" class="noprint">From ArchWiki</div>
+					</div>
+					<div id="contentSub"><div id="mw-content-subtitle"></div></div>
+					
+					
+					<div id="mw-content-text" class="mw-body-content">
+<div class="mw-content-ltr mw-parser-output" lang="en" dir="ltr">
+<div class="archwiki-template-meta-related-articles">
+<p>Related articles</p>
+<ul>
+<li><a href="../en/LVM_on_software_RAID.html" class="mw-redirect" title="Installing with Software RAID or LVM">Installing with Software RAID or LVM</a></li>
+<li><a href="../en/Convert_a_single_drive_system_to_RAID.html" title="Convert a single drive system to RAID">Convert a single drive system to RAID</a></li>
+<li><a href="../en/Installation_guide.html" title="Installation guide">Installation guide</a></li>
+</ul>
+</div>
+<p>The purpose of this guide is to enable use of a RAID set created by the on-board BIOS RAID controller and thereby allow dual-booting of Linux and Windows from partitions <b>inside</b> the RAID set using GRUB. When using so-called "fake RAID" or "host RAID", the disc sets are reached from <code>/dev/mapper/chipsetName_randomName</code> and not <code>/dev/sd<i>X</i></code>.
+</p>
+<meta property="mw:PageProp/toc">
+<h2>
+<span id="What_is_.22fake_RAID.22"></span><span class="mw-headline" id='What_is_"fake_RAID"'>What is "fake RAID"</span>
+</h2>
+<p>From <a href="https://en.wikipedia.org/wiki/RAID" class="extiw" title="wikipedia:RAID">Wikipedia:RAID</a>:
+</p>
+<dl><dd>Operating system-based RAID doesn't always protect the boot process and is generally impractical on desktop versions of Windows. Hardware RAID controllers are expensive and proprietary. To fill this gap, cheap "RAID controllers" were introduced that do not contain a RAID controller chip, but simply a standard disk controller chip with special firmware and drivers. During early stage boot-up, the RAID is implemented by the firmware. When a protected-mode operating system kernel such as Linux or a modern version of Microsoft Windows is loaded, the drivers take over.</dd></dl>
+<dl><dd>These controllers are described by their manufacturers as RAID controllers, and it is rarely made clear to purchasers that the burden of RAID processing is borne by the host computer's central processing unit -- not the RAID controller itself -- thus introducing the aforementioned CPU overhead which hardware controllers do not suffer from. Firmware controllers often can only use certain types of hard drives in their RAID arrays (e.g. SATA for Intel Matrix RAID, as there is neither SCSI nor PATA support in modern Intel ICH southbridges; however, motherboard makers implement RAID controllers outside of the southbridge on some motherboards). Before their introduction, a "RAID controller" implied that the controller did the processing, and the new type has become known in technically knowledgeable circles as "fake RAID" even though the RAID itself is implemented correctly. Adaptec calls them "host RAID".</dd></dl>
+<p>See also <a rel="nofollow" class="external text" href="https://help.ubuntu.com/community/FakeRaidHowto">FakeRaidHowto @ Community Ubuntu Documentation</a> for more information.
+</p>
+<p>Despite the terminology, "fake RAID" via <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=dmraid">dmraid</a></span> is a robust software RAID implementation that offers a solid system to mirror or stripe data across multiple disks with negligible overhead for any modern system. <i>dmraid</i> is comparable to <i>mdadm</i> (pure Linux software RAID) with the added benefit of being able to completely rebuild a drive after a failure <b>before</b> the system is ever booted. However, be aware that not all BIOS RAID implementations support drive rebuilding. Instead they rely on non-linux software to perform the rebuild. If your system cannot rebuild a drive in the BIOS RAID setup utility, you are strongly encouraged to use mdraid (pure Linux Software Raid via mdadm - see <a href="../en/RAID.html" title="RAID">RAID</a>) instead of dmraid or you will find yourself unable to rebuild an array in case of a drive failure - or unable to retrieve information from your array in case of a motherboard failure without a lot of additional work.
+</p>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../File:View-refresh-red.svg" decoding="async" width="48" height="48" class="mw-file-element"></span></span><b>This article or section is out of date.</b></p>
+<div>
+<b>Reason:</b> The installation steps do not reflect the current Arch Linux installation procedure. Need to be updated. Btw, it appears that Intel now recommends mdadm instead of dmraid. See <a href="#MBR_install_example_using_mdadm_and_Intel_FakeRAID">#MBR install example using mdadm and Intel FakeRAID</a> for an example of an install using the MBR disk partition layout using intel FakeRAID and mdadm. (Discuss in <a href="../en/Talk:Install_Arch_Linux_with_Fake_RAID.html#Out_of_date_page?_(use_mdadm_instead_of_dmraid)" title="Talk:Install Arch Linux with Fake RAID">Talk:Install Arch Linux with Fake RAID#Out of date page? (use mdadm instead of dmraid)</a>)</div>
+</div>
+<h2><span class="mw-headline" id="Preparation">Preparation</span></h2>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Warning:</strong> Backup all data before playing with RAID. What you do with your hardware is only your own fault. Data on RAID stripes is highly vulnerable to disc failures. Create regular backups or consider using mirror sets. <b>Consider yourself warned!</b>
+</div>
+<ul>
+<li>Open up any needed guides (<a href="../en/Installation_guide.html" title="Installation guide">Installation guide</a>) on another machine. If you do not have access to another machine, print it out.</li>
+<li>Download the latest Arch Linux install image.</li>
+<li>Backup all important files since everything on the target partitions will be destroyed.</li>
+</ul>
+<h3><span class="mw-headline" id="Configure_RAID_sets">Configure RAID sets</span></h3>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Warning:</strong> If your drives are not already configured as RAID and Windows is already installed, switching to "RAID" may cause Windows to BSOD during boot.<a rel="nofollow" class="external autonumber" href="https://support.microsoft.com/en-us/topic/error-message-occurs-after-you-change-the-sata-mode-of-the-boot-drive-0e3ab9b8-99aa-c2b3-1f27-dc9eaf58a14b">[1]</a>
+</div>
+<ul>
+<li>Enter your BIOS setup and enable the RAID controller.
+<ul><li>The BIOS may contain an option to configure SATA drives as "IDE", "AHCI", or "RAID"; ensure "RAID" is selected.</li></ul>
+</li>
+<li>Save and exit the BIOS setup. During boot, enter the RAID setup utility.
+<ul><li>The RAID utility is usually either accessible via the boot menu (often F8, F10 or CTRL+I) or whilst the RAID controller is initializing.</li></ul>
+</li>
+<li>Use the RAID setup utility to create preferred stripe/mirror sets.</li>
+</ul>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> See your motherboard documentation for details. The exact procedure may vary.</div>
+<h2><span class="mw-headline" id="Boot_the_installer">Boot the installer</span></h2>
+<p>See <a href="../en/Installation_guide.html#Pre-installation" title="Installation guide">Installation guide#Pre-installation</a> for details.
+</p>
+<h2><span class="mw-headline" id="MBR_install_example_using_mdadm_and_Intel_FakeRAID">MBR install example using mdadm and Intel FakeRAID</span></h2>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../File:Tango-edit-clear.svg" decoding="async" width="48" height="48" class="mw-file-element"></span></span><b>This article or section needs language, wiki syntax or style improvements. See <a href="../en/Help:Style.html" title="Help:Style">Help:Style</a> for reference.</b></p>
+<div>
+<b>Reason:</b> see <a href="../en/Help:Style.html" title="Help:Style">Help:Style</a> (Discuss in <a rel="nofollow" class="external text" href="../en/Talk:Install_Arch_Linux_with_Fake_RAID.html">Talk:Install Arch Linux with Fake RAID</a>)</div>
+</div>
+<p>This is here because I spent hours making this work because there is so much information out there on different ways to do it, plus outdated information. It may need integrated into this page better with more explanation but I am wrapping this up at the moment. This is a basic command line dump that shows a successful RAID setup using the MBR partition structure.
+</p>
+<p>It looks like once you create the array in the intel util it writes the RAID metadata. So assembling/creating an array does not need to happen.  I named my array ZERO in the intel util and you can see it in this example.
+</p>
+<p>I am leaving the entire install example as it shows when to configure things during the install.  You are going to have to modify some things to make them work, do not copy and paste!
+</p>
+<pre># ls /dev/md/
+# parted /dev/md/ZERO_0
+# mklabel msdos
+# mkpart primary ext4 1MiB 100MiB
+# set 1 boot on
+# mkpart primary ext4 100MiB 16.5GiB
+# mkpart primary linux-swap 16.5GiB 100%
+</pre>
+<p>Just to see changes:
+</p>
+<pre># fdisk -l /dev/md/ZERO_0
+</pre>
+<p>Create filesystem/swap and activate swap:
+</p>
+<pre># mkfs.ext4 /dev/md/ZERO_0p1
+# mkfs.ext4 /dev/md/ZERO_0p2
+# mkswap /dev/md/ZERO_0p3
+# swapon /dev/md/ZERO_0p3
+# mount /dev/md/ZERO_0p2 /mnt
+# mkdir -p /mnt/boot
+# mount /dev/md/ZERO_0p1 /mnt/boot/
+</pre>
+<p><a href="../en/Help:Reading.html#Append,_add,_create,_edit" class="mw-redirect" title="Textedit">Edit</a> <code>/etc/pacman.conf</code> and uncomment multilib on x64 (why not)(do it after chroot too).
+Then:
+</p>
+<pre># pacstrap -K -i /mnt base base-devel
+# genfstab -U /mnt &gt; /mnt/etc/fstab
+</pre>
+<p><a href="../en/Help:Reading.html#Append,_add,_create,_edit" class="mw-redirect" title="Textedit">Edit</a> <code>/mnt/etc/fstab</code> and replace UUIDs with (this may be optional):
+</p>
+<pre>/dev/md/ZERO_0p1
+/dev/md/ZERO_0p2
+/dev/md/ZERO_0p3
+</pre>
+<p>Then run:
+</p>
+<pre># mdadm --detail --scan &gt;&gt; /mnt/etc/mdadm.conf
+</pre>
+<p>Chroot in for config:
+</p>
+<pre># arch-chroot /mnt /bin/bash
+</pre>
+<p><a href="../en/Help:Reading.html#Append,_add,_create,_edit" class="mw-redirect" title="Textedit">Edit</a> <code>/etc/locale.gen</code> and uncomment <code>en_US.UTF-8 UTF-8</code> and other needed UTF-8 <a href="../en/Locale.html" title="Locale">locales</a>. Generate the locales by running:
+</p>
+<pre># locale-gen
+</pre>
+<p><a href="../en/Help:Reading.html#Append,_add,_create,_edit" class="mw-redirect" title="Create">Create</a> the <span class="plainlinks archwiki-template-man" title="$ man 5 locale.conf"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/locale.conf.5">locale.conf(5)</a></span> file, and <a href="../en/Locale.html#Setting_the_system_locale" title="Locale">set the LANG variable</a> accordingly:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/locale.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">LANG=<i>en_US.UTF-8</i></pre>
+<p>Set the <a href="../en/System_time.html#Time_zone" class="mw-redirect" title="Time zone">time zone</a>:
+</p>
+<pre># ln -sf /usr/share/zoneinfo/<i>Region</i>/<i>City</i> /etc/localtime
+</pre>
+<p><a href="../en/Help:Reading.html#Installation_of_packages" class="mw-redirect" title="Install">Install</a> <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=grub">grub</a></span>.
+<a href="../en/Help:Reading.html#Append,_add,_create,_edit" class="mw-redirect" title="Textedit">Edit</a> <code>/etc/default/grub</code> and uncomment <code>GRUB_DISABLE_LINUX_UUID=true</code>
+</p>
+<p>Add <code>mdadm_udev</code> to the <code>HOOKS</code> array in <code>/etc/mkinitcpio.conf</code>:
+</p>
+<pre>HOOKS=(base udev autodetect microcode modconf kms keyboard keymap consolefont block <b>mdadm_udev</b> filesystems fsck)
+</pre>
+<p><a href="../en/Mkinitcpio.html#Image_creation_and_activation" class="mw-redirect" title="Regenerate the initramfs">Regenerate the initramfs</a>. Then:
+</p>
+<pre># grub-install --recheck /dev/md/ZERO_0
+# grub-mkconfig -o /boot/grub/grub.cfg
+</pre>
+<p><a href="../en/Help:Reading.html#Append,_add,_create,_edit" class="mw-redirect" title="Create">Create</a> the <a href="../en/Network_configuration.html#Set_the_hostname" class="mw-redirect" title="Hostname">hostname</a> file:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/hostname</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;"><i>yourhostname</i>
+</pre>
+<p>Update <code>/etc/hosts</code> file appropriately. Then:
+</p>
+<pre># systemctl enable dhcpcd@enp13s0.service
+# exit
+# umount -R /mnt
+# reboot
+</pre>
+<p>Remove the installation medium.
+</p>
+<h2><span class="mw-headline" id="Load_dmraid">Load dmraid</span></h2>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../File:View-refresh-red.svg" decoding="async" width="48" height="48" class="mw-file-element"></span></span><b>This article or section is out of date.</b></p>
+<div>
+<b>Reason:</b> <i>dmraid</i> is currently unmaintained and might break with new linux versions. Using <i>mdadm</i> is highly recommended. (Discuss in <a rel="nofollow" class="external text" href="../en/Talk:Install_Arch_Linux_with_Fake_RAID.html">Talk:Install Arch Linux with Fake RAID</a>)</div>
+</div>
+<p>Load device-mapper and find RAID sets:
+</p>
+<pre># modprobe dm_mod
+# dmraid -ay
+# ls -la /dev/mapper/
+</pre>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Warning:</strong> Command <code>dmraid -ay</code> could fail after boot to Arch Linux Release: 2011.08.19 as image file with initial ramdisk environment does not support <i>dmraid</i>. You could use an older Release: 2010.05. Note that you must correct your kernel name and initrd name in grubs menu.lst after installing as these releases use different naming</div>
+<p>Example output:
+</p>
+<pre>/dev/mapper/control            &lt;- Created by device-mapper; if present, device-mapper is likely functioning
+/dev/mapper/sil_aiageicechah   &lt;- A RAID set on a Silicon Image SATA RAID controller
+/dev/mapper/sil_aiageicechah1  &lt;- First partition on this RAID set
+</pre>
+<p>If there is only one file (<code>/dev/mapper/control</code>), check if your controller chipset module is loaded with <code>lsmod</code>. If it is, then <i>dmraid</i> does not support this controller or there are no RAID sets on the system (check RAID BIOS setup again). If correct, then you may be forced to use <a href="../en/LVM_on_software_RAID.html" class="mw-redirect" title="Installing with Software RAID or LVM">software RAID</a> (this means no dual-booted RAID system on this controller).
+</p>
+<p>If your chipset module is NOT loaded, load it now. For example:
+</p>
+<pre># modprobe sata_sil
+</pre>
+<p>See <code>/lib/modules/`uname -r`/kernel/drivers/ata/</code> for available drivers.
+</p>
+<p>To test the RAID sets:
+</p>
+<pre># dmraid -tay
+</pre>
+<h2><span class="mw-headline" id="Install_the_bootloader">Install the bootloader</span></h2>
+<h3><span class="mw-headline" id="GRUB2">GRUB2</span></h3>
+<p>See <a href="../en/GRUB.html" class="mw-redirect" title="GRUB2">GRUB2</a> for details on configuring GRUB2. <i>grub-bios</i> works out of the box with dm-raid partitions:
+</p>
+<pre> $ grub-install --target=i386-pc --recheck --debug /dev/mapper/sil_aiageicechah
+</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> If <code>GRUB_DISABLE_LINUX_UUID=true</code> is not set, grub2 will generate lines with <code>root=UUID=...</code> resulting in mounting one side of a mirrored RAID 1 array.</div>
+<p>(Optional) Install <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=os-prober">os-prober</a></span> if you have other OS like windows.
+</p>
+<pre> $ grub-mkconfig -o /boot/grub/grub.cfg
+</pre>
+<p>That's all, <i>grub-mkconfig</i> will generate the configure automatically. You could edit <code>/etc/default/grub</code> to modify the configure (timeout, color, etc) before grub-mkconfig.
+</p>
+<h2><span class="mw-headline" id="Troubleshooting">Troubleshooting</span></h2>
+<h3><span class="mw-headline" id="Booting_with_degraded_array">Booting with degraded array</span></h3>
+<p>One drawback of the fake RAID approach on GNU/Linux is that <i>dmraid</i> is currently unable to handle degraded arrays, and will refuse to activate. In this scenario, one must resolve the problem from within another OS (e.g. Windows) or via the BIOS/chipset RAID utility. 
+</p>
+<p>Alternatively, if using a mirrored (RAID 1) array, users may temporarily bypass <i>dmraid</i> during the boot process and boot from a single drive:
+</p>
+<ol>
+<li>Edit the <b>kernel</b> line from the <a href="../en/GRUB.html" title="GRUB">GRUB</a> menu
+<ol>
+<li>Remove references to dmraid devices (e.g. change <code>/dev/mapper/raidSet1</code> to <code>/dev/sda1</code>)</li>
+<li>Append <code>disablehooks=dmraid</code> to prevent a kernel panic when <i>dmraid</i> discovers the degraded array</li>
+</ol>
+</li>
+<li>Boot the system</li>
+</ol>
+<h3>
+<span id="Error:_Unable_to_determine_major.2Fminor_number_of_root_device"></span><span class="mw-headline" id="Error:_Unable_to_determine_major/minor_number_of_root_device">Error: Unable to determine major/minor number of root device</span>
+</h3>
+<p>If you experience a boot failure after kernel update where the boot process is unable to determine major/minor number of root device, this might just be a timing problem (i.e. <code>dmraid -ay</code> might be called before /dev/sd* is fully set up and detected). This can effect both the normal and LTS kernel images. Booting the 'Fallback' kernel image should work. The error will look something like this:
+</p>
+<pre>Activating dmraid arrays...
+no block devices found
+Waiting 10 seconds for device /dev/mapper/nvidia_baaccajap5
+Root device '/dev/mapper/nvidia_baaccajap5' doesn't exist attempting to create it.
+Error: Unable to determine major/minor number of root device '/dev/mapper/nvidia_baaccajap5'
+</pre>
+<p>To work around this problem:
+</p>
+<dl><dd><ul>
+<li>boot the Fallback kernel</li>
+<li>insert the <code>sleep</code> hook in the <code>HOOKS</code> array of <code>/etc/mkinitcpio.conf</code> after the <code>udev</code> hook like this:</li>
+</ul></dd></dl>
+<pre>HOOKS=(base udev sleep autodetect microcode modconf kms keyboard keymap consolefont block dmraid filesystems fsck)
+</pre>
+<dl><dd><ul><li>rebuild the kernel image and reboot</li></ul></dd></dl>
+<h3><span class="mw-headline" id="dmraid_mirror_fails_to_activate">dmraid mirror fails to activate</span></h3>
+<p>Does everything above work correctly the first time, but then when you reboot <i>dmraid</i> cannot find the array?
+</p>
+<p>This is because Linux software raid (<i>mdadm</i>) has already attempted to mount the fakeraid array during system init and left it in an umountable state. To prevent <i>mdadm</i> from running, move the udev rule that is responsible out of the way:
+</p>
+<pre># cd /lib/udev/rules.d
+# mkdir disabled
+# mv 64-md-raid.rules disabled/
+# reboot
+</pre>
+<h3><span class="mw-headline" id="No_block_devices_for_partitions_on_existing_RAID_array">No block devices for partitions on existing RAID array</span></h3>
+<p>If your existing array, set up before attempting to install arch, appears in <code>/dev/mapper/raidnamehere</code>, but does not have any partitions (<code>raidnamehere1</code>, etc) re-check the status of your RAID partitions.
+</p>
+<p>Arch may not create block devices for partitions <i>that work in another OS</i> if there are certain, even minor, problems.
+</p>
+<p><span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=gparted">gparted</a></span> is useful to diagnose and repair most problems. Unfortunately, you may have to repartition from scratch.
+</p>
+<h2><span class="mw-headline" id="See_also">See also</span></h2>
+<ul><li><a rel="nofollow" class="external text" href="https://bbs.archlinux.org/viewtopic.php?id=22038">Related forum thread</a></li></ul>
+</div>
+</div>
+					<div id="catlinks" class="catlinks" data-mw="interface">
+<div id="mw-normal-catlinks" class="mw-normal-catlinks">
+<a href="../Special:Categories.html" title="Special:Categories">Categories</a>: <ul>
+<li><a href="../en/Category:Installation_process.html" title="Category:Installation process">Installation process</a></li>
+<li><a href="../en/Category:Storage_virtualization.html" title="Category:Storage virtualization">Storage virtualization</a></li>
+</ul>
+</div>
+<div id="mw-hidden-catlinks" class="mw-hidden-catlinks mw-hidden-cats-hidden">Hidden categories: <ul>
+<li><a href="../en/Category:Pages_or_sections_flagged_with_Template:Out_of_date.html" title="Category:Pages or sections flagged with Template:Out of date">Pages or sections flagged with Template:Out of date</a></li>
+<li><a href="../en/Category:Pages_or_sections_flagged_with_Template:Style.html" title="Category:Pages or sections flagged with Template:Style">Pages or sections flagged with Template:Style</a></li>
+</ul>
+</div>
+</div>
+				</div>
+			</main>
+			
+		</div>
+		<div class="mw-footer-container">
+			
+<footer id="footer" class="mw-footer" style="margin: 0">
+	<ul id="footer-info">
+	<li data-nosnippet="">Retrieved from "<a dir="ltr" href="https://wiki.archlinux.org/index.php?title=Install_Arch_Linux_with_Fake_RAID&amp;oldid=828722">https://wiki.archlinux.org/index.php?title=Install_Arch_Linux_with_Fake_RAID&amp;oldid=828722</a>"</li>
+<li id="footer-info-lastmod"> This page was last edited on 12 March 2025, at 20:56.</li>
+	<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+<br>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="https://terms.archlinux.org/docs/privacy-policy/">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="../en/ArchWiki:About.html">About ArchWiki</a></li>
+	<li id="footer-places-disclaimers"><a href="../en/ArchWiki:General_disclaimer.html">Disclaimers</a></li>
+	<li id="footer-places-archwiki-code-of-conduct"><a href="https://terms.archlinux.org/docs/code-of-conduct/" class="extiw" title="archlinux-service-agreements:code-of-conduct">Code of conduct</a></li>
+	<li id="footer-places-archwiki-terms-of-service"><a href="https://terms.archlinux.org/docs/terms-of-service/" class="extiw" title="archlinux-service-agreements:terms-of-service">Terms of service</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-copyrightico"><a href="https://www.gnu.org/copyleft/fdl.html" class="cdx-button cdx-button--fake-button cdx-button--size-large cdx-button--fake-button--enabled"><img src="/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" loading="lazy"></a></li>
+	<li id="footer-poweredbyico"><img src="/resources/assets/poweredby_mediawiki.svg" width="88" height="31" loading="lazy"></li>
+</ul>
+
+</footer>
+
+		</div>
+	</div> 
+</div> 
+<div class="vector-settings" id="p-dock-bottom">
+	<ul></ul>
+</div>
+</body>
+</html>

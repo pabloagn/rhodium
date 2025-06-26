@@ -1,0 +1,61 @@
+<h1>az acr</h1>
+
+<blockquote><p>Azure Container Registries를 사용해 프라이빗 레지스트리를 관리.
+<code>azure-cli</code>의 일부 (<code>az</code>라고도 함).
+더 많은 정보: <a href="https://learn.microsoft.com/cli/azure/acr">https://learn.microsoft.com/cli/azure/acr</a>.</p></blockquote>
+
+<ul>
+<li>관리형 컨테이너 레지스트리를 생성:</li>
+</ul>
+
+
+<p><code>az acr create --name {{레지스트리_이름}} --resource-group {{리소스_그룹}} --sku {{sku}}</code></p>
+
+<ul>
+<li>레지스트리에 로그인:</li>
+</ul>
+
+
+<p><code>az acr login --name {{레지스트리_이름}}</code></p>
+
+<ul>
+<li>ACR용 로컬 이미지에 태그를 지정:</li>
+</ul>
+
+
+<p><code>docker tag {{이미지_이름}} {{레지스트리_이름}}.azurecr.io/{{이미지_이름}}:{{태그}}</code></p>
+
+<ul>
+<li>이미지를 레지스트리에 푸시:</li>
+</ul>
+
+
+<p><code>docker push {{레지스트리_이름}}.azurecr.io/{{이미지_이름}}:{{태그}}</code></p>
+
+<ul>
+<li>레지스트리에서 이미지를 가져옴:</li>
+</ul>
+
+
+<p><code>docker pull {{레지스트리_이름}}.azurecr.io/{{이미지_이름}}:{{태그}}</code></p>
+
+<ul>
+<li>레지스트리에서 이미지 삭제:</li>
+</ul>
+
+
+<p><code>az acr repository delete --name {{레지스트리_이름}} --repository {{이미지_이름}}:{{태그}}</code></p>
+
+<ul>
+<li>관리형 컨테이너 레지스트리를 삭제:</li>
+</ul>
+
+
+<p><code>az acr delete --name {{레지스트리_이름}} --resource-group {{리소스_그룹}} --yes</code></p>
+
+<ul>
+<li>레지스트리 내의 이미지 목록 나열:</li>
+</ul>
+
+
+<p><code>az acr repository list --name {{레지스트리_이름}} --output table</code></p>

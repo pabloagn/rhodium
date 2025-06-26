@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-sticky-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-0 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-disabled skin-theme-clientpref-day vector-toc-available" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>Arch boot process (Português) - ArchWiki</title>
+<link rel="stylesheet" href="../ArchWikiOffline.css">
+<meta name="ResourceLoaderDynamicStyles" content="">
+<meta name="generator" content="MediaWiki 1.43.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="max-image-preview:standard">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.25, maximum-scale=5.0">
+<link rel="search" type="application/opensearchdescription+xml" href="/rest.php/v1/search" title="ArchWiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.archlinux.org/api.php?action=rsd">
+<link rel="license" href="https://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="ArchWiki Atom feed" href="/index.php?title=Special:RecentChanges&amp;feed=atom">
+</head>
+<body class="skin--responsive skin-vector skin-vector-search-vue mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Arch_boot_process_Português rootpage-Arch_boot_process_Português skin-vector-2022 action-view">
+<a class="mw-jump-link" href="#bodyContent">Jump to content</a>
+<div class="vector-header-container">
+	</div>
+<div class="mw-page-container">
+	<div class="mw-page-container-inner">
+		<div class="vector-column-start">
+			<div class="vector-main-menu-container">
+		</div>
+	<div class="vector-sticky-pinned-container">
+				<nav id="mw-panel-toc" aria-label="Contents" data-event-name="ui.sidebar-toc" class="mw-table-of-contents-container vector-toc-landmark">
+					<div id="vector-toc-pinned-container" class="vector-pinned-container">
+					<div id="vector-toc" class="vector-toc vector-pinnable-element">
+	<div class="vector-pinnable-header vector-toc-pinnable-header vector-pinnable-header-pinned" data-feature-name="toc-pinned" data-pinnable-element-id="vector-toc">
+	<h2 class="vector-pinnable-header-label">Contents</h2>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-toc.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-toc.unpin">hide</button>
+</div>
+
+
+	<ul class="vector-toc-contents" id="mw-panel-toc-list">
+		<li id="toc-mw-content-text" class="vector-toc-list-item vector-toc-level-1">
+			<a href="#" class="vector-toc-link">
+				<div class="vector-toc-text">Beginning</div>
+			</a>
+		</li>
+		<li id="toc-Tipos_de_firmware" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Tipos_de_firmware">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">1</span>
+				<span>Tipos de firmware</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Tipos_de_firmware-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Tipos de firmware subsection</span>
+			</button>
+		
+		<ul id="toc-Tipos_de_firmware-sublist" class="vector-toc-list">
+			<li id="toc-UEFI" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#UEFI">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.1</span>
+					<span>UEFI</span>
+				</div>
+			</a>
+			
+			<ul id="toc-UEFI-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-BIOS" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#BIOS">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.2</span>
+					<span>BIOS</span>
+				</div>
+			</a>
+			
+			<ul id="toc-BIOS-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Inicialização_do_sistema" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Inicializa%C3%A7%C3%A3o_do_sistema">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">2</span>
+				<span>Inicialização do sistema</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Inicialização_do_sistema-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Inicialização do sistema subsection</span>
+			</button>
+		
+		<ul id="toc-Inicialização_do_sistema-sublist" class="vector-toc-list">
+			<li id="toc-UEFI_2" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#UEFI_2">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1</span>
+					<span>UEFI</span>
+				</div>
+			</a>
+			
+			<ul id="toc-UEFI_2-sublist" class="vector-toc-list">
+				<li id="toc-Inicialização_múltipla" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Inicializa%C3%A7%C3%A3o_m%C3%BAltipla">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1.1</span>
+					<span>Inicialização múltipla</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Inicialização_múltipla-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-BIOS_2" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#BIOS_2">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2</span>
+					<span>BIOS</span>
+				</div>
+			</a>
+			
+			<ul id="toc-BIOS_2-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Gerenciador_de_boot" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Gerenciador_de_boot">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">3</span>
+				<span>Gerenciador de boot</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Gerenciador_de_boot-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Gerenciador de boot subsection</span>
+			</button>
+		
+		<ul id="toc-Gerenciador_de_boot-sublist" class="vector-toc-list">
+			<li id="toc-Comparação_de_recursos" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Compara%C3%A7%C3%A3o_de_recursos">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1</span>
+					<span>Comparação de recursos</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Comparação_de_recursos-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Kernel" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Kernel">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">4</span>
+				<span>Kernel</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Kernel-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-initramfs" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#initramfs">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">5</span>
+				<span>initramfs</span>
+			</div>
+		</a>
+		
+		<ul id="toc-initramfs-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Início_do_espaço_de_usuário" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#In%C3%ADcio_do_espa%C3%A7o_de_usu%C3%A1rio">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">6</span>
+				<span>Início do espaço de usuário</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Início_do_espaço_de_usuário-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Subsequência_do_espaço_de_usuário" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Subsequ%C3%AAncia_do_espa%C3%A7o_de_usu%C3%A1rio">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">7</span>
+				<span>Subsequência do espaço de usuário</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Subsequência_do_espaço_de_usuário-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Subsequência do espaço de usuário subsection</span>
+			</button>
+		
+		<ul id="toc-Subsequência_do_espaço_de_usuário-sublist" class="vector-toc-list">
+			<li id="toc-getty" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#getty">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">7.1</span>
+					<span>getty</span>
+				</div>
+			</a>
+			
+			<ul id="toc-getty-sublist" class="vector-toc-list">
+				<li id="toc-Login" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Login">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">7.1.1</span>
+					<span>Login</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Login-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Shell" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Shell">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">7.1.2</span>
+					<span>Shell</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Shell-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Gerenciador_de_exibição" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Gerenciador_de_exibi%C3%A7%C3%A3o">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">7.2</span>
+					<span>Gerenciador de exibição</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Gerenciador_de_exibição-sublist" class="vector-toc-list">
+				<li id="toc-Sessão_gráfica_(Xorg)" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Sess%C3%A3o_gr%C3%A1fica_(Xorg)">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">7.2.1</span>
+					<span>Sessão gráfica (Xorg)</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Sessão_gráfica_(Xorg)-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Veja_também" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Veja_tamb%C3%A9m">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">8</span>
+				<span>Veja também</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Veja_também-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+</ul>
+</div>
+
+					</div>
+		</nav>
+			</div>
+		</div>
+		<div class="mw-content-container">
+			<main id="content" class="mw-body" style="margin: 0">
+				<header class="mw-body-header vector-page-titlebar">
+					<nav aria-label="Contents" class="vector-toc-landmark">
+						
+<div id="vector-page-titlebar-toc" class="vector-dropdown vector-page-titlebar-toc vector-button-flush-left">
+	<input type="checkbox" id="vector-page-titlebar-toc-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-page-titlebar-toc" class="vector-dropdown-checkbox " aria-label="Toggle the table of contents">
+	<label id="vector-page-titlebar-toc-label" for="vector-page-titlebar-toc-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"><span class="vector-icon mw-ui-icon-listBullet mw-ui-icon-wikimedia-listBullet"></span>
+
+<span class="vector-dropdown-label-text">Toggle the table of contents</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+							<div id="vector-page-titlebar-toc-unpinned-container" class="vector-unpinned-container">
+			</div>
+		
+	</div>
+</div>
+
+					</nav>
+					<h1 id="firstHeading" class="firstHeading mw-first-heading"><span class="mw-page-title-main">Arch boot process (Português)</span></h1>
+							
+<div id="p-lang-btn" class="vector-dropdown mw-portlet mw-portlet-lang">
+	<input type="checkbox" id="p-lang-btn-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-p-lang-btn" class="vector-dropdown-checkbox mw-interlanguage-selector" aria-label="Go to an article in another language. Available in 7 languages">
+	<label id="p-lang-btn-label" for="p-lang-btn-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--action-progressive mw-portlet-lang-heading-7" aria-hidden="true"><span class="vector-icon mw-ui-icon-language-progressive mw-ui-icon-wikimedia-language-progressive"></span>
+
+<span class="vector-dropdown-label-text">7 languages</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+		<div class="vector-menu-content">
+			
+			<ul class="vector-menu-content-list">
+				
+				<li class="interlanguage-link interwiki-bs mw-list-item"><a href="../bs/Arch_boot_process.html" title="Arch boot process – bosanski" lang="bs" hreflang="bs" data-title="Arch boot process" data-language-autonym="Bosanski" data-language-local-name="bosanski" class="interlanguage-link-target"><span>Bosanski</span></a></li>
+<li class="interlanguage-link interwiki-en mw-list-item"><a href="../en/Arch_boot_process.html" title="Arch boot process – English" lang="en" hreflang="en" data-title="Arch boot process" data-language-autonym="English" data-language-local-name="English" class="interlanguage-link-target"><span>English</span></a></li>
+<li class="interlanguage-link interwiki-es mw-list-item"><a href="../es/Arch_boot_process.html" title="Arch boot process – español" lang="es" hreflang="es" data-title="Arch boot process" data-language-autonym="Español" data-language-local-name="español" class="interlanguage-link-target"><span>Español</span></a></li>
+<li class="interlanguage-link interwiki-fr mw-list-item"><a href="../fr/Arch_boot_process.html" title="Arch boot process – français" lang="fr" hreflang="fr" data-title="Arch boot process" data-language-autonym="Français" data-language-local-name="français" class="interlanguage-link-target"><span>Français</span></a></li>
+<li class="interlanguage-link interwiki-ja mw-list-item"><a href="https://wiki.archlinux.jp/index.php/Arch_%E3%83%96%E3%83%BC%E3%83%88%E3%83%97%E3%83%AD%E3%82%BB%E3%82%B9" title="Arch ブートプロセス – 日本語" lang="ja" hreflang="ja" data-title="Arch ブートプロセス" data-language-autonym="日本語" data-language-local-name="日本語" class="interlanguage-link-target"><span>日本語</span></a></li>
+<li class="interlanguage-link interwiki-ru mw-list-item"><a href="../ru/Arch_boot_process.html" title="Arch boot process – русский" lang="ru" hreflang="ru" data-title="Arch boot process" data-language-autonym="Русский" data-language-local-name="русский" class="interlanguage-link-target"><span>Русский</span></a></li>
+<li class="interlanguage-link interwiki-zh-hans mw-list-item"><a href="https://wiki.archlinuxcn.org/wiki/Arch_boot_process" title="Arch boot process – 中文（简体）" lang="zh-Hans" hreflang="zh-Hans" data-title="Arch boot process" data-language-autonym="中文（简体）" data-language-local-name="中文（简体）" class="interlanguage-link-target"><span>中文（简体）</span></a></li>
+			</ul>
+			
+		</div>
+
+	</div>
+</div>
+</header>
+				<div class="vector-column-end">
+					<div class="vector-sticky-pinned-container">
+						<nav class="vector-page-tools-landmark" aria-label="Page tools">
+							<div id="vector-page-tools-pinned-container" class="vector-pinned-container">
+				
+							</div>
+		</nav>
+						<nav class="vector-appearance-landmark" aria-label="Appearance">
+							<div id="vector-appearance-pinned-container" class="vector-pinned-container">
+				<div id="vector-appearance" class="vector-appearance vector-pinnable-element">
+	<div class="vector-pinnable-header vector-appearance-pinnable-header vector-pinnable-header-pinned" data-feature-name="appearance-pinned" data-pinnable-element-id="vector-appearance" data-pinned-container-id="vector-appearance-pinned-container" data-unpinned-container-id="vector-appearance-unpinned-container">
+	<div class="vector-pinnable-header-label">Appearance</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-appearance.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-appearance.unpin">hide</button>
+</div>
+
+
+</div>
+
+							</div>
+		</nav>
+					</div>
+				</div>
+				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container>
+					<div class="vector-body-before-content">
+							<div class="mw-indicators">
+		</div>
+
+						<div id="siteSub" class="noprint">From ArchWiki</div>
+					</div>
+					<div id="contentSub"><div id="mw-content-subtitle"></div></div>
+					
+					
+					<div id="mw-content-text" class="mw-body-content">
+<div class="mw-content-ltr mw-parser-output" lang="pt" dir="ltr">
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Status de tradução:</strong> Esse artigo é uma tradução de <a href="../en/Arch_boot_process.html" title="Arch boot process">Arch boot process</a>. Data da última tradução: 2025-03-05. Você pode ajudar a sincronizar a tradução, se houver <a rel="nofollow" class="external text" href="https://wiki.archlinux.org/index.php?title=Arch_boot_process&amp;diff=0&amp;oldid=827594">alterações</a> na versão em inglês.</div>
+<div class="archwiki-template-meta-related-articles">
+<p>Artigos relacionados</p>
+<ul>
+<li><a href="../pt/Partitioning.html#Master_Boot_Record" class="mw-redirect" title="Particionamento">Master Boot Record</a></li>
+<li><a href="../pt/Partitioning.html#Tabela_de_Parti%C3%A7%C3%A3o_GUID" class="mw-redirect" title="Particionamento">Tabela de Partição GUID</a></li>
+<li><a href="../en/Unified_Extensible_Firmware_Interface.html" title="Unified Extensible Firmware Interface">Unified Extensible Firmware Interface</a></li>
+<li><a href="../pt/Mkinitcpio.html" title="Mkinitcpio (Português)">mkinitcpio</a></li>
+<li><a href="../pt/Init.html" title="Init (Português)">init</a></li>
+<li><a href="../pt/Systemd.html" title="Systemd (Português)">systemd</a></li>
+<li><a href="../pt/Fstab.html" title="Fstab (Português)">fstab</a></li>
+<li><a href="../pt/Autostarting.html" class="mw-redirect" title="Inicialização automática">Inicialização automática</a></li>
+</ul>
+</div>
+<p>Para inicializar o Arch Linux, um carregador <a href="#Gerenciador_de_boot">gerenciador de boot</a> compatível com Linux deve ser configurado. O gerenciador de boot é responsável por carregar o kernel e o <a href="#initramfs">ramdisk inicial</a> antes de iniciar o processo de inicialização. O procedimento é bastante diferente para sistemas <a href="https://en.wikipedia.org/wiki/pt:BIOS" class="extiw" title="wikipedia:pt:BIOS">BIOS</a> e <a href="../en/Unified_Extensible_Firmware_Interface.html" class="mw-redirect" title="UEFI">UEFI</a>. A descrição detalhada é fornecida nesta página ou em páginas vinculadas.
+</p>
+<meta property="mw:PageProp/toc">
+<h2><span class="mw-headline" id="Tipos_de_firmware">Tipos de firmware</span></h2>
+<p>O <a href="https://en.wikipedia.org/wiki/pt:Firmware" class="extiw" title="wikipedia:pt:Firmware">firmware</a> é o primeiro programa a ser executado a partir do momento que o sistema é ligado.
+</p>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Dica:</strong> As palavras BIOS e UEFI são frequentemente usadas no lugar da palavra firmware.</div>
+<h3><span class="mw-headline" id="UEFI">UEFI</span></h3>
+<p>A <a href="../en/Unified_Extensible_Firmware_Interface.html" title="Unified Extensible Firmware Interface">Unified Extensible Firmware Interface</a> tem suporte para ler a tabela de partições e os sistemas de arquivos. UEFI não inicia qualquer <a href="../pt/Partitioning.html#Master_Boot_Record_(c%C3%B3digo_de_inicializa%C3%A7%C3%A3o)" class="mw-redirect" title="Particionamento">código de inicialização do Master Boot Record (MBR)</a> independentemente de existir ou não - em vez disso, a inicialização depende de entradas de inicialização na <a href="https://en.wikipedia.org/wiki/pt:NVRAM" class="extiw" title="wikipedia:pt:NVRAM">NVRAM</a>.
+</p>
+<p>A especificação UEFI determina o suporte para os sistemas de arquivos <a href="../en/FAT.html" title="FAT">FAT12, FAT16 e FAT32</a> (veja <a rel="nofollow" class="external text" href="https://uefi.org/specs/UEFI/2.10/13_Protocols_Media_Access.html#file-system-format-1">Especificação UEFI versão 2.10, seção 13.3.1.1</a>), mas qualquer fornecedor em conformidade pode, opcionalmente, adicionar suporte para sistemas de arquivos adicionais; por exemplo, o suporte ao <a href="https://en.wikipedia.org/wiki/HFS%2B" class="extiw" title="wikipedia:HFS+">HFS+</a> ou <a href="https://en.wikipedia.org/wiki/APFS" class="extiw" title="wikipedia:APFS">APFS</a> em alguns firmwares da Apple. As implementações da UEFI também suportam <a href="https://en.wikipedia.org/wiki/pt:ISO-9660" class="extiw" title="wikipedia:pt:ISO-9660">ISO-9660</a> para discos ópticos.
+</p>
+<p>O UEFI inicia aplicativos EFI, por exemplo <a href="#Gerenciador_de_boot">gerenciadores de boot</a>,  <a href="../en/Unified_Extensible_Firmware_Interface.html#UEFI_Shell" class="mw-redirect" title="UEFI shell">Shell UEFI</a>, etc. Esses aplicativos geralmente são armazenados como arquivos na <a href="../pt/EFI_system_partition.html" class="mw-redirect" title="Partição de sistema EFI">partição de sistema EFI</a>. Cada fornecedor pode armazenar seus arquivos na partição do sistema EFI dentro do diretório <code>/EFI/<i>nome_fornecedor</i></code>. Os aplicativos podem ser iniciados adicionando uma entrada de inicialização à NVRAM ou a partir do shell UEFI.
+</p>
+<p>A especificação UEFI tem suporte para inicializar o <i>legacy</i>, no caso o legado da <a href="#BIOS">BIOS</a>, e inicializar com seu <a href="https://en.wikipedia.org/wiki/pt:Unified_Extensible_Firmware_Interface#Compatibility_Support_Module" class="extiw" title="wikipedia:pt:Unified Extensible Firmware Interface">Compatibility Support Module (CSM)</a>. Se o CSM estiver ativado no UEFI, o UEFI gerará entradas de inicialização do CSM para todas as unidades. Se uma entrada de inicialização do CSM for escolhida para ser inicializada, o CSM do UEFI tentará instanciar a partir do código de inicialização da unidade MBR.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Nota:</strong> A Intel está aos poucos deixando de dar suporte ao CSM, e depender do recurso pode não ser mais possível em um futuro próximo. <a rel="nofollow" class="external autonumber" href="https://www.intel.com/content/dam/support/us/en/documents/intel-nuc/Legacy-BIOS-Boot-Support-Removal-for-Intel-Platforms.pdf">[1]</a>
+</div>
+<h3><span class="mw-headline" id="BIOS">BIOS</span></h3>
+<p>Uma <a href="https://en.wikipedia.org/wiki/pt:BIOS" class="extiw" title="wikipedia:pt:BIOS">BIOS</a> (acrônimo para <i>Basic Input-Output System</i>) é na maioria dos casos armazenado em uma memória flash na própria placa-mãe e é independente do armazenamento do sistema. Originalmente ela servia para o <a href="https://en.wikipedia.org/wiki/pt:IBM_PC" class="extiw" title="wikipedia:pt:IBM PC">IBM PC</a> e cuidava do processo de inicialização do sistema e do hardware. Agora ela tem sido gradualmente substituída desde 2010 pela <a href="#UEFI">UEFI</a>, da qual não sofre das mesmas limitações técnicas.
+</p>
+<h2>
+<span id="Inicializa.C3.A7.C3.A3o_do_sistema"></span><span class="mw-headline" id="Inicialização_do_sistema">Inicialização do sistema</span>
+</h2>
+<p>Ao ligar o sistema, o autoteste de inicialização, denominado no inglês como <a href="https://en.wikipedia.org/wiki/pt:Power-on_self-test" class="extiw" title="wikipedia:pt:Power-on self-test">power-on self-test</a>, é executado. 
+</p>
+<p>Veja também o texto, por Hugo Landau, em inglês, sobre as <a rel="nofollow" class="external text" href="https://www.devever.net/~hl/backstage-cast">CPUs modernas possuírem um elenco nos bastidores</a> se quiser saber um pouco mais sobre o papel das CPUs no processo de inicialização de um sistema.
+</p>
+<h3><span class="mw-headline" id="UEFI_2">UEFI</span></h3>
+<ol>
+<li>Após o POST, o UEFI inicializa o hardware necessário para carregar o sistema (disco, controladores de teclado etc.);</li>
+<li>O firmware lê as entradas de inicialização na NVRAM para determinar qual aplicativo EFI deve ser iniciado e de onde (por exemplo, de qual disco e partição);
+<ul><li>Uma entrada de inicialização pode ser simplesmente um disco. Nesse caso, o firmware procura uma <a href="../pt/EFI_system_partition.html" class="mw-redirect" title="Partição de sistema EFI">partição de sistema EFI</a> nesse disco e tenta localizar o aplicativo EFI no caminho reserva de inicialização <code>\EFI\BOOT\BOOTx64.EFI</code> (<code>BOOTIA32.EFI</code> em <a href="../en/Unified_Extensible_Firmware_Interface.html#UEFI_firmware_bitness" title="Unified Extensible Firmware Interface">sistemas com um IA32 (32 bits)</a>). É assim que as mídias removíveis inicializáveis UEFI funcionam;</li></ul>
+</li>
+<li>O firmware inicia o aplicativo EFI;
+<ul>
+<li>Isso poderia ser um <a href="#Gerenciador_de_boot">gerenciador de boot</a> ou o <a href="../pt/Kernel.html" title="Kernel (Português)">kernel</a> do Arch usando um <a href="../pt/EFISTUB.html" title="EFISTUB (Português)">stub de inicialização EFI</a>;</li>
+<li>Ele poderia ser algum aplicativo EFI como um shell UEFI ou um <a href="#Gerenciador_de_boot">gerenciador de boot</a>, como <a href="../pt/Systemd-boot.html" title="Systemd-boot (Português)">systemd-boot</a> ou <a href="../en/REFInd.html" title="REFInd">rEFInd</a>;</li>
+</ul>
+</li>
+</ol>
+<p>Se <a href="../en/Unified_Extensible_Firmware_Interface/Secure_Boot.html" class="mw-redirect" title="Secure Boot">Secure Boot</a> estiver habilitado, o processo de inicialização vai verificar a autenticidade do binário EFI pela assinatura.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Nota:</strong> Alguns sistemas UEFI só podem inicializar a partir do caminho reserva de inicialização.</div>
+<h4>
+<span id="Inicializa.C3.A7.C3.A3o_m.C3.BAltipla"></span><span class="mw-headline" id="Inicialização_múltipla">Inicialização múltipla</span>
+</h4>
+<p>Como cada sistema operacional ou fornecedor pode manter seus próprios arquivos dentro da <a href="../pt/EFI_system_partition.html" class="mw-redirect" title="Partição de sistema EFI">partição de sistema EFI</a> sem afetar um outro sistema, a inicialização múltipla, do inglês <i>multibooting</i>, usando UEFI é apenas uma questão de iniciar um aplicativo EFI diferente, que é correspondente ao gerenciador de boot do sistema operacional específico. Isso elimina a necessidade de contar com os mecanismos de <a href="https://en.wikipedia.org/wiki/Chain_loading" class="extiw" title="wikipedia:Chain loading">carregamento em cadeia</a> de um <a href="#Gerenciador_de_boot">gerenciador de boot</a> para carregar outro sistema operacional.
+</p>
+<p>Veja também <a href="../pt/Dual_boot_with_Windows.html" title="Dual boot with Windows (Português)">Dual boot com Windows</a>.
+</p>
+<h3><span class="mw-headline" id="BIOS_2">BIOS</span></h3>
+<ol>
+<li>Após o POST, a BIOS inicializa o hardware necessário para inicializar (disco, controladores de teclado etc.).</li>
+<li>A BIOS inicia os primeiros 440 bytes (<a href="../pt/Partitioning.html#Master_Boot_Record_(c%C3%B3digo_de_inicializa%C3%A7%C3%A3o)" class="mw-redirect" title="Particionamento">a área de código de bootstrap do Master Boot Record</a>) do primeiro disco na ordem de disco da BIOS.</li>
+<li>O primeiro estágio do gerenciador de boot no código de inicialização da MBR, então, inicia o código de seu segundo estágio (se houver) de:
+<ul>
+<li>próximos setores de disco após o MBR, ou seja, o chamado intervalo pós-MBR (somente em uma tabela de partição MBR).</li>
+<li>um <a href="https://en.wikipedia.org/wiki/Volume_boot_record" class="extiw" title="wikipedia:Volume boot record">registro de inicialização de volume (VBR)</a> do disco com ou sem partição.</li>
+<li>para o <a href="../pt/GRUB.html" title="GRUB (Português)">GRUB</a> em um disco particionado como GPT, usar uma  <a href="../pt/GRUB.html#Instru%C3%A7%C3%B5es_espec%C3%ADficas_de_Tabela_de_Parti%C3%A7%C3%A3o_GUID_(GPT)" class="mw-redirect" title="Partição de inicialização de BIOS">partição de inicialização de BIOS</a> específica para o GRUB (isto é usado no lugar do intervalo pós-MBR, do qual não existe em partições GPT).</li>
+</ul>
+</li>
+<li>O atual <a href="#Gerenciador_de_boot">gerenciador de boot</a> é iniciado.</li>
+<li>O gerenciador de boot carrega um sistema operacional por encadeamento ou diretamente o kernel do sistema operacional.</li>
+</ol>
+<h2><span class="mw-headline" id="Gerenciador_de_boot">Gerenciador de boot</span></h2>
+<p>Um gerenciador de boot é um peça de software iniciada pelo firmware (<a href="https://en.wikipedia.org/wiki/pt:BIOS" class="extiw" title="wikipedia:pt:BIOS">BIOS</a> ou <a href="../en/Unified_Extensible_Firmware_Interface.html" class="mw-redirect" title="UEFI">UEFI</a>). Ele é responsável por carregar o kernel com os <a href="../pt/Kernel_parameters.html" class="mw-redirect" title="Parâmetros do kernel">parâmetros do kernel</a> desejados e qualquer imagem initramfs externa escolhida. No caso do UEFI, o kernel em si pode ser lançado diretamente pelo UEFI usando <a href="../pt/EFISTUB.html" title="EFISTUB (Português)">o stub de inicialização EFI</a>. Um gerenciador de boot separado ainda pode ser usado com o propósito de editar os parâmetros do kernel antes de inicializar. Sistemas com <a href="../en/Unified_Extensible_Firmware_Interface.html#UEFI_firmware_bitness" title="Unified Extensible Firmware Interface">32-bit IA32 UEFI</a> requerem um gerenciador de boot que dê suporte ao modo misto de inicialização.
+</p>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Atenção:</strong> Para carregar a inicialização do Arch com sucesso, o gerenciador de boot precisa acessar o kernel e as imagens do initramfs, dos quais tipicamente residem no diretório <code>/boot</code>. Isto significa que o gerenciador de boot deve possuir suporte para tudo, desde os dispositivos de bloco, dispositivos de bloco <i>stacked</i> (empilhados/em camadas, como LVM, RAID, dm-crypt, LUKS, etc.), até ao sistema de arquivos no qual residem o(s) kernel(s) e as imagens initramfs.</div>
+<p>Como quase nenhum dos gerenciadores de boot possuem suporte para dispositivos de bloco empilhados, e já que os sistema de arquivos podem introduzir novos recursos e funcionalidades que podem não ser compatíveis com qualquer tipo de gerenciador de boot (por exemplo, <a rel="nofollow" class="external text" href="https://gitlab.archlinux.org/archlinux/packaging/packages/grub/-/issues/7">archlinux/packaging/packages/grub#7</a>, <a rel="nofollow" class="external text" href="https://bugs.archlinux.org/task/79857">FS#79857</a>, <a rel="nofollow" class="external text" href="https://bugs.archlinux.org/task/59047">FS#59047</a>, <a rel="nofollow" class="external text" href="https://bugs.archlinux.org/task/58137">FS#58137</a>, <a rel="nofollow" class="external text" href="https://bugs.archlinux.org/task/51879">FS#51879</a>, <a rel="nofollow" class="external text" href="https://bugs.archlinux.org/task/46856">FS#46856</a>, <a rel="nofollow" class="external text" href="https://bugs.archlinux.org/task/38750">FS#38750</a>, <a rel="nofollow" class="external text" href="https://bugs.archlinux.org/task/21733">FS#21733</a> e diretórios criptografados com <a href="../en/Fscrypt.html" title="Fscrypt">fscrypt</a>), usar uma <a href="../pt/Partitioning.html#/boot" title="Partitioning (Português)">partição /boot</a> separada com um sistema de arquivos universalmente suportado, como <a href="../en/FAT.html" class="mw-redirect" title="FAT32">FAT32</a>, em diversas ocasiões é a opção mais viável.
+</p>
+<h3>
+<span id="Compara.C3.A7.C3.A3o_de_recursos"></span><span class="mw-headline" id="Comparação_de_recursos">Comparação de recursos</span>
+</h3>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Nota:</strong> 
+<ul>
+<li>Como o GPT é parte da especificação UEFI, todos os gerenciadores de boot UEFI oferecem suporte a discos GPT. O GPT em sistemas BIOS é possível, usando <i>hybrid booting</i> com <a rel="nofollow" class="external text" href="https://www.rodsbooks.com/gdisk/hybrid.html">Hybrid MBR</a> ("inicialização híbrida") ou o novo protocolo <a rel="nofollow" class="external text" href="https://repo.or.cz/syslinux.git/blob/HEAD:/doc/gpt.txt">somente GPT</a>. Porém, esse protocolo pode causar problemas com certas implementações de BIOS; veja <a rel="nofollow" class="external text" href="https://www.rodsbooks.com/gdisk/bios.html#bios">rodsbooks</a> para mais detalhes.</li>
+<li>Como <a href="../en/Unified_Extensible_Firmware_Interface/Secure_Boot.html" class="mw-redirect" title="Secure Boot">Secure Boot</a> faz parte das especificações UEFI, todos os gerenciadores de boot UEFI possuem este suporte, apesar de alguns terem limitações.</li>
+</ul>
+</div>
+<table class="wikitable sortable">
+<tbody>
+<tr>
+<th rowspan="2">Nome
+</th>
+<th colspan="2">Firmware
+</th>
+<th colspan="2">
+<a href="../pt/Partitioning.html#Tabela_de_parti%C3%A7%C3%A3o" class="mw-redirect" title="Tabela de partição">Tabela de partição</a>
+</th>
+<th rowspan="2">Inicialização múltipla
+</th>
+<th rowspan="2">
+<a href="../pt/File_systems.html" class="mw-redirect" title="Sistema de arquivos">Sistema de arquivos</a>
+</th>
+<th rowspan="2">Notas
+</th>
+</tr>
+<tr>
+<th>BIOS</th>
+<th>
+<a href="../en/Unified_Extensible_Firmware_Interface.html" class="mw-redirect" title="UEFI">UEFI</a>
+</th>
+<th><a href="../pt/Partitioning.html#Master_Boot_Record" class="mw-redirect" title="MBR (Português)">MBR</a></th>
+<th>
+<a href="../pt/Partitioning.html#Tabela_de_Parti%C3%A7%C3%A3o_GUID" class="mw-redirect" title="GPT (Português)">GPT</a>
+</th>
+</tr>
+<tr>
+<th>
+<a href="../en/Clover.html" title="Clover">Clover</a>
+</th>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sim
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sim
+</td>
+<td data-sort-value="1" style="background: #faa; color: inherit; vertical-align: middle; text-align: center;">Não</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sim
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sim
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">
+<a href="../en/Clover.html#Supported_file_systems" title="Clover">Extensível</a><sup>2,5</sup>
+</td>
+<td>Consegue emular UEFI em sistemas com BIOS legado.
+</td>
+</tr>
+<tr>
+<th>
+<a href="../pt/EFISTUB.html" title="EFISTUB (Português)">EFI boot stub</a>
+</th>
+<td data-sort-value="5" style="background: inherit; color: inherit; vertical-align: middle; text-align: center;">–
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sim<sup>1</sup>
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sim</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sim
+</td>
+<td data-sort-value="5" style="background: inherit; color: inherit; vertical-align: middle; text-align: center;">–
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Herdado do firmware<sup>1</sup>
+</td>
+<td>O kernel é um executável EFI válido que pode ser carregado diretamente do firmware UEFI ou de outro gerenciador de boot.
+</td>
+</tr>
+<tr>
+<th>
+<a href="../pt/GRUB.html" title="GRUB (Português)">GRUB</a>
+</th>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sim
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sim<sup>3</sup>
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sim</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sim
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sim
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">
+<a href="../en/GRUB.html#Supported_file_systems" title="GRUB">Já incorporado (built-in)</a>
+</td>
+<td>Fornece suporte a RAID, LUKS (porém não ao Argon2 PBKDFs) e LVM (porém não em volumes de provisionamento fino). Verifique a página do <a href="../pt/GRUB.html" title="GRUB (Português)">GRUB</a> para conhecer limitações de configurações específicas.
+</td>
+</tr>
+<tr>
+<th>
+<a href="../en/Limine.html" title="Limine">Limine</a>
+</th>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sim
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sim
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sim</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sim
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sim
+</td>
+<td data-sort-value="3" style="background: #ffa; color: inherit; vertical-align: middle; text-align: center;">
+<a href="../en/Limine.html#Supported_file_systems" title="Limine">Limitado</a>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<th>
+<a href="../en/REFInd.html" title="REFInd">rEFInd</a>
+</th>
+<td data-sort-value="1" style="background: #faa; color: inherit; vertical-align: middle; text-align: center;">Não
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sim
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sim</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sim
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sim<sup>4</sup>
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">
+<a href="../en/REFInd.html#Supported_file_systems" title="REFInd">Extensível</a><sup>2,5</sup>
+</td>
+<td>Possui suporte a auto detecção de kernels e parâmetros sem configuração explícita, e possui suporte a inicialização rápida (<i>fastboot</i>) <a rel="nofollow" class="external autonumber" href="https://bbs.archlinux.org/viewtopic.php?id=258805">[2]</a>.
+</td>
+</tr>
+<tr>
+<th>
+<a href="../en/Syslinux.html" title="Syslinux">Syslinux</a>
+</th>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sim</td>
+<td data-sort-value="3" style="background: #ffa; color: inherit; vertical-align: middle; text-align: center;">
+<a href="../en/Syslinux.html#Limitations_of_UEFI_Syslinux" title="Syslinux">Parcial</a><sup>1</sup>
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sim</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sim
+</td>
+<td data-sort-value="3" style="background: #ffa; color: inherit; vertical-align: middle; text-align: center;">
+<a href="../en/Syslinux.html#Chainloading" title="Syslinux">Parcial</a>
+</td>
+<td data-sort-value="3" style="background: #ffa; color: inherit; vertical-align: middle; text-align: center;">
+<a href="../en/Syslinux.html#Supported_file_systems" title="Syslinux">Limitado</a>
+</td>
+<td>Sem suporte a certos recursos de sistema de arquivos.<br>Pode apenas acessar o sistema de arquivos para o qual foi <a href="../en/Syslinux.html#Chainloading" title="Syslinux">instalado</a>.
+</td>
+</tr>
+<tr>
+<th>
+<a href="../pt/Systemd-boot.html" title="Systemd-boot (Português)">systemd-boot</a>
+</th>
+<td data-sort-value="1" style="background: #faa; color: inherit; vertical-align: middle; text-align: center;">Não
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sim<sup>3</sup>
+</td>
+<td data-sort-value="3" style="background: #ffa; color: inherit; vertical-align: middle; text-align: center;"><a rel="nofollow" class="external text" href="https://github.com/systemd/systemd/issues/1125">Manual</a></td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sim
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sim<sup>4</sup>
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">
+<a href="../en/Systemd-boot.html#Supported_file_systems" title="Systemd-boot">Extensível</a><sup>2,5</sup>
+</td>
+<td>Só pode carregar binários que foram instalados para o <a href="../pt/EFI_system_partition.html" class="mw-redirect" title="ESP (Português)">ESP</a> ou da Partição de Gerenciador de Boot Estendida (partição XBOOTLDR) de dentro do mesmo disco.<br>Automaticamente detecta <a href="../pt/Unified_kernel_image.html" title="Unified kernel image (Português)">imagens de kernel unificadas</a> colocadas em <code><i>esp</i>/EFI/Linux/</code>.
+</td>
+</tr>
+<tr>
+<th>
+<a href="../pt/Unified_kernel_image.html" title="Unified kernel image (Português)">Imagem de kernel unificada</a>
+</th>
+<td data-sort-value="5" style="background: inherit; color: inherit; vertical-align: middle; text-align: center;">–
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sim<sup>3</sup>
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sim</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sim
+</td>
+<td data-sort-value="5" style="background: inherit; color: inherit; vertical-align: middle; text-align: center;">–
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Herdado do firmware<sup>2</sup>
+</td>
+<td>
+<span class="plainlinks archwiki-template-man" title="$ man 7 systemd-stub"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd-stub.7">systemd-stub(7)</a></span>, um kernel, o initramfs e a linha de comando do kernel empacotados dentro de um executável EFI para serem carregados diretamente do firmware UEFI ou de outro gerenciador de boot.
+</td>
+</tr>
+<tr>
+<th style="background: #ddd; color: inherit; vertical-align: middle; text-align: center;">
+<a href="../en/GRUB_Legacy.html" title="GRUB Legacy">GRUB Legacy</a>
+</th>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sim
+</td>
+<td data-sort-value="1" style="background: #faa; color: inherit; vertical-align: middle; text-align: center;">Não
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sim</td>
+<td data-sort-value="1" style="background: #faa; color: inherit; vertical-align: middle; text-align: center;">Não
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sim
+</td>
+<td data-sort-value="3" style="background: #ffa; color: inherit; vertical-align: middle; text-align: center;">
+<a href="../en/GRUB_Legacy.html#Supported_file_systems" title="GRUB Legacy">Limitado</a>
+</td>
+<td>
+<a rel="nofollow" class="external text" href="https://www.gnu.org/software/grub/grub-legacy.html">Descontinuado</a> em favor do <a href="../pt/GRUB.html" title="GRUB (Português)">GRUB</a>.
+</td>
+</tr>
+<tr>
+<th style="background: #ddd; color: inherit; vertical-align: middle; text-align: center;">
+<a href="../en/LILO.html" title="LILO">LILO</a>
+</th>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sim
+</td>
+<td data-sort-value="1" style="background: #faa; color: inherit; vertical-align: middle; text-align: center;">Não
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sim</td>
+<td data-sort-value="3" style="background: #ffa; color: inherit; vertical-align: middle; text-align: center;">
+<a rel="nofollow" class="external text" href="https://salsa.debian.org/joowie-guest/upstream_lilo/-/commit/29a64e6b92cac22d472f4b352de5b1535e4afc5f">Parcial</a>
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sim
+</td>
+<td data-sort-value="3" style="background: #ffa; color: inherit; vertical-align: middle; text-align: center;">
+<a href="../en/LILO.html#Supported_file_systems" title="LILO">Limitado</a>
+</td>
+<td>
+<a rel="nofollow" class="external text" href="https://web.archive.org/web/20180323163248/http://lilo.alioth.debian.org/">Descontinuado</a> em razão de limitações (por exemplo, com Btrfs, GPT, RAID, criptografia).
+</td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li>Mesmo que o binário seja assinado para <a href="../en/Unified_Extensible_Firmware_Interface/Secure_Boot.html" class="mw-redirect" title="Secure Boot">Secure Boot</a>, o mesmo não passa por nenhuma verificação após a assinatura, portanto isto quebra a cadeia de confiança.</li>
+<li>O suporte ao sistema de arquivos é herdado do firmware. A especificação UEFI exige suporte para os sistemas de arquivos FAT12, FAT16 e FAT32 <a rel="nofollow" class="external autonumber" href="https://uefi.org/specs/UEFI/2.10/13_Protocols_Media_Access.html#file-system-format-1">[3]</a>, mas os fornecedores podem opcionalmente adicionar suporte para sistemas de arquivos adicionais; por exemplo, o firmware dos <a href="../en/Mac.html" title="Mac">Macs</a> da Apple têm suporte ao sistema de arquivos HFS+. Se o firmware fornecer uma interface para carregar <a href="../en/Unified_Extensible_Firmware_Interface.html#UEFI_drivers" title="Unified Extensible Firmware Interface">UEFI drivers</a> na inicialização, o suporte a sistemas de arquivos adicionais poderá ser adicionado carregando drivers de sistema de arquivos (adquiridos independentemente).</li>
+<li>Oferece suporte a inicialização de modo misto, ou seja, pode iniciar um kernel Linux x86_64 64-bit em uma <a href="../en/Unified_Extensible_Firmware_Interface.html#UEFI_firmware_bitness" title="Unified Extensible Firmware Interface">UEFI IA32 32-bit</a>.</li>
+<li>Um <a rel="nofollow" class="external text" href="https://www.rodsbooks.com/efi-bootloaders/principles.html">gerenciador de boot</a>. Ele só pode iniciar outros aplicativos EFI, por exemplo, imagens de kernel do Linux criadas com <code>CONFIG_EFI_STUB=y</code> e o <a rel="nofollow" class="external text" href="https://learn.microsoft.com/en-us/windows-hardware/drivers/bringup/boot-and-uefi#understanding-the-windows-boot-manager">Gerenciador de Boot do Windows</a> (<code>bootmgfw.efi</code>).</li>
+<li>Oferece suporte ao carregamento de <a href="../en/Unified_Extensible_Firmware_Interface.html#UEFI_drivers" title="Unified Extensible Firmware Interface">programas de sistema de arquivos UEFI</a>.</li>
+</ol>
+<p>Veja também <a href="https://en.wikipedia.org/wiki/Comparison_of_boot_loaders" class="extiw" title="wikipedia:Comparison of boot loaders">Wikipedia:Comparison of boot loaders</a>.
+</p>
+<h2><span class="mw-headline" id="Kernel">Kernel</span></h2>
+<p>O <a href="#Gerenciador_de_boot">gerenciador de boot</a> inicializa a <a href="https://en.wikipedia.org/wiki/vmlinux" class="extiw" title="wikipedia:vmlinux">imagem vmlinux</a> contendo o <a href="../pt/Kernel.html" title="Kernel (Português)">kernel</a>.
+</p>
+<p>O kernel funciona em um baixo nível (<i>kernelspace</i>, ou no caso a nível de <i>espaço de kernel</i>) que interage entre o hardware da máquina e os programas. O kernel inicialmente desempenha a enumeração do hardware e a inicialização antes de prosseguir para o espaço de usuário. Veja <a href="https://en.wikipedia.org/wiki/pt:N%C3%BAcleo_(sistema_operacional)" class="extiw" title="wikipedia:pt:Núcleo (sistema operacional)">Wikipedia:Núcleo (sistema operacional)</a> e <a href="https://en.wikipedia.org/wiki/pt:Linux_(n%C3%BAcleo)" class="extiw" title="wikipedia:pt:Linux (núcleo)">Wikipedia:Linux (núcleo)</a> para uma explicação detalhada.
+</p>
+<h2><span class="mw-headline" id="initramfs">initramfs</span></h2>
+<p>A imagem initramfs é o início em RAM de um sistema de arquivos (<i>init</i>al <i>RAM</i> <i>f</i>ile <i>s</i>ystem) por um conjunto de arquivos compactado em <a href="https://en.wikipedia.org/wiki/pt:cpio" class="extiw" title="wikipedia:pt:cpio">cpio</a>. Imagens initramfs podem ser geradas pelo <a href="../pt/Mkinitcpio.html" title="Mkinitcpio (Português)">mkinitcpio</a>, <a href="../pt/Dracut.html" title="Dracut (Português)">dracut</a> ou <a href="../en/Booster.html" title="Booster">booster</a>, e o método preferido do Arch é configurar o <i>início do espaço de usuário</i>, ou do inglês, <i>early userspace</i>.
+</p>
+<p>O sistema de arquivos <i>raiz</i>, ou <i>root</i>, em <code>/</code> começa como um <a rel="nofollow" class="external text" href="https://docs.kernel.org/filesystems/ramfs-rootfs-initramfs.html">rootfs</a> vazio, em outras palavras, começa como uma raiz vazia de um sistema de arquivos, e é uma instância especial do tmpfs ou do ramfs. Estes são nomes para uma raiz de sistema de arquivos temporária e é o local cuja a imagem initramfs será desempacotada.
+</p>
+<p>O principal objetivo do initramfs é de fornecer os arquivos necessários para o início do espaço de usuário inicializar de forma bem sucedida os processos posteriores do espaço de usuário. Não é obrigatório que a imagem contenha todos os módulos de kernel que alguém almeje usar; a imagem deve possuir apenas os módulos requeridos para o dispositivo root como NVMe, SATA, SAS, eMMC ou USB (se inicializado por uma unidade externa) e de criptografia. A maioria dos módulos serão carregados mais tarde pelo <a href="../en/Udev.html" title="Udev">udev</a>, após a troca de root para dentro do sistema de arquivos raiz durante o processo de inicialização.
+</p>
+<ol>
+<li>Primeiro, o kernel desempacota a integração do initramfs para dentro do root temporário. Os kernels <a href="../pt/Kernel.html#Kernels_com_suporte_oficial" title="Kernel (Português)">oficialmente suportados</a> por Arch Linux usam um arquivo compactado vazio da integração do initramfs, tal qual é o padrão ao montar o Linux.</li>
+<li>E então, o kernel desempacota imagens initramfs externas na ordem que elas foram especificadas pela linha de comando, passadas pelo <a href="#Gerenciador_de_boot">gerenciador de boot</a>, e o mesmo sobrescreve qualquer arquivo que veio da integração do initramfs ou do desempacotamento dos arquivos prévio. Note que múltiplas imagens initramfs podem ser unidas em um único arquivo e o kernel irá processá-las na mesma ordem contida neste arquivo.
+<ol>
+<li>Se a primeira imagem initramfs é descomprimida, após ser desempacotada, o kernel irá procurar por atualizações do <a href="../en/Microcode.html" title="Microcode">microcode</a> da CPU e atualizações da tabela ACPI respectivamente em <code>/kernel/x86/microcode/</code> e <code>/kernel/firmware/acpi</code>.</li>
+<li>Depois de processar as atualizações do microcode da CPU e da tabela ACPI, o kernel continuará a desempacotar o resto das imagens initramfs, se caso houver.</li>
+</ol>
+</li>
+</ol>
+<p>Além disso, o <a href="../pt/Kernel.html" title="Kernel (Português)">kernel</a> Linux <a rel="nofollow" class="external text" href="https://github.com/torvalds/linux/blob/1b907d0507354b74a4f2c286380cd6059af79248/fs/namespace.c#L4222">fixa</a> o root original de inicialização. Se um initramfs não é usado, o real sistema de arquivos root pode acabar falhando ao desmontar de forma limpa o sistema durante o desligamento.
+</p>
+<h2>
+<span id="In.C3.ADcio_do_espa.C3.A7o_de_usu.C3.A1rio"></span><span class="mw-headline" id="Início_do_espaço_de_usuário">Início do espaço de usuário</span>
+</h2>
+<p>O estágio de <i>início do espaço de usuário</i>, ou <i>early userspace</i>, também conhecido por <i>estágio do initramfs</i>, começa dentro do sistema de arquivos root, do qual consiste de arquivos provenientes de <a href="#initramfs">#initramfs</a>. O início do espaço de usuário inicia quando o kernel executa o binário <code>/init</code> como PID 1.
+</p>
+<p>A função de início de espaço de usuário é <a href="../pt/Mkinitcpio.html#Hooks_comuns" title="Mkinitcpio (Português)">configurável</a>, mas o principal propósito é que o sistema inicialize por conta própria ao ponto que o mesmo possa acessar a raiz do sistema de arquivos. Isto inclui:
+</p>
+<ul><li>Configurar e preparar o armazenamento empilhado cujo o sistema de arquivos root está, por exemplo, por meio de <a href="../pt/Dm-crypt.html" title="Dm-crypt (Português)">dm-crypt</a>, <a href="../pt/LVM.html" title="LVM (Português)">LVM</a>, <a href="../en/Systemd-repart.html" title="Systemd-repart">systemd-repart</a>, etc.</li></ul>
+<ul><li>Determinar os <a href="../pt/Persistent_block_device_naming.html" class="mw-redirect" title="Nomeação persistente de dispositivo de bloco">nomes persistentes de dispositivos de bloco</a> aos dispositivos reais por meio do <a href="../en/Udev.html" title="Udev">udev</a>.</li></ul>
+<ul><li>
+<span class="plainlinks archwiki-template-man" title="$ man 8 systemd-modules-load"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd-modules-load.8">systemd-modules-load(8)</a></span> carrega os módulos de kernel, assim como qualquer módulo de dispositivo de bloco necessário para montar o real sistema de arquivos root.</li></ul>
+<ul><li>Lida com a desencriptação do real sistema de arquivos root, quando aplicável.</li></ul>
+<ul><li>Carrega o módulo DRM, assim como o <a href="../en/Kernel_mode_setting.html#Early_KMS_start" title="Kernel mode setting">início do KMS</a> já é habilitado por padrão para módulos em árvore (<i>in-tree modules</i>).</li></ul>
+<p>Note que o início do espaço de usuário serve mais do que apenas configurar o sistema de arquivos root. Há tarefas que só podem ser performadas antes que a raiz do sistema de arquivos seja montada, como no caso em <a href="../pt/Fsck.html" title="Fsck (Português)">fsck</a> e ao retornar o sistema depois da <a href="../pt/Power_management/Suspend_and_hibernate.html#Hiberna%C3%A7%C3%A3o" class="mw-redirect" title="Hibernação">hibernação</a>.
+</p>
+<p>No estágio final do início do espaço de usuário, o root real é montado em <code>/sysroot/</code> (no caso de um initramfs baseado em <a href="../pt/Systemd.html" title="Systemd (Português)">systemd</a>) ou em <code>/new_root/</code> (no caso de um baseado em busybox), e com isso a troca é realizada ao ser usado <code>systemctl switch-root</code>, quando usando um initramfs baseado em systemd, ou <span class="plainlinks archwiki-template-man" title="$ man 8 switch_root"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/switch_root.8">switch_root(8)</a></span>, quando usado um initramfs baseado em busybox. Os processos posteriores do espaço de usuário começam quando executado o programa <a href="../pt/Init.html" title="Init (Português)">init</a> a partir do real sistema de arquivos root.
+</p>
+<h2>
+<span id="Subsequ.C3.AAncia_do_espa.C3.A7o_de_usu.C3.A1rio"></span><span class="mw-headline" id="Subsequência_do_espaço_de_usuário">Subsequência do espaço de usuário</span>
+</h2>
+<p>A subsequência do espaço de usuário é executado pelo processo do <a href="../pt/Init.html" title="Init (Português)">init</a>. Oficialmente o Arch usa <a href="../pt/Systemd.html" title="Systemd (Português)">systemd</a>, e o processo é embasado no conceito de units e serviços, mas a funcionalidade descrita aqui é em grande parte sobreposta com a explicação de outros sistemas de inicialização.
+</p>
+<h3><span class="mw-headline" id="getty">getty</span></h3>
+<p>O processo do init chama <a href="../en/Getty.html" title="Getty">getty</a> uma vez para cada <a href="https://en.wikipedia.org/wiki/Virtual_console" class="extiw" title="wikipedia:Virtual console">terminal virtual</a> (geralmente seis deles), que inicializa cada terminal e protege o usuário de acesso não autorizado. Uma vez que o nome de usuário e a senha são fornecidos, o <i>getty</i> verifica-os em <code>/etc/passwd</code> e em <code>/etc/shadow</code>, e então chama o <span class="plainlinks archwiki-template-man" title="$ man 1 login"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/login.1">login(1)</a></span>.
+</p>
+<h4><span class="mw-headline" id="Login">Login</span></h4>
+<p>O programa <i>login</i> começa a sessão para o usuário ao configurar as variáveis de ambiente e ao iniciar o shell de usuário, baseado no que foi descrito em <code>/etc/passwd</code>. O programa <i>login</i> exibe os conteúdo da mensagem do dia <a href="https://en.wikipedia.org/wiki/motd_(Unix)" class="extiw" title="wikipedia:motd (Unix)">/etc/motd</a> (<i>m</i>essage <i>o</i>f <i>t</i>he <i>d</i>ay) após um login bem sucedido, pouco antes disto é executado o shell de login (<i>login shell</i>). Este é um bom lugar para exibir os termos de serviço e relembrar o usuário de suas diretivas locais, ou dizer qualquer outra coisa que você queira.
+</p>
+<h4><span class="mw-headline" id="Shell">Shell</span></h4>
+<p>Uma vez que o <a href="../pt/Command-line_shell.html" title="Command-line shell (Português)">shell</a> do usuário é iniciado, tipicamente será executado um arquivo de configuração de tempo de execução (<i>runtime</i>) antes de apresentar o prompt ao usuário, no caso pode ser um arquivo como o <a href="../en/Bash.html#Configuration_files" class="mw-redirect" title="Bashrc">bashrc</a>. Se a conta é configurada para <a href="../pt/Xinit.html#Inicializar_automaticamente_o_X_no_login" title="Xinit (Português)">iniciar o X no login</a>, o arquivo de configuração de tempo de execução irá chamar <a href="../pt/Xinit.html" title="Xinit (Português)">startx</a> ou <a href="../pt/Xinit.html" title="Xinit (Português)">xinit</a>. Para chegar ao fim desta explicação, pule para a seção de <a href="#Sess%C3%A3o_gr%C3%A1fica_(Xorg)">#Sessão gráfica (Xorg)</a>.
+</p>
+<h3>
+<span id="Gerenciador_de_exibi.C3.A7.C3.A3o"></span><span class="mw-headline" id="Gerenciador_de_exibição">Gerenciador de exibição</span>
+</h3>
+<p>Adicionalmente, o <a href="../pt/Init.html" title="Init (Português)">init</a> pode ser configurado para iniciar um <a href="../pt/Display_manager.html" title="Display manager (Português)">gerenciador de exibição</a> ao invés de iniciar com <i>getty</i> em um terminal virtual específico. Isto requer manualmente <a href="../pt/Help:Reading.html#Controle_de_unidades_do_systemd" title="Help:Reading (Português)">habilitar</a> o seu respectivo <a href="../pt/Systemd.html#Usando_units" title="Systemd (Português)">arquivo de serviço do systemd</a>. O gerenciador de exibição pode então iniciar a sessão gráfica.
+</p>
+<h4>
+<span id="Sess.C3.A3o_gr.C3.A1fica_.28Xorg.29"></span><span class="mw-headline" id="Sessão_gráfica_(Xorg)">Sessão gráfica (Xorg)</span>
+</h4>
+<p><a href="../pt/Xinit.html" title="Xinit (Português)">xinit</a> executa o arquivo de configuração de tempo de execução <a href="../pt/Xinit.html#xinitrc" class="mw-redirect" title="Xinitrc (Português)">xinitrc</a> do usuário, que normalmente inicia um <a href="../pt/Window_manager.html" class="mw-redirect" title="Gerenciador de janela">gerenciador de janelas</a> ou um <a href="../pt/Desktop_environment.html" class="mw-redirect" title="Ambiente de desktop">ambiente desktop</a>. Quando o usuário é encerrado e sai, <i>xinit</i>, <i>startx</i>, o shell e o login serão encerrados respectivamente, retornando ao <i>getty</i> ou ao gerenciador de exibição.
+</p>
+<h2>
+<span id="Veja_tamb.C3.A9m"></span><span class="mw-headline" id="Veja_também">Veja também</span>
+</h2>
+<ul><li><a href="https://en.wikipedia.org/wiki/Booting_process_of_Linux" class="extiw" title="wikipedia:Booting process of Linux">Wikipedia:Booting process of Linux</a></li></ul>
+<ul><li><a rel="nofollow" class="external text" href="https://web.archive.org/web/20230313210814/https://developer.ibm.com/articles/l-linuxboot/">Inside the Linux boot process</a></li></ul>
+<ul><li><a rel="nofollow" class="external text" href="https://www.rodsbooks.com/efi-bootloaders/">Rod Smith - Managing EFI Boot Loaders for Linux</a></li></ul>
+<ul><li><a rel="nofollow" class="external text" href="https://neosmart.net/wiki/mbr-boot-process/">NeoSmart: The BIOS/MBR Boot Process</a></li></ul>
+<ul><li><a rel="nofollow" class="external text" href="https://0pointer.net/blog/linux-boot-partitions.html">Lennart Poettering - Linux Boot Partitions and How to Set Them Up</a></li></ul>
+<ul><li><a href="https://en.wikipedia.org/wiki/initrd" class="extiw" title="wikipedia:initrd">Wikipedia:initrd</a></li></ul>
+<ul><li><a rel="nofollow" class="external text" href="https://web.archive.org/web/20150430223035/http://archlinux.me/brain0/2010/02/13/early-userspace-in-arch-linux/">Early Userspace in Arch Linux</a></li></ul>
+<ul><li><a rel="nofollow" class="external text" href="https://www.linux.com/learn/kernel-newbie-corner-initrd-and-initramfs-whats">Kernel Newbie Corner: initrd and initramfs</a></li></ul>
+<ul><li>
+<span class="plainlinks archwiki-template-man" title="$ man 7 bootup"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/bootup.7">bootup(7)</a></span> (aborda mais sobre o initrd do systemd + a porção do espaço de usuário)</li></ul>
+</div>
+</div>
+					<div id="catlinks" class="catlinks" data-mw="interface"><div id="mw-normal-catlinks" class="mw-normal-catlinks">
+<a href="../Special:Categories.html" title="Special:Categories">Categories</a>: <ul>
+<li><a href="../pt/Category:Boot_process.html" title="Category:Boot process (Português)">Boot process (Português)</a></li>
+<li><a href="../pt/Category:About_Arch.html" title="Category:About Arch (Português)">About Arch (Português)</a></li>
+</ul>
+</div></div>
+				</div>
+			</main>
+			
+		</div>
+		<div class="mw-footer-container">
+			
+<footer id="footer" class="mw-footer" style="margin: 0">
+	<ul id="footer-info">
+	<li data-nosnippet="">Retrieved from "<a dir="ltr" href="https://wiki.archlinux.org/index.php?title=Arch_boot_process_(Portugu%C3%AAs)&amp;oldid=828309">https://wiki.archlinux.org/index.php?title=Arch_boot_process_(Português)&amp;oldid=828309</a>"</li>
+<li id="footer-info-lastmod"> This page was last edited on 5 March 2025, at 18:02.</li>
+	<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+<br>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="https://terms.archlinux.org/docs/privacy-policy/">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="../en/ArchWiki:About.html">About ArchWiki</a></li>
+	<li id="footer-places-disclaimers"><a href="../en/ArchWiki:General_disclaimer.html">Disclaimers</a></li>
+	<li id="footer-places-archwiki-code-of-conduct"><a href="https://terms.archlinux.org/docs/code-of-conduct/" class="extiw" title="archlinux-service-agreements:code-of-conduct">Code of conduct</a></li>
+	<li id="footer-places-archwiki-terms-of-service"><a href="https://terms.archlinux.org/docs/terms-of-service/" class="extiw" title="archlinux-service-agreements:terms-of-service">Terms of service</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-copyrightico"><a href="https://www.gnu.org/copyleft/fdl.html" class="cdx-button cdx-button--fake-button cdx-button--size-large cdx-button--fake-button--enabled"><img src="/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" loading="lazy"></a></li>
+	<li id="footer-poweredbyico"><img src="/resources/assets/poweredby_mediawiki.svg" width="88" height="31" loading="lazy"></li>
+</ul>
+
+</footer>
+
+		</div>
+	</div> 
+</div> 
+<div class="vector-settings" id="p-dock-bottom">
+	<ul></ul>
+</div>
+</body>
+</html>

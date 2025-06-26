@@ -1,0 +1,46 @@
+<h1>mosquitto_pub</h1>
+
+<blockquote><p>A simple MQTT version 3.1.1 client that will publish a single message on a topic and exit.
+More information: <a href="https://mosquitto.org/man/mosquitto_pub-1.html">https://mosquitto.org/man/mosquitto_pub-1.html</a>.</p></blockquote>
+
+<ul>
+<li>Publish a temperature value of 32 on the topic <code>sensors/temperature</code> to 192.168.1.1 (defaults to <code>localhost</code>) with Quality of Service (<code>QoS</code>) set to 1:</li>
+</ul>
+
+
+<p><code>mosquitto_pub {{[-h|--host]}} {{192.168.1.1}} {{[-t|--topic]}} {{sensors/temperature}} {{[-m|--message]}} {{32}} {{[-q|--qos]}} {{1}}</code></p>
+
+<ul>
+<li>Publish timestamp and temperature data on the topic <code>sensors/temperature</code> to a remote host on a non-standard port:</li>
+</ul>
+
+
+<p><code>mosquitto_pub {{[-h|--host]}} {{192.168.1.1}} {{[-p|--port]}} {{1885}} {{[-t|--topic]}} {{sensors/temperature}} {{[-m|--message]}} "{{1266193804 32}}"</code></p>
+
+<ul>
+<li>Publish light switch status and retain the message on the topic <code>switches/kitchen_lights/status</code> to a remote host because there may be a long period of time between light switch events:</li>
+</ul>
+
+
+<p><code>mosquitto_pub {{[-r|--retain]}} {{[-h|--host]}} "{{iot.eclipse.org}}" {{[-t|--topic]}} {{switches/kitchen_lights/status}} {{[-m|--message]}} "{{on}}"</code></p>
+
+<ul>
+<li>Send the contents of a file (<code>data.txt</code>) as a message and publish it to <code>sensors/temperature</code> topic:</li>
+</ul>
+
+
+<p><code>mosquitto_pub {{[-t|--topic]}} {{sensors/temperature}} {{[-f|--file]}} {{data.txt}}</code></p>
+
+<ul>
+<li>Send the contents of a file (<code>data.txt</code>), by reading from <code>stdin</code> and send the entire input as a message and publish it to <code>sensors/temperature</code> topic:</li>
+</ul>
+
+
+<p><code>mosquitto_pub {{[-t|--topic]}} {{sensors/temperature}} {{[-s|--stdin-file]}} &lt; {{data.txt}}</code></p>
+
+<ul>
+<li>Read newline delimited data from <code>stdin</code> as a message and publish it to <code>sensors/temperature</code> topic:</li>
+</ul>
+
+
+<p><code>{{echo data.txt}} | mosquitto_pub {{[-t|--topic]}} {{sensors/temperature}} {{[-l|--stdin-line]}}</code></p>

@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-sticky-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-0 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-disabled skin-theme-clientpref-day vector-toc-available" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>systemd-homed - ArchWiki</title>
+<link rel="stylesheet" href="../ArchWikiOffline.css">
+<meta name="ResourceLoaderDynamicStyles" content="">
+<meta name="generator" content="MediaWiki 1.43.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="max-image-preview:standard">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.25, maximum-scale=5.0">
+<link rel="search" type="application/opensearchdescription+xml" href="/rest.php/v1/search" title="ArchWiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.archlinux.org/api.php?action=rsd">
+<link rel="license" href="https://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="ArchWiki Atom feed" href="/index.php?title=Special:RecentChanges&amp;feed=atom">
+</head>
+<body class="skin--responsive skin-vector skin-vector-search-vue mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Systemd-homed rootpage-Systemd-homed skin-vector-2022 action-view">
+<a class="mw-jump-link" href="#bodyContent">Jump to content</a>
+<div class="vector-header-container">
+	</div>
+<div class="mw-page-container">
+	<div class="mw-page-container-inner">
+		<div class="vector-column-start">
+			<div class="vector-main-menu-container">
+		</div>
+	<div class="vector-sticky-pinned-container">
+				<nav id="mw-panel-toc" aria-label="Contents" data-event-name="ui.sidebar-toc" class="mw-table-of-contents-container vector-toc-landmark">
+					<div id="vector-toc-pinned-container" class="vector-pinned-container">
+					<div id="vector-toc" class="vector-toc vector-pinnable-element">
+	<div class="vector-pinnable-header vector-toc-pinnable-header vector-pinnable-header-pinned" data-feature-name="toc-pinned" data-pinnable-element-id="vector-toc">
+	<h2 class="vector-pinnable-header-label">Contents</h2>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-toc.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-toc.unpin">hide</button>
+</div>
+
+
+	<ul class="vector-toc-contents" id="mw-panel-toc-list">
+		<li id="toc-mw-content-text" class="vector-toc-list-item vector-toc-level-1">
+			<a href="#" class="vector-toc-link">
+				<div class="vector-toc-text">Beginning</div>
+			</a>
+		</li>
+		<li id="toc-Installation" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Installation">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">1</span>
+				<span>Installation</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Installation-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Usage" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Usage">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">2</span>
+				<span>Usage</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Usage-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Usage subsection</span>
+			</button>
+		
+		<ul id="toc-Usage-sublist" class="vector-toc-list">
+			<li id="toc-Utilities" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Utilities">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1</span>
+					<span>Utilities</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Utilities-sublist" class="vector-toc-list">
+				<li id="toc-homectl" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#homectl">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1.1</span>
+					<span>homectl</span>
+				</div>
+			</a>
+			
+			<ul id="toc-homectl-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-userdbctl" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#userdbctl">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1.2</span>
+					<span>userdbctl</span>
+				</div>
+			</a>
+			
+			<ul id="toc-userdbctl-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Storage_mechanism" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Storage_mechanism">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2</span>
+					<span>Storage mechanism</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Storage_mechanism-sublist" class="vector-toc-list">
+				<li id="toc-LUKS_home_directory" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#LUKS_home_directory">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2.1</span>
+					<span>LUKS home directory</span>
+				</div>
+			</a>
+			
+			<ul id="toc-LUKS_home_directory-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-fscrypt_directory" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#fscrypt_directory">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2.2</span>
+					<span>fscrypt directory</span>
+				</div>
+			</a>
+			
+			<ul id="toc-fscrypt_directory-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Directory_or_Btrfs_subvolume" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Directory_or_Btrfs_subvolume">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2.3</span>
+					<span>Directory or Btrfs subvolume</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Directory_or_Btrfs_subvolume-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-CIFS_server" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#CIFS_server">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2.4</span>
+					<span>CIFS server</span>
+				</div>
+			</a>
+			
+			<ul id="toc-CIFS_server-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-User_record_properties" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#User_record_properties">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.3</span>
+					<span>User record properties</span>
+				</div>
+			</a>
+			
+			<ul id="toc-User_record_properties-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Managing_users" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Managing_users">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.4</span>
+					<span>Managing users</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Managing_users-sublist" class="vector-toc-list">
+				<li id="toc-Creation" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Creation">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.4.1</span>
+					<span>Creation</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Creation-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Deletion" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Deletion">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.4.2</span>
+					<span>Deletion</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Deletion-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Tips_and_tricks" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Tips_and_tricks">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">3</span>
+				<span>Tips and tricks</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Tips_and_tricks-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Tips and tricks subsection</span>
+			</button>
+		
+		<ul id="toc-Tips_and_tricks-sublist" class="vector-toc-list">
+			<li id="toc-Forget_key_on_suspend" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Forget_key_on_suspend">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1</span>
+					<span>Forget key on suspend</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Forget_key_on_suspend-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-SSH_remote_unlocking" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#SSH_remote_unlocking">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.2</span>
+					<span>SSH remote unlocking</span>
+				</div>
+			</a>
+			
+			<ul id="toc-SSH_remote_unlocking-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Mounting_encrypted_home_directory_for_rescue" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Mounting_encrypted_home_directory_for_rescue">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.3</span>
+					<span>Mounting encrypted home directory for rescue</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Mounting_encrypted_home_directory_for_rescue-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Setup_user_with_FIDO2_hmac-secret_for_authentication_and_encryption" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Setup_user_with_FIDO2_hmac-secret_for_authentication_and_encryption">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.4</span>
+					<span>Setup user with FIDO2 hmac-secret for authentication and encryption</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Setup_user_with_FIDO2_hmac-secret_for_authentication_and_encryption-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Troubleshooting" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Troubleshooting">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">4</span>
+				<span>Troubleshooting</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Troubleshooting-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Troubleshooting subsection</span>
+			</button>
+		
+		<ul id="toc-Troubleshooting-sublist" class="vector-toc-list">
+			<li id="toc-Home_directory_remains_active_after_logging_out_of_Plasma" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Home_directory_remains_active_after_logging_out_of_Plasma">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.1</span>
+					<span>Home directory remains active after logging out of Plasma</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Home_directory_remains_active_after_logging_out_of_Plasma-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-User_umask_is_ignored" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#User_umask_is_ignored">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.2</span>
+					<span>User umask is ignored</span>
+				</div>
+			</a>
+			
+			<ul id="toc-User_umask_is_ignored-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Home_directory_in_a_dirty_state" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Home_directory_in_a_dirty_state">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.3</span>
+					<span>Home directory in a dirty state</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Home_directory_in_a_dirty_state-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-See_also" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#See_also">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">5</span>
+				<span>See also</span>
+			</div>
+		</a>
+		
+		<ul id="toc-See_also-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+</ul>
+</div>
+
+					</div>
+		</nav>
+			</div>
+		</div>
+		<div class="mw-content-container">
+			<main id="content" class="mw-body" style="margin: 0">
+				<header class="mw-body-header vector-page-titlebar">
+					<nav aria-label="Contents" class="vector-toc-landmark">
+						
+<div id="vector-page-titlebar-toc" class="vector-dropdown vector-page-titlebar-toc vector-button-flush-left">
+	<input type="checkbox" id="vector-page-titlebar-toc-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-page-titlebar-toc" class="vector-dropdown-checkbox " aria-label="Toggle the table of contents">
+	<label id="vector-page-titlebar-toc-label" for="vector-page-titlebar-toc-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"><span class="vector-icon mw-ui-icon-listBullet mw-ui-icon-wikimedia-listBullet"></span>
+
+<span class="vector-dropdown-label-text">Toggle the table of contents</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+							<div id="vector-page-titlebar-toc-unpinned-container" class="vector-unpinned-container">
+			</div>
+		
+	</div>
+</div>
+
+					</nav>
+					<h1 id="firstHeading" class="firstHeading mw-first-heading">systemd-homed</h1>
+							
+<div id="p-lang-btn" class="vector-dropdown mw-portlet mw-portlet-lang">
+	<input type="checkbox" id="p-lang-btn-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-p-lang-btn" class="vector-dropdown-checkbox mw-interlanguage-selector" aria-label="Go to an article in another language. Available in 2 languages">
+	<label id="p-lang-btn-label" for="p-lang-btn-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--action-progressive mw-portlet-lang-heading-2" aria-hidden="true"><span class="vector-icon mw-ui-icon-language-progressive mw-ui-icon-wikimedia-language-progressive"></span>
+
+<span class="vector-dropdown-label-text">2 languages</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+		<div class="vector-menu-content">
+			
+			<ul class="vector-menu-content-list">
+				
+				<li class="interlanguage-link interwiki-ja mw-list-item"><a href="https://wiki.archlinux.jp/index.php/Systemd-homed" title="Systemd-homed – 日本語" lang="ja" hreflang="ja" data-title="Systemd-homed" data-language-autonym="日本語" data-language-local-name="日本語" class="interlanguage-link-target"><span>日本語</span></a></li>
+<li class="interlanguage-link interwiki-pt mw-list-item"><a href="../pt/Systemd-homed.html" title="Systemd-homed – português" lang="pt" hreflang="pt" data-title="Systemd-homed" data-language-autonym="Português" data-language-local-name="português" class="interlanguage-link-target"><span>Português</span></a></li>
+			</ul>
+			
+		</div>
+
+	</div>
+</div>
+</header>
+				<div class="vector-column-end">
+					<div class="vector-sticky-pinned-container">
+						<nav class="vector-page-tools-landmark" aria-label="Page tools">
+							<div id="vector-page-tools-pinned-container" class="vector-pinned-container">
+				
+							</div>
+		</nav>
+						<nav class="vector-appearance-landmark" aria-label="Appearance">
+							<div id="vector-appearance-pinned-container" class="vector-pinned-container">
+				<div id="vector-appearance" class="vector-appearance vector-pinnable-element">
+	<div class="vector-pinnable-header vector-appearance-pinnable-header vector-pinnable-header-pinned" data-feature-name="appearance-pinned" data-pinnable-element-id="vector-appearance" data-pinned-container-id="vector-appearance-pinned-container" data-unpinned-container-id="vector-appearance-unpinned-container">
+	<div class="vector-pinnable-header-label">Appearance</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-appearance.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-appearance.unpin">hide</button>
+</div>
+
+
+</div>
+
+							</div>
+		</nav>
+					</div>
+				</div>
+				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container>
+					<div class="vector-body-before-content">
+							<div class="mw-indicators">
+		</div>
+
+						<div id="siteSub" class="noprint">From ArchWiki</div>
+					</div>
+					<div id="contentSub"><div id="mw-content-subtitle"></div></div>
+					
+					
+					<div id="mw-content-text" class="mw-body-content">
+<div class="mw-content-ltr mw-parser-output" lang="en" dir="ltr">
+<p><span>
+</span>
+</p>
+<div class="archwiki-template-meta-related-articles">
+<p>Related articles</p>
+<ul>
+<li><a href="../en/Users_and_groups.html" title="Users and groups">Users and groups</a></li>
+<li><a href="../en/Fscrypt.html" title="Fscrypt">fscrypt</a></li>
+<li><a href="../en/Security.html" title="Security">Security</a></li>
+<li><a href="../en/PAM.html" title="PAM">PAM</a></li>
+</ul>
+</div>
+<p><span class="plainlinks archwiki-template-man" title="$ man 8 systemd-homed"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd-homed.8">systemd-homed(8)</a></span> is a <a href="../en/Systemd.html" title="Systemd">systemd</a> service providing portable human-user accounts that are not dependent on current system configuration.
+</p>
+<p>It achieves portability by moving all user-related information into a storage medium, optionally encrypted, and creating an <code>~/.identity</code> file that contains signed information about the user, password, what groups they belong to, UID/GID and other information that would typically be scattered over multiple files in <code>/</code>.
+</p>
+<p>This approach allows not only for a home directory portability, but also provides security by automatically managing a home directory encryption on login and locking it if the system is suspended.
+</p>
+<meta property="mw:PageProp/toc">
+<h2><span class="mw-headline" id="Installation">Installation</span></h2>
+<p><i>systemd-homed</i> is part of and packaged with <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=systemd">systemd</a></span>. The <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=pambase">pambase</a></span> package since version 20200721.1-2 comes with the necessary <a href="../en/PAM.html#Configuration" title="PAM">PAM configuration</a> to allow systemd-homed user sessions.
+</p>
+<h2><span class="mw-headline" id="Usage">Usage</span></h2>
+<p><a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Start/enable">Start/enable</a> the <code>systemd-homed.service</code> service.
+</p>
+<h3><span class="mw-headline" id="Utilities">Utilities</span></h3>
+<h4><span class="mw-headline" id="homectl">homectl</span></h4>
+<p><i>homectl</i> is the main utility you will use for homed. With it, you can create, update, and inspect users; their home directories; and their <code>~/.identity</code> files controlled by the <span class="plainlinks archwiki-template-man" title="$ man 8 systemd-homed"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd-homed.8">systemd-homed(8)</a></span> service.
+</p>
+<p>The simplest usage of <span class="plainlinks archwiki-template-man" title="$ man 1 homectl"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/homectl.1">homectl(1)</a></span> is:
+</p>
+<pre># homectl create <i>username</i>
+</pre>
+<p>This command will create a user with the specified username, a free UID <a rel="nofollow" class="external text" href="https://systemd.io/UIDS-GIDS/">in range 60001–60513</a>, create a group with the same name and a GID equal to the chosen UID, set the specified user as its member, and set the user's default shell to <code>/bin/bash</code>.
+</p>
+<p>The home directory mount point is set to <code>/home/<i>username</i></code>. The storage mechanism is chosen in this order:
+</p>
+<ol>
+<li>
+<code>luks</code> if supported;</li>
+<li>
+<code>subvolume</code> if LUKS is not supported and subvolume is supported;</li>
+<li>
+<code>directory</code> if none of the above is supported and no other manual option is specified.</li>
+</ol>
+<p>The image path for the LUKS mechanism is set to <code>/home/<i>username</i>.home</code>. The directory path for the directory mechanism is set to <code>/home/<i>username</i>.homedir</code>.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> <i>homectl</i> does not manage group creation or deletion other than those matching the name and ID of users managed by systemd-homed.</div>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Warning:</strong> The <code>~/.identity</code> files are signed and must not be edited directly with a text editor as it will break the signature and render them invalid. Use <code>homectl update --identity=/path/to/.identity</code> to modify it.</div>
+<h4><span class="mw-headline" id="userdbctl">userdbctl</span></h4>
+<p>A query tool used to inspect users, groups and group memberships provided by both classic UNIX mechanisms and systemd-homed.
+</p>
+<h3><span class="mw-headline" id="Storage_mechanism">Storage mechanism</span></h3>
+<h4><span class="mw-headline" id="LUKS_home_directory">LUKS home directory</span></h4>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../File:Tango-view-fullscreen.svg" decoding="async" width="48" height="48" class="mw-file-element"></span></span><b>This article or section needs expansion.</b></p>
+<div>
+<b>Reason:</b> It does not have to be <b>removable</b> media. <code>homectl create</code> wipes the partition table of the block device specified by <code>--image-path</code>, i.e. when an empty device is available it can be used.<a rel="nofollow" class="external autonumber" href="https://github.com/systemd/systemd/issues/15273#issuecomment-606462384">[1]</a> (Discuss in <a rel="nofollow" class="external text" href="../en/Talk:Systemd-homed.html">Talk:Systemd-homed</a>)</div>
+</div>
+<p>A user home directory is stored in a Linux <a href="../en/File_systems.html" class="mw-redirect" title="File system">file system</a>, inside an encrypted <a href="../en/Dm-crypt.html" class="mw-redirect" title="LUKS">LUKS</a> (<i>Linux Unified Key Setup</i>) volume inside a loopback file or any removable media.  To use this mechanism provide <code>--storage=luks</code> to <i>homectl</i>.
+</p>
+<p>If you are using a loopback file, in order to save space, the LUKS2 volume can be made to discard deleted data transparently. To use this mechanism provide <code>--luks-discard=true</code> and <code>--luks-offline-discard=true</code> to <i>homectl</i>. Doing so can, however, <a rel="nofollow" class="external text" href="https://superuser.com/questions/302710/trim-support-via-dm-crypt-device-mapper/318847#318847">reduce security under certain situations</a>.
+</p>
+<p>If you are using a removable media, make sure that these conditions are met:
+</p>
+<ul>
+<li>The image contains a GPT partition table. For now it should only contain a single partition, and that partition must have the type UUID <code>773f91ef-66d4-49b5-bd83-d683bf40ad16</code>. Its partition label must be the user name.</li>
+<li>This partition must contain a LUKS2 volume, whose label must be the user name. The LUKS2 volume must contain a LUKS2 token field of type systemd-homed. The JSON data of this token must have a record field, containing a string with base64-encoded data. This data is the JSON user record, in the same serialization as in <code>~/.identity</code>, though encrypted. The JSON data of this token must also have an iv field, which contains a base64-encoded binary initialization vector for the encryption. The encryption used is the same as the LUKS2 volume itself uses, unlocked by the same volume key, but based on its own IV.</li>
+<li>Inside of this LUKS2 volume must be a Linux file system, one of <a href="../en/Ext4.html" title="Ext4">ext4</a>, <a href="../en/Btrfs.html" title="Btrfs">btrfs</a> and <a href="../en/XFS.html" title="XFS">XFS</a>. The file system label must be the user name.</li>
+<li>This file system should contain a single directory named after the user. This directory will become the home directory of the user when activated. It contains a second copy of the user record in the <code>~/.identity</code> file, like in the other storage mechanisms.</li>
+</ul>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Warning:</strong> 
+<ul>
+<li>In the event of a forceful or unexpected shutdown or power outage, in the case of a loopback file, it is possible for it to be left in a dirty state which may permanently lock the user out. See <a href="#Home_directory_in_a_dirty_state">#Home directory in a dirty state</a> for details.</li>
+<li>systemd-homed does not work on <a href="../en/Advanced_Format.html" title="Advanced Format">4Kn drives</a> and LUKS with a 4096 byte sector size. See systemd issues <a rel="nofollow" class="external text" href="https://github.com/systemd/systemd/issues/30393">30393</a> and <a rel="nofollow" class="external text" href="https://github.com/systemd/systemd/issues/30394">30394</a>.</li>
+</ul>
+</div>
+<h4><span class="mw-headline" id="fscrypt_directory">fscrypt directory</span></h4>
+<p>A user home directory is stored the same way as when using the above method, but this time a native filesystem encryption is used. To use this mechanism provide <code>--storage=fscrypt</code> to <i>homectl</i>.
+</p>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> Filesystems with fscrypt support include <a href="../en/Ext4.html" title="Ext4">ext4</a> and <a href="../en/F2FS.html" title="F2FS">F2FS</a>.</div>
+<h4><span class="mw-headline" id="Directory_or_Btrfs_subvolume">Directory or Btrfs subvolume</span></h4>
+<p>A user home directory is stored in <code>/home/<i>username</i>.homedir</code> and mounted to <code>/home/<i>username</i></code> using bind <a href="../en/File_systems.html#Mount_a_file_system" class="mw-redirect" title="Mount">mount</a> on unlocking. When this method is used no encryption is provided. To use this mechanism provide <code>--storage=directory</code> or <code>--storage=subvolume</code> to <i>homectl</i>.
+</p>
+<h4><span class="mw-headline" id="CIFS_server">CIFS server</span></h4>
+<p>Here, the home directory is mounted from a CIFS (<i>Common Internet File System</i>) server at login. Note that CIFS is implemented via the <a href="../en/Samba.html" title="Samba">Samba</a> protocol. Use <code>--storage=cifs</code> on the <i>homectl</i> command line. The local password of the user is used to log into the CIFS service.
+</p>
+<h3><span class="mw-headline" id="User_record_properties">User record properties</span></h3>
+<p>You can view an entire user record with:
+</p>
+<pre># homectl inspect <i>username</i>
+</pre>
+<p>You can modify or add to the user record with:
+</p>
+<pre># homectl update <i>username</i> --<i>property</i>=<i>VALUE</i>
+</pre>
+<p>See <span class="plainlinks archwiki-template-man" title="$ man 1 homectl"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/homectl.1">homectl(1)</a></span> for more options.
+</p>
+<h3><span class="mw-headline" id="Managing_users">Managing users</span></h3>
+<h4><span class="mw-headline" id="Creation">Creation</span></h4>
+<p>Create a user with LUKS encryption:
+</p>
+<pre># homectl create <i>username</i> --storage=luks
+</pre>
+<p>Create a user with fscrypt encryption (make sure that fscrypt is <a href="../en/Fscrypt.html#File_system" title="Fscrypt">enabled on the file system</a>):
+</p>
+<pre># homectl create <i>username</i> --storage=fscrypt
+</pre>
+<p>Create a user with a specific UID, shell and groups:
+</p>
+<pre># homectl create <i>username</i> --shell=/usr/bin/zsh --uid=60100 --member-of=wheel,adm,uucp
+</pre>
+<p>Other options can be found in <span class="plainlinks archwiki-template-man" title="$ man 1 homectl"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/homectl.1#USER_RECORD_PROPERTIES">homectl(1) § USER RECORD PROPERTIES</a></span>.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> The caveat explained at <a href="../en/Users_and_groups.html#User_management" title="Users and groups">Users and groups#User management</a> applies: the login shell must be one of those listed in <code>/etc/shells</code>.</div>
+<h4><span class="mw-headline" id="Deletion">Deletion</span></h4>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Warning:</strong> The user deletion is instant, be careful!</div>
+<p>It is possible to delete several users at the same time:
+</p>
+<pre># homectl remove <i>username</i> <i>username2</i>
+</pre>
+<h2><span class="mw-headline" id="Tips_and_tricks">Tips and tricks</span></h2>
+<h3><span class="mw-headline" id="Forget_key_on_suspend">Forget key on suspend</span></h3>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Warning:</strong> Mistakes in <a href="../en/PAM.html" title="PAM">PAM</a> configuration can break the system authorization up to not being able to login even as <i>root</i>. Backing up existing configuration files is recommended before making any changes.</div> 
+<p>The <code>suspend</code> option can be used with <code>pam_systemd_home.so</code> entries in the files in <code>/etc/pam.d/</code> to enable forget key on suspend. <b>No session manager at the moment supports this feature.</b> Furthermore, TTY sessions do not support the reauthentication mechanism. So, when session managers start supporting this feature, the suspend option should only be enabled for them. Read <span class="plainlinks archwiki-template-man" title="$ man 8 pam_systemd_home"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/pam_systemd_home.8">pam_systemd_home(8)</a></span> and the <a rel="nofollow" class="external text" href="https://github.com/linux-pam/linux-pam/blob/master/doc/sag/Linux-PAM_SAG.xml">Linux-PAM System Administrators' Guide</a> for more details.
+</p>
+<h3><span class="mw-headline" id="SSH_remote_unlocking">SSH remote unlocking</span></h3>
+<p><i>systemd-homed</i> encrypts your home directory using your password, so SSH configured for public key authentication cannot mount it or read <code>authorized_keys</code>. A possible solution is to add authorized keys to your user record and require both public key and password for authentication. Add the following to <code>/etc/ssh/sshd_config</code>:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/ssh/sshd_config</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">PasswordAuthentication yes
+PubkeyAuthentication yes
+AuthenticationMethods publickey,password
+</pre>
+<p>Update your user record with your authorized keys while the user is unlocked using:
+</p>
+<pre># homectl update <i>username</i> --ssh-authorized-keys=@<i>/path/to/mounted/home</i>/.ssh/authorized_keys
+</pre>
+<p>From now on, SSH will ask you to enter your password after completing key-based authentication. <i>systemd-homed</i> will use it to unlock and mount your home directory.
+</p>
+<h3><span class="mw-headline" id="Mounting_encrypted_home_directory_for_rescue">Mounting encrypted home directory for rescue</span></h3>
+<p>If you need to mount a <i>systemd-homed</i>-encrypted directory from a rescue disk or another machine, you will need to decrypt the directory outside of the <i>systemd-homed</i> framework. You may wish to keep a text file or script of this solution from the <a rel="nofollow" class="external text" href="https://bbs.archlinux.org/viewtopic.php?id=258152">forums</a> on your rescue disk for emergencies:
+</p>
+<pre># losetup -fP --show <i>username</i>.home
+# cryptsetup open /dev/<i>loopXpY</i> <i>mappername</i>
+# mount /dev/mapper/<i>mappername</i> <i>/mnt/mountpoint</i>
+</pre>
+<p>where,
+</p>
+<ul>
+<li>
+<code><i>username</i>.home</code> is the file in the <code>/home</code> directory with your username and the <i>.home</i> extension as its name</li>
+<li>
+<code><i>loopXpY</i></code> is the device in the <code>/dev</code> directory with the loop number of the loopback device created in the prior step and the partition number of the relevant partition, probably <code>/dev/loop0p1</code>
+</li>
+<li>
+<code><i>mappername</i></code> is whatever alias you decide to adopt for the mapped device, e.g. <code>user_oldhome</code>
+</li>
+<li>
+<code><i>/mnt/mountpoint</i></code> is wherever you want to mount your decrypted home directory</li>
+</ul>
+<h3><span class="mw-headline" id="Setup_user_with_FIDO2_hmac-secret_for_authentication_and_encryption">Setup user with FIDO2 hmac-secret for authentication and encryption</span></h3>
+<p>This setup requires a FIDO2 security device, and asks for a pin to login and decrypt the home directory:
+</p>
+<pre># homectl create <i>username</i> --storage=fscrypt --fido2-device=auto --fido2-with-client-pin=yes --fido2-with-user-presence=no --recovery-key=yes
+</pre>
+<p>Setting up a recovery key is recommended in case the device is lost or broken. The recovery key will be used like a password to access the user and files. Instead of using a device pin, it is also possible to ask only for user presence, which requires touching the security device. 
+Currently, <i>homectl</i> also requires the user to set a password as alternative login which also works as a backup secret.
+</p>
+<h2><span class="mw-headline" id="Troubleshooting">Troubleshooting</span></h2>
+<h3><span class="mw-headline" id="Home_directory_remains_active_after_logging_out_of_Plasma">Home directory remains active after logging out of Plasma</span></h3>
+<p>After logging out of <a href="../en/KDE.html#Plasma" class="mw-redirect" title="Plasma">Plasma</a>, there may still be active user processes (e.g. <i>dbus-daemon</i>) that prevent the home directory's deactivation.
+</p>
+<p>This can be solved by <a href="../en/KDE.html#systemd_startup" title="KDE">enabling Plasma's systemd startup</a>.
+</p>
+<h3><span class="mw-headline" id="User_umask_is_ignored">User umask is ignored</span></h3>
+<p>There always is an <a href="../en/Umask.html" title="Umask">umask</a> set in <code>/etc/login.defs</code>, so the user's own umask set via <a href="#homectl">homectl</a> is currently ignored. See <a rel="nofollow" class="external text" href="https://github.com/systemd/systemd/issues/23007">systemd issue 23007</a>.
+</p>
+<p>To solve this, set the umask in your <a href="../en/Command-line_shell.html#Login_shell" class="mw-redirect" title="Login shell">login shell</a>'s startup files e.g. <code>~/.bash_profile</code> or <code>~/.zprofile</code>.
+</p>
+<h3><span class="mw-headline" id="Home_directory_in_a_dirty_state">Home directory in a dirty state</span></h3>
+<p>In the event of a forceful or unexpected shutdown or power outage, it is possible for the home directory to be left in a dirty state. In this case, the user will be locked out and authenticating to the home directory <i>may</i> require manual intervention. The following steps assumes that the <a href="../en/Dm-crypt.html" class="mw-redirect" title="LUKS">LUKS2</a> encrypted loop back file storage mechanism is used, and <a href="../en/Fsck.html" title="Fsck">fsck</a> can be used in the underlying filesystem to repair it.
+</p>
+<p>First, confirm the state of the loop back  file is <i>dirty</i> and determine the path of the user's loop back file:
+</p>
+<pre>$ homectl inspect <i>username</i>
+</pre>
+<p>Next, using the path of the loop back file, follow the steps in <a href="#Mounting_encrypted_home_directory_for_rescue">#Mounting encrypted home directory for rescue</a>.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> If the LUKS2 device was able to be opened at this point, to minimize potential risk after using <i>fsck</i>, it would be wise to recover any data within the mounted device.</div>
+<p>Finally, attempt to repair the filesystem using <i>fsck</i> on the opened LUKS2 device:
+</p>
+<pre># fsck /dev/mapper/<i>mappername</i>
+</pre>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Warning:</strong> Ensure a mount point does not exist for <code>/dev/mapper/<i>mappername</i></code> before running <i>fsck</i>.</div>
+<p>At this point, if the repair was successful, <a href="../en/Dm-crypt/Device_encryption.html#Unlocking/Mapping_LUKS_partitions_with_the_device_mapper" title="Dm-crypt/Device encryption">close</a> the LUKS2 container, detach the loop back device, then attempt to re-authenticate normally via the systemd-homed service.
+</p>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../File:Tango-view-fullscreen.svg" decoding="async" width="48" height="48" class="mw-file-element"></span></span><b>This article or section needs expansion.</b></p>
+<div>
+<b>Reason:</b> Add links to bug reports for the issues mentioned in the note. (Discuss in <a rel="nofollow" class="external text" href="../en/Talk:Systemd-homed.html">Talk:Systemd-homed</a>)</div>
+</div>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> In other cases, such as when the loop back file itself is corrupted, recovery may not be possible  which may <b>permanently</b> lock out the user. Moreover, <i>homectl</i> currently does not provide any native commands for recovering from dirty states. If this is a concern, then please prepare routine <a href="../en/System_maintenance.html" title="System maintenance">backups</a> of the home directory or refrain from using systemd-homed entirely.</div>
+<h2><span class="mw-headline" id="See_also">See also</span></h2>
+<ul>
+<li><a rel="nofollow" class="external free" href="https://systemd.io/CONVERTING_TO_HOMED/">https://systemd.io/CONVERTING_TO_HOMED/</a></li>
+<li><a rel="nofollow" class="external free" href="https://systemd.io/HOME_DIRECTORY/">https://systemd.io/HOME_DIRECTORY/</a></li>
+</ul>
+</div>
+</div>
+					<div id="catlinks" class="catlinks" data-mw="interface">
+<div id="mw-normal-catlinks" class="mw-normal-catlinks">
+<a href="../Special:Categories.html" title="Special:Categories">Category</a>: <ul><li><a href="../en/Category:Security.html" title="Category:Security">Security</a></li></ul>
+</div>
+<div id="mw-hidden-catlinks" class="mw-hidden-catlinks mw-hidden-cats-hidden">Hidden category: <ul><li><a href="../en/Category:Pages_or_sections_flagged_with_Template:Expansion.html" title="Category:Pages or sections flagged with Template:Expansion">Pages or sections flagged with Template:Expansion</a></li></ul>
+</div>
+</div>
+				</div>
+			</main>
+			
+		</div>
+		<div class="mw-footer-container">
+			
+<footer id="footer" class="mw-footer" style="margin: 0">
+	<ul id="footer-info">
+	<li data-nosnippet="">Retrieved from "<a dir="ltr" href="https://wiki.archlinux.org/index.php?title=Systemd-homed&amp;oldid=819971">https://wiki.archlinux.org/index.php?title=Systemd-homed&amp;oldid=819971</a>"</li>
+<li id="footer-info-lastmod"> This page was last edited on 1 November 2024, at 17:05.</li>
+	<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+<br>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="https://terms.archlinux.org/docs/privacy-policy/">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="../en/ArchWiki:About.html">About ArchWiki</a></li>
+	<li id="footer-places-disclaimers"><a href="../en/ArchWiki:General_disclaimer.html">Disclaimers</a></li>
+	<li id="footer-places-archwiki-code-of-conduct"><a href="https://terms.archlinux.org/docs/code-of-conduct/" class="extiw" title="archlinux-service-agreements:code-of-conduct">Code of conduct</a></li>
+	<li id="footer-places-archwiki-terms-of-service"><a href="https://terms.archlinux.org/docs/terms-of-service/" class="extiw" title="archlinux-service-agreements:terms-of-service">Terms of service</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-copyrightico"><a href="https://www.gnu.org/copyleft/fdl.html" class="cdx-button cdx-button--fake-button cdx-button--size-large cdx-button--fake-button--enabled"><img src="/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" loading="lazy"></a></li>
+	<li id="footer-poweredbyico"><img src="/resources/assets/poweredby_mediawiki.svg" width="88" height="31" loading="lazy"></li>
+</ul>
+
+</footer>
+
+		</div>
+	</div> 
+</div> 
+<div class="vector-settings" id="p-dock-bottom">
+	<ul></ul>
+</div>
+</body>
+</html>

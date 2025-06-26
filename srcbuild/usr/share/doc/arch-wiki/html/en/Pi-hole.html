@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-sticky-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-0 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-disabled skin-theme-clientpref-day vector-toc-available" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>Pi-hole - ArchWiki</title>
+<link rel="stylesheet" href="../ArchWikiOffline.css">
+<meta name="ResourceLoaderDynamicStyles" content="">
+<meta name="generator" content="MediaWiki 1.43.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="max-image-preview:standard">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.25, maximum-scale=5.0">
+<link rel="search" type="application/opensearchdescription+xml" href="/rest.php/v1/search" title="ArchWiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.archlinux.org/api.php?action=rsd">
+<link rel="license" href="https://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="ArchWiki Atom feed" href="/index.php?title=Special:RecentChanges&amp;feed=atom">
+</head>
+<body class="skin--responsive skin-vector skin-vector-search-vue mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Pi-hole rootpage-Pi-hole skin-vector-2022 action-view">
+<a class="mw-jump-link" href="#bodyContent">Jump to content</a>
+<div class="vector-header-container">
+	</div>
+<div class="mw-page-container">
+	<div class="mw-page-container-inner">
+		<div class="vector-column-start">
+			<div class="vector-main-menu-container">
+		</div>
+	<div class="vector-sticky-pinned-container">
+				<nav id="mw-panel-toc" aria-label="Contents" data-event-name="ui.sidebar-toc" class="mw-table-of-contents-container vector-toc-landmark">
+					<div id="vector-toc-pinned-container" class="vector-pinned-container">
+					<div id="vector-toc" class="vector-toc vector-pinnable-element">
+	<div class="vector-pinnable-header vector-toc-pinnable-header vector-pinnable-header-pinned" data-feature-name="toc-pinned" data-pinnable-element-id="vector-toc">
+	<h2 class="vector-pinnable-header-label">Contents</h2>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-toc.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-toc.unpin">hide</button>
+</div>
+
+
+	<ul class="vector-toc-contents" id="mw-panel-toc-list">
+		<li id="toc-mw-content-text" class="vector-toc-list-item vector-toc-level-1">
+			<a href="#" class="vector-toc-link">
+				<div class="vector-toc-text">Beginning</div>
+			</a>
+		</li>
+		<li id="toc-Installation" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Installation">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">1</span>
+				<span>Installation</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Installation-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Configuration" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Configuration">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">2</span>
+				<span>Configuration</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Configuration-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Configuration subsection</span>
+			</button>
+		
+		<ul id="toc-Configuration-sublist" class="vector-toc-list">
+			<li id="toc-FTL_(Faster_Than_Light)" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#FTL_(Faster_Than_Light)">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1</span>
+					<span>FTL (Faster Than Light)</span>
+				</div>
+			</a>
+			
+			<ul id="toc-FTL_(Faster_Than_Light)-sublist" class="vector-toc-list">
+				<li id="toc-FTL_Integrated_Web_interface" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#FTL_Integrated_Web_interface">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1.1</span>
+					<span>FTL Integrated Web interface</span>
+				</div>
+			</a>
+			
+			<ul id="toc-FTL_Integrated_Web_interface-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Update_hosts_file" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Update_hosts_file">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2</span>
+					<span>Update hosts file</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Update_hosts_file-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Making_devices_use_Pi-hole" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Making_devices_use_Pi-hole">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.3</span>
+					<span>Making devices use Pi-hole</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Making_devices_use_Pi-hole-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Usage" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Usage">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.4</span>
+					<span>Usage</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Usage-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Usage_2" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Usage_2">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">3</span>
+				<span>Usage</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Usage_2-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Usage subsection</span>
+			</button>
+		
+		<ul id="toc-Usage_2-sublist" class="vector-toc-list">
+			<li id="toc-Using_web_interface" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Using_web_interface">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1</span>
+					<span>Using web interface</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Using_web_interface-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Using_CLI" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Using_CLI">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.2</span>
+					<span>Using CLI</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Using_CLI-sublist" class="vector-toc-list">
+				<li id="toc-Pi-hole_DNS_management" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Pi-hole_DNS_management">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.2.1</span>
+					<span>Pi-hole DNS management</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Pi-hole_DNS_management-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Forced_update_of_ad-serving_domains_list" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Forced_update_of_ad-serving_domains_list">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.2.2</span>
+					<span>Forced update of ad-serving domains list</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Forced_update_of_ad-serving_domains_list-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Temporarily_disable_Pi-hole" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Temporarily_disable_Pi-hole">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.2.3</span>
+					<span>Temporarily disable Pi-hole</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Temporarily_disable_Pi-hole-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Tips_and_tricks" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Tips_and_tricks">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">4</span>
+				<span>Tips and tricks</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Tips_and_tricks-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Tips and tricks subsection</span>
+			</button>
+		
+		<ul id="toc-Tips_and_tricks-sublist" class="vector-toc-list">
+			<li id="toc-Password-protected_web_interface" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Password-protected_web_interface">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.1</span>
+					<span>Password-protected web interface</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Password-protected_web_interface-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Cloudflare_DoH" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Cloudflare_DoH">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.2</span>
+					<span>Cloudflare DoH</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Cloudflare_DoH-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Optimise_for_solid_state_drives" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Optimise_for_solid_state_drives">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.3</span>
+					<span>Optimise for solid state drives</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Optimise_for_solid_state_drives-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Disable_query_logging" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Disable_query_logging">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.4</span>
+					<span>Disable query logging</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Disable_query_logging-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Use_with_VPN_server" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Use_with_VPN_server">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.5</span>
+					<span>Use with VPN server</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Use_with_VPN_server-sublist" class="vector-toc-list">
+				<li id="toc-OpenVPN" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#OpenVPN">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.5.1</span>
+					<span>OpenVPN</span>
+				</div>
+			</a>
+			
+			<ul id="toc-OpenVPN-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-WireGuard" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#WireGuard">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.5.2</span>
+					<span>WireGuard</span>
+				</div>
+			</a>
+			
+			<ul id="toc-WireGuard-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Nginx_instead_of_Lighttpd" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Nginx_instead_of_Lighttpd">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.6</span>
+					<span>Nginx instead of Lighttpd</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Nginx_instead_of_Lighttpd-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Additional_blocklists" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Additional_blocklists">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.7</span>
+					<span>Additional blocklists</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Additional_blocklists-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Block_/_Allow_custom_domain_names_based_on_a_Regex" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Block_/_Allow_custom_domain_names_based_on_a_Regex">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.8</span>
+					<span>Block / Allow custom domain names based on a Regex</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Block_/_Allow_custom_domain_names_based_on_a_Regex-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Use_Unbound_as_upstream_DNS_server" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Use_Unbound_as_upstream_DNS_server">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.9</span>
+					<span>Use Unbound as upstream DNS server</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Use_Unbound_as_upstream_DNS_server-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Troubleshooting" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Troubleshooting">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">5</span>
+				<span>Troubleshooting</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Troubleshooting-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Troubleshooting subsection</span>
+			</button>
+		
+		<ul id="toc-Troubleshooting-sublist" class="vector-toc-list">
+			<li id="toc-Odd_behavior_in_the_web_interface_after_an_upgrade" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Odd_behavior_in_the_web_interface_after_an_upgrade">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.1</span>
+					<span>Odd behavior in the web interface after an upgrade</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Odd_behavior_in_the_web_interface_after_an_upgrade-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Data_loss_on_reboot" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Data_loss_on_reboot">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.2</span>
+					<span>Data loss on reboot</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Data_loss_on_reboot-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Failed_to_start_Pi-hole_FTLDNS_engine" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Failed_to_start_Pi-hole_FTLDNS_engine">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.3</span>
+					<span>Failed to start Pi-hole FTLDNS engine</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Failed_to_start_Pi-hole_FTLDNS_engine-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-DNSMasq_package_conflict" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#DNSMasq_package_conflict">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.4</span>
+					<span>DNSMasq package conflict</span>
+				</div>
+			</a>
+			
+			<ul id="toc-DNSMasq_package_conflict-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Unknown_status_and_changes_not_being_saved" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Unknown_status_and_changes_not_being_saved">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.5</span>
+					<span>Unknown status and changes not being saved</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Unknown_status_and_changes_not_being_saved-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Slow_loading_times" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Slow_loading_times">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.6</span>
+					<span>Slow loading times</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Slow_loading_times-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Prevent_DNS_resolution_issues_for_other_virtual_hosts" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Prevent_DNS_resolution_issues_for_other_virtual_hosts">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.7</span>
+					<span>Prevent DNS resolution issues for other virtual hosts</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Prevent_DNS_resolution_issues_for_other_virtual_hosts-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Interface_not_up_when_pihole_starts" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Interface_not_up_when_pihole_starts">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.8</span>
+					<span>Interface not up when pihole starts</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Interface_not_up_when_pihole_starts-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-DNS_cache_evictions_greater_than_zero" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#DNS_cache_evictions_greater_than_zero">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.9</span>
+					<span>DNS cache evictions greater than zero</span>
+				</div>
+			</a>
+			
+			<ul id="toc-DNS_cache_evictions_greater_than_zero-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Missing_web_GUI_after_upgrade_to_version_6" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Missing_web_GUI_after_upgrade_to_version_6">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.10</span>
+					<span>Missing web GUI after upgrade to version 6</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Missing_web_GUI_after_upgrade_to_version_6-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-See_also" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#See_also">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">6</span>
+				<span>See also</span>
+			</div>
+		</a>
+		
+		<ul id="toc-See_also-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+</ul>
+</div>
+
+					</div>
+		</nav>
+			</div>
+		</div>
+		<div class="mw-content-container">
+			<main id="content" class="mw-body" style="margin: 0">
+				<header class="mw-body-header vector-page-titlebar">
+					<nav aria-label="Contents" class="vector-toc-landmark">
+						
+<div id="vector-page-titlebar-toc" class="vector-dropdown vector-page-titlebar-toc vector-button-flush-left">
+	<input type="checkbox" id="vector-page-titlebar-toc-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-page-titlebar-toc" class="vector-dropdown-checkbox " aria-label="Toggle the table of contents">
+	<label id="vector-page-titlebar-toc-label" for="vector-page-titlebar-toc-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"><span class="vector-icon mw-ui-icon-listBullet mw-ui-icon-wikimedia-listBullet"></span>
+
+<span class="vector-dropdown-label-text">Toggle the table of contents</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+							<div id="vector-page-titlebar-toc-unpinned-container" class="vector-unpinned-container">
+			</div>
+		
+	</div>
+</div>
+
+					</nav>
+					<h1 id="firstHeading" class="firstHeading mw-first-heading"><span class="mw-page-title-main">Pi-hole</span></h1>
+							
+<div id="p-lang-btn" class="vector-dropdown mw-portlet mw-portlet-lang">
+	<input type="checkbox" id="p-lang-btn-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-p-lang-btn" class="vector-dropdown-checkbox mw-interlanguage-selector" aria-label="Go to an article in another language. Available in 2 languages">
+	<label id="p-lang-btn-label" for="p-lang-btn-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--action-progressive mw-portlet-lang-heading-2" aria-hidden="true"><span class="vector-icon mw-ui-icon-language-progressive mw-ui-icon-wikimedia-language-progressive"></span>
+
+<span class="vector-dropdown-label-text">2 languages</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+		<div class="vector-menu-content">
+			
+			<ul class="vector-menu-content-list">
+				
+				<li class="interlanguage-link interwiki-it mw-list-item"><a href="../it/Pi-hole.html" title="Pi-hole – italiano" lang="it" hreflang="it" data-title="Pi-hole" data-language-autonym="Italiano" data-language-local-name="italiano" class="interlanguage-link-target"><span>Italiano</span></a></li>
+<li class="interlanguage-link interwiki-ja mw-list-item"><a href="https://wiki.archlinux.jp/index.php/Pi-hole" title="Pi-hole – 日本語" lang="ja" hreflang="ja" data-title="Pi-hole" data-language-autonym="日本語" data-language-local-name="日本語" class="interlanguage-link-target"><span>日本語</span></a></li>
+			</ul>
+			
+		</div>
+
+	</div>
+</div>
+</header>
+				<div class="vector-column-end">
+					<div class="vector-sticky-pinned-container">
+						<nav class="vector-page-tools-landmark" aria-label="Page tools">
+							<div id="vector-page-tools-pinned-container" class="vector-pinned-container">
+				
+							</div>
+		</nav>
+						<nav class="vector-appearance-landmark" aria-label="Appearance">
+							<div id="vector-appearance-pinned-container" class="vector-pinned-container">
+				<div id="vector-appearance" class="vector-appearance vector-pinnable-element">
+	<div class="vector-pinnable-header vector-appearance-pinnable-header vector-pinnable-header-pinned" data-feature-name="appearance-pinned" data-pinnable-element-id="vector-appearance" data-pinned-container-id="vector-appearance-pinned-container" data-unpinned-container-id="vector-appearance-unpinned-container">
+	<div class="vector-pinnable-header-label">Appearance</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-appearance.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-appearance.unpin">hide</button>
+</div>
+
+
+</div>
+
+							</div>
+		</nav>
+					</div>
+				</div>
+				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container>
+					<div class="vector-body-before-content">
+							<div class="mw-indicators">
+		</div>
+
+						<div id="siteSub" class="noprint">From ArchWiki</div>
+					</div>
+					<div id="contentSub"><div id="mw-content-subtitle"></div></div>
+					
+					
+					<div id="mw-content-text" class="mw-body-content">
+<div class="mw-content-ltr mw-parser-output" lang="en" dir="ltr">
+<div class="archwiki-template-meta-related-articles">
+<p>Related articles</p>
+<ul>
+<li><a href="../en/Dnsmasq.html" title="Dnsmasq">dnsmasq</a></li>
+<li><a href="../en/Domain_name_resolution.html" title="Domain name resolution">Domain name resolution</a></li>
+<li><a href="../en/Linux_Containers.html" title="Linux Containers">Linux Containers</a></li>
+<li><a href="../en/OpenVPN.html" title="OpenVPN">OpenVPN</a></li>
+<li><a href="../en/WireGuard.html" title="WireGuard">WireGuard</a></li>
+</ul>
+</div>
+<p><a rel="nofollow" class="external text" href="https://pi-hole.net/">Pi-hole</a> project is a <a href="https://en.wikipedia.org/wiki/DNS_sinkhole" class="extiw" title="wikipedia:DNS sinkhole">DNS sinkhole</a> that compiles a blocklist of domains from multiple third-party sources. Pi-hole uses <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/pi-hole-ftl/">pi-hole-ftl</a></span><sup><small>AUR</small></sup> (a <a href="../en/Dnsmasq.html" title="Dnsmasq">dnsmasq</a> fork) to seamlessly drop any and all requests for domains in its blocklist. Running it effectively deploys network-wide ad-blocking without the need to configure individual clients. The package comes with an optional web administration interface.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> Pi-hole on Arch Linux is not officially supported by the Pi-hole project.</div>
+<meta property="mw:PageProp/toc">
+<h2><span class="mw-headline" id="Installation">Installation</span></h2>
+<p><a href="../en/Help:Reading.html#Installation_of_packages" class="mw-redirect" title="Install">Install</a> the <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/pi-hole-core/">pi-hole-core</a></span><sup><small>AUR</small></sup> package.
+</p>
+<h2><span class="mw-headline" id="Configuration">Configuration</span></h2>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../File:View-refresh-red.svg" decoding="async" width="48" height="48" class="mw-file-element"></span></span><b>This article or section is out of date.</b></p>
+<div>
+<b>Reason:</b> Many of the following sections still refer to Pi-hole 5, so are not directly applicable to Pi-hole 6, where many things changed, including an integrated webserver and the move to the .toml config file (Discuss in <a rel="nofollow" class="external text" href="../en/Talk:Pi-hole.html">Talk:Pi-hole</a>)</div>
+</div>
+<p><br>
+</p>
+<h3>
+<span id="FTL_.28Faster_Than_Light.29"></span><span class="mw-headline" id="FTL_(Faster_Than_Light)">FTL (Faster Than Light)</span>
+</h3>
+<p>Pi-hole's FTL is a DNS resolver/forwarder and a database-like wrapper/API that provides long-term storage of requests which users can query through the "long-term data" section of the WebGUI. Data are collected and stored in two places:
+</p>
+<ol>
+<li>Daily data are stored in RAM and are captured in real-time within <code>/run/log/pihole/pihole.log</code>
+</li>
+<li>Historical data (several days/weeks/months) are stored on the file system <code>/etc/pihole/pihole-FTL.db</code> and written out at a user-specified interval.</li>
+</ol>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> 
+<ul>
+<li>To disable logging, see <a href="#Disable_query_logging">#Disable query logging</a>.</li>
+<li>Starting <code>pihole-FTL.service</code> is likely to fail. See <a href="#Failed_to_start_Pi-hole_FTLDNS_engine">#Failed to start Pi-hole FTLDNS engine</a>.</li>
+</ul>
+</div>
+<p><code>pihole-FTL.service</code> is statically enabled; re/start it. For FTL configuration, see <a rel="nofollow" class="external text" href="https://docs.pi-hole.net/ftldns/configfile/">upstream documentation</a>.
+</p>
+<h4><span class="mw-headline" id="FTL_Integrated_Web_interface">FTL Integrated Web interface</span></h4>
+<p>Pi-hole has a powerful, user-friendly, but completely optional web interface. As well as changing settings, the user can analyse and visualise DNS queries handled by Pi-hole.
+</p>
+<h3><span class="mw-headline" id="Update_hosts_file">Update hosts file</span></h3>
+<p><span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=filesystem">filesystem</a></span> ships with an empty <code>/etc/hosts</code> file which is known to prevent Pi-hole from fetching block lists.  One must append the following to this file to ensure correct operation, noting that <i>ip.address.of.pihole</i> should be the actual IP address of the machine running Pi-hole (e.g. 192.168.1.250) and <i>myhostname</i> should be the actual hostname of the machine running Pi-hole:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/hosts</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">127.0.0.1              localhost
+ip.address.of.pihole   pi.hole myhostname
+</pre>
+<p>For more, see <a rel="nofollow" class="external text" href="https://github.com/pi-hole/pi-hole/issues/1800">Issue#1800</a>.
+</p>
+<h3><span class="mw-headline" id="Making_devices_use_Pi-hole">Making devices use Pi-hole</span></h3>
+<p>To use Pi-hole, devices within the network should use Pi-hole's IP address as their sole DNS server. To accomplish this, there are generally two methods:
+</p>
+<ol>
+<li>In the router's LAN DHCP settings, set Pi-hole's IP address as the only DNS server available for connected devices.</li>
+<li>Manually configure each device to use Pi-hole's IP address as their only DNS server.</li>
+</ol>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> Some routers (or even ISPs) do not allow modifications to LAN DNS settings, so disabling the router's DHCP server and using <a rel="nofollow" class="external text" href="https://discourse.pi-hole.net/t/how-do-i-use-pi-holes-built-in-dhcp-server-and-why-would-i-want-to">Pi-hole's built-in DHCP server</a> might be a solution.</div>
+<p>More information about making other devices use Pi-hole can be found at <a rel="nofollow" class="external text" href="https://discourse.pi-hole.net/t/how-do-i-configure-my-devices-to-use-pi-hole-as-their-dns-server/245">upstream documentation</a>.
+</p>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> The Pi-hole hosting device can also make use of Pi-hole. Just change DNS settings to only IP address <code>127.0.0.1</code>.</div>
+<h3><span class="mw-headline" id="Usage">Usage</span></h3>
+<p>Change the computer's network settings so the only DNS server in use is <code>127.0.0.1</code>.
+</p>
+<p>If using DHCP to lease IP addresses from an external router, append <code>bind-interfaces</code> to <code>/etc/dnsmasq.conf</code> for DNS queries to resolve.
+</p>
+<p>Test DNS queries independently of network-configured nameserver in <code>/etc/resolv.conf</code> using the <code>drill</code> command of <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=ldns">ldns</a></span> package with <code>drill @127.0.0.1 archlinux.org</code> .
+</p>
+<h2><span class="mw-headline" id="Usage_2">Usage</span></h2>
+<p>Both standalone and server versions can be controlled via CLI, but only server version can be controlled via web interface.
+</p>
+<h3><span class="mw-headline" id="Using_web_interface">Using web interface</span></h3>
+<p>Go to <a rel="nofollow" class="external text" href="http://pi.hole/admin/">pi.hole</a> or <code>&lt;Pi-hole IP address&gt;/admin/</code> to access web interface.
+</p>
+<h3><span class="mw-headline" id="Using_CLI">Using CLI</span></h3>
+<h4><span class="mw-headline" id="Pi-hole_DNS_management">Pi-hole DNS management</span></h4>
+<p>By default Pi-hole uses the Google DNS server. Change which DNS servers Pi-hole uses with:
+</p>
+<pre>$ pihole -a setdns <i>ipaddress#port</i>
+</pre>
+<p>Specify multiple DNS servers by separating their addresses with commas.
+</p>
+<h4><span class="mw-headline" id="Forced_update_of_ad-serving_domains_list">Forced update of ad-serving domains list</span></h4>
+<p>To update the blocked domain list, execute:
+</p>
+<pre>$ pihole -g
+</pre>
+<h4><span class="mw-headline" id="Temporarily_disable_Pi-hole">Temporarily disable Pi-hole</span></h4>
+<p>Pi-hole can be paused via CLI by executing:
+</p>
+<pre>$ pihole disable [time]
+</pre>
+<p>Leaving the value for <code>time</code> blank, the disabling will be permanent until later manual reenabling.
+<code>time</code> can be expressed in seconds or minutes with syntax #s and #m. For example, to disable Pi-hole for 5 minutes:
+</p>
+<pre>$ pihole disable 5m
+</pre>
+<p>At any time, reenable Pi-hole by executing:
+</p>
+<pre>$ pihole enable
+</pre>
+<h2><span class="mw-headline" id="Tips_and_tricks">Tips and tricks</span></h2>
+<h3><span class="mw-headline" id="Password-protected_web_interface">Password-protected web interface</span></h3>
+<p>To password-protect the Pi-hole web interface, run the following command and enter the password:
+</p>
+<pre>$ pihole -a -p
+</pre>
+<p>To disable the password protection, set a blank password.
+</p>
+<h3><span class="mw-headline" id="Cloudflare_DoH">Cloudflare DoH</span></h3>
+<p>Pi-hole can be configured to use <a href="../en/Cloudflared.html" title="Cloudflared">Cloudflared</a> to achieve <a href="../en/Domain_name_resolution.html#Privacy_and_security" class="mw-redirect" title="DNS over HTTPS">DNS over HTTPS</a> functionality.
+</p>
+<p>To make <a href="../en/Cloudflared.html" title="Cloudflared">Cloudflared</a> work with Pi-hole, simply start cloudflared and configure pi-hole to use it as its DNS entry.
+</p>
+<p>Using the <a href="../en/Cloudflared.html#Usage" title="Cloudflared">suggested service file for cloudflared</a>, that would be:
+</p>
+<pre># systemctl start cloudflared
+$ pihole -a setdns 127.0.0.1#5300
+</pre>
+<p>Test that pi-hole is working with:
+</p>
+<pre>drill archlinux.org @127.0.0.1 -p 53
+</pre>
+<p>(notice that the port is the one bound to pi-hole, not the one bound to cloudflared).
+</p>
+<h3><span class="mw-headline" id="Optimise_for_solid_state_drives">Optimise for solid state drives</span></h3>
+<p>If Pi-hole is running on a <a href="../en/Solid_state_drive.html" title="Solid state drive">solid state drive</a> (SD card, SSD etc..) it is recommended to uncomment the <code>DBINTERVAL</code> value and change it to at least <code>60.0</code> to minimize writes to the database:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/pihole/pihole-FTL.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">
+
+...
+
+## Database Interval
+## How often do we store queries in FTL's database -minutes-?
+## See: https://docs.pi-hole.net/ftldns/database/
+## Options: number of minutes
+DBINTERVAL=60.0
+
+...
+
+</pre>
+<p>After changes have been performed, <a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Restart">restart</a> <code>pihole-FTL.service</code>.
+</p>
+<h3><span class="mw-headline" id="Disable_query_logging">Disable query logging</span></h3>
+<p>Both daily and historic data collected by default contain query data that might be considered sensitive.
+</p>
+<p>To disable the query database for historic data, set privacy level to the maximum <i>Anonymous mode</i> either in the web administration (Settings &gt; Privacy) or in the configuration file <code>/etc/pihole/pihole-FTL.conf</code> by editing the line:
+</p>
+<pre>PRIVACYLEVEL=3
+</pre>
+<p>To also disable the logging for daily data, use the following command:
+</p>
+<pre>$ pihole logging off
+</pre>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Warning:</strong> Pi-hole will erase all statistics upon executing this command.</div>
+<h3><span class="mw-headline" id="Use_with_VPN_server">Use with VPN server</span></h3>
+<p>Pi-hole can be used by connected VPN clients.
+</p>
+<h4><span class="mw-headline" id="OpenVPN">OpenVPN</span></h4>
+<p>An <a href="../en/OpenVPN.html" title="OpenVPN">OpenVPN</a> server can be configured to advertise a Pi-hole instance to its clients. Add the following two lines to <code>/etc/openvpn/server/server.conf</code>:
+</p>
+<pre>push "redirect-gateway def1 bypass-dhcp"
+push "dhcp-option DNS <i>Pi-hole-IP</i>"
+</pre>
+<p>If it still does not work, try creating a file <code>/etc/dnsmasq.d/00-openvpn.conf</code> with the following content:
+</p>
+<pre>interface=tun0
+</pre>
+<p>It may be necessary to make <code>dnsmasq</code> listen on <code>tun0</code>.
+</p>
+<h4><span class="mw-headline" id="WireGuard">WireGuard</span></h4>
+<p><a href="../en/WireGuard.html" title="WireGuard">WireGuard</a> clients can be configured to use the Pi-hole DNS server. In the client configuration file, specify the following line:
+</p>
+<pre>DNS = <i>Pi-hole-IP</i>
+</pre>
+<p>In order for the DNS to be functional from the VPN, Pi-hole has to listen to all local interfaces:
+</p>
+<pre>pihole -a -i local
+</pre>
+<p>See more information in <a href="../en/WireGuard.html#Client_configuration" title="WireGuard">WireGuard#Client configuration</a>.
+</p>
+<h3><span class="mw-headline" id="Nginx_instead_of_Lighttpd">Nginx instead of Lighttpd</span></h3>
+<p>This is <a rel="nofollow" class="external text" href="https://docs.pi-hole.net/guides/nginx-configuration/">unofficial, community-supported configuration</a><sup title="Last check status: 404">[<a href="https://en.wikipedia.org/wiki/Wikipedia:Link_rot" class="extiw" title="wikipedia:Wikipedia:Link rot">dead link</a> 2025-03-15 ⓘ]</sup>. Make sure that PHP is set up (see <a href="#Set_up_PHP">#Set up PHP</a>) and lighttpd server is inactive.
+</p>
+<p><a href="../en/Help:Reading.html#Installation_of_packages" class="mw-redirect" title="Install">Install</a> <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=nginx-mainline">nginx-mainline</a></span> and <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=php-fpm">php-fpm</a></span>. 
+</p>
+<p>Modify <code>/etc/nginx/nginx.conf</code> to contain the following in the <b>http</b> section:
+</p>
+<pre>gzip            on;
+gzip_min_length 1000;
+gzip_proxied    expired no-cache no-store private auth;
+gzip_types      text/plain application/xml application/json application/javascript application/octet-stream text/css;
+include /etc/nginx/conf.d/*.conf;
+</pre>
+<p>Copy the package provided default configuration for Pi-hole:
+</p>
+<pre># mkdir /etc/nginx/conf.d
+# cp /usr/share/pihole/configs/nginx.example.conf /etc/nginx/conf.d/pihole.conf
+</pre>
+<p>Edit <code>/etc/nginx/conf.d/pihole.conf</code> and change the <code>fastcgi_pass</code> directive to the following:
+</p>
+<pre>fastcgi_pass  unix:/run/php-fpm/php-fpm.sock;  
+</pre>
+<p>Optionally, set <code>VIRTUAL_HOST</code> to the CNAME of Pi-hole if the intention is to run multiple virtual hosts on Nginx.
+</p>
+<pre>fastcgi_param VIRTUAL_HOST "pihole.example.com";
+</pre>
+<p>Since version 7.4 php-fpm is hardened by default and revokes read/write access on <code>/usr</code> (and sub-directories).
+</p>
+<p>Create an <a href="../en/Systemd.html#Drop-in_files" class="mw-redirect" title="Drop-in file">drop-in file</a> for <code>php-fpm</code> with the following content:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/system/php-fpm.service.d/pihole.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Service]
+ReadWritePaths = /srv/http/pihole
+ReadWritePaths = /run/pihole-ftl/pihole-FTL.port
+ReadWritePaths = /run/log/pihole/pihole.log
+ReadWritePaths = /run/log/pihole-ftl/pihole-FTL.log
+ReadWritePaths = /etc/pihole
+ReadWritePaths = /etc/hosts
+ReadWritePaths = /etc/hostname
+ReadWritePaths = /etc/dnsmasq.d/01-pihole.conf
+ReadWritePaths = /proc/meminfo
+ReadWritePaths = /proc/cpuinfo
+ReadWritePaths = /sys/class/thermal/thermal_zone0/temp
+ReadWritePaths = /tmp</pre>
+<p>Then <a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Start">start</a> and <a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Enable">enable</a> <code>nginx.service</code> and <code>php-fpm.service</code>.
+</p>
+<h3><span class="mw-headline" id="Additional_blocklists">Additional blocklists</span></h3>
+<p>Pi-hole was intended to block ads, but it can also be used to block other unwanted content:
+</p>
+<ol>
+<li>Tracking domains</li>
+<li>Malware domains</li>
+<li>Piracy sites</li>
+<li>Fake news sites</li>
+<li>Phishing sites</li>
+</ol>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> Pi-hole blocklists must contain <b>domains</b>. Some blocklists might contain IP addresses of 127.0.0.1 and domain combination - this format is accepted by Pi-hole.</div>
+<p>There are many sources providing these blocklists. Some examples: <a rel="nofollow" class="external text" href="https://firebog.net/">firebog.net</a> and <a rel="nofollow" class="external text" href="https://oisd.nl/">oisd.nl</a>.
+</p>
+<h3>
+<span id="Block_.2F_Allow_custom_domain_names_based_on_a_Regex"></span><span class="mw-headline" id="Block_/_Allow_custom_domain_names_based_on_a_Regex">Block / Allow custom domain names based on a Regex</span>
+</h3>
+<p>If you want to add a wildcard domain to the deny-/blacklist, use the following <a rel="nofollow" class="external text" href="https://docs.pi-hole.net/main/pihole-command/#allowlisting-denylisting-and-regex">pihole</a> command:
+</p>
+<pre>$ /usr/local/bin/pihole --wild yourdomain.com
+</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> The entry in the domains list will look like <code>(\.|^)yourdomain\.com$</code> </div>
+<p>If you want to remove the same domain from the deny-/blacklist, just add <code>-d</code> flag to the <i>pihole</i> command:
+</p>
+<pre>$ /usr/local/bin/pihole --wild -d yourdomain.com
+</pre>
+<p>To block all domains from a custom Regex, use the following pihole command::
+</p>
+<pre>$ pihole --regex "[a-z]test.com"
+</pre>
+<p>If you want to remove the same custom Regex from the deny-/blacklist, just add <code>-d</code> flag to the pihole command:
+</p>
+<pre>$ pihole --regex -d "[a-z]test.com"
+</pre>
+<h3><span class="mw-headline" id="Use_Unbound_as_upstream_DNS_server">Use Unbound as upstream DNS server</span></h3>
+<p>By default, Pi-hole forwards requests to upstream DNS servers, which might lead to privacy concerns.
+See <a rel="nofollow" class="external text" href="https://docs.pi-hole.net/guides/dns/unbound/">upstream documentation</a> for a guide on setting up <a href="../en/Unbound.html" title="Unbound">Unbound</a> locally to resolve DNS requests.
+</p>
+<h2><span class="mw-headline" id="Troubleshooting">Troubleshooting</span></h2>
+<h3><span class="mw-headline" id="Odd_behavior_in_the_web_interface_after_an_upgrade">Odd behavior in the web interface after an upgrade</span></h3>
+<p>Some strange/unexplained rendering issues in the web GUI can often be fixed by clearing one's browser cache.
+</p>
+<h3><span class="mw-headline" id="Data_loss_on_reboot">Data loss on reboot</span></h3>
+<p>Systems without a <a href="../en/System_time.html#Hardware_clock" class="mw-redirect" title="RTC">RTC</a> such as some ARM devices will likely experience loss of data in the query log upon rebooting.  When systems lacking a <a href="../en/System_time.html#Hardware_clock" class="mw-redirect" title="RTC">RTC</a> boot, the time is set <i>after</i> the network and resolver come up.  Aspects of Pi-hole can get started before this happens leading to the data loss.  An incorrectly set <a href="../en/System_time.html#Hardware_clock" class="mw-redirect" title="RTC">RTC</a> can also cause problems.  See: <a href="../en/Installation_guide.html#Time" title="Installation guide">Installation guide#Time</a> and <a href="../en/System_time.html" title="System time">System time</a>.
+</p>
+<p>For devices lacking a <a href="../en/System_time.html#Hardware_clock" class="mw-redirect" title="RTC">RTC</a>:
+A hacky work-around for this is to use <a href="../en/Systemd.html#Drop-in_files" class="mw-redirect" title="Drop-in file">drop-in files</a> against <code>pihole-FTL.service</code> wherein a delay is built in calling <code>/usr/bin/sleep x</code> in a <code>ExecStartPre</code> statement.  Note that the value of "x" in the sleep time depends on how long the specific hardware takes to establish the time sync.
+</p>
+<p><a rel="nofollow" class="external text" href="https://github.com/systemd/systemd/issues/11008">Issue#11008</a> against systemd-timesyncd is currently preventing the use of the <i>time-sync.target</i> to automate this.
+</p>
+<h3><span class="mw-headline" id="Failed_to_start_Pi-hole_FTLDNS_engine">Failed to start Pi-hole FTLDNS engine</span></h3>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> Check which process opened port 53 with: <code># lsof -i :53</code>.</div>
+<p>It might be that <code>systemd-resolved.service</code> already occupied port 53, which is required for <code>pihole-FTL.service</code>.
+To resolve this, disable the stub listener by creating a <a href="../en/Systemd.html#Drop-in_files" class="mw-redirect" title="Drop-in snippet">drop-in snippet</a> form <a href="../en/Systemd-resolved.html" title="Systemd-resolved">systemd-resolved</a>'s configuration file:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/resolved.conf.d/pi-hole.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Resolve]
+DNSStubListener=no</pre>
+<p>Then <a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Restart">restart</a> <code>systemd-resolved.service</code> and <code>pihole-FTL.service</code>.
+</p>
+<p>For more information, see <span class="plainlinks archwiki-template-man" title="$ man 5 resolved.conf"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/resolved.conf.5">resolved.conf(5)</a></span>.
+</p>
+<p>Alternatively, tell dnsmasq to bind to each interface explicitly, instead of the wildcard <code>0.0.0.0:53</code>, by uncommenting the line <code>bind-interfaces</code> in <code>/etc/dnsmasq.conf</code>. This will avoid conflicting with <code>systemd-resolved</code> which listens on <code>127.0.0.53:53</code>.
+</p>
+<h3><span class="mw-headline" id="DNSMasq_package_conflict">DNSMasq package conflict</span></h3>
+<p>Since Pi-hole-FTL 4.0, a private fork of dnsmasq is integrated in the FTL sub-project. The original <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=dnsmasq">dnsmasq</a></span> package is now conflicting with <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/pi-hole-ftl/">pi-hole-ftl</a></span><sup><small>AUR</small></sup> and will be uninstalled when upgrading from a previous version. It is still possible to use the previous dnsmasq configuration files, just ensure that <code>conf-dir=/etc/dnsmasq.d/,*.conf</code> in the original <code>/etc/dnsmasq.conf</code> is not commented out.
+</p>
+<h3><span class="mw-headline" id="Unknown_status_and_changes_not_being_saved">Unknown status and changes not being saved</span></h3>
+<p>The issue, as seen in <a rel="nofollow" class="external text" href="https://bugs.archlinux.org/task/63704">FS#63704</a>, is with systemd-sysusers created user <code>http</code>, which is created in expired state. To fix it, run:
+</p>
+<pre># chage --expiredate -1 http
+</pre>
+<h3><span class="mw-headline" id="Slow_loading_times">Slow loading times</span></h3>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../File:Inaccurate.svg" decoding="async" width="48" height="48" class="mw-file-element"></span></span><b>The factual accuracy of this article or section is disputed.</b></p>
+<div>
+<b>Reason:</b> This issue seems to pertain to DNS configuration. It might not be a good idea to instruct direct changes to <code>/etc/resolv.conf</code>. (Discuss in <a rel="nofollow" class="external text" href="../en/Talk:Pi-hole.html">Talk:Pi-hole</a>)</div>
+</div>
+<p>If browsers report "Resolving host" or it just takes longer to load pages than usual, ensure that <code>/etc/resolv.conf</code> looks <b>exactly</b> like this:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/resolv.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">nameserver 127.0.0.1
+</pre>
+<p>If it takes very long to load pages, it can be a problem with <code>lsof</code> call in pihole script <code>(/usr/bin/pihole)</code> called through php.  Verify it while loading page with: <code>ps -ef | grep lsof</code>. Kill it and if the page is displayed, replace <code>lsof</code> call in pihole script (there is only one) with:
+</p>
+<pre>ss -lnp '( sport = 53 )'</pre>
+<h3><span class="mw-headline" id="Prevent_DNS_resolution_issues_for_other_virtual_hosts">Prevent DNS resolution issues for other virtual hosts</span></h3>
+<p>By default, the DNS service (pihole-FTL) will be bind to the 0.0.0.0 IP address :
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;"># netstat -ltnp | grep 53</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">tcp        0      0 0.0.0.0:53              0.0.0.0:*               LISTEN      2196/pihole-FTL
+tcp6       0      0 :::53                   :::*                    LISTEN      2196/pihole-FTL
+</pre>
+<p>This will prevent any other virtual host onto the same machine hosting the pihole instance (such as docker containers) to get DNS resolution.<a rel="nofollow" class="external autonumber" href="https://discourse.pi-hole.net/t/make-pihole-ftl-bind-only-on-certain-ips-v4-0/11883">[1]</a><a rel="nofollow" class="external autonumber" href="https://discourse.pi-hole.net/t/solve-dns-resolution-in-other-containers-when-using-docker-pihole/31413">[2]</a>
+</p>
+<p>In order to solve this, you need to create a config file in <code>/etc/dnsmasq.d/</code> with the following content (where <code>X.X.X.X</code> is the IP address of your pi-hole) :
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/dnsmasq.d/99-dns-bind.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">listen-address=<i>X.X.X.X</i>
+bind-interfaces</pre>
+<p>Then, you need to <a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Restart">restart</a> the <code>pihole-FTL.service</code> to apply changes. 
+</p>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> To complete this configuration you may need to activate the online waiting service of your network manager</div>
+<h3><span class="mw-headline" id="Interface_not_up_when_pihole_starts">Interface not up when pihole starts</span></h3>
+<p>If after booting domain name resolution does not work, and the <a href="../en/Systemd/Journal.html" class="mw-redirect" title="Journal">journal</a> shows an error message like:
+</p>
+<pre>pihole-FTL [...] FATAL ERROR in dnsmasq core: unknown interface wlo1
+</pre>
+<p>Then it might be that the interface name is wrong, or the interface is not up when pihole tries to run.
+</p>
+<ol>
+<li>Check the interface name with <code>ip a</code>. If it is wrong, set <code>PIHOLE_INTERFACE</code> to the correct value in <code>/etc/pihole/setupVars.conf</code>
+</li>
+<li>If the interface is right, it may not be up when pihole is started (even if the systemd service depends on <code>After=network-online.target</code>). Set <code>DELAY_STARTUP</code> in <code>/etc/pihole/pihole-FTL.conf</code> to a value greater than 0 (expressed in seconds).</li>
+</ol>
+<p>Reboot to verify the issue is fixed.
+</p>
+<p><a rel="nofollow" class="external text" href="https://discourse.pi-hole.net/t/strange-error-and-ftl-not-working-on-every-reboot/46391">Reference</a>.
+</p>
+<h3><span class="mw-headline" id="DNS_cache_evictions_greater_than_zero">DNS cache evictions greater than zero</span></h3>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> Setting the cache size to zero disables caching.</div>
+<p>The cache size should be increased when this number is larger than zero. You can set the cache limit at /etc/dnsmasq.conf by uncommenting or adding the following setting with your desired number.
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/dnsmasq.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">cache-size=12345</pre>
+<p>After changes have been performed restart pihole-FTL.service
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> There is no benefit in increasing this number unless the number of DNS cache evictions is greater than zero.
+<p>A larger cache will consume more memory on your node, leaving less memory available for other caches of your Pi-hole. If you push this number to the extremes, it may even be that your Pi-hole gets short on memory and does not operate as expected.
+</p>
+You can not reduce the cache size below 150 when DNSSEC is enabled because the DNSSEC validation process uses the cache.</div>
+<p><a rel="nofollow" class="external text" href="https://docs.pi-hole.net/ftldns/dns-cache/">Reference</a>.
+</p>
+<h3><span class="mw-headline" id="Missing_web_GUI_after_upgrade_to_version_6">Missing web GUI after upgrade to version 6</span></h3>
+<p>After upgrading from version 5 to 6 you may encounter error <b>404 Site not found</b> when calling the web GUI. Anyway, the web GUI is probably still reachable at port <code>8080</code>.
+</p>
+<p>Reason: Pi-hole now comes with an own web server!
+</p>
+<p>Most likely you had the previous pi-hole web server lighttpd up and running on port <code>80</code> while you were installing pi-hole 6. In that case pi-hole sets <code>8080</code> as default listening port. If you also had yet another web server listening on port <code>8080</code> during the installation process pi-hole's web GUI gets unavailable completely. See the <a rel="nofollow" class="external text" href="https://docs.pi-hole.net/main/prerequisites/?h=webserver#ports">pi-hole reference</a> documentation.
+</p>
+<p>After resolving the interfering web server, you can reset the web GUI's listening port to <code>80</code> either in <code>/etc/pihole/pihole.toml</code> at line <code>port =</code> or within the new web GUI at <i>Settings &gt; System &gt; turn on Expert mode in the upper right corner &gt; All settings &gt; Webserver and API &gt; webserver.port</i>.
+</p>
+<h2><span class="mw-headline" id="See_also">See also</span></h2>
+<ul>
+<li><a rel="nofollow" class="external text" href="https://pi-hole.net/">Pi-hole homepage</a></li>
+<li><a rel="nofollow" class="external text" href="https://github.com/pi-hole/pi-hole">Pi-hole GitHub page</a></li>
+<li><a rel="nofollow" class="external text" href="https://github.com/pi-hole/FTL">Pi-hole FTL GitHub page</a></li>
+<li><a rel="nofollow" class="external text" href="https://unix.stackexchange.com/questions/304050/how-to-avoid-conflicts-between-dnsmasq-and-systemd-resolved">Stopping systemd-resolved stub server opening port 53</a></li>
+<li><a rel="nofollow" class="external text" href="https://www.reddit.com/r/pihole/comments/d9j1z6/unbound_as_recursive_dns_server_slow_performance/f1jnuq1/">Unbound performance issue</a></li>
+</ul>
+</div>
+</div>
+					<div id="catlinks" class="catlinks" data-mw="interface">
+<div id="mw-normal-catlinks" class="mw-normal-catlinks">
+<a href="../Special:Categories.html" title="Special:Categories">Category</a>: <ul><li><a href="../en/Category:Domain_Name_System.html" title="Category:Domain Name System">Domain Name System</a></li></ul>
+</div>
+<div id="mw-hidden-catlinks" class="mw-hidden-catlinks mw-hidden-cats-hidden">Hidden categories: <ul>
+<li><a href="../en/Category:Pages_or_sections_flagged_with_Template:Out_of_date.html" title="Category:Pages or sections flagged with Template:Out of date">Pages or sections flagged with Template:Out of date</a></li>
+<li><a href="../en/Category:Pages_with_dead_links.html" title="Category:Pages with dead links">Pages with dead links</a></li>
+<li><a href="../en/Category:Pages_or_sections_flagged_with_Template:Accuracy.html" title="Category:Pages or sections flagged with Template:Accuracy">Pages or sections flagged with Template:Accuracy</a></li>
+</ul>
+</div>
+</div>
+				</div>
+			</main>
+			
+		</div>
+		<div class="mw-footer-container">
+			
+<footer id="footer" class="mw-footer" style="margin: 0">
+	<ul id="footer-info">
+	<li data-nosnippet="">Retrieved from "<a dir="ltr" href="https://wiki.archlinux.org/index.php?title=Pi-hole&amp;oldid=829149">https://wiki.archlinux.org/index.php?title=Pi-hole&amp;oldid=829149</a>"</li>
+<li id="footer-info-lastmod"> This page was last edited on 15 March 2025, at 22:37.</li>
+	<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+<br>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="https://terms.archlinux.org/docs/privacy-policy/">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="../en/ArchWiki:About.html">About ArchWiki</a></li>
+	<li id="footer-places-disclaimers"><a href="../en/ArchWiki:General_disclaimer.html">Disclaimers</a></li>
+	<li id="footer-places-archwiki-code-of-conduct"><a href="https://terms.archlinux.org/docs/code-of-conduct/" class="extiw" title="archlinux-service-agreements:code-of-conduct">Code of conduct</a></li>
+	<li id="footer-places-archwiki-terms-of-service"><a href="https://terms.archlinux.org/docs/terms-of-service/" class="extiw" title="archlinux-service-agreements:terms-of-service">Terms of service</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-copyrightico"><a href="https://www.gnu.org/copyleft/fdl.html" class="cdx-button cdx-button--fake-button cdx-button--size-large cdx-button--fake-button--enabled"><img src="/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" loading="lazy"></a></li>
+	<li id="footer-poweredbyico"><img src="/resources/assets/poweredby_mediawiki.svg" width="88" height="31" loading="lazy"></li>
+</ul>
+
+</footer>
+
+		</div>
+	</div> 
+</div> 
+<div class="vector-settings" id="p-dock-bottom">
+	<ul></ul>
+</div>
+</body>
+</html>

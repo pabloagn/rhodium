@@ -1,0 +1,39 @@
+<h1>gbp</h1>
+
+<blockquote><p>A system to integrate the Debian package build system with Git.
+More information: <a href="https://honk.sigxcpu.org/projects/git-buildpackage/manual-html/gbp.html">https://honk.sigxcpu.org/projects/git-buildpackage/manual-html/gbp.html</a>.</p></blockquote>
+
+<ul>
+<li>Convert an existing Debian package to gbp:</li>
+</ul>
+
+
+<p><code>gbp import-dsc {{path/to/package.dsc}}</code></p>
+
+<ul>
+<li>Build the package in the current directory using the default builder (<code>debuild</code>):</li>
+</ul>
+
+
+<p><code>gbp buildpackage -jauto -us -uc</code></p>
+
+<ul>
+<li>Build a package in a <code>pbuilder</code> environment for Debian Bullseye:</li>
+</ul>
+
+
+<p><code>DIST={{bullseye}} ARCH={{amd64}} gbp buildpackage -jauto -us -uc --git-builder={{git-pbuilder}}</code></p>
+
+<ul>
+<li>Specify a package to be a source-only upload in the <code>.changes</code> file (see <a href="https://wiki.debian.org/SourceOnlyUpload">https://wiki.debian.org/SourceOnlyUpload</a>):</li>
+</ul>
+
+
+<p><code>gbp buildpackage -jauto -us -uc --changes-options={{-S}}</code></p>
+
+<ul>
+<li>Import a new upstream release:</li>
+</ul>
+
+
+<p><code>gbp import-orig --pristine-tar {{path/to/package.tar.gz}}</code></p>

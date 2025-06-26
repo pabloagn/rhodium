@@ -1,0 +1,32 @@
+<h1>in-toto-run</h1>
+
+<blockquote><p>Generating link metadata while carrying out a supply chain step.
+More information: <a href="https://in-toto.readthedocs.io/en/latest/command-line-tools/in-toto-run.html">https://in-toto.readthedocs.io/en/latest/command-line-tools/in-toto-run.html</a>.</p></blockquote>
+
+<ul>
+<li>Tag a Git repo and signing the resulting link file:</li>
+</ul>
+
+
+<p><code>in-toto-run {{[-n|--step-name]}} {{tag}} {{[-p|--products]}} {{.}} -k {{key_file}} -- {{git tag v1.0}}</code></p>
+
+<ul>
+<li>Create a tarball, storing files as materials and the tarball as product:</li>
+</ul>
+
+
+<p><code>in-toto-run {{[-n|--step-name]}} {{package}} {{[-m|--materials]}} {{project}} {{[-p|--products]}} {{project.tar.gz}} -- {{tar czf project.tar.gz project}}</code></p>
+
+<ul>
+<li>Generate signed attestations for review work:</li>
+</ul>
+
+
+<p><code>in-toto-run {{[-n|--step-name]}} {{review}} -k {{key_file}} {{[-m|--materials]}} {{document.pdf}} {{[-x|--no-command]}}</code></p>
+
+<ul>
+<li>Scan the image using Trivy and generate link file:</li>
+</ul>
+
+
+<p><code>in-toto-run {{[-n|--step-name]}} {{scan}} -k {{key_file}} {{[-p|--products]}} {{report.json}} -- {{/bin/sh -c "trivy {{[-o|--output]}} report.json {{[-f|--format]}} json &lt;IMAGE&gt;"}}</code></p>

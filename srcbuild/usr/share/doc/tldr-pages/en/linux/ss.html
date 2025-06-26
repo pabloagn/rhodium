@@ -1,0 +1,60 @@
+<h1>ss</h1>
+
+<blockquote><p>Utility to investigate sockets.
+More information: <a href="https://manned.org/ss.8">https://manned.org/ss.8</a>.</p></blockquote>
+
+<ul>
+<li>Show all TCP/UDP/RAW/UNIX sockets:</li>
+</ul>
+
+
+<p><code>ss {{[-a|--all]}} {{-t|-u|-w|-x}}</code></p>
+
+<ul>
+<li>Filter TCP sockets by states, only/exclude:</li>
+</ul>
+
+
+<p><code>ss {{state|exclude}} {{bucket|big|connected|synchronized|...}}</code></p>
+
+<ul>
+<li>Show all TCP sockets connected to the local HTTPS port (443):</li>
+</ul>
+
+
+<p><code>ss {{[-t|--tcp]}} src :{{443}}</code></p>
+
+<ul>
+<li>Show all TCP sockets listening on the local 8080 port:</li>
+</ul>
+
+
+<p><code>ss {{[-lt|--listening --tcp]}} src :{{8080}}</code></p>
+
+<ul>
+<li>Show all TCP sockets along with processes connected to a remote SSH port:</li>
+</ul>
+
+
+<p><code>ss {{[-pt|--processes --tcp]}} dst :{{ssh}}</code></p>
+
+<ul>
+<li>Show all UDP sockets connected on specific source and destination ports:</li>
+</ul>
+
+
+<p><code>ss {{[-u|--udp]}} 'sport == :{{source_port}} and dport == :{{destination_port}}'</code></p>
+
+<ul>
+<li>Show all TCP IPv4 sockets locally connected on the subnet 192.168.0.0/16:</li>
+</ul>
+
+
+<p><code>ss {{[-4t|--ipv4 --tcp]}} src {{192.168/16}}</code></p>
+
+<ul>
+<li>Kill IPv4 or IPv6 Socket Connection with destination IP 192.168.1.17 and destination port 8080:</li>
+</ul>
+
+
+<p><code>ss {{[-K|--kill]}} dst {{192.168.1.17}} dport = {{8080}}</code></p>

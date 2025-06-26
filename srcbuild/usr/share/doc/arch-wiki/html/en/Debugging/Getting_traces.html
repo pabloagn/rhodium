@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-sticky-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-0 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-disabled skin-theme-clientpref-day vector-toc-available" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>Debugging/Getting traces - ArchWiki</title>
+<link rel="stylesheet" href="../../ArchWikiOffline.css">
+<meta name="ResourceLoaderDynamicStyles" content="">
+<meta name="generator" content="MediaWiki 1.43.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="max-image-preview:standard">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.25, maximum-scale=5.0">
+<link rel="search" type="application/opensearchdescription+xml" href="/rest.php/v1/search" title="ArchWiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.archlinux.org/api.php?action=rsd">
+<link rel="license" href="https://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="ArchWiki Atom feed" href="/index.php?title=Special:RecentChanges&amp;feed=atom">
+</head>
+<body class="skin--responsive skin-vector skin-vector-search-vue mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Debugging_Getting_traces rootpage-Debugging skin-vector-2022 action-view">
+<a class="mw-jump-link" href="#bodyContent">Jump to content</a>
+<div class="vector-header-container">
+	</div>
+<div class="mw-page-container">
+	<div class="mw-page-container-inner">
+		<div class="vector-column-start">
+			<div class="vector-main-menu-container">
+		</div>
+	<div class="vector-sticky-pinned-container">
+				<nav id="mw-panel-toc" aria-label="Contents" data-event-name="ui.sidebar-toc" class="mw-table-of-contents-container vector-toc-landmark">
+					<div id="vector-toc-pinned-container" class="vector-pinned-container">
+					<div id="vector-toc" class="vector-toc vector-pinnable-element">
+	<div class="vector-pinnable-header vector-toc-pinnable-header vector-pinnable-header-pinned" data-feature-name="toc-pinned" data-pinnable-element-id="vector-toc">
+	<h2 class="vector-pinnable-header-label">Contents</h2>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-toc.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-toc.unpin">hide</button>
+</div>
+
+
+	<ul class="vector-toc-contents" id="mw-panel-toc-list">
+		<li id="toc-mw-content-text" class="vector-toc-list-item vector-toc-level-1">
+			<a href="#" class="vector-toc-link">
+				<div class="vector-toc-text">Beginning</div>
+			</a>
+		</li>
+		<li id="toc-Introduction" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Introduction">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">1</span>
+				<span>Introduction</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Introduction-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Getting_the_trace" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Getting_the_trace">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">2</span>
+				<span>Getting the trace</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Getting_the_trace-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Getting the trace subsection</span>
+			</button>
+		
+		<ul id="toc-Getting_the_trace-sublist" class="vector-toc-list">
+			<li id="toc-Starting_a_new_instance_of_a_program" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Starting_a_new_instance_of_a_program">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1</span>
+					<span>Starting a new instance of a program</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Starting_a_new_instance_of_a_program-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Attaching_to_an_existing_process" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Attaching_to_an_existing_process">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2</span>
+					<span>Attaching to an existing process</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Attaching_to_an_existing_process-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Examining_a_previous_crash" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Examining_a_previous_crash">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.3</span>
+					<span>Examining a previous crash</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Examining_a_previous_crash-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Manually_getting_debug_info" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Manually_getting_debug_info">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">3</span>
+				<span>Manually getting debug info</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Manually_getting_debug_info-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Manually getting debug info subsection</span>
+			</button>
+		
+		<ul id="toc-Manually_getting_debug_info-sublist" class="vector-toc-list">
+			<li id="toc-Installing_debug_packages" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Installing_debug_packages">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1</span>
+					<span>Installing debug packages</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Installing_debug_packages-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Rebuilding_packages" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Rebuilding_packages">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.2</span>
+					<span>Rebuilding packages</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Rebuilding_packages-sublist" class="vector-toc-list">
+				<li id="toc-Compilation_options" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Compilation_options">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.2.1</span>
+					<span>Compilation options</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Compilation_options-sublist" class="vector-toc-list">
+				<li id="toc-glibc" class="vector-toc-list-item vector-toc-level-4">
+			<a class="vector-toc-link" href="#glibc">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.2.1.1</span>
+					<span>glibc</span>
+				</div>
+			</a>
+			
+			<ul id="toc-glibc-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Clang" class="vector-toc-list-item vector-toc-level-4">
+			<a class="vector-toc-link" href="#Clang">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.2.1.2</span>
+					<span>Clang</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Clang-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-LTO" class="vector-toc-list-item vector-toc-level-4">
+			<a class="vector-toc-link" href="#LTO">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.2.1.3</span>
+					<span>LTO</span>
+				</div>
+			</a>
+			
+			<ul id="toc-LTO-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Building_and_installing_the_package" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Building_and_installing_the_package">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.2.2</span>
+					<span>Building and installing the package</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Building_and_installing_the_package-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-See_also" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#See_also">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">4</span>
+				<span>See also</span>
+			</div>
+		</a>
+		
+		<ul id="toc-See_also-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+</ul>
+</div>
+
+					</div>
+		</nav>
+			</div>
+		</div>
+		<div class="mw-content-container">
+			<main id="content" class="mw-body" style="margin: 0">
+				<header class="mw-body-header vector-page-titlebar">
+					<nav aria-label="Contents" class="vector-toc-landmark">
+						
+<div id="vector-page-titlebar-toc" class="vector-dropdown vector-page-titlebar-toc vector-button-flush-left">
+	<input type="checkbox" id="vector-page-titlebar-toc-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-page-titlebar-toc" class="vector-dropdown-checkbox " aria-label="Toggle the table of contents">
+	<label id="vector-page-titlebar-toc-label" for="vector-page-titlebar-toc-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"><span class="vector-icon mw-ui-icon-listBullet mw-ui-icon-wikimedia-listBullet"></span>
+
+<span class="vector-dropdown-label-text">Toggle the table of contents</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+							<div id="vector-page-titlebar-toc-unpinned-container" class="vector-unpinned-container">
+			</div>
+		
+	</div>
+</div>
+
+					</nav>
+					<h1 id="firstHeading" class="firstHeading mw-first-heading"><span class="mw-page-title-main">Debugging/Getting traces</span></h1>
+							
+<div id="p-lang-btn" class="vector-dropdown mw-portlet mw-portlet-lang">
+	<input type="checkbox" id="p-lang-btn-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-p-lang-btn" class="vector-dropdown-checkbox mw-interlanguage-selector" aria-label="Go to an article in another language. Available in 4 languages">
+	<label id="p-lang-btn-label" for="p-lang-btn-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--action-progressive mw-portlet-lang-heading-4" aria-hidden="true"><span class="vector-icon mw-ui-icon-language-progressive mw-ui-icon-wikimedia-language-progressive"></span>
+
+<span class="vector-dropdown-label-text">4 languages</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+		<div class="vector-menu-content">
+			
+			<ul class="vector-menu-content-list">
+				
+				<li class="interlanguage-link interwiki-ja mw-list-item"><a href="https://wiki.archlinux.jp/index.php/%E3%83%87%E3%83%90%E3%83%83%E3%82%B0/%E3%83%88%E3%83%AC%E3%83%BC%E3%82%B9%E3%82%92%E5%8F%96%E5%BE%97" title="デバッグ/トレースを取得 – 日本語" lang="ja" hreflang="ja" data-title="デバッグ/トレースを取得" data-language-autonym="日本語" data-language-local-name="日本語" class="interlanguage-link-target"><span>日本語</span></a></li>
+<li class="interlanguage-link interwiki-pt mw-list-item"><a href="../../pt/Debug_-_Getting_Traces.html" title="Debug - Getting Traces – português" lang="pt" hreflang="pt" data-title="Debug - Getting Traces" data-language-autonym="Português" data-language-local-name="português" class="interlanguage-link-target"><span>Português</span></a></li>
+<li class="interlanguage-link interwiki-ru mw-list-item"><a href="../../ru/Debugging/Getting_traces.html" title="Debugging (Русский)/Getting traces – русский" lang="ru" hreflang="ru" data-title="Debugging (Русский)/Getting traces" data-language-autonym="Русский" data-language-local-name="русский" class="interlanguage-link-target"><span>Русский</span></a></li>
+<li class="interlanguage-link interwiki-zh-hans mw-list-item"><a href="https://wiki.archlinuxcn.org/wiki/Debugging/Getting_traces" title="Debugging/Getting traces – 中文（简体）" lang="zh-Hans" hreflang="zh-Hans" data-title="Debugging/Getting traces" data-language-autonym="中文（简体）" data-language-local-name="中文（简体）" class="interlanguage-link-target"><span>中文（简体）</span></a></li>
+			</ul>
+			
+		</div>
+
+	</div>
+</div>
+</header>
+				<div class="vector-column-end">
+					<div class="vector-sticky-pinned-container">
+						<nav class="vector-page-tools-landmark" aria-label="Page tools">
+							<div id="vector-page-tools-pinned-container" class="vector-pinned-container">
+				
+							</div>
+		</nav>
+						<nav class="vector-appearance-landmark" aria-label="Appearance">
+							<div id="vector-appearance-pinned-container" class="vector-pinned-container">
+				<div id="vector-appearance" class="vector-appearance vector-pinnable-element">
+	<div class="vector-pinnable-header vector-appearance-pinnable-header vector-pinnable-header-pinned" data-feature-name="appearance-pinned" data-pinnable-element-id="vector-appearance" data-pinned-container-id="vector-appearance-pinned-container" data-unpinned-container-id="vector-appearance-unpinned-container">
+	<div class="vector-pinnable-header-label">Appearance</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-appearance.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-appearance.unpin">hide</button>
+</div>
+
+
+</div>
+
+							</div>
+		</nav>
+					</div>
+				</div>
+				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container>
+					<div class="vector-body-before-content">
+							<div class="mw-indicators">
+		</div>
+
+						<div id="siteSub" class="noprint">From ArchWiki</div>
+					</div>
+					<div id="contentSub"><div id="mw-content-subtitle"><div class="subpages">&lt; <bdi dir="ltr"><a href="../../en/Debugging.html" title="Debugging">Debugging</a></bdi>
+</div></div></div>
+					
+					
+					<div id="mw-content-text" class="mw-body-content">
+<div class="mw-content-ltr mw-parser-output" lang="en" dir="ltr">
+<div class="archwiki-template-meta-related-articles">
+<p>Related articles</p>
+<ul>
+<li><a href="../../en/General_troubleshooting.html" title="General troubleshooting">General troubleshooting</a></li>
+<li><a href="../../en/Bug_reporting_guidelines.html" class="mw-redirect" title="Reporting bug guidelines">Reporting bug guidelines</a></li>
+<li><a href="../../en/Debuginfod.html" title="Debuginfod">Debuginfod</a></li>
+<li><a href="../../en/Core_dump.html" title="Core dump">Core dump</a></li>
+</ul>
+</div>
+<p>This article aims to help debugging software by providing traces and debug information. This information can then be used for the bug report to the (upstream) software developers or package maintainers.
+</p>
+<meta property="mw:PageProp/toc">
+<h2><span class="mw-headline" id="Introduction">Introduction</span></h2>
+<p>Usually, executable files are stripped of human readable context to make them smaller. Obtaining traces without debugging information available drastically reduces their usefulness. For example, a trace from a <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=gdb">gdb</a></span> session where debugging information is not available may look as follows:
+</p>
+<pre>[...]
+Backtrace was generated from '/usr/bin/epiphany'
+
+<b>(no debugging symbols found)</b>
+Using host libthread_db library "<b>/lib/libthread_db.so.1</b>".
+<b>(no debugging symbols found)</b>
+[Thread debugging using libthread_db enabled]
+[New Thread -1241265952 (LWP 12630)]
+(no debugging symbols found)
+0xb7f25410 in __kernel_vsyscall ()
+#0  0xb7f25410 in __kernel_vsyscall ()
+#1  0xb741b45b in <b>??</b> () from /lib/libpthread.so.0
+[...]
+</pre>
+<p><code>??</code> shows where debugging info is missing, as well as the name of library or executable which called the function. Similarly, when <code>(no debugging symbols found)</code> appears, you should look for the stated file names.
+</p>
+<p>To obtain a proper trace that is useful to the program developers, follow the next sections. Separate debug files are available for most official Arch packages and can be downloaded with <a href="../../en/Debuginfod.html" title="Debuginfod">Debuginfod</a> (see <a href="#Getting_the_trace">#Getting the trace</a>). When enhanced debugging information was not added to the executable in the first place, one has to <a href="#Rebuilding_packages">rebuild the package</a> with debugging symbols enabled.
+</p>
+<p>Use the complete stack trace to inform developers of a bug you have discovered before. This will be highly appreciated by them and will help to improve your favorite program.
+</p>
+<h2><span class="mw-headline" id="Getting_the_trace">Getting the trace</span></h2>
+<p>The actual backtrace (or stack trace) can be obtained via <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=gdb">gdb</a></span>, the GNU Debugger. It can be used in several ways, depending on whether it should start a new instance of a program, attach to an existing process, or examine a previous crash.
+</p>
+<h3><span class="mw-headline" id="Starting_a_new_instance_of_a_program">Starting a new instance of a program</span></h3>
+<p>Start <i>gdb</i> with an executable program that can be found in <code>$PATH</code> (or a full path):
+</p>
+<pre>$ gdb <i>application</i>
+</pre>
+<p><i>gdb</i> automatically tries to download debug information and symbols for packages in the <a href="../../en/Official_repositories.html" title="Official repositories">official repositories</a>. When <i>gdb</i> asks whether <a href="../../en/Debuginfod.html" title="Debuginfod">Debuginfod</a> should be enabled in the debugging session, answer <code>y</code>:
+</p>
+<pre>This GDB supports auto-downloading debuginfo from the following URLs:
+  &lt;<a rel="nofollow" class="external free" href="https://debuginfod.archlinux.org">https://debuginfod.archlinux.org</a>&gt;
+Enable debuginfod for this session? (y or [n]) y
+Debuginfod has been enabled.
+To make this setting permanent, add 'set debuginfod enabled on' to .gdbinit.
+Downloading separate debug info for /usr/bin/<i>application</i>
+Reading symbols from /home/user/.cache/debuginfod_client/fbaee841e2ed2c11ecbbda26f39eeec1da23d6c3/debuginfo...</pre>
+<p>Then, within <i>gdb</i>, type <code>run</code> followed by any arguments you wish the program to start with:
+</p>
+<pre>(gdb) run <i>arguments</i>
+</pre>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> Alternatively, you can pass arguments when starting <i>gdb</i> using <code>gdb --args <i>application arguments...</i></code> and then use only <code>run</code> without arguments within <i>gdb</i>. For example, to debug an application written in Python, run <code>gdb --args /usr/bin/python <i>/path/to/application</i></code>.</div>
+<p>Now do whatever is necessary to evoke the bug. <i>gdb</i> will automatically halt the application when it crashes and prompt for commands. In case of freezes or similar issues, press <code>Ctrl+c</code> and you will be returned to the command prompt, too.
+</p>
+<p>Then enable logging to a file:
+</p>
+<pre>(gdb) set logging enabled on
+</pre>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> The default file name is <code>gdb.txt</code>. An alternate file name can be specified with <code>set logging file <i>trace.log</i></code> within <i>gdb</i>.</div>
+<p>And finally have the backtrace written to the specified file in the current working directory:
+</p>
+<pre>(gdb) thread apply all backtrace full
+</pre>
+<h3><span class="mw-headline" id="Attaching_to_an_existing_process">Attaching to an existing process</span></h3>
+<p>If the program you want to debug is already running, you need to first find its process ID. Tools such as <span class="plainlinks archwiki-template-man" title="$ man 1 pidof"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/pidof.1">pidof(1)</a></span> or <span class="plainlinks archwiki-template-man" title="$ man 1 pgrep"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/pgrep.1">pgrep(1)</a></span> are available. For example:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">$ pidof python3</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">907171 491909
+</pre>
+<p>When the output does not give a unique ID, you can try more filtering or look at the output of <code>ps aux</code> or <code>pstree --show-pids</code>.
+</p>
+<p>Attaching as regular user does not work by default due to restricted <a href="../../en/Security.html#ptrace_scope" title="Security">ptrace scope</a>. The restriction can be lowered temporarily with <code>echo 0 &gt; /proc/sys/kernel/yama/ptrace_scope</code> or you can run <i>gdb</i> as a privileged user, e.g. using <a href="../../en/Sudo.html" title="Sudo">sudo</a>.
+</p>
+<p>Start <i>gdb</i> attaching it to the process:
+</p>
+<pre>$ gdb --pid=<i>PID</i>
+</pre>
+<p><i>gdb</i> will ask if <a href="../../en/Debuginfod.html" title="Debuginfod">Debuginfod</a> should be enabled in this debugging session, to which you should answer <code>y</code>.
+</p>
+<p>Note that attaching to a process has stopped it and it needs to be explicitly continued. This replaces the <code>run</code> command from the workflow in the <a href="#Starting_a_new_instance_of_a_program">#Starting a new instance of a program</a> section:
+</p>
+<pre>(gdb) continue
+</pre>
+<p>Now do whatever is necessary to evoke the bug in the attached process. Then proceed with enabling logging and obtaining the trace same as in <a href="#Starting_a_new_instance_of_a_program">#Starting a new instance of a program</a>.
+</p>
+<h3><span class="mw-headline" id="Examining_a_previous_crash">Examining a previous crash</span></h3>
+<p>To debug an application that has already crashed, you will want to invoke <i>gdb</i> on its <i>core dump</i>. See <a href="../../en/Core_dump.html#Analyzing_a_core_dump" title="Core dump">Core dump#Analyzing a core dump</a> for details.
+</p>
+<p>If debugging information for the crashed program is not available and a proper backtrace was not obtained, you may need to <a href="#Rebuilding_packages">rebuild the package</a> and reproduce the crash again.
+</p>
+<h2><span class="mw-headline" id="Manually_getting_debug_info">Manually getting debug info</span></h2>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../../File:View-refresh-red.svg" decoding="async" width="48" height="48" class="mw-file-element"></span></span><b>This article or section is out of date.</b></p>
+<div>
+<b>Reason:</b> In the <a href="../../en/Debuginfod.html" title="Debuginfod">Debuginfod</a> era, installing separate debug packages with pacman is not needed for official packages. (Discuss in <a rel="nofollow" class="external text" href="../../en/Talk:Debugging/Getting_traces.html">Talk:Debugging/Getting traces</a>)</div>
+</div>
+<p>The first thing to do is to obtain the names of the packages which <a href="#Rebuilding_packages">require rebuilding</a> or the <a href="#Installing_debug_packages">install of a debug package</a>.
+</p>
+<pre>[...]
+Backtrace was generated from '/usr/bin/epiphany'
+
+<b>(no debugging symbols found)</b>
+Using host libthread_db library "<b>/lib/libthread_db.so.1</b>".
+<b>(no debugging symbols found)</b>
+[...]
+</pre>
+<p>For example for the above extract from a trace, the package name for the associated package can be obtained with <a href="../../en/Pacman.html" title="Pacman">pacman</a>:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">$ pacman -Qo /lib/libthread_db.so.1</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">/lib/libthread_db.so.1 is owned by <i>glibc</i> 2.5-8
+</pre>
+<p>The package is called <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=glibc">glibc</a></span> in version 2.5-8. Repeat this step for every package that needs debugging information.
+</p>
+<h3><span class="mw-headline" id="Installing_debug_packages">Installing debug packages</span></h3>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../../File:Tango-view-fullscreen.svg" decoding="async" width="48" height="48" class="mw-file-element"></span></span><b>This article or section needs expansion.</b></p>
+<div>
+<b>Reason:</b> Explain the different scenarios properly. Either you install a debug package or you let <a href="../../en/Debuginfod.html" title="Debuginfod">debuginfod</a> fetch the things it needs? This also states "A few mirrors" but lists only one. (Discuss in <a href="../../en/Talk:Debugging/Getting_traces.html#mirrors_distributing_debug_packages" title="Talk:Debugging/Getting traces">Talk:Debugging/Getting traces#mirrors distributing debug packages</a>)</div>
+</div>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> Debug packages are not archived by Arch Linux on <a href="../../en/Arch_Linux_Archive.html" title="Arch Linux Archive">Arch Linux Archive</a>.</div>
+<p>A few mirrors currently distribute debug packages in accessible repositories. These are sponsored mirrors controlled by Arch Linux and are given access to the debug repositories.
+</p>
+<ul><li>
+<a rel="nofollow" class="external free" href="https://geo.mirror.pkgbuild.com">https://geo.mirror.pkgbuild.com</a> (GeoDNS mirror)</li></ul>
+<p>To install a package you can install it directly from the repository. For example:
+</p>
+<pre># pacman -U https://geo.mirror.pkgbuild.com/core-debug/os/x86_64/<i>zstd-debug-1.5.2-2</i>-x86_64.pkg.tar.zst
+</pre>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Warning:</strong> Debug packages from one <a href="../../en/Mirrors.html" class="mw-redirect" title="Mirror">mirror</a> are not compatible with regular packages from another mirror, if both mirrors are not in sync, and thus have mismatching builds. In this case, avoid mixing packages from different mirrors (this would result in a <a href="../../en/System_maintenance.html#Partial_upgrades_are_unsupported" class="mw-redirect" title="Partial upgrade">partial upgrade</a>), but point all repositories to the <code>debug</code> mirror.</div>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../../File:Merge-arrows-2.svg" decoding="async" width="36" height="40" class="mw-file-element"></span></span><b>This article or section is a candidate for merging with <a href="../../en/Official_repositories.html" title="Official repositories">Official repositories</a>.</b></p>
+<div>
+<b>Notes:</b> Official repositories have a dedicated page (Discuss in <a rel="nofollow" class="external text" href="../../en/Talk:Debugging/Getting_traces.html">Talk:Debugging/Getting traces</a>)</div>
+</div>
+<p>Another option is to add the repositories to your pacman configuration.
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/pacman.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;"># Testing Repositories
+
+[core-testing-debug]
+Include = /etc/pacman.d/mirrorlist
+
+[extra-testing-debug]
+Include = /etc/pacman.d/mirrorlist
+
+[multilib-testing-debug]
+Include = /etc/pacman.d/mirrorlist
+
+# Stable repositories
+
+[core-debug]
+Include = /etc/pacman.d/mirrorlist
+
+[extra-debug]
+Include = /etc/pacman.d/mirrorlist
+
+[multilib-debug]
+Include = /etc/pacman.d/mirrorlist</pre>
+<p>Place a mirror with debug packages as the first one in the mirrorlist file:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/pacman.d/mirrorlist</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">Server = https://geo.mirror.pkgbuild.com/$repo/os/$arch
+...</pre>
+<h3><span class="mw-headline" id="Rebuilding_packages">Rebuilding packages</span></h3>
+<p>If debug information is not exposed through <i>debuginfod</i> (for example, when the package originates from the <a href="../../en/Arch_User_Repository.html" class="mw-redirect" title="AUR">AUR</a>), then it can be rebuilt from source. See <a href="../../en/Arch_build_system.html" class="mw-redirect" title="ABS">ABS</a> for packages in the <a href="../../en/Official_repositories.html" title="Official repositories">official repositories</a>, or <a href="../../en/Arch_User_Repository.html#Acquire_build_files" class="mw-redirect" title="AUR">AUR#Acquire build files</a> for packages in the <a href="../../en/Arch_User_Repository.html" class="mw-redirect" title="AUR">AUR</a>.
+</p>
+<p>To set the required <a href="#Compilation_options">#Compilation options</a>, you can modify the <a href="../../en/Makepkg.html#Configuration" title="Makepkg">makepkg configuration</a> if you will only use <i>makepkg</i> for debug purposes. In other cases, you should modify package's <code>PKGBUILD</code> file only for each package you would like to rebuild.
+</p>
+<h4><span class="mw-headline" id="Compilation_options">Compilation options</span></h4>
+<p>As of pacman 4.1, <span class="plainlinks archwiki-template-man" title="$ man 5 makepkg.conf"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/makepkg.conf.5">makepkg.conf(5)</a></span> has debug compilation flags in <code>DEBUG_CFLAGS</code> and <code>DEBUG_CXXFLAGS</code>. To use them, enable the <code>debug</code> <i>makepkg</i> option, and disable <code>strip</code>.
+</p>
+<p>These settings will force compilation with debug symbols and will disable their stripping from executables. 
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/makepkg.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">OPTIONS+=(debug !strip)</pre>
+<p>To apply this setting to a single package, modify the <code>PKGBUILD</code>:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">PKGBUILD</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">options=(debug !strip)</pre>
+<p>Alternatively you can put the debug information in a separate package by enabling both <code>debug</code> and <code>strip</code>, debug symbols will then be stripped from the main package and placed, together with source files to aid in stepping through the debugger, in a separate <code><i>pkgbase</i>-debug</code> package. This is advantageous if the package contains very large binaries (e.g. over a GB with debug symbols included) as it might cause freezing and other strange, unwanted behavior occurring.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> It is insufficient to simply install the newly compiled debug package, because the debugger will check that the file containing the debug symbols is from the same build as the associated library and executable. You must install both of the recompiled packages. In Arch, the debug symbol files are installed under <code>/usr/lib/debug/</code>, and source files are installed under <code>/usr/src/debug</code>. See the <a rel="nofollow" class="external text" href="https://sourceware.org/gdb/onlinedocs/gdb/Separate-Debug-Files.html">GDB documentation</a> for more information about debug packages.</div>
+<h5><span class="mw-headline" id="glibc">glibc</span></h5>
+<p>Certain packages such as <i>glibc</i> are stripped regardless. Check the <code>PKGBUILD</code> for sections such as:
+</p>
+<pre>strip $STRIP_BINARIES usr/bin/{gencat,getconf,getent,iconv,iconvconfig} \
+                      usr/bin/{ldconfig,locale,localedef,makedb} \
+                      usr/bin/{pcprofiledump,pldd,rpcgen,sln,sprof} \
+                      usr/lib/getconf/*
+
+strip $STRIP_STATIC usr/lib/*.a
+
+strip $STRIP_SHARED usr/lib/{libanl,libBrokenLocale,libcidn,libcrypt}-*.so \
+                    usr/lib/libnss_{compat,db,dns,files,hesiod,nis,nisplus}-*.so \
+                    usr/lib/{libdl,libm,libnsl,libresolv,librt,libutil}-*.so \
+                    usr/lib/{libmemusage,libpcprofile,libSegFault}.so \
+                    usr/lib/{audit,gconv}/*.so
+</pre>
+<p>And remove them where appropriate.
+</p>
+<h5><span class="mw-headline" id="Clang">Clang</span></h5>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../../File:View-refresh-red.svg" decoding="async" width="48" height="48" class="mw-file-element"></span></span><b>This article or section is out of date.</b></p>
+<div>
+<b>Reason:</b> The package that served as a reference is no longer in the repositories, do we have a more recent example? (Discuss in <a rel="nofollow" class="external text" href="../../en/Talk:Debugging/Getting_traces.html">Talk:Debugging/Getting traces</a>)</div>
+</div>
+<p>Packages using <a href="../../en/Clang.html" title="Clang">Clang</a> as the compiler will not build with the <code>debug</code> option due to the debug flag <code>-fvar-tracking-assignments'</code> not being handled (e.g. the previous <a rel="nofollow" class="external text" href="https://gitlab.archlinux.org/archlinux/packaging/packages/js78/-/blob/main/PKGBUILD">js78 PKGBUILD</a>).
+</p>
+<p>Add the following at the top of the <code>build()</code> function to only remove the flag for the affected package: 
+</p>
+<pre>build() {
+  CFLAGS=${CFLAGS/-fvar-tracking-assignments}
+  CXXFLAGS=${CXXFLAGS/-fvar-tracking-assignments}
+[...]</pre>
+<h5><span class="mw-headline" id="LTO">LTO</span></h5>
+<p>Using <a href="https://en.wikipedia.org/wiki/Interprocedural_optimization#WPO_and_LTO" class="extiw" title="w:Interprocedural optimization">Link-time optimization (LTO)</a> will, both during compiling and in a debugger, use more memory<a rel="nofollow" class="external autonumber" href="https://pp.ipd.kit.edu/uploads/publikationen/weinreuter16bachelorarbeit.pdf#section.4.3">[1]</a><a rel="nofollow" class="external autonumber" href="https://sourceware.org/bugzilla/show_bug.cgi?id=23710">[2]</a>. Depending on the application, especially if it is a large one like Firefox or Qt, it might exceed the available memory. Build the application without LTO if this happens.
+</p>
+<p>All packages in the official repositories are generally built with LTO.
+</p>
+<h4><span class="mw-headline" id="Building_and_installing_the_package">Building and installing the package</span></h4>
+<p>Build the package from source using <code>makepkg</code> while in the <code>PKGBUILD</code>'s directory. This could take some time:
+</p>
+<pre>$ makepkg
+</pre>
+<p>Then install the built package:
+</p>
+<pre># pacman -U glibc-2.26-1-x86_64.pkg.tar.gz
+</pre>
+<h2><span class="mw-headline" id="See_also">See also</span></h2>
+<ul>
+<li><a href="https://wiki.debian.org/HowToGetABacktrace" class="extiw" title="debian:HowToGetABacktrace">Debian:HowToGetABacktrace</a></li>
+<li><a href="https://wiki.gentoo.org/wiki/Project:Quality_Assurance/Backtraces" class="extiw" title="gentoo:Project:Quality Assurance/Backtraces">Gentoo:Project:Quality Assurance/Backtraces</a></li>
+<li><a href="https://fedoraproject.org/wiki/StackTraces" class="extiw" title="fedora:StackTraces">Fedora:StackTraces</a></li>
+<li><a rel="nofollow" class="external text" href="https://wiki.gnome.org/GettingInTouch/Bugzilla/GettingTraces/Details#Obtaining_a_stack_trace_.28the_easy_way.29">GNOME - Getting Stack Traces</a></li>
+<li><a rel="nofollow" class="external text" href="https://linux.bytesex.org/gdb.html">gdb mini intro</a></li>
+</ul>
+</div>
+</div>
+					<div id="catlinks" class="catlinks" data-mw="interface">
+<div id="mw-normal-catlinks" class="mw-normal-catlinks">
+<a href="../../Special:Categories.html" title="Special:Categories">Categories</a>: <ul>
+<li><a href="../../en/Category:Package_development.html" title="Category:Package development">Package development</a></li>
+<li><a href="../../en/Category:Development.html" title="Category:Development">Development</a></li>
+</ul>
+</div>
+<div id="mw-hidden-catlinks" class="mw-hidden-catlinks mw-hidden-cats-hidden">Hidden categories: <ul>
+<li><a href="../../en/Category:Pages_or_sections_flagged_with_Template:Out_of_date.html" title="Category:Pages or sections flagged with Template:Out of date">Pages or sections flagged with Template:Out of date</a></li>
+<li><a href="../../en/Category:Pages_or_sections_flagged_with_Template:Expansion.html" title="Category:Pages or sections flagged with Template:Expansion">Pages or sections flagged with Template:Expansion</a></li>
+<li><a href="../../en/Category:Pages_or_sections_flagged_with_Template:Merge.html" title="Category:Pages or sections flagged with Template:Merge">Pages or sections flagged with Template:Merge</a></li>
+</ul>
+</div>
+</div>
+				</div>
+			</main>
+			
+		</div>
+		<div class="mw-footer-container">
+			
+<footer id="footer" class="mw-footer" style="margin: 0">
+	<ul id="footer-info">
+	<li data-nosnippet="">Retrieved from "<a dir="ltr" href="https://wiki.archlinux.org/index.php?title=Debugging/Getting_traces&amp;oldid=829326">https://wiki.archlinux.org/index.php?title=Debugging/Getting_traces&amp;oldid=829326</a>"</li>
+<li id="footer-info-lastmod"> This page was last edited on 17 March 2025, at 14:31.</li>
+	<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+<br>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="https://terms.archlinux.org/docs/privacy-policy/">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="../../en/ArchWiki:About.html">About ArchWiki</a></li>
+	<li id="footer-places-disclaimers"><a href="../../en/ArchWiki:General_disclaimer.html">Disclaimers</a></li>
+	<li id="footer-places-archwiki-code-of-conduct"><a href="https://terms.archlinux.org/docs/code-of-conduct/" class="extiw" title="archlinux-service-agreements:code-of-conduct">Code of conduct</a></li>
+	<li id="footer-places-archwiki-terms-of-service"><a href="https://terms.archlinux.org/docs/terms-of-service/" class="extiw" title="archlinux-service-agreements:terms-of-service">Terms of service</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-copyrightico"><a href="https://www.gnu.org/copyleft/fdl.html" class="cdx-button cdx-button--fake-button cdx-button--size-large cdx-button--fake-button--enabled"><img src="/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" loading="lazy"></a></li>
+	<li id="footer-poweredbyico"><img src="/resources/assets/poweredby_mediawiki.svg" width="88" height="31" loading="lazy"></li>
+</ul>
+
+</footer>
+
+		</div>
+	</div> 
+</div> 
+<div class="vector-settings" id="p-dock-bottom">
+	<ul></ul>
+</div>
+</body>
+</html>

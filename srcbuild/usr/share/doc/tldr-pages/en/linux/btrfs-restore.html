@@ -1,0 +1,39 @@
+<h1>btrfs restore</h1>
+
+<blockquote><p>Try to salvage files from a damaged btrfs filesystem.
+More information: <a href="https://btrfs.readthedocs.io/en/latest/btrfs-restore.html">https://btrfs.readthedocs.io/en/latest/btrfs-restore.html</a>.</p></blockquote>
+
+<ul>
+<li>Restore all files from a btrfs filesystem to a given directory:</li>
+</ul>
+
+
+<p><code>sudo btrfs restore {{path/to/btrfs_device}} {{path/to/target_directory}}</code></p>
+
+<ul>
+<li>List (don&rsquo;t write) files to be restored from a btrfs filesystem:</li>
+</ul>
+
+
+<p><code>sudo btrfs restore {{[-D|--dry-run]}} {{path/to/btrfs_device}} {{path/to/target_directory}}</code></p>
+
+<ul>
+<li>Restore files matching a given regex ([c]ase-insensitive) files to be restored from a btrfs filesystem (all parent directories of target file(s) must match as well):</li>
+</ul>
+
+
+<p><code>sudo btrfs restore --path-regex {{regex}} -c {{path/to/btrfs_device}} {{path/to/target_directory}}</code></p>
+
+<ul>
+<li>Restore files from a btrfs filesystem using a specific root [t]ree <code>bytenr</code> (see <code>btrfs-find-root</code>):</li>
+</ul>
+
+
+<p><code>sudo btrfs restore -t {{bytenr}} {{path/to/btrfs_device}} {{path/to/target_directory}}</code></p>
+
+<ul>
+<li>Restore files from a btrfs filesystem (along with metadata, extended attributes, and Symlinks), overwriting files in the target:</li>
+</ul>
+
+
+<p><code>sudo btrfs restore {{[-m|--metadata]}} {{[-x|--xattr]}} {{[-S|--symlinks]}} {{[-o|--overwrite]}} {{path/to/btrfs_device}} {{path/to/target_directory}}</code></p>

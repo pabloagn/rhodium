@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-sticky-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-0 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-disabled skin-theme-clientpref-day vector-toc-available" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>Music Player Daemon - ArchWiki</title>
+<link rel="stylesheet" href="../ArchWikiOffline.css">
+<meta name="ResourceLoaderDynamicStyles" content="">
+<meta name="generator" content="MediaWiki 1.43.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="max-image-preview:standard">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.25, maximum-scale=5.0">
+<link rel="search" type="application/opensearchdescription+xml" href="/rest.php/v1/search" title="ArchWiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.archlinux.org/api.php?action=rsd">
+<link rel="license" href="https://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="ArchWiki Atom feed" href="/index.php?title=Special:RecentChanges&amp;feed=atom">
+</head>
+<body class="skin--responsive skin-vector skin-vector-search-vue mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Music_Player_Daemon rootpage-Music_Player_Daemon skin-vector-2022 action-view">
+<a class="mw-jump-link" href="#bodyContent">Jump to content</a>
+<div class="vector-header-container">
+	</div>
+<div class="mw-page-container">
+	<div class="mw-page-container-inner">
+		<div class="vector-column-start">
+			<div class="vector-main-menu-container">
+		</div>
+	<div class="vector-sticky-pinned-container">
+				<nav id="mw-panel-toc" aria-label="Contents" data-event-name="ui.sidebar-toc" class="mw-table-of-contents-container vector-toc-landmark">
+					<div id="vector-toc-pinned-container" class="vector-pinned-container">
+					<div id="vector-toc" class="vector-toc vector-pinnable-element">
+	<div class="vector-pinnable-header vector-toc-pinnable-header vector-pinnable-header-pinned" data-feature-name="toc-pinned" data-pinnable-element-id="vector-toc">
+	<h2 class="vector-pinnable-header-label">Contents</h2>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-toc.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-toc.unpin">hide</button>
+</div>
+
+
+	<ul class="vector-toc-contents" id="mw-panel-toc-list">
+		<li id="toc-mw-content-text" class="vector-toc-list-item vector-toc-level-1">
+			<a href="#" class="vector-toc-link">
+				<div class="vector-toc-text">Beginning</div>
+			</a>
+		</li>
+		<li id="toc-Installation" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Installation">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">1</span>
+				<span>Installation</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Installation-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Configuration" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Configuration">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">2</span>
+				<span>Configuration</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Configuration-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Configuration subsection</span>
+			</button>
+		
+		<ul id="toc-Configuration-sublist" class="vector-toc-list">
+			<li id="toc-Per-user_configuration" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Per-user_configuration">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1</span>
+					<span>Per-user configuration</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Per-user_configuration-sublist" class="vector-toc-list">
+				<li id="toc-Configure_the_location_of_files_and_directories" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Configure_the_location_of_files_and_directories">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1.1</span>
+					<span>Configure the location of files and directories</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Configure_the_location_of_files_and_directories-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Audio_configuration" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Audio_configuration">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1.2</span>
+					<span>Audio configuration</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Audio_configuration-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Autostart_with_systemd" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Autostart_with_systemd">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1.3</span>
+					<span>Autostart with systemd</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Autostart_with_systemd-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Autostart_on_tty_login" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Autostart_on_tty_login">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1.4</span>
+					<span>Autostart on tty login</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Autostart_on_tty_login-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Scripted_configuration" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Scripted_configuration">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1.5</span>
+					<span>Scripted configuration</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Scripted_configuration-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-System-wide_configuration" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#System-wide_configuration">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2</span>
+					<span>System-wide configuration</span>
+				</div>
+			</a>
+			
+			<ul id="toc-System-wide_configuration-sublist" class="vector-toc-list">
+				<li id="toc-Music_directory" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Music_directory">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2.1</span>
+					<span>Music directory</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Music_directory-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Start_with_systemd" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Start_with_systemd">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2.2</span>
+					<span>Start with systemd</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Start_with_systemd-sublist" class="vector-toc-list">
+				<li id="toc-Socket_activation" class="vector-toc-list-item vector-toc-level-4">
+			<a class="vector-toc-link" href="#Socket_activation">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2.2.1</span>
+					<span>Socket activation</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Socket_activation-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-User_id_startup_workflow" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#User_id_startup_workflow">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2.3</span>
+					<span>User id startup workflow</span>
+				</div>
+			</a>
+			
+			<ul id="toc-User_id_startup_workflow-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Multi-MPD_setup" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Multi-MPD_setup">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.3</span>
+					<span>Multi-MPD setup</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Multi-MPD_setup-sublist" class="vector-toc-list">
+				<li id="toc-Running_an_Icecast_server" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Running_an_Icecast_server">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.3.1</span>
+					<span>Running an Icecast server</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Running_an_Icecast_server-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Satellite_setup" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Satellite_setup">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.3.2</span>
+					<span>Satellite setup</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Satellite_setup-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Clients" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Clients">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">3</span>
+				<span>Clients</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Clients-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Clients subsection</span>
+			</button>
+		
+		<ul id="toc-Clients-sublist" class="vector-toc-list">
+			<li id="toc-Command-line" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Command-line">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1</span>
+					<span>Command-line</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Command-line-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Console" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Console">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.2</span>
+					<span>Console</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Console-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Graphical" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Graphical">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.3</span>
+					<span>Graphical</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Graphical-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-See_also" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#See_also">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">4</span>
+				<span>See also</span>
+			</div>
+		</a>
+		
+		<ul id="toc-See_also-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+</ul>
+</div>
+
+					</div>
+		</nav>
+			</div>
+		</div>
+		<div class="mw-content-container">
+			<main id="content" class="mw-body" style="margin: 0">
+				<header class="mw-body-header vector-page-titlebar">
+					<nav aria-label="Contents" class="vector-toc-landmark">
+						
+<div id="vector-page-titlebar-toc" class="vector-dropdown vector-page-titlebar-toc vector-button-flush-left">
+	<input type="checkbox" id="vector-page-titlebar-toc-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-page-titlebar-toc" class="vector-dropdown-checkbox " aria-label="Toggle the table of contents">
+	<label id="vector-page-titlebar-toc-label" for="vector-page-titlebar-toc-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"><span class="vector-icon mw-ui-icon-listBullet mw-ui-icon-wikimedia-listBullet"></span>
+
+<span class="vector-dropdown-label-text">Toggle the table of contents</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+							<div id="vector-page-titlebar-toc-unpinned-container" class="vector-unpinned-container">
+			</div>
+		
+	</div>
+</div>
+
+					</nav>
+					<h1 id="firstHeading" class="firstHeading mw-first-heading"><span class="mw-page-title-main">Music Player Daemon</span></h1>
+							
+<div id="p-lang-btn" class="vector-dropdown mw-portlet mw-portlet-lang">
+	<input type="checkbox" id="p-lang-btn-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-p-lang-btn" class="vector-dropdown-checkbox mw-interlanguage-selector" aria-label="Go to an article in another language. Available in 4 languages">
+	<label id="p-lang-btn-label" for="p-lang-btn-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--action-progressive mw-portlet-lang-heading-4" aria-hidden="true"><span class="vector-icon mw-ui-icon-language-progressive mw-ui-icon-wikimedia-language-progressive"></span>
+
+<span class="vector-dropdown-label-text">4 languages</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+		<div class="vector-menu-content">
+			
+			<ul class="vector-menu-content-list">
+				
+				<li class="interlanguage-link interwiki-de mw-list-item"><a href="https://wiki.archlinux.de/title/Music_Player_Daemon" title="Music Player Daemon – Deutsch" lang="de" hreflang="de" data-title="Music Player Daemon" data-language-autonym="Deutsch" data-language-local-name="Deutsch" class="interlanguage-link-target"><span>Deutsch</span></a></li>
+<li class="interlanguage-link interwiki-fr mw-list-item"><a href="../fr/Music_Player_Daemon.html" title="Music Player Daemon – français" lang="fr" hreflang="fr" data-title="Music Player Daemon" data-language-autonym="Français" data-language-local-name="français" class="interlanguage-link-target"><span>Français</span></a></li>
+<li class="interlanguage-link interwiki-ja mw-list-item"><a href="https://wiki.archlinux.jp/index.php/Music_Player_Daemon" title="Music Player Daemon – 日本語" lang="ja" hreflang="ja" data-title="Music Player Daemon" data-language-autonym="日本語" data-language-local-name="日本語" class="interlanguage-link-target"><span>日本語</span></a></li>
+<li class="interlanguage-link interwiki-zh-hans mw-list-item"><a href="https://wiki.archlinuxcn.org/wiki/Music_Player_Daemon" title="Music Player Daemon – 中文（简体）" lang="zh-Hans" hreflang="zh-Hans" data-title="Music Player Daemon" data-language-autonym="中文（简体）" data-language-local-name="中文（简体）" class="interlanguage-link-target"><span>中文（简体）</span></a></li>
+			</ul>
+			
+		</div>
+
+	</div>
+</div>
+</header>
+				<div class="vector-column-end">
+					<div class="vector-sticky-pinned-container">
+						<nav class="vector-page-tools-landmark" aria-label="Page tools">
+							<div id="vector-page-tools-pinned-container" class="vector-pinned-container">
+				
+							</div>
+		</nav>
+						<nav class="vector-appearance-landmark" aria-label="Appearance">
+							<div id="vector-appearance-pinned-container" class="vector-pinned-container">
+				<div id="vector-appearance" class="vector-appearance vector-pinnable-element">
+	<div class="vector-pinnable-header vector-appearance-pinnable-header vector-pinnable-header-pinned" data-feature-name="appearance-pinned" data-pinnable-element-id="vector-appearance" data-pinned-container-id="vector-appearance-pinned-container" data-unpinned-container-id="vector-appearance-unpinned-container">
+	<div class="vector-pinnable-header-label">Appearance</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-appearance.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-appearance.unpin">hide</button>
+</div>
+
+
+</div>
+
+							</div>
+		</nav>
+					</div>
+				</div>
+				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container>
+					<div class="vector-body-before-content">
+							<div class="mw-indicators">
+		</div>
+
+						<div id="siteSub" class="noprint">From ArchWiki</div>
+					</div>
+					<div id="contentSub"><div id="mw-content-subtitle"></div></div>
+					
+					
+					<div id="mw-content-text" class="mw-body-content">
+<div class="mw-content-ltr mw-parser-output" lang="en" dir="ltr">
+<div class="archwiki-template-meta-related-articles">
+<p>Related articles</p>
+<ul>
+<li><a href="../en/Music_Player_Daemon/Tips_and_tricks.html" class="mw-redirect" title="MPD/Tips and Tricks">MPD/Tips and Tricks</a></li>
+<li><a href="../en/Music_Player_Daemon/Troubleshooting.html" class="mw-redirect" title="MPD/Troubleshooting">MPD/Troubleshooting</a></li>
+</ul>
+</div>
+<p><b><a rel="nofollow" class="external text" href="https://www.musicpd.org/">MPD</a></b> (music player daemon) is an audio player that has a server-client architecture.  It plays audio files, organizes playlists and maintains a music database, all while using  very few resources. In order to interface with it, a separate <a href="#Clients">client</a> is needed.
+</p>
+<meta property="mw:PageProp/toc">
+<h2><span class="mw-headline" id="Installation">Installation</span></h2>
+<p><a href="../en/Help:Reading.html#Installation_of_packages" class="mw-redirect" title="Install">Install</a> the <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=mpd">mpd</a></span> package, or <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/mpd-git/">mpd-git</a></span><sup><small>AUR</small></sup> for the development version.
+</p>
+<h2><span class="mw-headline" id="Configuration">Configuration</span></h2>
+<p>MPD is able to run in <a href="#Per-user_configuration">#Per-user configuration</a> or <a href="#System-wide_configuration">#System-wide configuration</a> mode (settings apply to all users). Also it is possible to run multiple instances of MPD in a <a href="#Multi-MPD_setup">#Multi-MPD setup</a>.
+The way of setting up MPD depends on the way it is intended to be used: a local per-user configuration is easier to set up and may prove more adapted on a desktop system. The system-wide setup might be better suited for a always-on audio server with multiple users but a shared MPD instance.
+</p>
+<p>In order for MPD to be able to playback audio, <a href="../en/Advanced_Linux_Sound_Architecture.html" class="mw-redirect" title="ALSA">ALSA</a>, optionally with <a href="../en/PulseAudio.html" title="PulseAudio">PulseAudio</a> or <a href="../en/PipeWire.html" title="PipeWire">PipeWire</a>, must be set up and working. The <a href="#Audio_configuration">#Audio configuration</a> section thereafter describes the parameters needed for <i>ALSA</i>, <i>PulseAudio</i> or <i>PipeWire</i>.
+</p>
+<p>MPD is configured in the file <span class="plainlinks archwiki-template-man" title="$ man 5 mpd.conf"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/mpd.conf.5">mpd.conf(5)</a></span> which can be located in various paths depending on the setup chosen (system-wide or per-user). In short, the two common locations used are:
+</p>
+<ol>
+<li>
+<code>~/.config/mpd/mpd.conf</code> in per-user configuration mode, this is the first location searched,</li>
+<li>
+<code>/etc/mpd.conf</code> in system-wide configuration.</li>
+</ol>
+<p>These are some of the most commonly used configuration options:
+</p>
+<ul>
+<li>
+<code>pid_file</code> -  The file where MPD stores its process ID</li>
+<li>
+<code>db_file</code> - The music database</li>
+<li>
+<code>state_file</code> - MPD's current state is noted here</li>
+<li>
+<code>playlist_directory</code> - The directory where playlists are saved into</li>
+<li>
+<code>music_directory</code> - The directory that MPD scans for music</li>
+<li>
+<code>sticker_file</code> - The sticker database</li>
+</ul>
+<h3><span class="mw-headline" id="Per-user_configuration">Per-user configuration</span></h3>
+<p>MPD can be configured per-user. Running it as a normal user has the benefits of:
+</p>
+<ul>
+<li>Regrouping into one single directory <code>~/.config/mpd/</code> (or any other directory under <code>$HOME</code>) all the MPD configuration files.</li>
+<li>Avoiding unforeseen directory and file permission errors.</li>
+</ul>
+<h4><span class="mw-headline" id="Configure_the_location_of_files_and_directories">Configure the location of files and directories</span></h4>
+<p>In user mode, the configuration is read from <code>$XDG_CONFIG_HOME/mpd/mpd.conf</code>.
+We will assume here <code>$XDG_CONFIG_HOME</code> equals the <a rel="nofollow" class="external text" href="https://specifications.freedesktop.org/basedir-spec/latest/">default</a> of <code>~/.config</code>.
+</p>
+<p>To build the user configuration, the <a rel="nofollow" class="external text" href="https://raw.githubusercontent.com/MusicPlayerDaemon/MPD/master/doc/mpdconf.example">MPD configuration example</a> included in the package is a good starting point, copy it using the following lines:
+</p>
+<pre>$ mkdir -p ~/.config/mpd
+$ cp /usr/share/doc/mpd/mpdconf.example ~/.config/mpd/mpd.conf
+</pre>
+<p>A good practice is to use this newly created <code>~/.config/mpd/</code> directory to store, together with the configuration file, other MPD related files like the database or the playlists. The user must have read write access to this directory.
+</p>
+<p>Then edit the configuration file in order to specify the required and optional files and directories:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">~/.config/mpd/mpd.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;"># Recommended location for database
+db_file            "~/.config/mpd/database"
+
+# If running mpd using systemd, delete this line to log directly to systemd.
+log_file           "syslog"
+
+# The music directory is by default the XDG directory, uncomment to amend and choose a different directory
+#music_directory    "~/music"
+
+# Uncomment to refresh the database whenever files in the music_directory are changed
+#auto_update "yes"
+
+# Uncomment to enable the functionalities
+#playlist_directory "~/.config/mpd/playlists"
+#pid_file           "~/.config/mpd/pid"
+#state_file         "~/.local/state/mpd/state"
+#sticker_file       "~/.config/mpd/sticker.sql"
+</pre>
+<p>If playlists are enabled in the configuration, the specified playlist directory must be created:
+</p>
+<pre>$ mkdir ~/.config/mpd/playlists
+</pre>
+<p>If <code>state_file</code> is set, the specified directory must be created:
+</p>
+<pre>$ mkdir -p ~/.local/state/mpd
+</pre>
+<p>MPD can now be started (an optional custom location for the configuration file can be specified):
+</p>
+<pre>$ mpd <i>[config_file]</i>
+</pre>
+<p>In order to build the database file, MPD must scan into the <code>music_directory</code> defined above. To request this task, one of the MPD <a href="#Clients">clients</a> must be used. For example with <i>mpc</i> the command is:
+</p>
+<pre>$ mpc update
+</pre>
+<p>or alternatively one can set the option <code>auto_update</code> to <code>"yes"</code> in the configuration to refresh the database whenever files are changed in <code>music_directory</code>.
+</p>
+<h4><span class="mw-headline" id="Audio_configuration">Audio configuration</span></h4>
+<p>If <a href="../en/Advanced_Linux_Sound_Architecture.html" class="mw-redirect" title="ALSA">ALSA</a> is used, <b>autodetection</b> of the default device should work out of the box without any particular setting. If not, the syntax for ALSA audio output definition is provided thereafter; the required <code>name</code> parameter specifies a unique name for the audio output.
+The exact device as displayed using <code>aplay --list-pcm</code> from the package <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=alsa-utils">alsa-utils</a></span> can optionally be indicated with the <code>device</code> option.
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">~/.config/mpd/mpd.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">audio_output {
+        type          "alsa"
+        name          "<i>ALSA sound card</i>"
+        # Optional
+        #device        "<i>iec958:CARD=Intel,DEV=0</i>"
+        #mixer_control "PCM"
+}</pre>
+<p>Users of <a href="../en/PulseAudio.html" title="PulseAudio">PulseAudio</a> will need to make the following modification:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">~/.config/mpd/mpd.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">audio_output {
+        type            "pulse"
+        name            "<i>pulse audio</i>"
+}</pre>
+<p>Output with <a href="../en/PipeWire.html" title="PipeWire">PipeWire</a> can also be configured:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">~/.config/mpd/mpd.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">audio_output {
+        type            "pipewire"
+        name            "<i>PipeWire Sound Server</i>"
+}</pre>
+<h4><span class="mw-headline" id="Autostart_with_systemd">Autostart with systemd</span></h4>
+<p>The <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=mpd">mpd</a></span> package provides a <a href="../en/Systemd/User.html" title="Systemd/User">user service</a> file. The service starts the process as user, there is no need to change permission nor use the <code>user</code> and <code>group</code> variables in the MPD configuration file.
+</p>
+<p><a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Start/enable">Start/enable</a> the user unit <code>mpd.service</code> (i.e. with the <code>--user</code> flag).
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> The configuration file is read from <code>~/.config/mpd/mpd.conf</code>, see <a href="../en/Systemd.html#Editing_provided_units" title="Systemd">systemd#Editing provided units</a> if you would like to indicate a custom configuration file path.</div>
+<h4><span class="mw-headline" id="Autostart_on_tty_login">Autostart on tty login</span></h4>
+<p>To start MPD on login add the following to <code>~/.profile</code> or another <a href="../en/Autostarting.html" title="Autostarting">autostart file</a>:
+</p>
+<pre># MPD daemon start (if no other user instance exists)
+[ ! -s ~/.config/mpd/pid ] &amp;&amp; mpd
+</pre>
+<h4><span class="mw-headline" id="Scripted_configuration">Scripted configuration</span></h4>
+<p>The <a rel="nofollow" class="external text" href="https://gitlab.com/sonida/mpd-configure">mpd-configure</a> tool creates a MPD configuration optimized for <a rel="nofollow" class="external text" href="https://www.musicpd.org/doc/user/advanced_usage.html#bit_perfect">bit perfect</a> audio playback, without any resampling or conversion, using the ALSA interface hardware address (hw:x,y).
+</p>
+<h3><span class="mw-headline" id="System-wide_configuration">System-wide configuration</span></h3>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> Users of PulseAudio with a system-wide MPD configuration have to implement a <a href="../en/Music_Player_Daemon/Tips_and_tricks.html#Local_(with_separate_mpd_user)" title="Music Player Daemon/Tips and tricks">workaround</a> in order to run MPD as its own user!</div>
+<p>The default <code>/etc/mpd.conf</code> keeps the setup in <code>/var/lib/mpd</code> which is assigned to user as well as primary group MPD.
+</p>
+<h4><span class="mw-headline" id="Music_directory">Music directory</span></h4>
+<p>The music directory is defined by the option <code>music_directory</code> in the configuration file <code>/etc/mpd.conf</code>.
+</p>
+<p>MPD needs to have execute permission on <i>all</i> parent directories of the music collection and also read access to all directories containing music files. This may conflict with the default configuration of the user directory, like <code>~/Music</code>, where the music is stored.
+</p>
+<p>While there are several solutions to this issue, one of these should be most practical:
+</p>
+<ul>
+<li>Switch to the <a href="#Per-user_configuration">#Per-user configuration</a> mode instead</li>
+<li>Add the <code>mpd</code> user to the user's group and grant group execute permission to the user directory. This way the <code>mpd</code> user has permission to open the user directory:</li>
+</ul>
+<pre># gpasswd -a mpd <i>user_group_name</i>
+$ chmod 710 /home/<i>user_directory</i>
+</pre>
+<ul><li>Store the music collection in a different path, either:
+<ul>
+<li>by moving it entirely,</li>
+<li>with a bind mount,</li>
+<li>or with <a href="../en/Btrfs.html#Subvolumes" title="Btrfs">Btrfs#Subvolumes</a> (you should make this change persistent with an entry to <code>/etc/fstab</code> ).</li>
+</ul>
+</li></ul>
+<p>The MPD configuration file must define only one music directory. If the music collection is contained under multiple directories, create symbolic links under the main music directory in <code>/var/lib/mpd</code>. Remember to set permissions accordingly on the directories being linked.
+</p>
+<p>To exclude a file - or files - from the update, create a file called <code>.mpdignore</code> in its parent directory. Each line of that file may contain a list of shell wildcards. Matching files in the current directory and all subdirectories are then excluded from subsequent updates.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> MPD is capable of reading music files within some archive file formats, and will add those during an update if they are in the music directory; tar is known to be an exception.</div>
+<h4><span class="mw-headline" id="Start_with_systemd">Start with systemd</span></h4>
+<p>MPD can be controlled with <code>mpd.service</code> <a href="../en/Systemd.html#Using_units" title="Systemd">using systemd</a>. The first startup can take some time as MPD will scan your music directory.
+</p>
+<p>Test everything by starting a client application (<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=ncmpc">ncmpc</a></span> is a light and easy to use client), and play some music!
+</p>
+<h5><span class="mw-headline" id="Socket_activation">Socket activation</span></h5>
+<p><span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=mpd">mpd</a></span> provides a <code>mpd.socket</code> unit. If <code>mpd.socket</code> is enabled (and <code>mpd.service</code> is disabled), systemd will not start MPD immediately, it will just listen to the appropriate sockets. Then, whenever an MPD client attempts to connect to one of these sockets, systemd will start <code>mpd.service</code> and transparently hand over control of these ports to the MPD process.
+</p>
+<p>If you prefer to listen to different UNIX sockets or network ports (even multiple sockets of each type), or if you prefer not to listen to network ports at all, <a href="../en/Systemd.html#Editing_provided_units" class="mw-redirect" title="Edit">edit</a> the <code>mpd.socket</code> unit appropriately <b>and</b> modify <code>/etc/mpd.conf</code> to match the configuration (see <span class="plainlinks archwiki-template-man" title="$ man 5 mpd.conf"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/mpd.conf.5">mpd.conf(5)</a></span> for details).
+</p>
+<h4><span class="mw-headline" id="User_id_startup_workflow">User id startup workflow</span></h4>
+<p>MPD should never run as <i>root</i>; you may use the <code>user</code> option in the configuration to make MPD change its user id after initialization. Do not use this option if you start MPD as an unprivileged user.
+To describe how MPD drops its superuser privileges and switch to those of the user set in the configuration, the steps of a normal MPD startup are listed thereafter:
+</p>
+<ol>
+<li>Since MPD is started as <i>root</i> by systemd, it first reads the <code>/etc/mpd.conf</code> file.</li>
+<li>MPD reads the <code>user</code> variable in the configuration, and changes from <i>root</i> to this user.</li>
+<li>MPD then reads the rest of the configuration file and configures itself accordingly. Uses of <code>~</code> in the configuration file points to the home user's directory, and not root's directory.</li>
+</ol>
+<h3><span class="mw-headline" id="Multi-MPD_setup">Multi-MPD setup</span></h3>
+<h4><span class="mw-headline" id="Running_an_Icecast_server">Running an Icecast server</span></h4>
+<p>For a second MPD (e.g. with <a href="../en/Icecast.html" title="Icecast">Icecast</a> output to share music over the network) using the same music and playlist as the one above, simply copy the above configuration file and make a new file (e.g., <code>/home/username/.mpd/config-icecast</code>), and only change the <code>log_file</code>, <code>error_file</code>, <code>pid_file</code>, and <code>state_file</code> parameters (e.g. <code>mpd-icecast.log</code>, <code>mpd-icecast.error</code>, and so on). Using the same directory paths for the music and playlist directories would ensure that this second MPD uses the same music collection as the first one, e.g. creating and editing a playlist under the first daemon would affect the second daemon as well. Users do not have to create the same playlists all over again for the second daemon. Call this second daemon the same way from <code>~/.xinitrc</code> above - but be sure to have a different port number, avoiding a conflict with the first MPD daemon.
+</p>
+<h4><span class="mw-headline" id="Satellite_setup">Satellite setup</span></h4>
+<p>The method described in <a href="#Running_an_Icecast_server">#Running an Icecast server</a> works, but at least in theory could lead to issues with the database, when both MPD instances try to write to the same database file concurrently. MPD has a <a rel="nofollow" class="external text" href="https://www.musicpd.org/doc/user/advanced_config.html#satellite">satellite mode</a> where one instance can receive the database from an already running MPD instance.
+</p>
+<p>In your <code>config-icecast</code> add this, where host and port reflect your primary MPD server:
+</p>
+<pre>database {
+    plugin "proxy"
+    host "localhost"
+    port "6600"
+}
+</pre>
+<h2><span class="mw-headline" id="Clients">Clients</span></h2>
+<p>A separate client is needed to control MPD. See a long list of clients at the <a rel="nofollow" class="external text" href="https://www.musicpd.org/clients/">mpd website</a>. Popular options are:
+</p>
+<h3><span class="mw-headline" id="Command-line">Command-line</span></h3>
+<ul><li>
+<b>mpc</b> — Command line user interface for MPD server written in C.</li></ul>
+<dl><dd>
+<a rel="nofollow" class="external free" href="https://www.musicpd.org/clients/mpc/">https://www.musicpd.org/clients/mpc/</a> || <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=mpc">mpc</a></span>
+</dd></dl>
+<h3><span class="mw-headline" id="Console">Console</span></h3>
+<ul><li>
+<b>clerk</b> — MPD client using <a href="../en/Rofi.html" title="Rofi">Rofi</a>.</li></ul>
+<dl><dd>
+<a rel="nofollow" class="external free" href="https://github.com/carnager/clerk">https://github.com/carnager/clerk</a> || <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/clerk-git/">clerk-git</a></span><sup><small>AUR</small></sup>
+</dd></dl>
+<ul><li>
+<b>gomp</b> — MPD client inspired by ncmpcpp with builtin cover-art view and LastFM integration.</li></ul>
+<dl><dd>
+<a rel="nofollow" class="external free" href="https://github.com/aditya-K2/gomp">https://github.com/aditya-K2/gomp</a> || <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/gomp-git/">gomp-git</a></span><sup><small>AUR</small></sup>
+</dd></dl>
+<ul><li>
+<b>inori</b> — MPD client with a folding library view and effective searching.</li></ul>
+<dl><dd>
+<a rel="nofollow" class="external free" href="https://github.com/eshrh/inori">https://github.com/eshrh/inori</a> || <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/inori/">inori</a></span><sup><small>AUR</small></sup>
+</dd></dl>
+<ul><li>
+<b>mmtc</b> — Minimal mpd terminal client that aims to be simple yet highly configurable.</li></ul>
+<dl><dd>
+<a rel="nofollow" class="external free" href="https://github.com/figsoda/mmtc">https://github.com/figsoda/mmtc</a> || <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/mmtc/">mmtc</a></span><sup><small>AUR</small></sup>
+</dd></dl>
+<ul><li>
+<b>ncmpc</b> — Ncurses client for MPD written in C++.</li></ul>
+<dl><dd>
+<a rel="nofollow" class="external free" href="https://www.musicpd.org/clients/ncmpc/">https://www.musicpd.org/clients/ncmpc/</a> || <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=ncmpc">ncmpc</a></span>
+</dd></dl>
+<ul><li>
+<b><a href="../en/Ncmpcpp.html" title="Ncmpcpp">ncmpcpp</a></b> — Almost exact clone of <i>ncmpc</i>, written in C++ with some additional features (tag editor, search engine).</li></ul>
+<dl><dd>
+<a rel="nofollow" class="external free" href="https://rybczak.net/ncmpcpp/">https://rybczak.net/ncmpcpp/</a> || <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=ncmpcpp">ncmpcpp</a></span>
+</dd></dl>
+<ul><li>
+<b>ncmpy</b> — Curses-based MPD client written in Python.</li></ul>
+<dl><dd>
+<a rel="nofollow" class="external free" href="https://repo.cykerway.com/ncmpy">https://repo.cykerway.com/ncmpy</a> || <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/ncmpy/">ncmpy</a></span><sup><small>AUR</small></sup>
+</dd></dl>
+<ul><li>
+<b>nncmpp</b> — Yet another MPD client. It is in effect a simplified TUI version of Sonata.</li></ul>
+<dl><dd>
+<a rel="nofollow" class="external free" href="https://git.janouch.name/p/nncmpp/">https://git.janouch.name/p/nncmpp/</a> || <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/nncmpp-git/">nncmpp-git</a></span><sup><small>AUR</small></sup>
+</dd></dl>
+<ul><li>
+<b>pms</b> — Highly configurable and accessible ncurses client written in Go.</li></ul>
+<dl><dd>
+<a rel="nofollow" class="external free" href="https://github.com/kimtore/pms">https://github.com/kimtore/pms</a> || <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/pmus-git/">pmus-git</a></span><sup><small>AUR</small></sup>
+</dd></dl>
+<ul><li>
+<b>rmpc</b> — A configurable MPD client inspired by ncmpcpp and ranger with album art support via various graphics protocols.</li></ul>
+<dl><dd>
+<a rel="nofollow" class="external free" href="https://mierak.github.io/rmpc/">https://mierak.github.io/rmpc/</a> || <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=rmpc">rmpc</a></span>
+</dd></dl>
+<ul><li>
+<b>vimpc</b> — Ncurses based MPD client with vi-like key bindings.</li></ul>
+<dl><dd>
+<a rel="nofollow" class="external free" href="https://github.com/boysetsfrog/vimpc">https://github.com/boysetsfrog/vimpc</a> || <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/vimpc-git/">vimpc-git</a></span><sup><small>AUR</small></sup>
+</dd></dl>
+<h3><span class="mw-headline" id="Graphical">Graphical</span></h3>
+<ul><li>
+<b>Ario</b> — Very feature-rich GTK3 GUI client for MPD, inspired by <a href="../en/Rhythmbox.html" title="Rhythmbox">Rhythmbox</a>.</li></ul>
+<dl><dd>
+<a rel="nofollow" class="external free" href="https://ario-player.sourceforge.net/">https://ario-player.sourceforge.net/</a> || <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=ario">ario</a></span>
+</dd></dl>
+<ul><li>
+<b>Cantata</b> — Unmaintained high-feature, Qt5 client for MPD with very configurable interface.</li></ul>
+<dl><dd>
+<a rel="nofollow" class="external free" href="https://github.com/CDrummond/cantata">https://github.com/CDrummond/cantata</a> || <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/cantata/">cantata</a></span><sup><small>AUR</small></sup>
+</dd></dl>
+<ul><li>
+<b>CoverGrid</b> — GTK3 GUI client focusing on albums instead of single tracks.</li></ul>
+<dl><dd>
+<a rel="nofollow" class="external free" href="https://www.suruatoel.xyz/codes/mcg">https://www.suruatoel.xyz/codes/mcg</a> || <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/mcg/">mcg</a></span><sup><small>AUR</small></sup>
+</dd></dl>
+<ul><li>
+<b>Plattenalbum</b> — A modern and small GTK4 MPD client written in python.</li></ul>
+<dl><dd>
+<a rel="nofollow" class="external free" href="https://github.com/SoongNoonien/plattenalbum">https://github.com/SoongNoonien/plattenalbum</a> || <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/plattenalbum/">plattenalbum</a></span><sup><small>AUR</small></sup>
+</dd></dl>
+<ul><li>
+<b>QMPDClient</b> — Qt5 GUI client.</li></ul>
+<dl><dd>
+<a rel="nofollow" class="external free" href="https://bitcheese.net/QMPDClient/">https://bitcheese.net/QMPDClient/</a> || <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/qmpdclient/">qmpdclient</a></span><sup><small>AUR</small></sup>
+</dd></dl>
+<ul><li>
+<b>Quimup</b> — Simple Qt5 frontend for MPD written in C++.</li></ul>
+<dl><dd>
+<a rel="nofollow" class="external free" href="https://sourceforge.net/projects/quimup/">https://sourceforge.net/projects/quimup/</a> || <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/quimup/">quimup</a></span><sup><small>AUR</small></sup>
+</dd></dl>
+<ul><li>
+<b>RompЯ</b> — Web client for MPD.</li></ul>
+<dl><dd>
+<a rel="nofollow" class="external free" href="https://fatg3erman.github.io/RompR/">https://fatg3erman.github.io/RompR/</a> || <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/rompr/">rompr</a></span><sup><small>AUR</small></sup>
+</dd></dl>
+<ul><li>
+<b>SkyMPC</b> — Simple MPD client, powered by Qt5.</li></ul>
+<dl><dd>
+<a rel="nofollow" class="external free" href="https://github.com/soramimi/SkyMPC">https://github.com/soramimi/SkyMPC</a> || <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/skympc-git/">skympc-git</a></span><sup><small>AUR</small></sup>
+</dd></dl>
+<ul><li>
+<b>Sonata</b> — Elegant Python GTK client.</li></ul>
+<dl><dd>
+<a rel="nofollow" class="external free" href="https://www.nongnu.org/sonata/">https://www.nongnu.org/sonata/</a> || <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/sonata-git/">sonata-git</a></span><sup><small>AUR</small></sup>
+</dd></dl>
+<ul><li>
+<b>Xfce MPD Panel Plugin</b> — MPD plugin for <a href="../en/Xfce.html" title="Xfce">Xfce</a>4 panel.</li></ul>
+<dl><dd>
+<a rel="nofollow" class="external free" href="https://goodies.xfce.org/projects/panel-plugins/xfce4-mpc-plugin">https://goodies.xfce.org/projects/panel-plugins/xfce4-mpc-plugin</a> || <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=xfce4-mpc-plugin">xfce4-mpc-plugin</a></span>
+</dd></dl>
+<ul><li>
+<b>Xfmpc</b> — Graphical GTK MPD client focusing on low footprint.</li></ul>
+<dl><dd>
+<a rel="nofollow" class="external free" href="https://goodies.xfce.org/projects/applications/xfmpc">https://goodies.xfce.org/projects/applications/xfmpc</a> || <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=xfmpc">xfmpc</a></span>
+</dd></dl>
+<ul><li>
+<b>ympd</b> — Standalone MPD Web GUI written in C, utilizing Websockets and Bootstrap/JS.</li></ul>
+<dl><dd>
+<a rel="nofollow" class="external free" href="https://ympd.org/">https://ympd.org/</a> || <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/ympd/">ympd</a></span><sup><small>AUR</small></sup>
+</dd></dl>
+<ul><li>
+<b>Ymuse</b> — Easy, functional and snappy GTK front-end (client) for Music Player Daemon written in Go.</li></ul>
+<dl><dd>
+<a rel="nofollow" class="external free" href="https://yktoo.com/en/software/ymuse/">https://yktoo.com/en/software/ymuse/</a> || <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/ymuse/">ymuse</a></span><sup><small>AUR</small></sup>
+</dd></dl>
+<h2><span class="mw-headline" id="See_also">See also</span></h2>
+<ul>
+<li><a rel="nofollow" class="external text" href="https://forum.musicpd.org/">MPD Forum</a></li>
+<li><a rel="nofollow" class="external text" href="https://www.musicpd.org/doc/user/">MPD User Manual</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Music_Player_Daemon" class="extiw" title="wikipedia:Music Player Daemon">MPD Wikipedia article</a></li>
+<li><a rel="nofollow" class="external text" href="https://github.com/MusicPlayerDaemon/MPD">MPD GitHub repository</a></li>
+<li>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=mopidy">mopidy</a></span> is an alternative to MPD written in Python. Note it is not a complete MPD replacement, its advantage is that it has plug-ins for playing music from cloud services like Spotify, SoundCloud, and Google Play Music.</li>
+</ul>
+</div>
+</div>
+					<div id="catlinks" class="catlinks" data-mw="interface"><div id="mw-normal-catlinks" class="mw-normal-catlinks">
+<a href="../Special:Categories.html" title="Special:Categories">Category</a>: <ul><li><a href="../en/Category:Music.html" title="Category:Music">Music</a></li></ul>
+</div></div>
+				</div>
+			</main>
+			
+		</div>
+		<div class="mw-footer-container">
+			
+<footer id="footer" class="mw-footer" style="margin: 0">
+	<ul id="footer-info">
+	<li data-nosnippet="">Retrieved from "<a dir="ltr" href="https://wiki.archlinux.org/index.php?title=Music_Player_Daemon&amp;oldid=829773">https://wiki.archlinux.org/index.php?title=Music_Player_Daemon&amp;oldid=829773</a>"</li>
+<li id="footer-info-lastmod"> This page was last edited on 24 March 2025, at 20:00.</li>
+	<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+<br>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="https://terms.archlinux.org/docs/privacy-policy/">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="../en/ArchWiki:About.html">About ArchWiki</a></li>
+	<li id="footer-places-disclaimers"><a href="../en/ArchWiki:General_disclaimer.html">Disclaimers</a></li>
+	<li id="footer-places-archwiki-code-of-conduct"><a href="https://terms.archlinux.org/docs/code-of-conduct/" class="extiw" title="archlinux-service-agreements:code-of-conduct">Code of conduct</a></li>
+	<li id="footer-places-archwiki-terms-of-service"><a href="https://terms.archlinux.org/docs/terms-of-service/" class="extiw" title="archlinux-service-agreements:terms-of-service">Terms of service</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-copyrightico"><a href="https://www.gnu.org/copyleft/fdl.html" class="cdx-button cdx-button--fake-button cdx-button--size-large cdx-button--fake-button--enabled"><img src="/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" loading="lazy"></a></li>
+	<li id="footer-poweredbyico"><img src="/resources/assets/poweredby_mediawiki.svg" width="88" height="31" loading="lazy"></li>
+</ul>
+
+</footer>
+
+		</div>
+	</div> 
+</div> 
+<div class="vector-settings" id="p-dock-bottom">
+	<ul></ul>
+</div>
+</body>
+</html>

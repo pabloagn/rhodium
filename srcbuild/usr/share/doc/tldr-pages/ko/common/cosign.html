@@ -1,0 +1,60 @@
+<h1>cosign</h1>
+
+<blockquote><p>OCI 레지스트리의 컨테이너 서명, 검증 및 저장.
+더 많은 정보: <a href="https://github.com/sigstore/cosign">https://github.com/sigstore/cosign</a>.</p></blockquote>
+
+<ul>
+<li>키의 쌍을 생성:</li>
+</ul>
+
+
+<p><code>cosign generate-key-pair</code></p>
+
+<ul>
+<li>컨테이너에 서명하고 레지스트리에 서명을 저장:</li>
+</ul>
+
+
+<p><code>cosign sign -key {{cosign.key}} {{이미지}}</code></p>
+
+<ul>
+<li>Kubernetes 비밀에 저장된 키 쌍을 사용하여 컨테이너 이미지에 서명:</li>
+</ul>
+
+
+<p><code>cosign sign -key k8s://{{네임스페이스}}/{{키}} {{이미지}}</code></p>
+
+<ul>
+<li>로컬 키 쌍 파일로 blob에 서명:</li>
+</ul>
+
+
+<p><code>cosign sign-blob --key {{cosign.key}} {{경로/대상/파일}}</code></p>
+
+<ul>
+<li>공개 키에 대해 컨테이너를 확인:</li>
+</ul>
+
+
+<p><code>cosign verify -key {{cosign.pub}} {{이미지}}</code></p>
+
+<ul>
+<li>Dockerfile의 공개 키로 이미지를 확인:</li>
+</ul>
+
+
+<p><code>cosign dockerfile verify -key {{cosign.pub}} {{경로/대상/Dockerfile}}</code></p>
+
+<ul>
+<li>Kubernetes 비밀에 저장된 공개 키로 이미지를 확인:</li>
+</ul>
+
+
+<p><code>cosign verify -key k8s://{{네임스페이스}}/{{key}} {{이미지}}</code></p>
+
+<ul>
+<li>컨테이너 이미지와 해당 서명을 복사:</li>
+</ul>
+
+
+<p><code>cosign copy {{example.com/src:latest}} {{example.com/dest:latest}}</code></p>

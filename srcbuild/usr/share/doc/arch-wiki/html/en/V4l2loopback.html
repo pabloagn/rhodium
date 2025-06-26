@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-sticky-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-0 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-disabled skin-theme-clientpref-day vector-toc-available" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>v4l2loopback - ArchWiki</title>
+<link rel="stylesheet" href="../ArchWikiOffline.css">
+<meta name="ResourceLoaderDynamicStyles" content="">
+<meta name="generator" content="MediaWiki 1.43.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="max-image-preview:standard">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.25, maximum-scale=5.0">
+<link rel="search" type="application/opensearchdescription+xml" href="/rest.php/v1/search" title="ArchWiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.archlinux.org/api.php?action=rsd">
+<link rel="license" href="https://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="ArchWiki Atom feed" href="/index.php?title=Special:RecentChanges&amp;feed=atom">
+</head>
+<body class="skin--responsive skin-vector skin-vector-search-vue mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-V4l2loopback rootpage-V4l2loopback skin-vector-2022 action-view">
+<a class="mw-jump-link" href="#bodyContent">Jump to content</a>
+<div class="vector-header-container">
+	</div>
+<div class="mw-page-container">
+	<div class="mw-page-container-inner">
+		<div class="vector-column-start">
+			<div class="vector-main-menu-container">
+		</div>
+	<div class="vector-sticky-pinned-container">
+				<nav id="mw-panel-toc" aria-label="Contents" data-event-name="ui.sidebar-toc" class="mw-table-of-contents-container vector-toc-landmark">
+					<div id="vector-toc-pinned-container" class="vector-pinned-container">
+					<div id="vector-toc" class="vector-toc vector-pinnable-element">
+	<div class="vector-pinnable-header vector-toc-pinnable-header vector-pinnable-header-pinned" data-feature-name="toc-pinned" data-pinnable-element-id="vector-toc">
+	<h2 class="vector-pinnable-header-label">Contents</h2>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-toc.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-toc.unpin">hide</button>
+</div>
+
+
+	<ul class="vector-toc-contents" id="mw-panel-toc-list">
+		<li id="toc-mw-content-text" class="vector-toc-list-item vector-toc-level-1">
+			<a href="#" class="vector-toc-link">
+				<div class="vector-toc-text">Beginning</div>
+			</a>
+		</li>
+		<li id="toc-Installation" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Installation">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">1</span>
+				<span>Installation</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Installation-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Loading_the_kernel_module" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Loading_the_kernel_module">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">2</span>
+				<span>Loading the kernel module</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Loading_the_kernel_module-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Viewing_a_v4l2loopback_video_feed" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Viewing_a_v4l2loopback_video_feed">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">3</span>
+				<span>Viewing a v4l2loopback video feed</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Viewing_a_v4l2loopback_video_feed-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Use_cases" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Use_cases">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">4</span>
+				<span>Use cases</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Use_cases-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Use cases subsection</span>
+			</button>
+		
+		<ul id="toc-Use_cases-sublist" class="vector-toc-list">
+			<li id="toc-Screen_casting" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Screen_casting">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.1</span>
+					<span>Screen casting</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Screen_casting-sublist" class="vector-toc-list">
+				<li id="toc-Casting_X11_using_FFmpeg" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Casting_X11_using_FFmpeg">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.1.1</span>
+					<span>Casting X11 using FFmpeg</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Casting_X11_using_FFmpeg-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Casting_Wayland_using_wf-recorder" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Casting_Wayland_using_wf-recorder">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.1.2</span>
+					<span>Casting Wayland using wf-recorder</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Casting_Wayland_using_wf-recorder-sublist" class="vector-toc-list">
+				<li id="toc-Screen_casting_only_a_specific_region" class="vector-toc-list-item vector-toc-level-4">
+			<a class="vector-toc-link" href="#Screen_casting_only_a_specific_region">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.1.2.1</span>
+					<span>Screen casting only a specific region</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Screen_casting_only_a_specific_region-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Using_a_photo_camera_as_webcam_with_gPhoto" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Using_a_photo_camera_as_webcam_with_gPhoto">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.2</span>
+					<span>Using a photo camera as webcam with gPhoto</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Using_a_photo_camera_as_webcam_with_gPhoto-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Using_a_network_stream_as_webcam" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Using_a_network_stream_as_webcam">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.3</span>
+					<span>Using a network stream as webcam</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Using_a_network_stream_as_webcam-sublist" class="vector-toc-list">
+				<li id="toc-Using_an_Android_device_as_webcam" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Using_an_Android_device_as_webcam">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.3.1</span>
+					<span>Using an Android device as webcam</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Using_an_Android_device_as_webcam-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Using_a_background_image_in_video_conferencing" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Using_a_background_image_in_video_conferencing">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.4</span>
+					<span>Using a background image in video conferencing</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Using_a_background_image_in_video_conferencing-sublist" class="vector-toc-list">
+				<li id="toc-OBS" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#OBS">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.4.1</span>
+					<span>OBS</span>
+				</div>
+			</a>
+			
+			<ul id="toc-OBS-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Troubleshooting" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Troubleshooting">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">5</span>
+				<span>Troubleshooting</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Troubleshooting-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Troubleshooting subsection</span>
+			</button>
+		
+		<ul id="toc-Troubleshooting-sublist" class="vector-toc-list">
+			<li id="toc-Firefox" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Firefox">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.1</span>
+					<span>Firefox</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Firefox-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-ioctl(VIDIOC_G_FMT)" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#ioctl(VIDIOC_G_FMT)">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.2</span>
+					<span>ioctl(VIDIOC_G_FMT)</span>
+				</div>
+			</a>
+			
+			<ul id="toc-ioctl(VIDIOC_G_FMT)-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-See_also" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#See_also">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">6</span>
+				<span>See also</span>
+			</div>
+		</a>
+		
+		<ul id="toc-See_also-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+</ul>
+</div>
+
+					</div>
+		</nav>
+			</div>
+		</div>
+		<div class="mw-content-container">
+			<main id="content" class="mw-body" style="margin: 0">
+				<header class="mw-body-header vector-page-titlebar">
+					<nav aria-label="Contents" class="vector-toc-landmark">
+						
+<div id="vector-page-titlebar-toc" class="vector-dropdown vector-page-titlebar-toc vector-button-flush-left">
+	<input type="checkbox" id="vector-page-titlebar-toc-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-page-titlebar-toc" class="vector-dropdown-checkbox " aria-label="Toggle the table of contents">
+	<label id="vector-page-titlebar-toc-label" for="vector-page-titlebar-toc-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"><span class="vector-icon mw-ui-icon-listBullet mw-ui-icon-wikimedia-listBullet"></span>
+
+<span class="vector-dropdown-label-text">Toggle the table of contents</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+							<div id="vector-page-titlebar-toc-unpinned-container" class="vector-unpinned-container">
+			</div>
+		
+	</div>
+</div>
+
+					</nav>
+					<h1 id="firstHeading" class="firstHeading mw-first-heading">v4l2loopback</h1>
+							
+<div id="p-lang-btn" class="vector-dropdown mw-portlet mw-portlet-lang">
+	<input type="checkbox" id="p-lang-btn-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-p-lang-btn" class="vector-dropdown-checkbox mw-interlanguage-selector" aria-label="Go to an article in another language. Available in 1 language">
+	<label id="p-lang-btn-label" for="p-lang-btn-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--action-progressive mw-portlet-lang-heading-1" aria-hidden="true"><span class="vector-icon mw-ui-icon-language-progressive mw-ui-icon-wikimedia-language-progressive"></span>
+
+<span class="vector-dropdown-label-text">1 language</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+		<div class="vector-menu-content">
+			
+			<ul class="vector-menu-content-list">
+				
+				<li class="interlanguage-link interwiki-ja mw-list-item"><a href="https://wiki.archlinux.jp/index.php/v4l2loopback" title="v4l2loopback – 日本語" lang="ja" hreflang="ja" data-title="v4l2loopback" data-language-autonym="日本語" data-language-local-name="日本語" class="interlanguage-link-target"><span>日本語</span></a></li>
+			</ul>
+			
+		</div>
+
+	</div>
+</div>
+</header>
+				<div class="vector-column-end">
+					<div class="vector-sticky-pinned-container">
+						<nav class="vector-page-tools-landmark" aria-label="Page tools">
+							<div id="vector-page-tools-pinned-container" class="vector-pinned-container">
+				
+							</div>
+		</nav>
+						<nav class="vector-appearance-landmark" aria-label="Appearance">
+							<div id="vector-appearance-pinned-container" class="vector-pinned-container">
+				<div id="vector-appearance" class="vector-appearance vector-pinnable-element">
+	<div class="vector-pinnable-header vector-appearance-pinnable-header vector-pinnable-header-pinned" data-feature-name="appearance-pinned" data-pinnable-element-id="vector-appearance" data-pinned-container-id="vector-appearance-pinned-container" data-unpinned-container-id="vector-appearance-unpinned-container">
+	<div class="vector-pinnable-header-label">Appearance</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-appearance.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-appearance.unpin">hide</button>
+</div>
+
+
+</div>
+
+							</div>
+		</nav>
+					</div>
+				</div>
+				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container>
+					<div class="vector-body-before-content">
+							<div class="mw-indicators">
+		</div>
+
+						<div id="siteSub" class="noprint">From ArchWiki</div>
+					</div>
+					<div id="contentSub"><div id="mw-content-subtitle"></div></div>
+					
+					
+					<div id="mw-content-text" class="mw-body-content">
+<div class="mw-content-ltr mw-parser-output" lang="en" dir="ltr">
+<p><span>
+</span>
+</p>
+<div class="archwiki-template-meta-related-articles">
+<p>Related articles</p>
+<ul>
+<li><a href="../en/Webcam_setup.html" title="Webcam setup">Webcam setup</a></li>
+</ul>
+</div>
+<p>From the project <a rel="nofollow" class="external text" href="https://github.com/umlaeute/v4l2loopback">repository</a>:
+</p>
+<dl>
+<dd>v4l2loopback - a kernel module to create V4L2 loopback devices</dd>
+<dd>This module allows you to create "virtual video devices". Normal (v4l2) applications will read these devices as if they were ordinary video devices, but the video will not be read from e.g. a capture card but instead it is generated by another application.</dd>
+</dl>
+<meta property="mw:PageProp/toc">
+<h2><span class="mw-headline" id="Installation">Installation</span></h2>
+<p><a href="../en/Help:Reading.html#Installation_of_packages" class="mw-redirect" title="Install">Install</a> the <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=v4l2loopback-dkms">v4l2loopback-dkms</a></span> package <b>and</b> the headers for the target kernel/kernels (see <a href="../en/Dynamic_Kernel_Module_Support.html#Installation" title="Dynamic Kernel Module Support">Dynamic Kernel Module Support#Installation</a>). For example, for the default <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=linux">linux</a></span> kernel this would be <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=linux-headers">linux-headers</a></span>. Other kernels have their own respective headers packages.
+</p>
+<p>Command line utilities are provided by <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=v4l2loopback-utils">v4l2loopback-utils</a></span> and <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=v4l-utils">v4l-utils</a></span>.
+</p>
+<p>Many of the use case examples in this article also use <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=ffmpeg">ffmpeg</a></span>.
+</p>
+<h2><span class="mw-headline" id="Loading_the_kernel_module">Loading the kernel module</span></h2>
+<p>The <code>v4l2loopback</code> <a href="../en/Kernel_module.html" title="Kernel module">kernel module</a> can be loaded via the <a href="../en/Dynamic_Kernel_Module_Support.html" title="Dynamic Kernel Module Support">Dynamic Kernel Module Support</a>:
+</p>
+<pre># modprobe v4l2loopback
+</pre>
+<p><code>v4l2-ctl</code> can be used to list all video devices, where the new <code>v4l2loopback</code> device should appear:
+</p>
+<pre>$ v4l2-ctl --list-devices
+</pre>
+<p><code>v4l2loopback</code> can be loaded with various options for device creation:
+</p>
+<pre># modprobe v4l2loopback video_nr=9 card_label=Video-Loopback exclusive_caps=1
+</pre>
+<p>This should create <code>/dev/video9</code> as a loopback device. <code>exclusive_caps=1</code> is necessary for some Chromium/WebRTC based application like <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/jitsi-meet-desktop-bin/">jitsi-meet-desktop-bin</a></span><sup><small>AUR</small></sup> or <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/zoom/">zoom</a></span><sup><small>AUR</small></sup>. This will enable <code>exclusive_caps</code> mode that only reports CAPTURE/OUTPUT capabilities exclusively. The newly created device will announce OUTPUT capabilities only (so ordinary webcam applications (including Chrome) will not see it). As soon as you have attached a producer to the device, it will start announcing CAPTURE capabilities only (so applications that refuse to open devices that have other capabilities apart from capturing can open it too). More options can be found in the <a rel="nofollow" class="external text" href="https://github.com/umlaeute/v4l2loopback#options">official documentation</a>.
+</p>
+<p>If the module is already loaded, the above command has likely no effect. The module first has to be unloaded, before loaded again:
+</p>
+<pre># modprobe -r v4l2loopback
+</pre>
+<p>See <a href="../en/Kernel_module.html#Manual_module_handling" title="Kernel module">Kernel module#Manual module handling</a> for more details.
+</p>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> It is also possible to manage the devices dynamically without reloading the kernel module using <code>v4l2loopback-ctl</code> as described in the <a rel="nofollow" class="external text" href="https://github.com/umlaeute/v4l2loopback#dynamic-device-management">official documentation</a>.</div>
+<p>It is possible to create multiple loopback devices by using the <code>devices</code> argument. Options for the every device are specified by using a comma. The following command creates three loopback devices, <code>/dev/video8</code>, <code>/dev/video9</code> and the first available <code>/dev/video<i>X</i></code>, all with <code>exclusive_caps</code> enabled.
+</p>
+<pre># modprobe v4l2loopback devices=3 video_nr=8,9 exclusive_caps=1,1,1 card_label="Loopback-1,Loopback-2,Loopback-3"
+</pre>
+<p>Restarting the system will unload the module, but is possible to load the modules automatically at boot with custom device options, which is useful if one loopback device is used for an internal webcam. See <a href="../en/Kernel_module.html#Automatic_module_loading" title="Kernel module">Kernel module#Automatic module loading</a> and <a rel="nofollow" class="external text" href="https://github.com/umlaeute/v4l2loopback#load-the-module-at-boot">the official documentation</a> for details.
+</p>
+<h2><span class="mw-headline" id="Viewing_a_v4l2loopback_video_feed">Viewing a v4l2loopback video feed</span></h2>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> <code>v4l2loopback</code> video devices only output video, if there is a stream piped into them like the examples in <a href="#Use_cases">#Use cases</a> do. Otherwise many applications won't even detect the video devices.</div>
+<p>A loopback video device at <code>/dev/video0</code> can be viewed for testing with any of the following: <code>ffplay</code> (part of <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=ffmpeg">ffmpeg</a></span>), <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=mpv">mpv</a></span>, or <code>gst-launch</code> (part of <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=gstreamer">gstreamer</a></span>):
+</p>
+<pre>$ ffplay /dev/video0
+$ mpv av://v4l2:/dev/video0
+$ gst-launch-1.0 -v v4l2src device=/dev/video0 ! glimagesink
+</pre>
+<p>As noted in <a href="#Loading_the_kernel_module">#Loading the kernel module</a>, when <code>exclusive_caps=1</code> is used <a href="../en/Chromium.html" title="Chromium">Chromium</a> and applications like <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/jitsi-meet-desktop-bin/">jitsi-meet-desktop-bin</a></span><sup><small>AUR</small></sup> and <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/zoom/">zoom</a></span><sup><small>AUR</small></sup> should be able to use the loopback device as a virtual webcam, while a video stream is piped into them. In a browser the virtual webcam can be tested on <a rel="nofollow" class="external text" href="https://webcamtests.com/">webcamtests.com</a>.
+</p>
+<p>See also <a href="../en/Webcam_setup.html#Applications" title="Webcam setup">Webcam setup#Applications</a>.
+</p>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> If you pipe a video stream to the video device and your application doesn't detect it, try it with and without <code>exclusive_caps=1</code>.</div>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> 
+<ul>
+<li>Various other issues with <a href="../en/Firefox.html" title="Firefox">Firefox</a> have been reported.</li>
+<li>It has been reported, that <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/skypeforlinux-bin/">skypeforlinux-bin</a></span><sup><small>AUR</small></sup> detects the virtual video device, but outputs a blank screen.</li>
+</ul>
+</div>
+<h2><span class="mw-headline" id="Use_cases">Use cases</span></h2>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> Because v4l2loopback devices can be handled as v4l2 devices, numerous applications can interact with them. For more information about <a rel="nofollow" class="external text" href="https://www.linuxtv.org/wiki/index.php/Development:_Video4Linux_APIs">v4l2 devices</a> see the <a href="../en/Webcam_setup.html" title="Webcam setup">Webcam setup</a> article.</div>
+<p>Generally, <a href="../en/FFmpeg.html" title="FFmpeg">FFmpeg</a> is very convenient in combination with v4l2loopback, because it can transcode various input streams to the widely supported yuv420p pixel format and pipe the output to a v4l2loopback device by using the <code>ffmpeg</code> arguments <code>-vf format=yuv420p -f v4l2</code>. See the examples below in this article.
+</p>
+<p>FFmpeg can also use the v4l2loopback device as an input stream. See <a href="../en/FFmpeg.html#Recording_webcam" title="FFmpeg">FFmpeg#Recording webcam</a>.
+</p>
+<p><a href="../en/GStreamer.html" title="GStreamer">GStreamer</a> can also use v4l2loopback devices as <a rel="nofollow" class="external text" href="https://gstreamer.freedesktop.org/documentation/video4linux2/v4l2src.html">sources</a> and <a rel="nofollow" class="external text" href="https://gstreamer.freedesktop.org/documentation/video4linux2/v4l2sink.html">sinks</a>.
+</p>
+<p>Further examples can be found at the <a rel="nofollow" class="external text" href="https://github.com/umlaeute/v4l2loopback/wiki">official v4l2loopback wiki</a>.
+</p>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> <a href="../en/PipeWire.html" title="PipeWire">PipeWire</a> is an upcoming new low-level multimedia framework, which can also do some things v4l2loopback is used for.</div>
+<h3><span class="mw-headline" id="Screen_casting">Screen casting</span></h3>
+<p>Below are examples how to implement screen sharing by streaming the screen to a v4l2 loopback device, which can be used as a virtual webcam.
+</p>
+<h4><span class="mw-headline" id="Casting_X11_using_FFmpeg">Casting X11 using FFmpeg</span></h4>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> This requires <a href="#Loading_the_kernel_module">#Loading the kernel module</a> with <code>exclusive_caps=1</code> and assumes the created video device is <code>/dev/video0</code>.</div>
+<p><a href="../en/FFmpeg.html" title="FFmpeg">FFmpeg</a> can be used to select a region on a <a href="../en/Xorg.html" class="mw-redirect" title="X11">X11</a> display and then stream it to a v4l2 loopback device:
+</p>
+<pre>$ ffmpeg -f x11grab -select_region 1 -show_region 1 -framerate 25 -i $DISPLAY -vf format=yuv420p -f v4l2 /dev/video0
+</pre>
+<p>See the <a rel="nofollow" class="external text" href="https://www.ffmpeg.org/ffmpeg-devices.html#x11grab">x11grab docs</a> for a description of all the arguments.
+</p>
+<h4><span class="mw-headline" id="Casting_Wayland_using_wf-recorder">Casting Wayland using wf-recorder</span></h4>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> 
+<ul>
+<li>See also <a href="../en/PipeWire.html#WebRTC_screen_sharing" title="PipeWire">PipeWire#WebRTC screen sharing</a> for a different approach to this.</li>
+<li>This requires <a href="#Loading_the_kernel_module">#Loading the kernel module</a> with <code>exclusive_caps=1</code> and assumes the created video device is <code>/dev/video0</code>.</li>
+</ul>
+</div>
+<p><a href="../en/Help:Reading.html#Installation_of_packages" class="mw-redirect" title="Install">Install</a> <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=wf-recorder">wf-recorder</a></span> (or <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/wf-recorder-git/">wf-recorder-git</a></span><sup><small>AUR</small></sup>). To start recording the screen with <code>wf-recorder</code> and stream it to a v4l2 loopback device use:
+</p>
+<pre>$ wf-recorder --muxer=v4l2 --codec=rawvideo --file=/dev/video0 -x yuv420p
+</pre>
+<p>If you encounter <code>Unknown V4L2 pixel format equivalent for rgb0</code> run <code>wf-recorder</code> with <code>--force-yuv</code> or <code>-t</code> to force conversion of the data to yuv format, before sending it to the GPU. <a rel="nofollow" class="external autonumber" href="https://github.com/ammen99/wf-recorder/issues/164">[1]</a>
+</p>
+<h5><span class="mw-headline" id="Screen_casting_only_a_specific_region">Screen casting only a specific region</span></h5>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Warning:</strong> This method does not involve a proper implementation of individual application sharing as the region being shared will not change after resizing any windows.</div>
+<p>As explained above, <code>wf-recorder</code> is able to record only a portion of the screen by first selecting a region with <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=slurp">slurp</a></span>. To use this functionality for sharing a specific region/application window through a virtual video device, start recording the screen with the following modified command:
+</p>
+<pre>$ wf-recorder <b>-g "$(slurp)"</b> --muxer=v4l2 --codec=rawvideo --file=/dev/video0 -x yuv420p
+</pre>
+<h3><span class="mw-headline" id="Using_a_photo_camera_as_webcam_with_gPhoto">Using a photo camera as webcam with gPhoto</span></h3>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> This requires <a href="#Loading_the_kernel_module">#Loading the kernel module</a> with <code>exclusive_caps=1</code> and assumes the created video device is <code>/dev/video0</code>.</div>
+<p>If <a href="../en/GPhoto.html" title="GPhoto">gPhoto</a> is installed and working with your camera, you can use <code>gphoto2</code> and <a href="../en/FFmpeg.html" title="FFmpeg">FFmpeg</a> to pipe the liveview stream of the camera to a v4l2 loopback device:
+</p>
+<pre>$ gphoto2 --stdout --capture-movie | ffmpeg -i - -vf format=yuv420p -f v4l2 /dev/video0
+</pre>
+<p>For troubleshooting refer to <a href="../en/GPhoto.html#Troubleshooting" title="GPhoto">gPhoto#Troubleshooting</a>. This should work with all cameras, which have the liveview functionality listed on the <a rel="nofollow" class="external text" href="http://www.gphoto.org/doc/remote/">official gPhoto website</a>.
+</p>
+<h3><span class="mw-headline" id="Using_a_network_stream_as_webcam">Using a network stream as webcam</span></h3>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> This requires <a href="#Loading_the_kernel_module">#Loading the kernel module</a> with <code>exclusive_caps=1</code> and assumes the created video device is <code>/dev/video0</code>.</div>
+<p><a href="../en/FFmpeg.html" title="FFmpeg">FFmpeg</a> can be used to capture a network stream and pipe it to a v4l2 loopback device:
+</p>
+<pre>$ ffmpeg -i http://<i>ip_address</i>:<i>port</i>/video -vf format=yuv420p -f v4l2 /dev/video0
+</pre>
+<h4><span class="mw-headline" id="Using_an_Android_device_as_webcam">Using an Android device as webcam</span></h4>
+<p>On Android <a rel="nofollow" class="external text" href="https://play.google.com/store/apps/details?id=com.pas.webcam">IP Webcam</a> can be used to broadcast a network video stream. Then the command above can be used to pipe it into a v4l2 loopback device and use it like a webcam. IP Webcam defaults to port 8080.
+</p>
+<p>Depending on the network connection, the network stream over Wi-Fi might have a lot of latency and could be stuttering. If you have <a href="../en/Android_Debug_Bridge.html" title="Android Debug Bridge">Android Debug Bridge</a> configured with your computer and the Android device, it is possible to tunnel the stream over a USB cable using <code>adb forward</code>, which provides a more stable connection:
+</p>
+<pre>$ adb wait-for-usb-device &amp;&amp; adb forward tcp:8080 tcp:8080 &amp;&amp; ffmpeg -i http://127.0.0.1:8080/video -vf format=yuv420p -f v4l2 /dev/video0
+</pre>
+<p>Another easier way is to use <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=scrcpy">scrcpy</a></span>:
+</p>
+<pre>$ scrcpy --video-source=camera --camera-id=0 --camera-size=1920x1080 --video-bit-rate=20M --v4l2-sink=/dev/video0 --no-playback
+</pre>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> An other option is <a rel="nofollow" class="external text" href="https://play.google.com/store/apps/details?id=com.jacksoftw.webcam">Iriun</a> with <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/iriunwebcam-bin/">iriunwebcam-bin</a></span><sup><small>AUR</small></sup>.</div>
+<h3><span class="mw-headline" id="Using_a_background_image_in_video_conferencing">Using a background image in video conferencing</span></h3>
+<p>There are a number of different options for hiding/replacing the background in video conferencing software like Microsoft Teams and Zoom.
+</p>
+<h4><span class="mw-headline" id="OBS">OBS</span></h4>
+<p><a rel="nofollow" class="external text" href="https://obsproject.com/">OBS</a> is used by streamers as a real-time video management system, for switching between video feeds.  It can have multiple "scenes" set up (e.g. each with a different background image) and then they can be switched with a button click.  It can also provide other video filters, has a plugin system for new ones, can display multiple video feeds at the same time, and so on.  It can send its output to a v4l2loopback device that works with any application that supports V4L2 cameras.
+</p>
+<p>To set this up:
+</p>
+<ol>
+<li>
+<a href="../en/Help:Reading.html#Installation_of_packages" class="mw-redirect" title="Install">Install</a> the main <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=obs-studio">obs-studio</a></span> package and the <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/obs-backgroundremoval/">obs-backgroundremoval</a></span><sup><small>AUR</small></sup> plugin.</li>
+<li>Load <code>obs</code> and add the real camera as an input source for the scene.</li>
+<li>Right-click on the source and edit the filters, and add the background removal filter.  You should now see the background erased, only showing black.  (You can also opt to blur the background instead of removing it, in the advanced options.)</li>
+<li>Add another input source of type "Image" and select your preferred background image.  The source type could also be a video file or another webcam, but start with an image until everything is working.</li>
+<li>Drag the image entry in the source list so that it is below the entry for the video source, in order for the image to appear behind the video instead of in front of it.</li>
+<li>Move/resize the background image so that it takes up most of the scene.</li>
+<li>Enable the virtual output and the virtual webcam is ready to use.</li>
+</ol>
+<p><code>obs</code> must be left running with the virtual output enabled in order for the virtual webcam to be usable by video conferencing software.
+</p>
+<p>If you get a corrupted or blank image (common after changing the output resolution) you may need to delete and recreate the V4L2 loopback device (or unload and reload the <code>v4l2loopback</code> module).
+</p>
+<p>See <a href="#Viewing_a_v4l2loopback_video_feed">#Viewing a v4l2loopback video feed</a> above for troubleshooting - if these programs play the feed fine then the problem is with the application consuming the video.  If these utilities also do not see video properly, the problem is with the loopback set up.
+</p>
+<h2><span class="mw-headline" id="Troubleshooting">Troubleshooting</span></h2>
+<h3><span class="mw-headline" id="Firefox">Firefox</span></h3>
+<p>If Firefox is unable to read the video stream and prints a message like <code>AbortError: Starting video failed</code>, try preloading v4l2compat.so:
+</p>
+<pre>$ LD_PRELOAD=/usr/lib/v4l1compat.so firefox
+</pre>
+<h3>
+<span id="ioctl.28VIDIOC_G_FMT.29"></span><span class="mw-headline" id="ioctl(VIDIOC_G_FMT)">ioctl(VIDIOC_G_FMT)</span>
+</h3>
+<p>If you get a <code>ioctl(VIDIOC_G_FMT)</code> error, when trying to use the video device with <code>ffmpeg</code>, try unloading and reloading the kernel module. <a rel="nofollow" class="external autonumber" href="https://github.com/umlaeute/v4l2loopback/issues/504">[2]</a>
+</p>
+<h2><span class="mw-headline" id="See_also">See also</span></h2>
+<ul>
+<li><a rel="nofollow" class="external text" href="https://github.com/umlaeute/v4l2loopback">v4l2loopback repository</a></li>
+<li><a rel="nofollow" class="external text" href="https://github.com/umlaeute/v4l2loopback/wiki">v4l2loopback wiki</a></li>
+</ul>
+</div>
+</div>
+					<div id="catlinks" class="catlinks" data-mw="interface"><div id="mw-normal-catlinks" class="mw-normal-catlinks">
+<a href="../Special:Categories.html" title="Special:Categories">Categories</a>: <ul>
+<li><a href="../en/Category:Video.html" title="Category:Video">Video</a></li>
+<li><a href="../en/Category:Digital_imaging.html" title="Category:Digital imaging">Digital imaging</a></li>
+</ul>
+</div></div>
+				</div>
+			</main>
+			
+		</div>
+		<div class="mw-footer-container">
+			
+<footer id="footer" class="mw-footer" style="margin: 0">
+	<ul id="footer-info">
+	<li data-nosnippet="">Retrieved from "<a dir="ltr" href="https://wiki.archlinux.org/index.php?title=V4l2loopback&amp;oldid=822120">https://wiki.archlinux.org/index.php?title=V4l2loopback&amp;oldid=822120</a>"</li>
+<li id="footer-info-lastmod"> This page was last edited on 4 December 2024, at 09:21.</li>
+	<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+<br>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="https://terms.archlinux.org/docs/privacy-policy/">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="../en/ArchWiki:About.html">About ArchWiki</a></li>
+	<li id="footer-places-disclaimers"><a href="../en/ArchWiki:General_disclaimer.html">Disclaimers</a></li>
+	<li id="footer-places-archwiki-code-of-conduct"><a href="https://terms.archlinux.org/docs/code-of-conduct/" class="extiw" title="archlinux-service-agreements:code-of-conduct">Code of conduct</a></li>
+	<li id="footer-places-archwiki-terms-of-service"><a href="https://terms.archlinux.org/docs/terms-of-service/" class="extiw" title="archlinux-service-agreements:terms-of-service">Terms of service</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-copyrightico"><a href="https://www.gnu.org/copyleft/fdl.html" class="cdx-button cdx-button--fake-button cdx-button--size-large cdx-button--fake-button--enabled"><img src="/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" loading="lazy"></a></li>
+	<li id="footer-poweredbyico"><img src="/resources/assets/poweredby_mediawiki.svg" width="88" height="31" loading="lazy"></li>
+</ul>
+
+</footer>
+
+		</div>
+	</div> 
+</div> 
+<div class="vector-settings" id="p-dock-bottom">
+	<ul></ul>
+</div>
+</body>
+</html>

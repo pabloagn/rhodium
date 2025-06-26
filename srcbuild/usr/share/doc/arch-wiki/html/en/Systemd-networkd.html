@@ -1,0 +1,1636 @@
+<!DOCTYPE html>
+<html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-sticky-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-0 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-disabled skin-theme-clientpref-day vector-toc-available" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>systemd-networkd - ArchWiki</title>
+<link rel="stylesheet" href="../ArchWikiOffline.css">
+<meta name="ResourceLoaderDynamicStyles" content="">
+<meta name="generator" content="MediaWiki 1.43.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="max-image-preview:standard">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.25, maximum-scale=5.0">
+<link rel="search" type="application/opensearchdescription+xml" href="/rest.php/v1/search" title="ArchWiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.archlinux.org/api.php?action=rsd">
+<link rel="license" href="https://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="ArchWiki Atom feed" href="/index.php?title=Special:RecentChanges&amp;feed=atom">
+</head>
+<body class="skin--responsive skin-vector skin-vector-search-vue mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Systemd-networkd rootpage-Systemd-networkd skin-vector-2022 action-view">
+<a class="mw-jump-link" href="#bodyContent">Jump to content</a>
+<div class="vector-header-container">
+	</div>
+<div class="mw-page-container">
+	<div class="mw-page-container-inner">
+		<div class="vector-column-start">
+			<div class="vector-main-menu-container">
+		</div>
+	<div class="vector-sticky-pinned-container">
+				<nav id="mw-panel-toc" aria-label="Contents" data-event-name="ui.sidebar-toc" class="mw-table-of-contents-container vector-toc-landmark">
+					<div id="vector-toc-pinned-container" class="vector-pinned-container">
+					<div id="vector-toc" class="vector-toc vector-pinnable-element">
+	<div class="vector-pinnable-header vector-toc-pinnable-header vector-pinnable-header-pinned" data-feature-name="toc-pinned" data-pinnable-element-id="vector-toc">
+	<h2 class="vector-pinnable-header-label">Contents</h2>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-toc.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-toc.unpin">hide</button>
+</div>
+
+
+	<ul class="vector-toc-contents" id="mw-panel-toc-list">
+		<li id="toc-mw-content-text" class="vector-toc-list-item vector-toc-level-1">
+			<a href="#" class="vector-toc-link">
+				<div class="vector-toc-text">Beginning</div>
+			</a>
+		</li>
+		<li id="toc-Basic_usage" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Basic_usage">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">1</span>
+				<span>Basic usage</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Basic_usage-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Basic usage subsection</span>
+			</button>
+		
+		<ul id="toc-Basic_usage-sublist" class="vector-toc-list">
+			<li id="toc-Required_services_and_setup" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Required_services_and_setup">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.1</span>
+					<span>Required services and setup</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Required_services_and_setup-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-systemd-networkd-wait-online" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#systemd-networkd-wait-online">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.2</span>
+					<span>systemd-networkd-wait-online</span>
+				</div>
+			</a>
+			
+			<ul id="toc-systemd-networkd-wait-online-sublist" class="vector-toc-list">
+				<li id="toc-Multiple_interfaces_that_are_not_connected_all_the_time" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Multiple_interfaces_that_are_not_connected_all_the_time">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.2.1</span>
+					<span>Multiple interfaces that are not connected all the time</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Multiple_interfaces_that_are_not_connected_all_the_time-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Wait_until_network_interfaces_have_a_routable_address" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Wait_until_network_interfaces_have_a_routable_address">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.2.2</span>
+					<span>Wait until network interfaces have a routable address</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Wait_until_network_interfaces_have_a_routable_address-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Configuration_examples" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Configuration_examples">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.3</span>
+					<span>Configuration examples</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Configuration_examples-sublist" class="vector-toc-list">
+				<li id="toc-Wired_adapter_using_DHCP" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Wired_adapter_using_DHCP">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.3.1</span>
+					<span>Wired adapter using DHCP</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Wired_adapter_using_DHCP-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Wired_adapter_using_a_static_IP" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Wired_adapter_using_a_static_IP">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.3.2</span>
+					<span>Wired adapter using a static IP</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Wired_adapter_using_a_static_IP-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Wireless_adapter" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Wireless_adapter">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.3.3</span>
+					<span>Wireless adapter</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Wireless_adapter-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Wired_and_wireless_adapters_on_the_same_machine" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Wired_and_wireless_adapters_on_the_same_machine">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.3.4</span>
+					<span>Wired and wireless adapters on the same machine</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Wired_and_wireless_adapters_on_the_same_machine-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Configuration_files" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Configuration_files">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">2</span>
+				<span>Configuration files</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Configuration_files-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Configuration files subsection</span>
+			</button>
+		
+		<ul id="toc-Configuration_files-sublist" class="vector-toc-list">
+			<li id="toc-network_files" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#network_files">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1</span>
+					<span>network files</span>
+				</div>
+			</a>
+			
+			<ul id="toc-network_files-sublist" class="vector-toc-list">
+				<li id="toc-[Match]" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#[Match]">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1.1</span>
+					<span>[Match]</span>
+				</div>
+			</a>
+			
+			<ul id="toc-[Match]-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-[Link]" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#[Link]">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1.2</span>
+					<span>[Link]</span>
+				</div>
+			</a>
+			
+			<ul id="toc-[Link]-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-[Network]" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#[Network]">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1.3</span>
+					<span>[Network]</span>
+				</div>
+			</a>
+			
+			<ul id="toc-[Network]-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-[Address]" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#[Address]">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1.4</span>
+					<span>[Address]</span>
+				</div>
+			</a>
+			
+			<ul id="toc-[Address]-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-[Route]" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#[Route]">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1.5</span>
+					<span>[Route]</span>
+				</div>
+			</a>
+			
+			<ul id="toc-[Route]-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-[RoutingPolicyRule]" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#[RoutingPolicyRule]">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1.6</span>
+					<span>[RoutingPolicyRule]</span>
+				</div>
+			</a>
+			
+			<ul id="toc-[RoutingPolicyRule]-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-[DHCPv4]" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#[DHCPv4]">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1.7</span>
+					<span>[DHCPv4]</span>
+				</div>
+			</a>
+			
+			<ul id="toc-[DHCPv4]-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-[DHCPServer]" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#[DHCPServer]">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1.8</span>
+					<span>[DHCPServer]</span>
+				</div>
+			</a>
+			
+			<ul id="toc-[DHCPServer]-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-netdev_files" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#netdev_files">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2</span>
+					<span>netdev files</span>
+				</div>
+			</a>
+			
+			<ul id="toc-netdev_files-sublist" class="vector-toc-list">
+				<li id="toc-[Match]_section" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#[Match]_section">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2.1</span>
+					<span>[Match] section</span>
+				</div>
+			</a>
+			
+			<ul id="toc-[Match]_section-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-[NetDev]_section" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#[NetDev]_section">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2.2</span>
+					<span>[NetDev] section</span>
+				</div>
+			</a>
+			
+			<ul id="toc-[NetDev]_section-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Usage_with_containers" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Usage_with_containers">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">3</span>
+				<span>Usage with containers</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Usage_with_containers-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Usage with containers subsection</span>
+			</button>
+		
+		<ul id="toc-Usage_with_containers-sublist" class="vector-toc-list">
+			<li id="toc-Network_bridge_with_DHCP" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Network_bridge_with_DHCP">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1</span>
+					<span>Network bridge with DHCP</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Network_bridge_with_DHCP-sublist" class="vector-toc-list">
+				<li id="toc-Bridge_interface" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Bridge_interface">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1.1</span>
+					<span>Bridge interface</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Bridge_interface-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Bind_Ethernet_to_bridge" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Bind_Ethernet_to_bridge">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1.2</span>
+					<span>Bind Ethernet to bridge</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Bind_Ethernet_to_bridge-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Bridge_network" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Bridge_network">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1.3</span>
+					<span>Bridge network</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Bridge_network-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Inherit_MAC_address_(optional)" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Inherit_MAC_address_(optional)">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1.4</span>
+					<span>Inherit MAC address (optional)</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Inherit_MAC_address_(optional)-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Configure_the_container" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Configure_the_container">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1.5</span>
+					<span>Configure the container</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Configure_the_container-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Result" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Result">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1.6</span>
+					<span>Result</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Result-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Notice" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Notice">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1.7</span>
+					<span>Notice</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Notice-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Network_bridge_with_static_IP_addresses" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Network_bridge_with_static_IP_addresses">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.2</span>
+					<span>Network bridge with static IP addresses</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Network_bridge_with_static_IP_addresses-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-MACVLAN_bridge" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#MACVLAN_bridge">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.3</span>
+					<span>MACVLAN bridge</span>
+				</div>
+			</a>
+			
+			<ul id="toc-MACVLAN_bridge-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Tips_and_tricks" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Tips_and_tricks">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">4</span>
+				<span>Tips and tricks</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Tips_and_tricks-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Tips and tricks subsection</span>
+			</button>
+		
+		<ul id="toc-Tips_and_tricks-sublist" class="vector-toc-list">
+			<li id="toc-Interface_and_desktop_integration" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Interface_and_desktop_integration">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.1</span>
+					<span>Interface and desktop integration</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Interface_and_desktop_integration-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Configuring_static_IP_or_DHCP_based_on_SSID_(location)" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Configuring_static_IP_or_DHCP_based_on_SSID_(location)">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.2</span>
+					<span>Configuring static IP or DHCP based on SSID (location)</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Configuring_static_IP_or_DHCP_based_on_SSID_(location)-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Bonding_a_wired_and_wireless_interface" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Bonding_a_wired_and_wireless_interface">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.3</span>
+					<span>Bonding a wired and wireless interface</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Bonding_a_wired_and_wireless_interface-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Speeding_up_TCP_slow-start" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Speeding_up_TCP_slow-start">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.4</span>
+					<span>Speeding up TCP slow-start</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Speeding_up_TCP_slow-start-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Prevent_multiple_default_routes" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Prevent_multiple_default_routes">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.5</span>
+					<span>Prevent multiple default routes</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Prevent_multiple_default_routes-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Configuring_a_second_static_IP_with_its_own_MAC_address_on_an_existing_interface" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Configuring_a_second_static_IP_with_its_own_MAC_address_on_an_existing_interface">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.6</span>
+					<span>Configuring a second static IP with its own MAC address on an existing interface</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Configuring_a_second_static_IP_with_its_own_MAC_address_on_an_existing_interface-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-See_also" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#See_also">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">5</span>
+				<span>See also</span>
+			</div>
+		</a>
+		
+		<ul id="toc-See_also-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+</ul>
+</div>
+
+					</div>
+		</nav>
+			</div>
+		</div>
+		<div class="mw-content-container">
+			<main id="content" class="mw-body" style="margin: 0">
+				<header class="mw-body-header vector-page-titlebar">
+					<nav aria-label="Contents" class="vector-toc-landmark">
+						
+<div id="vector-page-titlebar-toc" class="vector-dropdown vector-page-titlebar-toc vector-button-flush-left">
+	<input type="checkbox" id="vector-page-titlebar-toc-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-page-titlebar-toc" class="vector-dropdown-checkbox " aria-label="Toggle the table of contents">
+	<label id="vector-page-titlebar-toc-label" for="vector-page-titlebar-toc-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"><span class="vector-icon mw-ui-icon-listBullet mw-ui-icon-wikimedia-listBullet"></span>
+
+<span class="vector-dropdown-label-text">Toggle the table of contents</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+							<div id="vector-page-titlebar-toc-unpinned-container" class="vector-unpinned-container">
+			</div>
+		
+	</div>
+</div>
+
+					</nav>
+					<h1 id="firstHeading" class="firstHeading mw-first-heading">systemd-networkd</h1>
+							
+<div id="p-lang-btn" class="vector-dropdown mw-portlet mw-portlet-lang">
+	<input type="checkbox" id="p-lang-btn-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-p-lang-btn" class="vector-dropdown-checkbox mw-interlanguage-selector" aria-label="Go to an article in another language. Available in 6 languages">
+	<label id="p-lang-btn-label" for="p-lang-btn-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--action-progressive mw-portlet-lang-heading-6" aria-hidden="true"><span class="vector-icon mw-ui-icon-language-progressive mw-ui-icon-wikimedia-language-progressive"></span>
+
+<span class="vector-dropdown-label-text">6 languages</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+		<div class="vector-menu-content">
+			
+			<ul class="vector-menu-content-list">
+				
+				<li class="interlanguage-link interwiki-de mw-list-item"><a href="https://wiki.archlinux.de/title/Systemd/systemd-networkd" title="Systemd/systemd-networkd – Deutsch" lang="de" hreflang="de" data-title="Systemd/systemd-networkd" data-language-autonym="Deutsch" data-language-local-name="Deutsch" class="interlanguage-link-target"><span>Deutsch</span></a></li>
+<li class="interlanguage-link interwiki-es mw-list-item"><a href="../es/Systemd-networkd.html" title="Systemd-networkd – español" lang="es" hreflang="es" data-title="Systemd-networkd" data-language-autonym="Español" data-language-local-name="español" class="interlanguage-link-target"><span>Español</span></a></li>
+<li class="interlanguage-link interwiki-fr mw-list-item"><a href="../fr/Systemd-networkd.html" title="Systemd-networkd – français" lang="fr" hreflang="fr" data-title="Systemd-networkd" data-language-autonym="Français" data-language-local-name="français" class="interlanguage-link-target"><span>Français</span></a></li>
+<li class="interlanguage-link interwiki-ja mw-list-item"><a href="https://wiki.archlinux.jp/index.php/systemd-networkd" title="systemd-networkd – 日本語" lang="ja" hreflang="ja" data-title="systemd-networkd" data-language-autonym="日本語" data-language-local-name="日本語" class="interlanguage-link-target"><span>日本語</span></a></li>
+<li class="interlanguage-link interwiki-ru mw-list-item"><a href="../ru/Systemd-networkd.html" title="Systemd-networkd – русский" lang="ru" hreflang="ru" data-title="Systemd-networkd" data-language-autonym="Русский" data-language-local-name="русский" class="interlanguage-link-target"><span>Русский</span></a></li>
+<li class="interlanguage-link interwiki-zh-hans mw-list-item"><a href="https://wiki.archlinuxcn.org/wiki/Systemd-networkd" title="Systemd-networkd – 中文（简体）" lang="zh-Hans" hreflang="zh-Hans" data-title="Systemd-networkd" data-language-autonym="中文（简体）" data-language-local-name="中文（简体）" class="interlanguage-link-target"><span>中文（简体）</span></a></li>
+			</ul>
+			
+		</div>
+
+	</div>
+</div>
+</header>
+				<div class="vector-column-end">
+					<div class="vector-sticky-pinned-container">
+						<nav class="vector-page-tools-landmark" aria-label="Page tools">
+							<div id="vector-page-tools-pinned-container" class="vector-pinned-container">
+				
+							</div>
+		</nav>
+						<nav class="vector-appearance-landmark" aria-label="Appearance">
+							<div id="vector-appearance-pinned-container" class="vector-pinned-container">
+				<div id="vector-appearance" class="vector-appearance vector-pinnable-element">
+	<div class="vector-pinnable-header vector-appearance-pinnable-header vector-pinnable-header-pinned" data-feature-name="appearance-pinned" data-pinnable-element-id="vector-appearance" data-pinned-container-id="vector-appearance-pinned-container" data-unpinned-container-id="vector-appearance-unpinned-container">
+	<div class="vector-pinnable-header-label">Appearance</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-appearance.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-appearance.unpin">hide</button>
+</div>
+
+
+</div>
+
+							</div>
+		</nav>
+					</div>
+				</div>
+				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container>
+					<div class="vector-body-before-content">
+							<div class="mw-indicators">
+		</div>
+
+						<div id="siteSub" class="noprint">From ArchWiki</div>
+					</div>
+					<div id="contentSub"><div id="mw-content-subtitle"></div></div>
+					
+					
+					<div id="mw-content-text" class="mw-body-content">
+<div class="mw-content-ltr mw-parser-output" lang="en" dir="ltr">
+<p><span>
+</span>
+</p>
+<div class="archwiki-template-meta-related-articles">
+<p>Related articles</p>
+<ul>
+<li><a href="../en/Systemd.html" title="Systemd">systemd</a></li>
+<li><a href="../en/Systemd-resolved.html" title="Systemd-resolved">systemd-resolved</a></li>
+<li><a href="../en/Systemd-nspawn.html" title="Systemd-nspawn">systemd-nspawn</a></li>
+<li><a href="../en/Network_bridge.html" title="Network bridge">Network bridge</a></li>
+<li><a href="../en/Network_configuration.html" title="Network configuration">Network configuration</a></li>
+<li><a href="../en/Network_configuration/Wireless.html" class="mw-redirect" title="Wireless network configuration">Wireless network configuration</a></li>
+<li><a href="../en/Category:Network_configuration.html" title="Category:Network configuration">Category:Network configuration</a></li>
+</ul>
+</div>
+<p><i>systemd-networkd</i> is a system daemon that manages network configurations. It detects and configures network devices as they appear; it can also create virtual network devices. This service can be especially useful to set up complex network configurations for a container managed by <a href="../en/Systemd-nspawn.html" title="Systemd-nspawn">systemd-nspawn</a> or for virtual machines. It also works fine on simple connections.
+</p>
+<meta property="mw:PageProp/toc">
+<h2><span class="mw-headline" id="Basic_usage">Basic usage</span></h2>
+<p>The <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=systemd">systemd</a></span> package is part of the default Arch installation and contains all needed files to operate a wired network.  Wireless adapters, covered later in this article, can be set up by services, such as <a href="../en/Wpa_supplicant.html" title="Wpa supplicant">wpa_supplicant</a> or <a href="../en/Iwd.html" title="Iwd">iwd</a>.
+</p>
+<h3><span class="mw-headline" id="Required_services_and_setup">Required services and setup</span></h3>
+<p>To use <i>systemd-networkd</i>, <a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Start/enable">start/enable</a> <code>systemd-networkd.service</code>.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> Each network interface should be managed by only one <a href="../en/Network_configuration.html#Network_managers" title="Network configuration">DHCP client or network manager</a>, so it is advised to run only one DHCP client or network manager on the system. Find a list of the currently running services with <code>systemctl --type=service</code> and then <a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Stop">stop</a> or reconfigure those that conflict.</div>
+<p>It is optional to also configure <a href="../en/Systemd-resolved.html" title="Systemd-resolved">systemd-resolved</a>, which is a network name resolution service to local applications, considering the following points:
+</p>
+<ul>
+<li>It is important to understand how <a href="../en/Domain_name_resolution.html" class="mw-redirect" title="Resolv.conf">resolv.conf</a> and <i>systemd-resolved</i> interact to properly configure the DNS that will be used, some explanations are provided in <a href="../en/Systemd-resolved.html" title="Systemd-resolved">systemd-resolved</a>.</li>
+<li>
+<i>systemd-resolved</i> is required if DNS entries are specified in <i>.network</i> files.</li>
+<li>
+<i>systemd-resolved</i> is also required to obtain DNS addresses from DHCP servers or IPv6 router advertisements.<br>(by setting (<code>DHCP=</code> and/or <code>IPv6AcceptRA=</code> in the <code>[Network]</code> section, and <code>UseDNS=yes</code> (the default) in the corresponding section(s) <code>[DHCPv4]</code>, <code>[DHCPv6]</code>, <code>[IPv6AcceptRA]</code>, see <span class="plainlinks archwiki-template-man" title="$ man 5 systemd.network"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd.network.5">systemd.network(5)</a></span>).</li>
+<li>Note that <i>systemd-resolved</i> can also be used without <i>systemd-networkd</i>.</li>
+</ul>
+<h3><span class="mw-headline" id="systemd-networkd-wait-online">systemd-networkd-wait-online</span></h3>
+<p>Enabling <code>systemd-networkd.service</code> also enables <code>systemd-networkd-wait-online.service</code>, which is a oneshot system service that waits for the network to be configured. The latter has <code>WantedBy=network-online.target</code>, so it will be started only when <code>network-online.target</code> itself is enabled or pulled in by some other unit. See also <a href="../en/Systemd.html#Running_services_after_the_network_is_up" title="Systemd">systemd#Running services after the network is up</a>.
+</p>
+<p>By default, <code>systemd-networkd-wait-online.service</code> waits for all links managed by <i>systemd-networkd</i> to be fully configured or failed, and for at least one link to be online.
+</p>
+<p>See <span class="plainlinks archwiki-template-man" title="$ man 8 systemd-networkd-wait-online"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd-networkd-wait-online.8">systemd-networkd-wait-online(8)</a></span> for details.
+</p>
+<h4><span class="mw-headline" id="Multiple_interfaces_that_are_not_connected_all_the_time">Multiple interfaces that are not connected all the time</span></h4>
+<p>For system with multiple network interfaces that are not expected to be connected all the time (e.g. if a dual-port Ethernet card, but only one cable plugged in), starting <code>systemd-networkd-wait-online.service</code> will fail after the default timeout of 2 minutes. This may cause an unwanted delay in the startup process. To change the behaviour to wait for <i>any</i> interface rather than <i>all</i> interfaces to become online, <a href="../en/Systemd.html#Editing_provided_units" class="mw-redirect" title="Edit">edit</a> the service and add the <code>--any</code> parameter to the <code>ExecStart</code> line:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/system/systemd-networkd-wait-online.service.d/wait-for-only-one-interface.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Service]
+ExecStart=
+ExecStart=/usr/lib/systemd/systemd-networkd-wait-online --any</pre>
+<p>Alternatively, use <code>systemd-networkd-wait-online@.service</code> to wait for a specific interface. For example, to wait for <code>enp1s0</code>, <a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Disable">disable</a> <code>systemd-networkd-wait-online.service</code> and <a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Enable">enable</a> <code>systemd-networkd-wait-online@enp1s0.service</code>.
+</p>
+<h4><span class="mw-headline" id="Wait_until_network_interfaces_have_a_routable_address">Wait until network interfaces have a routable address</span></h4>
+<p>Per <span class="plainlinks archwiki-template-man" title="$ man 8 systemd-networkd-wait-online.service"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd-networkd-wait-online.service.8">systemd-networkd-wait-online.service(8)</a></span>, "online means that the link's operational state is equal or higher than "degraded"." (see <span class="plainlinks archwiki-template-man" title="$ man 1 networkctl"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/networkctl.1">networkctl(1)</a></span> for the definition of "degraded" and other operational statuses).
+</p>
+<p>To prevent <code>systemd-networkd-wait-online.service</code> from exiting before network interfaces have a routable IP address (and thus having other services that require a working network connection starting too early), add <code>RequiredForOnline=routable</code> to the <code>[Link]</code> section in <i>.network</i> files:
+</p>
+<pre>[Link]
+RequiredForOnline=routable</pre>
+<h3><span class="mw-headline" id="Configuration_examples">Configuration examples</span></h3>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../File:Tango-view-fullscreen.svg" decoding="async" width="48" height="48" class="mw-file-element"></span></span><b>This article or section needs expansion.</b></p>
+<div>
+<b>Reason:</b> Mention <code>networkctl edit</code> and <code>/usr/lib/systemd/network/*.example</code> (Discuss in <a rel="nofollow" class="external text" href="../en/Talk:Systemd-networkd.html">Talk:Systemd-networkd</a>)</div>
+</div>
+<p>All configurations in this section are stored as <code>foo.network</code> in <code>/etc/systemd/network/</code>. For a full listing of options and processing order, see <a href="#Configuration_files">#Configuration files</a> and <span class="plainlinks archwiki-template-man" title="$ man 5 systemd.network"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd.network.5">systemd.network(5)</a></span>.
+</p>
+<p>systemd/udev automatically assigns predictable, stable network interface names for all local Ethernet, WLAN, and WWAN interfaces. Use <code>networkctl list</code> to list the devices on the system. If it is desired to divert from the automatic interface naming, see <a href="../en/Network_configuration.html#Change_interface_name" title="Network configuration">Network configuration#Change interface name</a> for examples.
+</p>
+<p>After making changes to a configuration file, <a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Restart">restart</a> <code>systemd-networkd.service</code>.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> 
+<ul>
+<li>The options specified in the configuration files are case sensitive.</li>
+<li>In the examples below, <code>enp1s0</code> is the wired adapter and <code>wlp2s0</code> is the wireless adapter. These names can be different on different systems. See <a href="../en/Network_configuration.html#Network_interfaces" title="Network configuration">Network configuration#Network interfaces</a> for checking your adapter names.</li>
+<li>It is also possible to use a wildcard, e.g. <code>Name=en*</code> or <code>Name=wl*</code>.</li>
+<li>Devices can also be matched by their type. E.g. <code>Type=ether</code> for Ethernet, <code>Type=wlan</code> for Wi-Fi and <code>Type=wwan</code> for WWAN.</li>
+<li>Note that <code>Type=ether</code> will also match virtual Ethernet interfaces. To exclude them, use <code>Type=ether</code> in combination with <code>Kind=!*</code>.</li>
+</ul>
+</div>
+<h4><span class="mw-headline" id="Wired_adapter_using_DHCP">Wired adapter using DHCP</span></h4>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/network/20-wired.network</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Match]
+Name=enp1s0
+
+[Link]
+RequiredForOnline=routable
+
+[Network]
+DHCP=yes</pre>
+<h4><span class="mw-headline" id="Wired_adapter_using_a_static_IP">Wired adapter using a static IP</span></h4>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/network/20-wired.network</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Match]
+Name=enp1s0
+
+[Network]
+Address=10.1.10.9/24
+Gateway=10.1.10.1
+DNS=10.1.10.1</pre>
+<p><code>Address=</code> can be used more than once to configure multiple IPv4 or IPv6 addresses. See <a href="#network_files">#network files</a> or <span class="plainlinks archwiki-template-man" title="$ man 5 systemd.network"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd.network.5">systemd.network(5)</a></span> for more options.
+</p>
+<h4><span class="mw-headline" id="Wireless_adapter">Wireless adapter</span></h4>
+<p>In order to connect to a wireless network with <i>systemd-networkd</i>, a wireless adapter configured with another application such as <a href="../en/Wpa_supplicant.html" title="Wpa supplicant">wpa_supplicant</a> or <a href="../en/Iwd.html" title="Iwd">iwd</a> is required.
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/network/25-wireless.network</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Match]
+Name=wlp2s0
+
+[Link]
+RequiredForOnline=routable
+
+[Network]
+DHCP=yes
+IgnoreCarrierLoss=3s</pre>
+<p>If the wireless adapter has a static IP address, the configuration is the same (except for the interface name) as in a <a href="#Wired_adapter_using_a_static_IP">wired adapter</a>.
+</p>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> <code>IgnoreCarrierLoss=3s</code> ensures that <i>systemd-networkd</i> will not re-configure the interface (e.g., release and re-acquire a DHCP lease) for a short period (3 seconds in this example) while the wireless interface roams to another access point within the same wireless network (SSID), which translates to shorter downtime when roaming.</div>
+<p>To authenticate to the wireless network, use e.g. <a href="../en/Wpa_supplicant.html" title="Wpa supplicant">wpa_supplicant</a> or <a href="../en/Iwd.html" title="Iwd">iwd</a>.
+</p>
+<h4><span class="mw-headline" id="Wired_and_wireless_adapters_on_the_same_machine">Wired and wireless adapters on the same machine</span></h4>
+<p>This setup will enable a DHCP IP for both a wired and wireless connection making use of the metric directive to allow the kernel to decide on-the-fly which one to use.  This way, no connection downtime is observed when the wired connection is unplugged.
+</p>
+<p>The kernel's route metric (same as configured with <i>ip</i>) decides which route to use for outgoing packets, in cases when several match. This will be the case when both wireless and wired devices on the system have active connections. To break the tie, the kernel uses the metric. If one of the connections is terminated, the other automatically wins without there being a gap with nothing configured (ongoing transfers may still not deal with this nicely but that is at a different OSI layer).
+</p>
+<p><i>systemd-networkd</i> <a rel="nofollow" class="external text" href="https://github.com/systemd/systemd/issues/17698">does not set per-interface-type default route metrics</a>, so it needs to be configured manually:
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> The <code>Metric</code> option is for static routes while the <code>RouteMetric</code> option is for setups not using static routes. See <span class="plainlinks archwiki-template-man" title="$ man 5 systemd.network"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd.network.5">systemd.network(5)</a></span> for more details.</div>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/network/20-wired.network</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Match]
+Name=enp1s0
+
+[Link]
+RequiredForOnline=routable
+
+[Network]
+DHCP=yes
+
+[DHCPv4]
+RouteMetric=100
+
+[IPv6AcceptRA]
+RouteMetric=100</pre>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/network/25-wireless.network</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Match]
+Name=wlp2s0
+
+[Link]
+RequiredForOnline=routable
+
+[Network]
+DHCP=yes
+
+[DHCPv4]
+RouteMetric=600
+
+[IPv6AcceptRA]
+RouteMetric=600</pre>
+<h2><span class="mw-headline" id="Configuration_files">Configuration files</span></h2>
+<p>The global configuration file in <code>/etc/systemd/networkd.conf</code> may be used to override some defaults only. The main configuration is performed per network device. Configuration files are located in <code>/usr/lib/systemd/network/</code>, the volatile runtime network directory <code>/run/systemd/network/</code> and the local administration network directory <code>/etc/systemd/network/</code>. Files in <code>/etc/systemd/network/</code> have the highest priority.
+</p>
+<p>There are three types of configuration files. They all use a format similar to <a href="../en/Systemd.html#Writing_unit_files" title="Systemd">systemd unit files</a>. 
+</p>
+<ul>
+<li>
+<i>.network</i> files. They will apply a network configuration for a <i>matching</i> device</li>
+<li>
+<i>.netdev</i> files. They will create a <i>virtual network device</i> for a <i>matching</i> environment</li>
+<li>
+<i>.link</i> files. When a network device appears, <a href="../en/Udev.html" title="Udev">udev</a> will look for the first <i>matching</i> <i>.link</i> file</li>
+</ul>
+<p>They all follow the same rules: 
+</p>
+<ul>
+<li>If <b>all</b> conditions in the <code>[Match]</code> section are matched, the profile will be activated</li>
+<li>an empty <code>[Match]</code> section means the profile will apply in any case (can be compared to the <code>*</code> wildcard)</li>
+<li>all configuration files are collectively sorted and processed in lexical order, regardless of the directory in which they live</li>
+<li>files with identical name replace each other</li>
+</ul>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> 
+<ul>
+<li>Files in <code>/etc/systemd/network/</code> override the corresponding system-supplied file in <code>/usr/lib/systemd/network/</code>. Optionally use a symlink to <code>/dev/null</code> to "mask" a system file.</li>
+<li>systemd accepts the values <code>1</code>, <code>true</code>, <code>yes</code>, <code>on</code> for a true boolean, and the values <code>0</code>, <code>false</code>, <code>no</code>, <code>off</code> for a false boolean. See <span class="plainlinks archwiki-template-man" title="$ man 7 systemd.syntax"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd.syntax.7">systemd.syntax(7)</a></span>.</li>
+<li>systemd-networkd will alter routing tables also for other network software. If this is undesired, configure <code>ManageForeignRoutingPolicyRules=</code> in <span class="plainlinks archwiki-template-man" title="$ man 5 networkd.conf"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/networkd.conf.5">networkd.conf(5)</a></span> accordingly. For example, see <a href="../en/WireGuard.html#Connection_lost_after_sleep_using_systemd-networkd" title="WireGuard">WireGuard#Connection lost after sleep using systemd-networkd</a>.</li>
+</ul>
+</div>
+<h3><span class="mw-headline" id="network_files">network files</span></h3>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../File:Tango-edit-cut.svg" decoding="async" width="48" height="48" class="mw-file-element"></span></span><b>This article or section is being considered for removal.</b></p>
+<div>
+<b>Reason:</b> Duplicates the <span class="plainlinks archwiki-template-man" title="$ man 5 systemd.network"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd.network.5">systemd.network(5)</a></span> man page. (Discuss in <a href='../en/Talk:Systemd-networkd.html#Remove_"network_files"_section_which_just_duplicates_the_related_man_page' title="Talk:Systemd-networkd">Talk:Systemd-networkd#Remove_"network_files"_section_which_just_duplicates_the_related_man_page</a>)</div>
+</div>
+<p>These files are aimed at setting network configuration variables, especially for servers and containers.
+</p>
+<p><i>.network</i> files have the following sections: <code>[Match]</code>, <code>[Link]</code>, <code>[Network]</code>, <code>[Address]</code>, <code>[Route]</code>, and <code>[DHCPv4]</code>. Below are commonly configured keys for each section. See <span class="plainlinks archwiki-template-man" title="$ man 5 systemd.network"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd.network.5">systemd.network(5)</a></span> for more information and examples.
+</p>
+<h4>
+<span id=".5BMatch.5D"></span><span class="mw-headline" id="[Match]">[Match]</span>
+</h4>
+<table class="wikitable">
+<tbody>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Accepted Values</th>
+<th>Default Value
+</th>
+</tr>
+<tr>
+<td><code>Name=</code></td>
+<td>Match device names, e.g. <code>en*</code>. By prefixing with <code>!</code>, the list can be inverted.</td>
+<td>white-space separated device names with globs, logical negation (<code>!</code>)</td>
+<td>
+</td>
+</tr>
+<tr>
+<td><code>MACAddress=</code></td>
+<td>Match MAC addresses, e.g. <code>MACAddress=01:23:45:67:89:ab 00-11-22-33-44-55 AABB.CCDD.EEFF</code>
+</td>
+<td>whitespace-separated MAC addresses in full colon-, hyphen- or dot-delimited hexadecimal</td>
+<td>
+</td>
+</tr>
+<tr>
+<td><code>Host=</code></td>
+<td>Match the hostname or machine ID of the host.</td>
+<td>hostname string with globs, <span class="plainlinks archwiki-template-man" title="$ man 5 machine-id"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/machine-id.5">machine-id(5)</a></span>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td><code>Virtualization=</code></td>
+<td>Check whether the system is executed in a virtualized environment. <code>Virtualization=false</code> will only match your host machine, while <code>Virtualization=true</code> matches any container or VM. It is possible to check for a specific virtualization type or implementation, or for a user namespace (with <code>private-users</code>).</td>
+<td>boolean, logical negation (<code>!</code>), type (<code>vm</code>, <code>container</code>), implementation (see <span class="plainlinks archwiki-template-man" title="$ man 1 systemd-detect-virt"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd-detect-virt.1">systemd-detect-virt(1)</a></span>), <code>private-users</code>
+</td>
+<td>
+</td>
+</tr>
+</tbody>
+</table>
+<h4>
+<span id=".5BLink.5D"></span><span class="mw-headline" id="[Link]">[Link]</span>
+</h4>
+<table class="wikitable">
+<tbody>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Accepted Values</th>
+<th>Default Value
+</th>
+</tr>
+<tr>
+<td><code>MACAddress=</code></td>
+<td>Assign a hardware address to the device. Useful for <a href="../en/MAC_address_spoofing.html#systemd-udevd" title="MAC address spoofing">MAC address spoofing</a>.</td>
+<td>full colon-, hyphen- or dot-delimited hexadecimal MAC addresses</td>
+<td>
+</td>
+</tr>
+<tr>
+<td><code>MTUBytes=</code></td>
+<td>Maximum transmission unit in bytes to set for the device. Note that if IPv6 is enabled on the interface, and the MTU is chosen below 1280 (the minimum MTU for IPv6) it will automatically be increased to this value. Setting a larger MTU value (e.g. when using <a href="../en/Network_configuration.html#Set_device_MTU_and_queue_length" class="mw-redirect" title="Jumbo frames">jumbo frames</a>) can significantly speed up your network transfers</td>
+<td>integer (usual suffixes K, M, G, are supported and are understood to the base of 1024)</td>
+<td>
+</td>
+</tr>
+<tr>
+<td><code>Multicast=</code></td>
+<td>allows the usage of <a href="https://en.wikipedia.org/wiki/Multicast_address" class="extiw" title="wikipedia:Multicast address">multicast</a>
+</td>
+<td>boolean</td>
+<td>? not documented ?
+</td>
+</tr>
+</tbody>
+</table>
+<h4>
+<span id=".5BNetwork.5D"></span><span class="mw-headline" id="[Network]">[Network]</span>
+</h4>
+<table class="wikitable">
+<tbody>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Accepted Values</th>
+<th>Default Value
+</th>
+</tr>
+<tr>
+<td><code>DHCP=</code></td>
+<td>Controls DHCPv4 and/or DHCPv6 client support.</td>
+<td>boolean, <code>ipv4</code>, <code>ipv6</code>
+</td>
+<td>
+<code>no</code>
+</td>
+</tr>
+<tr>
+<td><code>DHCPServer=</code></td>
+<td>If enabled, a DHCPv4 server will be started.</td>
+<td>boolean</td>
+<td>
+<code>no</code>
+</td>
+</tr>
+<tr>
+<td><code>MulticastDNS=</code></td>
+<td>Enables <a href="https://tools.ietf.org/html/rfc6762" class="extiw" title="rfc:6762">multicast DNS</a> support. When set to <code>resolve</code>, only resolution is enabled, but not host or service registration and announcement.</td>
+<td>boolean, <code>resolve</code>
+</td>
+<td>
+<code>false</code>
+</td>
+</tr>
+<tr>
+<td><code>DNSSEC=</code></td>
+<td>Controls DNSSEC DNS validation support on the link. When set to <code>allow-downgrade</code>, compatibility with non-DNSSEC capable networks is increased, by automatically turning off DNSSEC in this case.</td>
+<td>boolean, <code>allow-downgrade</code>
+</td>
+<td>
+<code>false</code>
+</td>
+</tr>
+<tr>
+<td><code>DNS=</code></td>
+<td>Configure static <a href="../en/Domain_name_resolution.html" class="mw-redirect" title="DNS">DNS</a> addresses. May be specified more than once.</td>
+<td><span class="plainlinks archwiki-template-man" title="$ man 3 inet_pton"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/inet_pton.3">inet_pton(3)</a></span></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><code>Domains=</code></td>
+<td>A list of domains which should be resolved using the DNS servers on this link. <span class="plainlinks archwiki-template-man" title="$ man 5 systemd.network"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd.network.5#%5BNETWORK%5D_SECTION_OPTIONS">systemd.network(5) § [NETWORK] SECTION OPTIONS</a></span>
+</td>
+<td>domain name, optionally prefixed with a tilde (<code>~</code>)</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<code>IPv4Forwarding=</code> and <code>IPv6Forwarding=</code>
+</td>
+<td>If enabled, incoming (IPv4 / IPv6) packets on this network interface will be forwarded to any other interfaces according to the routing table. This controls the <code>net.ipv4/6.conf.INTERFACE.forwarding</code> sysctl option of the network interface. See <a href="../en/Internet_sharing.html#Enable_packet_forwarding" title="Internet sharing">Internet sharing#Enable packet forwarding</a> for details.</td>
+<td>boolean</td>
+<td>
+<code>no</code>
+</td>
+</tr>
+<tr>
+<td><code>IPMasquerade=</code></td>
+<td>If enabled, packets forwarded from the network interface will appear as coming from the local host. Depending on the value, implies <code>IPv6Forwarding=yes</code> or <code>IPv4Forwarding=yes</code>.</td>
+<td>
+<code>ipv4</code>, <code>ipv6</code>, <code>both</code>, <code>no</code>
+</td>
+<td>
+<code>no</code>
+</td>
+</tr>
+<tr>
+<td><code>IPv6PrivacyExtensions=</code></td>
+<td>Configures use of stateless temporary addresses that change over time (see <a href="https://tools.ietf.org/html/rfc4941" class="extiw" title="rfc:4941">RFC 4941</a>). When <code>prefer-public</code>, enables the privacy extensions, but prefers public addresses over temporary addresses. When <code>kernel</code>, the kernel's default setting will be left in place.</td>
+<td>boolean, <code>prefer-public</code>, <code>kernel</code>
+</td>
+<td>
+<code>no</code>
+</td>
+</tr>
+</tbody>
+</table>
+<h4>
+<span id=".5BAddress.5D"></span><span class="mw-headline" id="[Address]">[Address]</span>
+</h4>
+<table class="wikitable">
+<tbody>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Accepted Values</th>
+<th>Default Value
+</th>
+</tr>
+<tr>
+<td><code>Address=</code></td>
+<td>Specify this key more than once to configure several addresses. Mandatory unless DHCP is used. If the specified address is <code>0.0.0.0</code> (for IPv4) or <code>::</code> (for IPv6), a new address range of the requested size is automatically allocated from a system-wide pool of unused ranges.</td>
+<td>static IPv4 or IPv6 address and its prefix length (see <span class="plainlinks archwiki-template-man" title="$ man 3 inet_pton"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/inet_pton.3">inet_pton(3)</a></span>)</td>
+<td>
+</td>
+</tr>
+</tbody>
+</table>
+<h4>
+<span id=".5BRoute.5D"></span><span class="mw-headline" id="[Route]">[Route]</span>
+</h4>
+<ul>
+<li>
+<code>Gateway=</code> this option is <b>mandatory</b> unless direct routing or DHCP is used</li>
+<li>
+<code>Destination=</code> the destination prefix of the route, possibly followed by a slash and the prefix length</li>
+<li>
+<code>Metrics=</code> the priority of this route</li>
+<li>
+<code>Type=</code> the type for the route</li>
+<li>
+<code>Table=</code> the table identifier for the route</li>
+<li>
+<code>GatewayOnLink=</code> if set to <code>yes</code>, the kernel does not have to check if the gateway is reachable directly by the current machine (i.e., attached to the local network). Can be used to solve some routing issues.</li>
+</ul>
+<p>If <code>Destination</code> is not present in <code>[Route]</code> section, this section is treated as a default route.
+</p>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> Put the <code>Address=</code> and <code>Gateway=</code> keys in the <code>[Network]</code> section as a short-hand if <code>[Address]</code> section contains only an <code>Address</code> key and <code>[Route]</code> section contains only a <code>Gateway</code> key.</div>
+<h4>
+<span id=".5BRoutingPolicyRule.5D"></span><span class="mw-headline" id="[RoutingPolicyRule]">[RoutingPolicyRule]</span>
+</h4>
+<p>Standard routing algorithms usually take in account only the destination address when they have to choose to which gateway send a packet. But for more complex networks this is not enough.
+</p>
+<p>The <code>[RoutingPolicyRule]</code> section allows you to specify additional rules that are applied only to those packages that match the specified conditions.
+</p>
+<p>Here a non-exhaustive list of these matches:
+</p>
+<ul>
+<li>
+<code>TypeOfService=</code> (matches) the Type of Service of the packet as an integer in the range <code>0..255</code>;</li>
+<li>
+<code>From=</code> the source address prefix;</li>
+<li>
+<code>To=</code> the destination address prefix;</li>
+<li>
+<code>FirewallMark=</code> the iptables firewall mark value;</li>
+<li>
+<code>IncomingInterface=</code> the incoming device;</li>
+<li>
+<code>OutgoingInterface=</code> the outgoing device;</li>
+</ul>
+<p>Other options:
+</p>
+<ul>
+<li>
+<code>Type=</code> the Routing Policy Database rule type;</li>
+<li>
+<code>Table=</code> the routing table to use if the packet matches the rule;</li>
+<li>
+<code>Priority=</code> the priority of this rule. Rules are evaluated in increasing order of priority, therefore lower priority rules are applied before others;</li>
+<li>
+<code>InvertRule=</code> if set to <code>true</code> then the rule is inverted, that is it is applied to every package that doesn't satisfy at least one of the matches;</li>
+<li>
+<code>SuppressPrefixLength=</code> the rule is suppressed if the prefix length is equal or less than the specified value;</li>
+</ul>
+<h4>
+<span id=".5BDHCPv4.5D"></span><span class="mw-headline" id="[DHCPv4]">[DHCPv4]</span>
+</h4>
+<table class="wikitable">
+<tbody>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Accepted Values</th>
+<th>Default Value
+</th>
+</tr>
+<tr>
+<td><code>UseDNS=</code></td>
+<td>controls whether the DNS servers advertised by the DHCP server are used</td>
+<td>boolean</td>
+<td>
+<code>true</code>
+</td>
+</tr>
+<tr>
+<td><code>Anonymize=</code></td>
+<td>when true, the options sent to the DHCP server will follow the <a href="https://tools.ietf.org/html/rfc7844" class="extiw" title="rfc:7844">RFC:7844</a> (Anonymity Profiles for DHCP Clients) to minimize disclosure of identifying information</td>
+<td>boolean</td>
+<td>
+<code>false</code>
+</td>
+</tr>
+<tr>
+<td><code>UseDomains=</code></td>
+<td>controls whether the domain name received from the DHCP server will be used as DNS search domain. If set to <code>route</code>, the domain name received from the DHCP server will be used for routing DNS queries only, but not for searching. This option can sometimes fix local name resolving when using <a href="../en/Systemd-resolved.html" title="Systemd-resolved">systemd-resolved</a>
+</td>
+<td>boolean, <code>route</code>
+</td>
+<td>
+<code>false</code>
+</td>
+</tr>
+<tr>
+<td><code>IPv6OnlyMode=</code></td>
+<td>when true, the DHCP client will signal to the DHCP server that it supports IPv6-only operation (<a href="https://tools.ietf.org/html/rfc8925" class="extiw" title="rfc:8925">RFC:8925</a>, IPv6-Only Preferred Option for DHCPv4). If the DHCPv4 server returns that option in its DHCP response, the client will abort the DHCP request, will not acquire an IPv4 address and will configure an IPv6-only network</td>
+<td>boolean</td>
+<td>
+<code>true</code> if IPv6 is enabled
+</td>
+</tr>
+</tbody>
+</table>
+<h4>
+<span id=".5BDHCPServer.5D"></span><span class="mw-headline" id="[DHCPServer]">[DHCPServer]</span>
+</h4>
+<p>This is an example of a DHCP server configuration which works well with <a href="../en/Software_access_point.html#Wi-Fi_link_layer" class="mw-redirect" title="Hostapd">hostapd</a> to create a wireless hotspot. <code>IPMasquerade</code> adds the firewall rules for <a href="../en/Internet_sharing.html#Enable_NAT" title="Internet sharing">NAT</a> and implies <code>IPv4Forwarding=yes</code> to enable <a href="../en/Internet_sharing.html#Enable_packet_forwarding" title="Internet sharing">packet forwarding</a>.
+</p>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../File:Inaccurate.svg" decoding="async" width="48" height="48" class="mw-file-element"></span></span><b>The factual accuracy of this article or section is disputed.</b></p>
+<div>
+<b>Reason:</b> <code>IPMasquerade=ipv4</code> does not add the rules for the <code>filter</code> table, they have to be added manually. See <a href="../en/Systemd-nspawn.html#Use_a_virtual_Ethernet_link" title="Systemd-nspawn">systemd-nspawn#Use a virtual Ethernet link</a>. (Discuss in <a rel="nofollow" class="external text" href="../en/Talk:Systemd-networkd.html">Talk:Systemd-networkd</a>)</div>
+</div>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/network/<i>wlan0</i>.network</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Match]
+Name=wlan0
+
+[Network]
+Address=10.1.1.1/24
+DHCPServer=true
+IPMasquerade=ipv4
+
+[DHCPServer]
+PoolOffset=100
+PoolSize=20
+EmitDNS=yes
+DNS=9.9.9.9</pre>
+<h3><span class="mw-headline" id="netdev_files">netdev files</span></h3>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../File:Tango-edit-cut.svg" decoding="async" width="48" height="48" class="mw-file-element"></span></span><b>This article or section is being considered for removal.</b></p>
+<div>
+<b>Reason:</b> Duplicates the <span class="plainlinks archwiki-template-man" title="$ man 5 systemd.netdev"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd.netdev.5">systemd.netdev(5)</a></span> man page. (Discuss in <a href='../en/Talk:Systemd-networkd.html#Remove_"netdev_files"_section_which_just_duplicates_the_related_man_page' title="Talk:Systemd-networkd">Talk:Systemd-networkd#Remove_"netdev_files"_section_which_just_duplicates_the_related_man_page</a>)</div>
+</div>
+<p>These files will create virtual network devices. They have two sections: <code>[Match]</code> and <code>[NetDev]</code>. Below are commonly configured keys for each section. See <span class="plainlinks archwiki-template-man" title="$ man 5 systemd.netdev"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd.netdev.5">systemd.netdev(5)</a></span> for more information and examples.
+</p>
+<h4>
+<span id=".5BMatch.5D_section"></span><span class="mw-headline" id="[Match]_section">[Match] section</span>
+</h4>
+<ul>
+<li>
+<code>Host=</code> the hostname</li>
+<li>
+<code>Virtualization=</code> check if the system is running in a virtualized environment</li>
+</ul>
+<h4>
+<span id=".5BNetDev.5D_section"></span><span class="mw-headline" id="[NetDev]_section">[NetDev] section</span>
+</h4>
+<p>Most common keys are:
+</p>
+<ul>
+<li>
+<code>Name=</code> the interface name. <b>mandatory</b>
+</li>
+<li>
+<code>Kind=</code> e.g. <i>bridge</i>, <i>bond</i>, <i>vlan</i>, <i>veth</i>, <i>sit</i>, etc. <b>mandatory</b>
+</li>
+</ul>
+<h2><span class="mw-headline" id="Usage_with_containers">Usage with containers</span></h2>
+<p><i>systemd-networkd</i> can provide fully automatic configuration of networking for <a href="../en/Systemd-nspawn.html" title="Systemd-nspawn">systemd-nspawn</a> containers using private networking when it is used on the host system as well as inside the container. See <a href="../en/Systemd-nspawn.html#Networking" title="Systemd-nspawn">systemd-nspawn#Networking</a> for a comprehensive overview.
+</p>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> <a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Starting">Starting</a> <code>systemd-networkd</code> is <b>all that is needed</b> on the host to provide the described network auto-configuration for containers which use the default <a href="../en/Systemd-nspawn.html#Use_a_virtual_Ethernet_link" title="Systemd-nspawn">virtual Ethernet link</a> setup. The following is only needed for other private networking scenarios.</div>
+<p>For the examples below,
+</p>
+<ul>
+<li>we will limit the output of the <code>ip a</code> command to the concerned interfaces,</li>
+<li>we assume the <i>host</i> is the main operating system running on real hardware and the <i>container</i> is the guest system,</li>
+<li>all interface names and IP addresses are only examples.</li>
+</ul>
+<h3><span class="mw-headline" id="Network_bridge_with_DHCP">Network bridge with DHCP</span></h3>
+<h4><span class="mw-headline" id="Bridge_interface">Bridge interface</span></h4>
+<p>First, create a virtual <a href="../en/Network_bridge.html" class="mw-redirect" title="Bridge">bridge</a> interface with a <i>.netdev</i> unit file which tells <i>systemd-networkd</i> to create a device named <code>br0</code> that functions as an Ethernet bridge.
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/network/25-br0.netdev</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[NetDev]
+Name=br0
+Kind=bridge</pre>
+<p>Optionally add <code>MACAddress=none</code> to the <code>NetDev</code> section for the bridge to inherit MAC address from one of the bridged interfaces. This also requires a creation of <i>25-br0.link</i> file.
+</p>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> <i>systemd-networkd</i> assigns a MAC address generated based on the interface name and the machine ID to the bridge. This may cause connection issues, for example in case of routing based on MAC filtering. To circumvent such problems, assign a MAC address to your bridge, probably the same as your physical device, adding the line <code>MACAddress=<i>xx</i>:<i>xx</i>:<i>xx</i>:<i>xx</i>:<i>xx</i>:<i>xx</i></code> in the <code>NetDev</code> section above.</div>
+<p><a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Restart">Restart</a> <code>systemd-networkd.service</code> to have <i>systemd-networkd</i> create the bridge.
+</p>
+<p>To see the newly created bridge on the host and on the container, type:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">$ ip a</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">3: br0: &lt;BROADCAST,MULTICAST&gt; mtu 1500 qdisc noop state DOWN group default 
+    link/ether ae:bd:35:ea:0c:c9 brd ff:ff:ff:ff:ff:ff
+</pre>
+<p>Note that the interface <code>br0</code> is listed but is still DOWN at this stage.
+</p>
+<h4><span class="mw-headline" id="Bind_Ethernet_to_bridge">Bind Ethernet to bridge</span></h4>
+<p>The next step is to add a network interface to the newly created bridge. The configuration file of the bridge must be loaded before those of the bridged interfaces, so its configuration file should be alphanumerically prior to those. In the example below, we add any interface that matches the name <code>en*</code> into the bridge <code>br0</code>. 
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/network/25-br0-en.network</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Match]
+Name=en*
+
+[Network]
+Bridge=br0</pre>
+<p>The Ethernet interface must not have DHCP or an IP address associated, as the bridge requires an interface to bind to with no IP address.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> Ensure that no other <i>.network</i> file attempts to match interfaces by <code>Name=en*</code>. Only the first file that matches an interface is applied.</div>
+<h4><span class="mw-headline" id="Bridge_network">Bridge network</span></h4>
+<p>Now that the bridge has been created and has been bound to an existing network interface, the IP configuration of the bridge interface must be specified. This is defined in a third <i>.network</i> file, the example below uses DHCP.
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/network/25-br0.network</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Match]
+Name=br0
+
+[Link]
+RequiredForOnline=routable
+
+[Network]
+DHCP=yes</pre>
+<h4>
+<span id="Inherit_MAC_address_.28optional.29"></span><span class="mw-headline" id="Inherit_MAC_address_(optional)">Inherit MAC address (optional)</span>
+</h4>
+<p>For the bridge to inhering MAC address from one of the bridged interfaces, set <code>MACAddress=none</code> and <code>MACAddressPolicy=none</code>.
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/network/25-br0.netdev</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[NetDev]
+Name=br0
+Kind=bridge
+MACAddress=none</pre>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/network/25-br0.link</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Match]
+OriginalName=br0
+
+[Link]
+MACAddressPolicy=none</pre>
+<p><br>
+</p>
+<h4><span class="mw-headline" id="Configure_the_container">Configure the container</span></h4>
+<p>Use the <code>--network-bridge=br0</code> option when starting the container. See <a href="../en/Systemd-nspawn.html#Use_a_network_bridge" title="Systemd-nspawn">systemd-nspawn#Use a network bridge</a> for details.
+</p>
+<h4><span class="mw-headline" id="Result">Result</span></h4>
+<ul><li>on host</li></ul>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">$ ip a</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">3: br0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc noqueue state UP group default 
+    link/ether 14:da:e9:b5:7a:88 brd ff:ff:ff:ff:ff:ff
+    inet 192.168.1.87/24 brd 192.168.1.255 scope global br0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::16da:e9ff:feb5:7a88/64 scope link 
+       valid_lft forever preferred_lft forever
+6: vb-<i>MyContainer</i>: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc pfifo_fast master br0 state UP group default qlen 1000
+    link/ether d2:7c:97:97:37:25 brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::d07c:97ff:fe97:3725/64 scope link 
+       valid_lft forever preferred_lft forever
+</pre>
+<ul><li>on container</li></ul>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">$ ip a</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">2: host0: &lt;BROADCAST,MULTICAST,ALLMULTI,AUTOMEDIA,NOTRAILERS,UP,LOWER_UP&gt; mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 5e:96:85:83:a8:5d brd ff:ff:ff:ff:ff:ff
+    inet 192.168.1.73/24 brd 192.168.1.255 scope global host0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::5c96:85ff:fe83:a85d/64 scope link 
+       valid_lft forever preferred_lft forever
+</pre>
+<h4><span class="mw-headline" id="Notice">Notice</span></h4>
+<ul>
+<li>we have now one IP address for <code>br0</code> on the host, and one for <code>host0</code> in the container</li>
+<li>two new interfaces have appeared: <code>vb-<i>MyContainer</i></code> in the host and <code>host0</code> in the container. This comes as a result of the <code>--network-bridge=br0</code> option as explained in <a href="../en/Systemd-nspawn.html#Use_a_network_bridge" title="Systemd-nspawn">systemd-nspawn#Use a network bridge</a> for details.</li>
+<li>the DHCP address on <code>host0</code> comes from the system <code>/usr/lib/systemd/network/80-container-host0.network</code> file.</li>
+<li>on host</li>
+</ul>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../File:View-refresh-red.svg" decoding="async" width="48" height="48" class="mw-file-element"></span></span><b>This article or section is out of date.</b></p>
+<div>
+<b>Reason:</b> <i>brctl</i> is deprecated, use <code>bridge link</code>. See <a href="../en/Network_bridge.html#With_iproute2" title="Network bridge">Network bridge#With iproute2</a>. (Discuss in <a rel="nofollow" class="external text" href="../en/Talk:Systemd-networkd.html">Talk:Systemd-networkd</a>)</div>
+</div>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">$ brctl show</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">bridge name	bridge id		STP enabled	interfaces
+br0		8000.14dae9b57a88	no		enp7s0
+							vb-<i>MyContainer</i>
+</pre>
+<p>the above command output confirms we have a bridge with two interfaces binded to.
+</p>
+<ul><li>on host</li></ul>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">$ ip route</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">default via 192.168.1.254 dev br0 
+192.168.1.0/24 dev br0  proto kernel  scope link  src 192.168.1.87
+</pre>
+<ul><li>on container</li></ul>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">$ ip route</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">default via 192.168.1.254 dev host0 
+192.168.1.0/24 dev host0  proto kernel  scope link  src 192.168.1.73
+</pre>
+<p>the above command outputs confirm we have activated <code>br0</code> and <code>host0</code> interfaces with an IP address and Gateway 192.168.1.254. The gateway address has been automatically grabbed by <i>systemd-networkd</i>.
+</p>
+<h3><span class="mw-headline" id="Network_bridge_with_static_IP_addresses">Network bridge with static IP addresses</span></h3>
+<p>Setting a static IP address for each device can be helpful in case of deployed web services (e.g FTP, http, SSH). Each device will keep the same MAC address across reboots if your system <code>/usr/lib/systemd/network/99-default.link</code> file has the <code>MACAddressPolicy=persistent</code> option (it has by default). This setup routes any service on the gateway to the desired device.
+</p>
+<p>The following configuration needs to be done for this setup:
+</p>
+<ul><li>on host</li></ul>
+<p>The configuration is very similar to the <a href="#Network_bridge_with_DHCP">#Network bridge with DHCP</a> section. First, a virtual bridge interface needs to be created and the main physical interface needs to be bound to it. This task can be accomplished with the following two files, with contents equal to those available in the DHCP section.
+</p>
+<pre>/etc/systemd/network/<i>MyBridge</i>.netdev
+/etc/systemd/network/<i>MyEth</i>.network
+</pre>
+<p>Next, you need to configure the IP and DNS of the newly created virtual bridge interface. For example:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/network/<i>MyBridge</i>.network</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Match]
+Name=br0
+
+[Network]
+DNS=192.168.1.254
+Address=192.168.1.87/24
+Gateway=192.168.1.254</pre>
+<ul><li>on container</li></ul>
+<p>To get configure a static IP address on the container, we need to override the system <code>/usr/lib/systemd/network/80-container-host0.network</code> file, which provides a DHCP configuration for the <code>host0</code> network interface of the container. This can be done by placing the configuration into <code>/etc/systemd/network/80-container-host0.network</code>. For example:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/network/80-container-host0.network</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Match]
+Name=host0
+
+[Network]
+DNS=192.168.1.254
+Address=192.168.1.94/24
+Gateway=192.168.1.254</pre>
+<p>Make sure that <code>systemd-networkd.service</code> is <a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Enabled">enabled</a> in the container.
+</p>
+<h3><span class="mw-headline" id="MACVLAN_bridge">MACVLAN bridge</span></h3>
+<p>For the host to be able to reach containers connected via MACVLAN, the host itself also needs to connect via MACVLAN and not directly to the underlying Ethernet network interface.
+</p>
+<p>On the host, attach the underlying Ethernet network interface to MACVLAN and make sure it does not get assigned IP addresses. For example, using <code>mv-0</code> as the MACVLAN interface name and with <code>enp1s0</code> as the host's Ethernet interface:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/network/30-enp1s0.network</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Match]
+Name=enp1s0
+
+[Link]
+RequiredForOnline=carrier
+
+[Network]
+MACVLAN=mv-0
+DHCP=no
+IPv6AcceptRA=false
+LinkLocalAddressing=no
+MulticastDNS=false
+LLMNR=false</pre>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> 
+<ul>
+<li>
+<code>RequiredForOnline=carrier</code> prevents <a href="#systemd-networkd-wait-online">systemd-networkd-wait-online.service</a> from waiting (and eventually failing) for the connection to acquire an IP address, which will never happen.</li>
+<li>The underlying network interface does not necessarily need to be a physical Ethernet interface. For example, a MACVLAN bridge can be attached to a bond.</li>
+</ul>
+</div>
+<p>Create the MACVLAN bridge <code>mv-0</code>:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/network/25-mv-0.netdev</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[NetDev]
+Name=mv-0
+Kind=macvlan
+
+[MACVLAN]
+Mode=bridge</pre>
+<p>Configure the host's network connection on the MACVLAN bridge (<code>mv-0</code>). The following example uses DHCP, replace the options as necessary.
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/network/35-mv-0.network</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Match]
+Name=mv-0
+
+[Link]
+RequiredForOnline=routable
+
+[Network]
+BindCarrier=enp1s0
+DHCP=yes</pre>
+<p>For the container, attach a MACVLAN to the <b>underlying Ethernet network interface</b> (<code>enp1s0</code> in the examples above). For example, in <code>/etc/systemd/nspawn/<i>container_name</i>.nspawn</code> specify:
+</p>
+<pre>[Network]
+MACVLAN=enp1s0</pre>
+<p>For containers started from the command line, pass them the <code>--network-macvlan=enp1s0</code> option.
+</p>
+<p>In the container, the MACVLAN interface will have the name <code>mv-<i>underlying_interface_name</i></code> (e.g. <code>mv-enp1s0</code>). Configure the network connection as necessary (just like in the host) by matching the interface name. For example, using DHCP:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/network/30-mv-enp1s0.network</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Match]
+Name=mv-enp1s0
+
+[Link]
+RequiredForOnline=routable
+
+[Network]
+DHCP=yes</pre>
+<h2><span class="mw-headline" id="Tips_and_tricks">Tips and tricks</span></h2>
+<h3><span class="mw-headline" id="Interface_and_desktop_integration">Interface and desktop integration</span></h3>
+<p><i>systemd-networkd</i> does not have a proper interactive graphical management interface. Still, some tools are available to either display or modify the current state of the network, receive notifications or interact with the wireless configuration:
+</p>
+<ul>
+<li>
+<i>networkctl</i> provides a <a href="../en/Command-line_shell.html" title="Command-line shell">command-line shell</a> interface to query or modify the network interface states. It is worth noting that in order to change only some aspects of an interface behavior, one is required to first <a href="../en/Help:Reading.html#Append,_add,_create,_edit" title="Help:Reading">edit</a> one or more configuration files in <code>/etc/systemd/network/</code>.</li>
+<li>When <i>networkd</i> is configured with <a href="../en/Wpa_supplicant.html" title="Wpa supplicant">wpa_supplicant</a>, both <i>wpa_cli</i> and <i>wpa_gui</i> offer the ability to associate and configure WLAN interfaces dynamically.</li>
+<li>The <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/networkd-dispatcher/">networkd-dispatcher</a></span><sup><small>AUR</small></sup> daemon allows executing scripts in response to network interface state changes, similar to <i>NetworkManager-dispatcher</i>.</li>
+<li>The <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/networkd-notify-git/">networkd-notify-git</a></span><sup><small>AUR</small></sup> creates simple notification messages on interface changes.</li>
+<li>As for the DNS resolver <i>systemd-resolved</i>, information about current DNS servers can be visualized with <code>resolvectl status</code>.</li>
+</ul>
+<h3>
+<span id="Configuring_static_IP_or_DHCP_based_on_SSID_.28location.29"></span><span class="mw-headline" id="Configuring_static_IP_or_DHCP_based_on_SSID_(location)">Configuring static IP or DHCP based on SSID (location)</span>
+</h3>
+<p>Often there is a situation where your home wireless network uses DHCP and office wireless network uses static IP. This mixed setup can be configured as follows:
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> Number in the file name decides the order in which the files are processed. Users can [Match] based on SSID or BSSID or both.</div>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/network/24-wireless-office.network</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;"># special configuration for office Wi-Fi network
+[Match]
+Name=wlp2s0
+SSID=office_ap_name
+#BSSID=aa:bb:cc:dd:ee:ff
+
+[Network]
+Address=10.1.10.9/24
+Gateway=10.1.10.1
+DNS=10.1.10.1
+#DNS=8.8.8.8</pre>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/network/25-wireless-dhcp.network</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;"># use DHCP for any other Wi-Fi network
+[Match]
+Name=wlp2s0
+
+[Link]
+RequiredForOnline=routable
+
+[Network]
+DHCP=yes</pre>
+<h3><span class="mw-headline" id="Bonding_a_wired_and_wireless_interface">Bonding a wired and wireless interface</span></h3>
+<p>See also <a href="../en/Wireless_bonding.html" title="Wireless bonding">Wireless bonding</a>.
+</p>
+<p>Bonding allows connection sharing through multiple interfaces, so if e.g. the wired interface is unplugged, the wireless is still connected and the network connectivity remains up seamlessly.
+</p>
+<p>Create a bond interface. In this case the mode is <i>active-backup</i>, which means packets are routed through a secondary interface if the primary interface goes down.
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/network/30-bond0.netdev</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[NetDev]
+Name=bond0
+Kind=bond
+
+[Bond]
+Mode=active-backup
+PrimaryReselectPolicy=always
+MIIMonitorSec=1s</pre>
+<p>Set the wired interface as the primary:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/network/30-ethernet-bond0.network</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Match]
+Name=enp0s25
+
+[Network]
+Bond=bond0
+PrimarySlave=true</pre>
+<p>Set the wireless as the secondary:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/network/30-wifi-bond0.network</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Match]
+Name=wlan0
+
+[Network]
+Bond=bond0</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> When using MAC addresses in the <code>[Match]</code> section, use of <code>PermanentMACAddress</code> is recommended over <code>MACAddress</code>, see <a rel="nofollow" class="external text" href="https://github.com/systemd/systemd/issues/27432">this upstream discussion</a>.</div>
+<p>Configure the bond interface just like a normal interface:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/network/30-bond0.network</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Match]
+Name=bond0
+
+[Link]
+RequiredForOnline=routable
+
+[Network]
+BindCarrier=enp0s25 wlan0
+DHCP=yes</pre>
+<p>Now if the wired network is unplugged, the connection should remain through the wireless:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">$ networkctl</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">IDX LINK    TYPE     OPERATIONAL      SETUP     
+  1 lo      loopback carrier          unmanaged 
+  2 enp0s25 ether    no-carrier       configured
+  3 bond0   bond     degraded-carrier configured
+  5 wlan0   wlan     enslaved         configured
+
+4 links listed.
+</pre>
+<h3><span class="mw-headline" id="Speeding_up_TCP_slow-start">Speeding up TCP slow-start</span></h3>
+<p>On a higher bandwidth link with moderate latency (typically a home Internet connection that is above 10 Mbit/s) the default settings for the TCP Slow Start algorithm are somewhat conservative.  This issue exhibits as downloads starting slowly and taking a number of seconds to speed up before they reach the connection's full bandwidth.  It is particularly noticeable with a pacman upgrade, where each package downloaded starts off slowly and often finishes before it has reached the connection's full speed.
+</p>
+<p>These settings can be adjusted to make TCP connections start with larger window sizes than the defaults, avoiding the time it takes for them to automatically increase on each new TCP connection<a rel="nofollow" class="external autonumber" href="https://www.cdnplanet.com/blog/tune-tcp-initcwnd-for-optimum-performance/">[1]</a>.  While this will usually decrease performance on slow connections (or if the values are increased too far) due to having to retransmit a larger number of lost packets, they can substantially increase performance on connections with sufficient bandwidth.
+</p>
+<p>It is important to benchmark before and after changing these values to ensure it is improving network speed and not reducing it.  If you are not seeing downloads begin slowly and gradually speed up, then there is no need to change these values as they are already optimal for your connection speed.  When benchmarking, be sure to test against both a high speed and low speed remote server to ensure you are not speeding up access to fast machines at the expense of making access to slow servers even slower.
+</p>
+<p>To adjust these values, edit the <i>.network</i> file for the connection:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/network/eth0.network</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Match]
+Name=eth0
+
+#[Network]
+#Gateway=...  &lt;-- Remove this if you have it, and put it in the Gateway= line below
+
+[Route]
+# This will apply to the gateway supplied via DHCP.  If you manually specify
+# your gateway, put it here instead.
+Gateway=_dhcp4
+
+# The defaults for these values is 10.  They are a multiple of the MSS (1460 bytes).
+InitialCongestionWindow=10
+InitialAdvertisedReceiveWindow=10</pre>
+<p>The defaults of <code>10</code> work well for connections slower than 10 Mbit/s.  For a 100 Mbit/s connection, a value of <code>30</code> works well.  The manual page <span class="plainlinks archwiki-template-man" title="$ man 5 systemd.network"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd.network.5#%5BROUTE%5D_SECTION_OPTIONS">systemd.network(5) § [ROUTE] SECTION OPTIONS</a></span> says a value of <code>100</code> is considered excessive.
+</p>
+<p>If the <a href="../en/Sysctl.html" title="Sysctl">sysctl</a> setting <code>net.ipv4.tcp_slow_start_after_idle</code> is enabled then the connection will return to these initial settings after it has been idle for some time (and often a very small amount of time).  If this setting is disabled then the connection will maintain a higher window if a larger one was negotiated during packet transfer.  Regardless of the setting, each new TCP connection will begin with the <code>Initial*</code> settings set above.
+</p>
+<p>The sysctl setting <code>net.ipv4.tcp_congestion_control</code> is not directly related to these values, as it controls how the congestion and receive windows are adjusted while a TCP link is active, and particularly when the path between the two hosts is congested and throughput must be reduced.  The above <code>Initial*</code> values simply set the default window values selected for each new connection, before any congestion algorithm takes over and adjusts them as needed.  Setting higher initial values simply shortcuts some negotiation while the congestion algorithm tries to find the optimum values (or, conversely, setting the wrong initial values adds additional negotiation time while the congestion algorithm works towards correcting them, slowing down each newly established TCP connection for a few seconds extra).
+</p>
+<h3><span class="mw-headline" id="Prevent_multiple_default_routes">Prevent multiple default routes</span></h3>
+<p><i>systemd-networkd</i> <a rel="nofollow" class="external text" href="https://github.com/systemd/systemd/issues/17698">does not set per-interface-type default route metrics</a>, i.e. they need to be configured manually when using multiple network devices. For example, the following <code>ip route</code> shows multiple default routes:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">ip route</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">default via 10.30.1.1 dev eno2 proto dhcp src 10.30.1.15 metric 1024
+default via 192.168.1.254 dev eno1 proto dhcp src 172.18.105.104 metric 1024</pre>
+<p>Since the same default <code>metric</code> value <code>1024</code> is assigned, there is a race condition which of both is chosen as default route. Since the <code>eno2</code> device came up first, it is preferred and thus, access available via <code>eno1</code> may be ignored.
+</p>
+<p>To prevent the race condition, assign different <code>RouteMetric=</code> values for the devices. See <a href="#Wired_and_wireless_adapters_on_the_same_machine">#Wired and wireless adapters on the same machine</a> for a corresponding example.
+</p>
+<p>If instead one device should not provide a default route, the <code>UseRoutes=false</code> option can be used to ignore routes provides by the DHCP server. This may be useful, for example, if the device provides a connection to a single other machine.
+</p>
+<h3><span class="mw-headline" id="Configuring_a_second_static_IP_with_its_own_MAC_address_on_an_existing_interface">Configuring a second static IP with its own MAC address on an existing interface</span></h3>
+<p>To make your computer appear as two completely separate devices to your router, you can create a virtual interface not just with a different IP but also with a different MAC address.
+</p>
+<p>To achieve this, create a virtual interface (<i>macvlan</i>) on top of your physical interface with a unique MAC address:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/network/<i>25-eth210</i>.netdev</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[NetDev]
+Name=<i>eth210</i>
+Kind=macvlan
+MACAddress=<i>00:11:22:33:44:55</i>
+
+[MACVLAN]
+Mode=bridge</pre>
+<p>Then add a network file as usual, using the same subnet and gateway, and avoiding the range of IP numbers used for DHCP if you configure a static IP. For example:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/network/<i>25-eth210</i>.network</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Match]
+Name=<i>eth210</i>
+
+[Network]
+Address=<i>192.168.132.210/24</i>
+Gateway=<i>192.168.132.1</i>
+
+[Route]
+Destination=<i>192.168.132.0/24</i>
+Metric=2</pre>
+<p>The <i>macvlan</i> interface route has metric 2. This ensures that traffic will prefer going through the main interface, since that (implicitly) has a default route with metric 1, unless specifically directed to use the <i>macvlan</i> interface.
+</p>
+<p>Finally, add <code>MACVLAN=eth210</code> to the <code>[Network]</code> section of the <i>.network</i> file of your main interface!
+</p>
+<p>At this point, a fast way to make your router aware of the new MAC (and configure it to accept that MAC) you can for example run <code>arping -I eth210 192.168.132.1</code> as root. After configuring your router for the "new device" you can test if the new interface has internet access with for example <code>curl --interface 192.168.132.210 ifconfig.me</code> that should then print your public IP number.
+</p>
+<h2><span class="mw-headline" id="See_also">See also</span></h2>
+<ul>
+<li><span class="plainlinks archwiki-template-man" title="$ man 8 systemd-networkd"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd-networkd.8">systemd-networkd(8)</a></span></li>
+<li><a rel="nofollow" class="external text" href="https://web.archive.org/web/20201111213850/https://coreos.com/blog/intro-to-systemd-networkd/">Tom Gundersen posts on Core OS blog</a></li>
+<li>
+<a rel="nofollow" class="external text" href="https://bbs.archlinux.org/viewtopic.php?pid=1393759#p1393759">How to set up systemd-networkd with wpa_supplicant</a> (WonderWoofy's walkthrough on Arch forums)</li>
+</ul>
+</div>
+</div>
+					<div id="catlinks" class="catlinks" data-mw="interface">
+<div id="mw-normal-catlinks" class="mw-normal-catlinks">
+<a href="../Special:Categories.html" title="Special:Categories">Categories</a>: <ul>
+<li><a href="../en/Category:Network_managers.html" title="Category:Network managers">Network managers</a></li>
+<li><a href="../en/Category:Virtualization.html" title="Category:Virtualization">Virtualization</a></li>
+</ul>
+</div>
+<div id="mw-hidden-catlinks" class="mw-hidden-catlinks mw-hidden-cats-hidden">Hidden categories: <ul>
+<li><a href="../en/Category:Pages_or_sections_flagged_with_Template:Expansion.html" title="Category:Pages or sections flagged with Template:Expansion">Pages or sections flagged with Template:Expansion</a></li>
+<li><a href="../en/Category:Sections_flagged_with_Template:Remove.html" title="Category:Sections flagged with Template:Remove">Sections flagged with Template:Remove</a></li>
+<li><a href="../en/Category:Pages_or_sections_flagged_with_Template:Accuracy.html" title="Category:Pages or sections flagged with Template:Accuracy">Pages or sections flagged with Template:Accuracy</a></li>
+<li><a href="../en/Category:Pages_or_sections_flagged_with_Template:Out_of_date.html" title="Category:Pages or sections flagged with Template:Out of date">Pages or sections flagged with Template:Out of date</a></li>
+</ul>
+</div>
+</div>
+				</div>
+			</main>
+			
+		</div>
+		<div class="mw-footer-container">
+			
+<footer id="footer" class="mw-footer" style="margin: 0">
+	<ul id="footer-info">
+	<li data-nosnippet="">Retrieved from "<a dir="ltr" href="https://wiki.archlinux.org/index.php?title=Systemd-networkd&amp;oldid=829031">https://wiki.archlinux.org/index.php?title=Systemd-networkd&amp;oldid=829031</a>"</li>
+<li id="footer-info-lastmod"> This page was last edited on 15 March 2025, at 16:53.</li>
+	<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+<br>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="https://terms.archlinux.org/docs/privacy-policy/">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="../en/ArchWiki:About.html">About ArchWiki</a></li>
+	<li id="footer-places-disclaimers"><a href="../en/ArchWiki:General_disclaimer.html">Disclaimers</a></li>
+	<li id="footer-places-archwiki-code-of-conduct"><a href="https://terms.archlinux.org/docs/code-of-conduct/" class="extiw" title="archlinux-service-agreements:code-of-conduct">Code of conduct</a></li>
+	<li id="footer-places-archwiki-terms-of-service"><a href="https://terms.archlinux.org/docs/terms-of-service/" class="extiw" title="archlinux-service-agreements:terms-of-service">Terms of service</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-copyrightico"><a href="https://www.gnu.org/copyleft/fdl.html" class="cdx-button cdx-button--fake-button cdx-button--size-large cdx-button--fake-button--enabled"><img src="/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" loading="lazy"></a></li>
+	<li id="footer-poweredbyico"><img src="/resources/assets/poweredby_mediawiki.svg" width="88" height="31" loading="lazy"></li>
+</ul>
+
+</footer>
+
+		</div>
+	</div> 
+</div> 
+<div class="vector-settings" id="p-dock-bottom">
+	<ul></ul>
+</div>
+</body>
+</html>

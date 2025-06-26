@@ -1,0 +1,46 @@
+<h1>aws kinesis</h1>
+
+<blockquote><p>Interact with the Amazon Kinesis Data Streams, a service that scales elastically for real-time processing of streaming big data.
+More information: <a href="https://docs.aws.amazon.com/cli/latest/reference/kinesis/index.html#cli-aws-kinesis">https://docs.aws.amazon.com/cli/latest/reference/kinesis/index.html#cli-aws-kinesis</a>.</p></blockquote>
+
+<ul>
+<li>Show all streams in the account:</li>
+</ul>
+
+
+<p><code>aws kinesis list-streams</code></p>
+
+<ul>
+<li>Write one record to a Kinesis stream:</li>
+</ul>
+
+
+<p><code>aws kinesis put-record --stream-name {{name}} --partition-key {{key}} --data {{base64_encoded_message}}</code></p>
+
+<ul>
+<li>Write a record to a Kinesis stream with inline base64 encoding:</li>
+</ul>
+
+
+<p><code>aws kinesis put-record --stream-name {{name}} --partition-key {{key}} --data "$( echo "{{my raw message}}" | base64 )"</code></p>
+
+<ul>
+<li>List the shards available on a stream:</li>
+</ul>
+
+
+<p><code>aws kinesis list-shards --stream-name {{name}}</code></p>
+
+<ul>
+<li>Get a shard iterator for reading from the oldest message in a stream&rsquo;s shard:</li>
+</ul>
+
+
+<p><code>aws kinesis get-shard-iterator --shard-iterator-type TRIM_HORIZON --stream-name {{name}} --shard-id {{id}}</code></p>
+
+<ul>
+<li>Read records from a shard, using a shard iterator:</li>
+</ul>
+
+
+<p><code>aws kinesis get-records --shard-iterator {{iterator}}</code></p>

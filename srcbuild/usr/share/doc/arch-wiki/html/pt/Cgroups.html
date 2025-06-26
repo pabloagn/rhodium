@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-sticky-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-0 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-disabled skin-theme-clientpref-day vector-toc-available" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>cgroups (Português) - ArchWiki</title>
+<link rel="stylesheet" href="../ArchWikiOffline.css">
+<meta name="ResourceLoaderDynamicStyles" content="">
+<meta name="generator" content="MediaWiki 1.43.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="max-image-preview:standard">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.25, maximum-scale=5.0">
+<link rel="search" type="application/opensearchdescription+xml" href="/rest.php/v1/search" title="ArchWiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.archlinux.org/api.php?action=rsd">
+<link rel="license" href="https://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="ArchWiki Atom feed" href="/index.php?title=Special:RecentChanges&amp;feed=atom">
+</head>
+<body class="skin--responsive skin-vector skin-vector-search-vue mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Cgroups_Português rootpage-Cgroups_Português skin-vector-2022 action-view">
+<a class="mw-jump-link" href="#bodyContent">Jump to content</a>
+<div class="vector-header-container">
+	</div>
+<div class="mw-page-container">
+	<div class="mw-page-container-inner">
+		<div class="vector-column-start">
+			<div class="vector-main-menu-container">
+		</div>
+	<div class="vector-sticky-pinned-container">
+				<nav id="mw-panel-toc" aria-label="Contents" data-event-name="ui.sidebar-toc" class="mw-table-of-contents-container vector-toc-landmark">
+					<div id="vector-toc-pinned-container" class="vector-pinned-container">
+					<div id="vector-toc" class="vector-toc vector-pinnable-element">
+	<div class="vector-pinnable-header vector-toc-pinnable-header vector-pinnable-header-pinned" data-feature-name="toc-pinned" data-pinnable-element-id="vector-toc">
+	<h2 class="vector-pinnable-header-label">Contents</h2>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-toc.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-toc.unpin">hide</button>
+</div>
+
+
+	<ul class="vector-toc-contents" id="mw-panel-toc-list">
+		<li id="toc-mw-content-text" class="vector-toc-list-item vector-toc-level-1">
+			<a href="#" class="vector-toc-link">
+				<div class="vector-toc-text">Beginning</div>
+			</a>
+		</li>
+		<li id="toc-Instalação" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Instala%C3%A7%C3%A3o">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">1</span>
+				<span>Instalação</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Instalação-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Com_systemd" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Com_systemd">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">2</span>
+				<span>Com systemd</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Com_systemd-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Com systemd subsection</span>
+			</button>
+		
+		<ul id="toc-Com_systemd-sublist" class="vector-toc-list">
+			<li id="toc-Hierarquia" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Hierarquia">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1</span>
+					<span>Hierarquia</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Hierarquia-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Encontre_o_cgroup_de_um_processo" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Encontre_o_cgroup_de_um_processo">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2</span>
+					<span>Encontre o cgroup de um processo</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Encontre_o_cgroup_de_um_processo-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Uso_de_recursos_do_cgroup" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Uso_de_recursos_do_cgroup">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.3</span>
+					<span>Uso de recursos do cgroup</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Uso_de_recursos_do_cgroup-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Customização_de_cgroups" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Customiza%C3%A7%C3%A3o_de_cgroups">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.4</span>
+					<span>Customização de cgroups</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Customização_de_cgroups-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Como_serviços" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Como_servi%C3%A7os">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.5</span>
+					<span>Como serviços</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Como_serviços-sublist" class="vector-toc-list">
+				<li id="toc-Arquivo_unit_de_serviço" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Arquivo_unit_de_servi%C3%A7o">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.5.1</span>
+					<span>Arquivo unit de serviço</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Arquivo_unit_de_serviço-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Agrupando_unit_em_um_slice" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Agrupando_unit_em_um_slice">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.5.2</span>
+					<span>Agrupando unit em um slice</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Agrupando_unit_em_um_slice-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Como_root" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Como_root">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.6</span>
+					<span>Como root</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Como_root-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Como_usuário_sem_privilégios" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Como_usu%C3%A1rio_sem_privil%C3%A9gios">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.7</span>
+					<span>Como usuário sem privilégios</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Como_usuário_sem_privilégios-sublist" class="vector-toc-list">
+				<li id="toc-Tipos_de_controladores" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Tipos_de_controladores">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.7.1</span>
+					<span>Tipos de controladores</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Tipos_de_controladores-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Delegações_de_usuário" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Delega%C3%A7%C3%B5es_de_usu%C3%A1rio">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.7.2</span>
+					<span>Delegações de usuário</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Delegações_de_usuário-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Slices_definidos_pelo_usuário" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Slices_definidos_pelo_usu%C3%A1rio">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.7.3</span>
+					<span>Slices definidos pelo usuário</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Slices_definidos_pelo_usuário-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Ajuste_durante_runtime_-_Tempo_de_execução" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Ajuste_durante_runtime_-_Tempo_de_execu%C3%A7%C3%A3o">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.8</span>
+					<span>Ajuste durante runtime - Tempo de execução</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Ajuste_durante_runtime_-_Tempo_de_execução-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Com_libcgroup" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Com_libcgroup">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">3</span>
+				<span>Com libcgroup</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Com_libcgroup-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Com libcgroup subsection</span>
+			</button>
+		
+		<ul id="toc-Com_libcgroup-sublist" class="vector-toc-list">
+			<li id="toc-Grupos_ad-hoc" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Grupos_ad-hoc">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1</span>
+					<span>Grupos ad-hoc</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Grupos_ad-hoc-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Configuração_persistente_de_grupo" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Configura%C3%A7%C3%A3o_persistente_de_grupo">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.2</span>
+					<span>Configuração persistente de grupo</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Configuração_persistente_de_grupo-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Com_o_sistema_de_arquivos_virtual_cgroup" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Com_o_sistema_de_arquivos_virtual_cgroup">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">4</span>
+				<span>Com o sistema de arquivos virtual cgroup</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Com_o_sistema_de_arquivos_virtual_cgroup-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Exemplos" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Exemplos">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">5</span>
+				<span>Exemplos</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Exemplos-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Exemplos subsection</span>
+			</button>
+		
+		<ul id="toc-Exemplos-sublist" class="vector-toc-list">
+			<li id="toc-Restrição_de_uso_da_memória_ou_CPU_de_um_comando" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Restri%C3%A7%C3%A3o_de_uso_da_mem%C3%B3ria_ou_CPU_de_um_comando">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.1</span>
+					<span>Restrição de uso da memória ou CPU de um comando</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Restrição_de_uso_da_memória_ou_CPU_de_um_comando-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Matlab" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Matlab">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.2</span>
+					<span>Matlab</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Matlab-sublist" class="vector-toc-list">
+				<li id="toc-Com_systemd_2" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Com_systemd_2">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.2.1</span>
+					<span>Com systemd</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Com_systemd_2-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Com_libcgroup_2" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Com_libcgroup_2">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.2.2</span>
+					<span>Com libcgroup</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Com_libcgroup_2-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Documentação" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Documenta%C3%A7%C3%A3o">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">6</span>
+				<span>Documentação</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Documentação-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Dicas_e_truques" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Dicas_e_truques">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">7</span>
+				<span>Dicas e truques</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Dicas_e_truques-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Dicas e truques subsection</span>
+			</button>
+		
+		<ul id="toc-Dicas_e_truques-sublist" class="vector-toc-list">
+			<li id="toc-Habilitar_cgroup_v1" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Habilitar_cgroup_v1">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">7.1</span>
+					<span>Habilitar cgroup v1</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Habilitar_cgroup_v1-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Veja_também" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Veja_tamb%C3%A9m">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">8</span>
+				<span>Veja também</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Veja_também-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+</ul>
+</div>
+
+					</div>
+		</nav>
+			</div>
+		</div>
+		<div class="mw-content-container">
+			<main id="content" class="mw-body" style="margin: 0">
+				<header class="mw-body-header vector-page-titlebar">
+					<nav aria-label="Contents" class="vector-toc-landmark">
+						
+<div id="vector-page-titlebar-toc" class="vector-dropdown vector-page-titlebar-toc vector-button-flush-left">
+	<input type="checkbox" id="vector-page-titlebar-toc-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-page-titlebar-toc" class="vector-dropdown-checkbox " aria-label="Toggle the table of contents">
+	<label id="vector-page-titlebar-toc-label" for="vector-page-titlebar-toc-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"><span class="vector-icon mw-ui-icon-listBullet mw-ui-icon-wikimedia-listBullet"></span>
+
+<span class="vector-dropdown-label-text">Toggle the table of contents</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+							<div id="vector-page-titlebar-toc-unpinned-container" class="vector-unpinned-container">
+			</div>
+		
+	</div>
+</div>
+
+					</nav>
+					<h1 id="firstHeading" class="firstHeading mw-first-heading">cgroups (Português)</h1>
+							
+<div id="p-lang-btn" class="vector-dropdown mw-portlet mw-portlet-lang">
+	<input type="checkbox" id="p-lang-btn-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-p-lang-btn" class="vector-dropdown-checkbox mw-interlanguage-selector" aria-label="Go to an article in another language. Available in 2 languages">
+	<label id="p-lang-btn-label" for="p-lang-btn-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--action-progressive mw-portlet-lang-heading-2" aria-hidden="true"><span class="vector-icon mw-ui-icon-language-progressive mw-ui-icon-wikimedia-language-progressive"></span>
+
+<span class="vector-dropdown-label-text">2 languages</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+		<div class="vector-menu-content">
+			
+			<ul class="vector-menu-content-list">
+				
+				<li class="interlanguage-link interwiki-en mw-list-item"><a href="../en/Cgroups.html" title="Cgroups – English" lang="en" hreflang="en" data-title="Cgroups" data-language-autonym="English" data-language-local-name="English" class="interlanguage-link-target"><span>English</span></a></li>
+<li class="interlanguage-link interwiki-ja mw-list-item"><a href="https://wiki.archlinux.jp/index.php/Cgroups" title="Cgroups – 日本語" lang="ja" hreflang="ja" data-title="Cgroups" data-language-autonym="日本語" data-language-local-name="日本語" class="interlanguage-link-target"><span>日本語</span></a></li>
+			</ul>
+			
+		</div>
+
+	</div>
+</div>
+</header>
+				<div class="vector-column-end">
+					<div class="vector-sticky-pinned-container">
+						<nav class="vector-page-tools-landmark" aria-label="Page tools">
+							<div id="vector-page-tools-pinned-container" class="vector-pinned-container">
+				
+							</div>
+		</nav>
+						<nav class="vector-appearance-landmark" aria-label="Appearance">
+							<div id="vector-appearance-pinned-container" class="vector-pinned-container">
+				<div id="vector-appearance" class="vector-appearance vector-pinnable-element">
+	<div class="vector-pinnable-header vector-appearance-pinnable-header vector-pinnable-header-pinned" data-feature-name="appearance-pinned" data-pinnable-element-id="vector-appearance" data-pinned-container-id="vector-appearance-pinned-container" data-unpinned-container-id="vector-appearance-unpinned-container">
+	<div class="vector-pinnable-header-label">Appearance</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-appearance.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-appearance.unpin">hide</button>
+</div>
+
+
+</div>
+
+							</div>
+		</nav>
+					</div>
+				</div>
+				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container>
+					<div class="vector-body-before-content">
+							<div class="mw-indicators">
+		</div>
+
+						<div id="siteSub" class="noprint">From ArchWiki</div>
+					</div>
+					<div id="contentSub"><div id="mw-content-subtitle"></div></div>
+					
+					
+					<div id="mw-content-text" class="mw-body-content">
+<div class="mw-content-ltr mw-parser-output" lang="pt" dir="ltr">
+<p><span>
+</span>
+</p>
+<div class="archwiki-template-meta-related-articles">
+<p>Artigos relacionados</p>
+<ul>
+<li><a href="../en/Linux_Containers.html" title="Linux Containers">Linux Containers</a></li>
+<li><a href="../en/Systemd-nspawn.html" title="Systemd-nspawn">systemd-nspawn</a></li>
+<li><a href="../en/Docker.html" title="Docker">Docker</a></li>
+<li><a href="../en/Limits.conf.html" title="Limits.conf">limits.conf</a></li>
+</ul>
+</div>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Status de tradução:</strong> Esse artigo é uma tradução de <a href="../en/Cgroups.html" title="Cgroups">Cgroups</a>. Data da última tradução: 2023-03-11. Você pode ajudar a sincronizar a tradução, se houver <a rel="nofollow" class="external text" href="https://wiki.archlinux.org/index.php?title=Cgroups&amp;diff=0&amp;oldid=802280">alterações</a> na versão em inglês.</div>
+<p><b>Grupos de Controle</b>, ou em inglês <b>Control groups</b> (ou também conhecido por <b>cgroups</b>) é um recurso para gerenciamento, restrição e auditoria de grupos de processos fornecido pelo kernel Linux. Comparado com outros gerenciamentos como pelo comando <span class="plainlinks archwiki-template-man" title="$ man 1 nice"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/nice.1">nice(1)</a></span> ou por configurações em <code>/etc/security/limits.conf</code>, cgroups é mais flexível por conseguir operar em (sub)conjuntos de processos (usável com diferentes usuários de sistema).
+</p>
+<p>O controle de grupos pode ser acessado por diversas ferramentas:
+</p>
+<ul>
+<li>Usando diretivas nos arquivos unit do <a href="../pt/Systemd.html" title="Systemd (Português)">systemd</a> para especificar limites de serviços e slices;</li>
+<li>Acessando o sistema de arquivos <code>cgroup</code> diretamente;</li>
+<li>Por via de <code>cgcreate</code>, <code>cgexec</code> e <code>cgclassify</code> (parte dos pacotes <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/libcgroup-git/">libcgroup-git</a></span><sup><small>AUR</small></sup> e <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/libcgroup-git/">libcgroup-git</a></span><sup><small>AUR</small></sup>) ou similares;</li>
+<li>Usando o serviço de controle de grupos (rules engine daemon) para automaticamente mover certos usuários/grupos/comandos para grupos (<code>/etc/cgrules.conf</code>) e <code>cgconfig.service</code> (parte dos pacotes <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/libcgroup-git/">libcgroup-git</a></span><sup><small>AUR</small></sup> e <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/libcgroup-git/">libcgroup-git</a></span><sup><small>AUR</small></sup>);</li>
+<li>E através de outros softwares de virtualização como <a href="../pt/Linux_Containers.html" title="Linux Containers (Português)">Linux Containers</a> (LXC).</li>
+</ul>
+<p>Em Arch Linux systemd é o método preferível e mais fácil para chamar e configurar cgroups, pois faz parte da instalação padrão.
+</p>
+<meta property="mw:PageProp/toc">
+<h2>
+<span id="Instala.C3.A7.C3.A3o"></span><span class="mw-headline" id="Instalação">Instalação</span>
+</h2>
+<p>Tenha certeza que você possui um desses pacotes <a href="../pt/Pacman.html#Instalando_pacotes" class="mw-redirect" title="Instalado">instalados</a> para automatizar o controle de grupos:
+</p>
+<ul>
+<li>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=systemd">systemd</a></span> - para controle de recursos de um serviço systemd.</li>
+<li>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/libcgroup/">libcgroup</a></span><sup><small>AUR</small></sup>, <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/libcgroup-git/">libcgroup-git</a></span><sup><small>AUR</small></sup> - conjunto de ferramentas standalone (<code>cgcreate</code>, <code>cgclassify</code>, persistência via <code>cgconfig.conf</code>).</li>
+</ul>
+<h2><span class="mw-headline" id="Com_systemd">Com systemd</span></h2>
+<h3><span class="mw-headline" id="Hierarquia">Hierarquia</span></h3>
+<p>A atual hierarquia de cgroup pode ser vista com <code>systemctl status</code> ou pelo comando <code>systemd-cgls</code>.
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">$ systemctl status</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">● myarchlinux
+    State: running
+     Jobs: 0 queued
+   Failed: 0 units
+    Since: Wed 2019-12-04 22:16:28 UTC; 1 day 4h ago
+   CGroup: /
+           ├─user.slice 
+           │ └─user-1000.slice 
+           │   ├─user@1000.service 
+           │   │ ├─gnome-shell-wayland.service 
+           │   │ │ ├─ 1129 /usr/bin/gnome-shell
+           │   │ ├─gnome-terminal-server.service 
+           │   │ │ ├─33519 /usr/lib/gnome-terminal-server
+           │   │ │ ├─37298 fish
+           │   │ │ └─39239 systemctl status
+           │   │ ├─init.scope 
+           │   │ │ ├─1066 /usr/lib/systemd/systemd --user
+           │   │ │ └─1067 (sd-pam)
+           │   └─session-2.scope 
+           │     ├─1053 gdm-session-worker [pam/gdm-password]
+           │     ├─1078 /usr/bin/gnome-keyring-daemon --daemonize --login
+           │     ├─1082 /usr/lib/gdm-wayland-session /usr/bin/gnome-session
+           │     ├─1086 /usr/lib/gnome-session-binary
+           │     └─3514 /usr/bin/ssh-agent -D -a /run/user/1000/keyring/.ssh
+           ├─init.scope 
+           │ └─1 /sbin/init
+           └─system.slice 
+             ├─systemd-udevd.service 
+             │ └─285 /usr/lib/systemd/systemd-udevd
+             ├─systemd-journald.service 
+             │ └─272 /usr/lib/systemd/systemd-journald
+             ├─NetworkManager.service 
+             │ └─656 /usr/bin/NetworkManager --no-daemon
+             ├─gdm.service 
+             │ └─668 /usr/bin/gdm
+             └─systemd-logind.service 
+               └─654 /usr/lib/systemd/systemd-logind
+</pre>
+<h3><span class="mw-headline" id="Encontre_o_cgroup_de_um_processo">Encontre o cgroup de um processo</span></h3>
+<p>O nome de um processo do cgroup pode ser encontrado em <code>/proc/<i>PID</i>/cgroup</code>. 
+</p>
+<p>Por exemplo, o cgroup do shell:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">$ cat /proc/self/cgroup</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">0::/user.slice/user-1000.slice/session-3.scope
+</pre>
+<h3><span class="mw-headline" id="Uso_de_recursos_do_cgroup">Uso de recursos do cgroup</span></h3>
+<p>O comando <code>systemd-cgtop</code> pode ser usado para visualizar o uso de recursos:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">$ systemd-cgtop</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">Control Group                            Tasks   %CPU   Memory  Input/s Output/s
+user.slice                                 540  152,8     3.3G        -        -
+user.slice/user-1000.slice                 540  152,8     3.3G        -        -
+user.slice/u…000.slice/session-1.scope     425  149,5     3.1G        -        -
+system.slice                                37      -   215.6M        -        -
+</pre>
+<h3>
+<span id="Customiza.C3.A7.C3.A3o_de_cgroups"></span><span class="mw-headline" id="Customização_de_cgroups">Customização de cgroups</span>
+</h3>
+<p>Um arquivo unit <span class="plainlinks archwiki-template-man" title="$ man 5 systemd.slice"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd.slice.5">systemd.slice(5)</a></span> pode ser usado para definir uma configuração de cgroup personalizada, do qual deve ser colocado em um diretório do systemd como <code>/etc/systemd/system/</code>. As opções de controle de recursos que podem ser atribuídas estão documentadas em <span class="plainlinks archwiki-template-man" title="$ man 5 systemd.resource-control"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd.resource-control.5">systemd.resource-control(5)</a></span>.
+</p>
+<p>Este é um exemplo de um <i>slice unit</i> que pode somente permitir 30% da CPU em uso:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/system/meu.slice</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Slice]
+CPUQuota=30%</pre>
+<p>Lembre-se de fazer systemd <a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Daemon-reload">daemon-reload</a> para selecionar qualquer arquivo novo ou modificado em <code>.slice</code>.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Nota:</strong> Como mostrado acima, um slice permite agrupar e gerenciar recursos e processos de uma unidade (unit) do systemd.</div>
+<h3>
+<span id="Como_servi.C3.A7os"></span><span class="mw-headline" id="Como_serviços">Como serviços</span>
+</h3>
+<h4>
+<span id="Arquivo_unit_de_servi.C3.A7o"></span><span class="mw-headline" id="Arquivo_unit_de_serviço">Arquivo unit de serviço</span>
+</h4>
+<p>Recursos podem ser especificamente direcionados em uma definição de serviço ou como <a href="../pt/Systemd.html#Arquivos_drop-in" class="mw-redirect" title="Arquivo drop-in">arquivo drop-in</a>:
+</p>
+<pre>[Service]
+MemoryMax=1G 
+</pre>
+<p>Neste exemplo os limites do serviço foram definidos para 1 gigabyte.
+</p>
+<h4><span class="mw-headline" id="Agrupando_unit_em_um_slice">Agrupando unit em um slice</span></h4>
+<p>Um serviço pode ser direcionado para uma execução de slice específica em:
+</p>
+<pre>[Service]
+Slice=<i>meu.slice</i></pre>
+<h3><span class="mw-headline" id="Como_root">Como root</span></h3>
+<p><code>systemd-run</code> pode ser usado para executar um comando em um slice específico. 
+</p>
+<pre># systemd-run --slice=<i>meu.slice</i> <i>comando</i>
+</pre>
+<p><code>--uid=<i>nomedousuario</i></code> é uma opção usada para gerar o comando como um usuário específico.
+</p>
+<pre># systemd-run --uid=<i>nomedousuario</i> --slice=<i>meu.slice</i> <i>comando</i>
+</pre>
+<p>A opção <code>--shell</code> é usada para gerar um comando em shell de dentro do slice.
+</p>
+<h3>
+<span id="Como_usu.C3.A1rio_sem_privil.C3.A9gios"></span><span class="mw-headline" id="Como_usuário_sem_privilégios">Como usuário sem privilégios</span>
+</h3>
+<p>Usuários sem privilégios podem dividir os recursos disponibilizados em novos cgroups, se claro algumas condições forem atendidas.
+</p>
+<p>É importante que cgroups v2 seja utilizado para que um usuário sem privilégios consiga as permissões de gerenciamento de recursos cgroup.
+</p>
+<h4><span class="mw-headline" id="Tipos_de_controladores">Tipos de controladores</span></h4>
+<p>Nem todos os recursos podem ser controlados pelo usuário. 
+</p>
+<table class="wikitable">
+<tbody>
+<tr>
+<th>Controlador</th>
+<th>Controlado pelo usuário</th>
+<th>Opções
+</th>
+</tr>
+<tr>
+<td>cpu</td>
+<td data-sort-value="3" style="background: #ffa; color: inherit; vertical-align: middle; text-align: center;">Precisa de delegação</td>
+<td>CPUAccounting, CPUWeight, CPUQuota, AllowedCPUs, AllowedMemoryNodes
+</td>
+</tr>
+<tr>
+<td>io</td>
+<td data-sort-value="3" style="background: #ffa; color: inherit; vertical-align: middle; text-align: center;">Precisa de delegação</td>
+<td>IOWeight, IOReadBandwidthMax, IOWriteBandwidthMax, IODeviceLatencyTargetSec
+</td>
+</tr>
+<tr>
+<td>memory</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sim</td>
+<td>MemoryLow, MemoryHigh, MemoryMax, MemorySwapMax
+</td>
+</tr>
+<tr>
+<td>pids</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sim</td>
+<td>TasksMax
+</td>
+</tr>
+<tr>
+<td>rdma</td>
+<td data-sort-value="1" style="background: #faa; color: inherit; vertical-align: middle; text-align: center;">Não</td>
+<td>
+<i>Não definido ou desconhecido.</i>
+</td>
+</tr>
+<tr>
+<td>eBPF</td>
+<td data-sort-value="1" style="background: #faa; color: inherit; vertical-align: middle; text-align: center;">Não</td>
+<td>IPAddressDeny, DeviceAllow, DevicePolicy
+</td>
+</tr>
+</tbody>
+</table>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Nota:</strong> eBPF tecnicamente não é considerado um controlador, mas sim as opções implementadas pelo systemd que as usa e somente o usuário root possui permissão de mudá-las.</div>
+<h4>
+<span id="Delega.C3.A7.C3.B5es_de_usu.C3.A1rio"></span><span class="mw-headline" id="Delegações_de_usuário">Delegações de usuário</span>
+</h4>
+<p>Para o usuário controlar CPU e recursos de I/O os mesmos precisam ser delegados ao usuário em questão. Isso pode ser feito com um <a href="../pt/Systemd.html#Arquivos_drop-in" class="mw-redirect" title="Arquivo drop-in">arquivo drop-in</a>.
+</p>
+<p>Por exemplo, se o seu id de usuário for 1000:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/system/user@1000.service.d/delegate.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Service]
+Delegate=cpu cpuset io</pre>
+<p>Reinicie o sistema e verifique a utilização dos controladores <code>cpu</code> e <code>io</code> na sessão de usuário:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">$ cat /sys/fs/cgroup/user.slice/user-1000.slice/cgroup.controllers</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;"><b>cpuset cpu io</b> memory pids
+</pre>
+<h4>
+<span id="Slices_definidos_pelo_usu.C3.A1rio"></span><span class="mw-headline" id="Slices_definidos_pelo_usuário">Slices definidos pelo usuário</span>
+</h4>
+<p>Os arquivos slice de usuário podem ser colocados em <code>~/.config/systemd/user/</code>.
+</p>
+<p>Para executar comandos em um certo slice:
+</p>
+<pre>$ systemd-run --user --slice=<i>meu.slice</i> <i>comando</i>
+</pre>
+<p>Você pode também executar seu login shell de dentro do slice:
+</p>
+<pre>$ systemd-run --user --slice=<i>meu.slice</i> --shell
+</pre>
+<h3>
+<span id="Ajuste_durante_runtime_-_Tempo_de_execu.C3.A7.C3.A3o"></span><span class="mw-headline" id="Ajuste_durante_runtime_-_Tempo_de_execução">Ajuste durante runtime - Tempo de execução</span>
+</h3>
+<p>Recursos definidos pelo cgroups podem ser ajustados durante o tempo de execução usando o comando <code>systemctl set-property</code>. A sintaxe é idêntica às opções de <span class="plainlinks archwiki-template-man" title="$ man 5 systemd.resource-control"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd.resource-control.5">systemd.resource-control(5)</a></span>.
+</p>
+<p>Por exemplo, para cortar o acesso à internet de todas as sessões de usuário:
+</p>
+<pre>$ systemctl set-property user.slice IPAddressDeny=any
+</pre>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Atenção:</strong>  Os ajustes serão <b>permanentes</b> a não ser que a opção <code>--runtime</code> seja passada. As alterações são salvas em <code>/etc/systend/system.control/</code> e, portanto, gerenciam as opções gerais do sistema, enquanto as opções de usuário são salvas em <code>.config/systemd/user.control/</code>.</div>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Nota:</strong>  Nem todos os recursos tem efeito imediato após alteração. Por exemplo, gerar alterações com TaskMax terá efeito somente depois de criado novos processos.</div>
+<h2><span class="mw-headline" id="Com_libcgroup">Com libcgroup</span></h2>
+<p>É possível <a href="../pt/Systemd.html#Usando_units" class="mw-redirect" title="Habilitar">habilitar</a> o serviço <code>chconfig</code> com systemd. Isto permite facilmente o rastreio de quaisquer erros gerados pelo <code>cgconfig.conf</code>.
+</p>
+<h3><span class="mw-headline" id="Grupos_ad-hoc">Grupos ad-hoc</span></h3>
+<p>Um dos poderes de cgroups é a criação de grupos "ad-hoc" em tempo real. Uma das vantagens é adicionar privilégios ao usuário regular ativo para criação de grupos customizados. No exemplo abaixo <code>nomedogrupo</code> é o nome do cgroup:
+</p>
+<pre># cgcreate -a <i>usuario</i> -t <i>usuario</i> -g memory,cpu:<i>nomedogrupo</i>
+</pre>
+<p>Agora todos os comportamentos ajustados no grupo <code>nomedogrupo</code> podem ser escritos pelo usuário ativo.
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">$ ls -l /sys/fs/cgroup/memory/<i>nomedogrupo</i></pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">total 0
+-rwxrwxr-x 1 user root 0 Sep 25 00:39 cgroup.event_control
+-rwxrwxr-x 1 user root 0 Sep 25 00:39 cgroup.procs
+-rwxrwxr-x 1 user root 0 Sep 25 00:39 cpu.rt_period_us
+-rwxrwxr-x 1 user root 0 Sep 25 00:39 cpu.rt_runtime_us
+-rwxrwxr-x 1 user root 0 Sep 25 00:39 cpu.shares
+-rwxrwxr-x 1 user root 0 Sep 25 00:39 notify_on_release
+-rwxrwxr-x 1 user root 0 Sep 25 00:39 tasks
+</pre>
+<p>Cgroups são hierárquicos, ou seja, um usuário pode criar quantos subgrupos forem desejados. Se por exemplo um usuário regular quiser executar o shell <code>bash</code> de dentro de um novo subgrupo chamado <code>foo</code>:
+</p>
+<pre>$ cgcreate -g memory,cpu:<b>nomedogrupo/foo</b>
+$ <b>cgexec</b>    -g memory,cpu:nomedogrupo/foo <b>bash</b>
+</pre>
+<p>Por garantia verifique (somente necessário ao usar cgroups legacy (v1)):
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">$ cat /proc/self/cgroup</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">11:memory:/nomedogrupo/foo
+6:cpu:/nomedogrupo/foo
+</pre>
+<p>Desta forma um novo subdiretório foi criado para este grupo. Para limitar o uso da memória de todos os processos envolvidos no grupo em 10MB, execute o comando abaixo:
+</p>
+<pre>$ echo 10000000 &gt; /sys/fs/cgroup/memory/groupname/foo/memory.limit_in_bytes
+</pre>
+<p>Note que o limite de memória se aplica apenas ao uso de RAM. A partir do momento que as tarefas alcançarem o máximo estabelecido, a memória é convertida em swap. Entretanto a troca não afetará a performance de forma significativa.
+</p>
+<p>De maneira similar, você pode mudar a prioridade ("shares", ou compartilhamentos) de CPU em grupo. Por padrão todos os grupos tem 1024 shares. Um grupo com 100 shares deterá aproximadamente 10% do tempo de CPU.
+</p>
+<pre>$ echo 100 &gt; /sys/fs/cgroup/cpu/groupname/foo/cpu.shares
+</pre>
+<p>Mais ajustes de comportamento ou estatísticas podem ser encontrados ao listar o diretório do cgroup. 
+</p>
+<p>Se for preferível um processo já em execução pode ter seu cgroup alterado. Como mostrado no exemplo abaixo, para mover todos os comandos dos processos em shell 'bash' com destino ao <code>nomedogrupo/foo</code>:
+</p>
+<pre>$ pidof bash
+13244 13266
+$ <b>cgclassify</b> -g memory,cpu:nomedogrupo/foo `pidof bash`
+$ cat /proc/13244/cgroup
+11:memory:/nomedogrupo/foo
+6:cpu:/nomedogrupo/foo
+</pre>
+<h3>
+<span id="Configura.C3.A7.C3.A3o_persistente_de_grupo"></span><span class="mw-headline" id="Configuração_persistente_de_grupo">Configuração persistente de grupo</span>
+</h3>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Nota:</strong> Quando usada uma versão de <a href="../en/Systemd.html" title="Systemd">Systemd</a> ≥ 205 (maior ou igual a 205) ao gerenciar cgroups, você pode ignorar totalmente este arquivo.</div> 
+<p>Se você quiser que cgroups sejam criados durante o boot, defina no arquivo de configuração em <code>/etc/cgconfig.conf</code>. Por exemplo, o "nomedogrupo" garante permissão para o <code>$USER</code> e <i>usuários</i> do grupo  <code>$GROUP</code> para gerenciar limites e adicionar tarefas. Portanto as definições de grupo do <i>subgrupo</i> "nomedogrupo/foo" seriam semelhantes a configuração abaixo:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/cgconfig.conf </pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">group <b>nomedogrupo</b> {
+  perm {
+# who can manage limits
+    admin {
+      uid = <b>$USER</b>;
+      gid = <b>$GROUP</b>;
+    }
+# who can add tasks to this group
+    task {
+      uid = <b>$USER</b>;
+      gid = <b>$GROUP</b>;
+    }
+  }
+# create this group in cpu and memory controllers
+  cpu { }
+  memory { }
+}
+
+group <b>nomedogrupo/foo</b> {
+  cpu {
+    <b>cpu.shares</b> = 100;
+  }
+  memory {
+    <b>memory.limit_in_bytes</b> = 10000000;
+  }
+}</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Nota:</strong> 
+<ul>
+<li>Comentários <i>devem</i> começar na primeira linha! Ou seja, o carácter <b>#</b> usado em comentários deve aparecer como o primeiro carácter da linha. Caso não seja, o <i>cgconfigparser</i> irá ter problemas de <a href="https://en.wikipedia.org/wiki/pt:An%C3%A1lise_sint%C3%A1tica_(computa%C3%A7%C3%A3o)" class="extiw" title="wikipedia:pt:Análise sintática (computação)">parsing</a> e será reportado o erro: <code>cgroup change of grupo failed</code>, ou de forma traduzida: <code>mudança de grupo falhou para cgroup</code>. O erro também é evitável se <i>cgconfig</i> for executado por uma unit do <a href="../pt/Systemd.html" title="Systemd (Português)">systemd</a>.</li>
+<li>A seção de permissões é opcional.</li>
+<li>A hierarquia do diretório <code>/sys/fs/cgroup/</code> que contém todos os <i>controladores</i> já possui os subdiretórios criados e montados durante o boot como um sistema de arquivos virtual. Isto fornece a habilidade de criar uma nova entrada de grupo com o comando <code><i>$CONTROLLER-NAME { }</i></code>. Se por alguma razão você quiser criar e montar hierarquias em outro lugar, será necessário escrever uma segunda entrada em <code>/etc/cgconfig.conf</code> da seguinte forma:</li>
+</ul>
+<pre> mount {    
+   cpuset = /local/do/<i>nomedogrupo</i>;
+ }
+</pre>
+<p>Isto é equivalente a esses comandos em shell:
+</p>
+<pre> # mkdir /local/do/<i>nomedogrupo</i>
+ # mount -t /local/do -o cpuset <i>nomedogrupo</i> /local/do/<i>nomedogrupo</i>
+</pre>
+</div>
+<h2><span class="mw-headline" id="Com_o_sistema_de_arquivos_virtual_cgroup">Com o sistema de arquivos virtual cgroup</span></h2>
+<p>A partir do systemd versão 232, ao invés do método <i>cgm</i> descrito na próxima seção abaixo, esta seção aborda uma alternativa manual para configurar a limitação de memória em uso.
+</p>
+<p>Crie um novo nome de cgroup chamado <i>nomedogrupo</i>:
+</p>
+<pre># mkdir /sys/fs/cgroup/memory/<i>nomedogrupo</i>
+</pre>
+<p>Exemplo: defina o valor limite de memória para 100MB:
+</p>
+<pre># echo 100000000 &gt; /sys/fs/cgroup/memory/<i>nomedogrupo</i>/memory.limit_in_bytes
+</pre>
+<p>Mova um único processo para o cgroup por vez:
+</p>
+<pre># echo <i>pid</i> &gt; /sys/fs/cgroup/memory/<i>groupname</i>/cgroup.procs
+</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Nota:</strong> Neste último comando, somente um PID pode ser escrito por vez. Portanto, repita esse passo para cada processo que precise ser movido.</div>
+<h2><span class="mw-headline" id="Exemplos">Exemplos</span></h2>
+<h3>
+<span id="Restri.C3.A7.C3.A3o_de_uso_da_mem.C3.B3ria_ou_CPU_de_um_comando"></span><span class="mw-headline" id="Restrição_de_uso_da_memória_ou_CPU_de_um_comando">Restrição de uso da memória ou CPU de um comando</span>
+</h3>
+<p>O exemplo a seguir demonstra um <i>cgroup</i> que restringe um determinado comando para 2GB de memória.
+</p>
+<pre>$ systemd-run --scope -p MemoryMax=2G --user <i>comando</i>
+</pre>
+<p>E o exemplo a seguir demonstra um comando restringido para 20% do uso de um core de CPU.
+</p>
+<pre>$ systemd-run --scope -p CPUQuota="20%" --user <i>comando</i>
+</pre>
+<h3><span class="mw-headline" id="Matlab">Matlab</span></h3>
+<p>Fazer cálculos extensos com <a href="../en/MATLAB.html" title="MATLAB">MATLAB</a> pode resultar em <i>crash</i> do seu sistema. Devido ao fato que Matlab não possui nenhuma proteção contra o consumo de memória ou CPU da máquina. O exemplo a seguir mostra um <i>cgroup</i> que restringe o uso do Matlab para o limite dos primeiros 6 cores de CPU e 5GB de memória.
+</p>
+<h4><span class="mw-headline" id="Com_systemd_2">Com systemd</span></h4>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">~/.config/systemd/user/matlab.slice</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Slice]
+AllowedCPUs=0-5
+MemoryHigh=6G</pre>
+<p>Inicie Matlab desta maneira (tenha certeza que o caminho está correto):
+</p>
+<pre>$ systemd-run --user --slice=matlab.slice /opt/MATLAB/2012b/bin/matlab -desktop
+</pre>
+<h4><span class="mw-headline" id="Com_libcgroup_2">Com libcgroup</span></h4>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/cgconfig.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">group matlab {
+    perm {
+        admin {
+            uid = <i>nomedousuario</i>;
+        }
+        task {
+            uid = <i>nomedousuario</i>;
+        }
+    }
+
+    cpuset {
+        cpuset.mems="0";
+        cpuset.cpus="0-5";
+    }
+    memory {
+        memory.limit_in_bytes = 5000000000;
+    }
+}</pre>
+<p>Mude <code><i>nomedousuario</i></code> para o nome de usuário que estiver executando Matlab.
+</p>
+<p>Você também pode restringir o compartilhamento de CPU (share) ao delimitar com <code>cpu</code>.
+</p>
+<p>Inicie Matlab desta maneira (tenha certeza que o caminho está correto):
+</p>
+<pre>$ cgexec -g memory,cpuset:matlab /opt/MATLAB/2012b/bin/matlab -desktop
+</pre>
+<h2>
+<span id="Documenta.C3.A7.C3.A3o"></span><span class="mw-headline" id="Documentação">Documentação</span>
+</h2>
+<ul>
+<li>Para informações de controladores e o que certos switches ou ajustes de comportamento (tunables) significam, consulte a documentação do kernel: <a rel="nofollow" class="external text" href="https://docs.kernel.org/admin-guide/cgroup-v1/index.html">v1</a> ou <a rel="nofollow" class="external text" href="https://docs.kernel.org/admin-guide/cgroup-v2.html">v2</a> (ou instale <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=linux-docs">linux-docs</a></span> e veja <code>/usr/src/linux/Documentation/cgroup</code>)</li>
+<li>Página do manual do Linux: <span class="plainlinks archwiki-template-man" title="$ man 7 cgroups"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/cgroups.7">cgroups(7)</a></span>.</li>
+<li>Um detalhado e completo guia sobre gerenciamento de recursos pode ser encontrado na <a rel="nofollow" class="external text" href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/6/html/resource_management_guide/ch01#sec-How_Control_Groups_Are_Organized">documentação do Red Hat Enterprise Linux</a>.</li>
+</ul>
+<p>Para comandos e configurações de arquivos, veja as páginas man relevantes, por exemplo: <span class="plainlinks archwiki-template-man" title="$ man 1 cgcreate"><a rel="nofollow" class="external text" href="https://github.com/libcgroup/libcgroup/blob/main/doc/man/cgcreate.1">cgcreate(1)</a></span> ou <span class="plainlinks archwiki-template-man" title="$ man 5 cgrules.conf"><a rel="nofollow" class="external text" href="https://github.com/libcgroup/libcgroup/blob/main/doc/man/cgrules.conf.5">cgrules.conf(5)</a></span>
+</p>
+<h2><span class="mw-headline" id="Dicas_e_truques">Dicas e truques</span></h2>
+<h3><span class="mw-headline" id="Habilitar_cgroup_v1">Habilitar cgroup v1</span></h3>
+<p>Cgroup v2 é agora habilitado por padrão. Se você quiser trocar para cgroup v1, defina o seguinte <a href="../pt/Kernel_parameters.html" title="Kernel parameters (Português)">parâmetro de kernel</a>:
+</p>
+<pre>systemd.unified_cgroup_hierarchy=0
+</pre>
+<h2>
+<span id="Veja_tamb.C3.A9m"></span><span class="mw-headline" id="Veja_também">Veja também</span>
+</h2>
+<ul>
+<li><a rel="nofollow" class="external text" href="https://systemd.io/CGROUP_DELEGATION/">systemd cgroups hacker guide</a></li>
+<li><a rel="nofollow" class="external text" href="https://chrisdown.name/talks/cgroupv2/cgroupv2-fosdem.pdf">cgroupv2: Linux's new unified control group system</a></li>
+</ul>
+</div>
+</div>
+					<div id="catlinks" class="catlinks" data-mw="interface"><div id="mw-normal-catlinks" class="mw-normal-catlinks">
+<a href="../Special:Categories.html" title="Special:Categories">Categories</a>: <ul>
+<li><a href="../pt/Category:Kernel.html" title="Category:Kernel (Português)">Kernel (Português)</a></li>
+<li><a href="../pt/Category:Virtualization.html" title="Category:Virtualization (Português)">Virtualization (Português)</a></li>
+</ul>
+</div></div>
+				</div>
+			</main>
+			
+		</div>
+		<div class="mw-footer-container">
+			
+<footer id="footer" class="mw-footer" style="margin: 0">
+	<ul id="footer-info">
+	<li data-nosnippet="">Retrieved from "<a dir="ltr" href="https://wiki.archlinux.org/index.php?title=Cgroups_(Portugu%C3%AAs)&amp;oldid=802991">https://wiki.archlinux.org/index.php?title=Cgroups_(Português)&amp;oldid=802991</a>"</li>
+<li id="footer-info-lastmod"> This page was last edited on 11 March 2024, at 22:21.</li>
+	<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+<br>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="https://terms.archlinux.org/docs/privacy-policy/">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="../en/ArchWiki:About.html">About ArchWiki</a></li>
+	<li id="footer-places-disclaimers"><a href="../en/ArchWiki:General_disclaimer.html">Disclaimers</a></li>
+	<li id="footer-places-archwiki-code-of-conduct"><a href="https://terms.archlinux.org/docs/code-of-conduct/" class="extiw" title="archlinux-service-agreements:code-of-conduct">Code of conduct</a></li>
+	<li id="footer-places-archwiki-terms-of-service"><a href="https://terms.archlinux.org/docs/terms-of-service/" class="extiw" title="archlinux-service-agreements:terms-of-service">Terms of service</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-copyrightico"><a href="https://www.gnu.org/copyleft/fdl.html" class="cdx-button cdx-button--fake-button cdx-button--size-large cdx-button--fake-button--enabled"><img src="/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" loading="lazy"></a></li>
+	<li id="footer-poweredbyico"><img src="/resources/assets/poweredby_mediawiki.svg" width="88" height="31" loading="lazy"></li>
+</ul>
+
+</footer>
+
+		</div>
+	</div> 
+</div> 
+<div class="vector-settings" id="p-dock-bottom">
+	<ul></ul>
+</div>
+</body>
+</html>

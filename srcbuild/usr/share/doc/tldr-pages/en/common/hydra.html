@@ -1,0 +1,61 @@
+<h1>hydra</h1>
+
+<blockquote><p>Online password guessing tool.
+Protocols supported include FTP, HTTP(S), SMTP, SNMP, XMPP, SSH, and more.
+More information: <a href="https://manned.org/hydra">https://manned.org/hydra</a>.</p></blockquote>
+
+<ul>
+<li>Start Hydra&rsquo;s wizard:</li>
+</ul>
+
+
+<p><code>hydra-wizard</code></p>
+
+<ul>
+<li>Guess SSH credentials using a given username and a list of passwords:</li>
+</ul>
+
+
+<p><code>hydra -l {{username}} -P {{path/to/wordlist.txt}} {{host_ip}} {{ssh}}</code></p>
+
+<ul>
+<li>Guess HTTPS webform credentials using two specific lists of usernames and passwords (&ldquo;https_post_request&rdquo; can be like &ldquo;username=^USER^&amp;password=^PASS^&rdquo;):</li>
+</ul>
+
+
+<p><code>hydra -L {{path/to/usernames.txt}} -P {{path/to/wordlist.txt}} {{host_ip}} {{https-post-form}} "{{url_without_host}}:{{https_post_request}}:{{login_failed_string}}"</code></p>
+
+<ul>
+<li>Guess FTP credentials using usernames and passwords lists, specifying the number of threads:</li>
+</ul>
+
+
+<p><code>hydra -L {{path/to/usernames.txt}} -P {{path/to/wordlist.txt}} -t {{n_tasks}} {{host_ip}} {{ftp}}</code></p>
+
+<ul>
+<li>Guess MySQL credentials using a username and a passwords list, exiting when a username/password pair is found:</li>
+</ul>
+
+
+<p><code>hydra -l {{username}} -P {{path/to/wordlist.txt}} -f {{host_ip}} {{mysql}}</code></p>
+
+<ul>
+<li>Guess RDP credentials using a username and a passwords list, showing each attempt:</li>
+</ul>
+
+
+<p><code>hydra -l {{username}} -P {{path/to/wordlist.txt}} -V {{rdp://host_ip}}</code></p>
+
+<ul>
+<li>Guess IMAP credentials on a range of hosts using a list of colon-separated username/password pairs:</li>
+</ul>
+
+
+<p><code>hydra -C {{path/to/username_password_pairs.txt}} {{imap://[host_range_cidr]}}</code></p>
+
+<ul>
+<li>Guess POP3 credentials on a list of hosts using usernames and passwords lists, exiting when a username/password pair is found:</li>
+</ul>
+
+
+<p><code>hydra -L {{path/to/usernames.txt}} -P {{path/to/wordlist.txt}} -M {{path/to/hosts.txt}} -F {{pop3}}</code></p>

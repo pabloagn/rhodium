@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-sticky-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-0 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-disabled skin-theme-clientpref-day vector-toc-available" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>Arch boot process (Français) - ArchWiki</title>
+<link rel="stylesheet" href="../ArchWikiOffline.css">
+<meta name="ResourceLoaderDynamicStyles" content="">
+<meta name="generator" content="MediaWiki 1.43.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="max-image-preview:standard">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.25, maximum-scale=5.0">
+<link rel="search" type="application/opensearchdescription+xml" href="/rest.php/v1/search" title="ArchWiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.archlinux.org/api.php?action=rsd">
+<link rel="license" href="https://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="ArchWiki Atom feed" href="/index.php?title=Special:RecentChanges&amp;feed=atom">
+</head>
+<body class="skin--responsive skin-vector skin-vector-search-vue mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Arch_boot_process_Français rootpage-Arch_boot_process_Français skin-vector-2022 action-view">
+<a class="mw-jump-link" href="#bodyContent">Jump to content</a>
+<div class="vector-header-container">
+	</div>
+<div class="mw-page-container">
+	<div class="mw-page-container-inner">
+		<div class="vector-column-start">
+			<div class="vector-main-menu-container">
+		</div>
+	<div class="vector-sticky-pinned-container">
+				<nav id="mw-panel-toc" aria-label="Contents" data-event-name="ui.sidebar-toc" class="mw-table-of-contents-container vector-toc-landmark">
+					<div id="vector-toc-pinned-container" class="vector-pinned-container">
+					<div id="vector-toc" class="vector-toc vector-pinnable-element">
+	<div class="vector-pinnable-header vector-toc-pinnable-header vector-pinnable-header-pinned" data-feature-name="toc-pinned" data-pinnable-element-id="vector-toc">
+	<h2 class="vector-pinnable-header-label">Contents</h2>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-toc.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-toc.unpin">hide</button>
+</div>
+
+
+	<ul class="vector-toc-contents" id="mw-panel-toc-list">
+		<li id="toc-mw-content-text" class="vector-toc-list-item vector-toc-level-1">
+			<a href="#" class="vector-toc-link">
+				<div class="vector-toc-text">Beginning</div>
+			</a>
+		</li>
+		<li id="toc-Les_types_de_microprogrammes" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Les_types_de_microprogrammes">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">1</span>
+				<span>Les types de microprogrammes</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Les_types_de_microprogrammes-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Les types de microprogrammes subsection</span>
+			</button>
+		
+		<ul id="toc-Les_types_de_microprogrammes-sublist" class="vector-toc-list">
+			<li id="toc-BIOS" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#BIOS">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.1</span>
+					<span>BIOS</span>
+				</div>
+			</a>
+			
+			<ul id="toc-BIOS-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-UEFI" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#UEFI">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.2</span>
+					<span>UEFI</span>
+				</div>
+			</a>
+			
+			<ul id="toc-UEFI-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Initialisation_du_système" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Initialisation_du_syst%C3%A8me">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">2</span>
+				<span>Initialisation du système</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Initialisation_du_système-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Initialisation du système subsection</span>
+			</button>
+		
+		<ul id="toc-Initialisation_du_système-sublist" class="vector-toc-list">
+			<li id="toc-Avec_un_BIOS" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Avec_un_BIOS">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1</span>
+					<span>Avec un BIOS</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Avec_un_BIOS-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Avec_un_UEFI" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Avec_un_UEFI">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2</span>
+					<span>Avec un UEFI</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Avec_un_UEFI-sublist" class="vector-toc-list">
+				<li id="toc-«Multi-boot»_avec_un_UEFI" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#%C2%ABMulti-boot%C2%BB_avec_un_UEFI">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2.1</span>
+					<span>«Multi-boot» avec un UEFI</span>
+				</div>
+			</a>
+			
+			<ul id="toc-«Multi-boot»_avec_un_UEFI-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Chargeur_d'amorçage" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Chargeur_d'amor%C3%A7age">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">3</span>
+				<span>Chargeur d'amorçage</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Chargeur_d'amorçage-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Chargeur d'amorçage subsection</span>
+			</button>
+		
+		<ul id="toc-Chargeur_d'amorçage-sublist" class="vector-toc-list">
+			<li id="toc-Comparaison_des_fonctionnalités" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Comparaison_des_fonctionnalit%C3%A9s">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1</span>
+					<span>Comparaison des fonctionnalités</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Comparaison_des_fonctionnalités-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Le_Noyau" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Le_Noyau">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">4</span>
+				<span>Le Noyau</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Le_Noyau-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Initramfs" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Initramfs">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">5</span>
+				<span>Initramfs</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Initramfs-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Init" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Init">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">6</span>
+				<span>Init</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Init-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-agetty" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#agetty">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">7</span>
+				<span>agetty</span>
+			</div>
+		</a>
+		
+		<ul id="toc-agetty-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Gestionnaire_de_connexions" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Gestionnaire_de_connexions">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">8</span>
+				<span>Gestionnaire de connexions</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Gestionnaire_de_connexions-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Login" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Login">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">9</span>
+				<span>Login</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Login-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Shell" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Shell">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">10</span>
+				<span>Shell</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Shell-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-GUI,_xinit_ou_wayland" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#GUI,_xinit_ou_wayland">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">11</span>
+				<span>GUI, xinit ou wayland</span>
+			</div>
+		</a>
+		
+		<ul id="toc-GUI,_xinit_ou_wayland-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Voir_aussi" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Voir_aussi">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">12</span>
+				<span>Voir aussi</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Voir_aussi-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+</ul>
+</div>
+
+					</div>
+		</nav>
+			</div>
+		</div>
+		<div class="mw-content-container">
+			<main id="content" class="mw-body" style="margin: 0">
+				<header class="mw-body-header vector-page-titlebar">
+					<nav aria-label="Contents" class="vector-toc-landmark">
+						
+<div id="vector-page-titlebar-toc" class="vector-dropdown vector-page-titlebar-toc vector-button-flush-left">
+	<input type="checkbox" id="vector-page-titlebar-toc-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-page-titlebar-toc" class="vector-dropdown-checkbox " aria-label="Toggle the table of contents">
+	<label id="vector-page-titlebar-toc-label" for="vector-page-titlebar-toc-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"><span class="vector-icon mw-ui-icon-listBullet mw-ui-icon-wikimedia-listBullet"></span>
+
+<span class="vector-dropdown-label-text">Toggle the table of contents</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+							<div id="vector-page-titlebar-toc-unpinned-container" class="vector-unpinned-container">
+			</div>
+		
+	</div>
+</div>
+
+					</nav>
+					<h1 id="firstHeading" class="firstHeading mw-first-heading"><span class="mw-page-title-main">Arch boot process (Français)</span></h1>
+							
+<div id="p-lang-btn" class="vector-dropdown mw-portlet mw-portlet-lang">
+	<input type="checkbox" id="p-lang-btn-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-p-lang-btn" class="vector-dropdown-checkbox mw-interlanguage-selector" aria-label="Go to an article in another language. Available in 7 languages">
+	<label id="p-lang-btn-label" for="p-lang-btn-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--action-progressive mw-portlet-lang-heading-7" aria-hidden="true"><span class="vector-icon mw-ui-icon-language-progressive mw-ui-icon-wikimedia-language-progressive"></span>
+
+<span class="vector-dropdown-label-text">7 languages</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+		<div class="vector-menu-content">
+			
+			<ul class="vector-menu-content-list">
+				
+				<li class="interlanguage-link interwiki-bs mw-list-item"><a href="../bs/Arch_boot_process.html" title="Arch boot process – bosanski" lang="bs" hreflang="bs" data-title="Arch boot process" data-language-autonym="Bosanski" data-language-local-name="bosanski" class="interlanguage-link-target"><span>Bosanski</span></a></li>
+<li class="interlanguage-link interwiki-en mw-list-item"><a href="../en/Arch_boot_process.html" title="Arch boot process – English" lang="en" hreflang="en" data-title="Arch boot process" data-language-autonym="English" data-language-local-name="English" class="interlanguage-link-target"><span>English</span></a></li>
+<li class="interlanguage-link interwiki-es mw-list-item"><a href="../es/Arch_boot_process.html" title="Arch boot process – español" lang="es" hreflang="es" data-title="Arch boot process" data-language-autonym="Español" data-language-local-name="español" class="interlanguage-link-target"><span>Español</span></a></li>
+<li class="interlanguage-link interwiki-ja mw-list-item"><a href="https://wiki.archlinux.jp/index.php/Arch_%E3%83%96%E3%83%BC%E3%83%88%E3%83%97%E3%83%AD%E3%82%BB%E3%82%B9" title="Arch ブートプロセス – 日本語" lang="ja" hreflang="ja" data-title="Arch ブートプロセス" data-language-autonym="日本語" data-language-local-name="日本語" class="interlanguage-link-target"><span>日本語</span></a></li>
+<li class="interlanguage-link interwiki-pt mw-list-item"><a href="../pt/Arch_boot_process.html" title="Arch boot process – português" lang="pt" hreflang="pt" data-title="Arch boot process" data-language-autonym="Português" data-language-local-name="português" class="interlanguage-link-target"><span>Português</span></a></li>
+<li class="interlanguage-link interwiki-ru mw-list-item"><a href="../ru/Arch_boot_process.html" title="Arch boot process – русский" lang="ru" hreflang="ru" data-title="Arch boot process" data-language-autonym="Русский" data-language-local-name="русский" class="interlanguage-link-target"><span>Русский</span></a></li>
+<li class="interlanguage-link interwiki-zh-hans mw-list-item"><a href="https://wiki.archlinuxcn.org/wiki/Arch_boot_process" title="Arch boot process – 中文（简体）" lang="zh-Hans" hreflang="zh-Hans" data-title="Arch boot process" data-language-autonym="中文（简体）" data-language-local-name="中文（简体）" class="interlanguage-link-target"><span>中文（简体）</span></a></li>
+			</ul>
+			
+		</div>
+
+	</div>
+</div>
+</header>
+				<div class="vector-column-end">
+					<div class="vector-sticky-pinned-container">
+						<nav class="vector-page-tools-landmark" aria-label="Page tools">
+							<div id="vector-page-tools-pinned-container" class="vector-pinned-container">
+				
+							</div>
+		</nav>
+						<nav class="vector-appearance-landmark" aria-label="Appearance">
+							<div id="vector-appearance-pinned-container" class="vector-pinned-container">
+				<div id="vector-appearance" class="vector-appearance vector-pinnable-element">
+	<div class="vector-pinnable-header vector-appearance-pinnable-header vector-pinnable-header-pinned" data-feature-name="appearance-pinned" data-pinnable-element-id="vector-appearance" data-pinned-container-id="vector-appearance-pinned-container" data-unpinned-container-id="vector-appearance-unpinned-container">
+	<div class="vector-pinnable-header-label">Appearance</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-appearance.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-appearance.unpin">hide</button>
+</div>
+
+
+</div>
+
+							</div>
+		</nav>
+					</div>
+				</div>
+				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container>
+					<div class="vector-body-before-content">
+							<div class="mw-indicators">
+		</div>
+
+						<div id="siteSub" class="noprint">From ArchWiki</div>
+					</div>
+					<div id="contentSub"><div id="mw-content-subtitle"></div></div>
+					
+					
+					<div id="mw-content-text" class="mw-body-content">
+<div class="mw-content-ltr mw-parser-output" lang="fr" dir="ltr">
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>État de la traduction:</strong> Cet article est la version francophone de <a href="../en/Arch_boot_process.html" title="Arch boot process">Arch boot process</a>. Date de la dernière traduction: 2022-01-19. Vous pouvez aider à synchroniser la traduction s'il y a eu des <a rel="nofollow" class="external text" href="https://wiki.archlinux.org/index.php?title=Arch_boot_process&amp;diff=0&amp;oldid=711375">changements</a> dans la version anglaise.</div>
+<div class="archwiki-template-meta-related-articles">
+<p>Related articles</p>
+<ul>
+<li><a href="../en/Partitioning.html#Master_Boot_Record" class="mw-redirect" title="Master Boot Record">Master Boot Record</a></li>
+<li><a href="../en/Partitioning.html#GUID_Partition_Table" class="mw-redirect" title="GUID Partition Table">GUID Partition Table</a></li>
+<li><a href="../en/Unified_Extensible_Firmware_Interface.html" title="Unified Extensible Firmware Interface">Unified Extensible Firmware Interface</a></li>
+<li><a href="../fr/Mkinitcpio.html" title="Mkinitcpio (Français)">mkinitcpio (Français)</a></li>
+<li><a href="../en/Init.html" title="Init">init</a></li>
+<li><a href="../fr/Systemd.html" title="Systemd (Français)">systemd (Français)</a></li>
+<li><a href="../fr/Fstab.html" title="Fstab (Français)">fstab (Français)</a></li>
+<li><a href="../en/Autostarting.html" title="Autostarting">Autostarting</a></li>
+</ul>
+</div>
+<p>Afin de démarrer Arch Linux, un <a href="#Chargeur_d'amor%C3%A7age">chargeur d'amorçage</a> qui prends en charge Linux doit être configuré. Le chargeur d'amorçage a pour responsabilité de charger le <a href="../fr/Kernel.html" title="Kernel (Français)">noyau Linux</a> et l'<a href="#Initramfs">initramfs</a> (crée par <a href="../fr/Mkinitcpio.html" title="Mkinitcpio (Français)">mkinitcpio</a>) avant de lancer le processus de démarrage.
+</p>
+<p>Ce processus est assez différent selon que l'on considère une machine équipée d'un <a href="https://en.wikipedia.org/wiki/fr:BIOS" class="extiw" title="wikipedia:fr:BIOS">BIOS</a> ou d'un <a href="https://en.wikipedia.org/wiki/fr:UEFI" class="extiw" title="wikipedia:fr:UEFI">UEFI</a>. Une description détaillée pour chacun est donnée sur cette page ou les liens y figurant. 
+</p>
+<meta property="mw:PageProp/toc">
+<h2><span class="mw-headline" id="Les_types_de_microprogrammes">Les types de microprogrammes</span></h2>
+<p>Lorsque vous allumez matériellement votre ordinateur, c'est le premier programme à s’exécuter. En anglais on parle de <i>firmware</i>.
+</p>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Astuce:</strong> On parle rarement de microprogramme (quel que soit son genre) : on dira souvent BIOS ou (U)EFI par abus de langage</div>
+<h3><span class="mw-headline" id="BIOS">BIOS</span></h3>
+<p>Un <a href="https://en.wikipedia.org/wiki/fr:BIOS" class="extiw" title="wikipedia:fr:BIOS">BIOS</a> ou Basic Input-Output System (système élémentaire des entrées et sorties) est dans la plupart des cas stocké dans une mémoire flash située dans la carte mère elle-même indépendamment du stockage du système. Créé à l'origine pour l'<a href="https://en.wikipedia.org/wiki/fr:IBM_PC" class="extiw" title="wikipedia:fr:IBM PC">IBM PC</a> afin de prendre en charge l'initialisation du matériel et le processus de démarrage, il a été progressivement remplacé depuis 2010 par l'<a href="#UEFI">UEFI</a> qui ne souffre pas des mêmes limitations techniques.
+</p>
+<h3><span class="mw-headline" id="UEFI">UEFI</span></h3>
+<p>L'<a href="https://en.wikipedia.org/wiki/fr:Unified_Extensible_Firmware_Interface" class="extiw" title="wikipedia:fr:Unified Extensible Firmware Interface">UEFI</a> (qui peut se traduire par <a href="../en/Unified_Extensible_Firmware_Interface.html" class="mw-redirect" title="UEFI">Interface Matérielle Extensible Unifiée</a>) prends en charge autant la lecture de la table de partition que que la lecture des partitions, mais il n’exécute pas le code contenu dans le <a href="https://en.wikipedia.org/wiki/fr:Master_boot_record" class="extiw" title="wikipedia:fr:Master boot record">MBR</a> (que celui-ci soit présent ou non), à la place le démarrage repose sur la présence d'«entrées de démarrage» inscrites dans la <a href="https://en.wikipedia.org/wiki/fr:NVRAM" class="extiw" title="wikipedia:fr:NVRAM">NVRAM</a>.
+</p>
+<p>Les spécifications de l'UEFI imposent la prise en charge des formats de partitions <b>FAT12</b>, <b>FAT16</b>, et <b>FAT32</b> (voir <a rel="nofollow" class="external text" href="https://uefi.org/sites/default/files/resources/UEFI_Spec_2_8_final.pdf#G17.1019485">UEFI specification version 2.8, section 13.3.1.1</a>), mais les fabricants peuvent individuellement ajouter la prise en charge de n'importe quel système de fichier; par exemple, les ordinateurs Apple prennent en charge (et utilisent par défaut) leur propre format de partition, le <b>HFS+</b>. Certaines implémentations prennent  également en charge le format <b>ISO-9660</b> pour le démarrage depuis un cd-rom.
+</p>
+<p>L'UEFI lance des applications EFI, tels des gestionnaires de démarrage, des shells UEFI, etc. Ces applications sont stockées comme de simples fichiers sur la partition <a href="../fr/EFI_system_partition.html" title="EFI system partition (Français)">ESP</a>. Chaque constructeur peut ainsi stocker ses propres fichiers dans cette partition à l'intérieur du répertoire <code>/EFI/<i>vendor_name</i></code>. Ces applications peuvent être lancées en ajoutant une entrée de démarrage dans  la NVRAM, ou depuis un shell UEFI.
+</p>
+<p>L'UEFI permet un démarrage en «mode de compatibilité» ou <i>legacy <a href="#BIOS">BIOS</a> booting</i> au moyen du <a href="https://en.wikipedia.org/wiki/Unified_Extensible_Firmware_Interface#CSM_booting" class="extiw" title="wikipedia:Unified Extensible Firmware Interface">Compatibility Support Module (CSM)</a>. Si le CSM est activé dans l'interface de réglage de l'UEFI, ce dernier générera des entrées de démarrage pour chacun des disques. Et, si une entrée de démarrage CSM est choisie, l'UEFI tentera de démarrer le code de démarrage du MBR de ce disque.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> Intel abandonne progressivement la prise en charge du CSM, il ne sera peut-être plus possible de s'appuyer sur cette fonctionnalité à l'avenir.<a rel="nofollow" class="external autonumber" href="https://www.intel.com/content/dam/support/us/en/documents/intel-nuc/Legacy-BIOS-Boot-Support-Removal-for-Intel-Platforms.pdf">[1]</a>
+</div>
+<h2>
+<span id="Initialisation_du_syst.C3.A8me"></span><span class="mw-headline" id="Initialisation_du_système">Initialisation du système</span>
+</h2>
+<h3><span class="mw-headline" id="Avec_un_BIOS">Avec un BIOS</span></h3>
+<ol>
+<li>Mise sous tension du système, le <a href="https://en.wikipedia.org/wiki/fr:Power-on_self-test" class="extiw" title="wikipedia:fr:Power-on self-test">power-on self-test (POST)</a> est exécuté.</li>
+<li>Après le POST, le BIOS initialise le matériel nécessaire au démarrage (disque, contrôleurs de clavier, etc.).</li>
+<li>Le BIOS lance les 440 premiers octets (<a href="../en/Partitioning.html#Master_Boot_Record_(bootstrap_code)" title="Partitioning">la zone de code d'amorçage du Master Boot Record</a>) du premier disque dans l'ordre des disques du BIOS.</li>
+<li>La première étape du code d'amorçage du chargeur d'amorçage dans le MBR lance ensuite son code de deuxième étape (le cas échéant) à partir de l'un ou l'autre des éléments suivants :
+<ul>
+<li>les prochains secteurs du disque après le MBR, c'est-à-dire ce qu'on appelle l'espace post-MBR (uniquement sur une table de partition MBR).</li>
+<li>d'une partition ou d'un disque sans partition <a href="https://en.wikipedia.org/wiki/Volume_boot_record" class="extiw" title="wikipedia:Volume boot record">volume boot record (VBR) (en)</a>.</li>
+<li>la <a href="../en/GRUB.html#GUID_Partition_Table_(GPT)_specific_instructions" title="GRUB">partition de démarrage du BIOS</a>. (<a href="../en/GRUB.html" class="mw-redirect" title="GRUB (Français)">GRUB</a> sur BIOS/GPT uniquement).</li>
+</ul>
+</li>
+<li>Le véritable <a href="#Chargeur_d'amor%C3%A7age">chargeur d'amorçage (<i>boot loader</i>)</a> est lancé.</li>
+<li>Le chargeur d'amorçage charge ensuite un système d'exploitation, soit par chargement en chaîne, soit par chargement direct du noyau du système d'exploitation.</li>
+</ol>
+<h3><span class="mw-headline" id="Avec_un_UEFI">Avec un UEFI</span></h3>
+<ol>
+<li>Le système est allumé, le <a href="https://en.wikipedia.org/wiki/fr:Power-on_self-test" class="extiw" title="wikipedia:fr:Power-on self-test">power-on self-test (POST)</a> est exécuté.</li>
+<li>Après le POST, UEFI initialise le matériel nécessaire au démarrage (disque, contrôleurs de clavier, etc.).</li>
+<li>Le microprogramme lit les entrées de démarrage dans la NVRAM pour déterminer quelle application EFI lancer et à partir de quel endroit (par exemple, à partir de quel disque et de quelle partition).
+<ul><li>Une entrée de démarrage peut simplement être un disque. Dans ce cas, le microprogramme recherche une <a href="../fr/EFI_system_partition.html" title="EFI system partition (Français)">partition système EFI</a> sur ce disque et tente de trouver une application EFI dans le chemin de démarrage de secours <code>\EFI\BOOT\BOOTx64.EFI</code>. (<code>BOOTIA32.EFI</code> sur les <a href="../en/Unified_Extensible_Firmware_Interface.html#UEFI_firmware_bitness" title="Unified Extensible Firmware Interface">systèmes avec un UEFI IA32 (32 bits) (en)</a>). Voici comment fonctionnent les supports amovibles amorçables UEFI.</li></ul>
+</li>
+<li>Le microprogramme lance l'application EFI.
+<ul>
+<li>Cela peut être un <a href="#Chargeur_d'amor%C3%A7age">chargeur d'amorçage</a> ou le <a href="../fr/Kernel.html" title="Kernel (Français)">noyau</a> Arch lui-même en utilisant <a href="../fr/EFISTUB.html" title="EFISTUB (Français)">EFISTUB</a>.</li>
+<li>Il peut s'agir d'une autre application EFI comme le [[<a href="../en/Unified_Extensible_Firmware_Interface.html#UEFI_Shell" title="Unified Extensible Firmware Interface">shell UEFI</a> ou un <a href="#Chargeur_d'amor%C3%A7age">gestionnaire de démarrage (<i>boot manager</i>)</a> comme <a href="../en/Systemd-boot.html" title="Systemd-boot">systemd-boot</a> ou <a href="../en/REFInd.html" title="REFInd">rEFInd</a>.</li>
+</ul>
+</li>
+</ol>
+<p>Si <a href="../en/Unified_Extensible_Firmware_Interface/Secure_Boot.html" class="mw-redirect" title="Secure Boot">Secure Boot</a> est activé, le processus de démarrage vérifiera l'authenticité du binaire EFI par signature.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> Certains systèmes UEFI ne peuvent démarrer qu'à partir du chemin d'amorçage de secours.</div>
+<h4>
+<span id=".C2.ABMulti-boot.C2.BB_avec_un_UEFI"></span><span class="mw-headline" id="«Multi-boot»_avec_un_UEFI">«Multi-boot» avec un UEFI</span>
+</h4>
+<p>Puisque chaque système d'exploitation ou fournisseur peut maintenir ses propres fichiers dans la <a href="../fr/EFI_system_partition.html" title="EFI system partition (Français)">partition système EFI</a> sans affecter l'autre, le démarrage multiple en utilisant UEFI est juste une question de lancement d'une application EFI différente correspondant au chargeur d'amorçage du système d'exploitation particulier. Cela supprime la nécessité de s'appuyer sur les mécanismes de <a href="https://en.wikipedia.org/wiki/Chain_loading" class="extiw" title="wikipedia:Chain loading">chain loading (en)</a> d'un <a href="#Chargeur_d'amor%C3%A7age">chargeur d'amorçage</a> pour charger un autre OS.
+</p>
+<p>Consultez également <a href="../fr/Dual_boot_with_Windows.html" title="Dual boot with Windows (Français)">«Dual boot» avec Windows</a>.
+</p>
+<h2>
+<span id="Chargeur_d.27amor.C3.A7age"></span><span class="mw-headline" id="Chargeur_d'amorçage">Chargeur d'amorçage</span>
+</h2>
+<p>Un chargeur d'amorçage est un logiciel lancé par le microprogramme (<a href="#BIOS">BIOS</a> ou <a href="#UEFI">UEFI</a>). Il est responsable du chargement du noyau avec les <a href="../en/Kernel_parameters.html" title="Kernel parameters">paramètres du noyau (en)</a> souhaités et toute image initramfs externe. Dans le cas de l'UEFI, le noyau lui-même peut être lancé directement par l'UEFI à l'aide du <a href="../fr/EFISTUB.html" title="EFISTUB (Français)">EFI boot stub</a>. Un chargeur d'amorçage ou un gestionnaire d'amorçage séparé peut toujours être utilisé pour modifier les paramètres du noyau avant le démarrage.
+</p>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Attention:</strong> Un chargeur d'amorçage doit être capable d'accéder au noyau et aux images initramfs, sinon le système ne démarrera pas. Ainsi, dans une configuration typique, il doit pouvoir accéder à <code>/boot</code>. Cela signifie qu'il doit prendre en charge tout ce qui commence par les périphériques blocs, les périphériques blocs empilés (LVM, RAID, dm-crypt, LUKS, etc.) et se termine par le système de fichiers sur lequel résident le(s) noyau(x) et les images initramfs.</div>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> Le chargement des mises à jour <a href="../en/Microcode.html" title="Microcode">Microcode</a> nécessite des ajustements dans la configuration du chargeur d'amorçage. <a rel="nofollow" class="external autonumber" href="https://archlinux.org/news/changes-to-intel-microcodeupdates/">[2]</a>
+</div>
+<h3>
+<span id="Comparaison_des_fonctionnalit.C3.A9s"></span><span class="mw-headline" id="Comparaison_des_fonctionnalités">Comparaison des fonctionnalités</span>
+</h3>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> 
+<ul>
+<li>Comme GPT fait partie de la spécification UEFI, tous les chargeurs d'amorçage UEFI prennent en charge les disques GPT. GPT sur les systèmes BIOS est possible, en utilisant soit le "démarrage hybride" avec <a rel="nofollow" class="external text" href="https://www.rodsbooks.com/gdisk/hybrid.html">MBR Hybrid</a>, soit le nouveau protocole <a rel="nofollow" class="external text" href="https://repo.or.cz/syslinux.git/blob/HEAD:/doc/gpt.txt">GPT-seul</a>. Ce protocole peut cependant causer des problèmes avec certaines implémentations BIOS ; consultez <a rel="nofollow" class="external text" href="https://www.rodsbooks.com/gdisk/bios.html#bios">rodsbooks</a> pour plus de détails.</li>
+<li>Le chiffrement mentionné dans la prise en charge du système de fichiers est <a href="https://en.wikipedia.org/wiki/Filesystem-level_encryption" class="extiw" title="wikipedia:Filesystem-level encryption">le chiffrement au niveau système de fichier (en)</a>, il n'a aucun rapport avec <a href="../fr/Dm-crypt.html" title="Dm-crypt (Français)">chiffrement au niveau du disque</a>.</li>
+</ul>
+</div>
+<table class="wikitable sortable">
+<tbody>
+<tr>
+<th rowspan="2">Nom
+</th>
+<th colspan="2">Microprogramme
+</th>
+<th colspan="2">
+<a href="../en/Partitioning.html#Partition_table" class="mw-redirect" title="Partition table">Table des partitions (en)</a>
+</th>
+<th rowspan="2">Multi-boot
+</th>
+<th colspan="5">
+<a href="../en/File_systems.html" title="File systems">Systèmes de fichier (en)</a>
+</th>
+<th rowspan="2">Notes
+</th>
+</tr>
+<tr>
+<th>BIOS</th>
+<th>
+<a href="../en/Unified_Extensible_Firmware_Interface.html" class="mw-redirect" title="UEFI">UEFI</a>
+</th>
+<th><a href="../en/Partitioning.html#Master_Boot_Record" class="mw-redirect" title="MBR">MBR</a></th>
+<th>
+<a href="../en/Partitioning.html#GUID_Partition_Table" class="mw-redirect" title="GPT">GPT</a>
+</th>
+<th><a href="../en/Btrfs.html" class="mw-redirect" title="Btrfs (Français)">Btrfs</a></th>
+<th><a href="../fr/Ext4.html" title="Ext4 (Français)">ext4</a></th>
+<th>ReiserFS</th>
+<th><a href="../en/FAT.html" class="mw-redirect" title="VFAT">VFAT</a></th>
+<th>
+<a href="../en/XFS.html" title="XFS">XFS</a>
+</th>
+</tr>
+<tr>
+<th>
+<a href="../fr/EFISTUB.html" title="EFISTUB (Français)">EFISTUB</a>
+</th>
+<td data-sort-value="5" style="background: inherit; color: inherit; vertical-align: middle; text-align: center;">–</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Oui
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Oui</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Oui
+</td>
+<td data-sort-value="5" style="background: inherit; color: inherit; vertical-align: middle; text-align: center;">–
+</td>
+<td data-sort-value="5" style="background: inherit; color: inherit; vertical-align: middle; text-align: center;">–</td>
+<td data-sort-value="5" style="background: inherit; color: inherit; vertical-align: middle; text-align: center;">–</td>
+<td data-sort-value="5" style="background: inherit; color: inherit; vertical-align: middle; text-align: center;">–</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Hérité du microprogramme<sup>1</sup>
+</td>
+<td data-sort-value="5" style="background: inherit; color: inherit; vertical-align: middle; text-align: center;">–
+</td>
+<td>Le noyau est un exécutable EFI valide qui peut être chargé directement à partir du microprogramme UEFI en utilisant <a href="../en/Unified_Extensible_Firmware_Interface.html#efibootmgr" class="mw-redirect" title="Efibootmgr">efibootmgr</a> ou un autre chargeur d'amorçage.
+</td>
+</tr>
+<tr>
+<th>
+<a href="../en/Unified_kernel_image.html" title="Unified kernel image">Unified kernel image</a>
+</th>
+<td data-sort-value="5" style="background: inherit; color: inherit; vertical-align: middle; text-align: center;">–</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Oui
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Oui</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Oui
+</td>
+<td data-sort-value="5" style="background: inherit; color: inherit; vertical-align: middle; text-align: center;">–
+</td>
+<td data-sort-value="5" style="background: inherit; color: inherit; vertical-align: middle; text-align: center;">–</td>
+<td data-sort-value="5" style="background: inherit; color: inherit; vertical-align: middle; text-align: center;">–</td>
+<td data-sort-value="5" style="background: inherit; color: inherit; vertical-align: middle; text-align: center;">–</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Hérité du microprogramme<sup>1</sup>
+</td>
+<td data-sort-value="5" style="background: inherit; color: inherit; vertical-align: middle; text-align: center;">–
+</td>
+<td>
+<span class="plainlinks archwiki-template-man" title="$ man 7 systemd-stub"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd-stub.7">systemd-stub(7)</a></span>, un noyau, initramfs et la ligne de commande du noyau emballés dans un exécutable EFI pour être chargés directement à partir du firmware UEFI ou d'un autre chargeur d'amorçage.
+</td>
+</tr>
+<tr>
+<th>
+<a href="../en/GRUB.html" class="mw-redirect" title="GRUB (Français)">GRUB</a>
+</th>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Oui</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Oui
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Oui</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Oui
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Oui
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Oui</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Oui</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Oui</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Oui</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Oui
+</td>
+<td>La configuration BIOS/GPT nécessite une <a href="../en/GRUB.html#GUID_Partition_Table_(GPT)_specific_instructions" title="GRUB">partition de démarrage BIOS</a>. <br>Prise en charge de RAID, LUKS1 et LVM (mais pas les volumes <i>thin provisioned</i>).
+</td>
+</tr>
+<tr>
+<th>
+<a href="../en/Limine.html" title="Limine">Limine</a>
+</th>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Oui</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Oui
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Oui</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Oui
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Oui
+</td>
+<td data-sort-value="1" style="background: #faa; color: inherit; vertical-align: middle; text-align: center;">Non</td>
+<td data-sort-value="3" style="background: #ffa; color: inherit; vertical-align: middle; text-align: center;">Sans chiffrement</td>
+<td data-sort-value="1" style="background: #faa; color: inherit; vertical-align: middle; text-align: center;">Non</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Oui</td>
+<td data-sort-value="1" style="background: #faa; color: inherit; vertical-align: middle; text-align: center;">Non
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<th>
+<a href="../en/REFInd.html" title="REFInd">rEFInd</a>
+</th>
+<td data-sort-value="1" style="background: #faa; color: inherit; vertical-align: middle; text-align: center;">Non</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Oui
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Oui</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Oui
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Oui<sup>2</sup>
+</td>
+<td data-sort-value="3" style="background: #ffa; color: inherit; vertical-align: middle; text-align: center;">Sans chiffrement</td>
+<td data-sort-value="3" style="background: #ffa; color: inherit; vertical-align: middle; text-align: center;">Sans chiffrement</td>
+<td data-sort-value="3" style="background: #ffa; color: inherit; vertical-align: middle; text-align: center;">Sans la fonction <i>tail-packing</i>
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Hérité du microprogramme<sup>1</sup>
+</td>
+<td data-sort-value="1" style="background: #faa; color: inherit; vertical-align: middle; text-align: center;">Non
+</td>
+<td>Prend en charge l'auto-détection des noyaux et des paramètres sans configuration explicite ainsi que <i>fastboot</i>. <a rel="nofollow" class="external autonumber" href="https://bbs.archlinux.org/viewtopic.php?id=258805">[3]</a>.
+</td>
+</tr>
+<tr>
+<th>
+<a href="../en/Syslinux.html" class="mw-redirect" title="Syslinux (Français)">Syslinux</a>
+</th>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Oui</td>
+<td data-sort-value="3" style="background: #ffa; color: inherit; vertical-align: middle; text-align: center;">
+<a href="../en/Syslinux.html#Limitations_of_UEFI_Syslinux" title="Syslinux">Partielle</a>
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Oui</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Oui
+</td>
+<td data-sort-value="3" style="background: #ffa; color: inherit; vertical-align: middle; text-align: center;">
+<a href="../en/Syslinux.html#Chainloading" title="Syslinux">Partielle</a>
+</td>
+<td data-sort-value="3" style="background: #ffa; color: inherit; vertical-align: middle; text-align: center;">Sans: volumes sur plusieurs périphériques, compression, chiffrement</td>
+<td data-sort-value="3" style="background: #ffa; color: inherit; vertical-align: middle; text-align: center;">Sans chiffrement</td>
+<td data-sort-value="1" style="background: #faa; color: inherit; vertical-align: middle; text-align: center;">Non</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Oui</td>
+<td data-sort-value="3" style="background: #ffa; color: inherit; vertical-align: middle; text-align: center;">MBR uniquement; sans <i>sparse inodes</i>
+</td>
+<td>Pas de prise en charge de certaines fonctionnalités de <a href="../en/File_systems.html" class="mw-redirect" title="File system">systèmes de fichier</a>. <a rel="nofollow" class="external autonumber" href="https://wiki.syslinux.org/wiki/index.php?title=Filesystem">[4]</a> <br>Ne possède pas de pilotes de systèmes de fichiers <a rel="nofollow" class="external autonumber" href="https://bugzilla.syslinux.org/show_bug.cgi?id=33">[5]</a>, ne peut accéder qu'au système de fichiers sur lequel il a été installé.
+</td>
+</tr>
+<tr>
+<th>
+<a href="../en/Systemd-boot.html" title="Systemd-boot">systemd-boot</a>
+</th>
+<td data-sort-value="1" style="background: #faa; color: inherit; vertical-align: middle; text-align: center;">Non</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Oui
+</td>
+<td data-sort-value="3" style="background: #ffa; color: inherit; vertical-align: middle; text-align: center;"><a rel="nofollow" class="external text" href="https://github.com/systemd/systemd/issues/1125">Installation manuelle uniquement</a></td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Oui
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Oui<sup>2</sup>
+</td>
+<td data-sort-value="3" style="background: #ffa; color: inherit; vertical-align: middle; text-align: center;">Peut être «side-loadé»<sup>3</sup>
+</td>
+<td data-sort-value="3" style="background: #ffa; color: inherit; vertical-align: middle; text-align: center;">Peut être «side-loadé»<sup>3</sup>
+</td>
+<td data-sort-value="3" style="background: #ffa; color: inherit; vertical-align: middle; text-align: center;">Peut être «side-loadé»<sup>3</sup>
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Hérité du microprogramme<sup>1</sup>
+</td>
+<td data-sort-value="3" style="background: #ffa; color: inherit; vertical-align: middle; text-align: center;">Peut être «side-loadé»<sup>3</sup>
+</td>
+<td>Impossible de lancer des binaires à partir de partitions autres que l'<a href="../fr/EFI_system_partition.html" title="EFI system partition (Français)">ESP</a> ou la partition de chargeur d'amorçage étendu (partition XBOOTLDR).<br>Prise en charge la détection automatique des <a href="../en/Unified_kernel_image.html" title="Unified kernel image">images de noyau unifié</a> lorsqu'elles sont placées dans <code><i>esp</i>/EFI/Linux</code>.
+</td>
+</tr>
+<tr>
+<th style="background: #ddd; color: inherit; vertical-align: middle; text-align: center;">
+<a href="../en/GRUB_Legacy.html" class="mw-redirect" title="GRUB Legacy (Français)">GRUB Legacy</a>
+</th>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Oui</td>
+<td data-sort-value="1" style="background: #faa; color: inherit; vertical-align: middle; text-align: center;">Non
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Oui</td>
+<td data-sort-value="1" style="background: #faa; color: inherit; vertical-align: middle; text-align: center;">Non
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Oui
+</td>
+<td data-sort-value="1" style="background: #faa; color: inherit; vertical-align: middle; text-align: center;">Non</td>
+<td data-sort-value="1" style="background: #faa; color: inherit; vertical-align: middle; text-align: center;">Non</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Oui</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Oui</td>
+<td data-sort-value="3" style="background: #ffa; color: inherit; vertical-align: middle; text-align: center;">XFS v4 uniquement
+</td>
+<td>
+<a rel="nofollow" class="external text" href="https://www.gnu.org/software/grub/grub-legacy.html">Abandonné</a> en faveur de <a href="../en/GRUB.html" class="mw-redirect" title="GRUB (Français)">GRUB</a>.
+</td>
+</tr>
+<tr>
+<th style="background: #ddd; color: inherit; vertical-align: middle; text-align: center;">
+<a href="../en/LILO.html" title="LILO">LILO</a>
+</th>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Oui</td>
+<td data-sort-value="1" style="background: #faa; color: inherit; vertical-align: middle; text-align: center;">Non
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Oui</td>
+<td data-sort-value="1" style="background: #faa; color: inherit; vertical-align: middle; text-align: center;">Non
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Oui
+</td>
+<td data-sort-value="1" style="background: #faa; color: inherit; vertical-align: middle; text-align: center;">Non</td>
+<td data-sort-value="3" style="background: #ffa; color: inherit; vertical-align: middle; text-align: center;">Sans chiffrement</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Oui</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Oui</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">
+<a rel="nofollow" class="external text" href="https://xfs.org/index.php/XFS_FAQ#Q:_Does_LILO_work_with_XFS.3F">Oui</a>
+</td>
+<td>
+<a rel="nofollow" class="external text" href="https://web.archive.org/web/20180323163248/http://lilo.alioth.debian.org/">Abandonné</a> en raison de ses limitations (par exemple, avec Btrfs, GPT, RAID).
+</td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li>La prise en charge du système de fichiers est héritée du microprogramme. La spécification UEFI impose la prise en charge des systèmes de fichiers FAT12, FAT16 et FAT32 <a rel="nofollow" class="external autonumber" href="https://uefi.org/sites/default/files/resources/UEFI_Spec_2_8_final.pdf#G17.1345080">[6]</a>, mais les fournisseurs peuvent ajouter en option la prise en charge de systèmes de fichiers supplémentaires ; par exemple, le microprogramme des <a href="../en/Mac.html" title="Mac">Macs</a> d'Apple prend en charge le système de fichiers HFS+. Si le microprogramme fournit une interface pour le chargement de <a href="../en/Unified_Extensible_Firmware_Interface.html#UEFI_drivers" title="Unified Extensible Firmware Interface">drivers UEFI</a> au démarrage, la prise en charge de systèmes de fichiers supplémentaires peut être ajouté en chargeant des pilotes de systèmes de fichiers (acquis indépendamment).</li>
+<li>Un <a rel="nofollow" class="external text" href="https://www.rodsbooks.com/efi-bootloaders/principles.html">gestionnaire d'amorçage</a>. Il peut seulement lancer d'autres applications EFI, par exemple, des images de noyau Linux construites avec <code>CONFIG_EFI_STUB=y</code> et <code>bootmgfw.efi</code> Windows.</li>
+<li>systemd-boot prend en charge le «side-loading» des pilotes de <a href="../en/Unified_Extensible_Firmware_Interface.html#UEFI_drivers" title="Unified Extensible Firmware Interface">système de fichiers UEFI</a>. Ils sont fournis par <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=efifs">efifs</a></span> et doivent être placés dans <code><i>esp</i>/EFI/systemd/drivers/</code>.</li>
+</ol>
+<p>Consultez également <a href="https://en.wikipedia.org/wiki/Comparison_of_boot_loaders" class="extiw" title="wikipedia:Comparison of boot loaders">La comparaison des chargeurs d'amorçage (Wikipedia en)</a>.
+</p>
+<h2><span class="mw-headline" id="Le_Noyau">Le Noyau</span></h2>
+<p>Le noyau <i>(ou kernel)</i> est l'élément central d'un système d'exploitation. Il repose sur des interactions de <i>bas-niveau</i> entre le matériel et les programmes qui en font usage. On parle de code exécuté à l’intérieur du <i>kernelspace</i> par opposition à du code exécuté depuis le <i>userspace</i>.
+</p>
+<p>Pour faire un usage efficace du processeur, le noyau utilise un ordonnanceur <i>(scheduler)</i> pour prioriser chacune des tâches qu'il doit accomplir à n'importe quel instant, créant ainsi l'illusion que celles-ci sont exécutées simultanément.
+</p>
+<p>Bien que l'on parle parfois de noyau «monolithique», celui-ci fait néanmoins usage de <a href="../fr/Kernel_module.html" title="Kernel module (Français)">«modules»</a> qui chargent <i>et éventuellement déchargent</i> certaines fonctionnalités.
+</p>
+<h2><span class="mw-headline" id="Initramfs">Initramfs</span></h2>
+<p>Après que le chargeur d'amorçage a chargé le noyau et un éventuel <i>initramfs</i>, il exécute le  noyau Arch qui utilise un (éventuel second) <b>initramfs</b> (INITial RAM FileSystem). Il s'agit d'une image de système de fichiers compressée. Le noyau la décompresse et la monte comme système de fichiers racine, dit <i>rootfs</i> (initial root filesystem, typiquement un <i>ramfs</i>).
+</p>
+<p>Le premier initramfs est celui embarqué dans le noyau lors de la compilation de ce dernier, ensuite différents fichiers d'initramfs sont extraits. Chaque fichier contenu dans ces initramfs extérieur vient écraser les fichiers de même nom déjà présents dans l'initramfs embarquée. Le noyau exécute ensuite <code>/init</code> (présent dans le rootfs) comme premier processus utilisateur. On parle à ce stade  de <i>early userspace</i>.
+</p>
+<p>Arch Linux utilise une archive vide pour l'initramfs du noyau (ce qui est la valeur par défaut lors de la compilation de Linux). Voyez <a href="../fr/Mkinitcpio.html" title="Mkinitcpio (Français)">mkinitcpio</a> pour plus de détails.
+</p>
+<p>Le but de l'initramfs est d'amorcer le système jusqu'au point où il peut accéder au système de fichiers racine (consultez <a href="../fr/Frequently_asked_questions.html#Arch_respecte-t-elle_la_norme_FHS_(Filesystem_Hierarchy_Standard)_de_la_Fondation_Linux?" title="Frequently asked questions (Français)">FHS</a> pour plus de détails). Cela signifie que tous les modules requis pour les périphériques tels que IDE, SCSI, SATA, USB/FW (si l'on démarre à partir d'un disque externe) doivent pouvoir être chargés à partir de l'initramfs s'ils ne sont pas intégrés au noyau. Une fois les modules appropriés chargés (soit explicitement via un programme ou un script, soit implicitement via <a href="../fr/Udev.html" title="Udev (Français)">udev</a>), le processus de démarrage se poursuit. Pour cette raison, l'initramfs ne doit contenir que les modules nécessaires pour accéder au système de fichiers racine ; il n'a pas besoin de contenir tous les modules que l'on pourrait vouloir utiliser. La majorité des modules seront chargés plus tard par udev, pendant le processus d'init.
+</p>
+<h2><span class="mw-headline" id="Init">Init</span></h2>
+<p>À la fin de l'<i>early userspace</i>, la partition racine définie par le paramètre <b>root=</b> de la «cmdline» (ligne des paramètres) du noyau est montée comme racine / en remplacement de l'<a href="#Initramfs">Initramfs</a>. 
+</p>
+<p>Le programme <code>/sbin/init</code> est alors lancé (remplaçant <code>/init</code>), sauf si un autre est spécifié dans la <i>cmdline</i> à l'aide du paramètre <b>init=</b>.
+</p>
+<p>Archlinux utilise <a href="../fr/Systemd.html" title="Systemd (Français)">systemd</a> comme système d'init.
+</p>
+<h2><span class="mw-headline" id="agetty">agetty</span></h2>
+<p><code>agetty</code> est la version Arch Linux de la commande <a href="../fr/Getty.html" title="Getty (Français)">getty</a> présente dans les systèmes Unix. <code>agetty</code> est exécuté une fois pour chaque console virtuelle (typiquement six). Un processus <code>agetty</code> a pour fonction de protéger la ligne de transmission vers un terminal vis-à-vis des intrusions: il initialise chacune des consoles et réclame à l'utilisateur de s’authentifier. Une fois le nom d'utilisateur et le mot de passe fournis, il les compare aux fichiers <code>/etc/passwd</code> et <code>/etc/shadow</code>. Si ceux-ci correspondent, il appelle alors <a href="#Login">login</a>.
+</p>
+<p>Alternativement, <code>agetty</code> peut lancer un gestionnaire de connexion.
+</p>
+<h2><span class="mw-headline" id="Gestionnaire_de_connexions">Gestionnaire de connexions</span></h2>
+<p>Un <a href="../fr/Display_manager.html" title="Display manager (Français)">Gestionnaire de connexions</a> peut être configuré pour remplacer <code>agetty</code> lors de la connexion au système.
+</p>
+<p>Afin de démarrer une interface graphique, il vous faudra activer le <a href="../fr/Systemd.html#Utilisation_basique_de_systemctl" title="Systemd (Français)">service</a> correspondant à votre gestionnaire de connexion.
+</p>
+<h2><span class="mw-headline" id="Login">Login</span></h2>
+<p>Le programme <code>login</code> démarre une session utilisateur en définissant les variables d'environnements puis en lançant le shell par défaut de l'utilisateur (tel que défini dans <code>/etc/passwd</code>).
+</p>
+<p>Si la connexion est acceptée, <code>login</code> affiche le contenu du fichier <code>/etc/motd</code> juste avant de lancer le shell (voir <span class="plainlinks archwiki-template-man" title="$ man 5 motd"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/motd.5">motd(5)</a></span>).
+</p>
+<h2><span class="mw-headline" id="Shell">Shell</span></h2>
+<p>Une fois le shell lancé, il va généralement charger un fichier de configuration (typiquement <code>~/.bashrc</code> ou <code>~/.zshrc</code>) avant de présenter la première invite de commande. On peut utiliser ces fichier pour lancer un compositeur <a href="../en/Wayland.html" class="mw-redirect" title="Wayland (Français)">wayland</a> ou <a href="../fr/Xinit.html" title="Xinit (Français)">startx</a> pour démarrer un environnement graphique.
+</p>
+<h2>
+<span id="GUI.2C_xinit_ou_wayland"></span><span class="mw-headline" id="GUI,_xinit_ou_wayland">GUI, xinit ou wayland</span>
+</h2>
+<p><a href="../fr/Xinit.html" title="Xinit (Français)">xinit</a> exécute le fichier de configuration d'exécution <a href="../fr/Xinit.html#Configuration" title="Xinit (Français)">xinitrc</a> de l'utilisateur, qui démarre normalement un <a href="../fr/Window_manager.html" title="Window manager (Français)">gestionnaire de fenêtres</a>. Lorsque l'utilisateur a terminé et quitte le gestionnaire de fenêtres, <i>xinit</i>, <i>startx</i>, l'interpréteur de commandes et la connexion se terminent dans cet ordre, retournant à <a href="#agetty">agetty</a>.
+</p>
+<h2><span class="mw-headline" id="Voir_aussi">Voir aussi</span></h2>
+<ul>
+<li>
+<a rel="nofollow" class="external text" href="https://web.archive.org/web/20150430223035/http://archlinux.me/brain0/2010/02/13/early-userspace-in-arch-linux/">Les débuts de l'espace utilisateur dans Arch Linux</a> (en anglais)</li>
+<li>
+<a rel="nofollow" class="external text" href="https://developer.ibm.com/articles/l-linuxboot/">Inside the Linux boot process</a> (en anglais)</li>
+<li>
+<a href="https://en.wikipedia.org/wiki/Linux_startup_process" class="extiw" title="wikipedia:Linux startup process">Wikipedia:Linux startup process</a> (en anglais)</li>
+<li><a href="https://en.wikipedia.org/wiki/fr:initrd" class="extiw" title="wikipedia:fr:initrd">Wikipedia:fr:initrd</a></li>
+<li>
+<a rel="nofollow" class="external text" href="https://www.cyberciti.biz/faq/grub-boot-into-single-user-mode/">Boot Linux Grub Into Single User Mode</a> (en anglais)</li>
+<li>
+<a rel="nofollow" class="external text" href="https://neosmart.net/wiki/mbr-boot-process/">NeoSmart : Le processus de démarrage BIOS/MBR</a> (en anglais)</li>
+<li>
+<a rel="nofollow" class="external text" href="https://www.linux.com/learn/kernel-newbie-corner-initrd-and-initramfs-whats">Le coin des néophytes du noyau : initrd et initramfs</a> (en anglais)</li>
+<li>
+<a rel="nofollow" class="external text" href="https://www.rodsbooks.com/efi-bootloaders/">Rod Smith - Gérer les chargeurs d'amorçage EFI pour Linux</a> (en anglais)</li>
+</ul>
+</div>
+</div>
+					<div id="catlinks" class="catlinks" data-mw="interface"><div id="mw-normal-catlinks" class="mw-normal-catlinks">
+<a href="../Special:Categories.html" title="Special:Categories">Categories</a>: <ul>
+<li><a href="../fr/Category:Boot_process.html" title="Category:Boot process (Français)">Boot process (Français)</a></li>
+<li><a href="../fr/Category:About_Arch.html" title="Category:About Arch (Français)">About Arch (Français)</a></li>
+</ul>
+</div></div>
+				</div>
+			</main>
+			
+		</div>
+		<div class="mw-footer-container">
+			
+<footer id="footer" class="mw-footer" style="margin: 0">
+	<ul id="footer-info">
+	<li data-nosnippet="">Retrieved from "<a dir="ltr" href="https://wiki.archlinux.org/index.php?title=Arch_boot_process_(Fran%C3%A7ais)&amp;oldid=823083">https://wiki.archlinux.org/index.php?title=Arch_boot_process_(Français)&amp;oldid=823083</a>"</li>
+<li id="footer-info-lastmod"> This page was last edited on 14 December 2024, at 19:13.</li>
+	<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+<br>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="https://terms.archlinux.org/docs/privacy-policy/">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="../en/ArchWiki:About.html">About ArchWiki</a></li>
+	<li id="footer-places-disclaimers"><a href="../en/ArchWiki:General_disclaimer.html">Disclaimers</a></li>
+	<li id="footer-places-archwiki-code-of-conduct"><a href="https://terms.archlinux.org/docs/code-of-conduct/" class="extiw" title="archlinux-service-agreements:code-of-conduct">Code of conduct</a></li>
+	<li id="footer-places-archwiki-terms-of-service"><a href="https://terms.archlinux.org/docs/terms-of-service/" class="extiw" title="archlinux-service-agreements:terms-of-service">Terms of service</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-copyrightico"><a href="https://www.gnu.org/copyleft/fdl.html" class="cdx-button cdx-button--fake-button cdx-button--size-large cdx-button--fake-button--enabled"><img src="/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" loading="lazy"></a></li>
+	<li id="footer-poweredbyico"><img src="/resources/assets/poweredby_mediawiki.svg" width="88" height="31" loading="lazy"></li>
+</ul>
+
+</footer>
+
+		</div>
+	</div> 
+</div> 
+<div class="vector-settings" id="p-dock-bottom">
+	<ul></ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,1849 @@
+<!DOCTYPE html>
+<html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-sticky-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-0 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-disabled skin-theme-clientpref-day vector-toc-available" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>WireGuard - ArchWiki</title>
+<link rel="stylesheet" href="../ArchWikiOffline.css">
+<meta name="ResourceLoaderDynamicStyles" content="">
+<meta name="generator" content="MediaWiki 1.43.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="max-image-preview:standard">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.25, maximum-scale=5.0">
+<link rel="search" type="application/opensearchdescription+xml" href="/rest.php/v1/search" title="ArchWiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.archlinux.org/api.php?action=rsd">
+<link rel="license" href="https://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="ArchWiki Atom feed" href="/index.php?title=Special:RecentChanges&amp;feed=atom">
+</head>
+<body class="skin--responsive skin-vector skin-vector-search-vue mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-WireGuard rootpage-WireGuard skin-vector-2022 action-view">
+<a class="mw-jump-link" href="#bodyContent">Jump to content</a>
+<div class="vector-header-container">
+	</div>
+<div class="mw-page-container">
+	<div class="mw-page-container-inner">
+		<div class="vector-column-start">
+			<div class="vector-main-menu-container">
+		</div>
+	<div class="vector-sticky-pinned-container">
+				<nav id="mw-panel-toc" aria-label="Contents" data-event-name="ui.sidebar-toc" class="mw-table-of-contents-container vector-toc-landmark">
+					<div id="vector-toc-pinned-container" class="vector-pinned-container">
+					<div id="vector-toc" class="vector-toc vector-pinnable-element">
+	<div class="vector-pinnable-header vector-toc-pinnable-header vector-pinnable-header-pinned" data-feature-name="toc-pinned" data-pinnable-element-id="vector-toc">
+	<h2 class="vector-pinnable-header-label">Contents</h2>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-toc.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-toc.unpin">hide</button>
+</div>
+
+
+	<ul class="vector-toc-contents" id="mw-panel-toc-list">
+		<li id="toc-mw-content-text" class="vector-toc-list-item vector-toc-level-1">
+			<a href="#" class="vector-toc-link">
+				<div class="vector-toc-text">Beginning</div>
+			</a>
+		</li>
+		<li id="toc-Installation" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Installation">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">1</span>
+				<span>Installation</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Installation-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Installation subsection</span>
+			</button>
+		
+		<ul id="toc-Installation-sublist" class="vector-toc-list">
+			<li id="toc-Graphical_clients" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Graphical_clients">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.1</span>
+					<span>Graphical clients</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Graphical_clients-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Command-line_tools" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Command-line_tools">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.2</span>
+					<span>Command-line tools</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Command-line_tools-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Usage" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Usage">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">2</span>
+				<span>Usage</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Usage-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Usage subsection</span>
+			</button>
+		
+		<ul id="toc-Usage-sublist" class="vector-toc-list">
+			<li id="toc-Key_generation" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Key_generation">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1</span>
+					<span>Key generation</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Key_generation-sublist" class="vector-toc-list">
+				<li id="toc-Vanity_keys" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Vanity_keys">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1.1</span>
+					<span>Vanity keys</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Vanity_keys-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Manual_configuration" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Manual_configuration">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2</span>
+					<span>Manual configuration</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Manual_configuration-sublist" class="vector-toc-list">
+				<li id="toc-Peer_setup" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Peer_setup">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2.1</span>
+					<span>Peer setup</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Peer_setup-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Additional_routes" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Additional_routes">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2.2</span>
+					<span>Additional routes</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Additional_routes-sublist" class="vector-toc-list">
+				<li id="toc-Point-to-site" class="vector-toc-list-item vector-toc-level-4">
+			<a class="vector-toc-link" href="#Point-to-site">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2.2.1</span>
+					<span>Point-to-site</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Point-to-site-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Site-to-point" class="vector-toc-list-item vector-toc-level-4">
+			<a class="vector-toc-link" href="#Site-to-point">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2.2.2</span>
+					<span>Site-to-point</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Site-to-point-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Site-to-site" class="vector-toc-list-item vector-toc-level-4">
+			<a class="vector-toc-link" href="#Site-to-site">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2.2.3</span>
+					<span>Site-to-site</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Site-to-site-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Routing_all_traffic_over_WireGuard" class="vector-toc-list-item vector-toc-level-4">
+			<a class="vector-toc-link" href="#Routing_all_traffic_over_WireGuard">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2.2.4</span>
+					<span>Routing all traffic over WireGuard</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Routing_all_traffic_over_WireGuard-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-DNS" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#DNS">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2.3</span>
+					<span>DNS</span>
+				</div>
+			</a>
+			
+			<ul id="toc-DNS-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Basic_checkups" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Basic_checkups">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.3</span>
+					<span>Basic checkups</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Basic_checkups-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Persistent_configuration" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Persistent_configuration">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.4</span>
+					<span>Persistent configuration</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Persistent_configuration-sublist" class="vector-toc-list">
+				<li id="toc-wg-quick" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#wg-quick">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.4.1</span>
+					<span>wg-quick</span>
+				</div>
+			</a>
+			
+			<ul id="toc-wg-quick-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-systemd-networkd" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#systemd-networkd">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.4.2</span>
+					<span>systemd-networkd</span>
+				</div>
+			</a>
+			
+			<ul id="toc-systemd-networkd-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-systemd-networkd:_routing_all_traffic_over_WireGuard" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#systemd-networkd:_routing_all_traffic_over_WireGuard">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.4.3</span>
+					<span>systemd-networkd: routing all traffic over WireGuard</span>
+				</div>
+			</a>
+			
+			<ul id="toc-systemd-networkd:_routing_all_traffic_over_WireGuard-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Netctl" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Netctl">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.4.4</span>
+					<span>Netctl</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Netctl-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-NetworkManager" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#NetworkManager">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.4.5</span>
+					<span>NetworkManager</span>
+				</div>
+			</a>
+			
+			<ul id="toc-NetworkManager-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Specific_use-case:_VPN_server" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Specific_use-case:_VPN_server">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">3</span>
+				<span>Specific use-case: VPN server</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Specific_use-case:_VPN_server-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Specific use-case: VPN server subsection</span>
+			</button>
+		
+		<ul id="toc-Specific_use-case:_VPN_server-sublist" class="vector-toc-list">
+			<li id="toc-Server" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Server">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1</span>
+					<span>Server</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Server-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Key_generation_2" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Key_generation_2">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.2</span>
+					<span>Key generation</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Key_generation_2-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Server_configuration" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Server_configuration">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.3</span>
+					<span>Server configuration</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Server_configuration-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Client_configuration" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Client_configuration">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.4</span>
+					<span>Client configuration</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Client_configuration-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Testing_the_tunnel" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Testing_the_tunnel">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">4</span>
+				<span>Testing the tunnel</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Testing_the_tunnel-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Tips_and_tricks" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Tips_and_tricks">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">5</span>
+				<span>Tips and tricks</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Tips_and_tricks-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Tips and tricks subsection</span>
+			</button>
+		
+		<ul id="toc-Tips_and_tricks-sublist" class="vector-toc-list">
+			<li id="toc-Store_private_keys_in_encrypted_form_(wg-quick)" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Store_private_keys_in_encrypted_form_(wg-quick)">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.1</span>
+					<span>Store private keys in encrypted form (wg-quick)</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Store_private_keys_in_encrypted_form_(wg-quick)-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Using_systemd_credentials_for_private_keys_(systemd-networkd)" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Using_systemd_credentials_for_private_keys_(systemd-networkd)">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.2</span>
+					<span>Using systemd credentials for private keys (systemd-networkd)</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Using_systemd_credentials_for_private_keys_(systemd-networkd)-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Endpoint_with_changing_IP" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Endpoint_with_changing_IP">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.3</span>
+					<span>Endpoint with changing IP</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Endpoint_with_changing_IP-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Generate_QR_code" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Generate_QR_code">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.4</span>
+					<span>Generate QR code</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Generate_QR_code-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Enable_debug_logs" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Enable_debug_logs">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.5</span>
+					<span>Enable debug logs</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Enable_debug_logs-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Reload_peer_(server)_configuration" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Reload_peer_(server)_configuration">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.6</span>
+					<span>Reload peer (server) configuration</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Reload_peer_(server)_configuration-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Workaround_for_some_public_Wi-Fi_networks_seemingly_blocking_WireGuard_connections" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Workaround_for_some_public_Wi-Fi_networks_seemingly_blocking_WireGuard_connections">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.7</span>
+					<span>Workaround for some public Wi-Fi networks seemingly blocking WireGuard connections</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Workaround_for_some_public_Wi-Fi_networks_seemingly_blocking_WireGuard_connections-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Troubleshooting" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Troubleshooting">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">6</span>
+				<span>Troubleshooting</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Troubleshooting-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Troubleshooting subsection</span>
+			</button>
+		
+		<ul id="toc-Troubleshooting-sublist" class="vector-toc-list">
+			<li id="toc-Routes_are_periodically_reset" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Routes_are_periodically_reset">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.1</span>
+					<span>Routes are periodically reset</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Routes_are_periodically_reset-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Broken_DNS_resolution" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Broken_DNS_resolution">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.2</span>
+					<span>Broken DNS resolution</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Broken_DNS_resolution-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Adjusting_the_MTU_value" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Adjusting_the_MTU_value">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.3</span>
+					<span>Adjusting the MTU value</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Adjusting_the_MTU_value-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Key_is_not_the_correct_length_or_format" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Key_is_not_the_correct_length_or_format">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.4</span>
+					<span>Key is not the correct length or format</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Key_is_not_the_correct_length_or_format-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Unable_to_establish_a_persistent_connection_behind_NAT_/_firewall" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Unable_to_establish_a_persistent_connection_behind_NAT_/_firewall">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.5</span>
+					<span>Unable to establish a persistent connection behind NAT / firewall</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Unable_to_establish_a_persistent_connection_behind_NAT_/_firewall-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Loop_routing" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Loop_routing">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.6</span>
+					<span>Loop routing</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Loop_routing-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Connection_lost_after_sleep_using_systemd-networkd" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Connection_lost_after_sleep_using_systemd-networkd">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.7</span>
+					<span>Connection lost after sleep using systemd-networkd</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Connection_lost_after_sleep_using_systemd-networkd-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-See_also" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#See_also">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">7</span>
+				<span>See also</span>
+			</div>
+		</a>
+		
+		<ul id="toc-See_also-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+</ul>
+</div>
+
+					</div>
+		</nav>
+			</div>
+		</div>
+		<div class="mw-content-container">
+			<main id="content" class="mw-body" style="margin: 0">
+				<header class="mw-body-header vector-page-titlebar">
+					<nav aria-label="Contents" class="vector-toc-landmark">
+						
+<div id="vector-page-titlebar-toc" class="vector-dropdown vector-page-titlebar-toc vector-button-flush-left">
+	<input type="checkbox" id="vector-page-titlebar-toc-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-page-titlebar-toc" class="vector-dropdown-checkbox " aria-label="Toggle the table of contents">
+	<label id="vector-page-titlebar-toc-label" for="vector-page-titlebar-toc-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"><span class="vector-icon mw-ui-icon-listBullet mw-ui-icon-wikimedia-listBullet"></span>
+
+<span class="vector-dropdown-label-text">Toggle the table of contents</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+							<div id="vector-page-titlebar-toc-unpinned-container" class="vector-unpinned-container">
+			</div>
+		
+	</div>
+</div>
+
+					</nav>
+					<h1 id="firstHeading" class="firstHeading mw-first-heading"><span class="mw-page-title-main">WireGuard</span></h1>
+							
+<div id="p-lang-btn" class="vector-dropdown mw-portlet mw-portlet-lang">
+	<input type="checkbox" id="p-lang-btn-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-p-lang-btn" class="vector-dropdown-checkbox mw-interlanguage-selector" aria-label="Go to an article in another language. Available in 2 languages">
+	<label id="p-lang-btn-label" for="p-lang-btn-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--action-progressive mw-portlet-lang-heading-2" aria-hidden="true"><span class="vector-icon mw-ui-icon-language-progressive mw-ui-icon-wikimedia-language-progressive"></span>
+
+<span class="vector-dropdown-label-text">2 languages</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+		<div class="vector-menu-content">
+			
+			<ul class="vector-menu-content-list">
+				
+				<li class="interlanguage-link interwiki-ja mw-list-item"><a href="https://wiki.archlinux.jp/index.php/WireGuard" title="WireGuard – 日本語" lang="ja" hreflang="ja" data-title="WireGuard" data-language-autonym="日本語" data-language-local-name="日本語" class="interlanguage-link-target"><span>日本語</span></a></li>
+<li class="interlanguage-link interwiki-zh-hans mw-list-item"><a href="https://wiki.archlinuxcn.org/wiki/WireGuard" title="WireGuard – 中文（简体）" lang="zh-Hans" hreflang="zh-Hans" data-title="WireGuard" data-language-autonym="中文（简体）" data-language-local-name="中文（简体）" class="interlanguage-link-target"><span>中文（简体）</span></a></li>
+			</ul>
+			
+		</div>
+
+	</div>
+</div>
+</header>
+				<div class="vector-column-end">
+					<div class="vector-sticky-pinned-container">
+						<nav class="vector-page-tools-landmark" aria-label="Page tools">
+							<div id="vector-page-tools-pinned-container" class="vector-pinned-container">
+				
+							</div>
+		</nav>
+						<nav class="vector-appearance-landmark" aria-label="Appearance">
+							<div id="vector-appearance-pinned-container" class="vector-pinned-container">
+				<div id="vector-appearance" class="vector-appearance vector-pinnable-element">
+	<div class="vector-pinnable-header vector-appearance-pinnable-header vector-pinnable-header-pinned" data-feature-name="appearance-pinned" data-pinnable-element-id="vector-appearance" data-pinned-container-id="vector-appearance-pinned-container" data-unpinned-container-id="vector-appearance-unpinned-container">
+	<div class="vector-pinnable-header-label">Appearance</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-appearance.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-appearance.unpin">hide</button>
+</div>
+
+
+</div>
+
+							</div>
+		</nav>
+					</div>
+				</div>
+				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container>
+					<div class="vector-body-before-content">
+							<div class="mw-indicators">
+		</div>
+
+						<div id="siteSub" class="noprint">From ArchWiki</div>
+					</div>
+					<div id="contentSub"><div id="mw-content-subtitle"></div></div>
+					
+					
+					<div id="mw-content-text" class="mw-body-content">
+<div class="mw-content-ltr mw-parser-output" lang="en" dir="ltr">
+<div class="archwiki-template-meta-related-articles">
+<p>Related articles</p>
+<ul>
+<li><a href="../en/Linux_Containers/Using_VPNs.html" title="Linux Containers/Using VPNs">Linux Containers/Using VPNs</a></li>
+</ul>
+</div>
+<p>From the <a rel="nofollow" class="external text" href="https://www.wireguard.com/">WireGuard</a> project homepage:
+</p>
+<dl><dd>WireGuard is an extremely simple yet fast and modern VPN that utilizes state-of-the-art cryptography. It aims to be faster, simpler, leaner, and more useful than IPsec, while avoiding the massive headache. It intends to be considerably more performant than OpenVPN. WireGuard is designed as a general purpose VPN for running on embedded interfaces and super computers alike, fit for many different circumstances. Initially released for the Linux kernel, it is now cross-platform (Windows, macOS, BSD, iOS, Android) and widely deployable.</dd></dl>
+<p>A rough introduction to the main concepts used in this article can be found on <a rel="nofollow" class="external text" href="https://www.wireguard.com/">WireGuard's</a> project homepage. WireGuard has been included in the <a rel="nofollow" class="external text" href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=e7096c131e5161fa3b8e52a650d7719d2857adfd">Linux kernel</a> since late 2019.
+</p>
+<meta property="mw:PageProp/toc">
+<h2><span class="mw-headline" id="Installation">Installation</span></h2>
+<p><a href="../en/Help:Reading.html#Installation_of_packages" class="mw-redirect" title="Install">Install</a> the <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=wireguard-tools">wireguard-tools</a></span> package for userspace utilities.
+</p>
+<p>Alternatively, various network managers provide support for WireGuard, provided that peer keys are available. See <a href="#Persistent_configuration">#Persistent configuration</a> for details.
+</p>
+<h3><span class="mw-headline" id="Graphical_clients">Graphical clients</span></h3>
+<ul><li>
+<b>wireguird</b> — A linux GTK GUI client for WireGuard.</li></ul>
+<dl><dd>
+<a rel="nofollow" class="external free" href="https://github.com/UnnoTed/wireguird">https://github.com/UnnoTed/wireguird</a> || <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/wireguird/">wireguird</a></span><sup><small>AUR</small></sup>
+</dd></dl>
+<h3><span class="mw-headline" id="Command-line_tools">Command-line tools</span></h3>
+<ul><li>
+<b>wg_tool</b> — Tool to manage wireguard configs for server and users.</li></ul>
+<dl><dd>
+<a rel="nofollow" class="external free" href="https://github.com/gene-git/wg_tool">https://github.com/gene-git/wg_tool</a> || <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/wg_tool/">wg_tool</a></span><sup><small>AUR</small></sup>
+</dd></dl>
+<ul><li>
+<b>wg-client</b> — Linux client with both command line and GUI.</li></ul>
+<dl><dd>
+<a rel="nofollow" class="external free" href="https://github.com/gene-git/wg-client">https://github.com/gene-git/wg-client</a> || <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/wg-client/">wg-client</a></span><sup><small>AUR</small></sup>
+</dd></dl>
+<ul><li>
+<b>wg2nd</b> — A tool to convert WireGuard configurations from <span class="plainlinks archwiki-template-man" title="$ man 8 wg-quick"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/wg-quick.8">wg-quick(8)</a></span> format into <a href="../en/Systemd-networkd.html" title="Systemd-networkd">systemd-networkd</a> compatible configurations.</li></ul>
+<dl><dd>
+<a rel="nofollow" class="external free" href="https://git.flu0r1ne.net/wg2nd/about">https://git.flu0r1ne.net/wg2nd/about</a> || <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/wg2nd/">wg2nd</a></span><sup><small>AUR</small></sup>
+</dd></dl>
+<h2><span class="mw-headline" id="Usage">Usage</span></h2>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../File:Tango-edit-clear.svg" decoding="async" width="48" height="48" class="mw-file-element"></span></span><b>This article or section needs language, wiki syntax or style improvements. See <a href="../en/Help:Style.html" title="Help:Style">Help:Style</a> for reference.</b></p>
+<div>
+<b>Reason:</b> Useless section name – everything on this page is about WireGuard usage. Moving the 4 subsections to the top level would make sense. (Discuss in <a rel="nofollow" class="external text" href="../en/Talk:WireGuard.html">Talk:WireGuard</a>)</div>
+</div>
+<p>The commands below demonstrate how to set up a basic tunnel between two or more peers with the following settings:
+</p>
+<table class="wikitable">
+<tbody>
+<tr>
+<th rowspan="2">
+</th>
+<th colspan="3">External (public) addresses
+</th>
+<th colspan="2">Internal IP addresses
+</th>
+<th rowspan="2">Port
+</th>
+</tr>
+<tr>
+<th>Domain name
+</th>
+<th>IPv4 address
+</th>
+<th>IPv6 address
+</th>
+<th>IPv4 address
+</th>
+<th>IPv6 address
+</th>
+</tr>
+<tr>
+<th>Peer A
+</th>
+<td>
+</td>
+<td>198.51.100.101
+</td>
+<td>2001:db8:a85b:70a:ffd4:ec1b:4650:a001
+</td>
+<td>10.0.0.1/24
+</td>
+<td>fdc9:281f:04d7:9ee9::1/64
+</td>
+<td>UDP/51871
+</td>
+</tr>
+<tr>
+<th>Peer B
+</th>
+<td>peer-b.example
+</td>
+<td>203.0.113.102
+</td>
+<td>2001:db8:40f0:147a:80ad:3e88:f8e9:b002
+</td>
+<td>10.0.0.2/24
+</td>
+<td>fdc9:281f:04d7:9ee9::2/64
+</td>
+<td>UDP/51902
+</td>
+</tr>
+<tr>
+<th>Peer C
+</th>
+<td>
+</td>
+<td>
+<i>dynamic</i>
+</td>
+<td>
+<i>dynamic</i>
+</td>
+<td>10.0.0.3/24
+</td>
+<td>fdc9:281f:04d7:9ee9::3/64
+</td>
+<td>UDP/51993
+</td>
+</tr>
+</tbody>
+</table>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> The same UDP port can be used for all peers.</div>
+<p>The external addresses should already exist. For example, if ICMP echo requests are not blocked, peer A should be able to <a href="../en/Network_configuration.html#Ping" class="mw-redirect" title="Ping">ping</a> peer B via its public IP address(es) and vice versa.
+</p>
+<p>The internal addresses will be new addresses, created either manually using the <span class="plainlinks archwiki-template-man" title="$ man 8 ip"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/ip.8">ip(8)</a></span> utility or by network management software, which will be used internally within the new WireGuard network. The following examples will use 10.0.0.0/24 and fdc9:281f:04d7:9ee9::/64 as the internal network. The <code>/24</code> and <code>/64</code> in the IP addresses is the <a href="https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation" class="extiw" title="wikipedia:Classless Inter-Domain Routing">CIDR</a>.
+</p>
+<h3><span class="mw-headline" id="Key_generation">Key generation</span></h3>
+<p>Create a private and public key for each peer. If connecting dozens of peers optionally consider a vanity keypair to personalize the Base64 encoded public key string. See <a href="#Vanity_keys">#Vanity keys</a>.
+</p>
+<p>To create a private key run:
+</p>
+<pre>$ (umask 0077; wg genkey &gt; peer_A.key)
+</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> It is recommended to only allow reading and writing access for the owner. The above alters the <a href="../en/Umask.html" title="Umask">umask</a> temporarily within a sub-shell to ensure that access (read/write permissions) is restricted to the owner.</div>
+<p>To create a public key:
+</p>
+<pre>$ wg pubkey &lt; peer_A.key &gt; peer_A.pub
+</pre>
+<p>Alternatively, do this all at once:
+</p>
+<pre>$ wg genkey | (umask 0077 &amp;&amp; tee peer_A.key) | wg pubkey &gt; peer_A.pub
+</pre>
+<p>One can also generate a pre-shared key to add an additional layer of symmetric-key cryptography to be mixed into the already existing public-key cryptography, for post-quantum resistance. A pre-shared key should be generated for each peer pair and should not be reused. For example, three interconnected peers, A, B, and, C will need three separate pre-shared keys, one for each peer pair.
+</p>
+<p>Generate a pre-shared key for each peer pair using the following command (make sure to use <code>umask 0077</code> for this as well):
+</p>
+<pre>$ wg genpsk &gt; peer_A-peer_B.psk
+$ wg genpsk &gt; peer_A-peer_C.psk
+$ wg genpsk &gt; peer_B-peer_C.psk
+</pre>
+<h4><span class="mw-headline" id="Vanity_keys">Vanity keys</span></h4>
+<p>Currently, WireGuard does not support comments or attaching human-memorable names to keys.  This makes identifying the key's owner difficult particularly when multiple keys are in use.  One solution is to generate a public key that contains some familiar characters (perhaps the first few letters of the owner's name or of the hostname etc.), <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=wireguard-vanity-address">wireguard-vanity-address</a></span>, or alternatively <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/wicuvanity/">wicuvanity</a></span><sup><small>AUR</small></sup> do this.
+</p>
+<p>For example:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">$ wireguard-vanity-address --in 8 leslie</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">searching for 'leslie' in pubkey[0..10], one of every 214748364 keys should match
+one core runs at 2.69e6 keys/s, CPU cores available: 16
+est yield: 5.0 seconds per key, 200.10e-3 keys/s
+hit Ctrl-C to stop
+private wEoVMj92P+E3fQXVf9IixWJqpCqcnP/4OfvrB1g3zmY=  public LEsliEny+aMcWcRbh8Qf414XsQHSBOAFk3TaEk/aSD0=
+private EAOwlGGqpHVbZ9ehaCspdBJt+lkMcCfkwiA5T5a4JFs=  public VlesLiEB5BFd//OD2ILKXviolfz+hodG6uZ+XjoalC8=
+private UDWG4VWI+RzAGzNSnlC+0X4d3nk9goWPs/NRC5tX524=  public 9lESlieIFOlJFV6dG7Omao2WS+amWgshDdBYn8ahRjo=</pre>
+<h3><span class="mw-headline" id="Manual_configuration">Manual configuration</span></h3>
+<h4><span class="mw-headline" id="Peer_setup">Peer setup</span></h4>
+<p>Manual setup is accomplished by using <span class="plainlinks archwiki-template-man" title="$ man 8 ip"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/ip.8">ip(8)</a></span> and <span class="plainlinks archwiki-template-man" title="$ man 8 wg"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/wg.8">wg(8)</a></span>.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> These examples use the pre-shared keys which were introduced as <i>optional</i> in <a href="#Key_generation">#Key generation</a>. If not using them, simply ignore the corresponding parts in the commands.</div>
+<p><b>Peer A setup:</b>
+</p>
+<p>In this example, peer A will listen on UDP port 51871 and will accept connection from peers B and C.
+</p>
+<pre># ip link add dev wg0 type wireguard
+# ip addr add 10.0.0.1/24 dev wg0
+# ip addr add fdc9:281f:04d7:9ee9::1/64 dev wg0
+# wg set wg0 listen-port 51871 private-key <i>/path/to/</i>peer_A.key
+# wg set wg0 peer <i>PEER_B_PUBLIC_KEY</i> preshared-key <i>/path/to/</i>peer_A-peer_B.psk endpoint peer-b.example:51902 allowed-ips 10.0.0.2/32,fdc9:281f:04d7:9ee9::2/128
+# wg set wg0 peer <i>PEER_C_PUBLIC_KEY</i> preshared-key <i>/path/to/</i>peer_A-peer_C.psk allowed-ips 10.0.0.3/32,fdc9:281f:04d7:9ee9::3/128
+# ip link set wg0 up
+</pre>
+<p><code><i>PEER_X_PUBLIC_KEY</i></code> should be the contents of <code><i>peer_X</i>.pub</code>.
+</p>
+<p>The keyword <code>allowed-ips</code> is a list of addresses that will get routed to the peer. Make sure to specify at least one address range that contains the WireGuard connection's internal IP address(es).
+</p>
+<p><b>Peer B setup:</b>
+</p>
+<pre># ip link add dev wg0 type wireguard
+# ip addr add 10.0.0.2/24 dev wg0
+# ip addr add fdc9:281f:04d7:9ee9::2/64 dev wg0
+# wg set wg0 listen-port 51902 private-key <i>/path/to/</i>peer_B.key
+# wg set wg0 peer <i>PEER_A_PUBLIC_KEY</i> preshared-key <i>/path/to/</i>peer_A-peer_B.psk endpoint 198.51.100.101:51871 allowed-ips 10.0.0.1/32,fdc9:281f:04d7:9ee9::1/128
+# wg set wg0 peer <i>PEER_C_PUBLIC_KEY</i> preshared-key <i>/path/to/</i>peer_B-peer_C.psk allowed-ips 10.0.0.3/32,fdc9:281f:04d7:9ee9::3/128
+# ip link set wg0 up
+</pre>
+<p><b>Peer C setup:</b>
+</p>
+<pre># ip link add dev wg0 type wireguard
+# ip addr add 10.0.0.3/24 dev wg0
+# ip addr add fdc9:281f:04d7:9ee9::3/64 dev wg0
+# wg set wg0 listen-port 51993 private-key <i>/path/to/</i>peer_C.key
+# wg set wg0 peer <i>PEER_A_PUBLIC_KEY</i> preshared-key <i>/path/to/</i>peer_A-peer_C.psk endpoint 198.51.100.101:51871 allowed-ips 10.0.0.1/32,fdc9:281f:04d7:9ee9::1/128
+# wg set wg0 peer <i>PEER_B_PUBLIC_KEY</i> preshared-key <i>/path/to/</i>peer_B-peer_C.psk endpoint peer-b.example:51902 allowed-ips 10.0.0.2/32,fdc9:281f:04d7:9ee9::2/128
+# ip link set wg0 up
+</pre>
+<h4><span class="mw-headline" id="Additional_routes">Additional routes</span></h4>
+<p>To establish connections more complicated than point-to-point, additional setup is necessary.
+</p>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../File:Tango-view-fullscreen.svg" decoding="async" width="48" height="48" class="mw-file-element"></span></span><b>This article or section needs expansion.</b></p>
+<div>
+<b>Reason:</b> Add a scenario: only peer A has a public IP address (i.e. <i>endpoint</i>), peers B and C (which are generally behind a NAT) connect to peer A with <code>PersistentKeepalive</code>, connections from peer B to peer C and vice versa are routed via peer A. Configuration: peers B and C have <code>10.0.0.0/24</code> in <code>AllowedIPs</code> for peer A, peer A must enable packet forwarding and masquerading via firewall rules, e.g. <code>iptables -A FORWARD -i wg+ -j ACCEPT</code> and <code>iptables -t nat -A POSTROUTING -s 10.0.0.0/24 -o wg0 -j MASQUERADE</code>. (Discuss in <a rel="nofollow" class="external text" href="../en/Talk:WireGuard.html">Talk:WireGuard</a>)</div>
+</div>
+<h5><span class="mw-headline" id="Point-to-site">Point-to-site</span></h5>
+<p>To access the network of a peer, specify the network subnet(s) in <code>allowed-ips</code> in the configuration of the peers who should be able to connect to it. E.g. <code>allowed-ips 10.0.0.2/32,fdc9:281f:04d7:9ee9::2/128,<b>192.168.35.0/24,fd7b:d0bd:7a6e::/64</b></code>.
+</p>
+<p>Make sure to also set up the <a href="../en/Network_configuration.html#Routing_table" title="Network configuration">routing table</a> with <span class="plainlinks archwiki-template-man" title="$ man 8 ip-route"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/ip-route.8">ip-route(8)</a></span>. E.g.:
+</p>
+<pre># ip route add 192.168.35.0/24 dev wg0
+# ip route add fd7b:d0bd:7a6e::/64 dev wg0
+</pre>
+<h5><span class="mw-headline" id="Site-to-point">Site-to-point</span></h5>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../File:Tango-view-fullscreen.svg" decoding="async" width="48" height="48" class="mw-file-element"></span></span><b>This article or section needs expansion.</b></p>
+<div>
+<b>Reason:</b> Add <code>ip route</code> examples; add alternative using NAT; mention the situation when the <i>site</i>-peer is the network's gateway. (Discuss in <a rel="nofollow" class="external text" href="../en/Talk:WireGuard.html">Talk:WireGuard</a>)</div>
+</div>
+<p>If the intent is to connect a device to a network with WireGuard peer(s), set up routes on each device so they know that the peer(s) are reachable via the device.
+</p>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> Deploy routes network-wide by configuring them in the router.</div>
+<p>After that, <a href="../en/Internet_sharing.html#Enable_packet_forwarding" title="Internet sharing">enable IP forwarding</a> on the peer through which other devices on the network will connect to WireGuard peer(s).
+</p>
+<h5><span class="mw-headline" id="Site-to-site">Site-to-site</span></h5>
+<p>To connect two (or more) networks, apply both <a href="#Point-to-site">#Point-to-site</a> and <a href="#Site-to-point">#Site-to-point</a> on all <i>sites</i>.
+</p>
+<h5><span class="mw-headline" id="Routing_all_traffic_over_WireGuard">Routing all traffic over WireGuard</span></h5>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../File:Tango-view-fullscreen.svg" decoding="async" width="48" height="48" class="mw-file-element"></span></span><b>This article or section needs expansion.</b></p>
+<div>
+<b>Reason:</b> Add instructions on how to <i>route everything over VPN</i>.<a rel="nofollow" class="external autonumber" href="https://www.wireguard.com/netns/">[1]</a> There is <a href="#systemd-networkd:_routing_all_traffic_over_WireGuard">#systemd-networkd: routing all traffic over WireGuard</a> already. (Discuss in <a rel="nofollow" class="external text" href="../en/Talk:WireGuard.html">Talk:WireGuard</a>)</div>
+</div>
+<p>To route all traffic through a peer, add the <a href="https://en.wikipedia.org/wiki/Default_route" class="extiw" title="wikipedia:Default route">default route</a> to <code>allowed-ips</code>, i.e. <code>allowed-ips 0.0.0.0/0,::/0</code>.
+</p>
+<h4><span class="mw-headline" id="DNS">DNS</span></h4>
+<p>To use a peer as a DNS server, add its WireGuard tunnel IP address(es) to <a href="../en/Domain_name_resolution.html" class="mw-redirect" title="/etc/resolv.conf">/etc/resolv.conf</a>. For example, to use peer B as the DNS server:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/resolv.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">nameserver fdc9:281f:04d7:9ee9::2
+nameserver 10.0.0.2
+</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> If a peer will act as a DNS server, make sure to use its WireGuard tunnel address(es) as the DNS server address(es) instead of another of its addresses from allowed IPs. Otherwise DNS lookups may fail.</div>
+<h3><span class="mw-headline" id="Basic_checkups">Basic checkups</span></h3>
+<p>Invoking the <span class="plainlinks archwiki-template-man" title="$ man 8 wg"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/wg.8">wg(8)</a></span> command without parameters will give a quick overview of the current configuration.
+</p>
+<p>As an example, when peer A has been configured we are able to see its identity and its associated peers:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;"># wg</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">interface: wg0
+  public key: UguPyBThx/+xMXeTbRYkKlP0Wh/QZT3vTLPOVaaXTD8=
+  private key: (hidden)
+  listening port: 51871
+
+peer: 9jalV3EEBnVXahro0pRMQ+cHlmjE33Slo9tddzCVtCw=
+  endpoint: 203.0.113.102:51902
+  allowed ips: 10.0.0.2/32, fdc9:281f:04d7:9ee9::2
+
+peer: 2RzKFbGMx5g7fG0BrWCI7JIpGvcwGkqUaCoENYueJw4=
+  endpoint: 192.0.2.103:51993
+  allowed ips: 10.0.0.3/32, fdc9:281f:04d7:9ee9::3</pre>
+<p>At this point one could reach the end of the tunnel. If the peers do not block ICMP echo requests, try <a href="../en/Network_configuration.html#Ping" class="mw-redirect" title="Ping">pinging</a> a peer to test the connection between them.
+</p>
+<p>Using ICMPv4:
+</p>
+<pre>$ ping 10.0.0.2
+</pre>
+<p>Using ICMPv6:
+</p>
+<pre>$ ping fdc9:281f:04d7:9ee9::2
+</pre>
+<p>After transferring some data between peers, the <code>wg</code> utility will show additional information:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;"># wg</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">interface: wg0
+  public key: UguPyBThx/+xMXeTbRYkKlP0Wh/QZT3vTLPOVaaXTD8=
+  private key: (hidden)
+  listening port: 51871
+
+peer: 9jalV3EEBnVXahro0pRMQ+cHlmjE33Slo9tddzCVtCw=
+  endpoint: 203.0.113.102:51902
+  allowed ips: 10.0.0.2/32, fdc9:281f:04d7:9ee9::2
+  latest handshake: 5 seconds ago
+  transfer: 1.24 KiB received, 1.38 KiB sent
+
+peer: 2RzKFbGMx5g7fG0BrWCI7JIpGvcwGkqUaCoENYueJw4=
+  allowed ips: 10.0.0.3/32, fdc9:281f:04d7:9ee9::3</pre>
+<h3><span class="mw-headline" id="Persistent_configuration">Persistent configuration</span></h3>
+<p>Persistent configuration can be achieved using <code>wg-quick@.service</code>, which is shipped with <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=wireguard-tools">wireguard-tools</a></span>, or using a network manager. Network managers that support WireGuard are <a href="../en/Systemd-networkd.html" title="Systemd-networkd">systemd-networkd</a>, <a href="../en/Netctl.html" title="Netctl">netctl</a><a rel="nofollow" class="external autonumber" href="https://gitlab.archlinux.org/archlinux/netctl/blob/master/docs/examples/wireguard">[2]</a>, <a href="../en/NetworkManager.html" title="NetworkManager">NetworkManager</a> and <a href="../en/ConnMan.html" title="ConnMan">ConnMan</a><a rel="nofollow" class="external autonumber" href="https://git.kernel.org/pub/scm/network/connman/connman.git/tree/doc/vpn-config-format.txt">[3]</a>.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> 
+<ul>
+<li>
+<a href="../en/Netctl.html" title="Netctl">netctl</a> relies on <span class="plainlinks archwiki-template-man" title="$ man 8 wg"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/wg.8">wg(8)</a></span> from <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=wireguard-tools">wireguard-tools</a></span> and <code>/etc/wireguard/<i>interfacename</i>.conf</code> configuration files for establishing WireGuard connections.</li>
+<li>
+<a href="../en/ConnMan.html" title="ConnMan">ConnMan</a> has a very limited support for WireGuard. It can connect to only one peer.<a rel="nofollow" class="external autonumber" href="https://git.kernel.org/pub/scm/network/connman/connman.git/commit/?id=95b25140bec7c4d9b6ae4e479dc1b94b7d409b39">[4]</a>
+</li>
+</ul>
+</div>
+<h4><span class="mw-headline" id="wg-quick">wg-quick</span></h4>
+<p><span class="plainlinks archwiki-template-man" title="$ man 8 wg-quick"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/wg-quick.8">wg-quick(8)</a></span> configures WireGuard tunnels using configuration files from <code>/etc/wireguard/<i>interfacename</i>.conf</code>.
+</p>
+<p>The current WireGuard configuration can be saved by utilizing the <span class="plainlinks archwiki-template-man" title="$ man 8 wg"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/wg.8">wg(8)</a></span> utility's <code>showconf</code> command. For example:
+</p>
+<pre># wg showconf wg0 &gt; /etc/wireguard/wg0.conf
+</pre>
+<p>To start a tunnel with a configuration file, use
+</p>
+<pre># wg-quick up <i>interfacename</i>
+</pre>
+<p>or use the systemd service—<code>wg-quick@<i>interfacename</i>.service</code>. To start the tunnel at boot, <a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Enable">enable</a> the unit.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> 
+<ul>
+<li>Users configuring the WireGuard interface using <i>wg-quick</i>, should make sure that no other <a href="../en/Network_configuration.html#Network_management" class="mw-redirect" title="Network management">network management</a> software tries to manage it. To use <a href="../en/NetworkManager.html" title="NetworkManager">NetworkManager</a> and to not configure WireGuard interfaces with it, see <a href="#Routes_are_periodically_reset">#Routes are periodically reset</a>.</li>
+<li>
+<i>wg-quick</i> adds additional configuration options to the configuration file format thus making it incompatible with <span class="plainlinks archwiki-template-man" title="$ man 8 wg"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/wg.8#CONFIGURATION_FILE_FORMAT">wg(8) § CONFIGURATION FILE FORMAT</a></span>. See the <span class="plainlinks archwiki-template-man" title="$ man 8 wg-quick"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/wg-quick.8#CONFIGURATION">wg-quick(8) § CONFIGURATION</a></span> man page for the configuration values in question. A <i>wg</i>-compatible configuration file can be produced by using <code>wg-quick strip</code>.</li>
+<li>
+<i>wg-quick</i> does not provide a way to instruct <a href="../en/Openresolv.html" class="mw-redirect" title="Resolvconf">resolvconf</a> to set the WireGuard interface as <i>private</i>. Even if there are search domains specified, all DNS queries from the system, not just those that match the search domains, will be sent to the DNS servers which are set in the WireGuard configuration.</li>
+</ul>
+</div>
+<p><b>Peer A setup:</b>
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/wireguard/wg0.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Interface]
+Address = 10.0.0.1/24, fdc9:281f:04d7:9ee9::1/64
+ListenPort = 51871
+PrivateKey = <i>PEER_A_PRIVATE_KEY</i>
+
+[Peer]
+PublicKey = <i>PEER_B_PUBLIC_KEY</i>
+PresharedKey = <i>PEER_A-PEER_B-PRESHARED_KEY</i>
+AllowedIPs = 10.0.0.2/32, fdc9:281f:04d7:9ee9::2/128
+Endpoint = peer-b.example:51902
+
+[Peer]
+PublicKey = <i>PEER_C_PUBLIC_KEY</i>
+PresharedKey = <i>PEER_A-PEER_C-PRESHARED_KEY</i>
+AllowedIPs = 10.0.0.3/32, fdc9:281f:04d7:9ee9::3/128</pre>
+<ul>
+<li>To <i>route all traffic</i> through the tunnel to a specific peer, add the <a href="https://en.wikipedia.org/wiki/Default_route" class="extiw" title="wikipedia:Default route">default route</a> (<code>0.0.0.0/0</code> for IPv4 and <code>::/0</code> for IPv6) to <code>AllowedIPs</code>. E.g. <code>AllowedIPs = 0.0.0.0/0, ::/0</code>. wg-quick will automatically take care of setting up correct routing and fwmark<a rel="nofollow" class="external autonumber" href="https://www.wireguard.com/netns/#routing-all-your-traffic">[5]</a> so that networking still functions.</li>
+<li>To use a peer as a DNS server, set <code>DNS = <i>wireguard_internal_ip_address_of_peer</i></code> in the <code>[Interface]</code> section. <a href="https://en.wikipedia.org/wiki/Search_domain" class="extiw" title="wikipedia:Search domain">Search domains</a> are also set with the <code>DNS =</code> option. Separate all values in the list with commas.</li>
+</ul>
+<p><b>Peer B setup:</b>
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/wireguard/wg0.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Interface]
+Address = 10.0.0.2/24, fdc9:281f:04d7:9ee9::2/64
+ListenPort = 51902
+PrivateKey = <i>PEER_B_PRIVATE_KEY</i>
+
+[Peer]
+PublicKey = <i>PEER_A_PUBLIC_KEY</i>
+PresharedKey = <i>PEER_A-PEER_B-PRESHARED_KEY</i>
+AllowedIPs = 10.0.0.1/32, fdc9:281f:04d7:9ee9::1/128
+Endpoint = 198.51.100.101:51871
+
+[Peer]
+PublicKey = <i>PEER_C_PUBLIC_KEY</i>
+PresharedKey = <i>PEER_B-PEER_C-PRESHARED_KEY</i>
+AllowedIPs = 10.0.0.3/32, fdc9:281f:04d7:9ee9::3/128</pre>
+<p><b>Peer C setup:</b>
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/wireguard/wg0.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Interface]
+Address = 10.0.0.3/24, fdc9:281f:04d7:9ee9::3/64
+ListenPort = 51993
+PrivateKey = <i>PEER_C_PRIVATE_KEY</i>
+
+[Peer]
+PublicKey = <i>PEER_A_PUBLIC_KEY</i>
+PresharedKey = <i>PEER_A-PEER_C-PRESHARED_KEY</i>
+AllowedIPs = 10.0.0.1/32, fdc9:281f:04d7:9ee9::1/128
+Endpoint = 198.51.100.101:51871
+
+[Peer]
+PublicKey = <i>PEER_B_PUBLIC_KEY</i>
+PresharedKey = <i>PEER_B-PEER_C-PRESHARED_KEY</i>
+AllowedIPs = 10.0.0.2/32, fdc9:281f:04d7:9ee9::2/128
+Endpoint = peer-b.example:51902</pre>
+<h4><span class="mw-headline" id="systemd-networkd">systemd-networkd</span></h4>
+<p><a href="../en/Systemd-networkd.html" title="Systemd-networkd">systemd-networkd</a> has native support for setting up WireGuard interfaces. An example is provided in the <span class="plainlinks archwiki-template-man" title="$ man 5 systemd.netdev"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd.netdev.5#EXAMPLES">systemd.netdev(5) § EXAMPLES</a></span> man page.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> Routing all DNS over WireGuard (i.e. <code>Domains=~.</code>) will prevent the DNS resolution of endpoints. Unless the peer domain is configured to be resolved on a specific network link.</div>
+<p><b>Peer A setup:</b>
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/network/99-wg0.netdev</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[NetDev]
+Name=wg0
+Kind=wireguard
+Description=WireGuard tunnel wg0
+
+[WireGuard]
+ListenPort=51871
+PrivateKey=<i>PEER_A_PRIVATE_KEY</i>
+
+[WireGuardPeer]
+PublicKey=<i>PEER_B_PUBLIC_KEY</i>
+PresharedKey=<i>PEER_A-PEER_B-PRESHARED_KEY</i>
+AllowedIPs=10.0.0.2/32,fdc9:281f:04d7:9ee9::2/128
+Endpoint=peer-b.example:51902
+
+[WireGuardPeer]
+PublicKey=<i>PEER_C_PUBLIC_KEY</i>
+PresharedKey=<i>PEER_A-PEER_C-PRESHARED_KEY</i>
+AllowedIPs=10.0.0.3/32,fdc9:281f:04d7:9ee9::3/128</pre>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/network/99-wg0.network</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Match]
+Name=wg0
+
+[Network]
+Address=10.0.0.1/24
+Address=fdc9:281f:04d7:9ee9::1/64</pre>
+<ul>
+<li>To use a peer as a DNS server, specify its WireGuard tunnel's IP address(es) in the <i>.network</i> file using the <code>DNS=</code> option. For <a href="https://en.wikipedia.org/wiki/Search_domain" class="extiw" title="wikipedia:Search domain">search domains</a> use the <code>Domains=</code> option. See <span class="plainlinks archwiki-template-man" title="$ man 5 systemd.network"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd.network.5#%5BNETWORK%5D_SECTION_OPTIONS">systemd.network(5) § [NETWORK] SECTION OPTIONS</a></span> for details.</li>
+<li>To use a peer as the <b>only</b> DNS server set <code>DNSDefaultRoute=true</code> and <code>Domains=~.</code> in the <code>[Network]</code> section of <i>.network</i> file's.</li>
+<li>To automatically create routes for everything in <code>AllowedIPs</code>, add <code>RouteTable=main</code> to the <code>[WireGuard]</code> or <code>[WireGuardPeer]</code> sections in the <i>.netdev</i> file. Alternatively, additional routes can be specified manually using <code>[Route]</code> sections in the <i>.network</i> file.</li>
+</ul>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Warning:</strong> In order to prevent the leaking of private and preshared keys, it is recommended to set the permissions of the <i>.netdev</i> file:
+<pre># chown root:systemd-network /etc/systemd/network/99-wg*.netdev
+# chmod 0640 /etc/systemd/network/99-wg*.netdev
+</pre>
+<p>Alternatively, the keys can be stored in separate files and referenced with <code>PrivateKeyFile=</code>, <code>PresharedKeyFile=</code> and <code>PublicKeyFile=</code>, or they can be stored encrypted using <a href="../en/Systemd-creds.html" title="Systemd-creds">systemd-creds</a>. See <a href="#Using_systemd_credentials_for_private_keys_(systemd-networkd)">#Using systemd credentials for private keys (systemd-networkd)</a>.
+</p>
+</div>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> To use the WireGuard interface name or IP addresses in <a href="../en/Nftables.html#Dynamic_named_sets_using_systemd-networkd" title="Nftables">nftables rules via systemd-networkd's NFTSet option</a>, specify the addresses in <code>[Address]</code> sections instead of the <code>[Network]</code> section. E.g.:
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/network/99-wg0.network</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">...
+[Address]
+Address=10.0.0.1/24
+NFTSet=address:inet:my_table:wg_ipv4_address
+NFTSet=prefix:inet:my_table:wg_ipv4_prefix
+NFTSet=ifindex:inet:my_table:wg_ifindex
+
+[Address]
+Address=fdc9:281f:04d7:9ee9::1/64
+NFTSet=address:inet:my_table:wg_ipv6_address
+NFTSet=prefix:inet:my_table:wg_ipv6_prefix
+NFTSet=ifindex:inet:my_table:wg_ifindex</pre>
+</div>
+<p><b>Peer B setup:</b>
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/network/99-wg0.netdev</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[NetDev]
+Name=wg0
+Kind=wireguard
+Description=WireGuard tunnel wg0
+
+[WireGuard]
+ListenPort=51902
+PrivateKey=<i>PEER_B_PRIVATE_KEY</i>
+
+[WireGuardPeer]
+PublicKey=<i>PEER_A_PUBLIC_KEY</i>
+PresharedKey=<i>PEER_A-PEER_B-PRESHARED_KEY</i>
+AllowedIPs=10.0.0.1/32,fdc9:281f:04d7:9ee9::1/128
+Endpoint=198.51.100.101:51871
+
+[WireGuardPeer]
+PublicKey=<i>PEER_C_PUBLIC_KEY</i>
+PresharedKey=<i>PEER_B-PEER_C-PRESHARED_KEY</i>
+AllowedIPs=10.0.0.3/32,fdc9:281f:04d7:9ee9::3/128</pre>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/network/99-wg0.network</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Match]
+Name=wg0
+
+[Network]
+Address=10.0.0.2/24
+Address=fdc9:281f:04d7:9ee9::2/64</pre>
+<p><b>Peer C setup:</b>
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/network/99-wg0.netdev</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[NetDev]
+Name=wg0
+Kind=wireguard
+Description=WireGuard tunnel wg0
+
+[WireGuard]
+ListenPort=51993
+PrivateKey=<i>PEER_C_PRIVATE_KEY</i>
+
+[WireGuardPeer]
+PublicKey=<i>PEER_A_PUBLIC_KEY</i>
+PresharedKey=<i>PEER_A-PEER_C-PRESHARED_KEY</i>
+AllowedIPs=10.0.0.1/32,fdc9:281f:04d7:9ee9::1/128
+Endpoint=198.51.100.101:51871
+
+[WireGuardPeer]
+PublicKey=<i>PEER_B_PUBLIC_KEY</i>
+PresharedKey=<i>PEER_B-PEER_C-PRESHARED_KEY</i>
+AllowedIPs=10.0.0.2/32,fdc9:281f:04d7:9ee9::2/128
+Endpoint=peer-b.example:51902</pre>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/network/99-wg0.network</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Match]
+Name=wg0
+
+[Network]
+Address=10.0.0.3/24
+Address=fdc9:281f:04d7:9ee9::3/64</pre>
+<h4><span class="mw-headline" id="systemd-networkd:_routing_all_traffic_over_WireGuard">systemd-networkd: routing all traffic over WireGuard</span></h4>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../File:Tango-view-fullscreen.svg" decoding="async" width="48" height="48" class="mw-file-element"></span></span><b>This article or section needs expansion.</b></p>
+<div>
+<b>Reason:</b> Add IPv6 addresses to the tunnel and route ::/0. (Discuss in <a rel="nofollow" class="external text" href="../en/Talk:WireGuard.html">Talk:WireGuard</a>)</div>
+</div>
+<p>In this example, Peer B connects to Peer A with a public IP address. Peer B routes all its traffic over the WireGuard tunnel and uses Peer A for handling DNS requests.
+</p>
+<p><b>Peer A setup</b>
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/network/99-wg0.netdev</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[NetDev]
+Name=wg0
+Kind=wireguard
+Description=WireGuard tunnel wg0
+
+[WireGuard]
+ListenPort=51871
+PrivateKey=<i>PEER_A_PRIVATE_KEY</i>
+
+[WireGuardPeer]
+PublicKey=<i>PEER_B_PUBLIC_KEY</i>
+PresharedKey=<i>PEER_A-PEER_B-PRESHARED_KEY</i>
+AllowedIPs=10.0.0.2/32</pre>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/network/99-wg0.network</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Match]
+Name=wg0
+
+[Network]
+Address=10.0.0.1/24
+IPMasquerade=ipv4</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> The <code>IPMasquerade=ipv4</code> option enables IP forwarding on the WireGuard interface and sets up firewall rules for IP masquerading for it in order for Peer A to provide working internet to Peer B. Additionally:
+<ul>
+<li>Enable <a href="../en/Internet_sharing.html#Enable_packet_forwarding" title="Internet sharing">IP forwarding</a> for the interface that is used for connecting to the Internet (i.e. add <code>IPv4Forwarding=yes</code> to its <i>.network</i> file).</li>
+<li>Make sure that <a href="../en/Internet_sharing.html#Enable_NAT" title="Internet sharing">the firewall does not block forwarding</a>.</li>
+<li>Configure the local DNS server to accept connections to the WireGuard interface IP address. For systemd-resolved see <a href="../en/Systemd-resolved.html#Additional_listening_interfaces" title="Systemd-resolved">systemd-resolved#Additional listening interfaces</a>.</li>
+</ul>
+</div>
+<p><b>Peer B setup:</b>
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/network/99-wg0.netdev</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[NetDev]
+Name=wg0
+Kind=wireguard
+Description=WireGuard tunnel wg0
+
+[WireGuard]
+ListenPort=51902
+PrivateKey=<i>PEER_B_PRIVATE_KEY</i>
+FirewallMark=0x8888
+
+[WireGuardPeer]
+PublicKey=<i>PEER_A_PUBLIC_KEY</i>
+PresharedKey=<i>PEER_A-PEER_B-PRESHARED_KEY</i>
+AllowedIPs=0.0.0.0/0
+Endpoint=198.51.100.101:51871
+RouteTable=1000</pre>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/network/50-wg0.network</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Match]
+Name=wg0
+
+[Network]
+Address=10.0.0.2/32
+DNS=10.0.0.1
+DNSDefaultRoute=true
+Domains=~.
+
+[RoutingPolicyRule]
+FirewallMark=0x8888
+InvertRule=true
+Table=1000
+Priority=10
+
+# Exempt the endpoint IP address so that wireguard can still connect to it.
+[RoutingPolicyRule]
+To=198.51.100.101/32
+Priority=5</pre>
+<p><b>Exempting specific addresses</b>
+</p>
+<p>In order to exempt specific addresses (such as private LAN addresses) from routing over the WireGuard tunnel, add them to another RoutingPolicyRule with higher priority.
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/network/50-wg0.network</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">...
+[RoutingPolicyRule]
+To=192.168.0.0/24
+Priority=9
+...</pre>
+<p><b>Route for specific user</b>
+</p>
+<p>It may be desirable to route WAN traffic over the tunnel only for a specific user, for example, the <a href="../en/Transmission.html" title="Transmission">transmission</a> user in order to use the tunnel for torrent traffic.
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/network/99-wg0.network</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">...
+[RoutingPolicyRule]
+Table=1000
+User=transmission
+Priority=30001
+Family=both
+
+[RoutingPolicyRule]
+Table=main
+User=transmission
+SuppressPrefixLength=0
+Priority=30000
+Family=both
+...</pre>
+<h4><span class="mw-headline" id="Netctl">Netctl</span></h4>
+<p><a href="../en/Netctl.html" title="Netctl">Netctl</a> has native support for setting up WireGuard interfaces. A typical set of WireGuard netctl profile configuration files would look like this:
+</p>
+<p><b>Peer A setup:</b>
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/netctl/wg0</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">Description="WireGuard tunnel on peer A"
+Interface=wg0
+Connection=wireguard
+WGConfigFile=/etc/wireguard/wg0.conf
+
+IP=static
+Address=('10.0.0.1/24')</pre>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/wireguard/wg0.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Interface]
+ListenPort = 51871
+PrivateKey = <i>PEER_A_PRIVATE_KEY</i>
+
+[Peer]
+PublicKey = <i>PEER_B_PUBLIC_KEY</i>
+AllowedIPs = 10.0.0.2/32
+Endpoint = peer-b.example:51902
+
+[Peer]
+PublicKey = <i>PEER_C_PUBLIC_KEY</i>
+AllowedIPs = 10.0.0.3/32</pre>
+<p><b>Peer B setup:</b>
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/netctl/wg0</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">Description="WireGuard tunnel on peer B"
+Interface=wg0
+Connection=wireguard
+WGConfigFile=/etc/wireguard/wg0.conf
+
+IP=static
+Address=('10.0.0.2/24')</pre>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/wireguard/wg0.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Interface]
+ListenPort = 51902
+PrivateKey = <i>PEER_B_PRIVATE_KEY</i>
+
+[Peer]
+PublicKey = <i>PEER_A_PUBLIC_KEY</i>
+AllowedIPs = 10.0.0.1/32
+Endpoint = peer-a.example:51871
+
+[Peer]
+PublicKey = <i>PEER_C_PUBLIC_KEY</i>
+AllowedIPs = 10.0.0.3/32</pre>
+<p><b>Peer C setup:</b>
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/netctl/wg0</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">Description="WireGuard tunnel on peer C"
+Interface=wg0
+Connection=wireguard
+WGConfigFile=/etc/wireguard/wg0.conf
+
+IP=static
+Address=('10.0.0.3/24')</pre>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/wireguard/wg0.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Interface]
+ListenPort = 51993
+PrivateKey = <i>PEER_C_PRIVATE_KEY</i>
+
+[Peer]
+PublicKey = <i>PEER_A_PUBLIC_KEY</i>
+AllowedIPs = 10.0.0.1/32
+Endpoint = peer-a.example:51871
+
+[Peer]
+PublicKey = <i>PEER_B_PUBLIC_KEY</i>
+AllowedIPs = 10.0.0.2/32
+Endpoint = peer-b.example:51902</pre>
+<p>Then start and/or enable the wg0 interface on every participating peer as needed, i.e.
+</p>
+<pre># netctl start wg0
+</pre>
+<p>To implement persistent site-to-peer, peer-to-site or site-to-site type of connection with WireGuard and Netctl, just add appropriate <code>Routes=</code> line into the netctl profile configuration file and add this network to <code>AllowedIPs</code> in the WireGuard profile, e.g. <code>Routes=('192.168.10.0/24 dev wg0')</code> in the <code>/etc/netctl/wg0</code> and <code>AllowedIPs=10.0.0.1/32, 192.168.10.0/24</code> in <code>/etc/wireguard/wg0.conf</code> and then do not forget to enable <a href="../en/Internet_sharing.html#Enable_packet_forwarding" title="Internet sharing">IP forwarding</a>.
+</p>
+<h4><span class="mw-headline" id="NetworkManager">NetworkManager</span></h4>
+<p><a href="../en/NetworkManager.html" title="NetworkManager">NetworkManager</a> has native support for setting up WireGuard interfaces. For all details about WireGuard usage in NetworkManager, read Thomas Haller's blog post—<a rel="nofollow" class="external text" href="https://blogs.gnome.org/thaller/2019/03/15/wireguard-in-networkmanager/">WireGuard in NetworkManager</a>.
+</p>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> NetworkManager can import a wg-quick configuration file. E.g.: <pre># nmcli connection import type wireguard file /etc/wireguard/wg0.conf</pre>
+</div>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> nmcli can create a WireGuard connection profile, but it does not support configuring peers. See <a rel="nofollow" class="external text" href="https://gitlab.freedesktop.org/NetworkManager/NetworkManager/issues/358">NetworkManager issue 358</a>.</div>
+<p>The following examples configure WireGuard via the keyfile format <i>.nmconnection</i> files. See <span class="plainlinks archwiki-template-man" title="$ man 5 nm-settings-keyfile"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/nm-settings-keyfile.5">nm-settings-keyfile(5)</a></span> and <span class="plainlinks archwiki-template-man" title="$ man 5 nm-settings"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/nm-settings.5">nm-settings(5)</a></span> for an explanation on the syntax and available options.
+</p>
+<p><b>Peer A setup:</b>
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/NetworkManager/system-connections/wg0.nmconnection</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[connection]
+id=wg0
+type=wireguard
+interface-name=wg0
+
+[wireguard]
+listen-port=51871
+private-key=<i>PEER_A_PRIVATE_KEY</i>
+private-key-flags=0
+
+[wireguard-peer.<i>PEER_B_PUBLIC_KEY</i>]
+endpoint=peer-b.example:51902
+preshared-key=<i>PEER_A-PEER_B-PRESHARED_KEY</i>
+preshared-key-flags=0
+allowed-ips=10.0.0.2/32;fdc9:281f:04d7:9ee9::2/128;
+
+[wireguard-peer.<i>PEER_C_PUBLIC_KEY</i>]
+preshared-key=<i>PEER_A-PEER_C-PRESHARED_KEY</i>
+preshared-key-flags=0
+allowed-ips=10.0.0.3/32;fdc9:281f:04d7:9ee9::3/128;
+
+[ipv4]
+address1=10.0.0.1/24
+method=manual
+
+[ipv6]
+address1=fdc9:281f:04d7:9ee9::1/64
+method=manual</pre>
+<ul>
+<li>To <i>route all traffic</i> through the tunnel to a specific peer, add the <a href="https://en.wikipedia.org/wiki/Default_route" class="extiw" title="wikipedia:Default route">default route</a> (<code>0.0.0.0/0</code> for IPv4 and <code>::/0</code> for IPv6) to <code>wireguard-peer.<i>PEER_X_PUBLIC_KEY</i>.allowed-ips</code>. E.g. <code>wireguard-peer.<i>PEER_B_PUBLIC_KEY</i>.allowed-ips=0.0.0.0/0;::/0;</code>. Special handling of the default route in WireGuard connections is supported since NetworkManager 1.20.0.</li>
+<li>To use a peer as a DNS server, specify its WireGuard tunnel's IP address(es) with the <code>ipv4.dns</code> and <code>ipv6.dns</code> settings. <a href="https://en.wikipedia.org/wiki/Search_domain" class="extiw" title="wikipedia:Search domain">Search domains</a> can be specified with the <code>ipv4.dns-search=</code> and <code>ipv6.dns-search=</code> options. See <span class="plainlinks archwiki-template-man" title="$ man 5 nm-settings"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/nm-settings.5">nm-settings(5)</a></span> for more details. For example, using the keyfile format:</li>
+</ul>
+<pre>...
+[ipv4]
+...
+dns=10.0.0.2;
+dns-search=corp;
+...
+[ipv6]
+...
+dns=fdc9:281f:04d7:9ee9::2;
+dns-search=corp;
+...</pre>
+<p>To use a peer as the <b>only</b> DNS server, set a negative DNS priority (e.g. <code>dns-priority=-1</code>) and add <code>~.</code> to the <code>dns-search=</code> settings.
+</p>
+<p><b>Peer B setup:</b>
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/NetworkManager/system-connections/wg0.nmconnection</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[connection]
+id=wg0
+type=wireguard
+interface-name=wg0
+
+[wireguard]
+listen-port=51902
+private-key=<i>PEER_B_PRIVATE_KEY</i>
+private-key-flags=0
+
+[wireguard-peer.<i>PEER_A_PUBLIC_KEY</i>]
+endpoint=198.51.100.101:51871
+preshared-key=<i>PEER_A-PEER_B-PRESHARED_KEY</i>
+preshared-key-flags=0
+allowed-ips=10.0.0.1/32;fdc9:281f:04d7:9ee9::1/128;
+
+[wireguard-peer.<i>PEER_C_PUBLIC_KEY</i>]
+preshared-key=<i>PEER_B-PEER_C-PRESHARED_KEY</i>
+preshared-key-flags=0
+allowed-ips=10.0.0.3/32;fdc9:281f:04d7:9ee9::3/128;
+
+[ipv4]
+address1=10.0.0.2/24
+method=manual
+
+[ipv6]
+address1=fdc9:281f:04d7:9ee9::2/64
+method=manual</pre>
+<p><b>Peer C setup:</b>
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/NetworkManager/system-connections/wg0.nmconnection</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[connection]
+id=wg0
+type=wireguard
+interface-name=wg0
+
+[wireguard]
+listen-port=51993
+private-key=<i>PEER_C_PRIVATE_KEY</i>
+private-key-flags=0
+
+[wireguard-peer.<i>PEER_A_PUBLIC_KEY</i>]
+endpoint=198.51.100.101:51871
+preshared-key=<i>PEER_A-PEER_C-PRESHARED_KEY</i>
+preshared-key-flags=0
+allowed-ips=10.0.0.1/32;fdc9:281f:04d7:9ee9::1/128;
+
+[wireguard-peer.<i>PEER_B_PUBLIC_KEY</i>]
+endpoint=peer-b.example:51902
+preshared-key=<i>PEER_B-PEER_C-PRESHARED_KEY</i>
+preshared-key-flags=0
+allowed-ips=10.0.0.2/32;fdc9:281f:04d7:9ee9::2/128;
+
+[ipv4]
+address1=10.0.0.3/24
+method=manual
+
+[ipv6]
+address1=fdc9:281f:04d7:9ee9::3/64
+method=manual</pre>
+<h2><span class="mw-headline" id="Specific_use-case:_VPN_server">Specific use-case: VPN server</span></h2>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../File:Merge-arrows-2.svg" decoding="async" width="36" height="40" class="mw-file-element"></span></span><b>This article or section is a candidate for merging with <a href="#wg-quick">#wg-quick</a>.</b></p>
+<div>
+<b>Notes:</b> Same use case. (Discuss in <a rel="nofollow" class="external text" href="../en/Talk:WireGuard.html">Talk:WireGuard</a>)</div>
+</div>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> Usage of the terms "server" and "client" were purposefully chosen in this section specifically to help new users/existing OpenVPN users become familiar with the construction of WireGuard's configuration files.  WireGuard documentation simply refers to both of these concepts as "peers."</div>
+<p>The purpose of this section is to set up a WireGuard "server" and generic "clients" to enable access to the server/network resources through an encrypted and secured tunnel like <a href="../en/OpenVPN.html" title="OpenVPN">OpenVPN</a> and others.  The "server" runs on Linux and the "clients" can run on any number of platforms (the WireGuard Project offers apps on both iOS and Android platforms in addition to Linux, Windows and MacOS).  See the official project <a rel="nofollow" class="external text" href="https://www.wireguard.com/install/">install link</a> for more.
+</p>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> Instead of using <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=wireguard-tools">wireguard-tools</a></span> for server/client configuration, one may also use <a href="#systemd-networkd">systemd-networkd</a> native WireGuard support.</div>
+<h3><span class="mw-headline" id="Server">Server</span></h3>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../File:Merge-arrows-2.svg" decoding="async" width="36" height="40" class="mw-file-element"></span></span><b>This article or section is a candidate for merging with <a href="#Site-to-point">#Site-to-point</a>.</b></p>
+<div>
+<b>Notes:</b> Same use case. (Discuss in <a rel="nofollow" class="external text" href="../en/Talk:WireGuard.html">Talk:WireGuard</a>)</div>
+</div>
+<p>On the peer that will act as the "server", first <a href="../en/Internet_sharing.html#Enable_packet_forwarding" title="Internet sharing">enable IPv4 forwarding</a>.
+</p>
+<p>If the server has a public IP configured, be sure to:
+</p>
+<ul>
+<li>Allow UDP traffic on the specified port(s) on which WireGuard will be running (for example allowing traffic on <code>51820/UDP</code>).</li>
+<li>Setup the forwarding policy for the firewall if it is not included in the WireGuard configuration for the interface itself <code>/etc/wireguard/wg0.conf</code>. The example below should have the iptables rules and work as-is.</li>
+</ul>
+<p>If the server is behind NAT, be sure to forward the specified port(s) on which WireGuard will be running (for example, <code>51820/UDP</code>) from the router to the WireGuard server.
+</p>
+<h3><span class="mw-headline" id="Key_generation_2">Key generation</span></h3>
+<p>Generate key pairs for the server and for each client as explained in <a href="#Key_generation">#Key generation</a>.
+</p>
+<h3><span class="mw-headline" id="Server_configuration">Server configuration</span></h3>
+<p>Create the "server" configuration file:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/wireguard/wg0.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Interface]
+Address = 10.200.200.1/24
+ListenPort = 51820
+PrivateKey = <i>SERVER_PRIVATE_KEY</i>
+
+# substitute <i>eth0</i> in the following lines to match the Internet-facing interface
+# the FORWARD rules will always be needed since traffic needs to be forwarded between the WireGuard
+# interface and the other interfaces on the server.
+# if the server is behind a router and receives traffic via NAT, specify static routing back to the
+# 10.200.200.0/24 subnet, the NAT iptables rules are not needed but the FORWARD rules are needed.
+# if the server is behind a router and receives traffic via NAT but one cannot specify static routing back to
+# 10.200.200.0/24 subnet, both the NAT and FORWARD iptables rules are needed. 
+PostUp = iptables -A FORWARD -i %i -j ACCEPT; iptables -A FORWARD -o %i -j ACCEPT; iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+PostDown = iptables -D FORWARD -i %i -j ACCEPT; iptables -D FORWARD -o %i -j ACCEPT; iptables -t nat -D POSTROUTING -o eth0 -j MASQUERADE
+
+[Peer]
+# foo
+PublicKey = <i>PEER_FOO_PUBLIC_KEY</i>
+PresharedKey = <i>PRE-SHARED_KEY</i>
+AllowedIPs = 10.200.200.2/32
+
+[Peer]
+# bar
+PublicKey = <i>PEER_BAR_PUBLIC_KEY</i>
+PresharedKey = <i>PRE-SHARED_KEY</i>
+AllowedIPs = 10.200.200.3/32</pre>
+<p>Additional peers ("clients") can be listed in the same format as needed. Each peer requires the <code>PublicKey</code> to be set. However, specifying <code>PresharedKey</code> is optional.
+</p>
+<p>Notice that the <code>Address</code> has a netmask of <code>/24</code> and the clients on <code>AllowedIPs</code> <code>/32</code>. The clients only use their IP and the server only sends back their respective addresses.
+</p>
+<p>The interface can be managed manually using <span class="plainlinks archwiki-template-man" title="$ man 8 wg-quick"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/wg-quick.8">wg-quick(8)</a></span> or using a <a href="../en/Systemd.html" title="Systemd">systemd</a> service managed via <span class="plainlinks archwiki-template-man" title="$ man 1 systemctl"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemctl.1">systemctl(1)</a></span>.
+</p>
+<p>The interface may be brought up using <code>wg-quick up wg0</code> respectively by <a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Start">starting</a> and potentially <a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Enable">enabling</a> the interface via <code>wg-quick@<i>interface</i>.service</code>, e.g. <code>wg-quick@wg0.service</code>. To close the interface use <code>wg-quick down wg0</code> respectively <a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Stop">stop</a> <code>wg-quick@<i>interface</i>.service</code>.
+</p>
+<h3><span class="mw-headline" id="Client_configuration">Client configuration</span></h3>
+<p>Create the corresponding "client" configuration file(s):
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">foo.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Interface]
+Address = 10.200.200.2/32
+PrivateKey = <i>PEER_FOO_PRIVATE_KEY</i>
+DNS = 10.200.200.1
+
+[Peer]
+PublicKey = <i>SERVER_PUBLICKEY</i>
+PresharedKey = <i>PRE-SHARED_KEY</i>
+Endpoint = my.ddns.example.com:51820
+AllowedIPs = 0.0.0.0/0, ::/0</pre>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">bar.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Interface]
+Address = 10.200.200.3/32
+PrivateKey = <i>PEER_BAR_PRIVATE_KEY</i>
+DNS = 10.200.200.1
+
+[Peer]
+PublicKey = <i>SERVER_PUBLICKEY</i>
+PresharedKey = <i>PRE-SHARED KEY</i>
+Endpoint = my.ddns.example.com:51820
+AllowedIPs = 0.0.0.0/0, ::/0</pre>
+<p>Using the catch-all <code>AllowedIPs = 0.0.0.0/0, ::/0</code> will forward all IPv4 (<code>0.0.0.0/0</code>) and IPv6 (<code>::/0</code>) traffic over the VPN.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> Users of <a href="../en/NetworkManager.html" title="NetworkManager">NetworkManager</a>, may need to <a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Enable">enable</a> the <code>NetworkManager-wait-online.service</code> and users of <a href="../en/Systemd-networkd.html" title="Systemd-networkd">systemd-networkd</a> may need to <a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Enable">enable</a> the <code>systemd-networkd-wait-online.service</code> to wait until devices are network-ready before attempting a WireGuard connection.</div>
+<h2><span class="mw-headline" id="Testing_the_tunnel">Testing the tunnel</span></h2>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../File:Merge-arrows-2.svg" decoding="async" width="36" height="40" class="mw-file-element"></span></span><b>This article or section is a candidate for merging with <a href="#Basic_checkups">#Basic checkups</a>.</b></p>
+<div>
+<b>Notes:</b> Same topic. (Discuss in <a rel="nofollow" class="external text" href="../en/Talk:WireGuard.html">Talk:WireGuard</a>)</div>
+</div>
+<p>Once a tunnel has been established, one can use <a href="../en/Network_tools.html#Netcat" class="mw-redirect" title="Netcat">netcat</a> to send traffic through it to test out throughput, CPU usage, etc.
+On one side of the tunnel, run <code>nc</code> in listen mode and on the other side, pipe some data from <code>/dev/zero</code> into <code>nc</code> in sending mode.
+</p>
+<p>In the example below, port 2222 is used for the traffic (be sure to allow traffic on port 2222 if using a firewall).
+</p>
+<p>On one side of the tunnel listen for traffic:
+</p>
+<pre>$ nc -vvlnp 2222
+</pre>
+<p>On the other side of the tunnel, send some traffic:
+</p>
+<pre>$ dd if=/dev/zero bs=1024K count=1024 | nc -v 10.0.0.203 2222
+</pre>
+<p>Status can be monitored using <code>wg</code> directly.
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;"># wg</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">interface: wg0
+  public key: UguPyBThx/+xMXeTbRYkKlP0Wh/QZT3vTLPOVaaXTD8=
+  private key: (hidden)
+  listening port: 51820
+
+peer: 9jalV3EEBnVXahro0pRMQ+cHlmjE33Slo9tddzCVtCw=
+  preshared key: (hidden)
+  endpoint: 192.168.1.216:53207
+  allowed ips: 10.0.0.0/0
+  latest handshake: 1 minutes, 17 seconds ago
+  transfer: 56.43 GiB received, 1.06 TiB sent</pre>
+<h2><span class="mw-headline" id="Tips_and_tricks">Tips and tricks</span></h2>
+<h3>
+<span id="Store_private_keys_in_encrypted_form_.28wg-quick.29"></span><span class="mw-headline" id="Store_private_keys_in_encrypted_form_(wg-quick)">Store private keys in encrypted form (wg-quick)</span>
+</h3>
+<p>It may be desirable to store private keys in encrypted form, such as through use of <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=pass">pass</a></span>. Just replace the <code>PrivateKey</code> line under <code>[Interface]</code> in the WireGuard configuration file with:
+</p>
+<pre>PostUp = wg set %i private-key &lt;(su user -c "export PASSWORD_STORE_DIR=/path/to/your/store/; pass WireGuard/private-keys/%i")
+</pre>
+<p>where <i>user</i> is the Linux username of interest. See the <span class="plainlinks archwiki-template-man" title="$ man 8 wg-quick"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/wg-quick.8">wg-quick(8)</a></span> man page for more details.
+</p>
+<p>Alternatively, <a href="../en/Systemd-creds.html" title="Systemd-creds">systemd-creds</a> can be used. This can be helpful to create encrypted private keys that are bound to the system's <a href="../en/Trusted_Platform_Module.html" class="mw-redirect" title="TPM">TPM</a>. See <span class="plainlinks archwiki-template-man" title="$ man 1 systemd-creds"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd-creds.1">systemd-creds(1)</a></span> for more details.
+</p>
+<p>First, create an encrypted credential:
+</p>
+<pre># echo -n <i>your_wg_private_key</i> | systemd-creds --tpm2-device=auto encrypt - /etc/credstore.encrypted/<i>wg-private-key</i>.cred
+</pre>
+<p>Finally, replace the <code>PrivateKey</code> line under <code>[Interface]</code> in the WireGuard configuration file with:
+</p>
+<pre>PostUp = wg set %i private-key &lt;(systemd-creds decrypt /etc/credstore.encrypted/<i>wg-private-key</i>.cred)
+</pre>
+<h3>
+<span id="Using_systemd_credentials_for_private_keys_.28systemd-networkd.29"></span><span class="mw-headline" id="Using_systemd_credentials_for_private_keys_(systemd-networkd)">Using systemd credentials for private keys (systemd-networkd)</span>
+</h3>
+<p>You can use <a href="../en/Systemd-creds.html" title="Systemd-creds">systemd-creds</a> to store your private keys encrypted.
+</p>
+<pre># echo -n <i>your_wg_private_key</i> | systemd-creds encrypt - /etc/credstore.encrypted/network.wireguard.private.wg0
+# echo -n <i>your_pre_shared_key</i> | systemd-creds encrypt - /etc/credstore.encrypted/network.wireguard.psk.wg0
+</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> The name of the store must match <code>network.wireguard.*</code>. See <span class="plainlinks archwiki-template-man" title="$ man 5 systemd.netdev"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd.netdev.5#%5BWIREGUARD%5D_SECTION_OPTIONS">systemd.netdev(5) § [WIREGUARD]_SECTION_OPTIONS</a></span>.</div>
+<p>Modify your <i>.netdev</i> file to use
+</p>
+<pre>PrivateKey = @network.wireguard.private.wg0
+PresharedKey = @network.wireguard.psk.wg0
+</pre>
+<h3><span class="mw-headline" id="Endpoint_with_changing_IP">Endpoint with changing IP</span></h3>
+<p>After resolving a server's domain, WireGuard <a rel="nofollow" class="external text" href="https://lists.zx2c4.com/pipermail/wireguard/2017-November/002028.html">will not check for changes in DNS again</a>.
+</p>
+<p>If the WireGuard server is frequently changing its IP-address due DHCP, Dyndns, IPv6, etc., any WireGuard client is going to lose its connection, until its endpoint is updated via something like <code>wg set "$INTERFACE" peer "$PUBLIC_KEY" endpoint "$ENDPOINT"</code>.
+</p>
+<p>Also be aware, if the endpoint is ever going to change its address (for example when moving to a new provider/datacenter), just updating DNS will not be enough, so periodically running reresolve-dns might make sense on any DNS-based setup.
+</p>
+<p>Luckily, <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=wireguard-tools">wireguard-tools</a></span> provides an example script <code>/usr/share/wireguard-tools/examples/reresolve-dns/reresolve-dns.sh</code>, that parses WG configuration files and automatically resets the endpoint address.
+</p>
+<p>One needs to run the <code>/usr/share/wireguard-tools/examples/reresolve-dns/reresolve-dns.sh /etc/wireguard/wg.conf</code> periodically to recover from an endpoint that has changed its IP.
+</p>
+<p>One way of doing so is by updating all WireGuard endpoints once every thirty seconds<a rel="nofollow" class="external autonumber" href="https://git.zx2c4.com/WireGuard/tree/contrib/examples/reresolve-dns/README">[6]</a> via a systemd timer:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/system/wireguard_reresolve-dns.timer</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Unit]
+Description=Periodically reresolve DNS of all WireGuard endpoints
+
+[Timer]
+OnCalendar=*:*:0/30
+
+[Install]
+WantedBy=timers.target</pre>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/system/wireguard_reresolve-dns.service</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Unit]
+Description=Reresolve DNS of all WireGuard endpoints
+Wants=network-online.target
+After=network-online.target nss-lookup.target
+
+[Service]
+Type=oneshot
+ExecStart=/bin/sh -c 'for i in /etc/wireguard/*.conf; do /usr/share/wireguard-tools/examples/reresolve-dns/reresolve-dns.sh "$i"; done'</pre>
+<p>Afterwards <a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Enable">enable</a> and <a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Start">start</a> <code>wireguard_reresolve-dns.timer</code>
+</p>
+<h3><span class="mw-headline" id="Generate_QR_code">Generate QR code</span></h3>
+<p>If the client is a mobile device such as a phone, <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=qrencode">qrencode</a></span> can be used to generate client's configuration QR code and display it in terminal:
+</p>
+<pre>$ qrencode -t ansiutf8 -r <i>client.conf</i>
+</pre>
+<h3><span class="mw-headline" id="Enable_debug_logs">Enable debug logs</span></h3>
+<p>When using the Linux kernel module on a kernel that supports dynamic debugging, debugging information can be written into the kernel ring buffer (viewable with <a href="../en/Core_utilities.html#Essentials" class="mw-redirect" title="Dmesg">dmesg</a> and <a href="../en/Systemd/Journal.html" class="mw-redirect" title="Journalctl">journalctl</a>) by running:
+</p>
+<pre># modprobe wireguard
+# echo module wireguard +p &gt; /sys/kernel/debug/dynamic_debug/control
+</pre>
+<h3>
+<span id="Reload_peer_.28server.29_configuration"></span><span class="mw-headline" id="Reload_peer_(server)_configuration">Reload peer (server) configuration</span>
+</h3>
+<p>In case the WireGuard peer (mostly server) adding or removing another peers from its configuration and wants to reload it without stopping any active sessions, one can execute the following command to do it:
+</p>
+<pre># wg syncconf ${WGNET} &lt;(wg-quick strip ${WGNET})
+</pre>
+<p>Where <code>$WGNET</code> is WireGuard interface name or configuration base name, for example <code>wg0</code> (for server) or <code>client</code> (without the <i>.conf</i> extension, for client).
+</p>
+<p>Users of <code>wg-quick@.service</code> can simply <a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Reload">reload</a> the service.
+</p>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../File:Tango-view-fullscreen.svg" decoding="async" width="48" height="48" class="mw-file-element"></span></span><b>This article or section needs expansion.</b></p>
+<div>
+<b>Reason:</b> Show how to do this with other network managers from <a href="#Persistent_configuration">#Persistent configuration</a>. (Discuss in <a rel="nofollow" class="external text" href="../en/Talk:WireGuard.html">Talk:WireGuard</a>)</div>
+</div>
+<h3><span class="mw-headline" id="Workaround_for_some_public_Wi-Fi_networks_seemingly_blocking_WireGuard_connections">Workaround for some public Wi-Fi networks seemingly blocking WireGuard connections</span></h3>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> This workaround will only be an option if a cellular connection is available on the device.</div>
+<p>Some Wi-Fi networks can be configured to actively identify and block WireGuard's handshake thus preventing the initial connection and preventing the establishment of the secure tunnel.
+</p>
+<p>This strategy works for blocking <i>new</i> WireGuard connections but it is useless against <i>existing</i> connections.  Therefore, to use WireGuard on such a network, simply connect to the WireGuard peer over cellular before joining the Wi-Fi network thus allowing the handshake to take place before the active blocking can occur.  WireGuard will keep this tunnel open as the devices transitions from cellular to Wi-Fi.
+</p>
+<h2><span class="mw-headline" id="Troubleshooting">Troubleshooting</span></h2>
+<h3><span class="mw-headline" id="Routes_are_periodically_reset">Routes are periodically reset</span></h3>
+<p>Users of <a href="../en/NetworkManager.html" title="NetworkManager">NetworkManager</a> should make sure that it <a href="../en/NetworkManager.html#Ignore_specific_devices" title="NetworkManager">is not managing</a> the WireGuard interface(s). For example, create the following configuration file:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/NetworkManager/conf.d/unmanaged.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[keyfile]
+unmanaged-devices=type:wireguard</pre>
+<h3><span class="mw-headline" id="Broken_DNS_resolution">Broken DNS resolution</span></h3>
+<p>When tunneling all traffic through a WireGuard interface, the connection can become seemingly lost after a while or upon new connection. This could be caused by a <a href="../en/Network_configuration.html#Network_managers" class="mw-redirect" title="Network manager">network manager</a> or <a href="../en/Network_configuration.html#Network_managers" class="mw-redirect" title="DHCP">DHCP</a> client overwriting <code>/etc/resolv.conf</code>.
+</p>
+<p>By default <i>wg-quick</i>  uses <i>resolvconf</i> to register new <a href="../en/Domain_name_resolution.html" class="mw-redirect" title="DNS">DNS</a> entries (from the <code>DNS</code> keyword in the configuration file). This will cause issues with <a href="../en/Network_configuration.html#Network_managers" class="mw-redirect" title="Network manager">network managers</a> and <a href="../en/Network_configuration.html#Network_managers" class="mw-redirect" title="DHCP">DHCP</a> clients that do not use <i>resolvconf</i>, as they will overwrite <code>/etc/resolv.conf</code> thus removing the DNS servers added by wg-quick.
+</p>
+<p>The solution is to use networking software that supports <a href="../en/Openresolv.html" class="mw-redirect" title="Resolvconf">resolvconf</a>.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> Users of <a href="../en/Systemd-resolved.html" title="Systemd-resolved">systemd-resolved</a> should make sure that <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=systemd-resolvconf">systemd-resolvconf</a></span> is <a href="../en/Help:Reading.html#Installation_of_packages" class="mw-redirect" title="Install">installed</a>.</div>
+<p>Users of <a href="../en/NetworkManager.html" title="NetworkManager">NetworkManager</a> should know that it does not use resolvconf by default.  It is recommended to use <a href="../en/Systemd-resolved.html" title="Systemd-resolved">systemd-resolved</a>.  If this is undesirable, <a href="../en/Help:Reading.html#Installation_of_packages" class="mw-redirect" title="Install">install</a> <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=openresolv">openresolv</a></span> and configure NetworkManager to use it: <a href="../en/NetworkManager.html#Use_openresolv" title="NetworkManager">NetworkManager#Use openresolv</a>.
+</p>
+<h3><span class="mw-headline" id="Adjusting_the_MTU_value">Adjusting the MTU value</span></h3>
+<p>A default Wireguard maximum transmission unit (MTU) value is <code>1420</code>.
+</p>
+<p>Due to a too low MTU (lower than <code>1280</code>), wg-quick may have failed to create the WireGuard interface. This can be solved by setting the MTU value in WireGuard configuration in Interface section on client.
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">foo.config</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Interface]
+Address = 10.200.200.2/24
+MTU = 1420
+PrivateKey = <i>PEER_FOO_PRIVATE_KEY</i>
+DNS = 10.200.200.1</pre>
+<p>Depending on your network, a lower MTU value can also make your WireGuard connection work.
+</p>
+<p>In certain cases larger MTU values can lead to unstable or intermittent connection because of unreliable <a rel="nofollow" class="external text" href="https://tldp.org/HOWTO/Adv-Routing-HOWTO/lartc.cookbook.mtu-mss.html">Path MTU discovery (PMTU)</a> along the route. Which may lead to situations where ICMP ping works because of its low packet size, but most of TCP connections fail because of full MTU size utilization. For example, an IPv6 connection has a higher packet overhead than IPv4, hence fragmentation may occur earlier with the same MTU value.
+</p>
+<p>It is worth checking the links MTU size on both peers and other routers involved to determine the minimum value.
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;"># ip link show</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">5: wg0: &lt;POINTOPOINT,NOARP,UP,LOWER_UP&gt; <b>mtu 1400</b> qdisc noqueue state UNKNOWN mode DEFAULT group default qlen 1000
+link/none</pre>
+<p>Another option is falling back to a MTU of <code>1280</code> and finding appropriate value for given path with a trial/error approach. 
+</p>
+<p>An MTU of <code>1420</code> and above can lead to partially broken links which could be interpreted as a firewall or routing issue instead of actual MTU size.
+</p>
+<h3><span class="mw-headline" id="Key_is_not_the_correct_length_or_format">Key is not the correct length or format</span></h3>
+<p>To avoid the following error, put the key value in the configuration file and not the path to the key file.
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;"># wg-quick up wg0</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[#] ip link add wg0 type wireguard
+[#] wg setconf wg0 /dev/fd/63
+Key is not the correct length or format: `<i>/path/example.key'</i>
+Configuration parsing error
+[#] ip link delete dev wg0
+</pre>
+<h3>
+<span id="Unable_to_establish_a_persistent_connection_behind_NAT_.2F_firewall"></span><span class="mw-headline" id="Unable_to_establish_a_persistent_connection_behind_NAT_/_firewall">Unable to establish a persistent connection behind NAT / firewall</span>
+</h3>
+<p>By default, WireGuard peers remain silent while they do not need to communicate, so peers located behind a NAT and/or <a href="../en/Category:Firewalls.html" class="mw-redirect" title="Firewall">firewall</a> may be unreachable from other peers until they reach out to other peers themselves (or the connection may time out). Adding <code>PersistentKeepalive = 25</code> to the <code>[Peer]</code> settings of a peer located behind a NAT and/or firewall can ensure that the connection remains open.
+</p>
+<p>To temporarily set the persistent-keepalive setting via command line, run the following command:
+</p>
+<pre># wg set wg0 peer <i>public_key</i> persistent-keepalive 25
+</pre>
+<h3><span class="mw-headline" id="Loop_routing">Loop routing</span></h3>
+<p>Adding the endpoint IP to the allowed IPs list, the kernel will attempt to send handshakes to said device binding, rather than using the original route. This results in failed handshake attempts.
+</p>
+<p>As a workaround, the correct route to the endpoint needs to be manually added using
+</p>
+<pre># ip route add <i>endpoint_ip</i> via <i>gateway</i> dev <i>network_interface</i>
+</pre>
+<p>E.g. for peer B from above in a standard LAN setup:
+</p>
+<pre># ip route add 203.0.113.102 via 192.168.0.1 dev eth0
+</pre>
+<p>To make this route persistent, the command can be added as <code>PostUp = ip route ...</code> to the <code>[Interface]</code> section of <code>wg0.conf</code>. However, on certain setups (e.g. using <code>wg-quick@.service</code> in combination with NetworkManager) this might fail on resume. Furthermore, this only works for a static network setup and fails if gateways or devices change (e.g. using Ethernet or Wi-Fi on a laptop).
+</p>
+<p>Using NetworkManager, a more flexible solution is to start WireGuard using a dispatcher script. As root, create
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/NetworkManager/dispatcher.d/50-wg0.sh</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">#!/bin/sh
+case $2 in
+  up)
+    wg-quick up wg0
+    ip route add &lt;endpoint ip&gt; via $IP4_GATEWAY dev $DEVICE_IP_IFACE
+    ;;
+  pre-down)
+    wg-quick down wg0
+    ;;
+esac</pre>
+<p>If not already running, start and enable <code>NetworkManager-dispatcher.service</code>. Also make sure that NetworkManager is not managing routes for <code>wg0</code>, see <a href="#Routes_are_periodically_reset">#Routes are periodically reset</a>.
+</p>
+<h3><span class="mw-headline" id="Connection_lost_after_sleep_using_systemd-networkd">Connection lost after sleep using systemd-networkd</span></h3>
+<p><a href="../en/Systemd.html" title="Systemd">systemd</a> version 253 introduced a change in how network interfaces are reconfigured when resuming from a suspended state<a rel="nofollow" class="external autonumber" href="https://github.com/systemd/systemd/commit/a39a9ac8065c29330207838b70fe388bde2bc254">[7]</a>. In doing so, network connections managed by <a href="../en/Systemd-networkd.html" title="Systemd-networkd">systemd-networkd</a> will lose connection to the wireguard interface.  Unless a kill switch is configured, this risks exposing the public IP address after resuming from suspension. To fix this, uncomment and change the value to <code>no</code> for <code>ManageForeignRoutingPolicyRules</code> in <code>/etc/systemd/networkd.conf</code>. <a rel="nofollow" class="external autonumber" href="https://github.com/systemd/systemd/issues/26665#issuecomment-1454353725">[8]</a>
+</p>
+<p>Review the <a href="../en/Systemd-networkd.html" title="Systemd-networkd">systemd-networkd</a> page in full to become informed of any other potential side effects of this change, if any.
+</p>
+<h2><span class="mw-headline" id="See_also">See also</span></h2>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/WireGuard" class="extiw" title="wikipedia:WireGuard">Wikipedia:WireGuard</a></li>
+<li>
+<a rel="nofollow" class="external text" href="https://www.wireguard.com/presentations/">Presentations by Jason Donenfeld</a>.</li>
+<li><a rel="nofollow" class="external text" href="https://lists.zx2c4.com/mailman/listinfo/wireguard">Mailing list</a></li>
+<li><a rel="nofollow" class="external text" href="https://docs.sweeting.me/s/wireguard">Unofficial WireGuard Documentation</a></li>
+<li><a href="https://wiki.debian.org/Wireguard" class="extiw" title="debian:Wireguard">Debian:Wireguard</a></li>
+</ul>
+</div>
+</div>
+					<div id="catlinks" class="catlinks" data-mw="interface">
+<div id="mw-normal-catlinks" class="mw-normal-catlinks">
+<a href="../Special:Categories.html" title="Special:Categories">Category</a>: <ul><li><a href="../en/Category:Virtual_Private_Network.html" title="Category:Virtual Private Network">Virtual Private Network</a></li></ul>
+</div>
+<div id="mw-hidden-catlinks" class="mw-hidden-catlinks mw-hidden-cats-hidden">Hidden categories: <ul>
+<li><a href="../en/Category:Pages_or_sections_flagged_with_Template:Style.html" title="Category:Pages or sections flagged with Template:Style">Pages or sections flagged with Template:Style</a></li>
+<li><a href="../en/Category:Pages_or_sections_flagged_with_Template:Expansion.html" title="Category:Pages or sections flagged with Template:Expansion">Pages or sections flagged with Template:Expansion</a></li>
+<li><a href="../en/Category:Pages_or_sections_flagged_with_Template:Merge.html" title="Category:Pages or sections flagged with Template:Merge">Pages or sections flagged with Template:Merge</a></li>
+</ul>
+</div>
+</div>
+				</div>
+			</main>
+			
+		</div>
+		<div class="mw-footer-container">
+			
+<footer id="footer" class="mw-footer" style="margin: 0">
+	<ul id="footer-info">
+	<li data-nosnippet="">Retrieved from "<a dir="ltr" href="https://wiki.archlinux.org/index.php?title=WireGuard&amp;oldid=829390">https://wiki.archlinux.org/index.php?title=WireGuard&amp;oldid=829390</a>"</li>
+<li id="footer-info-lastmod"> This page was last edited on 18 March 2025, at 12:31.</li>
+	<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+<br>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="https://terms.archlinux.org/docs/privacy-policy/">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="../en/ArchWiki:About.html">About ArchWiki</a></li>
+	<li id="footer-places-disclaimers"><a href="../en/ArchWiki:General_disclaimer.html">Disclaimers</a></li>
+	<li id="footer-places-archwiki-code-of-conduct"><a href="https://terms.archlinux.org/docs/code-of-conduct/" class="extiw" title="archlinux-service-agreements:code-of-conduct">Code of conduct</a></li>
+	<li id="footer-places-archwiki-terms-of-service"><a href="https://terms.archlinux.org/docs/terms-of-service/" class="extiw" title="archlinux-service-agreements:terms-of-service">Terms of service</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-copyrightico"><a href="https://www.gnu.org/copyleft/fdl.html" class="cdx-button cdx-button--fake-button cdx-button--size-large cdx-button--fake-button--enabled"><img src="/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" loading="lazy"></a></li>
+	<li id="footer-poweredbyico"><img src="/resources/assets/poweredby_mediawiki.svg" width="88" height="31" loading="lazy"></li>
+</ul>
+
+</footer>
+
+		</div>
+	</div> 
+</div> 
+<div class="vector-settings" id="p-dock-bottom">
+	<ul></ul>
+</div>
+</body>
+</html>

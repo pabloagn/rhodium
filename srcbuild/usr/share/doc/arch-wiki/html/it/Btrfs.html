@@ -1,0 +1,1437 @@
+<!DOCTYPE html>
+<html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-sticky-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-0 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-disabled skin-theme-clientpref-day vector-toc-available" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>Btrfs (Italiano) - ArchWiki</title>
+<link rel="stylesheet" href="../ArchWikiOffline.css">
+<meta name="ResourceLoaderDynamicStyles" content="">
+<meta name="generator" content="MediaWiki 1.43.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="max-image-preview:standard">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.25, maximum-scale=5.0">
+<link rel="search" type="application/opensearchdescription+xml" href="/rest.php/v1/search" title="ArchWiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.archlinux.org/api.php?action=rsd">
+<link rel="license" href="https://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="ArchWiki Atom feed" href="/index.php?title=Special:RecentChanges&amp;feed=atom">
+</head>
+<body class="skin--responsive skin-vector skin-vector-search-vue mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Btrfs_Italiano rootpage-Btrfs_Italiano skin-vector-2022 action-view">
+<a class="mw-jump-link" href="#bodyContent">Jump to content</a>
+<div class="vector-header-container">
+	</div>
+<div class="mw-page-container">
+	<div class="mw-page-container-inner">
+		<div class="vector-column-start">
+			<div class="vector-main-menu-container">
+		</div>
+	<div class="vector-sticky-pinned-container">
+				<nav id="mw-panel-toc" aria-label="Contents" data-event-name="ui.sidebar-toc" class="mw-table-of-contents-container vector-toc-landmark">
+					<div id="vector-toc-pinned-container" class="vector-pinned-container">
+					<div id="vector-toc" class="vector-toc vector-pinnable-element">
+	<div class="vector-pinnable-header vector-toc-pinnable-header vector-pinnable-header-pinned" data-feature-name="toc-pinned" data-pinnable-element-id="vector-toc">
+	<h2 class="vector-pinnable-header-label">Contents</h2>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-toc.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-toc.unpin">hide</button>
+</div>
+
+
+	<ul class="vector-toc-contents" id="mw-panel-toc-list">
+		<li id="toc-mw-content-text" class="vector-toc-list-item vector-toc-level-1">
+			<a href="#" class="vector-toc-link">
+				<div class="vector-toc-text">Beginning</div>
+			</a>
+		</li>
+		<li id="toc-Preparazione" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Preparazione">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">1</span>
+				<span>Preparazione</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Preparazione-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Creazione_del_file_system" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Creazione_del_file_system">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">2</span>
+				<span>Creazione del file system</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Creazione_del_file_system-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Creazione del file system subsection</span>
+			</button>
+		
+		<ul id="toc-Creazione_del_file_system-sublist" class="vector-toc-list">
+			<li id="toc-File_system_su_un_singolo_dispositivo" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#File_system_su_un_singolo_dispositivo">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1</span>
+					<span>File system su un singolo dispositivo</span>
+				</div>
+			</a>
+			
+			<ul id="toc-File_system_su_un_singolo_dispositivo-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-File_system_su_più_dispositivi" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#File_system_su_pi%C3%B9_dispositivi">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2</span>
+					<span>File system su più dispositivi</span>
+				</div>
+			</a>
+			
+			<ul id="toc-File_system_su_più_dispositivi-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Configurazione_del_file_system" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Configurazione_del_file_system">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">3</span>
+				<span>Configurazione del file system</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Configurazione_del_file_system-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Configurazione del file system subsection</span>
+			</button>
+		
+		<ul id="toc-Configurazione_del_file_system-sublist" class="vector-toc-list">
+			<li id="toc-Copy-on-Write_(CoW)" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Copy-on-Write_(CoW)">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1</span>
+					<span>Copy-on-Write (CoW)</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Copy-on-Write_(CoW)-sublist" class="vector-toc-list">
+				<li id="toc-Disabilitazione_della_funzione_CoW" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Disabilitazione_della_funzione_CoW">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1.1</span>
+					<span>Disabilitazione della funzione CoW</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Disabilitazione_della_funzione_CoW-sublist" class="vector-toc-list">
+				<li id="toc-Effetto_sugli_snapshot" class="vector-toc-list-item vector-toc-level-4">
+			<a class="vector-toc-link" href="#Effetto_sugli_snapshot">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1.1.1</span>
+					<span>Effetto sugli snapshot</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Effetto_sugli_snapshot-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Compressione" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Compressione">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.2</span>
+					<span>Compressione</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Compressione-sublist" class="vector-toc-list">
+				<li id="toc-Visualizzazione_dei_tipi_e_dei_rapporti_di_compressione" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Visualizzazione_dei_tipi_e_dei_rapporti_di_compressione">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.2.1</span>
+					<span>Visualizzazione dei tipi e dei rapporti di compressione</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Visualizzazione_dei_tipi_e_dei_rapporti_di_compressione-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Sottovolumi" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Sottovolumi">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.3</span>
+					<span>Sottovolumi</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Sottovolumi-sublist" class="vector-toc-list">
+				<li id="toc-Creazione_di_un_sottovolume" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Creazione_di_un_sottovolume">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.3.1</span>
+					<span>Creazione di un sottovolume</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Creazione_di_un_sottovolume-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Elencare_i_sottovolumi" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Elencare_i_sottovolumi">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.3.2</span>
+					<span>Elencare i sottovolumi</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Elencare_i_sottovolumi-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Cancellazione_di_un_sottovolume" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Cancellazione_di_un_sottovolume">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.3.3</span>
+					<span>Cancellazione di un sottovolume</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Cancellazione_di_un_sottovolume-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Montaggio_dei_sottovolumi" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Montaggio_dei_sottovolumi">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.3.4</span>
+					<span>Montaggio dei sottovolumi</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Montaggio_dei_sottovolumi-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Montaggio_di_un_sottovolume_come_root" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Montaggio_di_un_sottovolume_come_root">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.3.5</span>
+					<span>Montaggio di un sottovolume come root</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Montaggio_di_un_sottovolume_come_root-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Modifica_del_sottovolume_di_default" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Modifica_del_sottovolume_di_default">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.3.6</span>
+					<span>Modifica del sottovolume di default</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Modifica_del_sottovolume_di_default-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Quota" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Quota">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.4</span>
+					<span>Quota</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Quota-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Intervallo_di_commit" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Intervallo_di_commit">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.5</span>
+					<span>Intervallo di commit</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Intervallo_di_commit-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-TRIM_dei_drive_SSD" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#TRIM_dei_drive_SSD">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.6</span>
+					<span>TRIM dei drive SSD</span>
+				</div>
+			</a>
+			
+			<ul id="toc-TRIM_dei_drive_SSD-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Utilizzo" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Utilizzo">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">4</span>
+				<span>Utilizzo</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Utilizzo-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Utilizzo subsection</span>
+			</button>
+		
+		<ul id="toc-Utilizzo-sublist" class="vector-toc-list">
+			<li id="toc-Swap_file" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Swap_file">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.1</span>
+					<span>Swap file</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Swap_file-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Visualizzazione_dello_spazio_utilizzato/libero" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Visualizzazione_dello_spazio_utilizzato/libero">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.2</span>
+					<span>Visualizzazione dello spazio utilizzato/libero</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Visualizzazione_dello_spazio_utilizzato/libero-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Deframmentazione" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Deframmentazione">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.3</span>
+					<span>Deframmentazione</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Deframmentazione-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-RAID" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#RAID">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.4</span>
+					<span>RAID</span>
+				</div>
+			</a>
+			
+			<ul id="toc-RAID-sublist" class="vector-toc-list">
+				<li id="toc-Scrub" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Scrub">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.4.1</span>
+					<span>Scrub</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Scrub-sublist" class="vector-toc-list">
+				<li id="toc-Avvio_manuale" class="vector-toc-list-item vector-toc-level-4">
+			<a class="vector-toc-link" href="#Avvio_manuale">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.4.1.1</span>
+					<span>Avvio manuale</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Avvio_manuale-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Avvio_con_un_servizio_o_un_time" class="vector-toc-list-item vector-toc-level-4">
+			<a class="vector-toc-link" href="#Avvio_con_un_servizio_o_un_time">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.4.1.2</span>
+					<span>Avvio con un servizio o un time</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Avvio_con_un_servizio_o_un_time-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Bilanciamento" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Bilanciamento">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.4.2</span>
+					<span>Bilanciamento</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Bilanciamento-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Snapshot" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Snapshot">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.5</span>
+					<span>Snapshot</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Snapshot-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Invio/ricezione" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Invio/ricezione">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.6</span>
+					<span>Invio/ricezione</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Invio/ricezione-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Deduplicazione" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Deduplicazione">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.7</span>
+					<span>Deduplicazione</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Deduplicazione-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Ridimensionamento" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Ridimensionamento">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.8</span>
+					<span>Ridimensionamento</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Ridimensionamento-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Problemi_noti" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Problemi_noti">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">5</span>
+				<span>Problemi noti</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Problemi_noti-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Problemi noti subsection</span>
+			</button>
+		
+		<ul id="toc-Problemi_noti-sublist" class="vector-toc-list">
+			<li id="toc-Cifratura" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Cifratura">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.1</span>
+					<span>Cifratura</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Cifratura-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Problemi_legati_a_btrfs_check" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Problemi_legati_a_btrfs_check">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.2</span>
+					<span>Problemi legati a btrfs check</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Problemi_legati_a_btrfs_check-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Trucchi_e_suggerimenti" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Trucchi_e_suggerimenti">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">6</span>
+				<span>Trucchi e suggerimenti</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Trucchi_e_suggerimenti-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Trucchi e suggerimenti subsection</span>
+			</button>
+		
+		<ul id="toc-Trucchi_e_suggerimenti-sublist" class="vector-toc-list">
+			<li id="toc-Disco_Btrfs_privo_di_partizioni" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Disco_Btrfs_privo_di_partizioni">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.1</span>
+					<span>Disco Btrfs privo di partizioni</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Disco_Btrfs_privo_di_partizioni-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Conversione_da_Ext3/4_a_Btrfs" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Conversione_da_Ext3/4_a_Btrfs">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.2</span>
+					<span>Conversione da Ext3/4 a Btrfs</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Conversione_da_Ext3/4_a_Btrfs-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Riparazione_delle_corruzioni" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Riparazione_delle_corruzioni">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.3</span>
+					<span>Riparazione delle corruzioni</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Riparazione_delle_corruzioni-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Eseguire_il_boot_all'interno_di_snapshot" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Eseguire_il_boot_all'interno_di_snapshot">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.4</span>
+					<span>Eseguire il boot all'interno di snapshot</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Eseguire_il_boot_all'interno_di_snapshot-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Utilizzo_dei_sottovolumi_Btrfs_con_systemd-nspawn" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Utilizzo_dei_sottovolumi_Btrfs_con_systemd-nspawn">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.5</span>
+					<span>Utilizzo dei sottovolumi Btrfs con systemd-nspawn</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Utilizzo_dei_sottovolumi_Btrfs_con_systemd-nspawn-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Riduzione_degli_aggiornamenti_dei_metadati_sull'ora_di_accesso" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Riduzione_degli_aggiornamenti_dei_metadati_sull'ora_di_accesso">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.6</span>
+					<span>Riduzione degli aggiornamenti dei metadati sull'ora di accesso</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Riduzione_degli_aggiornamenti_dei_metadati_sull'ora_di_accesso-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Backup_incrementale_verso_un_drive_esterno" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Backup_incrementale_verso_un_drive_esterno">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.7</span>
+					<span>Backup incrementale verso un drive esterno</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Backup_incrementale_verso_un_drive_esterno-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Snapshot_automatici" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Snapshot_automatici">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.8</span>
+					<span>Snapshot automatici</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Snapshot_automatici-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Risoluzione_di_problemi" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Risoluzione_di_problemi">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">7</span>
+				<span>Risoluzione di problemi</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Risoluzione_di_problemi-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Risoluzione di problemi subsection</span>
+			</button>
+		
+		<ul id="toc-Risoluzione_di_problemi-sublist" class="vector-toc-list">
+			<li id="toc-GRUB" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#GRUB">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">7.1</span>
+					<span>GRUB</span>
+				</div>
+			</a>
+			
+			<ul id="toc-GRUB-sublist" class="vector-toc-list">
+				<li id="toc-Offset_della_partition" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Offset_della_partition">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">7.1.1</span>
+					<span>Offset della partition</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Offset_della_partition-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Root_mancante" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Root_mancante">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">7.1.2</span>
+					<span>Root mancante</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Root_mancante-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Time_out_del_montaggio" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Time_out_del_montaggio">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">7.2</span>
+					<span>Time out del montaggio</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Time_out_del_montaggio-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-BTRFS:_open_ctree_failed" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#BTRFS:_open_ctree_failed">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">7.3</span>
+					<span>BTRFS: open_ctree failed</span>
+				</div>
+			</a>
+			
+			<ul id="toc-BTRFS:_open_ctree_failed-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-btrfs_check" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#btrfs_check">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">7.4</span>
+					<span>btrfs check</span>
+				</div>
+			</a>
+			
+			<ul id="toc-btrfs_check-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Attività_costante_del_drive" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Attivit%C3%A0_costante_del_drive">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">7.5</span>
+					<span>Attività costante del drive</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Attività_costante_del_drive-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Vedere_anche" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Vedere_anche">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">8</span>
+				<span>Vedere anche</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Vedere_anche-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+</ul>
+</div>
+
+					</div>
+		</nav>
+			</div>
+		</div>
+		<div class="mw-content-container">
+			<main id="content" class="mw-body" style="margin: 0">
+				<header class="mw-body-header vector-page-titlebar">
+					<nav aria-label="Contents" class="vector-toc-landmark">
+						
+<div id="vector-page-titlebar-toc" class="vector-dropdown vector-page-titlebar-toc vector-button-flush-left">
+	<input type="checkbox" id="vector-page-titlebar-toc-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-page-titlebar-toc" class="vector-dropdown-checkbox " aria-label="Toggle the table of contents">
+	<label id="vector-page-titlebar-toc-label" for="vector-page-titlebar-toc-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"><span class="vector-icon mw-ui-icon-listBullet mw-ui-icon-wikimedia-listBullet"></span>
+
+<span class="vector-dropdown-label-text">Toggle the table of contents</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+							<div id="vector-page-titlebar-toc-unpinned-container" class="vector-unpinned-container">
+			</div>
+		
+	</div>
+</div>
+
+					</nav>
+					<h1 id="firstHeading" class="firstHeading mw-first-heading"><span class="mw-page-title-main">Btrfs (Italiano)</span></h1>
+							
+<div id="p-lang-btn" class="vector-dropdown mw-portlet mw-portlet-lang">
+	<input type="checkbox" id="p-lang-btn-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-p-lang-btn" class="vector-dropdown-checkbox mw-interlanguage-selector" aria-label="Go to an article in another language. Available in 7 languages">
+	<label id="p-lang-btn-label" for="p-lang-btn-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--action-progressive mw-portlet-lang-heading-7" aria-hidden="true"><span class="vector-icon mw-ui-icon-language-progressive mw-ui-icon-wikimedia-language-progressive"></span>
+
+<span class="vector-dropdown-label-text">7 languages</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+		<div class="vector-menu-content">
+			
+			<ul class="vector-menu-content-list">
+				
+				<li class="interlanguage-link interwiki-de mw-list-item"><a href="https://wiki.archlinux.de/title/Arch_auf_BtrFS" title="Arch auf BtrFS – Deutsch" lang="de" hreflang="de" data-title="Arch auf BtrFS" data-language-autonym="Deutsch" data-language-local-name="Deutsch" class="interlanguage-link-target"><span>Deutsch</span></a></li>
+<li class="interlanguage-link interwiki-en mw-list-item"><a href="../en/Btrfs.html" title="Btrfs – English" lang="en" hreflang="en" data-title="Btrfs" data-language-autonym="English" data-language-local-name="English" class="interlanguage-link-target"><span>English</span></a></li>
+<li class="interlanguage-link interwiki-es mw-list-item"><a href="../es/Btrfs.html" title="Btrfs – español" lang="es" hreflang="es" data-title="Btrfs" data-language-autonym="Español" data-language-local-name="español" class="interlanguage-link-target"><span>Español</span></a></li>
+<li class="interlanguage-link interwiki-ja mw-list-item"><a href="https://wiki.archlinux.jp/index.php/Btrfs" title="Btrfs – 日本語" lang="ja" hreflang="ja" data-title="Btrfs" data-language-autonym="日本語" data-language-local-name="日本語" class="interlanguage-link-target"><span>日本語</span></a></li>
+<li class="interlanguage-link interwiki-pt mw-list-item"><a href="../pt/Btrfs.html" title="Btrfs – português" lang="pt" hreflang="pt" data-title="Btrfs" data-language-autonym="Português" data-language-local-name="português" class="interlanguage-link-target"><span>Português</span></a></li>
+<li class="interlanguage-link interwiki-ru mw-list-item"><a href="../ru/Btrfs.html" title="Btrfs – русский" lang="ru" hreflang="ru" data-title="Btrfs" data-language-autonym="Русский" data-language-local-name="русский" class="interlanguage-link-target"><span>Русский</span></a></li>
+<li class="interlanguage-link interwiki-zh-hans mw-list-item"><a href="https://wiki.archlinuxcn.org/wiki/Btrfs" title="Btrfs – 中文（简体）" lang="zh-Hans" hreflang="zh-Hans" data-title="Btrfs" data-language-autonym="中文（简体）" data-language-local-name="中文（简体）" class="interlanguage-link-target"><span>中文（简体）</span></a></li>
+			</ul>
+			
+		</div>
+
+	</div>
+</div>
+</header>
+				<div class="vector-column-end">
+					<div class="vector-sticky-pinned-container">
+						<nav class="vector-page-tools-landmark" aria-label="Page tools">
+							<div id="vector-page-tools-pinned-container" class="vector-pinned-container">
+				
+							</div>
+		</nav>
+						<nav class="vector-appearance-landmark" aria-label="Appearance">
+							<div id="vector-appearance-pinned-container" class="vector-pinned-container">
+				<div id="vector-appearance" class="vector-appearance vector-pinnable-element">
+	<div class="vector-pinnable-header vector-appearance-pinnable-header vector-pinnable-header-pinned" data-feature-name="appearance-pinned" data-pinnable-element-id="vector-appearance" data-pinned-container-id="vector-appearance-pinned-container" data-unpinned-container-id="vector-appearance-unpinned-container">
+	<div class="vector-pinnable-header-label">Appearance</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-appearance.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-appearance.unpin">hide</button>
+</div>
+
+
+</div>
+
+							</div>
+		</nav>
+					</div>
+				</div>
+				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container>
+					<div class="vector-body-before-content">
+							<div class="mw-indicators">
+		</div>
+
+						<div id="siteSub" class="noprint">From ArchWiki</div>
+					</div>
+					<div id="contentSub"><div id="mw-content-subtitle"></div></div>
+					
+					
+					<div id="mw-content-text" class="mw-body-content">
+<div class="mw-content-ltr mw-parser-output" lang="it" dir="ltr">
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Translation Status:</strong> This article is a localized version of <a href="../en/Btrfs.html" title="Btrfs">Btrfs</a>. Last translation date: 2024-03-05. You can help to synchronize the translation, if there were <a rel="nofollow" class="external text" href="https://wiki.archlinux.org/index.php?title=Btrfs&amp;diff=0&amp;oldid=802264">changes</a> in the English version.</div>
+<div class="archwiki-template-meta-related-articles">
+<p>Articoli correlati</p>
+<ul>
+<li><a href="../it/File_systems.html" title="File systems (Italiano)">File systems (Italiano)</a></li>
+<li><a href="../en/Snapper.html" title="Snapper">Snapper</a></li>
+<li><a href="../en/Yabsnap.html" title="Yabsnap">Yabsnap</a></li>
+</ul>
+</div>
+<p>Dalla <a rel="nofollow" class="external text" href="https://btrfs.readthedocs.io/en/latest/Introduction.html">documentazione di Btrfs</a>:
+</p>
+<dl><dd>Btrfs è un moderno file system copy on write (COW) per Linux il cui scopo è l'implementazione di funzionalità avanzate, abbinata a una particolare attenzione alla tolleranza agli errori, alla riparazione e alla facilità di amministrazione.</dd></dl>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Nota:</strong> Come alcuni altri file system, Btrfs viene continuamente sviluppato. Specifiche funzioni potrebbero pertanto non essere ancora pronte per l'utilizzo quotidiano. Per verificare se il proprio caso di utilizzo possa essere interessato da eventuali limitazioni, consultare lo <a rel="nofollow" class="external text" href="https://btrfs.readthedocs.io/en/latest/Status.html">stato</a> nella documentazione di Btrfs e la sezione <a href="#Problemi_noti">#Problemi noti</a> del presente articolo.</div>
+<meta property="mw:PageProp/toc">
+<h2><span class="mw-headline" id="Preparazione">Preparazione</span></h2>
+<p>Per gli strumenti user space <a href="../it/Help:Reading.html#Installazione_di_pacchetti" class="mw-redirect" title="Installare">installare</a> il pacchetto <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=btrfs-progs">btrfs-progs</a></span>, necessario per le operazioni di base.
+</p>
+<p>Nel caso si necessiti di effettuare il boot da un file system Btrfs (ad es. nel caso il kernel e l'immagine initramfs risiedano su una partizione Btrfs), verificare che il proprio <a href="../en/Arch_boot_process.html#Boot_loader" class="mw-redirect" title="Boot loader">boot loader</a> supporti Btrfs.
+</p>
+<h2><span class="mw-headline" id="Creazione_del_file_system">Creazione del file system</span></h2>
+<p>Di seguito viene illustrato come creare un nuovo <a href="../it/File_systems.html" title="File systems (Italiano)">file system</a> Btrfs. Per convertire una partizione Ext3/4 in Btrfs, vedere <a href="#Conversione_da_Ext3/4_a_Btrfs">#Conversione da Ext3/4 a Btrfs</a>. Per utilizzare un setup privo di partizioni vedere <a href="#Disco_Btrfs_privo_di_partizioni">#Disco Btrfs privo di partizioni</a>.
+</p>
+<p>Vedere <span class="plainlinks archwiki-template-man" title="$ man 8 mkfs.btrfs"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/mkfs.btrfs.8">mkfs.btrfs(8)</a></span> per maggiori informazioni.
+</p>
+<h3><span class="mw-headline" id="File_system_su_un_singolo_dispositivo">File system su un singolo dispositivo</span></h3>
+<p>Per creare un file system Btrfs su una partizione <code>/dev/<i>partizione</i></code>:
+</p>
+<pre># mkfs.btrfs -L <i>la mia etichetta</i> /dev/<i>partizione</i>
+</pre>
+<p>In Btrfs, la dimensione di default dei nodi dei metadati è di 16 KiB, mentre la dimensione di default dei settori dati è uguale alla dimensione della pagina e viene rilevata in modo automatico. Per utilizzare una dimensione maggiore per i nodi dei metadati (tale dimensione deve essere un multiplo della dimensione dei settori, con un valore massimo consentito di 64 KiB), specificare un valore per il <code>nodesize</code> tramite lo switch <code>-n</code> come illustrato in questo esempio in cui vengono utilizzati blocchi da 32 KiB:
+</p>
+<pre># mkfs.btrfs -L <i>la mia etichetta</i> -n 32k /dev/<i>partizione</i>
+</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Nota:</strong> Secondo <span class="plainlinks archwiki-template-man" title="$ man 8 mkfs.btrfs"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/mkfs.btrfs.8#OPTIONS">mkfs.btrfs(8) § OPTIONS</a></span>, "[a] una dimensione minore dei nodi aumenta la frammentazione ma risulta in b-tree maggiori che, a loro volta, riducono le problematiche di locking contention. Nodi di dimensioni maggiori offrono una migliora compattazione e una minore frammentazione al costo di un maggiore dispendio in termini di operazioni di memoria durante l'aggiornamento dei blocchi di metadati".</div>
+<h3>
+<span id="File_system_su_pi.C3.B9_dispositivi"></span><span class="mw-headline" id="File_system_su_più_dispositivi">File system su più dispositivi</span>
+</h3>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Attenzione:</strong> Le modalità RAID 5 e RAID 6 di Btrfs sono caratterizzate da gravi difetti e non andrebbero pertanto utilizzate per "alcun tipo di finalità diversa dagli scopi di test con dati privi di importanza." <a rel="nofollow" class="external text" href="https://lore.kernel.org/linux-btrfs/20200627032414.GX10769@hungrycats.org/">Elenco di problemi noti e soluzioni per aggirarli parzialmente.</a> Vedere <span class="plainlinks archwiki-template-man" title="$ man 5 btrfs"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/btrfs.5#RAID56_STATUS_AND_RECOMMENDED_PRACTICES">btrfs(5) § RAID56 STATUS AND RECOMMENDED PRACTICES</a></span> per gli aggiornamenti sullo stato.</div>
+<p>È possibile utilizzare dispositivi multipli per creare una configurazione RAID. I livelli RAID supportati includono RAID 0, RAID 1, RAID 10, RAID 5 e RAID 6. A partire dal kernel 5.5 RAID1c3 e RAID1c4 per le copie 3- e 4- del livello RAID 1. I livelli RAID possono essere configurati separatamente per dati e metadati utilizzando rispettivamente le opzioni <code>-d</code> e <code>-m</code>. Come impostazione di default i dati possiedono una copia (<code>single</code>) e i metadati sono in configurazione mirrored (<code>raid1</code>). Si tratta di una situazione simile alla creazione di una <a href="https://en.wikipedia.org/wiki/it:RAID#Concatenazione_indipendente_.28o_JBOD.29" class="extiw" title="wikipedia:it:RAID">configurazione JBOD</a>, in cui i dischi vengono visti come un singolo file system, ma i file non sono duplicati. Vedere questo articolo sull'<a rel="nofollow" class="external text" href="https://archive.kernel.org/oldwiki/btrfs.wiki.kernel.org/index.php/Using_Btrfs_with_Multiple_Devices.html">utilizzo di Btrfs con dispositivi multipli</a> per maggiori informazioni su come creare un volume RAID Btrfs.
+</p>
+<pre># mkfs.btrfs -d single -m raid1 /dev/<i>part1</i> /dev/<i>part2</i> ...
+</pre>
+<p>È necessario includere l'hook <code>udev</code>, l'hook <code>systemd</code> o l'hook <code>btrfs</code> in <code>/etc/mkinitcpio.conf</code> per utilizzare dispositivi Btrfs multipli in un pool. Vedere l'articolo <a href="../en/Mkinitcpio.html#Common_hooks" title="Mkinitcpio">Mkinitcpio#Common hooks</a> per maggiori informazioni.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Nota:</strong> 
+<ul>
+<li>È possibile aggiungere dispositivi a un file system con dispositivi multipli anche in un secondo momento. Vedere l'<a rel="nofollow" class="external text" href="https://archive.kernel.org/oldwiki/btrfs.wiki.kernel.org/index.php/Using_Btrfs_with_Multiple_Devices.html">articolo sulla pagina wiki Btrfs</a> per maggiori informazioni.</li>
+<li>I dispositivi possono essere di dimensioni diverse. Tuttavia se un drive in una configurazione RAID è di dimensioni maggiori rispetto agli altri, questo spazio extra non verrà utilizzato.</li>
+<li>Alcuni <a href="../en/Arch_boot_process.html#Boot_loader" class="mw-redirect" title="Boot loader">boot loader</a>, come ad esempio <a href="../en/Syslinux.html" class="mw-redirect" title="Syslinux (Italiano)">Syslinux</a>, non supportano i file system su più dispositivi.</li>
+<li>Btrfs non effettua automaticamente le operazioni di lettura dal dispositivo più veloce, pertanto l'utilizzo di diversi tipi di dischi produce oscillazioni nelle prestazioni. Vedere <a rel="nofollow" class="external autonumber" href="https://stackoverflow.com/a/55408367">[1]</a> per maggiori dettagli.</li>
+</ul>
+</div>
+<p>Vedere <a href="#RAID">#RAID</a> per indicazioni sulla manutenzione di specifici file system Btrfs su più dispositivi.
+</p>
+<h2><span class="mw-headline" id="Configurazione_del_file_system">Configurazione del file system</span></h2>
+<h3>
+<span id="Copy-on-Write_.28CoW.29"></span><span class="mw-headline" id="Copy-on-Write_(CoW)">Copy-on-Write (CoW)</span>
+</h3>
+<p>Come impostazione di default, Btrfs utilizza una strategia <a href="https://en.wikipedia.org/wiki/it:copy-on-write" class="extiw" title="wikipedia:it:copy-on-write">copy-on-write</a> per tutti i file e in ogni momento. Le operazioni di scrittura non sovrascrivono i dati presenti. In luogo di questo approccio, una copia modificata del blocco viene scritta in una nuova posizione, e i metadati vengono aggiornati in modo da puntare a questa nuova posizione. Vedere la <a rel="nofollow" class="external text" href="https://archive.kernel.org/oldwiki/btrfs.wiki.kernel.org/index.php/SysadminGuide.html#Copy_on_Write_.28CoW.29">sezione della guida Btrfs per amministratori di sistema</a> per i dettagli sull'implementazione e per una descrizione dei vantaggi e degli svantaggi.
+</p>
+<h4><span class="mw-headline" id="Disabilitazione_della_funzione_CoW">Disabilitazione della funzione CoW</span></h4>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Attenzione:</strong> Disabilitando la funzione CoW in Btrfs si disabilitano anche i checksum. Btrfs non sarà di conseguenza in grado di rilevare eventuali file corrotti <code>nodatacow</code>. In combinazione con una configurazione RAID 1, eventuali interruzioni dell'alimentazione elettrica o altri eventi potenzialmente causa di corruzione possono provocare una desincronizzazione dei dati.</div>
+<p>Per disabilitare la funzione copy-on-write per i file di nuova creazione in a un sottovolume montato, utilizzare l'opzione di montaggio <code>nodatacow</code>. Questa modifica avrà effetto sui file di nuova creazione. La funzione copy-on-write rimarrà attiva per i file già esistenti. L'opzione <code>nodatacow</code> disabilita inoltre la compressione. Vedere <span class="plainlinks archwiki-template-man" title="$ man 5 btrfs"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/btrfs.5">btrfs(5)</a></span> per maggiori dettagli.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Nota:</strong> Da <span class="plainlinks archwiki-template-man" title="$ man 5 btrfs"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/btrfs.5#MOUNT_OPTIONS">btrfs(5) § MOUNT OPTIONS</a></span>:
+<dl><dd>all'interno di un singolo file system non è possibile montare alcuni sottovolumi con l'opzione <code>nodatacow</code> e altri con l'opzione <code>datacow</code>. L'opzione di montaggio del primo sottovolume montato si applica a tutti gli altri.</dd></dl>
+</div>
+<p>Per disabilitare la funzione copy-on-write per singoli file/singole directory, eseguire il seguente comando:
+</p>
+<pre>$ chattr +C <i>/dir/file</i>
+</pre>
+<p>Questo comando disabiliterà la funzione copy-on-write per le operazioni in cui esiste un solo riferimento al file. Se esiste più di un riferimento, ad es. a causa di cloni del file o di cloni di dimensioni ridotte o di snapshot del file system, la funzione copy-on-write rimane attiva. Si segnala che, a partire dalla versione 9.0 di <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=coreutils">coreutils</a></span>, il comando <code>cp</code> tenta di eseguire copie di dimensioni ridotte come impostazione di default — vedere <span class="plainlinks archwiki-template-man" title="$ man 1 cp"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/cp.1">cp(1)</a></span> per maggiori dettagli.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Nota:</strong> Da <span class="plainlinks archwiki-template-man" title="$ man 1 chattr"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/chattr.1">chattr(1)</a></span>:
+<dl><dd>Per Btrfs, la flag '<code>C</code>' dovrebbe essere impostata per i file nuovi o vuoti. Infatti, se viene impostata per un file che possiede già dei blocchi dati, risulta indefinito il momento in cui i blocchi assegnati al file risulteranno completamente stabili. Se la flag '<code>C</code>' viene impostata per una directory, non avrà alcun effetto sulla directory stessa, ma i nuovi file creati al suo interno avranno l'attributo <code>No_COW</code>.</dd></dl>
+</div>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Suggerimento:</strong> In accordo con la nota precedente, è possibile utilizzare il seguente trucco per disabilitare la funzione copy-on-write sui file esistenti in una directory:
+<pre>$ mv <i>/percorso/a/dir</i> <i>/percorso/a/dir</i>_old
+$ mkdir <i>/percorso/a/dir</i>
+$ chattr +C <i>/percorso/a/dir</i>
+$ cp -a --reflink=never <i>/percorso/a/dir</i>_old/. <i>/percorso/a/dir</i>
+$ rm -rf <i>/percorso/a/dir</i>_old
+</pre>
+Assicurarsi che i dati non vengano utilizzati durante questo processo. È importante notare anche che <code>mv</code> o <code>cp</code> senza la flag <code>--reflink=never</code> come descritto di seguito non funzionerà.</div>
+<h5><span class="mw-headline" id="Effetto_sugli_snapshot">Effetto sugli snapshot</span></h5>
+<p>Se per un file viene disabilitata la funzione copy-on-write (NOCOW) e viene eseguito uno <a href="#Snapshot">snapshot</a>, la prima scrittura su un blocco del file dopo l'effettuazione dello snapshot <a rel="nofollow" class="external text" href="https://www.spinics.net/lists/linux-btrfs/msg33090.html">sarà un'operazione COW</a> perché lo snapshot blocca il vecchio file nella sua posizione. Tuttavia, il file conserverà l'attributo NOCOW e ogni scrittura successiva sul medesimo blocco del file verrà effettuata nella medesima posizione fino allo snapshot successivo.
+</p>
+<p>L'esecuzione di snapshot frequenti può ridurre l'efficacia dell'attributo NOCOW, essendo la funzione COW ancora necessaria per la prima scrittura. Per disabilitare la funzione copy-on-write del tutto per questi file, posizionarli in un sottovolume separato e non effettuare snapshot di quest'ultimo.
+</p>
+<h3><span class="mw-headline" id="Compressione">Compressione</span></h3>
+<p>Btrfs supporta la <a rel="nofollow" class="external text" href="https://btrfs.readthedocs.io/en/latest/Compression.html">compressione trasparente e automatica</a>. Ciò riduce la dimensione dei file oltre ad aumentare in modo significativo la durata di vita dei dispositivi di archiviazione basati su memoria flash in quanto diminuisce l'amplificazione di scrittura. Vedere <a href="https://fedoraproject.org/wiki/Changes/BtrfsByDefault#Compression" class="extiw" title="fedora:Changes/BtrfsByDefault">Fedora:Changes/BtrfsByDefault#Compression</a>, <a rel="nofollow" class="external autonumber" href="https://lists.fedoraproject.org/archives/list/devel@lists.fedoraproject.org/message/NTV77NFF6NDZM3QTPUM2TQZ5PCM6GOO2/">[2]</a>, e <a rel="nofollow" class="external autonumber" href="https://pagure.io/fedora-btrfs/project/issue/36#comment-701551">[3]</a>. Può inoltre <a rel="nofollow" class="external text" href="https://www.phoronix.com/scan.php?page=article&amp;item=btrfs_compress_2635&amp;num=1">migliorare le prestazioni</a> in alcuni casi (ad es. thread singolo con importante flusso I/O di file) e ovviamente, allo stesso tempo, limitare le prestazioni stesse in altri casi (ad es. operazioni a thread multipli e/o con un utilizzo intenso della CPU con elevati flussi I/O di file). In linea generale si possono ottenere prestazioni migliori utilizzando gli algoritmi di compressione più veloci, <i>zstd</i> e <i>lzo</i>. Alcuni <a rel="nofollow" class="external text" href="https://www.phoronix.com/scan.php?page=article&amp;item=btrfs-zstd-compress">benchmark</a> forniscono un raffronto dettagliato.
+</p>
+<p>LZO possiede un livello di compressione fisso, mentre zlib e zstd sono caratterizzati da un intervallo di livelli che vanno da 1 (bassa compressione) a 9 (zlib) o 15 (zstd); vedere <span class="plainlinks archwiki-template-man" title="$ man 5 btrfs"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/btrfs.5#COMPRESSION">btrfs(5) § COMPRESSION</a></span>. La modifica dei livelli produrrà effetti diversi a livello di CPU e di capacità di flusso I/O, pertanto è opportuno eseguire delle verifiche / dei benchmark prima e dopo l'applicazione delle modifiche.
+</p>
+<p>L'opzione di montaggio <code>compress=<i>alg[:livello]</i></code> fa sì che ogni file venga automaticamente preso in considerazione per la compressione. I valori consentiti per <code><i>alg</i></code> sono <code>zlib</code>, <code>lzo</code>, <code>zstd</code>, o <code>no</code> (per assenza di compressione). Utilizzando questa opzione, Btrfs verificherà se comprimendo la prima porzione dei dati si ottiene una riduzione delle sue dimensioni.  In caso affermativo, l'intera operazione di scrittura su tale file verrà compressa.  In caso contrario non verrà effettuata alcuna compressione.  Con questa opzione, se la prima porzione della scrittura non vede alcuna riduzione delle dimensioni, non verrà applicata alcuna compressione alla scrittura stessa, anche qualora la parte restante dei dati fosse potenzialmente soggetta a una riduzione significativa delle dimensioni. <a rel="nofollow" class="external autonumber" href="https://btrfs.readthedocs.io/en/latest/Compression.html#incompressible-data">[4]</a>  Questa soluzione ha la finalità di evitare che il disco rimanga in attesa dell'inizio della scrittura fino a quando tutti i dati che devono essere scritti non siano stati passati al file system Btrfs per essere compressi.
+</p>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../File:Tango-view-fullscreen.svg" decoding="async" width="48" height="48" class="mw-file-element"></span></span><b>This article or section needs expansion.</b></p>
+<div>
+<b>Reason:</b> Riferimento mancante per il "test empirico" citato nel paragrafo successivo. (Discuss in <a rel="nofollow" class="external text" href="../it/Talk:Btrfs.html">Talk:Btrfs (Italiano)</a>)</div>
+</div>
+<p>È possibile invece utilizzare l'opzione di montaggio <code>compress-force=<i>alg[:livello]</i></code> per far sì che Btrfs non verifichi se la compressione riduca le dimensioni della prima porzione dei dati, e abilitare il tentativo di compressione automatica per ogni file.  Nello scenario peggiore che si possa immaginare, ciò potrebbe tradursi in un utilizzo (leggermente) maggiore della CPU senza alcun vantaggio. Tuttavia, test empirici svolti su diversi sistemi impiegati per un utilizzo misto hanno mostrato un miglioramento significativo del 10% circa di compressione del disco in conseguenza dell'utilizzo di <code>compress-force=<i>zstd</i></code> anziché di <code>compress=<i>zstd</i></code>, anch'esso con una compressione del disco del 10%. È tuttavia opportuno considerare che forzare la compressione è una pratica contraria alle <a rel="nofollow" class="external text" href="https://btrfs.readthedocs.io/en/latest/Compression.html#incompressible-data">linee guida ufficiali Btrfs</a>.
+</p>
+<p>Solo i file creati o modificati dopo l'aggiunta dell'opzione di montaggio verranno compressi.
+</p>
+<p>Per applicare la compressione ai file esistenti, utilizzare il comando <code>btrfs filesystem defragment -c<i>alg</i></code>, dove <code><i>alg</i></code> può essere <code>zlib</code>, <code>lzo</code> o <code>zstd</code>. Ad esempio, per ricomprimere l'intero file system con l'algoritmo <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=zstd">zstd</a></span>, eseguire il seguente comando:
+</p>
+<pre># btrfs filesystem defragment -r -v -czstd /
+</pre>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Attenzione:</strong> Deframmentare un file che possieda una copia COW (sia una copia in conseguenza di una snapshot o una copia creata con <code>cp</code> o bcp) utilizzando al contempo lo switch <code>-c</code> con un algoritmo di compressione può produrre come risultato la creazione di due file non correlati, andando in ultima analisi ad aumentare l'utilizzo del disco.</div>
+<p>Per abilitare la compressione durante l'installazione di Arch su una partizione Btrfs vuota, utilizzare l'opzione <code>compress</code> al momento di <a href="../it/File_systems.html#Montaggio_di_un_file_system" title="File systems (Italiano)">montare</a> il file system: <code>mount -o compress=zstd /dev/sd<i>xY</i> /mnt/</code>. Durante la configurazione, aggiungere <code>compress=zstd</code> alle opzioni di montaggio del file system di root in <a href="../it/Fstab.html" title="Fstab (Italiano)">fstab</a>.
+</p>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Suggerimento:</strong> La compressione può essere abilitata anche per singoli file senza utilizzare l'opzione di montaggio <code>compress</code>; per farlo applicare l'attributo <code>chattr +c</code> al file in questione. Se applicato a directory, farà sì che i nuovi file vengano automaticamente compressi quando vengono creati.</div>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Attenzione:</strong> 
+<ul>
+<li>I sistemi che utilizzano kernel più datati o <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=btrfs-progs">btrfs-progs</a></span> senza supporto per <code>zstd</code> potrebbero non essere in grado di leggere o riparare il file system qualora si utilizzi questa opzione.</li>
+<li>
+<a href="../en/GRUB.html" class="mw-redirect" title="GRUB (Italiano)">GRUB</a> Ha introdotto in supporto a <i>zstd</i> nella versione 2.04.  Assicurarsi di avere effettivamente aggiornato il bootloader installato nel proprio MBR / nella propria partizione ESP da detta versione eseguendo <code>grub-install</code> con le opzioni appropriate per il proprio setup BIOS/UEFI, dal momento che questa operazione non viene svolta automaticamente. Vedere <a rel="nofollow" class="external text" href="https://bugs.archlinux.org/task/63235">FS#63235</a>.</li>
+</ul>
+</div>
+<h4><span class="mw-headline" id="Visualizzazione_dei_tipi_e_dei_rapporti_di_compressione">Visualizzazione dei tipi e dei rapporti di compressione</span></h4>
+<p><span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=compsize">compsize</a></span> prende un elenco di file (o un intero file system Btrfs) e misura i tipi di compressione utilizzati e i rapporti di compressione effettivi.  Le dimensioni non compresse potrebbero non corrispondere a quelle restituite da altri programmi quali <span class="plainlinks archwiki-template-man" title="$ man 1 du"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/du.1">du(1)</a></span> in quanto ogni estensione viene computata una volta, anche se sono stati creati diversi link di riferimento ad essa, e anche se una sua parte non viene più utilizzata in nessun modo ma non è ancora stata eliminata.  L'opzione <code>-x</code> limita l'analisi a un singolo file system, risultando una soluzione utile in casi quali <code>compsize -x /</code> al fine di evitare il tentativo di ricerca all'interno di sottocartelle non Btrfs, che risulterebbe in un fallimento dell'intero processo.
+</p>
+<h3><span class="mw-headline" id="Sottovolumi">Sottovolumi</span></h3>
+<p>"Un sottovolume Btrfs non è un dispositivo a blocchi (e non può essere trattato come tale), bensì un sottovolume Btrfs può essere pensato come un namespace file POSIX. È possibile accedere a questo namespace tramite il sottovolume top-level del file system, oppure è possibile montarlo in modo indipendente." <a rel="nofollow" class="external autonumber" href="https://archive.kernel.org/oldwiki/btrfs.wiki.kernel.org/index.php/SysadminGuide.html#Subvolumes">[5]</a>
+</p>
+<p>Ogni file system Btrfs possiede un sottovolume top-level con ID 5. Questo sottovolume non può essere rimosso o sostituito da un altro sottovolume. Il percorso del sottovolume top-level all'interno del file system è <code>/</code> e gli altri sottovolumi sono disposti in configurazione <i>nidificata</i> al di sotto del sottovolume top-level. Tuttavia, i sottovolumi possono essere spostati all'interno del file system è il loro percorso può cambiare, mentre il loro ID no.
+</p>
+<p>Come impostazione di default, il sottovolume top-level viene montato al momento del montaggio del file system. Le opzioni invece consentono di <a href="#Montaggio_dei_sottovolumi">montare uno specifico sottovolume</a>.
+</p>
+<p>Uno dei principali casi di utilizzo per i sottovolumi sono gli <a href="#Snapshot">snapshot</a>.
+</p>
+<p>Vedere i seguenti link per maggiori dettagli:
+</p>
+<ul>
+<li><a rel="nofollow" class="external text" href="https://btrfs.readthedocs.io/en/latest/Subvolumes.html">Documentazione Btrfs</a></li>
+<li><a rel="nofollow" class="external text" href="https://archive.kernel.org/oldwiki/btrfs.wiki.kernel.org/index.php/SysadminGuide.html#Subvolumes">Sezione relativa ai sottovolumi della guida per gli amministratori di sistema della wiki Btrfs</a></li>
+<li><a rel="nofollow" class="external text" href="https://archive.kernel.org/oldwiki/btrfs.wiki.kernel.org/index.php/Trees.html">Pagina relativa ai tree della wiki Btrfs</a></li>
+</ul>
+<h4><span class="mw-headline" id="Creazione_di_un_sottovolume">Creazione di un sottovolume</span></h4>
+<p>Per creare un sottovolume, è necessario montare il file system Btrfs. Il nome del sottovolume viene definito utilizzando l'ultimo argomento.
+</p>
+<pre># btrfs subvolume create <i>/percorso/al/sottovolume</i>
+</pre>
+<h4><span class="mw-headline" id="Elencare_i_sottovolumi">Elencare i sottovolumi</span></h4>
+<p>Per visualizzare un elenco dei sottovolumi attualmente presenti e dei rispettivi id nel <code><i>percorso</i></code>:
+</p>
+<pre># btrfs subvolume list -p <i>percorso</i>
+</pre>
+<h4><span class="mw-headline" id="Cancellazione_di_un_sottovolume">Cancellazione di un sottovolume</span></h4>
+<p>Per cancellare un sottovolume:
+</p>
+<pre># btrfs subvolume delete <i>/percorso/al/sottovolume</i>
+</pre>
+<p>In alternativa, è possibile cancellare un sottovolume come si farebbe con una comune directory con i comandi (<code>rm -r</code>, <code>rmdir</code>).
+</p>
+<h4><span class="mw-headline" id="Montaggio_dei_sottovolumi">Montaggio dei sottovolumi</span></h4>
+<p>I sottovolumi possono essere montati come partizioni del file system utilizzando le flag di montaggio <code>subvol=<i>/percorso/al/sottovolume</i></code> o <code>subvolid=<i>id dell'oggetto</i></code>. Ad esempio, si potrebbe avere un sottovolume con nome <code>subvol_root</code> e lo si potrebbe montare come <code>/</code>.  Si potrebbero riprodurre le tradizionali partizioni del file system creando diversi sottovolumi al di sotto del livello top del file system e montandoli poi nei punti di montaggio rispettivamente appropriati. È preferibile eseguire il montaggio utilizzando <code>subvol=<i>/percorso/al/sottovolume</i></code>, anziché l'opzione subvolid, in quanto il subvolid potrebbe variare quando si ripristinano gli <a href="#Snapshot">snapshot</a>, richiedendo di conseguenza una modifica della configurazione di montaggio.
+</p>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Suggerimento:</strong> La modifica dei layout dei sottovolumi è resa più semplice evitando di utilizzare il sottovolume top-level (ID=5) come <code>/</code> (operazione eseguita di default). Prendere invece in considerazione l'opzione di creare un sottovolume che contenga i propri dati attuali e di montarlo come <code>/</code>.</div>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Nota:</strong> Da <span class="plainlinks archwiki-template-man" title="$ man 5 btrfs"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/btrfs.5#MOUNT_OPTIONS">btrfs(5) § MOUNT OPTIONS</a></span>:
+<dl><dd>La maggior parte delle opzioni di montaggio si applicano all'"intero file system<i>, pertanto solo le opzioni del primo sottovolume a essere montato avranno effetto. Questa limitazione è dovuta a carenze in termini di implementazione e la situazione potrebbe cambiare in futuro.</i>
+</dd></dl>
+<p>Vedere le <a rel="nofollow" class="external text" href="https://archive.kernel.org/oldwiki/btrfs.wiki.kernel.org/index.php/FAQ.html#Can_I_mount_subvolumes_with_different_mount_options.3F">FAQ della wiki Btrfs</a> per informazioni su quali opzioni di montaggio possano essere utilizzate per i singoli sottovolumi.
+</p>
+</div>
+<p>Vedere <a href="../en/Snapper.html#Suggested_filesystem_layout" title="Snapper">Snapper#Suggested filesystem layout</a>, <a rel="nofollow" class="external text" href="https://archive.kernel.org/oldwiki/btrfs.wiki.kernel.org/index.php/SysadminGuide.html#Managing_Snapshots">sezione relativa alla gestione degli snapshot della guida per gli amministratori di sistema della wiki Btrfs</a>, e <a rel="nofollow" class="external text" href="https://archive.kernel.org/oldwiki/btrfs.wiki.kernel.org/index.php/SysadminGuide.html#Layout">sezione relativa ai layout della medesima guida per gli amministratori di sistema</a> per esempi di layout del file system con utilizzo dei sottovolumi.
+</p>
+<p>Vedere <span class="plainlinks archwiki-template-man" title="$ man 5 btrfs"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/btrfs.5">btrfs(5)</a></span> per un elenco completo delle opzioni di montaggio specifiche del file system Btrfs.
+</p>
+<h4><span class="mw-headline" id="Montaggio_di_un_sottovolume_come_root">Montaggio di un sottovolume come root</span></h4>
+<p>Per utilizzare un sottovolume come punto di montaggio root è possibile renderlo il <a href="#Modifica_del_sottovolume_di_default">sottovolume di default</a>, oppure specificare il sottovolume mediante un <a href="../en/Kernel_parameters.html#Boot_loader_configuration" title="Kernel parameters">parametro del kernel</a> utilizzando <code>rootflags=subvol=<i>/percorso/al/sottovolume</i></code>. Modificare il punto di montaggio root nel file <code>/etc/fstab</code> e specificare l'opzione di montaggio <code>subvol=</code>. In alternativa, è possibile specificare il sottovolume utilizzando il suo id <code>rootflags=subvolid=<i>id dell'oggetto</i></code> come parametro del kernel e <code>subvolid=<i>id dell'oggetto</i></code> come opzione di montaggio in <code>/etc/fstab</code>. È preferibile eseguire il montaggio utilizzando <code>subvol=<i>/percorso/al/sottovolume</i></code>, anziché l'opzione subvolid, in quanto il subvolid potrebbe variare quando si ripristinano gli <a href="#Snapshot">snapshot</a>, richiedendo di conseguenza una modifica della configurazione di montaggio, in assenza della quale il sistema non si avvierà.
+</p>
+<h4><span class="mw-headline" id="Modifica_del_sottovolume_di_default">Modifica del sottovolume di default</span></h4>
+<p>Se non si specifica alcuna opzione di montaggio <code>subvol=</code> viene montato il sottovolume di default. Per modificare il sottovolume di default eseguire il seguente comando:
+</p>
+<pre># btrfs subvolume set-default <i>id del sottovolume</i> /
+</pre>
+<p>è possibile trovare il valore <i>id del sottovolume</i> <a href="#Elencare_i_sottovolumi">visualizzando l'elenco dei sottovolumi</a>.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Nota:</strong> Dopo aver modificato il sottovolume di default all'interno di un sistema con <a href="../en/GRUB.html" class="mw-redirect" title="GRUB (Italiano)">GRUB</a>, è consigliabile eseguire nuovamente il comando <code>grub-install</code> affinché il bootloader possa registrare le modifiche. Vedere <a rel="nofollow" class="external text" href="https://bbs.archlinux.org/viewtopic.php?pid=1615373">questo thread sul forum</a>.</div>
+<p>La modifica del sottovolume di default con <code>btrfs subvolume set-default</code> renderà inaccessibile il livello top del file system, a meno che non venga utilizzata l'opzione di montaggio <code>subvol=/</code> oppure <code>subvolid=5</code> <a rel="nofollow" class="external autonumber" href="https://btrfs.readthedocs.io/en/latest/Administration.html">[6]</a>.
+</p>
+<h3><span class="mw-headline" id="Quota">Quota</span></h3>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Attenzione:</strong> Qgroup non è stabile e la combinazione della funzione quota con (un numero eccessivo) di snapshot di sottovolumi può causare problemi in termini di prestazioni, ad esempio durante la cancellazione degli snapshot. In più sono presenti ulteriori <a rel="nofollow" class="external text" href="https://archive.kernel.org/oldwiki/btrfs.wiki.kernel.org/index.php/Quota_support.html#Known_issues">problemi noti</a>.</div>
+<p>Il supporto della funzione quota in Btrfs è implementato a livello di un sottovolume mediante l'utilizzo di gruppi quota o qgroup: a ogni sottovolume viene assegnato come impostazione di default un gruppo quota sotto forma di <i>0/id_sottovolume</i>. Tuttavia, se lo si desidera, è possibile creare un gruppo quota utilizzando qualunque numero.
+</p>
+<p>Per utilizzare i qgroup, è necessario dapprima abilitare la funzione quota con il comando
+</p>
+<pre># btrfs quota enable <i>percorso</i>
+</pre>
+<p>Da questo momento in poi, i sottovolumi di nuova creazione saranno controllati da questi gruppi.
+Al fine di abilitarli in modo retrospettivo per i sottovolumi già esistenti, abilitare normalmente la funzione quota, dopodiché creare un qgroup (gruppo quota) per ciascuno di questi sottovolumi utilizzando i rispettivi <i>id_sottovolume</i> ed eseguirne una nuova scansione:
+</p>
+<pre># btrfs subvolume list <i>path</i> | cut -d' ' -f2 | xargs -I{} -n1 btrfs qgroup create 0/{} <i>percorso</i>
+# btrfs quota rescan <i>percorso</i>
+</pre>
+<p>I gruppi quota in Btrfs formano una gerarchia ad albero, in cui i qgroup sono collegati ai sottovolumi. I limiti di dimensioni sono impostati a livello del singolo qgroup e si applicano allorché venga raggiunto qualsivoglia limite all'interno dell'albero contenente un dato sottovolume.
+</p>
+<p>I limiti nei gruppi quota possono essere applicati sia sull'utilizzo totale dei dati, sull'utilizzo dei dati non condivisi, sull'utilizzo dei dati compressi o su entrambi. La copia e l'eliminazione dei file possono entrambe influire sui limiti, dal momento che il limite per i dati non condivisi di un altro qgroup può variare se i file del volume originale vengono cancellati e ne rimane solo una copia. Ad esempio, uno snapshot appena eseguito condivide quasi tutti i blocchi con il sottovolume originale, le nuove scritture su ognuno dei sottovolumi si muoveranno in direzione del limite esclusivo, mentre le cancellazioni dei dati in comune in un volume provocherà un movimento in direzione del limite esclusivo nell'altro.
+</p>
+<p>Per applicare un limite a un qgroup, utilizzare il comando <code>btrfs qgroup limit</code>. A seconda del proprio tipo di utilizzo, utilizzare un limite totale, un limite non condiviso (<code>-e</code>) o un limite compresso (<code>-c</code>).
+Per visualizzare l'utilizzo e i limiti per un dato percorso all'interno del file system, utilizzare il comando
+</p>
+<pre># btrfs qgroup show -reF <i>percorso</i>
+</pre>
+<h3><span class="mw-headline" id="Intervallo_di_commit">Intervallo di commit</span></h3>
+<p>La frequenza con cui i dati vengono scritti nel file system è determinata da Btrfs e da impostazioni a livello di sistema. Btrfs è impostato di default su un intervallo di checkpoint di 30 secondi nel quali viene eseguito il commit dei nuovi dati nel file system. Questa impostazione può essere modificata aggiungendo l'opzione di montaggio <code>commit</code> in <code>/etc/fstab</code> per la partizione Btrfs.
+</p>
+<pre>LABEL=arch64 / btrfs defaults,compress=zstd,commit=120 0 0
+</pre>
+<p>Inoltre anche le impostazioni a livello di sistema influenzano gli intervalli di commit. Tali impostazioni comprendono i file in <code>/proc/sys/vm/*</code> ed esulano dall'argomento trattato nel presente articolo wiki. La documentazione del kernel relativa a queste impostazioni è disponibile all'indirizzo <a rel="nofollow" class="external free" href="https://docs.kernel.org/admin-guide/sysctl/vm.html">https://docs.kernel.org/admin-guide/sysctl/vm.html</a>.
+</p>
+<h3><span class="mw-headline" id="TRIM_dei_drive_SSD">TRIM dei drive SSD</span></h3>
+<p>Un file system Btrfs è in grado di liberare i blocchi inutilizzati da un drive SSD che supporti il comando TRIM. Il supporto del discard asincrono è disponibile utilizzando l'opzione di montaggio <code>discard=async</code>, ed è abilitato di default a partire dalla versione 6.2 del kernel <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=linux">linux</a></span>. Le estensioni liberate non sono scartate immediatamente, bensì raggruppate insieme per essere sottoposte in un secondo momento all'operazione di trim da parte di un thread separato, andando in questo modo a migliorare la latenza di commit.
+</p>
+<p>La funzione di discard asincrono può essere utilizzata in sicurezza unitamente alle operazioni di trim periodico <a rel="nofollow" class="external autonumber" href="https://lists.fedoraproject.org/archives/list/devel@lists.fedoraproject.org/thread/MLZIPQUXMJFRVSFJS6B2ACDKTYNSX3AX/">[7]</a>.
+</p>
+<p>Ulteriori informazioni su come abilitare e utilizzare la funzione di TRIM sono disponibili alla pagina <a href="../en/Solid_state_drive.html#TRIM" class="mw-redirect" title="Solid State Drives">Solid State Drives#TRIM</a>.
+</p>
+<h2><span class="mw-headline" id="Utilizzo">Utilizzo</span></h2>
+<h3><span class="mw-headline" id="Swap_file">Swap file</span></h3>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Nota:</strong> Gli swap file non sono supportati nei file system che si estendono su più dispositivi. Vedere <span class="plainlinks archwiki-template-man" title="$ man 5 btrfs"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/btrfs.5#SWAPFILE_SUPPORT">btrfs(5) § SWAPFILE SUPPORT</a></span> per informazioni su tutte le limitazioni.
+</div>
+<p>Per inizializzare in modo corretto uno swap file, creare dapprima un sottovolume di cui non vengano effettuati snapshot per alloggiare il file, ad es.
+</p>
+<pre># btrfs subvolume create /swap
+</pre>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Suggerimento:</strong> Prendere in considerazione l'opzione di creare il sottovolume direttamente al di sotto del sottovolume di livello top, ad es. <code>@swap</code>. Dopodiché, assicurarsi che il sottovolume sia <a href="#Montaggio_dei_sottovolumi">montato</a> in <code>/swap</code> (o qualunque altra posizione accessibile).</div>
+<p>Creare lo swap file:
+</p>
+<pre># btrfs filesystem mkswapfile --size 4g --uuid clear /swap/swapfile
+</pre>
+<p>Omettendo la flag If <code>--size</code>, viene utilizzato il valore di default di 2GiB.
+</p>
+<p>Attivare lo swap file:
+</p>
+<pre># swapon /swap/swapfile
+</pre>
+<p>Infine, modificare la configurazione del file <a href="../it/Fstab.html" title="Fstab (Italiano)">fstab</a> aggiungendo una voce per lo swap file:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/fstab</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">/swap/swapfile none swap defaults 0 0
+</pre>
+<p>Per maggiori informazioni vedere <a href="../it/Fstab.html#Utilizzo" title="Fstab (Italiano)">fstab (Italiano)#Utilizzo</a>.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Nota:</strong> È anche possibile creare lo swap file manualmente <a href="#Disabilitazione_della_funzione_CoW">impostando</a> l'attributo <code>No_COW</code> per l'intero sottovolume con il comando <code>chattr</code>, per poi seguire i passaggi descritti in <a href="../en/Swap.html#Swap_file_creation" title="Swap">Swap#Swap file creation</a>. Vedere <span class="plainlinks archwiki-template-man" title="$ man 5 btrfs"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/btrfs.5#SWAPFILE_SUPPORT">btrfs(5) § SWAPFILE SUPPORT</a></span> per un metodo alternativo.</div>
+<p>La configurazione dell'ibernazione in uno swap è descritta in <a href="../en/Power_management/Suspend_and_hibernate.html#Acquire_swap_file_offset" title="Power management/Suspend and hibernate">Power management/Suspend and hibernate#Acquire swap file offset</a>.
+</p>
+<h3>
+<span id="Visualizzazione_dello_spazio_utilizzato.2Flibero"></span><span class="mw-headline" id="Visualizzazione_dello_spazio_utilizzato/libero">Visualizzazione dello spazio utilizzato/libero</span>
+</h3>
+<p>Gli strumenti userspace linux di uso generale come ad esempio <span class="plainlinks archwiki-template-man" title="$ man 1 df"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/df.1">df(1)</a></span> forniranno valori errati in relazione allo spazio libero su una partizione Btrfs. Si raccomanda l'utilizzo di <code>btrfs filesystem usage</code> per visualizzare i valori relativi alle partizioni Btrfs. Ad esempio, per ottenere statistiche complete e dettagliate sull'allocazione e l'utilizzo del dispositivo eseguire il seguente comando:
+</p>
+<pre># btrfs filesystem usage /
+</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Nota:</strong> Il comando <code>btrfs filesystem usage</code> allo stato attuale non funziona correttamente i livelli RAID <code>RAID5/RAID6</code>.</div>
+<p>In alternativa, <code>btrfs filesystem df</code> permette di effettuare un rapido controllo dell'utilizzo dello spazio allocato senza la necessità di eseguire come root il seguente comando:
+</p>
+<pre>$ btrfs filesystem df /
+</pre>
+<p>Vedere <a rel="nofollow" class="external autonumber" href="https://archive.kernel.org/oldwiki/btrfs.wiki.kernel.org/index.php/FAQ.html#How_much_free_space_do_I_have.3F">[8]</a> per maggiori informazioni.
+</p>
+<p>Le medesime limitazioni si applicano agli strumenti che analizzano l'utilizzo dello spazio per alcuni subset del file system, come <span class="plainlinks archwiki-template-man" title="$ man 1 du"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/du.1">du(1)</a></span> o <span class="plainlinks archwiki-template-man" title="$ man 1 ncdu"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/ncdu.1">ncdu(1)</a></span>, dal momento che questi ultimi non prendono in considerazione i link di riferimento, gli snapshot e la compressione. In luogo di questi strumenti, vedere <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/btdu/">btdu</a></span><sup><small>AUR</small></sup> e <a href="#Visualizzazione_dei_tipi_e_dei_rapporti_di_compressione">compsize</a> per delle alternative che tengano in considerazione le specificità di Btrfs.
+</p>
+<h3><span class="mw-headline" id="Deframmentazione">Deframmentazione</span></h3>
+<p>Btrfs supporta la deframmentazione online tramite l'opzione di montaggio <code>autodefrag</code>; vedere <span class="plainlinks archwiki-template-man" title="$ man 5 btrfs"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/btrfs.5#MOUNT_OPTIONS">btrfs(5) § MOUNT OPTIONS</a></span>. Per eseguire manualmente la deframmentazione della propria partizione root, utilizzare il seguente comando:
+</p>
+<pre># btrfs filesystem defragment -r /
+</pre>
+<p>Utilizzando questo comando senza lo switch <code>-r</code> farà sì che soltanto i metadati conservati nel sottovolume contenente la directory vengano deframmentati. Ciò consente di eseguire la deframmentazione di file singoli semplicemente specificandone il percorso.
+</p>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Attenzione:</strong> Deframmentare un file che possieda una copia COW (sia una copia in conseguenza di una snapshot o una copia creata con <code>cp</code> o bcp) utilizzando al contempo lo switch <code>-c</code> con un algoritmo di compressione può produrre come risultato la creazione di due file non correlati, andando in ultima analisi ad aumentare l'utilizzo del disco.</div>
+<h3><span class="mw-headline" id="RAID">RAID</span></h3>
+<p>Btrfs offre a livello nativo una soluzione "RAID" per i <a href="#File_system_su_pi%C3%B9_dispositivi">#File system su più dispositivi</a>. Tra le funzioni degne di nota che differenziano la soluzione RAID Btrfs da quella <a href="../en/RAID.html" class="mw-redirect" title="RAID (Italiano)">mdadm</a> ci sono gli array ridondanti a correzione autonoma e il bilanciamento online. Vedere <a rel="nofollow" class="external text" href="https://archive.kernel.org/oldwiki/btrfs.wiki.kernel.org/index.php/Using_Btrfs_with_Multiple_Devices.html">la pagina wiki Btrfs</a> per maggiori informazioni. Inoltre, la pagina Btrfs per gli amministratori di sistema <a rel="nofollow" class="external text" href="https://archive.kernel.org/oldwiki/btrfs.wiki.kernel.org/index.php/SysadminGuide.html#RAID_and_data_replication">possiede una sezione</a> che fornisce informazioni di natura più tecnica.
+</p>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Attenzione:</strong> Il codice di parità RAID (RAID 5/6) possiede diversi bug che possono causare perdite di dati di grave entità. Vedere la <a rel="nofollow" class="external text" href="https://btrfs.readthedocs.io/en/latest/btrfs-man5.html#raid56-status-and-recommended-practices">pagina RAID5/6</a> della wiki Btrfs e un bug report nella <a rel="nofollow" class="external text" href="https://lore.kernel.org/linux-btrfs/8695beeb-f991-28c4-cf6b-8c92339e468f@inwind.it/">mailing list linux-btrfs</a> per informazioni maggiormente dettagliate. Nelle mese di giugno 2020, qualcuno ha postato un <a rel="nofollow" class="external text" href="https://lore.kernel.org/linux-btrfs/20200627030614.GW10769@hungrycats.org/">elenco esaustivo delle attuali problematiche</a> e un'<a rel="nofollow" class="external text" href="https://lore.kernel.org/linux-btrfs/20200627032414.GX10769@hungrycats.org/">utile guida per la loro risoluzione</a>. </div>
+<h4><span class="mw-headline" id="Scrub">Scrub</span></h4>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../File:Tango-view-fullscreen.svg" decoding="async" width="48" height="48" class="mw-file-element"></span></span><b>This article or section needs expansion.</b></p>
+<div>
+<b>Reason:</b> <a rel="nofollow" class="external text" href="https://unix.stackexchange.com/questions/556816/does-btrfs-scrub-examine-subvolume-or-the-device-that-subvolume-resides-on">La funzione scrub di Btrfs esamina il sottovolume o il dispositivo che ospita tale sottovolume?</a> (Discuss in <a rel="nofollow" class="external text" href="../it/Talk:Btrfs.html">Talk:Btrfs (Italiano)</a>)</div>
+</div>
+<p>Il <a rel="nofollow" class="external text" href="https://btrfs.readthedocs.io/en/latest/Glossary.html">glossario della wiki Btrfs</a> afferma che lo scrub Btrfs è "uno strumento per la verifica online del file system. Legge tutti i dati e i metadati sul file system e usa i checksum e le copie duplicate dell'archiviazione RAID per identificare e riparare qualunque dato corrotto."
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Nota:</strong> Un processo di scrub in corso di esecuzione impedirà al sistema di andare in sospensione, vedere <a rel="nofollow" class="external text" href="https://lore.kernel.org/linux-btrfs/20140227190656.GA28338@merlins.org/">questo thread</a> per i dettagli.</div>
+<h5><span class="mw-headline" id="Avvio_manuale">Avvio manuale</span></h5>
+<p>Per avviare uno scrub (in background) del file system che contiene <code>/</code> eseguire:
+</p>
+<pre># btrfs scrub start /
+</pre>
+<p>Per verificare lo stato di un processo di scrub in esecuzione eseguire:
+</p>
+<pre># btrfs scrub status /
+</pre>
+<h5><span class="mw-headline" id="Avvio_con_un_servizio_o_un_time">Avvio con un servizio o un time</span></h5>
+<p>Il pacchetto <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=btrfs-progs">btrfs-progs</a></span> fornisce l'unità <code>btrfs-scrub@.timer</code> per l'esecuzione a cadenza mensile dello scrub del punto di montaggio specificato. <a href="../it/Help:Reading.html#Controllo_delle_unit%C3%A0_systemd" title="Help:Reading (Italiano)">Abilitare</a> il timer con un percorso su cui si sia eseguita l'operazione di escape, ad es. <code>btrfs-scrub@-.timer</code> per <code>/</code> e <code>btrfs-scrub@home.timer</code> per <code>/home</code>. Per eseguire l'escape del percorso è possibile utilizzare <code>systemd-escape -p <i>/pecorso/del/punto di montaggio</i></code>; vedere <span class="plainlinks archwiki-template-man" title="$ man 1 systemd-escape"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd-escape.1">systemd-escape(1)</a></span> per i dettagli.
+</p>
+<p>È inoltre possibile eseguire lo scrub <a href="../it/Help:Reading.html#Controllo_delle_unit%C3%A0_systemd" title="Help:Reading (Italiano)">abilitando</a> <code>btrfs-scrub@.service</code> (con il medesimo percorso). Il vantaggio di questa soluzione rispetto all'esecuzione di <code>btrfs scrub</code> (come utente root) è la registrazione dei risultati dello scrub nel log del <a href="../en/Systemd/Journal.html" class="mw-redirect" title="Systemd (Italiano)/Journal (Italiano)">systemd journal</a>.
+</p>
+<p>Nei drive NVMe di grandi dimensioni con insufficiente capacità di raffreddamento (ad es. in un laptop), il processo di scrub può leggere il drive a una velocità e per un tempo sufficiente a portarlo a temperature molto elevate. Nel caso si eseguano gli scrub con systemd, è possibile limitare con facilità la velocità di scrub con l'opzione <code>IOReadBandwidthMax</code> descritta in <span class="plainlinks archwiki-template-man" title="$ man 5 systemd.resource-control"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd.resource-control.5">systemd.resource-control(5)</a></span> utilizzando un <a href="../it/Systemd.html#File_di_drop-in" title="Systemd (Italiano)">drop-in file</a>.
+</p>
+<h4><span class="mw-headline" id="Bilanciamento">Bilanciamento</span></h4>
+<p>"Un bilanciamento passa nuovamente tutti i dati presenti nel file system attraverso l'allocatore. La sua funzione principale è il ribilanciamento dei dati nel file system su tutti i dispositivi quando un dispositivo viene aggiunto o rimosso. Un bilanciamento provvederà a rigenerare le copie mancanti per i livelli RAID ridondanti, in caso di guasto di un dispositivo." <a rel="nofollow" class="external autonumber" href="https://btrfs.readthedocs.io/en/latest/Glossary.html">[9]</a> Vedere la <a rel="nofollow" class="external text" href="https://archive.kernel.org/oldwiki/btrfs.wiki.kernel.org/index.php/FAQ.html#What_does_.22balance.22_do.3F">pagina FAQ upstream</a>.
+</p>
+<p>In un file system su un dispositivo singolo, un bilanciamento può inoltre essere utile al fine di ridurre (temporaneamente) la quantità di porzioni allocate ma non utilizzate di (meta)dati. Talvolta ciò si rende necessario per risolvere <a rel="nofollow" class="external text" href="https://archive.kernel.org/oldwiki/btrfs.wiki.kernel.org/index.php/FAQ.html#Help.21_Btrfs_claims_I.27m_out_of_space.2C_but_it_looks_like_I_should_have_lots_left.21">problemi di tipo "file system pieno"</a>.
+</p>
+<pre># btrfs balance start --bg /
+# btrfs balance status /
+</pre>
+<h3><span class="mw-headline" id="Snapshot">Snapshot</span></h3>
+<p>"Uno snapshot è semplicemente un sottovolume che condivide i propri dati (e metadati) con alcuni altri sottovolumi, mediante l'utilizzo delle funzioni COW di Btrfs." Vedere la <a rel="nofollow" class="external text" href="https://archive.kernel.org/oldwiki/btrfs.wiki.kernel.org/index.php/SysadminGuide.html#sezione">relativa ai sottovolumi della guida per gli amministratori di sistema della wiki Btrfs</a> per maggiori dettagli.
+</p>
+<p>Per creare uno snapshot:
+</p>
+<pre># btrfs subvolume snapshot <i>sorgente</i> [<i>destinazione</i>/]<i>nome</i>
+</pre>
+<p>Per creare uno snapshot in sola lettura, aggiungere la flag <code>-r</code>. Per creare una versione scrivibile di uno snapshot in sola lettura, è sufficiente creare uno snapshot di quest'ultimo.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Nota:</strong> 
+<ul>
+<li>È possibile convertire uno snapshot in loco da sola lettura a scrivibile con il comando <code>btrfs property set -f -ts '/percorso/dello/snapshot' ro false</code>. Tuttavia questa operazione non è consigliata in quanto <a rel="nofollow" class="external text" href="https://lore.kernel.org/linux-btrfs/06e92a0b-e71b-eb21-edb5-9d2a5513b718@gmail.com/">provoca problemi</a> con ogni operazione di invio/ricezione incrementale futura. Effettuare un nuovo snapshot scrivibile evita questo tipo di problema.</li>
+<li>Gli snapshot non sono ricorsivi. Ogni sottovolume nidificato sarà una directory vuota all'interno dello snapshot.</li>
+</ul>
+</div>
+<h3>
+<span id="Invio.2Fricezione"></span><span class="mw-headline" id="Invio/ricezione">Invio/ricezione</span>
+</h3>
+<p>Un sottovolume può essere inviato all'output stdout o a un file utilizzando il comando <code>send</code>. Questa operazione rivela la propria massima utilità di norma quando abbinata mediante pipe a un comando Btrfs <code>receive</code>. Ad esempio, per inviare uno snapshot con nome <code>/root_backup</code> (che potrebbe essere un backup di uno snapshot di <code>/</code> eseguito in precedenza) a <code>/backup</code>, si dovrebbe eseguire il seguente comando:
+</p>
+<pre># btrfs send /root_backup | btrfs receive /backup
+</pre>
+<p>Lo snapshot inviato <i>deve</i> essere in sola lettura. Il comando precedente è utile per copiare un sottovolume su un dispositivo esterno (ad es. un disco USB montato in <code>/backup</code> come sopra).
+</p>
+<p>Il sottovolume verrà creato nella posizione indicata in ricezione. Non dovrà essere creato manualmente.
+</p>
+<p>Un altro esempio che crea: <code>/mnt/arch-v2/subvolumes/@var</code>:
+</p>
+<pre># btrfs send --proto 2 --compressed-data '/mnt/arch/snapshots/@var' | btrfs receive '/mnt/arch-v2/subvolumes/'
+</pre>
+<p>I parametri <code>--proto 2</code> e <code>--compressed-data</code> utilizzati nell'esempio possono risultare utili per effettuare l'invio in modo più efficiente (dando per assunta la presenza di dati compressi).
+</p>
+<p>È anche possibile inviare esclusivamente la differenza tra due snapshot. Ad esempio, se è già stata inviata una copia di <code>root_backup</code> come sopra ed è stato effettuato un nuovo snapshot in sola lettura del proprio sistema con nome <code>root_backup_new</code>, per inviare solo la differenza incrementale a <code>/backup</code>, eseguire il seguente comando:
+</p>
+<pre># btrfs send -p /root_backup /root_backup_new | btrfs receive /backup
+</pre>
+<p>Ora un nuovo sottovolume con nome <code>root_backup_new</code> sarà presente in <code>/backup</code>.
+</p>
+<p>Vedere <a rel="nofollow" class="external text" href="https://archive.kernel.org/oldwiki/btrfs.wiki.kernel.org/index.php/Incremental_Backup.html">pagina relativa ai backup incrementali della wiki Btrfs</a> e <a href="#Backup_incrementale_verso_un_drive_esterno">#Backup incrementale verso un drive esterno</a> per informazioni su come utilizzare questa funzione per eseguire backup incrementali e sugli strumenti disponibili per automatizzare il processo.
+</p>
+<h3><span class="mw-headline" id="Deduplicazione">Deduplicazione</span></h3>
+<p>Grazie alla funzione copy-on-write, Btrfs è in grado di copiare file o interi sottovolumi senza effettivamente copiare i dati. Tuttavia, ogniqualvolta un file viene modificato, viene creata una nuova copia <i>effettiva</i>. La deduplicazione rappresenta un'ulteriore evoluzione in questo senso in quanto identifica attivamente i blocchi di dati che condividono sequenze comuni e li combina in un'estensione con le medesime caratteristiche semantiche copy-on-write.
+</p>
+<p>Gli strumenti dedicati alla deduplicazione di una partizione formattata con file system Btrfs includono <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=duperemove">duperemove</a></span> e <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=bees">bees</a></span>. Si potrebbe anche desiderare deduplicare semplicemente i dati a livello di file anziché utilizzare ad es. <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/rmlint-git/">rmlint-git</a></span><sup><small>AUR</small></sup>, <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=rdfind">rdfind</a></span>, <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/jdupes/">jdupes</a></span><sup><small>AUR</small></sup> o <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/dduper-git/">dduper-git</a></span><sup><small>AUR</small></sup>. Per una panoramica delle caratteristiche disponibili di questi programmi e per informazioni aggiuntive, consultare la relativa <a rel="nofollow" class="external text" href="https://btrfs.readthedocs.io/en/latest/Deduplication.html">voce della wiki upstream</a>.
+</p>
+<h3><span class="mw-headline" id="Ridimensionamento">Ridimensionamento</span></h3>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Attenzione:</strong> Per evitare la perdita di dati, assicurarsi di eseguire un backup dei propri dati prima di iniziare l'operazione di ridimensionamento.</div>
+<p>È possibile aumentare le dimensioni di un file system fino al massimo spazio disponibile sul dispositivo, oppure specificarne le dimensioni esatte. Assicurarsi di aumentare le dimensioni del dispositivo o del volume logico prima di tentare di aumentare le dimensioni del file system.
+Quando si specifica la dimensione esatta del file system su un dispositivo, sia che le dimensioni del file system stesso vengano diminuite o aumentate, assicurarsi che le nuove dimensioni soddisfino le seguenti condizioni:
+</p>
+<ul>
+<li>Le nuove dimensioni devono essere maggiori di quelle dei dati esistenti; in caso contrario si verificherà una perdita di dati.</li>
+<li>Le nuove dimensioni devono essere uguali o inferiori alle dimensioni attuali del dispositivo, poiché il file system non può estendersi oltre lo spazio disponibile.</li>
+</ul>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Nota:</strong> Se si pianifica di diminuire le dimensioni del volume logico che contiene il file system, assicurarsi di diminuire le dimensioni del file system prima di tentare di ridurre le dimensioni del dispositivo o del volume logico.</div>
+<p>Per estendere le dimensioni del file system al massimo spazio disponibile sul dispositivo:
+</p>
+<pre># btrfs filesystem resize max /
+</pre>
+<p>Per estendere il file system a dimensioni specifiche:
+</p>
+<pre># btrfs filesystem resize <i>dimensioni</i> /
+</pre>
+<p>Sostituire a <code><i>dimensioni</i></code> il valore delle dimensioni desiderate. È inoltre possibile specificare le unità in cui il valore è espresso, come ad esempio K (kibibyte), M (mebibyte), o G (gibibyte). In alternativa, è possibile specificare un aumento o una riduzione delle dimensioni attuali inserendo rispettivamente un segno più (+) o o meno (-) davanti al valore:
+</p>
+<pre># btrfs filesystem resize +<i>dimensioni</i> /
+# btrfs filesystem resize -<i>dimensioni</i> /
+</pre>
+<h2><span class="mw-headline" id="Problemi_noti">Problemi noti</span></h2>
+<p>Prima di utilizzare questo file system è opportuno conoscerne alcune limitazioni.
+</p>
+<h3><span class="mw-headline" id="Cifratura">Cifratura</span></h3>
+<p>Btrfs non possiede un supporto integrato alla cifratura, ma questa funzionalità <a rel="nofollow" class="external text" href="https://lwn.net/Articles/700487/">potrebbe</a> essere aggiunta in futuro. Gli utenti possono cifrare la partizione prima di eseguire <code>mkfs.btrfs</code>. Vedere <a href="../en/Dm-crypt/Encrypting_an_entire_system.html" title="Dm-crypt/Encrypting an entire system">dm-crypt/Encrypting an entire system</a>.
+</p>
+<p>I file system Btrfs esistenti possono utilizzare soluzioni quali <a href="../en/EncFS.html" title="EncFS">EncFS</a> o <a href="../en/VeraCrypt.html" class="mw-redirect" title="TrueCrypt">TrueCrypt</a>, che possono però escludere alcune funzionalità di Btrfs.
+</p>
+<h3><span class="mw-headline" id="Problemi_legati_a_btrfs_check">Problemi legati a btrfs check</span></h3>
+<p>Lo strumento <code>btrfs check</code> presenta alcune problematiche note e non dovrebbe essere eseguito prima di essersi informati dettagliatamente in merito; vedere la sezione <a href="#btrfs_check">#btrfs check</a>.
+</p>
+<h2><span class="mw-headline" id="Trucchi_e_suggerimenti">Trucchi e suggerimenti</span></h2>
+<h3><span class="mw-headline" id="Disco_Btrfs_privo_di_partizioni">Disco Btrfs privo di partizioni</span></h3>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Attenzione:</strong> Questo tipo di setup non è adatto alla maggior parte degli utenti, i quali dovrebbero preferibilmente installare Btrfs su una normale partizione. Inoltre, GRUB scoraggia fortemente l’installazione su un disco privo di partizioni.</div>
+<p>Btrfs può occupare un intero dispositivo di archiviazione dati e sostituire gli schemi di partizionamento <a href="../en/Partitioning.html#Master_Boot_Record" class="mw-redirect" title="MBR">MBR</a> o <a href="../en/Partitioning.html#GUID_Partition_Table" class="mw-redirect" title="GPT">GPT</a> mediante l’utilizzo dei <a href="#Sottovolumi">sottovolumi</a> per simulare le partizioni. Tuttavia, l’utilizzo di una configurazione priva di partizioni non è richiesto per semplicemente <a href="#Creazione_del_file_system">creare un file system Btrfs</a> in una <a href="../en/Partitioning.html" class="mw-redirect" title="Partitioning (Italiano)">partizione</a> creata utilizzando un altro metodo. Sono presenti alcune limitazioni in relazione alle configurazioni prive di partizioni con un singolo disco:
+</p>
+<ul>
+<li>Non è possibile creare altri <a href="../it/File_systems.html" title="File systems (Italiano)">file system</a> su un’altra partizione sul medesimo disco.</li>
+<li>A causa di quanto specificato nel punto precedente, non è possibile avere una partizione <a href="../en/EFI_system_partition.html" class="mw-redirect" title="ESP">ESP</a> su questo disco. Per eseguire il boot <a href="../en/Unified_Extensible_Firmware_Interface.html" class="mw-redirect" title="Unified Extensible Firmware Interface (Italiano)">UEFI</a> è necessario un altro dispositivo.</li>
+</ul>
+<p>Per sovrascrivere la tabella delle partizioni esistente con Btrfs, eseguire il seguente comando:
+</p>
+<pre># mkfs.btrfs /dev/sd<i>X</i>
+</pre>
+<p>Ad esempio, utilizzare <code>/dev/sda</code> anziché <code>/dev/sda1</code>. Il secondo comando eseguirebbe la formattazione di una partizione esistente anziché sostituire l’intero schema delle partizioni. Dal momento che la partizione root è in Btrfs, assicurarsi che <code>btrfs</code> sia compilato all’interno del kernel, oppure inserire <code>btrfs</code> in <a href="../en/Mkinitcpio.html#MODULES" class="mw-redirect" title="Mkinitcpio.conf">mkinitcpio.conf#MODULES</a> e <a href="../en/Mkinitcpio.html#Image_creation_and_activation" class="mw-redirect" title="Regenerate the initramfs">rigenerare l'initramfs</a>.
+</p>
+<p>Installare il <a href="../en/Arch_boot_process.html#Boot_loader" class="mw-redirect" title="Boot loader">boot loader</a> come si farebbe per un dispositivo di archiviazione dati con un <a href="../en/Partitioning.html#Master_Boot_Record" class="mw-redirect" title="Master Boot Record">Master Boot Record</a>. Vedere <a href="../en/Syslinux.html#Manually" title="Syslinux">Syslinux#Manually</a> o <a href="../en/GRUB/Tips_and_tricks.html#Install_to_partition_or_partitionless_disk" title="GRUB/Tips and tricks">GRUB/Tips and tricks#Install to partition or partitionless disk</a>. Se il proprio kernel non effettua il boot restituendo l’errore <code>Failed to mount /sysroot.</code>, aggiungere <code>GRUB_PRELOAD_MODULES="btrfs"</code> nel file <code>/etc/default/grub</code> e <a href="../en/GRUB.html#Generate_the_main_configuration_file" title="GRUB">generare</a> il file di configurazione di grub.
+</p>
+<h3>
+<span id="Conversione_da_Ext3.2F4_a_Btrfs"></span><span class="mw-headline" id="Conversione_da_Ext3/4_a_Btrfs">Conversione da Ext3/4 a Btrfs</span>
+</h3>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Attenzione:</strong> Sono presenti molti report nella mailing list di btrfs che segnalano conversioni incomplete/corrotte/fallite. Assicurarsi di possedere dei backup "funzionanti" dei dati di cui si desideri escludere in modo assoluto la perdita. Vedere <a rel="nofollow" class="external text" href="https://archive.kernel.org/oldwiki/btrfs.wiki.kernel.org/index.php/Conversion_from_Ext3.html">conversione da Ext3</a> nella wiki Btrfs per maggiori informazioni.
+</div>
+<p>Eseguire il boot da un CD di installazione, dopodiché effettuare la conversione eseguendo:
+</p>
+<pre># btrfs-convert /dev/<i>partizione</i>
+</pre>
+<p>Montare la partizione e verificare l'avvenuta conversione controllando i file.  Assicurarsi di modificare il file <code>/etc/fstab</code> adattandolo alla modifica eseguita (<b>type</b> diviene <code>btrfs</code> e <b>fs_passno</b> [l'ultimo campo] diviene <code>0</code> dal momento che Btrfs non effettua un controllo del file system durante il boot). È inoltre importante notare che lo UUID della partizione risulterà diverso, pertanto è necessario aggiornare fstab di conseguenza qualora si utilizzino gli UUID. Eseguire il <code>chroot</code> nel sistema e rigenerare l'elenco del menu del proprio boot loader (vedere <a href="../en/Install_Arch_Linux_from_existing_Linux.html" class="mw-redirect" title="Install Arch Linux from existing Linux (Italiano)">Install Arch Linux from existing Linux (Italiano)</a>). Nel caso si stia convertendo un file system di root, mentre si è ancora nell'ambiente di chroot, eseguire <code>mkinitcpio -p linux</code> per rigenerare l'initramfs o il sistema non potrà eseguire il boot.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Nota:</strong> Se si verifica qualunque errore che renda impossibile montare la partizione Btrfs appena creata o scrivervi dei dati, esiste sempre la possibilità di effettuare un rollback a condizione che il sottovolume di backup <code>/ext2_saved</code> sia ancora presente. Utilizzare il comando <code>btrfs-convert -r /dev/<i>partition</i></code> per eseguire il rollback; ciò annullerà ogni modifica al file system Btrfs appena creato.</div>
+<p>Una volta confermata l'assenza di problemi, completare la conversione cancellando il sottovolume di backup <code>ext2_saved</code>. Attenzione: in assenza di questo sottovolume non è possibile ritornare a ext3/4.
+</p>
+<pre># btrfs subvolume delete /ext2_saved
+</pre>
+<p>Infine, eseguire il <a href="#Bilanciamento">bilanciamento</a> del file system per liberare lo spazio.
+</p>
+<p>Ricordarsi che alcune applicazioni precedentemente installate devono essere adattate a Btrfs.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Nota:</strong> La conversione da Ext3/4 a Btrfs è un'operazione che richiede molto tempo. Per un file system da 4 TiB su un normale disco HDD, può richiedere fino a 10 ore.</div>
+<h3><span class="mw-headline" id="Riparazione_delle_corruzioni">Riparazione delle corruzioni</span></h3>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Attenzione:</strong> Lo strumento <code>btrfs check</code> possiede delle problematiche note, vedere la sezione <a href="#btrfs_check">#btrfs check</a>
+</div>
+<p><i>btrfs-check</i> non può essere utilizzato su un file system montato. Per poter utilizzare <i>btrfs-check</i> senza effettuare il boot da una live USB, aggiungerlo all'initramfs:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/mkinitcpio.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">BINARIES=(btrfs)</pre>
+<p><a href="../en/Mkinitcpio.html#Image_creation_and_activation" class="mw-redirect" title="Regenerate the initramfs">Rigenerare l'initramfs</a>.
+</p>
+<p>Dopodiché se dovesse verificarsi un problema durante il boot, lo strumento sarà disponibile per eseguire l'opportuna riparazione.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Nota:</strong> Se il processo fsck deve invalidare la space cache (e/o altre cache?), è normale che il successivo boot si arresti per un po' di tempo (potrebbero essere visualizzati messaggi nella console relativamente a una transazione btrfs in sospeso). Dopo un po' di tempo il sistema dovrebbe essere in grado di ripristinarsi.</div>
+<p>Vedere <span class="plainlinks archwiki-template-man" title="$ man 8 btrfs-check"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/btrfs-check.8">btrfs-check(8)</a></span> per maggiori informazioni.
+</p>
+<h3>
+<span id="Eseguire_il_boot_all.27interno_di_snapshot"></span><span class="mw-headline" id="Eseguire_il_boot_all'interno_di_snapshot">Eseguire il boot all'interno di snapshot</span>
+</h3>
+<p>Per eseguire il boot all'interno di uno snapshot, si applica la medesima procedura prevista per montare un sottovolume come propria partizione di root, come descritta nella sezione relativa al <a href="#Montaggio_di_un_sottovolume_come_root">montaggio di un sottovolume come propria partizione di root</a>, in quanto gli snapshot possono essere montati come sottovolumi.
+</p>
+<ul>
+<li>Se si utilizza <a href="../en/GRUB.html" class="mw-redirect" title="GRUB (Italiano)">GRUB</a>, è possibile popolare automaticamente il proprio menu di boot con gli snapshot Btrfs al momento della rigenerazione del file di configurazione utilizzando il pacchetto <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=grub-btrfs">grub-btrfs</a></span> o <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/grub-btrfs-git/">grub-btrfs-git</a></span><sup><small>AUR</small></sup>.</li>
+<li>Se si utilizza <a href="../en/REFInd.html" title="REFInd">rEFInd</a>, è possibile popolare automaticamente il proprio menu di boot con gli snapshot Btrfs utilizzando il pacchetto <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/refind-btrfs/">refind-btrfs</a></span><sup><small>AUR</small></sup>, dopo aver <a href="../it/Help:Reading.html#Controllo_delle_unit%C3%A0_systemd" title="Help:Reading (Italiano)">abilitato</a> <code>refind-btrfs.service</code>.</li>
+</ul>
+<h3><span class="mw-headline" id="Utilizzo_dei_sottovolumi_Btrfs_con_systemd-nspawn">Utilizzo dei sottovolumi Btrfs con systemd-nspawn</span></h3>
+<p>Vedere gli articoli <a href="../en/Systemd-nspawn.html#Use_Btrfs_subvolume_as_container_root" title="Systemd-nspawn">Systemd-nspawn#Use Btrfs subvolume as container root</a> e <a href="../en/Systemd-nspawn.html#Use_temporary_Btrfs_snapshot_of_container" title="Systemd-nspawn">Systemd-nspawn#Use temporary Btrfs snapshot of container</a>.
+</p>
+<h3>
+<span id="Riduzione_degli_aggiornamenti_dei_metadati_sull.27ora_di_accesso"></span><span class="mw-headline" id="Riduzione_degli_aggiornamenti_dei_metadati_sull'ora_di_accesso">Riduzione degli aggiornamenti dei metadati sull'ora di accesso</span>
+</h3>
+<p>In ragione della natura copy-on-write di Btrfs, il semplice accesso ai file può azionare il processo di copia e scrittura dei metadati. Ridurre la frequenza degli aggiornamenti dell'ora di accesso potrebbe eliminare questo utilizzo inatteso del disco, con un conseguente miglioramento delle prestazioni. Vedere <a href="../it/Fstab.html#Opzioni_atime" title="Fstab (Italiano)">fstab (Italiano)#Opzioni atime</a> per le opzioni disponibili.
+</p>
+<h3><span class="mw-headline" id="Backup_incrementale_verso_un_drive_esterno">Backup incrementale verso un drive esterno</span></h3>
+<p>I seguenti pacchetti usano <code>btrfs send</code> e <code>btrfs receive</code> per inviare con un approccio incrementale i backup a un drive esterno. Fare riferimento alla rispettiva documentazione informazioni sulle differenze in termini di implementazione, caratteristiche e requisiti.
+</p>
+<ul><li>
+<b>btrbk</b> — Strumento per la creazione di snapshot e di backup remoti di sottovolumi Btrfs.</li></ul>
+<dl><dd>
+<a rel="nofollow" class="external free" href="https://github.com/digint/btrbk">https://github.com/digint/btrbk</a> || <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=btrbk">btrbk</a></span>
+</dd></dl>
+<ul><li>
+<b>snap-sync</b> — Utilizza snapshot di <a href="../en/Snapper.html" title="Snapper">snapper</a> per effettuare un backup verso un drive esterno o una macchina remota.</li></ul>
+<dl><dd>
+<a rel="nofollow" class="external free" href="https://github.com/wesbarnett/snap-sync">https://github.com/wesbarnett/snap-sync</a> || <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=snap-sync">snap-sync</a></span>
+</dd></dl>
+<ul><li>
+<b>snapsync</b> — Uno strumento di sincronizzazione per <a href="../en/Snapper.html" title="Snapper">snapper</a>.</li></ul>
+<dl><dd>
+<a rel="nofollow" class="external free" href="https://github.com/doudou/snapsync">https://github.com/doudou/snapsync</a> || <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/ruby-snapsync/">ruby-snapsync</a></span><sup><small>AUR</small></sup>
+</dd></dl>
+<p>Il seguente pacchetto consente di effettuare un backup di snapshot di snapper verso file system non Btrfs.
+</p>
+<ul><li>
+<b>snapborg</b> — Strumento simile a borgmatic che integra gli snapshot di snapper con i backup <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=borg">borg</a></span>.</li></ul>
+<dl><dd>
+<a rel="nofollow" class="external free" href="https://github.com/enzingerm/snapborg">https://github.com/enzingerm/snapborg</a> || <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/snapborg/">snapborg</a></span><sup><small>AUR</small></sup>
+</dd></dl>
+<h3><span class="mw-headline" id="Snapshot_automatici">Snapshot automatici</span></h3>
+<p>Per la gestione e la creazione in automatico di snapshot Btrfs, è possibile utilizzare uno snapshot manager come <a href="../en/Snapper.html" title="Snapper">Snapper</a>, <a href="../en/Timeshift.html" title="Timeshift">Timeshift</a> o <a href="../en/Yabsnap.html" title="Yabsnap">Yabsnap</a>.
+</p>
+<h2><span class="mw-headline" id="Risoluzione_di_problemi">Risoluzione di problemi</span></h2>
+<p>Vedere <a rel="nofollow" class="external text" href="https://btrfs.readthedocs.io/en/latest/trouble-index.html">le pagine Btrfs dedicate alla risoluzione di problemi</a> e <a rel="nofollow" class="external text" href="https://archive.kernel.org/oldwiki/btrfs.wiki.kernel.org/index.php/Problem_FAQ.html">le FAQ Btrfs relative ai problemi</a> per la risoluzione di problemi generici.
+</p>
+<h3><span class="mw-headline" id="GRUB">GRUB</span></h3>
+<h4><span class="mw-headline" id="Offset_della_partition">Offset della partition</span></h4>
+<p>Il problema legato all'offset si può presentare quando si tenta di integrare <code>core.img</code> in un disco partizionato. Ciò significa che <a href="../Special:Diff/319474.html" title="Special:Diff/319474">è OK</a> integrare il file <code>core.img</code> di GRUB direttamente in un pool Btrfs su un disco privo di partizioni (ad es. <code>/dev/sd<i>X</i></code>).
+</p>
+<p><a href="../en/GRUB.html" class="mw-redirect" title="GRUB (Italiano)">GRUB</a> può effettuare il boot di partizioni Btrfs, tuttavia il relativo modulo potrebbe essere di dimensioni maggiori rispetto a quelli di altri <a href="../it/File_systems.html" title="File systems (Italiano)">file system</a>. Pertanto il file <code>core.img</code> creato da <code>grub-install</code> potrebbe risultare di dimensioni eccessive per i primi 63 settori (31.5KiB) del drive che si trovano tra il MBR e la prima partizione. Gli strumenti di partizionamento più aggiornati quali <code>fdisk</code> e <code>gdisk</code> evitano questo problema prevedendo un offset della prima partizione di circa 1MiB o 2MiB.
+</p>
+<h4><span class="mw-headline" id="Root_mancante">Root mancante</span></h4>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../File:Inaccurate.svg" decoding="async" width="48" height="48" class="mw-file-element"></span></span><b>The factual accuracy of this article or section is disputed.</b></p>
+<div>
+<b>Reason:</b> Suggerisce la modifica manuale di un file non di configurazione. (Discuss in <a href="../en/Talk:Btrfs.html#Should_not_suggest_to_edit_files_in_/usr/share" title="Talk:Btrfs">Talk:Btrfs#Should not suggest to edit files in /usr/share</a>)</div>
+</div>
+<p>Gli utenti che sperimentano il seguente errore: <code>error no such device: root</code> nell'eseguire il boot da una configurazione in stile RAID dovranno modificare il file /usr/share/grub/grub-mkconfig_lib cancellando entrambe le virgolette dalla linea <code>echo "  search --no-floppy --fs-uuid --set=root ${hints} ${fs_uuid}"</code>. Dopodiché rigenerare il file di configurazione di grub e il sistema dovrebbe eseguire il boot senza errori.
+</p>
+<h3><span class="mw-headline" id="Time_out_del_montaggio">Time out del montaggio</span></h3>
+<p>Talvolta, in particolare in array RAID1 di grandi dimensioni, si potrebbe verificare il time out dell'operazione di montaggio con un messaggio del journal come:
+</p>
+<pre>Jan 25 18:05:12 host systemd[1]: storage.mount: Mounting timed out. Terminating.
+Jan 25 18:05:46 host systemd[1]: storage.mount: Mount process exited, code=killed, status=15/TERM
+Jan 25 18:05:46 host systemd[1]: storage.mount: Failed with result 'timeout'.
+Jan 25 18:05:46 host systemd[1]: Failed to mount /storage.
+Jan 25 18:05:46 host systemd[1]: Startup finished in 32.943s (firmware) + 3.097s (loader) + 7.247s (kernel)&gt;
+Jan 25 18:05:46 host kernel: BTRFS error (device sda): open_ctree failed</pre>
+<p>Questo problema può essere facilmente aggirato indicando un tempo di timeout maggiore tramite la specifica opzione di mount di systemd <code>x-systemd.mount-timeout</code> in <a href="../it/Fstab.html" title="Fstab (Italiano)">fstab</a>. Ad esempio:
+</p>
+<pre>/dev/sda                /storage    btrfs       rw,relatime,x-systemd.mount-timeout=5min  0 0
+</pre>
+<h3><span class="mw-headline" id="BTRFS:_open_ctree_failed">BTRFS: open_ctree failed</span></h3>
+<p>Da novembre 2014 sembra essere presente un bug in <a href="../it/Systemd.html" title="Systemd (Italiano)">systemd</a> o <a href="../en/Mkinitcpio.html" class="mw-redirect" title="Mkinitcpio (Italiano)">mkinitcpio</a> che provoca il seguente errore nei sistemi con un file system Btrfs su più dispositivi che utilizzano l'hook <code>btrfs</code> in <code>mkinitcpio.conf</code>:
+</p>
+<pre>BTRFS: open_ctree failed
+mount: wrong fs type, bad option, bad superblock on /dev/sdb2, missing codepage or helper program, or other error
+
+In some cases, useful info is found in syslog - try dmesg|tail or so.
+
+You are now being dropped into an emergency shell.
+</pre>
+<p>Un modo per aggirare questo problema è rimuovere <code>btrfs</code> dall'array <code>HOOKS</code> in <code>/etc/mkinitcpio.conf</code> aggiungendo invece <code>btrfs</code> all'array <code>MODULES</code>. Dopodiché <a href="../en/Mkinitcpio.html#Image_creation_and_activation" class="mw-redirect" title="Regenerate the initramfs">rigenerare l'initramfs</a> ed eseguire il reboot.
+</p>
+<p>Si verificherà il medesimo errore se si tenta di montare un array raid senza uno dei dispositivi. In questo caso, è necessario aggiungere l'opzione di montaggio <code>degraded</code> in <code>/etc/fstab</code>. Se la propria partizione di root risiede nell'array, è inoltre necessario aggiungere <code>rootflags=degraded</code> ai propri <a href="../en/Kernel_parameters.html" title="Kernel parameters">parametri del kernel</a>.
+</p>
+<p>Da agosto 2016, un possibile modo di aggirare questo bug è montare l'array con un solo drive indicato in <code>/etc/fstab</code>, consentendo così a Btrfs di rilevare e aggiungere in modo automatico gli altri drive. Gli identificatori basati su gruppo quali UUID e LABEL sembrano contribuire a questo errore. Ad esempio, un array RAID1 costituito da due dispositivi 'disk1' e disk2' possiederà uno UUID allocato. Tuttavia, anziché utilizzare lo UUID, utilizzare solo <code>/dev/mapper/disk1</code> in <code>/etc/fstab</code>. Per una spiegazione maggiormente dettagliata, vedere il seguente <a rel="nofollow" class="external text" href="https://web.archive.org/web/20161108175034/http://blog.samcater.com/fix-for-btrfs-open_ctree-failed-when-running-root-fs-on-raid-1-or-raid10-arch-linux/">post sul blog</a>.
+</p>
+<p>Un'ulteriore possibile soluzione è rimuovere l'hook <code>udev</code> in <a href="../en/Mkinitcpio.html#Configuration" class="mw-redirect" title="Mkinitcpio.conf">mkinitcpio.conf</a> e sostituirlo con l'hook <code>systemd</code>. In questo caso, <code>btrfs</code> <i>non</i> dovrebbe essere nell'array <code>HOOKS</code> o <code>MODULES</code>.
+</p>
+<p>Vedere il <a rel="nofollow" class="external text" href="https://bbs.archlinux.org/viewtopic.php?id=189845">thread originale del forum</a> e <a rel="nofollow" class="external text" href="https://bugs.archlinux.org/task/42884">FS#42884</a> per ulteriori informazioni e discussione.
+</p>
+<h3><span class="mw-headline" id="btrfs_check">btrfs check</span></h3>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../File:View-refresh-red.svg" decoding="async" width="48" height="48" class="mw-file-element"></span></span><b>This article or section is out of date.</b></p>
+<div>
+<b>Reason:</b> Lo stato "intenso sviluppo" è datato. (Discuss in <a rel="nofollow" class="external text" href="../it/Talk:Btrfs.html">Talk:Btrfs (Italiano)</a>)</div>
+</div>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Attenzione:</strong> Essendo Btrfs in una fase di intenso sviluppo, in particolare il comando <code>btrfs check</code>, si consiglia fortemente di creare un <a href="../it/System_maintenance.html#Backup" title="System maintenance (Italiano)">backup</a> e di consultare <span class="plainlinks archwiki-template-man" title="$ man 8 btrfs-check"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/btrfs-check.8">btrfs-check(8)</a></span> prima di eseguire <code>btrfs check</code> con lo switch <code>--repair</code>.</div>
+<p>Il comando <span class="plainlinks archwiki-template-man" title="$ man 8 btrfs-check"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/btrfs-check.8">btrfs-check(8)</a></span> può essere utilizzato per verificare o riparare un file system Btrfs non montato. Tuttavia, questo strumento di riparazione è ancora immaturo e non è in grado di riparare determinati errori del file system, anche quelli che non rendono in file system stesso impossibile da montare.
+</p>
+<h3>
+<span id="Attivit.C3.A0_costante_del_drive"></span><span class="mw-headline" id="Attività_costante_del_drive">Attività costante del drive</span>
+</h3>
+<p>A partire dalla versione 6.2 del <a href="../en/Kernel.html" class="mw-redirect" title="Kernel (Italiano)">kernel</a>, l'opzione di montaggio <code>discard=async</code> <span class="plainlinks archwiki-template-man" title="$ man 8 mount"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/mount.8">mount(8)</a></span> è impostata di default. Ciò <a rel="nofollow" class="external text" href="https://lore.kernel.org/linux-btrfs/Y%2F%2Bn1wS%2F4XAH7X1p@nz/#r">è stato riportato</a> come causa di un'attività costante in alcuni drive, anche quando in stato di idle, in quanto la coda di discard si riempie più velocemente della relativa velocità di elaborazione. Ciò può risultare in un consumo maggiore, in particolare nei drive NVMe.
+</p>
+<p>A partire dalla versione 6.3 del kernel, l'opzione discard di default <code>iops_limit</code> è stata modificata da 100 a 1000 per risolvere questo problema. È possibile impostare manualmente il valore desiderato per una versione datata del kernel, ad es.
+</p>
+<pre># echo 1000 &gt; /sys/fs/btrfs/<i>uuid</i>/discard/iops_limit
+</pre>
+<p>Dove <code><i>uuid</i></code> è lo UUID del file system Btrfs. Il limite di <code>1000</code> dovrà essere perfezionato sperimentando.
+</p>
+<p>Per impostare il parametro al boot, è possibile utilizzare <a href="../it/Systemd.html#systemd-tmpfiles_-_file_temporanei" title="Systemd (Italiano)">systemd-tmpfiles</a>, ad es. creando il seguente file:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/tmpfiles.d/btrfs-discard.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">w /sys/fs/btrfs/<i>uuid</i>/discard/iops_limit - - - - 1000
+</pre>
+<p>In alternativa, è possibile disattivare del tutto la funzione di discard asincrono utilizzando l'opzione di montaggio <code>nodiscard</code> in <a href="../it/Fstab.html" title="Fstab (Italiano)">fstab</a>, abbinandola a quanto specificato in <a href="../en/Solid_state_drive.html#Periodic_TRIM" title="Solid state drive">Periodic TRIM</a>.
+</p>
+<h2><span class="mw-headline" id="Vedere_anche">Vedere anche</span></h2>
+<ul>
+<li>
+<b>Sito ufficiale</b>
+<ul>
+<li><a rel="nofollow" class="external text" href="https://btrfs.readthedocs.io">Documentazione Btrfs</a></li>
+<li><a rel="nofollow" class="external text" href="https://archive.kernel.org/oldwiki/btrfs.wiki.kernel.org/">Wiki Btrfs archiviata</a></li>
+</ul>
+</li>
+<li>
+<b>Risorse relative alle prestazioni</b>
+<ul>
+<li><a rel="nofollow" class="external text" href="https://superuser.com/questions/432188/should-i-put-my-multi-device-btrfs-filesystem-on-disk-partitions-or-raw-devices">Btrfs su dischi raw?</a></li>
+<li><a rel="nofollow" class="external text" href="https://lore.kernel.org/linux-btrfs/CAKcLGm_MKEdTiHFBd-b-v2sN5gJmgFRqsykzWRXTVqUw4O6Acw@mail.gmail.com/">Leafsize e nodesize variabili in Btrfs</a></li>
+<li><a rel="nofollow" class="external text" href="https://lore.kernel.org/linux-btrfs/jgui4j$th5$1@dough.gmane.org/">Supporto Btrfs per un funzionamento efficiente dei dischi SSD (allineamento dei blocchi dati)</a></li>
+<li><a rel="nofollow" class="external text" href="https://archive.kernel.org/oldwiki/btrfs.wiki.kernel.org/index.php/FAQ.html#Is_Btrfs_optimized_for_SSD.3F">Btrfs è ottimizzato per i dischi SSD?</a></li>
+<li><a rel="nofollow" class="external text" href="https://blog.erdemagaoglu.com/post/4605524309/lzo-vs-snappy-vs-lzf-vs-zlib-a-comparison-of">Lzo vs. zLib</a></li>
+</ul>
+</li>
+<li>
+<b>Varie</b>
+<ul>
+<li><a href="https://www.funtoo.org/BTRFS_Fun" class="extiw" title="funtoo:BTRFS Fun">Funtoo:BTRFS Fun</a></li>
+<li>
+<a rel="nofollow" class="external text" href="https://www.phoronix.com/scan.php?page=news_item&amp;px=MTA0ODU">Avi Miller presenta Btrfs</a> presso SCALE 10x, gennaio 2012.</li>
+<li>
+<a rel="nofollow" class="external text" href="https://www.phoronix.com/scan.php?page=news_item&amp;px=MTA4Mzc">Riassunto del discorso di Chris Mason</a> presso LFCS 2012</li>
+<li>
+<a rel="nofollow" class="external text" href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=35054394c4b3cecd52577c2662c84da1f3e73525">Btrfs: interruzione della fornitura di una modalità operativa bmap per evitare corruzioni dello swapfile</a> 2009-01-21</li>
+<li><a rel="nofollow" class="external text" href="https://marc.merlins.org/perso/btrfs/post_2014-03-22_Btrfs-Tips_-Doing-Fast-Incremental-Backups-With-Btrfs-Send-and-Receive.html">Eseguire backup incrementali rapidi con Btrfs Send and Receive</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+					<div id="catlinks" class="catlinks" data-mw="interface">
+<div id="mw-normal-catlinks" class="mw-normal-catlinks">
+<a href="../Special:Categories.html" title="Special:Categories">Category</a>: <ul><li><a href="../it/Category:File_systems.html" title="Category:File systems (Italiano)">File systems (Italiano)</a></li></ul>
+</div>
+<div id="mw-hidden-catlinks" class="mw-hidden-catlinks mw-hidden-cats-hidden">Hidden categories: <ul>
+<li><a href="../en/Category:Pages_or_sections_flagged_with_Template:Expansion.html" title="Category:Pages or sections flagged with Template:Expansion">Pages or sections flagged with Template:Expansion</a></li>
+<li><a href="../en/Category:Pages_or_sections_flagged_with_Template:Accuracy.html" title="Category:Pages or sections flagged with Template:Accuracy">Pages or sections flagged with Template:Accuracy</a></li>
+<li><a href="../en/Category:Pages_or_sections_flagged_with_Template:Out_of_date.html" title="Category:Pages or sections flagged with Template:Out of date">Pages or sections flagged with Template:Out of date</a></li>
+</ul>
+</div>
+</div>
+				</div>
+			</main>
+			
+		</div>
+		<div class="mw-footer-container">
+			
+<footer id="footer" class="mw-footer" style="margin: 0">
+	<ul id="footer-info">
+	<li data-nosnippet="">Retrieved from "<a dir="ltr" href="https://wiki.archlinux.org/index.php?title=Btrfs_(Italiano)&amp;oldid=824408">https://wiki.archlinux.org/index.php?title=Btrfs_(Italiano)&amp;oldid=824408</a>"</li>
+<li id="footer-info-lastmod"> This page was last edited on 1 January 2025, at 21:05.</li>
+	<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+<br>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="https://terms.archlinux.org/docs/privacy-policy/">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="../en/ArchWiki:About.html">About ArchWiki</a></li>
+	<li id="footer-places-disclaimers"><a href="../en/ArchWiki:General_disclaimer.html">Disclaimers</a></li>
+	<li id="footer-places-archwiki-code-of-conduct"><a href="https://terms.archlinux.org/docs/code-of-conduct/" class="extiw" title="archlinux-service-agreements:code-of-conduct">Code of conduct</a></li>
+	<li id="footer-places-archwiki-terms-of-service"><a href="https://terms.archlinux.org/docs/terms-of-service/" class="extiw" title="archlinux-service-agreements:terms-of-service">Terms of service</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-copyrightico"><a href="https://www.gnu.org/copyleft/fdl.html" class="cdx-button cdx-button--fake-button cdx-button--size-large cdx-button--fake-button--enabled"><img src="/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" loading="lazy"></a></li>
+	<li id="footer-poweredbyico"><img src="/resources/assets/poweredby_mediawiki.svg" width="88" height="31" loading="lazy"></li>
+</ul>
+
+</footer>
+
+		</div>
+	</div> 
+</div> 
+<div class="vector-settings" id="p-dock-bottom">
+	<ul></ul>
+</div>
+</body>
+</html>

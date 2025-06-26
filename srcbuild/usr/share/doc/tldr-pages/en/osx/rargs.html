@@ -1,0 +1,40 @@
+<h1>rargs</h1>
+
+<blockquote><p>Execute a command for each line of standard input.
+Like <code>xargs</code>, but with pattern matching support.
+More information: <a href="https://github.com/lotabout/rargs">https://github.com/lotabout/rargs</a>.</p></blockquote>
+
+<ul>
+<li>Execute a command for every line of input, just like <code>xargs</code> (<code>{0}</code> indicates where to substitute in the text):</li>
+</ul>
+
+
+<p><code>{{command}} | rargs {{command}} {0}</code></p>
+
+<ul>
+<li>Do a dry run, which prints the commands that would be run instead of executing them:</li>
+</ul>
+
+
+<p><code>{{command}} | rargs -e {{command}} {0}</code></p>
+
+<ul>
+<li>Remove the <code>.bak</code> extension from every file in a list:</li>
+</ul>
+
+
+<p><code>{{command}} | rargs -p '(.*).bak mv {0} {1}</code></p>
+
+<ul>
+<li>Execute commands in parallel:</li>
+</ul>
+
+
+<p><code>{{command}} | rargs -w {{max-procs}}</code></p>
+
+<ul>
+<li>Consider each line of input to be separated by a NUL character (<code>\0</code>) instead of a newline (<code>\n</code>):</li>
+</ul>
+
+
+<p><code>{{command}} | rargs -0 {{command}} {0}</code></p>

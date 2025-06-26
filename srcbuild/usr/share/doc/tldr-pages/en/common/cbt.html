@@ -1,0 +1,46 @@
+<h1>cbt</h1>
+
+<blockquote><p>Utility for reading data from Google Cloud&rsquo;s Bigtable.
+More information: <a href="https://cloud.google.com/bigtable/docs/cbt-reference">https://cloud.google.com/bigtable/docs/cbt-reference</a>.</p></blockquote>
+
+<ul>
+<li>List tables in the current project:</li>
+</ul>
+
+
+<p><code>cbt ls</code></p>
+
+<ul>
+<li>Print count of rows in a specific table in the current project:</li>
+</ul>
+
+
+<p><code>cbt count "{{table_name}}"</code></p>
+
+<ul>
+<li>Display a single row from a specific table with only 1 (most recent) cell revision per column in the current project:</li>
+</ul>
+
+
+<p><code>cbt lookup "{{table_name}}" "{{row_key}}" cells-per-column={{1}}</code></p>
+
+<ul>
+<li>Display a single row with only specific column(s) (omit qualifier to return entire family) in the current project:</li>
+</ul>
+
+
+<p><code>cbt lookup "{{table_name}}" "{{row_key}}" columns="{{family1:qualifier1,family2:qualifier2,...}}"</code></p>
+
+<ul>
+<li>Search up to 5 rows in the current project by a specific regex pattern and print them:</li>
+</ul>
+
+
+<p><code>cbt read "{{table_name}}" regex="{{row_key_pattern}}" count={{5}}</code></p>
+
+<ul>
+<li>Read a specific range of rows and print only returned row keys in the current project:</li>
+</ul>
+
+
+<p><code>cbt read {{table_name}} start={{start_row_key}} end={{end_row_key}} keys-only=true</code></p>

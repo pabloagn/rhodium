@@ -1,0 +1,60 @@
+<h1>find</h1>
+
+<blockquote><p>Procura recursivamente por arquivos ou diretórios em uma árvore de diretórios.
+Mais informações: <a href="https://manned.org/find">https://manned.org/find</a>.</p></blockquote>
+
+<ul>
+<li>Procura por arquivos pela extensão:</li>
+</ul>
+
+
+<p><code>find {{caminho_raiz}} -name '{{*.ext}}'</code></p>
+
+<ul>
+<li>Procura por arquivos que correspondam a vários padrões específicos de caminho/nome:</li>
+</ul>
+
+
+<p><code>find {{caminho_raiz}} -path '{{**/caminho/**/*.ext}}' -or -name '{{*nome*}}'</code></p>
+
+<ul>
+<li>Procura por diretórios que correspondam a um nome específico, sem diferenciar maiúsculo de minúsculo:</li>
+</ul>
+
+
+<p><code>find {{caminho_raiz}} -type d -iname '{{*nome*}}'</code></p>
+
+<ul>
+<li>Procura por arquivos que correspondam a um nome específico, excluindo certos caminhos:</li>
+</ul>
+
+
+<p><code>find {{caminho_raiz}} -name '{{*.py}}' -not -path '{{*/caminho/*}}'</code></p>
+
+<ul>
+<li>Procura por arquivos que correspondam a uma faixa de tamanho específica, limitando a profundidade recursiva para &ldquo;1&rdquo;:</li>
+</ul>
+
+
+<p><code>find {{caminho_raiz}} -maxdepth 1 -size {{+500k}} -size {{-10M}}</code></p>
+
+<ul>
+<li>Executa um comando para cada arquivo (use <code>{}</code> dentro do comando para acessar o nome do arquivo):</li>
+</ul>
+
+
+<p><code>find {{caminho_raiz}} -name '{{*.ext}}' -exec {{wc -l}} {} \;</code></p>
+
+<ul>
+<li>Procura por todos os arquivos modificados hoje e passa os resultados para um único comando como argumentos:</li>
+</ul>
+
+
+<p><code>find {{caminho_raiz}} -daystart -mtime {{-1}} -exec {{tar -cvf arquivo.tar}} {} \+</code></p>
+
+<ul>
+<li>Procura por arquivos vazios (0 byte) ou diretórios e os exclui de forma verbosa:</li>
+</ul>
+
+
+<p><code>find {{caminho_raiz}} -type {{f|d}} -empty -delete -print</code></p>

@@ -1,0 +1,53 @@
+<h1>fclones</h1>
+
+<blockquote><p>Efficient duplicate file finder and remover.
+More information: <a href="https://github.com/pkolaczk/fclones">https://github.com/pkolaczk/fclones</a>.</p></blockquote>
+
+<ul>
+<li>Search for duplicate files in the current directory:</li>
+</ul>
+
+
+<p><code>fclones group .</code></p>
+
+<ul>
+<li>Search multiple directories for duplicate files and cache the results:</li>
+</ul>
+
+
+<p><code>fclones group --cache {{path/to/directory1 path/to/directory2}}</code></p>
+
+<ul>
+<li>Search only the specified directory for duplicate files, skipping subdirectories and save the results into a file:</li>
+</ul>
+
+
+<p><code>fclones group {{path/to/directory}} --depth 1 &gt; {{path/to/file.txt}}</code></p>
+
+<ul>
+<li>Move the duplicate files in a TXT file to a different directory:</li>
+</ul>
+
+
+<p><code>fclones move {{path/to/target_directory}} &lt; {{path/to/file.txt}}</code></p>
+
+<ul>
+<li>Perform a dry run for soft links in a TXT file without actually linking:</li>
+</ul>
+
+
+<p><code>fclones link --soft &lt; {{path/to/file.txt}} --dry-run 2 &gt; /dev/null</code></p>
+
+<ul>
+<li>Delete the newest duplicates from the current directory without storing them in a file:</li>
+</ul>
+
+
+<p><code>fclones group . | fclones remove --priority newest</code></p>
+
+<ul>
+<li>Preprocess JPEG files in the current directory by using an external command to strip their EXIF data before matching for duplicates:</li>
+</ul>
+
+
+<p><code>fclones group . --name '*.jpg' -i --transform 'exiv2 -d a $IN' --in-place</code></p>

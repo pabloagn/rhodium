@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-sticky-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-0 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-disabled skin-theme-clientpref-day vector-toc-available" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>systemd/User - ArchWiki</title>
+<link rel="stylesheet" href="../../ArchWikiOffline.css">
+<meta name="ResourceLoaderDynamicStyles" content="">
+<meta name="generator" content="MediaWiki 1.43.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="max-image-preview:standard">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.25, maximum-scale=5.0">
+<link rel="search" type="application/opensearchdescription+xml" href="/rest.php/v1/search" title="ArchWiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.archlinux.org/api.php?action=rsd">
+<link rel="license" href="https://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="ArchWiki Atom feed" href="/index.php?title=Special:RecentChanges&amp;feed=atom">
+</head>
+<body class="skin--responsive skin-vector skin-vector-search-vue mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Systemd_User rootpage-Systemd skin-vector-2022 action-view">
+<a class="mw-jump-link" href="#bodyContent">Jump to content</a>
+<div class="vector-header-container">
+	</div>
+<div class="mw-page-container">
+	<div class="mw-page-container-inner">
+		<div class="vector-column-start">
+			<div class="vector-main-menu-container">
+		</div>
+	<div class="vector-sticky-pinned-container">
+				<nav id="mw-panel-toc" aria-label="Contents" data-event-name="ui.sidebar-toc" class="mw-table-of-contents-container vector-toc-landmark">
+					<div id="vector-toc-pinned-container" class="vector-pinned-container">
+					<div id="vector-toc" class="vector-toc vector-pinnable-element">
+	<div class="vector-pinnable-header vector-toc-pinnable-header vector-pinnable-header-pinned" data-feature-name="toc-pinned" data-pinnable-element-id="vector-toc">
+	<h2 class="vector-pinnable-header-label">Contents</h2>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-toc.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-toc.unpin">hide</button>
+</div>
+
+
+	<ul class="vector-toc-contents" id="mw-panel-toc-list">
+		<li id="toc-mw-content-text" class="vector-toc-list-item vector-toc-level-1">
+			<a href="#" class="vector-toc-link">
+				<div class="vector-toc-text">Beginning</div>
+			</a>
+		</li>
+		<li id="toc-How_it_works" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#How_it_works">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">1</span>
+				<span>How it works</span>
+			</div>
+		</a>
+		
+		<ul id="toc-How_it_works-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Basic_setup" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Basic_setup">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">2</span>
+				<span>Basic setup</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Basic_setup-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Basic setup subsection</span>
+			</button>
+		
+		<ul id="toc-Basic_setup-sublist" class="vector-toc-list">
+			<li id="toc-Environment_variables" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Environment_variables">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1</span>
+					<span>Environment variables</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Environment_variables-sublist" class="vector-toc-list">
+				<li id="toc-Systemd_user_instance" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Systemd_user_instance">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1.1</span>
+					<span>Systemd user instance</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Systemd_user_instance-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Service_example" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Service_example">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1.2</span>
+					<span>Service example</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Service_example-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-DISPLAY_and_XAUTHORITY" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#DISPLAY_and_XAUTHORITY">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1.3</span>
+					<span>DISPLAY and XAUTHORITY</span>
+				</div>
+			</a>
+			
+			<ul id="toc-DISPLAY_and_XAUTHORITY-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-PATH" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#PATH">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1.4</span>
+					<span>PATH</span>
+				</div>
+			</a>
+			
+			<ul id="toc-PATH-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-pam_env" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#pam_env">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1.5</span>
+					<span>pam_env</span>
+				</div>
+			</a>
+			
+			<ul id="toc-pam_env-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Automatic_start-up_of_systemd_user_instances" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Automatic_start-up_of_systemd_user_instances">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2</span>
+					<span>Automatic start-up of systemd user instances</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Automatic_start-up_of_systemd_user_instances-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Writing_user_units" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Writing_user_units">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">3</span>
+				<span>Writing user units</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Writing_user_units-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Writing user units subsection</span>
+			</button>
+		
+		<ul id="toc-Writing_user_units-sublist" class="vector-toc-list">
+			<li id="toc-Example" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Example">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1</span>
+					<span>Example</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Example-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Example_with_variables" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Example_with_variables">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.2</span>
+					<span>Example with variables</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Example_with_variables-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Reading_the_journal" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Reading_the_journal">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.3</span>
+					<span>Reading the journal</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Reading_the_journal-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Temporary_files" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Temporary_files">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">4</span>
+				<span>Temporary files</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Temporary_files-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Xorg_and_systemd" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Xorg_and_systemd">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">5</span>
+				<span>Xorg and systemd</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Xorg_and_systemd-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Xorg and systemd subsection</span>
+			</button>
+		
+		<ul id="toc-Xorg_and_systemd-sublist" class="vector-toc-list">
+			<li id="toc-Automatic_login_into_Xorg_without_display_manager" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Automatic_login_into_Xorg_without_display_manager">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.1</span>
+					<span>Automatic login into Xorg without display manager</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Automatic_login_into_Xorg_without_display_manager-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Xorg_as_a_systemd_user_service" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Xorg_as_a_systemd_user_service">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.2</span>
+					<span>Xorg as a systemd user service</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Xorg_as_a_systemd_user_service-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-xinit_and_application_as_a_systemd_service" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#xinit_and_application_as_a_systemd_service">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.3</span>
+					<span>xinit and application as a systemd service</span>
+				</div>
+			</a>
+			
+			<ul id="toc-xinit_and_application_as_a_systemd_service-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Some_use_cases" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Some_use_cases">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">6</span>
+				<span>Some use cases</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Some_use_cases-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Some use cases subsection</span>
+			</button>
+		
+		<ul id="toc-Some_use_cases-sublist" class="vector-toc-list">
+			<li id="toc-Window_manager" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Window_manager">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.1</span>
+					<span>Window manager</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Window_manager-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Persistent_terminal_multiplexer" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Persistent_terminal_multiplexer">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.2</span>
+					<span>Persistent terminal multiplexer</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Persistent_terminal_multiplexer-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Kill_user_processes_on_logout" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Kill_user_processes_on_logout">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">7</span>
+				<span>Kill user processes on logout</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Kill_user_processes_on_logout-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Troubleshooting" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Troubleshooting">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">8</span>
+				<span>Troubleshooting</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Troubleshooting-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Troubleshooting subsection</span>
+			</button>
+		
+		<ul id="toc-Troubleshooting-sublist" class="vector-toc-list">
+			<li id="toc-Runtime_directory_'/run/user/1000'_is_not_owned_by_UID_1000,_as_it_should" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Runtime_directory_'/run/user/1000'_is_not_owned_by_UID_1000,_as_it_should">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">8.1</span>
+					<span>Runtime directory '/run/user/1000' is not owned by UID 1000, as it should</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Runtime_directory_'/run/user/1000'_is_not_owned_by_UID_1000,_as_it_should-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id='toc-"A_stop_job_is_running_for_User_Manager_for_UID_1000"' class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href='#"A_stop_job_is_running_for_User_Manager_for_UID_1000"'>
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">8.2</span>
+					<span>"A stop job is running for User Manager for UID 1000"</span>
+				</div>
+			</a>
+			
+			<ul id='toc-"A_stop_job_is_running_for_User_Manager_for_UID_1000"-sublist' class="vector-toc-list">
+				<li id="toc-Finding_and_overriding_the_misbehaving_service" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Finding_and_overriding_the_misbehaving_service">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">8.2.1</span>
+					<span>Finding and overriding the misbehaving service</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Finding_and_overriding_the_misbehaving_service-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Changing_the_timeout_value" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Changing_the_timeout_value">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">8.2.2</span>
+					<span>Changing the timeout value</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Changing_the_timeout_value-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-See_also" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#See_also">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">9</span>
+				<span>See also</span>
+			</div>
+		</a>
+		
+		<ul id="toc-See_also-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+</ul>
+</div>
+
+					</div>
+		</nav>
+			</div>
+		</div>
+		<div class="mw-content-container">
+			<main id="content" class="mw-body" style="margin: 0">
+				<header class="mw-body-header vector-page-titlebar">
+					<nav aria-label="Contents" class="vector-toc-landmark">
+						
+<div id="vector-page-titlebar-toc" class="vector-dropdown vector-page-titlebar-toc vector-button-flush-left">
+	<input type="checkbox" id="vector-page-titlebar-toc-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-page-titlebar-toc" class="vector-dropdown-checkbox " aria-label="Toggle the table of contents">
+	<label id="vector-page-titlebar-toc-label" for="vector-page-titlebar-toc-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"><span class="vector-icon mw-ui-icon-listBullet mw-ui-icon-wikimedia-listBullet"></span>
+
+<span class="vector-dropdown-label-text">Toggle the table of contents</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+							<div id="vector-page-titlebar-toc-unpinned-container" class="vector-unpinned-container">
+			</div>
+		
+	</div>
+</div>
+
+					</nav>
+					<h1 id="firstHeading" class="firstHeading mw-first-heading">systemd/User</h1>
+							
+<div id="p-lang-btn" class="vector-dropdown mw-portlet mw-portlet-lang">
+	<input type="checkbox" id="p-lang-btn-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-p-lang-btn" class="vector-dropdown-checkbox mw-interlanguage-selector" aria-label="Go to an article in another language. Available in 5 languages">
+	<label id="p-lang-btn-label" for="p-lang-btn-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--action-progressive mw-portlet-lang-heading-5" aria-hidden="true"><span class="vector-icon mw-ui-icon-language-progressive mw-ui-icon-wikimedia-language-progressive"></span>
+
+<span class="vector-dropdown-label-text">5 languages</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+		<div class="vector-menu-content">
+			
+			<ul class="vector-menu-content-list">
+				
+				<li class="interlanguage-link interwiki-fr mw-list-item"><a href="../../fr/Systemd/User.html" title="Systemd (Français)/User – français" lang="fr" hreflang="fr" data-title="Systemd (Français)/User" data-language-autonym="Français" data-language-local-name="français" class="interlanguage-link-target"><span>Français</span></a></li>
+<li class="interlanguage-link interwiki-it mw-list-item"><a href="../../it/Systemd/User.html" title="Systemd (Italiano)/User – italiano" lang="it" hreflang="it" data-title="Systemd (Italiano)/User" data-language-autonym="Italiano" data-language-local-name="italiano" class="interlanguage-link-target"><span>Italiano</span></a></li>
+<li class="interlanguage-link interwiki-ja mw-list-item"><a href="https://wiki.archlinux.jp/index.php/Systemd/%E3%83%A6%E3%83%BC%E3%82%B6%E3%83%BC" title="Systemd/ユーザー – 日本語" lang="ja" hreflang="ja" data-title="Systemd/ユーザー" data-language-autonym="日本語" data-language-local-name="日本語" class="interlanguage-link-target"><span>日本語</span></a></li>
+<li class="interlanguage-link interwiki-ru mw-list-item"><a href="../../ru/Systemd/User.html" title="Systemd (Русский)/User – русский" lang="ru" hreflang="ru" data-title="Systemd (Русский)/User" data-language-autonym="Русский" data-language-local-name="русский" class="interlanguage-link-target"><span>Русский</span></a></li>
+<li class="interlanguage-link interwiki-zh-hans mw-list-item"><a href="https://wiki.archlinuxcn.org/wiki/Systemd/User" title="Systemd/User – 中文（简体）" lang="zh-Hans" hreflang="zh-Hans" data-title="Systemd/User" data-language-autonym="中文（简体）" data-language-local-name="中文（简体）" class="interlanguage-link-target"><span>中文（简体）</span></a></li>
+			</ul>
+			
+		</div>
+
+	</div>
+</div>
+</header>
+				<div class="vector-column-end">
+					<div class="vector-sticky-pinned-container">
+						<nav class="vector-page-tools-landmark" aria-label="Page tools">
+							<div id="vector-page-tools-pinned-container" class="vector-pinned-container">
+				
+							</div>
+		</nav>
+						<nav class="vector-appearance-landmark" aria-label="Appearance">
+							<div id="vector-appearance-pinned-container" class="vector-pinned-container">
+				<div id="vector-appearance" class="vector-appearance vector-pinnable-element">
+	<div class="vector-pinnable-header vector-appearance-pinnable-header vector-pinnable-header-pinned" data-feature-name="appearance-pinned" data-pinnable-element-id="vector-appearance" data-pinned-container-id="vector-appearance-pinned-container" data-unpinned-container-id="vector-appearance-unpinned-container">
+	<div class="vector-pinnable-header-label">Appearance</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-appearance.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-appearance.unpin">hide</button>
+</div>
+
+
+</div>
+
+							</div>
+		</nav>
+					</div>
+				</div>
+				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container>
+					<div class="vector-body-before-content">
+							<div class="mw-indicators">
+		</div>
+
+						<div id="siteSub" class="noprint">From ArchWiki</div>
+					</div>
+					<div id="contentSub"><div id="mw-content-subtitle"><div class="subpages">&lt; <bdi dir="ltr"><a href="../../en/Systemd.html" title="Systemd">Systemd</a></bdi>
+</div></div></div>
+					
+					
+					<div id="mw-content-text" class="mw-body-content">
+<div class="mw-content-ltr mw-parser-output" lang="en" dir="ltr">
+<p><span>
+</span>
+</p>
+<div class="archwiki-template-meta-related-articles">
+<p>Related articles</p>
+<ul>
+<li><a href="../../en/Systemd.html" title="Systemd">systemd</a></li>
+<li><a href="../../en/Getty.html#Automatic_login_to_virtual_console" class="mw-redirect" title="Automatic login to virtual console">Automatic login to virtual console</a></li>
+<li><a href="../../en/Xinit.html#Autostart_X_at_login" class="mw-redirect" title="Start X at login">Start X at login</a></li>
+</ul>
+</div>
+<p><a href="../../en/Systemd.html" title="Systemd">systemd</a> offers the ability to manage services under the user's control with a per-user systemd instance, enabling them to start, stop, enable, and disable their own <b>user units</b>. This is convenient for daemons and other services that are commonly run for a single user, such as <a href="../../en/Music_Player_Daemon.html" class="mw-redirect" title="Mpd">mpd</a>, or to perform automated tasks like fetching mail.
+</p>
+<meta property="mw:PageProp/toc">
+<h2><span class="mw-headline" id="How_it_works">How it works</span></h2>
+<p>As per default configuration in <code>/etc/pam.d/system-login</code>, the <code>pam_systemd</code> module automatically launches a <code>systemd --user</code> instance when the user logs in for the first time. This process will survive as long as there is some session for that user, and will be killed as soon as the last session for the user is closed. When <a href="#Automatic_start-up_of_systemd_user_instances">#Automatic start-up of systemd user instances</a> is enabled, the instance is started on boot and will not be killed. The systemd user instance is responsible for managing user services, which can be used to run daemons or automated tasks with all the benefits of systemd, such as socket activation, timers, dependency system, and strict process control via cgroups.
+</p>
+<p>Similar to system units, user units are located in the following directories (ordered by ascending precedence):
+</p>
+<ul>
+<li>
+<code>/usr/lib/systemd/user/</code> where units provided by installed packages belong.</li>
+<li>
+<code>~/.local/share/systemd/user/</code> where units of packages that have been installed in the home directory belong.</li>
+<li>
+<code>/etc/systemd/user/</code> where system-wide user units are placed by the system administrator.</li>
+<li>
+<code>~/.config/systemd/user/</code> where the user puts their own units.</li>
+</ul>
+<p>When a systemd user instance starts, it brings up the per user target <code>default.target</code>. Other units can be controlled manually with <code>systemctl --user</code>. See <span class="plainlinks archwiki-template-man" title="$ man 7 systemd.special"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd.special.7#UNITS_MANAGED_BY_THE_USER_SERVICE_MANAGER">systemd.special(7) § UNITS MANAGED BY THE USER SERVICE MANAGER</a></span>.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> 
+<ul>
+<li>Be aware that the <code>systemd --user</code> instance is a per-user process, and not per-session. The rationale is that most resources handled by user services, like sockets or state files will be per-user (live on the user's home directory) and not per session. This means that all user services run outside of a session. As a consequence, programs that need to be run inside a session will probably break in user services. The way systemd handles user sessions is pretty much in flux. See <a rel="nofollow" class="external autonumber" href="https://mail.gnome.org/archives/desktop-devel-list/2014-January/msg00079.html">[1]</a> and <a rel="nofollow" class="external autonumber" href="https://lists.freedesktop.org/archives/systemd-devel/2014-March/017552.html">[2]</a> for some hints on where things are going.</li>
+<li>
+<code>systemd --user</code> runs as a separate process from the <code>systemd --system</code> process. User units can not reference or depend on system units or units of other users.</li>
+</ul>
+</div>
+<h2><span class="mw-headline" id="Basic_setup">Basic setup</span></h2>
+<p>All the user units will be placed in <code>~/.config/systemd/user/</code>. If you want to start units on first login, execute <code>systemctl --user enable <i>unit</i></code> for any unit you want to be autostarted.
+</p>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> If you want to enable a unit for all users rather than the user executing the <i>systemctl</i> command, run <code>systemctl --global enable <i>unit</i></code> as root. Similarly for <code>disable</code>.</div>
+<h3><span class="mw-headline" id="Environment_variables">Environment variables</span></h3>
+<p>Units started by user instance of systemd do not inherit any of the <a href="../../en/Environment_variables.html" title="Environment variables">environment variables</a> set in places like <code>.bashrc</code> etc. There are several ways to set environment variables for them:
+</p>
+<ul>
+<li>For users with a <code>$HOME</code> directory, create a <i>.conf</i> file in the <code>~/.config/environment.d/</code> directory with lines of the form <code>NAME=VAL</code>. Affects only that user's user unit. See <span class="plainlinks archwiki-template-man" title="$ man 5 environment.d"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/environment.d.5">environment.d(5)</a></span> for more information.</li>
+<li>Use the <code>DefaultEnvironment</code> option in <code>/etc/systemd/user.conf</code> file. Affects all user units.</li>
+<li>Add a drop-in configuration file in <code>/etc/systemd/system/user@<i>UID</i>.service.d/</code>, see <a href="#Service_example">#Service example</a>
+</li>
+<li>Add a drop-in configuration file in <code>/etc/systemd/system/user@.service.d/</code> (affects all users), see <a href="#Service_example">#Service example</a>
+</li>
+<li>At any time, use <code>systemctl --user set-environment</code> or <code>systemctl --user import-environment</code>. Affects all user units started after setting the environment variables, but not the units that were already running.</li>
+<li>Using the <code>dbus-update-activation-environment --systemd --all</code> command provided by <a href="../../en/D-Bus.html" class="mw-redirect" title="Dbus">dbus</a>. Has the same effect as <code>systemctl --user import-environment</code>, but also affects the D-Bus session. You can add this to the end of your shell initialization file.</li>
+<li>For "global" environment variables for the user environment you can use the <code>environment.d</code> directories which are parsed by some generators. See <span class="plainlinks archwiki-template-man" title="$ man 5 environment.d"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/environment.d.5">environment.d(5)</a></span> and <span class="plainlinks archwiki-template-man" title="$ man 7 systemd.generator"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd.generator.7">systemd.generator(7)</a></span> for more information.</li>
+<li>You can also write a <span class="plainlinks archwiki-template-man" title="$ man 7 systemd.environment-generator"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd.environment-generator.7">systemd.environment-generator(7)</a></span> script which can produce environment variables that vary from user to user, this is probably the best way if you need per-user environments (this is the case for <code>XDG_RUNTIME_DIR</code>, <code>DBUS_SESSION_BUS_ADDRESS</code>, etc).</li>
+</ul>
+<p>One variable you may want to set is <code>PATH</code>.
+</p>
+<p>After configuration, the command <code>systemctl --user show-environment</code> can be used to verify that the values are correct. You may need to run <code>systemctl --user daemon-reload</code> for changes to take effect immediately.
+</p>
+<h4><span class="mw-headline" id="Systemd_user_instance">Systemd user instance</span></h4>
+<p>The above only addresses default environment variables for user units. However, the systemd user instance itself is also affected by some environment variables. In particular, certain specifiers (see <span class="plainlinks archwiki-template-man" title="$ man 5 systemd.unit"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd.unit.5#SPECIFIERS">systemd.unit(5) § SPECIFIERS</a></span>) are affected by <a href="../../en/XDG_Base_Directory.html" title="XDG Base Directory">XDG variables</a>.
+</p>
+<p>However, the systemd user instance will <i>only</i> use environment variables that are set when it is started. In particular, it will not try parsing files, see <a rel="nofollow" class="external text" href="https://github.com/systemd/systemd/issues/29414">upstream bug #29414 (closed WONTFIX)</a>. Therefore, if such environment variables are needed, they should be set in a drop-in configuration file, see <a href="#Service_example">#Service example</a>.
+</p>
+<p>Systemd does not provide introspection tools to check these values, however, something like the following service can be used to help checking that the specifiers expand as expected:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">$XDG_CONFIG_HOME/systemd/user/test-specifiers.service</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Service]
+Type=oneshot
+ExecStart=printf '(systemd)=(envvar)\n'
+ExecStart=printf '%%s=%%s\n' %C "${XDG_CACHE_HOME}"
+ExecStart=printf '%%s=%%s\n' %E "${XDG_CONFIG_HOME}"
+ExecStart=printf '%%s=%%s\n' %L "${XDG_STATE_HOME}"/log
+ExecStart=printf '%%s=%%s\n' %S "${XDG_STATE_HOME}"
+ExecStart=printf '%%s=%%s\n' %t "${XDG_RUNTIME_DIR}"</pre>
+<h4><span class="mw-headline" id="Service_example">Service example</span></h4>
+<p>Create the <a href="../../en/Systemd.html#Drop-in_files" title="Systemd">drop-in</a> directory <code>/etc/systemd/system/user@.service.d/</code> and inside create a file that has the extension <i>.conf</i> (e.g. <code>local.conf</code>):
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/system/user@.service.d/local.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Service]
+Environment="PATH=/usr/lib/ccache/bin:/usr/local/sbin:/usr/local/bin:/usr/bin"
+Environment="EDITOR=nano -c"
+Environment="BROWSER=firefox"
+Environment="NO_AT_BRIDGE=1"
+Environment="XDG_STATE_HOME=%h/.local/var/state"</pre>
+<h4><span class="mw-headline" id="DISPLAY_and_XAUTHORITY">DISPLAY and XAUTHORITY</span></h4>
+<p><code>DISPLAY</code> is used by any X application to know which display to use and <code>XAUTHORITY</code> to provide a path to the user's <code>.Xauthority</code> file and thus the cookie needed to access the X server. If you plan on launching X applications from systemd units, these variables need to be set. Systemd provides a script in <code>/etc/X11/xinit/xinitrc.d/50-systemd-user.sh</code> to import those variables into the systemd user session on X launch. <a rel="nofollow" class="external autonumber" href="https://github.com/systemd/systemd/blob/v219/NEWS#L194">[3]</a> So unless you start X in a nonstandard way, user services should be aware of the <code>DISPLAY</code> and <code>XAUTHORITY</code>.
+</p>
+<h4><span class="mw-headline" id="PATH">PATH</span></h4>
+<p>If you customize your <code>PATH</code> and plan on launching applications that make use of it from systemd units, you should make sure the modified <code>PATH</code> is set on the systemd environment. Assuming you set your <code>PATH</code> in <code>.bash_profile</code>, the best way to make systemd aware of your modified <code>PATH</code> is by adding the following to <code>.bash_profile</code> after the <code>PATH</code> variable is set:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">~/.bash_profile</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">systemctl --user import-environment PATH
+</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> 
+<ul>
+<li>This will not affect systemd services started before <code>PATH</code> is imported.</li>
+<li>
+<i>systemd</i> does not look at the set <code>PATH</code> when resolving non-absolute binaries itself.</li>
+</ul>
+</div>
+<h4><span class="mw-headline" id="pam_env">pam_env</span></h4>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> This way of setting environment variables per user is deprecated and will be removed.</div>
+<p>Environment variables can be made available through use of the <code>pam_env.so</code> module. See <a href="../../en/Environment_variables.html#Using_pam_env" title="Environment variables">Environment variables#Using pam_env</a> for configuration details.
+</p>
+<h3><span class="mw-headline" id="Automatic_start-up_of_systemd_user_instances">Automatic start-up of systemd user instances</span></h3>
+<p>The systemd user instance is started after the first login of a user and killed after the last session of the user is closed. Sometimes it may be useful to start it right after boot, and keep the systemd user instance running after the last session closes, for instance to have some user process running without any open session. Lingering is used to that effect. Use the following command to enable lingering for your own user, if <a href="../../en/Polkit.html" title="Polkit">polkit</a> is installed:
+</p>
+<pre>$ loginctl enable-linger
+</pre>
+<p>Without <i>polkit</i> or to enable lingering for a different user:
+</p>
+<pre># loginctl enable-linger <i>username</i>
+</pre>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Warning:</strong> systemd services are <b>not</b> sessions, they run outside of <i>logind</i>. Do not use lingering to enable automatic login as it will <a href="../../en/General_troubleshooting.html#Session_permissions" title="General troubleshooting">break the session</a>.</div>
+<p>To list all users which have the permit for lingering see column "LINGER" with <code>yes</code>:
+</p>
+<pre>$ loginctl list-users 
+</pre>
+<p>or inspect <code>/var/lib/systemd/linger</code>. To revoke lingering:
+</p>
+<pre># loginctl disable-linger <i>username</i>
+</pre>
+<h2><span class="mw-headline" id="Writing_user_units">Writing user units</span></h2>
+<p>See <a href="../../en/Systemd.html#Writing_unit_files" title="Systemd">systemd#Writing unit files</a> for general information about writing systemd unit files.
+</p>
+<h3><span class="mw-headline" id="Example">Example</span></h3>
+<p>The following is an example of a user version of the mpd service:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">~/.config/systemd/user/mpd.service</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Unit]
+Description=Music Player Daemon
+
+[Service]
+ExecStart=/usr/bin/mpd --no-daemon
+
+[Install]
+WantedBy=default.target</pre>
+<h3><span class="mw-headline" id="Example_with_variables">Example with variables</span></h3>
+<p>The following is a user service used by <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/foldingathome/">foldingathome</a></span><sup><small>AUR</small></sup>, which takes into account variable home directories where <a href="../../en/Folding@home.html" title="Folding@home">Folding@home</a> can find certain files:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">~/.config/systemd/user/foldingathome-user.service</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Unit]
+Description=Folding@home distributed computing client
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=%h/.config/fah
+ExecStart=/usr/bin/FAHClient
+CPUSchedulingPolicy=idle
+IOSchedulingClass=3
+
+[Install]
+WantedBy=default.target</pre>
+<p>As detailed in <span class="plainlinks archwiki-template-man" title="$ man 5 systemd.unit"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd.unit.5#SPECIFIERS">systemd.unit(5) § SPECIFIERS</a></span>, the <code>%h</code> variable is replaced by the home directory of the user running the service. There are other variables that can be taken into account in the <a href="../../en/Systemd.html" title="Systemd">systemd</a> manpages.
+</p>
+<h3><span class="mw-headline" id="Reading_the_journal">Reading the journal</span></h3>
+<p>The journal for the user can be read using the analogous command:
+</p>
+<pre>$ journalctl --user
+</pre>
+<p>To specify a unit, one can use
+</p>
+<pre>$ journalctl --user-unit myunit.service
+</pre>
+<p>Or, equivalently:
+</p>
+<pre>$ journalctl --user -u myunit.service
+</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> journald will not write user journals for users with UIDs below 1000, instead <a rel="nofollow" class="external text" href="https://github.com/systemd/systemd/blob/a33687b792908aa6c9f4c0b22e8935643ee0ddb6/src/journal/journald-server.c#L402">directing</a> everything to the system journal.</div>
+<h2><span class="mw-headline" id="Temporary_files">Temporary files</span></h2>
+<p><i>systemd-tmpfiles</i> allows users to manage custom volatile and temporary files and directories just like in the system-wide way (see <a href="../../en/Systemd.html#systemd-tmpfiles_-_temporary_files" title="Systemd">systemd#systemd-tmpfiles - temporary files</a>). User-specific configuration files are read from <code>~/.config/user-tmpfiles.d/</code> and <code>~/.local/share/user-tmpfiles.d/</code>, in that order. For this functionality to be used, it is needed to enable the necessary systemd user units for your user:
+</p>
+<pre>$ systemctl --user enable systemd-tmpfiles-setup.service systemd-tmpfiles-clean.timer
+</pre>
+<p>The syntax of the configuration files is the same than those used system-wide. See the <span class="plainlinks archwiki-template-man" title="$ man 8 systemd-tmpfiles"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd-tmpfiles.8">systemd-tmpfiles(8)</a></span> and <span class="plainlinks archwiki-template-man" title="$ man 5 tmpfiles.d"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/tmpfiles.d.5">tmpfiles.d(5)</a></span> man pages for details.
+</p>
+<h2><span class="mw-headline" id="Xorg_and_systemd">Xorg and systemd</span></h2>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../../File:Tango-view-fullscreen.svg" decoding="async" width="48" height="48" class="mw-file-element"></span></span><b>This article or section needs expansion.</b></p>
+<div>
+<b>Reason:</b> Cover <code>graphical-session.target</code>: <span class="plainlinks archwiki-template-man" title="$ man 7 systemd.special"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd.special.7#Special_Passive_User_Units">systemd.special(7) § Special Passive User Units</a></span>, <a rel="nofollow" class="external autonumber" href="https://goral.net.pl/post/systemd-x-sessions/">[4]</a>. (Discuss in <a rel="nofollow" class="external text" href="../../en/Talk:Systemd/User.html">Talk:Systemd/User</a>)</div>
+</div>
+<p>There are several ways to run xorg within systemd units. Below there are 3 options, either by starting a new user session with an xorg process, launching xorg from a systemd user service, or launching xinit and application as a service.
+</p>
+<h3><span class="mw-headline" id="Automatic_login_into_Xorg_without_display_manager">Automatic login into Xorg without display manager</span></h3>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../../File:Inaccurate.svg" decoding="async" width="48" height="48" class="mw-file-element"></span></span><b>The factual accuracy of this article or section is disputed.</b></p>
+<div>
+<b>Reason:</b> This setup ends up with two user D-Bus buses, one for the desktop, and an other for systemd. Why cannot we use the systemd one alone?  (Discuss in <a rel="nofollow" class="external text" href="../../en/Talk:Systemd/User.html">Talk:Systemd/User</a>)</div>
+</div>
+<p>This option will launch a system unit that will start a user session with an xorg server and then run the usual <code>~/.xinitrc</code> to launch the window manager, etc. You need to have <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/xlogin-git/">xlogin-git</a></span><sup><small>AUR</small></sup> installed. Set up your xinitrc as specified in the <a href="../../en/Xinit.html#xinitrc" title="Xinit">Xinit#xinitrc</a> section.
+</p>
+<p>The session will use its own dbus daemon, but various systemd utilities will automatically connect to the <code>dbus.service</code> instance. Finally, <a href="../../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Enable">enable</a> the <code>xlogin@<i>username</i></code> service for automatic login at boot. The user session lives entirely inside a systemd scope and everything in the user session should work just fine.
+</p>
+<h3><span class="mw-headline" id="Xorg_as_a_systemd_user_service">Xorg as a systemd user service</span></h3>
+<p>Alternatively, <a href="../../en/Xorg.html" title="Xorg">xorg</a> can be run from within a systemd user service. This is nice since other X-related units can be made to depend on xorg, etc, but on the other hand, it has some drawbacks explained below.
+</p>
+<p><span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=xorg-server">xorg-server</a></span> provides integration with systemd in two ways:
+</p>
+<ul>
+<li>Can be run unprivileged, delegating device management to logind (see Hans de Goede commits around <a rel="nofollow" class="external text" href="https://gitlab.freedesktop.org/xorg/xserver/-/commit/82863656ec449644cd34a86388ba40f36cea11e9">this commit</a>).</li>
+<li>Can be made into a socket activated service (see <a rel="nofollow" class="external text" href="https://gitlab.freedesktop.org/xorg/xserver/-/commit/b3d3ffd19937827bcbdb833a628f9b1814a6e189">this commit</a>).</li>
+</ul>
+<p>Unfortunately, to be able to run xorg in unprivileged mode, it needs to run inside a session. So, right now the handicap of running xorg as user service is that it must be run with root privileges (like before 1.16), and cannot take advantage of the unprivileged mode introduced in 1.16.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> This is not a fundamental restriction imposed by logind, but the reason seems to be that xorg needs to know which session to take over, and right now it gets this information calling <a rel="nofollow" class="external text" href="https://www.freedesktop.org/wiki/Software/systemd/logind">logind</a>'s <code>GetSessionByPID</code> using its own pid as argument. See <a rel="nofollow" class="external text" href="https://lists.x.org/archives/xorg-devel/2014-February/040476.html">this thread</a> and <a rel="nofollow" class="external text" href="https://gitlab.freedesktop.org/xorg/xserver/-/blob/master/hw/xfree86/os-support/linux/systemd-logind.c">xorg sources</a>. It seems likely that xorg could be modified to get the session from the tty it is attaching to, and then it could run unprivileged from a user service outside a session.</div>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Warning:</strong> On xorg 1.18 socket activation seems to be broken. The client triggering the activation deadlocks. See the upstream bug report <a rel="nofollow" class="external autonumber" href="https://gitlab.freedesktop.org/xorg/xserver/issues/491">[5]</a>. As a temporary workaround you can start the xorg server without socket activation, making sure the clients connect after a delay, so the server is fully started. There seems to be no nice mechanism to get a startup notification for the X server.</div>
+<p>This is how to launch xorg from a user service:
+</p>
+<p>1. Make xorg run with root privileges for any user, by editing <code>/etc/X11/Xwrapper.config</code>. This builds on <a href="../../en/Xorg.html#Xorg_as_Root" title="Xorg">Xorg#Xorg as Root</a> by adding the stipulation that this need not be done from a physical console. That is, <code>allowed_user</code>'s default of <code>console</code> is being overwritten with <code>anybody</code>; see <span class="plainlinks archwiki-template-man" title="$ man 1 Xorg.wrap"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/Xorg.wrap.1">Xorg.wrap(1)</a></span>.
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/X11/Xwrapper.config</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">allowed_users=anybody
+needs_root_rights=yes</pre>
+<p>2. Add the following units to <code>~/.config/systemd/user</code>
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">~/.config/systemd/user/xorg@.socket</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Unit]
+Description=Socket for xorg at display %i
+
+[Socket]
+ListenStream=/tmp/.X11-unix/X%i</pre>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">~/.config/systemd/user/xorg@.service</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Unit]
+Description=Xorg server at display %i
+
+Requires=xorg@%i.socket
+After=xorg@%i.socket
+
+[Service]
+Type=simple
+SuccessExitStatus=0 1
+
+ExecStart=/usr/bin/Xorg :%i -nolisten tcp -noreset -verbose 2 "vt${XDG_VTNR}"</pre>
+<p>where <code>${XDG_VTNR}</code> is the virtual terminal where xorg will be launched, either hard-coded in the service unit, or set  in the systemd environment with
+</p>
+<pre>$ systemctl --user set-environment XDG_VTNR=1
+</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> xorg should be launched at the same virtual terminal where the user logged in. Otherwise logind will consider the session inactive.</div>
+<p>3. Make sure to configure the <code>DISPLAY</code> environment variable as explained <a href="#DISPLAY_and_XAUTHORITY">above</a>.
+</p>
+<p>4. Then, to enable socket activation for xorg on display 0 and tty 2 one would do:
+</p>
+<pre>$ systemctl --user set-environment XDG_VTNR=2     # So that xorg@.service knows which vt use
+$ systemctl --user start xorg@0.socket            # Start listening on the socket for display 0
+</pre>
+<p>Now running any X application will launch xorg on virtual terminal 2 automatically.
+</p>
+<p>The environment variable <code>XDG_VTNR</code> can be set in the systemd environment from <code>.bash_profile</code>, and then one could start any X application, including a window manager, as a systemd unit that depends on <code>xorg@0.socket</code>.
+</p>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Warning:</strong> Currently running a window manager as a user service means it runs outside of a session with the problems this may bring: <a href="../../en/General_troubleshooting.html#Session_permissions" title="General troubleshooting">break the session</a>. However, it seems that systemd developers intend to make something like this possible. See <a rel="nofollow" class="external autonumber" href="https://mail.gnome.org/archives/desktop-devel-list/2014-January/msg00079.html">[6]</a> and <a rel="nofollow" class="external autonumber" href="https://lists.freedesktop.org/archives/systemd-devel/2014-March/017552.html">[7]</a>
+</div>
+<h3><span class="mw-headline" id="xinit_and_application_as_a_systemd_service">xinit and application as a systemd service</span></h3>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../../File:Inaccurate.svg" decoding="async" width="48" height="48" class="mw-file-element"></span></span><b>The factual accuracy of this article or section is disputed.</b></p>
+<div>
+<b>Reason:</b> This should be a <i>user</i> service, not a <i>system</i> service. (Discuss in <a rel="nofollow" class="external text" href="../../en/Talk:Systemd/User.html">Talk:Systemd/User</a>)</div>
+</div>
+<p>The service below is an example to run xinit and <code>mate-session</code> with user privilege.
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/system/xinit.service</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Unit]
+After=graphical.target systemd-user-sessions.service
+Conflicts=getty@tty1.service
+
+[Service]
+Type=simple
+User=<i>yourusername</i>
+WorkingDirectory=~
+
+PAMName=login
+Environment=XDG_SESSION_TYPE=x11
+TTYPath=/dev/tty1
+StandardInput=tty
+UnsetEnvironment=TERM
+
+StandardOutput=journal
+ExecStart=/bin/xinit /bin/mate-session -- -quiet -logfile /dev/null -nolisten tcp vt01
+[Install]
+WantedBy=graphical.target</pre>
+<p>See also <a rel="nofollow" class="external free" href="https://vincent.bernat.ch/en/blog/2021-startx-systemd">https://vincent.bernat.ch/en/blog/2021-startx-systemd</a> .
+</p>
+<h2><span class="mw-headline" id="Some_use_cases">Some use cases</span></h2>
+<h3><span class="mw-headline" id="Window_manager">Window manager</span></h3>
+<p>To run a window manager as a systemd service, you first need to run <a href="#Xorg_as_a_systemd_user_service">#Xorg as a systemd user service</a>. In the following we will use <a href="../../en/Awesome.html" title="Awesome">awesome</a> as an example:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">~/.config/systemd/user/awesome.service</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Unit]
+Description=Awesome window manager
+After=xorg.target
+Requires=xorg.target
+
+[Service]
+ExecStart=/usr/bin/awesome
+Restart=always
+RestartSec=10
+ 
+[Install]
+WantedBy=wm.target</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> The <code>[Install]</code> section includes a <code>WantedBy</code> part. When using <code>systemctl --user enable</code> it will link this as <code>~/.config/systemd/user/wm.target.wants/<i>window_manager</i>.service</code>, allowing it to be started at login. Is recommended to enable this service, not to link it manually.</div>
+<h3><span class="mw-headline" id="Persistent_terminal_multiplexer">Persistent terminal multiplexer</span></h3>
+<p>Rather than logging you into a window manager session for your user session by default, you may want to automatically run a terminal multiplexer (such as <a href="../../en/Screen.html" title="Screen">screen</a> or <a href="../../en/Tmux.html" title="Tmux">tmux</a>) in the background. 
+</p>
+<p><a href="../../en/Help:Reading.html#Append,_add,_create,_edit" class="mw-redirect" title="Create">Create</a> the following: 
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">~/.config/systemd/user/multiplexer.target</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Unit]
+Description=Terminal multiplexer
+Documentation=info:screen man:screen(1) man:tmux(1)
+After=cruft.target
+Wants=cruft.target
+
+[Install]
+Alias=default.target</pre>
+<p>Separating login from X login is most likely only useful for those who boot to a TTY instead of to a display manager (in which case you can simply bundle everything you start in <code>mystuff.target</code>). 
+</p>
+<p>The dependency <code>cruft.target</code>, like the <code>mystuff.target</code> above, allows starting anything which should run before the multiplexer starts (or which you want started at boot regardless of timing), such as a GnuPG daemon session.
+</p>
+<p>You then need to create a service for your multiplexer session. Here is a sample service, using tmux as an example and sourcing a gpg-agent session which wrote its information to <code>/tmp/gpg-agent-info</code>. This sample session, when you start X, will also be able to run X programs, since <code>$DISPLAY</code> is set: 
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">~/.config/systemd/user/tmux.service</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Unit]
+Description=tmux: A terminal multiplexer 
+Documentation=man:tmux(1)
+After=gpg-agent.service
+Wants=gpg-agent.service
+
+[Service]
+Type=forking
+ExecStart=/usr/bin/tmux start
+ExecStop=/usr/bin/tmux kill-server
+Environment=DISPLAY=:0
+EnvironmentFile=/tmp/gpg-agent-info
+
+[Install]
+WantedBy=multiplexer.target</pre>
+<p><a href="../../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Enable">Enable</a> <code>tmux.service</code>, <code>multiplexer.target</code> and any services you created to be run by <code>cruft.target</code>, <a href="../../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Start">start</a> <code>user@.service</code> as usual and you should be done.
+</p>
+<h2><span class="mw-headline" id="Kill_user_processes_on_logout">Kill user processes on logout</span></h2>
+<p>Arch Linux builds the <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=systemd">systemd</a></span> package with <code>--without-kill-user-processes</code>, setting <code>KillUserProcesses</code> to <code>no</code> by default. This setting causes user processes not to be killed when the user logs out. To change this behavior in order to have all user processes killed on the user's logout, set <code>KillUserProcesses=yes</code> in <code>/etc/systemd/logind.conf</code>. 
+</p>
+<p>Note that changing this setting breaks terminal multiplexers such as <a href="../../en/Tmux.html" title="Tmux">tmux</a> and <a href="../../en/GNU_Screen.html" title="GNU Screen">GNU Screen</a>. If you change this setting, you can still use a terminal multiplexer by using <code>systemd-run</code> as follows:
+</p>
+<pre>$ systemd-run --scope --user <i>command</i> <i>args</i>
+</pre>
+<p>For example, to run <code>screen</code> you would do:
+</p>
+<pre>$ systemd-run --scope --user screen -S <i>foo</i>
+</pre>
+<p>Using <code>systemd-run</code> will keep the process running after logout only while the user is logged in at least once somewhere else in the system and <code>user@.service</code> is still running. 
+</p>
+<p>After the user logs out of all sessions, <code>user@.service</code> will be terminated too, by default, unless the user has "lingering" enabled <a rel="nofollow" class="external autonumber" href="https://github.com/systemd/systemd/blob/76153ad45f09b6ae45464f2e03d3afefbb4b2afe/NEWS#L274">[8]</a>. To effectively allow users to run long-term tasks even if they are completely logged out, lingering must be enabled for them. See <a href="#Automatic_start-up_of_systemd_user_instances">#Automatic start-up of systemd user instances</a> and <span class="plainlinks archwiki-template-man" title="$ man 1 loginctl"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/loginctl.1">loginctl(1)</a></span> for details.
+</p>
+<h2><span class="mw-headline" id="Troubleshooting">Troubleshooting</span></h2>
+<h3>
+<span id="Runtime_directory_.27.2Frun.2Fuser.2F1000.27_is_not_owned_by_UID_1000.2C_as_it_should"></span><span class="mw-headline" id="Runtime_directory_'/run/user/1000'_is_not_owned_by_UID_1000,_as_it_should">Runtime directory '/run/user/1000' is not owned by UID 1000, as it should</span>
+</h3>
+<pre>systemd[1867]: pam_systemd(systemd-user:session): Runtime directory '/run/user/1000' is not owned by UID 1000, as it should.
+systemd[1867]: Trying to run as user instance, but $XDG_RUNTIME_DIR is not set
+</pre>
+<p>If you see errors such as this and your login session is broken, it is possible that another system (non-user) service on your system is creating this directory. This can happen for example if you use a <a href="../../en/Docker.html" title="Docker">docker</a> container that has a bind mount to <code>/run/user/1000</code>. To fix this, you can either fix the container by removing the mount, or disable/delay the docker service.
+</p>
+<h3>
+<span id=".22A_stop_job_is_running_for_User_Manager_for_UID_1000.22"></span><span class="mw-headline" id='"A_stop_job_is_running_for_User_Manager_for_UID_1000"'>"A stop job is running for User Manager for UID 1000"</span>
+</h3>
+<p>If you see this message during shutdown, usually with a 2 minute timeout, it means that one of the user services did not stop in a timely manner. This can be caused by a misbehaving application which spawned a transient service earlier. You can simply wait for the timeout to expire, but if this bothers you, you can either create an override for the misbehaving service or reduce the global timeout for all user services.
+</p>
+<h4><span class="mw-headline" id="Finding_and_overriding_the_misbehaving_service">Finding and overriding the misbehaving service</span></h4>
+<p>To troubleshoot this problem, start the <a href="../../en/General_troubleshooting.html#Recovery_shells" title="General troubleshooting">systemd debug shell</a>:
+</p>
+<pre># systemctl start debug-shell
+</pre>
+<p>Then, reboot or shut down the system. When the problem occurs, switch to the debug shell using <code>Ctrl+Alt+F9</code>. To find out which service is preventing the shutdown, run:
+</p>
+<pre># systemctl --user list-jobs
+</pre>
+<p>For most open source applications, this problem should be reported to the respective maintainers such that an override isn't necessary. For closed source applications, however, an override can be created like so:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">$ systemctl --user edit --force <i>name</i>@.service </pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Service]
+TimeoutStopSec=1s</pre>
+<p>This will shorten the timeout of that particular service to 1 second. The <code>--force</code> parameter is only required for transient services which do not create a <code>.service</code> file on disk. The override will work regardless. Instead of the timeout, <code>KillSignal=SIGKILL</code> can be used. This will cause the service to be killed immediately when the user manager is stopped. Only use this if you know the service can handle it.
+</p>
+<h4><span class="mw-headline" id="Changing_the_timeout_value">Changing the timeout value</span></h4>
+<p>If you don't care which service is preventing the shutdown, you can change the global timeout for all user services in a similar manner:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;"># systemctl edit user@.service </pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Service]
+TimeoutStopSec=10s</pre>
+<p>After this timeout, any user services which haven't gracefully stopped will be killed, which is equivalent to a sudden power loss. Adjust this value for your particular use case. Setting the timeout too low may cause data corruption depending on the application.
+</p>
+<h2><span class="mw-headline" id="See_also">See also</span></h2>
+<ul>
+<li><a rel="nofollow" class="external text" href="https://bitbucket.org/KaiSforza/systemd-user-units/wiki/Home">KaiSforza's Bitbucket wiki</a></li>
+<li><a rel="nofollow" class="external text" href="https://github.com/zoqaeski/systemd-user-units">Zoqaeski's units on GitHub</a></li>
+<li><a rel="nofollow" class="external text" href="https://bbs.archlinux.org/viewtopic.php?id=167115">Arch forum thread about changes in systemd 206 user instances</a></li>
+</ul>
+</div>
+</div>
+					<div id="catlinks" class="catlinks" data-mw="interface">
+<div id="mw-normal-catlinks" class="mw-normal-catlinks">
+<a href="../../Special:Categories.html" title="Special:Categories">Category</a>: <ul><li><a href="../../en/Category:System_administration.html" title="Category:System administration">System administration</a></li></ul>
+</div>
+<div id="mw-hidden-catlinks" class="mw-hidden-catlinks mw-hidden-cats-hidden">Hidden categories: <ul>
+<li><a href="../../en/Category:Pages_or_sections_flagged_with_Template:Expansion.html" title="Category:Pages or sections flagged with Template:Expansion">Pages or sections flagged with Template:Expansion</a></li>
+<li><a href="../../en/Category:Pages_or_sections_flagged_with_Template:Accuracy.html" title="Category:Pages or sections flagged with Template:Accuracy">Pages or sections flagged with Template:Accuracy</a></li>
+</ul>
+</div>
+</div>
+				</div>
+			</main>
+			
+		</div>
+		<div class="mw-footer-container">
+			
+<footer id="footer" class="mw-footer" style="margin: 0">
+	<ul id="footer-info">
+	<li data-nosnippet="">Retrieved from "<a dir="ltr" href="https://wiki.archlinux.org/index.php?title=Systemd/User&amp;oldid=829560">https://wiki.archlinux.org/index.php?title=Systemd/User&amp;oldid=829560</a>"</li>
+<li id="footer-info-lastmod"> This page was last edited on 21 March 2025, at 16:49.</li>
+	<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+<br>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="https://terms.archlinux.org/docs/privacy-policy/">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="../../en/ArchWiki:About.html">About ArchWiki</a></li>
+	<li id="footer-places-disclaimers"><a href="../../en/ArchWiki:General_disclaimer.html">Disclaimers</a></li>
+	<li id="footer-places-archwiki-code-of-conduct"><a href="https://terms.archlinux.org/docs/code-of-conduct/" class="extiw" title="archlinux-service-agreements:code-of-conduct">Code of conduct</a></li>
+	<li id="footer-places-archwiki-terms-of-service"><a href="https://terms.archlinux.org/docs/terms-of-service/" class="extiw" title="archlinux-service-agreements:terms-of-service">Terms of service</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-copyrightico"><a href="https://www.gnu.org/copyleft/fdl.html" class="cdx-button cdx-button--fake-button cdx-button--size-large cdx-button--fake-button--enabled"><img src="/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" loading="lazy"></a></li>
+	<li id="footer-poweredbyico"><img src="/resources/assets/poweredby_mediawiki.svg" width="88" height="31" loading="lazy"></li>
+</ul>
+
+</footer>
+
+		</div>
+	</div> 
+</div> 
+<div class="vector-settings" id="p-dock-bottom">
+	<ul></ul>
+</div>
+</body>
+</html>

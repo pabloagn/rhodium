@@ -1,0 +1,60 @@
+<h1>jq</h1>
+
+<blockquote><p>A JSON processor that uses a domain-specific language (DSL).
+More information: <a href="https://jqlang.github.io/jq/manual/">https://jqlang.github.io/jq/manual/</a>.</p></blockquote>
+
+<ul>
+<li>Execute a specific expression only using the <code>jq</code> binary (print a colored and formatted JSON output):</li>
+</ul>
+
+
+<p><code>jq '.' {{/path/to/file.json}}</code></p>
+
+<ul>
+<li>Execute a specific script:</li>
+</ul>
+
+
+<p><code>{{cat path/to/file.json}} | jq {{[-f|--from-file]}} {{path/to/script.jq}}</code></p>
+
+<ul>
+<li>Pass specific arguments:</li>
+</ul>
+
+
+<p><code>{{cat path/to/file.json}} | jq {{--arg "name1" "value1" --arg "name2" "value2" ...}} '{{. + $ARGS.named}}'</code></p>
+
+<ul>
+<li>Create new JSON object via old JSON objects from multiple files:</li>
+</ul>
+
+
+<p><code>{{cat path/to/multiple_json_file_*.json}} | jq '{{{newKey1: .key1, newKey2: .key2.nestedKey, ...}}}'</code></p>
+
+<ul>
+<li>Print specific array items:</li>
+</ul>
+
+
+<p><code>{{cat path/to/file.json}} | jq '{{.[index1], .[index2], ...}}'</code></p>
+
+<ul>
+<li>Print all array/object values:</li>
+</ul>
+
+
+<p><code>{{cat path/to/file.json}} | jq '.[]'</code></p>
+
+<ul>
+<li>Print objects with 2-condition filter in array:</li>
+</ul>
+
+
+<p><code>{{cat path/to/file.json}} | jq '.[] | select((.key1=="value1") and .key2=="value2")'</code></p>
+
+<ul>
+<li>Add/remove specific keys:</li>
+</ul>
+
+
+<p><code>{{cat path/to/file.json}} | jq '. {{+|-}} {{{"key1": "value1", "key2": "value2", ...}}}'</code></p>

@@ -1,0 +1,61 @@
+<h1>nft</h1>
+
+<blockquote><p>Linux 커널 방화벽이 제공하는 테이블, 체인 및 규칙을 구성합니다.
+Nftables는 iptables를 대체합니다.
+더 많은 정보: <a href="https://wiki.nftables.org/wiki-nftables/index.php/Main_Page">https://wiki.nftables.org/wiki-nftables/index.php/Main_Page</a>.</p></blockquote>
+
+<ul>
+<li>현재 구성 보기:</li>
+</ul>
+
+
+<p><code>sudo nft list ruleset</code></p>
+
+<ul>
+<li>&ldquo;inet&rdquo; 가족과 &ldquo;filter&rdquo; 테이블로 새 테이블 추가:</li>
+</ul>
+
+
+<p><code>sudo nft add table {{inet}} {{filter}}</code></p>
+
+<ul>
+<li>모든 수신 트래픽을 허용하는 새 체인 추가:</li>
+</ul>
+
+
+<p><code>sudo nft add chain {{inet}} {{filter}} {{input}} \{ type {{filter}} hook {{input}} priority {{0}} \; policy {{accept}} \}</code></p>
+
+<ul>
+<li>여러 TCP 포트를 허용하는 새 규칙 추가:</li>
+</ul>
+
+
+<p><code>sudo nft add rule {{inet}} {{filter}} {{input}} {{tcp}} {{dport \{ telnet, ssh, http, https \} accept}}</code></p>
+
+<ul>
+<li><code>192.168.0.0/24</code> 서브넷의 모든 트래픽을 호스트의 공용 IP로 변환하는 NAT 규칙 추가:</li>
+</ul>
+
+
+<p><code>sudo nft add rule {{nat}} {{postrouting}} ip saddr {{192.168.0.0/24}} {{masquerade}}</code></p>
+
+<ul>
+<li>규칙 핸들 표시:</li>
+</ul>
+
+
+<p><code>sudo nft --handle --numeric list chain {{family}} {{table}} {{chain}}</code></p>
+
+<ul>
+<li>규칙 삭제:</li>
+</ul>
+
+
+<p><code>sudo nft delete rule {{inet}} {{filter}} {{input}} handle {{3}}</code></p>
+
+<ul>
+<li>현재 구성 저장:</li>
+</ul>
+
+
+<p><code>sudo nft list ruleset &gt; {{/etc/nftables.conf}}</code></p>

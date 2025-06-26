@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-sticky-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-0 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-disabled skin-theme-clientpref-day vector-toc-available" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>Session lock - ArchWiki</title>
+<link rel="stylesheet" href="../ArchWikiOffline.css">
+<meta name="ResourceLoaderDynamicStyles" content="">
+<meta name="generator" content="MediaWiki 1.43.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="max-image-preview:standard">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.25, maximum-scale=5.0">
+<link rel="search" type="application/opensearchdescription+xml" href="/rest.php/v1/search" title="ArchWiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.archlinux.org/api.php?action=rsd">
+<link rel="license" href="https://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="ArchWiki Atom feed" href="/index.php?title=Special:RecentChanges&amp;feed=atom">
+</head>
+<body class="skin--responsive skin-vector skin-vector-search-vue mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Session_lock rootpage-Session_lock skin-vector-2022 action-view">
+<a class="mw-jump-link" href="#bodyContent">Jump to content</a>
+<div class="vector-header-container">
+	</div>
+<div class="mw-page-container">
+	<div class="mw-page-container-inner">
+		<div class="vector-column-start">
+			<div class="vector-main-menu-container">
+		</div>
+	<div class="vector-sticky-pinned-container">
+				<nav id="mw-panel-toc" aria-label="Contents" data-event-name="ui.sidebar-toc" class="mw-table-of-contents-container vector-toc-landmark">
+					<div id="vector-toc-pinned-container" class="vector-pinned-container">
+					<div id="vector-toc" class="vector-toc vector-pinnable-element">
+	<div class="vector-pinnable-header vector-toc-pinnable-header vector-pinnable-header-pinned" data-feature-name="toc-pinned" data-pinnable-element-id="vector-toc">
+	<h2 class="vector-pinnable-header-label">Contents</h2>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-toc.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-toc.unpin">hide</button>
+</div>
+
+
+	<ul class="vector-toc-contents" id="mw-panel-toc-list">
+		<li id="toc-mw-content-text" class="vector-toc-list-item vector-toc-level-1">
+			<a href="#" class="vector-toc-link">
+				<div class="vector-toc-text">Beginning</div>
+			</a>
+		</li>
+		<li id="toc-By_environment" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#By_environment">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">1</span>
+				<span>By environment</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-By_environment-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle By environment subsection</span>
+			</button>
+		
+		<ul id="toc-By_environment-sublist" class="vector-toc-list">
+			<li id="toc-Virtual_console" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Virtual_console">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.1</span>
+					<span>Virtual console</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Virtual_console-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Xorg" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Xorg">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.2</span>
+					<span>Xorg</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Xorg-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Wayland" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Wayland">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.3</span>
+					<span>Wayland</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Wayland-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Triggering_the_lock" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Triggering_the_lock">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">2</span>
+				<span>Triggering the lock</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Triggering_the_lock-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Triggering the lock subsection</span>
+			</button>
+		
+		<ul id="toc-Triggering_the_lock-sublist" class="vector-toc-list">
+			<li id="toc-Shell_triggers" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Shell_triggers">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1</span>
+					<span>Shell triggers</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Shell_triggers-sublist" class="vector-toc-list">
+				<li id="toc-Zsh" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Zsh">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1.1</span>
+					<span>Zsh</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Zsh-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Xorg_triggers" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Xorg_triggers">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2</span>
+					<span>Xorg triggers</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Xorg_triggers-sublist" class="vector-toc-list">
+				<li id="toc-xss-lock" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#xss-lock">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2.1</span>
+					<span>xss-lock</span>
+				</div>
+			</a>
+			
+			<ul id="toc-xss-lock-sublist" class="vector-toc-list">
+				<li id="toc-systemd_events" class="vector-toc-list-item vector-toc-level-4">
+			<a class="vector-toc-link" href="#systemd_events">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2.1.1</span>
+					<span>systemd events</span>
+				</div>
+			</a>
+			
+			<ul id="toc-systemd_events-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-DPMS" class="vector-toc-list-item vector-toc-level-4">
+			<a class="vector-toc-link" href="#DPMS">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2.1.2</span>
+					<span>DPMS</span>
+				</div>
+			</a>
+			
+			<ul id="toc-DPMS-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-xautolock" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#xautolock">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2.2</span>
+					<span>xautolock</span>
+				</div>
+			</a>
+			
+			<ul id="toc-xautolock-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Wayland_triggers" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Wayland_triggers">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.3</span>
+					<span>Wayland triggers</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Wayland_triggers-sublist" class="vector-toc-list">
+				<li id="toc-swayidle" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#swayidle">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.3.1</span>
+					<span>swayidle</span>
+				</div>
+			</a>
+			
+			<ul id="toc-swayidle-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-hypridle" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#hypridle">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.3.2</span>
+					<span>hypridle</span>
+				</div>
+			</a>
+			
+			<ul id="toc-hypridle-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-D-Bus_notification" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#D-Bus_notification">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.3.3</span>
+					<span>D-Bus notification</span>
+				</div>
+			</a>
+			
+			<ul id="toc-D-Bus_notification-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Inactivity" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Inactivity">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.3.4</span>
+					<span>Inactivity</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Inactivity-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Units" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Units">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.3.5</span>
+					<span>Units</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Units-sublist" class="vector-toc-list">
+				<li id="toc-Before_suspend_or_hibernate" class="vector-toc-list-item vector-toc-level-4">
+			<a class="vector-toc-link" href="#Before_suspend_or_hibernate">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.3.5.1</span>
+					<span>Before suspend or hibernate</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Before_suspend_or_hibernate-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Lid_closing" class="vector-toc-list-item vector-toc-level-4">
+			<a class="vector-toc-link" href="#Lid_closing">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.3.5.2</span>
+					<span>Lid closing</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Lid_closing-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+	</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-See_also" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#See_also">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">3</span>
+				<span>See also</span>
+			</div>
+		</a>
+		
+		<ul id="toc-See_also-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+</ul>
+</div>
+
+					</div>
+		</nav>
+			</div>
+		</div>
+		<div class="mw-content-container">
+			<main id="content" class="mw-body" style="margin: 0">
+				<header class="mw-body-header vector-page-titlebar">
+					<nav aria-label="Contents" class="vector-toc-landmark">
+						
+<div id="vector-page-titlebar-toc" class="vector-dropdown vector-page-titlebar-toc vector-button-flush-left">
+	<input type="checkbox" id="vector-page-titlebar-toc-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-page-titlebar-toc" class="vector-dropdown-checkbox " aria-label="Toggle the table of contents">
+	<label id="vector-page-titlebar-toc-label" for="vector-page-titlebar-toc-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"><span class="vector-icon mw-ui-icon-listBullet mw-ui-icon-wikimedia-listBullet"></span>
+
+<span class="vector-dropdown-label-text">Toggle the table of contents</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+							<div id="vector-page-titlebar-toc-unpinned-container" class="vector-unpinned-container">
+			</div>
+		
+	</div>
+</div>
+
+					</nav>
+					<h1 id="firstHeading" class="firstHeading mw-first-heading"><span class="mw-page-title-main">Session lock</span></h1>
+							
+<div id="p-lang-btn" class="vector-dropdown mw-portlet mw-portlet-lang">
+	<input type="checkbox" id="p-lang-btn-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-p-lang-btn" class="vector-dropdown-checkbox mw-interlanguage-selector" aria-label="Go to an article in another language. Available in 2 languages">
+	<label id="p-lang-btn-label" for="p-lang-btn-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--action-progressive mw-portlet-lang-heading-2" aria-hidden="true"><span class="vector-icon mw-ui-icon-language-progressive mw-ui-icon-wikimedia-language-progressive"></span>
+
+<span class="vector-dropdown-label-text">2 languages</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+		<div class="vector-menu-content">
+			
+			<ul class="vector-menu-content-list">
+				
+				<li class="interlanguage-link interwiki-ja mw-list-item"><a href="https://wiki.archlinux.jp/index.php/%E3%82%BB%E3%83%83%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%92%E3%83%AD%E3%83%83%E3%82%AF" title="セッションをロック – 日本語" lang="ja" hreflang="ja" data-title="セッションをロック" data-language-autonym="日本語" data-language-local-name="日本語" class="interlanguage-link-target"><span>日本語</span></a></li>
+<li class="interlanguage-link interwiki-ru mw-list-item"><a href="../ru/Session_lock.html" title="Session lock – русский" lang="ru" hreflang="ru" data-title="Session lock" data-language-autonym="Русский" data-language-local-name="русский" class="interlanguage-link-target"><span>Русский</span></a></li>
+			</ul>
+			
+		</div>
+
+	</div>
+</div>
+</header>
+				<div class="vector-column-end">
+					<div class="vector-sticky-pinned-container">
+						<nav class="vector-page-tools-landmark" aria-label="Page tools">
+							<div id="vector-page-tools-pinned-container" class="vector-pinned-container">
+				
+							</div>
+		</nav>
+						<nav class="vector-appearance-landmark" aria-label="Appearance">
+							<div id="vector-appearance-pinned-container" class="vector-pinned-container">
+				<div id="vector-appearance" class="vector-appearance vector-pinnable-element">
+	<div class="vector-pinnable-header vector-appearance-pinnable-header vector-pinnable-header-pinned" data-feature-name="appearance-pinned" data-pinnable-element-id="vector-appearance" data-pinned-container-id="vector-appearance-pinned-container" data-unpinned-container-id="vector-appearance-unpinned-container">
+	<div class="vector-pinnable-header-label">Appearance</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-appearance.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-appearance.unpin">hide</button>
+</div>
+
+
+</div>
+
+							</div>
+		</nav>
+					</div>
+				</div>
+				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container>
+					<div class="vector-body-before-content">
+							<div class="mw-indicators">
+		</div>
+
+						<div id="siteSub" class="noprint">From ArchWiki</div>
+					</div>
+					<div id="contentSub"><div id="mw-content-subtitle"></div></div>
+					
+					
+					<div id="mw-content-text" class="mw-body-content">
+<div class="mw-content-ltr mw-parser-output" lang="en" dir="ltr">
+<p>There are numerous utilities to lock the screen of a session. But it is important to note that the utility to use is highly dependent on the environment you are in, either the virtual console, or a specific display server (Xorg or Wayland).
+</p>
+<p>See <a href="../en/List_of_applications/Security.html#Screen_lockers" title="List of applications/Security">List of applications/Security#Screen lockers</a>.
+</p>
+<meta property="mw:PageProp/toc">
+<h2><span class="mw-headline" id="By_environment">By environment</span></h2>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../File:Merge-arrows-2.svg" decoding="async" width="36" height="40" class="mw-file-element"></span></span><b>This article or section is a candidate for merging with <a href="../en/List_of_applications/Security.html#Screen_lockers" title="List of applications/Security">List of applications/Security#Screen lockers</a>.</b></p>
+<div>
+<b>Notes:</b> Same purpose, only split into categories. (Discuss in <a rel="nofollow" class="external text" href="../en/Talk:Session_lock.html">Talk:Session lock</a>)</div>
+</div>
+<h3><span class="mw-headline" id="Virtual_console">Virtual console</span></h3>
+<p>You can use <code>vlock</code> or <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=physlock">physlock</a></span> to lock a virtual console.
+</p>
+<h3><span class="mw-headline" id="Xorg">Xorg</span></h3>
+<p>There are many ways to lock the session under Xorg, so this section is likely to be incomplete. Some methods however include:
+</p>
+<ul>
+<li>
+<code>xlock</code>, in the <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=xlockmore">xlockmore</a></span> package -</li>
+<li>
+<code>xsecurelock</code>, in the <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=xsecurelock">xsecurelock</a></span> package</li>
+<li>
+<code>xscreensaver-command -lock</code> in the <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=xscreensaver">xscreensaver</a></span> package</li>
+<li><span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=xss-lock">xss-lock</a></span></li>
+<li>
+<a href="../en/Slock.html" title="Slock">slock</a> in the <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=slock">slock</a></span> package</li>
+<li><span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=kscreenlocker">kscreenlocker</a></span></li>
+<li><span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=i3lock">i3lock</a></span></li>
+<li>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/i3lock-color/">i3lock-color</a></span><sup><small>AUR</small></sup>
+</li>
+<li>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/alock/">alock</a></span><sup><small>AUR</small></sup>
+</li>
+</ul>
+<p>Most desktop environments come with some way to lock the session.
+</p>
+<h3><span class="mw-headline" id="Wayland">Wayland</span></h3>
+<p>You can lock the session with one of the following methods:
+</p>
+<ul>
+<li><span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=swaylock">swaylock</a></span></li>
+<li>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/swaylock-effects-git/">swaylock-effects-git</a></span><sup><small>AUR</small></sup>
+</li>
+<li><span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=waylock">waylock</a></span></li>
+<li><span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=gtklock">gtklock</a></span></li>
+<li><span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=hyprlock">hyprlock</a></span></li>
+</ul>
+<h2><span class="mw-headline" id="Triggering_the_lock">Triggering the lock</span></h2>
+<p>You can lock a session using different methods:
+</p>
+<ul>
+<li>from a terminal</li>
+<li>using a GUI:
+<ul>
+<li>from a desktop icon</li>
+<li>using hot corners</li>
+<li>from a menu (mouse or keyboard driven)</li>
+</ul>
+</li>
+<li>from a <a href="../en/Keyboard_shortcuts.html" title="Keyboard shortcuts">shortcut</a>
+</li>
+<li>from an event:
+<ul>
+<li>inactivity (using <a href="#Inactivity">systemd</a>, <a href="#xss-lock">xss-lock</a> or <a href="#xautolock">xautolock</a>)</li>
+<li>
+<a href="#systemd_events">systemd events</a> (suspend, hibernate, etc.)</li>
+</ul>
+</li>
+</ul>
+<p>The last point (triggering a lock from an event) is the trickiest, because you can do it in one of two ways:
+</p>
+<ul>
+<li>get the action trigger to execute your lock, then to execute the initial action.</li>
+<li>from the event trigger, add the lock to the event chain. So far this can only be done using systemd.</li>
+</ul>
+<h3><span class="mw-headline" id="Shell_triggers">Shell triggers</span></h3>
+<h4><span class="mw-headline" id="Zsh">Zsh</span></h4>
+<p>To execute a command after terminal inactivity, you can use the TMOUT environment variable.
+</p>
+<p>You can combine it with a trap on the ALARM signal to execute the lock. Without a trap, it will just terminate the shell.
+</p>
+<p>You might want to detect if you are in a graphical environment, otherwise your GUI terminals might start disappearing without you understanding why.
+</p>
+<h3><span class="mw-headline" id="Xorg_triggers">Xorg triggers</span></h3>
+<h4><span class="mw-headline" id="xss-lock">xss-lock</span></h4>
+<p><span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=xss-lock">xss-lock</a></span> is triggered by one of two things:
+</p>
+<ul>
+<li>systemd events</li>
+<li><a href="../en/Display_Power_Management_Signaling.html" class="mw-redirect" title="DPMS">DPMS</a></li>
+</ul>
+<p>The advantage of this is that you can control a lock issued manually, by inactivity, and by a suspend command at the same place.
+</p>
+<p>To execute an action on one of those events:
+</p>
+<pre>$ xss-lock <i>locker-utility</i>
+</pre>
+<h5><span class="mw-headline" id="systemd_events">systemd events</span></h5>
+<p>By default, xss-lock subscribes to <code>suspend</code>, <code>hibernate</code>, <code>lock-session</code>, and <code>unlock-session</code> with appropriate actions (run locker and wait for user to unlock or kill locker).
+</p>
+<p>You can prevent xss-lock from being triggered by <code>suspend</code> and <code>hibernate</code> using <code>--ignore-sleep</code>.
+</p>
+<p>You can trigger a manual lock using <code>loginctl lock-session</code>, or lock all current sessions with <code>loginctl lock-sessions</code>.
+</p>
+<h5><span class="mw-headline" id="DPMS">DPMS</span></h5>
+<p>To configure DPMS signaling timeout:
+</p>
+<pre># Trigger screensaver after 10 minutes of inactivity
+xset s on
+xset s 600
+</pre>
+<p>DPMS signaling can also be configured in <code>/etc/X11/xorg.conf.d/</code> in the <code>Monitor</code> section.
+</p>
+<p>Using DPMS signaling, you can set a second timer, for example to notify the user or to dim the screen. For example (from <span class="plainlinks archwiki-template-man" title="$ man 1 xss-lock"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/xss-lock.1">xss-lock(1)</a></span>):
+</p>
+<pre># Dim the screen after three minutes of inactivity, lock the screen two minutes later using i3lock:
+xset s 180 120
+xss-lock -n dim-screen.sh -- i3lock -n
+</pre>
+<p>An example <code>dim-screen.sh</code> script can be found in <code>/usr/share/doc/xss-lock</code>.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> When using xss-lock with <a href="../en/Display_Power_Management_Signaling.html" class="mw-redirect" title="DPMS">DPMS</a>, you will have to blank the screen yourself. It will not be triggered when looking at videos.</div>
+<h4><span class="mw-headline" id="xautolock">xautolock</span></h4>
+<p>Install the <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=xautolock">xautolock</a></span> package.
+</p>
+<pre>$ xautolock -time 12 -locker "systemctl suspend" -detectsleep
+</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> xautolock has restrictive timer limits:
+<ul>
+<li>1 min to 1 hour for <code>time</code>
+</li>
+<li>10 min to 2 hour for <code>killtime</code>
+</li>
+</ul>
+It might be necessary to add <code>-detectsleep</code> to prevent xautolock from locking the session after resuming. One nice feature of xautolock is the <code>corners</code>.</div>
+<h3><span class="mw-headline" id="Wayland_triggers">Wayland triggers</span></h3>
+<h4><span class="mw-headline" id="swayidle">swayidle</span></h4>
+<p><span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=swayidle">swayidle</a></span> listens for idle activity from the Wayland compositor, as well as systemd events, and executes commands accordingly. See <a href="../en/Sway.html#Idle" title="Sway">Sway#Idle</a>.
+</p>
+<h4><span class="mw-headline" id="hypridle">hypridle</span></h4>
+<p><span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=hypridle">hypridle</a></span> Hyprland's idle daemon. See <a rel="nofollow" class="external text" href="https://wiki.hyprland.org/Hypr-Ecosystem/hypridle/">upstream</a> for configuration.
+</p>
+<h4><span class="mw-headline" id="D-Bus_notification">D-Bus notification</span></h4>
+<p>Using <code>loginctl lock-session</code>, or the <code>lock</code> action in <span class="plainlinks archwiki-template-man" title="$ man 5 logind.conf"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/logind.conf.5">logind.conf(5)</a></span>, you can notify the system through DBUS that you want to lock. This notification can then be processed, for example by xss-lock.
+</p>
+<h4><span class="mw-headline" id="Inactivity">Inactivity</span></h4>
+<p>In <span class="plainlinks archwiki-template-man" title="$ man 5 logind.conf"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/logind.conf.5">logind.conf(5)</a></span>, you can configure the <code>IdleAction</code> to <code>lock</code>. This will trigger a DBUS notification, that will have to be processed (for example by xsslock) to lock the session.
+</p>
+<p>Note that this is for a global system (so this is not ideal for a multi user environment).
+</p>
+<p>Note also that "this requires that user sessions correctly report the idle status to the system".
+</p>
+<h4><span class="mw-headline" id="Units">Units</span></h4>
+<h5><span class="mw-headline" id="Before_suspend_or_hibernate">Before suspend or hibernate</span></h5>
+<p>You can use a <a href="../en/Power_management/Suspend_and_hibernate.html#Sleep_hooks" title="Power management/Suspend and hibernate">Sleep hook</a>.
+</p>
+<pre>[Unit]
+Description=Lock the screen
+Before=sleep.target
+
+[Service]
+User=%I
+Type=forking
+Environment=DISPLAY=:0
+ExecStart=/usr/bin/i3lock -c 000000
+
+[Install]
+WantedBy=sleep.target</pre>
+<p>To enable it for a certain user, <a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Enable">enable</a> <code>sleep@<i>Username</i>.service</code>.
+</p>
+<h5><span class="mw-headline" id="Lid_closing">Lid closing</span></h5>
+<p>You can use the <code>lock</code> action using the related <a href="../en/Power_management.html#ACPI_events" title="Power management">ACPI event</a>.
+</p>
+<h2><span class="mw-headline" id="See_also">See also</span></h2>
+<ul><li><a rel="nofollow" class="external text" href="https://geoff.greer.fm/2018/01/02/linux-laptop-locking/">Geoff Greer's site: Linux Laptop Locking</a></li></ul>
+</div>
+</div>
+					<div id="catlinks" class="catlinks" data-mw="interface">
+<div id="mw-normal-catlinks" class="mw-normal-catlinks">
+<a href="../Special:Categories.html" title="Special:Categories">Category</a>: <ul><li><a href="../en/Category:Security.html" title="Category:Security">Security</a></li></ul>
+</div>
+<div id="mw-hidden-catlinks" class="mw-hidden-catlinks mw-hidden-cats-hidden">Hidden category: <ul><li><a href="../en/Category:Pages_or_sections_flagged_with_Template:Merge.html" title="Category:Pages or sections flagged with Template:Merge">Pages or sections flagged with Template:Merge</a></li></ul>
+</div>
+</div>
+				</div>
+			</main>
+			
+		</div>
+		<div class="mw-footer-container">
+			
+<footer id="footer" class="mw-footer" style="margin: 0">
+	<ul id="footer-info">
+	<li data-nosnippet="">Retrieved from "<a dir="ltr" href="https://wiki.archlinux.org/index.php?title=Session_lock&amp;oldid=815183">https://wiki.archlinux.org/index.php?title=Session_lock&amp;oldid=815183</a>"</li>
+<li id="footer-info-lastmod"> This page was last edited on 24 August 2024, at 06:55.</li>
+	<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+<br>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="https://terms.archlinux.org/docs/privacy-policy/">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="../en/ArchWiki:About.html">About ArchWiki</a></li>
+	<li id="footer-places-disclaimers"><a href="../en/ArchWiki:General_disclaimer.html">Disclaimers</a></li>
+	<li id="footer-places-archwiki-code-of-conduct"><a href="https://terms.archlinux.org/docs/code-of-conduct/" class="extiw" title="archlinux-service-agreements:code-of-conduct">Code of conduct</a></li>
+	<li id="footer-places-archwiki-terms-of-service"><a href="https://terms.archlinux.org/docs/terms-of-service/" class="extiw" title="archlinux-service-agreements:terms-of-service">Terms of service</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-copyrightico"><a href="https://www.gnu.org/copyleft/fdl.html" class="cdx-button cdx-button--fake-button cdx-button--size-large cdx-button--fake-button--enabled"><img src="/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" loading="lazy"></a></li>
+	<li id="footer-poweredbyico"><img src="/resources/assets/poweredby_mediawiki.svg" width="88" height="31" loading="lazy"></li>
+</ul>
+
+</footer>
+
+		</div>
+	</div> 
+</div> 
+<div class="vector-settings" id="p-dock-bottom">
+	<ul></ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<h1>jello</h1>
+
+<blockquote><p>A command-line JSON processor using Python syntax.
+More information: <a href="https://github.com/kellyjonbrazil/jello">https://github.com/kellyjonbrazil/jello</a>.</p></blockquote>
+
+<ul>
+<li>Pretty-print JSON or JSON-Lines data from <code>stdin</code> to <code>stdout</code>:</li>
+</ul>
+
+
+<p><code>cat {{file.json}} | jello</code></p>
+
+<ul>
+<li>Output a schema of JSON or JSON Lines data from <code>stdin</code> to <code>stdout</code> (useful for grep):</li>
+</ul>
+
+
+<p><code>cat {{file.json}} | jello -s</code></p>
+
+<ul>
+<li>Output all elements from arrays (or all the values from objects) in JSON or JSON-Lines data from <code>stdin</code> to <code>stdout</code>:</li>
+</ul>
+
+
+<p><code>cat {{file.json}} | jello -l</code></p>
+
+<ul>
+<li>Output the first element in JSON or JSON-Lines data from <code>stdin</code> to <code>stdout</code>:</li>
+</ul>
+
+
+<p><code>cat {{file.json}} | jello _[0]</code></p>
+
+<ul>
+<li>Output the value of a given key of each element in JSON or JSON-Lines data from <code>stdin</code> to <code>stdout</code>:</li>
+</ul>
+
+
+<p><code>cat {{file.json}} | jello '[i.{{key_name}} for i in _]'</code></p>
+
+<ul>
+<li>Output the value of multiple keys as a new JSON object (assuming the input JSON has the keys <code>key_name1</code> and <code>key_name2</code>):</li>
+</ul>
+
+
+<p><code>cat {{file.json}} | jello '{"{{key1}}": _.{{key_name1}}, "{{key_name}}": _.{{key_name2}}}'</code></p>
+
+<ul>
+<li>Output the value of a given key to a string (and disable JSON output):</li>
+</ul>
+
+
+<p><code>cat {{file.json}} | jello -r '"{{some text}}: " + _.{{key_name}}'</code></p>

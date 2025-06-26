@@ -1,0 +1,39 @@
+<h1>kubectl run</h1>
+
+<blockquote><p>Run pods in Kubernetes. Specifies pod generator to avoid deprecation error in some K8S versions.
+More information: <a href="https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#run">https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#run</a>.</p></blockquote>
+
+<ul>
+<li>Run an nginx pod and expose port 80:</li>
+</ul>
+
+
+<p><code>kubectl run {{nginx-dev}} --image=nginx --port 80</code></p>
+
+<ul>
+<li>Run an nginx pod, setting the TEST_VAR environment variable:</li>
+</ul>
+
+
+<p><code>kubectl run {{nginx-dev}} --image=nginx --env="{{TEST_VAR}}={{testing}}"</code></p>
+
+<ul>
+<li>Show API calls that would be made to create an nginx container:</li>
+</ul>
+
+
+<p><code>kubectl run {{nginx-dev}} --image=nginx --dry-run={{none|server|client}}</code></p>
+
+<ul>
+<li>Run an Ubuntu pod interactively, never restart it, and remove it when it exits:</li>
+</ul>
+
+
+<p><code>kubectl run {{temp-ubuntu}} --image=ubuntu:22.04 --restart=Never --rm -- /bin/bash</code></p>
+
+<ul>
+<li>Run an Ubuntu pod, overriding the default command with echo, and specifying custom arguments:</li>
+</ul>
+
+
+<p><code>kubectl run {{temp-ubuntu}} --image=ubuntu:22.04 --command -- echo {{argument1 argument2 ...}}</code></p>

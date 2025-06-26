@@ -1,0 +1,60 @@
+<h1>xidel</h1>
+
+<blockquote><p>Download and extract data from HTML/XML pages as well as JSON APIs.
+More information: <a href="https://www.videlibri.de/xidel.html">https://www.videlibri.de/xidel.html</a>.</p></blockquote>
+
+<ul>
+<li>Print all URLs found by a Google search:</li>
+</ul>
+
+
+<p><code>xidel {{https://www.google.com/search?q=test}} {{[-e|--extract]}} "//a/extract(@href, 'url[?]q=([^&amp;]+)&amp;', 1)[. != '']"</code></p>
+
+<ul>
+<li>Print the title of all pages found by a Google search and download them:</li>
+</ul>
+
+
+<p><code>xidel {{https://www.google.com/search?q=test}} {{[-f|--follow]}} "{{//a/extract(@href, 'url[?]q=([^&amp;]+)&amp;', 1)[. != '']}}" {{[-e|--extract]}} {{//title}} --download {{'{$host}/'}}</code></p>
+
+<ul>
+<li>Follow all links on a page and print the titles, with XPath:</li>
+</ul>
+
+
+<p><code>xidel {{https://example.org}} {{[-f|--follow]}} {{//a}} {{[-e|--extract]}} {{//title}}</code></p>
+
+<ul>
+<li>Follow all links on a page and print the titles, with CSS selectors:</li>
+</ul>
+
+
+<p><code>xidel {{https://example.org}} {{[-f|--follow]}} "{{css('a')}}" --css {{title}}</code></p>
+
+<ul>
+<li>Follow all links on a page and print the titles, with pattern matching:</li>
+</ul>
+
+
+<p><code>xidel {{https://example.org}} {{[-f|--follow]}} "{{&lt;a&gt;{.}&lt;/a&gt;*}}" {{[-e|--extract]}} "{{&lt;title&gt;{.}&lt;/title&gt;}}"</code></p>
+
+<ul>
+<li>Read the pattern from example.xml (which will also check if the element containing &ldquo;ood&rdquo; is there, and fail otherwise):</li>
+</ul>
+
+
+<p><code>xidel {{path/to/example.xml}} {{[-e|--extract]}} "{{&lt;x&gt;&lt;foo&gt;ood&lt;/foo&gt;&lt;bar&gt;{.}&lt;/bar&gt;&lt;/x&gt;}}"</code></p>
+
+<ul>
+<li>Print all newest Stack Overflow questions with title and URL using pattern matching on their RSS feed:</li>
+</ul>
+
+
+<p><code>xidel {{http://stackoverflow.com/feeds}} {{[-e|--extract]}} "{{&lt;entry&gt;&lt;title&gt;{title:=.}&lt;/title&gt;&lt;link&gt;{uri:=@href}&lt;/link&gt;&lt;/entry&gt;+}}"</code></p>
+
+<ul>
+<li>Check for unread Reddit mail, Webscraping, combining CSS, XPath, JSONiq, and automatically form evaluation:</li>
+</ul>
+
+
+<p><code>xidel {{https://reddit.com}} {{[-f|--follow]}} "{{form(css('form.login-form')[1], {'user': '$your_username', 'passwd': '$your_password'})}}" {{[-e|--extract]}} "{{css('#mail')/@title}}"</code></p>

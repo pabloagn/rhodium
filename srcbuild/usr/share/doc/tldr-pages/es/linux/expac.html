@@ -1,0 +1,40 @@
+<h1>expac</h1>
+
+<blockquote><p>Una herramienta de extracción de datos para bases de datos alpm, que ofrece una flexibilidad similar a printf para utilidades basadas en pacman.
+Vea también: <code>pacman</code>.
+Más información: <a href="https://github.com/falconindy/expac">https://github.com/falconindy/expac</a>.</p></blockquote>
+
+<ul>
+<li>Lista las dependencias de un paquete:</li>
+</ul>
+
+
+<p><code>expac -S '%D' {{paquete}}</code></p>
+
+<ul>
+<li>Lista las dependencias opcionales de un paquete:</li>
+</ul>
+
+
+<p><code>expac -S "%o" {{paquete}}</code></p>
+
+<ul>
+<li>Lista el tamaño de descarga de los paquetes en MiB:</li>
+</ul>
+
+
+<p><code>expac -S -H M '%k\t%n' {{paquete1 paquete2 ...}}</code></p>
+
+<ul>
+<li>Lista los paquetes marcados para actualización con su tamaño de descarga:</li>
+</ul>
+
+
+<p><code>expac -S -H M '%k\t%n' $(pacman -Qqu) | sort -sh</code></p>
+
+<ul>
+<li>Listar los paquetes instalados explícitamente con sus dependencias opcionales:</li>
+</ul>
+
+
+<p><code>expac -d '\n\n' -l '\n\t' -Q '%n\n\t%O' $(pacman -Qeq)</code></p>

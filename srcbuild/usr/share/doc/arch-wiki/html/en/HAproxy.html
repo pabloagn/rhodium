@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-sticky-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-0 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-disabled skin-theme-clientpref-day vector-toc-available" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>HAproxy - ArchWiki</title>
+<link rel="stylesheet" href="../ArchWikiOffline.css">
+<meta name="ResourceLoaderDynamicStyles" content="">
+<meta name="generator" content="MediaWiki 1.43.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="max-image-preview:standard">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.25, maximum-scale=5.0">
+<link rel="search" type="application/opensearchdescription+xml" href="/rest.php/v1/search" title="ArchWiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.archlinux.org/api.php?action=rsd">
+<link rel="license" href="https://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="ArchWiki Atom feed" href="/index.php?title=Special:RecentChanges&amp;feed=atom">
+</head>
+<body class="skin--responsive skin-vector skin-vector-search-vue mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-HAproxy rootpage-HAproxy skin-vector-2022 action-view">
+<a class="mw-jump-link" href="#bodyContent">Jump to content</a>
+<div class="vector-header-container">
+	</div>
+<div class="mw-page-container">
+	<div class="mw-page-container-inner">
+		<div class="vector-column-start">
+			<div class="vector-main-menu-container">
+		</div>
+	<div class="vector-sticky-pinned-container">
+				<nav id="mw-panel-toc" aria-label="Contents" data-event-name="ui.sidebar-toc" class="mw-table-of-contents-container vector-toc-landmark">
+					<div id="vector-toc-pinned-container" class="vector-pinned-container">
+					<div id="vector-toc" class="vector-toc vector-pinnable-element">
+	<div class="vector-pinnable-header vector-toc-pinnable-header vector-pinnable-header-pinned" data-feature-name="toc-pinned" data-pinnable-element-id="vector-toc">
+	<h2 class="vector-pinnable-header-label">Contents</h2>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-toc.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-toc.unpin">hide</button>
+</div>
+
+
+	<ul class="vector-toc-contents" id="mw-panel-toc-list">
+		<li id="toc-mw-content-text" class="vector-toc-list-item vector-toc-level-1">
+			<a href="#" class="vector-toc-link">
+				<div class="vector-toc-text">Beginning</div>
+			</a>
+		</li>
+		<li id="toc-Installation" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Installation">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">1</span>
+				<span>Installation</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Installation-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Running" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Running">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">2</span>
+				<span>Running</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Running-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Configuration" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Configuration">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">3</span>
+				<span>Configuration</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Configuration-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Configuration subsection</span>
+			</button>
+		
+		<ul id="toc-Configuration-sublist" class="vector-toc-list">
+			<li id="toc-General_configuration" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#General_configuration">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1</span>
+					<span>General configuration</span>
+				</div>
+			</a>
+			
+			<ul id="toc-General_configuration-sublist" class="vector-toc-list">
+				<li id="toc-ACLs" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#ACLs">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1.1</span>
+					<span>ACLs</span>
+				</div>
+			</a>
+			
+			<ul id="toc-ACLs-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Backends" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Backends">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1.2</span>
+					<span>Backends</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Backends-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Frontends" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Frontends">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1.3</span>
+					<span>Frontends</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Frontends-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Health_checks" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Health_checks">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1.4</span>
+					<span>Health checks</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Health_checks-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Logging_with_systemd" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Logging_with_systemd">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1.5</span>
+					<span>Logging with systemd</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Logging_with_systemd-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Performing_TLS/SSL_termination" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Performing_TLS/SSL_termination">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1.6</span>
+					<span>Performing TLS/SSL termination</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Performing_TLS/SSL_termination-sublist" class="vector-toc-list">
+				<li id="toc-Redirecting_HTTP_to_HTTPS" class="vector-toc-list-item vector-toc-level-4">
+			<a class="vector-toc-link" href="#Redirecting_HTTP_to_HTTPS">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1.6.1</span>
+					<span>Redirecting HTTP to HTTPS</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Redirecting_HTTP_to_HTTPS-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Virtual_host_like_configuration" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Virtual_host_like_configuration">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1.7</span>
+					<span>Virtual host like configuration</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Virtual_host_like_configuration-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-See_also" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#See_also">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">4</span>
+				<span>See also</span>
+			</div>
+		</a>
+		
+		<ul id="toc-See_also-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+</ul>
+</div>
+
+					</div>
+		</nav>
+			</div>
+		</div>
+		<div class="mw-content-container">
+			<main id="content" class="mw-body" style="margin: 0">
+				<header class="mw-body-header vector-page-titlebar">
+					<nav aria-label="Contents" class="vector-toc-landmark">
+						
+<div id="vector-page-titlebar-toc" class="vector-dropdown vector-page-titlebar-toc vector-button-flush-left">
+	<input type="checkbox" id="vector-page-titlebar-toc-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-page-titlebar-toc" class="vector-dropdown-checkbox " aria-label="Toggle the table of contents">
+	<label id="vector-page-titlebar-toc-label" for="vector-page-titlebar-toc-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"><span class="vector-icon mw-ui-icon-listBullet mw-ui-icon-wikimedia-listBullet"></span>
+
+<span class="vector-dropdown-label-text">Toggle the table of contents</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+							<div id="vector-page-titlebar-toc-unpinned-container" class="vector-unpinned-container">
+			</div>
+		
+	</div>
+</div>
+
+					</nav>
+					<h1 id="firstHeading" class="firstHeading mw-first-heading"><span class="mw-page-title-main">HAproxy</span></h1>
+							
+<div id="p-lang-btn" class="vector-dropdown mw-portlet mw-portlet-lang">
+	<input type="checkbox" id="p-lang-btn-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-p-lang-btn" class="vector-dropdown-checkbox mw-interlanguage-selector" aria-label="Go to an article in another language. Available in 1 language">
+	<label id="p-lang-btn-label" for="p-lang-btn-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--action-progressive mw-portlet-lang-heading-1" aria-hidden="true"><span class="vector-icon mw-ui-icon-language-progressive mw-ui-icon-wikimedia-language-progressive"></span>
+
+<span class="vector-dropdown-label-text">1 language</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+		<div class="vector-menu-content">
+			
+			<ul class="vector-menu-content-list">
+				
+				<li class="interlanguage-link interwiki-ja mw-list-item"><a href="https://wiki.archlinux.jp/index.php/HAproxy" title="HAproxy – 日本語" lang="ja" hreflang="ja" data-title="HAproxy" data-language-autonym="日本語" data-language-local-name="日本語" class="interlanguage-link-target"><span>日本語</span></a></li>
+			</ul>
+			
+		</div>
+
+	</div>
+</div>
+</header>
+				<div class="vector-column-end">
+					<div class="vector-sticky-pinned-container">
+						<nav class="vector-page-tools-landmark" aria-label="Page tools">
+							<div id="vector-page-tools-pinned-container" class="vector-pinned-container">
+				
+							</div>
+		</nav>
+						<nav class="vector-appearance-landmark" aria-label="Appearance">
+							<div id="vector-appearance-pinned-container" class="vector-pinned-container">
+				<div id="vector-appearance" class="vector-appearance vector-pinnable-element">
+	<div class="vector-pinnable-header vector-appearance-pinnable-header vector-pinnable-header-pinned" data-feature-name="appearance-pinned" data-pinnable-element-id="vector-appearance" data-pinned-container-id="vector-appearance-pinned-container" data-unpinned-container-id="vector-appearance-unpinned-container">
+	<div class="vector-pinnable-header-label">Appearance</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-appearance.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-appearance.unpin">hide</button>
+</div>
+
+
+</div>
+
+							</div>
+		</nav>
+					</div>
+				</div>
+				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container>
+					<div class="vector-body-before-content">
+							<div class="mw-indicators">
+		</div>
+
+						<div id="siteSub" class="noprint">From ArchWiki</div>
+					</div>
+					<div id="contentSub"><div id="mw-content-subtitle"></div></div>
+					
+					
+					<div id="mw-content-text" class="mw-body-content">
+<div class="mw-content-ltr mw-parser-output" lang="en" dir="ltr">
+<p><a rel="nofollow" class="external text" href="https://www.haproxy.org/">HAProxy</a> is a free, very fast and reliable solution offering high availability, load balancing, and proxying for TCP and HTTP-based applications. It is particularly suited for very high traffic web sites and powers quite a number of the world's most visited ones. Over the years it has become the de-facto standard opensource load balancer, is now shipped with most mainstream Linux distributions, and is often deployed by default in cloud platforms.
+</p>
+<meta property="mw:PageProp/toc">
+<h2><span class="mw-headline" id="Installation">Installation</span></h2>
+<p><a href="../en/Help:Reading.html#Installation_of_packages" class="mw-redirect" title="Install">Install</a> the <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=haproxy">haproxy</a></span> package.
+</p>
+<h2><span class="mw-headline" id="Running">Running</span></h2>
+<p><a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Enable">Enable</a> <code>haproxy.service</code>. HAProxy's configuration can be reloaded live by <a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Reload">reloading</a> <code>haproxy.service</code> as root.
+</p>
+<h2><span class="mw-headline" id="Configuration">Configuration</span></h2>
+<p>An example configuration is available in <code>/etc/haproxy/haproxy.cfg</code>. Edit it to suit your needs, and then <a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Start">start</a> <code>haproxy.service</code>.
+</p>
+<h3><span class="mw-headline" id="General_configuration">General configuration</span></h3>
+<h4><span class="mw-headline" id="ACLs">ACLs</span></h4>
+<p>HAProxy supports ACLs, which can be used to test conditions and perform a given action based on the results of those tests. A typical ACL would be written as follows:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/haproxy/haproxy.cfg</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">acl photo_page path_beg /photos
+</pre>
+<p>In this case, the ACL is matched if the user's request path begins with <code>/photos</code>.
+</p>
+<h4><span class="mw-headline" id="Backends">Backends</span></h4>
+<p>In HAProxy terminology, <b>backends</b> are a server or set of servers that will receive forwarded requests. Backends can balance load based on several <a rel="nofollow" class="external text" href="https://cbonte.github.io/haproxy-dconv/1.8/configuration.html#4.2-balance">load balancing algorithms</a>, including:
+</p>
+<ul>
+<li>Round-robin</li>
+<li>Static round-robin (also known as weighted round-robin)</li>
+<li>Least connections</li>
+</ul>
+<p>An example backend may be written as follows:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/haproxy/haproxy.cfg</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">backend http-in
+   balance roundrobin
+   server s1 web1.example.com:80 check
+   server s2 web2.example.com:80 check
+</pre>
+<h4><span class="mw-headline" id="Frontends">Frontends</span></h4>
+<p><b>Frontends</b> are used to define how requests should be forwarded to backends. They consist of the following:
+</p>
+<ul>
+<li>IP addresses and ports</li>
+<li>ACLs</li>
+<li>
+<i>use_backend</i> rules</li>
+</ul>
+<h4><span class="mw-headline" id="Health_checks">Health checks</span></h4>
+<p>When a backend is declared with the <code>check</code> option, HAProxy will check on startup and on scheduled intervals if the backend is available to process forwarded requests. If a backend fails the health check, it will be removed from rotation until it is deemed to be healthy again, i.e. it passes the health check.
+</p>
+<p>By default, HAProxy will attempt to establish a TCP connection to the backend to determine healthiness.
+</p>
+<p>If a large number of backends are declared with the <code>check</code> option, HAProxy will query all of them on startup, which may delay startup time.
+</p>
+<h4><span class="mw-headline" id="Logging_with_systemd">Logging with systemd</span></h4>
+<p>To configure HAproxy to use systemd <code>/dev/log</code> compatibility socket add the following to your configuration file under the <code>global</code> section. 
+</p>
+<pre>log /dev/log local0 info
+</pre>
+<p>If you use the <code>chroot</code> option in your global configuration, you need to bind the socket into the chroot.
+</p>
+<p>For this we will use a <span class="plainlinks archwiki-template-man" title="$ man 5 systemd.mount"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd.mount.5">systemd.mount(5)</a></span> unit. Generate the unit name with:
+</p>
+<pre># systemd-escape --suffix=mount --path /var/lib/haproxy/dev/log
+</pre>
+<p>We want mount <code>/dev/log</code> into the chroot, but just after journald came up. Create a <a href="../en/Systemd.html#Replacement_unit_files" class="mw-redirect" title="Replacement unit file">replacement unit file</a>: 
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/system/var-lib-haproxy-dev-log.mount</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Unit]
+Requires=systemd-journald.service
+Description=/Expose Systemd Log for HAProxy
+
+[Mount]
+What=/dev/log
+Where=/var/lib/haproxy/dev/log
+Type=none
+Options=bind</pre>
+<p>With the mount file created it is time to expand the original service unit so it mounts up everything correctly. Use a <a href="../en/Systemd.html#Drop-in_files" class="mw-redirect" title="Drop-in file">drop-in file</a> for <code>haproxy.service</code> and add: 
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/system/haproxy.service.d/override.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Unit]
+Requires=var-lib-haproxy-dev-log.mount</pre>
+<h4>
+<span id="Performing_TLS.2FSSL_termination"></span><span class="mw-headline" id="Performing_TLS/SSL_termination">Performing TLS/SSL termination</span>
+</h4>
+<p>In order to use haproxy as a TLS terminator you have to set inside your <code>frontend</code> section
+</p>
+<pre>bind :80
+bind :443 ssl crt <i>/path/to/combined/cert</i>
+</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> To generate the cert you can run <code>cat <i>certificate-full-chain</i> <i>certificate-private-key</i> &gt; <i>combined-cert</i></code>.</div>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> To add support for HTTP/2 add <code>alpn h2,http/1.1</code> at the end of the <code>bind :443</code> line.</div>
+<h5><span class="mw-headline" id="Redirecting_HTTP_to_HTTPS">Redirecting HTTP to HTTPS</span></h5>
+<p>Set in your <code>frontend</code> section
+</p>
+<pre>redirect scheme https code 301 if !{ ssl_fc }
+</pre>
+<h4><span class="mw-headline" id="Virtual_host_like_configuration">Virtual host like configuration</span></h4>
+<p>Suppose you have two backends: <code>foo</code> and <code>bar</code> and each should handle requests only for a specific domain.
+In order to perform this in your <code>frontend</code> section you can configure
+</p>
+<pre>use_backend foo-backend if { hdr(host) -i foo.example.com || hdr(host) -i www.foo.example.com }
+use_backend bar-backend if { hdr(host) -i bar.example.com || hdr(host) -i www.bar.example.com }
+</pre>
+<h2><span class="mw-headline" id="See_also">See also</span></h2>
+<ul>
+<li><a rel="nofollow" class="external text" href="https://www.haproxy.org/">The official HAProxy website</a></li>
+<li><a rel="nofollow" class="external text" href="https://docs.haproxy.org/">Configuration guide</a></li>
+</ul>
+</div>
+</div>
+					<div id="catlinks" class="catlinks" data-mw="interface"><div id="mw-normal-catlinks" class="mw-normal-catlinks">
+<a href="../Special:Categories.html" title="Special:Categories">Category</a>: <ul><li><a href="../en/Category:Networking.html" title="Category:Networking">Networking</a></li></ul>
+</div></div>
+				</div>
+			</main>
+			
+		</div>
+		<div class="mw-footer-container">
+			
+<footer id="footer" class="mw-footer" style="margin: 0">
+	<ul id="footer-info">
+	<li data-nosnippet="">Retrieved from "<a dir="ltr" href="https://wiki.archlinux.org/index.php?title=HAproxy&amp;oldid=762433">https://wiki.archlinux.org/index.php?title=HAproxy&amp;oldid=762433</a>"</li>
+<li id="footer-info-lastmod"> This page was last edited on 29 December 2022, at 08:11.</li>
+	<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+<br>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="https://terms.archlinux.org/docs/privacy-policy/">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="../en/ArchWiki:About.html">About ArchWiki</a></li>
+	<li id="footer-places-disclaimers"><a href="../en/ArchWiki:General_disclaimer.html">Disclaimers</a></li>
+	<li id="footer-places-archwiki-code-of-conduct"><a href="https://terms.archlinux.org/docs/code-of-conduct/" class="extiw" title="archlinux-service-agreements:code-of-conduct">Code of conduct</a></li>
+	<li id="footer-places-archwiki-terms-of-service"><a href="https://terms.archlinux.org/docs/terms-of-service/" class="extiw" title="archlinux-service-agreements:terms-of-service">Terms of service</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-copyrightico"><a href="https://www.gnu.org/copyleft/fdl.html" class="cdx-button cdx-button--fake-button cdx-button--size-large cdx-button--fake-button--enabled"><img src="/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" loading="lazy"></a></li>
+	<li id="footer-poweredbyico"><img src="/resources/assets/poweredby_mediawiki.svg" width="88" height="31" loading="lazy"></li>
+</ul>
+
+</footer>
+
+		</div>
+	</div> 
+</div> 
+<div class="vector-settings" id="p-dock-bottom">
+	<ul></ul>
+</div>
+</body>
+</html>

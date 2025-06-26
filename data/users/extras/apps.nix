@@ -78,6 +78,18 @@
       icon = "bitwarden";
       description = "Bitwarden";
     };
+    protonpassword = {
+      binary = "proton-pass";
+      args = [];
+      icon = "proton";
+      description = "ProtonPass";
+    };
+    protonvpn = {
+      binary = "protonvpn-app";
+      args = [];
+      icon = "proton";
+      description = "ProtonVPN GUI";
+    };
     protonmail = {
       binary = "proton-mail";
       args = [];

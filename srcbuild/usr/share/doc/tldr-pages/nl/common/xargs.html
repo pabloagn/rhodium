@@ -1,0 +1,47 @@
+<h1>xargs</h1>
+
+<blockquote><p>Voer een commando uit met doorgegeven argumenten van een ander commando, een bestand, etc.
+De invoer wordt behandeld als een enkel tekstblok en gesplitst in afzonderlijke stukken op spaties, tabbladen, nieuwe regels en einde-van-bestand.
+Meer informatie: <a href="https://pubs.opengroup.org/onlinepubs/9699919799/utilities/xargs.html">https://pubs.opengroup.org/onlinepubs/9699919799/utilities/xargs.html</a>.</p></blockquote>
+
+<ul>
+<li>Voer een commando uit met de invoergegevens als argumenten:</li>
+</ul>
+
+
+<p><code>{{argumenten_bron}} | xargs {{commando}}</code></p>
+
+<ul>
+<li>Voer meerdere gekoppelde commando&rsquo;s uit op de invoergegevens:</li>
+</ul>
+
+
+<p><code>{{argumenten_bron}} | xargs sh -c "{{commando1}} &amp;&amp; {{commando2}} | {{commando3}}"</code></p>
+
+<ul>
+<li>Gzip alle bestanden met een <code>.log</code> extensie en profiteer van het voordeel van meerdere threads (<code>-print0</code> gebruikt een nul-teken om bestandsnamen te splitsen en <code>-0</code> gebruikt het als scheidingsteken):</li>
+</ul>
+
+
+<p><code>find . -name '*.log' -print0 | xargs {{[-0|--null]}} {{[-P|--max-procs]}} {{4}} {{[-n|--max-args]}} 1 gzip</code></p>
+
+<ul>
+<li>Voer het commando eenmaal per argument uit:</li>
+</ul>
+
+
+<p><code>{{argumenten_bron}} | xargs {{[-n|--max-args]}} 1 {{commando}}</code></p>
+
+<ul>
+<li>Voer het commando één keer uit voor elke invoerregel, waarbij elke plaatsaanduiding (hier gemarkeerd als <code>_</code>) wordt vervangen door de invoerregel:</li>
+</ul>
+
+
+<p><code>{{argumenten_bron}} | xargs -I _ {{commando}} _ {{optionele_extra_argumenten}}</code></p>
+
+<ul>
+<li>Parallelle uitvoeringen van maximaal <code>max-procs</code> processen tegelijk; de standaard is 1. Als <code>max-procs</code> 0 is, zal xargs zoveel mogelijk processen tegelijk uitvoeren:</li>
+</ul>
+
+
+<p><code>{{argumenten_bron}} | xargs {{[-P|--max-procs]}} {{max-procs}} {{commando}}</code></p>

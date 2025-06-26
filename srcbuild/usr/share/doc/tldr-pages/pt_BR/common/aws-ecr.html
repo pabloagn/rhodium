@@ -1,0 +1,60 @@
+<h1>aws ecr</h1>
+
+<blockquote><p>Enviar, buscar, e gerenciar imagens de container.
+Mais informações: <a href="https://awscli.amazonaws.com/v2/documentation/api/latest/reference/ecr/index.html">https://awscli.amazonaws.com/v2/documentation/api/latest/reference/ecr/index.html</a>.</p></blockquote>
+
+<ul>
+<li>Autentica o Docker com o registro default (nome do usuário na AWS):</li>
+</ul>
+
+
+<p><code>aws ecr get-login-password --region {{region}} | {{docker login}} --username AWS --password-stdin {{aws_account_id}}.dkr.ecr.{{region}}.amazonaws.com</code></p>
+
+<ul>
+<li>Cria um repositório:</li>
+</ul>
+
+
+<p><code>aws ecr create-repository --repository-name {{repository}} --image-scanning-configuration scanOnPush={{true|false}} --region {{region}}</code></p>
+
+<ul>
+<li>Cria uma tag em uma imagem local para o ECR:</li>
+</ul>
+
+
+<p><code>docker tag {{nome_do_container}}:{{tag}} {{aws_account_id}}.dkr.ecr.{{region}}.amazonaws.com/{{nome_do_container}}:{{tag}}</code></p>
+
+<ul>
+<li>Envia uma imagem para um repositório:</li>
+</ul>
+
+
+<p><code>docker push {{aws_account_id}}.dkr.ecr.{{region}}.amazonaws.com/{{nome_do_container}}:{{tag}}</code></p>
+
+<ul>
+<li>Busca a imagem de um repositório:</li>
+</ul>
+
+
+<p><code>docker pull {{aws_account_id}}.dkr.ecr.{{region}}.amazonaws.com/{{nome_do_container}}:{{tag}}</code></p>
+
+<ul>
+<li>Apaga uma imagem de um repositório:</li>
+</ul>
+
+
+<p><code>aws ecr batch-delete-image --repository-name {{repositório}} --image-ids imageTag={{latest}}</code></p>
+
+<ul>
+<li>Apaga um repositório:</li>
+</ul>
+
+
+<p><code>aws ecr delete-repository --repository-name {{repositório}} --force</code></p>
+
+<ul>
+<li>Lista as imagens de um repositório:</li>
+</ul>
+
+
+<p><code>aws ecr list-images --repository-name {{repositório}}</code></p>

@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-sticky-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-0 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-disabled skin-theme-clientpref-day vector-toc-available" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>iptables (Français) - ArchWiki</title>
+<link rel="stylesheet" href="../ArchWikiOffline.css">
+<meta name="ResourceLoaderDynamicStyles" content="">
+<meta name="generator" content="MediaWiki 1.43.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="max-image-preview:standard">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.25, maximum-scale=5.0">
+<link rel="search" type="application/opensearchdescription+xml" href="/rest.php/v1/search" title="ArchWiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.archlinux.org/api.php?action=rsd">
+<link rel="license" href="https://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="ArchWiki Atom feed" href="/index.php?title=Special:RecentChanges&amp;feed=atom">
+</head>
+<body class="skin--responsive skin-vector skin-vector-search-vue mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Iptables_Français rootpage-Iptables_Français skin-vector-2022 action-view">
+<a class="mw-jump-link" href="#bodyContent">Jump to content</a>
+<div class="vector-header-container">
+	</div>
+<div class="mw-page-container">
+	<div class="mw-page-container-inner">
+		<div class="vector-column-start">
+			<div class="vector-main-menu-container">
+		</div>
+	<div class="vector-sticky-pinned-container">
+				<nav id="mw-panel-toc" aria-label="Contents" data-event-name="ui.sidebar-toc" class="mw-table-of-contents-container vector-toc-landmark">
+					<div id="vector-toc-pinned-container" class="vector-pinned-container">
+					<div id="vector-toc" class="vector-toc vector-pinnable-element">
+	<div class="vector-pinnable-header vector-toc-pinnable-header vector-pinnable-header-pinned" data-feature-name="toc-pinned" data-pinnable-element-id="vector-toc">
+	<h2 class="vector-pinnable-header-label">Contents</h2>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-toc.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-toc.unpin">hide</button>
+</div>
+
+
+	<ul class="vector-toc-contents" id="mw-panel-toc-list">
+		<li id="toc-mw-content-text" class="vector-toc-list-item vector-toc-level-1">
+			<a href="#" class="vector-toc-link">
+				<div class="vector-toc-text">Beginning</div>
+			</a>
+		</li>
+		<li id="toc-Installation" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Installation">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">1</span>
+				<span>Installation</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Installation-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Installation subsection</span>
+			</button>
+		
+		<ul id="toc-Installation-sublist" class="vector-toc-list">
+			<li id="toc-Interfaces_utilisateur" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Interfaces_utilisateur">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.1</span>
+					<span>Interfaces utilisateur</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Interfaces_utilisateur-sublist" class="vector-toc-list">
+				<li id="toc-Console" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Console">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.1.1</span>
+					<span>Console</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Console-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Graphique" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Graphique">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.1.2</span>
+					<span>Graphique</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Graphique-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Concepts_de_base" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Concepts_de_base">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">2</span>
+				<span>Concepts de base</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Concepts_de_base-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Concepts de base subsection</span>
+			</button>
+		
+		<ul id="toc-Concepts_de_base-sublist" class="vector-toc-list">
+			<li id="toc-Tables" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Tables">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1</span>
+					<span>Tables</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Tables-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Chaînes" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Cha%C3%AEnes">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2</span>
+					<span>Chaînes</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Chaînes-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Règles" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#R%C3%A8gles">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.3</span>
+					<span>Règles</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Règles-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Traverser_les_chaînes" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Traverser_les_cha%C3%AEnes">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.4</span>
+					<span>Traverser les chaînes</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Traverser_les_chaînes-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Modules" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Modules">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.5</span>
+					<span>Modules</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Modules-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Configuration_et_utilisation" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Configuration_et_utilisation">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">3</span>
+				<span>Configuration et utilisation</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Configuration_et_utilisation-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Configuration et utilisation subsection</span>
+			</button>
+		
+		<ul id="toc-Configuration_et_utilisation-sublist" class="vector-toc-list">
+			<li id="toc-En_ligne_de_commande" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#En_ligne_de_commande">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1</span>
+					<span>En ligne de commande</span>
+				</div>
+			</a>
+			
+			<ul id="toc-En_ligne_de_commande-sublist" class="vector-toc-list">
+				<li id="toc-Afficher_les_règles_actuelles" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Afficher_les_r%C3%A8gles_actuelles">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1.1</span>
+					<span>Afficher les règles actuelles</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Afficher_les_règles_actuelles-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Réinitialisation_des_règles" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#R%C3%A9initialisation_des_r%C3%A8gles">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1.2</span>
+					<span>Réinitialisation des règles</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Réinitialisation_des_règles-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Modification_des_règles" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Modification_des_r%C3%A8gles">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1.3</span>
+					<span>Modification des règles</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Modification_des_règles-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Permettre_le_trafic_multidiffusion" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Permettre_le_trafic_multidiffusion">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.2</span>
+					<span>Permettre le trafic multidiffusion</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Permettre_le_trafic_multidiffusion-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Guides" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Guides">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.3</span>
+					<span>Guides</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Guides-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Journalisation" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Journalisation">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">4</span>
+				<span>Journalisation</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Journalisation-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Journalisation subsection</span>
+			</button>
+		
+		<ul id="toc-Journalisation-sublist" class="vector-toc-list">
+			<li id="toc-Limiter_le_débit_de_logs" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Limiter_le_d%C3%A9bit_de_logs">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.1</span>
+					<span>Limiter le débit de logs</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Limiter_le_débit_de_logs-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Visualisation_des_paquets_journalisés" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Visualisation_des_paquets_journalis%C3%A9s">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.2</span>
+					<span>Visualisation des paquets journalisés</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Visualisation_des_paquets_journalisés-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-syslog-ng" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#syslog-ng">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.3</span>
+					<span>syslog-ng</span>
+				</div>
+			</a>
+			
+			<ul id="toc-syslog-ng-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-ulogd" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#ulogd">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.4</span>
+					<span>ulogd</span>
+				</div>
+			</a>
+			
+			<ul id="toc-ulogd-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Voir_aussi" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Voir_aussi">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">5</span>
+				<span>Voir aussi</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Voir_aussi-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+</ul>
+</div>
+
+					</div>
+		</nav>
+			</div>
+		</div>
+		<div class="mw-content-container">
+			<main id="content" class="mw-body" style="margin: 0">
+				<header class="mw-body-header vector-page-titlebar">
+					<nav aria-label="Contents" class="vector-toc-landmark">
+						
+<div id="vector-page-titlebar-toc" class="vector-dropdown vector-page-titlebar-toc vector-button-flush-left">
+	<input type="checkbox" id="vector-page-titlebar-toc-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-page-titlebar-toc" class="vector-dropdown-checkbox " aria-label="Toggle the table of contents">
+	<label id="vector-page-titlebar-toc-label" for="vector-page-titlebar-toc-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"><span class="vector-icon mw-ui-icon-listBullet mw-ui-icon-wikimedia-listBullet"></span>
+
+<span class="vector-dropdown-label-text">Toggle the table of contents</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+							<div id="vector-page-titlebar-toc-unpinned-container" class="vector-unpinned-container">
+			</div>
+		
+	</div>
+</div>
+
+					</nav>
+					<h1 id="firstHeading" class="firstHeading mw-first-heading">iptables (Français)</h1>
+							
+<div id="p-lang-btn" class="vector-dropdown mw-portlet mw-portlet-lang">
+	<input type="checkbox" id="p-lang-btn-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-p-lang-btn" class="vector-dropdown-checkbox mw-interlanguage-selector" aria-label="Go to an article in another language. Available in 6 languages">
+	<label id="p-lang-btn-label" for="p-lang-btn-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--action-progressive mw-portlet-lang-heading-6" aria-hidden="true"><span class="vector-icon mw-ui-icon-language-progressive mw-ui-icon-wikimedia-language-progressive"></span>
+
+<span class="vector-dropdown-label-text">6 languages</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+		<div class="vector-menu-content">
+			
+			<ul class="vector-menu-content-list">
+				
+				<li class="interlanguage-link interwiki-de mw-list-item"><a href="https://wiki.archlinux.de/title/Iptables" title="Iptables – Deutsch" lang="de" hreflang="de" data-title="Iptables" data-language-autonym="Deutsch" data-language-local-name="Deutsch" class="interlanguage-link-target"><span>Deutsch</span></a></li>
+<li class="interlanguage-link interwiki-en mw-list-item"><a href="../en/Iptables.html" title="Iptables – English" lang="en" hreflang="en" data-title="Iptables" data-language-autonym="English" data-language-local-name="English" class="interlanguage-link-target"><span>English</span></a></li>
+<li class="interlanguage-link interwiki-es mw-list-item"><a href="../es/Iptables.html" title="Iptables – español" lang="es" hreflang="es" data-title="Iptables" data-language-autonym="Español" data-language-local-name="español" class="interlanguage-link-target"><span>Español</span></a></li>
+<li class="interlanguage-link interwiki-ja mw-list-item"><a href="https://wiki.archlinux.jp/index.php/Iptables" title="Iptables – 日本語" lang="ja" hreflang="ja" data-title="Iptables" data-language-autonym="日本語" data-language-local-name="日本語" class="interlanguage-link-target"><span>日本語</span></a></li>
+<li class="interlanguage-link interwiki-ru mw-list-item"><a href="../ru/Iptables.html" title="Iptables – русский" lang="ru" hreflang="ru" data-title="Iptables" data-language-autonym="Русский" data-language-local-name="русский" class="interlanguage-link-target"><span>Русский</span></a></li>
+<li class="interlanguage-link interwiki-zh-hans mw-list-item"><a href="https://wiki.archlinuxcn.org/wiki/Iptables" title="Iptables – 中文（简体）" lang="zh-Hans" hreflang="zh-Hans" data-title="Iptables" data-language-autonym="中文（简体）" data-language-local-name="中文（简体）" class="interlanguage-link-target"><span>中文（简体）</span></a></li>
+			</ul>
+			
+		</div>
+
+	</div>
+</div>
+</header>
+				<div class="vector-column-end">
+					<div class="vector-sticky-pinned-container">
+						<nav class="vector-page-tools-landmark" aria-label="Page tools">
+							<div id="vector-page-tools-pinned-container" class="vector-pinned-container">
+				
+							</div>
+		</nav>
+						<nav class="vector-appearance-landmark" aria-label="Appearance">
+							<div id="vector-appearance-pinned-container" class="vector-pinned-container">
+				<div id="vector-appearance" class="vector-appearance vector-pinnable-element">
+	<div class="vector-pinnable-header vector-appearance-pinnable-header vector-pinnable-header-pinned" data-feature-name="appearance-pinned" data-pinnable-element-id="vector-appearance" data-pinned-container-id="vector-appearance-pinned-container" data-unpinned-container-id="vector-appearance-unpinned-container">
+	<div class="vector-pinnable-header-label">Appearance</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-appearance.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-appearance.unpin">hide</button>
+</div>
+
+
+</div>
+
+							</div>
+		</nav>
+					</div>
+				</div>
+				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container>
+					<div class="vector-body-before-content">
+							<div class="mw-indicators">
+		</div>
+
+						<div id="siteSub" class="noprint">From ArchWiki</div>
+					</div>
+					<div id="contentSub"><div id="mw-content-subtitle"></div></div>
+					
+					
+					<div id="mw-content-text" class="mw-body-content">
+<div class="mw-content-ltr mw-parser-output" lang="fr" dir="ltr">
+<p><span>
+</span>
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>État de la traduction:</strong> Cet article est la version francophone de <a href="../en/Iptables.html" title="Iptables">iptables</a>. Date de la dernière traduction: 2023-03-17. Vous pouvez aider à synchroniser la traduction s'il y a eu des <a rel="nofollow" class="external text" href="https://wiki.archlinux.org/index.php?title=Iptables&amp;diff=0&amp;oldid=773015">changements</a> dans la version anglaise.</div>
+<div class="archwiki-template-meta-related-articles">
+<p>Related articles</p>
+<ul>
+<li><a href="../en/Nftables.html" title="Nftables">nftables</a></li>
+<li><a href="../en/Fail2ban.html" title="Fail2ban">Fail2ban</a></li>
+<li><a href="../en/Sshguard.html" title="Sshguard">sshguard</a></li>
+<li><a href="../en/Simple_stateful_firewall.html" title="Simple stateful firewall">Simple stateful firewall</a></li>
+<li><a href="../en/Sysctl.html#TCP/IP_stack_hardening" title="Sysctl">Sysctl#TCP/IP stack hardening</a></li>
+<li><a href="../en/Uncomplicated_Firewall.html" title="Uncomplicated Firewall">Uncomplicated Firewall</a></li>
+</ul>
+</div>
+<p><i>iptables</i> est un utilitaire de ligne de commande pour configurer le <a href="../fr/Category:Firewalls.html" class="mw-redirect" title="Pare-feu">pare-feu</a> du noyau Linux implémenté dans le projet <a href="https://en.wikipedia.org/wiki/fr:Netfilter" class="extiw" title="wikipedia:fr:Netfilter">Netfilter</a>. Le terme <i>iptables</i> est aussi couramment utilisé pour désigner ce pare-feu au niveau du noyau. Il peut être configuré directement avec iptables, ou en utilisant l'une des nombreuses interfaces en <a href="#Console">console</a> ou <a href="#Graphique">graphique</a>. <i>iptables</i> est utilisé pour <a href="https://en.wikipedia.org/wiki/IPv4" class="extiw" title="wikipedia:IPv4">IPv4</a> et <i>ip6tables</i> est utilisé pour <a href="../en/IPv6.html" title="IPv6">IPv6</a>. <i>iptables</i> et <i>ip6tables</i> ont la même syntaxe, mais certaines options sont spécifiques à IPv4 ou IPv6.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> <i>iptables</i> est une ancienne infrastructure, <a href="../en/Nftables.html" title="Nftables">nftables</a> vise à fournir un remplacement moderne incluant une couche de compatibilité.</div>
+<meta property="mw:PageProp/toc">
+<h2><span class="mw-headline" id="Installation">Installation</span></h2>
+<p>Le noyau Arch Linux de base est compilé pour fournir iptables. Vous n'aurez besoin que d'installer les utilitaires de l'utilisateur, qui sont fournis par le paquet <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=iptables">iptables</a></span>. Le paquet <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=iptables">iptables</a></span> est une dépendance indirecte du <a href="../en/Meta_package_and_package_group.html#Difference_between_meta_package_and_package_group" title="Meta package and package group">méta-paquet</a> <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=base">base</a></span>, il devrait donc être installé sur votre système par défaut.
+</p>
+<h3><span class="mw-headline" id="Interfaces_utilisateur">Interfaces utilisateur</span></h3>
+<h4><span class="mw-headline" id="Console">Console</span></h4>
+<ul><li>
+<b>Arno's firewall</b> — Pare-feu sécurisé pour les machines à hébergement unique ou multiple. Très facile à configurer, pratique à gérer et hautement personnalisable. Prend en charge : NAT et SNAT, transfert de port, modems ethernet ADSL avec IPs statiques et dynamiques, filtrage d'adresse MAC, détection de scan de port furtif, transfert de DMZ et DMZ-2-LAN, protection contre les inondations SYN/ICMP, journalisation étendue définissable par l'utilisateur avec limitation du taux pour éviter l'inondation des journaux, tous les protocoles IP et VPNs tels que IPsec, support des plugins pour ajouter des fonctionnalités supplémentaires.</li></ul>
+<dl><dd>
+<a rel="nofollow" class="external free" href="https://rocky.eld.leidenuniv.nl/">https://rocky.eld.leidenuniv.nl/</a> || <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/arno-iptables-firewall/">arno-iptables-firewall</a></span><sup><small>AUR</small></sup>
+</dd></dl>
+<ul><li>
+<b>ferm</b> — Outil pour maintenir des pare-feu complexes, sans avoir la peine de réécrire les règles complexes encore et encore. Il permet de stocker l'ensemble des règles du pare-feu dans un fichier séparé et de les charger avec une seule commande. La configuration du pare-feu ressemble à un langage structuré de type programmation, qui peut contenir des niveaux et des listes.</li></ul>
+<dl><dd>
+<a rel="nofollow" class="external free" href="http://ferm.foo-projects.org/">http://ferm.foo-projects.org/</a> || <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=ferm">ferm</a></span>
+</dd></dl>
+<ul><li>
+<b><a href="https://en.wikipedia.org/wiki/FireHOL" class="extiw" title="wikipedia:FireHOL">FireHOL</a></b> — Langage permettant d'exprimer des règles de pare-feu, et pas seulement un script qui produit une sorte de pare-feu. Il permet de construire facilement des pare-feu, même sophistiqués, comme vous le souhaitez.</li></ul>
+<dl><dd>
+<a rel="nofollow" class="external free" href="https://firehol.sourceforge.net/">https://firehol.sourceforge.net/</a> || <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/firehol/">firehol</a></span><sup><small>AUR</small></sup>
+</dd></dl>
+<ul><li>
+<b>Firetable</b> — Outil pour maintenir un pare-feu IPtables. Chaque interface peut être configurée séparément via son propre fichier de configuration, qui contient une syntaxe facile et lisible par l'homme.</li></ul>
+<dl><dd>
+<a rel="nofollow" class="external free" href="https://gitlab.com/hsleisink/firetable">https://gitlab.com/hsleisink/firetable</a> || <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/firetable/">firetable</a></span><sup><small>AUR</small></sup>
+</dd></dl>
+<ul><li>
+<b><a href="../en/Firewalld.html" title="Firewalld">firewalld</a> (firewall-cmd)</b> — Daemon et interface console pour la configuration du réseau et des zones de pare-feu ainsi que pour la mise en place et la configuration des règles de pare-feu.</li></ul>
+<dl><dd>
+<a rel="nofollow" class="external free" href="https://firewalld.org/">https://firewalld.org/</a> || <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=firewalld">firewalld</a></span>
+</dd></dl>
+<ul><li>
+<b><a href="../en/Shorewall.html" title="Shorewall">Shorewall</a></b> — Outil de haut niveau pour la configuration de Netfilter. Vous décrivez les exigences de votre pare-feu/ passerelle à l'aide d'entrées dans un ensemble de fichiers de configuration.</li></ul>
+<dl><dd>
+<a rel="nofollow" class="external free" href="http://www.shorewall.net/">http://www.shorewall.net/</a> || <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/shorewall/">shorewall</a></span><sup><small>AUR</small></sup>
+</dd></dl>
+<ul><li>
+<b><a href="../en/Uncomplicated_Firewall.html" title="Uncomplicated Firewall">Uncomplicated Firewall</a></b> — Interface simple pour iptables.</li></ul>
+<dl><dd>
+<a rel="nofollow" class="external free" href="https://launchpad.net/ufw">https://launchpad.net/ufw</a> || <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=ufw">ufw</a></span>
+</dd></dl>
+<ul><li>
+<b><a href="../en/PeerGuardian_Linux.html" title="PeerGuardian Linux">PeerGuardian</a> (pglcmd)</b> — Application de pare-feu orientée vers la protection de la vie privée. Elle bloque les connexions vers et depuis les hôtes spécifiés dans d'énormes listes de blocage (des milliers ou des millions de plages IP).</li></ul>
+<dl><dd>
+<a rel="nofollow" class="external free" href="https://sourceforge.net/projects/peerguardian/">https://sourceforge.net/projects/peerguardian/</a> || <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/pgl/">pgl</a></span><sup><small>AUR</small></sup>
+</dd></dl>
+<ul><li>
+<b>Vuurmuur</b> — Puissant gestionnaire de pare-feu. Il a une configuration simple et facile à apprendre qui permet des configurations simples et complexes. La configuration peut être entièrement configurée via une <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=ncurses">ncurses</a></span> GUI, qui permet une administration à distance sécurisée par SSH ou sur la console. Vuurmuur prend en charge la mise en forme du trafic et dispose de puissantes fonctions de surveillance, qui permettent à l'administrateur de consulter les journaux, les connexions et l'utilisation de la bande passante en temps réel.</li></ul>
+<dl><dd>
+<a rel="nofollow" class="external free" href="https://www.vuurmuur.org/">https://www.vuurmuur.org/</a> || <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/vuurmuur/">vuurmuur</a></span><sup><small>AUR</small></sup>
+</dd></dl>
+<h4><span class="mw-headline" id="Graphique">Graphique</span></h4>
+<ul><li>
+<b>Firewall Builder</b> — Outil graphique de configuration et de gestion de pare-feu qui prend en charge iptables (netfilter), ipfilter, pf, ipfw, Cisco PIX (FWSM, ASA) et les listes d'accès étendues des routeurs Cisco. Le programme fonctionne sous Linux, FreeBSD, OpenBSD, Windows et macOS et peut gérer les pare-feu locaux et distants.</li></ul>
+<dl><dd>
+<a rel="nofollow" class="external free" href="https://fwbuilder.sourceforge.net/">https://fwbuilder.sourceforge.net/</a> || <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=fwbuilder">fwbuilder</a></span>
+</dd></dl>
+<ul><li>
+<b><a href="https://en.wikipedia.org/wiki/firewalld" class="extiw" title="wikipedia:firewalld">firewalld</a> (firewall-config)</b> — Daemon et interface graphique pour la configuration du réseau et des zones de pare-feu ainsi que pour la mise en place et la configuration des règles de pare-feu.</li></ul>
+<dl><dd>
+<a rel="nofollow" class="external free" href="https://firewalld.org/">https://firewalld.org/</a> || <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=firewalld">firewalld</a></span>
+</dd></dl>
+<ul><li>
+<b><a href="../en/Uncomplicated_Firewall.html#Gufw" title="Uncomplicated Firewall">Gufw</a></b> — Une interface basé sur GTK pour <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=ufw">ufw</a></span> qui se trouve être une interface CLI pour iptables (gufw-&gt;ufw-&gt;iptables), est super facile et super simple à utiliser.</li></ul>
+<dl><dd>
+<a rel="nofollow" class="external free" href="https://gufw.org/">https://gufw.org/</a> || <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=gufw">gufw</a></span>
+</dd></dl>
+<ul><li>
+<b><a href="../en/PeerGuardian_Linux.html" title="PeerGuardian Linux">PeerGuardian</a></b> — Application pare-feu orientée vers la protection de la vie privée. Elle bloque les connexions vers et depuis les hôtes spécifiés dans d'énormes listes de blocage (des milliers ou des millions de plages IP).</li></ul>
+<dl><dd>
+<a rel="nofollow" class="external free" href="https://sourceforge.net/projects/peerguardian/">https://sourceforge.net/projects/peerguardian/</a> || <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/pgl/">pgl</a></span><sup><small>AUR</small></sup>
+</dd></dl>
+<ul><li>
+<b>Portmaster</b> — Portmaster est un pare-feu applicatif gratuit et open-source avec des paramètres par défaut pour améliorer votre vie privée.</li></ul>
+<dl><dd>
+<a rel="nofollow" class="external free" href="https://safing.io/">https://safing.io/</a> || <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/portmaster-stub-bin/">portmaster-stub-bin</a></span><sup><small>AUR</small></sup>
+</dd></dl>
+<h2><span class="mw-headline" id="Concepts_de_base">Concepts de base</span></h2>
+<p>iptables est utilisé pour inspecter, modifier, transférer, rediriger et/ou supprimer des paquets IP.  Le code pour filtrer les paquets IP est déjà intégré au noyau et est organisé en une collection de <i>tables</i>, chacune ayant un but spécifique.  Les tables sont constituées d'un ensemble de "chaînes" prédéfinies, et les chaînes contiennent des règles qui sont parcourues dans l'ordre. Chaque règle consiste en un prédicat de correspondances potentielles et une action correspondante (appelée <i>cible</i>) qui est exécutée si le prédicat est vrai, c'est-à-dire si les conditions sont remplies.  Si le paquet IP atteint la fin d'une chaîne intégrée, y compris une chaîne vide, alors la cible <i>politique</i> de la chaîne détermine la destination finale du paquet IP. iptables est l'utilitaire utilisateur qui vous permet de travailler avec ces chaînes/règles.  La plupart des nouveaux utilisateurs trouvent les complexités du routage IP sous Linux assez décourageantes, mais, en pratique, les cas d'utilisation les plus courants (NAT et/ou pare-feu Internet de base) sont considérablement moins complexes.
+</p>
+<p>La clé pour comprendre comment iptables fonctionne est <a rel="nofollow" class="external text" href="https://www.frozentux.net/iptables-tutorial/images/tables_traverse.jpg">ce tableau</a>.  Le mot minuscule en haut est le tableau et le mot majuscule en bas est la chaîne.  Chaque paquet IP qui arrive <i>sur n'importe quelle interface réseau</i> passe par cet organigramme de haut en bas.  Une idée fausse courante est que les paquets entrant depuis, par exemple, une interface interne sont traités différemment des paquets provenant d'une interface tournée vers Internet.  Toutes les interfaces sont traitées de la même manière ; c'est à vous de définir des règles qui les traitent différemment.  Bien entendu, certains paquets sont destinés à des processus locaux, ils entrent donc par le haut de l'organigramme et s'arrêtent à &lt;Processus local&gt;, tandis que d'autres paquets sont générés par des processus locaux ; ils commencent donc à &lt;Processus local&gt; et descendent dans l'organigramme.  Une explication détaillée du fonctionnement de cet organigramme peut être trouvée <a rel="nofollow" class="external text" href="https://www.frozentux.net/iptables-tutorial/iptables-tutorial.html#TRAVERSINGOFTABLES">ici</a>.
+</p>
+<p>Dans la grande majorité des cas d'utilisation, vous n'aurez pas du tout besoin d'utiliser les tables <b>raw</b>, <b>mangle</b>, ou <b>security</b>.  Par conséquent, le tableau suivant représente un flux de paquets réseau simplifié à travers <i>iptables</i> :
+</p>
+<pre style="white-space: pre !important; font-family:'DejaVu Sans Mono',monospace,monospace; font-variant-ligatures: no-common-ligatures;">                               XXXXXXXXXXXXXXXXXX
+                             XXX     Network    XXX
+                               XXXXXXXXXXXXXXXXXX
+                                       +
+                                       |
+                                       v
+ +-------------+              +------------------+
+ |table: filter| &lt;---+        | table: nat       |
+ |chain: INPUT |     |        | chain: PREROUTING|
+ +-----+-------+     |        +--------+---------+
+       |             |                 |
+       v             |                 v
+ [local process]     |           ****************          +--------------+
+       |             +---------+ Routing decision +------&gt; |table: filter |
+       v                         ****************          |chain: FORWARD|
+****************                                           +------+-------+
+Routing decision                                                  |
+****************                                                  |
+       |                                                          |
+       v                        ****************                  |
++-------------+       +------&gt;  Routing decision  &lt;---------------+
+|table: nat   |       |         ****************
+|chain: OUTPUT|       |               +
++-----+-------+       |               |
+      |               |               v
+      v               |      +-------------------+
++--------------+      |      | table: nat        |
+|table: filter | +----+      | chain: POSTROUTING|
+|chain: OUTPUT |             +--------+----------+
++--------------+                      |
+                                      v
+                               XXXXXXXXXXXXXXXXXX
+                             XXX    Network     XXX
+                               XXXXXXXXXXXXXXXXXX
+</pre>
+<h3><span class="mw-headline" id="Tables">Tables</span></h3>
+<p>iptables contient cinq tables :
+</p>
+<ol>
+<li>
+<code>raw</code> est utilisée uniquement pour configurer les paquets afin qu'ils soient exempts de suivi de connexion.</li>
+<li>
+<code>filter</code> est la table par défaut, et c'est là que toutes les actions typiquement associées à un pare-feu ont lieu.</li>
+<li>
+<code>nat</code> est utilisée pour <a href="https://en.wikipedia.org/wiki/fr:Network_address_translation" class="extiw" title="wikipedia:fr:Network address translation">network address translation</a> (par exemple, la redirection de port).</li>
+<li>
+<code>mangle</code> est utilisé pour les altérations spécialisées de paquets.</li>
+<li>
+<code>security</code> est utilisé pour les règles de <a href="../en/Security.html#Mandatory_access_control" class="mw-redirect" title="Mandatory Access Control">contrôle d'accès obligatoire</a> du réseau (par exemple SELinux -- consulter <a rel="nofollow" class="external text" href="https://lwn.net/Articles/267140/">cet article</a> pour plus de détails).</li>
+</ol>
+<p>Dans la plupart des cas, vous n'en utiliserez que deux : <b>filter</b> et <b>nat</b>.  Les autres tables sont destinées à des configurations complexes impliquant plusieurs routeurs et décisions de routage et sont de toute façon au-delà de la portée de ces remarques introductives.
+</p>
+<h3>
+<span id="Cha.C3.AEnes"></span><span class="mw-headline" id="Chaînes">Chaînes</span>
+</h3>
+<p>Les tables sont composées de <i>chaînes</i>, qui sont des listes de règles qui sont suivies dans l'ordre. La table par défaut, <code>filter</code>, contient trois chaînes intégrées : <code>INPUT</code>, <code>OUTPUT</code> et <code>FORWARD</code> qui sont activées à différents moments du processus de filtrage des paquets, comme l'illustre le <a rel="nofollow" class="external text" href="https://www.frozentux.net/iptables-tutorial/chunkyhtml/images/tables_traverse.jpg">graphique</a><sup title="Last check status: 404">[<a href="https://en.wikipedia.org/wiki/Wikipedia:Link_rot" class="extiw" title="wikipedia:Wikipedia:Link rot">dead link</a> 2025-01-19 ⓘ]</sup>.  La table nat comprend les chaînes <code>PREROUTING</code>, <code>POSTROUTING</code> et <code>OUTPUT</code>.
+</p>
+<p>Consultez <span class="plainlinks archwiki-template-man" title="$ man 8 iptables"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/iptables.8">iptables(8)</a></span> pour une description des chaînes intégrées dans d'autres tables.
+</p>
+<p>Par défaut, aucune des chaînes ne contient de règles. C'est à vous d'ajouter des règles aux chaînes que vous souhaitez utiliser. Les chaînes ont une politique par défaut, qui est généralement définie sur <code>ACCEPT</code>, mais qui peut être réinitialisée sur <code>DROP</code>, si vous voulez être sûr que rien ne passe à travers votre jeu de règles. La politique par défaut s'applique toujours à la fin d'une chaîne uniquement. Par conséquent, le paquet doit passer par toutes les règles existantes dans la chaîne avant que la politique par défaut ne soit appliquée.
+</p>
+<p>Des chaînes définies par l'utilisateur peuvent être ajoutées pour rendre les jeux de règles plus efficaces ou plus facilement modifiables.  Consultez <a href="../en/Simple_stateful_firewall.html" title="Simple stateful firewall">Simple stateful firewall</a> pour un exemple d'utilisation des chaînes définies par l'utilisateur.
+</p>
+<h3>
+<span id="R.C3.A8gles"></span><span class="mw-headline" id="Règles">Règles</span>
+</h3>
+<p>Le filtrage de paquets est basé sur des <i>règles</i>, qui sont spécifiées par plusieurs <i>correspondances</i> (conditions que le paquet doit satisfaire pour que la règle puisse être appliquée), et une <i>cible</i> (action prise lorsque le paquet correspond à toutes les conditions).  Les éléments typiques sur lesquels une règle peut correspondre sont l'interface par laquelle le paquet est arrivé (par exemple eth0 ou eth1), le type de paquet (ICMP, TCP ou UDP) ou le port de destination du paquet.
+</p>
+<p>Les cibles sont spécifiées à l'aide de l'option <code>-j</code> ou <code>--jump</code>. Les cibles peuvent être des chaînes définies par l'utilisateur (c'est-à-dire que si ces conditions sont remplies, il faut sauter à la chaîne suivante définie par l'utilisateur et y poursuivre le traitement), une des cibles spéciales intégrées ou une extension de cible. Les cibles intégrées sont <code>ACCEPT</code>, <code>DROP</code>, <code>QUEUE</code> et <code>RETURN</code>, les extensions de cible sont, par exemple, <code>REJECT</code> et <code>LOG</code>. Si la cible est une cible intégrée, le sort du paquet est décidé immédiatement et le traitement du paquet dans la table courante est arrêté. Si la cible est une chaîne définie par l'utilisateur et que le sort du paquet n'est pas décidé par cette seconde chaîne, il sera filtré par les règles restantes de la chaîne originale. Les extensions de cible peuvent être soit <i>terminantes</i> (comme les cibles intégrées) ou <i>non-terminantes</i> (comme les chaînes définies par l'utilisateur), consultez <span class="plainlinks archwiki-template-man" title="$ man 8 iptables-extensions"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/iptables-extensions.8">iptables-extensions(8)</a></span> pour plus de détails.
+</p>
+<h3>
+<span id="Traverser_les_cha.C3.AEnes"></span><span class="mw-headline" id="Traverser_les_chaînes">Traverser les chaînes</span>
+</h3>
+<p>Un paquet réseau reçu sur n'importe quelle interface traverse les chaînes de contrôle du trafic des tables dans l'ordre indiqué dans l'organigramme <a rel="nofollow" class="external autonumber" href="https://www.frozentux.net/iptables-tutorial/chunkyhtml/images/tables_traverse.jpg">[1]</a><sup title="Last check status: 404">[<a href="https://en.wikipedia.org/wiki/Wikipedia:Link_rot" class="extiw" title="wikipedia:Wikipedia:Link rot">dead link</a> 2025-01-19 ⓘ]</sup>. La première décision de routage consiste à déterminer si la destination finale du paquet est la machine locale (auquel cas le paquet traverse les chaînes <code>INPUT</code>) ou une autre machine (auquel cas le paquet traverse les chaînes <code>FORWARD</code>). Les décisions de routage ultérieures consistent à décider de l'interface à attribuer à un paquet sortant. À chaque chaîne du chemin, chaque règle de cette chaîne est évaluée dans l'ordre et chaque fois qu'une règle correspond, l'action cible/saut correspondante est exécutée.  Les trois cibles les plus couramment utilisées sont <code>ACCEPT</code>, <code>DROP</code> et le saut vers une chaîne définie par l'utilisateur.  Alors que les chaînes intégrées peuvent avoir des politiques par défaut, les chaînes définies par l'utilisateur ne le peuvent pas.  Si toutes les règles d'une chaîne que vous avez sautée ne parviennent pas à fournir une correspondance complète, le paquet est renvoyé dans la chaîne d'appel ; voir l'illustration suivante <a rel="nofollow" class="external autonumber" href="https://www.frozentux.net/iptables-tutorial/images/table_subtraverse.jpg">[2]</a>. Si, à tout moment, une correspondance complète est obtenue pour une règle avec une cible <code>DROP</code>, le paquet est abandonné et aucun autre traitement n'est effectué. Si un paquet atteint un saut vers la cible ACCEPT, il ne traversera pas d'autres règles de la chaîne et des chaînes suivantes de la table. Son traitement passera à la première chaîne de la table suivante dans l'ordre. Voir aussi <a rel="nofollow" class="external text" href="https://www.frozentux.net/iptables-tutorial/iptables-tutorial.html#TRAVERSINGOFTABLES">Traversing tables and chains</a> et <a rel="nofollow" class="external text" href="https://www.frozentux.net/iptables-tutorial/iptables-tutorial.html#ACCEPTTARGET">Accept Target</a> du tutoriel frozentux.
+</p>
+<h3><span class="mw-headline" id="Modules">Modules</span></h3>
+<p>Il existe de nombreux modules qui peuvent être utilisés pour étendre iptables tels que connlimit, conntrack, limit et recent. Ces modules ajoutent des fonctionnalités supplémentaires pour permettre des règles de filtrage complexes.
+</p>
+<h2><span class="mw-headline" id="Configuration_et_utilisation">Configuration et utilisation</span></h2>
+<p>iptables est un service <a href="../fr/Systemd.html" title="Systemd (Français)">systemd</a> et est <a href="../fr/Systemd.html#Utilisation_des_unit%C3%A9s" class="mw-redirect" title="Démarré">démarré</a> en conséquence. Le paquet Arch <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=iptables">iptables</a></span> installe un ensemble vide de règles dans <code>/etc/iptables/iptables.rules</code> qui sera chargé lorsque vous <a href="../fr/Systemd.html#Utilisation_des_unit%C3%A9s" class="mw-redirect" title="Démarrez">démarrez</a> l'unité <code>iptables.service</code> pour la première fois. Comme pour les autres services, si vous voulez qu'iptables soit chargé automatiquement au démarrage, vous devez l'<a href="../fr/Systemd.html#Utilisation_des_unit%C3%A9s" class="mw-redirect" title="Activer">activer</a>.
+</p>
+<p>Les règles iptables pour IPv6 sont, par défaut, stockées dans <code>/etc/iptables/ip6tables.rules</code>, qui est lu par <code>ip6tables.service</code>. Vous pouvez le démarrer de la même manière que ci-dessus.
+</p>
+<p>Après avoir ajouté des règles via la ligne de commande comme indiqué dans les sections suivantes, le fichier de configuration n'est pas modifié automatiquement ; vous devez le sauvegarder manuellement :
+</p>
+<pre># iptables-save -f /etc/iptables/iptables.rules
+</pre>
+<p>Si vous modifiez le fichier de configuration manuellement, <a href="../fr/Systemd.html#Utilisation_des_unit%C3%A9s" class="mw-redirect" title="Rechargez">rechargez</a> iptables.
+</p>
+<p>Ou vous pouvez le charger directement à travers iptables :
+</p>
+<pre># iptables-restore /etc/iptables/iptables.rules
+</pre>
+<h3><span class="mw-headline" id="En_ligne_de_commande">En ligne de commande</span></h3>
+<h4>
+<span id="Afficher_les_r.C3.A8gles_actuelles"></span><span class="mw-headline" id="Afficher_les_règles_actuelles">Afficher les règles actuelles</span>
+</h4>
+<p>La commande de base pour lister les règles actuelles est <code>--list-rules</code> (<code>-S</code>), dont le format de sortie est similaire à celui de l'utilitaire <i>iptables-save</i>. La principale différence entre les deux est que ce dernier affiche les règles de toutes les tables par défaut, alors que toutes les commandes <i>iptables</i> n'affichent par défaut que la table <code>filter</code>. 
+</p>
+<p>Lorsque vous travaillez avec iptables sur la ligne de commande, la commande <code>--list</code> (<code>-L</code>) accepte plus de modificateurs et affiche plus d'informations. Par exemple, vous pouvez vérifier le jeu de règles actuel et le nombre d'occurrences par règle en utilisant la commande :
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;"># iptables -nvL</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">Chain INPUT (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination
+
+Chain FORWARD (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination
+
+Chain OUTPUT (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination
+</pre>
+<p>Si la sortie ressemble à ce qui précède, alors il n'y a pas de règles (c'est-à-dire que rien n'est bloqué) dans la table <code>filter</code> par défaut. D'autres tables peuvent être spécifiées avec l'option <code>-t</code>.
+</p>
+<p>Pour afficher les numéros de ligne lors de l'énumération des règles, ajoutez <code>--line-numbers</code> à cette entrée. Les numéros de ligne sont un raccourci utile pour la <a href="#Modification_des_r%C3%A8gles">#Modification des règles</a> sur la ligne de commande.
+</p>
+<h4>
+<span id="R.C3.A9initialisation_des_r.C3.A8gles"></span><span class="mw-headline" id="Réinitialisation_des_règles">Réinitialisation des règles</span>
+</h4>
+<p>Vous pouvez purger et réinitialiser iptables par défaut en utilisant ces commandes :
+</p>
+<pre># iptables -F
+# iptables -X
+# iptables -t nat -F
+# iptables -t nat -X
+# iptables -t mangle -F
+# iptables -t mangle -X
+# iptables -t raw -F
+# iptables -t raw -X
+# iptables -t security -F
+# iptables -t security -X
+# iptables -P INPUT ACCEPT
+# iptables -P FORWARD ACCEPT
+# iptables -P OUTPUT ACCEPT
+</pre>
+<p>La commande <code>-F</code> sans argument vide toutes les chaînes de sa table courante. De même, <code>-X</code> supprime toutes les chaînes vides autres que celles par défaut dans une table.
+</p>
+<p>Les chaînes individuelles peuvent être vidées ou supprimées en suivant <code>-F</code> et <code>-X</code> avec un argument <code>[chain]</code>.
+</p>
+<h4>
+<span id="Modification_des_r.C3.A8gles"></span><span class="mw-headline" id="Modification_des_règles">Modification des règles</span>
+</h4>
+<p>Les règles peuvent être éditées en ajoutant <code>-A</code> une règle à une chaîne, en l'insérant <code>-I</code> à une position spécifique de la chaîne, en remplaçant <code>-R</code> une règle existante, ou en la supprimant <code>-D</code>. Les trois premières commandes sont illustrées dans ce qui suit.
+</p>
+<p>Tout d'abord, notre ordinateur n'est pas un routeur (à moins, bien sûr, qu'il <a href="../en/Router.html" title="Router">soit un routeur</a>). Nous voulons changer la politique par défaut sur la chaîne <code>FORWARD</code> de <code>ACCEPT</code> à <code>DROP</code>.
+</p>
+<pre># iptables -P FORWARD DROP
+</pre>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Attention:</strong> Le reste de cette section a pour but d'enseigner la syntaxe et les concepts des règles iptables. Il ne s'agit pas d'un moyen de sécuriser les serveurs. Pour améliorer la sécurité de votre système, consultez <a href="../en/Simple_stateful_firewall.html" title="Simple stateful firewall">Simple stateful firewall</a> pour une configuration iptables minimalement sécurisée et <a href="../en/Security.html" title="Security">Security</a> pour renforcer Arch Linux en général.</div>
+<p>La fonction de synchronisation sur réseau local de <a href="https://en.wikipedia.org/wiki/Dropbox_(service)" class="extiw" title="wikipedia:Dropbox (service)">Dropbox</a> <a rel="nofollow" class="external text" href="https://isc.sans.edu/data/port.html?port=17500">diffuse des paquets toutes les 30 secondes</a> à tous les ordinateurs qu'elle peut consulter. Si nous nous trouvons sur un réseau local avec des clients Dropbox et que nous n'utilisons pas cette fonction, nous pouvons souhaiter rejeter ces paquets.
+</p>
+<pre># iptables -A INPUT -p tcp --dport 17500 -j REJECT --reject-with icmp-port-unreachable
+</pre>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;"># iptables -nvL --line-numbers</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">Chain INPUT (policy ACCEPT 0 packets, 0 bytes)
+num   pkts bytes target     prot opt in     out     source               destination
+1        0     0 REJECT     tcp  --  *      *       0.0.0.0/0            0.0.0.0/0            tcp dpt:17500 reject-with icmp-port-unreachable
+
+Chain FORWARD (policy DROP 0 packets, 0 bytes)
+num   pkts bytes target     prot opt in     out     source               destination
+
+Chain OUTPUT (policy ACCEPT 0 packets, 0 bytes)
+num   pkts bytes target     prot opt in     out     source               destination
+</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> Nous utilisons ici <code>REJECT</code> plutôt que <code>DROP</code>, car la <a href="https://tools.ietf.org/html/rfc1122#page-69" class="extiw" title="rfc:1122">RFC 1122</a> exige que les hôtes renvoient les erreurs ICMP chaque fois que possible, au lieu de laisser tomber les paquets. <a rel="nofollow" class="external text" href="https://www.chiark.greenend.org.uk/~peterb/network/drop-vs-reject">Cette page</a> explique pourquoi il est presque toujours préférable de REJETER plutôt que de DROP les paquets.</div>
+<p>Supposons maintenant que nous changeons d'avis sur Dropbox et que nous décidions de l'installer sur notre ordinateur. Nous voulons également effectuer une synchronisation en réseau local, mais uniquement avec une adresse IP particulière sur notre réseau. Nous devons donc utiliser <code>-R</code> pour remplacer notre ancienne règle. Où <code>10.0.0.85</code> est notre autre IP :
+</p>
+<pre># iptables -R INPUT 1 -p tcp --dport 17500 ! -s 10.0.0.85 -j REJECT --reject-with icmp-port-unreachable
+</pre>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;"># iptables -nvL --line-numbers</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">Chain INPUT (policy ACCEPT 0 packets, 0 bytes)
+num   pkts bytes target     prot opt in     out     source               destination
+1        0     0 REJECT     tcp  --  *      *      !10.0.0.85            0.0.0.0/0            tcp dpt:17500 reject-with icmp-port-unreachable
+
+Chain FORWARD (policy DROP 0 packets, 0 bytes)
+num   pkts bytes target     prot opt in     out     source               destination
+
+Chain OUTPUT (policy ACCEPT 0 packets, 0 bytes)
+num   pkts bytes target     prot opt in     out     source               destination
+</pre>
+<p>Nous avons maintenant remplacé notre règle originale par une règle qui autorise <code>10.0.0.85</code> à accéder au port <code>17500</code> de notre ordinateur. Mais nous réalisons maintenant que cette règle n'est pas évolutive. Si notre sympathique utilisateur de Dropbox tente d'accéder au port <code>17500</code> sur notre appareil, nous devons l'autoriser immédiatement, et non pas le tester en fonction des règles de pare-feu qui pourraient venir par la suite !
+</p>
+<p>Nous écrivons donc une nouvelle règle pour autoriser immédiatement notre utilisateur de confiance. En utilisant <code>-I</code> pour insérer la nouvelle règle avant l'ancienne :
+</p>
+<pre># iptables -I INPUT -p tcp --dport 17500 -s 10.0.0.85 -j ACCEPT -m comment --comment "Friendly Dropbox"
+</pre>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;"># iptables -nvL --line-numbers</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">Chain INPUT (policy ACCEPT 0 packets, 0 bytes)
+num   pkts bytes target     prot opt in     out     source               destination
+1        0     0 ACCEPT     tcp  --  *      *       10.0.0.85            0.0.0.0/0            tcp dpt:17500 /* Friendly Dropbox */
+2        0     0 REJECT     tcp  --  *      *      !10.0.0.85            0.0.0.0/0            tcp dpt:17500 reject-with icmp-port-unreachable
+
+Chain FORWARD (policy DROP 0 packets, 0 bytes)
+num   pkts bytes target     prot opt in     out     source               destination
+
+Chain OUTPUT (policy ACCEPT 0 packets, 0 bytes)
+num   pkts bytes target     prot opt in     out     source               destination
+</pre>
+<p>Et remplacez notre deuxième règle par une règle qui rejette tout sur le port <code>17500</code> :
+</p>
+<pre># iptables -R INPUT 2 -p tcp --dport 17500 -j REJECT --reject-with icmp-port-unreachable
+</pre>
+<p>Notre liste de règles finale ressemble maintenant à ceci :
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;"># iptables -nvL --line-numbers</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">Chain INPUT (policy ACCEPT 0 packets, 0 bytes)
+num   pkts bytes target     prot opt in     out     source               destination
+1        0     0 ACCEPT     tcp  --  *      *       10.0.0.85            0.0.0.0/0            tcp dpt:17500 /* Friendly Dropbox */
+2        0     0 REJECT     tcp  --  *      *       0.0.0.0/0            0.0.0.0/0            tcp dpt:17500 reject-with icmp-port-unreachable
+
+Chain FORWARD (policy DROP 0 packets, 0 bytes)
+num   pkts bytes target     prot opt in     out     source               destination
+
+Chain OUTPUT (policy ACCEPT 0 packets, 0 bytes)
+num   pkts bytes target     prot opt in     out     source               destination
+</pre>
+<h3><span class="mw-headline" id="Permettre_le_trafic_multidiffusion">Permettre le trafic multidiffusion</span></h3>
+<p>Les protocoles qui utilisent l'identification multicast (par exemple <a href="../en/SANE.html" title="SANE">SANE</a> qui recherche des scanners de réseau) enverront du trafic à l'IP de diffusion du réseau et les réponses reviendront de l'IP d'un client spécifique. Puisque ces adresses IP sont différentes, iptables ne reconnaîtra pas la réponse comme <code>RELATED</code> ou <code>ESTABLISHED</code>, et il bloquera la réponse. Voir <a rel="nofollow" class="external autonumber" href="https://serverfault.com/a/911286">[3]</a> pour savoir comment accepter le trafic multicast sans créer un pare-feu trop permissif.
+</p>
+<p>Tout d'abord, créez un conteneur de hachage <a href="../en/Ipset.html" title="Ipset">ipset</a>. Le délai d'attente est la fenêtre de temps pour accepter les réponses du client.
+</p>
+<pre># ipset create upnp hash:ip,port timeout 3
+</pre>
+<p>Ensuite, créez une règle pour ajouter le trafic multicast sortant au hash ipset.
+</p>
+<pre># iptables -A OUTPUT -d 239.255.255.250/32 -p udp -m udp -j SET --add-set upnp src,src --exist
+</pre>
+<p>Troisièmement, créez une règle pour autoriser le trafic entrant qui correspond au hachage de l'ipset.
+</p>
+<pre># iptables -A INPUT -p udp -m set --match-set upnp dst,dst -j ACCEPT
+</pre>
+<p>Enfin, n'oubliez pas de sauvegarder les nouvelles règles (voir <a href="#Configuration_et_utilisation">#Configuration et utilisation</a> et <a href="../en/Ipset.html#Making_ipset_persistent" title="Ipset">ipset#Making ipset persistent</a>), et assurez-vous que <code>iptables.service</code> et <code>ipset.service</code> sont <a href="../fr/Systemd.html#Utilisation_des_unit%C3%A9s" class="mw-redirect" title="Activé">activés</a> pour que les règles se chargent au démarrage du système.
+</p>
+<h3><span class="mw-headline" id="Guides">Guides</span></h3>
+<ul>
+<li><a href="../en/Simple_stateful_firewall.html" title="Simple stateful firewall">Simple stateful firewall</a></li>
+<li><a href="../en/Router.html" title="Router">Router</a></li>
+</ul>
+<h2><span class="mw-headline" id="Journalisation">Journalisation</span></h2>
+<p>La cible <code>LOG</code> peut être utilisée pour consigner les paquets qui ont rencontré une règle. Contrairement à d'autres cibles telles que <code>ACCEPT</code> ou <code>DROP</code>, le paquet continuera à avancer dans la chaîne après avoir atteint une cible <code>LOG</code>. Cela signifie que pour activer la journalisation de tous les paquets abandonnés, vous devez ajouter une règle <code>LOG</code> en double avant chaque règle <code>DROP</code>. Comme cela réduit l'efficacité et rend les choses moins simples, une chaîne <code>logdrop</code> peut être créée à la place.
+</p>
+<p>Créez la chaîne avec :
+</p>
+<pre># iptables -N logdrop
+</pre>
+<p>Et ajoutez les règles suivantes à la chaîne nouvellement créée :
+</p>
+<pre># iptables -A logdrop -m limit --limit 5/m --limit-burst 10 -j LOG
+# iptables -A logdrop -j DROP
+</pre>
+<p>L'explication des options <code>limit</code> et <code>limit-burst</code> est donnée <a href="#Limiter_le_d%C3%A9bit_de_logs">ci-dessous</a>.
+</p>
+<p>Maintenant, chaque fois que nous voulons laisser tomber un paquet et enregistrer cet événement, nous sautons simplement à la chaîne <code>logdrop</code>, par exemple :
+</p>
+<pre># iptables -A INPUT -m conntrack --ctstate INVALID -j logdrop
+</pre>
+<h3>
+<span id="Limiter_le_d.C3.A9bit_de_logs"></span><span class="mw-headline" id="Limiter_le_débit_de_logs">Limiter le débit de logs</span>
+</h3>
+<p>La chaîne <code>logdrop</code> ci-dessus utilise le module limit pour empêcher le journal <i>iptables</i> de devenir trop volumineux ou de provoquer des écritures inutiles sur le disque dur. Sans limitation, un service configuré de manière erronée qui essaie de se connecter, ou un attaquant, pourrait remplir le disque (ou au moins la partition <code>/var</code>) en provoquant des écritures dans le journal iptables.
+</p>
+<p>Le module limit est appelé avec <code>-m limit</code>. Vous pouvez ensuite utiliser <code>--limit</code> pour définir un taux moyen et <code>--limit-burst</code> pour définir un taux de rafale initial. Dans l'exemple <code>logdrop</code> ci-dessus :
+</p>
+<pre>iptables -A logdrop -m limit --limit 5/m --limit-burst 10 -j LOG
+</pre>
+<p>ajoute une règle qui enregistrera tous les paquets qui la traversent. Les 10 premiers paquets consécutifs seront enregistrés, et à partir de là, seulement 5 paquets par minute seront enregistrés. Le compte de "limit burst" est remis à zéro chaque fois que le "limite rate" n'est pas dépassé, c'est-à-dire que l'activité de journalisation revient automatiquement à la normale.
+</p>
+<h3>
+<span id="Visualisation_des_paquets_journalis.C3.A9s"></span><span class="mw-headline" id="Visualisation_des_paquets_journalisés">Visualisation des paquets journalisés</span>
+</h3>
+<p>Les paquets journalisés sont visibles sous forme de messages du noyau dans le <a href="../fr/Systemd/Journal.html" class="mw-redirect" title="Journal de systemd">journal de systemd</a>.
+</p>
+<p>Pour voir tous les paquets qui ont été journalisés depuis le dernier démarrage de la machine :
+</p>
+<pre># journalctl -k --grep="IN=.*OUT=.*"
+</pre>
+<h3><span class="mw-headline" id="syslog-ng">syslog-ng</span></h3>
+<p>En supposant que vous utilisez <a href="../en/Syslog-ng.html" title="Syslog-ng">syslog-ng</a>, vous pouvez contrôler l'emplacement de la sortie du journal d'iptables dans <code>syslog-ng.conf</code>. Remplacez :
+</p>
+<pre>filter f_everything { level(debug..emerg) and not facility(auth, authpriv) ; } ;
+</pre>
+<p>en
+</p>
+<pre>filter f_everything { level(debug..emerg) and not facility(auth, authpriv) and not filter(f_iptables) ; } ;
+</pre>
+<p>Ceci arrêtera la journalisation de la sortie d'iptables dans <code>/var/log/everything.log</code>.
+</p>
+<p>Si vous voulez aussi qu'iptables enregistre dans un fichier différent de <code>/var/log/iptables.log</code>, vous pouvez simplement changer la valeur du fichier de destination <code>d_iptables</code> ici (toujours dans <code>syslog-ng.conf</code>) :
+</p>
+<pre>destination d_iptables { file("/var/log/iptables.log") ; } ;
+</pre>
+<h3><span class="mw-headline" id="ulogd">ulogd</span></h3>
+<p><span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=ulogd">ulogd</a></span> est un daemon spécialisé de journalisation de paquets en espace utilisateur pour netfilter qui peut remplacer la cible <code>LOG</code> par défaut.
+</p>
+<h2><span class="mw-headline" id="Voir_aussi">Voir aussi</span></h2>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/iptables" class="extiw" title="wikipedia:iptables">Article Wikipedia</a></li>
+<li><a href="../en/Port_knocking.html" title="Port knocking">Port knocking</a></li>
+<li><a rel="nofollow" class="external text" href="https://www.netfilter.org/projects/iptables/index.html">Site web officiel d'iptables</a></li>
+<li>
+<a rel="nofollow" class="external text" href="https://www.frozentux.net/iptables-tutorial/iptables-tutorial.html">iptables Tutorial 1.2.2</a> par Oskar Andreasson</li>
+<li><a href="https://wiki.debian.org/iptables" class="extiw" title="debian:iptables">Debian Wiki - iptables</a></li>
+<li><a rel="nofollow" class="external text" href="https://home.regit.org/netfilter-en/secure-use-of-helpers/">Utilisation sécurisée des aides au suivi des connexions</a></li>
+</ul>
+</div>
+</div>
+					<div id="catlinks" class="catlinks" data-mw="interface">
+<div id="mw-normal-catlinks" class="mw-normal-catlinks">
+<a href="../Special:Categories.html" title="Special:Categories">Category</a>: <ul><li><a href="../fr/Category:Firewalls.html" title="Category:Firewalls (Français)">Firewalls (Français)</a></li></ul>
+</div>
+<div id="mw-hidden-catlinks" class="mw-hidden-catlinks mw-hidden-cats-hidden">Hidden category: <ul><li><a href="../en/Category:Pages_with_dead_links.html" title="Category:Pages with dead links">Pages with dead links</a></li></ul>
+</div>
+</div>
+				</div>
+			</main>
+			
+		</div>
+		<div class="mw-footer-container">
+			
+<footer id="footer" class="mw-footer" style="margin: 0">
+	<ul id="footer-info">
+	<li data-nosnippet="">Retrieved from "<a dir="ltr" href="https://wiki.archlinux.org/index.php?title=Iptables_(Fran%C3%A7ais)&amp;oldid=825574">https://wiki.archlinux.org/index.php?title=Iptables_(Français)&amp;oldid=825574</a>"</li>
+<li id="footer-info-lastmod"> This page was last edited on 19 January 2025, at 17:29.</li>
+	<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+<br>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="https://terms.archlinux.org/docs/privacy-policy/">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="../en/ArchWiki:About.html">About ArchWiki</a></li>
+	<li id="footer-places-disclaimers"><a href="../en/ArchWiki:General_disclaimer.html">Disclaimers</a></li>
+	<li id="footer-places-archwiki-code-of-conduct"><a href="https://terms.archlinux.org/docs/code-of-conduct/" class="extiw" title="archlinux-service-agreements:code-of-conduct">Code of conduct</a></li>
+	<li id="footer-places-archwiki-terms-of-service"><a href="https://terms.archlinux.org/docs/terms-of-service/" class="extiw" title="archlinux-service-agreements:terms-of-service">Terms of service</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-copyrightico"><a href="https://www.gnu.org/copyleft/fdl.html" class="cdx-button cdx-button--fake-button cdx-button--size-large cdx-button--fake-button--enabled"><img src="/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" loading="lazy"></a></li>
+	<li id="footer-poweredbyico"><img src="/resources/assets/poweredby_mediawiki.svg" width="88" height="31" loading="lazy"></li>
+</ul>
+
+</footer>
+
+		</div>
+	</div> 
+</div> 
+<div class="vector-settings" id="p-dock-bottom">
+	<ul></ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-sticky-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-0 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-disabled skin-theme-clientpref-day vector-toc-available" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>hdparm - ArchWiki</title>
+<link rel="stylesheet" href="../ArchWikiOffline.css">
+<meta name="ResourceLoaderDynamicStyles" content="">
+<meta name="generator" content="MediaWiki 1.43.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="max-image-preview:standard">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.25, maximum-scale=5.0">
+<link rel="search" type="application/opensearchdescription+xml" href="/rest.php/v1/search" title="ArchWiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.archlinux.org/api.php?action=rsd">
+<link rel="license" href="https://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="ArchWiki Atom feed" href="/index.php?title=Special:RecentChanges&amp;feed=atom">
+</head>
+<body class="skin--responsive skin-vector skin-vector-search-vue mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Hdparm rootpage-Hdparm skin-vector-2022 action-view">
+<a class="mw-jump-link" href="#bodyContent">Jump to content</a>
+<div class="vector-header-container">
+	</div>
+<div class="mw-page-container">
+	<div class="mw-page-container-inner">
+		<div class="vector-column-start">
+			<div class="vector-main-menu-container">
+		</div>
+	<div class="vector-sticky-pinned-container">
+				<nav id="mw-panel-toc" aria-label="Contents" data-event-name="ui.sidebar-toc" class="mw-table-of-contents-container vector-toc-landmark">
+					<div id="vector-toc-pinned-container" class="vector-pinned-container">
+					<div id="vector-toc" class="vector-toc vector-pinnable-element">
+	<div class="vector-pinnable-header vector-toc-pinnable-header vector-pinnable-header-pinned" data-feature-name="toc-pinned" data-pinnable-element-id="vector-toc">
+	<h2 class="vector-pinnable-header-label">Contents</h2>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-toc.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-toc.unpin">hide</button>
+</div>
+
+
+	<ul class="vector-toc-contents" id="mw-panel-toc-list">
+		<li id="toc-mw-content-text" class="vector-toc-list-item vector-toc-level-1">
+			<a href="#" class="vector-toc-link">
+				<div class="vector-toc-text">Beginning</div>
+			</a>
+		</li>
+		<li id="toc-Installation" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Installation">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">1</span>
+				<span>Installation</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Installation-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Usage" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Usage">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">2</span>
+				<span>Usage</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Usage-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Usage subsection</span>
+			</button>
+		
+		<ul id="toc-Usage-sublist" class="vector-toc-list">
+			<li id="toc-Disk_info" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Disk_info">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1</span>
+					<span>Disk info</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Disk_info-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Benchmarking" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Benchmarking">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2</span>
+					<span>Benchmarking</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Benchmarking-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Power_management_configuration" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Power_management_configuration">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.3</span>
+					<span>Power management configuration</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Power_management_configuration-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Write_cache" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Write_cache">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.4</span>
+					<span>Write cache</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Write_cache-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Power_off_a_hard_disk_drive" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Power_off_a_hard_disk_drive">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.5</span>
+					<span>Power off a hard disk drive</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Power_off_a_hard_disk_drive-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Tips_and_tricks" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Tips_and_tricks">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">3</span>
+				<span>Tips and tricks</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Tips_and_tricks-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Tips and tricks subsection</span>
+			</button>
+		
+		<ul id="toc-Tips_and_tricks-sublist" class="vector-toc-list">
+			<li id="toc-Querying_the_status_of_the_disk_without_waking_it_up" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Querying_the_status_of_the_disk_without_waking_it_up">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1</span>
+					<span>Querying the status of the disk without waking it up</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Querying_the_status_of_the_disk_without_waking_it_up-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Persistent_configuration_using_udev_rule" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Persistent_configuration_using_udev_rule">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.2</span>
+					<span>Persistent configuration using udev rule</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Persistent_configuration_using_udev_rule-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Reapplying_configuration_after_wakeup" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Reapplying_configuration_after_wakeup">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.3</span>
+					<span>Reapplying configuration after wakeup</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Reapplying_configuration_after_wakeup-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Putting_a_drive_to_sleep_directly_after_boot" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Putting_a_drive_to_sleep_directly_after_boot">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.4</span>
+					<span>Putting a drive to sleep directly after boot</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Putting_a_drive_to_sleep_directly_after_boot-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Working_with_unsupported_hardware" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Working_with_unsupported_hardware">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.5</span>
+					<span>Working with unsupported hardware</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Working_with_unsupported_hardware-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Power_management_for_Western_Digital_Green_drives" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Power_management_for_Western_Digital_Green_drives">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.6</span>
+					<span>Power management for Western Digital Green drives</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Power_management_for_Western_Digital_Green_drives-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Troubleshooting" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Troubleshooting">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">4</span>
+				<span>Troubleshooting</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Troubleshooting-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Troubleshooting subsection</span>
+			</button>
+		
+		<ul id="toc-Troubleshooting-sublist" class="vector-toc-list">
+			<li id="toc-APM_level_reset_after_suspend" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#APM_level_reset_after_suspend">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.1</span>
+					<span>APM level reset after suspend</span>
+				</div>
+			</a>
+			
+			<ul id="toc-APM_level_reset_after_suspend-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-See_also" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#See_also">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">5</span>
+				<span>See also</span>
+			</div>
+		</a>
+		
+		<ul id="toc-See_also-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+</ul>
+</div>
+
+					</div>
+		</nav>
+			</div>
+		</div>
+		<div class="mw-content-container">
+			<main id="content" class="mw-body" style="margin: 0">
+				<header class="mw-body-header vector-page-titlebar">
+					<nav aria-label="Contents" class="vector-toc-landmark">
+						
+<div id="vector-page-titlebar-toc" class="vector-dropdown vector-page-titlebar-toc vector-button-flush-left">
+	<input type="checkbox" id="vector-page-titlebar-toc-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-page-titlebar-toc" class="vector-dropdown-checkbox " aria-label="Toggle the table of contents">
+	<label id="vector-page-titlebar-toc-label" for="vector-page-titlebar-toc-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"><span class="vector-icon mw-ui-icon-listBullet mw-ui-icon-wikimedia-listBullet"></span>
+
+<span class="vector-dropdown-label-text">Toggle the table of contents</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+							<div id="vector-page-titlebar-toc-unpinned-container" class="vector-unpinned-container">
+			</div>
+		
+	</div>
+</div>
+
+					</nav>
+					<h1 id="firstHeading" class="firstHeading mw-first-heading">hdparm</h1>
+							
+<div id="p-lang-btn" class="vector-dropdown mw-portlet mw-portlet-lang">
+	<input type="checkbox" id="p-lang-btn-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-p-lang-btn" class="vector-dropdown-checkbox mw-interlanguage-selector" aria-label="Go to an article in another language. Available in 4 languages">
+	<label id="p-lang-btn-label" for="p-lang-btn-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--action-progressive mw-portlet-lang-heading-4" aria-hidden="true"><span class="vector-icon mw-ui-icon-language-progressive mw-ui-icon-wikimedia-language-progressive"></span>
+
+<span class="vector-dropdown-label-text">4 languages</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+		<div class="vector-menu-content">
+			
+			<ul class="vector-menu-content-list">
+				
+				<li class="interlanguage-link interwiki-fr mw-list-item"><a href="../fr/Hdparm.html" title="Hdparm – français" lang="fr" hreflang="fr" data-title="Hdparm" data-language-autonym="Français" data-language-local-name="français" class="interlanguage-link-target"><span>Français</span></a></li>
+<li class="interlanguage-link interwiki-ja mw-list-item"><a href="https://wiki.archlinux.jp/index.php/hdparm" title="hdparm – 日本語" lang="ja" hreflang="ja" data-title="hdparm" data-language-autonym="日本語" data-language-local-name="日本語" class="interlanguage-link-target"><span>日本語</span></a></li>
+<li class="interlanguage-link interwiki-ru mw-list-item"><a href="../ru/Hdparm.html" title="Hdparm – русский" lang="ru" hreflang="ru" data-title="Hdparm" data-language-autonym="Русский" data-language-local-name="русский" class="interlanguage-link-target"><span>Русский</span></a></li>
+<li class="interlanguage-link interwiki-zh-hans mw-list-item"><a href="https://wiki.archlinuxcn.org/wiki/Hdparm" title="Hdparm – 中文（简体）" lang="zh-Hans" hreflang="zh-Hans" data-title="Hdparm" data-language-autonym="中文（简体）" data-language-local-name="中文（简体）" class="interlanguage-link-target"><span>中文（简体）</span></a></li>
+			</ul>
+			
+		</div>
+
+	</div>
+</div>
+</header>
+				<div class="vector-column-end">
+					<div class="vector-sticky-pinned-container">
+						<nav class="vector-page-tools-landmark" aria-label="Page tools">
+							<div id="vector-page-tools-pinned-container" class="vector-pinned-container">
+				
+							</div>
+		</nav>
+						<nav class="vector-appearance-landmark" aria-label="Appearance">
+							<div id="vector-appearance-pinned-container" class="vector-pinned-container">
+				<div id="vector-appearance" class="vector-appearance vector-pinnable-element">
+	<div class="vector-pinnable-header vector-appearance-pinnable-header vector-pinnable-header-pinned" data-feature-name="appearance-pinned" data-pinnable-element-id="vector-appearance" data-pinned-container-id="vector-appearance-pinned-container" data-unpinned-container-id="vector-appearance-unpinned-container">
+	<div class="vector-pinnable-header-label">Appearance</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-appearance.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-appearance.unpin">hide</button>
+</div>
+
+
+</div>
+
+							</div>
+		</nav>
+					</div>
+				</div>
+				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container>
+					<div class="vector-body-before-content">
+							<div class="mw-indicators">
+		</div>
+
+						<div id="siteSub" class="noprint">From ArchWiki</div>
+					</div>
+					<div id="contentSub"><div id="mw-content-subtitle"></div></div>
+					
+					
+					<div id="mw-content-text" class="mw-body-content">
+<div class="mw-content-ltr mw-parser-output" lang="en" dir="ltr">
+<p><span>
+</span>
+</p>
+<div class="archwiki-template-meta-related-articles">
+<p>Related articles</p>
+<ul>
+<li><a href="../en/Securely_wipe_disk.html#hdparm" title="Securely wipe disk">Securely wipe disk#hdparm</a></li>
+</ul>
+</div>
+<p><i>hdparm</i> and <i>sdparm</i> are command line utilities to set and view hardware parameters of <a href="https://en.wikipedia.org/wiki/Hard_disk_drive" class="extiw" title="wikipedia:Hard disk drive">hard disk drives</a>. <i>hdparm</i> can also be used as a simple <a href="../en/Benchmarking.html" title="Benchmarking">benchmarking</a> tool.
+</p>
+<p>Originally, <i>hdparm</i> was created for <a href="https://en.wikipedia.org/wiki/Parallel_ATA#IDE_and_ATA-1" class="extiw" title="wikipedia:Parallel ATA">IDE</a> disks and <i>sdparm</i> for <a href="https://en.wikipedia.org/wiki/SCSI" class="extiw" title="wikipedia:SCSI">SCSI</a> disks. Since approximately 2010 onward, storage device interfaces are an enhanced mixture of both IDE and SCSI, <i>hdparm</i> and <i>sdparm</i> complement each other.
+</p>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Warning:</strong> Changing the disk's default parameters can freeze the system or even irreversibly damage the disk.</div>
+<meta property="mw:PageProp/toc">
+<h2><span class="mw-headline" id="Installation">Installation</span></h2>
+<p><a href="../en/Help:Reading.html#Installation_of_packages" class="mw-redirect" title="Install">Install</a> the <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=hdparm">hdparm</a></span> package. For use with SCSI devices, install the <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=sdparm">sdparm</a></span> package.
+</p>
+<h2><span class="mw-headline" id="Usage">Usage</span></h2>
+<h3><span class="mw-headline" id="Disk_info">Disk info</span></h3>
+<p>To get information about hard disks, run the following:
+</p>
+<pre># hdparm -I /dev/sda
+</pre>
+<h3><span class="mw-headline" id="Benchmarking">Benchmarking</span></h3>
+<p>hdparm can be used for <a href="../en/Benchmarking.html#hdparm" title="Benchmarking">Benchmarking#hdparm</a>.
+</p>
+<h3><span class="mw-headline" id="Power_management_configuration">Power management configuration</span></h3>
+<p>Modern hard drives support numerous power management features. The most common ones are summarized in the following table. See <span class="plainlinks archwiki-template-man" title="$ man 8 hdparm"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/hdparm.8">hdparm(8)</a></span> for the complete list.
+</p>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Warning:</strong> Overly aggressive power management can reduce the lifespan of hard drives due to frequent parking and spindowns.</div>
+<table class="wikitable">
+<tbody>
+<tr>
+<th>Parameter</th>
+<th>Description
+</th>
+</tr>
+<tr>
+<td><code>-B</code></td>
+<td>Set the <a href="https://en.wikipedia.org/wiki/Advanced_Power_Management" class="extiw" title="wikipedia:Advanced Power Management">Advanced Power Management</a> feature. Possible values are between 1 and 255, low values mean more aggressive power management and higher values mean better performance. Values from 1 to 127 permit spin-down, whereas values from 128 to 254 do not. A value of 255 completely disables the feature.
+</td>
+</tr>
+<tr>
+<td><code>-S</code></td>
+<td>Set the standby (spindown) timeout for the drive. The timeout specifies how long to wait in idle (with no disk activity) before turning off the motor to save power. The value of 0 disables spindown, the values from 1 to 240 specify multiples of 5 seconds and values from 241 to 251 specify multiples of 30 minutes.
+</td>
+</tr>
+<tr>
+<td><code>-M</code></td>
+<td>Set the <a href="https://en.wikipedia.org/wiki/Automatic_Acoustic_Management" class="extiw" title="wikipedia:Automatic Acoustic Management">Automatic Acoustic Management</a> feature. Most modern hard disk drives have the ability to speed down the head movements to reduce their noise output. The possible value depends on the disk, some disks may not support this feature.
+</td>
+</tr>
+</tbody>
+</table>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> 
+<ul>
+<li>When passing both <code>-B</code> and <code>-S</code> parameters, APM values less than 128 might cause the drive to spin down before the <code>-S</code> timeout value. See <a rel="nofollow" class="external autonumber" href="https://bbs.archlinux.org/viewtopic.php?id=216832">[1]</a>.</li>
+<li>Current values of <code>-S</code> cannot be queried.</li>
+</ul>
+</div>
+<p>To query current value of <code>-B</code>, pass the parameter without a value:
+</p>
+<pre># hdparm -B /dev/sda
+</pre>
+<p>To apply different value, for example set APM to 127:
+</p>
+<pre># hdparm -B 127 /dev/sda
+</pre>
+<h3><span class="mw-headline" id="Write_cache">Write cache</span></h3>
+<p>Write caching is the process of temporarily caching files in the <a href="https://en.wikipedia.org/wiki/Disk_buffer" class="extiw" title="wikipedia:Disk buffer">drive's embedded memory</a> before writing them to the disk, which is essentially a performance boost. Write cache is a feature provided by most hard drives, and it is enabled by default in most cases. To check if that's the case, run:
+</p>
+<pre>$ hdparm -W /dev/<i>sdX</i>
+</pre>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Warning:</strong> While write cache is a free performance boost, it also comes with a downside. Enabling write cache increases the risk of data loss when the power is suddenly lost.</div>
+<p>If it is disabled, one may enable it with:
+</p>
+<pre>$ hdparm -W 1 /dev/<i>sdX</i>
+</pre>
+<p>Conversely, to disable it, use:
+</p>
+<pre>$ hdparm -W 0 /dev/<i>sdX</i>
+</pre>
+<h3><span class="mw-headline" id="Power_off_a_hard_disk_drive">Power off a hard disk drive</span></h3>
+<p>A typical usage case, where such a feature is looked for, is with disks connected to a cheap external USB/SATA/FireWire enclosure, or bridge. If it does not properly issue a stop command to the drive when turning off the power switch, the drive is forced to do an emergency head retract. Regularly doing that will, sooner or later, break the drive. One solution is, after one is sure the data has been written to the media, to run a command to power off the drive:
+</p>
+<pre># hdparm -Y /dev/sd<i>X</i>
+</pre>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Warning:</strong> Be absolutely sure
+<ol>
+<li>The data was actually written to the media. It is also advised to wait some time so that the drive will become idle.</li>
+<li>The device, <code>/dev/sd<i>X</i></code> in the example, is the one you want to power off.</li>
+</ol>
+</div>
+<h2><span class="mw-headline" id="Tips_and_tricks">Tips and tricks</span></h2>
+<h3><span class="mw-headline" id="Querying_the_status_of_the_disk_without_waking_it_up">Querying the status of the disk without waking it up</span></h3>
+<p>Invoking hdparm with the query option is known to wake-up some drives.  In this case, consider <code>smartctl</code> provided by <a href="../en/S.M.A.R.T..html" class="mw-redirect" title="Smartmontools">smartmontools</a> to query the device which will not wake up a sleeping disk. For example:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;"># smartctl -i -n standby /dev/sda</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">smartctl 6.5 2016-05-07 r4318 [x86_64-linux-4.10.13-1-ARCH] (local build)
+Copyright (C) 2002-16, Bruce Allen, Christian Franke, www.smartmontools.org
+
+Device is in STANDBY mode, exit(2)
+</pre>
+<h3><span class="mw-headline" id="Persistent_configuration_using_udev_rule">Persistent configuration using udev rule</span></h3>
+<p>To make the setting persistent across reboot, one can use a <a href="../en/Udev.html" title="Udev">udev</a> rule:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/udev/rules.d/69-hdparm.rules</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">ACTION=="add", SUBSYSTEM=="block", KERNEL=="sda", RUN+="/usr/bin/hdparm -B 254 -S 0 /dev/sda"</pre>
+<p>Because a disk device can be assigned randomly to a changing <code>/dev/sd<i>X</i></code>, the disk can also be identified by its serial as explained in <a href="../en/Udev.html#Identifying_a_disk_by_its_serial" title="Udev">Udev#Identifying a disk by its serial</a>.
+</p>
+<p>Systems with multiple hard drives can apply the rule in a flexible way according to some criteria. For example, to apply power-saving settings to all rotational drives (hard disk with rotational head, excluding in particular <a href="../en/Solid_state_drive.html" title="Solid state drive">solid state drives</a>), use the following rule:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/udev/rules.d/69-hdparm.rules</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">ACTION=="add|change", KERNEL=="sd[a-z]", ATTRS{queue/rotational}=="1", RUN+="/usr/bin/hdparm -B 127 /dev/%k"</pre>
+<h3><span class="mw-headline" id="Reapplying_configuration_after_wakeup">Reapplying configuration after wakeup</span></h3>
+<p>If the configuration is lost after system suspension/hibernation, it can be reapplied using <a href="../en/Power_management/Suspend_and_hibernate.html#Hooks_in_/usr/lib/systemd/system-sleep" title="Power management/Suspend and hibernate">systemd-sleep</a>.
+</p>
+<p>Put a script into <code>/usr/lib/systemd/system-sleep/</code> and make it <a href="../en/Help:Reading.html#Make_executable" class="mw-redirect" title="Executable">executable</a>:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/usr/lib/systemd/system-sleep/hdparm</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">#!/bin/sh
+
+case $1 in post)
+        /usr/bin/hdparm -B 254 -S 0 /dev/sda
+        ;;
+esac</pre>
+<h3><span class="mw-headline" id="Putting_a_drive_to_sleep_directly_after_boot">Putting a drive to sleep directly after boot</span></h3>
+<p>A device which is rarely needed can be put to sleep directly at the end of the boot process. This does not work with the above udev rule because it happens too early. In order to issue the command when the boot is completed, just create a <a href="../en/Systemd.html" title="Systemd">systemd</a> service and <a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Enable">enable</a> it:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/system/hdparm.service</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Unit]
+Description=hdparm sleep
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/hdparm -q -S 120 -y /dev/sdb
+
+[Install]
+WantedBy=multi-user.target</pre>
+<h3><span class="mw-headline" id="Working_with_unsupported_hardware">Working with unsupported hardware</span></h3>
+<p>Some drives do not support spin down via hdparm. A diagnostic error message similar to the following is a good indication this is the case:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;"># hdparm -S 240 /dev/sda</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">/dev/sda:
+setting standby to 240 (20 minutes)
+HDIO_DRIVE_CMD(setidle) failed: Invalid argument
+</pre>
+<p>For some other drives, the hdparm command is acknowledged but the drive do not respect the parameters (either APM or spin down timer). This was observed with a Toshiba P300 (model HDWD120) HDD.
+</p>
+<p>Such drives can be spun down using <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/hd-idle/">hd-idle</a></span><sup><small>AUR</small></sup> which ships with a <a href="../en/Systemd.html" title="Systemd">systemd</a> service. One need to edit <code>/etc/conf.d/hd-idle</code> and the <code>HD_IDLE_OPTS</code> value, then <a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Start">start</a> and <a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Enable">enable</a> <code>hd-idle.service</code>.
+</p>
+<p>Example using a 10 min idle time for <code>/dev/sda</code> and a 1 min idle time for <code>/dev/disk/by-uuid/01CF0AC9AA5EAF70</code>:
+</p>
+<pre>HD_IDLE_OPTS="-i 0 -a /dev/sda -i 600 -a /dev/disk/by-uuid/01CF0AC9AA5EAF70 -i 60"
+</pre>
+<p>the leading <code>-i 0</code> parameter indicates that hd-idle is disabled on other drives.
+</p>
+<h3><span class="mw-headline" id="Power_management_for_Western_Digital_Green_drives">Power management for Western Digital Green drives</span></h3>
+<p><i>Western Digital Green</i> hard drives have a special <i>idle3</i> timer which controls how long the drive waits before positioning its heads in their park position and entering a low power consumption state.  The factory default is aggressively set to 8 seconds, which can result in thousands of head load/unload cycles in a short period of time and eventually premature failure, not to mention the performance impact of the drive often having to wake-up before doing routine I/O. Western Digital issued a <a rel="nofollow" class="external text" href="https://web.archive.org/web/20190129000226/http://wdc.custhelp.com/app/answers/detail/a_id/5357">statement</a>, claiming that Linux is not optimized for low power storage devices and advising to reduce logging frequency. There are different ways to amend the <i>idle3</i> state:
+</p>
+<ol>
+<li>Western Digital supplies a DOS utility <i>wdidle3.exe</i> for <a rel="nofollow" class="external text" href="https://support.wdc.com/downloads.aspx?p=113">download</a> for tweaking this setting. This utility is designed to upgrade only the firmware of the following hard drives: WD1000FYPS, WD7500AYPS, WD7501AYPS but is known to be able to change the <i>idle3</i> timer of other Green models as well.</li>
+<li>hdparm features a reverse-engineered implementation behind the <code>-J</code> flag, which is not as complete as the original official program, even though it seems to work on at least a few drives. A setting of 30 seconds is recommended for Linux use. Specify a value of zero (0) to disable the WD idle3 timer completely (<b>not recommended</b>):<pre># hdparm -J 30 --please-destroy-my-drive /dev/sda</pre> See <a href="#Persistent_configuration_using_udev_rule">#Persistent configuration using udev rule</a> to automatically use this parameter on supported hard drives.</li>
+<li>Another unofficial utility is provided by the <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=idle3-tools">idle3-tools</a></span> package. A raw <code><i>idle3</i></code> value is passed as a parameter of the <i>idle3ctl</i> command. The correspondence between this value and the timeout in seconds is provided in the bottom table within <span class="plainlinks archwiki-template-man" title="$ man 8 idle3ctl"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/idle3ctl.8">idle3ctl(8)</a></span>. The following command sets the timer to 30 seconds:<pre># idle3ctl -s 129 /dev/sdc</pre> The following completely disables the timer (<b>not recommended</b>):<pre># idle3ctl -d /dev/sdc</pre>
+</li>
+</ol>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> 
+<ul>
+<li>A full power cycle is required for any change to take effect regardless of which program above is used. It means the drive needs to be powered OFF and then ON, a simple reboot does not suffice.</li>
+<li>Some Western Digital Green drives are also known to have a different interpretation of hdparm's standby timeout parameter, <code>-S 1</code> resulting in a 10 min timer rather than 5 sec.</li>
+<li>The power consumption of a Green drive is typically around 5.3W during read/write, 4.7W in idle mode and 0.7W in standby mode.</li>
+</ul>
+</div>
+<h2><span class="mw-headline" id="Troubleshooting">Troubleshooting</span></h2>
+<h3><span class="mw-headline" id="APM_level_reset_after_suspend">APM level reset after suspend</span></h3>
+<p>The APM level may get reset after a suspend requiring it to be re-executed after each resume. This can be automated with the following <a href="../en/Systemd.html" title="Systemd">systemd</a> unit (adapted from a <a rel="nofollow" class="external text" href="https://bbs.archlinux.org/viewtopic.php?id=151640">forum thread</a>):
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/system/apm.service</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Unit]
+Description=Local system resume actions
+After=suspend.target hybrid-sleep.target hibernate.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/hdparm -B 254 /dev/sda
+
+[Install]
+WantedBy=sleep.target</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> The <code>sleep.target</code> is pulled by all <code>suspend</code>, <code>hybrid-sleep</code> and <code>hibernate</code> targets, but it finishes starting up <i>before</i> the system is suspended, so the three targets have to be specified explicitly. See <a rel="nofollow" class="external autonumber" href="https://wiki.archlinux.org/index.php?title=Talk:Hdparm&amp;oldid=440457#Troubleshooting_APM_settings_after_suspend.2C_hibernate_or_hybrid-sleep">[2]</a>.</div>
+<p>Alternatively, create a <a href="../en/Power_management/Suspend_and_hibernate.html#Hooks_in_/usr/lib/systemd/system-sleep" title="Power management/Suspend and hibernate">hook in /usr/lib/systemd/system-sleep</a>.
+</p>
+<h2><span class="mw-headline" id="See_also">See also</span></h2>
+<ul><li>
+<a rel="nofollow" class="external free" href="https://sourceforge.net/projects/hdparm/">https://sourceforge.net/projects/hdparm/</a> - hdparm on SourceForge</li></ul>
+</div>
+</div>
+					<div id="catlinks" class="catlinks" data-mw="interface"><div id="mw-normal-catlinks" class="mw-normal-catlinks">
+<a href="../Special:Categories.html" title="Special:Categories">Categories</a>: <ul>
+<li><a href="../en/Category:File_systems.html" title="Category:File systems">File systems</a></li>
+<li><a href="../en/Category:Storage.html" title="Category:Storage">Storage</a></li>
+</ul>
+</div></div>
+				</div>
+			</main>
+			
+		</div>
+		<div class="mw-footer-container">
+			
+<footer id="footer" class="mw-footer" style="margin: 0">
+	<ul id="footer-info">
+	<li data-nosnippet="">Retrieved from "<a dir="ltr" href="https://wiki.archlinux.org/index.php?title=Hdparm&amp;oldid=802353">https://wiki.archlinux.org/index.php?title=Hdparm&amp;oldid=802353</a>"</li>
+<li id="footer-info-lastmod"> This page was last edited on 5 March 2024, at 18:14.</li>
+	<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+<br>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="https://terms.archlinux.org/docs/privacy-policy/">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="../en/ArchWiki:About.html">About ArchWiki</a></li>
+	<li id="footer-places-disclaimers"><a href="../en/ArchWiki:General_disclaimer.html">Disclaimers</a></li>
+	<li id="footer-places-archwiki-code-of-conduct"><a href="https://terms.archlinux.org/docs/code-of-conduct/" class="extiw" title="archlinux-service-agreements:code-of-conduct">Code of conduct</a></li>
+	<li id="footer-places-archwiki-terms-of-service"><a href="https://terms.archlinux.org/docs/terms-of-service/" class="extiw" title="archlinux-service-agreements:terms-of-service">Terms of service</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-copyrightico"><a href="https://www.gnu.org/copyleft/fdl.html" class="cdx-button cdx-button--fake-button cdx-button--size-large cdx-button--fake-button--enabled"><img src="/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" loading="lazy"></a></li>
+	<li id="footer-poweredbyico"><img src="/resources/assets/poweredby_mediawiki.svg" width="88" height="31" loading="lazy"></li>
+</ul>
+
+</footer>
+
+		</div>
+	</div> 
+</div> 
+<div class="vector-settings" id="p-dock-bottom">
+	<ul></ul>
+</div>
+</body>
+</html>

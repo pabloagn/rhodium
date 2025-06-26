@@ -1,0 +1,1445 @@
+<!DOCTYPE html>
+<html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-sticky-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-0 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-disabled skin-theme-clientpref-day vector-toc-available" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>systemd-networkd (Русский) - ArchWiki</title>
+<link rel="stylesheet" href="../ArchWikiOffline.css">
+<meta name="ResourceLoaderDynamicStyles" content="">
+<meta name="generator" content="MediaWiki 1.43.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="max-image-preview:standard">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.25, maximum-scale=5.0">
+<link rel="search" type="application/opensearchdescription+xml" href="/rest.php/v1/search" title="ArchWiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.archlinux.org/api.php?action=rsd">
+<link rel="license" href="https://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="ArchWiki Atom feed" href="/index.php?title=Special:RecentChanges&amp;feed=atom">
+</head>
+<body class="skin--responsive skin-vector skin-vector-search-vue mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Systemd-networkd_Русский rootpage-Systemd-networkd_Русский skin-vector-2022 action-view">
+<a class="mw-jump-link" href="#bodyContent">Jump to content</a>
+<div class="vector-header-container">
+	</div>
+<div class="mw-page-container">
+	<div class="mw-page-container-inner">
+		<div class="vector-column-start">
+			<div class="vector-main-menu-container">
+		</div>
+	<div class="vector-sticky-pinned-container">
+				<nav id="mw-panel-toc" aria-label="Contents" data-event-name="ui.sidebar-toc" class="mw-table-of-contents-container vector-toc-landmark">
+					<div id="vector-toc-pinned-container" class="vector-pinned-container">
+					<div id="vector-toc" class="vector-toc vector-pinnable-element">
+	<div class="vector-pinnable-header vector-toc-pinnable-header vector-pinnable-header-pinned" data-feature-name="toc-pinned" data-pinnable-element-id="vector-toc">
+	<h2 class="vector-pinnable-header-label">Contents</h2>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-toc.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-toc.unpin">hide</button>
+</div>
+
+
+	<ul class="vector-toc-contents" id="mw-panel-toc-list">
+		<li id="toc-mw-content-text" class="vector-toc-list-item vector-toc-level-1">
+			<a href="#" class="vector-toc-link">
+				<div class="vector-toc-text">Beginning</div>
+			</a>
+		</li>
+		<li id="toc-Основы_использования" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#%D0%9E%D1%81%D0%BD%D0%BE%D0%B2%D1%8B_%D0%B8%D1%81%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">1</span>
+				<span>Основы использования</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Основы_использования-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Основы использования subsection</span>
+			</button>
+		
+		<ul id="toc-Основы_использования-sublist" class="vector-toc-list">
+			<li id="toc-Службы_и_настройки" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#%D0%A1%D0%BB%D1%83%D0%B6%D0%B1%D1%8B_%D0%B8_%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B8">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.1</span>
+					<span>Службы и настройки</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Службы_и_настройки-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-systemd-networkd-wait-online" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#systemd-networkd-wait-online">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.2</span>
+					<span>systemd-networkd-wait-online</span>
+				</div>
+			</a>
+			
+			<ul id="toc-systemd-networkd-wait-online-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Примеры_настроек" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#%D0%9F%D1%80%D0%B8%D0%BC%D0%B5%D1%80%D1%8B_%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BA">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.3</span>
+					<span>Примеры настроек</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Примеры_настроек-sublist" class="vector-toc-list">
+				<li id="toc-Проводной_интерфейс_с_DHCP" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#%D0%9F%D1%80%D0%BE%D0%B2%D0%BE%D0%B4%D0%BD%D0%BE%D0%B9_%D0%B8%D0%BD%D1%82%D0%B5%D1%80%D1%84%D0%B5%D0%B9%D1%81_%D1%81_DHCP">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.3.1</span>
+					<span>Проводной интерфейс с DHCP</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Проводной_интерфейс_с_DHCP-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Проводной_интерфейс_со_статическим_IP-адресом" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#%D0%9F%D1%80%D0%BE%D0%B2%D0%BE%D0%B4%D0%BD%D0%BE%D0%B9_%D0%B8%D0%BD%D1%82%D0%B5%D1%80%D1%84%D0%B5%D0%B9%D1%81_%D1%81%D0%BE_%D1%81%D1%82%D0%B0%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%BC_IP-%D0%B0%D0%B4%D1%80%D0%B5%D1%81%D0%BE%D0%BC">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.3.2</span>
+					<span>Проводной интерфейс со статическим IP-адресом</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Проводной_интерфейс_со_статическим_IP-адресом-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Беспроводной_интерфейс" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#%D0%91%D0%B5%D1%81%D0%BF%D1%80%D0%BE%D0%B2%D0%BE%D0%B4%D0%BD%D0%BE%D0%B9_%D0%B8%D0%BD%D1%82%D0%B5%D1%80%D1%84%D0%B5%D0%B9%D1%81">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.3.3</span>
+					<span>Беспроводной интерфейс</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Беспроводной_интерфейс-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Проводные_и_беспроводные_интерфейсы_на_одной_машине" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#%D0%9F%D1%80%D0%BE%D0%B2%D0%BE%D0%B4%D0%BD%D1%8B%D0%B5_%D0%B8_%D0%B1%D0%B5%D1%81%D0%BF%D1%80%D0%BE%D0%B2%D0%BE%D0%B4%D0%BD%D1%8B%D0%B5_%D0%B8%D0%BD%D1%82%D0%B5%D1%80%D1%84%D0%B5%D0%B9%D1%81%D1%8B_%D0%BD%D0%B0_%D0%BE%D0%B4%D0%BD%D0%BE%D0%B9_%D0%BC%D0%B0%D1%88%D0%B8%D0%BD%D0%B5">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.3.4</span>
+					<span>Проводные и беспроводные интерфейсы на одной машине</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Проводные_и_беспроводные_интерфейсы_на_одной_машине-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Переименование_интерфейса" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#%D0%9F%D0%B5%D1%80%D0%B5%D0%B8%D0%BC%D0%B5%D0%BD%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5_%D0%B8%D0%BD%D1%82%D0%B5%D1%80%D1%84%D0%B5%D0%B9%D1%81%D0%B0">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.3.5</span>
+					<span>Переименование интерфейса</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Переименование_интерфейса-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Файлы_настроек" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#%D0%A4%D0%B0%D0%B9%D0%BB%D1%8B_%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BA">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">2</span>
+				<span>Файлы настроек</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Файлы_настроек-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Файлы настроек subsection</span>
+			</button>
+		
+		<ul id="toc-Файлы_настроек-sublist" class="vector-toc-list">
+			<li id="toc-Файлы_network" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#%D0%A4%D0%B0%D0%B9%D0%BB%D1%8B_network">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1</span>
+					<span>Файлы network</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Файлы_network-sublist" class="vector-toc-list">
+				<li id="toc-[Match]" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#[Match]">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1.1</span>
+					<span>[Match]</span>
+				</div>
+			</a>
+			
+			<ul id="toc-[Match]-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-[Link]" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#[Link]">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1.2</span>
+					<span>[Link]</span>
+				</div>
+			</a>
+			
+			<ul id="toc-[Link]-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-[Network]" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#[Network]">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1.3</span>
+					<span>[Network]</span>
+				</div>
+			</a>
+			
+			<ul id="toc-[Network]-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-[Address]" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#[Address]">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1.4</span>
+					<span>[Address]</span>
+				</div>
+			</a>
+			
+			<ul id="toc-[Address]-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-[Route]" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#[Route]">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1.5</span>
+					<span>[Route]</span>
+				</div>
+			</a>
+			
+			<ul id="toc-[Route]-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-[DHCP]" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#[DHCP]">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1.6</span>
+					<span>[DHCP]</span>
+				</div>
+			</a>
+			
+			<ul id="toc-[DHCP]-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-[DHCPServer]" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#[DHCPServer]">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1.7</span>
+					<span>[DHCPServer]</span>
+				</div>
+			</a>
+			
+			<ul id="toc-[DHCPServer]-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Файлы_netdev" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#%D0%A4%D0%B0%D0%B9%D0%BB%D1%8B_netdev">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2</span>
+					<span>Файлы netdev</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Файлы_netdev-sublist" class="vector-toc-list">
+				<li id="toc-[Match]_2" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#[Match]_2">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2.1</span>
+					<span>[Match]</span>
+				</div>
+			</a>
+			
+			<ul id="toc-[Match]_2-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-[Netdev]" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#[Netdev]">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2.2</span>
+					<span>[Netdev]</span>
+				</div>
+			</a>
+			
+			<ul id="toc-[Netdev]-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Файлы_link" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#%D0%A4%D0%B0%D0%B9%D0%BB%D1%8B_link">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.3</span>
+					<span>Файлы link</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Файлы_link-sublist" class="vector-toc-list">
+				<li id="toc-[Match]_3" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#[Match]_3">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.3.1</span>
+					<span>[Match]</span>
+				</div>
+			</a>
+			
+			<ul id="toc-[Match]_3-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-[Link]_2" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#[Link]_2">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.3.2</span>
+					<span>[Link]</span>
+				</div>
+			</a>
+			
+			<ul id="toc-[Link]_2-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Использование_с_контейнерами" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#%D0%98%D1%81%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5_%D1%81_%D0%BA%D0%BE%D0%BD%D1%82%D0%B5%D0%B9%D0%BD%D0%B5%D1%80%D0%B0%D0%BC%D0%B8">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">3</span>
+				<span>Использование с контейнерами</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Использование_с_контейнерами-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Использование с контейнерами subsection</span>
+			</button>
+		
+		<ul id="toc-Использование_с_контейнерами-sublist" class="vector-toc-list">
+			<li id="toc-Сетевой_мост_с_DHCP" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#%D0%A1%D0%B5%D1%82%D0%B5%D0%B2%D0%BE%D0%B9_%D0%BC%D0%BE%D1%81%D1%82_%D1%81_DHCP">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1</span>
+					<span>Сетевой мост с DHCP</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Сетевой_мост_с_DHCP-sublist" class="vector-toc-list">
+				<li id="toc-Интерфейс_моста" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#%D0%98%D0%BD%D1%82%D0%B5%D1%80%D1%84%D0%B5%D0%B9%D1%81_%D0%BC%D0%BE%D1%81%D1%82%D0%B0">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1.1</span>
+					<span>Интерфейс моста</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Интерфейс_моста-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Привязка_Ethernet_к_мосту" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#%D0%9F%D1%80%D0%B8%D0%B2%D1%8F%D0%B7%D0%BA%D0%B0_Ethernet_%D0%BA_%D0%BC%D0%BE%D1%81%D1%82%D1%83">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1.2</span>
+					<span>Привязка Ethernet к мосту</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Привязка_Ethernet_к_мосту-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Сеть_моста" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#%D0%A1%D0%B5%D1%82%D1%8C_%D0%BC%D0%BE%D1%81%D1%82%D0%B0">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1.3</span>
+					<span>Сеть моста</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Сеть_моста-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Настройка_контейнера" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#%D0%9D%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0_%D0%BA%D0%BE%D0%BD%D1%82%D0%B5%D0%B9%D0%BD%D0%B5%D1%80%D0%B0">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1.4</span>
+					<span>Настройка контейнера</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Настройка_контейнера-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Результат" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#%D0%A0%D0%B5%D0%B7%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%82">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1.5</span>
+					<span>Результат</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Результат-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Замечания" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#%D0%97%D0%B0%D0%BC%D0%B5%D1%87%D0%B0%D0%BD%D0%B8%D1%8F">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1.6</span>
+					<span>Замечания</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Замечания-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Сетевой_мост_со_статическими_IP-адресами" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#%D0%A1%D0%B5%D1%82%D0%B5%D0%B2%D0%BE%D0%B9_%D0%BC%D0%BE%D1%81%D1%82_%D1%81%D0%BE_%D1%81%D1%82%D0%B0%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%BC%D0%B8_IP-%D0%B0%D0%B4%D1%80%D0%B5%D1%81%D0%B0%D0%BC%D0%B8">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.2</span>
+					<span>Сетевой мост со статическими IP-адресами</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Сетевой_мост_со_статическими_IP-адресами-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Советы_и_рекомендации" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#%D0%A1%D0%BE%D0%B2%D0%B5%D1%82%D1%8B_%D0%B8_%D1%80%D0%B5%D0%BA%D0%BE%D0%BC%D0%B5%D0%BD%D0%B4%D0%B0%D1%86%D0%B8%D0%B8">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">4</span>
+				<span>Советы и рекомендации</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Советы_и_рекомендации-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Советы и рекомендации subsection</span>
+			</button>
+		
+		<ul id="toc-Советы_и_рекомендации-sublist" class="vector-toc-list">
+			<li id="toc-Интеграция_сетевого_интерфейса_и_рабочего_стола" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#%D0%98%D0%BD%D1%82%D0%B5%D0%B3%D1%80%D0%B0%D1%86%D0%B8%D1%8F_%D1%81%D0%B5%D1%82%D0%B5%D0%B2%D0%BE%D0%B3%D0%BE_%D0%B8%D0%BD%D1%82%D0%B5%D1%80%D1%84%D0%B5%D0%B9%D1%81%D0%B0_%D0%B8_%D1%80%D0%B0%D0%B1%D0%BE%D1%87%D0%B5%D0%B3%D0%BE_%D1%81%D1%82%D0%BE%D0%BB%D0%B0">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.1</span>
+					<span>Интеграция сетевого интерфейса и рабочего стола</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Интеграция_сетевого_интерфейса_и_рабочего_стола-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Назначение_IP-адреса_на_основании_SSID" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#%D0%9D%D0%B0%D0%B7%D0%BD%D0%B0%D1%87%D0%B5%D0%BD%D0%B8%D0%B5_IP-%D0%B0%D0%B4%D1%80%D0%B5%D1%81%D0%B0_%D0%BD%D0%B0_%D0%BE%D1%81%D0%BD%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B8_SSID">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.2</span>
+					<span>Назначение IP-адреса на основании SSID</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Назначение_IP-адреса_на_основании_SSID-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Объединение_проводного_и_беспроводного_интерфейсов" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#%D0%9E%D0%B1%D1%8A%D0%B5%D0%B4%D0%B8%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5_%D0%BF%D1%80%D0%BE%D0%B2%D0%BE%D0%B4%D0%BD%D0%BE%D0%B3%D0%BE_%D0%B8_%D0%B1%D0%B5%D1%81%D0%BF%D1%80%D0%BE%D0%B2%D0%BE%D0%B4%D0%BD%D0%BE%D0%B3%D0%BE_%D0%B8%D0%BD%D1%82%D0%B5%D1%80%D1%84%D0%B5%D0%B9%D1%81%D0%BE%D0%B2">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.3</span>
+					<span>Объединение проводного и беспроводного интерфейсов</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Объединение_проводного_и_беспроводного_интерфейсов-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Ускорение_TCP_Slow_Start" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#%D0%A3%D1%81%D0%BA%D0%BE%D1%80%D0%B5%D0%BD%D0%B8%D0%B5_TCP_Slow_Start">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.4</span>
+					<span>Ускорение TCP Slow Start</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Ускорение_TCP_Slow_Start-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Смотрите_также" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#%D0%A1%D0%BC%D0%BE%D1%82%D1%80%D0%B8%D1%82%D0%B5_%D1%82%D0%B0%D0%BA%D0%B6%D0%B5">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">5</span>
+				<span>Смотрите также</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Смотрите_также-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+</ul>
+</div>
+
+					</div>
+		</nav>
+			</div>
+		</div>
+		<div class="mw-content-container">
+			<main id="content" class="mw-body" style="margin: 0">
+				<header class="mw-body-header vector-page-titlebar">
+					<nav aria-label="Contents" class="vector-toc-landmark">
+						
+<div id="vector-page-titlebar-toc" class="vector-dropdown vector-page-titlebar-toc vector-button-flush-left">
+	<input type="checkbox" id="vector-page-titlebar-toc-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-page-titlebar-toc" class="vector-dropdown-checkbox " aria-label="Toggle the table of contents">
+	<label id="vector-page-titlebar-toc-label" for="vector-page-titlebar-toc-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"><span class="vector-icon mw-ui-icon-listBullet mw-ui-icon-wikimedia-listBullet"></span>
+
+<span class="vector-dropdown-label-text">Toggle the table of contents</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+							<div id="vector-page-titlebar-toc-unpinned-container" class="vector-unpinned-container">
+			</div>
+		
+	</div>
+</div>
+
+					</nav>
+					<h1 id="firstHeading" class="firstHeading mw-first-heading">systemd-networkd (Русский)</h1>
+							
+<div id="p-lang-btn" class="vector-dropdown mw-portlet mw-portlet-lang">
+	<input type="checkbox" id="p-lang-btn-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-p-lang-btn" class="vector-dropdown-checkbox mw-interlanguage-selector" aria-label="Go to an article in another language. Available in 6 languages">
+	<label id="p-lang-btn-label" for="p-lang-btn-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--action-progressive mw-portlet-lang-heading-6" aria-hidden="true"><span class="vector-icon mw-ui-icon-language-progressive mw-ui-icon-wikimedia-language-progressive"></span>
+
+<span class="vector-dropdown-label-text">6 languages</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+		<div class="vector-menu-content">
+			
+			<ul class="vector-menu-content-list">
+				
+				<li class="interlanguage-link interwiki-de mw-list-item"><a href="https://wiki.archlinux.de/title/Systemd/systemd-networkd" title="Systemd/systemd-networkd – Deutsch" lang="de" hreflang="de" data-title="Systemd/systemd-networkd" data-language-autonym="Deutsch" data-language-local-name="Deutsch" class="interlanguage-link-target"><span>Deutsch</span></a></li>
+<li class="interlanguage-link interwiki-en mw-list-item"><a href="../en/Systemd-networkd.html" title="Systemd-networkd – English" lang="en" hreflang="en" data-title="Systemd-networkd" data-language-autonym="English" data-language-local-name="English" class="interlanguage-link-target"><span>English</span></a></li>
+<li class="interlanguage-link interwiki-es mw-list-item"><a href="../es/Systemd-networkd.html" title="Systemd-networkd – español" lang="es" hreflang="es" data-title="Systemd-networkd" data-language-autonym="Español" data-language-local-name="español" class="interlanguage-link-target"><span>Español</span></a></li>
+<li class="interlanguage-link interwiki-fr mw-list-item"><a href="../fr/Systemd-networkd.html" title="Systemd-networkd – français" lang="fr" hreflang="fr" data-title="Systemd-networkd" data-language-autonym="Français" data-language-local-name="français" class="interlanguage-link-target"><span>Français</span></a></li>
+<li class="interlanguage-link interwiki-ja mw-list-item"><a href="https://wiki.archlinux.jp/index.php/systemd-networkd" title="systemd-networkd – 日本語" lang="ja" hreflang="ja" data-title="systemd-networkd" data-language-autonym="日本語" data-language-local-name="日本語" class="interlanguage-link-target"><span>日本語</span></a></li>
+<li class="interlanguage-link interwiki-zh-hans mw-list-item"><a href="https://wiki.archlinuxcn.org/wiki/Systemd-networkd" title="Systemd-networkd – 中文（简体）" lang="zh-Hans" hreflang="zh-Hans" data-title="Systemd-networkd" data-language-autonym="中文（简体）" data-language-local-name="中文（简体）" class="interlanguage-link-target"><span>中文（简体）</span></a></li>
+			</ul>
+			
+		</div>
+
+	</div>
+</div>
+</header>
+				<div class="vector-column-end">
+					<div class="vector-sticky-pinned-container">
+						<nav class="vector-page-tools-landmark" aria-label="Page tools">
+							<div id="vector-page-tools-pinned-container" class="vector-pinned-container">
+				
+							</div>
+		</nav>
+						<nav class="vector-appearance-landmark" aria-label="Appearance">
+							<div id="vector-appearance-pinned-container" class="vector-pinned-container">
+				<div id="vector-appearance" class="vector-appearance vector-pinnable-element">
+	<div class="vector-pinnable-header vector-appearance-pinnable-header vector-pinnable-header-pinned" data-feature-name="appearance-pinned" data-pinnable-element-id="vector-appearance" data-pinned-container-id="vector-appearance-pinned-container" data-unpinned-container-id="vector-appearance-unpinned-container">
+	<div class="vector-pinnable-header-label">Appearance</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-appearance.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-appearance.unpin">hide</button>
+</div>
+
+
+</div>
+
+							</div>
+		</nav>
+					</div>
+				</div>
+				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container>
+					<div class="vector-body-before-content">
+							<div class="mw-indicators">
+		</div>
+
+						<div id="siteSub" class="noprint">From ArchWiki</div>
+					</div>
+					<div id="contentSub"><div id="mw-content-subtitle"></div></div>
+					
+					
+					<div id="mw-content-text" class="mw-body-content">
+<div class="mw-content-ltr mw-parser-output" lang="ru" dir="ltr">
+<p><span>
+</span>
+</p>
+<div class="archwiki-template-meta-related-articles">
+<p>Ссылки по теме</p>
+<ul>
+<li><a href="../ru/Systemd.html" title="Systemd (Русский)">systemd (Русский)</a></li>
+<li><a href="../ru/Systemd-resolved.html" title="Systemd-resolved (Русский)">systemd-resolved (Русский)</a></li>
+<li><a href="../en/Systemd-nspawn.html" title="Systemd-nspawn">systemd-nspawn</a></li>
+<li><a href="../en/Network_bridge.html" title="Network bridge">Network bridge</a></li>
+<li><a href="../ru/Network_configuration.html" class="mw-redirect" title="Настройка сети">Настройка сети</a></li>
+<li><a href="../ru/Network_configuration/Wireless.html" class="mw-redirect" title="Настройка беспроводной сети">Настройка беспроводной сети</a></li>
+<li><a href="../ru/Category:Network_configuration.html" title="Category:Network configuration (Русский)">Category:Network configuration (Русский)</a></li>
+</ul>
+</div>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Состояние перевода:</strong> На этой странице представлен перевод статьи <a href="../en/Systemd-networkd.html" title="Systemd-networkd">systemd-networkd</a>. Дата последней синхронизации: 11 июля 2021. Вы можете <a href="../ru/ArchWiki:Translation_Team.html" title="ArchWiki:Translation Team (Русский)">помочь</a> синхронизировать перевод, если в английской версии произошли <a rel="nofollow" class="external text" href="https://wiki.archlinux.org/index.php?title=Systemd-networkd&amp;diff=0&amp;oldid=684453">изменения</a>.</div>
+<p><i>systemd-networkd</i> — системный демон для управления сетевыми настройками. Его задачей является обнаружение и настройка сетевых устройств по мере их появления, а также создание виртуальных сетевых устройств. Эта служба особенно полезна при работе со сложными сетевыми настройками контейнера <a href="../en/Systemd-nspawn.html" title="Systemd-nspawn">systemd-nspawn</a> или виртуальной машины, но вполне подойдёт и для простых соединений.
+</p>
+<meta property="mw:PageProp/toc">
+<h2>
+<span id=".D0.9E.D1.81.D0.BD.D0.BE.D0.B2.D1.8B_.D0.B8.D1.81.D0.BF.D0.BE.D0.BB.D1.8C.D0.B7.D0.BE.D0.B2.D0.B0.D0.BD.D0.B8.D1.8F"></span><span class="mw-headline" id="Основы_использования">Основы использования</span>
+</h2>
+<p>Пакет <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=systemd">systemd</a></span> входит в базовую установку Arch. В нём содержится всё необходимое для работы с проводной сетью. Беспроводные сетевые интерфейсы настраиваются специализированными утилитами вроде <a href="../en/Wpa_supplicant.html" title="Wpa supplicant">wpa_supplicant</a> или <a href="../ru/Iwd.html" title="Iwd (Русский)">iwd</a>.
+</p>
+<h3>
+<span id=".D0.A1.D0.BB.D1.83.D0.B6.D0.B1.D1.8B_.D0.B8_.D0.BD.D0.B0.D1.81.D1.82.D1.80.D0.BE.D0.B9.D0.BA.D0.B8"></span><span class="mw-headline" id="Службы_и_настройки">Службы и настройки</span>
+</h3>
+<p>Чтобы включить <i>systemd-networkd</i>, <a href="../ru/Help:Reading.html#%D0%A3%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5_%D1%8E%D0%BD%D0%B8%D1%82%D0%B0%D0%BC%D0%B8_systemd" class="mw-redirect" title="Запустите/включите">запустите/включите</a> службу <code>systemd-networkd.service</code>.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Примечание:</strong> Убедитесь, что в системе не запущены другие службы, имеющие доступ к изменению сетевых настроек — это может привести к конфликтам. Найдите такие службы командой <code>systemctl --type=service</code> и <a href="../ru/Help:Reading.html#%D0%A3%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5_%D1%8E%D0%BD%D0%B8%D1%82%D0%B0%D0%BC%D0%B8_systemd" class="mw-redirect" title="Остановите">остановите</a> их.</div>
+<p>При необходимости можно также настроить <a href="../ru/Systemd-resolved.html" title="Systemd-resolved (Русский)">systemd-resolved</a>, который будет выполнять разрешение сетевых имён для прикладных приложений:
+</p>
+<ul>
+<li>Некоторые пояснения насчёт того, как <i>systemd-resolved</i> работает с файлом <a href="../ru/Domain_name_resolution.html" class="mw-redirect" title="Resolv.conf (Русский)">resolv.conf</a>, можно найти в статье <a href="../ru/Systemd-resolved.html" title="Systemd-resolved (Русский)">systemd-resolved</a>.</li>
+<li>
+<i>systemd-resolved</i> необходим, если в <i>.network</i>-файлах заданы связанные с DNS параметры.</li>
+<li>
+<i>systemd-resolved</i> необходим, если DNS-адреса будут выдаваться DHCP-сервером или через IPv6 router advertisements (параметры <code>DHCP=</code> и/или <code>IPv6AcceptRA=</code> в разделе <code>[Network]</code>, а также <code>UseDNS=yes</code> (задано по умолчанию) в разделах <code>[DHCPv4]</code>, <code>[DHCPv6]</code>, <code>[IPv6AcceptRA]</code>, см. <span class="plainlinks archwiki-template-man" title="$ man 5 systemd.network"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd.network.5">systemd.network(5)</a></span>).</li>
+<li>Кроме того, <i>systemd-resolved</i> может использоваться и без <i>systemd-networkd</i>.</li>
+</ul>
+<h3><span class="mw-headline" id="systemd-networkd-wait-online">systemd-networkd-wait-online</span></h3>
+<p>Cлужба <code>systemd-networkd-wait-online.service</code> запускается автоматически при включении службы <code>systemd-networkd.service</code>. Это служба типа "oneshot", которая ожидает конфигурации доступа в сеть и начинает работу только после выполнения цели <code>network-online.target</code> (параметр <code>WantedBy=network-online.target</code>). См. также <a href="../ru/Systemd.html#%D0%97%D0%B0%D0%BF%D1%83%D1%81%D0%BA_%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%BE%D0%B2_%D0%BF%D0%BE%D1%81%D0%BB%D0%B5_%D0%BF%D0%BE%D0%B4%D0%BA%D0%BB%D1%8E%D1%87%D0%B5%D0%BD%D0%B8%D1%8F_%D0%BA_%D1%81%D0%B5%D1%82%D0%B8" title="Systemd (Русский)">systemd#Запуск сервисов после подключения к сети</a>.
+</p>
+<p>По умолчанию <code>systemd-networkd-wait-online.service</code> ожидает получения информации о состоянии всех интерфейсов под управлением <i>systemd-networkd</i>, причем минимум на одном интерфейсе должно быть установлено рабочее подключение.
+</p>
+<p>Если в вашей системе несколько интерфейсов, но некоторые не смогли подключиться к сети (например, Ethernet-интерфейс с двумя портами, но кабель воткнут только в один), запуск <code>systemd-networkd-wait-online.service</code> завершится неудачно по истечении тайм-аута в 2 минуты. Это может стать причиной неприятной паузы во время загрузки системы. Чтобы служба ожидала подключения <i>любого</i> интерфейса, а не всех, <a href="../ru/Systemd.html#%D0%A0%D0%B5%D0%B4%D0%B0%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5_%D1%84%D0%B0%D0%B9%D0%BB%D0%BE%D0%B2_%D1%8E%D0%BD%D0%B8%D1%82%D0%BE%D0%B2" class="mw-redirect" title="Отредактируйте">отредактируйте</a> файл службы, добавив параметр <code>--any</code> к строке <code>ExecStart</code>:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/system/systemd-networkd-wait-online.service.d/wait-for-only-one-interface.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Service]
+ExecStart=
+ExecStart=/usr/lib/systemd/systemd-networkd-wait-online --any</pre>
+<p>Также можно настроить и другие параметры, например, ожидание включения конкретных интерфейсов и режим работы. Подробнее см. <span class="plainlinks archwiki-template-man" title="$ man 8 systemd-networkd-wait-online"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd-networkd-wait-online.8">systemd-networkd-wait-online(8)</a></span>.
+</p>
+<h3>
+<span id=".D0.9F.D1.80.D0.B8.D0.BC.D0.B5.D1.80.D1.8B_.D0.BD.D0.B0.D1.81.D1.82.D1.80.D0.BE.D0.B5.D0.BA"></span><span class="mw-headline" id="Примеры_настроек">Примеры настроек</span>
+</h3>
+<p>Настройки должны храниться в каталоге <code>/etc/systemd/network</code> в файлах с суффиксом <i>.network</i>. Подробнее смотрите <a href="#%D0%A4%D0%B0%D0%B9%D0%BB%D1%8B_%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BA">#Файлы настроек</a> и <span class="plainlinks archwiki-template-man" title="$ man 5 systemd.network"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd.network.5">systemd.network(5)</a></span>.
+</p>
+<p>systemd/udev автоматически назначает <a rel="nofollow" class="external text" href="https://systemd.io/PREDICTABLE_INTERFACE_NAMES/">постоянные</a> имена для обнаруженных Ethernet, WLAN и WWAN интерфейсов. Перечень интерфейсов можно увидеть командой <code>networkctl list</code>.
+</p>
+<p>Чтобы изменения настроек вступили в силу необходимо будет <a href="../ru/Help:Reading.html#%D0%A3%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5_%D1%8E%D0%BD%D0%B8%D1%82%D0%B0%D0%BC%D0%B8_systemd" class="mw-redirect" title="Перезапустите">перезапустить</a> демон <code>systemd-networkd.service</code>.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Примечание:</strong> 
+<ul>
+<li>Параметры в файлах настроек чувствительны к регистру.</li>
+<li>В примерах ниже <code>enp1s0</code> — проводной интерфейс, а <code>wlp2s0</code> — беспроводной. Названия интерфейсов на вашей системе могут отличаться. Подробнее об именах интерфейсов см. <a href="../ru/Network_configuration.html#%D0%A1%D0%B5%D1%82%D0%B5%D0%B2%D1%8B%D0%B5_%D0%B8%D0%BD%D1%82%D0%B5%D1%80%D1%84%D0%B5%D0%B9%D1%81%D1%8B" class="mw-redirect" title="Настройка сети">Настройка сети#Сетевые интерфейсы</a>.</li>
+<li>Можно использовать подстановочные символы (wildcards), например <code>Name=en*</code> или <code>Name=wl*</code>.</li>
+<li>Можно искать устройства по типу. Например, <code>Type=ether</code> для Ethernet, <code>Type=wlan</code> для Wi-Fi и <code>Type=wwan</code> для WWAN. Учтите, что <code>Type=ether</code> включает также виртуальные Ethernet-интерфейсы (<code>veth*</code>), что может оказаться нежелательно.</li>
+<li>Если вы хотите отключить IPv6, то изучите статью <a href="../ru/IPv6.html#systemd-networkd_3" title="IPv6 (Русский)">IPv6#systemd-networkd</a>.</li>
+</ul>
+</div>
+<h4>
+<span id=".D0.9F.D1.80.D0.BE.D0.B2.D0.BE.D0.B4.D0.BD.D0.BE.D0.B9_.D0.B8.D0.BD.D1.82.D0.B5.D1.80.D1.84.D0.B5.D0.B9.D1.81_.D1.81_DHCP"></span><span class="mw-headline" id="Проводной_интерфейс_с_DHCP">Проводной интерфейс с DHCP</span>
+</h4>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/network/20-wired.network</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Match]
+Name=enp1s0
+
+[Network]
+DHCP=yes</pre>
+<h4>
+<span id=".D0.9F.D1.80.D0.BE.D0.B2.D0.BE.D0.B4.D0.BD.D0.BE.D0.B9_.D0.B8.D0.BD.D1.82.D0.B5.D1.80.D1.84.D0.B5.D0.B9.D1.81_.D1.81.D0.BE_.D1.81.D1.82.D0.B0.D1.82.D0.B8.D1.87.D0.B5.D1.81.D0.BA.D0.B8.D0.BC_IP-.D0.B0.D0.B4.D1.80.D0.B5.D1.81.D0.BE.D0.BC"></span><span class="mw-headline" id="Проводной_интерфейс_со_статическим_IP-адресом">Проводной интерфейс со статическим IP-адресом</span>
+</h4>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/network/20-wired.network</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Match]
+Name=enp1s0
+
+[Network]
+Address=10.1.10.9/24
+Gateway=10.1.10.1
+DNS=10.1.10.1
+</pre>
+<p>Параметр <code>Address=</code> можно указать несколько раз, если необходимо настроить несколько IPv4 и IPv6 адресов. Подробнее смотрите <a href="#%D0%A4%D0%B0%D0%B9%D0%BB%D1%8B_network">#Файлы network</a> и <span class="plainlinks archwiki-template-man" title="$ man 5 systemd.network"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd.network.5">systemd.network(5)</a></span>.
+</p>
+<h4>
+<span id=".D0.91.D0.B5.D1.81.D0.BF.D1.80.D0.BE.D0.B2.D0.BE.D0.B4.D0.BD.D0.BE.D0.B9_.D0.B8.D0.BD.D1.82.D0.B5.D1.80.D1.84.D0.B5.D0.B9.D1.81"></span><span class="mw-headline" id="Беспроводной_интерфейс">Беспроводной интерфейс</span>
+</h4>
+<p>Беспроводной сетевой интерфейс нужно предварительно настроить приложением вроде <a href="../en/Wpa_supplicant.html" title="Wpa supplicant">wpa_supplicant</a> или <a href="../ru/Iwd.html" title="Iwd (Русский)">iwd</a>. После этого можно подключиться к беспроводной сети посредством systemd-networkd:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/network/25-wireless.network</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Match]
+Name=wlp2s0
+
+[Network]
+DHCP=yes</pre>
+<p>Если беспроводному интерфейсу назначен статический IP-адрес, то настройка полностью (за исключением названия интерфейса) совпадает с настройкой <a href="#%D0%9F%D1%80%D0%BE%D0%B2%D0%BE%D0%B4%D0%BD%D0%BE%D0%B9_%D0%B8%D0%BD%D1%82%D0%B5%D1%80%D1%84%D0%B5%D0%B9%D1%81_%D1%81%D0%BE_%D1%81%D1%82%D0%B0%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%BC_IP-%D0%B0%D0%B4%D1%80%D0%B5%D1%81%D0%BE%D0%BC">проводного интерфейса</a>.
+</p>
+<p>Для аутентификации в беспроводной сети можно использовать <a href="../en/Wpa_supplicant.html" title="Wpa supplicant">wpa_supplicant</a> или <a href="../ru/Iwd.html" title="Iwd (Русский)">iwd</a>.
+</p>
+<h4>
+<span id=".D0.9F.D1.80.D0.BE.D0.B2.D0.BE.D0.B4.D0.BD.D1.8B.D0.B5_.D0.B8_.D0.B1.D0.B5.D1.81.D0.BF.D1.80.D0.BE.D0.B2.D0.BE.D0.B4.D0.BD.D1.8B.D0.B5_.D0.B8.D0.BD.D1.82.D0.B5.D1.80.D1.84.D0.B5.D0.B9.D1.81.D1.8B_.D0.BD.D0.B0_.D0.BE.D0.B4.D0.BD.D0.BE.D0.B9_.D0.BC.D0.B0.D1.88.D0.B8.D0.BD.D0.B5"></span><span class="mw-headline" id="Проводные_и_беспроводные_интерфейсы_на_одной_машине">Проводные и беспроводные интерфейсы на одной машине</span>
+</h4>
+<p>Когда в системе есть и проводной, и беспроводной интерфейсы, настройте директиву ядра metric, чтобы оно могло "на лету" определять, какой из интерфейсов использовать. В этом случае при отключении проводного соединения полного обрыва связи не произойдёт.
+</p>
+<p>Ядро использует настройки метрик при выборе одного из возможных маршрутов для исходящих пакетов — например, при двух включённых сетевых интерфесах, проводном и беспроводном. Если вдруг одно из соединений прерывается, то второй вариант автоматически объявляется победителем. При этом полного разрыва соединения не происходит. Правда, для текущих процессов передачи данных не всегда всё так гладко, но, сторого говоря, это проблема другого уровня сетевой модели OSI.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Примечание:</strong> Параметр <code>Metric</code> используется для статических маршрутов, а <code>RouteMetric</code> — для динамической маршрутизации. Подробнее смотрите <span class="plainlinks archwiki-template-man" title="$ man 5 systemd.network"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd.network.5">systemd.network(5)</a></span>.
+</div>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/network/20-wired.network</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Match]
+Name=enp1s0
+
+[Network]
+DHCP=yes
+
+[DHCP]
+RouteMetric=10</pre>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/network/25-wireless.network</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Match]
+Name=wlp2s0
+
+[Network]
+DHCP=yes
+
+[DHCP]
+RouteMetric=20</pre>
+<h4>
+<span id=".D0.9F.D0.B5.D1.80.D0.B5.D0.B8.D0.BC.D0.B5.D0.BD.D0.BE.D0.B2.D0.B0.D0.BD.D0.B8.D0.B5_.D0.B8.D0.BD.D1.82.D0.B5.D1.80.D1.84.D0.B5.D0.B9.D1.81.D0.B0"></span><span class="mw-headline" id="Переименование_интерфейса">Переименование интерфейса</span>
+</h4>
+<p>Файлы <i>.link</i> можно использовать для назначения интерфейсу нового имени вместо <a href="../ru/Network_configuration.html#%D0%A1%D0%BC%D0%B5%D0%BD%D0%B0_%D0%B8%D0%BC%D0%B5%D0%BD%D0%B8_%D0%B8%D0%BD%D1%82%D0%B5%D1%80%D1%84%D0%B5%D0%B9%D1%81%D0%B0" title="Network configuration (Русский)">редактирования правил udev</a>. Например, можно задать постоянное имя интерфейса для USB-to-Ethernet адаптера на основе его MAC-адреса, т.к. имена таким адаптерам обычно назначаются в зависимости от того, к какому USB-порту они подключены.
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/network/10-ethusb0.link</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Match]
+MACAddress=12:34:56:78:90:ab
+
+[Link]
+Description=USB to Ethernet Adapter
+Name=ethusb0</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Примечание:</strong> Название пользовательского файла <i>.link</i> должно быть "меньше" (в лексическом смысле), чем название файла настроек по умолчанию <code>99-default.link</code>. Например, название <code>10-ethusb0.link</code> подходит, а <code>ethusb0.link</code> — нет.
+</div>
+<h2>
+<span id=".D0.A4.D0.B0.D0.B9.D0.BB.D1.8B_.D0.BD.D0.B0.D1.81.D1.82.D1.80.D0.BE.D0.B5.D0.BA"></span><span class="mw-headline" id="Файлы_настроек">Файлы настроек</span>
+</h2>
+<p>Файлы настроек могут находиться в следующих каталогах (в порядке увеличения приоритета):
+</p>
+<ul>
+<li>
+<code>/usr/lib/systemd/network/</code> — системный сетевой каталог.</li>
+<li>
+<code>/run/systemd/network/</code> — runtime-каталог сетевых программ.</li>
+<li>
+<code>/etc/systemd/network/</code> — локальный каталог системного администрирования.</li>
+</ul>
+<p>Существуют три типа файлов настройки. 
+</p>
+<ul>
+<li>Файлы <i>.network</i> — настройки (профили) сетевых интерфейсов.</li>
+<li>Файлы <i>.netdev</i> — настройки (профили) виртуальных сетевых интерфейсов.</li>
+<li>Файлы <i>.link</i> — настройки, которые использует менеджер устройств <a href="../ru/Udev.html" title="Udev (Русский)">udev</a> при обнаружении нового интерфейса.</li>
+</ul>
+<p>Для этих файлов действуют следующие правила: 
+</p>
+<ul>
+<li>Профиль активируется, если совпали <b>все</b> условия в разделе <code>[Match]</code>.</li>
+<li>Если в разделе <code>[Match]</code> не указано ничего, то профиль применяется для всех устройств (можно сравнить с подстановочным символом <code>*</code>).</li>
+<li>Файлы настроек сортируются по названиям и обрабатываются в лексическом порядке, независимо от каталога, в котором они расположены.</li>
+<li>Файлы с одинаковыми названиями заменяют друг друга — в порядке приоритета каталогов, в которых они находятся.</li>
+</ul>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Совет:</strong> 
+<ul>
+<li>Файлы в каталоге <code>/etc/systemd/network/</code> имеют приоритет перед системными файлами в <code>/usr/lib/systemd/network/</code>. Создайте в этом каталоге символическую ссылку на <code>/dev/null</code>, чтобы "замаскировать" системный файл.</li>
+<li>systemd понимает значения <code>1, true, yes, on</code> как логическое <i>true</i>, а <code>0, false, no, off</code> — как <i>false</i>.</li>
+</ul>
+</div>
+<h3>
+<span id=".D0.A4.D0.B0.D0.B9.D0.BB.D1.8B_network"></span><span class="mw-headline" id="Файлы_network">Файлы network</span>
+</h3>
+<p>В network-файлах задаются сетевые настройки, чаще всего — для серверов и контейнеров.
+</p>
+<p>Файлы <i>.network</i> могут содержать разделы <code>[Match]</code>, <code>[Link]</code>, <code>[Network]</code>, <code>[Address]</code>, <code>[Route]</code> и <code>[DHCP]</code>. Ниже приведены основные параметры для каждого раздела. Подробнее смотрите <span class="plainlinks archwiki-template-man" title="$ man 5 systemd.network"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd.network.5">systemd.network(5)</a></span>.
+</p>
+<h4>
+<span id=".5BMatch.5D"></span><span class="mw-headline" id="[Match]">[Match]</span>
+</h4>
+<p>Наиболее распространенные ключи для поиска совпадающего устройства:
+</p>
+<table class="wikitable">
+<tbody>
+<tr>
+<th>Параметр</th>
+<th>Описание</th>
+<th>Возможные значения</th>
+<th>Значение по умолчанию
+</th>
+</tr>
+<tr>
+<td><code>Name=</code></td>
+<td>Поиск интерфейса по названию, например: <code>en*</code>. Символ <code>!</code> в начале инвертирует результаты поиска.</td>
+<td>Разделённые пробелами названия интерфейсов (можно указывать шаблоны с подстановочными символами в стиле командной оболочки), логическое отрицание (<code>!</code>).</td>
+<td>
+</td>
+</tr>
+<tr>
+<td><code>MACAddress=</code></td>
+<td>Поиск интерфейса по MAC-адресу, например: <code>MACAddress=01:23:45:67:89:ab 00-11-22-33-44-55 AABB.CCDD.EEFF</code>
+</td>
+<td>Разделённые пробелами MAC-адреса в шестнадцатеричном формате; в качестве внутреннего разделителя в адресах можно использовать двоеточия, дефисы и точки.</td>
+<td>
+</td>
+</tr>
+<tr>
+<td><code>Host=</code></td>
+<td>Поиск по имени хоста или machine ID.</td>
+<td>Имя хоста (в том числе в виде шаблона), <span class="plainlinks archwiki-template-man" title="$ man 5 machine-id"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/machine-id.5">machine-id(5)</a></span>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td><code>Virtualization=</code></td>
+<td>Проверка на работу в виртуальном окружении. <code>Virtualization=false</code> — для хост-системы, <code>Virtualization=true</code> — для работы в контейнере или виртуальной машине. Есть возможность проверить тип виртуализации и пространство имён пользователя (параметр <code>private-users</code>).</td>
+<td>булевские, логическое отрицание (<code>!</code>), тип (<code>vm</code> и <code>container</code>), реализация (<code>qemu</code>, <code>kvm</code>, <code>zvm</code>, <code>vmware</code>, <code>microsoft</code>, <code>oracle</code>, <code>powervm</code>, <code>xen</code>, <code>bochs</code>, <code>uml</code>, <code>bhyve</code>, <code>qnx</code>, <code>openvz</code>, <code>lxc</code>, <code>lxc-libvirt</code>, <code>systemd-nspawn</code>, <code>docker</code>, <code>podman</code>, <code>rkt</code>, <code>wsl</code>, <code>proot</code>, <code>pouch</code>, <code>acrn</code>), <code>private-users</code>
+</td>
+<td>
+</td>
+</tr>
+</tbody>
+</table>
+<h4>
+<span id=".5BLink.5D"></span><span class="mw-headline" id="[Link]">[Link]</span>
+</h4>
+<table class="wikitable">
+<tbody>
+<tr>
+<th>Параметр</th>
+<th>Описание</th>
+<th>Допустимые значения</th>
+<th>Значение по умолчанию
+</th>
+</tr>
+<tr>
+<td><code>MACAddress=</code></td>
+<td>Привязка аппаратного адреса к устройству. Полезно при <a href="../ru/MAC_address_spoofing.html#systemd-networkd" title="MAC address spoofing (Русский)">подмене MAC-адреса</a>.</td>
+<td>Полный MAC-адрес с двоеточием, дефисом или точкой в качестве разделителя</td>
+<td>
+</td>
+</tr>
+<tr>
+<td><code>MTUBytes=</code></td>
+<td>Максимальный размер передаваемого пакета данных для данного интерфейса. Имейте в виду, что если для интерфейса включён IPv6 и задано значение MTU ниже 1280 (минимальный MTU для IPv6), то оно будет автоматически увеличено до этого значения. Большее значение MTU (например, при использовании <a href="../en/Network_configuration.html#Set_device_MTU_and_queue_length" class="mw-redirect" title="Jumbo frames">jumbo frames</a>) может повысить скорость передачи данных.</td>
+<td>Целое число; возможны суффиксы K, M, G для указания размерности (основание 1024)</td>
+<td>
+</td>
+</tr>
+<tr>
+<td><code>Multicast=</code></td>
+<td>
+<a href="https://en.wikipedia.org/wiki/ru:%D0%9C%D1%83%D0%BB%D1%8C%D1%82%D0%B8%D0%B2%D0%B5%D1%89%D0%B0%D0%BD%D0%B8%D0%B5" class="extiw" title="wikipedia:ru:Мультивещание">групповая передача</a> для интерфейса(-ов).</td>
+<td>булевское</td>
+<td>? не задокументировано ?
+</td>
+</tr>
+</tbody>
+</table>
+<h4>
+<span id=".5BNetwork.5D"></span><span class="mw-headline" id="[Network]">[Network]</span>
+</h4>
+<table class="wikitable">
+<tbody>
+<tr>
+<th>Параметр</th>
+<th>Описание</th>
+<th>Допустимые значения</th>
+<th>Значение по умолчанию
+</th>
+</tr>
+<tr>
+<td><code>DHCP=</code></td>
+<td>Поддержка DHCPv4- и/или DHCPv6-клиента.</td>
+<td>булевское, <code>ipv4</code>, <code>ipv6</code>.</td>
+<td>
+<code>false</code>
+</td>
+</tr>
+<tr>
+<td><code>DHCPServer=</code></td>
+<td>Запуск сервера DHCPv4.</td>
+<td>булевское</td>
+<td>
+<code>false</code>
+</td>
+</tr>
+<tr>
+<td><code>MulticastDNS=</code></td>
+<td>Поддержка <a href="https://tools.ietf.org/html/rfc6762" class="extiw" title="rfc:6762">multicast DNS</a>. Если задать значение <code>resolve</code>, то включится только разрешение имён, но не регистрация и объявление хостов/служб.</td>
+<td>булевское, <code>resolve</code>
+</td>
+<td>
+<code>false</code>
+</td>
+</tr>
+<tr>
+<td><code>DNSSEC=</code></td>
+<td>Поддержка DNSSEC. Если задать значение <code>allow-downgrade</code>, то DNSSEC будет автоматически отключаться в не-DNSSEC сетях, что повысит совместимость.</td>
+<td>булевское, <code>allow-downgrade</code>
+</td>
+<td>
+<code>false</code>
+</td>
+</tr>
+<tr>
+<td><code>DNS=</code></td>
+<td>Адрес <a href="../ru/Domain_name_resolution.html" title="Domain name resolution (Русский)">DNS</a>-сервера. Может указываться больше одного раза.</td>
+<td><span class="plainlinks archwiki-template-man" title="$ man 3 inet_pton"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/inet_pton.3">inet_pton(3)</a></span></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><code>Domains=</code></td>
+<td>Список доменов, которые должны разрешаться с использованием DNS-сервера (<span class="plainlinks archwiki-template-man" title="$ man 5 systemd.network"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd.network.5#%5BNETWORK%5D_SECTION_OPTIONS">systemd.network(5) § [NETWORK] SECTION OPTIONS</a></span>).</td>
+<td>имя домена (в том числе с символом (<code>~</code>) в начале)</td>
+<td>
+</td>
+</tr>
+<tr>
+<td><code>IPForward=</code></td>
+<td>Пересылка входящих пакетов на другой интерфейс в соответствии с таблицей маршрутизации. Подробнее см. <a href="../ru/Internet_sharing.html#%D0%A0%D0%B0%D0%B7%D1%80%D0%B5%D1%88%D0%B8%D1%82%D0%B5_%D0%BF%D0%B5%D1%80%D0%B5%D1%81%D1%8B%D0%BB%D0%BA%D1%83_%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%BE%D0%B2" class="mw-redirect" title="Раздача интернета">Раздача интернета#Разрешите пересылку пакетов</a>.</td>
+<td>булевское, <code>ipv4</code>, <code>ipv6</code>
+</td>
+<td>
+<code>false</code>
+</td>
+</tr>
+<tr>
+<td><code>IPMasquerade=</code></td>
+<td>Если опция включена, то при пересылке пакетов IP-адрес источника подменяется адресом локального сетевого интерфейса. Неявно подразумевает <code>IPForward=ipv4</code>, <code>IPForward=ipv6</code> или <code>IPForward=yes</code>.</td>
+<td>
+<code>ipv4</code>, <code>ipv6</code>, <code>both</code>, <code>no</code>
+</td>
+<td>
+<code>no</code>
+</td>
+</tr>
+<tr>
+<td><code>IPv6PrivacyExtensions=</code></td>
+<td>Использование временных IPv6-адресов в соответствии с <a href="https://tools.ietf.org/html/rfc4941" class="extiw" title="rfc:4941">RFC 4941</a>. Если задать значение <code>prefer-public</code>, то privacy extensions включатся, но предпочтение будет отдаваться использованию публичных адресов, а не временных. Если задать значение <code>kernel</code>, то будут использоваться настройки ядра.</td>
+<td>булевское, <code>prefer-public</code>, <code>kernel</code>
+</td>
+<td>
+<code>false</code>
+</td>
+</tr>
+</tbody>
+</table>
+<h4>
+<span id=".5BAddress.5D"></span><span class="mw-headline" id="[Address]">[Address]</span>
+</h4>
+<table class="wikitable">
+<tbody>
+<tr>
+<th>Параметр</th>
+<th>Описание</th>
+<th>Допустимые значения</th>
+<th>Значение по умолчанию
+</th>
+</tr>
+<tr>
+<td><code>Address=</code></td>
+<td>Можно настроить несколько адресов, указав этот ключ несколько раз. Опция обязательна, если не используется DHCP. Если указать значение <code>0.0.0.0</code> (для IPv4) или <code>::</code> (для IPv6), то будет выделен неиспользуемый блок адресов заданного размера.</td>
+<td>сатические адреса IPv4 и IPv6 с длиной префикса (см. <span class="plainlinks archwiki-template-man" title="$ man 3 inet_pton"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/inet_pton.3">inet_pton(3)</a></span>)</td>
+<td>
+</td>
+</tr>
+</tbody>
+</table>
+<h4>
+<span id=".5BRoute.5D"></span><span class="mw-headline" id="[Route]">[Route]</span>
+</h4>
+<ul>
+<li>
+<code>Gateway=</code> — адрес шлюза. Если не используется DHCP, то эта опция <b>обязательна</b>.</li>
+<li>
+<code>Destination=</code> — префикс сети назначения.</li>
+</ul>
+<p>Если параметр <code>Destination</code> не задан, то используется маршрут по умолчанию.
+</p>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Совет:</strong> Если в разделах <code>[Address]</code> и <code>[Route]</code> заданы только параметры <code>Address=</code> и <code>Gateway=</code> соответственно, то для краткости оба эти параметра можно перенести в раздел <code>[Network]</code>.
+</div>
+<h4>
+<span id=".5BDHCP.5D"></span><span class="mw-headline" id="[DHCP]">[DHCP]</span>
+</h4>
+<table class="wikitable">
+<tbody>
+<tr>
+<th>Параметр</th>
+<th>Описание</th>
+<th>Допустимые значения</th>
+<th>Значение по умолчанию
+</th>
+</tr>
+<tr>
+<td><code>UseDNS=</code></td>
+<td>Объявление DNS-сервера при работе DHCP-сервера.</td>
+<td>булевское</td>
+<td>
+<code>true</code>
+</td>
+</tr>
+<tr>
+<td><code>Anonymize=</code></td>
+<td>Если задать значение <code>true</code>, посылаемые DHCP-серверу параметры будут соответствовать <a href="https://tools.ietf.org/html/rfc7844" class="extiw" title="rfc:7844">RFC:7844</a> (Anonymity Profiles for DHCP Clients) для сокрытия идентифицирующей информации.</td>
+<td>булевское</td>
+<td>
+<code>false</code>
+</td>
+</tr>
+<tr>
+<td><code>UseDomains=</code></td>
+<td>Использование полученного от DHCP-сервера домена в качестве адреса для DNS-поиска. Если задать значение <code>route</code>, полученное доменное имя будет использоваться только для маршрутизации DNS-запросов, но не для поиска. Эта опция может повлиять на локальное разрешение имён с помощью <a href="../ru/Systemd-resolved.html" title="Systemd-resolved (Русский)">systemd-resolved</a>.</td>
+<td>булевское, <code>route</code>
+</td>
+<td>
+<code>false</code>
+</td>
+</tr>
+</tbody>
+</table>
+<h4>
+<span id=".5BDHCPServer.5D"></span><span class="mw-headline" id="[DHCPServer]">[DHCPServer]</span>
+</h4>
+<p>Ниже приведён пример настройки DHCP-сервера с <a href="../ru/Software_access_point.html#%D0%9A%D0%B0%D0%BD%D0%B0%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9_%D1%83%D1%80%D0%BE%D0%B2%D0%B5%D0%BD%D1%8C_Wi-Fi" class="mw-redirect" title="Программная точка доступа">hostapd</a>, выступающего в качестве беспроводной точки доступа. Параметр <code>IPMasquerade</code> включает правила межсетевого экрана для <a href="../ru/Internet_sharing.html#%D0%92%D0%BA%D0%BB%D1%8E%D1%87%D0%B8%D1%82%D0%B5_NAT" class="mw-redirect" title="Раздача интернета">NAT</a>, а также автоматически включает <code>IPForward=ipv4</code>, что разрешает <a href="../ru/Internet_sharing.html#%D0%A0%D0%B0%D0%B7%D1%80%D0%B5%D1%88%D0%B8%D1%82%D0%B5_%D0%BF%D0%B5%D1%80%D0%B5%D1%81%D1%8B%D0%BB%D0%BA%D1%83_%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%BE%D0%B2" class="mw-redirect" title="Раздача интернета">пересылку пакетов</a>.
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/network/<i>wlan0</i>.network</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Match]
+Name=wlan0
+
+[Network]
+Address=10.1.1.1/24
+DHCPServer=true
+IPMasquerade=true
+
+[DHCPServer]
+PoolOffset=100
+PoolSize=20
+EmitDNS=yes
+DNS=9.9.9.9</pre>
+<h3>
+<span id=".D0.A4.D0.B0.D0.B9.D0.BB.D1.8B_netdev"></span><span class="mw-headline" id="Файлы_netdev">Файлы netdev</span>
+</h3>
+<p>В файлах netdev описывается создание виртуальных сетевых интерфейсов. В нём два раздела, <code>[Match]</code> и <code>[NetDev]</code>. Ниже приведены некоторые важные параметры. Подробнее смотрите <span class="plainlinks archwiki-template-man" title="$ man 5 systemd.netdev"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd.netdev.5">systemd.netdev(5)</a></span>.
+</p>
+<h4>
+<span id=".5BMatch.5D_2"></span><span class="mw-headline" id="[Match]_2">[Match]</span>
+</h4>
+<ul>
+<li>
+<code>Host=</code> — поиск по имени хоста.</li>
+<li>
+<code>Virtualization=</code> — проверка на работу в виртуальном окружении.</li>
+</ul>
+<h4>
+<span id=".5BNetdev.5D"></span><span class="mw-headline" id="[Netdev]">[Netdev]</span>
+</h4>
+<p>Наиболее распространенные ключи:
+</p>
+<ul>
+<li>
+<code>Name=</code> — имя интерфейса. Опция <b>обязательна</b>.</li>
+<li>
+<code>Kind=</code> — вид интерфейса. Например, <i>bridge</i>, <i>bond</i>, <i>vlan</i>, <i>veth</i>, <i>sit</i> и т.д. Опция <b>обязательна</b>.</li>
+</ul>
+<h3>
+<span id=".D0.A4.D0.B0.D0.B9.D0.BB.D1.8B_link"></span><span class="mw-headline" id="Файлы_link">Файлы link</span>
+</h3>
+<p>Файлы link выступают в качестве альтернативы пользовательским правилам <a href="../ru/Udev.html" title="Udev (Русский)">udev</a> и применяются при обнаружении менеджером нового устройства. Файл состоит из двух разделов, <code>[Match]</code> и <code>[Link]</code>. Ниже приведены основные параметры обоих разделов. Подробнее смотрите <span class="plainlinks archwiki-template-man" title="$ man 5 systemd.link"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd.link.5">systemd.link(5)</a></span>.
+</p>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Совет:</strong> Для выявления проблем с <i>.link</i>-файлами используйте команду <code># udevadm test-builtin net_setup_link /sys/<i>путь/к/сетевому/устройству</i></code> .
+</div>
+<h4>
+<span id=".5BMatch.5D_3"></span><span class="mw-headline" id="[Match]_3">[Match]</span>
+</h4>
+<ul>
+<li>
+<code>MACAddress=</code> — поиск по MAC-адресу.</li>
+<li>
+<code>Host=</code> — поиск по имени хоста.</li>
+<li>
+<code>Virtualization=</code> — проверка на виртуализацию.</li>
+<li>
+<code>Type=</code> — поиск по типу интерфейса (например, vlan).</li>
+</ul>
+<h4>
+<span id=".5BLink.5D_2"></span><span class="mw-headline" id="[Link]_2">[Link]</span>
+</h4>
+<ul>
+<li>
+<code>MACAddressPolicy=</code> — использование постоянных или же случайных адресов.</li>
+<li>
+<code>MACAddress=</code> — использование конкретного адреса.</li>
+<li>
+<code>NamePolicy=</code> — политики выбора и назначения имён интерфейсов, например, <code>kernel</code>, <code>keep</code> и т.д.</li>
+</ul>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Примечание:</strong> Настроек в системном файле <code>/usr/lib/systemd/network/99-default.link</code>, как правило, в большинстве случаев вполне достаточно.
+</div>
+<h2>
+<span id=".D0.98.D1.81.D0.BF.D0.BE.D0.BB.D1.8C.D0.B7.D0.BE.D0.B2.D0.B0.D0.BD.D0.B8.D0.B5_.D1.81_.D0.BA.D0.BE.D0.BD.D1.82.D0.B5.D0.B9.D0.BD.D0.B5.D1.80.D0.B0.D0.BC.D0.B8"></span><span class="mw-headline" id="Использование_с_контейнерами">Использование с контейнерами</span>
+</h2>
+<p><i>systemd-networkd</i> предоставляет полную сетевую конфигурацию для контейнеров <a href="../en/Systemd-nspawn.html" title="Systemd-nspawn">systemd-nspawn</a>, запущенных как на хостовой системе, так и внутри другого контейнера. Подробнее см. <a href="../en/Systemd-nspawn.html#Networking" title="Systemd-nspawn">systemd-nspawn#Networking</a>
+</p>
+<p>В примерах ниже:
+</p>
+<ul>
+<li>вывод команды <code>ip a</code> будет ограничен только рассматриваемыми интерфейсами.</li>
+<li>
+<i>хост</i> будет означать вашу основную ОС, а <i>контейнер</i> — гостевую виртуальную машину.</li>
+<li>все названия сетевых интерфейсов и IP-адреса приведены в качестве примера.</li>
+</ul>
+<h3>
+<span id=".D0.A1.D0.B5.D1.82.D0.B5.D0.B2.D0.BE.D0.B9_.D0.BC.D0.BE.D1.81.D1.82_.D1.81_DHCP"></span><span class="mw-headline" id="Сетевой_мост_с_DHCP">Сетевой мост с DHCP</span>
+</h3>
+<h4>
+<span id=".D0.98.D0.BD.D1.82.D0.B5.D1.80.D1.84.D0.B5.D0.B9.D1.81_.D0.BC.D0.BE.D1.81.D1.82.D0.B0"></span><span class="mw-headline" id="Интерфейс_моста">Интерфейс моста</span>
+</h4>
+<p>Первым делом необходимо создать виртуальный интерфейс <a href="../en/Network_bridge.html" class="mw-redirect" title="Bridge">моста</a>. С помощью systemd создаём устройство-мост <code>br0</code>:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/network/<i>мой_мост</i>.netdev</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[NetDev]
+Name=br0
+Kind=bridge</pre>
+<p><a href="../ru/Help:Reading.html#%D0%A3%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5_%D1%8E%D0%BD%D0%B8%D1%82%D0%B0%D0%BC%D0%B8_systemd" class="mw-redirect" title="Перезапустите">Перезапустите</a> <code>systemd-networkd.service</code>, чтобы настройки вступили в силу.
+</p>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Совет:</strong> <i>systemd-networkd</i> генерирует MAC-адрес на основе названия интерфейса и идентификатора машины (machine ID) и привязывает его к мосту. Это может создать проблемы, например, при маршрутизации с фильтрацией по MAC-адресам. Чтобы избежать такого рода проблем, привязку MAC-адреса моста (возможно, совпадающего с MAC-адресом физического устройства) необходимо выполнить с помощью строки <code>MACAddress=xx:xx:xx:xx:xx:xx</code> в разделе <i>NetDev</i> в примере выше.
+</div>
+<p>Чтобы увидеть новый мост на хосте или в контейнере, выполните:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">$ ip a</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">3: br0: &lt;BROADCAST,MULTICAST&gt; mtu 1500 qdisc noop state DOWN group default 
+    link/ether ae:bd:35:ea:0c:c9 brd ff:ff:ff:ff:ff:ff
+</pre>
+<p>Обратите внимание, что интерфейс <code>br0</code> обнаружен, но он всё ещё выключен (DOWN).
+</p>
+<h4>
+<span id=".D0.9F.D1.80.D0.B8.D0.B2.D1.8F.D0.B7.D0.BA.D0.B0_Ethernet_.D0.BA_.D0.BC.D0.BE.D1.81.D1.82.D1.83"></span><span class="mw-headline" id="Привязка_Ethernet_к_мосту">Привязка Ethernet к мосту</span>
+</h4>
+<p>Следующий шаг — выполнить привязку реального сетевого интерфейса к виртуальному мосту. В примере ниже мы привязываем любой интерфейс, название которого совпадает с шаблоном <code>en*</code>.
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/network/<i>привязка</i>.network</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Match]
+Name=en*
+
+[Network]
+Bridge=br0</pre>
+<p>Выбранному проводному интерфейсу не должно быть назначено никакого IP-адреса, поскольку для привязки необходим интерфейс без оного. Если необходимо, отредактируйте файл <code>/etc/systemd/network/<i>мой_Eth</i>.network</code> соответствующим образом.
+</p>
+<h4>
+<span id=".D0.A1.D0.B5.D1.82.D1.8C_.D0.BC.D0.BE.D1.81.D1.82.D0.B0"></span><span class="mw-headline" id="Сеть_моста">Сеть моста</span>
+</h4>
+<p>Теперь, поскольку мост создан и привязан к существующему сетевому интерфейсу, необходимо создать настройки IP. Это определяется в файле <i>.network</i>:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/network/<i>мой_мост</i>.network</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Match]
+Name=br0
+
+[Network]
+DHCP=ipv4</pre>
+<h4>
+<span id=".D0.9D.D0.B0.D1.81.D1.82.D1.80.D0.BE.D0.B9.D0.BA.D0.B0_.D0.BA.D0.BE.D0.BD.D1.82.D0.B5.D0.B9.D0.BD.D0.B5.D1.80.D0.B0"></span><span class="mw-headline" id="Настройка_контейнера">Настройка контейнера</span>
+</h4>
+<p>Используйте параметр <code>--networkd-bridge=br0</code> при запуске контейнера. Подробнее см. <a href="../en/Systemd-nspawn.html#Use_a_network_bridge" title="Systemd-nspawn">systemd-nspawn#Use a network bridge</a>.
+</p>
+<h4>
+<span id=".D0.A0.D0.B5.D0.B7.D1.83.D0.BB.D1.8C.D1.82.D0.B0.D1.82"></span><span class="mw-headline" id="Результат">Результат</span>
+</h4>
+<ul><li>для хоста</li></ul>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">$ ip a</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">3: br0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc noqueue state UP group default 
+    link/ether 14:da:e9:b5:7a:88 brd ff:ff:ff:ff:ff:ff
+    inet 192.168.1.87/24 brd 192.168.1.255 scope global br0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::16da:e9ff:feb5:7a88/64 scope link 
+       valid_lft forever preferred_lft forever
+6: vb-<i>мой_контейнер</i>: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc pfifo_fast master br0 state UP group default qlen 1000
+    link/ether d2:7c:97:97:37:25 brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::d07c:97ff:fe97:3725/64 scope link 
+       valid_lft forever preferred_lft forever
+</pre>
+<ul><li>для контейнера</li></ul>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">$ ip a</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">2: host0: &lt;BROADCAST,MULTICAST,ALLMULTI,AUTOMEDIA,NOTRAILERS,UP,LOWER_UP&gt; mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 5e:96:85:83:a8:5d brd ff:ff:ff:ff:ff:ff
+    inet 192.168.1.73/24 brd 192.168.1.255 scope global host0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::5c96:85ff:fe83:a85d/64 scope link 
+       valid_lft forever preferred_lft forever
+</pre>
+<h4>
+<span id=".D0.97.D0.B0.D0.BC.D0.B5.D1.87.D0.B0.D0.BD.D0.B8.D1.8F"></span><span class="mw-headline" id="Замечания">Замечания</span>
+</h4>
+<ul>
+<li>теперь задан один IP-адрес для интерфейса <code>br0</code> на хосте, и один для интерфейса <code>host0</code> в контейнере.</li>
+<li>появилось два новых интерфейса: <code>vb-<i>мой_контейнер</i></code> на хосте и <code>host0</code> в контейнере. Это результат опции <code>--network-bridge=br0</code> (см. <a href="../en/Systemd-nspawn.html#Use_a_network_bridge" title="Systemd-nspawn">systemd-nspawn#Use a network bridge</a>).</li>
+<li>DHCP-адрес интерфейса <code>host0</code> был выдан на основании файла <code>/usr/lib/systemd/network/80-container-host0.network</code>.</li>
+</ul>
+<ul><li>на хосте</li></ul>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">$ brctl show</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">bridge name	bridge id		STP enabled	interfaces
+br0		8000.14dae9b57a88	no		enp7s0
+							vb-<i>мой_контейнер</i>
+</pre>
+<p>Выше показано, что в системе есть мост с двумя связанными интерфейсами.
+</p>
+<ul><li>на хосте</li></ul>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">$ ip route</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">default via 192.168.1.254 dev br0 
+192.168.1.0/24 dev br0  proto kernel  scope link  src 192.168.1.87
+</pre>
+<ul><li>на контейнере</li></ul>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">$ ip route</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">default via 192.168.1.254 dev host0 
+192.168.1.0/24 dev host0  proto kernel  scope link  src 192.168.1.73
+</pre>
+<p>А здесь видно, что были активированы интерфейсы <code>br0</code> и <code>host0</code> с отдельными IP-адресами и шлюзом по умолчанию 192.168.1.254. Адрес шлюза был автоматически назначен systemd-networkd.
+</p>
+<h3>
+<span id=".D0.A1.D0.B5.D1.82.D0.B5.D0.B2.D0.BE.D0.B9_.D0.BC.D0.BE.D1.81.D1.82_.D1.81.D0.BE_.D1.81.D1.82.D0.B0.D1.82.D0.B8.D1.87.D0.B5.D1.81.D0.BA.D0.B8.D0.BC.D0.B8_IP-.D0.B0.D0.B4.D1.80.D0.B5.D1.81.D0.B0.D0.BC.D0.B8"></span><span class="mw-headline" id="Сетевой_мост_со_статическими_IP-адресами">Сетевой мост со статическими IP-адресами</span>
+</h3>
+<p>Настройка статического IP-адреса может быть удобной в случае развёртывания веб-сервисов (например, FTP, http, SSH). Если в файле <code>/usr/lib/systemd/network/99-default.link</code> задан параметр <code>MACAddressPolicy=persistent</code> (значение по умолчанию), то устройствам будут назначены постоянные MAC-адреса. Следовательно, будет несложно настроить маршрутизацию сервисов от шлюза на разные интерфейсы.
+</p>
+<p>Выполните следующие настройки:
+</p>
+<ul><li>на хосте</li></ul>
+<p>Настройка очень похожа на настройку <a href="#%D0%A1%D0%B5%D1%82%D0%B5%D0%B2%D0%BE%D0%B9_%D0%BC%D0%BE%D1%81%D1%82_%D1%81_DHCP">#Сетевой мост с DHCP</a>. Во-первых, нужно создать виртуальный мост и привязать к нему физический интерфейс. Эта делается с помощью двух файлов настроек, содержание которых аналогично файлам из раздела о DHCP.
+</p>
+<pre>/etc/systemd/network/<i>мой_мост</i>.netdev
+/etc/systemd/network/<i>мой_Eth</i>.network
+</pre>
+<p>Далее, необходимо настроить IP и DNS для моста. Пример настройки:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/network/<i>мой_мост</i>.network</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Match]
+Name=br0
+
+[Network]
+DNS=192.168.1.254
+Address=192.168.1.87/24
+Gateway=192.168.1.254
+</pre>
+<ul><li>на контейнере</li></ul>
+<p>Чтобы настроить статический IP-адрес для контейнера, необходимо заместить системный файл <code>/usr/lib/systemd/network/80-container-host0.network</code>, который содержит настройки DHCP для сетевого интерфейса <code>host0</code> контейнера. Для этого нужно поместить настройки в файл <code>/etc/systemd/network/80-container-host0.network</code>. Например:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/network/80-container-host0.network</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Match]
+Name=host0
+
+[Network]
+DNS=192.168.1.254
+Address=192.168.1.94/24
+Gateway=192.168.1.254</pre>
+<p>Не забудьте проверить, что служба <code>systemd-networkd.service</code> в контейнере включена.
+</p>
+<h2>
+<span id=".D0.A1.D0.BE.D0.B2.D0.B5.D1.82.D1.8B_.D0.B8_.D1.80.D0.B5.D0.BA.D0.BE.D0.BC.D0.B5.D0.BD.D0.B4.D0.B0.D1.86.D0.B8.D0.B8"></span><span class="mw-headline" id="Советы_и_рекомендации">Советы и рекомендации</span>
+</h2>
+<h3>
+<span id=".D0.98.D0.BD.D1.82.D0.B5.D0.B3.D1.80.D0.B0.D1.86.D0.B8.D1.8F_.D1.81.D0.B5.D1.82.D0.B5.D0.B2.D0.BE.D0.B3.D0.BE_.D0.B8.D0.BD.D1.82.D0.B5.D1.80.D1.84.D0.B5.D0.B9.D1.81.D0.B0_.D0.B8_.D1.80.D0.B0.D0.B1.D0.BE.D1.87.D0.B5.D0.B3.D0.BE_.D1.81.D1.82.D0.BE.D0.BB.D0.B0"></span><span class="mw-headline" id="Интеграция_сетевого_интерфейса_и_рабочего_стола">Интеграция сетевого интерфейса и рабочего стола</span>
+</h3>
+<p>Systemd-networkd не имеет встроенной функциональности для интерактивного управления сетевыми интерфейсами, ни через графическое приложение, ни через <a href="../ru/Command-line_shell.html" class="mw-redirect" title="Командная оболочка">командную оболочку</a>. Тем не менее, существует ряд утилит для отображения состояния сети, изменения настроек или получения уведомлений.
+</p>
+<ul>
+<li>Утилита командной строки <i>networkctl</i> позволяет вывести информацию о сетевых интерфейсах.</li>
+<li>Когда networkd настраивается с помощью <a href="../en/Wpa_supplicant.html" title="Wpa supplicant">wpa_supplicant</a>, утилитами <i>wpa_cli</i> и <i>wpa_gui</i> можно динамически настраивать WLAN-интерфейсы.</li>
+<li>Плагин <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/networkd-notify-git/">networkd-notify-git</a></span><sup><small>AUR</small></sup> выводит уведомления при изменениях в работе интерфейса (например, при установлении соединения или его завершении).</li>
+<li>Демон <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/networkd-dispatcher/">networkd-dispatcher</a></span><sup><small>AUR</small></sup> позволяет выполнять сценарии при изменении состояния интерфейса. Работает схожим образом с <i>NetworkManager-dispatcher</i>.</li>
+<li>Отобразить информацию о DNS-сервере для systemd-resolved можно командой <code>resolvectl status</code>.</li>
+</ul>
+<h3>
+<span id=".D0.9D.D0.B0.D0.B7.D0.BD.D0.B0.D1.87.D0.B5.D0.BD.D0.B8.D0.B5_IP-.D0.B0.D0.B4.D1.80.D0.B5.D1.81.D0.B0_.D0.BD.D0.B0_.D0.BE.D1.81.D0.BD.D0.BE.D0.B2.D0.B0.D0.BD.D0.B8.D0.B8_SSID"></span><span class="mw-headline" id="Назначение_IP-адреса_на_основании_SSID">Назначение IP-адреса на основании SSID</span>
+</h3>
+<p>Может возникнуть ситуация, когда дома вы используете беспроводную сеть с DHCP, а на работе — беспроводную же сеть, но со статическим IP-адресом. Пример смешанных настроек приведён ниже.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Примечание:</strong> Номер в начале имени файла определяет порядок, в котором они будут обрабатываться. В разделе [Match] можно использовать параметры SSID, BSSID или оба одновременно.
+</div>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/network/24-wireless-office.network</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;"># отдельные настройки для сети WiFi на работе
+[Match]
+Name=wlp2s0
+SSID=название_точки_доступа
+#BSSID=aa:bb:cc:dd:ee:ff
+
+[Network]
+Address=10.1.10.9/24
+Gateway=10.1.10.1
+DNS=10.1.10.1
+#DNS=8.8.8.8
+</pre>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/network/25-wireless-dhcp.network</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;"># для остальных сетей используется DHCP
+[Match]
+Name=wlp2s0
+
+[Network]
+DHCP=ipv4
+</pre>
+<h3>
+<span id=".D0.9E.D0.B1.D1.8A.D0.B5.D0.B4.D0.B8.D0.BD.D0.B5.D0.BD.D0.B8.D0.B5_.D0.BF.D1.80.D0.BE.D0.B2.D0.BE.D0.B4.D0.BD.D0.BE.D0.B3.D0.BE_.D0.B8_.D0.B1.D0.B5.D1.81.D0.BF.D1.80.D0.BE.D0.B2.D0.BE.D0.B4.D0.BD.D0.BE.D0.B3.D0.BE_.D0.B8.D0.BD.D1.82.D0.B5.D1.80.D1.84.D0.B5.D0.B9.D1.81.D0.BE.D0.B2"></span><span class="mw-headline" id="Объединение_проводного_и_беспроводного_интерфейсов">Объединение проводного и беспроводного интерфейсов</span>
+</h3>
+<p>См. также <a href="../en/Wireless_bonding.html" title="Wireless bonding">Wireless bonding</a>.
+</p>
+<p>Объединение интерфейсов (bonding) позволяет использовать для одного Интернет-соединения несколько сетевых интерфейсов. Если затем, например, проводной сетевой интерфейс по какой-то причине отключится, соединение будет перенаправлено на беспроводной.
+</p>
+<p>Создайте объединённый интерфейс. В качестве режима работы необходимо указать <i>active-backup</i>, чтобы пакеты направлялись на запасной сетевой интерфейс, если основной будет отключён. 
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/network/30-bond0.netdev</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[NetDev]
+Name=bond0
+Kind=bond
+
+[Bond]
+Mode=active-backup
+PrimaryReselectPolicy=always
+MIIMonitorSec=1s</pre>
+<p>Укажите проводной интерфейс в качестве основного:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/network/30-ethernet-bond0.network</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Match]
+Name=enp0s25
+
+[Network]
+Bond=bond0
+PrimarySlave=true</pre>
+<p>Беспроводной интерфейс будет запасным:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/network/30-wifi-bond.network</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Match]
+Name=wlan0
+
+[Network]
+Bond=bond0</pre>
+<p>Объединённый интрефейс необходимо настроить так же, как настраивается обычный сетевой интерфейс:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/network/30-bond0.network</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Match]
+Name=bond0
+
+[Network]
+DHCP=ipv4</pre>
+<p>Теперь, если Ethernet-интерфейс будет отключён, соединение сохранится по беспроводной сети:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">$ networkctl</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">IDX LINK    TYPE     OPERATIONAL      SETUP     
+  1 lo      loopback carrier          unmanaged 
+  2 enp0s25 ether    no-carrier       configured
+  3 bond0   bond     degraded-carrier configured
+  5 wlan0   wlan     enslaved         configured
+
+4 links listed.</pre>
+<h3>
+<span id=".D0.A3.D1.81.D0.BA.D0.BE.D1.80.D0.B5.D0.BD.D0.B8.D0.B5_TCP_Slow_Start"></span><span class="mw-headline" id="Ускорение_TCP_Slow_Start">Ускорение TCP Slow Start</span>
+</h3>
+<p>В сетях с большой пропускной способностью и значительной величиной задержки (для домашнего интернета — выше 10 Мбит/с) стандартные значения для алгоритма TCP Slow Start являются довольно консервативными. Это приводит к тому, что загрузки начинаются медленно и проходит несколько секунд, прежде чем будет задействована вся доступная пропускная способность. Особенно это заметно при обновлениях пакетов в pacman, когда загрузка каждого отдельного пакета успевает завершиться до достижения максимальной скорости для данного соединения.
+</p>
+<p>Настройки TCP позволяют увеличить начальный размер окна, в результате чего соединения будут "ускоряться" быстрее <a rel="nofollow" class="external autonumber" href="https://www.cdnplanet.com/blog/tune-tcp-initcwnd-for-optimum-performance/">[1]</a>. Для медленных соединений это часто приводит к замедлению передачи, поскольку приходится передавать заново большое количество потерянных пакетов, но при наличии достаточной пропускной способности производительность вырастет.
+</p>
+<p>Очень важно провести тестовые замеры до и после изменения значений, чтобы убедиться, что вы повысили скорость, а не уменьшили её. Если вы не замечаете, что ваши загрузки начинаются медленно, то скорее всего, текущие значения являются оптимальными для вашего соединения. При тестах следует использовать как быстрый, так и медленный удалённый сервер, чтобы убедиться, что вы не ускорили доступ к быстрым машинам, при этом сделав доступ к медленным серверам ещё медленнее.
+</p>
+<p>Отредактируйте <i>.network</i>-файл для соединения:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/network/eth0.network</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Match]
+Name=eth0
+
+#[Network]
+#Gateway=...  &lt;-- Удалите это значение, если оно задано, и поместите в строку Gateway= ниже
+
+[Route]
+# Применяется только к шлюзам с DHCP. Если вы вручную выбрали шлюз,
+# то укажите его.
+Gateway=_dhcp4
+
+# Стандартное значение — 10. Это множитель для MSS (1460 байт).
+InitialCongestionWindow=10
+InitialAdvertisedReceiveWindow=10</pre>
+<p>Стандартное значение <code>10</code> хорошо работает для сетей меньше 10 Мбит/с.  Для соединений 100 Мбит/с подойдёт значение <code>30</code>. Если верить <span class="plainlinks archwiki-template-man" title="$ man 5 systemd.network"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd.network.5#%5BROUTE%5D_SECTION_OPTIONS">systemd.network(5) § [ROUTE] SECTION OPTIONS</a></span>, значение <code>100</code> будет уже чрезмерным.
+</p>
+<p>Если параметр <a href="../en/Sysctl.html" title="Sysctl">sysctl</a> <code>net.ipv4.tcp_slow_start_after_idle</code> включён, то соединение будет возвращаться к этим начальным настройкам после некоторого простоя (иногда довольно небольшого). Если этот параметр отключён, соединение будет работать с большим размером окна, если оно было согласовано при передаче пакетов. Вне зависимости от значения этого параметра, каждое TCP-соединение будет начинать со значений в параметрах <code>Initial*</code>.
+</p>
+<p>Параметр sysctl <code>net.ipv4.tcp_congestion_control</code> не относится напрямую к этим значениям, но он управляет перегрузками и размером окна получателя, особенно при перегрузке канала связи, что обычно выливается в уменьшение пропускной способности. Значения <code>Initial*</code> задают стандартные значения окна для каждого соединения, до того, как алгоритм управления перегрузками возьмет управление на себя и изменит их под текущие потребности. Более высокие значения позволят ускорить процесс согласования, пока алгоритм перегрузок пытается найти оптимальное значение. Наоборот, задание неправильных значений усложняет согласование и работу алгоритма управления перегрузками, замедляя каждое TCP-соединение на несколько дополнительных секунд.
+</p>
+<h2>
+<span id=".D0.A1.D0.BC.D0.BE.D1.82.D1.80.D0.B8.D1.82.D0.B5_.D1.82.D0.B0.D0.BA.D0.B6.D0.B5"></span><span class="mw-headline" id="Смотрите_также">Смотрите также</span>
+</h2>
+<ul>
+<li><span class="plainlinks archwiki-template-man" title="$ man 8 systemd-networkd"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd-networkd.8">systemd-networkd(8)</a></span></li>
+<li><a rel="nofollow" class="external text" href="https://web.archive.org/web/20201111213850/https://coreos.com/blog/intro-to-systemd-networkd/">Tom Gundersen posts on Core OS blog</a></li>
+<li>
+<a rel="nofollow" class="external text" href="https://bbs.archlinux.org/viewtopic.php?pid=1393759#p1393759">How to set up systemd-networkd with wpa_supplicant</a> (WonderWoofy's walkthrough on Arch forums)</li>
+</ul>
+</div>
+</div>
+					<div id="catlinks" class="catlinks" data-mw="interface"><div id="mw-normal-catlinks" class="mw-normal-catlinks">
+<a href="../Special:Categories.html" title="Special:Categories">Categories</a>: <ul>
+<li><a href="../ru/Category:Network_managers.html" title="Category:Network managers (Русский)">Network managers (Русский)</a></li>
+<li><a href="../ru/Category:Virtualization.html" title="Category:Virtualization (Русский)">Virtualization (Русский)</a></li>
+</ul>
+</div></div>
+				</div>
+			</main>
+			
+		</div>
+		<div class="mw-footer-container">
+			
+<footer id="footer" class="mw-footer" style="margin: 0">
+	<ul id="footer-info">
+	<li data-nosnippet="">Retrieved from "<a dir="ltr" href="https://wiki.archlinux.org/index.php?title=Systemd-networkd_(%D0%A0%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9)&amp;oldid=775062">https://wiki.archlinux.org/index.php?title=Systemd-networkd_(Русский)&amp;oldid=775062</a>"</li>
+<li id="footer-info-lastmod"> This page was last edited on 8 April 2023, at 08:15.</li>
+	<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+<br>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="https://terms.archlinux.org/docs/privacy-policy/">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="../en/ArchWiki:About.html">About ArchWiki</a></li>
+	<li id="footer-places-disclaimers"><a href="../en/ArchWiki:General_disclaimer.html">Disclaimers</a></li>
+	<li id="footer-places-archwiki-code-of-conduct"><a href="https://terms.archlinux.org/docs/code-of-conduct/" class="extiw" title="archlinux-service-agreements:code-of-conduct">Code of conduct</a></li>
+	<li id="footer-places-archwiki-terms-of-service"><a href="https://terms.archlinux.org/docs/terms-of-service/" class="extiw" title="archlinux-service-agreements:terms-of-service">Terms of service</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-copyrightico"><a href="https://www.gnu.org/copyleft/fdl.html" class="cdx-button cdx-button--fake-button cdx-button--size-large cdx-button--fake-button--enabled"><img src="/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" loading="lazy"></a></li>
+	<li id="footer-poweredbyico"><img src="/resources/assets/poweredby_mediawiki.svg" width="88" height="31" loading="lazy"></li>
+</ul>
+
+</footer>
+
+		</div>
+	</div> 
+</div> 
+<div class="vector-settings" id="p-dock-bottom">
+	<ul></ul>
+</div>
+</body>
+</html>

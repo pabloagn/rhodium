@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-sticky-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-0 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-disabled skin-theme-clientpref-day vector-toc-available" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>udev - ArchWiki</title>
+<link rel="stylesheet" href="../ArchWikiOffline.css">
+<meta name="ResourceLoaderDynamicStyles" content="">
+<meta name="generator" content="MediaWiki 1.43.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="max-image-preview:standard">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.25, maximum-scale=5.0">
+<link rel="search" type="application/opensearchdescription+xml" href="/rest.php/v1/search" title="ArchWiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.archlinux.org/api.php?action=rsd">
+<link rel="license" href="https://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="ArchWiki Atom feed" href="/index.php?title=Special:RecentChanges&amp;feed=atom">
+</head>
+<body class="skin--responsive skin-vector skin-vector-search-vue mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Udev rootpage-Udev skin-vector-2022 action-view">
+<a class="mw-jump-link" href="#bodyContent">Jump to content</a>
+<div class="vector-header-container">
+	</div>
+<div class="mw-page-container">
+	<div class="mw-page-container-inner">
+		<div class="vector-column-start">
+			<div class="vector-main-menu-container">
+		</div>
+	<div class="vector-sticky-pinned-container">
+				<nav id="mw-panel-toc" aria-label="Contents" data-event-name="ui.sidebar-toc" class="mw-table-of-contents-container vector-toc-landmark">
+					<div id="vector-toc-pinned-container" class="vector-pinned-container">
+					<div id="vector-toc" class="vector-toc vector-pinnable-element">
+	<div class="vector-pinnable-header vector-toc-pinnable-header vector-pinnable-header-pinned" data-feature-name="toc-pinned" data-pinnable-element-id="vector-toc">
+	<h2 class="vector-pinnable-header-label">Contents</h2>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-toc.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-toc.unpin">hide</button>
+</div>
+
+
+	<ul class="vector-toc-contents" id="mw-panel-toc-list">
+		<li id="toc-mw-content-text" class="vector-toc-list-item vector-toc-level-1">
+			<a href="#" class="vector-toc-link">
+				<div class="vector-toc-text">Beginning</div>
+			</a>
+		</li>
+		<li id="toc-Installation" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Installation">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">1</span>
+				<span>Installation</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Installation-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-About_udev_rules" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#About_udev_rules">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">2</span>
+				<span>About udev rules</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-About_udev_rules-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle About udev rules subsection</span>
+			</button>
+		
+		<ul id="toc-About_udev_rules-sublist" class="vector-toc-list">
+			<li id="toc-udev_rule_example" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#udev_rule_example">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1</span>
+					<span>udev rule example</span>
+				</div>
+			</a>
+			
+			<ul id="toc-udev_rule_example-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-List_the_attributes_of_a_device" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#List_the_attributes_of_a_device">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2</span>
+					<span>List the attributes of a device</span>
+				</div>
+			</a>
+			
+			<ul id="toc-List_the_attributes_of_a_device-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Testing_rules_before_loading" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Testing_rules_before_loading">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.3</span>
+					<span>Testing rules before loading</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Testing_rules_before_loading-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Loading_new_rules" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Loading_new_rules">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.4</span>
+					<span>Loading new rules</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Loading_new_rules-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-udisks" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#udisks">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">3</span>
+				<span>udisks</span>
+			</div>
+		</a>
+		
+		<ul id="toc-udisks-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Tips_and_tricks" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Tips_and_tricks">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">4</span>
+				<span>Tips and tricks</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Tips_and_tricks-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Tips and tricks subsection</span>
+			</button>
+		
+		<ul id="toc-Tips_and_tricks-sublist" class="vector-toc-list">
+			<li id="toc-Mounting_drives_in_rules" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Mounting_drives_in_rules">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.1</span>
+					<span>Mounting drives in rules</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Mounting_drives_in_rules-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Spawning_long-running_processes" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Spawning_long-running_processes">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.2</span>
+					<span>Spawning long-running processes</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Spawning_long-running_processes-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Allowing_regular_users_to_use_devices" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Allowing_regular_users_to_use_devices">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.3</span>
+					<span>Allowing regular users to use devices</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Allowing_regular_users_to_use_devices-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Execute_when_HDMI_cable_is_plugged_in_or_unplugged" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Execute_when_HDMI_cable_is_plugged_in_or_unplugged">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.4</span>
+					<span>Execute when HDMI cable is plugged in or unplugged</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Execute_when_HDMI_cable_is_plugged_in_or_unplugged-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Execute_on_VGA_cable_plug_in" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Execute_on_VGA_cable_plug_in">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.5</span>
+					<span>Execute on VGA cable plug in</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Execute_on_VGA_cable_plug_in-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Detect_new_eSATA_drives" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Detect_new_eSATA_drives">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.6</span>
+					<span>Detect new eSATA drives</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Detect_new_eSATA_drives-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Mark_internal_SATA_ports_as_eSATA" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Mark_internal_SATA_ports_as_eSATA">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.7</span>
+					<span>Mark internal SATA ports as eSATA</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Mark_internal_SATA_ports_as_eSATA-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Setting_static_device_names" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Setting_static_device_names">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.8</span>
+					<span>Setting static device names</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Setting_static_device_names-sublist" class="vector-toc-list">
+				<li id="toc-Video_device" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Video_device">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.8.1</span>
+					<span>Video device</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Video_device-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Printer" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Printer">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.8.2</span>
+					<span>Printer</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Printer-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Identifying_a_disk_by_its_serial" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Identifying_a_disk_by_its_serial">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.9</span>
+					<span>Identifying a disk by its serial</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Identifying_a_disk_by_its_serial-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Waking_from_suspend_with_USB_device" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Waking_from_suspend_with_USB_device">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.10</span>
+					<span>Waking from suspend with USB device</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Waking_from_suspend_with_USB_device-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Triggering_events" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Triggering_events">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.11</span>
+					<span>Triggering events</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Triggering_events-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Triggering_desktop_notifications_from_a_udev_rule" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Triggering_desktop_notifications_from_a_udev_rule">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.12</span>
+					<span>Triggering desktop notifications from a udev rule</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Triggering_desktop_notifications_from_a_udev_rule-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Troubleshooting" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Troubleshooting">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">5</span>
+				<span>Troubleshooting</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Troubleshooting-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Troubleshooting subsection</span>
+			</button>
+		
+		<ul id="toc-Troubleshooting-sublist" class="vector-toc-list">
+			<li id="toc-Blacklisting_modules" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Blacklisting_modules">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.1</span>
+					<span>Blacklisting modules</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Blacklisting_modules-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Debug_output" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Debug_output">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.2</span>
+					<span>Debug output</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Debug_output-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-udevd_hangs_at_boot" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#udevd_hangs_at_boot">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.3</span>
+					<span>udevd hangs at boot</span>
+				</div>
+			</a>
+			
+			<ul id="toc-udevd_hangs_at_boot-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Some_devices,_that_should_be_treated_as_removable,_are_not" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Some_devices,_that_should_be_treated_as_removable,_are_not">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.4</span>
+					<span>Some devices, that should be treated as removable, are not</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Some_devices,_that_should_be_treated_as_removable,_are_not-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Sound_problems_with_some_modules_not_loaded_automatically" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Sound_problems_with_some_modules_not_loaded_automatically">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.5</span>
+					<span>Sound problems with some modules not loaded automatically</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Sound_problems_with_some_modules_not_loaded_automatically-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id='toc-Optical_drives_have_group_ID_set_to_"disk"' class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href='#Optical_drives_have_group_ID_set_to_"disk"'>
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.6</span>
+					<span>Optical drives have group ID set to "disk"</span>
+				</div>
+			</a>
+			
+			<ul id='toc-Optical_drives_have_group_ID_set_to_"disk"-sublist' class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-X_programs_in_RUN_rules_hang_when_no_X_server_is_present" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#X_programs_in_RUN_rules_hang_when_no_X_server_is_present">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.7</span>
+					<span>X programs in RUN rules hang when no X server is present</span>
+				</div>
+			</a>
+			
+			<ul id="toc-X_programs_in_RUN_rules_hang_when_no_X_server_is_present-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-See_also" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#See_also">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">6</span>
+				<span>See also</span>
+			</div>
+		</a>
+		
+		<ul id="toc-See_also-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+</ul>
+</div>
+
+					</div>
+		</nav>
+			</div>
+		</div>
+		<div class="mw-content-container">
+			<main id="content" class="mw-body" style="margin: 0">
+				<header class="mw-body-header vector-page-titlebar">
+					<nav aria-label="Contents" class="vector-toc-landmark">
+						
+<div id="vector-page-titlebar-toc" class="vector-dropdown vector-page-titlebar-toc vector-button-flush-left">
+	<input type="checkbox" id="vector-page-titlebar-toc-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-page-titlebar-toc" class="vector-dropdown-checkbox " aria-label="Toggle the table of contents">
+	<label id="vector-page-titlebar-toc-label" for="vector-page-titlebar-toc-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"><span class="vector-icon mw-ui-icon-listBullet mw-ui-icon-wikimedia-listBullet"></span>
+
+<span class="vector-dropdown-label-text">Toggle the table of contents</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+							<div id="vector-page-titlebar-toc-unpinned-container" class="vector-unpinned-container">
+			</div>
+		
+	</div>
+</div>
+
+					</nav>
+					<h1 id="firstHeading" class="firstHeading mw-first-heading">udev</h1>
+							
+<div id="p-lang-btn" class="vector-dropdown mw-portlet mw-portlet-lang">
+	<input type="checkbox" id="p-lang-btn-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-p-lang-btn" class="vector-dropdown-checkbox mw-interlanguage-selector" aria-label="Go to an article in another language. Available in 5 languages">
+	<label id="p-lang-btn-label" for="p-lang-btn-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--action-progressive mw-portlet-lang-heading-5" aria-hidden="true"><span class="vector-icon mw-ui-icon-language-progressive mw-ui-icon-wikimedia-language-progressive"></span>
+
+<span class="vector-dropdown-label-text">5 languages</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+		<div class="vector-menu-content">
+			
+			<ul class="vector-menu-content-list">
+				
+				<li class="interlanguage-link interwiki-de mw-list-item"><a href="https://wiki.archlinux.de/title/Udev" title="Udev – Deutsch" lang="de" hreflang="de" data-title="Udev" data-language-autonym="Deutsch" data-language-local-name="Deutsch" class="interlanguage-link-target"><span>Deutsch</span></a></li>
+<li class="interlanguage-link interwiki-fr mw-list-item"><a href="../fr/Udev.html" title="Udev – français" lang="fr" hreflang="fr" data-title="Udev" data-language-autonym="Français" data-language-local-name="français" class="interlanguage-link-target"><span>Français</span></a></li>
+<li class="interlanguage-link interwiki-ja mw-list-item"><a href="https://wiki.archlinux.jp/index.php/Udev" title="Udev – 日本語" lang="ja" hreflang="ja" data-title="Udev" data-language-autonym="日本語" data-language-local-name="日本語" class="interlanguage-link-target"><span>日本語</span></a></li>
+<li class="interlanguage-link interwiki-ru mw-list-item"><a href="../ru/Udev.html" title="Udev – русский" lang="ru" hreflang="ru" data-title="Udev" data-language-autonym="Русский" data-language-local-name="русский" class="interlanguage-link-target"><span>Русский</span></a></li>
+<li class="interlanguage-link interwiki-zh-hans mw-list-item"><a href="https://wiki.archlinuxcn.org/wiki/Udev" title="Udev – 中文（简体）" lang="zh-Hans" hreflang="zh-Hans" data-title="Udev" data-language-autonym="中文（简体）" data-language-local-name="中文（简体）" class="interlanguage-link-target"><span>中文（简体）</span></a></li>
+			</ul>
+			
+		</div>
+
+	</div>
+</div>
+</header>
+				<div class="vector-column-end">
+					<div class="vector-sticky-pinned-container">
+						<nav class="vector-page-tools-landmark" aria-label="Page tools">
+							<div id="vector-page-tools-pinned-container" class="vector-pinned-container">
+				
+							</div>
+		</nav>
+						<nav class="vector-appearance-landmark" aria-label="Appearance">
+							<div id="vector-appearance-pinned-container" class="vector-pinned-container">
+				<div id="vector-appearance" class="vector-appearance vector-pinnable-element">
+	<div class="vector-pinnable-header vector-appearance-pinnable-header vector-pinnable-header-pinned" data-feature-name="appearance-pinned" data-pinnable-element-id="vector-appearance" data-pinned-container-id="vector-appearance-pinned-container" data-unpinned-container-id="vector-appearance-unpinned-container">
+	<div class="vector-pinnable-header-label">Appearance</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-appearance.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-appearance.unpin">hide</button>
+</div>
+
+
+</div>
+
+							</div>
+		</nav>
+					</div>
+				</div>
+				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container>
+					<div class="vector-body-before-content">
+							<div class="mw-indicators">
+		</div>
+
+						<div id="siteSub" class="noprint">From ArchWiki</div>
+					</div>
+					<div id="contentSub"><div id="mw-content-subtitle"></div></div>
+					
+					
+					<div id="mw-content-text" class="mw-body-content">
+<div class="mw-content-ltr mw-parser-output" lang="en" dir="ltr">
+<p><span>
+</span>
+</p>
+<div class="archwiki-template-meta-related-articles">
+<p>Related articles</p>
+<ul>
+<li><a href="../en/Udisks.html" title="Udisks">udisks</a></li>
+</ul>
+</div>
+<p><i>udev</i> is a userspace system that enables the operating system administrator to register userspace handlers for events. The events received by <i>udev</i>'s daemon are mainly generated by the (Linux) kernel in response to physical events relating to peripheral devices. As such, <i>udev</i>'s main purpose is to act upon peripheral detection and hot-plugging, including actions that return control to the kernel, e.g., loading kernel modules or device firmware. Another component of this detection is adjusting the permissions of the device to be accessible to non-root users and groups.
+</p>
+<p>As the successor of <i>devfsd</i> and <i>hotplug</i>, <i>udev</i> also manages device nodes in the <code>/dev</code> directory by adding, symlinking and renaming them. <i>udev</i> replaces the functionality of both <i>hotplug</i> and <i>hwdetect</i>.
+</p>
+<p><i>udev</i> handles separate events concurrently (in parallel), leading to a potential performance improvement over older systems. At the same time, this can complicate system administration, because, for example, the kernel module loading order is not preserved across boots. If the machine has multiple block devices, this may manifest itself in the form of device nodes changing designations after reboot. For example, if the machine has two hard drives, <code>/dev/sda</code> may on next boot become <code>/dev/sdb</code>. See below for more info on this.
+</p>
+<meta property="mw:PageProp/toc">
+<h2><span class="mw-headline" id="Installation">Installation</span></h2>
+<p><i>udev</i> is part of <a href="../en/Systemd.html" title="Systemd">systemd</a> and thus installed by default. See <span class="plainlinks archwiki-template-man" title="$ man 8 systemd-udevd.service"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd-udevd.service.8">systemd-udevd.service(8)</a></span> for information.
+</p>
+<h2><span class="mw-headline" id="About_udev_rules">About udev rules</span></h2>
+<p><i>udev</i> rules written by the administrator go in <code>/etc/udev/rules.d/</code>, their file name has to end with <i>.rules</i>. The <i>udev</i> rules shipped with various packages are found in <code>/usr/lib/udev/rules.d/</code>. If there are two files by the same name under <code>/usr/lib</code> and <code>/etc</code>, the ones in <code>/etc</code> take precedence.
+</p>
+<p>To learn about <i>udev</i> rules, refer to the <span class="plainlinks archwiki-template-man" title="$ man 7 udev"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/udev.7">udev(7)</a></span> manual. Also see <a rel="nofollow" class="external text" href="https://www.reactivated.net/writing_udev_rules.html">Writing udev rules</a> and some practical examples are provided within the guide: <a rel="nofollow" class="external text" href="https://www.reactivated.net/writing_udev_rules.html#example-printer">Writing udev rules - Examples</a>.
+</p>
+<h3><span class="mw-headline" id="udev_rule_example">udev rule example</span></h3>
+<p>Below is an example of a rule that creates a symlink <code>/dev/video-cam</code> when a webcamera is connected.
+</p>
+<p>Let say this camera is currently connected and has loaded with the device name <code>/dev/video2</code>. The reason for writing this rule is that at the next boot, the device could show up under a different name, like <code>/dev/video0</code>.
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">$ udevadm info --attribute-walk --path=$(udevadm info --query=path --name=/dev/video2)</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">Udevadm info starts with the device specified by the devpath and then walks up the chain of parent devices.
+It prints for every device found, all possible attributes in the udev rules key format.
+A rule to match, can be composed by the attributes of the device and the attributes from one single parent device.
+
+looking at device '/devices/pci0000:00/0000:00:04.1/usb3/3-2/3-2:1.0/video4linux/video2':
+  KERNEL=="video2"
+  SUBSYSTEM=="video4linux"
+   ...
+looking at parent device '/devices/pci0000:00/0000:00:04.1/usb3/3-2/3-2:1.0':
+  KERNELS=="3-2:1.0"
+  SUBSYSTEMS=="usb"
+  ...
+looking at parent device '/devices/pci0000:00/0000:00:04.1/usb3/3-2':
+  KERNELS=="3-2"
+  SUBSYSTEMS=="usb"
+  ATTRS{idVendor}=="05a9"
+  ATTRS{manufacturer}=="OmniVision Technologies, Inc."
+  ATTRS{removable}=="unknown"
+  ATTRS{idProduct}=="4519"
+  ATTRS{bDeviceClass}=="00"
+  ATTRS{product}=="USB Camera"
+  ...</pre>
+<p>To identify the webcamera, from the <i>video4linux</i> device we use <code>KERNEL=="video2"</code> and <code>SUBSYSTEM=="video4linux"</code>, then walking up two levels above, we match the webcamera using vendor and product ID's from the usb parent <code>SUBSYSTEMS=="usb"</code>, <code>ATTRS{idVendor}=="05a9"</code> and <code>ATTRS{idProduct}=="4519"</code>. Note that this matching is case sensitive, so <code>"05A9"</code> can not be used to match the <code>idVendor</code> in this example.
+</p>
+<p>We are now able to create a rule match for this device as follows:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/udev/rules.d/83-webcam.rules</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">KERNEL=="video[0-9]*", SUBSYSTEM=="video4linux", SUBSYSTEMS=="usb", ATTRS{idVendor}=="05a9", ATTRS{idProduct}=="4519", SYMLINK+="video-cam"</pre>
+<p>Here we create a symlink using <code>SYMLINK+="video-cam"</code> but we could easily set user <code>OWNER="john"</code> or group using <code>GROUP="video"</code> or set the permissions using <code>MODE="0660"</code>. 
+</p>
+<p>If you intend to write a rule to do something when a device is being removed, be aware that device attributes may not be accessible. In this case, you will have to work with preset device <a href="../en/Environment_variables.html" title="Environment variables">environment variables</a>. To monitor those environment variables, execute the following command while unplugging your device:
+</p>
+<pre>$ udevadm monitor --property --udev
+</pre>
+<p>In this command's output, you will see value pairs such as <code>ID_VENDOR_ID</code> and <code>ID_MODEL_ID</code>, which match the previously used attributes <code>idVendor</code> and <code>idProduct</code>. A rule that uses device environment variables instead of device attributes may look like this:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/udev/rules.d/83-webcam-removed.rules</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">ACTION=="remove", SUBSYSTEM=="usb", ENV{ID_VENDOR_ID}=="05a9", ENV{ID_MODEL_ID}=="4519", RUN+="<i>/path/to/your/script</i>"</pre>
+<h3><span class="mw-headline" id="List_the_attributes_of_a_device">List the attributes of a device</span></h3>
+<p>To get a list of all of the attributes of a device you can use to write rules, run this command:
+</p>
+<pre>$ udevadm info --attribute-walk --name=<i>device_name</i>
+</pre>
+<p>Replace <code><i>device_name</i></code> with the device present in the system, such as <code>/dev/sda</code> or <code>/dev/ttyUSB0</code>.
+</p>
+<p>If you do not know the device name you can also list all attributes of a specific system path:
+</p>
+<pre>$ udevadm info --attribute-walk --path=/sys/class/backlight/acpi_video0
+</pre>
+<p>To narrow down the search for a device, figure out the class and run:
+</p>
+<pre>$ ls /dev/<i>class</i>/by-id
+</pre>
+<p>You can use the symlink outright or what it points as the input to <code>--name</code>. For example:
+</p>
+<pre>$ udevadm info --attribute-walk --name=/dev/input/by-id/usb-foostan_Corne-event-kbd
+</pre>
+<p>To get the path of a bare USB device which does not populate any subordinate device you have to use the full USB device path. Start monitor mode and then plug in the USB device to get it:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">$ udevadm monitor</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">...
+KERNEL[26652.638931] add      /devices/pci0000:00/0000:00:01.2/0000:02:00.0/0000:03:05.0/0000:05:00.0/usb1/1-3 (usb)
+KERNEL[26652.639153] add      /devices/pci0000:00/0000:00:01.2/0000:02:00.0/0000:03:05.0/0000:05:00.0/usb1/1-3/1-3:1.0 (usb)
+...</pre>
+<p>You can just choose the deepest path and <code><i>--attribute-walk</i></code> will show all parent's attributes anyway:
+</p>
+<pre>$ udevadm info --attribute-walk --path=<i>/devices/pci0000:00/0000:00:01.2/0000:02:00.0/0000:03:05.0/0000:05:00.0/usb1/1-3/1-3:1.0</i>
+</pre>
+<h3><span class="mw-headline" id="Testing_rules_before_loading">Testing rules before loading</span></h3>
+<pre># udevadm test $(udevadm info --query=path --name=<i>device_name</i>) 2&gt;&amp;1
+</pre>
+<p>This will not perform all actions in your new rules but it will however process symlink rules on existing devices which might come in handy if you are unable to load them otherwise. You can also directly provide the path to the device you want to test the <i>udev</i> rule for:
+</p>
+<pre># udevadm test /sys/class/backlight/acpi_video0/
+</pre>
+<h3><span class="mw-headline" id="Loading_new_rules">Loading new rules</span></h3>
+<p><i>udev</i> automatically detects changes to rules files, so changes take effect immediately without requiring <i>udev</i> to be restarted. However, the rules are not re-triggered automatically on already existing devices. Hot-pluggable devices, such as USB devices, will probably have to be reconnected for the new rules to take effect, or at least unloading and reloading the ohci-hcd and ehci-hcd kernel modules and thereby reloading all USB drivers.
+</p>
+<p>If rules fail to reload automatically:
+</p>
+<pre># udevadm control --reload
+</pre>
+<p>To manually force <i>udev</i> to trigger your rules:
+</p>
+<pre># udevadm trigger
+</pre>
+<h2><span class="mw-headline" id="udisks">udisks</span></h2>
+<p>See <a href="../en/Udisks.html" title="Udisks">udisks</a>.
+</p>
+<h2><span class="mw-headline" id="Tips_and_tricks">Tips and tricks</span></h2>
+<h3><span class="mw-headline" id="Mounting_drives_in_rules">Mounting drives in rules</span></h3>
+<p>To mount removable drives, do not call <code>mount</code> from <i>udev</i> rules. This is ill-advised for two reasons: 
+</p>
+<ol>
+<li>systemd by default runs <code>systemd-udevd.service</code> with a separate "mount namespace" (see <span class="plainlinks archwiki-template-man" title="$ man 7 namespaces"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/namespaces.7">namespaces(7)</a></span>), which means that mounts will not be visible to the rest of the system.</li>
+<li>Even if you change the service parameters to fix this (commenting out the <code>PrivateMounts</code> and <code>MountFlags</code> lines), there is another problem which is that processes started from Udev are killed after a few seconds. In case of FUSE filesystems, such as <a href="../en/NTFS-3G.html" title="NTFS-3G">NTFS-3G</a>, <i>mount</i> starts a user-space process to handle the filesystem internals; when this is killed you will get <code>Transport endpoint not connected</code> errors if you try to access the filesystem.</li>
+</ol>
+<p>There are some options that work:
+</p>
+<ul>
+<li>Start a custom systemd service from the Udev rule; the systemd service can invoke a script which can start any number of long-running processes (like FUSE). A concise example which automatically mounts USB disks under <code>/media</code> is <a rel="nofollow" class="external text" href="https://github.com/Ferk/udev-media-automount">udev-media-automount</a>. A variant of the same idea is explained in <a rel="nofollow" class="external text" href="http://jasonwryan.com/blog/2014/01/20/udev/">this blog post</a>.</li>
+<li>Use <code>systemd-mount</code> instead of <code>mount</code> in your Udev rule. This is <a rel="nofollow" class="external text" href="https://github.com/systemd/systemd/issues/11982#issuecomment-472529566">recommended by systemd developers</a>. For example this Udev rule should mount USB disks under <code>/media</code>:</li>
+</ul>
+<dl><dd><pre>ACTION=="add", SUBSYSTEMS=="usb", SUBSYSTEM=="block", ENV{ID_FS_USAGE}=="filesystem", RUN{program}+="/usr/bin/systemd-mount --no-block --automount=yes --collect $devnode /media"</pre></dd></dl>
+<ul><li>Use a package like <a href="../en/Udisks.html" title="Udisks">udisks</a> or <a href="../en/Udisks.html" class="mw-redirect" title="Udiskie">udiskie</a>. These are very powerful, but difficult to set up. Also, they are meant to be used in single user sessions, since they make some filesystems available under the ownership of the unprivileged user whose session is currently active.</li></ul>
+<h3><span class="mw-headline" id="Spawning_long-running_processes">Spawning long-running processes</span></h3>
+<p>Programs started by udev will block further events from that device, and any tasks spawned from a udev rule will be killed after event handling is completed. If you need to spawn a long-running process with udev, the intended way is to have a <a href="../en/Systemd.html" title="Systemd">systemd</a> unit which handles running the actual command, and a udev rule that merely signals that this unit should run. However, using <code>systemctl</code> in a udev rule is discouraged, since it is meant for user interaction and may block, among other things.
+</p>
+<p>The correct way of doing this is to have the rule tag the device as needing a systemd device unit (see <span class="plainlinks archwiki-template-man" title="$ man 5 systemd.device"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd.device.5">systemd.device(5)</a></span>) using <code>TAG+="systemd"</code> and adding an device property of either <code>ENV{SYSTEMD_WANTS}=</code> for services that would run with <code>systemctl --system</code> or <code>ENV{SYSTEMD_USER_WANTS}=</code> for services that should run with <code>systemctl --user</code>. For example:
+</p>
+<pre>SUBSYSTEM=="tty" ACTION=="add" ATTRS{manufacturer}=="Pulse-Eight" ATTRS{product}=="CEC Adapter" TAG+="systemd" ENV{SYSTEMD_WANTS}="inputattach-cec@$devnode.service"
+</pre>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/system/inputattach-cec@.service</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Unit]
+Description=Configure USB serial device at %I
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/inputattach --pulse8-cec %I</pre>
+<p><code>SYSTEMD_WANTS</code> is equivalent to the <code>Wants=</code> directive elsewhere in systemd, meaning the device will not be affected if the service fails, does not exists, or completes successfully at any point.
+</p>
+<h3><span class="mw-headline" id="Allowing_regular_users_to_use_devices">Allowing regular users to use devices</span></h3>
+<p>When a <a href="../en/Kernel.html" title="Kernel">kernel</a> driver initializes a device, the default state of the device node is to be owned by <code>root:root</code>, with permissions <code>600</code>. <a rel="nofollow" class="external autonumber" href="https://github.com/torvalds/linux/blob/v5.19/drivers/base/devtmpfs.c#L11-L13">[1]</a> This makes devices inaccessible to regular users unless the driver changes the default, or a udev rule in userspace changes the permissions.
+</p>
+<p>The <code>OWNER</code>, <code>GROUP</code>, and <code>MODE</code> udev values can be used to provide access, though one encounters the issue of how to make a device usable to all users without an overly permissive mode. Ubuntu's approach is to create a <code>plugdev</code> group that devices are added to, but this practice is not only discouraged by the systemd developers, <a rel="nofollow" class="external autonumber" href="https://bugzilla.redhat.com/show_bug.cgi?id=815093">[2]</a> but considered a bug when shipped in udev rules on Arch (<a rel="nofollow" class="external text" href="https://bugs.archlinux.org/task/35602">FS#35602</a>). Another approach historically employed, as described in <a href="../en/Users_and_groups.html#Pre-systemd_groups" title="Users and groups">Users and groups#Pre-systemd groups</a>, is to have different groups corresponding to categories of devices.
+</p>
+<p>The modern recommended approach for systemd systems is to use a <code>MODE</code> of <code>660</code> to let the group use the device, and then attach a <code>TAG</code> named <code>uaccess</code> <a rel="nofollow" class="external autonumber" href="https://github.com/systemd/systemd/blob/main/rules.d/70-uaccess.rules.in">[3]</a>. This special tag makes udev apply a <a rel="nofollow" class="external text" href="https://github.com/systemd/systemd/blob/main/src/udev/udev-builtin-uaccess.c">dynamic user ACL</a> to the device node, which coordinates with <span class="plainlinks archwiki-template-man" title="$ man 8 systemd-logind"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd-logind.8">systemd-logind(8)</a></span> to make the device usable to logged-in users. For an example of a udev rule implementing this:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/udev/rules.d/71-device-name.rules</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">SUBSYSTEMS=="usb", ATTRS{idVendor}=="<i>vendor_id</i>", ATTRS{idProduct}=="<i>product_id</i>", MODE="0660", TAG+="uaccess"</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> For any rule adding the <code>uaccess</code> tag to be effective, the name of the file it is defined in <a rel="nofollow" class="external text" href="https://github.com/systemd/systemd/issues/4288#issuecomment-348166161">has to lexically precede</a> <code>/usr/lib/udev/rules.d/73-seat-late.rules</code>.</div>
+<h3><span class="mw-headline" id="Execute_when_HDMI_cable_is_plugged_in_or_unplugged">Execute when HDMI cable is plugged in or unplugged</span></h3>
+<p>Create the rule <code>/etc/udev/rules.d/95-hdmi-plug.rules</code> with the following content:
+</p>
+<pre>ACTION=="change", SUBSYSTEM=="drm", ENV{DISPLAY}=":0", ENV{XAUTHORITY}="/home/<i>username</i>/.Xauthority", RUN+="<i>/path/to/script.sh</i>"
+</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> If the rule triggers before the X server starts, it may not work as intended. See <a href="#X_programs_in_RUN_rules_hang_when_no_X_server_is_present">#X programs in RUN rules hang when no X server is present</a>.</div>
+<h3><span class="mw-headline" id="Execute_on_VGA_cable_plug_in">Execute on VGA cable plug in</span></h3>
+<p>Create the rule <code>/etc/udev/rules.d/95-monitor-hotplug.rules</code> with the following content to launch <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=arandr">arandr</a></span> on plug in of a VGA monitor cable:
+</p>
+<pre>KERNEL=="card0", SUBSYSTEM=="drm", ENV{DISPLAY}=":0", ENV{XAUTHORITY}="/home/<i>username</i>/.Xauthority", RUN+="/usr/bin/arandr"
+</pre>
+<p>Some display managers store the <code>.Xauthority</code> outside the user home directory. You will need to update the <code>ENV{XAUTHORITY} </code> accordingly. As an example <a href="../en/GDM.html" class="mw-redirect" title="GNOME Display Manager">GNOME Display Manager</a> looks as follows:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">$ printenv XAUTHORITY</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">/run/user/1000/gdm/Xauthority</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> If the rule triggers before the X server starts, it may not work as intended. See <a href="#X_programs_in_RUN_rules_hang_when_no_X_server_is_present">#X programs in RUN rules hang when no X server is present</a>.</div>
+<h3><span class="mw-headline" id="Detect_new_eSATA_drives">Detect new eSATA drives</span></h3>
+<p>If your eSATA drive is not detected when you plug it in, there are a few things you can try. You can reboot with the eSATA plugged in. Or you could try:
+</p>
+<pre># echo 0 0 0 | tee /sys/class/scsi_host/host*/scan
+</pre>
+<p>Or you could install <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/scsiadd/">scsiadd</a></span><sup><small>AUR</small></sup> (from the AUR) and try:
+</p>
+<pre># scsiadd -s
+</pre>
+<p>Hopefully, your drive is now in <code>/dev</code>. If it is not, you could try the above commands while running:
+</p>
+<pre># udevadm monitor
+</pre>
+<p>to see if anything is actually happening.
+</p>
+<h3><span class="mw-headline" id="Mark_internal_SATA_ports_as_eSATA">Mark internal SATA ports as eSATA</span></h3>
+<p>If you connected an eSATA bay or another eSATA adapter, the system will still recognize this disk as an internal SATA drive. <a href="../en/GNOME.html" title="GNOME">GNOME</a> and <a href="../en/KDE.html" title="KDE">KDE</a> will ask you for your root password all the time. The following rule will mark the specified SATA-Port as an external eSATA-Port. With that, a normal GNOME user can connect their eSATA drives to that port like a USB drive, without any root password and so on.
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/udev/rules.d/10-esata.rules</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">DEVPATH=="/devices/pci0000:00/0000:00:1f.2/host4/*", ENV{UDISKS_SYSTEM}="0"
+</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> The <code>DEVPATH</code> can be found after connection the eSATA drive with the following commands (replace <code>sdb</code> accordingly):
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">$ udevadm info --query=path /dev/sdb</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">/devices/pci0000:00/0000:00:1f.2/host4/target4:0:0/4:0:0:0/block/sdb
+</pre>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">$ find /sys/devices/ -name sdb</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">/sys/devices/pci0000:00/0000:00:1f.2/host4/target4:0:0/4:0:0:0/block/sdb
+</pre>
+</div>
+<h3><span class="mw-headline" id="Setting_static_device_names">Setting static device names</span></h3>
+<p>Because <i>udev</i> loads all modules asynchronously, they are initialized in a different order. This can result in devices randomly switching names. A <i>udev</i> rule can be added to use static device names.
+See also <a href="../en/Persistent_block_device_naming.html" title="Persistent block device naming">Persistent block device naming</a> for block devices and <a href="../en/Network_configuration.html#Change_interface_name" title="Network configuration">Network configuration#Change interface name</a> for network devices.
+</p>
+<h4><span class="mw-headline" id="Video_device">Video device</span></h4>
+<p>For setting up the webcam in the first place, refer to <a href="../en/Webcam_setup.html" title="Webcam setup">Webcam setup</a>.
+</p>
+<p>Using multiple webcams will assign video devices as <code>/dev/video*</code> randomly on boot. The recommended solution is to create symlinks using a <i>udev</i> rule as in the <a href="#udev_rule_example">#udev rule example</a>:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/udev/rules.d/83-webcam.rules</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">KERNEL=="video[0-9]*", SUBSYSTEM=="video4linux", SUBSYSTEMS=="usb", ATTRS{idVendor}=="05a9", ATTRS{idProduct}=="4519", SYMLINK+="video-cam1"
+KERNEL=="video[0-9]*", SUBSYSTEM=="video4linux", SUBSYSTEMS=="usb", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="08f6", SYMLINK+="video-cam2"</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> Using names other than <code>/dev/video*</code> will break preloading of <code>v4l1compat.so</code> and perhaps <code>v4l2convert.so</code>
+</div>
+<h4><span class="mw-headline" id="Printer">Printer</span></h4>
+<p>If you use multiple printers, <code>/dev/lp[0-9]</code> devices will be assigned randomly on boot, which will break e.g. <a href="../en/CUPS.html" title="CUPS">CUPS</a> configuration. 
+</p>
+<p>You can create the following rule, which will create symlinks under <code>/dev/lp/by-id</code> and <code>/dev/lp/by-path</code>, similar to <a href="../en/Persistent_block_device_naming.html" title="Persistent block device naming">Persistent block device naming</a> scheme:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/udev/rules.d/60-persistent-printer.rules</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">ACTION=="remove", GOTO="persistent_printer_end"
+# This should not be necessary
+#KERNEL!="lp*", GOTO="persistent_printer_end"
+
+SUBSYSTEMS=="usb", IMPORT{builtin}="usb_id"
+ENV{ID_TYPE}!="printer", GOTO="persistent_printer_end"
+
+ENV{ID_SERIAL}=="?*", SYMLINK+="lp/by-id/$env{ID_BUS}-$env{ID_SERIAL}"
+
+IMPORT{builtin}="path_id"
+ENV{ID_PATH}=="?*", SYMLINK+="lp/by-path/$env{ID_PATH}"
+
+LABEL="persistent_printer_end"</pre>
+<h3><span class="mw-headline" id="Identifying_a_disk_by_its_serial">Identifying a disk by its serial</span></h3>
+<p>To perform some action on a specific disk device <code>/dev/sd<i>X</i></code> identified permanently by its unique serial <code>ID_SERIAL_SHORT</code> as displayed with <code>udevadm info /dev/sd<i>X</i></code>, one can use the below rule. It is passing as a parameter the device name found if any to illustrate:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/udev/rules.d/69-disk.rules</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">ACTION=="add", KERNEL=="sd[a-z]", ENV{ID_SERIAL_SHORT}=="<i>X5ER1ALX</i>", RUN+="/path/to/script /dev/%k"</pre>
+<h3><span class="mw-headline" id="Waking_from_suspend_with_USB_device">Waking from suspend with USB device</span></h3>
+<p>A udev rule can be useful to enable the <a href="../en/Power_management/Wakeup_triggers.html" class="mw-redirect" title="Wakeup triggers">wakeup triggers</a> of a USB device, like a mouse or a keyboard, so that it can be used to wake the system from sleep.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> By default, the USB host controllers are all enabled for wakeup. The status can be checked using <code>cat /proc/acpi/wakeup</code>. The rule below is in this case not necessary but can be used as a template to perform other actions, like disabling the wakeup functionality for example.
+</div>
+<p>First, identify the vendor and product identifiers of the USB device. They will be used to recognize it in the udev rule. For example:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">$ lsusb | grep Logitech</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">Bus 007 Device 002: ID <b>046d</b>:<b>c52b</b> Logitech, Inc. Unifying Receiver
+</pre>
+<p>Then, find where the device is connected to using:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">$ grep <i>c52b</i> /sys/bus/usb/devices/*/idProduct</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">/sys/bus/usb/devices/<b>1-1.1.1.4/</b>idProduct:c52b
+</pre>
+<p>Now create the rule to change the <code>power/wakeup</code> attribute of both the device and the USB controller it is connected to whenever it is added:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/udev/rules.d/50-wake-on-device.rules</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">ACTION=="add", SUBSYSTEM=="usb", DRIVERS=="usb", ATTRS{idVendor}=="<b>046d</b>", ATTRS{idProduct}=="<b>c52b</b>", ATTR{power/wakeup}="enabled", ATTR{driver/<b>1-1.1.1.4</b>/power/wakeup}="enabled"</pre>
+<h3><span class="mw-headline" id="Triggering_events">Triggering events</span></h3>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../File:Merge-arrows-2.svg" decoding="async" width="36" height="40" class="mw-file-element"></span></span><b>This article or section is a candidate for merging with <a href="#Testing_rules_before_loading">#Testing rules before loading</a>.</b></p>
+<div>
+<b>Notes:</b> similar trick (Discuss in <a rel="nofollow" class="external text" href="../en/Talk:Udev.html">Talk:Udev</a>)</div>
+</div>
+<p>It can be useful to trigger various <i>udev</i> events. For example, you might want to simulate a USB device disconnect on a remote machine. In such cases, use <code>udevadm trigger</code>:
+</p>
+<pre># udevadm trigger --verbose --type=subsystems --action=remove --subsystem-match=usb --attr-match="idVendor=abcd"
+</pre>
+<p>This command will trigger a USB remove event on all USB devices with vendor ID <code>abcd</code>.
+</p>
+<h3><span class="mw-headline" id="Triggering_desktop_notifications_from_a_udev_rule">Triggering desktop notifications from a udev rule</span></h3>
+<p>To trigger a desktop notification from a <i>udev</i> rule, use <span class="plainlinks archwiki-template-man" title="$ man 1 systemd-run"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd-run.1">systemd-run(1)</a></span> as explained in <a href="../en/Desktop_notifications.html#Send_notifications_to_another_user" title="Desktop notifications">Desktop notifications#Send notifications to another user</a>: 
+</p>
+<p>Create the file:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/udev/rules.d/99-powersupply_notification.rules</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;"># Rule for when switching to battery
+ACTION=="change", SUBSYSTEM=="power_supply", ATTRS{type}=="Mains", ATTRS{online}=="0", RUN+="/usr/bin/systemd-run --machine=<i>target_user</i>@.host --user notify-send 'Changing Power States' 'Using battery power'"
+# Rule for when switching to AC
+ACTION=="change", SUBSYSTEM=="power_supply", ATTRS{type}=="Mains", ATTRS{online}=="1", RUN+="/usr/bin/systemd-run --machine=<i>target_user</i>@.host --user notify-send 'Changing Power States' 'Using AC power'"</pre>
+<p>To launch multiple or long commands, an <a href="../en/Help:Reading.html#Make_executable" class="mw-redirect" title="Executable">executable</a> script can be given to <i>systemd-run</i>:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/usr/local/bin/from_battery.sh</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">#!/bin/sh
+
+paplay /usr/share/sounds/freedesktop/stereo/power-unplug.oga
+notify-send --icon=/usr/share/icons/Adwaita/symbolic/legacy/battery-good-symbolic.svg 'Changing Power States' 'Using battery power' --expire-time=4000</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> If the rule triggers before the X server starts, it may not work as intended. See <a href="#X_programs_in_RUN_rules_hang_when_no_X_server_is_present">#X programs in RUN rules hang when no X server is present</a>.</div>
+<h2><span class="mw-headline" id="Troubleshooting">Troubleshooting</span></h2>
+<h3><span class="mw-headline" id="Blacklisting_modules">Blacklisting modules</span></h3>
+<p>In rare cases, <i>udev</i> can make mistakes and load the wrong modules. To prevent it from doing this, you can <a href="../en/Kernel_module.html#Blacklisting" class="mw-redirect" title="Blacklist">blacklist</a> modules. Once blacklisted, <i>udev</i> will never load that module – not at boot-time and not even later on when a hot-plug event is received (e.g., you plug in your USB flash drive).
+</p>
+<h3><span class="mw-headline" id="Debug_output">Debug output</span></h3>
+<p>To get hardware <a href="../en/General_troubleshooting.html" title="General troubleshooting">debug</a> info, use the <a href="../en/Kernel_parameters.html" class="mw-redirect" title="Kernel parameter">kernel parameter</a> <code>udev.log-priority=debug</code>. Alternatively you can set
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/udev/udev.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">udev_log="debug"</pre>
+<p>This option can also be compiled into your initramfs by adding the configuration file to your <code>FILES</code> array:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/mkinitcpio.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">FILES=(... /etc/udev/udev.conf)</pre>
+<p>and then <a href="../en/Mkinitcpio.html#Image_creation_and_activation" class="mw-redirect" title="Regenerate the initramfs">regenerate the initramfs</a>.
+</p>
+<h3><span class="mw-headline" id="udevd_hangs_at_boot">udevd hangs at boot</span></h3>
+<p>After migrating to LDAP or updating an LDAP-backed system, <i>udevd</i> can hang at boot at the message "Starting UDev Daemon". This is usually caused by <i>udevd</i> trying to look up a name from LDAP but failing, because the network is not up yet. The solution is to ensure that all system group names are present locally.
+</p>
+<p>Extract the group names referenced in <i>udev</i> rules and the group names actually present on the system:
+</p>
+<pre># grep -Fr GROUP /etc/udev/rules.d/ /usr/lib/udev/rules.d/ | sed 's:.*GROUP="\([-a-z_]\{1,\}\)".*:\1:' | sort -u &gt;udev_groups
+# cut -d: -f1 /etc/gshadow /etc/group | sort -u &gt;present_groups
+</pre>
+<p>To see the differences, do a side-by-side diff:
+</p>
+<pre># diff -y present_groups udev_groups
+...
+network							      &lt;
+nobody							      &lt;
+ntp							      &lt;
+optical								optical
+power							      |	pcscd
+rfkill							      &lt;
+root								root
+scanner								scanner
+smmsp							      &lt;
+storage								storage
+...
+</pre>
+<p>In this case, the <code>pcscd</code> group is for some reason not present in the system. <a href="../en/Users_and_groups.html#Group_management" title="Users and groups">Add the missing groups</a>. Also, make sure that local resources are looked up before resorting to LDAP. <code>/etc/nsswitch.conf</code> should contain the following line:
+</p>
+<pre>group: files ldap
+</pre>
+<h3>
+<span id="Some_devices.2C_that_should_be_treated_as_removable.2C_are_not"></span><span class="mw-headline" id="Some_devices,_that_should_be_treated_as_removable,_are_not">Some devices, that should be treated as removable, are not</span>
+</h3>
+<p>You need to create a custom <i>udev</i> rule for that particular device. To get definitive information of the device you can use either <code>ID_SERIAL</code> or <code>ID_SERIAL_SHORT</code> (remember to change <code>/dev/sdb</code> if needed):
+</p>
+<pre>$ udevadm info /dev/sdb | grep ID_SERIAL
+</pre>
+<p>Then we set <code>UDISKS_AUTO="1"</code> to mark the device for automounting and <code>UDISKS_SYSTEM="0"</code> to mark the device as "removable". See <span class="plainlinks archwiki-template-man" title="$ man 8 udisks"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/udisks.8">udisks(8)</a></span> for details.
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/udev/rules.d/99-removable.rules</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">ENV{ID_SERIAL_SHORT}=="<i>serial_number</i>", ENV{UDISKS_AUTO}="1", ENV{UDISKS_SYSTEM}="0"</pre>
+<p>Remember to reload <i>udev</i> rules with <code>udevadm control --reload</code>. Next time you plug your device in, it will be treated as an external drive.
+</p>
+<h3><span class="mw-headline" id="Sound_problems_with_some_modules_not_loaded_automatically">Sound problems with some modules not loaded automatically</span></h3>
+<p>Some users have traced this problem to old entries in <code>/etc/modprobe.d/sound.conf</code>. Try cleaning that file out and trying again.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> Since <code>udev&gt;=171</code>, the OSS emulation modules (<code>snd_seq_oss</code>, <code>snd_pcm_oss</code>, <code>snd_mixer_oss</code>) are not automatically loaded by default.</div>
+<h3>
+<span id="Optical_drives_have_group_ID_set_to_.22disk.22"></span><span class="mw-headline" id='Optical_drives_have_group_ID_set_to_"disk"'>Optical drives have group ID set to "disk"</span>
+</h3>
+<p>If the group ID of your optical drive is set to <code>disk</code> and you want to have it set to <code>optical</code>, you have to create a custom <i>udev</i> rule:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/udev/rules.d</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;"># permissions for SCSI CD devices
+SUBSYSTEMS=="scsi", KERNEL=="s[rg][0-9]*", ATTRS{type}=="5", GROUP="optical"</pre>
+<h3><span class="mw-headline" id="X_programs_in_RUN_rules_hang_when_no_X_server_is_present">X programs in RUN rules hang when no X server is present</span></h3>
+<p>When <i>xrandr</i> or another X-based program tries to connect to an X server, it falls back to a TCP connection on failure. However, due to <code>IPAddressDeny</code> in the <a rel="nofollow" class="external text" href="https://github.com/systemd/systemd/blob/main/units/systemd-udevd.service.in#L43">systemd-udev service configuration</a>, this hangs. Eventually the program will be killed and event processing will resume.
+</p>
+<p>If the rule is for a drm device and the hang causes event processing to complete once the X server has started, this can cause 3D acceleration to stop working with a <code>failed to authenticate magic</code> error.
+</p>
+<h2><span class="mw-headline" id="See_also">See also</span></h2>
+<ul>
+<li><span class="plainlinks archwiki-template-man" title="$ man 7 udev"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/udev.7">udev(7)</a></span></li>
+<li><a rel="nofollow" class="external text" href="https://opensource.com/article/18/11/udev">An Introduction to udev</a></li>
+<li><a rel="nofollow" class="external text" href="http://vger.kernel.org/vger-lists.html#linux-hotplug">udev mailing list information</a></li>
+<li><a rel="nofollow" class="external text" href="http://jasonwryan.com/blog/2014/01/20/udev/">Scripting with udev</a></li>
+<li><a rel="nofollow" class="external text" href="https://www.reactivated.net/writing_udev_rules.html">Writing udev rules</a></li>
+<li><a rel="nofollow" class="external text" href="https://www.linuxfromscratch.org/lfs/view/stable/chapter09/udev.html">Device and Module Handling on an LFS System</a></li>
+<li><a rel="nofollow" class="external text" href="https://github.com/Ventto/xpub">Running GUI or accessing display variables from udev rules</a></li>
+<li><a rel="nofollow" class="external text" href="https://doc.opensuse.org/documentation/leap/reference/html/book-reference/cha-udev.html">openSUSE udev documentation</a></li>
+</ul>
+</div>
+</div>
+					<div id="catlinks" class="catlinks" data-mw="interface">
+<div id="mw-normal-catlinks" class="mw-normal-catlinks">
+<a href="../Special:Categories.html" title="Special:Categories">Category</a>: <ul><li><a href="../en/Category:Hardware_detection_and_troubleshooting.html" title="Category:Hardware detection and troubleshooting">Hardware detection and troubleshooting</a></li></ul>
+</div>
+<div id="mw-hidden-catlinks" class="mw-hidden-catlinks mw-hidden-cats-hidden">Hidden category: <ul><li><a href="../en/Category:Pages_or_sections_flagged_with_Template:Merge.html" title="Category:Pages or sections flagged with Template:Merge">Pages or sections flagged with Template:Merge</a></li></ul>
+</div>
+</div>
+				</div>
+			</main>
+			
+		</div>
+		<div class="mw-footer-container">
+			
+<footer id="footer" class="mw-footer" style="margin: 0">
+	<ul id="footer-info">
+	<li data-nosnippet="">Retrieved from "<a dir="ltr" href="https://wiki.archlinux.org/index.php?title=Udev&amp;oldid=827704">https://wiki.archlinux.org/index.php?title=Udev&amp;oldid=827704</a>"</li>
+<li id="footer-info-lastmod"> This page was last edited on 24 February 2025, at 17:36.</li>
+	<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+<br>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="https://terms.archlinux.org/docs/privacy-policy/">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="../en/ArchWiki:About.html">About ArchWiki</a></li>
+	<li id="footer-places-disclaimers"><a href="../en/ArchWiki:General_disclaimer.html">Disclaimers</a></li>
+	<li id="footer-places-archwiki-code-of-conduct"><a href="https://terms.archlinux.org/docs/code-of-conduct/" class="extiw" title="archlinux-service-agreements:code-of-conduct">Code of conduct</a></li>
+	<li id="footer-places-archwiki-terms-of-service"><a href="https://terms.archlinux.org/docs/terms-of-service/" class="extiw" title="archlinux-service-agreements:terms-of-service">Terms of service</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-copyrightico"><a href="https://www.gnu.org/copyleft/fdl.html" class="cdx-button cdx-button--fake-button cdx-button--size-large cdx-button--fake-button--enabled"><img src="/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" loading="lazy"></a></li>
+	<li id="footer-poweredbyico"><img src="/resources/assets/poweredby_mediawiki.svg" width="88" height="31" loading="lazy"></li>
+</ul>
+
+</footer>
+
+		</div>
+	</div> 
+</div> 
+<div class="vector-settings" id="p-dock-bottom">
+	<ul></ul>
+</div>
+</body>
+</html>

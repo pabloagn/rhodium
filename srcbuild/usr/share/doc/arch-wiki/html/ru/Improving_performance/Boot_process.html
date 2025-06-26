@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-sticky-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-0 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-disabled skin-theme-clientpref-day vector-toc-available" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>Improving performance (Русский)/Boot process (Русский) - ArchWiki</title>
+<link rel="stylesheet" href="../../ArchWikiOffline.css">
+<meta name="ResourceLoaderDynamicStyles" content="">
+<meta name="generator" content="MediaWiki 1.43.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="max-image-preview:standard">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.25, maximum-scale=5.0">
+<link rel="search" type="application/opensearchdescription+xml" href="/rest.php/v1/search" title="ArchWiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.archlinux.org/api.php?action=rsd">
+<link rel="license" href="https://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="ArchWiki Atom feed" href="/index.php?title=Special:RecentChanges&amp;feed=atom">
+</head>
+<body class="skin--responsive skin-vector skin-vector-search-vue mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Improving_performance_Русский_Boot_process_Русский rootpage-Improving_performance_Русский skin-vector-2022 action-view">
+<a class="mw-jump-link" href="#bodyContent">Jump to content</a>
+<div class="vector-header-container">
+	</div>
+<div class="mw-page-container">
+	<div class="mw-page-container-inner">
+		<div class="vector-column-start">
+			<div class="vector-main-menu-container">
+		</div>
+	<div class="vector-sticky-pinned-container">
+				<nav id="mw-panel-toc" aria-label="Contents" data-event-name="ui.sidebar-toc" class="mw-table-of-contents-container vector-toc-landmark">
+					<div id="vector-toc-pinned-container" class="vector-pinned-container">
+					<div id="vector-toc" class="vector-toc vector-pinnable-element">
+	<div class="vector-pinnable-header vector-toc-pinnable-header vector-pinnable-header-pinned" data-feature-name="toc-pinned" data-pinnable-element-id="vector-toc">
+	<h2 class="vector-pinnable-header-label">Contents</h2>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-toc.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-toc.unpin">hide</button>
+</div>
+
+
+	<ul class="vector-toc-contents" id="mw-panel-toc-list">
+		<li id="toc-mw-content-text" class="vector-toc-list-item vector-toc-level-1">
+			<a href="#" class="vector-toc-link">
+				<div class="vector-toc-text">Beginning</div>
+			</a>
+		</li>
+		<li id="toc-Анализ_процесса_загрузки" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#%D0%90%D0%BD%D0%B0%D0%BB%D0%B8%D0%B7_%D0%BF%D1%80%D0%BE%D1%86%D0%B5%D1%81%D1%81%D0%B0_%D0%B7%D0%B0%D0%B3%D1%80%D1%83%D0%B7%D0%BA%D0%B8">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">1</span>
+				<span>Анализ процесса загрузки</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Анализ_процесса_загрузки-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Анализ процесса загрузки subsection</span>
+			</button>
+		
+		<ul id="toc-Анализ_процесса_загрузки-sublist" class="vector-toc-list">
+			<li id="toc-С_помощью_systemd-analyze" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#%D0%A1_%D0%BF%D0%BE%D0%BC%D0%BE%D1%89%D1%8C%D1%8E_systemd-analyze">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.1</span>
+					<span>С помощью systemd-analyze</span>
+				</div>
+			</a>
+			
+			<ul id="toc-С_помощью_systemd-analyze-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-С_помощью_bootchart2" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#%D0%A1_%D0%BF%D0%BE%D0%BC%D0%BE%D1%89%D1%8C%D1%8E_bootchart2">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.2</span>
+					<span>С помощью bootchart2</span>
+				</div>
+			</a>
+			
+			<ul id="toc-С_помощью_bootchart2-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Использование_хука_systemd" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#%D0%98%D1%81%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5_%D1%85%D1%83%D0%BA%D0%B0_systemd">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">2</span>
+				<span>Использование хука systemd</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Использование_хука_systemd-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Компиляция_собственного_ядра" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#%D0%9A%D0%BE%D0%BC%D0%BF%D0%B8%D0%BB%D1%8F%D1%86%D0%B8%D1%8F_%D1%81%D0%BE%D0%B1%D1%81%D1%82%D0%B2%D0%B5%D0%BD%D0%BD%D0%BE%D0%B3%D0%BE_%D1%8F%D0%B4%D1%80%D0%B0">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">3</span>
+				<span>Компиляция собственного ядра</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Компиляция_собственного_ядра-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Initramfs" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Initramfs">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">4</span>
+				<span>Initramfs</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Initramfs-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Выбор_оптимального_способа_запуска_служб" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#%D0%92%D1%8B%D0%B1%D0%BE%D1%80_%D0%BE%D0%BF%D1%82%D0%B8%D0%BC%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%B3%D0%BE_%D1%81%D0%BF%D0%BE%D1%81%D0%BE%D0%B1%D0%B0_%D0%B7%D0%B0%D0%BF%D1%83%D1%81%D0%BA%D0%B0_%D1%81%D0%BB%D1%83%D0%B6%D0%B1">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">5</span>
+				<span>Выбор оптимального способа запуска служб</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Выбор_оптимального_способа_запуска_служб-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Последовательная_раскрутка_дисков" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#%D0%9F%D0%BE%D1%81%D0%BB%D0%B5%D0%B4%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%B0%D1%8F_%D1%80%D0%B0%D1%81%D0%BA%D1%80%D1%83%D1%82%D0%BA%D0%B0_%D0%B4%D0%B8%D1%81%D0%BA%D0%BE%D0%B2">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">6</span>
+				<span>Последовательная раскрутка дисков</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Последовательная_раскрутка_дисков-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Монтирование_файловых_систем" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#%D0%9C%D0%BE%D0%BD%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5_%D1%84%D0%B0%D0%B9%D0%BB%D0%BE%D0%B2%D1%8B%D1%85_%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BC">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">7</span>
+				<span>Монтирование файловых систем</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Монтирование_файловых_систем-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Уменьшение_вывода_во_время_загрузки" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#%D0%A3%D0%BC%D0%B5%D0%BD%D1%8C%D1%88%D0%B5%D0%BD%D0%B8%D0%B5_%D0%B2%D1%8B%D0%B2%D0%BE%D0%B4%D0%B0_%D0%B2%D0%BE_%D0%B2%D1%80%D0%B5%D0%BC%D1%8F_%D0%B7%D0%B0%D0%B3%D1%80%D1%83%D0%B7%D0%BA%D0%B8">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">8</span>
+				<span>Уменьшение вывода во время загрузки</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Уменьшение_вывода_во_время_загрузки-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Изменение_загрузчика" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#%D0%98%D0%B7%D0%BC%D0%B5%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5_%D0%B7%D0%B0%D0%B3%D1%80%D1%83%D0%B7%D1%87%D0%B8%D0%BA%D0%B0">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">9</span>
+				<span>Изменение загрузчика</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Изменение_загрузчика-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Ждущий_режим" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#%D0%96%D0%B4%D1%83%D1%89%D0%B8%D0%B9_%D1%80%D0%B5%D0%B6%D0%B8%D0%BC">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">10</span>
+				<span>Ждущий режим</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Ждущий_режим-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+</ul>
+</div>
+
+					</div>
+		</nav>
+			</div>
+		</div>
+		<div class="mw-content-container">
+			<main id="content" class="mw-body" style="margin: 0">
+				<header class="mw-body-header vector-page-titlebar">
+					<nav aria-label="Contents" class="vector-toc-landmark">
+						
+<div id="vector-page-titlebar-toc" class="vector-dropdown vector-page-titlebar-toc vector-button-flush-left">
+	<input type="checkbox" id="vector-page-titlebar-toc-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-page-titlebar-toc" class="vector-dropdown-checkbox " aria-label="Toggle the table of contents">
+	<label id="vector-page-titlebar-toc-label" for="vector-page-titlebar-toc-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"><span class="vector-icon mw-ui-icon-listBullet mw-ui-icon-wikimedia-listBullet"></span>
+
+<span class="vector-dropdown-label-text">Toggle the table of contents</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+							<div id="vector-page-titlebar-toc-unpinned-container" class="vector-unpinned-container">
+			</div>
+		
+	</div>
+</div>
+
+					</nav>
+					<h1 id="firstHeading" class="firstHeading mw-first-heading"><span class="mw-page-title-main">Improving performance (Русский)/Boot process (Русский)</span></h1>
+							
+<div id="p-lang-btn" class="vector-dropdown mw-portlet mw-portlet-lang">
+	<input type="checkbox" id="p-lang-btn-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-p-lang-btn" class="vector-dropdown-checkbox mw-interlanguage-selector" aria-label="Go to an article in another language. Available in 5 languages">
+	<label id="p-lang-btn-label" for="p-lang-btn-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--action-progressive mw-portlet-lang-heading-5" aria-hidden="true"><span class="vector-icon mw-ui-icon-language-progressive mw-ui-icon-wikimedia-language-progressive"></span>
+
+<span class="vector-dropdown-label-text">5 languages</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+		<div class="vector-menu-content">
+			
+			<ul class="vector-menu-content-list">
+				
+				<li class="interlanguage-link interwiki-en mw-list-item"><a href="../../en/Improving_performance/Boot_process.html" title="Improving performance/Boot process – English" lang="en" hreflang="en" data-title="Improving performance/Boot process" data-language-autonym="English" data-language-local-name="English" class="interlanguage-link-target"><span>English</span></a></li>
+<li class="interlanguage-link interwiki-es mw-list-item"><a href="../../es/Improving_performance/Boot_process.html" title="Improving performance (Español)/Boot process – español" lang="es" hreflang="es" data-title="Improving performance (Español)/Boot process" data-language-autonym="Español" data-language-local-name="español" class="interlanguage-link-target"><span>Español</span></a></li>
+<li class="interlanguage-link interwiki-fr mw-list-item"><a href="../../fr/Improving_performance/Boot_process.html" title="Improving performance (Français)/Boot process – français" lang="fr" hreflang="fr" data-title="Improving performance (Français)/Boot process" data-language-autonym="Français" data-language-local-name="français" class="interlanguage-link-target"><span>Français</span></a></li>
+<li class="interlanguage-link interwiki-ja mw-list-item"><a href="https://wiki.archlinux.jp/index.php/%E3%83%91%E3%83%95%E3%82%A9%E3%83%BC%E3%83%9E%E3%83%B3%E3%82%B9%E3%81%AE%E5%90%91%E4%B8%8A/%E3%83%96%E3%83%BC%E3%83%88%E3%83%97%E3%83%AD%E3%82%BB%E3%82%B9" title="パフォーマンスの向上/ブートプロセス – 日本語" lang="ja" hreflang="ja" data-title="パフォーマンスの向上/ブートプロセス" data-language-autonym="日本語" data-language-local-name="日本語" class="interlanguage-link-target"><span>日本語</span></a></li>
+<li class="interlanguage-link interwiki-pt mw-list-item"><a href="../../pt/Improving_performance/Boot_process.html" title="Improving performance (Português)/Boot process – português" lang="pt" hreflang="pt" data-title="Improving performance (Português)/Boot process" data-language-autonym="Português" data-language-local-name="português" class="interlanguage-link-target"><span>Português</span></a></li>
+			</ul>
+			
+		</div>
+
+	</div>
+</div>
+</header>
+				<div class="vector-column-end">
+					<div class="vector-sticky-pinned-container">
+						<nav class="vector-page-tools-landmark" aria-label="Page tools">
+							<div id="vector-page-tools-pinned-container" class="vector-pinned-container">
+				
+							</div>
+		</nav>
+						<nav class="vector-appearance-landmark" aria-label="Appearance">
+							<div id="vector-appearance-pinned-container" class="vector-pinned-container">
+				<div id="vector-appearance" class="vector-appearance vector-pinnable-element">
+	<div class="vector-pinnable-header vector-appearance-pinnable-header vector-pinnable-header-pinned" data-feature-name="appearance-pinned" data-pinnable-element-id="vector-appearance" data-pinned-container-id="vector-appearance-pinned-container" data-unpinned-container-id="vector-appearance-unpinned-container">
+	<div class="vector-pinnable-header-label">Appearance</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-appearance.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-appearance.unpin">hide</button>
+</div>
+
+
+</div>
+
+							</div>
+		</nav>
+					</div>
+				</div>
+				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container>
+					<div class="vector-body-before-content">
+							<div class="mw-indicators">
+		</div>
+
+						<div id="siteSub" class="noprint">From ArchWiki</div>
+					</div>
+					<div id="contentSub"><div id="mw-content-subtitle"><div class="subpages">&lt; <bdi dir="ltr"><a href="../../ru/Improving_performance.html" title="Improving performance (Русский)">Improving performance (Русский)</a></bdi>
+</div></div></div>
+					
+					
+					<div id="mw-content-text" class="mw-body-content">
+<div class="mw-content-ltr mw-parser-output" lang="ru" dir="ltr">
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Состояние перевода:</strong> На этой странице представлен перевод статьи <a href="../../en/Improving_performance/Boot_process.html" title="Improving performance/Boot process">Improving performance/Boot process</a>. Дата последней синхронизации: 15 декабря 2022. Вы можете <a href="../../ru/ArchWiki:Translation_Team.html" title="ArchWiki:Translation Team (Русский)">помочь</a> синхронизировать перевод, если в английской версии произошли <a rel="nofollow" class="external text" href="https://wiki.archlinux.org/index.php?title=Improving_performance/Boot_process&amp;diff=0&amp;oldid=751020">изменения</a>.</div>
+<div class="archwiki-template-meta-related-articles">
+<p>Ссылки по теме</p>
+<ul>
+<li><a href="../../ru/Improving_performance.html" class="mw-redirect" title="Увеличение производительности">Увеличение производительности</a></li>
+<li><a href="../../ru/Silent_boot.html" class="mw-redirect" title="Тихая загрузка">Тихая загрузка</a></li>
+<li><a href="../../ru/Daemons.html" class="mw-redirect" title="Демоны">Демоны</a></li>
+<li><a href="../../en/Kexec.html" title="Kexec">Kexec</a></li>
+</ul>
+</div>
+<p>Улучшение производительности загрузки системы уменьшает время ожидания загрузки, а также служит способом изучения взаимодействия определённых системных файлов и скриптов друг с другом. В этой статье сделана попытка собрать воедино методы ускорения загрузки системы Arch Linux.
+</p>
+<meta property="mw:PageProp/toc">
+<h2>
+<span id=".D0.90.D0.BD.D0.B0.D0.BB.D0.B8.D0.B7_.D0.BF.D1.80.D0.BE.D1.86.D0.B5.D1.81.D1.81.D0.B0_.D0.B7.D0.B0.D0.B3.D1.80.D1.83.D0.B7.D0.BA.D0.B8"></span><span class="mw-headline" id="Анализ_процесса_загрузки">Анализ процесса загрузки</span>
+</h2>
+<h3>
+<span id=".D0.A1_.D0.BF.D0.BE.D0.BC.D0.BE.D1.89.D1.8C.D1.8E_systemd-analyze"></span><span class="mw-headline" id="С_помощью_systemd-analyze">С помощью systemd-analyze</span>
+</h3>
+<p>В состав <a href="../../ru/Systemd.html" title="Systemd (Русский)">systemd</a> входит инструмент <code>systemd-analyze</code>, который можно использовать для просмотра информации о времени загрузки, в том числе svg-график с отображением юнитов, ожидающих запуска своих зависимостей. Вы можете увидеть, какие юниты вызывают замедление процесса загрузки, и попытаться оптимизировать их запуск.
+</p>
+<p>Чтобы узнать, сколько времени было потрачено в пространстве ядра и пространстве пользователя при загрузке, просто используйте:
+</p>
+<pre>$ systemd-analyze
+</pre>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Совет:</strong> Если загрузка выполняется через <a href="../../ru/Unified_Extensible_Firmware_Interface.html" title="Unified Extensible Firmware Interface (Русский)">UEFI</a> и используется загрузчик, который реализует systemd <a rel="nofollow" class="external text" href="https://systemd.io/BOOT_LOADER_INTERFACE/">Boot Loader Interface</a> (на данный момент его реализуют только <a href="../../ru/Systemd-boot.html" title="Systemd-boot (Русский)">systemd-boot</a> и <a href="../../ru/GRUB.html" title="GRUB (Русский)">GRUB</a>), <i>systemd-analyze</i> сможет дополнительно показать, сколько времени было потрачено на работу прошивки EFI и самого́ загрузчика.</div>
+<p>Просмотр списка запущенных юнитов, отсортированного по времени, которое потребовалось каждому из них для запуска:
+</p>
+<pre>$ systemd-analyze blame
+</pre>
+<p>В некоторых местах загрузка не может продолжаться, пока не произойдёт успешное выполнение какого-то юнита. Чтобы узнать, какие юниты оказываются в этих критических местах цепочки загрузки, выполните команду:
+</p>
+<pre>$ systemd-analyze critical-chain
+</pre>
+<p>Также можно создать создать SVG-файл, который демонстрирует процесс загрузки в графическом виде, подобно <a href="../../ru/Bootchart.html" title="Bootchart (Русский)">Bootchart</a>:
+</p>
+<pre>$ systemd-analyze plot &gt; plot.svg
+</pre>
+<p>Смотрите <span class="plainlinks archwiki-template-man" title="$ man 1 systemd-analyze"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd-analyze.1">systemd-analyze(1)</a></span> для более подробной информации.
+</p>
+<h3>
+<span id=".D0.A1_.D0.BF.D0.BE.D0.BC.D0.BE.D1.89.D1.8C.D1.8E_bootchart2"></span><span class="mw-headline" id="С_помощью_bootchart2">С помощью bootchart2</span>
+</h3>
+<p>Также можно использовать <a href="../../ru/Bootchart.html#Bootchart2" title="Bootchart (Русский)">Bootchart2</a> для визуализации процесса загрузки.
+</p>
+<h2>
+<span id=".D0.98.D1.81.D0.BF.D0.BE.D0.BB.D1.8C.D0.B7.D0.BE.D0.B2.D0.B0.D0.BD.D0.B8.D0.B5_.D1.85.D1.83.D0.BA.D0.B0_systemd"></span><span class="mw-headline" id="Использование_хука_systemd">Использование хука systemd</span>
+</h2>
+<p>По умолчанию в конфигурации <a href="../../ru/Mkinitcpio.html" title="Mkinitcpio (Русский)">mkinitcpio</a> для сборки initramfs используются хуки <code>base</code> и <code>udev</code>. Для более быстрой загрузки их можно заменить на <code>systemd</code>.
+</p>
+<p>Смотрите <a href="../../ru/Mkinitcpio.html#%D0%94%D0%BE%D1%81%D1%82%D1%83%D0%BF%D0%BD%D1%8B%D0%B5_%D1%85%D1%83%D0%BA%D0%B8" title="Mkinitcpio (Русский)">mkinitcpio (Русский)#Доступные хуки</a> для более подробной информации. Также смотрите <a href="../../ru/Fsck.html#%D0%9F%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0_%D0%BF%D1%80%D0%B8_%D0%B7%D0%B0%D0%B3%D1%80%D1%83%D0%B7%D0%BA%D0%B5" title="Fsck (Русский)">fsck (Русский)#Проверка при загрузке</a> в случае замены хука <code>fsck</code>.
+</p>
+<h2>
+<span id=".D0.9A.D0.BE.D0.BC.D0.BF.D0.B8.D0.BB.D1.8F.D1.86.D0.B8.D1.8F_.D1.81.D0.BE.D0.B1.D1.81.D1.82.D0.B2.D0.B5.D0.BD.D0.BD.D0.BE.D0.B3.D0.BE_.D1.8F.D0.B4.D1.80.D0.B0"></span><span class="mw-headline" id="Компиляция_собственного_ядра">Компиляция собственного ядра</span>
+</h2>
+<p>Компиляция своего ядра может сократить время загрузки и использование памяти, хотя со стандартизацией 64-битной архитектуры и модульной природой ядра Linux улучшение может оказаться не таким значительным. Смотрите <a href="../../ru/Kernel.html#%D0%9A%D0%BE%D0%BC%D0%BF%D0%B8%D0%BB%D1%8F%D1%86%D0%B8%D1%8F" class="mw-redirect" title="Ядро">Ядро#Компиляция</a> для более подробной информации.
+</p>
+<h2><span class="mw-headline" id="Initramfs">Initramfs</span></h2>
+<p>Самый простой способ уменьшить размер initramfs — добавить хук <code>autodetect</code> в настройках <a href="../../ru/Mkinitcpio.html" title="Mkinitcpio (Русский)">mkinitcpio</a>. Более сложные методы уменьшения размера описаны в статье <a href="../../en/Mkinitcpio/Minimal_initramfs.html" class="mw-redirect" title="Minimal initramfs">Minimal initramfs</a>.
+</p>
+<p>В зависимости от вашего оборудования (процессора и скорости хранилища), использование <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=lz4">lz4</a></span> вместо используемого по умолчанию алгоритма сжатия <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=zstd">zstd</a></span> может оказаться быстрее, поскольку более высокая скорость декомпрессии при загрузке обычно компенсирует немного больший размер initramfs, который приходится считывать с диска. Смотрите раздел <a href="../../ru/Mkinitcpio.html#COMPRESSION" title="Mkinitcpio (Русский)">mkinitcpio (Русский)#COMPRESSION</a>.
+</p>
+<h2>
+<span id=".D0.92.D1.8B.D0.B1.D0.BE.D1.80_.D0.BE.D0.BF.D1.82.D0.B8.D0.BC.D0.B0.D0.BB.D1.8C.D0.BD.D0.BE.D0.B3.D0.BE_.D1.81.D0.BF.D0.BE.D1.81.D0.BE.D0.B1.D0.B0_.D0.B7.D0.B0.D0.BF.D1.83.D1.81.D0.BA.D0.B0_.D1.81.D0.BB.D1.83.D0.B6.D0.B1"></span><span class="mw-headline" id="Выбор_оптимального_способа_запуска_служб">Выбор оптимального способа запуска служб</span>
+</h2>
+<p>Одной из центральных особенностей systemd является активация через <a href="../../ru/D-Bus.html" title="D-Bus (Русский)">D-Bus</a> и сокеты. Это предпочтительно в большинстве случаев, поскольку позволяет службам запускаться только при первом обращении к ним, что, как правило, хорошо (например, включение службы <code>cups.service</code> во время загрузки обычно не особо полезно для настольных систем, вместо него лучше включить <code>cups.socket</code>, который будет запускать службу, только когда потребуется что-то распечатать).
+</p>
+<p>Однако если вы точно знаете, что какая-то служба (например, <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=upower">upower</a></span>) всегда будет запускаться во время загрузки, то общее время загрузки можно уменьшить, запустив её как можно раньше. Для этого можно <a href="../../ru/Help:Reading.html#%D0%A3%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5_%D1%8E%D0%BD%D0%B8%D1%82%D0%B0%D0%BC%D0%B8_systemd" class="mw-redirect" title="Включить">включить</a> службу, например <code>upower.service</code> (если файл службы настроен для этого, что в большинстве случаев так и есть).
+</p>
+<p>Это заставит systemd запустить UPower как можно раньше, не вызывая гонок с активацией сокета или D-Bus.
+</p>
+<h2>
+<span id=".D0.9F.D0.BE.D1.81.D0.BB.D0.B5.D0.B4.D0.BE.D0.B2.D0.B0.D1.82.D0.B5.D0.BB.D1.8C.D0.BD.D0.B0.D1.8F_.D1.80.D0.B0.D1.81.D0.BA.D1.80.D1.83.D1.82.D0.BA.D0.B0_.D0.B4.D0.B8.D1.81.D0.BA.D0.BE.D0.B2"></span><span class="mw-headline" id="Последовательная_раскрутка_дисков">Последовательная раскрутка дисков</span>
+</h2>
+<p>Некоторые диски поддерживают последовательную раскрутку (<a href="https://en.wikipedia.org/wiki/Spin-up#Staggered_spin-up" class="extiw" title="wikipedia:Spin-up">staggered spin-up</a>): ОС проверяет интерфейсы ATA последовательно, что позволяет раскручивать диски по одному и таким образом снижать пиковое энергопотребление. Это замедляет скорость загрузки, а на большинстве домашних компьютеров вообще не даёт никаких преимуществ, поскольку диски уже раскручиваются сразу после включения питания. Чтобы проверить, используется ли SSS:
+</p>
+<pre># dmesg | grep SSS
+</pre>
+<p>Если не используется, то эта команда ничего не выведет.
+</p>
+<p>Для отключения добавьте <a href="../../ru/Kernel_parameters.html" class="mw-redirect" title="Параметр ядра">параметр ядра</a> <code>libahci.ignore_sss=1</code>.
+</p>
+<h2>
+<span id=".D0.9C.D0.BE.D0.BD.D1.82.D0.B8.D1.80.D0.BE.D0.B2.D0.B0.D0.BD.D0.B8.D0.B5_.D1.84.D0.B0.D0.B9.D0.BB.D0.BE.D0.B2.D1.8B.D1.85_.D1.81.D0.B8.D1.81.D1.82.D0.B5.D0.BC"></span><span class="mw-headline" id="Монтирование_файловых_систем">Монтирование файловых систем</span>
+</h2>
+<p>Благодаря хуку <code>fsck</code> в <a href="../../ru/Mkinitcpio.html" title="Mkinitcpio (Русский)">mkinitcpio</a> можно избежать дорогостоящего перемонтирования корневого раздела, изменив <code>ro</code> на <code>rw</code> в параметрах ядра: опции монтирования можно задать через <code>rootflags=<b>rw</b>,<i>другие_опции</i></code>. Запись должна быть удалена из файла <code>/etc/fstab</code>, иначе служба <code>systemd-remount-fs.service</code> будет продолжать попытки применения этих настроек. В качестве альтернативы можно попытаться замаскировать этот юнит.
+</p>
+<p>Если в качестве корневой файловой системы используется <a href="../../ru/Btrfs.html" title="Btrfs (Русский)">Btrfs</a>, то нет необходимости в выполнении fsck при каждой загрузке, как в других файловых системах. В этом случае можно удалить хук <code>fsck</code>. Вы также можете замаскировать службу <code>systemd-fsck-root.service</code> или запретить ей выполнять проверку корневой файловой системы с помощью параметра ядра <code>fsck.mode=skip</code>. Без <code>fsck</code> systemd всё равно будет выполнять проверку всех соответствующих файловых систем через <code>systemd-fsck@.service</code>.
+</p>
+<p>Из <code>/etc/fstab</code> можно удалить записи для тех точек монтирования, которые systemd монтирует сам с использованием своих юнитов (список таких юнитов можно посмотреть с помощью команды <code>pacman -Ql systemd | grep '\.mount$'</code>). Например, нередко пользователи по старой привычке добавляют запись для монтирования <code>/tmp</code>, как делали во времена sysvinit, но сегодня в этом нет необходимости, так как systemd-юнит <code>tmp.mount</code> уже позаботился об этом. Следовательно, такую запись можно смело удалить.
+</p>
+<p>Другие файловые системы, такие как <code>/home</code> или <a href="../../ru/EFI_system_partition.html" class="mw-redirect" title="Системный раздел EFI">системный раздел EFI</a>, могут быть смонтированы с помощью отредактированных mount-юнитов. Добавление <code>noauto,x-systemd.automount</code> к опциям монтирования будет буферизировать весь доступ к этому разделу, а также будет выполнять проверку и монтировать его в момент первого обращения, таким образом уменьшая количество файловых систем, которые нужно проверять/монтировать в процессе загрузки.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Примечание:</strong> 
+<ul>
+<li>Это изменит тип файловой системы <code>/home</code> на <code>autofs</code>, который <a href="../../ru/Locate.html" title="Locate (Русский)">locate</a> по умолчанию игнорирует. В зависимости от системы, ускорение от отложенного монтирования <code>/home</code> может составлять около секунды-двух, так что, возможно, это не стоит того.</li>
+<li>Если система установлена в <a href="../../ru/Btrfs.html#%D0%9C%D0%BE%D0%BD%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5_%D0%BF%D0%BE%D0%B4%D1%82%D0%BE%D0%BC%D0%B0_%D0%B2_%D0%BA%D0%B0%D1%87%D0%B5%D1%81%D1%82%D0%B2%D0%B5_%D0%BA%D0%BE%D1%80%D0%BD%D1%8F" title="Btrfs (Русский)">подтом btrfs</a> (то есть корневой каталог <code>/</code> сам по себе является подтомом), а <code>/home</code> находится на отдельной файловой системе, вы можете захотеть предотвратить создание подтома <code>/home</code>. Замаскируйте tmpfiles-настройку <code>home.conf</code>: <code>ln -s /dev/null /etc/tmpfiles.d/home.conf</code>.</li>
+</ul>
+</div>
+<h2>
+<span id=".D0.A3.D0.BC.D0.B5.D0.BD.D1.8C.D1.88.D0.B5.D0.BD.D0.B8.D0.B5_.D0.B2.D1.8B.D0.B2.D0.BE.D0.B4.D0.B0_.D0.B2.D0.BE_.D0.B2.D1.80.D0.B5.D0.BC.D1.8F_.D0.B7.D0.B0.D0.B3.D1.80.D1.83.D0.B7.D0.BA.D0.B8"></span><span class="mw-headline" id="Уменьшение_вывода_во_время_загрузки">Уменьшение вывода во время загрузки</span>
+</h2>
+<p>На некоторых системах, особенно с SSD, узким местом процесса загрузки может оказаться медленный TTY, поэтому меньший объём выводимого в консоль текста означает более быструю загрузку. Смотрите статью <a href="../../ru/Silent_boot.html" class="mw-redirect" title="Тихая загрузка">Тихая загрузка</a> для более подробной информации.
+</p>
+<h2>
+<span id=".D0.98.D0.B7.D0.BC.D0.B5.D0.BD.D0.B5.D0.BD.D0.B8.D0.B5_.D0.B7.D0.B0.D0.B3.D1.80.D1.83.D0.B7.D1.87.D0.B8.D0.BA.D0.B0"></span><span class="mw-headline" id="Изменение_загрузчика">Изменение загрузчика</span>
+</h2>
+<p>Изменение <a href="../../ru/Arch_boot_process.html#%D0%97%D0%B0%D0%B3%D1%80%D1%83%D0%B7%D1%87%D0%B8%D0%BA" title="Arch boot process (Русский)">загрузчика</a> (например, на более простой, такой как <a href="../../ru/Systemd-boot.html" title="Systemd-boot (Русский)">systemd-boot</a>), может сэкономить несколько секунд.
+</p>
+<p>Если есть возможность использовать <a href="../../en/EFI_boot_stub.html" class="mw-redirect" title="EFISTUB (Русский)">EFISTUB</a>, это сэкономит ещё больше времени.
+</p>
+<h2>
+<span id=".D0.96.D0.B4.D1.83.D1.89.D0.B8.D0.B9_.D1.80.D0.B5.D0.B6.D0.B8.D0.BC"></span><span class="mw-headline" id="Ждущий_режим">Ждущий режим</span>
+</h2>
+<p>Лучший способ сократить время включения системы — не выключать её вообще. Попробуйте вместо выключения использовать <a href="../../ru/Power_management/Suspend_and_hibernate.html" title="Power management (Русский)/Suspend and hibernate (Русский)">ждущий режим</a>.
+</p>
+</div>
+</div>
+					<div id="catlinks" class="catlinks" data-mw="interface"><div id="mw-normal-catlinks" class="mw-normal-catlinks">
+<a href="../../Special:Categories.html" title="Special:Categories">Category</a>: <ul><li><a href="../../ru/Category:Boot_process.html" title="Category:Boot process (Русский)">Boot process (Русский)</a></li></ul>
+</div></div>
+				</div>
+			</main>
+			
+		</div>
+		<div class="mw-footer-container">
+			
+<footer id="footer" class="mw-footer" style="margin: 0">
+	<ul id="footer-info">
+	<li data-nosnippet="">Retrieved from "<a dir="ltr" href="https://wiki.archlinux.org/index.php?title=Improving_performance_(%D0%A0%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9)/Boot_process_(%D0%A0%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9)&amp;oldid=816991">https://wiki.archlinux.org/index.php?title=Improving_performance_(Русский)/Boot_process_(Русский)&amp;oldid=816991</a>"</li>
+<li id="footer-info-lastmod"> This page was last edited on 21 September 2024, at 15:24.</li>
+	<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+<br>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="https://terms.archlinux.org/docs/privacy-policy/">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="../../en/ArchWiki:About.html">About ArchWiki</a></li>
+	<li id="footer-places-disclaimers"><a href="../../en/ArchWiki:General_disclaimer.html">Disclaimers</a></li>
+	<li id="footer-places-archwiki-code-of-conduct"><a href="https://terms.archlinux.org/docs/code-of-conduct/" class="extiw" title="archlinux-service-agreements:code-of-conduct">Code of conduct</a></li>
+	<li id="footer-places-archwiki-terms-of-service"><a href="https://terms.archlinux.org/docs/terms-of-service/" class="extiw" title="archlinux-service-agreements:terms-of-service">Terms of service</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-copyrightico"><a href="https://www.gnu.org/copyleft/fdl.html" class="cdx-button cdx-button--fake-button cdx-button--size-large cdx-button--fake-button--enabled"><img src="/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" loading="lazy"></a></li>
+	<li id="footer-poweredbyico"><img src="/resources/assets/poweredby_mediawiki.svg" width="88" height="31" loading="lazy"></li>
+</ul>
+
+</footer>
+
+		</div>
+	</div> 
+</div> 
+<div class="vector-settings" id="p-dock-bottom">
+	<ul></ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-sticky-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-0 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-disabled skin-theme-clientpref-day vector-toc-available" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>Improving performance (Português)/Boot process (Português) - ArchWiki</title>
+<link rel="stylesheet" href="../../ArchWikiOffline.css">
+<meta name="ResourceLoaderDynamicStyles" content="">
+<meta name="generator" content="MediaWiki 1.43.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="max-image-preview:standard">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.25, maximum-scale=5.0">
+<link rel="search" type="application/opensearchdescription+xml" href="/rest.php/v1/search" title="ArchWiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.archlinux.org/api.php?action=rsd">
+<link rel="license" href="https://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="ArchWiki Atom feed" href="/index.php?title=Special:RecentChanges&amp;feed=atom">
+</head>
+<body class="skin--responsive skin-vector skin-vector-search-vue mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Improving_performance_Português_Boot_process_Português rootpage-Improving_performance_Português skin-vector-2022 action-view">
+<a class="mw-jump-link" href="#bodyContent">Jump to content</a>
+<div class="vector-header-container">
+	</div>
+<div class="mw-page-container">
+	<div class="mw-page-container-inner">
+		<div class="vector-column-start">
+			<div class="vector-main-menu-container">
+		</div>
+	<div class="vector-sticky-pinned-container">
+				<nav id="mw-panel-toc" aria-label="Contents" data-event-name="ui.sidebar-toc" class="mw-table-of-contents-container vector-toc-landmark">
+					<div id="vector-toc-pinned-container" class="vector-pinned-container">
+					<div id="vector-toc" class="vector-toc vector-pinnable-element">
+	<div class="vector-pinnable-header vector-toc-pinnable-header vector-pinnable-header-pinned" data-feature-name="toc-pinned" data-pinnable-element-id="vector-toc">
+	<h2 class="vector-pinnable-header-label">Contents</h2>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-toc.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-toc.unpin">hide</button>
+</div>
+
+
+	<ul class="vector-toc-contents" id="mw-panel-toc-list">
+		<li id="toc-mw-content-text" class="vector-toc-list-item vector-toc-level-1">
+			<a href="#" class="vector-toc-link">
+				<div class="vector-toc-text">Beginning</div>
+			</a>
+		</li>
+		<li id="toc-Analisando_o_processo_de_inicialização" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Analisando_o_processo_de_inicializa%C3%A7%C3%A3o">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">1</span>
+				<span>Analisando o processo de inicialização</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Analisando_o_processo_de_inicialização-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Analisando o processo de inicialização subsection</span>
+			</button>
+		
+		<ul id="toc-Analisando_o_processo_de_inicialização-sublist" class="vector-toc-list">
+			<li id="toc-Usando_systemd-analyze" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Usando_systemd-analyze">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.1</span>
+					<span>Usando systemd-analyze</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Usando_systemd-analyze-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Usando_bootchart2" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Usando_bootchart2">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.2</span>
+					<span>Usando bootchart2</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Usando_bootchart2-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Compilando_um_kernel_personalizado" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Compilando_um_kernel_personalizado">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">2</span>
+				<span>Compilando um kernel personalizado</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Compilando_um_kernel_personalizado-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Initramfs" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Initramfs">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">3</span>
+				<span>Initramfs</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Initramfs-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Início_antecipado_para_serviços" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#In%C3%ADcio_antecipado_para_servi%C3%A7os">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">4</span>
+				<span>Início antecipado para serviços</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Início_antecipado_para_serviços-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Rotação_escalonada" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Rota%C3%A7%C3%A3o_escalonada">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">5</span>
+				<span>Rotação escalonada</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Rotação_escalonada-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Montagem_dos_sistemas_de_arquivos" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Montagem_dos_sistemas_de_arquivos">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">6</span>
+				<span>Montagem dos sistemas de arquivos</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Montagem_dos_sistemas_de_arquivos-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Menos_saída_durante_a_inicialização" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Menos_sa%C3%ADda_durante_a_inicializa%C3%A7%C3%A3o">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">7</span>
+				<span>Menos saída durante a inicialização</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Menos_saída_durante_a_inicialização-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Suspensão_para_RAM" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Suspens%C3%A3o_para_RAM">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">8</span>
+				<span>Suspensão para RAM</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Suspensão_para_RAM-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+</ul>
+</div>
+
+					</div>
+		</nav>
+			</div>
+		</div>
+		<div class="mw-content-container">
+			<main id="content" class="mw-body" style="margin: 0">
+				<header class="mw-body-header vector-page-titlebar">
+					<nav aria-label="Contents" class="vector-toc-landmark">
+						
+<div id="vector-page-titlebar-toc" class="vector-dropdown vector-page-titlebar-toc vector-button-flush-left">
+	<input type="checkbox" id="vector-page-titlebar-toc-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-page-titlebar-toc" class="vector-dropdown-checkbox " aria-label="Toggle the table of contents">
+	<label id="vector-page-titlebar-toc-label" for="vector-page-titlebar-toc-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"><span class="vector-icon mw-ui-icon-listBullet mw-ui-icon-wikimedia-listBullet"></span>
+
+<span class="vector-dropdown-label-text">Toggle the table of contents</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+							<div id="vector-page-titlebar-toc-unpinned-container" class="vector-unpinned-container">
+			</div>
+		
+	</div>
+</div>
+
+					</nav>
+					<h1 id="firstHeading" class="firstHeading mw-first-heading"><span class="mw-page-title-main">Improving performance (Português)/Boot process (Português)</span></h1>
+							
+<div id="p-lang-btn" class="vector-dropdown mw-portlet mw-portlet-lang">
+	<input type="checkbox" id="p-lang-btn-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-p-lang-btn" class="vector-dropdown-checkbox mw-interlanguage-selector" aria-label="Go to an article in another language. Available in 5 languages">
+	<label id="p-lang-btn-label" for="p-lang-btn-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--action-progressive mw-portlet-lang-heading-5" aria-hidden="true"><span class="vector-icon mw-ui-icon-language-progressive mw-ui-icon-wikimedia-language-progressive"></span>
+
+<span class="vector-dropdown-label-text">5 languages</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+		<div class="vector-menu-content">
+			
+			<ul class="vector-menu-content-list">
+				
+				<li class="interlanguage-link interwiki-en mw-list-item"><a href="../../en/Improving_performance/Boot_process.html" title="Improving performance/Boot process – English" lang="en" hreflang="en" data-title="Improving performance/Boot process" data-language-autonym="English" data-language-local-name="English" class="interlanguage-link-target"><span>English</span></a></li>
+<li class="interlanguage-link interwiki-es mw-list-item"><a href="../../es/Improving_performance/Boot_process.html" title="Improving performance (Español)/Boot process – español" lang="es" hreflang="es" data-title="Improving performance (Español)/Boot process" data-language-autonym="Español" data-language-local-name="español" class="interlanguage-link-target"><span>Español</span></a></li>
+<li class="interlanguage-link interwiki-fr mw-list-item"><a href="../../fr/Improving_performance/Boot_process.html" title="Improving performance (Français)/Boot process – français" lang="fr" hreflang="fr" data-title="Improving performance (Français)/Boot process" data-language-autonym="Français" data-language-local-name="français" class="interlanguage-link-target"><span>Français</span></a></li>
+<li class="interlanguage-link interwiki-ja mw-list-item"><a href="https://wiki.archlinux.jp/index.php/%E3%83%91%E3%83%95%E3%82%A9%E3%83%BC%E3%83%9E%E3%83%B3%E3%82%B9%E3%81%AE%E5%90%91%E4%B8%8A/%E3%83%96%E3%83%BC%E3%83%88%E3%83%97%E3%83%AD%E3%82%BB%E3%82%B9" title="パフォーマンスの向上/ブートプロセス – 日本語" lang="ja" hreflang="ja" data-title="パフォーマンスの向上/ブートプロセス" data-language-autonym="日本語" data-language-local-name="日本語" class="interlanguage-link-target"><span>日本語</span></a></li>
+<li class="interlanguage-link interwiki-ru mw-list-item"><a href="../../ru/Improving_performance/Boot_process.html" title="Improving performance (Русский)/Boot process – русский" lang="ru" hreflang="ru" data-title="Improving performance (Русский)/Boot process" data-language-autonym="Русский" data-language-local-name="русский" class="interlanguage-link-target"><span>Русский</span></a></li>
+			</ul>
+			
+		</div>
+
+	</div>
+</div>
+</header>
+				<div class="vector-column-end">
+					<div class="vector-sticky-pinned-container">
+						<nav class="vector-page-tools-landmark" aria-label="Page tools">
+							<div id="vector-page-tools-pinned-container" class="vector-pinned-container">
+				
+							</div>
+		</nav>
+						<nav class="vector-appearance-landmark" aria-label="Appearance">
+							<div id="vector-appearance-pinned-container" class="vector-pinned-container">
+				<div id="vector-appearance" class="vector-appearance vector-pinnable-element">
+	<div class="vector-pinnable-header vector-appearance-pinnable-header vector-pinnable-header-pinned" data-feature-name="appearance-pinned" data-pinnable-element-id="vector-appearance" data-pinned-container-id="vector-appearance-pinned-container" data-unpinned-container-id="vector-appearance-unpinned-container">
+	<div class="vector-pinnable-header-label">Appearance</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-appearance.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-appearance.unpin">hide</button>
+</div>
+
+
+</div>
+
+							</div>
+		</nav>
+					</div>
+				</div>
+				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container>
+					<div class="vector-body-before-content">
+							<div class="mw-indicators">
+		</div>
+
+						<div id="siteSub" class="noprint">From ArchWiki</div>
+					</div>
+					<div id="contentSub"><div id="mw-content-subtitle"><div class="subpages">&lt; <bdi dir="ltr"><a href="../../pt/Improving_performance.html" title="Improving performance (Português)">Improving performance (Português)</a></bdi>
+</div></div></div>
+					
+					
+					<div id="mw-content-text" class="mw-body-content">
+<div class="mw-content-ltr mw-parser-output" lang="pt" dir="ltr">
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Status de tradução:</strong> Esse artigo é uma tradução de <a href="../../en/Improving_performance/Boot_process.html" title="Improving performance/Boot process">Improving performance/Boot process</a>. Data da última tradução: 2020-04-09. Você pode ajudar a sincronizar a tradução, se houver <a rel="nofollow" class="external text" href="https://wiki.archlinux.org/index.php?title=Improving_performance/Boot_process&amp;diff=0&amp;oldid=605217">alterações</a> na versão em inglês.</div>
+<div class="archwiki-template-meta-related-articles">
+<p>Artigos relacionados</p>
+<ul>
+<li><a href="../../pt/Improving_performance.html" class="mw-redirect" title="Melhorando o desempenho">Melhorando o desempenho</a></li>
+<li><a href="../../pt/Silent_boot.html" class="mw-redirect" title="Inicialização silenciosa">Inicialização silenciosa</a></li>
+<li><a href="../../pt/Daemons.html" class="mw-redirect" title="Daemon (Português)">Daemon</a></li>
+<li><a href="../../en/Kexec.html" title="Kexec">Kexec</a></li>
+</ul>
+</div>
+<p>Melhorar o desempenho de inicialização de um sistema pode fornecer tempos de espera de inicialização reduzidos e um meio de aprender mais sobre como certos arquivos e scripts do sistema interagem entre si. Este artigo tenta agregar métodos sobre como melhorar o desempenho de inicialização de um sistema Arch Linux.
+</p>
+<meta property="mw:PageProp/toc">
+<h2>
+<span id="Analisando_o_processo_de_inicializa.C3.A7.C3.A3o"></span><span class="mw-headline" id="Analisando_o_processo_de_inicialização">Analisando o processo de inicialização</span>
+</h2>
+<h3><span class="mw-headline" id="Usando_systemd-analyze">Usando systemd-analyze</span></h3>
+<p><a href="../../pt/Systemd.html" title="Systemd (Português)">systemd</a> fornece uma ferramenta chamada <code>systemd-analyze</code> que pode ser usada para mostrar detalhes de tempo sobre o processo de inicialização, incluindo um gráfico svg mostrando as unidades aguardando suas dependências. Você pode ver quais arquivos da unidade estão causando uma lentidão no processo de inicialização. Você pode otimizar seu sistema adequadamente.
+</p>
+<p>Para ver quanto tempo foi gasto no kernelspace e no espaço do usuário na inicialização, basta usar:
+</p>
+<pre>$ systemd-analyze
+</pre>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Dica:</strong> Se você inicializar via <a href="../../en/Unified_Extensible_Firmware_Interface.html" class="mw-redirect" title="UEFI">UEFI</a> e usar um gerenciador de inicialização que implemente a <a rel="nofollow" class="external text" href="https://systemd.io/BOOT_LOADER_INTERFACE/">Boot Loader Interface</a> do systemd (que atualmente <a href="../../pt/Systemd-boot.html" title="Systemd-boot (Português)">systemd-boot</a> e <a href="../../pt/GRUB.html" title="GRUB (Português)">GRUB</a> do), <i>systemd-analyze</i> também pode mostrar quanto tempo foi gasto no firmware EFI e no próprio carregador de inicialização.</div>
+<p>Para listar os arquivos da unidade iniciada, classificados pelo tempo que cada um deles levou para iniciar:
+</p>
+<pre>$ systemd-analyze blame
+</pre>
+<p>Em alguns pontos do processo de inicialização, as coisas não podem continuar até que uma determinada unidade seja bem-sucedida. Para ver quais unidades se encontram nesses pontos críticos da cadeia de inicialização, faça:
+</p>
+<pre>$ systemd-analyze critical-chain
+</pre>
+<p>Você também pode criar um arquivo SVG que descreva graficamente seu processo de inicialização, semelhante a <a href="../../en/Bootchart.html" title="Bootchart">Bootchart</a>:
+</p>
+<pre>$ systemd-analyze plot &gt; plot.svg
+</pre>
+<p>Consulte <span class="plainlinks archwiki-template-man" title="$ man 1 systemd-analyze"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd-analyze.1">systemd-analyze(1)</a></span> para detalhes.
+</p>
+<h3><span class="mw-headline" id="Usando_bootchart2">Usando bootchart2</span></h3>
+<p>Você também pode usar uma versão do bootchart para visualizar a sequência de inicialização. Como você não pode colocar um segundo init na linha de comando do kernel, não poderá usar nenhuma das configurações padrão do bootchart. No entanto, o pacote <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/bootchart2/">bootchart2</a></span><sup><small>AUR</small></sup> do <a href="../../pt/Arch_User_Repository.html" class="mw-redirect" title="AUR (Português)">AUR</a> vem com um serviço <b>systemd</b> não documentado. Depois de instalar o bootchart2, faça:
+</p>
+<pre># systemctl enable bootchart2
+</pre>
+<p>Você pode visualizar os resultados abrindo <code>/var/log/bootchart.png</code> ou, se desejar mais recursos, iniciando:
+</p>
+<pre>$ pybootchartgui -i
+</pre>
+<p>Leia a <a rel="nofollow" class="external text" href="https://github.com/mmeeks/bootchart">documentação do bootchart2</a> para obter mais detalhes sobre o uso desta versão do bootchart.
+</p>
+<h2><span class="mw-headline" id="Compilando_um_kernel_personalizado">Compilando um kernel personalizado</span></h2>
+<p>A compilação de um kernel personalizado pode reduzir o tempo de inicialização e o uso de memória. Embora com a padronização da arquitetura de 64 bits e a natureza modular do kernel Linux, esses benefícios não sejam tão grandes quanto o esperado. Consulte <a href="../../pt/Kernel.html#Compila%C3%A7%C3%A3o" title="Kernel (Português)">Kernel#Compilação</a> para mais informações.
+</p>
+<h2><span class="mw-headline" id="Initramfs">Initramfs</span></h2>
+<p>Em uma abordagem semelhante a <a href="#Compilando_um_kernel_personalizado">#Compilando um kernel personalizado</a>, o initramfs pode ser reduzido. Uma maneira simples é incluir o hook <code>autodetect</code> do <a href="../../pt/Mkinitcpio.html" title="Mkinitcpio (Português)">mkinitcpio</a>. Se você quiser ir além disso, consulte <a href="../../en/Mkinitcpio/Minimal_initramfs.html" class="mw-redirect" title="Minimal initramfs">Minimal initramfs</a>.
+</p>
+<h2>
+<span id="In.C3.ADcio_antecipado_para_servi.C3.A7os"></span><span class="mw-headline" id="Início_antecipado_para_serviços">Início antecipado para serviços</span>
+</h2>
+<p>Um recurso central do systemd é o <a href="../../en/D-Bus.html" title="D-Bus">D-Bus</a> e a ativação do soquete. Isso faz com que os serviços sejam iniciados quando são acessados pela primeira vez e geralmente é uma coisa boa. No entanto, se você souber que um serviço (como <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=upower">upower</a></span>) sempre será iniciado durante a inicialização, o tempo total de inicialização poderá ser reduzido iniciando-o o mais cedo possível. Isso pode ser alcançado (se o arquivo de serviço estiver configurado para ele, o que na maioria dos casos é) emitindo:
+</p>
+<pre># systemctl enable upower
+</pre>
+<p>Isso fará com que o systemd inicie o UPower o mais rápido possível, sem causar corridas com a ativação do D-Bus ou soquete.
+</p>
+<h2>
+<span id="Rota.C3.A7.C3.A3o_escalonada"></span><span class="mw-headline" id="Rotação_escalonada">Rotação escalonada</span>
+</h2>
+<p>Alguns implementos de hardware <a href="https://en.wikipedia.org/wiki/Spin-up#Staggered_spin-up" class="extiw" title="wikipedia:Spin-up">rotação escalonada (ou <i>staggered spin-up</i>)</a>, o que faz com que o sistema operacional examine as interfaces ATA em série, o que pode girar as unidades um a um e reduzir o consumo de energia de pico. Isso diminui a velocidade de inicialização e, na maioria dos hardwares de consumo, não oferece benefícios, pois as unidades já irão girar imediatamente quando a energia for ligada. Para verificar se SSS está sendo usado:
+</p>
+<pre># dmesg | grep SSS
+</pre>
+<p>Se não foi usado durante a inicialização, não haverá saída.
+</p>
+<p>Para desativá-lo, adicione <a href="../../pt/Kernel_parameters.html" class="mw-redirect" title="Parâmetro do kernel">parâmetro do kernel</a> <code>libahci.ignore_sss=1</code>.
+</p>
+<h2><span class="mw-headline" id="Montagem_dos_sistemas_de_arquivos">Montagem dos sistemas de arquivos</span></h2>
+<p>Graças ao hook <code>fsck</code> do <a href="../../pt/Mkinitcpio.html" title="Mkinitcpio (Português)">mkinitcpio</a>, você pode evitar uma remontagem possivelmente cara da partição raiz alterando <code>ro</code> para <code>rw</code> na linha do kernel: as opções podem ser definidas com <code>rootflags=<b>rw</b>, <i>outros_pontos_de_montagem</i></code>. A entrada deve ser removida do arquivo <code>/etc/fstab</code>, caso contrário, o <code>systemd-remount-fs.service</code> continuará tentando aplicar essas configurações. Como alternativa, pode-se tentar mascarar essa unit.
+</p>
+<p>Se o <a href="../../en/Btrfs.html" title="Btrfs">btrfs</a> estiver em uso para o sistema de arquivos raiz, não há necessidade de um fsck em cada inicialização, como outros sistemas de arquivos. Se for esse o caso, o gancho <code>fsck</code> de <a href="../../pt/Mkinitcpio.html" title="Mkinitcpio (Português)">mkinitcpio</a> pode ser removido. Você também pode mascarar o <code>systemd-fsck-root.service</code> ou pedir para não fsck o sistema de arquivos raiz na linha de comando do kernel usando <code>fsck.mode=skip</code>. Sem o hook <code>fsck</code> de <a href="../../pt/Mkinitcpio.html" title="Mkinitcpio (Português)">mkinitcpio</a>, o systemd ainda fsck qualquer sistema de arquivos relevante com o <code>systemd-fsck@.service</code>
+</p>
+<p>Você também pode remover os sistemas de arquivos de API do <code>/etc/fstab</code>, pois o systemd os montará (consulte <code>pacman -Ql systemd | grep '\.mount$'</code> para uma lista). Não é incomum que os usuários tenham uma entrada <code>/tmp</code> transferida do sysvinit, mas você deve ter notado no comando acima que o systemd já cuida disso. Portanto, ele pode ser removido com segurança.
+</p>
+<p>Outros sistemas de arquivos como <code>/home</code> ou <a href="../../pt/EFI_system_partition.html" class="mw-redirect" title="Partição de sistema EFI">partição de sistema EFI</a> podem ser montados com unidades de montagem personalizadas. Adicionar <code>noauto,x-systemd.automount</code> às opções de montagem armazenará em buffer todo o acesso a essa partição e vai executar fsck e mount no primeiro acesso, reduzindo o número de sistemas de arquivos que eles devem fsck/montar durante o processo de inicialização.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Nota:</strong> 
+<ul>
+<li>Isso tornará seu sistema de arquivos <code>/home</code> tipo <code>autofs</code>, que é ignorado por <a href="../../pt/Locate.html" title="Locate (Português)">locate</a> por padrão. A aceleração da montagem automática <code>/home</code> pode não ser superior a um segundo ou dois, dependendo do seu sistema, portanto, esse truque pode não valer a pena.</li>
+<li>Se o sistema estiver instalado em um subvolume <i>btrfs</i> (especificamente: o próprio diretório raiz <code>/</code> é um subvolume) e <code>/home</code> é um sistema de arquivos separado, você também pode desejar para impedir a criação de um subvolume <code>/home</code>. Mascare o arquivo tmp <code>home.conf</code>: <code>ln -s /dev/null /etc/tmpfiles.d/home.conf</code>.</li>
+</ul>
+</div>
+<h2>
+<span id="Menos_sa.C3.ADda_durante_a_inicializa.C3.A7.C3.A3o"></span><span class="mw-headline" id="Menos_saída_durante_a_inicialização">Menos saída durante a inicialização</span>
+</h2>
+<p>Para alguns sistemas, particularmente aqueles com um SSD, o desempenho lento do TTY é realmente um gargalo e, portanto, menos saída significa uma inicialização mais rápida. Consulte o artigo <a href="../../pt/Silent_boot.html" class="mw-redirect" title="Inicialização silenciosa">Inicialização silenciosa</a> para obter sugestões.
+</p>
+<h2>
+<span id="Suspens.C3.A3o_para_RAM"></span><span class="mw-headline" id="Suspensão_para_RAM">Suspensão para RAM</span>
+</h2>
+<p>A melhor maneira de reduzir o tempo de inicialização é não inicializar. Considere <a href="../../pt/Power_management/Suspend_and_hibernate.html" class="mw-redirect" title="Suspender e hibernar">suspender seu sistema para a RAM</a>.
+</p>
+</div>
+</div>
+					<div id="catlinks" class="catlinks" data-mw="interface"><div id="mw-normal-catlinks" class="mw-normal-catlinks">
+<a href="../../Special:Categories.html" title="Special:Categories">Category</a>: <ul><li><a href="../../pt/Category:Boot_process.html" title="Category:Boot process (Português)">Boot process (Português)</a></li></ul>
+</div></div>
+				</div>
+			</main>
+			
+		</div>
+		<div class="mw-footer-container">
+			
+<footer id="footer" class="mw-footer" style="margin: 0">
+	<ul id="footer-info">
+	<li data-nosnippet="">Retrieved from "<a dir="ltr" href="https://wiki.archlinux.org/index.php?title=Improving_performance_(Portugu%C3%AAs)/Boot_process_(Portugu%C3%AAs)&amp;oldid=816701">https://wiki.archlinux.org/index.php?title=Improving_performance_(Português)/Boot_process_(Português)&amp;oldid=816701</a>"</li>
+<li id="footer-info-lastmod"> This page was last edited on 16 September 2024, at 16:20.</li>
+	<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+<br>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="https://terms.archlinux.org/docs/privacy-policy/">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="../../en/ArchWiki:About.html">About ArchWiki</a></li>
+	<li id="footer-places-disclaimers"><a href="../../en/ArchWiki:General_disclaimer.html">Disclaimers</a></li>
+	<li id="footer-places-archwiki-code-of-conduct"><a href="https://terms.archlinux.org/docs/code-of-conduct/" class="extiw" title="archlinux-service-agreements:code-of-conduct">Code of conduct</a></li>
+	<li id="footer-places-archwiki-terms-of-service"><a href="https://terms.archlinux.org/docs/terms-of-service/" class="extiw" title="archlinux-service-agreements:terms-of-service">Terms of service</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-copyrightico"><a href="https://www.gnu.org/copyleft/fdl.html" class="cdx-button cdx-button--fake-button cdx-button--size-large cdx-button--fake-button--enabled"><img src="/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" loading="lazy"></a></li>
+	<li id="footer-poweredbyico"><img src="/resources/assets/poweredby_mediawiki.svg" width="88" height="31" loading="lazy"></li>
+</ul>
+
+</footer>
+
+		</div>
+	</div> 
+</div> 
+<div class="vector-settings" id="p-dock-bottom">
+	<ul></ul>
+</div>
+</body>
+</html>

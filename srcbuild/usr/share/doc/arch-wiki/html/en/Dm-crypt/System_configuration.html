@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-sticky-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-0 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-disabled skin-theme-clientpref-day vector-toc-available" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>dm-crypt/System configuration - ArchWiki</title>
+<link rel="stylesheet" href="../../ArchWikiOffline.css">
+<meta name="ResourceLoaderDynamicStyles" content="">
+<meta name="generator" content="MediaWiki 1.43.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="max-image-preview:standard">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.25, maximum-scale=5.0">
+<link rel="search" type="application/opensearchdescription+xml" href="/rest.php/v1/search" title="ArchWiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.archlinux.org/api.php?action=rsd">
+<link rel="license" href="https://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="ArchWiki Atom feed" href="/index.php?title=Special:RecentChanges&amp;feed=atom">
+</head>
+<body class="skin--responsive skin-vector skin-vector-search-vue mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Dm-crypt_System_configuration rootpage-Dm-crypt skin-vector-2022 action-view">
+<a class="mw-jump-link" href="#bodyContent">Jump to content</a>
+<div class="vector-header-container">
+	</div>
+<div class="mw-page-container">
+	<div class="mw-page-container-inner">
+		<div class="vector-column-start">
+			<div class="vector-main-menu-container">
+		</div>
+	<div class="vector-sticky-pinned-container">
+				<nav id="mw-panel-toc" aria-label="Contents" data-event-name="ui.sidebar-toc" class="mw-table-of-contents-container vector-toc-landmark">
+					<div id="vector-toc-pinned-container" class="vector-pinned-container">
+					<div id="vector-toc" class="vector-toc vector-pinnable-element">
+	<div class="vector-pinnable-header vector-toc-pinnable-header vector-pinnable-header-pinned" data-feature-name="toc-pinned" data-pinnable-element-id="vector-toc">
+	<h2 class="vector-pinnable-header-label">Contents</h2>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-toc.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-toc.unpin">hide</button>
+</div>
+
+
+	<ul class="vector-toc-contents" id="mw-panel-toc-list">
+		<li id="toc-mw-content-text" class="vector-toc-list-item vector-toc-level-1">
+			<a href="#" class="vector-toc-link">
+				<div class="vector-toc-text">Beginning</div>
+			</a>
+		</li>
+		<li id="toc-Unlocking_in_early_userspace" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Unlocking_in_early_userspace">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">1</span>
+				<span>Unlocking in early userspace</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Unlocking_in_early_userspace-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Unlocking in early userspace subsection</span>
+			</button>
+		
+		<ul id="toc-Unlocking_in_early_userspace-sublist" class="vector-toc-list">
+			<li id="toc-mkinitcpio" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#mkinitcpio">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.1</span>
+					<span>mkinitcpio</span>
+				</div>
+			</a>
+			
+			<ul id="toc-mkinitcpio-sublist" class="vector-toc-list">
+				<li id="toc-Examples" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Examples">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.1.1</span>
+					<span>Examples</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Examples-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Kernel_parameters" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Kernel_parameters">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.2</span>
+					<span>Kernel parameters</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Kernel_parameters-sublist" class="vector-toc-list">
+				<li id="toc-root" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#root">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.2.1</span>
+					<span>root</span>
+				</div>
+			</a>
+			
+			<ul id="toc-root-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-resume" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#resume">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.2.2</span>
+					<span>resume</span>
+				</div>
+			</a>
+			
+			<ul id="toc-resume-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Using_encrypt_hook" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Using_encrypt_hook">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.2.3</span>
+					<span>Using encrypt hook</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Using_encrypt_hook-sublist" class="vector-toc-list">
+				<li id="toc-cryptdevice" class="vector-toc-list-item vector-toc-level-4">
+			<a class="vector-toc-link" href="#cryptdevice">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.2.3.1</span>
+					<span>cryptdevice</span>
+				</div>
+			</a>
+			
+			<ul id="toc-cryptdevice-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-cryptkey" class="vector-toc-list-item vector-toc-level-4">
+			<a class="vector-toc-link" href="#cryptkey">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.2.3.2</span>
+					<span>cryptkey</span>
+				</div>
+			</a>
+			
+			<ul id="toc-cryptkey-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-crypto" class="vector-toc-list-item vector-toc-level-4">
+			<a class="vector-toc-link" href="#crypto">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.2.3.3</span>
+					<span>crypto</span>
+				</div>
+			</a>
+			
+			<ul id="toc-crypto-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Using_systemd-cryptsetup-generator" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Using_systemd-cryptsetup-generator">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.2.4</span>
+					<span>Using systemd-cryptsetup-generator</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Using_systemd-cryptsetup-generator-sublist" class="vector-toc-list">
+				<li id="toc-rd.luks.uuid" class="vector-toc-list-item vector-toc-level-4">
+			<a class="vector-toc-link" href="#rd.luks.uuid">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.2.4.1</span>
+					<span>rd.luks.uuid</span>
+				</div>
+			</a>
+			
+			<ul id="toc-rd.luks.uuid-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-rd.luks.name" class="vector-toc-list-item vector-toc-level-4">
+			<a class="vector-toc-link" href="#rd.luks.name">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.2.4.2</span>
+					<span>rd.luks.name</span>
+				</div>
+			</a>
+			
+			<ul id="toc-rd.luks.name-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-rd.luks.key" class="vector-toc-list-item vector-toc-level-4">
+			<a class="vector-toc-link" href="#rd.luks.key">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.2.4.3</span>
+					<span>rd.luks.key</span>
+				</div>
+			</a>
+			
+			<ul id="toc-rd.luks.key-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-rd.luks.options" class="vector-toc-list-item vector-toc-level-4">
+			<a class="vector-toc-link" href="#rd.luks.options">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.2.4.4</span>
+					<span>rd.luks.options</span>
+				</div>
+			</a>
+			
+			<ul id="toc-rd.luks.options-sublist" class="vector-toc-list">
+				<li id="toc-Timeout" class="vector-toc-list-item vector-toc-level-5">
+			<a class="vector-toc-link" href="#Timeout">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.2.4.4.1</span>
+					<span>Timeout</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Timeout-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Password_echo" class="vector-toc-list-item vector-toc-level-5">
+			<a class="vector-toc-link" href="#Password_echo">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.2.4.4.2</span>
+					<span>Password echo</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Password_echo-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Trusted_Platform_Module_and_FIDO2_keys" class="vector-toc-list-item vector-toc-level-5">
+			<a class="vector-toc-link" href="#Trusted_Platform_Module_and_FIDO2_keys">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.2.4.4.3</span>
+					<span>Trusted Platform Module and FIDO2 keys</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Trusted_Platform_Module_and_FIDO2_keys-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-rd.luks.data" class="vector-toc-list-item vector-toc-level-4">
+			<a class="vector-toc-link" href="#rd.luks.data">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.2.4.5</span>
+					<span>rd.luks.data</span>
+				</div>
+			</a>
+			
+			<ul id="toc-rd.luks.data-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+	</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Unlocking_in_late_userspace" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Unlocking_in_late_userspace">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">2</span>
+				<span>Unlocking in late userspace</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Unlocking_in_late_userspace-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Unlocking in late userspace subsection</span>
+			</button>
+		
+		<ul id="toc-Unlocking_in_late_userspace-sublist" class="vector-toc-list">
+			<li id="toc-crypttab" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#crypttab">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1</span>
+					<span>crypttab</span>
+				</div>
+			</a>
+			
+			<ul id="toc-crypttab-sublist" class="vector-toc-list">
+				<li id="toc-Mounting_at_boot_time" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Mounting_at_boot_time">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1.1</span>
+					<span>Mounting at boot time</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Mounting_at_boot_time-sublist" class="vector-toc-list">
+				<li id="toc-Unlocking_with_a_keyfile" class="vector-toc-list-item vector-toc-level-4">
+			<a class="vector-toc-link" href="#Unlocking_with_a_keyfile">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1.1.1</span>
+					<span>Unlocking with a keyfile</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Unlocking_with_a_keyfile-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Mounting_a_stacked_blockdevice" class="vector-toc-list-item vector-toc-level-4">
+			<a class="vector-toc-link" href="#Mounting_a_stacked_blockdevice">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1.1.2</span>
+					<span>Mounting a stacked blockdevice</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Mounting_a_stacked_blockdevice-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Mounting_on_demand" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Mounting_on_demand">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1.2</span>
+					<span>Mounting on demand</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Mounting_on_demand-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Troubleshooting" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Troubleshooting">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">3</span>
+				<span>Troubleshooting</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Troubleshooting-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Troubleshooting subsection</span>
+			</button>
+		
+		<ul id="toc-Troubleshooting-sublist" class="vector-toc-list">
+			<li id="toc-System_stuck_on_boot/password_prompt_does_not_show" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#System_stuck_on_boot/password_prompt_does_not_show">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1</span>
+					<span>System stuck on boot/password prompt does not show</span>
+				</div>
+			</a>
+			
+			<ul id="toc-System_stuck_on_boot/password_prompt_does_not_show-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Keyboard_or_keyfile_on_filesystem_unavailable_for_unlocking" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Keyboard_or_keyfile_on_filesystem_unavailable_for_unlocking">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.2</span>
+					<span>Keyboard or keyfile on filesystem unavailable for unlocking</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Keyboard_or_keyfile_on_filesystem_unavailable_for_unlocking-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+</ul>
+</div>
+
+					</div>
+		</nav>
+			</div>
+		</div>
+		<div class="mw-content-container">
+			<main id="content" class="mw-body" style="margin: 0">
+				<header class="mw-body-header vector-page-titlebar">
+					<nav aria-label="Contents" class="vector-toc-landmark">
+						
+<div id="vector-page-titlebar-toc" class="vector-dropdown vector-page-titlebar-toc vector-button-flush-left">
+	<input type="checkbox" id="vector-page-titlebar-toc-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-page-titlebar-toc" class="vector-dropdown-checkbox " aria-label="Toggle the table of contents">
+	<label id="vector-page-titlebar-toc-label" for="vector-page-titlebar-toc-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"><span class="vector-icon mw-ui-icon-listBullet mw-ui-icon-wikimedia-listBullet"></span>
+
+<span class="vector-dropdown-label-text">Toggle the table of contents</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+							<div id="vector-page-titlebar-toc-unpinned-container" class="vector-unpinned-container">
+			</div>
+		
+	</div>
+</div>
+
+					</nav>
+					<h1 id="firstHeading" class="firstHeading mw-first-heading">dm-crypt/System configuration</h1>
+							
+<div id="p-lang-btn" class="vector-dropdown mw-portlet mw-portlet-lang">
+	<input type="checkbox" id="p-lang-btn-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-p-lang-btn" class="vector-dropdown-checkbox mw-interlanguage-selector" aria-label="Go to an article in another language. Available in 3 languages">
+	<label id="p-lang-btn-label" for="p-lang-btn-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--action-progressive mw-portlet-lang-heading-3" aria-hidden="true"><span class="vector-icon mw-ui-icon-language-progressive mw-ui-icon-wikimedia-language-progressive"></span>
+
+<span class="vector-dropdown-label-text">3 languages</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+		<div class="vector-menu-content">
+			
+			<ul class="vector-menu-content-list">
+				
+				<li class="interlanguage-link interwiki-es mw-list-item"><a href="../../es/Dm-crypt/System_configuration.html" title="Dm-crypt (Español)/System configuration – español" lang="es" hreflang="es" data-title="Dm-crypt (Español)/System configuration" data-language-autonym="Español" data-language-local-name="español" class="interlanguage-link-target"><span>Español</span></a></li>
+<li class="interlanguage-link interwiki-ja mw-list-item"><a href="https://wiki.archlinux.jp/index.php/dm-crypt/%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E8%A8%AD%E5%AE%9A" title="dm-crypt/システム設定 – 日本語" lang="ja" hreflang="ja" data-title="dm-crypt/システム設定" data-language-autonym="日本語" data-language-local-name="日本語" class="interlanguage-link-target"><span>日本語</span></a></li>
+<li class="interlanguage-link interwiki-pt mw-list-item"><a href="../../pt/Dm-crypt/System_configuration.html" title="Dm-crypt (Português)/System configuration – português" lang="pt" hreflang="pt" data-title="Dm-crypt (Português)/System configuration" data-language-autonym="Português" data-language-local-name="português" class="interlanguage-link-target"><span>Português</span></a></li>
+			</ul>
+			
+		</div>
+
+	</div>
+</div>
+</header>
+				<div class="vector-column-end">
+					<div class="vector-sticky-pinned-container">
+						<nav class="vector-page-tools-landmark" aria-label="Page tools">
+							<div id="vector-page-tools-pinned-container" class="vector-pinned-container">
+				
+							</div>
+		</nav>
+						<nav class="vector-appearance-landmark" aria-label="Appearance">
+							<div id="vector-appearance-pinned-container" class="vector-pinned-container">
+				<div id="vector-appearance" class="vector-appearance vector-pinnable-element">
+	<div class="vector-pinnable-header vector-appearance-pinnable-header vector-pinnable-header-pinned" data-feature-name="appearance-pinned" data-pinnable-element-id="vector-appearance" data-pinned-container-id="vector-appearance-pinned-container" data-unpinned-container-id="vector-appearance-unpinned-container">
+	<div class="vector-pinnable-header-label">Appearance</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-appearance.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-appearance.unpin">hide</button>
+</div>
+
+
+</div>
+
+							</div>
+		</nav>
+					</div>
+				</div>
+				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container>
+					<div class="vector-body-before-content">
+							<div class="mw-indicators">
+		</div>
+
+						<div id="siteSub" class="noprint">From ArchWiki</div>
+					</div>
+					<div id="contentSub"><div id="mw-content-subtitle"><div class="subpages">&lt; <bdi dir="ltr"><a href="../../en/Dm-crypt.html" title="Dm-crypt">Dm-crypt</a></bdi>
+</div></div></div>
+					
+					
+					<div id="mw-content-text" class="mw-body-content">
+<div class="mw-content-ltr mw-parser-output" lang="en" dir="ltr">
+<p><span>
+</span>
+</p>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../../File:Tango-view-fullscreen.svg" decoding="async" width="48" height="48" class="mw-file-element"></span></span><b>This article or section needs expansion.</b></p>
+<div>
+<b>Reason:</b> Aggregate here all the generic information on system configuration from the other sub-articles of <a href="../../en/Dm-crypt.html" title="Dm-crypt">dm-crypt</a>. (Discuss in <a rel="nofollow" class="external text" href="../../en/Talk:Dm-crypt/System_configuration.html">Talk:Dm-crypt/System configuration</a>)</div>
+</div>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> 
+<ul>
+<li>If in need to remotely unlock root or other early-boot filesystems (headless machine, distant servers...), follow  the specific instructions from <a href="../../en/Dm-crypt/Specialties.html#Remote_unlocking_of_root_(or_other)_partition" title="Dm-crypt/Specialties">dm-crypt/Specialties#Remote unlocking of root (or other) partition</a>.</li>
+<li>To ease inputting UUIDs, PARTUUIDs, etc. in configuration files, you can install and use a <a href="../../en/List_of_applications/Documents.html#Text_editors" class="mw-redirect" title="Text editor">text editor</a> that supports inserting command output (e.g. <a href="../../en/Nano.html" title="Nano">nano</a> with <code>Ctrl+t</code>, <a href="../../en/Vim.html" title="Vim">Vim</a> or <a href="../../en/Neovim.html" title="Neovim">Neovim</a> with <code>:read</code> or <a href="../../en/Midnight_Commander.html#Modules" class="mw-redirect" title="Mcedit">mcedit</a> with <code>Alt+u</code>) and pass it <a href="../../en/Persistent_block_device_naming.html#Persistent_naming_methods" title="Persistent block device naming">the apropriate lsblk or blkid command</a>. Alternatively, you can install a <a href="../../en/List_of_applications/Utilities.html#Terminal_multiplexers" title="List of applications/Utilities">terminal multiplexer</a> and use its copy and paste functionality.</li>
+</ul>
+</div>
+<meta property="mw:PageProp/toc">
+<h2><span class="mw-headline" id="Unlocking_in_early_userspace">Unlocking in early userspace</span></h2>
+<p>Booting an encrypted root volume requires that the <a href="../../en/Arch_boot_process.html#initramfs" class="mw-redirect" title="Initramfs">initramfs</a> contains the necessary tools for early userspace to unlock the volume. The instructions on what to unlock are typically passed via <a href="../../en/Kernel_parameters.html" title="Kernel parameters">kernel parameters</a>.
+</p>
+<p>The following sections describe how to configure mkinitcpio and list which kernel parameters are required.
+</p>
+<h3><span class="mw-headline" id="mkinitcpio">mkinitcpio</span></h3>
+<p>Depending on the particular scenarios, a subset of the following <a href="../../en/Mkinitcpio.html#HOOKS" title="Mkinitcpio">mkinitcpio hooks</a> will have to be enabled:
+</p>
+<table class="wikitable">
+<tbody>
+<tr>
+<th>busybox</th>
+<th>systemd</th>
+<th>Use case
+</th>
+</tr>
+<tr>
+<td style="text-align: center;white-space:nowrap;">
+<code>encrypt</code>
+</td>
+<td style="text-align: center;white-space:nowrap;">
+<code>sd-encrypt</code>
+</td>
+<td>Needed when the root partition is encrypted or when an encrypted partition needs to be mounted <i>before</i> the root partition. Not needed in other cases as system initialization scripts like <code>/etc/crypttab</code> already take care of unlocking other non-root partitions. This hook must be placed <i>after</i> the <code>udev</code> or <code>systemd</code> hook.
+</td>
+</tr>
+<tr>
+<td colspan="2" style="text-align: center;white-space:nowrap;">
+<code>keyboard</code>
+</td>
+<td>Needed to make keyboards work in early userspace.
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> For systems that are booted with different hardware configurations (e.g. laptops with external keyboard vs. internal keyboard or <a href="https://en.wikipedia.org/wiki/Headless_computer" class="extiw" title="wikipedia:Headless computer">headless systems</a>), it is helpful to place this hook before <code>autodetect</code> in order to always include all keyboard drivers. Otherwise the external keyboard only works in early userspace if it was connected when creating the image.</div>
+</td>
+</tr>
+<tr>
+<td style="text-align: center;white-space:nowrap;">
+<code>keymap</code>
+</td>
+<td rowspan="2" style="text-align: center;white-space:nowrap;">
+<code>sd-vconsole</code>
+</td>
+<td>Provides support for non-US keymaps for typing encryption passwords; it must come <i>before</i> the <code>encrypt</code> hook, otherwise you will need to enter your encryption password using the default US keymap. Set your keymap in <code>/etc/vconsole.conf</code>, see <a href="../../en/Linux_console/Keyboard_configuration.html#Persistent_configuration" class="mw-redirect" title="Keyboard configuration in console">Keyboard configuration in console#Persistent configuration</a>.
+</td>
+</tr>
+<tr>
+<td style="text-align: center;white-space:nowrap;">
+<code>consolefont</code>
+</td>
+<td>Loads an alternative console font in early userspace. Set your font in <code>/etc/vconsole.conf</code>, see <a href="../../en/Linux_console.html#Persistent_configuration" title="Linux console">Linux console#Persistent configuration</a>.
+</td>
+</tr>
+</tbody>
+</table>
+<p><a href="../../en/Mkinitcpio.html#Common_hooks" title="Mkinitcpio">Other hooks</a> needed should be clear from other manual steps followed during the installation of the system.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> Remember to <a href="../../en/Mkinitcpio.html#Image_creation_and_activation" class="mw-redirect" title="Regenerate the initramfs">regenerate the initramfs</a> after making any changes to <code>/etc/mkinitcpio.conf</code>.</div>
+<h4><span class="mw-headline" id="Examples">Examples</span></h4>
+<p>A typical <code>/etc/mkinitcpio.conf</code> configuration using <code>encrypt</code> hook:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/mkinitcpio.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">...
+HOOKS=(base <b>udev</b> autodetect microcode modconf kms keyboard <b>keymap</b> <b>consolefont</b> block <b>encrypt</b> lvm2 filesystems fsck)
+...</pre>
+<p>A configuration with systemd-based initramfs using <code>sd-encrypt</code> hook:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/mkinitcpio.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">...
+HOOKS=(base <b>systemd</b> autodetect microcode modconf kms keyboard <b>sd-vconsole</b> block <b>sd-encrypt</b> lvm2 filesystems fsck)
+...</pre>
+<h3><span class="mw-headline" id="Kernel_parameters">Kernel parameters</span></h3>
+<p>The <a href="../../en/Kernel_parameters.html" title="Kernel parameters">kernel parameters</a> you need to specify depend on whether the <code>encrypt</code> hook or the <code>sd-encrypt</code> hook is being used. <code>root</code> and <code>resume</code> are specified the same way for both.
+</p>
+<h4><span class="mw-headline" id="root">root</span></h4>
+<p>The <code>root=</code> parameter specifies the <code><i>device</i></code> of the actual (decrypted) root file system:
+</p>
+<pre>root=<i>device</i>
+</pre>
+<ul>
+<li>If the file system is formatted directly on the decrypted device file this will be <code>/dev/mapper/<i>dmname</i></code>.</li>
+<li>If a LVM gets activated first and contains an <a href="../../en/Dm-crypt/Encrypting_an_entire_system.html#LUKS_on_LVM" title="Dm-crypt/Encrypting an entire system">encrypted logical rootvolume</a>, the above form applies as well.</li>
+<li>If the root file system is contained in a logical volume of a fully <a href="../../en/Dm-crypt/Encrypting_an_entire_system.html#LVM_on_LUKS" class="mw-redirect" title="Encrypted LVM">encrypted LVM</a>, the device mapper for it will be in the general form of <code>root=/dev/<i>volumegroup</i>/<i>logicalvolume</i></code>.</li>
+</ul>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> 
+<ul>
+<li>The specification of the <code>root=</code> parameter can be omitted when using the <code>sd-encrypt</code> hook and <a href="../../en/Systemd.html#GPT_partition_automounting" title="Systemd">GPT partition automounting</a>. See <a href="../../en/Dm-crypt/Encrypting_an_entire_system.html#Configuring_the_boot_loader" title="Dm-crypt/Encrypting an entire system">LUKS on a partition</a>.</li>
+<li>When using <a href="../../en/GRUB.html" title="GRUB">GRUB</a> and generating <code>grub.cfg</code> with <i>grub-mkconfig</i>, the <code>root=</code> parameter does not need to be specified manually. <i>grub-mkconfig</i> will determine the correct UUID of the decrypted root filesystem and add it to <code>grub.cfg</code> automatically.</li>
+</ul>
+</div>
+<h4><span class="mw-headline" id="resume">resume</span></h4>
+<pre>resume=<i>device</i>
+</pre>
+<ul><li>
+<code><i>device</i></code> is the device file of the decrypted (swap) filesystem used for <a href="../../en/Power_management/Suspend_and_hibernate.html#Hibernation" title="Power management/Suspend and hibernate">suspend to disk</a>. If swap is on a separate partition, it will be in the form of <code>/dev/mapper/swap</code>. See also <a href="../../en/Dm-crypt/Swap_encryption.html" title="Dm-crypt/Swap encryption">dm-crypt/Swap encryption</a>.</li></ul>
+<h4><span class="mw-headline" id="Using_encrypt_hook">Using encrypt hook</span></h4>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> Compared to the <a href="../../en/Dm-crypt/System_configuration.html#Using_systemd-cryptsetup-generator" class="mw-redirect" title="Sd-encrypt">sd-encrypt</a> hook, the <code>encrypt</code> hook does not support:
+<ul>
+<li>Unlocking <a href="../../en/Dm-crypt/Specialties.html#The_encrypt_hook_and_multiple_disks" title="Dm-crypt/Specialties">multiple encrypted disks</a> (<a rel="nofollow" class="external text" href="https://gitlab.archlinux.org/archlinux/mkinitcpio/mkinitcpio/-/issues/231">archlinux/mkinitcpio/mkinitcpio#231</a>). Only <b>one</b> device can be unlocked in the initramfs.</li>
+<li>Using a <a href="../../en/Dm-crypt/Specialties.html#Encrypted_system_using_a_detached_LUKS_header" title="Dm-crypt/Specialties">detached LUKS header</a> (<a rel="nofollow" class="external text" href="https://gitlab.archlinux.org/archlinux/mkinitcpio/mkinitcpio/-/issues/234">archlinux/mkinitcpio/mkinitcpio#234</a>).</li>
+<li>Setting additional options that are supported by <a href="#crypttab">crypttab</a>.</li>
+</ul>
+</div>
+<h5><span class="mw-headline" id="cryptdevice">cryptdevice</span></h5>
+<p>This specifies the device containing the encrypted root on a cold boot. It is parsed by the <code>encrypt</code> hook to identify which device contains the encrypted system:
+</p>
+<pre>cryptdevice=<i>device</i>:<i>dmname</i>:<i>options</i>
+</pre>
+<ul>
+<li>
+<code><i>device</i></code> is the path to the device backing the encrypted device. <a href="../../en/Persistent_block_device_naming.html#Kernel_parameters" title="Persistent block device naming">Usage of persistent block device naming</a> is strongly recommended.</li>
+<li>
+<code><i>dmname</i></code> is the <b>d</b>evice-<b>m</b>apper name given to the device after decryption, which will be available as <code>/dev/mapper/<i>dmname</i></code>.</li>
+<li>
+<code><i>options</i></code> (optional) are comma separated options, e.g. for TRIM support. If no options are required, omit this parameter (use <code>cryptdevice=<i>device</i>:<i>dmname</i></code>).</li>
+<li>If a LVM contains the <a href="../../en/Dm-crypt/Encrypting_an_entire_system.html#LUKS_on_LVM" title="Dm-crypt/Encrypting an entire system">encrypted root</a>, the LVM gets activated first and the volume group containing the logical volume of the encrypted root serves as <i>device</i>. It is then followed by the respective volume group to be mapped to root. The parameter follows the form of <code>cryptdevice=<i>/dev/vgname/lvname</i>:<i>dmname</i></code>.</li>
+</ul>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> One may want to <a href="../../en/Dm-crypt/Specialties.html#Discard/TRIM_support_for_solid_state_drives_(SSD)" title="Dm-crypt/Specialties">enable Discard/TRIM support</a> for solid state drives (SSD).</div>
+<h5><span class="mw-headline" id="cryptkey">cryptkey</span></h5>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> If a passphrase is to be used, the <code>cryptkey=</code> parameter does not need to be specified manually. You will then be prompted to enter the passphrase upon boot.</div>
+<p>This parameter specifies the location of a keyfile and is required by the <code><i>encrypt</i></code> hook for reading such a keyfile to unlock the <code><i>cryptdevice</i></code> (unless a key is in the default location, see below). It can have three parameter sets, depending on whether the keyfile exists as a file in a particular device, a bitstream starting on a specific location, or a file in the initramfs. 
+</p>
+<p>For a file in a device the format is:
+</p>
+<pre>cryptkey=<i>device</i>:<i>fstype</i>:<i>path</i>
+</pre>
+<ul>
+<li>
+<code><i>device</i></code> is the raw block device where the key exists. Usage of <a href="../../en/Persistent_block_device_naming.html" title="Persistent block device naming">persistent block device naming</a> is strongly recommended.</li>
+<li>
+<code><i>fstype</i></code> is the filesystem type of <code><i>device</i></code> (or auto).</li>
+<li>
+<code><i>path</i></code> is the absolute path of the keyfile within the device.</li>
+</ul>
+<p>Example: <code>cryptkey=LABEL=usbstick:vfat:/secretkey</code>
+</p>
+<p>For a bitstream on a device the key's location is specified with the following: 
+</p>
+<pre>cryptkey=<i>device</i>:<i>offset</i>:<i>size</i> 
+</pre>
+<p>where the offset and size are in bytes. For example, <code>cryptkey=UUID=<i>ZZZZZZZZ-ZZZZ-ZZZZ-ZZZZ-ZZZZZZZZZZZZ</i>:0:512</code> reads a 512 byte keyfile starting at the beginning of the device. 
+</p>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> If the device path you want to access contains the character <code>:</code>, you have to escape it with a backslash <code>\</code>. In that case the cryptkey parameter would be as follows: <code>cryptkey=/dev/disk/by-id/usb-123456-0\:0:0:512</code> for a USB key with the ID <code>usb-123456-0:0</code>.</div>
+<p>For a file <a href="../../en/Mkinitcpio.html#BINARIES_and_FILES" title="Mkinitcpio">included</a> in the initramfs the format is<a rel="nofollow" class="external autonumber" href="https://gitlab.archlinux.org/archlinux/packaging/packages/cryptsetup/-/blob/main/hooks-encrypt#L14">[1]</a>:
+</p>
+<pre>cryptkey=rootfs:<i>path</i>
+</pre>
+<p>Example: <code>cryptkey=rootfs:/secretkey</code>
+</p>
+<p>Also note that if <code>cryptkey</code> is not specified, it defaults to <code>/crypto_keyfile.bin</code> (in the initramfs).<a rel="nofollow" class="external autonumber" href="https://gitlab.archlinux.org/archlinux/packaging/packages/cryptsetup/-/blob/main/hooks-encrypt#L8">[2]</a>
+</p>
+<p>See also <a href="../../en/Dm-crypt/Device_encryption.html#Keyfiles" title="Dm-crypt/Device encryption">dm-crypt/Device encryption#Keyfiles</a>.
+</p>
+<h5><span class="mw-headline" id="crypto">crypto</span></h5>
+<p>This parameter is specific to pass <i>dm-crypt</i> plain mode options to the <i>encrypt</i> hook. 
+</p>
+<p>It takes the form
+</p>
+<pre>crypto=<i>hash</i>:<i>cipher</i>:<i>keysize</i>:<i>offset</i>:<i>skip</i>
+</pre>
+<p>The arguments relate directly to the <i>cryptsetup</i> options. See <a href="../../en/Dm-crypt/Device_encryption.html#Encryption_options_for_plain_mode" title="Dm-crypt/Device encryption">dm-crypt/Device encryption#Encryption options for plain mode</a>.
+</p>
+<p>For a disk encrypted with just <i>plain</i> default options, the <code>crypto</code> arguments must be specified, but each entry can be left blank: 
+</p>
+<pre>crypto=::::
+</pre>
+<p>A specific example of arguments is  
+</p>
+<pre>crypto=sha512:twofish-xts-plain64:512:0:
+</pre>
+<h4><span class="mw-headline" id="Using_systemd-cryptsetup-generator">Using systemd-cryptsetup-generator</span></h4>
+<p><i>systemd-cryptsetup-generator</i> is a <a href="../../en/Systemd.html" title="Systemd">systemd</a> unit generator that reads a subset of <a href="../../en/Kernel_parameters.html" title="Kernel parameters">kernel parameters</a>, and <code>/etc/crypttab</code>, for the purpose of unlocking encrypted devices. See the <span class="plainlinks archwiki-template-man" title="$ man 8 systemd-cryptsetup-generator"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd-cryptsetup-generator.8">systemd-cryptsetup-generator(8)</a></span> man page for more details about it and all options it supports.
+</p>
+<p><i>systemd-cryptsetup-generator</i> is run  during the <a href="../../en/Arch_boot_process.html#Early_userspace" title="Arch boot process">initramfs stage</a> when using the <code>sd-encrypt</code> <a href="../../en/Mkinitcpio.html#HOOKS" title="Mkinitcpio">mkinitcpio hook</a> or the <code>systemd</code> <a href="../../en/Dracut.html#dracut_modules" title="Dracut">dracut module</a>.
+</p>
+<p>In what follows, we describe some of the <a href="../../en/Kernel_parameters.html" title="Kernel parameters">kernel parameters</a> that <i>systemd-cryptsetup-generator</i> interprets.
+</p>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> 
+<ul>
+<li>If the file <code>/etc/crypttab.initramfs</code> exists, it will be added to the initramfs as <code>/etc/crypttab</code>, there you can specify devices that need to be unlocked at the initramfs phase. See <a href="#crypttab">#crypttab</a> for the syntax. If <code>/etc/crypttab.initramfs</code> does not exist, there will be no <code>/etc/crypttab</code> in the initramfs and the unlockable devices will need to be specified via kernel parameters listed below.</li>
+<li>
+<code>/etc/crypttab.initramfs</code> is not limited to using only UUID like <code>rd.luks</code>. You can use any of the <a href="../../en/Persistent_block_device_naming.html#Persistent_naming_methods" title="Persistent block device naming">persistent block device naming methods</a>.</li>
+<li>If all the prerequisites of <a href="../../en/Systemd.html#GPT_partition_automounting" title="Systemd">systemd#GPT partition automounting</a> are met, you can avoid hardcoding the root block device identifier (e.g. UUID, PARTUUID, etc.) in <code>/etc/crypttab.initramfs</code> by using <code>/dev/gpt-auto-root-luks</code> instead.</li>
+<li>Passwords entered during boot are cached in the kernel keyring by <span class="plainlinks archwiki-template-man" title="$ man 8 systemd-cryptsetup"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd-cryptsetup.8">systemd-cryptsetup(8)</a></span>, so if multiple devices can be unlocked with the same password (this includes devices in <a href="#crypttab">crypttab</a> that are unlocked after boot), then you will only need to input each password once.</li>
+</ul>
+</div>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> 
+<ul>
+<li>All of the <code>rd.luks</code> parameters can be specified multiple times to unlock multiple LUKS encrypted volumes.</li>
+<li>The <code>rd.luks</code> parameters only support unlocking LUKS devices. To unlock a plain dm-crypt device, you must specify it in <code>/etc/crypttab.initramfs</code>. See <a href="#crypttab">#crypttab</a> for the syntax.</li>
+</ul>
+</div>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Warning:</strong> If you are using <code>/etc/crypttab</code> or <code>/etc/crypttab.initramfs</code> together with <code>luks.*</code> or <code>rd.luks.*</code> parameters, only those devices specified on the kernel command line will be activated and you will see <code>Not creating device 'devicename' because it was not specified on the kernel command line.</code>. This is because the <code>luks.*</code> or <code>rd.luks.*</code> parameters control which devices from the crypttab get activated. To activate all devices in <code>/etc/crypttab</code> do not specify any <code>luks.*</code> parameters and use <code>rd.luks.*</code>. To activate all devices in <code>/etc/crypttab.initramfs</code> do not specify any <code>luks.*</code> or <code>rd.luks.*</code> parameters.</div>
+<h5><span class="mw-headline" id="rd.luks.uuid">rd.luks.uuid</span></h5>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> <code>rd.luks.uuid</code> can be omitted when using <code>rd.luks.name</code>.</div>
+<pre>rd.luks.uuid=<i>XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX</i>
+</pre>
+<p>Specify the <a href="../../en/Persistent_block_device_naming.html#by-uuid" class="mw-redirect" title="UUID">UUID</a> of the device to be decrypted on boot with this flag.
+</p>
+<p>By default, the mapped device will be located at <code>/dev/mapper/luks-<i>XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX</i></code> where <i>XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX</i> is the UUID of the LUKS partition.
+</p>
+<h5><span class="mw-headline" id="rd.luks.name">rd.luks.name</span></h5>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> When using this parameter you can omit <code>rd.luks.uuid</code>.</div>
+<pre>rd.luks.name=<i>XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX</i>=<i>name</i>
+</pre>
+<p>Specify the name of the mapped device after the LUKS partition is open, where <i>XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX</i> is the UUID of the LUKS partition. This is equivalent to the second parameter of <code>encrypt</code>'s <code>cryptdevice</code>.
+</p>
+<p>For example, specifying <code>rd.luks.name=12345678-9abc-def0-1234-56789abcdef0=root</code> causes the unlocked LUKS device with UUID <code>12345678-9ABC-DEF0-1234-56789ABCDEF0</code> to be located at <code>/dev/mapper/root</code>.
+</p>
+<h5><span class="mw-headline" id="rd.luks.key">rd.luks.key</span></h5>
+<p>Specify the location of a password file used to decrypt the device specified by its UUID. There is no default location like there is with the <code>encrypt</code> hook parameter <code>cryptkey</code>.
+</p>
+<p>If the keyfile is <a href="../../en/Mkinitcpio.html#BINARIES_and_FILES" title="Mkinitcpio">included in the initramfs</a>:
+</p>
+<pre>rd.luks.key=<i>XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX</i>=<i>/path/to/keyfile</i>
+</pre>
+<p>or
+</p>
+<pre>rd.luks.key=<i>/path/to/keyfile</i>
+</pre>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> The whole <code>rd.luks.key</code> parameter can be omitted if the keyfile is included as <code>/etc/cryptsetup-keys.d/<i>name</i>.key</code>.</div>
+<p>If the keyfile is on another device:
+</p>
+<pre>rd.luks.key=<i>XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX</i>=<i>/path/to/keyfile</i>:UUID=<i>ZZZZZZZZ-ZZZZ-ZZZZ-ZZZZ-ZZZZZZZZZZZZ</i>
+</pre>
+<p>Replace <code>UUID=<i>ZZZZZZZZ-ZZZZ-ZZZZ-ZZZZ-ZZZZZZZZZZZZ</i></code> with the identifier of the device on which the keyfile is located.
+</p>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Warning:</strong> 
+<ul>
+<li>If the type of file system is different than your root file system, you must <a href="../../en/Mkinitcpio.html#MODULES" title="Mkinitcpio">include the kernel module for it in the initramfs</a>.</li>
+<li>
+<code>rd.luks.key</code> with a keyfile on another device by default does not fallback to asking for a password if the device is not available. To fallback to a password prompt, specify the <code>keyfile-timeout=</code> option in <code>rd.luks.options</code>. E.g. for a 10 second timeout: <pre>rd.luks.options=<i>XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX</i>=keyfile-timeout=10s</pre>
+</li>
+</ul>
+</div>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> The volume containing the keyfile does not get unmounted during boot. See <a rel="nofollow" class="external text" href="https://github.com/systemd/systemd/issues/28021">systemd issue 28021</a>.</div>
+<h5><span class="mw-headline" id="rd.luks.options">rd.luks.options</span></h5>
+<pre>rd.luks.options=<i>XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX</i>=<i>options</i>
+</pre>
+<p>or
+</p>
+<pre>rd.luks.options=<i>options</i>
+</pre>
+<p>Set options for the device specified by it UUID or, if not specified, for all UUIDs not specified elsewhere (e.g., crypttab).
+</p>
+<p>This parameter is the analogue of <a href="#crypttab">crypttab's</a> options field. The format is the same—options are separated by commas, options with values are specified using <code><i>option</i>=<i>value</i></code>. This is roughly equivalent to the third parameter of <code>encrypt</code>'s <code>cryptdevice</code>.
+</p>
+<p>For example:
+</p>
+<pre>rd.luks.options=timeout=10s,discard,password-echo=no,tries=1
+</pre>
+<h6><span class="mw-headline" id="Timeout">Timeout</span></h6>
+<p>There are two options that affect the timeout for entering the password during boot:
+</p>
+<ul>
+<li>
+<code>rd.luks.options=timeout=<i>mytimeout</i></code> specifies the timeout for querying for a password</li>
+<li>
+<code>rootflags=x-systemd.device-timeout=<i>mytimeout</i></code> specifies how long systemd should wait for the rootfs device to show up before giving up (defaults to 90 seconds)</li>
+</ul>
+<p>If you want to disable the timeout altogether, then set both timeouts to zero:
+</p>
+<pre>rd.luks.options=timeout=0 rootflags=x-systemd.device-timeout=0
+</pre>
+<h6><span class="mw-headline" id="Password_echo">Password echo</span></h6>
+<p>When the user is typing the password, <i>systemd-cryptsetup</i> by default outputs asterisks (<code>*</code>) for each typed character. This is unlike the <code>encrypt</code> hook, which does not output anything. To silence the output, set the <code>password-echo=no</code> option:
+</p>
+<pre>rd.luks.options=password-echo=no
+</pre>
+<h6><span class="mw-headline" id="Trusted_Platform_Module_and_FIDO2_keys">Trusted Platform Module and FIDO2 keys</span></h6>
+<p>If a <a href="../../en/Trusted_Platform_Module.html" class="mw-redirect" title="TPM">TPM2</a> chip is available in your system, or you use FIDO2-compatible security key, you can use it to automatically unlock your volume instead of using a password or a keyfile.
+</p>
+<p>Set 
+</p>
+<ul>
+<li>for TPM2 chip: <code>rd.luks.options=<i>XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX</i>=tpm2-device=auto</code>
+</li>
+<li>for FIDO2 key: <code>rd.luks.options=<i>XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX</i>=fido2-device=auto</code>
+</li>
+</ul>
+<p>in addition to <code>rd.luks.uuid</code> or <code>rd.luks.name</code>
+</p>
+<p>Alternatively, <code>/etc/crypttab.initramfs</code> can be used which avoids the need to specify any kernel options.
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/crypttab.initramfs</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">root  UUID=<i>XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX</i>  none  tpm2-device=auto</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> Remember to <a href="../../en/Mkinitcpio.html#Image_creation_and_activation" class="mw-redirect" title="Regenerate the initramfs">regenerate the initramfs</a> after making any changes to <code>/etc/crypttab.initramfs</code>.</div>
+<p>Here the encrypted volume is mounted under the name <code>root</code> (appearing in <code>/dev/mapper/root</code>), mounted via the UUID of the storage device, with no password, and retrieving the key from the TPM2 device.
+</p>
+<p>Note that <code>none</code> must be provided in the password field order for the TPM2 device to be used, otherwise the value given will be used as a password or key, and if it does not work it will ask you to type in the passkey during boot without attempting to load the key from the TPM2 device.
+</p>
+<p>If specifying the device via UUID as shown above, ensure it is that of the underlying (encrypted) storage device, not the UUID of the decrypted volume that is specified elsewhere as the root filesystem.
+</p>
+<h5><span class="mw-headline" id="rd.luks.data">rd.luks.data</span></h5>
+<p>When using a detached LUKS header, specify the block device with the encrypted data. Must be used together with <code>rd.luks.options</code> to specify the header file location.
+</p>
+<p>See <a href="../../en/Dm-crypt/Specialties.html#Encrypted_system_using_a_detached_LUKS_header" title="Dm-crypt/Specialties">dm-crypt/Specialties#Encrypted system using a detached LUKS header</a> for details and instructions.
+</p>
+<h2><span class="mw-headline" id="Unlocking_in_late_userspace">Unlocking in late userspace</span></h2>
+<h3><span class="mw-headline" id="crypttab">crypttab</span></h3>
+<p>The <code>/etc/crypttab</code> (encrypted device table) file is similar to the <a href="../../en/Fstab.html" title="Fstab">fstab</a> file and contains a list of encrypted devices to be unlocked during system boot up. This file can be used for automatically mounting encrypted swap devices or secondary file systems.
+</p>
+<p><code>crypttab</code> is read <i>before</i> <code>fstab</code>, so that dm-crypt containers can be unlocked before the file system inside is mounted. Note that <code>crypttab</code> is read <i>after</i> the system has booted up, therefore it is not a replacement for unlocking encrypted partitions by using <a href="#mkinitcpio">mkinitcpio</a> hooks and <a href="#Kernel_parameters">configuring them by using kernel parameters</a> as in the case of <a href="../../en/Dm-crypt/Encrypting_an_entire_system.html" title="Dm-crypt/Encrypting an entire system">encrypting the root partition</a>. <code>crypttab</code> processing at boot time is made by the <span class="plainlinks archwiki-template-man" title="$ man 8 systemd-cryptsetup-generator"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd-cryptsetup-generator.8">systemd-cryptsetup-generator(8)</a></span> automatically.
+</p>
+<p>See <span class="plainlinks archwiki-template-man" title="$ man 5 crypttab"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/crypttab.5">crypttab(5)</a></span> for details, read below for some examples, and the <a href="#Mounting_at_boot_time">#Mounting at boot time</a> section for instructions on how to use UUIDs to mount an encrypted device.
+</p>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Warning:</strong> 
+<ul>
+<li>If the <code>nofail</code> option is specified, the password entry screen may disappear while typing the password. <code>nofail</code> should therefore only be used together with keyfiles.</li>
+<li>For <a href="../../en/Dm-crypt/Device_encryption.html#Encryption_options_for_plain_mode" title="Dm-crypt/Device encryption">dm-crypt plain mode</a> devices, the <code>plain</code> option must be explicitly set to force <span class="plainlinks archwiki-template-man" title="$ man 8 systemd-cryptsetup"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd-cryptsetup.8">systemd-cryptsetup(8)</a></span> to recognize them. See <a rel="nofollow" class="external text" href="https://github.com/systemd/systemd/issues/442">systemd issue 442</a>.</li>
+</ul>
+</div>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/crypttab</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;"># Example crypttab file. Fields are: name, underlying device, passphrase, cryptsetup options.
+
+# Mount /dev/lvm/swap re-encrypting it with a fresh key each reboot
+swap	/dev/lvm/swap	/dev/urandom	swap,cipher=aes-xts-plain64,size=256,sector-size=4096
+
+# Mount /dev/lvm/tmp as /dev/mapper/tmp using plain dm-crypt with a random passphrase, making its contents unrecoverable after it is dismounted.
+tmp	/dev/lvm/tmp	/dev/urandom	tmp,cipher=aes-xts-plain64,size=256 
+
+# Mount /dev/lvm/home as /dev/mapper/home using LUKS, and prompt for the passphrase at boot time.
+home   /dev/lvm/home
+
+# Mount /dev/sdb1 as /dev/mapper/backup using LUKS, with a passphrase stored in a file.
+backup /dev/sdb1       /home/alice/backup.key
+
+# Unlock /dev/sdX using the only available TPM, naming it myvolume
+myvolume	/dev/sdX	none	tpm2-device=auto</pre>
+<p>To test your crypttab immediately after editing it, reload the systemd manager configuration with a <a href="../../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Daemon-reload">daemon-reload</a> and <a href="../../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Start">start</a> the newly generated <code>systemd-cryptsetup@<i>name</i>.service</code>.
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;"># cryptsetup status <i>name</i></pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">/dev/mapper/<i>name</i> is active.
+  type:    ...
+  cipher:  ...
+  keysize: ... bits
+  key location: ...
+  device:  /dev/sdxN
+  sector size:  ...
+  offset:  ... sectors
+  size:    ... sectors
+  mode:    ...
+  flags:   ...</pre>
+<p>For more on <code>systemd-cryptsetup@<i>name</i>.service</code>, see <a href="#Mounting_on_demand">#Mounting on demand</a>.
+</p>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> If you use GPT and specific partition type UUIDs, you can avoid using crypttab and fstab for some mount points with systemd. For more information, see <a href="../../en/Systemd.html#GPT_partition_automounting" title="Systemd">systemd#GPT partition automounting</a>.</div>
+<h4><span class="mw-headline" id="Mounting_at_boot_time">Mounting at boot time</span></h4>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../../File:Merge-arrows-2.svg" decoding="async" width="36" height="40" class="mw-file-element"></span></span><b>This article or section is a candidate for merging with <a href="#crypttab">#crypttab</a>.</b></p>
+<div>
+<b>Notes:</b> There is no need for two sections to explain the use of one file. (Discuss in <a rel="nofollow" class="external text" href="../../en/Talk:Dm-crypt/System_configuration.html">Talk:Dm-crypt/System configuration</a>)</div>
+</div>
+<p>If you want to mount an encrypted drive at boot time, enter the device's UUID in <code>/etc/crypttab</code>. You get the UUID (partition) by using the command <code>lsblk -f</code> and adding it to <code>crypttab</code> in the form:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/crypttab</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">externaldrive         UUID=2f9a8428-ac69-478a-88a2-4aa458565431        none    timeout=180</pre>
+<p>The first parameter is your preferred device mapper's name for the encrypted drive. The option <code>none</code> will trigger a prompt during boot to type the passphrase for unlocking the partition. The <code>timeout</code> option defines a timeout in seconds for entering the decryption password during boot.
+</p>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> Passwords entered in the password prompt are cached in the kernel keyring by <span class="plainlinks archwiki-template-man" title="$ man 8 systemd-cryptsetup"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd-cryptsetup.8">systemd-cryptsetup(8)</a></span> (when <a href="#Using_systemd-cryptsetup-generator">using the sd-encrypt hook</a>, this also includes passwords entered in the initramfs stage). If a device in <code>crypttab</code> uses a previously entered password, the third parameter can be set to <code>none</code> and the cached password will be automatically used.</div>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> Keep in mind that the <code>timeout</code> option in <code>crypttab</code> only determines the amount of time allowed for <i>entering the password</i> of the encrypted device. In addition, <a href="../../en/Systemd.html" title="Systemd">systemd</a> also has a default timeout which determines the amount of time allowed for <i>the device to be available</i> (defaulting to 90 seconds), which is independent of the password timer. In consequence, even when the <code>timeout</code> option in <code>crypttab</code> is set to a value larger than 90 seconds (or it is at its default value of 0, meaning unlimited time), <i>systemd</i> will still only wait a maximum of 90 seconds for the device to be unlocked. In order to change the time <i>systemd</i> will wait for a device to be available, the option <code>x-systemd.device-timeout</code> (see <span class="plainlinks archwiki-template-man" title="$ man 5 systemd.mount"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd.mount.5">systemd.mount(5)</a></span>) can be set in <a href="../../en/Fstab.html" title="Fstab">fstab</a> for said device. It is probably desired, then, that the amount of time of the <code>timeout</code> option in <code>crypttab</code> is equal to the amount of time of the <code>x-systemd.device-timeout</code> option in <code>fstab</code> for each device mounted at boot time.</div>
+<h5><span class="mw-headline" id="Unlocking_with_a_keyfile">Unlocking with a keyfile</span></h5>
+<p>If the <a href="../../en/Dm-crypt/Device_encryption.html#Keyfiles" title="Dm-crypt/Device encryption">keyfile</a> for a secondary file system is itself stored inside an encrypted root, it is safe while the system is powered off and can be sourced to automatically unlock the mount during with boot via <a href="#crypttab">crypttab</a>. For example, unlock a crypt specified by <a href="../../en/Persistent_block_device_naming.html#by-uuid" class="mw-redirect" title="UUID">UUID</a>:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/crypttab</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">home-crypt    UUID=<i>XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX</i>    /etc/cryptsetup-keys.d/home-crypt.key</pre>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> 
+<ul>
+<li>If a keyfile is not specified, <span class="plainlinks archwiki-template-man" title="$ man 8 systemd-cryptsetup"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd-cryptsetup.8">systemd-cryptsetup(8)</a></span> will automatically try to load it from <code>/etc/cryptsetup-keys.d/<i>name</i>.key</code> and <code>/run/cryptsetup-keys.d/<i>name</i>.key</code>.<a rel="nofollow" class="external autonumber" href="https://github.com/systemd/systemd/pull/15637">[3]</a>
+</li>
+<li>If you prefer to use a <code>--plain</code> mode blockdevice, the encryption options necessary to unlock it are specified in <code>/etc/crypttab</code>. Take care to apply the systemd workaround mentioned in <a href="#crypttab">crypttab</a> in this case.</li>
+</ul>
+</div>
+<p>Then use the device mapper's name (defined in <code>/etc/crypttab</code>) to make an entry in <code>/etc/fstab</code>:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/fstab</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">/dev/mapper/home-crypt        /home   ext4        defaults        0       2
+</pre>
+<p>Since <code>/dev/mapper/home-crypt</code> already is the result of a unique partition mapping, there is no need to specify a UUID for it. In any case, the mapper with the filesystem will have a different UUID than the partition it is encrypted in.
+</p>
+<h5><span class="mw-headline" id="Mounting_a_stacked_blockdevice">Mounting a stacked blockdevice</span></h5>
+<p>The systemd generators also automatically process stacked block devices at boot. 
+</p>
+<p>For example, you can create a <a href="../../en/RAID.html" title="RAID">RAID</a> setup, use cryptsetup on it and create an <a href="../../en/LVM.html" title="LVM">LVM</a> logical volume with respective filesystem inside the encrypted block device. A resulting: 
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">$ lsblk -f</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">─sdXX                  linux_raid_member    
+│ └─md0                 crypto_LUKS   
+│   └─cryptedbackup     LVM2_member 
+│     └─vgraid-lvraid   ext4              /mnt/backup
+└─sdYY                  linux_raid_member    
+  └─md0                 crypto_LUKS       
+    └─cryptedbackup     LVM2_member 
+      └─vgraid-lvraid   ext4              /mnt/backup
+</pre>
+<p>will ask for the passphrase and mount automatically at boot. 
+</p>
+<p>Given you specify the correct corresponding crypttab (e.g. UUID for the <code>crypto_LUKS</code> device) and fstab (<code>/dev/vgraid/lvraid</code>) entries, there is no need to add additional mkinitcpio hooks/configuration, because <code>/etc/crypttab</code> processing applies to non-root mounts only. One exception is when the <code>mdadm_udev</code> hook is used <i>already</i> (e.g. for the root device). In this case <code>/etc/madadm.conf</code> and the initramfs need updating to achieve the correct root raid is picked first.
+</p>
+<h4><span class="mw-headline" id="Mounting_on_demand">Mounting on demand</span></h4>
+<p>Instead of using
+</p>
+<pre># cryptsetup open UUID=... externaldrive
+</pre>
+<p>you can <a href="../../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Start">start</a> <code>systemd-cryptsetup@externaldrive.service</code> when you have an entry as follows in your <code>/etc/crypttab</code>:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/crypttab</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">externaldrive UUID=... none noauto</pre>
+<p>That way you do not need to remember the exact crypttab options. It will prompt you for the passphrase if needed.
+</p>
+<p>The corresponding unit file is generated automatically by <span class="plainlinks archwiki-template-man" title="$ man 8 systemd-cryptsetup-generator"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd-cryptsetup-generator.8">systemd-cryptsetup-generator(8)</a></span>. You can list all generated unit files using:
+</p>
+<pre>$ systemctl list-unit-files | grep systemd-cryptsetup
+</pre>
+<h2><span class="mw-headline" id="Troubleshooting">Troubleshooting</span></h2>
+<h3>
+<span id="System_stuck_on_boot.2Fpassword_prompt_does_not_show"></span><span class="mw-headline" id="System_stuck_on_boot/password_prompt_does_not_show">System stuck on boot/password prompt does not show</span>
+</h3>
+<p>If you are using <a href="../../en/Plymouth.html" title="Plymouth">Plymouth</a>, make sure to use the correct modules (see <a href="../../en/Plymouth.html#mkinitcpio" title="Plymouth">Plymouth#mkinitcpio</a>) or disable it. Otherwise, Plymouth will swallow the password prompt, making a system boot impossible.
+</p>
+<h3><span class="mw-headline" id="Keyboard_or_keyfile_on_filesystem_unavailable_for_unlocking">Keyboard or keyfile on filesystem unavailable for unlocking</span></h3>
+<p>If you unlock the LUKS device with a keyboard or a keyfile on a filesystem that is not present when generating the initramfs, you might need to add the corresponding modules to the <code>MODULES</code> array of mkinitcpio. This might also be needed when the keyboard is connected through a USB hub. See <a href="../../en/Mkinitcpio.html#MODULES" title="Mkinitcpio">mkinitcpio#MODULES</a> for more information on this issue and <a href="../../en/Mkinitcpio/Minimal_initramfs.html#Sorting_out_modules" class="mw-redirect" title="Minimal initramfs">Minimal initramfs#Sorting out modules</a> as a starting point for potential keyboard and filesystem module names to be added.  
+</p>
+<p>In general, for keyboards that are not connected to the PC at initramfs generation time, you need to place the <code>keyboard</code> hook before the <code>autodetect</code> hook or only the parts necessary for the currently connected hardware are kept, see <a href="../../en/Mkinitcpio.html#Common_hooks" title="Mkinitcpio">mkinitcpio#Common hooks</a>.
+</p>
+</div>
+</div>
+					<div id="catlinks" class="catlinks" data-mw="interface">
+<div id="mw-normal-catlinks" class="mw-normal-catlinks">
+<a href="../../Special:Categories.html" title="Special:Categories">Category</a>: <ul><li><a href="../../en/Category:Data-at-rest_encryption.html" title="Category:Data-at-rest encryption">Data-at-rest encryption</a></li></ul>
+</div>
+<div id="mw-hidden-catlinks" class="mw-hidden-catlinks mw-hidden-cats-hidden">Hidden categories: <ul>
+<li><a href="../../en/Category:Pages_or_sections_flagged_with_Template:Expansion.html" title="Category:Pages or sections flagged with Template:Expansion">Pages or sections flagged with Template:Expansion</a></li>
+<li><a href="../../en/Category:Pages_or_sections_flagged_with_Template:Merge.html" title="Category:Pages or sections flagged with Template:Merge">Pages or sections flagged with Template:Merge</a></li>
+</ul>
+</div>
+</div>
+				</div>
+			</main>
+			
+		</div>
+		<div class="mw-footer-container">
+			
+<footer id="footer" class="mw-footer" style="margin: 0">
+	<ul id="footer-info">
+	<li data-nosnippet="">Retrieved from "<a dir="ltr" href="https://wiki.archlinux.org/index.php?title=Dm-crypt/System_configuration&amp;oldid=827200">https://wiki.archlinux.org/index.php?title=Dm-crypt/System_configuration&amp;oldid=827200</a>"</li>
+<li id="footer-info-lastmod"> This page was last edited on 16 February 2025, at 13:01.</li>
+	<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+<br>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="https://terms.archlinux.org/docs/privacy-policy/">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="../../en/ArchWiki:About.html">About ArchWiki</a></li>
+	<li id="footer-places-disclaimers"><a href="../../en/ArchWiki:General_disclaimer.html">Disclaimers</a></li>
+	<li id="footer-places-archwiki-code-of-conduct"><a href="https://terms.archlinux.org/docs/code-of-conduct/" class="extiw" title="archlinux-service-agreements:code-of-conduct">Code of conduct</a></li>
+	<li id="footer-places-archwiki-terms-of-service"><a href="https://terms.archlinux.org/docs/terms-of-service/" class="extiw" title="archlinux-service-agreements:terms-of-service">Terms of service</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-copyrightico"><a href="https://www.gnu.org/copyleft/fdl.html" class="cdx-button cdx-button--fake-button cdx-button--size-large cdx-button--fake-button--enabled"><img src="/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" loading="lazy"></a></li>
+	<li id="footer-poweredbyico"><img src="/resources/assets/poweredby_mediawiki.svg" width="88" height="31" loading="lazy"></li>
+</ul>
+
+</footer>
+
+		</div>
+	</div> 
+</div> 
+<div class="vector-settings" id="p-dock-bottom">
+	<ul></ul>
+</div>
+</body>
+</html>

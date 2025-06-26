@@ -1,0 +1,62 @@
+<h1>dnsx</h1>
+
+<blockquote><p>Un equipo de herramientas de DNS rápido y multipropósito para ejecutar múltiples consultas DNS.
+Nota: la entrada a <code>dnsx</code> necesita ser pasada a través de <code>stdin</code> (tubería <code>|</code>) en algunos casos.
+Ver también: <code>dig</code>, <code>dog</code>, <code>dnstracer</code>.
+Más información: <a href="https://docs.projectdiscovery.io/tools/dnsx/running">https://docs.projectdiscovery.io/tools/dnsx/running</a>.</p></blockquote>
+
+<ul>
+<li>Consulta el registro A de un subdominio y muestra la [re]spuesta recibida:</li>
+</ul>
+
+
+<p><code>echo {{ejemplo.com}} | dnsx -a -re</code></p>
+
+<ul>
+<li>Consulta todos los registros DNS (A, AAAA, CNAME, NS, TXT, SRV, PTR, MX, SOA, AXFR y CAA):</li>
+</ul>
+
+
+<p><code>dnsx -recon -re &lt;&lt;&lt; {{ejemplo.com}}</code></p>
+
+<ul>
+<li>Consulta un tipo específico de registro DNS:</li>
+</ul>
+
+
+<p><code>echo {{ejemplo.com}} | dnsx -re -{{a|aaaa|cname|ns|txt|srv|ptr|mx|soa|any|axfr|caa}}</code></p>
+
+<ul>
+<li>Muestra s[o]lo la [r]espuesta (no muestra el dominio o subdominio consultado):</li>
+</ul>
+
+
+<p><code>echo {{ejemplo.com}} | dnsx -ro</code></p>
+
+<ul>
+<li>Muestra la respuesta sin procesar una consulta, especificando los solucionado[r]es a utilizar y el número de intentos en caso de haber errores:</li>
+</ul>
+
+
+<p><code>echo {{ejemplo.com}} | dnsx -{{debug|raw}} -resolver {{1.1.1.1,8.8.8.8,...}} -retry {{número}}</code></p>
+
+<ul>
+<li>Aplica fuerza bruta a registros DNS utilizando un marcador de posición:</li>
+</ul>
+
+
+<p><code>dnsx -domain {{FUZZ.ejemplo.com}} -wordlist {{ruta/a/lista_de_palabras.txt}} -re</code></p>
+
+<ul>
+<li>Aplica fuerza bruta a registros DNS a partir de una lista de [d]ominios y listas de palabras, adjuntando la salida a un archivo sin códigos de [c]olor:</li>
+</ul>
+
+
+<p><code>dnsx -domain {{ruta/a/dominio.txt}} -wordlist {{ruta/a/lista_de_palabras.txt}} -re -output {{ruta/a/salida.txt}} -no-color</code></p>
+
+<ul>
+<li>Extrae registros <code>CNAME</code> desde una lista de subdominios, con una velocidad [l]ímite de consultas DNS por segundo:</li>
+</ul>
+
+
+<p><code>subfinder -silent -d {{ejemplo.com}} | dnsx -cname -re -rl {{número}}</code></p>

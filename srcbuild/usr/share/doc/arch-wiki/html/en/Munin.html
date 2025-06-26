@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-sticky-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-0 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-disabled skin-theme-clientpref-day vector-toc-available" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>Munin - ArchWiki</title>
+<link rel="stylesheet" href="../ArchWikiOffline.css">
+<meta name="ResourceLoaderDynamicStyles" content="">
+<meta name="generator" content="MediaWiki 1.43.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="max-image-preview:standard">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.25, maximum-scale=5.0">
+<link rel="search" type="application/opensearchdescription+xml" href="/rest.php/v1/search" title="ArchWiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.archlinux.org/api.php?action=rsd">
+<link rel="license" href="https://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="ArchWiki Atom feed" href="/index.php?title=Special:RecentChanges&amp;feed=atom">
+</head>
+<body class="skin--responsive skin-vector skin-vector-search-vue mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Munin rootpage-Munin skin-vector-2022 action-view">
+<a class="mw-jump-link" href="#bodyContent">Jump to content</a>
+<div class="vector-header-container">
+	</div>
+<div class="mw-page-container">
+	<div class="mw-page-container-inner">
+		<div class="vector-column-start">
+			<div class="vector-main-menu-container">
+		</div>
+	<div class="vector-sticky-pinned-container">
+				<nav id="mw-panel-toc" aria-label="Contents" data-event-name="ui.sidebar-toc" class="mw-table-of-contents-container vector-toc-landmark">
+					<div id="vector-toc-pinned-container" class="vector-pinned-container">
+					<div id="vector-toc" class="vector-toc vector-pinnable-element">
+	<div class="vector-pinnable-header vector-toc-pinnable-header vector-pinnable-header-pinned" data-feature-name="toc-pinned" data-pinnable-element-id="vector-toc">
+	<h2 class="vector-pinnable-header-label">Contents</h2>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-toc.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-toc.unpin">hide</button>
+</div>
+
+
+	<ul class="vector-toc-contents" id="mw-panel-toc-list">
+		<li id="toc-mw-content-text" class="vector-toc-list-item vector-toc-level-1">
+			<a href="#" class="vector-toc-link">
+				<div class="vector-toc-text">Beginning</div>
+			</a>
+		</li>
+		<li id="toc-Installation" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Installation">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">1</span>
+				<span>Installation</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Installation-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Configuration" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Configuration">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">2</span>
+				<span>Configuration</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Configuration-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Configuration subsection</span>
+			</button>
+		
+		<ul id="toc-Configuration-sublist" class="vector-toc-list">
+			<li id="toc-Munin_master" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Munin_master">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1</span>
+					<span>Munin master</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Munin_master-sublist" class="vector-toc-list">
+				<li id="toc-Directories" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Directories">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1.1</span>
+					<span>Directories</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Directories-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Cron" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Cron">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1.2</span>
+					<span>Cron</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Cron-sublist" class="vector-toc-list">
+				<li id="toc-crontab" class="vector-toc-list-item vector-toc-level-4">
+			<a class="vector-toc-link" href="#crontab">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1.2.1</span>
+					<span>crontab</span>
+				</div>
+			</a>
+			
+			<ul id="toc-crontab-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-systemd_timer" class="vector-toc-list-item vector-toc-level-4">
+			<a class="vector-toc-link" href="#systemd_timer">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1.2.2</span>
+					<span>systemd timer</span>
+				</div>
+			</a>
+			
+			<ul id="toc-systemd_timer-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Permissions" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Permissions">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1.3</span>
+					<span>Permissions</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Permissions-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Testing" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Testing">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1.4</span>
+					<span>Testing</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Testing-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Munin_node" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Munin_node">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2</span>
+					<span>Munin node</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Munin_node-sublist" class="vector-toc-list">
+				<li id="toc-Daemon" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Daemon">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2.1</span>
+					<span>Daemon</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Daemon-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-IPv6" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#IPv6">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2.2</span>
+					<span>IPv6</span>
+				</div>
+			</a>
+			
+			<ul id="toc-IPv6-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Customization" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Customization">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2.3</span>
+					<span>Customization</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Customization-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Plugins" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Plugins">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2.4</span>
+					<span>Plugins</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Plugins-sublist" class="vector-toc-list">
+				<li id="toc-Adding" class="vector-toc-list-item vector-toc-level-4">
+			<a class="vector-toc-link" href="#Adding">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2.4.1</span>
+					<span>Adding</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Adding-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Additional_plugins" class="vector-toc-list-item vector-toc-level-4">
+			<a class="vector-toc-link" href="#Additional_plugins">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2.4.2</span>
+					<span>Additional plugins</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Additional_plugins-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Removing" class="vector-toc-list-item vector-toc-level-4">
+			<a class="vector-toc-link" href="#Removing">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2.4.3</span>
+					<span>Removing</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Removing-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Debugging" class="vector-toc-list-item vector-toc-level-4">
+			<a class="vector-toc-link" href="#Debugging">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2.4.4</span>
+					<span>Debugging</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Debugging-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Permissions_2" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Permissions_2">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2.5</span>
+					<span>Permissions</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Permissions_2-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Web_server_(optional)" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Web_server_(optional)">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">3</span>
+				<span>Web server (optional)</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Web_server_(optional)-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Web server (optional) subsection</span>
+			</button>
+		
+		<ul id="toc-Web_server_(optional)-sublist" class="vector-toc-list">
+			<li id="toc-Apache" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Apache">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1</span>
+					<span>Apache</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Apache-sublist" class="vector-toc-list">
+				<li id="toc-Apache_VirtualHost_examples" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Apache_VirtualHost_examples">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1.1</span>
+					<span>Apache VirtualHost examples</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Apache_VirtualHost_examples-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Basic_static_HTML" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Basic_static_HTML">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1.2</span>
+					<span>Basic static HTML</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Basic_static_HTML-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Static_HTML_with_DynaZoom_feature" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Static_HTML_with_DynaZoom_feature">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1.3</span>
+					<span>Static HTML with DynaZoom feature</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Static_HTML_with_DynaZoom_feature-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-DynaZoom_Permissions" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#DynaZoom_Permissions">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1.4</span>
+					<span>DynaZoom Permissions</span>
+				</div>
+			</a>
+			
+			<ul id="toc-DynaZoom_Permissions-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Full_dynamic" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Full_dynamic">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1.5</span>
+					<span>Full dynamic</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Full_dynamic-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Nginx" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Nginx">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.2</span>
+					<span>Nginx</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Nginx-sublist" class="vector-toc-list">
+				<li id="toc-Munin_2.0.x" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Munin_2.0.x">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.2.1</span>
+					<span>Munin 2.0.x</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Munin_2.0.x-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Munin_2.1.x" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Munin_2.1.x">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.2.2</span>
+					<span>Munin 2.1.x</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Munin_2.1.x-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Tips_and_tricks" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Tips_and_tricks">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">4</span>
+				<span>Tips and tricks</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Tips_and_tricks-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Tips and tricks subsection</span>
+			</button>
+		
+		<ul id="toc-Tips_and_tricks-sublist" class="vector-toc-list">
+			<li id="toc-MySQL" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#MySQL">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.1</span>
+					<span>MySQL</span>
+				</div>
+			</a>
+			
+			<ul id="toc-MySQL-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-S.M.A.R.T." class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#S.M.A.R.T.">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.2</span>
+					<span>S.M.A.R.T.</span>
+				</div>
+			</a>
+			
+			<ul id="toc-S.M.A.R.T.-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-lm_sensors" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#lm_sensors">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.3</span>
+					<span>lm_sensors</span>
+				</div>
+			</a>
+			
+			<ul id="toc-lm_sensors-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+</ul>
+</div>
+
+					</div>
+		</nav>
+			</div>
+		</div>
+		<div class="mw-content-container">
+			<main id="content" class="mw-body" style="margin: 0">
+				<header class="mw-body-header vector-page-titlebar">
+					<nav aria-label="Contents" class="vector-toc-landmark">
+						
+<div id="vector-page-titlebar-toc" class="vector-dropdown vector-page-titlebar-toc vector-button-flush-left">
+	<input type="checkbox" id="vector-page-titlebar-toc-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-page-titlebar-toc" class="vector-dropdown-checkbox " aria-label="Toggle the table of contents">
+	<label id="vector-page-titlebar-toc-label" for="vector-page-titlebar-toc-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"><span class="vector-icon mw-ui-icon-listBullet mw-ui-icon-wikimedia-listBullet"></span>
+
+<span class="vector-dropdown-label-text">Toggle the table of contents</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+							<div id="vector-page-titlebar-toc-unpinned-container" class="vector-unpinned-container">
+			</div>
+		
+	</div>
+</div>
+
+					</nav>
+					<h1 id="firstHeading" class="firstHeading mw-first-heading"><span class="mw-page-title-main">Munin</span></h1>
+							
+<div id="p-lang-btn" class="vector-dropdown mw-portlet mw-portlet-lang">
+	<input type="checkbox" id="p-lang-btn-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-p-lang-btn" class="vector-dropdown-checkbox mw-interlanguage-selector" aria-label="Go to an article in another language. Available in 1 language">
+	<label id="p-lang-btn-label" for="p-lang-btn-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--action-progressive mw-portlet-lang-heading-1" aria-hidden="true"><span class="vector-icon mw-ui-icon-language-progressive mw-ui-icon-wikimedia-language-progressive"></span>
+
+<span class="vector-dropdown-label-text">1 language</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+		<div class="vector-menu-content">
+			
+			<ul class="vector-menu-content-list">
+				
+				<li class="interlanguage-link interwiki-ja mw-list-item"><a href="https://wiki.archlinux.jp/index.php/Munin" title="Munin – 日本語" lang="ja" hreflang="ja" data-title="Munin" data-language-autonym="日本語" data-language-local-name="日本語" class="interlanguage-link-target"><span>日本語</span></a></li>
+			</ul>
+			
+		</div>
+
+	</div>
+</div>
+</header>
+				<div class="vector-column-end">
+					<div class="vector-sticky-pinned-container">
+						<nav class="vector-page-tools-landmark" aria-label="Page tools">
+							<div id="vector-page-tools-pinned-container" class="vector-pinned-container">
+				
+							</div>
+		</nav>
+						<nav class="vector-appearance-landmark" aria-label="Appearance">
+							<div id="vector-appearance-pinned-container" class="vector-pinned-container">
+				<div id="vector-appearance" class="vector-appearance vector-pinnable-element">
+	<div class="vector-pinnable-header vector-appearance-pinnable-header vector-pinnable-header-pinned" data-feature-name="appearance-pinned" data-pinnable-element-id="vector-appearance" data-pinned-container-id="vector-appearance-pinned-container" data-unpinned-container-id="vector-appearance-unpinned-container">
+	<div class="vector-pinnable-header-label">Appearance</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-appearance.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-appearance.unpin">hide</button>
+</div>
+
+
+</div>
+
+							</div>
+		</nav>
+					</div>
+				</div>
+				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container>
+					<div class="vector-body-before-content">
+							<div class="mw-indicators">
+		</div>
+
+						<div id="siteSub" class="noprint">From ArchWiki</div>
+					</div>
+					<div id="contentSub"><div id="mw-content-subtitle"></div></div>
+					
+					
+					<div id="mw-content-text" class="mw-body-content">
+<div class="mw-content-ltr mw-parser-output" lang="en" dir="ltr">
+<p><a rel="nofollow" class="external text" href="https://munin-monitoring.org/">Munin</a> is a networked resource monitoring tool that can help analyze resource trends and bottlenecks.
+Munin has a master/node architecture in which the master regularly fetches the data from the nodes and presents the information in graphs through a web interface.
+A default installation provides a lot of graphs with almost no work and new graphs can be easily created added as plugins. <a rel="nofollow" class="external autonumber" href="https://munin-monitoring.org/">[1]</a>
+</p>
+<p>You can check out OpenStreetMap's <a rel="nofollow" class="external text" href="https://munin.openstreetmap.org/">Munin install</a> for an example.
+</p>
+<meta property="mw:PageProp/toc">
+<h2><span class="mw-headline" id="Installation">Installation</span></h2>
+<p><a href="../en/Help:Reading.html#Installation_of_packages" class="mw-redirect" title="Install">Install</a> the <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=munin">munin</a></span> package on the master machine and <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=munin-node">munin-node</a></span> on the devices that you whish to monitor.
+</p>
+<p>You can also install them both on the same machine so that the master machine monitors itself.
+</p>
+<p>Further documentation may be found on the <a rel="nofollow" class="external text" href="https://munin-monitoring.org/wiki/Documentation">Munin documentation wiki</a>.
+</p>
+<h2><span class="mw-headline" id="Configuration">Configuration</span></h2>
+<h3><span class="mw-headline" id="Munin_master">Munin master</span></h3>
+<h4><span class="mw-headline" id="Directories">Directories</span></h4>
+<p>Create a directory where the <i>munin-master</i> will write the generated HTML and graph images. The munin user must have write permission to this directory.
+</p>
+<p>The following example uses <code>/srv/http/munin</code>, so the generated output can be viewed at <a rel="nofollow" class="external text" href="http://localhost/munin/">http://localhost/munin/</a>, provided that a web server is installed and running:
+</p>
+<pre># mkdir /srv/http/munin
+# chown munin:munin /srv/http/munin
+</pre>
+<p>Uncomment the <code>htmldir</code> entry in <code>/etc/munin/munin.conf</code> and change it to the directory created in the previous step:
+</p>
+<pre>htmldir /srv/http/munin
+</pre>
+<h4><span class="mw-headline" id="Cron">Cron</span></h4>
+<h5><span class="mw-headline" id="crontab">crontab</span></h5>
+<p>Run the following to have Munin collect data and update the generated HTML and graph images every 5 minutes:
+</p>
+<pre># crontab /etc/munin/munin-cron-entry -u munin
+</pre>
+<p>Configure the email server to send mails to the <i>munin</i> user. If using postfix, add the following:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/postfix/aliases</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">munin:    root
+</pre>
+<p>And run:
+</p>
+<pre># newaliases
+</pre>
+<h5><span class="mw-headline" id="systemd_timer">systemd timer</span></h5>
+<p>Instead of a cron job a systemd timer can be used.
+</p>
+<p>This needs a service unit configuration:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/system/munin-cron.service</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Unit]
+Description=Survey monitored computers
+After=network.target
+
+[Service]
+User=munin
+ExecStart=/usr/bin/munin-cron</pre>
+<p>And a timer unit configuration:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/system/munin-cron.timer</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Unit]
+Description=Survey monitored computers every five minutes
+
+[Timer]
+OnCalendar=*-*-* *:00/5:00
+
+[Install]
+WantedBy=multi-user.target</pre>
+<p>Now, reload systemd configuration, <a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Enable/start">enable/start</a> <code>munin-cron.timer</code> and verify that everything is working:
+</p>
+<pre># journalctl --unit munin-cron.service
+# less /var/log/munin/munin-update.log
+</pre>
+<h4><span class="mw-headline" id="Permissions">Permissions</span></h4>
+<p>When <code>graph_strategy cgi</code> is enabled in <code>/etc/munin/munin.conf</code> ensure the directory <code>/var/lib/munin/cgi-tmp</code> is owned by user and group <code>munin</code> so that the <code>/usr/share/munin/cgi/munin-cgi-graph</code> script is able to write the png files to this directory.
+</p>
+<pre># chown munin: /var/lib/munin/cgi-tmp
+</pre>
+<h4><span class="mw-headline" id="Testing">Testing</span></h4>
+<p>Once <code>munin-cron</code> is configured to run Munin will be ready to start generating graphs. Ensure the <code>munin-node.service</code> is running on each of the nodes. It may be useful to jump ahead to the <a href="#Munin_node">#Munin node</a> section and return here once the node are up and running.
+</p>
+<p>By runnning the <code>munin-cron</code> command manually as the <code>munin</code> user, it will trigger the generation of HTML and graph images immediately without having to wait for the next cron run:
+</p>
+<pre>[munin]$ munin-cron
+</pre>
+<p>If the munin logging is configured, the logs are usually found in <code>/var/log/munin/</code>. Watching the <code>munin-update.log</code> log in a seperate terminal after running the <code>munin-cron</code> command can be helpful in diagnosing issues.
+</p>
+<pre># tail -f /var/log/munin/munin-update.log
+</pre>
+<p>And finally test the interface by pointing your browser to the output directory or <a rel="nofollow" class="external text" href="http://localhost/munin/">http://localhost/munin/</a>.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> It might take a while for the graphs to have data, so be patient. Wait for about 30 minutes to an hour.</div>
+<h3><span class="mw-headline" id="Munin_node">Munin node</span></h3>
+<h4><span class="mw-headline" id="Daemon">Daemon</span></h4>
+<p>On the nodes, <a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Enable/start">enable/start</a> <code>munin-node.service</code>.
+</p>
+<h4><span class="mw-headline" id="IPv6">IPv6</span></h4>
+<p>For IPv6 support on <i>munin-node</i>, using:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/munin/munin-node.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">host :::1
+</pre>
+<p>Install:
+</p>
+<ul>
+<li><span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=perl-socket6">perl-socket6</a></span></li>
+<li><span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=perl-io-socket-inet6">perl-io-socket-inet6</a></span></li>
+</ul>
+<h4><span class="mw-headline" id="Customization">Customization</span></h4>
+<p>Before running munin, you might want to setup the hostname of your system. In <code>/etc/munin/munin.conf</code>, the default hostname is <code>myhostname</code>. This can be altered to any preferred hostname. The hostname will be used to group and name the <code>.rrd</code> files in <code>/var/lib/munin</code> and further, used to group the html files and graphs in your selected <i>munin-master</i> directory.
+</p>
+<h4><span class="mw-headline" id="Plugins">Plugins</span></h4>
+<p>Run <code>munin-node-configure</code> with the <code>--suggest</code> option to have Munin suggest plugins it thinks will work on your installation:
+</p>
+<pre># munin-node-configure --suggest
+</pre>
+<p>If there is a suggestion for a plugin you want to use, follow that suggestion and run the command again. When you are satisfied with the plugins suggested by <code>munin-node-configure</code>, run it with the <code>--shell</code> option to have the plugins configured:
+</p>
+<pre># munin-node-configure --shell | sh
+</pre>
+<h5><span class="mw-headline" id="Adding">Adding</span></h5>
+<p>Basically all plugins are added in the following manner (although there are exceptions, review each plugin!):
+</p>
+<p>Download a plugin, then copy or move it to <code>/usr/lib/munin/plugins</code>:
+</p>
+<pre># cp <i>plugin</i> /usr/lib/munin/plugins/
+</pre>
+<p>Then link the plugin to <code>/etc/munin/plugins</code>:
+</p>
+<pre># ln -s /usr/lib/munin/plugins/<i>plugin</i> /etc/munin/plugins/
+</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> Some plugins - known as wildcard plugins - can be used with multiple devices at once by linking them with different names. These plugins end with an underscore and are linked as <code>&lt;plugin&gt;_&lt;device&gt;</code> to be used on <code>&lt;device&gt;</code>. See the <code>if_</code> plugin for an example.</div>
+<p>Now test your plugin. You do not need to use the full path to the plugin, <code>munin-run</code> should be able to figure it out:
+</p>
+<pre># munin-run <i>plugin</i>
+</pre>
+<p>And <a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Restart">restart</a> <code>munin-node.service</code>. Finally, refresh the web page.
+</p>
+<h5><span class="mw-headline" id="Additional_plugins">Additional plugins</span></h5>
+<p>There are many Munin plugins out there just waiting to be installed. The <a rel="nofollow" class="external text" href="http://muninexchange.projects.linpro.no/">MuninExchange</a> is an excellent place to start looking, and if you cannot find a plugin that does what you want it is easy to write your own. Have a look at <a rel="nofollow" class="external text" href="http://guide.munin-monitoring.org/en/latest/develop/plugins/">Developing Plugins</a> at the Munin documentation wiki to learn how.
+</p>
+<h5><span class="mw-headline" id="Removing">Removing</span></h5>
+<p>If you want to remove a plugin, simply delete the linked file in <code>/etc/munin/plugins</code> - there is no need to remove the plugin from <code>/usr/lib/munin/plugins</code>.
+</p>
+<pre># rm /etc/munin/plugins/<i>plugin</i>
+</pre>
+<h5><span class="mw-headline" id="Debugging">Debugging</span></h5>
+<p>If you come across a plugin that is not working as expected (for example giving you no output at all) it might be interesting to run it directly. Fortunately there is a way to do this. Following the instructions until here, you will for example notice, that the plugin <code>apache_accesses</code> gives no output at all, when enabled. In order to run the plugin directly:
+</p>
+<pre># munin-run apache_accesses
+</pre>
+<p>The following error:
+</p>
+<pre>LWP::UserAgent not found at /etc/munin/plugins/apache_accesses line 86.
+</pre>
+<p>indicates that a perl function could not be found. To resolve the problem, <a href="../en/Help:Reading.html#Installation_of_packages" class="mw-redirect" title="Install">install</a> the missing library, in this case, <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=perl-libwww">perl-libwww</a></span>.
+</p>
+<h4><span class="mw-headline" id="Permissions_2">Permissions</span></h4>
+<p>Because many plugins read log files, it is useful to <a href="../en/Users_and_groups.html#Example_adding_a_user" title="Users and groups">add</a> <code>munin</code> user into <code>log</code> group:
+</p>
+<pre># usermod -a -G log munin
+</pre>
+<h2>
+<span id="Web_server_.28optional.29"></span><span class="mw-headline" id="Web_server_(optional)">Web server (optional)</span>
+</h2>
+<p>This guide sets up Munin to generate static HTML and graph images and write them in a directory of your choosing. You can view these generated files locally with any web browser. If you want to view the generated files from a remote machine, then you will need to install and configure one of the following web servers:
+</p>
+<ul>
+<li><a href="../en/Apache_HTTP_Server.html" title="Apache HTTP Server">Apache HTTP Server</a></li>
+<li><a href="../en/Lighttpd.html" title="Lighttpd">Lighttpd</a></li>
+<li><a href="../en/Nginx.html" title="Nginx">Nginx</a></li>
+</ul>
+<p>Or one of the other servers found in the <a href="../en/List_of_applications/Internet.html#Web_servers" class="mw-redirect" title="Web server">web server</a> category.
+</p>
+<h3><span class="mw-headline" id="Apache">Apache</span></h3>
+<h4><span class="mw-headline" id="Apache_VirtualHost_examples">Apache VirtualHost examples</span></h4>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../File:View-refresh-red.svg" decoding="async" width="48" height="48" class="mw-file-element"></span></span><b>This article or section is out of date.</b></p>
+<div>
+<b>Reason:</b> This section speaks of "the next major release" with a link that had to be replaced with a 2018 copy of the documentation. Surely things have changed in those years. (Discuss in <a rel="nofollow" class="external text" href="../en/Talk:Munin.html">Talk:Munin</a>)</div>
+</div>
+<p>Based on information found here:
+</p>
+<ul>
+<li><a rel="nofollow" class="external free" href="http://guide.munin-monitoring.org/en/stable-2.0/example/webserver/apache-virtualhost.html">http://guide.munin-monitoring.org/en/stable-2.0/example/webserver/apache-virtualhost.html</a></li>
+<li>
+<a rel="nofollow" class="external free" href="http://munin-monitoring.org/wiki/MuninConfigurationMasterCGI">http://munin-monitoring.org/wiki/MuninConfigurationMasterCGI</a><sup title="Last check status: 404">[<a href="https://en.wikipedia.org/wiki/Wikipedia:Link_rot" class="extiw" title="wikipedia:Wikipedia:Link rot">dead link</a> 2021-05-17 ⓘ]</sup>
+</li>
+</ul>
+<p>In the next major release of Munin, things will be much simpler. Check it out:
+</p>
+<ul><li><a rel="nofollow" class="external free" href="https://web.archive.org/web/20180128051736/http://guide.munin-monitoring.org/en/latest/example/webserver/apache-virtualhost.html">https://web.archive.org/web/20180128051736/http://guide.munin-monitoring.org/en/latest/example/webserver/apache-virtualhost.html</a></li></ul>
+<h4><span class="mw-headline" id="Basic_static_HTML">Basic static HTML</span></h4>
+<pre>&lt;VirtualHost *:80&gt;
+    ServerName localhost
+    ServerAdmin  root@localhost
+
+    DocumentRoot /srv/http/munin
+
+    ErrorLog /var/log/httpd/munin-error.log
+    CustomLog /var/log/httpd/munin-access.log combined
+&lt;/VirtualHost&gt;
+</pre>
+<h4><span class="mw-headline" id="Static_HTML_with_DynaZoom_feature">Static HTML with DynaZoom feature</span></h4>
+<p>Install <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=perl-cgi-fast">perl-cgi-fast</a></span>.
+</p>
+<p>You must enable one of these:
+</p>
+<ul>
+<li>
+<code>mod_cgid</code> (or <code>mod_cgi</code> if using mpm_prefork_module) by uncommenting the line in <code>httpd.conf</code>.</li>
+<li>Or install <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/mod_fcgid/">mod_fcgid</a></span><sup><small>AUR</small></sup> and add <code>LoadModule fcgid_module modules/mod_fcgid.so</code> in <code>httpd.conf</code>.</li>
+</ul>
+<pre>&lt;VirtualHost *:80&gt;
+   ServerName localhost
+   ServerAdmin  root@localhost
+
+   DocumentRoot /srv/http/munin
+
+   ErrorLog /var/log/httpd/munin-error.log
+   CustomLog /var/log/httpd/munin-access.log combined
+
+   # Rewrites
+   RewriteEngine On
+
+   # Images
+   RewriteRule ^/munin-cgi(.*) /usr/share/munin/cgi/$1 [L] 
+
+   # Ensure we can run (fast)cgi scripts
+   &lt;Directory "/usr/share/munin/cgi"&gt;
+       Require all granted
+       Options +ExecCGI
+       &lt;IfModule mod_fcgid.c&gt;
+           SetHandler fcgid-script
+       &lt;/IfModule&gt;
+       &lt;IfModule !mod_fcgid.c&gt;
+           SetHandler cgi-script
+       &lt;/IfModule&gt;
+   &lt;/Directory&gt;
+&lt;/VirtualHost&gt;
+</pre>
+<h4><span class="mw-headline" id="DynaZoom_Permissions">DynaZoom Permissions</span></h4>
+<p>When Munin cannot draw graphs and logs a similar message to <code>Could not draw graph "/var/lib/munin/cgi-tmp/munin-cgi-graph/"</code> check to make sure group permissions are set on <code>/var/lib/munin/cgi-tmp/munin-cgi-graph/</code> so the <code>munin-cgi-graph</code> directory has writeable group permissions such as <code>drwxrwxr-x 3 munin http 4096 Aug  9 20:11 munin-cgi-graph</code>.
+</p>
+<p><code>ls -l /var/lib/munin/cgi-tmp/</code>
+</p>
+<p>If group permissions are not set, then
+</p>
+<p><code>chmod g+w /var/lib/munin/cgi-tmp/munin-cgi-graph/</code>
+</p>
+<h4><span class="mw-headline" id="Full_dynamic">Full dynamic</span></h4>
+<p>Use this VirtualHost if you want to set <code>html_strategy</code> and <code>graph_strategy</code> to <code>cgi</code>. Page loads will take longer because all the HTML and PNG files will be dynamically generated, but the munin-cron run will take less time because it will not execute munin-html and munin-graph. This feature may become necessary for you if your master polls many nodes and the munin-cron risks taking more than 5 minutes.
+</p>
+<p>Install <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=perl-cgi-fast">perl-cgi-fast</a></span>.
+</p>
+<p>You must enable one of these:
+</p>
+<ul>
+<li>
+<code>mod_cgid</code> (or <code>mod_cgi</code> if using mpm_prefork_module) by uncommenting the line in <code>httpd.conf</code>.</li>
+<li>Or install <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/mod_fcgid/">mod_fcgid</a></span><sup><small>AUR</small></sup> and add <code>LoadModule mod_fcgid modules/mod_fcgid.so</code> in <code>httpd.conf</code>.</li>
+</ul>
+<pre>&lt;VirtualHost *:80&gt;
+   ServerName localhost
+   ServerAdmin  root@localhost
+
+   DocumentRoot /srv/http/munin
+
+   ErrorLog /var/log/httpd/munin-error.log
+   CustomLog /var/log/httpd/munin-access.log combined
+
+
+   # Rewrites
+   RewriteEngine On
+
+   # Static content in /static
+   RewriteRule ^/favicon.ico /etc/munin/static/favicon.ico [L] 
+   RewriteRule ^/static/(.*) /etc/munin/static/$1          [L] 
+
+   # HTML
+   RewriteCond %{REQUEST_URI} .html$ [or]
+   RewriteCond %{REQUEST_URI} =/
+   RewriteRule ^/(.*)          /usr/share/munin/cgi/munin-cgi-html/$1 [L] 
+
+   # Images
+   RewriteRule ^/munin-cgi(.*) /usr/share/munin/cgi/$1 [L] 
+
+   &lt;Directory "/etc/munin/static"&gt;
+       Require all granted
+   &lt;/Directory&gt;
+
+   # Ensure we can run (fast)cgi scripts
+   &lt;Directory "/usr/share/munin/cgi"&gt;
+       Require all granted
+       Options +ExecCGI
+       &lt;IfModule mod_fcgid.c&gt;
+           SetHandler fcgid-script
+       &lt;/IfModule&gt;
+       &lt;IfModule !mod_fcgid.c&gt;
+           SetHandler cgi-script
+       &lt;/IfModule&gt;
+   &lt;/Directory&gt;
+&lt;/VirtualHost&gt;
+</pre>
+<h3><span class="mw-headline" id="Nginx">Nginx</span></h3>
+<h4><span class="mw-headline" id="Munin_2.0.x">Munin 2.0.x</span></h4>
+<p>This example Nginx setup is based on a Munin 2.0.x <code>munin</code> master installation. It requires FastCGI and uses the <code>html_strategy cgi</code> and <code>graph_strategy cgi</code> in the <code>munin.conf</code> configuration.
+</p>
+<p><a href="../en/Help:Reading.html#Installation_of_packages" class="mw-redirect" title="Install">Install</a> the <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=nginx">nginx</a></span>, <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=perl-cgi-fast">perl-cgi-fast</a></span> and <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=perl-html-template-expr">perl-html-template-expr</a></span> packages on the Munin-Master.
+</p>
+<p>As we will be using the <i>cgi</i> strategy the systemd socket files need to be enabled. So the <code>/run/munin/fcgi-graph.sock</code> and <code>/run/munin/fcgi-html.sock</code> sockets are created for the Nginx FastCGI configuration to hook into.
+</p>
+<p><a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Enable/start">Enable/start</a> <code>munin-graph.socket</code> and <code>munin-html.socket</code>.
+</p>
+<p>Create the munin vhost configuration file
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/nginx/sites-available/munin</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">server {
+    server_name yourhost.example.com;
+    listen 80;
+    access_log /var/log/nginx/munin-access.log;
+    error_log /var/log/nginx/munin-error.log info;
+    location ^~ /munin-cgi/munin-cgi-graph/ {
+        fastcgi_split_path_info ^(/munin-cgi/munin-cgi-graph)(.*);
+        fastcgi_param PATH_INFO $fastcgi_path_info;
+        fastcgi_pass unix:/run/munin/fcgi-graph.sock;
+        include fastcgi_params;
+    }
+    location /munin/static/ {
+        alias /etc/munin/static/;
+    }
+    location /munin/ {
+        fastcgi_split_path_info ^(/munin)(.*);
+        fastcgi_param PATH_INFO $fastcgi_path_info;
+        fastcgi_pass unix:/run/munin/fcgi-html.sock;
+        include fastcgi_params;
+    }
+}
+</pre>
+<p>Then <a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Restart">restart</a> the webserver (<code>nginx.service</code>).
+</p>
+<p>If all goes well, point your browser to your host <code>http://yourhost.example.com/munin/</code> and you should see the Munin Overview page.
+</p>
+<h4><span class="mw-headline" id="Munin_2.1.x">Munin 2.1.x</span></h4>
+<p>Although Munin 2.1.x versions are not yet available in the Arch repository. It is worth mentioning that the 2.1.x series will no longer use FastCGI and will be replaced with <a rel="nofollow" class="external text" href="http://guide.munin-monitoring.org/en/latest/reference/munin-httpd.html#munin-httpd">munin-httpd</a>
+This <a rel="nofollow" class="external text" href="https://web.archive.org/web/20180221235730/http://guide.munin-monitoring.org/en/latest/example/webserver/nginx.html">page</a> already contains an example configuration.
+</p>
+<h2><span class="mw-headline" id="Tips_and_tricks">Tips and tricks</span></h2>
+<h3><span class="mw-headline" id="MySQL">MySQL</span></h3>
+<p>The MySQL plugin has extra dependencies: <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=perl-dbi">perl-dbi</a></span>, <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=perl-dbd-mysql">perl-dbd-mysql</a></span>, <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/perl-cache-cache/">perl-cache-cache</a></span><sup><small>AUR</small></sup>, and <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/perl-ipc-sharelite/">perl-ipc-sharelite</a></span><sup><small>AUR</small></sup>
+</p>
+<p>Additionally it is recommended to access the database through a separate <a href="../en/MySQL.html" title="MySQL">MySQL</a> user. To make another user via the following MySQL commands:
+</p>
+<pre>MariaDB&gt; CREATE USER 'muninuser'@'localhost' IDENTIFIED BY 'muninpassword';
+MariaDB&gt; GRANT SUPER,PROCESS ON *.* TO 'muninuser'@'localhost';
+MariaDB&gt; GRANT SELECT ON mysql.* TO 'muninuser'@'localhost';
+MariaDB&gt; FLUSH PRIVILEGES; </pre>
+<p>To configure Munin to use this new user, create:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/munin/plugin-conf.d/mysql_</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[mysql_*]
+     env.mysqlconnection DBI:mysql:mysql;host=127.0.0.1;port=3306
+     env.mysqluser muninuser
+     env.mysqlpassword muninpassword</pre>
+<h3><span class="mw-headline" id="S.M.A.R.T.">S.M.A.R.T.</span></h3>
+<p>To enable monitoring of S.M.A.R.T. data, install the <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=smartmontools">smartmontools</a></span> package, and use:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/munin/plugin-conf.d/munin-node</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[smart_*]
+    user root
+    group disk</pre>
+<p>
+Then create the appropriate symlink for each disk to be monitored. As an example for <code>sda</code>: </p>
+<pre># ln -s /usr/lib/munin/plugins/smart_ /etc/munin/plugins/smart_<b>sda</b></pre>
+<h3><span class="mw-headline" id="lm_sensors">lm_sensors</span></h3>
+<p>Install <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=lm_sensors">lm_sensors</a></span> and configure according to <a href="../en/Lm_sensors.html#Configuration" title="Lm sensors">lm_sensors#Configuration</a>. Assuming all goes correctly, create some symlinks:
+</p>
+<pre># ln -s /usr/lib/munin/plugins/sensors_ /etc/munin/plugins/sensors_fan 
+# ln -s /usr/lib/munin/plugins/sensors_ /etc/munin/plugins/sensors_temp
+# ln -s /usr/lib/munin/plugins/sensors_ /etc/munin/plugins/sensors_volt
+</pre>
+</div>
+</div>
+					<div id="catlinks" class="catlinks" data-mw="interface">
+<div id="mw-normal-catlinks" class="mw-normal-catlinks">
+<a href="../Special:Categories.html" title="Special:Categories">Category</a>: <ul><li><a href="../en/Category:System_monitors.html" title="Category:System monitors">System monitors</a></li></ul>
+</div>
+<div id="mw-hidden-catlinks" class="mw-hidden-catlinks mw-hidden-cats-hidden">Hidden categories: <ul>
+<li><a href="../en/Category:Pages_or_sections_flagged_with_Template:Out_of_date.html" title="Category:Pages or sections flagged with Template:Out of date">Pages or sections flagged with Template:Out of date</a></li>
+<li><a href="../en/Category:Pages_with_dead_links.html" title="Category:Pages with dead links">Pages with dead links</a></li>
+</ul>
+</div>
+</div>
+				</div>
+			</main>
+			
+		</div>
+		<div class="mw-footer-container">
+			
+<footer id="footer" class="mw-footer" style="margin: 0">
+	<ul id="footer-info">
+	<li data-nosnippet="">Retrieved from "<a dir="ltr" href="https://wiki.archlinux.org/index.php?title=Munin&amp;oldid=807081">https://wiki.archlinux.org/index.php?title=Munin&amp;oldid=807081</a>"</li>
+<li id="footer-info-lastmod"> This page was last edited on 30 April 2024, at 06:13.</li>
+	<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+<br>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="https://terms.archlinux.org/docs/privacy-policy/">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="../en/ArchWiki:About.html">About ArchWiki</a></li>
+	<li id="footer-places-disclaimers"><a href="../en/ArchWiki:General_disclaimer.html">Disclaimers</a></li>
+	<li id="footer-places-archwiki-code-of-conduct"><a href="https://terms.archlinux.org/docs/code-of-conduct/" class="extiw" title="archlinux-service-agreements:code-of-conduct">Code of conduct</a></li>
+	<li id="footer-places-archwiki-terms-of-service"><a href="https://terms.archlinux.org/docs/terms-of-service/" class="extiw" title="archlinux-service-agreements:terms-of-service">Terms of service</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-copyrightico"><a href="https://www.gnu.org/copyleft/fdl.html" class="cdx-button cdx-button--fake-button cdx-button--size-large cdx-button--fake-button--enabled"><img src="/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" loading="lazy"></a></li>
+	<li id="footer-poweredbyico"><img src="/resources/assets/poweredby_mediawiki.svg" width="88" height="31" loading="lazy"></li>
+</ul>
+
+</footer>
+
+		</div>
+	</div> 
+</div> 
+<div class="vector-settings" id="p-dock-bottom">
+	<ul></ul>
+</div>
+</body>
+</html>

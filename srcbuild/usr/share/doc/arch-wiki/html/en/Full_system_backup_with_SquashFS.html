@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-sticky-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-0 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-disabled skin-theme-clientpref-day vector-toc-available" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>Full system backup with SquashFS - ArchWiki</title>
+<link rel="stylesheet" href="../ArchWikiOffline.css">
+<meta name="ResourceLoaderDynamicStyles" content="">
+<meta name="generator" content="MediaWiki 1.43.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="max-image-preview:standard">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.25, maximum-scale=5.0">
+<link rel="search" type="application/opensearchdescription+xml" href="/rest.php/v1/search" title="ArchWiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.archlinux.org/api.php?action=rsd">
+<link rel="license" href="https://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="ArchWiki Atom feed" href="/index.php?title=Special:RecentChanges&amp;feed=atom">
+</head>
+<body class="skin--responsive skin-vector skin-vector-search-vue mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Full_system_backup_with_SquashFS rootpage-Full_system_backup_with_SquashFS skin-vector-2022 action-view">
+<a class="mw-jump-link" href="#bodyContent">Jump to content</a>
+<div class="vector-header-container">
+	</div>
+<div class="mw-page-container">
+	<div class="mw-page-container-inner">
+		<div class="vector-column-start">
+			<div class="vector-main-menu-container">
+		</div>
+	<div class="vector-sticky-pinned-container">
+				<nav id="mw-panel-toc" aria-label="Contents" data-event-name="ui.sidebar-toc" class="mw-table-of-contents-container vector-toc-landmark">
+					<div id="vector-toc-pinned-container" class="vector-pinned-container">
+					<div id="vector-toc" class="vector-toc vector-pinnable-element">
+	<div class="vector-pinnable-header vector-toc-pinnable-header vector-pinnable-header-pinned" data-feature-name="toc-pinned" data-pinnable-element-id="vector-toc">
+	<h2 class="vector-pinnable-header-label">Contents</h2>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-toc.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-toc.unpin">hide</button>
+</div>
+
+
+	<ul class="vector-toc-contents" id="mw-panel-toc-list">
+		<li id="toc-mw-content-text" class="vector-toc-list-item vector-toc-level-1">
+			<a href="#" class="vector-toc-link">
+				<div class="vector-toc-text">Beginning</div>
+			</a>
+		</li>
+		<li id="toc-Pros_and_cons" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Pros_and_cons">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">1</span>
+				<span>Pros and cons</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Pros_and_cons-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Prepare_the_backup_drive" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Prepare_the_backup_drive">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">2</span>
+				<span>Prepare the backup drive</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Prepare_the_backup_drive-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Prepare_a_live_medium" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Prepare_a_live_medium">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">3</span>
+				<span>Prepare a live medium</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Prepare_a_live_medium-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Back_up" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Back_up">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">4</span>
+				<span>Back up</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Back_up-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-(Optional)_Test_backup_in_QEMU" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#(Optional)_Test_backup_in_QEMU">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">5</span>
+				<span>(Optional) Test backup in QEMU</span>
+			</div>
+		</a>
+		
+		<ul id="toc-(Optional)_Test_backup_in_QEMU-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-(Optional)_Inspect_backup" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#(Optional)_Inspect_backup">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">6</span>
+				<span>(Optional) Inspect backup</span>
+			</div>
+		</a>
+		
+		<ul id="toc-(Optional)_Inspect_backup-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Retrieve_file_from_backup" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Retrieve_file_from_backup">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">7</span>
+				<span>Retrieve file from backup</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Retrieve_file_from_backup-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Restore_backup" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Restore_backup">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">8</span>
+				<span>Restore backup</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Restore_backup-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+</ul>
+</div>
+
+					</div>
+		</nav>
+			</div>
+		</div>
+		<div class="mw-content-container">
+			<main id="content" class="mw-body" style="margin: 0">
+				<header class="mw-body-header vector-page-titlebar">
+					<nav aria-label="Contents" class="vector-toc-landmark">
+						
+<div id="vector-page-titlebar-toc" class="vector-dropdown vector-page-titlebar-toc vector-button-flush-left">
+	<input type="checkbox" id="vector-page-titlebar-toc-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-page-titlebar-toc" class="vector-dropdown-checkbox " aria-label="Toggle the table of contents">
+	<label id="vector-page-titlebar-toc-label" for="vector-page-titlebar-toc-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"><span class="vector-icon mw-ui-icon-listBullet mw-ui-icon-wikimedia-listBullet"></span>
+
+<span class="vector-dropdown-label-text">Toggle the table of contents</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+							<div id="vector-page-titlebar-toc-unpinned-container" class="vector-unpinned-container">
+			</div>
+		
+	</div>
+</div>
+
+					</nav>
+					<h1 id="firstHeading" class="firstHeading mw-first-heading"><span class="mw-page-title-main">Full system backup with SquashFS</span></h1>
+							
+<div id="p-lang-btn" class="vector-dropdown mw-portlet mw-portlet-lang">
+	<input type="checkbox" id="p-lang-btn-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-p-lang-btn" class="vector-dropdown-checkbox mw-interlanguage-selector" aria-label="Go to an article in another language. Available in 2 languages">
+	<label id="p-lang-btn-label" for="p-lang-btn-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--action-progressive mw-portlet-lang-heading-2" aria-hidden="true"><span class="vector-icon mw-ui-icon-language-progressive mw-ui-icon-wikimedia-language-progressive"></span>
+
+<span class="vector-dropdown-label-text">2 languages</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+		<div class="vector-menu-content">
+			
+			<ul class="vector-menu-content-list">
+				
+				<li class="interlanguage-link interwiki-es mw-list-item"><a href="../es/Full_system_backup_with_SquashFS.html" title="Full system backup with SquashFS – español" lang="es" hreflang="es" data-title="Full system backup with SquashFS" data-language-autonym="Español" data-language-local-name="español" class="interlanguage-link-target"><span>Español</span></a></li>
+<li class="interlanguage-link interwiki-ja mw-list-item"><a href="https://wiki.archlinux.jp/index.php/SquashFS_%E3%81%AB%E3%82%88%E3%82%8B%E3%83%95%E3%83%AB%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%83%90%E3%83%83%E3%82%AF%E3%82%A2%E3%83%83%E3%83%97" title="SquashFS によるフルシステムバックアップ – 日本語" lang="ja" hreflang="ja" data-title="SquashFS によるフルシステムバックアップ" data-language-autonym="日本語" data-language-local-name="日本語" class="interlanguage-link-target"><span>日本語</span></a></li>
+			</ul>
+			
+		</div>
+
+	</div>
+</div>
+</header>
+				<div class="vector-column-end">
+					<div class="vector-sticky-pinned-container">
+						<nav class="vector-page-tools-landmark" aria-label="Page tools">
+							<div id="vector-page-tools-pinned-container" class="vector-pinned-container">
+				
+							</div>
+		</nav>
+						<nav class="vector-appearance-landmark" aria-label="Appearance">
+							<div id="vector-appearance-pinned-container" class="vector-pinned-container">
+				<div id="vector-appearance" class="vector-appearance vector-pinnable-element">
+	<div class="vector-pinnable-header vector-appearance-pinnable-header vector-pinnable-header-pinned" data-feature-name="appearance-pinned" data-pinnable-element-id="vector-appearance" data-pinned-container-id="vector-appearance-pinned-container" data-unpinned-container-id="vector-appearance-unpinned-container">
+	<div class="vector-pinnable-header-label">Appearance</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-appearance.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-appearance.unpin">hide</button>
+</div>
+
+
+</div>
+
+							</div>
+		</nav>
+					</div>
+				</div>
+				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container>
+					<div class="vector-body-before-content">
+							<div class="mw-indicators">
+		</div>
+
+						<div id="siteSub" class="noprint">From ArchWiki</div>
+					</div>
+					<div id="contentSub"><div id="mw-content-subtitle"></div></div>
+					
+					
+					<div id="mw-content-text" class="mw-body-content">
+<div class="mw-content-ltr mw-parser-output" lang="en" dir="ltr">
+<div class="archwiki-template-meta-related-articles">
+<p>Related articles</p>
+<ul>
+<li><a href="../en/Full_system_backup_with_tar.html" title="Full system backup with tar">Full system backup with tar</a></li>
+</ul>
+</div>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../File:Tango-edit-clear.svg" decoding="async" width="48" height="48" class="mw-file-element"></span></span><b>This article or section needs language, wiki syntax or style improvements. See <a href="../en/Help:Style.html" title="Help:Style">Help:Style</a> for reference.</b></p>
+<div>
+<b>Reason:</b> Too specifically geared towards one specific sort of backup (using an entire device as the destination), reads like a blog post, content organization is unclear. (Discuss in <a rel="nofollow" class="external text" href="../en/Talk:Full_system_backup_with_SquashFS.html">Talk:Full system backup with SquashFS</a>)</div>
+</div>
+<p>Compressed backup archives of whole filesystems can be made in the <a href="../en/File_systems.html#Read-only_file_systems" class="mw-redirect" title="SquashFS">SquashFS</a> format. Backup and retrieval takes relatively less time with its random access capability, but any kind of modification other than appending is not yet possible.
+</p>
+<table class="wikitable">
+
+<tbody>
+<tr>
+<th>Device File
+</th>
+<th>Description
+</th>
+</tr>
+<tr>
+<td>/dev/sdB
+</td>
+<td>Backup Drive
+</td>
+</tr>
+<tr>
+<td>/dev/sdL
+</td>
+<td>Live Medium
+</td>
+</tr>
+<tr>
+<td>/dev/sdSRC
+</td>
+<td>Drive to Be Backed Up
+</td>
+</tr>
+</tbody>
+</table>
+<meta property="mw:PageProp/toc">
+<h2><span class="mw-headline" id="Pros_and_cons">Pros and cons</span></h2>
+<p>Pros:
+</p>
+<ul>
+<li>No partitioning, no guessing how much size is required</li>
+<li>
+<a href="../en/File_systems.html#Read-only_file_systems" class="mw-redirect" title="SquashFS">SquashFS</a> should be supported by most rescue disks</li>
+<li>
+<a href="https://en.wikipedia.org/wiki/Tar_(computing)#Random_access" class="extiw" title="wikipedia:Tar (computing)">Random access</a><sup>[citation needed]</sup>, with a plain <code>mount</code>
+</li>
+<li>Duplicate files are removed by default (unless <code>-no-duplicates</code> flag is on)</li>
+</ul>
+<p>Cons:
+</p>
+<ul>
+<li>
+<a href="../en/Access_Control_Lists.html" title="Access Control Lists">Access Control Lists</a> <a rel="nofollow" class="external text" href="https://docs.kernel.org/filesystems/squashfs.html#todo-list">are not yet supported</a>, and therefore not backed up</li>
+<li>Not accessible from Windows<sup>1</sup>
+</li>
+<li>Appendable but impossible to remove things from it</li>
+<li>To use the disk for some other purposes, you have to destroy the backup<sup>2</sup>
+</li>
+</ul>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> 
+<ol>
+<li>
+<a rel="nofollow" class="external text" href="https://github.com/AgentD/squashfs-tools-ng">squashfs-tools-ng</a> may support SquashFS image files but Windows itself does not support partitionless drives at all.</li>
+<li>
+<i>Do not grab the <a href="https://en.wikipedia.org/wiki/Lifebuoy" class="extiw" title="wikipedia:Lifebuoy">lifebuoy</a> when you need a <a href="https://en.wikipedia.org/wiki/Swim_ring" class="extiw" title="wikipedia:Swim ring">swim ring</a>.</i> File sharing and backup should be in separate disks. Please <a rel="nofollow" class="external text" href="https://askubuntu.com/a/594861">buy adequate backup hardware</a>.</li>
+</ol>
+</div>
+<h2><span class="mw-headline" id="Prepare_the_backup_drive">Prepare the backup drive</span></h2>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Warning:</strong> 
+<ul>
+<li>All data on the backup drive will be lost.</li>
+<li>All data on machine may be lost if an incorrect device file is specified.</li>
+</ul>
+</div>
+<ol>
+<li>Wipe out all partitions <code>/dev/sdBN</code>, then the partition table <code>/dev/sdB</code>, with <a href="../en/Device_file.html#wipefs" class="mw-redirect" title="Wipefs">wipefs</a>.</li>
+<li>Synchronize all write caches <code># sync</code>
+</li>
+<li>Inform the OS of partition table changes <code># partprobe</code>
+</li>
+<li>Check for bad blocks:
+<ul>
+<li>If the backup drive is an <a href="../en/Solid_state_drive.html" class="mw-redirect" title="SSD">SSD</a>, use <a href="../en/S.M.A.R.T..html" title="S.M.A.R.T.">S.M.A.R.T.</a>.</li>
+<li>If the backup drive is an HDD, use <a href="../en/Badblocks.html" title="Badblocks">badblocks</a>.</li>
+</ul>
+</li>
+</ol>
+<h2><span class="mw-headline" id="Prepare_a_live_medium">Prepare a live medium</span></h2>
+<p><a href="../en/Installation_guide.html#Prepare_an_installation_medium" title="Installation guide">Installation guide#Prepare an installation medium</a> or <a href="../en/Archiso.html" title="Archiso">archiso</a> to /dev/sdL
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> Creating SquashFS filesystem requires <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=squashfs-tools">squashfs-tools</a></span>, which is included in the <a rel="nofollow" class="external text" href="https://archlinux.org/download/">official Arch Linux installation image</a>.</div>
+<h2><span class="mw-headline" id="Back_up">Back up</span></h2>
+<p><a href="../en/Installation_guide.html#Boot_the_live_environment" title="Installation guide">Installation guide#Boot the live environment</a>
+</p>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> If you do not have enough USB ports for both the backup drive and live medium:
+<ol>
+<li>Boot the live medium</li>
+<li>When the boot loader menu appears, press 'e'</li>
+<li>Append <a rel="nofollow" class="external text" href="https://gitlab.archlinux.org/archlinux/archiso/-/blob/d5102724fbacb8f980db346e0caa8b5a85d9edb6/docs/README.bootparams#L26">copytoram</a> to <a href="../en/Kernel_parameters.html" title="Kernel parameters">kernel parameters</a>
+</li>
+<li>
+<code># udisksctl power-off -b /dev/sdL</code> (requires <a href="../en/Archiso.html#Prepare_a_custom_profile" title="Archiso">archiso releng</a> with <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=udisks2">udisks2</a></span> in <a href="../en/Archiso.html#Selecting_packages" title="Archiso">packages.x86_64</a>)</li>
+<li>Make sure the live medium stops spinning and disconnect it</li>
+</ol>
+</div>
+<p>Mount filesystems you would like to backup. (e.g. /dev/sdSRC to /mnt)
+</p>
+<pre># fsck /dev/sdSRC
+# mount -o ro /dev/sdSRC /mnt</pre>
+<p>Back up (<a rel="nofollow" class="external text" href="https://github.com/Un1Gfn/archiso/blob/master/mksquashfs.sh">example script</a>)
+</p>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Warning:</strong> 
+<ul>
+<li>All data on the backup drive will be lost.</li>
+<li>All data on machine may be lost if an incorrect device file is specified.</li>
+</ul>
+</div>
+<pre># mksquashfs /mnt /dev/sdB \
+  -not-reproducible \
+  -xattrs \
+  -wildcards \
+  -noappend \
+  -progress \
+  -mem 5G \
+  -e \
+    var/cache/pacman/pkg \
+    var/lib/pacman/sync \
+    var/log/journal \
+    efi \
+    boot/grub \
+    boot/initramfs-linux"*".img \
+    boot/vmlinuz-linux</pre>
+<dl>
+<dt>-not-reproducible</dt>
+<dd>Slightly increase backup speed</dd>
+<dt>-noappend</dt>
+<dd>Overwrite</dd>
+<dt>-mem</dt>
+<dd>RAM granted to mksquashfs</dd>
+<dt>-e</dt>
+<dd>List of exclude dirs/files</dd>
+</dl>
+<h2>
+<span id=".28Optional.29_Test_backup_in_QEMU"></span><span class="mw-headline" id="(Optional)_Test_backup_in_QEMU">(Optional) Test backup in QEMU</span>
+</h2>
+<p>Grant permission
+</p>
+<pre>$ sudo chown $USER:$USER /dev/sdB
+</pre>
+<p>Launch QEMU
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> <a href="../en/Kernel.html" title="Kernel">Kernel</a> and <a href="../en/Arch_boot_process.html#initramfs" class="mw-redirect" title="Initramfs">initramfs</a> from the host machine are used.</div>
+<pre>$ qemu-system-x86_64 \
+  -kernel /boot/vmlinuz-linux \
+  -append "root=/dev/sdB ro loglevel=3 init=/usr/lib/systemd/systemd" \
+  -initrd /boot/initramfs-linux-fallback.img \
+  -drive file=/dev/sdB,index=0,media=disk,format=raw \
+  -m <i>virtual_machine_ram_in_MiB</i> \
+  --enable-kvm \
+  -cpu host</pre>
+<h2>
+<span id=".28Optional.29_Inspect_backup"></span><span class="mw-headline" id="(Optional)_Inspect_backup">(Optional) Inspect backup</span>
+</h2>
+<p>Get backup date
+</p>
+<pre># date --date=@"$(unsquashfs -mkfs-time /dev/sdB)"
+</pre>
+<p>More superblock information
+</p>
+<pre># unsquashfs -stat /dev/sdB
+</pre>
+<p>Checksum
+</p>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../File:Inaccurate.svg" decoding="async" width="48" height="48" class="mw-file-element"></span></span><b>The factual accuracy of this article or section is disputed.</b></p>
+<div>
+<b>Reason:</b> <code>unsquashfs -stat</code> and <code>df</code> gives different sizes (Discuss in <a rel="nofollow" class="external text" href="../en/Talk:Full_system_backup_with_SquashFS.html">Talk:Full system backup with SquashFS</a>)</div>
+</div>
+<pre># COUNT="$(unsquashfs -stat /dev/sdB | grep -F 'Filesystem size' | cut -d' ' -f3)"
+# echo "$COUNT Byte"
+# numfmt --to=iec-i "$COUNT"
+# head -c "$COUNT" /dev/sdB | sha1sum | tee -a sha1sum.txt</pre>
+<h2><span class="mw-headline" id="Retrieve_file_from_backup">Retrieve file from backup</span></h2>
+<pre># mount /dev/sdB /mnt
+# cp /mnt/<i>path/to/file</i> <i>/path/to/destination</i>
+</pre>
+<h2><span class="mw-headline" id="Restore_backup">Restore backup</span></h2>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../File:Tango-view-fullscreen.svg" decoding="async" width="48" height="48" class="mw-file-element"></span></span><b>This article or section needs expansion.</b></p>
+<div>
+<b>Reason:</b> Add <code>unsquashfs</code> oneliner (Discuss in <a rel="nofollow" class="external text" href="../en/Talk:Full_system_backup_with_SquashFS.html">Talk:Full system backup with SquashFS</a>)</div>
+</div>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> 
+<p>To make system bootable after restore:
+</p>
+<ul>
+<li>fix <a href="../en/Fstab.html" title="Fstab">fstab</a>
+</li>
+<li>arch-chroot
+<ul>
+<li><a href="../en/Mkinitcpio.html#Image_creation_and_activation" class="mw-redirect" title="Regenerate the initramfs">regenerate the initramfs</a></li>
+<li>install and configure <a href="../en/Arch_boot_process.html#Boot_loader" class="mw-redirect" title="Boot loader">boot loader</a>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+					<div id="catlinks" class="catlinks" data-mw="interface">
+<div id="mw-normal-catlinks" class="mw-normal-catlinks">
+<a href="../Special:Categories.html" title="Special:Categories">Category</a>: <ul><li><a href="../en/Category:Backup.html" title="Category:Backup">Backup</a></li></ul>
+</div>
+<div id="mw-hidden-catlinks" class="mw-hidden-catlinks mw-hidden-cats-hidden">Hidden categories: <ul>
+<li><a href="../en/Category:Pages_or_sections_flagged_with_Template:Style.html" title="Category:Pages or sections flagged with Template:Style">Pages or sections flagged with Template:Style</a></li>
+<li><a href="../en/Category:Pages_or_sections_flagged_with_Template:Accuracy.html" title="Category:Pages or sections flagged with Template:Accuracy">Pages or sections flagged with Template:Accuracy</a></li>
+<li><a href="../en/Category:Pages_or_sections_flagged_with_Template:Expansion.html" title="Category:Pages or sections flagged with Template:Expansion">Pages or sections flagged with Template:Expansion</a></li>
+</ul>
+</div>
+</div>
+				</div>
+			</main>
+			
+		</div>
+		<div class="mw-footer-container">
+			
+<footer id="footer" class="mw-footer" style="margin: 0">
+	<ul id="footer-info">
+	<li data-nosnippet="">Retrieved from "<a dir="ltr" href="https://wiki.archlinux.org/index.php?title=Full_system_backup_with_SquashFS&amp;oldid=765936">https://wiki.archlinux.org/index.php?title=Full_system_backup_with_SquashFS&amp;oldid=765936</a>"</li>
+<li id="footer-info-lastmod"> This page was last edited on 31 January 2023, at 15:53.</li>
+	<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+<br>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="https://terms.archlinux.org/docs/privacy-policy/">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="../en/ArchWiki:About.html">About ArchWiki</a></li>
+	<li id="footer-places-disclaimers"><a href="../en/ArchWiki:General_disclaimer.html">Disclaimers</a></li>
+	<li id="footer-places-archwiki-code-of-conduct"><a href="https://terms.archlinux.org/docs/code-of-conduct/" class="extiw" title="archlinux-service-agreements:code-of-conduct">Code of conduct</a></li>
+	<li id="footer-places-archwiki-terms-of-service"><a href="https://terms.archlinux.org/docs/terms-of-service/" class="extiw" title="archlinux-service-agreements:terms-of-service">Terms of service</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-copyrightico"><a href="https://www.gnu.org/copyleft/fdl.html" class="cdx-button cdx-button--fake-button cdx-button--size-large cdx-button--fake-button--enabled"><img src="/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" loading="lazy"></a></li>
+	<li id="footer-poweredbyico"><img src="/resources/assets/poweredby_mediawiki.svg" width="88" height="31" loading="lazy"></li>
+</ul>
+
+</footer>
+
+		</div>
+	</div> 
+</div> 
+<div class="vector-settings" id="p-dock-bottom">
+	<ul></ul>
+</div>
+</body>
+</html>

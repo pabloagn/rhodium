@@ -1,0 +1,54 @@
+<h1>chat</h1>
+
+<blockquote><p>Automate conversations with a modem or serial device.
+Commonly used to establish PPP (Point-to-Point Protocol) connections.
+More information: <a href="https://manned.org/chat.8">https://manned.org/chat.8</a>.</p></blockquote>
+
+<ul>
+<li>Execute a chat script directly from the command line:</li>
+</ul>
+
+
+<p><code>chat '{{expect_send_pairs}}'</code></p>
+
+<ul>
+<li>Execute a chat script from a file:</li>
+</ul>
+
+
+<p><code>chat -f '{{path/to/chat_script}}'</code></p>
+
+<ul>
+<li>Set a custom timeout (in seconds) for expecting a response:</li>
+</ul>
+
+
+<p><code>chat -t {{timeout_in_seconds}} '{{expect_send_pairs}}'</code></p>
+
+<ul>
+<li>Enable verbose output to log the conversation to <code>syslog</code>:</li>
+</ul>
+
+
+<p><code>chat -v '{{expect_send_pairs}}'</code></p>
+
+<ul>
+<li>Use a report file to log specific strings received during the conversation:</li>
+</ul>
+
+
+<p><code>chat -r {{path/to/report_file}} '{{expect_send_pairs}}'</code></p>
+
+<ul>
+<li>Dial a phone number using a variable, substituting <code>\T</code> in the script:</li>
+</ul>
+
+
+<p><code>chat -T '{{phone_number}}' '{{"ATDT\\T CONNECT"}}'</code></p>
+
+<ul>
+<li>Include an abort condition if a specific string is received:</li>
+</ul>
+
+
+<p><code>chat 'ABORT "{{error_string}}" {{expect_send_pairs}}'</code></p>

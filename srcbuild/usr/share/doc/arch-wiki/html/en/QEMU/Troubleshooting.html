@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-sticky-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-0 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-disabled skin-theme-clientpref-day vector-toc-available" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>QEMU/Troubleshooting - ArchWiki</title>
+<link rel="stylesheet" href="../../ArchWikiOffline.css">
+<meta name="ResourceLoaderDynamicStyles" content="">
+<meta name="generator" content="MediaWiki 1.43.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="max-image-preview:standard">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.25, maximum-scale=5.0">
+<link rel="search" type="application/opensearchdescription+xml" href="/rest.php/v1/search" title="ArchWiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.archlinux.org/api.php?action=rsd">
+<link rel="license" href="https://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="ArchWiki Atom feed" href="/index.php?title=Special:RecentChanges&amp;feed=atom">
+</head>
+<body class="skin--responsive skin-vector skin-vector-search-vue mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-QEMU_Troubleshooting rootpage-QEMU skin-vector-2022 action-view">
+<a class="mw-jump-link" href="#bodyContent">Jump to content</a>
+<div class="vector-header-container">
+	</div>
+<div class="mw-page-container">
+	<div class="mw-page-container-inner">
+		<div class="vector-column-start">
+			<div class="vector-main-menu-container">
+		</div>
+	<div class="vector-sticky-pinned-container">
+				<nav id="mw-panel-toc" aria-label="Contents" data-event-name="ui.sidebar-toc" class="mw-table-of-contents-container vector-toc-landmark">
+					<div id="vector-toc-pinned-container" class="vector-pinned-container">
+					<div id="vector-toc" class="vector-toc vector-pinnable-element">
+	<div class="vector-pinnable-header vector-toc-pinnable-header vector-pinnable-header-pinned" data-feature-name="toc-pinned" data-pinnable-element-id="vector-toc">
+	<h2 class="vector-pinnable-header-label">Contents</h2>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-toc.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-toc.unpin">hide</button>
+</div>
+
+
+	<ul class="vector-toc-contents" id="mw-panel-toc-list">
+		<li id="toc-mw-content-text" class="vector-toc-list-item vector-toc-level-1">
+			<a href="#" class="vector-toc-link">
+				<div class="vector-toc-text">Beginning</div>
+			</a>
+		</li>
+		<li id="toc-Mouse_cursor_is_jittery_or_erratic" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Mouse_cursor_is_jittery_or_erratic">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">1</span>
+				<span>Mouse cursor is jittery or erratic</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Mouse_cursor_is_jittery_or_erratic-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-No_visible_Cursor" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#No_visible_Cursor">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">2</span>
+				<span>No visible Cursor</span>
+			</div>
+		</a>
+		
+		<ul id="toc-No_visible_Cursor-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Two_different_mouse_cursors_are_visible" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Two_different_mouse_cursors_are_visible">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">3</span>
+				<span>Two different mouse cursors are visible</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Two_different_mouse_cursors_are_visible-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Keyboard_issues_when_using_VNC" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Keyboard_issues_when_using_VNC">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">4</span>
+				<span>Keyboard issues when using VNC</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Keyboard_issues_when_using_VNC-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Keyboard_seems_broken_or_the_arrow_keys_do_not_work" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Keyboard_seems_broken_or_the_arrow_keys_do_not_work">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">5</span>
+				<span>Keyboard seems broken or the arrow keys do not work</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Keyboard_seems_broken_or_the_arrow_keys_do_not_work-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Could_not_read_keymap_file" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Could_not_read_keymap_file">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">6</span>
+				<span>Could not read keymap file</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Could_not_read_keymap_file-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Guest_display_stretches_on_window_resize" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Guest_display_stretches_on_window_resize">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">7</span>
+				<span>Guest display stretches on window resize</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Guest_display_stretches_on_window_resize-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-ioctl(KVM_CREATE_VM)_failed:_16_Device_or_resource_busy" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#ioctl(KVM_CREATE_VM)_failed:_16_Device_or_resource_busy">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">8</span>
+				<span>ioctl(KVM_CREATE_VM) failed: 16 Device or resource busy</span>
+			</div>
+		</a>
+		
+		<ul id="toc-ioctl(KVM_CREATE_VM)_failed:_16_Device_or_resource_busy-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-libgfapi_error_message" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#libgfapi_error_message">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">9</span>
+				<span>libgfapi error message</span>
+			</div>
+		</a>
+		
+		<ul id="toc-libgfapi_error_message-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Kernel_panic_on_LIVE-environments" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Kernel_panic_on_LIVE-environments">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">10</span>
+				<span>Kernel panic on LIVE-environments</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Kernel_panic_on_LIVE-environments-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Windows_7_guest_suffers_low-quality_sound" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Windows_7_guest_suffers_low-quality_sound">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">11</span>
+				<span>Windows 7 guest suffers low-quality sound</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Windows_7_guest_suffers_low-quality_sound-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Could_not_access_KVM_kernel_module:_Permission_denied" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Could_not_access_KVM_kernel_module:_Permission_denied">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">12</span>
+				<span>Could not access KVM kernel module: Permission denied</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Could_not_access_KVM_kernel_module:_Permission_denied-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id='toc-"System_Thread_Exception_Not_Handled"_when_booting_a_Windows_virtual_machine' class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href='#"System_Thread_Exception_Not_Handled"_when_booting_a_Windows_virtual_machine'>
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">13</span>
+				<span>"System Thread Exception Not Handled" when booting a Windows virtual machine</span>
+			</div>
+		</a>
+		
+		<ul id='toc-"System_Thread_Exception_Not_Handled"_when_booting_a_Windows_virtual_machine-sublist' class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Certain_Windows_games/applications_crashing/causing_a_bluescreen" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Certain_Windows_games/applications_crashing/causing_a_bluescreen">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">14</span>
+				<span>Certain Windows games/applications crashing/causing a bluescreen</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Certain_Windows_games/applications_crashing/causing_a_bluescreen-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-High_interrupt_latency_and_microstuttering" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#High_interrupt_latency_and_microstuttering">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">15</span>
+				<span>High interrupt latency and microstuttering</span>
+			</div>
+		</a>
+		
+		<ul id="toc-High_interrupt_latency_and_microstuttering-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-QXL_video_causes_low_resolution" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#QXL_video_causes_low_resolution">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">16</span>
+				<span>QXL video causes low resolution</span>
+			</div>
+		</a>
+		
+		<ul id="toc-QXL_video_causes_low_resolution-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Virtual_machine_not_booting_when_using_a_Secure_Boot_enabled_OVMF" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Virtual_machine_not_booting_when_using_a_Secure_Boot_enabled_OVMF">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">17</span>
+				<span>Virtual machine not booting when using a Secure Boot enabled OVMF</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Virtual_machine_not_booting_when_using_a_Secure_Boot_enabled_OVMF-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Virtual_machine_not_booting_into_Arch_ISO" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Virtual_machine_not_booting_into_Arch_ISO">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">18</span>
+				<span>Virtual machine not booting into Arch ISO</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Virtual_machine_not_booting_into_Arch_ISO-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Guest_CPU_interrupts_are_not_firing" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Guest_CPU_interrupts_are_not_firing">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">19</span>
+				<span>Guest CPU interrupts are not firing</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Guest_CPU_interrupts_are_not_firing-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-KDE_with_sddm_does_not_start_spice-vdagent_at_login_automatically" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#KDE_with_sddm_does_not_start_spice-vdagent_at_login_automatically">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">20</span>
+				<span>KDE with sddm does not start spice-vdagent at login automatically</span>
+			</div>
+		</a>
+		
+		<ul id="toc-KDE_with_sddm_does_not_start_spice-vdagent_at_login_automatically-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+</ul>
+</div>
+
+					</div>
+		</nav>
+			</div>
+		</div>
+		<div class="mw-content-container">
+			<main id="content" class="mw-body" style="margin: 0">
+				<header class="mw-body-header vector-page-titlebar">
+					<nav aria-label="Contents" class="vector-toc-landmark">
+						
+<div id="vector-page-titlebar-toc" class="vector-dropdown vector-page-titlebar-toc vector-button-flush-left">
+	<input type="checkbox" id="vector-page-titlebar-toc-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-page-titlebar-toc" class="vector-dropdown-checkbox " aria-label="Toggle the table of contents">
+	<label id="vector-page-titlebar-toc-label" for="vector-page-titlebar-toc-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"><span class="vector-icon mw-ui-icon-listBullet mw-ui-icon-wikimedia-listBullet"></span>
+
+<span class="vector-dropdown-label-text">Toggle the table of contents</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+							<div id="vector-page-titlebar-toc-unpinned-container" class="vector-unpinned-container">
+			</div>
+		
+	</div>
+</div>
+
+					</nav>
+					<h1 id="firstHeading" class="firstHeading mw-first-heading"><span class="mw-page-title-main">QEMU/Troubleshooting</span></h1>
+				</header>
+				<div class="vector-column-end">
+					<div class="vector-sticky-pinned-container">
+						<nav class="vector-page-tools-landmark" aria-label="Page tools">
+							<div id="vector-page-tools-pinned-container" class="vector-pinned-container">
+				
+							</div>
+		</nav>
+						<nav class="vector-appearance-landmark" aria-label="Appearance">
+							<div id="vector-appearance-pinned-container" class="vector-pinned-container">
+				<div id="vector-appearance" class="vector-appearance vector-pinnable-element">
+	<div class="vector-pinnable-header vector-appearance-pinnable-header vector-pinnable-header-pinned" data-feature-name="appearance-pinned" data-pinnable-element-id="vector-appearance" data-pinned-container-id="vector-appearance-pinned-container" data-unpinned-container-id="vector-appearance-unpinned-container">
+	<div class="vector-pinnable-header-label">Appearance</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-appearance.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-appearance.unpin">hide</button>
+</div>
+
+
+</div>
+
+							</div>
+		</nav>
+					</div>
+				</div>
+				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container>
+					<div class="vector-body-before-content">
+							<div class="mw-indicators">
+		</div>
+
+						<div id="siteSub" class="noprint">From ArchWiki</div>
+					</div>
+					<div id="contentSub"><div id="mw-content-subtitle"><div class="subpages">&lt; <bdi dir="ltr"><a href="../../en/QEMU.html" title="QEMU">QEMU</a></bdi>
+</div></div></div>
+					
+					
+					<div id="mw-content-text" class="mw-body-content">
+<div class="mw-content-ltr mw-parser-output" lang="en" dir="ltr">
+<meta property="mw:PageProp/toc">
+<h2><span class="mw-headline" id="Mouse_cursor_is_jittery_or_erratic">Mouse cursor is jittery or erratic</span></h2>
+<p>If the cursor jumps around the screen uncontrollably, entering this on the terminal before starting QEMU might help:
+</p>
+<pre>$ export SDL_VIDEO_X11_DGAMOUSE=0
+</pre>
+<p>If this helps, you can add this to your <code>~/.bashrc</code> file.
+</p>
+<h2><span class="mw-headline" id="No_visible_Cursor">No visible Cursor</span></h2>
+<p>Add <code>-display default,show-cursor=on</code> to QEMU's options to see a mouse cursor.
+</p>
+<p>If that still does not work, make sure you have set your display device appropriately, for example: <code>-vga qxl</code>.
+</p>
+<p>Another option to try is <code>-usb -device usb-tablet</code> as mentioned in <a href="#Mouse_integration">#Mouse integration</a>. This overrides the default PS/2 mouse emulation and synchronizes pointer location between host and guest as an added bonus.
+</p>
+<h2><span class="mw-headline" id="Two_different_mouse_cursors_are_visible">Two different mouse cursors are visible</span></h2>
+<p>Apply the tip <a href="#Mouse_integration">#Mouse integration</a>.
+</p>
+<h2><span class="mw-headline" id="Keyboard_issues_when_using_VNC">Keyboard issues when using VNC</span></h2>
+<p>When using VNC, you might experience keyboard problems described (in gory details) <a rel="nofollow" class="external text" href="https://www.berrange.com/posts/2010/07/04/more-than-you-or-i-ever-wanted-to-know-about-virtual-keyboard-handling/">here</a>. The solution is <i>not</i> to use the <code>-k</code> option on QEMU, and to use <code>gvncviewer</code> from <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=gtk-vnc">gtk-vnc</a></span>. See also <a rel="nofollow" class="external text" href="https://www.mail-archive.com/libvir-list@redhat.com/msg13340.html">this</a> message posted on libvirt's mailing list.
+</p>
+<h2><span class="mw-headline" id="Keyboard_seems_broken_or_the_arrow_keys_do_not_work">Keyboard seems broken or the arrow keys do not work</span></h2>
+<p>Should you find that some of your keys do not work or "press" the wrong key (in particular, the arrow keys), you likely need to specify your keyboard layout as an option. The keyboard layouts can be found in <code>/usr/share/qemu/keymaps/</code>.
+</p>
+<pre>$ qemu-system-x86_64 -k <i>keymap</i> <i>disk_image</i>
+</pre>
+<h2><span class="mw-headline" id="Could_not_read_keymap_file">Could not read keymap file</span></h2>
+<pre>qemu-system-x86_64: -display vnc=0.0.0.0:0: could not read keymap file: 'en'
+</pre>
+<p>is caused by an invalid <i>keymap</i> passed to the <code>-k</code> argument. For example, <code>en</code> is invalid, but <code>en-us</code> is valid - see <code>/usr/share/qemu/keymaps/</code>.
+</p>
+<h2><span class="mw-headline" id="Guest_display_stretches_on_window_resize">Guest display stretches on window resize</span></h2>
+<p>To restore default window size, press <code>Ctrl+Alt+u</code>.
+</p>
+<h2>
+<span id="ioctl.28KVM_CREATE_VM.29_failed:_16_Device_or_resource_busy"></span><span class="mw-headline" id="ioctl(KVM_CREATE_VM)_failed:_16_Device_or_resource_busy">ioctl(KVM_CREATE_VM) failed: 16 Device or resource busy</span>
+</h2>
+<p>If an error message like this is printed when starting QEMU with <code>-enable-kvm</code> option:
+</p>
+<pre>ioctl(KVM_CREATE_VM) failed: 16 Device or resource busy
+failed to initialize KVM: Device or resource busy
+</pre>
+<p>that means another <a href="../../en/Category:Hypervisors.html" class="mw-redirect" title="Hypervisor">hypervisor</a> is currently running. It is not recommended or possible to run several hypervisors in parallel.
+</p>
+<h2><span class="mw-headline" id="libgfapi_error_message">libgfapi error message</span></h2>
+<p>The error message displayed at startup:
+</p>
+<pre>Failed to open module: libgfapi.so.0: cannot open shared object file: No such file or directory
+</pre>
+<p><a href="../../en/Help:Reading.html#Installation_of_packages" class="mw-redirect" title="Install">Install</a> <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=glusterfs">glusterfs</a></span> or ignore the error message as GlusterFS is a optional dependency.
+</p>
+<h2><span class="mw-headline" id="Kernel_panic_on_LIVE-environments">Kernel panic on LIVE-environments</span></h2>
+<p>If you start a live-environment (or better: booting a system) you may encounter this:
+</p>
+<pre>[ end Kernel panic - not syncing: VFS: Unable to mount root fs on unknown block(0,0)
+</pre>
+<p>or some other boot hindering process (e.g. cannot unpack initramfs, cant start service foo).
+Try starting the virtual machine with the <code>-m VALUE</code> switch and an appropriate amount of RAM, if the ram is to low you will probably encounter similar issues as above/without the memory-switch.
+</p>
+<h2><span class="mw-headline" id="Windows_7_guest_suffers_low-quality_sound">Windows 7 guest suffers low-quality sound</span></h2>
+<p>Using the <code>hda</code> audio driver for Windows 7 guest may result in low-quality sound. Changing the audio driver to <code>ac97</code> by passing the <code>-soundhw ac97</code> arguments to QEMU and installing the AC97 driver from <a rel="nofollow" class="external text" href="https://www.realtek.com/en/component/zoo/category/pc-audio-codecs-ac-97-audio-codecs-software">Realtek AC'97 Audio Codecs</a><sup title="Last check status: SSL error">[<a href="https://en.wikipedia.org/wiki/Wikipedia:Link_rot" class="extiw" title="wikipedia:Wikipedia:Link rot">dead link</a> 2025-01-22 ⓘ]</sup> in the guest may solve the problem. See <a rel="nofollow" class="external text" href="https://bugzilla.redhat.com/show_bug.cgi?id=1176761#c16">Red Hat Bugzilla – Bug 1176761</a> for more information.
+</p>
+<h2><span class="mw-headline" id="Could_not_access_KVM_kernel_module:_Permission_denied">Could not access KVM kernel module: Permission denied</span></h2>
+<p>If you encounter the following error:
+</p>
+<pre>libvirtError: internal error: process exited while connecting to monitor: Could not access KVM kernel module: Permission denied failed to initialize KVM: Permission denied
+</pre>
+<p>Systemd 234 assigns a dynamic ID for the <code>kvm</code> group (see <a rel="nofollow" class="external text" href="https://bugs.archlinux.org/task/54943">FS#54943</a>). To avoid this error, you need edit the file <code>/etc/libvirt/qemu.conf</code> and change the line with <code>group = "78"</code> to <code>group = "kvm"</code>.
+</p>
+<h2>
+<span id=".22System_Thread_Exception_Not_Handled.22_when_booting_a_Windows_virtual_machine"></span><span class="mw-headline" id='"System_Thread_Exception_Not_Handled"_when_booting_a_Windows_virtual_machine'>"System Thread Exception Not Handled" when booting a Windows virtual machine</span>
+</h2>
+<p>Windows 8 or Windows 10 guests may raise a generic compatibility exception at boot, namely "System Thread Exception Not Handled", which tends to be caused by legacy drivers acting strangely on real machines. On KVM machines this issue can generally be solved by setting the CPU model to <code>core2duo</code>.
+</p>
+<h2>
+<span id="Certain_Windows_games.2Fapplications_crashing.2Fcausing_a_bluescreen"></span><span class="mw-headline" id="Certain_Windows_games/applications_crashing/causing_a_bluescreen">Certain Windows games/applications crashing/causing a bluescreen</span>
+</h2>
+<p>Occasionally, applications running in the virtual machine may crash unexpectedly, whereas they would run normally on a physical machine. If, while running <code>dmesg -wH</code> as root, you encounter an error mentioning <code>MSR</code>, the reason for those crashes is that KVM injects a <a href="https://en.wikipedia.org/wiki/General_protection_fault" class="extiw" title="wikipedia:General protection fault">General protection fault</a> (GPF) when the guest tries to access unsupported <a href="https://en.wikipedia.org/wiki/Model-specific_register" class="extiw" title="wikipedia:Model-specific register">Model-specific registers</a> (MSRs) - this often results in guest applications/OS crashing. A number of those issues can be solved by passing the <code>ignore_msrs=1</code> option to the KVM module, which will ignore unimplemented MSRs.
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/modprobe.d/kvm.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">...
+options kvm ignore_msrs=1
+...</pre>
+<p>Cases where adding this option might help:
+</p>
+<ul>
+<li>GeForce Experience complaining about an unsupported CPU being present.</li>
+<li>StarCraft 2 and L.A. Noire reliably blue-screening Windows 10 with <code>KMODE_EXCEPTION_NOT_HANDLED</code>. The blue screen information does not identify a driver file in these cases.</li>
+</ul>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Warning:</strong> While this is normally safe and some applications might not work without this, silently ignoring unknown MSR accesses could potentially break other software within the virtual machine or other virtual machine.</div>
+<h2><span class="mw-headline" id="High_interrupt_latency_and_microstuttering">High interrupt latency and microstuttering</span></h2>
+<p>This problem manifests itself as small pauses (stutters) and is particularly noticeable in graphics-intensive applications, such as games.
+</p>
+<ul>
+<li>One of the causes is CPU power saving features, which are controlled by <a href="../../en/CPU_frequency_scaling.html" title="CPU frequency scaling">CPU frequency scaling</a>. Change this to <code>performance</code> for all processor cores.</li>
+<li>Another possible cause is PS/2 inputs. Switch from PS/2 to Virtio inputs, see <a href="../../en/PCI_passthrough_via_OVMF.html#Passing_keyboard/mouse_via_Evdev" title="PCI passthrough via OVMF">PCI passthrough via OVMF#Passing keyboard/mouse via Evdev</a>.</li>
+</ul>
+<h2><span class="mw-headline" id="QXL_video_causes_low_resolution">QXL video causes low resolution</span></h2>
+<p>QEMU 4.1.0 introduced a regression where QXL video can fall back to low resolutions, when being displayed through spice. <a rel="nofollow" class="external autonumber" href="https://bugs.launchpad.net/qemu/+bug/1843151">[1]</a> For example, when KMS starts, text resolution may become as low as 4x10 characters. When trying to increase GUI resolution, it may go to the lowest supported resolution.
+</p>
+<p>As a workaround, create your device in this form:
+</p>
+<pre>-device qxl-vga,max_outputs=1...
+</pre>
+<h2><span class="mw-headline" id="Virtual_machine_not_booting_when_using_a_Secure_Boot_enabled_OVMF">Virtual machine not booting when using a Secure Boot enabled OVMF</span></h2>
+<p><code>OVMF_CODE.secboot.4m.fd</code> and <code>OVMF_CODE.secboot.fd</code> files from <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=edk2-ovmf">edk2-ovmf</a></span> are built with <a href="https://en.wikipedia.org/wiki/System_Management_Mode" class="extiw" title="wikipedia:System Management Mode">SMM</a> support. If S3 support is not disabled in the virtual machine, then the virtual machine might not boot at all.
+</p>
+<p>Add the <code>-global ICH9-LPC.disable_s3=1</code> option to the <i>qemu</i> command.
+</p>
+<p>See <a rel="nofollow" class="external text" href="https://bugs.archlinux.org/task/59465">FS#59465</a> and <a rel="nofollow" class="external free" href="https://github.com/tianocore/edk2/blob/master/OvmfPkg/README">https://github.com/tianocore/edk2/blob/master/OvmfPkg/README</a> for more details and the required options to use Secure Boot in QEMU.
+</p>
+<h2><span class="mw-headline" id="Virtual_machine_not_booting_into_Arch_ISO">Virtual machine not booting into Arch ISO</span></h2>
+<p>When trying to boot the virtual machine for the first time from an Arch ISO image, the boot process hangs. Adding <code>console=ttyS0</code> to kernel boot options by pressing <code>e</code> in the boot menu you will get more boot messages and the following error:
+</p>
+<pre>:: Mounting '/dev/disk/by-label/ARCH_202204' to '/run/archiso/bootmnt'
+Waiting 30 seconds for device /dev/disk/by-label/ARCH_202204 ...
+ERROR: '/dev/disk/by-label/ARCH_202204' device did not show up after 30 seconds...
+   Falling back to interactive prompt
+   You can try to fix the problem manually, log out when you are finished
+sh: can't access tty; job control turned off
+</pre>
+<p>The error message does not give a good clue as to what the real issue is. The problem is with the default 128MB of RAM that QEMU allocates to the virtual machine. Increasing the limit to 1024MB with <code>-m 1024</code> solves the issue and lets the system boot. You can continue installing Arch Linux as usual after that. Once the installation is complete, the memory allocation for the virtual machine can be decreased. The need for 1024MB is due to RAM disk requirements and size of the installation media. See <a rel="nofollow" class="external text" href="https://lists.archlinux.org/archives/list/arch-releng@lists.archlinux.org/message/D5HSGOFTPGYI6IZUEB3ZNAX4D3F3ID37/">this message on the arch-releng mailing list</a> and <a rel="nofollow" class="external text" href="https://bbs.archlinux.org/viewtopic.php?id=204023">this forum thread</a>.
+</p>
+<h2><span class="mw-headline" id="Guest_CPU_interrupts_are_not_firing">Guest CPU interrupts are not firing</span></h2>
+<p>If you are writing your own operating system by following the <a rel="nofollow" class="external text" href="https://wiki.osdev.org/">OSDev wiki</a>, or are simply getting stepping through the guest architecture assembly code using QEMU's <code>gdb</code> interface using the <code>-s</code> flag, it is useful to know that many emulators, QEMU included, usually implement some CPU interrupts leaving many hardware interrupts unimplemented. One way to know if your code is firing an interrupt, is by using:
+</p>
+<pre>-d int
+</pre>
+<p>to enable showing interrupts/exceptions on stdout.
+</p>
+<p>To see what other guest debugging features QEMU has to offer, see:
+</p>
+<pre>qemu-system-x86_64 -d help
+</pre>
+<p>or replace <code>x86_64</code> for your chosen guest architecture.
+</p>
+<h2><span class="mw-headline" id="KDE_with_sddm_does_not_start_spice-vdagent_at_login_automatically">KDE with sddm does not start spice-vdagent at login automatically</span></h2>
+<p>Remove or comment out <code>X-GNOME-Autostart-Phase=WindowManager</code> from <code>/etc/xdg/autostart/spice-vdagent.desktop</code>. <a rel="nofollow" class="external autonumber" href="https://github.com/systemd/systemd/issues/18791">[2]</a>
+</p>
+</div>
+</div>
+					<div id="catlinks" class="catlinks" data-mw="interface">
+<div id="mw-normal-catlinks" class="mw-normal-catlinks">
+<a href="../../Special:Categories.html" title="Special:Categories">Categories</a>: <ul>
+<li><a href="../../en/Category:Emulation.html" title="Category:Emulation">Emulation</a></li>
+<li><a href="../../en/Category:Hypervisors.html" title="Category:Hypervisors">Hypervisors</a></li>
+</ul>
+</div>
+<div id="mw-hidden-catlinks" class="mw-hidden-catlinks mw-hidden-cats-hidden">Hidden category: <ul><li><a href="../../en/Category:Pages_with_dead_links.html" title="Category:Pages with dead links">Pages with dead links</a></li></ul>
+</div>
+</div>
+				</div>
+			</main>
+			
+		</div>
+		<div class="mw-footer-container">
+			
+<footer id="footer" class="mw-footer" style="margin: 0">
+	<ul id="footer-info">
+	<li data-nosnippet="">Retrieved from "<a dir="ltr" href="https://wiki.archlinux.org/index.php?title=QEMU/Troubleshooting&amp;oldid=828618">https://wiki.archlinux.org/index.php?title=QEMU/Troubleshooting&amp;oldid=828618</a>"</li>
+<li id="footer-info-lastmod"> This page was last edited on 10 March 2025, at 20:03.</li>
+	<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+<br>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="https://terms.archlinux.org/docs/privacy-policy/">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="../../en/ArchWiki:About.html">About ArchWiki</a></li>
+	<li id="footer-places-disclaimers"><a href="../../en/ArchWiki:General_disclaimer.html">Disclaimers</a></li>
+	<li id="footer-places-archwiki-code-of-conduct"><a href="https://terms.archlinux.org/docs/code-of-conduct/" class="extiw" title="archlinux-service-agreements:code-of-conduct">Code of conduct</a></li>
+	<li id="footer-places-archwiki-terms-of-service"><a href="https://terms.archlinux.org/docs/terms-of-service/" class="extiw" title="archlinux-service-agreements:terms-of-service">Terms of service</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-copyrightico"><a href="https://www.gnu.org/copyleft/fdl.html" class="cdx-button cdx-button--fake-button cdx-button--size-large cdx-button--fake-button--enabled"><img src="/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" loading="lazy"></a></li>
+	<li id="footer-poweredbyico"><img src="/resources/assets/poweredby_mediawiki.svg" width="88" height="31" loading="lazy"></li>
+</ul>
+
+</footer>
+
+		</div>
+	</div> 
+</div> 
+<div class="vector-settings" id="p-dock-bottom">
+	<ul></ul>
+</div>
+</body>
+</html>

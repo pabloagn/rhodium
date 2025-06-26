@@ -1,0 +1,61 @@
+<h1>hledger</h1>
+
+<blockquote><p>Una aplicación de contabilidad en texto plano que es robusta y fácil de usar.
+Vea también: <code>hledger-ui</code> para la TUI, <code>hledger-web</code> para la interfaz web.
+Más información: <a href="https://hledger.org/hledger.html">https://hledger.org/hledger.html</a>.</p></blockquote>
+
+<ul>
+<li>Registra nuevas transacciones interactivamente, guardándolas en el archivo de diario por defecto:</li>
+</ul>
+
+
+<p><code>hledger add</code></p>
+
+<ul>
+<li>Importa nuevas transacciones de <code>banco.csv</code>, usando <code>banco.csv.rules</code> para convertir:</li>
+</ul>
+
+
+<p><code>hledger import {{ruta/a/banco.csv}}</code></p>
+
+<ul>
+<li>Imprime todas las transacciones, leyendo múltiples archivos de diario específicos:</li>
+</ul>
+
+
+<p><code>hledger print --file {{ruta/a/precios-2024.journal}} --file {{ruta/a/precios-2023.journal}}</code></p>
+
+<ul>
+<li>Muestra todas las cuentas, como jerarquía, y sus tipos:</li>
+</ul>
+
+
+<p><code>hledger accounts --tree --types</code></p>
+
+<ul>
+<li>Muestra saldos de cuenta de activos y pasivos, incluyendo ceros, jerárquicamente:</li>
+</ul>
+
+
+<p><code>hledger balancesheet --empty --tree --no-elide</code></p>
+
+<ul>
+<li>Muestra ingresos/gastos/totales mensuales, los más grandes primero, resumido a 2 niveles:</li>
+</ul>
+
+
+<p><code>hledger incomestatement --monthly --row-total --average --sort --depth 2</code></p>
+
+<ul>
+<li>Muestra las transacciones de la cuenta <code>assets:bank:checking</code> y su saldo actual:</li>
+</ul>
+
+
+<p><code>hledger aregister assets:bank:checking</code></p>
+
+<ul>
+<li>Muestra el monto gastado en comida desde la cuenta <code>assets:cash</code>:</li>
+</ul>
+
+
+<p><code>hledger print assets:cash | hledger -f- -I aregister expenses:food</code></p>

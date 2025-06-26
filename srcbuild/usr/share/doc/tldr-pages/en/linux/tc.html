@@ -1,0 +1,53 @@
+<h1>tc</h1>
+
+<blockquote><p>Show/manipulate traffic control settings.
+More information: <a href="https://manned.org/tc">https://manned.org/tc</a>.</p></blockquote>
+
+<ul>
+<li>Add constant network delay to outbound packages:</li>
+</ul>
+
+
+<p><code>sudo tc {{[q|qdisc]}} {{[a|add]}} dev {{eth0}} root netem delay {{delay_in_milliseconds}}ms</code></p>
+
+<ul>
+<li>Add normal distributed network delay to outbound packages:</li>
+</ul>
+
+
+<p><code>sudo tc {{[q|qdisc]}} {{[a|add]}} dev {{eth0}} root netem delay {{mean_delay_ms}}ms {{delay_std_ms}}ms</code></p>
+
+<ul>
+<li>Add package corruption/loss/duplication to a portion of packages:</li>
+</ul>
+
+
+<p><code>sudo tc {{[q|qdisc]}} {{[a|add]}} dev {{eth0}} root netem {{corruption|loss|duplication}} {{effect_percentage}}%</code></p>
+
+<ul>
+<li>Limit bandwidth, burst rate and max latency:</li>
+</ul>
+
+
+<p><code>sudo tc {{[q|qdisc]}} {{[a|add]}} dev eth0 root tbf rate {{max_bandwidth_mb}}mbit burst {{max_burst_rate_kb}}kbit latency {{max_latency_before_drop_ms}}ms</code></p>
+
+<ul>
+<li>Show active traffic control policies:</li>
+</ul>
+
+
+<p><code>tc {{[q|qdisc]}} {{[s|show]}} dev {{eth0}}</code></p>
+
+<ul>
+<li>Delete all traffic control rules:</li>
+</ul>
+
+
+<p><code>sudo tc {{[q|qdisc]}} {{[d|delete]}} dev {{eth0}}</code></p>
+
+<ul>
+<li>Change traffic control rule:</li>
+</ul>
+
+
+<p><code>sudo tc {{[q|qdisc]}} {{[c|change]}} dev {{eth0}} root netem {{policy}} {{policy_parameters}}</code></p>

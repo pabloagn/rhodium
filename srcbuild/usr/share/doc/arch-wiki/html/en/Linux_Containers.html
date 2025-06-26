@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-sticky-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-0 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-disabled skin-theme-clientpref-day vector-toc-available" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>Linux Containers - ArchWiki</title>
+<link rel="stylesheet" href="../ArchWikiOffline.css">
+<meta name="ResourceLoaderDynamicStyles" content="">
+<meta name="generator" content="MediaWiki 1.43.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="max-image-preview:standard">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.25, maximum-scale=5.0">
+<link rel="search" type="application/opensearchdescription+xml" href="/rest.php/v1/search" title="ArchWiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.archlinux.org/api.php?action=rsd">
+<link rel="license" href="https://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="ArchWiki Atom feed" href="/index.php?title=Special:RecentChanges&amp;feed=atom">
+</head>
+<body class="skin--responsive skin-vector skin-vector-search-vue mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Linux_Containers rootpage-Linux_Containers skin-vector-2022 action-view">
+<a class="mw-jump-link" href="#bodyContent">Jump to content</a>
+<div class="vector-header-container">
+	</div>
+<div class="mw-page-container">
+	<div class="mw-page-container-inner">
+		<div class="vector-column-start">
+			<div class="vector-main-menu-container">
+		</div>
+	<div class="vector-sticky-pinned-container">
+				<nav id="mw-panel-toc" aria-label="Contents" data-event-name="ui.sidebar-toc" class="mw-table-of-contents-container vector-toc-landmark">
+					<div id="vector-toc-pinned-container" class="vector-pinned-container">
+					<div id="vector-toc" class="vector-toc vector-pinnable-element">
+	<div class="vector-pinnable-header vector-toc-pinnable-header vector-pinnable-header-pinned" data-feature-name="toc-pinned" data-pinnable-element-id="vector-toc">
+	<h2 class="vector-pinnable-header-label">Contents</h2>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-toc.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-toc.unpin">hide</button>
+</div>
+
+
+	<ul class="vector-toc-contents" id="mw-panel-toc-list">
+		<li id="toc-mw-content-text" class="vector-toc-list-item vector-toc-level-1">
+			<a href="#" class="vector-toc-link">
+				<div class="vector-toc-text">Beginning</div>
+			</a>
+		</li>
+		<li id="toc-Privileged_or_unprivileged_containers" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Privileged_or_unprivileged_containers">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">1</span>
+				<span>Privileged or unprivileged containers</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Privileged_or_unprivileged_containers-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Privileged or unprivileged containers subsection</span>
+			</button>
+		
+		<ul id="toc-Privileged_or_unprivileged_containers-sublist" class="vector-toc-list">
+			<li id="toc-An_example_to_illustrate_unprivileged_containers" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#An_example_to_illustrate_unprivileged_containers">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.1</span>
+					<span>An example to illustrate unprivileged containers</span>
+				</div>
+			</a>
+			
+			<ul id="toc-An_example_to_illustrate_unprivileged_containers-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Setup" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Setup">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">2</span>
+				<span>Setup</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Setup-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Setup subsection</span>
+			</button>
+		
+		<ul id="toc-Setup-sublist" class="vector-toc-list">
+			<li id="toc-Required_software" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Required_software">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1</span>
+					<span>Required software</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Required_software-sublist" class="vector-toc-list">
+				<li id="toc-Enable_support_to_run_unprivileged_containers_(optional)" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Enable_support_to_run_unprivileged_containers_(optional)">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1.1</span>
+					<span>Enable support to run unprivileged containers (optional)</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Enable_support_to_run_unprivileged_containers_(optional)-sublist" class="vector-toc-list">
+				<li id="toc-Unprivileged_containers_on_linux-hardened_and_custom_kernels" class="vector-toc-list-item vector-toc-level-4">
+			<a class="vector-toc-link" href="#Unprivileged_containers_on_linux-hardened_and_custom_kernels">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1.1.1</span>
+					<span>Unprivileged containers on linux-hardened and custom kernels</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Unprivileged_containers_on_linux-hardened_and_custom_kernels-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Host_network_configuration" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Host_network_configuration">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2</span>
+					<span>Host network configuration</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Host_network_configuration-sublist" class="vector-toc-list">
+				<li id="toc-Using_a_host_bridge" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Using_a_host_bridge">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2.1</span>
+					<span>Using a host bridge</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Using_a_host_bridge-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Using_a_NAT_bridge" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Using_a_NAT_bridge">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2.2</span>
+					<span>Using a NAT bridge</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Using_a_NAT_bridge-sublist" class="vector-toc-list">
+				<li id="toc-Firewall_considerations" class="vector-toc-list-item vector-toc-level-4">
+			<a class="vector-toc-link" href="#Firewall_considerations">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2.2.1</span>
+					<span>Firewall considerations</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Firewall_considerations-sublist" class="vector-toc-list">
+				<li id="toc-Example_iptables_rule" class="vector-toc-list-item vector-toc-level-5">
+			<a class="vector-toc-link" href="#Example_iptables_rule">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2.2.1.1</span>
+					<span>Example iptables rule</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Example_iptables_rule-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Example_ufw_rule" class="vector-toc-list-item vector-toc-level-5">
+			<a class="vector-toc-link" href="#Example_ufw_rule">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2.2.1.2</span>
+					<span>Example ufw rule</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Example_ufw_rule-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Running_containers_as_non-root_user" class="vector-toc-list-item vector-toc-level-4">
+			<a class="vector-toc-link" href="#Running_containers_as_non-root_user">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2.2.2</span>
+					<span>Running containers as non-root user</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Running_containers_as_non-root_user-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Container_creation" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Container_creation">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.3</span>
+					<span>Container creation</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Container_creation-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Container_configuration" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Container_configuration">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.4</span>
+					<span>Container configuration</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Container_configuration-sublist" class="vector-toc-list">
+				<li id="toc-Basic_configuration_with_networking" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Basic_configuration_with_networking">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.4.1</span>
+					<span>Basic configuration with networking</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Basic_configuration_with_networking-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Mounts_within_the_container" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Mounts_within_the_container">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.4.2</span>
+					<span>Mounts within the container</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Mounts_within_the_container-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Xorg_program_considerations_(optional)" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Xorg_program_considerations_(optional)">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.4.3</span>
+					<span>Xorg program considerations (optional)</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Xorg_program_considerations_(optional)-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-VPN_considerations" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#VPN_considerations">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.4.4</span>
+					<span>VPN considerations</span>
+				</div>
+			</a>
+			
+			<ul id="toc-VPN_considerations-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Managing_containers" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Managing_containers">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">3</span>
+				<span>Managing containers</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Managing_containers-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Managing containers subsection</span>
+			</button>
+		
+		<ul id="toc-Managing_containers-sublist" class="vector-toc-list">
+			<li id="toc-Basic_usage" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Basic_usage">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1</span>
+					<span>Basic usage</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Basic_usage-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Advanced_usage" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Advanced_usage">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.2</span>
+					<span>Advanced usage</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Advanced_usage-sublist" class="vector-toc-list">
+				<li id="toc-LXC_clones" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#LXC_clones">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.2.1</span>
+					<span>LXC clones</span>
+				</div>
+			</a>
+			
+			<ul id="toc-LXC_clones-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Converting_a_privileged_container_to_an_unprivileged_container" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Converting_a_privileged_container_to_an_unprivileged_container">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.3</span>
+					<span>Converting a privileged container to an unprivileged container</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Converting_a_privileged_container_to_an_unprivileged_container-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Running_Xorg_programs" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Running_Xorg_programs">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">4</span>
+				<span>Running Xorg programs</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Running_Xorg_programs-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Tips_and_Tricks" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Tips_and_Tricks">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">5</span>
+				<span>Tips and Tricks</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Tips_and_Tricks-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Tips and Tricks subsection</span>
+			</button>
+		
+		<ul id="toc-Tips_and_Tricks-sublist" class="vector-toc-list">
+			<li id="toc-Ping_not_working_in_an_unprivileged_container" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Ping_not_working_in_an_unprivileged_container">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.1</span>
+					<span>Ping not working in an unprivileged container</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Ping_not_working_in_an_unprivileged_container-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Troubleshooting" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Troubleshooting">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">6</span>
+				<span>Troubleshooting</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Troubleshooting-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Troubleshooting subsection</span>
+			</button>
+		
+		<ul id="toc-Troubleshooting-sublist" class="vector-toc-list">
+			<li id="toc-Root_login_fails" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Root_login_fails">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.1</span>
+					<span>Root login fails</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Root_login_fails-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-No_network-connection_with_veth_in_container_config" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#No_network-connection_with_veth_in_container_config">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.2</span>
+					<span>No network-connection with veth in container config</span>
+				</div>
+			</a>
+			
+			<ul id="toc-No_network-connection_with_veth_in_container_config-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Error:_unknown_command" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Error:_unknown_command">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.3</span>
+					<span>Error: unknown command</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Error:_unknown_command-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Error:_Failed_at_step_KEYRING_spawning..." class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Error:_Failed_at_step_KEYRING_spawning...">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.4</span>
+					<span>Error: Failed at step KEYRING spawning...</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Error:_Failed_at_step_KEYRING_spawning...-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Known_issues" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Known_issues">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">7</span>
+				<span>Known issues</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Known_issues-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Known issues subsection</span>
+			</button>
+		
+		<ul id="toc-Known_issues-sublist" class="vector-toc-list">
+			<li id="toc-lxc-execute_fails_due_to_missing_lxc.init.static" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#lxc-execute_fails_due_to_missing_lxc.init.static">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">7.1</span>
+					<span>lxc-execute fails due to missing lxc.init.static</span>
+				</div>
+			</a>
+			
+			<ul id="toc-lxc-execute_fails_due_to_missing_lxc.init.static-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-See_also" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#See_also">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">8</span>
+				<span>See also</span>
+			</div>
+		</a>
+		
+		<ul id="toc-See_also-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+</ul>
+</div>
+
+					</div>
+		</nav>
+			</div>
+		</div>
+		<div class="mw-content-container">
+			<main id="content" class="mw-body" style="margin: 0">
+				<header class="mw-body-header vector-page-titlebar">
+					<nav aria-label="Contents" class="vector-toc-landmark">
+						
+<div id="vector-page-titlebar-toc" class="vector-dropdown vector-page-titlebar-toc vector-button-flush-left">
+	<input type="checkbox" id="vector-page-titlebar-toc-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-page-titlebar-toc" class="vector-dropdown-checkbox " aria-label="Toggle the table of contents">
+	<label id="vector-page-titlebar-toc-label" for="vector-page-titlebar-toc-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"><span class="vector-icon mw-ui-icon-listBullet mw-ui-icon-wikimedia-listBullet"></span>
+
+<span class="vector-dropdown-label-text">Toggle the table of contents</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+							<div id="vector-page-titlebar-toc-unpinned-container" class="vector-unpinned-container">
+			</div>
+		
+	</div>
+</div>
+
+					</nav>
+					<h1 id="firstHeading" class="firstHeading mw-first-heading"><span class="mw-page-title-main">Linux Containers</span></h1>
+							
+<div id="p-lang-btn" class="vector-dropdown mw-portlet mw-portlet-lang">
+	<input type="checkbox" id="p-lang-btn-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-p-lang-btn" class="vector-dropdown-checkbox mw-interlanguage-selector" aria-label="Go to an article in another language. Available in 3 languages">
+	<label id="p-lang-btn-label" for="p-lang-btn-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--action-progressive mw-portlet-lang-heading-3" aria-hidden="true"><span class="vector-icon mw-ui-icon-language-progressive mw-ui-icon-wikimedia-language-progressive"></span>
+
+<span class="vector-dropdown-label-text">3 languages</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+		<div class="vector-menu-content">
+			
+			<ul class="vector-menu-content-list">
+				
+				<li class="interlanguage-link interwiki-ja mw-list-item"><a href="https://wiki.archlinux.jp/index.php/Linux_Containers" title="Linux Containers – 日本語" lang="ja" hreflang="ja" data-title="Linux Containers" data-language-autonym="日本語" data-language-local-name="日本語" class="interlanguage-link-target"><span>日本語</span></a></li>
+<li class="interlanguage-link interwiki-pt mw-list-item"><a href="../pt/Linux_Containers.html" title="Linux Containers – português" lang="pt" hreflang="pt" data-title="Linux Containers" data-language-autonym="Português" data-language-local-name="português" class="interlanguage-link-target"><span>Português</span></a></li>
+<li class="interlanguage-link interwiki-zh-hans mw-list-item"><a href="https://wiki.archlinuxcn.org/wiki/Linux_Containers" title="Linux Containers – 中文（简体）" lang="zh-Hans" hreflang="zh-Hans" data-title="Linux Containers" data-language-autonym="中文（简体）" data-language-local-name="中文（简体）" class="interlanguage-link-target"><span>中文（简体）</span></a></li>
+			</ul>
+			
+		</div>
+
+	</div>
+</div>
+</header>
+				<div class="vector-column-end">
+					<div class="vector-sticky-pinned-container">
+						<nav class="vector-page-tools-landmark" aria-label="Page tools">
+							<div id="vector-page-tools-pinned-container" class="vector-pinned-container">
+				
+							</div>
+		</nav>
+						<nav class="vector-appearance-landmark" aria-label="Appearance">
+							<div id="vector-appearance-pinned-container" class="vector-pinned-container">
+				<div id="vector-appearance" class="vector-appearance vector-pinnable-element">
+	<div class="vector-pinnable-header vector-appearance-pinnable-header vector-pinnable-header-pinned" data-feature-name="appearance-pinned" data-pinnable-element-id="vector-appearance" data-pinned-container-id="vector-appearance-pinned-container" data-unpinned-container-id="vector-appearance-unpinned-container">
+	<div class="vector-pinnable-header-label">Appearance</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-appearance.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-appearance.unpin">hide</button>
+</div>
+
+
+</div>
+
+							</div>
+		</nav>
+					</div>
+				</div>
+				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container>
+					<div class="vector-body-before-content">
+							<div class="mw-indicators">
+		</div>
+
+						<div id="siteSub" class="noprint">From ArchWiki</div>
+					</div>
+					<div id="contentSub"><div id="mw-content-subtitle"></div></div>
+					
+					
+					<div id="mw-content-text" class="mw-body-content">
+<div class="mw-content-ltr mw-parser-output" lang="en" dir="ltr">
+<div class="archwiki-template-meta-related-articles">
+<p>Related articles</p>
+<ul>
+<li><a href="../en/Linux_Containers/Using_VPNs.html" title="Linux Containers/Using VPNs">/Using VPNs</a></li>
+<li><a href="../en/Cgroups.html" title="Cgroups">Cgroups</a></li>
+<li><a href="../en/Docker.html" title="Docker">Docker</a></li>
+<li><a href="../en/Incus.html" title="Incus">Incus</a></li>
+<li><a href="../en/LXD.html" title="LXD">LXD</a></li>
+<li><a href="../en/Podman.html" title="Podman">Podman</a></li>
+<li><a href="../en/Systemd-nspawn.html" title="Systemd-nspawn">systemd-nspawn</a></li>
+</ul>
+</div>
+<p><a rel="nofollow" class="external text" href="https://linuxcontainers.org/lxc/introduction">Linux Containers</a> (LXC) is a userspace interface for the Linux kernel containment features, providing a method for <a href="https://en.wikipedia.org/wiki/OS-level_virtualization" class="extiw" title="w:OS-level virtualization">OS-level virtualization</a>, using <a href="https://en.wikipedia.org/wiki/Linux_namespaces" class="extiw" title="wikipedia:Linux namespaces">namespaces</a>, <a href="../en/Cgroups.html" title="Cgroups">cgroups</a> and other Linux kernel <span class="plainlinks archwiki-template-man" title="$ man 7 capabilities"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/capabilities.7">capabilities(7)</a></span> on the LXC host. <span class="plainlinks archwiki-template-man" title="$ man 7 lxc"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/lxc.7">lxc(7)</a></span> is considered something in the middle between a chroot and a full-fledged virtual machine.
+</p>
+<p><a href="../en/Incus.html" title="Incus">Incus</a> or <a href="../en/LXD.html" title="LXD">LXD</a> can be used as a manager for LXC. This page deals with using LXC directly.
+</p>
+<p>Alternatives for using containers comprise <a href="../en/Systemd-nspawn.html" title="Systemd-nspawn">systemd-nspawn</a>, <a href="../en/Docker.html" title="Docker">Docker</a> and <a href="../en/Podman.html" title="Podman">Podman</a>.
+</p>
+<meta property="mw:PageProp/toc">
+<h2><span class="mw-headline" id="Privileged_or_unprivileged_containers">Privileged or unprivileged containers</span></h2>
+<p>LXC supports two types of containers: <i>privileged</i> and <i>unprivileged</i>.
+</p>
+<p>In general, <i>privileged</i> containers are considered <b>unsafe</b><a rel="nofollow" class="external autonumber" href="https://linuxcontainers.org/lxc/security/">[1]</a>.  
+</p>
+<p>On <i>unprivileged</i> containers, the root UID within the container is mapped to an unprivileged UID on the host, which makes it more difficult for a hack inside the container to lead to consequences on the host system.  In other words, if an attacker manages to escape the container, they should find themselves with limited or no rights on the host.
+</p>
+<p>The Arch <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=linux">linux</a></span>, <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=linux-lts">linux-lts</a></span> and <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=linux-zen">linux-zen</a></span> kernel packages currently provide out-of-the-box support for <i>unprivileged</i> containers. With the <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=linux-hardened">linux-hardened</a></span> package, <i>unprivileged</i> containers are only available for the system  administrator; hence additional kernel configuration changes are required to enable user namespaces for normal users there.
+</p>
+<p>This article contains information for users to run either type of container, but <a href="#Enable_support_to_run_unprivileged_containers_(optional)">additional steps</a> may be required in order to use <i>unprivileged</i> containers.
+</p>
+<h3><span class="mw-headline" id="An_example_to_illustrate_unprivileged_containers">An example to illustrate unprivileged containers</span></h3>
+<p>To illustrate the power of UID mapping, consider the output below from a running, <i>unprivileged</i> container.  Therein, we see the containerized processes owned by the containerized root user in the output of <code>ps</code>:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">[root@unprivileged_container /]# ps -ef | head -n 5</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">UID        PID  PPID  C STIME TTY          TIME CMD
+root         1     0  0 17:49 ?        00:00:00 /sbin/init
+root        14     1  0 17:49 ?        00:00:00 /usr/lib/systemd/systemd-journald
+dbus        25     1  0 17:49 ?        00:00:00 /usr/bin/dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation
+systemd+    26     1  0 17:49 ?        00:00:00 /usr/lib/systemd/systemd-networkd</pre>
+<p>On the host, however, those containerized root processes are actually shown to be running as the mapped user (ID&gt;99999), rather than the host's actual root user:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">[root@host /]# lxc-info -Ssip --name sandbox</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">State:          RUNNING
+PID:            26204
+CPU use:        10.51 seconds
+BlkIO use:      244.00 KiB
+Memory use:     13.09 MiB
+KMem use:       7.21 MiB
+</pre>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">[root@host /]# ps -ef | grep 26204 | head -n 5</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">UID        PID  PPID  C STIME TTY          TIME CMD
+100000   26204 26200  0 12:49 ?        00:00:00 /sbin/init
+100000   26256 26204  0 12:49 ?        00:00:00 /usr/lib/systemd/systemd-journald
+100081   26282 26204  0 12:49 ?        00:00:00 /usr/bin/dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation
+100000   26284 26204  0 12:49 ?        00:00:00 /usr/lib/systemd/systemd-logind</pre>
+<h2><span class="mw-headline" id="Setup">Setup</span></h2>
+<h3><span class="mw-headline" id="Required_software">Required software</span></h3>
+<p>Installing <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=lxc">lxc</a></span> and <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=arch-install-scripts">arch-install-scripts</a></span> will allow the host system to run privileged lxcs.
+</p>
+<h4>
+<span id="Enable_support_to_run_unprivileged_containers_.28optional.29"></span><span class="mw-headline" id="Enable_support_to_run_unprivileged_containers_(optional)">Enable support to run unprivileged containers (optional)</span>
+</h4>
+<p>Modify <code>/etc/lxc/default.conf</code> to contain the following lines:
+</p>
+<pre>lxc.idmap = u 0 100000 65536
+lxc.idmap = g 0 100000 65536
+</pre>
+<p>In other words, map a range of 65536 consecutive uids, starting from container-side uid 0, which shall be uid 100000 from the host’s point of view, up to and including container-side uid 65535, which the host will know as uid 165535. Apply that same mapping to gids.
+</p>
+<p><a href="../en/Help:Reading.html#Append,_add,_create,_edit" class="mw-redirect" title="Create">Create or edit</a> both <span class="plainlinks archwiki-template-man" title="$ man 5 subuid"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/subuid.5">subuid(5)</a></span> at <code>/etc/subuid</code> and <span class="plainlinks archwiki-template-man" title="$ man 5 subgid"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/subgid.5">subgid(5)</a></span> at <code>/etc/subgid</code> to contain the mapping to the containerized uid/gid pairs for each user who shall be able to run the containers.  The example below is simply for the root user (and <a href="../en/Systemd.html" title="Systemd">systemd</a> system unit):
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/subuid</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">root:100000:65536
+</pre>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/subgid</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">root:100000:65536
+</pre>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../File:Inaccurate.svg" decoding="async" width="48" height="48" class="mw-file-element"></span></span><b>The factual accuracy of this article or section is disputed.</b></p>
+<div>
+<b>Reason:</b> Below instructions do not match with the provided reference<a rel="nofollow" class="external autonumber" href="https://linuxcontainers.org/lxc/getting-started/#creating-unprivileged-containers-as-a-user">[2]</a> (Discuss in <a href="../en/Talk:Linux_Containers.html#Unprivileged_containers_for_unprivileged_users" title="Talk:Linux Containers">Talk:Linux Containers#Unprivileged_containers_for_unprivileged_users</a>)</div>
+</div>
+<p>In addition, running unprivileged containers as an unprivileged user only works if you delegate a <a href="../en/Cgroups.html" class="mw-redirect" title="Cgroup">cgroup</a> in advance (the cgroup2 delegation model enforces this restriction, not liblxc). Use the following <i>systemd</i> command to delegate the cgroup (per <a rel="nofollow" class="external text" href="https://linuxcontainers.org/lxc/getting-started/#creating-unprivileged-containers-as-a-user">LXC - Getting started: Creating unprivileged containers as a user</a>):
+</p>
+<pre>$ systemd-run --unit=<i>myshell</i> --user --scope -p "Delegate=yes" lxc-start <i>container_name</i>
+</pre>
+<p>This works similarly for other lxc commands.
+</p>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../File:Merge-arrows-2.svg" decoding="async" width="36" height="40" class="mw-file-element"></span></span><b>This article or section is a candidate for merging with <a href="../en/Cgroups.html#User_delegation" title="Cgroups">cgroups#User delegation</a>.</b></p>
+<div>
+<b>Notes:</b> Not specific to Linux Containers, avoid duplication. (Discuss in <a rel="nofollow" class="external text" href="../en/Talk:Linux_Containers.html">Talk:Linux Containers</a>)</div>
+</div>
+<p>Alternatively, delegate <i>unprivileged</i> <a href="../en/Cgroups.html" class="mw-redirect" title="Cgroup">cgroups</a> by creating a <i>systemd</i> unit (per <a rel="nofollow" class="external text" href="https://rootlesscontaine.rs/getting-started/common/cgroup2/#enabling-cpu-cpuset-and-io-delegation">Rootless Containers: Enabling CPU, CPUSET, and I/O delegation</a>):
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/system/user@.service.d/delegate.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Service]
+Delegate=cpu cpuset io memory pids</pre>
+<h5><span class="mw-headline" id="Unprivileged_containers_on_linux-hardened_and_custom_kernels">Unprivileged containers on linux-hardened and custom kernels</span></h5>
+<p>Users wishing to run <i>unprivileged</i> containers on <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=linux-hardened">linux-hardened</a></span> or their custom kernel need to complete several additional setup steps.
+</p>
+<p>Firstly, a kernel is required that has support for user namespaces (a kernel with <code>CONFIG_USER_NS</code>). All Arch Linux kernels have support for <code>CONFIG_USER_NS</code>. However, due to more general security concerns, the <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=linux-hardened">linux-hardened</a></span> kernel does ship with user namespaces enabled only for the <i>root</i> user. There are two options to create <i>unprivileged</i> containers there:
+</p>
+<ul>
+<li>Start the unprivileged containers only as <i>root</i>. Also give the <a href="../en/Sysctl.html" title="Sysctl">sysctl</a> setting <code>user.max_user_namespaces</code> a positive value to suit your environment if its current value is <code>0</code> (this fixes <code>Failed to clone process in new user namespace</code> errors seen in <code>lxc info --show-log <i>container_name</i></code>).</li>
+<li>Under <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=linux-hardened">linux-hardened</a></span> &amp; <code>lxd 5.0.0</code> you may need to set <code>/etc/subuid</code> &amp; <code>/etc/subgid</code> to use a range of <code>root:1000000:65536</code>. You may also need to start your <b>first</b> container as privileged. This fixes error <code>newuidmap failed to write mapping "newuidmap: uid range [0-1000000000) -&gt; [1000000-1001000000) not allowed"</code>
+</li>
+<li>Enable the <i>sysctl</i> setting <code>kernel.unprivileged_userns_clone</code> to allow normal users to run unprivileged containers. This can be done for the current session by running <code>sysctl kernel.unprivileged_userns_clone=1</code> as root and can be made permanent with <span class="plainlinks archwiki-template-man" title="$ man 5 sysctl.d"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/sysctl.d.5">sysctl.d(5)</a></span>.</li>
+</ul>
+<h3><span class="mw-headline" id="Host_network_configuration">Host network configuration</span></h3>
+<p>LXC supports different virtual network types and devices (see <span class="plainlinks archwiki-template-man" title="$ man 5 lxc.container.conf"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/lxc.container.conf.5#NETWORK">lxc.container.conf(5) § NETWORK</a></span>). A bridge device on the host is required for most types of virtual networking, which is illustrated in this section.  
+</p>
+<p>There are several main setups to consider:
+</p>
+<ol>
+<li>A host bridge</li>
+<li>A NAT bridge</li>
+</ol>
+<p>The host bridge requires the host's network manager to manage a shared bridge interface.  The host and any lxc will be assigned an IP address in the same network (for example 192.168.1.x).  This might be more simplistic in cases where the goal is to containerize some network-exposed service like a webserver, or VPN server.  The user can think of the lxc as just another PC on the physical LAN, and forward the needed ports in the router accordingly.  The added simplicity can also be thought of as an added threat vector, again, if WAN traffic is being forwarded to the lxc, having it running on a separate range presents a smaller threat surface.
+</p>
+<p>The NAT bridge does not require the host's network manager to manage the bridge.  <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=lxc">lxc</a></span> ships with <code>lxc-net</code> which creates a NAT bridge called <code>lxcbr0</code>.  The NAT bridge is a standalone bridge with a private network that is not bridged to the host's ethernet device or to a physical network. It exists as a private subnet in the host.
+</p>
+<h4><span class="mw-headline" id="Using_a_host_bridge">Using a host bridge</span></h4>
+<p>See <a href="../en/Network_bridge.html" title="Network bridge">Network bridge</a>.
+</p>
+<h4><span class="mw-headline" id="Using_a_NAT_bridge">Using a NAT bridge</span></h4>
+<p>By default, <code>lxc-net</code> service is configured to create and use a bridge interface and a virtual Ethernet pair device, with one side assigned to the container and the other side on the host attached to the bridge. This is done automatically using <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=dnsmasq">dnsmasq</a></span>.
+</p>
+<p>To use this setup, first, <a href="../en/Help:Reading.html#Installation_of_packages" class="mw-redirect" title="Install">Install</a> <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=dnsmasq">dnsmasq</a></span>, which is a dependency for <code>lxc-net</code> and then <a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Start">start</a> and <a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Enable">enable</a> <code>lxc-net.service</code>.
+</p>
+<p>One can override some <code>lxc-net</code> defaults by <a href="../en/Help:Reading.html#Append,_add,_create,_edit" class="mw-redirect" title="Create">creating</a> <code>/etc/default/lxc-net</code> file or <a href="../en/Help:Reading.html#Append,_add,_create,_edit" class="mw-redirect" title="Create">editing</a> <code>/etc/default/lxc</code> file using the following template:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/default/lxc-net</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;"># Leave USE_LXC_BRIDGE as "true" if you want to use lxcbr0 for your
+# containers.  Set to "false" if you'll use virbr0 or another existing
+# bridge, or mavlan to your host's NIC.
+USE_LXC_BRIDGE="true"
+
+# If you change the LXC_BRIDGE to something other than lxcbr0, then
+# you will also need to update your /etc/lxc/default.conf as well as the
+# configuration (/var/lib/lxc/&lt;container&gt;/config) for any containers
+# already created using the default config to reflect the new bridge
+# name.
+# If you have the dnsmasq daemon installed, you'll also have to update
+# /etc/dnsmasq.d/lxc and restart the system wide dnsmasq daemon.
+LXC_BRIDGE="lxcbr0"
+LXC_ADDR="10.0.3.1"
+LXC_NETMASK="255.255.255.0"
+LXC_NETWORK="10.0.3.0/24"
+LXC_DHCP_RANGE="10.0.3.2,10.0.3.254"
+LXC_DHCP_MAX="253"
+# Uncomment the next line if you'd like to use a conf-file for the lxcbr0
+# dnsmasq.  For instance, you can use 'dhcp-host=mail1,10.0.3.100' to have
+# container 'mail1' always get ip address 10.0.3.100.
+#LXC_DHCP_CONFILE=/etc/lxc/dnsmasq.conf
+
+# Uncomment the next line if you want lxcbr0's dnsmasq to resolve the .lxc
+# domain.  You can then add "server=/lxc/10.0.3.1' (or your actual $LXC_ADDR)
+# to your system dnsmasq configuration file (normally /etc/dnsmasq.conf,
+# or /etc/NetworkManager/dnsmasq.d/lxc.conf on systems that use NetworkManager).
+# Once these changes are made, restart the lxc-net and network-manager services.
+# 'container1.lxc' will then resolve on your host.
+#LXC_DOMAIN="lxc"</pre>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong>  Make sure the bridge's IP range does not interfere with the local network. One way to pick an available IP address is to use one of the addresses already assigned dynamically to the container. This can be inspected using <code>lxc-ls -f</code> command.</div>
+<p>If you want a minimal setup configuration to get the container to run, just set <code>USE_LXC_BRIDGE="true"</code>.
+</p>
+<p>Optionally, create a configuration file to manually define the IP address of any containers:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/lxc/dnsmasq.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">dhcp-host=playtime,10.0.3.100</pre>
+<h5><span class="mw-headline" id="Firewall_considerations">Firewall considerations</span></h5>
+<p>Depending on which firewall the host machine is running, it might be necessary to allow inbound packets from <code>lxcbr0</code> to the host, and outbound packets from <code>lxcbr0</code> to traverse through the host to other networks.  To test this, try to bring up a container configured to use DHCP for its IP assignment and see if <code>lxc-net</code> is able to assign an IP address to the container (check with <code>lxc-ls -f</code>.  If no IP is assigned, the host's policies will need to be adjusted.
+</p>
+<p>Users of <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=ufw">ufw</a></span> can simply run the <a rel="nofollow" class="external text" href="https://discuss.linuxcontainers.org/t/lxd-bridge-doesnt-work-with-ipv4-and-ufw-with-nftables/10034/17">following two lines</a> to enable this:
+</p>
+<pre># ufw allow in on lxcbr0
+# ufw route allow in on lxcbr0
+</pre>
+<p>Alternatively, users of <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=nftables">nftables</a></span> can modify <code>/etc/nftables.conf</code> (and reload it with <code>nft -f /etc/nftables.conf</code>; check if the config syntax is correct with <code>nft -cf /etc/nftables.conf</code>) to allow the container to have internet access (replace <code>"eth0"</code> with the device on your system that has internet access; list existing devices with <code>ip link</code>):
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/nftables.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">table inet filter {
+  chain input {
+    ...
+    iifname "lxcbr0" accept comment "Allow lxc containers"
+    
+    pkttype host limit rate 5/second counter reject with icmpx type admin-prohibited
+    counter
+  }
+  chain forward {
+    ...
+    iifname "lxcbr0" oifname "eth0" accept comment "Allow forwarding from lxcbr0 to eth0"
+    iifname "eth0" oifname "lxcbr0" accept comment "Allow forwarding from eth0 to lxcbr0"
+  }
+}
+</pre>
+<p>Additionally, since the container is running on the 10.0.3.x subnet, external access to services such as ssh, httpd, etc. will need to be actively forwarded to the lxc.  In principle, the firewall on the host needs to forward incoming traffic on the expected port on the container.  
+</p>
+<h6><span class="mw-headline" id="Example_iptables_rule">Example iptables rule</span></h6>
+<p>The goal of this rule is to allow ssh traffic to the lxc:
+</p>
+<pre># iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 2221 -j DNAT --to-destination 10.0.3.100:22
+</pre>
+<p>This rule forwards tcp traffic originating on port 2221 to the IP address of the lxc on port 22.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> Make sure to allow traffic on 2221/tcp on the host and to allow 22/tcp traffic on the lxc.</div>
+<p>To ssh into the container from another PC on the LAN, one needs to ssh on port 2221 to the host.  The host will then forward that traffic to the container.
+</p>
+<pre>$ ssh -p 2221 host.lan
+</pre>
+<h6><span class="mw-headline" id="Example_ufw_rule">Example ufw rule</span></h6>
+<p>If using <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=ufw">ufw</a></span>, append the following at the bottom of <code>/etc/ufw/before.rules</code> to make this persistent:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/ufw/before.rules</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">
+
+
+*nat
+:PREROUTING ACCEPT [0:0]
+-A PREROUTING -i eth0 -p tcp --dport 2221 -j DNAT --to-destination 10.0.3.100:22
+COMMIT
+</pre>
+<h5><span class="mw-headline" id="Running_containers_as_non-root_user">Running containers as non-root user</span></h5>
+<p>To create and start containers as a non-root user, extra configuration must be applied. 
+</p>
+<p>Create the usernet file under <code>/etc/lxc/lxc-usernet</code>. According to <span class="plainlinks archwiki-template-man" title="$ man 5 lxc-usernet"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/lxc-usernet.5">lxc-usernet(5)</a></span>, the entry per line is:
+</p>
+<pre>user type bridge number
+</pre>
+<p>Configure the file with the user needing to create containers. The bridge will be the same as defined in <code>/etc/default/lxc-net</code>. 
+</p>
+<p>A copy of the <code>/etc/lxc/default.conf</code> is needed in the non-root user's home directory, e.g. <code>~/.config/lxc/default.conf</code> (create the directory if needed).
+</p>
+<p>Running containers as a non-root user requires <code>+x</code> permissions on <code>~/.local/share/</code>. Make that change with <a href="../en/File_permissions_and_attributes.html#Changing_permissions" class="mw-redirect" title="Chmod">chmod</a> before starting a container.
+</p>
+<h3><span class="mw-headline" id="Container_creation">Container creation</span></h3>
+<p>Containers are built using <span class="plainlinks archwiki-template-man" title="$ man 1 lxc-create"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/lxc-create.1">lxc-create(1)</a></span> command.  With the release of lxc-3.0.0-1, upstream has deprecated locally stored templates.
+</p>
+<p>To create an Arch container:
+</p>
+<pre># lxc-create --name <i>playtime</i> --template download -- --dist archlinux --release current --arch amd64
+</pre>
+<p>To create a container by interactively choosing from a list of supported distributions:
+</p>
+<pre># lxc-create -n playtime -t download
+</pre>
+<p>To see a list of <i>download</i> template options:
+</p>
+<pre># lxc-create -t download --help
+</pre>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> Users of <a href="../en/Btrfs.html" title="Btrfs">Btrfs</a> can append <code>-B btrfs</code> to create a Btrfs subvolume for storing containerized rootfs. This comes in handy if cloning containers with the help of <code>lxc-clone</code> command. <a href="../en/ZFS.html" title="ZFS">ZFS</a> users may use <code>-B zfs</code>, correspondingly.</div>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> Users wanting the legacy templates can find them in <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/lxc-templates/">lxc-templates</a></span><sup><small>AUR</small></sup> or alternatively, users can build their own templates with <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=distrobuilder">distrobuilder</a></span>.</div>
+<h3><span class="mw-headline" id="Container_configuration">Container configuration</span></h3>
+<p>The examples below can be used with <i>privileged</i> and <i>unprivileged</i> containers alike.  Note that for unprivileged containers, additional lines will be present by default, which are not shown in the examples, including the <code>lxc.idmap = u 0 100000 65536</code> and the <code>lxc.idmap = g 0 100000 65536</code> values optionally defined in the <a href="#Enable_support_to_run_unprivileged_containers_(optional)">#Enable support to run unprivileged containers (optional)</a> section.
+</p>
+<h4><span class="mw-headline" id="Basic_configuration_with_networking">Basic configuration with networking</span></h4>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> With the release of lxc-1:2.1.0-1, many of the configuration options have changed. Existing containers need to be updated; users are directed to the table of these changes in the <a rel="nofollow" class="external text" href="https://discuss.linuxcontainers.org/t/lxc-2-1-has-been-released/487">v2.1 release notes</a>.</div>
+<p>Configurations specific to a container, including system resources to be virtualized/isolated when a process is using the container, are defined in <code>/var/lib/lxc/CONTAINER_NAME/config</code>. Read <span class="plainlinks archwiki-template-man" title="$ man 5 lxc.container.conf"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/lxc.container.conf.5">lxc.container.conf(5)</a></span> for the syntax and possible options of the configuration file.
+</p>
+<p>A basic configuration file generated when creating containers using templates. Read <span class="plainlinks archwiki-template-man" title="$ man 5 lxc.conf"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/lxc.conf.5">lxc.conf(5)</a></span> for more information.
+</p>
+<p>By default, the creation process will make a minimum setup without networking support.  Below is an example configuration with networking supplied by <code>lxc-net.service</code>:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/var/lib/lxc/playtime/config</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;"># Template used to create this container: /usr/share/lxc/templates/lxc-archlinux
+# Parameters passed to the template:
+# For additional config options, please look at lxc.container.conf(5)
+
+# Distribution configuration
+lxc.include = /usr/share/lxc/config/common.conf
+lxc.arch = x86_64
+
+# Container specific configuration
+lxc.rootfs.path = dir:/var/lib/lxc/playtime/rootfs
+lxc.uts.name = playtime
+
+# Network configuration
+lxc.net.0.type = veth
+lxc.net.0.link = lxcbr0
+lxc.net.0.flags = up
+lxc.net.0.hwaddr = ee:ec:fa:e9:56:7d
+</pre>
+<h4><span class="mw-headline" id="Mounts_within_the_container">Mounts within the container</span></h4>
+<p>One can create a host volume outside the container's <code>rootfs</code> and then mount that volume inside the container. This can be advantageous, for example if the same architecture is being containerized and one wants to share pacman packages between the host and container. Another example could be shared directories. Read <span class="plainlinks archwiki-template-man" title="$ man 5 lxc.container.conf"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/lxc.container.conf.5#MOUNT_POINTS">lxc.container.conf(5) § MOUNT POINTS</a></span> for more information. The general syntax is:
+</p>
+<pre>lxc.mount.entry = /var/cache/pacman/pkg var/cache/pacman/pkg none bind 0 0
+</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> This will not work without filesystem permission modifications on the host if using <i>unprivileged</i> containers.</div>
+<h4>
+<span id="Xorg_program_considerations_.28optional.29"></span><span class="mw-headline" id="Xorg_program_considerations_(optional)">Xorg program considerations (optional)</span>
+</h4>
+<p>In order to run programs on the host's display, some bind mounts need to be defined so that the containerized programs can access the host's resources.
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/var/lib/lxc/playtime/config</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">## for xorg
+lxc.mount.entry = /dev/dri dev/dri none bind,optional,create=dir
+lxc.mount.entry = /dev/snd dev/snd none bind,optional,create=dir
+lxc.mount.entry = /tmp/.X11-unix tmp/.X11-unix none bind,optional,create=dir,ro
+lxc.mount.entry = /dev/video0 dev/video0 none bind,optional,create=file</pre>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../File:Inaccurate.svg" decoding="async" width="48" height="48" class="mw-file-element"></span></span><b>The factual accuracy of this article or section is disputed.</b></p>
+<div>
+<b>Reason:</b> Setting <code>xhost +</code> is very unsafe, use <a href="../en/Systemd-nspawn.html#Avoiding_xhost" title="Systemd-nspawn">cookie-based authentication</a> instead. (Discuss in <a rel="nofollow" class="external text" href="../en/Talk:Linux_Containers.html">Talk:Linux Containers</a>)</div>
+</div>
+<p>If still experiencing a <i>permission denied</i> error in the LXC guest, call <code>xhost +</code> in the host to allow the guest to connect to the host's display server. Take note of the security concerns of opening up the display server by doing this.
+In addition, add the following line <b>before</b> the above bind mount lines.
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/var/lib/lxc/playtime/config</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">lxc.mount.entry = tmpfs tmp tmpfs defaults</pre>
+<h4><span class="mw-headline" id="VPN_considerations">VPN considerations</span></h4>
+<p>To run a containerized <a href="../en/OpenVPN.html" title="OpenVPN">OpenVPN</a> or <a href="../en/WireGuard.html" title="WireGuard">WireGuard</a>, see <a href="../en/Linux_Containers/Using_VPNs.html" title="Linux Containers/Using VPNs">Linux Containers/Using VPNs</a>.
+</p>
+<h2><span class="mw-headline" id="Managing_containers">Managing containers</span></h2>
+<h3><span class="mw-headline" id="Basic_usage">Basic usage</span></h3>
+<p>To list all installed LXC containers:
+</p>
+<pre># lxc-ls -f
+</pre>
+<p>Systemd can be used to <a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Start">start</a> and to <a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Stop">stop</a> LXCs via <code>lxc@CONTAINER_NAME.service</code>.  <a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Enable">Enable</a> <code>lxc@CONTAINER_NAME.service</code> to have it start when the host system boots.
+</p>
+<p>Users can also start/stop LXCs without systemd.
+Start a container:
+</p>
+<pre># lxc-start -n <i>CONTAINER_NAME</i>
+</pre>
+<p>Stop a container:
+</p>
+<pre># lxc-stop -n <i>CONTAINER_NAME</i>
+</pre>
+<p>To login into a container:
+</p>
+<pre># lxc-console -n <i>CONTAINER_NAME</i>
+</pre>
+<p>Once logged, treat the container like any other linux system, set the root password, create users, install packages, etc.
+</p>
+<p>To attach to a container:
+</p>
+<pre># lxc-attach -n <i>CONTAINER_NAME</i> --clear-env
+</pre>
+<p>That works nearly the same as lxc-console, but it causes starts with a root prompt inside the container, bypassing login. Without the <code> --clear-env</code> flag, the host will pass its own environment variables into the container (including <code>$PATH</code>, so some commands will not work when the containers are based on another distribution).
+</p>
+<h3><span class="mw-headline" id="Advanced_usage">Advanced usage</span></h3>
+<h4><span class="mw-headline" id="LXC_clones">LXC clones</span></h4>
+<p>Users with a need to run multiple containers can simplify administrative overhead (user management, system updates, etc.) by using snapshots.  The strategy is to setup and keep up-to-date a single base container, then, as needed, clone (snapshot) it.  The power in this strategy is that the disk space and system overhead are truly minimized since the snapshots use an overlayfs mount to only write out to disk, only the differences in data.  The base system is read-only but changes to it in the snapshots are allowed via the overlayfs.
+</p>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../File:Tango-view-fullscreen.svg" decoding="async" width="48" height="48" class="mw-file-element"></span></span><b>This article or section needs expansion.</b></p>
+<div>
+<b>Reason:</b> The note needs a reference. (Discuss in <a rel="nofollow" class="external text" href="../en/Talk:Linux_Containers.html">Talk:Linux Containers</a>)</div>
+</div>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> overlayfs for unprivileged containers is not supported in the current mainline Arch Linux kernel due to security considerations.</div>
+<p>For example, setup a container as outlined above.  We will call it "base" for the purposes of this guide.  Now create 2 snapshots of "base" which we will call "snap1" and "snap2" with these commands:
+</p>
+<pre># lxc-copy -n base -N snap1 -B overlayfs -s
+# lxc-copy -n base -N snap2 -B overlayfs -s
+</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> If a static IP was defined for the "base" lxc, that will need to manually changed in the configuration for "snap1" and for "snap2" before starting them. If the process is to be automated, a script using sed can do this automatically although this is beyond the scope of this wiki section.</div>
+<p>The snapshots can be started/stopped like any other container.  Users can optionally destroy the snapshots and all new data therein with the following command.  Note that the underlying "base" lxc is untouched:
+</p>
+<pre># lxc-destroy -n snap1 -f
+</pre>
+<p>Systemd units and wrapper scripts to manage snapshots for <a href="../en/Pi-hole.html" title="Pi-hole">pi-hole</a> and <a href="../en/OpenVPN.html" title="OpenVPN">OpenVPN</a> are available to automate the process in <a rel="nofollow" class="external text" href="https://github.com/graysky2/lxc-service-snapshots">lxc-service-snapshots</a>.
+</p>
+<h3><span class="mw-headline" id="Converting_a_privileged_container_to_an_unprivileged_container">Converting a privileged container to an unprivileged container</span></h3>
+<p>Once the system has been configured to use unprivileged containers (see, <a href="#Enable_support_to_run_unprivileged_containers_(optional)">#Enable support to run unprivileged containers (optional)</a>), <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/nsexec-bzr/">nsexec-bzr</a></span><sup><small>AUR</small></sup> contains a utility called <code>uidmapshift</code> which is able to convert an existing <i>privileged</i> container to an <i>unprivileged</i> container to avoid a total rebuild of the image.
+</p>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Warning:</strong> 
+<ul>
+<li>It is recommended to backup the existing image before using this utility!</li>
+<li>This utility will not shift UIDs and GIDs in <a href="../en/Access_Control_Lists.html" class="mw-redirect" title="ACL">ACL</a>, users will need to shift them manually!</li>
+</ul>
+</div>
+<p>Invoke the utility to convert over like so:
+</p>
+<pre># uidmapshift -b /var/lib/lxc/foo 0 100000 65536
+</pre>
+<p>Additional options are available simply by calling <code>uidmapshift</code> without any arguments.
+</p>
+<h2><span class="mw-headline" id="Running_Xorg_programs">Running Xorg programs</span></h2>
+<p>Either attach to or <a href="../en/Secure_Shell.html" class="mw-redirect" title="SSH">SSH</a> into the target container and prefix the call to the program with the DISPLAY ID of the host's X session.  For most simple setups, the display is always 0.
+</p>
+<p>An example of running Firefox from the container in the host's display:
+</p>
+<pre>$ DISPLAY=:0 firefox
+</pre>
+<p>Alternatively, to avoid directly attaching to or connecting to the container, the following can be used on the host to automate the process:
+</p>
+<pre># lxc-attach -n playtime --clear-env -- sudo -u YOURUSER env DISPLAY=:0 firefox
+</pre>
+<h2><span class="mw-headline" id="Tips_and_Tricks">Tips and Tricks</span></h2>
+<h3><span class="mw-headline" id="Ping_not_working_in_an_unprivileged_container">Ping not working in an unprivileged container</span></h3>
+<p>In unprivileged containers, ping is likely to not work without an extra config step. Example error:
+</p>
+<pre>% ping www.google.com
+ping: socktype: SOCK_RAW
+ping: socket: Operation not permitted
+ping: -&gt; missing cap_net_raw+p capability or setuid?
+</pre>
+<p>To fix this in container foo, on the host:
+</p>
+<pre># lxc-attach -n foo -- chmod u+s /usr/bin/ping</pre>
+<h2><span class="mw-headline" id="Troubleshooting">Troubleshooting</span></h2>
+<h3><span class="mw-headline" id="Root_login_fails">Root login fails</span></h3>
+<p>If presented with following error upon trying to login using lxc-console:
+</p>
+<pre>login: root
+Login incorrect
+</pre>
+<p>And the container's <a href="../en/Systemd/Journal.html" class="mw-redirect" title="Journal">journal</a> shows:
+</p>
+<pre>pam_securetty(login:auth): access denied: tty 'pts/0' is not secure !
+</pre>
+<p>Delete <code>/etc/securetty</code><a rel="nofollow" class="external autonumber" href="https://unix.stackexchange.com/questions/41840/effect-of-entries-in-etc-securetty/41939#41939">[3]</a> and <code>/usr/share/factory/etc/securetty</code> on the <b>container</b> file system. Optionally add them to <a href="../en/Pacman.html#Skip_files_from_being_installed_to_system" class="mw-redirect" title="NoExtract">NoExtract</a> in <code>/etc/pacman.conf</code> to prevent them from getting reinstalled. See <a rel="nofollow" class="external text" href="https://bugs.archlinux.org/task/45903">FS#45903</a> for details.
+</p>
+<p>Alternatively, create a new user in lxc-attach and use it for logging in to the system, then switch to root.
+</p>
+<pre># lxc-attach -n playtime
+[root@playtime]# useradd -m -Gwheel newuser
+[root@playtime]# passwd newuser
+[root@playtime]# passwd root
+[root@playtime]# exit
+# lxc-console -n playtime
+[newuser@playtime]$ su
+</pre>
+<h3><span class="mw-headline" id="No_network-connection_with_veth_in_container_config">No network-connection with veth in container config</span></h3>
+<p>If you cannot access your LAN or WAN with a networking interface configured as <b>veth</b> and setup through <code>/etc/lxc/<i>containername</i>/config</code>.
+If the virtual interface gets the ip assigned and should be connected to the network correctly.
+</p>
+<pre>ip addr show veth0 
+inet 192.168.1.111/24
+</pre>
+<p>You may disable all the relevant static ip formulas and try setting the ip through the booted container-os like you would normaly do.
+</p>
+<p>Example <code><i>container</i>/config</code>
+</p>
+<pre>...
+lxc.net.0.type = veth
+lxc.net.0.name = veth0
+lxc.net.0.flags = up
+lxc.net.0.link = <code>bridge</code>
+...
+</pre>
+<p>And then assign the IP through a preferred method <b>inside</b> the container, see also <a href="../en/Network_configuration.html#Network_management" title="Network configuration">Network configuration#Network management</a>.
+</p>
+<h3><span class="mw-headline" id="Error:_unknown_command">Error: unknown command</span></h3>
+<p>The error may happen when a basic command (<i>ls</i>, <i>cat</i>, etc.) on an attached container is typed hen a different Linux distribution is containerized relative to the host system (e.g. Debian container in Arch Linux host system). Upon attaching, use the argument <code>--clear-env</code>: 
+</p>
+<pre># lxc-attach -n <i>container_name</i> --clear-env
+</pre>
+<h3><span class="mw-headline" id="Error:_Failed_at_step_KEYRING_spawning...">Error: Failed at step KEYRING spawning...</span></h3>
+<p>Services in an unprivileged container may fail with the following message
+</p>
+<pre>some.service: Failed to change ownership of session keyring: Permission denied
+some.service: Failed to set up kernel keyring: Permission denied
+some.service: Failed at step KEYRING spawning ....: Permission denied
+</pre>
+<p>Create a file <code>/etc/lxc/unpriv.seccomp</code> containing
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/lxc/unpriv.seccomp</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">2
+blacklist
+[all]
+keyctl errno 38</pre>
+<p>Then add the following line to the container configuration <b>after</b> lxc.idmap
+</p>
+<pre>lxc.seccomp.profile = /etc/lxc/unpriv.seccomp
+</pre>
+<h2><span class="mw-headline" id="Known_issues">Known issues</span></h2>
+<h3><span class="mw-headline" id="lxc-execute_fails_due_to_missing_lxc.init.static">lxc-execute fails due to missing lxc.init.static</span></h3>
+<p><code>lxc-execute</code> fails with the error message <code>Unable to open lxc.init.static</code>. See <a rel="nofollow" class="external text" href="https://bugs.archlinux.org/task/63814">FS#63814</a> for details.
+</p>
+<p>Starting containers using <code>lxc-start</code> works fine.
+</p>
+<h2><span class="mw-headline" id="See_also">See also</span></h2>
+<ul>
+<li><a rel="nofollow" class="external text" href="https://linuxcontainers.org/lxc/introduction/">Official Website</a></li>
+<li><a rel="nofollow" class="external text" href="https://linuxcontainers.org/lxc/getting-started/">Getting Started Guide</a></li>
+<li><a rel="nofollow" class="external text" href="https://linuxcontainers.org/lxc/documentation/">Documentation</a></li>
+<li><a rel="nofollow" class="external text" href="https://discuss.linuxcontainers.org/">Forum</a></li>
+<li><a rel="nofollow" class="external text" href="https://github.com/lxc/lxc">Official GitHub Repository</a></li>
+<li><a rel="nofollow" class="external text" href="https://linuxcontainers.org/lxc/security/">Security Guide</a></li>
+<li><a rel="nofollow" class="external text" href="https://documentation.ubuntu.com/server/how-to/containers/lxd-containers/">Ubuntu LXD documentation</a></li>
+</ul>
+</div>
+</div>
+					<div id="catlinks" class="catlinks" data-mw="interface">
+<div id="mw-normal-catlinks" class="mw-normal-catlinks">
+<a href="../Special:Categories.html" title="Special:Categories">Categories</a>: <ul>
+<li><a href="../en/Category:Virtualization.html" title="Category:Virtualization">Virtualization</a></li>
+<li><a href="../en/Category:Sandboxing.html" title="Category:Sandboxing">Sandboxing</a></li>
+</ul>
+</div>
+<div id="mw-hidden-catlinks" class="mw-hidden-catlinks mw-hidden-cats-hidden">Hidden categories: <ul>
+<li><a href="../en/Category:Pages_or_sections_flagged_with_Template:Accuracy.html" title="Category:Pages or sections flagged with Template:Accuracy">Pages or sections flagged with Template:Accuracy</a></li>
+<li><a href="../en/Category:Pages_or_sections_flagged_with_Template:Merge.html" title="Category:Pages or sections flagged with Template:Merge">Pages or sections flagged with Template:Merge</a></li>
+<li><a href="../en/Category:Pages_or_sections_flagged_with_Template:Expansion.html" title="Category:Pages or sections flagged with Template:Expansion">Pages or sections flagged with Template:Expansion</a></li>
+</ul>
+</div>
+</div>
+				</div>
+			</main>
+			
+		</div>
+		<div class="mw-footer-container">
+			
+<footer id="footer" class="mw-footer" style="margin: 0">
+	<ul id="footer-info">
+	<li data-nosnippet="">Retrieved from "<a dir="ltr" href="https://wiki.archlinux.org/index.php?title=Linux_Containers&amp;oldid=829563">https://wiki.archlinux.org/index.php?title=Linux_Containers&amp;oldid=829563</a>"</li>
+<li id="footer-info-lastmod"> This page was last edited on 21 March 2025, at 18:24.</li>
+	<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+<br>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="https://terms.archlinux.org/docs/privacy-policy/">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="../en/ArchWiki:About.html">About ArchWiki</a></li>
+	<li id="footer-places-disclaimers"><a href="../en/ArchWiki:General_disclaimer.html">Disclaimers</a></li>
+	<li id="footer-places-archwiki-code-of-conduct"><a href="https://terms.archlinux.org/docs/code-of-conduct/" class="extiw" title="archlinux-service-agreements:code-of-conduct">Code of conduct</a></li>
+	<li id="footer-places-archwiki-terms-of-service"><a href="https://terms.archlinux.org/docs/terms-of-service/" class="extiw" title="archlinux-service-agreements:terms-of-service">Terms of service</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-copyrightico"><a href="https://www.gnu.org/copyleft/fdl.html" class="cdx-button cdx-button--fake-button cdx-button--size-large cdx-button--fake-button--enabled"><img src="/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" loading="lazy"></a></li>
+	<li id="footer-poweredbyico"><img src="/resources/assets/poweredby_mediawiki.svg" width="88" height="31" loading="lazy"></li>
+</ul>
+
+</footer>
+
+		</div>
+	</div> 
+</div> 
+<div class="vector-settings" id="p-dock-bottom">
+	<ul></ul>
+</div>
+</body>
+</html>

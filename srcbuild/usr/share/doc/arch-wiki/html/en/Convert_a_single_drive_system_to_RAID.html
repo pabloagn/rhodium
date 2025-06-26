@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-sticky-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-0 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-disabled skin-theme-clientpref-day vector-toc-available" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>Convert a single drive system to RAID - ArchWiki</title>
+<link rel="stylesheet" href="../ArchWikiOffline.css">
+<meta name="ResourceLoaderDynamicStyles" content="">
+<meta name="generator" content="MediaWiki 1.43.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="max-image-preview:standard">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.25, maximum-scale=5.0">
+<link rel="search" type="application/opensearchdescription+xml" href="/rest.php/v1/search" title="ArchWiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.archlinux.org/api.php?action=rsd">
+<link rel="license" href="https://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="ArchWiki Atom feed" href="/index.php?title=Special:RecentChanges&amp;feed=atom">
+</head>
+<body class="skin--responsive skin-vector skin-vector-search-vue mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Convert_a_single_drive_system_to_RAID rootpage-Convert_a_single_drive_system_to_RAID skin-vector-2022 action-view">
+<a class="mw-jump-link" href="#bodyContent">Jump to content</a>
+<div class="vector-header-container">
+	</div>
+<div class="mw-page-container">
+	<div class="mw-page-container-inner">
+		<div class="vector-column-start">
+			<div class="vector-main-menu-container">
+		</div>
+	<div class="vector-sticky-pinned-container">
+				<nav id="mw-panel-toc" aria-label="Contents" data-event-name="ui.sidebar-toc" class="mw-table-of-contents-container vector-toc-landmark">
+					<div id="vector-toc-pinned-container" class="vector-pinned-container">
+					<div id="vector-toc" class="vector-toc vector-pinnable-element">
+	<div class="vector-pinnable-header vector-toc-pinnable-header vector-pinnable-header-pinned" data-feature-name="toc-pinned" data-pinnable-element-id="vector-toc">
+	<h2 class="vector-pinnable-header-label">Contents</h2>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-toc.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-toc.unpin">hide</button>
+</div>
+
+
+	<ul class="vector-toc-contents" id="mw-panel-toc-list">
+		<li id="toc-mw-content-text" class="vector-toc-list-item vector-toc-level-1">
+			<a href="#" class="vector-toc-link">
+				<div class="vector-toc-text">Beginning</div>
+			</a>
+		</li>
+		<li id="toc-Scenario" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Scenario">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">1</span>
+				<span>Scenario</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Scenario-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Prepare_the_new_disk" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Prepare_the_new_disk">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">2</span>
+				<span>Prepare the new disk</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Prepare_the_new_disk-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Prepare the new disk subsection</span>
+			</button>
+		
+		<ul id="toc-Prepare_the_new_disk-sublist" class="vector-toc-list">
+			<li id="toc-Partition_the_disk" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Partition_the_disk">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1</span>
+					<span>Partition the disk</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Partition_the_disk-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Create_the_RAID_device" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Create_the_RAID_device">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2</span>
+					<span>Create the RAID device</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Create_the_RAID_device-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Make_file_system" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Make_file_system">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.3</span>
+					<span>Make file system</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Make_file_system-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Copy_the_data_on_the_array" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Copy_the_data_on_the_array">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">3</span>
+				<span>Copy the data on the array</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Copy_the_data_on_the_array-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Boot_on_the_new_disk" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Boot_on_the_new_disk">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">4</span>
+				<span>Boot on the new disk</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Boot_on_the_new_disk-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Boot on the new disk subsection</span>
+			</button>
+		
+		<ul id="toc-Boot_on_the_new_disk-sublist" class="vector-toc-list">
+			<li id="toc-Update_the_boot_loader" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Update_the_boot_loader">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.1</span>
+					<span>Update the boot loader</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Update_the_boot_loader-sublist" class="vector-toc-list">
+				<li id="toc-GRUB_legacy" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#GRUB_legacy">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.1.1</span>
+					<span>GRUB legacy</span>
+				</div>
+			</a>
+			
+			<ul id="toc-GRUB_legacy-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-GRUB" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#GRUB">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.1.2</span>
+					<span>GRUB</span>
+				</div>
+			</a>
+			
+			<ul id="toc-GRUB-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Alter_fstab" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Alter_fstab">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.2</span>
+					<span>Alter fstab</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Alter_fstab-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Rebuild_the_initramfs" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Rebuild_the_initramfs">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.3</span>
+					<span>Rebuild the initramfs</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Rebuild_the_initramfs-sublist" class="vector-toc-list">
+				<li id="toc-Chroot_into_the_RAID_system" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Chroot_into_the_RAID_system">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.3.1</span>
+					<span>Chroot into the RAID system</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Chroot_into_the_RAID_system-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Record_mdadm's_config" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Record_mdadm's_config">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.3.2</span>
+					<span>Record mdadm's config</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Record_mdadm's_config-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Rebuild_initcpio" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Rebuild_initcpio">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.3.3</span>
+					<span>Rebuild initcpio</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Rebuild_initcpio-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Install_the_boot_loader_on_the_RAID_array" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Install_the_boot_loader_on_the_RAID_array">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.4</span>
+					<span>Install the boot loader on the RAID array</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Install_the_boot_loader_on_the_RAID_array-sublist" class="vector-toc-list">
+				<li id="toc-GRUB_Legacy_2" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#GRUB_Legacy_2">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.4.1</span>
+					<span>GRUB Legacy</span>
+				</div>
+			</a>
+			
+			<ul id="toc-GRUB_Legacy_2-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Verify_success" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Verify_success">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.5</span>
+					<span>Verify success</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Verify_success-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Add_original_disk_to_array" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Add_original_disk_to_array">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">5</span>
+				<span>Add original disk to array</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Add_original_disk_to_array-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Add original disk to array subsection</span>
+			</button>
+		
+		<ul id="toc-Add_original_disk_to_array-sublist" class="vector-toc-list">
+			<li id="toc-Partition_original_disk" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Partition_original_disk">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.1</span>
+					<span>Partition original disk</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Partition_original_disk-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Add_disk_partition_to_array" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Add_disk_partition_to_array">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.2</span>
+					<span>Add disk partition to array</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Add_disk_partition_to_array-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-See_also" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#See_also">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">6</span>
+				<span>See also</span>
+			</div>
+		</a>
+		
+		<ul id="toc-See_also-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+</ul>
+</div>
+
+					</div>
+		</nav>
+			</div>
+		</div>
+		<div class="mw-content-container">
+			<main id="content" class="mw-body" style="margin: 0">
+				<header class="mw-body-header vector-page-titlebar">
+					<nav aria-label="Contents" class="vector-toc-landmark">
+						
+<div id="vector-page-titlebar-toc" class="vector-dropdown vector-page-titlebar-toc vector-button-flush-left">
+	<input type="checkbox" id="vector-page-titlebar-toc-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-page-titlebar-toc" class="vector-dropdown-checkbox " aria-label="Toggle the table of contents">
+	<label id="vector-page-titlebar-toc-label" for="vector-page-titlebar-toc-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"><span class="vector-icon mw-ui-icon-listBullet mw-ui-icon-wikimedia-listBullet"></span>
+
+<span class="vector-dropdown-label-text">Toggle the table of contents</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+							<div id="vector-page-titlebar-toc-unpinned-container" class="vector-unpinned-container">
+			</div>
+		
+	</div>
+</div>
+
+					</nav>
+					<h1 id="firstHeading" class="firstHeading mw-first-heading"><span class="mw-page-title-main">Convert a single drive system to RAID</span></h1>
+							
+<div id="p-lang-btn" class="vector-dropdown mw-portlet mw-portlet-lang">
+	<input type="checkbox" id="p-lang-btn-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-p-lang-btn" class="vector-dropdown-checkbox mw-interlanguage-selector" aria-label="Go to an article in another language. Available in 1 language">
+	<label id="p-lang-btn-label" for="p-lang-btn-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--action-progressive mw-portlet-lang-heading-1" aria-hidden="true"><span class="vector-icon mw-ui-icon-language-progressive mw-ui-icon-wikimedia-language-progressive"></span>
+
+<span class="vector-dropdown-label-text">1 language</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+		<div class="vector-menu-content">
+			
+			<ul class="vector-menu-content-list">
+				
+				<li class="interlanguage-link interwiki-ja mw-list-item"><a href="https://wiki.archlinux.jp/index.php/%E3%82%B7%E3%83%B3%E3%82%B0%E3%83%AB%E3%83%89%E3%83%A9%E3%82%A4%E3%83%96%E7%92%B0%E5%A2%83%E3%82%92_RAID_%E3%81%AB%E5%A4%89%E6%8F%9B" title="シングルドライブ環境を RAID に変換 – 日本語" lang="ja" hreflang="ja" data-title="シングルドライブ環境を RAID に変換" data-language-autonym="日本語" data-language-local-name="日本語" class="interlanguage-link-target"><span>日本語</span></a></li>
+			</ul>
+			
+		</div>
+
+	</div>
+</div>
+</header>
+				<div class="vector-column-end">
+					<div class="vector-sticky-pinned-container">
+						<nav class="vector-page-tools-landmark" aria-label="Page tools">
+							<div id="vector-page-tools-pinned-container" class="vector-pinned-container">
+				
+							</div>
+		</nav>
+						<nav class="vector-appearance-landmark" aria-label="Appearance">
+							<div id="vector-appearance-pinned-container" class="vector-pinned-container">
+				<div id="vector-appearance" class="vector-appearance vector-pinnable-element">
+	<div class="vector-pinnable-header vector-appearance-pinnable-header vector-pinnable-header-pinned" data-feature-name="appearance-pinned" data-pinnable-element-id="vector-appearance" data-pinned-container-id="vector-appearance-pinned-container" data-unpinned-container-id="vector-appearance-unpinned-container">
+	<div class="vector-pinnable-header-label">Appearance</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-appearance.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-appearance.unpin">hide</button>
+</div>
+
+
+</div>
+
+							</div>
+		</nav>
+					</div>
+				</div>
+				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container>
+					<div class="vector-body-before-content">
+							<div class="mw-indicators">
+		</div>
+
+						<div id="siteSub" class="noprint">From ArchWiki</div>
+					</div>
+					<div id="contentSub"><div id="mw-content-subtitle"></div></div>
+					
+					
+					<div id="mw-content-text" class="mw-body-content">
+<div class="mw-content-ltr mw-parser-output" lang="en" dir="ltr">
+<p>This guide shows how to convert a functional single-drive system to a <a href="../en/RAID.html" title="RAID">RAID</a> 1 setup after adding a second drive, without the need to temporarily store the data on a third drive. The procedure can also be adapted, simplifying it, to the conversion of simple non-root partitions, and to other RAID levels.
+</p>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> You may consider using <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=raider">raider</a></span>, which can convert a single disk into a RAID system with a two-pass command.</div>
+<meta property="mw:PageProp/toc">
+<h2><span class="mw-headline" id="Scenario">Scenario</span></h2>
+<p>This example assumes that the pre-existing disk is <code>/dev/sda</code>, which contains only one partition, <code>/dev/sda1</code>, used for the whole system. The newly-added disk is <code>/dev/sdb</code>.
+</p>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Warning:</strong> Backup important data before proceeding.</div>
+<h2><span class="mw-headline" id="Prepare_the_new_disk">Prepare the new disk</span></h2>
+<h3><span class="mw-headline" id="Partition_the_disk">Partition the disk</span></h3>
+<p>The first step is creating the <a href="../en/Partitioning.html" class="mw-redirect" title="Partition">partition</a> on the new disk, <code>/dev/sdb1</code>, that will be used as the mirror for the RAID array. In general, in this step it is not needed to recreate the exact partitioning scheme of the pre-existing drive; RAID can even be configured on whole disks, and <a rel="nofollow" class="external text" href="https://raid.wiki.kernel.org/index.php/Partitioning_RAID_/_LVM_on_RAID#Partitions%20on%20a%20RAID%20device">partitions</a> or <a href="../en/LVM.html" title="LVM">logical volumes</a> created later.
+</p>
+<p>Make sure that the partition type is set as <code>FD</code>. See <a href="../en/RAID.html#Prepare_the_devices" title="RAID">RAID#Prepare the devices</a> and <a href="../en/RAID.html#Partition_the_devices" title="RAID">RAID#Partition the devices</a> for more information.
+</p>
+<h3><span class="mw-headline" id="Create_the_RAID_device">Create the RAID device</span></h3>
+<p>Next, create the RAID array in a degraded state, using only the new disk. Note how the <code>missing</code> keyword is specified for the first device: this will be added later.
+</p>
+<pre># mdadm --create /dev/md0 --level=1 --raid-devices=2 missing /dev/<i>device</i>
+</pre>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> Run <code>fdisk -l</code> to find the disk you want to use</div>
+<p>Replace <i>device</i> with the one you are wanting to use before running the command.
+</p>
+<p>If you want to use <a href="../en/Syslinux.html" title="Syslinux">Syslinux</a>, then specify <code>--metadata=1.0</code> (for the boot partition). As of Syslinux 6.03, <a href="../en/RAID.html" class="mw-redirect" title="Mdadm">mdadm</a> 1.2 is not yet supported in Syslinux. See also <a href="../en/LVM_on_software_RAID.html" class="mw-redirect" title="Software RAID and LVM">Software RAID and LVM</a>.
+</p>
+<p>Make sure the array has been created correctly by checking <code>/proc/mdstat</code>:
+</p>
+<pre># Personalities : [raid1]                                                                                                                                                                       
+md0 : active raid1 sdb1[1]                                                                                                                                                                    
+      2930034432 blocks super 1.2 [2/1] [_U]                                                                                                                                                  
+      bitmap: 22/22 pages [88KB], 65536KB chunk                                                                                                                                               
+                                                                                                                                                                                              
+unused devices: &lt;none&gt;
+</pre>
+<h3><span class="mw-headline" id="Make_file_system">Make file system</span></h3>
+<p>Create the needed <a href="../en/File_systems.html" class="mw-redirect" title="File system">file system</a> on the <code>/dev/md0</code> device.
+</p>
+<h2><span class="mw-headline" id="Copy_the_data_on_the_array">Copy the data on the array</span></h2>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Warning:</strong> It is recommended to copy the data from another system, such as a live image, to minimize the risk of the data changing in the middle of the copy. Alternatively, switch to single-user mode with <code>systemctl isolate rescue.target</code>.</div>
+<p>Mount the array:
+</p>
+<pre># mount --mkdir /dev/md0 /mnt/new-raid
+</pre>
+<p>Now copy the data from <code>/dev/sda1</code> to <code>/mnt/new-raid/</code>, for example using <a href="../en/Rsync.html#Full_system_backup" class="mw-redirect" title="Full system backup with rsync">rsync</a>.
+</p>
+<h2><span class="mw-headline" id="Boot_on_the_new_disk">Boot on the new disk</span></h2>
+<h3><span class="mw-headline" id="Update_the_boot_loader">Update the boot loader</span></h3>
+<p>Create a new entry in the boot loader to load the system from the RAID array in the new disk.
+</p>
+<h4><span class="mw-headline" id="GRUB_legacy">GRUB legacy</span></h4>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../File:Inaccurate.svg" decoding="async" width="48" height="48" class="mw-file-element"></span></span><b>The factual accuracy of this article or section is disputed.</b></p>
+<div>
+<b>Reason:</b> The following configuration has not been verified after the article has been reorganized on September 2015. (Discuss in <a rel="nofollow" class="external text" href="../en/Talk:Convert_a_single_drive_system_to_RAID.html">Talk:Convert a single drive system to RAID</a>)</div>
+</div>
+<p>Use your preferred text editor to open <code>/mnt/new-raid/boot/grub/menu.lst</code>.
+</p>
+<pre>--- SNIP ---
+default   0
+color light-blue/black light-cyan/blue
+
+## fallback
+fallback 1
+
+# (0) Arch Linux
+title  Arch Linux - Original Disc
+root   (hd0,0)
+kernel /vmlinuz-linux root=/dev/sda1
+
+# (1) Arch Linux
+title  Arch Linux - New RAID
+root   (hd1,0)
+#kernel /vmlinuz-linux root=/dev/sda1 ro
+kernel /vmlinuz-linux root=/dev/md0 md=0,/dev/sda1,/dev/sdb1
+--- SNIP ---
+</pre>
+<p>Notice we added the <code>fallback</code> line and duplicated the Arch Linux entry with a different <code>root</code> directive on the kernel line.
+</p>
+<p>Also update the "kopt" and "groot" sections, as shown below, if they are in your <code>/mnt/new-raid/boot/grub/menu.lst</code> file, because it will make applying distribution kernel updates easier:
+</p>
+<pre>- # kopt=root=UUID=fbafab1a-18f5-4bb9-9e66-a71c1b00977e ro
++ # kopt=root=/dev/md0 ro md=0,/dev/sda1,/dev/sdb1
+
+## default GRUB root device
+## e.g. groot=(hd0,0)
+- # groot=(hd0,0)
++ # groot=(hd0,1)
+</pre>
+<p>See <a href="../en/GRUB_Legacy.html" title="GRUB Legacy">GRUB Legacy</a> for more information.
+</p>
+<h4><span class="mw-headline" id="GRUB">GRUB</span></h4>
+<p>Please refer to <a href="../en/GRUB.html#RAID" title="GRUB">GRUB#RAID</a>.
+</p>
+<p>To boot the system from your degraded array, you will need to (1) add the <code>mdadm_udev</code> hook to the HOOKS in <code>/etc/mkinitcpio.conf</code> (after the entry for <code>block</code>) and (2) <a href="../en/Mkinitcpio.html#Image_creation_and_activation" class="mw-redirect" title="Regenerate the initramfs">regenerate the initramfs</a> and <a href="../en/GRUB.html#Generate_the_main_configuration_file" title="GRUB">generate a new configuration file</a>. You can then add a menu entry in <code>/boot/grub/grub.cfg</code> pointing to the raid partitions for boot. This is complicated by the default generation options making use of a primary boot entry, and placing the remaining boot entries in <b>sub-menus</b>. To restore generation of a single entry per-line for each boot option, simply add:
+</p>
+<pre>   GRUB_DISABLE_SUBMENU=y
+</pre>
+<p>to <code>/etc/default/grub</code> and regenerate <code>grub.cfg</code>. Now you can simply add an entry containing either the device files (e.g. <code>/dev/md0</code>, <code>/dev/md1</code> or simply use the <b>UUID</b> for each of the raid filesystems. After having done so, the easiest way to add an entry to boot from the degraded arrays is simply to copy the <i>"Arch Linux, with Linux linux"</i> entry and change the UUID's to match your arrays as shown in <code>/dev/disk/by-uuid</code>.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> Another alternative that avoids the uuid-shuffle, is to chroot your degraded array after it has been created and file copied to each of the respective arrays (e.g. <code>/</code>, <code>/boot</code>, and <code>/home</code>). You can add the <code>mdadm_udev</code> hook to <code>/etc/mkinitcpio.conf</code>, regenerate the initramfs. install the bootloader and generate a <code>grub.cfg</code> within the chroot environment. If you then toggle the primary drive for boot, you can boot the degraded array.</div>
+<h3><span class="mw-headline" id="Alter_fstab">Alter fstab</span></h3>
+<p>You need to tell fstab on the <b>new</b> disk where to find the new device. It is recommended to use <a href="../en/Persistent_block_device_naming.html" title="Persistent block device naming">Persistent block device naming</a>.
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/mnt/new-raid/etc/fstab</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">/dev/md0    /    ext4     defaults   0 1
+</pre>
+<h3><span class="mw-headline" id="Rebuild_the_initramfs">Rebuild the initramfs</span></h3>
+<h4><span class="mw-headline" id="Chroot_into_the_RAID_system">Chroot into the RAID system</span></h4>
+<pre># mount --bind /sys /mnt/new-raid/sys
+# mount --bind /proc /mnt/new-raid/proc
+# mount --bind /dev /mnt/new-raid/dev
+# chroot /mnt/new-raid/
+</pre>
+<p>If the chroot command gives you an error like <code>chroot: failed to run command `/bin/zsh': No such file or directory</code>, then use <code>chroot /mnt/new-raid/ /bin/bash</code> instead.
+</p>
+<h4>
+<span id="Record_mdadm.27s_config"></span><span class="mw-headline" id="Record_mdadm's_config">Record mdadm's config</span>
+</h4>
+<p><a href="../en/Help:Reading.html#Append,_add,_create,_edit" class="mw-redirect" title="Textedit">Edit</a> <code>/etc/mdadm.conf</code> and change the <code>MAILADDR</code> line to be your email address, if you want emailed alerts of problems with the RAID 1.
+</p>
+<p>Then save the array configuration with UUIDs to make it easier for the system to find <code>/dev/md0</code> at boot. If you do not do this, you can get an <code>ALERT! /dev/md0 does not exist</code> error when booting:
+</p>
+<pre># mdadm --detail --scan &gt;&gt; /etc/mdadm.conf
+</pre>
+<h4><span class="mw-headline" id="Rebuild_initcpio">Rebuild initcpio</span></h4>
+<p>Follow <a href="../en/RAID.html#Configure_mkinitcpio" title="RAID">RAID#Configure mkinitcpio</a>.
+</p>
+<h3><span class="mw-headline" id="Install_the_boot_loader_on_the_RAID_array">Install the boot loader on the RAID array</span></h3>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../File:Tango-view-fullscreen.svg" decoding="async" width="48" height="48" class="mw-file-element"></span></span><b>This article or section needs expansion.</b></p>
+<div>
+<b>Reason:</b> Support more boot loaders, simplify. (Discuss in <a rel="nofollow" class="external text" href="../en/Talk:Convert_a_single_drive_system_to_RAID.html">Talk:Convert a single drive system to RAID</a>)</div>
+</div>
+<h4><span class="mw-headline" id="GRUB_Legacy_2">GRUB Legacy</span></h4>
+<p>Start GRUB:
+</p>
+<pre># grub --no-floppy
+</pre>
+<p>Then we find our two partitions - the current one (hd0,0) (I.e. first disk, first partition), and (hd1,1) (i.e. the partition we just added above, on the second partition of the second drive). Check you get two results here:
+</p>
+<pre>grub&gt; find /boot/grub/stage1
+(hd0,0)
+(hd1,1)
+</pre>
+<p>Then we tell GRUB to assume the new second drive is (hd0), i.e. the first disk in the system (when it is not currently the case). If your first disk fails, however, and you remove it, or you change the order disks are detected in the BIOS so that you can boot from your second disk, then your second disk will become the first disk in the system. The MBR will then be correct, your new second drive will have become your first drive, and you will be able to boot from this disk.
+</p>
+<pre>grub&gt; device (hd0) /dev/sdb
+</pre>
+<p>Then we install GRUB onto the MBR of our new second drive. Check that the "partition type" is detected as "0xfd", as shown below, to make sure you have the right partition:
+</p>
+<pre>grub&gt; root (hd0,1)
+ Filesystem type is ext2fs, partition type 0xfd
+grub&gt; setup (hd0)
+ Checking if "/boot/grub/stage1" exists... yes
+ Checking if "/boot/grub/stage2" exists... yes
+ Checking if "/boot/grub/e2fs_stage1_5" exists... yes
+ Running "embed /boot/grub/e2fs_stage1_5 (hd0)"...  16 sectors are embedded. succeeded
+ Running "install /boot/grub/stage1 (hd0) (hd0)1+16 p (hd0,1)/boot/grub/stage2 /boot/grub/grub.conf"... succeeded
+ Done
+grub&gt; quit
+</pre>
+<h3><span class="mw-headline" id="Verify_success">Verify success</span></h3>
+<p>Reboot the computer, making sure it boots from the new RAID disk (<code>/dev/sdb</code>) and not the original disk (<code>/dev/sda</code>). You may need to change the boot device priorities in your BIOS to do this.
+</p>
+<p>Once the boot loader on the <b>new</b> disk loads, make sure you select to boot the new system entry you created earlier.
+</p>
+<p>Verify you have booted from the RAID array by looking at the output of mount. Also check mdstat again only to confirm which disk is in the array.
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;"># mount</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;"> /dev/md0 on / type ext4 (rw)
+</pre>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../File:Inaccurate.svg" decoding="async" width="48" height="48" class="mw-file-element"></span></span><b>The factual accuracy of this article or section is disputed.</b></p>
+<div>
+<b>Reason:</b> The output of the following command has not been verified after the article has been reorganized on September 2015. (Discuss in <a rel="nofollow" class="external text" href="../en/Talk:Convert_a_single_drive_system_to_RAID.html">Talk:Convert a single drive system to RAID</a>)</div>
+</div>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;"># cat /proc/mdstat</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;"> Personalities : [linear] [raid0] [raid1] [raid5] [multipath] [raid6] [raid10]
+ md0 : active raid1 sdb1[1]
+      40064 blocks [2/1] [_U]
+ 
+ unused devices: &lt;none&gt;
+</pre>
+<p>If the system boots fine, and the output of the above commands is correct, then you are running off the degraded RAID array, as expected.
+</p>
+<h2><span class="mw-headline" id="Add_original_disk_to_array">Add original disk to array</span></h2>
+<h3><span class="mw-headline" id="Partition_original_disk">Partition original disk</span></h3>
+<p>Copy the partition table from <code>/dev/sdb</code> (newly implemented RAID disk) to <code>/dev/sda</code> (second disk we are adding to the array) so that both disks have exactly the same layout:
+</p>
+<pre># sfdisk -d /dev/sdb | sfdisk /dev/sda
+</pre>
+<p>Alternative method: this will output the <code>/dev/sdb</code> partition layout to a file, then it is used as input for partitioning <code>/dev/sda</code>.
+</p>
+<pre># sfdisk -d /dev/sdb &gt; raidinfo-partitions.sdb
+# sfdisk /dev/sda &lt; raidinfo-partitions.sdb
+</pre>
+<p>Verify that the partitioning is identical:
+</p>
+<pre># fdisk -l
+</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> If you get an error when attempting to add the partition to the array: 
+<pre>mdadm: /dev/sda1 not large enough to join array
+</pre>
+You might have seen an earlier warning message when partitioning this disk that the kernel still sees the old disk size: a reboot ought to fix this, then try adding again to the array.</div>
+<h3><span class="mw-headline" id="Add_disk_partition_to_array">Add disk partition to array</span></h3>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;"># mdadm /dev/md0 -a /dev/sda1</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;"> mdadm: hot added /dev/sda1
+</pre>
+<p>Verify that the RAID array is being rebuilt:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;"># cat /proc/mdstat</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;"> Personalities : [raid1] 
+md0 : active raid1 sda1[2] sdb1[1]
+      2930034432 blocks super 1.2 [2/1] [_U]
+      [&gt;....................]  recovery =  0.2% (5973824/2930034432) finish=332.5min speed=146528K/sec
+      bitmap: 22/22 pages [88KB], 65536KB chunk
+
+unused devices: &lt;none&gt;
+</pre>
+<h2><span class="mw-headline" id="See_also">See also</span></h2>
+<ul><li>
+<a rel="nofollow" class="external text" href="https://askubuntu.com/questions/252795/convert-running-system-to-raid-5">Convert running system to RAID 5</a> — Example using RAID 5</li></ul>
+</div>
+</div>
+					<div id="catlinks" class="catlinks" data-mw="interface">
+<div id="mw-normal-catlinks" class="mw-normal-catlinks">
+<a href="../Special:Categories.html" title="Special:Categories">Category</a>: <ul><li><a href="../en/Category:Storage_virtualization.html" title="Category:Storage virtualization">Storage virtualization</a></li></ul>
+</div>
+<div id="mw-hidden-catlinks" class="mw-hidden-catlinks mw-hidden-cats-hidden">Hidden categories: <ul>
+<li><a href="../en/Category:Pages_or_sections_flagged_with_Template:Accuracy.html" title="Category:Pages or sections flagged with Template:Accuracy">Pages or sections flagged with Template:Accuracy</a></li>
+<li><a href="../en/Category:Pages_or_sections_flagged_with_Template:Expansion.html" title="Category:Pages or sections flagged with Template:Expansion">Pages or sections flagged with Template:Expansion</a></li>
+</ul>
+</div>
+</div>
+				</div>
+			</main>
+			
+		</div>
+		<div class="mw-footer-container">
+			
+<footer id="footer" class="mw-footer" style="margin: 0">
+	<ul id="footer-info">
+	<li data-nosnippet="">Retrieved from "<a dir="ltr" href="https://wiki.archlinux.org/index.php?title=Convert_a_single_drive_system_to_RAID&amp;oldid=822909">https://wiki.archlinux.org/index.php?title=Convert_a_single_drive_system_to_RAID&amp;oldid=822909</a>"</li>
+<li id="footer-info-lastmod"> This page was last edited on 14 December 2024, at 07:37.</li>
+	<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+<br>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="https://terms.archlinux.org/docs/privacy-policy/">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="../en/ArchWiki:About.html">About ArchWiki</a></li>
+	<li id="footer-places-disclaimers"><a href="../en/ArchWiki:General_disclaimer.html">Disclaimers</a></li>
+	<li id="footer-places-archwiki-code-of-conduct"><a href="https://terms.archlinux.org/docs/code-of-conduct/" class="extiw" title="archlinux-service-agreements:code-of-conduct">Code of conduct</a></li>
+	<li id="footer-places-archwiki-terms-of-service"><a href="https://terms.archlinux.org/docs/terms-of-service/" class="extiw" title="archlinux-service-agreements:terms-of-service">Terms of service</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-copyrightico"><a href="https://www.gnu.org/copyleft/fdl.html" class="cdx-button cdx-button--fake-button cdx-button--size-large cdx-button--fake-button--enabled"><img src="/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" loading="lazy"></a></li>
+	<li id="footer-poweredbyico"><img src="/resources/assets/poweredby_mediawiki.svg" width="88" height="31" loading="lazy"></li>
+</ul>
+
+</footer>
+
+		</div>
+	</div> 
+</div> 
+<div class="vector-settings" id="p-dock-bottom">
+	<ul></ul>
+</div>
+</body>
+</html>

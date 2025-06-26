@@ -1,0 +1,54 @@
+<h1>ansible</h1>
+
+<blockquote><p>Manage groups of computers remotely over SSH. (use the <code>/etc/ansible/hosts</code> file to add new groups/hosts).
+Some subcommands such as <code>galaxy</code> have their own usage documentation.
+More information: <a href="https://docs.ansible.com/ansible/latest/cli/ansible.html">https://docs.ansible.com/ansible/latest/cli/ansible.html</a>.</p></blockquote>
+
+<ul>
+<li>List hosts belonging to a group:</li>
+</ul>
+
+
+<p><code>ansible {{group}} --list-hosts</code></p>
+
+<ul>
+<li>Ping a group of hosts by invoking the ping module:</li>
+</ul>
+
+
+<p><code>ansible {{group}} {{[-m|--module-name]}} ping</code></p>
+
+<ul>
+<li>Display facts about a group of hosts by invoking the setup module:</li>
+</ul>
+
+
+<p><code>ansible {{group}} {{[-m|--module-name]}} setup</code></p>
+
+<ul>
+<li>Execute a command on a group of hosts by invoking command module with arguments:</li>
+</ul>
+
+
+<p><code>ansible {{group}} {{[-m|--module-name]}} command {{[-a|--args]}} '{{my_command}}'</code></p>
+
+<ul>
+<li>Execute a command with administrative privileges:</li>
+</ul>
+
+
+<p><code>ansible {{group}} {{[-b|--become]}} --ask-become-pass {{[-m|--module-name]}} command {{[-a|--args]}} '{{my_command}}'</code></p>
+
+<ul>
+<li>Execute a command using a custom inventory file:</li>
+</ul>
+
+
+<p><code>ansible {{group}} {{[-i|--inventory]}} {{inventory_file}} {{[-m|--module-name]}} command {{[-a|--args]}} '{{my_command}}'</code></p>
+
+<ul>
+<li>List the groups in an inventory:</li>
+</ul>
+
+
+<p><code>ansible localhost {{[-m|--module-name]}} debug {{[-a|--args]}} '{{var=groups.keys()}}'</code></p>

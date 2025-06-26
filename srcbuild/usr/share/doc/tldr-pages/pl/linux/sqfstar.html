@@ -1,0 +1,39 @@
+<h1>sqfstar</h1>
+
+<blockquote><p>Utwórz system plików squashfs z archiwum tar.
+Więcej informacji: <a href="https://manned.org/sqfstar">https://manned.org/sqfstar</a>.</p></blockquote>
+
+<ul>
+<li>Utwórz system plików squashfs (domyślnie kompresując za pomocą <code>gzip</code>) z nieskompresowanego archiwum tar:</li>
+</ul>
+
+
+<p><code>sqfstar {{system_plików.squashfs}} &lt; {{archiwum.tar}}</code></p>
+
+<ul>
+<li>Utwórz system plików squashfs z archiwum tar skompresowanego za pomocą <code>gzip</code>, i skompresuj system plików używając podanego algorytmu:</li>
+</ul>
+
+
+<p><code>zcat {{archiwum.tar.gz}} | sqfstar -comp {{gzip|lzo|lz4|xz|zstd|lzma}} {{system_plików.squashfs}}</code></p>
+
+<ul>
+<li>Utwórz system plików squashfs z archiwum tar skompresowanego za pomocą <code>xz</code>, pomijając niektóre pliki:</li>
+</ul>
+
+
+<p><code>xzcat {{archiwum.tar.xz}} | sqfstar {{system_plików.squashfs}} {{plik1 plik2 ...}}</code></p>
+
+<ul>
+<li>Utwórz system plików squashfs z archiwum tar skompresowanego za pomocą <code>zstd</code>, pomijając pliki kończące się na <code>.gz</code>:</li>
+</ul>
+
+
+<p><code>zstdcat {{archiwum.tar.zst}} | sqfstar {{system_plików.squashfs}} "{{*.gz}}"</code></p>
+
+<ul>
+<li>Utwórz system plików squashfs z archiwum tar skompresowanego za pomocą <code>lz4</code>, pomijając pliki pasujące do wyrażenia regularnego:</li>
+</ul>
+
+
+<p><code>lz4cat {{archiwum.tar.lz4}} | sqfstar {{system_plików.squashfs}} -regex "{{wyrażenie_regularne}}"</code></p>

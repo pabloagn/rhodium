@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-sticky-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-0 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-disabled skin-theme-clientpref-day vector-toc-available" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>Install Arch Linux via SSH - ArchWiki</title>
+<link rel="stylesheet" href="../ArchWikiOffline.css">
+<meta name="ResourceLoaderDynamicStyles" content="">
+<meta name="generator" content="MediaWiki 1.43.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="max-image-preview:standard">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.25, maximum-scale=5.0">
+<link rel="search" type="application/opensearchdescription+xml" href="/rest.php/v1/search" title="ArchWiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.archlinux.org/api.php?action=rsd">
+<link rel="license" href="https://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="ArchWiki Atom feed" href="/index.php?title=Special:RecentChanges&amp;feed=atom">
+</head>
+<body class="skin--responsive skin-vector skin-vector-search-vue mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Install_Arch_Linux_via_SSH rootpage-Install_Arch_Linux_via_SSH skin-vector-2022 action-view">
+<a class="mw-jump-link" href="#bodyContent">Jump to content</a>
+<div class="vector-header-container">
+	</div>
+<div class="mw-page-container">
+	<div class="mw-page-container-inner">
+		<div class="vector-column-start">
+			<div class="vector-main-menu-container">
+		</div>
+	<div class="vector-sticky-pinned-container">
+				<nav id="mw-panel-toc" aria-label="Contents" data-event-name="ui.sidebar-toc" class="mw-table-of-contents-container vector-toc-landmark">
+					<div id="vector-toc-pinned-container" class="vector-pinned-container">
+					<div id="vector-toc" class="vector-toc vector-pinnable-element">
+	<div class="vector-pinnable-header vector-toc-pinnable-header vector-pinnable-header-pinned" data-feature-name="toc-pinned" data-pinnable-element-id="vector-toc">
+	<h2 class="vector-pinnable-header-label">Contents</h2>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-toc.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-toc.unpin">hide</button>
+</div>
+
+
+	<ul class="vector-toc-contents" id="mw-panel-toc-list">
+		<li id="toc-mw-content-text" class="vector-toc-list-item vector-toc-level-1">
+			<a href="#" class="vector-toc-link">
+				<div class="vector-toc-text">Beginning</div>
+			</a>
+		</li>
+		<li id="toc-On_the_remote_(target)_machine" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#On_the_remote_(target)_machine">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">1</span>
+				<span>On the remote (target) machine</span>
+			</div>
+		</a>
+		
+		<ul id="toc-On_the_remote_(target)_machine-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-On_the_local_machine" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#On_the_local_machine">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">2</span>
+				<span>On the local machine</span>
+			</div>
+		</a>
+		
+		<ul id="toc-On_the_local_machine-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Installation_on_a_headless_server" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Installation_on_a_headless_server">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">3</span>
+				<span>Installation on a headless server</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Installation_on_a_headless_server-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Installation on a headless server subsection</span>
+			</button>
+		
+		<ul id="toc-Installation_on_a_headless_server-sublist" class="vector-toc-list">
+			<li id="toc-Prepare_cloud-init_configuration_files" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Prepare_cloud-init_configuration_files">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1</span>
+					<span>Prepare cloud-init configuration files</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Prepare_cloud-init_configuration_files-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Using_an_additional_FAT_formatted_drive" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Using_an_additional_FAT_formatted_drive">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.2</span>
+					<span>Using an additional FAT formatted drive</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Using_an_additional_FAT_formatted_drive-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Using_an_additional_ISO" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Using_an_additional_ISO">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.3</span>
+					<span>Using an additional ISO</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Using_an_additional_ISO-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Using_a_single_USB_flash_drive" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Using_a_single_USB_flash_drive">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.4</span>
+					<span>Using a single USB flash drive</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Using_a_single_USB_flash_drive-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Using_a_single_custom-built_ISO" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Using_a_single_custom-built_ISO">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.5</span>
+					<span>Using a single custom-built ISO</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Using_a_single_custom-built_ISO-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Boot_from_the_installation_medium" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Boot_from_the_installation_medium">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.6</span>
+					<span>Boot from the installation medium</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Boot_from_the_installation_medium-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+</ul>
+</div>
+
+					</div>
+		</nav>
+			</div>
+		</div>
+		<div class="mw-content-container">
+			<main id="content" class="mw-body" style="margin: 0">
+				<header class="mw-body-header vector-page-titlebar">
+					<nav aria-label="Contents" class="vector-toc-landmark">
+						
+<div id="vector-page-titlebar-toc" class="vector-dropdown vector-page-titlebar-toc vector-button-flush-left">
+	<input type="checkbox" id="vector-page-titlebar-toc-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-page-titlebar-toc" class="vector-dropdown-checkbox " aria-label="Toggle the table of contents">
+	<label id="vector-page-titlebar-toc-label" for="vector-page-titlebar-toc-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"><span class="vector-icon mw-ui-icon-listBullet mw-ui-icon-wikimedia-listBullet"></span>
+
+<span class="vector-dropdown-label-text">Toggle the table of contents</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+							<div id="vector-page-titlebar-toc-unpinned-container" class="vector-unpinned-container">
+			</div>
+		
+	</div>
+</div>
+
+					</nav>
+					<h1 id="firstHeading" class="firstHeading mw-first-heading"><span class="mw-page-title-main">Install Arch Linux via SSH</span></h1>
+							
+<div id="p-lang-btn" class="vector-dropdown mw-portlet mw-portlet-lang">
+	<input type="checkbox" id="p-lang-btn-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-p-lang-btn" class="vector-dropdown-checkbox mw-interlanguage-selector" aria-label="Go to an article in another language. Available in 5 languages">
+	<label id="p-lang-btn-label" for="p-lang-btn-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--action-progressive mw-portlet-lang-heading-5" aria-hidden="true"><span class="vector-icon mw-ui-icon-language-progressive mw-ui-icon-wikimedia-language-progressive"></span>
+
+<span class="vector-dropdown-label-text">5 languages</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+		<div class="vector-menu-content">
+			
+			<ul class="vector-menu-content-list">
+				
+				<li class="interlanguage-link interwiki-es mw-list-item"><a href="../es/Install_Arch_Linux_via_SSH.html" title="Install Arch Linux via SSH – español" lang="es" hreflang="es" data-title="Install Arch Linux via SSH" data-language-autonym="Español" data-language-local-name="español" class="interlanguage-link-target"><span>Español</span></a></li>
+<li class="interlanguage-link interwiki-ja mw-list-item"><a href="https://wiki.archlinux.jp/index.php/SSH_%E3%81%8B%E3%82%89%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB" title="SSH からインストール – 日本語" lang="ja" hreflang="ja" data-title="SSH からインストール" data-language-autonym="日本語" data-language-local-name="日本語" class="interlanguage-link-target"><span>日本語</span></a></li>
+<li class="interlanguage-link interwiki-pt mw-list-item"><a href="../pt/Install_Arch_Linux_via_SSH.html" title="Install Arch Linux via SSH – português" lang="pt" hreflang="pt" data-title="Install Arch Linux via SSH" data-language-autonym="Português" data-language-local-name="português" class="interlanguage-link-target"><span>Português</span></a></li>
+<li class="interlanguage-link interwiki-ru mw-list-item"><a href="../ru/Install_Arch_Linux_via_SSH.html" title="Install Arch Linux via SSH – русский" lang="ru" hreflang="ru" data-title="Install Arch Linux via SSH" data-language-autonym="Русский" data-language-local-name="русский" class="interlanguage-link-target"><span>Русский</span></a></li>
+<li class="interlanguage-link interwiki-zh-hans mw-list-item"><a href="https://wiki.archlinuxcn.org/wiki/Install_Arch_Linux_via_SSH" title="Install Arch Linux via SSH – 中文（简体）" lang="zh-Hans" hreflang="zh-Hans" data-title="Install Arch Linux via SSH" data-language-autonym="中文（简体）" data-language-local-name="中文（简体）" class="interlanguage-link-target"><span>中文（简体）</span></a></li>
+			</ul>
+			
+		</div>
+
+	</div>
+</div>
+</header>
+				<div class="vector-column-end">
+					<div class="vector-sticky-pinned-container">
+						<nav class="vector-page-tools-landmark" aria-label="Page tools">
+							<div id="vector-page-tools-pinned-container" class="vector-pinned-container">
+				
+							</div>
+		</nav>
+						<nav class="vector-appearance-landmark" aria-label="Appearance">
+							<div id="vector-appearance-pinned-container" class="vector-pinned-container">
+				<div id="vector-appearance" class="vector-appearance vector-pinnable-element">
+	<div class="vector-pinnable-header vector-appearance-pinnable-header vector-pinnable-header-pinned" data-feature-name="appearance-pinned" data-pinnable-element-id="vector-appearance" data-pinned-container-id="vector-appearance-pinned-container" data-unpinned-container-id="vector-appearance-unpinned-container">
+	<div class="vector-pinnable-header-label">Appearance</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-appearance.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-appearance.unpin">hide</button>
+</div>
+
+
+</div>
+
+							</div>
+		</nav>
+					</div>
+				</div>
+				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container>
+					<div class="vector-body-before-content">
+							<div class="mw-indicators">
+		</div>
+
+						<div id="siteSub" class="noprint">From ArchWiki</div>
+					</div>
+					<div id="contentSub"><div id="mw-content-subtitle"></div></div>
+					
+					
+					<div id="mw-content-text" class="mw-body-content">
+<div class="mw-content-ltr mw-parser-output" lang="en" dir="ltr">
+<p>This article is intended to show users how to install Arch remotely via an <a href="../en/Secure_Shell.html" class="mw-redirect" title="SSH">SSH</a> connection. Consider this approach when the host is located remotely or you wish to use the copy/paste ability of an SSH client to do the Arch install.
+</p>
+<meta property="mw:PageProp/toc">
+<h2>
+<span id="On_the_remote_.28target.29_machine"></span><span class="mw-headline" id="On_the_remote_(target)_machine">On the remote (target) machine</span>
+</h2>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> These steps require physical access to the machine. If the host is physically located elsewhere, this may need to be coordinated with another person.</div>
+<p>Follow the steps from <a href="../en/Installation_guide.html#Pre-installation" title="Installation guide">Installation guide#Pre-installation</a> up to and including <a href="../en/Installation_guide.html#Connect_to_the_internet" title="Installation guide">connecting to the internet</a> (<a href="../en/Installation_guide.html#Set_the_console_keyboard_layout_and_font" title="Installation guide">setting the keyboard layout and font</a> can be skipped).
+</p>
+<p>At that point, set the required root password to allow an SSH connection, since the default Arch password for root is empty:
+</p>
+<pre># passwd
+</pre>
+<p>Confirm that <code>PermitRootLogin yes</code> is set in <code>/etc/ssh/sshd_config</code>. If it is not, set it and <a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Reload">reload</a> the OpenSSH daemon <code>sshd.service</code> to apply the changes.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> If the target machine is behind a NAT router, and you require external access, the SSH port (22 by default) will need to be forwarded to the target machine's LAN IP address. Alternatively, you can setup a reverse SSH tunnel to your local (client) machine and connect back through it, see the <code>-R</code> flag of <span class="plainlinks archwiki-template-man" title="$ man 1 ssh"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/ssh.1">ssh(1)</a></span>.</div>
+<h2><span class="mw-headline" id="On_the_local_machine">On the local machine</span></h2>
+<p>On the local machine, connect to the target machine via SSH with the following command:
+</p>
+<pre>$ ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@<i>ip.address.of.target</i>
+</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> The <code>-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null</code> options will prevent verifying and writing the live environment's SSH host keys to <code>~/.ssh/known_hosts</code>. This will avoid the <code>REMOTE HOST IDENTIFICATION HAS CHANGED</code> warning in case you have ever connected to the IP address before.</div>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> If both machines are on the same local network, you can use the mDNS hostname <code>archiso.local</code> in place of the target's IP address: <pre>$ ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@archiso.local</pre>
+</div>
+<p>From here one is presented with the live environment's welcome message and is able to administer the target machine as if sitting at the physical keyboard. At this point, if the intent is to simply install Arch from the live media, resume at <a href="../en/Installation_guide.html#Update_the_system_clock" title="Installation guide">Installation guide#Update the system clock</a>. If the intent is to edit an existing Linux install that got broken, follow the <a href="../en/Install_Arch_Linux_from_existing_Linux.html" class="mw-redirect" title="Install from existing Linux">Install from existing Linux</a> wiki article.
+</p>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> Consider using <a href="../en/GNU_Screen.html" title="GNU Screen">GNU Screen</a> or <a href="../en/Tmux.html" title="Tmux">tmux</a> on the target machine (both are available in the live environment), so that if you are disconnected you can reattach to your multiplexer's session.</div>
+<h2><span class="mw-headline" id="Installation_on_a_headless_server">Installation on a headless server</span></h2>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../File:Merge-arrows-2.svg" decoding="async" width="36" height="40" class="mw-file-element"></span></span><b>This article or section is a candidate for merging with <a href="../en/Cloud-init.html#Archiso" title="Cloud-init">Cloud-init#Archiso</a>.</b></p>
+<div>
+<b>Notes:</b> The process described here is entirely dependent on cloud-init and is a great illustration of its use, so it should probably be merged and linked from there. (Discuss in <a rel="nofollow" class="external text" href="../en/Talk:Install_Arch_Linux_via_SSH.html">Talk:Install Arch Linux via SSH</a>)</div>
+</div>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> These steps may require physical access to the headless machine. Somebody has to insert the installation medium and power up the headless server.</div>
+<p>This section describes installation of Arch Linux on a headless server without a keyboard, mouse or display. It uses an additional drive with <a href="../en/Cloud-init.html" title="Cloud-init">cloud-init</a> NoCloud configuration to automatically configure <a href="../en/OpenSSH.html" title="OpenSSH">OpenSSH</a> authorized keys and optionally <a href="../en/Iwd.html" title="Iwd">iwd</a> connection(s).
+</p>
+<h3><span class="mw-headline" id="Prepare_cloud-init_configuration_files">Prepare cloud-init configuration files</span></h3>
+<p>There are three required <a href="../en/Cloud-init.html" title="Cloud-init">cloud-init</a> configuration files: <code>meta-data</code>, <code>user-data</code> and <code>network-config</code>.
+</p>
+<p>The <code>meta-data</code> file can be empty:
+</p>
+<pre>$ printf "" &gt; meta-data
+</pre>
+<p><code>user-data</code> will contain the relevant configuration:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">user-data</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">#cloud-config
+users:
+  - name: root
+    ssh_authorized_keys:
+      - ssh-ed25519 <i>XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</i>
+      - ssh-ed25519 <i>YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY</i></pre>
+<p>Replace <code>ssh-ed25519 <i>XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</i></code> with your public <a href="../en/SSH_keys.html" class="mw-redirect" title="SSH key">SSH key</a>. To add multiple keys, simply repeat the statement as shown above.
+</p>
+<p>To automatically connect to a Wi-Fi network, use the <code>write_files:</code> statement to create <a href="../en/Iwd.html#Network_configuration" title="Iwd">iwd network configuration files</a> in the correct directory. For example:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">user-data</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">#cloud-config
+users:
+  - name: root
+    ssh_authorized_keys:
+      - ssh-ed25519 <i>XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</i>
+      - ssh-ed25519 <i>YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY</i>
+
+write_files:
+- content: |
+    [Security]
+    PreSharedKey=aafb192ce2da24d8c7805c956136f45dd612103f086034c402ed266355297295
+  path: /var/lib/iwd/spaceship.psk
+
+runcmd:
+- systemctl restart iwd.service</pre>
+<p>cloud-init creates network configuration that differs from one shipped in the ISO. I.e. mDNS responder and DHCPv6 client are not enabled. To avoid this, disable cloud-init's network configuration in <code>network-config</code>:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">network-config</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">version: 2
+config: disabled
+</pre>
+<p>Once all three files are created they need to be placed on a drive with an ISO 9660 or FAT volume labeled <code>CIDATA</code>.
+</p>
+<h3><span class="mw-headline" id="Using_an_additional_FAT_formatted_drive">Using an additional FAT formatted drive</span></h3>
+<p>Use a <a href="../en/FAT.html" title="FAT">FAT</a> formatted drive. Copy <code>meta-data</code>, <code>user-data</code> and <code>network-config</code> to the drive and change the file system's <a href="../en/Persistent_block_device_naming.html#by-label" class="mw-redirect" title="LABEL">LABEL</a> to <code>CIDATA</code>.
+</p>
+<p>You will need to attach this drive to the headless machine in addition to the one with the official ISO.
+</p>
+<h3><span class="mw-headline" id="Using_an_additional_ISO">Using an additional ISO</span></h3>
+<p>Create a <code>cloud-init.iso</code> file using <i>xorriso</i> from <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=libisoburn">libisoburn</a></span>:
+</p>
+<pre>$ xorrisofs -output cloud-init.iso -volid CIDATA -joliet -rational-rock meta-data user-data network-config
+</pre>
+<p>Prepare the cloud-init data medium by <a href="../en/Optical_disc_drive.html#Burning" title="Optical disc drive">burning</a> <code>cloud-init.iso</code> to an optical disc or, if deployment options permit, use the ISO as is.
+</p>
+<h3><span class="mw-headline" id="Using_a_single_USB_flash_drive">Using a single USB flash drive</span></h3>
+<p>If the installation image is written to e.g. a USB flash drive, provided there is enough space on the drive, an additional partition to house cloud-init data can be created.
+</p>
+<p><a href="../en/Help:Reading.html#Installation_of_packages" class="mw-redirect" title="Install">Install</a> <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=dosfstools">dosfstools</a></span>, <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=mtools">mtools</a></span> and <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=libisoburn">libisoburn</a></span>.
+</p>
+<p>First create a 2 MiB <a href="../en/FAT.html" title="FAT">FAT</a> image with its <a href="../en/Persistent_block_device_naming.html#by-label" class="mw-redirect" title="LABEL">LABEL</a> set to <code>CIDATA</code>:
+</p>
+<pre>$ mkfs.fat -C -n CIDATA cloud-init.img 2048
+</pre>
+<p>Copy the <code>meta-data</code> and <code>user-data</code> files to the root of it:
+</p>
+<pre>$ mcopy -i cloud-init.img meta-data user-data network-config ::
+</pre>
+<p>Repack the official ISO to include the FAT image as a third partition:
+</p>
+<pre>$ xorriso -indev archlinux-<i>version</i>-x86_64.iso -outdev archlinux-<i>version</i>-x86_64-with-cidata.iso -append_partition 3 0x0c cloud-init.img -boot_image any replay
+</pre>
+<p>Finally follow <a href="../en/USB_flash_installation_medium.html#Using_the_ISO_as_is_(BIOS_and_UEFI)" title="USB flash installation medium">USB flash installation medium#Using the ISO as is (BIOS and UEFI)</a> to prepare the USB flash drive installation medium using the repacked ISO (<code>archlinux-<i>version</i>-x86_64-with-cidata.iso</code>).
+</p>
+<h3><span class="mw-headline" id="Using_a_single_custom-built_ISO">Using a single custom-built ISO</span></h3>
+<p>Alternatively, create a custom ISO using <a href="../en/Archiso.html" title="Archiso">Archiso</a>. This allows using only one drive regardless of type.
+</p>
+<p>Use the releng profile as basis. Place <a href="#Prepare_cloud-init_configuration_files">the cloud-init configuration files</a> in <code>airootfs/var/lib/cloud/seed/nocloud/</code> and build the ISO.
+</p>
+<h3><span class="mw-headline" id="Boot_from_the_installation_medium">Boot from the installation medium</span></h3>
+<p>Once finished, deploy the installation medium and the cloud-init data medium (if it is separate) to the headless machine using the appropriate method.
+</p>
+<p>Power up the headless machine and boot into a live Arch environment from the installation medium. Wait for a minute or so to allow the headless machine time to boot up and connect to the network.
+</p>
+<p>From your existing machine (with keyboard and display) <a href="../en/Secure_Shell.html" class="mw-redirect" title="SSH">SSH</a> into the live Arch environment on the headless server and complete the installation as described in the <a href="../en/Installation_guide.html" title="Installation guide">Installation guide</a>.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> To belabor the obvious, all the Wi-Fi and SSH configuration that was carried out in the boot image needs to be done again in the actual Arch Linux installation to allow Wi-Fi SSH access to the headless machine after installation.</div>
+</div>
+</div>
+					<div id="catlinks" class="catlinks" data-mw="interface">
+<div id="mw-normal-catlinks" class="mw-normal-catlinks">
+<a href="../Special:Categories.html" title="Special:Categories">Categories</a>: <ul>
+<li><a href="../en/Category:Installation_process.html" title="Category:Installation process">Installation process</a></li>
+<li><a href="../en/Category:Secure_Shell.html" title="Category:Secure Shell">Secure Shell</a></li>
+</ul>
+</div>
+<div id="mw-hidden-catlinks" class="mw-hidden-catlinks mw-hidden-cats-hidden">Hidden category: <ul><li><a href="../en/Category:Pages_or_sections_flagged_with_Template:Merge.html" title="Category:Pages or sections flagged with Template:Merge">Pages or sections flagged with Template:Merge</a></li></ul>
+</div>
+</div>
+				</div>
+			</main>
+			
+		</div>
+		<div class="mw-footer-container">
+			
+<footer id="footer" class="mw-footer" style="margin: 0">
+	<ul id="footer-info">
+	<li data-nosnippet="">Retrieved from "<a dir="ltr" href="https://wiki.archlinux.org/index.php?title=Install_Arch_Linux_via_SSH&amp;oldid=822113">https://wiki.archlinux.org/index.php?title=Install_Arch_Linux_via_SSH&amp;oldid=822113</a>"</li>
+<li id="footer-info-lastmod"> This page was last edited on 4 December 2024, at 09:14.</li>
+	<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+<br>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="https://terms.archlinux.org/docs/privacy-policy/">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="../en/ArchWiki:About.html">About ArchWiki</a></li>
+	<li id="footer-places-disclaimers"><a href="../en/ArchWiki:General_disclaimer.html">Disclaimers</a></li>
+	<li id="footer-places-archwiki-code-of-conduct"><a href="https://terms.archlinux.org/docs/code-of-conduct/" class="extiw" title="archlinux-service-agreements:code-of-conduct">Code of conduct</a></li>
+	<li id="footer-places-archwiki-terms-of-service"><a href="https://terms.archlinux.org/docs/terms-of-service/" class="extiw" title="archlinux-service-agreements:terms-of-service">Terms of service</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-copyrightico"><a href="https://www.gnu.org/copyleft/fdl.html" class="cdx-button cdx-button--fake-button cdx-button--size-large cdx-button--fake-button--enabled"><img src="/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" loading="lazy"></a></li>
+	<li id="footer-poweredbyico"><img src="/resources/assets/poweredby_mediawiki.svg" width="88" height="31" loading="lazy"></li>
+</ul>
+
+</footer>
+
+		</div>
+	</div> 
+</div> 
+<div class="vector-settings" id="p-dock-bottom">
+	<ul></ul>
+</div>
+</body>
+</html>

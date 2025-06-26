@@ -1,0 +1,61 @@
+<h1>kiterunner scan</h1>
+
+<blockquote><p>A contextual web scanner for concurrently scanning API paths and web endpoints using kitebuilder wordlists.
+The <code>scan</code> subcommand targets one or multiple hosts with structured API requests.
+More information: <a href="https://github.com/assetnote/kiterunner">https://github.com/assetnote/kiterunner</a>.</p></blockquote>
+
+<ul>
+<li>Scan a target with an Assetnote wordlist (e.g., first 5000 API routes):</li>
+</ul>
+
+
+<p><code>kiterunner scan {{https://example.com}} {{[-A|--assetnote-wordlist]}} {{apiroutes-210228:5000}}</code></p>
+
+<ul>
+<li>Scan a target with a kitebuilder wordlist:</li>
+</ul>
+
+
+<p><code>kiterunner scan {{https://example.com}} {{[-w|--kitebuilder-list]}} {{path/to/wordlist.kite}}</code></p>
+
+<ul>
+<li>Scan multiple hosts from a file with a kitebuilder wordlist:</li>
+</ul>
+
+
+<p><code>kiterunner scan {{path/to/hosts.txt}} {{[-w|--kitebuilder-list]}} {{path/to/wordlist.kite}}</code></p>
+
+<ul>
+<li>Scan with an Assetnote wordlist and JSON output:</li>
+</ul>
+
+
+<p><code>kiterunner scan {{https://example.com}} {{[-A|--assetnote-wordlist]}} {{apiroutes-210228:5000}} -o {{json}}</code></p>
+
+<ul>
+<li>Scan with custom concurrency settings for performance:</li>
+</ul>
+
+
+<p><code>kiterunner scan {{https://example.com}} {{[-w|--kitebuilder-list]}} {{path/to/wordlist.kite}} {{[-x|--max-connection-per-host]}} {{5}} {{[-j|--max-parallel-hosts]}} {{100}}</code></p>
+
+<ul>
+<li>Scan with a wordlist as a normal wordlist, disabling depth scanning:</li>
+</ul>
+
+
+<p><code>kiterunner scan {{https://example.com}} {{[-w|--kitebuilder-list]}} {{path/to/rafter.txt}} {{[-d|--preflight-depth]}} {{0}}</code></p>
+
+<ul>
+<li>Scan with custom headers and ignore specific content length responses:</li>
+</ul>
+
+
+<p><code>kiterunner scan {{https://example.com}} {{[-w|--kitebuilder-list]}} {{path/to/wordlist.kite}} {{[-H|--header]}} "{{Authorization: Bearer token}}" --ignore-length {{100-105}}</code></p>
+
+<ul>
+<li>Perform a full kitebuilder scan without phase scanning:</li>
+</ul>
+
+
+<p><code>kiterunner scan {{https://example.com}} {{[-w|--kitebuilder-list]}} {{path/to/wordlist.kite}} --kitebuilder-full-scan</code></p>

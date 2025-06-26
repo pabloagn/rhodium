@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-sticky-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-0 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-disabled skin-theme-clientpref-day vector-toc-available" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>Perl package guidelines (Português) - ArchWiki</title>
+<link rel="stylesheet" href="../ArchWikiOffline.css">
+<meta name="ResourceLoaderDynamicStyles" content="">
+<meta name="generator" content="MediaWiki 1.43.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="max-image-preview:standard">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.25, maximum-scale=5.0">
+<link rel="search" type="application/opensearchdescription+xml" href="/rest.php/v1/search" title="ArchWiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.archlinux.org/api.php?action=rsd">
+<link rel="license" href="https://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="ArchWiki Atom feed" href="/index.php?title=Special:RecentChanges&amp;feed=atom">
+</head>
+<body class="skin--responsive skin-vector skin-vector-search-vue mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Perl_package_guidelines_Português rootpage-Perl_package_guidelines_Português skin-vector-2022 action-view">
+<a class="mw-jump-link" href="#bodyContent">Jump to content</a>
+<div class="vector-header-container">
+	</div>
+<div class="mw-page-container">
+	<div class="mw-page-container-inner">
+		<div class="vector-column-start">
+			<div class="vector-main-menu-container">
+		</div>
+	<div class="vector-sticky-pinned-container">
+				<nav id="mw-panel-toc" aria-label="Contents" data-event-name="ui.sidebar-toc" class="mw-table-of-contents-container vector-toc-landmark">
+					<div id="vector-toc-pinned-container" class="vector-pinned-container">
+					<div id="vector-toc" class="vector-toc vector-pinnable-element">
+	<div class="vector-pinnable-header vector-toc-pinnable-header vector-pinnable-header-pinned" data-feature-name="toc-pinned" data-pinnable-element-id="vector-toc">
+	<h2 class="vector-pinnable-header-label">Contents</h2>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-toc.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-toc.unpin">hide</button>
+</div>
+
+
+	<ul class="vector-toc-contents" id="mw-panel-toc-list">
+		<li id="toc-mw-content-text" class="vector-toc-list-item vector-toc-level-1">
+			<a href="#" class="vector-toc-link">
+				<div class="vector-toc-text">Beginning</div>
+			</a>
+		</li>
+		<li id="toc-Convenções_de_empacotamento_do_Arch_Linux" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Conven%C3%A7%C3%B5es_de_empacotamento_do_Arch_Linux">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">1</span>
+				<span>Convenções de empacotamento do Arch Linux</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Convenções_de_empacotamento_do_Arch_Linux-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Convenções de empacotamento do Arch Linux subsection</span>
+			</button>
+		
+		<ul id="toc-Convenções_de_empacotamento_do_Arch_Linux-sublist" class="vector-toc-list">
+			<li id="toc-Nomes_de_pacotes" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Nomes_de_pacotes">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.1</span>
+					<span>Nomes de pacotes</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Nomes_de_pacotes-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Colocação_de_arquivos_no_pacote" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Coloca%C3%A7%C3%A3o_de_arquivos_no_pacote">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.2</span>
+					<span>Colocação de arquivos no pacote</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Colocação_de_arquivos_no_pacote-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Arquitetura" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Arquitetura">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.3</span>
+					<span>Arquitetura</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Arquitetura-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Automação" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Automa%C3%A7%C3%A3o">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.4</span>
+					<span>Automação</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Automação-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Exemplos_de_PKGBUILD" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Exemplos_de_PKGBUILD">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">2</span>
+				<span>Exemplos de PKGBUILD</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Exemplos_de_PKGBUILD-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Mecanismos_de_módulo_CPAN" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Mecanismos_de_m%C3%B3dulo_CPAN">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">3</span>
+				<span>Mecanismos de módulo CPAN</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Mecanismos_de_módulo_CPAN-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Mecanismos de módulo CPAN subsection</span>
+			</button>
+		
+		<ul id="toc-Mecanismos_de_módulo_CPAN-sublist" class="vector-toc-list">
+			<li id="toc-Módulos" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#M%C3%B3dulos">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1</span>
+					<span>Módulos</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Módulos-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Distribuições" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Distribui%C3%A7%C3%B5es">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.2</span>
+					<span>Distribuições</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Distribuições-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-CPAN" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#CPAN">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.3</span>
+					<span>CPAN</span>
+				</div>
+			</a>
+			
+			<ul id="toc-CPAN-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Dependências_de_módulos" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Depend%C3%AAncias_de_m%C3%B3dulos">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.4</span>
+					<span>Dependências de módulos</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Dependências_de_módulos-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Definição_de_dependências" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Defini%C3%A7%C3%A3o_de_depend%C3%AAncias">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.5</span>
+					<span>Definição de dependências</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Definição_de_dependências-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Informações_meta" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Informa%C3%A7%C3%B5es_meta">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.6</span>
+					<span>Informações meta</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Informações_meta-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Módulos_instaláveis" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#M%C3%B3dulos_instal%C3%A1veis">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">4</span>
+				<span>Módulos instaláveis</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Módulos_instaláveis-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Módulos instaláveis subsection</span>
+			</button>
+		
+		<ul id="toc-Módulos_instaláveis-sublist" class="vector-toc-list">
+			<li id="toc-ExtUtils::MakeMaker" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#ExtUtils::MakeMaker">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.1</span>
+					<span>ExtUtils::MakeMaker</span>
+				</div>
+			</a>
+			
+			<ul id="toc-ExtUtils::MakeMaker-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Module::Build" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Module::Build">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.2</span>
+					<span>Module::Build</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Module::Build-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Module::Build::Tiny" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Module::Build::Tiny">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.3</span>
+					<span>Module::Build::Tiny</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Module::Build::Tiny-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Module::Install" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Module::Install">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.4</span>
+					<span>Module::Install</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Module::Install-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Variáveis_de_ambiente" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Vari%C3%A1veis_de_ambiente">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.5</span>
+					<span>Variáveis de ambiente</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Variáveis_de_ambiente-sublist" class="vector-toc-list">
+				<li id="toc-PERL_MM_USE_DEFAULT" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#PERL_MM_USE_DEFAULT">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.5.1</span>
+					<span>PERL_MM_USE_DEFAULT</span>
+				</div>
+			</a>
+			
+			<ul id="toc-PERL_MM_USE_DEFAULT-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-PERL_AUTOINSTALL" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#PERL_AUTOINSTALL">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.5.2</span>
+					<span>PERL_AUTOINSTALL</span>
+				</div>
+			</a>
+			
+			<ul id="toc-PERL_AUTOINSTALL-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-PERL_MM_OPT" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#PERL_MM_OPT">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.5.3</span>
+					<span>PERL_MM_OPT</span>
+				</div>
+			</a>
+			
+			<ul id="toc-PERL_MM_OPT-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-PERL_MB_OPT" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#PERL_MB_OPT">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.5.4</span>
+					<span>PERL_MB_OPT</span>
+				</div>
+			</a>
+			
+			<ul id="toc-PERL_MB_OPT-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-MODULEBUILDRC" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#MODULEBUILDRC">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.5.5</span>
+					<span>MODULEBUILDRC</span>
+				</div>
+			</a>
+			
+			<ul id="toc-MODULEBUILDRC-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-PERL5LIB" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#PERL5LIB">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.5.6</span>
+					<span>PERL5LIB</span>
+				</div>
+			</a>
+			
+			<ul id="toc-PERL5LIB-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-PERL_LOCAL_LIB_ROOT" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#PERL_LOCAL_LIB_ROOT">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.5.7</span>
+					<span>PERL_LOCAL_LIB_ROOT</span>
+				</div>
+			</a>
+			
+			<ul id="toc-PERL_LOCAL_LIB_ROOT-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Problemas_com_perl_instalado_pelo_usuário" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Problemas_com_perl_instalado_pelo_usu%C3%A1rio">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">5</span>
+				<span>Problemas com perl instalado pelo usuário</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Problemas_com_perl_instalado_pelo_usuário-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+</ul>
+</div>
+
+					</div>
+		</nav>
+			</div>
+		</div>
+		<div class="mw-content-container">
+			<main id="content" class="mw-body" style="margin: 0">
+				<header class="mw-body-header vector-page-titlebar">
+					<nav aria-label="Contents" class="vector-toc-landmark">
+						
+<div id="vector-page-titlebar-toc" class="vector-dropdown vector-page-titlebar-toc vector-button-flush-left">
+	<input type="checkbox" id="vector-page-titlebar-toc-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-page-titlebar-toc" class="vector-dropdown-checkbox " aria-label="Toggle the table of contents">
+	<label id="vector-page-titlebar-toc-label" for="vector-page-titlebar-toc-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"><span class="vector-icon mw-ui-icon-listBullet mw-ui-icon-wikimedia-listBullet"></span>
+
+<span class="vector-dropdown-label-text">Toggle the table of contents</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+							<div id="vector-page-titlebar-toc-unpinned-container" class="vector-unpinned-container">
+			</div>
+		
+	</div>
+</div>
+
+					</nav>
+					<h1 id="firstHeading" class="firstHeading mw-first-heading"><span class="mw-page-title-main">Perl package guidelines (Português)</span></h1>
+							
+<div id="p-lang-btn" class="vector-dropdown mw-portlet mw-portlet-lang">
+	<input type="checkbox" id="p-lang-btn-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-p-lang-btn" class="vector-dropdown-checkbox mw-interlanguage-selector" aria-label="Go to an article in another language. Available in 2 languages">
+	<label id="p-lang-btn-label" for="p-lang-btn-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--action-progressive mw-portlet-lang-heading-2" aria-hidden="true"><span class="vector-icon mw-ui-icon-language-progressive mw-ui-icon-wikimedia-language-progressive"></span>
+
+<span class="vector-dropdown-label-text">2 languages</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+		<div class="vector-menu-content">
+			
+			<ul class="vector-menu-content-list">
+				
+				<li class="interlanguage-link interwiki-en mw-list-item"><a href="../en/Perl_package_guidelines.html" title="Perl package guidelines – English" lang="en" hreflang="en" data-title="Perl package guidelines" data-language-autonym="English" data-language-local-name="English" class="interlanguage-link-target"><span>English</span></a></li>
+<li class="interlanguage-link interwiki-ja mw-list-item"><a href="https://wiki.archlinux.jp/index.php/Perl_%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E3%82%AC%E3%82%A4%E3%83%89%E3%83%A9%E3%82%A4%E3%83%B3" title="Perl パッケージガイドライン – 日本語" lang="ja" hreflang="ja" data-title="Perl パッケージガイドライン" data-language-autonym="日本語" data-language-local-name="日本語" class="interlanguage-link-target"><span>日本語</span></a></li>
+			</ul>
+			
+		</div>
+
+	</div>
+</div>
+</header>
+				<div class="vector-column-end">
+					<div class="vector-sticky-pinned-container">
+						<nav class="vector-page-tools-landmark" aria-label="Page tools">
+							<div id="vector-page-tools-pinned-container" class="vector-pinned-container">
+				
+							</div>
+		</nav>
+						<nav class="vector-appearance-landmark" aria-label="Appearance">
+							<div id="vector-appearance-pinned-container" class="vector-pinned-container">
+				<div id="vector-appearance" class="vector-appearance vector-pinnable-element">
+	<div class="vector-pinnable-header vector-appearance-pinnable-header vector-pinnable-header-pinned" data-feature-name="appearance-pinned" data-pinnable-element-id="vector-appearance" data-pinned-container-id="vector-appearance-pinned-container" data-unpinned-container-id="vector-appearance-unpinned-container">
+	<div class="vector-pinnable-header-label">Appearance</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-appearance.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-appearance.unpin">hide</button>
+</div>
+
+
+</div>
+
+							</div>
+		</nav>
+					</div>
+				</div>
+				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container>
+					<div class="vector-body-before-content">
+							<div class="mw-indicators">
+		</div>
+
+						<div id="siteSub" class="noprint">From ArchWiki</div>
+					</div>
+					<div id="contentSub"><div id="mw-content-subtitle"></div></div>
+					
+					
+					<div id="mw-content-text" class="mw-body-content">
+<div class="mw-content-ltr mw-parser-output" lang="pt" dir="ltr">
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Status de tradução:</strong> Esse artigo é uma tradução de <a href="../en/Perl_package_guidelines.html" title="Perl package guidelines">Perl package guidelines</a>. Data da última tradução: 2018-11-01. Você pode ajudar a sincronizar a tradução, se houver <a rel="nofollow" class="external text" href="https://wiki.archlinux.org/index.php?title=Perl_package_guidelines&amp;diff=0&amp;oldid=552531">alterações</a> na versão em inglês.</div>
+<div class="toc" style="display:block; text-align: center; margin-bottom: 1em;">
+<b><a href="../pt/Arch_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes do Arch">Diretrizes de pacotes do Arch</a></b>
+<hr>
+<p><a href="../pt/32-bit_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes 32-bit">32-bit</a> – <a href="../pt/CLR_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes CLR">CLR</a> – <a href="../pt/CMake_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes CMake">CMake</a> – <a href="../pt/Cross-compiling_tools_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes de ferramentas de compilação cruzada">Cross</a> – <a href="../pt/DKMS_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes DKMS">DKMS</a> – <a href="../pt/Eclipse_plugin_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes de plugin do Eclipse">Eclipse</a> – <a href="../pt/Electron_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes Electron">Electron</a> – <a href="../pt/Font_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes de fontes">Fonte</a> – <a href="../pt/Free_Pascal_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes Free Pascal">Free Pascal</a> – <a href="../pt/GNOME_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes GNOME">GNOME</a> – <a href="../pt/Go_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes Go">Go</a> – <a href="../pt/Haskell_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes Haskell">Haskell</a> – <a href="../pt/Java_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes Java">Java</a> – <a href="../pt/KDE_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes KDE">KDE</a> – <a href="../pt/Kernel_module_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes de módulos de kernel">Kernel</a> – <a href="../pt/Lisp_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes Lisp">Lisp</a> – <a href="../pt/Meson_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes Meson">Meson</a> – <a href="../pt/MinGW_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes MinGW">MinGW</a> – <a href="../pt/Node.js_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes Node.js">Node.js</a> – <a href="../pt/Nonfree_applications_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes de aplicativos não livres">Nonfree</a> – <a href="../pt/OCaml_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes OCaml">OCaml</a> – <a href="../pt/Perl_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes Perl">Perl</a> – <a href="../pt/PHP_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes PHP">PHP</a> – <a href="../pt/Python_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes Python">Python</a> – <a href="../pt/R_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes R">R</a> – <a href="../pt/Ruby_Gem_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes Ruby Gem">Ruby</a> – <a href="../pt/Rust_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes Rust">Rust</a> – <a href="../pt/Shell_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes de shell">Shell</a> – <a href="../pt/VCS_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes VCS">VCS</a> – <a href="../pt/Web_application_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes de aplicativos da Web">Web</a> – <a href="../pt/Wine_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes Wine">Wine</a>
+</p>
+</div>
+<p>Este documento cobre a criação de <a href="../pt/PKGBUILD.html" title="PKGBUILD (Português)">PKGBUILDs</a> para módulos perl distribuídos pelo CPAN, a Comprehensive Perl Authors Network. Este documento tem como público-alvo aqueles que deseja empacotar módulos perl. Para as políticas do Perl, veja <a href="../en/Perl_Policy.html" title="Perl Policy">Políticas do Perl</a>.
+</p>
+<meta property="mw:PageProp/toc">
+<h2>
+<span id="Conven.C3.A7.C3.B5es_de_empacotamento_do_Arch_Linux"></span><span class="mw-headline" id="Convenções_de_empacotamento_do_Arch_Linux">Convenções de empacotamento do Arch Linux</span>
+</h2>
+<p>As seguintes convenções devem ser usadas para manter os pacotes de módulos perl consistentes. Esta seção serve como uma introdução ao conceito de empacotamento de perl, do ponto de vista do Arch Linux; isto é, gerenciamento de pacotes e administração do sistema. Em um esforço para agradar o leitor <a href="https://en.wikipedia.org/wiki/TL;DR" class="extiw" title="wikipedia:TL;DR">TL;DR</a>, o material mais fácil e/ou mais popular está no topo.
+</p>
+<h3><span class="mw-headline" id="Nomes_de_pacotes">Nomes de pacotes</span></h3>
+<p>Para módulos, o nome do pacote deve começar com <code>perl-</code> e o resto do nome deve ser construído a partir do nome do módulo, convertendo-o em letras minúsculas e, em seguida, substituindo os dois pontos por hífenes. Por exemplo, o nome do pacote correspondente a <code>HTML::Parser</code> será <code>perl-html-parser</code>. Os aplicativos Perl devem ter o mesmo nome do aplicativo, mas em letras minúsculas.
+</p>
+<h3>
+<span id="Coloca.C3.A7.C3.A3o_de_arquivos_no_pacote"></span><span class="mw-headline" id="Colocação_de_arquivos_no_pacote">Colocação de arquivos no pacote</span>
+</h3>
+<p>Os pacotes Perl devem instalar os arquivos do módulo em <code>/usr/lib/perl5/$version/vendor_perl/</code> (use <code>perl -V:vendorarch</code> em scripts), ou <code>/usr/share/perl5/vendor_perl/</code>. Isso é feito configurando o parâmetro de linha de comando <code>INSTALLDIRS</code> para <code>vendor</code> como mostrado abaixo. Nenhum arquivo deve ser armazenado em <code>/usr/lib/perl5/$version/site_perl/</code>, pois esse diretório é reservado para uso pelo administrador do sistema para instalar pacotes Perl fora do sistema de gerenciamento de pacotes. Quando um usuário instala módulos em todo o sistema usando o shell <i>cpan</i>, os módulos acabam nos subdiretórios site-perl.
+</p>
+<p>Os arquivos <code>perllocal.pod</code> e <code>.packlist</code> também não devem estar presentes; isso é cuidado pelo exemplo de PKGBUILD descrito abaixo.
+</p>
+<h3><span class="mw-headline" id="Arquitetura">Arquitetura</span></h3>
+<p>Na maioria dos casos, o vetor <code>arch</code> deve conter <code>'any'</code> porque a maioria dos pacotes Perl são independentes de arquitetura. Os módulos XS são compilados em bibliotecas carregadas dinamicamente (arquivos .so) e devem explicitamente configurar sua arquitetura para <code>('x86_64')</code> para indicar que eles são dependentes da arquitetura quando construídos. Um módulo XS geralmente contém um ou mais arquivos .xs que geram dinamicamente arquivos .c.
+</p>
+<h3>
+<span id="Automa.C3.A7.C3.A3o"></span><span class="mw-headline" id="Automação">Automação</span>
+</h3>
+<p>Um plugin para o shell CPAN de segunda geração, CPANPLUS, está disponível no pacote perl-cpanplus-dist-arch do repo da comunidade. Este plugin empacota distribuições rapidamente quando elas são instaladas pelo CPANPLUS. A documentação on-line está disponível em <a rel="nofollow" class="external free" href="https://metacpan.org/release/CPANPLUS-Dist-Arch">https://metacpan.org/release/CPANPLUS-Dist-Arch</a>
+</p>
+<h2><span class="mw-headline" id="Exemplos_de_PKGBUILD">Exemplos de PKGBUILD</span></h2>
+<p>Um exemplo de PKGBUILD pode ser encontrado em <a rel="nofollow" class="external autonumber" href="https://gitlab.archlinux.org/archlinux/abs/blob/master/prototypes/PKGBUILD-perl.proto">[1]</a>.
+</p>
+<p>Os dois exemplos a seguir do PKGBUILD usam técnicas, introduzidas nesta página, destinadas a tornar um PKGBUILD mais resiliente a problemas mais sofisticados. Como existem dois estilos de scripts de construção, há dois exemplos de PKGBUILDS. O primeiro PKGBUILD é um exemplo de como empacotar uma distribuição que usa <code>Makefile.PL</code>. O segundo PKGBUILD pode ser usado como ponto de partida para uma distribuição que usa <code>Build.PL</code>.
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">PKGBUILD</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;"># Contributor: Your Name &lt;youremail@domain.com&gt;
+pkgname=perl-foo-bar
+pkgver=1.0
+pkgrel=1
+pkgdesc='This packages the Foo-Bar distribution, containing the Foo::Bar module!'
+_dist=Foo-Bar
+arch=('any')
+url="https://metacpan.org/release/$_dist"
+license=('GPL' 'PerlArtistic')
+depends=(perl)
+options=('!emptydirs' purge)
+source=("http://search.cpan.org/CPAN/authors/id/BAZ/$_dist-$pkgver.tar.gz")
+md5sums=(...)
+
+build() {
+  cd "$srcdir/$_dist-$pkgver"
+  unset PERL5LIB PERL_MM_OPT PERL_LOCAL_LIB_ROOT
+  export PERL_MM_USE_DEFAULT=1 PERL_AUTOINSTALL=--skipdeps
+  /usr/bin/perl Makefile.PL
+  make
+}
+
+check() {
+  cd "$srcdir/$_dist-$pkgver"
+  unset PERL5LIB PERL_MM_OPT PERL_LOCAL_LIB_ROOT
+  export PERL_MM_USE_DEFAULT=1
+  make test
+}
+
+package() {
+  cd "$srcdir/$_dist-$pkgver"
+  unset PERL5LIB PERL_MM_OPT PERL_LOCAL_LIB_ROOT
+  make install INSTALLDIRS=vendor DESTDIR="$pkgdir"
+}
+</pre>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">PKGBUILD</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;"># Contributor: Your Name &lt;youremail@domain.com&gt;
+pkgname=perl-foo-bar
+pkgver=1.0
+pkgrel=1
+pkgdesc='This packages the Foo-Bar distribution, containing the Foo::Bar module!'
+_dist=Foo-Bar
+arch=('any')
+url="https://metacpan.org/release/$_dist"
+license=('GPL' 'PerlArtistic')
+depends=(perl)
+options=('!emptydirs' purge)
+source=("http://search.cpan.org/CPAN/authors/id/BAZ/$_dist-$pkgver.tar.gz")
+md5sums=(...)
+
+build() {
+  cd "$srcdir/$_dist-$pkgver"
+  unset PERL5LIB PERL_MM_OPT PERL_MB_OPT PERL_LOCAL_LIB_ROOT
+  export PERL_MM_USE_DEFAULT=1 MODULEBUILDRC=/dev/null
+  /usr/bin/perl Build.PL
+  ./Build
+}
+
+check() {
+  cd "$srcdir/$_dist-$pkgver"
+  unset PERL5LIB PERL_MM_OPT PERL_MB_OPT PERL_LOCAL_LIB_ROOT
+  export PERL_MM_USE_DEFAULT=1
+  ./Build test
+}
+
+package() {
+  cd "$srcdir/$_dist-$pkgver"
+  unset PERL5LIB PERL_MM_OPT PERL_MB_OPT PERL_LOCAL_LIB_ROOT
+  ./Build install --installdirs=vendor --destdir="$pkgdir"
+}
+</pre>
+<p>A justificativa para a complexidade adicional desses PKGBUILDs é apresentada nas seções abaixo.
+</p>
+<h2>
+<span id="Mecanismos_de_m.C3.B3dulo_CPAN"></span><span class="mw-headline" id="Mecanismos_de_módulo_CPAN">Mecanismos de módulo CPAN</span>
+</h2>
+<p>Há uma série de mecanismos cuidadosamente projetados, e não tão cuidadosamente, que trabalham juntos para criar o sistema de módulos. Ao fazer uso do CPAN, os procedimentos devem ser seguidos para buscar o código-fonte de um módulo, criar esse módulo buscado e inseri-lo no software do sistema para execução posterior. Para entender como os módulos devem ser empacotados, isso ajuda imensamente se entendermos como os módulos funcionam sem qualquer envolvimento dos pacotes pacman e Arch Linux. Nosso objetivo, no final, é tentar ser o mais discreto possível, melhorando a organização e a consistência do produto final.
+</p>
+<h3>
+<span id="M.C3.B3dulos"></span><span class="mw-headline" id="Módulos">Módulos</span>
+</h3>
+<p>Os módulos são declarados com a palavra-chave <code>package</code> no perl. Os módulos estão contidos em um arquivo <code>.pm</code> (pronuncia-se como "dót-pi-em"). Embora seja possível, mais de um módulo (<code>package</code>) está no arquivo. Os módulos têm namespaces separados por <code>::</code> (dois pontos duplos), como: <code>Archlinux::Module</code>. Ao carregar um módulo, os <code>::</code>s são substituídos por separadores de diretórios. Por exemplo: <code>Archlinux/Module.pm</code> será carregado para o módulo <code>Archlinux::Module</code>.
+</p>
+<p>O módulos principais estão incluídos com uma instalação do perl. Alguns módulos principais estão <i>apenas</i> disponíveis empacotados com o perl. Outros módulos ainda podem ser baixados e instalados separadamente do CPAN.
+</p>
+<h3>
+<span id="Distribui.C3.A7.C3.B5es"></span><span class="mw-headline" id="Distribuições">Distribuições</span>
+</h3>
+<p><i>Distributions</i> também são conhecidas como <i>dist</i> ou<i>package</i> no CPAN-lingo, sendo um equivalente a um pacote do Arch Linux neste site. Distribuições são arquivos <code>.tar.gz</code> cheios de arquivos. Esses arquivos contêm principalmente arquivos de módulo .pm, testes para os módulos incluídos, documentação para os módulos e o que for necessário.
+</p>
+<p>Normalmente, uma distribuição contém um módulo primário com o mesmo nome. Às vezes isso não é verdade, como na distribuição do Template-Toolkit. O pacote mais recente, <code>Template-Toolkit-2.22.tar.gz</code>, para o <code>Template-Toolkit</code> dist, não contém o módulo <code>Template::Toolkit</code>!
+</p>
+<p>Às vezes, porque as distribuições são nomeadas conforme um módulo principal, seus nomes são usados de forma intercambiável e ficam confusos. No entanto, às vezes é útil considerá-los uma entidade separada (como no caso do Template-Toolkit).
+</p>
+<h3><span class="mw-headline" id="CPAN">CPAN</span></h3>
+<p>Cada espelho CPAN contém índices que listam as distribuições no CPAN, os módulos nos dists e o nome do autor que carregou o dist. Estes são simplesmente arquivos de texto. O índice mais útil está no arquivo <code>/modules.dlocaches.details.txt.gz</code> disponível em cada espelho do CPAN. O termo "pacotes" aqui se refere à palavra-chave <code>package</code> na própria linguagem perl, não algo similar aos pacotes pacman. O shell CPAN, chamado de letras minúsculas, em itálico <i>cpan</i>, é simplesmente o venerável script perl que navega nos índices para encontrar o módulo que você deseja instalar.
+</p>
+<p>Os módulos são encontrados na lista <code>02packages.details.txt.gz</code>. Na mesma linha que o nome do módulo/pacote está o caminho para o tarball de distribuição que contém o módulo. Quando você pede ao <i>cpan</i> para instalar um módulo, ele irá procurar o módulo e instalar a distribuição relevante. Como a distribuição está instalando, irá gerar uma lista de dependências do módulo. <i>Cpan</i> tentará carregar cada dependência de módulo no intérprete perl. Se um módulo da versão fornecida não puder ser carregado, o processo será repetido.
+</p>
+<p>O shell <i>cpan</i> não precisa se preocupar com qual versão do módulo necessário está sendo instalado. O <i>cpan</i> pode confiar no fato de que a última versão do módulo deve satisfazer os requisitos do módulo original que começou a instalar em primeiro lugar. Somente as versões mais recentes dos módulos são listadas no arquivo de detalhes dos pacotes. Infelizmente, para o autor do pacote perl, nem sempre podemos confiar no fato de que nossos pacotes oferecem a versão mais recente de uma distribuição perl e os módulos contidos nela. A verificação de dependência do Pacman é muito mais estática e fortemente aplicada.
+</p>
+<h3>
+<span id="Depend.C3.AAncias_de_m.C3.B3dulos"></span><span class="mw-headline" id="Dependências_de_módulos">Dependências de módulos</span>
+</h3>
+<p>Perl tem uma maneira única de definir dependências em comparação com sistemas similares, como <i>eggs</i> de python e <i>gems</i> de ruby. <i>Eggs</i> definem dependências de outros eggs. <i>Gems</i> dependem de <i>gems</i>. Dists de perl dependem de módulos. Os módulos só estão disponíveis nas distribuições CPAN, de modo que as distribuições perl dependem apenas indiretamente das distribuições. Os módulos podem definir suas próprias versões independentes das distribuições dentro do código-fonte do módulo. Isso é feito definindo uma variável <i>package</i> chamada <code>$VERSION</code>. Ao usar <i>strict</i> e <i>warnings</i>, isso é definido com a nossa palavra-chave. Por exemplo:
+</p>
+<pre>package Foo::Module;
+use warnings;
+use strict;
+our $VERSION = '1.00';</pre>
+<p>Os módulos podem alterar suas versões da maneira que quiserem e até mesmo ter uma versão diferente da versão de distribuição. A utilidade disso é questionável, mas é importante ter em mente. Versões de módulo são mais difíceis de determinar fora do interpretador perl e requerem análise do próprio código perl e talvez até mesmo carregar o módulo em perl. A vantagem é que, dentro do módulo perl, as versões do módulo são fáceis de determinar. Por exemplo:
+</p>
+<pre>use Foo::Module;
+print $Foo::Module::VERSION, "\n";
+</pre>
+<h3>
+<span id="Defini.C3.A7.C3.A3o_de_depend.C3.AAncias"></span><span class="mw-headline" id="Definição_de_dependências">Definição de dependências</span>
+</h3>
+<p>Onde estão as dependências definidas nas distribuições perl? Elas são "definidas" dentro do script <code>Makefile.PL</code> ou <code>Build.PL</code>. Por exemplo, dentro do script <code>Makefile.PL</code>, a função <code>WriteMakeFile</code> é chamada para gerar o <code>Makefile</code> assim:
+</p>
+<pre>use ExtUtils::MakeMaker;
+WriteMakeFile(
+    'NAME' =&gt; 'ArchLinux::Module',
+    'VERSION' =&gt; '0.01',
+    'PREREQ_PM' =&gt; { 'POSIX' =&gt; '0.01' },
+);
+</pre>
+<p>Este é um exemplo artificial, mas é importante entender que as dependências não são finais até que o script <code>Makefile.PL</code> ou <code>Build.PL</code> seja executado. Dependências são especificadas em tempo de execução, o que significa que elas podem ser alteradas ou modificadas usando todo o poder do perl. Isso significa que o autor do módulo pode adicionar, remover ou alterar versões de dependências antes da instalação da distribuição. Alguns autores de módulos usam isso para fazer coisas excessivamente inteligentes, como depender de módulos apenas se eles estiverem instalados. Algumas dists multiplataformas também dependem de módulos específicos do sistema quando instalados em sistemas operacionais diferentes.
+</p>
+<p>Como exemplo, a distribuição CPANPLUS procura por plugins CPANPLUS::Dist que estão atualmente instalados. Se algum plug-in estiver instalado para a versão atualmente instalada do CPANPLUS, ele será incluído nos pré-requisitos do novo CPANPLUS. Não sei bem por quê. Felizmente para o perl empacotador, a maioria das dependências é estática, como no exemplo acima, que requer o módulo POSIX com uma versão mínima de 0.01.
+</p>
+<h3>
+<span id="Informa.C3.A7.C3.B5es_meta"></span><span class="mw-headline" id="Informações_meta">Informações meta</span>
+</h3>
+<p>Os arquivos meta são incluídos em distribuições recentes que contêm meta-informações sobre distribuições, como nome, autor, descrição abstrata e requisitos do módulo. Anteriormente, havia arquivos <code>META.yml</code> no formato YAML, mas, mais recentemente, a mudança foi feita para arquivos <code>META.json</code> no formato JSON. Esses arquivos podem ser editados manualmente, mas com mais frequência eles são gerados automaticamente pelos scripts <code>Makefile.PL</code> ou <code>Build.PL</code> ao empacotar uma distribuição para lançamento. A última especificação é descrita nas <a rel="nofollow" class="external text" href="https://search.cpan.org/perldoc?CPAN::Meta::Spec">documentações online do CPAN::Meta::Spec</a>.
+</p>
+<p>Lembre-se que as dependências podem ser alteradas em tempo de execução! Por esse motivo, outro meta arquivo é gerado após a execução do script de compilação. Este segundo meta arquivo é chamado <code>MYMETA.json</code> e reflete as alterações feitas no script em tempo de execução e pode ser diferente do arquivo meta gerado quando a distribuição foi empacotada para o CPAN.
+</p>
+<p>Distribuições idosas no CPAN não possuem nenhum arquivo meta. Esses lançamentos antigos são anteriores à ideia do arquivo META.yml e descrevem apenas seus pré-requisitos em seu <code>Makefile.PL</code>.
+</p>
+<h2>
+<span id="M.C3.B3dulos_instal.C3.A1veis"></span><span class="mw-headline" id="Módulos_instaláveis">Módulos instaláveis</span>
+</h2>
+<p>Um dos maiores pontos fortes do perl é o grande número de módulos disponíveis no CPAN. Não muito surpreendentemente, existem também vários módulos diferentes usados para instalar... bem... módulos! Há mais de uma maneira de fazer isso! Eu não estou ciente de um nome padrão para esses tipos de módulos, então eu os chamei de "Módulos de Instalação".
+</p>
+<p>Estes módulos estão preocupados com a compilação da distribuição e instalação dos arquivos do módulo, sempre que o usuário preferir. Isso parece simples, mas considerando o número de diferentes sistemas em que perl é executado, isso pode se tornar complexo. Todos os módulos de instalação colocam um arquivo de código perl dentro do tarball dist. A execução deste script perl iniciará o processo de compilação e instalação. O script sempre termina com o sufixo <code>.PL</code> e é denominado "Script de compilação" na lista abaixo.
+</p>
+<h3><span class="mw-headline" id="ExtUtils::MakeMaker">ExtUtils::MakeMaker</span></h3>
+<dl>
+<dt>Script de compilação</dt>
+<dd><code>Makefile.PL</code></dd>
+<dt>Link no CPAN</dt>
+<dd><a rel="nofollow" class="external free" href="https://search.cpan.org/dist/ExtUtils-MakeMaker">https://search.cpan.org/dist/ExtUtils-MakeMaker</a></dd>
+</dl>
+<p>O módulo mais antigo e original para a instalação de módulos é o <code>ExtUtils::MakeMaker</code>. A principal desvantagem deste módulo é que ele requer que o programa <code>make</code> compile e instale tudo. Isso pode não parecer um grande problema para os usuários do Linux, mas é um verdadeiro aborrecimento para as pessoas do Windows!
+</p>
+<h3><span class="mw-headline" id="Module::Build">Module::Build</span></h3>
+<dl>
+<dt>Script de instalação</dt>
+<dd><code>Build.PL</code></dd>
+<dt>Link no CPAN</dt>
+<dd><a rel="nofollow" class="external free" href="https://search.cpan.org/dist/Module-Build">https://search.cpan.org/dist/Module-Build</a></dd>
+</dl>
+<p>A principal vantagem do Module::Build é que ele é puro perl. Isto significa que não requer que um programa <code>make</code> seja instalado para você compilar/instalar módulos. Sua adoção foi complicada porque se o <code>Module::Build</code> ainda não estivesse instalado, você não poderia executar o script <code>Build.PL</code> incluído! Este não é um problema com versões recentes do perl porque <code>Module::Build</code> é um módulo central. (<b>NOTE</b> A partir do perl 5.22, o Module::Build não será mais um módulo central)
+</p>
+<h3><span class="mw-headline" id="Module::Build::Tiny">Module::Build::Tiny</span></h3>
+<dl>
+<dt>Script de compilação</dt>
+<dd><code>Build.PL</code></dd>
+<dt>Link no CPAN</dt>
+<dd><a rel="nofollow" class="external free" href="https://search.cpan.org/dist/Module-Build-Tiny">https://search.cpan.org/dist/Module-Build-Tiny</a></dd>
+</dl>
+<p>Esta é outra ferramenta de compilação de puro perl. Como interface, implementa um subconjunto da interface do Module::Build, em particular, requer traços antes de seus argumentos (Module::Build aceita com e sem) e não suporta <code>.modulebuildrc</code>.
+</p>
+<h3><span class="mw-headline" id="Module::Install">Module::Install</span></h3>
+<dl>
+<dt>Script de compilação</dt>
+<dd><code>Makefile.PL</code></dd>
+<dt>Link no CPAN</dt>
+<dd><a rel="nofollow" class="external free" href="https://search.cpan.org/dist/Module-Install">https://search.cpan.org/dist/Module-Install</a></dd>
+</dl>
+<p>Outro módulo moderno de compilação/instalação, <code>Module::Install</code> ainda requer que o programa <code>make</code> seja instalado para funcionar. <code>MI</code> foi criado para substituir <code>MakeMaker</code>, para resolver algumas das deficiências do <code>MakeMaker</code>. Ironicamente, isso depende do <code>MakeMaker</code> para operar. Os arquivos <code>Makefile.PL</code> que são gerados pelo <code>MI</code> são muito diferentes e são implementados usando uma linguagem simples específico do domínio.
+</p>
+<p>Uma característica muito interessante é que o <code>Module::Install</code> empacota uma <i>cópia completa</i> de si mesmo no arquivo de distribuição. Por causa disso, ao contrário de <code>MakeMaker</code> ou <code>M::B</code>, você não precisa que <code>Module::Install</code> esteja instalado em seu sistema.
+</p>
+<p>Outra característica muito original é a instalação automática. <i>Embora não seja recomendado pelos autores de <code>Module::Install</code>, esse recurso é usado com bastante frequência</i>. Quando o autor do módulo habilita a auto-instalação para sua distribuição, <code>Module::Install</code> irá procurar e instalar quaisquer módulos de pré-requisito que não estejam instalados quando o <code>Makefile.PL</code> for executado. Este recurso é ignorado quando <code>Module::Install</code> detecta que está sendo executado por <code>CPAN</code> ou <code>CPANPLUS</code>. No entanto, esse recurso não é ignorado quando executado dentro... oh, eu não sei ... um <b>PKGBUILD</b>! Espero que você possa ver como um programa permissivo do perl baixando e instalando módulos a qualquer momento, dentro de um PKGBUILD, possa ser um problema. Veja a variável de ambiente <a href="#PERL_AUTOINSTALL">#PERL_AUTOINSTALL</a> para ver como corrigir isso.
+</p>
+<h3>
+<span id="Vari.C3.A1veis_de_ambiente"></span><span class="mw-headline" id="Variáveis_de_ambiente">Variáveis de ambiente</span>
+</h3>
+<p>Diversas variáveis de ambiente podem afetar o modo como os módulos são construídos ou instalados. Alguns têm um efeito muito dramático e podem causar problemas se forem mal compreendidos. Um usuário avançado pode estar usando essas variáveis de ambiente. Algumas delas quebrarão um PKGBUILD desavisado ou causarão um comportamento inesperado.
+</p>
+<h4><span class="mw-headline" id="PERL_MM_USE_DEFAULT">PERL_MM_USE_DEFAULT</span></h4>
+<p>Quando esta variável é definida para um valor verdadeiro, o módulo de instalação fingirá que a resposta padrão foi dada para qualquer pergunta que normalmente faria. Isso não "sempre" funciona, mas todos os módulos de instalação o honram. <i>Isso não significa que o autor do módulo irá!</i>
+</p>
+<h4><span class="mw-headline" id="PERL_AUTOINSTALL">PERL_AUTOINSTALL</span></h4>
+<p>Você pode passar argumentos adicionais de linha de comando para o <code>Makefile.PL</code> do <code>Module::Install</code> com essa variável. Para desativar a instalação automática (<i>altamente recomendado</i>), atribua <code>--skipdeps</code> a este.
+</p>
+<pre>export PERL_AUTOINSTALL='--skipdeps'</pre>
+<h4><span class="mw-headline" id="PERL_MM_OPT">PERL_MM_OPT</span></h4>
+<p>Você pode passar argumentos adicionais de linha de comando a <code>Makefile.PL</code> e/ou <code>Build.PL</code> com essa variável. Por exemplo, você pode instalar módulos em seu diretório pessoal usando:
+</p>
+<pre>export PERL_MM_OPT=INSTALLBASE=~/perl5</pre>
+<h4><span class="mw-headline" id="PERL_MB_OPT">PERL_MB_OPT</span></h4>
+<p>Essa é a mesma coisa que <code>PERL_MM_OPT</code>, exceto por ser apenas para <code>Module::Build</code>. Por exemplo, você poderia instalar módulos em seu diretório pessoal usando:
+</p>
+<pre>export PERL_MB_OPT=--install_base=~/perl5</pre>
+<h4><span class="mw-headline" id="MODULEBUILDRC">MODULEBUILDRC</span></h4>
+<p><code>Module::Build</code> permite que você sobrescreva seus argumentos de linha de comando com um arquivo rc. O padrão deste é <code>~/.modulebuildrc</code>. É considerado obsoleto no conjunto de ferramentas perl. Você pode sobrescrever qual arquivo usa definindo o caminho para o arquivo rc em <code>MODULEBUILDRC</code>. Os paranoicos podem definir <code>MODULEBUILDRC</code> para <code>/dev/null</code> ... apenas por precaução.
+</p>
+<h4><span class="mw-headline" id="PERL5LIB">PERL5LIB</span></h4>
+<p>Os diretórios pesquisados por bibliotecas podem ser configurados pelo usuário (especialmente se eles estiverem usando <code>Local::Lib</code>) definindo <code>PERL5LIB</code>. Isso deve ser apagado antes de compilar.
+</p>
+<h4><span class="mw-headline" id="PERL_LOCAL_LIB_ROOT">PERL_LOCAL_LIB_ROOT</span></h4>
+<p>Se o usuário estiver usando <code>Local::Lib</code>, então <code>PERL_LOCAL_LIB_ROOT</code> será definido. Isso deve ser apagado antes de compilar.
+</p>
+<h2>
+<span id="Problemas_com_perl_instalado_pelo_usu.C3.A1rio"></span><span class="mw-headline" id="Problemas_com_perl_instalado_pelo_usuário">Problemas com perl instalado pelo usuário</span>
+</h2>
+<p>Um problema sutil é que os programadores avançados de perl podem gostar de ter múltiplas versões de perl instaladas. Isso é útil para testar a compatibilidade com versões anteriores em programas criados. Também há benefícios de velocidade para compilar seu próprio interpretador perl personalizado (p. ex., sem threads). Outra razão para um <i>perl</i> personalizado é simplesmente porque o pacote perl do Arch Linux às vezes fica atrás de versões perl. O usuário pode estar experimentando o perl mais recente ... quem sabe?
+</p>
+<p>Se o usuário tiver um executável personalizado do perl em seu <code>$PATH</code>, o perl personalizado será executado quando o usuário digita o comando <i>perl</i> na shell. Na verdade, o perl personalizado será executado dentro do <code>PKGBUILD</code> também! Isso pode levar a problemas traiçoeiros que são difíceis de entender.
+</p>
+<p>O problema reside nos módulos XS compilados. Esses módulos ligam perl e C. Como tal, eles devem usar a API C internal do perl para realizar essa ponte. A API C do perl muda um pouco entre diferentes versões do perl. Se o usuário tiver uma versão diferente do perl do que o perl do sistema (<code>/usr/bin/perl</code>), então qualquer módulo XS compilado com o perl do usuário será incompatível com o perl do sistema. Ao tentar usar o módulo XS compilado com o perl do sistema, o módulo vai falhar em carregar com um erro de vinculação.
+</p>
+<p>Uma solução simples é sempre usar o caminho absoluto do interpretador perl do sistema (<code>/usr/bin/perl</code>) ao executar perl no <code>PKGBUILD</code>.
+</p>
+</div>
+</div>
+					<div id="catlinks" class="catlinks" data-mw="interface"><div id="mw-normal-catlinks" class="mw-normal-catlinks">
+<a href="../Special:Categories.html" title="Special:Categories">Category</a>: <ul><li><a href="../pt/Category:Arch_package_guidelines.html" title="Category:Arch package guidelines (Português)">Arch package guidelines (Português)</a></li></ul>
+</div></div>
+				</div>
+			</main>
+			
+		</div>
+		<div class="mw-footer-container">
+			
+<footer id="footer" class="mw-footer" style="margin: 0">
+	<ul id="footer-info">
+	<li data-nosnippet="">Retrieved from "<a dir="ltr" href="https://wiki.archlinux.org/index.php?title=Perl_package_guidelines_(Portugu%C3%AAs)&amp;oldid=711877">https://wiki.archlinux.org/index.php?title=Perl_package_guidelines_(Português)&amp;oldid=711877</a>"</li>
+<li id="footer-info-lastmod"> This page was last edited on 20 January 2022, at 07:22.</li>
+	<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+<br>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="https://terms.archlinux.org/docs/privacy-policy/">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="../en/ArchWiki:About.html">About ArchWiki</a></li>
+	<li id="footer-places-disclaimers"><a href="../en/ArchWiki:General_disclaimer.html">Disclaimers</a></li>
+	<li id="footer-places-archwiki-code-of-conduct"><a href="https://terms.archlinux.org/docs/code-of-conduct/" class="extiw" title="archlinux-service-agreements:code-of-conduct">Code of conduct</a></li>
+	<li id="footer-places-archwiki-terms-of-service"><a href="https://terms.archlinux.org/docs/terms-of-service/" class="extiw" title="archlinux-service-agreements:terms-of-service">Terms of service</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-copyrightico"><a href="https://www.gnu.org/copyleft/fdl.html" class="cdx-button cdx-button--fake-button cdx-button--size-large cdx-button--fake-button--enabled"><img src="/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" loading="lazy"></a></li>
+	<li id="footer-poweredbyico"><img src="/resources/assets/poweredby_mediawiki.svg" width="88" height="31" loading="lazy"></li>
+</ul>
+
+</footer>
+
+		</div>
+	</div> 
+</div> 
+<div class="vector-settings" id="p-dock-bottom">
+	<ul></ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<h1>docker inspect</h1>
+
+<blockquote><p>Return low-level information on Docker objects.
+More information: <a href="https://docs.docker.com/reference/cli/docker/inspect/">https://docs.docker.com/reference/cli/docker/inspect/</a>.</p></blockquote>
+
+<ul>
+<li>Display help:</li>
+</ul>
+
+
+<p><code>docker inspect</code></p>
+
+<ul>
+<li>Display information about a container, image, or volume using a name or ID:</li>
+</ul>
+
+
+<p><code>docker inspect {{container|image|ID}}</code></p>
+
+<ul>
+<li>Display a container&rsquo;s IP address:</li>
+</ul>
+
+
+<p><code>docker inspect {{[-f|--format]}} '\{\{range.NetworkSettings.Networks\}\}\{\{.IPAddress\}\}\{\{end\}\}' {{container}}</code></p>
+
+<ul>
+<li>Display the path to the container&rsquo;s log file:</li>
+</ul>
+
+
+<p><code>docker inspect {{[-f|--format]}} '\{\{.LogPath\}\}' {{container}}</code></p>
+
+<ul>
+<li>Display the image name of the container:</li>
+</ul>
+
+
+<p><code>docker inspect {{[-f|--format]}} '\{\{.Config.Image\}\}' {{container}}</code></p>
+
+<ul>
+<li>Display the configuration information as JSON:</li>
+</ul>
+
+
+<p><code>docker inspect {{[-f|--format]}} '\{\{json .Config\}\}' {{container}}</code></p>
+
+<ul>
+<li>Display all port bindings:</li>
+</ul>
+
+
+<p><code>docker inspect {{[-f|--format]}} '\{\{range $p, $conf := .NetworkSettings.Ports\}\} \{\{$p\}\} -&gt; \{\{(index $conf 0).HostPort\}\} \{\{end\}\}' {{container}}</code></p>

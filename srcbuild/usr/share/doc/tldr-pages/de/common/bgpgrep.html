@@ -1,0 +1,47 @@
+<h1>bgpgrep</h1>
+
+<blockquote><p>Filtert und gibt BGP-Daten in einem MRT-Dump aus.
+Kann mit gzip, bzip2 und xz komprimierte Dateien lesen.
+Weitere Informationen: <a href="https://codeberg.org/1414codeforge/ubgpsuite">https://codeberg.org/1414codeforge/ubgpsuite</a>.</p></blockquote>
+
+<ul>
+<li>Gib alle Routen aus:</li>
+</ul>
+
+
+<p><code>bgpgrep {{master6.mrt}}</code></p>
+
+<ul>
+<li>Gib alle von einem bestimmten Peer empfangenen Routen aus, bestimmt durch die AS-Nummer des Peers:</li>
+</ul>
+
+
+<p><code>bgpgrep {{master4.mrt}} -peer {{64498}}</code></p>
+
+<ul>
+<li>Gib alle von einem bestimmten Peer empfangenen Routen aus, bestimmt durch die IP-Adresse des Peers:</li>
+</ul>
+
+
+<p><code>bgpgrep {{master4.mrt.bz2}} -peer {{2001:db8:dead:cafe:acd::19e}}</code></p>
+
+<ul>
+<li>Gib alle Routen aus, die bestimmte ASNs in ihrem AS-Pfad haben:</li>
+</ul>
+
+
+<p><code>bgpgrep {{master6.mrt.bz2}} -aspath '{{64498 64510}}'</code></p>
+
+<ul>
+<li>Gib Routen aus, die zu einer bestimmten Adresse führen:</li>
+</ul>
+
+
+<p><code>bgpgrep {{master6.mrt.bz2}} -supernet '{{2001:db8:dead:cafe:aef::5}}'</code></p>
+
+<ul>
+<li>Gib alle Routen aus, die Communities von einem bestimmten AS haben:</li>
+</ul>
+
+
+<p><code>bgpgrep {{master4.mrt}} -communities \( '{{64497}}:*' \)</code></p>

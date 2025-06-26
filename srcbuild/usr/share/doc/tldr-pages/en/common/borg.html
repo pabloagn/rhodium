@@ -1,0 +1,54 @@
+<h1>borg</h1>
+
+<blockquote><p>Deduplicating backup tool.
+Create local or remote backups that are mountable as filesystems.
+More information: <a href="https://borgbackup.readthedocs.io/en/stable/usage/general.html">https://borgbackup.readthedocs.io/en/stable/usage/general.html</a>.</p></blockquote>
+
+<ul>
+<li>Initialize a (local) repository:</li>
+</ul>
+
+
+<p><code>borg init {{path/to/repo_directory}}</code></p>
+
+<ul>
+<li>Backup a directory into the repository, creating an archive called &ldquo;Monday&rdquo;:</li>
+</ul>
+
+
+<p><code>borg create --progress {{path/to/repo_directory}}::{{Monday}} {{path/to/source_directory}}</code></p>
+
+<ul>
+<li>List all archives in a repository:</li>
+</ul>
+
+
+<p><code>borg list {{path/to/repo_directory}}</code></p>
+
+<ul>
+<li>Extract a specific directory from the &ldquo;Monday&rdquo; archive in a remote repository, excluding all <code>*.ext</code> files:</li>
+</ul>
+
+
+<p><code>borg extract {{user}}@{{host}}:{{path/to/repo_directory}}::{{Monday}} {{path/to/target_directory}} --exclude '{{*.ext}}'</code></p>
+
+<ul>
+<li>Prune a repository by deleting all archives older than 7 days, listing changes:</li>
+</ul>
+
+
+<p><code>borg prune --keep-within {{7d}} --list {{path/to/repo_directory}}</code></p>
+
+<ul>
+<li>Mount a repository as a FUSE filesystem:</li>
+</ul>
+
+
+<p><code>borg mount {{path/to/repo_directory}}::{{Monday}} {{path/to/mountpoint}}</code></p>
+
+<ul>
+<li>Display help on creating archives:</li>
+</ul>
+
+
+<p><code>borg create --help</code></p>

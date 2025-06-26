@@ -1,0 +1,60 @@
+<h1>aws ecr</h1>
+
+<blockquote><p>Pousse, récupère et gère les images de conteneur.
+Plus d'informations : <a href="https://awscli.amazonaws.com/v2/documentation/api/latest/reference/ecr/index.html">https://awscli.amazonaws.com/v2/documentation/api/latest/reference/ecr/index.html</a>.</p></blockquote>
+
+<ul>
+<li>Connecte Docker avec le registre par défaut (le nom d'utilisateur est AWS) :</li>
+</ul>
+
+
+<p><code>aws ecr get-login-password --region {{région}} | {{docker login}} --username AWS --password-stdin {{id_de_compte_aws}}.dkr.ecr.{{région}}.amazonaws.com</code></p>
+
+<ul>
+<li>Crée un dépôt :</li>
+</ul>
+
+
+<p><code>aws ecr create-repository --repository-name {{dépôt}} --image-scanning-configuration scanOnPush={{true|false}} --region {{région}}</code></p>
+
+<ul>
+<li>Tag une image locale pour ECR :</li>
+</ul>
+
+
+<p><code>docker tag {{nom_de_conteneur}}:{{tag}} {{id_de_compte_aws}}.dkr.ecr.{{région}}.amazonaws.com/{{nom_de_conteneur}}:{{tag}}</code></p>
+
+<ul>
+<li>Pousse une image dans le dépôt :</li>
+</ul>
+
+
+<p><code>docker push {{id_de_compte_aws}}.dkr.ecr.{{région}}.amazonaws.com/{{nom_de_conteneur}}:{{tag}}</code></p>
+
+<ul>
+<li>Récupère une image depuis un dépôt :</li>
+</ul>
+
+
+<p><code>docker pull {{id_de_compte_aws}}.dkr.ecr.{{région}}.amazonaws.com/{{nom_de_conteneur}}:{{tag}}</code></p>
+
+<ul>
+<li>Supprime une image d'un dépôt :</li>
+</ul>
+
+
+<p><code>aws ecr batch-delete-image --repository-name {{dépôt}} --image-ids imageTag={{latest}}</code></p>
+
+<ul>
+<li>Supprime un dépôt :</li>
+</ul>
+
+
+<p><code>aws ecr delete-repository --repository-name {{dépôt}} --force</code></p>
+
+<ul>
+<li>Liste les images dans un dépôt :</li>
+</ul>
+
+
+<p><code>aws ecr list-images --repository-name {{dépôt}}</code></p>

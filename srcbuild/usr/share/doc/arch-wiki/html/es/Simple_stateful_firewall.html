@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-sticky-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-0 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-disabled skin-theme-clientpref-day vector-toc-available" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>Simple stateful firewall (Español) - ArchWiki</title>
+<link rel="stylesheet" href="../ArchWikiOffline.css">
+<meta name="ResourceLoaderDynamicStyles" content="">
+<meta name="generator" content="MediaWiki 1.43.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="max-image-preview:standard">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.25, maximum-scale=5.0">
+<link rel="search" type="application/opensearchdescription+xml" href="/rest.php/v1/search" title="ArchWiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.archlinux.org/api.php?action=rsd">
+<link rel="license" href="https://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="ArchWiki Atom feed" href="/index.php?title=Special:RecentChanges&amp;feed=atom">
+</head>
+<body class="skin--responsive skin-vector skin-vector-search-vue mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Simple_stateful_firewall_Español rootpage-Simple_stateful_firewall_Español skin-vector-2022 action-view">
+<a class="mw-jump-link" href="#bodyContent">Jump to content</a>
+<div class="vector-header-container">
+	</div>
+<div class="mw-page-container">
+	<div class="mw-page-container-inner">
+		<div class="vector-column-start">
+			<div class="vector-main-menu-container">
+		</div>
+	<div class="vector-sticky-pinned-container">
+				<nav id="mw-panel-toc" aria-label="Contents" data-event-name="ui.sidebar-toc" class="mw-table-of-contents-container vector-toc-landmark">
+					<div id="vector-toc-pinned-container" class="vector-pinned-container">
+					<div id="vector-toc" class="vector-toc vector-pinnable-element">
+	<div class="vector-pinnable-header vector-toc-pinnable-header vector-pinnable-header-pinned" data-feature-name="toc-pinned" data-pinnable-element-id="vector-toc">
+	<h2 class="vector-pinnable-header-label">Contents</h2>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-toc.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-toc.unpin">hide</button>
+</div>
+
+
+	<ul class="vector-toc-contents" id="mw-panel-toc-list">
+		<li id="toc-mw-content-text" class="vector-toc-list-item vector-toc-level-1">
+			<a href="#" class="vector-toc-link">
+				<div class="vector-toc-text">Beginning</div>
+			</a>
+		</li>
+		<li id="toc-Requisitos_previos" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Requisitos_previos">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">1</span>
+				<span>Requisitos previos</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Requisitos_previos-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Cortafuegos_para_una_sola_máquina" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Cortafuegos_para_una_sola_m%C3%A1quina">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">2</span>
+				<span>Cortafuegos para una sola máquina</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Cortafuegos_para_una_sola_máquina-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Cortafuegos para una sola máquina subsection</span>
+			</button>
+		
+		<ul id="toc-Cortafuegos_para_una_sola_máquina-sublist" class="vector-toc-list">
+			<li id="toc-Crear_las_cadenas_necesarias" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Crear_las_cadenas_necesarias">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1</span>
+					<span>Crear las cadenas necesarias</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Crear_las_cadenas_necesarias-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-La_cadena_FORWARD" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#La_cadena_FORWARD">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2</span>
+					<span>La cadena FORWARD</span>
+				</div>
+			</a>
+			
+			<ul id="toc-La_cadena_FORWARD-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-La_cadena_OUTPUT" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#La_cadena_OUTPUT">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.3</span>
+					<span>La cadena OUTPUT</span>
+				</div>
+			</a>
+			
+			<ul id="toc-La_cadena_OUTPUT-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-La_cadena_INPUT" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#La_cadena_INPUT">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.4</span>
+					<span>La cadena INPUT</span>
+				</div>
+			</a>
+			
+			<ul id="toc-La_cadena_INPUT-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Archivo_resultante_de_iptables.rules" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Archivo_resultante_de_iptables.rules">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.5</span>
+					<span>Archivo resultante de iptables.rules</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Archivo_resultante_de_iptables.rules-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Las_cadenas_TCP_y_UDP" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Las_cadenas_TCP_y_UDP">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.6</span>
+					<span>Las cadenas TCP y UDP</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Las_cadenas_TCP_y_UDP-sublist" class="vector-toc-list">
+				<li id="toc-Apertura_de_puertos_para_conexiones_entrantes" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Apertura_de_puertos_para_conexiones_entrantes">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.6.1</span>
+					<span>Apertura de puertos para conexiones entrantes</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Apertura_de_puertos_para_conexiones_entrantes-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Golpear_puertos" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Golpear_puertos">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.6.2</span>
+					<span>Golpear puertos</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Golpear_puertos-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Protección_contra_ataques_de_suplantación" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Protecci%C3%B3n_contra_ataques_de_suplantaci%C3%B3n">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.7</span>
+					<span>Protección contra ataques de suplantación</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Protección_contra_ataques_de_suplantación-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-«Ocultar»_el_ordenador" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#%C2%ABOcultar%C2%BB_el_ordenador">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.8</span>
+					<span>«Ocultar» el ordenador</span>
+				</div>
+			</a>
+			
+			<ul id="toc-«Ocultar»_el_ordenador-sublist" class="vector-toc-list">
+				<li id="toc-Bloquear_solicitudes_de_ping" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Bloquear_solicitudes_de_ping">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.8.1</span>
+					<span>Bloquear solicitudes de ping</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Bloquear_solicitudes_de_ping-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Engañar_a_los_analizadores_de_puertos" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Enga%C3%B1ar_a_los_analizadores_de_puertos">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.8.2</span>
+					<span>Engañar a los analizadores de puertos</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Engañar_a_los_analizadores_de_puertos-sublist" class="vector-toc-list">
+				<li id="toc-Escaneos_de_SYN" class="vector-toc-list-item vector-toc-level-4">
+			<a class="vector-toc-link" href="#Escaneos_de_SYN">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.8.2.1</span>
+					<span>Escaneos de SYN</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Escaneos_de_SYN-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Escaneos_de_UDP" class="vector-toc-list-item vector-toc-level-4">
+			<a class="vector-toc-link" href="#Escaneos_de_UDP">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.8.2.2</span>
+					<span>Escaneos de UDP</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Escaneos_de_UDP-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Restaurar_la_regla_final" class="vector-toc-list-item vector-toc-level-4">
+			<a class="vector-toc-link" href="#Restaurar_la_regla_final">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.8.2.3</span>
+					<span>Restaurar la regla final</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Restaurar_la_regla_final-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Protección_contra_otros_ataques" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Protecci%C3%B3n_contra_otros_ataques">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.9</span>
+					<span>Protección contra otros ataques</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Protección_contra_otros_ataques-sublist" class="vector-toc-list">
+				<li id="toc-Ataques_de_fuerza_bruta" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Ataques_de_fuerza_bruta">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.9.1</span>
+					<span>Ataques de fuerza bruta</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Ataques_de_fuerza_bruta-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-IPv6" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#IPv6">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.10</span>
+					<span>IPv6</span>
+				</div>
+			</a>
+			
+			<ul id="toc-IPv6-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Guardar_las_reglas" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Guardar_las_reglas">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.11</span>
+					<span>Guardar las reglas</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Guardar_las_reglas-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Configurar_una_puerta_de_enlace_NAT" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Configurar_una_puerta_de_enlace_NAT">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">3</span>
+				<span>Configurar una puerta de enlace NAT</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Configurar_una_puerta_de_enlace_NAT-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Configurar una puerta de enlace NAT subsection</span>
+			</button>
+		
+		<ul id="toc-Configurar_una_puerta_de_enlace_NAT-sublist" class="vector-toc-list">
+			<li id="toc-Configurar_la_tabla_filter" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Configurar_la_tabla_filter">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1</span>
+					<span>Configurar la tabla filter</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Configurar_la_tabla_filter-sublist" class="vector-toc-list">
+				<li id="toc-Crear_las_cadenas_necesarias_2" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Crear_las_cadenas_necesarias_2">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1.1</span>
+					<span>Crear las cadenas necesarias</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Crear_las_cadenas_necesarias_2-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Configurar_la_cadena_FORWARD" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Configurar_la_cadena_FORWARD">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1.2</span>
+					<span>Configurar la cadena FORWARD</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Configurar_la_cadena_FORWARD-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Configurar_las_cadenas_fw-interfaces_y_fw-open" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Configurar_las_cadenas_fw-interfaces_y_fw-open">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1.3</span>
+					<span>Configurar las cadenas fw-interfaces y fw-open</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Configurar_las_cadenas_fw-interfaces_y_fw-open-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Configurar_la_tabla_nat" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Configurar_la_tabla_nat">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.2</span>
+					<span>Configurar la tabla nat</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Configurar_la_tabla_nat-sublist" class="vector-toc-list">
+				<li id="toc-Configurar_la_cadena_POSTROUTING" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Configurar_la_cadena_POSTROUTING">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.2.1</span>
+					<span>Configurar la cadena POSTROUTING</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Configurar_la_cadena_POSTROUTING-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Configurar_la_cadena_PREROUTING" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Configurar_la_cadena_PREROUTING">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.2.2</span>
+					<span>Configurar la cadena PREROUTING</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Configurar_la_cadena_PREROUTING-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Guardar_las_reglas_2" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Guardar_las_reglas_2">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.3</span>
+					<span>Guardar las reglas</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Guardar_las_reglas_2-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Véase_también" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#V%C3%A9ase_tambi%C3%A9n">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">4</span>
+				<span>Véase también</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Véase_también-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+</ul>
+</div>
+
+					</div>
+		</nav>
+			</div>
+		</div>
+		<div class="mw-content-container">
+			<main id="content" class="mw-body" style="margin: 0">
+				<header class="mw-body-header vector-page-titlebar">
+					<nav aria-label="Contents" class="vector-toc-landmark">
+						
+<div id="vector-page-titlebar-toc" class="vector-dropdown vector-page-titlebar-toc vector-button-flush-left">
+	<input type="checkbox" id="vector-page-titlebar-toc-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-page-titlebar-toc" class="vector-dropdown-checkbox " aria-label="Toggle the table of contents">
+	<label id="vector-page-titlebar-toc-label" for="vector-page-titlebar-toc-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"><span class="vector-icon mw-ui-icon-listBullet mw-ui-icon-wikimedia-listBullet"></span>
+
+<span class="vector-dropdown-label-text">Toggle the table of contents</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+							<div id="vector-page-titlebar-toc-unpinned-container" class="vector-unpinned-container">
+			</div>
+		
+	</div>
+</div>
+
+					</nav>
+					<h1 id="firstHeading" class="firstHeading mw-first-heading"><span class="mw-page-title-main">Simple stateful firewall (Español)</span></h1>
+							
+<div id="p-lang-btn" class="vector-dropdown mw-portlet mw-portlet-lang">
+	<input type="checkbox" id="p-lang-btn-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-p-lang-btn" class="vector-dropdown-checkbox mw-interlanguage-selector" aria-label="Go to an article in another language. Available in 4 languages">
+	<label id="p-lang-btn-label" for="p-lang-btn-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--action-progressive mw-portlet-lang-heading-4" aria-hidden="true"><span class="vector-icon mw-ui-icon-language-progressive mw-ui-icon-wikimedia-language-progressive"></span>
+
+<span class="vector-dropdown-label-text">4 languages</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+		<div class="vector-menu-content">
+			
+			<ul class="vector-menu-content-list">
+				
+				<li class="interlanguage-link interwiki-en mw-list-item"><a href="../en/Simple_stateful_firewall.html" title="Simple stateful firewall – English" lang="en" hreflang="en" data-title="Simple stateful firewall" data-language-autonym="English" data-language-local-name="English" class="interlanguage-link-target"><span>English</span></a></li>
+<li class="interlanguage-link interwiki-ja mw-list-item"><a href="https://wiki.archlinux.jp/index.php/%E3%82%B7%E3%83%B3%E3%83%97%E3%83%AB%E3%81%AA%E3%82%B9%E3%83%86%E3%83%BC%E3%83%88%E3%83%95%E3%83%AB%E3%83%95%E3%82%A1%E3%82%A4%E3%82%A2%E3%82%A6%E3%82%A9%E3%83%BC%E3%83%AB" title="シンプルなステートフルファイアウォール – 日本語" lang="ja" hreflang="ja" data-title="シンプルなステートフルファイアウォール" data-language-autonym="日本語" data-language-local-name="日本語" class="interlanguage-link-target"><span>日本語</span></a></li>
+<li class="interlanguage-link interwiki-ru mw-list-item"><a href="../ru/Simple_stateful_firewall.html" title="Simple stateful firewall – русский" lang="ru" hreflang="ru" data-title="Simple stateful firewall" data-language-autonym="Русский" data-language-local-name="русский" class="interlanguage-link-target"><span>Русский</span></a></li>
+<li class="interlanguage-link interwiki-zh-hans mw-list-item"><a href="https://wiki.archlinuxcn.org/wiki/Simple_stateful_firewall" title="Simple stateful firewall – 中文（简体）" lang="zh-Hans" hreflang="zh-Hans" data-title="Simple stateful firewall" data-language-autonym="中文（简体）" data-language-local-name="中文（简体）" class="interlanguage-link-target"><span>中文（简体）</span></a></li>
+			</ul>
+			
+		</div>
+
+	</div>
+</div>
+</header>
+				<div class="vector-column-end">
+					<div class="vector-sticky-pinned-container">
+						<nav class="vector-page-tools-landmark" aria-label="Page tools">
+							<div id="vector-page-tools-pinned-container" class="vector-pinned-container">
+				
+							</div>
+		</nav>
+						<nav class="vector-appearance-landmark" aria-label="Appearance">
+							<div id="vector-appearance-pinned-container" class="vector-pinned-container">
+				<div id="vector-appearance" class="vector-appearance vector-pinnable-element">
+	<div class="vector-pinnable-header vector-appearance-pinnable-header vector-pinnable-header-pinned" data-feature-name="appearance-pinned" data-pinnable-element-id="vector-appearance" data-pinned-container-id="vector-appearance-pinned-container" data-unpinned-container-id="vector-appearance-unpinned-container">
+	<div class="vector-pinnable-header-label">Appearance</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-appearance.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-appearance.unpin">hide</button>
+</div>
+
+
+</div>
+
+							</div>
+		</nav>
+					</div>
+				</div>
+				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container>
+					<div class="vector-body-before-content">
+							<div class="mw-indicators">
+		</div>
+
+						<div id="siteSub" class="noprint">From ArchWiki</div>
+					</div>
+					<div id="contentSub"><div id="mw-content-subtitle"></div></div>
+					
+					
+					<div id="mw-content-text" class="mw-body-content">
+<div class="mw-content-ltr mw-parser-output" lang="es" dir="ltr">
+<div class="archwiki-template-box archwiki-template-box-note">Esta traducción de <a href="../en/Simple_stateful_firewall.html" title="Simple stateful firewall">Simple stateful firewall</a> fue revisada el <b>2018-09-05</b>. Si existen <a rel="nofollow" class="external text" href="https://wiki.archlinux.org/index.php?title=Simple_stateful_firewall&amp;diff=0&amp;oldid=538197">cambios</a> puede <a href="../es/ArchWiki:Translation_Team/Contributing.html" title="ArchWiki:Translation Team (Español)/Contributing (Español)">actualizarla</a> o avisar al <a href="../es/ArchWiki:Translation_Team.html" title="ArchWiki:Translation Team (Español)">equipo de traducción</a>.</div>
+<div class="archwiki-template-meta-related-articles">
+<p>Artículos relacionados</p>
+<ul>
+<li><a href="../en/Category:Firewalls.html" class="mw-redirect" title="Firewalls">Firewalls</a></li>
+<li><a href="../en/Internet_sharing.html" title="Internet sharing">Internet sharing</a></li>
+<li><a href="../en/Nftables.html#Simple_stateful_firewall" title="Nftables">Nftables#Simple stateful firewall</a></li>
+<li><a href="../en/Router.html" title="Router">Router</a></li>
+<li><a href="../en/Uncomplicated_Firewall.html" title="Uncomplicated Firewall">Uncomplicated Firewall</a></li>
+</ul>
+</div>
+<dl>
+<dt>Según <a href="https://en.wikipedia.org/wiki/Stateful_firewall" class="extiw" title="wikipedia:Stateful firewall">Wikipedia (en inglés)</a>
+</dt>
+<dd><i>Firewall Stateful es «en informática, un cortafuegos de estado (cualquier cortafuegos que realiza la inspección del estado de los paquetes (SPI) o la inspección de estado) es un cortafuegos que realiza un seguimiento del estado de las conexiones de red (por ejemplo, flujos TCP, comunicación UDP) que viajan a través de ella. El cortafuegos está programado para distinguir paquetes legítimos para diferentes tipos de conexiones. Solo los paquetes que coincidan con una conexión activa conocida serán permitidos por el cortafuegos; el resto serán rechazados».</i></dd>
+</dl>
+<p>Esta página explica cómo configurar un cortafuegos <a href="https://en.wikipedia.org/wiki/Stateful_firewall" class="extiw" title="wikipedia:Stateful firewall">stateful</a> usando <a href="../es/Iptables.html" title="Iptables (Español)">iptables</a>. También explica lo que significan las reglas y por qué son necesarias. Para simplificar, se divide en dos secciones principales. La primera sección trata sobre la configuración de un cortafuegos para una sola máquina, la segunda establece la configuración de una puerta de enlace NAT además de la del cortafuegos de la primera sección.
+</p>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Advertencia:</strong> Las reglas se dan en el orden en que se ejecutan. Si está conectado a una máquina remota, es posible que se cierre el acceso a la máquina, mientras crea las reglas. Solo debe seguir los siguientes pasos mientras se está conectado en el sistema local. El <a href="#Archivo_resultante_de_iptables.rules">ejemplo de archivo de configuración</a> se puede utilizar para solucionar este problema.
+</div>
+<meta property="mw:PageProp/toc">
+<h2><span class="mw-headline" id="Requisitos_previos">Requisitos previos</span></h2>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Nota:</strong> El kernel debe ser compilado con soporte para iptables. Todos los kernels de stock de Arch Linux tienen soporte para iptables.</div>
+<p>En primer lugar, instale las herramientas <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=iptables">iptables</a></span> en el espacio de usuario o verifique que ya están instaladas.
+</p>
+<p>Este artículo supone que no hay reglas iptables establecidas en su sistema. Para comprobar el conjunto de reglas vigentes y cerciorarse que no existen actualmente reglas, ejecute lo siguiente:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;"># iptables-save</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;"># Generated by iptables-save v1.4.19.1 on Thu Aug  1 19:28:53 2013
+*filter
+:INPUT ACCEPT [50:3763]
+:FORWARD ACCEPT [0:0]
+:OUTPUT ACCEPT [30:3472]
+COMMIT
+# Completed on Thu Aug  1 19:28:53 2013
+</pre>
+<p>o
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;"># iptables -nvL --line-numbers</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">Chain INPUT (policy ACCEPT 156 packets, 12541 bytes)
+num   pkts bytes target     prot opt in     out     source               destination
+
+Chain FORWARD (policy ACCEPT 0 packets, 0 bytes)
+num   pkts bytes target     prot opt in     out     source               destination
+
+Chain OUTPUT (policy ACCEPT 82 packets, 8672 bytes)
+num   pkts bytes target     prot opt in     out     source               destination
+</pre>
+<p>Si hay reglas, podrá ser capaz de restablecerlas, cargando el conjunto de reglas por defecto:
+</p>
+<pre># iptables-restore &lt; /etc/iptables/empty.rules
+</pre>
+<p>De lo contrario, vea <a href="../es/Iptables.html#Restablecer_las_reglas" title="Iptables (Español)">Iptables (Español)#Restablecer las reglas</a>.
+</p>
+<h2>
+<span id="Cortafuegos_para_una_sola_m.C3.A1quina"></span><span class="mw-headline" id="Cortafuegos_para_una_sola_máquina">Cortafuegos para una sola máquina</span>
+</h2>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Nota:</strong> Puesto que las reglas de iptables siguen procesos en orden lineal, de arriba a abajo dentro de una cadena, se aconseja poner las reglas más frecuentemente afectadas al principio de la cadena. Por supuesto que hay un límite, en función de la lógica que se está implementando. Además, las reglas tienen un costo de tiempo de ejecución asociado, por lo que las reglas no deben ser reordenadas basandose únicamente en observaciones empíricas de los recuentos de bytes/paquetes de red.</div>
+<h3><span class="mw-headline" id="Crear_las_cadenas_necesarias">Crear las cadenas necesarias</span></h3>
+<p>Para esta configuración básica, vamos a crear dos cadenas, definidas por el usuario, que utilizaremos para abrir puertos en el cortafuegos.
+</p>
+<pre># iptables -N TCP
+# iptables -N UDP
+</pre>
+<p>Las cadenas pueden tener, por supuesto, nombres arbitrarios. Elegimos estos nombres solo para que coincidan con los protocolos que queremos manejar con ellos en las reglas posteriores, que se especifican con las opciones del protocolo, por ejemplo, <code>-p tcp</code>, siempre.
+</p>
+<h3><span class="mw-headline" id="La_cadena_FORWARD">La cadena FORWARD</span></h3>
+<p>Si desea configurar el equipo como una puerta de enlace NAT, vaya a <a href="#Configurar_una_puerta_de_enlace_NAT">#Configurar una puerta de enlace NAT</a>. Para una sola máquina, sin embargo, simplemente establecemos la política de la cadena <b>FORWARD</b> en <b>DROP</b> y continuamos con la configuración:
+</p>
+<pre># iptables -P FORWARD DROP
+</pre>
+<h3><span class="mw-headline" id="La_cadena_OUTPUT">La cadena OUTPUT</span></h3>
+<p>No tenemos ninguna intención de filtrar todo el tráfico saliente, ya que esto haría la configuración mucho más complicada y requeriría alguna reflexión adicional. Para el caso simple que nos ocupa, ponemos la política <b>OUTPUT</b> en <b>ACCEPT</b>.
+</p>
+<pre># iptables -P OUTPUT ACCEPT
+</pre>
+<h3><span class="mw-headline" id="La_cadena_INPUT">La cadena INPUT</span></h3>
+<p>De manera similar a las cadenas anteriores, fijamos la política predeterminada para la cadena <b>INPUT</b> en <b>DROP</b> como medida preventiva para evitar que se nos deslice algún error en nuestras reglas. Cerrar todo el tráfico y especificar luego qué tráfico entrante está permitido es la mejor manera de hacer un cortafuegos seguro.
+</p>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Advertencia:</strong> Si está conectado a través de SSH, lo siguiente hará que se desconecte inmediatamente la sesión SSH. Para evitarlo: (1) añada la primera regla de la cadena INPUT de abajo (que mantendrá la sesión abierta), (2) añada una regla normal para permitir la entrada de SSH (para poder volver a reconectar en caso de una caída de la conexión) y (3) establezca la política de la cadena.</div>
+<pre># iptables -P INPUT DROP
+</pre>
+<p>Cada paquete que se recibe por cualquier interfaz de red pasará primero por la cadena <b>INPUT</b>, si está destinado a nuestra máquina. Con esta cadena, nos aseguraremos de que solo los paquetes que queremos sean aceptados.
+</p>
+<p>La primera regla añadida a la cadena INPUT permitirá el tráfico perteneciente a las conexiones ya establecidas, o para el nuevo tráfico válido relacionado con estas conexiones, como los errores ICMP, o las respuestas de Echo (los paquetes que retornan al equipo cuando se hace ping —«<i>(...) es un servicio de red que repite aquel comando que se le envía (como el eco). Es útil para hacer comprobaciones sobre el estado de la conectividad de una red»</i> (<a href="https://en.wikipedia.org/wiki/es:Echo_(inform%C3%A1tica)" class="extiw" title="wikipedia:es:Echo (informática)">fuente</a>)—). <b>ICMP</b> (siglas en inglés de <i>Internet Control Message Protocol</i>) significa <b>Protocolo de Mensajes de Control de Internet</b>. Algunos mensajes <a href="https://en.wikipedia.org/wiki/es:Internet_Control_Message_Protocol" class="extiw" title="wikipedia:es:Internet Control Message Protocol">ICMP</a> son muy importantes y ayudan a gestionar la congestión y <a href="https://en.wikipedia.org/wiki/es:Unidad_m%C3%A1xima_de_transferencia" class="extiw" title="wikipedia:es:Unidad máxima de transferencia">MTU</a>, y son aceptados por esta regla. 
+</p>
+<p>El estado de conexión <code>ESTABLISHED</code> implica que, o bien otra regla anteriormente permitió la conexión inicial intentada (<code>--ctstate NEW</code>), o bien la conexión ya estaba activa (por ejemplo, una conexión SSH remota activa) al tiempo de establecer esta regla:
+</p>
+<pre># iptables -A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+</pre>
+<p>La segunda regla aceptará todo el tráfico de la interfaz (lo) <a href="https://en.wikipedia.org/wiki/es:Loopback" class="extiw" title="wikipedia:es:Loopback">«loopback»</a>, que es necesario para muchas aplicaciones y servicios.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Nota:</strong> Se pueden agregar las interfaces más fiables aquí como «eth1» si no quiere/necesita que el cortafuegos filtre el tráfico, pero tenga presente que si tiene una configuración NAT que redirige cualquier tipo de tráfico a esta interfaz desde otro lugar de la red (digamos un router), va a conseguir lo mismo a través de ello, independientemente de cualquier otra configuración que pueda tener.</div>
+<pre># iptables -A INPUT -i lo -j ACCEPT
+</pre>
+<p>La tercera regla descartará todo el tráfico que coincida con el estado «INVALID». El tráfico puede agruparse en una de las cuatro categorías de «estado»: NEW, ESTABLISHED, RELATED o INVALID, y esto es lo que hace de este sea un cortafuegos «stateful» (podríamos definirlo como un cortafuegos de filtrado dinámico de paquetes), en lugar de un cortafuegos «stateless» (filtrado de paquetes sin estado) que es menos seguro. Los estados hacen un seguimiento usando los módulos del kernel «nf_conntrack_*» que se cargan automáticamente por el kernel a medida que se añaden las reglas.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Nota:</strong> 
+<ul>
+<li>Esta regla descartará todos los paquetes con cabeceras o sumas de comprobación no válidas, indicadores TCP no válidos, mensajes ICMP no válidos (como un puerto inaccesible cuando no enviamos nada para el equipo), y descarta los paquetes secuenciados que pueden ser causados por la predicción de secuencia u otros ataques similares. El objetivo de «DROP» es descartar un paquete sin dar ninguna respuesta, contrariamente a REJECT que rechaza el paquete. Utilizamos DROP porque no hay una respuesta adecuada a los paquetes que no son válidos, y no queremos reconocer que hemos recibido esos paquetes.</li>
+<li>Los paquetes <a href="https://en.wikipedia.org/wiki/es:Neighbor_Discovery" class="extiw" title="wikipedia:es:Neighbor Discovery">Neighbor Discovery</a> de ICMPv6 permanecen sin seguimiento, y siempre se clasifican «INVALID» aunque no estén dañados o similares. Tenga esto presente, y acepte dicha situación antes de esta regla: iptables -A INPUT -p 41 -j ACCEPT</li>
+</ul>
+</div>
+<pre># iptables -A INPUT -m conntrack --ctstate INVALID -j DROP
+</pre>
+<p>La siguiente regla aceptará todos las nuevas peticiones de <b>ICMP echo requests</b>,  también conocidas como pings. Solo el primer paquete contará como NUEVO, el resto estará a cargo de la regla  RELATED,ESTABLISHED. Dado que el equipo no es un router, ningún otro tráfico ICMP con el estado NEW necesita ser permitido.
+</p>
+<pre># iptables -A INPUT -p icmp --icmp-type 8 -m conntrack --ctstate NEW -j ACCEPT
+</pre>
+<p>Ahora asociamos las cadenas TCP y UDP a la cadena INPUT para manejar todas las nuevas conexiones entrantes. Una vez que una conexión es aceptada por la cadena TCP o UDP, la misma es manejada por la regla de tráfico RELATED/ESTABLISHED. Las cadenas TCP y UDP bien aceptan las nuevas conexiones entrantes, o bien las rechazan. Las nuevas conexiones TCP deben comenzar con paquetes SYN.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Nota:</strong> NEW pero no SYN es la única etiqueta TCP no válida no cubierta por el estado INVALID. La razón es porque raramente son paquetes maliciosos, y esto no basta para descartarlos. En su lugar, simplemente no los aceptamos, por lo que se rechazan con un <a href="https://en.wikipedia.org/wiki/es:RST_(flag)" class="extiw" title="wikipedia:es:RST (flag)">RST</a> de TCP por la siguiente regla.</div>
+<pre># iptables -A INPUT -p udp -m conntrack --ctstate NEW -j UDP
+# iptables -A INPUT -p tcp --syn -m conntrack --ctstate NEW -j TCP
+</pre>
+<p>Rechazamos las conexiones TCP con paquetes RESET de TCP y flujos de UDP con mensaje de puerto ICMP inalcanzable, si no se abren los puertos. Esto imita el comportamiento predeterminado de Linux (RFC), y que permite al remitente cerrar rápidamente la conexión y limpiarla.
+</p>
+<pre># iptables -A INPUT -p udp -j REJECT --reject-with icmp-port-unreachable
+# iptables -A INPUT -p tcp -j REJECT --reject-with tcp-reset
+</pre>
+<p>Para otros protocolos, añadimos una regla final para la cadena INPUT para rechazar todo el tráfico entrante restante con protocolo ICMP de mensajes inaccesibles. Esto imita el comportamiento por defecto de Linux.
+</p>
+<pre># iptables -A INPUT -j REJECT --reject-with icmp-proto-unreachable
+</pre>
+<h3><span class="mw-headline" id="Archivo_resultante_de_iptables.rules">Archivo resultante de iptables.rules</span></h3>
+<p>He aquí un ejemplo de archivo <code>iptables.rules</code> que se obtendría después de ejecutar todas las órdenes anteriores:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/iptables/iptables.rules</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;"># Generated by iptables-save v1.4.18 on Sun Mar 17 14:21:12 2013
+*filter
+:INPUT DROP [0:0]
+:FORWARD DROP [0:0]
+:OUTPUT ACCEPT [0:0]
+:TCP - [0:0]
+:UDP - [0:0]
+-A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+-A INPUT -i lo -j ACCEPT
+-A INPUT -m conntrack --ctstate INVALID -j DROP
+-A INPUT -p icmp -m icmp --icmp-type 8 -m conntrack --ctstate NEW -j ACCEPT
+-A INPUT -p udp -m conntrack --ctstate NEW -j UDP
+-A INPUT -p tcp --tcp-flags FIN,SYN,RST,ACK SYN -m conntrack --ctstate NEW -j TCP
+-A INPUT -p udp -j REJECT --reject-with icmp-port-unreachable
+-A INPUT -p tcp -j REJECT --reject-with tcp-reset
+-A INPUT -j REJECT --reject-with icmp-proto-unreachable
+COMMIT
+# Completed on Sun Mar 17 14:21:12 2013
+</pre>
+<p>Este archivo se puede generar con:
+</p>
+<pre># iptables-save &gt; /etc/iptables/iptables.rules
+</pre>
+<p>y se puede utilizar como base para continuar con las siguientes secciones. Si va a configurar un cortafuegos de forma remota a través de SSH, añada la siguiente regla para permitir nuevas conexiones SSH antes de continuar (ajustar el puerto si es necesario):
+</p>
+<pre>-A TCP -p tcp --dport 22 -j ACCEPT
+</pre>
+<h3><span class="mw-headline" id="Las_cadenas_TCP_y_UDP">Las cadenas TCP y UDP</span></h3>
+<p>Las cadenas TCP y UDP contienen reglas para la aceptación de nuevas conexiones <a href="https://en.wikipedia.org/wiki/es:" class="extiw" title="wikipedia:es:">TCP</a> y flujos <a href="https://en.wikipedia.org/wiki/es:User_Datagram_Protocol" class="extiw" title="wikipedia:es:User Datagram Protocol">UDP</a> entrantes para puertos específicos.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Nota:</strong> Aquí es donde necesita añadir reglas para aceptar conexiones entrantes, como SSH, HTTP u otros servicios a los que desee acceder de forma remota.</div>
+<h4><span class="mw-headline" id="Apertura_de_puertos_para_conexiones_entrantes">Apertura de puertos para conexiones entrantes</span></h4>
+<p>Para aceptar conexiones TCP entrantes en el puerto 80 para un servidor web:
+</p>
+<pre># iptables -A TCP -p tcp --dport 80 -j ACCEPT
+</pre>
+<p>Para aceptar conexiones TCP entrantes en el puerto 443 para un servidor web (HTTPS):
+</p>
+<pre># iptables -A TCP -p tcp --dport 443 -j ACCEPT
+</pre>
+<p>Para permitir conexiones remotas a través de SSH (en el puerto 22):
+</p>
+<pre># iptables -A TCP -p tcp --dport 22 -j ACCEPT
+</pre>
+<p>Para aceptar transmisiones TCP/UDP entrantes en el puerto 53 para un servidor <a href="../en/Domain_name_resolution.html" class="mw-redirect" title="DNS">DNS</a>:
+</p>
+<pre># iptables -A TCP -p tcp --dport 53 -j ACCEPT
+# iptables -A UDP -p udp --dport 53 -j ACCEPT
+</pre>
+<p>Vea <span class="plainlinks archwiki-template-man" title="$ man 8 iptables"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/iptables.8">iptables(8)</a></span> para conocer reglas más avanzadas, como equipar múltiples puertos.
+</p>
+<h4><span class="mw-headline" id="Golpear_puertos">Golpear puertos</span></h4>
+<p>El <a href="https://en.wikipedia.org/wiki/es:Golpeo_de_puertos" class="extiw" title="wikipedia:es:Golpeo de puertos">golpeo de puertos</a> es un método para abrir puertos externamente que, por defecto, el cortafuegos mantiene cerrado. Funciona al demandar intentos de conexión a una serie de puertos cerrados de forma predefinida. Cuando la secuencia correcta del puerto al que se «golpea» (intentos de conexión) es recibida, el cortafuegos abre determinado puerto(s) para permitir una conexión. Vea <a href="../en/Port_knocking.html" class="mw-redirect" title="Port knocking (Español)">Port knocking (Español)</a> para más información.
+</p>
+<h3>
+<span id="Protecci.C3.B3n_contra_ataques_de_suplantaci.C3.B3n"></span><span class="mw-headline" id="Protección_contra_ataques_de_suplantación">Protección contra ataques de suplantación</span>
+</h3>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Nota:</strong> <code>rp_filter</code> está ajustado actualmente en <code>1</code> por defecto en <code>/usr/lib/sysctl.d/50-default.conf</code>, por lo que el siguiente paso no es necesario.</div>
+<p>El bloqueo de las direcciones locales reservadas entrantes desde Internet o red local se realiza normalmente a través de la configuración de <code>rp_filter</code> (Reverse Path Filter) en sysctl ajustándola a 1. Para ello, añada la siguiente línea al archivo <code>/etc/sysctl.d/90-firewall.conf</code> (ver <a href="../en/Sysctl.html" title="Sysctl">sysctl</a> para más detalles) para permitir la verificación de la dirección IP de origen que está integrado en el mismo kernel de Linux. La verificación por parte del kernel se encargará de la <a href="https://en.wikipedia.org/wiki/es:Spoofing" class="extiw" title="wikipedia:es:Spoofing">suplantación de identidad o <i>spoofing</i></a> mejor que las reglas de iptables individuales para cada caso.
+</p>
+<pre>net.ipv4.conf.all.rp_filter=1
+</pre>
+<p>Esto se puede hacer con netfilter en su lugar,  si se desean estadíaticas (y mejorar el registro):
+</p>
+<pre># iptables -t raw -I PREROUTING -m rpfilter --invert -j DROP
+</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Nota:</strong> No hay ninguna razón para activar esto en ambos lugares. El método netfilter es la opción más moderna y también funciona con IPv6.</div>
+<p>Solo cuando el enrutamiento es asíncrono,
+se debe utilizar la opción de sysctl <code>rp_filter=0</code>. Pasando el modificador <code>--loose</code> al módulo <code>rpfilter</code> se logrará lo mismo con netfilter.
+</p>
+<h3>
+<span id=".C2.ABOcultar.C2.BB_el_ordenador"></span><span class="mw-headline" id="«Ocultar»_el_ordenador">«Ocultar» el ordenador</span>
+</h3>
+<p>Si está ejecutando una máquina de escritorio, esto podría ser una buena idea para bloquear algunas peticiones entrantes.
+</p>
+<h4><span class="mw-headline" id="Bloquear_solicitudes_de_ping">Bloquear solicitudes de ping</span></h4>
+<p>Una petición 'Ping' es un paquete ICMP enviado a la dirección IP de destino para garantizar la conectividad entre los dispositivos. Si la red funciona bien, puede bloquear de forma segura todas las solicitudes de ping. Es importante señalar que esto en realidad «no» oculta su ordenador —cualquier paquete que se le envíe será rechazado, por lo que aún se mostrará en un <a href="https://en.wikipedia.org/wiki/es:Nmap" class="extiw" title="wikipedia:es:Nmap">nmap</a> simple de «escaneo de ping» de un conjunto de IP—.
+</p>
+<p>Esta es una «protección» rudimentaria y hace más difícil la depuración de problemas en el futuro. Solo debe hacer esto para propósitos educativos.
+</p>
+<p>Para bloquear las peticiones de Echo, añada la siguiente línea a su archivo <code>/etc/sysctl.d/90-firewall.conf</code> (ver <a href="../en/Sysctl.html" title="Sysctl">sysctl</a> para más detalles):
+</p>
+<pre>net.ipv4.icmp_echo_ignore_all = 1
+</pre>
+<p>Puede encontrar más información en la página del manual de iptables, o leyendo la documentación y ejemplos en la página web <a rel="nofollow" class="external free" href="https://web.archive.org/web/20200217165135/http://snowman.net/projects/ipt_recent/">https://web.archive.org/web/20200217165135/http://snowman.net/projects/ipt_recent/</a>
+</p>
+<h4>
+<span id="Enga.C3.B1ar_a_los_analizadores_de_puertos"></span><span class="mw-headline" id="Engañar_a_los_analizadores_de_puertos">Engañar a los analizadores de puertos</span>
+</h4>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Nota:</strong> 
+<ul>
+<li>Esto le abre a una forma de <a href="https://en.wikipedia.org/wiki/es:Ataque_de_denegaci%C3%B3n_de_servicio" class="extiw" title="wikipedia:es:Ataque de denegación de servicio">DoS</a> (siglas en inglés de <i>Denial of Service</i> —ataque de denegación de servicios—). Un ataque puede enviar paquetes con direcciones IP falsas, y hacer que los recursos o servicios sean bloqueados para conectarse a los mismos por los usuarios legítimos.</li>
+<li>Este truco puede bloquear una dirección IP legítima si algunos paquetes de red provenientes de esta dirección al puerto de destino se consideran NO VÁLIDOS por el módulo «<i>conntrack</i>». Para evitar su inclusión en listas negras, un cambio de tendencia es permitir que todos los paquetes se dirijan a ese puerto de destino particular.</li>
+</ul>
+</div>
+<p>Los escaneadores de puertos son utilizados por los atacantes para identificar los puertos abiertos en su equipo. Esto les permite identificar y analizar las huellas de sus servicios en ejecución y, posiblemente, lanzar <a href="https://en.wikipedia.org/wiki/es:Exploit" class="extiw" title="wikipedia:es:Exploit">exploits</a> contra ellos.
+</p>
+<p>La regla de estado INVALID se hará cargo de todos los tipos de escaneo de puertos, excepto para los escaneo de UDP, ACK y SYN (-sU, -sA y -sS en nmap, respectivamente). 
+</p>
+<p>Los <i>escaneos ACK</i> no se utilizan para identificar los puertos abiertos, pero si para identificar los puertos filtrados por un cortafuegos. Debido a la comprobación de SYN para todas las conexiones TCP con el estado NEW, cada paquete individual enviado por una exploración ACK será rechazado correctamente por un paquete TCP RST. Algunos cortafuegos bloquean estos paquetes en su lugar, y esto permite que un atacante pueda trazar las reglas del cortafuegos.
+</p>
+<p>El módulo <i>recent</i> puede ser utilizado para engañar a los otros dos tipos de escaneos de puertos restantes. El módulo <i>recent</i> puede agregar equipos a una lista «recent» que se puede utilizar para los analizadores de huellas y detener ciertos tipos de ataques. Las listas <i>recent</i> actuales se pueden ver en <code>/proc/net/xt_recent/</code>.
+</p>
+<h5><span class="mw-headline" id="Escaneos_de_SYN">Escaneos de SYN</span></h5>
+<p>En un escaneo SYN, el analizador de puertos envía paquetes SYN a cada puerto. Los puertos cerrados devuelven un paquete TCP RST, o son bloqueados por un cortafuegos estricto. Los puertos abiertos devuelven un paquete SYN ACK independientemente de la presencia o no de un cortafuegos.
+</p>
+<p>El módulo recent se puede utilizar para realizar un seguimiento de los equipos con intentos rechazados y devolverles un TCP RST para cualquier paquete SYN que envían a puertos abiertos como si el puerto estuviera cerrado. Si un puerto abierto es el primero en ser escaneado, será devuelto un paquete SYN ACK pese a ello, por lo que las aplicaciones en ejecución, requieren que funcionen en puertos no esperados para que esto sea coherente, como ssh que debe ejecutarse en puertos no estándar.
+</p>
+<p>En primer lugar, insertar una regla en la parte superior de la cadena TCP. Esta regla responde con un RST TCP a cualquier equipo añadido a la lista TCP PortScan en los últimos sesenta segundos. El parámetro <code>--update</code> hace que la lista recent se actualice, lo que hace que el contador de 60 segundo se restablezca.
+</p>
+<pre># iptables -I TCP -p tcp -m recent --update --rsource --seconds 60 --name TCP-PORTSCAN -j REJECT --reject-with tcp-reset
+</pre>
+<p>A continuación, la regla para rechazar los paquetes TCP necesita ser modificada para incluir los equipos con paquetes rechazados en la lista TCP-PORTSCAN.
+</p>
+<pre># iptables -D INPUT -p tcp -j REJECT --reject-with tcp-reset
+# iptables -A INPUT -p tcp -m recent --set --rsource --name TCP-PORTSCAN -j REJECT --reject-with tcp-reset
+</pre>
+<h5><span class="mw-headline" id="Escaneos_de_UDP">Escaneos de UDP</span></h5>
+<p>Los escaneos de puertos UDP son similares a las exploraciones TCP SYN, excepto que UDP es un protocolo «sin conexión (previamente establecida)». No hay contacto ni reconocimiento. En cambio, el escáner envía paquetes UDP a cada puerto UDP. Los puertos cerrados devuelven mensajes ICMP de puertos inaccesibles, y los puertos abiertos no devuelven respuesta. Dado que UDP no es un protocolo «confiable», el escáner no tiene manera de saber si los paquetes se perdieron, y tiene que hacer varias comprobaciones para cada puerto que no devuelve una respuesta.
+</p>
+<p>El kernel de Linux envía mensajes ICMP de puerto inaccesible muy lentamente, por lo que un escaneo UDP completo contra una máquina Linux podría durar más de 10 horas. Sin embargo, los puertos comunes todavía pudieron ser identificados, por lo que la aplicación de las mismas medidas contra escaneos de SYN para UDP es una buena idea.
+</p>
+<p>En primer lugar, añada una regla para rechazar los paquetes de los equipos incluidos en la lista UDP-PortScan al inicio de la cadena de UDP.
+</p>
+<pre># iptables -I UDP -p udp -m recent --update --rsource --seconds 60 --name UDP-PORTSCAN -j REJECT --reject-with icmp-port-unreachable
+</pre>
+<p>A continuación, modifique la regla de rechazo de paquetes para UDP:
+</p>
+<pre># iptables -D INPUT -p udp -j REJECT --reject-with icmp-port-unreachable
+# iptables -A INPUT -p udp -m recent --set --rsource --name UDP-PORTSCAN -j REJECT --reject-with icmp-port-unreachable
+</pre>
+<h5><span class="mw-headline" id="Restaurar_la_regla_final">Restaurar la regla final</span></h5>
+<p>Si se utilizaron uno o ambas de los reglas de escaneo de puertos descritos, estas se colocarán por encima de la última regla por defecto, con lo cual esta última ya no será la regla final en la cadena INPUT. La regla por defecto tiene que ser la última regla, de lo contrario interferirá en las reglas del escaneo de puertos que acaba de agregar y nunca se utilizarán. Solo tiene que eliminar la regla (D) y, a continuación, añadirla (-A) de nuevo, lo que hará que la regla por defecto se coloque al final de la cadena.
+</p>
+<pre># iptables -D INPUT -j REJECT --reject-with icmp-proto-unreachable
+# iptables -A INPUT -j REJECT --reject-with icmp-proto-unreachable
+</pre>
+<h3>
+<span id="Protecci.C3.B3n_contra_otros_ataques"></span><span class="mw-headline" id="Protección_contra_otros_ataques">Protección contra otros ataques</span>
+</h3>
+<p>Consulte <a href="../en/Sysctl.html#TCP/IP_stack_hardening" title="Sysctl">sysctl#TCP/IP stack hardening</a> para conocer los parámetros del kernel más relevantes.
+</p>
+<h4><span class="mw-headline" id="Ataques_de_fuerza_bruta">Ataques de fuerza bruta</span></h4>
+<p>Desafortunadamente, los ataques de fuerza bruta sobre los servicios accesibles a través de una dirección IP expuesta públicamente son comunes. Una razón para esto es que los ataques son fáciles de hacer con las muchas herramientas disponibles. Afortunadamente, hay varias formas de proteger los servicios contra ellos. Una de ellas es el uso de reglas apropiadas <code>iptables</code> que activen e incluyan en una lista negra las direcciones IP después de que estas hayan intentado iniciar una conexión de forma infructuosa con un número determinado de paquetes. Otro es el uso de demonios especializados que controlen los archivos del registro de intentos fallidos y la lista negra en consecuencia.
+</p>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Advertencia:</strong> El uso de una lista negra de IP detendrá ataques triviales pero la misma se apoya en un demonio adicional y un registro de éxito (la partición que contiene /var puede llegar a saturarse, especialmente si un atacante golpea con fuerza en el servidor). Además, si el atacante conoce su dirección IP, puede enviar paquetes con un encabezado de origen falso y conseguir bloquearle el servidor. <a href="../en/SSH_keys.html" class="mw-redirect" title="SSH keys (Español)">SSH keys (Español)</a> proporciona una solución elegante al problema de la fuerza bruta sin estos problemas.</div>
+<p>Dos aplicaciones que prohíben direcciones IP después de demasiados fracasos con la contraseña son <a href="../es/Fail2ban.html" title="Fail2ban (Español)">Fail2ban (Español)</a> o, para <code>sshd</code> en particular, <a href="../es/Sshguard.html" title="Sshguard (Español)">Sshguard (Español)</a>. Estas dos aplicaciones actualizan las reglas de iptables para rechazar futuras conexiones desde direcciones IP incluidas en la lista negra.
+</p>
+<p>Las siguientes reglas se dan como un ejemplo de configuración para mitigar los ataques de fuerza bruta contra SSH utilizando <code>iptables</code>.
+</p>
+<pre># iptables -N IN_SSH
+# iptables -A INPUT -p tcp --dport ssh -m conntrack --ctstate NEW -j IN_SSH
+# iptables -A IN_SSH -m recent --name sshbf --rttl --rcheck --hitcount 3 --seconds 10 -j DROP
+# iptables -A IN_SSH -m recent --name sshbf --rttl --rcheck --hitcount 4 --seconds 1800 -j DROP 
+# iptables -A IN_SSH -m recent --name sshbf --set -j ACCEPT
+</pre>
+<p>La mayoría de las opciones pueden explicarse por sí mismas, así las reglas precedentes permiten tres paquetes de conexión cada diez segundos. El resto de intentos en ese lapso de tiempo incluyen la IP en la lista negra. La siguiente regla añade una peculiaridad, al permitir un total de cuatro intentos en 30 minutos. Esto se hace porque algunos ataques de fuerza bruta que se realizan son realmente lentos y no en un estallido de intentos. Las reglas emplean una serie de opciones adicionales. Para leer más acerca de ellas, revise la referencia original para este ejemplo: <a rel="nofollow" class="external text" href="https://compilefailure.blogspot.com/2011/04/better-ssh-brute-force-prevention-with.html">compilefailure.blogspot.com</a>
+</p>
+<p>Las reglas anteriores se pueden usar para proteger cualquier servicio, aunque el demonio SSH es probablemente uno de los más solicitado.
+</p>
+<p>En términos de orden, uno debe asegurarse de que <code>-A INPUT -p tcp --dport ssh -m conntrack --ctstate NEW -j IN_SSH</code> esté en la posición correcta en la secuencia de iptables: debe aparecer antes que el de La cadena TCP que está conectada a INPUT para detectar nuevas conexiones SSH primero. Si se han completado todos los pasos anteriores de esta wiki, funcionaría con el siguiente posicionamiento:
+</p>
+<pre>...
+-A INPUT -m conntrack --ctstate INVALID -j DROP
+-A INPUT -p icmp -m icmp --icmp-type 8 -m conntrack --ctstate NEW -j ACCEPT
+<b>-A INPUT -p tcp --dport 22 -m conntrack --ctstate NEW -j IN_SSH</b>
+-A INPUT -p udp -m conntrack --ctstate NEW -j UDP
+-A INPUT -p tcp --tcp-flags FIN,SYN,RST,ACK SYN -m conntrack --ctstate NEW -j TCP
+...
+</pre>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Sugerencia:</strong> Para autodiagnosticar las reglas después de su configuración, la gestión de la lista negra vigente puede ralentizar la prueba, lo que dificultará afinar los parámetros. Se pueden ver los intentos de entrada a través de <code>cat /proc/net/xt_recent/sshbf</code>. Para desbloquear la propia IP durante las pruebas, se necesitan privilegios de root <code># echo / &gt; /proc/net/xt_recent/sshbf</code>
+</div>
+<h3><span class="mw-headline" id="IPv6">IPv6</span></h3>
+<p>Si no utiliza IPv6, considere <a href="../en/IPv6.html#Disable_IPv6" class="mw-redirect" title="Disabling IPv6">desactivarlo</a>, de lo contrario, siga estos pasos para activar las reglas de IPv6 para el cortafuegos.
+</p>
+<p>Copie las reglas IPv4 utilizadas en este ejemplo como base, y cambie cualquier IP del formato IPv4 al formato IPv6:
+</p>
+<pre># cp /etc/iptables/iptables.rules /etc/iptables/ip6tables.rules
+</pre>
+<p>A few of the rules in this example have to be adapted for use with IPv6. The ICMP protocol has been updated in IPv6, replacing the ICMP protocol for use with IPv4. Hence, the reject error return codes <code>--reject-with icmp-port-unreachable</code> and <code>--reject-with icmp-proto-unreachable</code> have to be converted to ICMPv6 codes. 
+</p>
+<p>Algunas de las reglas de este ejemplo deben adaptarse para su uso con IPv6. El protocolo ICMP se ha actualizado en IPv6, reemplazando el protocolo ICMP para su uso con IPv4. Por lo tanto, los códigos de retorno de error de rechazo <code> --reject-with icmp-port-unreachable</code> y {{ic | --reject-with icmp-proto-unreachable}. Por lo tanto, los códigos de retorno de error de rechazo <code>--reject-with icmp-port-unreachable</code> y <code>--reject-with icmp-proto-unreachable</code> tienen que ser convertidos en códigos ICMPv6.
+</p>
+<p>Los códigos de error de ICMPv6 disponibles se enumeran en <a rel="nofollow" class="external text" href="https://tools.ietf.org/html/rfc4443#section-3.1">RFC 4443</a>, que especifica que una regla de cortafuegos para bloquear los intentos de conexión debe utilizar <code>--reject-with icmp6-adm-prohibited</code>. Si lo bloquea, básicamente informa al sistema remoto que la conexión fue rechazada por el cortafuegos, en lugar de informar que un servicio fue escuchado. 
+</p>
+<p>Si se prefiere no informar explícitamente acerca de la existencia de un filtro en el cortafuegos, el paquete también puede ser rechazado sin el mensaje: 
+</p>
+<pre> -A INPUT -j REJECT
+</pre>
+<p>Lo anterior va a rechazar con la devolución de error por defecto <code>--reject-with-icmp6-port-unreachable</code>. Debe tener en cuenta, sin embargo, que la identificación de un cortafuegos es una característica básica de las aplicaciones de escaneo de puertos y la mayoría va a identificarlo a pesar de todo. 
+</p>
+<p>El siguiente paso es asegurarse de que el protocolo y la extensión se cambian al apropiado para IPv6 en la regla de todas las nuevas peticiones de echo ICMP entrantes (pings):
+</p>
+<pre># ip6tables -A INPUT -p ipv6-icmp --icmpv6-type 128 -m conntrack --ctstate NEW -j ACCEPT
+</pre>
+<p>conntrack de netfilter no parece hacer el seguimiento del Protocolo Neighbor Discovery de ICMPv6 (el IPv6 equivalente de ARP), así que tenemos que permitir el tráfico ICMPv6 sin importar el estado para todas las subredes conectadas directamente. Lo siguiente debe insertarse después de descartar <code>--ctstate INVALID</code>, pero antes de cualquier otro objetivo DROP o REJECT, junto con la línea correspondiente de cada subred conectada directamente:
+</p>
+<pre># ip6tables -A INPUT -s fe80::/10 -p ipv6-icmp -j ACCEPT
+</pre>
+<p>Como no existe un filtro de ruta inversa del kernel para IPv6, es posible que desee habilitar uno en <i> ip6tables </i> con lo siguiente:
+</p>
+<pre># ip6tables -t raw -A PREROUTING -m rpfilter -j ACCEPT
+# ip6tables -t raw -A PREROUTING -j DROP
+</pre>
+<h3><span class="mw-headline" id="Guardar_las_reglas">Guardar las reglas</span></h3>
+<p>El conjunto de reglas ya está terminado y se debe guardar en el disco duro para que pueda ser cargado en cada arranque.
+</p>
+<p>Guarde las reglas de IPv4 y IPv6 con estas órdenes
+</p>
+<pre># iptables-save &gt; /etc/iptables/iptables.rules
+# ip6tables-save &gt; /etc/iptables/ip6tables.rules
+</pre>
+<p>Después <a href="../es/Systemd.html#Utilizar_las_unidades" title="Systemd (Español)">active</a> e <a href="../es/Systemd.html#Utilizar_las_unidades" title="Systemd (Español)">inicie</a> <code>iptables.service</code> y <code>ip6tables.service</code>. Compruebe el estado de los servicios para asegurarse de que las reglas estén cargadas correctamente.
+</p>
+<h2><span class="mw-headline" id="Configurar_una_puerta_de_enlace_NAT">Configurar una puerta de enlace NAT</span></h2>
+<p>Esta sección de la guía trata sobre la configuración de una puerta de enlace <a href="https://en.wikipedia.org/wiki/es:Network_Address_Translation" class="extiw" title="wikipedia:es:Network Address Translation">NAT</a> (siglas en inglés de Network Address Translation —conversión de direcciones de red—). Se supone que ya ha leído la <a href="#Cortafuegos_para_una_sola_m%C3%A1quina">primera parte de la guía</a> y configurado las cadenas <b>INPUT</b>, <b>OUTPUT</b>, <b>TCP</b> y <b>UDP</b> como se ha descrito anteriormente. Todas las reglas hasta ahora se han creado en la tabla <b>filter</b>. En esta sección, también vamos a tener que utilizar la tabla <b>nat</b>.
+</p>
+<h3><span class="mw-headline" id="Configurar_la_tabla_filter">Configurar la tabla filter</span></h3>
+<h4><span class="mw-headline" id="Crear_las_cadenas_necesarias_2">Crear las cadenas necesarias</span></h4>
+<p>En nuestra configuración, utilizaremos otras dos cadenas en la tabla de filtros, las cadenas <b>fw-interfaces</b> y <b>fw-open</b> que crearemos con las siguientes órdenes:
+</p>
+<pre># iptables -N fw-interfaces
+# iptables -N fw-open
+</pre>
+<h4><span class="mw-headline" id="Configurar_la_cadena_FORWARD">Configurar la cadena FORWARD</span></h4>
+<p>La creación de la cadena <b>FORWARD</b> es similar a la cadena <b>INPUT</b> de la primera parte de esta guía.
+</p>
+<p>Ahora establecemos una regla con <b>conntrack</b>, idéntica a la de la cadena <b>INPUT</b>:
+</p>
+<pre># iptables -A FORWARD -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+</pre>
+<p>El siguiente paso es activar el reenvío para las interfaces de confianza y hacer que todos los paquetes pasen por la cadena <b>fw-open</b>.
+</p>
+<pre># iptables -A FORWARD -j fw-interfaces 
+# iptables -A FORWARD -j fw-open 
+</pre>
+<p>A los paquetes restantes se les niega con un mensaje <b>ICMP</b>:
+</p>
+<pre># iptables -A FORWARD -j REJECT --reject-with icmp-host-unreach
+# iptables -P FORWARD DROP
+</pre>
+<h4><span class="mw-headline" id="Configurar_las_cadenas_fw-interfaces_y_fw-open">Configurar las cadenas fw-interfaces y fw-open</span></h4>
+<p>El significado de las cadenas <b>fw-interfaces</b> y <b>fw-open</b> se explica más adelante, cuando nos ocupemos de las cadenas <b>POSTROUTING</b> y <b>PREROUTING</b> en la tabla <b>nat</b>, respectivamente.
+</p>
+<h3><span class="mw-headline" id="Configurar_la_tabla_nat">Configurar la tabla nat</span></h3>
+<p>En toda esta sección, se supone que la interfaz de salida (la que tiene la IP expuesta públicamente a internet) es <b>ppp0</b>. Tenga en cuenta que tiene que cambiar el nombre en todas las reglas siguientes si su interfaz de salida tiene otro nombre.
+</p>
+<h4><span class="mw-headline" id="Configurar_la_cadena_POSTROUTING">Configurar la cadena POSTROUTING</span></h4>
+<p>Ahora, tenemos que definir quién tiene permisos para conectarse a Internet. Supongamos que tenemos la subred <b>192.168.0.0/24</b> (que significa que todas las direcciones tienen el formato 192.168.0.*) en <b>eth0</b>. Primero tenemos que aceptar las máquinas en esta interfaz en la tabla FORWARD, es por eso que hemos creado la cadena <b>fw-interfaces</b> anterior:
+</p>
+<pre># iptables -A fw-interfaces -i eth0 -j ACCEPT
+</pre>
+<p>Ahora, tenemos que modificar todos los paquetes salientes de manera que tengan nuestra dirección IP pública como la dirección IP de origen, en lugar de la dirección LAN local. Para ello, utilizamos el objetivo <b>MASQUERADE</b>:
+</p>
+<pre># iptables -t nat -A POSTROUTING -s 192.168.0.0/24 -o ppp0 -j MASQUERADE
+</pre>
+<p>No se olvide el parámetro <b>-o ppp0</b> anterior. Si lo omite, su red no funcionará.
+</p>
+<p>Supongamos que tenemos otra subred, <b>10.3.0.0/16</b> (que comprende todas las direcciones  10.3.*.*), en la interfaz <b>eth1</b>. Añadimos las mismas reglas que antes, además de:
+</p>
+<pre># iptables -A fw-interfaces -i eth1 -j ACCEPT
+# iptables -t nat -A POSTROUTING -s 10.3.0.0/16 -o ppp0 -j MASQUERADE
+</pre>
+<p>El último paso es activar <a href="../en/Internet_sharing.html#Enable_packet_forwarding" title="Internet sharing">activar el reenvío de paquetes de red</a> (si no está ya activado):
+</p>
+<p>Las máquinas de estas subredes pueden ahora utilizar su nueva máquina NAT como su puerta de enlace. Tenga en cuenta que es posible que desee configurar un servidor DNS y <a href="../es/Network_configuration.html#DHCP" class="mw-redirect" title="DHCP (Español)">DHCP</a> como <a href="../es/Dnsmasq.html" title="Dnsmasq (Español)">dnsmasq</a> o una combinación de <a href="../es/BIND.html" title="BIND (Español)">BIND</a> y <a href="../en/Dhcpd.html" title="Dhcpd">dhcpd</a> para simplificar la configuración de red en la resolución de DNS en los equipos clientes. Este no es el tema de esta guía.
+</p>
+<h4><span class="mw-headline" id="Configurar_la_cadena_PREROUTING">Configurar la cadena PREROUTING</span></h4>
+<p>A veces, queremos cambiar la dirección de un paquete entrante de la puerta de entrada a una máquina de la LAN. Para ello, utilizamos la cadena <b>fw-open</b> definida antes, así como la cadena <b>PREROUTING</b> de la tabla <b>nat</b>.
+</p>
+<p>Daremos dos ejemplos sencillos: en primer lugar, queremos cambiar todos los paquetes entrantes SSH (puerto 22) al servidor ssh en la máquina <b>192.168.0.5</b>:
+</p>
+<pre># iptables -t nat -A PREROUTING -i ppp0 -p tcp --dport 22 -j DNAT --to 192.168.0.5
+# iptables -A fw-open -d 192.168.0.5 -p tcp --dport 22 -j ACCEPT
+</pre>
+<p>El segundo ejemplo le mostrará cómo cambiar los paquetes a un puerto diferente del puerto de entrada. Queremos cambiar cualquier conexión entrante en el puerto <b>8000</b> en nuestro servidor web <b>192.168.0.6</b>, al puerto <b>80</b>:
+</p>
+<pre># iptables -t nat -A PREROUTING -i ppp0 -p tcp --dport 8000 -j DNAT --to 192.168.0.6:80
+# iptables -A fw-open -d 192.168.0.6 -p tcp --dport 80 -j ACCEPT
+</pre>
+<p>La misma configuración también funciona con los paquetes UDP.
+</p>
+<h3><span class="mw-headline" id="Guardar_las_reglas_2">Guardar las reglas</span></h3>
+<p>Guarde las reglas con:
+</p>
+<pre># iptables-save &gt; /etc/iptables/iptables.rules
+</pre>
+<p>Esto supone que ha seguido los pasos <a href="#Guardar_las_reglas">anteriores</a> para activar el servicio de systemd <b>iptables</b>.
+</p>
+<h2>
+<span id="V.C3.A9ase_tambi.C3.A9n"></span><span class="mw-headline" id="Véase_también">Véase también</span>
+</h2>
+<ul>
+<li><a rel="nofollow" class="external text" href="https://www.webhostingtalk.com/showthread.php?t=456571">Methods to block SSH attacks</a></li>
+<li><a rel="nofollow" class="external text" href="https://www.ducea.com/2006/06/28/using-iptables-to-block-brute-force-attacks/">Using iptables to block brute force attacks</a></li>
+<li><a rel="nofollow" class="external text" href="https://linuxconfig.org/collection-of-basic-linux-firewall-iptables-rules">20 Iptables Examples For New SysAdmins</a></li>
+<li><a rel="nofollow" class="external text" href="https://www.thegeekstuff.com/2011/06/iptables-rules-examples/">25 Most Frequently Used Linux IPTables Rules Examples</a></li>
+</ul>
+</div>
+</div>
+					<div id="catlinks" class="catlinks" data-mw="interface"><div id="mw-normal-catlinks" class="mw-normal-catlinks">
+<a href="../Special:Categories.html" title="Special:Categories">Category</a>: <ul><li><a href="../es/Category:Firewalls.html" title="Category:Firewalls (Español)">Firewalls (Español)</a></li></ul>
+</div></div>
+				</div>
+			</main>
+			
+		</div>
+		<div class="mw-footer-container">
+			
+<footer id="footer" class="mw-footer" style="margin: 0">
+	<ul id="footer-info">
+	<li data-nosnippet="">Retrieved from "<a dir="ltr" href="https://wiki.archlinux.org/index.php?title=Simple_stateful_firewall_(Espa%C3%B1ol)&amp;oldid=765473">https://wiki.archlinux.org/index.php?title=Simple_stateful_firewall_(Español)&amp;oldid=765473</a>"</li>
+<li id="footer-info-lastmod"> This page was last edited on 28 January 2023, at 01:55.</li>
+	<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+<br>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="https://terms.archlinux.org/docs/privacy-policy/">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="../en/ArchWiki:About.html">About ArchWiki</a></li>
+	<li id="footer-places-disclaimers"><a href="../en/ArchWiki:General_disclaimer.html">Disclaimers</a></li>
+	<li id="footer-places-archwiki-code-of-conduct"><a href="https://terms.archlinux.org/docs/code-of-conduct/" class="extiw" title="archlinux-service-agreements:code-of-conduct">Code of conduct</a></li>
+	<li id="footer-places-archwiki-terms-of-service"><a href="https://terms.archlinux.org/docs/terms-of-service/" class="extiw" title="archlinux-service-agreements:terms-of-service">Terms of service</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-copyrightico"><a href="https://www.gnu.org/copyleft/fdl.html" class="cdx-button cdx-button--fake-button cdx-button--size-large cdx-button--fake-button--enabled"><img src="/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" loading="lazy"></a></li>
+	<li id="footer-poweredbyico"><img src="/resources/assets/poweredby_mediawiki.svg" width="88" height="31" loading="lazy"></li>
+</ul>
+
+</footer>
+
+		</div>
+	</div> 
+</div> 
+<div class="vector-settings" id="p-dock-bottom">
+	<ul></ul>
+</div>
+</body>
+</html>

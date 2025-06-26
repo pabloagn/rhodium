@@ -1,0 +1,54 @@
+<h1>hping3</h1>
+
+<blockquote><p>Utilidad de ping avanzada que soporta protocolos TCP, UDP y raw IP.
+Mejor correrla con privilegios elevados.
+Más información: <a href="https://github.com/antirez/hping">https://github.com/antirez/hping</a>.</p></blockquote>
+
+<ul>
+<li>Ping a un destino con 4 solicitudes ping ICMP:</li>
+</ul>
+
+
+<p><code>hping3 --icmp --count {{4}} {{ip_o_nombre_de_servidor}}</code></p>
+
+<ul>
+<li>Ping a una dirección IP sobre UDP en el puerto 80:</li>
+</ul>
+
+
+<p><code>hping3 --udp --destport {{80}} --syn {{ip_o_nombre_de_servidor}}</code></p>
+
+<ul>
+<li>Escanea el puerto TCP 80, haciéndolo desde el puerto de origen local 5090:</li>
+</ul>
+
+
+<p><code>hping3 --verbose --syn --destport {{80}} --baseport {{5090}} {{ip_o_nombre_de_servidor}}</code></p>
+
+<ul>
+<li>Traceroute utilizando un escaneado TCP a un puerto de destino específico:</li>
+</ul>
+
+
+<p><code>hping3 --traceroute --verbose --syn --destport {{80}} {{ip_o_nombre_de_servidor}}</code></p>
+
+<ul>
+<li>Escanea un conjunto de puertos TCP en una dirección IP específica:</li>
+</ul>
+
+
+<p><code>hping3 --scan {{80,3000,9000}} --syn {{ip_o_nombre_de_servidor}}</code></p>
+
+<ul>
+<li>Realiza un escaneado TCP ACK para comprobar si un equipo dado está vivo:</li>
+</ul>
+
+
+<p><code>hping3 --count {{2}} --verbose --destport {{80}} --ack {{ip_o_nombre_de_servidor}}</code></p>
+
+<ul>
+<li>Realiza una prueba de carga en el puerto 80:</li>
+</ul>
+
+
+<p><code>hping3 --flood --destport {{80}} --syn {{ip_o_nombre_de_servidor}}</code></p>

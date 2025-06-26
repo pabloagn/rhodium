@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-sticky-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-0 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-disabled skin-theme-clientpref-day vector-toc-available" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>Keepalived - ArchWiki</title>
+<link rel="stylesheet" href="../ArchWikiOffline.css">
+<meta name="ResourceLoaderDynamicStyles" content="">
+<meta name="generator" content="MediaWiki 1.43.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="max-image-preview:standard">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.25, maximum-scale=5.0">
+<link rel="search" type="application/opensearchdescription+xml" href="/rest.php/v1/search" title="ArchWiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.archlinux.org/api.php?action=rsd">
+<link rel="license" href="https://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="ArchWiki Atom feed" href="/index.php?title=Special:RecentChanges&amp;feed=atom">
+</head>
+<body class="skin--responsive skin-vector skin-vector-search-vue mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Keepalived rootpage-Keepalived skin-vector-2022 action-view">
+<a class="mw-jump-link" href="#bodyContent">Jump to content</a>
+<div class="vector-header-container">
+	</div>
+<div class="mw-page-container">
+	<div class="mw-page-container-inner">
+		<div class="vector-column-start">
+			<div class="vector-main-menu-container">
+		</div>
+	<div class="vector-sticky-pinned-container">
+				<nav id="mw-panel-toc" aria-label="Contents" data-event-name="ui.sidebar-toc" class="mw-table-of-contents-container vector-toc-landmark">
+					<div id="vector-toc-pinned-container" class="vector-pinned-container">
+					<div id="vector-toc" class="vector-toc vector-pinnable-element">
+	<div class="vector-pinnable-header vector-toc-pinnable-header vector-pinnable-header-pinned" data-feature-name="toc-pinned" data-pinnable-element-id="vector-toc">
+	<h2 class="vector-pinnable-header-label">Contents</h2>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-toc.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-toc.unpin">hide</button>
+</div>
+
+
+	<ul class="vector-toc-contents" id="mw-panel-toc-list">
+		<li id="toc-mw-content-text" class="vector-toc-list-item vector-toc-level-1">
+			<a href="#" class="vector-toc-link">
+				<div class="vector-toc-text">Beginning</div>
+			</a>
+		</li>
+		<li id="toc-Installation" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Installation">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">1</span>
+				<span>Installation</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Installation-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Configuration" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Configuration">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">2</span>
+				<span>Configuration</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Configuration-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Configuration subsection</span>
+			</button>
+		
+		<ul id="toc-Configuration-sublist" class="vector-toc-list">
+			<li id="toc-Master_and_backup_failover_setup" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Master_and_backup_failover_setup">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1</span>
+					<span>Master and backup failover setup</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Master_and_backup_failover_setup-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Failover_setup_with_monitoring" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Failover_setup_with_monitoring">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2</span>
+					<span>Failover setup with monitoring</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Failover_setup_with_monitoring-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Failover_with_load-balancing" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Failover_with_load-balancing">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.3</span>
+					<span>Failover with load-balancing</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Failover_with_load-balancing-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Security_considerations" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Security_considerations">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">3</span>
+				<span>Security considerations</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Security_considerations-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-See_also" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#See_also">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">4</span>
+				<span>See also</span>
+			</div>
+		</a>
+		
+		<ul id="toc-See_also-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+</ul>
+</div>
+
+					</div>
+		</nav>
+			</div>
+		</div>
+		<div class="mw-content-container">
+			<main id="content" class="mw-body" style="margin: 0">
+				<header class="mw-body-header vector-page-titlebar">
+					<nav aria-label="Contents" class="vector-toc-landmark">
+						
+<div id="vector-page-titlebar-toc" class="vector-dropdown vector-page-titlebar-toc vector-button-flush-left">
+	<input type="checkbox" id="vector-page-titlebar-toc-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-page-titlebar-toc" class="vector-dropdown-checkbox " aria-label="Toggle the table of contents">
+	<label id="vector-page-titlebar-toc-label" for="vector-page-titlebar-toc-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"><span class="vector-icon mw-ui-icon-listBullet mw-ui-icon-wikimedia-listBullet"></span>
+
+<span class="vector-dropdown-label-text">Toggle the table of contents</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+							<div id="vector-page-titlebar-toc-unpinned-container" class="vector-unpinned-container">
+			</div>
+		
+	</div>
+</div>
+
+					</nav>
+					<h1 id="firstHeading" class="firstHeading mw-first-heading"><span class="mw-page-title-main">Keepalived</span></h1>
+				</header>
+				<div class="vector-column-end">
+					<div class="vector-sticky-pinned-container">
+						<nav class="vector-page-tools-landmark" aria-label="Page tools">
+							<div id="vector-page-tools-pinned-container" class="vector-pinned-container">
+				
+							</div>
+		</nav>
+						<nav class="vector-appearance-landmark" aria-label="Appearance">
+							<div id="vector-appearance-pinned-container" class="vector-pinned-container">
+				<div id="vector-appearance" class="vector-appearance vector-pinnable-element">
+	<div class="vector-pinnable-header vector-appearance-pinnable-header vector-pinnable-header-pinned" data-feature-name="appearance-pinned" data-pinnable-element-id="vector-appearance" data-pinned-container-id="vector-appearance-pinned-container" data-unpinned-container-id="vector-appearance-unpinned-container">
+	<div class="vector-pinnable-header-label">Appearance</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-appearance.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-appearance.unpin">hide</button>
+</div>
+
+
+</div>
+
+							</div>
+		</nav>
+					</div>
+				</div>
+				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container>
+					<div class="vector-body-before-content">
+							<div class="mw-indicators">
+		</div>
+
+						<div id="siteSub" class="noprint">From ArchWiki</div>
+					</div>
+					<div id="contentSub"><div id="mw-content-subtitle"></div></div>
+					
+					
+					<div id="mw-content-text" class="mw-body-content">
+<div class="mw-content-ltr mw-parser-output" lang="en" dir="ltr">
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../File:Tango-view-fullscreen.svg" decoding="async" width="48" height="48" class="mw-file-element"></span></span><b>This article or section needs expansion.</b></p>
+<div>
+<b>Reason:</b> Add example configuration for failover with HAproxy as load balancer. (Discuss in <a rel="nofollow" class="external text" href="../en/Talk:Keepalived.html">Talk:Keepalived</a>)</div>
+</div>
+<p><a rel="nofollow" class="external text" href="https://www.keepalived.org/">Keepalived</a> is a failover and monitoring daemon for Linux virtual server (LVS) clusters that provides high availability functionality and load balancing using the Virtual Router Redundancy Protocol (VRRP).
+</p>
+<meta property="mw:PageProp/toc">
+<h2><span class="mw-headline" id="Installation">Installation</span></h2>
+<p><a href="../en/Help:Reading.html#Installation_of_packages" class="mw-redirect" title="Install">Install</a> the <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=keepalived">keepalived</a></span> package.
+</p>
+<p><a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Enable">Enable</a> <code>keepalived.service</code>.
+</p>
+<h2><span class="mw-headline" id="Configuration">Configuration</span></h2>
+<p>The service is configured in <code>/etc/keepalived/keepalived.conf</code>.
+</p>
+<h3><span class="mw-headline" id="Master_and_backup_failover_setup">Master and backup failover setup</span></h3>
+<p>The following provides a basic configuration to setup a high availability cluster with two servers/routers sharing a virtual IP address. Both need to be running keepalived. 
+</p>
+<p>On host A:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/keepalived/keepalived.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">vrrp_instance VI_1 {
+    state MASTER
+    interface eth0
+    virtual_router_id 101
+    priority 255
+    advert_int 1
+    authentication {
+        auth_type PASS
+        auth_pass pass1234 
+    }
+    virtual_ipaddress {
+        172.16.0.100
+    }
+}
+</pre>
+<p>On host B:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/keepalived/keepalived.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">vrrp_instance VI_1 {
+    state BACKUP
+    interface eth0
+    virtual_router_id 101
+    priority 150
+    advert_int 1
+    authentication {
+        auth_type PASS
+        auth_pass pass1234
+    }
+    virtual_ipaddress {
+        172.16.0.100
+    }
+}
+</pre>
+<p>The state sets the initial role of the host when the service is started and before multicast advertisements are processed to determine the host with the highest priority which will take the master role. This setup means that the host A with the higher priority will manage the VIP (virtual IP address) and only if host A stops responding will host B take over the VIP. The default transition time until takeover is one second.
+</p>
+<h3><span class="mw-headline" id="Failover_setup_with_monitoring">Failover setup with monitoring</span></h3>
+<p>The following provides a failover cluster for service (sshd) running on the same hosts as keepalived.
+</p>
+<p>This setup provides a more dynamic cluster for the sshd service running on the failover host itself. Both servers start in the backup state and the nopreempt option allows the server with the lower priority to keep the master role even when the server with the higher priority returns after a failure. This prevents the interruption of connections to the VIP when the former master server comes back alive. The configuration also includes process tracking to reduce the priority of a server when the target service crashes. Since the weight option in the process section is omitted, the server enters the failed state as soon as the tracked process is no longer available and the delay timer has run out.
+</p>
+<p>On host A:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/keepalived/keepalived.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">global_defs {
+   notification_email {
+     admin@example.net
+   }
+   notification_email_from lb1@example.net
+   smtp_server mail.example.net
+   smtp_connect_timeout 30
+}
+
+# enter failed state when the sshd process is down
+vrrp_track_process track_sshd {
+    process sshd
+    delay 1
+}
+
+vrrp_instance VI_1 {
+    state BACKUP
+    nopreempt
+    interface eth0
+    virtual_router_id 101
+    priority 200
+    advert_int 1
+    authentication {
+        auth_type AH
+        auth_pass key12345
+    }
+    virtual_ipaddress {
+        172.16.0.100
+    }
+    track_process {
+        track_sshd
+    }
+    smtp_alert
+}
+</pre>
+<p>On host B:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/keepalived/keepalived.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">global_defs {
+   notification_email {
+     admin@example.net
+   }
+   notification_email_from lb2@example.net
+   smtp_server mail.example.net
+   smtp_connect_timeout 30
+}
+
+# enter failed state when the sshd process is down
+vrrp_track_process track_sshd {
+    process sshd
+    delay 1
+}
+
+vrrp_instance VI_1 {
+    state BACKUP
+    nopreempt
+    interface eth0
+    virtual_router_id 101
+    priority 150
+    advert_int 1
+    authentication {
+        auth_type AH
+        auth_pass key12345
+    }
+    virtual_ipaddress {
+        172.16.0.100
+    }
+    track_process {
+        track_sshd
+    }
+    smtp_alert
+}
+</pre>
+<h3><span class="mw-headline" id="Failover_with_load-balancing">Failover with load-balancing</span></h3>
+<p>Keepalived also provides load balancing with a number of possible algorithms (see <span class="plainlinks archwiki-template-man" title="$ man 5 keepalived.conf"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/keepalived.conf.5">keepalived.conf(5)</a></span>).
+</p>
+<p>This would be a simple example for HTTP load balancing that can be added to the above configuration:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/keepalived/keepalived.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">virtual_server 172.16.0.100 80 {
+    delay_loop 6
+    lvs_sched rr
+    lvs_method NAT
+    protocol TCP
+
+    real_server 172.16.1.20 80 {
+        TCP_CHECK {
+                connect_timeout 10
+        }
+    }
+    real_server 172.16.1.21 80 {
+        TCP_CHECK {
+                connect_timeout 10
+        }
+    }
+    real_server 172.16.1.22 80 {
+        TCP_CHECK {
+                connect_timeout 10
+        }
+    }
+    real_server 172.16.1.23 80 {
+        TCP_CHECK {
+                connect_timeout 10
+        }
+    }
+}
+</pre>
+<p>Alternatively, keepalived can also be used for failover with <a href="../en/HAproxy.html" title="HAproxy">HAproxy</a> acting as the loadbalancer.
+</p>
+<h2><span class="mw-headline" id="Security_considerations">Security considerations</span></h2>
+<p>The VRRP protocol used by keepalived does not provide significant security against attackers who are already on the same subnet. The main benefit of using authentication in this service is to protect against accidentally adding servers that disrupt an existing cluster. When using <code>auth_type PASS</code>, the password is sent in plaintext over the local subnet with every multicast packet. Using <code>auth_type AH</code> (IP Authentication Header) will provide slightly better resilience against attacks but basic disruption and attacks such as ARP spoofing are still possible. Use network restrictions to protect the VRRP traffic if security is a high priority for you, e.g. use an isolated subnet for the cluster and block VRRP traffic from other networks in your firewall.
+</p>
+<h2><span class="mw-headline" id="See_also">See also</span></h2>
+<ul>
+<li><a rel="nofollow" class="external text" href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/load_balancer_administration/index">Load Balancer Administration</a></li>
+<li><a rel="nofollow" class="external text" href="https://louwrentius.com/configuring-attacking-and-securing-vrrp-on-linux.html">Configuring, Attacking and Securing VRRP on Linux</a></li>
+</ul>
+</div>
+</div>
+					<div id="catlinks" class="catlinks" data-mw="interface">
+<div id="mw-normal-catlinks" class="mw-normal-catlinks">
+<a href="../Special:Categories.html" title="Special:Categories">Category</a>: <ul><li><a href="../en/Category:Networking.html" title="Category:Networking">Networking</a></li></ul>
+</div>
+<div id="mw-hidden-catlinks" class="mw-hidden-catlinks mw-hidden-cats-hidden">Hidden category: <ul><li><a href="../en/Category:Pages_or_sections_flagged_with_Template:Expansion.html" title="Category:Pages or sections flagged with Template:Expansion">Pages or sections flagged with Template:Expansion</a></li></ul>
+</div>
+</div>
+				</div>
+			</main>
+			
+		</div>
+		<div class="mw-footer-container">
+			
+<footer id="footer" class="mw-footer" style="margin: 0">
+	<ul id="footer-info">
+	<li data-nosnippet="">Retrieved from "<a dir="ltr" href="https://wiki.archlinux.org/index.php?title=Keepalived&amp;oldid=803300">https://wiki.archlinux.org/index.php?title=Keepalived&amp;oldid=803300</a>"</li>
+<li id="footer-info-lastmod"> This page was last edited on 15 March 2024, at 15:45.</li>
+	<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+<br>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="https://terms.archlinux.org/docs/privacy-policy/">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="../en/ArchWiki:About.html">About ArchWiki</a></li>
+	<li id="footer-places-disclaimers"><a href="../en/ArchWiki:General_disclaimer.html">Disclaimers</a></li>
+	<li id="footer-places-archwiki-code-of-conduct"><a href="https://terms.archlinux.org/docs/code-of-conduct/" class="extiw" title="archlinux-service-agreements:code-of-conduct">Code of conduct</a></li>
+	<li id="footer-places-archwiki-terms-of-service"><a href="https://terms.archlinux.org/docs/terms-of-service/" class="extiw" title="archlinux-service-agreements:terms-of-service">Terms of service</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-copyrightico"><a href="https://www.gnu.org/copyleft/fdl.html" class="cdx-button cdx-button--fake-button cdx-button--size-large cdx-button--fake-button--enabled"><img src="/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" loading="lazy"></a></li>
+	<li id="footer-poweredbyico"><img src="/resources/assets/poweredby_mediawiki.svg" width="88" height="31" loading="lazy"></li>
+</ul>
+
+</footer>
+
+		</div>
+	</div> 
+</div> 
+<div class="vector-settings" id="p-dock-bottom">
+	<ul></ul>
+</div>
+</body>
+</html>

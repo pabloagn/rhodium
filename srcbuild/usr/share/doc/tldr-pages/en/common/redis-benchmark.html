@@ -1,0 +1,53 @@
+<h1>redis-benchmark</h1>
+
+<blockquote><p>Benchmark a Redis server.
+More information: <a href="https://redis.io/docs/latest/operate/oss_and_stack/management/optimization/benchmarks/">https://redis.io/docs/latest/operate/oss_and_stack/management/optimization/benchmarks/</a>.</p></blockquote>
+
+<ul>
+<li>Run full benchmark:</li>
+</ul>
+
+
+<p><code>redis-benchmark</code></p>
+
+<ul>
+<li>Run benchmark on a specific Redis server:</li>
+</ul>
+
+
+<p><code>redis-benchmark -h {{host}} -p {{port}} -a {{password}}</code></p>
+
+<ul>
+<li>Run a subset of tests with default 100000 requests:</li>
+</ul>
+
+
+<p><code>redis-benchmark -h {{host}} -p {{port}} -t {{set,lpush}} -n {{100000}}</code></p>
+
+<ul>
+<li>Run with a specific script:</li>
+</ul>
+
+
+<p><code>redis-benchmark -n {{100000}} script load "{{redis.call('set', 'foo', 'bar')}}"</code></p>
+
+<ul>
+<li>Run benchmark by using 100000 [r]andom keys:</li>
+</ul>
+
+
+<p><code>redis-benchmark -t {{set}} -r {{100000}}</code></p>
+
+<ul>
+<li>Run benchmark by using a [P]ipelining of 16 commands:</li>
+</ul>
+
+
+<p><code>redis-benchmark -n {{1000000}} -t {{set,get}} -P {{16}}</code></p>
+
+<ul>
+<li>Run benchmark [q]uietly and only show query per seconds result:</li>
+</ul>
+
+
+<p><code>redis-benchmark -q</code></p>

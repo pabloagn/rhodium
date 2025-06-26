@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-sticky-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-0 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-disabled skin-theme-clientpref-day vector-toc-available" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>Windows PE - ArchWiki</title>
+<link rel="stylesheet" href="../ArchWikiOffline.css">
+<meta name="ResourceLoaderDynamicStyles" content="">
+<meta name="generator" content="MediaWiki 1.43.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="max-image-preview:standard">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.25, maximum-scale=5.0">
+<link rel="search" type="application/opensearchdescription+xml" href="/rest.php/v1/search" title="ArchWiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.archlinux.org/api.php?action=rsd">
+<link rel="license" href="https://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="ArchWiki Atom feed" href="/index.php?title=Special:RecentChanges&amp;feed=atom">
+</head>
+<body class="skin--responsive skin-vector skin-vector-search-vue mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Windows_PE rootpage-Windows_PE skin-vector-2022 action-view">
+<a class="mw-jump-link" href="#bodyContent">Jump to content</a>
+<div class="vector-header-container">
+	</div>
+<div class="mw-page-container">
+	<div class="mw-page-container-inner">
+		<div class="vector-column-start">
+			<div class="vector-main-menu-container">
+		</div>
+	<div class="vector-sticky-pinned-container">
+				<nav id="mw-panel-toc" aria-label="Contents" data-event-name="ui.sidebar-toc" class="mw-table-of-contents-container vector-toc-landmark">
+					<div id="vector-toc-pinned-container" class="vector-pinned-container">
+					<div id="vector-toc" class="vector-toc vector-pinnable-element">
+	<div class="vector-pinnable-header vector-toc-pinnable-header vector-pinnable-header-pinned" data-feature-name="toc-pinned" data-pinnable-element-id="vector-toc">
+	<h2 class="vector-pinnable-header-label">Contents</h2>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-toc.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-toc.unpin">hide</button>
+</div>
+
+
+	<ul class="vector-toc-contents" id="mw-panel-toc-list">
+		<li id="toc-mw-content-text" class="vector-toc-list-item vector-toc-level-1">
+			<a href="#" class="vector-toc-link">
+				<div class="vector-toc-text">Beginning</div>
+			</a>
+		</li>
+		<li id="toc-Creating_a_bootable_Windows_PE_image" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Creating_a_bootable_Windows_PE_image">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">1</span>
+				<span>Creating a bootable Windows PE image</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Creating_a_bootable_Windows_PE_image-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Creating a bootable Windows PE image subsection</span>
+			</button>
+		
+		<ul id="toc-Creating_a_bootable_Windows_PE_image-sublist" class="vector-toc-list">
+			<li id="toc-Obtain_a_Windows_ISO_or_WAIK_image" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Obtain_a_Windows_ISO_or_WAIK_image">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.1</span>
+					<span>Obtain a Windows ISO or WAIK image</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Obtain_a_Windows_ISO_or_WAIK_image-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Prepare_a_bootable_Windows_PE_ISO" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Prepare_a_bootable_Windows_PE_ISO">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.2</span>
+					<span>Prepare a bootable Windows PE ISO</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Prepare_a_bootable_Windows_PE_ISO-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Prepare_bootable_Windows_PE_media_for_UEFI_systems" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Prepare_bootable_Windows_PE_media_for_UEFI_systems">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.3</span>
+					<span>Prepare bootable Windows PE media for UEFI systems</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Prepare_bootable_Windows_PE_media_for_UEFI_systems-sublist" class="vector-toc-list">
+				<li id="toc-Option_1:_Create_an_ISO_file_for_UEFI_systems" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Option_1:_Create_an_ISO_file_for_UEFI_systems">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.3.1</span>
+					<span>Option 1: Create an ISO file for UEFI systems</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Option_1:_Create_an_ISO_file_for_UEFI_systems-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Option_2:_Create_an_USB_key_for_UEFI_systems" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Option_2:_Create_an_USB_key_for_UEFI_systems">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.3.2</span>
+					<span>Option 2: Create an USB key for UEFI systems</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Option_2:_Create_an_USB_key_for_UEFI_systems-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Booting_Windows_PE" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Booting_Windows_PE">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">2</span>
+				<span>Booting Windows PE</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Booting_Windows_PE-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Booting Windows PE subsection</span>
+			</button>
+		
+		<ul id="toc-Booting_Windows_PE-sublist" class="vector-toc-list">
+			<li id="toc-In_virtual_machine" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#In_virtual_machine">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1</span>
+					<span>In virtual machine</span>
+				</div>
+			</a>
+			
+			<ul id="toc-In_virtual_machine-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-From_USB_key" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#From_USB_key">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2</span>
+					<span>From USB key</span>
+				</div>
+			</a>
+			
+			<ul id="toc-From_USB_key-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-From_CD" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#From_CD">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.3</span>
+					<span>From CD</span>
+				</div>
+			</a>
+			
+			<ul id="toc-From_CD-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-From_Network" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#From_Network">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.4</span>
+					<span>From Network</span>
+				</div>
+			</a>
+			
+			<ul id="toc-From_Network-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Installing_Windows_from_Windows_PE" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Installing_Windows_from_Windows_PE">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">3</span>
+				<span>Installing Windows from Windows PE</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Installing_Windows_from_Windows_PE-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Tips_and_tricks" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Tips_and_tricks">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">4</span>
+				<span>Tips and tricks</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Tips_and_tricks-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Tips and tricks subsection</span>
+			</button>
+		
+		<ul id="toc-Tips_and_tricks-sublist" class="vector-toc-list">
+			<li id="toc-Update_Intel_Management_Engine_firmware" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Update_Intel_Management_Engine_firmware">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.1</span>
+					<span>Update Intel Management Engine firmware</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Update_Intel_Management_Engine_firmware-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Custom_Windows_PE_images" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Custom_Windows_PE_images">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.2</span>
+					<span>Custom Windows PE images</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Custom_Windows_PE_images-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Troubleshooting" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Troubleshooting">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">5</span>
+				<span>Troubleshooting</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Troubleshooting-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Troubleshooting subsection</span>
+			</button>
+		
+		<ul id="toc-Troubleshooting-sublist" class="vector-toc-list">
+			<li id="toc-System_error_58_has_occurred._The_specified_server_cannot_perform_the_requested_operation" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#System_error_58_has_occurred._The_specified_server_cannot_perform_the_requested_operation">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.1</span>
+					<span>System error 58 has occurred. The specified server cannot perform the requested operation</span>
+				</div>
+			</a>
+			
+			<ul id="toc-System_error_58_has_occurred._The_specified_server_cannot_perform_the_requested_operation-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-See_also" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#See_also">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">6</span>
+				<span>See also</span>
+			</div>
+		</a>
+		
+		<ul id="toc-See_also-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+</ul>
+</div>
+
+					</div>
+		</nav>
+			</div>
+		</div>
+		<div class="mw-content-container">
+			<main id="content" class="mw-body" style="margin: 0">
+				<header class="mw-body-header vector-page-titlebar">
+					<nav aria-label="Contents" class="vector-toc-landmark">
+						
+<div id="vector-page-titlebar-toc" class="vector-dropdown vector-page-titlebar-toc vector-button-flush-left">
+	<input type="checkbox" id="vector-page-titlebar-toc-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-page-titlebar-toc" class="vector-dropdown-checkbox " aria-label="Toggle the table of contents">
+	<label id="vector-page-titlebar-toc-label" for="vector-page-titlebar-toc-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"><span class="vector-icon mw-ui-icon-listBullet mw-ui-icon-wikimedia-listBullet"></span>
+
+<span class="vector-dropdown-label-text">Toggle the table of contents</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+							<div id="vector-page-titlebar-toc-unpinned-container" class="vector-unpinned-container">
+			</div>
+		
+	</div>
+</div>
+
+					</nav>
+					<h1 id="firstHeading" class="firstHeading mw-first-heading"><span class="mw-page-title-main">Windows PE</span></h1>
+							
+<div id="p-lang-btn" class="vector-dropdown mw-portlet mw-portlet-lang">
+	<input type="checkbox" id="p-lang-btn-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-p-lang-btn" class="vector-dropdown-checkbox mw-interlanguage-selector" aria-label="Go to an article in another language. Available in 3 languages">
+	<label id="p-lang-btn-label" for="p-lang-btn-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--action-progressive mw-portlet-lang-heading-3" aria-hidden="true"><span class="vector-icon mw-ui-icon-language-progressive mw-ui-icon-wikimedia-language-progressive"></span>
+
+<span class="vector-dropdown-label-text">3 languages</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+		<div class="vector-menu-content">
+			
+			<ul class="vector-menu-content-list">
+				
+				<li class="interlanguage-link interwiki-ja mw-list-item"><a href="https://wiki.archlinux.jp/index.php/Windows_PE" title="Windows PE – 日本語" lang="ja" hreflang="ja" data-title="Windows PE" data-language-autonym="日本語" data-language-local-name="日本語" class="interlanguage-link-target"><span>日本語</span></a></li>
+<li class="interlanguage-link interwiki-ru mw-list-item"><a href="../ru/Windows_PE.html" title="Windows PE – русский" lang="ru" hreflang="ru" data-title="Windows PE" data-language-autonym="Русский" data-language-local-name="русский" class="interlanguage-link-target"><span>Русский</span></a></li>
+<li class="interlanguage-link interwiki-zh-hans mw-list-item"><a href="https://wiki.archlinuxcn.org/wiki/Windows_PE" title="Windows PE – 中文（简体）" lang="zh-Hans" hreflang="zh-Hans" data-title="Windows PE" data-language-autonym="中文（简体）" data-language-local-name="中文（简体）" class="interlanguage-link-target"><span>中文（简体）</span></a></li>
+			</ul>
+			
+		</div>
+
+	</div>
+</div>
+</header>
+				<div class="vector-column-end">
+					<div class="vector-sticky-pinned-container">
+						<nav class="vector-page-tools-landmark" aria-label="Page tools">
+							<div id="vector-page-tools-pinned-container" class="vector-pinned-container">
+				
+							</div>
+		</nav>
+						<nav class="vector-appearance-landmark" aria-label="Appearance">
+							<div id="vector-appearance-pinned-container" class="vector-pinned-container">
+				<div id="vector-appearance" class="vector-appearance vector-pinnable-element">
+	<div class="vector-pinnable-header vector-appearance-pinnable-header vector-pinnable-header-pinned" data-feature-name="appearance-pinned" data-pinnable-element-id="vector-appearance" data-pinned-container-id="vector-appearance-pinned-container" data-unpinned-container-id="vector-appearance-unpinned-container">
+	<div class="vector-pinnable-header-label">Appearance</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-appearance.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-appearance.unpin">hide</button>
+</div>
+
+
+</div>
+
+							</div>
+		</nav>
+					</div>
+				</div>
+				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container>
+					<div class="vector-body-before-content">
+							<div class="mw-indicators">
+		</div>
+
+						<div id="siteSub" class="noprint">From ArchWiki</div>
+					</div>
+					<div id="contentSub"><div id="mw-content-subtitle"></div></div>
+					
+					
+					<div id="mw-content-text" class="mw-body-content">
+<div class="mw-content-ltr mw-parser-output" lang="en" dir="ltr">
+<p><a rel="nofollow" class="external text" href="https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/winpe-intro?view=windows-11">Windows PE</a> is a lightweight version of Windows intended to be used for installation of Windows Vista and later versions of Windows, as well as for system maintenance. It runs entirely from memory and can be booted from the network.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> Not to be confused with the <a href="https://en.wikipedia.org/wiki/Portable_Executable" class="extiw" title="wikipedia:Portable Executable">PE</a> binary executable format.</div>
+<p>Windows PE images are normally created in Windows using the <a rel="nofollow" class="external text" href="https://learn.microsoft.com/en-us/windows-hardware/get-started/adk-install">Windows ADK</a>. This page describes how customized Windows PE images can be created, and optionally published on the network, using an (Arch) Linux machine. This might be useful if : 
+</p>
+<ul>
+<li>you need to install Windows from the network, or boot Windows PE from the network for system administration, using an Arch Linux-based server. This may be because you do not have a Windows-based server, or you prefer using a Linux server because of its improved security and configurability, or you are already using a Linux server for other purposes.</li>
+<li>you need to run a Windows environment to run Win32 programs, you do not have a Windows machine available, and you do not want to use <a href="../en/Wine.html" title="Wine">Wine</a> or the programs will not run correctly with <a href="../en/Wine.html" title="Wine">Wine</a>.</li>
+<li>you need to <a href="#Update_Intel_Management_Engine_firmware">update firmware</a> for which your device manufacturer only provides Windows binaries.</li>
+</ul>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Warning:</strong> By downloading the Windows Automated Installation Kit, you may be bound by its license, which prevents you from, among other things, using Windows PE as a general-purpose operating system.
+</div>
+<meta property="mw:PageProp/toc">
+<h2><span class="mw-headline" id="Creating_a_bootable_Windows_PE_image">Creating a bootable Windows PE image</span></h2>
+<p>Install <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=wimlib">wimlib</a></span>.
+</p>
+<h3><span class="mw-headline" id="Obtain_a_Windows_ISO_or_WAIK_image">Obtain a Windows ISO or WAIK image</span></h3>
+<p>You need a copy of Windows installation media, in order to extract the <code>boot.wim</code> file that contains the initial copy of Windows PE, along with some boot files. Different versions of Windows contain different versions of Windows PE. For the relationship between Windows versions and Windows PE versions, refer to <a href="https://en.wikipedia.org/wiki/Windows_Preinstallation_Environment#Versions" class="extiw" title="wikipedia:Windows Preinstallation Environment">Wikipedia</a>.
+</p>
+<p>The simplest method is to download the latest <a rel="nofollow" class="external text" href="https://www.microsoft.com/en-us/software-download/windows11">Windows 11 ISO</a>.
+</p>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> 
+<ul>
+<li>For a 32-bit version of Windows PE, download a <a rel="nofollow" class="external text" href="https://www.microsoft.com/en-us/software-download/windows10ISO">Windows 10 iso</a>, as Windows 11 has dropped support for 32-bit.</li>
+<li>For versions prior to Windows 8, you can download the Windows Automated Installation Kit (WAIK) image instead. See <a rel="nofollow" class="external autonumber" href="https://www.microsoft.com/download/details.aspx?id=10333">[1]</a>, <a rel="nofollow" class="external autonumber" href="https://www.microsoft.com/download/details.aspx?id=5753">[2]</a>
+</li>
+<li>It may be possible to use <a rel="nofollow" class="external text" href="https://httpfs.sourceforge.net/">httpfs</a> to avoid downloading the entire image file.</li>
+</ul>
+</div>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Warning:</strong> Make sure to select the correct architecture depending on your target usage: either x86 (32-bit) or x64 (64-bit). Compatibility of 32-bit programs on Windows x64 is generally good, but your mileage may vary.</div>
+<h3><span class="mw-headline" id="Prepare_a_bootable_Windows_PE_ISO">Prepare a bootable Windows PE ISO</span></h3>
+<p>Mount the installation image, e.g.:
+</p>
+<pre># mount --mkdir <i>winimg</i>.iso /media/winimg
+</pre>
+<p>Use the <code>mkwinpeimg</code> script provided with <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=wimlib">wimlib</a></span> to create a bootable Windows PE ISO :
+</p>
+<pre>$ mkwinpeimg --iso --windows-dir=/media/winimg winpe.iso
+</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> If using a WAIK image, use <code>--waik-dir</code> instead of <code>--windows-dir</code>.</div>
+<p>See <span class="plainlinks archwiki-template-man" title="$ man 1 mkwinpeimg"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/mkwinpeimg.1">mkwinpeimg(1)</a></span> for more information, including the <code>--overlay</code> option to copy files into the image. You may want to do this to add additional Windows applications that you want to run in Windows PE, or to add any additional drivers that Windows PE needs. Drivers can be loaded using the <code>drvload</code> command within Windows PE.
+</p>
+<p>Unmount the source ISO:
+</p>
+<pre># umount /media/winimg
+</pre>
+<h3><span class="mw-headline" id="Prepare_bootable_Windows_PE_media_for_UEFI_systems">Prepare bootable Windows PE media for UEFI systems</span></h3>
+<p><code>mkwinpeimg</code> cannot build a bootable UEFI system natively, but the necessary UEFI boot files are included in  the Windows installation media.
+</p>
+<p>These can be used for creating a bootable USB key or a bootable ISO file for UEFI systems.
+</p>
+<p>The following steps assume that <code><i>winimg</i>.iso</code> is still mounted at <code>/media/winimg</code>.
+</p>
+<p>Create a directory <code><i>winpe_uefi</i></code> which will contain the files necessary for creating UEFI boot media.
+</p>
+<p>Mount the newly created Windows PE ISO file and copy the necessary files over to <code><i>winpe_uefi</i></code>:
+</p>
+<pre># mount --mkdir winpe.iso /media/winpe
+# cp -r /media/winpe/* <i>winpe_uefi</i>
+# cp -r /media/winimg/efi <i>winpe_uefi</i>
+</pre>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Warning:</strong> Make sure you selected an appropriate architecture for your Windows ISO image (x86 or x64). This guide has only been tested with x64, i.e. it boots using <code>/efi/boot/bootx64.efi</code>. It is unknown whether a UEFI system would boot a x86 image of Windows this way. Please update this page if you can test.</div>
+<h4><span class="mw-headline" id="Option_1:_Create_an_ISO_file_for_UEFI_systems">Option 1: Create an ISO file for UEFI systems</span></h4>
+<p>Use the following command to create a version of the ISO file which can be booted from UEFI systems:
+</p>
+<pre>$ mkisofs \
+    -no-emul-boot \
+    -b "efi/microsoft/boot/efisys.bin" \
+    -iso-level 4 \
+    -udf \
+    -joliet \
+    -disable-deep-relocation \
+    -omit-version-number \
+    -relaxed-filenames \
+    -output "winpe_uefi.iso" \
+    <i>winpe_uefi</i>
+</pre>
+<p>You can now unmount all ISO. Your <code>winpe_uefi.iso</code> file is ready to boot on UEFI systems now.
+</p>
+<h4><span class="mw-headline" id="Option_2:_Create_an_USB_key_for_UEFI_systems">Option 2: Create an USB key for UEFI systems</span></h4>
+<p>On a USB key, <a href="../en/Fdisk.html#Create_a_partition_table_and_partitions" title="Fdisk">create a GPT partition table</a> with a single partition of type <code>EFI System</code>, and format the partition <a href="../en/FAT.html#File_system_creation" title="FAT">to FAT32</a>.
+</p>
+<p>Copy the files prepared in the <code><i>winpe_uefi</i></code> directory over to the USB key:
+</p>
+<pre># mount --mkdir /dev/sd<i>X</i>1 /media/usb
+# cp -r <i>winpe_uefi</i>/* /media/usb/
+</pre>
+<p>You can now umount all ISO and the USB key, your USB key is ready to boot.
+</p>
+<h2><span class="mw-headline" id="Booting_Windows_PE">Booting Windows PE</span></h2>
+<p>After creating a bootable ISO of Windows PE (<code>winpe.iso</code>) as described in the previous section, you may want to boot Windows PE in the following ways:
+</p>
+<h3><span class="mw-headline" id="In_virtual_machine">In virtual machine</span></h3>
+<p>Run a virtual machine with <code>winpe.iso</code> attached as a CD-ROM.  Be sure to give it adequate memory, definitely more than the size of the ISO, since Windows PE runs from memory.  See <a href="../en/Category:Hypervisors.html" title="Category:Hypervisors">Category:Hypervisors</a> for a list of available virtualization software.
+</p>
+<h3><span class="mw-headline" id="From_USB_key">From USB key</span></h3>
+<p>If you have prepared a USB key for UEFI systems according to the guide above, it should just boot. It may take some time to boot (10 to 20 seconds is not uncommon, depending on your USB key) because the loader seems to copy some/all data to RAM.
+</p>
+<h3><span class="mw-headline" id="From_CD">From CD</span></h3>
+<p>Simply <a href="../en/Optical_disc_drive.html#Burning" title="Optical disc drive">burn</a> <code>winpe.iso</code> onto a CD, and you can boot from it.
+</p>
+<h3><span class="mw-headline" id="From_Network">From Network</span></h3>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../File:Merge-arrows-2.svg" decoding="async" width="36" height="40" class="mw-file-element"></span></span><b>This article or section is a candidate for merging with <a href="../en/Preboot_Execution_Environment.html" class="mw-redirect" title="PXE">PXE</a>.</b></p>
+<div>
+<b>Notes:</b> The PXE article already describes most of this stuff, no need for duplication. Just make sure that configuration file is not lost if it is necessary for windows.  Besides that everything is dupe. (Discuss in <a rel="nofollow" class="external text" href="../en/Talk:Windows_PE.html">Talk:Windows PE</a>)</div>
+</div>
+<p>Windows PE can be booted from the network using <a rel="nofollow" class="external text" href="https://wiki.syslinux.org/wiki/index.php/PXELINUX">PXELINUX</a> and its <a rel="nofollow" class="external text" href="https://wiki.syslinux.org/wiki/index.php/MEMDISK">MEMDISK</a> module on BIOS systems. For UEFI systems, <a rel="nofollow" class="external text" href="http://ipxe.org/wimboot">wimboot</a> and <a rel="nofollow" class="external text" href="https://ipxe.org">iPXE</a> can be used.
+</p>
+<p>Install <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=syslinux">syslinux</a></span> and <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=tftp-hpa">tftp-hpa</a></span>.
+</p>
+<p>Copy needed PXELINUX files to the <a href="../en/TFTP.html" class="mw-redirect" title="Tftpd server">TFTP server</a> root directory.
+</p>
+<pre># rsync -aq /usr/lib/syslinux/bios/ /var/tftpboot/
+</pre>
+<p>Put <code>winpe.iso</code> in the <a href="../en/TFTP.html" class="mw-redirect" title="Tftpd server">TFTP server</a> root directory.
+</p>
+<pre># mv winpe.iso /var/tftpboot
+</pre>
+<p>Create a <a href="../en/Syslinux.html#Configuration" title="Syslinux">configuration file</a> for PXELINUX similar to the following:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/var/tftpboot/pxelinux.cfg/default</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">UI         menu.c32
+MENU TITLE Network Boot
+TIMEOUT    50
+
+LABEL      winpe
+MENU LABEL Boot Windows PE from network
+KERNEL     /memdisk
+INITRD     winpe.iso
+APPEND     iso raw
+
+LABEL      localboot
+MENU LABEL Boot from local disk
+LOCALBOOT  0
+</pre>
+<p>Start the <a href="../en/TFTP.html" class="mw-redirect" title="Tftpd server">TFTP server</a>.
+</p>
+<p>Configure your DHCP server (such as <a href="../en/Dhcpd.html" title="Dhcpd">Dhcpd</a> or <a href="../en/Dnsmasq.html" title="Dnsmasq">Dnsmasq</a>) to point to <code>pxelinux.0</code> as the boot file, with the Linux server's IP address.  Beware: if your DHCP server is on a router, it may not be possible to do this without installing custom firmware.
+</p>
+<p>After completing the above steps, you should be able to boot Windows PE from the network.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> With the given PXELINUX configuration file, Windows PE will start by default after 5 seconds.</div>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> TFTP is not designed to be used to transfer large files, such as <code>winpe.iso</code>, which may be 118MB or more and take about 30 seconds to load.  Performance may be improved by using the <code>gpxelinux.0</code> bootloader instead of <code>pxelinux.0</code> and loading <code>winpe.iso</code> using HTTP rather than TFTP.</div>
+<h2><span class="mw-headline" id="Installing_Windows_from_Windows_PE">Installing Windows from Windows PE</span></h2>
+<p>Once booted into Windows PE, you can install Windows from an installation media.
+</p>
+<p>The installation media can be a network share (Samba). See <a href="../en/Samba.html" title="Samba">Samba</a> for seting up a Samba server on another machine on the LAN. To share the installation image mounted at <code>/media/winimg</code>, add the following share definition to <code>/etc/samba/smb.conf</code>:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/samba/smb.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[REMINST]
+browsable = true
+read only = no
+guest ok = yes
+path = /media/winimg
+</pre>
+<p>Once booted into Windows PE command prompt, run the following command to initialize the network interface, obtain the IP of the Samba server (assuming Windows PE was booted over PXE from a machine that runs the DHCP, TFTP, and Samba server, the server IP will usually be the Gateway IP), mount the share, and launch the GUI setup:
+</p>
+<pre> &gt; wpeinit
+ &gt; ipconfig
+ &gt; net use I: \\IP.ADDRESS.OF.SAMBA.SERVER\REMINST
+ &gt; I:\setup.exe
+</pre>
+<h2><span class="mw-headline" id="Tips_and_tricks">Tips and tricks</span></h2>
+<h3><span class="mw-headline" id="Update_Intel_Management_Engine_firmware">Update Intel Management Engine firmware</span></h3>
+<p>You can use Windows PE in order to install updates for firmware such as <a href="https://en.wikipedia.org/wiki/Intel_Management_Engine" class="extiw" title="wikipedia:Intel Management Engine">Intel ME</a> if your hardware manufacturer only provides Windows binaries, and you cannot update via <a href="../en/Fwupd.html" title="Fwupd">Fwupd</a>.
+</p>
+<p>You will need to download :
+</p>
+<ul>
+<li>your manufacturer's Intel ME update tool</li>
+<li>drivers for the Intel Management Engine.</li>
+</ul>
+<p>Store both extracted archives in a folder, e.g.
+</p>
+<pre><i>/vendor_files</i>
+  ├── <i>me_driver</i>
+  └── <i>update_tool</i>
+</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> You might need to use <a href="../en/Wine.html" title="Wine">Wine</a> and/or <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=cabextract">cabextract</a></span> in order to extract the drivers, according to how they are packaged.
+</div>
+<p>Proceed with <a href="#Creating_a_bootable_Windows_PE_image">#Creating a bootable Windows PE image</a> but make sure to :
+</p>
+<ul>
+<li>choose a windows PE version for which your device vendor provides Intel ME drivers, i.e. 32-bit or 64-bit.</li>
+<li>include the device drivers and update tool with <code>--overlay</code>, e.g. :</li>
+</ul>
+<pre>$ mkwinpeimg --iso --windows-dir=/media/winimg --overlay=<i>vendor_files</i> winpe.iso
+</pre>
+<p>Proceed with <a href="#Booting_Windows_PE">#Booting Windows PE</a>, then load the drivers with: 
+</p>
+<pre>X:\Windows\Systems32&gt;cd \
+X:\&gt;drvload <i>me_driver</i>\...\heci.inf
+</pre>
+<p>Finally, update the Intel ME firmware by using the update tool.
+</p>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> You can use the <a rel="nofollow" class="external text" href="https://www.intel.com/content/www/us/en/download/19392/intel-converged-security-and-management-engine-version-detection-tool-intel-csmevdt.html">Intel CSME version detection tool</a> to check for vulnerabilities.</div>
+<h3><span class="mw-headline" id="Custom_Windows_PE_images">Custom Windows PE images</span></h3>
+<p>Tools like <a rel="nofollow" class="external text" href="https://www.hirensbootcd.org/download/">Hiren's BootCD</a> and others include Windows PE and are around half the size (~2.8GB) of a full Windows ISO. They are often fuller featured boot environments and can include Internet Explorer, which may be helpful to look up <code>bcdedit</code> or <code>bootrec</code> commands to repair Windows boot manager.
+</p>
+<p>Hiren's BootCd is already bootable, it only needs to be extracted to a USB.
+</p>
+<pre>dd bs=4M if=./HBCD_PE_x64.iso of=/dev/sdX status=progress &amp;&amp; sync
+</pre>
+<p>Make sure the USB key uses a GPT partition table as described in <a href="#Prepare_bootable_Windows_PE_media_for_UEFI_systems">#Prepare bootable Windows PE media for UEFI systems</a>.
+</p>
+<h2><span class="mw-headline" id="Troubleshooting">Troubleshooting</span></h2>
+<h3><span class="mw-headline" id="System_error_58_has_occurred._The_specified_server_cannot_perform_the_requested_operation">System error 58 has occurred. The specified server cannot perform the requested operation</span></h3>
+<p>If you are getting the following error when using the <code>net use</code> command:
+</p>
+<pre>System error 58 has occurred.
+
+The specified server cannot perform the requested operation.
+</pre>
+<p>1. Make sure you have not accidentally unmounted the <code>/media/winimg</code> directory.
+</p>
+<p>2. Add a <code>map to guest</code> to <code>/etc/samba/smb.conf</code>. Add the following at the top of the file:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/samba/smb.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[global]
+map to guest = Bad User
+...
+</pre>
+<p>3. Restart the <code>smbd.service</code>.
+</p>
+<p>4. Specify any username/password in the net use command:
+</p>
+<pre>net use I: \\IP.ADDRESS.OF.SAMBA.SERVER\REMINST /user:user pass
+</pre>
+<p>This is happening because Windows 10 connects to anonymous shares by checking some username and password to see if it is able to log in, and if so it allows an anonymous connection.
+Apparently whatever part hides this from the user did not make it into the PE build.
+</p>
+<h2><span class="mw-headline" id="See_also">See also</span></h2>
+<ul>
+<li><a rel="nofollow" class="external text" href="https://technet.microsoft.com/en-us/library/cc766093(v=ws.10).aspx">Microsoft's documentation for Windows PE</a></li>
+<li><a rel="nofollow" class="external text" href="https://www.thinkwiki.org/wiki/Windows_PE">Another article about making Windows PE images on Linux</a></li>
+<li><a rel="nofollow" class="external text" href="https://serverfault.com/a/858269">Windows 10 PE Unable to map network drive anonymously</a></li>
+<li><a href="../en/Wim.html" title="Wim">Wim</a></li>
+</ul>
+</div>
+</div>
+					<div id="catlinks" class="catlinks" data-mw="interface">
+<div id="mw-normal-catlinks" class="mw-normal-catlinks">
+<a href="../Special:Categories.html" title="Special:Categories">Category</a>: <ul><li><a href="../en/Category:System_administration.html" title="Category:System administration">System administration</a></li></ul>
+</div>
+<div id="mw-hidden-catlinks" class="mw-hidden-catlinks mw-hidden-cats-hidden">Hidden category: <ul><li><a href="../en/Category:Pages_or_sections_flagged_with_Template:Merge.html" title="Category:Pages or sections flagged with Template:Merge">Pages or sections flagged with Template:Merge</a></li></ul>
+</div>
+</div>
+				</div>
+			</main>
+			
+		</div>
+		<div class="mw-footer-container">
+			
+<footer id="footer" class="mw-footer" style="margin: 0">
+	<ul id="footer-info">
+	<li data-nosnippet="">Retrieved from "<a dir="ltr" href="https://wiki.archlinux.org/index.php?title=Windows_PE&amp;oldid=828787">https://wiki.archlinux.org/index.php?title=Windows_PE&amp;oldid=828787</a>"</li>
+<li id="footer-info-lastmod"> This page was last edited on 13 March 2025, at 11:54.</li>
+	<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+<br>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="https://terms.archlinux.org/docs/privacy-policy/">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="../en/ArchWiki:About.html">About ArchWiki</a></li>
+	<li id="footer-places-disclaimers"><a href="../en/ArchWiki:General_disclaimer.html">Disclaimers</a></li>
+	<li id="footer-places-archwiki-code-of-conduct"><a href="https://terms.archlinux.org/docs/code-of-conduct/" class="extiw" title="archlinux-service-agreements:code-of-conduct">Code of conduct</a></li>
+	<li id="footer-places-archwiki-terms-of-service"><a href="https://terms.archlinux.org/docs/terms-of-service/" class="extiw" title="archlinux-service-agreements:terms-of-service">Terms of service</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-copyrightico"><a href="https://www.gnu.org/copyleft/fdl.html" class="cdx-button cdx-button--fake-button cdx-button--size-large cdx-button--fake-button--enabled"><img src="/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" loading="lazy"></a></li>
+	<li id="footer-poweredbyico"><img src="/resources/assets/poweredby_mediawiki.svg" width="88" height="31" loading="lazy"></li>
+</ul>
+
+</footer>
+
+		</div>
+	</div> 
+</div> 
+<div class="vector-settings" id="p-dock-bottom">
+	<ul></ul>
+</div>
+</body>
+</html>

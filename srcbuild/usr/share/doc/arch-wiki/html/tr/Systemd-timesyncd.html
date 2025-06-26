@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-sticky-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-0 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-disabled skin-theme-clientpref-day vector-toc-available" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>systemd-timesyncd (Türkçe) - ArchWiki</title>
+<link rel="stylesheet" href="../ArchWikiOffline.css">
+<meta name="ResourceLoaderDynamicStyles" content="">
+<meta name="generator" content="MediaWiki 1.43.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="max-image-preview:standard">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.25, maximum-scale=5.0">
+<link rel="search" type="application/opensearchdescription+xml" href="/rest.php/v1/search" title="ArchWiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.archlinux.org/api.php?action=rsd">
+<link rel="license" href="https://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="ArchWiki Atom feed" href="/index.php?title=Special:RecentChanges&amp;feed=atom">
+</head>
+<body class="skin--responsive skin-vector skin-vector-search-vue mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Systemd-timesyncd_Türkçe rootpage-Systemd-timesyncd_Türkçe skin-vector-2022 action-view">
+<a class="mw-jump-link" href="#bodyContent">Jump to content</a>
+<div class="vector-header-container">
+	</div>
+<div class="mw-page-container">
+	<div class="mw-page-container-inner">
+		<div class="vector-column-start">
+			<div class="vector-main-menu-container">
+		</div>
+	<div class="vector-sticky-pinned-container">
+				<nav id="mw-panel-toc" aria-label="Contents" data-event-name="ui.sidebar-toc" class="mw-table-of-contents-container vector-toc-landmark">
+					<div id="vector-toc-pinned-container" class="vector-pinned-container">
+					<div id="vector-toc" class="vector-toc vector-pinnable-element">
+	<div class="vector-pinnable-header vector-toc-pinnable-header vector-pinnable-header-pinned" data-feature-name="toc-pinned" data-pinnable-element-id="vector-toc">
+	<h2 class="vector-pinnable-header-label">Contents</h2>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-toc.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-toc.unpin">hide</button>
+</div>
+
+
+	<ul class="vector-toc-contents" id="mw-panel-toc-list">
+		<li id="toc-mw-content-text" class="vector-toc-list-item vector-toc-level-1">
+			<a href="#" class="vector-toc-link">
+				<div class="vector-toc-text">Beginning</div>
+			</a>
+		</li>
+		<li id="toc-Yapılandırma" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Yap%C4%B1land%C4%B1rma">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">1</span>
+				<span>Yapılandırma</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Yapılandırma-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Kullanım" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Kullan%C4%B1m">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">2</span>
+				<span>Kullanım</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Kullanım-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Kullanım subsection</span>
+			</button>
+		
+		<ul id="toc-Kullanım-sublist" class="vector-toc-list">
+			<li id="toc-Etkinleştirme_ve_başlatma" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Etkinle%C5%9Ftirme_ve_ba%C5%9Flatma">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1</span>
+					<span>Etkinleştirme ve başlatma</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Etkinleştirme_ve_başlatma-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Servis_kontrolü" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Servis_kontrol%C3%BC">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2</span>
+					<span>Servis kontrolü</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Servis_kontrolü-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Ayrıntılı_bilgi_edinme" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Ayr%C4%B1nt%C4%B1l%C4%B1_bilgi_edinme">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.3</span>
+					<span>Ayrıntılı bilgi edinme</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Ayrıntılı_bilgi_edinme-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Varsayılan_olmayan_yapılandırma_ayarlarını_görüntüleme" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Varsay%C4%B1lan_olmayan_yap%C4%B1land%C4%B1rma_ayarlar%C4%B1n%C4%B1_g%C3%B6r%C3%BCnt%C3%BCleme">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.4</span>
+					<span>Varsayılan olmayan yapılandırma ayarlarını görüntüleme</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Varsayılan_olmayan_yapılandırma_ayarlarını_görüntüleme-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Günlüğü_görüntüleme" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#G%C3%BCnl%C3%BC%C4%9F%C3%BC_g%C3%B6r%C3%BCnt%C3%BCleme">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.5</span>
+					<span>Günlüğü görüntüleme</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Günlüğü_görüntüleme-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Ayrıca_bakınız" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Ayr%C4%B1ca_bak%C4%B1n%C4%B1z">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">3</span>
+				<span>Ayrıca bakınız</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Ayrıca_bakınız-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+</ul>
+</div>
+
+					</div>
+		</nav>
+			</div>
+		</div>
+		<div class="mw-content-container">
+			<main id="content" class="mw-body" style="margin: 0">
+				<header class="mw-body-header vector-page-titlebar">
+					<nav aria-label="Contents" class="vector-toc-landmark">
+						
+<div id="vector-page-titlebar-toc" class="vector-dropdown vector-page-titlebar-toc vector-button-flush-left">
+	<input type="checkbox" id="vector-page-titlebar-toc-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-page-titlebar-toc" class="vector-dropdown-checkbox " aria-label="Toggle the table of contents">
+	<label id="vector-page-titlebar-toc-label" for="vector-page-titlebar-toc-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"><span class="vector-icon mw-ui-icon-listBullet mw-ui-icon-wikimedia-listBullet"></span>
+
+<span class="vector-dropdown-label-text">Toggle the table of contents</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+							<div id="vector-page-titlebar-toc-unpinned-container" class="vector-unpinned-container">
+			</div>
+		
+	</div>
+</div>
+
+					</nav>
+					<h1 id="firstHeading" class="firstHeading mw-first-heading">systemd-timesyncd (Türkçe)</h1>
+							
+<div id="p-lang-btn" class="vector-dropdown mw-portlet mw-portlet-lang">
+	<input type="checkbox" id="p-lang-btn-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-p-lang-btn" class="vector-dropdown-checkbox mw-interlanguage-selector" aria-label="Go to an article in another language. Available in 9 languages">
+	<label id="p-lang-btn-label" for="p-lang-btn-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--action-progressive mw-portlet-lang-heading-9" aria-hidden="true"><span class="vector-icon mw-ui-icon-language-progressive mw-ui-icon-wikimedia-language-progressive"></span>
+
+<span class="vector-dropdown-label-text">9 languages</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+		<div class="vector-menu-content">
+			
+			<ul class="vector-menu-content-list">
+				
+				<li class="interlanguage-link interwiki-de mw-list-item"><a href="https://wiki.archlinux.de/title/Systemd/systemd-timesyncd" title="Systemd/systemd-timesyncd – Deutsch" lang="de" hreflang="de" data-title="Systemd/systemd-timesyncd" data-language-autonym="Deutsch" data-language-local-name="Deutsch" class="interlanguage-link-target"><span>Deutsch</span></a></li>
+<li class="interlanguage-link interwiki-en mw-list-item"><a href="../en/Systemd-timesyncd.html" title="Systemd-timesyncd – English" lang="en" hreflang="en" data-title="Systemd-timesyncd" data-language-autonym="English" data-language-local-name="English" class="interlanguage-link-target"><span>English</span></a></li>
+<li class="interlanguage-link interwiki-es mw-list-item"><a href="../es/Systemd-timesyncd.html" title="Systemd-timesyncd – español" lang="es" hreflang="es" data-title="Systemd-timesyncd" data-language-autonym="Español" data-language-local-name="español" class="interlanguage-link-target"><span>Español</span></a></li>
+<li class="interlanguage-link interwiki-fr mw-list-item"><a href="../fr/Systemd-timesyncd.html" title="Systemd-timesyncd – français" lang="fr" hreflang="fr" data-title="Systemd-timesyncd" data-language-autonym="Français" data-language-local-name="français" class="interlanguage-link-target"><span>Français</span></a></li>
+<li class="interlanguage-link interwiki-ja mw-list-item"><a href="https://wiki.archlinux.jp/index.php/Systemd-timesyncd" title="Systemd-timesyncd – 日本語" lang="ja" hreflang="ja" data-title="Systemd-timesyncd" data-language-autonym="日本語" data-language-local-name="日本語" class="interlanguage-link-target"><span>日本語</span></a></li>
+<li class="interlanguage-link interwiki-pl mw-list-item"><a href="../pl/Systemd-timesyncd.html" title="Systemd-timesyncd – polski" lang="pl" hreflang="pl" data-title="Systemd-timesyncd" data-language-autonym="Polski" data-language-local-name="polski" class="interlanguage-link-target"><span>Polski</span></a></li>
+<li class="interlanguage-link interwiki-pt mw-list-item"><a href="../pt/Systemd-timesyncd.html" title="Systemd-timesyncd – português" lang="pt" hreflang="pt" data-title="Systemd-timesyncd" data-language-autonym="Português" data-language-local-name="português" class="interlanguage-link-target"><span>Português</span></a></li>
+<li class="interlanguage-link interwiki-ru mw-list-item"><a href="../ru/Systemd-timesyncd.html" title="Systemd-timesyncd – русский" lang="ru" hreflang="ru" data-title="Systemd-timesyncd" data-language-autonym="Русский" data-language-local-name="русский" class="interlanguage-link-target"><span>Русский</span></a></li>
+<li class="interlanguage-link interwiki-zh-hans mw-list-item"><a href="https://wiki.archlinuxcn.org/wiki/Systemd-timesyncd" title="Systemd-timesyncd – 中文（简体）" lang="zh-Hans" hreflang="zh-Hans" data-title="Systemd-timesyncd" data-language-autonym="中文（简体）" data-language-local-name="中文（简体）" class="interlanguage-link-target"><span>中文（简体）</span></a></li>
+			</ul>
+			
+		</div>
+
+	</div>
+</div>
+</header>
+				<div class="vector-column-end">
+					<div class="vector-sticky-pinned-container">
+						<nav class="vector-page-tools-landmark" aria-label="Page tools">
+							<div id="vector-page-tools-pinned-container" class="vector-pinned-container">
+				
+							</div>
+		</nav>
+						<nav class="vector-appearance-landmark" aria-label="Appearance">
+							<div id="vector-appearance-pinned-container" class="vector-pinned-container">
+				<div id="vector-appearance" class="vector-appearance vector-pinnable-element">
+	<div class="vector-pinnable-header vector-appearance-pinnable-header vector-pinnable-header-pinned" data-feature-name="appearance-pinned" data-pinnable-element-id="vector-appearance" data-pinned-container-id="vector-appearance-pinned-container" data-unpinned-container-id="vector-appearance-unpinned-container">
+	<div class="vector-pinnable-header-label">Appearance</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-appearance.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-appearance.unpin">hide</button>
+</div>
+
+
+</div>
+
+							</div>
+		</nav>
+					</div>
+				</div>
+				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container>
+					<div class="vector-body-before-content">
+							<div class="mw-indicators">
+		</div>
+
+						<div id="siteSub" class="noprint">From ArchWiki</div>
+					</div>
+					<div id="contentSub"><div id="mw-content-subtitle"></div></div>
+					
+					
+					<div id="mw-content-text" class="mw-body-content">
+<div class="mw-content-ltr mw-parser-output" lang="tr" dir="ltr">
+<p><span>
+</span>
+</p>
+<div class="archwiki-template-meta-related-articles">
+<p>İlgili makaleler</p>
+<ul>
+<li><a href="../en/Systemd-networkd.html" title="Systemd-networkd">systemd-networkd</a></li>
+<li><a href="../en/Systemd.html" title="Systemd">systemd</a></li>
+<li><a href="../en/System_time.html" title="System time">System time</a></li>
+</ul>
+</div>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Çeviri Durumu:</strong> Bu makale, <a href="../en/Systemd-timesyncd.html" title="Systemd-timesyncd">Systemd-timesyncd</a> makalesinin çevirisidir. Son çeviri tarihi (yıl-ay-gün şeklinde): 2024-08-26. Eğer makalenin İngilizce sürümünde <a rel="nofollow" class="external text" href="https://wiki.archlinux.org/index.php?title=Systemd-timesyncd&amp;diff=0&amp;oldid=814750">değişiklik</a> yapılmış ise çevirinin senkronize edilmesine yardımcı olabilirsiniz. Çevirmenliğe dair bilgi edinmek için <a rel="nofollow" class="external text" href="https://t.me/archwikiturkiye">Telegram grubumuzu</a> ziyaret edebilirsiniz. Çevrilmiş tüm makelelere <a href="../tr/ArchWiki:Translation_Team.html#%C3%87evrilmi%C5%9F_sayfalar" title="ArchWiki:Translation Team (Türkçe)">buradan erişebilirsiniz</a>. </div>
+<p><a rel="nofollow" class="external text" href="https://lists.freedesktop.org/archives/systemd-devel/2014-May/019537.html">systemd e-posta listesinden</a>:
+</p>
+<dl><dd>
+<i>systemd-timesyncd</i>, sistem saatini sistem ağında senkronize hale getirebilmek için eklenmiş bir hayalet programdır. Program bir SNTP istemcisi sağlar. <a href="../en/Chrony.html" title="Chrony">chrony</a> gibi NTP istemcilerine veya NTP referans sunucusuna kıyasla bu yöntem sadece kullanıcı tarafında hizmet sunar ve NTP'nin zorluklarıyla uğraşmaz, sadece bir sunucudan güncel saatin bilgisini edinip yerel saati o saate denk getirmeye çalışır. Eğer herhangi bir ağdaki istemcilere NTP sunmayacaksanız veya yerel donanım saatlerine bağlanmak istemiyorsanız bu basit NTP istemcisi çoğu kurulum için fazlasıyla yeterli olacaktır. Servis minimal düzeyde yetki ile çalışmaktadır, sadece ağ bağlantısı sağlandığında beraber çalışabilmesi için networkd'ye bağlanmıştır. Servis, her yeni NTP senkronizasyonu edinildiğinde mevcut saati diske kaydeder ve bunu, Raspberry Pi ve gömülü cihazlar gibi RTC'si olmayan sistemlere uyacak şekilde sistem saatini açılış sırasında düzeltmek ve her zaman doğru olmasa da zamanın tekdüze ilerlediğinden emin olmak için kullanır. Bu servisten yararlanabilmek için systemd kurulumu sırasında "systemd-timesync" adıyla yeni bir kullanıcı ve grup oluşturulmalıdır.</dd></dl>
+<meta property="mw:PageProp/toc">
+<h2>
+<span id="Yap.C4.B1land.C4.B1rma"></span><span class="mw-headline" id="Yapılandırma">Yapılandırma</span>
+</h2>
+<p><i>systemd-timesyncd</i> başlatılırken <code>/etc/systemd/timesyncd.conf</code> dizinindeki yapılandırma dosyasını okuyacaktır. Bu dosya şöyle gözükmektedir:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/timesyncd.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Time]
+#NTP=
+#FallbackNTP=0.arch.pool.ntp.org 1.arch.pool.ntp.org 2.arch.pool.ntp.org 3.arch.pool.ntp.org
+#...</pre>
+<p>Yeni <a href="../en/Network_Time_Protocol_daemon.html#Connection_to_NTP_servers" title="Network Time Protocol daemon">zaman sunucuları</a> eklemek veya elde bulunanları değiştirmek için ilgili yerleri yorum satırından çıkarın, ardından sunucu adreslerini veya IP adreslerini boşluklar bırakarak ekleyin. Ayrıca bir yapılandırma parçası da (configuration snippet) <code>/etc/systemd/timesyncd.conf.d/*.conf</code> kullanabilirsiniz, daha fazla bilgi için <span class="plainlinks archwiki-template-man" title="$ man 5 timesyncd.conf"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/timesyncd.conf.5">timesyncd.conf(5)</a></span> sayfasına bakın.
+</p>
+<p>Örneğin, <a rel="nofollow" class="external text" href="https://www.pool.ntp.org/">NTP havuzu</a> tarafından sağlanan herhangi bir sunucuyu kullanabilir veya <a rel="nofollow" class="external text" href="https://gitlab.archlinux.org/archlinux/packaging/packages/ntp/-/commit/343310b9ddd996220de27a2a35a5c1277a0bec9b">varsayılan Arch havuzunu</a> (yine NTP havuz projesi tarafından sağlanmıştır) kullanabilirsiniz:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/timesyncd.conf veya /etc/systemd/timesyncd.conf.d/local.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Time]
+NTP=0.arch.pool.ntp.org 1.arch.pool.ntp.org 2.arch.pool.ntp.org 3.arch.pool.ntp.org
+FallbackNTP=0.pool.ntp.org 1.pool.ntp.org 0.fr.pool.ntp.org</pre>
+<p>Yapılandırmanızı doğrulamak için
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">$ timedatectl show-timesync --all</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">LinkNTPServers=
+SystemNTPServers=
+RuntimeNTPServers=
+FallbackNTPServers=0.arch.pool.ntp.org 1.arch.pool.ntp.org 2.arch.pool.ntp.org 3.arch.pool.ntp.org
+ServerName=2.arch.pool.ntp.org
+ServerAddress=45.136.155.37
+RootDistanceMaxUSec=5s
+PollIntervalMinUSec=32s
+PollIntervalMaxUSec=34min 8s
+PollIntervalUSec=34min 8s
+NTPMessage={ Leap=0, Version=4, Mode=4, Stratum=3, Precision=-24, RootDelay=217.346ms, RootDispersion=52.047ms, Reference=27912C56, OriginateTimestamp=Fri 2024-01-19 16:39:56 +03, ReceiveTimestamp=Fri 2024-01-19 16:39:56 +03, TransmitTimestamp=Fri 2024-01-19 16:39:56 +03, DestinationTimestamp=Fri 2024-01-19 16:39:56 +03, Ignored=no, PacketCount=12, Jitter=535.760ms }
+Frequency=-210741</pre>
+<p>Servis yapılandırmasına ek olarak, NTP sunucuları <code>NTP=</code> ile <a href="../en/Systemd-networkd.html#[Network]" title="Systemd-networkd">systemd-networkd</a> yapılandırma dosyası üzerinden veya dinamik bir şekilde bir DHCP sunucusu aracılığıyla da sağlanabilir (<i>.network</i> dosyasının içerisinde <code>[DHCPv4]</code> veya <code>[DHCPv6]</code> bölümünde <code>UseNTP</code> seçeneği aktif hale getirilirse).
+</p>
+<p>Kullanılacak NTP sunucusu aşağıdaki kurallar kullanılarak belirlenir:
+</p>
+<ul>
+<li>
+<span class="plainlinks archwiki-template-man" title="$ man 8 systemd-networkd.service"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd-networkd.service.8">systemd-networkd.service(8)</a></span> yapılandırmasından veya DHCP aracılığıyla elde edilen arayüz başı NTP sunucularına öncelik verilir.</li>
+<li>
+<code>/etc/systemd/timesyncd.conf</code> içinde tanımlanan NTP sunucuları çalıştırılırken arayüz başına listeye eklenecek ve servis yanıt veren bir tane bulana kadar sırayla sunucularla iletişime geçecektir.</li>
+<li>Bu adımlar tamamlandıktan sonra herhangi bir NTP sunucu bilgisi edinilmezse, <code>FallbackNTP=</code> içinde tanımlanmış NTP sunucusu ana makine adları veya IP adresleri kullanılır.</li>
+</ul>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Not:</strong> 
+<ul>
+<li>Hizmet her senkronizasyonda <code>/var/lib/systemd/timesync/clock</code> dosyasını günceller. Bu dosya konumu sabittir ve değiştirilemez.</li>
+<li>Bu yazma işlemi salt okunur kök bölümü çalıştırırken veya SD kartta yazmaları en aza indirmeye çalışırken soruna sebep olabilir.</li>
+<li>Yazma işlemi yapılandırma dosyasına eklenecek  <code>PollIntervalMinSec=1d</code> ve <code>SaveIntervalSec=infinity</code> ayarları ile azaltılabilir.</li>
+</ul>
+</div> 
+<h2>
+<span id="Kullan.C4.B1m"></span><span class="mw-headline" id="Kullanım">Kullanım</span>
+</h2>
+<h3>
+<span id="Etkinle.C5.9Ftirme_ve_ba.C5.9Flatma"></span><span class="mw-headline" id="Etkinleştirme_ve_başlatma">Etkinleştirme ve başlatma</span>
+</h3>
+<p>Servisi etkinleştirip çalıştırmak için aşağıdaki komutu girin:
+</p>
+<pre># timedatectl set-ntp true
+</pre>
+<p>Alternatif olarak (örneğin chroot içerisindeyken) <code>systemd-timesyncd.service</code> servisini <a href="../tr/Help:Reading.html#systemd_birimlerinin_kontrol%C3%BC" class="mw-redirect" title="Başlat">başlatın/etkinleştirin</a>.
+</p>
+<h3>
+<span id="Servis_kontrol.C3.BC"></span><span class="mw-headline" id="Servis_kontrolü">Servis kontrolü</span>
+</h3>
+<p>Senkronizasyon süreci belirgin ölçüde yavaş olabilir. Bu herhangi bir sorun olduğu anlamına gelmez, bir sorun olduğundan emin olmadan önce belli bir süre beklemek gerekir. Hizmetin ne durumda olduğunu kontrol etmek için aşağıdaki komutu kullanın:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">$ timedatectl status</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">               Local time: Fri 2024-01-19 17:36:59 +03
+           Universal time: Fri 2024-01-19 14:36:59 UTC
+                 RTC time: Fri 2024-01-19 14:36:59
+                Time zone: Europe/Istanbul (+03, +0300)
+System clock synchronized: yes
+              NTP service: active
+          RTC in local TZ: no
+</pre>
+<h3>
+<span id="Ayr.C4.B1nt.C4.B1l.C4.B1_bilgi_edinme"></span><span class="mw-headline" id="Ayrıntılı_bilgi_edinme">Ayrıntılı bilgi edinme</span>
+</h3>
+<p>Servise dair ayrıntılı bilgi edinmek için aşağıdaki komutu kullanın:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">$ timedatectl timesync-status</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">       Server: 45.136.155.37 (2.arch.pool.ntp.org)
+Poll interval: 34min 8s (min: 32s; max 34min 8s)
+         Leap: normal
+      Version: 4
+      Stratum: 3
+    Reference: 27912C56
+    Precision: 1us (-24)
+Root distance: 165.137ms (max: 5s)
+       Offset: -4.870ms
+        Delay: 17.750ms
+       Jitter: 535.761ms
+ Packet count: 13
+    Frequency: -4.405ppm
+</pre>
+<h3>
+<span id="Varsay.C4.B1lan_olmayan_yap.C4.B1land.C4.B1rma_ayarlar.C4.B1n.C4.B1_g.C3.B6r.C3.BCnt.C3.BCleme"></span><span class="mw-headline" id="Varsayılan_olmayan_yapılandırma_ayarlarını_görüntüleme">Varsayılan olmayan yapılandırma ayarlarını görüntüleme</span>
+</h3>
+<p>Varsayılan olmayan yapılandırma ayarlarını ve bu ayarların hangi dosyalar ile ayarlandığını görmek için aşağıdaki komutu kullanın:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">$ systemd-analyze cat-config systemd/timesyncd.conf --tldr</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;"># /etc/systemd/timesyncd.conf
+[Time]
+# /etc/systemd/timesyncd.conf.d/local.conf
+[Time]
+NTP=0.nl.pool.ntp.org 1.nl.pool.ntp.org 2.nl.pool.ntp.org 3.nl.pool.ntp.org
+RootDistanceMaxSec=0.1
+PollIntervalMinSec=1d
+PollIntervalMaxSec=4w
+SaveIntervalSec=infinity
+</pre>
+<h3>
+<span id="G.C3.BCnl.C3.BC.C4.9F.C3.BC_g.C3.B6r.C3.BCnt.C3.BCleme"></span><span class="mw-headline" id="Günlüğü_görüntüleme">Günlüğü görüntüleme</span>
+</h3>
+<p>Servise dair, son 24 saat içinde günlüğe kaydedilmiş olayları listelemek için aşağıdaki komutu kullanın:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;"># journalctl -u systemd-timesyncd --no-hostname --since "1 day ago"</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">Jan 19 15:14:20 systemd[1]: Stopping Network Time Synchronization...
+Jan 19 15:14:20 systemd[1]: systemd-timesyncd.service: Deactivated successfully.
+Jan 19 15:14:20 systemd[1]: Stopped Network Time Synchronization.
+Jan 19 15:14:20 systemd[1]: Starting Network Time Synchronization...
+Jan 19 15:14:20 systemd[1]: Started Network Time Synchronization.
+Jan 19 15:14:20 systemd-timesyncd[1023]: Contacted time server 178.215.228.24:123 (0.nl.pool.ntp.org).
+Jan 19 15:14:20 systemd-timesyncd[1023]: Initial clock synchronization to Fri 2024-01-19 15:14:20.393865 CET.
+</pre>
+<h2>
+<span id="Ayr.C4.B1ca_bak.C4.B1n.C4.B1z"></span><span class="mw-headline" id="Ayrıca_bakınız">Ayrıca bakınız</span>
+</h2>
+<ul>
+<li><a rel="nofollow" class="external text" href="https://bbs.archlinux.org/viewtopic.php?id=182600">Forum: systemd-timesyncd is not syncing time</a></li>
+<li><a rel="nofollow" class="external text" href="https://bbs.archlinux.org/viewtopic.php?id=182172">Forum: Using systemd-timesync instead of NTP</a></li>
+<li><a rel="nofollow" class="external text" href="https://github.com/systemd/systemd/blob/main/src/timesync/timesyncd.c">timesyncd kaynak kodu</a></li>
+<li><span class="plainlinks archwiki-template-man" title="$ man 8 systemd-timesyncd"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd-timesyncd.8">systemd-timesyncd(8)</a></span></li>
+<li><span class="plainlinks archwiki-template-man" title="$ man 5 timesyncd.conf"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/timesyncd.conf.5">timesyncd.conf(5)</a></span></li>
+</ul>
+</div>
+</div>
+					<div id="catlinks" class="catlinks" data-mw="interface"><div id="mw-normal-catlinks" class="mw-normal-catlinks">
+<a href="../Special:Categories.html" title="Special:Categories">Category</a>: <ul><li><a href="../tr/Category:Network_Time_Protocol.html" title="Category:Network Time Protocol (Türkçe)">Network Time Protocol (Türkçe)</a></li></ul>
+</div></div>
+				</div>
+			</main>
+			
+		</div>
+		<div class="mw-footer-container">
+			
+<footer id="footer" class="mw-footer" style="margin: 0">
+	<ul id="footer-info">
+	<li data-nosnippet="">Retrieved from "<a dir="ltr" href="https://wiki.archlinux.org/index.php?title=Systemd-timesyncd_(T%C3%BCrk%C3%A7e)&amp;oldid=815408">https://wiki.archlinux.org/index.php?title=Systemd-timesyncd_(Türkçe)&amp;oldid=815408</a>"</li>
+<li id="footer-info-lastmod"> This page was last edited on 25 August 2024, at 22:36.</li>
+	<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+<br>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="https://terms.archlinux.org/docs/privacy-policy/">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="../en/ArchWiki:About.html">About ArchWiki</a></li>
+	<li id="footer-places-disclaimers"><a href="../en/ArchWiki:General_disclaimer.html">Disclaimers</a></li>
+	<li id="footer-places-archwiki-code-of-conduct"><a href="https://terms.archlinux.org/docs/code-of-conduct/" class="extiw" title="archlinux-service-agreements:code-of-conduct">Code of conduct</a></li>
+	<li id="footer-places-archwiki-terms-of-service"><a href="https://terms.archlinux.org/docs/terms-of-service/" class="extiw" title="archlinux-service-agreements:terms-of-service">Terms of service</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-copyrightico"><a href="https://www.gnu.org/copyleft/fdl.html" class="cdx-button cdx-button--fake-button cdx-button--size-large cdx-button--fake-button--enabled"><img src="/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" loading="lazy"></a></li>
+	<li id="footer-poweredbyico"><img src="/resources/assets/poweredby_mediawiki.svg" width="88" height="31" loading="lazy"></li>
+</ul>
+
+</footer>
+
+		</div>
+	</div> 
+</div> 
+<div class="vector-settings" id="p-dock-bottom">
+	<ul></ul>
+</div>
+</body>
+</html>

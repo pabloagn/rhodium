@@ -1,0 +1,47 @@
+<h1>iptables</h1>
+
+<blockquote><p>Configure tables, chains and rules of the Linux kernel IPv4 firewall.
+Use <code>ip6tables</code> to set rules for IPv6 traffic. See also: <code>iptables-save</code>, <code>iptables-restore</code>.
+More information: <a href="https://manned.org/iptables">https://manned.org/iptables</a>.</p></blockquote>
+
+<ul>
+<li>View chains, rules, packet/byte counters and line numbers for the filter table:</li>
+</ul>
+
+
+<p><code>sudo iptables {{[-vnL --line-numbers|--verbose --numeric --list --line-numbers]}}</code></p>
+
+<ul>
+<li>Set chain policy rule:</li>
+</ul>
+
+
+<p><code>sudo iptables {{[-P|--policy]}} {{chain}} {{rule}}</code></p>
+
+<ul>
+<li>Append rule to chain policy for IP:</li>
+</ul>
+
+
+<p><code>sudo iptables {{[-A|--append]}} {{chain}} {{[-s|--source]}} {{ip}} {{[-j|--jump]}} {{rule}}</code></p>
+
+<ul>
+<li>Append rule to chain policy for IP considering protocol and port:</li>
+</ul>
+
+
+<p><code>sudo iptables {{[-A|--append]}} {{chain}} {{[-s|--source]}} {{ip}} {{[-p|--protocol]}} {{tcp|udp|icmp|...}} --dport {{port}} {{[-j|--jump]}} {{rule}}</code></p>
+
+<ul>
+<li>Add a NAT rule to translate all traffic from the <code>192.168.0.0/24</code> subnet to the host&rsquo;s public IP:</li>
+</ul>
+
+
+<p><code>sudo iptables {{[-t|--table]}} {{nat}} {{[-A|--append]}} {{POSTROUTING}} {{[-s|--source]}} {{192.168.0.0/24}} {{[-j|--jump]}} {{MASQUERADE}}</code></p>
+
+<ul>
+<li>Delete chain rule:</li>
+</ul>
+
+
+<p><code>sudo iptables {{[-D|--delete]}} {{chain}} {{rule_line_number}}</code></p>

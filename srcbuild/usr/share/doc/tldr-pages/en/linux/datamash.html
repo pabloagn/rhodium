@@ -1,0 +1,32 @@
+<h1>datamash</h1>
+
+<blockquote><p>Perform basic numeric, textual and statistical operations on input textual data files.
+More information: <a href="https://www.gnu.org/software/datamash/manual/html_node/Invoking-datamash.html">https://www.gnu.org/software/datamash/manual/html_node/Invoking-datamash.html</a>.</p></blockquote>
+
+<ul>
+<li>Get max, min, mean and median of a single column of numbers:</li>
+</ul>
+
+
+<p><code>seq 3 | datamash max 1 min 1 mean 1 median 1</code></p>
+
+<ul>
+<li>Get the mean of a single column of float numbers (floats must use &ldquo;,&rdquo; and not &ldquo;.&rdquo;):</li>
+</ul>
+
+
+<p><code>echo -e '1.0\n2.5\n3.1\n4.3\n5.6\n5.7' | tr '.' ',' | datamash mean 1</code></p>
+
+<ul>
+<li>Get the mean of a single column of numbers with a given decimal precision:</li>
+</ul>
+
+
+<p><code>echo -e '1\n2\n3\n4\n5\n5' | datamash {{[-R|--round]}} {{number_of_decimals_wanted}} mean 1</code></p>
+
+<ul>
+<li>Get the mean of a single column of numbers ignoring &ldquo;Na&rdquo; and &ldquo;NaN&rdquo; (literal) strings:</li>
+</ul>
+
+
+<p><code>echo -e '1\n2\nNa\n3\nNaN' | datamash --narm mean 1</code></p>

@@ -1,0 +1,40 @@
+<h1>tuc</h1>
+
+<blockquote><p>Cut text (or bytes) where a delimiter matches, then keep the desired parts.
+A more user-friendly and powerful version of <code>cut</code> with sensible defaults.
+More information: <a href="https://github.com/riquito/tuc">https://github.com/riquito/tuc</a>.</p></blockquote>
+
+<ul>
+<li>Cut and rearrange fields:</li>
+</ul>
+
+
+<p><code>echo "foo bar baz" | tuc {{[-d|--delimiter]}} '{{ }}' {{[-f|--fields]}} {{3,2,1}}</code></p>
+
+<ul>
+<li>Replace the delimiter <code>space</code> with an arrow:</li>
+</ul>
+
+
+<p><code>echo "foo bar baz" | tuc {{[-d|--delimiter]}} ' ' {{[-r|--replace-delimiter]}} ' ➡ '</code></p>
+
+<ul>
+<li>Keep a range of fields:</li>
+</ul>
+
+
+<p><code>echo "foo bar    baz" | tuc {{[-d|--delimiter]}} ' ' {{[-f|--fields]}} {{2:}}</code></p>
+
+<ul>
+<li>Cut using regular expressions:</li>
+</ul>
+
+
+<p><code>echo "a,b, c" | tuc {{[-e|--regex]}} '{{[, ]+}}' {{[-f|--fields]}} {{1,3}}</code></p>
+
+<ul>
+<li>Emit JSON output:</li>
+</ul>
+
+
+<p><code>echo "foo bar baz" | tuc {{[-d|--delimiter]}} '{{ }}' --json</code></p>

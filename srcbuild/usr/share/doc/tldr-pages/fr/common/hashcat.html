@@ -1,0 +1,53 @@
+<h1>hashcat</h1>
+
+<blockquote><p>Outil de récupération de mot de passe rapide et avancé.
+Plus d'informations : <a href="https://hashcat.net/wiki/doku.php?id=hashcat">https://hashcat.net/wiki/doku.php?id=hashcat</a>.</p></blockquote>
+
+<ul>
+<li>Effectue une attaque par force brute (mode 3) avec le masque hashcat par défaut :</li>
+</ul>
+
+
+<p><code>hashcat --hash-type {{id_type_hash}} --attack-mode {{3}} {{valeur_hash}}</code></p>
+
+<ul>
+<li>Effectue une attaque par force brute (mode 3) avec un motif connu de 4 chiffres :</li>
+</ul>
+
+
+<p><code>hashcat --hash-type {{id_type_hash}} --attack-mode {{3}} {{valeur_hash}} "{{?d?d?d?d}}"</code></p>
+
+<ul>
+<li>Effectue une attaque par force brute (mode 3) en utilisant au plus 8 caractères parmi tous les caractères ASCII imprimables :</li>
+</ul>
+
+
+<p><code>hashcat --hash-type {{id_type_hash}} --attack-mode {{3}} --increment {{valeur_hash}} "{{?a?a?a?a?a?a?a?a}}"</code></p>
+
+<ul>
+<li>Effectue une attaque par dictionnaire (mode 0) en utilisant la liste de mots RockYou d'une machine Kali Linux :</li>
+</ul>
+
+
+<p><code>hashcat --hash-type {{id_type_hash}} --attack-mode {{0}} {{valeur_hash}} {{/usr/share/wordlists/rockyou.txt}}</code></p>
+
+<ul>
+<li>Effectue une attaque par dictionnaire basée sur des règles (mode 0) en utilisant la liste de mots RockYou modifiée avec des variations de mots de passe courants :</li>
+</ul>
+
+
+<p><code>hashcat --hash-type {{id_type_hash}} --attack-mode {{0}} --rules-file {{/usr/share/hashcat/rules/best64.rule}} {{valeur_hash}} {{/usr/share/wordlists/rockyou.txt}}</code></p>
+
+<ul>
+<li>Effectue une attaque combinée (mode 1) en utilisant la concaténation de mots provenant de deux dictionnaires personnalisés différents :</li>
+</ul>
+
+
+<p><code>hashcat --hash-type {{id_type_hash}} --attack-mode {{1}} {{valeur_hash}} {{/chemin/vers/dictionnaire1.txt}} {{/chemin/vers/dictionnaire2.txt}}</code></p>
+
+<ul>
+<li>Affiche le résultat d'un hash déjà craqué :</li>
+</ul>
+
+
+<p><code>hashcat --show {{valeur_hash}}</code></p>

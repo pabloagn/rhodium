@@ -1,0 +1,60 @@
+<h1>find</h1>
+
+<blockquote><p>البحث عن الملفات أو المُجَلَّدات داخل فروع مُجَلَّد، بشكل متكرر.
+لمزيد من التفاصيل: <a href="https://manned.org/find">https://manned.org/find</a>.</p></blockquote>
+
+<ul>
+<li>البحث عن الملفات حسب الامتداد:</li>
+</ul>
+
+
+<p><code>find {{root_path}} -name '{{*.ext}}'</code></p>
+
+<ul>
+<li>البحث عن الملفات المطابقة لأنماط مسار/اسم متعددة:</li>
+</ul>
+
+
+<p><code>find {{root_path}} -path '{{*/path/*/*.ext}}' -or -name '{{*pattern*}}'</code></p>
+
+<ul>
+<li>البحث عن المُجَلَّدات المطابقة لاسم معين، مع تجاهل حالة الأحرف سواء أكانت صغيرة او كبيرة:</li>
+</ul>
+
+
+<p><code>find {{root_path}} -type d -iname '{{*lib*}}'</code></p>
+
+<ul>
+<li>البحث عن الملفات المطابقة لنمط معين، مع استثناء مسارات محددة:</li>
+</ul>
+
+
+<p><code>find {{root_path}} -name '{{*.py}}' -not -path '{{*/site-packages/*}}'</code></p>
+
+<ul>
+<li>البحث عن الملفات التي تطابق نطاق حجم معين، مع تقييد العمق التكراري إلى &ldquo;1&rdquo;:</li>
+</ul>
+
+
+<p><code>find {{root_path}} -maxdepth 1 -size {{+500k}} -size {{-10M}}</code></p>
+
+<ul>
+<li>تنفيذ أمر لكل ملف (استخدم <code>{}</code> داخل الأمر للوصول إلى اسم الملف):</li>
+</ul>
+
+
+<p><code>find {{root_path}} -name '{{*.ext}}' -exec {{wc -l}} {} \;</code></p>
+
+<ul>
+<li>البحث عن جميع الملفات المعدلة اليوم وتمرير النتائج إلى أمر واحد كوسيطات:</li>
+</ul>
+
+
+<p><code>find {{root_path}} -daystart -mtime {{-1}} -exec {{tar -cvf archive.tar}} {} \+</code></p>
+
+<ul>
+<li>البحث عن الملفات أو المُجَلَّدات الفارغة وحذفها مع عرض التفاصيل:</li>
+</ul>
+
+
+<p><code>find {{root_path}} -type {{f|d}} -empty -delete -print</code></p>

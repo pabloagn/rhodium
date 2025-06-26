@@ -1,0 +1,60 @@
+<h1>bfs</h1>
+
+<blockquote><p>Breadth-first search for your files.
+More information: <a href="https://manned.org/bfs">https://manned.org/bfs</a>.</p></blockquote>
+
+<ul>
+<li>Find files by extension:</li>
+</ul>
+
+
+<p><code>bfs {{root_path}} -name '{{*.ext}}'</code></p>
+
+<ul>
+<li>Find files matching multiple path/name patterns:</li>
+</ul>
+
+
+<p><code>bfs {{root_path}} -path '{{**/path/**/*.ext}}' -or -name '{{*pattern*}}'</code></p>
+
+<ul>
+<li>Find directories matching a given name, in case-insensitive mode:</li>
+</ul>
+
+
+<p><code>bfs {{root_path}} -type d -iname '{{*lib*}}'</code></p>
+
+<ul>
+<li>Find files matching a given pattern, excluding specific paths:</li>
+</ul>
+
+
+<p><code>bfs {{root_path}} -name '{{*.py}}' -not -path '{{*/site-packages/*}}'</code></p>
+
+<ul>
+<li>Find files matching a given size range, limiting the recursive depth to &ldquo;1&rdquo;:</li>
+</ul>
+
+
+<p><code>bfs {{root_path}} -maxdepth 1 -size {{+500k}} -size {{-10M}}</code></p>
+
+<ul>
+<li>Run a command for each file (use <code>{}</code> within the command to access the filename):</li>
+</ul>
+
+
+<p><code>bfs {{root_path}} -name '{{*.ext}}' -exec {{wc -l}} {} \;</code></p>
+
+<ul>
+<li>Find all files modified today and pass the results to a single command as arguments:</li>
+</ul>
+
+
+<p><code>bfs {{root_path}} -daystart -mtime {{-1}} -exec {{tar -cvf archive.tar}} {} \+</code></p>
+
+<ul>
+<li>Find empty files (0 byte) or directories and delete them verbosely:</li>
+</ul>
+
+
+<p><code>bfs {{root_path}} -type {{f|d}} -empty -delete -print</code></p>

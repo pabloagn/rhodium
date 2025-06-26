@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-sticky-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-0 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-disabled skin-theme-clientpref-day vector-toc-available" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>Arch package guidelines - ArchWiki</title>
+<link rel="stylesheet" href="../ArchWikiOffline.css">
+<meta name="ResourceLoaderDynamicStyles" content="">
+<meta name="generator" content="MediaWiki 1.43.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="max-image-preview:standard">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.25, maximum-scale=5.0">
+<link rel="search" type="application/opensearchdescription+xml" href="/rest.php/v1/search" title="ArchWiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.archlinux.org/api.php?action=rsd">
+<link rel="license" href="https://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="ArchWiki Atom feed" href="/index.php?title=Special:RecentChanges&amp;feed=atom">
+</head>
+<body class="skin--responsive skin-vector skin-vector-search-vue mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Arch_package_guidelines rootpage-Arch_package_guidelines skin-vector-2022 action-view">
+<a class="mw-jump-link" href="#bodyContent">Jump to content</a>
+<div class="vector-header-container">
+	</div>
+<div class="mw-page-container">
+	<div class="mw-page-container-inner">
+		<div class="vector-column-start">
+			<div class="vector-main-menu-container">
+		</div>
+	<div class="vector-sticky-pinned-container">
+				<nav id="mw-panel-toc" aria-label="Contents" data-event-name="ui.sidebar-toc" class="mw-table-of-contents-container vector-toc-landmark">
+					<div id="vector-toc-pinned-container" class="vector-pinned-container">
+					<div id="vector-toc" class="vector-toc vector-pinnable-element">
+	<div class="vector-pinnable-header vector-toc-pinnable-header vector-pinnable-header-pinned" data-feature-name="toc-pinned" data-pinnable-element-id="vector-toc">
+	<h2 class="vector-pinnable-header-label">Contents</h2>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-toc.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-toc.unpin">hide</button>
+</div>
+
+
+	<ul class="vector-toc-contents" id="mw-panel-toc-list">
+		<li id="toc-mw-content-text" class="vector-toc-list-item vector-toc-level-1">
+			<a href="#" class="vector-toc-link">
+				<div class="vector-toc-text">Beginning</div>
+			</a>
+		</li>
+		<li id="toc-Package_etiquette" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Package_etiquette">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">1</span>
+				<span>Package etiquette</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Package_etiquette-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Package_naming" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Package_naming">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">2</span>
+				<span>Package naming</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Package_naming-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Package_versioning" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Package_versioning">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">3</span>
+				<span>Package versioning</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Package_versioning-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Package_dependencies" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Package_dependencies">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">4</span>
+				<span>Package dependencies</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Package_dependencies-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Package_relations" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Package_relations">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">5</span>
+				<span>Package relations</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Package_relations-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Package_sources" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Package_sources">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">6</span>
+				<span>Package sources</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Package_sources-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Working_with_upstream" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Working_with_upstream">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">7</span>
+				<span>Working with upstream</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Working_with_upstream-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Directories" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Directories">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">8</span>
+				<span>Directories</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Directories-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Makepkg_duties" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Makepkg_duties">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">9</span>
+				<span>Makepkg duties</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Makepkg_duties-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Architectures" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Architectures">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">10</span>
+				<span>Architectures</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Architectures-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Licenses" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Licenses">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">11</span>
+				<span>Licenses</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Licenses-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Reproducible_builds" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Reproducible_builds">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">12</span>
+				<span>Reproducible builds</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Reproducible_builds-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+</ul>
+</div>
+
+					</div>
+		</nav>
+			</div>
+		</div>
+		<div class="mw-content-container">
+			<main id="content" class="mw-body" style="margin: 0">
+				<header class="mw-body-header vector-page-titlebar">
+					<nav aria-label="Contents" class="vector-toc-landmark">
+						
+<div id="vector-page-titlebar-toc" class="vector-dropdown vector-page-titlebar-toc vector-button-flush-left">
+	<input type="checkbox" id="vector-page-titlebar-toc-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-page-titlebar-toc" class="vector-dropdown-checkbox " aria-label="Toggle the table of contents">
+	<label id="vector-page-titlebar-toc-label" for="vector-page-titlebar-toc-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"><span class="vector-icon mw-ui-icon-listBullet mw-ui-icon-wikimedia-listBullet"></span>
+
+<span class="vector-dropdown-label-text">Toggle the table of contents</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+							<div id="vector-page-titlebar-toc-unpinned-container" class="vector-unpinned-container">
+			</div>
+		
+	</div>
+</div>
+
+					</nav>
+					<h1 id="firstHeading" class="firstHeading mw-first-heading"><span class="mw-page-title-main">Arch package guidelines</span></h1>
+							
+<div id="p-lang-btn" class="vector-dropdown mw-portlet mw-portlet-lang">
+	<input type="checkbox" id="p-lang-btn-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-p-lang-btn" class="vector-dropdown-checkbox mw-interlanguage-selector" aria-label="Go to an article in another language. Available in 6 languages">
+	<label id="p-lang-btn-label" for="p-lang-btn-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--action-progressive mw-portlet-lang-heading-6" aria-hidden="true"><span class="vector-icon mw-ui-icon-language-progressive mw-ui-icon-wikimedia-language-progressive"></span>
+
+<span class="vector-dropdown-label-text">6 languages</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+		<div class="vector-menu-content">
+			
+			<ul class="vector-menu-content-list">
+				
+				<li class="interlanguage-link interwiki-es mw-list-item"><a href="../es/Arch_package_guidelines.html" title="Arch package guidelines – español" lang="es" hreflang="es" data-title="Arch package guidelines" data-language-autonym="Español" data-language-local-name="español" class="interlanguage-link-target"><span>Español</span></a></li>
+<li class="interlanguage-link interwiki-fr mw-list-item"><a href="../fr/Arch_package_guidelines.html" title="Arch package guidelines – français" lang="fr" hreflang="fr" data-title="Arch package guidelines" data-language-autonym="Français" data-language-local-name="français" class="interlanguage-link-target"><span>Français</span></a></li>
+<li class="interlanguage-link interwiki-ja mw-list-item"><a href="https://wiki.archlinux.jp/index.php/Arch_%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E3%82%AC%E3%82%A4%E3%83%89%E3%83%A9%E3%82%A4%E3%83%B3" title="Arch パッケージガイドライン – 日本語" lang="ja" hreflang="ja" data-title="Arch パッケージガイドライン" data-language-autonym="日本語" data-language-local-name="日本語" class="interlanguage-link-target"><span>日本語</span></a></li>
+<li class="interlanguage-link interwiki-pt mw-list-item"><a href="../pt/Arch_package_guidelines.html" title="Arch package guidelines – português" lang="pt" hreflang="pt" data-title="Arch package guidelines" data-language-autonym="Português" data-language-local-name="português" class="interlanguage-link-target"><span>Português</span></a></li>
+<li class="interlanguage-link interwiki-ru mw-list-item"><a href="../ru/Arch_package_guidelines.html" title="Arch package guidelines – русский" lang="ru" hreflang="ru" data-title="Arch package guidelines" data-language-autonym="Русский" data-language-local-name="русский" class="interlanguage-link-target"><span>Русский</span></a></li>
+<li class="interlanguage-link interwiki-zh-hans mw-list-item"><a href="https://wiki.archlinuxcn.org/wiki/Arch_package_guidelines" title="Arch package guidelines – 中文（简体）" lang="zh-Hans" hreflang="zh-Hans" data-title="Arch package guidelines" data-language-autonym="中文（简体）" data-language-local-name="中文（简体）" class="interlanguage-link-target"><span>中文（简体）</span></a></li>
+			</ul>
+			
+		</div>
+
+	</div>
+</div>
+</header>
+				<div class="vector-column-end">
+					<div class="vector-sticky-pinned-container">
+						<nav class="vector-page-tools-landmark" aria-label="Page tools">
+							<div id="vector-page-tools-pinned-container" class="vector-pinned-container">
+				
+							</div>
+		</nav>
+						<nav class="vector-appearance-landmark" aria-label="Appearance">
+							<div id="vector-appearance-pinned-container" class="vector-pinned-container">
+				<div id="vector-appearance" class="vector-appearance vector-pinnable-element">
+	<div class="vector-pinnable-header vector-appearance-pinnable-header vector-pinnable-header-pinned" data-feature-name="appearance-pinned" data-pinnable-element-id="vector-appearance" data-pinned-container-id="vector-appearance-pinned-container" data-unpinned-container-id="vector-appearance-unpinned-container">
+	<div class="vector-pinnable-header-label">Appearance</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-appearance.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-appearance.unpin">hide</button>
+</div>
+
+
+</div>
+
+							</div>
+		</nav>
+					</div>
+				</div>
+				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container>
+					<div class="vector-body-before-content">
+							<div class="mw-indicators">
+		</div>
+
+						<div id="siteSub" class="noprint">From ArchWiki</div>
+					</div>
+					<div id="contentSub"><div id="mw-content-subtitle"></div></div>
+					
+					
+					<div id="mw-content-text" class="mw-body-content">
+<div class="mw-content-ltr mw-parser-output" lang="en" dir="ltr">
+<div class="toc" style="display:block; text-align: center; margin-bottom: 1em;">
+<b><a class="mw-selflink selflink">Arch package guidelines</a></b>
+<hr>
+<p><a href="../en/32-bit_package_guidelines.html" title="32-bit package guidelines">32-bit</a> – <a href="../en/CLR_package_guidelines.html" title="CLR package guidelines">CLR</a> – <a href="../en/CMake_package_guidelines.html" title="CMake package guidelines">CMake</a> – <a href="../en/Cross-compiling_tools_package_guidelines.html" title="Cross-compiling tools package guidelines">Cross</a> – <a href="../en/DKMS_package_guidelines.html" title="DKMS package guidelines">DKMS</a> – <a href="../en/Eclipse_plugin_package_guidelines.html" title="Eclipse plugin package guidelines">Eclipse</a> – <a href="../en/Electron_package_guidelines.html" title="Electron package guidelines">Electron</a> – <a href="../en/Font_package_guidelines.html" title="Font package guidelines">Font</a> – <a href="../en/Free_Pascal_package_guidelines.html" title="Free Pascal package guidelines">Free Pascal</a> – <a href="../en/GNOME_package_guidelines.html" title="GNOME package guidelines">GNOME</a> – <a href="../en/Go_package_guidelines.html" title="Go package guidelines">Go</a> – <a href="../en/Haskell_package_guidelines.html" title="Haskell package guidelines">Haskell</a> – <a href="../en/Java_package_guidelines.html" title="Java package guidelines">Java</a> – <a href="../en/KDE_package_guidelines.html" title="KDE package guidelines">KDE</a> – <a href="../en/Kernel_module_package_guidelines.html" title="Kernel module package guidelines">Kernel modules</a> – <a href="../en/Lisp_package_guidelines.html" title="Lisp package guidelines">Lisp</a> – <a href="../en/Meson_package_guidelines.html" title="Meson package guidelines">Meson</a> – <a href="../en/MinGW_package_guidelines.html" title="MinGW package guidelines">MinGW</a> – <a href="../en/Node.js_package_guidelines.html" title="Node.js package guidelines">Node.js</a> – <a href="../en/Nonfree_applications_package_guidelines.html" title="Nonfree applications package guidelines">Nonfree</a> – <a href="../en/OCaml_package_guidelines.html" title="OCaml package guidelines">OCaml</a> – <a href="../en/Perl_package_guidelines.html" title="Perl package guidelines">Perl</a> – <a href="../en/PHP_package_guidelines.html" title="PHP package guidelines">PHP</a> – <a href="../en/Python_package_guidelines.html" title="Python package guidelines">Python</a> – <a href="../en/R_package_guidelines.html" title="R package guidelines">R</a> – <a href="../en/Ruby_package_guidelines.html" title="Ruby package guidelines">Ruby</a> – <a href="../en/Rust_package_guidelines.html" title="Rust package guidelines">Rust</a> - <a href="../en/Arch_package_guidelines/Security.html" title="Arch package guidelines/Security">Security</a> – <a href="../en/Shell_package_guidelines.html" title="Shell package guidelines">Shell</a> – <a href="../en/VCS_package_guidelines.html" title="VCS package guidelines">VCS</a> – <a href="../en/Web_application_package_guidelines.html" title="Web application package guidelines">Web</a> – <a href="../en/Wine_package_guidelines.html" title="Wine package guidelines">Wine</a>
+</p>
+</div>
+<div class="archwiki-template-meta-related-articles">
+<p>Related articles</p>
+<ul>
+<li><a href="../en/Arch_package_guidelines/Security.html" title="Arch package guidelines/Security">/Security</a></li>
+<li><a href="../en/Arch_build_system.html" title="Arch build system">Arch build system</a></li>
+<li><a href="../en/Creating_packages.html" title="Creating packages">Creating packages</a></li>
+<li><a href="../en/Makepkg.html" title="Makepkg">makepkg</a></li>
+<li><a href="../en/PKGBUILD.html" title="PKGBUILD">PKGBUILD</a></li>
+</ul>
+</div>
+<p>When building packages for <a href="../en/Arch_Linux.html" title="Arch Linux">Arch Linux</a>, adhere to the package guidelines below, especially if the intention is to contribute a new package to Arch Linux. You should also see the <span class="plainlinks archwiki-template-man" title="$ man 5 PKGBUILD"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/PKGBUILD.5">PKGBUILD(5)</a></span> and <span class="plainlinks archwiki-template-man" title="$ man 8 makepkg"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/makepkg.8">makepkg(8)</a></span> <a href="../en/Man_page.html" title="Man page">man pages</a>.
+</p>
+<p>Important points listed on this page are not repeated on the other package guideline pages. These specific guidelines are intended as an addition to the standards listed below.
+</p>
+<p>Packages submitted to the <a href="../en/Arch_User_Repository.html" title="Arch User Repository">Arch User Repository</a> must additionally comply with <a href="../en/AUR_submission_guidelines.html" title="AUR submission guidelines">AUR submission guidelines</a>.
+</p>
+<p>See <i>.proto</i> files in the <code>/usr/share/pacman/</code> <a rel="nofollow" class="external text" href="https://gitlab.archlinux.org/pacman/pacman/-/tree/master/proto">directory</a> as <code>PKGBUILD</code> examples.
+</p>
+<meta property="mw:PageProp/toc">
+<h2><span class="mw-headline" id="Package_etiquette">Package etiquette</span></h2>
+<ul><li>Packages should <b>never</b> be installed to <code>/usr/local/</code>.</li></ul>
+<ul><li>
+<b>Do not introduce new variables or functions</b> into <code>PKGBUILD</code> build scripts, unless the package cannot be built without doing so, as these could possibly <b>conflict</b> with variables and functions used in <i>makepkg</i> itself.</li></ul>
+<ul><li>If a new variable or a new function is absolutely required, <b>prefix its name with an underscore</b> (<code>_</code>), e.g. <pre>_customvariable=</pre>
+</li></ul>
+<ul><li>
+<b>Avoid</b> using <code>/usr/libexec/</code> for anything. Use <code>/usr/lib/$pkgname/</code> instead.</li></ul>
+<ul><li>The <code>packager</code> field from the package meta file can be <b>customized</b> by the package builder by modifying the appropriate option in the <code>/etc/makepkg.conf</code> file, or alternatively override it by creating <code>~/.makepkg.conf</code>.</li></ul>
+<ul><li>
+<b>Do not use makepkg subroutines</b> (e.g. <code>error</code>, <code>msg</code>, <code>msg2</code>, <code>plain</code>, <code>warning</code>) as they might change at any time. To print data, use <code>printf</code> or <code>echo</code>.</li></ul>
+<ul><li>All important messages should be echoed during install using an <b>.install file</b>. For example, if a package needs extra setup to work, directions should be included.</li></ul>
+<ul><li>
+<b>Dependencies</b> are the most common packaging error. Please take the time to verify them carefully, for example by running <code>ldd</code> on dynamic executables, checking tools required by scripts or looking at the documentation of the software. The <a href="../en/Namcap.html" title="Namcap">namcap</a> utility can help you in this regard. This tool can analyze both PKGBUILD and the resulting package tarball and will warn you about bad permissions, missing dependencies, redundant dependencies, and other common mistakes.</li></ul>
+<ul><li>Any <b>optional dependencies</b> that are not needed to run the package or have it generally function should not be included in the <b>depends</b> array; instead the information should be added to the <b>optdepends</b> array:</li></ul>
+<dl>
+<dd><pre>optdepends=('cups: printing support'
+            'sane: scanners support'
+            'libgphoto2: digital cameras support'
+            'alsa-lib: sound support'
+            'giflib: GIF images support'
+            'libjpeg: JPEG images support'
+            'libpng: PNG images support')
+</pre></dd>
+<dd>The above example is taken from the <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=wine">wine</a></span> package. The optdepends information is automatically printed out on installation/upgrade so one should <b>not</b> keep this kind of information in <code>.install</code> files.</dd>
+</dl>
+<ul><li>When creating a <b>package description</b> for a package, do not include the package name in a self-referencing way.  For example, "Nedit is a text editor for X11" could be simplified to "A text editor for X11".  Also try to keep the descriptions to ~80 characters or less.</li></ul>
+<ul><li>Try to keep the <b>line length</b> in the PKGBUILD below ~100 characters.</li></ul>
+<ul><li>Where possible, <b>remove empty lines</b> from the <code>PKGBUILD</code> (<code>provides</code>, <code>replaces</code>, etc.)</li></ul>
+<ul><li>It is common practice to <b>preserve the order</b> of the <code>PKGBUILD</code> fields in the same order as given in the <a href="../en/PKGBUILD.html" title="PKGBUILD">PKGBUILD</a> article. However, this is not mandatory, as the only requirement in this context is <b>correct Bash syntax</b>.</li></ul>
+<ul><li>
+<b>Quote</b> variables which may contain spaces, such as <code>"$pkgdir"</code> and <code>"$srcdir"</code>.</li></ul>
+<ul><li>To ensure the <b>integrity</b> of packages, make sure that the <a href="../en/PKGBUILD.html#Integrity" title="PKGBUILD">integrity variables</a> contain correct values. These can be updated using the <span class="plainlinks archwiki-template-man" title="$ man 8 updpkgsums"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/updpkgsums.8">updpkgsums(8)</a></span> tool.</li></ul>
+<h2><span class="mw-headline" id="Package_naming">Package naming</span></h2>
+<ul>
+<li>Package names can contain only alphanumeric characters and any of <code>@</code>, <code>.</code>, <code>_</code>, <code>+</code>, <code>-</code>. Names are not allowed to start with hyphens or dots. All letters should be lowercase.</li>
+<li>Package names should <b>not</b> be suffixed with the upstream major release version number (e.g. we do not want libfoo2 if upstream calls it libfoo v2.3.4) in case the library and its dependencies are expected to be able to keep using the most recent library version with each respective upstream release. However, for some software or dependencies, this can not be assumed. In the past this has been especially true for widget toolkits such as GTK and Qt. Software that depends on such toolkits can usually not be trivially ported to a new major version. As such, in cases where software can not trivially keep rolling alongside its dependencies, package names should carry the major version suffix (e.g. gtk2, gtk3, qt4, qt5). For cases where most dependencies can keep rolling along the newest release but some cannot (for instance closed source that needs libpng12 or similar), a deprecated version of that package might be called libfoo1 while the current version is just libfoo.</li>
+</ul>
+<h2><span class="mw-headline" id="Package_versioning">Package versioning</span></h2>
+<ul>
+<li>Package <a href="../en/PKGBUILD.html#pkgver" title="PKGBUILD">version</a> — <code>pkgver</code> — <b>should be the same as the version released by the author</b>.</li>
+<li>Versions can include letters if need be, e.g. version could be <code>2.54BETA32</code>.</li>
+<li>
+<b>Version tags may not include hyphens</b>, and may contain letters, numbers, and periods only. If the upstream version contains a hyphen, it must be replaced with an underscore.</li>
+</ul>
+<p><br>
+</p>
+<ul>
+<li>Package <a href="../en/PKGBUILD.html#pkgrel" title="PKGBUILD">releases</a> — <code>pkgrel</code> — are <b>specific to Arch Linux packages</b>. These allow users to differentiate between newer and older package builds. When a new package version is first released, the <b>release count starts at 1</b>. Then as fixes and optimizations are made, the package will be <b>re-released</b> to the Arch Linux public and the <b>release number will increment</b>.</li>
+<li>When a new version comes out, the release count resets to 1.</li>
+<li>Package release tags follow the <b>same naming restrictions as version tags</b>.</li>
+</ul>
+<h2><span class="mw-headline" id="Package_dependencies">Package dependencies</span></h2>
+<ul>
+<li>
+<b>Do not rely on <a href="https://en.wikipedia.org/wiki/Transitive_dependency" class="extiw" title="wikipedia:Transitive dependency">transitive dependencies</a></b> in any of the <a href="../en/PKGBUILD.html#Dependencies" title="PKGBUILD">PKGBUILD#Dependencies</a>, as they might break, if one of the dependencies is updated.</li>
+<li>List all direct library dependencies. To identify them <span class="plainlinks archwiki-template-man" title="$ man 1 find-libdeps"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/find-libdeps.1">find-libdeps(1)</a></span> (part of <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=devtools">devtools</a></span>) can be used.</li>
+</ul>
+<h2><span class="mw-headline" id="Package_relations">Package relations</span></h2>
+<ul>
+<li>Do not add <code>$pkgname</code> to <a href="../en/PKGBUILD.html#provides" title="PKGBUILD">PKGBUILD#provides</a>, as it is always implicitly provided by the package.</li>
+<li>List all external shared libraries of a package in <a href="../en/PKGBUILD.html#provides" title="PKGBUILD">PKGBUILD#provides</a> (e.g. <code>'libsomething.so'</code>). To identify them <span class="plainlinks archwiki-template-man" title="$ man 1 find-libprovides"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/find-libprovides.1">find-libprovides(1)</a></span> (part of <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=devtools">devtools</a></span>) can be used.</li>
+</ul>
+<h2><span class="mw-headline" id="Package_sources">Package sources</span></h2>
+<ul>
+<li>HTTPS sources (<code>https://</code> for tarballs, <code>git+https://</code> for git sources) should be used wherever possible</li>
+<li>Sources should be verified using PGP signatures wherever possible (this might entail building from a git tag instead of a source tarball, if upstream signs commits and tags but not the tarballs)</li>
+</ul>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../File:Inaccurate.svg" decoding="async" width="48" height="48" class="mw-file-element"></span></span><b>The factual accuracy of this article or section is disputed.</b></p>
+<div>
+<b>Reason:</b> commit# is not required in recent pacman as proper checksum is supported for git sources. See<a rel="nofollow" class="external autonumber" href="https://gitlab.archlinux.org/pacman/pacman/-/commit/2fc2ab6cf0fbb93e1b3182a1997d3c9ffc9fc0fd">[1]</a>. gitea package also has been updated to use below approach (Discuss in <a rel="nofollow" class="external text" href="../en/Talk:Arch_package_guidelines.html">Talk:Arch package guidelines</a>)</div>
+</div>
+<ul><li>When building from a git tag, use its object hash obtained from <code>git rev-parse</code> instead of the tag name:</li></ul>
+<dl>
+<dd><pre>_tag=1234567890123456789012345678901234567890 # git rev-parse "v$pkgver"
+source=(git+https://$url.git?signed#tag=$_tag)
+
+pkgver() {
+    cd "$pkgname"
+    git describe
+}
+</pre></dd>
+<dd>An example for this approach can be found in the <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=gitea">gitea</a></span> package. The reason for this practice is that tags can be force pushed to change the commit that they are pointing to, which would alter the built package. Using the tag object hash ensures the integrity of the sources because force pushing the tag changes its hash. Using a <code>pkgver()</code> function prevents accidentally bumping <code>pkgver</code> without updating <code>_tag</code> as well.  See <a href="../en/VCS_package_guidelines.html#VCS_sources" title="VCS package guidelines">VCS package guidelines#VCS sources</a> for more info on the formatting of VCS sources.</dd>
+</dl>
+<ul>
+<li>
+<b>Do not diminish the security or validity of a package</b> (e.g. by removing a checksum check or by removing PGP signature verification), because an upstream release is broken or suddenly lacks a certain feature (e.g. PGP signature missing for a new release)</li>
+<li>Sources have to be unique in <code>srcdir</code> (this might require renaming them when downloading, e.g. <code>"${pkgname}-${pkgver}.tar.gz::https://${pkgname}.tld/download/${pkgver}.tar.gz"</code>)</li>
+<li>Avoid using specific mirrors (e.g. on sourceforge) to download, as they might become unavailable</li>
+</ul>
+<h2><span class="mw-headline" id="Working_with_upstream">Working with upstream</span></h2>
+<p>It is considered best-practice to work closely with upstream wherever possible. This entails reporting problems about building and testing a package.
+</p>
+<ul>
+<li>Report problems to upstream right away.</li>
+<li>Upstream patches wherever possible.</li>
+<li>Add comments with links to relevant (upstream) bug tracker tickets in the <a href="../en/PKGBUILD.html" title="PKGBUILD">PKGBUILD</a> (this is particularly important, as it ensures, that other packagers can understand changes and work with a package as well).</li>
+</ul>
+<p>It is recommended to track upstream with tools such as <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=nvchecker">nvchecker</a></span>, <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/nvrs/">nvrs</a></span><sup><small>AUR</small></sup> or <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=urlwatch">urlwatch</a></span> to be informed about new stable releases.
+</p>
+<h2><span class="mw-headline" id="Directories">Directories</span></h2>
+<ul>
+<li>
+<b>Configuration files</b> should be placed in the <code>/etc</code> directory. If there is more than one configuration file, it is customary to <b>use a subdirectory</b> in order to keep the <code>/etc</code> area as clean as possible. Use <code>/etc/<i>pkg</i></code>  where <code><i>pkg</i></code> is the name of the package (or a suitable alternative, eg, apache uses <code>/etc/httpd/</code>).</li>
+<li>Package files should follow these <b>general directory guidelines</b>:</li>
+</ul>
+<dl><dd><table class="wikitable">
+
+<tbody>
+<tr>
+<td>
+<code>/etc</code>
+</td>
+<td>
+<b>System-essential</b> configuration files
+</td>
+</tr>
+<tr>
+<td>
+<code>/usr/bin</code>
+</td>
+<td>Binaries
+</td>
+</tr>
+<tr>
+<td>
+<code>/usr/lib</code>
+</td>
+<td>Libraries
+</td>
+</tr>
+<tr>
+<td>
+<code>/usr/include</code>
+</td>
+<td>Header files
+</td>
+</tr>
+<tr>
+<td>
+<code>/usr/lib/<i>pkg</i></code>
+</td>
+<td>Modules, plugins, etc.
+</td>
+</tr>
+<tr>
+<td>
+<code>/usr/share/doc/<i>pkg</i></code>
+</td>
+<td>Application documentation
+</td>
+</tr>
+<tr>
+<td>
+<code>/usr/share/info</code>
+</td>
+<td>GNU Info system files
+</td>
+</tr>
+<tr>
+<td>
+<code>/usr/share/licenses/<i>pkg</i></code>
+</td>
+<td>Application licenses
+</td>
+</tr>
+<tr>
+<td>
+<code>/usr/share/man</code>
+</td>
+<td>Manpages
+</td>
+</tr>
+<tr>
+<td>
+<code>/usr/share/<i>pkg</i></code>
+</td>
+<td>Application data
+</td>
+</tr>
+<tr>
+<td>
+<code>/var/lib/<i>pkg</i></code>
+</td>
+<td>Persistent application storage
+</td>
+</tr>
+<tr>
+<td>
+<code>/etc/<i>pkg</i></code>
+</td>
+<td>Configuration files for <i>pkg</i>
+</td>
+</tr>
+<tr>
+<td>
+<code>/opt/<i>pkg</i></code>
+</td>
+<td>Large self-contained packages
+</td>
+</tr>
+</tbody>
+</table></dd></dl>
+<ul><li>Packages should not contain any of the following directories:
+<ul>
+<li><code>/bin</code></li>
+<li><code>/sbin</code></li>
+<li><code>/dev</code></li>
+<li><code>/home</code></li>
+<li><code>/srv</code></li>
+<li><code>/media</code></li>
+<li><code>/mnt</code></li>
+<li><code>/proc</code></li>
+<li><code>/root</code></li>
+<li><code>/selinux</code></li>
+<li><code>/sys</code></li>
+<li><code>/tmp</code></li>
+<li><code>/var/tmp</code></li>
+<li><code>/run</code></li>
+</ul>
+</li></ul>
+<h2><span class="mw-headline" id="Makepkg_duties">Makepkg duties</span></h2>
+<p>When <a href="../en/Makepkg.html" title="Makepkg">makepkg</a> is used to build a package, it does the following automatically:
+</p>
+<ol>
+<li>Checks if package <b>dependencies</b> and <b>makedepends</b> are installed</li>
+<li>
+<b>Downloads source</b> files from servers</li>
+<li>
+<b>Checks the integrity</b> of source files</li>
+<li>
+<b>Unpacks</b> source files</li>
+<li>Does any necessary <b>patching</b>
+</li>
+<li>
+<b>Builds</b> the software and installs it in a fake root</li>
+<li>
+<b>Strips</b> symbols from binaries</li>
+<li>
+<b>Strips</b> debugging symbols from libraries</li>
+<li>
+<b>Compresses</b> manual and/or info pages</li>
+<li>Generates the <b>package meta file</b> which is included with each package</li>
+<li>
+<b>Compresses</b> the fake root into the package file</li>
+<li>
+<b>Stores</b> the package file in the configured destination directory (i.e. the current working directory by default)</li>
+</ol>
+<h2><span class="mw-headline" id="Architectures">Architectures</span></h2>
+<p>The <code>arch</code> array should contain <code>'x86_64'</code> if the compiled package is architecture-specific. Otherwise, use <code>'any'</code> for architecture independent packages.
+</p>
+<h2><span class="mw-headline" id="Licenses">Licenses</span></h2>
+<p>See <a href="../en/PKGBUILD.html#license" title="PKGBUILD">PKGBUILD#license</a>.
+</p>
+<h2><span class="mw-headline" id="Reproducible_builds">Reproducible builds</span></h2>
+<p>Arch is working on making all packages <a href="../en/Reproducible_builds.html" title="Reproducible builds">reproducible</a>. A packager can check if a package is reproducible with <code>makerepropkg</code> from <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=devtools">devtools</a></span> or <code>repro</code> from <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=archlinux-repro">archlinux-repro</a></span>.
+</p>
+<pre>$ makerepropkg $pkgname-1-1-any.pkg.tar.zst
+</pre>
+<p>Or
+</p>
+<pre>$ repro -f $pkgname-1-1-any.pkg.tar.zst
+</pre>
+<p>If the timestamp is required at build-time, use the environment variable <code>SOURCE_DATE_EPOCH</code>. The format is <a rel="nofollow" class="external text" href="https://reproducible-builds.org/docs/source-date-epoch/">documented upstream</a>.
+</p>
+</div>
+</div>
+					<div id="catlinks" class="catlinks" data-mw="interface">
+<div id="mw-normal-catlinks" class="mw-normal-catlinks">
+<a href="../Special:Categories.html" title="Special:Categories">Category</a>: <ul><li><a href="../en/Category:Arch_package_guidelines.html" title="Category:Arch package guidelines">Arch package guidelines</a></li></ul>
+</div>
+<div id="mw-hidden-catlinks" class="mw-hidden-catlinks mw-hidden-cats-hidden">Hidden category: <ul><li><a href="../en/Category:Pages_or_sections_flagged_with_Template:Accuracy.html" title="Category:Pages or sections flagged with Template:Accuracy">Pages or sections flagged with Template:Accuracy</a></li></ul>
+</div>
+</div>
+				</div>
+			</main>
+			
+		</div>
+		<div class="mw-footer-container">
+			
+<footer id="footer" class="mw-footer" style="margin: 0">
+	<ul id="footer-info">
+	<li data-nosnippet="">Retrieved from "<a dir="ltr" href="https://wiki.archlinux.org/index.php?title=Arch_package_guidelines&amp;oldid=824452">https://wiki.archlinux.org/index.php?title=Arch_package_guidelines&amp;oldid=824452</a>"</li>
+<li id="footer-info-lastmod"> This page was last edited on 2 January 2025, at 20:29.</li>
+	<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+<br>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="https://terms.archlinux.org/docs/privacy-policy/">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="../en/ArchWiki:About.html">About ArchWiki</a></li>
+	<li id="footer-places-disclaimers"><a href="../en/ArchWiki:General_disclaimer.html">Disclaimers</a></li>
+	<li id="footer-places-archwiki-code-of-conduct"><a href="https://terms.archlinux.org/docs/code-of-conduct/" class="extiw" title="archlinux-service-agreements:code-of-conduct">Code of conduct</a></li>
+	<li id="footer-places-archwiki-terms-of-service"><a href="https://terms.archlinux.org/docs/terms-of-service/" class="extiw" title="archlinux-service-agreements:terms-of-service">Terms of service</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-copyrightico"><a href="https://www.gnu.org/copyleft/fdl.html" class="cdx-button cdx-button--fake-button cdx-button--size-large cdx-button--fake-button--enabled"><img src="/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" loading="lazy"></a></li>
+	<li id="footer-poweredbyico"><img src="/resources/assets/poweredby_mediawiki.svg" width="88" height="31" loading="lazy"></li>
+</ul>
+
+</footer>
+
+		</div>
+	</div> 
+</div> 
+<div class="vector-settings" id="p-dock-bottom">
+	<ul></ul>
+</div>
+</body>
+</html>

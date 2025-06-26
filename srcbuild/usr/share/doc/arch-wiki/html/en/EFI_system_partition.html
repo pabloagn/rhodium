@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-sticky-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-0 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-disabled skin-theme-clientpref-day vector-toc-available" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>EFI system partition - ArchWiki</title>
+<link rel="stylesheet" href="../ArchWikiOffline.css">
+<meta name="ResourceLoaderDynamicStyles" content="">
+<meta name="generator" content="MediaWiki 1.43.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="max-image-preview:standard">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.25, maximum-scale=5.0">
+<link rel="search" type="application/opensearchdescription+xml" href="/rest.php/v1/search" title="ArchWiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.archlinux.org/api.php?action=rsd">
+<link rel="license" href="https://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="ArchWiki Atom feed" href="/index.php?title=Special:RecentChanges&amp;feed=atom">
+</head>
+<body class="skin--responsive skin-vector skin-vector-search-vue mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-EFI_system_partition rootpage-EFI_system_partition skin-vector-2022 action-view">
+<a class="mw-jump-link" href="#bodyContent">Jump to content</a>
+<div class="vector-header-container">
+	</div>
+<div class="mw-page-container">
+	<div class="mw-page-container-inner">
+		<div class="vector-column-start">
+			<div class="vector-main-menu-container">
+		</div>
+	<div class="vector-sticky-pinned-container">
+				<nav id="mw-panel-toc" aria-label="Contents" data-event-name="ui.sidebar-toc" class="mw-table-of-contents-container vector-toc-landmark">
+					<div id="vector-toc-pinned-container" class="vector-pinned-container">
+					<div id="vector-toc" class="vector-toc vector-pinnable-element">
+	<div class="vector-pinnable-header vector-toc-pinnable-header vector-pinnable-header-pinned" data-feature-name="toc-pinned" data-pinnable-element-id="vector-toc">
+	<h2 class="vector-pinnable-header-label">Contents</h2>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-toc.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-toc.unpin">hide</button>
+</div>
+
+
+	<ul class="vector-toc-contents" id="mw-panel-toc-list">
+		<li id="toc-mw-content-text" class="vector-toc-list-item vector-toc-level-1">
+			<a href="#" class="vector-toc-link">
+				<div class="vector-toc-text">Beginning</div>
+			</a>
+		</li>
+		<li id="toc-Check_for_an_existing_partition" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Check_for_an_existing_partition">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">1</span>
+				<span>Check for an existing partition</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Check_for_an_existing_partition-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Create_the_partition" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Create_the_partition">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">2</span>
+				<span>Create the partition</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Create_the_partition-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Create the partition subsection</span>
+			</button>
+		
+		<ul id="toc-Create_the_partition-sublist" class="vector-toc-list">
+			<li id="toc-GPT_partitioned_disks" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#GPT_partitioned_disks">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1</span>
+					<span>GPT partitioned disks</span>
+				</div>
+			</a>
+			
+			<ul id="toc-GPT_partitioned_disks-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-MBR_partitioned_disks" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#MBR_partitioned_disks">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2</span>
+					<span>MBR partitioned disks</span>
+				</div>
+			</a>
+			
+			<ul id="toc-MBR_partitioned_disks-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Format_the_partition" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Format_the_partition">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">3</span>
+				<span>Format the partition</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Format_the_partition-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Mount_the_partition" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Mount_the_partition">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">4</span>
+				<span>Mount the partition</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Mount_the_partition-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Mount the partition subsection</span>
+			</button>
+		
+		<ul id="toc-Mount_the_partition-sublist" class="vector-toc-list">
+			<li id="toc-Typical_mount_points" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Typical_mount_points">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.1</span>
+					<span>Typical mount points</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Typical_mount_points-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Alternative_mount_points" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Alternative_mount_points">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.2</span>
+					<span>Alternative mount points</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Alternative_mount_points-sublist" class="vector-toc-list">
+				<li id="toc-Using_bind_mount" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Using_bind_mount">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.2.1</span>
+					<span>Using bind mount</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Using_bind_mount-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Using_systemd" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Using_systemd">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.2.2</span>
+					<span>Using systemd</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Using_systemd-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Using_filesystem_events" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Using_filesystem_events">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.2.3</span>
+					<span>Using filesystem events</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Using_filesystem_events-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Using_mkinitcpio_preset" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Using_mkinitcpio_preset">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.2.4</span>
+					<span>Using mkinitcpio preset</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Using_mkinitcpio_preset-sublist" class="vector-toc-list">
+				<li id="toc-Replacing_the_mkinitcpio_hook" class="vector-toc-list-item vector-toc-level-4">
+			<a class="vector-toc-link" href="#Replacing_the_mkinitcpio_hook">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.2.4.1</span>
+					<span>Replacing the mkinitcpio hook</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Replacing_the_mkinitcpio_hook-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Another_example" class="vector-toc-list-item vector-toc-level-4">
+			<a class="vector-toc-link" href="#Another_example">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.2.4.2</span>
+					<span>Another example</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Another_example-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Using_a_mkinitcpio_post_hook" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Using_a_mkinitcpio_post_hook">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.2.5</span>
+					<span>Using a mkinitcpio post hook</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Using_a_mkinitcpio_post_hook-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Using_pacman_hook" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Using_pacman_hook">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.2.6</span>
+					<span>Using pacman hook</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Using_pacman_hook-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Tips_and_tricks" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Tips_and_tricks">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">5</span>
+				<span>Tips and tricks</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Tips_and_tricks-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Tips and tricks subsection</span>
+			</button>
+		
+		<ul id="toc-Tips_and_tricks-sublist" class="vector-toc-list">
+			<li id="toc-Replace_the_partition_with_a_larger_one" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Replace_the_partition_with_a_larger_one">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.1</span>
+					<span>Replace the partition with a larger one</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Replace_the_partition_with_a_larger_one-sublist" class="vector-toc-list">
+				<li id="toc-Free_up_space_for_a_new_partition_in_Windows" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Free_up_space_for_a_new_partition_in_Windows">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.1.1</span>
+					<span>Free up space for a new partition in Windows</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Free_up_space_for_a_new_partition_in_Windows-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Delete_the_old_partition_and_create_a_new_one" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Delete_the_old_partition_and_create_a_new_one">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.1.2</span>
+					<span>Delete the old partition and create a new one</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Delete_the_old_partition_and_create_a_new_one-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Sacrifice_an_adjacent_swap_partition_to_enlarge_the_ESP" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Sacrifice_an_adjacent_swap_partition_to_enlarge_the_ESP">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.1.3</span>
+					<span>Sacrifice an adjacent swap partition to enlarge the ESP</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Sacrifice_an_adjacent_swap_partition_to_enlarge_the_ESP-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Troubleshooting" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Troubleshooting">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">6</span>
+				<span>Troubleshooting</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Troubleshooting-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Troubleshooting subsection</span>
+			</button>
+		
+		<ul id="toc-Troubleshooting-sublist" class="vector-toc-list">
+			<li id="toc-ESP_on_software_RAID1" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#ESP_on_software_RAID1">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.1</span>
+					<span>ESP on software RAID1</span>
+				</div>
+			</a>
+			
+			<ul id="toc-ESP_on_software_RAID1-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Firmware_does_not_see_the_EFI_directory" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Firmware_does_not_see_the_EFI_directory">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.2</span>
+					<span>Firmware does not see the EFI directory</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Firmware_does_not_see_the_EFI_directory-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-See_also" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#See_also">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">7</span>
+				<span>See also</span>
+			</div>
+		</a>
+		
+		<ul id="toc-See_also-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+</ul>
+</div>
+
+					</div>
+		</nav>
+			</div>
+		</div>
+		<div class="mw-content-container">
+			<main id="content" class="mw-body" style="margin: 0">
+				<header class="mw-body-header vector-page-titlebar">
+					<nav aria-label="Contents" class="vector-toc-landmark">
+						
+<div id="vector-page-titlebar-toc" class="vector-dropdown vector-page-titlebar-toc vector-button-flush-left">
+	<input type="checkbox" id="vector-page-titlebar-toc-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-page-titlebar-toc" class="vector-dropdown-checkbox " aria-label="Toggle the table of contents">
+	<label id="vector-page-titlebar-toc-label" for="vector-page-titlebar-toc-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"><span class="vector-icon mw-ui-icon-listBullet mw-ui-icon-wikimedia-listBullet"></span>
+
+<span class="vector-dropdown-label-text">Toggle the table of contents</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+							<div id="vector-page-titlebar-toc-unpinned-container" class="vector-unpinned-container">
+			</div>
+		
+	</div>
+</div>
+
+					</nav>
+					<h1 id="firstHeading" class="firstHeading mw-first-heading"><span class="mw-page-title-main">EFI system partition</span></h1>
+							
+<div id="p-lang-btn" class="vector-dropdown mw-portlet mw-portlet-lang">
+	<input type="checkbox" id="p-lang-btn-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-p-lang-btn" class="vector-dropdown-checkbox mw-interlanguage-selector" aria-label="Go to an article in another language. Available in 6 languages">
+	<label id="p-lang-btn-label" for="p-lang-btn-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--action-progressive mw-portlet-lang-heading-6" aria-hidden="true"><span class="vector-icon mw-ui-icon-language-progressive mw-ui-icon-wikimedia-language-progressive"></span>
+
+<span class="vector-dropdown-label-text">6 languages</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+		<div class="vector-menu-content">
+			
+			<ul class="vector-menu-content-list">
+				
+				<li class="interlanguage-link interwiki-es mw-list-item"><a href="../es/EFI_system_partition.html" title="EFI system partition – español" lang="es" hreflang="es" data-title="EFI system partition" data-language-autonym="Español" data-language-local-name="español" class="interlanguage-link-target"><span>Español</span></a></li>
+<li class="interlanguage-link interwiki-fr mw-list-item"><a href="../fr/EFI_system_partition.html" title="EFI system partition – français" lang="fr" hreflang="fr" data-title="EFI system partition" data-language-autonym="Français" data-language-local-name="français" class="interlanguage-link-target"><span>Français</span></a></li>
+<li class="interlanguage-link interwiki-ja mw-list-item"><a href="https://wiki.archlinux.jp/index.php/EFI_%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%83%91%E3%83%BC%E3%83%86%E3%82%A3%E3%82%B7%E3%83%A7%E3%83%B3" title="EFI システムパーティション – 日本語" lang="ja" hreflang="ja" data-title="EFI システムパーティション" data-language-autonym="日本語" data-language-local-name="日本語" class="interlanguage-link-target"><span>日本語</span></a></li>
+<li class="interlanguage-link interwiki-pt mw-list-item"><a href="../pt/EFI_system_partition.html" title="EFI system partition – português" lang="pt" hreflang="pt" data-title="EFI system partition" data-language-autonym="Português" data-language-local-name="português" class="interlanguage-link-target"><span>Português</span></a></li>
+<li class="interlanguage-link interwiki-ru mw-list-item"><a href="../ru/EFI_system_partition.html" title="EFI system partition – русский" lang="ru" hreflang="ru" data-title="EFI system partition" data-language-autonym="Русский" data-language-local-name="русский" class="interlanguage-link-target"><span>Русский</span></a></li>
+<li class="interlanguage-link interwiki-zh-hans mw-list-item"><a href="https://wiki.archlinuxcn.org/wiki/EFI_system_partition" title="EFI system partition – 中文（简体）" lang="zh-Hans" hreflang="zh-Hans" data-title="EFI system partition" data-language-autonym="中文（简体）" data-language-local-name="中文（简体）" class="interlanguage-link-target"><span>中文（简体）</span></a></li>
+			</ul>
+			
+		</div>
+
+	</div>
+</div>
+</header>
+				<div class="vector-column-end">
+					<div class="vector-sticky-pinned-container">
+						<nav class="vector-page-tools-landmark" aria-label="Page tools">
+							<div id="vector-page-tools-pinned-container" class="vector-pinned-container">
+				
+							</div>
+		</nav>
+						<nav class="vector-appearance-landmark" aria-label="Appearance">
+							<div id="vector-appearance-pinned-container" class="vector-pinned-container">
+				<div id="vector-appearance" class="vector-appearance vector-pinnable-element">
+	<div class="vector-pinnable-header vector-appearance-pinnable-header vector-pinnable-header-pinned" data-feature-name="appearance-pinned" data-pinnable-element-id="vector-appearance" data-pinned-container-id="vector-appearance-pinned-container" data-unpinned-container-id="vector-appearance-unpinned-container">
+	<div class="vector-pinnable-header-label">Appearance</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-appearance.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-appearance.unpin">hide</button>
+</div>
+
+
+</div>
+
+							</div>
+		</nav>
+					</div>
+				</div>
+				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container>
+					<div class="vector-body-before-content">
+							<div class="mw-indicators">
+		</div>
+
+						<div id="siteSub" class="noprint">From ArchWiki</div>
+					</div>
+					<div id="contentSub"><div id="mw-content-subtitle"></div></div>
+					
+					
+					<div id="mw-content-text" class="mw-body-content">
+<div class="mw-content-ltr mw-parser-output" lang="en" dir="ltr">
+<div class="archwiki-template-meta-related-articles">
+<p>Related articles</p>
+<ul>
+<li><a href="../en/Unified_Extensible_Firmware_Interface.html" title="Unified Extensible Firmware Interface">Unified Extensible Firmware Interface</a></li>
+<li><a href="../en/Arch_boot_process.html#Boot_loader" class="mw-redirect" title="Boot loader">Boot loader</a></li>
+</ul>
+</div>
+<p>The <a href="https://en.wikipedia.org/wiki/EFI_system_partition" class="extiw" title="wikipedia:EFI system partition">EFI system partition</a> (also called ESP) is an OS independent partition that acts as the storage place for the UEFI boot loaders, applications  and drivers to be launched by the UEFI firmware. It is mandatory for UEFI boot.
+</p>
+<meta property="mw:PageProp/toc">
+<h2><span class="mw-headline" id="Check_for_an_existing_partition">Check for an existing partition</span></h2>
+<p>If you are installing Arch Linux on an UEFI-capable computer with an installed operating system, like <a href="../en/Dual_boot_with_Windows.html" title="Dual boot with Windows">Windows</a> 10 for example, it is very likely that you already have an EFI system partition.
+</p>
+<p>To find out the disk partition scheme and the system partition, use <a href="../en/Fdisk.html" title="Fdisk">fdisk</a> as root on the disk you want to boot from:
+</p>
+<pre># fdisk -l /dev/sd<i>x</i>
+</pre>
+<p>The command returns:
+</p>
+<ul>
+<li>The disk's partition table: it indicates <code>Disklabel type: gpt</code> if the partition table is <a href="../en/Partitioning.html#GUID_Partition_Table" class="mw-redirect" title="GPT">GPT</a> or <code>Disklabel type: dos</code> if it is <a href="../en/Partitioning.html#Master_Boot_Record" class="mw-redirect" title="MBR">MBR</a>.</li>
+<li>The list of partitions on the disk: Look for the EFI system partition in the list, it is usually at least 100 MiB in size and has the type <code>EFI System</code> or <code>EFI (FAT-12/16/32)</code>. To confirm this is the ESP, <a href="../en/File_systems.html#Mount_a_file_system" class="mw-redirect" title="Mount">mount</a> it and check whether it contains a directory named <code>EFI</code>, if it does this is definitely the ESP.</li>
+</ul>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> To find out whether it is a FAT12, FAT16 or FAT32 file system, follow <a href="../en/FAT.html#Detecting_FAT_type" title="FAT">FAT#Detecting FAT type</a>.</div>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Warning:</strong> When dual-booting, avoid reformatting the ESP if possible, as it may contain files required to boot other operating systems. If the existing ESP is smaller than the <a href="#Create_the_partition">suggested minimum size</a>, you may need to <a href="#Replace_the_partition_with_a_larger_one">replace it with a larger one</a>.</div>
+<p>If you found an acceptable existing EFI system partition, simply proceed to <a href="#Mount_the_partition">#Mount the partition</a>. If you did not find one, you will need to create it, proceed to <a href="#Create_the_partition">#Create the partition</a>.
+</p>
+<h2><span class="mw-headline" id="Create_the_partition">Create the partition</span></h2>
+<p>The following two sections show how to create an EFI system partition (ESP).
+</p>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Warning:</strong> The EFI system partition must be a physical partition in the main partition table of the disk, not under LVM or software RAID etc.</div>
+<p>The partition size should provide adequate space for storing boot loaders and other files required for booting.
+</p>
+<p>It is recommended to make the partition 1 GiB in size to ensure it has adequate space for multiple kernels or unified kernel images, a boot loader, firmware updates files and any other operating system or OEM files. If still in doubt, <b>4 GiB</b> ought to be enough for anybody, e.g., for tools like <a href="../en/Limine.html#Snapper_snapshot_integration_for_Btrfs" title="Limine">Limine bootloader with Snapper integration for Btrfs</a>, which supports creating multiple bootable snapshots.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> It is possible to use a smaller partition, but mind the potential compatibility issues:
+<ul>
+<li>For early and/or buggy UEFI implementations the size of at least 512 MiB might be needed.<a rel="nofollow" class="external autonumber" href="https://www.rodsbooks.com/efi-bootloaders/principles.html">[1]</a>
+</li>
+<li>If you plan to mount the partition to <a href="../en/Partitioning.html#/boot" title="Partitioning">/boot</a> and will not install more than one kernel, then 400 MiB will be sufficient.</li>
+<li>When <a href="../en/Dual_boot_with_Windows.html" title="Dual boot with Windows">dual booting with Windows</a>, the size should be at least 300 MiB for drives with a 4096 logical sector size (<a href="../en/Advanced_Format.html" title="Advanced Format">Advanced Format</a> 4Kn drives)<a rel="nofollow" class="external autonumber" href="https://superuser.com/questions/1310927/what-is-the-absolute-minimum-size-a-uefi-partition-can-be/1310938">[2]</a> or at least 100 MiB otherwise.<a rel="nofollow" class="external autonumber" href="https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/configure-uefigpt-based-hard-drive-partitions#diskpartitionrules">[3]</a>
+</li>
+<li>To ensure the partition can be formatted to FAT32, it should be at least 36 MiB on drives with 512 byte logical sector size and 260 MiB on drives with 4096 logical sector size.<a rel="nofollow" class="external autonumber" href="https://superuser.com/a/1717643">[4]</a>
+</li>
+<li>If none of these are relevant issues, the partition size can be as small as 2 MiB, in which case it could house nothing more than a boot loader.</li>
+</ul>
+</div>
+<h3><span class="mw-headline" id="GPT_partitioned_disks">GPT partitioned disks</span></h3>
+<p>EFI system partition on a <a href="../en/Partitioning.html#GUID_Partition_Table" class="mw-redirect" title="GUID Partition Table">GUID Partition Table</a> is identified by the <a href="https://en.wikipedia.org/wiki/GUID_Partition_Table#Partition_type_GUIDs" class="extiw" title="wikipedia:GUID Partition Table">partition type GUID</a> <code>C12A7328-F81F-11D2-BA4B-00A0C93EC93B</code>.
+</p>
+<p><b>Choose one</b> of the following methods to create an ESP for a GPT partitioned disk:
+</p>
+<ul>
+<li>
+<a href="../en/Fdisk.html" title="Fdisk">fdisk</a>: Create a partition and use the <code>t</code> command to <a href="../en/Fdisk.html#Change_partition_type" title="Fdisk">change its partition type</a> to <code>EFI System</code> using the alias <code>uefi</code>.</li>
+<li>
+<a href="../en/GPT_fdisk.html" class="mw-redirect" title="Gdisk">gdisk</a>: Create a partition with partition type <code>EF00</code>.</li>
+<li>
+<a href="../en/Parted.html" class="mw-redirect" title="GNU Parted">GNU Parted</a>: Create a partition with <code>fat32</code> as the file system type and set the <code>esp</code> flag on it.</li>
+</ul>
+<p>After creating the partition, it should be formatted with a file system. Proceed to the <a href="#Format_the_partition">#Format the partition</a> section below.
+</p>
+<h3><span class="mw-headline" id="MBR_partitioned_disks">MBR partitioned disks</span></h3>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Warning:</strong> It is highly recommended to use GPT instead of MBR.
+<ul>
+<li>Some firmware might not support UEFI/MBR booting due to it not being supported by <a href="../en/Dual_boot_with_Windows.html" title="Dual boot with Windows">Windows Setup</a>.</li>
+<li>
+<i>bootctl</i> does not support installing <a href="../en/Systemd-boot.html" title="Systemd-boot">systemd-boot</a> to an MBR partitioned disk; see <a rel="nofollow" class="external text" href="https://github.com/systemd/systemd/issues/1125">systemd issue 1125</a>.</li>
+</ul>
+<p>See also <a href="../en/Partitioning.html#Choosing_between_GPT_and_MBR" title="Partitioning">Partitioning#Choosing between GPT and MBR</a> for the limits of MBR and the advantages of GPT in general.
+</p>
+</div>
+<p>EFI system partition on a <a href="../en/Partitioning.html#Master_Boot_Record" class="mw-redirect" title="Master Boot Record">Master Boot Record</a> partition table is identified by the <a href="https://en.wikipedia.org/wiki/Partition_type" class="extiw" title="wikipedia:Partition type">partition type ID</a> <code>EF</code>.
+</p>
+<p><b>Choose one</b> of the following methods to create an ESP for a MBR partitioned disk:
+</p>
+<ul>
+<li>
+<a href="../en/Fdisk.html" title="Fdisk">fdisk</a>: Create a primary partition and and use the <code>t</code> command to <a href="../en/Fdisk.html#Change_partition_type" title="Fdisk">change its partition type</a> to <code>EFI (FAT-12/16/32)</code>.</li>
+<li>
+<a href="../en/Parted.html" class="mw-redirect" title="GNU Parted">GNU Parted</a>: Create a primary partition with <code>fat32</code> as the file system type and set the <code>esp</code> flag on it.</li>
+</ul>
+<p>After creating the partition, it should be formatted with a file system. Proceed to the <a href="#Format_the_partition">#Format the partition</a> section below.
+</p>
+<h2><span class="mw-headline" id="Format_the_partition">Format the partition</span></h2>
+<p>The UEFI specification mandates support for the FAT12, FAT16, and FAT32 file systems (see <a rel="nofollow" class="external text" href="https://uefi.org/specs/UEFI/2.10/13_Protocols_Media_Access.html#file-system-format-1">UEFI specification version 2.10, section 13.3.1.1</a>), but any conformant vendor can optionally add support for additional file systems; for example, the firmware in Apple <a href="../en/Mac.html" title="Mac">Macs</a> supports the HFS+ file system.
+</p>
+<p>To prevent potential issues with other operating systems and since the UEFI specification says that UEFI "encompasses the use of FAT32 for a system partition, and FAT12 or FAT16 for removable media"<a rel="nofollow" class="external autonumber" href="https://uefi.org/specs/UEFI/2.10/13_Protocols_Media_Access.html#file-system-format">[5]</a>, it is recommended to use <a href="../en/FAT.html" class="mw-redirect" title="FAT32">FAT32</a>. Use the <span class="plainlinks archwiki-template-man" title="$ man 8 mkfs.fat"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/mkfs.fat.8">mkfs.fat(8)</a></span> utility from <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=dosfstools">dosfstools</a></span>:
+</p>
+<pre># mkfs.fat -F 32 /dev/sd<i>xY</i>
+</pre>
+<p>If you get the message <code>WARNING: Not enough clusters for a 32 bit FAT!</code> and you cannot <a href="#Create_the_partition">create</a> a larger ESP, reduce cluster size with <code>mkfs.fat -s2 -F32 ...</code> or <code>-s1</code>; otherwise the partition may be unreadable by UEFI. See <span class="plainlinks archwiki-template-man" title="$ man 8 mkfs.fat"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/mkfs.fat.8">mkfs.fat(8)</a></span> for supported cluster sizes.
+</p>
+<p>For partitions smaller than 32 MiB using FAT32 may not be possible. In which case, format it to FAT16 or even FAT12. For example, a 2 MiB ESP will only be able to support FAT12:
+</p>
+<pre># mkfs.fat -F 12 /dev/sd<i>xY</i>
+</pre>
+<h2><span class="mw-headline" id="Mount_the_partition">Mount the partition</span></h2>
+<p>The kernels, initramfs files, and, in most cases, the processor's <a href="../en/Microcode.html" title="Microcode">microcode</a>, need to be accessible by the <a href="../en/Arch_boot_process.html#Boot_loader" class="mw-redirect" title="Boot loader">boot loader</a> or UEFI itself to successfully boot the system. Thus if you want to keep the setup simple, your boot loader choice limits the available mount points for EFI system partition.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> If the ESP is not mounted to <code>/boot</code>, make sure to not rely on the <a href="../en/Fstab.html#Automount_with_systemd" title="Fstab">systemd automount mechanism</a> (including that of <a href="../en/Systemd.html#GPT_partition_automounting" title="Systemd">systemd-gpt-auto-generator</a>) during kernel upgrades. Always mount it manually prior to any system or kernel update, otherwise you may not be able to mount it after the update, locking you in the currently running kernel with no ability to update the copy of kernel on the ESP.
+<p>Alternatively <a href="../en/Kernel_module.html#systemd" title="Kernel module">preload the required kernel modules on boot</a>, e.g.:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/modules-load.d/vfat.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">vfat
+nls_cp437
+nls_ascii
+</pre>
+</div>
+<h3><span class="mw-headline" id="Typical_mount_points">Typical mount points</span></h3>
+<p>The three typical scenarios for mounting the EFI system partition are:
+</p>
+<ul>
+<li>
+<a href="../en/File_systems.html#Mount_a_file_system" class="mw-redirect" title="Mount">mount</a> the ESP to <code>/boot</code>:
+<ul>
+<li>This facilitates system maintenance and administration, as <code>/boot</code> is the default path where <a href="../en/Microcode.html" title="Microcode">microcode</a> packages place the CPU microcode initramfs files and where <a href="../en/Mkinitcpio.html" title="Mkinitcpio">mkinitcpio</a> places <a href="../en/Kernel.html" title="Kernel">kernels</a> and <a href="../en/Arch_boot_process.html#initramfs" class="mw-redirect" title="Initramfs">initramfs</a> images.</li>
+<li>This ensures that the above files are accessible to most <a href="../en/Arch_boot_process.html#Boot_loader" class="mw-redirect" title="Boot loader">boot loaders</a>, as not all of them can access files on other volumes.</li>
+<li>This prevents setting file-specific <a href="../en/File_permissions_and_attributes.html" class="mw-redirect" title="Permissions">permissions</a> and/or <a href="../en/Extended_attributes.html" title="Extended attributes">extended attributes</a>, as FAT sets global permissions at mount time</li>
+<li>This increases the size requirement for the ESP, as files normally installed in <code>/boot</code> will join the EFI-related ones.</li>
+<li>In the case of dual-booting, this exposes the OS-specific boot files to potentially hazardous manipulation from other OSes.</li>
+<li>This makes <a href="../en/GRUB.html#Encrypted_/boot" title="GRUB">encrypting /boot</a> impossible, as EFI-related files have to be accessible by the firmware.</li>
+</ul>
+</li>
+<li>
+<a href="../en/File_systems.html#Mount_a_file_system" class="mw-redirect" title="Mount">mount</a> the ESP to <code>/efi</code>:
+<ul>
+<li>It ensures a separation of concerns between OS- and EFI-related files, which may include other OSes' files better left alone.</li>
+<li>It avoids increasing the size requirement of the ESP by not placing the files installed to <code>/boot</code> in it: only the EFI binaries (the boot loader (and optionally drivers) and/or the unified kernel image) will be stored on the ESP, which saves storage space.</li>
+<li>It allows to preserve Linux-specific filesystem permissions for files residing in <code>/boot</code>, avoiding FAT limitations.</li>
+<li>It allows to mount separately the ESP according to the need, <i>e.g.</i> only when upgrading the <a href="../en/Arch_boot_process.html#Boot_loader" class="mw-redirect" title="Boot loader">boot loader</a>.</li>
+<li>If using <a href="../en/Dm-crypt/Encrypting_an_entire_system.html" title="Dm-crypt/Encrypting an entire system">system encryption</a> with the appropriate setup, it allows to leave only a few required files unencrypted while <code>/boot</code> remains protected: this can be useful for <a href="../en/Unified_kernel_image.html" title="Unified kernel image">unified kernel images</a> or <a href="../en/Arch_boot_process.html#Boot_loader" class="mw-redirect" title="Boot loader">boot loaders</a> that have file system drivers capable of accessing the kernel(s) and files that are stored elsewhere.</li>
+</ul>
+</li>
+<li>
+<a href="../en/File_systems.html#Mount_a_file_system" class="mw-redirect" title="Mount">mount</a> the ESP to <code>/efi</code> and additionally mount an "Extended Boot Loader Partition" (XBOOTLDR) to <code>/boot</code>. This can be useful when a previously created ESP is too small to hold multiple boot loaders and/or kernels but the ESP cannot be easily resized (such as when installing Linux after Windows to <a href="../en/Dual_boot_with_Windows.html" class="mw-redirect" title="Dual boot">dual boot</a>). This method is supported by at least <a href="../en/Systemd-boot.html#Installation_using_XBOOTLDR" title="Systemd-boot">systemd-boot</a>.</li>
+</ul>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> 
+<ul>
+<li>
+<code>/efi</code> is a replacement<a rel="nofollow" class="external autonumber" href="https://uapi-group.org/specifications/specs/boot_loader_specification/#mount-points">[6]</a><a rel="nofollow" class="external autonumber" href="https://github.com/systemd/systemd/pull/3757#issuecomment-234290236">[7]</a> for the historical and now discouraged ESP mountpoint <code>/boot/efi</code>.</li>
+<li>The <code>/efi</code> directory is not available by default, you will need to first <a href="../en/Help:Reading.html#Append,_add,_create,_edit" class="mw-redirect" title="Create">create</a> it before mounting the ESP to it.</li>
+</ul>
+</div>
+<h3><span class="mw-headline" id="Alternative_mount_points">Alternative mount points</span></h3>
+<p>If you do not use one of the <a href="#Typical_mount_points">#Typical mount points</a>, you will need to copy your boot files to ESP (referred to hereafter as <code><i>esp</i></code>).
+</p>
+<pre># mkdir -p <i>esp</i>/EFI/arch
+# cp -a /boot/vmlinuz-linux <i>esp</i>/EFI/arch/
+# cp -a /boot/initramfs-linux.img <i>esp</i>/EFI/arch/
+# cp -a /boot/initramfs-linux-fallback.img <i>esp</i>/EFI/arch/
+</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> If you use <a href="../en/Microcode.html#Microcode_in_a_separate_initramfs_file" title="Microcode">external microcode initramfs images</a>, they will also need to be copied to the boot-entry location.</div>
+<p>Furthermore, you will need to keep the files on the ESP up-to-date with later kernel updates. Failure to do so could result in an unbootable system. The following sections discuss several mechanisms for automating it.
+</p>
+<h4><span class="mw-headline" id="Using_bind_mount">Using bind mount</span></h4>
+<p>Instead of mounting the ESP itself to <code>/boot</code>, you can mount a directory of the ESP to <code>/boot</code> using a bind <a href="../en/File_systems.html#Mount_a_file_system" class="mw-redirect" title="Mount">mount</a> (see <span class="plainlinks archwiki-template-man" title="$ man 8 mount"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/mount.8">mount(8)</a></span>). This allows <a href="../en/Pacman.html" title="Pacman">pacman</a> to update the kernel directly while keeping the ESP organized to your liking.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> This requires a <a href="../en/FAT.html#Kernel_configuration" title="FAT">kernel</a> and <a href="../en/Arch_boot_process.html#Boot_loader" class="mw-redirect" title="Boot loader">boot loader</a> compatible with FAT32. This is not an issue for a regular Arch install, but could be problematic for other distributions (namely those that require symlinks in <code>/boot/</code>). See the forum post <a rel="nofollow" class="external autonumber" href="https://bbs.archlinux.org/viewtopic.php?pid=1331867#p1331867">[8]</a>.</div>
+<p>Just like in <a href="#Alternative_mount_points">#Alternative mount points</a>, copy all boot files to a directory on your ESP, but mount the ESP <b>outside</b> <code>/boot</code>. Then bind mount the directory:
+</p>
+<pre># mount --bind <i>esp</i>/EFI/arch /boot
+</pre>
+<p>After verifying success, edit your <a href="../en/Fstab.html" title="Fstab">Fstab</a> to make the changes persistent:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/fstab</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;"><i>esp</i>/EFI/arch /boot none defaults,bind 0 0
+</pre>
+<h4><span class="mw-headline" id="Using_systemd">Using systemd</span></h4>
+<p><a href="../en/Systemd.html" title="Systemd">Systemd</a> features event triggered tasks. In this particular case, the ability to detect a change in path is used to sync the EFISTUB kernel and initramfs files when they are updated in <code>/boot/</code>. The file watched for changes is <code>initramfs-linux-fallback.img</code> since this is the last file built by mkinitcpio, to make sure all files have been built before starting the copy. The <i>systemd</i> path and service files to be created are:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/system/efistub-update.path</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Unit]
+Description=Copy EFISTUB Kernel to EFI system partition
+
+[Path]
+PathChanged=/boot/initramfs-linux-fallback.img
+
+[Install]
+WantedBy=multi-user.target
+WantedBy=system-update.target</pre>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/system/efistub-update.service</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Unit]
+Description=Copy EFISTUB Kernel to EFI system partition
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/cp -af /boot/vmlinuz-linux <i>esp</i>/EFI/arch/
+ExecStart=/usr/bin/cp -af /boot/initramfs-linux.img <i>esp</i>/EFI/arch/
+ExecStart=/usr/bin/cp -af /boot/initramfs-linux-fallback.img <i>esp</i>/EFI/arch/</pre>
+<p>Then <a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Enable">enable</a> and <a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Start">start</a> <code>efistub-update.path</code>.
+</p>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> For <a href="../en/Unified_Extensible_Firmware_Interface/Secure_Boot.html" class="mw-redirect" title="Secure Boot">Secure Boot</a> with your own keys, you can set up the service to also sign the image using <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=sbsigntools">sbsigntools</a></span>:
+<pre>ExecStart=/usr/bin/sbsign --key <i>/path/to/db.key</i> --cert <i>/path/to/db.crt</i> --output <i>esp</i>/EFI/arch/vmlinuz-linux /boot/vmlinuz-linux</pre>
+</div>
+<h4><span class="mw-headline" id="Using_filesystem_events">Using filesystem events</span></h4>
+<p><a href="../en/Autostarting.html#On_filesystem_events" title="Autostarting">Filesystem events</a> can be used to run a script syncing the EFISTUB Kernel after kernel updates. An example with <a href="../en/Incron.html" title="Incron">incron</a> follows.
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/usr/local/bin/efistub-update</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">#!/bin/sh
+cp -af /boot/vmlinuz-linux <i>esp</i>/EFI/arch/
+cp -af /boot/initramfs-linux.img <i>esp</i>/EFI/arch/
+cp -af /boot/initramfs-linux-fallback.img <i>esp</i>/EFI/arch/
+</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> The first parameter <code>/boot/initramfs-linux-fallback.img</code> is the file to watch. The second parameter <code>IN_CLOSE_WRITE</code> is the action to watch for. The third parameter <code>/usr/local/bin/efistub-update</code> is the script to execute.</div>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/incron.d/efistub-update.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">/boot/initramfs-linux-fallback.img IN_CLOSE_WRITE /usr/local/bin/efistub-update
+</pre>
+<p>In order to use this method, <a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Enable">enable</a> the <code>incrond.service</code>.
+</p>
+<h4><span class="mw-headline" id="Using_mkinitcpio_preset">Using mkinitcpio preset</span></h4>
+<p>As the presets in <code>/etc/mkinitcpio.d/</code> support shell scripting, the kernel and initramfs can be copied by just editing the presets.
+</p>
+<h5><span class="mw-headline" id="Replacing_the_mkinitcpio_hook">Replacing the mkinitcpio hook</span></h5>
+<p>Edit the file <code>/etc/mkinitcpio.d/linux.preset</code>:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/mkinitcpio.d/linux.preset</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;"># mkinitcpio preset file for the 'linux' package
+
+# Directory to install the kernel, the initramfs...
+ESP_DIR="<i>esp</i>/EFI/arch"
+
+#ALL_config="/etc/mkinitcpio.conf"
+ALL_kver="${ESP_DIR}/vmlinuz-linux"
+
+PRESETS=('default' 'fallback')
+
+#default_config="/etc/mkinitcpio.conf"
+default_image="${ESP_DIR}/initramfs-linux.img"
+default_options=""
+
+#fallback_config="/etc/mkinitcpio.conf"
+fallback_image="${ESP_DIR}/initramfs-linux-fallback.img"
+fallback_options="-S autodetect"</pre>
+<p>To test that, just run:
+</p>
+<pre># rm /boot/initramfs-linux-fallback.img /boot/initramfs-linux.img
+# mv /boot/vmlinuz-linux <i>esp</i>/EFI/arch/
+# mkinitcpio -p linux
+</pre>
+<h5><span class="mw-headline" id="Another_example">Another example</span></h5>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/mkinitcpio.d/linux.preset</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">ESP_DIR="<i>esp</i>/EFI/arch"
+#ALL_config="/etc/mkinitcpio.conf"
+ALL_kver="$ESP_DIR/vmlinuz-linux$suffix"
+PRESETS=('default')
+default_config="/etc/mkinitcpio.conf"
+default_image="$ESP_DIR/initramfs-linux$suffix.img"</pre>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/mkinitcpio.d/linux-zen.preset</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">suffix='-zen'
+source /etc/mkinitcpio.d/linux.preset</pre>
+<h4><span class="mw-headline" id="Using_a_mkinitcpio_post_hook">Using a mkinitcpio post hook</span></h4>
+<p>A <a href="../en/Mkinitcpio.html#Post_hooks" title="Mkinitcpio">mkinitcpio post hook</a> can be used to copy kernels and initramfs images to a desired directory after the initramfs is generated.
+</p>
+<p><a href="../en/Help:Reading.html#Append,_add,_create,_edit" class="mw-redirect" title="Create">Create</a> the following file and make it <a href="../en/Help:Reading.html#Make_executable" class="mw-redirect" title="Executable">executable</a>:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/initcpio/post/copy-kernel-and-initramfs</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">#!/usr/bin/env bash
+
+kernel="$1"
+initrd="$2"
+target_dir="<i>esp</i>/EFI/arch"
+files_to_copy=()
+
+for file in "$kernel" "$initrd"; do
+	if [[ -n "$file" ]] &amp;&amp; ! cmp -s -- "$file" "${target_dir}/${file##*/}"; then
+		files_to_copy+=("$file")
+	fi
+done
+
+(( ! ${#files_to_copy[@]} )) &amp;&amp; exit 0
+
+cp -af -- "${files_to_copy[@]}" "${target_dir}/"</pre>
+<h4><span class="mw-headline" id="Using_pacman_hook">Using pacman hook</span></h4>
+<p>A last option relies on the <a href="../en/Pacman.html#Hooks" class="mw-redirect" title="Pacman hooks">pacman hooks</a> that are run at the end of the transaction.
+</p>
+<p>The first file is a hook that monitors the relevant files, and it is run if they were modified in the former transaction.
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/pacman.d/hooks/999-kernel-efi-copy.hook</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Trigger]
+Type = Path
+Operation = Install
+Operation = Upgrade
+Target = usr/lib/modules/*/vmlinuz
+Target = usr/lib/initcpio/*
+Target = boot/*-ucode.img
+
+[Action]
+Description = Copying linux and initramfs to EFI directory...
+When = PostTransaction
+Exec = /usr/local/bin/kernel-efi-copy.sh</pre>
+<p>The second file is the script itself. Create the file and make it <a href="../en/Help:Reading.html#Make_executable" class="mw-redirect" title="Executable">executable</a>:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/usr/local/bin/kernel-efi-copy.sh</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">#!/bin/sh
+#
+# Copy kernel and initramfs images to EFI directory
+#
+
+ESP_DIR="<i>esp</i>/EFI/arch"
+
+for file in /boot/vmlinuz*
+do
+        cp -af "$file" "$ESP_DIR/$(basename "$file").efi"
+        [ $? -ne 0 ] &amp;&amp; exit 1
+done
+
+for file in /boot/initramfs*
+do
+        cp -af "$file" "$ESP_DIR/"
+        [ $? -ne 0 ] &amp;&amp; exit 1
+done
+
+[ -e /boot/intel-ucode.img ] &amp;&amp; cp -af /boot/intel-ucode.img "$ESP_DIR/"
+[ -e /boot/amd-ucode.img ] &amp;&amp; cp -af /boot/amd-ucode.img "$ESP_DIR/"
+
+exit 0</pre>
+<h2><span class="mw-headline" id="Tips_and_tricks">Tips and tricks</span></h2>
+<h3><span class="mw-headline" id="Replace_the_partition_with_a_larger_one">Replace the partition with a larger one</span></h3>
+<p>On a disk with a preexisting operating system, the EFI system partition may be smaller than recommended in <a href="#Create_the_partition">#Create the partition</a>. E.g. Windows Setup creates a measly 100 MiB EFI system partition on non-4Kn drives.
+</p>
+<p>In such cases, it may be a good idea to create a new, larger EFI system partition to prevent running out of space on it.
+</p>
+<h4><span class="mw-headline" id="Free_up_space_for_a_new_partition_in_Windows">Free up space for a new partition in Windows</span></h4>
+<p>In Windows, partitions can be either managed graphically with Disk Management (<code>diskmgmt.msc</code>) or from the command line with the <code>diskpart.exe</code> utility.
+</p>
+<p>Run <code>diskmgmt.msc</code> as Administrator.
+</p>
+<ol>
+<li>Right click on the "(C:)" partition (the only one of the default Windows-created partitions which can be resized online) and select <i>Shrink Volume...</i>.</li>
+<li>Enter <code>4096</code> as the amount to shrink and click <i>Shrink</i>.</li>
+</ol>
+<p>There should now be a 4 GiB unallocated space after the "(C:)" partition.
+</p>
+<p>Boot into Arch Linux or the Arch Linux installation medium to proceed to creating a new partition.
+</p>
+<h4><span class="mw-headline" id="Delete_the_old_partition_and_create_a_new_one">Delete the old partition and create a new one</span></h4>
+<p>First, make sure to backup the contents of the EFI system partition. For example, with <i>esp</i> being its mountpoint:
+</p>
+<pre># cp -a <i>esp</i> /esp_backup
+</pre>
+<p>Unmount the EFI system partition:
+</p>
+<pre># umount <i>esp</i>
+</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> On an installed system, you may need to additionally <a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Stop">stop</a> <code><i>esp</i>.mount</code> and <code><i>esp</i>.automount</code> units to prevent systemd from automounting it again.</div>
+<p>Run <i>blkid</i> and take note of the UUID and PARTUUID values. They will later be reused for the new partition.
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;"># blkid</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">/dev/sd<i>xY</i>: UUID="<i><b>XXXX-XXXX</b></i>" BLOCK_SIZE="512" TYPE="vfat" PARTLABEL="EFI system partition" PARTUUID="<i><b>YYYYYYYY-YYYY-YYYY-YYYY-YYYYYYYYYYYY</b></i>"</pre>
+<p>Delete the old partition using <a href="../en/GPT_fdisk.html" class="mw-redirect" title="Sgdisk">sgdisk</a> from <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=gptfdisk">gptfdisk</a></span>:
+</p>
+<pre># sgdisk --delete=<i>Y</i> /dev/sd<i>x</i>
+</pre>
+<p>Create a new partition in the largest unallocated space while reusing the old PARTUUID and PARTLABEL:
+</p>
+<pre># sgdisk --align-end --largest-new=0 --typecode=0:ef00 --change-name=0:'EFI system partition' --partition-guid=0:<i>YYYYYYYY-YYYY-YYYY-YYYY-YYYYYYYYYYYY</i> /dev/sd<i>x</i>
+</pre>
+<p>Confirm the new, 4 GiB in size, EFI system partition is created by listing the partitions with <i>fdisk</i>:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;"># fdisk -l /dev/sd<i>x</i></pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">...
+Device         Start       End   Sectors  Size Type
+/dev/sd<i>x</i>1  158099456 166488063   8388608    4G EFI System
+/dev/sd<i>x</i>2     206848    239615     32768   16M Microsoft reserved
+/dev/sd<i>x</i>3     239616 158099455 157859840 75.3G Microsoft basic data
+/dev/sd<i>x</i>4  166488064 167768063   1280000  625M Windows recovery environment
+/dev/sd<i>x</i>5  167768064 176156671   8388608    4G Linux swap
+/dev/sd<i>x</i>6  176156672 243265535  67108864   32G Linux root (x86-64)
+
+Partition table entries are not in disk order.
+</pre>
+<p>Partition numbers are not resorted when deleting and creating partitions, so the EFI system partition number on the disk will likely be the same as before.
+</p>
+<p>Format the partition to FAT32 reusing the old UUID (while removing the dash from it):
+</p>
+<pre># mkfs.fat -F 32 -i <i>XXXXXXXX</i> /dev/sd<i>xY</i>
+</pre>
+<p>Finally, mount the new partition and restore its contents from backup:
+</p>
+<pre># mount /dev/sd<i>xY</i> <i>esp</i>
+# cp -a /esp_backup/. <i>esp</i>/
+</pre>
+<p>If you previously stopped <code><i>esp</i>.automount</code>, <a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Start">start</a> it again.
+</p>
+<h4><span class="mw-headline" id="Sacrifice_an_adjacent_swap_partition_to_enlarge_the_ESP">Sacrifice an adjacent swap partition to enlarge the ESP</span></h4>
+<p>If there is a swap partition right after the EFI system partition, you can sacrifice it to give space for enlarging the EFI system partition. E.g. with a layout similar to:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;"># fdisk -l /dev/sd<i>x</i></pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">...
+Device       Start       End   Sectors  Size Type
+/dev/sd<i>x</i>1     2048    616447    614400  300M EFI System
+/dev/sd<i>x</i>2   616448   9005055   8388608    4G Linux swap
+/dev/sd<i>x</i>3  9005056 125827071 116822016 55.7G Linux root (x86-64)
+</pre>
+<p>First, <a href="../en/Swap.html#Disabling_swap" title="Swap">deactivate the swap partition</a> and remove it from <a href="../en/Fstab.html" title="Fstab">fstab</a>.
+</p>
+<p>Use <a href="../en/Fdisk.html" title="Fdisk">fdisk</a> to delete the swap partition and enlarge the EFI system partition.
+</p>
+<ol>
+<li>Run: <pre># fdisk -l /dev/sd<i>x</i></pre>
+</li>
+<li>Use the <code>d</code> command to delete the swap partition (partition number <code>2</code> in the example layout above).</li>
+<li>Use the <code>e</code> command to enlarge the EFI system partition (partition number <code>1</code> in the example layout above). Use the suggested default value for the new size and press <code>Enter</code>.</li>
+<li>Write changes to disk and exit via the <code>w</code> command.</li>
+</ol>
+<p>After the partition is resized, you need to resize the file system in it. Since <span class="plainlinks archwiki-template-man" title="$ man 1 fatresize"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/fatresize.1">fatresize(1)</a></span> <a rel="nofollow" class="external text" href="https://github.com/ya-mouse/fatresize/issues/18">does not work</a> and libparted <a rel="nofollow" class="external text" href="https://superuser.com/a/1717415">cannot resize FAT volumes of certain sizes</a>, the only option is to backup the files from the existing file system and create a new one that takes up all space of the partition.
+</p>
+<p>Take note of the file system <a href="../en/Persistent_block_device_naming.html#by-uuid" class="mw-redirect" title="UUID">UUID</a> to allow reusing it for the new file system:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">$ lsblk -dno UUID /dev/sd<i>xY</i></pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;"><i><b>XXXX-XXXX</b></i>
+</pre>
+<p>Backup the contents of the EFI system partition. For example, with <i>esp</i> being its mountpoint:
+</p>
+<pre># cp -a <i>esp</i> /esp_backup
+</pre>
+<p>Unmount the EFI system partition:
+</p>
+<pre># umount <i>esp</i>
+</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> On an installed system, you may need to additionally <a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Stop">stop</a> <code><i>esp</i>.mount</code> and <code><i>esp</i>.automount</code> units to prevent systemd from automounting it again.</div>
+<p>Wipe the file system signature from the partition to avoid any artifacts from the old file system:
+</p>
+<pre># wipefs -af /dev/sd<i>xY</i>
+</pre>
+<p>Format the partition to FAT32 reusing the old UUID (while removing the dash from it):
+</p>
+<pre># mkfs.fat -F 32 -i <i>XXXXXXXX</i> /dev/sd<i>xY</i>
+</pre>
+<p>Finally, mount the new partition and restore its contents from backup:
+</p>
+<pre># mount /dev/sd<i>xY</i> <i>esp</i>
+# cp -a /esp_backup/. <i>esp</i>/
+</pre>
+<p>If you previously stopped <code><i>esp</i>.automount</code>, <a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Start">start</a> it again.
+</p>
+<p>Now that the swap partition is gone, set up swap on a <a href="../en/Swap.html#Swap_file" class="mw-redirect" title="Swap file">swap file</a>.
+</p>
+<h2><span class="mw-headline" id="Troubleshooting">Troubleshooting</span></h2>
+<h3><span class="mw-headline" id="ESP_on_software_RAID1">ESP on software RAID1</span></h3>
+<p>It is possible to make the ESP part of a RAID1 array, but doing so brings the risk of data corruption, and further considerations need to be taken when creating the ESP. See <a rel="nofollow" class="external autonumber" href="https://bbs.archlinux.org/viewtopic.php?pid=1398710#p1398710">[9]</a> and <a rel="nofollow" class="external autonumber" href="https://bbs.archlinux.org/viewtopic.php?pid=1390741#p1390741">[10]</a> for details and <a rel="nofollow" class="external text" href="https://outflux.net/blog/archives/2018/04/19/uefi-booting-and-raid1/">UEFI booting and RAID1</a> for an in-depth guide with a solution.
+</p>
+<p>The key part is to use <code>--metadata 1.0</code> in order to keep the RAID metadata at the end of the partition, otherwise the firmware will not be able to access it:
+</p>
+<pre># mdadm --create --verbose --level=1 <b>--metadata=1.0</b> --raid-devices=2 /dev/md/ESP /dev/sda<i>X</i> /dev/sdb<i>Y</i>
+</pre>
+<p>Alternatively, as the ESP is not often updated, a secondary ESP can be managed by copying the primary ESP to the secondary one on a different disk during relevant updates. A boot entry for the secondary ESP can then be added manually using <a href="../en/Unified_Extensible_Firmware_Interface.html#efibootmgr" class="mw-redirect" title="Efibootmgr">efibootmgr</a>. See the <a rel="nofollow" class="external text" href="https://wiki.debian.org/UEFI#RAID_for_the_EFI_System_Partition">debian wiki</a> for an implementation example. Note that while this avoids some risks of the RAID approach, it only works when using a single OS.
+</p>
+<h3><span class="mw-headline" id="Firmware_does_not_see_the_EFI_directory">Firmware does not see the EFI directory</span></h3>
+<p>If you give the FAT file system a <a href="../en/Persistent_block_device_naming.html#by-label" title="Persistent block device naming">volume name (i.e. file system label)</a>, be sure to name it something other than <code>EFI</code>. That can trigger a bug in some firmwares (due to the volume name matching the EFI directory name) that will cause the firmware to act like the EFI directory does not exist.
+</p>
+<h2><span class="mw-headline" id="See_also">See also</span></h2>
+<ul>
+<li><a rel="nofollow" class="external text" href="https://blog.uncooperative.org/uefi/linux/shim/efi%20system%20partition/2014/02/06/the-efi-system-partition.html">The EFI system partition and the default boot behavior</a></li>
+<li><a rel="nofollow" class="external text" href="https://ramsdenj.com/posts/2016-04-15-multi-boot-linux-with-one-boot-partition/">Multi Boot Linux With One Boot Partition | John Ramsden</a></li>
+</ul>
+</div>
+</div>
+					<div id="catlinks" class="catlinks" data-mw="interface"><div id="mw-normal-catlinks" class="mw-normal-catlinks">
+<a href="../Special:Categories.html" title="Special:Categories">Category</a>: <ul><li><a href="../en/Category:Boot_process.html" title="Category:Boot process">Boot process</a></li></ul>
+</div></div>
+				</div>
+			</main>
+			
+		</div>
+		<div class="mw-footer-container">
+			
+<footer id="footer" class="mw-footer" style="margin: 0">
+	<ul id="footer-info">
+	<li data-nosnippet="">Retrieved from "<a dir="ltr" href="https://wiki.archlinux.org/index.php?title=EFI_system_partition&amp;oldid=826121">https://wiki.archlinux.org/index.php?title=EFI_system_partition&amp;oldid=826121</a>"</li>
+<li id="footer-info-lastmod"> This page was last edited on 30 January 2025, at 12:09.</li>
+	<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+<br>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="https://terms.archlinux.org/docs/privacy-policy/">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="../en/ArchWiki:About.html">About ArchWiki</a></li>
+	<li id="footer-places-disclaimers"><a href="../en/ArchWiki:General_disclaimer.html">Disclaimers</a></li>
+	<li id="footer-places-archwiki-code-of-conduct"><a href="https://terms.archlinux.org/docs/code-of-conduct/" class="extiw" title="archlinux-service-agreements:code-of-conduct">Code of conduct</a></li>
+	<li id="footer-places-archwiki-terms-of-service"><a href="https://terms.archlinux.org/docs/terms-of-service/" class="extiw" title="archlinux-service-agreements:terms-of-service">Terms of service</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-copyrightico"><a href="https://www.gnu.org/copyleft/fdl.html" class="cdx-button cdx-button--fake-button cdx-button--size-large cdx-button--fake-button--enabled"><img src="/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" loading="lazy"></a></li>
+	<li id="footer-poweredbyico"><img src="/resources/assets/poweredby_mediawiki.svg" width="88" height="31" loading="lazy"></li>
+</ul>
+
+</footer>
+
+		</div>
+	</div> 
+</div> 
+<div class="vector-settings" id="p-dock-bottom">
+	<ul></ul>
+</div>
+</body>
+</html>

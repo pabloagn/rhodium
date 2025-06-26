@@ -1,0 +1,60 @@
+<h1>x8</h1>
+
+<blockquote><p>A hidden parameters discovery suite for identifying vulnerable or interesting web parameters.
+More information: <a href="https://sh1yo.art/x8docs/">https://sh1yo.art/x8docs/</a>.</p></blockquote>
+
+<ul>
+<li>Check hidden parameters in a URL query:</li>
+</ul>
+
+
+<p><code>x8 {{[-u|--url]}} {{https://example.com/}} {{[-w|--wordlist]}} {{path/to/wordlist.txt}}</code></p>
+
+<ul>
+<li>Check parameters with a custom query injection point (<code>%s</code>):</li>
+</ul>
+
+
+<p><code>x8 {{[-u|--url]}} {{https://example.com/?something=1%26%s}} {{[-w|--wordlist]}} {{path/to/wordlist.txt}}</code></p>
+
+<ul>
+<li>Send parameters via POST body with JSON format:</li>
+</ul>
+
+
+<p><code>x8 {{[-u|--url]}} {{https://example.com/}} {{[-X|--method]}} {{POST}} {{[-b|--body]}} {{'{"x":{%s}}'}} {{[-w|--wordlist]}} {{path/to/wordlist.txt}}</code></p>
+
+<ul>
+<li>Check parameters with a custom template (<code>%k</code> for key, <code>%v</code> for value):</li>
+</ul>
+
+
+<p><code>x8 {{[-u|--url]}} {{https://example.com/}} {{[-P|--param-template]}} {{user[%k]=%v}} {{[-w|--wordlist]}} {{path/to/wordlist.txt}}</code></p>
+
+<ul>
+<li>Encode parameters for special characters in queries:</li>
+</ul>
+
+
+<p><code>x8 {{[-u|--url]}} {{https://example.com/?path=..%2faction.php%3f%s%23}} --encode {{[-w|--wordlist]}} {{path/to/wordlist.txt}}</code></p>
+
+<ul>
+<li>Discover hidden headers for a URL:</li>
+</ul>
+
+
+<p><code>x8 {{[-u|--url]}} {{https://example.com/}} --headers {{[-w|--wordlist]}} {{path/to/headers.txt}}</code></p>
+
+<ul>
+<li>Check multiple URLs in parallel with high concurrency and verify found parameters:</li>
+</ul>
+
+
+<p><code>x8 {{[-u|--url]}} {{https://example.com/}} {{https://4rt.one/}} {{[-W|--workers]}} {{0}} -c {{3}} --verify</code></p>
+
+<ul>
+<li>Save request and response data for found parameters to a directory:</li>
+</ul>
+
+
+<p><code>x8 {{[-u|--url]}} {{https://example.com/}} {{[-w|--wordlist]}} {{path/to/wordlist.txt}} --save-responses {{path/to/output_dir}}</code></p>

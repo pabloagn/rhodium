@@ -1,0 +1,1664 @@
+<!DOCTYPE html>
+<html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-sticky-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-0 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-disabled skin-theme-clientpref-day vector-toc-available" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>nftables - ArchWiki</title>
+<link rel="stylesheet" href="../ArchWikiOffline.css">
+<meta name="ResourceLoaderDynamicStyles" content="">
+<meta name="generator" content="MediaWiki 1.43.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="max-image-preview:standard">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.25, maximum-scale=5.0">
+<link rel="search" type="application/opensearchdescription+xml" href="/rest.php/v1/search" title="ArchWiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.archlinux.org/api.php?action=rsd">
+<link rel="license" href="https://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="ArchWiki Atom feed" href="/index.php?title=Special:RecentChanges&amp;feed=atom">
+</head>
+<body class="skin--responsive skin-vector skin-vector-search-vue mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Nftables rootpage-Nftables skin-vector-2022 action-view">
+<a class="mw-jump-link" href="#bodyContent">Jump to content</a>
+<div class="vector-header-container">
+	</div>
+<div class="mw-page-container">
+	<div class="mw-page-container-inner">
+		<div class="vector-column-start">
+			<div class="vector-main-menu-container">
+		</div>
+	<div class="vector-sticky-pinned-container">
+				<nav id="mw-panel-toc" aria-label="Contents" data-event-name="ui.sidebar-toc" class="mw-table-of-contents-container vector-toc-landmark">
+					<div id="vector-toc-pinned-container" class="vector-pinned-container">
+					<div id="vector-toc" class="vector-toc vector-pinnable-element">
+	<div class="vector-pinnable-header vector-toc-pinnable-header vector-pinnable-header-pinned" data-feature-name="toc-pinned" data-pinnable-element-id="vector-toc">
+	<h2 class="vector-pinnable-header-label">Contents</h2>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-toc.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-toc.unpin">hide</button>
+</div>
+
+
+	<ul class="vector-toc-contents" id="mw-panel-toc-list">
+		<li id="toc-mw-content-text" class="vector-toc-list-item vector-toc-level-1">
+			<a href="#" class="vector-toc-link">
+				<div class="vector-toc-text">Beginning</div>
+			</a>
+		</li>
+		<li id="toc-Installation" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Installation">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">1</span>
+				<span>Installation</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Installation-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Installation subsection</span>
+			</button>
+		
+		<ul id="toc-Installation-sublist" class="vector-toc-list">
+			<li id="toc-Front-ends" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Front-ends">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.1</span>
+					<span>Front-ends</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Front-ends-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Usage" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Usage">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">2</span>
+				<span>Usage</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Usage-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Usage subsection</span>
+			</button>
+		
+		<ul id="toc-Usage-sublist" class="vector-toc-list">
+			<li id="toc-Simple_firewall" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Simple_firewall">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1</span>
+					<span>Simple firewall</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Simple_firewall-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Configuration" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Configuration">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">3</span>
+				<span>Configuration</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Configuration-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Configuration subsection</span>
+			</button>
+		
+		<ul id="toc-Configuration-sublist" class="vector-toc-list">
+			<li id="toc-Tables" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Tables">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1</span>
+					<span>Tables</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Tables-sublist" class="vector-toc-list">
+				<li id="toc-Create_table" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Create_table">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1.1</span>
+					<span>Create table</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Create_table-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-List_tables" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#List_tables">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1.2</span>
+					<span>List tables</span>
+				</div>
+			</a>
+			
+			<ul id="toc-List_tables-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-List_chains_and_rules_in_a_table" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#List_chains_and_rules_in_a_table">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1.3</span>
+					<span>List chains and rules in a table</span>
+				</div>
+			</a>
+			
+			<ul id="toc-List_chains_and_rules_in_a_table-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Delete_table" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Delete_table">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1.4</span>
+					<span>Delete table</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Delete_table-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Flush_table" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Flush_table">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1.5</span>
+					<span>Flush table</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Flush_table-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Chains" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Chains">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.2</span>
+					<span>Chains</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Chains-sublist" class="vector-toc-list">
+				<li id="toc-Create_chain" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Create_chain">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.2.1</span>
+					<span>Create chain</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Create_chain-sublist" class="vector-toc-list">
+				<li id="toc-Base_chain" class="vector-toc-list-item vector-toc-level-4">
+			<a class="vector-toc-link" href="#Base_chain">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.2.1.1</span>
+					<span>Base chain</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Base_chain-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Regular_chain" class="vector-toc-list-item vector-toc-level-4">
+			<a class="vector-toc-link" href="#Regular_chain">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.2.1.2</span>
+					<span>Regular chain</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Regular_chain-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-List_chains" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#List_chains">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.2.2</span>
+					<span>List chains</span>
+				</div>
+			</a>
+			
+			<ul id="toc-List_chains-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Edit_a_chain" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Edit_a_chain">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.2.3</span>
+					<span>Edit a chain</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Edit_a_chain-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Delete_a_chain" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Delete_a_chain">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.2.4</span>
+					<span>Delete a chain</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Delete_a_chain-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Flush_rules_from_a_chain" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Flush_rules_from_a_chain">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.2.5</span>
+					<span>Flush rules from a chain</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Flush_rules_from_a_chain-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Rules" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Rules">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.3</span>
+					<span>Rules</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Rules-sublist" class="vector-toc-list">
+				<li id="toc-Add_rule" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Add_rule">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.3.1</span>
+					<span>Add rule</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Add_rule-sublist" class="vector-toc-list">
+				<li id="toc-Expressions" class="vector-toc-list-item vector-toc-level-4">
+			<a class="vector-toc-link" href="#Expressions">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.3.1.1</span>
+					<span>Expressions</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Expressions-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-List_rules" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#List_rules">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.3.2</span>
+					<span>List rules</span>
+				</div>
+			</a>
+			
+			<ul id="toc-List_rules-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Deletion" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Deletion">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.3.3</span>
+					<span>Deletion</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Deletion-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Sets" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Sets">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.4</span>
+					<span>Sets</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Sets-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Atomic_reloading" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Atomic_reloading">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.5</span>
+					<span>Atomic reloading</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Atomic_reloading-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Examples" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Examples">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">4</span>
+				<span>Examples</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Examples-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Examples subsection</span>
+			</button>
+		
+		<ul id="toc-Examples-sublist" class="vector-toc-list">
+			<li id="toc-Workstation" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Workstation">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.1</span>
+					<span>Workstation</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Workstation-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Server" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Server">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.2</span>
+					<span>Server</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Server-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Limit_rate" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Limit_rate">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.3</span>
+					<span>Limit rate</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Limit_rate-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Jump" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Jump">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.4</span>
+					<span>Jump</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Jump-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Different_rules_for_different_interfaces" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Different_rules_for_different_interfaces">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.5</span>
+					<span>Different rules for different interfaces</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Different_rules_for_different_interfaces-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Masquerading" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Masquerading">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.6</span>
+					<span>Masquerading</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Masquerading-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-NAT_with_port_forwarding" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#NAT_with_port_forwarding">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.7</span>
+					<span>NAT with port forwarding</span>
+				</div>
+			</a>
+			
+			<ul id="toc-NAT_with_port_forwarding-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Count_new_connections_per_IP" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Count_new_connections_per_IP">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.8</span>
+					<span>Count new connections per IP</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Count_new_connections_per_IP-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Dynamic_blackhole" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Dynamic_blackhole">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.9</span>
+					<span>Dynamic blackhole</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Dynamic_blackhole-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Tips_and_tricks" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Tips_and_tricks">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">5</span>
+				<span>Tips and tricks</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Tips_and_tricks-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Tips and tricks subsection</span>
+			</button>
+		
+		<ul id="toc-Tips_and_tricks-sublist" class="vector-toc-list">
+			<li id="toc-Saving_current_rule_set" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Saving_current_rule_set">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.1</span>
+					<span>Saving current rule set</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Saving_current_rule_set-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Simple_stateful_firewall" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Simple_stateful_firewall">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.2</span>
+					<span>Simple stateful firewall</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Simple_stateful_firewall-sublist" class="vector-toc-list">
+				<li id="toc-Single_machine" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Single_machine">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.2.1</span>
+					<span>Single machine</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Single_machine-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Prevent_brute-force_attacks" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Prevent_brute-force_attacks">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.3</span>
+					<span>Prevent brute-force attacks</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Prevent_brute-force_attacks-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Logging_traffic" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Logging_traffic">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.4</span>
+					<span>Logging traffic</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Logging_traffic-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Monitor" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Monitor">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.5</span>
+					<span>Monitor</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Monitor-sublist" class="vector-toc-list">
+				<li id="toc-Ruleset_debugging_trace_temporary" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Ruleset_debugging_trace_temporary">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.5.1</span>
+					<span>Ruleset debugging trace temporary</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Ruleset_debugging_trace_temporary-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Using_iptables-nft" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Using_iptables-nft">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.6</span>
+					<span>Using iptables-nft</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Using_iptables-nft-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Dynamic_named_sets_using_systemd-networkd" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Dynamic_named_sets_using_systemd-networkd">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.7</span>
+					<span>Dynamic named sets using systemd-networkd</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Dynamic_named_sets_using_systemd-networkd-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Troubleshooting" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Troubleshooting">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">6</span>
+				<span>Troubleshooting</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Troubleshooting-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Troubleshooting subsection</span>
+			</button>
+		
+		<ul id="toc-Troubleshooting-sublist" class="vector-toc-list">
+			<li id="toc-Working_with_Docker" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Working_with_Docker">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.1</span>
+					<span>Working with Docker</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Working_with_Docker-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-See_also" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#See_also">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">7</span>
+				<span>See also</span>
+			</div>
+		</a>
+		
+		<ul id="toc-See_also-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+</ul>
+</div>
+
+					</div>
+		</nav>
+			</div>
+		</div>
+		<div class="mw-content-container">
+			<main id="content" class="mw-body" style="margin: 0">
+				<header class="mw-body-header vector-page-titlebar">
+					<nav aria-label="Contents" class="vector-toc-landmark">
+						
+<div id="vector-page-titlebar-toc" class="vector-dropdown vector-page-titlebar-toc vector-button-flush-left">
+	<input type="checkbox" id="vector-page-titlebar-toc-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-page-titlebar-toc" class="vector-dropdown-checkbox " aria-label="Toggle the table of contents">
+	<label id="vector-page-titlebar-toc-label" for="vector-page-titlebar-toc-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"><span class="vector-icon mw-ui-icon-listBullet mw-ui-icon-wikimedia-listBullet"></span>
+
+<span class="vector-dropdown-label-text">Toggle the table of contents</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+							<div id="vector-page-titlebar-toc-unpinned-container" class="vector-unpinned-container">
+			</div>
+		
+	</div>
+</div>
+
+					</nav>
+					<h1 id="firstHeading" class="firstHeading mw-first-heading">nftables</h1>
+							
+<div id="p-lang-btn" class="vector-dropdown mw-portlet mw-portlet-lang">
+	<input type="checkbox" id="p-lang-btn-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-p-lang-btn" class="vector-dropdown-checkbox mw-interlanguage-selector" aria-label="Go to an article in another language. Available in 5 languages">
+	<label id="p-lang-btn-label" for="p-lang-btn-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--action-progressive mw-portlet-lang-heading-5" aria-hidden="true"><span class="vector-icon mw-ui-icon-language-progressive mw-ui-icon-wikimedia-language-progressive"></span>
+
+<span class="vector-dropdown-label-text">5 languages</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+		<div class="vector-menu-content">
+			
+			<ul class="vector-menu-content-list">
+				
+				<li class="interlanguage-link interwiki-de mw-list-item"><a href="https://wiki.archlinux.de/title/Nftables" title="Nftables – Deutsch" lang="de" hreflang="de" data-title="Nftables" data-language-autonym="Deutsch" data-language-local-name="Deutsch" class="interlanguage-link-target"><span>Deutsch</span></a></li>
+<li class="interlanguage-link interwiki-es mw-list-item"><a href="../es/Nftables.html" title="Nftables – español" lang="es" hreflang="es" data-title="Nftables" data-language-autonym="Español" data-language-local-name="español" class="interlanguage-link-target"><span>Español</span></a></li>
+<li class="interlanguage-link interwiki-ja mw-list-item"><a href="https://wiki.archlinux.jp/index.php/Nftables" title="Nftables – 日本語" lang="ja" hreflang="ja" data-title="Nftables" data-language-autonym="日本語" data-language-local-name="日本語" class="interlanguage-link-target"><span>日本語</span></a></li>
+<li class="interlanguage-link interwiki-ru mw-list-item"><a href="../ru/Nftables.html" title="Nftables – русский" lang="ru" hreflang="ru" data-title="Nftables" data-language-autonym="Русский" data-language-local-name="русский" class="interlanguage-link-target"><span>Русский</span></a></li>
+<li class="interlanguage-link interwiki-zh-hans mw-list-item"><a href="https://wiki.archlinuxcn.org/wiki/Nftables" title="Nftables – 中文（简体）" lang="zh-Hans" hreflang="zh-Hans" data-title="Nftables" data-language-autonym="中文（简体）" data-language-local-name="中文（简体）" class="interlanguage-link-target"><span>中文（简体）</span></a></li>
+			</ul>
+			
+		</div>
+
+	</div>
+</div>
+</header>
+				<div class="vector-column-end">
+					<div class="vector-sticky-pinned-container">
+						<nav class="vector-page-tools-landmark" aria-label="Page tools">
+							<div id="vector-page-tools-pinned-container" class="vector-pinned-container">
+				
+							</div>
+		</nav>
+						<nav class="vector-appearance-landmark" aria-label="Appearance">
+							<div id="vector-appearance-pinned-container" class="vector-pinned-container">
+				<div id="vector-appearance" class="vector-appearance vector-pinnable-element">
+	<div class="vector-pinnable-header vector-appearance-pinnable-header vector-pinnable-header-pinned" data-feature-name="appearance-pinned" data-pinnable-element-id="vector-appearance" data-pinned-container-id="vector-appearance-pinned-container" data-unpinned-container-id="vector-appearance-unpinned-container">
+	<div class="vector-pinnable-header-label">Appearance</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-appearance.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-appearance.unpin">hide</button>
+</div>
+
+
+</div>
+
+							</div>
+		</nav>
+					</div>
+				</div>
+				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container>
+					<div class="vector-body-before-content">
+							<div class="mw-indicators">
+		</div>
+
+						<div id="siteSub" class="noprint">From ArchWiki</div>
+					</div>
+					<div id="contentSub"><div id="mw-content-subtitle"></div></div>
+					
+					
+					<div id="mw-content-text" class="mw-body-content">
+<div class="mw-content-ltr mw-parser-output" lang="en" dir="ltr">
+<p><span>
+</span>
+</p>
+<div class="archwiki-template-meta-related-articles">
+<p>Related articles</p>
+<ul>
+<li><a href="../en/Iptables.html" title="Iptables">iptables</a></li>
+<li><a href="../en/Firewalld.html" title="Firewalld">Firewalld</a></li>
+</ul>
+</div>
+<p><a rel="nofollow" class="external text" href="https://netfilter.org/projects/nftables/">nftables</a> is a netfilter project that aims to replace the existing {ip,ip6,arp,eb}tables framework. It provides a new packet filtering framework, a new user-space utility (nft), and a compatibility layer for {ip,ip6}tables. It uses the existing hooks, connection tracking system, user-space queueing component, and logging subsystem of netfilter.
+</p>
+<p>It consists of three main components: a kernel implementation, the libnl <a href="https://en.wikipedia.org/wiki/Netlink" class="extiw" title="wikipedia:Netlink">netlink</a> communication and the nftables user-space front-end.
+The kernel provides a netlink configuration interface, as well as run-time rule-set evaluation, libnl contains the low-level functions for communicating with the kernel, and the nftables front-end is what the user interacts with via nft.
+</p>
+<p>You can also visit the <a rel="nofollow" class="external text" href="https://wiki.nftables.org/wiki-nftables/index.php/Main_Page">official nftables wiki page</a> for more information.
+</p>
+<meta property="mw:PageProp/toc">
+<h2><span class="mw-headline" id="Installation">Installation</span></h2>
+<p><a href="../en/Help:Reading.html#Installation_of_packages" class="mw-redirect" title="Install">Install</a> the userspace utilities package <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=nftables">nftables</a></span> or the git version <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/nftables-git/">nftables-git</a></span><sup><small>AUR</small></sup>.
+</p>
+<p>Alternatively, <a href="../en/Help:Reading.html#Installation_of_packages" class="mw-redirect" title="Install">install</a> <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=iptables-nft">iptables-nft</a></span>, which includes <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=nftables">nftables</a></span> as a dependency, will automatically uninstall <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=iptables">iptables</a></span> (an indirect dependency of the <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=base">base</a></span> <a href="../en/Meta_package_and_package_group.html#Difference_between_meta_package_and_package_group" class="mw-redirect" title="Meta package">meta package</a>) and prevent conflicts between <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=iptables">iptables</a></span> and <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=nftables">nftables</a></span> when used together. See <a href="#Using_iptables-nft">#Using iptables-nft</a> for details.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=iptables-nft">iptables-nft</a></span> works by providing implementations of the <code>iptables</code> commands that actually create and act on the <code>nftables</code> rules. However, rules created using the old <code>iptables-legacy</code> tools are separate objects, and <code>iptables-nft</code> will warn you if they are present.</div>
+<h3><span class="mw-headline" id="Front-ends">Front-ends</span></h3>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> Most <a href="../en/Iptables.html#Front-ends" title="Iptables">iptables front-ends</a> feature no direct or indirect support of nftables, but may introduce it.<a rel="nofollow" class="external autonumber" href="https://www.spinics.net/lists/netfilter/msg58215.html">[1]</a> One graphical front-end that supports both, nftables and iptables, is <a href="../en/Firewalld.html" title="Firewalld">firewalld</a>.<a rel="nofollow" class="external autonumber" href="https://firewalld.org/2018/07/nftables-backend">[2]</a>. Another one is <a href="../en/Uncomplicated_Firewall.html" class="mw-redirect" title="Ufw">ufw</a>.</div>
+<ul><li>
+<b><a href="../en/Firewalld.html" title="Firewalld">firewalld</a> (firewall-cmd)</b> — Daemon and console interface for configuring network and firewall zones as well as setting up and configuring firewall rules.</li></ul>
+<dl><dd>
+<a rel="nofollow" class="external free" href="https://firewalld.org/">https://firewalld.org/</a> || <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=firewalld">firewalld</a></span>
+</dd></dl>
+<ul><li>
+<b>nft-blackhole</b> — Script / daemon to blocking IP in nftables by country and black lists.</li></ul>
+<dl><dd>
+<a rel="nofollow" class="external free" href="https://github.com/tomasz-c/nft-blackhole">https://github.com/tomasz-c/nft-blackhole</a> || <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/nft-blackhole/">nft-blackhole</a></span><sup><small>AUR</small></sup>
+</dd></dl>
+<ul><li>
+<b><a href="../en/Uncomplicated_Firewall.html" class="mw-redirect" title="Ufw">ufw</a></b> — Ufw stands for Uncomplicated Firewall, and is a program for managing a netfilter firewall.</li></ul>
+<dl><dd>
+<a rel="nofollow" class="external free" href="https://help.ubuntu.com/community/UFW">https://help.ubuntu.com/community/UFW</a> || <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=ufw">ufw</a></span>
+</dd></dl>
+<ul><li>
+<b>reaction</b> — A daemon that scans program outputs for repeated patterns, and takes action. A lightweight alternative to fail2ban.</li></ul>
+<dl><dd>
+<a rel="nofollow" class="external free" href="https://framagit.org/ppom/reaction">https://framagit.org/ppom/reaction</a> || <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/reaction/">reaction</a></span><sup><small>AUR</small></sup>
+</dd></dl>
+<h2><span class="mw-headline" id="Usage">Usage</span></h2>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> If you already have an iptables rule, you can convert the iptables rule to an nftables rule, see <a rel="nofollow" class="external autonumber" href="https://wiki.nftables.org/wiki-nftables/index.php/Moving_from_iptables_to_nftables">[3]</a>.</div>
+<p><b>nftables</b> makes <b>no</b> distinction between temporary rules made in the command line and permanent ones loaded from or saved to a file.
+</p>
+<p>All rules have to be created or loaded using <code>nft</code> command line utility.
+</p>
+<p>Refer to <a href="#Configuration">#Configuration</a> section on how to use.
+</p>
+<p>Current ruleset can be printed with:
+</p>
+<pre># nft list ruleset
+</pre>
+<p>Remove all ruleset leaving the system with no firewall:
+</p>
+<pre># nft flush ruleset
+</pre>
+<p>Read ruleset from <code>/etc/nftables.conf</code> by <a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Restart">restarting</a> <code>nftables.service</code>.
+</p>
+<h3><span class="mw-headline" id="Simple_firewall">Simple firewall</span></h3>
+<p><span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=nftables">nftables</a></span> comes with a simple and secure firewall configuration stored in the <code>/etc/nftables.conf</code> file.
+</p>
+<p>The <code>nftables.service</code> will load rules from that file when <a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Start/enable">started or enabled</a>.
+</p>
+<h2><span class="mw-headline" id="Configuration">Configuration</span></h2>
+<p>nftables user-space utility <code>nft</code> performs most of the rule-set evaluation before handing rule-sets to the kernel. Rules are stored in chains, which in turn are stored in tables. The following sections indicate how to create and modify these constructs.
+</p>
+<p>To read input from a file use the <code>-f</code>/<code>--file</code> option:
+</p>
+<pre># nft --file <i>filename</i>
+</pre>
+<p>Note that any rules already loaded are <b>not</b> automatically flushed.
+</p>
+<p>See <span class="plainlinks archwiki-template-man" title="$ man 8 nft"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/nft.8">nft(8)</a></span> for a complete list of all commands.
+</p>
+<h3><span class="mw-headline" id="Tables">Tables</span></h3>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../File:Tango-view-fullscreen.svg" decoding="async" width="48" height="48" class="mw-file-element"></span></span><b>This article or section needs expansion.</b></p>
+<div>
+<b>Reason:</b> Clarify the difference between tables in iptables and nftables: in the latter they have a "namespacing" nature and can contain different chain types. <a rel="nofollow" class="external autonumber" href="https://unix.stackexchange.com/a/607391">[4]</a> (Discuss in <a rel="nofollow" class="external text" href="../en/Talk:Nftables.html">Talk:Nftables</a>)</div>
+</div>
+<p>Tables hold <a href="#Chains">#Chains</a>. Unlike tables in iptables, there are no built-in tables in nftables. The number of tables and their names is up to the user. However, each table only has one address family and only applies to packets of this family. Tables can have one of five families specified:
+</p>
+<table class="wikitable">
+<tbody>
+<tr>
+<th>nftables family</th>
+<th>iptables utility
+</th>
+</tr>
+<tr>
+<td>ip</td>
+<td>iptables
+</td>
+</tr>
+<tr>
+<td>ip6</td>
+<td>ip6tables
+</td>
+</tr>
+<tr>
+<td>inet</td>
+<td>iptables and ip6tables
+</td>
+</tr>
+<tr>
+<td>arp</td>
+<td>arptables
+</td>
+</tr>
+<tr>
+<td>bridge</td>
+<td>ebtables
+</td>
+</tr>
+</tbody>
+</table>
+<p><code>ip</code> (i.e. IPv4) is the default family and will be used if family is not specified.
+</p>
+<p>To create one rule that applies to both IPv4 and IPv6, use <code>inet</code>. <code>inet</code> allows for the unification of the <code>ip</code> and <code>ip6</code> families to make defining rules for both easier.
+</p>
+<p>See <span class="plainlinks archwiki-template-man" title="$ man 8 nft"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/nft.8#ADDRESS_FAMILIES">nft(8) § ADDRESS FAMILIES</a></span> for a complete description of address families.
+</p>
+<p>In all of the following, <code><i>family_type</i></code> is optional, and if not specified is set to <code>ip</code>.
+</p>
+<h4><span class="mw-headline" id="Create_table">Create table</span></h4>
+<p>The following adds a new table:
+</p>
+<pre># nft add table <i>family_type</i> <i>table_name</i>
+</pre>
+<h4><span class="mw-headline" id="List_tables">List tables</span></h4>
+<p>To list all tables:
+</p>
+<pre># nft list tables
+</pre>
+<h4><span class="mw-headline" id="List_chains_and_rules_in_a_table">List chains and rules in a table</span></h4>
+<p>To list all chains and rules of a specified table:
+</p>
+<pre># nft list table <i>family_type</i> <i>table_name</i>
+</pre>
+<p>For example, to list all the rules of the <code>my_table</code> table of the <code>inet</code> family:
+</p>
+<pre># nft list table inet my_table
+</pre>
+<h4><span class="mw-headline" id="Delete_table">Delete table</span></h4>
+<p>To delete a table:
+</p>
+<pre># nft delete table <i>family_type</i> <i>table_name</i>
+</pre>
+<p>This will destroy all chains in the table.
+</p>
+<h4><span class="mw-headline" id="Flush_table">Flush table</span></h4>
+<p>To flush/clear all rules from a table:
+</p>
+<pre># nft flush table <i>family_type</i> <i>table_name</i>
+</pre>
+<h3><span class="mw-headline" id="Chains">Chains</span></h3>
+<p>The purpose of chains is to hold <a href="#Rules">#Rules</a>. Unlike chains in iptables, there are no built-in chains in nftables. This means that if no chain uses any types or hooks in the netfilter framework, packets that would flow through those chains will not be touched by nftables, unlike iptables.
+</p>
+<p>Chains have two types. A <i>base</i> chain is an entry point for packets from the networking stack, where a hook value is specified. A <i>regular</i> chain may be used as a jump target for better organization.
+</p>
+<p>See the <a rel="nofollow" class="external text" href="https://wiki.nftables.org/wiki-nftables/index.php/Netfilter_hooks">traffic flow diagram</a> showing the ordering between individual hooks. Within a given hook, netfilter performs operations in order of increasing numerical priority.
+</p>
+<p>In all of the following <code><i>family_type</i></code> is optional, and if not specified is set to <code>ip</code>.
+</p>
+<h4><span class="mw-headline" id="Create_chain">Create chain</span></h4>
+<h5><span class="mw-headline" id="Base_chain">Base chain</span></h5>
+<p>To add a base chain it is mandatory to specify type, hook and priority values:
+</p>
+<pre># nft add chain <i>family_type</i> <i>table_name</i> <i>chain_name</i> '{ type <i>chain_type</i> hook <i>hook_type</i> priority <i>priority_value</i> ; policy <i>policy</i> ;}'
+</pre>
+<p><code><i>chain_type</i></code> can be <code>filter</code>, <code>route</code>, or <code>nat</code>.
+</p>
+<p>For IPv4/IPv6/Inet address families <code><i>hook_type</i></code> can be <code>prerouting</code>, <code>input</code>, <code>forward</code>, <code>output</code>, or <code>postrouting</code>. See <span class="plainlinks archwiki-template-man" title="$ man 8 nft"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/nft.8#CHAINS">nft(8) § CHAINS</a></span> for a list of supported <i>family_type</i>, <i>chain_type</i> and <i>hook_type</i> combinations.
+</p>
+<p><code><i>priority_value</i></code> takes either a priority name or an integer value. See <span class="plainlinks archwiki-template-man" title="$ man 8 nft"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/nft.8#CHAINS">nft(8) § CHAINS</a></span> for a list of standard priority names and values. Chains with lower numbers are processed first and can be negative. <a rel="nofollow" class="external autonumber" href="https://wiki.nftables.org/wiki-nftables/index.php/Configuring_chains#Base_chain_types">[5]</a>
+</p>
+<p>Optionally base chains can have a <code><i>policy</i></code> (<code>drop</code> or the default <code>accept</code>), to define what happens to packets not explicitly accepted or refused in contained rules.
+</p>
+<p>For example, to add a base chain that filters input packets:
+</p>
+<pre># nft add chain inet my_table my_chain '{ type filter hook input priority 0; }'
+</pre>
+<p>Replace <code>add</code> with <code>create</code> in any of the above to add a new chain but return an error if the chain already exists.
+</p>
+<h5><span class="mw-headline" id="Regular_chain">Regular chain</span></h5>
+<p>The following adds a regular chain named <code><i>chain_name</i></code> to the table named <code><i>table_name</i></code>:
+</p>
+<pre># nft add chain <i>family_type</i> <i>table_name</i> <i>chain_name</i>
+</pre>
+<p>For example, to add a regular chain named <code>my_tcp_chain</code> to the <code>my_table</code> table of the <code>inet</code> address family:
+</p>
+<pre># nft add chain inet my_table my_tcp_chain
+</pre>
+<h4><span class="mw-headline" id="List_chains">List chains</span></h4>
+<p>The following lists all chains without rules (see <a href="#List_rules">#List rules</a>) of a <i>family_type</i>:
+</p>
+<pre># nft list chains <i>family_type</i>
+</pre>
+<p>For example, the following lists the chains of ipv6:
+</p>
+<pre># nft list chains ip6
+</pre>
+<p>if you omit the family_type all chains are printed.
+</p>
+<h4><span class="mw-headline" id="Edit_a_chain">Edit a chain</span></h4>
+<p>To edit a chain, simply call it by its name and define the rules you want to change.
+</p>
+<pre># nft chain <i>family_type table_name chain_name</i> '{ [ type <i>chain_type</i> hook <i>hook_type</i> device <i>device_name</i> priority <i>priority_value</i> ; policy <i>policy_type</i> ; ] }'
+</pre>
+<p>For example, to change the <code>my_input</code> chain policy of the default table from <code>accept</code> to <code>drop</code>
+</p>
+<pre># nft chain inet my_table my_input '{ policy drop ; }'
+</pre>
+<h4><span class="mw-headline" id="Delete_a_chain">Delete a chain</span></h4>
+<p>To delete a chain:
+</p>
+<pre># nft delete chain <i>family_type</i> <i>table_name</i> <i>chain_name</i>
+</pre>
+<p>The chain must not contain any rules or be a jump target.
+</p>
+<h4><span class="mw-headline" id="Flush_rules_from_a_chain">Flush rules from a chain</span></h4>
+<p>To flush rules from a chain:
+</p>
+<pre># nft flush chain <i>family_type</i> <i>table_name</i> <i>chain_name</i>
+</pre>
+<h3><span class="mw-headline" id="Rules">Rules</span></h3>
+<p>Rules are either constructed from expressions or statements and are contained within chains.
+</p>
+<h4><span class="mw-headline" id="Add_rule">Add rule</span></h4>
+<p>To add a rule to a chain:
+</p>
+<pre># nft add rule <i>family_type</i> <i>table_name</i> <i>chain_name</i> handle <i>handle_value</i> <i>statement</i>
+</pre>
+<p>The rule is appended at <code><i>handle_value</i></code>, which is optional. If not specified, the rule is appended to the end of the chain.
+</p>
+<p>The <code>--handle</code> switch, which can be added to any valid list command, must be used to determine a rule handle. This switch tells <code>nft</code> to list the handles in its output. The <code>--numeric</code> argument is useful for viewing some numeric output, like unresolved IP addresses.
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;"># nft --handle --numeric list chain inet my_table my_input</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">table inet my_table {
+     chain input {
+          type filter hook input priority 0;
+          ip saddr 127.0.0.1 accept # handle 10
+     }
+}
+</pre>
+<p>To prepend the rule to the position:
+</p>
+<pre># nft insert rule <i>family_type</i> <i>table_name</i> <i>chain_name</i> handle <i>handle_value</i> <i>statement</i>
+</pre>
+<p>If <code><i>handle_value</i></code> is not specified, the rule is prepended to the chain.
+</p>
+<h5><span class="mw-headline" id="Expressions">Expressions</span></h5>
+<p>Typically a <code><i>statement</i></code> includes some expression to be matched and then a verdict statement. Verdict statements include <code>accept</code>, <code>drop</code>, <code>queue</code>, <code>continue</code>, <code>return</code>, <code>jump <i>chain_name</i></code>, and <code>goto <i>chain_name</i></code>. Other statements than verdict statements are possible. See <span class="plainlinks archwiki-template-man" title="$ man 8 nft"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/nft.8">nft(8)</a></span> for more information.
+</p>
+<p>There are various expressions available in nftables and, for the most part, coincide with their iptables counterparts. The most noticeable difference is that there are no generic or implicit matches. A generic match was one that was always available, such as <code>--protocol</code> or <code>--source</code>. Implicit matches were protocol-specific, such as <code>--sport</code> when a packet was determined to be TCP.
+</p>
+<p>The following is an incomplete list of the matches available:
+</p>
+<ul>
+<li>meta    (meta properties, e.g. interfaces)</li>
+<li>icmp    (ICMP protocol)</li>
+<li>icmpv6  (ICMPv6 protocol)</li>
+<li>ip      (IP protocol)</li>
+<li>ip6     (IPv6 protocol)</li>
+<li>tcp     (TCP protocol)</li>
+<li>udp     (UDP protocol)</li>
+<li>sctp    (SCTP protocol)</li>
+<li>ct      (connection tracking)</li>
+</ul>
+<p>The following is an incomplete list of match arguments (for a more complete list, see <span class="plainlinks archwiki-template-man" title="$ man 8 nft"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/nft.8">nft(8)</a></span>):
+</p>
+<pre>meta:
+  oif &lt;output interface INDEX&gt;
+  iif &lt;input interface INDEX&gt;
+  oifname &lt;output interface NAME&gt;
+  iifname &lt;input interface NAME&gt;
+
+  (oif and iif accept string arguments and are converted to interface indexes)
+  (oifname and iifname are more dynamic, but slower because of string matching)
+
+icmp:
+  type &lt;icmp type&gt;
+
+icmpv6:
+  type &lt;icmpv6 type&gt;
+
+ip:
+  protocol &lt;protocol&gt;
+  daddr &lt;destination address&gt;
+  saddr &lt;source address&gt;
+
+ip6:
+  daddr &lt;destination address&gt;
+  saddr &lt;source address&gt;
+
+tcp:
+  dport &lt;destination port&gt;
+  sport &lt;source port&gt;
+
+udp:
+  dport &lt;destination port&gt;
+  sport &lt;source port&gt;
+
+sctp:
+  dport &lt;destination port&gt;
+  sport &lt;source port&gt;
+
+ct:
+  state &lt;new | established | related | invalid&gt;
+</pre>
+<h4><span class="mw-headline" id="List_rules">List rules</span></h4>
+<p>The following lists all rules of a chain:
+</p>
+<pre># nft list chain <i>family_type</i> <i>table_name</i> <i>chain_name</i>
+</pre>
+<p>For example, the following lists the rules of the chain named <code>my_output</code> in the <code>inet</code> table named <code>my_table</code>:
+</p>
+<pre># nft list chain inet my_table my_output
+</pre>
+<h4><span class="mw-headline" id="Deletion">Deletion</span></h4>
+<p>Individual rules can only be deleted by their handles. Obtaining the handles was shown at <a href="#Add_rule">#Add rule</a>. Assuming
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;"># nft --handle --numeric list chain inet my_table my_input</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">table inet my_table {
+     chain input {
+          type filter hook input priority 0;
+          ip saddr 127.0.0.1 accept # handle 10
+     }
+}
+</pre>
+<pre># nft delete rule inet my_table my_input handle 10
+</pre>
+<p>deletes it.
+</p>
+<p>All the chains in a table can be flushed with the <code>nft flush table</code> command. Individual chains can be flushed using either the <code>nft flush chain</code> or <code>nft delete rule</code> commands.
+</p>
+<pre># nft flush table <i>table_name</i>
+# nft flush chain <i>family_type</i> <i>table_name</i> <i>chain_name</i>
+# nft delete rule <i>family_type</i> <i>table_name</i> <i>chain_name</i>
+</pre>
+<p>The first command flushes all of the chains in the ip <code><i>table_name</i></code> table. The second flushes the <code><i>chain_name</i></code> chain in the <code><i>family_type</i></code> <code><i>table_name</i></code> table. The third deletes all of the rules in <code><i>chain_name</i></code> chain in the <code><i>family_type</i></code> <code><i>table_name</i></code> table.
+</p>
+<h3><span class="mw-headline" id="Sets">Sets</span></h3>
+<p><a rel="nofollow" class="external text" href="https://wiki.nftables.org/wiki-nftables/index.php/Sets">Sets are named or anonymous</a>, and consist of one or more elements, separated by commas, enclosed by curly braces. Anonymous sets are embedded in rules and cannot be updated, you must delete and re-add the rule. E.g., you cannot just remove "http" from the dports set in the following:
+</p>
+<pre># nft add rule ip6 filter input tcp dport {telnet, http, https} accept
+</pre>
+<p>Named sets can be updated, and can be typed and flagged. <i>sshguard</i> uses named sets for the IP addresses of blocked hosts.
+</p>
+<pre>table ip sshguard {
+       set attackers {
+               type ipv4_addr
+               flags interval
+               elements = { 1.2.3.4 }
+       }
+</pre>
+<p>To <i>add</i> or <i>delete</i> elements from the set, use:
+</p>
+<pre># nft add element ip sshguard attackers { 5.6.7.8/32 }
+# nft delete element ip sshguard attackers { 1.2.3.4/32 }
+</pre>
+<p>Note the type <i>ipv4_addr</i> can include a CIDR netmask (the <code>/32</code> here is not necessary, but is included for completeness' sake). Note also, the set defined here by <code>TABLE ip sshguard { SET attackers }</code> is addressed as <code>ip sshguard attackers</code>.
+</p>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> <a href="../en/Systemd-networkd.html" title="Systemd-networkd">systemd-networkd</a> connections can be configured to populate predefined named sets with host IP addresses, network prefixes and interface indexes. See the description of <code>NFTSet=</code> in <span class="plainlinks archwiki-template-man" title="$ man 5 systemd.network"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd.network.5#%5BADDRESS%5D_SECTION_OPTIONS">systemd.network(5) § [ADDRESS] SECTION OPTIONS</a></span> for details and <a href="#Dynamic_named_sets_using_systemd-networkd">#Dynamic named sets using systemd-networkd</a> for an example.</div>
+<h3><span class="mw-headline" id="Atomic_reloading">Atomic reloading</span></h3>
+<p>Flush the current ruleset:
+</p>
+<pre># echo "flush ruleset" &gt; /tmp/nftables 
+</pre>
+<p>Dump the current ruleset:
+</p>
+<pre># nft -s list ruleset &gt;&gt; /tmp/nftables
+</pre>
+<p>Now you can edit <code>/tmp/nftables</code> and apply your changes with:
+</p>
+<pre># nft -f /tmp/nftables
+</pre>
+<h2><span class="mw-headline" id="Examples">Examples</span></h2>
+<h3><span class="mw-headline" id="Workstation">Workstation</span></h3>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/nftables.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">flush ruleset
+
+table inet my_table {
+	set LANv4 {
+		type ipv4_addr
+		flags interval
+
+		elements = { 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16, 169.254.0.0/16 }
+	}
+	set LANv6 {
+		type ipv6_addr
+		flags interval
+
+		elements = { fd00::/8, fe80::/10 }
+	}
+
+	chain my_input_lan {
+		udp sport 1900 udp dport &gt;= 1024 meta pkttype unicast limit rate 4/second burst 20 packets accept comment "Accept UPnP IGD port mapping reply"
+
+		udp sport netbios-ns udp dport &gt;= 1024 meta pkttype unicast accept comment "Accept Samba Workgroup browsing replies"
+
+	}
+
+	chain my_input {
+		type filter hook input priority filter; policy drop;
+
+		iif lo accept comment "Accept any localhost traffic"
+		ct state invalid drop comment "Drop invalid connections"
+		fib daddr . iif type != { local, broadcast, multicast } drop comment "Drop packets if the destination IP address is not configured on the incoming interface (strong host model)"
+		ct state { established, related } accept comment "Accept traffic originated from us"
+
+		meta l4proto { icmp, ipv6-icmp } accept comment "Accept ICMP"
+		ip protocol igmp accept comment "Accept IGMP"
+
+		udp dport mdns ip6 daddr ff02::fb accept comment "Accept mDNS"
+		udp dport mdns ip daddr 224.0.0.251 accept comment "Accept mDNS"
+
+		ip6 saddr @LANv6 jump my_input_lan comment "Connections from private IP address ranges"
+		ip saddr @LANv4 jump my_input_lan comment "Connections from private IP address ranges"
+
+		counter comment "Count any other traffic"
+	}
+
+	chain my_forward {
+		type filter hook forward priority filter; policy drop;
+		# Drop everything forwarded to us. We do not forward. That is routers job.
+	}
+
+	chain my_output {
+		type filter hook output priority filter; policy accept;
+		# Accept every outbound connection
+	}
+
+}
+</pre>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> When using <a href="../en/Systemd-networkd.html" title="Systemd-networkd">systemd-networkd</a> and connected to a local network, you can avoid hardcoding the network subnets by using the <span class="plainlinks archwiki-template-man" title="$ man 5 systemd.network"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd.network.5">systemd.network(5)</a></span> option <code>NFTSet=</code> to get the network prefixes of a connection. See <a href="#Dynamic_named_sets_using_systemd-networkd">#Dynamic named sets using systemd-networkd</a>.</div>
+<h3><span class="mw-headline" id="Server">Server</span></h3>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/nftables.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">flush ruleset
+
+table inet my_table {
+	set LANv4 {
+		type ipv4_addr
+		flags interval
+
+		elements = { 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16, 169.254.0.0/16 }
+	}
+	set LANv6 {
+		type ipv6_addr
+		flags interval
+
+		elements = { fd00::/8, fe80::/10 }
+	}
+
+	chain my_input_lan {
+		meta l4proto { tcp, udp } th dport 2049 accept comment "Accept NFS"
+
+		udp dport netbios-ns accept comment "Accept NetBIOS Name Service (nmbd)"
+		udp dport netbios-dgm accept comment "Accept NetBIOS Datagram Service (nmbd)"
+		tcp dport netbios-ssn accept comment "Accept NetBIOS Session Service (smbd)"
+		tcp dport microsoft-ds accept comment "Accept Microsoft Directory Service (smbd)"
+
+		udp sport { bootpc, 4011 } udp dport { bootps, 4011 } accept comment "Accept PXE"
+		udp dport tftp accept comment "Accept TFTP"
+	}
+
+	chain my_input {
+		type filter hook input priority filter; policy drop;
+
+		iif lo accept comment "Accept any localhost traffic"
+		ct state invalid drop comment "Drop invalid connections"
+		fib daddr . iif type != { local, broadcast, multicast } drop comment "Drop packets if the destination IP address is not configured on the incoming interface (strong host model)"
+		ct state { established, related } accept comment "Accept traffic originated from us"
+
+		meta l4proto { icmp, ipv6-icmp } accept comment "Accept ICMP"
+		ip protocol igmp accept comment "Accept IGMP"
+
+		udp dport mdns ip6 daddr ff02::fb accept comment "Accept mDNS"
+		udp dport mdns ip daddr 224.0.0.251 accept comment "Accept mDNS"
+
+		ip6 saddr @LANv6 jump my_input_lan comment "Connections from private IP address ranges"
+		ip saddr @LANv4 jump my_input_lan comment "Connections from private IP address ranges"
+
+		tcp dport ssh accept comment "Accept SSH on port 22"
+
+		tcp dport ipp accept comment "Accept IPP/IPPS on port 631"
+
+		tcp dport { http, https, 8008, 8080 } accept comment "Accept HTTP (ports 80, 443, 8008, 8080)"
+
+		udp sport bootpc udp dport bootps ip saddr 0.0.0.0 ip daddr 255.255.255.255 accept comment "Accept DHCPDISCOVER (for DHCP-Proxy)"
+	}
+
+	chain my_forward {
+		type filter hook forward priority filter; policy drop;
+		# Drop everything forwarded to us. We do not forward. That is routers job.
+	}
+
+	chain my_output {
+		type filter hook output priority filter; policy accept;
+		# Accept every outbound connection
+	}
+
+}
+</pre>
+<h3><span class="mw-headline" id="Limit_rate">Limit rate</span></h3>
+<pre>table inet my_table {
+	chain my_input {
+		type filter hook input priority filter; policy drop;
+
+		iif lo accept comment "Accept any localhost traffic"
+		ct state invalid drop comment "Drop invalid connections"
+		fib daddr . iif type != { local, broadcast, multicast } drop comment "Drop packets if the destination IP address is not configured on the incoming interface (strong host model)"
+
+		meta l4proto icmp icmp type echo-request limit rate over 10/second burst 4 packets drop comment "No ping floods"
+		meta l4proto ipv6-icmp icmpv6 type echo-request limit rate over 10/second burst 4 packets drop comment "No ping floods"
+
+		ct state { established, related } accept comment "Accept traffic originated from us"
+
+		meta l4proto { icmp, ipv6-icmp } accept comment "Accept ICMP"
+		ip protocol igmp accept comment "Accept IGMP"
+
+		tcp dport ssh ct state new limit rate 15/minute accept comment "Avoid brute force on SSH"
+
+	}
+
+}
+</pre>
+<h3><span class="mw-headline" id="Jump">Jump</span></h3>
+<p>When using jumps in configuration file, it is necessary to define the target chain first. Otherwise one could end up with <code>Error: Could not process rule: No such file or directory</code>.
+</p>
+<pre>table inet my_table {
+    chain web {
+        tcp dport http accept
+        tcp dport 8080 accept
+    }
+    chain my_input {
+        type filter hook input priority filter;
+        ip saddr 10.0.2.0/24 jump web
+        drop
+    }
+}
+</pre>
+<h3><span class="mw-headline" id="Different_rules_for_different_interfaces">Different rules for different interfaces</span></h3>
+<p>If your box has more than one network interface, and you would like to use different rules for different interfaces, you may want to use a "dispatching" filter chain, and then interface-specific filter chains. For example, let us assume your box acts as a home router, you want to run a web server accessible over the LAN (interface <code>enp3s0</code>), but not from the public internet (interface <code>enp2s0</code>), you may want to consider a structure like this:
+</p>
+<pre>table inet my_table {
+  chain my_input { # this chain serves as a dispatcher
+    type filter hook input priority filter; policy drop;
+
+    iif lo accept comment "always accept loopback"
+    iifname enp2s0 jump my_input_public
+    iifname enp3s0 jump my_input_private
+  }
+  chain my_input_public { # rules applicable to public interface interface
+    ct state {established,related} accept
+    ct state invalid drop
+    udp dport bootpc accept
+    tcp dport bootpc accept
+  }
+  chain my_input_private {
+    ct state {established,related} accept
+    ct state invalid drop
+    udp dport bootpc accept
+    tcp dport bootpc accept
+    tcp port http accept
+    tcp port https accept
+    reject with icmpx port-unreachable comment "all other traffic"
+  }
+  chain my_output { # we let everything out
+    type filter hook output priority filter;
+    accept
+  }
+}
+</pre>
+<p>Alternatively you could choose only one <code>iifname</code> statement, such as for the single upstream interface, and put the default rules for all other interfaces in one place, instead of dispatching for each interface.
+</p>
+<h3><span class="mw-headline" id="Masquerading">Masquerading</span></h3>
+<p>nftables has a special keyword <code>masquerade</code> "where the source address is automagically set to the address of the output interface" (<a rel="nofollow" class="external text" href="https://wiki.nftables.org/wiki-nftables/index.php/Performing_Network_Address_Translation_%28NAT%29#Masquerading">source</a>). This is particularly useful for situations in which the IP address of the interface is unpredictable or unstable, such as the upstream interface of routers connecting to many ISPs. Without it, the Network Address Translation rules would have to be updated every time the IP address of the interface changed.
+</p>
+<p>To use it:
+</p>
+<ul>
+<li>make sure masquerading is enabled in the kernel (true if you use the default kernel), otherwise during kernel configuration, set <code>CONFIG_NFT_MASQ=m</code>.</li>
+<li>the <code>masquerade</code> keyword can only be used in chains of type <code>nat</code>.</li>
+<li>masquerading is a kind of source NAT, so only works in the output path.</li>
+</ul>
+<p>Example for a machine with two interfaces: LAN connected to <code>enp3s0</code>, and public internet connected to <code>enp2s0</code>:
+</p>
+<pre>table inet my_nat {
+  chain my_masquerade {
+    type nat hook postrouting priority srcnat;
+    oifname "enp2s0" masquerade
+  }
+}
+</pre>
+<p>Since the table type is <code>inet</code> both IPv4 and IPv6 packets will be masqueraded. If you want only ipv4 packets to be masqueraded (since extra adress space of IPv6 makes NAT not required) <code>meta nfproto ipv4</code> expression can be used infront of <code>oifname "enp2s0"</code> or the table type can be changed to <code>ip</code>.
+</p>
+<h3><span class="mw-headline" id="NAT_with_port_forwarding">NAT with port forwarding</span></h3>
+<p>This example will masquerade traffic exiting through a WAN interface called eth0 and forward ports 22 and 80 to <code>10.0.0.2</code>. You will need to set <code>net.ipv4.ip_forward</code> to <code>1</code> via <a href="../en/Sysctl.html" title="Sysctl">sysctl</a>.
+</p>
+<pre>table nat {
+    chain prerouting {
+        type nat hook prerouting priority dstnat;
+        iif eth0 tcp dport {22, 80} dnat to 10.0.0.2
+    }
+    chain postrouting {
+        type nat hook postrouting priority srcnat;
+        oif eth0 masquerade
+    }
+}
+</pre>
+<h3><span class="mw-headline" id="Count_new_connections_per_IP">Count new connections per IP</span></h3>
+<p>Use this snippet to count HTTPS connections:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/nftables.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">table inet filter {
+    set https {
+        type ipv4_addr;
+        flags dynamic;
+        size 65536;
+        timeout 60m;
+    }
+
+    chain input {
+        type filter hook input priority filter;
+        ct state new tcp dport 443 update @https { ip saddr counter }
+    }
+}
+</pre>
+<p>To print the counters, run <code>nft list set inet filter https</code>.
+</p>
+<h3><span class="mw-headline" id="Dynamic_blackhole">Dynamic blackhole</span></h3>
+<p>Use this snippet to drop all HTTPS connections for 1 minute from a source IP (or /64 IPv6 range) that exceeds the limit of 10/second.
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/nftables.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">table inet dev {
+    set blackhole_ipv4 {
+        type ipv4_addr;
+        flags dynamic, timeout;
+        size 65536;
+    }
+    set blackhole_ipv6 {
+        type ipv6_addr;
+        flags dynamic, timeout;
+        size 65536;
+    }
+
+    chain input {
+        type filter hook input priority filter; policy accept;
+        ct state new tcp dport 443 \
+                meter flood_ipv4 size 128000 { ip saddr timeout 10s limit rate over 10/second } \
+                add @blackhole_ipv4 { ip saddr timeout 1m }
+        ct state new tcp dport 443 \
+                meter flood_ipv6 size 128000 { ip6 saddr and ffff:ffff:ffff:ffff:: timeout 10s limit rate over 10/second } \
+                add @blackhole_ipv6 { ip6 saddr and ffff:ffff:ffff:ffff:: timeout 1m }
+
+        ip saddr @blackhole_ipv4 counter drop
+        ip6 saddr and ffff:ffff:ffff:ffff:: @blackhole_ipv6 counter drop
+    }
+}
+</pre>
+<p>To print the blackholed IPs, run <code>nft list set inet dev blackhole_ipv<i>X</i></code>.
+</p>
+<h2><span class="mw-headline" id="Tips_and_tricks">Tips and tricks</span></h2>
+<h3><span class="mw-headline" id="Saving_current_rule_set">Saving current rule set</span></h3>
+<p>The output of <code>nft list ruleset</code> command is a valid input file for it as well. Current rule set can be saved to file and later loaded back in.
+</p>
+<pre># nft -s list ruleset | tee <i>filename</i>
+</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> <code>nft list</code> does not output variable definitions, if you had any in your original file they will be lost. Any variables used in rules will be replaced by their value.</div>
+<h3><span class="mw-headline" id="Simple_stateful_firewall">Simple stateful firewall</span></h3>
+<p>See <a href="../en/Simple_stateful_firewall.html" title="Simple stateful firewall">Simple stateful firewall</a> for more information.
+</p>
+<h4><span class="mw-headline" id="Single_machine">Single machine</span></h4>
+<p>Flush the current ruleset:
+</p>
+<pre># nft flush ruleset
+</pre>
+<p>Add a table:
+</p>
+<pre># nft add table inet my_table
+</pre>
+<p>Add the input, forward, and output base chains. The policy for input and forward will be to drop. The policy for output will be to accept.
+</p>
+<pre># nft add chain inet my_table my_input '{ type filter hook input priority 0 ; policy drop ; }'
+# nft add chain inet my_table my_forward '{ type filter hook forward priority 0 ; policy drop ; }'
+# nft add chain inet my_table my_output '{ type filter hook output priority 0 ; policy accept ; }'
+</pre>
+<p>Add two regular chains that will be associated with tcp and udp:
+</p>
+<pre># nft add chain inet my_table my_tcp_chain
+# nft add chain inet my_table my_udp_chain
+</pre>
+<p>Related and established traffic will be accepted:
+</p>
+<pre># nft add rule inet my_table my_input ct state '{ related, established }' accept
+</pre>
+<p>All loopback interface traffic will be accepted:
+</p>
+<pre># nft add rule inet my_table my_input iif lo accept
+</pre>
+<p>Drop any invalid traffic:
+</p>
+<pre># nft add rule inet my_table my_input ct state invalid drop
+</pre>
+<p>Accept ICMP and IGMP:
+</p>
+<pre># nft add rule inet my_table my_input meta l4proto '{ icmp, ipv6-icmp }' accept
+# nft add rule inet my_table my_input ip protocol igmp accept
+</pre>
+<p>New udp traffic will jump to the UDP chain:
+</p>
+<pre># nft add rule inet my_table my_input meta l4proto udp ct state new jump my_udp_chain
+</pre>
+<p>New tcp traffic will jump to the TCP chain:
+</p>
+<pre># nft add rule inet my_table my_input 'meta l4proto tcp tcp flags &amp; (fin|syn|rst|ack) == syn ct state new jump my_tcp_chain'
+</pre>
+<p>At this point you should decide what ports you want to open to incoming connections, which are handled by the TCP and UDP chains. For example to open connections for a web server add:
+</p>
+<pre># nft add rule inet my_table my_tcp_chain tcp dport 80 accept
+</pre>
+<p>To accept HTTPS connections for a webserver on port 443:
+</p>
+<pre># nft add rule inet my_table my_tcp_chain tcp dport 443 accept
+</pre>
+<p>To accept SSH traffic on port 22:
+</p>
+<pre># nft add rule inet my_table my_tcp_chain tcp dport 22 accept
+</pre>
+<p>To accept incoming DNS requests:
+</p>
+<pre># nft add rule inet my_table my_tcp_chain tcp dport 53 accept
+# nft add rule inet my_table my_udp_chain udp dport 53 accept
+</pre>
+<p>Be sure to make your changes permanent when satisfied.
+</p>
+<h3><span class="mw-headline" id="Prevent_brute-force_attacks">Prevent brute-force attacks</span></h3>
+<p><a href="../en/Sshguard.html" title="Sshguard">Sshguard</a> is program that can detect brute-force attacks and modify firewalls based on IP addresses it temporarily blacklists. See <a href="../en/Sshguard.html#nftables" title="Sshguard">Sshguard#nftables</a> on how to set up nftables to be used with it.
+</p>
+<h3><span class="mw-headline" id="Logging_traffic">Logging traffic</span></h3>
+<p>You can log packets using the <code>log</code> action. The most simple rule to log all incoming traffic is:
+</p>
+<pre># nft add rule inet filter input log
+</pre>
+<p>See <a rel="nofollow" class="external text" href="https://wiki.nftables.org/wiki-nftables/index.php/Logging_traffic">nftables wiki</a> for details.
+</p>
+<h3><span class="mw-headline" id="Monitor">Monitor</span></h3>
+<p>Listen to all events, report in native nft format.
+</p>
+<pre># nft monitor
+</pre>
+<p>See <span class="plainlinks archwiki-template-man" title="$ man 8 nft"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/nft.8#MONITOR">nft(8) § MONITOR</a></span>
+</p>
+<h4><span class="mw-headline" id="Ruleset_debugging_trace_temporary">Ruleset debugging trace temporary</span></h4>
+<p><b>meta nftrace set 1</b> ruleset packet tracing on/off. Use <a href="#Monitor">monitor trace</a> command to watch traces.
+</p>
+<p>In another shell "include" the file inside the interactive shell:
+</p>
+<pre># nft -i
+nft&gt; include "/root/nftables.trace"
+</pre>
+<p>Example, adjust to your needs:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/root/nftables.trace</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">add table ip temp-trace {comment "Temporary table!!"; flags owner;}
+add chain ip temp-trace icmp-prerouting { type filter hook prerouting priority raw - 1 ; }
+add rule ip temp-trace icmp-prerouting <i>ip protocol icmp</i> <b>meta nftrace set 1</b>
+</pre>
+<p>This file adds a temporary table (<i>flags owner</i>) so that it gets automatically removed, if the calling (process) interactive nft is closed. The Base Chain needs to be adjusted for your use case. You can create multiple chains and multiple rules with "meta nftrace set 1"  "ip protocol icmp" is used just as an example and is not necessary. There are many ways to achieve a similar effect, the advantage is that by closing the interactive shell the previous state is automatically restored, and if an error is inside the file nothing gets executed.
+</p>
+<p>See <a rel="nofollow" class="external text" href="https://wiki.nftables.org/wiki-nftables/index.php/Ruleset_debug/tracing">nftables wiki</a> and a <a rel="nofollow" class="external text" href="https://github.com/aborrero/nftables-tracer">python tool automating</a> the process and coloring.
+</p>
+<h3><span class="mw-headline" id="Using_iptables-nft">Using iptables-nft</span></h3>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../File:Inaccurate.svg" decoding="async" width="48" height="48" class="mw-file-element"></span></span><b>The factual accuracy of this article or section is disputed.</b></p>
+<div>
+<b>Reason:</b> nftables warns if there are legacy iptables objects loaded, so it is not "perfectly workable to use legacy iptables <i>and</i> nftables at the same time". (Discuss in <a rel="nofollow" class="external text" href="../en/Talk:Nftables.html">Talk:Nftables</a>)</div>
+</div>
+<p>The older iptables language remains quite dominant in Linux documentation, and quite a few things still depend on iptables to run (such as Docker's networking). Although it's also perfectly workable to use legacy iptables <i>and</i> nftables at the same time, using iptables-nft's translation is preferred because:
+</p>
+<ul>
+<li>It puts everything in the same place, using the newer, more efficient, non-locking framework.</li>
+<li>It checks for conflicts.</li>
+</ul>
+<p>There are two ways to use the old iptables language with nftables:
+</p>
+<ul><li>
+<code>iptables-translate</code> and <code>iptables-restore-translate</code> (plus vice versa for <code>ip6tables</code>, <code>ebtables</code>, etc.) take iptable language and output nft language. They do <i>not</i> change running nft settings. See <span class="plainlinks archwiki-template-man" title="$ man 8 xtables-translate"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/xtables-translate.8">xtables-translate(8)</a></span>.</li></ul>
+<dl><dd>For configuration you want to maintain later on, it's a good idea to use the <code>-translate</code> tool and integrate the result code into your existing rules. For example, if you find something useful in <a href="../en/Simple_stateful_firewall.html" title="Simple stateful firewall">simple stateful firewall</a> or the wider Internet, you can translate them to put into your nft config.</dd></dl>
+<ul><li>
+<code>iptables</code> and <code>iptables-restore</code> (again vice versa for <code>ip6tables</code> etc.) uses the above translation <i>and</i> put them into the running nft settings. It also offers statistics like regular iptables does. See <span class="plainlinks archwiki-template-man" title="$ man 8 xtables-nft"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/xtables-nft.8">xtables-nft(8)</a></span>.</li></ul>
+<dl><dd>Those commands work reasonably well given what they have to work with. They should "just work" with simple usage, but occasionally you will need to step in and debug.</dd></dl>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> The translator covers a large portion, but not all, of the iptables language. Some iptables rules work in conjunction and the translator needs context to properly translate, so do not panic if some lines translate into nothing.</div>
+<h3><span class="mw-headline" id="Dynamic_named_sets_using_systemd-networkd">Dynamic named sets using systemd-networkd</span></h3>
+<p><a href="../en/Systemd-networkd.html" title="Systemd-networkd">systemd-networkd</a>'s connections can use the <code>NFTSet=</code> option to populate predefined named sets with host IP addresses, network prefixes and interface indexes. This allows to avoid hardcoding them in <code>/etc/nftables.conf</code>. The <code>NFTSet=</code> option is supported in <code>[Address]</code>, <code>[DHCPv4]</code>, <code>[DHCPv6]</code> and <code>[IPv6AcceptRA]</code> sections. See <span class="plainlinks archwiki-template-man" title="$ man 5 systemd.network"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd.network.5#%5BADDRESS%5D_SECTION_OPTIONS">systemd.network(5) § [ADDRESS] SECTION OPTIONS</a></span>.
+</p>
+<p>For example, to process connections from a local network (where IP addresses are assigned via DHCP or SLAAC) in a separate <code>my_input_lan</code> chain:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/nftables.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">...
+table inet my_table {
+
+	set eth_ipv4_prefix {
+		type ipv4_addr
+		flags interval
+		comment "Populated by systemd-networkd"
+	}
+	set eth_ipv6_prefix {
+		type ipv6_addr
+		flags interval
+		comment "Populated by systemd-networkd"
+
+		elements = { fe80::/10 }
+	}
+	set eth_ifindex {
+		type iface_index
+		comment "Populated by systemd-networkd"
+	}
+...
+	chain my_input {
+		type filter hook input priority filter; policy drop;
+
+		iif @eth_ifindex ip6 saddr @eth_ipv6_prefix jump my_input_lan comment "Connections from LAN"
+		iif @eth_ifindex ip saddr @eth_ipv4_prefix jump my_input_lan comment "Connections from LAN"
+	}
+...
+}</pre>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/network/my-network.network</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">...
+
+[DHCPv4]
+NFTSet=prefix:inet:my_table:eth_ipv4_prefix
+NFTSet=ifindex:inet:my_table:eth_ifindex
+
+[DHCPv6]
+NFTSet=prefix:inet:my_table:eth_ipv6_prefix
+NFTSet=ifindex:inet:my_table:eth_ifindex
+
+[IPv6AcceptRA]
+NFTSet=prefix:inet:my_table:eth_ipv6_prefix
+NFTSet=ifindex:inet:my_table:eth_ifindex
+...</pre>
+<h2><span class="mw-headline" id="Troubleshooting">Troubleshooting</span></h2>
+<h3><span class="mw-headline" id="Working_with_Docker">Working with Docker</span></h3>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> 
+<ul>
+<li>With the following setup, you will not be able to use protocols like <code>AF_BLUETOOTH</code> inside containers even with <code>--net host --privileged</code>.</li>
+<li>Rootless Docker containers already run in a separate network namespace. You may not need to do anything.</li>
+</ul>
+</div>
+<p>Using nftables can interfere with <a href="../en/Docker.html" title="Docker">Docker</a> networking (and probably other container runtimes as well). You can find various workarounds on the internet which either involve patching iptables rules and ensuring a defined service start order or disabling dockers iptables management completely which makes using docker very restrictive (think port forwarding or docker-compose).
+</p>
+<p>A reliable method is letting docker run in a separate network namespace where it can do whatever it wants. It is probably best to <b>not</b> use <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=iptables-nft">iptables-nft</a></span> to prevent docker from mixing nftables and iptables rules.
+</p>
+<p>Use the following docker service <a href="../en/Systemd.html#Drop-in_files" class="mw-redirect" title="Drop-in file">drop-in file</a>:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/system/docker.service.d/netns.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Service]
+PrivateNetwork=yes
+PrivateMounts=No
+
+# cleanup
+ExecStartPre=-nsenter -t 1 -n -- ip link delete docker0
+
+# add veth
+ExecStartPre=nsenter -t 1 -n -- ip link add docker0 type veth peer name docker0_ns
+ExecStartPre=sh -c 'nsenter -t 1 -n -- ip link set docker0_ns netns "$$BASHPID" &amp;&amp; true'
+ExecStartPre=ip link set docker0_ns name eth0
+
+# bring host online
+ExecStartPre=nsenter -t 1 -n -- ip addr add 10.0.0.1/24 dev docker0
+ExecStartPre=nsenter -t 1 -n -- ip link set docker0 up
+
+# bring ns online
+ExecStartPre=ip addr add 10.0.0.100/24 dev eth0
+ExecStartPre=ip link set eth0 up
+ExecStartPre=ip route add default via 10.0.0.1 dev eth0</pre>
+<p>Adjust the <code>10.0.0.*</code> IP addresses if they are not appropriate for your setup.
+</p>
+<p>Enable IP forwarding and set-up NAT for docker0 with the following postrouting rule:
+</p>
+<pre>iifname docker0 oifname eth0 masquerade
+</pre>
+<p>Then, ensure that <a href="../en/Internet_sharing.html#Enable_packet_forwarding" title="Internet sharing">kernel IP forwarding</a> is enabled.
+</p>
+<p>Now you can setup a firewall and port forwarding for the <code>docker0</code> interface using nftables without any interference.
+</p>
+<h2><span class="mw-headline" id="See_also">See also</span></h2>
+<ul>
+<li><a rel="nofollow" class="external text" href="https://wiki.nftables.org/">netfilter nftables wiki</a></li>
+<li><a href="https://wiki.debian.org/nftables" class="extiw" title="debian:nftables">debian:nftables</a></li>
+<li><a href="https://wiki.gentoo.org/wiki/nftables" class="extiw" title="gentoo:nftables">gentoo:nftables</a></li>
+<li><a rel="nofollow" class="external text" href="https://lwn.net/Articles/324251/">First release of nftables</a></li>
+<li><a rel="nofollow" class="external text" href="https://home.regit.org/netfilter-en/nftables-quick-howto/">nftables quick howto</a></li>
+<li><a rel="nofollow" class="external text" href="https://lwn.net/Articles/564095/">The return of nftables</a></li>
+<li><a rel="nofollow" class="external text" href="https://developers.redhat.com/blog/2016/10/28/what-comes-after-iptables-its-successor-of-course-nftables/">What comes after ‘iptables’? Its successor, of course: `nftables`</a></li>
+<li>
+<a rel="nofollow" class="external text" href="https://github.com/gene-git/blog/tree/master/nftables">Gene's Tech Blog</a> – additional nftables samples for workstation and firewall</li>
+</ul>
+</div>
+</div>
+					<div id="catlinks" class="catlinks" data-mw="interface">
+<div id="mw-normal-catlinks" class="mw-normal-catlinks">
+<a href="../Special:Categories.html" title="Special:Categories">Category</a>: <ul><li><a href="../en/Category:Firewalls.html" title="Category:Firewalls">Firewalls</a></li></ul>
+</div>
+<div id="mw-hidden-catlinks" class="mw-hidden-catlinks mw-hidden-cats-hidden">Hidden categories: <ul>
+<li><a href="../en/Category:Pages_or_sections_flagged_with_Template:Expansion.html" title="Category:Pages or sections flagged with Template:Expansion">Pages or sections flagged with Template:Expansion</a></li>
+<li><a href="../en/Category:Pages_or_sections_flagged_with_Template:Accuracy.html" title="Category:Pages or sections flagged with Template:Accuracy">Pages or sections flagged with Template:Accuracy</a></li>
+</ul>
+</div>
+</div>
+				</div>
+			</main>
+			
+		</div>
+		<div class="mw-footer-container">
+			
+<footer id="footer" class="mw-footer" style="margin: 0">
+	<ul id="footer-info">
+	<li data-nosnippet="">Retrieved from "<a dir="ltr" href="https://wiki.archlinux.org/index.php?title=Nftables&amp;oldid=829720">https://wiki.archlinux.org/index.php?title=Nftables&amp;oldid=829720</a>"</li>
+<li id="footer-info-lastmod"> This page was last edited on 24 March 2025, at 07:57.</li>
+	<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+<br>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="https://terms.archlinux.org/docs/privacy-policy/">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="../en/ArchWiki:About.html">About ArchWiki</a></li>
+	<li id="footer-places-disclaimers"><a href="../en/ArchWiki:General_disclaimer.html">Disclaimers</a></li>
+	<li id="footer-places-archwiki-code-of-conduct"><a href="https://terms.archlinux.org/docs/code-of-conduct/" class="extiw" title="archlinux-service-agreements:code-of-conduct">Code of conduct</a></li>
+	<li id="footer-places-archwiki-terms-of-service"><a href="https://terms.archlinux.org/docs/terms-of-service/" class="extiw" title="archlinux-service-agreements:terms-of-service">Terms of service</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-copyrightico"><a href="https://www.gnu.org/copyleft/fdl.html" class="cdx-button cdx-button--fake-button cdx-button--size-large cdx-button--fake-button--enabled"><img src="/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" loading="lazy"></a></li>
+	<li id="footer-poweredbyico"><img src="/resources/assets/poweredby_mediawiki.svg" width="88" height="31" loading="lazy"></li>
+</ul>
+
+</footer>
+
+		</div>
+	</div> 
+</div> 
+<div class="vector-settings" id="p-dock-bottom">
+	<ul></ul>
+</div>
+</body>
+</html>

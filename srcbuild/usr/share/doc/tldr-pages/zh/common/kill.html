@@ -1,0 +1,54 @@
+<h1>kill</h1>
+
+<blockquote><p>向进程发送信号，通常用于停止进程。
+除了 SIGKILL 和 SIGSTOP，所有信号都可以被进程拦截，以便进行正常退出。
+更多信息：<a href="https://manned.org/kill.1posix">https://manned.org/kill.1posix</a>.</p></blockquote>
+
+<ul>
+<li>使用默认的 SIGTERM（终止）信号来结束一个程序：</li>
+</ul>
+
+
+<p><code>kill {{进程ID}}</code></p>
+
+<ul>
+<li>列出可用的信号名称（使用时无需加 <code>SIG</code> 前缀）：</li>
+</ul>
+
+
+<p><code>kill -l</code></p>
+
+<ul>
+<li>使用 SIGHUP（挂起）信号终止一个程序。许多守护进程接收到此信号后会重新加载而不是终止：</li>
+</ul>
+
+
+<p><code>kill -{{1|HUP}} {{进程ID}}</code></p>
+
+<ul>
+<li>使用 SIGINT（中断）信号终止一个程序。通常由用户按下 <code>&lt;Ctrl c&gt;</code> 发起：</li>
+</ul>
+
+
+<p><code>kill -{{2|INT}} {{进程ID}}</code></p>
+
+<ul>
+<li>向操作系统发送信号，立即终止一个程序（程序无机会捕获信号）：</li>
+</ul>
+
+
+<p><code>kill -{{9|KILL}} {{进程ID}}</code></p>
+
+<ul>
+<li>向操作系统发送信号，暂停一个程序，直到收到 SIGCONT（继续）信号：</li>
+</ul>
+
+
+<p><code>kill -{{17|STOP}} {{进程ID}}</code></p>
+
+<ul>
+<li>向所有具有指定 GID（组ID）的进程发送 <code>SIGUSR1</code> 信号：</li>
+</ul>
+
+
+<p><code>kill -{{SIGUSR1}} -{{组ID}}</code></p>

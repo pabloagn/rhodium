@@ -1,0 +1,46 @@
+<h1>aws kinesis</h1>
+
+<blockquote><p>CLI officiel d'AWS pour les services de streaming d'Amazon Kinesis.
+Plus d'informations : <a href="https://docs.aws.amazon.com/cli/latest/reference/kinesis/index.html#cli-aws-kinesis">https://docs.aws.amazon.com/cli/latest/reference/kinesis/index.html#cli-aws-kinesis</a>.</p></blockquote>
+
+<ul>
+<li>Affiche tous les streams du compte :</li>
+</ul>
+
+
+<p><code>aws kinesis list-streams</code></p>
+
+<ul>
+<li>Écris une entrée dans le stream Kinesis :</li>
+</ul>
+
+
+<p><code>aws kinesis put-record --stream-name {{nom}} --partition-key {{clé}} --data {{message_encodé_en_base64}}</code></p>
+
+<ul>
+<li>Écris une entrée dans le stream Kinesis avec un encodage base64 inline :</li>
+</ul>
+
+
+<p><code>aws kinesis put-record --stream-name {{nom}} --partition-key {{clé}} --data "$( echo "{{mon message}}" | base64 )"</code></p>
+
+<ul>
+<li>Liste tous les fragments disponible dans un stream :</li>
+</ul>
+
+
+<p><code>aws kinesis list-shards --stream-name {{nom}}</code></p>
+
+<ul>
+<li>Récupère un fragment pour lire depuis le plus vieux message dans la stream de ce dernier :</li>
+</ul>
+
+
+<p><code>aws kinesis get-shard-iterator --shard-iterator-type TRIM_HORIZON --stream-name {{nom}} --shard-id {{id}}</code></p>
+
+<ul>
+<li>Lis les entrées d'un fragment en utilisant un itérateur de fragment :</li>
+</ul>
+
+
+<p><code>aws kinesis get-records --shard-iterator {{itérateur}}</code></p>

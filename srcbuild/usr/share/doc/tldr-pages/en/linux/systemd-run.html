@@ -1,0 +1,60 @@
+<h1>systemd-run</h1>
+
+<blockquote><p>Run programs in transient scope units, service units, or path-, socket-, or timer-triggered service units.
+More information: <a href="https://www.freedesktop.org/software/systemd/man/systemd-run.html">https://www.freedesktop.org/software/systemd/man/systemd-run.html</a>.</p></blockquote>
+
+<ul>
+<li>Start a transient service:</li>
+</ul>
+
+
+<p><code>sudo systemd-run {{command}} {{argument1 argument2 ...}}</code></p>
+
+<ul>
+<li>Start a transient service under the service manager of the current user (no privileges):</li>
+</ul>
+
+
+<p><code>systemd-run --user {{command}} {{argument1 argument2 ...}}</code></p>
+
+<ul>
+<li>Start a transient service with a custom unit name and description:</li>
+</ul>
+
+
+<p><code>sudo systemd-run {{[-u|--unit]}} {{name}} --description {{string}} {{command}} {{argument1 argument2 ...}}</code></p>
+
+<ul>
+<li>Start a transient service that does not get cleaned up after it terminates with a custom environment variable:</li>
+</ul>
+
+
+<p><code>sudo systemd-run {{[-r|--remain-after-exit]}} --set-env={{name}}={{value}} {{command}} {{argument1 argument2 ...}}</code></p>
+
+<ul>
+<li>Start a transient timer that periodically runs its transient service (see <code>man systemd.time</code> for calendar event format):</li>
+</ul>
+
+
+<p><code>sudo systemd-run --on-calendar={{calendar_event}} {{command}} {{argument1 argument2 ...}}</code></p>
+
+<ul>
+<li>Share the terminal with the program (allowing interactive input/output) and make sure the execution details remain after the program exits:</li>
+</ul>
+
+
+<p><code>systemd-run {{[-r|--remain-after-exit]}} --pty {{command}}</code></p>
+
+<ul>
+<li>Set properties (e.g. CPUQuota, MemoryMax) of the process and wait until it exits:</li>
+</ul>
+
+
+<p><code>systemd-run {{[-p|--property]}} MemoryMax={{memory_in_bytes}} {{[-p|--property]}} CPUQuota={{percentage_of_CPU_time}}% --wait {{command}}</code></p>
+
+<ul>
+<li>Use the program in a shell pipeline:</li>
+</ul>
+
+
+<p><code>{{command1}} | systemd-run {{[-P|--pipe]}} {{command2}} | {{command3}}</code></p>

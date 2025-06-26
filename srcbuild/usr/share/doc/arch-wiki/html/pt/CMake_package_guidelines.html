@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-sticky-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-0 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-disabled skin-theme-clientpref-day vector-toc-available" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>CMake package guidelines (Português) - ArchWiki</title>
+<link rel="stylesheet" href="../ArchWikiOffline.css">
+<meta name="ResourceLoaderDynamicStyles" content="">
+<meta name="generator" content="MediaWiki 1.43.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="max-image-preview:standard">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.25, maximum-scale=5.0">
+<link rel="search" type="application/opensearchdescription+xml" href="/rest.php/v1/search" title="ArchWiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.archlinux.org/api.php?action=rsd">
+<link rel="license" href="https://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="ArchWiki Atom feed" href="/index.php?title=Special:RecentChanges&amp;feed=atom">
+</head>
+<body class="skin--responsive skin-vector skin-vector-search-vue mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-CMake_package_guidelines_Português rootpage-CMake_package_guidelines_Português skin-vector-2022 action-view">
+<a class="mw-jump-link" href="#bodyContent">Jump to content</a>
+<div class="vector-header-container">
+	</div>
+<div class="mw-page-container">
+	<div class="mw-page-container-inner">
+		<div class="vector-column-start">
+			<div class="vector-main-menu-container">
+		</div>
+	<div class="vector-sticky-pinned-container">
+				<nav id="mw-panel-toc" aria-label="Contents" data-event-name="ui.sidebar-toc" class="mw-table-of-contents-container vector-toc-landmark">
+					<div id="vector-toc-pinned-container" class="vector-pinned-container">
+					<div id="vector-toc" class="vector-toc vector-pinnable-element">
+	<div class="vector-pinnable-header vector-toc-pinnable-header vector-pinnable-header-pinned" data-feature-name="toc-pinned" data-pinnable-element-id="vector-toc">
+	<h2 class="vector-pinnable-header-label">Contents</h2>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-toc.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-toc.unpin">hide</button>
+</div>
+
+
+	<ul class="vector-toc-contents" id="mw-panel-toc-list">
+		<li id="toc-mw-content-text" class="vector-toc-list-item vector-toc-level-1">
+			<a href="#" class="vector-toc-link">
+				<div class="vector-toc-text">Beginning</div>
+			</a>
+		</li>
+		<li id="toc-Introdução" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Introdu%C3%A7%C3%A3o">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">1</span>
+				<span>Introdução</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Introdução-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Introdução subsection</span>
+			</button>
+		
+		<ul id="toc-Introdução-sublist" class="vector-toc-list">
+			<li id="toc-Uso_típico" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Uso_t%C3%ADpico">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.1</span>
+					<span>Uso típico</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Uso_típico-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Comportamentos_indesejados_do_CMake" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Comportamentos_indesejados_do_CMake">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">2</span>
+				<span>Comportamentos indesejados do CMake</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Comportamentos_indesejados_do_CMake-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Comportamentos indesejados do CMake subsection</span>
+			</button>
+		
+		<ul id="toc-Comportamentos_indesejados_do_CMake-sublist" class="vector-toc-list">
+			<li id="toc-Carência_de_suporte_à_variável_de_ambiente_CPPFLAGS" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Car%C3%AAncia_de_suporte_%C3%A0_vari%C3%A1vel_de_ambiente_CPPFLAGS">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1</span>
+					<span>Carência de suporte à variável de ambiente CPPFLAGS</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Carência_de_suporte_à_variável_de_ambiente_CPPFLAGS-sublist" class="vector-toc-list">
+				<li id="toc-Corrigindo_o_problema_de_CPPFLAGS" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Corrigindo_o_problema_de_CPPFLAGS">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1.1</span>
+					<span>Corrigindo o problema de CPPFLAGS</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Corrigindo_o_problema_de_CPPFLAGS-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-CMake_pode_substituir_automaticamente_o_sinalizador_padrão_de_otimização_do_compilador" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#CMake_pode_substituir_automaticamente_o_sinalizador_padr%C3%A3o_de_otimiza%C3%A7%C3%A3o_do_compilador">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2</span>
+					<span>CMake pode substituir automaticamente o sinalizador padrão de otimização do compilador</span>
+				</div>
+			</a>
+			
+			<ul id="toc-CMake_pode_substituir_automaticamente_o_sinalizador_padrão_de_otimização_do_compilador-sublist" class="vector-toc-list">
+				<li id="toc-Notas_sobre_-O3" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Notas_sobre_-O3">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2.1</span>
+					<span>Notas sobre -O3</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Notas_sobre_-O3-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Corrigindo_a_substituição_automática_do_sinalizador_de_otimização" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Corrigindo_a_substitui%C3%A7%C3%A3o_autom%C3%A1tica_do_sinalizador_de_otimiza%C3%A7%C3%A3o">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2.2</span>
+					<span>Corrigindo a substituição automática do sinalizador de otimização</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Corrigindo_a_substituição_automática_do_sinalizador_de_otimização-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Verificando_as_correções" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Verificando_as_corre%C3%A7%C3%B5es">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.3</span>
+					<span>Verificando as correções</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Verificando_as_correções-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Diretórios_de_prefixo_e_instalação_de_biblioteca" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Diret%C3%B3rios_de_prefixo_e_instala%C3%A7%C3%A3o_de_biblioteca">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">3</span>
+				<span>Diretórios de prefixo e  instalação de biblioteca</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Diretórios_de_prefixo_e_instalação_de_biblioteca-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Dicas_e_truques" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Dicas_e_truques">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">4</span>
+				<span>Dicas e truques</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Dicas_e_truques-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Dicas e truques subsection</span>
+			</button>
+		
+		<ul id="toc-Dicas_e_truques-sublist" class="vector-toc-list">
+			<li id="toc-Especificando_diretórios" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Especificando_diret%C3%B3rios">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.1</span>
+					<span>Especificando diretórios</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Especificando_diretórios-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Reduzindo_possíveis_saídas_indesejadas" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Reduzindo_poss%C3%ADveis_sa%C3%ADdas_indesejadas">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.2</span>
+					<span>Reduzindo possíveis saídas indesejadas</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Reduzindo_possíveis_saídas_indesejadas-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Removendo_referências_a_RPATH_inseguro_de_binários" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Removendo_refer%C3%AAncias_a_RPATH_inseguro_de_bin%C3%A1rios">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.3</span>
+					<span>Removendo referências a RPATH inseguro de binários</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Removendo_referências_a_RPATH_inseguro_de_binários-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Obtendo_todas_as_opções_disponíveis_do_CMake" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Obtendo_todas_as_op%C3%A7%C3%B5es_dispon%C3%ADveis_do_CMake">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.4</span>
+					<span>Obtendo todas as opções disponíveis do CMake</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Obtendo_todas_as_opções_disponíveis_do_CMake-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Modelo" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Modelo">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">5</span>
+				<span>Modelo</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Modelo-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Pacotes_exemplos" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Pacotes_exemplos">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">6</span>
+				<span>Pacotes exemplos</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Pacotes_exemplos-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Veja_também" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Veja_tamb%C3%A9m">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">7</span>
+				<span>Veja também</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Veja_também-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+</ul>
+</div>
+
+					</div>
+		</nav>
+			</div>
+		</div>
+		<div class="mw-content-container">
+			<main id="content" class="mw-body" style="margin: 0">
+				<header class="mw-body-header vector-page-titlebar">
+					<nav aria-label="Contents" class="vector-toc-landmark">
+						
+<div id="vector-page-titlebar-toc" class="vector-dropdown vector-page-titlebar-toc vector-button-flush-left">
+	<input type="checkbox" id="vector-page-titlebar-toc-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-page-titlebar-toc" class="vector-dropdown-checkbox " aria-label="Toggle the table of contents">
+	<label id="vector-page-titlebar-toc-label" for="vector-page-titlebar-toc-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"><span class="vector-icon mw-ui-icon-listBullet mw-ui-icon-wikimedia-listBullet"></span>
+
+<span class="vector-dropdown-label-text">Toggle the table of contents</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+							<div id="vector-page-titlebar-toc-unpinned-container" class="vector-unpinned-container">
+			</div>
+		
+	</div>
+</div>
+
+					</nav>
+					<h1 id="firstHeading" class="firstHeading mw-first-heading"><span class="mw-page-title-main">CMake package guidelines (Português)</span></h1>
+							
+<div id="p-lang-btn" class="vector-dropdown mw-portlet mw-portlet-lang">
+	<input type="checkbox" id="p-lang-btn-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-p-lang-btn" class="vector-dropdown-checkbox mw-interlanguage-selector" aria-label="Go to an article in another language. Available in 3 languages">
+	<label id="p-lang-btn-label" for="p-lang-btn-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--action-progressive mw-portlet-lang-heading-3" aria-hidden="true"><span class="vector-icon mw-ui-icon-language-progressive mw-ui-icon-wikimedia-language-progressive"></span>
+
+<span class="vector-dropdown-label-text">3 languages</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+		<div class="vector-menu-content">
+			
+			<ul class="vector-menu-content-list">
+				
+				<li class="interlanguage-link interwiki-en mw-list-item"><a href="../en/CMake_package_guidelines.html" title="CMake package guidelines – English" lang="en" hreflang="en" data-title="CMake package guidelines" data-language-autonym="English" data-language-local-name="English" class="interlanguage-link-target"><span>English</span></a></li>
+<li class="interlanguage-link interwiki-ja mw-list-item"><a href="https://wiki.archlinux.jp/index.php/CMake_%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E3%82%AC%E3%82%A4%E3%83%89%E3%83%A9%E3%82%A4%E3%83%B3" title="CMake パッケージガイドライン – 日本語" lang="ja" hreflang="ja" data-title="CMake パッケージガイドライン" data-language-autonym="日本語" data-language-local-name="日本語" class="interlanguage-link-target"><span>日本語</span></a></li>
+<li class="interlanguage-link interwiki-zh-hans mw-list-item"><a href="https://wiki.archlinuxcn.org/wiki/CMake_package_guidelines" title="CMake package guidelines – 中文（简体）" lang="zh-Hans" hreflang="zh-Hans" data-title="CMake package guidelines" data-language-autonym="中文（简体）" data-language-local-name="中文（简体）" class="interlanguage-link-target"><span>中文（简体）</span></a></li>
+			</ul>
+			
+		</div>
+
+	</div>
+</div>
+</header>
+				<div class="vector-column-end">
+					<div class="vector-sticky-pinned-container">
+						<nav class="vector-page-tools-landmark" aria-label="Page tools">
+							<div id="vector-page-tools-pinned-container" class="vector-pinned-container">
+				
+							</div>
+		</nav>
+						<nav class="vector-appearance-landmark" aria-label="Appearance">
+							<div id="vector-appearance-pinned-container" class="vector-pinned-container">
+				<div id="vector-appearance" class="vector-appearance vector-pinnable-element">
+	<div class="vector-pinnable-header vector-appearance-pinnable-header vector-pinnable-header-pinned" data-feature-name="appearance-pinned" data-pinnable-element-id="vector-appearance" data-pinned-container-id="vector-appearance-pinned-container" data-unpinned-container-id="vector-appearance-unpinned-container">
+	<div class="vector-pinnable-header-label">Appearance</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-appearance.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-appearance.unpin">hide</button>
+</div>
+
+
+</div>
+
+							</div>
+		</nav>
+					</div>
+				</div>
+				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container>
+					<div class="vector-body-before-content">
+							<div class="mw-indicators">
+		</div>
+
+						<div id="siteSub" class="noprint">From ArchWiki</div>
+					</div>
+					<div id="contentSub"><div id="mw-content-subtitle"></div></div>
+					
+					
+					<div id="mw-content-text" class="mw-body-content">
+<div class="mw-content-ltr mw-parser-output" lang="pt" dir="ltr">
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Status de tradução:</strong> Esse artigo é uma tradução de <a href="../en/CMake_package_guidelines.html" title="CMake package guidelines">CMake package guidelines</a>. Data da última tradução: 2020-04-27. Você pode ajudar a sincronizar a tradução, se houver <a rel="nofollow" class="external text" href="https://wiki.archlinux.org/index.php?title=CMake_package_guidelines&amp;diff=0&amp;oldid=608538">alterações</a> na versão em inglês.</div>
+<div class="toc" style="display:block; text-align: center; margin-bottom: 1em;">
+<b><a href="../pt/Arch_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes do Arch">Diretrizes de pacotes do Arch</a></b>
+<hr>
+<p><a href="../pt/32-bit_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes 32-bit">32-bit</a> – <a href="../pt/CLR_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes CLR">CLR</a> – <a href="../pt/CMake_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes CMake">CMake</a> – <a href="../pt/Cross-compiling_tools_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes de ferramentas de compilação cruzada">Cross</a> – <a href="../pt/DKMS_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes DKMS">DKMS</a> – <a href="../pt/Eclipse_plugin_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes de plugin do Eclipse">Eclipse</a> – <a href="../pt/Electron_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes Electron">Electron</a> – <a href="../pt/Font_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes de fontes">Fonte</a> – <a href="../pt/Free_Pascal_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes Free Pascal">Free Pascal</a> – <a href="../pt/GNOME_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes GNOME">GNOME</a> – <a href="../pt/Go_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes Go">Go</a> – <a href="../pt/Haskell_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes Haskell">Haskell</a> – <a href="../pt/Java_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes Java">Java</a> – <a href="../pt/KDE_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes KDE">KDE</a> – <a href="../pt/Kernel_module_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes de módulos de kernel">Kernel</a> – <a href="../pt/Lisp_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes Lisp">Lisp</a> – <a href="../pt/Meson_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes Meson">Meson</a> – <a href="../pt/MinGW_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes MinGW">MinGW</a> – <a href="../pt/Node.js_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes Node.js">Node.js</a> – <a href="../pt/Nonfree_applications_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes de aplicativos não livres">Nonfree</a> – <a href="../pt/OCaml_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes OCaml">OCaml</a> – <a href="../pt/Perl_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes Perl">Perl</a> – <a href="../pt/PHP_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes PHP">PHP</a> – <a href="../pt/Python_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes Python">Python</a> – <a href="../pt/R_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes R">R</a> – <a href="../pt/Ruby_Gem_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes Ruby Gem">Ruby</a> – <a href="../pt/Rust_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes Rust">Rust</a> – <a href="../pt/Shell_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes de shell">Shell</a> – <a href="../pt/VCS_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes VCS">VCS</a> – <a href="../pt/Web_application_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes de aplicativos da Web">Web</a> – <a href="../pt/Wine_package_guidelines.html" class="mw-redirect" title="Diretrizes de pacotes Wine">Wine</a>
+</p>
+</div>
+<p>Este documento abrange padrões e diretrizes sobre como escrever <a href="../pt/PKGBUILD.html" title="PKGBUILD (Português)">PKGBUILDs</a> para software que usa <a rel="nofollow" class="external text" href="https://cmake.org/">CMake</a>.
+</p>
+<meta property="mw:PageProp/toc">
+<h2>
+<span id="Introdu.C3.A7.C3.A3o"></span><span class="mw-headline" id="Introdução">Introdução</span>
+</h2>
+<p>Do <a rel="nofollow" class="external text" href="https://cmake.org">site do CMake</a>:
+</p>
+<dl><dd>O CMake é uma família de ferramentas de código aberto e de plataforma cruzada, projetada para criar, testar e empacotar software. O CMake é usado para controlar o processo de compilação de software usando arquivos simples de configuração independentes de plataforma e compilador e gerar makefiles e espaços de trabalho nativos que podem ser usados no ambiente do compilador de sua escolha.</dd></dl>
+<h3>
+<span id="Uso_t.C3.ADpico"></span><span class="mw-headline" id="Uso_típico">Uso típico</span>
+</h3>
+<p>O uso típico consiste em executar o comando <code>cmake</code> e depois executar o comando de construção. O comando <code>cmake</code> geralmente define alguns parâmetros, verifica as dependências necessárias e cria os arquivos de compilação, deixando o software pronto para ser compilado por outras ferramentas como <code>make</code> e <code>ninja</code>.
+</p>
+<h2><span class="mw-headline" id="Comportamentos_indesejados_do_CMake">Comportamentos indesejados do CMake</span></h2>
+<p>Devido às suas próprias características internas para gerar os arquivos de compilação, às vezes o CMake pode se comportar de maneiras indesejadas. Sendo assim, algumas etapas devem ser observadas ao escrever <a href="../pt/PKGBUILD.html" title="PKGBUILD (Português)">PKGBUILDs</a> para software baseado no CMake.
+</p>
+<h3>
+<span id="Car.C3.AAncia_de_suporte_.C3.A0_vari.C3.A1vel_de_ambiente_CPPFLAGS"></span><span class="mw-headline" id="Carência_de_suporte_à_variável_de_ambiente_CPPFLAGS">Carência de suporte à variável de ambiente <code>CPPFLAGS</code></span>
+</h3>
+<p>O CMake não possui suporte à <a href="../pt/Environment_variables.html" class="mw-redirect" title="Variável de ambiente">variável de ambiente</a> <code>CPPFLAGS</code>. Essa variável contém sinalizadores (opções) de preprocessador C/C++ que são passados para o compilador no momento da compilação e são definidos no <a href="../pt/Makepkg.html#Configura%C3%A7%C3%A3o" title="Makepkg (Português)">arquivo de configuração do makepkg</a>. Como o CMake não possui suporte a ela, todos os sinalizadores definidos nesta variável não serão passados para o compilador.
+</p>
+<p>Atualmente, <code>CPPFLAGS</code> contém apenas o sinalizador <code>-D_FORTIFY_SOURCE=2</code>. Este é um sinalizador de proteção e é importante por motivos de segurança, pois pode evitar tipos específicos de ataques que podem ocorrer em estouros de buffer exploráveis. Para mais detalhes sobre este sinalizador, consulte <span class="plainlinks archwiki-template-man" title="$ man 7 feature_test_macros"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/feature_test_macros.7">feature_test_macros(7)</a></span>.
+</p>
+<p>Os desenvolvedores do CMake estão cientes dessa situação, pois há um antigo relatório de erro<a rel="nofollow" class="external autonumber" href="https://cmake.org/Bug/view.php?id=12928">[1]</a><a rel="nofollow" class="external autonumber" href="https://gitlab.kitware.com/cmake/cmake/issues/12928">[2]</a> foi aberto (em 2012) no rastreador de erros do CMake e ainda não foi resolvido. Enquanto isso não for resolvido, os empacotadores devem manipular manualmente a passagem do <code>CPPFLAGS</code> para o CMake a nível de empacotamento.
+</p>
+<h4><span class="mw-headline" id="Corrigindo_o_problema_de_CPPFLAGS">Corrigindo o problema de <code>CPPFLAGS</code></span></h4>
+<p>Isso pode ser corrigido anexando <code>CPPFLAGS</code> a <code>CFLAGS</code> e/ou <code>CXXFLAGS</code>, pois eles são analisados pelo CMake. Você pode usar <code>export</code> para anexar <code>CPPFLAGS</code> diretamente em <code>CFLAGS</code>/<code>CXXFLAGS</code> antes de executar o CMake. Por exemplo:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">PKGBUILD</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">build() {
+    export CFLAGS+=" ${CPPFLAGS}"
+    export CXXFLAGS+=" ${CPPFLAGS}"
+    cmake &lt;opções&gt;
+    &lt;outros comandos&gt;
+}</pre>
+<p>Isso afetará todos os comandos que usam <code>CFLAGS</code>/<code>CXXFLAGS</code> posteriormente. Existem outras possibilidades que preservam o <code>CFLAGS</code>/<code>CXXFLAGS</code>, como usar as opções do CMake <code>-DCMAKE_C_FLAGS="${CFLAGS} ${CPPFLAGS}"</code> e/ou <code>-DCMAKE_CXX_FLAGS="${CXXFLAGS} ${CPPFLAGS}"</code>.
+</p>
+<p>Alguns poucos projetos de software codificam <code>-D_FORTIFY_SOURCE=2</code> em seus arquivos CMake. Se esse for o caso e se você tiver certeza de que <code>-D_FORTIFY_SOURCE=2</code> está sendo usado, anexando <code>CPPFLAGS</code> a <code>CFLAGS</code>/<code>CXXFLAGS</code> não é necessário, mas geralmente não há problema em fazer isso como regra geral. Isso evitará que o pacote perca o suporte para <code>-D_FORTIFY_SOURCE=2</code> se o upstream o remover do código-fonte em versões futuras e você não perceber, reduzindo o trabalho de atualização do pacote.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Nota:</strong> 
+<ul>
+<li>Não é ideal misturar <code>CPPFLAGS</code> em <code>CFLAGS</code>/<code>CXXFLAGS</code>, mas é melhor do que permitir que o pacote seja compilado sem o importante sinalizador de proteção.</li>
+<li>Ao usar o <code>export</code>, não esqueça o espaço após o operador do shell <code>+=</code>. Caso contrário, o comando do compilador falhará na execução porque produzirá uma opção inválida.</li>
+<li>Nem todo software exigirá o acréscimo de <code>CPPFLAGS</code> a <code>CFLAGS</code> e <code>CXXFLAGS</code>. Programas diferentes exigirão apenas <code>CFLAGS</code>, apenas <code>CXXFLAGS</code> ou ambos, e isso dependerá do software upstream em questão. Em caso de dúvida, o uso de ambos geralmente não dói. Você pode usar apenas o necessário, se tiver certeza.</li>
+</ul>
+</div>
+<h3>
+<span id="CMake_pode_substituir_automaticamente_o_sinalizador_padr.C3.A3o_de_otimiza.C3.A7.C3.A3o_do_compilador"></span><span class="mw-headline" id="CMake_pode_substituir_automaticamente_o_sinalizador_padrão_de_otimização_do_compilador">CMake pode substituir automaticamente o sinalizador padrão de otimização do compilador</span>
+</h3>
+<p>É muito comum ver pessoas executando o CMake com a opção <code>-DCMAKE_BUILD_TYPE=Release</code>. Alguns projetos upstream, mesmo inadvertidamente, incluem essa opção em suas instruções de compilação, mas isso produz um comportamento indesejado.
+</p>
+<p>Cada tipo de compilação faz com que o CMake anexe automaticamente um conjunto de sinalizadores a <code>CFLAGS</code> e <code>CXXFLAGS</code>. Ao usar o tipo de compilação comum <code>Release</code>, ele anexa automaticamente o sinalizador de otimização <code>-O3</code><a rel="nofollow" class="external autonumber" href="https://github.com/Kitware/CMake/blob/v3.17.0/Modules/Compiler/GNU.cmake#L58">[3]</a> do compilador, e isso substitui o sinalizador padrão do Arch Linux que atualmente é <code>-O2</code> (definido no <a href="../pt/Makepkg.html#Configura%C3%A7%C3%A3o" title="Makepkg (Português)">arquivo de configuração do makepkg</a>). Isso é indesejável, pois se desvia do nível de otimização direcionada do Arch Linux.
+</p>
+<h4><span class="mw-headline" id="Notas_sobre_-O3">Notas sobre <code>-O3</code></span></h4>
+<p>O uso de <code>-O3</code> não garante que o software tenha um desempenho melhor e, às vezes, pode até atrasar o programa. Também pode quebrar o software em algumas situações. Há uma boa razão pela qual os desenvolvedores do Arch Linux escolhem <code>-O2</code> como o nível de otimização de destino e devemos continuar com ele. A menos que você saiba exatamente o que está fazendo, ou se o upstream explicitamente disser ou implicar que <code>-O3</code> é necessário, devemos evitar usá-lo em nossos pacotes.
+</p>
+<h4>
+<span id="Corrigindo_a_substitui.C3.A7.C3.A3o_autom.C3.A1tica_do_sinalizador_de_otimiza.C3.A7.C3.A3o"></span><span class="mw-headline" id="Corrigindo_a_substituição_automática_do_sinalizador_de_otimização">Corrigindo a substituição automática do sinalizador de otimização</span>
+</h4>
+<p>Corrigir isso de uma maneira 100% garantida não é uma questão simples devido à flexibilidade do CMake. Observe que não há solução padrão que possa ser aplicada a todos os casos. Nesta seção serão objeto de discussão as possíveis soluções e alguns pontos que devem ser observados.
+</p>
+<p>O tipo de compilação padrão do CMake é <code>None</code> e não anexa nenhum sinalizador a <code>CFLAGS</code> e <code>CXXFLAGS</code> por padrão, então simplesmente omitir a opção <code>CMAKE_BUILD_TYPE</code> pode funcionar, pois será padronizada como <code>None</code>. Mas observe que a omissão desta opção não garante a correção do problema, pois muitos projetos de software configuram automaticamente o tipo de construção como <code>Release</code> (ou outro tipo) nos arquivos CMake, se <code>CMAKE_BUILD_TYPE</code> não estiver definido na linha de comando.
+</p>
+<p>Como o tipo de compilação padrão <code>None</code> não anexa nenhum sinalizador a <code>CFLAGS</code> e <code>CXXFLAGS</code> por padrão, usando a opção <code>-DCMAKE_BUILD_TYPE=None</code> também pode funcionar. De um modo geral, usar a opção <code>-DCMAKE_BUILD_TYPE=None</code> é melhor do que omitir o uso de <code>CMAKE_BUILD_TYPE</code>. Ele abordará o caso quando o upstream definir automaticamente o tipo de compilação como <code>Release</code> quando <code>CMAKE_BUILD_TYPE</code> for omitido, ele não anexará nenhum sinalizador por padrão e é incomum ver o software configurando sinalizadores indesejados para o tipo de compilação <code>None</code>.
+</p>
+<p>Mas, infelizmente, as coisas não são tão simples como usar apenas <code>-DCMAKE_BUILD_TYPE=None</code> para corrigir isso. Ao usar o tipo de compilação <code>None</code> para corrigir o problema de <code>-O3</code>, pode-se cair em outro problema. É uma prática comum para muitos projetos de software definir alguns sinalizadores de compilador necessários para o tipo de compilação <code>Release</code> nos arquivos CMake (por exemplo, como definir as variáveis do CMake <code>CMAKE_C_FLAGS_RELEASE</code> e <code>CMAKE_CXX_FLAGS_RELEASE</code>). Esse software pode quebrar ou se comportar mal quando compilado sem esses sinalizadores definidos pelo upstream, se você usar o tipo de compilação <code>None</code>. Para determinar se estão faltando alguns sinalizadores, é necessário examinar os arquivos do CMake ou comparar a saída de <code>make VERBOSE=1</code> para os tipos de compilação <code>None</code> e <code>Release</code>. O que fazer se o tipo de compilação <code>None</code> fizer com que alguns sinalizadores definidos pelo upstream sejam perdidos? Nesse caso, você pode estar no meio de duas situações problemáticas, porque se você usar o tipo de compilação <code>Release</code>, poderá usar o sinalizador indesejado <code>-O3</code> e se usar o tipo de compilação <code>None</code>, você perderá alguns sinalizadores definidos a montante necessários. Não existe uma maneira padrão de resolver essa situação e ela deve ser analisada caso a caso. Se o upstream definir <code>-O2</code> para o tipo de compilação <code>Release</code>, você poderá usar <code>-DCMAKE_BUILD_TYPE=Release</code> (veja abaixo). Caso contrário, o patch dos arquivos do CMake pode ser uma solução.
+</p>
+<p>Alguns poucos projetos de software codificam <code>-O2</code> para o tipo de compilação <code>Release</code> em seus arquivos CMake e, portanto, <code>-DCMAKE_BUILD_TYPE=Release</code> pode ser configurado com segurança nesse caso se você tiver certeza de que <code>-O2</code> é o nível de otimização que está sendo usado.
+</p>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Atenção:</strong> 
+<ul>
+<li>Alguns softwares podem falhar ao usar o tipo de compilação <code>None</code>. Teste o software ao usar o tipo de compilação <code>None</code> para verificar se ele irá quebrar ou perder funcionalidades.</li>
+<li>Alguns softwares podem funcionar apenas com o tipo de compilação <code>Release</code>. Você precisará experimentar e testar o software.</li>
+</ul>
+</div>
+<h3>
+<span id="Verificando_as_corre.C3.A7.C3.B5es"></span><span class="mw-headline" id="Verificando_as_correções">Verificando as correções</span>
+</h3>
+<p>Você pode verificar se as correções estão sendo usadas corretamente pelo CMake, ativando o modo detalhado da ferramenta de compilação. Por exemplo, ao usar <code>make</code> (que é o padrão do CMake), isso pode ser feito adicionando <code>VERBOSE=1</code> a ele (como <code>make VERBOSE=1</code>). Isso permitirá que <code>make</code> produza os comandos do compilador que estão sendo executados. Você pode então executar <a href="../pt/Makepkg.html" title="Makepkg (Português)">makepkg</a> e examinar a saída para ver se o compilador está usando os sinalizadores <code>-D_FORTIFY_SOURCE=2</code> e <code>-O2</code>. Se vários sinalizadores de otimização estiverem sendo exibidos em cada linha de comando, o último sinalizador na linha será o usado pelo compilador (significa que <code>-O2</code> precisa ser o último sinalizador de otimização para ser eficaz).
+</p>
+<h2>
+<span id="Diret.C3.B3rios_de_prefixo_e_instala.C3.A7.C3.A3o_de_biblioteca"></span><span class="mw-headline" id="Diretórios_de_prefixo_e_instalação_de_biblioteca">Diretórios de prefixo e  instalação de biblioteca</span>
+</h2>
+<p>O prefixo padrão do Arch Linux <code>/usr</code> pode ser especificado pela opção do CMake <code>-DCMAKE_INSTALL_PREFIX=/usr</code>. Isso geralmente é necessário porque muitos softwares padrão instalam arquivos no prefixo <code>/usr/local</code>.
+</p>
+<p>Alguns projetos upstream configuram seus arquivos CMake para instalar bibliotecas no diretório <code>/usr/lib64</code>. Se esse for o caso, você poderá configurar corretamente o diretório de instalação da biblioteca como <code>/usr/lib</code> usando a opção CMake <code>-DCMAKE_INSTALL_LIBDIR=lib</code>.
+</p>
+<h2><span class="mw-headline" id="Dicas_e_truques">Dicas e truques</span></h2>
+<h3>
+<span id="Especificando_diret.C3.B3rios"></span><span class="mw-headline" id="Especificando_diretórios">Especificando diretórios</span>
+</h3>
+<p>Desde a versão 3.13 do CMake, existe uma opção <code>-B</code> que cria automaticamente o diretório de compilação. Isso evita a criação do diretório de compilação por um comando <code>mkdir</code> (ou <code>install</code>) separado. A opção <code>-S</code> especifica o diretório fonte (onde procurar por um arquivo <code>CMakeLists.txt</code>) e evita a necessidade de usar <code>cd</code> na árvore de fontes antes executando <code>cmake</code>. Combinadas, essas duas opções são uma maneira conveniente de especificar os diretórios de compilação e de fontes. Por exemplo, para criar um programa chamado <i>foo</i>:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">PKGBUILD</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">build() {
+    &lt;comando(s) de exportação&gt;
+    cmake -B build -S "foo-${pkgver}" [outras_opções_cmake]
+    make -C build
+}</pre>
+<h3>
+<span id="Reduzindo_poss.C3.ADveis_sa.C3.ADdas_indesejadas"></span><span class="mw-headline" id="Reduzindo_possíveis_saídas_indesejadas">Reduzindo possíveis saídas indesejadas</span>
+</h3>
+<p>A opção <code>-Wno-dev</code> do CMake suprimirá a saída de alguns avisos destinados apenas aos desenvolvedores do projeto upstream que gravam os arquivos <code>CMakeLists.txt</code>. A remoção desses avisos torna a saída do CMake mais suave e reduz a carga de examiná-la. Como regra geral, esses avisos geralmente podem ser ignorados com segurança pelos empacotadores.
+</p>
+<h3>
+<span id="Removendo_refer.C3.AAncias_a_RPATH_inseguro_de_bin.C3.A1rios"></span><span class="mw-headline" id="Removendo_referências_a_RPATH_inseguro_de_binários">Removendo referências a <code>RPATH</code> inseguro de binários</span>
+</h3>
+<p>Às vezes, os binários resultantes podem conter referências não seguras em <code>RPATH</code>. Isso pode ser verificado executando <a href="../pt/Namcap.html" title="Namcap (Português)">Namcap</a> no pacote compilado e consiste em um problema de segurança que deve ser corrigido. Há uma boa chance de corrigir isso usando as opções do CMake <code>CMAKE_SKIP_INSTALL_RPATH=YES</code> <b>ou</b> <code>CMAKE_SKIP_RPATH=YES</code>. Você precisa experimentar os dois e ver o que funcionará no software em questão (não é necessário usar as duas opções).
+</p>
+<h3>
+<span id="Obtendo_todas_as_op.C3.A7.C3.B5es_dispon.C3.ADveis_do_CMake"></span><span class="mw-headline" id="Obtendo_todas_as_opções_disponíveis_do_CMake">Obtendo todas as opções disponíveis do CMake</span>
+</h3>
+<p>Para obter todas as opções "visíveis" do CMake disponíveis para um projeto de software, execute <code>cmake -LAH</code> na árvore de origem (onde está localizado o arquivo principal <code>CMakeLists.txt</code>).
+</p>
+<p>Se você deseja salvar a saída para referência posterior, você pode redirecioná-la para um arquivo:
+</p>
+<pre>$ cmake -LAH &gt;options.txt 2&gt;&amp;1
+</pre>
+<h2><span class="mw-headline" id="Modelo">Modelo</span></h2>
+<p>Aqui está um modelo geral para a função <code>build()</code> que serve como ponto de partida para pacotes baseados no CMake. Supondo que o pacote seja nomeado <i>foo</i>, ele é baseado em C e C++ e que não define nenhum sinalizador de compilador necessário para o tipo de compilação <code>Release</code> nos arquivos CMake:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">PKGBUILD</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">build() {
+    export CFLAGS+=" ${CPPFLAGS}"
+    export CXXFLAGS+=" ${CPPFLAGS}"
+    cmake -B build -S "foo-${pkgver}" \
+        -DCMAKE_BUILD_TYPE='None' \
+        -DCMAKE_INSTALL_PREFIX='/usr' \
+        -Wno-dev
+    make -C build
+}</pre>
+<p>Não se esqueça de colocar o <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=cmake">cmake</a></span> em <a href="../pt/PKGBUILD.html#makedepends" class="mw-redirect" title="Makedepends (Português)">makedepends</a>.
+</p>
+<h2><span class="mw-headline" id="Pacotes_exemplos">Pacotes exemplos</span></h2>
+<ul>
+<li><span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=i2pd">i2pd</a></span></li>
+<li><span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=libmysofa">libmysofa</a></span></li>
+</ul>
+<h2>
+<span id="Veja_tamb.C3.A9m"></span><span class="mw-headline" id="Veja_também">Veja também</span>
+</h2>
+<ul>
+<li><a rel="nofollow" class="external text" href="https://cmake.org/documentation/">Documentação do CMake</a></li>
+<li><a rel="nofollow" class="external text" href="https://cmake.org/cmake/help/latest/">Documentação de referência para a versão mais recente</a></li>
+<li><a href="https://en.wikipedia.org/wiki/CMake" class="extiw" title="wikipedia:CMake">Artigo do Wikipédia</a></li>
+<li><span class="plainlinks archwiki-template-man" title="$ man 1 cmake"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/cmake.1">cmake(1)</a></span></li>
+</ul>
+</div>
+</div>
+					<div id="catlinks" class="catlinks" data-mw="interface"><div id="mw-normal-catlinks" class="mw-normal-catlinks">
+<a href="../Special:Categories.html" title="Special:Categories">Category</a>: <ul><li><a href="../pt/Category:Arch_package_guidelines.html" title="Category:Arch package guidelines (Português)">Arch package guidelines (Português)</a></li></ul>
+</div></div>
+				</div>
+			</main>
+			
+		</div>
+		<div class="mw-footer-container">
+			
+<footer id="footer" class="mw-footer" style="margin: 0">
+	<ul id="footer-info">
+	<li data-nosnippet="">Retrieved from "<a dir="ltr" href="https://wiki.archlinux.org/index.php?title=CMake_package_guidelines_(Portugu%C3%AAs)&amp;oldid=719786">https://wiki.archlinux.org/index.php?title=CMake_package_guidelines_(Português)&amp;oldid=719786</a>"</li>
+<li id="footer-info-lastmod"> This page was last edited on 23 February 2022, at 07:07.</li>
+	<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+<br>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="https://terms.archlinux.org/docs/privacy-policy/">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="../en/ArchWiki:About.html">About ArchWiki</a></li>
+	<li id="footer-places-disclaimers"><a href="../en/ArchWiki:General_disclaimer.html">Disclaimers</a></li>
+	<li id="footer-places-archwiki-code-of-conduct"><a href="https://terms.archlinux.org/docs/code-of-conduct/" class="extiw" title="archlinux-service-agreements:code-of-conduct">Code of conduct</a></li>
+	<li id="footer-places-archwiki-terms-of-service"><a href="https://terms.archlinux.org/docs/terms-of-service/" class="extiw" title="archlinux-service-agreements:terms-of-service">Terms of service</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-copyrightico"><a href="https://www.gnu.org/copyleft/fdl.html" class="cdx-button cdx-button--fake-button cdx-button--size-large cdx-button--fake-button--enabled"><img src="/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" loading="lazy"></a></li>
+	<li id="footer-poweredbyico"><img src="/resources/assets/poweredby_mediawiki.svg" width="88" height="31" loading="lazy"></li>
+</ul>
+
+</footer>
+
+		</div>
+	</div> 
+</div> 
+<div class="vector-settings" id="p-dock-bottom">
+	<ul></ul>
+</div>
+</body>
+</html>

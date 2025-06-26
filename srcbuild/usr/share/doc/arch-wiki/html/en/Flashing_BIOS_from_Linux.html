@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-sticky-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-0 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-disabled skin-theme-clientpref-day vector-toc-available" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>Flashing BIOS from Linux - ArchWiki</title>
+<link rel="stylesheet" href="../ArchWikiOffline.css">
+<meta name="ResourceLoaderDynamicStyles" content="">
+<meta name="generator" content="MediaWiki 1.43.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="max-image-preview:standard">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.25, maximum-scale=5.0">
+<link rel="search" type="application/opensearchdescription+xml" href="/rest.php/v1/search" title="ArchWiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.archlinux.org/api.php?action=rsd">
+<link rel="license" href="https://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="ArchWiki Atom feed" href="/index.php?title=Special:RecentChanges&amp;feed=atom">
+</head>
+<body class="skin--responsive skin-vector skin-vector-search-vue mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Flashing_BIOS_from_Linux rootpage-Flashing_BIOS_from_Linux skin-vector-2022 action-view">
+<a class="mw-jump-link" href="#bodyContent">Jump to content</a>
+<div class="vector-header-container">
+	</div>
+<div class="mw-page-container">
+	<div class="mw-page-container-inner">
+		<div class="vector-column-start">
+			<div class="vector-main-menu-container">
+		</div>
+	<div class="vector-sticky-pinned-container">
+				<nav id="mw-panel-toc" aria-label="Contents" data-event-name="ui.sidebar-toc" class="mw-table-of-contents-container vector-toc-landmark">
+					<div id="vector-toc-pinned-container" class="vector-pinned-container">
+					<div id="vector-toc" class="vector-toc vector-pinnable-element">
+	<div class="vector-pinnable-header vector-toc-pinnable-header vector-pinnable-header-pinned" data-feature-name="toc-pinned" data-pinnable-element-id="vector-toc">
+	<h2 class="vector-pinnable-header-label">Contents</h2>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-toc.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-toc.unpin">hide</button>
+</div>
+
+
+	<ul class="vector-toc-contents" id="mw-panel-toc-list">
+		<li id="toc-mw-content-text" class="vector-toc-list-item vector-toc-level-1">
+			<a href="#" class="vector-toc-link">
+				<div class="vector-toc-text">Beginning</div>
+			</a>
+		</li>
+		<li id="toc-fwupd" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#fwupd">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">1</span>
+				<span>fwupd</span>
+			</div>
+		</a>
+		
+		<ul id="toc-fwupd-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-BiosDisk" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#BiosDisk">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">2</span>
+				<span>BiosDisk</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-BiosDisk-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle BiosDisk subsection</span>
+			</button>
+		
+		<ul id="toc-BiosDisk-sublist" class="vector-toc-list">
+			<li id="toc-Installation" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Installation">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1</span>
+					<span>Installation</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Installation-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Usage" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Usage">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2</span>
+					<span>Usage</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Usage-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Flashrom" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Flashrom">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">3</span>
+				<span>Flashrom</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Flashrom-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Flashrom subsection</span>
+			</button>
+		
+		<ul id="toc-Flashrom-sublist" class="vector-toc-list">
+			<li id="toc-Installation_2" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Installation_2">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1</span>
+					<span>Installation</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Installation_2-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Usage_2" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Usage_2">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.2</span>
+					<span>Usage</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Usage_2-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-FreeDOS" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#FreeDOS">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">4</span>
+				<span>FreeDOS</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-FreeDOS-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle FreeDOS subsection</span>
+			</button>
+		
+		<ul id="toc-FreeDOS-sublist" class="vector-toc-list">
+			<li id="toc-Unetbootin" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Unetbootin">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.1</span>
+					<span>Unetbootin</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Unetbootin-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-dosemu" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#dosemu">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.2</span>
+					<span>dosemu</span>
+				</div>
+			</a>
+			
+			<ul id="toc-dosemu-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Pre-built_images" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Pre-built_images">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.3</span>
+					<span>Pre-built images</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Pre-built_images-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Using_a_FreeDOS-provided_Disk_Image_+_USB_stick_on_Linux" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Using_a_FreeDOS-provided_Disk_Image_+_USB_stick_on_Linux">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.4</span>
+					<span>Using a FreeDOS-provided Disk Image + USB stick on Linux</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Using_a_FreeDOS-provided_Disk_Image_+_USB_stick_on_Linux-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Using_a_FreeDOS-provided_Disk_Image_+_USB_stick_with_Windows" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Using_a_FreeDOS-provided_Disk_Image_+_USB_stick_with_Windows">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.5</span>
+					<span>Using a FreeDOS-provided Disk Image + USB stick with Windows</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Using_a_FreeDOS-provided_Disk_Image_+_USB_stick_with_Windows-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Images_that_are_too_large_for_a_floppy" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Images_that_are_too_large_for_a_floppy">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.6</span>
+					<span>Images that are too large for a floppy</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Images_that_are_too_large_for_a_floppy-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Usage_3" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Usage_3">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.7</span>
+					<span>Usage</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Usage_3-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Bootable_optical_disk_emulation" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Bootable_optical_disk_emulation">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">5</span>
+				<span>Bootable optical disk emulation</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Bootable_optical_disk_emulation-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Bootable optical disk emulation subsection</span>
+			</button>
+		
+		<ul id="toc-Bootable_optical_disk_emulation-sublist" class="vector-toc-list">
+			<li id="toc-Installation_3" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Installation_3">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.1</span>
+					<span>Installation</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Installation_3-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Usage_4" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Usage_4">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.2</span>
+					<span>Usage</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Usage_4-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Windows_PE" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Windows_PE">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">6</span>
+				<span>Windows PE</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Windows_PE-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Windows PE subsection</span>
+			</button>
+		
+		<ul id="toc-Windows_PE-sublist" class="vector-toc-list">
+			<li id="toc-Usage_5" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Usage_5">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.1</span>
+					<span>Usage</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Usage_5-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Vendor_specific" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Vendor_specific">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">7</span>
+				<span>Vendor specific</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Vendor_specific-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Vendor specific subsection</span>
+			</button>
+		
+		<ul id="toc-Vendor_specific-sublist" class="vector-toc-list">
+			<li id="toc-HP" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#HP">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">7.1</span>
+					<span>HP</span>
+				</div>
+			</a>
+			
+			<ul id="toc-HP-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-ASUS" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#ASUS">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">7.2</span>
+					<span>ASUS</span>
+				</div>
+			</a>
+			
+			<ul id="toc-ASUS-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Lenovo" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Lenovo">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">7.3</span>
+					<span>Lenovo</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Lenovo-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+</ul>
+</div>
+
+					</div>
+		</nav>
+			</div>
+		</div>
+		<div class="mw-content-container">
+			<main id="content" class="mw-body" style="margin: 0">
+				<header class="mw-body-header vector-page-titlebar">
+					<nav aria-label="Contents" class="vector-toc-landmark">
+						
+<div id="vector-page-titlebar-toc" class="vector-dropdown vector-page-titlebar-toc vector-button-flush-left">
+	<input type="checkbox" id="vector-page-titlebar-toc-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-page-titlebar-toc" class="vector-dropdown-checkbox " aria-label="Toggle the table of contents">
+	<label id="vector-page-titlebar-toc-label" for="vector-page-titlebar-toc-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"><span class="vector-icon mw-ui-icon-listBullet mw-ui-icon-wikimedia-listBullet"></span>
+
+<span class="vector-dropdown-label-text">Toggle the table of contents</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+							<div id="vector-page-titlebar-toc-unpinned-container" class="vector-unpinned-container">
+			</div>
+		
+	</div>
+</div>
+
+					</nav>
+					<h1 id="firstHeading" class="firstHeading mw-first-heading"><span class="mw-page-title-main">Flashing BIOS from Linux</span></h1>
+							
+<div id="p-lang-btn" class="vector-dropdown mw-portlet mw-portlet-lang">
+	<input type="checkbox" id="p-lang-btn-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-p-lang-btn" class="vector-dropdown-checkbox mw-interlanguage-selector" aria-label="Go to an article in another language. Available in 1 language">
+	<label id="p-lang-btn-label" for="p-lang-btn-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--action-progressive mw-portlet-lang-heading-1" aria-hidden="true"><span class="vector-icon mw-ui-icon-language-progressive mw-ui-icon-wikimedia-language-progressive"></span>
+
+<span class="vector-dropdown-label-text">1 language</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+		<div class="vector-menu-content">
+			
+			<ul class="vector-menu-content-list">
+				
+				<li class="interlanguage-link interwiki-ja mw-list-item"><a href="https://wiki.archlinux.jp/index.php/Linux_%E3%81%8B%E3%82%89_BIOS_%E3%82%92%E6%9B%B8%E3%81%8D%E6%8F%9B%E3%81%88%E3%82%8B" title="Linux から BIOS を書き換える – 日本語" lang="ja" hreflang="ja" data-title="Linux から BIOS を書き換える" data-language-autonym="日本語" data-language-local-name="日本語" class="interlanguage-link-target"><span>日本語</span></a></li>
+			</ul>
+			
+		</div>
+
+	</div>
+</div>
+</header>
+				<div class="vector-column-end">
+					<div class="vector-sticky-pinned-container">
+						<nav class="vector-page-tools-landmark" aria-label="Page tools">
+							<div id="vector-page-tools-pinned-container" class="vector-pinned-container">
+				
+							</div>
+		</nav>
+						<nav class="vector-appearance-landmark" aria-label="Appearance">
+							<div id="vector-appearance-pinned-container" class="vector-pinned-container">
+				<div id="vector-appearance" class="vector-appearance vector-pinnable-element">
+	<div class="vector-pinnable-header vector-appearance-pinnable-header vector-pinnable-header-pinned" data-feature-name="appearance-pinned" data-pinnable-element-id="vector-appearance" data-pinned-container-id="vector-appearance-pinned-container" data-unpinned-container-id="vector-appearance-unpinned-container">
+	<div class="vector-pinnable-header-label">Appearance</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-appearance.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-appearance.unpin">hide</button>
+</div>
+
+
+</div>
+
+							</div>
+		</nav>
+					</div>
+				</div>
+				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container>
+					<div class="vector-body-before-content">
+							<div class="mw-indicators">
+		</div>
+
+						<div id="siteSub" class="noprint">From ArchWiki</div>
+					</div>
+					<div id="contentSub"><div id="mw-content-subtitle"></div></div>
+					
+					
+					<div id="mw-content-text" class="mw-body-content">
+<div class="mw-content-ltr mw-parser-output" lang="en" dir="ltr">
+<p>This article provides information on using Linux to update the BIOS of a system. Usually, the update program provided by a manufacturer must be executed under Windows. However, various utilities and methods have been published for upgrading a system BIOS under Linux.
+</p>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Warning:</strong> Flashing the BIOS is a dangerous activity that may render your motherboard inoperable!</div>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> 
+<ul>
+<li>HP users may download Windows BIOS updater from HP website, extract *.exe file and locate ISO image for burning to a CD. Using CD, upgrade is possible from BIOS menu using 'Firmware Upgrade' without using below tools. See <a rel="nofollow" class="external text" href="https://h30434.www3.hp.com/t5/Notebook-Operating-System-and-Recovery/How-to-update-BIOS-on-Linux/td-p/4869835">this</a> thread for details. Also, see the <a href="#HP">#HP</a> section below to upgrade using an USB if your current HP BIOS allows it.</li>
+<li>For users with Dell computers, Dell recommends Linux users flash their BIOS following information located <a rel="nofollow" class="external text" href="https://www.dell.com/support/article/us/en/19/sln171755/updating-the-dell-bios-in-linux-and-ubuntu-environments">here</a> (in short, put the .EXE on a USB stick and use the F12 boot menu to access the firmware's flash utility).</li>
+</ul>
+</div>
+<p>In addition to the tools described below, many <a href="../en/Laptop.html" title="Laptop">laptop</a> pages include individualized instructions for a particular model. The instructions sometimes involve bespoke utilities that may even be particular to the upgrade process on a single model. If there is no page for a particular model, it may be useful to look at pages for similar models, as it might be possible to adapt a process for the target model. The <a href="../en/Laptop/HP.html#Model_list" class="mw-redirect" title="HP ENVY m4-1015dx">HP ENVY m4-1015dx</a> page, for example, includes instructions that may work on a variety of HP models.
+</p>
+<meta property="mw:PageProp/toc">
+<h2><span class="mw-headline" id="fwupd">fwupd</span></h2>
+<p>fwupd is a simple daemon to allow session software to update device firmware on your local machine.
+</p>
+<p>Large vendors including Dell and Logitech use this way to distribute firmware updates to Linux.
+</p>
+<p>fwupd only supports flashing BIOS updates in UEFI mode.
+</p>
+<p>See <a href="../en/Fwupd.html" title="Fwupd">fwupd</a> for further information about installation and usage.
+</p>
+<h2><span class="mw-headline" id="BiosDisk">BiosDisk</span></h2>
+<p><a rel="nofollow" class="external text" href="https://github.com/dell/biosdisk">BiosDisk</a> simplifies the process of flashing your system BIOS under Linux.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> This is only supported on systems when booted in "Legacy mode". In UEFI mode, you will need to use a different method.</div>
+<h3><span class="mw-headline" id="Installation">Installation</span></h3>
+<p><a href="../en/Help:Reading.html#Installation_of_packages" class="mw-redirect" title="Install">Install</a> the <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/biosdisk-git/">biosdisk-git</a></span><sup><small>AUR</small></sup> package.
+</p>
+<h3><span class="mw-headline" id="Usage">Usage</span></h3>
+<p>To use the biosdisk utility to create a BIOS flash image, first download the latest raw BIOS image for your system from your manufacturer's website. Make sure, however, that you always get the BIOS executable and NOT the Windows executable. You then have one of two options: create a ISO or install the image for your bootloader.
+</p>
+<ul><li>The mkimage action will create a ISO image on the user's hard drive. Usage is the following:</li></ul>
+<pre># biosdisk mkimage [-o option] [-i destination] /path/to/.exe 
+</pre>
+<ul><li>The install action will create the biosdisk image, copy the image file to /boot, and then update the bootloader with an entry for the image. Then all the user has to do is boot the system and select the image to flash the BIOS; this will load the biosdisk image directly from the hard drive and flash the BIOS.</li></ul>
+<pre># biosdisk install [-o option] [--name=] /path/to/.exe
+</pre>
+<h2><span class="mw-headline" id="Flashrom">Flashrom</span></h2>
+<p><a rel="nofollow" class="external text" href="https://wiki.flashrom.org/Supported_hardware">Flashrom</a> is a utility for identifying, reading, writing, verifying and erasing flash chips. It is designed to flash BIOS/EFI/coreboot/firmware/optionROM images on mainboards, network/graphics/storage controller cards, and various programmer devices.
+</p>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Warning:</strong> If you have a laptop/notebook/netbook, please do NOT try flashrom because interactions with the EC on these machines might crash your machine during flashing. flashrom tries to detect if a machine is a laptop, but not all laptops follow the standard, so this is not 100% reliable.<a rel="nofollow" class="external autonumber" href="https://wiki.flashrom.org/Board_Testing_HOWTO">[1]</a>
+</div>
+<h3><span class="mw-headline" id="Installation_2">Installation</span></h3>
+<p><a href="../en/Help:Reading.html#Installation_of_packages" class="mw-redirect" title="Install">Install</a> the <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=flashrom">flashrom</a></span> or <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/flashrom-git/">flashrom-git</a></span><sup><small>AUR</small></sup> package.
+</p>
+<h3><span class="mw-headline" id="Usage_2">Usage</span></h3>
+<p>Find out if your motherboard and chipset (internal) is supported by flashrom at this website. <a rel="nofollow" class="external text" href="https://wiki.flashrom.org/Supported_hardware">Supported Hardware</a>
+You can also find out if your hardware is supported by issuing the following command
+</p>
+<pre># flashrom --programmer internal
+</pre>
+<p>The above command will tell you your motherboard and chipset. You can then find out if yours is supported by issuing this command:
+</p>
+<pre># flashrom --programmer internal -L | grep CHIPNAMEfrompreviouscommand
+</pre>
+<p>On modern mainboards you probably get more than one rom chip listed. You have to select the chipname you get from the upper command. Then you use the <code>-c</code> option to select which rom is affected by the command
+</p>
+<pre># flashrom --programmer internal -c "CHIPNAME" -r backup_CHIPNAME.bin
+</pre>
+<p>Write and verify the new BIOS image (proprietary or Coreboot) on the ROM chip:
+</p>
+<pre># flashrom --programmer internal -c "CHIPNAME" -w newbios.bin
+</pre>
+<p>If you want to flash other flash chips on your mainboard, you will find all options with
+</p>
+<pre># flashrom
+</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> With Linux kernel versions greater than 4.4, <code>CONFIG_IO_STRICT_DEVMEM</code> a new kernel security measure can make flashrom stop working; in that case, you can try adding <code>iomem=relaxed</code> to your kernel parameters. <a rel="nofollow" class="external text" href="https://wiki.flashrom.org/FAQ">FAQ</a>.</div>
+<h2><span class="mw-headline" id="FreeDOS">FreeDOS</span></h2>
+<p>Some laptop manufacturers provide a DOS compatible executable to flash the system firmware. 
+<a rel="nofollow" class="external text" href="https://www.freedos.org/">FreeDOS</a>, a free DOS-compatible operating system, is up to the challenge, no need for proprietary DOS versions. So, all you need is a bootable floppy disk image with FreeDOS kernel on it.
+</p>
+<h3><span class="mw-headline" id="Unetbootin">Unetbootin</span></h3>
+<p>By far the easiest way to make a bootable FreeDOS USB Stick is using <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/unetbootin/">unetbootin</a></span><sup><small>AUR</small></sup>.
+</p>
+<p>You should format a pendrive with FAT16 and flag it as "boot" (you may do this through a GUI with <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=gparted">gparted</a></span> or <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=partitionmanager">partitionmanager</a></span>). Then, after mounting the flash drive, select under distribution <b>FreeDOS</b> and your mounted stick. The app will automatically download the image for you and copy it to the drive. Finally, you may copy everything you want to flash there (BIOS, firmwares, etc).
+</p>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Warning:</strong> Unetbootin may not function properly on some Lenovo systems. It may be necessary to create the bootable stick on a different device. See <a rel="nofollow" class="external text" href="http://reboot.pro/topic/9849-blinking-cursor-at-boot/">here</a>.</div>
+<h3><span class="mw-headline" id="dosemu">dosemu</span></h3>
+<p>The problem with the official FreeDOS images is the lack of extra space for holding firmware and BIOS update files and programs. The easiest way to create a DOS, bootable FAT drive of arbitrary size under Linux is to <a href="https://wiki.gentoo.org/wiki/Bootable_DOS_USB_stick" class="extiw" title="gentoo:Bootable DOS USB stick">mount a FAT drive under dosemu and then make it bootable with the FreeDOS sys command</a>.
+</p>
+<p>For an alternative method, see <a href="https://wiki.gentoo.org/wiki/BIOS_Update#FreeDOS_environment" class="extiw" title="gentoo:BIOS Update">Gentoo:BIOS Update#FreeDOS environment</a>.
+</p>
+<h3><span class="mw-headline" id="Pre-built_images">Pre-built images</span></h3>
+<p>Yet another simple solution: <a rel="nofollow" class="external text" href="https://myhq.it/sites/myhq.it/files/FreeDOS-1.1-memstick-2-2048M.img.bz2">FreeDOS pre-built bootable USB flash drive image by Christian Taube</a>. Instructions can be found <a rel="nofollow" class="external text" href="https://web.archive.org/web/20160224081331/http://www.chtaube.eu/computers/freedos/bootable-usb/">here</a>.
+</p>
+<h3>
+<span id="Using_a_FreeDOS-provided_Disk_Image_.2B_USB_stick_on_Linux"></span><span class="mw-headline" id="Using_a_FreeDOS-provided_Disk_Image_+_USB_stick_on_Linux">Using a FreeDOS-provided Disk Image + USB stick on Linux</span>
+</h3>
+<p>As of writing (2017-07-11), <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/unetbootin/">unetbootin</a></span><sup><small>AUR</small></sup> does not support versions of FreeDOS more recent than 1.0 (current version is 1.2). The following procedure worked to upgrade an Inspiron 17-3737 to the A09 BIOS. (Dell offers this as a possibility <a rel="nofollow" class="external text" href="https://www.dell.com/support/article/ca/en/cabsdt1/SLN171755/updating-the-dell-bios-in-linux-and-ubuntu-environments?lang=EN#Creating%20a%20USB%20Bootable%20Storage%20Device">on their site</a>)
+</p>
+<p>Some notes before starting:
+</p>
+<ul>
+<li>You can check your current BIOS version with <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=dmidecode">dmidecode</a></span>. You might already be at the latest version.</li>
+<li>Ensure that your hardware vendor has verified this method works (use of FreeDOS to run BIOS update <i>.exe</i>)</li>
+<li>Laptop users should not attempt this without AC power</li>
+<li>This is dangerous, and you assume all risk for following this procedure.</li>
+</ul>
+<p>Procedure:
+</p>
+<ol>
+<li>Grab the latest USB installer from the <a rel="nofollow" class="external text" href="https://www.freedos.org/download/">FreeDOS Download Page</a>
+<ul><li>author note: used the "Full" version on suspicion that it might include more drivers, etc (pure speculation)</li></ul>
+</li>
+<li>Extract the archive, you get a <i>.img</i> file</li>
+<li>Determine which of <code>/dev/sdX</code> is your USB stick (use <code>fdisk -l</code>)</li>
+<li>Write the image directly to the block device:
+<ul><li>
+<code>dd if=FD12FULL.img of=/dev/sdX status=progress</code> (where <code>X</code> is the letter representing your USB stick as a block device, do not write the image to a partition)</li></ul>
+</li>
+<li>Double-check that the image copying worked:
+<ul><li>
+<code>fdisk -l</code> (you should see a single partition on a DOS disk with the bootable ("boot") flag set)</li></ul>
+</li>
+<li>Mount the partition, and copy over the <i>.exe</i> used to update your firmware
+<ul>
+<li>Stay on the safe side and limit the filename to 8 characters (without extension), uppercase</li>
+<li>Ensure that you verified any checksums provided by your hardware vendor</li>
+</ul>
+</li>
+<li>Unmount and reboot. Do whatever is needed to boot from the USB drive</li>
+</ol>
+<p>Now you will find yourself in the FreeDOS live installation environment.
+</p>
+<ol>
+<li>Select your language</li>
+<li>You will be prompted to install FreeDOS
+<ul><li>Select "No - Return to DOS"</li></ul>
+</li>
+<li>You should see a prompt (<code>C:\&gt;</code>)</li>
+<li>Run <code>dir /w</code> and verify that your firmware upgrade tool is present</li>
+<li>Run the executable
+<ul><li>author note: in the case of the Dell tool, the machine displayed a splash screen and then rebooted. Upon reboot, it started the firmware upgrade automatically, and ran for about 2 minutes with the fan at full speed)</li></ul>
+</li>
+<li>Once the process specific to your vendor completes, optionally verify through the BIOS setup screen, as well as by running <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=dmidecode">dmidecode</a></span> when you are back in Linux</li>
+</ol>
+<h3>
+<span id="Using_a_FreeDOS-provided_Disk_Image_.2B_USB_stick_with_Windows"></span><span class="mw-headline" id="Using_a_FreeDOS-provided_Disk_Image_+_USB_stick_with_Windows">Using a FreeDOS-provided Disk Image + USB stick with Windows</span>
+</h3>
+<p>The author for this procedure encountered several issues related to mounting the FAT partition type of the USB using the previous method on Linux with dd. This procedure seeks to outline a method to flash the BIOS with FreeDOS, a USB stick and Ruckus on Windows.
+</p>
+<p>Prerequisites:
+</p>
+<ul>
+<li>Download and install Rufus for Windows. This can be either the full installation or the portable version.</li>
+<li>Download the latest Full USB installer for FreeDOS (v1.2 as of the time of writing).</li>
+<li>Download the latest BIOS update from the vendors' website</li>
+<li>It is assumed that <i>dmidecode</i> is installed on the system</li>
+</ul>
+<p>Procedure:
+</p>
+<ol>
+<li>Extract the contents of the <i>FD12FULL.zip</i> archive, noting the <i>.img</i> file</li>
+<li>Insert a flash drive and flash the <i>FD12FULL.img</i> file using Rufus, leaving all default options
+<ul><li>Detailed use of Rufus is not covered in this guide. Refer to Rufus' manual or documentation for detailed usage</li></ul>
+</li>
+<li>Once flashed with Rufus, rename the BIOS file with 8 uppercase characters (not including the extension) and copy it over to the flash drive</li>
+<li>Eject the flash drive and plug it into the laptop.</li>
+<li>Perform whatever steps are necessary to boot from the USB with LEGACY BOOT
+<ul><li>Author note: For my Dell Laptop, I press F12 for boot options and select 'USB Storage Device' under 'Legacy Options'. I have explicitly enabled legacy boot from within my BIOS, but this option may not be present if the system is only configured to boot with UEFI</li></ul>
+</li>
+<li>You will be presented with the FreeDOS Installation environment
+<ul>
+<li>Select preferred language</li>
+<li>Select 'No - Return to DOS' on the next screen</li>
+<li>Type <i>dir</i> to view the contents of the USB flash drive</li>
+<li>To execute the BIOS upgrade file, simply type the filename and press enter</li>
+<li>Note: My upgrade took &lt;2 minutes with the fans at full speed. The system reboot 3 times total.</li>
+</ul>
+</li>
+<li>Once the upgrade completes and the system boots back into the OS, issue <code>dmidecode | grep -E 'BIOS|Version'</code> as root and validate the BIOS version has been upgraded</li>
+</ol>
+<h3><span class="mw-headline" id="Images_that_are_too_large_for_a_floppy">Images that are too large for a floppy</span></h3>
+<p>If your flash image is too large for a floppy, go to the <a rel="nofollow" class="external text" href="https://web.archive.org/web/20200410051317/https://www.fdos.org/bootdisks/">FreeDos bootdisk website</a>, and download the 10Mb hard-disk image.  This image is a full disk image, including partitions, so adding your flash utility will be a little trickier:
+</p>
+<p>First find the first partition (at time of writing, the first partition starts at block 63; this means that the partitions starts at offset <code>512 * 63 = 32256</code>).
+You can either use:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;"># file -sk <i>&lt;image-file&gt;</i> | sed -r 's/.*startsector ([0-9]+).*/\1/'</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;"><b>63</b>
+</pre>
+<p>Or:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;"># fdisk -l <i>&lt;image-file&gt;</i></pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">…
+Units = sectors of 1 * <b>512</b> = 512 bytes
+…
+      Device  Boot  Start    End  Blocks  Id  System
+              *        <b>63</b>  19151   9544+   1  FAT12</pre>
+<p>Now you can mount the image:
+</p>
+<pre># mount -oloop,offset=$((63 * 512)) <i>&lt;image-file&gt;</i> /mnt
+</pre>
+<p>Then you can copy your flash utility onto the filesystem as normal.
+Once you are done:
+</p>
+<pre># umount /mnt
+</pre>
+<p>The image can now be copied to a USB stick for booting, or booted as a memdisk as per normal instructions.
+</p>
+<h3><span class="mw-headline" id="Usage_3">Usage</span></h3>
+<p>The OEM Bootdisk version is recommended, as it only includes <code>kernel</code> and <code>command.com</code> thus leaving more space for the flash utility and new BIOS image. Download the <a rel="nofollow" class="external text" href="https://web.archive.org/web/20190924142014/http://www.fdos.org/bootdisks/autogen/FDOEM.144.gz">FreeDOS image</a> and <a href="../en/Archiving_and_compression.html" class="mw-redirect" title="Decompress">decompress</a> it.
+</p>
+<p>Copy your BIOS flash utility and new BIOS image to the mounted floppy disk image. Load the necessary modules:
+</p>
+<pre># modprobe -a vfat loop
+</pre>
+<p><code>/proc/fileystems</code> shows if the needed file systems are supported. "loop mount" the floppy disk image to a temporary path:
+</p>
+<pre>$ mount --mkdir -t vfat -o loop FDOEM.144 /tmp/floppy
+</pre>
+<p>If the mount went without errors, copy the BIOS flash utility and new BIOS image to the mounted floppy disk image. You will probably have to unzip the archive you downloaded from your motherboard vendor site, to get to those two files. For example:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;"># unzip 775Dual-VSTA\(2.60\).zip</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">Archive: 775Dual-VSTA(2.60).zip
+ inflating: 75DVSTA2.60
+ inflating: ASRflash.exe
+</pre>
+<pre># cp 75DVSTA2.60 ASRflash.exe /tmp/floppy
+</pre>
+<p>Check that the two files were not too big for the floppy:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">$ df /tmp/floppy</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">Filesystem           1K-blocks      Used Available Use% Mounted on
+/tmp/FDOEM.144            1424       990       434  70% /tmp/floppy
+</pre>
+<p>Unmount the floppy disk image:
+</p>
+<pre># umount /tmp/floppy
+</pre>
+<p>The next step is to burn the floppy image to a CD/DVD-RW media, but in a way that it can be booted afterwards. First create a bootable CD image, and then burn it.
+</p>
+<pre># genisoimage -o bootcd.iso -b FDOEM.144 FDOEM.144
+# wodim -v bootcd.iso
+</pre>
+<p>You may alternatively add your image to the <a href="../en/GRUB.html" title="GRUB">GRUB</a> menu. Install <a href="../en/Syslinux.html" title="Syslinux">syslinux</a> and copy <code>memdisk</code> and your image to <code>/boot</code>:
+</p>
+<pre># cp /usr/lib/syslinux/memdisk /boot
+# cp FDOEM.144 /boot/flashbios.img
+</pre>
+<p>Now add an entry to <code>/boot/grub/menu.lst</code>:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/boot/grub/menu.lst</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">title Flash BIOS
+kernel /memdisk
+initrd /flashbios.img
+</pre>
+<p>Or for GRUB2 in <code>/boot/grub/grub.cfg</code>:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/boot/grub/grub.cfg</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">menuentry "Flash BIOS" {
+ linux16 /boot/memdisk
+ initrd16 /boot/flashbios.img
+}
+</pre>
+<p>Or for syslinux in <code>/boot/syslinux/syslinux.cfg</code>:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/boot/syslinux/syslinux.cfg</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">LABEL flashbios
+	MENU LABEL Flash BIOS
+	LINUX ../memdisk
+	INITRD ../fdboot.img
+</pre>
+<p>Finally reboot your machine, making sure the CD drive is first in the boot sequence, and run the BIOS upgrade procedure when the CD boots. If using the GRUB method, choose the new entry on the list, and it should boot into FreeDOS.
+</p>
+<h2><span class="mw-headline" id="Bootable_optical_disk_emulation">Bootable optical disk emulation</span></h2>
+<p>The script Geteltorito.pl will extract the <a href="https://en.wikipedia.org/wiki/El_Torito_(CD-ROM_standard)" class="extiw" title="wikipedia:El Torito (CD-ROM standard)">El Torito</a> boot image. It has worked with Lenovo laptops like the X1 Carbon, X200, X220, X230, X260, X395, W540, T450, T450s and P50. It may work for other vendors as well.
+</p>
+<h3><span class="mw-headline" id="Installation_3">Installation</span></h3>
+<p>Install the <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/geteltorito/">geteltorito</a></span><sup><small>AUR</small></sup> package.
+</p>
+<h3><span class="mw-headline" id="Usage_4">Usage</span></h3>
+<p>Get the bios update iso from the vendor support site. Run the <i>geteltorito</i> image extraction:
+</p>
+<pre>$ geteltorito.pl -o &lt;image&gt;.img &lt;image&gt;.iso
+</pre>
+<p>Copy the image to the usb thumbdrive:
+</p>
+<pre># dd if=&lt;image&gt;.img of=&lt;destination&gt; bs=512K
+</pre>
+<p>Reboot and boot from the USB drive, follow vendor directions.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> If you get the message "Secure Flash Authentication failed!", it means that some security check did not allow the flash to happen. It can help to go to the BIOS options page <i>Security &gt; UEFI BIOS Update Option</i> and disable <i>Secure RollBack Prevention</i> and enable <i>Flash BIOS Updating by End-Users</i>. You can set them to what you want after flashing.</div>
+<h2><span class="mw-headline" id="Windows_PE">Windows PE</span></h2>
+<p>If your manufacturer only provides an exe file and you were not successful following the prior advice, you can update your bios creating a Windows PE flash drive and from there flash the bios update as normally.
+</p>
+<h3><span class="mw-headline" id="Usage_5">Usage</span></h3>
+<p>Download a ISO <a href="../en/Windows_PE.html" title="Windows PE">Windows PE</a> to create a bootable drive.
+</p>
+<p>Boot the USB and go to your manufacturer website and download the respective update, and execute normally.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> This method was tested on an Acer Laptop, your mileage may vary </div>
+<h2><span class="mw-headline" id="Vendor_specific">Vendor specific</span></h2>
+<h3><span class="mw-headline" id="HP">HP</span></h3>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Warning:</strong> Not all HP BIOSes are the same. A method that may work in one of their models may or may not work in another model.For eg. neither of the below methods work with the HP T730 Thin Client.</div>
+<p>Some HP BIOS, especially the ones available in their business lines -- ProDesk 600, EliteDesk 800, Thin Clients (T620, T730 etc) -- have an option to update the BIOS from within the BIOS. This option is usually available under the File Menu and is called "Flash System ROM". There are 2 different directory structures that seem to work. Your BIOS may or may not work with either directory structure.
+</p>
+<ol>
+<li>Placing the BIOS *.bin file in the root of the FAT32 formatted USB drive without any other directories. You do not need any other files.</li>
+<li>Using the directory structure as described <a rel="nofollow" class="external text" href="https://h30434.www3.hp.com/t5/Notebook-Operating-System-and-Recovery/How-to-update-BIOS-on-Linux/td-p/4869835">here</a>
+</li>
+</ol>
+<p>If neither of the above directory structures seem to work, then either use the FreeDOS method if HP provides the relevant DOS executables for your BIOS version or get a Windows machine to first create a HP BIOS Flash Recovery USB and then use that USB to flash the BIOS using the same Flash System ROM option.
+</p>
+<p>Procedure:
+</p>
+<ol>
+<li>Download the BIOS executable from HP's support website using your serial number and indicating Windows as the OS .</li>
+<li>The exe file is an archive and can then be extracted using e.g <a href="../en/7-Zip.html" class="mw-redirect" title="7z">7z</a>
+</li>
+<li>Create the appropriate directory structure in the USB as described above. If one does not work, try the other</li>
+<li>Unmount the USB</li>
+<li>Attach it to the computer whose BIOS needs to be upgraded (if using a different computer to create the USB drive)</li>
+<li>Reboot the computer and get into the BIOS using the assigned key (e.g. <code>F10</code>) for your BIOS.</li>
+<li>Once in the BIOS, find and select the <i>Flash System ROM</i> option. It may provide you with 3 options to flash from
+<ul>
+<li>USB</li>
+<li>Hard disk</li>
+<li>Network</li>
+</ul>
+</li>
+<li>Select the appropriate option (in this case USB) and it will pop up another text box which will have the file name of the BIN file that you put in the root of the USB drive.</li>
+<li>Hit Enter and it should indicate that current version of the BIOS and new one being upgraded to.</li>
+<li>Follow the screen prompts to upgrade the BIOS and finally reboot.</li>
+</ol>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> If you put the *.BIN file under a folder as suggested <a rel="nofollow" class="external text" href="https://h30434.www3.hp.com/t5/Notebook-Operating-System-and-Recovery/How-to-update-BIOS-on-Linux/td-p/4869835">here</a>, the "Flash System ROM" option is still able to find it. However when you proceed to upgrade the BIOS, it fails after a couple of minutes indicating "ROM is incompatible with the system". If you get this message, make sure that the BIN file is in the root of the USB drive and then try again.</div>
+<p>For some models, particularly around the years 2010-2014, unpacking the executable produces a file ending in <i>.fd</i> that contains both the BIOS file and an RSA signature for the file.  Instructions have been published on how to extract from the <i>.fd</i> file, and some tools have been published as well. Once these files are extracted and placed on a USB drive, they can be used to perform the update. Sometimes the firmware update user interface makes it possible to navigate to the files, but it may sometimes also be necessary to place them in a particular directory with a particular name. The bios file usually has the suffix <i>.bin</i> and the signature file has the suffix <i>.sig</i> or <i>.s12</i>. The <a href="../en/Laptop/HP.html#Model_list" class="mw-redirect" title="HP ENVY m4-1015dx">HP ENVY m4-1015dx</a> page provides specific details for one such model.
+</p>
+<h3><span class="mw-headline" id="ASUS">ASUS</span></h3>
+<p>Modern ASUS motherboards do not require Windows for firmware update. You can update from within the UEFI with the Ez-Flash utility. However, they <a rel="nofollow" class="external text" href="https://forum.manjaro.org/t/questions-about-updating-the-bios-and-intel-management-service-on-a-new-motherboard/141876">ask</a> you to update ME before updating bios. The problem is that they do not include Linux update tool in the archive<a rel="nofollow" class="external autonumber" href="https://www.asus.com/motherboards-components/motherboards/prime/prime-z370-a/helpdesk_bios/?model2Name=PRIME-Z370-A">[2]</a>.
+</p>
+<p>Even if your bios is at latest version, you need update ME anyway. It is important to avoid hardware problems, such as unable to wake from sleep.
+</p>
+<p>Download the System Tools from <a rel="nofollow" class="external text" href="https://winraid.level1techs.com/t/intel-converged-security-management-engine-drivers-firmware-and-tools-2-15/30719">here</a>. For this particular motherboard the latest (v15) version did not work (Unknown PCH platform). As recommended <a rel="nofollow" class="external text" href="https://winraid.level1techs.com/t/me-firmware-linux/33230">here</a>, using v11 version worked. Extract the Linux executable from the archive ("CSME System Tools v11 r46/FWUpdate/LINUX64/FWUpdLcl") and place it to the folder with the firmware in archive downloaded from Asus site (MEUpdateTool_11.8.80.3746v5_S/FW/). Make the "FWUpdLcl" executable.
+</p>
+<p>Show usage: 
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">$ ./FWUpdLcl</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">Intel (R) Firmware Update Utility Version: 11.8.92.4222
+Copyright (C) 2007 - 2022, Intel Corporation.  All rights reserved.
+
+FWUpdLcl.exe [-H|?] [-VER] [-EXP] [-VERBOSE] [-F] [-Y] [-SAVE] 
+             [-FWVER] [-PARTID] [-ALLOWSV] [-FORCERESET] [-OEMID] [-PASS] 
+             [-PARTVER] 
+
+-H|?                    Displays help screen. 
+-VER                    Displays version information. 
+-EXP                    Displays example usage of this tool. 
+-VERBOSE&lt;file&gt;          Display the debug information of the tool. 
+-F &lt;file&gt;               File used for updating the FW. 
+-Y                      Automatically answer Yes to prompts. 
+-SAVE &lt;file&gt;            Save the current FW to an update image. 
+-FWVER&lt;file&gt;            Display the FW Version of current FW or update image. 
+-PARTID&lt;Partition ID&gt;   Provide specific Partition ID to perform partial update. 
+-ALLOWSV                Allows same version firmware updates. 
+-FORCERESET             Automatically Reboots system after update (if needed). 
+-OEMID &lt;UUID&gt;           OEM ID needed to perform firmware update. 
+-PASS &lt;pass&gt;            MeBX password. Optional with the '-f' option.  
+-PARTVER &lt;Partition ID&gt; Display the Version of specific partition.
+</pre>
+<p>Show your current ME version:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;"># ./FWUpdLcl -FWVER</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">Intel (R) Firmware Update Utility Version: 11.8.92.4222
+Copyright (C) 2007 - 2022, Intel Corporation.  All rights reserved.
+
+FW Version: 11.8.65.3590</pre>
+<p>Show the ME version of the file in downloaded archive:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">$ ./FWUpdLcl -FWVER ME.bin</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">Intel (R) Firmware Update Utility Version: 11.8.92.4222
+Copyright (C) 2007 - 2022, Intel Corporation.  All rights reserved.
+
+FW Version: 11.8.80.3746</pre>
+<p>Start flashing:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;"># ./FWUpdLcl -F ME.bin</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">Intel (R) Firmware Update Utility Version: 11.8.92.4222
+Copyright (C) 2007 - 2022, Intel Corporation.  All rights reserved.
+
+Communication Mode: MEI
+Checking firmware parameters...
+
+Warning: Do not exit the process or power off the machine before the firmware update process ends.
+Sending the update image to FW for verification:  [ COMPLETE ] 
+
+FW Update:  [ 100% (/)]Do not Interrupt
+FW Update is completed successfully.</pre>
+<p>To be able to see new version you need reboot. Now you can see the version applied:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;"># ./FWUpdLcl -FWVER</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">Intel (R) Firmware Update Utility Version: 11.8.92.4222
+Copyright (C) 2007 - 2022, Intel Corporation.  All rights reserved.
+
+FW Version: 11.8.80.3746</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> Alternatively, you can update via the UEFI shell using <code>FWUpdLcl.efi</code> from the archive.</div>
+<h3><span class="mw-headline" id="Lenovo">Lenovo</span></h3>
+<p>Some firmware updates are only provided in Windows executable format. This section uses as an example the Lenovo IdeaPad L340-15API firmware. If you try to apply these steps to another system, your mileage may vary. The Lenovo IdeaPad L340-15API only offers a <i>.exe</i> on the Lenovo support site. This renders not just many, but all of the methods in the article futile:
+</p>
+<ul>
+<li>Wine: while dangerous, the mentioned IdeaPad firmware failed due to a "TDK library" error. More on this below.</li>
+<li>
+<a href="../en/Fwupd.html" title="Fwupd">fwupd</a> alone does not work because the firmware is not on the LVFS, even if other entries might be, such as the <a href="../en/Unified_Extensible_Firmware_Interface/Secure_Boot.html" class="mw-redirect" title="Secure Boot">Secure Boot</a> Forbidden Signatures Database (dbx).</li>
+<li>BiosDisk only works on "BIOS executables" and not our executable. It is also made by Dell, so your mileage could vary with other vendors.</li>
+<li>Flashrom comes with the specific warning not to use it with laptops. Many systems, and the IdeaPad included, are not supported in their hardware list either.</li>
+<li>For FreeDOS to work, the firmware would need to be a DOS executable. If your firmware executable is like that of the IdeaPad discussed, it will not run in FreeDOS at all even with modern Windows executables starting with a DOS header.</li>
+<li>
+<code>geteltorito.pl</code> only works if you have an ISO.</li>
+<li>Windows PE, might also yield incompatibility issues. In particular, the installer might not run because it is checking the operating system for compatibility.</li>
+</ul>
+<ol>
+<li>The installer. The IdeaPad's firmware download comes in an installer format, specifically <a rel="nofollow" class="external text" href="https://bladecoder.medium.com/flash-your-lenovo-ideapad-laptop-bios-from-linux-using-uefi-capsule-updates-a82e455ea29c">set up by Inno Setup</a>. Instead of extracting by running the installer with something like Wine, use the <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=innoextract">innoextract</a></span> tool: <pre>$ innoextract <i>installer.exe</i></pre>
+</li>
+<li>We find inside another executable. This inner IdeaPad executable also does not work in FreeDOS or Windows PE. However, note the earlier mentioned TDK library error. TDK refers to the firmware dev kit made by <a rel="nofollow" class="external text" href="https://www.phoenix.com/uefi-bios-utilities-package/">Phoenix Technologies</a>. It was mentioned on the <a rel="nofollow" class="external text" href="https://www.badcaps.net/forum/showthread.php?t=80861">badcaps forum</a> that the executable itself will extract the contents using the <code>/ext</code> argument. So using Wine, run <pre>$ wine <i>firmware.exe</i> /ext</pre> Alternatively, using <a href="../en/7-Zip.html" class="mw-redirect" title="7z">7z</a> has been reported as working too: <pre>$ 7z x <i>firmware.exe</i></pre>
+</li>
+<li>We find ourselves with more <i>.exe</i> files in this <i>.exe</i> file too. None of them work in FreeDOS or Windows PE. However, note that the firmware itself is in a UEFI capsule update format, suggested in <a rel="nofollow" class="external text" href="https://bladecoder.medium.com/flash-your-lenovo-ideapad-laptop-bios-from-linux-using-uefi-capsule-updates-a82e455ea29c">bladecoder's blog</a>.
+<ul>
+<li>In the extracted files, look for the <i>.cap</i> file. You have located the extracted firmware.</li>
+<li>Alternatively, some models use an <i>.fd</i> file.</li>
+</ul>
+</li>
+<li>With the UEFI capsule in hand, the next step is to try to install it manually. Mentioned in that blog, <a href="../en/Fwupd.html" title="Fwupd">fwupd</a> can help with this. <i>fwupdate</i> is not provided in the <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=fwupd">fwupd</a></span> package, but <i>fwupdtool</i> accomplishes the same task. First, identify the device ID of the firmware: <pre># fwupdtool get-devices</pre>
+</li>
+<li>Finding the ID in the devices output, use it with a manual install: <pre># fwupdtool install-blob <i>BIOS.ext</i> <i>DEVICE-ID</i></pre>
+</li>
+<li>Reboot when prompted. The screen may go completely black: wait for it to finish installing.</li>
+<li>The EFI boot list is cleared after the update. First, update your UEFI settings to your previous ones.</li>
+<li>Finally, use an external boot media to reinstall your bootloader.</li>
+</ol>
+</div>
+</div>
+					<div id="catlinks" class="catlinks" data-mw="interface"><div id="mw-normal-catlinks" class="mw-normal-catlinks">
+<a href="../Special:Categories.html" title="Special:Categories">Category</a>: <ul><li><a href="../en/Category:Mainboards_and_BIOS.html" title="Category:Mainboards and BIOS">Mainboards and BIOS</a></li></ul>
+</div></div>
+				</div>
+			</main>
+			
+		</div>
+		<div class="mw-footer-container">
+			
+<footer id="footer" class="mw-footer" style="margin: 0">
+	<ul id="footer-info">
+	<li data-nosnippet="">Retrieved from "<a dir="ltr" href="https://wiki.archlinux.org/index.php?title=Flashing_BIOS_from_Linux&amp;oldid=829080">https://wiki.archlinux.org/index.php?title=Flashing_BIOS_from_Linux&amp;oldid=829080</a>"</li>
+<li id="footer-info-lastmod"> This page was last edited on 15 March 2025, at 22:13.</li>
+	<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+<br>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="https://terms.archlinux.org/docs/privacy-policy/">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="../en/ArchWiki:About.html">About ArchWiki</a></li>
+	<li id="footer-places-disclaimers"><a href="../en/ArchWiki:General_disclaimer.html">Disclaimers</a></li>
+	<li id="footer-places-archwiki-code-of-conduct"><a href="https://terms.archlinux.org/docs/code-of-conduct/" class="extiw" title="archlinux-service-agreements:code-of-conduct">Code of conduct</a></li>
+	<li id="footer-places-archwiki-terms-of-service"><a href="https://terms.archlinux.org/docs/terms-of-service/" class="extiw" title="archlinux-service-agreements:terms-of-service">Terms of service</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-copyrightico"><a href="https://www.gnu.org/copyleft/fdl.html" class="cdx-button cdx-button--fake-button cdx-button--size-large cdx-button--fake-button--enabled"><img src="/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" loading="lazy"></a></li>
+	<li id="footer-poweredbyico"><img src="/resources/assets/poweredby_mediawiki.svg" width="88" height="31" loading="lazy"></li>
+</ul>
+
+</footer>
+
+		</div>
+	</div> 
+</div> 
+<div class="vector-settings" id="p-dock-bottom">
+	<ul></ul>
+</div>
+</body>
+</html>

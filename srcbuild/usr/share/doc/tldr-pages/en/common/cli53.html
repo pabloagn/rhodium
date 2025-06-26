@@ -1,0 +1,60 @@
+<h1>cli53</h1>
+
+<blockquote><p>Command line tool for Amazon Route 53.
+More information: <a href="https://github.com/barnybug/cli53">https://github.com/barnybug/cli53</a>.</p></blockquote>
+
+<ul>
+<li>List domains:</li>
+</ul>
+
+
+<p><code>cli53 list</code></p>
+
+<ul>
+<li>Create a domain:</li>
+</ul>
+
+
+<p><code>cli53 create {{mydomain.com}} --comment "{{comment}}"</code></p>
+
+<ul>
+<li>Export a bind zone file to <code>stdout</code>:</li>
+</ul>
+
+
+<p><code>cli53 export {{mydomain.com}}</code></p>
+
+<ul>
+<li>Create a <code>www</code> subdomain pointing to a relative record in the same zone:</li>
+</ul>
+
+
+<p><code>cli53 {{rc|rrcreate}} {{mydomain.com}} {{'www 300 CNAME lb'}}</code></p>
+
+<ul>
+<li>Create a <code>www</code> subdomain pointing to an external address (must end with a dot):</li>
+</ul>
+
+
+<p><code>cli53 {{rc|rrcreate}} {{mydomain.com}} {{'www 300 CNAME lb.externalhost.com.'}}</code></p>
+
+<ul>
+<li>Create a <code>www</code> subdomain pointing to an IP address:</li>
+</ul>
+
+
+<p><code>cli53 {{rc|rrcreate}} {{mydomain.com}} {{'www 300 A 150.130.110.1'}}</code></p>
+
+<ul>
+<li>Replace a <code>www</code> subdomain pointing to a different IP:</li>
+</ul>
+
+
+<p><code>cli53 {{rc|rrcreate}} --replace {{'www 300 A 150.130.110.2'}}</code></p>
+
+<ul>
+<li>Delete a record A:</li>
+</ul>
+
+
+<p><code>cli53 {{rd|rrdelete}} {{mydomain.com}} {{www}} {{A}}</code></p>

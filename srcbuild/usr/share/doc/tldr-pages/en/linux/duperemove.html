@@ -1,0 +1,34 @@
+<h1>duperemove</h1>
+
+<blockquote><p>Finds duplicate filesystem extents and optionally schedule them for deduplication.
+An extent is small part of a file inside the filesystem.
+On some filesystems one extent can be referenced multiple times, when parts of the content of the files are identical.
+More information: <a href="https://markfasheh.github.io/duperemove/">https://markfasheh.github.io/duperemove/</a>.</p></blockquote>
+
+<ul>
+<li>Search for duplicate extents in a directory and show them:</li>
+</ul>
+
+
+<p><code>duperemove -r {{path/to/directory}}</code></p>
+
+<ul>
+<li>Deduplicate duplicate extents on a Btrfs or XFS (experimental) filesystem:</li>
+</ul>
+
+
+<p><code>duperemove -r -d {{path/to/directory}}</code></p>
+
+<ul>
+<li>Use a hash file to store extent hashes (less memory usage and can be reused on subsequent runs):</li>
+</ul>
+
+
+<p><code>duperemove -r -d --hashfile={{path/to/hashfile}} {{path/to/directory}}</code></p>
+
+<ul>
+<li>Limit I/O threads (for hashing and dedupe stage) and CPU threads (for duplicate extent finding stage):</li>
+</ul>
+
+
+<p><code>duperemove -r -d --hashfile={{path/to/hashfile}} --io-threads={{n}} --cpu-threads={{n}} {{path/to/directory}}</code></p>

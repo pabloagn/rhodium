@@ -1,0 +1,32 @@
+<h1>tee</h1>
+
+<blockquote><p><code>stdin</code> から読み込んで <code>stdout</code> とファイル(またはコマンド)に書き込みます。
+もっと詳しく: <a href="https://www.gnu.org/software/coreutils/manual/html_node/tee-invocation.html">https://www.gnu.org/software/coreutils/manual/html_node/tee-invocation.html</a>。</p></blockquote>
+
+<ul>
+<li>各ファイルに <code>stdin</code> をコピーし、<code>stdout</code> にもコピーする:</li>
+</ul>
+
+
+<p><code>echo "example" | tee {{path/to/file}}</code></p>
+
+<ul>
+<li>与えられたファイルに追記する。上書きはしない:</li>
+</ul>
+
+
+<p><code>echo "example" | tee {{[-a|--append]}} {{path/to/file}}</code></p>
+
+<ul>
+<li>ターミナルに <code>stdin</code> を表示し、さらに処理するために別のプログラムにパイプする:</li>
+</ul>
+
+
+<p><code>echo "example" | tee {{/dev/tty}} | {{xargs printf "[%s]"}}</code></p>
+
+<ul>
+<li>&ldquo;example"と言うディレクトリを作成し、"example"の文字バイト数を数え、"example"をターミナルに出力する:</li>
+</ul>
+
+
+<p><code>echo "example" | tee &gt;(xargs mkdir) &gt;(wc -c)</code></p>

@@ -1,0 +1,60 @@
+<h1>http</h1>
+
+<blockquote><p>HTTPie: een HTTP-client ontworpen voor het testen, debuggen en in het algemeen interactie met API&rsquo;s en HTTP-servers.
+Meer informatie: <a href="https://httpie.io/docs/cli/usage">https://httpie.io/docs/cli/usage</a>.</p></blockquote>
+
+<ul>
+<li>Maak een eenvoudige GET-aanvraag (toont response header en inhoud):</li>
+</ul>
+
+
+<p><code>http {{https://example.org}}</code></p>
+
+<ul>
+<li>Print specifieke uitvoerinhoud (<code>H</code>: request headers, <code>B</code>: request body, <code>h</code>: response headers, <code>b</code>: response body, <code>m</code>: response metadata):</li>
+</ul>
+
+
+<p><code>http {{[-p|--print]}} {{H|B|h|b|m|Hh|Hhb|...}} {{https://example.com}}</code></p>
+
+<ul>
+<li>Specificeer de HTTP-methode bij het verzenden van een aanvraag en gebruik een proxy om de aanvraag te onderscheppen:</li>
+</ul>
+
+
+<p><code>http {{GET|POST|HEAD|PUT|PATCH|DELETE|...}} --proxy {{http|https}}:{{http://localhost:8080|socks5://localhost:9050|...}} {{https://example.com}}</code></p>
+
+<ul>
+<li>Volg eventuele <code>3xx</code> redirects en specificeer extra headers in een verzoek:</li>
+</ul>
+
+
+<p><code>http {{[-F|--follow]}} {{https://example.com}} {{'User-Agent: Mozilla/5.0' 'Accept-Encoding: gzip'}}</code></p>
+
+<ul>
+<li>Authenticeer bij een server met verschillende authenticatiemethoden:</li>
+</ul>
+
+
+<p><code>http {{[-a|--auth]}} {{gebruikersnaam:wachtwoord|token}} {{[-A|--auth-type]}} {{basic|digest|bearer}} {{GET|POST|...}} {{https://example.com/auth}}</code></p>
+
+<ul>
+<li>Maak een verzoek maar verzend het niet (vergelijkbaar met een dry-run):</li>
+</ul>
+
+
+<p><code>http --offline {{GET|DELETE|...}} {{https://example.com}}</code></p>
+
+<ul>
+<li>Gebruik benoemde sessies voor aanhoudende aangepaste headers, auth-referenties en cookies:</li>
+</ul>
+
+
+<p><code>http --session {{session_naam|pad/naar/session.json}} {{[-a|--auth]}} {{gebruikersnaam}}:{{wachtwoord}} {{https://example.com/auth}} {{API-KEY:xxx}}</code></p>
+
+<ul>
+<li>Upload een bestand naar een formulier (het onderstaande voorbeeld gaat ervan uit dat het formulier <code>&lt;input type="file" name="cv" /&gt;</code> is):</li>
+</ul>
+
+
+<p><code>http {{[-f|--form]}} {{POST}} {{https://example.com/upload}} {{cv@pad/naar/bestand}}</code></p>

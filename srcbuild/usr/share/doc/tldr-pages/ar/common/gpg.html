@@ -1,0 +1,60 @@
+<h1>gpg</h1>
+
+<blockquote><p>برنامج GNU Privacy Guard.
+لمزيد من التفاصيل: <a href="https://gnupg.org/documentation/manuals/gnupg/Invoking-GPG.html">https://gnupg.org/documentation/manuals/gnupg/Invoking-GPG.html</a>.</p></blockquote>
+
+<ul>
+<li>إنشاء مفتاح GPG عام وخاص بطريقة تفاعلية:</li>
+</ul>
+
+
+<p><code>gpg --full-generate-key</code></p>
+
+<ul>
+<li>توقيع الملف <code>doc.txt</code> دون تشفير (يتم حفظ الإخراج في ملف <code>doc.txt.asc</code>):</li>
+</ul>
+
+
+<p><code>gpg --clearsign {{doc.txt}}</code></p>
+
+<ul>
+<li>تشفير وتوقيع الملف <code>doc.txt</code> للمستخدمين alice@example.com و bob@example.com (يتم حفظ الإخراج في ملف <code>doc.txt.gpg</code>):</li>
+</ul>
+
+
+<p><code>gpg --encrypt --sign --recipient {{alice@example.com}} --recipient {{bob@example.com}} {{doc.txt}}</code></p>
+
+<ul>
+<li>تشفير <code>doc.txt</code> باستخدام كلمة مرور فقط (يتم حفظ الإخراج في ملف <code>doc.txt.gpg</code>):</li>
+</ul>
+
+
+<p><code>gpg --symmetric {{doc.txt}}</code></p>
+
+<ul>
+<li>فك تشفير <code>doc.txt.gpg</code> (يتم عرض الإخراج على <code>stdout</code>):</li>
+</ul>
+
+
+<p><code>gpg --decrypt {{doc.txt.gpg}}</code></p>
+
+<ul>
+<li>استيراد مفتاح عام:</li>
+</ul>
+
+
+<p><code>gpg --import {{public.gpg}}</code></p>
+
+<ul>
+<li>تصدير المفتاح العام للمستخدم alice@example.com (يتم عرض الإخراج على <code>stdout</code>):</li>
+</ul>
+
+
+<p><code>gpg --export --armor {{alice@example.com}}</code></p>
+
+<ul>
+<li>تصدير المفتاح الخاص للمستخدم alice@example.com (يتم عرض الإخراج على <code>stdout</code>):</li>
+</ul>
+
+
+<p><code>gpg --export-secret-keys --armor {{alice@example.com}}</code></p>

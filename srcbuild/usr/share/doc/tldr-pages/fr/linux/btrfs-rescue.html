@@ -1,0 +1,39 @@
+<h1>btrfs rescue</h1>
+
+<blockquote><p>Essayer de récupérer un système de fichiers btrfs endommagé.
+Plus d'informations : <a href="https://btrfs.readthedocs.io/en/latest/btrfs-rescue.html">https://btrfs.readthedocs.io/en/latest/btrfs-rescue.html</a>.</p></blockquote>
+
+<ul>
+<li>Reconstruire les méta-données du système de fichiers (très lent) :</li>
+</ul>
+
+
+<p><code>sudo btrfs rescue chunk-recover {{chemin/vers/partition}}</code></p>
+
+<ul>
+<li>Corriger les problèmes d'alignement de taille de périphérique (e.g. incohérence entre la taille du système de fichiers et le nombre total d'octets empéchant de monter la partition) :</li>
+</ul>
+
+
+<p><code>sudo btrfs rescue fix-device-size {{chemin/vers/partition}}</code></p>
+
+<ul>
+<li>Restaurer un superbloc corrompu depuis ses copies correctes (restauration de la racine de l'arbre du système de fichiers) :</li>
+</ul>
+
+
+<p><code>sudo btrfs rescue super-recover {{chemin/vers/partition}}</code></p>
+
+<ul>
+<li>Restaurer depuis des transactions interrompues (correction des problèmes de re-exécution des messages de journaux) :</li>
+</ul>
+
+
+<p><code>sudo btrfs rescue zero-log {{chemin/vers/partition}}</code></p>
+
+<ul>
+<li>Créer un périphérique de contrôle sous <code>/dev/btrfs-control</code> quand l'outil <code>mknod</code> n'est pas installé :</li>
+</ul>
+
+
+<p><code>sudo btrfs rescue create-control-device</code></p>

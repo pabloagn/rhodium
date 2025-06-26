@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-sticky-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-0 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-disabled skin-theme-clientpref-day vector-toc-available" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>File systems (Español) - ArchWiki</title>
+<link rel="stylesheet" href="../ArchWikiOffline.css">
+<meta name="ResourceLoaderDynamicStyles" content="">
+<meta name="generator" content="MediaWiki 1.43.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="max-image-preview:standard">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.25, maximum-scale=5.0">
+<link rel="search" type="application/opensearchdescription+xml" href="/rest.php/v1/search" title="ArchWiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.archlinux.org/api.php?action=rsd">
+<link rel="license" href="https://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="ArchWiki Atom feed" href="/index.php?title=Special:RecentChanges&amp;feed=atom">
+</head>
+<body class="skin--responsive skin-vector skin-vector-search-vue mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-File_systems_Español rootpage-File_systems_Español skin-vector-2022 action-view">
+<a class="mw-jump-link" href="#bodyContent">Jump to content</a>
+<div class="vector-header-container">
+	</div>
+<div class="mw-page-container">
+	<div class="mw-page-container-inner">
+		<div class="vector-column-start">
+			<div class="vector-main-menu-container">
+		</div>
+	<div class="vector-sticky-pinned-container">
+				<nav id="mw-panel-toc" aria-label="Contents" data-event-name="ui.sidebar-toc" class="mw-table-of-contents-container vector-toc-landmark">
+					<div id="vector-toc-pinned-container" class="vector-pinned-container">
+					<div id="vector-toc" class="vector-toc vector-pinnable-element">
+	<div class="vector-pinnable-header vector-toc-pinnable-header vector-pinnable-header-pinned" data-feature-name="toc-pinned" data-pinnable-element-id="vector-toc">
+	<h2 class="vector-pinnable-header-label">Contents</h2>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-toc.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-toc.unpin">hide</button>
+</div>
+
+
+	<ul class="vector-toc-contents" id="mw-panel-toc-list">
+		<li id="toc-mw-content-text" class="vector-toc-list-item vector-toc-level-1">
+			<a href="#" class="vector-toc-link">
+				<div class="vector-toc-text">Beginning</div>
+			</a>
+		</li>
+		<li id="toc-Tipos_de_sistemas_de_archivos" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Tipos_de_sistemas_de_archivos">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">1</span>
+				<span>Tipos de sistemas de archivos</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Tipos_de_sistemas_de_archivos-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Tipos de sistemas de archivos subsection</span>
+			</button>
+		
+		<ul id="toc-Tipos_de_sistemas_de_archivos-sublist" class="vector-toc-list">
+			<li id="toc-Journaling" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Journaling">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.1</span>
+					<span>Journaling</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Journaling-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Sistemas_de_archivos_basados_​​en_FUSE" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Sistemas_de_archivos_basados_%E2%80%8B%E2%80%8Ben_FUSE">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.2</span>
+					<span>Sistemas de archivos basados ​​en FUSE</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Sistemas_de_archivos_basados_​​en_FUSE-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Sistemas_de_archivos_apilables" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Sistemas_de_archivos_apilables">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.3</span>
+					<span>Sistemas de archivos apilables</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Sistemas_de_archivos_apilables-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Sistemas_de_archivos_de_solo_lectura" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Sistemas_de_archivos_de_solo_lectura">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.4</span>
+					<span>Sistemas de archivos de solo lectura</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Sistemas_de_archivos_de_solo_lectura-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Sistemas_de_archivos_agrupados_(cluster)" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Sistemas_de_archivos_agrupados_(cluster)">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.5</span>
+					<span>Sistemas de archivos agrupados (cluster)</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Sistemas_de_archivos_agrupados_(cluster)-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Sistema_de_archivos_de_disco_compartido" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Sistema_de_archivos_de_disco_compartido">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.6</span>
+					<span>Sistema de archivos de disco compartido</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Sistema_de_archivos_de_disco_compartido-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Identificar_los_sistemas_de_archivos_existentes" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Identificar_los_sistemas_de_archivos_existentes">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">2</span>
+				<span>Identificar los sistemas de archivos existentes</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Identificar_los_sistemas_de_archivos_existentes-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Crear_un_sistema_de_archivos" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Crear_un_sistema_de_archivos">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">3</span>
+				<span>Crear un sistema de archivos</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Crear_un_sistema_de_archivos-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Montar_un_sistema_de_archivos" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Montar_un_sistema_de_archivos">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">4</span>
+				<span>Montar un sistema de archivos</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Montar_un_sistema_de_archivos-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Montar un sistema de archivos subsection</span>
+			</button>
+		
+		<ul id="toc-Montar_un_sistema_de_archivos-sublist" class="vector-toc-list">
+			<li id="toc-Listar_los_sistemas_de_archivos_montados" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Listar_los_sistemas_de_archivos_montados">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.1</span>
+					<span>Listar los sistemas de archivos montados</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Listar_los_sistemas_de_archivos_montados-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Desmontar_un_sistema_de_archivos" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Desmontar_un_sistema_de_archivos">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.2</span>
+					<span>Desmontar un sistema de archivos</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Desmontar_un_sistema_de_archivos-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Véase_también" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#V%C3%A9ase_tambi%C3%A9n">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">5</span>
+				<span>Véase también</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Véase_también-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+</ul>
+</div>
+
+					</div>
+		</nav>
+			</div>
+		</div>
+		<div class="mw-content-container">
+			<main id="content" class="mw-body" style="margin: 0">
+				<header class="mw-body-header vector-page-titlebar">
+					<nav aria-label="Contents" class="vector-toc-landmark">
+						
+<div id="vector-page-titlebar-toc" class="vector-dropdown vector-page-titlebar-toc vector-button-flush-left">
+	<input type="checkbox" id="vector-page-titlebar-toc-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-page-titlebar-toc" class="vector-dropdown-checkbox " aria-label="Toggle the table of contents">
+	<label id="vector-page-titlebar-toc-label" for="vector-page-titlebar-toc-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"><span class="vector-icon mw-ui-icon-listBullet mw-ui-icon-wikimedia-listBullet"></span>
+
+<span class="vector-dropdown-label-text">Toggle the table of contents</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+							<div id="vector-page-titlebar-toc-unpinned-container" class="vector-unpinned-container">
+			</div>
+		
+	</div>
+</div>
+
+					</nav>
+					<h1 id="firstHeading" class="firstHeading mw-first-heading"><span class="mw-page-title-main">File systems (Español)</span></h1>
+							
+<div id="p-lang-btn" class="vector-dropdown mw-portlet mw-portlet-lang">
+	<input type="checkbox" id="p-lang-btn-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-p-lang-btn" class="vector-dropdown-checkbox mw-interlanguage-selector" aria-label="Go to an article in another language. Available in 7 languages">
+	<label id="p-lang-btn-label" for="p-lang-btn-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--action-progressive mw-portlet-lang-heading-7" aria-hidden="true"><span class="vector-icon mw-ui-icon-language-progressive mw-ui-icon-wikimedia-language-progressive"></span>
+
+<span class="vector-dropdown-label-text">7 languages</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+		<div class="vector-menu-content">
+			
+			<ul class="vector-menu-content-list">
+				
+				<li class="interlanguage-link interwiki-en mw-list-item"><a href="../en/File_systems.html" title="File systems – English" lang="en" hreflang="en" data-title="File systems" data-language-autonym="English" data-language-local-name="English" class="interlanguage-link-target"><span>English</span></a></li>
+<li class="interlanguage-link interwiki-it mw-list-item"><a href="../it/File_systems.html" title="File systems – italiano" lang="it" hreflang="it" data-title="File systems" data-language-autonym="Italiano" data-language-local-name="italiano" class="interlanguage-link-target"><span>Italiano</span></a></li>
+<li class="interlanguage-link interwiki-ja mw-list-item"><a href="https://wiki.archlinux.jp/index.php/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0" title="ファイルシステム – 日本語" lang="ja" hreflang="ja" data-title="ファイルシステム" data-language-autonym="日本語" data-language-local-name="日本語" class="interlanguage-link-target"><span>日本語</span></a></li>
+<li class="interlanguage-link interwiki-pt mw-list-item"><a href="../pt/File_systems.html" title="File systems – português" lang="pt" hreflang="pt" data-title="File systems" data-language-autonym="Português" data-language-local-name="português" class="interlanguage-link-target"><span>Português</span></a></li>
+<li class="interlanguage-link interwiki-ru mw-list-item"><a href="../ru/File_systems.html" title="File systems – русский" lang="ru" hreflang="ru" data-title="File systems" data-language-autonym="Русский" data-language-local-name="русский" class="interlanguage-link-target"><span>Русский</span></a></li>
+<li class="interlanguage-link interwiki-uk mw-list-item"><a href="../uk/File_systems.html" title="File systems – українська" lang="uk" hreflang="uk" data-title="File systems" data-language-autonym="Українська" data-language-local-name="українська" class="interlanguage-link-target"><span>Українська</span></a></li>
+<li class="interlanguage-link interwiki-zh-hans mw-list-item"><a href="https://wiki.archlinuxcn.org/wiki/File_systems" title="File systems – 中文（简体）" lang="zh-Hans" hreflang="zh-Hans" data-title="File systems" data-language-autonym="中文（简体）" data-language-local-name="中文（简体）" class="interlanguage-link-target"><span>中文（简体）</span></a></li>
+			</ul>
+			
+		</div>
+
+	</div>
+</div>
+</header>
+				<div class="vector-column-end">
+					<div class="vector-sticky-pinned-container">
+						<nav class="vector-page-tools-landmark" aria-label="Page tools">
+							<div id="vector-page-tools-pinned-container" class="vector-pinned-container">
+				
+							</div>
+		</nav>
+						<nav class="vector-appearance-landmark" aria-label="Appearance">
+							<div id="vector-appearance-pinned-container" class="vector-pinned-container">
+				<div id="vector-appearance" class="vector-appearance vector-pinnable-element">
+	<div class="vector-pinnable-header vector-appearance-pinnable-header vector-pinnable-header-pinned" data-feature-name="appearance-pinned" data-pinnable-element-id="vector-appearance" data-pinned-container-id="vector-appearance-pinned-container" data-unpinned-container-id="vector-appearance-unpinned-container">
+	<div class="vector-pinnable-header-label">Appearance</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-appearance.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-appearance.unpin">hide</button>
+</div>
+
+
+</div>
+
+							</div>
+		</nav>
+					</div>
+				</div>
+				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container>
+					<div class="vector-body-before-content">
+							<div class="mw-indicators">
+		</div>
+
+						<div id="siteSub" class="noprint">From ArchWiki</div>
+					</div>
+					<div id="contentSub"><div id="mw-content-subtitle"></div></div>
+					
+					
+					<div id="mw-content-text" class="mw-body-content">
+<div class="mw-content-ltr mw-parser-output" lang="es" dir="ltr">
+<div class="archwiki-template-box archwiki-template-box-note">Esta traducción de <a href="../en/File_systems.html" title="File systems">File systems</a> fue revisada el <b>2020-12-12</b>. Si existen <a rel="nofollow" class="external text" href="https://wiki.archlinux.org/index.php?title=File_systems&amp;diff=0&amp;oldid=640208">cambios</a> puede <a href="../es/ArchWiki:Translation_Team/Contributing.html" title="ArchWiki:Translation Team (Español)/Contributing (Español)">actualizarla</a> o avisar al <a href="../es/ArchWiki:Translation_Team.html" title="ArchWiki:Translation Team (Español)">equipo de traducción</a>.</div>
+<div class="archwiki-template-meta-related-articles">
+<p>Artículos relacionados</p>
+<ul>
+<li><a href="../en/Partitioning.html" class="mw-redirect" title="Partitioning (Español)">Particionado</a></li>
+<li><a href="../es/Device_file.html#lsblk" title="Device file (Español)">lsblk</a></li>
+<li><a href="../es/File_permissions_and_attributes.html" title="File permissions and attributes (Español)">Permisos y atributos de archivo</a></li>
+<li><a href="../en/Fsck.html" title="Fsck">fsck</a></li>
+<li><a href="../es/Fstab.html" title="Fstab (Español)">lsblk</a></li>
+<li><a href="../en/List_of_applications/Utilities.html#Mount_tools" title="List of applications/Utilities">List of applications/Utilities#Mount tools</a></li>
+<li><a href="../es/QEMU.html#Montaje_de_una_partici%C3%B3n_dentro_de_una_imagen_de_disco_raw" title="QEMU (Español)">Montaje de una partición dentro de una imagen de disco raw</a></li>
+<li><a href="../en/Udev.html" class="mw-redirect" title="Udev (Español)">udev</a></li>
+<li><a href="../en/Udisks.html" title="Udisks">udisks</a></li>
+<li><a href="../es/Umask.html" title="Umask (Español)">umask</a></li>
+<li><a href="../es/USB_storage_devices.html" title="USB storage devices (Español)">Dispositivos de almacenamiento USB</a></li>
+</ul>
+</div>
+<p>De <a href="https://en.wikipedia.org/wiki/es:Sistema_de_archivos" class="extiw" title="wikipedia:es:Sistema de archivos">Wikipedia</a>:
+</p>
+<dl><dd>En informática, un sistema de archivos controla cómo se almacenan y recuperan los datos. Sin un sistema de archivos, la información colocada en un medio de almacenamiento sería una gran cantidad de datos sin una manera de decir dónde se detiene una información y comienza la siguiente. Al separar los datos en partes y darle a cada una un nombre, la información se aísla e identifica fácilmente. Tomando su nombre de la forma en que se nombran los sistemas de información en papel, cada grupo de datos se llama un «archivo». La estructura y las reglas lógicas utilizadas para administrar los grupos de información y sus nombres se denominan «sistema de archivos».</dd></dl>
+<p>Las particiones individuales de la unidad se pueden configurar utilizando uno de los muchos y diferentes sistemas de archivos disponibles. Cada uno tiene sus propias ventajas, desventajas e idiosincrasias únicas. A continuación se ofrece una breve descripción de los sistemas de archivos compatibles; los enlaces son a páginas de Wikipedia que proporcionan mucha más información.
+</p>
+<meta property="mw:PageProp/toc">
+<h2><span class="mw-headline" id="Tipos_de_sistemas_de_archivos">Tipos de sistemas de archivos</span></h2>
+<p>Véase <span class="plainlinks archwiki-template-man" title="$ man 5 filesystems"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/filesystems.5">filesystems(5)</a></span> para una visión general y <a href="https://en.wikipedia.org/wiki/es:Anexo:Comparaci%C3%B3n_de_sistemas_de_archivos" class="extiw" title="wikipedia:es:Anexo:Comparación de sistemas de archivos">Wikipedia:es:Anexo:Comparación de sistemas de archivos</a> para una comparación detallada de características. Los sistemas de archivos soportados por el kernel están listados en <code>/proc/filesystems</code>.
+</p>
+<table class="wikitable sortable">
+<caption>Sistemas de archivos en la rama oficial y FUSE
+</caption>
+<tbody>
+<tr>
+<th>Sistema de archivos
+</th>
+<th>Orden para crearlo
+</th>
+<th>Utilidades de usuario
+</th>
+<th>
+<a href="../en/Archiso.html" title="Archiso">Archiso</a> <a rel="nofollow" class="external autonumber" href="https://gitlab.archlinux.org/archlinux/archiso/blob/master/configs/releng/packages.x86_64">[1]</a>
+</th>
+<th>Documentación del kernel <a rel="nofollow" class="external autonumber" href="https://docs.kernel.org/filesystems/">[2]</a>
+</th>
+<th>Notas
+</th>
+</tr>
+<tr>
+<td>
+<a href="../es/Btrfs.html" title="Btrfs (Español)">Btrfs</a>
+</td>
+<td>
+<span class="plainlinks archwiki-template-man" title="$ man 8 mkfs.btrfs"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/mkfs.btrfs.8">mkfs.btrfs(8)</a></span>
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=btrfs-progs">btrfs-progs</a></span>
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sí
+</td>
+<td>
+<a rel="nofollow" class="external text" href="https://docs.kernel.org/filesystems/btrfs.html">btrfs.html</a>
+</td>
+<td>
+<a rel="nofollow" class="external text" href="https://btrfs.wiki.kernel.org/index.php/Status">estado de su estabilidad</a>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../es/FAT.html" class="mw-redirect" title="VFAT (Español)">VFAT</a>
+</td>
+<td>
+<span class="plainlinks archwiki-template-man" title="$ man 8 mkfs.fat"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/mkfs.fat.8">mkfs.fat(8)</a></span>
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=dosfstools">dosfstools</a></span>
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sí
+</td>
+<td>
+<a rel="nofollow" class="external text" href="https://docs.kernel.org/filesystems/vfat.html">vfat.html</a>
+</td>
+<td>Sistema de archivos de <a href="https://en.wikipedia.org/wiki/es:Windows_9x" class="extiw" title="wikipedia:es:Windows 9x">Windows 9x</a>
+</td>
+</tr>
+<tr>
+<td rowspan="2">
+<a href="https://en.wikipedia.org/wiki/es:exFAT" class="extiw" title="wikipedia:es:exFAT">exFAT</a>
+</td>
+<td>
+<span class="plainlinks archwiki-template-man" title="$ man 8 mkfs.exfat"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/mkfs.exfat.8">mkfs.exfat(8)</a></span>
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=exfatprogs">exfatprogs</a></span>
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sí
+</td>
+<td>
+</td>
+<td>Sistema de archivos nativo desde linux 5.4. <a rel="nofollow" class="external autonumber" href="https://lwn.net/Articles/799425/">[3]</a>
+</td>
+</tr>
+<tr>
+<td>
+<span class="plainlinks archwiki-template-man" title="$ man 8 mkexfatfs"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/mkexfatfs.8">mkexfatfs(8)</a></span>
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=exfat-utils">exfat-utils</a></span>
+</td>
+<td data-sort-value="1" style="background: #faa; color: inherit; vertical-align: middle; text-align: center;">No
+</td>
+<td>N/D (basado en FUSE)
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../en/F2FS.html" title="F2FS">F2FS</a>
+</td>
+<td>
+<span class="plainlinks archwiki-template-man" title="$ man 8 mkfs.f2fs"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/mkfs.f2fs.8">mkfs.f2fs(8)</a></span>
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=f2fs-tools">f2fs-tools</a></span>
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sí
+</td>
+<td>
+<a rel="nofollow" class="external text" href="https://docs.kernel.org/filesystems/f2fs.html">f2fs.html</a>
+</td>
+<td>dispositivos basados ​​en flash
+</td>
+</tr>
+<tr>
+<td>
+<a href="../en/Ext3.html" title="Ext3">ext3</a>
+</td>
+<td>
+<span class="plainlinks archwiki-template-man" title="$ man 8 mke2fs"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/mke2fs.8">mke2fs(8)</a></span>
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=e2fsprogs">e2fsprogs</a></span>
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sí
+</td>
+<td>
+<a rel="nofollow" class="external text" href="https://docs.kernel.org/filesystems/ext3.html">ext3.html</a>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../es/Ext4.html" title="Ext4 (Español)">ext4</a>
+</td>
+<td>
+<span class="plainlinks archwiki-template-man" title="$ man 8 mke2fs"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/mke2fs.8">mke2fs(8)</a></span>
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=e2fsprogs">e2fsprogs</a></span>
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sí
+</td>
+<td>
+<a rel="nofollow" class="external text" href="https://docs.kernel.org/admin-guide/ext4.html">ext4.html</a>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://en.wikipedia.org/wiki/es:Hierarchical_File_System" class="extiw" title="wikipedia:es:Hierarchical File System">HFS</a>
+</td>
+<td>
+<span class="plainlinks archwiki-template-man" title="$ man 8 mkfs.hfsplus">mkfs.hfsplus(8)</span>
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/hfsprogs/">hfsprogs</a></span><sup><small>AUR</small></sup>
+</td>
+<td data-sort-value="1" style="background: #faa; color: inherit; vertical-align: middle; text-align: center;">No
+</td>
+<td>
+<a rel="nofollow" class="external text" href="https://docs.kernel.org/filesystems/hfs.html">hfs.html</a>
+</td>
+<td>sistema de archivos <a href="https://en.wikipedia.org/wiki/es:Mac_OS_Classic" class="extiw" title="wikipedia:es:Mac OS Classic">Mac OS clásico</a>
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://en.wikipedia.org/wiki/es:HFS_Plus" class="extiw" title="wikipedia:es:HFS Plus">HFS+</a>
+</td>
+<td>
+<span class="plainlinks archwiki-template-man" title="$ man 8 mkfs.hfsplus">mkfs.hfsplus(8)</span>
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/hfsprogs/">hfsprogs</a></span><sup><small>AUR</small></sup>
+</td>
+<td data-sort-value="1" style="background: #faa; color: inherit; vertical-align: middle; text-align: center;">No
+</td>
+<td>
+<a rel="nofollow" class="external text" href="https://docs.kernel.org/filesystems/hfsplus.html">hfsplus.html</a>
+</td>
+<td>sistema de archivos de <a href="https://en.wikipedia.org/wiki/es:macOS" class="extiw" title="wikipedia:es:macOS">macOS</a> (8-10.12)
+</td>
+</tr>
+<tr>
+<td>
+<a href="../en/JFS.html" title="JFS">JFS</a>
+</td>
+<td>
+<span class="plainlinks archwiki-template-man" title="$ man 8 mkfs.jfs"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/mkfs.jfs.8">mkfs.jfs(8)</a></span>
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=jfsutils">jfsutils</a></span>
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sí
+</td>
+<td>
+<a rel="nofollow" class="external text" href="https://docs.kernel.org/admin-guide/jfs.html">jfs.html</a>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://en.wikipedia.org/wiki/NILFS" class="extiw" title="wikipedia:NILFS">NILFS2</a>
+</td>
+<td>
+<span class="plainlinks archwiki-template-man" title="$ man 8 mkfs.nilfs2"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/mkfs.nilfs2.8">mkfs.nilfs2(8)</a></span>
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=nilfs-utils">nilfs-utils</a></span>
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sí
+</td>
+<td>
+<a rel="nofollow" class="external text" href="https://docs.kernel.org/filesystems/nilfs2.html">nilfs2.html</a>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../en/NTFS-3G.html" class="mw-redirect" title="NTFS (Español)">NTFS</a>
+</td>
+<td>
+<span class="plainlinks archwiki-template-man" title="$ man 8 mkfs.ntfs"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/mkfs.ntfs.8">mkfs.ntfs(8)</a></span>
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=ntfs-3g">ntfs-3g</a></span>
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sí
+</td>
+<td>N/D (basado en FUSE)
+</td>
+<td>sistema de archivos de <a href="https://en.wikipedia.org/wiki/es:Windows_NT" class="extiw" title="wikipedia:es:Windows NT">Windows NT</a>
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://en.wikipedia.org/wiki/es:ReiserFS" class="extiw" title="wikipedia:es:ReiserFS">ReiserFS</a>
+</td>
+<td>
+<span class="plainlinks archwiki-template-man" title="$ man 8 mkfs.reiserfs"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/mkfs.reiserfs.8">mkfs.reiserfs(8)</a></span>
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/reiserfsprogs/">reiserfsprogs</a></span><sup><small>AUR</small></sup>
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sí
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://en.wikipedia.org/wiki/es:Universal_Disk_Format" class="extiw" title="wikipedia:es:Universal Disk Format">UDF</a>
+</td>
+<td>
+<span class="plainlinks archwiki-template-man" title="$ man 8 mkfs.udf"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/mkfs.udf.8">mkfs.udf(8)</a></span>
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=udftools">udftools</a></span>
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sí
+</td>
+<td>
+<a rel="nofollow" class="external text" href="https://docs.kernel.org/filesystems/udf.html">udf.html</a>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../en/XFS.html" title="XFS">XFS</a>
+</td>
+<td>
+<span class="plainlinks archwiki-template-man" title="$ man 8 mkfs.xfs"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/mkfs.xfs.8">mkfs.xfs(8)</a></span>
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=xfsprogs">xfsprogs</a></span>
+</td>
+<td data-sort-value="5" style="background: #afa; color: inherit; vertical-align: middle; text-align: center;">Sí
+</td>
+<td>
+<p><a rel="nofollow" class="external text" href="https://docs.kernel.org/admin-guide/xfs.html">xfs.html</a><br>
+<a rel="nofollow" class="external text" href="https://docs.kernel.org/filesystems/xfs-delayed-logging-design.html">xfs-delayed-logging-design.html</a><sup>[<a href="https://en.wikipedia.org/wiki/Wikipedia:Link_rot" class="extiw" title="wikipedia:Wikipedia:Link rot">enlace roto</a> 2024-03-03]</sup><br>
+<a rel="nofollow" class="external text" href="https://docs.kernel.org/filesystems/xfs-self-describing-metadata.html">xfs-self-describing-metadata.html</a><sup>[<a href="https://en.wikipedia.org/wiki/Wikipedia:Link_rot" class="extiw" title="wikipedia:Wikipedia:Link rot">enlace roto</a> 2024-03-03]</sup>
+</p>
+</td>
+<td>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Nota:</strong> El kernel tiene su propio controlador NTFS (véase <a rel="nofollow" class="external text" href="https://docs.kernel.org/filesystems/ntfs.html">ntfs.html</a><sup>[<a href="https://en.wikipedia.org/wiki/Wikipedia:Link_rot" class="extiw" title="wikipedia:Wikipedia:Link rot">enlace roto</a> 2024-07-30]</sup>), pero tiene un soporte limitado para escribir archivos.</div>
+<table class="wikitable sortable">
+<caption>Sistemas de archivos fuera de la rama oficial
+</caption>
+<tbody>
+<tr>
+<th>Sistema de archivos
+</th>
+<th>Orden para crearlo
+</th>
+<th>Parche del kernel
+</th>
+<th>Utilidades de usuario
+</th>
+<th>Notas
+</th>
+</tr>
+<tr>
+<td>
+<a href="https://en.wikipedia.org/wiki/es:Apple_File_System" class="extiw" title="wikipedia:es:Apple File System">APFS</a>
+</td>
+<td>
+<span class="plainlinks archwiki-template-man" title="$ man 8 mkapfs">mkapfs(8)</span>
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/linux-apfs-dkms-git/">linux-apfs-dkms-git</a></span><sup><small>AUR</small></sup><sup>[<a href="../en/Help:Procedures.html#Fix_broken_package_links" title="Help:Procedures">enlace roto</a>: package not found]</sup>
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/apfsprogs-git/">apfsprogs-git</a></span><sup><small>AUR</small></sup>
+</td>
+<td>sistema de archivos <a href="https://en.wikipedia.org/wiki/es:macOS" class="extiw" title="wikipedia:es:macOS">macOS</a> (10.13 y posterior). Solo lectura, experimental.
+</td>
+</tr>
+<tr>
+<td>
+<a href="../en/Bcachefs.html" title="Bcachefs">Bcachefs</a>
+</td>
+<td>
+<span class="plainlinks archwiki-template-man" title="$ man 8 bcachefs"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/bcachefs.8">bcachefs(8)</a></span>
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/linux-bcachefs-git/">linux-bcachefs-git</a></span><sup><small>AUR</small></sup>
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/bcachefs-tools-git/">bcachefs-tools-git</a></span><sup><small>AUR</small></sup>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://en.wikipedia.org/wiki/Reiser4" class="extiw" title="wikipedia:Reiser4">Reiser4</a>
+</td>
+<td>
+<span class="plainlinks archwiki-template-man" title="$ man 8 mkfs.reiser4">mkfs.reiser4(8)</span>
+</td>
+<td>
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/reiser4progs/">reiser4progs</a></span><sup><small>AUR</small></sup>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../en/ZFS.html" title="ZFS">ZFS</a>
+</td>
+<td>
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/zfs-linux/">zfs-linux</a></span><sup><small>AUR</small></sup>
+</td>
+<td data-sort-value="1" style="background: #faa; color: inherit; vertical-align: middle; text-align: center;">No
+</td>
+<td>N/D (adaptación <a href="https://en.wikipedia.org/wiki/OpenZFS" class="extiw" title="wikipedia:OpenZFS">OpenZFS</a>)
+</td>
+<td>
+</td>
+</tr>
+</tbody>
+</table>
+<h3><span class="mw-headline" id="Journaling">Journaling</span></h3>
+<p>Todos los sistemas de archivos anteriores con la excepción de exFAT, ext2, FAT16/32, Reiser4 (opcional), Btrfs y ZFS, utilizan <a href="https://en.wikipedia.org/wiki/es:Journaling" class="extiw" title="wikipedia:es:Journaling">journaling</a>. Journaling proporciona tolerancia a fallos al registrar los cambios antes de que se confirmen en el sistema de archivos. En el caso de un fallo del sistema o de alimentación, estos sistemas de archivos son más rápidos para volver a estar en línea y es menos probable que se corrompan. El registro se realiza en un área dedicada del sistema de archivos.
+</p>
+<p>No todas las técnicas Journaling son iguales. Ext3 y ext4 ofrecen data-mode journaling, que registra datos y metadatos, así como posibilidad de registrar solo los cambios de metadatos. Data-mode journaling viene con una penalización de velocidad y no está activada de forma predeterminada. Del mismo modo, Reiser4 ofrece el llamado <a rel="nofollow" class="external text" href="https://reiser4.wiki.kernel.org/index.php/Reiser4_transaction_models">"modelos de transacción"</a> que no solo cambian las características que proporciona, sino también en su modo de registro en diario. Utiliza diferentes técnicas Journaling: un modelo especial llamado <a rel="nofollow" class="external text" href="https://reiser4.wiki.kernel.org/index.php/V4#Wandering_Logs">registros errantes</a> que elimina la necesidad de escribir en el disco dos veces, <b>escritura en cualquier lugar</b>: un enfoque puro de copia en escritura (en su mayoría equivalente al valor predeterminado de btrfs pero con un diseño en "árbol" fundamentalmente diferente) y un enfoque combinado llamado <b>híbrido</b> que alterna heurísticamente entre los dos anteriores.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Nota:</strong> Reiser4 proporciona un comportamiento journaling casi equivalente al predeterminado de ext4 (solo meta datos) con la utilización del complemento <b>node41</b> que también presenta meta datos y sumas de verificación en línea, opcionalmente combinado con el comportamiento de registros errantes que proporciona dependiendo del modelo de transacción elegido en el momento del montaje.</div>
+<p>Los otros sistemas de archivos proporcionan ordered-mode journaling, que solo registra metadatos. Si bien todo journaling devolverá un sistema de archivos a un estado válido después de una caída, data-mode journaling ofrece la mayor protección contra la corrupción y la pérdida de datos. Sin embargo, existe un compromiso en el rendimiento del sistema, ya que data-mode journaling realiza dos operaciones de escritura: primero en el journal y luego en el disco (que Reiser4 evita con su función de "registros errantes"). Al elegir el tipo de sistema de archivos, se debe considerar el equilibrio entre la velocidad del sistema y la seguridad de los datos. Reiser4 es el único sistema de archivos que, por diseño, funciona con una atomicidad completa y también proporciona sumas de verificación tanto para meta datos como para datos en línea (las operaciones ocurren por completo, o no lo hacen y no corrompen ni destruyen datos debido a operaciones que ocurren a medias) y el diseño es mucho menos propenso a la pérdida de datos con respecto a otros sistemas de archivos como <a href="../es/Btrfs.html" title="Btrfs (Español)">Btrfs</a>.
+</p>
+<p>Los sistemas de archivos basados ​​en copy-on-write (también conocido como escritura en cualquier lugar), como Reiser4, Btrfs y ZFS, no tienen necesidad de usar el journal tradicional para proteger los metadatos, porque nunca se actualizan en el lugar. Aunque Btrfs todavía tiene un árbol de registro similar a journal, solo se utiliza para acelerar fdatasync/fsync.
+</p>
+<h3>
+<span id="Sistemas_de_archivos_basados_.E2.80.8B.E2.80.8Ben_FUSE"></span><span class="mw-headline" id="Sistemas_de_archivos_basados_​​en_FUSE">Sistemas de archivos basados ​​en FUSE</span>
+</h3>
+<p>Véase <a href="../es/FUSE.html" title="FUSE (Español)">FUSE</a>.
+</p>
+<h3><span class="mw-headline" id="Sistemas_de_archivos_apilables">Sistemas de archivos apilables</span></h3>
+<ul><li>
+<b><a href="../en/ECryptfs.html" title="ECryptfs">eCryptfs</a></b> — El sistema de archivos de cifrado empresarial es un paquete de software de cifrado de disco para Linux. Se implementa como una capa de cifrado a nivel de sistema de archivos compatible con POSIX, con el objetivo de ofrecer una funcionalidad similar a la de GnuPG a nivel de sistema operativo.</li></ul>
+<dl><dd>
+<a rel="nofollow" class="external free" href="https://ecryptfs.org">https://ecryptfs.org</a> || <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=ecryptfs-utils">ecryptfs-utils</a></span>
+</dd></dl>
+<ul><li>
+<b>mergerfs</b> — Un sistema de archivos de unión basado en FUSE.</li></ul>
+<dl><dd>
+<a rel="nofollow" class="external free" href="https://github.com/trapexit/mergerfs">https://github.com/trapexit/mergerfs</a> || <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/mergerfs/">mergerfs</a></span><sup><small>AUR</small></sup>
+</dd></dl>
+<ul><li>
+<b>mhddfs</b> — Sistema de archivos FUSE Multi-HDD, un sistema de archivos de unión basado en FUSE.</li></ul>
+<dl><dd>
+<a rel="nofollow" class="external free" href="http://mhddfs.uvw.ru">http://mhddfs.uvw.ru</a> || <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/mhddfs/">mhddfs</a></span><sup><small>AUR</small></sup>
+</dd></dl>
+<ul><li>
+<b><a href="../en/Overlay_filesystem.html" class="mw-redirect" title="Overlayfs">overlayfs</a></b> — OverlayFS es un servicio de sistema de archivos para Linux que implementa un montaje de unión para otros sistemas de archivos.</li></ul>
+<dl><dd>
+<a rel="nofollow" class="external free" href="https://docs.kernel.org/filesystems/overlayfs.html">https://docs.kernel.org/filesystems/overlayfs.html</a> || <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=linux">linux</a></span>
+</dd></dl>
+<ul><li>
+<b>Unionfs</b> — Unionfs es un servicio de sistema de archivos para Linux, FreeBSD y NetBSD que implementa un montaje de unión para otros sistemas de archivos.</li></ul>
+<dl><dd>
+<a rel="nofollow" class="external free" href="https://unionfs.filesystems.org/">https://unionfs.filesystems.org/</a> || <small>not packaged? <a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/">search in AUR</a></small>
+</dd></dl>
+<ul><li>
+<b>unionfs-fuse</b> — Una implementación de Unionfs en el espacio de usuario.</li></ul>
+<dl><dd>
+<a rel="nofollow" class="external free" href="https://github.com/rpodgorny/unionfs-fuse">https://github.com/rpodgorny/unionfs-fuse</a> || <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/unionfs-fuse/">unionfs-fuse</a></span><sup><small>AUR</small></sup>
+</dd></dl>
+<h3><span class="mw-headline" id="Sistemas_de_archivos_de_solo_lectura">Sistemas de archivos de solo lectura</span></h3>
+<ul><li>
+<b><a href="https://en.wikipedia.org/wiki/EROFS" class="extiw" title="wikipedia:EROFS">EROFS</a></b> — El sistema de archivos de solo lectura mejorado es un sistema de archivos de solo lectura ligero, su objetivo es mejorar el rendimiento y comprimir la capacidad de almacenamiento.</li></ul>
+<dl><dd>
+<a rel="nofollow" class="external free" href="https://docs.kernel.org/filesystems/erofs.html">https://docs.kernel.org/filesystems/erofs.html</a> || <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=erofs-utils">erofs-utils</a></span>
+</dd></dl>
+<ul><li>
+<b><a href="https://en.wikipedia.org/wiki/es:SquashFS" class="extiw" title="wikipedia:es:SquashFS">SquashFS</a></b> — SquashFS es un sistema de archivos comprimido de solo lectura. SquashFS comprime archivos, inodos y directorios, y admite tamaños de bloque de hasta 1 MB para una mayor compresión.</li></ul>
+<dl><dd>
+<a rel="nofollow" class="external free" href="https://github.com/plougher/squashfs-tools">https://github.com/plougher/squashfs-tools</a> || <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=squashfs-tools">squashfs-tools</a></span>
+</dd></dl>
+<h3>
+<span id="Sistemas_de_archivos_agrupados_.28cluster.29"></span><span class="mw-headline" id="Sistemas_de_archivos_agrupados_(cluster)">Sistemas de archivos agrupados (cluster)</span>
+</h3>
+<ul><li>
+<b><a href="../en/Ceph.html" title="Ceph">Ceph</a></b> — Unificado, sistema de almacenamiento distribuido diseñado para un excelente rendimiento, fiabilidad y escalabilidad.</li></ul>
+<dl><dd>
+<a rel="nofollow" class="external free" href="https://ceph.com/">https://ceph.com/</a> || <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/ceph/">ceph</a></span><sup><small>AUR</small></sup>
+</dd></dl>
+<ul><li>
+<b><a href="../en/Glusterfs.html" title="Glusterfs">Glusterfs</a></b> — Sistema de archivos agrupado capaz de escalar a varios peta-bytes.</li></ul>
+<dl><dd>
+<a rel="nofollow" class="external free" href="https://www.gluster.org/">https://www.gluster.org/</a> || <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=glusterfs">glusterfs</a></span>
+</dd></dl>
+<ul><li>
+<b><a href="../en/InterPlanetary_File_System.html" class="mw-redirect" title="IPFS">IPFS</a></b> — Un protocolo de hipermedia de igual a igual <i>(peer-to-peer)</i> para que la web sea más rápida, segura y abierta. IPFS trata de reemplazar a HTTP y construir una mejor web para todos nosotros. Utiliza bloques para almacenar partes de un archivo, cada nodo de red almacena solo el contenido que le interesa, proporciona deduplicación, distribución, sistema escalable limitado solo por los usuarios. (actualmente en alfa)</li></ul>
+<dl><dd>
+<a rel="nofollow" class="external free" href="https://ipfs.io/">https://ipfs.io/</a> || <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=go-ipfs">go-ipfs</a></span><sup>[<a href="../en/Help:Procedures.html#Fix_broken_package_links" title="Help:Procedures">enlace roto</a>: replaced by <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=kubo">kubo</a></span>]</sup>
+</dd></dl>
+<ul><li>
+<b><a href="https://en.wikipedia.org/wiki/MooseFS" class="extiw" title="wikipedia:MooseFS">MooseFS</a></b> — MooseFS es un sistema de archivos distribuido en red de escalamiento horizontal tolerante a fallos, de alta disponibilidad y de alto rendimiento.</li></ul>
+<dl><dd>
+<a rel="nofollow" class="external free" href="https://moosefs.com">https://moosefs.com</a> || <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=moosefs">moosefs</a></span>
+</dd></dl>
+<ul><li>
+<b>OpenAFS</b> — Implementación de código abierto del sistema de archivos distribuido AFS.</li></ul>
+<dl><dd>
+<a rel="nofollow" class="external free" href="https://www.openafs.org">https://www.openafs.org</a> || <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/openafs/">openafs</a></span><sup><small>AUR</small></sup>
+</dd></dl>
+<ul><li>
+<b><a href="https://en.wikipedia.org/wiki/OrangeFS" class="extiw" title="wikipedia:OrangeFS">OrangeFS</a></b> — OrangeFS es un sistema de archivos de red de escalado horizontal diseñado para acceder de forma transparente al almacenamiento en disco multiservidor en paralelo. Ha optimizado el soporte de MPI-IO para aplicaciones paralelas y distribuidas. Simplifica el uso del almacenamiento paralelo no solo para clientes Linux, sino también para Windows, Hadoop y WebDAV. Compatible con POSIX. Parte del kernel de Linux desde la versión 4.6.</li></ul>
+<dl><dd>
+<a rel="nofollow" class="external free" href="https://www.orangefs.org/">https://www.orangefs.org/</a> || <small>not packaged? <a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/">search in AUR</a></small>
+</dd></dl>
+<ul><li>
+<b>Sheepdog</b> — El sistema de almacenamiento de objetos distribuidos para servicios de volumen y contenedor. Gestiona los discos y nodos de forma inteligente.</li></ul>
+<dl><dd>
+<a rel="nofollow" class="external free" href="https://sheepdog.github.io/sheepdog/">https://sheepdog.github.io/sheepdog/</a> || <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/sheepdog/">sheepdog</a></span><sup><small>AUR</small></sup>
+</dd></dl>
+<ul><li>
+<b><a href="https://en.wikipedia.org/wiki/Tahoe-LAFS" class="extiw" title="wikipedia:Tahoe-LAFS">Tahoe-LAFS</a></b> — Tahoe Least-Authority Filesystem es un sistema de archivos libre y abierto, seguro, descentralizado, tolerante a fallos y distribuido de igual a igual.</li></ul>
+<dl><dd>
+<a rel="nofollow" class="external free" href="https://tahoe-lafs.org/">https://tahoe-lafs.org/</a> || <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/tahoe-lafs/">tahoe-lafs</a></span><sup><small>AUR</small></sup><sup>[<a href="../en/Help:Procedures.html#Fix_broken_package_links" title="Help:Procedures">enlace roto</a>: package not found]</sup>
+</dd></dl>
+<h3><span class="mw-headline" id="Sistema_de_archivos_de_disco_compartido">Sistema de archivos de disco compartido</span></h3>
+<ul><li>
+<b><a href="https://en.wikipedia.org/wiki/GFS2" class="extiw" title="wikipedia:GFS2">GFS2</a></b> — GFS2 permite que todos los miembros de un clúster tengan acceso simultáneo directo al mismo almacenamiento de bloques compartido</li></ul>
+<dl><dd>
+<a rel="nofollow" class="external free" href="https://pagure.io/gfs2-utils">https://pagure.io/gfs2-utils</a> || <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/gfs2-utils/">gfs2-utils</a></span><sup><small>AUR</small></sup>
+</dd></dl>
+<ul><li>
+<b><a href="https://en.wikipedia.org/wiki/OCFS2" class="extiw" title="wikipedia:OCFS2">OCFS2</a></b> — Oracle Cluster File System (versión 2) es un sistema de archivos de disco compartido desarrollado por Oracle Corporation y publicado bajo la Licencia Pública General GNU</li></ul>
+<dl><dd>
+<a rel="nofollow" class="external free" href="https://oss.oracle.com/projects/ocfs2/">https://oss.oracle.com/projects/ocfs2/</a> || <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/ocfs2-tools/">ocfs2-tools</a></span><sup><small>AUR</small></sup>
+</dd></dl>
+<ul><li>
+<b><a href="https://en.wikipedia.org/wiki/VMware_VMFS" class="extiw" title="wikipedia:VMware VMFS">VMware VMFS</a></b> — VMFS (Virtual Machine File System) de VMware es utilizado por la suite de virtualización de servidores insignia de la compañía, vSphere.</li></ul>
+<dl><dd>
+<a rel="nofollow" class="external free" href="https://www.vmware.com/products/vi/esx/vmfs.html">https://www.vmware.com/products/vi/esx/vmfs.html</a><sup>[<a href="https://en.wikipedia.org/wiki/Wikipedia:Link_rot" class="extiw" title="wikipedia:Wikipedia:Link rot">enlace roto</a> 2024-07-30]</sup> || <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/vmfs-tools/">vmfs-tools</a></span><sup><small>AUR</small></sup>
+</dd></dl>
+<h2><span class="mw-headline" id="Identificar_los_sistemas_de_archivos_existentes">Identificar los sistemas de archivos existentes</span></h2>
+<p>Para identificar los sistemas de archivos existentes, puede utilizar <a href="../en/Device_file.html#lsblk" class="mw-redirect" title="Lsblk">lsblk</a>:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">$ lsblk -f</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">NAME   FSTYPE LABEL     UUID                                 MOUNTPOINT
+sdb
+└─sdb1 vfat   Transcend 4A3C-A9E9</pre>
+<p>Un sistema de archivos existente, si está presente, se mostrará en la columna <code>FSTYPE</code>. Si está <a href="../es/File_systems.html#Montar_un_sistema_de_archivos" class="mw-redirect" title="Mount (Español)">montado</a>, aparecerá en la columna <code>MOUNTPOINT</code>.
+</p>
+<h2><span class="mw-headline" id="Crear_un_sistema_de_archivos">Crear un sistema de archivos</span></h2>
+<p>Los sistemas de archivos generalmente se crean en una <a href="../en/Partitioning.html" class="mw-redirect" title="Partition (Español)">partición</a>, dentro de contenedores lógicos como <a href="../es/LVM.html" title="LVM (Español)">LVM</a>, <a href="../es/RAID.html" title="RAID (Español)">RAID</a> y <a href="../es/Dm-crypt.html" title="Dm-crypt (Español)">dm-crypt</a>, o en un archivo normal (véase <a href="https://en.wikipedia.org/wiki/es:Loop_device" class="extiw" title="wikipedia:es:Loop device">Wikipedia:es:Loop device</a>). Esta sección describe el caso de la partición.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Nota:</strong> Los sistemas de archivos se pueden escribir directamente en un disco, conocido como <i>superfloppy</i> o <a href="../en/Partitioning.html#Partitionless_disk" title="Partitioning">particless disk</a>. Ciertas limitaciones están involucradas con este método, particularmente si <a href="../en/Arch_boot_process.html" title="Arch boot process">arranca</a> desde tal unidad. Véase <a href="../es/Btrfs.html#Disco_Btrfs_sin_particiones" title="Btrfs (Español)">Btrfs (Español)#Disco Btrfs sin particiones</a> para un ejemplo.</div>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Advertencia:</strong> 
+<ul>
+<li>Después de crear un nuevo sistema de archivos, es improbable que se recuperen los datos almacenados previamente en esta partición. <b>Haga una copia de seguridad de los datos que desee conservar</b>.</li>
+<li>El propósito de una partición dada puede restringir la elección del sistema de archivos. Por ejemplo, una <a href="../es/EFI_system_partition.html" title="EFI system partition (Español)">partición del sistema EFI</a> debe contener un sistema de archivos <a href="../es/FAT.html" class="mw-redirect" title="FAT32 (Español)">FAT32</a>, y el sistema de archivos que contiene el directorio <code>/boot</code> debe estar soportado por el <a href="../es/Arch_boot_process.html#Gestor_de_arranque" class="mw-redirect" title="Boot loader (Español)">cargador de arranque</a>.</li>
+</ul>
+</div>
+<p>Antes de continuar, <a href="../es/Device_file.html#lsblk" class="mw-redirect" title="Lsblk (Español)">identifique el dispositivo</a> donde se creará el sistema de archivos y si está montado o no. Por ejemplo:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">$ lsblk -f</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">NAME   FSTYPE   LABEL       UUID                                 MOUNTPOINT
+sda
+├─sda1                      C4DA-2C4D
+├─sda2 ext4                 5b1564b2-2e2c-452c-bcfa-d1f572ae99f2 /mnt
+└─sda3                      56adc99b-a61e-46af-aab7-a6d07e504652
+</pre>
+<p>Los sistemas de archivos montados <b>deben</b> ser <a href="#Desmontar_un_sistema_de_archivos">desmontados</a> antes de continuar. En el ejemplo anterior, existe un sistema de archivos que está en <code>/dev/sda2</code> y se monta en <code>/mnt</code>. Se desmontaría con:
+</p>
+<pre># umount /dev/sda2
+</pre>
+<p>Para encontrar los sistemas de archivos que estén montados, véase <a href="#Listar_los_sistemas_de_archivos_montados">#Listar los sistemas de archivos montados</a>.
+</p>
+<p>Para crear un nuevo sistema de archivos, utilice <span class="plainlinks archwiki-template-man" title="$ man 8 mkfs"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/mkfs.8">mkfs(8)</a></span>. Véase <a href="#Tipos_de_sistemas_de_archivos">#Tipos de sistemas de archivos</a> para conocer el tipo exacto, así como las utilidades de espacio de usuario que desee instalar para un sistema de archivos en particular.
+</p>
+<p>Por ejemplo, para crear un nuevo sistema de archivos de tipo <a href="../es/Ext4.html" title="Ext4 (Español)">ext4</a> (común para particiones de datos de Linux) en <code>/dev/sda1</code>, ejecute:
+</p>
+<pre># mkfs.ext4 /dev/sda1
+</pre>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Sugerencia:</strong> 
+<ul>
+<li>Utilice la opción <code>-L</code> de <i>mkfs.ext4</i> para especificar una <a href="../es/Persistent_block_device_naming.html#by-label" title="Persistent block device naming (Español)">etiqueta de sistema de archivos</a>. <i>e2label</i> se puede utilizar para cambiar la etiqueta en un sistema de archivos existente.</li>
+<li>Los sistemas de archivos pueden ser <i>redimensionados</i> tras su creación, con ciertas limitaciones. Por ejemplo, el tamaño del sistema de archivos <a href="../en/XFS.html" title="XFS">XFS</a> se puede aumentar, pero no se puede reducir. Véase <a href="https://en.wikipedia.org/wiki/Comparison_of_file_systems#Resize_capabilities" class="extiw" title="wikipedia:Comparison of file systems">Capacidades de redimensionar</a> y la documentación del sistema de archivos correspondiente para obtener más información.</li>
+</ul>
+</div>
+<p>El nuevo sistema de archivos ahora se puede montar en el directorio de su elección.
+</p>
+<h2><span class="mw-headline" id="Montar_un_sistema_de_archivos">Montar un sistema de archivos</span></h2>
+<p>Para montar manualmente el sistema de archivos ubicado en un dispositivo (por ejemplo, una partición) en un directorio, utilice <span class="plainlinks archwiki-template-man" title="$ man 8 mount"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/mount.8">mount(8)</a></span>. Este ejemplo monta <code>/dev/sda1</code> en <code>/mnt</code>.
+</p>
+<pre># mount /dev/sda1 /mnt
+</pre>
+<p>Esto vincula el sistema de archivos en <code>/dev/sda1</code> en el directorio <code>/mnt</code>, haciendo visible el contenido del sistema de archivos. Todos los datos que existían en <code>/mnt</code> antes de esta acción se vuelven invisibles hasta que se desmonte el dispositivo.
+</p>
+<p><a href="../es/Fstab.html" title="Fstab (Español)">fstab</a> contiene información sobre cómo se deben montar automáticamente los dispositivos, si están presentes. Véase el artículo <a href="../es/Fstab.html" title="Fstab (Español)">fstab</a> para obtener más información sobre cómo modificar este comportamiento.
+</p>
+<p>Si se especifica un dispositivo en <code>/etc/fstab</code> y solo se proporciona el dispositivo o el punto de montaje en la línea de órdenes, esa información se utilizará en el montaje. Por ejemplo, si <code>/etc/fstab</code> contiene una línea que indica que <code>/dev/sda1</code> debe montarse en <code>/mnt</code>, entonces lo siguiente montará automáticamente el dispositivo en esa ubicación:
+</p>
+<pre># mount /dev/sda1
+</pre>
+<p>o
+</p>
+<pre># mount /mnt
+</pre>
+<p><i>mount</i> contiene varias opciones, muchas de las cuales dependen del sistema de archivos especificado.
+Las opciones se pueden cambiar, ya sea:
+</p>
+<ul>
+<li>utilizando opciones en la línea de órdenes con <i>mount</i>
+</li>
+<li>editando <a href="../es/Fstab.html" title="Fstab (Español)">fstab</a>
+</li>
+<li>creando reglas <a href="../en/Udev.html" class="mw-redirect" title="Udev (Español)">udev</a>
+</li>
+<li><a href="../es/Arch_Build_System.html" title="Arch Build System (Español)">compilando el kernel usted mismo</a></li>
+<li>o utilizando scripts de montaje específicos del sistema de archivos (situados en <code>/usr/bin/mount.*</code>).</li>
+</ul>
+<p>Véase estos artículos relacionados y el artículo del sistema de archivos de interés para obtener más información.
+</p>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Sugerencia:</strong> Los sistemas de archivos también se pueden montar con <i>systemd-mount</i> en lugar de <i>mount</i>. Si no se especifica el punto de montaje, el sistema de archivos se montará en <code>/run/media/system/<i>identificador_del_dispositivo</i>/</code>. Esto permite montar fácilmente un sistema de archivos sin tener que decidir dónde montarlo. Véase <span class="plainlinks archwiki-template-man" title="$ man 1 systemd-mount"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd-mount.1">systemd-mount(1)</a></span> para su uso y más detalles.</div>
+<h3><span class="mw-headline" id="Listar_los_sistemas_de_archivos_montados">Listar los sistemas de archivos montados</span></h3>
+<p>Para listar todos los sistemas de archivos montados utilice <span class="plainlinks archwiki-template-man" title="$ man 8 findmnt"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/findmnt.8">findmnt(8)</a></span>:
+</p>
+<pre>$ findmnt
+</pre>
+<p><i>findmnt</i> toma una variedad de argumentos que pueden filtrar la salida y mostrar información adicional. Por ejemplo, puede tomar un dispositivo o punto de montaje como argumento para mostrar solo información sobre lo que se especifica:
+</p>
+<pre>$ findmnt /dev/sda1
+</pre>
+<p><i>findmnt</i> reúne información de <code>/etc/fstab</code>, <code>/etc/mtab</code>, y <code>/proc/self/mounts</code>.
+</p>
+<h3><span class="mw-headline" id="Desmontar_un_sistema_de_archivos">Desmontar un sistema de archivos</span></h3>
+<p>Para desmontar un sistema de archivos utilice <span class="plainlinks archwiki-template-man" title="$ man 8 umount"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/umount.8">umount(8)</a></span>. Se puede especificar el dispositivo que contiene el sistema de archivos (por ejemplo, <code>/dev/sda1</code>) o el punto de montaje (por ejemplo, <code>/mnt</code>):
+</p>
+<pre># umount /dev/sda1
+</pre>
+<p>o
+</p>
+<pre># umount /mnt
+</pre>
+<h2>
+<span id="V.C3.A9ase_tambi.C3.A9n"></span><span class="mw-headline" id="Véase_también">Véase también</span>
+</h2>
+<ul>
+<li><span class="plainlinks archwiki-template-man" title="$ man 5 filesystems"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/filesystems.5">filesystems(5)</a></span></li>
+<li><span class="plainlinks archwiki-template-man" title="$ man 1 systemd-mount"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd-mount.1">systemd-mount(1)</a></span></li>
+<li><a rel="nofollow" class="external text" href="https://docs.kernel.org/filesystems/">Documentación de sistemas de archivos soportados por Linux</a></li>
+<li><a href="https://en.wikipedia.org/wiki/es:Sistema_de_archivos" class="extiw" title="wikipedia:es:Sistema de archivos">Wikipedia:es:Sistema de archivos</a></li>
+<li><a href="https://en.wikipedia.org/wiki/es:Mount" class="extiw" title="wikipedia:es:Mount">Wikipedia:es:Mount</a></li>
+</ul>
+</div>
+</div>
+					<div id="catlinks" class="catlinks" data-mw="interface">
+<div id="mw-normal-catlinks" class="mw-normal-catlinks">
+<a href="../Special:Categories.html" title="Special:Categories">Categories</a>: <ul>
+<li><a href="../es/Category:File_systems.html" title="Category:File systems (Español)">File systems (Español)</a></li>
+<li><a href="../es/Category:Lists.html" title="Category:Lists (Español)">Lists (Español)</a></li>
+</ul>
+</div>
+<div id="mw-hidden-catlinks" class="mw-hidden-catlinks mw-hidden-cats-hidden">Hidden categories: <ul>
+<li><a href="../en/Category:Pages_with_dead_links.html" title="Category:Pages with dead links">Pages with dead links</a></li>
+<li><a href="../en/Category:Pages_with_broken_package_links.html" title="Category:Pages with broken package links">Pages with broken package links</a></li>
+<li><a href="../en/Category:Pages_with_missing_package_links.html" title="Category:Pages with missing package links">Pages with missing package links</a></li>
+</ul>
+</div>
+</div>
+				</div>
+			</main>
+			
+		</div>
+		<div class="mw-footer-container">
+			
+<footer id="footer" class="mw-footer" style="margin: 0">
+	<ul id="footer-info">
+	<li data-nosnippet="">Retrieved from "<a dir="ltr" href="https://wiki.archlinux.org/index.php?title=File_systems_(Espa%C3%B1ol)&amp;oldid=828986">https://wiki.archlinux.org/index.php?title=File_systems_(Español)&amp;oldid=828986</a>"</li>
+<li id="footer-info-lastmod"> This page was last edited on 15 March 2025, at 15:23.</li>
+	<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+<br>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="https://terms.archlinux.org/docs/privacy-policy/">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="../en/ArchWiki:About.html">About ArchWiki</a></li>
+	<li id="footer-places-disclaimers"><a href="../en/ArchWiki:General_disclaimer.html">Disclaimers</a></li>
+	<li id="footer-places-archwiki-code-of-conduct"><a href="https://terms.archlinux.org/docs/code-of-conduct/" class="extiw" title="archlinux-service-agreements:code-of-conduct">Code of conduct</a></li>
+	<li id="footer-places-archwiki-terms-of-service"><a href="https://terms.archlinux.org/docs/terms-of-service/" class="extiw" title="archlinux-service-agreements:terms-of-service">Terms of service</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-copyrightico"><a href="https://www.gnu.org/copyleft/fdl.html" class="cdx-button cdx-button--fake-button cdx-button--size-large cdx-button--fake-button--enabled"><img src="/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" loading="lazy"></a></li>
+	<li id="footer-poweredbyico"><img src="/resources/assets/poweredby_mediawiki.svg" width="88" height="31" loading="lazy"></li>
+</ul>
+
+</footer>
+
+		</div>
+	</div> 
+</div> 
+<div class="vector-settings" id="p-dock-bottom">
+	<ul></ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<h1>iptables</h1>
+
+<blockquote><p>Configureer tabellen, ketens en regels van de Linux kernel IPv4 firewall.
+Gebruik <code>ip6tables</code> om regels in te stellen voor IPv6 verkeer. Bekijk ook: <code>iptables-save</code>, <code>iptables-restore</code>.
+Meer informatie: <a href="https://manned.org/iptables">https://manned.org/iptables</a>.</p></blockquote>
+
+<ul>
+<li>Bekijk ketens, regels, pakket/byte tellers en regelnummers voor de filter tabel:</li>
+</ul>
+
+
+<p><code>sudo iptables {{[-vnL --line-numbers|--verbose --numeric --list --line-numbers]}}</code></p>
+
+<ul>
+<li>Zet keten [P]olicy regel:</li>
+</ul>
+
+
+<p><code>sudo iptables {{[-P|--policy]}} {{keten}} {{regel}}</code></p>
+
+<ul>
+<li>Voeg regel toe aan keten policy voor IP:</li>
+</ul>
+
+
+<p><code>sudo iptables {{[-A|--append]}} {{keten}} {{[-s|--source]}} {{ip}} {{[-j|--jump]}} {{regel}}</code></p>
+
+<ul>
+<li>Voeg regel toe aan keten policy voor IP met [p]rotocol en poort in overweging:</li>
+</ul>
+
+
+<p><code>sudo iptables {{[-A|--append]}} {{keten}} {{[-s|--source]}} {{ip}} {{[-p|--protocol]}} {{tcp|udp|icmp|...}} --dport {{poort}} {{[-j|--jump]}} {{regel}}</code></p>
+
+<ul>
+<li>Voeg een NAT regel toe om al het verkeer van <code>192.168.0.0/24</code> subnet te vertalen naar de host&rsquo;s publieke IP:</li>
+</ul>
+
+
+<p><code>sudo iptables {{[-t|--table]}} {{nat}} {{[-A|--append]}} {{POSTROUTING}} {{[-s|--source]}} {{192.168.0.0/24}} {{[-j|--jump]}} {{MASQUERADE}}</code></p>
+
+<ul>
+<li>Verwij[D]er keten regel:</li>
+</ul>
+
+
+<p><code>sudo iptables {{[-D|--delete]}} {{keten}} {{regelnummer}}</code></p>

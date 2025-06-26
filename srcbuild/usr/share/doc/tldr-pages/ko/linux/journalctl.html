@@ -1,0 +1,60 @@
+<h1>journalctl</h1>
+
+<blockquote><p>systemd 저널을 조회합니다.
+더 많은 정보: <a href="https://manned.org/journalctl">https://manned.org/journalctl</a>.</p></blockquote>
+
+<ul>
+<li>현재 부트에서 우선순위 레벨 3(오류)로 모든 메시지 표시:</li>
+</ul>
+
+
+<p><code>journalctl {{[-b|--boot]}} {{[-p|--priority]}} 3</code></p>
+
+<ul>
+<li>2일 이상된 저널 로그 삭제:</li>
+</ul>
+
+
+<p><code>journalctl --vacuum-time 2d</code></p>
+
+<ul>
+<li>마지막 N줄만 표시하고 새 메시지를 팔로우(전통적인 syslog의 <code>tail -f</code>처럼) 표시:</li>
+</ul>
+
+
+<p><code>journalctl {{[-n|--lines]}} {{N}} {{[-f|--follow]}}</code></p>
+
+<ul>
+<li>특정 유닛의 모든 메시지 표시:</li>
+</ul>
+
+
+<p><code>journalctl {{[-u|--unit]}} {{유닛}}</code></p>
+
+<ul>
+<li>마지막으로 시작된 이후 유닛의 로그 표시:</li>
+</ul>
+
+
+<p><code>journalctl _SYSTEMD_INVOCATION_ID=$(systemctl show --value --property=InvocationID {{유닛}})</code></p>
+
+<ul>
+<li>시간 범위 내의 메시지 필터링(타임스탬프 또는 &ldquo;yesterday&rdquo; 같은 플레이스홀더 사용 가능):</li>
+</ul>
+
+
+<p><code>journalctl {{[-S|--since]}} {{now|today|yesterday|tomorrow}} {{[-U|--until]}} "{{YYYY-MM-DD HH:MM:SS}}"</code></p>
+
+<ul>
+<li>특정 프로세스의 모든 메시지 표시:</li>
+</ul>
+
+
+<p><code>journalctl _PID={{pid}}</code></p>
+
+<ul>
+<li>특정 실행 파일의 모든 메시지 표시:</li>
+</ul>
+
+
+<p><code>journalctl {{경로/대상/실행_파일}}</code></p>

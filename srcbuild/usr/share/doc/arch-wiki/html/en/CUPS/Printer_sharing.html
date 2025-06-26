@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-sticky-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-0 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-disabled skin-theme-clientpref-day vector-toc-available" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>CUPS/Printer sharing - ArchWiki</title>
+<link rel="stylesheet" href="../../ArchWikiOffline.css">
+<meta name="ResourceLoaderDynamicStyles" content="">
+<meta name="generator" content="MediaWiki 1.43.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="max-image-preview:standard">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.25, maximum-scale=5.0">
+<link rel="search" type="application/opensearchdescription+xml" href="/rest.php/v1/search" title="ArchWiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.archlinux.org/api.php?action=rsd">
+<link rel="license" href="https://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="ArchWiki Atom feed" href="/index.php?title=Special:RecentChanges&amp;feed=atom">
+</head>
+<body class="skin--responsive skin-vector skin-vector-search-vue mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-CUPS_Printer_sharing rootpage-CUPS skin-vector-2022 action-view">
+<a class="mw-jump-link" href="#bodyContent">Jump to content</a>
+<div class="vector-header-container">
+	</div>
+<div class="mw-page-container">
+	<div class="mw-page-container-inner">
+		<div class="vector-column-start">
+			<div class="vector-main-menu-container">
+		</div>
+	<div class="vector-sticky-pinned-container">
+				<nav id="mw-panel-toc" aria-label="Contents" data-event-name="ui.sidebar-toc" class="mw-table-of-contents-container vector-toc-landmark">
+					<div id="vector-toc-pinned-container" class="vector-pinned-container">
+					<div id="vector-toc" class="vector-toc vector-pinnable-element">
+	<div class="vector-pinnable-header vector-toc-pinnable-header vector-pinnable-header-pinned" data-feature-name="toc-pinned" data-pinnable-element-id="vector-toc">
+	<h2 class="vector-pinnable-header-label">Contents</h2>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-toc.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-toc.unpin">hide</button>
+</div>
+
+
+	<ul class="vector-toc-contents" id="mw-panel-toc-list">
+		<li id="toc-mw-content-text" class="vector-toc-list-item vector-toc-level-1">
+			<a href="#" class="vector-toc-link">
+				<div class="vector-toc-text">Beginning</div>
+			</a>
+		</li>
+		<li id="toc-Creating_class_for_multiple_printers" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Creating_class_for_multiple_printers">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">1</span>
+				<span>Creating class for multiple printers</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Creating_class_for_multiple_printers-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Printer_sharing" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Printer_sharing">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">2</span>
+				<span>Printer sharing</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Printer_sharing-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Printer sharing subsection</span>
+			</button>
+		
+		<ul id="toc-Printer_sharing-sublist" class="vector-toc-list">
+			<li id="toc-DNS-SD_advertisement" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#DNS-SD_advertisement">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1</span>
+					<span>DNS-SD advertisement</span>
+				</div>
+			</a>
+			
+			<ul id="toc-DNS-SD_advertisement-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Sharing_via_Internet_Printing_Protocol" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Sharing_via_Internet_Printing_Protocol">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2</span>
+					<span>Sharing via Internet Printing Protocol</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Sharing_via_Internet_Printing_Protocol-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Sharing_via_Samba" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Sharing_via_Samba">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.3</span>
+					<span>Sharing via Samba</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Sharing_via_Samba-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Sharing_via_Line_Printer_Daemon_protocol" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Sharing_via_Line_Printer_Daemon_protocol">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.4</span>
+					<span>Sharing via Line Printer Daemon protocol</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Sharing_via_Line_Printer_Daemon_protocol-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Remote_administration" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Remote_administration">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">3</span>
+				<span>Remote administration</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Remote_administration-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Remote administration subsection</span>
+			</button>
+		
+		<ul id="toc-Remote_administration-sublist" class="vector-toc-list">
+			<li id="toc-Kerberos" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Kerberos">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1</span>
+					<span>Kerberos</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Kerberos-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Troubleshooting" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Troubleshooting">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">4</span>
+				<span>Troubleshooting</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Troubleshooting-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Troubleshooting subsection</span>
+			</button>
+		
+		<ul id="toc-Troubleshooting-sublist" class="vector-toc-list">
+			<li id="toc-Cannot_print_with_GTK_applications" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Cannot_print_with_GTK_applications">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.1</span>
+					<span>Cannot print with GTK applications</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Cannot_print_with_GTK_applications-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Permission_errors_on_Windows" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Permission_errors_on_Windows">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.2</span>
+					<span>Permission errors on Windows</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Permission_errors_on_Windows-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Local_Printing_is_fine,_but_no_printing_via_Network" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Local_Printing_is_fine,_but_no_printing_via_Network">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.3</span>
+					<span>Local Printing is fine, but no printing via Network</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Local_Printing_is_fine,_but_no_printing_via_Network-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Other_operating_systems" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Other_operating_systems">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">5</span>
+				<span>Other operating systems</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Other_operating_systems-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+</ul>
+</div>
+
+					</div>
+		</nav>
+			</div>
+		</div>
+		<div class="mw-content-container">
+			<main id="content" class="mw-body" style="margin: 0">
+				<header class="mw-body-header vector-page-titlebar">
+					<nav aria-label="Contents" class="vector-toc-landmark">
+						
+<div id="vector-page-titlebar-toc" class="vector-dropdown vector-page-titlebar-toc vector-button-flush-left">
+	<input type="checkbox" id="vector-page-titlebar-toc-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-page-titlebar-toc" class="vector-dropdown-checkbox " aria-label="Toggle the table of contents">
+	<label id="vector-page-titlebar-toc-label" for="vector-page-titlebar-toc-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"><span class="vector-icon mw-ui-icon-listBullet mw-ui-icon-wikimedia-listBullet"></span>
+
+<span class="vector-dropdown-label-text">Toggle the table of contents</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+							<div id="vector-page-titlebar-toc-unpinned-container" class="vector-unpinned-container">
+			</div>
+		
+	</div>
+</div>
+
+					</nav>
+					<h1 id="firstHeading" class="firstHeading mw-first-heading"><span class="mw-page-title-main">CUPS/Printer sharing</span></h1>
+							
+<div id="p-lang-btn" class="vector-dropdown mw-portlet mw-portlet-lang">
+	<input type="checkbox" id="p-lang-btn-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-p-lang-btn" class="vector-dropdown-checkbox mw-interlanguage-selector" aria-label="Go to an article in another language. Available in 2 languages">
+	<label id="p-lang-btn-label" for="p-lang-btn-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--action-progressive mw-portlet-lang-heading-2" aria-hidden="true"><span class="vector-icon mw-ui-icon-language-progressive mw-ui-icon-wikimedia-language-progressive"></span>
+
+<span class="vector-dropdown-label-text">2 languages</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+		<div class="vector-menu-content">
+			
+			<ul class="vector-menu-content-list">
+				
+				<li class="interlanguage-link interwiki-ja mw-list-item"><a href="https://wiki.archlinux.jp/index.php/CUPS/%E3%83%97%E3%83%AA%E3%83%B3%E3%82%BF%E3%83%BC%E5%85%B1%E6%9C%89" title="CUPS/プリンター共有 – 日本語" lang="ja" hreflang="ja" data-title="CUPS/プリンター共有" data-language-autonym="日本語" data-language-local-name="日本語" class="interlanguage-link-target"><span>日本語</span></a></li>
+<li class="interlanguage-link interwiki-ru mw-list-item"><a href="../../ru/CUPS/Printer_sharing.html" title="CUPS (Русский)/Printer sharing – русский" lang="ru" hreflang="ru" data-title="CUPS (Русский)/Printer sharing" data-language-autonym="Русский" data-language-local-name="русский" class="interlanguage-link-target"><span>Русский</span></a></li>
+			</ul>
+			
+		</div>
+
+	</div>
+</div>
+</header>
+				<div class="vector-column-end">
+					<div class="vector-sticky-pinned-container">
+						<nav class="vector-page-tools-landmark" aria-label="Page tools">
+							<div id="vector-page-tools-pinned-container" class="vector-pinned-container">
+				
+							</div>
+		</nav>
+						<nav class="vector-appearance-landmark" aria-label="Appearance">
+							<div id="vector-appearance-pinned-container" class="vector-pinned-container">
+				<div id="vector-appearance" class="vector-appearance vector-pinnable-element">
+	<div class="vector-pinnable-header vector-appearance-pinnable-header vector-pinnable-header-pinned" data-feature-name="appearance-pinned" data-pinnable-element-id="vector-appearance" data-pinned-container-id="vector-appearance-pinned-container" data-unpinned-container-id="vector-appearance-unpinned-container">
+	<div class="vector-pinnable-header-label">Appearance</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-appearance.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-appearance.unpin">hide</button>
+</div>
+
+
+</div>
+
+							</div>
+		</nav>
+					</div>
+				</div>
+				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container>
+					<div class="vector-body-before-content">
+							<div class="mw-indicators">
+		</div>
+
+						<div id="siteSub" class="noprint">From ArchWiki</div>
+					</div>
+					<div id="contentSub"><div id="mw-content-subtitle"><div class="subpages">&lt; <bdi dir="ltr"><a href="../../en/CUPS.html" title="CUPS">CUPS</a></bdi>
+</div></div></div>
+					
+					
+					<div id="mw-content-text" class="mw-body-content">
+<div class="mw-content-ltr mw-parser-output" lang="en" dir="ltr">
+<div class="archwiki-template-meta-related-articles">
+<p>Related articles</p>
+<ul>
+<li><a href="../../en/Samba.html" title="Samba">Samba</a></li>
+<li><a href="../../en/CUPS.html" title="CUPS">CUPS</a></li>
+</ul>
+</div>
+<p>This article contains instruction on sharing printers from a GNU/Linux system.
+</p>
+<table class="wikitable sortable">
+<caption>Client support
+</caption>
+<tbody>
+<tr>
+<th>Protocol
+</th>
+<th>Linux
+</th>
+<th>Windows
+</th>
+<th>macOS
+</th>
+</tr>
+<tr>
+<th>
+<a href="https://en.wikipedia.org/wiki/Zero-configuration_networking#DNS-based_service_discovery" class="extiw" title="wikipedia:Zero-configuration networking">Discovery (DNS-SD/mDNS)</a>
+</th>
+<td>
+<a href="../../en/CUPS.html" title="CUPS">CUPS</a> with <a href="../../en/Avahi.html" title="Avahi">Avahi</a>
+</td>
+<td>Native support since <a rel="nofollow" class="external text" href="https://www.ctrl.blog/entry/windows-mdns-dnssd.html">Windows 10</a>
+</td>
+<td>Bonjour
+</td>
+</tr>
+<tr>
+<th>
+<a href="https://en.wikipedia.org/wiki/Internet_Printing_Protocol" class="extiw" title="wikipedia:Internet Printing Protocol">Internet Printing Protocol</a>
+</th>
+<td>
+<a href="../../en/CUPS.html" title="CUPS">CUPS</a>
+</td>
+<td>
+<i>Control Panel &gt; Programs &gt; Turn Windows features on or off &gt; Print and Document Services &gt; Internet Printing Client</i>
+</td>
+<td>Native support
+</td>
+</tr>
+<tr>
+<th>
+<a href="https://en.wikipedia.org/wiki/Server_Message_Block" class="extiw" title="wikipedia:Server Message Block">SMB</a> shared printer
+</th>
+<td>
+<a href="../../en/Samba.html" title="Samba">Samba</a> with <a href="../../en/CUPS.html" title="CUPS">CUPS</a>
+</td>
+<td>Native support
+</td>
+<td>Native support
+</td>
+</tr>
+<tr>
+<th>
+<a href="https://en.wikipedia.org/wiki/Line_Printer_Daemon_protocol" class="extiw" title="wikipedia:Line Printer Daemon protocol">Line Printer Daemon protocol</a>
+</th>
+<td>
+<a href="../../en/CUPS.html" title="CUPS">CUPS</a>
+</td>
+<td>
+<i>Control Panel &gt; Programs &gt; Turn Windows features on or off &gt; Print services &gt;</i><br><i>LPD Print Service</i> and <i>LPR Port Monitor</i>
+</td>
+<td>Native support
+</td>
+</tr>
+</tbody>
+</table>
+<meta property="mw:PageProp/toc">
+<h2><span class="mw-headline" id="Creating_class_for_multiple_printers">Creating class for multiple printers</span></h2>
+<p>In CUPS, a class is a group of printers which appears to clients as a single printer. When a client selects to print to the class, CUPS selects any printer in the group to accept the print job. This may be especially useful when one printer from the class must be removed. If it is excluded from the class, end users will not notice any change because the print job will be queued to another printer in the class. Creating and managing classes can be done from CUPS Web GUI.
+</p>
+<h2><span class="mw-headline" id="Printer_sharing">Printer sharing</span></h2>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../../File:Tango-view-fullscreen.svg" decoding="async" width="48" height="48" class="mw-file-element"></span></span><b>This article or section needs expansion.</b></p>
+<div>
+<b>Reason:</b> List ports which need to be opened in the firewall.<a rel="nofollow" class="external autonumber" href="https://www.cups.org/doc/firewalls.html">[1]</a> (Discuss in <a rel="nofollow" class="external text" href="../../en/Talk:CUPS/Printer_sharing.html">Talk:CUPS/Printer sharing</a>)</div>
+</div>
+<h3><span class="mw-headline" id="DNS-SD_advertisement">DNS-SD advertisement</span></h3>
+<p>To announce the printer to the network over DNS-SD/mDNS (Bonjour in Apple world), <a href="../../en/Avahi.html" title="Avahi">Avahi</a> must be installed and running on the server.
+</p>
+<p>To enable it, either select <i>Share printers connected to this system</i> in the web interface, or manually set <code>Browsing Yes</code> in <code>/etc/cups/cupsd.conf</code>:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/cups/cupsd.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">...
+Browsing Yes
+...
+</pre>
+<p>Afterwards <a href="../../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Restart">restart</a> <code>cups.service</code>.
+</p>
+<p>Note that "browsing" at the print server is a different thing from "browsing" at a remote networked host.  On the print server, <code>cupsd</code> provides the DNS-SD protocol support which the <code>avahi-daemon</code> broadcasts.  The <code>cups-browsed</code> service is unnecessary on the print server, unless also broadcasting the old CUPS protocol, or the print server is also "browsing" for other networked printers.  On the remote networked host, the <code>cups-browsed</code> service is <i>required</i> to "browse" for network broadcasts of print services, and running <code>cups-browsed</code> will also automatically start <code>cupsd</code>.
+</p>
+<p>The <code>cups.service</code> service will be automatically started when a USB printer is plugged in, however this may not be the case for other connection types. If <code>cups.service</code> is not running, <code>avahi-daemon</code> does not broadcast the print services, so in that case the systemd unit service file must be modified to start on boot, and then the service must again be "enabled/installed" with the new dependency. To do this, <a href="../../en/Systemd.html#Editing_provided_units" class="mw-redirect" title="Edit">edit</a> the service file <code>[Install]</code> section to add a <code>WantedBy=default.target</code> dependency, and then <a href="../../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Enable">enable</a> and <a href="../../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Start">start</a> the <code>cups.service</code> service.
+</p>
+<h3><span class="mw-headline" id="Sharing_via_Internet_Printing_Protocol">Sharing via Internet Printing Protocol</span></h3>
+<p>The server can be configured using either the web interface or by manually editing <code>/etc/cups/cupsd.conf</code>.
+</p>
+<p>Open up the web interface to the server, select the <i>Administration</i> tab, look under the <i>Server</i> heading, and enable the "Share printers connected to this system" option. Save your change by clicking on the <i>Change Settings</i> button. The server will automatically restart.
+</p>
+<p>On the server computer (the one directly connected to the printer), allow access to the server by modifying the location directive. For instance:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/cups/cupsd.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">&lt;Location /&gt;
+    Order allow,deny
+    Allow localhost
+    Allow 192.168.0.*
+&lt;/Location&gt;
+...
+</pre>
+<p>Also make sure the server is listening on the IP address the client will use:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/cups/cupsd.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">...
+Listen &lt;hostname&gt;:631
+...
+</pre>
+<p>There are more configuration possibilities, including automatic methods, which are described in detail in <a rel="nofollow" class="external text" href="https://www.cups.org/doc/network.html">Using Network Printers</a> and <span class="plainlinks archwiki-template-man" title="$ man 5 cupsd.conf"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/cupsd.conf.5">cupsd.conf(5)</a></span>.
+</p>
+<p>After making any modifications, <a href="../../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Restart">restart</a> <code>cups.service</code>.
+</p>
+<p>If CUPS is started using socket activation, create a <a href="../../en/Systemd.html#Drop-in_files" class="mw-redirect" title="Drop-in snippet">drop-in snippet</a> for <code>cups.socket</code> so that socket activation also works for remote connections:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/system/cups.socket.d/override.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Socket]
+ListenStream=631</pre>
+<h3><span class="mw-headline" id="Sharing_via_Samba">Sharing via Samba</span></h3>
+<p><a href="../../en/Samba.html" title="Samba">Samba</a> is an implementation of the Windows file and printer sharing protocols, even the most vintage ones.
+</p>
+<p>To configure Samba on the Linux server, edit <code>/etc/samba/smb.conf</code> file to allow access to printers. File <code>smb.conf</code> can look something like this:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/samba/smb.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[global]
+...
+printing = CUPS
+...
+
+[printers]
+    comment = All Printers
+    path = /var/spool/samba
+    browseable = yes
+    # to allow user 'guest account' to print.
+    guest ok = no
+    writable = no
+    printable = yes
+    create mode = 0700
+    write list = root @adm @wheel <i>yourusername</i></pre>
+<p>That should be enough to share the printer, yet adding an individual printer entry may be desirable:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/samba/smb.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[ML1250]
+    comment = Samsung ML-1250 Laser Printer
+    printer = ml1250
+    path = /var/spool/samba
+    printing = cups
+    printable = yes
+    user client driver = yes
+    # to allow user 'guest account' to print.
+    guest ok = no
+    writable = no
+    write list = root @adm @wheel <i>yourusername</i>
+    valid users = root @adm @wheel <i>yourusername</i></pre>
+<p>Please note that this assumes configuration was made so that users must have a valid account to access the printer. To have a public printer, set <code>guest ok</code> to <code>yes</code>, and remove the <code>valid users</code> line. To add accounts, set up a regular GNU/Linux account and then set up a Samba password on the server. See <a href="../../en/Samba.html#User_management" title="Samba">Samba#User management</a>.
+</p>
+<p>After this, <a href="../../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Restart">restart</a> <code>smb.service</code> and <code>nmb.service</code>.
+</p>
+<p>See Samba's documentation <a rel="nofollow" class="external text" href="https://wiki.samba.org/index.php/Setting_up_Samba_as_a_Print_Server">Setting up Samba as a Print Server</a> for more details.
+</p>
+<h3><span class="mw-headline" id="Sharing_via_Line_Printer_Daemon_protocol">Sharing via Line Printer Daemon protocol</span></h3>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Warning:</strong> <i>cups-lpd</i> does not perform any access control based on the settings in <code>/etc/cups/cupsd.conf</code>. Therefore, running <i>cups-lpd</i> on your server will allow any computer on your network (and perhaps the entire Internet) to print to your server.</div>
+<p><a href="../../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Enable">Enable</a> and <a href="../../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Start">start</a> <code>cups-lpd.socket</code>.
+</p>
+<h2><span class="mw-headline" id="Remote_administration">Remote administration</span></h2>
+<p>Once the server is set up as described in <a href="#Printer_sharing">#Printer sharing</a>, it can also be configured so that it can be remotely administered. Add the allowed hosts to the <code>&lt;Location /admin&gt;</code> block in <code>/etc/cups/cupsd.conf</code>, using the same syntax as described in <a href="#Sharing_via_Internet_Printing_Protocol">#Sharing via Internet Printing Protocol</a>. Note that three levels of access can be granted:
+</p>
+<pre>&lt;Location /&gt;           #access to the server
+&lt;Location /admin&gt;	#access to the admin pages
+&lt;Location /admin/conf&gt;	#access to configuration files
+</pre>
+<p>To give remote hosts access to one of these levels, add an <code>Allow</code> statement to that level's section. An <code>Allow</code> statement can take one or more of the forms listed below:
+</p>
+<pre>Allow from all
+Allow from host.domain.com
+Allow from *.domain.com
+Allow from ip-address
+Allow from ip-address/netmask
+Allow from @LOCAL
+</pre>
+<p>Deny statements can also be used. For example, to give full access to all hosts on your local network interfaces, edit <code>/etc/cups/cupsd.conf</code> to include this:
+</p>
+<pre># Restrict access to the server...
+# By default only localhost connections are possible
+&lt;Location /&gt;
+   Order allow,deny
+   <b>Allow from @LOCAL</b>
+&lt;/Location&gt;
+
+# Restrict access to the admin pages...
+&lt;Location /admin&gt;
+   Order allow,deny
+   <b>Allow from @LOCAL</b>
+&lt;/Location&gt;
+
+# Restrict access to configuration files...
+&lt;Location /admin/conf&gt;
+   AuthType Basic
+   Require user @SYSTEM
+   Order allow,deny
+   <b>Allow from @LOCAL</b>
+&lt;/Location&gt;
+</pre>
+<p>You might also need to disable the HTTPS requirement, when using the default self-signed certificate generated by CUPS:
+</p>
+<pre>DefaultEncryption IfRequested
+</pre>
+<p>This should avoid the error: 426 - Upgrade Required when using the CUPS web interface from a remote machine.
+</p>
+<h3><span class="mw-headline" id="Kerberos">Kerberos</span></h3>
+<p><a href="../../en/Kerberos.html" title="Kerberos">Kerberos</a> can be used to authenticate users accessing a remote CUPS server. This assumes that your machine has a keytab and it will need a ticket for "HTTP". Instead of using <code>http://localhost:631</code> you must use <code>https://host.example.co.uk:631</code> - encryption is required for auth (hence https) and the full hostname is needed so that Kerberos/Negotiate can work. In addition, the server must be configured in <code>/etc/cups/cupsd.conf</code> to use a <code>DefaultAuthType</code> of <code>Negotiate</code>.
+</p>
+<p>If you are using <a href="../../en/Samba.html" title="Samba">Samba</a>'s winbind NSS support, you can add an AD group name to <code>/etc/cups/cups-files.conf</code> - in the following example <code>sysadmin</code> might be an AD group: 
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/cups/cups-files.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">SystemGroup sys root sysadmin
+</pre>
+<h2><span class="mw-headline" id="Troubleshooting">Troubleshooting</span></h2>
+<p>See <a href="../../en/CUPS/Troubleshooting.html" title="CUPS/Troubleshooting">CUPS/Troubleshooting</a> for general troubleshooting tips.
+</p>
+<h3><span class="mw-headline" id="Cannot_print_with_GTK_applications">Cannot print with GTK applications</span></h3>
+<p>If you get a <i>getting printer information failed</i> message when you try to print from GTK applications, add this line to your <code>/etc/hosts</code>:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/hosts</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">serverip 	some.name.tld 	ServersHostname
+</pre>
+<h3><span class="mw-headline" id="Permission_errors_on_Windows">Permission errors on Windows</span></h3>
+<p>Some users fixed <code>NT_STATUS_ACCESS_DENIED</code> (Windows clients) errors by using a slightly different syntax:
+</p>
+<pre>smb://workgroup/username:password@hostname/printer_name
+</pre>
+<h3>
+<span id="Local_Printing_is_fine.2C_but_no_printing_via_Network"></span><span class="mw-headline" id="Local_Printing_is_fine,_but_no_printing_via_Network">Local Printing is fine, but no printing via Network</span>
+</h3>
+<p>Depending on the printer (Especially for unidirectional label-printers) one side must be configured with the <code>raw</code>-driver to be able to print
+</p>
+<h2><span class="mw-headline" id="Other_operating_systems">Other operating systems</span></h2>
+<p>More information on interfacing CUPS with other printing systems can be found in the CUPS manual, e.g. on <a rel="nofollow" class="external free" href="http://localhost:631/help/network.html">http://localhost:631/help/network.html</a>.
+</p>
+</div>
+</div>
+					<div id="catlinks" class="catlinks" data-mw="interface">
+<div id="mw-normal-catlinks" class="mw-normal-catlinks">
+<a href="../../Special:Categories.html" title="Special:Categories">Category</a>: <ul><li><a href="../../en/Category:Printers.html" title="Category:Printers">Printers</a></li></ul>
+</div>
+<div id="mw-hidden-catlinks" class="mw-hidden-catlinks mw-hidden-cats-hidden">Hidden category: <ul><li><a href="../../en/Category:Pages_or_sections_flagged_with_Template:Expansion.html" title="Category:Pages or sections flagged with Template:Expansion">Pages or sections flagged with Template:Expansion</a></li></ul>
+</div>
+</div>
+				</div>
+			</main>
+			
+		</div>
+		<div class="mw-footer-container">
+			
+<footer id="footer" class="mw-footer" style="margin: 0">
+	<ul id="footer-info">
+	<li data-nosnippet="">Retrieved from "<a dir="ltr" href="https://wiki.archlinux.org/index.php?title=CUPS/Printer_sharing&amp;oldid=790795">https://wiki.archlinux.org/index.php?title=CUPS/Printer_sharing&amp;oldid=790795</a>"</li>
+<li id="footer-info-lastmod"> This page was last edited on 23 October 2023, at 09:34.</li>
+	<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+<br>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="https://terms.archlinux.org/docs/privacy-policy/">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="../../en/ArchWiki:About.html">About ArchWiki</a></li>
+	<li id="footer-places-disclaimers"><a href="../../en/ArchWiki:General_disclaimer.html">Disclaimers</a></li>
+	<li id="footer-places-archwiki-code-of-conduct"><a href="https://terms.archlinux.org/docs/code-of-conduct/" class="extiw" title="archlinux-service-agreements:code-of-conduct">Code of conduct</a></li>
+	<li id="footer-places-archwiki-terms-of-service"><a href="https://terms.archlinux.org/docs/terms-of-service/" class="extiw" title="archlinux-service-agreements:terms-of-service">Terms of service</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-copyrightico"><a href="https://www.gnu.org/copyleft/fdl.html" class="cdx-button cdx-button--fake-button cdx-button--size-large cdx-button--fake-button--enabled"><img src="/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" loading="lazy"></a></li>
+	<li id="footer-poweredbyico"><img src="/resources/assets/poweredby_mediawiki.svg" width="88" height="31" loading="lazy"></li>
+</ul>
+
+</footer>
+
+		</div>
+	</div> 
+</div> 
+<div class="vector-settings" id="p-dock-bottom">
+	<ul></ul>
+</div>
+</body>
+</html>

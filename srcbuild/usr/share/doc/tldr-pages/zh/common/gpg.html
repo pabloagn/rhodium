@@ -1,0 +1,60 @@
+<h1>gpg</h1>
+
+<blockquote><p>GNU Privacy Guard.
+更多信息：<a href="https://gnupg.org/documentation/manuals/gnupg/Invoking-GPG.html">https://gnupg.org/documentation/manuals/gnupg/Invoking-GPG.html</a>.</p></blockquote>
+
+<ul>
+<li>交互地创建 GPG 公钥和私钥：</li>
+</ul>
+
+
+<p><code>gpg --full-generate-key</code></p>
+
+<ul>
+<li>不加密，仅对 <code>doc.txt</code> 进行签名（生成 <code>doc.txt.asc</code>，格式为 ASCII 码形式）：</li>
+</ul>
+
+
+<p><code>gpg --clearsign {{doc.txt}}</code></p>
+
+<ul>
+<li>为接收者 alice@example.com 和 bob@example.com 签名并加密 <code>doc.txt</code>（生成 <code>doc.txt.gpg</code>）：</li>
+</ul>
+
+
+<p><code>gpg --encrypt --sign --recipient {{alice@example.com}} --recipient {{bob@example.com}} {{doc.txt}}</code></p>
+
+<ul>
+<li>只用密码加密 <code>doc.txt</code>（生成 <code>doc.txt.gpg</code>）：</li>
+</ul>
+
+
+<p><code>gpg --symmetric {{doc.txt}}</code></p>
+
+<ul>
+<li>解密 <code>doc.txt.gpg</code>（输出到标准输出）：</li>
+</ul>
+
+
+<p><code>gpg --decrypt {{doc.txt.gpg}}</code></p>
+
+<ul>
+<li>导入一个公钥：</li>
+</ul>
+
+
+<p><code>gpg --import {{public.gpg}}</code></p>
+
+<ul>
+<li>导出 alice@example.com 的公钥（输出到标准输出）：</li>
+</ul>
+
+
+<p><code>gpg --export --armor {{alice@example.com}}</code></p>
+
+<ul>
+<li>导出 alice@example.com 的私钥（输出到标准输出）：</li>
+</ul>
+
+
+<p><code>gpg --export-secret-keys --armor {{alice@example.com}}</code></p>

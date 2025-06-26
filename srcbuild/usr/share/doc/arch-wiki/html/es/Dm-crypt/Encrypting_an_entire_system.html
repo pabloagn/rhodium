@@ -1,0 +1,1927 @@
+<!DOCTYPE html>
+<html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-sticky-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-0 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-disabled skin-theme-clientpref-day vector-toc-available" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>dm-crypt (Español)/Encrypting an entire system (Español) - ArchWiki</title>
+<link rel="stylesheet" href="../../ArchWikiOffline.css">
+<meta name="ResourceLoaderDynamicStyles" content="">
+<meta name="generator" content="MediaWiki 1.43.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="max-image-preview:standard">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.25, maximum-scale=5.0">
+<link rel="search" type="application/opensearchdescription+xml" href="/rest.php/v1/search" title="ArchWiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.archlinux.org/api.php?action=rsd">
+<link rel="license" href="https://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="ArchWiki Atom feed" href="/index.php?title=Special:RecentChanges&amp;feed=atom">
+</head>
+<body class="skin--responsive skin-vector skin-vector-search-vue mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Dm-crypt_Español_Encrypting_an_entire_system_Español rootpage-Dm-crypt_Español skin-vector-2022 action-view">
+<a class="mw-jump-link" href="#bodyContent">Jump to content</a>
+<div class="vector-header-container">
+	</div>
+<div class="mw-page-container">
+	<div class="mw-page-container-inner">
+		<div class="vector-column-start">
+			<div class="vector-main-menu-container">
+		</div>
+	<div class="vector-sticky-pinned-container">
+				<nav id="mw-panel-toc" aria-label="Contents" data-event-name="ui.sidebar-toc" class="mw-table-of-contents-container vector-toc-landmark">
+					<div id="vector-toc-pinned-container" class="vector-pinned-container">
+					<div id="vector-toc" class="vector-toc vector-pinnable-element">
+	<div class="vector-pinnable-header vector-toc-pinnable-header vector-pinnable-header-pinned" data-feature-name="toc-pinned" data-pinnable-element-id="vector-toc">
+	<h2 class="vector-pinnable-header-label">Contents</h2>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-toc.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-toc.unpin">hide</button>
+</div>
+
+
+	<ul class="vector-toc-contents" id="mw-panel-toc-list">
+		<li id="toc-mw-content-text" class="vector-toc-list-item vector-toc-level-1">
+			<a href="#" class="vector-toc-link">
+				<div class="vector-toc-text">Beginning</div>
+			</a>
+		</li>
+		<li id="toc-Descripción_general" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Descripci%C3%B3n_general">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">1</span>
+				<span>Descripción general</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Descripción_general-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-LUKS_sobre_una_partición" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#LUKS_sobre_una_partici%C3%B3n">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">2</span>
+				<span>LUKS sobre una partición</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-LUKS_sobre_una_partición-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle LUKS sobre una partición subsection</span>
+			</button>
+		
+		<ul id="toc-LUKS_sobre_una_partición-sublist" class="vector-toc-list">
+			<li id="toc-Preparar_el_disco" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Preparar_el_disco">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1</span>
+					<span>Preparar el disco</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Preparar_el_disco-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Preparar_las_particiones_que_no_son_de_arranque_(boot)" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Preparar_las_particiones_que_no_son_de_arranque_(boot)">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2</span>
+					<span>Preparar las particiones que no son de arranque (boot)</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Preparar_las_particiones_que_no_son_de_arranque_(boot)-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Preparar_la_partición_de_arranque" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Preparar_la_partici%C3%B3n_de_arranque">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.3</span>
+					<span>Preparar la partición de arranque</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Preparar_la_partición_de_arranque-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Montar_los_dispositivos" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Montar_los_dispositivos">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.4</span>
+					<span>Montar los dispositivos</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Montar_los_dispositivos-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Configurar_mkinitcpio" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Configurar_mkinitcpio">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.5</span>
+					<span>Configurar mkinitcpio</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Configurar_mkinitcpio-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Configurar_el_gestor_de_arranque" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Configurar_el_gestor_de_arranque">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.6</span>
+					<span>Configurar el gestor de arranque</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Configurar_el_gestor_de_arranque-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-LVM_sobre_LUKS" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#LVM_sobre_LUKS">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">3</span>
+				<span>LVM sobre LUKS</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-LVM_sobre_LUKS-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle LVM sobre LUKS subsection</span>
+			</button>
+		
+		<ul id="toc-LVM_sobre_LUKS-sublist" class="vector-toc-list">
+			<li id="toc-Preparar_el_disco_2" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Preparar_el_disco_2">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1</span>
+					<span>Preparar el disco</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Preparar_el_disco_2-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Preparar_los_volúmenes_lógicos" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Preparar_los_vol%C3%BAmenes_l%C3%B3gicos">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.2</span>
+					<span>Preparar los volúmenes lógicos</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Preparar_los_volúmenes_lógicos-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Preparar_la_partición_de_arranque_2" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Preparar_la_partici%C3%B3n_de_arranque_2">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.3</span>
+					<span>Preparar la partición de arranque</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Preparar_la_partición_de_arranque_2-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Configurar_mkinitcpio_2" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Configurar_mkinitcpio_2">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.4</span>
+					<span>Configurar mkinitcpio</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Configurar_mkinitcpio_2-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Configurar_el_gestor_de_arranque_2" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Configurar_el_gestor_de_arranque_2">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.5</span>
+					<span>Configurar el gestor de arranque</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Configurar_el_gestor_de_arranque_2-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-LUKS_sobre_LVM" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#LUKS_sobre_LVM">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">4</span>
+				<span>LUKS sobre LVM</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-LUKS_sobre_LVM-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle LUKS sobre LVM subsection</span>
+			</button>
+		
+		<ul id="toc-LUKS_sobre_LVM-sublist" class="vector-toc-list">
+			<li id="toc-Preparar_el_disco_3" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Preparar_el_disco_3">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.1</span>
+					<span>Preparar el disco</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Preparar_el_disco_3-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Preparar_los_volúmenes_lógicos_2" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Preparar_los_vol%C3%BAmenes_l%C3%B3gicos_2">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.2</span>
+					<span>Preparar los volúmenes lógicos</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Preparar_los_volúmenes_lógicos_2-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Preparar_la_partición_de_arranque_3" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Preparar_la_partici%C3%B3n_de_arranque_3">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.3</span>
+					<span>Preparar la partición de arranque</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Preparar_la_partición_de_arranque_3-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Configurar_mkinitcpio_3" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Configurar_mkinitcpio_3">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.4</span>
+					<span>Configurar mkinitcpio</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Configurar_mkinitcpio_3-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Configurar_el_gestor_de_arranque_3" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Configurar_el_gestor_de_arranque_3">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.5</span>
+					<span>Configurar el gestor de arranque</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Configurar_el_gestor_de_arranque_3-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Configurar_fstab_y_crypttab" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Configurar_fstab_y_crypttab">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.6</span>
+					<span>Configurar fstab y crypttab</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Configurar_fstab_y_crypttab-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Cifrar_el_volúmen_lógico_/home" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Cifrar_el_vol%C3%BAmen_l%C3%B3gico_/home">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.7</span>
+					<span>Cifrar el volúmen lógico /home</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Cifrar_el_volúmen_lógico_/home-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-LUKS_sobre_RAID_por_software" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#LUKS_sobre_RAID_por_software">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">5</span>
+				<span>LUKS sobre RAID por software</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-LUKS_sobre_RAID_por_software-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle LUKS sobre RAID por software subsection</span>
+			</button>
+		
+		<ul id="toc-LUKS_sobre_RAID_por_software-sublist" class="vector-toc-list">
+			<li id="toc-Preparar_los_discos" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Preparar_los_discos">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.1</span>
+					<span>Preparar los discos</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Preparar_los_discos-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Compilar_la_matriz_RAID" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Compilar_la_matriz_RAID">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.2</span>
+					<span>Compilar la matriz RAID</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Compilar_la_matriz_RAID-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Preparar_los_dispositivos_de_bloque" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Preparar_los_dispositivos_de_bloque">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.3</span>
+					<span>Preparar los dispositivos de bloque</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Preparar_los_dispositivos_de_bloque-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Configurar_GRUB" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Configurar_GRUB">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.4</span>
+					<span>Configurar GRUB</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Configurar_GRUB-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Crear_los_archivos_de_claves" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Crear_los_archivos_de_claves">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.5</span>
+					<span>Crear los archivos de claves</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Crear_los_archivos_de_claves-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Configurar_el_sistema" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Configurar_el_sistema">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.6</span>
+					<span>Configurar el sistema</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Configurar_el_sistema-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Modalidad_plain_de_dm-crypt" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Modalidad_plain_de_dm-crypt">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">6</span>
+				<span>Modalidad plain de dm-crypt</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Modalidad_plain_de_dm-crypt-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Modalidad plain de dm-crypt subsection</span>
+			</button>
+		
+		<ul id="toc-Modalidad_plain_de_dm-crypt-sublist" class="vector-toc-list">
+			<li id="toc-Preparar_el_disco_4" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Preparar_el_disco_4">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.1</span>
+					<span>Preparar el disco</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Preparar_el_disco_4-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Preparar_las_particiones_que_no_son_de_arranque_(boot)_2" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Preparar_las_particiones_que_no_son_de_arranque_(boot)_2">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.2</span>
+					<span>Preparar las particiones que no son de arranque (boot)</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Preparar_las_particiones_que_no_son_de_arranque_(boot)_2-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Preparar_la_partición_de_arranque_4" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Preparar_la_partici%C3%B3n_de_arranque_4">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.3</span>
+					<span>Preparar la partición de arranque</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Preparar_la_partición_de_arranque_4-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Configurar_mkinitcpio_4" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Configurar_mkinitcpio_4">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.4</span>
+					<span>Configurar mkinitcpio</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Configurar_mkinitcpio_4-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Configurar_el_gestor_de_arranque_4" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Configurar_el_gestor_de_arranque_4">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.5</span>
+					<span>Configurar el gestor de arranque</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Configurar_el_gestor_de_arranque_4-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Posinstalación" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Posinstalaci%C3%B3n">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.6</span>
+					<span>Posinstalación</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Posinstalación-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Cifrar_partición_de_arranque_(GRUB)" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Cifrar_partici%C3%B3n_de_arranque_(GRUB)">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">7</span>
+				<span>Cifrar partición de arranque (GRUB)</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Cifrar_partición_de_arranque_(GRUB)-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Cifrar partición de arranque (GRUB) subsection</span>
+			</button>
+		
+		<ul id="toc-Cifrar_partición_de_arranque_(GRUB)-sublist" class="vector-toc-list">
+			<li id="toc-Preparar_el_disco_5" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Preparar_el_disco_5">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">7.1</span>
+					<span>Preparar el disco</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Preparar_el_disco_5-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Preparar_los_volúmenes_lógicos_3" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Preparar_los_vol%C3%BAmenes_l%C3%B3gicos_3">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">7.2</span>
+					<span>Preparar los volúmenes lógicos</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Preparar_los_volúmenes_lógicos_3-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Configurar_mkinitcpio_5" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Configurar_mkinitcpio_5">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">7.3</span>
+					<span>Configurar mkinitcpio</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Configurar_mkinitcpio_5-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Configurar_GRUB_2" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Configurar_GRUB_2">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">7.4</span>
+					<span>Configurar GRUB</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Configurar_GRUB_2-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Evitar_tener_que_ingresar_la_frase_de_contraseña_dos_veces" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Evitar_tener_que_ingresar_la_frase_de_contrase%C3%B1a_dos_veces">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">7.5</span>
+					<span>Evitar tener que ingresar la frase de contraseña dos veces</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Evitar_tener_que_ingresar_la_frase_de_contraseña_dos_veces-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Subvolúmenes_btrfs_con_espacio_de_intercambio" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Subvol%C3%BAmenes_btrfs_con_espacio_de_intercambio">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">8</span>
+				<span>Subvolúmenes btrfs con espacio de intercambio</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Subvolúmenes_btrfs_con_espacio_de_intercambio-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Subvolúmenes btrfs con espacio de intercambio subsection</span>
+			</button>
+		
+		<ul id="toc-Subvolúmenes_btrfs_con_espacio_de_intercambio-sublist" class="vector-toc-list">
+			<li id="toc-Preparar_el_disco_6" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Preparar_el_disco_6">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">8.1</span>
+					<span>Preparar el disco</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Preparar_el_disco_6-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Preparar_la_partición_del_sistema" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Preparar_la_partici%C3%B3n_del_sistema">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">8.2</span>
+					<span>Preparar la partición del sistema</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Preparar_la_partición_del_sistema-sublist" class="vector-toc-list">
+				<li id="toc-Crear_contenedor_LUKS" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Crear_contenedor_LUKS">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">8.2.1</span>
+					<span>Crear contenedor LUKS</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Crear_contenedor_LUKS-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Desbloquear_el_contenedor_LUKS" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Desbloquear_el_contenedor_LUKS">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">8.2.2</span>
+					<span>Desbloquear el contenedor LUKS</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Desbloquear_el_contenedor_LUKS-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Formatear_el_dispositivo_mapeado" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Formatear_el_dispositivo_mapeado">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">8.2.3</span>
+					<span>Formatear el dispositivo mapeado</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Formatear_el_dispositivo_mapeado-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Montar_el_dispositivo_mapeado" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Montar_el_dispositivo_mapeado">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">8.2.4</span>
+					<span>Montar el dispositivo mapeado</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Montar_el_dispositivo_mapeado-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Crear_subvolúmenes_btrfs" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Crear_subvol%C3%BAmenes_btrfs">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">8.3</span>
+					<span>Crear subvolúmenes btrfs</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Crear_subvolúmenes_btrfs-sublist" class="vector-toc-list">
+				<li id="toc-Esquema" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Esquema">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">8.3.1</span>
+					<span>Esquema</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Esquema-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Crear_subvolúmenes_de_nivel_superior" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Crear_subvol%C3%BAmenes_de_nivel_superior">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">8.3.2</span>
+					<span>Crear subvolúmenes de nivel superior</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Crear_subvolúmenes_de_nivel_superior-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Montar_subvolúmenes_de_nivel_superior" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Montar_subvol%C3%BAmenes_de_nivel_superior">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">8.3.3</span>
+					<span>Montar subvolúmenes de nivel superior</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Montar_subvolúmenes_de_nivel_superior-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Crear_subvolúmenes_anidados" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Crear_subvol%C3%BAmenes_anidados">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">8.3.4</span>
+					<span>Crear subvolúmenes anidados</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Crear_subvolúmenes_anidados-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Montar_ESP" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Montar_ESP">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">8.3.5</span>
+					<span>Montar ESP</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Montar_ESP-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Configurar_mkinitcpio_6" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Configurar_mkinitcpio_6">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">8.4</span>
+					<span>Configurar mkinitcpio</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Configurar_mkinitcpio_6-sublist" class="vector-toc-list">
+				<li id="toc-Crear_archivo_de_claves" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Crear_archivo_de_claves">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">8.4.1</span>
+					<span>Crear archivo de claves</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Crear_archivo_de_claves-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Editar_mkinitcpio.conf" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Editar_mkinitcpio.conf">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">8.4.2</span>
+					<span>Editar mkinitcpio.conf</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Editar_mkinitcpio.conf-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Configurar_el_gestor_de_arranque_5" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Configurar_el_gestor_de_arranque_5">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">8.5</span>
+					<span>Configurar el gestor de arranque</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Configurar_el_gestor_de_arranque_5-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Configurar_el_espacio_de_intercambio" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Configurar_el_espacio_de_intercambio">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">8.6</span>
+					<span>Configurar el espacio de intercambio</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Configurar_el_espacio_de_intercambio-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+</ul>
+</div>
+
+					</div>
+		</nav>
+			</div>
+		</div>
+		<div class="mw-content-container">
+			<main id="content" class="mw-body" style="margin: 0">
+				<header class="mw-body-header vector-page-titlebar">
+					<nav aria-label="Contents" class="vector-toc-landmark">
+						
+<div id="vector-page-titlebar-toc" class="vector-dropdown vector-page-titlebar-toc vector-button-flush-left">
+	<input type="checkbox" id="vector-page-titlebar-toc-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-page-titlebar-toc" class="vector-dropdown-checkbox " aria-label="Toggle the table of contents">
+	<label id="vector-page-titlebar-toc-label" for="vector-page-titlebar-toc-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"><span class="vector-icon mw-ui-icon-listBullet mw-ui-icon-wikimedia-listBullet"></span>
+
+<span class="vector-dropdown-label-text">Toggle the table of contents</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+							<div id="vector-page-titlebar-toc-unpinned-container" class="vector-unpinned-container">
+			</div>
+		
+	</div>
+</div>
+
+					</nav>
+					<h1 id="firstHeading" class="firstHeading mw-first-heading">dm-crypt (Español)/Encrypting an entire system (Español)</h1>
+							
+<div id="p-lang-btn" class="vector-dropdown mw-portlet mw-portlet-lang">
+	<input type="checkbox" id="p-lang-btn-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-p-lang-btn" class="vector-dropdown-checkbox mw-interlanguage-selector" aria-label="Go to an article in another language. Available in 6 languages">
+	<label id="p-lang-btn-label" for="p-lang-btn-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--action-progressive mw-portlet-lang-heading-6" aria-hidden="true"><span class="vector-icon mw-ui-icon-language-progressive mw-ui-icon-wikimedia-language-progressive"></span>
+
+<span class="vector-dropdown-label-text">6 languages</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+		<div class="vector-menu-content">
+			
+			<ul class="vector-menu-content-list">
+				
+				<li class="interlanguage-link interwiki-de mw-list-item"><a href="https://wiki.archlinux.de/title/Systemverschl%C3%BCsselung_mit_dm-crypt" title="Systemverschlüsselung mit dm-crypt – Deutsch" lang="de" hreflang="de" data-title="Systemverschlüsselung mit dm-crypt" data-language-autonym="Deutsch" data-language-local-name="Deutsch" class="interlanguage-link-target"><span>Deutsch</span></a></li>
+<li class="interlanguage-link interwiki-en mw-list-item"><a href="../../en/Dm-crypt/Encrypting_an_entire_system.html" title="Dm-crypt/Encrypting an entire system – English" lang="en" hreflang="en" data-title="Dm-crypt/Encrypting an entire system" data-language-autonym="English" data-language-local-name="English" class="interlanguage-link-target"><span>English</span></a></li>
+<li class="interlanguage-link interwiki-ja mw-list-item"><a href="https://wiki.archlinux.jp/index.php/Dm-crypt/%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E5%85%A8%E4%BD%93%E3%81%AE%E6%9A%97%E5%8F%B7%E5%8C%96" title="Dm-crypt/システム全体の暗号化 – 日本語" lang="ja" hreflang="ja" data-title="Dm-crypt/システム全体の暗号化" data-language-autonym="日本語" data-language-local-name="日本語" class="interlanguage-link-target"><span>日本語</span></a></li>
+<li class="interlanguage-link interwiki-pl mw-list-item"><a href="../../pl/Dm-crypt/Encrypting_an_entire_system.html" title="Dm-crypt (Polski)/Encrypting an entire system – polski" lang="pl" hreflang="pl" data-title="Dm-crypt (Polski)/Encrypting an entire system" data-language-autonym="Polski" data-language-local-name="polski" class="interlanguage-link-target"><span>Polski</span></a></li>
+<li class="interlanguage-link interwiki-pt mw-list-item"><a href="../../pt/Dm-crypt/Encrypting_an_entire_system.html" title="Dm-crypt (Português)/Encrypting an entire system – português" lang="pt" hreflang="pt" data-title="Dm-crypt (Português)/Encrypting an entire system" data-language-autonym="Português" data-language-local-name="português" class="interlanguage-link-target"><span>Português</span></a></li>
+<li class="interlanguage-link interwiki-zh-hans mw-list-item"><a href="https://wiki.archlinuxcn.org/wiki/dm-crypt/%E5%8A%A0%E5%AF%86%E6%95%B4%E4%B8%AA%E7%B3%BB%E7%BB%9F" title="dm-crypt/加密整个系统 – 中文（简体）" lang="zh-Hans" hreflang="zh-Hans" data-title="dm-crypt/加密整个系统" data-language-autonym="中文（简体）" data-language-local-name="中文（简体）" class="interlanguage-link-target"><span>中文（简体）</span></a></li>
+			</ul>
+			
+		</div>
+
+	</div>
+</div>
+</header>
+				<div class="vector-column-end">
+					<div class="vector-sticky-pinned-container">
+						<nav class="vector-page-tools-landmark" aria-label="Page tools">
+							<div id="vector-page-tools-pinned-container" class="vector-pinned-container">
+				
+							</div>
+		</nav>
+						<nav class="vector-appearance-landmark" aria-label="Appearance">
+							<div id="vector-appearance-pinned-container" class="vector-pinned-container">
+				<div id="vector-appearance" class="vector-appearance vector-pinnable-element">
+	<div class="vector-pinnable-header vector-appearance-pinnable-header vector-pinnable-header-pinned" data-feature-name="appearance-pinned" data-pinnable-element-id="vector-appearance" data-pinned-container-id="vector-appearance-pinned-container" data-unpinned-container-id="vector-appearance-unpinned-container">
+	<div class="vector-pinnable-header-label">Appearance</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-appearance.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-appearance.unpin">hide</button>
+</div>
+
+
+</div>
+
+							</div>
+		</nav>
+					</div>
+				</div>
+				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container>
+					<div class="vector-body-before-content">
+							<div class="mw-indicators">
+		</div>
+
+						<div id="siteSub" class="noprint">From ArchWiki</div>
+					</div>
+					<div id="contentSub"><div id="mw-content-subtitle"><div class="subpages">&lt; <bdi dir="ltr"><a href="../../es/Dm-crypt.html" title="Dm-crypt (Español)">Dm-crypt (Español)</a></bdi>
+</div></div></div>
+					
+					
+					<div id="mw-content-text" class="mw-body-content">
+<div class="mw-content-ltr mw-parser-output" lang="es" dir="ltr">
+<p><span>
+</span>
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">Esta traducción de <a href="../../en/Dm-crypt/Encrypting_an_entire_system.html" title="Dm-crypt/Encrypting an entire system">Dm-crypt/Encrypting an entire system</a> fue revisada el <b>2019-09-20</b>. Si existen <a rel="nofollow" class="external text" href="https://wiki.archlinux.org/index.php?title=Dm-crypt/Encrypting_an_entire_system&amp;diff=0&amp;oldid=582801">cambios</a> puede <a href="../../es/ArchWiki:Translation_Team/Contributing.html" title="ArchWiki:Translation Team (Español)/Contributing (Español)">actualizarla</a> o avisar al <a href="../../es/ArchWiki:Translation_Team.html" title="ArchWiki:Translation Team (Español)">equipo de traducción</a>.</div>
+<p>Los siguientes son ejemplos de escenarios comunes en el cifrado completo de un sistema con <i>dm-crypt</i>. Se explican todas las adaptaciones que se necesitan introducir en el <a href="../../es/Installation_guide.html" title="Installation guide (Español)">proceso de instalación</a>. Todas las herramientas necesarias para ello están presentes en la <a rel="nofollow" class="external text" href="https://archlinux.org/download/">imagen de instalación</a>.
+</p>
+<meta property="mw:PageProp/toc">
+<h2>
+<span id="Descripci.C3.B3n_general"></span><span class="mw-headline" id="Descripción_general">Descripción general</span>
+</h2>
+<p>Asegurar un sistema de archivos raíz es donde <i>dm-crypt</i> sobresale, en cuanto a características y rendimiento. Cuando el sistema de archivos de un sistema (raíz) está en un dispositivo dm-crypt, prácticamente todos los archivos del sistema están cifrados. A diferencia del cifrado de forma selectiva de los sistemas de archivos no raíz, un sistema de archivos raíz cifrado puede ocultar información, tales como qué programas se instalan, los nombres de los usuarios y todas sus cuentas, y los vectores de vuelcos de datos comunes, tales como <a href="../../es/Locate.html" title="Locate (Español)">locate</a> y <code>/var/log/</code>. Además, un sistema de archivos raíz cifrado hace que la manipulación del sistema sea mucho más difícil, al estar todo cifrado, con las excepciones del <a href="../../es/Arch_boot_process.html#Gestor_de_arranque" class="mw-redirect" title="Boot loader (Español)">gestor de arranque</a> y (normalmente) el kernel. 
+</p>
+<p>En la siguiente tabla se ilustran las ventajas de todos los escenarios posibles, diferenciando los pros y contras de cada uno:
+</p>
+<table class="wikitable">
+<tbody>
+<tr>
+<th>Escenarios
+</th>
+<th>Ventajas
+</th>
+<th>Desventajas
+</th>
+</tr>
+<tr>
+<td>
+<a href="#LUKS_sobre_una_partici%C3%B3n">#LUKS sobre una partición</a>
+<p>muestra una configuración sencilla y básica de una partición raíz completamente cifrada con LUKS. 
+</p>
+</td>
+<td>
+<ul><li>Particionado y configuración sencilla</li></ul>
+</td>
+<td>
+<ul><li>Rigidez; el espacio del disco a cifrar debe estar preasignado</li></ul>
+</td>
+</tr>
+<tr>
+<td>
+<a href="#LVM_sobre_LUKS">#LVM sobre LUKS</a>
+<p>logra un particionado flexible usando LVM dentro de una única partición  cifrada con LUKS.  
+</p>
+</td>
+<td>
+<ul>
+<li>Particionado sencillo con la ductilidad de LVM</li>
+<li>Solo es necesaria una clave para desbloquear todos los volúmenes (por ejemplo, configuración fácil para restaurar desde disco)</li>
+<li>El esquema del volumen no es transparente cuando está bloqueado</li>
+<li>El método más fácil para permitir la <a href="../../es/Dm-crypt/Swap_encryption.html#Con_soporte_para_suspensi%C3%B3n_en_disco" title="Dm-crypt (Español)/Swap encryption (Español)">suspensión en el disco</a>
+</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>LVM añade una capa y un hook adicional de mapeo</li>
+<li>Poco útil si un volumen particular necesita una clave separada</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td>
+<a href="#LUKS_sobre_LVM">#LUKS sobre LVM</a>
+<p>utiliza dm-crypt solo después de configurar LVM. 
+</p>
+</td>
+<td>
+<ul>
+<li>LVM puede utilizarse para tener cifrado volúmenes que abarquen varios discos</li>
+<li>Facilidad para mezclar grupos de volúmenes cifrados/descifrados</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>Complejo; cambiar volúmenes requiere cambiar demasiados mapeados cifrados</li>
+<li>Los volúmenes requieren claves propias cada uno</li>
+<li>El esquema LVM es transparente cuando está bloqueado</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td>
+<a href="#LUKS_sobre_RAID_por_software">#LUKS sobre RAID por software</a>
+<p>utiliza dm-crypt solo después de configurar RAID.
+</p>
+</td>
+<td>
+<ul><li>Similar a <a href="#LUKS_sobre_LVM">#LUKS sobre LVM</a>
+</li></ul>
+</td>
+<td>
+<ul><li>Similar a <a href="#LUKS_sobre_LVM">#LUKS sobre LVM</a>
+</li></ul>
+</td>
+</tr>
+<tr>
+<td>
+<a href="#Modalidad_plain_de_dm-crypt">#Modalidad plain de dm-crypt</a>
+<p>utiliza la modalidad plain de dm-crypt, es decir, sin una cabecera LUKS y sus opciones para múltiples claves. <br>Este escenario también permite emplear dispositivos USB para <code>/boot</code> y almacenamiento de claves, que se puede aplicar a los otros escenarios.
+</p>
+</td>
+<td>
+<ul>
+<li>Capacidad de recuperación de los datos para los casos en que pueda dañarse un encabezado LUKS</li>
+<li>Permite el <a href="https://en.wikipedia.org/wiki/es:Cifrado_de_disco#Completo_cifrado_de_disco" class="extiw" title="wikipedia:es:Cifrado de disco">cifrado completo de disco</a>
+</li>
+<li>Ayuda a abordar <a href="../../es/Dm-crypt/Specialties.html#Soporte_Discard/TRIM_para_unidades_de_estado_s%C3%B3lido_(SSD)" title="Dm-crypt (Español)/Specialties (Español)">problemas</a> con unidades SSD</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>Es necesaria una alta competencia en todos los parámetros de cifrado</li>
+<li>Clave de cifrado única y sin opción de cambiarla</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td>
+<a href="#Cifrar_partici%C3%B3n_de_arranque_(GRUB)">#Cifrar partición de arranque (GRUB)</a>
+<p>muestra cómo cifrar la partición de arranque utilizando el gestor de arranque GRUB. <br> Este escenario también emplea una partición ESP, que se puede aplicar a los otros escenarios.
+</p>
+</td>
+<td>
+<ul>
+<li>Las mismas ventajas que las descritas para el escenario de la instalación basada en LVM sobre LUKS (para este ejemplo en particular)</li>
+<li>Se dejan menos datos sin cifrar, es decir, el gestor de arranque y la partición ESP, si está presente</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>Las mismas desventajas que las descritas para el escenario de la instalación basada en LVM sobre LUKS (para este ejemplo en particular)</li>
+<li>Configuración más complicada</li>
+<li>No es compatible con otros gestores de arranque</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td>
+<a href="#Subvol%C3%BAmenes_btrfs_con_espacio_de_intercambio">#Subvolúmenes btrfs con espacio de intercambio</a>
+<p>muestra cómo cifrar un sistema <a href="../../es/Btrfs.html" title="Btrfs (Español)">Btrfs</a>, incluyendo el directorio <code>/boot</code>, también agrega una partición de intercambio, en el hardware UEFI.
+</p>
+</td>
+<td>
+<ul>
+<li>Ventajas similares a <a href="#Cifrar_partici%C3%B3n_de_arranque_(GRUB)">#Cifrar partición de arranque (GRUB)</a>
+</li>
+<li>Disponibilidad de las características de Btrfs</li>
+</ul>
+</td>
+<td>
+<ul><li>Desventajas similares a <a href="#Cifrar_partici%C3%B3n_de_arranque_(GRUB)">#Cifrar partición de arranque (GRUB)</a>
+</li></ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Si bien todos los escenarios anteriores proporcionan una protección mucho mayor contra las amenazas externas que los sistemas de archivos cifrados secundariamente, también comparten una desventaja común: cualquier usuario en posesión de la clave de cifrado puede descifrar toda la unidad y, por lo tanto, puede acceder a los datos de otros usuarios. Si esto es motivo de preocupación, es posible utilizar una combinación de cifrado de dispositivos de bloques y sistema de archivos  apilados, y recoger las ventajas de ambos. Véase <a href="../../es/Data-at-rest_encryption.html" class="mw-redirect" title="Disk encryption (Español)">Disk encryption (Español)</a> para planificar las opciones.
+</p>
+<p>Véase <a href="../../es/Dm-crypt/Drive_preparation.html#Particionar" title="Dm-crypt (Español)/Drive preparation (Español)">dm-crypt (Español)/Drive preparation (Español)#Particionar</a> para tener una visión general de las estrategias de particionado utilizados en los escenarios.
+</p>
+<p>Otra área a considerar es si se debe configurar una partición de intercambio cifrado y de qué tipo. Véase <a href="../../es/Dm-crypt/Swap_encryption.html" title="Dm-crypt (Español)/Swap encryption (Español)">dm-crypt (Español)/Swap encryption (Español)</a> para conocer alternativas.
+</p>
+<p>Si quiere avanzar en la protección de los datos del sistema no solo contra el robo físico, sino también previniéndose contra la manipulación lógica, vea <a href="../../es/Dm-crypt/Specialties.html#Asegurar_la_partici%C3%B3n_de_arranque_no_cifrada" title="Dm-crypt (Español)/Specialties (Español)">dm-crypt (Español)/Specialties (Español)#Asegurar la partición de arranque no cifrada</a> para conocer más posibilidades después de seguir uno de los escenarios.
+</p>
+<p>Para <a href="../../en/Solid_state_drive.html" title="Solid state drive">solid state drives</a> es posible que desee considerar activar la compatibilidad con TRIM, pero tenga en cuenta que existen posibles implicaciones de seguridad. Consulte <a href="../../es/Dm-crypt/Specialties.html#Soporte_Discard/TRIM_para_unidades_de_estado_s%C3%B3lido_(SSD)" title="Dm-crypt (Español)/Specialties (Español)">dm-crypt (Español)/Specialties (Español)#Soporte Discard/TRIM para unidades de estado sólido (SSD)</a> para obtener más información.
+</p>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Advertencia:</strong> 
+<ul>
+<li>En cualquier situación, nunca utilice software de reparación del sistema de archivos como <a href="../../en/Fsck.html" title="Fsck">fsck</a> directamente sobre un volumen cifrado, o destruirá cualquier medio para recuperar la clave utilizada para descifrar sus archivos. En su lugar, utilice estas herramientas en el dispositivo una vez desencriptado (abierto).</li>
+<li>Sobre el formato LUKS2:
+<ul>
+<li>
+<a href="../../es/GRUB.html" title="GRUB (Español)">GRUB (Español)</a> no es compatible con LUKS2.<a rel="nofollow" class="external autonumber" href="https://savannah.gnu.org/bugs/?55093">[1]</a> Utilice LUKS1 en particiones a las que GRUB necesita acceder.</li>
+<li>El formato LUKS2 tiene un alto uso de RAM por diseño, con un valor predeterminado de 1 GB por mapeador cifrado. Las máquinas con poca RAM y/o múltiples particiones LUKS2 desbloqueadas en paralelo pueden producir un error al arrancar. Consulte la opción <code>--pbkdf-memory</code> para controlar el uso de la memoria.<a rel="nofollow" class="external autonumber" href="https://gitlab.com/cryptsetup/cryptsetup/issues/372">[2]</a>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<h2>
+<span id="LUKS_sobre_una_partici.C3.B3n"></span><span class="mw-headline" id="LUKS_sobre_una_partición">LUKS sobre una partición</span>
+</h2>
+<p>Este ejemplo explica cómo cifrar un sistema completo con <i>dmcrypt</i> + LUKS en un esquema de particionado simple:
+</p>
+<pre style="white-space: pre !important; font-family:'DejaVu Sans Mono',monospace,monospace; font-variant-ligatures: no-common-ligatures;"> +----------------------+--------------------------+-------------------------------+
+ | Partición de arranque| Partición del sistema    |Espacio libre opcional         |
+ |                      | cifrada con LUKS2        |para configurar posteriormente |
+ |                      |                          |particiones de intercambio     |
+ | /boot                | /                        |o particiones adicionales      |
+ |                      |                          |                               |
+ |                      | /dev/mapper/cryptroot    |                               |
+ |                      |--------------------------|                               |
+ | /dev/sda1            | /dev/sda2                |                               |
+ +----------------------+--------------------------+-------------------------------+
+</pre>
+<p>Los primeros pasos se pueden realizar directamente después de arrancar la imagen de instalación de Arch Linux.
+</p>
+<h3><span class="mw-headline" id="Preparar_el_disco">Preparar el disco</span></h3>
+<p>Antes de crear las particiones, debe informarse sobre la importancia y los métodos para borrar de forma segura el disco, descrito en <a href="../../es/Dm-crypt/Drive_preparation.html" title="Dm-crypt (Español)/Drive preparation (Español)">dm-crypt (Español)/Drive preparation (Español)</a>.
+</p>
+<p>A continuación, cree las particiones necesarias, al menos una para <code>/</code> (por ejemplo, <code>/dev/sda2</code>) y otra para <code>/boot</code> (<code>/dev/sda1</code>). Véase <a href="../../en/Partitioning.html" class="mw-redirect" title="Partitioning (Español)">Partitioning (Español)</a>.
+</p>
+<h3>
+<span id="Preparar_las_particiones_que_no_son_de_arranque_.28boot.29"></span><span class="mw-headline" id="Preparar_las_particiones_que_no_son_de_arranque_(boot)">Preparar las particiones que no son de arranque (boot)</span>
+</h3>
+<p>Las siguientes órdenes crean y montan la partición raíz cifrada. Se corresponden con el proceso descrito con detalle en <a href="../../es/Dm-crypt/Encrypting_a_non-root_file_system.html#Partici%C3%B3n" title="Dm-crypt (Español)/Encrypting a non-root file system (Español)">dm-crypt (Español)/Encrypting a non-root file system (Español)#Partición</a> (que, a pesar del título, <i>se puede</i> aplicar a particiones raíz, siempre y cuando <a href="#Configurar_mkinitcpio">mkinitcpio</a> y el <a href="#Configurar_el_gestor_de_arranque">gestor de arranque</a> estén configurados correctamente). 
+Si desea utilizar determinadas opciones de cifrado no predeterminadas (por ejemplo, respecto al algoritmo de cifrado, longitud de la clave, etc.), consulte <a href="../../es/Dm-crypt/Device_encryption.html#Cifrar_dispositivos_con_la_modalidad_LUKS" title="Dm-crypt (Español)/Device encryption (Español)">opciones de cifrado</a> antes de ejecutar la primera orden:
+</p>
+<pre># cryptsetup -y -v luksFormat /dev/sda2
+# cryptsetup open /dev/sda2 cryptroot
+# mkfs.ext4 /dev/mapper/cryptroot
+# mount /dev/mapper/cryptroot /mnt
+</pre>
+<p>Compruebe que el mapeado funciona según lo previsto:
+</p>
+<pre># umount /mnt
+# cryptsetup close cryptroot
+# cryptsetup open /dev/sda2 cryptroot
+# mount /dev/mapper/cryptroot /mnt
+</pre>
+<p>Si ha creado particiones separadas (por ejemplo, <code>/home</code>), estos pasos tienen que ser adaptados y repetidos para todas ellas, a <i>excepción</i> de <code>/boot</code>. Véase <a href="../../es/Dm-crypt/Encrypting_a_non-root_file_system.html#Desbloqueo_y_montaje_automatizados" title="Dm-crypt (Español)/Encrypting a non-root file system (Español)">dm-crypt (Español)/Encrypting a non-root file system (Español)#Desbloqueo y montaje automatizados</a> para saber cómo manejar particiones adicionales en el arranque.
+</p>
+<p>Tenga en cuenta que cada dispositivo de bloque requiere su propia contraseña. Esto puede ser un inconveniente, porque da lugar a una frase de acceso separada para cada uno, que hay que introducir durante el inicio. Una alternativa es utilizar un archivo de claves almacenada en la partición del sistema para desbloquear la partición separada mediante <code>crypttab</code>. Vease <a href="../../es/Dm-crypt/Device_encryption.html#Utilizar_LUKS_para_formatear_particiones_con_un_archivo_de_claves" title="Dm-crypt (Español)/Device encryption (Español)">dm-crypt (Español)/Device encryption (Español)#Utilizar LUKS para formatear particiones con un archivo de claves</a> para obtener instrucciones.
+</p>
+<h3>
+<span id="Preparar_la_partici.C3.B3n_de_arranque"></span><span class="mw-headline" id="Preparar_la_partición_de_arranque">Preparar la partición de arranque</span>
+</h3>
+<p>Lo que tiene que hacer es configurar la partición <code>/boot</code> sin cifrar, que se necesita para una partición raíz cifrada. Para una partición <code>/boot</code> normal sobre sistemas BIOS, por ejemplo, ejecute:
+</p>
+<pre># mkfs.ext4 /dev/sda1
+</pre>
+<p>o para una <a href="../../es/EFI_system_partition.html" title="EFI system partition (Español)">EFI system partition (Español)</a> en sistemas UEFI:
+</p>
+<pre># mkfs.fat -F32 /dev/sda1
+</pre>
+<p>Luego cree el directorio para el punto de montaje y monte la partición:
+</p>
+<pre># mkdir /mnt/boot
+# mount /dev/sda1 /mnt/boot
+</pre>
+<h3><span class="mw-headline" id="Montar_los_dispositivos">Montar los dispositivos</span></h3>
+<p>Como en <a href="../../es/Installation_guide.html#Montar_los_sistemas_de_archivos" title="Installation guide (Español)">Installation guide (Español)#Montar los sistemas de archivos</a>, hay que montar los dispositivos mapeados, no las particiones subyacentes. En cambio <code>/boot</code>, al no estar cifrado, se monta directamente como de costumbre.
+</p>
+<h3><span class="mw-headline" id="Configurar_mkinitcpio">Configurar mkinitcpio</span></h3>
+<p>Añada los hooks <code>keyboard</code>, <code>keymap</code> y <code>encrypt</code> a <a href="../../en/Mkinitcpio.html" class="mw-redirect" title="Mkinitcpio (Español)">mkinitcpio (Español)</a>. Si la distribución de teclado predeterminado de EE.UU. está bien para usted, puede omitir el hook <code>keymap</code> .
+</p>
+<pre>HOOKS=(base <b>udev</b> autodetect <b>keyboard</b> <b>keymap</b> consolefont modconf block <b>encrypt</b> filesystems fsck)
+</pre>
+<p>Si utiliza el hook <a href="../../es/Dm-crypt/System_configuration.html#Utilizar_el_hook_sd-encrypt" title="Dm-crypt (Español)/System configuration (Español)">sd-encrypt</a> con initramfs basado en systemd, en su lugar debe establecerse lo siguiente:
+</p>
+<pre>HOOKS=(base <b>systemd</b> autodetect <b>keyboard</b> <b>sd-vconsole</b> modconf block <b>sd-encrypt</b> filesystems fsck)
+</pre>
+<p>Dependiendo de qué otros hooks se utilicen, el orden de los mismos puede ser relevante.  Véase <a href="../../en/Dm-crypt/System_configuration.html#mkinitcpio" title="Dm-crypt/System configuration">dm-crypt/System configuration#mkinitcpio</a> para conocer más detalles y otros hooks que pueda necesitar.
+</p>
+<h3><span class="mw-headline" id="Configurar_el_gestor_de_arranque">Configurar el gestor de arranque</span></h3>
+<p>Con el fin de desbloquear en el arranque la partición raíz cifrada, es necesario pasar los siguientes <a href="../../es/Kernel_parameters.html" title="Kernel parameters (Español)">parámetros del kernel</a> al gestor de arranque:
+</p>
+<pre>cryptdevice=UUID=<i>UUID-del-dispositivo</i>:cryptroot root=/dev/mapper/cryptroot
+</pre>
+<p>Si utiliza el hook <a href="../../es/Dm-crypt/System_configuration.html#Utilizar_el_hook_sd-encrypt" title="Dm-crypt (Español)/System configuration (Español)">sd-encrypt</a> con initramfs basado en systemd, en su lugar debe establecerse lo siguiente:
+</p>
+<pre>rd.luks.name=<i>UUID-del-dispositivo</i>=cryptroot root=/dev/mapper/cryptroot
+</pre>
+<p>Véase <a href="../../es/Dm-crypt/System_configuration.html#Cargador_de_arranque" title="Dm-crypt (Español)/System configuration (Español)">dm-crypt (Español)/System configuration (Español)#Cargador de arranque</a> para conocer más detalles.
+</p>
+<p>El <code><i>UUID-del-dispositivo</i></code> se está refiriendo al UUID de <code>/dev/sda2</code> (la partición física donde reside el sistema, no el dispositivo mapeado). Véase <a href="../../es/Persistent_block_device_naming.html" title="Persistent block device naming (Español)">Persistent block device naming (Español)</a> para conocer más detalles.
+</p>
+<h2><span class="mw-headline" id="LVM_sobre_LUKS">LVM sobre LUKS</span></h2>
+<p>El método sencillo es crear <a href="../../es/LVM.html" title="LVM (Español)">LVM (Español)</a> sobre la partición cifrada y no al revés. Técnicamente, LVM se configura sobre un gran dispositivo cifrado. Por lo tanto, LVM no es transparente hasta que el dispositivo de bloque se desbloquea y la estructura del volumen subyacente se escanea y se monta durante el arranque.
+</p>
+<p>El esquema de particionado del disco en este ejemplo sería: 
+</p>
+<pre style="white-space: pre !important; font-family:'DejaVu Sans Mono',monospace,monospace; font-variant-ligatures: no-common-ligatures;"> 
++-----------------------------------------------------------------------+ +-----------------------+
+| Volumen lógico 1      | Volumen lógico 2      | Volumen lógico 3      | | Partición de arranque |     
+|                       |                       |                       | |                       |
+| [SWAP]                | /                     | /home                 | | /boot                 |
+|                       |                       |                       | |                       |
+| /dev/MyVolGroup/swap  | /dev/MyVolGroup/root  | /dev/MyVolGroup/home  | |                       |
+|_ _ _ _ _ _ _ _ _ _ _ _|_ _ _ _ _ _ _ _ _ _ _ _|_ _ _ _ _ _ _ _ _ _ _ _| | (puede estar en otro  |
+|                                                                       | | dispositivo)          |
+|                         Partición cifrada con LUKS                    | |                       |
+|                         /dev/sda1                                     | | /dev/sdb1             |
++-----------------------------------------------------------------------+ +-----------------------+
+</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Nota:</strong> Al usar el hook <code>encrypt</code> este método no le permite abarcar los volúmenes lógicos en varios discos; use <a href="../../es/Dm-crypt/System_configuration.html#Utilizar_el_hook_sd-encrypt" title="Dm-crypt (Español)/System configuration (Español)">sd-encrypt</a> o vea <a href="../../en/Dm-crypt/Specialties.html#Modifying_the_encrypt_hook_for_multiple_partitions" title="Dm-crypt/Specialties">dm-crypt/Specialties#Modifying the encrypt hook for multiple partitions</a>.</div>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Sugerencia:</strong> Existen dos variantes de esta configuración: 
+<ul>
+<li>las instrucciones de <a href="../../es/Dm-crypt/Specialties.html#Sistema_cifrado_usando_un_encabezado_LUKS_separado" title="Dm-crypt (Español)/Specialties (Español)">dm-crypt (Español)/Specialties (Español)#Sistema cifrado usando un encabezado LUKS separado</a> utilizan esta configuración con un encabezado LUKS remoto sobre un dispositivo USB para lograr una autenticación de dos factores con él;</li>
+<li>las instrucciones de <a href="../../es/Dm-crypt/Specialties.html#/boot_cifrado_y_un_encabezado_LUKS_separado_en_USB" title="Dm-crypt (Español)/Specialties (Español)">dm-crypt (Español)/Specialties (Español)#/boot cifrado y un encabezado LUKS separado en USB</a> usan esta configuración con un encabezado LUKS separado, una partición <code>/boot</code> cifrada y un archivo de claves encriptado, todo en un dispositivo USB.</li>
+</ul>
+</div>
+<h3><span class="mw-headline" id="Preparar_el_disco_2">Preparar el disco</span></h3>
+<p>Antes de crear las particiones, debe informarse sobre la importancia y los métodos sobre cómo borrar de forma segura el disco, descrito en <a href="../../es/Dm-crypt/Drive_preparation.html" title="Dm-crypt (Español)/Drive preparation (Español)">dm-crypt (Español)/Drive preparation (Español)</a>.
+</p>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Sugerencia:</strong> Cuando se utiliza el gestor de arranque <a href="../../es/GRUB.html" title="GRUB (Español)">GRUB (Español)</a> junto con un disco <a href="../../en/Partitioning.html#GUID_Partition_Table" class="mw-redirect" title="Partitioning (Español)">GPT</a> arrancando BIOS, debe crear una partición <a href="../../es/GRUB.html#Instrucciones_espec%C3%ADficas_para_GUID_Partition_Table_(GPT)" title="GRUB (Español)">BIOS boot partition</a>.</div>
+<p>Cree una partición con punto de montaje en <code>/boot</code> con un tamaño de 200 MiB o más.
+</p>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Sugerencia:</strong> Los sistemas UEFI pueden utilizar la <a href="../../es/EFI_system_partition.html" title="EFI system partition (Español)">EFI system partition (Español)</a> para <code>/boot</code>.</div>	
+<p>Cree una partición que luego contendrá el contenedor cifrado.
+</p>
+<p>Cree un contenedor cifrado con LUKS en la partición del «sistema». Introduzca la contraseña elegida dos veces.
+</p>
+<pre># cryptsetup luksFormat /dev/sda1
+</pre>
+<p>Para obtener más información sobre las opciones disponibles de cryptsetup vea las <a href="../../es/Dm-crypt/Device_encryption.html#Opciones_de_cifrado_para_la_modalidad_LUKS" title="Dm-crypt (Español)/Device encryption (Español)">opciones de cifrado de LUKS</a> antes de ejecutar la orden de arriba.
+</p>
+<p>Abra el contenedor:
+</p>
+<pre># cryptsetup open --type luks /dev/<i>sdaX</i> lvm
+</pre>
+<p>El contenedor descifrado estará ahora disponible como <code>/dev/mapper/lvm</code>.
+</p>
+<h3>
+<span id="Preparar_los_vol.C3.BAmenes_l.C3.B3gicos"></span><span class="mw-headline" id="Preparar_los_volúmenes_lógicos">Preparar los volúmenes lógicos</span>
+</h3>
+<p>Cree un volumen físico sobre el contenedor LUKS abierto:
+</p>
+<pre># pvcreate /dev/mapper/cryptlvm
+</pre>
+<p>Cree un grupo de volúmenes llamado (por ejemplo) <code>MyVolGroup</code>, sobre el volumen físico creado con anterioridad:
+</p>
+<pre># vgcreate MyVolGroup /dev/mapper/cryptlvm
+</pre>
+<p>Cree varios volúmenes lógicos en el grupo de volúmenes:
+</p>
+<pre># lvcreate -L 8G MyVolGroup -n swap
+# lvcreate -L 32G MyVolGroup -n root
+# lvcreate -l 100%FREE MyVolGroup -n home
+</pre>
+<p>Cree un sistema de archivos para cada volumen lógico:
+</p>
+<pre># mkfs.ext4 /dev/MyVolGroup/root
+# mkfs.ext4 /dev/MyVolGroup/home
+# mkswap /dev/MyVolGroup/swap
+</pre>
+<p>Monte los sistemas de archivos:
+</p>
+<pre># mount /dev/MyVolGroup/root /mnt
+# mkdir /mnt/home
+# mount /dev/MyVolGroup/home /mnt/home
+# swapon /dev/MyVolGroup/swap
+</pre>
+<h3>
+<span id="Preparar_la_partici.C3.B3n_de_arranque_2"></span><span class="mw-headline" id="Preparar_la_partición_de_arranque_2">Preparar la partición de arranque</span>
+</h3>
+<p>El gestor de arranque carga el kernel, <a href="../../en/Mkinitcpio.html" class="mw-redirect" title="Mkinitcpio (Español)">mkinitcpio (Español)</a> y sus propios archivos de configuración desde el directorio <code>/boot</code>. Cualquier sistema de archivos que pueda ser leído por el gestor de arranque vale.
+</p>
+<p>Cree un <a href="../../es/File_systems.html" title="File systems (Español)">sistema de archivos</a> en la partición destinada a <code>/boot</code>:
+</p>
+<pre># mkfs.ext4 /dev/sdb1
+</pre>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Sugerencia:</strong> Al optar por mantener <code>/boot</code> sobre una <a href="../../es/EFI_system_partition.html" title="EFI system partition (Español)">EFI system partition (Español)</a> el formateo recomendado es:
+<pre># mkfs.fat -F32 /dev/sdb1
+</pre>
+</div>
+<p>Cree el directorio <code>/mnt/boot</code>:
+</p>
+<pre># mkdir /mnt/boot
+</pre>
+<p>Monte la partición para <code>/mnt/boot</code>:
+</p>
+<pre># mount /dev/sdb1 /mnt/boot
+</pre>
+<h3><span class="mw-headline" id="Configurar_mkinitcpio_2">Configurar mkinitcpio</span></h3>
+<p>Añada los hooks <code>keyboard</code>, <code>encrypt</code> y <code>lvm2</code> a <a href="../../en/Mkinitcpio.html" class="mw-redirect" title="Mkinitcpio (Español)">mkinitcpio.conf</a>:
+</p>
+<pre>HOOKS=(base <b>udev</b> autodetect <b>keyboard</b> <b>keymap</b> consolefont modconf block <b>encrypt</b> <b>lvm2</b> filesystems fsck)
+</pre>
+<p>Si utiliza el hook <a href="../../es/Dm-crypt/System_configuration.html#Utilizar_el_hook_sd-encrypt" title="Dm-crypt (Español)/System configuration (Español)">sd-encrypt</a>, se debe configurar lo siguiente en su lugar:
+</p>
+<pre>HOOKS=(base <b>systemd</b> autodetect <b>keyboard</b> <b>sd-vconsole</b> modconf block <b>sd-encrypt</b> <b>sd-lvm2</b> filesystems fsck)
+</pre>
+<p>Véase <a href="../../es/Dm-crypt/System_configuration.html#mkinitcpio" title="Dm-crypt (Español)/System configuration (Español)">dm-crypt (Español)/System configuration (Español)#mkinitcpio</a> para conocer más detalles y otros hooks que se puedan necesitar.
+</p>
+<h3><span class="mw-headline" id="Configurar_el_gestor_de_arranque_2">Configurar el gestor de arranque</span></h3>
+<p>Con el fin de desbloquear en el arranque la partición raíz cifrada, es necesario pasar los siguientes parámetros del kernel al gestor de arranque:
+</p>
+<pre>cryptdevice=UUID=<i>UUID-del-dispositivo</i>:cryptlvm root=/dev/MyVolGroup/root
+</pre>
+<p>Si utiliza el hook  <a href="../../es/Dm-crypt/System_configuration.html#Utilizar_el_hook_sd-encrypt" title="Dm-crypt (Español)/System configuration (Español)">sd-encrypt</a>, lo siguiente debe establecerse en su lugar:
+</p>
+<pre>rd.luks.name=<i>UUID-del-dispositivo</i>=cryptlvm root=/dev/MyVolGroup/root
+</pre>
+<p>El <code><i>UUID-del-dispositivo</i></code> se refiere al UUID de <code>/dev/sda1</code> (la partición física a cifrar, no el dispositivo mapeado resultante). Véase <a href="../../es/Persistent_block_device_naming.html" title="Persistent block device naming (Español)">Persistent block device naming (Español)</a> para más detalles.
+</p>
+<p>Véase <a href="../../en/Dm-crypt/System_configuration.html#Kernel_parameters" title="Dm-crypt/System configuration">dm-crypt/System configuration#Kernel parameters</a> para más detalles.
+</p>
+<h2><span class="mw-headline" id="LUKS_sobre_LVM">LUKS sobre LVM</span></h2>
+<p>Para utilizar el cifrado sobre <a href="../../es/LVM.html" title="LVM (Español)">LVM (Español)</a>, los volúmenes LVM se establecen primero y luego se usan como base para las particiones cifradas. De esta manera, es posible mezclar particiones/volúmenes cifrados/sin cifrar.
+</p>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Sugerencia:</strong> A diferencia de <a href="#LVM_sobre_LUKS">#LVM sobre LUKS</a>, este método permite que los volúmenes lógicos puedan abarcar con normalidad varios discos.</div>
+<p>El siguiente ejemplo se crea una configuración LUKS sobre LVM, donde se entremezcla el uso de un archivo de claves para desbloquear la partición /home, por un lado, con volúmenes temporales cifrados para <code>/tmp</code> y <code>/swap</code>, por otro. Esto último se considera deseable desde una perspectiva de seguridad, ya que ningún dato temporal potencialmente sensible sobrevivirá al reinicio, cuando el cifrado se reinicializa. Si tiene experiencia con LVM, podrá ignorar/reemplazar LVM y otros detalles de acuerdo con su plan.
+</p>
+<p>Si desea que un volumen lógico abarque varios discos que ya se han configurado, o ampliar el volumen lógico para <code>/home</code> (o cualquier otro volumen), en <a href="../../es/Dm-crypt/Specialties.html#Expandir_LVM_en_varios_discos" title="Dm-crypt (Español)/Specialties (Español)">dm-crypt (Español)/Specialties (Español)#Expandir LVM en varios discos</a> se describe un procedimiento para hacerlo. Es importante tener en cuenta que el contenedor cifrado con LUKS también debe redimensionarse.
+</p>
+<h3><span class="mw-headline" id="Preparar_el_disco_3">Preparar el disco</span></h3>
+<p>Esquema de particionado:
+</p>
+<pre style="white-space: pre !important; font-family:'DejaVu Sans Mono',monospace,monospace; font-variant-ligatures: no-common-ligatures;">+-----------------------+--------------------------------------------------------------------------------------------------------------+
+| Partición de arranque | Volumen cifrado con plain dm-crypt | Volumen cifrado con LUKS2          | Volumen cifrado con LUKS2          |
+|                       |                                    |                                    |                                    |
+| /boot                 | [SWAP]                             | /                                  | /home                              |
+|                       |                                    |                                    |                                    |
+|                       | /dev/mapper/swap                   | /dev/mapper/root                   | /dev/mapper/home                   |
+|                       |_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ |_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ |_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ |
+|                       | Volumen lógico 1                   | Volumen lógico 2                   | Volumen lógico 3                   |
+|                       | /dev/MyVolGroup/cryptswap          | /dev/MyVolGroup/cryptroot          | /dev/MyVolGroup/crypthome          |
+|                       |_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ |_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ |_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ |
+|                       |                                                                                                              |
+|     /dev/sda1         |                                               /dev/sda2                                                      |
++-----------------------+--------------------------------------------------------------------------------------------------------------+
+</pre>
+<p>Escriba aleatóriamente la partición <code>/dev/sda2</code> como indica el artículo <a href="../../es/Dm-crypt/Drive_preparation.html#Limpiar_un_disco_o_partici%C3%B3n_vac%C3%ADos_con_dm-crypt" title="Dm-crypt (Español)/Drive preparation (Español)">dm-crypt (Español)/Drive preparation (Español)#Limpiar un disco o partición vacíos con dm-crypt</a>.
+</p>
+<h3>
+<span id="Preparar_los_vol.C3.BAmenes_l.C3.B3gicos_2"></span><span class="mw-headline" id="Preparar_los_volúmenes_lógicos_2">Preparar los volúmenes lógicos</span>
+</h3>
+<pre># pvcreate /dev/sda2
+# vgcreate MyVolGroup /dev/sda2
+# lvcreate -L 32G -n cryptroot MyVolGroup
+# lvcreate -L 500M -n cryptswap MyVolGroup
+# lvcreate -L 500M -n crypttmp MyVolGroup
+# lvcreate -l 100%FREE -n crypthome MyVolGroup
+</pre>
+<pre># cryptsetup luksFormat /dev/MyVolGroup/cryptroot
+# cryptsetup open /dev/MyVolGroup/cryptroot root
+# mkfs.ext4 /dev/mapper/root
+# mount /dev/mapper/root /mnt
+</pre>
+<p>Más información acerca de las opciones de cifrado se puede encontrar en <a href="../../es/Dm-crypt/Device_encryption.html#Opciones_de_cifrado_para_la_modalidad_LUKS" title="Dm-crypt (Español)/Device encryption (Español)">dm-crypt (Español)/Device encryption (Español)#Opciones de cifrado para la modalidad LUKS</a>.
+Tenga en cuenta se indicará cómo cifrar <code>/home</code> en <a href="#Cifrar_el_vol%C3%BAmen_l%C3%B3gico_/home">#Cifrar el volúmen lógico /home</a>.
+</p>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Sugerencia:</strong> Además, observe que si alguna vez tiene que acceder a la raíz cifrada desde la ISO de Arch, la anterior acción <code>open</code> le permitirá a continuación <a href="../../es/LVM.html#No_se_muestran_los_vol%C3%BAmenes_l%C3%B3gicos" title="LVM (Español)">mostrar los volúmenes de LVM</a>.</div>
+<h3>
+<span id="Preparar_la_partici.C3.B3n_de_arranque_3"></span><span class="mw-headline" id="Preparar_la_partición_de_arranque_3">Preparar la partición de arranque</span>
+</h3>
+<pre># dd if=/dev/zero of=/dev/sda1 bs=1M status=progress
+# mkfs.ext4 /dev/sda1
+# mkdir /mnt/boot
+# mount /dev/sda1 /mnt/boot
+</pre>
+<h3><span class="mw-headline" id="Configurar_mkinitcpio_3">Configurar mkinitcpio</span></h3>
+<p>Añada los hooks  <code>keyboard</code>, <code>lvm2</code> y <code>encrypt</code> a <a href="../../en/Mkinitcpio.html" class="mw-redirect" title="Mkinitcpio (Español)">mkinitcpio (Español)</a>:
+</p>
+<pre>HOOKS=(base <b>udev</b> autodetect <b>keyboard</b> <b>keymap</b> consolefont modconf block <b>lvm2</b> <b>encrypt</b> filesystems fsck)
+</pre>
+<p>Si usa el hook <a href="../../es/Dm-crypt/System_configuration.html#Utilizar_el_hook_sd-encrypt" title="Dm-crypt (Español)/System configuration (Español)">sd-encrypt</a> con initramfs basado en systemd, en su lugar debe establecerse lo siguiente:
+</p>
+<pre>HOOKS=(base <b>systemd</b> autodetect <b>keyboard</b> <b>sd-vconsole</b> modconf block <b>sd-encrypt</b> <b>sd-lvm2</b> filesystems fsck)
+</pre>
+<p>Véase <a href="../../es/Dm-crypt/System_configuration.html#mkinitcpio" title="Dm-crypt (Español)/System configuration (Español)">dm-crypt (Español)/System configuration (Español)#mkinitcpio</a> para conocer más detalles y otros hooks que se puedan necesitar.
+</p>
+<h3><span class="mw-headline" id="Configurar_el_gestor_de_arranque_3">Configurar el gestor de arranque</span></h3>
+<p>Con el fin de desbloquear en el arranque la partición raíz cifrada, es necesario pasar los siguientes <a href="../../es/Kernel_parameters.html" title="Kernel parameters (Español)">parámetros del kernel</a> al gestor de arranque:
+</p>
+<pre>cryptdevice=UUID=<i>UUID-del-dispositivo</i>:root root=/dev/mapper/root
+</pre>
+<p>Si utiliza el hook <a href="../../es/Dm-crypt/System_configuration.html#Utilizar_el_hook_sd-encrypt" title="Dm-crypt (Español)/System configuration (Español)">sd-encrypt</a>, se debe configurar lo siguiente en su lugar:
+</p>
+<pre>rd.luks.name=<i>UUID-del-dispositivo</i>=root root=/dev/mapper/root
+</pre>
+<p>El <code><i>UUID-del-dispositivo</i></code> hace referencia al UUID de <code>/dev/MyVolGroup/cryptroot</code> (el volumen raíz a cifrar, no el dispositivo mapeado resultante). Consulte  <a href="../../es/Persistent_block_device_naming.html" title="Persistent block device naming (Español)">Persistent block device naming (Español)</a> para más detalles.
+</p>
+<p>Véase <a href="../../es/Dm-crypt/System_configuration.html#Cargador_de_arranque" title="Dm-crypt (Español)/System configuration (Español)">dm-crypt (Español)/System configuration (Español)#Cargador de arranque</a> para conocer más detalles.
+</p>
+<h3><span class="mw-headline" id="Configurar_fstab_y_crypttab">Configurar fstab y crypttab</span></h3>
+<p>Ambas entradas, para <a href="../../en/Dm-crypt/System_configuration.html#crypttab" class="mw-redirect" title="Crypttab">crypttab</a> y <a href="../../es/Fstab.html" title="Fstab (Español)">fstab</a>, son necesarias tanto para desbloquear el dispositivo como para montar los sistemas de archivos, respectivamente. Las siguientes líneas volverán a reencriptar los sistemas de archivos temporales en cada reinicio:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/crypttab</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">swap	/dev/MyVolGroup/cryptswap	/dev/urandom	swap,cipher=aes-xts-plain64,size=256
+tmp	/dev/MyVolGroup/crypttmp	/dev/urandom	tmp,cipher=aes-xts-plain64,size=256</pre>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/fstab</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">/dev/mapper/root        /       ext4            defaults        0       1
+/dev/sda1               /boot   ext4            defaults        0       2
+/dev/mapper/tmp         /tmp    tmpfs           defaults        0       0
+/dev/mapper/swap        none    swap            sw              0       0
+</pre>
+<h3>
+<span id="Cifrar_el_vol.C3.BAmen_l.C3.B3gico_.2Fhome"></span><span class="mw-headline" id="Cifrar_el_volúmen_lógico_/home">Cifrar el volúmen lógico /home</span>
+</h3>
+<p>Desde este escenario se utiliza LVM como el primer mapeador y dm-crypt como el segundo, cada volumen lógico cifrado requiere su propio cifrado. Sin embargo, a diferencia de los sistemas de archivos temporales configurados con cifrado volátil anteriormente, el volumen lógico para <code>/home</code> debe ser persistente, por supuesto. Lo siguiente asume que se ha reiniciado el sistema instalado, de lo contrario se tienen que ajustar las rutas.
+Para asegurarnos de que se introduce una segunda frase de acceso en el arranque para dicho volumen, creamos un <a href="../../es/Dm-crypt/Device_encryption.html#Archivos_de_claves" title="Dm-crypt (Español)/Device encryption (Español)">archivo de claves</a>:
+</p>
+<pre># mkdir -m 700 /etc/luks-keys
+# dd if=/dev/random of=/etc/luks-keys/home bs=1 count=256 status=progress
+</pre>
+<p>El volumen lógico se cifra con dicho archivo de clave:
+</p>
+<pre># cryptsetup luksFormat -v /dev/MyVolGroup/crypthome /etc/luks-keys/home
+# cryptsetup -d /etc/luks-keys/home open /dev/MyVolGroup/crypthome home
+# mkfs.ext4 /dev/mapper/home
+# mount /dev/mapper/home /home
+</pre>
+<p>El montaje encriptado será configurado tanto en <a href="../../en/Dm-crypt/System_configuration.html#crypttab" class="mw-redirect" title="Crypttab">crypttab</a> como en <a href="../../es/Fstab.html" title="Fstab (Español)">fstab</a>:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/crypttab</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">home	/dev/MyVolGroup/crypthome   /etc/luks-keys/home
+</pre>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/fstab</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">/dev/mapper/home        /home   ext4        defaults        0       2
+</pre>
+<h2><span class="mw-headline" id="LUKS_sobre_RAID_por_software">LUKS sobre RAID por software</span></h2>
+<p>Este ejemplo se basa en una configuración real para un portátil destinado a funcionar como una estación de trabajo equipado con dos unidades SSD de igual tamaño y una unidad de disco duro (HDD) adicional para almacenamiento masivo. El resultado final es el cifrado del disco completo basado en LUKS1 (incluyendo <code>/boot</code>) para todas las unidades, con las unidades SSD en una matriz <a href="../../es/RAID.html" title="RAID (Español)">RAID0</a> y los archivos de clave utilizados para desbloquear toda la encriptación después de que <a href="../../es/GRUB.html" title="GRUB (Español)">GRUB (Español)</a> recibe una frase de contraseña correcta en el arranque.
+</p>
+<p>Esta configuración utiliza un esquema de particionado muy simplificado, con todo el almacenamiento RAID disponible montado en <code>/</code> (sin partición <code>/boot</code> separada, y el disco HDD descifrado montado en <code>/data</code>.
+</p>
+<p>Tenga en cuenta que es muy importante en este tipo de configuraciones realizar <a href="../../en/System_backup.html" title="System backup">copias de seguridad del sistema</a> regulares. Si cualquiera de los SSD falla, los datos contenidos en el conjunto RAID serán prácticamente imposibles de recuperar. Es posible que desee seleccionar un <a href="../../es/RAID.html#Niveles_RAID_est%C3%A1ndar" title="RAID (Español)">nivel RAID</a> diferente si la tolerancia a los fallos es importante para usted.
+</p>
+<p>El cifrado no es denegable en esta configuración.
+</p>
+<p>Para el ejemplo de las siguientes instrucciones, se utilizan los siguientes dispositivos de bloques:
+</p>
+<pre>/dev/sda = primer SSD
+/dev/sdb = segundo SSD
+/dev/sdc = HDD
+</pre>
+<pre style="white-space: pre !important; font-family:'DejaVu Sans Mono',monospace,monospace; font-variant-ligatures: no-common-ligatures;">+---------------------+---------------------------+---------------------------+ +---------------------+---------------------------+---------------------------+ +---------------------------+
+| BIOS boot partition | EFI system partition (ESP)| volumen cifrado con LUKS1 | | BIOS boot partition | EFI system partition (ESP)| volumen cifrado con LUKS1 | | volumen cifrado con LUKS2 |	
+|                     |                           |                           | |                     |                           |                           | |                           |	
+|                     | /efi                      | /                         | |                     | /efi                      | /                         | | /data                     |	
+|                     |                           |                           | |                     |                           |                           | |                           |	
+|                     |                           | /dev/mapper/cryptroot     | |                     |                           | /dev/mapper/cryptroot     | |                           |	
+|                     +---------------------------+---------------------------+ |                     +---------------------------+---------------------------+ |                           |
+|                     | matriz RAID1 (parte 1/2)  | matriz RAID0 (parte 1/2   | |                     | matriz RAID1 (parte 2/2)  | matriz RAID0 (parte 2/2)  | |                           |
+|                     |                           |                           | |                     |                           |                           | |                           |	
+|                     | /dev/md/ESP               | /dev/md/root              | |                     | /dev/md/ESP               | /dev/md/root              | | /dev/mapper/cryptdata     |	
+|                     +---------------------------+---------------------------+ |                     +---------------------------+---------------------------+ +---------------------------+	
+| /dev/sda1           | /dev/sda2                 | /dev/sda3                 | | /dev/sdb1           | /dev/sdb2                 | /dev/sdb3                 | | /dev/sdc1                 |
++---------------------+---------------------------+---------------------------+ +---------------------+---------------------------+---------------------------+ +---------------------------+
+</pre>
+<p>Asegúrese de sustituirlos por las designaciones de dispositivo apropiadas para su configuración, ya que pueden ser diferentes.
+</p>
+<h3><span class="mw-headline" id="Preparar_los_discos">Preparar los discos</span></h3>
+<p>Antes de crear cualquier partición, debe informarse acerca de la importancia y los métodos para borrar de forma segura el disco, descrito en <a href="../../es/Dm-crypt/Drive_preparation.html" title="Dm-crypt (Español)/Drive preparation (Español)">dm-crypt (Español)/Drive preparation (Español)</a>.
+</p>
+<p>Para <a href="../../es/GRUB.html#Sistemas_BIOS" title="GRUB (Español)">sistemas BIOS</a> con GPT, cree una <a href="../../es/GRUB.html#Instrucciones_espec%C3%ADficas_para_GUID_Partition_Table_(GPT)" class="mw-redirect" title="BIOS boot partition (Español)">BIOS boot partition (Español)</a> con un tamaño de 1 MiB para que GRUB almacene la segunda etapa del cargador de arranque de BIOS. No monte dicha partición.
+</p>
+<p>For <a href="../../es/GRUB.html#Sistemas_UEFI" title="GRUB (Español)">sistemas UEFI</a> cree una <a href="../../es/EFI_system_partition.html" title="EFI system partition (Español)">EFI system partition (Español)</a> con un tamaño apropiado, luego móntela en <code>/efi</code>.
+</p>
+<p>En el espacio restante en la unidad, cree una partición (<code>/dev/sda3</code> en este ejemplo) para «Linux RAID.» Elija el ID del tipo de partición <code>fd</code> para MBR o el tipo de partición GUID <code>A19D880F-05FC-4D3B-A006-743F0F84911E</code> para GPT.
+</p>
+<p>Una vez que se ha creado las particiones en <code>/dev/sda</code>, se pueden usar las siguientes órdenes para clonarlas en <code>/dev/sdb</code>
+</p>
+<pre># sfdisk -d /dev/sda &gt; sda.dump
+# sfdisk /dev/sdb &lt; sda.dump
+</pre>
+<p>El disco HDD está preparado con una sola partición de Linux que cubre todo el disco en <code>/dev/sdc1</code>.
+</p>
+<h3><span class="mw-headline" id="Compilar_la_matriz_RAID">Compilar la matriz RAID</span></h3>
+<p>Cree la matriz RAID para las unidades SSD.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Nota:</strong> 
+<ul>
+<li>Todas las partes de una matriz RAID en una EFI system partition deben poder usarse individualmente, eso significa que ESP solo puede colocarse en una matriz RAID1;</li>
+<li>El superbloque RAID debe colocarse al final de la partición del sistema EFI utilizando <code>--metadata=1.0</code>, de lo contrario, el firmware no podrá acceder a la partición.</li>
+</ul>
+</div>
+<pre># mdadm --create --verbose --level=0 --metadata=1.2 --raid-devices=2 /dev/md/root /dev/sda3 /dev/sdb3	
+	
+</pre>
+<p>Este ejemplo utiliza RAID0 para root, es posible que desee sustituir un nivel diferente según sus preferencias o requisitos.
+</p>
+<pre># mdadm --create --verbose --level=0 --metadata=1.2 --raid-devices=2 /dev/md/root /dev/sda3 /dev/sdb3
+</pre>
+<h3><span class="mw-headline" id="Preparar_los_dispositivos_de_bloque">Preparar los dispositivos de bloque</span></h3>
+<p>Como se explica en <a href="../../es/Dm-crypt/Drive_preparation.html" title="Dm-crypt (Español)/Drive preparation (Español)">dm-crypt (Español)/Drive preparation (Español)</a>, los dispositivos se limpian con datos aleatorios utilizando <code>/dev/zero</code> y un dispositivo de cifrado con una clave aleatoria. Alternativamente, puede usar <code>dd</code> con <code>/dev/random</code> o <code>/dev/urandom</code>, aunque será mucho más lento.
+</p>
+<pre># cryptsetup open --type plain /dev/md0 container --key-file /dev/random
+# dd if=/dev/zero of=/dev/mapper/container bs=1M status=progress
+# cryptsetup close container
+</pre>
+<p>Y repita lo anterior para la unidad HDD (<code>/dev/sdc1</code> en este ejemplo).
+</p>
+<p>Configure el cifrado para <code>/dev/md/root </code>:
+</p>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Advertencia:</strong> GRUB no es compatible con LUKS2. Utilice LUKS1 (<code>--type luks1</code>) en particiones donde GRUB necesite acceder.</div>
+<pre># cryptsetup -y -v luksFormat --type luks1 /dev/md/root
+# cryptsetup open /dev/md/root cryptroot
+# mkfs.ext4 /dev/mapper/cryptroot
+# mount /dev/mapper/cryptroot /mnt
+</pre>
+<p>Y repítalo para la unidad HDD:
+</p>
+<pre># cryptsetup -y -v luksFormat /dev/sdc1
+# cryptsetup open /dev/sdc1 cryptdata
+# mkfs.ext4 /dev/mapper/cryptdata
+# mkdir /mnt/data
+# mount /dev/mapper/cryptdata /mnt/mnt/data
+</pre>
+<p>Para sistemas UEFI, configure la partición del sistema EFI:
+</p>
+<pre># mkfs.fat -F32 /dev/md/ESP	
+# mount /dev/md/ESP /mnt/efi
+</pre>
+<h3><span class="mw-headline" id="Configurar_GRUB">Configurar GRUB</span></h3>
+<p>Configure <a href="../../es/GRUB.html" title="GRUB (Español)">GRUB (Español)</a> para el sistema cifrado con LUKS1, modificando <code>/etc/default/grub</code> con lo siguiente:
+</p>
+<pre>GRUB_CMDLINE_LINUX="cryptdevice=/dev/md/root:cryptroot"
+GRUB_ENABLE_CRYPTODISK=y
+</pre>
+<p>Consulte <a href="../../es/Dm-crypt/System_configuration.html#Cargador_de_arranque" title="Dm-crypt (Español)/System configuration (Español)">dm-crypt (Español)/System configuration (Español)#Cargador de arranque</a> y <a href="../../es/GRUB.html#/boot_cifrado" title="GRUB (Español)">GRUB (Español)#/boot cifrado</a>  para obtener más detalles.
+</p>
+<p>Complete la instalación de GRUB en ambas unidades SSD (en realidad, la instalación solo funcionará para <code>/dev/sda</code>).
+</p>
+<pre># grub-install --target=i386-pc /dev/sda
+# grub-install --target=i386-pc /dev/sdb
+# grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=GRUB
+# grub-mkconfig -o /boot/grub/grub.cfg
+</pre>
+<h3><span class="mw-headline" id="Crear_los_archivos_de_claves">Crear los archivos de claves</span></h3>
+<p>Los próximos pasos le ahorran que tenga que ingresar su  contraseña dos veces cuando inicia el sistema (una vez para que GRUB pueda desbloquear el dispositivo LUKS1, y la segunda vez cuando initramfs asume el control del sistema). Esto se hace creando un <a href="../../es/Dm-crypt/Device_encryption.html#Archivos_de_claves" title="Dm-crypt (Español)/Device encryption (Español)">archivo de claves</a> para el cifrado y añadiéndolo a la imagen de initramfs para permitir que el hook encrypt desbloquee el dispositivo raíz. Consulte <a href="../../es/Dm-crypt/Device_encryption.html#Con_un_archivo_de_clave_incrustado_en_initramfs" title="Dm-crypt (Español)/Device encryption (Español)">dm-crypt (Español)/Device encryption (Español)#Con un archivo de clave incrustado en initramfs</a> para más detalles.
+</p>
+<ul>
+<li>Cree el <a href="../../es/Dm-crypt/Device_encryption.html#Archivos_de_claves" title="Dm-crypt (Español)/Device encryption (Español)">archivo de claves</a> y agregue la clave para <code>/dev/md/root</code>.</li>
+<li>Cree otro archivo de claves para la unidad HDD (<code>/dev/sdc1</code>) para que también se pueda desbloquear al arrancar. Para su comodidad, deje la  contraseña creada anteriormente en su lugar, ya que esto puede facilitar la recuperación si alguna vez la necesita. Modifique <code>/etc/crypttab</code> para descifrar la unidad HDD al arrancar. Vea <a href="../../es/Dm-crypt/System_configuration.html#Desbloquear_con_archivo_de_claves" title="Dm-crypt (Español)/System configuration (Español)">dm-crypt (Español)/System configuration (Español)#Desbloquear con archivo de claves</a>.</li>
+</ul>
+<h3><span class="mw-headline" id="Configurar_el_sistema">Configurar el sistema</span></h3>
+<p>Modifique <a href="../../es/Fstab.html" title="Fstab (Español)">fstab</a> para montar los dispositivos de bloques cryptroot y cryptdata y la ESP:
+</p>
+<pre>/dev/mapper/cryptroot  /           ext4    rw,noatime  0   1 
+/dev/mapper/cryptdata  /mnt/data   ext4    defaults            0   2  
+/dev/md/ESP            /efi        vfat    rw,relatime,codepage=437,iocharset=iso8859-1,shortname=mixed,utf8,tz=UTC,errors=remount-ro  0   2
+</pre>
+<p>Guarde la configuración de RAID:
+</p>
+<pre># mdadm --detail --scan &gt;&gt; /etc/mdadm.conf 
+</pre>
+<p>Modifique <a href="../../en/Mkinitcpio.html" class="mw-redirect" title="Mkinitcpio (Español)">mkinitcpio (Español)</a> para incluir su archivo de claves y agregar los hooks adecuados:
+</p>
+<pre>FILES=(/crypto_keyfile.bin)
+HOOKS=(base udev autodetect <b>keyboard</b> <b>keymap</b> consolefont modconf block <b>mdadm_udev</b> <b>encrypt</b> filesystems fsck)
+</pre>
+<p>Consulte <a href="../../es/Dm-crypt/System_configuration.html#mkinitcpio" title="Dm-crypt (Español)/System configuration (Español)">dm-crypt (Español)/System configuration (Español)#mkinitcpio</a> para conocer más detalles.
+</p>
+<h2><span class="mw-headline" id="Modalidad_plain_de_dm-crypt">Modalidad plain de dm-crypt</span></h2>
+<p>Contrariamente a LUKS, la modalidad <i>plain</i> de dm-crypt no requiere una cabecera en el disco cifrado: esto significa que un disco cifrado sin particionar será indistinguible de un disco lleno con datos aleatorios, que podría permitir <a href="https://en.wikipedia.org/wiki/es:Cifrado_negable" class="extiw" title="wikipedia:es:Cifrado negable">cifrado negable</a>. Véase también <a href="https://en.wikipedia.org/wiki/es:Cifrado_de_disco#Completo_cifrado_de_disco" class="extiw" title="wikipedia:es:Cifrado de disco">Wikipedia:es:Cifrado de disco#Completo cifrado de disco</a>.
+</p>
+<p>Tenga en cuenta que si no necesita cifrar el disco completo, los métodos que utilizan LUKS descritos anteriormente son las mejores opciones para el cifrado del sistema y de las particiones. Características de LUKS como la  gestión de claves con múltiples frases de contraseñas/archivos de claves no están disponibles con la modalidad <i>plain</i>. 
+</p>
+<p>Los discos cifrados con la modalidad <i>plain</i> de dm-crypt pueden ser más resistentes a los daños que los discos cifrados con LUKS, ya que no se basan en una clave maestra de cifrado, la cual constituye un punto vulnerable único de fallo si se daña. Sin embargo, utilizando el modo <i>plain</i> también se requiere una configuración más manual de las opciones de cifrado para lograr la misma fuerza criptográfica. Véase también <a href="../../es/Data-at-rest_encryption.html#Metadatos_criptogr%C3%A1ficos" class="mw-redirect" title="Disk encryption (Español)">Disk encryption (Español)#Metadatos criptográficos</a>. También se puede considerar el uso de la modalidad <i>plain</i> si se trata de los problemas explicados en <a href="../../es/Dm-crypt/Specialties.html#Soporte_Discard/TRIM_para_unidades_de_estado_s%C3%B3lido_(SSD)" title="Dm-crypt (Español)/Specialties (Español)">dm-crypt (Español)/Specialties (Español)#Soporte Discard/TRIM para unidades de estado sólido (SSD)</a>.
+</p>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Sugerencia:</strong> Si el cifrado sin cabeceras es su objetivo, pero no está seguro acerca de la falta de derivación de clave con el modo <i>plain</i>, entonces dispone de dos alternativas:
+<ul>
+<li>
+<a href="../../en/Tcplay.html" title="Tcplay">tcplay</a> que ofrece cifrado sin cabeceras, pero con la función PBKDF2, o</li>
+<li>la modalidad LUKS de dm-crypt utilizando la opción <code>--header</code> de <i>cryptsetup</i>. No se podrá utilizar el hook estándar <i>encrypt</i>, pero dicho hook <a href="../../es/Dm-crypt/Specialties.html#Sistema_cifrado_usando_un_encabezado_LUKS_separado" title="Dm-crypt (Español)/Specialties (Español)">puede ser modificado</a>.</li>
+</ul>
+</div>
+<p>El escenario utiliza una memoria USB:
+</p>
+<ul>
+<li>una para el dispositivo de arranque que también permite almacenar las opciones necesarias para abrir/desbloquear el dispositivo cifrado simple en la configuración del gestor de arranque, ya que escribirlos en cada arranque sería propenso a errores;</li>
+<li>y otra para almacenar la clave de cifrado asumiendo que está almacenada como bits en bruto de modo que a los ojos de un atacante que no esté al tanto que quiera obtener la clave usb, la clave de cifrado se mostrará como datos aleatorios en lugar de ser visible como un archivo normal. Véase también <a href="https://en.wikipedia.org/wiki/es:Seguridad_por_oscuridad" class="extiw" title="wikipedia:es:Seguridad por oscuridad">Wikipedia:es:Seguridad por oscuridad</a>, y siga con <a href="../../en/Dm-crypt/Device_encryption.html#Keyfiles" title="Dm-crypt/Device encryption">dm-crypt/Device encryption#Keyfiles</a> para preparar el archivo de claves.</li>
+</ul>
+<p>El esquema de particionado del disco es:
+</p>
+<pre style="white-space: pre !important; font-family:'DejaVu Sans Mono',monospace,monospace; font-variant-ligatures: no-common-ligatures;">+----------------------+----------------------+----------------------+ +-------------------------+ +--------------------------+
+| Volumen lógico 1     | Volumen lógico 2     | Volumen lógico 3     | | Dispositivo de arranque | | Depósito para el archivo |
+|                      |                      |                      | |                         | | de claves de cifrado     |
+| /                    | [SWAP]               | /home                | | /boot                   | | (sin particionar         |
+|                      |                      |                      | |                         | | en el ejemplo)           |
+| /dev/MyVolGroup/root | /dev/MyVolGroup/swap | /dev/MyVolGroup/home | | /dev/sdb1               | | /dev/sdc                 |
+|----------------------+----------------------+----------------------| |-------------------------| |--------------------------|
+| unidad/disco /dev/sda cifrado con modo plain y LVM                 | | USB 1                   | | USB 2                    |
++--------------------------------------------------------------------+ +-------------------------+ +--------------------------+
+</pre>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Sugerencia:</strong> 
+<ul>
+<li>También es posible utilizar una sola llave USB física:
+<ul>
+<li>mediante la coloación de la clave en otra partición (/dev/sdb2) del dispositivo de almacenamiento USB (/dev/sdb);</li>
+<li>mediante la copia del archivo de claves a la imagen initramfs directamente. Un ejemplo de archivo de claves <code>/etc/keyfile</code> copiado a la imagen initramfs se hace estableciendo <code>FILES="/etc/keyfile"</code> en <code>/etc/mkinitcpio.conf</code>. La manera de instruir al hook <code>encrypt</code> para que lea el archivo de claves en la imagen initramfs es utilizando el prefijo <code>rootfs:</code> delante del nombre del archivo, por ejemplo <code>cryptkey=rootfs:/etc/keyfile</code>.</li>
+</ul>
+</li>
+<li>Otra opción es usar una frase de acceso con buena <a href="../../es/Data-at-rest_encryption.html#Elegir_una_frase_de_acceso_s%C3%B3lida" class="mw-redirect" title="Disk encryption (Español)">entropía</a>.</li>
+</ul>
+</div>
+<h3><span class="mw-headline" id="Preparar_el_disco_4">Preparar el disco</span></h3>
+<p>Es de vital importancia que el dispositivo mapeado está lleno de datos aleatorios. En particular, esto se aplica al caso que nos afecta.
+</p>
+<p>Véase <a href="../../es/Dm-crypt/Drive_preparation.html" title="Dm-crypt (Español)/Drive preparation (Español)">dm-crypt (Español)/Drive preparation (Español)</a> y <a href="../../es/Dm-crypt/Drive_preparation.html#M%C3%A9todos_espec%C3%ADficos_de_dm-crypt" title="Dm-crypt (Español)/Drive preparation (Español)">dm-crypt (Español)/Drive preparation (Español)#Métodos específicos de dm-crypt</a>
+</p>
+<h3>
+<span id="Preparar_las_particiones_que_no_son_de_arranque_.28boot.29_2"></span><span class="mw-headline" id="Preparar_las_particiones_que_no_son_de_arranque_(boot)_2">Preparar las particiones que no son de arranque (boot)</span>
+</h3>
+<p>Consulte <a href="../../es/Dm-crypt/Device_encryption.html#Opciones_de_cifrado_para_la_modalidad_plain" title="Dm-crypt (Español)/Device encryption (Español)">dm-crypt (Español)/Device encryption (Español)#Opciones de cifrado para la modalidad plain</a> para más detalles.
+</p>
+<p>Utilizando el dispositivo <code>/dev/sda</code>, con el cifrado aes-xts con un tamaño de clave de 512 bits, y un archivo de clave, tenemos las siguientes opciones para este escenario:
+</p>
+<pre># cryptsetup --cipher=aes-xts-plain64 --offset=0 --key-file=/dev/sdc --key-size=512 open --type plain /dev/sda cryptlvm
+</pre>
+<p>A diferencia del cifrado con LUKS, la orden anterior se debe ejecutar <i>en su totalidad</i> siempre que sea necesario restablecer el mapeado, por lo que es importante recordar los detalles del cifrado, el hash y el archivo de claves.
+</p>
+<p>Ahora podemos comprobar que se ha realizado una entrada de mapeo para <code>/dev/mapper/cryptlvm</code>:
+</p>
+<pre># fdisk -l
+</pre>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Sugerencia:</strong> Una alternativa más simple al uso de LVM, recomendada en las FAQ de cryptsetup para los casos en que LVM no es necesario, es simplemente crear un sistema de archivos en la totalidad del dispositivo mapeado con dm-crypt.</div>
+<p>A continuación, configuramos volúmenes lógicos <a href="../../es/LVM.html" title="LVM (Español)">LVM (Español)</a> en el dispositivo mapeado. Consulte <a href="../../es/LVM.html#Instalar_Arch_Linux_sobre_LVM" title="LVM (Español)">LVM (Español)#Instalar Arch Linux sobre LVM</a> para obtener más detalles:
+</p>
+<pre># pvcreate /dev/mapper/cryptlvm
+# vgcreate MyVolGroup /dev/mapper/cryptlvm
+# lvcreate -L 32G MyVolGroup -n root
+# lvcreate -L 10G MyVolGroup -n swap
+# lvcreate -l 100%FREE MyVolGroup -n home
+</pre>
+<p>]
+Formateamos y montamos y, luego, activamos el espacio de intercambio. Consulte <a href="../../es/File_systems.html#Crear_un_sistema_de_archivos" title="File systems (Español)">File systems (Español)#Crear un sistema de archivos</a> para más detalles:
+</p>
+<pre># mkfs.ext4 /dev/MyVolGroup/root
+# mkfs.ext4 /dev/MyVolGroup/home
+# mount /dev/MyVolGroup/root /mnt
+# mkdir /mnt/home
+# mount /dev/MyVolGroup/home /mnt/home
+# mkswap /dev/MyVolGroup/swap
+# swapon /dev/MyVolGroup/swap
+</pre>
+<h3>
+<span id="Preparar_la_partici.C3.B3n_de_arranque_4"></span><span class="mw-headline" id="Preparar_la_partición_de_arranque_4">Preparar la partición de arranque</span>
+</h3>
+<p>La partición <code>/boot</code> se puede instalar en la partición vfat estándar de una memoria USB, si es necesario. Pero si se ve en la necesidad de realizar el particionado manualmente, entonces podría crear una pequeña partición de 200 MiB, lo que sería suficiente. Cree la partición utilizando una <a href="../../en/Partitioning.html#Partitioning_tools" title="Partitioning">utilidad de particionado</a> de su elección.
+</p>
+<p>Cree un <a href="../../es/File_systems.html" title="File systems (Español)">sistema de archivos</a> en la partición destinada a <code>/boot</code>, si no está ya formateada como vfat: 
+</p>
+<pre># mkfs.ext4 /dev/sdb1
+# mkdir /mnt/boot
+# mount /dev/sdb1 /mnt/boot
+</pre>
+<h3><span class="mw-headline" id="Configurar_mkinitcpio_4">Configurar mkinitcpio</span></h3>
+<p>Añada los hooks <code>keyboard</code>, <code>encrypt</code> and <code>lvm2</code> a <a href="../../en/Mkinitcpio.html" class="mw-redirect" title="Mkinitcpio (Español)">mkinitcpio (Español)</a>:
+</p>
+<pre>HOOKS=(base udev autodetect <b>keyboard</b> <b>keymap</b> consolefont modconf block <b>encrypt</b> <b>lvm2</b> filesystems fsck)
+</pre>
+<p>Véase <a href="../../es/Dm-crypt/System_configuration.html#mkinitcpio" title="Dm-crypt (Español)/System configuration (Español)">dm-crypt (Español)/System configuration (Español)#mkinitcpio</a> para conocer más detalles y otros hooks que pueda necesitar.
+</p>
+<h3><span class="mw-headline" id="Configurar_el_gestor_de_arranque_4">Configurar el gestor de arranque</span></h3>
+<p>Con el fin de desbloquear la partición raíz cifrada en el arranque, es necesario pasar los siguientes <a href="../../es/Kernel_parameters.html" title="Kernel parameters (Español)">parámetros del kernel</a> al gestor de arranque (tenga en cuenta que 64 es el número de bytes en 512 bits)::
+</p>
+<pre>cryptdevice=/dev/disk/by-id/<i>disk-ID-of-sda</i>:cryptlvm cryptkey=/dev/disk/by-id/<i>disk-ID-of-sdc</i>:0:64 crypto=:aes-xts-plain64:512:0:
+</pre>
+<p>El <code><i>disk-ID-of-<b>disk</b></i></code> se refiere a la identificación del disco al que se hace referencia. Véase <a href="../../es/Persistent_block_device_naming.html" title="Persistent block device naming (Español)">Persistent block device naming (Español)</a> par más detalles.
+</p>
+<p>Véase <a href="../../es/Dm-crypt/System_configuration.html#Cargador_de_arranque" title="Dm-crypt (Español)/System configuration (Español)">dm-crypt (Español)/System configuration (Español)#Cargador de arranque</a> para conocer más detalles y otros parámetros que pueda necesitar
+</p>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Sugerencia:</strong> Si se utiliza GRUB, puede instalarlo en el mismo USB utilizado como partición <code>/boot</code> con:
+<pre># grub-install --recheck /dev/sdb
+</pre>
+</div>
+<h3>
+<span id="Posinstalaci.C3.B3n"></span><span class="mw-headline" id="Posinstalación">Posinstalación</span>
+</h3>
+<p>Podemos retirar la memoria USB después de arrancar. Ya que la partición <code>/boot</code>, generalmente, no se necesita, la opción <code>noauto</code> se puede agregar en la línea correspondiente de <code>/etc/fstab</code>:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/fstab</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;"># /dev/sdb1
+/dev/sdb1 /boot ext4 <b>noauto</b>,rw,noatime 0 2
+</pre>
+<p>Sin embargo, cuando se requiere una actualización de cualquier cosa utilizada en initramfs, o un kernel, o el gestor de arranque, la partición <code>/boot</code> debe estar presente y montada. Como la entrada en <code>fstab</code> ya existe, se puede montar de forma sencilla con:
+</p>
+<pre># mount /boot
+</pre>
+<h2>
+<span id="Cifrar_partici.C3.B3n_de_arranque_.28GRUB.29"></span><span class="mw-headline" id="Cifrar_partición_de_arranque_(GRUB)">Cifrar partición de arranque (GRUB)</span>
+</h2>
+<p>Esta configuración utiliza el mismo diseño y configuración de partición que la sección anterior <a href="#LVM_sobre_LUKS">#LVM sobre LUKS</a>, con la diferencia de que se utiliza el cargador de arranque <a href="../../es/GRUB.html" title="GRUB (Español)">GRUB (Español)</a> ya que es capaz de arrancar desde un volumen lógico LVM y un <code>/boot</code> cifrado con LUKS1. Véase también <a href="../../es/GRUB.html#/boot_cifrado" title="GRUB (Español)">GRUB (Español)#/boot cifrado</a>.
+</p>
+<p>La distribución del disco en este ejemplo es:
+</p>
+<pre style="white-space: pre !important; font-family:'DejaVu Sans Mono',monospace,monospace; font-variant-ligatures: no-common-ligatures;">+---------------------+----------------------+----------------------+----------------------+----------------------+
+| Partición           | Partición            | Volumen lógico 1     | Volumen lógico 2     | Volumen lógico 3     |
+| BIOS boot partition | EFI system particion |                      |                      |                      |
+|                     | /efi                 | /                    | [SWAP]               | /home                |
+|                     |                      |                      |                      |                      |
+|                     |                      | /dev/MyVolGroup/root | /dev/MyVolGroup/swap | /dev/MyVolGroup/home |
+| /dev/sda1           | /dev/sda2            +----------------------+----------------------+----------------------+
+| sin cifrar          | sin cifrar           | /dev/sda3 cifrado usando LVM sobre LUKS1                           |
++---------------------+----------------------+--------------------------------------------------------------------+
+</pre>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Sugerencia:</strong> 
+<ul>
+<li>Todos los escenarios tienen el propósito de ejemplos. Es, por supuesto, posible combinar los dos pasos anteriores de las distintas instalaciones con otros escenarios posibles. Ver también las variantes asociadas a <a href="#LVM_sobre_LUKS">#LVM sobre LUKS</a>;</li>
+<li>Puede utilizar el script <code>cryptboot</code> del paquete <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/cryptboot/">cryptboot</a></span><sup><small>AUR</small></sup> para una administración de arranque cifrada simplificada (montaje, desmontaje, actualización de paquetes) y como defensa contra ataques de <a rel="nofollow" class="external text" href="https://www.schneier.com/blog/archives/2009/10/evil_maid_attac.html">Evil Maid</a> con <a href="../../en/Unified_Extensible_Firmware_Interface/Secure_Boot.html#Using_your_own_keys" class="mw-redirect" title="Secure Boot">Secure Boot de UEFI</a>. Para obtener más información y limitaciones, consulte la página  <a rel="nofollow" class="external text" href="https://github.com/xmikos/cryptboot">cryptboot project</a>.</li>
+</ul>
+</div>
+<h3><span class="mw-headline" id="Preparar_el_disco_5">Preparar el disco</span></h3>
+<p>Antes de crear las particiones, debe informarse sobre la importancia y los métodos para borrar de forma segura el disco, descrito en <a href="../../es/Dm-crypt/Drive_preparation.html" title="Dm-crypt (Español)/Drive preparation (Español)">dm-crypt (Español)/Drive preparation (Español)</a>.
+</p>
+<p>Para <a href="../../es/GRUB.html#Sistemas_BIOS" title="GRUB (Español)">sistemas BIOS</a> cree una <a href="../../es/GRUB.html#Instrucciones_espec%C3%ADficas_para_GUID_Partition_Table_(GPT)" title="GRUB (Español)">BIOS boot partition</a> con tamaño de 1 MiB para GRUB para almacenar la segunda etapa del gestor de arranque BIOS. No monte la partición.
+</p>
+<p>Para <a href="../../es/GRUB.html#Sistemas_UEFI" title="GRUB (Español)">sistemas UEFI</a> cree una <a href="../../es/EFI_system_partition.html" title="EFI system partition (Español)">EFI system partition (Español)</a> con un tamaño apropiado, para luego montarla en  <code>/efi</code>.
+</p>
+<p>Cree una partición del tipo <code>8309</code>, which will later contain the encrypted container for the LVM.
+</p>
+<p>Cree el contenedor cifrado con LUKS:
+</p>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Advertencia:</strong> GRUB no es compatible con LUKS2. Utilice LUKS1 (<code>--type luks1</code>) en las particiones a las que GRUB necesita acceder.</div>
+<pre># cryptsetup luksFormat --type luks1 /dev/sda3
+</pre>
+<p>Para obtener más información sobre las opciones disponibles de cryptsetup vea <a href="../../es/Dm-crypt/Device_encryption.html#Opciones_de_cifrado_para_la_modalidad_LUKS" title="Dm-crypt (Español)/Device encryption (Español)">LUKS encryption options</a> antes de ejecutar la orden anterior.
+</p>
+<p>Su esquema de particinado debería ser similar a esto:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;"># gdisk -l /dev/sda</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">Number  Start (sector)    End (sector)  Size       Code  Name
+   1            2048            4095   1024.0 KiB  EF02  BIOS boot partition
+   2            4096         1130495   550.0 MiB   EF00  EFI System
+   3         1130496        68239360   32.0 GiB    8309  Linux LUKS
+</pre>
+<p>Abra el contenedor:
+</p>
+<pre># cryptsetup open /dev/sda3 cryptlvm
+</pre>
+<p>El contenedor desbloqueado estará ahora disponible como <code>/dev/mapper/cryptlvm</code>.
+</p>
+<h3>
+<span id="Preparar_los_vol.C3.BAmenes_l.C3.B3gicos_3"></span><span class="mw-headline" id="Preparar_los_volúmenes_lógicos_3">Preparar los volúmenes lógicos</span>
+</h3>
+<p>Los volúmenes lógicos LVM de este ejemplo siguen el mismo esquema descrito en el escenario <a href="#LVM_sobre_LUKS">#LVM sobre LUKS</a>. Por lo tanto, siga la sección <a href="#Preparar_los_vol%C3%BAmenes_l%C3%B3gicos">#Preparar los volúmenes lógicos</a> de arriba o haga los ajustes necesarios.
+</p>
+<p>If you plan to boot in UEFI mode, create a mountpoint for the <a href="../../es/EFI_system_partition.html" title="EFI system partition (Español)">EFI system partition (Español)</a> at <code>/efi</code> for compatibility with <code>grub-install</code> and mount it:
+</p>
+<pre># mkdir /mnt/efi
+# mount /dev/sda2 /mnt/efi
+</pre>
+<p>En este punto, debe tener las siguientes particiones y volúmenes lógicos dentro de <code>/mnt</code>:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">$ lsblk</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">NAME                  MAJ:MIN RM   SIZE RO TYPE  MOUNTPOINT
+sda                   8:0      0   200G  0 disk
+├─sda1                8:1      0     1M  0 part
+├─sda2                8:2      0   550M  0 part  /mnt/efi
+├─sda3                8:3      0   200M  0 part
+  └─cryptlvm          254:0    0   198M  0 crypt /boot
+    ├─MyVolGroup-swap 254:1    0     8G  0 lvm   [SWAP]
+    ├─MyVolGroup-root 254:2    0    32G  0 lvm   /
+    └─MyVolGroup-home 254:3    0    60G  0 lvm   /mnt/home
+</pre>
+<h3><span class="mw-headline" id="Configurar_mkinitcpio_5">Configurar mkinitcpio</span></h3>
+<p>Añada los hooks <code>keyboard</code>, <code>encrypt</code> y <code>lvm2</code> a <a href="../../en/Mkinitcpio.html" class="mw-redirect" title="Mkinitcpio (Español)">mkinitcpio (Español)</a>:
+</p>
+<pre>HOOKS=(base <b>udev</b> autodetect <b>keyboard</b> <b>keymap</b> consolefont modconf block <b>encrypt</b> <b>lvm2</b> filesystems fsck)
+</pre>
+<p>Si utiliza el hook <a href="../../es/Dm-crypt/System_configuration.html#Utilizar_el_hook_sd-encrypt" title="Dm-crypt (Español)/System configuration (Español)">sd-encrypt</a> con initramfs basado en systemd se debe establecer lo siguiente en su lugar:
+</p>
+<pre>HOOKS=(base <b>systemd</b> autodetect <b>keyboard</b> <b>sd-vconsole</b> modconf block <b>sd-encrypt</b> <b>sd-lvm2</b> filesystems fsck)
+</pre>
+<p>Véase <a href="../../es/Dm-crypt/System_configuration.html#mkinitcpio" title="Dm-crypt (Español)/System configuration (Español)">dm-crypt (Español)/System configuration (Español)#mkinitcpio</a> para más detalles y otros hooks que pueda necesitar.
+</p>
+<h3><span class="mw-headline" id="Configurar_GRUB_2">Configurar GRUB</span></h3>
+<p>Configure GRUB para que reconozca la partición <code>/boot</code> cifrada con LUKS1:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/default/grub</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">GRUB_ENABLE_CRYPTODISK=y</pre>
+<p>Establezca los parámetros del kernel para que initramfs pueda desbloquear la partición raíz cifrada. Usando el hook <code>encrypt</code>:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/default/grub</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">GRUB_CMDLINE_LINUX="... cryptdevice=UUID=<i>UUID-del-dispositivo</i>:cryptlvm ..."</pre>
+<p>Si utiliza el hook <a href="../../es/Dm-crypt/System_configuration.html#Utilizar_el_hook_sd-encrypt" title="Dm-crypt (Español)/System configuration (Español)">sd-encrypt</a>, se debe configurar lo siguiente en su lugar:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/default/grub</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">GRUB_CMDLINE_LINUX="... rd.luks.name=<i>UUID-del-dispositivo</i>=cryptlvm" ...</pre>
+<p>Véase <a href="../../es/Dm-crypt/System_configuration.html#Cargador_de_arranque" title="Dm-crypt (Español)/System configuration (Español)">Dm-crypt (Español)/System configuration (Español)#Cargador de arranque</a> y <a href="../../es/GRUB.html#/boot_cifrado" title="GRUB (Español)">GRUB (Español)#/boot cifrado</a> para obtener más detalles. El <code><i>UUID-del-dispositivo</i></code> hace referencia al UUID de <code>/dev/sda4</code> (la partición física que aloja el volumen, la cual contiene a su vez el sistema de archivos raíz, no es dispositivo mapeado resultante del cifrado). Vea <a href="../../es/Persistent_block_device_naming.html" title="Persistent block device naming (Español)">Persistent block device naming (Español)</a>.
+</p>
+<p><a href="../../es/GRUB.html#Instalaci%C3%B3n" title="GRUB (Español)">Instale GRUB</a> con la ESP montada para arrancar UEFI:
+</p>
+<pre># grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=GRUB --recheck
+</pre>
+<p><a href="../../es/GRUB.html#Instalaci%C3%B3n_2" title="GRUB (Español)">Instale GRUB</a> en el disco para arrancar BIOS:
+</p>
+<pre># grub-install --target=i386-pc --recheck /dev/sda
+</pre>
+<p>Genere el archivo de <a href="../../es/GRUB.html#Generar_el_archivo_de_configuraci%C3%B3n_principal" title="GRUB (Español)">configuration</a> de GRUB :
+</p>
+<pre># grub-mkconfig -o /boot/grub/grub.cfg
+</pre>
+<p>Si todos las órdenes terminaron sin errores, GRUB le pedirá la contraseña para desbloquear la partición <code>/dev/sda3</code> en el siguiente reinicio.
+</p>
+<h3>
+<span id="Evitar_tener_que_ingresar_la_frase_de_contrase.C3.B1a_dos_veces"></span><span class="mw-headline" id="Evitar_tener_que_ingresar_la_frase_de_contraseña_dos_veces">Evitar tener que ingresar la frase de contraseña dos veces</span>
+</h3>
+<p>Si bien GRUB solicita una frase de contraseña para desbloquear la partición cifrada con LUKS1m siguiendo las instrucciones anteriores, el desbloqueo de la partición no se transfiere a initramfs. Por lo tanto, debe ingresar la frase de contraseña dos veces en el arranque: una para GRUB y otra para initramfs.
+</p>
+<p>Esta sección trata sobre la configuración adicional para permitir que el sistema arranque solo ingresando la frase de contraseña una vez, en GRUB. Esto se logra mediante <a href="../../es/Dm-crypt/Device_encryption.html#Con_un_archivo_de_clave_incrustado_en_initramfs" title="Dm-crypt (Español)/Device encryption (Español)">un archivo de claves incrustado en initramfs</a>.
+</p>
+<p>Primero cree un archivo de claves y añádalo como clave de LUKS:
+</p>
+<pre># dd bs=512 count=4 if=/dev/random of=/root/cryptlvm.keyfile iflag=fullblock
+# chmod 000 /root/cryptlvm.keyfile
+# chmod 600 /boot/initramfs-linux*	
+# cryptsetup -v luksAddKey /dev/sda3 /root/cryptlvm.keyfile
+</pre>
+<p>Añada el archivo de claves a la imagen initramfs:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/mkinitcpio.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">FILES=(/root/cryptlvm.keyfile)</pre>
+<p>Establezca los siguientes parámetros del kernel para desbloquear la partición LUKS con el archivo de claves. Usando el hook <code>encrypt</code>:
+</p>
+<pre>GRUB_CMDLINE_LINUX="... cryptkey=rootfs:/root/cryptlvm.keyfile"
+</pre>
+<p>O, usando el hook <a href="../../es/Dm-crypt/System_configuration.html#Utilizar_el_hook_sd-encrypt" title="Dm-crypt (Español)/System configuration (Español)">sd-encrypt</a>:
+</p>
+<pre>GRUB_CMDLINE_LINUX="... rd.luks.key=<i>UUID-del-dispositivo</i>=/root/cryptlvm.keyfile"
+</pre>
+<p>Si por alguna razón el archivo de claves no puede desbloquear la partición de arranque, systemd se repliega para pedir una contraseña para desbloquear y, en caso de que sea correcta, continuar el arranque.
+</p>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Sugerencia:</strong> Si desea cifrar la partición <code>/boot</code> para protegerse contra amenazas de manipulación offline, el hook <a href="../../es/Dm-crypt/Specialties.html#mkinitcpio-chkcryptoboot" title="Dm-crypt (Español)/Specialties (Español)">mkinitcpio-chkcryptoboot</a> puede serle de ayuda.</div>
+<h2>
+<span id="Subvol.C3.BAmenes_btrfs_con_espacio_de_intercambio"></span><span class="mw-headline" id="Subvolúmenes_btrfs_con_espacio_de_intercambio">Subvolúmenes btrfs con espacio de intercambio</span>
+</h2>
+<p>El siguiente ejemplo crea un cifrado completo del sistema con LUKS1 utilizando subvolúmenes <a href="../../es/Btrfs.html" title="Btrfs (Español)">Btrfs</a> como una <a href="../../es/Btrfs.html#Montar_subvol%C3%BAmenes" title="Btrfs (Español)">simulación de particiones</a>.
+</p>
+<p>Si utiliza UEFI, se requiere una <a href="../../es/EFI_system_partition.html" title="EFI system partition (Español)">EFI system partition (Español)</a> (siglas en inglés ESP). El mismo <code>/boot</code> puede residir en la raíz <code>/</code> y estar cifrado; sin embargo, la ESP no puede cifrase. En este esquema propuesto de ejemplo, la ESP es <code>/dev/sda1</code> y está montada en <code>/efi</code>. <code>/boot</code> se encuentra en la partición del sistema, <code>/dev/sda2</code>.
+</p>
+<p>Dado que <code>/boot</code> reside en la raiz <code>/</code> cifrada con LUKS1, <a href="../../es/GRUB.html" title="GRUB (Español)">GRUB (Español)</a> debe usarse como gestor de arranque, porque solo GRUB puede cargar los módulos necesarios para descifrar <code>/boot</code> (por ejemplo, crypto.mod, cryptodisk.mod y luks.mod).
+</p>
+<p>Además, se el esquema muestra una partición opcional de <a href="../../es/Swap.html" title="Swap (Español)">swap</a> cifrada con plain.
+</p>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Advertencia:</strong> No utilice un <a href="../../es/Swap.html#Archivo_como_espacio_de_intercambio" title="Swap (Español)">archivo de intercambio</a> en lugar de una partición separada sobre el kernel de Linux antes de v5.0, ya que esto puede ocasionar la pérdida de datos. Vea <a href="../../es/Btrfs.html#Archivo_como_espacio_de_intercambio" title="Btrfs (Español)">Btrfs (Español)#Archivo como espacio de intercambio</a>.</div>
+<pre style="white-space: pre !important; font-family:'DejaVu Sans Mono',monospace,monospace; font-variant-ligatures: no-common-ligatures;">+----------------------------------+-------------------------------+--------------------------+
+| Partición «EFI system partition» | Partición del sistema         | Partición de intercambio |
+| sin cifrar                       | cifrada con LUKS1             | cifrada con plain        |
+|                                  |                               |                          |
+| /efi                             | /                             | [SWAP]                   |
+| /dev/sda1                        | /dev/sda2                     | /dev/sda3                |
+|----------------------------------+-------------------------------+--------------------------+
+</pre>
+<h3><span class="mw-headline" id="Preparar_el_disco_6">Preparar el disco</span></h3>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Nota:</strong> No es posible utilizar btrfs para particionar como se describe en <a href="../../es/Btrfs.html#Disco_Btrfs_sin_particiones" title="Btrfs (Español)">Btrfs (Español)#Disco Btrfs sin particiones</a> cuando se utiliza LUKS. Se debe utilizar la partición tradicional, incluso si solo se trata de crear una partición.</div>
+<p>Antes de crear cualquier partición, debe informarse acerca de la importancia y los métodos para borrar de forma segura el disco, descrito en <a href="../../es/Dm-crypt/Drive_preparation.html" title="Dm-crypt (Español)/Drive preparation (Español)">dm-crypt (Español)/Drive preparation (Español)</a>. Si está utilizando <a href="../../es/Unified_Extensible_Firmware_Interface.html" title="Unified Extensible Firmware Interface (Español)">UEFI (Español)</a>, cree una <a href="../../es/EFI_system_partition.html" title="EFI system partition (Español)">EFI system partition (Español)</a> con un tamaño apropiado. Posteriormente se montará en <code>/efi</code>. Si va a crear una partición de intercambio cifrada, crea la partición para ella, pero <b>no</b> la marque como <i>swap</i>, ya que se usará la modalidad plain de <i>dm-crypt</i> para cifrar la partición.
+</p>
+<p>Cree las particiones necesarias, al menos una para la raíz <code>/</code> (por ejemplo, <code>/dev/sda2</code>). Vea el artículo <a href="../../en/Partitioning.html" class="mw-redirect" title="Partitioning (Español)">Partitioning (Español)</a>.
+</p>
+<h3>
+<span id="Preparar_la_partici.C3.B3n_del_sistema"></span><span class="mw-headline" id="Preparar_la_partición_del_sistema">Preparar la partición del sistema</span>
+</h3>
+<h4><span class="mw-headline" id="Crear_contenedor_LUKS">Crear contenedor LUKS</span></h4>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Advertencia:</strong> GRUB no es compatible con LUKS2. Utilice LUKS1 (<code>--type luks1</code>) en las particiones a las que GRUB necesita acceder.</div>
+<p>Siga la sección <a href="../../es/Dm-crypt/Device_encryption.html#Opciones_de_cifrado_para_la_modalidad_LUKS" title="Dm-crypt (Español)/Device encryption (Español)">dm-crypt (Español)/Device encryption (Español)#Opciones de cifrado para la modalidad LUKS</a> para configurar <code>/dev/sda2</code> para LUKS. Consulte <a href="../../es/Dm-crypt/Device_encryption.html#Opciones_de_cifrado_para_la_modalidad_LUKS" title="Dm-crypt (Español)/Device encryption (Español)">dm-crypt (Español)/Device encryption (Español)#Opciones de cifrado para la modalidad LUKS</a> antes de hacerlo para obtener una lista de opciones de cifrado.
+</p>
+<h4><span class="mw-headline" id="Desbloquear_el_contenedor_LUKS">Desbloquear el contenedor LUKS</span></h4>
+<p>Ahora siga las instrucciones de <a href="../../es/Dm-crypt/Device_encryption.html#Desbloquear/mapear_particiones_LUKS_con_el_mapeador_de_dispositivos" title="Dm-crypt (Español)/Device encryption (Español)">dm-crypt (Español)/Device encryption (Español)#Desbloquear/mapear particiones LUKS con el mapeador de dispositivos</a> para desbloquear el contenedor LUKS y mapearlo.
+</p>
+<h4><span class="mw-headline" id="Formatear_el_dispositivo_mapeado">Formatear el dispositivo mapeado</span></h4>
+<p>Proceda a formatear el dispositivo mapeado como se describe en <a href="../../es/Btrfs.html#Sistema_de_archivos_en_un_%C3%BAnico_dispositivo" title="Btrfs (Español)">Btrfs (Español)#Sistema de archivos en un único dispositivo</a>, donde <code><i>/dev/partition</i></code> es el nombre del dispositivo mapeado (es decir, <code>cryptroot</code>) y <b>no</b> <code>/dev/sda2</code>.
+</p>
+<h4><span class="mw-headline" id="Montar_el_dispositivo_mapeado">Montar el dispositivo mapeado</span></h4>
+<p>Finalmente, <a href="../../es/File_systems.html#Montar_un_sistema_de_archivos" class="mw-redirect" title="Mount (Español)">monte</a> el dispositivo mapeado ahora formateado (es decir, <code>/dev/mapper/cryptroot</code>) en <code>/mnt</code>.
+</p>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Sugerencia:</strong> Es posible que desee utilizar la opción de montaje <code>compress=lzo</code>. Vea <a href="../../es/Btrfs.html#Compresi%C3%B3n" title="Btrfs (Español)">Btrfs (Español)#Compresión</a> para más información.</div>
+<h3>
+<span id="Crear_subvol.C3.BAmenes_btrfs"></span><span class="mw-headline" id="Crear_subvolúmenes_btrfs">Crear subvolúmenes btrfs</span>
+</h3>
+<h4><span class="mw-headline" id="Esquema">Esquema</span></h4>
+<p>Los <a href="../../es/Btrfs.html#Subvol%C3%BAmenes" title="Btrfs (Español)">subvolúmenes</a> se usarán para simular particiones, pero también se crearán otros subvolúmenes (anidados). Aquí hay una representación parcial de lo que generará el siguiente ejemplo:
+</p>
+<pre style="white-space: pre !important; font-family:'DejaVu Sans Mono',monospace,monospace; font-variant-ligatures: no-common-ligatures;">subvolid=5 (/dev/sda2)
+   |
+   ├── @ (montado como /)
+   |       |
+   |       ├── /bin (directorio)
+   |       |
+   |       ├── /home (montado subvolumen @home)
+   |       |
+   |       ├── /usr (directorio)
+   |       |
+   |       ├── /.snapshots (montado subvolumen @snapshots)
+   |       |
+   |       ├── /var/cache/pacman/pkg (subvolumen anidado)
+   |       |
+   |       ├── ... (otros directorios y subvolúmenes anidados)
+   |
+   ├── @snapshots (montado como /.snapshots)
+   |
+   ├── @home (montado como /home)
+   |
+   └── @... (subvolúmenes adicionales que desee usar como puntos de montaje)
+</pre>
+<p>Esta sección sigue la sección <a href="../../en/Snapper.html#Suggested_filesystem_layout" title="Snapper">Snapper#Suggested filesystem layout</a>, que es más útil cuando se usa con <a href="../../en/Snapper.html" title="Snapper">Snapper</a>. También debe consultar <a rel="nofollow" class="external text" href="https://btrfs.wiki.kernel.org/index.php/SysadminGuide#Layout">Btrfs Wiki SysadminGuide#Layout</a>.
+</p>
+<h4>
+<span id="Crear_subvol.C3.BAmenes_de_nivel_superior"></span><span class="mw-headline" id="Crear_subvolúmenes_de_nivel_superior">Crear subvolúmenes de nivel superior</span>
+</h4>
+<p>Aquí estamos usando la convención de prefijo <code>@</code> para los nombres de subvolumen que se usarán como puntos de montaje, y <code>@</code> será el subvolumen que se monta como <code>/</code>.
+</p>
+<p>Siguiendo el artículo <a href="../../es/Btrfs.html#Crear_un_subvolumen" title="Btrfs (Español)">Btrfs (Español)#Crear un subvolumen</a>, cree subvolúmenes en <code>/mnt/@</code>, <code>/mnt/@snapshots</code>, y <code>/mnt/@home</code>.
+</p>
+<p>Cree cualquier subvolúmenes adicional que desee usar como puntos de montaje ahora.
+</p>
+<h4>
+<span id="Montar_subvol.C3.BAmenes_de_nivel_superior"></span><span class="mw-headline" id="Montar_subvolúmenes_de_nivel_superior">Montar subvolúmenes de nivel superior</span>
+</h4>
+<p>Desmonte la partición del sistema de <code>/mnt</code>.
+</p>
+<p>Ahora monte el subvolumen <code>@</code> recién creado que servirá como raíz <code>/</code> en  <code>/mnt</code> utilizando la opción de montaje <code>subvol=</code>. Suponiendo que el dispositivo mapeado se llama <code>cryptroot</code>, la orden se emitiría así:
+</p>
+<pre># mount -o compress=lzo,subvol=@ /dev/mapper/cryptroot /mnt
+</pre>
+<p>Véase <a href="../../es/Btrfs.html#Montar_subvol%C3%BAmenes" title="Btrfs (Español)">Btrfs (Español)#Montar subvolúmenes</a> para obtener más detalles.
+</p>
+<p>Monte también los otros subvolúmenes en sus respectivos puntos de montaje: <code>@home</code> en <code>/mnt/home</code> y <code>@snapshots</code> en <code>/mnt/.snapshots</code>.
+</p>
+<h4>
+<span id="Crear_subvol.C3.BAmenes_anidados"></span><span class="mw-headline" id="Crear_subvolúmenes_anidados">Crear subvolúmenes anidados</span>
+</h4>
+<p>Cree cualquier subvolumen del que <b>no</b> quiera tener instantáneas de cuando haga instantánea de la raíz <code>/</code>. Por ejemplo, probablemente no desee tomar instantáneas de <code>/var/cache/pacman/pkg</code>. Estos subvolúmenes estarán anidados bajo el subvolumen <code>@</code>, pero con la misma facilidad podrían haber sido creados anteriormente al mismo nivel que <code>@</code> de acuerdo con sus preferencia.
+</p>
+<p>Dado que el subvolumen <code>@</code> está montado en <code>/mnt</code>, necesitará <a href="../../es/Btrfs.html#Crear_un_subvolumen" class="mw-redirect" title="Create a subvolume (Español)">crear un subvolumen</a> en <code>/mnt/var/cache/pacman/pkg</code> para este ejemplo. Es posible que primero tenga que crear cualquier directorio padre.
+</p>
+<p>Otros directorios con los que puede hacer esto son  <code>/var/abs</code>, <code>/var/tmp</code>, and <code>/srv</code>.
+</p>
+<h4><span class="mw-headline" id="Montar_ESP">Montar ESP</span></h4>
+<p>Si preparó una partición de sistema EFI anteriormente, cree su punto de montaje y móntela ahora.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Nota:</strong> Las instantáneas de Btrfs excluirán <code>/efi</code>, ya que no es un sistema de archivos btrfs.</div>
+<p>En el paso de la instalación con <a href="../../es/Installation_guide.html#Instalar_paquetes_esenciales" title="Installation guide (Español)">pacstrap</a>, debe instalarse el paquete <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=btrfs-progs">btrfs-progs</a></span> además del grupo base.
+</p>
+<h3><span class="mw-headline" id="Configurar_mkinitcpio_6">Configurar mkinitcpio</span></h3>
+<h4><span class="mw-headline" id="Crear_archivo_de_claves">Crear archivo de claves</span></h4>
+<p>Para que GRUB abra la partición LUKS sin que el usuario tenga que ingresar dos veces su contraseña, usaremos un archivo de clave incrustado en initramfs. Siga <a href="../../es/Dm-crypt/Device_encryption.html#Con_un_archivo_de_clave_incrustado_en_initramfs" title="Dm-crypt (Español)/Device encryption (Español)">dm-crypt (Español)/Device encryption (Español)#Con un archivo de clave incrustado en initramfs</a> y asegúrese de agregar la clave de <code>/dev/sda2</code> en el paso <i>luksAddKey</i>.
+</p>
+<h4><span class="mw-headline" id="Editar_mkinitcpio.conf">Editar mkinitcpio.conf</span></h4>
+<p>Después de crear, agregar e incrustar la clave como se describe arriba, añada el hook <code>encrypt</code> en <a href="../../en/Mkinitcpio.html" class="mw-redirect" title="Mkinitcpio (Español)">mkinitcpio (Español)</a>, así como cualquier otro hook que necesite. Consulte <a href="../../es/Dm-crypt/System_configuration.html#mkinitcpio" title="Dm-crypt (Español)/System configuration (Español)">dm-crypt (Español)/System configuration (Español)#mkinitcpio</a> para obtener información detallada.
+</p>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Sugerencia:</strong> Es posible que desee añadir <code>BINARIES=(/usr/bin/btrfs)</code> a <code>mkinitcpio.conf</code>. Consulte el artículo <a href="../../es/Btrfs.html#Recuperaci%C3%B3n_de_la_corrupci%C3%B3n" title="Btrfs (Español)">Btrfs (Español)#Recuperación de la corrupción</a>.</div>
+<h3><span class="mw-headline" id="Configurar_el_gestor_de_arranque_5">Configurar el gestor de arranque</span></h3>
+<p>Instale <a href="../../es/GRUB.html" title="GRUB (Español)">GRUB (Español)</a> en <code>/dev/sda</code>. A continuación, modifique <code>/etc/default/grub</code> como se indica en el artículo <a href="../../es/GRUB.html#Argumentos_adicionales" title="GRUB (Español)">GRUB (Español)#Argumentos adicionales</a> and <a href="../../es/GRUB.html#/boot_cifrado" title="GRUB (Español)">GRUB (Español)#/boot cifrado</a>, siguiendo las instrucciones de una partición raíz y de arranque cifradas. Finalmente, genere el archivo de configuración GRUB.
+</p>
+<h3><span class="mw-headline" id="Configurar_el_espacio_de_intercambio">Configurar el espacio de intercambio</span></h3>
+<p>Si creó una partición de intercambio cifrada, ahora es el momento de configurarla. Siga las instrucciones dadas en <a href="../../es/Dm-crypt/Swap_encryption.html" title="Dm-crypt (Español)/Swap encryption (Español)">dm-crypt (Español)/Swap encryption (Español)</a>.
+</p>
+</div>
+</div>
+					<div id="catlinks" class="catlinks" data-mw="interface"><div id="mw-normal-catlinks" class="mw-normal-catlinks">
+<a href="../../Special:Categories.html" title="Special:Categories">Categories</a>: <ul>
+<li><a href="../../es/Category:Data-at-rest_encryption.html" title="Category:Data-at-rest encryption (Español)">Data-at-rest encryption (Español)</a></li>
+<li><a href="../../es/Category:Installation_process.html" title="Category:Installation process (Español)">Installation process (Español)</a></li>
+</ul>
+</div></div>
+				</div>
+			</main>
+			
+		</div>
+		<div class="mw-footer-container">
+			
+<footer id="footer" class="mw-footer" style="margin: 0">
+	<ul id="footer-info">
+	<li data-nosnippet="">Retrieved from "<a dir="ltr" href="https://wiki.archlinux.org/index.php?title=Dm-crypt_(Espa%C3%B1ol)/Encrypting_an_entire_system_(Espa%C3%B1ol)&amp;oldid=816244">https://wiki.archlinux.org/index.php?title=Dm-crypt_(Español)/Encrypting_an_entire_system_(Español)&amp;oldid=816244</a>"</li>
+<li id="footer-info-lastmod"> This page was last edited on 11 September 2024, at 08:42.</li>
+	<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+<br>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="https://terms.archlinux.org/docs/privacy-policy/">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="../../en/ArchWiki:About.html">About ArchWiki</a></li>
+	<li id="footer-places-disclaimers"><a href="../../en/ArchWiki:General_disclaimer.html">Disclaimers</a></li>
+	<li id="footer-places-archwiki-code-of-conduct"><a href="https://terms.archlinux.org/docs/code-of-conduct/" class="extiw" title="archlinux-service-agreements:code-of-conduct">Code of conduct</a></li>
+	<li id="footer-places-archwiki-terms-of-service"><a href="https://terms.archlinux.org/docs/terms-of-service/" class="extiw" title="archlinux-service-agreements:terms-of-service">Terms of service</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-copyrightico"><a href="https://www.gnu.org/copyleft/fdl.html" class="cdx-button cdx-button--fake-button cdx-button--size-large cdx-button--fake-button--enabled"><img src="/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" loading="lazy"></a></li>
+	<li id="footer-poweredbyico"><img src="/resources/assets/poweredby_mediawiki.svg" width="88" height="31" loading="lazy"></li>
+</ul>
+
+</footer>
+
+		</div>
+	</div> 
+</div> 
+<div class="vector-settings" id="p-dock-bottom">
+	<ul></ul>
+</div>
+</body>
+</html>

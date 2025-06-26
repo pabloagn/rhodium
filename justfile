@@ -1,9 +1,6 @@
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 # ▲ RHODIUM SYSTEM MANAGEMENT
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# ─────────────────────────────────────────────────────────────────────────────
-# ⟡ CONFIGURATION
-# ─────────────────────────────────────────────────────────────────────────────
 
 # Configuration
 set shell := ["bash", "-euo", "pipefail", "-c"]
@@ -12,7 +9,9 @@ set positional-arguments := true
 # Internal Variables
 flake_path := "."
 modules_path := flake_path + "/build"
+assets_path := flake_path + "/assets"
 version := "1.0.0"
+repository := "https://github.com/pabloagn/rhodium"
 author := "Rhodium"
 timestamp := `date +%Y-%m-%d`
 
@@ -22,7 +21,7 @@ home_dir := env('HOME')
 
 # Unicode Symbols
 sym_success := "▲"
-sym_pending := "⟡"
+sym_pending := "❖"
 sym_partial := "◐"
 sym_down := "▼"
 sym_bullet := "▪"
@@ -39,12 +38,44 @@ magenta := '\033[0;35m'
 cyan := '\033[0;36m'
 reset := '\033[0m'
 
+# Command definitions - one per line: "command|description"
+help_data := '''
+switch <host>|Build and switch NixOS configuration
+build <host>|Build without switching [test build]
+boot <host>|Rebuild and boot into new generation
+fast <host>|Fast rebuild with minimal output
+dev <host>|Development rebuild with verbose output
+dry <host>|Dry run - show what would be built
+rollback|Rollback to previous generation
+update|Update all flake inputs
+update-input <input>|Update specific flake input
+update-caches|Update application caches
+fmt|Format all nix files
+gc-keep [N=5]|Remove old generations keeping N most recent
+gc-days [N=7]|Collect generations older than N days
+clean-orphans|Remove orphaned configuration directories
+clean-backups|Clean all backup files
+health|Show system health status
+generation|List current generation details
+flake-info|Show flake metadata
+check-backups|Check for backup files in config
+orphans|Find orphaned configuration files
+untracked|Check for untracked files in repository
+'''
+
 # Default recipe shows available commands
 default:
-    @just --list
+    @printf "{{cyan}}{{bar_light}}{{reset}}\n"
+    @cat "{{assets_path}}/calvin-m.txt"
+    @printf "{{cyan}}{{bar_light}}{{reset}}\n"
+    @printf "\n{{cyan}}Available Commands:{{reset}}\n"
+    @echo '{{help_data}}' | grep -v '^$' | while IFS='|' read cmd desc; do \
+        printf "  {{cyan}}{{sym_bullet}}{{reset}} {{green}}%-25s{{reset}} %s\n" "$cmd" "$desc"; \
+    done
+    @printf "\n"
 
 # Build and switch NixOS configuration
-switch host=`hostname`: && update-caches
+switch host: && update-caches
     @printf "{{yellow}}{{sym_pending}} Pre-flight checks for %s{{reset}}\n" "{{ host }}"
     @if nix flake check {{ flake_path }} 2>/dev/null; then \
     	printf "  {{green}}{{sym_success}} Flake validation passed{{reset}}\n"; \
@@ -69,29 +100,29 @@ switch host=`hostname`: && update-caches
     @printf "{{green}}{{sym_success}} System rebuild complete{{reset}}\n"
 
 # Build without switching [test build]
-build host=`hostname`:
+build host:
     @printf "{{yellow}}{{sym_pending}} Building configuration for %s...{{reset}}\n" "{{ host }}"
     sudo nixos-rebuild build --flake {{ flake_path }}#{{ host }}
     @printf "{{green}}{{sym_success}} Build successful [not activated]{{reset}}\n"
 
 # Rebuild and boot into new generation
-boot host=`hostname`:
+boot host:
     @printf "{{yellow}}{{sym_pending}} Building boot configuration for %s...{{reset}}\n" "{{ host }}"
     sudo nixos-rebuild boot --flake {{ flake_path }}#{{ host }}
     @printf "{{green}}{{sym_success}} Will boot into new generation on next reboot{{reset}}\n"
 
 # Dry run - show what would be built
-dry host=`hostname`:
+dry host:
     @printf "{{yellow}}{{sym_pending}} Dry run for %s...{{reset}}\n" "{{ host }}"
     sudo nixos-rebuild dry-build --flake {{ flake_path }}#{{ host }}
 
 # Fast rebuild with minimal output
-fast host=`hostname`: && update-caches
+fast host: && update-caches
     @printf "{{yellow}}{{sym_pending}} Fast switch for %s...{{reset}}\n" "{{ host }}"
     sudo nixos-rebuild switch --flake {{ flake_path }}#{{ host }} --fast
 
 # Development rebuild with verbose output
-dev host=`hostname`:
+dev host:
     @printf "{{yellow}}{{sym_partial}} Development build with trace output for %s{{reset}}\n" "{{ host }}"
     sudo nixos-rebuild switch --flake {{ flake_path }}#{{ host }} --show-trace -L
 
@@ -320,29 +351,7 @@ update-caches:
     @printf "{{yellow}}{{sym_pending}} Updating application caches...{{reset}}\n"
     @{{modules_path}}/cache/build-caches.sh
     @python3 {{modules_path}}/cache/build-icons-cache.py
-
-# Force rebuild yazi image cache for directory
-yazi-cache dir=".":
-    @printf "{{yellow}}{{sym_pending}} Checking yazi cache capabilities...{{reset}}\n"
-    @if command -v yazi >/dev/null 2>&1; then \
-    	printf "{{yellow}}{{sym_partial}} Yazi CLI caching not available{{reset}}\n"; \
-    	printf "Image caching occurs on directory access\n"; \
-    	printf "\n"; \
-    	printf "{{yellow}}{{sym_pending}} Pre-generating thumbnails...{{reset}}\n"; \
-    	thumb_dir="{{home_dir}}/.cache/yazi/thumbnails"; \
-    	mkdir -p "$$thumb_dir"; \
-    	count=0; \
-    	while IFS= read -r -d '' img; do \
-    		hash=$$(echo -n "$$img" | sha256sum | cut -d' ' -f1); \
-    		thumb="$$thumb_dir/$${hash}.jpg"; \
-    		if [ ! -f "$$thumb" ]; then \
-    			convert "$$img" -thumbnail 500x500 "$$thumb" 2>/dev/null && ((count++)) || true; \
-    		fi; \
-    	done < <(find "{{ dir }}" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.gif" -o -iname "*.webp" \) -print0 2>/dev/null); \
-    	printf "{{green}}{{sym_success}} Generated %s new thumbnails{{reset}}\n" "$$count"; \
-    else \
-    	printf "{{red}}{{sym_down}} Yazi not found{{reset}}\n"; \
-    fi
+    @{{modules_path}}/cache/wikiman-cache.sh
 
 # Rollback to previous generation
 rollback:

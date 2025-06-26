@@ -1,0 +1,53 @@
+<h1>bzgrep</h1>
+
+<blockquote><p>Find patterns in <code>bzip2</code> compressed files using <code>grep</code>.
+More information: <a href="https://manned.org/bzgrep">https://manned.org/bzgrep</a>.</p></blockquote>
+
+<ul>
+<li>Search for a pattern within a compressed file:</li>
+</ul>
+
+
+<p><code>bzgrep "{{search_pattern}}" {{path/to/file}}</code></p>
+
+<ul>
+<li>Use extended regular expressions (supports <code>?</code>, <code>+</code>, <code>{}</code>, <code>()</code> and <code>|</code>), in case-insensitive mode:</li>
+</ul>
+
+
+<p><code>bzgrep {{[-E|--extended-regexp]}} {{[-i|--ignore-case]}} "{{search_pattern}}" {{path/to/file}}</code></p>
+
+<ul>
+<li>Print 3 lines of [C]ontext around, [B]efore, or [A]fter each match:</li>
+</ul>
+
+
+<p><code>bzgrep --{{context|before-context|after-context}} {{3}} "{{search_pattern}}" {{path/to/file}}</code></p>
+
+<ul>
+<li>Print file name and line number for each match:</li>
+</ul>
+
+
+<p><code>bzgrep {{[-H|--with-filename]}} {{[-n|--line-number]}} "{{search_pattern}}" {{path/to/file}}</code></p>
+
+<ul>
+<li>Search for lines matching a pattern, printing only the matched text:</li>
+</ul>
+
+
+<p><code>bzgrep {{[-o|--only-matching]}} "{{search_pattern}}" {{path/to/file}}</code></p>
+
+<ul>
+<li>Recursively search files in a bzip2 compressed tar archive for a pattern:</li>
+</ul>
+
+
+<p><code>bzgrep {{[-r|--recursive]}} "{{search_pattern}}" {{path/to/tar/file}}</code></p>
+
+<ul>
+<li>Search <code>stdin</code> for lines that do not match a pattern:</li>
+</ul>
+
+
+<p><code>cat {{/path/to/bz/compressed/file}} | bzgrep {{[-v|--invert-match]}} "{{search_pattern}}"</code></p>

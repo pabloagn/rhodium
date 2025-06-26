@@ -1,0 +1,46 @@
+<h1>hledger import</h1>
+
+<blockquote><p>Import new transactions from one or more data files to the main journal.
+More information: <a href="https://hledger.org/hledger.html#import">https://hledger.org/hledger.html#import</a>.</p></blockquote>
+
+<ul>
+<li>Import new transactions from <code>bank.csv</code>, using <code>bank.csv.rules</code> to convert:</li>
+</ul>
+
+
+<p><code>hledger import {{path/to/bank.csv}}</code></p>
+
+<ul>
+<li>Show what would be imported from these two files, without doing anything:</li>
+</ul>
+
+
+<p><code>hledger import {{path/to/bank1.csv}} {{path/to/bank2.csv}} --dry-run</code></p>
+
+<ul>
+<li>Import new transactions from all CSV files, using the same rules for all:</li>
+</ul>
+
+
+<p><code>hledger import --rules-file {{common.rules}} *.csv</code></p>
+
+<ul>
+<li>Show conversion errors or results while editing <code>bank.csv.rules</code>:</li>
+</ul>
+
+
+<p><code>watchexec -- hledger {{[-f|--file]}} {{path/to/bank.csv}} print</code></p>
+
+<ul>
+<li>Mark <code>bank.csv</code>&rsquo;s current data as seen, as if already imported:</li>
+</ul>
+
+
+<p><code>hledger import --catchup {{path/to/bank.csv}}</code></p>
+
+<ul>
+<li>Mark <code>bank.csv</code> as all new, as if not yet imported:</li>
+</ul>
+
+
+<p><code>rm {{[-f|--force]}} .latest.bank.csv</code></p>

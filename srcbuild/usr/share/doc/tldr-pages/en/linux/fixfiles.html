@@ -1,0 +1,60 @@
+<h1>fixfiles</h1>
+
+<blockquote><p>Fix file SELinux security contexts.
+More information: <a href="https://manned.org/fixfiles">https://manned.org/fixfiles</a>.</p></blockquote>
+
+<ul>
+<li>If specified with onboot, this fixfiles will record the current date in the <code>/.autorelabel</code> file, so that it can be used later to speed up labeling. If used with restore, the restore will only affect files that were modified today:</li>
+</ul>
+
+
+<p><code>fixfiles -B</code></p>
+
+<ul>
+<li>[F]orce reset of context to match <code>file_context</code> for customizable files:</li>
+</ul>
+
+
+<p><code>fixfiles -F</code></p>
+
+<ul>
+<li>Clear <code>/tmp</code> directory without confirmation:</li>
+</ul>
+
+
+<p><code>fixfiles -f</code></p>
+
+<ul>
+<li>Use the [R]pm database to discover all files within specific packages and restore the file contexts:</li>
+</ul>
+
+
+<p><code>fixfiles -R {{rpm_package1,rpm_package2 ...}}</code></p>
+
+<ul>
+<li>Run a diff on the <code>PREVIOUS_FILECONTEXT</code> file to the [C]urrently installed one, and restore the context of all affected files:</li>
+</ul>
+
+
+<p><code>fixfiles -C PREVIOUS_FILECONTEXT</code></p>
+
+<ul>
+<li>Only act on files created after a specific date which will be passed to find <code>--newermt</code> command:</li>
+</ul>
+
+
+<p><code>fixfiles -N {{YYYY-MM-DD HH:MM}}</code></p>
+
+<ul>
+<li>Bind [M]ount filesystems before relabeling them, this allows fixing the context of files or directories that have been mounted over:</li>
+</ul>
+
+
+<p><code>fixfiles -M</code></p>
+
+<ul>
+<li>Modify [v]erbosity from progress to verbose and run <code>restorecon</code> with <code>-v</code> instead of <code>-p</code>:</li>
+</ul>
+
+
+<p><code>fixfiles -v</code></p>

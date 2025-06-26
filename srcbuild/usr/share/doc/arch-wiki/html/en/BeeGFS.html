@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-sticky-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-0 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-disabled skin-theme-clientpref-day vector-toc-available" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>BeeGFS - ArchWiki</title>
+<link rel="stylesheet" href="../ArchWikiOffline.css">
+<meta name="ResourceLoaderDynamicStyles" content="">
+<meta name="generator" content="MediaWiki 1.43.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="max-image-preview:standard">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.25, maximum-scale=5.0">
+<link rel="search" type="application/opensearchdescription+xml" href="/rest.php/v1/search" title="ArchWiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.archlinux.org/api.php?action=rsd">
+<link rel="license" href="https://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="ArchWiki Atom feed" href="/index.php?title=Special:RecentChanges&amp;feed=atom">
+</head>
+<body class="skin--responsive skin-vector skin-vector-search-vue mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-BeeGFS rootpage-BeeGFS skin-vector-2022 action-view">
+<a class="mw-jump-link" href="#bodyContent">Jump to content</a>
+<div class="vector-header-container">
+	</div>
+<div class="mw-page-container">
+	<div class="mw-page-container-inner">
+		<div class="vector-column-start">
+			<div class="vector-main-menu-container">
+		</div>
+	<div class="vector-sticky-pinned-container">
+				<nav id="mw-panel-toc" aria-label="Contents" data-event-name="ui.sidebar-toc" class="mw-table-of-contents-container vector-toc-landmark">
+					<div id="vector-toc-pinned-container" class="vector-pinned-container">
+					<div id="vector-toc" class="vector-toc vector-pinnable-element">
+	<div class="vector-pinnable-header vector-toc-pinnable-header vector-pinnable-header-pinned" data-feature-name="toc-pinned" data-pinnable-element-id="vector-toc">
+	<h2 class="vector-pinnable-header-label">Contents</h2>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-toc.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-toc.unpin">hide</button>
+</div>
+
+
+	<ul class="vector-toc-contents" id="mw-panel-toc-list">
+		<li id="toc-mw-content-text" class="vector-toc-list-item vector-toc-level-1">
+			<a href="#" class="vector-toc-link">
+				<div class="vector-toc-text">Beginning</div>
+			</a>
+		</li>
+		<li id="toc-Terminology" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Terminology">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">1</span>
+				<span>Terminology</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Terminology-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Installation" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Installation">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">2</span>
+				<span>Installation</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Installation-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Installation subsection</span>
+			</button>
+		
+		<ul id="toc-Installation-sublist" class="vector-toc-list">
+			<li id="toc-Example_cluster_deployment" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Example_cluster_deployment">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1</span>
+					<span>Example cluster deployment</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Example_cluster_deployment-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-NTP_client" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#NTP_client">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2</span>
+					<span>NTP client</span>
+				</div>
+			</a>
+			
+			<ul id="toc-NTP_client-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Management_server" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Management_server">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.3</span>
+					<span>Management server</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Management_server-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Monitoring_server" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Monitoring_server">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.4</span>
+					<span>Monitoring server</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Monitoring_server-sublist" class="vector-toc-list">
+				<li id="toc-Configuration_of_default_Grafana_panels" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Configuration_of_default_Grafana_panels">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.4.1</span>
+					<span>Configuration of default Grafana panels</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Configuration_of_default_Grafana_panels-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Accessing_Grafana_panels" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Accessing_Grafana_panels">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.4.2</span>
+					<span>Accessing Grafana panels</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Accessing_Grafana_panels-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Metadata_server" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Metadata_server">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.5</span>
+					<span>Metadata server</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Metadata_server-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Storage_server" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Storage_server">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.6</span>
+					<span>Storage server</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Storage_server-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Client" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Client">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.7</span>
+					<span>Client</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Client-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Utilities" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Utilities">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.8</span>
+					<span>Utilities</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Utilities-sublist" class="vector-toc-list">
+				<li id="toc-Check_connectivity" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Check_connectivity">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.8.1</span>
+					<span>Check connectivity</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Check_connectivity-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Server_tuning_and_advanced_features" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Server_tuning_and_advanced_features">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">3</span>
+				<span>Server tuning and advanced features</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Server_tuning_and_advanced_features-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Server tuning and advanced features subsection</span>
+			</button>
+		
+		<ul id="toc-Server_tuning_and_advanced_features-sublist" class="vector-toc-list">
+			<li id="toc-InfiniBand_Support" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#InfiniBand_Support">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1</span>
+					<span>InfiniBand Support</span>
+				</div>
+			</a>
+			
+			<ul id="toc-InfiniBand_Support-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-ACLs" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#ACLs">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.2</span>
+					<span>ACLs</span>
+				</div>
+			</a>
+			
+			<ul id="toc-ACLs-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Storage_Pools" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Storage_Pools">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.3</span>
+					<span>Storage Pools</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Storage_Pools-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Quota_Enforcement" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Quota_Enforcement">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.4</span>
+					<span>Quota Enforcement</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Quota_Enforcement-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-High_Availability" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#High_Availability">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.5</span>
+					<span>High Availability</span>
+				</div>
+			</a>
+			
+			<ul id="toc-High_Availability-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-See_also" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#See_also">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">4</span>
+				<span>See also</span>
+			</div>
+		</a>
+		
+		<ul id="toc-See_also-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+</ul>
+</div>
+
+					</div>
+		</nav>
+			</div>
+		</div>
+		<div class="mw-content-container">
+			<main id="content" class="mw-body" style="margin: 0">
+				<header class="mw-body-header vector-page-titlebar">
+					<nav aria-label="Contents" class="vector-toc-landmark">
+						
+<div id="vector-page-titlebar-toc" class="vector-dropdown vector-page-titlebar-toc vector-button-flush-left">
+	<input type="checkbox" id="vector-page-titlebar-toc-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-page-titlebar-toc" class="vector-dropdown-checkbox " aria-label="Toggle the table of contents">
+	<label id="vector-page-titlebar-toc-label" for="vector-page-titlebar-toc-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"><span class="vector-icon mw-ui-icon-listBullet mw-ui-icon-wikimedia-listBullet"></span>
+
+<span class="vector-dropdown-label-text">Toggle the table of contents</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+							<div id="vector-page-titlebar-toc-unpinned-container" class="vector-unpinned-container">
+			</div>
+		
+	</div>
+</div>
+
+					</nav>
+					<h1 id="firstHeading" class="firstHeading mw-first-heading"><span class="mw-page-title-main">BeeGFS</span></h1>
+				</header>
+				<div class="vector-column-end">
+					<div class="vector-sticky-pinned-container">
+						<nav class="vector-page-tools-landmark" aria-label="Page tools">
+							<div id="vector-page-tools-pinned-container" class="vector-pinned-container">
+				
+							</div>
+		</nav>
+						<nav class="vector-appearance-landmark" aria-label="Appearance">
+							<div id="vector-appearance-pinned-container" class="vector-pinned-container">
+				<div id="vector-appearance" class="vector-appearance vector-pinnable-element">
+	<div class="vector-pinnable-header vector-appearance-pinnable-header vector-pinnable-header-pinned" data-feature-name="appearance-pinned" data-pinnable-element-id="vector-appearance" data-pinned-container-id="vector-appearance-pinned-container" data-unpinned-container-id="vector-appearance-unpinned-container">
+	<div class="vector-pinnable-header-label">Appearance</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-appearance.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-appearance.unpin">hide</button>
+</div>
+
+
+</div>
+
+							</div>
+		</nav>
+					</div>
+				</div>
+				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container>
+					<div class="vector-body-before-content">
+							<div class="mw-indicators">
+		</div>
+
+						<div id="siteSub" class="noprint">From ArchWiki</div>
+					</div>
+					<div id="contentSub"><div id="mw-content-subtitle"></div></div>
+					
+					
+					<div id="mw-content-text" class="mw-body-content">
+<div class="mw-content-ltr mw-parser-output" lang="en" dir="ltr">
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../File:Tango-edit-clear.svg" decoding="async" width="48" height="48" class="mw-file-element"></span></span><b>This article or section needs language, wiki syntax or style improvements. See <a href="../en/Help:Style.html" title="Help:Style">Help:Style</a> for reference.</b></p>
+<div>
+<b>Reason:</b> Some general style violations, sections do not use sentence case, duplicating of content (Discuss in <a rel="nofollow" class="external text" href="../en/Talk:BeeGFS.html">Talk:BeeGFS</a>)</div>
+</div>
+<div class="archwiki-template-meta-related-articles">
+<p>Related articles</p>
+<ul>
+<li><a href="../en/Ceph.html" title="Ceph">Ceph</a></li>
+<li><a href="../en/Glusterfs.html" class="mw-redirect" title="GlusterFS">GlusterFS</a></li>
+<li><a href="../en/File_systems.html" class="mw-redirect" title="File Systems">File Systems</a></li>
+</ul>
+</div>
+<p>BeeGFS is a scalable network-storage platform with a focus on being distributed, resilient, highly configurable and having good performance and high reliability. BeeGFS is extremely configurable, with administrators being able to control virtually all aspects of the system. A command line interface is used to monitor and control the cluster.
+</p>
+<p>From <a href="https://en.wikipedia.org/wiki/BeeGFS" class="extiw" title="wikipedia:BeeGFS">Wikipedia</a>:
+</p>
+<dl><dd>BeeGFS (formerly FhGFS) is a parallel file system, developed and optimized for high-performance computing. BeeGFS includes a distributed metadata architecture for scalability and flexibility reasons. Its most important aspect is data throughput. BeeGFS was originally developed at the <a rel="nofollow" class="external text" href="https://www.itwm.fraunhofer.de/en/departments/hpc.html">Fraunhofer Center for High Performance Computing</a> in Germany by a team around Sven Breuner, who later became the CEO of <a rel="nofollow" class="external text" href="https://thinkparq.com/">ThinkParQ</a>, the spin-off company that was founded in 2014 to maintain BeeGFS and offer professional services.</dd></dl>
+<p>From <a rel="nofollow" class="external text" href="https://beegfs.io/">BeeGFS.io</a>:
+</p>
+<dl><dd>BeeGFS is the leading parallel cluster file system, developed with a strong focus on performance and designed for very easy installation and management. If I/O intensive workloads are your problem, BeeGFS is the solution.</dd></dl>
+<meta property="mw:PageProp/toc">
+<h2><span class="mw-headline" id="Terminology">Terminology</span></h2>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> A full glossary is available in the <a rel="nofollow" class="external text" href="https://www.beegfs.io/wiki/PageIndex">official documentation</a>.</div>
+<table class="wikitable">
+<tbody>
+<tr>
+<th>Node Type and Description
+</th>
+<th>Packages
+</th>
+</tr>
+<tr>
+<td>
+<b>Management Server (one node)</b>
+<ul>
+<li>Manages configuration and group membership</li>
+<li>Hostname or IP address must be known by other nodes at service start time</li>
+</ul>
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/beegfs-mgmtd/">beegfs-mgmtd</a></span><sup><small>AUR</small></sup>
+</td>
+</tr>
+<tr>
+<td>
+<b>Metadata Server (at least one node)</b>
+<ul><li>Stores directory information and allocates file space on storage servers</li></ul>
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/beegfs-meta/">beegfs-meta</a></span><sup><small>AUR</small></sup>
+</td>
+</tr>
+<tr>
+<td>
+<b>Storage Server (at least one node)</b>
+<ul><li>Stores raw file contents</li></ul>
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/beegfs-storage/">beegfs-storage</a></span><sup><small>AUR</small></sup>
+</td>
+</tr>
+<tr>
+<td>
+<b>InfluxDB / Grafana based Monitoring Server (optional)</b>
+<ul>
+<li>Continuous monitoring of servers</li>
+<li>Live statistics</li>
+<li>beegfs-admon (Java based administration and monitoring GUI), must not be installed on the same server</li>
+</ul>
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/beegfs-mon/">beegfs-mon</a></span><sup><small>AUR</small></sup>
+</td>
+</tr>
+<tr>
+<td>
+<b>BeeGFS utilities for administrators</b>
+<ul>
+<li>
+<code>beegfs-ctl</code> tool for command-line administration</li>
+<li>
+<code>beegfs-fsck</code> tool for file system checking</li>
+<li>Several small helper scripts such logging and <a href="../en/Domain_name_resolution.html" class="mw-redirect" title="DNS">DNS</a> lookup functionality</li>
+</ul>
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/beegfs-utils/">beegfs-utils</a></span><sup><small>AUR</small></sup>
+</td>
+</tr>
+<tr>
+<td>
+<b>BeeGFS Common</b>
+<ul>
+<li>Common files for all packages</li>
+<li>Enables support for remote direct memory access <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=rdma-core">rdma-core</a></span> based on the <a rel="nofollow" class="external text" href="https://www.openfabrics.org/">OpenFabrics IBVerbs API</a>, through <code>libbeegfs-ib</code>.</li>
+</ul>
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/beegfs-common/">beegfs-common</a></span><sup><small>AUR</small></sup>
+</td>
+</tr>
+<tr>
+<td>
+<b>Client</b>
+<ul>
+<li>Kernel module to mount the file system</li>
+<li>Requires userspace helper daemon for logging and <a href="../en/Network_configuration.html#Set_the_hostname" class="mw-redirect" title="Hostname">hostname</a> resolution</li>
+</ul>
+</td>
+<td>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/beegfs-client/">beegfs-client</a></span><sup><small>AUR</small></sup>
+</td>
+</tr>
+</tbody>
+</table>
+<p>In addition to the free and open-source packages described here, BeeGFS also offers a number of <a rel="nofollow" class="external text" href="https://www.beegfs.io/content/support/">Enterprise Features and Professional Support</a>, which include:
+</p>
+<ul>
+<li>High Availability</li>
+<li>Quota Enforcement</li>
+<li>Access Control Lists (ACLs)</li>
+<li>Storage Pools</li>
+<li>Burst buffer function with BeeOND</li>
+</ul>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Warning:</strong> Whilst the BeeGFS server components are userspace daemons, the client is a native kernel module. The <a rel="nofollow" class="external text" href="https://www.beegfs.io/release/beegfs_7_1/Changelog.txt">latest version of BeeGFS v7.1.3 has support for Kernels up to 4.19.x</a>. Hence there are a number of adhoc patches to the client source build files included in the <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/beegfs-client/">beegfs-client</a></span><sup><small>AUR</small></sup> <a href="../en/PKGBUILD.html" title="PKGBUILD">PKGBUILD</a>. This in turn may lead to instability with the client kernel module.</div>
+<h2><span class="mw-headline" id="Installation">Installation</span></h2>
+<h3><span class="mw-headline" id="Example_cluster_deployment">Example cluster deployment</span></h3>
+<p>The following hardware configuration will be used in this example:
+</p>
+<table class="wikitable">
+<tbody>
+<tr>
+<th>Hostname
+</th>
+<th>IP Address
+</th>
+<th>Description
+</th>
+</tr>
+<tr>
+<td>node01
+</td>
+<td>
+<code>192.168.0.1</code>
+</td>
+<td>Management Server and Monitoring (optional) Server
+</td>
+</tr>
+<tr>
+<td>node02
+</td>
+<td>
+<code>192.168.0.2</code>
+</td>
+<td>Metadata Server
+</td>
+</tr>
+<tr>
+<td>node03
+</td>
+<td>
+<code>192.168.0.3</code>
+</td>
+<td>Storage Server
+</td>
+</tr>
+<tr>
+<td>node04
+</td>
+<td>
+<code>192.168.0.4</code>
+</td>
+<td>Client
+</td>
+</tr>
+</tbody>
+</table>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> One if free to choose the option of using dedicated hosts for all BeeGFS services. BeeGFS allows running any combination of services (including client and storage/metadata service) on the same machine. Especially the management and mon daemons are not performance-critical and thus are typically not running on dedicated machines.</div>
+<h3><span class="mw-headline" id="NTP_client">NTP client</span></h3>
+<p><a href="../en/Pacman.html#Installing_packages" title="Pacman">Install</a> and run a time synchronization client on all the nodes. See <a href="../en/System_time.html#Time_synchronization" class="mw-redirect" title="Time synchronization">Time synchronization</a> for details.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> It is strongly recommended to synchronize the clocks on all cluster nodes to prevent clock drift (see <a href="../en/System_time.html#Time_skew" title="System time">System time#Time skew</a> for details), which can degrade the performance of your cluster or stop it from functioning altogether. The <a rel="nofollow" class="external text" href="https://www.beegfs.io/wiki/ManualInstallWalkThrough#hn_59ca4f8bbb_10:">official documentation</a> recommends that nodes run some form of clock synchronization.</div>
+<h3><span class="mw-headline" id="Management_server">Management server</span></h3>
+<p><a href="../en/Help:Reading.html#Installation_of_packages" class="mw-redirect" title="Install">Install</a> it with the package <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/beegfs-mgmtd/">beegfs-mgmtd</a></span><sup><small>AUR</small></sup> on the management node <code>192.168.0.1</code>.
+</p>
+<p>The management service needs to know where it can store its data. It will only store some node information like connectivity data, so it will not require much storage space and its data access is not performance critical. Thus, this service is typically not running on a dedicated machine.
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/beegfs/beegfs-mgmtd</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">storeMgmtdDirectory = /mnt/beegfs/beegfs-mgmtd</pre>
+<p><a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Start/enable">Start/enable</a> the <code>beegfs-mgmtd@node01.service</code> on the management node.
+</p>
+<h3><span class="mw-headline" id="Monitoring_server">Monitoring server</span></h3>
+<p><a href="../en/Help:Reading.html#Installation_of_packages" class="mw-redirect" title="Install">Install</a> the package <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/beegfs-mon/">beegfs-mon</a></span><sup><small>AUR</small></sup>  on the management/monitoring node <code>192.168.0.1</code>, which collects statistics from the system and provides them to the user using a time series database <a href="../en/TICK_stack.html#InfluxDB" class="mw-redirect" title="InfluxDB">InfluxDB</a>. For visualization of the data <code>beegfs-mon</code> provides predefined <a href="../en/Grafana.html" title="Grafana">Grafana</a> panels that can be used out of the box.
+</p>
+<p>Before running <code>beegfs-mon</code>, you need to edit the configuration file <code>/etc/beegfs/beegfs-mon.conf</code>. If you have everything installed on the same host, you only need to specify the management host:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/beegfs/beegfs-mon.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">sysMgmtHost = localhost</pre>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> If your InfluxDB is installed on another host, say the <code>client</code> for example or you need to use a different database port or name, you also need to modify the corresponding entries:
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/beegfs/beegfs-mon.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">dbHostName = node04
+dbHostPort = 9096
+dbHostName = beegfs_mon_client</pre>
+</div>
+<p><a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Start/enable">Start/enable</a> the <code>beegfs-mon@node01.service</code> on the management/monitoring node.
+</p>
+<h4><span class="mw-headline" id="Configuration_of_default_Grafana_panels">Configuration of default <a href="../en/Grafana.html" title="Grafana">Grafana</a> panels</span></h4>
+<p>You can use the provided installation script for default <a href="../en/TICK_stack.html#InfluxDB" class="mw-redirect" title="InfluxDB">InfluxDB</a> and <a href="../en/Grafana.html" title="Grafana">Grafana</a> deployments on the same host.
+</p>
+<pre># cd /etc/beegfs/grafana
+# ./import-dashboards default
+</pre>
+<h4><span class="mw-headline" id="Accessing_Grafana_panels">Accessing Grafana panels</span></h4>
+<p>Access the application on localhost, e.g.: <a rel="nofollow" class="external free" href="http://127.0.0.1:3000">http://127.0.0.1:3000</a> . Refer to <a rel="nofollow" class="external text" href="https://www.beegfs.io/wiki/Mon#hn_59ca4f8bbb_5">Custom Grafana Panel Configuration</a> for non-default installations and for the <a rel="nofollow" class="external text" href="https://www.beegfs.io/wiki/MonDatabaseReference">Reference to All Metrics monitored</a>.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> Different services on the same machine cannot share the same storage directory, so different directories have to be used, i.e. <code>/mnt/beegfs/beegfs-mgmtd</code> for management servers and <code>/mnt/beegfs/beegfs-mon</code> for monitoring servers.</div>
+<h3><span class="mw-headline" id="Metadata_server">Metadata server</span></h3>
+<p><a href="../en/Help:Reading.html#Installation_of_packages" class="mw-redirect" title="Install">Install</a> the package <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/beegfs-meta/">beegfs-meta</a></span><sup><small>AUR</small></sup> on the metadata server(s), i.e. <code>192.168.0.2</code>.
+</p>
+<p>The metadata service needs to know where it can store its data and where the management service is running. Typically, one will have multiple metadata services running on different machines.
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/beegfs/beegfs-meta.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">sysMgmtdHost = node01
+storeMetaDirectory = /mnt/beegfs/beegfs-meta</pre>
+<p><a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Start/enable">Start/enable</a> the <code>beegfs-meta@node02.service</code> on the metadata node.
+</p>
+<h3><span class="mw-headline" id="Storage_server">Storage server</span></h3>
+<p><a href="../en/Help:Reading.html#Installation_of_packages" class="mw-redirect" title="Install">Install</a> the package <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/beegfs-storage/">beegfs-storage</a></span><sup><small>AUR</small></sup> on the storage server(s), i.e. <code>192.168.0.3</code>.
+</p>
+<p>The storage service needs to know where it can store its data and how to reach the management server. Typically, one will have multiple storage services running on different machines and/or multiple storage targets (e.g. multiple <a href="../en/RAID.html" title="RAID">RAID</a> volumes) per storage service.
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/beegfs/beegfs-storage.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">sysMgmtdHost = node01
+storeStorageDirectory = /mnt/beegfs/beegfs-storage</pre>
+<p><a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Start/enable">Start/enable</a> the <code>beegfs-storage@node03.service</code> on the storage node.
+</p>
+<h3><span class="mw-headline" id="Client">Client</span></h3>
+<p><a href="../en/Help:Reading.html#Installation_of_packages" class="mw-redirect" title="Install">Install</a> the package <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/beegfs-client/">beegfs-client</a></span><sup><small>AUR</small></sup> on the client node, which will build the client <a href="../en/Kernel_module.html" title="Kernel module">Kernel module</a>.
+</p>
+<p>The client service needs to know where it can reach the management server.
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/beegfs/beegfs-client.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">sysMgmtdHost = node01</pre>
+<p>The client service needs to know where it can mount the cluster storage, as well as the location of the client configuration file.
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/beegfs/beegfs-mount.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">/mnt/beegfs/beegfs-mount /etc/beegfs/beegfs-client.conf</pre>
+<p><a href="../en/Kernel_module.html#Manual_module_handling" title="Kernel module">Load</a> the Kernel module and its dependencies.
+</p>
+<pre># modprobe beegfs
+</pre>
+<p><a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Start/enable">Start/enable</a> the <code>beegfs-helperd@node04.service</code> on the client node.
+</p>
+<p><a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Start/enable">Start/enable</a> the <code>beegfs-client.service</code> on the client node.
+</p>
+<h3><span class="mw-headline" id="Utilities">Utilities</span></h3>
+<p><a href="../en/Help:Reading.html#Installation_of_packages" class="mw-redirect" title="Install">Install</a> the package <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/beegfs-utils/">beegfs-utils</a></span><sup><small>AUR</small></sup>.
+</p>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> Best to install on either the management server or client node, or both. For the purposes of this example the client node is used.</div>
+<h4><span class="mw-headline" id="Check_connectivity">Check connectivity</span></h4>
+<p>Check the detected network interfaces and transport protocols from a client node with the following commands:
+</p>
+<pre># beegfs-ctl --listnodes --nodetype=mgmt --nicdetails 
+  node01 [ID: 1]
+    Ports: UDP: 8008; TCP: 8008
+    Interfaces: 
+    + enp0s31f6[ip addr: 192.168.0.1; type: TCP]
+</pre>
+<pre># beegfs-ctl --listnodes --nodetype=meta --nicdetails 
+  node02 [ID: 2]
+    Ports: UDP: 8005; TCP: 8005
+    Interfaces: 
+    + eno1[ip addr: 192.168.0.2; type: TCP]
+</pre>
+<pre># beegfs-ctl --listnodes --nodetype=storage --nicdetails 
+  node03 [ID: 3]
+    Ports: UDP: 8003; TCP: 8003
+    Interfaces: 
+    + eno1[ip addr: 192.168.0.3; type: TCP]
+</pre>
+<pre># beegfs-ctl --listnodes --nodetype=client --nicdetails 
+  4E451-5DAEDCBF-node04 [ID: 4]
+    Ports: UDP: 8004; TCP: 0
+    Interfaces: 
+    + wlo1[ip addr: 192.168.0.4; type: TCP]
+</pre>
+<h2><span class="mw-headline" id="Server_tuning_and_advanced_features">Server tuning and advanced features</span></h2>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../File:Tango-view-fullscreen.svg" decoding="async" width="48" height="48" class="mw-file-element"></span></span><b>This article or section needs expansion.</b></p>
+<div>
+<b>Reason:</b> Empty sections (Discuss in <a rel="nofollow" class="external text" href="../en/Talk:BeeGFS.html">Talk:BeeGFS</a>)</div>
+</div>
+<h3><span class="mw-headline" id="InfiniBand_Support">InfiniBand Support</span></h3>
+<ul>
+<li>Explicitly <a href="../en/Help:Reading.html#Installation_of_packages" class="mw-redirect" title="Install">Install</a> <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/beegfs-common/">beegfs-common</a></span><sup><small>AUR</small></sup>, which will provide <code>libbeegfs-ib.so</code> shared object libraries.</li>
+<li>Enable support for <a rel="nofollow" class="external text" href="https://www.beegfs.io/wiki/ManualInstallWalkThrough#hn_59ca4f8bbb_4">RDMA-capable network hardware</a>.</li>
+<li>Rebuild the <a href="#Client">client</a> kernel module.</li>
+</ul>
+<h3><span class="mw-headline" id="ACLs">ACLs</span></h3>
+<h3><span class="mw-headline" id="Storage_Pools">Storage Pools</span></h3>
+<h3><span class="mw-headline" id="Quota_Enforcement">Quota Enforcement</span></h3>
+<h3><span class="mw-headline" id="High_Availability">High Availability</span></h3>
+<h2><span class="mw-headline" id="See_also">See also</span></h2>
+<ul>
+<li>Official site
+<ul>
+<li><a rel="nofollow" class="external text" href="https://www.beegfs.io/content/">Homepage</a></li>
+<li><a rel="nofollow" class="external text" href="https://www.beegfs.io/content/documentation/">Documentation</a></li>
+</ul>
+</li>
+<li>Official source code
+<ul>
+<li><a rel="nofollow" class="external text" href="https://git.beegfs.io/pub">GitLab BeeGFS</a></li>
+<li><a rel="nofollow" class="external text" href="https://www.beegfs.io/content/download/">RPM/DEB Package Build Files</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+					<div id="catlinks" class="catlinks" data-mw="interface">
+<div id="mw-normal-catlinks" class="mw-normal-catlinks">
+<a href="../Special:Categories.html" title="Special:Categories">Categories</a>: <ul>
+<li><a href="../en/Category:File_systems.html" title="Category:File systems">File systems</a></li>
+<li><a href="../en/Category:Distributed_computing.html" title="Category:Distributed computing">Distributed computing</a></li>
+</ul>
+</div>
+<div id="mw-hidden-catlinks" class="mw-hidden-catlinks mw-hidden-cats-hidden">Hidden categories: <ul>
+<li><a href="../en/Category:Pages_or_sections_flagged_with_Template:Style.html" title="Category:Pages or sections flagged with Template:Style">Pages or sections flagged with Template:Style</a></li>
+<li><a href="../en/Category:Pages_or_sections_flagged_with_Template:Expansion.html" title="Category:Pages or sections flagged with Template:Expansion">Pages or sections flagged with Template:Expansion</a></li>
+</ul>
+</div>
+</div>
+				</div>
+			</main>
+			
+		</div>
+		<div class="mw-footer-container">
+			
+<footer id="footer" class="mw-footer" style="margin: 0">
+	<ul id="footer-info">
+	<li data-nosnippet="">Retrieved from "<a dir="ltr" href="https://wiki.archlinux.org/index.php?title=BeeGFS&amp;oldid=749079">https://wiki.archlinux.org/index.php?title=BeeGFS&amp;oldid=749079</a>"</li>
+<li id="footer-info-lastmod"> This page was last edited on 28 September 2022, at 09:56.</li>
+	<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+<br>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="https://terms.archlinux.org/docs/privacy-policy/">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="../en/ArchWiki:About.html">About ArchWiki</a></li>
+	<li id="footer-places-disclaimers"><a href="../en/ArchWiki:General_disclaimer.html">Disclaimers</a></li>
+	<li id="footer-places-archwiki-code-of-conduct"><a href="https://terms.archlinux.org/docs/code-of-conduct/" class="extiw" title="archlinux-service-agreements:code-of-conduct">Code of conduct</a></li>
+	<li id="footer-places-archwiki-terms-of-service"><a href="https://terms.archlinux.org/docs/terms-of-service/" class="extiw" title="archlinux-service-agreements:terms-of-service">Terms of service</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-copyrightico"><a href="https://www.gnu.org/copyleft/fdl.html" class="cdx-button cdx-button--fake-button cdx-button--size-large cdx-button--fake-button--enabled"><img src="/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" loading="lazy"></a></li>
+	<li id="footer-poweredbyico"><img src="/resources/assets/poweredby_mediawiki.svg" width="88" height="31" loading="lazy"></li>
+</ul>
+
+</footer>
+
+		</div>
+	</div> 
+</div> 
+<div class="vector-settings" id="p-dock-bottom">
+	<ul></ul>
+</div>
+</body>
+</html>

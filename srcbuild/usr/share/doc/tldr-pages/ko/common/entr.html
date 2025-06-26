@@ -1,0 +1,53 @@
+<h1>entr</h1>
+
+<blockquote><p>파일이 변경되면 임의의 명령을 실행.
+더 많은 정보: <a href="https://eradman.com/entrproject/">https://eradman.com/entrproject/</a>.</p></blockquote>
+
+<ul>
+<li>하위 디렉터리의 파일이 변경되면 <code>make</code>로 다시 빌드:</li>
+</ul>
+
+
+<p><code>{{ag -l}} | entr {{make}}</code></p>
+
+<ul>
+<li>현재 디렉터리에 <code>.c</code> 소스 파일이 변경되면 <code>make</code>로 다시 빌드하고 테스트:</li>
+</ul>
+
+
+<p><code>{{ls *.c}} | entr {{'make &amp;&amp; make test'}}</code></p>
+
+<ul>
+<li><code>ruby main.rb</code>를 실행하기 전에 이전에 생성된 ruby 하위 프로세스에 <code>SIGTERM</code>을 보냄:</li>
+</ul>
+
+
+<p><code>{{ls *.rb}} | entr -r {{ruby main.rb}}</code></p>
+
+<ul>
+<li>변경된 파일 (<code>/_</code>)을 인수로 사용하여 명령을 실행:</li>
+</ul>
+
+
+<p><code>{{ls *.sql}} | entr {{psql -f}} /_</code></p>
+
+<ul>
+<li>화면을 지우고([c]lear) SQL 스크립트가 업데이트된 후 쿼리를 실행:</li>
+</ul>
+
+
+<p><code>{{echo my.sql}} | entr -cp {{psql -f}} /_</code></p>
+
+<ul>
+<li>소스 파일이 변경되면 프로젝트를 다시 빌드하고, 출력을 처음 몇 줄로 제한:</li>
+</ul>
+
+
+<p><code>{{find src/}} | entr -s {{'make | sed 10q'}}</code></p>
+
+<ul>
+<li>Node.js 서버를 시작하고 자동으로 로드(auto-[r]eload):</li>
+</ul>
+
+
+<p><code>{{ls *.js}} | entr -r {{node app.js}}</code></p>

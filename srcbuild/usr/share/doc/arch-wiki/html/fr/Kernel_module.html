@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-sticky-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-0 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-disabled skin-theme-clientpref-day vector-toc-available" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>Kernel module (Français) - ArchWiki</title>
+<link rel="stylesheet" href="../ArchWikiOffline.css">
+<meta name="ResourceLoaderDynamicStyles" content="">
+<meta name="generator" content="MediaWiki 1.43.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="max-image-preview:standard">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.25, maximum-scale=5.0">
+<link rel="search" type="application/opensearchdescription+xml" href="/rest.php/v1/search" title="ArchWiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.archlinux.org/api.php?action=rsd">
+<link rel="license" href="https://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="ArchWiki Atom feed" href="/index.php?title=Special:RecentChanges&amp;feed=atom">
+</head>
+<body class="skin--responsive skin-vector skin-vector-search-vue mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Kernel_module_Français rootpage-Kernel_module_Français skin-vector-2022 action-view">
+<a class="mw-jump-link" href="#bodyContent">Jump to content</a>
+<div class="vector-header-container">
+	</div>
+<div class="mw-page-container">
+	<div class="mw-page-container-inner">
+		<div class="vector-column-start">
+			<div class="vector-main-menu-container">
+		</div>
+	<div class="vector-sticky-pinned-container">
+				<nav id="mw-panel-toc" aria-label="Contents" data-event-name="ui.sidebar-toc" class="mw-table-of-contents-container vector-toc-landmark">
+					<div id="vector-toc-pinned-container" class="vector-pinned-container">
+					<div id="vector-toc" class="vector-toc vector-pinnable-element">
+	<div class="vector-pinnable-header vector-toc-pinnable-header vector-pinnable-header-pinned" data-feature-name="toc-pinned" data-pinnable-element-id="vector-toc">
+	<h2 class="vector-pinnable-header-label">Contents</h2>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-toc.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-toc.unpin">hide</button>
+</div>
+
+
+	<ul class="vector-toc-contents" id="mw-panel-toc-list">
+		<li id="toc-mw-content-text" class="vector-toc-list-item vector-toc-level-1">
+			<a href="#" class="vector-toc-link">
+				<div class="vector-toc-text">Beginning</div>
+			</a>
+		</li>
+		<li id="toc-Obtenir_des_informations" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Obtenir_des_informations">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">1</span>
+				<span>Obtenir des informations</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Obtenir_des_informations-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Chargement_automatique_des_modules" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Chargement_automatique_des_modules">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">2</span>
+				<span>Chargement automatique des modules</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Chargement_automatique_des_modules-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Chargement automatique des modules subsection</span>
+			</button>
+		
+		<ul id="toc-Chargement_automatique_des_modules-sublist" class="vector-toc-list">
+			<li id="toc-systemd" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#systemd">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1</span>
+					<span>systemd</span>
+				</div>
+			</a>
+			
+			<ul id="toc-systemd-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Chargement_précoce_des_modules" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Chargement_pr%C3%A9coce_des_modules">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2</span>
+					<span>Chargement précoce des modules</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Chargement_précoce_des_modules-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Gestion_manuelle_des_modules" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Gestion_manuelle_des_modules">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">3</span>
+				<span>Gestion manuelle des modules</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Gestion_manuelle_des_modules-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Définir_les_options_du_module" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#D%C3%A9finir_les_options_du_module">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">4</span>
+				<span>Définir les options du module</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Définir_les_options_du_module-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Définir les options du module subsection</span>
+			</button>
+		
+		<ul id="toc-Définir_les_options_du_module-sublist" class="vector-toc-list">
+			<li id="toc-Manuellement_au_moment_du_chargement_à_l'aide_de_modprobe" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Manuellement_au_moment_du_chargement_%C3%A0_l'aide_de_modprobe">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.1</span>
+					<span>Manuellement au moment du chargement à l'aide de modprobe</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Manuellement_au_moment_du_chargement_à_l'aide_de_modprobe-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Utilisation_des_fichiers_dans_/etc/modprobe.d/" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Utilisation_des_fichiers_dans_/etc/modprobe.d/">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.2</span>
+					<span>Utilisation des fichiers dans /etc/modprobe.d/</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Utilisation_des_fichiers_dans_/etc/modprobe.d/-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Utilisation_de_la_ligne_de_commande_du_noyau" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Utilisation_de_la_ligne_de_commande_du_noyau">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.3</span>
+					<span>Utilisation de la ligne de commande du noyau</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Utilisation_de_la_ligne_de_commande_du_noyau-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Aliasing" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Aliasing">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">5</span>
+				<span>Aliasing</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Aliasing-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Liste_noire" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Liste_noire">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">6</span>
+				<span>Liste noire</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Liste_noire-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Liste noire subsection</span>
+			</button>
+		
+		<ul id="toc-Liste_noire-sublist" class="vector-toc-list">
+			<li id="toc-Utilisation_des_fichiers_dans_/etc/modprobe.d/_2" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Utilisation_des_fichiers_dans_/etc/modprobe.d/_2">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.1</span>
+					<span>Utilisation des fichiers dans /etc/modprobe.d/</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Utilisation_des_fichiers_dans_/etc/modprobe.d/_2-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Utilisation_de_la_ligne_de_commande_du_noyau_2" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Utilisation_de_la_ligne_de_commande_du_noyau_2">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.2</span>
+					<span>Utilisation de la ligne de commande du noyau</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Utilisation_de_la_ligne_de_commande_du_noyau_2-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Dépannage" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#D%C3%A9pannage">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">7</span>
+				<span>Dépannage</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Dépannage-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Dépannage subsection</span>
+			</button>
+		
+		<ul id="toc-Dépannage-sublist" class="vector-toc-list">
+			<li id="toc-Les_modules_ne_se_chargent_pas" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Les_modules_ne_se_chargent_pas">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">7.1</span>
+					<span>Les modules ne se chargent pas</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Les_modules_ne_se_chargent_pas-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Voir_aussi" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Voir_aussi">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">8</span>
+				<span>Voir aussi</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Voir_aussi-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+</ul>
+</div>
+
+					</div>
+		</nav>
+			</div>
+		</div>
+		<div class="mw-content-container">
+			<main id="content" class="mw-body" style="margin: 0">
+				<header class="mw-body-header vector-page-titlebar">
+					<nav aria-label="Contents" class="vector-toc-landmark">
+						
+<div id="vector-page-titlebar-toc" class="vector-dropdown vector-page-titlebar-toc vector-button-flush-left">
+	<input type="checkbox" id="vector-page-titlebar-toc-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-page-titlebar-toc" class="vector-dropdown-checkbox " aria-label="Toggle the table of contents">
+	<label id="vector-page-titlebar-toc-label" for="vector-page-titlebar-toc-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"><span class="vector-icon mw-ui-icon-listBullet mw-ui-icon-wikimedia-listBullet"></span>
+
+<span class="vector-dropdown-label-text">Toggle the table of contents</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+							<div id="vector-page-titlebar-toc-unpinned-container" class="vector-unpinned-container">
+			</div>
+		
+	</div>
+</div>
+
+					</nav>
+					<h1 id="firstHeading" class="firstHeading mw-first-heading"><span class="mw-page-title-main">Kernel module (Français)</span></h1>
+							
+<div id="p-lang-btn" class="vector-dropdown mw-portlet mw-portlet-lang">
+	<input type="checkbox" id="p-lang-btn-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-p-lang-btn" class="vector-dropdown-checkbox mw-interlanguage-selector" aria-label="Go to an article in another language. Available in 8 languages">
+	<label id="p-lang-btn-label" for="p-lang-btn-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--action-progressive mw-portlet-lang-heading-8" aria-hidden="true"><span class="vector-icon mw-ui-icon-language-progressive mw-ui-icon-wikimedia-language-progressive"></span>
+
+<span class="vector-dropdown-label-text">8 languages</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+		<div class="vector-menu-content">
+			
+			<ul class="vector-menu-content-list">
+				
+				<li class="interlanguage-link interwiki-bs mw-list-item"><a href="../bs/Kernel_module.html" title="Kernel module – bosanski" lang="bs" hreflang="bs" data-title="Kernel module" data-language-autonym="Bosanski" data-language-local-name="bosanski" class="interlanguage-link-target"><span>Bosanski</span></a></li>
+<li class="interlanguage-link interwiki-de mw-list-item"><a href="https://wiki.archlinux.de/title/Kernelmodule" title="Kernelmodule – Deutsch" lang="de" hreflang="de" data-title="Kernelmodule" data-language-autonym="Deutsch" data-language-local-name="Deutsch" class="interlanguage-link-target"><span>Deutsch</span></a></li>
+<li class="interlanguage-link interwiki-en mw-list-item"><a href="../en/Kernel_module.html" title="Kernel module – English" lang="en" hreflang="en" data-title="Kernel module" data-language-autonym="English" data-language-local-name="English" class="interlanguage-link-target"><span>English</span></a></li>
+<li class="interlanguage-link interwiki-es mw-list-item"><a href="../es/Kernel_module.html" title="Kernel module – español" lang="es" hreflang="es" data-title="Kernel module" data-language-autonym="Español" data-language-local-name="español" class="interlanguage-link-target"><span>Español</span></a></li>
+<li class="interlanguage-link interwiki-ja mw-list-item"><a href="https://wiki.archlinux.jp/index.php/%E3%82%AB%E3%83%BC%E3%83%8D%E3%83%AB%E3%83%A2%E3%82%B8%E3%83%A5%E3%83%BC%E3%83%AB" title="カーネルモジュール – 日本語" lang="ja" hreflang="ja" data-title="カーネルモジュール" data-language-autonym="日本語" data-language-local-name="日本語" class="interlanguage-link-target"><span>日本語</span></a></li>
+<li class="interlanguage-link interwiki-pt mw-list-item"><a href="../pt/Kernel_module.html" title="Kernel module – português" lang="pt" hreflang="pt" data-title="Kernel module" data-language-autonym="Português" data-language-local-name="português" class="interlanguage-link-target"><span>Português</span></a></li>
+<li class="interlanguage-link interwiki-ru mw-list-item"><a href="../ru/Kernel_module.html" title="Kernel module – русский" lang="ru" hreflang="ru" data-title="Kernel module" data-language-autonym="Русский" data-language-local-name="русский" class="interlanguage-link-target"><span>Русский</span></a></li>
+<li class="interlanguage-link interwiki-zh-hans mw-list-item"><a href="https://wiki.archlinuxcn.org/wiki/Kernel_module" title="Kernel module – 中文（简体）" lang="zh-Hans" hreflang="zh-Hans" data-title="Kernel module" data-language-autonym="中文（简体）" data-language-local-name="中文（简体）" class="interlanguage-link-target"><span>中文（简体）</span></a></li>
+			</ul>
+			
+		</div>
+
+	</div>
+</div>
+</header>
+				<div class="vector-column-end">
+					<div class="vector-sticky-pinned-container">
+						<nav class="vector-page-tools-landmark" aria-label="Page tools">
+							<div id="vector-page-tools-pinned-container" class="vector-pinned-container">
+				
+							</div>
+		</nav>
+						<nav class="vector-appearance-landmark" aria-label="Appearance">
+							<div id="vector-appearance-pinned-container" class="vector-pinned-container">
+				<div id="vector-appearance" class="vector-appearance vector-pinnable-element">
+	<div class="vector-pinnable-header vector-appearance-pinnable-header vector-pinnable-header-pinned" data-feature-name="appearance-pinned" data-pinnable-element-id="vector-appearance" data-pinned-container-id="vector-appearance-pinned-container" data-unpinned-container-id="vector-appearance-unpinned-container">
+	<div class="vector-pinnable-header-label">Appearance</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-appearance.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-appearance.unpin">hide</button>
+</div>
+
+
+</div>
+
+							</div>
+		</nav>
+					</div>
+				</div>
+				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container>
+					<div class="vector-body-before-content">
+							<div class="mw-indicators">
+		</div>
+
+						<div id="siteSub" class="noprint">From ArchWiki</div>
+					</div>
+					<div id="contentSub"><div id="mw-content-subtitle"></div></div>
+					
+					
+					<div id="mw-content-text" class="mw-body-content">
+<div class="mw-content-ltr mw-parser-output" lang="fr" dir="ltr">
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>État de la traduction:</strong> Cet article est la version francophone de <a href="../en/Kernel_module.html" title="Kernel module">Kernel module</a>. Date de la dernière traduction: 2022-10-03. Vous pouvez aider à synchroniser la traduction s'il y a eu des <a rel="nofollow" class="external text" href="https://wiki.archlinux.org/index.php?title=Kernel_module&amp;diff=0&amp;oldid=742686">changements</a> dans la version anglaise.</div>
+<div class="archwiki-template-meta-related-articles">
+<p>Related articles</p>
+<ul>
+<li><a href="../fr/General_troubleshooting.html#Probl%C3%A8mes_de_d%C3%A9marrage" title="General troubleshooting (Français)">General troubleshooting (Français)#Problèmes de démarrage</a></li>
+<li><a href="../fr/Kernel.html" class="mw-redirect" title="Noyau">Noyau</a></li>
+<li><a href="../en/Kernel_parameters.html" title="Kernel parameters">Kernel parameters</a></li>
+<li><a href="../en/Compile_kernel_module.html" title="Compile kernel module">Compile kernel module</a></li>
+</ul>
+</div>
+<p><a href="https://en.wikipedia.org/wiki/fr:Loadable_Kernel_Module" class="extiw" title="wikipedia:fr:Loadable Kernel Module">Modules du noyau</a> sont des morceaux de code qui peuvent être chargés et déchargés dans le noyau à la demande. Ils étendent les fonctionnalités du noyau sans qu'il soit nécessaire de redémarrer le système. 
+</p>
+<p>Pour créer un module de noyau, vous pouvez lire <a rel="nofollow" class="external text" href="https://sysprog21.github.io/lkmpg/">le Guide de programmation des modules du noyau Linux</a>. Un module peut être configuré comme intégré ou chargeable. Pour charger ou supprimer dynamiquement un module, il doit être configuré comme un module chargeable dans la configuration du noyau (la ligne relative au module affichera donc la lettre <code>M</code>).
+</p>
+<meta property="mw:PageProp/toc">
+<h2><span class="mw-headline" id="Obtenir_des_informations">Obtenir des informations</span></h2>
+<p>Les modules sont stockés dans <code>/usr/lib/modules/<i>kernel_release</i></code>. Vous pouvez utiliser la commande <code>uname -r</code> pour obtenir la version actuelle de votre noyau.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> Les noms de modules utilisent souvent des traits de soulignement (<code>_</code>) ou des tirets (<code>-</code>) ; cependant, ces symboles sont interchangeables lors de l'utilisation de la commande <code>modprobe</code> et dans les fichiers de configuration dans <code>/etc/modprobe.d/</code>.</div>
+<p>Pour montrer quels modules du noyau sont actuellement chargés :
+</p>
+<pre>$ lsmod
+</pre>
+<p>Pour afficher des informations sur un module :
+</p>
+<pre>$ modinfo <i>nom_du_module</i>
+</pre>
+<p>Pour lister les options qui sont définies pour un module chargé :
+</p>
+<pre>$ systool -v -m <i>nom_du_module</i>
+</pre>
+<p>Pour afficher la configuration complète de tous les modules :
+</p>
+<pre>$ modprobe -c | less
+</pre>
+<p>Pour afficher la configuration d'un module particulier :
+</p>
+<pre>$ modprobe -c | grep <i>nom_du_module</i>
+</pre>
+<p>Lister les dépendances d'un module (ou alias), y compris le module lui-même :
+</p>
+<pre>$ modprobe --show-depends <i>nom_du_module</i>
+</pre>
+<h2><span class="mw-headline" id="Chargement_automatique_des_modules">Chargement automatique des modules</span></h2>
+<p>Aujourd'hui, tous les chargements de modules nécessaires sont gérés automatiquement par <a href="../fr/Udev.html" title="Udev (Français)">udev</a>, donc si vous n'avez pas besoin d'utiliser de modules noyau hors-arbre, il n'est pas nécessaire de mettre les modules qui doivent être chargés au démarrage dans un fichier de configuration. Cependant, il y a des cas où vous pouvez vouloir charger un module supplémentaire pendant le processus de démarrage, ou en mettre un autre sur liste noire pour que votre ordinateur fonctionne correctement.
+</p>
+<h3><span class="mw-headline" id="systemd">systemd</span></h3>
+<p>Les modules du noyau peuvent être explicitement listés dans des fichiers sous <code>/etc/modules-load.d/</code> pour que systemd les charge pendant le démarrage. Chaque fichier de configuration est nommé dans le style de <code>/etc/modules-load.d/<i>program</i>.conf</code>. Les fichiers de configuration contiennent simplement une liste de noms de modules du noyau à charger, séparés par des nouvelles lignes. Les lignes vides et les lignes dont le premier caractère non espace est <code>#</code> ou <code>;</code> sont ignorées.
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/modules-load.d/virtio-net.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;"># Chargement de virtio_net.ko au démarrage
+virtio_net</pre>
+<p>Consultez <span class="plainlinks archwiki-template-man" title="$ man 5 modules-load.d"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/modules-load.d.5">modules-load.d(5)</a></span> pour plus de détails.
+</p>
+<h3>
+<span id="Chargement_pr.C3.A9coce_des_modules"></span><span class="mw-headline" id="Chargement_précoce_des_modules">Chargement précoce des modules</span>
+</h3>
+<p>L'image <a href="../fr/Arch_boot_process.html#Initramfs" title="Arch boot process (Français)">initramfs</a> peut ne pas contenir les modules du noyau demandés dans <code>/etc/modules-load.d/</code>, il peut également manquer les fichiers qui ont été définis dans ce dossier. Le chargement précoce des modules dépend du générateur d'initramfs utilisé :
+</p>
+<ul>
+<li>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=mkinitcpio">mkinitcpio</a></span> : consultez <a href="../fr/Mkinitcpio.html#MODULES" title="Mkinitcpio (Français)">Mkinitcpio (Français)#MODULES</a>
+</li>
+<li>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=dracut">dracut</a></span> : consultez <a href="../en/Dracut.html#Early_kernel_module_loading" title="Dracut">Dracut#Early kernel module loading</a>
+</li>
+<li>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=booster">booster</a></span> : consultez <a href="../en/Booster.html#Early_module_loading" title="Booster">Booster#Early module loading</a>
+</li>
+</ul>
+<h2><span class="mw-headline" id="Gestion_manuelle_des_modules">Gestion manuelle des modules</span></h2>
+<p>Les modules du noyau sont gérés par des outils fournis par le paquet <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=kmod">kmod</a></span>. Vous pouvez utiliser ces outils manuellement.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> Si vous avez mis à jour votre noyau mais n'avez pas encore redémarré, <i>modprobe</i> échouera sans message d'erreur et sortira avec le code 1, car le chemin <code>/usr/lib/modules/$(uname -r)/</code> n'existe plus. Vérifiez manuellement si ce chemin existe lorsque <i>modprobe</i> a échoué pour déterminer si c'est le cas.</div>
+<p>Pour charger un module :
+</p>
+<pre># modprobe <i>nom_du_module</i>
+</pre>
+<p>Pour charger un module par nom de fichier (c'est-à-dire un module qui n'est pas installé dans <code>/usr/lib/modules/$(uname -r)/</code>) :
+</p>
+<pre># insmod filename [args]
+</pre>
+<p>Pour décharger un module :
+</p>
+<pre># modprobe -r <i>nom_du_module</i>
+</pre>
+<p>Ou, alternativement :
+</p>
+<pre># rmmod <i>nom_du_module</i>
+</pre>
+<h2>
+<span id="D.C3.A9finir_les_options_du_module"></span><span class="mw-headline" id="Définir_les_options_du_module">Définir les options du module</span>
+</h2>
+<p>Pour passer un paramètre à un module du noyau, vous pouvez le faire manuellement avec modprobe ou vous assurer que certains paramètres sont toujours appliqués en utilisant un fichier de configuration modprobe ou en utilisant la ligne de commande du noyau.
+</p>
+<h3>
+<span id="Manuellement_au_moment_du_chargement_.C3.A0_l.27aide_de_modprobe"></span><span class="mw-headline" id="Manuellement_au_moment_du_chargement_à_l'aide_de_modprobe">Manuellement au moment du chargement à l'aide de modprobe</span>
+</h3>
+<p>La manière de base de passer des paramètres à un module est d'utiliser la commande <i>modprobe</i>. Les paramètres sont spécifiés sur la ligne de commande en utilisant de simples <code><i>key=value</i></code> assignations :
+</p>
+<pre># modprobe <i>nom_du_module nom_du_paramètre=valeur_du_paramètre</i>
+</pre>
+<h3>
+<span id="Utilisation_des_fichiers_dans_.2Fetc.2Fmodprobe.d.2F"></span><span class="mw-headline" id="Utilisation_des_fichiers_dans_/etc/modprobe.d/">Utilisation des fichiers dans /etc/modprobe.d/</span>
+</h3>
+<p>Les fichiers du répertoire <code>/etc/modprobe.d/</code> peuvent être utilisés pour transmettre les paramètres des modules à <a href="../fr/Udev.html" title="Udev (Français)">udev</a>, qui utilisera <code>modprobe</code> pour gérer le chargement des modules lors du démarrage du système. Les fichiers de configuration dans ce répertoire peuvent avoir n'importe quel nom, du moment qu'ils se terminent par l'extension <i>.conf</i>. La syntaxe est la suivante :
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/modprobe.d/myfilename.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">options <i>nom_du_module nom_du_paramètre=valeur_du_paramètre</i></pre>
+<p>Par exemple :
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/modprobe.d/thinkfan.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;"># Sur les ThinkPads, cela permet au daemon 'thinkfan' de contrôler la vitesse du ventilateur.
+options thinkpad_acpi fan_control=1</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> Si l'un des modules concernés est chargé à partir de l'initramfs, vous devrez ajouter le fichier <i>.conf</i> approprié à <code>FILES</code> dans <a href="../fr/Mkinitcpio.html#Configuration" title="Mkinitcpio (Français)">mkinitcpio.conf</a> ou utiliser le fichier <code>modconf</code>. <a href="../fr/Mkinitcpio.html#HOOKS" title="Mkinitcpio (Français)">hook</a>, puis <a href="../fr/Mkinitcpio.html#Cr%C3%A9ation_et_activation_d'images" class="mw-redirect" title="Régénérez l'initramfs">régénérez l'initramfs</a> pour inclure le fichier <i>.conf</i>. Pour consulter le contenu de l'initramfs par défaut, utilisez <a href="../fr/Mkinitcpio.html#Extraction_de_l'image" title="Mkinitcpio (Français)">lsinitcpio</a>.</div>
+<h3><span class="mw-headline" id="Utilisation_de_la_ligne_de_commande_du_noyau">Utilisation de la ligne de commande du noyau</span></h3>
+<p>Si le module est intégré au noyau, vous pouvez également passer des options au module en utilisant la ligne de commande du noyau. Pour tous les chargeurs d'amorçage courants, la syntaxe suivante est correcte :
+</p>
+<pre><i>nom_du_module.nom_du_paramètre=valeur_du_paramètre</i>
+</pre>
+<p>Par exemple
+</p>
+<pre>thinkpad_acpi.fan_control=1
+</pre>
+<p>Ajoutez simplement ceci à la ligne de commande du noyau de votre chargeur d'amorçage, comme décrit dans <a href="../en/Kernel_parameters.html" title="Kernel parameters">Paramètres du noyau</a>.
+</p>
+<h2><span class="mw-headline" id="Aliasing">Aliasing</span></h2>
+<p>Les alias sont des noms alternatifs pour un module. Par exemple : <code>alias my-mod really_long_modulename</code> signifie que vous pouvez utiliser <code>modprobe my-mod</code> au lieu de <code>modprobe really_long_modulename</code>. Vous pouvez également utiliser des caractères génériques de type shell, ainsi <code>alias my-mod* really_long_modulename</code> signifie que <code>modprobe my-mod-something</code> a le même effet. Créez un alias :
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/modprobe.d/myalias.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">alias monmod nom_de_module_très_long</pre>
+<p>Certains modules ont des alias qui sont utilisés pour les charger automatiquement lorsqu'ils sont nécessaires à une application. La désactivation de ces alias peut empêcher le chargement automatique mais permettra toujours le chargement manuel des modules.
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/modprobe.d/modprobe.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;"># Empêcher le chargement automatique de Bluetooth
+alias net-pf-31 off</pre>
+<h2><span class="mw-headline" id="Liste_noire">Liste noire</span></h2>
+<p>La liste noire, dans le contexte des modules du noyau, est un mécanisme permettant d'empêcher le chargement du module du noyau. Cela peut être utile si, par exemple, le matériel associé n'est pas nécessaire, ou si le chargement de ce module pose des problèmes : par exemple, il peut y avoir deux modules de noyau qui essaient de contrôler la même pièce de matériel, et les charger ensemble entraînerait un conflit.
+</p>
+<p>Certains modules sont chargés en tant que partie de l'<a href="../fr/Arch_boot_process.html#Initramfs" title="Arch boot process (Français)">initramfs</a>. <code>mkinitcpio -M</code> affichera tous les modules détectés automatiquement : pour empêcher l'initramfs de charger certains de ces modules, mettez-les sur liste noire dans un fichier <i>.conf</i> sous <code>/etc/modprobe.d</code> et il sera ajouté par le hook <code>modconf</code> pendant la génération de l'image. L'exécution de <code>mkinitcpio -v</code> listera tous les modules ajoutés par les différents hooks (par exemple, le hook <code>filesystems</code>, le hook <code>block</code>, etc.) N'oubliez pas d'ajouter ce fichier <i>.conf</i> au tableau <code>FILES</code> de <code>/etc/mkinitcpio.conf</code> si vous n'avez pas le hook <code>modconf</code> dans votre tableau <code>HOOKS</code> (par exemple si vous avez dévié de la configuration par défaut), et une fois que vous avez mis les modules sur liste noire <a href="../fr/Mkinitcpio.html#Cr%C3%A9ation_et_activation_d'images" title="Mkinitcpio (Français)">régénérez l'initramfs</a>, et redémarrez ensuite.
+</p>
+<h3>
+<span id="Utilisation_des_fichiers_dans_.2Fetc.2Fmodprobe.d.2F_2"></span><span class="mw-headline" id="Utilisation_des_fichiers_dans_/etc/modprobe.d/_2">Utilisation des fichiers dans /etc/modprobe.d/</span>
+</h3>
+<p>Créez un fichier <i>.conf</i> dans <code>/etc/modprobe.d/</code> et ajoutez une ligne pour chaque module que vous voulez mettre sur liste noire, en utilisant le mot-clé <code>blacklist</code>. Si par exemple vous voulez empêcher le chargement du module <code>pcspkr</code> pour éviter les sons avec le <a href="../en/PC_speaker.html" title="PC speaker">bipeur du PC</a> :
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/modprobe.d/nobeep.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;"># Ne pas charger le module 'pcspkr' au démarrage.
+blacklist pcspkr
+</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> La commande <code>blacklist</code> met un module en liste noire afin qu'il ne soit pas chargé automatiquement, mais le module peut être chargé si un autre module non mis en liste noire en dépend ou s'il est chargé manuellement.
+<p>Cependant, il existe une solution de contournement pour ce comportement ; la commande <code>install</code> demande à modprobe d'exécuter une commande personnalisée au lieu d'insérer le module dans le noyau normalement, de sorte que vous pouvez forcer le module à toujours échouer au chargement avec :
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/modprobe.d/blacklist.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">...
+install <i>nom_du_module</i> /bin/true
+...</pre>
+Cela mettra effectivement sur liste noire ce module et tous les autres qui en dépendent.</div>
+<h3><span class="mw-headline" id="Utilisation_de_la_ligne_de_commande_du_noyau_2">Utilisation de la ligne de commande du noyau</span></h3>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Astuce:</strong> Cela peut être très utile si un module cassé rend impossible le démarrage de votre système.</div>
+<p>Vous pouvez également mettre les modules sur liste noire à partir du chargeur d'amorçage.
+</p>
+<p>Ajoutez simplement <code>module_blacklist=modname1,modname2,modname3</code> à la ligne de commande du noyau de votre chargeur d'amorçage, comme décrit dans <a href="../en/Kernel_parameters.html" title="Kernel parameters">Paramètres du noyau</a>.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> Lorsque vous mettez sur liste noire plus d'un module, notez qu'ils sont séparés par des virgules uniquement. Les espaces ou toute autre chose pourraient vraisemblablement rompre la syntaxe. </div>
+<h2>
+<span id="D.C3.A9pannage"></span><span class="mw-headline" id="Dépannage">Dépannage</span>
+</h2>
+<h3><span class="mw-headline" id="Les_modules_ne_se_chargent_pas">Les modules ne se chargent pas</span></h3>
+<p>Dans le cas où un module spécifique ne se charge pas et que le journal de démarrage (accessible en exécutant <code>journalctl -b</code> en tant que root) indique que le module est sur liste noire, mais que le répertoire <code>/etc/modprobe.d/</code> ne montre pas d'entrée correspondante, vérifiez dans un autre répertoire source de modprobe à <code>/usr/lib/modprobe.d/</code> les entrées de liste noire.
+</p>
+<p>Un module ne sera pas chargé si la chaîne "vermagic" contenue dans le module du noyau ne correspond pas à la valeur du noyau en cours d'exécution. Si l'on sait que le module est compatible avec le noyau en cours d'exécution, la vérification de "vermagic" peut être ignorée avec <code>modprobe --force-vermagic</code>.
+</p>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Attention:</strong> Ignorer les vérifications de version d'un module du noyau peut provoquer un plantage du noyau ou un comportement non défini du système en raison de l'incompatibilité. N'utilisez <code>--force-vermagic</code> qu'avec la plus grande prudence.</div>
+<h2><span class="mw-headline" id="Voir_aussi">Voir aussi</span></h2>
+<ul>
+<li><a href="../en/PC_speaker.html" title="PC speaker">Désactiver le bip du haut-parleur du PC</a></li>
+<li>
+<a rel="nofollow" class="external text" href="https://lwn.net/Articles/391230/">Writing a WMI driver</a> - an LWM introduction (en anglais)</li>
+</ul>
+</div>
+</div>
+					<div id="catlinks" class="catlinks" data-mw="interface"><div id="mw-normal-catlinks" class="mw-normal-catlinks">
+<a href="../Special:Categories.html" title="Special:Categories">Categories</a>: <ul>
+<li><a href="../fr/Category:Kernel.html" title="Category:Kernel (Français)">Kernel (Français)</a></li>
+<li><a href="../fr/Category:Hardware_detection_and_troubleshooting.html" title="Category:Hardware detection and troubleshooting (Français)">Hardware detection and troubleshooting (Français)</a></li>
+<li><a href="../fr/Category:Boot_process.html" title="Category:Boot process (Français)">Boot process (Français)</a></li>
+</ul>
+</div></div>
+				</div>
+			</main>
+			
+		</div>
+		<div class="mw-footer-container">
+			
+<footer id="footer" class="mw-footer" style="margin: 0">
+	<ul id="footer-info">
+	<li data-nosnippet="">Retrieved from "<a dir="ltr" href="https://wiki.archlinux.org/index.php?title=Kernel_module_(Fran%C3%A7ais)&amp;oldid=820610">https://wiki.archlinux.org/index.php?title=Kernel_module_(Français)&amp;oldid=820610</a>"</li>
+<li id="footer-info-lastmod"> This page was last edited on 12 November 2024, at 15:54.</li>
+	<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+<br>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="https://terms.archlinux.org/docs/privacy-policy/">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="../en/ArchWiki:About.html">About ArchWiki</a></li>
+	<li id="footer-places-disclaimers"><a href="../en/ArchWiki:General_disclaimer.html">Disclaimers</a></li>
+	<li id="footer-places-archwiki-code-of-conduct"><a href="https://terms.archlinux.org/docs/code-of-conduct/" class="extiw" title="archlinux-service-agreements:code-of-conduct">Code of conduct</a></li>
+	<li id="footer-places-archwiki-terms-of-service"><a href="https://terms.archlinux.org/docs/terms-of-service/" class="extiw" title="archlinux-service-agreements:terms-of-service">Terms of service</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-copyrightico"><a href="https://www.gnu.org/copyleft/fdl.html" class="cdx-button cdx-button--fake-button cdx-button--size-large cdx-button--fake-button--enabled"><img src="/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" loading="lazy"></a></li>
+	<li id="footer-poweredbyico"><img src="/resources/assets/poweredby_mediawiki.svg" width="88" height="31" loading="lazy"></li>
+</ul>
+
+</footer>
+
+		</div>
+	</div> 
+</div> 
+<div class="vector-settings" id="p-dock-bottom">
+	<ul></ul>
+</div>
+</body>
+</html>

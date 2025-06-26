@@ -1,0 +1,40 @@
+<h1>expac</h1>
+
+<blockquote><p>A data extraction tool for alpm databases, offering printf-like flexibility for pacman-based utilities.
+See also: <code>pacman</code>.
+More information: <a href="https://github.com/falconindy/expac">https://github.com/falconindy/expac</a>.</p></blockquote>
+
+<ul>
+<li>List the dependencies of a package:</li>
+</ul>
+
+
+<p><code>expac {{[-S|--sync]}} '%D' {{package}}</code></p>
+
+<ul>
+<li>List the optional dependencies of a package:</li>
+</ul>
+
+
+<p><code>expac {{[-S|--sync]}} "%o" {{package}}</code></p>
+
+<ul>
+<li>List the download size of packages in MiB:</li>
+</ul>
+
+
+<p><code>expac {{[-S|--sync]}} {{[-H|--humansize]}} M '%k\t%n' {{package1 package2 ...}}</code></p>
+
+<ul>
+<li>List packages marked for upgrade with their download size:</li>
+</ul>
+
+
+<p><code>expac {{[-S|--sync]}} {{[-H|--humansize]}} M '%k\t%n' $(pacman -Qqu) | sort {{[-sh|--sort --human-numeric-sort]}}</code></p>
+
+<ul>
+<li>List explicitly-installed packages with their optional dependencies:</li>
+</ul>
+
+
+<p><code>expac {{[-d|--delim]}} '\n\n' {{[-l|listdelim]}} '\n\t' {{[-Q|--query]}} '%n\n\t%O' $(pacman -Qeq)</code></p>

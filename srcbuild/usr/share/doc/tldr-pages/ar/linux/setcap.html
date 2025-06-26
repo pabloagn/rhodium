@@ -1,0 +1,40 @@
+<h1>setcap</h1>
+
+<blockquote><p>تعيين الصلاحيات لملف محدد.
+انظر أيضًا: <code>getcap</code>.
+لمزيد من التفاصيل: <a href="https://manned.org/setcap">https://manned.org/setcap</a>.</p></blockquote>
+
+<ul>
+<li>تعيين الصلاحية <code>cap_net_raw</code> (لاستخدام مآخذ RAW و PACKET) لملف معين:</li>
+</ul>
+
+
+<p><code>setcap '{{cap_net_raw}}' {{path/to/file}}</code></p>
+
+<ul>
+<li>تعيين عدة صلاحيات على ملف (<code>ep</code> خلف الصلاحية تعني &ldquo;مفعلة ومسموح بها&rdquo;):</li>
+</ul>
+
+
+<p><code>setcap '{{cap_dac_read_search,cap_sys_tty_config+ep}}' {{path/to/file}}</code></p>
+
+<ul>
+<li>إزالة جميع الصلاحيات من ملف:</li>
+</ul>
+
+
+<p><code>setcap -r {{path/to/file}}</code></p>
+
+<ul>
+<li>التحقق من أن الصلاحيات المحددة مرتبطة حاليًا بالملف المحدد:</li>
+</ul>
+
+
+<p><code>setcap -v '{{cap_net_raw}}' {{path/to/file}}</code></p>
+
+<ul>
+<li>يمكن استخدام المعامل الاختياري <code>-n root_uid</code> لتعيين صلاحيات الملف لاستخدامها فقط في نطاق مستخدم معين مع هذا المعرّف الجذري:</li>
+</ul>
+
+
+<p><code>setcap -n {{root_uid}} '{{cap_net_admin}}' {{path/to/file}}</code></p>

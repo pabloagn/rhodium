@@ -1,0 +1,60 @@
+<h1>argocd app</h1>
+
+<blockquote><p>Command-line interface to manage applications by Argo CD.
+More information: <a href="https://argo-cd.readthedocs.io/en/stable/user-guide/commands/argocd_app/">https://argo-cd.readthedocs.io/en/stable/user-guide/commands/argocd_app/</a>.</p></blockquote>
+
+<ul>
+<li>List applications:</li>
+</ul>
+
+
+<p><code>argocd app list --output {{json|yaml|wide}}</code></p>
+
+<ul>
+<li>Get application details:</li>
+</ul>
+
+
+<p><code>argocd app get {{app_name}} --output {{json|yaml|wide}}</code></p>
+
+<ul>
+<li>Deploy application internally (to the same cluster that Argo CD is running in):</li>
+</ul>
+
+
+<p><code>argocd app create {{app_name}} --repo {{git_repo_url}} --path {{path/to/repo}} --dest-server https://kubernetes.default.svc --dest-namespace {{ns}}</code></p>
+
+<ul>
+<li>Delete an application:</li>
+</ul>
+
+
+<p><code>argocd app delete {{app_name}}</code></p>
+
+<ul>
+<li>Enable application auto-sync:</li>
+</ul>
+
+
+<p><code>argocd app set {{app_name}} --sync-policy auto --auto-prune --self-heal</code></p>
+
+<ul>
+<li>Preview app synchronization without affecting cluster:</li>
+</ul>
+
+
+<p><code>argocd app sync {{app_name}} --dry-run --prune</code></p>
+
+<ul>
+<li>Show application deployment history:</li>
+</ul>
+
+
+<p><code>argocd app history {{app_name}} --output {{wide|id}}</code></p>
+
+<ul>
+<li>Rollback application to a previous deployed version by history ID (deleting unexpected resources):</li>
+</ul>
+
+
+<p><code>argocd app rollback {{app_name}} {{history_id}} --prune</code></p>

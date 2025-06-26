@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-sticky-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-0 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-disabled skin-theme-clientpref-day vector-toc-available" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>NFS/Troubleshooting - ArchWiki</title>
+<link rel="stylesheet" href="../../ArchWikiOffline.css">
+<meta name="ResourceLoaderDynamicStyles" content="">
+<meta name="generator" content="MediaWiki 1.43.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="max-image-preview:standard">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.25, maximum-scale=5.0">
+<link rel="search" type="application/opensearchdescription+xml" href="/rest.php/v1/search" title="ArchWiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.archlinux.org/api.php?action=rsd">
+<link rel="license" href="https://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="ArchWiki Atom feed" href="/index.php?title=Special:RecentChanges&amp;feed=atom">
+</head>
+<body class="skin--responsive skin-vector skin-vector-search-vue mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-NFS_Troubleshooting rootpage-NFS skin-vector-2022 action-view">
+<a class="mw-jump-link" href="#bodyContent">Jump to content</a>
+<div class="vector-header-container">
+	</div>
+<div class="mw-page-container">
+	<div class="mw-page-container-inner">
+		<div class="vector-column-start">
+			<div class="vector-main-menu-container">
+		</div>
+	<div class="vector-sticky-pinned-container">
+				<nav id="mw-panel-toc" aria-label="Contents" data-event-name="ui.sidebar-toc" class="mw-table-of-contents-container vector-toc-landmark">
+					<div id="vector-toc-pinned-container" class="vector-pinned-container">
+					<div id="vector-toc" class="vector-toc vector-pinnable-element">
+	<div class="vector-pinnable-header vector-toc-pinnable-header vector-pinnable-header-pinned" data-feature-name="toc-pinned" data-pinnable-element-id="vector-toc">
+	<h2 class="vector-pinnable-header-label">Contents</h2>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-toc.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-toc.unpin">hide</button>
+</div>
+
+
+	<ul class="vector-toc-contents" id="mw-panel-toc-list">
+		<li id="toc-mw-content-text" class="vector-toc-list-item vector-toc-level-1">
+			<a href="#" class="vector-toc-link">
+				<div class="vector-toc-text">Beginning</div>
+			</a>
+		</li>
+		<li id="toc-Server-side_issues" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Server-side_issues">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">1</span>
+				<span>Server-side issues</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Server-side_issues-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Server-side issues subsection</span>
+			</button>
+		
+		<ul id="toc-Server-side_issues-sublist" class="vector-toc-list">
+			<li id="toc-exportfs:_/etc/exports:2:_syntax_error:_bad_option_list" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#exportfs:_/etc/exports:2:_syntax_error:_bad_option_list">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.1</span>
+					<span>exportfs: /etc/exports:2: syntax error: bad option list</span>
+				</div>
+			</a>
+			
+			<ul id="toc-exportfs:_/etc/exports:2:_syntax_error:_bad_option_list-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-exportfs:_requires_fsid=_for_NFS_export" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#exportfs:_requires_fsid=_for_NFS_export">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.2</span>
+					<span>exportfs: requires fsid= for NFS export</span>
+				</div>
+			</a>
+			
+			<ul id="toc-exportfs:_requires_fsid=_for_NFS_export-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Group/GID_permissions_issues" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Group/GID_permissions_issues">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.3</span>
+					<span>Group/GID permissions issues</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Group/GID_permissions_issues-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id='toc-"Permission_denied"_when_trying_to_write_files_as_root' class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href='#"Permission_denied"_when_trying_to_write_files_as_root'>
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.4</span>
+					<span>"Permission denied" when trying to write files as root</span>
+				</div>
+			</a>
+			
+			<ul id='toc-"Permission_denied"_when_trying_to_write_files_as_root-sublist' class="vector-toc-list">
+			</ul>
+		</li>
+		<li id='toc-"RPC:_Program_not_registered"_when_showmount_-e_command_issued' class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href='#"RPC:_Program_not_registered"_when_showmount_-e_command_issued'>
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.5</span>
+					<span>"RPC: Program not registered" when showmount -e command issued</span>
+				</div>
+			</a>
+			
+			<ul id='toc-"RPC:_Program_not_registered"_when_showmount_-e_command_issued-sublist' class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-UDP_mounts_not_working" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#UDP_mounts_not_working">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.6</span>
+					<span>UDP mounts not working</span>
+				</div>
+			</a>
+			
+			<ul id="toc-UDP_mounts_not_working-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Timeout_with_big_directories" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Timeout_with_big_directories">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.7</span>
+					<span>Timeout with big directories</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Timeout_with_big_directories-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Client-side_issues" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Client-side_issues">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">2</span>
+				<span>Client-side issues</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Client-side_issues-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Client-side issues subsection</span>
+			</button>
+		
+		<ul id="toc-Client-side_issues-sublist" class="vector-toc-list">
+			<li id="toc-mount.nfs4:_No_such_device" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#mount.nfs4:_No_such_device">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1</span>
+					<span>mount.nfs4: No such device</span>
+				</div>
+			</a>
+			
+			<ul id="toc-mount.nfs4:_No_such_device-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-mount.nfs4:_Invalid_argument" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#mount.nfs4:_Invalid_argument">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2</span>
+					<span>mount.nfs4: Invalid argument</span>
+				</div>
+			</a>
+			
+			<ul id="toc-mount.nfs4:_Invalid_argument-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-mount.nfs4:_Network_is_unreachable" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#mount.nfs4:_Network_is_unreachable">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.3</span>
+					<span>mount.nfs4: Network is unreachable</span>
+				</div>
+			</a>
+			
+			<ul id="toc-mount.nfs4:_Network_is_unreachable-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-mount.nfs4:_an_incorrect_mount_option_was_specified" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#mount.nfs4:_an_incorrect_mount_option_was_specified">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.4</span>
+					<span>mount.nfs4: an incorrect mount option was specified</span>
+				</div>
+			</a>
+			
+			<ul id="toc-mount.nfs4:_an_incorrect_mount_option_was_specified-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Unable_to_connect_from_OS_X_clients" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Unable_to_connect_from_OS_X_clients">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.5</span>
+					<span>Unable to connect from OS X clients</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Unable_to_connect_from_OS_X_clients-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Unreliable_connection_from_OS_X_clients" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Unreliable_connection_from_OS_X_clients">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.6</span>
+					<span>Unreliable connection from OS X clients</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Unreliable_connection_from_OS_X_clients-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Intermittent_client_freezes_when_copying_large_files" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Intermittent_client_freezes_when_copying_large_files">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.7</span>
+					<span>Intermittent client freezes when copying large files</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Intermittent_client_freezes_when_copying_large_files-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-mount.nfs:_Operation_not_permitted" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#mount.nfs:_Operation_not_permitted">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.8</span>
+					<span>mount.nfs: Operation not permitted</span>
+				</div>
+			</a>
+			
+			<ul id="toc-mount.nfs:_Operation_not_permitted-sublist" class="vector-toc-list">
+				<li id="toc-NFSv4" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#NFSv4">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.8.1</span>
+					<span>NFSv4</span>
+				</div>
+			</a>
+			
+			<ul id="toc-NFSv4-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-NFSv3_and_earlier" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#NFSv3_and_earlier">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.8.2</span>
+					<span>NFSv3 and earlier</span>
+				</div>
+			</a>
+			
+			<ul id="toc-NFSv3_and_earlier-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-mount.nfs:_Protocol_not_supported" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#mount.nfs:_Protocol_not_supported">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.9</span>
+					<span>mount.nfs: Protocol not supported</span>
+				</div>
+			</a>
+			
+			<ul id="toc-mount.nfs:_Protocol_not_supported-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Permissions_issues" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Permissions_issues">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.10</span>
+					<span>Permissions issues</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Permissions_issues-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Problems_with_Vagrant_and_synced_folders" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Problems_with_Vagrant_and_synced_folders">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.11</span>
+					<span>Problems with Vagrant and synced_folders</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Problems_with_Vagrant_and_synced_folders-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Performance_issues" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Performance_issues">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">3</span>
+				<span>Performance issues</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Performance_issues-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Performance issues subsection</span>
+			</button>
+		
+		<ul id="toc-Performance_issues-sublist" class="vector-toc-list">
+			<li id="toc-Diagnose_the_problem" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Diagnose_the_problem">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1</span>
+					<span>Diagnose the problem</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Diagnose_the_problem-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Close-to-open/flush-on-close" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Close-to-open/flush-on-close">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.2</span>
+					<span>Close-to-open/flush-on-close</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Close-to-open/flush-on-close-sublist" class="vector-toc-list">
+				<li id="toc-The_nocto_mount_option" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#The_nocto_mount_option">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.2.1</span>
+					<span>The nocto mount option</span>
+				</div>
+			</a>
+			
+			<ul id="toc-The_nocto_mount_option-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-The_async_export_option" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#The_async_export_option">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.2.2</span>
+					<span>The async export option</span>
+				</div>
+			</a>
+			
+			<ul id="toc-The_async_export_option-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Buffer_cache_size_and_MTU" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Buffer_cache_size_and_MTU">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.3</span>
+					<span>Buffer cache size and MTU</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Buffer_cache_size_and_MTU-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Debugging" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Debugging">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">4</span>
+				<span>Debugging</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Debugging-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Debugging subsection</span>
+			</button>
+		
+		<ul id="toc-Debugging-sublist" class="vector-toc-list">
+			<li id="toc-Using_rpcdebug" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Using_rpcdebug">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.1</span>
+					<span>Using rpcdebug</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Using_rpcdebug-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Using_mountstats" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Using_mountstats">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.2</span>
+					<span>Using mountstats</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Using_mountstats-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Kernel_Interfaces" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Kernel_Interfaces">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.3</span>
+					<span>Kernel Interfaces</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Kernel_Interfaces-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-NFSD_debug_flags" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#NFSD_debug_flags">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.4</span>
+					<span>NFSD debug flags</span>
+				</div>
+			</a>
+			
+			<ul id="toc-NFSD_debug_flags-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-NFS_debug_flags" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#NFS_debug_flags">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.5</span>
+					<span>NFS debug flags</span>
+				</div>
+			</a>
+			
+			<ul id="toc-NFS_debug_flags-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-NLM_debug_flags" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#NLM_debug_flags">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.6</span>
+					<span>NLM debug flags</span>
+				</div>
+			</a>
+			
+			<ul id="toc-NLM_debug_flags-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-RPC_debug_flags" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#RPC_debug_flags">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.7</span>
+					<span>RPC debug flags</span>
+				</div>
+			</a>
+			
+			<ul id="toc-RPC_debug_flags-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-See_also" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#See_also">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.8</span>
+					<span>See also</span>
+				</div>
+			</a>
+			
+			<ul id="toc-See_also-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+</ul>
+</div>
+
+					</div>
+		</nav>
+			</div>
+		</div>
+		<div class="mw-content-container">
+			<main id="content" class="mw-body" style="margin: 0">
+				<header class="mw-body-header vector-page-titlebar">
+					<nav aria-label="Contents" class="vector-toc-landmark">
+						
+<div id="vector-page-titlebar-toc" class="vector-dropdown vector-page-titlebar-toc vector-button-flush-left">
+	<input type="checkbox" id="vector-page-titlebar-toc-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-page-titlebar-toc" class="vector-dropdown-checkbox " aria-label="Toggle the table of contents">
+	<label id="vector-page-titlebar-toc-label" for="vector-page-titlebar-toc-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"><span class="vector-icon mw-ui-icon-listBullet mw-ui-icon-wikimedia-listBullet"></span>
+
+<span class="vector-dropdown-label-text">Toggle the table of contents</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+							<div id="vector-page-titlebar-toc-unpinned-container" class="vector-unpinned-container">
+			</div>
+		
+	</div>
+</div>
+
+					</nav>
+					<h1 id="firstHeading" class="firstHeading mw-first-heading"><span class="mw-page-title-main">NFS/Troubleshooting</span></h1>
+							
+<div id="p-lang-btn" class="vector-dropdown mw-portlet mw-portlet-lang">
+	<input type="checkbox" id="p-lang-btn-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-p-lang-btn" class="vector-dropdown-checkbox mw-interlanguage-selector" aria-label="Go to an article in another language. Available in 2 languages">
+	<label id="p-lang-btn-label" for="p-lang-btn-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--action-progressive mw-portlet-lang-heading-2" aria-hidden="true"><span class="vector-icon mw-ui-icon-language-progressive mw-ui-icon-wikimedia-language-progressive"></span>
+
+<span class="vector-dropdown-label-text">2 languages</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+		<div class="vector-menu-content">
+			
+			<ul class="vector-menu-content-list">
+				
+				<li class="interlanguage-link interwiki-de mw-list-item"><a href="https://wiki.archlinux.de/title/Network_File_System" title="Network File System – Deutsch" lang="de" hreflang="de" data-title="Network File System" data-language-autonym="Deutsch" data-language-local-name="Deutsch" class="interlanguage-link-target"><span>Deutsch</span></a></li>
+<li class="interlanguage-link interwiki-ja mw-list-item"><a href="https://wiki.archlinux.jp/index.php/NFS/%E3%83%88%E3%83%A9%E3%83%96%E3%83%AB%E3%82%B7%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0" title="NFS/トラブルシューティング – 日本語" lang="ja" hreflang="ja" data-title="NFS/トラブルシューティング" data-language-autonym="日本語" data-language-local-name="日本語" class="interlanguage-link-target"><span>日本語</span></a></li>
+			</ul>
+			
+		</div>
+
+	</div>
+</div>
+</header>
+				<div class="vector-column-end">
+					<div class="vector-sticky-pinned-container">
+						<nav class="vector-page-tools-landmark" aria-label="Page tools">
+							<div id="vector-page-tools-pinned-container" class="vector-pinned-container">
+				
+							</div>
+		</nav>
+						<nav class="vector-appearance-landmark" aria-label="Appearance">
+							<div id="vector-appearance-pinned-container" class="vector-pinned-container">
+				<div id="vector-appearance" class="vector-appearance vector-pinnable-element">
+	<div class="vector-pinnable-header vector-appearance-pinnable-header vector-pinnable-header-pinned" data-feature-name="appearance-pinned" data-pinnable-element-id="vector-appearance" data-pinned-container-id="vector-appearance-pinned-container" data-unpinned-container-id="vector-appearance-unpinned-container">
+	<div class="vector-pinnable-header-label">Appearance</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-appearance.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-appearance.unpin">hide</button>
+</div>
+
+
+</div>
+
+							</div>
+		</nav>
+					</div>
+				</div>
+				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container>
+					<div class="vector-body-before-content">
+							<div class="mw-indicators">
+		</div>
+
+						<div id="siteSub" class="noprint">From ArchWiki</div>
+					</div>
+					<div id="contentSub"><div id="mw-content-subtitle"><div class="subpages">&lt; <bdi dir="ltr"><a href="../../en/NFS.html" title="NFS">NFS</a></bdi>
+</div></div></div>
+					
+					
+					<div id="mw-content-text" class="mw-body-content">
+<div class="mw-content-ltr mw-parser-output" lang="en" dir="ltr">
+<div class="archwiki-template-meta-related-articles">
+<p>Related articles</p>
+<ul>
+<li><a href="../../en/NFS.html" title="NFS">NFS</a></li>
+</ul>
+</div>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../../File:View-refresh-red.svg" decoding="async" width="48" height="48" class="mw-file-element"></span></span><b>This article or section is out of date.</b></p>
+<div>
+<b>Reason:</b> Not all sections are up-to-date with NFSv4 changes. (Discuss in <a rel="nofollow" class="external text" href="../../en/Talk:NFS/Troubleshooting.html">Talk:NFS/Troubleshooting</a>)</div>
+</div>
+<p>Dedicated article for common problems and solutions.
+</p>
+<meta property="mw:PageProp/toc">
+<h2><span class="mw-headline" id="Server-side_issues">Server-side issues</span></h2>
+<h3>
+<span id="exportfs:_.2Fetc.2Fexports:2:_syntax_error:_bad_option_list"></span><span class="mw-headline" id="exportfs:_/etc/exports:2:_syntax_error:_bad_option_list">exportfs: /etc/exports:2: syntax error: bad option list</span>
+</h3>
+<p>Make sure to delete all space from the option list in <code>/etc/exports</code>.
+</p>
+<h3>
+<span id="exportfs:_requires_fsid.3D_for_NFS_export"></span><span class="mw-headline" id="exportfs:_requires_fsid=_for_NFS_export">exportfs: requires fsid= for NFS export</span>
+</h3>
+<p>As not all filesystems are stored on devices and not all filesystems have UUIDs (e.g. <a href="../../en/FUSE.html" title="FUSE">FUSE</a>), it is sometimes necessary to explicitly tell NFS how to identify a filesystem. This is done with the <code>fsid</code> option:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/exports</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">/srv/nfs client(rw,sync,crossmnt,fsid=0)
+/srv/nfs/music client(rw,sync,fsid=10)</pre>
+<h3>
+<span id="Group.2FGID_permissions_issues"></span><span class="mw-headline" id="Group/GID_permissions_issues">Group/GID permissions issues</span>
+</h3>
+<p>If NFS shares mount fine, and are fully accessible to the owner, but not to group members; check the number of groups that user belongs to. NFS has a limit of 16 on the number of groups a user can belong to. If you have users with more than this, you need to enable the <code>manage-gids</code> start-up flag on the NFS server:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/nfs.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[mountd]
+manage-gids=y</pre>
+<h3>
+<span id=".22Permission_denied.22_when_trying_to_write_files_as_root"></span><span class="mw-headline" id='"Permission_denied"_when_trying_to_write_files_as_root'>"Permission denied" when trying to write files as root</span>
+</h3>
+<ul><li>If you need to mount shares as root, and have full r/w access from the client, add the no_root_squash option to the export in <code>/etc/exports</code>:</li></ul>
+<pre>/var/cache/pacman/pkg 192.168.1.0/24(rw,no_subtree_check,no_root_squash)
+</pre>
+<ul><li>You must also add no_root_squash to the first line in <code>/etc/exports</code>:</li></ul>
+<pre>/ 192.168.1.0/24(rw,fsid=root,no_root_squash,no_subtree_check)
+</pre>
+<h3>
+<span id=".22RPC:_Program_not_registered.22_when_showmount_-e_command_issued"></span><span class="mw-headline" id='"RPC:_Program_not_registered"_when_showmount_-e_command_issued'>"RPC: Program not registered" when showmount -e command issued</span>
+</h3>
+<p>Make sure that <code>nfs-server.service</code> and <code>rpcbind.service</code> are running on the server site, see <a href="../../en/Systemd.html" title="Systemd">systemd</a>. If they are not, start and enable them.
+</p>
+<p>Also make sure NFSv3 is enabled. <i>showmount</i> does <b>not</b> work with NFSv4-only servers.
+</p>
+<h3><span class="mw-headline" id="UDP_mounts_not_working">UDP mounts not working</span></h3>
+<p><i>nfs-utils</i> disabled serving NFS over UDP in version 2.2.1. Arch core updated to 2.3.1 on 21 Dec 2017 (skipping over 2.2.1.) If UDP stopped working then, add <code>udp=y</code> under <code>[nfsd]</code> in <code>/etc/nfs.conf</code>. Then restart <code>nfs-server.service</code>.
+</p>
+<h3><span class="mw-headline" id="Timeout_with_big_directories">Timeout with big directories</span></h3>
+<p>Since <i>nfs-utils</i> version 1.0.x, every subdirectory is checked for permissions. This can lead to timeout on directories with a "large" number of subdirectories, even a few hundreds.
+</p>
+<p>To disable this behaviour, add the option <code>no_subtree_check</code> to <code>/etc/exports</code> to the share directory.
+</p>
+<h2><span class="mw-headline" id="Client-side_issues">Client-side issues</span></h2>
+<h3><span class="mw-headline" id="mount.nfs4:_No_such_device">mount.nfs4: No such device</span></h3>
+<p>Make sure the <code>nfsd</code> <a href="../../en/Kernel_module.html" title="Kernel module">kernel module</a> has been loaded.
+</p>
+<h3><span class="mw-headline" id="mount.nfs4:_Invalid_argument">mount.nfs4: Invalid argument</span></h3>
+<p><a href="../../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Enable">Enable</a> and <a href="../../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Start">start</a> <code>nfs-client.target</code> and make sure the appropriate daemons (nfs-idmapd, rpc-gssd, etc) are running on the server.
+</p>
+<h3><span class="mw-headline" id="mount.nfs4:_Network_is_unreachable">mount.nfs4: Network is unreachable</span></h3>
+<p>Users making use of <a href="../../en/Systemd-networkd.html" title="Systemd-networkd">systemd-networkd</a> or <a href="../../en/NetworkManager.html" title="NetworkManager">NetworkManager</a> might notice <a href="../../en/NFS.html" title="NFS">NFS</a> mounts are not mounted when booting.
+</p>
+<p>Force the network to be completely configured by <a href="../../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Enabling">enabling</a> <code>systemd-networkd-wait-online.service</code> or <code>NetworkManager-wait-online.service</code>.   This may slow down the boot-process because fewer services run in parallel.
+</p>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> If the NFS server is only expecting IPV4 addresses, and you are using <code>NetworkManager-wait-online.service</code>, set <code>ipv4.may-fail=no</code> in your network profile to make sure that an IPV4 address is acquired before the <code>NetworkManager-wait-online.service</code> is reached.</div>
+<h3><span class="mw-headline" id="mount.nfs4:_an_incorrect_mount_option_was_specified">mount.nfs4: an incorrect mount option was specified</span></h3>
+<p>This can happen if using the <code>sec=krb5</code> option without <code>nfs-client.target</code> and/or <code>rpc-gssd.service</code> running. Starting and enabling those services should resolve the issue.
+</p>
+<h3><span class="mw-headline" id="Unable_to_connect_from_OS_X_clients">Unable to connect from OS X clients</span></h3>
+<p>When trying to connect from an OS X client, you will see that everything is ok in the server logs, but OS X will refuse to mount your NFS share. You can do one of two things to fix this:
+</p>
+<ul><li>On the NFS server, add the <code>insecure</code> option to the share in <code>/etc/exports</code> and re-run <code>exportfs -r</code>.</li></ul>
+<p>... <b>OR</b> ...
+</p>
+<ul><li>On the OS X client, add the <code>resvport</code> option to the <code>mount</code> command line. You can also set <code>resvport</code> as a default client mount option in <code>/etc/nfs.conf</code>:</li></ul>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/nfs.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">nfs.client.mount.options = resvport</pre>
+<p>Using the default client mount option should also affect mounting the share from Finder via "Connect to Server...".
+</p>
+<h3><span class="mw-headline" id="Unreliable_connection_from_OS_X_clients">Unreliable connection from OS X clients</span></h3>
+<p>OS X's NFS client is optimized for OS X Servers and might present some issues with Linux servers. If you are experiencing slow performance, frequent disconnects and problems with international characters edit the default mount options by adding the line <code>nfs.client.mount.options = intr,locallocks,nfc</code> to <code>/etc/nfs.conf</code> on your Mac client. More information about the mount options can be found in the OS X <span class="plainlinks archwiki-template-man" title="$ man 8 mount_nfs"><a rel="nofollow" class="external text" href="https://www.unix.com/man-page/osx/8/mount_nfs/">mount_nfs(8)</a></span>.
+</p>
+<h3><span class="mw-headline" id="Intermittent_client_freezes_when_copying_large_files">Intermittent client freezes when copying large files</span></h3>
+<p>If you copy large files from your client machine to the NFS server, the transfer speed is <i>very</i> fast, but after some seconds the speed drops and your client machine intermittently locks up completely for some time until the transfer is finished.
+</p>
+<p>Try adding <code>sync</code> as a mount option on the client (e.g. in <code>/etc/fstab</code>) to fix this problem.
+</p>
+<h3><span class="mw-headline" id="mount.nfs:_Operation_not_permitted">mount.nfs: Operation not permitted</span></h3>
+<h4><span class="mw-headline" id="NFSv4">NFSv4</span></h4>
+<p>If you use <a href="../../en/Kerberos.html" title="Kerberos">Kerberos</a> (<code>sec=krb5*</code>), make sure the client and server clocks are correct. Using <a href="../../en/Network_Time_Protocol_daemon.html" class="mw-redirect" title="Ntpd">ntpd</a> or <a href="../../en/Systemd-timesyncd.html" title="Systemd-timesyncd">systemd-timesyncd</a> is recommended. Also, check that the canonical name for the server as resolved on the client (see <a href="../../en/Domain_name_resolution.html" title="Domain name resolution">Domain name resolution</a>) matches the name in the server's NFS principal.
+</p>
+<h4><span class="mw-headline" id="NFSv3_and_earlier">NFSv3 and earlier</span></h4>
+<p><i>nfs-utils</i> versions 1.2.1-2 or higher use NFSv4 by default, resulting in NFSv3 shares failing on upgrade. The problem can be solved by using either mount option <code>'vers=3'</code> or <code>'nfsvers=3'</code> on the command line: 
+</p>
+<pre># mount.nfs <i>remote target</i> <i>directory</i> -o ...,vers=3,...
+# mount.nfs <i>remote target</i> <i>directory</i> -o ...,nfsvers=3,...
+</pre>
+<p>or in <code>/etc/fstab</code>:
+</p>
+<pre><i>remote target</i> <i>directory</i> nfs ...,vers=3,... 0 0
+<i>remote target</i> <i>directory</i> nfs ...,nfsvers=3,... 0 0
+</pre>
+<h3><span class="mw-headline" id="mount.nfs:_Protocol_not_supported">mount.nfs: Protocol not supported</span></h3>
+<p>This error occurs when you include the export root in the path of the NFS source.
+For example:
+</p>
+<pre># mount SERVER:/srv/nfs4/media /mnt
+mount.nfs4: Protocol not supported
+</pre>
+<p>Use the relative path instead:
+</p>
+<pre># mount SERVER:/media /mnt
+</pre>
+<h3><span class="mw-headline" id="Permissions_issues">Permissions issues</span></h3>
+<p>If you find that you cannot set the permissions on files properly, make sure the <a href="../../en/Users_and_groups.html" class="mw-redirect" title="User">user</a>/<a href="../../en/Users_and_groups.html#Group_management" class="mw-redirect" title="User group">user group</a> are <b>both</b> on the client and server.
+</p>
+<p>If all your files are owned by <code>nobody</code>, and you are using NFSv4, on both the client and server, you should ensure that the <code>nfs-idmapd.service</code> has been started.
+</p>
+<p>On some systems detecting the domain from FQDN minus hostname does not seem to work reliably. If files are still showing as <code>nobody</code> after the above changes, edit <code>/etc/idmapd.conf</code>, ensure that <code>Domain</code> is set to <code>FQDN minus hostname</code>. For example:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/idmapd.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[General]
+Domain = <i>domain.ext</i>
+
+[Mapping]
+
+Nobody-User = nobody
+Nobody-Group = nobody
+
+[Translation]
+
+Method = nsswitch</pre>
+<h3><span class="mw-headline" id="Problems_with_Vagrant_and_synced_folders">Problems with Vagrant and synced_folders</span></h3>
+<p>If you get an error about unuspported protocol, you need to enable NFS over UDP on your host (or make Vagrant use NFS over TCP.) See <a href="#UDP_mounts_not_working">#UDP mounts not working</a>.
+</p>
+<p>If Vagrant scripts are unable to mount folders over NFS, installing the <i>net-tools</i> package may solve the issue.
+</p>
+<h2><span class="mw-headline" id="Performance_issues">Performance issues</span></h2>
+<p>This <a rel="nofollow" class="external text" href="https://nfs.sourceforge.net/nfs-howto/ar01s05.html">NFS Howto page</a> has some useful information regarding performance.  Here are some further tips:
+</p>
+<h3><span class="mw-headline" id="Diagnose_the_problem">Diagnose the problem</span></h3>
+<ul>
+<li>
+<b>Htop</b> should be your first port of call.  The most obvious symptom will be a maxed-out CPU.</li>
+<li>Press F2, and under "Display options", enable "Detailed CPU time".  Press F1 for an explanation of the colours used in the CPU bars.  In particular, is the CPU spending most of its time responding to IRQs, or in Wait-IO (wio)?</li>
+</ul>
+<h3>
+<span id="Close-to-open.2Fflush-on-close"></span><span class="mw-headline" id="Close-to-open/flush-on-close">Close-to-open/flush-on-close</span>
+</h3>
+<p><b>Symptoms:</b> Your clients are writing many small files.  The server CPU is not maxed out, but there is very high wait-IO, and the server disk seems to be churning more than you might expect.
+</p>
+<p>In order to ensure data consistency across clients, the NFS protocol requires that the client's cache is flushed (all data is pushed to the server) whenever a file is closed after writing.  Because the server is not allowed to buffer disk writes (if it crashes, the client will not realise the data was not written properly), the data is written to disk immediately before the client's request is completed.  When you are writing lots of small files from the client, this means that the server spends most of its time waiting for small files to be written to its disk, which can cause a significant reduction in throughput.
+</p>
+<p>See <a rel="nofollow" class="external text" href="https://docstore.mik.ua/orelly/networking_2ndEd/nfs/ch07_04.htm">this excellent article</a> or the <b>nfs</b> manpage for more details on the close-to-open policy.  There are several approaches to solving this problem:
+</p>
+<h4><span class="mw-headline" id="The_nocto_mount_option">The nocto mount option</span></h4>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Warning:</strong> The Linux kernel does not seem to honor this option properly. Files are still flushed when they are closed.</div>
+<p>If all of the following conditions are satisfied:
+</p>
+<ul>
+<li>The export you have mounted on the client is only going to be used by the one client.</li>
+<li>It does not matter too much if a file written on one client does not immediately appear on other clients.</li>
+<li>It does not matter if after a client has written a file, and the client thinks the file has been saved, and then the client crashes, the file may be lost.</li>
+</ul>
+<p>Use the <b>nocto</b> mount option, which will disable the close-to-open behavior.
+</p>
+<h4><span class="mw-headline" id="The_async_export_option">The async export option</span></h4>
+<p>Does your situation match these conditions?
+</p>
+<ul>
+<li>It is important that when a file is closed after writing on one client, it is:
+<ul>
+<li>Immediately visible on all the other clients.</li>
+<li>Safely stored on the server, even if the client crashes immediately after closing the file.</li>
+</ul>
+</li>
+<li>It is not important to you that if the server crashes:
+<ul>
+<li>You may lose the files that were most recently written by clients.</li>
+<li>When the server is restarted, the clients will believe their recent files exist, even though they were actually lost.</li>
+</ul>
+</li>
+</ul>
+<p>In this situation, you can use <code>async</code> instead of <code>sync</code> in the server's <code>/etc/exports</code> file for those specific exports.  See the <b>exports</b> manual page for details.  In this case, it does not make sense to use the <code>nocto</code> mount option on the client.
+</p>
+<h3><span class="mw-headline" id="Buffer_cache_size_and_MTU">Buffer cache size and MTU</span></h3>
+<p><b>Symptoms:</b> High kernel or IRQ CPU usage, a very high packet count through the network card.
+</p>
+<p>This is a trickier optimisation. Make sure this is definitely the problem before spending too much time on this. The default values are usually fine for most situations.
+</p>
+<p>See <a rel="nofollow" class="external text" href="https://docstore.mik.ua/orelly/networking_2ndEd/nfs/ch07_03.htm">this article</a> for information about I/O buffering in NFS. Essentially, data is accumulated into buffers before being sent. The size of the buffer will affect the way data is transmitted over the network. The Maximum Transmission Unit (MTU) of the network equipment will also affect throughput, as the buffers need to be split into MTU-sized chunks before they are sent over the network. If your buffer size is too big, the kernel or hardware may spend too much time splitting it into MTU-sized chunks. If the buffer size is too small, there will be overhead involved in sending a very large number of small packets. You can use the <b>rsize</b> and <b>wsize</b> mount options on the client to alter the buffer cache size. To achieve the best throughput, you need to experiment and discover the best values for your setup.
+</p>
+<p>It is possible to change the MTU of many network cards. If your clients are on a separate subnet (e.g. for a Beowulf cluster), it may be safe to configure all of the network cards to use a high MTU. This should be done in very-high-bandwidth environments.
+</p>
+<p>See <a href="../../en/NFS.html#Performance_tuning" title="NFS">NFS#Performance tuning</a> for more information.
+</p>
+<h2><span class="mw-headline" id="Debugging">Debugging</span></h2>
+<h3><span class="mw-headline" id="Using_rpcdebug">Using rpcdebug</span></h3>
+<p>Using <code>rpcdebug</code> is the easiest way to manipulate the kernel interfaces in place of echoing bitmasks to /proc.
+</p>
+<table class="wikitable">
+
+<tbody>
+<tr>
+<th>Option</th>
+<th>Description
+</th>
+</tr>
+<tr>
+<td>-c</td>
+<td>Clear the given debug flags
+</td>
+</tr>
+<tr>
+<td>-s</td>
+<td>Set the given debug flags
+</td>
+</tr>
+<tr>
+<td>-m <i>module</i>
+</td>
+<td>Specify which module's flags to set or clear.
+</td>
+</tr>
+<tr>
+<td>-v</td>
+<td>Increase the verbosity of rpcdebug's output
+</td>
+</tr>
+<tr>
+<td>-h</td>
+<td>Print a help message and exit. When combined with the -v option, also prints the available debug flags.
+</td>
+</tr>
+</tbody>
+</table>
+<p>For the <b>-m</b> option, the available modules are:
+</p>
+<table class="wikitable">
+
+<tbody>
+<tr>
+<th>Module</th>
+<th>Description
+</th>
+</tr>
+<tr>
+<td>nfsd</td>
+<td>The NFS server
+</td>
+</tr>
+<tr>
+<td>nfs</td>
+<td>The NFS client
+</td>
+</tr>
+<tr>
+<td>nlm</td>
+<td>The Network Lock Manager, in either an NFS client or server
+</td>
+</tr>
+<tr>
+<td>rpc</td>
+<td>The Remote Procedure Call module, in either an NFS client or server
+</td>
+</tr>
+</tbody>
+</table>
+<p>Examples:
+</p>
+<pre>rpcdebug -m rpc -s all    # sets all debug flags for RPC
+rpcdebug -m rpc -c all    # clears all debug flags for RPC
+
+rpcdebug -m nfsd -s all   # sets all debug flags for NFS Server
+rpcdebug -m nfsd -c all   # clears all debug flags for NFS Server
+</pre>
+<p>Once the flags are set you can tail the journal for the debug output, usually by running <code>journalctl -fl</code> as root or similar.
+</p>
+<h3><span class="mw-headline" id="Using_mountstats">Using mountstats</span></h3>
+<p>The <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=nfs-utils">nfs-utils</a></span> package contains the <code>mountstats</code> tool, which can retrieve a lot of statistics about NFS mounts, including average timings and packet size.
+</p>
+<pre>$ mountstats 
+Stats for example:/tank mounted on /tank:
+  NFS mount options: rw,sync,vers=4.2,rsize=524288,wsize=524288,namlen=255,acregmin=3,acregmax=60,acdirmin=30,acdirmax=60,soft,proto=tcp,port=0,timeo=15,retrans=2,sec=sys,clientaddr=xx.yy.zz.tt,local_lock=none
+  NFS server capabilities: caps=0xfbffdf,wtmult=512,dtsize=32768,bsize=0,namlen=255
+  NFSv4 capability flags: bm0=0xfdffbfff,bm1=0x40f9be3e,bm2=0x803,acl=0x3,sessions,pnfs=notconfigured
+  NFS security flavor: 1  pseudoflavor: 0
+
+NFS byte counts:
+  applications read 248542089 bytes via read(2)
+  applications wrote 0 bytes via write(2)
+  applications read 0 bytes via O_DIRECT read(2)
+  applications wrote 0 bytes via O_DIRECT write(2)
+  client read 171375125 bytes via NFS READ
+  client wrote 0 bytes via NFS WRITE
+
+RPC statistics:
+  699 RPC requests sent, 699 RPC replies received (0 XIDs not found)
+  average backlog queue length: 0
+
+READ:
+	338 ops (48%) 
+	avg bytes sent per op: 216	avg bytes received per op: 507131
+	backlog wait: 0.005917 	RTT: 548.736686 	total execute time: 548.775148 (milliseconds)
+GETATTR:
+	115 ops (16%) 
+	avg bytes sent per op: 199	avg bytes received per op: 240
+	backlog wait: 0.008696 	RTT: 15.756522 	total execute time: 15.843478 (milliseconds)
+ACCESS:
+	93 ops (13%) 
+	avg bytes sent per op: 203	avg bytes received per op: 168
+	backlog wait: 0.010753 	RTT: 2.967742 	total execute time: 3.032258 (milliseconds)
+LOOKUP:
+	32 ops (4%) 
+	avg bytes sent per op: 220	avg bytes received per op: 274
+	backlog wait: 0.000000 	RTT: 3.906250 	total execute time: 3.968750 (milliseconds)
+OPEN_NOATTR:
+	25 ops (3%) 
+	avg bytes sent per op: 268	avg bytes received per op: 350
+	backlog wait: 0.000000 	RTT: 2.320000 	total execute time: 2.360000 (milliseconds)
+CLOSE:
+	24 ops (3%) 
+	avg bytes sent per op: 224	avg bytes received per op: 176
+	backlog wait: 0.000000 	RTT: 30.250000 	total execute time: 30.291667 (milliseconds)
+DELEGRETURN:
+	23 ops (3%) 
+	avg bytes sent per op: 220	avg bytes received per op: 160
+	backlog wait: 0.000000 	RTT: 6.782609 	total execute time: 6.826087 (milliseconds)
+READDIR:
+	4 ops (0%) 
+	avg bytes sent per op: 224	avg bytes received per op: 14372
+	backlog wait: 0.000000 	RTT: 198.000000 	total execute time: 198.250000 (milliseconds)
+SERVER_CAPS:
+	2 ops (0%) 
+	avg bytes sent per op: 172	avg bytes received per op: 164
+	backlog wait: 0.000000 	RTT: 1.500000 	total execute time: 1.500000 (milliseconds)
+FSINFO:
+	1 ops (0%) 
+	avg bytes sent per op: 172	avg bytes received per op: 164
+	backlog wait: 0.000000 	RTT: 2.000000 	total execute time: 2.000000 (milliseconds)
+PATHCONF:
+	1 ops (0%) 
+	avg bytes sent per op: 164	avg bytes received per op: 116
+	backlog wait: 0.000000 	RTT: 1.000000 	total execute time: 1.000000 (milliseconds)</pre>
+<h3><span class="mw-headline" id="Kernel_Interfaces">Kernel Interfaces</span></h3>
+<p>A bitmask of the debug flags can be echoed into the interface to enable output to syslog; 0 is the default:
+</p>
+<pre>/proc/sys/sunrpc/nfsd_debug
+/proc/sys/sunrpc/nfs_debug
+/proc/sys/sunrpc/nlm_debug
+/proc/sys/sunrpc/rpc_debug
+</pre>
+<p>Sysctl controls are registered for these interfaces, so they can be used instead of echo:
+</p>
+<pre>sysctl -w sunrpc.rpc_debug=1023
+sysctl -w sunrpc.rpc_debug=0
+
+sysctl -w sunrpc.nfsd_debug=1023
+sysctl -w sunrpc.nfsd_debug=0</pre>
+<p>At runtime the server holds information that can be examined:
+</p>
+<pre>grep . /proc/net/rpc/*/content
+cat /proc/fs/nfs/exports
+cat /proc/net/rpc/nfsd
+ls -l /proc/fs/nfsd
+</pre>
+<p>A rundown of <code>/proc/net/rpc/nfsd</code> (the userspace tool <code>nfsstat</code> pretty-prints this info):
+</p>
+<pre>* rc (reply cache): &lt;hits&gt; &lt;misses&gt; &lt;nocache&gt;
+- hits: client it's retransmitting
+- misses: a operation that requires caching
+- nocache: a operation that no requires caching
+
+* fh (filehandle): &lt;stale&gt; &lt;total-lookups&gt; &lt;anonlookups&gt; &lt;dir-not-in-cache&gt; &lt;nodir-not-in-cache&gt;
+- stale: file handle errors
+- total-lookups, anonlookups, dir-not-in-cache, nodir-not-in-cache
+  . always seem to be zeros
+
+* io (input/output): &lt;bytes-read&gt; &lt;bytes-written&gt;
+- bytes-read: bytes read directly from disk
+- bytes-written: bytes written to disk
+
+* th (threads): &lt;threads&gt; &lt;fullcnt&gt; &lt;10%-20%&gt; &lt;20%-30%&gt; ... &lt;90%-100%&gt; &lt;100%&gt;
+  DEPRECATED:  All fields after &lt;threads&gt; are hard-coded to <code>0</code>
+- threads: number of nfsd threads
+- fullcnt: number of times that the last 10% of threads are busy
+- 10%-20%, 20%-30% ... 90%-100%: 10 numbers representing 10-20%, 20-30% to 100%
+  . Counts the number of times a given interval are busy
+
+* ra (read-ahead): &lt;cache-size&gt; &lt;10%&gt; &lt;20%&gt; ... &lt;100%&gt; &lt;not-found&gt;
+- cache-size: always the double of number threads
+- 10%, 20% ... 100%: how deep it found what was looking for
+- not-found: not found in the read-ahead cache
+
+* net: &lt;netcnt&gt; &lt;netudpcnt&gt; &lt;nettcpcnt&gt; &lt;nettcpconn&gt;
+- netcnt: counts every read
+- netudpcnt: counts every UDP packet it receives
+- nettcpcnt: counts every time it receives data from a TCP connection
+- nettcpconn: count every TCP connection it receives
+
+* rpc: &lt;rpccnt&gt; &lt;rpcbadfmt+rpcbadauth+rpcbadclnt&gt; &lt;rpcbadfmt&gt; &lt;rpcbadauth&gt; &lt;rpcbadclnt&gt;
+- rpccnt: counts all rpc operations
+- rpcbadfmt: counts if while processing a RPC it encounters the following errors:
+  . err_bad_dir, err_bad_rpc, err_bad_prog, err_bad_vers, err_bad_proc, err_bad
+- rpcbadauth: bad authentication
+  . does not count if you try to mount from a machine that it's not in your exports file
+- rpcbadclnt: unused
+
+* procN (N = vers): &lt;vs_nproc&gt; &lt;null&gt; &lt;getattr&gt; &lt;setattr&gt; &lt;lookup&gt; &lt;access&gt; &lt;readlink&gt; &lt;read&gt; &lt;write&gt; &lt;create&gt; &lt;mkdir&gt; &lt;symlink&gt; &lt;mknod&gt; &lt;remove&gt; &lt;rmdir&gt; &lt;rename&gt; &lt;link&gt; &lt;readdir&gt; &lt;readdirplus&gt; &lt;fsstat&gt; &lt;fsinfo&gt; &lt;pathconf&gt; &lt;commit&gt;
+- vs_nproc: number of procedures for NFS version
+  . v2: nfsproc.c, 18
+  . v3: nfs3proc.c, 22
+  - v4, nfs4proc.c, 2
+- statistics: generated from NFS operations at runtime
+
+* proc4ops: &lt;ops&gt; &lt;x..y&gt;
+- ops: the definition of LAST_NFS4_OP, OP_RELEASE_LOCKOWNER = 39, plus 1 (so 40); defined in nfs4.h
+- x..y: the array of nfs_opcount up to LAST_NFS4_OP (nfsdstats.nfs4_opcount[i])</pre>
+<h3><span class="mw-headline" id="NFSD_debug_flags">NFSD debug flags</span></h3>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/usr/include/linux/nfsd/debug.h</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">/*
+ * knfsd debug flags
+ */
+#define NFSDDBG_SOCK            0x0001
+#define NFSDDBG_FH              0x0002
+#define NFSDDBG_EXPORT          0x0004
+#define NFSDDBG_SVC             0x0008
+#define NFSDDBG_PROC            0x0010
+#define NFSDDBG_FILEOP          0x0020
+#define NFSDDBG_AUTH            0x0040
+#define NFSDDBG_REPCACHE        0x0080
+#define NFSDDBG_XDR             0x0100
+#define NFSDDBG_LOCKD           0x0200
+#define NFSDDBG_ALL             0x7FFF
+#define NFSDDBG_NOCHANGE        0xFFFF</pre>
+<h3><span class="mw-headline" id="NFS_debug_flags">NFS debug flags</span></h3>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/usr/include/linux/nfs_fs.h</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">/*
+ * NFS debug flags
+ */
+#define NFSDBG_VFS              0x0001
+#define NFSDBG_DIRCACHE         0x0002
+#define NFSDBG_LOOKUPCACHE      0x0004
+#define NFSDBG_PAGECACHE        0x0008
+#define NFSDBG_PROC             0x0010
+#define NFSDBG_XDR              0x0020
+#define NFSDBG_FILE             0x0040
+#define NFSDBG_ROOT             0x0080
+#define NFSDBG_CALLBACK         0x0100
+#define NFSDBG_CLIENT           0x0200
+#define NFSDBG_MOUNT            0x0400
+#define NFSDBG_FSCACHE          0x0800
+#define NFSDBG_PNFS             0x1000
+#define NFSDBG_PNFS_LD          0x2000
+#define NFSDBG_STATE            0x4000
+#define NFSDBG_ALL              0xFFFF</pre>
+<h3><span class="mw-headline" id="NLM_debug_flags">NLM debug flags</span></h3>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/usr/include/linux/lockd/debug.h</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">/*
+ * Debug flags
+ */
+#define NLMDBG_SVC		0x0001
+#define NLMDBG_CLIENT		0x0002
+#define NLMDBG_CLNTLOCK		0x0004
+#define NLMDBG_SVCLOCK		0x0008
+#define NLMDBG_MONITOR		0x0010
+#define NLMDBG_CLNTSUBS		0x0020
+#define NLMDBG_SVCSUBS		0x0040
+#define NLMDBG_HOSTCACHE	0x0080
+#define NLMDBG_XDR		0x0100
+#define NLMDBG_ALL		0x7fff</pre>
+<h3><span class="mw-headline" id="RPC_debug_flags">RPC debug flags</span></h3>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/usr/include/linux/sunrpc/debug.h</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">/*
+ * RPC debug facilities
+ */
+#define RPCDBG_XPRT             0x0001
+#define RPCDBG_CALL             0x0002
+#define RPCDBG_DEBUG            0x0004
+#define RPCDBG_NFS              0x0008
+#define RPCDBG_AUTH             0x0010
+#define RPCDBG_BIND             0x0020
+#define RPCDBG_SCHED            0x0040
+#define RPCDBG_TRANS            0x0080
+#define RPCDBG_SVCXPRT          0x0100
+#define RPCDBG_SVCDSP           0x0200
+#define RPCDBG_MISC             0x0400
+#define RPCDBG_CACHE            0x0800
+#define RPCDBG_ALL              0x7fff</pre>
+<h3><span class="mw-headline" id="See_also">See also</span></h3>
+<ul>
+<li><span class="plainlinks archwiki-template-man" title="$ man 8 rpcdebug"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/rpcdebug.8">rpcdebug(8)</a></span></li>
+<li><a rel="nofollow" class="external text" href="https://cns.utoronto.ca/~cks/space/blog/linux/NFSClientDebuggingBits">http://utcc.utoronto.ca/~cks/space/blog/linux/NFSClientDebuggingBits</a></li>
+<li><a rel="nofollow" class="external text" href="https://www.novell.com/support/kb/doc.php?id=7011571">http://www.novell.com/support/kb/doc.php?id=7011571</a></li>
+<li><a rel="nofollow" class="external text" href="https://stromberg.dnsalias.org/~strombrg/NFS-troubleshooting-2.html">http://stromberg.dnsalias.org/~strombrg/NFS-troubleshooting-2.html</a></li>
+<li><a rel="nofollow" class="external text" href="http://www.opensubscriber.com/message/nfs@lists.sourceforge.net/7833588.html">http://www.opensubscriber.com/message/nfs@lists.sourceforge.net/7833588.html</a></li>
+</ul>
+</div>
+</div>
+					<div id="catlinks" class="catlinks" data-mw="interface">
+<div id="mw-normal-catlinks" class="mw-normal-catlinks">
+<a href="../../Special:Categories.html" title="Special:Categories">Category</a>: <ul><li><a href="../../en/Category:Network_sharing.html" title="Category:Network sharing">Network sharing</a></li></ul>
+</div>
+<div id="mw-hidden-catlinks" class="mw-hidden-catlinks mw-hidden-cats-hidden">Hidden category: <ul><li><a href="../../en/Category:Pages_or_sections_flagged_with_Template:Out_of_date.html" title="Category:Pages or sections flagged with Template:Out of date">Pages or sections flagged with Template:Out of date</a></li></ul>
+</div>
+</div>
+				</div>
+			</main>
+			
+		</div>
+		<div class="mw-footer-container">
+			
+<footer id="footer" class="mw-footer" style="margin: 0">
+	<ul id="footer-info">
+	<li data-nosnippet="">Retrieved from "<a dir="ltr" href="https://wiki.archlinux.org/index.php?title=NFS/Troubleshooting&amp;oldid=781320">https://wiki.archlinux.org/index.php?title=NFS/Troubleshooting&amp;oldid=781320</a>"</li>
+<li id="footer-info-lastmod"> This page was last edited on 17 June 2023, at 18:19.</li>
+	<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+<br>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="https://terms.archlinux.org/docs/privacy-policy/">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="../../en/ArchWiki:About.html">About ArchWiki</a></li>
+	<li id="footer-places-disclaimers"><a href="../../en/ArchWiki:General_disclaimer.html">Disclaimers</a></li>
+	<li id="footer-places-archwiki-code-of-conduct"><a href="https://terms.archlinux.org/docs/code-of-conduct/" class="extiw" title="archlinux-service-agreements:code-of-conduct">Code of conduct</a></li>
+	<li id="footer-places-archwiki-terms-of-service"><a href="https://terms.archlinux.org/docs/terms-of-service/" class="extiw" title="archlinux-service-agreements:terms-of-service">Terms of service</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-copyrightico"><a href="https://www.gnu.org/copyleft/fdl.html" class="cdx-button cdx-button--fake-button cdx-button--size-large cdx-button--fake-button--enabled"><img src="/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" loading="lazy"></a></li>
+	<li id="footer-poweredbyico"><img src="/resources/assets/poweredby_mediawiki.svg" width="88" height="31" loading="lazy"></li>
+</ul>
+
+</footer>
+
+		</div>
+	</div> 
+</div> 
+<div class="vector-settings" id="p-dock-bottom">
+	<ul></ul>
+</div>
+</body>
+</html>

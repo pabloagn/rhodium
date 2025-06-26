@@ -1,0 +1,60 @@
+<h1>find</h1>
+
+<blockquote><p>Trouve récursivement des fichiers ou des dossiers dans l'arborescence spécifiée.
+Plus d'informations : <a href="https://manned.org/find">https://manned.org/find</a>.</p></blockquote>
+
+<ul>
+<li>Trouve des fichiers par extension :</li>
+</ul>
+
+
+<p><code>find {{racine}} -name '{{*.ext}}'</code></p>
+
+<ul>
+<li>Trouve des fichiers correspondant à plusieurs chemins ou motifs :</li>
+</ul>
+
+
+<p><code>find {{racine}} -path '{{**/chemin/**/*.ext}}' -or -name '{{*motif*}}'</code></p>
+
+<ul>
+<li>Trouve des dossiers correspondant à un nom donné sans vérifier la casse :</li>
+</ul>
+
+
+<p><code>find {{racine}} -type d -iname '{{*lib*}}'</code></p>
+
+<ul>
+<li>Trouve des fichiers correspondant à un motif donné en excluant certains chemins de la recherche :</li>
+</ul>
+
+
+<p><code>find {{racine}} -name '{{*.py}}' -not -path '{{*/site-packages/*}}'</code></p>
+
+<ul>
+<li>Trouve des fichiers dans une fourchette de tailles et limite la profondeur récursive à &ldquo;1&rdquo; :</li>
+</ul>
+
+
+<p><code>find {{racine}} -maxdepth 1 -size {{+500k}} -size {{-10M}}</code></p>
+
+<ul>
+<li>Exécute une commande pour chaque fichier (utiliser <code>{}</code> dans la commande pour utiliser le nom des fichiers) :</li>
+</ul>
+
+
+<p><code>find {{racine}} -name '{{*.ext}}' -exec {{wc -l {} }}\;</code></p>
+
+<ul>
+<li>Trouve les fichiers modifiés dans les 7 derniers jours :</li>
+</ul>
+
+
+<p><code>find {{racine}} -daystart -mtime -{{7}}</code></p>
+
+<ul>
+<li>Trouve les fichiers vides (de taille nulle) et les supprimer :</li>
+</ul>
+
+
+<p><code>find {{racine}} -type {{f}} -empty -delete</code></p>

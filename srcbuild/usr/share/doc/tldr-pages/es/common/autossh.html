@@ -1,0 +1,47 @@
+<h1>autossh</h1>
+
+<blockquote><p>Ejecuta, monitorea y reinicia conexiones SSH.
+Auto-reconecta para mantener los túneles de reenvío de puertos. Acepta todas las señales SSH.
+Más información: <a href="https://manned.org/autossh">https://manned.org/autossh</a>.</p></blockquote>
+
+<ul>
+<li>Inicia una sesión SSH, reiniciando cuando un puerto de monitoreo no retorna datos:</li>
+</ul>
+
+
+<p><code>autossh -M {{puerto_monitor}} "{{comando_ssh}}"</code></p>
+
+<ul>
+<li>Reenvía un puerto local a uno remoto, reiniciando cuando sea necesario:</li>
+</ul>
+
+
+<p><code>autossh -M {{puerto_monitor}} -L {{puerto_local}}:localhost:{{puerto_remoto}} {{usuario}}@{{host}}</code></p>
+
+<ul>
+<li>Crea un proceso <code>autossh</code> en segundo plano antes de ejecutar SSH y no abre un shell remoto:</li>
+</ul>
+
+
+<p><code>autossh -f -M {{puerto_monitor}} -N "{{comando_ssh}}"</code></p>
+
+<ul>
+<li>Ejecuta en segundo plano, sin puerto de monitorización, y en su lugar envía paquetes SSH keep-alive cada 10 segundos para detectar fallos:</li>
+</ul>
+
+
+<p><code>autossh -f -M 0 -N -o "ServerAliveInterval 10" -o "ServerAliveCountMax 3" "{{comando_ssh}}"</code></p>
+
+<ul>
+<li>Ejecuta en segundo plano, sin puerto de monitorización y sin shell remoto, saliendo si falla el reenvío de puerto:</li>
+</ul>
+
+
+<p><code>autossh -f -M 0 -N -o "ServerAliveInterval 10" -o "ServerAliveCountMax 3" -o ExitOnForwardFailure=yes -L {{local_port}}:localhost:{{puerto_remoto}} {{usuario}}@{{host}}</code></p>
+
+<ul>
+<li>Se ejecuta en segundo plano, registrando la salida de depuración <code>autossh</code> y la salida detallada SSH en archivos:</li>
+</ul>
+
+
+<p><code>AUTOSSH_DEBUG=1 AUTOSSH_LOGFILE={{ruta/al/autossh_log_file.log}} autossh -f -M {{puerto_monitor}} -v -E {{ruta/al/archivo_ssh_log.log}} {{comando_ssh}}</code></p>

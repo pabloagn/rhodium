@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-sticky-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-0 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-disabled skin-theme-clientpref-day vector-toc-available" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>Music Player Daemon/Troubleshooting - ArchWiki</title>
+<link rel="stylesheet" href="../../ArchWikiOffline.css">
+<meta name="ResourceLoaderDynamicStyles" content="">
+<meta name="generator" content="MediaWiki 1.43.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="max-image-preview:standard">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.25, maximum-scale=5.0">
+<link rel="search" type="application/opensearchdescription+xml" href="/rest.php/v1/search" title="ArchWiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.archlinux.org/api.php?action=rsd">
+<link rel="license" href="https://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="ArchWiki Atom feed" href="/index.php?title=Special:RecentChanges&amp;feed=atom">
+</head>
+<body class="skin--responsive skin-vector skin-vector-search-vue mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Music_Player_Daemon_Troubleshooting rootpage-Music_Player_Daemon skin-vector-2022 action-view">
+<a class="mw-jump-link" href="#bodyContent">Jump to content</a>
+<div class="vector-header-container">
+	</div>
+<div class="mw-page-container">
+	<div class="mw-page-container-inner">
+		<div class="vector-column-start">
+			<div class="vector-main-menu-container">
+		</div>
+	<div class="vector-sticky-pinned-container">
+				<nav id="mw-panel-toc" aria-label="Contents" data-event-name="ui.sidebar-toc" class="mw-table-of-contents-container vector-toc-landmark">
+					<div id="vector-toc-pinned-container" class="vector-pinned-container">
+					<div id="vector-toc" class="vector-toc vector-pinnable-element">
+	<div class="vector-pinnable-header vector-toc-pinnable-header vector-pinnable-header-pinned" data-feature-name="toc-pinned" data-pinnable-element-id="vector-toc">
+	<h2 class="vector-pinnable-header-label">Contents</h2>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-toc.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-toc.unpin">hide</button>
+</div>
+
+
+	<ul class="vector-toc-contents" id="mw-panel-toc-list">
+		<li id="toc-mw-content-text" class="vector-toc-list-item vector-toc-level-1">
+			<a href="#" class="vector-toc-link">
+				<div class="vector-toc-text">Beginning</div>
+			</a>
+		</li>
+		<li id="toc-Troubleshooting" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Troubleshooting">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">1</span>
+				<span>Troubleshooting</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Troubleshooting-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Troubleshooting subsection</span>
+			</button>
+		
+		<ul id="toc-Troubleshooting-sublist" class="vector-toc-list">
+			<li id="toc-Autodetection_failed" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Autodetection_failed">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.1</span>
+					<span>Autodetection failed</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Autodetection_failed-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-MPD_hangs_on_first_startup" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#MPD_hangs_on_first_startup">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.2</span>
+					<span>MPD hangs on first startup</span>
+				</div>
+			</a>
+			
+			<ul id="toc-MPD_hangs_on_first_startup-sublist" class="vector-toc-list">
+				<li id="toc-EasyTAG" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#EasyTAG">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.2.1</span>
+					<span>EasyTAG</span>
+				</div>
+			</a>
+			
+			<ul id="toc-EasyTAG-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Kid3" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Kid3">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.2.2</span>
+					<span>Kid3</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Kid3-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id='toc-Cannot_connect_to_mpd:_host_"localhost"_not_found:_Temporary_failure_in_name_resolution' class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href='#Cannot_connect_to_mpd:_host_"localhost"_not_found:_Temporary_failure_in_name_resolution'>
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.3</span>
+					<span>Cannot connect to mpd: host "localhost" not found: Temporary failure in name resolution</span>
+				</div>
+			</a>
+			
+			<ul id='toc-Cannot_connect_to_mpd:_host_"localhost"_not_found:_Temporary_failure_in_name_resolution-sublist' class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Other_issues_when_attempting_to_connect_to_mpd_with_a_client" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Other_issues_when_attempting_to_connect_to_mpd_with_a_client">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.4</span>
+					<span>Other issues when attempting to connect to mpd with a client</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Other_issues_when_attempting_to_connect_to_mpd_with_a_client-sublist" class="vector-toc-list">
+				<li id="toc-First_fix" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#First_fix">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.4.1</span>
+					<span>First fix</span>
+				</div>
+			</a>
+			
+			<ul id="toc-First_fix-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Second_fix" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Second_fix">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.4.2</span>
+					<span>Second fix</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Second_fix-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Binding_to_IPV6_before_IPV4" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Binding_to_IPV6_before_IPV4">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.5</span>
+					<span>Binding to IPV6 before IPV4</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Binding_to_IPV6_before_IPV4-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id='toc-daemon:_cannot_setgid_for_user_"mpd":_Operation_not_permitted' class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href='#daemon:_cannot_setgid_for_user_"mpd":_Operation_not_permitted'>
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.6</span>
+					<span>daemon: cannot setgid for user "mpd": Operation not permitted</span>
+				</div>
+			</a>
+			
+			<ul id='toc-daemon:_cannot_setgid_for_user_"mpd":_Operation_not_permitted-sublist' class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-daemon:_fatal_error:_Failed_to_set_group_NN:_Operation_not_permitted" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#daemon:_fatal_error:_Failed_to_set_group_NN:_Operation_not_permitted">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.7</span>
+					<span>daemon: fatal_error: Failed to set group NN: Operation not permitted</span>
+				</div>
+			</a>
+			
+			<ul id="toc-daemon:_fatal_error:_Failed_to_set_group_NN:_Operation_not_permitted-sublist" class="vector-toc-list">
+				<li id="toc-First_fix_2" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#First_fix_2">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.7.1</span>
+					<span>First fix</span>
+				</div>
+			</a>
+			
+			<ul id="toc-First_fix_2-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Second_fix_2" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Second_fix_2">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.7.2</span>
+					<span>Second fix</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Second_fix_2-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Third_fix" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Third_fix">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.7.3</span>
+					<span>Third fix</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Third_fix-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-MPD_&amp;_ALSA" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#MPD_&amp;_ALSA">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.8</span>
+					<span>MPD &amp; ALSA</span>
+				</div>
+			</a>
+			
+			<ul id="toc-MPD_&amp;_ALSA-sublist" class="vector-toc-list">
+				<li id="toc-High_CPU_usage_with_ALSA" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#High_CPU_usage_with_ALSA">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.8.1</span>
+					<span>High CPU usage with ALSA</span>
+				</div>
+			</a>
+			
+			<ul id="toc-High_CPU_usage_with_ALSA-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Playing_audio_files_with_different_rate_(works_for_EMU_0202/0204/0404)" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Playing_audio_files_with_different_rate_(works_for_EMU_0202/0204/0404)">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.8.2</span>
+					<span>Playing audio files with different rate (works for EMU 0202/0204/0404)</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Playing_audio_files_with_different_rate_(works_for_EMU_0202/0204/0404)-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Changing_user" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Changing_user">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.9</span>
+					<span>Changing user</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Changing_user-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-MPD_includes_music_from_hidden_folders_in_database" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#MPD_includes_music_from_hidden_folders_in_database">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.10</span>
+					<span>MPD includes music from hidden folders in database</span>
+				</div>
+			</a>
+			
+			<ul id="toc-MPD_includes_music_from_hidden_folders_in_database-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+</ul>
+</div>
+
+					</div>
+		</nav>
+			</div>
+		</div>
+		<div class="mw-content-container">
+			<main id="content" class="mw-body" style="margin: 0">
+				<header class="mw-body-header vector-page-titlebar">
+					<nav aria-label="Contents" class="vector-toc-landmark">
+						
+<div id="vector-page-titlebar-toc" class="vector-dropdown vector-page-titlebar-toc vector-button-flush-left">
+	<input type="checkbox" id="vector-page-titlebar-toc-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-page-titlebar-toc" class="vector-dropdown-checkbox " aria-label="Toggle the table of contents">
+	<label id="vector-page-titlebar-toc-label" for="vector-page-titlebar-toc-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"><span class="vector-icon mw-ui-icon-listBullet mw-ui-icon-wikimedia-listBullet"></span>
+
+<span class="vector-dropdown-label-text">Toggle the table of contents</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+							<div id="vector-page-titlebar-toc-unpinned-container" class="vector-unpinned-container">
+			</div>
+		
+	</div>
+</div>
+
+					</nav>
+					<h1 id="firstHeading" class="firstHeading mw-first-heading"><span class="mw-page-title-main">Music Player Daemon/Troubleshooting</span></h1>
+							
+<div id="p-lang-btn" class="vector-dropdown mw-portlet mw-portlet-lang">
+	<input type="checkbox" id="p-lang-btn-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-p-lang-btn" class="vector-dropdown-checkbox mw-interlanguage-selector" aria-label="Go to an article in another language. Available in 1 language">
+	<label id="p-lang-btn-label" for="p-lang-btn-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--action-progressive mw-portlet-lang-heading-1" aria-hidden="true"><span class="vector-icon mw-ui-icon-language-progressive mw-ui-icon-wikimedia-language-progressive"></span>
+
+<span class="vector-dropdown-label-text">1 language</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+		<div class="vector-menu-content">
+			
+			<ul class="vector-menu-content-list">
+				
+				<li class="interlanguage-link interwiki-ja mw-list-item"><a href="https://wiki.archlinux.jp/index.php/Music_Player_Daemon/%E3%83%88%E3%83%A9%E3%83%96%E3%83%AB%E3%82%B7%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0" title="Music Player Daemon/トラブルシューティング – 日本語" lang="ja" hreflang="ja" data-title="Music Player Daemon/トラブルシューティング" data-language-autonym="日本語" data-language-local-name="日本語" class="interlanguage-link-target"><span>日本語</span></a></li>
+			</ul>
+			
+		</div>
+
+	</div>
+</div>
+</header>
+				<div class="vector-column-end">
+					<div class="vector-sticky-pinned-container">
+						<nav class="vector-page-tools-landmark" aria-label="Page tools">
+							<div id="vector-page-tools-pinned-container" class="vector-pinned-container">
+				
+							</div>
+		</nav>
+						<nav class="vector-appearance-landmark" aria-label="Appearance">
+							<div id="vector-appearance-pinned-container" class="vector-pinned-container">
+				<div id="vector-appearance" class="vector-appearance vector-pinnable-element">
+	<div class="vector-pinnable-header vector-appearance-pinnable-header vector-pinnable-header-pinned" data-feature-name="appearance-pinned" data-pinnable-element-id="vector-appearance" data-pinned-container-id="vector-appearance-pinned-container" data-unpinned-container-id="vector-appearance-unpinned-container">
+	<div class="vector-pinnable-header-label">Appearance</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-appearance.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-appearance.unpin">hide</button>
+</div>
+
+
+</div>
+
+							</div>
+		</nav>
+					</div>
+				</div>
+				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container>
+					<div class="vector-body-before-content">
+							<div class="mw-indicators">
+		</div>
+
+						<div id="siteSub" class="noprint">From ArchWiki</div>
+					</div>
+					<div id="contentSub"><div id="mw-content-subtitle"><div class="subpages">&lt; <bdi dir="ltr"><a href="../../en/Music_Player_Daemon.html" title="Music Player Daemon">Music Player Daemon</a></bdi>
+</div></div></div>
+					
+					
+					<div id="mw-content-text" class="mw-body-content">
+<div class="mw-content-ltr mw-parser-output" lang="en" dir="ltr">
+<meta property="mw:PageProp/toc">
+<h2><span class="mw-headline" id="Troubleshooting">Troubleshooting</span></h2>
+<h3><span class="mw-headline" id="Autodetection_failed">Autodetection failed</span></h3>
+<p>During the start of MPD, it tries to autodetect your set-up and configure output and volume control accordingly. Though this mostly goes well, it will fail for some systems. It may help to tell MPD specifically what to use as output and mixer control. If you copied <code>/etc/mpd.conf</code> over from <code>/etc/mpd.conf.example</code> as mentioned above, you can simply uncomment:
+</p>
+<p>Example for alsa output type and alsa mixer:
+</p>
+<pre>audio_output {
+	type			"alsa"
+	name			"My ALSA Device"
+	device			"hw:0,0"	# optional
+	format			"44100:16:2"	# optional
+	mixer_type		"hardware"
+	mixer_device		"default"
+	mixer_control		"PCM"
+}
+</pre>
+<p><b>Note:</b> in case of permission problems when using ESD with MPD run this as root:
+</p>
+<pre># chsh -s /bin/true mpd
+</pre>
+<h3><span class="mw-headline" id="MPD_hangs_on_first_startup">MPD hangs on first startup</span></h3>
+<p>This is a common error that's caused by corrupt mp3 tags.
+Here is an experimental way to solve this issue.
+Requirements:
+</p>
+<ul>
+<li>kid3</li>
+<li>easytag</li>
+</ul>
+<p>This method is very tedious, especially with a huge database. Just as a baseline it took 2.5h to fix a 16GB database.
+</p>
+<h4><span class="mw-headline" id="EasyTAG">EasyTAG</span></h4>
+<p>The purpose of <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=easytag">easytag</a></span> here is that easytag detects the error in the tags, but like MPD it hangs and dies. The trick here is that easy tags actually tells you what file is causing the problem on the status bar.
+Before starting easytag make sure to have a terminal close to be ready to kill easy tag to avoid a hang. Once you are ready, on the tree view select the directory where all your music is located. By default easytag starts to search all subdirectories for mp3 files. Once you notice that easytag stopped scanning for songs, make note of the culprit and kill easytag.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> This task can also be achieved by editing mpd's configuration file and setting "log_level" from "default" to "verbose". restart mpd and look up the last entry in mpd's log file after mpd hangs. It is recommended to set "log_level" back to "default" after debugging, since the log file grows fast.</div>
+<h4><span class="mw-headline" id="Kid3">Kid3</span></h4>
+<p>Here is where <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=kid3">kid3</a></span> comes in handy. With kid3 go to the offending song and rewrite one of the tags. then save the file. This should force kid3 to rewrite the whole tag again fixing the problem with MPD and easy tag hanging.
+</p>
+<p>Repeat this procedure until your music library is done.
+</p>
+<h3>
+<span id="Cannot_connect_to_mpd:_host_.22localhost.22_not_found:_Temporary_failure_in_name_resolution"></span><span class="mw-headline" id='Cannot_connect_to_mpd:_host_"localhost"_not_found:_Temporary_failure_in_name_resolution'>Cannot connect to mpd: host "localhost" not found: Temporary failure in name resolution</span>
+</h3>
+<p>Cannot connect to MPD (with ncmpcpp), if you are disconnected from network. Solution is <a href="../../en/IPv6.html#Disable_IPv6" class="mw-redirect" title="Disable IPv6">disable IPv6</a> or add line to /etc/hosts
+</p>
+<pre>::1 localhost.localdomain localhost
+</pre>
+<h3><span class="mw-headline" id="Other_issues_when_attempting_to_connect_to_mpd_with_a_client">Other issues when attempting to connect to mpd with a client</span></h3>
+<p>Some have reported being unable to access mpd with various clients, for example seeing errors like these:
+</p>
+<pre>$ ncmpcpp
+Cannot connect to mpd: Connection closed by the server
+$ sonata
+2011-02-13 18:33:05  Connection lost while reading MPD hello
+2011-02-13 18:33:05  Not connected
+2011-02-13 18:33:05  Not connected
+</pre>
+<p>Please see posts on ncmpcpp on the Arch Forums <a rel="nofollow" class="external text" href="https://bbs.archlinux.org/viewtopic.php?id=109962">HERE</a> and <a rel="nofollow" class="external text" href="https://bbs.archlinux.org/viewtopic.php?id=113493">HERE</a>. Also see <a rel="nofollow" class="external text" href="https://bugs.archlinux.org/task/22071">FS#22071</a>.
+</p>
+<h4><span class="mw-headline" id="First_fix">First fix</span></h4>
+<p>Check <code>mpd.conf</code> for a line like <code>mpd.error</code> and remove it. The mpd error file is deprecated and has been removed.
+</p>
+<h4><span class="mw-headline" id="Second_fix">Second fix</span></h4>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> I'm not so sure this is a good idea. There is a warning about changing the address to bind to in the default mpd.conf. If this does not help, you might want to comment out the changes.</div>
+<p>If that does not help, add the following to <code>mpd.conf</code>:
+</p>
+<pre> bind_to_address "127.0.0.1"
+ port "6600"
+</pre>
+<p>Afterwards, instruct your client to connect via 127.0.0.1. For example, add the following to the ncmpcpp configuration file:
+</p>
+<pre> mpd_host "127.0.0.1"
+ mpd_port "6600"
+</pre>
+<h3><span class="mw-headline" id="Binding_to_IPV6_before_IPV4">Binding to IPV6 before IPV4</span></h3>
+<p>If on startup, mpd displays the following message:
+</p>
+<pre>listen: bind to '0.0.0.0:6600' failed: Address already in use (continuing anyway, because binding to '[::]:6600' succeeded)
+</pre>
+<p>it means mpd binds to the ipv6 interface before binding to ipv4. If you want to use your ipv4 interface, hardcode it in <code>mpd.conf</code>, like:
+</p>
+<pre>bind_to_address "0.0.0.0"
+</pre>
+<p>Several binds can also be specified, for example, to have mpd listen both to localhost and to the external IP of your network card:
+</p>
+<pre>bind_to_address "127.0.0.1"
+bind_to_address "192.168.1.13"
+</pre>
+<h3>
+<span id="daemon:_cannot_setgid_for_user_.22mpd.22:_Operation_not_permitted"></span><span class="mw-headline" id='daemon:_cannot_setgid_for_user_"mpd":_Operation_not_permitted'>daemon: cannot setgid for user "mpd": Operation not permitted</span>
+</h3>
+<p>The error is stating that the user starting the process does not have permissions to become another user (mpd) which the configuration has told the process to run as.
+</p>
+<p>To solve the issue, simply <a href="../../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Start">start</a> <code>mpd.service</code> as the <a href="../../en/Users_and_groups.html#Overview" class="mw-redirect" title="Root user">root user</a> instead of starting a <a href="../../en/Systemd/User.html" class="mw-redirect" title="User unit">user unit</a>.
+</p>
+<h3><span class="mw-headline" id="daemon:_fatal_error:_Failed_to_set_group_NN:_Operation_not_permitted">daemon: fatal_error: Failed to set group NN: Operation not permitted</span></h3>
+<p>The error is stating that mpd cannot set the group. This is if you have set any other group in <code>/etc/mpd.conf</code> than the default: mpd. This is because of the default <code>mpd.service</code> file. It starts mpd as user mpd (and if no group specified with the default group of this user as stated in your <code>/etc/passwd</code>) and therefore mpd does not have any rights to change its group.
+</p>
+<h4><span class="mw-headline" id="First_fix_2">First fix</span></h4>
+<p>In <code>/etc/mpd.conf</code> comment out the <code>group=</code> part or change it to <code>group=mpd</code>
+</p>
+<h4><span class="mw-headline" id="Second_fix_2">Second fix</span></h4>
+<p><a href="../../en/Systemd.html#Drop-in_files" class="mw-redirect" title="Extend the unit">Extend the unit</a> <code>mpd.service</code> and add your desired group. E.g. run mpd with the group "audio":
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/system/mpd.service.d/group.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Service]
+Group=audio</pre>
+<h4><span class="mw-headline" id="Third_fix">Third fix</span></h4>
+<p>Change the default group of the user mpd in your <code>/etc/passwd</code>.
+</p>
+<h3>
+<span id="MPD_.26_ALSA"></span><span class="mw-headline" id="MPD_&amp;_ALSA">MPD &amp; ALSA</span>
+</h3>
+<p>Sometimes, when using other audio outputs, e.g: some web pages containing Flash applets, MPD is rendered unable to play (until it is restarted). The error comes up in mpd's log:
+</p>
+<pre>Error opening alsa device "hw:0,0": Device or resource busy
+</pre>
+<p>Reasons for this may be:
+</p>
+<ul>
+<li>The sound card does not support hardware mixing (uses <b>dmix</b> plugin)</li>
+<li>An application does not work with ALSA's default settings</li>
+</ul>
+<p>For a detailed description, it is recommended to take a look at <a rel="nofollow" class="external text" href="https://mpd.wikia.com/wiki/Alsa">this</a> link. 
+</p>
+<p>This problem may be solved by adding the following lines to <code>mpd.conf</code>:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">mpd.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">audio_output {
+        type                    "alsa"
+        name                    "Sound Card"
+        options                 "dev=dmixer"
+        device                  "plug:dmix"
+}</pre>
+<p>To make the changes have effect, <a href="../../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Restart">restart</a> <code>mpd.service</code>.
+</p>
+<h4><span class="mw-headline" id="High_CPU_usage_with_ALSA">High CPU usage with ALSA</span></h4>
+<p>When using MPD with ALSA, users may experience MPD taking up lots of CPU (around 20-30%). This is caused by most sound cards supporting 48kHz and most music being 44.1kHz, thus forcing MPD to resample it. This operation takes lots of CPU cycles and results into high usage.
+</p>
+<p>For most users the problem should be solved by telling MPD not to use resampling by adding <code>auto_resample "no"</code> into audio_output-part of <code>/etc/mpd.conf</code>.
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">mpd.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">audio_output {
+   type			"alsa"
+   name			"My ALSA Device"
+   auto_resample	"no"
+}</pre>
+<p>Although it may not give as drastic a speedup, enabling mmap may still speed things up:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">mpd.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">audio_output {
+   type			"alsa"
+   name			"My ALSA Device"
+   use_mmap		"yes"
+}</pre>
+<p>Some users might also want to tell dmix to use 44kHz as well. More info about tuning performance of your MPD can be found on the <a rel="nofollow" class="external text" href="https://mpd.wikia.com/wiki/Tuning">MPD wiki</a>
+</p>
+<h4>
+<span id="Playing_audio_files_with_different_rate_.28works_for_EMU_0202.2F0204.2F0404.29"></span><span class="mw-headline" id="Playing_audio_files_with_different_rate_(works_for_EMU_0202/0204/0404)">Playing audio files with different rate (works for EMU 0202/0204/0404)</span>
+</h4>
+<p>To play audio files of different rate with automatic card rate change install pulseaudio and pulseaudio-alsa and keep using ALSA as output:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">mpd.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">audio_output {
+    type          "alsa"
+    name          "Emu 0202 USB"
+    device        "hw:2,0"
+}</pre>
+<h3><span class="mw-headline" id="Changing_user">Changing user</span></h3>
+<p>Changing the group that MPD runs as may result in errors like:
+</p>
+<pre>output: Failed to open "My ALSA Device"
+</pre>
+<pre>[alsa]: Failed to open ALSA device "default": No such file or directory
+</pre>
+<p>or
+</p>
+<pre>player_thread: problems opening audio device while playing "Song Name.mp3"
+</pre>
+<p>This is because the MPD users need to be part of the <i>audio</i> group to access sound devices under <code>/dev/snd/</code>. To fix it add user make the MPD user part of the <i>audio</i> group:
+</p>
+<pre># gpasswd -a 'mpd' audio
+</pre>
+<h3><span class="mw-headline" id="MPD_includes_music_from_hidden_folders_in_database">MPD includes music from hidden folders in database</span></h3>
+<p>MPD includes hidden folders in its database such as repetitive backups of music made by <a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=syncthing">syncthing</a> such as <code>.stfolder</code>. To correct for this, create a <code>.mpdignore</code> file in the same directory with a list of folders or files to ignore on each line as per the <a rel="nofollow" class="external text" href="https://www.musicpd.org/doc/html/user.html#the-music-directory-and-the-database">mpd documentation</a>.
+</p>
+</div>
+</div>
+					<div id="catlinks" class="catlinks" data-mw="interface"><div id="mw-normal-catlinks" class="mw-normal-catlinks">
+<a href="../../Special:Categories.html" title="Special:Categories">Category</a>: <ul><li><a href="../../en/Category:Music.html" title="Category:Music">Music</a></li></ul>
+</div></div>
+				</div>
+			</main>
+			
+		</div>
+		<div class="mw-footer-container">
+			
+<footer id="footer" class="mw-footer" style="margin: 0">
+	<ul id="footer-info">
+	<li data-nosnippet="">Retrieved from "<a dir="ltr" href="https://wiki.archlinux.org/index.php?title=Music_Player_Daemon/Troubleshooting&amp;oldid=800332">https://wiki.archlinux.org/index.php?title=Music_Player_Daemon/Troubleshooting&amp;oldid=800332</a>"</li>
+<li id="footer-info-lastmod"> This page was last edited on 12 February 2024, at 15:53.</li>
+	<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+<br>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="https://terms.archlinux.org/docs/privacy-policy/">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="../../en/ArchWiki:About.html">About ArchWiki</a></li>
+	<li id="footer-places-disclaimers"><a href="../../en/ArchWiki:General_disclaimer.html">Disclaimers</a></li>
+	<li id="footer-places-archwiki-code-of-conduct"><a href="https://terms.archlinux.org/docs/code-of-conduct/" class="extiw" title="archlinux-service-agreements:code-of-conduct">Code of conduct</a></li>
+	<li id="footer-places-archwiki-terms-of-service"><a href="https://terms.archlinux.org/docs/terms-of-service/" class="extiw" title="archlinux-service-agreements:terms-of-service">Terms of service</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-copyrightico"><a href="https://www.gnu.org/copyleft/fdl.html" class="cdx-button cdx-button--fake-button cdx-button--size-large cdx-button--fake-button--enabled"><img src="/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" loading="lazy"></a></li>
+	<li id="footer-poweredbyico"><img src="/resources/assets/poweredby_mediawiki.svg" width="88" height="31" loading="lazy"></li>
+</ul>
+
+</footer>
+
+		</div>
+	</div> 
+</div> 
+<div class="vector-settings" id="p-dock-bottom">
+	<ul></ul>
+</div>
+</body>
+</html>

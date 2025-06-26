@@ -1,0 +1,32 @@
+<h1>entr</h1>
+
+<blockquote><p>Uruchom dowolną komendę, gdy zmieni się plik.
+Więcej informacji: <a href="https://eradman.com/entrproject/">https://eradman.com/entrproject/</a>.</p></blockquote>
+
+<ul>
+<li>Przebuduj projekt używając <code>make</code>, jeżeli zmiemi się którykolwiek z plików w podkatalogu:</li>
+</ul>
+
+
+<p><code>{{ag -l}} | entr {{make}}</code></p>
+
+<ul>
+<li>Jeżeli zmieni się którykowliek z plików źródłowych <code>.c</code> w obecnym katalogu, przebuduj i uruchom testy używając <code>make</code>:</li>
+</ul>
+
+
+<p><code>{{ls *.c}} | entr {{'make &amp;&amp; make test'}}</code></p>
+
+<ul>
+<li>Wyślij <code>SIGTERM</code> do wszystkich uruchomionych poprzednio podprocesów ruby przed wykonaniem <code>ruby main.rb</code>:</li>
+</ul>
+
+
+<p><code>{{ls *.rb}} | entr -r {{ruby main.rb}}</code></p>
+
+<ul>
+<li>Uruchom komendę przekazując zmieniony plik (<code>/_</code>) jako jej argument:</li>
+</ul>
+
+
+<p><code>{{ls *.sql}} | entr {{psql -f}} /_</code></p>

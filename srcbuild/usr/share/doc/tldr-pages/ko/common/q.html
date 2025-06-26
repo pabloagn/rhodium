@@ -1,0 +1,46 @@
+<h1>q</h1>
+
+<blockquote><p>CSV 및 TSV 파일에서 SQL 유사 쿼리 실행.
+더 많은 정보: <a href="https://harelba.github.io/q">https://harelba.github.io/q</a>.</p></blockquote>
+
+<ul>
+<li>구분 기호를 &lsquo;,'로 지정하여 CSV 파일 쿼리:</li>
+</ul>
+
+
+<p><code>q -d',' "SELECT * from {{경로/대상/파일}}"</code></p>
+
+<ul>
+<li>TSV 파일 쿼리:</li>
+</ul>
+
+
+<p><code>q -t "SELECT * from {{경로/대상/파일}}"</code></p>
+
+<ul>
+<li>헤더 행이 있는 파일 쿼리:</li>
+</ul>
+
+
+<p><code>q -d{{구분자}} -H "SELECT * from {{경로/대상/파일}}"</code></p>
+
+<ul>
+<li><code>stdin</code>에서 데이터 읽기; 쿼리에서 &lsquo;-'는 <code>stdin</code>의 데이터를 나타냄:</li>
+</ul>
+
+
+<p><code>{{출력}} | q "select * from -"</code></p>
+
+<ul>
+<li>두 파일을 공통 열 <code>c1</code>을 기준으로 조인 (<code>f1</code>과 <code>f2</code>로 별칭):</li>
+</ul>
+
+
+<p><code>q "SELECT * FROM {{경로/대상/파일}} f1 JOIN {{경로/대상/다른_파일}} f2 ON (f1.c1 = f2.c1)"</code></p>
+
+<ul>
+<li>출력 구분자와 출력 헤더 행을 사용하여 출력 형식 지정 (참고: 명령은 입력 파일 헤더 또는 쿼리에서 재정의된 열 별칭에 기반하여 열 이름 출력):</li>
+</ul>
+
+
+<p><code>q -D{{구분자}} -O "SELECT {{열}} as {{별칭}} from {{경로/대상/파일}}"</code></p>

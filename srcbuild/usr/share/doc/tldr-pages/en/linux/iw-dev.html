@@ -1,0 +1,54 @@
+<h1>iw dev</h1>
+
+<blockquote><p>Show and manipulate wireless devices.
+For a list of channels, frequencies and reg information: <a href="https://wireless.docs.kernel.org/en/latest/en/developers/documentation/channellist.html">https://wireless.docs.kernel.org/en/latest/en/developers/documentation/channellist.html</a>.
+More information: <a href="https://wireless.docs.kernel.org/en/latest/en/users/documentation/iw.html">https://wireless.docs.kernel.org/en/latest/en/users/documentation/iw.html</a>.</p></blockquote>
+
+<ul>
+<li>Set device to monitor mode (interface must be down first. See also <code>ip link</code>):</li>
+</ul>
+
+
+<p><code>sudo iw dev {{wlp}} set type monitor</code></p>
+
+<ul>
+<li>Set device to managed mode (interface must be down first):</li>
+</ul>
+
+
+<p><code>sudo iw dev {{wlp}} set type managed</code></p>
+
+<ul>
+<li>Set device WiFi channel (device must first be in monitor mode with the interface up):</li>
+</ul>
+
+
+<p><code>sudo iw dev {{wlp}} set channel {{channel_number}}</code></p>
+
+<ul>
+<li>Set device WiFi frequency in Mhz (device must first be in monitor mode with the interface up):</li>
+</ul>
+
+
+<p><code>sudo iw dev {{wlp}} set freq {{freq_in_mhz}}</code></p>
+
+<ul>
+<li>Show all known station info:</li>
+</ul>
+
+
+<p><code>iw dev {{wlp}} station dump</code></p>
+
+<ul>
+<li>Create a virtual interface in monitor mode with a specific MAC address:</li>
+</ul>
+
+
+<p><code>sudo iw dev {{wlp}} interface add "{{vif_name}}" type monitor addr {{12:34:56:aa:bb:cc}}</code></p>
+
+<ul>
+<li>Delete virtual interface:</li>
+</ul>
+
+
+<p><code>sudo iw dev "{{vif_name}}" del</code></p>

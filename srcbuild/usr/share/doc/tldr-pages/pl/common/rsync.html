@@ -1,0 +1,61 @@
+<h1>rsync</h1>
+
+<blockquote><p>Przesyłaj pliki do lub ze zdalnego hosta (ale nie pomiędzy dwoma zdalnymi hostami), domyślnie używając SSH.
+Aby wskazać na ścieżkę zdalną, użyj <code>user@host:ścieżka/do/pliku_lub_katalogu</code>.
+Więcej informacji: <a href="https://download.samba.org/pub/rsync/rsync.1">https://download.samba.org/pub/rsync/rsync.1</a>.</p></blockquote>
+
+<ul>
+<li>Prześlij plik:</li>
+</ul>
+
+
+<p><code>rsync {{ścieżka/do/źródła}} {{ścieżka/do/miejsca_docelowego}}</code></p>
+
+<ul>
+<li>Użyj trybu archiwum (rekursywnie kopiuj katalogi, kopiuj dowiązania symboliczne bez rozwiązywania i zachowaj uprawnienia, własność i czasy modyfikacji):</li>
+</ul>
+
+
+<p><code>rsync {{[-a|--archive]}} {{ścieżka/do/źródła}} {{ścieżka/do/miejsca_docelowego}}</code></p>
+
+<ul>
+<li>Kompresuj dane podczas gdy są wysyłane do miejsca docelowego, wyświetlaj szczegółowy i czytelny dla człowieka postęp i zachowaj częściowo przesłane pliki w przypadku przerwania:</li>
+</ul>
+
+
+<p><code>rsync {{[-zvhP|--compress --verbose --human-readable --partial --progress]}} {{ścieżka/do/źródła}} {{ścieżka/do/miejsca_docelowego}}</code></p>
+
+<ul>
+<li>Rekursywnie kopiuj katalogi:</li>
+</ul>
+
+
+<p><code>rsync {{[-r|--recursive]}} {{ścieżka/do/źródła}} {{ścieżka/do/miejsca_docelowego}}</code></p>
+
+<ul>
+<li>Prześlij zawartość katalogu, ale nie sam katalog:</li>
+</ul>
+
+
+<p><code>rsync {{[-r|--recursive]}} {{ścieżka/do/źródła/}} {{ścieżka/do/miejsca_docelowego}}</code></p>
+
+<ul>
+<li>Rekursywnie kopiuj katalogi, użyj trybu archiwum, rozwiąż dowiązania symboliczne i pomiń pliki, które są nowsze w miejscu docelowym:</li>
+</ul>
+
+
+<p><code>rsync {{[-auL|--archive --update --copy-links]}} {{ścieżka/do/źródła}} {{ścieżka/do/miejsca_docelowego}}</code></p>
+
+<ul>
+<li>Prześlij katalog ze zdalnego hosta, na którym działa <code>rsyncd</code> i usuń pliki w miejscu docelowym, które nie istnieją w źródle:</li>
+</ul>
+
+
+<p><code>rsync {{[-r|--recursive]}} --delete rsync://{{host}}:{{ścieżka/do/źródła}} {{ścieżka/do/miejsca_docelowego}}</code></p>
+
+<ul>
+<li>Prześlij plik poprzez SSH używając innego portu niż domyślny (22) i wyświetlaj globalny postęp:</li>
+</ul>
+
+
+<p><code>rsync {{[-e|--rsh]}} 'ssh -p {{port}}' --info=progress2 {{host}}:{{ścieżka/do/źródła}} {{ścieżka/do/miejsca_docelowego}}</code></p>

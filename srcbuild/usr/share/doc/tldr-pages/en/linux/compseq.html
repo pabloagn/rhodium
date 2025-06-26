@@ -1,0 +1,60 @@
+<h1>compseq</h1>
+
+<blockquote><p>Calculate the composition of unique words in sequences.
+More information: <a href="https://www.bioinformatics.nl/cgi-bin/emboss/help/compseq/">https://www.bioinformatics.nl/cgi-bin/emboss/help/compseq/</a>.</p></blockquote>
+
+<ul>
+<li>Count observed frequencies of words in a FASTA file, providing parameter values with interactive prompt:</li>
+</ul>
+
+
+<p><code>compseq {{path/to/file.fasta}}</code></p>
+
+<ul>
+<li>Count observed frequencies of amino acid pairs from a FASTA file, save output to a text file:</li>
+</ul>
+
+
+<p><code>compseq {{path/to/input_protein.fasta}} -word 2 {{path/to/output_file.comp}}</code></p>
+
+<ul>
+<li>Count observed frequencies of hexanucleotides from a FASTA file, save output to a text file and ignore zero counts:</li>
+</ul>
+
+
+<p><code>compseq {{path/to/input_dna.fasta}} -word 6 {{path/to/output_file.comp}} -nozero</code></p>
+
+<ul>
+<li>Count observed frequencies of codons in a particular reading frame; ignoring any overlapping counts (i.e. move window across by word-length 3):</li>
+</ul>
+
+
+<p><code>compseq -sequence {{path/to/input_rna.fasta}} -word 3 {{path/to/output_file.comp}} -nozero -frame {{1}}</code></p>
+
+<ul>
+<li>Count observed frequencies of codons frame-shifted by 3 positions; ignoring any overlapping counts (should report all codons except the first one):</li>
+</ul>
+
+
+<p><code>compseq -sequence {{path/to/input_rna.fasta}} -word 3 {{path/to/output_file.comp}} -nozero -frame 3</code></p>
+
+<ul>
+<li>Count amino acid triplets in a FASTA file and compare to a previous run of <code>compseq</code> to calculate expected and normalised frequency values:</li>
+</ul>
+
+
+<p><code>compseq -sequence {{path/to/human_proteome.fasta}} -word 3 {{path/to/output_file1.comp}} -nozero -infile {{path/to/output_file2.comp}}</code></p>
+
+<ul>
+<li>Approximate the above command without a previously prepared file, by calculating expected frequencies using the single base/residue frequencies in the supplied input sequence(s):</li>
+</ul>
+
+
+<p><code>compseq -sequence {{path/to/human_proteome.fasta}} -word 3 {{path/to/output_file.comp}} -nozero -calcfreq</code></p>
+
+<ul>
+<li>Display help (use <code>-help -verbose</code> for more information on associated and general qualifiers):</li>
+</ul>
+
+
+<p><code>compseq -help</code></p>

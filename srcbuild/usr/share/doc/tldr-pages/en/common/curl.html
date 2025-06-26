@@ -1,0 +1,61 @@
+<h1>curl</h1>
+
+<blockquote><p>Transfers data from or to a server.
+Supports most protocols, including HTTP, HTTPS, FTP, SCP, etc.
+More information: <a href="https://curl.se/docs/manpage.html">https://curl.se/docs/manpage.html</a>.</p></blockquote>
+
+<ul>
+<li>Make an HTTP GET request and dump the contents in <code>stdout</code>:</li>
+</ul>
+
+
+<p><code>curl {{https://example.com}}</code></p>
+
+<ul>
+<li>Make an HTTP GET request, follow any <code>3xx</code> redirects, and dump the reply headers and contents to <code>stdout</code>:</li>
+</ul>
+
+
+<p><code>curl {{[-L|--location]}} {{[-D|--dump-header]}} - {{https://example.com}}</code></p>
+
+<ul>
+<li>Download a file, saving the output under the filename indicated by the URL:</li>
+</ul>
+
+
+<p><code>curl {{[-O|--remote-name]}} {{https://example.com/filename.zip}}</code></p>
+
+<ul>
+<li>Send form-encoded data (POST request of type <code>application/x-www-form-urlencoded</code>). Use <code>--data @file_name</code> or <code>--data @'-'</code> to read from <code>stdin</code>:</li>
+</ul>
+
+
+<p><code>curl {{[-X|--request]}} POST {{[-d|--data]}} {{'name=bob'}} {{http://example.com/form}}</code></p>
+
+<ul>
+<li>Send a request with an extra header, using a custom HTTP method and over a proxy (such as BurpSuite), ignoring insecure self-signed certificates:</li>
+</ul>
+
+
+<p><code>curl {{[-k|--insecure]}} {{[-x|--proxy]}} {{http://127.0.0.1:8080}} {{[-H|--header]}} {{'Authorization: Bearer token'}} {{[-X|--request]}} {{GET|PUT|POST|DELETE|PATCH|...}} {{https://example.com}}</code></p>
+
+<ul>
+<li>Send data in JSON format, specifying the appropriate Content-Type header:</li>
+</ul>
+
+
+<p><code>curl {{[-d|--data]}} {{'{"name":"bob"}'}} {{[-H|--header]}} {{'Content-Type: application/json'}} {{http://example.com/users/1234}}</code></p>
+
+<ul>
+<li>Pass client certificate and key for a resource, skipping certificate validation:</li>
+</ul>
+
+
+<p><code>curl {{[-E|--cert]}} {{client.pem}} --key {{key.pem}} {{[-k|--insecure]}} {{https://example.com}}</code></p>
+
+<ul>
+<li>Resolve a hostname to a custom IP address, with verbose output (similar to editing the <code>/etc/hosts</code> file for custom DNS resolution):</li>
+</ul>
+
+
+<p><code>curl {{[-v|--verbose]}} --resolve {{example.com}}:{{80}}:{{127.0.0.1}} {{http://example.com}}</code></p>

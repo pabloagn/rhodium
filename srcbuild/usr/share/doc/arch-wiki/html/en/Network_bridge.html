@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-sticky-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-0 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-disabled skin-theme-clientpref-day vector-toc-available" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>Network bridge - ArchWiki</title>
+<link rel="stylesheet" href="../ArchWikiOffline.css">
+<meta name="ResourceLoaderDynamicStyles" content="">
+<meta name="generator" content="MediaWiki 1.43.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="max-image-preview:standard">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.25, maximum-scale=5.0">
+<link rel="search" type="application/opensearchdescription+xml" href="/rest.php/v1/search" title="ArchWiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.archlinux.org/api.php?action=rsd">
+<link rel="license" href="https://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="ArchWiki Atom feed" href="/index.php?title=Special:RecentChanges&amp;feed=atom">
+</head>
+<body class="skin--responsive skin-vector skin-vector-search-vue mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Network_bridge rootpage-Network_bridge skin-vector-2022 action-view">
+<a class="mw-jump-link" href="#bodyContent">Jump to content</a>
+<div class="vector-header-container">
+	</div>
+<div class="mw-page-container">
+	<div class="mw-page-container-inner">
+		<div class="vector-column-start">
+			<div class="vector-main-menu-container">
+		</div>
+	<div class="vector-sticky-pinned-container">
+				<nav id="mw-panel-toc" aria-label="Contents" data-event-name="ui.sidebar-toc" class="mw-table-of-contents-container vector-toc-landmark">
+					<div id="vector-toc-pinned-container" class="vector-pinned-container">
+					<div id="vector-toc" class="vector-toc vector-pinnable-element">
+	<div class="vector-pinnable-header vector-toc-pinnable-header vector-pinnable-header-pinned" data-feature-name="toc-pinned" data-pinnable-element-id="vector-toc">
+	<h2 class="vector-pinnable-header-label">Contents</h2>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-toc.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-toc.unpin">hide</button>
+</div>
+
+
+	<ul class="vector-toc-contents" id="mw-panel-toc-list">
+		<li id="toc-mw-content-text" class="vector-toc-list-item vector-toc-level-1">
+			<a href="#" class="vector-toc-link">
+				<div class="vector-toc-text">Beginning</div>
+			</a>
+		</li>
+		<li id="toc-Creating_a_bridge" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Creating_a_bridge">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">1</span>
+				<span>Creating a bridge</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Creating_a_bridge-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Creating a bridge subsection</span>
+			</button>
+		
+		<ul id="toc-Creating_a_bridge-sublist" class="vector-toc-list">
+			<li id="toc-With_iproute2" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#With_iproute2">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.1</span>
+					<span>With iproute2</span>
+				</div>
+			</a>
+			
+			<ul id="toc-With_iproute2-sublist" class="vector-toc-list">
+				<li id="toc-Adding_the_main_network_interface" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Adding_the_main_network_interface">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.1.1</span>
+					<span>Adding the main network interface</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Adding_the_main_network_interface-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-With_bridge-utils" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#With_bridge-utils">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.2</span>
+					<span>With bridge-utils</span>
+				</div>
+			</a>
+			
+			<ul id="toc-With_bridge-utils-sublist" class="vector-toc-list">
+				<li id="toc-Adding_the_main_network_interface_2" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Adding_the_main_network_interface_2">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.2.1</span>
+					<span>Adding the main network interface</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Adding_the_main_network_interface_2-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-With_netctl" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#With_netctl">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.3</span>
+					<span>With netctl</span>
+				</div>
+			</a>
+			
+			<ul id="toc-With_netctl-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-With_systemd-networkd" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#With_systemd-networkd">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.4</span>
+					<span>With systemd-networkd</span>
+				</div>
+			</a>
+			
+			<ul id="toc-With_systemd-networkd-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-With_NetworkManager" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#With_NetworkManager">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.5</span>
+					<span>With NetworkManager</span>
+				</div>
+			</a>
+			
+			<ul id="toc-With_NetworkManager-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Assigning_an_IP_address" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Assigning_an_IP_address">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">2</span>
+				<span>Assigning an IP address</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Assigning_an_IP_address-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Assigning an IP address subsection</span>
+			</button>
+		
+		<ul id="toc-Assigning_an_IP_address-sublist" class="vector-toc-list">
+			<li id="toc-With_iproute2_2" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#With_iproute2_2">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1</span>
+					<span>With iproute2</span>
+				</div>
+			</a>
+			
+			<ul id="toc-With_iproute2_2-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-With_NetworkManager_2" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#With_NetworkManager_2">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2</span>
+					<span>With NetworkManager</span>
+				</div>
+			</a>
+			
+			<ul id="toc-With_NetworkManager_2-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Tips_and_tricks" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Tips_and_tricks">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">3</span>
+				<span>Tips and tricks</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Tips_and_tricks-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Tips and tricks subsection</span>
+			</button>
+		
+		<ul id="toc-Tips_and_tricks-sublist" class="vector-toc-list">
+			<li id="toc-Wireless_interface_on_a_bridge" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Wireless_interface_on_a_bridge">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1</span>
+					<span>Wireless interface on a bridge</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Wireless_interface_on_a_bridge-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Speeding_up_traffic_destinated_to_the_bridge_itself" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Speeding_up_traffic_destinated_to_the_bridge_itself">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.2</span>
+					<span>Speeding up traffic destinated to the bridge itself</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Speeding_up_traffic_destinated_to_the_bridge_itself-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Troubleshooting" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Troubleshooting">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">4</span>
+				<span>Troubleshooting</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Troubleshooting-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Troubleshooting subsection</span>
+			</button>
+		
+		<ul id="toc-Troubleshooting-sublist" class="vector-toc-list">
+			<li id="toc-No_networking_after_bridge_configuration" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#No_networking_after_bridge_configuration">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.1</span>
+					<span>No networking after bridge configuration</span>
+				</div>
+			</a>
+			
+			<ul id="toc-No_networking_after_bridge_configuration-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-No_networking_on_hosted_servers_after_bridge_configuration" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#No_networking_on_hosted_servers_after_bridge_configuration">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.2</span>
+					<span>No networking on hosted servers after bridge configuration</span>
+				</div>
+			</a>
+			
+			<ul id="toc-No_networking_on_hosted_servers_after_bridge_configuration-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Cannot_connect_to_bridge_connection_after_connecting_to_usual_connection" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Cannot_connect_to_bridge_connection_after_connecting_to_usual_connection">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.3</span>
+					<span>Cannot connect to bridge connection after connecting to usual connection</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Cannot_connect_to_bridge_connection_after_connecting_to_usual_connection-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Bridge_appears_to_not_be_working_on_one_side_of_the_network" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Bridge_appears_to_not_be_working_on_one_side_of_the_network">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.4</span>
+					<span>Bridge appears to not be working on one side of the network</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Bridge_appears_to_not_be_working_on_one_side_of_the_network-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-See_also" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#See_also">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">5</span>
+				<span>See also</span>
+			</div>
+		</a>
+		
+		<ul id="toc-See_also-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+</ul>
+</div>
+
+					</div>
+		</nav>
+			</div>
+		</div>
+		<div class="mw-content-container">
+			<main id="content" class="mw-body" style="margin: 0">
+				<header class="mw-body-header vector-page-titlebar">
+					<nav aria-label="Contents" class="vector-toc-landmark">
+						
+<div id="vector-page-titlebar-toc" class="vector-dropdown vector-page-titlebar-toc vector-button-flush-left">
+	<input type="checkbox" id="vector-page-titlebar-toc-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-page-titlebar-toc" class="vector-dropdown-checkbox " aria-label="Toggle the table of contents">
+	<label id="vector-page-titlebar-toc-label" for="vector-page-titlebar-toc-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"><span class="vector-icon mw-ui-icon-listBullet mw-ui-icon-wikimedia-listBullet"></span>
+
+<span class="vector-dropdown-label-text">Toggle the table of contents</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+							<div id="vector-page-titlebar-toc-unpinned-container" class="vector-unpinned-container">
+			</div>
+		
+	</div>
+</div>
+
+					</nav>
+					<h1 id="firstHeading" class="firstHeading mw-first-heading"><span class="mw-page-title-main">Network bridge</span></h1>
+							
+<div id="p-lang-btn" class="vector-dropdown mw-portlet mw-portlet-lang">
+	<input type="checkbox" id="p-lang-btn-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-p-lang-btn" class="vector-dropdown-checkbox mw-interlanguage-selector" aria-label="Go to an article in another language. Available in 1 language">
+	<label id="p-lang-btn-label" for="p-lang-btn-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--action-progressive mw-portlet-lang-heading-1" aria-hidden="true"><span class="vector-icon mw-ui-icon-language-progressive mw-ui-icon-wikimedia-language-progressive"></span>
+
+<span class="vector-dropdown-label-text">1 language</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+		<div class="vector-menu-content">
+			
+			<ul class="vector-menu-content-list">
+				
+				<li class="interlanguage-link interwiki-ja mw-list-item"><a href="https://wiki.archlinux.jp/index.php/%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF%E3%83%96%E3%83%AA%E3%83%83%E3%82%B8" title="ネットワークブリッジ – 日本語" lang="ja" hreflang="ja" data-title="ネットワークブリッジ" data-language-autonym="日本語" data-language-local-name="日本語" class="interlanguage-link-target"><span>日本語</span></a></li>
+			</ul>
+			
+		</div>
+
+	</div>
+</div>
+</header>
+				<div class="vector-column-end">
+					<div class="vector-sticky-pinned-container">
+						<nav class="vector-page-tools-landmark" aria-label="Page tools">
+							<div id="vector-page-tools-pinned-container" class="vector-pinned-container">
+				
+							</div>
+		</nav>
+						<nav class="vector-appearance-landmark" aria-label="Appearance">
+							<div id="vector-appearance-pinned-container" class="vector-pinned-container">
+				<div id="vector-appearance" class="vector-appearance vector-pinnable-element">
+	<div class="vector-pinnable-header vector-appearance-pinnable-header vector-pinnable-header-pinned" data-feature-name="appearance-pinned" data-pinnable-element-id="vector-appearance" data-pinned-container-id="vector-appearance-pinned-container" data-unpinned-container-id="vector-appearance-unpinned-container">
+	<div class="vector-pinnable-header-label">Appearance</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-appearance.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-appearance.unpin">hide</button>
+</div>
+
+
+</div>
+
+							</div>
+		</nav>
+					</div>
+				</div>
+				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container>
+					<div class="vector-body-before-content">
+							<div class="mw-indicators">
+		</div>
+
+						<div id="siteSub" class="noprint">From ArchWiki</div>
+					</div>
+					<div id="contentSub"><div id="mw-content-subtitle"></div></div>
+					
+					
+					<div id="mw-content-text" class="mw-body-content">
+<div class="mw-content-ltr mw-parser-output" lang="en" dir="ltr">
+<div class="archwiki-template-meta-related-articles">
+<p>Related articles</p>
+<ul>
+<li><a href="../en/Bridge_with_netctl.html" title="Bridge with netctl">Bridge with netctl</a></li>
+<li><a href="../en/Network_configuration.html#Bonding_or_LAG" title="Network configuration">Network configuration#Bonding or LAG</a></li>
+</ul>
+</div>
+<p>A network bridge is a virtual network device that forwards packets between two or more network segments. A bridge behaves like a virtual network switch and works transparently. Other machines in the network do not need to know about its existence. Physical network devices (e.g. <code>eth1</code>) and virtual network devices (e.g. <code>tap0</code>) can be connected to it.
+</p>
+<meta property="mw:PageProp/toc">
+<h2><span class="mw-headline" id="Creating_a_bridge">Creating a bridge</span></h2>
+<p>There are a number of ways to create a network bridge. This section outlines the steps required to set up a bridge with at least one ethernet interface. This is useful for things like the bridge mode of <a href="../en/QEMU.html" title="QEMU">QEMU</a>, setting a software based access point, etc.
+</p>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Warning:</strong> If you are creating a bridge on a remote server, and you plan to add the main network interface to the bridge, make sure you first add the main network interface's IP address on the bridge, set the bridge up, and set up a backup default route, <b>before</b> adding the interface to the bridge. Otherwise the server will lose network connectivity and you will not be able to SSH back into it.</div>
+<h3><span class="mw-headline" id="With_iproute2">With iproute2</span></h3>
+<p>This section describes the management of a network bridge using the <i>ip</i> tool from the <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=iproute2">iproute2</a></span> package, which is required by the <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=base">base</a></span> <a href="../en/Meta_package_and_package_group.html#Difference_between_meta_package_and_package_group" class="mw-redirect" title="Meta package">meta package</a>.
+</p>
+<p>Create a new bridge and change its state to up:
+</p>
+<pre># ip link add name <i>bridge_name</i> type bridge
+# ip link set dev <i>bridge_name</i> up
+</pre>
+<p>To add an interface (e.g. <code>eth1</code>) into the bridge, its state must be up:
+</p>
+<pre># ip link set eth1 up
+</pre>
+<p>Adding the interface into the bridge is done by setting its master to <code><i>bridge_name</i></code>:
+</p>
+<pre># ip link set eth1 master <i>bridge_name</i>
+</pre>
+<p>To show the existing bridges and associated interfaces, use the <i>bridge</i> utility (also part of <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=iproute2">iproute2</a></span>). See <span class="plainlinks archwiki-template-man" title="$ man 8 bridge"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/bridge.8">bridge(8)</a></span> for details.
+</p>
+<pre># bridge link
+</pre>
+<p>This is how to remove an interface from a bridge:
+</p>
+<pre># ip link set eth1 nomaster
+</pre>
+<p>The interface will still be up, so you may also want to bring it down:
+</p>
+<pre># ip link set eth1 down
+</pre>
+<p>To delete a bridge issue the following command:
+</p>
+<pre># ip link delete <i>bridge_name</i> type bridge
+</pre>
+<p>This will automatically remove all interfaces from the bridge. The slave interfaces will still be up, though, so you may also want to bring them down after.
+</p>
+<h4><span class="mw-headline" id="Adding_the_main_network_interface">Adding the main network interface</span></h4>
+<p>If you are doing this on a remote server, and the plan is to add the main network interface (e.g. <code>eth0</code>) to the bridge, first take note of the current network status:
+</p>
+<pre>$ ip address show eth0
+$ ip route show dev eth0
+</pre>
+<p>For this example, this is the relevant info:
+</p>
+<ul>
+<li>IP address attached to <code>eth0</code>: <code>10.2.3.4/8</code>
+</li>
+<li>Default gateway: <code>10.0.0.1</code>
+</li>
+<li>Bridge name: <code>br0</code>
+</li>
+</ul>
+<p>Initial setup for the bridge:
+</p>
+<pre># ip link add name br0 type bridge
+# ip link set dev br0 up
+# ip address add 10.2.3.4/8 dev br0
+# ip route append default via 10.0.0.1 dev br0
+</pre>
+<p>Then, execute these commands in quick succession. It is advisable to put them in a script file and execute the script:
+</p>
+<pre># ip link set eth0 master br0
+# ip address del 10.2.3.4/8 dev eth0
+</pre>
+<p>Explanation:
+</p>
+<ul>
+<li>Once <code>eth0</code> is added to the bridge, it won't be used for routing anymore. <code>br0</code> will take its place, so it needs an IP and have the default route attached.</li>
+<li>We cannot delete the IP address on <code>eth0</code> before adding the interface to <code>br0</code>, otherwise network connectivity will be lost.</li>
+<li>However, we need to quickly remove the ip address on <code>eth0</code>, otherwise network connectivity will be lost after a short period.</li>
+<li>Linux does not allow two default routes on the same routing table. The easy workaround is just to append the new default route.</li>
+<li>Once the IP address of <code>eth0</code> is removed, the default route attached to it is automatically removed.</li>
+</ul>
+<h3><span class="mw-headline" id="With_bridge-utils">With bridge-utils</span></h3>
+<p>This section describes the management of a network bridge using the legacy <i>brctl</i> tool from the <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=bridge-utils">bridge-utils</a></span> package. See <span class="plainlinks archwiki-template-man" title="$ man 8 brctl"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/brctl.8">brctl(8)</a></span> for full listing of options.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> The use of <i>brctl</i> is deprecated and is considered obsolete. See the Notes section in <span class="plainlinks archwiki-template-man" title="$ man 8 brctl"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/brctl.8#NOTES">brctl(8) § NOTES</a></span> for details.</div>
+<p>Create a new bridge:
+</p>
+<pre># brctl addbr <i>bridge_name</i>
+</pre>
+<p>Add a device to a bridge, for example <code>eth1</code>:
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> Adding an interface to a bridge will cause the interface to lose its existing IP address. If you are connected remotely via the interface you intend to add to the bridge, you will lose your connection. This problem can be worked around by scripting the bridge to be created at system startup.</div>
+<pre># brctl addif <i>bridge_name</i> eth1
+</pre>
+<p>Show current bridges and what interfaces they are connected to:
+</p>
+<pre>$ brctl show
+</pre>
+<p>Set the bridge device up:
+</p>
+<pre># ip link set dev <i>bridge_name</i> up
+</pre>
+<p>Delete a bridge, you need to first set it to <i>down</i>:
+</p>
+<pre># ip link set dev <i>bridge_name</i> down
+# brctl delbr <i>bridge_name</i>
+</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> To enable the <a rel="nofollow" class="external text" href="https://ebtables.netfilter.org/documentation/bridge-nf.html">bridge-netfilter</a> functionality, you need to manually load the <code>br_netfilter</code> module:
+<pre># modprobe br_netfilter
+</pre>
+<p>You can also <a href="../en/Kernel_module.html#Automatic_module_loading" class="mw-redirect" title="Load the module at boot">load the module at boot</a>.
+</p>
+</div>
+<h4><span class="mw-headline" id="Adding_the_main_network_interface_2">Adding the main network interface</span></h4>
+<p>First, take note of the current network status:
+</p>
+<pre>$ ip address show eth0
+$ ip route show dev eth0
+</pre>
+<p>For this example, this is the relevant info:
+</p>
+<ul>
+<li>IP address attached to <code>eth0</code>: <code>10.2.3.4/8</code>
+</li>
+<li>Default gateway: <code>10.0.0.1</code>
+</li>
+<li>Bridge name: <code>br0</code>
+</li>
+</ul>
+<p>Initial setup for the bridge:
+</p>
+<pre># brctl addbr br0
+# ip address add 10.2.3.4/8 dev br0
+# ip link set dev br0 up
+</pre>
+<p>Then, execute these commands in quick succession. It is advisable to put them in a script file and execute the script:
+</p>
+<pre># brctl addif br0 eth0
+# ip address del 10.2.3.4/8 dev eth0
+</pre>
+<h3><span class="mw-headline" id="With_netctl">With netctl</span></h3>
+<p>See <a href="../en/Bridge_with_netctl.html" title="Bridge with netctl">Bridge with netctl</a>.
+</p>
+<h3><span class="mw-headline" id="With_systemd-networkd">With systemd-networkd</span></h3>
+<p>See <a href="../en/Systemd-networkd.html#Bridge_interface" title="Systemd-networkd">systemd-networkd#Bridge interface</a>.
+</p>
+<h3><span class="mw-headline" id="With_NetworkManager">With NetworkManager</span></h3>
+<p><a href="../en/GNOME.html" title="GNOME">GNOME</a>'s Network settings can create bridges, but currently will not auto-connect to them or slave/attached interfaces. Open Network Settings, add a new interface of type Bridge, add a new bridged connection, and select the MAC address of the device to attach to the bridge.
+</p>
+<p><a href="../en/KDE.html" title="KDE">KDE</a>'s <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=plasma-nm">plasma-nm</a></span> can create bridges. In order to view, create and modify bridge interfaces open the Connections window either by right clicking the Networks applet in the system tray and selecting <i>Configure Network Connections...</i> or from <i>System Settings &gt; Connections</i>. Click the <i>Configuration</i> button in the lower left corner of the module and enable "Show virtual connections". A session restart will be necessary to use the enabled functionality.
+</p>
+<p><span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=nm-connection-editor">nm-connection-editor</a></span> can create bridges in the same manner as GNOME's Network settings. <a rel="nofollow" class="external text" href="https://www.xmodulo.com/configure-linux-bridge-network-manager-ubuntu.html">This</a> page shows these steps with screenshots.
+</p>
+<p><i>nmcli</i> from <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=networkmanager">networkmanager</a></span> can create bridges. For example, to create a bridge <code>br0</code> with <a href="https://en.wikipedia.org/wiki/Spanning_Tree_Protocol" class="extiw" title="wikipedia:Spanning Tree Protocol">STP</a> disabled (to avoid the bridge being advertised on the network) run:
+</p>
+<pre>$ nmcli connection add type bridge ifname br0 stp no
+</pre>
+<p>Make your Ethernet interface (<code>enp30s0</code> in this example, see <a href="../en/Network_configuration.html#Network_interfaces" title="Network configuration">Network configuration#Network interfaces</a> for instructions on finding out the name) into a slave to the bridge:
+</p>
+<pre>$ nmcli connection add type bridge-slave ifname enp30s0 master br0
+</pre>
+<p>Bring the existing connection down (you can acquire the connection name with <code>nmcli connection show --active</code>):
+</p>
+<pre>$ nmcli connection down <i>Connection</i>
+</pre>
+<p>Bring the new bridge up:
+</p>
+<pre>$ nmcli connection up bridge-br0
+$ nmcli connection up bridge-slave-enp30s0
+</pre>
+<p>If NetworkManager's default interface for the device you added to the bridge connects automatically, you may want to disable that by clicking the gear next to it in Network Settings, and unchecking <i>Connect automatically</i> under <i>Identity</i> or using the command:
+</p>
+<pre>$ nmcli connection modify <i>Connection</i> connection.autoconnect no
+</pre>
+<h2><span class="mw-headline" id="Assigning_an_IP_address">Assigning an IP address</span></h2>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../File:Tango-view-fullscreen.svg" decoding="async" width="48" height="48" class="mw-file-element"></span></span><b>This article or section needs expansion.</b></p>
+<div>
+<b>Reason:</b> This section needs to be connected to the link-level part described in <a href="../en/QEMU.html#Tap_networking_with_QEMU" title="QEMU">QEMU#Tap networking with QEMU</a>. For now, see the instructions given there. (Discuss in <a rel="nofollow" class="external text" href="../en/Talk:Network_bridge.html">Talk:Network bridge</a>)</div>
+</div>
+<p>When the bridge is fully set up, it can be assigned an IP address:
+</p>
+<h3><span class="mw-headline" id="With_iproute2_2">With iproute2</span></h3>
+<pre># ip address add dev <i>bridge_name</i> 192.168.66.66/24
+</pre>
+<h3><span class="mw-headline" id="With_NetworkManager_2">With NetworkManager</span></h3>
+<p>Give it the desired address:
+</p>
+<pre># nmcli connection modify <i>Connection</i> ipv4.addresses <i>desired_IP</i>
+</pre>
+<p>Set up a DNS server (this will also avoid not being able to load any pages after you apply the changes):
+</p>
+<pre># nmcli connection modify <i>Connection</i> ipv4.dns <i>DNS_server</i>
+</pre>
+<p>Set the IP address to static:
+</p>
+<pre># nmcli connection modify <i>Connection</i> ipv4.method manual
+</pre>
+<p>Apply the changes:
+</p>
+<pre># nmcli connection up <i>Connection</i>
+</pre>
+<h2><span class="mw-headline" id="Tips_and_tricks">Tips and tricks</span></h2>
+<h3><span class="mw-headline" id="Wireless_interface_on_a_bridge">Wireless interface on a bridge</span></h3>
+<p>To add a wireless interface to a bridge, you first have to assign the wireless interface to an access point or start an access point with <a href="../en/Software_access_point.html" title="Software access point">hostapd</a>. Otherwise the wireless interface will not be added to the bridge.
+</p>
+<p>See also <a href="https://wiki.debian.org/BridgeNetworkConnections#Bridging_with_a_wireless_NIC" class="extiw" title="debian:BridgeNetworkConnections">Debian:BridgeNetworkConnections#Bridging with a wireless NIC</a>.
+</p>
+<h3><span class="mw-headline" id="Speeding_up_traffic_destinated_to_the_bridge_itself">Speeding up traffic destinated to the bridge itself</span></h3>
+<p>In some situations the bridge not only serves as a bridge box, but also talks to other hosts. Packets that arrive on a bridge port and that are destinated to the bridge box itself will by default enter the iptables INPUT chain with the logical bridge port as input device. These packets will be queued twice by the network code, the first time they are queued after they are received by the network device. The second time after the bridge code examined the destination MAC address and determined it was a locally destinated packet and therefore decided to pass the frame up to the higher protocol stack.<a rel="nofollow" class="external autonumber" href="https://ebtables.netfilter.org/examples/basic.html#ex_speed">[1]</a>
+</p>
+<p>The way to let locally destinated packets be queued only once is by brouting them in the BROUTING chain of the broute table. Suppose br0 has an IP address and that br0's bridge ports do not have an IP address. Using the following rule should make all locally directed traffic be queued only once: 
+</p>
+<pre># ebtables -t broute -A BROUTING -d $MAC_OF_BR0 -p ipv4 -j redirect --redirect-target DROP
+</pre>
+<p>The replies from the bridge will be sent out through the br0 device (assuming your routing table is correct and sends all traffic through br0), so everything keeps working neatly, without the performance loss caused by the packet being queued twice. 
+</p>
+<p>The redirect target is needed because the MAC address of the bridge port is not necessarily equal to the MAC address of the bridge device. The packets destinated to the bridge box will have a destination MAC address equal to that of the bridge br0, so that destination address must be changed to that of the bridge port.
+</p>
+<h2><span class="mw-headline" id="Troubleshooting">Troubleshooting</span></h2>
+<h3><span class="mw-headline" id="No_networking_after_bridge_configuration">No networking after bridge configuration</span></h3>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../File:Tango-edit-clear.svg" decoding="async" width="48" height="48" class="mw-file-element"></span></span><b>This article or section needs language, wiki syntax or style improvements. See <a href="../en/Help:Style.html" title="Help:Style">Help:Style</a> for reference.</b></p>
+<div>
+<b>Reason:</b> This problem is pointed out as a note in <a href="#With_bridge-utils">#With bridge-utils</a>. It should be made clear in all other sections and running a DHCP client should be added to <a href="#Assigning_an_IP_address">#Assigning an IP address</a>. (Discuss in <a rel="nofollow" class="external text" href="../en/Talk:Network_bridge.html">Talk:Network bridge</a>)</div>
+</div>
+<p>It may help to remove all IP addresses and routes from the interface (e.g. <code>eth1</code>) that was added to the bridge and configure these parameters for the bridge instead.
+</p>
+<p>First of all, make sure there is no <a href="../en/Dhcpcd.html" title="Dhcpcd">dhcpcd</a> instance running for <code>eth1</code>, otherwise the deleted addresses may be reassigned.
+</p>
+<p>Remove address and route from the <code>eth1</code> interface:
+</p>
+<pre># ip addr del <i>address</i> dev eth1
+# ip route del <i>address</i> dev eth1
+</pre>
+<p>Now IP address and route for the earlier configured bridge must be set. This is usually done by starting a DHCP client for this interface. Otherwise, consult <a href="../en/Network_configuration.html" title="Network configuration">Network configuration</a> for manual configuration.
+</p>
+<h3><span class="mw-headline" id="No_networking_on_hosted_servers_after_bridge_configuration">No networking on hosted servers after bridge configuration</span></h3>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../File:Tango-edit-clear.svg" decoding="async" width="48" height="48" class="mw-file-element"></span></span><b>This article or section needs language, wiki syntax or style improvements. See <a href="../en/Help:Style.html" title="Help:Style">Help:Style</a> for reference.</b></p>
+<div>
+<b>Reason:</b> "Hosted server" is not a generally obvious term. (Discuss in <a rel="nofollow" class="external text" href="../en/Talk:Network_bridge.html">Talk:Network bridge</a>)</div>
+</div>
+<p>As the MAC address of the bridge is not necessarily equal to the MAC address of the networking card usually used by the server, the server provider might drop traffic coming out from the bridge, resulting in a loss of connectivity when bridging e.g. the server ethernet interface. Configuring the bridge to clone the mac address of the ethernet interface might therefore be needed for hosted servers.
+</p>
+<h3><span class="mw-headline" id="Cannot_connect_to_bridge_connection_after_connecting_to_usual_connection">Cannot connect to bridge connection after connecting to usual connection</span></h3>
+<p>In Network Manager applet, if you have usual ethernet/wireless connection (not a bridge slave connection), and if you first connect to it, and then try to connect to bridged connection (with or without disconnecting from usual connection first), then you are not able to connect to it. For some reason, the bridge slave connection (it is not listed in network applet) is not activated, even when the auto connect checkbox is enabled.
+</p>
+<p>The workaround is to activate it manually via terminal:
+</p>
+<pre>nmcli connection up br1\ slave\ 1
+</pre>
+<p>Then immediately your bridge connections works.
+</p>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../File:Tango-view-fullscreen.svg" decoding="async" width="48" height="48" class="mw-file-element"></span></span><b>This article or section needs expansion.</b></p>
+<div>
+<b>Reason:</b> Is there a bug report for this? (Discuss in <a rel="nofollow" class="external text" href="../en/Talk:Network_bridge.html">Talk:Network bridge</a>)</div>
+</div>
+<h3><span class="mw-headline" id="Bridge_appears_to_not_be_working_on_one_side_of_the_network">Bridge appears to not be working on one side of the network</span></h3>
+<p>See <a href="../en/QEMU.html#Internal_networking" title="QEMU">QEMU#Internal networking</a>.
+</p>
+<h2><span class="mw-headline" id="See_also">See also</span></h2>
+<ul>
+<li><a rel="nofollow" class="external text" href="https://www.linuxfoundation.org/collaborate/workgroups/networking/iproute2">Official documentation for iproute2</a></li>
+<li><a rel="nofollow" class="external text" href="https://ebtables.netfilter.org/br_fw_ia/br_fw_ia.html">ebtables/iptables interaction on a Linux-based bridge</a></li>
+</ul>
+</div>
+</div>
+					<div id="catlinks" class="catlinks" data-mw="interface">
+<div id="mw-normal-catlinks" class="mw-normal-catlinks">
+<a href="../Special:Categories.html" title="Special:Categories">Category</a>: <ul><li><a href="../en/Category:Networking.html" title="Category:Networking">Networking</a></li></ul>
+</div>
+<div id="mw-hidden-catlinks" class="mw-hidden-catlinks mw-hidden-cats-hidden">Hidden categories: <ul>
+<li><a href="../en/Category:Pages_or_sections_flagged_with_Template:Expansion.html" title="Category:Pages or sections flagged with Template:Expansion">Pages or sections flagged with Template:Expansion</a></li>
+<li><a href="../en/Category:Pages_or_sections_flagged_with_Template:Style.html" title="Category:Pages or sections flagged with Template:Style">Pages or sections flagged with Template:Style</a></li>
+</ul>
+</div>
+</div>
+				</div>
+			</main>
+			
+		</div>
+		<div class="mw-footer-container">
+			
+<footer id="footer" class="mw-footer" style="margin: 0">
+	<ul id="footer-info">
+	<li data-nosnippet="">Retrieved from "<a dir="ltr" href="https://wiki.archlinux.org/index.php?title=Network_bridge&amp;oldid=830325">https://wiki.archlinux.org/index.php?title=Network_bridge&amp;oldid=830325</a>"</li>
+<li id="footer-info-lastmod"> This page was last edited on 1 April 2025, at 18:26.</li>
+	<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+<br>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="https://terms.archlinux.org/docs/privacy-policy/">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="../en/ArchWiki:About.html">About ArchWiki</a></li>
+	<li id="footer-places-disclaimers"><a href="../en/ArchWiki:General_disclaimer.html">Disclaimers</a></li>
+	<li id="footer-places-archwiki-code-of-conduct"><a href="https://terms.archlinux.org/docs/code-of-conduct/" class="extiw" title="archlinux-service-agreements:code-of-conduct">Code of conduct</a></li>
+	<li id="footer-places-archwiki-terms-of-service"><a href="https://terms.archlinux.org/docs/terms-of-service/" class="extiw" title="archlinux-service-agreements:terms-of-service">Terms of service</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-copyrightico"><a href="https://www.gnu.org/copyleft/fdl.html" class="cdx-button cdx-button--fake-button cdx-button--size-large cdx-button--fake-button--enabled"><img src="/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" loading="lazy"></a></li>
+	<li id="footer-poweredbyico"><img src="/resources/assets/poweredby_mediawiki.svg" width="88" height="31" loading="lazy"></li>
+</ul>
+
+</footer>
+
+		</div>
+	</div> 
+</div> 
+<div class="vector-settings" id="p-dock-bottom">
+	<ul></ul>
+</div>
+</body>
+</html>

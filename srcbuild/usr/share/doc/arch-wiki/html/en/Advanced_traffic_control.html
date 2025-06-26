@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-sticky-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-0 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-disabled skin-theme-clientpref-day vector-toc-available" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>Advanced traffic control - ArchWiki</title>
+<link rel="stylesheet" href="../ArchWikiOffline.css">
+<meta name="ResourceLoaderDynamicStyles" content="">
+<meta name="generator" content="MediaWiki 1.43.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="max-image-preview:standard">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.25, maximum-scale=5.0">
+<link rel="search" type="application/opensearchdescription+xml" href="/rest.php/v1/search" title="ArchWiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.archlinux.org/api.php?action=rsd">
+<link rel="license" href="https://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="ArchWiki Atom feed" href="/index.php?title=Special:RecentChanges&amp;feed=atom">
+</head>
+<body class="skin--responsive skin-vector skin-vector-search-vue mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Advanced_traffic_control rootpage-Advanced_traffic_control skin-vector-2022 action-view">
+<a class="mw-jump-link" href="#bodyContent">Jump to content</a>
+<div class="vector-header-container">
+	</div>
+<div class="mw-page-container">
+	<div class="mw-page-container-inner">
+		<div class="vector-column-start">
+			<div class="vector-main-menu-container">
+		</div>
+	<div class="vector-sticky-pinned-container">
+				<nav id="mw-panel-toc" aria-label="Contents" data-event-name="ui.sidebar-toc" class="mw-table-of-contents-container vector-toc-landmark">
+					<div id="vector-toc-pinned-container" class="vector-pinned-container">
+					<div id="vector-toc" class="vector-toc vector-pinnable-element">
+	<div class="vector-pinnable-header vector-toc-pinnable-header vector-pinnable-header-pinned" data-feature-name="toc-pinned" data-pinnable-element-id="vector-toc">
+	<h2 class="vector-pinnable-header-label">Contents</h2>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-toc.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-toc.unpin">hide</button>
+</div>
+
+
+	<ul class="vector-toc-contents" id="mw-panel-toc-list">
+		<li id="toc-mw-content-text" class="vector-toc-list-item vector-toc-level-1">
+			<a href="#" class="vector-toc-link">
+				<div class="vector-toc-text">Beginning</div>
+			</a>
+		</li>
+		<li id="toc-Prerequisites" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Prerequisites">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">1</span>
+				<span>Prerequisites</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Prerequisites-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Queuing" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Queuing">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">2</span>
+				<span>Queuing</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Queuing-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Queuing subsection</span>
+			</button>
+		
+		<ul id="toc-Queuing-sublist" class="vector-toc-list">
+			<li id="toc-Classless_Qdiscs" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Classless_Qdiscs">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1</span>
+					<span>Classless Qdiscs</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Classless_Qdiscs-sublist" class="vector-toc-list">
+				<li id="toc-fifo_fast" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#fifo_fast">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1.1</span>
+					<span>fifo_fast</span>
+				</div>
+			</a>
+			
+			<ul id="toc-fifo_fast-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Token_Bucket_Filter_(TBF)" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Token_Bucket_Filter_(TBF)">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1.2</span>
+					<span>Token Bucket Filter (TBF)</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Token_Bucket_Filter_(TBF)-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Stochastic_Fairness_Queueing_(SFQ)" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Stochastic_Fairness_Queueing_(SFQ)">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1.3</span>
+					<span>Stochastic Fairness Queueing (SFQ)</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Stochastic_Fairness_Queueing_(SFQ)-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-CoDel_and_Fair_Queueing_CoDel" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#CoDel_and_Fair_Queueing_CoDel">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1.4</span>
+					<span>CoDel and Fair Queueing CoDel</span>
+				</div>
+			</a>
+			
+			<ul id="toc-CoDel_and_Fair_Queueing_CoDel-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Classful_Qdiscs" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Classful_Qdiscs">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2</span>
+					<span>Classful Qdiscs</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Classful_Qdiscs-sublist" class="vector-toc-list">
+				<li id="toc-Hierarchical_Token_Bucket_(HTB)" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Hierarchical_Token_Bucket_(HTB)">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2.1</span>
+					<span>Hierarchical Token Bucket (HTB)</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Hierarchical_Token_Bucket_(HTB)-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Filters" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Filters">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">3</span>
+				<span>Filters</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Filters-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Filters subsection</span>
+			</button>
+		
+		<ul id="toc-Filters-sublist" class="vector-toc-list">
+			<li id="toc-Using_tc_only" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Using_tc_only">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1</span>
+					<span>Using tc only</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Using_tc_only-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Using_tc_+_iptables" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Using_tc_+_iptables">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.2</span>
+					<span>Using tc + iptables</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Using_tc_+_iptables-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Example_of_ingress_traffic_shaping_with_SNAT" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Example_of_ingress_traffic_shaping_with_SNAT">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">4</span>
+				<span>Example of ingress traffic shaping with SNAT</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Example_of_ingress_traffic_shaping_with_SNAT-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-See_also" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#See_also">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">5</span>
+				<span>See also</span>
+			</div>
+		</a>
+		
+		<ul id="toc-See_also-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+</ul>
+</div>
+
+					</div>
+		</nav>
+			</div>
+		</div>
+		<div class="mw-content-container">
+			<main id="content" class="mw-body" style="margin: 0">
+				<header class="mw-body-header vector-page-titlebar">
+					<nav aria-label="Contents" class="vector-toc-landmark">
+						
+<div id="vector-page-titlebar-toc" class="vector-dropdown vector-page-titlebar-toc vector-button-flush-left">
+	<input type="checkbox" id="vector-page-titlebar-toc-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-page-titlebar-toc" class="vector-dropdown-checkbox " aria-label="Toggle the table of contents">
+	<label id="vector-page-titlebar-toc-label" for="vector-page-titlebar-toc-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"><span class="vector-icon mw-ui-icon-listBullet mw-ui-icon-wikimedia-listBullet"></span>
+
+<span class="vector-dropdown-label-text">Toggle the table of contents</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+							<div id="vector-page-titlebar-toc-unpinned-container" class="vector-unpinned-container">
+			</div>
+		
+	</div>
+</div>
+
+					</nav>
+					<h1 id="firstHeading" class="firstHeading mw-first-heading"><span class="mw-page-title-main">Advanced traffic control</span></h1>
+							
+<div id="p-lang-btn" class="vector-dropdown mw-portlet mw-portlet-lang">
+	<input type="checkbox" id="p-lang-btn-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-p-lang-btn" class="vector-dropdown-checkbox mw-interlanguage-selector" aria-label="Go to an article in another language. Available in 2 languages">
+	<label id="p-lang-btn-label" for="p-lang-btn-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--action-progressive mw-portlet-lang-heading-2" aria-hidden="true"><span class="vector-icon mw-ui-icon-language-progressive mw-ui-icon-wikimedia-language-progressive"></span>
+
+<span class="vector-dropdown-label-text">2 languages</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+		<div class="vector-menu-content">
+			
+			<ul class="vector-menu-content-list">
+				
+				<li class="interlanguage-link interwiki-ja mw-list-item"><a href="https://wiki.archlinux.jp/index.php/%E9%AB%98%E5%BA%A6%E3%81%AA%E3%83%88%E3%83%A9%E3%83%95%E3%82%A3%E3%83%83%E3%82%AF%E5%88%B6%E5%BE%A1" title="高度なトラフィック制御 – 日本語" lang="ja" hreflang="ja" data-title="高度なトラフィック制御" data-language-autonym="日本語" data-language-local-name="日本語" class="interlanguage-link-target"><span>日本語</span></a></li>
+<li class="interlanguage-link interwiki-zh-hans mw-list-item"><a href="https://wiki.archlinuxcn.org/wiki/Advanced_traffic_control" title="Advanced traffic control – 中文（简体）" lang="zh-Hans" hreflang="zh-Hans" data-title="Advanced traffic control" data-language-autonym="中文（简体）" data-language-local-name="中文（简体）" class="interlanguage-link-target"><span>中文（简体）</span></a></li>
+			</ul>
+			
+		</div>
+
+	</div>
+</div>
+</header>
+				<div class="vector-column-end">
+					<div class="vector-sticky-pinned-container">
+						<nav class="vector-page-tools-landmark" aria-label="Page tools">
+							<div id="vector-page-tools-pinned-container" class="vector-pinned-container">
+				
+							</div>
+		</nav>
+						<nav class="vector-appearance-landmark" aria-label="Appearance">
+							<div id="vector-appearance-pinned-container" class="vector-pinned-container">
+				<div id="vector-appearance" class="vector-appearance vector-pinnable-element">
+	<div class="vector-pinnable-header vector-appearance-pinnable-header vector-pinnable-header-pinned" data-feature-name="appearance-pinned" data-pinnable-element-id="vector-appearance" data-pinned-container-id="vector-appearance-pinned-container" data-unpinned-container-id="vector-appearance-unpinned-container">
+	<div class="vector-pinnable-header-label">Appearance</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-appearance.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-appearance.unpin">hide</button>
+</div>
+
+
+</div>
+
+							</div>
+		</nav>
+					</div>
+				</div>
+				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container>
+					<div class="vector-body-before-content">
+							<div class="mw-indicators">
+		</div>
+
+						<div id="siteSub" class="noprint">From ArchWiki</div>
+					</div>
+					<div id="contentSub"><div id="mw-content-subtitle"></div></div>
+					
+					
+					<div id="mw-content-text" class="mw-body-content">
+<div class="mw-content-ltr mw-parser-output" lang="en" dir="ltr">
+<p>The Linux kernel's network stack has network traffic control and shaping features. The <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=iproute2">iproute2</a></span> package installs the <code>tc</code> command to control these via the command line. 
+</p>
+<p>The goal of this article is to show how to shape the traffic by using queueing disciplines. For instance, if you ever had to forbid downloads or torrents on a network that you admin, and not because you were against those services, but because users were "abusing" the bandwidth, then you could use queueing disciplines to allow that kind of traffic and, at the same time, be sure that one user cannot slowdown the entire network.
+</p>
+<p>This is an advanced article; you are expected to have certain knowledge of network devices, iptables, etc.
+</p>
+<meta property="mw:PageProp/toc">
+<h2><span class="mw-headline" id="Prerequisites">Prerequisites</span></h2>
+<p>It is important to disable <a href="https://en.wikipedia.org/wiki/TCP_segmentation_offload" class="extiw" title="wikipedia:TCP segmentation offload">TCP segmentation offload</a> on your network adapter, or else it bypasses the traffic shaper to save on CPU. <a rel="nofollow" class="external autonumber" href="https://www.suse.com/support/kb/doc/?id=000016894">[1]</a>
+</p>
+<pre># ethtool -K <i>eth0</i> tso off
+</pre>
+<h2><span class="mw-headline" id="Queuing">Queuing</span></h2>
+<p>Queuing controls how data is <b>sent</b>; receiving data is much more reactive with fewer network-oriented controls. However, since TCP/IP packets are sent using a slow start the system starts sending the packets slow and keeps sending them faster and faster until packets start getting rejected - it is therefore possible to control how much traffic is received on a LAN by dropping packets that arrive at a router before they get forwarded. There are more relevant details, but they do not touch directly on queuing logic.
+</p>
+<p>In order to be the ones fully controlling the shape of the traffic, we need to be the slowest link of the chain. That is, if the connection has a maximum download speed of 500k, if you do not limit of the output to 450k or below it is going to be the modem shaping the traffic instead of us.
+</p>
+<p>Each network device has a <i>root</i> where a qdisc can be set. This root has a fq_codel qdisc by default. (more info below)
+</p>
+<p>There are two kind of disciplines: classful and classless. 
+</p>
+<p>Classful qdiscs allow you to create classes, which work like branches on a tree. You can then set rules to filter packets into each class. Each class can itself have assigned other classful or classless qdisc.
+</p>
+<p>Classless qdiscs do not allow to add more qdiscs to it.
+</p>
+<p>Before starting to configure qdiscs, first we need to remove any existing qdisc from the root. This will remove any qdisc from the <i>eth0</i> device:
+</p>
+<pre># tc qdisc del root dev <i>eth0</i>
+</pre>
+<h3><span class="mw-headline" id="Classless_Qdiscs">Classless Qdiscs</span></h3>
+<p>These are queues that do basic management of traffic by reordering, slowing or dropping packets. This qdiscs do not allow the creation of classes.
+</p>
+<h4><span class="mw-headline" id="fifo_fast">fifo_fast</span></h4>
+<p>This was the default qdisc up until systemd 217. In every network device where no custom qdisc configuration has been applied, fifo_fast is the qdisc set on the root.  fifo means <i>First In First Out</i>, that is, the first packet to get in, is going to be the first to be sent. This way, no package gets special treatment.
+</p>
+<h4>
+<span id="Token_Bucket_Filter_.28TBF.29"></span><span class="mw-headline" id="Token_Bucket_Filter_(TBF)">Token Bucket Filter (TBF)</span>
+</h4>
+<p>This qdisc allows bytes to pass, as long certain rate limit is not passed. 
+</p>
+<p>It works by creating a virtual bucket and then dropping tokens at certain speed, filling that bucket. Each package takes a virtual token from the bucket, and uses it to get a permission to pass. If too many packets arrive, the bucket will have no more tokens left and the remaining packets are going to wait certain time for new tokens. If the tokens do not arrive fast enough, the packets are going to be dropped. On the opposite case (too few packets sent), the tokens can be used to allow some burst (uploading spikes) to happen. 
+</p>
+<p>That means this qdisc is useful to slow down an interface.
+</p>
+<p>Example:
+</p>
+<p>Uploading can fill a modem's queue and, as result, while you are uploading a huge file, the interactivity is destroyed.
+</p>
+<pre># tc qdisc add dev ppp0 root tbf rate 220kbit latency 50ms burst 1540
+</pre>
+<p>Note the above upload speed should be changed to your upload speed minus a small few percent (to be the slowest link of the chain). This configuration sets a TBF for the <code>ppp0</code> device, limiting the upload speed to 220k, setting a latency of 50ms for a package before being dropped, and a burst of 1540.
+It works by keeping the queueing on the Linux machine (where it can be shaped) instead of the modem.
+</p>
+<h4>
+<span id="Stochastic_Fairness_Queueing_.28SFQ.29"></span><span class="mw-headline" id="Stochastic_Fairness_Queueing_(SFQ)">Stochastic Fairness Queueing (SFQ)</span>
+</h4>
+<p>This is a round-robin qdisc. Each conversation is set on a fifo queue, and on each round, each conversation has the possibility to send data. That is why it is called "Fairness".
+It is also called "Stochastic" because it does not really create a queue for each conversation, instead it uses a hashing algorithm. For the hash, there is a chance for multiple sessions on the same bucket. To solve this, SFQ changes its hashing algorithm often to prevent that this becomes noticeable.
+</p>
+<p>Example:
+</p>
+<p>This configuration sets SFQ on the root on the <i>eth0</i> device, configuring it to perturb (alter) its hashing algorithm every 10 seconds.
+</p>
+<pre># tc qdisc add dev <i>eth0</i> root sfq perturb 10
+</pre>
+<h4><span class="mw-headline" id="CoDel_and_Fair_Queueing_CoDel">CoDel and Fair Queueing CoDel</span></h4>
+<p>Since systemd 217, fq_codel is the default. <a href="https://en.wikipedia.org/wiki/CoDel" class="extiw" title="wikipedia:CoDel">CoDel</a> (Controlled Delay) is an attempt to limit buffer bloating and minimize latency in saturated network links by distinguishing good queues (that empty quickly) from bad queues that stay saturated and slow. The <a href="https://en.wikipedia.org/wiki/Fair_queueing" class="extiw" title="wikipedia:Fair queueing">fair queueing</a> Codel utilizes fair queues to more readily distribute available bandwidth between Codel flows. The configuration options are limited intentionally, since the algorithm is designed to work with dynamic networks, and there are some corner cases to consider that are discussed on the <a rel="nofollow" class="external text" href="https://www.bufferbloat.net/projects/codel/wiki">bufferbloat wiki concerning Codel</a>, including issues on very large switches and sub megabit connections. 
+</p>
+<p>Additional information is available via the <span class="plainlinks archwiki-template-man" title="$ man 8 tc-codel"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/tc-codel.8">tc-codel(8)</a></span> and <span class="plainlinks archwiki-template-man" title="$ man 8 tc-fq_codel"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/tc-fq_codel.8">tc-fq_codel(8)</a></span>. 
+</p>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Warning:</strong> Make sure your ethernet driver supports Byte Queue Limits before using CoDel. <a rel="nofollow" class="external text" href="https://www.bufferbloat.net/projects/bloat/wiki/BQL_enabled_drivers">Here is a list of drivers supported as of kernel 3.14</a>
+</div>
+<h3><span class="mw-headline" id="Classful_Qdiscs">Classful Qdiscs</span></h3>
+<p>Classful qdiscs are very useful if you have different kinds of traffic which should have differing treatment.
+A classful qdisc allows you to have branches. The branches are called classes.
+</p>
+<p>Setting a classful qdisc requires that you name each class. To name a class,the <code>classid</code> parameter is used . The <code>parent</code> parameter, as the name indicates, points to the parent of the class.
+</p>
+<p>All the names should be set as <code>x:y</code> where <code>x</code> is the name of the root, and <code>y</code> is the name of the class. Normally, the root is called <code>1:</code> and its children are things like <code>1:10</code>
+</p>
+<h4>
+<span id="Hierarchical_Token_Bucket_.28HTB.29"></span><span class="mw-headline" id="Hierarchical_Token_Bucket_(HTB)">Hierarchical Token Bucket (HTB)</span>
+</h4>
+<p>HTB is well suited for setups where you have a fixed amount of bandwidth which you want to divide for different purposes, giving each purpose a guaranteed bandwidth, with the possibility of specifying how much bandwidth can be borrowed.
+Here is an example with comments explaining what each line does:
+</p>
+<pre># This line sets a HTB qdisc on the root of <i>eth0</i>, and it specifies that the class 1:30 is used by default. It sets the name of the root as 1:, for future references.
+tc qdisc add dev <i>eth0</i> root handle 1: htb default 30
+
+# This creates a class called 1:1, which is direct descendant of root (the parent is 1:), this class gets assigned also an HTB qdisc, and then it sets a max rate of 6mbits, with a burst of 15k
+tc class add dev <i>eth0</i> parent 1: classid 1:1 htb rate 6mbit burst 15k
+
+# The previous class has this branches:
+
+# Class 1:10, which has a rate of 5mbit
+tc class add dev <i>eth0</i> parent 1:1 classid 1:10 htb rate 5mbit burst 15k
+
+# Class 1:20, which has a rate of 3mbit
+tc class add dev <i>eth0</i> parent 1:1 classid 1:20 htb rate 3mbit ceil 6mbit burst 15k
+
+# Class 1:30, which has a rate of 1kbit. This one is the default class.
+tc class add dev <i>eth0</i> parent 1:1 classid 1:30 htb rate 1kbit ceil 6mbit burst 15k
+
+# Martin Devera, author of HTB, then recommends SFQ for beneath these classes:
+tc qdisc add dev <i>eth0</i> parent 1:10 handle 10: sfq perturb 10
+tc qdisc add dev <i>eth0</i> parent 1:20 handle 20: sfq perturb 10
+tc qdisc add dev <i>eth0</i> parent 1:30 handle 30: sfq perturb 10
+</pre>
+<h2><span class="mw-headline" id="Filters">Filters</span></h2>
+<p>Once a classful qdisc is set on root (which may contain classes with more classful qdiscs), it is necessary to use filters to indicate which package should be processed by which class.
+</p>
+<p>On a classless-only environment, filters are not necessary.
+</p>
+<p>You can filter packets by using tc, or a combination of tc + iptables.
+</p>
+<h3><span class="mw-headline" id="Using_tc_only">Using tc only</span></h3>
+<p>Here is an example explaining a filter:
+</p>
+<pre># This command adds a filter to the qdisc 1: of dev <i>eth0</i>, set the
+# priority of the filter to 1, matches packets with a
+# destination port 22, and make the class 1:10 process the
+# packets that match.
+tc filter add dev <i>eth0</i> protocol ip parent 1: prio 1 u32 match ip dport 22 0xffff flowid 1:10
+
+# This filter is attached to the qdisc 1: of dev <i>eth0</i>, has a
+# priority of 2, and matches the ip address 4.3.2.1 exactly, and
+# matches packets with a source port of 80, then makes class
+# 1:11 process the packets that match
+tc filter add dev <i>eth0</i> parent 1: protocol ip prio 2 u32 match ip src 4.3.2.1/32 match ip sport 80 0xffff flowid 1:11
+</pre>
+<h3>
+<span id="Using_tc_.2B_iptables"></span><span class="mw-headline" id="Using_tc_+_iptables">Using tc + iptables</span>
+</h3>
+<p><a href="../en/Iptables.html" title="Iptables">Iptables</a> has a method called fwmark that can be used to mark packets across interfaces.
+</p>
+<p>First, this makes packets marked with 6, to be processed by the 1:30 class
+</p>
+<pre># tc filter add dev <i>eth0</i> protocol ip parent 1: prio 1 handle 6 fw flowid 1:30
+</pre>
+<p>This sets that mark 6, using iptables
+</p>
+<pre># iptables -A PREROUTING -t mangle -i <i>eth0</i> -j MARK --set-mark 6
+</pre>
+<p>You can then use iptables normally to match packets and then mark them with fwmark.
+</p>
+<h2><span class="mw-headline" id="Example_of_ingress_traffic_shaping_with_SNAT">Example of ingress traffic shaping with SNAT</span></h2>
+<p>Qdiscs on ingress traffic provide only policing with no shaping. In order to shape ingress, the IFB (Intermediate Functional Block) device has to be used. However, another problem arises if SNAT or MASQUERADE is in use, as all incoming traffic has the same destination address. The Qdisc intercepts the incoming traffic on the external interface before reverse NAT translation so it can only see the router's IP as destination of the packets.
+</p>
+<p>The following solution is implemented on OpenWRT and can be applied to Arch Linux: First the outgoing packets are marked with MARK and the corresponding connections (and related connections) with CONNMARK. On the incoming packets an ingress u32 filter redirects the traffic to IFB (action mirred), and also retrieves the mark of the packet from CONNTRACK (action connmark) thus providing information as to which IP behind the NAT initiated the traffic). 
+</p>
+<p>This function is integrated in kernel since <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=linux">linux</a></span>-3.19 and in <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=iproute2">iproute2</a></span> since 4.1. 
+</p>
+<p>The following is a small script with only 2 HTB classes on ingress to demonstrate it. Traffic defaults to class 3:30. Outgoing traffic from 192.168.1.50 (behind NAT) to the Internet is marked with "3" and thus incoming packets from the Internet going to 192.168.1.50 are marked also with "3" and are classified on 3:33. 
+</p>
+<pre>#!/bin/sh -x
+
+# Maximum allowed downlink. Set to 90% of the achievable downlink in kbits/s
+DOWNLINK=1800
+
+# Interface facing the Internet
+EXTDEV=enp0s3
+
+# Load IFB, all other modules all loaded automatically
+modprobe ifb
+ip link set dev ifb0 down
+
+# Clear old queuing disciplines (qdisc) on the interfaces and the MANGLE table
+tc qdisc del dev $EXTDEV root    2&gt; /dev/null &gt; /dev/null
+tc qdisc del dev $EXTDEV ingress 2&gt; /dev/null &gt; /dev/null
+tc qdisc del dev ifb0 root       2&gt; /dev/null &gt; /dev/null
+tc qdisc del dev ifb0 ingress    2&gt; /dev/null &gt; /dev/null
+iptables -t mangle -F
+iptables -t mangle -X QOS
+
+# appending "stop" (without quotes) after the name of the script stops here.
+if [ "$1" = "stop" ]
+then
+        echo "Shaping removed on $EXTDEV."
+        exit
+fi
+
+ip link set dev ifb0 up
+
+# HTB classes on IFB with rate limiting
+tc qdisc add dev ifb0 root handle 3: htb default 30
+tc class add dev ifb0 parent 3: classid 3:3 htb rate ${DOWNLINK}kbit
+tc class add dev ifb0 parent 3:3 classid 3:30 htb rate 400kbit ceil ${DOWNLINK}kbit
+tc class add dev ifb0 parent 3:3 classid 3:33 htb rate 1400kbit ceil ${DOWNLINK}kbit
+
+# Packets marked with "3" on IFB flow through class 3:33
+tc filter add dev ifb0 parent 3:0 protocol ip handle 3 fw flowid 3:33
+
+# Outgoing traffic from 192.168.1.50 is marked with "3"
+iptables -t mangle -N QOS
+iptables -t mangle -A FORWARD -o $EXTDEV -j QOS
+iptables -t mangle -A OUTPUT -o $EXTDEV -j QOS
+iptables -t mangle -A QOS -j CONNMARK --restore-mark
+iptables -t mangle -A QOS -s 192.168.1.50 -m mark --mark 0 -j MARK --set-mark 3
+iptables -t mangle -A QOS -j CONNMARK --save-mark
+
+# Forward all ingress traffic on internet interface to the IFB device
+tc qdisc add dev $EXTDEV ingress handle ffff:
+tc filter add dev $EXTDEV parent ffff: protocol ip \
+        u32 match u32 0 0 \
+        action connmark \
+        action mirred egress redirect dev ifb0 \
+        flowid ffff:1
+
+exit 0
+</pre>
+<h2><span class="mw-headline" id="See_also">See also</span></h2>
+<ul>
+<li><a rel="nofollow" class="external text" href="https://lartc.org">Linux Advanced Routing &amp; Traffic Control</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Tc_(Linux)" class="extiw" title="wikipedia:Tc (Linux)">Wikipedia page for the tc command</a></li>
+</ul>
+</div>
+</div>
+					<div id="catlinks" class="catlinks" data-mw="interface"><div id="mw-normal-catlinks" class="mw-normal-catlinks">
+<a href="../Special:Categories.html" title="Special:Categories">Category</a>: <ul><li><a href="../en/Category:Networking.html" title="Category:Networking">Networking</a></li></ul>
+</div></div>
+				</div>
+			</main>
+			
+		</div>
+		<div class="mw-footer-container">
+			
+<footer id="footer" class="mw-footer" style="margin: 0">
+	<ul id="footer-info">
+	<li data-nosnippet="">Retrieved from "<a dir="ltr" href="https://wiki.archlinux.org/index.php?title=Advanced_traffic_control&amp;oldid=790431">https://wiki.archlinux.org/index.php?title=Advanced_traffic_control&amp;oldid=790431</a>"</li>
+<li id="footer-info-lastmod"> This page was last edited on 19 October 2023, at 09:54.</li>
+	<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+<br>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="https://terms.archlinux.org/docs/privacy-policy/">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="../en/ArchWiki:About.html">About ArchWiki</a></li>
+	<li id="footer-places-disclaimers"><a href="../en/ArchWiki:General_disclaimer.html">Disclaimers</a></li>
+	<li id="footer-places-archwiki-code-of-conduct"><a href="https://terms.archlinux.org/docs/code-of-conduct/" class="extiw" title="archlinux-service-agreements:code-of-conduct">Code of conduct</a></li>
+	<li id="footer-places-archwiki-terms-of-service"><a href="https://terms.archlinux.org/docs/terms-of-service/" class="extiw" title="archlinux-service-agreements:terms-of-service">Terms of service</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-copyrightico"><a href="https://www.gnu.org/copyleft/fdl.html" class="cdx-button cdx-button--fake-button cdx-button--size-large cdx-button--fake-button--enabled"><img src="/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" loading="lazy"></a></li>
+	<li id="footer-poweredbyico"><img src="/resources/assets/poweredby_mediawiki.svg" width="88" height="31" loading="lazy"></li>
+</ul>
+
+</footer>
+
+		</div>
+	</div> 
+</div> 
+<div class="vector-settings" id="p-dock-bottom">
+	<ul></ul>
+</div>
+</body>
+</html>

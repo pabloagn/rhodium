@@ -1,0 +1,60 @@
+<h1>find</h1>
+
+<blockquote><p>디렉토리 트리 아래에서 파일 또는 폴더를 재귀적으로 찾습니다.
+더 많은 정보: <a href="https://manned.org/find">https://manned.org/find</a>.</p></blockquote>
+
+<ul>
+<li>확장자로 파일 찾기:</li>
+</ul>
+
+
+<p><code>find {{루트_경로}} -name '{{*.ext}}'</code></p>
+
+<ul>
+<li>여러 경로/이름 패턴에 맞는 파일 찾기:</li>
+</ul>
+
+
+<p><code>find {{루트_경로}} -path '{{**/경로/**/*.ext}}' -or -name '{{*패턴*}}'</code></p>
+
+<ul>
+<li>대소문자를 구분하지 않고 주어진 이름에 맞는 디렉토리 찾기:</li>
+</ul>
+
+
+<p><code>find {{루트_경로}} -type d -iname '{{*lib*}}'</code></p>
+
+<ul>
+<li>주어진 패턴에 맞는 파일을 특정 경로를 제외하고 찾기:</li>
+</ul>
+
+
+<p><code>find {{루트_경로}} -name '{{*.py}}' -not -path '{{*/site-packages/*}}'</code></p>
+
+<ul>
+<li>주어진 크기 범위에 맞는 파일을 찾고 재귀 깊이를 &ldquo;1"로 제한:</li>
+</ul>
+
+
+<p><code>find {{루트_경로}} -maxdepth 1 -size {{+500k}} -size {{-10M}}</code></p>
+
+<ul>
+<li>각 파일에 대해 명령 실행 (명령 내에서 파일명을 액세스하려면 <code>{}</code> 사용):</li>
+</ul>
+
+
+<p><code>find {{루트_경로}} -name '{{*.ext}}' -exec {{wc -l}} {} \;</code></p>
+
+<ul>
+<li>오늘 수정된 모든 파일을 찾아 결과를 단일 명령에 인수로 전달:</li>
+</ul>
+
+
+<p><code>find {{루트_경로}} -daystart -mtime {{-1}} -exec {{tar -cvf archive.tar}} {} \+</code></p>
+
+<ul>
+<li>빈 (0 바이트) 파일을 찾아 삭제:</li>
+</ul>
+
+
+<p><code>find {{루트_경로}} -type {{f}} -empty -delete</code></p>

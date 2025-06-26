@@ -1,0 +1,60 @@
+<h1>awk</h1>
+
+<blockquote><p>Un versátil lenguaje de programación para trabajar con archivos.
+Más información: <a href="https://github.com/onetrueawk/awk">https://github.com/onetrueawk/awk</a>.</p></blockquote>
+
+<ul>
+<li>Imprime la quinta columna (también conocida como campo) de un archivo separado por espacios:</li>
+</ul>
+
+
+<p><code>awk '{print $5}' {{ruta/al/archivo}}</code></p>
+
+<ul>
+<li>Imprime la segunda columna de las líneas que contienen &ldquo;foo&rdquo; en un archivo separado por espacios:</li>
+</ul>
+
+
+<p><code>awk '/{{foo}}/ {print $2}' {{ruta/al/archivo}}</code></p>
+
+<ul>
+<li>Imprime la última columna de cada línea de un archivo, utilizando una coma (en lugar de un espacio) como separador de campos:</li>
+</ul>
+
+
+<p><code>awk -F ',' '{print $NF}' {{ruta/al/archivo}}</code></p>
+
+<ul>
+<li>Suma los valores de la primera columna de un fichero e imprime el total:</li>
+</ul>
+
+
+<p><code>awk '{s+=$1} END {print s}' {{ruta/al/archivo}}</code></p>
+
+<ul>
+<li>Imprime una de cada tres líneas a partir de la primera:</li>
+</ul>
+
+
+<p><code>awk 'NR%3==1' {{ruta/al/archivo}}</code></p>
+
+<ul>
+<li>Imprime diferentes valores basados en condiciones:</li>
+</ul>
+
+
+<p><code>awk '{if ($1 == "foo") print "Coincidencia exacta foo"; else if ($1 ~ "bar") print "Coincidencia parcial bar"; else print "Baz"}' {{ruta/al/archivo}}</code></p>
+
+<ul>
+<li>Imprime todas las líneas en las que el valor de la 10ª columna está entre un mínimo y un máximo:</li>
+</ul>
+
+
+<p><code>awk '($10 &gt;= {{valor_mínimo}} &amp;&amp; $10 &lt;= {{valor_máximo}})'</code></p>
+
+<ul>
+<li>Imprime tabla de usuarios con UID >=1000 con cabecera y salida formateada, usando dos puntos como separador (<code>%-20s</code> significa: 20 caracteres de cadena alineados a la izquierda, <code>%6s</code> significa: 6 caracteres de cadena alineados a la derecha):</li>
+</ul>
+
+
+<p><code>awk 'BEGIN {FS=":";printf "%-20s %6s %25s\n", "Name", "UID", "Shell"} $4 &gt;= 1000 {printf "%-20s %6d %25s\n", $1, $4, $7}' /etc/passwd</code></p>

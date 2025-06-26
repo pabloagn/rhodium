@@ -1,0 +1,60 @@
+<h1>awk</h1>
+
+<blockquote><p>Uma linguagem de programação versátil para trabalhar com arquivos.
+Mais informações: <a href="https://github.com/onetrueawk/awk">https://github.com/onetrueawk/awk</a>.</p></blockquote>
+
+<ul>
+<li>Imprime a quinta coluna (também chamada de campo) em um arquivo separado por espaços:</li>
+</ul>
+
+
+<p><code>awk '{print $5}' {{caminho/para/arquivo}}</code></p>
+
+<ul>
+<li>Imprime a segunda coluna das linhas contendo &ldquo;foo&rdquo; em um arquivo separado por espaços:</li>
+</ul>
+
+
+<p><code>awk '/{{foo}}/ {print $2}' {{caminho/para/arquivo}}</code></p>
+
+<ul>
+<li>Imprime a última coluna de cada linha em um arquivo, usando vírgula (ao invés de espaço) como separador de campo:</li>
+</ul>
+
+
+<p><code>awk -F ',' '{print $NF}' {{caminho/para/arquivo}}</code></p>
+
+<ul>
+<li>Soma os valores da primeira coluna de um arquivo e imprime o total:</li>
+</ul>
+
+
+<p><code>awk '{s+=$1} END {print s}' {{caminho/para/arquivo}}</code></p>
+
+<ul>
+<li>Imprime de três em três linhas a partir da primeira:</li>
+</ul>
+
+
+<p><code>awk 'NR%3==1' {{caminho/para/arquivo}}</code></p>
+
+<ul>
+<li>Imprime diferentes valores baseado em condições:</li>
+</ul>
+
+
+<p><code>awk '{if ($1 == "foo") print "Correspondência completa foo"; else if ($1 ~ "bar") print "Correspondência parcial bar"; else print "Baz"}' {{caminho/para/arquivo}}</code></p>
+
+<ul>
+<li>Imprime todas as linhas em que o valor da décima coluna está entre um mínimo e um máximo:</li>
+</ul>
+
+
+<p><code>awk '($10 &gt;= {{valor_minimo}} &amp;&amp; $10 &lt;= {{valor_maximo}})'</code></p>
+
+<ul>
+<li>Imprime tabela de usuários com UID >=1000 com cabeçalho e saída formatada, usando dois pontos como separador (<code>%-20s</code> significa: alinhamento à esquerda de 20 caracteres, <code>%6s</code> significa: alinhamento à direita 6 caracteres):</li>
+</ul>
+
+
+<p><code>awk 'BEGIN {FS=":";printf "%-20s %6s %25s\n", "Nome", "UID", "Shell"} $4 &gt;= 1000 {printf "%-20s %6d %25s\n", $1, $4, $7}' /etc/passwd</code></p>

@@ -1,0 +1,60 @@
+<h1>http</h1>
+
+<blockquote><p>HTTPie: un cliente HTTP diseñado para probar, depurar e interactuar generalmente con APIs y servidores HTTP.
+Más información: <a href="https://httpie.io/docs/cli/usage">https://httpie.io/docs/cli/usage</a>.</p></blockquote>
+
+<ul>
+<li>Hace una solicitud simple GET (muestra encabezados de respuesta y contenido):</li>
+</ul>
+
+
+<p><code>http {{https://example.com}}</code></p>
+
+<ul>
+<li>Imprime partes específicas del contenido (<code>H</code>: encabezados de la solicitud, <code>B</code>: cuerpo de la solicitud, <code>h</code>: encabezados de la respuesta, <code>b</code>: cuerpo de la respuesta, <code>m</code>: metadatos de respuesta):</li>
+</ul>
+
+
+<p><code>http {{[-p|--print]}} {{H|B|h|b|m|Hh|Hhb|...}} {{https://example.com}}</code></p>
+
+<ul>
+<li>Especifica el método HTTP al enviar una solicitud y utiliza un proxy para interceptar la solicitud:</li>
+</ul>
+
+
+<p><code>http {{GET|POST|HEAD|PUT|PATCH|DELETE|...}} --proxy {{http|https}}:{{http://localhost:8080|socks5://localhost:9050|...}} {{https://example.com}}</code></p>
+
+<ul>
+<li>Sigue cualquier redirección <code>3xx</code> y especifica encabezados adicionales en una solicitud:</li>
+</ul>
+
+
+<p><code>http {{[-F|--follow]}} {{https://example.com}} {{'User-Agent: Mozilla/5.0' 'Accept-Encoding: gzip'}}</code></p>
+
+<ul>
+<li>Autentica ante un servidor utilizando diferentes métodos de autenticación:</li>
+</ul>
+
+
+<p><code>http {{[-a|--auth]}} {{username:password|token}} {{[-A|--auth-type]}} {{basic|digest|bearer}} {{GET|POST|...}} {{https://example.com/auth}}</code></p>
+
+<ul>
+<li>Construye una solicitud pero no la envía (similar a un simulacro (dry-run)):</li>
+</ul>
+
+
+<p><code>http --offline {{GET|DELETE|...}} {{https://example.com}}</code></p>
+
+<ul>
+<li>Utiliza sesiones nombradas para encabezados personalizados persistentes, credenciales de autenticación y cookies:</li>
+</ul>
+
+
+<p><code>http --session {{nombre_de_sesión|ruta/a/sesión.json}} {{[-a|--auth]}} {{usuario}}:{{clave}} {{https://example.com/auth}} {{API-KEY:xxx}}</code></p>
+
+<ul>
+<li>Sube un archivo a un formulario (el ejemplo a continuación supone que el campo del formulario es <code>&lt;input type="file" name="cv" /&gt;</code>):</li>
+</ul>
+
+
+<p><code>http {{[-f|--form]}} {{POST}} {{https://example.com/upload}} {{cv@ruta/al/archivo}}</code></p>

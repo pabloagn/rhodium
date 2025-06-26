@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-sticky-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-0 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-disabled skin-theme-clientpref-day vector-toc-available" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>F2FS - ArchWiki</title>
+<link rel="stylesheet" href="../ArchWikiOffline.css">
+<meta name="ResourceLoaderDynamicStyles" content="">
+<meta name="generator" content="MediaWiki 1.43.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="max-image-preview:standard">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.25, maximum-scale=5.0">
+<link rel="search" type="application/opensearchdescription+xml" href="/rest.php/v1/search" title="ArchWiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.archlinux.org/api.php?action=rsd">
+<link rel="license" href="https://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="ArchWiki Atom feed" href="/index.php?title=Special:RecentChanges&amp;feed=atom">
+</head>
+<body class="skin--responsive skin-vector skin-vector-search-vue mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-F2FS rootpage-F2FS skin-vector-2022 action-view">
+<a class="mw-jump-link" href="#bodyContent">Jump to content</a>
+<div class="vector-header-container">
+	</div>
+<div class="mw-page-container">
+	<div class="mw-page-container-inner">
+		<div class="vector-column-start">
+			<div class="vector-main-menu-container">
+		</div>
+	<div class="vector-sticky-pinned-container">
+				<nav id="mw-panel-toc" aria-label="Contents" data-event-name="ui.sidebar-toc" class="mw-table-of-contents-container vector-toc-landmark">
+					<div id="vector-toc-pinned-container" class="vector-pinned-container">
+					<div id="vector-toc" class="vector-toc vector-pinnable-element">
+	<div class="vector-pinnable-header vector-toc-pinnable-header vector-pinnable-header-pinned" data-feature-name="toc-pinned" data-pinnable-element-id="vector-toc">
+	<h2 class="vector-pinnable-header-label">Contents</h2>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-toc.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-toc.unpin">hide</button>
+</div>
+
+
+	<ul class="vector-toc-contents" id="mw-panel-toc-list">
+		<li id="toc-mw-content-text" class="vector-toc-list-item vector-toc-level-1">
+			<a href="#" class="vector-toc-link">
+				<div class="vector-toc-text">Beginning</div>
+			</a>
+		</li>
+		<li id="toc-Known_issues" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Known_issues">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">1</span>
+				<span>Known issues</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Known_issues-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Known issues subsection</span>
+			</button>
+		
+		<ul id="toc-Known_issues-sublist" class="vector-toc-list">
+			<li id="toc-fsck_failures" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#fsck_failures">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.1</span>
+					<span>fsck failures</span>
+				</div>
+			</a>
+			
+			<ul id="toc-fsck_failures-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Long_running_fsck_delays_boot" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Long_running_fsck_delays_boot">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.2</span>
+					<span>Long running fsck delays boot</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Long_running_fsck_delays_boot-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-GRUB_support" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#GRUB_support">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.3</span>
+					<span>GRUB support</span>
+				</div>
+			</a>
+			
+			<ul id="toc-GRUB_support-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Cannot_set_file_attributes_for_'/var/log/journal'" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Cannot_set_file_attributes_for_'/var/log/journal'">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.4</span>
+					<span>Cannot set file attributes for '/var/log/journal'</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Cannot_set_file_attributes_for_'/var/log/journal'-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Creating_a_F2FS_file_system" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Creating_a_F2FS_file_system">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">2</span>
+				<span>Creating a F2FS file system</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Creating_a_F2FS_file_system-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Creating a F2FS file system subsection</span>
+			</button>
+		
+		<ul id="toc-Creating_a_F2FS_file_system-sublist" class="vector-toc-list">
+			<li id="toc-Compression" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Compression">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1</span>
+					<span>Compression</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Compression-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-File-based_encryption_support" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#File-based_encryption_support">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2</span>
+					<span>File-based encryption support</span>
+				</div>
+			</a>
+			
+			<ul id="toc-File-based_encryption_support-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Mounting_a_F2FS_file_system" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Mounting_a_F2FS_file_system">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">3</span>
+				<span>Mounting a F2FS file system</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Mounting_a_F2FS_file_system-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Mounting a F2FS file system subsection</span>
+			</button>
+		
+		<ul id="toc-Mounting_a_F2FS_file_system-sublist" class="vector-toc-list">
+			<li id="toc-Recommended_mount_options" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Recommended_mount_options">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1</span>
+					<span>Recommended mount options</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Recommended_mount_options-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Implementation_of_discard" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Implementation_of_discard">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.2</span>
+					<span>Implementation of discard</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Implementation_of_discard-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Checking_and_repair" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Checking_and_repair">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">4</span>
+				<span>Checking and repair</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Checking_and_repair-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Grow_an_F2FS_file_system" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Grow_an_F2FS_file_system">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">5</span>
+				<span>Grow an F2FS file system</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Grow_an_F2FS_file_system-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Troubleshooting" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Troubleshooting">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">6</span>
+				<span>Troubleshooting</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Troubleshooting-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Troubleshooting subsection</span>
+			</button>
+		
+		<ul id="toc-Troubleshooting-sublist" class="vector-toc-list">
+			<li id="toc-Remounting_impossible_with_some_options" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Remounting_impossible_with_some_options">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">6.1</span>
+					<span>Remounting impossible with some options</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Remounting_impossible_with_some_options-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Minimum_version_required_for_each_feature" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Minimum_version_required_for_each_feature">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">7</span>
+				<span>Minimum version required for each feature</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Minimum_version_required_for_each_feature-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+</ul>
+</div>
+
+					</div>
+		</nav>
+			</div>
+		</div>
+		<div class="mw-content-container">
+			<main id="content" class="mw-body" style="margin: 0">
+				<header class="mw-body-header vector-page-titlebar">
+					<nav aria-label="Contents" class="vector-toc-landmark">
+						
+<div id="vector-page-titlebar-toc" class="vector-dropdown vector-page-titlebar-toc vector-button-flush-left">
+	<input type="checkbox" id="vector-page-titlebar-toc-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-page-titlebar-toc" class="vector-dropdown-checkbox " aria-label="Toggle the table of contents">
+	<label id="vector-page-titlebar-toc-label" for="vector-page-titlebar-toc-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"><span class="vector-icon mw-ui-icon-listBullet mw-ui-icon-wikimedia-listBullet"></span>
+
+<span class="vector-dropdown-label-text">Toggle the table of contents</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+							<div id="vector-page-titlebar-toc-unpinned-container" class="vector-unpinned-container">
+			</div>
+		
+	</div>
+</div>
+
+					</nav>
+					<h1 id="firstHeading" class="firstHeading mw-first-heading"><span class="mw-page-title-main">F2FS</span></h1>
+							
+<div id="p-lang-btn" class="vector-dropdown mw-portlet mw-portlet-lang">
+	<input type="checkbox" id="p-lang-btn-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-p-lang-btn" class="vector-dropdown-checkbox mw-interlanguage-selector" aria-label="Go to an article in another language. Available in 3 languages">
+	<label id="p-lang-btn-label" for="p-lang-btn-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--action-progressive mw-portlet-lang-heading-3" aria-hidden="true"><span class="vector-icon mw-ui-icon-language-progressive mw-ui-icon-wikimedia-language-progressive"></span>
+
+<span class="vector-dropdown-label-text">3 languages</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+		<div class="vector-menu-content">
+			
+			<ul class="vector-menu-content-list">
+				
+				<li class="interlanguage-link interwiki-ja mw-list-item"><a href="https://wiki.archlinux.jp/index.php/F2FS" title="F2FS – 日本語" lang="ja" hreflang="ja" data-title="F2FS" data-language-autonym="日本語" data-language-local-name="日本語" class="interlanguage-link-target"><span>日本語</span></a></li>
+<li class="interlanguage-link interwiki-ko mw-list-item"><a href="../ko/F2FS.html" title="F2FS – 한국어" lang="ko" hreflang="ko" data-title="F2FS" data-language-autonym="한국어" data-language-local-name="한국어" class="interlanguage-link-target"><span>한국어</span></a></li>
+<li class="interlanguage-link interwiki-zh-hans mw-list-item"><a href="https://wiki.archlinuxcn.org/wiki/F2FS" title="F2FS – 中文（简体）" lang="zh-Hans" hreflang="zh-Hans" data-title="F2FS" data-language-autonym="中文（简体）" data-language-local-name="中文（简体）" class="interlanguage-link-target"><span>中文（简体）</span></a></li>
+			</ul>
+			
+		</div>
+
+	</div>
+</div>
+</header>
+				<div class="vector-column-end">
+					<div class="vector-sticky-pinned-container">
+						<nav class="vector-page-tools-landmark" aria-label="Page tools">
+							<div id="vector-page-tools-pinned-container" class="vector-pinned-container">
+				
+							</div>
+		</nav>
+						<nav class="vector-appearance-landmark" aria-label="Appearance">
+							<div id="vector-appearance-pinned-container" class="vector-pinned-container">
+				<div id="vector-appearance" class="vector-appearance vector-pinnable-element">
+	<div class="vector-pinnable-header vector-appearance-pinnable-header vector-pinnable-header-pinned" data-feature-name="appearance-pinned" data-pinnable-element-id="vector-appearance" data-pinned-container-id="vector-appearance-pinned-container" data-unpinned-container-id="vector-appearance-unpinned-container">
+	<div class="vector-pinnable-header-label">Appearance</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-appearance.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-appearance.unpin">hide</button>
+</div>
+
+
+</div>
+
+							</div>
+		</nav>
+					</div>
+				</div>
+				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container>
+					<div class="vector-body-before-content">
+							<div class="mw-indicators">
+		</div>
+
+						<div id="siteSub" class="noprint">From ArchWiki</div>
+					</div>
+					<div id="contentSub"><div id="mw-content-subtitle"></div></div>
+					
+					
+					<div id="mw-content-text" class="mw-body-content">
+<div class="mw-content-ltr mw-parser-output" lang="en" dir="ltr">
+<div class="archwiki-template-meta-related-articles">
+<p>Related articles</p>
+<ul>
+<li><a href="../en/File_systems.html" title="File systems">File systems</a></li>
+</ul>
+</div>
+<p><a href="https://en.wikipedia.org/wiki/F2FS" class="extiw" title="wikipedia:F2FS">F2FS</a> (Flash-Friendly File System) is a file system intended for NAND-based flash memory equipped with Flash Translation Layer. Unlike JFFS or UBIFS it relies on a <a href="https://en.wikipedia.org/wiki/Flash_memory_controller#Flash_translation_layer_.28FTL.29_and_mapping" class="extiw" title="wikipedia:Flash memory controller">flash-transition layer (FTL)</a> to handle write distribution. It is supported from kernel 3.8 onwards.
+</p>
+<p>An FTL is found in all flash memory with a SCSI/SATA/PCIe/NVMe interface <a rel="nofollow" class="external autonumber" href="https://accelazh.github.io/storage/A-Summary-On-SSD-And-FTL">[1]</a>, opposed to bare NAND Flash and SmartMediaCards <a rel="nofollow" class="external autonumber" href="http://www.linux-mtd.infradead.org/archive/tech/nand.html">[2]</a>.
+</p>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Warning:</strong> The data contained on F2FS partitions can become unusable if the kernel version on the running machine is <i>older</i> than the kernel version used to create the partition.  For example, this limitation can manifest if the F2FS partition was created on a mainline kernel provided by <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=linux">linux</a></span> yet the system has a need to downgrade to an older series of kernels provided by <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=linux-lts">linux-lts</a></span>. See the <a href="#Minimum_version_required_for_each_feature"> minimum version required for each feature</a> table in this article and <a rel="nofollow" class="external text" href="https://bugs.archlinux.org/task/69363">FS#69363</a>.</div>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../File:Tango-view-fullscreen.svg" decoding="async" width="48" height="48" class="mw-file-element"></span></span><b>This article or section needs expansion.</b></p>
+<div>
+<b>Reason:</b> What advantages f2fs has over other fs, such as ext4? Is it recommended for being used inside lvm? (Discuss in <a rel="nofollow" class="external text" href="../en/Talk:F2FS.html">Talk:F2FS</a>)</div>
+</div>
+<meta property="mw:PageProp/toc">
+<h2><span class="mw-headline" id="Known_issues">Known issues</span></h2>
+<h3><span class="mw-headline" id="fsck_failures">fsck failures</span></h3>
+<p>F2FS has a weak fsck that can lead to data loss in case of a sudden power loss <a rel="nofollow" class="external autonumber" href="https://www.usenix.org/system/files/atc19-jaffer.pdf">[3]</a><a rel="nofollow" class="external autonumber" href="https://web.archive.org/web/20200925120546/https://archived.forum.manjaro.org/t/record-fsync-data-failed-on-f2fs-file-system-how-to-fix-foregt-the-help-i-reinstalled-its-just-easier/121051">[4]</a>.
+</p>
+<p>If power losses are frequent, consider an alternative <a href="../en/File_systems.html" class="mw-redirect" title="File system">file system</a>.
+</p>
+<h3><span class="mw-headline" id="Long_running_fsck_delays_boot">Long running fsck delays boot</span></h3>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../File:View-refresh-red.svg" decoding="async" width="48" height="48" class="mw-file-element"></span></span><b>This article or section is out of date.</b></p>
+<div>
+<b>Reason:</b> The <a rel="nofollow" class="external text" href="https://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs-tools.git/commit/?id=0d0158cf23c50d130c3ce3b7b024868a029ab60e">commit</a> is in <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=f2fs-tools">f2fs-tools</a></span> 1.14.0. What is the status of the issue now? (Discuss in <a rel="nofollow" class="external text" href="../en/Talk:F2FS.html">Talk:F2FS</a>)</div>
+</div>
+<p>If the kernel version has changed between boots, the <i>fsck.f2fs</i> utility will perform a full file system check which will take longer to finish<a rel="nofollow" class="external autonumber" href="https://bbs.archlinux.org/viewtopic.php?id=245702">[5]</a>.
+</p>
+<p>This may be mitigated in the future thanks to a recent commit <a rel="nofollow" class="external autonumber" href="https://lore.kernel.org/linux-f2fs-devel/20200619184346.56536-1-jaegeuk@kernel.org/">[6]</a>.
+</p>
+<h3><span class="mw-headline" id="GRUB_support">GRUB support</span></h3>
+<p>While GRUB supports F2FS since version 2.0.4, it cannot correctly read its boot files from an F2FS partition that was created with the <code>extra_attr</code> flag enabled (for more details, see <a href="../en/GRUB.html#Unsupported_file_systems" title="GRUB">GRUB#Unsupported file systems</a>).
+</p>
+<h3>
+<span id="Cannot_set_file_attributes_for_.27.2Fvar.2Flog.2Fjournal.27"></span><span class="mw-headline" id="Cannot_set_file_attributes_for_'/var/log/journal'">Cannot set file attributes for '/var/log/journal'</span>
+</h3>
+<p>If the error: 
+</p>
+<pre>Cannot set file attributes for '/var/log/journal', maybe due to incompatibility in specified attributes, previous=0x10001000, current=0x10001000, expected=0x10801000, ignoring.
+</pre>
+<p>is present in your <a href="../en/Systemd/Journal.html" class="mw-redirect" title="Journal">journal</a>, it can be <a rel="nofollow" class="external text" href="https://github.com/systemd/systemd/issues/26318">safely ignored</a>: it is due to <a href="../en/Systemd.html#systemd-tmpfiles_-_temporary_files" class="mw-redirect" title="Systemd-tmpfiles">systemd-tmpfiles</a> trying to use a file system feature that is not supported by F2FS.
+</p>
+<h2><span class="mw-headline" id="Creating_a_F2FS_file_system">Creating a F2FS file system</span></h2>
+<p>This article assumes the device has <a href="../en/Partitioning.html" class="mw-redirect" title="Partitions">partitions</a> already setup.  <a href="../en/Help:Reading.html#Installation_of_packages" class="mw-redirect" title="Install">Install</a> <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=f2fs-tools">f2fs-tools</a></span>.  Use <code>mkfs.f2fs</code> to format the target partition referred to as <code><i>/dev/sdxY</i></code>:
+</p>
+<pre># mkfs.f2fs -l mylabel -i -O extra_attr,inode_checksum,sb_checksum <i>/dev/sdxY</i>
+</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> 
+<ul>
+<li>The <code>-i</code> option is included to allow <a rel="nofollow" class="external text" href="https://lore.kernel.org/all/CAF_dkJB%3d2PAqes+41xAi74Z3X0dSjQzCd9eMwDjpKmLD9PBq6A@mail.gmail.com/T/">more space for inodes</a>.</li>
+<li>
+<code>extra_attr</code>, <code>inode_checksum</code>, and <code>sb_checksum</code> are options which help <i>fsck.f2fs</i> to detect and to fix some types of filesystem corruption. See <span class="plainlinks archwiki-template-man" title="$ man 8 mkfs.f2fs"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/mkfs.f2fs.8">mkfs.f2fs(8)</a></span> for all available options.</li>
+</ul>
+</div>
+<h3><span class="mw-headline" id="Compression">Compression</span></h3>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> Unlike other filesystems with inline compression, f2fs compression does not expose additional freespace by default and instead reserves the same number of blocks regardless of whether compression is enabled or not. The primary goal is reducing writes to extend flash lifetime, and potentially, <a rel="nofollow" class="external text" href="https://lz4.github.io/lz4/">a small increase in performance</a>. See <a rel="nofollow" class="external text" href="https://docs.kernel.org/filesystems/f2fs.html#compression-implementation">Compression Implementation</a> in the kernel docs. <code>F2FS_IOC_RELEASE_COMPRESS_BLOCKS</code> can be used to expose unused space on a per-file basis, but it makes the file immutable in the process.</div>
+<p>To use compression, include the <code>compression</code> option. Example:
+</p>
+<pre># mkfs.f2fs -l mylabel -O extra_attr,inode_checksum,sb_checksum,<b>compression</b> <i>/dev/sdxY</i>
+</pre>
+<p>When mounting the filesystem, specify <code>compress_algorithm=(lzo|lz4|zstd|lzo-rle)</code>. Using <code>compress_extension=txt</code> will cause all txt files to be compressed by default.
+</p>
+<p>In order to tell F2FS to compress a file or a directory, use :
+</p>
+<pre>$ chattr -R +c [FOLDER]
+</pre>
+<h3><span class="mw-headline" id="File-based_encryption_support">File-based encryption support</span></h3>
+<p>Since Linux 4.2, F2FS natively supports file encryption.  Encryption is applied at the directory level, and different directories can use different encryption keys.  This is different from both <a href="../en/Dm-crypt.html" title="Dm-crypt">dm-crypt</a>, which is block-device level encryption, and from <a href="../en/ECryptfs.html" title="ECryptfs">eCryptfs</a>, which is a stacked cryptographic filesystem.  To use F2FS's native encryption support, see the <a href="../en/Fscrypt.html" title="Fscrypt">fscrypt</a> article.  Create the file system with
+</p>
+<pre> # mkfs.f2fs -l mylabel -O extra_attr,inode_checksum,sb_checksum,<b>encrypt</b> <i>/dev/sdxY</i>
+</pre>
+<p>or add encryption capability at a later time with <code>fsck.f2fs -O encrypt /dev/sdxY</code>.
+</p>
+<h2><span class="mw-headline" id="Mounting_a_F2FS_file_system">Mounting a F2FS file system</span></h2>
+<p>The file system can then be mounted manually or via other mechanisms:
+</p>
+<pre># mount /dev/sdxY /mnt/foo
+</pre>
+<h3><span class="mw-headline" id="Recommended_mount_options">Recommended mount options</span></h3>
+<p>Since F2FS is designed to be used on flash devices, compression is a good idea. You have to enable it at <code>mkfs.f2fs</code> time.
+A few mount options can be used to improve things slightly.
+</p>
+<pre># mount -o compress_algorithm=zstd:6,compress_chksum,atgc,gc_merge,lazytime /dev/sd<i>xY</i> /mnt/<i>mountpoint</i>
+</pre>
+<ul>
+<li>
+<code>compress_algorithm=zstd:6</code> tells F2FS to use <a href="https://en.wikipedia.org/wiki/Zstandard" class="extiw" title="w:Zstandard">zstd</a> for compression at level 6, which should give pretty good compression ratio.</li>
+<li>
+<code>compress_chksum</code> tells the filesystem to verify compressed blocks with a checksum (to avoid corruption)</li>
+<li>
+<code>atgc,gc_merge</code> Enable better garbage collector, and enable some foreground garbage collections to be asynchronous.</li>
+</ul>
+<dl><dd><div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> See <a href="#Remounting_impossible_with_some_options">#Remounting impossible with some options</a>.</div></dd></dl>
+<ul><li>
+<code>lazytime</code> Do not synchronously update access or modification times. Improves IO performance and flash durability.</li></ul>
+<h3><span class="mw-headline" id="Implementation_of_discard">Implementation of discard</span></h3>
+<p>By default, F2FS is mounted using a hybrid TRIM mode which behaves as <a href="../en/Solid_state_drive.html#Continuous_TRIM" title="Solid state drive">continuous TRIM</a>.  This implementation creates asynchronous discard threads to alleviate long discarding latency among RW IOs.  It keeps candidates in memory, and the thread issues them in idle time <a rel="nofollow" class="external autonumber" href="https://sourceforge.net/p/linux-f2fs/mailman/message/36957687">[7]</a>.  As a result of this, users wanting <a href="../en/Solid_state_drive.html#Periodic_TRIM" title="Solid state drive">periodic TRIM</a> will need to implicitly set the <code>nodiscard</code> mount option in <code>/etc/fstab</code> or pass it to <a href="../en/File_systems.html#Mount_a_file_system" class="mw-redirect" title="Mount">mount</a> if mounting manually.
+</p>
+<h2><span class="mw-headline" id="Checking_and_repair">Checking and repair</span></h2>
+<p>Checking and repairs to F2FS file systems are accomplished with <code>fsck.f2fs</code> provided by <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=f2fs-tools">f2fs-tools</a></span>. To check a file system, execute
+</p>
+<pre># fsck.f2fs <i>/dev/sdxY</i>
+</pre>
+<p>Depending on the result, see <span class="plainlinks archwiki-template-man" title="$ man 8 fsck.f2fs"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/fsck.f2fs.8">fsck.f2fs(8)</a></span> for available switches to repair inconsistencies. For example:
+</p>
+<pre># fsck.f2fs -f <i>/dev/sdxY</i>
+</pre>
+<h2><span class="mw-headline" id="Grow_an_F2FS_file_system">Grow an F2FS file system</span></h2>
+<p>When the filesystem is unmounted, it can be grown if the partition is expanded. <a rel="nofollow" class="external text" href="https://lore.kernel.org/linux-f2fs-devel/1461630518-16944-1-git-send-email-jaegeuk@kernel.org/">Shrinking is not currently supported</a>.
+</p>
+<p>First use a <a href="../en/Partitioning.html#Partitioning_tools" title="Partitioning">partition tool</a> to resize the partition: for example, suppose the output of the <code>print</code> command in the <code>parted</code> console is the following:
+</p>
+<pre>Number  Start   End     Size        File system     Name                  Flag
+ 1      1049kB  106MB   105MB       fat32           EFI system partition  boot, esp
+ 2      106MB   11,0GB  10,9GB      ext4
+ 3      11,0GB  12,3GB  1322MB      f2fs
+ 4      31,0GB  31,3GB  261MB       ext4
+</pre>
+<p>To resize the <code>f2fs</code> partition to occupy all the space up to the fourth one, just give <code>resizepart 3 31GB</code> and <code>exit</code>. Now expand the filesystem to fill the new partition using:
+</p>
+<pre># resize.f2fs <i>/dev/sdxY</i>
+</pre>
+<p>where <code><i>/dev/sdxY</i></code> is the target F2FS volume to grow. See <span class="plainlinks archwiki-template-man" title="$ man 8 resize.f2fs"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/resize.f2fs.8">resize.f2fs(8)</a></span> for supported options.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> If using GPT, the partition's GUID (seen in <code>/dev/disk/by-partuuid/</code>) might change, but the filesystem UUID (seen in <code>/dev/disk/by-uuid/</code>) should stay the same.</div>
+<h2><span class="mw-headline" id="Troubleshooting">Troubleshooting</span></h2>
+<h3><span class="mw-headline" id="Remounting_impossible_with_some_options">Remounting impossible with some options</span></h3>
+<p>As alluded to in <a href="../en/Fsck.html#Boot_time_checking" title="Fsck">Fsck#Boot time checking</a>, the kernel keeps file systems in a read-only state by default, and it is either explicitly needed to pass the <code>rw</code> <a href="../en/Kernel_parameters.html" class="mw-redirect" title="Kernel parameter">kernel parameter</a> or have systemd remounting the filesystems as read-write with the <code>systemd-remount-fs.service</code>. 
+</p>
+<p>When remounting the file system from a read-only state to a read-write state, the <code>mount -o remount,... /</code> steps can fail for multiple reasons, which will either leave the root file system read-only or make the system unable to boot with the error message: 
+</p>
+<pre>Failed to start Remount Root and Kernel File Systems.
+</pre>
+<p>If the <code>atgc</code> option is specified in the fstab file but has not been passed as a kernel parameter, the F2FS kernel module will not permit re-mounting with an added or cleared <code>atgc</code> option<a rel="nofollow" class="external autonumber" href="https://github.com/systemd/systemd/issues/22982">[8]</a><a rel="nofollow" class="external autonumber" href="https://github.com/systemd/systemd/issues/26763">[9]</a>, either:
+</p>
+<ul>
+<li>add the <a href="../en/Kernel_parameters.html" class="mw-redirect" title="Kernel parameter">kernel parameter</a> <code>rootflags=atgc</code> to your boot loader configuration,</li>
+<li>add the <a href="../en/Kernel_parameters.html" class="mw-redirect" title="Kernel parameter">kernel parameter</a> <code>rw</code> to your boot loader configuration,</li>
+<li>remove the <code>atgc</code> mount option from the fstab.</li>
+</ul>
+<p>Since <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=linux">linux</a></span> 6.2, a <a rel="nofollow" class="external text" href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=967eaad1fed5f6335ea97a47d45214744dc57925">check</a> is made in the kernel to disable <code>flush_merge</code> when the file system is read-only, but it is the state of the file system before remounting that is checked. As explained in <a rel="nofollow" class="external text" href="https://bugs.archlinux.org/task/77596">FS#77596</a>, either: 
+</p>
+<ul>
+<li>add the <a href="../en/Kernel_parameters.html" class="mw-redirect" title="Kernel parameter">kernel parameter</a> <code>rw</code> to your boot loader configuration,</li>
+<li>remove the <code>flush_merge</code> mount option from the fstab.</li>
+</ul>
+<h2><span class="mw-headline" id="Minimum_version_required_for_each_feature">Minimum version required for each feature</span></h2>
+<table class="wikitable sortable">
+<caption>
+</caption>
+<tbody>
+<tr>
+<th><b>Feature name</b></th>
+<th><b>Description</b></th>
+<th><b>Kernel version</b></th>
+<th><b>F2FS tools version</b></th>
+<th><b>Kernel commit</b></th>
+<th>
+<b>F2FS tools commit</b>
+</th>
+</tr>
+<tr>
+<th>Lost parent inode number (pino) bit
+</th>
+<td>If a file is linked, F2FS may loose its parent inode number so that fsync calls for the linked file need to perform the checkpoint every time. But, if the pino can be recovered after the checkpoint, roll-forward mechanism for the further fsync calls can be adjusted, which improves the fsync performance significantly.</td>
+<td>3.11</td>
+<td>N/A</td>
+<td>354a3399dc6f ("f2fs: recover wrong pino after checkpoint during fsync")</td>
+<td>N/A
+</td>
+</tr>
+<tr>
+<th>Inline extended attributes
+</th>
+<td>Add a mount option inline_xattr, which is enabled when xattr is set, if the mount option is enabled, all the files are marked with the inline_xattrs flag.</td>
+<td>3.12</td>
+<td>1.2.0</td>
+<td>444c580f7e9a ("f2fs: add flags for inline xattrs")</td>
+<td>cd1e470 ("fsck, lib: support inline xattr")
+</td>
+</tr>
+<tr>
+<th>Inline data
+</th>
+<td>Support inline data in regular/symlink inode via inline_data mount option.</td>
+<td>3.14</td>
+<td>1.3.0</td>
+<td>1001b3479ce9 ("f2fs: add flags and helpers to support inline data")</td>
+<td>061ee67 ("f2fs-tools: add inline data check")
+</td>
+</tr>
+<tr>
+<th>Large directory
+</th>
+<td>Add a parameter to adjust structure of large directory for lookup performance tuning.</td>
+<td>3.15</td>
+<td>1.4.0</td>
+<td>3843154598a0 ("f2fs: introduce large directory support")</td>
+<td>99250ec ("mkfs: support large directory")
+</td>
+</tr>
+<tr>
+<th>Large volume
+</th>
+<td>Support for large volumes over around 3TB.</td>
+<td>3.16</td>
+<td>1.4.0</td>
+<td>1dbe4152168d ("f2fs: large volume support")</td>
+<td>092e3d9 ("mkfs.f2fs: large volume support")
+</td>
+</tr>
+<tr>
+<th>Fsck flag
+</th>
+<td>Adds "need fsck" flag to superblock to conduct fsck.f2fs later, this flag can only be removed by fsck.f2fs.</td>
+<td>3.18</td>
+<td>1.4.0</td>
+<td>2ae4c673e3cb ("f2fs: retain inconsistency information to initiate fsck.f2fs")</td>
+<td>7eb6c5a ("fsck.f2fs: add auto_fix feature")
+</td>
+</tr>
+<tr>
+<th>Fastboot flag
+</th>
+<td>Allow checkpoint write node summaries to speed up boot after a sudden poweroff.</td>
+<td>3.2</td>
+<td>1.4.1</td>
+<td>119ee9144534 ("f2fs: split UMOUNT and FASTBOOT flags")</td>
+<td>b57708a ("dump.f2fs: show checkpoint flag")
+</td>
+</tr>
+<tr>
+<th>Inline data (fix)
+</th>
+<td>Enhance stability of inline_data feature (changes disk layout).</td>
+<td>3.19</td>
+<td>1.4.1</td>
+<td>b3d208f96d6b ("f2fs: revisit inline_data to avoid data races and potential bugs")</td>
+<td>7279f03 ("fsck.f2fs: fix DATA_EXIST flag for old partition")
+</td>
+</tr>
+<tr>
+<th>Inline dentry
+</th>
+<td>Support storing of directory entries in the directory inode.</td>
+<td>3.19</td>
+<td>1.4.1</td>
+<td>34d67debe02b ("f2fs: add infra struct and helper for inline dir")</td>
+<td>6d88640 ("fsck.f2fs: support inline_dentry")
+</td>
+</tr>
+<tr>
+<th>Version info
+</th>
+<td>Stores current kernel version, updated on fsck.</td>
+<td>4.2</td>
+<td>1.4.1</td>
+<td>0040b933187b ("f2fs: add missing version info in superblock")</td>
+<td>6fa2547 ("fsck.f2fs: trigger fsck.f2fs when new change was made")
+</td>
+</tr>
+<tr>
+<th>Initial version info
+</th>
+<td>Identifies the Linux kernel version when the format was done.</td>
+<td>4.2</td>
+<td>1.4.1</td>
+<td>0040b933187b ("f2fs: add missing version info in superblock")</td>
+<td>762eedf ("mkfs.f2fs: give a kernel version for initial format")
+</td>
+</tr>
+<tr>
+<th>Keep size bit
+</th>
+<td>Ensures preallocated (with fallocate) file size does not change during roll-forward recovery.<br>If a file needs to keep its i_size set by fallocate, autorecovery needs to be turned off during roll-forward recovery</td>
+<td>4.1</td>
+<td>N/A</td>
+<td>26787236b366 ("f2fs: do not activate auto_recovery for fallocated i_size")</td>
+<td>N/A
+</td>
+</tr>
+<tr>
+<th>Inline dots
+</th>
+<td>Support to fix directory which has no '.' or '..' dentries, it changes disk layout</td>
+<td>4.1</td>
+<td>1.5.0</td>
+<td>510022a85839 ("f2fs: add F2FS_INLINE_DOTS to recover missing dot dentries")</td>
+<td>f1e4f9c ("fsck.f2fs: fix missing dentries")
+</td>
+</tr>
+<tr>
+<th>Encryption
+</th>
+<td>Enables support for filesystem level encryption.</td>
+<td>4.2</td>
+<td>1.5.0</td>
+<td>cde4de120577 ("f2fs crypto: declare some definitions for f2fs encryption feature")</td>
+<td>6e6c713 ("mkfs.f2fs: set encryption feature")
+</td>
+</tr>
+<tr>
+<th>Block zoned
+</th>
+<td>Specify F2FS filesystem to support the block zoned feature. It depends on multiple devices feature.</td>
+<td>4.8</td>
+<td>1.7.0</td>
+<td>52763a4b7a21 ("f2fs: detect host-managed SMR by feature flag")</td>
+<td>70a8fc3 ("mkfs/fsck: add host-managed smr feature")
+</td>
+</tr>
+<tr>
+<th>Multiple devices
+</th>
+<td>Enable support for multiple physical storage devices to be treated as a single logical volume</td>
+<td>4.1</td>
+<td>1.8.0</td>
+<td>3c62be17d4f5 ("f2fs: support multiple devices")</td>
+<td>de7e07e ("f2fs-tools: support multiple devices")
+</td>
+</tr>
+<tr>
+<th>Trimmed flag
+</th>
+<td>Optimizes the handling of discarded blocks. This flag (CP_TRIMMED_FLAG) allows the F2FS kernel module to record that all invalid blocks were trimmed before umount, so on the next mount these operations can be skipped.</td>
+<td>4.12</td>
+<td>1.9.0</td>
+<td>1f43e2ad7bff ("f2fs: introduce CP_TRIMMED_FLAG to avoid unneeded discard")</td>
+<td>f642b24 ("f2fs-tools: support to set and recognize CP_TRIMMED_FLAG")
+</td>
+</tr>
+<tr>
+<th>NAT bits
+</th>
+<td>Adds bitmaps to represent empty/full NAT blocks containing all used/free nid entries to optimize the management of NAT blocks.</td>
+<td>4.11</td>
+<td>1.9.0</td>
+<td>22ad0b6ab466 ("f2fs: add bitmaps for empty or full NAT blocks")</td>
+<td>191573e ("mkfs.f2fs: support nat_bits feature")
+</td>
+</tr>
+<tr>
+<th>CRC recovery
+</th>
+<td>Use CRC in addition to checkpoint version during roll-forward recovery. This allows for a more robust and reliable way to determine which version of the file to recover.<br>Introduces new flag (CP_CRC_RECOVERY_FLAG) to indicate when the new mechanism is used.</td>
+<td>4.9</td>
+<td>1.9.0</td>
+<td>a468f0ef516f ("f2fs: use crc and cp version to determine roll-forward recovery")</td>
+<td>a0bd5b9 ("f2fs-tools: catch up up-to-date checkpoint flag")
+</td>
+</tr>
+<tr>
+<th>Atomic write
+</th>
+<td>Atomic write feature, this feature does not change disk layout.</td>
+<td>4.14</td>
+<td>1.9.0</td>
+<td>e65ef20781cb ("f2fs: add ioctl to expose current features")</td>
+<td>8721519 ("f2fs-tools: add atomic_write feature flag")
+</td>
+</tr>
+<tr>
+<th>Extra attributes
+</th>
+<td>Enable extra attributes feature, required for some of the other features (see below).</td>
+<td>4.14</td>
+<td>1.9.0</td>
+<td>7a2af766af15 ("f2fs: enhance on-disk inode structure scalability")</td>
+<td>dad33a1 ("f2fs-tools: enhance on-disk inode structure scalability")
+</td>
+</tr>
+<tr>
+<th>Project quota
+</th>
+<td>Enable project ID tracking for projet quota accounting. Uses extra attributes.</td>
+<td>4.14</td>
+<td>1.9.0</td>
+<td>5c57132eaf52 ("f2fs: support project quota")</td>
+<td>a3d9db1 ("f2fs-tools: support project quota")
+</td>
+</tr>
+<tr>
+<th>Inode checksum
+</th>
+<td>Enable inode checksum. Uses extra attributes.</td>
+<td>4.14</td>
+<td>1.9.0</td>
+<td>704956ecf5bc ("f2fs: support inode checksum")</td>
+<td>7457726 ("f2fs-tools: support inode checksum")
+</td>
+</tr>
+<tr>
+<th>Nocrc recovery
+</th>
+<td>Disables the use of CRC during the checkpoint recovery process relying solely on the checkpoint version.</td>
+<td>4.16</td>
+<td>1.10.0</td>
+<td>f236792311f4 ("f2fs: allow to recover node blocks given updated checkpoint")</td>
+<td>f789444 ("fsck.f2fs: allow roll-forward for small checkpoint fix")
+</td>
+</tr>
+<tr>
+<th>Flexible inline xattr
+</th>
+<td>Enable flexible inline xattr size. Uses extra attributes.</td>
+<td>4.15</td>
+<td>1.10.0</td>
+<td>6afc662e68b5 ("f2fs: support flexible inline xattr size")</td>
+<td>8d46072 ("f2fs-tools: support flexible inline xattr size")
+</td>
+</tr>
+<tr>
+<th>Quota sysfile
+</th>
+<td>Enable quota feature (it allows F2FS to maintain an inner sysfile for disk quota data recording).</td>
+<td>4.15</td>
+<td>1.10.0</td>
+<td>234a96896142 ("f2fs: add quota_ino feature infra")</td>
+<td>23a872f ("mkfs.f2fs: support quota option in mkfs")
+</td>
+</tr>
+<tr>
+<th>Pinfile
+</th>
+<td>Support pinfile to avoid migration of its physical data blocks.</td>
+<td>4.16</td>
+<td>1.12.0</td>
+<td>1ad71a27124c ("f2fs: add an ioctl to disable GC for specific file")</td>
+<td>"91bb7b2 (""f2fs-tools: fix to reset i_gc_failures offline"")<br>820b5e3 (""sload.f2fs: use F2FS_COMPRESS_RELEASED instead of IMMUTABLE bit"") added the F2FS_PIN_FILE flag w/o any use."
+</td>
+</tr>
+<tr>
+<th>Inode creation time
+</th>
+<td>Enable inode creation time feature. Requires extra attributes.</td>
+<td>4.16</td>
+<td>1.10.0</td>
+<td>1c1d35df7110 ("f2fs: support inode creation time")</td>
+<td>4862080 ("f2fs-tools: support inode creation time")
+</td>
+</tr>
+<tr>
+<th>Extended node bitmap
+</th>
+<td>Enable extended node bitmap to increase upper boundary limitation of node block count.</td>
+<td>4.17</td>
+<td>1.11.0</td>
+<td>199bc3fef29c ("f2fs: support large nat bitmap")</td>
+<td>baaa076 ("mkfs.f2fs: expand scalability of nat bitmap")
+</td>
+</tr>
+<tr>
+<th>Hot file extensions
+</th>
+<td>Allows specifying a list of file extensions that F2FS will treat as hot files. The data of files with those extensions will be stored in the hot log.</td>
+<td>4.17</td>
+<td>1.11.0</td>
+<td>b6a06cbbb5f7 ("f2fs: support hot file extension")</td>
+<td>6fdc37f ("mkfs.f2fs: support hot file extension")
+</td>
+</tr>
+<tr>
+<th>lost+found
+</th>
+<td>Enable lost+found feature.</td>
+<td>4.17</td>
+<td>1.11.0</td>
+<td>b7c409deda6b ("f2fs: introduce F2FS_FEATURE_LOST_FOUND feature")</td>
+<td>ff37829 ("mkfs.f2fs: create lost+found directory")
+</td>
+</tr>
+<tr>
+<th>fs-verity
+</th>
+<td>Enable support for verity protected files (a.k.a. fs-verity).</td>
+<td>5.4</td>
+<td>1.11.0</td>
+<td>95ae251fe828 ("f2fs: add fs-verity support")</td>
+<td>76cd377 ("mkfs.f2fs: support fsverity feature")
+</td>
+</tr>
+<tr>
+<th>Checkpoint disable flag
+</th>
+<td>Indicate checkpoint is disabled.</td>
+<td>4.2</td>
+<td>1.12.0</td>
+<td>4354994f097d ("f2fs: checkpoint disabling")</td>
+<td>a48bda0 ("fsck.f2fs: support checkpoint=disable")
+</td>
+</tr>
+<tr>
+<th>Quota needs fsck
+</th>
+<td>Add a global state SBI_QUOTA_NEED_REPAIR to indicate that quota operation failed due to -EIO or -ENOSPC, so later,<br> a) checkpoint will skip syncing dquot metadata.<br> b) CP_QUOTA_NEED_FSCK_FLAG will be set in last cp pack to give a hint for fsck repairing.</td>
+<td>4.2</td>
+<td>1.12.0</td>
+<td>af033b2aa8a8 ("f2fs: guarantee journalled quota data by checkpoint")</td>
+<td>dfede78 ("fsck.f2fs: detect and recover corrupted quota file")
+</td>
+</tr>
+<tr>
+<th>Superblock checksum
+</th>
+<td>Enable superblock checksum.</td>
+<td>4.2</td>
+<td>1.12.0</td>
+<td>d440c52d3151 ("f2fs: support superblock checksum")</td>
+<td>886a924 ("f2fs-tools: introduce sb checksum")
+</td>
+</tr>
+<tr>
+<th>Checkpoint disable quick
+</th>
+<td>Add a quick method of checkpoint disabling.</td>
+<td>5.1</td>
+<td>N/A</td>
+<td>db610a640eee ("f2fs: add quick mode of checkpoint=disable for QA")</td>
+<td>N/A
+</td>
+</tr>
+<tr>
+<th>Casefolding
+</th>
+<td>Enable casefolding support in the filesystem. Optional flags can be passed with -C.</td>
+<td>5.4</td>
+<td>1.13.0</td>
+<td>5aba54302a46 ("f2fs: include charset encoding information in the superblock")</td>
+<td>ce64ea0 ("f2fs-tools: Add support for Casefolding")
+</td>
+</tr>
+<tr>
+<th>Compression
+</th>
+<td>Enable support for filesystem level compression. Requires extra attributes.</td>
+<td>5.6</td>
+<td>1.14.0</td>
+<td>4c8ff7095bef ("f2fs: support data compression")</td>
+<td>fdd47b2 ("f2fs-tools: support data compression")
+</td>
+</tr>
+<tr>
+<th>Resize FS flag
+</th>
+<td>Introduces a new checkpoint flag, CP_RESIZEFS_FLAG, to help fsck fix issues related to online resizing.</td>
+<td>5.7</td>
+<td>1.14.0</td>
+<td>c84ef3c5e65c ("f2fs: Add a new CP flag to help fsck fix resize SPO issues")</td>
+<td>9a31cef ("fsck.f2fs: allow fsck to fix issues with online resize due to SPO")
+</td>
+</tr>
+<tr>
+<th>Compression (fix)
+</th>
+<td>This change introduces a new flag (F2FS_COMPRESS_RELEASED) to represent the status of the released compressed blocks. Previously used IMMUTABLE bit prevented all operations on the released block.</td>
+<td>5.14</td>
+<td>1.15.0</td>
+<td>c61404153eb6 ("f2fs: introduce FI_COMPRESS_RELEASED instead of using IMMUTABLE bit")</td>
+<td>820b5e3 ("sload.f2fs: use F2FS_COMPRESS_RELEASED instead of IMMUTABLE bit")
+</td>
+</tr>
+<tr>
+<th>Readonly image
+</th>
+<td>Enable readonly feature to eliminate OVP/SSA on-disk layout for small readonly partition.</td>
+<td>5.14</td>
+<td>1.15.0</td>
+<td>a7d9fe3c3388 ("f2fs: support RO feature")</td>
+<td>1d2683f ("f2fs-tools: support small RO partition")
+</td>
+</tr>
+<tr>
+<th>Trunc bit
+</th>
+<td>"Direct IO (DIO) preallocates physical blocks before writing actual data, but if an error occurrs or a power-cut happens, the unwritten blocks' contents can be accessed by the user. This patch fixes it by:<br> 1) turning to buffered writes for DIO into holes<br> 2) truncating unwritten blocks from error or power-cut."</td>
+<td>5.17</td>
+<td>N/A</td>
+<td>d4dd19ec1ea0 ("f2fs: do not expose unwritten blocks to user by DIO")</td>
+<td>N/A
+</td>
+</tr>
+<tr>
+<th>CP error recording
+</th>
+<td>Supports recording the detailed stop checkpoint error into f2fs_super_block.s_stop_reason[].</td>
+<td>6.1</td>
+<td>1.16.0</td>
+<td>a9cfee0ef98e ("f2fs: support recording stop_checkpoint reason into super_block")</td>
+<td>2f1dde2 ("fsck.f2fs: trigger repairing if filesystem was forced to stop")
+</td>
+</tr>
+<tr>
+<th>FS error recording
+</th>
+<td>Supports recording the detailed reason of FSCORRUPTED error into f2fs_super_block.s_errors[].</td>
+<td>6.1</td>
+<td>1.16.0</td>
+<td>95fa90c9e5a7 ("f2fs: support recording errors into superblock")</td>
+<td>8cbe34e ("fsck.f2fs: trigger repairing if filesystem has inconsistent errors")
+</td>
+</tr>
+<tr>
+<th>16KB block support
+</th>
+<td>Supports for 16K block size, mkfs can choose block size via the -b option, with other tools getting the blocksize from the superblock.</td>
+<td>6.7</td>
+<td>Not released yet</td>
+<td>d7e9a9037de2 ("f2fs: Support Block Size == Page Size")</td>
+<td>50fd00b ("f2fs-tools: Support different block sizes")<br>c404632 ("f2fs-tools: Refactor f2fs_dentry_block struct")<br>
+<p>ef47782 ("f2fs-tools: Refactor Summary block struct and friends")<br>bb051c7 ("f2fs-tools: Refactor SIT/NAT block structs")<br>32f5a37 ("f2fs-tools: Refactor f2fs_node struct and friends")<br>b1aeb99 ("f2fs-tools: Refactor Orphan Block struct")<br>30825b3 ("f2fs-tools: Define constants in terms of BLKSIZE")
+</p>
+</td>
+</tr>
+<tr>
+<th>Device alias
+</th>
+<td>Enables device aliasing feature.</td>
+<td>6.13</td>
+<td>Not released yet</td>
+<td>128d333f0dff ("f2fs: introduce device aliasing file")</td>
+<td>8cc4e25 ("mkfs.f2fs: add device aliasing feature")
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+					<div id="catlinks" class="catlinks" data-mw="interface">
+<div id="mw-normal-catlinks" class="mw-normal-catlinks">
+<a href="../Special:Categories.html" title="Special:Categories">Category</a>: <ul><li><a href="../en/Category:File_systems.html" title="Category:File systems">File systems</a></li></ul>
+</div>
+<div id="mw-hidden-catlinks" class="mw-hidden-catlinks mw-hidden-cats-hidden">Hidden categories: <ul>
+<li><a href="../en/Category:Pages_or_sections_flagged_with_Template:Expansion.html" title="Category:Pages or sections flagged with Template:Expansion">Pages or sections flagged with Template:Expansion</a></li>
+<li><a href="../en/Category:Pages_or_sections_flagged_with_Template:Out_of_date.html" title="Category:Pages or sections flagged with Template:Out of date">Pages or sections flagged with Template:Out of date</a></li>
+</ul>
+</div>
+</div>
+				</div>
+			</main>
+			
+		</div>
+		<div class="mw-footer-container">
+			
+<footer id="footer" class="mw-footer" style="margin: 0">
+	<ul id="footer-info">
+	<li data-nosnippet="">Retrieved from "<a dir="ltr" href="https://wiki.archlinux.org/index.php?title=F2FS&amp;oldid=829447">https://wiki.archlinux.org/index.php?title=F2FS&amp;oldid=829447</a>"</li>
+<li id="footer-info-lastmod"> This page was last edited on 18 March 2025, at 21:18.</li>
+	<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+<br>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="https://terms.archlinux.org/docs/privacy-policy/">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="../en/ArchWiki:About.html">About ArchWiki</a></li>
+	<li id="footer-places-disclaimers"><a href="../en/ArchWiki:General_disclaimer.html">Disclaimers</a></li>
+	<li id="footer-places-archwiki-code-of-conduct"><a href="https://terms.archlinux.org/docs/code-of-conduct/" class="extiw" title="archlinux-service-agreements:code-of-conduct">Code of conduct</a></li>
+	<li id="footer-places-archwiki-terms-of-service"><a href="https://terms.archlinux.org/docs/terms-of-service/" class="extiw" title="archlinux-service-agreements:terms-of-service">Terms of service</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-copyrightico"><a href="https://www.gnu.org/copyleft/fdl.html" class="cdx-button cdx-button--fake-button cdx-button--size-large cdx-button--fake-button--enabled"><img src="/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" loading="lazy"></a></li>
+	<li id="footer-poweredbyico"><img src="/resources/assets/poweredby_mediawiki.svg" width="88" height="31" loading="lazy"></li>
+</ul>
+
+</footer>
+
+		</div>
+	</div> 
+</div> 
+<div class="vector-settings" id="p-dock-bottom">
+	<ul></ul>
+</div>
+</body>
+</html>

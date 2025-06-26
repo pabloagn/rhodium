@@ -1,0 +1,60 @@
+<h1>compseq</h1>
+
+<blockquote><p>Calcula la composición de palabras únicas en secuencias.
+Más información: <a href="https://www.bioinformatics.nl/cgi-bin/emboss/help/compseq/">https://www.bioinformatics.nl/cgi-bin/emboss/help/compseq/</a>.</p></blockquote>
+
+<ul>
+<li>Cuenta frecuencias observadas de palabras en un archivo FASTA, proporcionando valores de parámetros interactivamente:</li>
+</ul>
+
+
+<p><code>compseq {{ruta/al/archivo.fasta}}</code></p>
+
+<ul>
+<li>Cuenta frecuencias observadas de pares de aminoácidos en un archivo FASTA, y guarda el resultado en un archivo de texto:</li>
+</ul>
+
+
+<p><code>compseq {{ruta/al/archivo_proteina.fasta}} -word 2 {{ruta/al/archivo_de_salida.comp}}</code></p>
+
+<ul>
+<li>Cuenta las frecuencias observadas de hexanucleótidos en un archivo FASTA, luego guarda el resultado en un archivo de texto e ignora los recuentos cero:</li>
+</ul>
+
+
+<p><code>compseq {{ruta/al/archivo_de_entrada.fasta}} -word 6 {{ruta/al/archivo_de_salida.comp}} -nozero</code></p>
+
+<ul>
+<li>Cuenta las frecuencias observadas de codones en un marco de lectura concreto, ignorando cualquier recuento superpuesto (es decir, desplaza la ventana en longitud de palabra 3):</li>
+</ul>
+
+
+<p><code>compseq -sequence {{ruta/al/archivo_de_ingreso_rna.fasta}} -word 3 {{ruta/al/archivo_de_salida.comp}} -nozero -frame {{1}}</code></p>
+
+<ul>
+<li>Cuenta las frecuencias observadas de codones desplazados en 3 posiciones; ignorando los recuentos superpuestos (debería informar de todos los codones excepto el primero):</li>
+</ul>
+
+
+<p><code>compseq -sequence {{ruta/al/archivo_de_ingreso_rna.fasta}} -word 3 {{ruta/al/archivo_de_salida.comp}} -nozero -frame 3</code></p>
+
+<ul>
+<li>Cuenta tripletes de aminoácidos en un archivo FASTA y compara con una ejecución anterior de <code>compseq</code> para calcular los valores de frecuencia esperados y normalizados:</li>
+</ul>
+
+
+<p><code>compseq -sequence {{ruta/al/proteoma_humano.fasta}} -word 3 {{ruta/al/archivo_salida1.comp}} -nozero -infile {{ruta/al/archivo_de_salida2.comp}}</code></p>
+
+<ul>
+<li>Aproxima el comando anterior sin un archivo previamente preparado, calculando las frecuencias esperadas usando las frecuencias de una sola base/residuo en la(s) secuencia(s) de entrada suministrada(s):</li>
+</ul>
+
+
+<p><code>compseq -sequence {{ruta/al/proteoma_humano.fasta}} -word 3 {{ruta/al/archivo_de_salida.comp}} -nozero -calcfreq</code></p>
+
+<ul>
+<li>Muestra ayuda (utiliza <code>-help -verbose</code> para obtener más información sobre los calificadores asociados y generales):</li>
+</ul>
+
+
+<p><code>compseq -help</code></p>

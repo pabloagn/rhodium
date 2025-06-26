@@ -1,0 +1,60 @@
+<h1>gpg</h1>
+
+<blockquote><p>GNU Privacy Guard, an OpenPGP encryption and signing tool.
+More information: <a href="https://gnupg.org/documentation/manuals/gnupg/Invoking-GPG.html">https://gnupg.org/documentation/manuals/gnupg/Invoking-GPG.html</a>.</p></blockquote>
+
+<ul>
+<li>Create a GPG public and private key interactively:</li>
+</ul>
+
+
+<p><code>gpg {{[--full-gen-key|--full-generate-key]}}</code></p>
+
+<ul>
+<li>List all keys from the public keyring:</li>
+</ul>
+
+
+<p><code>gpg {{[-k|--list-keys]}}</code></p>
+
+<ul>
+<li>Sign <code>doc.txt</code> without encryption (writes output to <code>doc.txt.asc</code>):</li>
+</ul>
+
+
+<p><code>gpg --clearsign {{doc.txt}}</code></p>
+
+<ul>
+<li>Encrypt and sign <code>doc.txt</code> for <code>alice@example.com</code> and <code>bob@example.com</code> (output to <code>doc.txt.gpg</code>):</li>
+</ul>
+
+
+<p><code>gpg {{[-es|--encrypt --sign]}} {{[-r|--recipient]}} {{alice@example.com}} {{[-r|--recipient]}} {{bob@example.com}} {{doc.txt}}</code></p>
+
+<ul>
+<li>Encrypt <code>doc.txt</code> with only a passphrase (output to <code>doc.txt.gpg</code>):</li>
+</ul>
+
+
+<p><code>gpg {{[-c|--symmetric]}} {{doc.txt}}</code></p>
+
+<ul>
+<li>Decrypt <code>doc.txt.gpg</code> (output to <code>stdout</code>):</li>
+</ul>
+
+
+<p><code>gpg {{[-d|--decrypt]}} {{doc.txt.gpg}}</code></p>
+
+<ul>
+<li>Import a public key:</li>
+</ul>
+
+
+<p><code>gpg --import {{public.gpg}}</code></p>
+
+<ul>
+<li>Export the public/private key for <code>alice@example.com</code> (output to <code>stdout</code>):</li>
+</ul>
+
+
+<p><code>gpg {{--export|--export-secret-keys}} {{[-a|--armor]}} {{alice@example.com}}</code></p>

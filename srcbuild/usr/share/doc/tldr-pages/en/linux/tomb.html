@@ -1,0 +1,60 @@
+<h1>tomb</h1>
+
+<blockquote><p>Manage encrypted storage directories that can be safely transported and hidden in a filesystem.
+More information: <a href="https://dyne.org/docs/tomb/manpage/">https://dyne.org/docs/tomb/manpage/</a>.</p></blockquote>
+
+<ul>
+<li>Create a new tomb with an initial size of 100 MB:</li>
+</ul>
+
+
+<p><code>tomb dig -s {{100}} {{encrypted_directory.tomb}}</code></p>
+
+<ul>
+<li>Create a new key file that can be used to lock a tomb; user will be prompted for a password for the key:</li>
+</ul>
+
+
+<p><code>tomb forge {{encrypted_directory.tomb.key}}</code></p>
+
+<ul>
+<li>Forcefully create a new key, even if the tomb isn&rsquo;t allowing key forging (due to swap):</li>
+</ul>
+
+
+<p><code>tomb forge {{encrypted_directory.tomb.key}} -f</code></p>
+
+<ul>
+<li>Initialize and lock an empty tomb using a key made with <code>forge</code>:</li>
+</ul>
+
+
+<p><code>tomb lock {{encrypted_directory.tomb}} -k {{encrypted_directory.tomb.key}}</code></p>
+
+<ul>
+<li>Mount a tomb (by default in <code>/media</code>) using its key, making it usable as a regular filesystem directory:</li>
+</ul>
+
+
+<p><code>tomb open {{encrypted_directory.tomb}} -k {{encrypted_directory.tomb.key}}</code></p>
+
+<ul>
+<li>Close a tomb (fails if the tomb is being used by a process):</li>
+</ul>
+
+
+<p><code>tomb close {{encrypted_directory.tomb}}</code></p>
+
+<ul>
+<li>Forcefully close all open tombs, killing any applications using them:</li>
+</ul>
+
+
+<p><code>tomb slam all</code></p>
+
+<ul>
+<li>List all open tombs:</li>
+</ul>
+
+
+<p><code>tomb list</code></p>

@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-sticky-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-0 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-disabled skin-theme-clientpref-day vector-toc-available" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>SSHFS - ArchWiki</title>
+<link rel="stylesheet" href="../ArchWikiOffline.css">
+<meta name="ResourceLoaderDynamicStyles" content="">
+<meta name="generator" content="MediaWiki 1.43.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="max-image-preview:standard">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.25, maximum-scale=5.0">
+<link rel="search" type="application/opensearchdescription+xml" href="/rest.php/v1/search" title="ArchWiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.archlinux.org/api.php?action=rsd">
+<link rel="license" href="https://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="ArchWiki Atom feed" href="/index.php?title=Special:RecentChanges&amp;feed=atom">
+</head>
+<body class="skin--responsive skin-vector skin-vector-search-vue mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-SSHFS rootpage-SSHFS skin-vector-2022 action-view">
+<a class="mw-jump-link" href="#bodyContent">Jump to content</a>
+<div class="vector-header-container">
+	</div>
+<div class="mw-page-container">
+	<div class="mw-page-container-inner">
+		<div class="vector-column-start">
+			<div class="vector-main-menu-container">
+		</div>
+	<div class="vector-sticky-pinned-container">
+				<nav id="mw-panel-toc" aria-label="Contents" data-event-name="ui.sidebar-toc" class="mw-table-of-contents-container vector-toc-landmark">
+					<div id="vector-toc-pinned-container" class="vector-pinned-container">
+					<div id="vector-toc" class="vector-toc vector-pinnable-element">
+	<div class="vector-pinnable-header vector-toc-pinnable-header vector-pinnable-header-pinned" data-feature-name="toc-pinned" data-pinnable-element-id="vector-toc">
+	<h2 class="vector-pinnable-header-label">Contents</h2>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-toc.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-toc.unpin">hide</button>
+</div>
+
+
+	<ul class="vector-toc-contents" id="mw-panel-toc-list">
+		<li id="toc-mw-content-text" class="vector-toc-list-item vector-toc-level-1">
+			<a href="#" class="vector-toc-link">
+				<div class="vector-toc-text">Beginning</div>
+			</a>
+		</li>
+		<li id="toc-Installation" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Installation">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">1</span>
+				<span>Installation</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Installation-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Usage" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Usage">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">2</span>
+				<span>Usage</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Usage-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Usage subsection</span>
+			</button>
+		
+		<ul id="toc-Usage-sublist" class="vector-toc-list">
+			<li id="toc-Mounting" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Mounting">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1</span>
+					<span>Mounting</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Mounting-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Unmounting" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Unmounting">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2</span>
+					<span>Unmounting</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Unmounting-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Options" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Options">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">3</span>
+				<span>Options</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Options-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Options subsection</span>
+			</button>
+		
+		<ul id="toc-Options-sublist" class="vector-toc-list">
+			<li id="toc-User_ID_mapping" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#User_ID_mapping">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1</span>
+					<span>User ID mapping</span>
+				</div>
+			</a>
+			
+			<ul id="toc-User_ID_mapping-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-allow_root_or_allow_other" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#allow_root_or_allow_other">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.2</span>
+					<span>allow_root or allow_other</span>
+				</div>
+			</a>
+			
+			<ul id="toc-allow_root_or_allow_other-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Change_ownership_of_mountpoint" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Change_ownership_of_mountpoint">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.3</span>
+					<span>Change ownership of mountpoint</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Change_ownership_of_mountpoint-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Tips_and_tricks" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Tips_and_tricks">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">4</span>
+				<span>Tips and tricks</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Tips_and_tricks-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Tips and tricks subsection</span>
+			</button>
+		
+		<ul id="toc-Tips_and_tricks-sublist" class="vector-toc-list">
+			<li id="toc-Chrooting" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Chrooting">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.1</span>
+					<span>Chrooting</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Chrooting-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-systemd" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#systemd">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.2</span>
+					<span>systemd</span>
+				</div>
+			</a>
+			
+			<ul id="toc-systemd-sublist" class="vector-toc-list">
+				<li id="toc-As_user_unit" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#As_user_unit">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.2.1</span>
+					<span>As user unit</span>
+				</div>
+			</a>
+			
+			<ul id="toc-As_user_unit-sublist" class="vector-toc-list">
+				<li id="toc-Use_ssh-key_with_passphrase" class="vector-toc-list-item vector-toc-level-4">
+			<a class="vector-toc-link" href="#Use_ssh-key_with_passphrase">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.2.1.1</span>
+					<span>Use ssh-key with passphrase</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Use_ssh-key_with_passphrase-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Generate_.mount_and_.automount_files" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Generate_.mount_and_.automount_files">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.2.2</span>
+					<span>Generate .mount and .automount files</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Generate_.mount_and_.automount_files-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Write_.mount_and_.automount_files" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Write_.mount_and_.automount_files">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.2.3</span>
+					<span>Write .mount and .automount files</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Write_.mount_and_.automount_files-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-systemd_root_and_multiple_user" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#systemd_root_and_multiple_user">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.3</span>
+					<span>systemd root and multiple user</span>
+				</div>
+			</a>
+			
+			<ul id="toc-systemd_root_and_multiple_user-sublist" class="vector-toc-list">
+				<li id="toc-On_demand" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#On_demand">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.3.1</span>
+					<span>On demand</span>
+				</div>
+			</a>
+			
+			<ul id="toc-On_demand-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-On_boot" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#On_boot">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.3.2</span>
+					<span>On boot</span>
+				</div>
+			</a>
+			
+			<ul id="toc-On_boot-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Secure_user_access" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Secure_user_access">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.3.3</span>
+					<span>Secure user access</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Secure_user_access-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Troubleshooting" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Troubleshooting">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">5</span>
+				<span>Troubleshooting</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Troubleshooting-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Troubleshooting subsection</span>
+			</button>
+		
+		<ul id="toc-Troubleshooting-sublist" class="vector-toc-list">
+			<li id="toc-Checklist" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Checklist">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.1</span>
+					<span>Checklist</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Checklist-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Connection_reset_by_peer" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Connection_reset_by_peer">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.2</span>
+					<span>Connection reset by peer</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Connection_reset_by_peer-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Remote_host_has_disconnected" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Remote_host_has_disconnected">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.3</span>
+					<span>Remote host has disconnected</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Remote_host_has_disconnected-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-fstab_mounting_issues" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#fstab_mounting_issues">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.4</span>
+					<span>fstab mounting issues</span>
+				</div>
+			</a>
+			
+			<ul id="toc-fstab_mounting_issues-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Some_directories_are_empty" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Some_directories_are_empty">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.5</span>
+					<span>Some directories are empty</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Some_directories_are_empty-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Files_not_refreshed" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Files_not_refreshed">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.6</span>
+					<span>Files not refreshed</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Files_not_refreshed-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Limited_transfer_speed_on_fast_network" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Limited_transfer_speed_on_fast_network">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.7</span>
+					<span>Limited transfer speed on fast network</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Limited_transfer_speed_on_fast_network-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-See_also" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#See_also">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">6</span>
+				<span>See also</span>
+			</div>
+		</a>
+		
+		<ul id="toc-See_also-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+</ul>
+</div>
+
+					</div>
+		</nav>
+			</div>
+		</div>
+		<div class="mw-content-container">
+			<main id="content" class="mw-body" style="margin: 0">
+				<header class="mw-body-header vector-page-titlebar">
+					<nav aria-label="Contents" class="vector-toc-landmark">
+						
+<div id="vector-page-titlebar-toc" class="vector-dropdown vector-page-titlebar-toc vector-button-flush-left">
+	<input type="checkbox" id="vector-page-titlebar-toc-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-page-titlebar-toc" class="vector-dropdown-checkbox " aria-label="Toggle the table of contents">
+	<label id="vector-page-titlebar-toc-label" for="vector-page-titlebar-toc-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"><span class="vector-icon mw-ui-icon-listBullet mw-ui-icon-wikimedia-listBullet"></span>
+
+<span class="vector-dropdown-label-text">Toggle the table of contents</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+							<div id="vector-page-titlebar-toc-unpinned-container" class="vector-unpinned-container">
+			</div>
+		
+	</div>
+</div>
+
+					</nav>
+					<h1 id="firstHeading" class="firstHeading mw-first-heading"><span class="mw-page-title-main">SSHFS</span></h1>
+							
+<div id="p-lang-btn" class="vector-dropdown mw-portlet mw-portlet-lang">
+	<input type="checkbox" id="p-lang-btn-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-p-lang-btn" class="vector-dropdown-checkbox mw-interlanguage-selector" aria-label="Go to an article in another language. Available in 6 languages">
+	<label id="p-lang-btn-label" for="p-lang-btn-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--action-progressive mw-portlet-lang-heading-6" aria-hidden="true"><span class="vector-icon mw-ui-icon-language-progressive mw-ui-icon-wikimedia-language-progressive"></span>
+
+<span class="vector-dropdown-label-text">6 languages</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+		<div class="vector-menu-content">
+			
+			<ul class="vector-menu-content-list">
+				
+				<li class="interlanguage-link interwiki-de mw-list-item"><a href="https://wiki.archlinux.de/title/sshfs" title="sshfs – Deutsch" lang="de" hreflang="de" data-title="sshfs" data-language-autonym="Deutsch" data-language-local-name="Deutsch" class="interlanguage-link-target"><span>Deutsch</span></a></li>
+<li class="interlanguage-link interwiki-es mw-list-item"><a href="../es/SSHFS.html" title="SSHFS – español" lang="es" hreflang="es" data-title="SSHFS" data-language-autonym="Español" data-language-local-name="español" class="interlanguage-link-target"><span>Español</span></a></li>
+<li class="interlanguage-link interwiki-fr mw-list-item"><a href="../fr/SSHFS.html" title="SSHFS – français" lang="fr" hreflang="fr" data-title="SSHFS" data-language-autonym="Français" data-language-local-name="français" class="interlanguage-link-target"><span>Français</span></a></li>
+<li class="interlanguage-link interwiki-ja mw-list-item"><a href="https://wiki.archlinux.jp/index.php/Sshfs" title="Sshfs – 日本語" lang="ja" hreflang="ja" data-title="Sshfs" data-language-autonym="日本語" data-language-local-name="日本語" class="interlanguage-link-target"><span>日本語</span></a></li>
+<li class="interlanguage-link interwiki-ru mw-list-item"><a href="../ru/SSHFS.html" title="SSHFS – русский" lang="ru" hreflang="ru" data-title="SSHFS" data-language-autonym="Русский" data-language-local-name="русский" class="interlanguage-link-target"><span>Русский</span></a></li>
+<li class="interlanguage-link interwiki-zh-hans mw-list-item"><a href="https://wiki.archlinuxcn.org/wiki/SSHFS" title="SSHFS – 中文（简体）" lang="zh-Hans" hreflang="zh-Hans" data-title="SSHFS" data-language-autonym="中文（简体）" data-language-local-name="中文（简体）" class="interlanguage-link-target"><span>中文（简体）</span></a></li>
+			</ul>
+			
+		</div>
+
+	</div>
+</div>
+</header>
+				<div class="vector-column-end">
+					<div class="vector-sticky-pinned-container">
+						<nav class="vector-page-tools-landmark" aria-label="Page tools">
+							<div id="vector-page-tools-pinned-container" class="vector-pinned-container">
+				
+							</div>
+		</nav>
+						<nav class="vector-appearance-landmark" aria-label="Appearance">
+							<div id="vector-appearance-pinned-container" class="vector-pinned-container">
+				<div id="vector-appearance" class="vector-appearance vector-pinnable-element">
+	<div class="vector-pinnable-header vector-appearance-pinnable-header vector-pinnable-header-pinned" data-feature-name="appearance-pinned" data-pinnable-element-id="vector-appearance" data-pinned-container-id="vector-appearance-pinned-container" data-unpinned-container-id="vector-appearance-unpinned-container">
+	<div class="vector-pinnable-header-label">Appearance</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-appearance.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-appearance.unpin">hide</button>
+</div>
+
+
+</div>
+
+							</div>
+		</nav>
+					</div>
+				</div>
+				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container>
+					<div class="vector-body-before-content">
+							<div class="mw-indicators">
+		</div>
+
+						<div id="siteSub" class="noprint">From ArchWiki</div>
+					</div>
+					<div id="contentSub"><div id="mw-content-subtitle"></div></div>
+					
+					
+					<div id="mw-content-text" class="mw-body-content">
+<div class="mw-content-ltr mw-parser-output" lang="en" dir="ltr">
+<div class="archwiki-template-meta-related-articles">
+<p>Related articles</p>
+<ul>
+<li><a href="../en/SCP_and_SFTP.html" title="SCP and SFTP">SCP and SFTP</a></li>
+<li><a href="../en/SFTP_chroot.html" title="SFTP chroot">SFTP chroot</a></li>
+<li><a href="../en/Pure-FTPd.html" title="Pure-FTPd">Pure-FTPd</a></li>
+<li><a href="../en/Sftpman.html" title="Sftpman">sftpman</a></li>
+</ul>
+</div>
+<p><a rel="nofollow" class="external text" href="https://github.com/libfuse/sshfs">SSHFS</a> is a <a href="../en/FUSE.html" title="FUSE">FUSE</a>-based file system client for mounting remote directories over a <a href="../en/Secure_Shell.html" title="Secure Shell">Secure Shell</a> connection.
+</p>
+<meta property="mw:PageProp/toc">
+<h2><span class="mw-headline" id="Installation">Installation</span></h2>
+<p><a href="../en/Help:Reading.html#Installation_of_packages" class="mw-redirect" title="Install">Install</a> the <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=sshfs">sshfs</a></span> package.
+</p>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> 
+<ul>
+<li>If you often need to mount sshfs file systems you may be interested in using an sshfs helper, such as <a href="../en/Sftpman.html" title="Sftpman">sftpman</a>, <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/sshmnt/">sshmnt</a></span><sup><small>AUR</small></sup> or <a rel="nofollow" class="external text" href="https://github.com/lahwaacz/Scripts/blob/master/fmount.py">fmount.py</a>.</li>
+<li>You may want to use <a href="../en/Google_Authenticator.html" title="Google Authenticator">Google Authenticator</a> or <a href="../en/SSH_keys.html#FIDO/U2F" title="SSH keys">Fido Tokens</a> providing additional security as in two-step authentication.</li>
+<li>
+<a href="../en/SSH_keys.html" title="SSH keys">SSH keys</a> may be used over traditional password authentication.</li>
+</ul>
+</div>
+<h2><span class="mw-headline" id="Usage">Usage</span></h2>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> It is <b>recommended</b> to run SSHFS as regular user (<b>not as root</b>). For this to work, the mountpoint must be owned by the user. See <span class="plainlinks archwiki-template-man" title="$ man 8 mount.fuse"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/mount.fuse.8#SECURITY">mount.fuse(8) § SECURITY</a></span> for details.</div>
+<h3><span class="mw-headline" id="Mounting">Mounting</span></h3>
+<p>In order to be able to mount a directory the SSH user needs to be able to access it. Invoke <i>sshfs</i> to mount a remote directory:
+</p>
+<pre>$ sshfs <i>[user@]host:[dir] mountpoint [options]</i>
+</pre>
+<p>For example:
+</p>
+<pre>$ sshfs myuser@mycomputer:/remote/path /local/path -C -p 9876
+</pre>
+<p>Here <code>-p 9876</code> specifies the port number and <code>-C</code> enables compression. For more options see the <a href="#Options">#Options</a> section.
+</p>
+<p>When not specified, the remote path defaults to the remote user home directory. Default user names and options can be predefined on a host-by-host basis in <code>~/.ssh/config</code> to simplify the <i>sshfs</i> usage. For more information see <a href="../en/OpenSSH.html#Client_usage" title="OpenSSH">OpenSSH#Client usage</a>.
+</p>
+<p>SSH will ask for the password, if needed. If you do not want to type in the password multiple times a day, see <a href="../en/SSH_keys.html" title="SSH keys">SSH keys</a>.
+</p>
+<h3><span class="mw-headline" id="Unmounting">Unmounting</span></h3>
+<p>To unmount the remote system:
+</p>
+<pre>$ fusermount3 -u <i>mountpoint</i>
+</pre>
+<p>Example:
+</p>
+<pre>$ fusermount3 -u /local/path
+</pre>
+<h2><span class="mw-headline" id="Options">Options</span></h2>
+<p>A complete list of options can be found in <span class="plainlinks archwiki-template-man" title="$ man 1 sshfs"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/sshfs.1">sshfs(1)</a></span> and <span class="plainlinks archwiki-template-man" title="$ man 8 mount.fuse"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/mount.fuse.8">mount.fuse(8)</a></span>.
+</p>
+<h3><span class="mw-headline" id="User_ID_mapping">User ID mapping</span></h3>
+<p><i>sshfs</i> can automatically convert between local and remote user IDs. Use the <code>idmap=user</code> option to translate the UID of the connecting user to the remote user <code>myuser</code> (GID remains unchanged):
+</p>
+<pre>$ sshfs <i>myuser</i>@<i>mycomputer</i>:<i>/remote/path /local/path</i> -o idmap=user
+</pre>
+<p>If you need more control over UID and GID translation, look at the options <code>idmap=file</code>, <code>uidfile</code> and <code>gidfile</code>.
+</p>
+<h3><span class="mw-headline" id="allow_root_or_allow_other">allow_root or allow_other</span></h3>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> As hinted in <span class="plainlinks archwiki-template-man" title="$ man 8 mount.fuse"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/mount.fuse.8#SECURITY">mount.fuse(8) § SECURITY</a></span> you should be careful using these options.</div>
+<pre>$ sshfs <i>myuser</i>@<i>mycomputer</i>:<i>/remote/path /local/path</i> -o allow_other,default_permissions,uid=1002,gid=1002
+</pre>
+<ul>
+<li>
+<code>allow_other</code> - Allow other users than the mounter (i.e. root) to access the share.</li>
+<li>
+<code>allow_root</code> - Similar to allow_other but file access is limited to the user mounting the file system and root.</li>
+</ul>
+<p>allow_root and allow_other are mutually exclusive. Additionally you want to edit <code>/etc/fuse.conf</code> and uncomment the string <code>user_allow_other</code> to enable all users to use these options.
+</p>
+<ul><li>
+<code>default_permissions</code> - might be also used because fuse by default does not check file access permissions. i.e. use the actual permissions on the remote file system. This allows prohibiting access to everybody otherwise granted by <i>allow_other</i>.</li></ul>
+<h3><span class="mw-headline" id="Change_ownership_of_mountpoint">Change ownership of mountpoint</span></h3>
+<ul><li>
+<code>uid</code>, <code>gid</code> - set reported ownership of files to given values; <i>uid</i> is the numeric user ID of your user, <i>gid</i> is the numeric group ID of your user.</li></ul>
+<h2><span class="mw-headline" id="Tips_and_tricks">Tips and tricks</span></h2>
+<h3><span class="mw-headline" id="Chrooting">Chrooting</span></h3>
+<p>You may want to restrict a specific user to a specific directory on the remote system. This can be done by editing <code>/etc/ssh/sshd_config</code>:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/ssh/sshd_config</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">.....
+Match User <i>someuser</i>
+       ChrootDirectory <i>/chroot/%u</i>
+       ForceCommand internal-sftp
+       AllowTcpForwarding no
+       X11Forwarding no
+.....
+</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> The chroot directory <b>must</b> be owned by root, otherwise you will not be able to connect.</div>
+<p>See also <a href="../en/SFTP_chroot.html" title="SFTP chroot">SFTP chroot</a>. For more information check the <span class="plainlinks archwiki-template-man" title="$ man 5 sshd_config"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/sshd_config.5">sshd_config(5)</a></span> man page for <code>Match</code>, <code>ChrootDirectory</code> and <code>ForceCommand</code>.
+</p>
+<h3><span class="mw-headline" id="systemd">systemd</span></h3>
+<p>Similar to other file system mounts see <span class="plainlinks archwiki-template-man" title="$ man 5 systemd.mount"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd.mount.5">systemd.mount(5)</a></span> and possibly <span class="plainlinks archwiki-template-man" title="$ man 5 systemd.automount"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd.automount.5">systemd.automount(5)</a></span>. Because of the FUSE system and its mechanics you should use <a href="../en/Systemd/User.html" title="Systemd/User">user units</a>. Setup SSH with public key authentication.
+</p>
+<h4><span class="mw-headline" id="As_user_unit">As user unit</span></h4>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../File:Tango-edit-clear.svg" decoding="async" width="48" height="48" class="mw-file-element"></span></span><b>This article or section needs language, wiki syntax or style improvements. See <a href="../en/Help:Style.html" title="Help:Style">Help:Style</a> for reference.</b></p>
+<div>
+<b>Reason:</b> Add an example of a working user <i>.mount</i> unit. (Discuss in <a rel="nofollow" class="external text" href="../en/Talk:SSHFS.html">Talk:SSHFS</a>)</div>
+</div>
+<p>Place the <code><i>foo</i>.mount</code> inside <code>${XDG_CONFIG_HOME}/systemd/user/</code>.
+</p>
+<p><a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Start">Start</a> the unit as usual with the <code>--user</code> option.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> <span class="plainlinks archwiki-template-man" title="$ man 5 systemd.automount"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd.automount.5#DESCRIPTION">systemd.automount(5) § DESCRIPTION</a></span> says: "Note that automount support on Linux is privileged, automount units are hence only available in the system service manager (and root's user service manager), but not in unprivileged users' service managers."</div>
+<h5><span class="mw-headline" id="Use_ssh-key_with_passphrase">Use ssh-key with passphrase</span></h5>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> The user has to enter the passphrase for the ssh-key manually, this is not intended to work without any user interaction.</div>
+<p>See <a href="../en/SSH_keys.html#Start_ssh-agent_with_systemd_user" title="SSH keys">SSH keys#Start ssh-agent with systemd user</a>.
+</p>
+<h4><span class="mw-headline" id="Generate_.mount_and_.automount_files">Generate .mount and .automount files</span></h4>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../File:Tango-edit-cut.svg" decoding="async" width="48" height="48" class="mw-file-element"></span></span><b>This article or section is being considered for removal.</b></p>
+<div>
+<b>Reason:</b> Using sshfs in fstab is explained in <a href="#systemd_root_and_multiple_user">#systemd root and multiple user</a> along with a big warning. (Discuss in <a rel="nofollow" class="external text" href="../en/Talk:SSHFS.html">Talk:SSHFS</a>)</div>
+</div>
+<p>Create an entry in /etc/fstab <a href="../en/Fstab.html#Remote_file_system" title="Fstab">with at least _netdev</a>, <i>x-systemd.automount</i> is only necessary if you need automount functionality.
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/fstab</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">remoteuser@remotehost:/remote/folder /home/foo/local_folder fuse.sshfs <b>_netdev,x-systemd.automount,x-systemd.idle-timeout=5min,</b>rw   0   0</pre>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> If you can manually mount a remote file system with the sshfs command, then you probably can copy the last line from <b>/proc/mounts</b> and insert the highlighted part.</div>
+<pre># systemctl daemon-reload</pre>
+<p>All the generated files are after the daemon-reload command in <i>/run/systemd/generator/</i>. For user units you can copy the files you need and remove the fstab line and reload systemd
+</p>
+<h4><span class="mw-headline" id="Write_.mount_and_.automount_files">Write .mount and .automount files</span></h4>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../File:Tango-edit-clear.svg" decoding="async" width="48" height="48" class="mw-file-element"></span></span><b>This article or section needs language, wiki syntax or style improvements. See <a href="../en/Help:Style.html" title="Help:Style">Help:Style</a> for reference.</b></p>
+<div>
+<b>Reason:</b> This seems to be out of place, the <a href="#systemd_root_and_multiple_user">systemd root</a> section starts below. (Discuss in <a rel="nofollow" class="external text" href="../en/Talk:SSHFS.html">Talk:SSHFS</a>)</div>
+</div>
+<p>You will need to <a href="../en/Systemd.html#Writing_unit_files" title="Systemd">write two systemd units</a>: a mount unit and an optional automount unit. <a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Enabling">Enabling</a> the automount unit and keeping the mount unit itself disabled will not block startup and only mount once trying to access the file system. These files need to be named exactly like the mountpoint with "-" signs separating the folders within the path.
+</p>
+<p>Mount unit, needs to be named exactly like the mountpoint (here, <code>/mnt/data</code> becomes <code>mnt-data</code>):
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">systemd-escape -p --suffix=mount "/mnt/data/"</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">mnt-data.mount</pre>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/system/mnt-data.mount</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Unit]
+Description=SSHFS (remote.local)
+Before=remote-fs.target
+
+[Mount]
+What=user@remote.local:/mnt/data
+Where=/mnt/data
+Type=fuse.sshfs
+Options=_netdev,rw,nosuid,allow_other,uid=1000,gid=1000,default_permissions,follow_symlinks,idmap=user,identityfile=/home/<i>user</i>/.ssh/id_ed25519
+
+[Install]
+WantedBy=remote-fs.target
+WantedBy=multi-user.target</pre>
+<p>The automount unit file also needs to be named exactly like the mountpoint:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/system/mnt-data.automount</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Unit]
+Description=Automount /mnt/data
+
+[Automount]
+Where=/mnt/data
+TimeoutIdleSec=0
+
+[Install]
+WantedBy=multi-user.target</pre>
+<h3><span class="mw-headline" id="systemd_root_and_multiple_user">systemd root and multiple user</span></h3>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../File:Inaccurate.svg" decoding="async" width="48" height="48" class="mw-file-element"></span></span><b>The factual accuracy of this article or section is disputed.</b></p>
+<div>
+<b>Reason:</b> There are only a few use cases in lets say home environments, where you want to use these tricks, but you have to bend always something (e.g. allow_other, ssh-keys ...). Using fstab to have it mount at boot time without passphrase is probably not really necessary. Consider using systemd User- units for all users who need it. (Discuss in <a rel="nofollow" class="external text" href="../en/Talk:SSHFS.html">Talk:SSHFS</a>)</div>
+</div>
+<p>Automounting can happen on boot, or on demand (when accessing the directory). For both, the setup happens in the <a href="../en/Fstab.html" title="Fstab">fstab</a>.
+</p>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Warning:</strong> The private SSH key cannot be passphrase-protected for automounting to work (there is no interface to prompt the user for a passphrase when the mounting is triggered). Keeping the private key unencrypted on disk has security implications.</div>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> Keep in mind that automounting is done through the root user, therefore you cannot use hosts configured in <code>.ssh/config</code> of your normal user.
+<p>To let the root user use an SSH key of a normal user, specify its full path in the <code>IdentityFile</code> option.
+</p>
+<p><b>And most importantly</b>, use each sshfs mount at least once manually <b>while root</b> on the client machine so the host's signature is added to the client's <code>/root/.ssh/known_hosts</code> file. This can also be done manually by appending one or more of the SSH server's public host keys (the <code>/etc/ssh/ssh_host_*key.pub</code> files) to <code>/root/.ssh/known_hosts</code>.
+</p>
+</div>
+<h4><span class="mw-headline" id="On_demand">On demand</span></h4>
+<p>With systemd, on-demand mounting is possible using <code>/etc/fstab</code> entries.
+</p>
+<p>Example:
+</p>
+<pre><i>user</i>@<i>host</i>:<i>/remote/path /local/path</i>  fuse.sshfs x-systemd.automount,_netdev,users,idmap=user,IdentityFile=/home/<i>user</i>/.ssh/id_rsa,allow_other,reconnect 0 0
+</pre>
+<p>The important mount options here are <i>x-systemd.automount,_netdev</i>.
+</p>
+<ul>
+<li>
+<i>x-systemd.automount</i> does the on-demand magic</li>
+<li>
+<i>_netdev</i> tells it that it is a network device, not a block device (without it, "No such device" errors might happen)</li>
+</ul>
+<p>See also <a href="../en/Fstab.html#Automount_with_systemd" title="Fstab">fstab#Automount with systemd</a>.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> After editing <code>/etc/fstab</code>, <a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Reload">reload</a> the systemd configuration and the required services, which can be found by running <code>systemctl list-unit-files --type automount</code>.</div>
+<h4><span class="mw-headline" id="On_boot">On boot</span></h4>
+<p>An example on how to use sshfs to mount a remote file system through <code>/etc/fstab</code>
+</p>
+<pre><i>user</i>@<i>host</i>:<i>/remote/path  /local/path</i>  fuse.sshfs  _netdev  0  0
+</pre>
+<p>Take for example the <i>fstab</i> line
+</p>
+<pre>llib@192.168.1.200:/home/llib/FAH  /media/FAH2  fuse.sshfs  _netdev  0  0
+</pre>
+<p>The above will work automatically if you are using an SSH key for the user that is not password-protected. See <a href="../en/SSH_keys.html" class="mw-redirect" title="Using SSH Keys">Using SSH Keys</a>.
+</p>
+<p>If you want to use sshfs with multiple users, add the following option:
+</p>
+<pre>user@domain.org:/home/user  /media/user   fuse.sshfs    <b>allow_other</b>,_netdev    0  0
+</pre>
+<p>In order to ensure the network is available before trying to mount, it is not only important to set the <code>_netdev</code> mount option, but also to add either <code>--any</code> or a specific <code>--interface</code> to the appropriate <a href="../en/Systemd.html#Running_services_after_the_network_is_up" title="Systemd">wait-online service</a> for your network manager.
+</p>
+<h4><span class="mw-headline" id="Secure_user_access">Secure user access</span></h4>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../File:Inaccurate.svg" decoding="async" width="48" height="48" class="mw-file-element"></span></span><b>The factual accuracy of this article or section is disputed.</b></p>
+<div>
+<b>Reason:</b> The <i>Secure user access</i> is misleading, the <code>allow_other</code> option removes some "security" aspect (<span class="plainlinks archwiki-template-man" title="$ man 8 mount.fuse"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/mount.fuse.8#SECURITY">mount.fuse(8) § SECURITY</a></span>). (Discuss in <a rel="nofollow" class="external text" href="../en/Talk:SSHFS.html">Talk:SSHFS</a>)</div>
+</div>
+<p>When automounting via <a href="../en/Fstab.html" title="Fstab">fstab</a>, the file system will generally be mounted by root. By default, this produces undesireable results if you wish access as an ordinary user and limit access to other users.
+</p>
+<p>An example mountpoint configuration:
+</p>
+<pre><i>user</i>@<i>host</i>:<i>/remote/path /local/path</i>  fuse.sshfs noauto,x-systemd.automount,_netdev,user,idmap=user,follow_symlinks,identityfile=/home/<i>user</i>/.ssh/id_rsa,allow_other,default_permissions,uid=USER_ID_N,gid=USER_GID_N 0 0
+</pre>
+<p>See <a href="#allow_root_or_allow_other">#allow_root or allow_other</a> for the explanation of the options used.
+</p>
+<h2><span class="mw-headline" id="Troubleshooting">Troubleshooting</span></h2>
+<h3><span class="mw-headline" id="Checklist">Checklist</span></h3>
+<p>Read <a href="../en/OpenSSH.html#Checklist" title="OpenSSH">OpenSSH#Checklist</a> first. Further issues to check are:
+</p>
+<ol>
+<li>Is your SSH login sending additional information from server's <code>/etc/issue</code> file e.g.? This might confuse SSHFS. You should temporarily deactivate server's <code>/etc/issue</code> file: <pre>$ mv /etc/issue /etc/issue.orig</pre>
+</li>
+<li>Keep in mind that most SSH related troubleshooting articles you will find on the web are <b>not</b> systemd related. Often <code>/etc/fstab</code> definitions wrongly begin with <pre><i>sshfs#</i>user@host:/mnt/server/directory ... fuse ...</pre> instead of using the syntax <pre>user@host:/mnt/server/directory ... fuse.<i>sshfs</i> ... <i>x-systemd</i>, ...</pre>
+</li>
+<li>Check that the owner of server's source directory and content is owned by the server's user. <pre>$ chown -R <i>user_s</i>: /mnt/servers/directory</pre>
+</li>
+<li>The server's user ID can be different from the client's one. Obviously both user names have to be the same. You just have to care for the client's user IDs. SSHFS will translate the UID for you with the following mount options:<pre>uid=<i>USER_C_ID</i>,gid=<i>GROUP_C_ID</i></pre>
+</li>
+<li>Check that the client's target mount point (directory) is owned by the client user. This directory should have the same user ID as defined in SSHFS's mount options.<pre>$ chown -R <i>user_c</i>: /mnt/client/directory</pre>
+</li>
+<li>Check that the client's mount point (directory) is empty. By default you cannot mount SSHFS directories to non-empty directories.</li>
+</ol>
+<h3><span class="mw-headline" id="Connection_reset_by_peer">Connection reset by peer</span></h3>
+<ul>
+<li>If you are trying to access the remote system with a hostname, try using its IP address, as it can be a domain name resolving issue. Make sure you edit <code>/etc/hosts</code> with the server details.</li>
+<li>Make sure your user can log into the server (especially when using <code>AllowUsers</code>).</li>
+<li>Make sure <code>Subsystem sftp /usr/lib/ssh/sftp-server</code> is enabled in <code>/etc/ssh/sshd_config</code> on the remote system.</li>
+<li>If you are using a non-default key name and passing it as <code>-i .ssh/my_key</code>, this will not work. You have to use <code>-o IdentityFile=/home/<i>user</i>/.ssh/<i>my_key</i></code>, with the full path to the key.</li>
+<li>If your <code>/root/.ssh/config/</code> is a symlink, you will be getting this error as well. See <a rel="nofollow" class="external text" href="https://serverfault.com/questions/507748/bad-owner-or-permissions-on-root-ssh-config">this serverfault topic</a>
+</li>
+<li>Adding the option <code>sshfs_debug</code> (as in <code>sshfs -o sshfs_debug <i>user</i>@<i>server</i> ...</code>) can help in resolving the issue.</li>
+<li>If that does not reveal anything useful, you might also try adding the option <code>debug</code>.</li>
+<li>If you are trying to sshfs into a router running DD-WRT or the like, there is a solution <a rel="nofollow" class="external text" href="https://www.dd-wrt.com/wiki/index.php/SFTP_with_DD-WRT">here</a>. (Note that the <code>-osftp_server=/opt/libexec/sftp-server</code> option can be used to the sshfs command instead of patching dropbear).</li>
+<li>If you see this only on boot, it may be that systemd is attempting to mount prior to a network connection being available. Enabling the appropriate <a href="../en/Systemd.html#Running_services_after_the_network_is_up" title="Systemd">wait-online service</a> for your network manager fixes this.</li>
+<li>Old Forum thread: <a rel="nofollow" class="external text" href="https://bbs.archlinux.org/viewtopic.php?id=27613">sshfs: Connection reset by peer</a>.</li>
+</ul>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> When providing more than one option for sshfs, they must be comma separated. Like so: <code>sshfs -o sshfs_debug,IdentityFile=<i>/path/to/key</i> <i>user</i>@<i>server</i> ...</code>).</div>
+<h3><span class="mw-headline" id="Remote_host_has_disconnected">Remote host has disconnected</span></h3>
+<p>If you receive this message directly after attempting to use <i>sshfs</i>:
+</p>
+<ul>
+<li>First make sure that the <b>remote</b> machine has <i>sftp</i> installed! It will not work, if not.</li>
+<li>Then, check that the path of the <code>Subsystem sftp</code> in <code>/etc/ssh/sshd_config</code> on the remote machine is valid.</li>
+</ul>
+<h3><span class="mw-headline" id="fstab_mounting_issues">fstab mounting issues</span></h3>
+<p>To get verbose debugging output, add the following to the mount options:
+</p>
+<pre>ssh_command=ssh\040-vv,sshfs_debug,debug
+</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> Here, <code>\040</code> represents a space which fstab uses to separate fields.</div>
+<p>To be able to run <code>mount -av</code> and see the debug output, remove the following:
+</p>
+<pre> noauto,x-systemd.automount
+</pre>
+<h3><span class="mw-headline" id="Some_directories_are_empty">Some directories are empty</span></h3>
+<p>sshfs by default does not support symlinks. If those directories happened to be symlinks, use:
+</p>
+<pre>$ sshfs <i>user</i>@<i>host</i>:<i>/remote/path /local/path</i> -o follow_symlinks
+</pre>
+<h3><span class="mw-headline" id="Files_not_refreshed">Files not refreshed</span></h3>
+<p>If you see old content on remote, consider using option <code>dir_cache=no</code>:
+</p>
+<pre>$ sshfs <i>user</i>@<i>host</i>:<i>/remote/path /local/path</i> -o dir_cache=no
+</pre>
+<h3><span class="mw-headline" id="Limited_transfer_speed_on_fast_network">Limited transfer speed on fast network</span></h3>
+<p>If you observe transfer speed that is lower than your network capabilities and high CPU usage on the party where files are copied from, disable compression (remove <code>-C</code> option or set <code>-o compression=no</code>).
+</p>
+<h2><span class="mw-headline" id="See_also">See also</span></h2>
+<ul><li>
+<a rel="nofollow" class="external text" href="https://wiki.gilug.org/index.php/How_to_mount_SFTP_accesses">How to mount chrooted SSH file system</a>, with special care with owners and permissions questions.</li></ul>
+</div>
+</div>
+					<div id="catlinks" class="catlinks" data-mw="interface">
+<div id="mw-normal-catlinks" class="mw-normal-catlinks">
+<a href="../Special:Categories.html" title="Special:Categories">Categories</a>: <ul>
+<li><a href="../en/Category:FUSE.html" title="Category:FUSE">FUSE</a></li>
+<li><a href="../en/Category:Secure_Shell.html" title="Category:Secure Shell">Secure Shell</a></li>
+<li><a href="../en/Category:Network_sharing.html" title="Category:Network sharing">Network sharing</a></li>
+</ul>
+</div>
+<div id="mw-hidden-catlinks" class="mw-hidden-catlinks mw-hidden-cats-hidden">Hidden categories: <ul>
+<li><a href="../en/Category:Pages_or_sections_flagged_with_Template:Style.html" title="Category:Pages or sections flagged with Template:Style">Pages or sections flagged with Template:Style</a></li>
+<li><a href="../en/Category:Sections_flagged_with_Template:Remove.html" title="Category:Sections flagged with Template:Remove">Sections flagged with Template:Remove</a></li>
+<li><a href="../en/Category:Pages_or_sections_flagged_with_Template:Accuracy.html" title="Category:Pages or sections flagged with Template:Accuracy">Pages or sections flagged with Template:Accuracy</a></li>
+</ul>
+</div>
+</div>
+				</div>
+			</main>
+			
+		</div>
+		<div class="mw-footer-container">
+			
+<footer id="footer" class="mw-footer" style="margin: 0">
+	<ul id="footer-info">
+	<li data-nosnippet="">Retrieved from "<a dir="ltr" href="https://wiki.archlinux.org/index.php?title=SSHFS&amp;oldid=825501">https://wiki.archlinux.org/index.php?title=SSHFS&amp;oldid=825501</a>"</li>
+<li id="footer-info-lastmod"> This page was last edited on 19 January 2025, at 13:05.</li>
+	<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+<br>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="https://terms.archlinux.org/docs/privacy-policy/">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="../en/ArchWiki:About.html">About ArchWiki</a></li>
+	<li id="footer-places-disclaimers"><a href="../en/ArchWiki:General_disclaimer.html">Disclaimers</a></li>
+	<li id="footer-places-archwiki-code-of-conduct"><a href="https://terms.archlinux.org/docs/code-of-conduct/" class="extiw" title="archlinux-service-agreements:code-of-conduct">Code of conduct</a></li>
+	<li id="footer-places-archwiki-terms-of-service"><a href="https://terms.archlinux.org/docs/terms-of-service/" class="extiw" title="archlinux-service-agreements:terms-of-service">Terms of service</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-copyrightico"><a href="https://www.gnu.org/copyleft/fdl.html" class="cdx-button cdx-button--fake-button cdx-button--size-large cdx-button--fake-button--enabled"><img src="/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" loading="lazy"></a></li>
+	<li id="footer-poweredbyico"><img src="/resources/assets/poweredby_mediawiki.svg" width="88" height="31" loading="lazy"></li>
+</ul>
+
+</footer>
+
+		</div>
+	</div> 
+</div> 
+<div class="vector-settings" id="p-dock-bottom">
+	<ul></ul>
+</div>
+</body>
+</html>

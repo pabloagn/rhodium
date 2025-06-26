@@ -1,0 +1,47 @@
+<h1>duplicity</h1>
+
+<blockquote><p>Crea archivi incrementali, compressi, cifrati con controllo di versione.
+Può caricare i backup su una varietà di servizi backend.
+Maggiori informazioni: <a href="https://duplicity.gitlab.io">https://duplicity.gitlab.io</a>.</p></blockquote>
+
+<ul>
+<li>Esegui il backup di una directory via FTPS su una macchina remota, cifrandolo con una password:</li>
+</ul>
+
+
+<p><code>FTP_PASSWORD={{password_login_ftp}} PASSPHRASE={{password_cifratura}} duplicity {{percorso/della/directory_sorgente}} {{ftps://utente@hostname/percorso/della/directory_target/}}</code></p>
+
+<ul>
+<li>Esegui il backup di una directory in un server Amazon S3, facendo un backup completo ogni mese:</li>
+</ul>
+
+
+<p><code>duplicity --full-if-older-than {{1M}} s3://{{nome_bucket[/prefisso]}}</code></p>
+
+<ul>
+<li>Elimina le versioni più vecchie di un anno da un backup salvato in un server WebDAV:</li>
+</ul>
+
+
+<p><code>FTP_PASSWORD={{password_login_webdav}} duplicity remove-older-than {{1Y}} --force {{webdav[s]://utente@hostname[:porta]/directory}}</code></p>
+
+<ul>
+<li>Elenca i backup disponibili:</li>
+</ul>
+
+
+<p><code>duplicity collection-status "file://{{percorso/assoluto/della/directory/di/backup}}"</code></p>
+
+<ul>
+<li>Elenca i file in un backup salvato su una macchina remota, via SSH:</li>
+</ul>
+
+
+<p><code>duplicity list-current-files --time {{YYYY-MM-DD}} scp://{{utente@hostname}}/{{percorso/della/directory/backup}}</code></p>
+
+<ul>
+<li>Ripristina una sotto-directory da un backup locale cifrato con GnuPG in una posizione precisa:</li>
+</ul>
+
+
+<p><code>PASSPHRASE={{password_chiave_gpg}} duplicity restore --encrypt-key {{id_chiave_gpg}} --path-to-restore {{percorso/relativo/sotto_directory}} file://{{percorso/assoluto/della/directory/di/backup}} {{percorso/della/directory/dove/ripristinare}}</code></p>

@@ -1,0 +1,47 @@
+<h1>scamper</h1>
+
+<blockquote><p>Actively probes the Internet in order to analyze topology and performance.
+Includes some tools that start with <code>sc_</code>, for example <code>sc_warts2text</code> or <code>sc_ttlexp</code>.
+More information: <a href="https://www.caida.org/catalog/software/scamper/">https://www.caida.org/catalog/software/scamper/</a>.</p></blockquote>
+
+<ul>
+<li>Execute the standard option (traceroute) to a destination:</li>
+</ul>
+
+
+<p><code>scamper -i {{192.0.2.1}}</code></p>
+
+<ul>
+<li>Execute two actions (ping and traceroute) on two different targets:</li>
+</ul>
+
+
+<p><code>scamper -I "{{ping}} {{192.0.2.1}}" -I "{{trace}} {{192.0.2.2}}"</code></p>
+
+<ul>
+<li>Ping several hosts with UDP, use a specific port number for the first ping and increase it for each subsequent ping:</li>
+</ul>
+
+
+<p><code>scamper -c "{{ping}} -P {{UDP-dport}} -d {{33434}}" -i {{192.0.2.1}} -i {{192.0.2.2}}</code></p>
+
+<ul>
+<li>Use the Multipath Discovery Algorithm (MDA) to determine the presence of load-balanced paths to the destination and use ICMP echo packets to sample with a maximum of three attempts, write the result to a <code>warts</code> file:</li>
+</ul>
+
+
+<p><code>scamper -O {{warts}} -o {{path/to/output.warts}} -I "{{tracelb}} -P {{ICMP-echo}} -q {{3}} {{192.0.2.1}}"</code></p>
+
+<ul>
+<li>Execute a Paris traceroute with ICMP to a destination and save the result in a compressed <code>warts</code> file:</li>
+</ul>
+
+
+<p><code>scamper -O {{warts.gz}} -o {{path/to/output.warts}} -I "{{trace}} -P {{icmp-paris}} {{2001:db8:dead:beaf::4}}"</code></p>
+
+<ul>
+<li>Record all ICMP packets that arrive at a specific IP address and have a specific ICMP ID in a <code>warts</code> file:</li>
+</ul>
+
+
+<p><code>scamper -O {{warts}} -o {{path/to/output.warts}} -I "sniff -S {{2001:db8:dead:beef::6}} icmp[icmpid] == {{101}}"</code></p>

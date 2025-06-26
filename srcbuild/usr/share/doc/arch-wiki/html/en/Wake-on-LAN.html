@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-sticky-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-0 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-disabled skin-theme-clientpref-day vector-toc-available" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>Wake-on-LAN - ArchWiki</title>
+<link rel="stylesheet" href="../ArchWikiOffline.css">
+<meta name="ResourceLoaderDynamicStyles" content="">
+<meta name="generator" content="MediaWiki 1.43.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="max-image-preview:standard">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.25, maximum-scale=5.0">
+<link rel="search" type="application/opensearchdescription+xml" href="/rest.php/v1/search" title="ArchWiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.archlinux.org/api.php?action=rsd">
+<link rel="license" href="https://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="ArchWiki Atom feed" href="/index.php?title=Special:RecentChanges&amp;feed=atom">
+</head>
+<body class="skin--responsive skin-vector skin-vector-search-vue mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Wake-on-LAN rootpage-Wake-on-LAN skin-vector-2022 action-view">
+<a class="mw-jump-link" href="#bodyContent">Jump to content</a>
+<div class="vector-header-container">
+	</div>
+<div class="mw-page-container">
+	<div class="mw-page-container-inner">
+		<div class="vector-column-start">
+			<div class="vector-main-menu-container">
+		</div>
+	<div class="vector-sticky-pinned-container">
+				<nav id="mw-panel-toc" aria-label="Contents" data-event-name="ui.sidebar-toc" class="mw-table-of-contents-container vector-toc-landmark">
+					<div id="vector-toc-pinned-container" class="vector-pinned-container">
+					<div id="vector-toc" class="vector-toc vector-pinnable-element">
+	<div class="vector-pinnable-header vector-toc-pinnable-header vector-pinnable-header-pinned" data-feature-name="toc-pinned" data-pinnable-element-id="vector-toc">
+	<h2 class="vector-pinnable-header-label">Contents</h2>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-toc.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-toc.unpin">hide</button>
+</div>
+
+
+	<ul class="vector-toc-contents" id="mw-panel-toc-list">
+		<li id="toc-mw-content-text" class="vector-toc-list-item vector-toc-level-1">
+			<a href="#" class="vector-toc-link">
+				<div class="vector-toc-text">Beginning</div>
+			</a>
+		</li>
+		<li id="toc-Hardware_settings" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Hardware_settings">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">1</span>
+				<span>Hardware settings</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Hardware_settings-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Software_configuration" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Software_configuration">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">2</span>
+				<span>Software configuration</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Software_configuration-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Software configuration subsection</span>
+			</button>
+		
+		<ul id="toc-Software_configuration-sublist" class="vector-toc-list">
+			<li id="toc-Enable_WoL_on_the_network_adapter" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Enable_WoL_on_the_network_adapter">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1</span>
+					<span>Enable WoL on the network adapter</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Enable_WoL_on_the_network_adapter-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Make_it_persistent" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Make_it_persistent">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2</span>
+					<span>Make it persistent</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Make_it_persistent-sublist" class="vector-toc-list">
+				<li id="toc-systemd.link" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#systemd.link">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2.1</span>
+					<span>systemd.link</span>
+				</div>
+			</a>
+			
+			<ul id="toc-systemd.link-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-systemd_service" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#systemd_service">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2.2</span>
+					<span>systemd service</span>
+				</div>
+			</a>
+			
+			<ul id="toc-systemd_service-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-udev" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#udev">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2.3</span>
+					<span>udev</span>
+				</div>
+			</a>
+			
+			<ul id="toc-udev-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-cron" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#cron">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2.4</span>
+					<span>cron</span>
+				</div>
+			</a>
+			
+			<ul id="toc-cron-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-netctl" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#netctl">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2.5</span>
+					<span>netctl</span>
+				</div>
+			</a>
+			
+			<ul id="toc-netctl-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-NetworkManager" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#NetworkManager">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2.6</span>
+					<span>NetworkManager</span>
+				</div>
+			</a>
+			
+			<ul id="toc-NetworkManager-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Enable_WoL_in_TLP" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Enable_WoL_in_TLP">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.3</span>
+					<span>Enable WoL in TLP</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Enable_WoL_in_TLP-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Trigger_a_wake_up" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Trigger_a_wake_up">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">3</span>
+				<span>Trigger a wake up</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Trigger_a_wake_up-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Trigger a wake up subsection</span>
+			</button>
+		
+		<ul id="toc-Trigger_a_wake_up-sublist" class="vector-toc-list">
+			<li id="toc-On_the_same_LAN" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#On_the_same_LAN">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1</span>
+					<span>On the same LAN</span>
+				</div>
+			</a>
+			
+			<ul id="toc-On_the_same_LAN-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Across_the_internet" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Across_the_internet">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.2</span>
+					<span>Across the internet</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Across_the_internet-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Miscellaneous" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Miscellaneous">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">4</span>
+				<span>Miscellaneous</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Miscellaneous-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Miscellaneous subsection</span>
+			</button>
+		
+		<ul id="toc-Miscellaneous-sublist" class="vector-toc-list">
+			<li id="toc-Check_reception_of_the_magic_packets" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Check_reception_of_the_magic_packets">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.1</span>
+					<span>Check reception of the magic packets</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Check_reception_of_the_magic_packets-sublist" class="vector-toc-list">
+				<li id="toc-Using_netcat" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Using_netcat">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.1.1</span>
+					<span>Using netcat</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Using_netcat-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Using_ngrep" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Using_ngrep">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.1.2</span>
+					<span>Using ngrep</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Using_ngrep-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Example_of_WoL_script" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Example_of_WoL_script">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.2</span>
+					<span>Example of WoL script</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Example_of_WoL_script-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Troubleshooting" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Troubleshooting">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">5</span>
+				<span>Troubleshooting</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Troubleshooting-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Troubleshooting subsection</span>
+			</button>
+		
+		<ul id="toc-Troubleshooting-sublist" class="vector-toc-list">
+			<li id="toc-NetworkManager_2" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#NetworkManager_2">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.1</span>
+					<span>NetworkManager</span>
+				</div>
+			</a>
+			
+			<ul id="toc-NetworkManager_2-sublist" class="vector-toc-list">
+				<li id="toc-Network_adapter_is_still_powered_off_on_shutdown" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Network_adapter_is_still_powered_off_on_shutdown">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.1.1</span>
+					<span>Network adapter is still powered off on shutdown</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Network_adapter_is_still_powered_off_on_shutdown-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Wake-up_after_shutdown" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Wake-up_after_shutdown">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.2</span>
+					<span>Wake-up after shutdown</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Wake-up_after_shutdown-sublist" class="vector-toc-list">
+				<li id="toc-Fix_using_BIOS_Settings" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Fix_using_BIOS_Settings">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.2.1</span>
+					<span>Fix using BIOS Settings</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Fix_using_BIOS_Settings-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Fix_by_kernel_quirks" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Fix_by_kernel_quirks">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.2.2</span>
+					<span>Fix by kernel quirks</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Fix_by_kernel_quirks-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Battery_draining_problem" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Battery_draining_problem">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.3</span>
+					<span>Battery draining problem</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Battery_draining_problem-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Realtek" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Realtek">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.4</span>
+					<span>Realtek</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Realtek-sublist" class="vector-toc-list">
+				<li id="toc-r8168" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#r8168">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.4.1</span>
+					<span>r8168</span>
+				</div>
+			</a>
+			
+			<ul id="toc-r8168-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-r8125" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#r8125">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.4.2</span>
+					<span>r8125</span>
+				</div>
+			</a>
+			
+			<ul id="toc-r8125-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-alx_driver_support" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#alx_driver_support">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.5</span>
+					<span>alx driver support</span>
+				</div>
+			</a>
+			
+			<ul id="toc-alx_driver_support-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+</ul>
+</div>
+
+					</div>
+		</nav>
+			</div>
+		</div>
+		<div class="mw-content-container">
+			<main id="content" class="mw-body" style="margin: 0">
+				<header class="mw-body-header vector-page-titlebar">
+					<nav aria-label="Contents" class="vector-toc-landmark">
+						
+<div id="vector-page-titlebar-toc" class="vector-dropdown vector-page-titlebar-toc vector-button-flush-left">
+	<input type="checkbox" id="vector-page-titlebar-toc-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-page-titlebar-toc" class="vector-dropdown-checkbox " aria-label="Toggle the table of contents">
+	<label id="vector-page-titlebar-toc-label" for="vector-page-titlebar-toc-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"><span class="vector-icon mw-ui-icon-listBullet mw-ui-icon-wikimedia-listBullet"></span>
+
+<span class="vector-dropdown-label-text">Toggle the table of contents</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+							<div id="vector-page-titlebar-toc-unpinned-container" class="vector-unpinned-container">
+			</div>
+		
+	</div>
+</div>
+
+					</nav>
+					<h1 id="firstHeading" class="firstHeading mw-first-heading"><span class="mw-page-title-main">Wake-on-LAN</span></h1>
+							
+<div id="p-lang-btn" class="vector-dropdown mw-portlet mw-portlet-lang">
+	<input type="checkbox" id="p-lang-btn-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-p-lang-btn" class="vector-dropdown-checkbox mw-interlanguage-selector" aria-label="Go to an article in another language. Available in 2 languages">
+	<label id="p-lang-btn-label" for="p-lang-btn-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--action-progressive mw-portlet-lang-heading-2" aria-hidden="true"><span class="vector-icon mw-ui-icon-language-progressive mw-ui-icon-wikimedia-language-progressive"></span>
+
+<span class="vector-dropdown-label-text">2 languages</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+		<div class="vector-menu-content">
+			
+			<ul class="vector-menu-content-list">
+				
+				<li class="interlanguage-link interwiki-ja mw-list-item"><a href="https://wiki.archlinux.jp/index.php/Wake-on-LAN" title="Wake-on-LAN – 日本語" lang="ja" hreflang="ja" data-title="Wake-on-LAN" data-language-autonym="日本語" data-language-local-name="日本語" class="interlanguage-link-target"><span>日本語</span></a></li>
+<li class="interlanguage-link interwiki-zh-hans mw-list-item"><a href="https://wiki.archlinuxcn.org/wiki/Wake-on-LAN" title="Wake-on-LAN – 中文（简体）" lang="zh-Hans" hreflang="zh-Hans" data-title="Wake-on-LAN" data-language-autonym="中文（简体）" data-language-local-name="中文（简体）" class="interlanguage-link-target"><span>中文（简体）</span></a></li>
+			</ul>
+			
+		</div>
+
+	</div>
+</div>
+</header>
+				<div class="vector-column-end">
+					<div class="vector-sticky-pinned-container">
+						<nav class="vector-page-tools-landmark" aria-label="Page tools">
+							<div id="vector-page-tools-pinned-container" class="vector-pinned-container">
+				
+							</div>
+		</nav>
+						<nav class="vector-appearance-landmark" aria-label="Appearance">
+							<div id="vector-appearance-pinned-container" class="vector-pinned-container">
+				<div id="vector-appearance" class="vector-appearance vector-pinnable-element">
+	<div class="vector-pinnable-header vector-appearance-pinnable-header vector-pinnable-header-pinned" data-feature-name="appearance-pinned" data-pinnable-element-id="vector-appearance" data-pinned-container-id="vector-appearance-pinned-container" data-unpinned-container-id="vector-appearance-unpinned-container">
+	<div class="vector-pinnable-header-label">Appearance</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-appearance.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-appearance.unpin">hide</button>
+</div>
+
+
+</div>
+
+							</div>
+		</nav>
+					</div>
+				</div>
+				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container>
+					<div class="vector-body-before-content">
+							<div class="mw-indicators">
+		</div>
+
+						<div id="siteSub" class="noprint">From ArchWiki</div>
+					</div>
+					<div id="contentSub"><div id="mw-content-subtitle"></div></div>
+					
+					
+					<div id="mw-content-text" class="mw-body-content">
+<div class="mw-content-ltr mw-parser-output" lang="en" dir="ltr">
+<div class="archwiki-template-meta-related-articles">
+<p>Related articles</p>
+<ul>
+<li><a href="../en/Power_management/Wakeup_triggers.html" class="mw-redirect" title="Wakeup triggers">Wakeup triggers</a></li>
+</ul>
+</div>
+<p><a href="https://en.wikipedia.org/wiki/Wake-on-LAN" class="extiw" title="wikipedia:Wake-on-LAN">Wake-on-LAN</a> (WoL) is a feature to switch on a computer via the network.
+</p>
+<meta property="mw:PageProp/toc">
+<h2><span class="mw-headline" id="Hardware_settings">Hardware settings</span></h2>
+<p>Wake-On-LAN only works if you fulfill the following preconditions:
+</p>
+<ol>
+<li>The target computer's motherboard and <a href="https://en.wikipedia.org/wiki/Network_interface_controller" class="extiw" title="wikipedia:Network interface controller">Network Interface Controller</a> has to support Wake-on-LAN.</li>
+<li>The target computer has to be <i>physically</i> connected (with a cable) to a router or to the source computer for WoL to work properly <i>unless</i> your wireless card has support for Wake on Wireless (WoWLAN or WoW).</li>
+</ol>
+<p>You have to prepare the following in your BIOS/UEFI:
+</p>
+<ol>
+<li>Enable the Wake-on-LAN feature. Different motherboard manufacturers use slightly different language for this feature. Look for terminology such as "PCI Power up", "Allow PCI wake up event" or "Boot from PCI/PCI-E".</li>
+<li>(If available in BIOS/UEFI) Make sure that <a rel="nofollow" class="external text" href="https://www.cgdirector.com/what-is-erp-mode-erp-ready-in-bios">ErP</a> is <b>disabled</b>, otherwise your Ethernet card will not be powered and will not be able to receive any wake-up packets sent from another device.</li>
+</ol>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> 
+<ul>
+<li>Some motherboards support Wake-on-LAN from a powered-off state, but some only support Wake-on-LAN from a sleep / suspended state.</li>
+<li>Some motherboards are affected by a bug that can cause immediate or random <a href="#Wake-up_after_shutdown">#Wake-up after shutdown</a> whenever the BIOS WoL feature is enabled.</li>
+</ul>
+</div>
+<h2><span class="mw-headline" id="Software_configuration">Software configuration</span></h2>
+<h3><span class="mw-headline" id="Enable_WoL_on_the_network_adapter">Enable WoL on the network adapter</span></h3>
+<p>Depending on the hardware, the network driver may have WoL switched off by default.
+</p>
+<p>To query this status or to change the settings, install <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=ethtool">ethtool</a></span>, determine the name of the <a href="../en/Network_configuration.html#Network_interfaces" class="mw-redirect" title="Network interface">network interface</a>, and query it using the command:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;"># ethtool <i>interface</i> | grep Wake-on</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">Supports Wake-on: pumbag
+Wake-on: d
+</pre>
+<p>The <i>Wake-on</i> values define what activity triggers wake up: <code>d</code> (disabled), <code>p</code> (PHY activity), <code>u</code> (unicast activity), <code>m</code> (multicast activity), <code>b</code> (broadcast activity), <code>a</code> (ARP activity), and <code>g</code> (magic packet activity). The value <code>g</code> is required for WoL to work, if not, the following command enables the WoL feature in the driver:
+</p>
+<pre># ethtool -s <i>interface</i> wol g
+</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> Setting one of <code>u</code>, <code>m</code> or <code>b</code> along with <code>g</code> might also be necessary to enable the feature.</div>
+<p>This command might not last beyond the next reboot and in this case must be repeated via some mechanism. Common solutions are listed in the following subsections.
+</p>
+<h3><span class="mw-headline" id="Make_it_persistent">Make it persistent</span></h3>
+<h4><span class="mw-headline" id="systemd.link">systemd.link</span></h4>
+<p>Link-level configuration is possible through <a href="../en/Network_configuration.html#Network_interfaces" title="Network configuration">systemd.link files</a>. The actual setup is performed by the <code>net_setup_link</code> udev builtin. Add the <code>WakeOnLan</code> option to the network link file:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/network/50-wired.link</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Match]
+MACAddress=<i>aa:bb:cc:dd:ee:ff</i>
+
+[Link]
+NamePolicy=kernel database onboard slot path
+MACAddressPolicy=persistent
+<b>WakeOnLan=magic</b></pre>
+<p>Also see <span class="plainlinks archwiki-template-man" title="$ man 5 systemd.link"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd.link.5">systemd.link(5)</a></span> for more information.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> 
+<ul>
+<li>Only the first matching file is applied. The content of the default link file <code>/usr/lib/systemd/network/99-default.link</code> shipped with systemd has to be included, otherwise the interface might be misconfigured.</li>
+<li>To be considered, the file name should alphabetically come before the default <code>99-default.link</code>. For example <code>50-wired.link</code> works.</li>
+<li>This configuration applies only to the link-level, and is independent of network-level daemons such as <a href="../en/NetworkManager.html" title="NetworkManager">NetworkManager</a> or <a href="../en/Systemd-networkd.html" title="Systemd-networkd">systemd-networkd</a>.</li>
+<li>In the <code>Match</code> section, <code>OriginalName=</code> can also be used to identify the interface.</li>
+</ul>
+</div>
+<h4><span class="mw-headline" id="systemd_service">systemd service</span></h4>
+<p>This is an equivalent of previous <code>systemd.link</code> option, but uses a standalone systemd service.
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/system/wol@.service</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Unit]
+Description=Wake-on-LAN for %i
+Requires=network.target
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/ethtool -s %i wol g
+Type=oneshot
+
+[Install]
+WantedBy=multi-user.target</pre>
+<p>Alternatively install the <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/wol-systemd/">wol-systemd</a></span><sup><small>AUR</small></sup> package, then activate this new service by <a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Starting">starting</a> <code>wol@<i>interface</i>.service</code>.
+</p>
+<h4><span class="mw-headline" id="udev">udev</span></h4>
+<p><a href="../en/Udev.html" title="Udev">udev</a> is capable of running any command as soon as a device is visible. The following rule will turn on WOL on all <a href="../en/Network_configuration.html#Network_interfaces" class="mw-redirect" title="Network interface">network interfaces</a> whose name matches <code>en*</code>. The file name is important and must start with a number between 81 and 99 so that it runs <b>after</b> <code>80-net-setup-link.rules</code>, which renames interfaces with predictable names. Otherwise, <code>NAME</code> would be undefined and the rule would not run.
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/udev/rules.d/<b>81</b>-wol.rules</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">ACTION=="add", SUBSYSTEM=="net", NAME=="en*", RUN+="/usr/bin/ethtool -s $name wol g"</pre>
+<p>The <code>$name</code> placeholder will be replaced by the value of the <code>NAME</code> variable for the matched device.
+</p>
+<h4><span class="mw-headline" id="cron">cron</span></h4>
+<p>A command can be run each time the computer is (re)booted using "@reboot" in a crontab. First, make sure <a href="../en/Cron.html#Installation" title="Cron">cron</a> is enabled, and then <a href="../en/Cron.html#Basic_commands" title="Cron">edit a crontab</a> for the root user that contains the following line:
+</p>
+<pre>@reboot /usr/bin/ethtool -s <i>interface</i> wol g
+</pre>
+<h4><span class="mw-headline" id="netctl">netctl</span></h4>
+<p>If using <a href="../en/Netctl.html" title="Netctl">netctl</a>, one can make this setting persistent by adding the following the netctl profile:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/netctl/<i>profile</i></pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">ExecUpPost='/usr/bin/ethtool -s <i>interface</i> wol g'</pre>
+<h4><span class="mw-headline" id="NetworkManager">NetworkManager</span></h4>
+<p>NetworkManager provides <a rel="nofollow" class="external text" href="https://www.phoronix.com/scan.php?page=news_item&amp;px=NetworkManager-WoL-Control">Wake-on-LAN ethernet support</a>. One way to enable Wake-on-LAN by magic packet is through <i>nmcli</i>.
+</p>
+<p>First, search for the name of the wired connection:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;"># nmcli con show</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">NAME    UUID                                  TYPE            DEVICE
+wired1  612e300a-c047-4adb-91e2-12ea7bfe214e  802-3-ethernet  enp0s25</pre>
+<p>By following, one can view current status of Wake-on-LAN settings:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;"># nmcli c show "wired1" | grep 802-3-ethernet.wake-on-lan</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">802-3-ethernet.wake-on-lan:             default
+802-3-ethernet.wake-on-lan-password:    --</pre>
+<p>Enable Wake-on-LAN by magic packet on that connection:
+</p>
+<pre># nmcli c modify "wired1" 802-3-ethernet.wake-on-lan magic
+</pre>
+<p>Then reboot, possibly two times. To disable Wake-on-LAN, substitute <code>magic</code> with <code>ignore</code>.
+</p>
+<p>The Wake-on-LAN settings can also be changed from the GUI using <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=nm-connection-editor">nm-connection-editor</a></span>.
+</p>
+<p>You can disable Wake-on-LAN for all connections permanently by adding a dedicated configuration file :
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/NetworkManager/conf.d/<i>wake-on-lan.conf</i></pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[connection]
+ethernet.wake-on-lan = ignore
+wifi.wake-on-wlan = ignore</pre>
+<h3><span class="mw-headline" id="Enable_WoL_in_TLP">Enable WoL in TLP</span></h3>
+<p>When using <a href="../en/TLP.html" title="TLP">TLP</a> for suspend/hibernate, the <code>WOL_DISABLE</code> setting should be set to <code>N</code> in <code>/etc/tlp.conf</code> to allow resuming the computer with WoL.
+</p>
+<h2><span class="mw-headline" id="Trigger_a_wake_up">Trigger a wake up</span></h2>
+<p>To trigger WoL on a target machine, its <b>MAC address</b> must be known.
+To obtain it, execute the following command from the machine:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">$ ip link</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default
+   link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+2: enp1s0: &lt;BROADCAST,MULTICAST,PROMISC,UP,LOWER_UP&gt; mtu 1500 qdisc fq_codel master br0 state UP group default qlen 1000
+    link/ether <b>48:05:ca:09:0e:6a</b> brd ff:ff:ff:ff:ff:ff
+</pre>
+<p>Here the MAC address is <code>48:05:ca:09:0e:6a</code>.
+</p>
+<p>In its simplest form, Wake-on-LAN broadcasts the magic packet as an ethernet frame, containing the MAC address within the current network subnet, below the IP protocol layer. The knowledge of an IP address for the target computer is not necessary, as it operates on layer 2 (Data Link).
+</p>
+<p>If used to wake up a computer over the internet or in a different subnet, it typically relies on the router to relay the packet and broadcast it.
+In this scenario, the external IP address of the router must be known. Keep in mind that most routers by default will not relay subnet directed broadcasts as a safety precaution and need to be explicitly told to do so.
+</p>
+<p>Applications that are able to send magic packets for Wake-on-LAN:
+</p>
+<ul><li>
+<b>gWakeOnLAN</b> — GTK utility to awake turned off computers through the Wake-on-LAN feature.</li></ul>
+<dl><dd>
+<a rel="nofollow" class="external free" href="https://www.muflone.com/gwakeonlan/english/">https://www.muflone.com/gwakeonlan/english/</a> || <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=gwakeonlan">gwakeonlan</a></span>
+</dd></dl>
+<ul><li>
+<b>wol</b> — Implements Wake-on-LAN functionality in a small program. It wakes up hardware that is Magic Packet compliant. Note: This application will need the port changed to 9 from the default(40000) using the -p argument/flag.</li></ul>
+<dl><dd>
+<a rel="nofollow" class="external free" href="https://sourceforge.net/projects/wake-on-lan/">https://sourceforge.net/projects/wake-on-lan/</a> || <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=wol">wol</a></span>
+</dd></dl>
+<ul><li>
+<b>wol_qt</b> — Qt utility with integrated ARP scan to find MAC addresses and batch sending of Wake-on-LAN packets.</li></ul>
+<dl><dd>
+<a rel="nofollow" class="external free" href="https://github.com/stefmitropoulos/wol_qt">https://github.com/stefmitropoulos/wol_qt</a> || <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/wol_qt/">wol_qt</a></span><sup><small>AUR</small></sup>
+</dd></dl>
+<h3><span class="mw-headline" id="On_the_same_LAN">On the same LAN</span></h3>
+<p>If you are connected directly to another computer through a network cable, or the traffic within a LAN is not firewalled, then using Wake-on-LAN should be straightforward since there is no need to worry about port redirects.
+</p>
+<p>In the simplest case the default broadcast address <code>255.255.255.255</code> is used:
+</p>
+<pre>$ wol <i>target_MAC_address</i>
+</pre>
+<p>To broadcast the magic packet only to a specific subnet or host, use the <code>-i</code> switch:
+</p>
+<pre>$ wol -i <i>target_IP</i> <i>target_MAC_address</i>
+</pre>
+<h3><span class="mw-headline" id="Across_the_internet">Across the internet</span></h3>
+<p>When the source and target computers are separated by a NAT router, different solution can be envisaged:
+</p>
+<ul><li>If the router supports <i>WoL</i>, one can rely on it to properly broadcast the packet into the local network.</li></ul>
+<p>Otherwise Wake-on-LAN can be achieved via <a href="https://en.wikipedia.org/wiki/Port_forwarding" class="extiw" title="wikipedia:Port forwarding">port forwarding</a>. The router needs to be configured using one of these two options:
+</p>
+<ul>
+<li>Forward a different port to each target machine. This requires any target machine to have a static IP address on its LAN.</li>
+<li>Forward a single port to the <a href="https://en.wikipedia.org/wiki/Broadcast_address" class="extiw" title="wikipedia:Broadcast address">broadcast address</a>. Most routers do not allow to forward to broadcast, however if you can get shell access to your router, through telnet, ssh, serial cable or other mean, run the command: <pre>$ ip neighbor add 192.168.1.254 lladdr FF:FF:FF:FF:FF:FF dev net0</pre> This example assumes the network is <i>192.168.1.0/24</i> and uses <i>net0</i> as network interface. Now, forward UDP port 9 to 192.168.1.254. This solution was successfully tested on a Linksys WRT54G running <a href="https://en.wikipedia.org/wiki/Tomato_(firmware)" class="extiw" title="wikipedia:Tomato (firmware)">Tomato</a>, and on the Verizon FIOS ActionTec router. For notes on how to do it on a router with <a href="https://en.wikipedia.org/wiki/DD-WRT" class="extiw" title="wikipedia:DD-WRT">DD-WRT</a> firmware, see <a rel="nofollow" class="external text" href="https://www.dd-wrt.com/wiki/index.php/WOL#Remote_Wake_On_LAN_via_Port_Forwarding">this tutorial</a> and for a router with <a href="https://en.wikipedia.org/wiki/OpenWrt" class="extiw" title="wikipedia:OpenWrt">OpenWrt</a> firmware, see <a rel="nofollow" class="external text" href="https://openwrt.org/docs/guide-user/services/w_o_l/wol">this tutorial</a>.</li>
+</ul>
+<p>In any case, run the following command from the source computer to trigger wake-up:
+</p>
+<pre>$ wol -p <i>forwarded_port</i> -i <i>router_IP</i> <i>target_MAC_address</i>
+</pre>
+<h2><span class="mw-headline" id="Miscellaneous">Miscellaneous</span></h2>
+<h3><span class="mw-headline" id="Check_reception_of_the_magic_packets">Check reception of the magic packets</span></h3>
+<p>In order to make sure the WoL packets reach the target computer, one can listen to the UDP port, usually port 9, for magic packets.
+The magic packet frame expected contains 6 bytes of FF followed by 16 repetitions of the target computer's MAC (6 bytes each) for a total of 102 bytes.
+</p>
+<h4><span class="mw-headline" id="Using_netcat">Using netcat</span></h4>
+<p>This can be performed by installing <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=gnu-netcat">gnu-netcat</a></span> on the target computer and using the following command:
+</p>
+<pre># nc --udp --listen --local-port=9 --hexdump
+</pre>
+<p>Or, if you are using the <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=openbsd-netcat">openbsd-netcat</a></span> variant:
+</p>
+<pre># nc -u -l 9 | xxd
+</pre>
+<p>Then wait for the incoming traffic to appear in the <code>nc</code> terminal.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> The firewall on the machine itself does not need to be opened for wake-on-LAN to work (interface's processing happen in the NIC, before the firewall). However, for debugging purposes with netcat, you still need to temporarily open that port.</div>
+<h4><span class="mw-headline" id="Using_ngrep">Using ngrep</span></h4>
+<p>Install <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=ngrep">ngrep</a></span> on the target computer and type the following command:
+</p>
+<pre># ngrep '\xff{6}(.{6})\1{15}' -x port 9
+</pre>
+<h3><span class="mw-headline" id="Example_of_WoL_script">Example of WoL script</span></h3>
+<p>Here is a script that illustrates the use of <code>wol</code> with different machines:
+</p>
+<pre>#!/bin/bash
+
+# definition of MAC addresses
+monster=01:12:46:82:ab:4f
+ghost=01:1a:d2:56:6b:e6
+
+echo "Which PC to wake?"
+echo "m) monster"
+echo "g) ghost"
+echo "q) quit"
+read input1
+case $input1 in
+  m)
+    /usr/bin/wol $monster
+    ;;
+  g)
+    # uses wol over the internet provided that port 9 is forwarded to ghost on ghost's router
+    /usr/bin/wol --port=9 --host=ghost.mydomain.org $ghost
+    ;;
+  Q|q)
+    break
+    ;;
+esac
+</pre>
+<h2><span class="mw-headline" id="Troubleshooting">Troubleshooting</span></h2>
+<h3><span class="mw-headline" id="NetworkManager_2">NetworkManager</span></h3>
+<h4><span class="mw-headline" id="Network_adapter_is_still_powered_off_on_shutdown">Network adapter is still powered off on shutdown</span></h4>
+<p>Setting auto negotiation to <code>yes</code> may help if WOL is configured through <i>nmcli</i> and network adapter is still powered off on shutdown.
+</p>
+<p>Set it using:
+</p>
+<pre># nmcli c modify "wired1" 802-3-ethernet.auto-negotiate yes
+</pre>
+<h3><span class="mw-headline" id="Wake-up_after_shutdown">Wake-up after shutdown</span></h3>
+<p>It is known that some motherboards are affected by a bug that can cause immediate or random wake-up after a <i>shutdown</i> whenever the BIOS WoL feature is enabled (as discussed in <a rel="nofollow" class="external text" href="https://bbs.archlinux.org/viewtopic.php?id=173648">this thread</a> for example).
+</p>
+<h4><span class="mw-headline" id="Fix_using_BIOS_Settings">Fix using BIOS Settings</span></h4>
+<p>The following actions in the BIOS preferences can solve this issue with some motherboards:
+</p>
+<ol>
+<li>Disable all references to <i>xHCI</i> in the USB settings (note this will also disable USB 3.0 at boot time)</li>
+<li>Disable <i>EuP 2013</i> if it is explicitly an option</li>
+<li>Optionally enable wake-up on keyboard actions</li>
+</ol>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> There are mixed opinions as to the value of #3 above and it may be motherboard dependent.</div>
+<h4><span class="mw-headline" id="Fix_by_kernel_quirks">Fix by kernel quirks</span></h4>
+<p>The issue can also be solved by adding the following kernel boot parameter: <code>xhci_hcd.quirks=270336</code>
+This activates the following quirks:
+</p>
+<ul>
+<li><code>XHCI_SPURIOUS_REBOOT</code></li>
+<li><code>XHCI_SPURIOUS_WAKEUP</code></li>
+</ul>
+<h3><span class="mw-headline" id="Battery_draining_problem">Battery draining problem</span></h3>
+<p>Some laptops have a battery draining problem after shutdown <a rel="nofollow" class="external autonumber" href="https://ubuntuforums.org/archive/index.php/t-1729782.html">[1]</a>. This might be caused by enabled WOL. To solve this problem, disable it by using ethtool as mentioned above.
+</p>
+<pre># ethtool -s net0 wol d
+</pre>
+<h3><span class="mw-headline" id="Realtek">Realtek</span></h3>
+<h4><span class="mw-headline" id="r8168">r8168</span></h4>
+<p>Users with a Realtek 8168 8169 8101 8111(C) based NICs (cards / and on-board) may notice a problem where the NIC seems to be disabled on boot and has no link light. See <a href="../en/Network_configuration/Ethernet.html#Realtek_no_link_/_WOL_problem" title="Network configuration/Ethernet">Network configuration/Ethernet#Realtek no link / WOL problem</a>.
+</p>
+<p>If the link light on the network switch is enabled when the computer is turned off but Wake on LAN is still not working, booting the system using the <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/r8168/">r8168</a></span><sup><small>AUR</small></sup> kernel module at least once and then switching back to the <code>r8169</code> kernel module included with the kernel has been reported to fix it.
+</p>
+<p>For the <code>r8168</code> module you might need to set the <code>s5wol=1</code> <a href="../en/Kernel_module.html#Setting_module_options" class="mw-redirect" title="Kernel module parameter">kernel module parameter</a> to enable the wake on LAN functionality.
+</p>
+<h4><span class="mw-headline" id="r8125">r8125</span></h4>
+<p>Users with a Realtek 8125 NIC have reported being unable to use the Wake on LAN feature with the <code>r8169</code> kernel module. Installing <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/r8125-dkms/">r8125-dkms</a></span><sup><small>AUR</small></sup> enables the functionality. 
+</p>
+<p>Make sure the correct kernel driver is in use with <code>lspci -k</code>. If not, <a href="../en/Kernel_module.html#Blacklisting" class="mw-redirect" title="Blacklist">blacklist</a> the <code>r8169</code> module.
+</p>
+<p>Additionally, it might be necessary to enable WOL support and disable power saving features of the card.
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/modprobe.d/net.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">options r8125 disable_wol_support=0 s5wol=1 aspm=0</pre>
+<h3><span class="mw-headline" id="alx_driver_support">alx driver support</span></h3>
+<p>For some newer Atheros-based NICs (such as Atheros AR8161 and Killer E2500), WOL support has been disabled in the mainline <code>alx</code> module due to a bug causing unintentional wake-up (see <a rel="nofollow" class="external text" href="https://lore.kernel.org/netdev/1372880891-12320-1-git-send-email-johannes@sipsolutions.net/">this patch discussion</a>). A patch can be applied (or installed as a <a href="../en/Dynamic_Kernel_Module_Support.html" class="mw-redirect" title="Dkms">dkms</a> module using the <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/alx-wol-dkms/">alx-wol-dkms</a></span><sup><small>AUR</small></sup> package) which both restores WOL support and fixes the underlying bug, as outlined in <a rel="nofollow" class="external text" href="https://bugzilla.kernel.org/show_bug.cgi?id=61651">this thread</a>.
+</p>
+<p>See also the pre-patched sources in <a rel="nofollow" class="external autonumber" href="https://github.com/Snugface/alx">[2]</a>.
+</p>
+</div>
+</div>
+					<div id="catlinks" class="catlinks" data-mw="interface"><div id="mw-normal-catlinks" class="mw-normal-catlinks">
+<a href="../Special:Categories.html" title="Special:Categories">Categories</a>: <ul>
+<li><a href="../en/Category:Networking.html" title="Category:Networking">Networking</a></li>
+<li><a href="../en/Category:Power_management.html" title="Category:Power management">Power management</a></li>
+</ul>
+</div></div>
+				</div>
+			</main>
+			
+		</div>
+		<div class="mw-footer-container">
+			
+<footer id="footer" class="mw-footer" style="margin: 0">
+	<ul id="footer-info">
+	<li data-nosnippet="">Retrieved from "<a dir="ltr" href="https://wiki.archlinux.org/index.php?title=Wake-on-LAN&amp;oldid=829376">https://wiki.archlinux.org/index.php?title=Wake-on-LAN&amp;oldid=829376</a>"</li>
+<li id="footer-info-lastmod"> This page was last edited on 18 March 2025, at 11:04.</li>
+	<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+<br>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="https://terms.archlinux.org/docs/privacy-policy/">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="../en/ArchWiki:About.html">About ArchWiki</a></li>
+	<li id="footer-places-disclaimers"><a href="../en/ArchWiki:General_disclaimer.html">Disclaimers</a></li>
+	<li id="footer-places-archwiki-code-of-conduct"><a href="https://terms.archlinux.org/docs/code-of-conduct/" class="extiw" title="archlinux-service-agreements:code-of-conduct">Code of conduct</a></li>
+	<li id="footer-places-archwiki-terms-of-service"><a href="https://terms.archlinux.org/docs/terms-of-service/" class="extiw" title="archlinux-service-agreements:terms-of-service">Terms of service</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-copyrightico"><a href="https://www.gnu.org/copyleft/fdl.html" class="cdx-button cdx-button--fake-button cdx-button--size-large cdx-button--fake-button--enabled"><img src="/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" loading="lazy"></a></li>
+	<li id="footer-poweredbyico"><img src="/resources/assets/poweredby_mediawiki.svg" width="88" height="31" loading="lazy"></li>
+</ul>
+
+</footer>
+
+		</div>
+	</div> 
+</div> 
+<div class="vector-settings" id="p-dock-bottom">
+	<ul></ul>
+</div>
+</body>
+</html>

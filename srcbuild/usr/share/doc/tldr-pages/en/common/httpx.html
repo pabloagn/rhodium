@@ -1,0 +1,61 @@
+<h1>httpx</h1>
+
+<blockquote><p>A fast and multi-purpose HTTP toolkit written in Go to run multiple probes at once.
+Note: Not to be confused with the unrelated Python&rsquo;s HTTPX which has the same command name.
+More information: <a href="https://docs.projectdiscovery.io/tools/httpx/running">https://docs.projectdiscovery.io/tools/httpx/running</a>.</p></blockquote>
+
+<ul>
+<li>Run a probe against a [u]RL, host, IP Address or subnet (CIDR notation) showing probe status:</li>
+</ul>
+
+
+<p><code>httpx -probe {{[-u|-target]}} {{url|host|ipaddress|subnet_with_cidr}}</code></p>
+
+<ul>
+<li>Run a probe against multiple hosts showing status code with input from <code>subfinder</code>:</li>
+</ul>
+
+
+<p><code>subfinder {{[-d|-domain]}} {{example.com}} | httpx {{[-sc|-status-code]}}</code></p>
+
+<ul>
+<li>Run a rate limited probe against a list of hosts from a file showing technology detected and response time:</li>
+</ul>
+
+
+<p><code>httpx {{[-rl|-rate-limit]}} {{150}} {{[-l|-list]}} {{path/to/newline_separated_hosts_list}} {{[-td|-tech-detect]}} {{[-rt|-response-time]}}</code></p>
+
+<ul>
+<li>Run a probe against a [u]RL showing its webpage title, CDN/WAF in use, and page content hash:</li>
+</ul>
+
+
+<p><code>httpx {{[-u|-target]}} {{url}} -title -cdn -hash {{sha256}}</code></p>
+
+<ul>
+<li>Run a probe against a list of hosts with custom defined ports and timeout after certain seconds:</li>
+</ul>
+
+
+<p><code>httpx -probe {{[-u|-target]}} {{host1,host2,...}} {{[-p|-ports]}} http:{{80,8000-8080}},https:{{443,8443}} -timeout {{10}}</code></p>
+
+<ul>
+<li>Run a probe against a list of hosts filtering out codes of certain responses:</li>
+</ul>
+
+
+<p><code>httpx {{[-u|-target]}} {{host1,host2,...}} {{[-fc|-filter-code]}} {{400,401,404}}</code></p>
+
+<ul>
+<li>Run a probe against a list of hosts matching codes of certain responses:</li>
+</ul>
+
+
+<p><code>httpx {{[-u|-target]}} {{host1,host2,...}} {{[-mc|-match-code]}} {{200,301,304}}</code></p>
+
+<ul>
+<li>Run a probe against a URL saving screenshots of certain paths, with screenshot timeouts (assets are saved in <code>./output</code>):</li>
+</ul>
+
+
+<p><code>httpx {{[-u|-target]}} {{https://www.github.com}} -path {{/tldr-pages/tldr,/projectdiscovery/httpx}} {{[-ss|-screenshot]}} {{[-st|-screenshot-timeout]}} {{10}}</code></p>

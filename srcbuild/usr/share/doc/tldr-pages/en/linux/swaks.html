@@ -1,0 +1,39 @@
+<h1>swaks</h1>
+
+<blockquote><p>Swiss Army Knife SMTP, the all-purpose SMTP transaction tester.
+More information: <a href="https://github.com/jetmore/swaks/blob/develop/doc/base.pod">https://github.com/jetmore/swaks/blob/develop/doc/base.pod</a>.</p></blockquote>
+
+<ul>
+<li>Deliver a standard test email to <code>user@example.com</code> on port 25 of <code>test-server.example.net</code>:</li>
+</ul>
+
+
+<p><code>swaks {{[-t|--to]}} {{user@example.com}} {{[-s|--server]}} {{test-server.example.net}}</code></p>
+
+<ul>
+<li>Deliver a standard test email, requiring CRAM-MD5 authentication as user <code>me@example.com</code>. An &ldquo;X-Test&rdquo; header will be added to the email body:</li>
+</ul>
+
+
+<p><code>swaks {{[-t|--to]}} {{user@example.com}} {{[-f|--from]}} {{me@example.com}} {{[-a|--auth]}} {{CRAM-MD5}} {{[-au|--auth-user]}} {{me@example.com}} --header-X-Test "{{test_email}}"</code></p>
+
+<ul>
+<li>Test a virus scanner using EICAR in an attachment. Don&rsquo;t show the message DATA part:</li>
+</ul>
+
+
+<p><code>swaks {{[-t|--to]}} {{user@example.com}} --attach - {{[-s|--server]}} {{test-server.example.com}} {{[-n|--suppress-data]}} {{path/to/eicar.txt}}</code></p>
+
+<ul>
+<li>Test a spam scanner using GTUBE in the body of an email, routed via the MX records for <code>example.com</code>:</li>
+</ul>
+
+
+<p><code>swaks {{[-t|--to]}} {{user@example.com}} --body {{path/to/gtube_file}}</code></p>
+
+<ul>
+<li>Deliver a standard test email to <code>user@example.com</code> using the LMTP protocol via a UNIX domain socket file:</li>
+</ul>
+
+
+<p><code>swaks {{[-t|--to]}} {{user@example.com}} --socket {{/var/lda.sock}} --protocol {{LMTP}}</code></p>

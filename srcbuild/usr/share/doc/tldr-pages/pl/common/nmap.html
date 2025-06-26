@@ -1,0 +1,61 @@
+<h1>nmap</h1>
+
+<blockquote><p>Narzędzie do eksploracji sieci oraz skaner bezpieczeństwa/portów.
+Niektóre funkcje (np. skan SYN) aktywują się tylko gdy <code>nmap</code> jest uruchamiany z przywilejami root'a.
+Więcej informacji: <a href="https://nmap.org/book/man.html">https://nmap.org/book/man.html</a>.</p></blockquote>
+
+<ul>
+<li>Skanuj 1000 najpopularniejszych portów zdalnego hosta z różnymi poziomami szczegółowości ([v]erbosity):</li>
+</ul>
+
+
+<p><code>nmap -v{{1|2|3}} {{ip_lub_nazwa_hosta}}</code></p>
+
+<ul>
+<li>Wykonaj bardzo agresywnie ping sweep w całej podsieci lub na poszczególnych hostach:</li>
+</ul>
+
+
+<p><code>nmap -T5 -sn {{192.168.0.0/24|ip_lub_nazwa_hosta1,ip_lub_nazwa_hosta2,...}}</code></p>
+
+<ul>
+<li>Włącz wykrywanie systemu operacyjnego, wykrywanie wersji, skanowanie skryptów i traceroute hostów z pliku:</li>
+</ul>
+
+
+<p><code>sudo nmap -A -iL {{ścieżka/do/pliku.txt}}</code></p>
+
+<ul>
+<li>Skanuj podaną listę portów (użyj <code>-p-</code> dla wszystkich portów od 1 do 65535):</li>
+</ul>
+
+
+<p><code>nmap -p {{port1,port2,...}} {{ip_lub_host1,ip_lub_host2,...}}</code></p>
+
+<ul>
+<li>Przeprowadź wykrywanie usług i wersji dla 1000 najpopularniejszych portów używając domyślnych skryptów NSE, zapisując wynik (<code>-oA</code>) do plików wyjściowych:</li>
+</ul>
+
+
+<p><code>nmap -sC -sV -oA {{top-1000-ports}} {{ip_lub_host1,ip_lub_host2,...}}</code></p>
+
+<ul>
+<li>Skanuj cel(e) ostrożnie używając skryptów NSE <code>default and safe</code>:</li>
+</ul>
+
+
+<p><code>nmap --script "default and safe" {{ip_lub_host1,ip_lub_host2,...}}</code></p>
+
+<ul>
+<li>Skanuj w poszukiwaniu serwerów internetowych działających na standardowych portach 80 i 443 przy użyciu wszystkich dostępnych skryptów NSE <code>http-*</code>:</li>
+</ul>
+
+
+<p><code>nmap --script "http-*" {{ip_lub_host1,ip_lub_host2,...}} -p 80,443</code></p>
+
+<ul>
+<li>Spróbuj uniknąć wykrycia przez IDS/IPS, używając bardzo powolnego skanowania (<code>-T0</code>), fałszywych adresów źródłowych - wabików (<code>-D</code>), [f]ragmentowanych pakietów, losowych danych i innych metod:</li>
+</ul>
+
+
+<p><code>sudo nmap -T0 -D {{ip_wabika1,ip_wabika2,...}} --source-port {{53}} -f --data-length {{16}} -Pn {{ip_lub_host}}</code></p>

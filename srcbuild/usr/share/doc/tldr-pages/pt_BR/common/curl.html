@@ -1,0 +1,61 @@
+<h1>curl</h1>
+
+<blockquote><p>Transfere dados entre o computador local e um servidor.
+Suporta a maioria dos protocolos de comunicação, incluindo HTTP, HTTPS, FTP, SCP, etc.
+Mais informações: <a href="https://curl.se/docs/manpage.html">https://curl.se/docs/manpage.html</a>.</p></blockquote>
+
+<ul>
+<li>Faz um pedido HTTP GET e descarrega os conteúdos em <code>stdout</code> (saída padrão):</li>
+</ul>
+
+
+<p><code>curl {{https://example.com}}</code></p>
+
+<ul>
+<li>Faz um pedido HTTP GET, segue redirecionamentos <code>`3xx</code> e descarrega os cabeçalhos da resposta e conteúdos para <code>stdout</code>:</li>
+</ul>
+
+
+<p><code>curl {{[-L|--location]}} {{[-D|--dump-header]}} - {{https://example.com}}</code></p>
+
+<ul>
+<li>Baixa um arquivo, salvando a saída no arquivo indicado pela URL:</li>
+</ul>
+
+
+<p><code>curl {{[-O|--remote-name]}} {{https://example.com/arquivo.zip}}</code></p>
+
+<ul>
+<li>Envia dados codificados por formulário (pedido POST do tipo <code>application/x-www-form-urlencoded</code>). Usa <code>--data @file_name</code> ou <code>--data @'-'</code> para ler da <code>stdin</code>:</li>
+</ul>
+
+
+<p><code>curl {{[-X|--request]}} POST {{[-d|--data]}} {{'nome=maria'}} {{http://example.com/formulario}}</code></p>
+
+<ul>
+<li>Envia um pedido com um cabeçalho adicional, usando um método HTTP personalizado e por meio de um proxy (tal como BurpSuite), ignorando certificados autoassinados inseguros:</li>
+</ul>
+
+
+<p><code>curl {{[-k|--insecure]}} {{[-x|--proxy]}} {{http://127.0.0.1:8080}} {{[-H|--header]}} {{'Authorization: Bearer token'}} {{[-X|--request]}} {{GET|PUT|POST|DELETE|PATCH|...}} {{https://example.com}}</code></p>
+
+<ul>
+<li>Envia dados no formato JSON, especificando o cabeçalho de tipo de conteúdo (content-type) apropriado:</li>
+</ul>
+
+
+<p><code>curl {{[-d|--data]}} {{'{"nome":"maria"}'}} {{[-H|--header]}} {{'Content-Type: application/json'}} {{http://example.com/usuarios/1234}}</code></p>
+
+<ul>
+<li>Passa o certificado do cliente e chave para um recurso, pulando a validação do certificado:</li>
+</ul>
+
+
+<p><code>curl {{[-E|--cert]}} {{cliente.pem}} --key {{chave.pem}} {{[-k|--insecure]}} {{https://example.com}}</code></p>
+
+<ul>
+<li>Resolve um hostname para um endereço de IP personalizado, com a saída verbosa (similar a editar o arquivo <code>/etc/hosts</code> para resolução de DNS personalizada):</li>
+</ul>
+
+
+<p><code>curl {{[-v|--verbose]}} --resolve {{example.com}}:{{80}}:{{127.0.0.1}} {{http://example.com}}</code></p>

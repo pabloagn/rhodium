@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-sticky-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-0 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-disabled skin-theme-clientpref-day vector-toc-available" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>XFS - ArchWiki</title>
+<link rel="stylesheet" href="../ArchWikiOffline.css">
+<meta name="ResourceLoaderDynamicStyles" content="">
+<meta name="generator" content="MediaWiki 1.43.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="max-image-preview:standard">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.25, maximum-scale=5.0">
+<link rel="search" type="application/opensearchdescription+xml" href="/rest.php/v1/search" title="ArchWiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.archlinux.org/api.php?action=rsd">
+<link rel="license" href="https://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="ArchWiki Atom feed" href="/index.php?title=Special:RecentChanges&amp;feed=atom">
+</head>
+<body class="skin--responsive skin-vector skin-vector-search-vue mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-XFS rootpage-XFS skin-vector-2022 action-view">
+<a class="mw-jump-link" href="#bodyContent">Jump to content</a>
+<div class="vector-header-container">
+	</div>
+<div class="mw-page-container">
+	<div class="mw-page-container-inner">
+		<div class="vector-column-start">
+			<div class="vector-main-menu-container">
+		</div>
+	<div class="vector-sticky-pinned-container">
+				<nav id="mw-panel-toc" aria-label="Contents" data-event-name="ui.sidebar-toc" class="mw-table-of-contents-container vector-toc-landmark">
+					<div id="vector-toc-pinned-container" class="vector-pinned-container">
+					<div id="vector-toc" class="vector-toc vector-pinnable-element">
+	<div class="vector-pinnable-header vector-toc-pinnable-header vector-pinnable-header-pinned" data-feature-name="toc-pinned" data-pinnable-element-id="vector-toc">
+	<h2 class="vector-pinnable-header-label">Contents</h2>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-toc.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-toc.unpin">hide</button>
+</div>
+
+
+	<ul class="vector-toc-contents" id="mw-panel-toc-list">
+		<li id="toc-mw-content-text" class="vector-toc-list-item vector-toc-level-1">
+			<a href="#" class="vector-toc-link">
+				<div class="vector-toc-text">Beginning</div>
+			</a>
+		</li>
+		<li id="toc-Preparation" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Preparation">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">1</span>
+				<span>Preparation</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Preparation-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Creation" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Creation">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">2</span>
+				<span>Creation</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Creation-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Creation subsection</span>
+			</button>
+		
+		<ul id="toc-Creation-sublist" class="vector-toc-list">
+			<li id="toc-Checksumming" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Checksumming">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1</span>
+					<span>Checksumming</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Checksumming-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Free_inode_btree" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Free_inode_btree">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2</span>
+					<span>Free inode btree</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Free_inode_btree-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Reverse_mapping_btree" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Reverse_mapping_btree">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.3</span>
+					<span>Reverse mapping btree</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Reverse_mapping_btree-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Big_timestamps" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Big_timestamps">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.4</span>
+					<span>Big timestamps</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Big_timestamps-sublist" class="vector-toc-list">
+				<li id="toc-Upgrading" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Upgrading">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.4.1</span>
+					<span>Upgrading</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Upgrading-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Performance" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Performance">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">3</span>
+				<span>Performance</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Performance-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Performance subsection</span>
+			</button>
+		
+		<ul id="toc-Performance-sublist" class="vector-toc-list">
+			<li id="toc-Stripe_size_and_width" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Stripe_size_and_width">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1</span>
+					<span>Stripe size and width</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Stripe_size_and_width-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Access_time" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Access_time">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.2</span>
+					<span>Access time</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Access_time-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Discard" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Discard">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.3</span>
+					<span>Discard</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Discard-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Defragmentation" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Defragmentation">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.4</span>
+					<span>Defragmentation</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Defragmentation-sublist" class="vector-toc-list">
+				<li id="toc-Inspect_fragmentation_levels" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Inspect_fragmentation_levels">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.4.1</span>
+					<span>Inspect fragmentation levels</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Inspect_fragmentation_levels-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Perform_defragmentation" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Perform_defragmentation">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.4.2</span>
+					<span>Perform defragmentation</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Perform_defragmentation-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Deduplication" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Deduplication">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.5</span>
+					<span>Deduplication</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Deduplication-sublist" class="vector-toc-list">
+				<li id="toc-Reflink_copies" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Reflink_copies">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.5.1</span>
+					<span>Reflink copies</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Reflink_copies-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Deduplication_2" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Deduplication_2">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.5.2</span>
+					<span>Deduplication</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Deduplication_2-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-External_XFS_Journal" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#External_XFS_Journal">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.6</span>
+					<span>External XFS Journal</span>
+				</div>
+			</a>
+			
+			<ul id="toc-External_XFS_Journal-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Sync_interval" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Sync_interval">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.7</span>
+					<span>Sync interval</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Sync_interval-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Administration" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Administration">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">4</span>
+				<span>Administration</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Administration-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Administration subsection</span>
+			</button>
+		
+		<ul id="toc-Administration-sublist" class="vector-toc-list">
+			<li id="toc-Resize" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Resize">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.1</span>
+					<span>Resize</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Resize-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Online_metadata_checking_(scrub)" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Online_metadata_checking_(scrub)">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.2</span>
+					<span>Online metadata checking (scrub)</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Online_metadata_checking_(scrub)-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Repair" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Repair">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.3</span>
+					<span>Repair</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Repair-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Data_rescue" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Data_rescue">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.4</span>
+					<span>Data rescue</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Data_rescue-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Undelete" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Undelete">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.5</span>
+					<span>Undelete</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Undelete-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Troubleshooting" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#Troubleshooting">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">5</span>
+				<span>Troubleshooting</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Troubleshooting-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Troubleshooting subsection</span>
+			</button>
+		
+		<ul id="toc-Troubleshooting-sublist" class="vector-toc-list">
+			<li id="toc-Root_file_system_quota" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Root_file_system_quota">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.1</span>
+					<span>Root file system quota</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Root_file_system_quota-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id='toc-xfs_scrub_all_fails_if_user_"nobody"_can_not_access_the_mountpoint' class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href='#xfs_scrub_all_fails_if_user_"nobody"_can_not_access_the_mountpoint'>
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.2</span>
+					<span>xfs_scrub_all fails if user "nobody" can not access the mountpoint</span>
+				</div>
+			</a>
+			
+			<ul id='toc-xfs_scrub_all_fails_if_user_"nobody"_can_not_access_the_mountpoint-sublist' class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-fsck.xfs_fails_in_systemd-based_initramfs" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#fsck.xfs_fails_in_systemd-based_initramfs">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.3</span>
+					<span>fsck.xfs fails in systemd-based initramfs</span>
+				</div>
+			</a>
+			
+			<ul id="toc-fsck.xfs_fails_in_systemd-based_initramfs-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-See_also" class="vector-toc-list-item vector-toc-level-1">
+		<a class="vector-toc-link" href="#See_also">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">6</span>
+				<span>See also</span>
+			</div>
+		</a>
+		
+		<ul id="toc-See_also-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+</ul>
+</div>
+
+					</div>
+		</nav>
+			</div>
+		</div>
+		<div class="mw-content-container">
+			<main id="content" class="mw-body" style="margin: 0">
+				<header class="mw-body-header vector-page-titlebar">
+					<nav aria-label="Contents" class="vector-toc-landmark">
+						
+<div id="vector-page-titlebar-toc" class="vector-dropdown vector-page-titlebar-toc vector-button-flush-left">
+	<input type="checkbox" id="vector-page-titlebar-toc-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-page-titlebar-toc" class="vector-dropdown-checkbox " aria-label="Toggle the table of contents">
+	<label id="vector-page-titlebar-toc-label" for="vector-page-titlebar-toc-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"><span class="vector-icon mw-ui-icon-listBullet mw-ui-icon-wikimedia-listBullet"></span>
+
+<span class="vector-dropdown-label-text">Toggle the table of contents</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+							<div id="vector-page-titlebar-toc-unpinned-container" class="vector-unpinned-container">
+			</div>
+		
+	</div>
+</div>
+
+					</nav>
+					<h1 id="firstHeading" class="firstHeading mw-first-heading"><span class="mw-page-title-main">XFS</span></h1>
+							
+<div id="p-lang-btn" class="vector-dropdown mw-portlet mw-portlet-lang">
+	<input type="checkbox" id="p-lang-btn-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-p-lang-btn" class="vector-dropdown-checkbox mw-interlanguage-selector" aria-label="Go to an article in another language. Available in 4 languages">
+	<label id="p-lang-btn-label" for="p-lang-btn-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--action-progressive mw-portlet-lang-heading-4" aria-hidden="true"><span class="vector-icon mw-ui-icon-language-progressive mw-ui-icon-wikimedia-language-progressive"></span>
+
+<span class="vector-dropdown-label-text">4 languages</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+		<div class="vector-menu-content">
+			
+			<ul class="vector-menu-content-list">
+				
+				<li class="interlanguage-link interwiki-ja mw-list-item"><a href="https://wiki.archlinux.jp/index.php/XFS" title="XFS – 日本語" lang="ja" hreflang="ja" data-title="XFS" data-language-autonym="日本語" data-language-local-name="日本語" class="interlanguage-link-target"><span>日本語</span></a></li>
+<li class="interlanguage-link interwiki-pt mw-list-item"><a href="../pt/XFS.html" title="XFS – português" lang="pt" hreflang="pt" data-title="XFS" data-language-autonym="Português" data-language-local-name="português" class="interlanguage-link-target"><span>Português</span></a></li>
+<li class="interlanguage-link interwiki-ru mw-list-item"><a href="../ru/XFS.html" title="XFS – русский" lang="ru" hreflang="ru" data-title="XFS" data-language-autonym="Русский" data-language-local-name="русский" class="interlanguage-link-target"><span>Русский</span></a></li>
+<li class="interlanguage-link interwiki-zh-hans mw-list-item"><a href="https://wiki.archlinuxcn.org/wiki/XFS" title="XFS – 中文（简体）" lang="zh-Hans" hreflang="zh-Hans" data-title="XFS" data-language-autonym="中文（简体）" data-language-local-name="中文（简体）" class="interlanguage-link-target"><span>中文（简体）</span></a></li>
+			</ul>
+			
+		</div>
+
+	</div>
+</div>
+</header>
+				<div class="vector-column-end">
+					<div class="vector-sticky-pinned-container">
+						<nav class="vector-page-tools-landmark" aria-label="Page tools">
+							<div id="vector-page-tools-pinned-container" class="vector-pinned-container">
+				
+							</div>
+		</nav>
+						<nav class="vector-appearance-landmark" aria-label="Appearance">
+							<div id="vector-appearance-pinned-container" class="vector-pinned-container">
+				<div id="vector-appearance" class="vector-appearance vector-pinnable-element">
+	<div class="vector-pinnable-header vector-appearance-pinnable-header vector-pinnable-header-pinned" data-feature-name="appearance-pinned" data-pinnable-element-id="vector-appearance" data-pinned-container-id="vector-appearance-pinned-container" data-unpinned-container-id="vector-appearance-unpinned-container">
+	<div class="vector-pinnable-header-label">Appearance</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-appearance.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-appearance.unpin">hide</button>
+</div>
+
+
+</div>
+
+							</div>
+		</nav>
+					</div>
+				</div>
+				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container>
+					<div class="vector-body-before-content">
+							<div class="mw-indicators">
+		</div>
+
+						<div id="siteSub" class="noprint">From ArchWiki</div>
+					</div>
+					<div id="contentSub"><div id="mw-content-subtitle"></div></div>
+					
+					
+					<div id="mw-content-text" class="mw-body-content">
+<div class="mw-content-ltr mw-parser-output" lang="en" dir="ltr">
+<div class="archwiki-template-meta-related-articles">
+<p>Related articles</p>
+<ul>
+<li><a href="../en/File_systems.html" title="File systems">File systems</a></li>
+</ul>
+</div>
+<p><a rel="nofollow" class="external text" href="https://xfs.wiki.kernel.org/#documentation">XFS</a> is a high-performance journaling file system created by Silicon Graphics, Inc. XFS is particularly proficient at parallel IO due to its allocation group based design. This enables extreme scalability of IO threads, filesystem bandwidth, file and filesystem size when spanning multiple storage devices.
+</p>
+<meta property="mw:PageProp/toc">
+<h2><span class="mw-headline" id="Preparation">Preparation</span></h2>
+<p>For XFS userspace utilities <a href="../en/Help:Reading.html#Installation_of_packages" class="mw-redirect" title="Install">install</a> the <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=xfsprogs">xfsprogs</a></span> package. It contains the tools necessary to manage an XFS file system.
+</p>
+<h2><span class="mw-headline" id="Creation">Creation</span></h2>
+<p>To create a new filesystem on <i>device</i> use:
+</p>
+<pre># mkfs.xfs <i>device</i>
+</pre>
+<p>In general, the default options are optimal for common use.<a rel="nofollow" class="external autonumber" href="https://web.archive.org/web/20240113230117/https://xfs.org/index.php/XFS_FAQ#Q:_I_want_to_tune_my_XFS_filesystems_for_.3Csomething.3E">[1]</a><a rel="nofollow" class="external autonumber" href="https://access.redhat.com/documentation/en_us/red_hat_enterprise_linux/7/html/storage_administration_guide/ch-xfs#xfscreating">[2]</a>
+</p>
+<p>Sample output:
+</p>
+<pre>meta-data=/dev/device            isize=256    agcount=4, agsize=3277258 blks
+         =                       sectsz=512   attr=2
+data     =                       bsize=4096   blocks=13109032, imaxpct=25
+         =                       sunit=0      swidth=0 blks
+naming   =version 2              bsize=4096   ascii-ci=0
+log      =internal log           bsize=4096   blocks=6400, version=2
+         =                       sectsz=512   sunit=0 blks, lazy-count=1
+realtime =none                   extsz=4096   blocks=0, rtextents=0</pre>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> 
+<ul>
+<li>One can optionally assign a label to the filesystem by using the <code>-L <i>label</i></code> option.</li>
+<li>When using <i>mkfs.xfs</i> on a block device containing an existing file system, add the <code>-f</code> option to overwrite that file system.<a rel="nofollow" class="external autonumber" href="https://access.redhat.com/documentation/en_us/red_hat_enterprise_linux/7/html/storage_administration_guide/ch-xfs#xfscreating">[3]</a>. <i><b>This operation will destroy all data contained in the previous filesystem</b></i>.</li>
+</ul>
+</div>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> "After an XFS file system is created, its size cannot be reduced. However, it can still be enlarged using the xfs_growfs command."<a rel="nofollow" class="external autonumber" href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/storage_administration_guide/ch-xfs#xfscreating">[4]</a> See <a href="#Resize">#Resize</a>.</div>
+<h3><span class="mw-headline" id="Checksumming">Checksumming</span></h3>
+<p><span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=xfsprogs">xfsprogs</a></span> 3.2.0 introduced a new on-disk format (v5) that includes a metadata checksum scheme called <a rel="nofollow" class="external text" href="https://docs.kernel.org/filesystems/xfs/xfs-self-describing-metadata.html">Self-Describing Metadata</a>. 
+Based on CRC32, it provides additional protection against metadata corruption (e.g. on unexpected power losses). Checksums are enabled by default when using <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=xfsprogs">xfsprogs</a></span> 3.2.3 or later, but can be disabled (necessary for read-write mounts on older kernels) using the <code>-m crc=0</code> switch when calling <span class="plainlinks archwiki-template-man" title="$ man 8 mkfs.xfs"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/mkfs.xfs.8">mkfs.xfs(8)</a></span>:
+</p>
+<pre># mkfs.xfs -m crc=0 /dev/<i>target_partition</i>
+</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> Disabling metadata CRCs will also have the effect of disabling support for the <a href="#Free_inode_btree">#Free inode btree</a>, <a href="#Reverse_mapping_btree">#Reverse mapping btree</a> and <a href="#Big_timestamps">#Big timestamps</a> features below, as well as "reference count btrees" (see <span class="plainlinks archwiki-template-man" title="$ man 8 mkfs.xfs"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/mkfs.xfs.8#OPTIONS">mkfs.xfs(8) § OPTIONS</a></span> for details).</div>
+<p>The XFS v5 on-disk format is considered stable for production workloads starting in Linux Kernel 3.15.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> Unlike <a href="../en/Btrfs.html" title="Btrfs">Btrfs</a> and <a href="../en/ZFS.html" title="ZFS">ZFS</a>, the CRC32 checksum only applies to the metadata and not actual data.</div>
+<h3><span class="mw-headline" id="Free_inode_btree">Free inode btree</span></h3>
+<p>Starting in Linux 3.16, XFS has added a btree that tracks free inodes. It is equivalent to the existing inode allocation btree with the exception that the free inode btree tracks inode chunks with at least one free inode. The purpose is to improve lookups for free inode clusters for inode allocation. It improves performance on aged filesystems i.e. months or years down the track when you have added and removed millions of files to/from the filesystem. Using this feature does not impact overall filesystem reliability level or recovery capabilities.
+</p>
+<p>This feature relies on the new v5 on-disk format that has been considered stable for production workloads starting Linux Kernel 3.15. It does not change existing on-disk structures, but adds a new one that must remain consistent with the inode allocation btree; for this reason older kernels will only be able to mount read-only filesystems with the free inode btree feature.
+</p>
+<p>The feature is enabled by default when using xfsprogs 3.2.3 or later. If you need a writable filesystem for older kernels, it can be disable with the <code>finobt=0</code> switch when formatting an XFS partition. You will need <code>crc=0</code> together:
+</p>
+<pre># mkfs.xfs -m crc=0,finobt=0 /dev/<i>target_partition</i>
+</pre>
+<p>or shortly (because <code>finobt</code> depends on <code>crc</code>):
+</p>
+<pre># mkfs.xfs -m crc=0 /dev/<i>target_partition</i>
+</pre>
+<h3><span class="mw-headline" id="Reverse_mapping_btree">Reverse mapping btree</span></h3>
+<p>The reverse mapping btree is <a rel="nofollow" class="external text" href="https://blogs.oracle.com/linux/xfs-online-filesystem-checking">at its core</a>: 
+</p>
+<dl>
+<dd>a secondary index of storage space usage that effectively provides a redundant copy of primary space usage metadata. This adds some overhead to filesystem operations, but its inclusion in a filesystem makes cross-referencing very fast. It is an essential feature for repairing filesystems online because we can rebuild damaged primary metadata from the secondary copy.</dd>
+<dd>The feature graduated from EXPERIMENTAL status in Linux 4.16 and is production ready. However, online filesystem checking and repair is (so far) the only use case for this feature, so it will remain opt-in at least until online checking graduates to production readiness.</dd>
+</dl>
+<p>From <span class="plainlinks archwiki-template-man" title="$ man 8 mkfs.xfs"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/mkfs.xfs.8#OPTIONS">mkfs.xfs(8) § OPTIONS</a></span>:
+</p>
+<dl><dd>The reverse mapping btree maps filesystem blocks to the owner of the filesystem block. Most of the mappings will be to an inode number and an offset, though there will also be mappings to filesystem metadata. This secondary metadata can be used to validate the primary metadata or to pinpoint exactly which data has been lost when a disk error occurs.</dd></dl>
+<p>See also <a rel="nofollow" class="external autonumber" href="https://kernelnewbies.org/Linux_4.16#XFS_reverse_mapping_and_reflink_features_are_now_stable">[5]</a> and <a rel="nofollow" class="external autonumber" href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=35a891be96f1f8e1227e6ad3ca827b8a08ce47ea">[6]</a> for more information.
+</p>
+<p>This feature is enabled by default for new filesystems as of xfsprogs 6.5.0.
+</p>
+<h3><span class="mw-headline" id="Big_timestamps">Big timestamps</span></h3>
+<p>Starting in Linux 5.10, XFS supports using refactored "timestamp and inode encoding functions to handle timestamps as a 64-bit nanosecond counter and bit shifting to increase the effective size. This now allows XFS to run well past the <a href="https://en.wikipedia.org/wiki/Year_2038_problem" class="extiw" title="wikipedia:Year 2038 problem">Year 2038 problem</a> to now the Year 2486. Making a new XFS file-system with <i>bigtime</i> enabled allows a timestamp range from December 1901 to July 2486 rather than December 1901 to January 2038." The feature will also allow quota timer expirations from January 1970 to July 2486 rather than January 1970 to February 2106.
+</p>
+<p>Big timestamps are enabled by default for new filesystems as of xfsprogs 5.15.
+</p>
+<h4><span class="mw-headline" id="Upgrading">Upgrading</span></h4>
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../File:Tango-view-fullscreen.svg" decoding="async" width="48" height="48" class="mw-file-element"></span></span><b>This article or section needs expansion.</b></p>
+<div>
+<b>Reason:</b> Make this a top-level section and describe which of the new defaults can be enabled on existing file systems. (Discuss in <a rel="nofollow" class="external text" href="../en/Talk:XFS.html">Talk:XFS</a>)</div>
+</div>
+<p>Verify whether an existing filesystem has bigtime enabled with <span class="plainlinks archwiki-template-man" title="$ man 8 xfs_info"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/xfs_info.8">xfs_info(8)</a></span>:
+</p>
+<pre># xfs_info / | grep bigtime
+... bigtime=0 ...
+</pre>
+<p>With <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=xfsprogs">xfsprogs</a></span> 5.11 and newer you can upgrade an existing (unmounted) filesystem with <span class="plainlinks archwiki-template-man" title="$ man 8 xfs_admin"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/xfs_admin.8">xfs_admin(8)</a></span>:
+</p>
+<pre># xfs_admin -O bigtime=1 <i>device</i>
+</pre>
+<p>Or with <span class="plainlinks archwiki-template-man" title="$ man 8 xfs_repair"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/xfs_repair.8">xfs_repair(8)</a></span>:
+</p>
+<pre># xfs_repair -c bigtime=1 <i>device</i>
+</pre>
+<p>While there, you may want to enable <code>inobtcount</code> as well (another new default).
+</p>
+<h2><span class="mw-headline" id="Performance">Performance</span></h2>
+<p>From <a rel="nofollow" class="external text" href="https://web.archive.org/web/20240113230117/https://xfs.org/index.php/XFS_FAQ#Q:_I_want_to_tune_my_XFS_filesystems_for_.3Csomething.3E">XFS FAQ</a>:
+</p>
+<dl>
+<dd>The default values already used are optimised for best performance in the first place. mkfs.xfs will detect the difference between single disk and MD/DM RAID setups and change the default values it uses to configure the filesystem appropriately.</dd>
+<dd>In most cases, the only thing you need to consider for <code>mkfs.xfs</code> is specifying the stripe unit and width for hardware RAID devices.</dd>
+</dl>
+<p>(see <a href="#Stripe_size_and_width">#Stripe size and width</a>)
+</p>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> When using the XFS filesystem on <a href="../en/RAID.html" title="RAID">RAID</a> devices, performance improvements may be possible by using <code>largeio</code>, <code>swalloc</code>, increased <code>logbsize</code> and <code>allocsize</code> values, etc. The following articles may provide additional details about those flags:
+<ul>
+<li><a rel="nofollow" class="external free" href="https://www.beegfs.io/wiki/StorageServerTuning">https://www.beegfs.io/wiki/StorageServerTuning</a></li>
+<li><a rel="nofollow" class="external free" href="https://help.marklogic.com/Knowledgebase/Article/View/505/0/recommended-xfs-settings-for-marklogic-server">https://help.marklogic.com/Knowledgebase/Article/View/505/0/recommended-xfs-settings-for-marklogic-server</a></li>
+</ul>
+</div>
+<dl><dd>For mount options, the only thing that will change metadata performance considerably is the <code>logbsize</code> mount option. Increasing <code>logbsize</code> reduces the number of journal IOs for a given workload. The trade off for this increase in metadata performance is that more operations may be "missing" after recovery if the system crashes while actively making modifications.</dd></dl>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> See <span class="plainlinks archwiki-template-man" title="$ man 5 xfs"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/xfs.5">xfs(5)</a></span> for details on all available mount options.</div>
+<dl><dd>As of kernel 3.2.12, the default i/o scheduler, CFQ, will defeat much of the parallelization in XFS.</dd></dl>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> Arch is configured to use no I/O scheduler when a SATA or <a href="../en/Solid_state_drive/NVMe.html" class="mw-redirect" title="NVMe">NVMe</a> <a href="../en/Solid_state_drive.html" class="mw-redirect" title="SSD">SSD</a> is detected; this can confirmed by reading the content of <code>/sys/block/nvme*n*/queue/scheduler</code>.</div>
+<p>Therefore for optimal performance, in most cases you can just follow <a href="#Creation">#Creation</a>.
+</p>
+<h3><span class="mw-headline" id="Stripe_size_and_width">Stripe size and width</span></h3>
+<p>If this filesystem will be on a striped RAID you can gain significant speed improvements by specifying the stripe size to the <span class="plainlinks archwiki-template-man" title="$ man 8 mkfs.xfs"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/mkfs.xfs.8">mkfs.xfs(8)</a></span> command.
+</p>
+<p>XFS can sometimes detect the geometry under software RAID, but in case you reshape it or you are using hardware RAID see <a rel="nofollow" class="external text" href="https://web.archive.org/web/20240113230117/https://xfs.org/index.php/XFS_FAQ#Q:_How_to_calculate_the_correct_sunit.2Cswidth_values_for_optimal_performance">how to calculate the correct sunit,swidth values for optimal performance</a>.
+</p>
+<h3><span class="mw-headline" id="Access_time">Access time</span></h3>
+<p>On some filesystems you can increase performance by adding the <code>noatime</code> mount option to the <code>/etc/fstab</code> file. For XFS filesystems "the default atime behaviour is <code>relatime</code>, which has almost no overhead compared to noatime but still maintains sane atime values. All Linux filesystems use this as the default now (since around 2.6.30), but XFS has used relatime-like behaviour since 2006, so no-one should really need to ever use noatime on XFS for performance reasons."<a rel="nofollow" class="external autonumber" href="https://web.archive.org/web/20240113230117/https://xfs.org/index.php/XFS_FAQ#Q:_Is_using_noatime_or.2Fand_nodiratime_at_mount_time_giving_any_performance_benefits_in_xfs_.28or_not_using_them_performance_decrease.29.3F">[7]</a>
+</p>
+<p>See <a href="../en/Fstab.html#atime_options" title="Fstab">Fstab#atime options</a> for more on this topic.
+</p>
+<h3><span class="mw-headline" id="Discard">Discard</span></h3>
+<p>Despite XFS supporting async discard<a rel="nofollow" class="external autonumber" href="https://lwn.net/Articles/787272/">[8]</a> since kernel 4.7<a rel="nofollow" class="external autonumber" href="https://www.phoronix.com/scan.php?page=news_item&amp;px=Async-Discard-Linux-4.7">[9]</a><a rel="nofollow" class="external autonumber" href="https://events.static.linuxfound.org/sites/events/files/slides/discard_0.pdf">[10]</a>, <span class="plainlinks archwiki-template-man" title="$ man 5 xfs"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/xfs.5">xfs(5)</a></span> still recommends "that you use the <a href="../en/Solid_state_drive.html#Periodic_TRIM" class="mw-redirect" title="Fstrim">fstrim</a> application to discard unused blocks rather than the discard mount option because the performance impact of this option is quite severe."
+</p>
+<p>See <a href="../en/Solid_state_drive.html#Periodic_TRIM" title="Solid state drive">Solid state drive#Periodic TRIM</a>.
+</p>
+<h3><span class="mw-headline" id="Defragmentation">Defragmentation</span></h3>
+<p>Although the extent-based nature of XFS and the delayed allocation strategy it uses significantly improves the file system's resistance to fragmentation problems, XFS provides a filesystem defragmentation utility (<i>xfs_fsr</i>, short for XFS filesystem reorganizer) that can defragment the files on a mounted and active XFS filesystem. It can be useful to view XFS fragmentation periodically.
+</p>
+<p><span class="plainlinks archwiki-template-man" title="$ man 8 xfs_fsr"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/xfs_fsr.8">xfs_fsr(8)</a></span> improves the organization of mounted filesystems. The reorganization algorithm operates on one file at a time, compacting or otherwise improving the layout of the file extents (contiguous blocks of file data).
+</p>
+<h4><span class="mw-headline" id="Inspect_fragmentation_levels">Inspect fragmentation levels</span></h4>
+<p>To see how much fragmentation your file system currently has:
+</p>
+<pre># xfs_db -c frag -r /dev/<i>partition</i>
+</pre>
+<h4><span class="mw-headline" id="Perform_defragmentation">Perform defragmentation</span></h4>
+<p>To begin defragmentation, use the <span class="plainlinks archwiki-template-man" title="$ man 8 xfs_fsr"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/xfs_fsr.8">xfs_fsr(8)</a></span> command:
+</p>
+<pre># xfs_fsr /dev/<i>partition</i>
+</pre>
+<h3><span class="mw-headline" id="Deduplication">Deduplication</span></h3>
+<p>The <i>reflink</i> feature, available since kernel version 4.9 and enabled by default since <code>mkfs.xfs</code> version 5.1.0, allows creating fast reflink'ed copies of files as well as deduplication after the fact, in the same way as <a href="../en/Btrfs.html" title="Btrfs">btrfs</a>:
+</p>
+<h4><span class="mw-headline" id="Reflink_copies">Reflink copies</span></h4>
+<p>Reflink copies initially use no additional space:
+</p>
+<pre>$ cp --reflink bigfile1 bigfile2
+</pre>
+<p>Until either file is edited, and a copy-on-write takes place. This can be very useful to create snapshots of (large) files.
+</p>
+<h4><span class="mw-headline" id="Deduplication_2">Deduplication</span></h4>
+<p>Existing filesystems can be deduped using tools like <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=duperemove">duperemove</a></span> or <span class="plainlinks archwiki-template-man" title="$ man 1 hardlink"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/hardlink.1">hardlink(1)</a></span> from <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=util-linux">util-linux</a></span>.
+</p>
+<h3><span class="mw-headline" id="External_XFS_Journal">External XFS Journal</span></h3>
+<p>Using an external log (metadata journal) on for instance a <a href="../en/Solid_state_drive.html" class="mw-redirect" title="SSD">SSD</a> may be useful to improve performance <a rel="nofollow" class="external autonumber" href="https://docs.oracle.com/en/operating-systems/oracle-linux/9/fsadmin/fsadmin-ManagingtheXFSFileSystem.html#extjnl-xfs">[11]</a>. See <span class="plainlinks archwiki-template-man" title="$ man 8 mkfs.xfs"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/mkfs.xfs.8">mkfs.xfs(8)</a></span> for details about the <code>logdev</code> parameter.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> Using flash-memory may wear-out the drive. See <a href="../en/Improving_performance.html#Reduce_disk_reads/writes" title="Improving performance">Improving performance#Reduce disk reads/writes</a> for SSD wear-out details.</div>
+<p>To reserve an external journal with a specified size when you create an XFS file system, specify the <code>-l logdev=<i>device</i>,size=<i>size</i></code> option to the <code>mkfs.xfs</code> command. If you omit the <code>size</code> parameter, a journal size based on the size of the file system is used. To mount the XFS file system so that it uses the external journal, specify the <code>-o logdev=<i>device</i></code> option to the <a href="../en/File_systems.html#Mount_a_file_system" class="mw-redirect" title="Mount">mount</a> command.
+</p>
+<h3><span class="mw-headline" id="Sync_interval">Sync interval</span></h3>
+<p>XFS has a dedicated <a href="../en/Sysctl.html" title="Sysctl">sysctl</a> variable for setting the <a href="../en/Improving_performance.html#Writeback_interval_and_buffer_size" title="Improving performance">writeback interval</a> with a default value of 3000.
+</p>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Warning:</strong> While larger values may increase performance, they also increase the severity of data loss caused by a power outage.</div>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/sysctl.d/20-xfs-sync-interval.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">fs.xfs.xfssyncd_centisecs = 10000</pre>
+<h2><span class="mw-headline" id="Administration">Administration</span></h2>
+<h3><span class="mw-headline" id="Resize">Resize</span></h3>
+<p>XFS can be resized online using <span class="plainlinks archwiki-template-man" title="$ man 8 xfs_growfs"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/xfs_growfs.8">xfs_growfs(8)</a></span>:
+</p>
+<pre># xfs_growfs -D <i>size</i> <i>/path/to/mnt/point</i>
+</pre>
+<p>If <code>-D size</code> is omitted, the filesystem is automatically grown to the largest size possible, i.e. the size of the partition.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> xfs only has limited support for shrinking, as documented in <span class="plainlinks archwiki-template-man" title="$ man 8 xfs_growfs"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/xfs_growfs.8">xfs_growfs(8)</a></span>:
+"A filesystem with only 1 AG cannot be shrunk further, and a filesystem cannot be shrunk to the point where it would only have 1 AG.", where <i>AG</i> stands for <i>Allocation Group</i>.</div>
+<h3>
+<span id="Online_metadata_checking_.28scrub.29"></span><span class="mw-headline" id="Online_metadata_checking_(scrub)">Online metadata checking (scrub)</span>
+</h3>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Warning:</strong> This program is <b>experimental</b>, which means that its behavior and interface could change at any time. See <span class="plainlinks archwiki-template-man" title="$ man 8 xfs_scrub"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/xfs_scrub.8">xfs_scrub(8)</a></span>.</div>
+<p><code>xfs_scrub</code> asks the kernel to scrub all metadata objects in the XFS filesystem. Metadata records are scanned for obviously bad values and then cross-referenced against other metadata. The goal is to establish a reasonable confidence about the consistency of the overall filesystem by examining the consistency of individual metadata records against the other metadata in the filesystem. Damaged metadata can be rebuilt from other metadata if there exists redundant data structures which are intact.
+</p>
+<p><a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Enable">Enable</a>/<a href="../en/Help:Reading.html#Control_of_systemd_units" class="mw-redirect" title="Start">start</a> <code>xfs_scrub_all.timer</code> to periodic check online metadata for all XFS filesystems.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> One may want to <a href="../en/Systemd.html#Editing_provided_units" class="mw-redirect" title="Edit">edit</a> <code>xfs_scrub_all.timer</code>: the timer runs every Sunday at 3:10am and will be <a href="../en/Systemd/Timers.html#Realtime_timer" title="Systemd/Timers">triggered immediately</a> if it missed the last start time, i.e. due to the system being powered off.</div>
+<h3><span class="mw-headline" id="Repair">Repair</span></h3>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> "Unlike other Linux file systems, <i>xfs_repair</i> does not run at boot time, even when an XFS file system was not cleanly unmounted. In the event of an unclean unmount, <i>xfs_repair</i> simply replays the log at mount time, ensuring a consistent file system."<a rel="nofollow" class="external autonumber" href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/storage_administration_guide/xfsrepair">[12]</a>
+</div>
+<p>From <a rel="nofollow" class="external text" href="https://docs.oracle.com/en/operating-systems/oracle-linux/9/fsadmin/fsadmin-CheckingandRepairinganXFSFileSystem.html">Checking and Repairing an XFS File System</a> (emphasis ours):
+</p>
+<dl>
+<dd>If you can't mount an XFS file system, you can use the <code>xfs_repair -n</code> command to check its consistency. Typically, you would <b>only run this command on the device file of an <a href="../en/File_systems.html#Unmount_a_file_system" class="mw-redirect" title="Unmount">unmounted</a> file system</b> that you believe has a problem. The <code>xfs_repair -n</code> command displays output to indicates changes that would be made to the file system in the case where it would need to complete a repair operation, but doesn't modify the file system directly.</dd>
+<dd>If you can mount the file system and you don't have a suitable backup, you can use the <i>xfsdump</i> command to back up the existing file system data. However, note that the command might fail if the file system's metadata has become corrupted.</dd>
+<dd>You can use the <i>xfs_repair</i> command to attempt to repair an XFS file system specified by its device file. The command replays the journal log to fix any inconsistencies that might have resulted from the file system not being cleanly unmounted.  Unless the file system has an inconsistency, you typically don't need to use the follwoing command, as the journal is replayed every time that you mount an XFS file system.</dd>
+</dl>
+<dl><dd><pre># xfs_repair <i>device</i></pre></dd></dl>
+<dl><dd>If the journal log has become corrupted, you can reset the log by specifying the <code>-L</code> option to <i>xfs_repair</i>.</dd></dl>
+<dl><dd><div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Warning:</strong>
+<ul>
+<li>The <i>xfs_repair</i> utility cannot repair an XFS file system with a dirty log. To clear the log, mount and unmount the XFS file system. If the log is corrupt and cannot be replayed, use the <code>-L</code> option ("force log zeroing") to clear the log, that is, <code>xfs_repair -L /dev/<i>device</i></code>. Be aware that this may result in further corruption or data loss.<a rel="nofollow" class="external autonumber" href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/storage_administration_guide/xfsrepair">[13]</a>
+</li>
+<li>Resetting the log can leave the file system in an inconsistent state, resulting in data loss and data corruption. Unless you're experienced with debugging and repairing XFS file systems by using the <i>xfs_db</i>, it is recommended that you instead recreate the file system and restore its contents from a backup.<a rel="nofollow" class="external autonumber" href="https://docs.oracle.com/en/operating-systems/oracle-linux/9/fsadmin/fsadmin-CheckingandRepairinganXFSFileSystem.html">[14]</a>
+</li>
+</ul>
+</div></dd></dl>
+
+<dl>
+<dd>If you can't mount the file system or you don't have a suitable backup, running <i>xfs_repair</i> is the only viable option, unless you're experienced in using the <i>xfs_db</i> command.</dd>
+<dd>
+<i>xfs_db</i> provides an internal command set that allows you to debug and repair an XFS file system manually. The commands enable you to perform scans on the file system, and navigate and display its data structures. If you specify the <code>-x</code> option to enable expert mode, you can modify the data structures.</dd>
+</dl>
+<dl><dd><pre># xfs_db [-x] <i>device</i></pre></dd></dl>
+<dl><dd>For more information, see the <span class="plainlinks archwiki-template-man" title="$ man 8 xfs_db"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/xfs_db.8">xfs_db(8)</a></span> and <span class="plainlinks archwiki-template-man" title="$ man 8 xfs_repair"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/xfs_repair.8">xfs_repair(8)</a></span>, and the <i>help</i> command within <i>xfs_db</i>.</dd></dl>
+<p>See also <a rel="nofollow" class="external text" href="https://web.archive.org/web/20240113230117/https://xfs.org/index.php/XFS_FAQ#Q:_Which_factors_influence_the_memory_usage_of_xfs_repair.3F">Which factors influence the memory usage of xfs_repair?</a> and <a rel="nofollow" class="external text" href="https://web.archive.org/web/20210416081619/https://xfs.org/docs/xfsdocs-xml-dev/XFS_User_Guide/tmp/en-US/html/xfs-repair.html">XFS Repair</a>.
+</p>
+<h3><span class="mw-headline" id="Data_rescue">Data rescue</span></h3>
+<p>Even when being mounted read-only with <code>mount -o ro</code> an XFS file system's log will be replayed if it has not been unmounted cleanly.
+</p>
+<p>There may be situations where a compromised XFS file system on a damaged storage device should be mounted read-only, so that files may be copied off it hopefully without causing further damage, yet it cannot be mounted because it has not been unmounted cleanly and is damaged to such an extent that the log cannot be replayed.
+Also, consider that replaying the log means writing to the compromised file system, which might be a bad idea in itself.
+</p>
+<p>To mount an XFS file system without writing to it in any way and without replaying the log, use <code>mount -o ro,norecovery</code>.
+</p>
+<h3><span class="mw-headline" id="Undelete">Undelete</span></h3>
+<p><span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/xfs_undelete-git/">xfs_undelete-git</a></span><sup><small>AUR</small></sup> can recover (under certain conditions) deleted files on an unmounted or read-only mounted XFS filesystem.  See <a rel="nofollow" class="external free" href="https://github.com/ianka/xfs_undelete">https://github.com/ianka/xfs_undelete</a> for more information.
+</p>
+<h2><span class="mw-headline" id="Troubleshooting">Troubleshooting</span></h2>
+<h3><span class="mw-headline" id="Root_file_system_quota">Root file system quota</span></h3>
+<p>XFS quota mount options (<code>uquota</code>, <code>gquota</code>, <code>prjquota</code>, etc.) fail during re-mount of the file system. To enable quota for root file system, the mount option must be passed to initramfs as a <a href="../en/Kernel_parameters.html" class="mw-redirect" title="Kernel parameter">kernel parameter</a> <code>rootflags=</code>. Subsequently, it should not be listed among mount options in <code>/etc/fstab</code> for the root (<code>/</code>) filesystem.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> There are some differences of XFS Quota compared to standard Linux <a href="../en/Disk_quota.html" title="Disk quota">Disk quota</a>, this article <a rel="nofollow" class="external free" href="https://inai.de/linux/adm_quota">https://inai.de/linux/adm_quota</a> may be worth reading.</div>
+<h3>
+<span id="xfs_scrub_all_fails_if_user_.22nobody.22_can_not_access_the_mountpoint"></span><span class="mw-headline" id='xfs_scrub_all_fails_if_user_"nobody"_can_not_access_the_mountpoint'>xfs_scrub_all fails if user "nobody" can not access the mountpoint</span>
+</h3>
+<p>When running <code>xfs_scrub_all</code>, it will launch <code>xfs_scrub@.service</code> for each mounted XFS file system. The service is run as user <code>nobody</code>, so if <code>nobody</code> can not navigate to the directory, it will fail with the error:
+</p>
+<pre>xfs_scrub@<i>mountpoint</i>.service: Changing to the requested working directory failed: Permission denied
+xfs_scrub@<i>mountpoint</i>.service: Failed at step CHDIR spawning /usr/bin/xfs_scrub: Permission denied
+xfs_scrub@<i>mountpoint</i>.service: Main process exited, code=exited, status=200/CHDIR
+</pre>
+<p>To allow the service to run, change the <a href="../en/File_permissions_and_attributes.html" class="mw-redirect" title="Permissions">permissions</a> of the mountpoint so that user <code>nobody</code> has execute permissions.
+</p>
+<h3><span class="mw-headline" id="fsck.xfs_fails_in_systemd-based_initramfs">fsck.xfs fails in systemd-based initramfs</span></h3>
+<p>When using a <a href="../en/Mkinitcpio.html" title="Mkinitcpio">mkinitcpio</a>-generated systemd based initramfs without the <code>base</code> hook, you will see the following messages in the <a href="../en/Systemd/Journal.html" class="mw-redirect" title="Journal">journal</a>:
+</p>
+<pre>systemd-fsck[288]: fsck: /usr/bin/fsck.xfs: execute failed: No such file or directory
+systemd-fsck[286]: fsck failed with exit status 8.
+systemd-fsck[286]: Ignoring error.
+</pre>
+<p>This is because <span class="plainlinks archwiki-template-man" title="$ man 8 fsck.xfs"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/fsck.xfs.8">fsck.xfs(8)</a></span> is a shell script and requires <code>/bin/sh</code> to execute. <code>/usr/bin/sh</code> is provided by the <code>base</code> hook, so the solution is to prepend it to the HOOKS array in <code>/etc/mkinitcpio.conf</code>. E.g.:
+</p>
+<pre>HOOKS=(<b>base</b> systemd ... )
+</pre>
+<h2><span class="mw-headline" id="See_also">See also</span></h2>
+<ul>
+<li><a rel="nofollow" class="external text" href="https://web.archive.org/web/20240113230117/https://xfs.wiki.kernel.org/">XFS wiki (archive</a></li>
+<li><a rel="nofollow" class="external text" href="https://web.archive.org/web/20240113230117/https://xfs.org/index.php/XFS_FAQ">XFS FAQ</a></li>
+<li><a rel="nofollow" class="external text" href="https://web.archive.org/web/20240113230117/https://xfs.org/index.php/Improving_Metadata_Performance_By_Reducing_Journal_Overhead">Improving Metadata Performance By Reducing Journal Overhead</a></li>
+<li><a href="https://en.wikipedia.org/wiki/XFS" class="extiw" title="wikipedia:XFS">XFS Wikipedia Entry</a></li>
+<li>
+<a rel="nofollow" class="external text" href="https://web.archive.org/web/20210416081619/https://xfs.org/index.php/XFS_Papers_and_Documentation">XFS User Guide</a><sup title="Last check status: SSL error">[<a href="https://en.wikipedia.org/wiki/Wikipedia:Link_rot" class="extiw" title="wikipedia:Wikipedia:Link rot">dead link</a> 2024-03-03 ⓘ]</sup> XFS User Guide no longer exists but has a link to the git repository</li>
+</ul>
+</div>
+</div>
+					<div id="catlinks" class="catlinks" data-mw="interface">
+<div id="mw-normal-catlinks" class="mw-normal-catlinks">
+<a href="../Special:Categories.html" title="Special:Categories">Category</a>: <ul><li><a href="../en/Category:File_systems.html" title="Category:File systems">File systems</a></li></ul>
+</div>
+<div id="mw-hidden-catlinks" class="mw-hidden-catlinks mw-hidden-cats-hidden">Hidden categories: <ul>
+<li><a href="../en/Category:Pages_or_sections_flagged_with_Template:Expansion.html" title="Category:Pages or sections flagged with Template:Expansion">Pages or sections flagged with Template:Expansion</a></li>
+<li><a href="../en/Category:Pages_with_dead_links.html" title="Category:Pages with dead links">Pages with dead links</a></li>
+</ul>
+</div>
+</div>
+				</div>
+			</main>
+			
+		</div>
+		<div class="mw-footer-container">
+			
+<footer id="footer" class="mw-footer" style="margin: 0">
+	<ul id="footer-info">
+	<li data-nosnippet="">Retrieved from "<a dir="ltr" href="https://wiki.archlinux.org/index.php?title=XFS&amp;oldid=827036">https://wiki.archlinux.org/index.php?title=XFS&amp;oldid=827036</a>"</li>
+<li id="footer-info-lastmod"> This page was last edited on 14 February 2025, at 09:33.</li>
+	<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+<br>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="https://terms.archlinux.org/docs/privacy-policy/">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="../en/ArchWiki:About.html">About ArchWiki</a></li>
+	<li id="footer-places-disclaimers"><a href="../en/ArchWiki:General_disclaimer.html">Disclaimers</a></li>
+	<li id="footer-places-archwiki-code-of-conduct"><a href="https://terms.archlinux.org/docs/code-of-conduct/" class="extiw" title="archlinux-service-agreements:code-of-conduct">Code of conduct</a></li>
+	<li id="footer-places-archwiki-terms-of-service"><a href="https://terms.archlinux.org/docs/terms-of-service/" class="extiw" title="archlinux-service-agreements:terms-of-service">Terms of service</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-copyrightico"><a href="https://www.gnu.org/copyleft/fdl.html" class="cdx-button cdx-button--fake-button cdx-button--size-large cdx-button--fake-button--enabled"><img src="/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" loading="lazy"></a></li>
+	<li id="footer-poweredbyico"><img src="/resources/assets/poweredby_mediawiki.svg" width="88" height="31" loading="lazy"></li>
+</ul>
+
+</footer>
+
+		</div>
+	</div> 
+</div> 
+<div class="vector-settings" id="p-dock-bottom">
+	<ul></ul>
+</div>
+</body>
+</html>

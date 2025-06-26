@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-sticky-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-0 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-disabled skin-theme-clientpref-day vector-toc-available" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>Install Arch Linux on WSL - ArchWiki</title>
+<link rel="stylesheet" href="../ArchWikiOffline.css">
+<meta name="ResourceLoaderDynamicStyles" content="">
+<meta name="generator" content="MediaWiki 1.43.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="max-image-preview:standard">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.25, maximum-scale=5.0">
+<link rel="search" type="application/opensearchdescription+xml" href="/rest.php/v1/search" title="ArchWiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.archlinux.org/api.php?action=rsd">
+<link rel="license" href="https://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="ArchWiki Atom feed" href="/index.php?title=Special:RecentChanges&amp;feed=atom">
+</head>
+<body class="skin--responsive skin-vector skin-vector-search-vue mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Install_Arch_Linux_on_WSL rootpage-Install_Arch_Linux_on_WSL skin-vector-2022 action-view">
+<a class="mw-jump-link" href="#bodyContent">Jump to content</a>
+<div class="vector-header-container">
+	</div>
+<div class="mw-page-container">
+	<div class="mw-page-container-inner">
+		<div class="vector-column-start">
+			<div class="vector-main-menu-container">
+		</div>
+	<div class="vector-sticky-pinned-container">
+				<nav id="mw-panel-toc" aria-label="Contents" data-event-name="ui.sidebar-toc" class="mw-table-of-contents-container vector-toc-landmark">
+					<div id="vector-toc-pinned-container" class="vector-pinned-container">
+					<div id="vector-toc" class="vector-toc vector-pinnable-element">
+	<div class="vector-pinnable-header vector-toc-pinnable-header vector-pinnable-header-pinned" data-feature-name="toc-pinned" data-pinnable-element-id="vector-toc">
+	<h2 class="vector-pinnable-header-label">Contents</h2>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-toc.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-toc.unpin">hide</button>
+</div>
+
+
+	<ul class="vector-toc-contents" id="mw-panel-toc-list">
+		<li id="toc-mw-content-text" class="vector-toc-list-item vector-toc-level-1">
+			<a href="#" class="vector-toc-link">
+				<div class="vector-toc-text">Beginning</div>
+			</a>
+		</li>
+		<li id="toc-Installation" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Installation">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">1</span>
+				<span>Installation</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Installation-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Installation subsection</span>
+			</button>
+		
+		<ul id="toc-Installation-sublist" class="vector-toc-list">
+			<li id="toc-Automated_install" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Automated_install">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.1</span>
+					<span>Automated install</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Automated_install-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Manual_install" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Manual_install">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.2</span>
+					<span>Manual install</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Manual_install-sublist" class="vector-toc-list">
+				<li id="toc-WSL_2.4.4_or_greater" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#WSL_2.4.4_or_greater">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.2.1</span>
+					<span>WSL 2.4.4 or greater</span>
+				</div>
+			</a>
+			
+			<ul id="toc-WSL_2.4.4_or_greater-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-WSL_prior_to_2.4.4" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#WSL_prior_to_2.4.4">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">1.2.2</span>
+					<span>WSL prior to 2.4.4</span>
+				</div>
+			</a>
+			
+			<ul id="toc-WSL_prior_to_2.4.4-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Tips_and_tricks" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Tips_and_tricks">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">2</span>
+				<span>Tips and tricks</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Tips_and_tricks-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Tips and tricks subsection</span>
+			</button>
+		
+		<ul id="toc-Tips_and_tricks-sublist" class="vector-toc-list">
+			<li id="toc-Set_default_user" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Set_default_user">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1</span>
+					<span>Set default user</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Set_default_user-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Run_graphical_applications_with_WSLg" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Run_graphical_applications_with_WSLg">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2</span>
+					<span>Run graphical applications with WSLg</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Run_graphical_applications_with_WSLg-sublist" class="vector-toc-list">
+				<li id="toc-Hardware_accelerated_rendering" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Hardware_accelerated_rendering">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2.1</span>
+					<span>Hardware accelerated rendering</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Hardware_accelerated_rendering-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-WSL_interoperability" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#WSL_interoperability">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.3</span>
+					<span>WSL interoperability</span>
+				</div>
+			</a>
+			
+			<ul id="toc-WSL_interoperability-sublist" class="vector-toc-list">
+				<li id="toc-Bridge_the_ssh-agent_service_from_Windows" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Bridge_the_ssh-agent_service_from_Windows">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.3.1</span>
+					<span>Bridge the ssh-agent service from Windows</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Bridge_the_ssh-agent_service_from_Windows-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-PAM_authentication_with_Windows_Hello" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#PAM_authentication_with_Windows_Hello">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.3.2</span>
+					<span>PAM authentication with Windows Hello</span>
+				</div>
+			</a>
+			
+			<ul id="toc-PAM_authentication_with_Windows_Hello-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Passing_devices_to_WSL" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Passing_devices_to_WSL">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.4</span>
+					<span>Passing devices to WSL</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Passing_devices_to_WSL-sublist" class="vector-toc-list">
+				<li id="toc-Mount_a_disk" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Mount_a_disk">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.4.1</span>
+					<span>Mount a disk</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Mount_a_disk-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Connect_USB_devices" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Connect_USB_devices">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.4.2</span>
+					<span>Connect USB devices</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Connect_USB_devices-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Troubleshooting" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Troubleshooting">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">3</span>
+				<span>Troubleshooting</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Troubleshooting-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Troubleshooting subsection</span>
+			</button>
+		
+		<ul id="toc-Troubleshooting-sublist" class="vector-toc-list">
+			<li id="toc-systemd_support" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#systemd_support">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1</span>
+					<span>systemd support</span>
+				</div>
+			</a>
+			
+			<ul id="toc-systemd_support-sublist" class="vector-toc-list">
+				<li id="toc-systemd-firstboot.service_hanging" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#systemd-firstboot.service_hanging">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1.1</span>
+					<span>systemd-firstboot.service hanging</span>
+				</div>
+			</a>
+			
+			<ul id="toc-systemd-firstboot.service_hanging-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-systemd_requires_plain_cgroup_v2_support" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#systemd_requires_plain_cgroup_v2_support">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.1.2</span>
+					<span>systemd requires plain cgroup v2 support</span>
+				</div>
+			</a>
+			
+			<ul id="toc-systemd_requires_plain_cgroup_v2_support-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-Failure_when_running_Docker_containers" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#Failure_when_running_Docker_containers">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">3.2</span>
+					<span>Failure when running Docker containers</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Failure_when_running_Docker_containers-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-See_also" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#See_also">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">4</span>
+				<span>See also</span>
+			</div>
+		</a>
+		
+		<ul id="toc-See_also-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+</ul>
+</div>
+
+					</div>
+		</nav>
+			</div>
+		</div>
+		<div class="mw-content-container">
+			<main id="content" class="mw-body" style="margin: 0">
+				<header class="mw-body-header vector-page-titlebar">
+					<nav aria-label="Contents" class="vector-toc-landmark">
+						
+<div id="vector-page-titlebar-toc" class="vector-dropdown vector-page-titlebar-toc vector-button-flush-left">
+	<input type="checkbox" id="vector-page-titlebar-toc-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-page-titlebar-toc" class="vector-dropdown-checkbox " aria-label="Toggle the table of contents">
+	<label id="vector-page-titlebar-toc-label" for="vector-page-titlebar-toc-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"><span class="vector-icon mw-ui-icon-listBullet mw-ui-icon-wikimedia-listBullet"></span>
+
+<span class="vector-dropdown-label-text">Toggle the table of contents</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+							<div id="vector-page-titlebar-toc-unpinned-container" class="vector-unpinned-container">
+			</div>
+		
+	</div>
+</div>
+
+					</nav>
+					<h1 id="firstHeading" class="firstHeading mw-first-heading"><span class="mw-page-title-main">Install Arch Linux on WSL</span></h1>
+							
+<div id="p-lang-btn" class="vector-dropdown mw-portlet mw-portlet-lang">
+	<input type="checkbox" id="p-lang-btn-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-p-lang-btn" class="vector-dropdown-checkbox mw-interlanguage-selector" aria-label="Go to an article in another language. Available in 1 language">
+	<label id="p-lang-btn-label" for="p-lang-btn-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--action-progressive mw-portlet-lang-heading-1" aria-hidden="true"><span class="vector-icon mw-ui-icon-language-progressive mw-ui-icon-wikimedia-language-progressive"></span>
+
+<span class="vector-dropdown-label-text">1 language</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+		<div class="vector-menu-content">
+			
+			<ul class="vector-menu-content-list">
+				
+				<li class="interlanguage-link interwiki-zh-hans mw-list-item"><a href="https://wiki.archlinuxcn.org/wiki/%E5%9C%A8_WSL_%E4%B8%8A%E5%AE%89%E8%A3%85_Arch_Linux" title="在 WSL 上安装 Arch Linux – 中文（简体）" lang="zh-Hans" hreflang="zh-Hans" data-title="在 WSL 上安装 Arch Linux" data-language-autonym="中文（简体）" data-language-local-name="中文（简体）" class="interlanguage-link-target"><span>中文（简体）</span></a></li>
+			</ul>
+			
+		</div>
+
+	</div>
+</div>
+</header>
+				<div class="vector-column-end">
+					<div class="vector-sticky-pinned-container">
+						<nav class="vector-page-tools-landmark" aria-label="Page tools">
+							<div id="vector-page-tools-pinned-container" class="vector-pinned-container">
+				
+							</div>
+		</nav>
+						<nav class="vector-appearance-landmark" aria-label="Appearance">
+							<div id="vector-appearance-pinned-container" class="vector-pinned-container">
+				<div id="vector-appearance" class="vector-appearance vector-pinnable-element">
+	<div class="vector-pinnable-header vector-appearance-pinnable-header vector-pinnable-header-pinned" data-feature-name="appearance-pinned" data-pinnable-element-id="vector-appearance" data-pinned-container-id="vector-appearance-pinned-container" data-unpinned-container-id="vector-appearance-unpinned-container">
+	<div class="vector-pinnable-header-label">Appearance</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-appearance.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-appearance.unpin">hide</button>
+</div>
+
+
+</div>
+
+							</div>
+		</nav>
+					</div>
+				</div>
+				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container>
+					<div class="vector-body-before-content">
+							<div class="mw-indicators">
+		</div>
+
+						<div id="siteSub" class="noprint">From ArchWiki</div>
+					</div>
+					<div id="contentSub"><div id="mw-content-subtitle"></div></div>
+					
+					
+					<div id="mw-content-text" class="mw-body-content">
+<div class="mw-content-ltr mw-parser-output" lang="en" dir="ltr">
+<p>Arch Linux provides an official <a rel="nofollow" class="external text" href="https://learn.microsoft.com/en-us/windows/wsl/about">WSL (Windows Subsystem for Linux)</a> image as part of the <a rel="nofollow" class="external text" href="https://gitlab.archlinux.org/archlinux/archlinux-wsl">archlinux-wsl</a> project. 
+</p>
+<p>Images are built and released monthly and aim to provide the simplest but complete system to offer an outright Arch Linux experience with WSL.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> These images are built for <b>WSL 2</b>. WSL 1 is <b>not</b> supported.</div>
+<meta property="mw:PageProp/toc">
+<h2><span class="mw-headline" id="Installation">Installation</span></h2>
+<p>From a Windows system <a rel="nofollow" class="external text" href="https://learn.microsoft.com/en-us/windows/wsl/install">with WSL 2 installed</a>, use one of the following installation methods.
+</p>
+<h3><span class="mw-headline" id="Automated_install">Automated install</span></h3>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Warning:</strong> This automated install method is a work in progress and is not yet functional!</div>
+<p>Run the following command in a PowerShell prompt:
+</p>
+<pre>&gt; wsl --install archlinux
+</pre>
+<p>You can then run Arch Linux in WSL via the <code>archlinux</code> application from the Start menu, or by running <code>wsl -d archlinux</code> in a PowerShell prompt.
+</p>
+<h3><span class="mw-headline" id="Manual_install">Manual install</span></h3>
+<h4><span class="mw-headline" id="WSL_2.4.4_or_greater">WSL 2.4.4 or greater</span></h4>
+<p>Download the <a rel="nofollow" class="external text" href="https://gitlab.archlinux.org/archlinux/archlinux-wsl/-/releases/permalink/latest">latest Arch Linux .wsl</a> image and double-click on it to start the installation.
+</p>
+<p>You can then run Arch Linux in WSL via the <code>archlinux</code> application from the Start menu, or by running <code>wsl -d archlinux</code> in a PowerShell prompt.
+</p>
+<h4><span class="mw-headline" id="WSL_prior_to_2.4.4">WSL prior to 2.4.4</span></h4>
+<p>Download the <a rel="nofollow" class="external text" href="https://gitlab.archlinux.org/archlinux/archlinux-wsl/-/releases/permalink/latest">latest Arch Linux .wsl image</a> and run the following command in a PowerShell prompt:
+</p>
+<pre>&gt; wsl --import <i>Distro_name</i> <i>Install_location</i> <i>WSL_image</i>
+</pre>
+<p>For instance:
+</p>
+<pre>&gt; wsl --import archlinux C:\Users\<i>Username</i>\AppData\Local\wsl\archlinux C:\Users\<i>Username</i>\Downloads\archlinux-2025.04.01.121271.wsl
+</pre>
+<p>You can then run Arch Linux in WSL via the <code>archlinux</code> application from the Start menu, or by running <code>wsl -d archlinux</code> in a PowerShell prompt. Make sure to execute the first setup script by running <code>/usr/lib/wsl/first-setup.sh</code> right after the first launch.
+</p>
+<h2><span class="mw-headline" id="Tips_and_tricks">Tips and tricks</span></h2>
+<h3><span class="mw-headline" id="Set_default_user">Set default user</span></h3>
+<p>To set a different default user than <code>root</code>, first <a href="../en/Users_and_groups.html#Example_adding_a_user" title="Users and groups">ensure the user has been created</a>, then append the following to the <code>/etc/wsl.conf</code> file:
+</p>
+<pre>[user]
+default=<i>username</i>
+</pre>
+<p><br>
+</p>
+<p>The change will apply at the next session. To terminate your current session, run the following command in a PowerShell prompt:
+</p>
+<pre>&gt; wsl --terminate archlinux
+</pre>
+<h3><span class="mw-headline" id="Run_graphical_applications_with_WSLg">Run graphical applications with WSLg</span></h3>
+<p><a rel="nofollow" class="external text" href="https://github.com/microsoft/wslg">WSLg (Windows Subsystem for Linux GUI)</a> is a project that aims to enable <a rel="nofollow" class="external text" href="https://learn.microsoft.com/en-us/windows/wsl/tutorials/gui-apps">running Linux applications with audio (PulseAudio) and graphical (X11 and Wayland) support within WSL</a>.
+</p>
+<p>To be able to run graphical applications with WSLg, enable GUI applications support in the <code>%USERPROFILE%/.wslconfig</code> file on your Windows system (create it if it does not exists) with the following content:
+</p>
+<pre>[wsl2]
+guiApplications = true
+</pre>
+<p>With the the above set, WSL creates symlinks upon opening a session to the X11 and Wayland server's sockets but these are overriden by systemd during init. See <a rel="nofollow" class="external text" href="https://github.com/microsoft/wslg/issues/1032">microsoft/wslg#1032</a> for more details.
+</p>
+<p>While waiting for upstream to resolve this problem, you can create the symlinks manually. First, create a <a href="../en/Systemd.html#systemd-tmpfiles_-_temporary_files" title="Systemd">systemd-tmpfiles</a> configuration to link the directory containing the X11 server's socket:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/tmpfiles.d/wslg.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">#      Path         Mode UID  GID  Age Argument
+L+     %T/.X11-unix -    -    -    -   /mnt/wslg/.X11-unix
+</pre>
+<p>Then, create the following file to link the directory containing the PulseAudio and Wayland server's socket as well as set the Gallium driver:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/profile.d/wslg.sh</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">export GALLIUM_DRIVER=d3d12
+
+for i in "/mnt/wslg/runtime-dir/"*; do
+  if [ ! -L "$XDG_RUNTIME_DIR$(basename "$i")" ]; then
+    [ -d "$XDG_RUNTIME_DIR$(basename "$i")" ] &amp;&amp; rm -r "$XDG_RUNTIME_DIR$(basename "$i")"
+    ln -s "$i" "$XDG_RUNTIME_DIR$(basename "$i")"
+  fi
+done
+</pre>
+<p>Changes will apply at the next session. To terminate your current session, run the following command in a PowerShell prompt:
+</p>
+<pre>&gt; wsl --terminate archlinux
+</pre>
+<h4><span class="mw-headline" id="Hardware_accelerated_rendering">Hardware accelerated rendering</span></h4>
+<p>To utilise hardware accelerated rendering in WSL, <a href="../en/Help:Reading.html#Installation_of_packages" class="mw-redirect" title="Install">install</a> the following packages:
+</p>
+<ul>
+<li>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=mesa">mesa</a></span> - Contains the <code>d3d12</code> Gallium driver for OpenGL</li>
+<li>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=vulkan-dzn">vulkan-dzn</a></span> - Contains the experimental <code>dzn</code> (also known as <code>microsoft-experimental</code>) Vulkan driver</li>
+</ul>
+<p>You will need to install the <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=vulkan-icd-loader">vulkan-icd-loader</a></span> (and <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=lib32-vulkan-icd-loader">lib32-vulkan-icd-loader</a></span> if you also want to run 32-bit applications) as well.
+</p>
+<p>if openGL falling back to llvmpipe software renderer on Intel GPUs, you need to link libedit (sudo ln -s /usr/lib64/libedit.so.0 /usr/lib64/libedit.so.2 ), see <a rel="nofollow" class="external free" href="https://github.com/microsoft/wslg/issues/996">https://github.com/microsoft/wslg/issues/996</a> and <a rel="nofollow" class="external free" href="https://wiki.gentoo.org/wiki/Gentoo_in_WSL">https://wiki.gentoo.org/wiki/Gentoo_in_WSL</a>
+and you also need to export GALLIUM_DRIVER=d3d12 according to <a rel="nofollow" class="external free" href="https://github.com/microsoft/wslg/issues/996#issuecomment-2720501874">https://github.com/microsoft/wslg/issues/996#issuecomment-2720501874</a>
+</p>
+<h3><span class="mw-headline" id="WSL_interoperability">WSL interoperability</span></h3>
+<p>WSL features <a rel="nofollow" class="external text" href="https://github.com/ubuntu/WSL/blob/main/docs/tutorials/interop.md">interoperability between the Windows and WSL</a>. This allows you to run Windows binaries from within WSL.
+</p>
+<p>To use interoperability, make sure it is enabled in the <code>/etc/wsl.conf</code> file with the following content:
+</p>
+<pre>[interop]
+enabled = true
+</pre>
+<p>Various tools have been created to allow you to utilise Windows services and features from within WSL.
+</p>
+<h4><span class="mw-headline" id="Bridge_the_ssh-agent_service_from_Windows">Bridge the ssh-agent service from Windows</span></h4>
+<p><a rel="nofollow" class="external text" href="https://github.com/mame/wsl2-ssh-agent">wsl2-ssh-agent</a> is a tool that allows you to use the Windows <a href="../en/SSH_keys.html#SSH_agents" class="mw-redirect" title="SSH agent">SSH agent</a> from within WSL.
+</p>
+<p>This is especially useful if you utilise <code>*-sk</code> SSH keys requiring the use of physical security keys or even <a rel="nofollow" class="external text" href="https://www.microsoft.com/windows/tips/windows-hello">Windows Hello</a>.
+</p>
+<p>Install <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/wsl2-ssh-agent/">wsl2-ssh-agent</a></span><sup><small>AUR</small></sup> and add the following to your <code>~/.bashrc</code>:
+</p>
+<pre>eval "$(/usr/sbin/wsl2-ssh-agent)"
+</pre>
+<p>Restart your shell and the <code>SSH_AUTH_SOCK</code> <a href="../en/Environment_variables.html" class="mw-redirect" title="Environment variable">environment variable</a> should be configured correctly.
+</p>
+<h4><span class="mw-headline" id="PAM_authentication_with_Windows_Hello">PAM authentication with Windows Hello</span></h4>
+<p><a rel="nofollow" class="external text" href="https://github.com/nullpo-head/WSL-Hello-sudo">WSL-Hello-Sudo</a> is a <a href="../en/PAM.html" title="PAM">PAM</a> plugin that allows you to authenticate your user via <a rel="nofollow" class="external text" href="https://www.microsoft.com/windows/tips/windows-hello">Windows Hello</a>.
+</p>
+<p>Install <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/wsl-hello-sudo-bin/">wsl-hello-sudo-bin</a></span><sup><small>AUR</small></sup> and run <code>/opt/wsl-hello-sudo/install.sh</code>. The installer will copy a Windows executable to a directory of your choosing and store a certificate used to authenticate beside it.
+</p>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> <a rel="nofollow" class="external free" href="https://github.com/nullpo-head/WSL-Hello-sudo">https://github.com/nullpo-head/WSL-Hello-sudo</a> has not been updated in 4 years, so <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://aur.archlinux.org/packages/wsl-hello-sudo-bin/">wsl-hello-sudo-bin</a></span><sup><small>AUR</small></sup> utilises a fork (<a rel="nofollow" class="external free" href="https://github.com/lzlrd/wsl-hello-sudo">https://github.com/lzlrd/wsl-hello-sudo</a>) which has merged in dependency updates.</div>
+<p>Add <code>auth sufficient pam_wsl_hello.so</code> to any <code>/etc/pam.d</code> configuration files you wish to authenticate with Windows Hello for. For example, with sudo:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/pam.d/sudo</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">#%PAM-1.0
+auth            sufficient      pam_wsl_hello.so
+auth            include         system-auth
+account         include         system-auth
+session         include         system-auth
+</pre>
+<h3><span class="mw-headline" id="Passing_devices_to_WSL">Passing devices to WSL</span></h3>
+<p>WSL 2 is a <a href="../en/Hyper-V.html" title="Hyper-V">Hyper-V</a> virtual machine. This allows for passthrough for physical devices from the host (Windows) to the guest (WSL 2).
+</p>
+<h4><span class="mw-headline" id="Mount_a_disk">Mount a disk</span></h4>
+<p>WSL 2 supports attaching and mounting disks available to Windows.
+</p>
+<p>To do so, first idenitfy the <code>DeviceID</code> for the given disk with the following PowerShell command:
+</p>
+<pre>&gt; GET-CimInstance -query "SELECT * from Win32_DiskDrive"
+</pre>
+<p>Once you have found the disk you would like to pass, run the following on Windows (with Administrator privileges):
+</p>
+<pre>&gt; wsl --mount <i>DeviceID</i> --bare
+</pre>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Warning:</strong> This will take the disk offline in Windows! Make sure you have closed all running applications using the drive.</div>
+<p>Once attached, you should be able to see the device with <i>lsblk</i>.
+</p>
+<p>To unmount a disk, run:
+</p>
+<pre>&gt; wsl --unmount <i>DeviceID</i>
+</pre>
+<p>For more information, see <a rel="nofollow" class="external free" href="https://learn.microsoft.com/en-us/windows/wsl/wsl2-mount-disk">https://learn.microsoft.com/en-us/windows/wsl/wsl2-mount-disk</a>.
+</p>
+<h4><span class="mw-headline" id="Connect_USB_devices">Connect USB devices</span></h4>
+<p><a rel="nofollow" class="external text" href="https://github.com/dorssel/usbipd-win">usbipd-win</a> is a project which allows for sharing locally connected USB devices to other machines, including WSL 2.
+</p>
+<p>You first need to install the software on Windows. You can either run the installer (<i>.msi</i>) from the <a rel="nofollow" class="external text" href="https://github.com/dorssel/usbipd-win/releases/latest">latest release</a> or use use the <a rel="nofollow" class="external text" href="https://learn.microsoft.com/en-us/windows/package-manager/winget/">Windows Package Manager</a>:
+</p>
+<pre>&gt; winget install usbipd
+</pre>
+<p>Once installed, identify the USB devices available using and take note of the bus ID by running the following on Windows:
+</p>
+<pre>&gt; usbipd list
+</pre>
+<p>Prepare the USB device you have selected by running (this requires Administrator privileges):
+</p>
+<pre>&gt; usbipd bind --busid <i>busid</i>
+</pre>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Warning:</strong> Make sure you have closed all running applications using the USB device.</div>
+<p>Then, attach the USB device to WSL 2 using:
+</p>
+<pre>&gt; usbipd attach --wsl --busid <i>busid</i>
+</pre>
+<p>Once attached, you should be able to see the device with <code>lsusb</code>.
+</p>
+<p>To detatch a USB device, run:
+</p>
+<pre>&gt; usbipd detach --busid <i>busid</i>
+</pre>
+<p>For more information, see <a rel="nofollow" class="external free" href="https://learn.microsoft.com/en-us/windows/wsl/connect-usb">https://learn.microsoft.com/en-us/windows/wsl/connect-usb</a>.
+</p>
+<h2><span class="mw-headline" id="Troubleshooting">Troubleshooting</span></h2>
+<h3><span class="mw-headline" id="systemd_support">systemd support</span></h3>
+<p>The Arch Linux WSL image provides <a href="../en/Systemd.html" title="Systemd">systemd</a> support.
+</p>
+<p>However, there are known pending issues that may require additional actions for systemd to work properly.
+</p>
+<h4><span class="mw-headline" id="systemd-firstboot.service_hanging">systemd-firstboot.service hanging</span></h4>
+<p>The <code>systemd-firstboot.service</code> job hangs at first boot, preventing any other systemd services to start.
+</p>
+<p>While waiting for the actual root cause of this issue (and a proper fix for it) to be identified, a workaround is automatically applied by the <a rel="nofollow" class="external text" href="https://gitlab.archlinux.org/archlinux/archlinux-wsl/-/blob/main/rootfs/usr/lib/wsl/first-setup.sh">first-setup script</a> when running the image for the first time, so you should not have to do anything on that front.
+</p>
+<p>See <a rel="nofollow" class="external text" href="https://gitlab.archlinux.org/archlinux/archlinux-wsl/-/issues/3">archlinux/archlinux-wsl#3</a> for more details.
+</p>
+<h4><span class="mw-headline" id="systemd_requires_plain_cgroup_v2_support">systemd requires plain cgroup v2 support</span></h4>
+<p>Currently, WSL starts systems with cgroup v1 support by default<a rel="nofollow" class="external autonumber" href="https://github.com/microsoft/WSL/issues/11857">[1]</a> but systemd &gt;= 256 dropped support for it<a rel="nofollow" class="external autonumber" href="https://github.com/systemd/systemd/releases/tag/v256">[2]</a> and requires plain cgroup v2 support.
+</p>
+<p>While waiting for WSL to start systems with plain cgroup v2 support by default, you can force it by disabling cgroup v1 support in the <code>%USERPROFILE%/.wslconfig</code> file on your Windows system (create it if it does not exists) with the following content:
+</p>
+<pre>[wsl2]
+kernelCommandLine = cgroup_no_v1=all systemd.unified_cgroup_hierarchy=1
+</pre>
+<p>The change will apply at the next session. To terminate your current session, run the following command in a PowerShell prompt:
+</p>
+<pre>&gt; wsl --terminate archlinux
+</pre>
+<h3><span class="mw-headline" id="Failure_when_running_Docker_containers">Failure when running Docker containers</span></h3>
+<p>One might face the following error when running a <a href="../en/Docker.html" title="Docker">Docker</a> container from WSL:
+</p>
+<pre>Error response from daemon: path / is mounted on / but it is not a shared or slave mount
+Error: failed to start containers
+</pre>
+<p>This is because Docker expects the root (<code>/</code>) directory to be mounted with rshared propagation.
+</p>
+<p>To do so, run:
+</p>
+<pre># mount --make-rshared /
+</pre>
+<h2><span class="mw-headline" id="See_also">See also</span></h2>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Windows_Subsystem_for_Linux" class="extiw" title="wikipedia:Windows Subsystem for Linux">Wikipedia:Windows Subsystem for Linux</a></li>
+<li><a href="https://wiki.gentoo.org/wiki/Gentoo_in_WSL" class="extiw" title="gentoo:Gentoo in WSL">Gentoo:Gentoo in WSL</a></li>
+<li><a rel="nofollow" class="external text" href="https://learn.microsoft.com/en-us/windows/wsl">Official Documentation</a></li>
+<li><a rel="nofollow" class="external text" href="https://github.com/microsoft/WSLg/wiki">WSLg GitHub Wiki</a></li>
+</ul>
+</div>
+</div>
+					<div id="catlinks" class="catlinks" data-mw="interface"><div id="mw-normal-catlinks" class="mw-normal-catlinks">
+<a href="../Special:Categories.html" title="Special:Categories">Categories</a>: <ul>
+<li><a href="../en/Category:Installation_process.html" title="Category:Installation process">Installation process</a></li>
+<li><a href="../en/Category:Hypervisors.html" title="Category:Hypervisors">Hypervisors</a></li>
+</ul>
+</div></div>
+				</div>
+			</main>
+			
+		</div>
+		<div class="mw-footer-container">
+			
+<footer id="footer" class="mw-footer" style="margin: 0">
+	<ul id="footer-info">
+	<li data-nosnippet="">Retrieved from "<a dir="ltr" href="https://wiki.archlinux.org/index.php?title=Install_Arch_Linux_on_WSL&amp;oldid=830077">https://wiki.archlinux.org/index.php?title=Install_Arch_Linux_on_WSL&amp;oldid=830077</a>"</li>
+<li id="footer-info-lastmod"> This page was last edited on 29 March 2025, at 01:43.</li>
+	<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+<br>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="https://terms.archlinux.org/docs/privacy-policy/">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="../en/ArchWiki:About.html">About ArchWiki</a></li>
+	<li id="footer-places-disclaimers"><a href="../en/ArchWiki:General_disclaimer.html">Disclaimers</a></li>
+	<li id="footer-places-archwiki-code-of-conduct"><a href="https://terms.archlinux.org/docs/code-of-conduct/" class="extiw" title="archlinux-service-agreements:code-of-conduct">Code of conduct</a></li>
+	<li id="footer-places-archwiki-terms-of-service"><a href="https://terms.archlinux.org/docs/terms-of-service/" class="extiw" title="archlinux-service-agreements:terms-of-service">Terms of service</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-copyrightico"><a href="https://www.gnu.org/copyleft/fdl.html" class="cdx-button cdx-button--fake-button cdx-button--size-large cdx-button--fake-button--enabled"><img src="/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" loading="lazy"></a></li>
+	<li id="footer-poweredbyico"><img src="/resources/assets/poweredby_mediawiki.svg" width="88" height="31" loading="lazy"></li>
+</ul>
+
+</footer>
+
+		</div>
+	</div> 
+</div> 
+<div class="vector-settings" id="p-dock-bottom">
+	<ul></ul>
+</div>
+</body>
+</html>

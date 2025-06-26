@@ -1,0 +1,60 @@
+<h1>awk</h1>
+
+<blockquote><p>Wszechstronny język programowania do pracy na plikach.
+Więcej informacji: <a href="https://github.com/onetrueawk/awk">https://github.com/onetrueawk/awk</a>.</p></blockquote>
+
+<ul>
+<li>Wypisz piątą kolumnę (tzw. pole) w pliku oddzielonym spacjami:</li>
+</ul>
+
+
+<p><code>awk '{print $5}' {{ścieżka/do/pliku}}</code></p>
+
+<ul>
+<li>Wypisz drugą kolumnę wierszy zawierających &ldquo;foo&rdquo; w pliku oddzielonym spacjami:</li>
+</ul>
+
+
+<p><code>awk '/{{foo}}/ {print $2}' {{ścieżka/do/pliku}}</code></p>
+
+<ul>
+<li>Wypisz ostatnią kolumnę każdego wiersza w pliku, używając przecinka (zamiast spacji) jako separatora pola:</li>
+</ul>
+
+
+<p><code>awk -F ',' '{print $NF}' {{ścieżka/do/pliku}}</code></p>
+
+<ul>
+<li>Zsumuj wartości w pierwszej kolumnie pliku i wypisz łączną wartość:</li>
+</ul>
+
+
+<p><code>awk '{s+=$1} END {print s}' {{ścieżka/do/pliku}}</code></p>
+
+<ul>
+<li>Wypisuj co trzeci wiersz, zaczynając od pierwszego:</li>
+</ul>
+
+
+<p><code>awk 'NR%3==1' {{ścieżka/do/pliku}}</code></p>
+
+<ul>
+<li>Wypisz różne wartości w zależności od warunków:</li>
+</ul>
+
+
+<p><code>awk '{if ($1 == "foo") print "Dokładne dopasowanie foo"; else if ($1 ~ "bar") print "Częściowe dopasowanie bar"; else print "Baz"}' {{ścieżka/do/pliku}}</code></p>
+
+<ul>
+<li>Wypisz wszystkie linie gdzie wartość 10-tej kolumny jest pomiędzy podanymi wartościami:</li>
+</ul>
+
+
+<p><code>awk '($10 &gt;= {{min_wartość}} &amp;&amp; $10 &lt;= {{maks_wartość}})'</code></p>
+
+<ul>
+<li>Wypisz tabelę użytkowników z UID >=1000 z nagłówkiem i sformatowanym wyjściem, używając dwukropka jako separatora (<code>%-20s</code> oznacza: 20 znaków ciągu wyrównanych do lewej, <code>%6s</code> oznacza: 6 znaków ciągu wyrównanych do prawej):</li>
+</ul>
+
+
+<p><code>awk 'BEGIN {FS=":";printf "%-20s %6s %25s\n", "Name", "UID", "Shell"} $4 &gt;= 1000 {printf "%-20s %6d %25s\n", $1, $4, $7}' /etc/passwd</code></p>

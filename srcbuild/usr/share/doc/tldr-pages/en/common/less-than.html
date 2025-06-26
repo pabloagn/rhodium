@@ -1,0 +1,53 @@
+<h1>Less than</h1>
+
+<blockquote><p>Redirect data to <code>stdin</code>.
+More information: <a href="https://gnu.org/software/bash/manual/bash.html#Redirecting-Input">https://gnu.org/software/bash/manual/bash.html#Redirecting-Input</a>.</p></blockquote>
+
+<ul>
+<li>Redirect a file to <code>stdin</code> (achieves the same effect as <code>cat file.txt |</code>):</li>
+</ul>
+
+
+<p><code>{{command}} &lt; {{path/to/file.txt}}</code></p>
+
+<ul>
+<li>Create a here document and pass that into <code>stdin</code> (requires a multiline command):</li>
+</ul>
+
+
+<p><code>{{command}} &lt;&lt; {{EOF}} &lt;Enter&gt; {{multiline_text}} &lt;Enter&gt; {{EOF}}</code></p>
+
+<ul>
+<li>Create a here string and pass that into <code>stdin</code> (achieves the same effect as <code>echo string |</code>):</li>
+</ul>
+
+
+<p><code>{{command}} &lt;&lt;&lt; {{string}}</code></p>
+
+<ul>
+<li>Process data from a file and write the output to another file:</li>
+</ul>
+
+
+<p><code>{{command}} &lt; {{path/to/file.txt}} &gt; {{path/to/file2.txt}}</code></p>
+
+<ul>
+<li>Write a here document into a file:</li>
+</ul>
+
+
+<p><code>cat &lt;&lt; {{EOF}} &gt; {{path/to/file.txt}} &lt;Enter&gt; {{multiline_data}} &lt;Enter&gt; {{EOF}}</code></p>
+
+<ul>
+<li>Disregard leading tabs (good for scripts with indentation but does not work for spaces):</li>
+</ul>
+
+
+<p><code>cat &lt;&lt;- {{EOF}} &gt; {{path/to/file.txt}} &lt;Enter&gt; {{multiline_data}} &lt;Enter&gt; {{EOF}}</code></p>
+
+<ul>
+<li>Pass command output to a program as a file descriptor:</li>
+</ul>
+
+
+<p><code>diff &lt;({{command1}}) &lt;({{command2}})</code></p>

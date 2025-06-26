@@ -1,0 +1,54 @@
+<h1>ffuf</h1>
+
+<blockquote><p>A fast web fuzzer written in Go.
+The <code>FUZZ</code> keyword is used as a placeholder. <code>ffuf</code> will try to hit the URL by replacing the word <code>FUZZ</code> with every word in the wordlist.
+More information: <a href="https://github.com/ffuf/ffuf#usage">https://github.com/ffuf/ffuf#usage</a>.</p></blockquote>
+
+<ul>
+<li>Enumerate directories using [c]olored output and a [w]ordlist specifying a target [u]RL:</li>
+</ul>
+
+
+<p><code>ffuf -c -w {{path/to/wordlist.txt}} -u {{http://example.com/FUZZ}}</code></p>
+
+<ul>
+<li>Enumerate webservers of subdomains by changing the position of the keyword:</li>
+</ul>
+
+
+<p><code>ffuf -w {{path/to/subdomains.txt}} -u {{http://FUZZ.example.com}}</code></p>
+
+<ul>
+<li>Fuzz with specified [t]hreads (default: 40) and pro[x]ying the traffic and save [o]utput to a file:</li>
+</ul>
+
+
+<p><code>ffuf -o -w {{path/to/wordlist.txt}} -u {{http://example.com/FUZZ}} -t {{500}} -x {{http://127.0.0.1:8080}}</code></p>
+
+<ul>
+<li>Fuzz a specific [H]eader (&ldquo;Name: Value&rdquo;) and [m]atch HTTP status [c]odes:</li>
+</ul>
+
+
+<p><code>ffuf -w {{path/to/wordlist.txt}} -u {{http://example.com}} -H "{{Host: FUZZ}}" -mc {{200}}</code></p>
+
+<ul>
+<li>Fuzz with specified HTTP method and [d]ata, while [f]iltering out comma separated status [c]odes:</li>
+</ul>
+
+
+<p><code>ffuf -w {{path/to/postdata.txt}} -X {{POST}} -d "{{username=admin\&amp;password=FUZZ}}" -u {{http://example.com/login.php}} -fc {{401,403}}</code></p>
+
+<ul>
+<li>Fuzz multiple positions with multiple wordlists using different modes:</li>
+</ul>
+
+
+<p><code>ffuf -w {{path/to/keys:KEY}} -w {{path/to/values:VALUE}} -mode {{pitchfork|clusterbomb}} -u {{http://example.com/id?KEY=VALUE}}</code></p>
+
+<ul>
+<li>Proxy requests through a HTTP MITM pro[x]y (such as Burp Suite or <code>mitmproxy</code>):</li>
+</ul>
+
+
+<p><code>ffuf -w {{path/to/wordlist}} -x {{http://127.0.0.1:8080}} -u {{http://example.com/FUZZ}}</code></p>

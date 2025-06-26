@@ -1,0 +1,39 @@
+<h1>xe</h1>
+
+<blockquote><p>Execute a command once for each line piped from another command or file.
+More information: <a href="https://github.com/leahneukirchen/xe/blob/master/README">https://github.com/leahneukirchen/xe/blob/master/README</a>.</p></blockquote>
+
+<ul>
+<li>Run a command once for each line of input data as arguments:</li>
+</ul>
+
+
+<p><code>{{arguments_source}} | xe {{command}}</code></p>
+
+<ul>
+<li>Execute the commands, replacing any occurrence of the placeholder (marked as <code>{}</code>) with the input line:</li>
+</ul>
+
+
+<p><code>{{arguments_source}} | xe {{command}} {} {{optional_extra_arguments}}</code></p>
+
+<ul>
+<li>Execute a shellscript, joining every <code>N</code> lines into a single call:</li>
+</ul>
+
+
+<p><code>echo -e 'a\nb' | xe -N{{2}} -s 'echo $2 $1'</code></p>
+
+<ul>
+<li>Delete all files with a <code>.backup</code> extension:</li>
+</ul>
+
+
+<p><code>find . -name {{'*.backup'}} | xe rm -v</code></p>
+
+<ul>
+<li>Run up to <code>max-jobs</code> processes in parallel; the default is 1. If <code>max-jobs</code> is 0, xe will run as many processes as cpu cores:</li>
+</ul>
+
+
+<p><code>{{arguments_source}} | xe -j {{max-jobs}} {{command}}</code></p>

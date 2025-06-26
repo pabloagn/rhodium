@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-sticky-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-0 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-disabled skin-theme-clientpref-day vector-toc-available" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>Realtime kernel patchset - ArchWiki</title>
+<link rel="stylesheet" href="../ArchWikiOffline.css">
+<meta name="ResourceLoaderDynamicStyles" content="">
+<meta name="generator" content="MediaWiki 1.43.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="max-image-preview:standard">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.25, maximum-scale=5.0">
+<link rel="search" type="application/opensearchdescription+xml" href="/rest.php/v1/search" title="ArchWiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.archlinux.org/api.php?action=rsd">
+<link rel="license" href="https://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="ArchWiki Atom feed" href="/index.php?title=Special:RecentChanges&amp;feed=atom">
+</head>
+<body class="skin--responsive skin-vector skin-vector-search-vue mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Realtime_kernel_patchset rootpage-Realtime_kernel_patchset skin-vector-2022 action-view">
+<a class="mw-jump-link" href="#bodyContent">Jump to content</a>
+<div class="vector-header-container">
+	</div>
+<div class="mw-page-container">
+	<div class="mw-page-container-inner">
+		<div class="vector-column-start">
+			<div class="vector-main-menu-container">
+		</div>
+	<div class="vector-sticky-pinned-container">
+				<nav id="mw-panel-toc" aria-label="Contents" data-event-name="ui.sidebar-toc" class="mw-table-of-contents-container vector-toc-landmark">
+					<div id="vector-toc-pinned-container" class="vector-pinned-container">
+					<div id="vector-toc" class="vector-toc vector-pinnable-element">
+	<div class="vector-pinnable-header vector-toc-pinnable-header vector-pinnable-header-pinned" data-feature-name="toc-pinned" data-pinnable-element-id="vector-toc">
+	<h2 class="vector-pinnable-header-label">Contents</h2>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-toc.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-toc.unpin">hide</button>
+</div>
+
+
+	<ul class="vector-toc-contents" id="mw-panel-toc-list">
+		<li id="toc-mw-content-text" class="vector-toc-list-item vector-toc-level-1">
+			<a href="#" class="vector-toc-link">
+				<div class="vector-toc-text">Beginning</div>
+			</a>
+		</li>
+		<li id="toc-What_is_realtime?" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#What_is_realtime?">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">1</span>
+				<span>What is realtime?</span>
+			</div>
+		</a>
+		
+		<ul id="toc-What_is_realtime?-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-How_does_the_realtime_patch_work" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#How_does_the_realtime_patch_work">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">2</span>
+				<span>How does the realtime patch work</span>
+			</div>
+		</a>
+		
+		<ul id="toc-How_does_the_realtime_patch_work-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Installation" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Installation">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">3</span>
+				<span>Installation</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Installation-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Scheduling_latency" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Scheduling_latency">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">4</span>
+				<span>Scheduling latency</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Scheduling_latency-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Latency_testing_utilities" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Latency_testing_utilities">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">5</span>
+				<span>Latency testing utilities</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Latency_testing_utilities-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Latency testing utilities subsection</span>
+			</button>
+		
+		<ul id="toc-Latency_testing_utilities-sublist" class="vector-toc-list">
+			<li id="toc-cyclictest" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#cyclictest">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.1</span>
+					<span>cyclictest</span>
+				</div>
+			</a>
+			
+			<ul id="toc-cyclictest-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-hackbench" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#hackbench">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.2</span>
+					<span>hackbench</span>
+				</div>
+			</a>
+			
+			<ul id="toc-hackbench-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-hwlatdetect" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#hwlatdetect">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">5.3</span>
+					<span>hwlatdetect</span>
+				</div>
+			</a>
+			
+			<ul id="toc-hwlatdetect-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-See_also" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#See_also">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">6</span>
+				<span>See also</span>
+			</div>
+		</a>
+		
+		<ul id="toc-See_also-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+</ul>
+</div>
+
+					</div>
+		</nav>
+			</div>
+		</div>
+		<div class="mw-content-container">
+			<main id="content" class="mw-body" style="margin: 0">
+				<header class="mw-body-header vector-page-titlebar">
+					<nav aria-label="Contents" class="vector-toc-landmark">
+						
+<div id="vector-page-titlebar-toc" class="vector-dropdown vector-page-titlebar-toc vector-button-flush-left">
+	<input type="checkbox" id="vector-page-titlebar-toc-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-page-titlebar-toc" class="vector-dropdown-checkbox " aria-label="Toggle the table of contents">
+	<label id="vector-page-titlebar-toc-label" for="vector-page-titlebar-toc-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"><span class="vector-icon mw-ui-icon-listBullet mw-ui-icon-wikimedia-listBullet"></span>
+
+<span class="vector-dropdown-label-text">Toggle the table of contents</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+							<div id="vector-page-titlebar-toc-unpinned-container" class="vector-unpinned-container">
+			</div>
+		
+	</div>
+</div>
+
+					</nav>
+					<h1 id="firstHeading" class="firstHeading mw-first-heading"><span class="mw-page-title-main">Realtime kernel patchset</span></h1>
+							
+<div id="p-lang-btn" class="vector-dropdown mw-portlet mw-portlet-lang">
+	<input type="checkbox" id="p-lang-btn-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-p-lang-btn" class="vector-dropdown-checkbox mw-interlanguage-selector" aria-label="Go to an article in another language. Available in 1 language">
+	<label id="p-lang-btn-label" for="p-lang-btn-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--action-progressive mw-portlet-lang-heading-1" aria-hidden="true"><span class="vector-icon mw-ui-icon-language-progressive mw-ui-icon-wikimedia-language-progressive"></span>
+
+<span class="vector-dropdown-label-text">1 language</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+		<div class="vector-menu-content">
+			
+			<ul class="vector-menu-content-list">
+				
+				<li class="interlanguage-link interwiki-ja mw-list-item"><a href="https://wiki.archlinux.jp/index.php/%E3%83%AA%E3%82%A2%E3%83%AB%E3%82%BF%E3%82%A4%E3%83%A0%E3%82%AB%E3%83%BC%E3%83%8D%E3%83%AB" title="リアルタイムカーネル – 日本語" lang="ja" hreflang="ja" data-title="リアルタイムカーネル" data-language-autonym="日本語" data-language-local-name="日本語" class="interlanguage-link-target"><span>日本語</span></a></li>
+			</ul>
+			
+		</div>
+
+	</div>
+</div>
+</header>
+				<div class="vector-column-end">
+					<div class="vector-sticky-pinned-container">
+						<nav class="vector-page-tools-landmark" aria-label="Page tools">
+							<div id="vector-page-tools-pinned-container" class="vector-pinned-container">
+				
+							</div>
+		</nav>
+						<nav class="vector-appearance-landmark" aria-label="Appearance">
+							<div id="vector-appearance-pinned-container" class="vector-pinned-container">
+				<div id="vector-appearance" class="vector-appearance vector-pinnable-element">
+	<div class="vector-pinnable-header vector-appearance-pinnable-header vector-pinnable-header-pinned" data-feature-name="appearance-pinned" data-pinnable-element-id="vector-appearance" data-pinned-container-id="vector-appearance-pinned-container" data-unpinned-container-id="vector-appearance-unpinned-container">
+	<div class="vector-pinnable-header-label">Appearance</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-appearance.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-appearance.unpin">hide</button>
+</div>
+
+
+</div>
+
+							</div>
+		</nav>
+					</div>
+				</div>
+				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container>
+					<div class="vector-body-before-content">
+							<div class="mw-indicators">
+		</div>
+
+						<div id="siteSub" class="noprint">From ArchWiki</div>
+					</div>
+					<div id="contentSub"><div id="mw-content-subtitle"></div></div>
+					
+					
+					<div id="mw-content-text" class="mw-body-content">
+<div class="mw-content-ltr mw-parser-output" lang="en" dir="ltr">
+<div class="noprint archwiki-template-message">
+<p><span class="mw-default-size" typeof="mw:File"><span><img src="../File:Tango-go-next.svg" decoding="async" width="48" height="48" class="mw-file-element"></span></span><b>This article or section is a candidate for moving to <a href="../en/Realtime_kernel_patchset.html" class="mw-redirect" title="Realtime kernel">Realtime kernel</a>.</b></p>
+<div>
+<b>Notes:</b> <code>PREEMPT_RT</code> was merged in Linux 6.12. (Discuss in <a rel="nofollow" class="external text" href="../en/Talk:Realtime_kernel_patchset.html">Talk:Realtime kernel patchset</a>)</div>
+</div>
+<p>This article describes the <a href="../en/Kernel.html" class="mw-redirect" title="Linux kernel">Linux kernel</a> realtime patch set, and some utilities useful for trouble shooting scheduling latencies.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> Real-time kernel support was merged into <a rel="nofollow" class="external text" href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=baeb9a7d8b60b021d907127509c44507539c15e5">Linux 6.12</a>.</div>
+<meta property="mw:PageProp/toc">
+<h2>
+<span id="What_is_realtime.3F"></span><span class="mw-headline" id="What_is_realtime?">What is realtime?</span>
+</h2>
+<p><a href="https://en.wikipedia.org/wiki/Real-time_computing" class="extiw" title="wikipedia:Real-time computing">Realtime</a> applications have operational deadlines between some triggering event and the application's response to that event. To meet these operational deadlines, programmers use realtime operating systems (RTOS) on which the maximum response time can be calculated or measured reliably for the given application and environment.
+A typical RTOS uses priorities. The highest priority task wanting the CPU always gets the CPU within a fixed amount of time after the event waking the task has taken place. On such an RTOS the <a href="https://en.wikipedia.org/wiki/Latency_(engineering)" class="extiw" title="wikipedia:Latency (engineering)">latency</a> of a task only depends on the tasks running at equal or higher priorities; tasks running at lower priorities may be ignored. On a non-realtime OS (most GNU/Linux distributions running their default kernels), since latencies depend on each process running on the system, it is obviously much harder to ensure deadlines will be met every time, and this difficulty scales nonlinearly with system complexity. Determinism in scheduling becomes yet more difficult to achieve because <a href="https://en.wikipedia.org/wiki/Preemption_(computing)" class="extiw" title="wikipedia:Preemption (computing)">preemption</a> can be switched off for an arbitrary amount of time. A high priority task wanting to run can thus be delayed indefinitely by lower priority tasks with preemption disabled.
+</p>
+<h2><span class="mw-headline" id="How_does_the_realtime_patch_work">How does the realtime patch work</span></h2>
+<p>The RT-Preempt patch converts Linux into a fully preemptible kernel. This is done through:
+</p>
+<ul>
+<li>Making in-kernel locking-primitives (using <a href="https://en.wikipedia.org/wiki/Spinlock" class="extiw" title="wikipedia:Spinlock">spinlocks</a>) preemptible by reimplementation with rtmutexes.</li>
+<li>
+<a href="https://en.wikipedia.org/wiki/Critical_section" class="extiw" title="wikipedia:Critical section">Critical sections</a> protected by i.e. spinlock_t and rwlock_t are now preemptible. The creation of non-preemptible sections (in kernel) is still possible with raw_spinlock_t (same APIs like spinlock_t).</li>
+<li>Implementing <a href="https://en.wikipedia.org/wiki/Priority_inheritance" class="extiw" title="wikipedia:Priority inheritance">priority inheritance</a> for in-kernel spinlocks and <a href="https://en.wikipedia.org/wiki/Semaphore_(programming)" class="extiw" title="wikipedia:Semaphore (programming)">semaphores</a>.</li>
+<li>Converting interrupt handlers into preemptible kernel threads: The RT-Preempt patch treats soft interrupt handlers in kernel thread context, which is represented by a task_struct like a common user space process. However it is also possible to register an IRQ in kernel context.</li>
+<li>Converting the old Linux timer API into separate infrastructures for high resolution kernel timers plus one for timeouts, leading to user space POSIX timers with high resolution.</li>
+</ul>
+<h2><span class="mw-headline" id="Installation">Installation</span></h2>
+<p>There are two realtime patched kernels available: <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=linux-rt">linux-rt</a></span> and <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=linux-rt-lts">linux-rt-lts</a></span>, which both have a configuration based on the main <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=linux">linux</a></span> kernel package. linux-rt follows the development branch of the -rt patch, while linux-rt-lts tracks a stable branch of the rt patchset.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> Do not forget to add the newly installed kernel to your <a href="../en/Arch_boot_process.html#Boot_loader" class="mw-redirect" title="Boot loader">boot loader</a>!</div>
+<h2><span class="mw-headline" id="Scheduling_latency">Scheduling latency</span></h2>
+<p>In the context of the scheduler, latency is the time that passes from the occurrence of an event until the handling of said event.  Often the delay from the firing of an interrupt until the interrupt handler starts running, but could also be from the expiration of a timer, etc.
+</p>
+<p>There can be many varied causes for high scheduling latencies. Some worth mentioning (in no particular order) are: a misconfigured system, bad hardware, badly programmed kernel modules, CPU power management, faulty hardware timers, <a href="https://en.wikipedia.org/wiki/System_Management_Mode#Entering_SMM" class="extiw" title="wikipedia:System Management Mode">SMIs</a> and <a href="https://en.wikipedia.org/wiki/Simultaneous_multithreading" class="extiw" title="wikipedia:Simultaneous multithreading">SMT</a>.
+</p>
+<p>When trying to determine a system's maximum scheduling latency, the system needs to be put under load. A busy system will tend to experience greater latencies than an idle one. To sufficiently characterize latencies of interest, it would be prudent to run tests for a long time and under a variety of nominal and worst-case load conditions. Further, since many subsystems such as disks, network devices, USB and graphics may be used sparsely after a system is brought online, care should be taken to characterize latency with these subsystems active as well.
+</p>
+<h2><span class="mw-headline" id="Latency_testing_utilities">Latency testing utilities</span></h2>
+<p>Understanding latency is non-intuitive. In measuring and interpreting latency, errors are common and very likely to happen even with experienced computer scientists. Popular tools are often incorrect. This <a rel="nofollow" class="external text" href="https://www.youtube.com/watch?v=9MKY4KypBzg">talk</a> explains some common pitfalls. There are several tools available to check kernel scheduling latencies, and to track down the causes of latency spikes. One set of tools comes in a package called <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=rt-tests">rt-tests</a></span>. 
+</p>
+<h3><span class="mw-headline" id="cyclictest">cyclictest</span></h3>
+<p>One of the programs in rt-tests is called cyclictest, which can be used to verify the  maximum scheduling latency, and for tracking down the causes of latency spikes. cyclictest works by measuring the time between the expiration of a timer a thread sets and when the thread starts running again.
+</p>
+<p>Here is the result of a typical test run:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;"># cyclictest --smp -p98 -m</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;"># /dev/cpu_dma_latency set to 0us
+policy: fifo: loadavg: 239.09 220.49 134.53 142/1304 23799          
+
+T: 0 (23124) P:98 I:1000 C: 645663 Min:      2 Act:    4 Avg:    4 Max:      23
+T: 1 (23125) P:98 I:1500 C: 430429 Min:      2 Act:    5 Avg:    3 Max:      23
+T: 2 (23126) P:98 I:2000 C: 322819 Min:      2 Act:    4 Avg:    3 Max:      15
+T: 3 (23127) P:98 I:2500 C: 258247 Min:      2 Act:    5 Avg:    4 Max:      32
+^C</pre>
+<p>It shows a four CPU core system running one thread (SCHED_FIFO) per core at priority 98, with memory locked, the system is also under a high load due to running hackbench in a separate terminal.  What is most interesting is the max schedling latency detected, in this case 32 usecs on core 3.
+</p>
+<p>See <span class="plainlinks archwiki-template-man" title="$ man 8 cyclictest"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/cyclictest.8">cyclictest(8)</a></span> man page.
+</p>
+<h3><span class="mw-headline" id="hackbench">hackbench</span></h3>
+<p>An idle kernel will tend to show much lower scheduling latencies, it is essential to put some load on it to get a realistic result. This can be done with another utility in the rt-tests package called hackbench. It works by creating multiple pairs of threads or processes, that pass data between themselves either over sockets or pipes. To make it run longer add the -l parameter: <code>hackbench -l 1000000</code>.
+</p>
+<p>See <span class="plainlinks archwiki-template-man" title="$ man 8 hackbench"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/hackbench.8">hackbench(8)</a></span> man page.
+</p>
+<h3><span class="mw-headline" id="hwlatdetect">hwlatdetect</span></h3>
+<p>hwlatdetect can be used to detect SMIs taking an inordinate time, thus introducing latency by blocking normal kernel execution.  It consists of a kernel module (present in both linux-rt and linux-rt-lts), and a python script to launch the process and report the results back to the user. To check if the system uses NMIs run the following command:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">$ grep NMI /proc/interrupts</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;"> 
+NMI:       3335       3336       3335       3335   Non-maskable interrupts</pre>
+<p>The hwlatdetect kernel module works by turning everything running on the CPUs off through the stop_machine() call.  It then polls the TSC (Time Stamp Counter) looking for gaps in the generated data stream.  Any gaps indicates that it was interrupted by a NMI, as they are the only possible mechanism (apart from a broken TSC implementation). To run the program for 120 secs, with  a detection threshold of 15 usecs, execute the following:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;"># hwlatdetect --duration=120 --threshold=15</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">hwlatdetect:  test duration 120 seconds
+   parameters:
+        Latency threshold: 15us
+        Sample window:     1000000us
+        Sample width:      500000us
+     Non-sampling period:  500000us
+        Output File:       None
+
+Starting test
+test finished
+Max Latency: 21us
+Samples recorded: 16
+Samples exceeding threshold: 16
+1408928107.0286324723   18      17
+.
+.
+1408928180.0296881126   15      21
+.
+.
+1408928212.0300332889   18      18</pre>
+<p>The result shows 16 NMIs detected that exceeded the 15 usecs threshold specified, the maximum latency detected was 21 usecs.
+</p>
+<p>See <span class="plainlinks archwiki-template-man" title="$ man 8 hwlatdetect"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/hwlatdetect.8">hwlatdetect(8)</a></span> man page.
+</p>
+<h2><span class="mw-headline" id="See_also">See also</span></h2>
+<ul>
+<li><a rel="nofollow" class="external text" href="https://wiki.linuxfoundation.org/realtime/">realtime:start - Linux Foundation Wiki</a></li>
+<li><a rel="nofollow" class="external text" href="https://www.linuxfoundation.org/blog/blog/intro-to-real-time-linux-for-embedded-developers">Intro to Real-Time Linux for Embedded Developers</a></li>
+</ul>
+</div>
+</div>
+					<div id="catlinks" class="catlinks" data-mw="interface">
+<div id="mw-normal-catlinks" class="mw-normal-catlinks">
+<a href="../Special:Categories.html" title="Special:Categories">Category</a>: <ul><li><a href="../en/Category:Kernel.html" title="Category:Kernel">Kernel</a></li></ul>
+</div>
+<div id="mw-hidden-catlinks" class="mw-hidden-catlinks mw-hidden-cats-hidden">Hidden category: <ul><li><a href="../en/Category:Pages_or_sections_flagged_with_Template:Move.html" title="Category:Pages or sections flagged with Template:Move">Pages or sections flagged with Template:Move</a></li></ul>
+</div>
+</div>
+				</div>
+			</main>
+			
+		</div>
+		<div class="mw-footer-container">
+			
+<footer id="footer" class="mw-footer" style="margin: 0">
+	<ul id="footer-info">
+	<li data-nosnippet="">Retrieved from "<a dir="ltr" href="https://wiki.archlinux.org/index.php?title=Realtime_kernel_patchset&amp;oldid=821533">https://wiki.archlinux.org/index.php?title=Realtime_kernel_patchset&amp;oldid=821533</a>"</li>
+<li id="footer-info-lastmod"> This page was last edited on 27 November 2024, at 10:03.</li>
+	<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+<br>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="https://terms.archlinux.org/docs/privacy-policy/">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="../en/ArchWiki:About.html">About ArchWiki</a></li>
+	<li id="footer-places-disclaimers"><a href="../en/ArchWiki:General_disclaimer.html">Disclaimers</a></li>
+	<li id="footer-places-archwiki-code-of-conduct"><a href="https://terms.archlinux.org/docs/code-of-conduct/" class="extiw" title="archlinux-service-agreements:code-of-conduct">Code of conduct</a></li>
+	<li id="footer-places-archwiki-terms-of-service"><a href="https://terms.archlinux.org/docs/terms-of-service/" class="extiw" title="archlinux-service-agreements:terms-of-service">Terms of service</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-copyrightico"><a href="https://www.gnu.org/copyleft/fdl.html" class="cdx-button cdx-button--fake-button cdx-button--size-large cdx-button--fake-button--enabled"><img src="/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" loading="lazy"></a></li>
+	<li id="footer-poweredbyico"><img src="/resources/assets/poweredby_mediawiki.svg" width="88" height="31" loading="lazy"></li>
+</ul>
+
+</footer>
+
+		</div>
+	</div> 
+</div> 
+<div class="vector-settings" id="p-dock-bottom">
+	<ul></ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<h1>dd</h1>
+
+<blockquote><p>Convierte y copia un archivo.
+Más información: <a href="https://keith.github.io/xcode-man-pages/dd.1.html">https://keith.github.io/xcode-man-pages/dd.1.html</a>.</p></blockquote>
+
+<ul>
+<li>Crea una unidad USB de arranque desde un archivo isohybrid (como <code>archlinux-xxx.iso</code>) y muestra el progreso:</li>
+</ul>
+
+
+<p><code>dd if={{ruta/al/archivo.iso}} of={{/dev/dispositivo_usb}} status=progress</code></p>
+
+<ul>
+<li>Clona una unidad a otra unidad con un bloque de 4 MB, ignora el error y muestra el progreso:</li>
+</ul>
+
+
+<p><code>dd bs=4m conv=noerror if={{/dev/dispositivo_de origen}} of={{/dev/dispositivo_de destino}} status=progress</code></p>
+
+<ul>
+<li>Genera un archivo con un número específico de bytes aleatorios utilizando el controlador aleatorio del núcleo:</li>
+</ul>
+
+
+<p><code>dd bs={{100}} count={{1}} if=/dev/urandom of={{ruta/al/archivo_aleatorio}}</code></p>
+
+<ul>
+<li>Compara el rendimiento de escritura de un disco:</li>
+</ul>
+
+
+<p><code>dd bs={{1024}} count={{1000000}} if=/dev/zero of={{ruta/para/archivo_1GB}}</code></p>
+
+<ul>
+<li>Genera una copia de seguridad del sistema en un archivo IMG y muestra el progreso:</li>
+</ul>
+
+
+<p><code>dd if={{/dev/dispositivo_unidad}} of={{ruta/al/archivo.img}} status=progress</code></p>
+
+<ul>
+<li>Comprueba el progreso de una operación <code>dd</code> en curso (ejecuta este comando desde otro intérprete de comandos):</li>
+</ul>
+
+
+<p><code>kill -USR1 $(pgrep ^dd)</code></p>

@@ -1,0 +1,54 @@
+<h1>acme.sh</h1>
+
+<blockquote><p>Sebuah shell script yang mengimplementasikan ACME client protocol (pembuat sertifikat HTTPS), alternatif dari <code>certbot</code>.
+Lihat juga: <code>acme.sh dns</code>.
+Informasi lebih lanjut: <a href="https://github.com/acmesh-official/acme.sh">https://github.com/acmesh-official/acme.sh</a>.</p></blockquote>
+
+<ul>
+<li>Terbitkan sertifikat baru dan pasang pada webroot secara langsung:</li>
+</ul>
+
+
+<p><code>acme.sh --issue --domain {{example.com}} --webroot {{/jalan/menuju/webroot}}</code></p>
+
+<ul>
+<li>Terbitkan sertifikat untuk domain majemuk, menggunakan mode verifikasi mandiri (standalone) pada port 80:</li>
+</ul>
+
+
+<p><code>acme.sh --issue --standalone --domain {{example.com}} --domain {{www.example.com}}</code></p>
+
+<ul>
+<li>Terbitkan sertifikat menggunakan mode verifikasi mandiri berbasis TLS pada port 443:</li>
+</ul>
+
+
+<p><code>acme.sh --issue --alpn --domain {{example.com}}</code></p>
+
+<ul>
+<li>Terbitkan sertifikat dengan konfigurasi server Nginx untuk memasangnya:</li>
+</ul>
+
+
+<p><code>acme.sh --issue --nginx --domain {{example.com}}</code></p>
+
+<ul>
+<li>Terbitkan sertifikat dengan konfigurasi server Apache untuk memasangnya:</li>
+</ul>
+
+
+<p><code>acme.sh --issue --apache --domain {{example.com}}</code></p>
+
+<ul>
+<li>Terbitkan sertifikat wildcard (*) menggunakan verifikasi DNS via API (daftar jenis <code>api_dns</code> yang didukung tersedia dalam <a href="https://github.com/acmesh-official/acme.sh/wiki/How-to-use-lexicon-DNS-API">https://github.com/acmesh-official/acme.sh/wiki/How-to-use-lexicon-DNS-API</a>):</li>
+</ul>
+
+
+<p><code>acme.sh --issue --dns {{api_dns}} --domain {{*.example.com}}</code></p>
+
+<ul>
+<li>Pasang sertifikat ke dalam direktori tertentu (dapat berguna untuk proses pemutakhiran otomatis):</li>
+</ul>
+
+
+<p><code>acme.sh --install-cert -d {{example.com}} --key-file {{/jalan/menuju/example.com.key}} --fullchain-file {{/jalan/menuju/example.com.cer}} --reloadcmd "{{systemctl force-reload nginx}}"</code></p>

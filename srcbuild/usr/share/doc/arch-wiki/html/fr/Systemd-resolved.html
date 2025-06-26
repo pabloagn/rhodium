@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-sticky-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-0 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-disabled skin-theme-clientpref-day vector-toc-available" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>systemd-resolved (Français) - ArchWiki</title>
+<link rel="stylesheet" href="../ArchWikiOffline.css">
+<meta name="ResourceLoaderDynamicStyles" content="">
+<meta name="generator" content="MediaWiki 1.43.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="max-image-preview:standard">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.25, maximum-scale=5.0">
+<link rel="search" type="application/opensearchdescription+xml" href="/rest.php/v1/search" title="ArchWiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.archlinux.org/api.php?action=rsd">
+<link rel="license" href="https://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="ArchWiki Atom feed" href="/index.php?title=Special:RecentChanges&amp;feed=atom">
+</head>
+<body class="skin--responsive skin-vector skin-vector-search-vue mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Systemd-resolved_Français rootpage-Systemd-resolved_Français skin-vector-2022 action-view">
+<a class="mw-jump-link" href="#bodyContent">Jump to content</a>
+<div class="vector-header-container">
+	</div>
+<div class="mw-page-container">
+	<div class="mw-page-container-inner">
+		<div class="vector-column-start">
+			<div class="vector-main-menu-container">
+		</div>
+	<div class="vector-sticky-pinned-container">
+				<nav id="mw-panel-toc" aria-label="Contents" data-event-name="ui.sidebar-toc" class="mw-table-of-contents-container vector-toc-landmark">
+					<div id="vector-toc-pinned-container" class="vector-pinned-container">
+					<div id="vector-toc" class="vector-toc vector-pinnable-element">
+	<div class="vector-pinnable-header vector-toc-pinnable-header vector-pinnable-header-pinned" data-feature-name="toc-pinned" data-pinnable-element-id="vector-toc">
+	<h2 class="vector-pinnable-header-label">Contents</h2>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-toc.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-toc.unpin">hide</button>
+</div>
+
+
+	<ul class="vector-toc-contents" id="mw-panel-toc-list">
+		<li id="toc-mw-content-text" class="vector-toc-list-item vector-toc-level-1">
+			<a href="#" class="vector-toc-link">
+				<div class="vector-toc-text">Beginning</div>
+			</a>
+		</li>
+		<li id="toc-Installation" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Installation">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">1</span>
+				<span>Installation</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Installation-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Configuration" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Configuration">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">2</span>
+				<span>Configuration</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Configuration-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Configuration subsection</span>
+			</button>
+		
+		<ul id="toc-Configuration-sublist" class="vector-toc-list">
+			<li id="toc-DNS" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#DNS">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1</span>
+					<span>DNS</span>
+				</div>
+			</a>
+			
+			<ul id="toc-DNS-sublist" class="vector-toc-list">
+				<li id="toc-Affecter_les_serveurs_DNS" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#Affecter_les_serveurs_DNS">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1.1</span>
+					<span>Affecter les serveurs DNS</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Affecter_les_serveurs_DNS-sublist" class="vector-toc-list">
+				<li id="toc-Automatiquement" class="vector-toc-list-item vector-toc-level-4">
+			<a class="vector-toc-link" href="#Automatiquement">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1.1.1</span>
+					<span>Automatiquement</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Automatiquement-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Manuellement" class="vector-toc-list-item vector-toc-level-4">
+			<a class="vector-toc-link" href="#Manuellement">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1.1.2</span>
+					<span>Manuellement</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Manuellement-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-Serveurs_de_secours" class="vector-toc-list-item vector-toc-level-4">
+			<a class="vector-toc-link" href="#Serveurs_de_secours">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1.1.3</span>
+					<span>Serveurs de secours</span>
+				</div>
+			</a>
+			
+			<ul id="toc-Serveurs_de_secours-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-DNSSEC" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#DNSSEC">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1.2</span>
+					<span>DNSSEC</span>
+				</div>
+			</a>
+			
+			<ul id="toc-DNSSEC-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-DNS_via_TLS" class="vector-toc-list-item vector-toc-level-3">
+			<a class="vector-toc-link" href="#DNS_via_TLS">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.1.3</span>
+					<span>DNS via TLS</span>
+				</div>
+			</a>
+			
+			<ul id="toc-DNS_via_TLS-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+		</li>
+		<li id="toc-mDNS" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#mDNS">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.2</span>
+					<span>mDNS</span>
+				</div>
+			</a>
+			
+			<ul id="toc-mDNS-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-LLMNR" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#LLMNR">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">2.3</span>
+					<span>LLMNR</span>
+				</div>
+			</a>
+			
+			<ul id="toc-LLMNR-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Requêtes" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Requ%C3%AAtes">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">3</span>
+				<span>Requêtes</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Requêtes-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+	<li id="toc-Dépannage" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#D%C3%A9pannage">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">4</span>
+				<span>Dépannage</span>
+			</div>
+		</a>
+		
+			<button aria-controls="toc-Dépannage-sublist" class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-toc-toggle">
+				<span class="vector-icon mw-ui-icon-wikimedia-expand"></span>
+				<span>Toggle Dépannage subsection</span>
+			</button>
+		
+		<ul id="toc-Dépannage-sublist" class="vector-toc-list">
+			<li id="toc-systemd-resolved_ne_cherche_pas_le_domaine_local" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#systemd-resolved_ne_cherche_pas_le_domaine_local">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.1</span>
+					<span>systemd-resolved ne cherche pas le domaine local</span>
+				</div>
+			</a>
+			
+			<ul id="toc-systemd-resolved_ne_cherche_pas_le_domaine_local-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+		<li id="toc-systemd-resolved_ne_résout_pas_les_nom_d'hôte_sans_suffix" class="vector-toc-list-item vector-toc-level-2">
+			<a class="vector-toc-link" href="#systemd-resolved_ne_r%C3%A9sout_pas_les_nom_d'h%C3%B4te_sans_suffix">
+				<div class="vector-toc-text">
+					<span class="vector-toc-numb">4.2</span>
+					<span>systemd-resolved ne résout pas les nom d'hôte sans suffix</span>
+				</div>
+			</a>
+			
+			<ul id="toc-systemd-resolved_ne_résout_pas_les_nom_d'hôte_sans_suffix-sublist" class="vector-toc-list">
+			</ul>
+		</li>
+	</ul>
+	</li>
+	<li id="toc-Voir_aussi" class="vector-toc-list-item vector-toc-level-1 vector-toc-list-item-expanded">
+		<a class="vector-toc-link" href="#Voir_aussi">
+			<div class="vector-toc-text">
+				<span class="vector-toc-numb">5</span>
+				<span>Voir aussi</span>
+			</div>
+		</a>
+		
+		<ul id="toc-Voir_aussi-sublist" class="vector-toc-list">
+		</ul>
+	</li>
+</ul>
+</div>
+
+					</div>
+		</nav>
+			</div>
+		</div>
+		<div class="mw-content-container">
+			<main id="content" class="mw-body" style="margin: 0">
+				<header class="mw-body-header vector-page-titlebar">
+					<nav aria-label="Contents" class="vector-toc-landmark">
+						
+<div id="vector-page-titlebar-toc" class="vector-dropdown vector-page-titlebar-toc vector-button-flush-left">
+	<input type="checkbox" id="vector-page-titlebar-toc-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-page-titlebar-toc" class="vector-dropdown-checkbox " aria-label="Toggle the table of contents">
+	<label id="vector-page-titlebar-toc-label" for="vector-page-titlebar-toc-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"><span class="vector-icon mw-ui-icon-listBullet mw-ui-icon-wikimedia-listBullet"></span>
+
+<span class="vector-dropdown-label-text">Toggle the table of contents</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+							<div id="vector-page-titlebar-toc-unpinned-container" class="vector-unpinned-container">
+			</div>
+		
+	</div>
+</div>
+
+					</nav>
+					<h1 id="firstHeading" class="firstHeading mw-first-heading">systemd-resolved (Français)</h1>
+							
+<div id="p-lang-btn" class="vector-dropdown mw-portlet mw-portlet-lang">
+	<input type="checkbox" id="p-lang-btn-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-p-lang-btn" class="vector-dropdown-checkbox mw-interlanguage-selector" aria-label="Go to an article in another language. Available in 6 languages">
+	<label id="p-lang-btn-label" for="p-lang-btn-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--action-progressive mw-portlet-lang-heading-6" aria-hidden="true"><span class="vector-icon mw-ui-icon-language-progressive mw-ui-icon-wikimedia-language-progressive"></span>
+
+<span class="vector-dropdown-label-text">6 languages</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+		<div class="vector-menu-content">
+			
+			<ul class="vector-menu-content-list">
+				
+				<li class="interlanguage-link interwiki-de mw-list-item"><a href="https://wiki.archlinux.de/title/Systemd/systemd-resolved" title="Systemd/systemd-resolved – Deutsch" lang="de" hreflang="de" data-title="Systemd/systemd-resolved" data-language-autonym="Deutsch" data-language-local-name="Deutsch" class="interlanguage-link-target"><span>Deutsch</span></a></li>
+<li class="interlanguage-link interwiki-en mw-list-item"><a href="../en/Systemd-resolved.html" title="Systemd-resolved – English" lang="en" hreflang="en" data-title="Systemd-resolved" data-language-autonym="English" data-language-local-name="English" class="interlanguage-link-target"><span>English</span></a></li>
+<li class="interlanguage-link interwiki-es mw-list-item"><a href="../es/Systemd-resolved.html" title="Systemd-resolved – español" lang="es" hreflang="es" data-title="Systemd-resolved" data-language-autonym="Español" data-language-local-name="español" class="interlanguage-link-target"><span>Español</span></a></li>
+<li class="interlanguage-link interwiki-ja mw-list-item"><a href="https://wiki.archlinux.jp/index.php/Systemd-resolved" title="Systemd-resolved – 日本語" lang="ja" hreflang="ja" data-title="Systemd-resolved" data-language-autonym="日本語" data-language-local-name="日本語" class="interlanguage-link-target"><span>日本語</span></a></li>
+<li class="interlanguage-link interwiki-ru mw-list-item"><a href="../ru/Systemd-resolved.html" title="Systemd-resolved – русский" lang="ru" hreflang="ru" data-title="Systemd-resolved" data-language-autonym="Русский" data-language-local-name="русский" class="interlanguage-link-target"><span>Русский</span></a></li>
+<li class="interlanguage-link interwiki-zh-hans mw-list-item"><a href="https://wiki.archlinuxcn.org/wiki/systemd-resolved" title="systemd-resolved – 中文（简体）" lang="zh-Hans" hreflang="zh-Hans" data-title="systemd-resolved" data-language-autonym="中文（简体）" data-language-local-name="中文（简体）" class="interlanguage-link-target"><span>中文（简体）</span></a></li>
+			</ul>
+			
+		</div>
+
+	</div>
+</div>
+</header>
+				<div class="vector-column-end">
+					<div class="vector-sticky-pinned-container">
+						<nav class="vector-page-tools-landmark" aria-label="Page tools">
+							<div id="vector-page-tools-pinned-container" class="vector-pinned-container">
+				
+							</div>
+		</nav>
+						<nav class="vector-appearance-landmark" aria-label="Appearance">
+							<div id="vector-appearance-pinned-container" class="vector-pinned-container">
+				<div id="vector-appearance" class="vector-appearance vector-pinnable-element">
+	<div class="vector-pinnable-header vector-appearance-pinnable-header vector-pinnable-header-pinned" data-feature-name="appearance-pinned" data-pinnable-element-id="vector-appearance" data-pinned-container-id="vector-appearance-pinned-container" data-unpinned-container-id="vector-appearance-unpinned-container">
+	<div class="vector-pinnable-header-label">Appearance</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-appearance.pin">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-appearance.unpin">hide</button>
+</div>
+
+
+</div>
+
+							</div>
+		</nav>
+					</div>
+				</div>
+				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container>
+					<div class="vector-body-before-content">
+							<div class="mw-indicators">
+		</div>
+
+						<div id="siteSub" class="noprint">From ArchWiki</div>
+					</div>
+					<div id="contentSub"><div id="mw-content-subtitle"></div></div>
+					
+					
+					<div id="mw-content-text" class="mw-body-content">
+<div class="mw-content-ltr mw-parser-output" lang="fr" dir="ltr">
+<p><span>
+</span>
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>État de la traduction:</strong> Cet article est la version francophone de <a href="../en/Systemd-resolved.html" title="Systemd-resolved">systemd-resolved</a>. Date de la dernière traduction: 2022-12-22. Vous pouvez aider à synchroniser la traduction s'il y a eu des <a rel="nofollow" class="external text" href="https://wiki.archlinux.org/index.php?title=Systemd-resolved&amp;diff=0&amp;oldid=761814">changements</a> dans la version anglaise.</div>
+<div class="archwiki-template-meta-related-articles">
+<p>Related articles</p>
+<ul>
+<li><a href="../fr/Systemd-networkd.html" title="Systemd-networkd (Français)">systemd-networkd (Français)</a></li>
+<li><a href="../fr/Domain_name_resolution.html" title="Domain name resolution (Français)">Domain name resolution (Français)</a></li>
+<li><a href="../fr/Avahi.html" title="Avahi (Français)">Avahi (Français)</a></li>
+</ul>
+</div>
+<p><i>systemd-resolved</i> est un service <a href="../fr/Systemd.html" title="Systemd (Français)">systemd</a> qui fournit la résolution de nom de réseau aux applications locales via une interface <a href="../en/D-Bus.html" title="D-Bus">D-Bus</a>, le service <a href="../fr/Domain_name_resolution.html#Name_Service_Switch" title="Domain name resolution (Français)">NSS</a> <code>resolve</code> (<span class="plainlinks archwiki-template-man" title="$ man 8 nss-resolve"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/nss-resolve.8">nss-resolve(8)</a></span>), et une interface locale <code>127.0.0.53</code>. Consultez <span class="plainlinks archwiki-template-man" title="$ man 8 systemd-resolved"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd-resolved.8">systemd-resolved(8)</a></span> pour son utilisation.
+</p>
+<meta property="mw:PageProp/toc">
+<h2><span class="mw-headline" id="Installation">Installation</span></h2>
+<p><i>systemd-resolved</i> fait parti du paquet <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=systemd">systemd</a></span> qui est installé par défaut.
+</p>
+<h2><span class="mw-headline" id="Configuration">Configuration</span></h2>
+<p><i>systemd-resolved</i> fournit un service de résolution pour le <a href="https://en.wikipedia.org/wiki/fr:Domain_Name_System" class="extiw" title="wikipedia:fr:Domain Name System">Domain Name System (DNS)</a> (ce qui inclut <a href="https://en.wikipedia.org/wiki/fr:Domain_Name_System_Security_Extensions" class="extiw" title="wikipedia:fr:Domain Name System Security Extensions">DNSSEC</a> et <a href="https://en.wikipedia.org/wiki/fr:DNS_over_TLS" class="extiw" title="wikipedia:fr:DNS over TLS">DNS over TLS</a>), <a href="https://en.wikipedia.org/wiki/Multicast_DNS" class="extiw" title="wikipedia:Multicast DNS">Multicast DNS (mDNS)</a> et <a href="https://en.wikipedia.org/wiki/fr:Link-local_Multicast_Name_Resolution" class="extiw" title="wikipedia:fr:Link-local Multicast Name Resolution">Link-Local Multicast Name Resolution (LLMNR)</a>.
+</p>
+<p>Le résolveur peut être configuré en éditant <code>/etc/systemd/resolved.conf</code> et/ou les fichiers de configuration <i>.conf</i> de substitution dans <code>/etc/systemd/resolved.conf.d/</code>. Voir <span class="plainlinks archwiki-template-man" title="$ man 5 resolved.conf"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/resolved.conf.5">resolved.conf(5)</a></span>.
+</p>
+<p>Pour utiliser <i>systemd-resolved</i> <a href="../fr/Systemd.html#Utilisation_des_unit%C3%A9s" class="mw-redirect" title="Démarrez">démarrez</a> et <a href="../fr/Systemd.html#Utilisation_des_unit%C3%A9s" class="mw-redirect" title="Activez">activez</a> <code>systemd-resolved.service</code>.
+</p>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> Pour mieux comprendre le fonctionnement de <i>systemd-resolved</i> on peut activer les informations de debug comme indiqué dans <a href="../fr/Systemd.html#Diagnostic_d'un_service" title="Systemd (Français)">Systemd (Français)#Diagnostic d'un service</a>.</div>
+<h3><span class="mw-headline" id="DNS">DNS</span></h3>
+<p>Les logiciels qui se basent sur <span class="plainlinks archwiki-template-man" title="$ man 3 getaddrinfo"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/getaddrinfo.3">getaddrinfo(3)</a></span> de glibc (ou équivalent) fonctionneront tel quel, puisque, par défaut, <code>/etc/nsswitch.conf</code> est configuré pour utiliser <span class="plainlinks archwiki-template-man" title="$ man 8 nss-resolve"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/nss-resolve.8">nss-resolve(8)</a></span> quand il est disponible.
+</p>
+<p>Pour fournir la <a href="../fr/Domain_name_resolution.html" title="Domain name resolution (Français)">résolution de nom de domaine</a> pour les logiciels qui lisent <code>/etc/resolv.conf</code> directement, comme les <a href="../en/List_of_applications/Internet.html#Web_browsers" class="mw-redirect" title="Web browsers">navigateurs</a> et <a href="../en/GnuPG.html" title="GnuPG">GnuPG</a>, <i>systemd-resolved</i> a quatre différents mode pour manipuler le fichier—stub, static, uplink et foreign. Ils sont décrit dans <span class="plainlinks archwiki-template-man" title="$ man 8 systemd-resolved"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd-resolved.8#/ETC/RESOLV.CONF">systemd-resolved(8) § /ETC/RESOLV.CONF</a></span>. Nous allons, ici, nous concentrer sur le mode recommandé, i.e. le mode "stub" qui utilise <code>/run/systemd/resolve/stub-resolv.conf</code>.
+</p>
+<p><code>/run/systemd/resolve/stub-resolv.conf</code> contient une référence au programme local <code>127.0.0.53</code> comme étant le seul serveur DNS et une liste de domaine de recherche. C'est le mode opératoire recommandé pour propager la configuration de <i>systemd-resolved</i> vers tous les clients. Pour l'utiliser, il suffit de remplacer <code>/etc/resolv.conf</code> avec un lien symbolique vers le fichier dont nous parlons:
+</p>
+<pre># ln -rsf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
+</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> 
+<ul>
+<li>Ne pas configurer correctement <code>/etc/resolv.conf</code> mènera à des erreurs de résolution DNS.</li>
+<li>Créer le lien symbolique <code>/etc/resolv.conf</code> ne sera pas possible tant que vous êtes en <i>arch-chroot</i>, puisque le fichier est lié avec un fichier à l'extérieur de votre système. Au lieu de faire cela, il vous faut créer le lien symbolique depuis l'extérieur du chroot. E.g. <pre># ln -sf /run/systemd/resolve/stub-resolv.conf <i>/mnt</i>/etc/resolv.conf</pre>
+</li>
+</ul>
+</div>
+<h4><span class="mw-headline" id="Affecter_les_serveurs_DNS">Affecter les serveurs DNS</span></h4>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> Pour vérifier la configuration actuellement utilisée par <i>systemd-resolved</i>, lancez <code>resolvectl status</code>.</div>
+<h5><span class="mw-headline" id="Automatiquement">Automatiquement</span></h5>
+<p><i>systemd-resolved</i> fonctionnera tel quel avec un <a href="../en/Network_configuration.html#Network_managers" class="mw-redirect" title="Network manager">network manager</a> utilisant <code>/etc/resolv.conf</code>. Aucune configuration particulière n'est requise puisque <i>systemd-resolved</i> sera détecté en suivant le lien symbolique <code>/etc/resolv.conf</code>. Ce sera le cas avec <a href="../fr/Systemd-networkd.html" title="Systemd-networkd (Français)">systemd-networkd</a>, <a href="../fr/NetworkManager.html" title="NetworkManager (Français)">NetworkManager</a>, et <a href="../en/Iwd.html" title="Iwd">iwd</a>.
+</p>
+<p>Cependant, si le client <a href="../en/Network_configuration.html#Network_managers" class="mw-redirect" title="DHCP">DHCP</a> et <a href="../en/Category:Virtual_Private_Network.html" class="mw-redirect" title="VPN">VPN</a> utilise le programme <a href="https://en.wikipedia.org/wiki/resolvconf" class="extiw" title="wikipedia:resolvconf">resolvconf</a> pour affecter les serveurs et les domaine de recherche (Voir <a href="../en/Openresolv.html#Users" title="Openresolv">openresolv#Users</a> pour une liste de programme qui utilsent <i>resolvconf</i>), alors le paquet additionnel <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=systemd-resolvconf">systemd-resolvconf</a></span> est requis pour fournir le lien symbolique <code>/usr/bin/resolvconf</code>.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> 
+<ul>
+<li>
+<i>systemd-resolved</i> a une interface limitée avec <i>resolvconf</i> et peut ne pas fonctionner avec tout les clients, voir <span class="plainlinks archwiki-template-man" title="$ man 1 resolvectl"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/resolvectl.1#COMPATIBILITY_WITH_RESOLVCONF(8)">resolvectl(1) § COMPATIBILITY WITH RESOLVCONF(8)</a></span> pour plus d'informations.</li>
+<li>
+<span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=systemd-resolvconf">systemd-resolvconf</a></span> fonctionne seuleument quand <code>systemd-resolved.service</code> est démarré. Si vous n'utilisez pas <i>systemd-resolved</i>, alors assurez vous que le paquet <span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=systemd-resolvconf">systemd-resolvconf</a></span> est <a href="../fr/Pacman.html#Suppression_de_paquets" class="mw-redirect" title="Désinstallez">désinstallé</a>, autrement il va causer des problèmes avec les logiciels de réseau qui attendent un binaire <code>/usr/bin/resolvconf</code> fonctionnel.</li>
+</ul>
+</div>
+<h5><span class="mw-headline" id="Manuellement">Manuellement</span></h5>
+<p>Dans le mode stub et static, des serveurs DNS particuliers peuvent être placé dans le fichier de configuration <span class="plainlinks archwiki-template-man" title="$ man 5 resolved.conf"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/resolved.conf.5">resolved.conf(5)</a></span>:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/resolved.conf.d/dns_servers.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Resolve]
+DNS=192.168.35.1 fd7b:d0bd:7a6e::1
+Domains=~.</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> 
+<ul>
+<li>Sans l'option <code>Domains=~.</code> dans <span class="plainlinks archwiki-template-man" title="$ man 5 resolved.conf"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/resolved.conf.5">resolved.conf(5)</a></span>, <i>systemd-resolved</i> pourrait utiliser le serveur DNS par lien, si n'importe lequel affecte le <code>Domains=~.</code> dans la configuration d'un lien.</li>
+<li>Cette option n'affectera pas les requêtes de nom de domaine qui correspondent au nom de domaine spécifique spécifié dans la configuration d'un lien. Elles seront toujours résolu en utilisant le serveur DNS respectif au lien.</li>
+</ul>
+<p>Pour d'avantage d'informations sur la configuration des liens consultez <a href="../fr/Systemd-networkd.html#Fichiers_network" title="Systemd-networkd (Français)">Systemd-networkd (Français)#Fichiers network</a>.
+</p>
+</div>
+<h5><span class="mw-headline" id="Serveurs_de_secours">Serveurs de secours</span></h5>
+<p>Si <i>systemd-resolved</i> ne reçoit pas d'addresses de serveurs DNS depuis le <a href="../en/Network_configuration.html#Network_managers" class="mw-redirect" title="Network manager">network manager</a> et qu'aucune addresse de serveurs n'est configurée <a href="#Manuellement">manuellement</a> alors <i>systemd-resolved</i> se repli sur les adresses DNS de secours pour s'assurer que la résolution DNS fonctionne toujours.
+</p>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> Les serveurs DNS de secours sont dans cet ordre: Cloudflare, Quad9 et Google; consultez le <a rel="nofollow" class="external text" href="https://gitlab.archlinux.org/archlinux/packaging/packages/systemd/-/blob/6a2bc5773a560688e6c12ab4bcfec87df6092ec1/PKGBUILD#L124-133">PKGBUILD de systemd</a> où les serveurs sont définis.</div>
+<p>Les adresses peuvent être changées en définissant <code>FallbackDNS</code> dans <span class="plainlinks archwiki-template-man" title="$ man 5 resolved.conf"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/resolved.conf.5">resolved.conf(5)</a></span>. E.g.:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/resolved.conf.d/fallback_dns.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Resolve]
+FallbackDNS=127.0.0.1 ::1</pre>
+<p>Pour supprimer la fonctionnalité de serveurs de secours, activez l'option <code>FallbackDNS</code> en ne spécifiant aucune adresse:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/resolved.conf.d/fallback_dns.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Resolve]
+FallbackDNS=</pre>
+<h4><span class="mw-headline" id="DNSSEC">DNSSEC</span></h4>
+<p>La validation <a href="../en/DNSSEC.html" title="DNSSEC">DNSSEC</a> peut être activée en changeant l'option <code>DNSSEC</code> dans <span class="plainlinks archwiki-template-man" title="$ man 5 resolved.conf"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/resolved.conf.5">resolved.conf(5)</a></span>.
+</p>
+<ul>
+<li>Affectez <code>DNSSEC=allow-downgrade</code> pour valider DNSSEC seuleument quand le serveur en amont prend en charge la fonctionnalité.</li>
+<li>Affectez <code>DNSSEC=true</code> pour toujours valider DNSSEC, ce qui va casser la résolution DNS avec les serveurs de nom de domaines qui ne prend pas en charge la fonctionnalité. E.g:</li>
+</ul>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/resolved.conf.d/dnssec.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Resolve]
+DNSSEC=true</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> 
+<ul>
+<li>Si votre serveurs DNS ne prend pas en charge DNSSEC et vous observez des problèmes avec la valeurs par défaut "allow-downgrade" (e.g. <a rel="nofollow" class="external text" href="https://github.com/systemd/systemd/issues/10579">systemd issue 10579</a>), vous pouvez explicitement désactiver le support DNSSEC de systemd-resolved en affectant <code>DNSSEC=false</code>.</li>
+<li>systemd-resolved peut désactiver DNSSEC après quelques validations infructueuses . Si l'option <code>DNSSEC</code> est affectée à <code>true</code>, alors la résolution DNS stoppera de fonctionner complétement. Voir <a rel="nofollow" class="external text" href="https://github.com/systemd/systemd/issues/9867">systemd issue 9867</a>.</li>
+</ul>
+</div>
+<p>Vous pouvez tester la validation en requêtant un nom de domaine avec une signature invalide:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">$ resolvectl query sigfail.verteiltesysteme.net</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">sigfail.verteiltesysteme.net: resolve call failed: DNSSEC validation failed: invalid
+</pre>
+<p>Ensuite testez un nom de domaine avec une signature valide:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">$ resolvectl query sigok.verteiltesysteme.net</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">sigok.verteiltesysteme.net: 134.91.78.139
+
+-- Information acquired via protocol DNS in 266.3ms.
+-- Data is authenticated: yes
+</pre>
+<h4><span class="mw-headline" id="DNS_via_TLS">DNS via TLS</span></h4>
+<p>DNS via TLS est désactivé par défaut. Pour l'activer, changez l'option <code>DNSOverTLS</code> dans la section <code>[Resolve]</code> dans <span class="plainlinks archwiki-template-man" title="$ man 5 resolved.conf"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/resolved.conf.5">resolved.conf(5)</a></span>. Pour activer la validation du certificat du serveurs DNS de votre fournisseur, incluez leur nom d'hôte dans l'option <code>DNS</code> avec le format <code><i>ip_address</i>#<i>hostname</i></code>. E.g:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">/etc/systemd/resolved.conf.d/dns_over_tls.conf</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">[Resolve]
+DNS=9.9.9.9#dns.quad9.net
+DNSOverTLS=yes</pre>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> Le serveurs DNS utilisé doit prendre en charge DNS via TLS. Autrement toute les requêtes DNS vont échouer.</div>
+<p><span class="plainlinks archwiki-template-pkg"><a rel="nofollow" class="external text" href="https://archlinux.org/packages/?name=ngrep">ngrep</a></span> peut être utile pour tester si DNS via TLS fonctionne puisque DNS via TLS utilise toujours les ports 853 et jamais le port 53. La commande <code>ngrep port 53</code> ne doit produire aucune sortie quand le nom de domaine est résolu via TLS et <code>ngrep port 853</code> doit produire un contenu chiffré.
+</p>
+<p><a href="../fr/Wireshark.html" title="Wireshark (Français)">Wireshark</a> peut aussi être utilisé pour plus de détails sur l'inspection des paquets DNS via TLS.
+</p>
+<h3><span class="mw-headline" id="mDNS">mDNS</span></h3>
+<p><i>systemd-resolved</i> est capable de fonctionner comme un résolveur et un répondeur <a href="https://en.wikipedia.org/wiki/Multicast_DNS" class="extiw" title="wikipedia:Multicast DNS">multicast DNS</a>.
+</p>
+<p>Le résolveur fournit une résolution de <a href="../en/Network_configuration.html#Set_the_hostname" class="mw-redirect" title="Hostname">hostname</a> en utilisant un schénma de nom "<i>hostname</i>.local".
+</p>
+<p>mDNS ne sera activé seuleument pour une connexion si le support mDNS de systemd-resolved a été activé, et si la configuration du <a href="../en/Network_configuration.html#Network_managers" class="mw-redirect" title="Network manager">network manager</a> en vigueur active mDNS pour la connexion.
+</p>
+<p>Le support mDNS de <i>systemd-resolved</i> peut être activé par son option <code>MulticastDNS</code> (Voir <span class="plainlinks archwiki-template-man" title="$ man 5 resolved.conf"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/resolved.conf.5#OPTIONS">resolved.conf(5) § OPTIONS</a></span>).
+</p>
+<p>Activer mDNS pour chaque connexion indépendamment les unes des autres, dépends du <a href="../en/Network_configuration.html#Network_managers" class="mw-redirect" title="Network manager">network manager</a>:
+</p>
+<ul>
+<li>Pour <a href="../fr/Systemd-networkd.html" title="Systemd-networkd (Français)">systemd-networkd</a>, affectez l'option <code>MulticastDNS</code> dans la section <code>[Network]</code> dans le fichier de configuration de la connexion. Vous pourriez aussi avoir à affecter l'option <code>Multicast=yes</code> dans la section <code>[Link]</code>. Voir <span class="plainlinks archwiki-template-man" title="$ man 5 systemd.network"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd.network.5">systemd.network(5)</a></span>.</li>
+<li>Autrement, pour <a href="../fr/NetworkManager.html" title="NetworkManager (Français)">NetworkManager</a>, affectez l'option <code>mdns</code> dans la section <code>[connection]</code> du fichier de configuration de la connexion. Lancez la commande <code>nmcli connection modify <i>interface_name</i> connection.mdns <i>{yes|no|resolve}</i></code> qui fera cela pour vous. Voir <span class="plainlinks archwiki-template-man" title="$ man 5 nm-settings"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/nm-settings.5">nm-settings(5)</a></span>.</li>
+</ul>
+<div class="archwiki-template-box archwiki-template-box-note">
+<strong>Note:</strong> 
+<ul>
+<li>Si <a href="../fr/Avahi.html" title="Avahi (Français)">Avahi</a> a été installé, vous devriez envisager de <a href="../fr/Systemd.html#Utilisation_des_unit%C3%A9s" class="mw-redirect" title="Désactivez">désactiver</a> ou <a href="../fr/Systemd.html#Utilisation_des_unit%C3%A9s" class="mw-redirect" title="Masquez">masquer</a> <code>avahi-daemon.service</code> et <code>avahi-daemon.socket</code> pour éviter des conflits avec <i>systemd-resolved</i>.</li>
+<li>Si vous avez l'intention d'utiliser mDNS et un <a href="../en/Category:Firewalls.html" class="mw-redirect" title="Firewall">firewall</a>, assurez vous d'ouvrir les ports UDP <code>5353</code>.</li>
+</ul>
+</div>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> Le défaut pour toutes les connexion de <a href="../fr/NetworkManager.html" title="NetworkManager (Français)">NetworkManager</a> peut être affecté en créant un fichier de configuration dans <code>/etc/NetworkManager/conf.d/</code> et en affectant <code>connection.mdns=2</code> dans la section <code>[connection]</code>. Voir <span class="plainlinks archwiki-template-man" title="$ man 5 NetworkManager.conf"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/NetworkManager.conf.5#CONNECTION_SECTION">NetworkManager.conf(5) § CONNECTION SECTION</a></span> et <a rel="nofollow" class="external autonumber" href="https://bbs.archlinux.org/viewtopic.php?pid=1965078#p1965078">[1]</a>.</div>
+<h3><span class="mw-headline" id="LLMNR">LLMNR</span></h3>
+<p><a href="https://en.wikipedia.org/wiki/fr:Link-local_Multicast_Name_Resolution" class="extiw" title="wikipedia:fr:Link-local Multicast Name Resolution">Link-Local Multicast Name Resolution</a> est un protocole de résolution de <a href="../en/Network_configuration.html#Set_the_hostname" class="mw-redirect" title="Hostname">hostname</a> créé par Microsoft.
+</p>
+<p>LLMNR ne sera activé pour la connexion si l'option global <code>LLMNR</code> de systemd-resolved dans <span class="plainlinks archwiki-template-man" title="$ man 5 resolved.conf"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/resolved.conf.5#OPTIONS">resolved.conf(5) § OPTIONS</a></span> et l'option de la connexion du <a href="../en/Network_configuration.html#Network_managers" class="mw-redirect" title="Network manager">network manager</a> est activé. Par défaut <i>systemd-resolved</i> active le répondeur LLMNR; <a href="../fr/Systemd-networkd.html" title="Systemd-networkd (Français)">systemd-networkd</a> et <a href="../fr/NetworkManager.html" title="NetworkManager (Français)">NetworkManager</a><a rel="nofollow" class="external autonumber" href="https://gitlab.freedesktop.org/NetworkManager/NetworkManager/issues/301">[2]</a> l'active pour les connexion.
+</p>
+<ul>
+<li>Pour <a href="../fr/Systemd-networkd.html" title="Systemd-networkd (Français)">systemd-networkd</a> l'option est <code>LLMNR</code> dans la section <code>[Network]</code>. Voir <span class="plainlinks archwiki-template-man" title="$ man 5 systemd.network"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/systemd.network.5#%5BNETWORK%5D_SECTION_OPTIONS">systemd.network(5) § [NETWORK] SECTION OPTIONS</a></span>.</li>
+<li>Pour <a href="../fr/NetworkManager.html" title="NetworkManager (Français)">NetworkManager</a> l'option est <code>llmnr</code> dans la section <code>[connection]</code>. Voir <span class="plainlinks archwiki-template-man" title="$ man 5 nm-settings"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/nm-settings.5#connection_setting">nm-settings(5) § connection setting</a></span>.</li>
+</ul>
+<div class="archwiki-template-box archwiki-template-box-tip">
+<strong>Tip:</strong> La valeur par défaut pour chaque connexion dans <a href="../fr/NetworkManager.html" title="NetworkManager (Français)">NetworkManager</a> peut être affecté en créant un fichier de configuration dans <code>/etc/NetworkManager/conf.d/</code> et en affectant <code>connection.llmnr</code> dans la section <code>[connection]</code>. Voir <span class="plainlinks archwiki-template-man" title="$ man 5 NetworkManager.conf"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/NetworkManager.conf.5#CONNECTION_SECTION">NetworkManager.conf(5) § CONNECTION SECTION</a></span>.</div>
+<p>Si vous avez l'intention d'utiliser LLMNR et un <a href="../en/Category:Firewalls.html" class="mw-redirect" title="Firewall">firewall</a>, assurez vous d'ouvrir les ports UDP et TCP <code>5355</code>.
+</p>
+<h2>
+<span id="Requ.C3.AAtes"></span><span class="mw-headline" id="Requêtes">Requêtes</span>
+</h2>
+<p>Pour requêter les entrées DNS, mDNS ou LLMNR vous pouvez utiliser l'utilitaire <i>resolvectl</i>.
+</p>
+<p>Par exemple, pour requêter une entrée DNS:
+</p>
+<pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">$ resolvectl query archlinux.org</pre>
+<pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">archlinux.org: 2a01:4f8:172:1d86::1
+               138.201.81.199
+
+-- Information acquired via protocol DNS in 48.4ms.
+-- Data is authenticated: no
+</pre>
+<h2>
+<span id="D.C3.A9pannage"></span><span class="mw-headline" id="Dépannage">Dépannage</span>
+</h2>
+<h3><span class="mw-headline" id="systemd-resolved_ne_cherche_pas_le_domaine_local">systemd-resolved ne cherche pas le domaine local</span></h3>
+<p><i>systemd-resolved</i> peut ne pas chercher le domaine local quand on lui donne juste le nom de l'hôte, même si <code>UseDomains=yes</code> ou <code>Domains=[domain-list]</code> est présent dans le fichier de <a href="../fr/Systemd-networkd.html" title="Systemd-networkd (Français)">systemd-networkd</a> <i>.network</i> approprié, et que ce fichier produit la bonne <code>search [domain-list]</code> dans <code>resolv.conf</code>. Vous pouvez lancer <code>networkctl status</code> ou <code>resolvectl status</code> pour vérifier que les domaines de recherche sont en fait bien lu.
+</p>
+<p>Contournements possible:
+</p>
+<ul>
+<li>Désactivez <a href="#LLMNR">LLMNR</a> pour laisser <i>systemd-resolved</i> continuer immédiatement en concaténant le suffixe DNS.</li>
+<li>Supprimer le <code>hosts</code> de la base de donnée <code>/etc/nsswitch.conf</code> (e.g., en supprimant l'option <code>[!UNAVAIL=return]</code> après le service <code>resolve</code>)</li>
+<li>Pencher pour utiliser les nom de domaines totalement qualifiés.</li>
+<li>Uitilsez <code>/etc/hosts</code> pour résoudre les noms de domaines.</li>
+<li>Replier vous sur le <code>dns</code> de glibc au lieu d'utiliser le <code>resolve</code> de systemd.</li>
+</ul>
+<h3>
+<span id="systemd-resolved_ne_r.C3.A9sout_pas_les_nom_d.27h.C3.B4te_sans_suffix"></span><span class="mw-headline" id="systemd-resolved_ne_résout_pas_les_nom_d'hôte_sans_suffix">systemd-resolved ne résout pas les nom d'hôte sans suffix</span>
+</h3>
+<p>Pour faire en sort que systemd-resolved resolve les nom d'hôte qui ne sont pas des nom de domaines totalement qualifié, ajoutez <code>ResolveUnicastSingleLabel=yes</code> à <code>/etc/systemd/resolved.conf</code>.
+</p>
+<div class="archwiki-template-box archwiki-template-box-warning">
+<strong>Warning:</strong> Cela va envoyer les noms seuls vers les serveurs DNS globaux qui peuvent ne pas être sous votre contrôle. Ce comportement est non standard, ni conforme, et peut créer des risques de sécurité et de vie privée. Voir <span class="plainlinks archwiki-template-man" title="$ man 5 resolved.conf"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/resolved.conf.5">resolved.conf(5)</a></span> pour les détails.</div>
+<p>Cela semble ne marcher qu'avec LLMNR désactivé (<code>LLMNR=no</code>).
+</p>
+<p>Si vous utilisez <a href="../fr/Systemd-networkd.html" title="Systemd-networkd (Français)">systemd-networkd</a>, vous pourriez vouloir que le nom de domaine fournit par le serveur DHCP ou l'IPV6 RA soit utilisé comme nom de domaine de recherche. C'est désactivé par défaut, pour l'activer il faut l'ajouter dans le fichier <i>.network</i> de l'interface:
+</p>
+<pre>[DHCPv4]
+UseDomains=true
+
+[IPv6AcceptRA]
+UseDomains=yes</pre>
+<p>Vous pouvez vérifier ce que systemd-resolved possède pour chaque interface avec:
+</p>
+<pre>$ resolvectl domain
+</pre>
+<h2><span class="mw-headline" id="Voir_aussi">Voir aussi</span></h2>
+<ul>
+<li><a rel="nofollow" class="external text" href="https://moss.sh/name-resolution-issue-systemd-resolved">Un problème de résolution de nom avec systemd-resolved que nous avont trouvé dans la nature par Francisco Ros</a></li>
+<li>Voir <span class="plainlinks archwiki-template-man" title="$ man 1 resolvectl"><a rel="nofollow" class="external text" href="https://man.archlinux.org/man/resolvectl.1#EXAMPLES">resolvectl(1) § EXAMPLES</a></span> pour plus d'exemples.</li>
+</ul>
+</div>
+</div>
+					<div id="catlinks" class="catlinks" data-mw="interface"><div id="mw-normal-catlinks" class="mw-normal-catlinks">
+<a href="../Special:Categories.html" title="Special:Categories">Category</a>: <ul><li><a href="../fr/Category:Domain_Name_System.html" title="Category:Domain Name System (Français)">Domain Name System (Français)</a></li></ul>
+</div></div>
+				</div>
+			</main>
+			
+		</div>
+		<div class="mw-footer-container">
+			
+<footer id="footer" class="mw-footer" style="margin: 0">
+	<ul id="footer-info">
+	<li data-nosnippet="">Retrieved from "<a dir="ltr" href="https://wiki.archlinux.org/index.php?title=Systemd-resolved_(Fran%C3%A7ais)&amp;oldid=808201">https://wiki.archlinux.org/index.php?title=Systemd-resolved_(Français)&amp;oldid=808201</a>"</li>
+<li id="footer-info-lastmod"> This page was last edited on 12 May 2024, at 15:54.</li>
+	<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+<br>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="https://terms.archlinux.org/docs/privacy-policy/">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="../en/ArchWiki:About.html">About ArchWiki</a></li>
+	<li id="footer-places-disclaimers"><a href="../en/ArchWiki:General_disclaimer.html">Disclaimers</a></li>
+	<li id="footer-places-archwiki-code-of-conduct"><a href="https://terms.archlinux.org/docs/code-of-conduct/" class="extiw" title="archlinux-service-agreements:code-of-conduct">Code of conduct</a></li>
+	<li id="footer-places-archwiki-terms-of-service"><a href="https://terms.archlinux.org/docs/terms-of-service/" class="extiw" title="archlinux-service-agreements:terms-of-service">Terms of service</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-copyrightico"><a href="https://www.gnu.org/copyleft/fdl.html" class="cdx-button cdx-button--fake-button cdx-button--size-large cdx-button--fake-button--enabled"><img src="/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" loading="lazy"></a></li>
+	<li id="footer-poweredbyico"><img src="/resources/assets/poweredby_mediawiki.svg" width="88" height="31" loading="lazy"></li>
+</ul>
+
+</footer>
+
+		</div>
+	</div> 
+</div> 
+<div class="vector-settings" id="p-dock-bottom">
+	<ul></ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<h1>socat</h1>
+
+<blockquote><p>Relé polivalente (SOcket CAT).
+Más información: <a href="http://www.dest-unreach.org/socat/">http://www.dest-unreach.org/socat/</a>.</p></blockquote>
+
+<ul>
+<li>Escucha un puerto, espera una conexión entrante y transfiere datos a STDIO:</li>
+</ul>
+
+
+<p><code>sudo socat - TCP-LISTEN:8080,fork</code></p>
+
+<ul>
+<li>Escucha en un puerto usando SSL e imprime a STDOUT:</li>
+</ul>
+
+
+<p><code>sudo socat OPENSSL-LISTEN:4433,reuseaddr,cert=./cert.pem,cafile=./ca.cert.pem,key=./key.pem,verify=0 STDOUT</code></p>
+
+<ul>
+<li>Crea una conexión a un host y puerto, transfiere datos en STDIO al host conectado:</li>
+</ul>
+
+
+<p><code>sudo socat - TCP4:www.example.com:80</code></p>
+
+<ul>
+<li>Reenvía los datos entrantes de un puerto local a otro host y puerto:</li>
+</ul>
+
+
+<p><code>sudo socat TCP-LISTEN:80,fork TCP4:www.example.com:80</code></p>
+
+<ul>
+<li>Envía datos con un esquema de enrutamiento multicast:</li>
+</ul>
+
+
+<p><code>{{echo "Hello Multicast"}} | socat - UDP4-DATAGRAM:{{224.0.0.1}}:{{5000}}</code></p>
+
+<ul>
+<li>Recibe datos de un multicast:</li>
+</ul>
+
+
+<p><code>socat - UDP4-RECVFROM:{{5000}}</code></p>
