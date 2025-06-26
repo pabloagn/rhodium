@@ -61,6 +61,7 @@ flake-info|Show flake metadata
 check-backups|Check for backup files in config
 orphans|Find orphaned configuration files
 untracked|Check for untracked files in repository
+reload-services|Reload user services
 '''
 
 # Default recipe shows available commands
@@ -75,7 +76,7 @@ default:
     @printf "\n"
 
 # Build and switch NixOS configuration
-switch host: && update-caches
+switch host:
     @printf "{{yellow}}{{sym_pending}} Pre-flight checks for %s{{reset}}\n" "{{ host }}"
     @if nix flake check {{ flake_path }} 2>/dev/null; then \
     	printf "  {{green}}{{sym_success}} Flake validation passed{{reset}}\n"; \
@@ -85,19 +86,22 @@ switch host: && update-caches
     @printf "{{yellow}}{{sym_pending}} Building and switching configuration...{{reset}}\n"
     sudo nixos-rebuild switch --flake {{ flake_path }}#{{ host }}
     @printf "{{yellow}}{{sym_pending}} Running post-build tasks...{{reset}}\n"
+    @printf "{{green}}{{sym_success}} System rebuild complete{{reset}}\n"
     @if [ -f "/etc/profiles/per-user/{{user}}/etc/profile.d/hm-session-vars.sh" ]; then \
     	printf "  {{cyan}}{{sym_bullet}} Loading session variables{{reset}}\n"; \
     	source "/etc/profiles/per-user/{{user}}/etc/profile.d/hm-session-vars.sh"; \
     fi
-    @if [ -n "${WAYLAND_DISPLAY:-}" ]; then \
-    	printf "  {{cyan}}{{sym_bullet}} Reloading Wayland services{{reset}}\n"; \
-    	systemctl --user daemon-reload; \
-    	for service in rh-swaybg rh-waybar rh-mako; do \
-    		systemctl --user restart "$${service}.service" 2>/dev/null || true; \
-    	done; \
-    fi
-    @command -v niri >/dev/null 2>&1 && niri msg action do-screen-transition --delay-ms 200 2>/dev/null || true
-    @printf "{{green}}{{sym_success}} System rebuild complete{{reset}}\n"
+    @just update-caches
+    @just reload-services
+
+reload-services:
+    @printf "  {{cyan}}{{sym_bullet}} Reloading Wayland services{{reset}}\n"
+    @systemctl --user daemon-reload
+    @command -v niri >/dev/null 2>&1 && \
+        niri msg action do-screen-transition --delay-ms 800 2>/dev/null || true
+    @for service in rh-swaybg rh-waybar rh-mako; do \
+        systemctl --user restart "$service.service" || true; \
+    done
 
 # Build without switching [test build]
 build host:
