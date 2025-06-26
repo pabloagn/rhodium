@@ -24,10 +24,10 @@
         plugin = hydra-nvim; # Implementation of Emacs Hydra
         # config = sourceLuaFile "hydra-nvim.lua";
       }
-      # {
-      #   plugin = yazi-nvim;
-      #   config = sourceLuaFile "yazi-nvim.lua";
-      # }
+      {
+        plugin = yazi-nvim;
+        config = sourceLuaFile "yazi-nvim.lua";
+      }
 
       # Find
       # ------------------------------------------------

@@ -8,13 +8,13 @@ vim.g.maplocalleader = " " -- Local leader
 
 -- General
 -- -------------------------------------------------
-vim.keymap.set(
-	"n",
-	"<Leader><space>",
-	"<cmd>noh<CR>",
-	{ noremap = true, silent = true, desc = "Clear search highlight" }
-)
--- TODO: Confirm this works
+-- TODO: Reassign this key to a more productive map
+-- vim.keymap.set(
+-- 	"n",
+-- 	"<Leader><space>",
+-- 	"<cmd>noh<CR>",
+-- 	{ noremap = true, silent = true, desc = "Clear search highlight" }
+-- )
 vim.keymap.set("n", "<Esc>", "<cmd>noh<CR>", { noremap = true, silent = true, desc = "Clear search highlight" })
 vim.keymap.set(
 	"n",
@@ -25,16 +25,30 @@ vim.keymap.set(
 vim.keymap.set("n", "<Leader>y", ":%y+<CR>", { noremap = true, silent = true, desc = "Copy entire buffer to clip" })
 vim.keymap.set("n", "<Leader>D", ":%d+<CR>", { noremap = true, silent = true, desc = "Delete entire buffer" })
 
+-- Yazi
+-- -------------------------------------------------
+vim.keymap.set("n", "<leader>ac", "<cmd>Yazi<CR>", {
+	noremap = true,
+	silent = true,
+	desc = "Open Yazi on current directory",
+})
+
+vim.keymap.set("n", "<leader>aw", "<cmd>Yazi<CR>", {
+	noremap = true,
+	silent = true,
+	desc = "Open Yazi on working directory",
+})
+
 -- Outline/Aerial Operations
 -- -------------------------------------------------
 -- Main outline toggles
-vim.keymap.set("n", "<leader>aa", "<cmd>AerialToggle!<CR>", {
+vim.keymap.set("n", "<leader>oa", "<cmd>AerialToggle!<CR>", {
 	noremap = true,
 	silent = true,
 	desc = "Toggle sidebar",
 })
 
-vim.keymap.set("n", "<leader>aA", "<cmd>AerialNavToggle<CR>", {
+vim.keymap.set("n", "<leader>oA", "<cmd>AerialNavToggle<CR>", {
 	noremap = true,
 	silent = true,
 	desc = "Toggle navigation",
@@ -48,7 +62,7 @@ vim.keymap.set("n", "<leader>aA", "<cmd>AerialNavToggle<CR>", {
 -- })
 
 -- Additional outline operations
-vim.keymap.set("n", "<leader>af", function()
+vim.keymap.set("n", "<leader>of", function()
 	require("aerial").toggle()
 	if require("aerial").is_open() then
 		require("aerial").focus()
