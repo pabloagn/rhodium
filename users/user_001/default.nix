@@ -54,7 +54,7 @@
     rh-mako.enable = true;
     rh-swaybg.enable = true;
     rh-wlsunset.enable = false;
-    rh-neovim-daemon.enable = true;
+    rh-neovim-daemon.enable = false;
   };
 
   home = {
