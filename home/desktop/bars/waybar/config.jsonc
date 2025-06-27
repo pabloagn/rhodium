@@ -20,8 +20,8 @@
   "modules-right": [
     "network",
     "custom/vpn",
-    "niri/language",
-    "keyboard-state#capslock",
+    "bluetooth",
+    "custom/separator",
     "battery",
     "cpu",
     "memory",
@@ -32,38 +32,23 @@
     // "wireplumber",
     "wireplumber#sink",
     // "wireplumber#source",
-    "bluetooth",
+    "custom/separator",
+    "niri/language",
+    "keyboard-state#capslock",
   ],
 
+  // Helper modules
+  "custom/separator": {
+    "format": "│",
+    "tooltip": false,
+  },
+
+  // Left modules
   "custom/rhodium": {
     "format": "Rh",
     "tooltip": false,
     "on-click": "fuzzel",
     "on-click-right": "fuzzel",
-  },
-
-  // Num Lock
-  "keyboard-state#numlock": {
-    "numlock": true,
-    "capslock": false,
-    "scrolllock": false,
-    "format": "N [{icon}]",
-    "format-icons": {
-      "locked": "⌽",
-      "unlocked": "○",
-    },
-  },
-
-  // Caps Lock
-  "keyboard-state#capslock": {
-    "numlock": false,
-    "capslock": true,
-    "scrolllock": false,
-    "format": "⋂ [{icon}]",
-    "format-icons": {
-      "locked": "⌽",
-      "unlocked": "○",
-    },
   },
 
   // Niri workspace module
@@ -72,11 +57,7 @@
     "on-click": "activate",
   },
 
-  // Niri keyboard layout indicator
-  "niri/language": {
-    "format": "◆ {short}",
-  },
-
+  // Center modules
   "clock": {
     "interval": 1,
     "format": "{:%H.%M.%S}",
@@ -106,103 +87,147 @@
     },
   },
 
+  // Right modules (in display order)
+  "network": {
+    "interval": 1,
+    "format-wifi": "{bandwidthDownBytes:>} ↓",
+    "format-ethernet": "{bandwidthDownBytes:>} ↓",
+    "format-alt": "≏ ⇅ {bandwidthUpBytes:>} ↑ ⦚ {bandwidthDownBytes:>} ↓",
+    "tooltip-format-wifi": "≏ WiFi\n━━━━━━━━━━━━━━━━━━\n•{essid} ⟶ {signalStrength}% @ {frequency}GHz\n•IP ⟶ {ipaddr}/{cidr}\n•GW ⟶ {gwaddr}\n•Interface ⟶ {ifname}\n•Bandwidth ⟶ {bandwidthUpBytes} ↑ ⦚ {bandwidthDownBytes} ↓\n•Signal ⟶ {signaldBm}dBm [{bssid}]",
+    "tooltip-format-ethernet": "≏ Ethernet\n━━━━━━━━━━━━━━━━━━\n•Interface ⟶ {ifname}\n•IP ⟶ {ipaddr}/{cidr}\n•GW ⟶ {gwaddr}\n•Bandwidth ⟶ {bandwidthUpBytes} ↑ ⦚ {bandwidthDownBytes} ↓",
+    "tooltip-format-linked": "≏ Linked\n━━━━━━━━━━━━━━━━━━\n•Interface ⟶ {ifname}\n•Status ⟶ No IP assigned\n•Connection ⟶ Linked (No address)",
+    "tooltip-format-disconnected": "≏ Disconnected\n━━━━━━━━━━━━━━━━━━\n•Status ⟶ No Active Connection\n•Interface ⟶ {ifname}",
+    "format-linked": "≏ No IP",
+    "format-disconnected": "≏ ⌽",
+    // "on-click": "/home/pabloagn/.local/bin/fuzzel/fuzzel-wifi.sh",
+    "on-click-right": "nm-connection-editor",
+    "states": {
+      "warning": 30,
+      "critical": 10,
+    },
+  },
+
+  "custom/vpn": {
+    "interval": 5,
+    "exec": "pgrep -a openvpn|grep -q tun && echo '⊫' || echo '⊯'",
+    "tooltip": true,
+    "tooltip-format": "⊫ VPN\n━━━━━━━━━━━━━━━━━━\n⊫ ⟶ Active\n⊯ ⟶ Inactive",
+    "on-click": "kitty -e nmtui",
+    "on-right-click": "protonvpn-app",
+  },
+
+  "bluetooth": {
+    "format": " {num_connections} {status}",
+    "format-disabled": "0 ▽",
+    "format-off": "0 ▼",
+    "format-on": "0 △",
+    "format-connected": "{num_connections} ▲",
+    "tooltip": true,
+    "tooltip-format": "⋊ Bluetooth\n━━━━━━━━━━━━━━━━━━\n•{controller_alias} ⟶ {controller_address}\n•{num_connections} connected",
+    "tooltip-format-connected": "⋊ Bluetooth\n━━━━━━━━━━━━━━━━━━\n•{controller_alias} ⟶ {controller_address}\n\n•{device_enumerate}",
+    "tooltip-format-enumerate-connected": "↳ {device_alias} [{device_address}]",
+    "tooltip-format-enumerate-connected-battery": "↳ {device_alias} [{device_address}] ⦚ {device_battery_percentage}%",
+    "on-click": "/home/pabloagn/.local/bin/fuzzel/fuzzel-bluetooth.sh",
+    "on-click-right": "blueman-manager",
+  },
+
+  "battery": {
+    "interval": 5,
+    "bat": "BAT1",
+    "states": {
+      "good": 95,
+      "warning": 30,
+      "critical": 15,
+    },
+    "on-click-right": "$HOME/.local/bin/fuzzel/fuzzel-power.sh",
+    "format": "Ω {capacity}%",
+    "format-alt": "Ω {capacity}% {icon}",
+    "format-charging": "{capacity}% 𝥽",
+    "format-plugged": "{capacity}% 𝥽",
+    "format-icons": [
+      "[⠀]",
+      "[⢀]",
+      "[⣀]",
+      "[⣠]",
+      "[⣤]",
+      "[⣴]",
+      "[⣶]",
+      "[⣾]",
+      "[⣿]",
+    ],
+    "tooltip": true,
+    "tooltip-format": "Ω Battery\n━━━━━━━━━━━━━━━━━━\n•Battery ⟶ {capacity}%\n•Power Draw ⟶ {power}W\n•Time Remaining ⟶ {time}\n•Health ⟶ {health}%\n•Charge Cycles ⟶ {cycles}",
+    "tooltip-format-charging": "Ω Battery\n━━━━━━━━━━━━━━━━━━\n•Battery ⟶ {capacity}% [𝥽 Charging]\n•Power Input ⟶ {power}W\n•Time to Full ⟶ {time}\n•Health ⟶ {health}%\n•Charge Cycles ⟶ {cycles}",
+    "tooltip-format-plugged": "Ω Battery\n━━━━━━━━━━━━━━━━━━\n•Battery ⟶ {capacity}% [𝥽 Plugged]\n•Power Draw ⟶ {power}W\n•Health ⟶ {health}%\n•Charge Cycles ⟶ {cycles}",
+    "tooltip-format-full": "Ω Battery\n━━━━━━━━━━━━━━━━━━\n•Battery ⟶ {capacity}% [● Full]\n•Power Draw ⟶ {power}W\n•Health ⟶ {health}%\n•Charge Cycles ⟶ {cycles}",
+  },
+
+  "cpu": {
+    "interval": 1,
+    "format": "⚙ {usage}%",
+    "format-alt": "⚙ U {usage}% L {load}% AVG {avg_frequency}GHz MAX {max_frequency}GHz MIN {min_frequency}GHz",
+    "format-icons": [
+      "[⠀]",
+      "[⢀]",
+      "[⣀]",
+      "[⣠]",
+      "[⣤]",
+      "[⣴]",
+      "[⣶]",
+      "[⣾]",
+      "[⣿]",
+    ],
+    "tooltip": true,
+    "on-click-right": "/home/pabloagn/.local/bin/launchers/launchers-btop.sh",
+  },
+
+  "memory": {
+    "interval": 2,
+    "format": "𝍖 {percentage}%",
+    "format-alt": "𝍖 {percentage}% {icon}",
+    "format-icons": [
+      "[⠀]",
+      "[⢀]",
+      "[⣀]",
+      "[⣠]",
+      "[⣤]",
+      "[⣴]",
+      "[⣶]",
+      "[⣾]",
+      "[⣿]",
+    ],
+    "tooltip": true,
+    "tooltip-format": "𝍖 RAM\n━━━━━━━━━━━━━━━━━━\n•Usage ⟶ {used} / {total} ({percentage}%)\n•Available ⟶ {avail}",
+    "on-click-right": "/home/pabloagn/.local/bin/launchers/launchers-btop.sh",
+  },
+
+  "disk": {
+    "interval": 15,
+    "path": "/",
+    "format": "⬢ {percentage_used}%",
+    "format-alt": "⬢ {free} / {total}",
+    "tooltip": true,
+    "tooltip-format": "⬢ Disk Storage\n━━━━━━━━━━━━━━━━━━\n•Usage ⟶ {used} / {total} ({percentage_used}%)\n•Available ⟶ {free} ({percentage_free}%)\n•Mount Point ⟶ {path}",
+    "on-click-right": "thunar /",
+    "states": {
+      "warning": 70,
+      "critical": 85,
+    },
+  },
+
   "temperature": {
     "critical-threshold": 80,
     "interval": 1,
     "format": "Δ {temperatureC}°C",
     "format-icons": ["", "", ""],
-    "tooltip-format": "CPU Temperature\n━━━━━━━━━━━━━━━━━━\n● Current   ⟶ {temperatureC} °C\n▲ Warning   ⟶ 70 °C\n⚠ Critical  ⟶ 85 °C\n\n℉ Fahrenheit ⟶ {temperatureF} °F\nK Kelvin     ⟶ {temperatureK} K",
-    "on-click": "/home/pabloagn/.local/bin/launchers/launchers-btop.sh",
-  },
-
-  "cpu": {
-    "interval": 1,
-    // "format": "{usage}% ⚙",
-    "format": "⚙ {usage}% {icon}",
-    "format-icons": [
-      "[⠀]",
-      "[⢀]",
-      "[⣀]",
-      "[⣠]",
-      "[⣤]",
-      "[⣴]",
-      "[⣶]",
-      "[⣾]",
-      "[⣿]",
-    ],
-    "tooltip": true,
-    "tooltip-format": "CPU Usage\n━━━━━━━━━━━━━━━━━━\n•Usage ⟶ {usage}%\n•Load Average ⟶ {load}\n•Avg Frequency ⟶ {avg_frequency}•GHz\nMax Frequency ⟶ {max_frequency}GHz\n•Min Frequency ⟶ {min_frequency}•GHz\n\nCore 0 ⟶ {usage0}% {icon0}\n•Core 1 ⟶ {usage1}%",
-    "on-click": "/home/pabloagn/.local/bin/launchers/launchers-btop.sh",
-  },
-
-  "memory": {
-    "interval": 2,
-    "format": "𝍖 {}% {icon}",
-    "format-icons": [
-      "[⠀]",
-      "[⢀]",
-      "[⣀]",
-      "[⣠]",
-      "[⣤]",
-      "[⣴]",
-      "[⣶]",
-      "[⣾]",
-      "[⣿]",
-    ],
-    "tooltip": true,
-    "tooltip-format": "RAM\n━━━━━━━━━━━━━━━━━━\n•Usage ⟶ {used} / {total} ({percentage}%)\n•Available ⟶ {avail}",
-    "on-click": "/home/pabloagn/.local/bin/launchers/launchers-btop.sh",
-  },
-
-  "disk": {
-    "interval": 15,
-    "format": "⬢ {percentage_used}%",
-    "tooltip": true,
-    "tooltip-format": "Disk\n━━━━━━━━━━━━━━━━━━\n•Usage ⟶ {used} / {total} ({percentage_used}%)\n•Mount ⟶ {mount}\n•Free ⟶ {free}",
+    "tooltip-format": "Δ CPU Temperature\n━━━━━━━━━━━━━━━━━━\n● Current   ⟶ {temperatureC} °C\n▲ Warning   ⟶ 70 °C\n⚠ Critical  ⟶ 85 °C\n\n℉ Fahrenheit ⟶ {temperatureF} °F\nK Kelvin     ⟶ {temperatureK} K",
     "on-click": "/home/pabloagn/.local/bin/launchers/launchers-btop.sh",
   },
 
   "backlight": {
-    "format": "☀ {percent}% {icon}",
+    "format": "☀ {percent}%",
+    "format-alt": "☀ {percent}% {icon}",
     "format-icons": ["[-]", "[=]", "[≡]", "[≣]"],
-  },
-
-  "network": {
-    "interval": 1,
-    "format-wifi": "{bandwidthDownBytes:>} ↓",
-    "format-ethernet": "{bandwidthDownBytes:>} ↓",
-    "tooltip-format-wifi": "WiFi\n━━━━━━━━━━━━━━━━━━\n•{essid} ⟶ {signalStrength}% @ {frequency}MHz\n•IP ⟶ {ipaddr}/{cidr}\n•GW ⟶ {gwaddr}\n•Bandwidth ⟶ {bandwidthUpBytes} ↑ ⦚ {bandwidthDownBytes} ↓\n•Signal ⟶ {signaldBm}dBm [{bssid}]",
-    "tooltip-format-ethernet": "{ifname} ⟶ {ipaddr}/{cidr}\nGW ⟶ {gwaddr}\n⇅ {bandwidthUpBytes} ↑ / {bandwidthDownBytes} ↓",
-    "tooltip-format-linked": "{ifname} ⟶ No IP\nLinked (No assigned address)",
-    "tooltip-format-disconnected": "⌽ Disconnected\nNo active connection",
-    "format-linked": "No IP",
-    "format-disconnected": "⌽",
-    "on-click": "/home/pabloagn/.local/bin/fuzzel/fuzzel-wifi.sh",
-    "on-click-right": "nm-connection-editor",
-  },
-
-  "custom/vpn": {
-    // "class": "vpn-status",
-    "interval": 5,
-    "exec": "pgrep -a openvpn|grep -q tun && echo '⊫ [●]' || echo '⊫ [⌽]'",
-    "tooltip": true,
-    "tooltip-format": "VPN\n━━━━━━━━━━━━━━━━━━\n● ⟶ Active\n⌽ ⟶ Inactive",
-    "on-click": "kitty -e nmtui",
-  },
-
-  "bluetooth": {
-    "format": "⋊ {num_connections} {status}",
-    "format-disabled": "⋊ 0 [⌽]",
-    "format-off": "⋊ 0 [▼]",
-    "format-on": "⋊ 0 [△]",
-    "format-connected": "⋊ {num_connections} [▲]",
-    "tooltip": true,
-    "tooltip-format": "Bluetooth\n━━━━━━━━━━━━━━━━━━\n•{controller_alias} ⟶ {controller_address}\n•{num_connections} connected",
-    "tooltip-format-connected": "Bluetooth\n━━━━━━━━━━━━━━━━━━\n•{controller_alias} ⟶ {controller_address}\n\n•{device_enumerate}",
-    "tooltip-format-enumerate-connected": "↳ {device_alias} [{device_address}]",
-    "tooltip-format-enumerate-connected-battery": "↳ {device_alias} [{device_address}] ⦚ {device_battery_percentage}%",
-    "on-click": "/home/pabloagn/.local/bin/fuzzel/fuzzel-bluetooth.sh",
-    "on-click-right": "blueman-manager",
   },
 
   // "wireplumber": {
@@ -221,9 +246,10 @@
 
   "wireplumber#sink": {
     "node-type": "Audio/Sink",
-    "format": "∿ {volume}% {icon}",
-    "format-muted": "∿ {volume}% [⌽]",
-    "format-icons": ["[-]", "[=]", "[≡]", "[≣]"],
+    // "format": "∿ {volume}% {icon}",
+    "format": "● {volume}%",
+    "format-muted": "⌽ {volume}%",
+    // "format-icons": ["[-]", "[=]", "[≡]", "[≣]"],
     "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
     "on-click-right": "helvum",
     "scroll-step": 1,
@@ -232,7 +258,7 @@
       "critical": 100,
     },
     "tooltip": true,
-    "tooltip-format": "Playback Device\n━━━━━━━━━━━━━━━━━━\n•Device ⟶ {node_name}\n•Volume ⟶ {volume}%",
+    "tooltip-format": "∿ Playback Device\n━━━━━━━━━━━━━━━━━━\n•Device ⟶ {node_name}\n•Volume ⟶ {volume}%",
   },
 
   "wireplumber#source": {
@@ -251,36 +277,34 @@
     "tooltip-format": "Recording Device\n━━━━━━━━━━━━━━━━━━\n•Device ⟶ {node_name}\n•Volume ⟶ {volume}%",
   },
 
-  "battery": {
-    "interval": 5,
-    "bat": "BAT1",
-    "states": {
-      "good": 95,
-      "warning": 30,
-      "critical": 15,
+  "niri/language": {
+    "format": "{short}",
+    // "format": "◆ {short}",
+    "format-alt": "{long}",
+  },
+
+  // Caps Lock
+  "keyboard-state#capslock": {
+    "numlock": false,
+    "capslock": true,
+    "scrolllock": false,
+    "format": "{icon}",
+    "format-icons": {
+      "locked": "⋢",
+      "unlocked": "⊑",
     },
-    "on-click": "$HOME/.local/bin/fuzzel/fuzzel-power.sh",
-    "on-click-right": "$HOME/.local/bin/launchers/launchers-btop.sh",
-    "format": "Ω {capacity}% {icon}",
-    "format-charging": "{capacity}% ↯",
-    "format-plugged": "{capacity}% ↯",
-    // "format-alt": "{time} {icon}",
-    "format-icons": [
-      "[⠀]",
-      "[⢀]",
-      "[⣀]",
-      "[⣠]",
-      "[⣤]",
-      "[⣴]",
-      "[⣶]",
-      "[⣾]",
-      "[⣿]",
-    ],
-    "tooltip": true,
-    "tooltip-format": "Battery\n━━━━━━━━━━━━━━━━━━\n•Battery ⟶ {capacity}%\n•Power Draw ⟶ {power}W\n•Time Remaining ⟶ {time}\n•Health ⟶ {health}%\n•Charge Cycles ⟶ {cycles}",
-    "tooltip-format-charging": "Battery\n━━━━━━━━━━━━━━━━━━\n•Battery ⟶ {capacity}% [↯ Charging]\n•Power Input ⟶ {power}W\n•Time to Full ⟶ {time}\n•Health ⟶ {health}%\n•Charge Cycles ⟶ {cycles}",
-    "tooltip-format-plugged": "Battery\n━━━━━━━━━━━━━━━━━━\n•Battery ⟶ {capacity}% [↯ Plugged]\n•Power Draw ⟶ {power}W\n•Health ⟶ {health}%\n•Charge Cycles ⟶ {cycles}",
-    "tooltip-format-full": "Battery\n━━━━━━━━━━━━━━━━━━\n•Battery ⟶ {capacity}% [● Full]\n•Power Draw ⟶ {power}W\n•Health ⟶ {health}%\n•Charge Cycles ⟶ {cycles}",
+  },
+
+  // Num Lock
+  "keyboard-state#numlock": {
+    "numlock": true,
+    "capslock": false,
+    "scrolllock": false,
+    "format": "N [{icon}]",
+    "format-icons": {
+      "locked": "⌽",
+      "unlocked": "○",
+    },
   },
 }
 
