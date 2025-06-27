@@ -117,6 +117,12 @@
       icon = "qbittorrent";
       description = "qBittorrent";
     };
+    slack = {
+      binary = "slack";
+      args = [];
+      icon = "slack";
+      description = "Slack";
+    };
     jitsimeet = {
       binary = "jitsi-meet";
       args = [];

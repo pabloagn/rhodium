@@ -60,28 +60,33 @@
   # Core Directories
   gd = "z $HOME_DOWNLOADS";
   gc = "z $XDG_CONFIG_HOME";
+  ge = "z $XDG_CACHE_HOME";
   gr = "z $RHODIUM";
   gp = "z $HOME_PROJECTS";
   ga = "z $HOME_ACADEMIC";
   gs = "z $HOME_SOLENOIDLABS";
-  gpr = "z $HOME_PROFESSIONAL";
+  gw = "z $HOME_PROFESSIONAL";
   gv = "z $HOME_VAULTS";
-  gvs = "z $HOME_VAULTS_SANCTUM";
 
   # Fuzzy
   # fzd = "zi";
   fzh = "fzf-history-widget";
 
   # Git
-  gst = "git status";
-  gad = "git add .";
-  gcm = "git commit -m";
-  gpu = "git push -u origin main";
-  grm = "git rm -r --cached .";
+  gst = "git status"; # Check git repo status
+  gad = "git add ."; # Stage all files under current dir
+  gcm = "cz commit"; # Create a new commit (commitizen)
+  gbp = "cz bump"; # Bump version and update changelog (commitizen)
+  gch = "cz changelog"; # Generate changelog (commitizen)
+  gck = "cz check"; # Validate commit messages (commitizen)
+  gvr = "cz version"; # Show version information (commitizen)
+  gin = "cz init"; # Initialize Commitizen configuration (commitizen)
+  gpu = "git push -u origin main"; # Push to main
+  grm = "git rm -r --cached ."; # Remove remote cache
 
   # IDEs
   code = "code 2>/dev/null";
-  # cursor = "cursor 2>/dev/null";
+  cursor = "cursor 2>/dev/null";
 
   # See-utils
   sa = "alias | fzf"; # See aliases

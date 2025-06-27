@@ -56,11 +56,11 @@
     rh-wlsunset.enable = false;
     # rh-eww.enable = true;
     # TODO: Test
-    rh-ghostty-daemon.enable = true;
-    rh-kitty-daemon.enable = true;
-    rh-wezterm-daemon.enable = true;
+    # rh-ghostty-daemon.enable = true;
+    # rh-kitty-daemon.enable = true;
+    # rh-wezterm-daemon.enable = true;
     rh-neovim-daemon.enable = true;
-    rh-firefox-preload.enable = true;
+    # rh-firefox-preload.enable = true;
   };
 
   home = {

@@ -1,7 +1,16 @@
-{user, ...}: let
+{
+  user,
+  pkgs,
+  ...
+}: let
   userfullName = user.fullName;
   userEmail = user.emailMain;
 in {
+  home.packages = with pkgs; [
+    commitizen # Commit rules for projects
+    cz-cli # commitzen cli
+  ];
+
   programs.git = {
     enable = true;
     userName = userfullName;
@@ -39,11 +48,22 @@ in {
     ];
 
     delta = {
-      enable = true;
+      enable = true; # View file diffs
     };
 
-    # riff = {
-    #   enable = true;
-    # };
+    riff = {
+      enable = false; # View file diffs
+    };
+  };
+  programs.gh = {
+    enable = true; # GitHub CLI Tool
+  };
+
+  programs.gitui = {
+    enable = true; # Blazing fast terminal-ui for Git written in Rust
+  };
+
+  programs.lazygit = {
+    enable = true; # Simple terminal UI for git commands
   };
 }

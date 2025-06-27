@@ -1,5 +1,0 @@
-{...}: {
-  programs.lazygit = {
-    enable = true;
-  };
-}

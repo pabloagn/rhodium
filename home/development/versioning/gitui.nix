@@ -1,5 +1,0 @@
-{...}: {
-  programs.gitui = {
-    enable = true;
-  };
-}
