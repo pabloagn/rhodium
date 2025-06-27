@@ -179,6 +179,9 @@
     # Terraform
     terraform-ls
 
+    # Typst
+    tinymist # Integrated language server for typst (includes formatters)
+
     # Vue
     vue-language-server
 

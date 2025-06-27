@@ -22,6 +22,7 @@ require("conform").setup({
 		kdl = { "kdlfmt" },
 		typescript = { "prettierd", "prettier", stop_after_first = true },
 		typescriptreact = { "prettierd", "prettier", stop_after_first = true },
+		typst = { "typstyle" },
 		latex = { "latexindent" },
 		nix = { "nixpkgs_fmt", "alejandra" },
 		ocaml = { "ocamlformat" },

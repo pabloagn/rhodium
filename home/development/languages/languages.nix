@@ -1,13 +1,13 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
-    gcc
-    gnumake
+    gcc # GNU compiler collection
+    gnumake # GNU compiler
     go
     nodejs
     python3
-    rustup
-    just
-    texlive.combined.scheme-full
-    typst
+    rustup # Rust toolchain installer
+    just # Alternative to Make
+    texlive.combined.scheme-full # Complete texlive distribution
+    typst # New markup-based tool
   ];
 }

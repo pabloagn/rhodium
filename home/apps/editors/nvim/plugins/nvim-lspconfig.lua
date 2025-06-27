@@ -345,6 +345,16 @@ require("lspconfig").ts_ls.setup({
 	capabilities = capabilities,
 })
 
+-- Typst
+require("lspconfig")["tinymist"].setup({
+	capabilities = capabilities,
+	settings = {
+		formatterMode = "typstyle",
+		exportPdf = "onType",
+		semanticTokens = "disable",
+	},
+})
+
 -- Vue (Volar for Vue 3)
 require("lspconfig").volar.setup({
 	capabilities = capabilities,

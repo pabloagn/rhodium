@@ -57,6 +57,11 @@
         config = sourceLuaFile "render-markdown-nvim.lua";
       }
 
+      {
+        plugin = typst-preview;
+        config = sourceLuaFile "typst-preview-nvim.lua";
+      }
+
       # Linting
       # {
       #   plugin = nvim-lint;

@@ -17,6 +17,7 @@
 
     # Filetype plugins
     "nvim/ftplugin/tex.lua".source = ./ftplugin/tex.lua;
+    "nvim/ftplugin/typst.lua".source = ./ftplugin/typst.lua;
     "nvim/ftplugin/python.lua".source = ./ftplugin/python.lua;
     "nvim/ftplugin/markdown.lua".source = ./ftplugin/markdown.lua;
     "nvim/ftplugin/rust.lua".source = ./ftplugin/rust.lua;
