@@ -103,7 +103,7 @@ reload-services:
     @systemctl --user daemon-reload
     @command -v niri >/dev/null 2>&1 && \
         niri msg action do-screen-transition --delay-ms 800 2>/dev/null || true
-    @for service in rh-swaybg rh-waybar rh-mako; do \
+    @for service in rh-swaybg rh-waybar; do \
         systemctl --user restart "$service.service" || true; \
     done
     @printf "{{green}}{{sym_success}} Reloaded User Services{{reset}}\n"

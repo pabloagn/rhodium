@@ -8,7 +8,7 @@
 in {
   home.packages = with pkgs; [
     commitizen # Commit rules for projects
-    cz-cli # commitzen cli
+    # cz-cli # commitzen cli
   ];
 
   programs.git = {
