@@ -349,7 +349,7 @@ require("lspconfig").ts_ls.setup({
 require("lspconfig")["tinymist"].setup({
 	capabilities = capabilities,
 	settings = {
-        formatterMode = "disable",
+        formatterMode = "typstyle",
         exportPdf = "never",
         semanticTokens = "disable"
 	},
