@@ -1,11 +1,12 @@
-{ pkgs, sourceLuaFile }:
-
 {
+  pkgs,
+  sourceLuaFile,
+}: {
   programs.neovim = {
     plugins = with pkgs.vimPlugins; [
       # Git Integration
       {
-        # TODO: Add config 
+        # TODO: Add config
         plugin = gitsigns-nvim; # Add inline git signs
         # config = sourceLuaFile "gitsigns-nvim.lua";
       }

@@ -1,10 +1,8 @@
 require("typst-preview").setup({
 	debug = false,
 
-	-- Custom format string to open the output link provided with %s
-	-- Example: open_cmd = 'firefox %s -P typst-preview --class typst-preview'
 	-- open_cmd = nil,
-    open_cmd = 'firefox %s -P Personal --class typst-preview',
+    open_cmd = 'firefox --new-window -P Personal %s',
 
 	-- Custom port to open the preview server. Default is random.
 	-- Example: port = 8000

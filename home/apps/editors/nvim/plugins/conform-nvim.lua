@@ -22,7 +22,7 @@ require("conform").setup({
 		kdl = { "kdlfmt" },
 		typescript = { "prettierd", "prettier", stop_after_first = true },
 		typescriptreact = { "prettierd", "prettier", stop_after_first = true },
-		typst = { "typstyle" },
+		typst = { "tinymist" },
 		latex = { "latexindent" },
 		nix = { "nixpkgs_fmt", "alejandra" },
 		ocaml = { "ocamlformat" },
@@ -72,6 +72,10 @@ require("conform").setup({
 			command = "buf",
 			args = { "format", "-w" },
 			stdin = false,
+		},
+		tinymist = {
+			command = "tinymist",
+			stdin = true,
 		},
 	},
 })

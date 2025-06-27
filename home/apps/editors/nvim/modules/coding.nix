@@ -58,7 +58,7 @@
       }
 
       {
-        plugin = typst-preview;
+        plugin = typst-preview-nvim;
         config = sourceLuaFile "typst-preview-nvim.lua";
       }
 
