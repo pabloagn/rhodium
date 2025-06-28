@@ -1,6 +1,6 @@
 <p align="center"><img src="assets/logo.png" width=500px></p>
 
-<p align="center"><em>A robust, hypermodular NixOS system built to stand the test of time</em></p>
+<p align="center"><em>A hypermodular NixOS system built to stand the test of time</em></p>
 
 <br/>
 <div align="center">───────  ‡  ───────</div>
@@ -24,16 +24,35 @@
 
 Rhodium is a declarative NixOS system preconfigured with sensible defaults, aimed towards academics & professionals looking for stability without sacrificing innovation.
 
-This hypermodular configuration combines the declarative power of Nix with over 100+ curated packages using a profile-based configuration.
+This hypermodular configuration combines the declarative power of Nix with 150+ curated packages using a profile-based configuration.
+
+<div align="center">
+    <div id="images">
+        <p style="text-align:center;">
+        <a href="https://github.com/pabloagn/rhodium#-features-1">
+        <img src="https://img.shields.io/badge/Robust-f2f2f2?style=for-the-badge"/></a>&nbsp&nbsp
+        <a href="https://github.com/pabloagn/rhodium#-features-1">
+        <img src="https://img.shields.io/badge/Fast-f2f2f2?style=for-the-badge"/></a>&nbsp&nbsp
+        <a href="https://github.com/pabloagn/rhodium#-features-1">
+        <img src="https://img.shields.io/badge/Elegant-f2f2f2?style=for-the-badge"/></a>&nbsp&nbsp
+        <a href="https://github.com/pabloagn/rhodium#-features-1">
+        <img src="https://img.shields.io/badge/Reliable-f2f2f2?style=for-the-badge"/></a>&nbsp&nbsp
+        <a href="https://github.com/pabloagn/rhodium#-features-1">
+        <img src="https://img.shields.io/badge/Reproducible-f2f2f2?style=for-the-badge"/></a>&nbsp&nbsp
+        <a href="https://github.com/pabloagn/rhodium#-features-1">
+        <img src="https://img.shields.io/badge/Secure-f2f2f2?style=for-the-badge"/></a>
+    </div>
+</div>
 
 ## <samp>⊹ MOTIVATION</samp>
 
-It's difficult to find Linux rices aimed towards professional workflows. NixOS brings that opportunity closer than ever by providing the required framework to build setups that not only look pretty, but work pretty, but that is not enough.
+It's difficult to find Linux rices aimed towards professional workflows. NixOS brings that opportunity closer than ever by providing the required framework to build setups that not only look pretty, but work pretty, but alas, that is not enough.
 
-Rhodium emerges in order to fill that gap
+Rhodium emerges in order to fill that gap:
 
-<p align="center"><em>To provide a Linux configuration specifically tailored for research & development</em></p>
-
+<br/>
+<p align="center"><em>To provide a robust & reliable Linux configuration specifically tailored for high-performance research & development environments</em></p>
+<br/>
 
 ## <samp>⊹ TOOLS</samp>
 
@@ -41,39 +60,59 @@ Rhodium emerges in order to fill that gap
 
 <pre>
 • Window Managers ..................... <a href="https://github.com/YaLTeR/niri/">Niri</a> | <a href="https://hypr.land/">Hyprland</a>
-├─ Dynamic & static workspace management capabilities by default
 ├─ Mnemonic keybinding system (200+ binds)
+├─ Dynamic & static workspace management capabilities by default
 ├─ Preconfigured [XWayland-satellite](https://github.com/Supreeeme/xwayland-satellite)
 ├─ Preconfigured Niri IPC aliases for full runtime control
 └─ Multi-monitor support with wlr-randr/wl-mirror
+
 • Bars & Widgets ...................... <a href="https://github.com/Alexays/Waybar">Waybar</a> | <a href="https://github.com/elkowar/eww">Eww</a>
 ├─ Modular widget architecture
 ├─ Custom styling with CSS/SCSS support
 ├─ Real-time system monitoring & metrics
+├─ Custom tooltips, alternative modes & actions for each module
+├─ Native integration with Niri (preconfigured Niri modules)
 └─ Workspace & window state integration
+
 • Shells .............................. <a href="https://www.nushell.sh/">Nu</a> | <a href="https://fishshell.com/">Fish</a> | <a href="https://www.zsh.org/">Zsh</a>
+├─ 15+ sensible function binds
+└─ 70+ sensible aliases
+
 • Prompt .............................. <a href="https://github.com/starship/starship">Starship</a>
 • Terminals ........................... <a href="https://ghostty.org/">Ghostty</a> | <a href="https://sw.kovidgoyal.net/kitty/">Kitty</a>
 • Multiplexers ........................ <a href="https://zellij.dev/">Zellij</a> | <a href="https://github.com/tmux/tmux/">Tmux</a>
+└─ Predefined profile-based templates
+
 • Notification Daemon ................. <a href="https://github.com/emersion/mako">Mako</a>
 ├─ Custom notification groups & categories
 ├─ Full Unicode character compatibility
 ├─ Context-aware styling & positioning
-└─ Systemd integration for lifecycle management
+├─ Systemd integration for lifecycle management
+└─ Quirky easter eggs
+
 • Launcher ............................ <a href="https://codeberg.org/dnkl/fuzzel">Fuzzel</a>
-├─ [28 customizable menus](./home/scripts/fuzzel) & counting
-└─ Mnemonic keybinding system
+├─ Mnemonic keybinding system
+├─ <a href="https://github.com/rhodium/home/scripts/fuzzel">28 customizable menus</a> & counting
+└─ Interactive selections, submenu integration, cached content
+
 • File Manager ........................ <a href="https://github.com/sxyazi/yazi">Yazi</a>
+├─ Mnemonic keybinding system
 ├─ Specialized MIMEs & openers
-├─ Smart preloaders & prefetchers
-└─ Mnemonic keybinding system
+└─ Smart preloaders & prefetchers
+
 • IDEs ................................ <a href="https://neovim.io/doc/">NeoVim</a> | <a href="https://docs.helix-editor.com/">Evil-Helix</a> | <a href="https://docs.doomemacs.org/latest/">Doom Emacs</a> | <a href="https://zed.dev/">Zed Editor</a>
-├─ 50+ LSP servers with dual Nix LSP support
 ├─ Mnemonic keybinding system (300+ registries)
+├─ 50+ LSP servers with dual Nix LSP support
+├─ 40+ carefully curated, batteries-included plugins loved by the community
 ├─ Custom Lua function library & ftplugins
 └─ GitHub workflow integration
+
 • LockScreen .......................... <a href="https://wiki.hyprland.org/Hypr-Ecosystem/hyprlock/">Hyprlock</a>
+├─ Easy ASCII art injection
+└─ Custom-themed
+
 • ColorScheme ......................... <a href="https://github.com/webhooked/kanso.nvim">Kansō</a>
+└─ 10+ custom ports
 </pre>
 
 ### <samp>◇ OTHERS</samp>
@@ -142,6 +181,10 @@ There are two main ways to interact with Rhodium:
 - Using nix flake commands directly.
 
 ### <samp>⊹ JUST</samp>
+
+<br/>
+<p align="center"><em>Just switch and let everything flow</em></p>
+<br/>
 
 This system includes a comprehensive [justfile](https://github.com/casey/just) at the flake root for system management. After cloning the repository, you can use these commands:
 

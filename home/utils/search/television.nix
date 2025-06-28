@@ -63,24 +63,24 @@
         move_cursor_to_end = ["ctrl-e" "end"];
       };
     };
-
-    # Television theme
-    xdg.configFile."television/themes/kanso.toml".source = ./television/themes/kanso.toml;
-
-    # Television main config
-    xdg.configFile."television/config.toml".text = ''
-      theme = "kanso"
-    '';
-
-    # Television channels (cable)
-    xdg.configFile."television/cable/files.toml".source = ./television/cable/files.toml;
-    xdg.configFile."television/cable/projects.toml".source = ./television/cable/projects.toml;
-    xdg.configFile."television/cable/git.toml".source = ./television/cable/git.toml;
-    xdg.configFile."television/cable/recent.toml".source = ./television/cable/recent.toml;
-    xdg.configFile."television/cable/config.toml".source = ./television/cable/config.toml;
-    xdg.configFile."television/cable/processes.toml".source = ./television/cable/processes.toml;
-    xdg.configFile."television/cable/docker.toml".source = ./television/cable/docker.toml;
-    xdg.configFile."television/cable/nix.toml".source = ./television/cable/nix.toml;
-    xdg.configFile."television/cable/logs.toml".source = ./television/cable/logs.toml;
   };
+
+  # Television theme
+  xdg.configFile."television/themes/kanso.toml".source = ./television/themes/kanso.toml;
+
+  # Television main config
+  xdg.configFile."television/config.toml".text = ''
+    theme = "kanso"
+  '';
+
+  # Television channels (cable)
+  xdg.configFile."television/cable/files.toml".source = ./television/cable/files.toml;
+  xdg.configFile."television/cable/projects.toml".source = ./television/cable/projects.toml;
+  xdg.configFile."television/cable/git.toml".source = ./television/cable/git.toml;
+  xdg.configFile."television/cable/recent.toml".source = ./television/cable/recent.toml;
+  xdg.configFile."television/cable/config.toml".source = ./television/cable/config.toml;
+  xdg.configFile."television/cable/processes.toml".source = ./television/cable/processes.toml;
+  xdg.configFile."television/cable/docker.toml".source = ./television/cable/docker.toml;
+  xdg.configFile."television/cable/nix.toml".source = ./television/cable/nix.toml;
+  xdg.configFile."television/cable/logs.toml".source = ./television/cable/logs.toml;
 }
