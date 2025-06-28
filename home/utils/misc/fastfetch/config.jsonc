@@ -1,12 +1,10 @@
 // vim: ft=jsonc
 // Rhodium - Brutalist Fastfetch Configuration
-
 {
   "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
-
   // Logo configuration
   "logo": {
-    "source": "$XDG_DATA_HOME/ascii/calvin-m-fastfetch.txt",
+    "source": "$XDG_DATA_HOME/ascii/calvin-m.txt",
     "type": "auto",
     "color": {
       "1": "#C14043",
@@ -17,10 +15,9 @@
       "left": 2,
     },
   },
-
   // Display configuration
   "display": {
-    "separator": " ∷ ",
+    "separator": "",
     "color": {
       "keys": "#888071",
       "output": "#C5C9C7",
@@ -35,120 +32,200 @@
       "border": false,
     },
     "percent": {
-      "type": "1",
+      "type": 1,
     },
   },
-
   // Modules
   "modules": [
+    "break",
+    {
+      "type": "custom",
+      "format": "\u001b[90m┌─────────────────────── Uptime / Age / DT ───────────────────────┐",
+    },
     {
       "type": "title",
+      "key": "◍ SESS",
       "format": "{user-name}@{host-name}",
-      "key": "∴",
-      "keyColor": "#C14043",
+      "keyColor": "red",
     },
     {
-      "type": "separator",
-      "string": "─────────────────────────────",
-    },
-    {
-      "type": "os",
-      "key": "system",
-      "format": "{name} {arch}",
-    },
-    {
-      "type": "kernel",
-      "key": "kernel",
-      "format": "{release}",
+      "type": "command",
+      "key": "│ ├ ⊙",
+      "keyColor": "red",
+      "text": "birth_install=$(stat -c %W /); current=$(date +%s); time_progression=$((current - birth_install)); days_difference=$((time_progression / 86400)); echo $days_difference days",
     },
     {
       "type": "uptime",
-      "key": "uptime",
-      "format": "{days}d {hours}h {minutes}m",
+      "key": "│ ├ △",
+      "keyColor": "red",
     },
     {
-      "type": "packages",
-      "key": "packages",
-      "format": "{all}",
+      "type": "datetime",
+      "key": "└ └ ◷",
+      "keyColor": "red",
+    },
+    // {
+    //   "type": "localip",
+    //   "key": "│ ├ ≈",
+    //   "keyColor": "red",
+    // },
+    // {
+    //   "type": "publicip",
+    //   "key": "│ ├ ≋",
+    //   "keyColor": "red",
+    // },
+    // {
+    //   "type": "dns",
+    //   "key": "└ └ ≈",
+    //   "keyColor": "red",
+    // },
+    {
+      "type": "custom",
+      "format": "\u001b[90m└─────────────────────────────────────────────────────────────────┘",
+    },
+    "break",
+    {
+      "type": "custom",
+      "format": "\u001b[90m┌─────────────────────────── Hardware ────────────────────────────┐",
     },
     {
-      "type": "shell",
-      "key": "shell",
-      "format": "{name} {version}",
+      "type": "host",
+      "key": "⬢ PC",
+      "keyColor": "green",
+    },
+    {
+      "type": "chassis",
+      "key": "│ ├ ⊡",
+      "keyColor": "green",
     },
     {
       "type": "display",
-      "key": "resolution",
-      "format": "{width}×{height}",
-    },
-    {
-      "type": "wm",
-      "key": "wm",
-      "format": "{name}",
-    },
-    {
-      "type": "terminal",
-      "key": "terminal",
-      "format": "{name}",
+      "key": "│ ├ ❐ ",
+      "keyColor": "green",
     },
     {
       "type": "cpu",
-      "key": "cpu",
-      "format": "{name} [{cores}]",
+      "key": "│ ├ ⚙",
+      "showPeCoreCount": true,
+      "keyColor": "green",
     },
     {
       "type": "gpu",
-      "key": "gpu",
-      "format": "{name}",
+      "key": "│ ├ ▣",
+      "keyColor": "green",
+    },
+    {
+      "type": "vulkan",
+      "key": "│ ├ ◬",
+      "keyColor": "green",
+    },
+    {
+      "type": "opengl",
+      "key": "│ ├ ◪",
+      "keyColor": "green",
     },
     {
       "type": "memory",
-      "key": "memory",
-      "format": "{used} / {total} [{percentage}]",
-      "percent": {
-        "green": 50,
-        "yellow": 75,
-        "red": 90,
-      },
+      "key": "│ ├ 𝍖",
+      "keyColor": "green",
     },
     {
       "type": "disk",
-      "key": "disk [/]",
-      "format": "{used} / {total} [{percentage}]",
-      "percent": {
-        "green": 50,
-        "yellow": 75,
-        "red": 90,
-      },
-    },
-    {
-      "type": "battery",
-      "key": "battery",
-      "format": "{percentage} [{status}]",
+      "key": "│ ├ ◔",
+      "keyColor": "green",
     },
     {
       "type": "locale",
-      "key": "locale",
-      "format": "{locale}",
+      "key": "└ └ ⊜",
+      "keyColor": "green",
     },
     {
-      "type": "separator",
-      "string": "─────────────────────────────",
+      "type": "custom",
+      "format": "\u001b[90m└─────────────────────────────────────────────────────────────────┘",
+    },
+    "break",
+    {
+      "type": "custom",
+      "format": "\u001b[90m┌─────────────────────────── Software ────────────────────────────┐",
+    },
+    {
+      "type": "os",
+      "key": "◆ OS",
+      "keyColor": "yellow",
+    },
+    {
+      "type": "kernel",
+      "key": "│ ├ ⊡",
+      "keyColor": "yellow",
+    },
+    {
+      "type": "bios",
+      "key": "│ ├ ⬡",
+      "keyColor": "yellow",
+    },
+    {
+      "type": "bootmgr",
+      "key": "│ ├ ⊠",
+      "keyColor": "yellow",
+    },
+    {
+      "type": "initsystem",
+      "key": "│ ├ ⊛",
+      "keyColor": "yellow",
+    },
+    {
+      "type": "packages",
+      "key": "│ ├ ▪",
+      "keyColor": "yellow",
+    },
+    {
+      "type": "terminal",
+      "key": "│ ├ ▯",
+      "keyColor": "yellow",
+    },
+    {
+      "type": "shell",
+      "key": "│ ├ ≻",
+      "keyColor": "yellow",
+    },
+    {
+      "type": "editor",
+      "key": "└ └ ✎",
+      "keyColor": "yellow",
+    },
+    "break",
+    {
+      "type": "custom",
+      "format": "\u001b[34m▢ ENV\u001b[0m",
+    },
+    {
+      "type": "de",
+      "key": "│ ├ ◐",
+      "keyColor": "blue",
+    },
+    {
+      "type": "wm",
+      "key": "│ ├ ▦",
+      "keyColor": "blue",
+    },
+    {
+      "type": "wmtheme",
+      "key": "│ ├ ◈",
+      "keyColor": "blue",
+    },
+    {
+      "type": "terminalfont",
+      "key": "└ └ ≡",
+      "keyColor": "blue",
+    },
+    {
+      "type": "custom",
+      "format": "\u001b[90m└─────────────────────────────────────────────────────────────────┘",
     },
     {
       "type": "colors",
-      "symbol": "block",
       "paddingLeft": 2,
-      "key": "∴",
+      "symbol": "square",
     },
   ],
-
-  // General settings
-  "general": {
-    "processingTimeout": 1000,
-    "detectVersion": false,
-    "multithreading": true,
-    "disableLinewrap": false,
-    "hideCursor": false,
-  },
 }
