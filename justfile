@@ -10,15 +10,14 @@ set positional-arguments := true
 flake_path := "."
 build_path := flake_path + "/build"
 recipes_path := build_path + "/recipes"
-assets_path := flake_path + "/assets"
 
 # Default recipe shows available commands
 default:
     @just --list --unsorted
 
-# Fast rebuild with minimal output
+# Fast rebuild and switch with minimal output
 fast host:
-    @{{recipes_path}}/rh-build.sh "{{host}}" "fast"
+    @{{recipes_path}}/rh-switch.sh "{{host}}" "fast"
 
 # Build and switch NixOS configuration
 switch host:

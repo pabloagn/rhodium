@@ -8,15 +8,18 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "${SCRIPT_DIR}/rh-helpers.sh"
 
 function usage() {
-    echo "Usage: $0 <host>"
+    echo "Usage: $0 <host> [fast]"
     echo "Build and switch to NixOS configuration for the specified host"
+    echo ""
+    echo "Arguments:"
+    echo "  host    Target host configuration"
+    echo "  fast    Optional: Skip pre-flight checks and post-build tasks"
     exit 1
 }
 
 function pre_flight_checks() {
     local host="$1"
     print_pending "Pre-flight checks for $host"
-
     if nix flake check "$FLAKE_PATH" 2>/dev/null; then
         print_success "  Flake validation passed"
     else
@@ -35,42 +38,55 @@ function source_user_vars() {
 function reload_services() {
     print_pending "Reloading User Services"
     systemctl --user daemon-reload
-
+    
     # Trigger niri screen transition if available
     if command -v niri >/dev/null 2>&1; then
         niri msg action do-screen-transition --delay-ms 800 2>/dev/null || true
     fi
-
+    
     # Restart Rhodium services
     for service in rh-swaybg rh-waybar; do
         systemctl --user restart "$service.service" || true
     done
-
+    
     print_success "Reloaded User Services"
 }
 
 function main() {
-    if [ $# -ne 1 ]; then
+    if [ $# -lt 1 ] || [ $# -gt 2 ]; then
         usage
     fi
-
+    
     local host="$1"
-
-    # Pre-flight checks
-    pre_flight_checks "$host"
-
-    # Build and switch
+    local mode="${2:-}"
+    local is_fast_mode=false
+    
+    # Check if fast mode is requested
+    if [ "$mode" = "fast" ]; then
+        is_fast_mode=true
+        print_pending "Fast mode enabled - skipping pre/post checks"
+    fi
+    
+    # Pre-flight checks (skip in fast mode)
+    if [ "$is_fast_mode" = false ]; then
+        pre_flight_checks "$host"
+    fi
+    
+    # Build and switch (always performed)
     print_pending "Building and switching configuration..."
     sudo nixos-rebuild switch --flake "${FLAKE_PATH}#${host}"
-
-    # Post-build tasks
-    print_pending "Running post-build tasks..."
-    source_user_vars
-    "${MODULES_PATH}/cache/build-caches.sh"
-    python3 "${MODULES_PATH}/cache/build-icons-cache.py"
-    reload_services
-
-    print_success "System rebuild complete"
+    
+    # Post-build tasks (skip in fast mode)
+    if [ "$is_fast_mode" = false ]; then
+        print_pending "Running post-build tasks..."
+        source_user_vars
+        "${MODULES_PATH}/cache/build-caches.sh"
+        python3 "${MODULES_PATH}/cache/build-icons-cache.py"
+        reload_services
+        print_success "System rebuild complete"
+    else
+        print_success "Fast rebuild complete"
+    fi
 }
 
 main "$@"

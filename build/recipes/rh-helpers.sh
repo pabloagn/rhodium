@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
-set -eo pipefail
+# shellcheck disable=SC1091
+#
+# This is a helper script for formatting outputs and exporting env vars
+#
 
 # Configuration
 export FLAKE_PATH="${FLAKE_PATH:-.}"

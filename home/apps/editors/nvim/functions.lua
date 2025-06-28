@@ -245,45 +245,105 @@ function M.smart_outdent()
 	end
 end
 
--- Visual Replace
--- TEST: Test implementation
+-- Simple Replace
 -- --------------------------------------------------
 -- Replace all occurrences of visual selection in buffer
-function M.replace_visual_selection()
-	-- Get visual selection bounds
-	local start_pos = vim.fn.getpos("'<")
-	local end_pos = vim.fn.getpos("'>")
-
-	-- Get the selected text
-	local lines = vim.fn.getline(start_pos[2], end_pos[2])
-	if type(lines) == "string" then
-		lines = { lines }
-	end
-
-	-- Handle single line selection only for simplicity
-	if #lines > 1 then
-		vim.notify("Multi-line replacement not supported", vim.log.levels.WARN, { title = "Replace All" })
+function M.replace_word_under_cursor()
+	local old_word = vim.fn.expand("<cword>")
+	if old_word == "" then
+		vim.notify("No word under cursor", vim.log.levels.WARN, { title = "Replace All" })
 		return
 	end
 
-	local line = lines[1]
-	local selected = string.sub(line, start_pos[3], end_pos[3])
+	local new_word = vim.fn.input("Replace '" .. old_word .. "' with: ", old_word)
+	if new_word == "" or new_word == old_word then
+		return
+	end
 
-	if selected == "" then
+	-- Use word boundaries for exact matches
+	local cmd =
+		string.format("%%s/\\<%s\\>/%s/g", vim.fn.escape(old_word, "/\\.*$^~[]"), vim.fn.escape(new_word, "/\\&~"))
+
+	vim.cmd(cmd)
+	vim.notify(
+		string.format("Replaced '%s' with '%s'", old_word, new_word),
+		vim.log.levels.INFO,
+		{ title = "Replace All" }
+	)
+end
+
+-- Replace visual selection in buffer
+function M.replace_visual_selection()
+	-- Get the visually selected text
+	local vstart = vim.fn.getpos("'<")
+	local vend = vim.fn.getpos("'>")
+
+	-- Check if we have a valid visual selection
+	if vstart[2] == 0 or vend[2] == 0 then
+		vim.notify("No visual selection found", vim.log.levels.WARN, { title = "Replace All" })
+		return
+	end
+
+	-- Get selected text using getregion (Neovim 0.10+)
+	local selected_text
+	if vim.fn.has("nvim-0.10") == 1 then
+		local lines = vim.fn.getregion(vstart, vend, { type = vim.fn.visualmode() })
+		if #lines == 0 then
+			vim.notify("No text selected", vim.log.levels.WARN, { title = "Replace All" })
+			return
+		end
+		selected_text = table.concat(lines, "\n")
+	else
+		-- Fallback for older Neovim versions
+		local lines = vim.fn.getline(vstart[2], vend[2])
+		if type(lines) == "string" then
+			lines = { lines }
+		end
+
+		if #lines == 1 then
+			selected_text = string.sub(lines[1], vstart[3], vend[3])
+		else
+			-- Multi-line selection (simplified)
+			selected_text = lines[1]:sub(vstart[3])
+			for i = 2, #lines - 1 do
+				selected_text = selected_text .. "\n" .. lines[i]
+			end
+			selected_text = selected_text .. "\n" .. lines[#lines]:sub(1, vend[3])
+		end
+	end
+
+	if selected_text == "" then
 		vim.notify("No text selected", vim.log.levels.WARN, { title = "Replace All" })
 		return
 	end
 
-	-- Escape special regex characters
-	local escaped = vim.fn.escape(selected, "/\\.*$^~[]")
+	local new_text = vim.fn.input("Replace '" .. selected_text .. "' with: ", selected_text)
+	if new_text == "" or new_text == selected_text then
+		return
+	end
 
-	-- Build substitute command
-	local cmd = string.format("%%s/%s//g", escaped)
+	-- Escape for regex (no word boundaries for selections)
+	local cmd =
+		string.format("%%s/%s/%s/g", vim.fn.escape(selected_text, "/\\.*$^~[]"), vim.fn.escape(new_text, "/\\&~"))
 
-	-- Set up command line with cursor after the second /
-	vim.fn.feedkeys(":" .. cmd, "n")
-	vim.fn.feedkeys(string.rep("\x80\xfdh", #escaped + 1), "n")
-	vim.fn.feedkeys("a", "n")
+	vim.cmd(cmd)
+	vim.notify(
+		string.format("Replaced '%s' with '%s'", selected_text, new_text),
+		vim.log.levels.INFO,
+		{ title = "Replace All" }
+	)
+end
+
+-- Smart replace - detects context and chooses appropriate method
+function M.smart_replace()
+	local mode = vim.fn.mode()
+	if mode == "v" or mode == "V" or mode == "\22" then
+		-- Visual mode: replace selection
+		M.replace_visual_selection()
+	else
+		-- Normal mode: replace word under cursor
+		M.replace_word_under_cursor()
+	end
 end
 
 -- Pickers

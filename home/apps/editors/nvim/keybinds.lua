@@ -226,13 +226,12 @@ end, {
 	desc = "Replace buffer with clipboard",
 })
 
--- TEST: Test this implementation
--- Replace Visual (Quick)
+-- Smart Replace
 -- -------------------------------------------------
-vim.keymap.set("v", "<leader>rv", functions.replace_visual_selection, {
+vim.keymap.set({ "n", "v" }, "<leader>rv", functions.smart_replace, {
 	noremap = true,
 	silent = false,
-	desc = "Replace all occurrences with visual",
+	desc = "Replace word/selection in buffer",
 })
 
 -- Replace (Spectre)
