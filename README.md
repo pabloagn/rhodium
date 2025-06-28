@@ -26,6 +26,7 @@ Rhodium is a declarative NixOS system preconfigured with sensible defaults, aime
 
 This hypermodular configuration combines the declarative power of Nix with 150+ curated packages using a profile-based configuration.
 
+<br/>
 <div align="center">
     <div id="images">
         <p style="text-align:center;">
@@ -43,6 +44,7 @@ This hypermodular configuration combines the declarative power of Nix with 150+ 
         <img src="https://img.shields.io/badge/Secure-f2f2f2?style=for-the-badge"/></a>
     </div>
 </div>
+<br/>
 
 ## <samp>⊹ MOTIVATION</samp>
 
@@ -128,41 +130,48 @@ Rhodium emerges in order to fill that gap:
 ├─ Nix shells with automatic environment loading & direnv integration
 ├─ Language-specific toolchains, formatters & linters
 └─ IDE integration with 50+ LSP servers & debugging support
+
 • Nix Infrastructure .................. Flake Parts & Advanced Architecture
 ├─ Flake-parts modular system with per-system configurations
 ├─ Custom package overlays for bleeding-edge & patched software
 ├─ Advanced flake input management with lock file automation
 ├─ Home Manager & NixOS custom modules with option validation
 └─ Cross-platform support (NixOS/Darwin/Standalone Home Manager)
+
 • Hardware & System Integration ....... Automatic Hardware Detection
 ├─ Automatic hardware configuration generation & optimization
 ├─ GPU driver management (NVIDIA/AMD) with compute acceleration
 ├─ Power management profiles for laptops & desktops
 ├─ Audio pipewire configuration with low-latency optimization
 └─ Network configuration with VPN & wireless management
+
 • Secrets & Security Management ....... SOPS-Nix Integration
 ├─ Age-encrypted secrets with automatic key rotation
 ├─ Per-host secret deployment with secure key distribution
 ├─ Git-tracked encrypted configuration files
 └─ Runtime secret injection into services & applications
+
 • CI/CD & Deployment .................. GitHub Actions & NixOS Anywhere
 ├─ Automated flake validation & security scanning
 ├─ Remote deployment with nixos-anywhere integration
 ├─ Multi-architecture builds (x86_64, aarch64) in CI
 ├─ Automatic dependency updates with compatibility testing
 └─ Infrastructure as Code with declarative host provisioning
+
 • Automation & Orchestration ......... Systemd Services & Cron Jobs
 ├─ User services for desktop components (bars, notifications, wallpapers)
 ├─ System services for monitoring, backups & maintenance
 ├─ Automated garbage collection with storage optimization
 ├─ Service dependency management with health monitoring
 └─ Scheduled tasks for system maintenance & updates
+
 • Configuration Management ............ Atomic Operations & Rollbacks
 ├─ Declarative configuration with full reproducibility
 ├─ Atomic system updates with automatic rollback capabilities
 ├─ Generation management with selective cleanup
 ├─ Configuration validation before deployment
 └─ Modular architecture for component isolation & testing
+
 • Development Tooling ................. Advanced Development Features
 ├─ Pre-commit hooks with formatting & linting automation
 ├─ Development containers with isolated environments
@@ -177,13 +186,13 @@ Rhodium emerges in order to fill that gap:
 ## <samp>⊹ QUICK START</samp>
 
 There are two main ways to interact with Rhodium:
-- Using the built-in [justfile](./justfile)
+- Using the built-in [justfile](./justfile).
 - Using nix flake commands directly.
 
 ### <samp>⊹ JUST</samp>
 
 <br/>
-<p align="center"><em>Just switch and let everything flow</em></p>
+<p align="center"><em>∿ Just switch and let everything flow ∿</em></p>
 <br/>
 
 This system includes a comprehensive [justfile](https://github.com/casey/just) at the flake root for system management. After cloning the repository, you can use these commands:
