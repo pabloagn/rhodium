@@ -195,41 +195,37 @@ There are two main ways to interact with Rhodium:
 <p align="center"><em>∿ Just switch and let everything flow ∿</em></p>
 <br/>
 
-This system includes a comprehensive [justfile](https://github.com/casey/just) at the flake root for system management. After cloning the repository, you can use these commands:
+This system includes a comprehensive [justfile](https://github.com/casey/just) at the flake root for system management. After cloning the repository, you can use any of the 20+ pre-scripted commands:
 
 ```bash
-# Show all available commands
-just
-
-# Build and switch to new configuration
-just switch
-
-# Build configuration for specific host
-just switch hostname
-
-# Test build without switching
-just build
-
-# Fast rebuild with minimal output
-just fast
-
-# Update all flake inputs
-just update
-
-# Clean old generations (keep 5 most recent)
-just gc-keep
-
-# Check system health
-just health
-
-# Format all Nix files
-just fmt
-
-# Rollback to previous generation
-just rollback
+default                 # Default recipe shows available commands
+fast host               # Fast rebuild and switch with minimal output
+switch host             # Build and switch NixOS configuration
+build host              # Build without switching [test build]
+boot host               # Rebuild and boot into new generation
+dry host                # Dry run - show what would be built
+dev host                # Development rebuild with verbose output
+update                  # Update all flake inputs
+update-input input      # Update specific flake input
+flake-info              # Show flake metadata
+gc                      # Clean all garbage
+gc-keep generations="5" # Remove old generations keeping N most recent [default: 5]
+gc-days days="7"        # Traditional time-based garbage collection
+health                  # Show system health status
+generation              # List current generation details
+check-backups           # Check for backup files in config
+orphans                 # Find orphaned configuration files
+untracked               # Check for untracked files in repository
+clean-orphans           # Remove orphaned configuration directories [interactive]
+clean-backups           # Clean all backup files
+update-caches           # Update application caches
+rollback                # Rollback to previous generation
+fmt                     # Format all nix files
+reload-services         # Reload user services
+source-user-vars        # Source user environment variables
 ```
 
-### <samp>⊹ MANUAL</samp>
+### <samp>⊹ NIX</samp>
 
 You can directly run the typical nix flake commands directly instead of relying on the justfile. After setting up a basic NixOS system, you can create a new derivation using this flake:
 
