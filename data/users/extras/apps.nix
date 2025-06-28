@@ -18,12 +18,6 @@
       icon = "neovim";
       description = "Neovim";
     };
-    # neovide-instance = {
-    #   binary = "neovide";
-    #   args = [];
-    #   icon = "neovim";
-    #   description = "Neovide";
-    # };
     zeditor = {
       binary = "zeditor";
       args = [];
@@ -79,8 +73,8 @@
       description = "Bottom (Htop)";
     };
     btop = {
-      binary = "$HOME/.local/bin/launchers/launchers-btop.sh";
-      args = [];
+      binary = "kitty";
+      args = ["-e" "btop"];
       icon = "btop";
       description = "Btop Resource Monitor";
     };
@@ -89,24 +83,24 @@
   productivity = {
     yazi = {
       binary = "kitty";
-      args = ["-e yazi"];
+      args = ["-e" "yazi"];
       icon = "yazi";
       description = "Yazi in Kitty";
     };
     calcure = {
-      binary = "$HOME/.local/bin/launchers/launchers-calcure.sh";
-      args = [];
+      binary = "kitty";
+      args = ["-e" "calcure"];
       icon = "calcure";
       description = "Calcure Calendar and Tasks";
     };
     qalc = {
-      binary = "$HOME/.local/bin/launchers/launchers-qalc.sh";
-      args = [];
+      binary = "kitty";
+      args = ["-e" "qalc"];
       icon = "qalculate";
       description = "Qalculate CLI";
     };
     qalculate = {
-      binary = "$HOME/.local/bin/launchers/launchers-qalculate.sh";
+      binary = "qalculate-gtk";
       args = [];
       icon = "qalculate";
       description = "Qalculate!";
@@ -136,7 +130,7 @@
       description = "Zoom";
     };
     thunar = {
-      binary = "xfce.thunar";
+      binary = "thunar";
       args = [];
       icon = "thunar";
       description = "Thunar File Manager";
@@ -264,23 +258,41 @@
   };
 
   social = {
-    siglandesktop = {
-      binary = "siglan-desktop";
+    signal-desktop = {
+      binary = "signal-desktop";
       args = [];
-      icon = "siglan-desktop";
-      description = "Siglan Desktop";
+      icon = "signal";
+      description = "Signal Desktop";
     };
-    telegram = {
+    telegram-desktop = {
       binary = "telegram-desktop";
       args = [];
       icon = "telegram";
       description = "Telegram Desktop";
     };
-    element = {
-      binary = "element-desktop";
+    discord = {
+      binary = "discord";
+      args = [];
+      icon = "discord";
+      description = "Discord";
+    };
+    discordo = {
+      binary = "kitty";
+      args = ["-e" "discordo"];
+      icon = "discord";
+      description = "Discord TUI";
+    };
+    element-web = {
+      binary = "element-web";
       args = [];
       icon = "element";
-      description = "Element (Matrix)";
+      description = "Element Web (Matrix)";
+    };
+    element-call = {
+      binary = "element-call";
+      args = [];
+      icon = "element";
+      description = "Element Call (Matrix)";
     };
     fluffychat = {
       binary = "fluffychat";
@@ -293,12 +305,6 @@
       args = [];
       icon = "mastodon";
       description = "Mastodon Client";
-    };
-    discord = {
-      binary = "discord";
-      args = [];
-      icon = "discord";
-      description = "Discord";
     };
   };
 
@@ -348,12 +354,12 @@
       icon = "foot";
       description = "Foot";
     };
-    alacritty-instance = {
-      binary = "alacritty";
-      args = [];
-      icon = "alacritty";
-      description = "Alacritty";
-    };
+    # alacritty-instance = {
+    #   binary = "alacritty";
+    #   args = [];
+    #   icon = "alacritty";
+    #   description = "Alacritty";
+    # };
     ghostty-instance = {
       binary = "ghostty";
       args = [];

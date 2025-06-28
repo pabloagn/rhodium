@@ -15,10 +15,6 @@ in {
     theme = theme;
     keymap = configKeymaps;
     initLua = initLua;
-    # NOTE:
-    # - We were previously managing this using alloys.rh
-    # - We're now managing it directly here for practicity
-    # plugins = yaziPlugins;
     plugins = {
       yatline = pkgs.yaziPlugins.yatline;
       git = pkgs-unstable.yaziPlugins.git;

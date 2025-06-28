@@ -3,7 +3,7 @@
     # Messaging & Collaboration
     slack
     teams-for-linux
-    jitsi-meet
+    # jitsi-meet
     zoom-us
 
     # Document Processing and Viewing

@@ -8,6 +8,11 @@
     }
     {
       on = ["g" "h"];
+      run = "cd $HOME";
+      desc = "Go to user home";
+    }
+    {
+      on = ["g" "H"];
       run = "cd $XDG_CACHE_HOME";
       desc = "Go to .cache";
     }
@@ -23,13 +28,13 @@
     }
     {
       on = ["g" "p"];
-      run = "shell -- ya emit cd '$(git rev-parse --show-toplevel)'";
+      run = ''shell -- ya emit cd "$(git rev-parse --show-toplevel)"'';
       desc = "Go to Project Root";
     }
     {
       on = ["g" "A"];
-      run = "cd $XDG_SHARE_APPS";
-      desc = "Go to .local/share/apps";
+      run = "cd $HOME/.local/share/applications/";
+      desc = "Go to .local/share/applications";
     }
     {
       on = ["g" "a"];
@@ -56,6 +61,22 @@
       on = ["l"];
       run = "plugin smart-enter";
       desc = "Smart Enter";
+    }
+    # Renames
+    {
+      on = ["r" "r"];
+      run = "rename --cursor=before_ext";
+      desc = "Rename selected file(s)";
+    }
+    {
+      on = ["r" "a"];
+      run = "rename --empty=all --cursor=start";
+      desc = "Rename clear selected file(s)";
+    }
+    {
+      on = ["r" "c"];
+      run = "rename --empty=stem --cursor=start";
+      desc = "Rename change selected file(s)";
     }
   ];
 }

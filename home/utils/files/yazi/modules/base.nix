@@ -90,7 +90,6 @@
   };
 
   # ===== Opener Definitions =====
-  # TODO: Add the bkp file contents. There are new additions there.
   opener = {
     # --- Code Editors ---
     edit = [
@@ -155,7 +154,7 @@
       }
     ];
 
-    browser-private = [
+    browser-incognito = [
       {
         desc = "Firefox (Private)";
         for = "unix";
@@ -253,25 +252,17 @@
 
       # --- Code Files (by extension) ---
       {
-        name = "*.{js,jsx,ts,tsx,py,rs,go,c,cpp,h,hpp,java,rb,php,lua,vim,sh,bash,zsh,fish,nu}";
+        name = "*.{js,jsx,ts,tsx,py,rs,go,c,cpp,h,hpp,java,rb,php,lua,vim,sh,bash,zsh,fish,nu,Xresources,json,yaml,yml,toml,ini,conf,cfg}";
         use = ["edit" "edit-helix" "edit-zed" "edit-nano" "edit-emacs" "reveal"];
       }
-
-      {
-        name = "*.{json,yaml,yml,toml,ini,conf,cfg}";
-        use = ["edit" "edit-helix" "edit-zed" "edit-nano" "edit-emacs" "reveal"];
-      }
-
       {
         name = "*.{md,markdown,rst,tex}";
         use = ["edit" "edit-helix" "edit-zed" "edit-nano" "edit-emacs" "reveal"];
       }
-
       {
         name = "*.{css,scss,sass,less}";
         use = ["edit" "edit-helix" "edit-zed" "edit-nano" "edit-emacs" "reveal"];
       }
-
       {
         name = "*.{xml,sql,graphql,proto}";
         use = ["edit" "edit-helix" "edit-zed" "edit-nano" "edit-emacs" "reveal"];
@@ -280,7 +271,7 @@
       # --- HTML Files (special case with browsers) ---
       {
         name = "*.{html,htm,xhtml}";
-        use = ["edit" "edit-helix" "edit-zed" "edit-nano" "edit-emacs" "browser-personal" "browser-work" "browser-private" "reveal"];
+        use = ["edit" "edit-helix" "edit-zed" "edit-nano" "edit-emacs" "browser-personal" "browser-work" "browser-incognito" "reveal"];
       }
 
       # --- SVG Files (special case - both image and code) ---
@@ -289,7 +280,7 @@
         use = ["open" "imagemagick" "gimp" "edit" "edit-helix" "edit-zed" "edit-nano" "edit-emacs" "reveal"];
       }
 
-      # --- Images (NO EDIT OPTIONS) ---
+      # --- Images (no edit options) ---
       {
         name = "*.{jpg,jpeg,png,gif,webp,bmp,ico,tiff,psd,avif,heic,heif}";
         use = ["open" "imv" "imagemagick" "gimp" "reveal"];
