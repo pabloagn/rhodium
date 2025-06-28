@@ -68,7 +68,7 @@ end
 
 local function quick_note()
 	-- Helper function for quick note
-	local notes_dir = vim.fn.expand("$HOME/notes")
+	local notes_dir = vim.fn.expand("$HOME/pendings")
 	vim.fn.mkdir(notes_dir, "p")
 	local timestamp = os.date("%Y%m%d_%H%M%S")
 	local filename = notes_dir .. "/quick_note_" .. timestamp .. ".md"
@@ -305,18 +305,18 @@ require("dashboard").setup({
 				icon = "⊹ ",
 				key = "ft",
 			},
-			-- {
-			-- 	action = quick_note,
-			-- 	desc = " Quick Note",
-			-- 	icon = "⊹ ",
-			-- 	key = "fn",
-			-- },
 			{
-				action = make_directory,
-				desc = " Make Directory",
+				action = quick_note,
+				desc = " Quick Note",
 				icon = "⊹ ",
-				key = "fd",
+				key = "fn",
 			},
+			-- {
+			-- 	action = make_directory,
+			-- 	desc = " Make Directory",
+			-- 	icon = "⊹ ",
+			-- 	key = "fd",
+			-- },
 			-- {
 			-- 	action = make_project,
 			-- 	desc = " Make Project",
