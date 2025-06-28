@@ -1,0 +1,29 @@
+[metadata]
+name = "projects"
+description = "Quick access to your project directories"
+requirements = ["fd", "eza"]
+
+[source]
+command = """
+fd -t d -d 3 '(\.git|go\.mod|Cargo\.toml|package\.json|pyproject\.toml|flake\.nix)$' \
+  ~/projects ~/dev ~/work ~/code ~/src 2>/dev/null | \
+  xargs -I {} dirname {} | sort -u
+"""
+display = "{split:/:-1} [{split:/:0..-1|join:/}]"
+output = "{}"
+
+[preview]
+command = """
+eza -la --color=always --icons=always --group-directories-first "{}" | head -20
+echo
+if [ -f "{}/README.md" ]; then
+  echo "📖 README.md:"
+  bat -n --color=always --style=plain "{}/README.md" 2>/dev/null | head -15
+fi
+"""
+
+[keybindings]
+shortcut = "f2"
+
+[ui]
+input_header = "Projects:"

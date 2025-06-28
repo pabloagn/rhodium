@@ -1,0 +1,21 @@
+[metadata]
+name = "config"
+description = "Configuration files"
+requirements = ["fd", "bat"]
+
+[source]
+command = """
+fd -t f -e toml -e yaml -e yml -e json -e conf -e cfg -e ini \
+  . ~/.config /etc 2>/dev/null | grep -v cache | sort
+"""
+display = "{split:/:-1} ◦ {split:/:0..-1|join:/}"
+output = "{}"
+
+[preview]
+command = "bat -n --color=always --style=numbers {}"
+
+[keybindings]
+shortcut = "f5"
+
+[ui]
+input_header = "Configuration Files:"

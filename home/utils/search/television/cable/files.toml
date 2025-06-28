@@ -1,0 +1,24 @@
+[metadata]
+name = "files"
+description = "Navigate files and directories with smart filtering"
+requirements = ["fd", "bat", "eza"]
+
+[source]
+command = "fd . --type f --type d --hidden --exclude .git --color=never | sort"
+display = "{split:/:-1} ◦ {split:/:0..-1|join:/}"
+output = "{}"
+
+[preview]
+command = """
+if [ -d "{}" ]; then
+  eza -la --color=always --icons=always --group-directories-first "{}"
+else
+  bat -n --color=always --style=numbers,changes "{}" 2>/dev/null || file -b "{}"
+fi
+"""
+
+[keybindings]
+shortcut = "f1"
+
+[ui]
+input_header = "Files & Directories:"

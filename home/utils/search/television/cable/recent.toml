@@ -1,0 +1,22 @@
+[metadata]
+name = "recent"
+description = "Recently modified files"
+requirements = ["fd", "bat"]
+
+[source]
+command = """
+fd -t f --changed-within 7d --exclude .git --color=never . | \
+  xargs -I {} sh -c 'echo "$(stat -c %Y {} 2>/dev/null || stat -f %m {} 2>/dev/null) {}"' | \
+  sort -rn | cut -d' ' -f2- | head -100
+"""
+display = "{split:/:-1} • {split:/:0..-1|join:/}"
+output = "{}"
+
+[preview]
+command = "bat -n --color=always --style=full {}"
+
+[keybindings]
+shortcut = "f4"
+
+[ui]
+input_header = "Recent Files (7 days):"

@@ -1,0 +1,19 @@
+[metadata]
+name = "nix"
+description = "Nix packages and store paths"
+requirements = ["nix", "jq"]
+
+[source]
+command = """nix-env -q --installed --json | jq -r 'keys[]' | sort"""
+display = "{}"
+output = "{}"
+
+[preview]
+command = """
+echo "Package: {}"
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━"
+nix-env -qa --description {} 2>/dev/null | head -5
+"""
+
+[ui]
+input_header = "Installed Nix Packages:"
