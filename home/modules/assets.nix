@@ -9,6 +9,7 @@ with lib; let
 in {
   options.assets = {
     icons.enable = mkEnableOption "Link icons directory to XDG data home";
+    ascii.enable = mkEnableOption "Link ascii directory to XDG data home";
     wallpapers.enable = mkEnableOption "Link wallpapers directory to XDG data home";
     fonts.enable = mkEnableOption "Link fonts directory to fonts path";
     colors.enable = mkEnableOption "Link color palette files to XDG data home";
@@ -52,6 +53,15 @@ in {
       };
     })
 
+    # ASCII art
+    (mkIf cfg.icons.enable {
+      xdg.dataFile."ascii" = {
+        source = "${repoAssetsPath}/ascii";
+        recursive = true;
+        force = true;
+      };
+    })
+
     # Verification activation script
     {
       home.activation.verify-assets = lib.hm.dag.entryAfter ["linkGeneration"] ''
@@ -67,6 +77,13 @@ in {
             echo "✓ Icons symlink verified"
           else
             echo "⚠ Icons symlink missing or broken!"
+          fi
+        ''}
+        ${optionalString cfg.ascii.enable ''
+          if [ -L "${config.xdg.dataHome}/ascii" ] && [ -e "${config.xdg.dataHome}/ascii" ]; then
+            echo "✓ ASCII symlink verified"
+          else
+            echo "⚠ ASCII symlink missing or broken!"
           fi
         ''}
         ${optionalString cfg.fonts.enable ''

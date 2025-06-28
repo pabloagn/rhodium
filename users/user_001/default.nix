@@ -37,8 +37,9 @@
   # Asset linking
   assets = {
     wallpapers.enable = true; # Symlink wallpapers to data dir
-    colors.enable = true; # Symlink colorpacks to user data dir
+    colors.enable = true; # Symlink color packs to user data dir
     icons.enable = true; # Symlink icon packs to user data dir
+    ascii.enable = true; # Symlink ASCII art files to user data dir
   };
 
   # Script linking
