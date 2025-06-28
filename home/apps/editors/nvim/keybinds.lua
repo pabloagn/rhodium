@@ -483,8 +483,8 @@ vim.keymap.set("n", "<Leader>z", ":set foldmethod=expr foldexpr=nvim_treesitter#
 -- Buffers
 -- -------------------------------------------------
 -- Scroll buffers
-vim.keymap.set({ "n", "v" }, "A-s", "<cmd>BufferLineCycleNext<CR>", { desc = "Next buffer", silent = true })
-vim.keymap.set({ "n", "v" }, "A-S", "<cmd>BufferLineCyclePrev<CR>", { desc = "Previous buffer", silent = true })
+vim.keymap.set({ "n", "v" }, "<M-s>", "<cmd>BufferLineCycleNext<CR>", { desc = "Next buffer", silent = true })
+vim.keymap.set({ "n", "v" }, "<M-S>", "<cmd>BufferLineCyclePrev<CR>", { desc = "Previous buffer", silent = true })
 
 -- Close buffers
 -- TODO: Validate

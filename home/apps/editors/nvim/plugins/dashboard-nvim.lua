@@ -305,24 +305,24 @@ require("dashboard").setup({
 				icon = "⊹ ",
 				key = "ft",
 			},
-			{
-				action = quick_note,
-				desc = " Quick Note",
-				icon = "⊹ ",
-				key = "fn",
-			},
+			-- {
+			-- 	action = quick_note,
+			-- 	desc = " Quick Note",
+			-- 	icon = "⊹ ",
+			-- 	key = "fn",
+			-- },
 			{
 				action = make_directory,
 				desc = " Make Directory",
 				icon = "⊹ ",
 				key = "fd",
 			},
-			{
-				action = make_project,
-				desc = " Make Project",
-				icon = "⊹ ",
-				key = "fp",
-			},
+			-- {
+			-- 	action = make_project,
+			-- 	desc = " Make Project",
+			-- 	icon = "⊹ ",
+			-- 	key = "fp",
+			-- },
 			{
 				action = function()
 					require("telescope.builtin").find_files({
@@ -356,22 +356,22 @@ require("dashboard").setup({
 				icon = "⊹ ",
 				key = "fa",
 			},
-			{
-				action = function()
-					navigate_with_history(dirs.academic, "Academic")
-				end,
-				desc = " Z Academic",
-				icon = "⊹ ",
-				key = "za",
-			},
-			{
-				action = function()
-					navigate_with_history(dirs.professional, "Professional")
-				end,
-				desc = " Z Professional",
-				icon = "⊹ ",
-				key = "zw",
-			},
+			-- {
+			-- 	action = function()
+			-- 		navigate_with_history(dirs.academic, "Academic")
+			-- 	end,
+			-- 	desc = " Z Academic",
+			-- 	icon = "⊹ ",
+			-- 	key = "za",
+			-- },
+			-- {
+			-- 	action = function()
+			-- 		navigate_with_history(dirs.professional, "Professional")
+			-- 	end,
+			-- 	desc = " Z Professional",
+			-- 	icon = "⊹ ",
+			-- 	key = "zw",
+			-- },
 			{
 				action = function()
 					navigate_with_history(dirs.projects, "Projects")

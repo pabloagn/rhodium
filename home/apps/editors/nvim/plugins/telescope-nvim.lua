@@ -167,9 +167,12 @@ telescope.setup({
 	extensions = {
 		frecency = {
 			show_scores = false,
-			show_unindexed = true,
+			show_unindexed = false,
 			ignore_patterns = { "*.git/*", "*/tmp/*" },
 			disable_devicons = false,
+			auto_validate = true, -- Auto-validate entries and remove stale ones
+			db_safe_mode = false, -- Disable confirmation dialogs
+			max_timestamps = 50, -- Limit database size to prevent bloat
 		},
 		todo_comments = {},
 		live_grep_args = {},

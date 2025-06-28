@@ -59,7 +59,7 @@ require("which-key").setup({
 -- Group Definitions
 require("which-key").add({
 	-- Core groups
-	{ "<leader>a", group = "§ Outline" },
+	{ "<leader>a", group = "◈ Yazi" },
 	{ "<leader>b", group = "⎕ Buffer" },
 	{ "<leader>c", group = "⍝ Comment" },
 	{ "<leader>d", group = "‼ Diagnostic" },
@@ -69,28 +69,27 @@ require("which-key").add({
 	{ "<leader>i", group = "↦ Indent" },
 	{ "<leader>l", group = "ψ LSP" },
 	{ "<leader>m", group = "⠿ Multicursor" },
+	{ "<leader>o", group = "◫ Outline" },
 	{ "<leader>r", group = "⍋ Replace" },
-	{ "<leader>s", group = "⌽ Cycle" },
+	{ "<leader>s", group = "⌽ Sort" },
 	{ "<leader>t", group = "† Trouble" },
 	{ "<leader>x", group = "✕ Noice" },
 	{ "<leader>z", group = "± Fold" },
-
 	-- Buffer subgroups
 	{ "<leader>bc", group = "⊗ Close" },
 	{ "<leader>bg", group = "⊙ Group" },
 	{ "<leader>bm", group = "⊚ Move" },
 	{ "<leader>bs", group = "⊛ Sort" },
-
+	-- Comment subgroups
+	{ "<leader>cs", group = "⇄ Swap" },
 	-- Noice subgroup
 	{ "<leader>xn", group = "◊ Noice" },
-
 	-- Non-leader groups for navigation
 	{ "]", group = "⇢ Next" },
 	{ "[", group = "⇠ Prev" },
 	{ "g", group = "⟐ Go" },
 	{ "g[", group = "⇤ First" },
 	{ "g]", group = "⇥ Last" },
-
 	-- FtPlugin
 	{ ";", group = "◈ FileType" },
 })
@@ -98,15 +97,19 @@ require("which-key").add({
 -- Individual keybind descriptions
 require("which-key").add({
 	-- General
-	{ "<leader><space>", desc = "⊘ Clear search highlight" },
+	{ "<Esc>", desc = "⊘ Clear search highlight" },
 	{ "<leader>n", desc = "№ Toggle line numbers" },
 	{ "<leader>y", desc = "⊕ Copy entire buffer" },
 	{ "<leader>D", desc = "⊖ Delete entire buffer" },
 
+	-- Yazi
+	{ "<leader>ac", desc = "◈ Open on current directory" },
+	{ "<leader>aw", desc = "◉ Open on working directory" },
+
 	-- Outline/Aerial
-	{ "<leader>aa", desc = "◫ Toggle sidebar" },
-	{ "<leader>aA", desc = "◬ Toggle navigation" },
-	{ "<leader>af", desc = "◪ Focus sidebar" },
+	{ "<leader>oa", desc = "◫ Toggle sidebar" },
+	{ "<leader>oA", desc = "◬ Toggle navigation" },
+	{ "<leader>of", desc = "◪ Focus sidebar" },
 	{ "{", desc = "∧ Next symbol" },
 	{ "}", desc = "∨ Previous symbol" },
 
@@ -117,16 +120,20 @@ require("which-key").add({
 	{ "<leader>ct", desc = "✓ Insert TODO" },
 	{ "<leader>cf", desc = "✗ Insert FIX" },
 	{ "<leader>cn", desc = "※ Insert NOTE" },
-	-- TODO: Change this
 	{ "<leader>ch", desc = "⚡ Insert HACK" },
 	{ "<leader>cw", desc = "⚠ Insert WARN" },
 	{ "<leader>cp", desc = "⊕ Insert PERF" },
 	{ "<leader>ce", desc = "⊝ Insert TEST" },
-	{ "<leader>cd", desc = "☑ Toggle TODO/DONE" },
+	{ "<leader>cd", desc = "⊙ Insert DOCS" },
+	{ "<leader>cD", desc = "☑ Insert DONE" },
+	{ "<leader>csd", desc = "⇄ Toggle TODO/DONE" },
 	{ "<leader>cl", desc = "≣ List buffer TODOs" },
 
 	-- Edit
 	{ "<leader>er", desc = "⊹ Replace buffer with clipboard" },
+
+	-- Replace (Visual)
+	{ "<leader>rv", desc = "⍨ Replace visual selection", mode = "v" },
 
 	-- Replace (Spectre)
 	{ "<leader>rt", desc = "◎ Toggle Spectre" },
@@ -197,8 +204,8 @@ require("which-key").add({
 	{ "<leader>z", desc = "± Toggle treesitter folding" },
 
 	-- Buffers
-	{ "<leader>s", desc = "▶ Next buffer" },
-	{ "<leader>S", desc = "◀ Previous buffer" },
+	{ "A-s", desc = "▶ Next buffer", mode = { "n", "v" } },
+	{ "A-S", desc = "◀ Previous buffer", mode = { "n", "v" } },
 	{ "<leader>w", desc = "✓ Save and close" },
 	{ "<leader>q", desc = "✗ Close without saving" },
 	{ "<leader>bmn", desc = "▷ Move next" },
@@ -232,41 +239,48 @@ require("which-key").add({
 	-- TODOs Navigation
 	{ "]t", desc = "▸ Next todo comment" },
 	{ "[t", desc = "◂ Previous todo comment" },
-	{ "]T", desc = "▹ Next task" },
 
 	-- Multicursor
-	{ "<leader>m", desc = "⊙ Start on word/selection" },
+	{ "<leader>m", desc = "⊙ Start on word/selection", mode = { "n", "v" } },
 
 	-- Noice
 	{ "<S-Enter>", desc = "⤴ Redirect cmdline", mode = "c" },
 	{ "<leader>xnl", desc = "◊ Last message" },
-	{ "<leader>xnh", desc = "⌚ History" },
+	{ "<leader>xnh", desc = "🝮 History" },
 	{ "<leader>xna", desc = "≡ All messages" },
 	{ "<leader>xnd", desc = "⊗ Dismiss all" },
 	{ "<leader>xnt", desc = "⊙ Picker" },
 	{ "<c-f>", desc = "↓ Scroll forward", mode = { "i", "n", "s" } },
 	{ "<c-b>", desc = "↑ Scroll backward", mode = { "i", "n", "s" } },
+
+	-- Sort
+	{ "<leader>sa", desc = "⇈ Sort alphabetically", mode = "v" },
+	{ "<leader>sr", desc = "⇊ Sort reverse", mode = "v" },
+	{ "<leader>si", desc = "⇕ Sort case-insensitive", mode = "v" },
+	{ "<leader>sn", desc = "⇳ Sort numerically", mode = "v" },
+
+	-- Motions
+	{ "<A-Down>", desc = "↓ Move line down" },
+	{ "<A-Up>", desc = "↑ Move line up" },
+	{ "<CR>", desc = "⏎ Insert line below" },
+	{ "<S-CR>", desc = "⇧⏎ Insert line above" },
 })
 
 -- Highlight settings
 vim.api.nvim_set_hl(0, "WhichKeyNormal", {
-	-- bg = "#0f1316",
 	bg = "#090E13",
 })
 vim.api.nvim_set_hl(0, "WhichKeyBorder", {
 	fg = "#22262D",
-	-- bg = "#0f1316",
 	bg = "#090E13",
 })
 vim.api.nvim_set_hl(0, "WhichKeyTitle", {
-	-- bg = "#0f1316",
 	bg = "#090E13",
 })
 
 -- Add filetype-specific group names
 local FILETYPE_ICON = "☠"
 
--- Add filetype-specific group names
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = {
 		"bash",
@@ -356,7 +370,6 @@ vim.api.nvim_create_autocmd("FileType", {
 			-- Shell
 			bash = FILETYPE_ICON .. " Bash",
 			sh = FILETYPE_ICON .. " Shell",
-
 			-- Systems
 			c = FILETYPE_ICON .. " C",
 			cuda = FILETYPE_ICON .. " CUDA",
@@ -364,14 +377,12 @@ vim.api.nvim_create_autocmd("FileType", {
 			zig = FILETYPE_ICON .. " Zig",
 			rust = FILETYPE_ICON .. " Rust",
 			rs = FILETYPE_ICON .. " Rust",
-
 			-- Lisps
 			clojure = FILETYPE_ICON .. " Clojure",
 			commonlisp = FILETYPE_ICON .. " Common Lisp",
 			lisp = FILETYPE_ICON .. " Lisp",
 			elisp = FILETYPE_ICON .. " Emacs Lisp",
 			fennel = FILETYPE_ICON .. " Fennel",
-
 			-- Web
 			css = FILETYPE_ICON .. " CSS",
 			scss = FILETYPE_ICON .. " SCSS",
@@ -383,7 +394,6 @@ vim.api.nvim_create_autocmd("FileType", {
 			tsx = FILETYPE_ICON .. " TSX",
 			vue = FILETYPE_ICON .. " Vue",
 			svelte = FILETYPE_ICON .. " Svelte",
-
 			-- Data
 			json = FILETYPE_ICON .. " JSON",
 			yaml = FILETYPE_ICON .. " YAML",
@@ -394,7 +404,6 @@ vim.api.nvim_create_autocmd("FileType", {
 			tsv = FILETYPE_ICON .. " TSV",
 			kdl = FILETYPE_ICON .. " KDL",
 			ini = FILETYPE_ICON .. " INI",
-
 			-- Languages
 			python = FILETYPE_ICON .. " Python",
 			py = FILETYPE_ICON .. " Python",
@@ -419,14 +428,12 @@ vim.api.nvim_create_autocmd("FileType", {
 			ocaml = FILETYPE_ICON .. " OCaml",
 			odin = FILETYPE_ICON .. " Odin",
 			solidity = FILETYPE_ICON .. " Solidity",
-
 			-- Markup & Docs
 			markdown = FILETYPE_ICON .. " Markdown",
 			md = FILETYPE_ICON .. " Markdown",
 			latex = FILETYPE_ICON .. " LaTeX",
 			tex = FILETYPE_ICON .. " LaTeX",
 			typst = FILETYPE_ICON .. " Typst",
-
 			-- Config & Build
 			dockerfile = FILETYPE_ICON .. " Dockerfile",
 			make = FILETYPE_ICON .. " Makefile",
@@ -435,11 +442,9 @@ vim.api.nvim_create_autocmd("FileType", {
 			terraform = FILETYPE_ICON .. " Terraform",
 			tf = FILETYPE_ICON .. " Terraform",
 			hcl = FILETYPE_ICON .. " HCL",
-
 			-- Vim
 			vim = FILETYPE_ICON .. " Vim",
 			vimdoc = FILETYPE_ICON .. " VimDoc",
-
 			-- Tools & Misc
 			sql = FILETYPE_ICON .. " SQL",
 			graphql = FILETYPE_ICON .. " GraphQL",
@@ -447,18 +452,15 @@ vim.api.nvim_create_autocmd("FileType", {
 			regex = FILETYPE_ICON .. " Regex",
 			tmux = FILETYPE_ICON .. " Tmux",
 			ssh_config = FILETYPE_ICON .. " SSH Config",
-
 			-- WM & System
 			hyprlang = FILETYPE_ICON .. " Hyprlang",
 			sxhkdrc = FILETYPE_ICON .. " SXHKD",
 			rasi = FILETYPE_ICON .. " Rasi",
 			yuck = FILETYPE_ICON .. " Yuck",
 			zathurarc = FILETYPE_ICON .. " Zathura",
-
 			-- Shell alternatives
 			nu = FILETYPE_ICON .. " Nushell",
 		}
-
 		local ft = vim.bo[ev.buf].filetype
 		if ft_names[ft] then
 			require("which-key").add({
