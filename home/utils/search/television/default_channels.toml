@@ -1,0 +1,150 @@
+[[cable_channel]]
+name = "bash-history"
+source_command = "sed '1!G;h;$!d' ${HISTFILE:-${HOME}/.bash_history}"
+
+[[cable_channel]]
+name = "config"
+source_command = '''
+fd -t f -e toml -e yaml -e yml -e json -e conf -e cfg -e ini \
+  . ~/.config /etc 2>/dev/null | grep -v cache | sort
+'''
+preview_command = "bat -n --color=always --style=numbers {}"
+
+[[cable_channel]]
+name = "docker"
+source_command = "docker ps -a --format \"{{.ID}} {{.Names}} {{.Status}} {{.Image}}\""
+preview_command = "docker inspect {0} | jq '.[0]' 2>/dev/null || echo \"Container not found\""
+
+[[cable_channel]]
+name = "dotfiles"
+source_command = "fd -t f . $HOME/.config"
+preview_command = "bat -n --color=always --style=numbers {}"
+
+[[cable_channel]]
+name = "files"
+source_command = "fd . --type f --type d --hidden --exclude .git --color=never | sort"
+preview_command = '''
+if [ -d "{}" ]; then
+  eza -la --color=always --icons=always --group-directories-first "{}"
+else
+  bat -n --color=always --style=numbers,changes "{}" 2>/dev/null || file -b "{}"
+fi
+'''
+
+[[cable_channel]]
+name = "fish-history"
+source_command = "fish -c 'history'"
+
+[[cable_channel]]
+name = "git-branch"
+source_command = "git --no-pager branch --all --format=\"%(refname:short)\""
+preview_command = "git show -p --stat --pretty=fuller --color=always {}"
+
+[[cable_channel]]
+name = "git-diff"
+source_command = "git diff --name-only"
+preview_command = "git diff --color=always {}"
+
+[[cable_channel]]
+name = "git-log"
+source_command = "git log --oneline --date=short --pretty=\"format:%h %s %an %cd\""
+preview_command = "git show -p --stat --pretty=fuller --color=always {0}"
+
+[[cable_channel]]
+name = "git-reflog"
+source_command = "git reflog"
+preview_command = "git show -p --stat --pretty=fuller --color=always {0}"
+
+[[cable_channel]]
+name = "git"
+source_command = "git log --oneline --date=short --pretty=\"format:%h %s %an %cd\" --color=never"
+preview_command = "git show -p --stat --pretty=fuller --color=always {0} | delta"
+
+[[cable_channel]]
+name = "logs"
+source_command = '''
+fd -e log -e txt . /var/log ~/.local/share ~/.cache 2>/dev/null | \
+  grep -E '\.(log|txt)$' | sort -r | head -50
+'''
+preview_command = "tail -n 100 {} | bat -n --color=always --style=plain"
+
+[[cable_channel]]
+name = "nix"
+source_command = '''
+{
+  # Get system packages
+  nix-store --query --requisites /run/current-system 2>/dev/null | 
+    sed -E 's|/nix/store/[^-]+-||' | 
+    grep -vE '\.(patch|tar\.|zip|gz|bz2|xz)$|source$|\.drv$' | 
+    sort | uniq
+  
+  # Get home-manager packages if profile exists
+  if [[ -L "$HOME/.nix-profile" ]]; then
+    nix-store --query --requisites "$HOME/.nix-profile" 2>/dev/null | 
+      sed -E 's|/nix/store/[^-]+-||' | 
+      grep -vE '\.(patch|tar\.|zip|gz|bz2|xz)$|source$|\.drv$' | 
+      sort | uniq
+  fi
+} | sort | uniq | grep -v '^$'
+'''
+
+preview_command = '''
+echo "📦 Package: {}"
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo ""
+
+# Try to get package info from different sources
+echo "🔍 Searching package information..."
+echo ""
+
+# Search in nixpkgs
+nix search nixpkgs#{} 2>/dev/null | head -10 || \
+nix search nixpkgs {|| echo "Package information not found in search"
+
+echo ""
+echo "📋 Store path information:"
+nix-store --query --roots /nix/store/*{}* 2>/dev/null | head -5 || echo "No store information available"
+'''
+
+[[cable_channel]]
+name = "processes"
+source_command = "ps aux | tail -n +2 | awk '{printf \"%s %s %s %s %s\\n\", $2, $1, $3, $4, $11}'"
+preview_command = '''
+echo "Process Details for PID: {0}"
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━"
+ps -p {0} -o pid,ppid,user,comm,cmd,etime,pmem,pcpu 2>/dev/null || echo "Process not found"
+'''
+
+[[cable_channel]]
+name = "projects"
+source_command = '''
+fd -t d -d 3 '\.(git|go\.mod|Cargo\.toml|package\.json|pyproject\.toml|flake\.nix)$' \
+  ~/dev 2>/dev/null | \
+  xargs -I {} dirname {} | sort -u
+'''
+preview_command = '''
+eza -la --color=always --icons=always --group-directories-first "{}" | head -20
+echo
+if [ -f "{}/README.md" ]; then
+  echo "📖 README.md:"
+  bat -n --color=always --style=plain "{}/README.md" 2>/dev/null | head -15
+fi
+'''
+
+[[cable_channel]]
+name = "recent"
+source_command = '''
+fd -t f --changed-within 7d --exclude .git --color=never . | \
+  xargs -I {} sh -c 'echo "$(stat -c %Y {} 2>/dev/null || stat -f %m {} 2>/dev/null) {}"' | \
+  sort -rn | cut -d' ' -f2- | head -100
+'''
+preview_command = "bat -n --color=always --style=full {}"
+
+[[cable_channel]]
+name = "rhodium"
+source_command = "fd -t f . $RHODIUM"
+preview_command = "bat -n --color=always --style=numbers {}"
+
+[[cable_channel]]
+name = "zsh-history"
+source_command = "sed '1!G;h;$!d' ${HISTFILE:-${HOME}/.zsh_history} | cut -d\";\" -f 2-"

@@ -170,6 +170,7 @@
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
+              backupFileExtension = "backup";
 
               users.${userData.user_001.username or "user_001"} = import ./users/user_001;
 
@@ -204,6 +205,7 @@
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
+              backupFileExtension = "backup";
 
               users.${userData.user_001.username or "user_001"} = import ./users/user_001;
 

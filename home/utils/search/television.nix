@@ -1,27 +1,4 @@
-{lib, ...}: let
-  cableDir = ./television/cable;
-  cableFiles = builtins.readDir cableDir;
-  cableConfigs =
-    builtins.mapAttrs
-    (
-      name: type:
-        if type == "regular" && builtins.match ".*\\.toml$" name != null
-        then {source = cableDir + "/${name}";}
-        else null
-    )
-    cableFiles;
-  validCableConfigs =
-    builtins.mapAttrs
-    (name: value: value)
-    (lib.filterAttrs (name: value: value != null) cableConfigs);
-  prefixedCableConfigs =
-    builtins.mapAttrs'
-    (name: value: {
-      name = "television/cable/${name}";
-      value = value;
-    })
-    validCableConfigs;
-in {
+{...}: {
   programs.television = {
     enable = true;
 
@@ -81,9 +58,17 @@ in {
     };
   };
 
-  xdg.configFile =
-    prefixedCableConfigs
-    // {
-      "television/themes/kanso.toml".source = ./television/themes/kanso.toml;
+  xdg.configFile = {
+    "television/themes/kanso.toml" = {
+      source = ./television/themes/kanso.toml;
+      force = true;
     };
+  };
+
+  xdg.configFile = {
+    "television/default_channels.toml" = {
+      source = ./television/default_channels.toml;
+      force = true;
+    };
+  };
 }
