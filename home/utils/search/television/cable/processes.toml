@@ -1,20 +1,8 @@
-[metadata]
+[[cable_channel]]
 name = "processes"
-description = "System processes"
-requirements = ["ps", "awk"]
-
-[source]
-command = """ps aux | tail -n +2 | awk '{printf "%s▐%s▐%s▐%s▐%s %s\n", $2, $1, $3, $4, $11, $12}'"""
-display = "{split:▐:0} • {split:▐:1} [{split:▐:2}% CPU, {split:▐:3}% MEM] {split:▐:4}"
-output = "{split:▐:0}"
-
-[preview]
-command = """
-PID={split:▐:0}
-echo "Process Details for PID: $PID"
+source_command = "ps aux | tail -n +2 | awk '{printf \"%s %s %s %s %s\\n\", $2, $1, $3, $4, $11}'"
+preview_command = '''
+echo "Process Details for PID: {0}"
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━"
-ps -p $PID -o pid,ppid,user,comm,cmd,etime,pmem,pcpu 2>/dev/null || echo "Process not found"
-"""
-
-[ui]
-input_header = "Processes:"
+ps -p {0} -o pid,ppid,user,comm,cmd,etime,pmem,pcpu 2>/dev/null || echo "Process not found"
+'''

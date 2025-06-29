@@ -1,19 +1,36 @@
-[metadata]
+[[cable_channel]]
 name = "nix"
-description = "Nix packages and store paths"
-requirements = ["nix", "jq"]
+source_command = '''
+{
+  # Get system packages
+  nix-store --query --requisites /run/current-system 2>/dev/null | 
+    sed -E 's|/nix/store/[^-]+-||' | 
+    grep -vE '\.(patch|tar\.|zip|gz|bz2|xz)$|source$|\.drv$' | 
+    sort | uniq
+  
+  # Get home-manager packages if profile exists
+  if [[ -L "$HOME/.nix-profile" ]]; then
+    nix-store --query --requisites "$HOME/.nix-profile" 2>/dev/null | 
+      sed -E 's|/nix/store/[^-]+-||' | 
+      grep -vE '\.(patch|tar\.|zip|gz|bz2|xz)$|source$|\.drv$' | 
+      sort | uniq
+  fi
+} | sort | uniq | grep -v '^$'
+'''
+preview_command = '''
+echo "📦 Package: {}"
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo ""
 
-[source]
-command = """nix-env -q --installed --json | jq -r 'keys[]' | sort"""
-display = "{}"
-output = "{}"
+# Try to get package info from different sources
+echo "🔍 Searching package information..."
+echo ""
 
-[preview]
-command = """
-echo "Package: {}"
-echo "━━━━━━━━━━━━━━━━━━━━━━━━━━"
-nix-env -qa --description {} 2>/dev/null | head -5
-"""
+# Search in nixpkgs
+nix search nixpkgs#{} 2>/dev/null | head -10 || \
+nix search nixpkgs {|| echo "Package information not found in search"
 
-[ui]
-input_header = "Installed Nix Packages:"
+echo ""
+echo "📋 Store path information:"
+nix-store --query --roots /nix/store/*{}* 2>/dev/null | head -5 || echo "No store information available"
+'''

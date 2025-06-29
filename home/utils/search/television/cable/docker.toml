@@ -1,15 +1,4 @@
-[metadata]
+[[cable_channel]]
 name = "docker"
-description = "Docker containers and images"
-requirements = ["docker"]
-
-[source]
-command = """docker ps -a --format "table {{.ID}}▐{{.Names}}▐{{.Status}}▐{{.Image}}" | tail -n +2"""
-display = "{split:▐:1} • {split:▐:2} [{split:▐:0}]"
-output = "{split:▐:0}"
-
-[preview]
-command = """docker inspect {split:▐:0} | jq '.[0]' 2>/dev/null || echo "Container not found" """
-
-[ui]
-input_header = "Docker Containers:"
+source_command = "docker ps -a --format \"{{.ID}} {{.Names}} {{.Status}} {{.Image}}\""
+preview_command = "docker inspect {0} | jq '.[0]' 2>/dev/null || echo \"Container not found\""

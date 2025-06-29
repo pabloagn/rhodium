@@ -1,18 +1,7 @@
-[metadata]
+[[cable_channel]]
 name = "logs"
-description = "System and application logs"
-requirements = ["fd", "bat"]
-
-[source]
-command = """
+source_command = '''
 fd -e log -e txt . /var/log ~/.local/share ~/.cache 2>/dev/null | \
   grep -E '\.(log|txt)$' | sort -r | head -50
-"""
-display = "{split:/:-1} • {split:/:0..-1|join:/}"
-output = "{}"
-
-[preview]
-command = "tail -n 100 {} | bat -n --color=always --style=plain"
-
-[ui]
-input_header = "Log Files:"
+'''
+preview_command = "tail -n 100 {} | bat -n --color=always --style=plain"

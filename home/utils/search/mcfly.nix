@@ -1,6 +1,6 @@
 {...}: {
   programs.mcfly = {
-    enable = true;
+    enable = false;
     fzf.enable = true;
   };
 }
