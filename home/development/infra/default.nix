@@ -1,6 +1,6 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
-    # Terraform
+    # --- Terraform ---
     terraform
     terraform-ls # Official language server
   ];

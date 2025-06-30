@@ -97,6 +97,16 @@ vim.keymap.set("n", "}", "<cmd>AerialPrev<CR>", {
 
 -- Comment
 -- -------------------------------------------------
+-- Comment header
+vim.keymap.set("n", "<Leader>ch", function()
+	functions.comment_header()
+end, {
+	noremap = true,
+	silent = true,
+	desc = "Append",
+})
+
+-- Comment toggle
 vim.keymap.set("n", "<leader>cc", function()
 	if vim.v.count == 0 then
 		-- No count given, toggle current line
@@ -107,12 +117,14 @@ vim.keymap.set("n", "<leader>cc", function()
 	end
 end, { desc = "Toggle Linewise (Line/Count)" })
 
+-- Comment linewise
 local esc = vim.api.nvim_replace_termcodes("<ESC>", true, false, true)
 vim.keymap.set("x", "<leader>cc", function()
 	vim.api.nvim_feedkeys(esc, "nx", false)
 	require("Comment.api").toggle.linewise(vim.fn.visualmode())
 end, { desc = "Toggle Linewise (Visual Selection)" })
 
+-- Comment append
 vim.keymap.set("n", "<Leader>ca", function()
 	functions.comment_append()
 end, {
@@ -121,6 +133,7 @@ end, {
 	desc = "Append",
 })
 
+-- Comment all lines
 vim.keymap.set("n", "<leader>cA", function()
 	local line_count = vim.api.nvim_buf_line_count(0)
 	require("Comment.api").toggle.linewise.count(line_count)
@@ -134,6 +147,7 @@ end, {
 	desc = "Insert TODO",
 })
 
+-- Insert FIX
 vim.keymap.set("n", "<Leader>cf", function()
 	functions.insert_fix()
 end, {
@@ -142,6 +156,7 @@ end, {
 	desc = "Insert FIX",
 })
 
+-- Insert NOTE
 vim.keymap.set("n", "<Leader>cn", function()
 	functions.insert_note()
 end, {
@@ -150,7 +165,8 @@ end, {
 	desc = "Insert NOTE",
 })
 
-vim.keymap.set("n", "<Leader>ch", function()
+-- Insert HACK
+vim.keymap.set("n", "<Leader>ck", function()
 	functions.insert_hack()
 end, {
 	noremap = true,
@@ -158,6 +174,7 @@ end, {
 	desc = "Insert HACK",
 })
 
+-- Insert WARN
 vim.keymap.set("n", "<Leader>cw", function()
 	functions.insert_warn()
 end, {
@@ -166,6 +183,7 @@ end, {
 	desc = "Insert WARN",
 })
 
+-- Insert PERF
 vim.keymap.set("n", "<Leader>cp", function()
 	functions.insert_perf()
 end, {
@@ -174,6 +192,7 @@ end, {
 	desc = "Insert PERF",
 })
 
+-- Insert TEST
 vim.keymap.set("n", "<Leader>ce", function()
 	functions.insert_test()
 end, {
@@ -182,6 +201,7 @@ end, {
 	desc = "Insert TEST",
 })
 
+-- Insert DOCS
 vim.keymap.set("n", "<Leader>cd", function()
 	functions.insert_test()
 end, {
@@ -190,6 +210,7 @@ end, {
 	desc = "Insert DOCS",
 })
 
+-- Insert DONE
 vim.keymap.set("n", "<Leader>cD", function()
 	functions.insert_test()
 end, {

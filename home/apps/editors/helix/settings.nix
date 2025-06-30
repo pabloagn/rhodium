@@ -24,29 +24,27 @@
     # };
 
     editor = {
-      evil = true; # Disable evil to remove vim bindings altogether
-      path-completion = true;
-      # ruler-char = "⎸";
-      # rulers = [10 20 30]; # Rulers are rendered with ${ruler-char}      line-number = "relative";
-      mouse = true;
-      default-yank-register = "+";
-      middle-click-paste = true;
-      scroll-lines = 1;
-      scrolloff = 8;
-      cursorline = true;
-      cursorcolumn = false;
       auto-completion = true;
       auto-format = true;
       auto-info = true;
-      idle-timeout = 250;
+      bufferline = "always";
+      clipboard-provider = "wayland";
       completion-trigger-len = 1;
+      cursorcolumn = false;
+      cursorline = true;
+      default-yank-register = "+";
+      evil = true; # NOTE: Disable evil to remove vim bindings altogether
+      idle-timeout = 250;
+      indent-heuristic = "hybrid";
+      insert-final-newline = true;
+      middle-click-paste = true;
+      mouse = true;
+      path-completion = true;
+      popup-border = "all";
+      scroll-lines = 1;
+      scrolloff = 8;
       true-color = true;
       undercurl = true;
-      bufferline = "always";
-      insert-final-newline = true;
-      popup-border = "all";
-      indent-heuristic = "hybrid";
-      clipboard-provider = "wayland";
       smart-tab = {
         enable = true;
       };
@@ -105,7 +103,6 @@
         enable = true;
         auto-signature-help = true;
         display-inlay-hints = true;
-        #display-color-swatches = true;
       };
     };
   };

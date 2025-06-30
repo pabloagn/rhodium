@@ -1,6 +1,5 @@
 {...}: {
   programs.helix.languages = {
-    # Language servers only - let Helix use its built-in language definitions
     language-server.rust-analyzer = {
       command = "rust-analyzer";
     };

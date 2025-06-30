@@ -3,7 +3,6 @@
     enable = true;
     enableBashIntegration = true;
     enableNushellIntegration = true;
-    # enableFishIntegration = true;
     enableZshIntegration = true;
     nix-direnv.enable = true; # Cache .env environment
     silent = true; # Silence direnv messages
@@ -13,10 +12,10 @@
       whitelist = {
         # Allow entire directory hierarchies
         prefix = [
-          "${config.home.homeDirectory}/dev"
-          "${config.home.homeDirectory}/solenoid-labs"
-          "${config.home.homeDirectory}/professional"
           "${config.home.homeDirectory}/academic"
+          "${config.home.homeDirectory}/dev"
+          "${config.home.homeDirectory}/professional"
+          "${config.home.homeDirectory}/solenoid-labs"
         ];
       };
 

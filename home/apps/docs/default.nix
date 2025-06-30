@@ -9,10 +9,10 @@
   home.packages = with pkgs; [
     # anytype
     # appflowy
-    # logseq
-    # roam-research
     # joplin
     # joplin-desktop
+    # logseq
     # notion-app
+    # roam-research
   ];
 }

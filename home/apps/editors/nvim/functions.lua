@@ -1,7 +1,6 @@
 local M = {}
 
--- System Info
--- --------------------------------------------------
+-- --- System Info ---
 -- Dynamic hostname detection
 function M.get_hostname()
 	local handle = io.popen("hostname")
@@ -18,8 +17,7 @@ function M.get_username()
 	return os.getenv("USER") or "your-username"
 end
 
--- Terminal Integration
--- --------------------------------------------------
+-- --- Terminal Integration ---
 -- Open selected file in new terminal session
 function M.open_file_in_new_terminal(prompt_bufnr)
 	local actions = require("telescope.actions")
@@ -49,8 +47,7 @@ function M.open_file_in_new_terminal(prompt_bufnr)
 	)
 end
 
--- Edits
--- --------------------------------------------------
+-- --- Edits ---
 -- Replace entire buffer content with clipboard content
 function M.replace_buffer_with_clipboard()
 	local clipboard_content = vim.fn.getreg("+")
@@ -483,6 +480,57 @@ function M.get_comment_prefix()
 	-- Extract the part before %s
 	local prefix = commentstring:match("^(.-)%s*%%s")
 	return prefix or "//"
+end
+
+-- Comment Header
+-- Comment Header
+function M.comment_header()
+	local line = vim.api.nvim_get_current_line()
+	local comment_prefix = M.get_comment_prefix()
+
+	-- Escape special regex characters in comment prefix
+	local escaped_prefix = vim.pesc(comment_prefix)
+
+	-- Get the prefix part (indentation + comment marker)
+	local prefix = line:match("^(%s*" .. escaped_prefix .. "%s*)")
+
+	if not prefix then
+		vim.notify("No comment found on current line", vim.log.levels.WARN, { title = "Comment Header" })
+		return
+	end
+
+	-- Get everything after the comment prefix
+	local rest = line:sub(#prefix + 1)
+
+	-- Extract content by removing any dashes from beginning and end
+	local content = rest:match("^%-*%s*(.-)%s*%-*$")
+
+	if not content or content == "" then
+		vim.notify("No content in comment", vim.log.levels.WARN, { title = "Comment Header" })
+		return
+	end
+
+	-- Clean up any remaining dashes from content edges
+	content = content:gsub("^%-*%s*", ""):gsub("%s*%-*$", "")
+
+	-- Check if it's already a properly formatted header (starts and ends with ---)
+	if rest:match("^%-%-%-") and rest:match("%-%-%-$") then
+		-- It's decorated, convert to normal comment
+		vim.api.nvim_set_current_line(prefix .. content)
+		vim.notify("Removed header decoration", vim.log.levels.INFO, { title = "Comment Header" })
+	else
+		-- Convert to title case and add decoration
+		local words = {}
+		for word in content:gmatch("%S+") do
+			local first = word:sub(1, 1):upper()
+			local rest_of_word = word:sub(2):lower()
+			table.insert(words, first .. rest_of_word)
+		end
+
+		local formatted_content = table.concat(words, " ")
+		vim.api.nvim_set_current_line(prefix .. "--- " .. formatted_content .. " ---")
+		vim.notify("Added header decoration", vim.log.levels.INFO, { title = "Comment Header" })
+	end
 end
 
 -- Comment Append

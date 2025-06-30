@@ -1,7 +1,7 @@
 {...}: {
   imports = [
-    ./settings.nix
     ./languages.nix
+    ./settings.nix
     ./themes.nix
   ];
 }

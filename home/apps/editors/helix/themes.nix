@@ -1,7 +1,6 @@
 {...}: {
   programs.helix.themes = {
     chiaroscuro = let
-      # transparent = "none";
       red = "#f7768e";
       orange = "#ff9e64";
       yellow = "#e0af68";

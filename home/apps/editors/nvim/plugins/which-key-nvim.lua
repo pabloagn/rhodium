@@ -120,7 +120,7 @@ require("which-key").add({
 	{ "<leader>ct", desc = "✓ Insert TODO" },
 	{ "<leader>cf", desc = "✗ Insert FIX" },
 	{ "<leader>cn", desc = "※ Insert NOTE" },
-	{ "<leader>ch", desc = "⚡ Insert HACK" },
+	{ "<leader>ch", desc = "⊡ Insert HACK" },
 	{ "<leader>cw", desc = "⚠ Insert WARN" },
 	{ "<leader>cp", desc = "⊕ Insert PERF" },
 	{ "<leader>ce", desc = "⊝ Insert TEST" },
@@ -284,20 +284,19 @@ local FILETYPE_ICON = "☠"
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = {
 		"bash",
-		"sh",
 		"c",
 		"clojure",
 		"commonlisp",
-		"lisp",
 		"css",
 		"csv",
 		"cuda",
 		"dart",
 		"dockerfile",
-		"elixir",
 		"elisp",
+		"elixir",
 		"elm",
 		"erlang",
+		"fennel",
 		"fortran",
 		"gleam",
 		"go",
@@ -316,7 +315,7 @@ vim.api.nvim_create_autocmd("FileType", {
 		"kdl",
 		"kotlin",
 		"latex",
-		"tex",
+		"lisp",
 		"lua",
 		"luadoc",
 		"make",
@@ -329,16 +328,17 @@ vim.api.nvim_create_autocmd("FileType", {
 		"odin",
 		"perl",
 		"php",
-		"python",
 		"py",
+		"python",
 		"r",
 		"rasi",
-		"regex",
-		"ruby",
 		"rb",
-		"rust",
+		"regex",
 		"rs",
+		"ruby",
+		"rust",
 		"scss",
+		"sh",
 		"solidity",
 		"sql",
 		"ssh_config",
@@ -346,13 +346,14 @@ vim.api.nvim_create_autocmd("FileType", {
 		"swift",
 		"sxhkdrc",
 		"terraform",
+		"tex",
 		"tf",
 		"tmux",
 		"toml",
+		"ts",
 		"tsv",
 		"tsx",
 		"typescript",
-		"ts",
 		"typst",
 		"vim",
 		"vimdoc",
@@ -363,13 +364,13 @@ vim.api.nvim_create_autocmd("FileType", {
 		"yuck",
 		"zathurarc",
 		"zig",
-		"fennel",
 	},
 	callback = function(ev)
 		local ft_names = {
 			-- Shell
 			bash = FILETYPE_ICON .. " Bash",
 			sh = FILETYPE_ICON .. " Shell",
+
 			-- Systems
 			c = FILETYPE_ICON .. " C",
 			cuda = FILETYPE_ICON .. " CUDA",
@@ -377,12 +378,14 @@ vim.api.nvim_create_autocmd("FileType", {
 			zig = FILETYPE_ICON .. " Zig",
 			rust = FILETYPE_ICON .. " Rust",
 			rs = FILETYPE_ICON .. " Rust",
+
 			-- Lisps
 			clojure = FILETYPE_ICON .. " Clojure",
 			commonlisp = FILETYPE_ICON .. " Common Lisp",
 			lisp = FILETYPE_ICON .. " Lisp",
 			elisp = FILETYPE_ICON .. " Emacs Lisp",
 			fennel = FILETYPE_ICON .. " Fennel",
+
 			-- Web
 			css = FILETYPE_ICON .. " CSS",
 			scss = FILETYPE_ICON .. " SCSS",
@@ -394,6 +397,7 @@ vim.api.nvim_create_autocmd("FileType", {
 			tsx = FILETYPE_ICON .. " TSX",
 			vue = FILETYPE_ICON .. " Vue",
 			svelte = FILETYPE_ICON .. " Svelte",
+
 			-- Data
 			json = FILETYPE_ICON .. " JSON",
 			yaml = FILETYPE_ICON .. " YAML",
@@ -404,6 +408,7 @@ vim.api.nvim_create_autocmd("FileType", {
 			tsv = FILETYPE_ICON .. " TSV",
 			kdl = FILETYPE_ICON .. " KDL",
 			ini = FILETYPE_ICON .. " INI",
+
 			-- Languages
 			python = FILETYPE_ICON .. " Python",
 			py = FILETYPE_ICON .. " Python",
@@ -428,12 +433,14 @@ vim.api.nvim_create_autocmd("FileType", {
 			ocaml = FILETYPE_ICON .. " OCaml",
 			odin = FILETYPE_ICON .. " Odin",
 			solidity = FILETYPE_ICON .. " Solidity",
+
 			-- Markup & Docs
 			markdown = FILETYPE_ICON .. " Markdown",
 			md = FILETYPE_ICON .. " Markdown",
 			latex = FILETYPE_ICON .. " LaTeX",
 			tex = FILETYPE_ICON .. " LaTeX",
 			typst = FILETYPE_ICON .. " Typst",
+
 			-- Config & Build
 			dockerfile = FILETYPE_ICON .. " Dockerfile",
 			make = FILETYPE_ICON .. " Makefile",
@@ -442,9 +449,11 @@ vim.api.nvim_create_autocmd("FileType", {
 			terraform = FILETYPE_ICON .. " Terraform",
 			tf = FILETYPE_ICON .. " Terraform",
 			hcl = FILETYPE_ICON .. " HCL",
+
 			-- Vim
 			vim = FILETYPE_ICON .. " Vim",
 			vimdoc = FILETYPE_ICON .. " VimDoc",
+
 			-- Tools & Misc
 			sql = FILETYPE_ICON .. " SQL",
 			graphql = FILETYPE_ICON .. " GraphQL",
@@ -452,12 +461,14 @@ vim.api.nvim_create_autocmd("FileType", {
 			regex = FILETYPE_ICON .. " Regex",
 			tmux = FILETYPE_ICON .. " Tmux",
 			ssh_config = FILETYPE_ICON .. " SSH Config",
+
 			-- WM & System
 			hyprlang = FILETYPE_ICON .. " Hyprlang",
 			sxhkdrc = FILETYPE_ICON .. " SXHKD",
 			rasi = FILETYPE_ICON .. " Rasi",
 			yuck = FILETYPE_ICON .. " Yuck",
 			zathurarc = FILETYPE_ICON .. " Zathura",
+
 			-- Shell alternatives
 			nu = FILETYPE_ICON .. " Nushell",
 		}

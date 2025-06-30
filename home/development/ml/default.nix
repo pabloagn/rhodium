@@ -14,6 +14,7 @@ with lib; {
   config = mkIf config.programs.development.ml.enable {
     home.packages = with pkgs; [
       ollama
+      llama-cpp
     ];
   };
 }

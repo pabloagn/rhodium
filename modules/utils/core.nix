@@ -1,7 +1,7 @@
 {pkgs, ...}: {
   environment.systemPackages = with pkgs; [
     mesa # Open source 3D graphics library
-    libva
+    libva # Video acceleration API
     gdb # GNU Project Debugger
     libGL
     libGLU
@@ -15,9 +15,9 @@
 
     # Build essentials
     gnumake # Make files
-    gnutls
-    gcc
-    pkg-config
+    gnutls # GNU transport layer security library
+    gcc # GNU compiler collection
+    pkg-config # Package information finder
 
     # Version control
     git

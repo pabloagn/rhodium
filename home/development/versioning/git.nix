@@ -8,7 +8,7 @@
 in {
   home.packages = with pkgs; [
     commitizen # Commit rules for projects
-    # cz-cli # commitzen cli
+    # gitea # Self-hostable web service for managing Git repositories
   ];
 
   programs.git = {
@@ -52,7 +52,7 @@ in {
     };
 
     riff = {
-      enable = false; # View file diffs
+      enable = false; # View file diffs. Either this or delta.
     };
   };
   programs.gh = {
