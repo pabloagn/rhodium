@@ -4,14 +4,17 @@
 # This script handles all garbage collection modes for NixOS generations
 #
 
+# --- Imports ---
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-source "${SCRIPT_DIR}/rh-helpers.sh"
+COMMON_DIR="$(dirname "$SCRIPT_DIR")/common"
+source "${COMMON_DIR}/helpers.sh"
 
+# --- Functions ---
 function usage() {
     echo "Usage:"
-    echo "  $0 keep [generations]     - Keep N most recent generations (default: 5)"
-    echo "  $0 days [days]           - Remove generations older than N days (default: 7)"
-    echo "  $0 all                   - Remove all old generations"
+    echo "  $0 keep [generations]       - Keep N most recent generations (default: 5)"
+    echo "  $0 days [days]              - Remove generations older than N days (default: 7)"
+    echo "  $0 all                      - Remove all old generations"
     exit 1
 }
 

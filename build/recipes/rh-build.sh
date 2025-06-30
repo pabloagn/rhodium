@@ -4,9 +4,12 @@
 # This script handles NixOS build operations without switching
 #
 
+# --- Imports ---
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-source "${SCRIPT_DIR}/rh-helpers.sh"
+COMMON_DIR="$(dirname "$SCRIPT_DIR")/common"
+source "${COMMON_DIR}/helpers.sh"
 
+# --- Functions ---
 function usage() {
     echo "Usage: $0 <host> <mode>"
     echo "Build NixOS configuration for the specified host"

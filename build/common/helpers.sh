@@ -1,17 +1,17 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC1091
 #
-# This is a helper script for formatting outputs and exporting env vars
+# These are helper functions for formatting outputs and exporting env vars
 #
 
-# Configuration
+# --- Configuration ---
 export FLAKE_PATH="${FLAKE_PATH:-.}"
 export MODULES_PATH="${MODULES_PATH:-${FLAKE_PATH}/build}"
 export ASSETS_PATH="${ASSETS_PATH:-${FLAKE_PATH}/assets}"
 export USER="${USER}"
 export HOME_DIR="${HOME}"
 
-# Unicode Symbols
+# --- Unicode Symbols ---
 export SYM_SUCCESS="▲"
 export SYM_PENDING="❖"
 export SYM_PARTIAL="◐"
@@ -21,7 +21,7 @@ export SYM_INFO="✗"
 export BAR_HEAVY="━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 export BAR_LIGHT="─────────────────────────────────────────────────────────────────────────────"
 
-# Color functions
+# --- Color Functions ---
 function red() {
     echo -e "\033[0;31m$1\033[0m"
     if [ -n "${2-}" ]; then
@@ -64,7 +64,7 @@ function cyan() {
     fi
 }
 
-# Print functions with symbols
+# --- Print Functions With Symbols ---
 function print_pending() {
     yellow "${SYM_PENDING} $1"
 }
@@ -85,7 +85,7 @@ function print_info() {
     cyan "${SYM_BULLET} $1"
 }
 
-# Header printing
+# --- Header Printing ---
 function print_header() {
     cyan "$BAR_HEAVY"
     cyan "${SYM_SUCCESS} $1"
@@ -93,7 +93,7 @@ function print_header() {
     echo
 }
 
-# Ask yes or no, with yes being the default
+# --- Ask Yes Or No, With Yes Being The Default ---
 function yes_or_no() {
     echo -en "\033[0;34m[?] $* [y/n] (default: y): \033[0m"
     while true; do
@@ -106,7 +106,7 @@ function yes_or_no() {
     done
 }
 
-# Ask yes or no, with no being the default
+# --- Ask Yes Or No, With No Being The Default ---
 function no_or_yes() {
     echo -en "\033[0;34m[?] $* [y/n] (default: n): \033[0m"
     while true; do
@@ -119,7 +119,7 @@ function no_or_yes() {
     done
 }
 
-# Get installed packages list
+# --- Get Installed Packages List ---
 function get_installed_packages() {
     local tmpfile=$(mktemp)
     nix-env -q | cut -d- -f1 | sort -u >"$tmpfile"
@@ -127,7 +127,7 @@ function get_installed_packages() {
     echo "$tmpfile"
 }
 
-# Check if a directory is a system directory that should be preserved
+# --- Check If A Directory Is A System Directory That Should Be Preserved ---
 function is_system_directory() {
     local dirname="$1"
     [[ "$dirname" =~ ^(systemd|fontconfig|gtk-[0-9]|user-dirs|mimeapps|dconf|pulse)$ ]]

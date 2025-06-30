@@ -1,156 +1,23 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC1091
 #
-# This script updates application caches interactively
+# This script provides a menu interface for updating application caches
 #
 
-# SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# --- Imports ---
 SCRIPT_DIR="$(dirname "$(realpath "${BASH_SOURCE[0]}")")"
 COMMON_DIR="$(dirname "$SCRIPT_DIR")/common"
-source "${SCRIPT_DIR}/rh-helpers.sh"
-source "${COMMON_DIR}/bootstrap.sh"
+CACHE_BUILDER="$COMMON_DIR/build-caches.sh"
 
-# --- Variables for fuzzel-apps cache ---
-APP_NAME="rhodium-apps"
-APP_TITLE="Rhodium's Apps"
-PADDING_ARGS="35 20 20" # Column padding: name, type, categories
+if [[ ! -f "$CACHE_BUILDER" ]]; then
+    echo "Error: Cache builder script not found at $CACHE_BUILDER"
+    exit 1
+fi
 
-# Function to build fuzzel-apps cache
-build_fuzzel_cache() {
-    local APP_DIR="$HOME/.local/share/applications"
-    local CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/$APP_NAME"
-    local CACHE_FILE="$CACHE_DIR/formatted_apps.cache"
-    
-    print_pending "Building fuzzel-apps cache..."
-    
-    # Create cache directory
-    mkdir -p "$CACHE_DIR"
-    
-    # Parse padding arguments
-    local -a paddings
-    read -ra paddings <<<"$PADDING_ARGS"
-    
-    # Parse all desktop files in a single pass
-    declare -A name_map type_map cat_map
-    
-    # Read all desktop files once and extract all fields
-    for file in "$APP_DIR"/rh-*.desktop; do
-        [[ -f "$file" ]] || continue
-        
-        # Parse the file in a single pass
-        while IFS='=' read -r key value; do
-            case "$key" in
-            "Name")
-                name_map["$file"]="$value"
-                ;;
-            "X-Entry-Type")
-                type_map["$file"]="$value"
-                ;;
-            "X-Category")
-                cat_map["$file"]="$value"
-                ;;
-            esac
-        done <"$file"
-    done
-    
-    # Sort files by name
-    readarray -t sorted_files < <(
-        for file in "${!name_map[@]}"; do
-            printf '%s\t%s\n' "${name_map[$file]}" "$file"
-        done | sort -k1,1 | cut -f2
-    )
-    
-    # Build cache file in sorted order
-    {
-        for file in "${sorted_files[@]}"; do
-            name="${name_map[$file]}"
-            entry_type="${type_map[$file]:-app}"
-            
-            # Parse and format categories
-            categories="${cat_map[$file]:-}"
-            if [[ -n "$categories" ]]; then
-                # Split by semicolon, capitalize each, join with comma
-                IFS=';' read -ra cat_array <<<"$categories"
-                formatted_cats=""
-                for cat in "${cat_array[@]}"; do
-                    # Trim whitespace and capitalize
-                    cat="${cat#"${cat%%[![:space:]]*}"}"
-                    cat="${cat%"${cat##*[![:space:]]}"}"
-                    [[ -n "$cat" ]] && formatted_cats+="${formatted_cats:+, }${cat^}"
-                done
-                categories="$formatted_cats"
-            else
-                categories="App"
-            fi
-            
-            # Build padded entry
-            local formatted_text=""
-            local parts=("$(provide_fuzzel_entry) $name" "${entry_type^}" "$categories")
-            local num_parts=${#parts[@]}
-            local num_paddings=${#paddings[@]}
-            
-            for ((i = 0; i < num_parts; i++)); do
-                local part="${parts[i]}"
-                if ((i < num_paddings)); then
-                    local pad_to=${paddings[i]}
-                    formatted_text+=$(printf "%-*s" "$pad_to" "$part")
-                else
-                    formatted_text+="$part"
-                fi
-                if ((i < num_parts - 1)); then
-                    formatted_text+=" "
-                fi
-            done
-            
-            # Store formatted line and filename separated by tab
-            printf '%s\t%s\n' "$formatted_text" "$file"
-        done
-    } >"$CACHE_FILE"
-    
-    print_success "Fuzzel-apps cache built"
-}
+source "${COMMON_DIR}/helpers.sh"
 
-# Function to update bat cache
-update_bat_cache() {
-    print_pending "Updating bat cache..."
-    if bat cache --build; then
-        print_success "Bat cache updated"
-    else
-        print_error "Failed to update bat cache"
-    fi
-}
-
-# Function to update tldr cache
-update_tldr_cache() {
-    print_pending "Updating tldr cache..."
-    if tldr --update; then
-        print_success "TLDR cache updated"
-    else
-        print_error "Failed to update tldr cache"
-    fi
-}
-
-# Function to update unicode icons cache
-update_icons_cache() {
-    print_pending "Updating unicode icons cache..."
-    if python3 "${COMMON_DIR}/build-icons-cache.py"; then
-        print_success "Unicode icons cache updated"
-    else
-        print_error "Failed to update unicode icons cache"
-    fi
-}
-
-# Function to update nix index
-update_nix_index() {
-    print_pending "Updating nix index..."
-    if nix-index; then
-        print_success "Nix index updated"
-    else
-        print_error "Failed to update nix index"
-    fi
-}
-
-# Interactive menu function
+# --- Functions ---
+# Interactive Menu Function
 show_menu() {
     echo ""
     print_header "Select caches to update:"
@@ -166,9 +33,29 @@ show_menu() {
     echo ""
 }
 
-# Main function
+# Function To Convert Menu Choices To Cache-builder Arguments
+build_args() {
+    local choices=("$@")
+    local args=()
+    
+    for choice in "${choices[@]}"; do
+        case "$choice" in
+            1) args+=("--fuzzel") ;;
+            2) args+=("--bat") ;;
+            3) args+=("--tldr") ;;
+            4) args+=("--icons") ;;
+            5) args+=("--nix") ;;
+            6) args+=("--all") ;;
+            7) args+=("--all-except-nix") ;;
+        esac
+    done
+    
+    echo "${args[@]}"
+}
+
+# Main Function
 main() {
-    local selections=()
+    local choices
     local choice
     
     while true; do
@@ -194,42 +81,29 @@ main() {
                 fi
             done
             
-            # Process selections
-            selections=("${choices[@]}")
+            # Build arguments and execute cache builder
+            local args
+            args=$(build_args "${choices[@]}")
+            
+            if [[ -n "$args" ]]; then
+                echo ""
+                print_pending "Starting cache updates..."
+                echo ""
+                
+                # Execute cache builder with arguments
+                if "$CACHE_BUILDER" $args; then
+                    echo ""
+                    print_success "Cache updates completed!"
+                else
+                    echo ""
+                    print_error "Some cache updates failed!"
+                    exit 1
+                fi
+            fi
+            
             break
         fi
     done
-    
-    echo ""
-    print_pending "Starting cache updates..."
-    echo ""
-    
-    # Execute selected updates
-    for choice in "${selections[@]}"; do
-        case "$choice" in
-            1) build_fuzzel_cache ;;
-            2) update_bat_cache ;;
-            3) update_tldr_cache ;;
-            4) update_icons_cache ;;
-            5) update_nix_index ;;
-            6) 
-                build_fuzzel_cache
-                update_bat_cache
-                update_tldr_cache
-                update_icons_cache
-                update_nix_index
-                ;;
-            7)
-                build_fuzzel_cache
-                update_bat_cache
-                update_tldr_cache
-                update_icons_cache
-                ;;
-        esac
-    done
-    
-    echo ""
-    print_success "Cache updates completed!"
 }
 
 main "$@"

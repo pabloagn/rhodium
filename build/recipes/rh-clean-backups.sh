@@ -4,9 +4,12 @@
 # This script cleans backup files
 #
 
+# --- Imports ---
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-source "${SCRIPT_DIR}/rh-helpers.sh"
+COMMON_DIR="$(dirname "$SCRIPT_DIR")/common"
+source "${COMMON_DIR}/helpers.sh"
 
+# --- Functions ---
 function main() {
     print_partial "This will remove all .backup and .bkp files"
     echo "Press Ctrl+C to cancel"

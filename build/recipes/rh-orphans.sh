@@ -3,9 +3,13 @@
 #
 # This script finds orphaned configuration directories with detailed analysis
 #
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-source "${SCRIPT_DIR}/rh-helpers.sh"
 
+# --- Imports ---
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+COMMON_DIR="$(dirname "$SCRIPT_DIR")/common"
+source "${COMMON_DIR}/helpers.sh"
+
+# --- Functions ---
 # Check if directory contains nix store symlinks
 has_nix_symlinks() {
     local dir="$1"

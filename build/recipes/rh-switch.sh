@@ -4,9 +4,12 @@
 # This script handles NixOS configuration switching with pre/post flight checks
 #
 
+# --- Imports ---
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-source "${SCRIPT_DIR}/rh-helpers.sh"
+COMMON_DIR="$(dirname "$SCRIPT_DIR")/common"
+source "${COMMON_DIR}/helpers.sh"
 
+# --- Functions ---
 function usage() {
     echo "Usage: $0 <host> [fast]"
     echo "Build and switch to NixOS configuration for the specified host"
@@ -80,8 +83,8 @@ function main() {
     if [ "$is_fast_mode" = false ]; then
         print_pending "Running post-build tasks..."
         source_user_vars
-        "${MODULES_PATH}/cache/build-caches.sh"
-        python3 "${MODULES_PATH}/cache/build-icons-cache.py"
+        "${COMMON_DIR}/build-caches.sh --all"
+        python3 "${COMMON_DIR}/build-icons-cache.py"
         reload_services
         print_success "System rebuild complete"
     else

@@ -282,12 +282,6 @@
       icon = "discord";
       description = "Discord TUI";
     };
-    element-web = {
-      binary = "element-web";
-      args = [];
-      icon = "element";
-      description = "Element Web (Matrix)";
-    };
     element-call = {
       binary = "element-call";
       args = [];

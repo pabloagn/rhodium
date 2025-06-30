@@ -1,15 +1,17 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC1091
+#
+# These are helper functions for executing actions and providing variables not related to formatting
+#
 
-# Variables
-# Default app name if not set by including script
+# --- Variables ---
 : "${APP_NAME:=DefaultApp}"
 : "${APP_TITLE:=DefaultApp}"
 FUZZEL_PROMPT="λ"
 FUZZEL_ENTRY="⊹"
 
-# --- Shared Functions ---
+# --- Notify To Client ---
 notify() {
-    # Notify to client
     local title="$1"
     local message="$2"
     shift 2
@@ -20,8 +22,8 @@ notify() {
     fi
 }
 
+# --- Copy Content To Clipboard ---
 copy_to_clipboard() {
-    # Copy content to clipboard
     local text="$1"
     if command -v wl-copy &>/dev/null; then
         echo -n "$text" | wl-copy
@@ -34,23 +36,24 @@ copy_to_clipboard() {
     fi
 }
 
+# --- Fuzzel Providers ---
 provide_fuzzel_prompt() {
-    # Add a blank space after the symbol
+    # Add A Blank Space After The Symbol
     printf "%s " "$FUZZEL_PROMPT"
 }
 
 provide_fuzzel_entry() {
-    # Do not add blank space on this instance
+    # Do Not Add Blank Space On This Instance
     echo "$FUZZEL_ENTRY"
 }
 
 provide_fuzzel_mode() {
-    # Do not add blank space on this instance
+    # Do Not Add Blank Space On This Instance
     echo "--dmenu"
 }
 
+# --- Populate Fuzzel Menu From Raw "label:command" Array ---
 decorate_fuzzel_menu() {
-    # Populate fuzzel menu from raw "Label:command" array
     # Usage:
     #   decorate_fuzzel_menu raw_array[@]
     # After calling, two variables will be available:
@@ -70,8 +73,8 @@ decorate_fuzzel_menu() {
     done
 }
 
+# --- Returns The Number Of Non-empty Menu_labels (used For --lines Argument) ---
 get_fuzzel_line_count() {
-    # Returns the number of non-empty menu_labels (used for --lines argument)
 
     local count=0
     for label in "${menu_labels[@]}"; do

@@ -4,9 +4,12 @@
 # This script checks for untracked files in the repository
 #
 
+# --- Imports ---
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-source "${SCRIPT_DIR}/rh-helpers.sh"
+COMMON_DIR="$(dirname "$SCRIPT_DIR")/common"
+source "${COMMON_DIR}/helpers.sh"
 
+# --- Functions ---
 function check_untracked_files() {
     print_header "UNTRACKED FILES"
 
