@@ -1,8 +1,9 @@
 {...}: {
   imports = [
-    ./tty.nix
     ./gdm.nix
+    ./getty.nix
     ./regreet.nix
     ./sddm.nix
+    ./tty.nix
   ];
 }

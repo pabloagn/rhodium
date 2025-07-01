@@ -36,7 +36,7 @@
   # ---------------------------------
   # Display Manager
   manager = {
-    gdm.enable = true;
+    gdm.enable = false;
   };
 
   # Extra Services

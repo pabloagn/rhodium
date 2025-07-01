@@ -5,12 +5,12 @@
     eza # Modern ls replacement
     file # Determine file types
     gawk # GNU's awk
+    lsof # Tool to list open files
     ncdu # NCurses disk usage analyzer
     p7zip # 7-Zip archiver
-    unzip # Extract ZIP archives
     rar # RAR archives
-    zstd # Compression algorithm (optional Emacs dep)
+    unzip # Extract ZIP archives
     zip # Create ZIP archives
-    lsof # Tool to list open files
+    zstd # Compression algorithm (optional Emacs dep)
   ];
 }

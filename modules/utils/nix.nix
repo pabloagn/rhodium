@@ -1,10 +1,10 @@
 {pkgs, ...}: {
   environment.systemPackages = with pkgs; [
-    nil # Nix language server (original)
-    nixd # Nix language server (newer)
-    nixpkgs-fmt # Formatter
-    nixfmt-rfc-style # Official formatter
     alejandra # Opinionated formatter
+    nil # Nix language server (original)
     nix-ld # Run unpatched binaries on NixOS - needs system-wide access
+    nixd # Nix language server (newer)
+    nixfmt-rfc-style # Official formatter
+    nixpkgs-fmt # Formatter
   ];
 }

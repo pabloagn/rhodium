@@ -1,10 +1,10 @@
 {pkgs, ...}: {
   environment.systemPackages = with pkgs; [
     curl # Command line HTTP client
-    xh # A better curl
     dig # DNS lookup utility
+    ipfetch # Neofetch for IP addresses
     wget # Web file downloader
     wirelesstools # Wireless network configuration tools
-    ipfetch # Neofetch for IP addresses
+    xh # A better curl
   ];
 }

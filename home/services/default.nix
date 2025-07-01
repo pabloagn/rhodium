@@ -3,7 +3,7 @@
     ./eww.nix
     ./firefox.nix
     ./ghostty.nix
-    ./keepassxc.nix
+    ./keyring.nix
     ./kitty.nix
     ./mako.nix
     ./neovim.nix
