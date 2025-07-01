@@ -22,7 +22,8 @@ in
     shlvl = {
       format = "[$shlvl]($style) ";
       style = "bold ${colors.base0C}";
-      threshold = 2;
+      # HACK: We increase threshold from 2 to 3 since niri creates new shell session, so it always shows 2
+      threshold = 3;
       repeat = true;
       disabled = false;
     };
