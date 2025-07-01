@@ -56,6 +56,10 @@
     rh-swaybg.enable = true;
     rh-wlsunset.enable = false;
     rh-neovim-daemon.enable = false;
+    rh-keepassxc-keyring = {
+      enable = true;
+      minimizeToTray = false;
+    };
   };
 
   home = {

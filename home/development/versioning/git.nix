@@ -55,6 +55,7 @@ in {
       enable = false; # View file diffs. Either this or delta.
     };
   };
+
   programs.gh = {
     enable = true; # GitHub CLI Tool
   };

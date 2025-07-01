@@ -1,9 +1,8 @@
 {...}: {
   imports = [
-    ./keys.nix
-    ./pass.nix
-    ./privacy.nix
-    ./sops.nix
-    ./ssh.nix
+    ./auth
+    ./encryption
+    ./network
+    # ./secrets
   ];
 }

@@ -22,6 +22,7 @@ in {
         PartOf = ["default.target"];
         After = ["default.target"];
       };
+
       Service = {
         Type = "exec";
         ExecStart = "${pkgs.neovim}/bin/nvim --headless --listen ${cfg.socketPath}";
@@ -29,9 +30,11 @@ in {
         Restart = "on-failure";
         RestartSec = 5;
       };
+
       Install = {
         WantedBy = ["default.target"];
       };
+
     };
     # Alias for connecting to daemon
     home.shellAliases.nvim = "${pkgs.neovim}/bin/nvim --server ${cfg.socketPath} --remote-ui";

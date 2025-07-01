@@ -16,7 +16,6 @@ in {
         Description = "ElKowar's Wacky Widgets";
         PartOf = ["graphical-session.target"];
       };
-
       Service = {
         Environment = [
           "PATH=${config.home.profileDirectory}/bin:/run/current-system/sw/bin"
