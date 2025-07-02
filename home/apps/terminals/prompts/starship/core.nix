@@ -599,7 +599,7 @@ in {
     git_branch = {
       disabled = false;
       format = "on [$symbol$branch$ahead_behind]($style) ";
-      style = "bold #A4A7A4";
+      style = "bold ${c.color8}";
       symbol = " ";
     };
     git_state = {
@@ -629,6 +629,12 @@ in {
     };
     git_commit = {
       tag_symbol = "◈";
+    };
+    git_metrics = {
+      disabled = false;
+      added_style = "bold ${colors.color20}";
+      deleted_style = "bold ${colors.color9}";
+      format = "[\\[⊕ $added]($added_style) ∙ [⊖ $deleted]($deleted_style)] ";
     };
 
     # --- Others ---

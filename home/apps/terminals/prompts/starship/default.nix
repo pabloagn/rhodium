@@ -2,7 +2,8 @@
   imports = [
     # --- Main Modules ---
     ./core.nix
-    # ./custom.nix
+    # ./custom-langs.nix
+    ./custom-rhodium.nix
     ./format.nix
   ];
 }
