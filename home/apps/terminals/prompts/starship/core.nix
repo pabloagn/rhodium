@@ -57,7 +57,7 @@ in {
     };
 
     cmd_duration = {
-      format = "⋈ [$duration]($style) ";
+      format = "⑄ [$duration]($style) ";
       style = "#928A7C";
     };
 

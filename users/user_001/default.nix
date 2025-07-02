@@ -26,7 +26,7 @@
     ../../home/virtualization
 
     # Overlays
-    ../../home/overlays
+    # ../../home/overlays
   ];
 
   # Pass args to all modules
