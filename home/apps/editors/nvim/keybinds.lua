@@ -169,6 +169,146 @@ end, {
 	desc = "Remove current file from Harpoon",
 })
 
+-- --- Marks ---
+-- Letter marks
+vim.keymap.set("n", "<leader>pa", function()
+	require("marks").set()
+end, {
+	noremap = true,
+	silent = true,
+	desc = "Set mark (wait for letter)",
+})
+
+-- Set next
+vim.keymap.set("n", "<leader>p,", function()
+	require("marks").set_next()
+end, {
+	noremap = true,
+	silent = true,
+	desc = "Set next available mark",
+})
+
+-- Toggle mark at current line
+vim.keymap.set("n", "<leader>p;", function()
+	require("marks").toggle()
+end, {
+	noremap = true,
+	silent = true,
+	desc = "Toggle mark at line",
+})
+
+-- Delete marks
+vim.keymap.set("n", "<leader>p<space>", function()
+	require("marks").delete_line()
+end, {
+	noremap = true,
+	silent = true,
+	desc = "Delete mark on line",
+})
+
+vim.keymap.set("n", "<leader>pD", function()
+	require("marks").delete_buf()
+end, {
+	noremap = true,
+	silent = true,
+	desc = "Delete all marks in buffer",
+})
+
+-- Navigation
+vim.keymap.set("n", "<leader>p]", function()
+	require("marks").next()
+end, {
+	noremap = true,
+	silent = true,
+	desc = "Next mark",
+})
+
+vim.keymap.set("n", "<leader>p[", function()
+	require("marks").prev()
+end, {
+	noremap = true,
+	silent = true,
+	desc = "Previous mark",
+})
+
+vim.keymap.set("n", "<leader>p:", function()
+	require("marks").preview()
+end, {
+	noremap = true,
+	silent = true,
+	desc = "Preview mark",
+})
+
+-- Delete mark by letter
+vim.keymap.set("n", "<leader>pd", function()
+	require("marks").delete()
+end, {
+	noremap = true,
+	silent = true,
+	desc = "Delete mark (wait for letter)",
+})
+
+-- Bookmarks
+-- for i = 0, 9 do
+-- 	vim.keymap.set("n", "<leader>p" .. i, function()
+-- 		require("marks").set_bookmark" .. i .. "()
+-- 	end, {
+-- 		noremap = true,
+-- 		silent = true,
+-- 		desc = "Set bookmark " .. i,
+-- 	})
+-- 	
+-- 	vim.keymap.set("n", "<leader>pd" .. i, function()
+-- 		require("marks").delete_bookmark" .. i .. "()
+-- 	end, {
+-- 		noremap = true,
+-- 		silent = true,
+-- 		desc = "Delete bookmark group " .. i,
+-- 	})
+-- end
+
+-- Bookmark navigation
+vim.keymap.set("n", "<leader>p}", function()
+	require("marks").next_bookmark()
+end, {
+	noremap = true,
+	silent = true,
+	desc = "Next bookmark (same type)",
+})
+
+vim.keymap.set("n", "<leader>p{", function()
+	require("marks").prev_bookmark()
+end, {
+	noremap = true,
+	silent = true,
+	desc = "Previous bookmark (same type)",
+})
+
+vim.keymap.set("n", "<leader>pd=", function()
+	require("marks").delete_bookmark()
+end, {
+	noremap = true,
+	silent = true,
+	desc = "Delete bookmark under cursor",
+})
+
+-- Bracket navigation without leader
+vim.keymap.set("n", "]m", function()
+	require("marks").next()
+end, {
+	noremap = true,
+	silent = true,
+	desc = "Next mark",
+})
+
+vim.keymap.set("n", "[m", function()
+	require("marks").prev()
+end, {
+	noremap = true,
+	silent = true,
+	desc = "Previous mark",
+})
+
 -- --- Yazi ---
 vim.keymap.set("n", "<leader>ac", "<cmd>Yazi<CR>", {
 	noremap = true,

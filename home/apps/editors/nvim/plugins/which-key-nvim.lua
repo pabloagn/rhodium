@@ -11,7 +11,7 @@ require("which-key").setup({
 	},
 	-- Layout
 	layout = {
-		width = { min = 20 },
+		width = { min = 50 },
 		spacing = 3,
 	},
 	-- Custom key symbols
@@ -71,9 +71,10 @@ require("which-key").add({
 	{ "<leader>l", group = "ψ LSP" },
 	{ "<leader>m", group = "⠿ Multicursor" },
 	{ "<leader>o", group = "◫ Outline" },
+	{ "<leader>p", group = "† Pins" },
 	{ "<leader>r", group = "⍋ Replace" },
 	{ "<leader>s", group = "⌽ Sort" },
-	{ "<leader>t", group = "† Trouble" },
+	{ "<leader>t", group = "♰ Trouble" },
 	{ "<leader>x", group = "✕ Noice" },
 	{ "<leader>z", group = "± Fold" },
 
@@ -192,16 +193,23 @@ require("which-key").add({
 	{ "<leader>hp", desc = "◁ Previous mark" },
 	{ "<leader>hc", desc = "⊗ Clear all marks" },
 	{ "<leader>hr", desc = "⊖ Remove current file" },
-
-	-- Harpoon quick navigation (Alt keys)
 	{ "<M-h>", desc = "⊰ Quick mark 1" },
 	{ "<M-j>", desc = "⊰ Quick mark 2" },
 	{ "<M-k>", desc = "⊰ Quick mark 3" },
 	{ "<M-l>", desc = "⊰ Quick mark 4" },
-
-	-- Harpoon bracket navigation
 	{ "]h", desc = "⇢ Next Harpoon mark" },
 	{ "[h", desc = "⇠ Previous Harpoon mark" },
+
+	-- --- Marks ---
+	{ "<leader>pa", desc = "Set mark (wait for letter)" },
+	{ "<leader>p,", desc = "Set next available mark" },
+	{ "<leader>p;", desc = "Toggle mark at line" },
+	{ "<leader>p<space>", desc = "Delete mark on line" },
+	{ "<leader>pD", desc = "Delete all marks in buffer" },
+	{ "<leader>p]", desc = "Next mark" },
+	{ "<leader>p[", desc = "Previous mark" },
+	{ "<leader>p:", desc = "Preview mark" },
+	{ "<leader>pd", desc = "Delete mark (wait for letter)" },
 
 	-- --- Trouble ---
 	{ "<leader>tb", desc = "◉ Buffer diagnostics" },

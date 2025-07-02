@@ -1,4 +1,5 @@
 -- Silence nvim plugin deprecation warnings
+-- --- Marks ---
 vim.notify_original = vim.notify
 
 vim.notify = function(msg, level, opts)

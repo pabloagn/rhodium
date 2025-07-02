@@ -11,3 +11,4 @@ harpoon:setup({
   },
 })
 
+harpoon:extend(require("harpoon.extensions").builtins.highlight_current_file())

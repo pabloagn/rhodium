@@ -1,3 +1,4 @@
+-- multicursors.lua
 require("multicursors").setup({
 	-- --- Core Settings ---
 	DEBUG_MODE = false,
@@ -13,17 +14,30 @@ require("multicursors").setup({
 		insert = "i",
 	},
 
-	-- --- Disable the hint window completely ---
-	hint_config = false,
-
-	-- --- Disable hint generation ---
-	generate_hints = {
-		normal = false,
-		insert = false,
-		extend = false,
+	-- --- Hint Window Configuration ---
+	hint_config = {
+		type = "window",
+		position = "bottom-right",
+		offset = 0,
+		show_name = false,
+		funcs = {},
+		float_opts = {
+			border = "single",
+		},
 	},
 
-	-- Custom normal mode mappings with unicode symbols
+	-- --- Generate Hints Configuration ---
+	generate_hints = {
+		normal = true,
+		insert = true,
+		extend = true,
+		config = {
+			column_count = 1,
+			max_hint_length = 25,
+		},
+	},
+
+	-- Custom normal mode mappings
 	normal_keys = {
 		-- Clear other selections, keep main
 		[","] = {
@@ -31,7 +45,7 @@ require("multicursors").setup({
 				local N = require("multicursors.normal_mode")
 				N.clear_others()
 			end,
-			opts = { desc = "⊗ Clear others" },
+			opts = { desc = "Clear others" },
 		},
 
 		-- Comment all selections
@@ -43,7 +57,7 @@ require("multicursors").setup({
 					vim.cmd("normal " .. line_count .. "gcc")
 				end)
 			end,
-			opts = { desc = "⍝ Comment selections" },
+			opts = { desc = "Comment selections" },
 		},
 
 		-- Additional multicursor operations
@@ -51,28 +65,28 @@ require("multicursors").setup({
 			method = function()
 				require("multicursors.normal_mode").find_next()
 			end,
-			opts = { desc = "⇢ Find next" },
+			opts = { desc = "Find next" },
 		},
 
 		["<C-p>"] = {
 			method = function()
 				require("multicursors.normal_mode").find_prev()
 			end,
-			opts = { desc = "⇠ Find prev" },
+			opts = { desc = "Find prev" },
 		},
 
 		["<C-x>"] = {
 			method = function()
 				require("multicursors.normal_mode").skip()
 			end,
-			opts = { desc = "⤴ Skip current" },
+			opts = { desc = "Skip current" },
 		},
 
 		["<C-a>"] = {
 			method = function()
 				require("multicursors.normal_mode").find_all()
 			end,
-			opts = { desc = "⊛ Find all" },
+			opts = { desc = "Find all" },
 		},
 
 		-- Alignment operations
@@ -83,7 +97,7 @@ require("multicursors").setup({
 					vim.cmd("normal ==")
 				end)
 			end,
-			opts = { desc = "⊞ Align selections" },
+			opts = { desc = "Align selections" },
 		},
 
 		-- Indentation
@@ -95,7 +109,7 @@ require("multicursors").setup({
 					vim.cmd("normal " .. line_count .. ">>")
 				end)
 			end,
-			opts = { desc = "↦ Indent right" },
+			opts = { desc = "Indent right" },
 		},
 
 		["<"] = {
@@ -106,7 +120,7 @@ require("multicursors").setup({
 					vim.cmd("normal " .. line_count .. "<<")
 				end)
 			end,
-			opts = { desc = "↤ Indent left" },
+			opts = { desc = "Indent left" },
 		},
 
 		-- Case operations
@@ -117,7 +131,7 @@ require("multicursors").setup({
 					vim.cmd("normal ~")
 				end)
 			end,
-			opts = { desc = "⌘ Toggle case" },
+			opts = { desc = "Toggle case" },
 		},
 
 		["gu"] = {
@@ -127,7 +141,7 @@ require("multicursors").setup({
 					vim.cmd("normal gul")
 				end)
 			end,
-			opts = { desc = "⇩ Lowercase" },
+			opts = { desc = "Lowercase" },
 		},
 
 		["gU"] = {
@@ -137,12 +151,12 @@ require("multicursors").setup({
 					vim.cmd("normal gUl")
 				end)
 			end,
-			opts = { desc = "⇧ Uppercase" },
+			opts = { desc = "Uppercase" },
 		},
 	},
 })
 
--- Highlight customization
+-- Highlight customization for multicursor
 vim.api.nvim_set_hl(0, "MultiCursor", {
 	bg = "#22262D",
 	fg = "#D3C6AA",
@@ -154,4 +168,21 @@ vim.api.nvim_set_hl(0, "MultiCursorMain", {
 	fg = "#2D353B",
 	bold = true,
 	reverse = false,
+})
+
+vim.api.nvim_set_hl(0, "HydraRed", { fg = "#D3C6AA" })
+vim.api.nvim_set_hl(0, "HydraBlue", { fg = "#7FBBB3" })
+vim.api.nvim_set_hl(0, "HydraAmaranth", { fg = "#E67E80" })
+vim.api.nvim_set_hl(0, "HydraTeal", { fg = "#83C092" })
+vim.api.nvim_set_hl(0, "HydraPink", { fg = "#7FBBB3" })
+
+-- Override the hint window appearance
+vim.api.nvim_set_hl(0, "HydraHint", {
+	bg = "#090E13",
+	fg = "#8891A5",
+})
+
+vim.api.nvim_set_hl(0, "HydraBorder", {
+	fg = "#22262D",
+	bg = "#090E13",
 })
