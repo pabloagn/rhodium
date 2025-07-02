@@ -634,7 +634,7 @@ in {
       disabled = false;
       added_style = "bold ${colors.color12}";
       deleted_style = "bold ${colors.color9}";
-      format = "[\\[[$added]($added_style) ± [$deleted]($deleted_style)\\]]($added_style) ";
+      format = "\\[+$added]($added_style) [-$deleted]($deleted_style)\\] ";
     };
 
     # --- Others ---
