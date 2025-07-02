@@ -6,8 +6,8 @@
     prompt = "$jobs$character";
   in {
     format = ''
-      ${hostInfo} $fill ${nixInfo}
-      ${localInfo} $fill $time
+      ${hostInfo}
+      ${localInfo} $fill ${nixInfo}
       ${prompt}
     '';
     fill.symbol = " ";
