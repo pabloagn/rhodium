@@ -30,19 +30,19 @@
       bind -M default p 'commandline -i (wl-paste)'
 
       # --- Theme ---
-      set -g fish_color_autosuggestion A4A7A4 # kanso:color8      autosuggestions (muted gray)
-      set -g fish_color_command        7FB4CA # kanso:color12     commands (bright blue)
-      set -g fish_color_comment        4B5F6F # kanso:color18     code comments (dark blue-gray)
-      set -g fish_color_cwd            7AA89F # kanso:color14     current working directory (bright cyan)
-      set -g fish_color_end            b6927b # kanso:color16     process separators (brown)
-      set -g fish_color_error          E46876 # kanso:color9      highlight potential errors (bright red)
-      set -g fish_color_escape         8ea4a2 # kanso:color6      character escapes (cyan)
-      set -g fish_color_match          938AA9 # kanso:color13     matching parenthesis (bright purple)
-      set -g fish_color_normal         C8C093 # kanso:color7      default color (light tan)
-      set -g fish_color_operator       E6C384 # kanso:color11     parameter expansion operators (bright yellow)
-      set -g fish_color_param          C8C093 # kanso:color7      regular command parameters (light tan)
-      set -g fish_color_quote          87a987 # kanso:color10     quoted blocks of text (bright green)
-      set -g fish_color_redirection    a292a3 # kanso:color5      IO redirections (purple)
+      set -g fish_color_autosuggestion 4B5F6F # autosuggestions #4B5F6F
+      set -g fish_color_command        7FB4CA # commands #7FB4CA
+      set -g fish_color_comment        4B5F6F # code comments #4B5F6F
+      set -g fish_color_cwd            7AA89F # current working directory (bright cyan)
+      set -g fish_color_end            b6927b # process separators (brown)
+      set -g fish_color_error          E46876 # highlight potential errors (bright red)
+      set -g fish_color_escape         8ea4a2 # character escapes (cyan)
+      set -g fish_color_match          938AA9 # matching parenthesis (bright purple)
+      set -g fish_color_normal         A2A5A2 # default color #A2A5A2
+      set -g fish_color_operator       E6C384 # parameter expansion operators (bright yellow)
+      set -g fish_color_param          A2A5A2 # regular command parameters #A2A5A2
+      set -g fish_color_quote          87a987 # quoted blocks of text (bright green)
+      set -g fish_color_redirection    a292a3 # IO redirections (purple)
       set -g fish_color_search_match   --background E6C384 # kanso:color11  highlight search matches (bright yellow bg)
       set -g fish_color_selection      E6C384 # kanso:color11     text selection (bright yellow)
 # color for fish default prompts item

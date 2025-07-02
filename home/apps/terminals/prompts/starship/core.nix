@@ -93,16 +93,16 @@ in {
     time = {
       format = "\\[[$time]($style)\\]";
       style = "#4B5F6F";
-      disabled = false;
+      disabled = true;
     };
     aws = {
       disabled = false;
       symbol = " ";
-      format = "on [$symbol$profile(\\($region\\))]($style)";
+      format = "${i.icon01}](${viaColor}) [$symbol$profile(\\($region\\))]($style)";
     };
     gcloud = {
       disabled = true;
-      format = "on [$symbol$active(/$project)(\\($region\\))]($style)";
+      format = "${i.icon01}](${viaColor}) [$symbol$active(/$project)(\\($region\\))]($style)";
       symbol = "󱇶 ";
     };
     azure = {
@@ -598,7 +598,7 @@ in {
     # --- Version Control ---
     git_branch = {
       disabled = false;
-      format = "on [$symbol$branch$ahead_behind]($style) ";
+      format = "${i.icon01}](${viaColor}) [$symbol$branch]($style) ";
       style = "bold ${c.color8}";
       symbol = " ";
     };
@@ -612,7 +612,7 @@ in {
       revert = "↺";
     };
     git_status = {
-      format = "[\\[$all_status\\]]($style) ";
+      format = "[\\[$all_status$ahead_behind\\]]($style) ";
       style = "bold ${colors.color1}";
       ahead = "⇡";
       behind = "⇣";
@@ -632,9 +632,9 @@ in {
     };
     git_metrics = {
       disabled = false;
-      added_style = "bold ${colors.color20}";
+      added_style = "bold ${colors.color12}";
       deleted_style = "bold ${colors.color9}";
-      format = "[\\[⊕ $added]($added_style) ∙ [⊖ $deleted]($deleted_style)] ";
+      format = "[\\[[$added]($added_style) ± [$deleted]($deleted_style)\\]]($added_style) ";
     };
 
     # --- Others ---

@@ -37,8 +37,8 @@ in {
     custom.rhodium = {
       command = "echo 'Rh'";
       when = "true";
-      format = "[$output]($style) ";
-      style = "bold #A4A7A4";
+      format = "[$output]($style) ${i.icon01} ";
+      style = "#A4A7A4";
     };
   };
 }
