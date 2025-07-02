@@ -56,7 +56,7 @@ require("which-key").setup({
 	},
 })
 
--- Group Definitions
+-- --- Group Definitions ---
 require("which-key").add({
 	-- Core groups
 	{ "<leader>a", group = "◈ Yazi" },
@@ -66,6 +66,7 @@ require("which-key").add({
 	{ "<leader>e", group = "∆ Edit" },
 	{ "<leader>f", group = "⌆ Find" },
 	{ "<leader>g", group = "⠮ Git" },
+	{ "<leader>h", group = "⊰ Harpoon" },
 	{ "<leader>i", group = "↦ Indent" },
 	{ "<leader>l", group = "ψ LSP" },
 	{ "<leader>m", group = "⠿ Multicursor" },
@@ -75,141 +76,167 @@ require("which-key").add({
 	{ "<leader>t", group = "† Trouble" },
 	{ "<leader>x", group = "✕ Noice" },
 	{ "<leader>z", group = "± Fold" },
+
 	-- Buffer subgroups
 	{ "<leader>bc", group = "⊗ Close" },
 	{ "<leader>bg", group = "⊙ Group" },
 	{ "<leader>bm", group = "⊚ Move" },
 	{ "<leader>bs", group = "⊛ Sort" },
+
 	-- Comment subgroups
 	{ "<leader>cs", group = "⇄ Swap" },
+
 	-- Noice subgroup
 	{ "<leader>xn", group = "◊ Noice" },
+
 	-- Non-leader groups for navigation
 	{ "]", group = "⇢ Next" },
 	{ "[", group = "⇠ Prev" },
 	{ "g", group = "⟐ Go" },
 	{ "g[", group = "⇤ First" },
 	{ "g]", group = "⇥ Last" },
+
 	-- FtPlugin
 	{ ";", group = "◈ FileType" },
 })
 
--- Individual keybind descriptions
+-- --- Individual Keybind Descriptions ---
 require("which-key").add({
 	-- General
 	{ "<Esc>", desc = "⊘ Clear search highlight" },
+	{ "<leader>D", desc = "⊖ Delete entire buffer" },
 	{ "<leader>n", desc = "№ Toggle line numbers" },
 	{ "<leader>y", desc = "⊕ Copy entire buffer" },
-	{ "<leader>D", desc = "⊖ Delete entire buffer" },
 
 	-- Yazi
 	{ "<leader>ac", desc = "◈ Open on current directory" },
 	{ "<leader>aw", desc = "◉ Open on working directory" },
 
 	-- Outline/Aerial
-	{ "<leader>oa", desc = "◫ Toggle sidebar" },
 	{ "<leader>oA", desc = "◬ Toggle navigation" },
+	{ "<leader>oa", desc = "◫ Toggle sidebar" },
 	{ "<leader>of", desc = "◪ Focus sidebar" },
 	{ "{", desc = "∧ Next symbol" },
 	{ "}", desc = "∨ Previous symbol" },
 
 	-- Comment
-	{ "<leader>cc", desc = "≈ Toggle line/count" },
-	{ "<leader>ca", desc = "⊡ Append comment" },
 	{ "<leader>cA", desc = "≡ Comment all lines" },
-	{ "<leader>ct", desc = "✓ Insert TODO" },
-	{ "<leader>cf", desc = "✗ Insert FIX" },
-	{ "<leader>cn", desc = "※ Insert NOTE" },
-	{ "<leader>ch", desc = "⊡ Insert HACK" },
-	{ "<leader>cw", desc = "⚠ Insert WARN" },
-	{ "<leader>cp", desc = "⊕ Insert PERF" },
-	{ "<leader>ce", desc = "⊝ Insert TEST" },
-	{ "<leader>cd", desc = "⊙ Insert DOCS" },
 	{ "<leader>cD", desc = "☑ Insert DONE" },
-	{ "<leader>csd", desc = "⇄ Toggle TODO/DONE" },
+	{ "<leader>ca", desc = "⊡ Append comment" },
+	{ "<leader>cc", desc = "≈ Toggle line/count" },
+	{ "<leader>cd", desc = "⊙ Insert DOCS" },
+	{ "<leader>ce", desc = "⊝ Insert TEST" },
+	{ "<leader>cf", desc = "✗ Insert FIX" },
+	{ "<leader>ch", desc = "⊡ Insert HACK" },
 	{ "<leader>cl", desc = "≣ List buffer TODOs" },
+	{ "<leader>cn", desc = "※ Insert NOTE" },
+	{ "<leader>cp", desc = "⊕ Insert PERF" },
+	{ "<leader>csd", desc = "⇄ Toggle TODO/DONE" },
+	{ "<leader>ct", desc = "✓ Insert TODO" },
+	{ "<leader>cw", desc = "⚠ Insert WARN" },
 
-	-- Edit
+	-- --- Edit ---
 	{ "<leader>er", desc = "⊹ Replace buffer with clipboard" },
 
-	-- Replace (Visual)
+	-- --- Replace (visual) ---
 	{ "<leader>rv", desc = "⍨ Replace visual selection", mode = "v" },
 
-	-- Replace (Spectre)
+	-- --- Replace (spectre) ---
+	{ "<leader>rf", desc = "◐ Search in current file" },
 	{ "<leader>rt", desc = "◎ Toggle Spectre" },
 	{ "<leader>rw", desc = "◉ Search current word" },
-	{ "<leader>rf", desc = "◐ Search in current file" },
 
-	-- LSP Actions
-	{ "<leader>lh", desc = "◈ Show hover" },
-	{ "<leader>lf", desc = "⌘ Format (Conform)" },
-	{ "<leader>lr", desc = "⊛ Rename symbol" },
+	-- --- Lsp Actions ---
 	{ "<leader>la", desc = "⌥ Code actions" },
+	{ "<leader>lf", desc = "⌘ Format (Conform)" },
+	{ "<leader>lh", desc = "◈ Show hover" },
+	{ "<leader>lr", desc = "⊛ Rename symbol" },
 
-	-- LSP Navigation
+	-- --- Lsp Navigation ---
 	{ "gd", desc = "◆ Go to definition" },
-	{ "gr", desc = "◇ Go to references" },
 	{ "gi", desc = "◊ Go to implementation" },
+	{ "gr", desc = "◇ Go to references" },
 	{ "gt", desc = "○ Go to type definition" },
 
-	-- Find/Search
-	{ "<leader>ff", desc = "⊡ Files" },
-	{ "<leader>fp", desc = "◉ Project files" },
-	{ "<leader>fb", desc = "⊞ Buffers" },
-	{ "<leader>fr", desc = "↺ Recent (Frecency)" },
-	{ "<leader>fg", desc = "⊙ Live grep with args" },
-	{ "<leader>fw", desc = "⊛ Word under cursor" },
-	{ "<leader>fd", desc = "⊖ Diagnostics (current)" },
+	-- --- Find/search ---
 	{ "<leader>fD", desc = "⊗ Diagnostics (all)" },
-	{ "<leader>fs", desc = "◈ Symbols (document)" },
+	{ "<leader>fH", desc = "⍉ Search history" },
 	{ "<leader>fS", desc = "◉ Symbols (workspace)" },
+	{ "<leader>fb", desc = "⊞ Buffers" },
+	{ "<leader>fc", desc = "⌘ Command history" },
+	{ "<leader>fd", desc = "⊖ Diagnostics (current)" },
+	{ "<leader>ff", desc = "⊡ Files" },
+	{ "<leader>fg", desc = "⊙ Live grep with args" },
 	{ "<leader>fh", desc = "◊ Help" },
 	{ "<leader>fk", desc = "⌨ Keymaps" },
 	{ "<leader>fo", desc = "⊙ Options" },
-	{ "<leader>fc", desc = "⌘ Command history" },
-	{ "<leader>fH", desc = "⍉ Search history" },
+	{ "<leader>fp", desc = "◉ Project files" },
+	{ "<leader>fr", desc = "↺ Recent (Frecency)" },
+	{ "<leader>fs", desc = "◈ Symbols (document)" },
 	{ "<leader>ft", desc = "✓ TODOs with priority" },
+	{ "<leader>fw", desc = "⊛ Word under cursor" },
 
-	-- Trouble
-	{ "<leader>tt", desc = "◈ Toggle diagnostics" },
+	-- --- Git ---
+	{ "<leader>gb", desc = "⌥ Branches" },
+	{ "<leader>gc", desc = "◎ Commits" },
+	{ "<leader>gs", desc = "≡ Status" },
+
+	-- --- Harpoon ---
+	{ "<leader>ha", desc = "⊕ Add file to marks" },
+	{ "<leader>hh", desc = "⊡ Toggle menu" },
+	{ "<leader>h1", desc = "① Jump to mark 1" },
+	{ "<leader>h2", desc = "② Jump to mark 2" },
+	{ "<leader>h3", desc = "③ Jump to mark 3" },
+	{ "<leader>h4", desc = "④ Jump to mark 4" },
+	{ "<leader>hn", desc = "▷ Next mark" },
+	{ "<leader>hp", desc = "◁ Previous mark" },
+	{ "<leader>hc", desc = "⊗ Clear all marks" },
+	{ "<leader>hr", desc = "⊖ Remove current file" },
+
+	-- Harpoon quick navigation (Alt keys)
+	{ "<M-h>", desc = "⊰ Quick mark 1" },
+	{ "<M-j>", desc = "⊰ Quick mark 2" },
+	{ "<M-k>", desc = "⊰ Quick mark 3" },
+	{ "<M-l>", desc = "⊰ Quick mark 4" },
+
+	-- Harpoon bracket navigation
+	{ "]h", desc = "⇢ Next Harpoon mark" },
+	{ "[h", desc = "⇠ Previous Harpoon mark" },
+
+	-- --- Trouble ---
 	{ "<leader>tb", desc = "◉ Buffer diagnostics" },
-	{ "<leader>tq", desc = "◊ Quickfix list" },
-	{ "<leader>tl", desc = "○ Location list" },
-	{ "<leader>tr", desc = "◇ LSP references" },
+	{ "<leader>tc", desc = "⊗ Close all" },
 	{ "<leader>td", desc = "◆ LSP definitions" },
 	{ "<leader>ti", desc = "◊ LSP implementations" },
+	{ "<leader>tl", desc = "○ Location list" },
+	{ "<leader>tq", desc = "◊ Quickfix list" },
+	{ "<leader>tr", desc = "◇ LSP references" },
 	{ "<leader>ts", desc = "⊛ Document symbols" },
-	{ "<leader>tc", desc = "⊗ Close all" },
+	{ "<leader>tt", desc = "◈ Toggle diagnostics" },
 
 	-- Trouble Navigation
-	{ "]T", desc = "▷ Next trouble item" },
 	{ "[T", desc = "◁ Previous trouble item" },
-	{ "g]T", desc = "⇥ Last trouble item" },
+	{ "]T", desc = "▷ Next trouble item" },
 	{ "g[T", desc = "⇤ First trouble item" },
+	{ "g]T", desc = "⇥ Last trouble item" },
 
-	-- Diagnostics
-	{ "<leader>dv", desc = "◫ Toggle virtual text" },
-	{ "<leader>dl", desc = "≡ Show line diagnostics" },
+	-- --- Diagnostics ---
 	{ "<leader>db", desc = "≣ Show buffer diagnostics" },
-	{ "]d", desc = "▸ Next diagnostic" },
+	{ "<leader>dl", desc = "≡ Show line diagnostics" },
+	{ "<leader>dv", desc = "◫ Toggle virtual text" },
 	{ "[d", desc = "◂ Previous diagnostic" },
-	{ "]e", desc = "▹ Next error" },
 	{ "[e", desc = "◃ Previous error" },
+	{ "]d", desc = "▸ Next diagnostic" },
+	{ "]e", desc = "▹ Next error" },
 
-	-- Indents
+	-- --- Indents ---
 	{ "<leader>ii", desc = "→ Smart indent" },
 	{ "<leader>io", desc = "← Smart outdent" },
 
-	-- Treesitter
+	-- --- Treesitter ---
 	{ "<leader>z", desc = "± Toggle treesitter folding" },
 
-	-- Buffers
-	{ "A-s", desc = "▶ Next buffer", mode = { "n", "v" } },
-	{ "A-S", desc = "◀ Previous buffer", mode = { "n", "v" } },
-	{ "<leader>w", desc = "✓ Save and close" },
-	{ "<leader>q", desc = "✗ Close without saving" },
-	{ "<leader>bmn", desc = "▷ Move next" },
-	{ "<leader>bmp", desc = "◁ Move prev" },
+	-- --- Buffers ---
 	{ "<leader>b1", desc = "① Go to buffer 1" },
 	{ "<leader>b2", desc = "② Go to buffer 2" },
 	{ "<leader>b3", desc = "③ Go to buffer 3" },
@@ -219,45 +246,66 @@ require("which-key").add({
 	{ "<leader>b7", desc = "⑦ Go to buffer 7" },
 	{ "<leader>b8", desc = "⑧ Go to buffer 8" },
 	{ "<leader>b9", desc = "⑨ Go to buffer 9" },
-	{ "<leader>bcp", desc = "◎ Pick to close" },
-	{ "<leader>bco", desc = "◉ Close others" },
-	{ "<leader>bcr", desc = "▶ Close to right" },
-	{ "<leader>bcl", desc = "◀ Close to left" },
-	{ "<leader>bp", desc = "⊙ Pick buffer" },
 	{ "<leader>bP", desc = "⊡ Toggle pin" },
+	{ "<leader>bcl", desc = "◀ Close to left" },
+	{ "<leader>bco", desc = "◉ Close others" },
+	{ "<leader>bcp", desc = "◎ Pick to close" },
+	{ "<leader>bcr", desc = "▶ Close to right" },
+	{ "<leader>bgd", desc = "⊟ Toggle Docs group" },
+	{ "<leader>bgt", desc = "⊞ Toggle Tests group" },
+	{ "<leader>bmn", desc = "▷ Move next" },
+	{ "<leader>bmp", desc = "◁ Move prev" },
+	{ "<leader>bp", desc = "⊙ Pick buffer" },
 	{ "<leader>bsd", desc = "◫ Sort by directory" },
 	{ "<leader>bse", desc = "◬ Sort by extension" },
 	{ "<leader>bst", desc = "◪ Sort by tabs" },
-	{ "<leader>bgt", desc = "⊞ Toggle Tests group" },
-	{ "<leader>bgd", desc = "⊟ Toggle Docs group" },
-
-	-- Git
-	{ "<leader>gc", desc = "◎ Commits" },
-	{ "<leader>gb", desc = "⌥ Branches" },
-	{ "<leader>gs", desc = "≡ Status" },
+	{ "<leader>q", desc = "✗ Close without saving" },
+	{ "<leader>w", desc = "✓ Save and close" },
+	{ "A-S", desc = "◀ Previous buffer", mode = { "n", "v" } },
+	{ "A-s", desc = "▶ Next buffer", mode = { "n", "v" } },
 
 	-- TODOs Navigation
-	{ "]t", desc = "▸ Next todo comment" },
 	{ "[t", desc = "◂ Previous todo comment" },
+	{ "]t", desc = "▸ Next todo comment" },
 
 	-- Multicursor
-	{ "<leader>m", desc = "⊙ Start on word/selection", mode = { "n", "v" } },
+	{ "<C-a>", desc = "⊛ Find all", mode = "n" },
+	{ "<C-n>", desc = "⇢ Find next", mode = "n" },
+	{ "<C-p>", desc = "⇠ Find prev", mode = "n" },
+	{ "<C-x>", desc = "⤴ Skip current", mode = "n" },
+	{ "<Esc>", desc = "⊗ Exit multicursor", mode = "n" },
+	{ ",", desc = "⊗ Clear others", mode = "n" },
+	{ "a", desc = "⊕ Append mode", mode = "n" },
+	{ "c", desc = "⊘ Change mode", mode = "n" },
+	{ "d", desc = "⊖ Delete", mode = "n" },
+	{ "e", desc = "⊡ Extend mode", mode = "n" },
+	{ "gc", desc = "⍝ Comment", mode = "n" },
+	{ "gU", desc = "⇧ Uppercase", mode = "n" },
+	{ "gu", desc = "⇩ Lowercase", mode = "n" },
+	{ "i", desc = "⊙ Insert mode", mode = "n" },
+	{ "n", desc = "▷ Find next", mode = "n" },
+	{ "p", desc = "⊞ Paste after", mode = "n" },
+	{ "y", desc = "⊕ Yank", mode = "n" },
+	{ "~", desc = "⌘ Toggle case", mode = "n" },
+	{ "<", desc = "↤ Indent left", mode = "n" },
+	{ ">", desc = "↦ Indent right", mode = "n" },
+	{ "=", desc = "⊞ Align", mode = "n" },
 
 	-- Noice
 	{ "<S-Enter>", desc = "⤴ Redirect cmdline", mode = "c" },
-	{ "<leader>xnl", desc = "◊ Last message" },
-	{ "<leader>xnh", desc = "🝮 History" },
+	{ "<c-b>", desc = "↑ Scroll backward", mode = { "i", "n", "s" } },
+	{ "<c-f>", desc = "↓ Scroll forward", mode = { "i", "n", "s" } },
 	{ "<leader>xna", desc = "≡ All messages" },
 	{ "<leader>xnd", desc = "⊗ Dismiss all" },
+	{ "<leader>xnh", desc = "🝮 History" },
+	{ "<leader>xnl", desc = "◊ Last message" },
 	{ "<leader>xnt", desc = "⊙ Picker" },
-	{ "<c-f>", desc = "↓ Scroll forward", mode = { "i", "n", "s" } },
-	{ "<c-b>", desc = "↑ Scroll backward", mode = { "i", "n", "s" } },
 
 	-- Sort
 	{ "<leader>sa", desc = "⇈ Sort alphabetically", mode = "v" },
-	{ "<leader>sr", desc = "⇊ Sort reverse", mode = "v" },
 	{ "<leader>si", desc = "⇕ Sort case-insensitive", mode = "v" },
 	{ "<leader>sn", desc = "⇳ Sort numerically", mode = "v" },
+	{ "<leader>sr", desc = "⇊ Sort reverse", mode = "v" },
 
 	-- Motions
 	{ "<A-Down>", desc = "↓ Move line down" },
@@ -375,97 +423,97 @@ vim.api.nvim_create_autocmd("FileType", {
 			c = FILETYPE_ICON .. " C",
 			cuda = FILETYPE_ICON .. " CUDA",
 			fortran = FILETYPE_ICON .. " Fortran",
-			zig = FILETYPE_ICON .. " Zig",
-			rust = FILETYPE_ICON .. " Rust",
 			rs = FILETYPE_ICON .. " Rust",
+			rust = FILETYPE_ICON .. " Rust",
+			zig = FILETYPE_ICON .. " Zig",
 
 			-- Lisps
 			clojure = FILETYPE_ICON .. " Clojure",
 			commonlisp = FILETYPE_ICON .. " Common Lisp",
-			lisp = FILETYPE_ICON .. " Lisp",
 			elisp = FILETYPE_ICON .. " Emacs Lisp",
 			fennel = FILETYPE_ICON .. " Fennel",
+			lisp = FILETYPE_ICON .. " Lisp",
 
 			-- Web
 			css = FILETYPE_ICON .. " CSS",
-			scss = FILETYPE_ICON .. " SCSS",
 			html = FILETYPE_ICON .. " HTML",
 			javascript = FILETYPE_ICON .. " JavaScript",
 			js = FILETYPE_ICON .. " JavaScript",
-			typescript = FILETYPE_ICON .. " TypeScript",
+			scss = FILETYPE_ICON .. " SCSS",
+			svelte = FILETYPE_ICON .. " Svelte",
 			ts = FILETYPE_ICON .. " TypeScript",
 			tsx = FILETYPE_ICON .. " TSX",
+			typescript = FILETYPE_ICON .. " TypeScript",
 			vue = FILETYPE_ICON .. " Vue",
-			svelte = FILETYPE_ICON .. " Svelte",
 
 			-- Data
+			csv = FILETYPE_ICON .. " CSV",
+			ini = FILETYPE_ICON .. " INI",
 			json = FILETYPE_ICON .. " JSON",
+			kdl = FILETYPE_ICON .. " KDL",
+			toml = FILETYPE_ICON .. " TOML",
+			tsv = FILETYPE_ICON .. " TSV",
+			xml = FILETYPE_ICON .. " XML",
 			yaml = FILETYPE_ICON .. " YAML",
 			yml = FILETYPE_ICON .. " YAML",
-			toml = FILETYPE_ICON .. " TOML",
-			xml = FILETYPE_ICON .. " XML",
-			csv = FILETYPE_ICON .. " CSV",
-			tsv = FILETYPE_ICON .. " TSV",
-			kdl = FILETYPE_ICON .. " KDL",
-			ini = FILETYPE_ICON .. " INI",
 
 			-- Languages
-			python = FILETYPE_ICON .. " Python",
-			py = FILETYPE_ICON .. " Python",
-			lua = FILETYPE_ICON .. " Lua",
-			luadoc = FILETYPE_ICON .. " LuaDoc",
-			java = FILETYPE_ICON .. " Java",
-			kotlin = FILETYPE_ICON .. " Kotlin",
-			go = FILETYPE_ICON .. " Go",
 			dart = FILETYPE_ICON .. " Dart",
-			swift = FILETYPE_ICON .. " Swift",
-			ruby = FILETYPE_ICON .. " Ruby",
-			rb = FILETYPE_ICON .. " Ruby",
-			perl = FILETYPE_ICON .. " Perl",
-			php = FILETYPE_ICON .. " PHP",
-			r = FILETYPE_ICON .. " R",
-			julia = FILETYPE_ICON .. " Julia",
-			haskell = FILETYPE_ICON .. " Haskell",
-			elm = FILETYPE_ICON .. " Elm",
 			elixir = FILETYPE_ICON .. " Elixir",
+			elm = FILETYPE_ICON .. " Elm",
 			erlang = FILETYPE_ICON .. " Erlang",
 			gleam = FILETYPE_ICON .. " Gleam",
+			go = FILETYPE_ICON .. " Go",
+			haskell = FILETYPE_ICON .. " Haskell",
+			java = FILETYPE_ICON .. " Java",
+			julia = FILETYPE_ICON .. " Julia",
+			kotlin = FILETYPE_ICON .. " Kotlin",
+			lua = FILETYPE_ICON .. " Lua",
+			luadoc = FILETYPE_ICON .. " LuaDoc",
 			ocaml = FILETYPE_ICON .. " OCaml",
 			odin = FILETYPE_ICON .. " Odin",
+			perl = FILETYPE_ICON .. " Perl",
+			php = FILETYPE_ICON .. " PHP",
+			py = FILETYPE_ICON .. " Python",
+			python = FILETYPE_ICON .. " Python",
+			r = FILETYPE_ICON .. " R",
+			rb = FILETYPE_ICON .. " Ruby",
+			ruby = FILETYPE_ICON .. " Ruby",
 			solidity = FILETYPE_ICON .. " Solidity",
+			swift = FILETYPE_ICON .. " Swift",
 
 			-- Markup & Docs
+			latex = FILETYPE_ICON .. " LaTeX",
 			markdown = FILETYPE_ICON .. " Markdown",
 			md = FILETYPE_ICON .. " Markdown",
-			latex = FILETYPE_ICON .. " LaTeX",
 			tex = FILETYPE_ICON .. " LaTeX",
 			typst = FILETYPE_ICON .. " Typst",
 
 			-- Config & Build
 			dockerfile = FILETYPE_ICON .. " Dockerfile",
+			hcl = FILETYPE_ICON .. " HCL",
 			make = FILETYPE_ICON .. " Makefile",
 			makefile = FILETYPE_ICON .. " Makefile",
 			nix = FILETYPE_ICON .. " Nix",
 			terraform = FILETYPE_ICON .. " Terraform",
 			tf = FILETYPE_ICON .. " Terraform",
-			hcl = FILETYPE_ICON .. " HCL",
 
 			-- Vim
 			vim = FILETYPE_ICON .. " Vim",
 			vimdoc = FILETYPE_ICON .. " VimDoc",
 
 			-- Tools & Misc
-			sql = FILETYPE_ICON .. " SQL",
 			graphql = FILETYPE_ICON .. " GraphQL",
 			http = FILETYPE_ICON .. " HTTP",
 			regex = FILETYPE_ICON .. " Regex",
-			tmux = FILETYPE_ICON .. " Tmux",
+			sql = FILETYPE_ICON .. " SQL",
 			ssh_config = FILETYPE_ICON .. " SSH Config",
+			tmux = FILETYPE_ICON .. " Tmux",
 
 			-- WM & System
 			hyprlang = FILETYPE_ICON .. " Hyprlang",
-			sxhkdrc = FILETYPE_ICON .. " SXHKD",
 			rasi = FILETYPE_ICON .. " Rasi",
+			sxhkdrc = FILETYPE_ICON .. " SXHKD",
 			yuck = FILETYPE_ICON .. " Yuck",
 			zathurarc = FILETYPE_ICON .. " Zathura",
 

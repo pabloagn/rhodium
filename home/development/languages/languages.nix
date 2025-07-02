@@ -5,7 +5,7 @@
     go
     just # Alternative to Make
     nodejs
-    python3
+    # python3
     rustup # Rust toolchain installer
     texlive.combined.scheme-full # Complete texlive distribution
     typst # New markup-based tool

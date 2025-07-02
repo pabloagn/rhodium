@@ -1,14 +1,14 @@
-require "octo".setup({
-	use_local_fs = false,                  -- use local files on right side of reviews
-	enable_builtin = false,                -- shows a list of builtin actions when no action is provided
+require("octo").setup({
+	use_local_fs = false, -- use local files on right side of reviews
+	enable_builtin = false, -- shows a list of builtin actions when no action is provided
 	default_remote = { "upstream", "origin" }, -- order to try remotes
-	default_merge_method = "commit",       -- default merge method which should be used for both `Octo pr merge` and merging from picker, could be `commit`, `rebase` or `squash`
-	default_delete_branch = false,         -- whether to delete branch when merging pull request with either `Octo pr merge` or from picker (can be overridden with `delete`/`nodelete` argument to `Octo pr merge`)
-	ssh_aliases = {},                      -- SSH aliases. e.g. `ssh_aliases = {["github.com-work"] = "github.com"}`. The key part will be interpreted as an anchored Lua pattern.
-	picker = "telescope",                  -- or "fzf-lua" or "snacks"
+	default_merge_method = "commit", -- default merge method which should be used for both `Octo pr merge` and merging from picker, could be `commit`, `rebase` or `squash`
+	default_delete_branch = false, -- whether to delete branch when merging pull request with either `Octo pr merge` or from picker (can be overridden with `delete`/`nodelete` argument to `Octo pr merge`)
+	ssh_aliases = {}, -- SSH aliases. e.g. `ssh_aliases = {["github.com-work"] = "github.com"}`. The key part will be interpreted as an anchored Lua pattern.
+	picker = "telescope", -- or "fzf-lua" or "snacks"
 	picker_config = {
-		use_emojis = false,                -- only used by "fzf-lua" picker for now
-		mappings = {                       -- mappings for the pickers
+		use_emojis = false, -- only used by "fzf-lua" picker for now
+		mappings = { -- mappings for the pickers
 			open_in_browser = { lhs = "<C-b>", desc = "open issue in browser" },
 			copy_url = { lhs = "<C-y>", desc = "copy url to system clipboard" },
 			checkout_pr = { lhs = "<C-o>", desc = "checkout pull request" },
@@ -24,7 +24,7 @@ require "octo".setup({
 				},
 				notifications = {}, -- actions for the notifications picker
 				issue_templates = {}, -- actions for the issue templates picker
-				search = {},  -- actions for the search picker
+				search = {}, -- actions for the search picker
 				-- ... add actions for other pickers as needed
 			},
 		},
@@ -75,15 +75,14 @@ require "octo".setup({
 		use_signstatus = true, -- show "modified" marks on the status column
 	},
 	issues = {
-		order_by = {        -- criteria to sort results of `Octo issue list`
+		order_by = { -- criteria to sort results of `Octo issue list`
 			field = "CREATED_AT", -- either COMMENTS, CREATED_AT or UPDATED_AT (https://docs.github.com/en/graphql/reference/enums#issueorderfield)
-			direction =
-			"DESC"          -- either DESC or ASC (https://docs.github.com/en/graphql/reference/enums#orderdirection)
-		}
+			direction = "DESC", -- either DESC or ASC (https://docs.github.com/en/graphql/reference/enums#orderdirection)
+		},
 	},
 	reviews = {
 		auto_show_threads = true, -- automatically show comment threads on cursor move
-		focus             = "right", -- focus right buffer on diff open
+		focus = "right", -- focus right buffer on diff open
 	},
 	runs = {
 		icons = {
@@ -96,22 +95,21 @@ require "octo".setup({
 		},
 	},
 	pull_requests = {
-		order_by = {                        -- criteria to sort the results of `Octo pr list`
-			field = "CREATED_AT",           -- either COMMENTS, CREATED_AT or UPDATED_AT (https://docs.github.com/en/graphql/reference/enums#issueorderfield)
-			direction =
-			"DESC"                          -- either DESC or ASC (https://docs.github.com/en/graphql/reference/enums#orderdirection)
+		order_by = { -- criteria to sort the results of `Octo pr list`
+			field = "CREATED_AT", -- either COMMENTS, CREATED_AT or UPDATED_AT (https://docs.github.com/en/graphql/reference/enums#issueorderfield)
+			direction = "DESC", -- either DESC or ASC (https://docs.github.com/en/graphql/reference/enums#orderdirection)
 		},
 		always_select_remote_on_create = false, -- always give prompt to select base remote repo when creating PRs
-		use_branch_name_as_title = false    -- sets branch name to be the name for the PR
+		use_branch_name_as_title = false, -- sets branch name to be the name for the PR
 	},
 	notifications = {
 		current_repo_only = false, -- show notifications for current repo only
 	},
 	file_panel = {
-		size = 10,   -- changed files panel rows
-		use_icons = true -- use web-devicons in file panel (if false, nvim-web-devicons does not need to be installed)
+		size = 10, -- changed files panel rows
+		use_icons = true, -- use web-devicons in file panel (if false, nvim-web-devicons does not need to be installed)
 	},
-	colors = {       -- used for highlight groups (see Colors section below)
+	colors = { -- used for highlight groups (see Colors section below)
 		white = "#ffffff",
 		grey = "#2A354C",
 		black = "#000000",
@@ -235,7 +233,11 @@ require "octo".setup({
 			submit_review = { lhs = "<localleader>vs", desc = "submit review" },
 			discard_review = { lhs = "<localleader>vd", desc = "discard review" },
 			add_review_comment = { lhs = "<localleader>ca", desc = "add a new review comment", mode = { "n", "x" } },
-			add_review_suggestion = { lhs = "<localleader>sa", desc = "add a new review suggestion", mode = { "n", "x" } },
+			add_review_suggestion = {
+				lhs = "<localleader>sa",
+				desc = "add a new review suggestion",
+				mode = { "n", "x" },
+			},
 			focus_files = { lhs = "<localleader>e", desc = "move focus to changed file panel" },
 			toggle_files = { lhs = "<localleader>b", desc = "hide/show changed files panel" },
 			next_thread = { lhs = "]t", desc = "move to next thread" },

@@ -85,24 +85,22 @@
         quick_actions = true;
         selections_menu = true;
       };
-    };
 
-    # --- Repl Configuration ---
-    jupyter = {
-      kernel_selections = {
-        python = "nixpython";
+      # --- Repl Configuration ---
+      jupyter = {
+        kernel_selections = {
+          python = "nixpython";
+        };
+      };
+
+      languages = {
+        Python = {
+          tab_size = 4;
+          formatter = "language_server";
+          format_on_save = "on";
+          code_lens = true;
+        };
       };
     };
-
-    languages = {
-      Python = {
-        tab_size = 4;
-        formatter = "language_server";
-        format_on_save = "on";
-        code_lens = true;
-      };
-    };
-
-    inline_completion_provider = "supermaven";
   };
 }

@@ -32,19 +32,15 @@
 
       # Find
       # ------------------------------------------------
-      # {
-      #   plugin = fzf-vim;
-      #   config = sourceLuaFile "fzf-vim.lua";
-      # }
       {
         plugin = telescope-nvim; # Finder
         config = sourceLuaFile "telescope-nvim.lua";
       }
       telescope-frecency-nvim
       telescope-ui-select-nvim
-      telescope-fzf-native-nvim # Finder + fz
+      telescope-fzf-native-nvim
       telescope-live-grep-args-nvim
-      telescope-project-nvim # TODO: Add this config
+      telescope-project-nvim
 
       # Navigation
       # ------------------------------------------------
@@ -56,14 +52,18 @@
       #   plugin = flash-nvim;
       #   config = sourceLuaFile "flash-nvim.lua";
       # }
-      # {
-      #   plugin = harpoon2;
-      #   config = sourceLuaFile "harpoon2.lua";
-      # }
+      {
+        plugin = harpoon2;
+        config = sourceLuaFile "harpoon2-nvim.lua";
+      }
       # {
       #   plugin = leap-nvim;
       #   config = sourceLuaFile "leap-nvim.lua";
       # }
+      {
+        plugin = marks-nvim;
+        config = sourceLuaFile "marks-nvim.lua";
+      }
       # {
       #   plugin = outline-nvim;
       #   config = sourceLuaFile "outline-nvim.lua";

@@ -1,13 +1,11 @@
 local functions = require("functions")
 local builtin = require("telescope.builtin")
 
--- Leaders
--- -------------------------------------------------
+-- --- Leaders ---
 vim.g.mapleader = " " -- Leader
 vim.g.maplocalleader = " " -- Local leader
 
--- General
--- -------------------------------------------------
+-- --- General ---
 -- TODO: Reassign this key to a more productive map
 -- vim.keymap.set(
 -- 	"n",
@@ -25,8 +23,153 @@ vim.keymap.set(
 vim.keymap.set("n", "<Leader>y", ":%y+<CR>", { noremap = true, silent = true, desc = "Copy entire buffer to clip" })
 vim.keymap.set("n", "<Leader>D", ":%d+<CR>", { noremap = true, silent = true, desc = "Delete entire buffer" })
 
--- Yazi
--- -------------------------------------------------
+-- --- Harpoon ---
+-- File marking and navigation
+vim.keymap.set("n", "<leader>ha", function()
+	require("harpoon"):list():add()
+end, {
+	noremap = true,
+	silent = true,
+	desc = "Add file to Harpoon",
+})
+
+vim.keymap.set("n", "<leader>hh", function()
+	local harpoon = require("harpoon")
+	harpoon.ui:toggle_quick_menu(harpoon:list())
+end, {
+	noremap = true,
+	silent = true,
+	desc = "Toggle Harpoon menu",
+})
+
+-- Direct navigation to marks
+vim.keymap.set("n", "<leader>h1", function()
+	require("harpoon"):list():select(1)
+end, {
+	noremap = true,
+	silent = true,
+	desc = "Harpoon to file 1",
+})
+
+vim.keymap.set("n", "<leader>h2", function()
+	require("harpoon"):list():select(2)
+end, {
+	noremap = true,
+	silent = true,
+	desc = "Harpoon to file 2",
+})
+
+vim.keymap.set("n", "<leader>h3", function()
+	require("harpoon"):list():select(3)
+end, {
+	noremap = true,
+	silent = true,
+	desc = "Harpoon to file 3",
+})
+
+vim.keymap.set("n", "<leader>h4", function()
+	require("harpoon"):list():select(4)
+end, {
+	noremap = true,
+	silent = true,
+	desc = "Harpoon to file 4",
+})
+
+-- Quick navigation without leader (similar to buffer navigation)
+vim.keymap.set("n", "<M-h>", function()
+	require("harpoon"):list():select(1)
+end, {
+	noremap = true,
+	silent = true,
+	desc = "Quick Harpoon 1",
+})
+
+vim.keymap.set("n", "<M-j>", function()
+	require("harpoon"):list():select(2)
+end, {
+	noremap = true,
+	silent = true,
+	desc = "Quick Harpoon 2",
+})
+
+vim.keymap.set("n", "<M-k>", function()
+	require("harpoon"):list():select(3)
+end, {
+	noremap = true,
+	silent = true,
+	desc = "Quick Harpoon 3",
+})
+
+vim.keymap.set("n", "<M-l>", function()
+	require("harpoon"):list():select(4)
+end, {
+	noremap = true,
+	silent = true,
+	desc = "Quick Harpoon 4",
+})
+
+-- Cycle through marks
+vim.keymap.set("n", "<leader>hn", function()
+	require("harpoon"):list():next()
+end, {
+	noremap = true,
+	silent = true,
+	desc = "Next Harpoon mark",
+})
+
+vim.keymap.set("n", "<leader>hp", function()
+	require("harpoon"):list():prev()
+end, {
+	noremap = true,
+	silent = true,
+	desc = "Previous Harpoon mark",
+})
+
+-- Alternative cycling with brackets
+vim.keymap.set("n", "]h", function()
+	require("harpoon"):list():next()
+end, {
+	noremap = true,
+	silent = true,
+	desc = "Next Harpoon mark",
+})
+
+vim.keymap.set("n", "[h", function()
+	require("harpoon"):list():prev()
+end, {
+	noremap = true,
+	silent = true,
+	desc = "Previous Harpoon mark",
+})
+
+-- Clear all marks
+vim.keymap.set("n", "<leader>hc", function()
+	require("harpoon"):list():clear()
+end, {
+	noremap = true,
+	silent = true,
+	desc = "Clear all Harpoon marks",
+})
+
+-- Remove current file from Harpoon
+vim.keymap.set("n", "<leader>hr", function()
+	local harpoon = require("harpoon")
+	local list = harpoon:list()
+	local current_file = vim.api.nvim_buf_get_name(0)
+
+	for i, item in ipairs(list.items) do
+		if item.value == current_file then
+			list:remove_at(i)
+			break
+		end
+	end
+end, {
+	noremap = true,
+	silent = true,
+	desc = "Remove current file from Harpoon",
+})
+
+-- --- Yazi ---
 vim.keymap.set("n", "<leader>ac", "<cmd>Yazi<CR>", {
 	noremap = true,
 	silent = true,
@@ -39,8 +182,7 @@ vim.keymap.set("n", "<leader>aw", "<cmd>Yazi<CR>", {
 	desc = "Open Yazi on working directory",
 })
 
--- Outline/Aerial Operations
--- -------------------------------------------------
+-- --- Outline/aerial Operations ---
 -- Main outline toggles
 vim.keymap.set("n", "<leader>oa", "<cmd>AerialToggle!<CR>", {
 	noremap = true,
@@ -54,14 +196,14 @@ vim.keymap.set("n", "<leader>oA", "<cmd>AerialNavToggle<CR>", {
 	desc = "Toggle navigation",
 })
 
--- Built-in outline (alternative to Aerial)
+-- --- Built-in Outline (alternative To Aerial) ---
 -- vim.keymap.set("n", "gO", "<cmd>AerialNavOpen<CR>", {
 -- 	noremap = true,
 -- 	silent = true,
 -- 	desc = "Open navigation",
 -- })
 
--- Additional outline operations
+-- --- Additional Outline Operations ---
 vim.keymap.set("n", "<leader>of", function()
 	require("aerial").toggle()
 	if require("aerial").is_open() then
@@ -73,7 +215,7 @@ end, {
 	desc = "Focus sidebar",
 })
 
--- Quick symbol navigation (when aerial is open)
+-- --- Quick Symbol Navigation (when Aerial Is Open) ---
 vim.keymap.set("n", "{", "<cmd>AerialNext<CR>", {
 	noremap = true,
 	silent = true,
@@ -95,9 +237,9 @@ vim.keymap.set("n", "}", "<cmd>AerialPrev<CR>", {
 -- 	desc = "Search symbols",
 -- })
 
--- Comment
--- -------------------------------------------------
+-- --- Comment ---
 -- Comment header
+-- FIX: Does not work on languages such as CSS, where there is comment open and close
 vim.keymap.set("n", "<Leader>ch", function()
 	functions.comment_header()
 end, {
@@ -237,8 +379,7 @@ end, {
 	desc = "List buffer TODOs",
 })
 
--- Edit
--- -------------------------------------------------
+-- --- Edit ---
 vim.keymap.set("n", "<Leader>er", function()
 	functions.replace_buffer_with_clipboard()
 end, {
@@ -247,16 +388,14 @@ end, {
 	desc = "Replace buffer with clipboard",
 })
 
--- Smart Replace
--- -------------------------------------------------
+-- --- Smart Replace ---
 vim.keymap.set({ "n", "v" }, "<leader>rv", functions.smart_replace, {
 	noremap = true,
 	silent = false,
 	desc = "Replace word/selection in buffer",
 })
 
--- Replace (Spectre)
--- -------------------------------------------------
+-- --- Replace (spectre) ---
 vim.keymap.set("n", "<leader>rt", '<cmd>lua require("spectre").toggle()<CR>', {
 	desc = "Toggle Spectre",
 })
@@ -273,8 +412,7 @@ vim.keymap.set("n", "<leader>rf", '<cmd>lua require("spectre").open_file_search(
 	desc = "Search on current file",
 })
 
--- LSP Actions (Direct actions that do something)
--- -------------------------------------------------
+-- --- Lsp Actions (direct Actions That Do Something) ---
 vim.keymap.set("n", "<Leader>lh", vim.lsp.buf.hover, { noremap = true, silent = true, desc = "Show hover" })
 vim.keymap.set({ "n", "v" }, "<Leader>lf", function()
 	require("conform").format()
@@ -287,15 +425,13 @@ end, {
 vim.keymap.set("n", "<Leader>lr", vim.lsp.buf.rename, { noremap = true, silent = true, desc = "Rename symbol" })
 vim.keymap.set("n", "<Leader>la", vim.lsp.buf.code_action, { noremap = true, silent = true, desc = "Code actions" })
 
--- LSP Navigation (Go to things - quick jumps)
--- -------------------------------------------------
+-- --- Lsp Navigation (go To Things - Quick Jumps) ---
 vim.keymap.set("n", "gd", builtin.lsp_definitions, { desc = "Go to definition" })
 vim.keymap.set("n", "gr", builtin.lsp_references, { desc = "Go to references" })
 vim.keymap.set("n", "gi", builtin.lsp_implementations, { desc = "Go to implementation" })
 vim.keymap.set("n", "gt", builtin.lsp_type_definitions, { desc = "Go to type definition" })
 
--- Find/Search (Interactive pickers and browsers)
--- -------------------------------------------------
+-- --- Find/search (interactive Pickers And Browsers) ---
 -- Files and project
 vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Files" })
 vim.keymap.set("n", "<Leader>fp", function()
@@ -342,8 +478,7 @@ vim.keymap.set("n", "<leader>ft", "<cmd>TodoTelescope keywords=FIX,TODO,PERF,TES
 	desc = "TODOs with priority sorting",
 })
 
--- Trouble (Visual problem browser)
--- -------------------------------------------------
+-- --- Trouble (visual Problem Browser) ---
 -- Core trouble toggles
 vim.keymap.set("n", "<leader>tt", function()
 	require("trouble").toggle("diagnostics")
@@ -385,8 +520,7 @@ vim.keymap.set("n", "<leader>tc", function()
 	require("trouble").close()
 end, { desc = "Close all" })
 
--- Trouble Navigation (No leader - direct access)
--- -------------------------------------------------
+-- --- Trouble Navigation (no Leader - Direct Access) ---
 vim.keymap.set("n", "]T", function()
 	require("trouble").next({ skip_groups = true, jump = true })
 end, { desc = "Next trouble item" })
@@ -400,8 +534,7 @@ vim.keymap.set("n", "g[T", function()
 	require("trouble").first({ skip_groups = true, jump = true })
 end, { desc = "First trouble item" })
 
--- Diagnostics
--- -------------------------------------------------
+-- --- Diagnostics ---
 vim.keymap.set("n", "<Leader>dv", function()
 	functions.toggle_virtual_text()
 end, {

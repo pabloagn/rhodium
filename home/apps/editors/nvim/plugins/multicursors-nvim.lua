@@ -1,12 +1,11 @@
--- TODO: Test new setup
 require("multicursors").setup({
-	-- Core settings
+	-- --- Core Settings ---
 	DEBUG_MODE = false,
 	create_commands = true,
 	updatetime = 50,
 	nowait = true,
 
-	-- Mode keys for different multicursor modes
+	-- --- Mode Keys For Different Multicursor Modes ---
 	mode_keys = {
 		append = "a",
 		change = "c",
@@ -14,23 +13,14 @@ require("multicursors").setup({
 		insert = "i",
 	},
 
-	-- Hint window configuration - matching your which-key aesthetic
-	hint_config = {
-		float_opts = {
-			border = "single",
-			style = "minimal",
-		},
-		position = "bottom-right",
-	},
+	-- --- Disable the hint window completely ---
+	hint_config = false,
 
-	-- Generate hints for different modes
+	-- --- Disable hint generation ---
 	generate_hints = {
-		normal = true,
-		insert = true,
-		extend = true,
-		config = {
-			column_count = 1,
-		},
+		normal = false,
+		insert = false,
+		extend = false,
 	},
 
 	-- Custom normal mode mappings with unicode symbols
@@ -152,7 +142,7 @@ require("multicursors").setup({
 	},
 })
 
--- Highlight customization - matching your dark theme
+-- Highlight customization
 vim.api.nvim_set_hl(0, "MultiCursor", {
 	bg = "#22262D",
 	fg = "#D3C6AA",
@@ -165,89 +155,3 @@ vim.api.nvim_set_hl(0, "MultiCursorMain", {
 	bold = true,
 	reverse = false,
 })
-
--- Multicursor hint window styling to match which-key
-vim.api.nvim_set_hl(0, "MultiCursorHint", {
-	bg = "#0f1316",
-	fg = "#D3C6AA",
-})
-
-vim.api.nvim_set_hl(0, "MultiCursorHintBorder", {
-	fg = "#22262D",
-	bg = "#0f1316",
-})
-
--- Update your which-key multicursor group definition
-require("which-key").add({
-	{ "m", group = "⠿ Multicursor" },
-	{ "ma", desc = "⊕ Add cursor" },
-	{ "mc", desc = "⊗ Clear cursors" },
-	{ "mf", desc = "⌆ Find word" },
-	{ "ml", desc = "⊞ Line cursors" },
-	{ "mn", desc = "⇢ Next match" },
-	{ "mp", desc = "⇠ Prev match" },
-	{ "ms", desc = "⤴ Skip match" },
-	{ "mt", desc = "⌘ Toggle mode" },
-	{ "mv", desc = "⊛ Visual select" },
-})
-
--- require("multicursors").setup({
---   -- Core settings
---   DEBUG_MODE = false,
---   create_commands = true,
---   updatetime = 50,
---   nowait = true,
---
---   -- Mode keys for different multicursor modes
---   mode_keys = {
---     append = 'a',
---     change = 'c',
---     extend = 'e',
---     insert = 'i',
---   },
---
---   -- Hint window configuration
---   hint_config = {
---     float_opts = {
---       border = 'single',
---     },
---     position = 'bottom-right',
---   },
---
---   -- Generate hints for different modes
---   generate_hints = {
---     normal = true,
---     insert = true,
---     extend = true,
---     config = {
---       column_count = 1,
---     },
---   },
---
---   -- Custom normal mode mappings
---   normal_keys = {
---     -- Clear other selections, keep main
---     [','] = {
---       method = function()
---         local N = require("multicursors.normal_mode")
---         N.clear_others()
---       end,
---       opts = { desc = 'Clear others' },
---     },
---     -- Comment all selections
---     ['<C-/>'] = {
---       method = function()
---         require('multicursors.utils').call_on_selections(function(selection)
---           vim.api.nvim_win_set_cursor(0, { selection.row + 1, selection.col + 1 })
---           local line_count = selection.end_row - selection.row + 1
---           vim.cmd('normal ' .. line_count .. 'gcc')
---         end)
---       end,
---       opts = { desc = 'Comment selections' },
---     },
---   },
--- })
---
--- -- Highlight customization
--- vim.api.nvim_set_hl(0, "MultiCursor", { reverse = true })
--- vim.api.nvim_set_hl(0, "MultiCursorMain", { reverse = true, bold = true })
