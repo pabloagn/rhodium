@@ -1,12 +1,8 @@
-{
+{...}: {
   imports = [
-    ./format.nix
+    # --- Main Modules ---
     ./core.nix
-    ./git.nix
-    ./cloud.nix
+    ./format.nix
     ./symbols.nix
-
-    # Prompts for custom modules
-    ./custom.nix
   ];
 }

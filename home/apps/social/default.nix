@@ -1,17 +1,20 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
-    signal-desktop
-    telegram-desktop
-
-    # Discord
+    # --- Discord ---
     discordo
     discord
 
-    # Element
+    # --- Mastodon ---
+    mastodon
+
+    # --- Matrix ---
     element-call
     element-desktop
 
-    # Mastodon
-    mastodon
+    # --- Signal ---
+    signal-desktop
+
+    # --- Telegram ---
+    telegram-desktop
   ];
 }

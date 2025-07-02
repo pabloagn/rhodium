@@ -2,7 +2,7 @@
   programs.neovide = {
     enable = false;
     settings = {
-      # Window behavior
+      # --- Window Behavior ---
       fork = false;
       frame = "full";
       idle = true;
@@ -12,21 +12,21 @@
       tabs = true;
       theme = "auto";
 
-      # Performance & rendering
+      # --- Performance & Rendering ---
       srgb = false;
       no-multigrid = false;
 
-      # Mouse
+      # --- Mouse ---
       mouse-cursor-icon = "arrow";
 
-      # Font configuration - professional coding setup
+      # --- Font Configuration ---
       font = {
         normal = ["JetBrainsMono Nerd Font"];
         size = 12.0;
         hinting = "full";
         edging = "antialias";
 
-        # Font features for better coding experience
+        # --- Font Features ---
         features = {
           "JetBrainsMono Nerd Font" = [
             "+ss01" # Alternate a
@@ -46,19 +46,12 @@
         };
       };
 
-      # Box drawing for perfect terminal visuals
+      # --- Box Drawing ---
       box-drawing = {
         mode = "native";
-        # sizes = {
-        #   default = [1 2];  # Thin and thick lines
-        #   12 = [1 2];
-        #   14 = [1 3];
-        #   16 = [2 3];
-        #   18 = [2 4];
-        # };
       };
 
-      # Crash reporting
+      # --- Crash Reporting ---
       backtraces_path = "~/.local/share/neovide/neovide_backtraces.log";
     };
   };

@@ -12,7 +12,7 @@
     playerctl
     spotify
     # spotify-player # Terminal spotify player that has feature parity with the official client
-    tidal-hifi # Tidal GUI running on Electron
     tidal-dl
+    tidal-hifi # Tidal GUI running on Electron
   ];
 }

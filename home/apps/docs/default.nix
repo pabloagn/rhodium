@@ -1,18 +1,14 @@
 {pkgs, ...}: {
   imports = [
+    # ./anytype.nix
+    # ./appflowy.nix
+    # ./joplin.nix
+    # ./logseq.nix
+    # ./notion.nix
     ./obsidian.nix
     ./okular.nix
+    # ./roam.nix
     ./standardnotes.nix
     ./zathura.nix
-  ];
-
-  home.packages = with pkgs; [
-    # anytype
-    # appflowy
-    # joplin
-    # joplin-desktop
-    # logseq
-    # notion-app
-    # roam-research
   ];
 }

@@ -1,8 +1,8 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
-    blender
+    blender # 3D creation software
     figma-linux # Unofficial Figma client for Linux
-    inkscape
-    gimp3-with-plugins
+    inkscape # Vector graphics editor
+    gimp3-with-plugins # GNU manipulation program
   ];
 }

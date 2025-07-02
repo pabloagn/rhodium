@@ -1,52 +1,213 @@
-{ config, rhodiumLib, ... }:
-
-# TODO: Remove all the fallback emoji crap
-let
-  icons = config.theme.icons.iconsNerdFont;
-  formatIcon = rhodiumLib.formatters.iconFormatter.formatIcon;
-in
-{
+{...}: {
   programs.starship.settings = {
-    # Cloud Services
-    aws.symbol = formatIcon icons.cloud.aws "☁️";
-    gcloud.symbol = formatIcon icons.designAndMedia.material "☁️";
+    # --- Cloud Services ---
+    aws = {
+      symbol = " ";
+      format = "on [$symbol$profile(\\($region\\))]($style)";
+    };
+    gcloud = {
+      format = "on [$symbol$active(/$project)(\\($region\\))]($style)";
+      symbol = "󱇶 ";
+    };
+    azure.symbol = "󰠅 ";
+    openstack.symbol = " ";
 
-    # Containerization & Virtualization
-    docker_context.symbol = formatIcon icons.tech.docker "🐳";
+    # --- Containerization & Virtualization ---
+    container.symbol = " ";
+    docker_context.symbol = "  ";
+    kubernetes.symbol = "󱃾 ";
+    vagrant.symbol = " ";
 
-    # File System & Package Management
-    directory.read_only = formatIcon icons.cod.warning "🔒";
-    package.symbol = formatIcon icons.files.package "📦";
+    # --- File System & Package Management ---
+    directory.read_only = " ";
+    package.symbol = "󰏗 ";
 
-    # Infrastructure
-    terraform.symbol = formatIcon icons.buildTools.terraform "💠";
+    # --- Infrastructure & DevOps ---
+    direnv.symbol = " ";
+    pulumi.symbol = " ";
+    terraform.symbol = "󱁢 ";
 
-    # Languages & Runtimes
-    conda.symbol = formatIcon icons.dev.anaconda "";
-    dart.symbol = formatIcon icons.programming.dart "";
-    elixir.symbol = formatIcon icons.programming.elixir "💧";
-    elm.symbol = formatIcon icons.seti.elm "🌳";
-    golang.symbol = formatIcon icons.programming.go "🐹";
-    haskell.symbol = formatIcon icons.programming.haskell "λ ";
-    java.symbol = formatIcon icons.programming.java "☕";
-    julia.symbol = formatIcon icons.seti.julia "ஃ ";
-    lua.symbol = formatIcon icons.programming.lua "🌙";
-    nim.symbol = formatIcon icons.programming.nim "🐴";
-    nodejs.symbol = formatIcon icons.programming.nodejs "⬢ ";
-    perl.symbol = formatIcon icons.programming.perl "🐪";
-    php.symbol = formatIcon icons.programming.php "🐘";
-    python.symbol = formatIcon icons.programming.python "🐍";
-    ruby.symbol = formatIcon icons.programming.ruby "💎";
-    rust.symbol = formatIcon icons.programming.rust "";
-    scala.symbol = formatIcon icons.programming.scala "🗼";
-    swift.symbol = formatIcon icons.programming.swift "🐦";
+    # --- Languages & Runtimes ---
+    buf.symbol = " ";
+    bun.symbol = " ";
+    c.symbol = " ";
+    cmake.symbol = " ";
+    cobol.symbol = " ";
+    conda.symbol = " ";
+    crystal.symbol = " ";
+    daml.symbol = " ";
+    dart.symbol = " ";
+    deno.symbol = " ";
+    dotnet.symbol = "󰪮 ";
+    elixir.symbol = " ";
+    elm.symbol = " ";
+    erlang.symbol = " ";
+    fennel.symbol = " ";
+    gleam.symbol = " ";
+    golang.symbol = " ";
+    gradle.symbol = " ";
+    guix_shell.symbol = " ";
+    haskell.symbol = " ";
+    haxe.symbol = " ";
+    helm.symbol = " ";
+    java.symbol = " ";
+    julia.symbol = " ";
+    kotlin.symbol = " ";
+    lua.symbol = " ";
+    meson.symbol = "󰔷 ";
+    mise.symbol = " ";
+    mojo.symbol = " ";
+    nim.symbol = "󰆥 ";
+    nodejs.symbol = " ";
+    ocaml.symbol = " ";
+    odin.symbol = "󰹩 ";
+    opa.symbol = " ";
+    perl.symbol = " ";
+    php.symbol = " ";
+    pixi.symbol = " ";
+    purescript.symbol = " ";
+    python.symbol = " ";
+    quarto.symbol = " ";
+    raku.symbol = " ";
+    red.symbol = " ";
+    rlang.symbol = "󰟔 ";
+    ruby.symbol = " ";
+    rust.symbol = " ";
+    scala.symbol = " ";
+    solidity.symbol = " ";
+    swift.symbol = " ";
+    typst.symbol = " ";
+    vlang.symbol = " ";
+    zig.symbol = " ";
 
-    # System
-    memory_usage.symbol = formatIcon icons.status.info "🧠";
-    shlvl.symbol = formatIcon icons.cod.arrow-up "↗️";
+    # --- Shells ---
+    shell.bash_indicator = " ";
+    shell.fish_indicator = "󰈺 ";
+    shell.zsh_indicator = " ";
+    shell.powershell_indicator = "󰨊 ";
+    shell.ion_indicator = " ";
+    shell.elvish_indicator = " ";
+    shell.tcsh_indicator = " ";
+    shell.xonsh_indicator = " ";
+    shell.cmd_indicator = " ";
+    shell.nu_indicator = " ";
+    shell.unknown_indicator = " ";
 
-    # Version Control
-    git_branch.symbol = formatIcon icons.cod.source-control "";
-    hg_branch.symbol = formatIcon icons.cod.arrow-right "☿ ";
+    # --- System & Environment ---
+    battery = {
+      full_symbol = "󰁹 ";
+      charging_symbol = "󰂄 ";
+      discharging_symbol = "󰂃 ";
+      unknown_symbol = "󰁽 ";
+      empty_symbol = "󰂎 ";
+    };
+    cmd_duration.symbol = " ";
+    hostname.ssh_symbol = "󰒋 ";
+    jobs.symbol = "⛭ ";
+    localip.symbol = "󰩟 ";
+    memory_usage.symbol = "󰍛 ";
+    os.symbols = {
+      AIX = " ";
+      Alpaquita = " ";
+      AlmaLinux = " ";
+      Alpine = " ";
+      Amazon = " ";
+      Android = " ";
+      Arch = " ";
+      Artix = " ";
+      CentOS = " ";
+      Debian = " ";
+      DragonFly = " ";
+      Emscripten = " ";
+      EndeavourOS = " ";
+      Fedora = " ";
+      FreeBSD = " ";
+      Garuda = " ";
+      Gentoo = " ";
+      HardenedBSD = "󰞌 ";
+      Illumos = "󰈸 ";
+      Linux = " ";
+      Mabox = " ";
+      Macos = " ";
+      Manjaro = " ";
+      Mariner = " ";
+      MidnightBSD = " ";
+      Mint = " ";
+      NetBSD = " ";
+      NixOS = " ";
+      OpenBSD = " ";
+      openSUSE = " ";
+      OracleLinux = "󰌷 ";
+      Pop = " ";
+      Raspbian = " ";
+      Redhat = " ";
+      RedHatEnterprise = " ";
+      RockyLinux = " ";
+      Redox = "󰀘 ";
+      Solus = "󰠳 ";
+      SUSE = " ";
+      Ubuntu = " ";
+      Unknown = " ";
+      Windows = " ";
+    };
+    shlvl.symbol = "T";
+    status = {
+      symbol = "✗";
+      success_symbol = "✓";
+      not_executable_symbol = "⊘";
+      not_found_symbol = "?";
+      sigint_symbol = "⊗";
+      signal_symbol = "∿";
+    };
+    sudo.symbol = "⚿";
+    time.symbol = "⌀";
+    username.symbol = "⊙";
+
+    # --- Version Control ---
+    # Git
+    git_state = {
+      rebase = "↻";
+      merge = "⤝";
+      revert = "↺";
+      cherry_pick = "✓";
+      bisect = "⊟";
+      am = "✉";
+      am_or_rebase = "⟳";
+    };
+    git_status = {
+      format = "([\\[$all_status$ahead_behind\\]]($style) )";
+      conflicted = "=";
+      ahead = "⇡";
+      behind = "⇣";
+      diverged = "⇕";
+      up_to_date = "✓";
+      untracked = "?";
+      stashed = "$";
+      modified = "!";
+      staged = "+";
+      renamed = "»";
+      deleted = "✗";
+      typechanged = "⊙";
+    };
+    git_commit.tag_symbol = "◈";
+
+    # Others
+    fossil_branch.symbol = "⌘";
+    hg_branch.symbol = "☿";
+    pijul_channel.symbol = "⊶";
+    vcsh.symbol = "∇";
+
+    # --- Networking ---
+    nats.symbol = " ";
+    netns.symbol = "󰀂 ";
+
+    # --- Environment Variables ---
+    env_var.symbol = " ";
+
+    # --- Misc ---
+    fill.symbol = " ";
+    line_break.disabled = false;
+    spack.symbol = " ";
+    singularity.symbol = " ";
   };
 }

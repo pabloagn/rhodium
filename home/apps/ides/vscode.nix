@@ -6,8 +6,7 @@
   programs.vscode = {
     enable = true;
     package = pkgs.vscode;
-    # package = pkgs.vscodium;
-    mutableExtensionsDir = true; # Can VS Code modify extensions directory?
+    mutableExtensionsDir = true; # Can VS Code modify extensions directory? Of course not
     profiles = {
       default = {
         enableUpdateCheck = false; # Silence the mf

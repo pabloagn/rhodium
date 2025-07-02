@@ -1,12 +1,11 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
-    # Messaging & Collaboration
+    # --- Messaging & Collaboration ---
     slack
     teams-for-linux
-    # jitsi-meet
     zoom-us
 
-    # Document Processing and Viewing
+    # --- Document Processing And Viewing ---
     libreoffice
     onlyoffice-desktopeditors
   ];
