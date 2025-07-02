@@ -35,6 +35,7 @@ in let
 in {
   programs.starship.settings = {
     custom.rhodium = {
+      disabled=true;
       command = "echo 'Rh'";
       when = "true";
       format = "[$output]($style) ${i.icon01} ";
