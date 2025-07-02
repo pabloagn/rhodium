@@ -1,21 +1,48 @@
-{
-  config,
-  rhodiumLib,
-  ...
-}: let
-  getIcon = rhodiumLib.formatters.iconFormatter.getIcon;
-  viaIcon = "◆";
+{...}: let
+  c = {
+    # Normal
+    color0 = "#0d0c0c";
+    color1 = "#c4746e";
+    color2 = "#8a9a7b";
+    color3 = "#c4b28a";
+    color4 = "#8ba4b0";
+    color5 = "#a292a3";
+    color6 = "#8ea4a2";
+    color7 = "#C8C093";
+    # Bright
+    color8 = "#A4A7A4";
+    color9 = "#E46876";
+    color10 = "#87a987";
+    color11 = "#E6C384";
+    color12 = "#7FB4CA";
+    color13 = "#938AA9";
+    color14 = "#7AA89F";
+    color15 = "#C5C9C7";
+    # Extended
+    color16 = "#b6927b";
+    color17 = "#b98d7b";
+    color18 = "#4B5F6F";
+    color19 = "#4a7fff";
+    color20 = "#59bfaa";
+  };
+
+  i = {
+    icon01 = "◆";
+  };
+in let
+  viaColor = c.color18;
+  colors = c;
 in {
   programs.starship.settings = {
     username = {
       format = "[$user]($style)";
       show_always = true;
-      style_user = "#4a7fff";
+      style_user = "${colors.color19}";
     };
 
     hostname = {
       format = "[@$hostname]($style) ";
-      style = "#4C6070";
+      style = "${colors.color18}";
       ssh_only = false;
       ssh_symbol = "󰒋 ";
     };
@@ -24,7 +51,7 @@ in {
       disabled = false;
       format = "[$shlvl]($style) ";
       repeat = true;
-      style = "bold #59bfaa";
+      style = "bold ${c.color20}";
       symbol = "T";
       threshold = 3; # HACK: We increase threshold from 2 to 3 since niri creates new shell session, so it always shows 2
     };
@@ -46,7 +73,7 @@ in {
     nix_shell = {
       format = "[($name <- )$symbol]($style) ";
       impure_msg = "impure";
-      style = "bold #c4746e";
+      style = "bold ${colors.color1}";
       symbol = " ";
       pure_msg = "pure";
       unknown_msg = "";
@@ -68,53 +95,35 @@ in {
       style = "#4B5F6F";
       disabled = false;
     };
-
-    git_branch = {
-      format = "[$symbol$branch]($style) ";
-      style = "bold #A4A7A4";
-      symbol = " ";
-    };
-
-    python = {
-      format = "[${viaIcon}](#4B5F6F) [$symbol($version )]($style)";
-      symbol = " ";
-      style = "yellow bold";
-      disabled = false;
-      python_binary = ["python3" "python"];
-      detect_extensions = ["py"];
-      detect_files = ["setup.py" "pyproject.toml" "requirements.txt" "__init__.py"];
-      detect_folders = [];
-    };
-
     aws = {
+      disabled = false;
       symbol = " ";
       format = "on [$symbol$profile(\\($region\\))]($style)";
-      disabled = true;
     };
     gcloud = {
+      disabled = true;
       format = "on [$symbol$active(/$project)(\\($region\\))]($style)";
       symbol = "󱇶 ";
-      disabled = true;
     };
     azure = {
-      symbol = "󰠅 ";
       disabled = true;
+      symbol = "󰠅 ";
     };
     openstack = {
-      symbol = " ";
       disabled = true;
+      symbol = " ";
     };
 
     # --- Containerization & Virtualization ---
     container = {
       symbol = " ";
-      format = "${viaIcon} [$symbol($version )]($style)";
+      format = "[${i.icon01}](${viaColor}) [$symbol($version )]($style)";
       style = "bold #462941";
       disabled = true;
     };
     docker_context = {
       symbol = "  ";
-      format = "${viaIcon} [$symbol($version )]($style)";
+      format = "[${i.icon01}](${viaColor}) [$symbol($version )]($style)";
       style = "bold #462941";
       disabled = false;
     };
@@ -130,7 +139,7 @@ in {
     };
     vagrant = {
       symbol = " ";
-      format = "${viaIcon} [$symbol($version )]($style)";
+      format = "[${i.icon01}](${viaColor}) [$symbol($version )]($style)";
       style = "bold #462941";
       disabled = true;
     };
@@ -148,13 +157,13 @@ in {
     };
     pulumi = {
       symbol = " ";
-      format = "${viaIcon} [$symbol($version )]($style)";
+      format = "[${i.icon01}](${viaColor}) [$symbol($version )]($style)";
       style = "bold #462941";
       disabled = true;
     };
     terraform = {
       symbol = "󱁢 ";
-      format = "${viaIcon} [$symbol($version )]($style)";
+      format = "[${i.icon01}](${viaColor}) [$symbol($version )]($style)";
       style = "bold #462941";
       disabled = false;
     };
@@ -162,120 +171,120 @@ in {
     # --- Languages & Runtimes ---
     buf = {
       symbol = " ";
-      format = "${viaIcon} [$symbol($version )]($style)";
+      format = "[${i.icon01}](${viaColor}) [$symbol($version )]($style)";
       style = "bold #462941";
       disabled = true;
     };
     bun = {
       symbol = " ";
-      format = "${viaIcon} [$symbol($version )]($style)";
+      format = "[${i.icon01}](${viaColor}) [$symbol($version )]($style)";
       style = "bold #462941";
       disabled = true;
     };
     c = {
       symbol = " ";
-      format = "${viaIcon} [$symbol($version )]($style)";
+      format = "[${i.icon01}](${viaColor}) [$symbol($version )]($style)";
       style = "bold #462941";
       disabled = true;
     };
     cmake = {
       symbol = " ";
-      format = "${viaIcon} [$symbol($version )]($style)";
+      format = "[${i.icon01}](${viaColor}) [$symbol($version )]($style)";
       style = "bold #462941";
       disabled = true;
     };
     cobol = {
       symbol = " ";
-      format = "${viaIcon} [$symbol($version )]($style)";
+      format = "[${i.icon01}](${viaColor}) [$symbol($version )]($style)";
       style = "bold #462941";
       disabled = true;
     };
     conda = {
       symbol = " ";
-      format = "${viaIcon} [$symbol($version )]($style)";
+      format = "[${i.icon01}](${viaColor}) [$symbol($version )]($style)";
       style = "bold #462941";
       disabled = false;
     };
     crystal = {
       symbol = " ";
-      format = "${viaIcon} [$symbol($version )]($style)";
+      format = "[${i.icon01}](${viaColor}) [$symbol($version )]($style)";
       style = "bold #462941";
       disabled = true;
     };
     daml = {
       symbol = " ";
-      format = "${viaIcon} [$symbol($version )]($style)";
+      format = "[${i.icon01}](${viaColor}) [$symbol($version )]($style)";
       style = "bold #462941";
       disabled = true;
     };
     dart = {
       symbol = " ";
-      format = "${viaIcon} [$symbol($version )]($style)";
+      format = "[${i.icon01}](${viaColor}) [$symbol($version )]($style)";
       style = "bold #462941";
       disabled = true;
     };
     deno = {
       symbol = " ";
-      format = "${viaIcon} [$symbol($version )]($style)";
+      format = "[${i.icon01}](${viaColor}) [$symbol($version )]($style)";
       style = "bold #462941";
       disabled = true;
     };
     dotnet = {
       symbol = "󰪮 ";
-      format = "${viaIcon} [$symbol($version )]($style)";
+      format = "[${i.icon01}](${viaColor}) [$symbol($version )]($style)";
       style = "bold #462941";
       disabled = true;
     };
     elixir = {
       symbol = " ";
-      format = "${viaIcon} [$symbol($version )]($style)";
+      format = "[${i.icon01}](${viaColor}) [$symbol($version )]($style)";
       style = "bold #462941";
       disabled = false;
     };
     elm = {
       symbol = " ";
-      format = "${viaIcon} [$symbol($version )]($style)";
+      format = "[${i.icon01}](${viaColor}) [$symbol($version )]($style)";
       style = "bold #462941";
       disabled = true;
     };
     erlang = {
       symbol = " ";
-      format = "${viaIcon} [$symbol($version )]($style)";
+      format = "[${i.icon01}](${viaColor}) [$symbol($version )]($style)";
       style = "bold #462941";
       disabled = false;
     };
     fennel = {
       symbol = " ";
-      format = "${viaIcon} [$symbol($version )]($style)";
+      format = "[${i.icon01}](${viaColor}) [$symbol($version )]($style)";
       style = "bold #462941";
       disabled = true;
     };
     gleam = {
       symbol = " ";
-      format = "${viaIcon} [$symbol($version )]($style)";
+      format = "[${i.icon01}](${viaColor}) [$symbol($version )]($style)";
       style = "bold #462941";
       disabled = true;
     };
     golang = {
       symbol = " ";
-      format = "${viaIcon} [$symbol($version )]($style)";
+      format = "[${i.icon01}](${viaColor}) [$symbol($version )]($style)";
       style = "bold #462941";
       disabled = false;
     };
     gradle = {
       symbol = " ";
-      format = "${viaIcon} [$symbol($version )]($style)";
+      format = "[${i.icon01}](${viaColor}) [$symbol($version )]($style)";
       style = "bold #462941";
       disabled = true;
     };
     guix_shell = {
       symbol = " ";
-      format = "${viaIcon} [$symbol($version )]($style)";
+      format = "[${i.icon01}](${viaColor}) [$symbol($version )]($style)";
       style = "bold #462941";
       disabled = true;
     };
     haskell = {
-      format = "${viaIcon} [$symbol($version )]($style)";
+      format = "[${i.icon01}](${viaColor}) [$symbol($version )]($style)";
       style = "bold #462941";
       disabled = false;
       symbol = " ";
@@ -285,24 +294,24 @@ in {
     };
     haxe = {
       symbol = " ";
-      format = "${viaIcon} [$symbol($version )]($style)";
+      format = "[${i.icon01}](${viaColor}) [$symbol($version )]($style)";
       style = "bold #462941";
       disabled = true;
     };
     helm = {
       symbol = " ";
-      format = "${viaIcon} [$symbol($version )]($style)";
+      format = "[${i.icon01}](${viaColor}) [$symbol($version )]($style)";
       style = "bold #462941";
       disabled = true;
     };
     java = {
       symbol = " ";
-      format = "${viaIcon} [$symbol($version )]($style)";
+      format = "[${i.icon01}](${viaColor}) [$symbol($version )]($style)";
       style = "bold #462941";
       disabled = true;
     };
     julia = {
-      format = "via [$symbol($version )]($style)";
+      format = "[${i.icon01}](${viaColor}) [$symbol($version )]($style)";
       symbol = " ";
       style = "bold #C2736D";
       disabled = false;
@@ -312,7 +321,7 @@ in {
     };
     kotlin = {
       symbol = " ";
-      format = "${viaIcon} [$symbol($version )]($style)";
+      format = "[${i.icon01}](${viaColor}) [$symbol($version )]($style)";
       style = "bold #462941";
       disabled = true;
     };
@@ -327,36 +336,36 @@ in {
     };
     meson = {
       symbol = "󰔷 ";
-      format = "${viaIcon} [$symbol($version )]($style)";
+      format = "[${i.icon01}](${viaColor}) [$symbol($version )]($style)";
       style = "bold #462941";
       disabled = true;
     };
     mise = {
       symbol = " ";
-      format = "${viaIcon} [$symbol($version )]($style)";
+      format = "[${i.icon01}](${viaColor}) [$symbol($version )]($style)";
       style = "bold #462941";
       disabled = true;
     };
     mojo = {
       symbol = " ";
-      format = "${viaIcon} [$symbol($version )]($style)";
+      format = "[${i.icon01}](${viaColor}) [$symbol($version )]($style)";
       style = "bold #462941";
       disabled = true;
     };
     nim = {
       symbol = " ";
-      format = "${viaIcon} [$symbol($version )]($style)";
+      format = "[${i.icon01}](${viaColor}) [$symbol($version )]($style)";
       style = "bold #462941";
       disabled = true;
     };
     nodejs = {
       symbol = "󰎙 ";
-      format = "${viaIcon} [$symbol($version )]($style)";
+      format = "[${i.icon01}](${viaColor}) [$symbol($version )]($style)";
       style = "bold #2D4F67";
       disabled = false;
     };
     ocaml = {
-      format = "via [$symbol($version )]($style)";
+      format = "[${i.icon01}](${viaColor}) [$symbol($version )]($style)";
       symbol = " ";
       style = "bold #E6C384";
       disabled = false;
@@ -365,7 +374,7 @@ in {
       detect_folders = [];
     };
     odin = {
-      format = "via [$symbol($version )]($style)";
+      format = "[${i.icon01}](${viaColor})[$symbol($version )]($style)";
       symbol = "󰹩 ";
       style = "bold #4d699b";
       disabled = false;
@@ -375,54 +384,64 @@ in {
     };
     opa = {
       symbol = " ";
-      format = "${viaIcon} [$symbol($version )]($style)";
+      format = "[${i.icon01}](${viaColor}) [$symbol($version )]($style)";
       style = "bold #462941";
       disabled = true;
     };
     perl = {
       symbol = " ";
-      format = "${viaIcon} [$symbol($version )]($style)";
+      format = "[${i.icon01}](${viaColor}) [$symbol($version )]($style)";
       style = "bold #462941";
       disabled = true;
     };
     php = {
       symbol = " ";
-      format = "${viaIcon} [$symbol($version )]($style)";
+      format = "[${i.icon01}](${viaColor}) [$symbol($version )]($style)";
       style = "bold #462941";
       disabled = true;
     };
     pixi = {
       symbol = " ";
-      format = "${viaIcon} [$symbol($version )]($style)";
+      format = "[${i.icon01}](${viaColor}) [$symbol($version )]($style)";
       style = "bold #462941";
       disabled = true;
     };
     purescript = {
       symbol = " ";
-      format = "${viaIcon} [$symbol($version )]($style)";
+      format = "[${i.icon01}](${viaColor}) [$symbol($version )]($style)";
       style = "bold #462941";
       disabled = true;
     };
+    python = {
+      format = "[${i.icon01}](${viaColor}) [$symbol($version )]($style)";
+      symbol = " ";
+      style = "yellow bold";
+      disabled = false;
+      python_binary = ["python3" "python"];
+      detect_extensions = ["py"];
+      detect_files = ["setup.py" "pyproject.toml" "requirements.txt" "__init__.py"];
+      detect_folders = [];
+    };
     quarto = {
       symbol = " ";
-      format = "${viaIcon} [$symbol($version )]($style)";
+      format = "[${i.icon01}](${viaColor}) [$symbol($version )]($style)";
       style = "bold #462941";
       disabled = true;
     };
     raku = {
       symbol = " ";
-      format = "${viaIcon} [$symbol($version )]($style)";
+      format = "[${i.icon01}](${viaColor}) [$symbol($version )]($style)";
       style = "bold #462941";
       disabled = true;
     };
     red = {
       symbol = " ";
-      format = "${viaIcon} [$symbol($version )]($style)";
+      format = "[${i.icon01}](${viaColor}) [$symbol($version )]($style)";
       style = "bold #462941";
       disabled = true;
     };
     rlang = {
-      format = "via [$symbol($version )]($style)";
+      format = "[${i.icon01}](${viaColor}) [$symbol($version )]($style)";
       symbol = "󰟔 ";
       style = "bold #497EFC";
       disabled = false;
@@ -432,22 +451,22 @@ in {
     };
     ruby = {
       symbol = " ";
-      format = "${viaIcon} [$symbol($version )]($style)";
+      format = "[${i.icon01}](${viaColor}) [$symbol($version )]($style)";
       style = "bold #462941";
       disabled = true;
     };
     rust = {
       symbol = " ";
-      style = "bold #c4746e";
+      style = "bold ${colors.color1}";
       disabled = false;
       detect_extensions = ["rs"];
       detect_files = ["Cargo.toml" "Cargo.lock"];
       detect_folders = [];
     };
     scala = {
-      format = "via [$symbol($version )]($style)";
+      format = "[${i.icon01}](${viaColor}) [$symbol($version )]($style)";
       symbol = " ";
-      style = "bold #c4746e";
+      style = "bold ${colors.color1}";
       disabled = false;
       detect_extensions = ["scala" "sbt"];
       detect_files = ["build.sbt" "build.sc" "project/build.properties"];
@@ -455,31 +474,31 @@ in {
     };
     solidity = {
       symbol = " ";
-      format = "${viaIcon} [$symbol($version )]($style)";
+      format = "[${i.icon01}](${viaColor}) [$symbol($version )]($style)";
       style = "bold #462941";
       disabled = true;
     };
     swift = {
       symbol = " ";
-      format = "${viaIcon} [$symbol($version )]($style)";
+      format = "[${i.icon01}](${viaColor}) [$symbol($version )]($style)";
       style = "bold #462941";
       disabled = true;
     };
     typst = {
       symbol = " ";
-      format = "${viaIcon} [$symbol($version )]($style)";
+      format = "[${i.icon01}](${viaColor}) [$symbol($version )]($style)";
       style = "bold #462941";
       disabled = false;
     };
     vlang = {
       symbol = " ";
-      format = "${viaIcon} [$symbol($version )]($style)";
+      format = "[${i.icon01}](${viaColor}) [$symbol($version )]($style)";
       style = "bold #462941";
       disabled = true;
     };
     zig = {
       symbol = " ";
-      format = "via [$symbol($version )]($style)";
+      format = "[${i.icon01}](${viaColor}) [$symbol($version )]($style)";
       style = "bold yellow";
       disabled = false;
       detect_extensions = ["zig" "zon"];
@@ -516,9 +535,6 @@ in {
     };
     jobs = {
       symbol = "⛭ ";
-    };
-    localip = {
-      symbol = "󰩟 ";
     };
     memory_usage = {
       symbol = "󰍛 ";
@@ -580,6 +596,12 @@ in {
     };
 
     # --- Version Control ---
+    git_branch = {
+      disabled = false;
+      format = "on [$symbol$branch$ahead_behind]($style) ";
+      style = "bold #A4A7A4";
+      symbol = " ";
+    };
     git_state = {
       am = "✉";
       am_or_rebase = "⟳";
@@ -590,8 +612,8 @@ in {
       revert = "↺";
     };
     git_status = {
-      format = "([\\[$all_status$ahead_behind\\]]($style) )";
-      style = "bold #c4746e";
+      format = "[\\[$all_status\\]]($style) ";
+      style = "bold ${colors.color1}";
       ahead = "⇡";
       behind = "⇣";
       conflicted = "=";
@@ -631,11 +653,6 @@ in {
       symbol = "󰀂 ";
     };
 
-    # --- Environment Variables ---
-    env_var = {
-      symbol = " ";
-    };
-
     # --- Misc ---
     fill = {
       symbol = " ";
@@ -648,135 +665,6 @@ in {
     };
     singularity = {
       symbol = " ";
-    };
-  };
-  custom = {
-    clojure = {
-      description = "Shows Clojure project";
-      when = ''
-        test -f project.clj || \
-        test -f deps.edn || \
-        test -f build.boot || \
-        test -f shadow-cljs.edn || \
-        test -f bb.edn
-      '';
-      command = ''
-        if command -v clojure >/dev/null 2>&1; then
-          clojure -version 2>&1 | grep -o '[0-9]\+\.[0-9]\+\.[0-9]\+' | head -1
-        else
-          echo "project"
-        fi
-      '';
-      format = "${viaIcon} [ $output]($style) ";
-      style = "bold green";
-    };
-
-    astro = {
-      description = "Shows Astro project";
-      when = ''
-        test -f astro.config.mjs || \
-        test -f astro.config.js || \
-        test -f astro.config.ts || \
-        find . -maxdepth 1 -name "*.astro" 2>/dev/null | grep -q .
-      '';
-      command = ''
-        if [ -f package.json ] && grep -q '"astro"' package.json 2>/dev/null; then
-          grep '"astro":' package.json | grep -o '[0-9]\+\.[0-9]\+\.[0-9]\+' | head -1
-        else
-          echo "project"
-        fi
-      '';
-      format = "${viaIcon} [ $output]($style) ";
-      style = "bold purple";
-    };
-
-    typescript = {
-      description = "Shows TypeScript project";
-      when = ''
-        test -f tsconfig.json || \
-        test -f tsconfig.base.json || \
-        find . -maxdepth 1 -name "*.ts" -o -name "*.tsx" 2>/dev/null | grep -q .
-      '';
-      command = ''
-        if command -v tsc >/dev/null 2>&1; then
-          tsc --version | grep -o '[0-9]\+\.[0-9]\+\.[0-9]\+'
-        else
-          echo "project"
-        fi
-      '';
-      format = "${viaIcon} [ $output]($style) ";
-      style = "bold blue";
-    };
-
-    assembly = {
-      description = "Shows Assembly project";
-      when = ''
-        find . -maxdepth 1 \( -name "*.asm" -o -name "*.s" -o -name "*.S" \) 2>/dev/null | grep -q .
-      '';
-      command = ''
-        if command -v nasm >/dev/null 2>&1; then
-          echo "nasm"
-        elif command -v gas >/dev/null 2>&1; then
-          echo "gas"
-        else
-          echo "asm"
-        fi
-      '';
-      format = "${viaIcon} [ $output]($style) ";
-      style = "bold red";
-    };
-
-    ada = {
-      description = "Shows Ada project";
-      when = ''
-        test -f alire.toml || \
-        test -f project.gpr || \
-        find . -maxdepth 1 \( -name "*.ads" -o -name "*.adb" \) 2>/dev/null | grep -q .
-      '';
-      command = ''
-        if command -v gnatmake >/dev/null 2>&1; then
-          gnatmake --version | head -1 | grep -o '[0-9]\+\.[0-9]\+'
-        else
-          echo "project"
-        fi
-      '';
-      format = "${viaIcon} [ $output]($style) ";
-      style = "bold cyan";
-    };
-
-    agda = {
-      description = "Shows Agda project";
-      when = ''
-        test -f .agda-lib || \
-        find . -maxdepth 1 -name "*.agda" 2>/dev/null | grep -q .
-      '';
-      command = ''
-        if command -v agda >/dev/null 2>&1; then
-          agda --version | grep -o '[0-9]\+\.[0-9]\+\.[0-9]\+' | head -1
-        else
-          echo "project"
-        fi
-      '';
-      format = "${viaIcon} [ $output]($style) ";
-      style = "bold yellow";
-    };
-
-    angular = {
-      description = "Shows Angular project";
-      when = ''
-        test -f angular.json || \
-        test -f .angular-cli.json || \
-        test -f angular-cli.json
-      '';
-      command = ''
-        if [ -f package.json ] && grep -q '"@angular/core"' package.json 2>/dev/null; then
-          grep '"@angular/core":' package.json | grep -o '[0-9]\+\.[0-9]\+\.[0-9]\+' | head -1
-        else
-          echo "project"
-        fi
-      '';
-      format = "${viaIcon} [ $output]($style) ";
-      style = "bold red";
     };
   };
 }
