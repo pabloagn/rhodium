@@ -1,9 +1,13 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
-    # Python
-    python312Packages.ipykernel
-    python313Packages.ipykernel
-    python312Packages.wcwidth # Required for unicode menus
-    python313Packages.wcwidth
+    (python3.withPackages (ps:
+      with ps; [
+        ipykernel
+        jupyter
+        numpy
+        matplotlib
+        pandas
+        wcwidth
+      ]))
   ];
 }

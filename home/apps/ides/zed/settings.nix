@@ -1,7 +1,7 @@
 {...}: {
   programs.zed-editor = {
     userSettings = {
-      # Appearance
+      # --- Appearance ---
       buffer_font_family = "JetBrainsMono Nerd Font";
       buffer_font_size = 15;
       buffer_font_weight = 300;
@@ -12,7 +12,7 @@
       ui_font_size = 15;
       ui_font_weight = 400;
 
-      # Behavior
+      # --- Behavior ---
       auto_indent_on_paste = true;
       auto_signature_help = true;
       cursor_blink = false;
@@ -29,7 +29,7 @@
       vim_mode = true;
       wrap_guides = [];
 
-      # Features and Telemetry
+      # --- Features And Telemetry ---
       features = {
         copilot = false;
       };
@@ -38,7 +38,7 @@
         metrics = false;
       };
 
-      # Gutter
+      # --- Gutter ---
       gutter = {
         breakpoints = true;
         code_actions = true;
@@ -47,7 +47,7 @@
         runnables = true;
       };
 
-      # Indent Guides
+      # --- Indent Guides ---
       indent_guides = {
         active_line_width = 1;
         background_coloring = "disabled";
@@ -56,7 +56,7 @@
         line_width = 1;
       };
 
-      # Scrollbar
+      # --- Scrollbar ---
       scrollbar = {
         axes = {
           horizontal = true;
@@ -71,14 +71,14 @@
         show = "auto";
       };
 
-      # Title Bar
+      # --- Title Bar ---
       title_bar = {
         show_branch_icon = false;
         show_onboarding_banner = true;
         show_user_picture = true;
       };
 
-      # Toolbar
+      # --- Toolbar ---
       toolbar = {
         agent_review = false;
         breadcrumbs = true;
@@ -86,5 +86,23 @@
         selections_menu = true;
       };
     };
+
+    # --- Repl Configuration ---
+    jupyter = {
+      kernel_selections = {
+        python = "nixpython";
+      };
+    };
+
+    languages = {
+      Python = {
+        tab_size = 4;
+        formatter = "language_server";
+        format_on_save = "on";
+        code_lens = true;
+      };
+    };
+
+    inline_completion_provider = "supermaven";
   };
 }

@@ -1,58 +1,58 @@
-{pkgs, ...}: {
+{...}: {
   programs.vscode = {
     profiles = {
       default = {
         userSettings = {
-          # Window
+          # --- Window ---
           "window.title" = "Rhodium";
 
           # Workbench
-          "workbench.colorCustomizations" = {
-            "[Tokyo Night]" = {
-              # TODO: Include theme color tokens here
-              "editor.background" = "#141518";
-              "editor.lineHighlightBackground" = "#1f2233";
-              "editor.selectionBackground" = "#24282f";
-              "editor.findMatchBackground" = "#2e3c57";
-              "editorWhitespace.foreground" = "#3b4048";
-              "editorCursor.foreground" = "#d9dee8";
-              "editorIndentGuide.background1" = "#232530";
-              "editorIndentGuide.activeBackground1" = "#393b4d";
-              "sideBar.background" = "#141518";
-              "sideBar.foreground" = "#abb2bf";
-              "sideBarTitle.foreground" = "#abb2bf";
-              "sideBarSectionHeader.background" = "#181a1f";
-              "sideBarSectionHeader.foreground" = "#abb2bf";
-              "activityBar.background" = "#141518";
-              "activityBar.foreground" = "#cbc2c4";
-              "activityBar.inactiveForeground" = "#9794a3";
-              "titleBar.activeBackground" = "#141518";
-              "titleBar.activeForeground" = "#a9adb1";
-              "activityBarBadge.background" = "#d4b89b";
-              "activityBarBadge.foreground" = "#1a1b26";
-              "statusBar.background" = "#141518";
-              "statusBar.foreground" = "#9794a3";
-              "editorGroupHeader.tabsBackground" = "#141518";
-              "editorGroupHeader.tabsBorder" = "#141518";
-              "tab.activeBackground" = "#141518";
-              "tab.activeForeground" = "#d0d9e6";
-              "tab.inactiveBackground" = "#13141c";
-              "tab.inactiveForeground" = "#8792aa";
-              "tab.activeBorder" = "#8792aa";
-              "breadcrumb.background" = "#141518";
-              "breadcrumb.foreground" = "#8792aa";
-              "breadcrumb.focusForeground" = "#d5d8da";
-              "breadcrumb.activeSelectionForeground" = "#ffffff";
-              "breadcrumbPicker.background" = "#1c1e26";
-              "list.activeSelectionBackground" = "#1e2126";
-              "list.activeSelectionForeground" = "#d0d9e6";
-              "list.inactiveSelectionBackground" = "#1c1f25";
-              "list.hoverBackground" = "#1c1f25";
-              "scrollbarSlider.background" = "#2a2c3a80";
-              "scrollbarSlider.hoverBackground" = "#3b3f5280";
-              "scrollbarSlider.activeBackground" = "#3b3f52";
-            };
-          };
+          # "workbench.colorCustomizations" = {
+          #   "[Kanso]" = {
+          #     "editor.background" = "#141518";
+          #     "editor.lineHighlightBackground" = "#1f2233";
+          #     "editor.selectionBackground" = "#24282f";
+          #     "editor.findMatchBackground" = "#2e3c57";
+          #     "editorWhitespace.foreground" = "#3b4048";
+          #     "editorCursor.foreground" = "#d9dee8";
+          #     "editorIndentGuide.background1" = "#232530";
+          #     "editorIndentGuide.activeBackground1" = "#393b4d";
+          #     "sideBar.background" = "#141518";
+          #     "sideBar.foreground" = "#abb2bf";
+          #     "sideBarTitle.foreground" = "#abb2bf";
+          #     "sideBarSectionHeader.background" = "#181a1f";
+          #     "sideBarSectionHeader.foreground" = "#abb2bf";
+          #     "activityBar.background" = "#141518";
+          #     "activityBar.foreground" = "#cbc2c4";
+          #     "activityBar.inactiveForeground" = "#9794a3";
+          #     "titleBar.activeBackground" = "#141518";
+          #     "titleBar.activeForeground" = "#a9adb1";
+          #     "activityBarBadge.background" = "#d4b89b";
+          #     "activityBarBadge.foreground" = "#1a1b26";
+          #     "statusBar.background" = "#141518";
+          #     "statusBar.foreground" = "#9794a3";
+          #     "editorGroupHeader.tabsBackground" = "#141518";
+          #     "editorGroupHeader.tabsBorder" = "#141518";
+          #     "tab.activeBackground" = "#141518";
+          #     "tab.activeForeground" = "#d0d9e6";
+          #     "tab.inactiveBackground" = "#13141c";
+          #     "tab.inactiveForeground" = "#8792aa";
+          #     "tab.activeBorder" = "#8792aa";
+          #     "breadcrumb.background" = "#141518";
+          #     "breadcrumb.foreground" = "#8792aa";
+          #     "breadcrumb.focusForeground" = "#d5d8da";
+          #     "breadcrumb.activeSelectionForeground" = "#ffffff";
+          #     "breadcrumbPicker.background" = "#1c1e26";
+          #     "list.activeSelectionBackground" = "#1e2126";
+          #     "list.activeSelectionForeground" = "#d0d9e6";
+          #     "list.inactiveSelectionBackground" = "#1c1f25";
+          #     "list.hoverBackground" = "#1c1f25";
+          #     "scrollbarSlider.background" = "#2a2c3a80";
+          #     "scrollbarSlider.hoverBackground" = "#3b3f5280";
+          #     "scrollbarSlider.activeBackground" = "#3b3f52";
+          #   };
+          # };
+
           "workbench.editor.decorations.colors" = true;
           "workbench.editor.decorations.badges" = true;
           "workbench.editor.labelFormat" = "short";
@@ -60,12 +60,12 @@
           "workbench.editor.limit.value" = 15;
           "workbench.tree.indent" = 20;
           "workbench.tree.renderIndentGuides" = "always";
-          "workbench.colorTheme" = "Tokyo Night";
+          "workbench.colorTheme" = "Kanso Zen";
           "workbench.iconTheme" = "material-icon-theme";
           "workbench.panel.defaultLocation" = "bottom";
           "workbench.activityBar.location" = "top";
 
-          # Editor
+          # --- Editor ---
           "editor.tabSize" = 2;
           "editor.insertSpaces" = true;
           "editor.detectIndentation" = false;
@@ -81,7 +81,6 @@
           "editor.codeLens" = true;
           "editor.unicodeHighlight.ambiguousCharacters" = true;
           "editor.unicodeHighlight.invisibleCharacters" = true;
-          # TODO: Inject theme fonts here (incl fallback)
           "editor.fontFamily" = "'JetBrainsMono Nerd Font', 'JetBrains Mono', 'FiraCode Nerd Font', 'Fira Code', Menlo, Monaco, 'Courier New', monospace";
           "editor.fontLigatures" = true;
           "editor.fontSize" = 14;
@@ -98,12 +97,12 @@
           "editor.smoothScrolling" = true;
           "editor.formatOnSave" = false;
 
-          # Todo Tree
+          # --- Todo Tree ---
           "todo-tree.general.statusBar" = "total";
           "todo-tree.general.showActivityBarBadge" = false;
           "todo-tree.general.showIconsInsteadOfTagsInStatusBar" = true;
 
-          # Git/SCM
+          # --- Git/scm ---
           "scm.countBadge" = "off";
           "git.countBadge" = "off";
           "git.enableSmartCommit" = true;
@@ -111,9 +110,9 @@
           "git.autofetch" = true;
           "git.ignoreLimitWarning" = true;
 
-          # Language-specific editor settings
+          # --- Language-specific Editor Settings ---
           "editor.tokenColorCustomizations" = {
-            "[Tokyo Night]" = {
+            "[Kanso]" = {
               "textMateRules" = [
                 {
                   "scope" = "variable.other.rust";
@@ -193,22 +192,22 @@
             "editor.formatOnSave" = false;
           };
 
-          # Markdown
+          # --- Markdown ---
           "markdownlint.config" = {
             "MD029" = false;
             "MD024" = false;
           };
 
-          # Explorer
+          # --- Explorer ---
           "explorer.compactFolders" = true;
           "explorer.confirmDelete" = false;
           "explorer.confirmDragAndDrop" = false;
 
-          # Problems
+          # --- Problems ---
           "problems.autoReveal" = true;
           "problems.showCurrentInStatus" = true;
 
-          # Files & Search
+          # --- Files & Search ---
           "files.encoding" = "utf8";
           "files.eol" = "\n";
           "files.insertFinalNewline" = true;
@@ -261,7 +260,7 @@
             "*.nix" = "nix";
           };
 
-          # Language Servers
+          # --- Language Servers ---
           "python.defaultInterpreterPath" = "python3";
           "python.languageServer" = "Pylance";
           "python.analysis.typeCheckingMode" = "basic";
@@ -291,7 +290,7 @@
           "Lua.workspace.library" = ["\${3rd}/love2d/library"];
           "Lua.workspace.checkThirdParty" = false;
 
-          # Spell Checker
+          # --- Spell Checker ---
           "cSpell.enabled" = false;
           "cSpell.validateDirectives" = true;
           "cSpell.ignorePaths" = [
@@ -322,15 +321,15 @@
             "yazi"
           ];
 
-          # Terminal
+          # --- Terminal ---
           "terminal.integrated.cursorBlinking" = true;
           "terminal.integrated.smoothScrolling" = true;
 
-          # Extensions
+          # --- Extensions ---
           "extensions.autoCheckUpdates" = false;
           "extensions.ignoreRecommendations" = true;
 
-          # Misc
+          # --- Misc ---
           "security.workspace.trust.enabled" = false;
           "workbench.startupEditor" = "none";
           "redhat.telemetry.enabled" = false;
