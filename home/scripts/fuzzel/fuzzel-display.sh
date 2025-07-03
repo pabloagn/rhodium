@@ -46,7 +46,8 @@ wl_mirror_outputs() {
     local target_output="$2"
 
     notify "$APP_TITLE" "Mirroring ${source_output} to ${target_output}..."
-    wl-mirror --fullscreen-output "$target_output" "$source_output" & disown
+    wl-mirror --fullscreen-output "$target_output" "$source_output" &
+    disown
     notify "$APP_TITLE" "Mirroring initiated. Check ${target_output} for the mirrored view."
 }
 
@@ -60,6 +61,80 @@ stop_all_mirrors() {
     fi
 }
 
+switch_wallpaper() {
+    local target_dir="/var/tmp/current-wallpaper"
+    # Use the same APP_NAME defined at the top of your script
+    local CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/$APP_NAME"
+    local CACHE_FILE="$CACHE_DIR/wallpapers.cache"
+
+    # First, check if the cache file actually exists.
+    if [[ ! -f "$CACHE_FILE" ]]; then
+        notify "$APP_TITLE" "Wallpaper cache not found!" "Please run the cache builder script."
+        return 1
+    fi
+
+    while true; do
+        local selected_line
+        # Read the cache file, take the first column (the formatted text) and pipe it to fuzzel.
+        # This is extremely fast as it's just reading a text file.
+        selected_line=$(cut -d$'\t' -f1 "$CACHE_FILE" | fuzzel --dmenu -p "$PROMPT" -l 10 -w 85)
+
+        # If the user presses Escape in fuzzel, the selection is empty, so we break the loop.
+        if [[ -z "${selected_line:-}" ]]; then
+            echo "No selection, exiting wallpaper menu."
+            break
+        fi
+
+        # Now, find the actual file path that corresponds to the selected line.
+        # We use awk to find the line where the first field ($1) matches our selection,
+        # and then we print the second field ($2), which is the full path.
+        local wallpaper_path
+        wallpaper_path=$(awk -F'\t' -v sel="$selected_line" '$1 == sel { print $2; exit }' "$CACHE_FILE")
+
+        # If we found a valid path, set the wallpaper.
+        if [[ -n "$wallpaper_path" && -f "$wallpaper_path" ]]; then
+            ln -sf "$wallpaper_path" "$target_dir"
+            # Use the clean, selected line for the notification.
+            notify-send --app-name=rh-utils "Rhodium Utils" "Setting wallpaper: $(basename "$wallpaper_path")"
+
+            niri msg action do-screen-transition --delay-ms 400
+            systemctl --user restart rh-swaybg.service
+        else
+            notify "$APP_TITLE" "Could not find file path for selection."
+        fi
+    done
+}
+
+# switch_wallpaper() {
+#     local wallpaper_dir="${XDG_DATA_HOME:-$HOME/.local/share}/wallpapers"
+#     local target_dir="/var/tmp/current-wallpaper"
+#
+#     [[ -d "$wallpaper_dir" ]] || {
+#         notify "$APP_TITLE" "Wallpaper directory missing: $wallpaper_dir"
+#         return 1
+#     }
+#
+#     while true; do
+#         local selected
+#         selected=$(fd . "$wallpaper_dir" -t 'symlink' --and ".jpg" | sort -z | fuzzel --dmenu -p "$PROMPT" -l 10 | tr -d '\0')
+#
+#         if [[ -z "${selected:-}" ]]; then
+#             echo "No selection, exiting wallpaper menu."
+#             break
+#         fi
+#
+#         if [[ -f "$selected" ]]; then
+#             ln -sf "$selected" "$target_dir"
+#             notify-send --app-name=rh-utils "Rhodium Utils" "Setting wallpaper: ${selected}"
+#
+#             niri msg action do-screen-transition --delay-ms 400
+#             systemctl --user restart rh-swaybg.service
+#         else
+#             notify "$APP_TITLE" "Selected wallpaper not found: $selected"
+#         fi
+#     done
+# }
+
 noop() {
     :
 }
@@ -71,7 +146,6 @@ generate_menu_options() {
     if ! niri_outputs=$(get_display_info); then
         options+=("No displays detected:noop")
         options+=("Exit:noop")
-        echo "DEBUG: get_display_info failed, populating fallback options." >&2
         return
     fi
 
@@ -79,14 +153,12 @@ generate_menu_options() {
     output_names_str=$(echo "$niri_outputs" | jq -r 'keys[]' 2>/dev/null || true)
     local output_names=($output_names_str)
 
-    echo "DEBUG: Detected output_names: '${output_names[@]}'" >&2
     declare -A output_status
 
     if [[ ${#output_names[@]} -eq 0 ]]; then
         notify "$APP_TITLE" "No display names retrieved from Niri output. Check jq parsing or Niri JSON."
         options+=("No displays detected:noop")
         options+=("Exit:noop")
-        echo "DEBUG: No output_names detected, populating fallback options." >&2
         return
     fi
 
@@ -94,11 +166,9 @@ generate_menu_options() {
         if echo "$niri_outputs" | jq -e ".\"$output_name\".logical != null" >/dev/null; then
             output_status[$output_name]="on"
             options+=("Turn Off ${output_name}:wlr_randr_off ${output_name}")
-            echo "DEBUG: Added 'Turn Off ${output_name}'" >&2
         else
             output_status[$output_name]="off"
             options+=("Turn On ${output_name}:wlr_randr_on ${output_name}")
-            echo "DEBUG: Added 'Turn On ${output_name}'" >&2
         fi
     done
 
@@ -106,31 +176,24 @@ generate_menu_options() {
     for output_name in "${output_names[@]}"; do
         if [[ "${output_status[$output_name]}" == "on" ]]; then
             active_outputs+=("$output_name")
-            echo "DEBUG: Active output: ${output_name}" >&2
         fi
     done
 
     if [[ ${#active_outputs[@]} -ge 2 ]]; then
-        echo "DEBUG: Preparing mirror options for active outputs: ${active_outputs[@]}" >&2
         for source_output in "${active_outputs[@]}"; do
             for target_output in "${active_outputs[@]}"; do
                 if [[ "$source_output" != "$target_output" ]]; then
                     options+=("Mirror ${source_output} to ${target_output}:wl_mirror_outputs ${source_output} ${target_output}")
-                    echo "DEBUG: Added 'Mirror ${source_output} to ${target_output}'" >&2
                 fi
             done
         done
         options+=("Stop All Mirrors:stop_all_mirrors")
-        echo "DEBUG: Added 'Stop All Mirrors'" >&2
     else
         echo "DEBUG: Not enough active displays (${#active_outputs[@]}) for mirroring options." >&2
     fi
 
+    options+=("Switch Wallpapers:switch_wallpaper")
     options+=("Exit:noop")
-    echo "DEBUG: Final 'options' array contains ${#options[@]} items." >&2
-    for item in "${options[@]}"; do
-        echo "DEBUG:   - option: $item" >&2
-    done
 }
 
 main() {
@@ -150,35 +213,25 @@ main() {
     generate_menu_options
     echo "DEBUG: After generate_menu_options, 'options' array has ${#options[@]} entries." >&2
 
-    # --- CRITICAL REORDERING ---
-    # First, populate 'menu_labels' from 'options'
     decorate_fuzzel_menu options
-    echo "DEBUG: After decorate_fuzzel_menu, 'menu_labels' array has ${#menu_labels[@]} entries." >&2
-    echo "DEBUG: menu_labels for fuzzel: '${menu_labels[@]}'" >&2
 
     # Now that 'menu_labels' is populated, call get_fuzzel_line_count
     local line_count
     line_count=$(get_fuzzel_line_count)
-    echo "DEBUG: Fuzzel line count (from get_fuzzel_line_count): $line_count" >&2
-    # --- END CRITICAL REORDERING ---
 
     local selected
     selected=$(printf '%s\n' "${menu_labels[@]}" | fuzzel --dmenu --prompt="$PROMPT" -l "$line_count")
-    echo "DEBUG: Fuzzel selected: '$selected'" >&2
 
     [[ -z "$selected" ]] && return
 
     if [[ "$selected" =~ ^---.*---$ ]]; then
-        echo "DEBUG: Selected separator, re-running main." >&2
         main
         return
     fi
 
     if [[ -n "${menu_commands[$selected]:-}" ]]; then
-        echo "DEBUG: Executing command for '$selected': '${menu_commands[$selected]}'" >&2
         eval "${menu_commands[$selected]}"
     else
-        echo "DEBUG: No command found for '$selected'." >&2
         notify "$APP_TITLE" "No command associated with selected option: $selected"
     fi
 }

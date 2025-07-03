@@ -6,6 +6,7 @@
 }:
 with lib; let
   cfg = config.userExtraServices.rh-swaybg;
+  targetDir = "/var/tmp/current-wallpaper";
 in {
   options.userExtraServices.rh-swaybg = {
     enable = mkEnableOption "Wallpaper tool for Wayland compositors";
@@ -21,8 +22,7 @@ in {
 
       Service = {
         Type = "simple";
-        ExecStart = "${pkgs.swaybg}/bin/swaybg -m fill -i $WALLPAPER";
-        Environment = "WALLPAPER=${config.xdg.dataHome}/wallpapers/default.jpg";
+        ExecStart = "${pkgs.swaybg}/bin/swaybg -m fill -i ${targetDir}";
         Restart = "on-failure";
         RestartSec = 1;
       };
