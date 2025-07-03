@@ -10,6 +10,7 @@ APP_TITLE="Memento Mori"
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../common/bootstrap.sh"
 
 # Pick a window to kill
+notify "$APP_TITLE" "Knives Out" >&2
 focused=$(niri msg --json pick-window)
 
 # Check if user escaped
