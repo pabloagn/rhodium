@@ -11,5 +11,11 @@
     # calcurse # CLI calendar
     calcure # Modern calcurse alternative
     # ulauncher # GUI-based launcher
+
+    # --- Timers ---
+    uair
+    pom
+    openpomodoro-cli
+    yad # GUI dialogue for shell scripts
   ];
 }

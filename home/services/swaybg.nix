@@ -21,7 +21,8 @@ in {
 
       Service = {
         Type = "simple";
-        ExecStart = "${pkgs.swaybg}/bin/swaybg -m fill -i ${config.xdg.dataHome}/wallpapers/dante/wallpaper-01.jpg";
+        ExecStart = "${pkgs.swaybg}/bin/swaybg -m fill -i $WALLPAPER";
+        Environment = "WALLPAPER=${config.xdg.dataHome}/wallpapers/default.jpg";
         Restart = "on-failure";
         RestartSec = 1;
       };

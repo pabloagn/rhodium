@@ -61,7 +61,20 @@ in {
         force = true;
       };
     })
+    {
+      home.activation.generate-wallpaper-thumbnails = lib.hm.dag.entryAfter ["linkGeneration"] ''
+        WALLPAPER_DIR="${config.xdg.dataHome}/wallpapers"
+        THUMB_DIR="$WALLPAPER_DIR/.thumbs"
+        mkdir -p "$THUMB_DIR"
 
+        find "$WALLPAPER_DIR" -type f \( -iname '*.jpg' -o -iname '*.png' \) | while read -r img; do
+          thumb="$THUMB_DIR/$(basename "$img").webp"
+          if [ ! -f "$thumb" ]; then
+            ${pkgs.imagemagick}/bin/convert "$img" -resize 512x288 "$thumb"
+          fi
+        done
+      '';
+    }
     # Verification activation script
     {
       home.activation.verify-assets = lib.hm.dag.entryAfter ["linkGeneration"] ''
