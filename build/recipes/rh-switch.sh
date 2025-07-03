@@ -83,7 +83,7 @@ function main() {
     if [ "$is_fast_mode" = false ]; then
         print_pending "Running post-build tasks..."
         source_user_vars
-        "${COMMON_DIR}/build-caches.sh" -e
+        "${COMMON_DIR}/build-cache.sh" -e
         python3 "${COMMON_DIR}/build-icons-cache.py"
         reload_services
         print_success "System rebuild complete"
