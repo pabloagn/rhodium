@@ -16,7 +16,7 @@ source "${COMMON_DIR}/helpers.sh"
 source "${COMMON_DIR}/bootstrap.sh"
 
 # --- Main Cache Building Function ---
-build_cache_wallpaper() {
+build_cache_wallpapers() {
     local CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/$APP_NAME"
     local CACHE_FILE="$CACHE_DIR/wallpapers.cache"
 

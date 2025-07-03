@@ -7,7 +7,7 @@
 # --- Imports ---
 SCRIPT_DIR="$(dirname "$(realpath "${BASH_SOURCE[0]}")")"
 COMMON_DIR="$(dirname "$SCRIPT_DIR")/common"
-CACHE_BUILDER="$COMMON_DIR/build-caches.sh"
+CACHE_BUILDER="$COMMON_DIR/build-cache.sh"
 
 if [[ ! -f "$CACHE_BUILDER" ]]; then
     echo "Error: Cache builder script not found at $CACHE_BUILDER"
@@ -22,13 +22,14 @@ show_menu() {
     echo ""
     print_header "Select caches to update:"
     echo ""
-    echo "  1) Fuzzel Apps Cache"
-    echo "  2) Bat Syntax Cache"
-    echo "  3) TLDR Pages Cache"
-    echo "  4) Unicode Icons Cache"
-    echo "  5) Nix Index Database"
-    echo "  6) All Caches"
-    echo "  7) All except Nix Index"
+    echo "  1) Launcher Cache"
+    echo "  2) Wallpaper Cache"
+    echo "  3) Bat Syntax Cache"
+    echo "  4) TLDR Pages Cache"
+    echo "  5) Unicode Icons Cache"
+    echo "  6) Nix Index Database"
+    echo "  7) All Caches"
+    echo "  8) All Except Nix Index"
     echo "  0) Exit"
     echo ""
 }
@@ -37,19 +38,20 @@ show_menu() {
 build_args() {
     local choices=("$@")
     local args=()
-    
+
     for choice in "${choices[@]}"; do
         case "$choice" in
-            1) args+=("--fuzzel") ;;
-            2) args+=("--bat") ;;
-            3) args+=("--tldr") ;;
-            4) args+=("--icons") ;;
-            5) args+=("--nix") ;;
-            6) args+=("--all") ;;
-            7) args+=("--all-except-nix") ;;
+        1) args+=("--launcher") ;;
+        2) args+=("--wallpapers") ;;
+        3) args+=("--bat") ;;
+        4) args+=("--tldr") ;;
+        5) args+=("--icons") ;;
+        6) args+=("--nix") ;;
+        7) args+=("--all") ;;
+        8) args+=("--all-except-nix") ;;
         esac
     done
-    
+
     echo "${args[@]}"
 }
 
@@ -57,21 +59,21 @@ build_args() {
 main() {
     local choices
     local choice
-    
+
     while true; do
         show_menu
         read -rp "Enter your choices (space-separated, e.g., '1 3 4'): " -a choices
-        
+
         # Validate input
         local valid=true
         for choice in "${choices[@]}"; do
-            if ! [[ "$choice" =~ ^[0-7]$ ]]; then
+            if ! [[ "$choice" =~ ^[0-8]$ ]]; then
                 print_error "Invalid choice: $choice"
                 valid=false
                 break
             fi
         done
-        
+
         if [[ "$valid" == true ]]; then
             # Check for exit
             for choice in "${choices[@]}"; do
@@ -80,16 +82,16 @@ main() {
                     exit 0
                 fi
             done
-            
+
             # Build arguments and execute cache builder
             local args
             args=$(build_args "${choices[@]}")
-            
+
             if [[ -n "$args" ]]; then
                 echo ""
                 print_pending "Starting cache updates..."
                 echo ""
-                
+
                 # Execute cache builder with arguments
                 if "$CACHE_BUILDER" $args; then
                     echo ""
@@ -100,7 +102,7 @@ main() {
                     exit 1
                 fi
             fi
-            
+
             break
         fi
     done

@@ -7,8 +7,8 @@
 COMMON_DIR="$(dirname "$(realpath "${BASH_SOURCE[0]}")")"
 source "${COMMON_DIR}/helpers.sh"
 source "${COMMON_DIR}/bootstrap.sh"
-source "${COMMON_DIR}/build_cache_launcher.sh"
-source "${COMMON_DIR}/build_cache_wallpapers.sh"
+source "${COMMON_DIR}/build-cache-launcher.sh"
+source "${COMMON_DIR}/build-cache-wallpapers.sh"
 
 # --- Function To Update Bat Cache ---
 update_bat_cache() {
