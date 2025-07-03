@@ -2,18 +2,20 @@
 # ▲ RHODIUM SYSTEM MANAGEMENT
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-# Configuration
+# --- Configuration ---
 set shell := ["bash", "-euo", "pipefail", "-c"]
 set positional-arguments := true
 
-# Internal Variables
+# --- Internal Variables ---
 flake_path := "."
 build_path := flake_path + "/build"
 recipes_path := build_path + "/recipes"
 
-# Default recipe shows available commands
+# --- Default Recipe Shows Available Commands ---
 default:
     @just --list --unsorted
+
+# --- Recipes ---
 
 # Fast rebuild and switch with minimal output
 fast host:
