@@ -5,7 +5,7 @@ set -euo pipefail
 # --- Main Configuration ---
 APP_NAME="rhodium-help"
 APP_TITLE="Rhodium Help"
-PROMPT="β: "
+PROMPT="Η: "
 
 # --- Imports ---
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../common/bootstrap.sh"

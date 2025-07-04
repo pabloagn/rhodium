@@ -2,6 +2,7 @@
 
 set -euo pipefail
 
+# --- Main Configuration ---
 APP_NAME="rhodium-display"
 APP_TITLE="Rhodium's Display Menu"
 PROMPT="δ: "
@@ -75,26 +76,18 @@ switch_wallpaper() {
 
     while true; do
         local selected_line
-        # Read the cache file, take the first column (the formatted text) and pipe it to fuzzel.
-        # This is extremely fast as it's just reading a text file.
         selected_line=$(cut -d$'\t' -f1 "$CACHE_FILE" | fuzzel --dmenu -p "$PROMPT" -l 10 -w 85)
 
-        # If the user presses Escape in fuzzel, the selection is empty, so we break the loop.
         if [[ -z "${selected_line:-}" ]]; then
             echo "No selection, exiting wallpaper menu."
             break
         fi
 
-        # Now, find the actual file path that corresponds to the selected line.
-        # We use awk to find the line where the first field ($1) matches our selection,
-        # and then we print the second field ($2), which is the full path.
         local wallpaper_path
         wallpaper_path=$(awk -F'\t' -v sel="$selected_line" '$1 == sel { print $2; exit }' "$CACHE_FILE")
 
-        # If we found a valid path, set the wallpaper.
         if [[ -n "$wallpaper_path" && -f "$wallpaper_path" ]]; then
             ln -sf "$wallpaper_path" "$target_dir"
-            # Use the clean, selected line for the notification.
             notify-send --app-name=rh-utils "Rhodium Utils" "Setting wallpaper: $(basename "$wallpaper_path")"
 
             niri msg action do-screen-transition --delay-ms 400
@@ -104,36 +97,6 @@ switch_wallpaper() {
         fi
     done
 }
-
-# switch_wallpaper() {
-#     local wallpaper_dir="${XDG_DATA_HOME:-$HOME/.local/share}/wallpapers"
-#     local target_dir="/var/tmp/current-wallpaper"
-#
-#     [[ -d "$wallpaper_dir" ]] || {
-#         notify "$APP_TITLE" "Wallpaper directory missing: $wallpaper_dir"
-#         return 1
-#     }
-#
-#     while true; do
-#         local selected
-#         selected=$(fd . "$wallpaper_dir" -t 'symlink' --and ".jpg" | sort -z | fuzzel --dmenu -p "$PROMPT" -l 10 | tr -d '\0')
-#
-#         if [[ -z "${selected:-}" ]]; then
-#             echo "No selection, exiting wallpaper menu."
-#             break
-#         fi
-#
-#         if [[ -f "$selected" ]]; then
-#             ln -sf "$selected" "$target_dir"
-#             notify-send --app-name=rh-utils "Rhodium Utils" "Setting wallpaper: ${selected}"
-#
-#             niri msg action do-screen-transition --delay-ms 400
-#             systemctl --user restart rh-swaybg.service
-#         else
-#             notify "$APP_TITLE" "Selected wallpaper not found: $selected"
-#         fi
-#     done
-# }
 
 noop() {
     :

@@ -437,6 +437,7 @@ main() {
 ⊹ Smart Eject (Safe Removal)
 ⊹ Refresh Device List
 ⊹ Open Disks Utility
+⊹ Open Dust
 EOF
     )
 
@@ -444,7 +445,7 @@ EOF
     local main_menu_specific_args="-l $num_main_options"
 
     local choice
-    choice=$(run_fuzzel "Storage Manager: " "$main_menu_options" "$main_menu_specific_args") || exit 0
+    choice=$(run_fuzzel "$PROMPT" "$main_menu_options" "$main_menu_specific_args") || exit 0
 
     case "$choice" in
     "⊹ List All Devices")
@@ -472,7 +473,14 @@ EOF
         if command -v gnome-disks &>/dev/null; then
             gnome-disks &
         else
-            notify "Storage Manager" "GNOME Disks not installed. Install with: nix-env -iA nixos.gnome.gnome-disk-utility"
+            notify "Storage Manager" "GNOME Disks not installed. Add package to home manager and rebuild: nixos.gnome.gnome-disk-utility"
+        fi
+        ;;
+    "⊹ Open Dust")
+        if command -v dust &>/dev/null; then
+            $TERMINAL -e --hold dust &
+        else
+            notify "Storage Manager" "Dust not installed. Add package to home manager and rebuild: dust"
         fi
         ;;
     *)

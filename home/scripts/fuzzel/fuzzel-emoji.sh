@@ -286,7 +286,7 @@ EOF
 
 pick_emoji() {
     local chosen
-    chosen=$(echo "$EMOJI_LIST" | fuzzel --dmenu --prompt="$(provide_fuzzel_prompt)" | awk '{print $1}')
+    chosen=$(echo "$EMOJI_LIST" | fuzzel --dmenu --prompt="$PROMPT" | awk '{print $1}')
 
     if [[ -n "$chosen" ]]; then
         if copy_to_clipboard "$chosen"; then

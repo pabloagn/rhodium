@@ -5,7 +5,7 @@ set -euo pipefail
 # --- Main Configuration ---
 APP_NAME="rhodium-find"
 APP_TITLE="Rhodium's Find Utils"
-PROMPT="β: "
+PROMPT="ƒ: "
 
 MENU_LEN=5
 PADDING_ARGS_NIX_SEARCH="35 30 100"  # name, version, description
@@ -65,43 +65,6 @@ find_installed_packages() {
         notify-send "Package Selected" "$selected_package" 2>/dev/null || echo "Package: $selected_package"
     fi
 }
-
-# Function to search for available Nix packages
-# find_nix_packages() {
-#     local search_term=""
-#     local results=""
-#
-#     while true; do
-#         # Get search term from user
-#         search_term=$(echo "$search_term" | fuzzel --dmenu --prompt "Search packages: ")
-#
-#         # Exit if cancelled
-#         [[ -z "$search_term" ]] && break
-#
-#         # Try different search methods in order of preference
-#         if command -v nix-search &>/dev/null; then
-#             results=$(nix-search --no-pager --no-color "$search_term" 2>/dev/null | head -100)
-#         elif command -v nix-locate &>/dev/null; then
-#             results=$(nix-locate --top-level --minimal "*$search_term*" 2>/dev/null | head -100)
-#         else
-#             results=$(nix --extra-experimental-features "nix-command flakes" search nixpkgs "$search_term" 2>/dev/null |
-#                 grep -E "^\* " | sed 's/^\* //' | head -100)
-#         fi
-#
-#         if [[ -z "$results" ]]; then
-#             echo "No packages found for: $search_term" | fuzzel --dmenu --prompt "Press Enter to search again: "
-#             continue
-#         fi
-#
-#         # Show results
-#         selected=$(echo "$results" | fuzzel --dmenu --prompt "Select package (ESC to search again): ")
-#
-#         if [[ -n "$selected" ]]; then
-#             notify-send "Package Selected" "$selected" 2>/dev/null
-#             break
-#         fi
-#     done
-# }
 
 find_nix_packages() {
     local search_term=""
@@ -211,7 +174,7 @@ main() {
         done
 
         local selected
-        selected=$(echo -e "${menu_items}⊹ Exit" | fuzzel --dmenu --prompt "λ " -l $MENU_LEN)
+        selected=$(echo -e "${menu_items}⊹ Exit" | fuzzel --dmenu --prompt "$PROMPT" -l $MENU_LEN)
 
         # Exit if cancelled or Exit selected
         [[ -z "$selected" ]] || [[ "$selected" == "⊹ Exit" ]] && break

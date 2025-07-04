@@ -5,7 +5,7 @@ set -euo pipefail
 # --- Main Configuration ---
 APP_NAME="rhodium-unicode"
 APP_TITLE="Rhodium's Unicode Collection"
-PROMPT="β: "
+PROMPT="Ι: "
 
 # --- Padding Configuration ---
 SYMBOL_PADDING=10
