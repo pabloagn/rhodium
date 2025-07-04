@@ -30,9 +30,8 @@
             bind -M default p 'commandline -i (wl-paste)'
 
             # --- Theme ---
-            set -g fish_pager_color_background                normal
-            set -g fish_pager_color_secondary_background      normal
-            # set -g fish_pager_color_background                4B5F6F --background E6C384     # Pager
+            set -g fish_pager_color_secondary_background      4B5F6F --background E6C384     # Pager #E6C384 #4B5F6F
+            set -g fish_pager_color_background                4B5F6F --background E6C384     # Pager #E6C384 #4B5F6F
             set -g fish_color_autosuggestion                  4B5F6F                         # Autosuggestions #4B5F6F
             set -g fish_color_command                         7FB4CA                         # Commands #7FB4CA
             set -g fish_color_comment                         4B5F6F                         # Code comments #4B5F6F

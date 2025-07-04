@@ -54,8 +54,8 @@ telescope.setup({
 		winblend = 2,
 
 		prompt_prefix = " λ ",
-		selection_caret = " ●  ",
-		entry_prefix = " ○  ",
+		selection_caret = " ● ",
+		entry_prefix = " ○ ",
 
 		-- The default layout will be the horizontal "matrix"
 		layout_strategy = "horizontal_merged",
