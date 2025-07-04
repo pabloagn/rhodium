@@ -10,7 +10,7 @@
       theme = "kanso";
 
       # Typography
-      font-family = "JetBrains Mono";
+      font-family = "BerkeleyMonoRh Nerd Font Mono";
       font-style = "Regular";
       # font-size = 13;
 

@@ -1,21 +1,26 @@
 {...}: {
   programs.kitty = {
-    font.name = "JetBrainsMono Nerd Font";
+    font.name = "BerkeleyMonoRh Nerd Font Mono";
     font.size = 12;
 
     settings = {
+      # Font configurations for bold/italic variants
+      bold_font = "auto";
+      italic_font = "auto";
+      bold_italic_font = "auto";
+
       allow_remote_control = true;
       scrollback_lines = 10000;
       enable_audio_bell = false;
 
-      # Bottom tab
+      # --- Bottom Tab ---
       tab_bar_min_tabs = 2; # Only enable for tab num >= 2
       tab_bar_edge = "bottom";
       tab_bar_style = "powerline";
       tab_powerline_style = "angled";
       tab_title_template = "{title}{' :{}:'.format(num_windows) if num_windows > 1 else ''}";
 
-      # URLs
+      # --- Urls ---
       open_url_with = "firefox";
 
       # Borders

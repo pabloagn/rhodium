@@ -54,8 +54,8 @@ telescope.setup({
 		winblend = 2,
 
 		prompt_prefix = " λ ",
-		selection_caret = " ● ",
-		entry_prefix = " ○ ",
+		selection_caret = " ●  ",
+		entry_prefix = " ○  ",
 
 		-- The default layout will be the horizontal "matrix"
 		layout_strategy = "horizontal_merged",
@@ -141,8 +141,7 @@ telescope.setup({
 		},
 	},
 
-	-- Picker-Specific Overrides
-	-- Normal Layouts
+	-- --- Picker-specific Overrides ---
 	pickers = {
 		find_files = {},
 		live_grep = {},
@@ -150,7 +149,6 @@ telescope.setup({
 		git_status = {},
 		buffers = {
 			previewer = true,
-			-- layout_config = { width = 0.5, height = 0.8 },
 			sort_lastused = true,
 			mappings = {
 				i = { ["<c-d>"] = actions.delete_buffer },
@@ -163,7 +161,7 @@ telescope.setup({
 		diagnostics = {},
 	},
 
-	-- Extensions
+	-- --- Extensions ---
 	extensions = {
 		frecency = {
 			show_scores = false,

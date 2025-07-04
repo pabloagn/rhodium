@@ -30,25 +30,28 @@
             bind -M default p 'commandline -i (wl-paste)'
 
             # --- Theme ---
-            set -g fish_color_autosuggestion 4B5F6F                         # Autosuggestions #4B5F6F
-            set -g fish_color_command        7FB4CA                         # Commands #7FB4CA
-            set -g fish_color_comment        4B5F6F                         # Code comments #4B5F6F
-            set -g fish_color_cwd            7AA89F                         # Current working directory #7AA89F
-            set -g fish_color_end            b6927b                         # Process separators #b6927b
-            set -g fish_color_error          E46876                         # Highlight potential errors #E46876
-            set -g fish_color_escape         8ea4a2                         # Character escapes #8ea4a2
-            set -g fish_color_match          938AA9                         # Matching parenthesis #938AA9
-            set -g fish_color_normal         A2A5A2                         # Default color #A2A5A2
-            set -g fish_color_operator       E6C384                         # Parameter expansion operators #E6C384
-            set -g fish_color_param          A2A5A2                         # Regular command parameters #A2A5A2
-            set -g fish_color_quote          87a987                         # Quoted blocks of text #87a987
-            set -g fish_color_redirection    a292a3                         # IO redirections #a292a3
-            set -g fish_color_search_match   4B5F6F --background E6C384     # Highlight search matches #E6C384 #4B5F6F
-            set -g fish_color_selection      4B5F6F --background E6C384     # Text selection #E6C384
-            set -g fish_color_cancel         0d0c0c                         # The '^C' indicator #0d0c0c
-            set -g fish_color_host           938AA9                         # Current host system #938AA9
-            set -g fish_color_host_remote    938AA9                         # Remote host system #938AA9
-            set -g fish_color_user           b98d7b                         # Current username #b98d7b
+            set -g fish_pager_color_background                normal
+            set -g fish_pager_color_secondary_background      normal
+            # set -g fish_pager_color_background                4B5F6F --background E6C384     # Pager
+            set -g fish_color_autosuggestion                  4B5F6F                         # Autosuggestions #4B5F6F
+            set -g fish_color_command                         7FB4CA                         # Commands #7FB4CA
+            set -g fish_color_comment                         4B5F6F                         # Code comments #4B5F6F
+            set -g fish_color_cwd                             7AA89F                         # Current working directory #7AA89F
+            set -g fish_color_end                             b6927b                         # Process separators #b6927b
+            set -g fish_color_error                           E46876                         # Highlight potential errors #E46876
+            set -g fish_color_escape                          8ea4a2                         # Character escapes #8ea4a2
+            set -g fish_color_match                           938AA9                         # Matching parenthesis #938AA9
+            set -g fish_color_normal                          A2A5A2                         # Default color #A2A5A2
+            set -g fish_color_operator                        E6C384                         # Parameter expansion operators #E6C384
+            set -g fish_color_param                           A2A5A2                         # Regular command parameters #A2A5A2
+            set -g fish_color_quote                           87a987                         # Quoted blocks of text #87a987
+            set -g fish_color_redirection                     a292a3                         # IO redirections #a292a3
+            set -g fish_color_search_match                    4B5F6F --background E6C384     # Highlight search matches #E6C384 #4B5F6F
+            set -g fish_color_selection                       4B5F6F --background E6C384     # Text selection #E6C384 #4B5F6F
+            set -g fish_color_cancel                          0d0c0c                         # The '^C' indicator #0d0c0c
+            set -g fish_color_host                            938AA9                         # Current host system #938AA9
+            set -g fish_color_host_remote                     938AA9                         # Remote host system #938AA92
+            set -g fish_color_user                            b98d7b                         # Current username #b98d7b
 
             # Prompt
             function fish_prompt
@@ -79,10 +82,10 @@
             # Plugin setup
             # colored-man
             # TODO: Style this
-            set -g man_blink -o 2D4F67
-            set -g man_bold -o green
-            set -g man_standout -b black 93a1a1
-            set -g man_underline -u 93a1a1
+            set -g man_blink -o 2D4F67 #2D4F67
+            set -g man_bold -o 87a987 #87a987
+            set -g man_standout -b black 93a1a1 #93a1a1
+            set -g man_underline -u 93a1a1 #93a1a1
 
     '';
   };
