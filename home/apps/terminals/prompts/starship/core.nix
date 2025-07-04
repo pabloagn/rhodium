@@ -74,7 +74,7 @@ in {
       format = "[($name <- )$symbol]($style) ";
       impure_msg = "impure";
       style = "bold ${colors.color1}";
-      symbol = " ";
+      symbol = " ";
       pure_msg = "pure";
       unknown_msg = "";
       disabled = false;
@@ -326,7 +326,7 @@ in {
       disabled = true;
     };
     lua = {
-      symbol = " ";
+      symbol = "󰢱 ";
       format = "via [$symbol($version )]($style)";
       style = "bold #2D4F67";
       disabled = false;

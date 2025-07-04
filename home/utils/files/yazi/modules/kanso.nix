@@ -1,4 +1,314 @@
 {...}: {
+  icon = {
+    prepend_dirs = [
+      # Rhodium root
+      {
+        name = "rhodium";
+        text = "󰏉";
+        fg = "#2D4F67";
+      }
+      # Home directories
+      {
+        name = "downloads";
+        text = "";
+        fg = "#88A1AC";
+      }
+      {
+        name = "pendings";
+        text = "";
+        fg = "#88A1AC";
+      }
+      {
+        name = "pictures";
+        text = "󰄄";
+        fg = "#88A1AC";
+      }
+      {
+        name = "professional";
+        text = "";
+        fg = "#88A1AC";
+      }
+      {
+        name = "solenoid-labs";
+        text = "󱒀";
+        fg = "#88A1AC";
+      }
+      {
+        name = "dev";
+        text = "";
+        fg = "#88A1AC";
+      }
+      {
+        name = "vaults";
+        text = "󰴓";
+        fg = "#88A1AC";
+      }
+      {
+        name = "academic";
+        text = "󰂺";
+        fg = "#88A1AC";
+      }
+      {
+        name = "documents";
+        text = "󰈙";
+        fg = "#88A1AC";
+      }
+      {
+        name = ".config";
+        text = "";
+        fg = "#88A1AC";
+      }
+      {
+        name = ".local";
+        text = "";
+        fg = "#88A1AC";
+      }
+    ];
+    prepend_exts = [
+      # Rhodium config files
+      {
+        name = "rh";
+        text = "󰘧";
+        fg = "#597b75";
+      }
+      # Text files
+      {
+        name = "txt";
+        text = "󰈙";
+        fg = "#597b75";
+      }
+      {
+        name = "rtf";
+        text = "󰈙";
+        fg = "#597b75";
+      }
+      {
+        name = "g";
+        text = "󰿉";
+        fg = "#C1C5C3";
+      }
+      {
+        name = "cl";
+        text = "";
+        fg = "#C1C5C3";
+      }
+      {
+        name = "idr";
+        text = "󰊕";
+        fg = "#C1C5C3";
+      }
+      {
+        name = "nb";
+        text = "󱂅";
+        fg = "#C1C5C3";
+      }
+      {
+        name = "thy";
+        text = "󰬛";
+        fg = "#C1C5C3";
+      }
+      {
+        name = "glsl";
+        text = "";
+        fg = "#C1C5C3";
+      }
+      {
+        name = "hlsl";
+        text = "";
+        fg = "#C1C5C3";
+      }
+      {
+        name = "metal";
+        text = "";
+        fg = "#C1C5C3";
+      }
+      {
+        name = "wgsl";
+        text = "";
+        fg = "#C1C5C3";
+      }
+      {
+        name = "justfile";
+        text = "";
+        fg = "#6B7E84";
+      }
+      {
+        name = "cir";
+        text = "";
+        fg = "#C1C5C3";
+      }
+      {
+        name = "chpl";
+        text = "󰬊";
+        fg = "#C1C5C3";
+      }
+      {
+        name = "stan";
+        text = "";
+        fg = "#C1C5C3";
+      }
+      {
+        name = "sage";
+        text = "󰬚";
+        fg = "#C1C5C3";
+      }
+      {
+        name = "mac";
+        text = "󰬔";
+        fg = "#C1C5C3";
+      }
+      {
+        name = "pas";
+        text = "󰬗";
+        fg = "#C1C5C3";
+      }
+      {
+        name = "kdl";
+        text = "";
+        fg = "#C1C5C3";
+      }
+      {
+        name = "sty";
+        text = "";
+        fg = "#87a987";
+      }
+      {
+        name = "cls";
+        text = "";
+        fg = "#87a987";
+      }
+      {
+        name = "tex";
+        text = "";
+        fg = "#87a987";
+      }
+      {
+        name = "lisp";
+        text = "";
+        fg = "#C1C5C3";
+      }
+      {
+        name = "nix";
+        text = "";
+        fg = "#2D4F67";
+      }
+      {
+        name = "nix-channels";
+        text = "";
+        fg = "#2D4F67";
+      }
+      {
+        name = "ts";
+        text = "";
+        fg = "#2D4F67";
+      }
+      {
+        name = "yaml";
+        text = "";
+        fg = "#43436c";
+      }
+      {
+        name = "yml";
+        text = "";
+        fg = "#43436c";
+      }
+      {
+        name = "conf";
+        text = "󰒓";
+        fg = "#6B7E84";
+      }
+      {
+        name = "cnf";
+        text = "󰒓";
+        fg = "#6B7E84";
+      }
+      {
+        name = "config";
+        text = "󰒓";
+        fg = "#6B7E84";
+      }
+      {
+        name = "hcl";
+        text = "";
+        fg = "#6B7E84";
+      }
+      {
+        name = "geojson";
+        text = "";
+        fg = "#597b75";
+      }
+      {
+        name = "parquet";
+        text = "";
+        fg = "#597b75";
+      }
+      {
+        name = "tsv";
+        text = "";
+        fg = "#597b75";
+      }
+      {
+        name = "csv";
+        text = "";
+        fg = "#597b75";
+      }
+      {
+        name = "fasta";
+        text = "";
+        fg = "#597b75";
+      }
+      {
+        name = "fastq";
+        text = "";
+        fg = "#597b75";
+      }
+      {
+        name = "feather";
+        text = "󰛓";
+        fg = "#597b75";
+      }
+      {
+        name = "cbor";
+        text = "";
+        fg = "#597b75";
+      }
+      {
+        name = "msgpack";
+        text = "";
+        fg = "#597b75";
+      }
+      {
+        name = "proto";
+        text = "";
+        fg = "#4b4e57";
+      }
+      {
+        name = "fbs";
+        text = "";
+        fg = "#4b4e57";
+      }
+      {
+        name = "bfbs";
+        text = "";
+        fg = "#4b4e57";
+      }
+      {
+        name = "capnp";
+        text = "";
+        fg = "#4b4e57";
+      }
+      {
+        name = "pkl";
+        text = "";
+        fg = "#597b75";
+      }
+      {
+        name = "pickle";
+        text = "";
+        fg = "#597b75";
+      }
+    ];
+  };
   mgr = {
     marker_copied = {
       fg = "#87A987";
