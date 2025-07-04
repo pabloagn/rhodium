@@ -76,7 +76,7 @@
       };
       overlays = [
         nur.overlays.default
-        # self.overlays.default.fonts
+        self.overlays.fonts
       ];
     };
 
@@ -87,7 +87,7 @@
       };
       overlays = [
         nur.overlays.default
-        # self.overlays.default.fonts
+        self.overlays.fonts
       ];
     };
 
@@ -161,7 +161,7 @@
 
     chiaroscuroTheme = inputs.chiaroscuro.themes.kanso-zen;
   in {
-    # overlays.default = import ./overlays;
+    overlays = import ./overlays;
 
     nixosConfigurations = {
       # Host Entry

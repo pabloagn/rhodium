@@ -3,20 +3,15 @@
 set -euo pipefail
 
 # --- Main Configuration ---
-APP_NAME="rhodium-colors"
-APP_TITLE="Rhodium's Color Utils"
-PROMPT="β: "
+APP_NAME="rhodium-wifi"
+APP_TITLE="Rhodium's WiFi Utils"
+PROMPT="ω: "
 
 # --- Imports ---
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../common/bootstrap.sh"
 
 # --- Configuration ---
-# Fuzzel base dmenu arguments. These apply to all fuzzel invocations unless overridden.
-# If you want more global fuzzel styling, add it here.
 FUZZEL_DMENU_BASE_ARGS="--dmenu"
-
-# Maximum number of lines for the Wi-Fi network list.
-# If more networks are found, fuzzel will enable scrolling/paging.
 MAX_WIFI_LINES=15
 
 # --- Helper Functions ---
@@ -42,10 +37,10 @@ run_fuzzel() {
 
     if [[ -z "$input_data" ]]; then
         # Use existing stdin pipe if input_data is empty
-        fuzzel $FUZZEL_DMENU_BASE_ARGS $extra_args --prompt "$prompt"
+        fuzzel $FUZZEL_DMENU_BASE_ARGS "$extra_args" --prompt "$prompt"
     else
         # Echo input_data to fuzzel
-        echo "$input_data" | fuzzel $FUZZEL_DMENU_BASE_ARGS $extra_args --prompt "$prompt"
+        echo "$input_data" | fuzzel $FUZZEL_DMENU_BASE_ARGS "$extra_args" --prompt "$prompt"
     fi
 }
 
@@ -54,7 +49,7 @@ run_fuzzel() {
 run_fuzzel_password() {
     local prompt="$1"
     local extra_args="${2:-}" # Optional additional arguments for fuzzel
-    fuzzel $FUZZEL_DMENU_BASE_ARGS $extra_args --password --prompt "$prompt"
+    fuzzel $FUZZEL_DMENU_BASE_ARGS "$extra_args" --password --prompt "$prompt"
 }
 
 # --- Main Menu Actions ---
@@ -96,7 +91,7 @@ disconnect_wifi() {
     done <<<"$active_connections"
 
     local num_options=${#formatted_list_array[@]}
-    local menu_lines_arg="-l $num_options" # Exact height for disconnect menu
+    local menu_lines_arg="-l $num_options"
 
     local selected_line
     selected_line=$(run_fuzzel "Disconnect: " "$(printf "%s\n" "${formatted_list_array[@]}")" "$menu_lines_arg") || exit 1
@@ -164,14 +159,18 @@ connect_to_network() {
             continue
         fi
 
-        local display_symbol="🔓"
+        local display_symbol="⌽"
         if [[ "$security" != "--" && "$security" != "none" ]]; then
-            display_symbol="🔒"
+            display_symbol="⌽"
         fi
 
         local current_info="${ssid_info_map[$ssid]:-}"
-        local current_signal=$(echo "$current_info" | awk -F'|' '{print $2}')
-        local current_symbol=$(echo "$current_info" | awk -F'|' '{print $1}')
+
+        local current_signal
+        current_signal=$(echo "$current_info" | awk -F'|' '{print $2}')
+
+        local current_symbol
+        current_symbol=$(echo "$current_info" | awk -F'|' '{print $1}')
 
         local signal_int=-1
         if [[ "$signal" =~ ^[0-9]+$ ]]; then
@@ -185,7 +184,7 @@ connect_to_network() {
 
         if [[ -z "$current_info" ]]; then
             ssid_info_map["$ssid"]="${display_symbol}|${signal_int}"
-        elif [[ "$display_symbol" == "🔒" && "$current_symbol" == "🔓" ]]; then
+        elif [[ "$display_symbol" == "⌽" && "$current_symbol" == "⌽" ]]; then
             ssid_info_map["$ssid"]="${display_symbol}|${signal_int}"
         elif [[ "$display_symbol" == "$current_symbol" && "$signal_int" -gt "$current_signal_int" ]]; then
             ssid_info_map["$ssid"]="${display_symbol}|${signal_int}"
@@ -195,8 +194,11 @@ connect_to_network() {
     # Populate the array for fuzzel display
     for ssid in "${!ssid_info_map[@]}"; do
         local info="${ssid_info_map[$ssid]}"
-        local symbol=$(echo "$info" | awk -F'|' '{print $1}')
-        local signal=$(echo "$info" | awk -F'|' '{print $2}')
+        local symbol
+        symbol=$(echo "$info" | awk -F'|' '{print $1}')
+
+        local signal
+        signal=$(echo "$info" | awk -F'|' '{print $2}')
 
         local signal_display=""
         if [[ "$signal" -ge 0 ]]; then
@@ -220,7 +222,7 @@ connect_to_network() {
     selected_network_line=$(printf "%s\n" "${network_display_entries[@]}" | sort | run_fuzzel "Connect to: " "" "$wifi_menu_specific_args") || exit 1
 
     local selected_ssid
-    selected_ssid=$(echo "$selected_network_line" | sed -E 's/^[🔒🔓]\s+//; s/\s+\([0-9]+%\)$//' | xargs)
+    selected_ssid=$(echo "$selected_network_line" | sed -E 's/^[⌽⌽]\s+//; s/\s+\([0-9]+%\)$//' | xargs)
 
     if [[ -z "$selected_ssid" ]]; then
         notify "Wi-Fi" "No network selected or invalid selection. Connection cancelled."
@@ -232,10 +234,12 @@ connect_to_network() {
         return 1
     fi
 
-    local security_status=$(echo "${ssid_info_map[$selected_ssid]}" | awk -F'|' '{print $1}')
+    local security_status
+    security_status=$(echo "${ssid_info_map[$selected_ssid]}" | awk -F'|' '{print $1}')
+
     local password=""
 
-    if [[ "$security_status" == "🔒" ]]; then
+    if [[ "$security_status" == "⌽" ]]; then
         # Password prompt also uses a specific line count (usually 1 line)
         password=$(run_fuzzel_password "Password for $selected_ssid: " "-l 1") || exit 1
         if [[ -z "$password" ]]; then
@@ -264,7 +268,8 @@ connect_to_network() {
 # --- Main Logic ---
 
 main() {
-    local main_menu_options=$(
+    local main_menu_options
+    main_menu_options=$(
         cat <<EOF
 Scan networks
 Enable Wifi
@@ -275,12 +280,13 @@ Delete saved connection
 EOF
     )
     # Calculate the exact number of lines for the main menu
-    local num_main_options=$(echo -e "$main_menu_options" | wc -l)
+    local num_main_options
+    num_main_options=$(echo -e "$main_menu_options" | wc -l)
     local main_menu_specific_args="-l $num_main_options"
 
     local choice
     # Pass the calculated line count to run_fuzzel for the main menu
-    choice=$(run_fuzzel "Wi-Fi Menu: " "$main_menu_options" "$main_menu_specific_args") || exit 0
+    choice=$(run_fuzzel "$PROMPT" "$main_menu_options" "$main_menu_specific_args") || exit 0
 
     case "$choice" in
     "Scan networks")

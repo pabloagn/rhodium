@@ -1,5 +1,20 @@
 {pkgs, ...}: {
   monospace = {
+    # Rhodium Fonts
+    rhodium-fonts = {
+      enable = true;
+      name = "Rhodium Fonts";
+      package = pkgs.rhodium-fonts;
+      extraPackages = [];
+    };
+
+    # Packaged Fonts
+    maple-mono = {
+      enable = true;
+      package = pkgs.maple-mono.variable;
+      name = "Maple Mono";
+      style = "Monospace";
+    };
     anonymous-pro = {
       enable = true;
       package = pkgs.anonymousPro;

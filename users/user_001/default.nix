@@ -1,4 +1,5 @@
 {
+  pkgs,
   userData,
   theme,
   userExtras,
@@ -24,9 +25,6 @@
     ../../home/shells
     ../../home/utils
     ../../home/virtualization
-
-    # Overlays
-    # ../../home/overlays
   ];
 
   # Pass args to all modules

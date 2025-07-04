@@ -9,8 +9,8 @@ PROMPT="Ι: "
 
 # --- Padding Configuration ---
 SYMBOL_PADDING=10
-NAME_PADDING=60  # Much larger to accommodate long names
-CATEGORY_PADDING=30  # For combined "Block > Category"
+NAME_PADDING=60
+CATEGORY_PADDING=30
 
 # --- Imports ---
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../common/bootstrap.sh"
