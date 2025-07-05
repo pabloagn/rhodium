@@ -233,6 +233,11 @@
         fg = "#6B7E84";
       }
       {
+        name = "topojson";
+        text = "";
+        fg = "#597b75";
+      }
+      {
         name = "geojson";
         text = "";
         fg = "#597b75";
