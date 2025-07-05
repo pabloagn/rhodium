@@ -285,7 +285,7 @@ in {
     };
     haskell = {
       format = "[${i.icon01}](${viaColor}) [$symbol($version )]($style)";
-      style = "bold #8992a7";
+      style = "bold #9D72C0";
       disabled = false;
       symbol = " ";
       detect_extensions = ["hs" "cabal" "hs-boot"];
@@ -511,7 +511,7 @@ in {
       format = "[$indicator]($style) ";
       style = "white dimmed";
       disabled = true;
-      bash_indicator = "󰬉 ";
+      bash_indicator = " ";
       fish_indicator = "󰈺 ";
       zsh_indicator = "󰬡 ";
       powershell_indicator = "󰨊 ";

@@ -89,8 +89,14 @@
         text = "";
         fg = "#88A1AC";
       }
-    ];
+    ];#
     prepend_exts = [
+      # Haskell
+      {
+        name = "cabal";
+        text = "";
+        fg = "#9D72C0";
+      }
       # --- Rhodium Config Files ---
       {
         name = "rh";
