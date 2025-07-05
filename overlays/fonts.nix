@@ -7,126 +7,126 @@
       berkeley = {
         source = inputs.iridium-rh.packages.${prev.system}.berkeley-mono;
         fonts = {
-          "BerkeleyMonoRh-Black-Oblique.ttf" = {
-            patch = true;
-            mono = false;
-            nonprop = true;
-          };
-          "BerkeleyMonoRh-Black.ttf" = {
-            patch = true;
-            mono = false;
-            nonprop = true;
-          };
-          "BerkeleyMonoRh-Bold-Oblique.ttf" = {
-            patch = true;
-            mono = false;
-            nonprop = true;
-          };
-          "BerkeleyMonoRh-Bold.ttf" = {
-            patch = true;
-            mono = false;
-            nonprop = true;
-          };
-          "BerkeleyMonoRh-Book-Oblique.ttf" = {
-            patch = true;
-            mono = false;
-            nonprop = true;
-          };
-          "BerkeleyMonoRh-Book.ttf" = {
-            patch = true;
-            mono = false;
-            nonprop = true;
-          };
-          "BerkeleyMonoRh-ExtraBold-Oblique.ttf" = {
-            patch = true;
-            mono = false;
-            nonprop = true;
-          };
-          "BerkeleyMonoRh-ExtraBold.ttf" = {
-            patch = true;
-            mono = false;
-            nonprop = true;
-          };
-          "BerkeleyMonoRh-ExtraLight-Oblique.ttf" = {
-            patch = true;
-            mono = false;
-            nonprop = true;
-          };
-          "BerkeleyMonoRh-ExtraLight.ttf" = {
-            patch = true;
-            mono = false;
-            nonprop = true;
-          };
-          "BerkeleyMonoRh-Light-Oblique.ttf" = {
-            patch = true;
-            mono = false;
-            nonprop = true;
-          };
-          "BerkeleyMonoRh-Light.ttf" = {
-            patch = true;
-            mono = false;
-            nonprop = true;
-          };
-          "BerkeleyMonoRh-Medium-Oblique.ttf" = {
-            patch = true;
-            mono = false;
-            nonprop = true;
-          };
-          "BerkeleyMonoRh-Medium.ttf" = {
-            patch = true;
-            mono = false;
-            nonprop = true;
-          };
-          "BerkeleyMonoRh-Oblique.ttf" = {
-            patch = true;
-            mono = false;
-            nonprop = true;
-          };
+          # "BerkeleyMonoRh-Black-Oblique.ttf" = {
+          #   patch = true;
+          #   mono = false;
+          #   nonprop = true;
+          # };
+          # "BerkeleyMonoRh-Black.ttf" = {
+          #   patch = true;
+          #   mono = false;
+          #   nonprop = true;
+          # };
+          # "BerkeleyMonoRh-Bold-Oblique.ttf" = {
+          #   patch = true;
+          #   mono = false;
+          #   nonprop = true;
+          # };
+          # "BerkeleyMonoRh-Bold.ttf" = {
+          #   patch = true;
+          #   mono = false;
+          #   nonprop = true;
+          # };
+          # "BerkeleyMonoRh-Book-Oblique.ttf" = {
+          #   patch = true;
+          #   mono = false;
+          #   nonprop = true;
+          # };
+          # "BerkeleyMonoRh-Book.ttf" = {
+          #   patch = true;
+          #   mono = false;
+          #   nonprop = true;
+          # };
+          # "BerkeleyMonoRh-ExtraBold-Oblique.ttf" = {
+          #   patch = true;
+          #   mono = false;
+          #   nonprop = true;
+          # };
+          # "BerkeleyMonoRh-ExtraBold.ttf" = {
+          #   patch = true;
+          #   mono = false;
+          #   nonprop = true;
+          # };
+          # "BerkeleyMonoRh-ExtraLight-Oblique.ttf" = {
+          #   patch = true;
+          #   mono = false;
+          #   nonprop = true;
+          # };
+          # "BerkeleyMonoRh-ExtraLight.ttf" = {
+          #   patch = true;
+          #   mono = false;
+          #   nonprop = true;
+          # };
+          # "BerkeleyMonoRh-Light-Oblique.ttf" = {
+          #   patch = true;
+          #   mono = false;
+          #   nonprop = true;
+          # };
+          # "BerkeleyMonoRh-Light.ttf" = {
+          #   patch = true;
+          #   mono = false;
+          #   nonprop = true;
+          # };
+          # "BerkeleyMonoRh-Medium-Oblique.ttf" = {
+          #   patch = true;
+          #   mono = false;
+          #   nonprop = true;
+          # };
+          # "BerkeleyMonoRh-Medium.ttf" = {
+          #   patch = true;
+          #   mono = false;
+          #   nonprop = true;
+          # };
+          # "BerkeleyMonoRh-Oblique.ttf" = {
+          #   patch = true;
+          #   mono = false;
+          #   nonprop = true;
+          # };
           "BerkeleyMonoRh-Regular.ttf" = {
             patch = true;
             mono = false;
             nonprop = true;
           };
-          "BerkeleyMonoRh-Retina-Oblique.ttf" = {
-            patch = true;
-            mono = false;
-            nonprop = true;
-          };
-          "BerkeleyMonoRh-Retina.ttf" = {
-            patch = true;
-            mono = false;
-            nonprop = true;
-          };
-          "BerkeleyMonoRh-SemiBold-Oblique.ttf" = {
-            patch = true;
-            mono = false;
-            nonprop = true;
-          };
-          "BerkeleyMonoRh-SemiBold.ttf" = {
-            patch = true;
-            mono = false;
-            nonprop = true;
-          };
-          "BerkeleyMonoRh-SemiLight-Oblique.ttf" = {
-            patch = true;
-            mono = false;
-            nonprop = true;
-          };
-          "BerkeleyMonoRh-SemiLight.ttf" = {
-            patch = true;
-            mono = false;
-            nonprop = true;
-          };
-          "BerkeleyMonoRh-Thin-Oblique.ttf" = {
-            patch = true;
-            mono = false;
-            nonprop = true;
-          };
-          "BerkeleyMonoRh-Thin.ttf" = {
-            patch = true;
-            mono = false;
-            nonprop = true;
-          };
+        #   "BerkeleyMonoRh-Retina-Oblique.ttf" = {
+        #     patch = true;
+        #     mono = false;
+        #     nonprop = true;
+        #   };
+        #   "BerkeleyMonoRh-Retina.ttf" = {
+        #     patch = true;
+        #     mono = false;
+        #     nonprop = true;
+        #   };
+        #   "BerkeleyMonoRh-SemiBold-Oblique.ttf" = {
+        #     patch = true;
+        #     mono = false;
+        #     nonprop = true;
+        #   };
+        #   "BerkeleyMonoRh-SemiBold.ttf" = {
+        #     patch = true;
+        #     mono = false;
+        #     nonprop = true;
+        #   };
+        #   "BerkeleyMonoRh-SemiLight-Oblique.ttf" = {
+        #     patch = true;
+        #     mono = false;
+        #     nonprop = true;
+        #   };
+        #   "BerkeleyMonoRh-SemiLight.ttf" = {
+        #     patch = true;
+        #     mono = false;
+        #     nonprop = true;
+        #   };
+        #   "BerkeleyMonoRh-Thin-Oblique.ttf" = {
+        #     patch = true;
+        #     mono = false;
+        #     nonprop = true;
+        #   };
+        #   "BerkeleyMonoRh-Thin.ttf" = {
+        #     patch = true;
+        #     mono = false;
+        #     nonprop = true;
+        #   };
         };
       };
       # server = {
@@ -183,17 +183,24 @@
                     ${prev.lib.optionalString fontConfig.mono ''
                     python3 nerd-fonts/font-patcher \
                       "${familyName}/${fontFile}" \
-                      --complete --careful --progressbars \
+                      --complete \
+                      --careful \
+                      --progressbars \
                       --outputdir patched-mono \
-                      --makegroups 4 -s --adjust-line-height || exit 1
+                      --makegroups 4
+                      -s \
+                      --adjust-line-height || exit 1
                   ''}
 
                     ${prev.lib.optionalString fontConfig.nonprop ''
                     python3 nerd-fonts/font-patcher \
                       "${familyName}/${fontFile}" \
-                      --complete --careful --progressbars \
+                      --complete \
+                      --careful \
+                      --progressbars \
                       --outputdir patched-nonprop \
-                      --makegroups 4 --adjust-line-height || exit 1
+                      --makegroups 4 \
+                      --adjust-line-height || exit 1
                   ''}
                   fi
                 ''
