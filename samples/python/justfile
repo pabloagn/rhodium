@@ -1,0 +1,57 @@
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# ▲ PYTHON DATA SCIENCE ENVIRONMENT
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+# --- Configuration ---
+set shell := ["bash", "-euo", "pipefail", "-c"]
+set positional-arguments := true
+
+# --- Default Recipe Shows Available Commands ---
+default:
+   @just --list --unsorted
+
+# --- Package Management ---
+# Lock dependencies with uv
+lock:
+   @uv lock
+
+# Add Python package
+add package:
+   @uv add {{package}}
+
+# Remove Python package
+remove package:
+   @uv remove {{package}}
+
+# Lock dependencies and reload environment
+update:
+   @lock reload
+
+# --- Environment Management ---
+# Reload direnv environment
+reload:
+   @direnv reload
+
+# --- Jupyter Lab ---
+# Set password (one-time setup)
+set-password:
+    @jupyter server password
+
+# Start JupyterLab
+lab:
+   @jupyter lab --no-browser --log-level=ERROR
+
+# Start JupyterLab with Firefox profile and auto-cleanup on close
+lab-firefox profile:
+   @just lab && sleep 1 && firefox -p {{profile}} http://localhost:8888; pkill -f "jupyter.*lab" 2>/dev/null || true
+
+# Kill all Jupyter servers
+kill-jupyter:
+   @pkill -f "jupyter.*lab" 2>/dev/null || true
+   @pkill -f "jupyter.*server" 2>/dev/null || true
+   @pkill -f "jupyter.*notebook" 2>/dev/null || true
+
+# Kill all Jupyter servers and clean ports
+kill-all:
+   @pkill -f "jupyter" || true
+   @lsof -ti:8888,8889,8890,8891,8892 | xargs kill -9 || true

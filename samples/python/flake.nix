@@ -1,139 +1,127 @@
 {
-  description = "Python data science environment with numpy, pandas, etc.";
+  description = "Rhodium's Python Data Science Environment";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
+
+    pyproject-nix = {
+      url = "github:pyproject-nix/pyproject.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    uv2nix = {
+      url = "github:pyproject-nix/uv2nix";
+      inputs.pyproject-nix.follows = "pyproject-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    pyproject-build-systems = {
+      url = "github:pyproject-nix/build-system-pkgs";
+      inputs.pyproject-nix.follows = "pyproject-nix";
+      inputs.uv2nix.follows = "uv2nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, flake-utils }:
-    flake-utils.lib.eachDefaultSystem (system:
-      let
-        pkgs = nixpkgs.legacyPackages.${system};
-        
-        # Python with all the data science packages
-        pythonEnv = pkgs.python311.withPackages (ps: with ps; [
-          # Core scientific computing
+  outputs = {
+    self,
+    nixpkgs,
+    flake-utils,
+    uv2nix,
+    pyproject-nix,
+    pyproject-build-systems,
+    ...
+  }:
+    flake-utils.lib.eachDefaultSystem (system: let
+      pkgs = nixpkgs.legacyPackages.${system};
+      inherit (nixpkgs) lib;
+
+      pythonEnv = pkgs.python311.withPackages (ps:
+        with ps; [
           numpy
           scipy
           pandas
-          polars
-          
-          # Visualization
           matplotlib
           seaborn
-          plotly
-          bokeh
-          altair
-          
-          # Machine Learning
-          scikit-learn
-          xgboost
-          lightgbm
-          
-          # Statistics
-          statsmodels
-          
-          # Jupyter ecosystem
           jupyter
           jupyterlab
           ipython
           ipykernel
           ipywidgets
-          
-          # Data processing
           openpyxl
-          xlrd
-          pyarrow
-          fastparquet
-          
-          # Development tools
-          black
-          flake8
-          mypy
-          pytest
-          pytest-cov
-          
-          # Additional useful packages
-          requests
-          beautifulsoup4
-          lxml
-          tqdm
-          click
-          rich
-          
-          # Optional: Deep learning (uncomment if needed)
-          # torch
-          # torchvision
-          # tensorflow
+          # xlrd
+          # pyarrow
+          # fastparquet
+          # ruff
+          # flake8
+          # mypy
+          # pytest
+          # pytest-cov
+          # requests
+          # beautifulsoup4
+          # lxml
+          # tqdm
+          # click
+          # rich
         ]);
-        
-      in {
-        devShells.default = pkgs.mkShell {
-          buildInputs = with pkgs; [
-            # Python environment
+
+      uvWorkspace =
+        if builtins.pathExists ./uv.lock
+        then uv2nix.lib.workspace.loadWorkspace {workspaceRoot = ./.;}
+        else null;
+
+      uvOverlay =
+        if uvWorkspace != null
+        then uvWorkspace.mkPyprojectOverlay {sourcePreference = "wheel";}
+        else (_final: _prev: {});
+
+      pyprojectOverrides = _final: _prev: {};
+
+      uvPythonSet =
+        if uvWorkspace != null
+        then
+          (pkgs.callPackage pyproject-nix.build.packages {
+            python = pkgs.python311;
+          }).overrideScope
+          (lib.composeManyExtensions [
+            pyproject-build-systems.overlays.default
+            uvOverlay
+            pyprojectOverrides
+          ])
+        else null;
+
+      uvEnvironment =
+        if uvPythonSet != null
+        then uvPythonSet.mkVirtualEnv "ds-uv-env" uvWorkspace.deps.default
+        else null;
+    in {
+      devShells.default = pkgs.mkShell {
+        buildInputs = with pkgs;
+          [
             pythonEnv
-            
-            # System dependencies that some packages might need
             pkg-config
             libffi
             openssl
-            
-            # For numpy/scipy compilation if needed
             blas
             lapack
             gfortran
-            
-            # Other useful tools
             git
             curl
             which
-            
-            # Optional: R for mixed workflows
-            # R
-            # rPackages.ggplot2
-            # rPackages.dplyr
-          ];
-          
-          shellHook = ''
-            echo "🐍 Python Data Science Environment Loaded!"
-            echo "Python version: $(python --version)"
-            echo "NumPy version: $(python -c 'import numpy; print(numpy.__version__)')"
-            echo "Pandas version: $(python -c 'import pandas; print(pandas.__version__)')"
-            echo ""
-            echo "Available tools:"
-            echo "  - jupyter lab (start with: jupyter lab)"
-            echo "  - python (interactive Python)"
-            echo "  - ipython (enhanced Python shell)"
-            echo ""
-            echo "Key packages installed:"
-            echo "  NumPy, Pandas, Polars, Matplotlib, Seaborn, Scikit-learn"
-            echo "  Plotly, Bokeh, SciPy, Statsmodels, XGBoost, LightGBM"
-            
-            # Set up matplotlib backend for headless environments
-            export MPLBACKEND=Agg
-            
-            # Ensure Python can find packages
-            export PYTHONPATH="${pythonEnv}/${pythonEnv.sitePackages}:$PYTHONPATH"
-          '';
-        };
-        
-        # Optional: Create a package for your project
-        packages.default = pkgs.python311Packages.buildPythonApplication {
-          pname = "data-science-project";
-          version = "0.1.0";
-          
-          src = ./.;
-          
-          propagatedBuildInputs = with pkgs.python311Packages; [
-            numpy
-            pandas
-            matplotlib
-            # Add your specific dependencies here
-          ];
-          
-          # If you have a setup.py or pyproject.toml
-          # format = "pyproject";
-        };
-      });
+            uv
+          ]
+          ++ lib.optionals (uvEnvironment != null) [uvEnvironment];
+
+        env =
+          {
+            UV_PYTHON_DOWNLOADS = "never";
+            UV_PYTHON = "${pkgs.python311}/bin/python";
+            MPLBACKEND = "Agg";
+          }
+          // lib.optionalAttrs pkgs.stdenv.isLinux {
+            LD_LIBRARY_PATH = lib.makeLibraryPath pkgs.pythonManylinuxPackages.manylinux1;
+          };
+
+        shellHook = ''unset PYTHONPATH'';
+      };
+    });
 }

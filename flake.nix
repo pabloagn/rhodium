@@ -47,6 +47,11 @@
       url = "github:pabloagn/alloys.rhf";
       # inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    iridium-rh = {
+      url = "git+ssh://git@github.com/pabloagn/iridium.rh.git";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -61,9 +66,13 @@
     kanso-nvim,
     chiaroscuro,
     rhodium-alloys,
+    iridium-rh,
   } @ inputs: let
     lib = nixpkgs.lib;
     system = "x86_64-linux";
+
+    # Import overlays with inputs
+    overlaysWithInputs = import ./overlays {inherit inputs;};
 
     pkgs = import nixpkgs {
       inherit system;
@@ -76,7 +85,7 @@
       };
       overlays = [
         nur.overlays.default
-        self.overlays.fonts
+        overlaysWithInputs.fonts
       ];
     };
 
@@ -87,7 +96,7 @@
       };
       overlays = [
         nur.overlays.default
-        self.overlays.fonts
+        overlaysWithInputs.fonts
       ];
     };
 

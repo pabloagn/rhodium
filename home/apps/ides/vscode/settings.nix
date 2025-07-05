@@ -79,7 +79,7 @@
           "editor.suggest.insertMode" = "replace";
           "editor.inlineSuggest.enabled" = true;
           "editor.codeLens" = true;
-          "editor.unicodeHighlight.ambiguousCharacters" = true;
+          "editor.unicodeHighlight.ambiguousCharacters" = false;
           "editor.unicodeHighlight.invisibleCharacters" = true;
           "editor.fontFamily" = "'BerkeleyMonoRh Nerd Font Mono', 'JetBrainsMono Nerd Font', 'JetBrains Mono', 'FiraCode Nerd Font', 'Fira Code', Menlo, Monaco, 'Courier New', monospace";
           "editor.fontLigatures" = true;

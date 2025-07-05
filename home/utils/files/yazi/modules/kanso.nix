@@ -23,12 +23,17 @@
         fg = "#BF3F42";
       }
       {
-        name = "chiaroscuro.rht";
+        name = "chiaroscuro.rh";
         text = "τ";
         fg = "#BF3F42";
       }
       {
-        name = "alloys.rhf";
+        name = "palladium.rh";
+        text = "ƒ";
+        fg = "#BF3F42";
+      }
+      {
+        name = "iridium.rh";
         text = "ƒ";
         fg = "#BF3F42";
       }
