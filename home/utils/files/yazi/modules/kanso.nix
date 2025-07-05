@@ -1,13 +1,39 @@
 {...}: {
   icon = {
     prepend_dirs = [
-      # Rhodium root
+      # --- Rhodium Root ---
       {
         name = "rhodium";
-        text = "󰏉";
-        fg = "#2D4F67";
+        text = "λ";
+        fg = "#BF3F42";
       }
-      # Home directories
+      {
+        name = "kronos";
+        text = "󰏉";
+        fg = "#BF3F42";
+      }
+      {
+        name = "phantom";
+        text = "†";
+        fg = "#BF3F42";
+      }
+      {
+        name = "personal-website";
+        text = "ψ";
+        fg = "#BF3F42";
+      }
+      {
+        name = "chiaroscuro.rht";
+        text = "τ";
+        fg = "#BF3F42";
+      }
+      {
+        name = "alloys.rhf";
+        text = "ƒ";
+        fg = "#BF3F42";
+      }
+
+      # --- Home Directories ---
       {
         name = "downloads";
         text = "";
@@ -65,13 +91,13 @@
       }
     ];
     prepend_exts = [
-      # Rhodium config files
+      # --- Rhodium Config Files ---
       {
         name = "rh";
         text = "󰘧";
-        fg = "#597b75";
+        fg = "#BF3F42";
       }
-      # Text files
+      # --- Text Files ---
       {
         name = "txt";
         text = "󰈙";
