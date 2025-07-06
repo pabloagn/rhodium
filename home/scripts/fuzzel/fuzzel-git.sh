@@ -3,7 +3,7 @@
 set -euo pipefail
 
 # --- Main Configuration ---
-APP_NAME="rhodium-git"
+APP_NAME="rh-git"
 APP_TITLE="Rhodium's Git Utils"
 PROMPT="ϱ: "
 

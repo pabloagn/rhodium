@@ -2,6 +2,6 @@
   imports = [
     ./emulators
     ./prompts
-    ./utils
+    ./multiplexers
   ];
 }

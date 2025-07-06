@@ -3,7 +3,7 @@
 set -euo pipefail
 
 # --- Main Configuration ---
-APP_NAME="rhodium-auth"
+APP_NAME="rh-auth"
 APP_TITLE="Rhodium's Auth Utils"
 PROMPT="α: "
 

@@ -3,7 +3,7 @@
 set -euo pipefail
 
 # --- Main Configuration ---
-APP_NAME="rhodium-journals"
+APP_NAME="rh-journals"
 APP_TITLE="Rhodium's Journals"
 PROMPT="ͳ: "
 

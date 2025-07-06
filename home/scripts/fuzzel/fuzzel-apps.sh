@@ -3,7 +3,7 @@
 set -euo pipefail
 
 # --- Main Configuration ---
-APP_NAME="rhodium-apps"
+APP_NAME="rh-apps"
 APP_TITLE="Rhodium's Apps"
 PROMPT="λ: "
 

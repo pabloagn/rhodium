@@ -3,7 +3,7 @@
 set -euo pipefail
 
 # --- Main Configuration ---
-APP_NAME="rhodium-find"
+APP_NAME="rh-find"
 APP_TITLE="Rhodium's Find Utils"
 PROMPT="ƒ: "
 

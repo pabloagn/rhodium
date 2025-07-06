@@ -3,7 +3,7 @@
 set -euo pipefail
 
 # --- Main Configuration ---
-APP_NAME="rhodium-bluetooth"
+APP_NAME="rh-bluetooth"
 APP_TITLE="Rhodium's Bluetooth Utils"
 PROMPT="β: "
 

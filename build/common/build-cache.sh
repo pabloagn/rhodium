@@ -7,6 +7,7 @@
 COMMON_DIR="$(dirname "$(realpath "${BASH_SOURCE[0]}")")"
 source "${COMMON_DIR}/helpers.sh"
 source "${COMMON_DIR}/bootstrap.sh"
+source "${COMMON_DIR}/build-cache-apps.sh"
 source "${COMMON_DIR}/build-cache-launcher.sh"
 source "${COMMON_DIR}/build-cache-wallpapers.sh"
 
@@ -59,13 +60,14 @@ show_usage() {
     echo "Usage: $0 [OPTIONS]"
     echo ""
     echo "OPTIONS:"
-    echo "  --launcher, -l          Update fuzzel apps cache"
+    echo "  --apps, -a              Update fuzzel apps cache"
+    echo "  --launcher, -l          Update fuzzel launcher cache"
     echo "  --wallpapers, -w        Update fuzzel wallpapers cache"
     echo "  --bat, -b               Update bat syntax cache"
     echo "  --tldr, -t              Update tldr pages cache"
     echo "  --icons, -i             Update unicode icons cache"
     echo "  --nix, -n               Update nix index database"
-    echo "  --all, -a               Update all caches"
+    echo "  --all, -A               Update all caches"
     echo "  --all-except-nix, -e    Update all caches except nix index"
     echo "  --help, -h              Show this help message"
     echo ""
@@ -77,6 +79,7 @@ show_usage() {
 
 # --- Main Function ---
 main() {
+    local run_apps=false
     local run_launcher=false
     local run_wallpapers=false
     local run_bat=false
@@ -88,6 +91,11 @@ main() {
     # Parse command line arguments
     while [[ $# -gt 0 ]]; do
         case $1 in
+        --apps | -a)
+            run_apps=true
+            has_operations=true
+            shift
+            ;;
         --launcher | -l)
             run_launcher=true
             has_operations=true
@@ -118,7 +126,8 @@ main() {
             has_operations=true
             shift
             ;;
-        --all | -a)
+        --all | -A)
+            run_apps=true
             run_launcher=true
             run_wallpapers=true
             run_bat=true
@@ -129,6 +138,7 @@ main() {
             shift
             ;;
         --all-except-nix | -e)
+            run_apps=true
             run_launcher=true
             run_wallpapers=true
             run_bat=true
@@ -158,6 +168,7 @@ main() {
     # Execute selected operations
     local failed_operations=()
 
+    [[ "$run_apps" == true ]] && { build_cache_apps || failed_operations+=("apps"); }
     [[ "$run_launcher" == true ]] && { build_cache_launcher || failed_operations+=("launcher"); }
     [[ "$run_wallpapers" == true ]] && { build_cache_wallpapers || failed_operations+=("wallpapers"); }
     [[ "$run_bat" == true ]] && { update_bat_cache || failed_operations+=("bat"); }

@@ -3,7 +3,7 @@
 set -euo pipefail
 
 # --- Main Configuration ---
-APP_NAME="rhodium-unicode"
+APP_NAME="rh-unicode"
 APP_TITLE="Rhodium's Unicode Collection"
 PROMPT="Ι: "
 

@@ -11,5 +11,6 @@
     ./productivity
     ./social
     ./terminals
+    ./utils
   ];
 }
