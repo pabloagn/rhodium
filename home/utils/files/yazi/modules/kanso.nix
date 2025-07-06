@@ -28,15 +28,15 @@
         fg = "#BF3F42";
       }
       {
-        name = "palladium.rh";
-        text = "ƒ";
+        name = "{palladium.rh, iridium.rh}";
+        text = "󰊕";
         fg = "#BF3F42";
       }
-      {
-        name = "iridium.rh";
-        text = "ƒ";
-        fg = "#BF3F42";
-      }
+      # {
+      #   name = "iridium.rh";
+      #   text = "󰊕";
+      #   fg = "#BF3F42";
+      # }
 
       # --- Home Directories ---
       {
@@ -116,6 +116,11 @@
       }
       {
         name = "rtf";
+        text = "󰈙";
+        fg = "#597b75";
+      }
+      {
+        name = "rst";
         text = "󰈙";
         fg = "#597b75";
       }
@@ -295,7 +300,17 @@
         fg = "#597b75";
       }
       {
+        name = "cbor";
+        text = "";
+        fg = "#597b75";
+      }
+      {
         name = "fasta";
+        text = "";
+        fg = "#597b75";
+      }
+      {
+        name = "gff";
         text = "";
         fg = "#597b75";
       }
