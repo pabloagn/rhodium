@@ -21,7 +21,7 @@
       tab_title_template = "{title}{' :{}:'.format(num_windows) if num_windows > 1 else ''}";
 
       # --- Urls ---
-      open_url_with = "firefox";
+      open_url_with = "firefox -p Personal";
 
       # Borders
       window_border_width = "3pt";
@@ -34,6 +34,8 @@
       # Cursor
       # cursor_trail = 3;
       # cursor_trail_decay = "0.1 0.4";
+      # cursor_trail = 2;
+      # cursor_trail_decay = "0.1 0.2";
       cursor_blink_interval = 0;
 
       # Other properties

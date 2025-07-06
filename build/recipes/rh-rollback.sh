@@ -4,16 +4,19 @@
 # This script rolls back to previous generation
 #
 
+# --- Main Configuration ---
+APP_NAME="rh-build"
+APP_TITLE="Rhodium Build"
+RECIPE="rh-rollback"
+
 # --- Imports ---
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-COMMON_DIR="$(dirname "$SCRIPT_DIR")/common"
-source "${COMMON_DIR}/helpers.sh"
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../common/bootstrap.sh"
 
 # --- Functions ---
 function main() {
-    print_partial "Rolling back to previous generation..."
+    notify "$APP_TITLE" "$RECIPE:\n◌Rolling back to previous generation..."
     sudo nixos-rebuild switch --rollback
-    print_success "Rollback complete"
+    notify "$APP_TITLE" "$RECIPE:\n◌Rollback complete"
 }
 
 main "$@"

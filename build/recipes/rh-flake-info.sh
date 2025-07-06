@@ -4,15 +4,17 @@
 # This script shows flake metadata
 #
 
+# --- Main Configuration ---
+APP_NAME="rh-build"
+APP_TITLE="Rhodium Build"
+RECIPE="rh-flake-info"
+
 # --- Imports ---
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-COMMON_DIR="$(dirname "$SCRIPT_DIR")/common"
-source "${COMMON_DIR}/helpers.sh"
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../common/bootstrap.sh"
 
 # --- Functions ---
 function main() {
-    print_header "FLAKE INFORMATION"
-    echo ""
+    # This script's purpose is to print to terminal. No notification needed.
     nix flake metadata "${FLAKE_PATH}"
 }
 

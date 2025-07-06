@@ -4,10 +4,13 @@
 # This script handles NixOS build operations without switching
 #
 
+# --- Main Configuration ---
+APP_NAME="rh-build"
+APP_TITLE="Rhodium Build"
+RECIPE="rh-build"
+
 # --- Imports ---
-SCRIPT_DIR="$(dirname "$(realpath "${BASH_SOURCE[0]}")")"
-COMMON_DIR="$(dirname "$SCRIPT_DIR")/common"
-source "${COMMON_DIR}/helpers.sh"
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../common/bootstrap.sh"
 
 # --- Functions ---
 function usage() {
@@ -36,25 +39,25 @@ function main() {
 
     case "$mode" in
     "build")
-        print_pending "Building configuration for $host..."
+        notify "$APP_TITLE" "$RECIPE:\n◌Building configuration for $host..."
         sudo nixos-rebuild build --flake "${FLAKE_PATH}#${host}"
-        print_success "Build successful [not activated]"
+        notify "$APP_TITLE" "$RECIPE:\n◌Build successful [not activated]"
         ;;
     "boot")
-        print_pending "Building boot configuration for $host..."
+        notify "$APP_TITLE" "$RECIPE:\n◌Building boot configuration for $host..."
         sudo nixos-rebuild boot --flake "${FLAKE_PATH}#${host}"
-        print_success "Will boot into new generation on next reboot"
+        notify "$APP_TITLE" "$RECIPE:\n◌Will boot into new generation on next reboot"
         ;;
     "dry")
-        print_pending "Dry run for $host..."
+        notify "$APP_TITLE" "$RECIPE:\n◌Dry run for $host..."
         sudo nixos-rebuild dry-build --flake "${FLAKE_PATH}#${host}"
         ;;
     "dev")
-        print_partial "Development build with trace output for $host"
+        notify "$APP_TITLE" "$RECIPE:\n◌Development build with trace output for $host"
         sudo nixos-rebuild switch --flake "${FLAKE_PATH}#${host}" --show-trace -L
         ;;
     *)
-        print_error "Invalid mode: $mode"
+        notify "$APP_TITLE" "$RECIPE:\n◌ERROR: Invalid mode: $mode"
         usage
         ;;
     esac

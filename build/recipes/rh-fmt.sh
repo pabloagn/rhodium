@@ -4,17 +4,20 @@
 # This script formats Nix files
 #
 
+# --- Main Configuration ---
+APP_NAME="rh-build"
+APP_TITLE="Rhodium Build"
+RECIPE="rh-fmt"
+
 # --- Imports ---
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-COMMON_DIR="$(dirname "$SCRIPT_DIR")/common"
-source "${COMMON_DIR}/helpers.sh"
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../common/bootstrap.sh"
 
 # --- Functions ---
 function main() {
-    print_pending "Formatting Nix files..."
+    notify "$APP_TITLE" "$RECIPE:\n◌Formatting Nix files..."
     count=$(find "${FLAKE_PATH}" -name "*.nix" -type f | wc -l)
     find "${FLAKE_PATH}" -name "*.nix" -type f -exec nixfmt {} +
-    print_success "Formatted $count files"
+    notify "$APP_TITLE" "$RECIPE:\n◌Formatted $count files"
 }
 
 main "$@"

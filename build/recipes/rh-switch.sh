@@ -4,10 +4,13 @@
 # This script handles NixOS configuration switching with pre/post flight checks
 #
 
+# --- Main Configuration ---
+APP_NAME="rh-build"
+APP_TITLE="Rhodium Build"
+RECIPE="rh-switch"
+
 # --- Imports ---
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-COMMON_DIR="$(dirname "$SCRIPT_DIR")/common"
-source "${COMMON_DIR}/helpers.sh"
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../common/bootstrap.sh"
 
 # --- Functions ---
 function usage() {
@@ -22,73 +25,53 @@ function usage() {
 
 function pre_flight_checks() {
     local host="$1"
-    print_pending "Pre-flight checks for $host"
+    notify "$APP_TITLE" "$RECIPE:\n◌Pre-flight checks for $host..."
     if nix flake check "$FLAKE_PATH" 2>/dev/null; then
-        print_success "  Flake validation passed"
+        notify "$APP_TITLE" "$RECIPE:\n◌Flake validation passed"
     else
-        print_partial "  Flake validation failed [continuing anyway]"
+        notify "$APP_TITLE" "$RECIPE:\n◌Warning: Flake validation failed [continuing anyway]"
     fi
 }
 
 function source_user_vars() {
-    print_pending "Sourcing User Vars"
+    notify "$APP_TITLE" "$RECIPE:\n◌Sourcing User Vars..."
     if [ -f "/etc/profiles/per-user/${USER}/etc/profile.d/hm-session-vars.sh" ]; then
         source "/etc/profiles/per-user/${USER}/etc/profile.d/hm-session-vars.sh"
     fi
-    print_success "Sourced User Vars"
 }
 
 function reload_services() {
-    print_pending "Reloading User Services"
+    notify "$APP_TITLE" "$RECIPE:\n◌Reloading User Services..."
     systemctl --user daemon-reload
-    
-    # Trigger niri screen transition if available
-    if command -v niri >/dev/null 2>&1; then
-        niri msg action do-screen-transition --delay-ms 800 2>/dev/null || true
-    fi
-    
-    # Restart Rhodium services
-    for service in rh-swaybg rh-waybar; do
-        systemctl --user restart "$service.service" || true
-    done
-    
-    print_success "Reloaded User Services"
+    if command -v niri >/dev/null 2>&1; then niri msg action do-screen-transition --delay-ms 800 2>/dev/null || true; fi
+    for service in rh-swaybg rh-waybar; do systemctl --user restart "$service.service" || true; done
 }
 
 function main() {
-    if [ $# -lt 1 ] || [ $# -gt 2 ]; then
-        usage
-    fi
-    
+    if [ $# -lt 1 ] || [ $# -gt 2 ]; then usage; fi
+
     local host="$1"
     local mode="${2:-}"
     local is_fast_mode=false
-    
-    # Check if fast mode is requested
     if [ "$mode" = "fast" ]; then
         is_fast_mode=true
-        print_pending "Fast mode enabled - skipping pre/post checks"
+        notify "$APP_TITLE" "$RECIPE:\n◌Fast mode enabled - skipping pre/post checks"
     fi
-    
-    # Pre-flight checks (skip in fast mode)
-    if [ "$is_fast_mode" = false ]; then
-        pre_flight_checks "$host"
-    fi
-    
-    # Build and switch (always performed)
-    print_pending "Building and switching configuration..."
+
+    if [ "$is_fast_mode" = false ]; then pre_flight_checks "$host"; fi
+
+    notify "$APP_TITLE" "$RECIPE:\n◌Building and switching configuration..."
     sudo nixos-rebuild switch --flake "${FLAKE_PATH}#${host}"
-    
-    # Post-build tasks (skip in fast mode)
+
     if [ "$is_fast_mode" = false ]; then
-        print_pending "Running post-build tasks..."
+        notify "$APP_TITLE" "$RECIPE:\n◌Running post-build tasks..."
         source_user_vars
         "${COMMON_DIR}/build-cache.sh" -e
         python3 "${COMMON_DIR}/build-icons-cache.py"
         reload_services
-        print_success "System rebuild complete"
+        notify "$APP_TITLE" "$RECIPE:\n◌System rebuild complete"
     else
-        print_success "Fast rebuild complete"
+        notify "$APP_TITLE" "$RECIPE:\n◌Fast rebuild complete"
     fi
 }
 

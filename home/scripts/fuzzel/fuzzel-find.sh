@@ -5,10 +5,10 @@ set -euo pipefail
 # --- Main Configuration ---
 APP_NAME="rh-find"
 APP_TITLE="Rhodium's Find Utils"
-PROMPT="ƒ: "
+PROMPT="󰊕: "
 
 MENU_LEN=5
-PADDING_ARGS_NIX_SEARCH="35 30 100"  # name, version, description
+PADDING_ARGS_NIX_SEARCH="35 30 100" # name, version, description
 
 # --- Imports ---
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../common/bootstrap.sh"
@@ -28,8 +28,8 @@ find_fonts() {
     selected_font=$(fc-list --format="%{family[0]}\n" | sort | uniq | fuzzel --dmenu --prompt "Select Font: ")
 
     if [[ -n "$selected_font" ]]; then
-        echo "Selected font: $selected_font"
-        notify-send "Font Selected" "$selected_font" 2>/dev/null || echo "Font: $selected_font"
+        echo "$selected_font" | wl-copy
+        notify "$APP_TITLE" "Font Yanked to Clipboard:\n◌$selected_font"
     fi
 }
 
@@ -44,7 +44,8 @@ find_installed_packages() {
 
     # If home-manager profile exists, add those packages too
     if [[ -L "$HOME/.nix-profile" ]]; then
-        local home_packages=$(nix-store --query --requisites "$HOME/.nix-profile" 2>/dev/null |
+        local home_packages
+        home_packages=$(nix-store --query --requisites "$HOME/.nix-profile" 2>/dev/null |
             sed -E 's|/nix/store/[^-]+-||' |
             sort | uniq |
             grep -vE '\.patch$|\.tar\.|\.zip$|\.gz$|\.bz2$|\.xz$|source$|^\.drv$')
@@ -54,7 +55,7 @@ find_installed_packages() {
     fi
 
     if [[ -z "$installed_packages" ]]; then
-        notify-send "Error" "No packages found" 2>/dev/null
+        notify "$APP_TITLE" "Error:\nNo packages found"
         return
     fi
 
@@ -62,7 +63,8 @@ find_installed_packages() {
     selected_package=$(echo "$installed_packages" | fuzzel --dmenu --prompt "Installed Packages: ")
 
     if [[ -n "$selected_package" ]]; then
-        notify-send "Package Selected" "$selected_package" 2>/dev/null || echo "Package: $selected_package"
+        echo "$selected_package" | wl-copy
+        notify "$APP_TITLE" "Yanked to Clipboard:\n◌$selected_package"
     fi
 }
 
@@ -119,7 +121,7 @@ find_nix_packages() {
             for i in "${!formatted_entries[@]}"; do
                 if [[ "${formatted_entries[$i]}" == "$selected" ]]; then
                     printf "%s" "${raw_names[$i]}" | wl-copy
-                    notify-send -a "Fuzzel Finder" "Copied to Clipboard: ${raw_names[$i]}"
+                    notify "$APP_TITLE" "Yanked to Clipboard:\n◌${raw_names[$i]}"
                     break
                 fi
             done
@@ -131,7 +133,7 @@ find_nix_packages() {
             selected=$(echo "$results" | fuzzel --dmenu --prompt "Select package (ESC to search again): ")
             [[ -n "$selected" ]] && {
                 printf "%s" "$selected" | wl-copy
-                notify-send "Copied to Clipboard" "$selected"
+                notify "$APP_TITLE" "Yanked to Clipboard:\n◌${selected}"
             }
             break
 
@@ -142,7 +144,7 @@ find_nix_packages() {
             selected=$(echo "$results" | fuzzel --dmenu --prompt "Select package (ESC to search again): ")
             [[ -n "$selected" ]] && {
                 printf "%s" "$selected" | wl-copy
-                notify-send "Copied to Clipboard" "$selected"
+                notify "$APP_TITLE" "Yanked to Clipboard:\n◌${selected}"
             }
             break
         fi

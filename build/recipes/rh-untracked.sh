@@ -4,32 +4,34 @@
 # This script checks for untracked files in the repository
 #
 
+# --- Main Configuration ---
+APP_NAME="rh-build"
+APP_TITLE="Rhodium Build"
+RECIPE="rh-untracked"
+
 # --- Imports ---
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-COMMON_DIR="$(dirname "$SCRIPT_DIR")/common"
-source "${COMMON_DIR}/helpers.sh"
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../common/bootstrap.sh"
 
 # --- Functions ---
 function check_untracked_files() {
-    print_header "UNTRACKED FILES"
-
-    local untracked_files=$(git -C "$FLAKE_PATH" ls-files --others --exclude-standard)
+    notify "$APP_TITLE" "$RECIPE:\n◌Checking for untracked files..."
+    local untracked_files
+    untracked_files=$(git -C "$FLAKE_PATH" ls-files --others --exclude-standard)
 
     if [ -z "$untracked_files" ]; then
-        print_success "Repository is clean"
+        notify "$APP_TITLE" "$RECIPE:\n◌Repository is clean. No untracked files."
     else
-        local count=$(echo "$untracked_files" | wc -l)
-        print_partial "Found $count untracked files:"
+        local count
+        count=$(echo "$untracked_files" | wc -l)
+        notify "$APP_TITLE" "$RECIPE:\n◌Found $count untracked files. See terminal for list."
         echo
-
         echo "$untracked_files" | while IFS= read -r file; do
-            local size=$(du -h "${FLAKE_PATH}/$file" 2>/dev/null | cut -f1 || echo "?")
-            print_info "  $file [$size]"
+            local size
+            size=$(du -h "${FLAKE_PATH}/$file" 2>/dev/null | cut -f1 || echo "?")
+            echo "  $file [$size]"
         done
+        echo
     fi
-
-    echo
-    cyan "$BAR_HEAVY"
 }
 
 function main() {

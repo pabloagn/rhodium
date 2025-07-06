@@ -5,7 +5,7 @@ set -euo pipefail
 # --- Main Configuration ---
 APP_NAME="rh-mounts"
 APP_TITLE="Rhodium's Mounts Util"
-PROMPT="Μ: "
+PROMPT="∩: "
 
 FUZZEL_DMENU_BASE_ARGS="--dmenu"
 MAX_DYNAMIC_LINES=15

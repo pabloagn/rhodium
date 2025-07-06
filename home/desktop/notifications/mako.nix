@@ -43,27 +43,21 @@ in {
       sort = "-time";
 
       # --- Style ---
-      background-color = "#2a2a2aFF";
-      border-color = "#3c3c3cFF";
       border-radius = 0;
       border-size = 1;
-      font = "BerkeleyMonoRh Nerd Font";
+      font = "BerkeleyMonoRh Nerd Font 10";
       height = 120;
       margin = 10;
       outer-margin = 20;
       padding = "12,16";
-      text-color = "#ffffffFF";
       width = 400;
       progress-color = "over #5588AAFF";
       icons = 1;
-      max-icon-size = 48;
+      max-icon-size = 48; # Can change to 96
       icon-location = "left";
       markup = 1;
       actions = 1;
       history = 1;
-
-      # Default format
-      format = "<b>⊹ %s</b>\\n%b";
       text-alignment = "left";
       default-timeout = 10000;
 
@@ -77,34 +71,6 @@ in {
       on-button-right = "dismiss-all";
       on-touch = "dismiss";
       on-notify = "exec mpv /usr/share/sounds/freedesktop/stereo/message.oga --no-video --volume=50 2>/dev/null || true";
-
-      # --- Urgency Styling ---
-      # Low priority - subdued presence
-      "urgency=low" = {
-        background-color = "#1a1a1aFF";
-        text-color = "#888888FF";
-        border-color = "#2a2a2aFF";
-        format = "<b>─ %s</b>\\n%b";
-        default-timeout = 8000;
-      };
-
-      # Normal priority - standard interface
-      "urgency=normal" = {
-        background-color = "#2a2a2aFF";
-        text-color = "#ffffffFF";
-        border-color = "#3c3c3cFF";
-        format = "<b>▶ %s</b>\\n%b";
-        default-timeout = 10000;
-      };
-
-      # Critical priority - demanding attention
-      "urgency=critical" = {
-        background-color = "#3a3a3aFF";
-        text-color = "#ffffffFF";
-        border-color = "#555555FF";
-        format = "<b>▓ %s ▓</b>\\n%b";
-        default-timeout = 0;
-      };
 
       # --- App Overrides ---
       # Messaging applications
@@ -134,7 +100,7 @@ in {
         background-color = "#262626FF";
         text-color = "#ffffffFF";
         border-color = "#404040FF";
-        format = "<b>∴ SYSTEM</b>\\n%b";
+        format = "<b>∴ System</b>\\n%b";
       };
 
       # --- Terminal Notifications ---
@@ -286,7 +252,7 @@ in {
         background-color = "#1a1a1aFF";
         text-color = "#ccccccFF";
         border-color = "#2a2a2aFF";
-        # format = "<b>♫ %s</b>\\n%b";
+        format = "<b>⊹ %s</b>\\n%b";
         default-timeout = 5000;
       };
 
@@ -313,12 +279,12 @@ in {
         format = "<b>▤ %s</b>\\n%b";
       };
 
-      # GROUPED NOTIFICATIONS
+      # --- Grouped Notifications ---
       grouped = {
         format = "<b>∑ (%g) %s</b>\\n%b";
       };
 
-      # Mode configurations
+      # --- Mode Configurations ---
       "mode=do-not-disturb" = {
         invisible = 1;
       };
@@ -498,11 +464,50 @@ in {
         format = "<b>ζ %s</b>\\n%b";
         default-timeout = 4000;
       };
+
+      # --- Rhodium Builds ---
+      "app-name=rh-build" = {
+        background-color = "${c.color21}";
+        text-color = "${c.color18}";
+        border-color = "${c.color18}";
+        format = "<b>λ %s</b>\\n%b";
+        default-timeout = 4000;
+      };
+
+      # NOTE: This overrides my entire setup. It's forbidden here.
+      # --- Urgency Styling ---
+      # Low priority
+      # "urgency=low" = {
+      #   background-color = "#1a1a1aFF";
+      #   text-color = "#888888FF";
+      #   border-color = "#2a2a2aFF";
+      #   format = "<b>─ %s</b>\\n%b";
+      #   default-timeout = 8000;
+      # };
+      #
+      # # Normal priority
+      # "urgency=normal" = {
+      #   background-color = "#2a2a2aFF";
+      #   text-color = "#ffffffFF";
+      #   border-color = "#3c3c3cFF";
+      #   format = "<b>▶ %s</b>\\n%b";
+      #   default-timeout = 10000;
+      # };
+      #
+      # # Critical priority
+      # "urgency=critical" = {
+      #   background-color = "#3a3a3aFF";
+      #   text-color = "#ffffffFF";
+      #   border-color = "#555555FF";
+      #   format = "<b>▓ %s ▓</b>\\n%b";
+      #   default-timeout = 0;
+      # };
+
+      # # --- Default Format ---
+      # format = "<b>⊹ %s</b>\\n%b";
+      # background-color = "#2a2a2aFF";
+      # border-color = "#3c3c3cFF";
+      # text-color = "#ffffffFF";
     };
   };
-
-  # xdg.configFile."mako/config" = {
-  #   source = ./mako/config;
-  #   force = true;
-  # };
 }

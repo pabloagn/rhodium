@@ -4,18 +4,21 @@
 # This script sources user environment variables
 #
 
+# --- Main Configuration ---
+APP_NAME="rh-build"
+APP_TITLE="Rhodium Build"
+RECIPE="rh-source-vars"
+
 # --- Imports ---
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-COMMON_DIR="$(dirname "$SCRIPT_DIR")/common"
-source "${COMMON_DIR}/helpers.sh"
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../common/bootstrap.sh"
 
 # --- Functions ---
 function main() {
-    print_pending "Sourcing User Vars"
+    notify "$APP_TITLE" "$RECIPE:\n◌Sourcing User Vars..."
     if [ -f "/etc/profiles/per-user/${USER}/etc/profile.d/hm-session-vars.sh" ]; then
         source "/etc/profiles/per-user/${USER}/etc/profile.d/hm-session-vars.sh"
     fi
-    print_success "Sourced User Vars"
+    notify "$APP_TITLE" "$RECIPE:\n◌Sourced User Vars"
 }
 
 main "$@"

@@ -4,15 +4,18 @@
 # This script shows system generation details
 #
 
+# --- Main Configuration ---
+APP_NAME="rh-build"
+APP_TITLE="Rhodium Build"
+RECIPE="rh-generation"
+
 # --- Imports ---
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-COMMON_DIR="$(dirname "$SCRIPT_DIR")/common"
-source "${COMMON_DIR}/helpers.sh"
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../common/bootstrap.sh"
 
 # --- Functions ---
 function main() {
-    print_header "SYSTEM GENERATIONS"
-    echo ""
+    # This script's purpose is to print to terminal. No notification needed.
+    echo "--- SYSTEM GENERATIONS ---"
     sudo nix-env --list-generations -p /nix/var/nix/profiles/system | tail -10
 }
 
