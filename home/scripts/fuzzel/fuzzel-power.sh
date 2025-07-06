@@ -3,7 +3,7 @@
 set -euo pipefail
 
 # --- Main Configuration ---
-APP_NAME="rhodium-power"
+APP_NAME="rh-power"
 APP_TITLE="Rhodium's Power Menu"
 PROMPT="Ω: "
 

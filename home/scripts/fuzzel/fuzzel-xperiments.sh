@@ -3,7 +3,7 @@
 set -euo pipefail
 
 # --- Main Configuration ---
-APP_NAME="rhodium-xperiments"
+APP_NAME="rh-xperiments"
 APP_TITLE="Rhodium's X-Periments"
 PROMPT="Ξ: "
 

@@ -3,7 +3,7 @@
 set -euo pipefail
 
 # --- Main Configuration ---
-APP_NAME="rhodium-color-temp"
+APP_NAME="rh-color-temp"
 APP_TITLE="Rhodium's Display Temperature Util"
 PROMPT="ψ: "
 

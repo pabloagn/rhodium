@@ -585,7 +585,7 @@ in {
     };
     status = {
       symbol = "⨯";
-      success_symbol = "✓";
+      success_symbol = "Ω";
       not_executable_symbol = "⊘";
       not_found_symbol = "?";
       sigint_symbol = "⊗";
@@ -625,7 +625,7 @@ in {
       stashed = "‡";
       typechanged = "⊙";
       untracked = "?";
-      up_to_date = "●";
+      up_to_date = "Ω";
     };
     git_commit = {
       tag_symbol = "◈";

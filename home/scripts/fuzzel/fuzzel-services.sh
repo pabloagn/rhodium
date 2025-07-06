@@ -3,9 +3,9 @@
 set -euo pipefail
 
 # --- Main Configuration ---
-APP_NAME="rhodium-services"
+APP_NAME="rh-services"
 APP_TITLE="Rhodium's Service Manager"
-PROMPT="β: "
+PROMPT="Σ: "
 
 # --- Imports ---
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../common/bootstrap.sh"
@@ -49,85 +49,6 @@ list_user_services() {
         awk '{print $1}' |
         sort
 }
-
-# show_service_list() {
-#     local -a paddings
-#     read -ra paddings <<<"$PADDING_ARGS"
-#
-#     local services
-#     mapfile -t services < <(list_user_services)
-#
-#     # Temp files for output
-#     local status_file desc_file
-#     status_file=$(mktemp)
-#     desc_file=$(mktemp)
-#
-#     # Get statuses in parallel
-#     for service in "${services[@]}"; do
-#         {
-#             status=$(get_service_status "$service")
-#             echo "$service|$status"
-#         } >>"$status_file" &
-#     done
-#     wait
-#
-#     # Get descriptions in parallel
-#     for service in "${services[@]}"; do
-#         {
-#             desc=$(get_service_description "$service")
-#             echo "$service|$desc"
-#         } >>"$desc_file" &
-#     done
-#     wait
-#
-#     # Read into associative arrays
-#     declare -A status_map description_map
-#     while IFS="|" read -r name status; do
-#         status_map["$name"]="$status"
-#     done <"$status_file"
-#
-#     while IFS="|" read -r name desc; do
-#         description_map["$name"]="$desc"
-#     done <"$desc_file"
-#
-#     rm -f "$status_file" "$desc_file"
-#
-#     local all_entries=""
-#     for service in "${services[@]}"; do
-#         local status="${status_map[$service]}"
-#         local description="${description_map[$service]}"
-#         local status_display
-#         status_display=$(format_status_indicator "$status")
-#
-#         local formatted_text=""
-#         local parts=("$(provide_fuzzel_entry) $service" "$status_display" "$description")
-#         local num_parts=${#parts[@]}
-#         local num_paddings=${#paddings[@]}
-#
-#         for ((i = 0; i < num_parts; i++)); do
-#             local part="${parts[i]}"
-#             if ((i < num_paddings)); then
-#                 local pad_to=${paddings[i]}
-#                 formatted_text+=$(printf "%-*s" "$pad_to" "$part")
-#             else
-#                 formatted_text+="$part"
-#             fi
-#             if ((i < num_parts - 1)); then
-#                 formatted_text+=" "
-#             fi
-#         done
-#
-#         all_entries+="$formatted_text\n"
-#     done
-#
-#     if [[ -z "$all_entries" ]]; then
-#         notify "$APP_TITLE" "No user services found"
-#         return 1
-#     fi
-#
-#     echo -e "$all_entries"
-# }
-
 
 show_service_list() {
     local -a paddings
@@ -334,7 +255,7 @@ main() {
         service_list=$(show_service_list) || break
 
         local selected_service
-        selected_service=$(echo -e "$service_list" | fuzzel --dmenu --prompt="$(provide_fuzzel_prompt)" -w 120)
+        selected_service=$(echo -e "$service_list" | fuzzel --dmenu --prompt="$PROMPT" -w 120)
 
         [[ -z "$selected_service" ]] && break
 

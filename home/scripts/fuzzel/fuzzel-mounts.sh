@@ -5,7 +5,7 @@ set -euo pipefail
 # --- Main Configuration ---
 APP_NAME="rh-mounts"
 APP_TITLE="Rhodium's Mounts Util"
-PROMPT="μ: "
+PROMPT="Μ: "
 
 FUZZEL_DMENU_BASE_ARGS="--dmenu"
 MAX_DYNAMIC_LINES=15
@@ -31,9 +31,9 @@ run_fuzzel() {
     local extra_args="${3:-}"
 
     if [[ -z "$input_data" ]]; then
-        fuzzel $FUZZEL_DMENU_BASE_ARGS $extra_args --prompt "$prompt" --width 100
+        fuzzel $FUZZEL_DMENU_BASE_ARGS "$extra_args" --prompt "$prompt" --width 100
     else
-        echo "$input_data" | fuzzel $FUZZEL_DMENU_BASE_ARGS $extra_args --prompt "$prompt" --width 100
+        echo "$input_data" | fuzzel $FUZZEL_DMENU_BASE_ARGS "$extra_args" --prompt "$prompt" --width 100
     fi
 }
 

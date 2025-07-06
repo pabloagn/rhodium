@@ -3,7 +3,7 @@
 set -euo pipefail
 
 # --- Main Configuration ---
-APP_NAME="rhodium-wifi"
+APP_NAME="rh-wifi"
 APP_TITLE="Rhodium's WiFi Utils"
 PROMPT="ω: "
 

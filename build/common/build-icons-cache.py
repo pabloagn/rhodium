@@ -7,7 +7,7 @@ from pathlib import Path
 from wcwidth import wcwidth, wcswidth
 
 # --- Configuration ---
-APP_NAME = "rhodium-unicode"
+APP_NAME = "rh-unicode"
 APP_TITLE = "Rhodium's Unicode Collection"
 PROMPT = "β: "
 
