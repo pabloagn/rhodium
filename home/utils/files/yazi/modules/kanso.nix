@@ -1,5 +1,12 @@
 {...}: {
   icon = {
+    prepend_files = [
+      {
+        name = "justfile";
+        text = "";
+        fg = "#6B7E84";
+      }
+    ];
     prepend_dirs = [
       # --- Rhodium Root ---
       {
@@ -28,15 +35,15 @@
         fg = "#BF3F42";
       }
       {
-        name = "{palladium.rh, iridium.rh}";
+        name = "palladium.rh";
         text = "󰊕";
         fg = "#BF3F42";
       }
-      # {
-      #   name = "iridium.rh";
-      #   text = "󰊕";
-      #   fg = "#BF3F42";
-      # }
+      {
+        name = "iridium.rh";
+        text = "󰊕";
+        fg = "#BF3F42";
+      }
 
       # --- Home Directories ---
       {
@@ -94,8 +101,23 @@
         text = "";
         fg = "#88A1AC";
       }
-    ];#
+    ]; #
     prepend_exts = [
+      {
+        name = "backup";
+        text = "󰒓";
+        fg = "#6B7E84";
+      }
+      {
+        name = "bkp";
+        text = "󰒓";
+        fg = "#6B7E84";
+      }
+      {
+        name = "bak";
+        text = "󰒓";
+        fg = "#6B7E84";
+      }
       # Haskell
       {
         name = "cabal";
@@ -168,11 +190,6 @@
         name = "wgsl";
         text = "";
         fg = "#C1C5C3";
-      }
-      {
-        name = "justfile";
-        text = "";
-        fg = "#6B7E84";
       }
       {
         name = "cir";
