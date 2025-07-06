@@ -14,7 +14,7 @@ source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../common/bootstrap.sh"
 
 # --- Functions ---
 function scan_backup_files() {
-    notify "$APP_TITLE" "$RECIPE:\n◌Scanning for backup files..."
+    notify "$APP_TITLE" "$RECIPE:\n${NOTIFY_BULLET} Scanning for backup files..."
     echo
 
     local backup_count=0
@@ -30,7 +30,7 @@ function scan_backup_files() {
     done < <(find "${HOME_DIR}/.config" -type f \( -name "*.backup" -o -name "*.bkp" \) -print0 2>/dev/null)
 
     if [ $backup_count -eq 0 ]; then
-        notify "$APP_TITLE" "$RECIPE:\n◌No backup files found"
+        notify "$APP_TITLE" "$RECIPE:\n◌ No backup files found"
     else
         echo
         echo "Total: $backup_count backup files"

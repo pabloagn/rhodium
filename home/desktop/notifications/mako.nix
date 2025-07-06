@@ -21,19 +21,36 @@
     # Extended
     color16 = "#b6927bff";
     color17 = "#b98d7bff";
-    color18 = "#4B5F6Fff";
+    color18 = "#678298ff";
     color19 = "#4a7fffff";
     color20 = "#59bfaaff";
     color21 = "#0d0d0dff";
     color22 = "#C24043ff";
+    color23 = "#f2f2f2ff";
+    color24 = "#2a2a2aff";
   };
 
   i = {
     icon01 = "◆";
   };
-in let
-  viaColor = c.color18;
-  colors = c;
+
+  notifTime = {
+    xs = 1000;
+    sm = 2000;
+    md = 3000;
+    lg = 4000;
+    xl = 5000;
+    xx = 10000;
+  };
+
+  iconSize = {
+    xs = 12;
+    sm = 24;
+    md = 48;
+    lg = 62;
+    xl = 96;
+    xx = 120;
+  };
 in {
   services.mako = {
     enable = true;
@@ -53,13 +70,13 @@ in {
       width = 400;
       progress-color = "over #5588AAFF";
       icons = 1;
-      max-icon-size = 48; # Can change to 96
+      max-icon-size = iconSize.sm;
       icon-location = "left";
       markup = 1;
       actions = 1;
       history = 1;
       text-alignment = "left";
-      default-timeout = 10000;
+      default-timeout = notifTime.xx;
 
       ignore-timeout = 0;
       anchor = "top-right";
@@ -75,108 +92,117 @@ in {
       # --- App Overrides ---
       # Messaging applications
       "app-name=Telegram" = {
-        background-color = "#1e1e1eFF";
-        text-color = "#ccccccFF";
-        border-color = "#333333FF";
+        background-color = "${c.color21}";
+        text-color = "${c.color23}";
+        border-color = "${c.color24}";
         format = "<b>◆ %s</b>\\n%b";
       };
 
       "app-name=discord" = {
-        background-color = "#1e1e1eFF";
-        text-color = "#ccccccFF";
-        border-color = "#333333FF";
+        background-color = "${c.color21}";
+        text-color = "${c.color23}";
+        border-color = "${c.color24}";
         format = "<b>◇ %s</b>\\n%b";
       };
 
       "app-name=Signal" = {
-        background-color = "#1e1e1eFF";
-        text-color = "#ccccccFF";
-        border-color = "#333333FF";
+        background-color = "${c.color21}";
+        text-color = "${c.color23}";
+        border-color = "${c.color24}";
         format = "<b>■ %s</b>\\n%b";
       };
 
       # --- System Notifications ---
       "app-name=notify-send" = {
-        background-color = "#262626FF";
-        text-color = "#ffffffFF";
-        border-color = "#404040FF";
+        background-color = "${c.color21}";
+        text-color = "${c.color23}";
+        border-color = "${c.color24}";
         format = "<b>∴ System</b>\\n%b";
       };
 
       # --- Terminal Notifications ---
       "app-name=kitty" = {
-        background-color = "#1a1a1aFF";
-        text-color = "#ffffffFF";
-        border-color = "#333333FF";
+        background-color = "${c.color21}";
+        text-color = "${c.color23}";
+        border-color = "${c.color24}";
         format = "<b>λ %s</b>\\n%b";
       };
 
       "app-name=ghostty" = {
-        background-color = "#1a1a1aFF";
-        text-color = "#ffffffFF";
-        border-color = "#333333FF";
+        background-color = "${c.color21}";
+        text-color = "${c.color23}";
+        border-color = "${c.color24}";
         format = "<b>λ %s</b>\\n%b";
       };
 
       "app-name=foot" = {
-        background-color = "#1a1a1aFF";
-        text-color = "#ffffffFF";
-        border-color = "#333333FF";
+        background-color = "${c.color21}";
+        text-color = "${c.color23}";
+        border-color = "${c.color24}";
         format = "<b>λ %s</b>\\n%b";
       };
 
       "app-name=alacritty" = {
-        background-color = "#1a1a1aFF";
-        text-color = "#ffffffFF";
-        border-color = "#333333FF";
+        background-color = "${c.color21}";
+        text-color = "${c.color23}";
+        border-color = "${c.color24}";
         format = "<b>λ %s</b>\\n%b";
+      };
+
+      # Bluetooth notifications
+      "app-name=blueman" = {
+        background-color = "${c.color21}";
+        text-color = "${c.color23}";
+        border-color = "${c.color24}";
+        format = "<b>⊹ %s</b>\\n%b";
+        default-timeout = 4000;
       };
 
       # Volume notifications
       "summary~=\"Volume\"" = {
-        background-color = "#1a1a1aFF";
-        text-color = "#aaaaaaFF";
-        border-color = "#2a2a2aFF";
+        background-color = "${c.color21}";
+        text-color = "${c.color23}";
+        border-color = "${c.color24}";
         format = "<b>♪</b> %b";
         default-timeout = 3000;
       };
 
       # Brightness notifications
       "summary~=\"Brightness\"" = {
-        background-color = "#1a1a1aFF";
-        text-color = "#aaaaaaFF";
-        border-color = "#2a2a2aFF";
+        background-color = "${c.color21}";
+        text-color = "${c.color23}";
+        border-color = "${c.color24}";
         format = "<b>☀</b> %b";
         default-timeout = 3000;
       };
 
       # Battery notifications
       "summary~=\"Battery\"" = {
-        background-color = "#1a1a1aFF";
-        text-color = "#ffffffFF";
-        border-color = "#2a2a2aFF";
+        background-color = "${c.color21}";
+        text-color = "${c.color23}";
+        border-color = "${c.color24}";
         format = "<b>◙ %s</b>\\n%b";
       };
 
       # Network notifications
       "summary~=\"Network\"" = {
-        background-color = "#222222FF";
-        text-color = "#ccccccFF";
-        border-color = "#333333FF";
+        background-color = "${c.color21}";
+        text-color = "${c.color23}";
+        border-color = "${c.color24}";
         format = "<b>⌽ %s</b>\\n%b";
       };
 
       "summary~=\"Wi-Fi\"" = {
-        background-color = "#222222FF";
-        text-color = "#ccccccFF";
-        border-color = "#333333FF";
+        background-color = "${c.color21}";
+        text-color = "${c.color23}";
+        border-color = "${c.color24}";
         format = "<b>⌽ %s</b>\\n%b";
       };
 
       # Email notifications
       "app-name=thunderbird" = {
         background-color = "#262626FF";
-        text-color = "#ffffffFF";
+        text-color = "${c.color23}";
         border-color = "#3c3c3cFF";
         format = "<b>⍋ %s</b>\\n%b";
       };
@@ -184,98 +210,98 @@ in {
       # Download notifications
       "summary~=\"Download\"" = {
         background-color = "#1e1e1eFF";
-        text-color = "#ccccccFF";
-        border-color = "#333333FF";
+        text-color = "${c.color23}";
+        border-color = "${c.color24}";
         format = "<b>↓ %s</b>\\n%b";
       };
 
       # Security/Authentication
       "summary~=\"Authentication\"" = {
-        background-color = "#2a2a2aFF";
-        text-color = "#ffffffFF";
-        border-color = "#555555FF";
+        background-color = "${c.color21}";
+        text-color = "${c.color23}";
+        border-color = "${c.color24}";
         format = "<b>⌺ %s</b>\\n%b";
         default-timeout = 0;
       };
 
       # USB/Device notifications
       "summary~=\"Device\"" = {
-        background-color = "#222222FF";
-        text-color = "#ccccccFF";
-        border-color = "#333333FF";
+        background-color = "${c.color21}";
+        text-color = "${c.color23}";
+        border-color = "${c.color24}";
         format = "<b>▣ %s</b>\\n%b";
       };
 
       # Screenshot notifications
       "app-name=flameshot" = {
-        background-color = "#1a1a1aFF";
-        text-color = "#aaaaaaFF";
-        border-color = "#2a2a2aFF";
+        background-color = "${c.color21}";
+        text-color = "${c.color23}";
+        border-color = "${c.color24}";
         format = "<b>◌ %s</b>\\n%b";
         default-timeout = 3000;
       };
 
       "app-name=spectacle" = {
-        background-color = "#1a1a1aFF";
-        text-color = "#aaaaaaFF";
-        border-color = "#2a2a2aFF";
+        background-color = "${c.color21}";
+        text-color = "${c.color23}";
+        border-color = "${c.color24}";
         format = "<b>◌ %s</b>\\n%b";
         default-timeout = 3000;
       };
 
       # Git notifications
       "summary~=\"Git\"" = {
-        background-color = "#222222FF";
-        text-color = "#ffffffFF";
-        border-color = "#3c3c3cFF";
+        background-color = "${c.color21}";
+        text-color = "${c.color23}";
+        border-color = "${c.color24}";
         format = "<b>⎇ %s</b>\\n%b";
       };
 
       # Build/Compilation notifications
       "summary~=\"Build\"" = {
-        background-color = "#262626FF";
-        text-color = "#ffffffFF";
-        border-color = "#404040FF";
+        background-color = "${c.color21}";
+        text-color = "${c.color23}";
+        border-color = "${c.color24}";
         format = "<b>⚙ %s</b>\\n%b";
       };
 
       # Calendar/Schedule
       "app-name=gnome-calendar" = {
-        background-color = "#2a2a2aFF";
-        text-color = "#ffffffFF";
-        border-color = "#444444FF";
+        background-color = "${c.color21}";
+        text-color = "${c.color23}";
+        border-color = "${c.color24}";
         format = "<b>◷ %s</b>\\n%b";
       };
 
       # Music players
       "app-name=Spotify" = {
-        background-color = "#1a1a1aFF";
-        text-color = "#ccccccFF";
-        border-color = "#2a2a2aFF";
+        background-color = "${c.color21}";
+        text-color = "${c.color23}";
+        border-color = "${c.color24}";
         format = "<b>⊹ %s</b>\\n%b";
         default-timeout = 5000;
       };
 
       "app-name=rhythmbox" = {
-        background-color = "#1a1a1aFF";
-        text-color = "#ccccccFF";
-        border-color = "#2a2a2aFF";
-        format = "<b>♫ %s</b>\\n%b";
+        background-color = "${c.color21}";
+        text-color = "${c.color23}";
+        border-color = "${c.color24}";
+        format = "<b>♩ %s</b>\\n%b";
         default-timeout = 5000;
       };
 
       # File manager
       "app-name=nautilus" = {
-        background-color = "#222222FF";
-        text-color = "#ccccccFF";
-        border-color = "#333333FF";
+        background-color = "${c.color21}";
+        text-color = "${c.color23}";
+        border-color = "${c.color24}";
         format = "<b>▤ %s</b>\\n%b";
       };
 
       "app-name=thunar" = {
-        background-color = "#222222FF";
-        text-color = "#ccccccFF";
-        border-color = "#333333FF";
+        background-color = "${c.color21}";
+        text-color = "${c.color23}";
+        border-color = "${c.color24}";
         format = "<b>▤ %s</b>\\n%b";
       };
 
@@ -297,8 +323,8 @@ in {
 
       # --- Custom Applications ---
       "app-name=rh-util-screen-anotate" = {
-        background-color = "#1a1a1aFF";
-        text-color = "#aaaaaaFF";
+        background-color = "${c.color21}";
+        text-color = "${c.color23}";
         border-color = "#2a2a2aFF";
         format = "<b>◌ %s</b>\\n%b";
         default-timeout = 3000;
@@ -488,7 +514,7 @@ in {
       # # Normal priority
       # "urgency=normal" = {
       #   background-color = "#2a2a2aFF";
-      #   text-color = "#ffffffFF";
+      #   text-color = "${c.color23}";
       #   border-color = "#3c3c3cFF";
       #   format = "<b>▶ %s</b>\\n%b";
       #   default-timeout = 10000;
@@ -497,7 +523,7 @@ in {
       # # Critical priority
       # "urgency=critical" = {
       #   background-color = "#3a3a3aFF";
-      #   text-color = "#ffffffFF";
+      #   text-color = "${c.color23}";
       #   border-color = "#555555FF";
       #   format = "<b>▓ %s ▓</b>\\n%b";
       #   default-timeout = 0;
@@ -507,7 +533,7 @@ in {
       # format = "<b>⊹ %s</b>\\n%b";
       # background-color = "#2a2a2aFF";
       # border-color = "#3c3c3cFF";
-      # text-color = "#ffffffFF";
+      # text-color = "${c.color23}";
     };
   };
 }

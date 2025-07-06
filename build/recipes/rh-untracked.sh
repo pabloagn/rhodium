@@ -14,16 +14,16 @@ source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../common/bootstrap.sh"
 
 # --- Functions ---
 function check_untracked_files() {
-    notify "$APP_TITLE" "$RECIPE:\n◌Checking for untracked files..."
+    notify "$APP_TITLE" "$RECIPE:\n${NOTIFY_BULLET} Checking for untracked files..."
     local untracked_files
     untracked_files=$(git -C "$FLAKE_PATH" ls-files --others --exclude-standard)
 
     if [ -z "$untracked_files" ]; then
-        notify "$APP_TITLE" "$RECIPE:\n◌Repository is clean. No untracked files."
+        notify "$APP_TITLE" "$RECIPE:\n${NOTIFY_BULLET} Repository is clean. No untracked files."
     else
         local count
         count=$(echo "$untracked_files" | wc -l)
-        notify "$APP_TITLE" "$RECIPE:\n◌Found $count untracked files. See terminal for list."
+        notify "$APP_TITLE" "$RECIPE:\n${NOTIFY_BULLET} Found $count untracked files. See terminal for list."
         echo
         echo "$untracked_files" | while IFS= read -r file; do
             local size

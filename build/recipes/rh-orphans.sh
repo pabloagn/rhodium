@@ -35,7 +35,7 @@ is_package_installed() {
 }
 
 main() {
-    notify "$APP_TITLE" "$RECIPE:\n◌Scanning for orphaned configurations..."
+    notify "$APP_TITLE" "$RECIPE:\n${NOTIFY_BULLET} Scanning for orphaned configurations..."
     local pkg_list
     pkg_list=$(mktemp)
     get_package_names >"$pkg_list"
@@ -60,11 +60,11 @@ main() {
 
     local total_orphans=$((${#managed_configs[@]} + ${#unmanaged_configs[@]} + ${#mixed_configs[@]}))
     if [[ $total_orphans -eq 0 ]]; then
-        notify "$APP_TITLE" "$RECIPE:\n◌No orphaned configurations found!"
+        notify "$APP_TITLE" "$RECIPE:\n${NOTIFY_BULLET} No orphaned configurations found!"
         return
     fi
 
-    notify "$APP_TITLE" "$RECIPE:\n◌Found $total_orphans orphaned configurations"
+    notify "$APP_TITLE" "$RECIPE:\n${NOTIFY_BULLET} Found $total_orphans orphaned configurations"
 
     if [[ ${#unmanaged_configs[@]} -gt 0 ]]; then
         echo

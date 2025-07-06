@@ -36,24 +36,23 @@ copy_to_clipboard() {
     fi
 }
 
-# --- Fuzzel Providers ---
 provide_fuzzel_prompt() {
-    # Add A Blank Space After The Symbol
+    # Add a blank space after the symbol
     printf "%s " "$FUZZEL_PROMPT"
 }
 
 provide_fuzzel_entry() {
-    # Do Not Add Blank Space On This Instance
+    # Do not add blank space on this instance
     echo "$FUZZEL_ENTRY"
 }
 
 provide_fuzzel_mode() {
-    # Do Not Add Blank Space On This Instance
+    # Do not add blank space on this instance
     echo "--dmenu"
 }
 
-# --- Populate Fuzzel Menu From Raw "label:command" Array ---
 decorate_fuzzel_menu() {
+    # Populate fuzzel menu from raw "Label:command" array
     # Usage:
     #   decorate_fuzzel_menu raw_array[@]
     # After calling, two variables will be available:
@@ -73,8 +72,8 @@ decorate_fuzzel_menu() {
     done
 }
 
-# --- Returns The Number Of Non-empty Menu_labels (used For --lines Argument) ---
 get_fuzzel_line_count() {
+    # Returns the number of non-empty menu_labels (used for --lines argument)
 
     local count=0
     for label in "${menu_labels[@]}"; do

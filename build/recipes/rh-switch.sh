@@ -25,23 +25,23 @@ function usage() {
 
 function pre_flight_checks() {
     local host="$1"
-    notify "$APP_TITLE" "$RECIPE:\n◌Pre-flight checks for $host..."
+    notify "$APP_TITLE" "$RECIPE:\n${NOTIFY_BULLET} Pre-flight checks for $host..."
     if nix flake check "$FLAKE_PATH" 2>/dev/null; then
-        notify "$APP_TITLE" "$RECIPE:\n◌Flake validation passed"
+        notify "$APP_TITLE" "$RECIPE:\n${NOTIFY_BULLET} Flake validation passed"
     else
-        notify "$APP_TITLE" "$RECIPE:\n◌Warning: Flake validation failed [continuing anyway]"
+        notify "$APP_TITLE" "$RECIPE:\n${NOTIFY_BULLET} Warning: Flake validation failed [continuing anyway]"
     fi
 }
 
 function source_user_vars() {
-    notify "$APP_TITLE" "$RECIPE:\n◌Sourcing User Vars..."
+    notify "$APP_TITLE" "$RECIPE:\n${NOTIFY_BULLET} Sourcing User Vars..."
     if [ -f "/etc/profiles/per-user/${USER}/etc/profile.d/hm-session-vars.sh" ]; then
         source "/etc/profiles/per-user/${USER}/etc/profile.d/hm-session-vars.sh"
     fi
 }
 
 function reload_services() {
-    notify "$APP_TITLE" "$RECIPE:\n◌Reloading User Services..."
+    notify "$APP_TITLE" "$RECIPE:\n${NOTIFY_BULLET} Reloading User Services..."
     systemctl --user daemon-reload
     if command -v niri >/dev/null 2>&1; then niri msg action do-screen-transition --delay-ms 800 2>/dev/null || true; fi
     for service in rh-swaybg rh-waybar; do systemctl --user restart "$service.service" || true; done
@@ -55,23 +55,23 @@ function main() {
     local is_fast_mode=false
     if [ "$mode" = "fast" ]; then
         is_fast_mode=true
-        notify "$APP_TITLE" "$RECIPE:\n◌Fast mode enabled - skipping pre/post checks"
+        notify "$APP_TITLE" "$RECIPE:\n${NOTIFY_BULLET} Fast mode enabled - skipping pre/post checks"
     fi
 
     if [ "$is_fast_mode" = false ]; then pre_flight_checks "$host"; fi
 
-    notify "$APP_TITLE" "$RECIPE:\n◌Building and switching configuration..."
+    notify "$APP_TITLE" "$RECIPE:\n${NOTIFY_BULLET} Building and switching configuration..."
     sudo nixos-rebuild switch --flake "${FLAKE_PATH}#${host}"
 
     if [ "$is_fast_mode" = false ]; then
-        notify "$APP_TITLE" "$RECIPE:\n◌Running post-build tasks..."
+        notify "$APP_TITLE" "$RECIPE:\n${NOTIFY_BULLET} Running post-build tasks..."
         source_user_vars
         "${COMMON_DIR}/build-cache.sh" -e
         python3 "${COMMON_DIR}/build-icons-cache.py"
         reload_services
-        notify "$APP_TITLE" "$RECIPE:\n◌System rebuild complete"
+        notify "$APP_TITLE" "$RECIPE:\n${NOTIFY_BULLET} System rebuild complete"
     else
-        notify "$APP_TITLE" "$RECIPE:\n◌Fast rebuild complete"
+        notify "$APP_TITLE" "$RECIPE:\n${NOTIFY_BULLET} Fast rebuild complete"
     fi
 }
 

@@ -14,9 +14,9 @@ source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../common/bootstrap.sh"
 
 # --- Functions ---
 function main() {
-    notify "$APP_TITLE" "$RECIPE:\n◌Rolling back to previous generation..."
+    notify "$APP_TITLE" "$RECIPE:\n${NOTIFY_BULLET} Rolling back to previous generation..."
     sudo nixos-rebuild switch --rollback
-    notify "$APP_TITLE" "$RECIPE:\n◌Rollback complete"
+    notify "$APP_TITLE" "$RECIPE:\n${NOTIFY_BULLET} Rollback complete"
 }
 
 main "$@"

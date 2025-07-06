@@ -14,7 +14,6 @@ source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../common/bootstrap.sh"
 
 # --- Functions ---
 function main() {
-    # This script's purpose is to print to terminal. No notification needed.
     nix flake metadata "${FLAKE_PATH}"
 }
 

@@ -18,7 +18,7 @@ function main() {
     if [ -f "/etc/profiles/per-user/${USER}/etc/profile.d/hm-session-vars.sh" ]; then
         source "/etc/profiles/per-user/${USER}/etc/profile.d/hm-session-vars.sh"
     fi
-    notify "$APP_TITLE" "$RECIPE:\n◌Sourced User Vars"
+    notify "$APP_TITLE" "$RECIPE:\n${NOTIFY_BULLET} Sourced User Vars"
 }
 
 main "$@"

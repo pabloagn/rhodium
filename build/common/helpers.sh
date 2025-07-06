@@ -20,6 +20,7 @@ export SYM_BULLET="▪"
 export SYM_INFO="✗"
 export BAR_HEAVY="━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 export BAR_LIGHT="─────────────────────────────────────────────────────────────────────────────"
+export NOTIFY_BULLET="◌"
 
 # --- Color Functions ---
 function red() {

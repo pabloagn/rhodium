@@ -1,5 +1,5 @@
 {...}: {
   programs.eww = {
-    enable = false;
+    enable = true;
   };
 }

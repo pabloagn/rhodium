@@ -10,12 +10,13 @@ APP_TITLE="Rhodium Build"
 RECIPE="rh-update-caches"
 
 # --- Imports ---
-source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../common/bootstrap.sh"
+COMMON_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../common"
+source "$COMMON_DIR/bootstrap.sh"
 
 # --- Setup ---
 CACHE_BUILDER="$COMMON_DIR/build-cache.sh"
 if [[ ! -f "$CACHE_BUILDER" ]]; then
-    notify "$APP_TITLE" "$RECIPE:\n◌ERROR: Cache builder script not found!"
+    notify "$APP_TITLE" "$RECIPE:\n${NOTIFY_BULLET} ERROR: Cache builder script not found!"
     exit 1
 fi
 
@@ -69,11 +70,11 @@ main() {
             local args
             args=$(build_args "${choices[@]}")
             if [[ -n "$args" ]]; then
-                notify "$APP_TITLE" "$RECIPE:\n◌Starting cache updates..."
+                notify "$APP_TITLE" "$RECIPE:\n${NOTIFY_BULLET} Starting cache updates..."
                 if "$CACHE_BUILDER" "$args"; then
-                    notify "$APP_TITLE" "$RECIPE:\n◌Cache updates completed!"
+                    notify "$APP_TITLE" "$RECIPE:\n${NOTIFY_BULLET} Cache updates completed!"
                 else
-                    notify "$APP_TITLE" "$RECIPE:\n◌ERROR: Some cache updates failed!"
+                    notify "$APP_TITLE" "$RECIPE:\n${NOTIFY_BULLET} ERROR: Some cache updates failed!"
                     exit 1
                 fi
             fi

@@ -13,12 +13,14 @@ source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../common/bootstrap.sh"
 declare -A menu_options=(
     ["$(provide_fuzzel_entry) Enable Bluetooth"]="enable_bluetooth"
     ["$(provide_fuzzel_entry) Disable Bluetooth"]="disable_bluetooth"
-    ["$(provide_fuzzel_entry) Scan for devices"]="scan_for_devices"
-    ["$(provide_fuzzel_entry) Connect device"]="connect_device"
-    ["$(provide_fuzzel_entry) Disconnect device"]="disconnect_device"
-    ["$(provide_fuzzel_entry) List interfaces"]="list_interfaces"
-    ["$(provide_fuzzel_entry) List connected devices"]="list_connected_devices"
-    ["$(provide_fuzzel_entry) Remove device"]="remove_device"
+    ["$(provide_fuzzel_entry) Scan for Devices"]="scan_for_devices"
+    ["$(provide_fuzzel_entry) Connect Device"]="connect_device"
+    ["$(provide_fuzzel_entry) Disconnect Device"]="disconnect_device"
+    ["$(provide_fuzzel_entry) Blueman Adapters"]="blueman_adapters"
+    ["$(provide_fuzzel_entry) Blueman Services"]="blueman_services"
+    ["$(provide_fuzzel_entry) List Interfaces"]="list_interfaces"
+    ["$(provide_fuzzel_entry) List Connected Devices"]="list_connected_devices"
+    ["$(provide_fuzzel_entry) Remove Device"]="remove_device"
 )
 
 # --- Configuration ---
@@ -49,6 +51,15 @@ run_fuzzel_password() {
     local prompt="$1"
     local extra_args="${2:-}" # Optional additional arguments for fuzzel
     fuzzel "$(provide_fuzzel_mode)" "$extra_args" --password --prompt "$prompt"
+}
+
+# --- Launchers ---
+blueman_adapters() {
+    blueman-adapters
+}
+
+blueman_services() {
+    blueman-services
 }
 
 # --- Bluetooth Specific Helper Functions ---
@@ -82,12 +93,12 @@ get_battery_percentage() {
 # Enables Bluetooth power (overrides any GUI blocks)
 enable_bluetooth() {
     notify "$APP_TITLE" "Enabling Bluetooth..."
-    
+
     # First try to unblock rfkill if it's blocked
     if command -v rfkill &>/dev/null; then
         rfkill unblock bluetooth 2>/dev/null || true
     fi
-    
+
     # Then try to power on via bluetoothctl
     if bluetoothctl power on &>/dev/null; then
         notify "$APP_TITLE" "Bluetooth enabled."
@@ -106,7 +117,7 @@ enable_bluetooth() {
 # Disables Bluetooth power (hard disable with rfkill block)
 disable_bluetooth() {
     notify "$APP_TITLE" "Disabling Bluetooth..."
-    
+
     # First disconnect all devices
     local connected_devices=$(bluetoothctl devices Connected 2>/dev/null | awk '{print $2}')
     if [[ -n "$connected_devices" ]]; then
@@ -114,15 +125,15 @@ disable_bluetooth() {
             bluetoothctl disconnect "$mac" &>/dev/null || true
         done <<<"$connected_devices"
     fi
-    
+
     # Power off via bluetoothctl
     bluetoothctl power off &>/dev/null || true
-    
+
     # Block via rfkill to prevent re-enabling
     if command -v rfkill &>/dev/null; then
         rfkill block bluetooth 2>/dev/null || true
     fi
-    
+
     notify "$APP_TITLE" "Bluetooth disabled."
 }
 

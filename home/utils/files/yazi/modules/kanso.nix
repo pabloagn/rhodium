@@ -104,6 +104,11 @@
     ]; #
     prepend_exts = [
       {
+        name = "yuck";
+        text = "󰒓";
+        fg = "#6B7E84";
+      }
+      {
         name = "backup";
         text = "󰒓";
         fg = "#6B7E84";

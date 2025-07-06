@@ -1,5 +1,6 @@
 {...}: {
   imports = [
-    ./waybar.nix
+    ./eww.nix
   ];
 }
+

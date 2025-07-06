@@ -12,7 +12,6 @@ APP_NAME="rh-display"
 PADDING_ARGS="20 35 15"
 
 COMMON_DIR="$(dirname "$(realpath "${BASH_SOURCE[0]}")")"
-source "${COMMON_DIR}/helpers.sh"
 source "${COMMON_DIR}/bootstrap.sh"
 
 # --- Main Cache Building Function ---

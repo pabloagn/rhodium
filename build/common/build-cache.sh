@@ -5,7 +5,6 @@
 #
 
 COMMON_DIR="$(dirname "$(realpath "${BASH_SOURCE[0]}")")"
-source "${COMMON_DIR}/helpers.sh"
 source "${COMMON_DIR}/bootstrap.sh"
 
 # --- Function To Update Apps Cache ---

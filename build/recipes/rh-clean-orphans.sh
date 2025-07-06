@@ -49,7 +49,7 @@ show_contents() {
     echo
     local file_count=0
     while IFS= read -r file && [[ $file_count -lt $max_files ]]; do
-        local relative="${file#$dir/}"
+        local relative="${file#"$dir"/}"
         local indent="    "
         if [[ -L "$file" ]]; then
             local target
@@ -112,11 +112,11 @@ main() {
     echo "Please ensure you have backups of important configurations"
     echo
     if ! yes_or_no "Continue with orphan detection?"; then
-        notify "$APP_TITLE" "$RECIPE:\n◌Cancelled by user."
+        notify "$APP_TITLE" "$RECIPE:\n${NOTIFY_BULLET} Cancelled by user."
         exit 0
     fi
 
-    notify "$APP_TITLE" "$RECIPE:\n◌Detecting orphaned configurations..."
+    notify "$APP_TITLE" "$RECIPE:\n${NOTIFY_BULLET} Detecting orphaned configurations..."
     local pkg_list
     pkg_list=$(mktemp)
     get_package_names >"$pkg_list"
@@ -140,7 +140,7 @@ main() {
     rm -f "$pkg_list"
 
     local total_orphans=$((${#managed_configs[@]} + ${#unmanaged_configs[@]} + ${#mixed_configs[@]}))
-    notify "$APP_TITLE" "$RECIPE:\n◌Detection complete! Found $total_orphans orphans."
+    notify "$APP_TITLE" "$RECIPE:\n${NOTIFY_BULLET} Detection complete! Found $total_orphans orphans."
 
     echo
     echo "Found $total_orphans orphaned configurations:"
@@ -181,7 +181,7 @@ main() {
         fi
     fi
 
-    notify "$APP_TITLE" "$RECIPE:\n◌CLEANUP COMPLETE\nTotal configurations removed: $total_removed"
+    notify "$APP_TITLE" "$RECIPE:\n${NOTIFY_BULLET} CLEANUP COMPLETE\nTotal configurations removed: $total_removed"
     echo
     echo "Space reclaimed: $(du -sh "${HOME_DIR}"/.config 2>/dev/null | cut -f1)"
 }
