@@ -7,7 +7,7 @@
         # HACK:
         # We needed to use a compatible font (BerkeleyMono, JuliaMono)
         # since it was the font with widest adoption of unicode symbols
-        font = "BerkeleyMonoRh Nerd Font Mono:size=14, JuliaMono:size=14, JetBrainsMono Nerd Font:size=14";
+        font = "BerkeleyMonoRh Nerd Font:size=14, JuliaMono:size=14, JetBrainsMono Nerd Font:size=14";
         dpi-aware = false;
         prompt = "'λ '"; # Default prompt if none provided
         icons-enabled = true;

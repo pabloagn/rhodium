@@ -3,143 +3,8 @@
     pname = "rhodium-fonts";
     version = "1.0";
 
-    fontSources = {
-      berkeley = {
-        source = inputs.iridium-rh.packages.${prev.system}.berkeley-mono;
-        fonts = {
-          # "BerkeleyMonoRh-Black-Oblique.ttf" = {
-          #   patch = true;
-          #   mono = false;
-          #   nonprop = true;
-          # };
-          # "BerkeleyMonoRh-Black.ttf" = {
-          #   patch = true;
-          #   mono = false;
-          #   nonprop = true;
-          # };
-          # "BerkeleyMonoRh-Bold-Oblique.ttf" = {
-          #   patch = true;
-          #   mono = false;
-          #   nonprop = true;
-          # };
-          # "BerkeleyMonoRh-Bold.ttf" = {
-          #   patch = true;
-          #   mono = false;
-          #   nonprop = true;
-          # };
-          # "BerkeleyMonoRh-Book-Oblique.ttf" = {
-          #   patch = true;
-          #   mono = false;
-          #   nonprop = true;
-          # };
-          # "BerkeleyMonoRh-Book.ttf" = {
-          #   patch = true;
-          #   mono = false;
-          #   nonprop = true;
-          # };
-          # "BerkeleyMonoRh-ExtraBold-Oblique.ttf" = {
-          #   patch = true;
-          #   mono = false;
-          #   nonprop = true;
-          # };
-          # "BerkeleyMonoRh-ExtraBold.ttf" = {
-          #   patch = true;
-          #   mono = false;
-          #   nonprop = true;
-          # };
-          # "BerkeleyMonoRh-ExtraLight-Oblique.ttf" = {
-          #   patch = true;
-          #   mono = false;
-          #   nonprop = true;
-          # };
-          # "BerkeleyMonoRh-ExtraLight.ttf" = {
-          #   patch = true;
-          #   mono = false;
-          #   nonprop = true;
-          # };
-          # "BerkeleyMonoRh-Light-Oblique.ttf" = {
-          #   patch = true;
-          #   mono = false;
-          #   nonprop = true;
-          # };
-          # "BerkeleyMonoRh-Light.ttf" = {
-          #   patch = true;
-          #   mono = false;
-          #   nonprop = true;
-          # };
-          # "BerkeleyMonoRh-Medium-Oblique.ttf" = {
-          #   patch = true;
-          #   mono = false;
-          #   nonprop = true;
-          # };
-          # "BerkeleyMonoRh-Medium.ttf" = {
-          #   patch = true;
-          #   mono = false;
-          #   nonprop = true;
-          # };
-          # "BerkeleyMonoRh-Oblique.ttf" = {
-          #   patch = true;
-          #   mono = false;
-          #   nonprop = true;
-          # };
-          "BerkeleyMonoRh-Regular.ttf" = {
-            patch = true;
-            mono = false;
-            nonprop = true;
-          };
-        #   "BerkeleyMonoRh-Retina-Oblique.ttf" = {
-        #     patch = true;
-        #     mono = false;
-        #     nonprop = true;
-        #   };
-        #   "BerkeleyMonoRh-Retina.ttf" = {
-        #     patch = true;
-        #     mono = false;
-        #     nonprop = true;
-        #   };
-        #   "BerkeleyMonoRh-SemiBold-Oblique.ttf" = {
-        #     patch = true;
-        #     mono = false;
-        #     nonprop = true;
-        #   };
-        #   "BerkeleyMonoRh-SemiBold.ttf" = {
-        #     patch = true;
-        #     mono = false;
-        #     nonprop = true;
-        #   };
-        #   "BerkeleyMonoRh-SemiLight-Oblique.ttf" = {
-        #     patch = true;
-        #     mono = false;
-        #     nonprop = true;
-        #   };
-        #   "BerkeleyMonoRh-SemiLight.ttf" = {
-        #     patch = true;
-        #     mono = false;
-        #     nonprop = true;
-        #   };
-        #   "BerkeleyMonoRh-Thin-Oblique.ttf" = {
-        #     patch = true;
-        #     mono = false;
-        #     nonprop = true;
-        #   };
-        #   "BerkeleyMonoRh-Thin.ttf" = {
-        #     patch = true;
-        #     mono = false;
-        #     nonprop = true;
-        #   };
-        };
-      };
-      # server = {
-      #   source = inputs.iridium-rh.packages.${prev.system}.server-mono;
-      #   fonts = {
-      #     "ServerMono-Regular.otf" = {
-      #       patch = false;
-      #       mono = false;
-      #       nonprop = false;
-      #     };
-      #   };
-      # };
-    };
+    # _fontBuildData has been moved into the 'let' binding within buildPhase
+    # to prevent it from being exposed as a top-level attribute of the derivation.
 
     dontUnpack = true;
 
@@ -155,7 +20,146 @@
       sha256 = "1dl8xj3w0d2risww8smw8j1w7mq3iy6p1csq00s8iwx15b9phpiz";
     };
 
-    buildPhase = ''
+    buildPhase = let
+      # Moved _fontBuildData here to scope it locally to the buildPhase
+      _fontBuildData = {
+        berkeley = {
+          source = inputs.iridium-rh.packages.${prev.system}.berkeley-mono;
+          fonts = {
+            "BerkeleyMonoRh-Black-Oblique.ttf" = {
+              patch = true;
+              mono = false;
+              nonprop = true;
+            };
+            "BerkeleyMonoRh-Black.ttf" = {
+              patch = true;
+              mono = false;
+              nonprop = true;
+            };
+            "BerkeleyMonoRh-Bold-Oblique.ttf" = {
+              patch = true;
+              mono = false;
+              nonprop = true;
+            };
+            "BerkeleyMonoRh-Bold.ttf" = {
+              patch = true;
+              mono = false;
+              nonprop = true;
+            };
+            "BerkeleyMonoRh-Book-Oblique.ttf" = {
+              patch = true;
+              mono = false;
+              nonprop = true;
+            };
+            "BerkeleyMonoRh-Book.ttf" = {
+              patch = true;
+              mono = false;
+              nonprop = true;
+            };
+            "BerkeleyMonoRh-ExtraBold-Oblique.ttf" = {
+              patch = true;
+              mono = false;
+              nonprop = true;
+            };
+            "BerkeleyMonoRh-ExtraBold.ttf" = {
+              patch = true;
+              mono = false;
+              nonprop = true;
+            };
+            "BerkeleyMonoRh-ExtraLight-Oblique.ttf" = {
+              patch = true;
+              mono = false;
+              nonprop = true;
+            };
+            "BerkeleyMonoRh-ExtraLight.ttf" = {
+              patch = true;
+              mono = false;
+              nonprop = true;
+            };
+            "BerkeleyMonoRh-Light-Oblique.ttf" = {
+              patch = true;
+              mono = false;
+              nonprop = true;
+            };
+            "BerkeleyMonoRh-Light.ttf" = {
+              patch = true;
+              mono = false;
+              nonprop = true;
+            };
+            "BerkeleyMonoRh-Medium-Oblique.ttf" = {
+              patch = true;
+              mono = false;
+              nonprop = true;
+            };
+            "BerkeleyMonoRh-Medium.ttf" = {
+              patch = true;
+              mono = false;
+              nonprop = true;
+            };
+            "BerkeleyMonoRh-Oblique.ttf" = {
+              patch = true;
+              mono = false;
+              nonprop = true;
+            };
+            "BerkeleyMonoRh-Regular.ttf" = {
+              patch = true;
+              mono = false;
+              nonprop = true;
+            };
+            "BerkeleyMonoRh-Retina-Oblique.ttf" = {
+              patch = true;
+              mono = false;
+              nonprop = true;
+            };
+            "BerkeleyMonoRh-Retina.ttf" = {
+              patch = true;
+              mono = false;
+              nonprop = true;
+            };
+            "BerkeleyMonoRh-SemiBold-Oblique.ttf" = {
+              patch = true;
+              mono = false;
+              nonprop = true;
+            };
+            "BerkeleyMonoRh-SemiBold.ttf" = {
+              patch = true;
+              mono = false;
+              nonprop = true;
+            };
+            "BerkeleyMonoRh-SemiLight-Oblique.ttf" = {
+              patch = true;
+              mono = false;
+              nonprop = true;
+            };
+            "BerkeleyMonoRh-SemiLight.ttf" = {
+              patch = true;
+              mono = false;
+              nonprop = true;
+            };
+            "BerkeleyMonoRh-Thin-Oblique.ttf" = {
+              patch = true;
+              mono = false;
+              nonprop = true;
+            };
+            "BerkeleyMonoRh-Thin.ttf" = {
+              patch = true;
+              mono = false;
+              nonprop = true;
+            };
+          };
+        };
+        server = {
+          source = inputs.iridium-rh.packages.${prev.system}.server-mono;
+          fonts = {
+            "ServerMono-Regular.otf" = {
+              patch = false;
+              mono = false;
+              nonprop = false;
+            };
+          };
+        };
+      };
+    in ''
       runHook preBuild
       cp -r ${nerd-fonts-src} nerd-fonts
       chmod -R +w nerd-fonts
@@ -187,7 +191,7 @@
                       --careful \
                       --progressbars \
                       --outputdir patched-mono \
-                      --makegroups 4
+                      --makegroups 4 \
                       -s \
                       --adjust-line-height || exit 1
                   ''}
@@ -207,7 +211,7 @@
             )
             familyConfig.fonts)}
         '')
-        fontSources)}
+        _fontBuildData)} # This now refers to the _fontBuildData in the 'let' block
 
       runHook postBuild
     '';

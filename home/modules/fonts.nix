@@ -25,7 +25,7 @@
   ];
 in {
   fonts.fontconfig.enable = true;
-  home.packages = enabledFontPackages;
+  home.packages = enabledFontPackages ++ [pkgs.rhodium-fonts];
 
   # NOTE: List all installed fonts for debugging
   home.file.".local/share/fonts-installed.txt".text = let
