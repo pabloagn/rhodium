@@ -7,9 +7,30 @@
 COMMON_DIR="$(dirname "$(realpath "${BASH_SOURCE[0]}")")"
 source "${COMMON_DIR}/helpers.sh"
 source "${COMMON_DIR}/bootstrap.sh"
-source "${COMMON_DIR}/build-cache-apps.sh"
-source "${COMMON_DIR}/build-cache-launcher.sh"
-source "${COMMON_DIR}/build-cache-wallpapers.sh"
+
+# --- Function To Update Apps Cache ---
+update_apps_cache() {
+    (
+        source "${COMMON_DIR}/build-cache-apps.sh"
+        build_cache_apps
+    )
+}
+
+# --- Function To Update Launcher Cache ---
+update_launcher_cache() {
+    (
+        source "${COMMON_DIR}/build-cache-launcher.sh"
+        build_cache_launcher
+    )
+}
+
+# --- Function To Update Wallpapers Cache ---
+update_wallpapers_cache() {
+    (
+        source "${COMMON_DIR}/build-cache-wallpapers.sh"
+        build_cache_wallpapers
+    )
+}
 
 # --- Function To Update Bat Cache ---
 update_bat_cache() {
@@ -168,9 +189,9 @@ main() {
     # Execute selected operations
     local failed_operations=()
 
-    [[ "$run_apps" == true ]] && { build_cache_apps || failed_operations+=("apps"); }
-    [[ "$run_launcher" == true ]] && { build_cache_launcher || failed_operations+=("launcher"); }
-    [[ "$run_wallpapers" == true ]] && { build_cache_wallpapers || failed_operations+=("wallpapers"); }
+    [[ "$run_apps" == true ]] && { update_apps_cache || failed_operations+=("apps"); }
+    [[ "$run_launcher" == true ]] && { update_launcher_cache || failed_operations+=("launcher"); }
+    [[ "$run_wallpapers" == true ]] && { update_wallpapers_cache || failed_operations+=("wallpapers"); }
     [[ "$run_bat" == true ]] && { update_bat_cache || failed_operations+=("bat"); }
     [[ "$run_tldr" == true ]] && { update_tldr_cache || failed_operations+=("tldr"); }
     [[ "$run_icons" == true ]] && { update_icons_cache || failed_operations+=("icons"); }

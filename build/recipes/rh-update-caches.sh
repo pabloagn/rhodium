@@ -22,14 +22,15 @@ show_menu() {
     echo ""
     print_header "Select caches to update:"
     echo ""
-    echo "  1) Launcher Cache"
-    echo "  2) Wallpaper Cache"
-    echo "  3) Bat Syntax Cache"
-    echo "  4) TLDR Pages Cache"
-    echo "  5) Unicode Icons Cache"
-    echo "  6) Nix Index Database"
-    echo "  7) All Caches"
-    echo "  8) All Except Nix Index"
+    echo "  1) Apps Cache"
+    echo "  2) Launcher Cache"
+    echo "  3) Wallpaper Cache"
+    echo "  4) Bat Syntax Cache"
+    echo "  5) TLDR Pages Cache"
+    echo "  6) Unicode Icons Cache"
+    echo "  7) Nix Index Database"
+    echo "  8) All Caches"
+    echo "  9) All Except Nix Index"
     echo "  0) Exit"
     echo ""
 }
@@ -41,14 +42,15 @@ build_args() {
 
     for choice in "${choices[@]}"; do
         case "$choice" in
-        1) args+=("--launcher") ;;
-        2) args+=("--wallpapers") ;;
-        3) args+=("--bat") ;;
-        4) args+=("--tldr") ;;
-        5) args+=("--icons") ;;
-        6) args+=("--nix") ;;
-        7) args+=("--all") ;;
-        8) args+=("--all-except-nix") ;;
+        1) args+=("--apps") ;;
+        2) args+=("--launcher") ;;
+        3) args+=("--wallpapers") ;;
+        4) args+=("--bat") ;;
+        5) args+=("--tldr") ;;
+        6) args+=("--icons") ;;
+        7) args+=("--nix") ;;
+        8) args+=("--all") ;;
+        9) args+=("--all-except-nix") ;;
         esac
     done
 
@@ -67,7 +69,7 @@ main() {
         # Validate input
         local valid=true
         for choice in "${choices[@]}"; do
-            if ! [[ "$choice" =~ ^[0-8]$ ]]; then
+            if ! [[ "$choice" =~ ^[0-9]$ ]]; then
                 print_error "Invalid choice: $choice"
                 valid=false
                 break
@@ -93,7 +95,7 @@ main() {
                 echo ""
 
                 # Execute cache builder with arguments
-                if "$CACHE_BUILDER" $args; then
+                if "$CACHE_BUILDER" "$args"; then
                     echo ""
                     print_success "Cache updates completed!"
                 else

@@ -167,4 +167,4 @@ build_cache_launcher() {
 }
 
 # Run the cache builder
-build_cache_launcher
+# build_cache_launcher

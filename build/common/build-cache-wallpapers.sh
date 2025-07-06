@@ -8,7 +8,7 @@ set -euo pipefail
 
 # --- Configuration ---
 WALLPAPER_SRC_DIR="$XDG_DATA_HOME/wallpapers"
-APP_NAME="rhodium-display"
+APP_NAME="rh-display"
 PADDING_ARGS="20 35 15"
 
 COMMON_DIR="$(dirname "$(realpath "${BASH_SOURCE[0]}")")"
