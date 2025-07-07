@@ -1,4 +1,3 @@
--- Typst preview (browser-based)
 -- Preview
 vim.keymap.set("n", ";tp", ":TypstPreview<CR>", {
 	buffer = true,

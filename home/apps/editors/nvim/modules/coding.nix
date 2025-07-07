@@ -39,6 +39,10 @@
       #   plugin = crates-nvim;
       #   config = sourceLuaFile "crates-nvim.lua";
       # }
+      {
+        plugin = molten-nvim;
+        config = sourceLuaFile "molten-nvim.lua";
+      }
 
       # {
       #   plugin = lazydev-nvim;
