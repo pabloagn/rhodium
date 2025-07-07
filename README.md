@@ -3,7 +3,9 @@
 <p align="center"><em>A hypermodular NixOS system built to stand the test of time</em></p>
 
 <br/>
+<br/>
 <div align="center">───────  ⑄  ───────</div>
+<br/>
 <br/>
 
 <div align ="center">
@@ -16,7 +18,9 @@
 
 </div>
 
-<div align="center">───────────  ⑄  ───────────</div>
+<br/>
+<div align="center">───────  ⑄  ───────</div>
+<br/>
 <br/>
 
 <div align="center">
