@@ -7,6 +7,7 @@
     ./lockscreen
     ./notifications
     ./portals
+    ./widgets
     ./wallpaper
     ./wm
   ];
