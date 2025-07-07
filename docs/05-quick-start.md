@@ -1,7 +1,8 @@
 ---
 layout: default
 title: Quick Start
-permalink: /05-quick-start/
+nav_order: 6
+permalink: /quick-start/
 ---
 
 # Quick Start

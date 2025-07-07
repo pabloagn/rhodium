@@ -1,6 +1,9 @@
 ---
 layout: default
 title: Home
+nav_order: 1
+description: "A hypermodular NixOS system built to stand the test of time"
+permalink: /
 ---
 
 <div class="hero">
@@ -8,27 +11,6 @@ title: Home
     <p class="hero-subtitle">A hypermodular NixOS system built to stand the test of time</p>
     
     <div class="hero-divider">───────  ‡  ───────</div>
-    
-    <div class="hero-badges">
-        <a href="https://github.com/pabloagn/rhodium/commits/main">
-            <img src="https://img.shields.io/github/last-commit/pabloagn/rhodium?style=for-the-badge&logo=git&logoColor=white&color=7AA89F&labelColor=000000&label=LAST%20COMMIT" alt="Last Commit">
-        </a>
-        <a href="https://github.com/pabloagn/rhodium/blob/main/LICENSE">
-            <img src="https://img.shields.io/github/license/pabloagn/rhodium?style=for-the-badge&color=7AA89F&labelColor=000000" alt="License">
-        </a>
-    </div>
-    
-    <div class="hero-badges">
-        <a href="https://nixos.org/">
-            <img src="https://img.shields.io/badge/Made%20with-Nix-7AA89F?style=for-the-badge&logo=nixos&logoColor=white&labelColor=000000" alt="Made with Nix">
-        </a>
-        <a href="https://www.lua.org/">
-            <img src="https://img.shields.io/badge/Made%20with-Lua-7AA89F?style=for-the-badge&logo=lua&logoColor=white&labelColor=000000" alt="Made with Lua">
-        </a>
-        <a href="https://www.rust-lang.org/">
-            <img src="https://img.shields.io/badge/Made%20with-Rust-7AA89F?style=for-the-badge&logo=rust&logoColor=white&labelColor=000000" alt="Made with Rust">
-        </a>
-    </div>
 </div>
 
 ## Quick Navigation
@@ -44,3 +26,4 @@ title: Home
 git clone https://github.com/pabloagn/rhodium
 sudo nixos-rebuild build --flake .#your-hostname
 sudo nixos-rebuild switch --flake .#your-hostname
+```

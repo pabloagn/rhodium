@@ -1,7 +1,8 @@
 ---
 layout: default
 title: Showcase
-permalink: /09-showcase/
+nav_order: 10
+permalink: /showcase/
 ---
 
 # Showcase

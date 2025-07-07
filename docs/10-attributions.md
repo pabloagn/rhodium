@@ -1,7 +1,8 @@
 ---
 layout: default
 title: Attributions
-permalink: /10-attributions/
+nav_order: 11
+permalink: /attributions/
 ---
 
 # Attributions

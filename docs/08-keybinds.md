@@ -1,7 +1,8 @@
 ---
 layout: default
 title: Keybinds
-permalink: /08-keybinds/
+nav_order: 9
+permalink: /keybinds/
 ---
 
 # Keybinds

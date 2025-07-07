@@ -1,7 +1,8 @@
 ---
 layout: default
 title: Motivation
-permalink: /02-motivation/
+nav_order: 3
+permalink: /motivation/
 ---
 
 # Motivation

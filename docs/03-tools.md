@@ -1,7 +1,8 @@
 ---
 layout: default
 title: Tools
-permalink: /03-tools/
+nav_order: 4
+permalink: /tools/
 ---
 
 # Tools

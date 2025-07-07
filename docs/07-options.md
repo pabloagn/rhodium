@@ -1,7 +1,8 @@
 ---
 layout: default
 title: Options
-permalink: /07-options/
+nav_order: 8
+permalink: /options/
 ---
 
 # Options

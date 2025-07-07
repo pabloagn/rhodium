@@ -1,7 +1,8 @@
 ---
 layout: default
 title: Usage
-permalink: /06-usage/
+nav_order: 7
+permalink: /usage/
 ---
 
 # Usage

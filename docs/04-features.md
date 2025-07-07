@@ -1,7 +1,8 @@
 ---
 layout: default
 title: Features
-permalink: /04-features/
+nav_order: 5
+permalink: /features/
 ---
 
 # Features
