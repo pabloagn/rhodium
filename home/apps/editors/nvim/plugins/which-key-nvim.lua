@@ -68,6 +68,7 @@ require("which-key").add({
 	{ "<leader>g", group = "⠮ Git" },
 	{ "<leader>h", group = "⊰ Harpoon" },
 	{ "<leader>i", group = "↦ Indent" },
+	{ "<leader>j", group = "⟐ Jump" },
 	{ "<leader>l", group = "ψ LSP" },
 	{ "<leader>m", group = "⠿ Multicursor" },
 	{ "<leader>o", group = "◫ Outline" },
@@ -96,6 +97,13 @@ require("which-key").add({
 	{ "g", group = "⟐ Go" },
 	{ "g[", group = "⇤ First" },
 	{ "g]", group = "⇥ Last" },
+
+	-- Flash
+	{ "s", desc = "⊡ Flash jump", mode = { "n", "x", "o" } },
+	{ "S", desc = "⌲ Flash treesitter", mode = { "n", "x", "o" } },
+	{ "r", desc = "⊙ Remote flash", mode = "o" },
+	{ "R", desc = "⌕ Treesitter search", mode = { "o", "x" } },
+	{ "<c-s>", desc = "⊞ Toggle flash search", mode = "c" },
 
 	-- FtPlugin
 	{ ";", group = "◈ FileType" },
@@ -139,6 +147,22 @@ require("which-key").add({
 	-- --- Edit ---
 	{ "<leader>er", desc = "⊹ Replace buffer with clipboard" },
 
+	-- --- Indents ---
+	{ "<leader>ii", desc = "→ Smart indent" },
+	{ "<leader>io", desc = "← Smart outdent" },
+
+    -- --- Lsp Actions ---
+    { "<leader>la", desc = "⌥ Code actions" },
+    { "<leader>lf", desc = "⌘ Format (Conform)" },
+    { "<leader>lh", desc = "◈ Show hover" },
+    { "<leader>lr", desc = "⊛ Rename symbol" },
+
+    -- --- Lsp Navigation ---
+    { "gd", desc = "◆ Go to definition" },
+    { "gi", desc = "◊ Go to implementation" },
+    { "gr", desc = "◇ Go to references" },
+    { "gt", desc = "○ Go to type definition" },
+
 	-- --- Replace (visual) ---
 	{ "<leader>rv", desc = "⍨ Replace visual selection", mode = "v" },
 
@@ -147,17 +171,15 @@ require("which-key").add({
 	{ "<leader>rt", desc = "◎ Toggle Spectre" },
 	{ "<leader>rw", desc = "◉ Search current word" },
 
-	-- --- Lsp Actions ---
-	{ "<leader>la", desc = "⌥ Code actions" },
-	{ "<leader>lf", desc = "⌘ Format (Conform)" },
-	{ "<leader>lh", desc = "◈ Show hover" },
-	{ "<leader>lr", desc = "⊛ Rename symbol" },
 
-	-- --- Lsp Navigation ---
-	{ "gd", desc = "◆ Go to definition" },
-	{ "gi", desc = "◊ Go to implementation" },
-	{ "gr", desc = "◇ Go to references" },
-	{ "gt", desc = "○ Go to type definition" },
+    -- --- Diagnostics ---
+    { "<leader>db", desc = "≣ Show buffer diagnostics" },
+    { "<leader>dl", desc = "≡ Show line diagnostics" },
+    { "<leader>dv", desc = "◫ Toggle virtual text" },
+    { "[d", desc = "◂ Previous diagnostic" },
+    { "[e", desc = "◃ Previous error" },
+    { "]d", desc = "▸ Next diagnostic" },
+    { "]e", desc = "▹ Next error" },
 
 	-- --- Find/search ---
 	{ "<leader>fD", desc = "⊗ Diagnostics (all)" },
@@ -200,6 +222,15 @@ require("which-key").add({
 	{ "]h", desc = "⇢ Next Harpoon mark" },
 	{ "[h", desc = "⇠ Previous Harpoon mark" },
 
+
+	-- Jump (Flash)
+	{ "<leader>jl", desc = "⎯ Jump to line", mode = { "n", "x", "o" } },
+	{ "<leader>jw", desc = "◈ Jump to word beginning", mode = { "n", "x", "o" } },
+	{ "<leader>j.", desc = "↺ Continue last flash", mode = { "n", "x", "o" } },
+	{ "<leader>jf", desc = "→ Flash forward only", mode = { "n", "x", "o" } },
+	{ "<leader>jb", desc = "← Flash backward only", mode = { "n", "x", "o" } },
+	{ "<leader>jW", desc = "◉ Flash select word", mode = { "x", "o" } },
+
 	-- --- Marks ---
 	{ "<leader>pa", desc = "Set mark (wait for letter)" },
 	{ "<leader>p,", desc = "Set next available mark" },
@@ -228,18 +259,6 @@ require("which-key").add({
 	{ "g[T", desc = "⇤ First trouble item" },
 	{ "g]T", desc = "⇥ Last trouble item" },
 
-	-- --- Diagnostics ---
-	{ "<leader>db", desc = "≣ Show buffer diagnostics" },
-	{ "<leader>dl", desc = "≡ Show line diagnostics" },
-	{ "<leader>dv", desc = "◫ Toggle virtual text" },
-	{ "[d", desc = "◂ Previous diagnostic" },
-	{ "[e", desc = "◃ Previous error" },
-	{ "]d", desc = "▸ Next diagnostic" },
-	{ "]e", desc = "▹ Next error" },
-
-	-- --- Indents ---
-	{ "<leader>ii", desc = "→ Smart indent" },
-	{ "<leader>io", desc = "← Smart outdent" },
 
 	-- --- Treesitter ---
 	{ "<leader>z", desc = "± Toggle treesitter folding" },

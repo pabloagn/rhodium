@@ -169,6 +169,131 @@ end, {
 	desc = "Remove current file from Harpoon",
 })
 
+-- --- Flash ---
+-- Main jump motions
+vim.keymap.set({ "n", "x", "o" }, "s", function()
+	require("flash").jump()
+end, {
+	noremap = true,
+	silent = true,
+	desc = "Flash jump",
+})
+
+vim.keymap.set({ "n", "x", "o" }, "S", function()
+	require("flash").treesitter()
+end, {
+	noremap = true,
+	silent = true,
+	desc = "Flash treesitter",
+})
+
+-- Remote operations (operator mode only)
+vim.keymap.set("o", "r", function()
+	require("flash").remote()
+end, {
+	noremap = true,
+	silent = true,
+	desc = "Remote flash",
+})
+
+vim.keymap.set({ "o", "x" }, "R", function()
+	require("flash").treesitter_search()
+end, {
+	noremap = true,
+	silent = true,
+	desc = "Treesitter search",
+})
+
+-- Toggle flash search in command mode
+vim.keymap.set("c", "<c-s>", function()
+	require("flash").toggle()
+end, {
+	noremap = true,
+	silent = true,
+	desc = "Toggle flash search",
+})
+
+-- --- Additional Expert Motions ---
+-- Jump to line
+vim.keymap.set({ "n", "x", "o" }, "<leader>jl", function()
+	require("flash").jump({
+		search = { mode = "search", max_length = 0 },
+		label = { after = { 0, 0 } },
+		pattern = "^",
+	})
+end, {
+	noremap = true,
+	silent = true,
+	desc = "Jump to line",
+})
+
+-- Jump to word beginning
+vim.keymap.set({ "n", "x", "o" }, "<leader>jw", function()
+	require("flash").jump({
+		search = {
+			mode = function(str)
+				return "\\<" .. str
+			end,
+		},
+	})
+end, {
+	noremap = true,
+	silent = true,
+	desc = "Jump to word beginning",
+})
+
+-- Continue last flash search
+vim.keymap.set({ "n", "x", "o" }, "<leader>j.", function()
+	require("flash").jump({ continue = true })
+end, {
+	noremap = true,
+	silent = true,
+	desc = "Continue last flash",
+})
+
+-- Directional jumps
+vim.keymap.set({ "n", "x", "o" }, "<leader>jf", function()
+	require("flash").jump({
+		search = { forward = true, wrap = false, multi_window = false },
+	})
+end, {
+	noremap = true,
+	silent = true,
+	desc = "Flash forward only",
+})
+
+vim.keymap.set({ "n", "x", "o" }, "<leader>jb", function()
+	require("flash").jump({
+		search = { forward = false, wrap = false, multi_window = false },
+	})
+end, {
+	noremap = true,
+	silent = true,
+	desc = "Flash backward only",
+})
+
+-- Select any word (visual/operator mode)
+vim.keymap.set({ "x", "o" }, "<leader>jW", function()
+	require("flash").jump({
+		pattern = ".",
+		search = {
+			mode = function(pattern)
+				-- Remove leading dot
+				if pattern:sub(1, 1) == "." then
+					pattern = pattern:sub(2)
+				end
+				-- Return word pattern and skip pattern
+				return ([[\<%s\w*\>]]):format(pattern), ([[\<%s]]):format(pattern)
+			end,
+		},
+		jump = { pos = "range" },
+	})
+end, {
+	noremap = true,
+	silent = true,
+	desc = "Flash select word",
+})
+
 -- --- Marks ---
 -- Letter marks
 vim.keymap.set("n", "<leader>pa", function()
@@ -257,7 +382,7 @@ end, {
 -- 		silent = true,
 -- 		desc = "Set bookmark " .. i,
 -- 	})
--- 	
+--
 -- 	vim.keymap.set("n", "<leader>pd" .. i, function()
 -- 		require("marks").delete_bookmark" .. i .. "()
 -- 	end, {

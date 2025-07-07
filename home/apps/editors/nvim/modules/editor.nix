@@ -26,7 +26,7 @@
         # config = sourceLuaFile "hydra-nvim.lua";
       }
       {
-        plugin = yazi-nvim;
+        plugin = yazi-nvim; # Yazi on nvim
         config = sourceLuaFile "yazi-nvim.lua";
       }
 
@@ -45,33 +45,29 @@
       # Navigation
       # ------------------------------------------------
       {
-        plugin = aerial-nvim;
+        plugin = aerial-nvim; # Outline view
         config = sourceLuaFile "aerial-nvim.lua";
       }
-      # {
-      #   plugin = flash-nvim;
-      #   config = sourceLuaFile "flash-nvim.lua";
-      # }
       {
-        plugin = harpoon2;
+        plugin = flash-nvim; # Motion improvement
+        config = sourceLuaFile "flash-nvim.lua";
+      }
+      {
+        plugin = harpoon2; # Pin files and buffers for quick switch
         config = sourceLuaFile "harpoon2-nvim.lua";
       }
-      # {
-      #   plugin = leap-nvim;
-      #   config = sourceLuaFile "leap-nvim.lua";
-      # }
       {
-        plugin = marks-nvim;
+        plugin = marks-nvim; # Set file marks and leap
         config = sourceLuaFile "marks-nvim.lua";
       }
       # {
       #   plugin = outline-nvim;
       #   config = sourceLuaFile "outline-nvim.lua";
       # }
-      # {
-      #   plugin = vim-illuminate;
-      #   config = sourceLuaFile "vim-illuminate.lua";
-      # }
+      {
+        plugin = vim-illuminate; # Automatically highlighting other uses of the word under the cursor
+        config = sourceLuaFile "vim-illuminate-nvim.lua";
+      }
 
       # Productivity
       # ------------------------------------------------
@@ -83,20 +79,20 @@
       #   plugin = mini-nvim;
       #   config = sourceLuaFile "mini-nvim.lua";
       # }
-      # {
-      #   plugin = persistence-nvim;
-      #   config = sourceLuaFile "persistence-nvim.lua";
-      # }
+      {
+        plugin = persistence-nvim; # Automated session management
+        config = sourceLuaFile "persistence-nvim.lua";
+      }
       # {
       #   plugin = project-nvim;
       #   config = sourceLuaFile "project-nvim.lua";
       # }
       {
-        plugin = orgmode;
+        plugin = orgmode; # Emacs orgmode in nvim
         # config = sourceLuaFile "orgmode-nvim.lua";
       }
       {
-        plugin = snacks-nvim;
+        plugin = snacks-nvim; # Multiple goodies
         config = sourceLuaFile "snacks-nvim.lua";
       }
       {
