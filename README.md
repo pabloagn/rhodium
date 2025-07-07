@@ -17,6 +17,8 @@
 </div>
 
 <br/>
+<div align="center">───────  ⑄  ───────</div>
+<br/>
 
 <div align="center">
     <div id="docs">
