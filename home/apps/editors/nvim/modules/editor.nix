@@ -83,10 +83,10 @@
       #   plugin = mini-nvim;
       #   config = sourceLuaFile "mini-nvim.lua";
       # }
-      {
-        plugin = persistence-nvim; # Automated session management
-        config = sourceLuaFile "persistence-nvim.lua";
-      }
+      # {
+      #   plugin = persistence-nvim; # Automated session management
+      #   config = sourceLuaFile "persistence-nvim.lua";
+      # }
       # {
       #   plugin = project-nvim;
       #   config = sourceLuaFile "project-nvim.lua";
