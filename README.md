@@ -2,15 +2,11 @@
 
 <p align="center"><em>A hypermodular NixOS system built to stand the test of time</em></p>
 
-<br/>
-<div align="center">───────  ⑄  ───────</div>
-<br/>
-
 <div align="center">
     <div id="docs">
         <p style="text-align:center;">
         <a href="https://github.com/pabloagn/rhodium#-features-1">
-        <img src="https://img.shields.io/badge/Robust-78A59C?style=for-the-badge"/></a>&nbsp&nbsp
+        <img src="https://img.shields.io/badge/∙ Documentation ∙-f2f2f2?style=for-the-badge"/></a>&nbsp&nbsp
     </div>
 </div>
 
