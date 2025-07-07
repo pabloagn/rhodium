@@ -8,7 +8,7 @@
 
 <div align="center">
    <a href="https://pabloagn.github.io/rhodium/" style="text-decoration: none;">
-       <img src="https://img.shields.io/badge/⊹%20Documentation-7AA89F?style=for-the-badge&logoColor=white&labelColor=000000" alt="Documentation">
+       <img src="https://img.shields.io/badge/⊹%20Documentation-7AA89F?style=for-the-badge&logoColor=white&labelColor=1a1a1a" alt="Documentation">
    </a>
 </div>
 
