@@ -75,10 +75,10 @@
         plugin = indent-blankline-nvim; # Better indent
         config = sourceLuaFile "indent-blankline-nvim.lua";
       }
-      {
-        plugin = image-nvim; # Render images inside nvim (using Kitty protocol)
-        config = sourceLuaFile "image-nvim.lua";
-      }
+      # {
+      #   plugin = image-nvim; # Render images inside nvim (using Kitty protocol)
+      #   config = sourceLuaFile "image-nvim.lua";
+      # }
       # {
       #   plugin = mini-nvim;
       #   config = sourceLuaFile "mini-nvim.lua";
