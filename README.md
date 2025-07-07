@@ -3,34 +3,20 @@
 <p align="center"><em>A hypermodular NixOS system built to stand the test of time</em></p>
 
 <br/>
-<div align="center">───────  ‡  ───────</div>
+<div align="center">───────  ⑄  ───────</div>
 <br/>
 
-
 <div align="center">
-    <div id="images">
+    <div id="docs">
         <p style="text-align:center;">
         <a href="https://github.com/pabloagn/rhodium#-features-1">
-        <img src="https://img.shields.io/badge/Robust-f2f2f2?style=for-the-badge"/></a>&nbsp&nbsp
-        <a href="https://github.com/pabloagn/rhodium#-features-1">
-        <img src="https://img.shields.io/badge/Fast-f2f2f2?style=for-the-badge"/></a>&nbsp&nbsp
-        <a href="https://github.com/pabloagn/rhodium#-features-1">
-        <img src="https://img.shields.io/badge/Elegant-f2f2f2?style=for-the-badge"/></a>&nbsp&nbsp
-        <a href="https://github.com/pabloagn/rhodium#-features-1">
-        <img src="https://img.shields.io/badge/Reliable-f2f2f2?style=for-the-badge"/></a>&nbsp&nbsp
-        <a href="https://github.com/pabloagn/rhodium#-features-1">
-        <img src="https://img.shields.io/badge/Reproducible-f2f2f2?style=for-the-badge"/></a>&nbsp&nbsp
-        <a href="https://github.com/pabloagn/rhodium#-features-1">
-        <img src="https://img.shields.io/badge/Secure-f2f2f2?style=for-the-badge"/></a>
+        <img src="https://img.shields.io/badge/Robust-78A59C?style=for-the-badge"/></a>&nbsp&nbsp
     </div>
 </div>
 
-
-<div align="center">
-   <a href="https://pabloagn.github.io/rhodium/" style="text-decoration: none;">
-       <img src="https://img.shields.io/badge/✦%20DOCUMENTATION-7AA89F?style=flat&logoColor=000000&labelColor=7AA89F&color=7AA89F" alt="Documentation">
-   </a>
-</div>
+<br/>
+<div align="center">───────  ⑄  ───────</div>
+<br/>
 
 <br/>
 
