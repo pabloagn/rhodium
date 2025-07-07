@@ -1,19 +1,9 @@
 <p align="center"><img src="assets/logo.png" width=500px></p>
 
-<p align="center"><em>∿ A hypermodular NixOS system built to stand the test of time ∿</em></p>
-
-<div align="center">
-    <div id="docs">
-        <p style="text-align:center;">
-        <a href="https://pabloagn.github.io/rhodium/">
-        <img src="https://img.shields.io/badge/◆ Documentation ◆-f2f2f2?style=for-the-badge"/></a>&nbsp&nbsp
-    </div>
-</div>
+<p align="center"><em>A hypermodular NixOS system built to stand the test of time</em></p>
 
 <br/>
 <div align="center">───────  ⑄  ───────</div>
-<br/>
-
 <br/>
 
 <div align ="center">
@@ -27,6 +17,18 @@
 </div>
 
 <br/>
+
+<div align="center">
+    <div id="docs">
+        <p style="text-align:center;">
+        <a href="https://pabloagn.github.io/rhodium/">
+        <img src="https://img.shields.io/badge/∙ Documentation ∙-f2f2f2?style=for-the-badge"/></a>&nbsp&nbsp
+        <a href="https://pabloagn.github.io/rhodium/">
+        <img src="https://img.shields.io/badge/∙ Contact ∙-f2f2f2?style=for-the-badge"/></a>&nbsp&nbsp
+        <a href="https://pabloagn.github.io/rhodium/">
+        <img src="https://img.shields.io/badge/∙ Contributions ∙-f2f2f2?style=for-the-badge"/></a>&nbsp&nbsp
+    </div>
+</div>
 
 ## <samp>⊹ ABOUT</samp>
 
