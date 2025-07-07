@@ -6,19 +6,12 @@ description: "A hypermodular NixOS system built to stand the test of time"
 permalink: /
 ---
 
-<div class="hero">
-    <img src="{{ '/assets/logo.png' | relative_url }}" alt="Rhodium Logo" class="hero-logo">
-    <p class="hero-subtitle">A hypermodular NixOS system built to stand the test of time</p>
-    
-    <div class="hero-divider">───────  ‡  ───────</div>
-</div>
-
 ## Quick Navigation
 
-- [**About**]({{ '/01-about' | relative_url }}) - Learn about Rhodium's philosophy and goals
-- [**Tools**]({{ '/03-tools' | relative_url }}) - Explore the comprehensive toolset
-- [**Features**]({{ '/04-features' | relative_url }}) - Discover advanced capabilities
-- [**Quick Start**]({{ '/05-quick-start' | relative_url }}) - Get up and running immediately
+- [**About**]({{ '/about' | relative_url }}) - Learn about Rhodium's philosophy and goals
+- [**Tools**]({{ '/tools' | relative_url }}) - Explore the comprehensive toolset
+- [**Features**]({{ '/features' | relative_url }}) - Discover advanced capabilities
+- [**Quick Start**]({{ '/quick-start' | relative_url }}) - Get up and running immediately
 
 ## Get Started
 

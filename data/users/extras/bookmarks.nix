@@ -334,6 +334,12 @@ in
       description = "MyNixOS";
       categories = [ categories.reference ];
     };
+    namecheap = {
+      profile = "personal";
+      url = "https://namecheap.com";
+      description = "Namecheap";
+      categories = [ categories.productivity ];
+    };
     nerdfonts = {
       profile = "personal";
       url = "https://www.nerdfonts.com/cheat-sheet";
@@ -507,6 +513,12 @@ in
       url = "https://unsplash.com";
       description = "Unsplash";
       categories = [ categories.design ];
+    };
+    vercel = {
+      profile = "personal";
+      url = "https://vercel.com";
+      description = "Vercel";
+      categories = [ categories.productivity ];
     };
     whatsapp = {
       profile = "personal";

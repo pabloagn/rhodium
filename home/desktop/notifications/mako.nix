@@ -395,7 +395,7 @@ in {
         default-timeout = 4000;
       };
 
-      "app-name=rh-git" = {
+      "app-name=rh-go" = {
         background-color = "${c.color21}";
         text-color = "${c.color18}";
         border-color = "${c.color18}";

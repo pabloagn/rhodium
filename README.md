@@ -60,3 +60,8 @@ This hypermodular configuration combines the declarative power of Nix with 150+ 
 </div>
 <br/>
 
+## <samp>⊹ GET RHODIUM</samp>
+
+```bash
+curl
+```

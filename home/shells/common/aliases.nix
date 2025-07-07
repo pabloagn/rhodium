@@ -58,6 +58,7 @@
   "!!" = "sudo $history[1]";
 
   # Core Directories
+  hg = "z $HOME";
   gd = "z $HOME_DOWNLOADS";
   gc = "z $XDG_CONFIG_HOME";
   ge = "z $XDG_CACHE_HOME";
