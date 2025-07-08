@@ -65,10 +65,18 @@ function gc_days() {
 }
 
 function gc_all() {
-    notify "$APP_TITLE" "$RECIPE:\n${NOTIFY_BULLET} Cleaning all garbage..."
+    # Collect Nix garbage
+    notify "$APP_TITLE" "$RECIPE:\n${NOTIFY_BULLET} Cleaning Nix garbage..."
     sudo nix-collect-garbage -d
     nix-collect-garbage -d
+
+    # Collect actual Trash
+    notify "$APP_TITLE" "$RECIPE:\n${NOTIFY_BULLET} Cleaning Trash..."
+    rm -rf "$XDG_DATA_HOME/share/Trash"
+
+    # Notify complete
     notify "$APP_TITLE" "$RECIPE:\n${NOTIFY_BULLET} Garbage collection complete"
+    
 }
 
 function main() {

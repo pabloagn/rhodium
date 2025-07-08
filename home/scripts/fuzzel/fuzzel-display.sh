@@ -64,19 +64,19 @@ stop_all_mirrors() {
 
 switch_wallpaper() {
     local target_dir="/var/tmp/current-wallpaper"
-    # Use the same APP_NAME defined at the top of your script
     local CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/$APP_NAME"
     local CACHE_FILE="$CACHE_DIR/wallpapers.cache"
 
     # First, check if the cache file actually exists.
     if [[ ! -f "$CACHE_FILE" ]]; then
-        notify "$APP_TITLE" "Wallpaper cache not found!" "Please run the cache builder script."
+        notify "$APP_TITLE" "Wallpaper cache not found!" "Please run the corresponding cache builder recipe."
         return 1
     fi
 
     while true; do
         local selected_line
         selected_line=$(cut -d$'\t' -f1 "$CACHE_FILE" | fuzzel --dmenu -p "$PROMPT" -l 10 -w 85)
+        echo $selected_line
 
         if [[ -z "${selected_line:-}" ]]; then
             echo "No selection, exiting wallpaper menu."
@@ -88,7 +88,7 @@ switch_wallpaper() {
 
         if [[ -n "$wallpaper_path" && -f "$wallpaper_path" ]]; then
             ln -sf "$wallpaper_path" "$target_dir"
-            notify-send --app-name=rh-utils "Rhodium Utils" "Setting wallpaper: $(basename "$wallpaper_path")"
+            notify "$APP_TITLE" "Setting wallpaper:\n◌ $(basename "$wallpaper_path")"
 
             niri msg action do-screen-transition --delay-ms 400
             systemctl --user restart rh-swaybg.service
