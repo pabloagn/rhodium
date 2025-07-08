@@ -73,6 +73,7 @@
     sops-nix,
     nur,
     ags,
+    astal,
     zen-browser,
     kanso-nvim,
     chiaroscuro,
@@ -306,12 +307,11 @@
     };
 
     # --- Devshells ---
-
-    # NixOS (Default)
-    devShells.${system}.default = import ./devshells/nixos.nix {inherit pkgs inputs lib;};
-
-    # Astal
-    devShells.${system}.astal = import ./devshells/astal.nix {inherit pkgs inputs lib;};
-
+    devShells.${system} = {
+      # Default
+      default = import ./devshells/nixos.nix {inherit pkgs inputs lib;};
+      # Astal
+      astal = import ./devshells/astal.nix {inherit pkgs inputs lib;};
+    };
   };
 }
