@@ -172,6 +172,12 @@ in
       description = "ASCII Art - Image to ASCII";
       categories = [ categories.design categories.utils ];
     };
+    cloudflare = {
+      profile = "personal";
+      url = "https://www.cloudflare.com";
+      description = "Cloudflare";
+      categories = [ categories.productivity ];
+    };
     cloudping = {
       profile = "personal";
       url = "https://www.cloudping.info/";
@@ -553,10 +559,28 @@ in
       description = "Google Drive";
       categories = [ categories.productivity ];
     };
+    rhodium-web = {
+      profile = "solenoidlabs";
+      url = "https://rhodium.solenoidlabs.com/";
+      description = "Rhodium Web";
+      categories = [ categories.productivity ];
+    };
+    rhodium-web-docs = {
+      profile = "solenoidlabs";
+      url = "https://rhodium.solenoidlabs.com/docs";
+      description = "Rhodium Web Docs";
+      categories = [ categories.productivity ];
+    };
     upwork = {
       profile = "solenoidlabs";
       url = "https://upwork.com";
       description = "Upwork";
+      categories = [ categories.productivity ];
+    };
+    vercel-rhodium = {
+      profile = "solenoidlabs";
+      url = "https://vercel.com/pablos-projects-f712375e/rhodium-rh";
+      description = "Vercel Solenoid Labs";
       categories = [ categories.productivity ];
     };
   };
