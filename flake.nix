@@ -33,6 +33,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    astal = {
+      url = "github:aylur/astal";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -178,6 +183,39 @@
   in {
     overlays = import ./overlays;
 
+    # --- Astal ---
+    packages.${system} = {
+      astal-widgets = pkgs.stdenvNoCC.mkDerivation {
+        name = "astal-widgets";
+        src = ./home/desktop/widgets/ags;
+
+        nativeBuildInputs = [
+          pkgs.wrapGAppsHook
+          pkgs.gobject-introspection
+          pkgs.esbuild
+        ];
+
+        buildInputs = [
+          pkgs.gjs
+          pkgs.gtk4
+          pkgs.glib
+          inputs.astal.packages.${pkgs.system}.astal4
+          inputs.astal.packages.${pkgs.system}.io
+          inputs.astal.packages.${pkgs.system}.battery
+          inputs.astal.packages.${pkgs.system}.network
+          inputs.astal.packages.${pkgs.system}.hyprland
+        ];
+
+        installPhase = ''
+          mkdir -p $out/bin
+          esbuild app.ts --bundle --format=esm --sourcemap=inline --external:gi://\* --outfile=$out/bin/astal-widgets
+          sed -i '1i #!/usr/bin/env -S gjs -m' $out/bin/astal-widgets
+          chmod +x $out/bin/astal-widgets
+        '';
+      };
+    };
+
+    # --- Nixos ---
     nixosConfigurations = {
       # Host Entry
       host_001 = lib.nixosSystem {
@@ -249,7 +287,7 @@
       };
     };
 
-    # Standalone home configurations (testing)
+    # --- Standalone Home Configurations (testing) ---
     homeConfigurations = {
       user_001 = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
@@ -267,29 +305,13 @@
       };
     };
 
-    # devShells
-    # ---------------------------------------------
-    devShells.${system} = {
-      # Default DevShell
-      default = pkgs.mkShell {
-        buildInputs = with pkgs; [
-          # General requirements
-          nixpkgs-fmt
-          nixd
-          nil
-          git
-          ripgrep
-          sd
-          fd
-          pv
-          fzf
-          bat
-          hyperfine
-          # Requirements for cache building
-          python3
-          python3Packages.wcwidth
-        ];
-      };
-    };
+    # --- Devshells ---
+
+    # NixOS (Default)
+    devShells.${system}.default = import ./devshells/nixos.nix {inherit pkgs inputs lib;};
+
+    # Astal
+    devShells.${system}.astal = import ./devshells/astal.nix {inherit pkgs inputs lib;};
+
   };
 }

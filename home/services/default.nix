@@ -1,5 +1,6 @@
 {...}: {
   imports = [
+    ./astal.nix
     ./eww.nix
     ./firefox.nix
     ./ghostty.nix

@@ -52,7 +52,7 @@
   # Custom services
   # NOTE: These are custom services located under home/services, and run as systemd daemons
   userExtraServices = {
-    rh-ags.enable = true;
+    rh-astal.enable = true;
     rh-eww.enable = false;
     rh-mako.enable = false;
     rh-neovim-daemon.enable = false;
