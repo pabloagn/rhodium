@@ -1,5 +1,6 @@
 {...}: {
   imports = [
+    ./async
     ./databases
     ./infra
     ./languages

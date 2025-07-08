@@ -1,0 +1,28 @@
+(deflisten keyboard_language 
+  "~/.config/eww/scripts/get-locale.sh")
+
+;; (deflisten keyboard_capslock" 
+;;   "~/.config/eww/scripts/get-capslock.sh")
+;;
+;; (deflisten keyboard_numslock" 
+;;   "~/.config/eww/scripts/get-numslock.sh")
+
+(defwidget keyboard-language-widget []
+  (eventbox :class "keyboard-language-widget"
+            ;; :onhover      "${EWW_CMD} update reveal_network=true"
+            ;; :onhoverlost  "${EWW_CMD} update reveal_network=false"
+            ;; :onclick      "nm-connection-editor"
+    (box :orientation "h" :space-evenly false
+      (label :text "ѱ ${keyboard_language}")
+        )
+    )
+)
+
+(defwidget keyboard-module []
+  (eventbox :onhover      "${EWW_CMD} update reveal_system=true"
+            :onhoverlost  "${EWW_CMD} update reveal_system=false"
+    (box :class "keyboard-module" :orientation "h" :space-evenly false :spacing 15
+      (keyboard-language-widget)
+        )
+    )
+)

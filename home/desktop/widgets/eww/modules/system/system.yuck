@@ -1,0 +1,42 @@
+;; ---------------- VARIABLES ----------------
+(defvar reveal_system false)
+(defvar show_temp_details false)
+
+;; ---------------- POLLS --------------------
+(defpoll battery        :interval "1s" "~/.config/eww/scripts/get-battery.sh")
+(defpoll cpu_usage      :interval "1s" `top -bn1 | grep "Cpu(s)" | awk '{print $2}' | cut -d'%' -f1`)
+(defpoll memory         :interval "1s" `free -h | awk '/^Mem/ {print ($3/$2)*100}' | cut -d'.' -f1`)
+(defpoll disk           :interval "1s" `df -h / | awk 'NR==2 {print $5}' | tr -d '%'`)
+(defpoll thermals       :interval "1s" "~/.config/eww/scripts/get-thermals.sh")
+
+;; ---------------- WIDGETS ------------------
+(defwidget battery-widget []
+  (eventbox :class "battery ${(battery?.status ?: '')} ${(battery?.percentage ?: 0) < 15 ? 'critical' : (battery?.percentage ?: 0) < 30 ? 'warning' : ''}"
+    (box :orientation "h" :space-evenly false
+      (label :text "Ω ${(battery?.percentage ?: 0)}%${(battery?.charging ?: false) ? ' 𝥽' : ''}"))))
+
+(defwidget metric [label value class ?suffix]
+  (eventbox :class "metric ${class}"
+    (box :orientation "h" :space-evenly false
+      (label :text "${label} ${value}${suffix ?: '%'}"))))
+
+(defwidget temperature-widget []
+  (eventbox :class "temperature"
+            :onhover      "${EWW_CMD} update show_temp_details=true"
+            :onhoverlost  "${EWW_CMD} update show_temp_details=false"
+    (box :orientation "h" :space-evenly false
+      (label :text "Δ ${(thermals?.cpu ?: thermals)}°C ")
+      (revealer :transition "slideleft" :reveal show_temp_details :duration "300ms"
+        (label :class "temperature-details"
+               :text " ${(thermals?.details ?: '')}")))))
+
+(defwidget system-stats []
+  (eventbox :onhover      "${EWW_CMD} update reveal_system=true"
+            :onhoverlost  "${EWW_CMD} update reveal_system=false"
+    (box :class "system-stats" :orientation "h" :space-evenly false :spacing 15
+      (battery-widget)
+      (metric :label "⚙"  :value cpu_usage :class "cpu")
+      (metric :label "𝍖"  :value memory    :class "memory")
+      (metric :label "⬢"  :value disk      :class "disk")
+      (temperature-widget))))
+

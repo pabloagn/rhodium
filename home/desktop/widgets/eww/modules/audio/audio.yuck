@@ -1,0 +1,26 @@
+;; Output
+(defpoll volume :interval "200ms" :initial "0"
+  `wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print int($2*100)}' || echo 0`)
+(defpoll muted  :interval "200ms" :initial "false"
+  `wpctl get-volume @DEFAULT_AUDIO_SINK@ | grep -q MUTED && echo true || echo false`)
+
+(defvar reveal_audio false)
+
+(defwidget audio-module []
+  (eventbox
+    :onscroll "[ {} = 'up' ] && wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%+ || wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%-"
+    :onclick  "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+    :onrightclick "helvum"
+    :onhover "${EWW_CMD} update reveal_audio=true"
+    :onhoverlost "${EWW_CMD} update reveal_audio=false"
+    (box :class {"audio "
+                 + (muted  == "true" ? "muted"
+                 : volume >= 100     ? "critical"
+                 : volume >= 75      ? "warning" : "")}
+      (label :text {(muted == "true") ? "∅ " + volume + "%" : "∿ " + volume + "%"})
+      (revealer :transition "slideleft" :reveal reveal_audio :duration "250ms"
+        (scale :class "volume-slider" :value volume
+               :orientation "h" :width 100 :min 0 :max 150
+               :onchange "wpctl set-volume @DEFAULT_AUDIO_SINK@ {}%")))))
+
+

@@ -1,0 +1,34 @@
+;; ---------------- VARS ----------------
+(defvar reveal_network false)
+
+;; ---------------- POLLS ---------------
+(defpoll network     :interval "1s" "~/.config/eww/scripts/get-network.sh")
+(defpoll vpn_status  :interval "5s" `pgrep -a openvpn | grep -q tun && echo 'active' || echo 'false'`)
+(defpoll bluetooth   :interval "2s" "~/.config/eww/scripts/get-bluetooth.sh")
+
+;; ---------------- WIDGETS -------------
+(defwidget network-module []
+  (eventbox :class "network"
+            :onhover      "${EWW_CMD} update reveal_network=true"
+            :onhoverlost  "${EWW_CMD} update reveal_network=false"
+            :onclick      "nm-connection-editor"
+    (box :orientation "h" :space-evenly false
+      (label :text "${network?.icon ?: ''} ${network?.download_speed ?: ''} ↓")
+      (revealer :transition "slideleft" :reveal reveal_network :duration "250ms"
+        (label :class "network-details"
+               :text " ${network?.upload_speed ?: ''} ↑")))))
+
+(defwidget vpn-indicator []
+  (button :class "vpn ${vpn_status}"
+          :onclick      "kitty -e nmtui"
+          :onrightclick "protonvpn-app"
+          :tooltip      "VPN: ${vpn_status == 'active' ? 'Connected' : 'Disconnected'}"
+    (label :text {vpn_status == "active" ? "⊫" : "⊯"})))
+
+(defwidget bluetooth-module []
+  (eventbox :class "bluetooth"
+            :onclick      "~/.local/bin/fuzzel/fuzzel-bluetooth.sh"
+            :onrightclick "blueman-manager"
+    (box :orientation "h" :space-evenly false
+      (label :text "${bluetooth?.icon ?: ''} ${bluetooth?.connected_count ?: ''} ${bluetooth?.status_icon ?: ''}"))))
+

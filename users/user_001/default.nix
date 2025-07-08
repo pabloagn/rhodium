@@ -52,13 +52,14 @@
   # Custom services
   # NOTE: These are custom services located under home/services, and run as systemd daemons
   userExtraServices = {
-    rh-waybar.enable = false;
+    rh-ags.enable = true;
+    rh-eww.enable = false;
     rh-mako.enable = false;
-    rh-eww.enable = true;
-    rh-swaybg.enable = true;
-    rh-wlsunset.enable = false;
     rh-neovim-daemon.enable = false;
+    rh-swaybg.enable = true;
     rh-system-keyring.enable = true;
+    rh-waybar.enable = false;
+    rh-wlsunset.enable = false;
   };
 
   home = {

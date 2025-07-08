@@ -28,6 +28,11 @@
       url = "github:nix-community/NUR";
     };
 
+    ags = {
+      url = "github:aylur/ags";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -62,6 +67,7 @@
     flake-parts,
     sops-nix,
     nur,
+    ags,
     zen-browser,
     kanso-nvim,
     chiaroscuro,

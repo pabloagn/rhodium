@@ -1,0 +1,9 @@
+;; ---------- clock.yuck ----------
+(defpoll time :interval "1s"
+  `date +'{"hour":"%H","min":"%M","sec":"%S","date":"%A, %B %d, %Y"}'`)
+
+(defwidget clock-module []
+  (box :class "clock-module" :orientation "h" :space-evenly false
+    (label :class "clock"
+           :text "${(time?.hour ?: '00')}.${(time?.min ?: '00')}.${(time?.sec ?: '00')}")))
+
