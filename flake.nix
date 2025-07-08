@@ -28,16 +28,6 @@
       url = "github:nix-community/NUR";
     };
 
-    ags = {
-      url = "github:aylur/ags";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    astal = {
-      url = "github:aylur/astal";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -62,6 +52,17 @@
       url = "git+ssh://git@github.com/pabloagn/iridium.rh.git";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    astal = {
+      url = "github:aylur/astal";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    ags = {
+      url = "github:aylur/ags";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.astal.follows = "astal";
+    };
   };
 
   outputs = {
@@ -72,13 +73,13 @@
     flake-parts,
     sops-nix,
     nur,
-    ags,
-    astal,
     zen-browser,
     kanso-nvim,
     chiaroscuro,
     rhodium-alloys,
     iridium-rh,
+    astal,
+    ags,
   } @ inputs: let
     lib = nixpkgs.lib;
     system = "x86_64-linux";
@@ -184,38 +185,6 @@
   in {
     overlays = import ./overlays;
 
-    # --- Astal ---
-    packages.${system} = {
-      astal-widgets = pkgs.stdenvNoCC.mkDerivation {
-        name = "astal-widgets";
-        src = ./home/desktop/widgets/ags;
-
-        nativeBuildInputs = [
-          pkgs.wrapGAppsHook
-          pkgs.gobject-introspection
-          pkgs.esbuild
-        ];
-
-        buildInputs = [
-          pkgs.gjs
-          pkgs.gtk4
-          pkgs.glib
-          inputs.astal.packages.${pkgs.system}.astal4
-          inputs.astal.packages.${pkgs.system}.io
-          inputs.astal.packages.${pkgs.system}.battery
-          inputs.astal.packages.${pkgs.system}.network
-          inputs.astal.packages.${pkgs.system}.hyprland
-        ];
-
-        installPhase = ''
-          mkdir -p $out/bin
-          esbuild app.ts --bundle --format=esm --sourcemap=inline --external:gi://\* --outfile=$out/bin/astal-widgets
-          sed -i '1i #!/usr/bin/env -S gjs -m' $out/bin/astal-widgets
-          chmod +x $out/bin/astal-widgets
-        '';
-      };
-    };
-
     # --- Nixos ---
     nixosConfigurations = {
       # Host Entry
@@ -310,8 +279,6 @@
     devShells.${system} = {
       # Default
       default = import ./devshells/nixos.nix {inherit pkgs inputs lib;};
-      # Astal
-      astal = import ./devshells/astal.nix {inherit pkgs inputs lib;};
     };
   };
 }

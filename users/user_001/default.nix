@@ -1,4 +1,5 @@
 {
+  inputs,
   pkgs,
   userData,
   theme,
@@ -25,6 +26,9 @@
     ../../home/shells
     ../../home/utils
     ../../home/virtualization
+
+    # ags
+    inputs.ags.homeManagerModules.default
   ];
 
   # Pass args to all modules
@@ -52,7 +56,7 @@
   # Custom services
   # NOTE: These are custom services located under home/services, and run as systemd daemons
   userExtraServices = {
-    rh-astal.enable = true;
+    # rh-astal.enable = true;
     rh-eww.enable = false;
     rh-mako.enable = false;
     rh-neovim-daemon.enable = false;
@@ -60,6 +64,21 @@
     rh-system-keyring.enable = true;
     rh-waybar.enable = false;
     rh-wlsunset.enable = false;
+  };
+
+  # ags
+  programs.ags = {
+    enable = true;
+
+    # Point to your ags config directory
+    configDir = ./ags; # or ../path/to/your/ags/config
+
+    # Add any extra packages you need
+    extraPackages = with pkgs; [
+      inputs.astal.packages.${pkgs.system}.battery
+      inputs.astal.packages.${pkgs.system}.notifd
+      # Add other astal libraries as needed
+    ];
   };
 
   home = {
