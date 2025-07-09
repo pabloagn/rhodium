@@ -98,7 +98,7 @@ check_file() {
 # Utility functions
 launch_fastfetch() {
     check_command "fastfetch" "fastfetch" || return 1
-    run_app "fastfetch" "fastfetch"
+    run_app "fastfetch" "{$XDG_BIN_HOME}/launchers/launchers-fastfetch.sh"
 }
 
 launch_ascii() {
