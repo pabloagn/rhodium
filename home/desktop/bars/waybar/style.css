@@ -5,7 +5,6 @@
 @define-color disabled #A5A5A5;
 @define-color warning #938AA9;
 @define-color alert #C13F42;
-/* @define-color alert #E46876; */
 @define-color activegreen #7AA89F;
 @define-color highlight #E6C384;
 
@@ -15,18 +14,22 @@
   font-family: "BerkeleyMonoRh Nerd Font";
 }
 
-
 window#waybar {
   color: @fg;
   background: @bg;
   transition-property: background-color;
-  transition-duration: 0.5s;
+  transition-duration: 1s;
   border: 2px solid @bordercolor;
   border-radius: 0px;
 }
 
 window#waybar.empty {
   opacity: 0.3;
+}
+
+.hidden {
+  opacity: 0;
+  margin-left: -6px;
 }
 
 button {
@@ -45,9 +48,18 @@ button:hover {
   background: @bg;
 }
 
+#workspaces button:hover {
+  color: @highlight;
+}
+
+#workspaces button.empty:hover {
+  color: @highlight;
+}
+
 #workspaces button.urgent {
   color: @alert;
 }
+
 #workspaces button.empty {
   color: @fg;
 }
@@ -58,33 +70,6 @@ button:hover {
 
 #workspaces {
   margin-left: 7px;
-}
-
-#clock:hover:hover,
-#battery:hover,
-#cpu:hover,
-#memory:hover,
-#disk:hover,
-#temperature:hover,
-#language:hover,
-#backlight:hover,
-#backlight-slider:hover,
-#network:hover,
-#wireplumber:hover,
-#custom-media:hover,
-#taskbar:hover,
-#mode:hover,
-#idle_inhibitor:hover,
-#scratchpad:hover,
-#custom-power:hover,
-#custom-notification:hover,
-#window:hover,
-#keyboard-state:hover,
-#bluetooth:hover,
-#custom-vpn:hover,
-/* #custom-display-temp:hover, */
-#mpd:hover {
-  color: @highlight;
 }
 
 #clock,
@@ -109,17 +94,64 @@ button:hover {
 #keyboard-state,
 #bluetooth,
 #custom-vpn,
-/* #custom-display-temp, */
 #mpd {
   background: transparent;
   border: none;
   padding: 0px 5px;
-  padding-right: 10px;
   margin: 3px 3px;
-  /* font-weight: regular; */
   color: @fg;
 }
 
+#custom-thm-cpu,
+#custom-thm-amd,
+#custom-thm-nvidia,
+#custom-thm-nvme,
+#custom-thm-amb,
+#custom-thm-pwr,
+#custom-thm-batv,
+#custom-thm-bati,
+#custom-thm-fan,
+#mpd {
+  background: transparent;
+  border: none;
+  padding: 0px 5px;
+  margin: 3px 3px;
+}
+
+#custom-clock.local {
+  color: @fg;
+}
+
+#custom-clock.nonlocal {
+  color: @highlight;
+}
+
+#clock:hover,
+#battery:hover,
+#cpu:hover,
+#memory:hover,
+#disk:hover,
+#temperature:hover,
+#language:hover,
+#backlight:hover,
+#backlight-slider:hover,
+#network:hover,
+#wireplumber:hover,
+#custom-media:hover,
+#taskbar:hover,
+#mode:hover,
+#idle_inhibitor:hover,
+#scratchpad:hover,
+#custom-power:hover,
+#custom-notification:hover,
+#window:hover,
+#keyboard-state:hover,
+#bluetooth:hover,
+#custom-vpn:hover,
+#mpd:hover,
+.bar_item:hover {
+  color: @highlight;
+}
 
 #custom-separator {
   color: @sepcolor;
@@ -146,10 +178,6 @@ label:focus {
   background-color: @bg;
 }
 
-#battery.critical:not(.charging) {
-  color: @alert;
-}
-
 #pulseaudio.warning,
 #wireplumber.warning {
   color: @warning;
@@ -162,29 +190,14 @@ label:focus {
 
 #network.disconnected,
 #pulseaudio.muted,
+#battery.critical:not(.charging),
 #wireplumber.muted {
   color: @alert;
 }
 
 tooltip {
   border-radius: 0px;
-  background-color: #090E13;
+  background-color: #090e13;
   color: #f2f2f2;
 }
-
-/* If workspaces is the leftmost module, omit left margin */
-/* .modules-left > widget:first-child > #workspaces { */
-/*     margin-left: 0; */
-/* } */
-
-/* If workspaces is the rightmost module, omit right margin */
-/* .modules-right > widget:last-child > #workspaces { */
-/*     margin-right: 0; */
-/* } */
-
-
-
-
-
-
 

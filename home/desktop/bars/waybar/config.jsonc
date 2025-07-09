@@ -1,5 +1,3 @@
-// vim: ft=jsonc
-
 {
   "layer": "top",
   "position": "top",
@@ -11,39 +9,126 @@
   "spacing": 1,
   "reload_style_on_change": true,
 
-  // Order of modules
-  "modules-left": [
-    // "custom/rhodium",
-    "niri/workspaces",
-  ],
-  "modules-center": ["clock"],
+  "modules-left": ["niri/workspaces"],
+
+  "modules-center": ["custom/clock"],
+
   "modules-right": [
-    "network",
-    "custom/vpn",
-    "bluetooth",
-    "custom/separator",
-    "battery",
-    "cpu",
-    "memory",
-    "disk",
-    "temperature",
-    "backlight",
-    // "custom/display-temp",
-    // "wireplumber",
-    "wireplumber#sink",
-    // "wireplumber#source",
+    "group/wifi-speed",
+    "group/thermals",
     "custom/separator",
     "niri/language",
     "keyboard-state#capslock",
   ],
 
-  // Helper modules
+  // ------------------------------
+
+  "group/thermals": {
+    "orientation": "horizontal",
+    "modules": [
+      "custom/thm-cpu",
+      "custom/bullet",
+      "custom/thm-amd",
+      "custom/bullet",
+      "custom/thm-nvme",
+      "custom/bullet",
+      "custom/thm-amb",
+      "custom/separator",
+      "custom/thm-pwr",
+      "custom/bullet",
+      "custom/thm-batv",
+      "custom/bullet",
+      "custom/thm-bati",
+      "custom/separator",
+      "custom/thm-fan",
+    ],
+    "drawer": { "trigger": "hover" },
+  },
+
+  // ── header ───────────────────────────────────────────────────────────────────
+  "custom/thm-cpu": {
+    "exec": "~/.local/bin/waybar/waybar-thermals.sh",
+    "return-type": "json",
+    "format": "△ {text}",
+    "tooltip": true,
+    "tooltip-format": "CPU",
+    "interval": 1,
+  },
+
+  // ── details (one module per metric) ──────────────────────────────────────────
+  "custom/thm-amd": {
+    "exec": "~/.local/bin/waybar/waybar-thermals.sh amd",
+    "return-type": "json",
+    "format": "G {text}",
+    "tooltip": true,
+    "tooltip-format": "AMD GPU",
+    "interval": 1,
+  },
+  "custom/thm-nvidia": {
+    "exec": "~/.local/bin/waybar/waybar-thermals.sh nvidia",
+    "return-type": "json",
+    "format": "G {text}",
+    "tooltip": true,
+    "tooltip-format": "Nvidia GPU",
+    "interval": 1,
+  },
+  "custom/thm-nvme": {
+    "exec": "~/.local/bin/waybar/waybar-thermals.sh nvme",
+    "return-type": "json",
+    "format": "N {text}",
+    "tooltip": true,
+    "tooltip-format": "NVME",
+    "interval": 1,
+  },
+  "custom/thm-amb": {
+    "exec": "~/.local/bin/waybar/waybar-thermals.sh amb",
+    "return-type": "json",
+    "format": "A {text}",
+    "tooltip": true,
+    "tooltip-format": "Ambient",
+    "interval": 1,
+  },
+  "custom/thm-pwr": {
+    "exec": "~/.local/bin/waybar/waybar-thermals.sh gpupower",
+    "return-type": "json",
+    "format": "󱒀 G {text}",
+    "tooltip": true,
+    "tooltip-format": "GPU Wattage",
+    "interval": 1,
+  },
+  "custom/thm-batv": {
+    "exec": "~/.local/bin/waybar/waybar-thermals.sh batv",
+    "return-type": "json",
+    "format": "B {text}",
+    "tooltip": true,
+    "tooltip-format": "Battery Voltage",
+    "interval": 1,
+  },
+  "custom/thm-bati": {
+    "exec": "~/.local/bin/waybar/waybar-thermals.sh bati",
+    "return-type": "json",
+    "format": "B {text}",
+    "tooltip": true,
+    "tooltip-format": "Battery Current",
+    "interval": 1,
+  },
+  "custom/thm-fan": {
+    "exec": "~/.local/bin/waybar/waybar-thermals.sh fan",
+    "return-type": "json",
+    "format": " {text}",
+    "interval": 1,
+  },
+
   "custom/separator": {
-    "format": "│",
+    "format": " │ ",
     "tooltip": false,
   },
 
-  // Left modules
+  "custom/bullet": {
+    "format": "•",
+    "tooltip": false,
+  },
+
   "custom/rhodium": {
     "format": "Rh",
     "tooltip": false,
@@ -51,17 +136,18 @@
     "on-click-right": "fuzzel",
   },
 
-  // Niri workspace module
   "niri/workspaces": {
     "format": "●",
     "on-click": "activate",
+    "on-scroll-up": "niri msg action focus-workspace-up",
+    "on-scroll-down": "niri msg action focus-workspace-down",
+    "smooth-scrolling-threshold": 2.0,
   },
 
-  // Center modules
   "clock": {
     "interval": 1,
     "format": "{:%H.%M.%S}",
-    "format-alt": "{:%A, %B %d, %Y [%R]} ",
+    "format-alt": "{:%A, %B %d, %Y | %R} ",
     "tooltip-format": "<tt><small>{calendar}</small></tt>",
     "calendar": {
       "mode": "year",
@@ -82,28 +168,36 @@
       "on-click-right": "mode",
       "on-click-forward": "tz_up",
       "on-click-backward": "tz_down",
-      "on-scroll-up": "shift_up",
+      "on-scroll-up": "format-alt",
       "on-scroll-down": "shift_down",
     },
   },
-  // Right modules (in display order)
-  "network": {
+
+  "group/wifi-speed": {
+    "orientation": "horizontal",
+    "drawer": {
+      "transition-duration": 300,
+      "children-class": "drawer-hidden",
+      "click-to-reveal": false,
+      "transition-left-to-right": true,
+    },
+    "modules": ["network#wifi-dl", "network#wifi-ul"],
+  },
+
+  "network#wifi-dl": {
     "interval": 1,
     "format-wifi": "{bandwidthDownBytes:>} ↓",
-    "format-ethernet": "{bandwidthDownBytes:>} ↓",
-    "format-alt": "≏ ⇅ {bandwidthUpBytes:>} ↑ ⑀ {bandwidthDownBytes:>} ↓",
-    "tooltip-format-wifi": "≏ WiFi\n━━━━━━━━━━━━━━━━━━\n• {essid} ⟶ {signalStrength}% @ {frequency}GHz\n• IP ⟶ {ipaddr}/{cidr}\n• GW ⟶ {gwaddr}\n• Interface ⟶ {ifname}\n• Bandwidth ⟶ {bandwidthUpBytes} ↑ ⑀ {bandwidthDownBytes} ↓\n• Signal ⟶ {signaldBm}dBm [{bssid}]",
-    "tooltip-format-ethernet": "≏ Ethernet\n━━━━━━━━━━━━━━━━━━\n• Interface ⟶ {ifname}\n• IP ⟶ {ipaddr}/{cidr}\n• GW ⟶ {gwaddr}\n• Bandwidth ⟶ {bandwidthUpBytes} ↑ ⑀ {bandwidthDownBytes} ↓",
-    "tooltip-format-linked": "≏ Linked\n━━━━━━━━━━━━━━━━━━\n• Interface ⟶ {ifname}\n• Status ⟶ No IP assigned\n• Connection ⟶ Linked (No address)",
-    "tooltip-format-disconnected": "≏ Disconnected\n━━━━━━━━━━━━━━━━━━\n• Status ⟶ No Active Connection\n• Interface ⟶ {ifname}",
     "format-linked": "≏ No IP",
-    "format-disconnected": "≏ ⌽",
-    // "on-click": "/home/pabloagn/.local/bin/fuzzel/fuzzel-wifi.sh",
-    "on-click-right": "nm-connection-editor",
-    "states": {
-      "warning": 30,
-      "critical": 10,
-    },
+    "format-disconnected": "⌽",
+    "tooltip": false,
+  },
+
+  "network#wifi-ul": {
+    "interval": 1,
+    "format-wifi": "{bandwidthUpBytes:>} ↑",
+    "format-linked": "",
+    "format-disconnected": "",
+    "tooltip": false,
   },
 
   "custom/vpn": {
@@ -113,6 +207,17 @@
     "tooltip-format": "⊫ VPN\n━━━━━━━━━━━━━━━━━━\n⊫ ⟶ Active\n⊯ ⟶ Inactive",
     "on-click": "kitty -e nmtui",
     "on-right-click": "protonvpn-app",
+  },
+
+  "custom/clock": {
+    "exec": "~/.config/waybar/scripts/custom-clock.sh",
+    "return-type": "json",
+    "interval": 1,
+    "on-scroll-up": "~/.config/waybar/scripts/custom-clock-control.sh up",
+    "on-scroll-down": "~/.config/waybar/scripts/custom-clock-control.sh down",
+    "on-click": "~/.config/waybar/scripts/custom-clock-control.sh up",
+    "on-click-right": "~/.config/waybar/scripts/custom-clock-control.sh down",
+    "smooth-scrolling-threshold": 2.0,
   },
 
   "bluetooth": {
@@ -214,14 +319,14 @@
     },
   },
 
-  "temperature": {
-    "critical-threshold": 80,
-    "interval": 1,
-    "format": "Δ {temperatureC}°C",
-    "format-icons": ["", "", ""],
-    "tooltip-format": "Δ CPU Temperature\n━━━━━━━━━━━━━━━━━━\n● Current    ⟶ {temperatureC} °C\n⊚ Warning    ⟶ 70 °C\n⚠ Critical   ⟶ 85 °C\n\n°F Fahrenheit ⟶ {temperatureF} °F\nK Kelvin      ⟶ {temperatureK} K",
-    "on-click": "/home/pabloagn/.local/bin/launchers/launchers-btop.sh",
-  },
+  // "temperature": {
+  //   "critical-threshold": 80,
+  //   "interval": 1,
+  //   "format": "Δ {temperatureC}°C",
+  //   "format-icons": ["", "", ""],
+  //   "tooltip-format": "Δ CPU Temperature\n━━━━━━━━━━━━━━━━━━\n● Current    ⟶ {temperatureC} °C\n⊚ Warning    ⟶ 70 °C\n⚠ Critical   ⟶ 85 °C\n\n°F Fahrenheit ⟶ {temperatureF} °F\nK Kelvin      ⟶ {temperatureK} K",
+  //   "on-click": "/home/pabloagn/.local/bin/launchers/launchers-btop.sh",
+  // },
 
   "backlight": {
     "format": "☀ {percent}%",
@@ -229,26 +334,10 @@
     "format-icons": ["[-]", "[=]", "[≡]", "[≣]"],
   },
 
-  // "wireplumber": {
-  //   "format": "∿ {volume}% {icon}",
-  //   "format-muted": "∿ {volume}% [⌽]",
-  //   "format-icons": ["[-]", "[=]", "[≡]", "[≣]"],
-  //   "on-click": "pavucontrol", // General audio mixer
-  //   "scroll-step": 1, // Allows scrolling on the main module too
-  //   "states": {
-  //     "warning": 75,
-  //     "critical": 100,
-  //   },
-  //   "tooltip": true,
-  //   "tooltip-format": "Audio System\n━━━━━━━━━━━━━━━━━━\n•Default Output ⟶ {node_name}\n•Volume ⟶ {volume}%",
-  // },
-
   "wireplumber#sink": {
     "node-type": "Audio/Sink",
-    // "format": "∿ {volume}% {icon}",
     "format": "∿ {volume}%",
     "format-muted": "∅ {volume}%",
-    // "format-icons": ["[-]", "[=]", "[≡]", "[≣]"],
     "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
     "on-click-right": "helvum",
     "scroll-step": 1,
@@ -278,11 +367,9 @@
 
   "niri/language": {
     "format": "{short}",
-    // "format": "◆ {short}",
     "format-alt": "{long}",
   },
 
-  // Caps Lock
   "keyboard-state#capslock": {
     "numlock": false,
     "capslock": true,
@@ -294,7 +381,6 @@
     },
   },
 
-  // Num Lock
   "keyboard-state#numlock": {
     "numlock": true,
     "capslock": false,

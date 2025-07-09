@@ -20,17 +20,30 @@ input {
         numlock
     }
     touchpad {
+        // Disable-when-typing
+        dwt
+        // Disable-when-trackpointing
+        dwtp
         tap
         accel-speed -0.3
         middle-emulation
         scroll-factor 1.0
+        drag true
     }
     mouse {
-        accel-speed -0.2
+        // scroll-method "no-scroll"
+        accel-speed 0.1
+        accel-profile "adaptive"
         scroll-factor 0.9
         middle-emulation
     }
-    focus-follows-mouse max-scroll-amount="95%"
+    // Focus follows mouse
+    focus-follows-mouse max-scroll-amount="90%"
+    // Whenever I open a new window, mouse follows
+    // NOTE: This interferes with waybar workspace scrolling
+    // warp-mouse-to-focus mode="center-xy"
+    // Switch to correct workspace previous, even if reordered
+    workspace-auto-back-and-forth
 }
 // Outputs
 // ------------------------------------
@@ -268,8 +281,6 @@ spawn-at-startup "xwayland-satellite"
 // FIX: Script not working
 // Polkit fuzzel prompt client
 spawn-at-startup "sh" "-c" "~/.local/bin/fuzzel-polkit.sh"
-
-
 // Animation settings
 // ------------------------------------
 animations {
@@ -771,8 +782,4 @@ binds {
         toggle-overview
     }
 }
-
-
-
-
 
