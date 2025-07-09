@@ -20,6 +20,7 @@
 
     # Clipboard utilities
     wl-clipboard # Wayland clipboard utilities
+    clipman # Clipboard manager for Wayland
 
     # Utils
     mermaid-cli # Generation of mermaid diagrams in text

@@ -14,6 +14,7 @@ source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../common/bootstrap.sh"
 options=(
     "Power Off:power_off"
     "Reboot:reboot_system"
+    "Reboot to UEFI:reboot_uefi"
     "Log Out:log_out"
     "Lock Screen:lock_screen"
     "Suspend:suspend_system"
@@ -34,6 +35,11 @@ power_off() {
 reboot_system() {
     notify "$APP_TITLE" "Rebooting system..."
     systemctl reboot
+}
+
+reboot_uefi() {
+    notify "$APP_TITLE" "Rebooting system to UEFI..."
+    systemctl reboot --firmware-setup
 }
 
 log_out() {

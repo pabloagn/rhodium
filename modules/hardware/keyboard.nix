@@ -21,10 +21,15 @@
     LC_TIME = "en_GB.UTF-8";
   };
 
-  console.keyMap = "uk"; # Default onsole Keymap
+  console.keyMap = "uk"; # Default console Keymap
 
   services.xserver.xkb = {
     layout = "gb";
     variant = "";
+  };
+
+  # NOTE: Required for kmonad
+  hardware.uinput = {
+    enable = true;
   };
 }
