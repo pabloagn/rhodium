@@ -19,6 +19,7 @@ with lib; let
     "rofi"
     "testing"
     "utils"
+    "waybar"
   ];
   
   # Read the scripts directory
