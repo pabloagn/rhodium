@@ -654,11 +654,19 @@ end, {
 })
 
 -- --- Smart Replace ---
-vim.keymap.set({ "n", "v" }, "<leader>rv", functions.smart_replace, {
-	noremap = true,
-	silent = false,
-	desc = "Replace word/selection in buffer",
-})
+-- vim.keymap.set({ "n", "v" }, "<leader>rv", functions.smart_replace, {
+-- 	noremap = true,
+-- 	silent = false,
+-- 	desc = "Replace word/selection in buffer",
+-- })
+
+-- TODO: Pass to functions. For now this works good.
+vim.keymap.set(
+	{ "n", "v" }, -- normal & visual
+	"<leader>rr", -- space-r-r
+	[[<cmd>lua local w=vim.fn.mode():match("[vV]") and vim.fn.getreg("v")~="" and vim.fn.getreg("v") or vim.fn.expand("<cword>"); if w=="" then print("No word") else local n=vim.fn.input("Replace '"..w.."' with: ",w); if n~="" and n~=w then vim.cmd("%s/\\V\\<"..vim.fn.escape(w,"/\\.*$^~[]").."\\>/"..vim.fn.escape(n,"/\\&~").."/gc") end end<CR>]],
+	{ noremap = true, silent = true, desc = "Replace word / selection" }
+)
 
 -- --- Replace (spectre) ---
 vim.keymap.set("n", "<leader>rt", '<cmd>lua require("spectre").toggle()<CR>', {

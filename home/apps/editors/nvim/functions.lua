@@ -1,4 +1,5 @@
 local M = {}
+local api, fn = vim.api, vim.fn
 
 -- --- System Info ---
 -- Dynamic hostname detection
@@ -242,32 +243,36 @@ function M.smart_outdent()
 	end
 end
 
--- Simple Replace
--- --------------------------------------------------
--- Replace all occurrences of visual selection in buffer
-function M.replace_word_under_cursor()
-	local old_word = vim.fn.expand("<cword>")
-	if old_word == "" then
-		vim.notify("No word under cursor", vim.log.levels.WARN, { title = "Replace All" })
-		return
-	end
+-- -----------------------------------------------------------------------------
 
-	local new_word = vim.fn.input("Replace '" .. old_word .. "' with: ", old_word)
-	if new_word == "" or new_word == old_word then
-		return
-	end
+-- helper: capture text that is *currently* visually selected
+-- FIX: This is completely broken
+-- function M.simple_replace()
+-- 	-- 1. What are we replacing?
+-- 	local visual_active = fn.mode():match("[vV]") -- visual char/line
+-- 	local old = (visual_active and fn.getreg("v") ~= "") and fn.getreg("v") -- visual selection
+-- 		or fn.expand("<cword>") -- …or word under cursor
+-- 	if old == "" then
+-- 		vim.notify("Nothing to replace", vim.log.levels.WARN, { title = "Replace" })
+-- 		return
+-- 	end
+-- 	if visual_active then
+-- 		api.nvim_feedkeys(api.nvim_replace_termcodes("<Esc>", true, false, true), "n", false) -- leave Visual mode
+-- 	end
+--
+-- 	-- 2. Ask for the new text
+-- 	local new = fn.input("Replace '" .. old .. "' with: ", old)
+-- 	if new == "" or new == old then
+-- 		return
+-- 	end
+--
+-- 	-- 3. Do the substitution (very-nomagic + word boundaries + confirmation)
+-- 	local patt = fn.escape(old, "/\\.*$^~[]")
+-- 	local repl = fn.escape(new, "/\\&~")
+-- 	vim.cmd(("%s/\\V\\<%s\\>/%s/gc"):format("%", patt, repl))
+-- end
 
-	-- Use word boundaries for exact matches
-	local cmd =
-		string.format("%%s/\\<%s\\>/%s/g", vim.fn.escape(old_word, "/\\.*$^~[]"), vim.fn.escape(new_word, "/\\&~"))
-
-	vim.cmd(cmd)
-	vim.notify(
-		string.format("Replaced '%s' with '%s'", old_word, new_word),
-		vim.log.levels.INFO,
-		{ title = "Replace All" }
-	)
-end
+-- -----------------------------------------------------------------------------
 
 -- Replace visual selection in buffer
 function M.replace_visual_selection()
@@ -342,6 +347,8 @@ function M.smart_replace()
 		M.replace_word_under_cursor()
 	end
 end
+
+-- -----------------------------------------------------------------------------
 
 -- Pickers
 -- --------------------------------------------------

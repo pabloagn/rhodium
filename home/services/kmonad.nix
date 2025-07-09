@@ -9,57 +9,80 @@ with lib; let
 in {
   options.userExtraServices.rh-kmonad = {
     enable = mkEnableOption "Keyboard remapping with K-Monad";
+
+    # External (Keychron) layout
     configFile = mkOption {
       type = types.path;
-      default = config.home.homeDirectory + "/.config/kmonad/menus.kbd";
+      default =
+        config.home.homeDirectory
+        + "/.config/kmonad/keychron.kbd";
       description = ''
-        Absolute path of the *.kbd* file to run.
-        You can override this per-host if you keep several layouts.
+        Absolute path of the *.kbd* file used for the external keyboard.
       '';
     };
+
+    # Internal (laptop-keyboard) layout
+    internalConfigFile = mkOption {
+      type = types.path;
+      default =
+        config.home.homeDirectory
+        + "/.config/kmonad/justine.kbd";
+      description = ''
+        Absolute path of the *.kbd* file used for the built-in keyboard.
+      '';
+    };
+
     extraArgs = mkOption {
       type = types.listOf types.str;
       default = [];
-      description = "Additional arguments passed to kmonad.";
+      description = "Additional CLI arguments passed to kmonad.";
     };
   };
 
   config = mkIf cfg.enable {
-    # Make sure the binary is available
+    # we need the binary
     home.packages = [pkgs.kmonad];
 
-    # systemd-user service
-    systemd.user.services.rh-kmonad = {
+    # ── Keychron ───────────────────────────────────────────────
+    systemd.user.services.rh-kmonad-keychron = {
       Unit = {
-        Description = "K-Monad keyboard remapper";
+        Description = "K-Monad - Keychron";
         PartOf = ["graphical-session.target"];
         After = ["graphical-session-pre.target"];
       };
-
       Service = {
         Type = "simple";
         ExecStart = ''
           ${pkgs.kmonad}/bin/kmonad \
             ${cfg.configFile} \
-            ${concatStringsSep " " cfg.extraArgs}
+            ${lib.concatStringsSep " " cfg.extraArgs}
         '';
         Restart = "on-failure";
         RestartSec = 1;
-        Nice = "-5"; # Give it a bit of priority
+        Nice = "-5";
       };
-
       Install = {WantedBy = ["graphical-session.target"];};
     };
 
-    assertions = [
-      {
-        assertion = builtins.elem "input" config.users.users.${config.home.username}.extraGroups;
-        message = "rh-kmonad: add your user to the 'input' group.";
-      }
-      {
-        assertion = builtins.elem "uinput" config.users.users.${config.home.username}.extraGroups;
-        message = "rh-kmonad: add your user to the 'uinput' group.";
-      }
-    ];
+    # ── Justine ────────────────────────────────────────────
+    systemd.user.services.rh-kmonad-justine = {
+      Unit = {
+        Description = "K-Monad - Justine";
+        PartOf = ["graphical-session.target"];
+        After = ["graphical-session-pre.target"];
+      };
+      Service = {
+        Type = "simple";
+        ExecStart = ''
+          ${pkgs.kmonad}/bin/kmonad \
+            ${cfg.internalConfigFile} \
+            ${lib.concatStringsSep " " cfg.extraArgs}
+        '';
+        Restart = "on-failure";
+        RestartSec = 1;
+        Nice = "-5";
+      };
+      Install = {WantedBy = ["graphical-session.target"];};
+    };
   };
 }
