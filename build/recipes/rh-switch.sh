@@ -44,7 +44,7 @@ function reload_services() {
     notify "$APP_TITLE" "$RECIPE:\n${NOTIFY_BULLET} Reloading User Services..."
     systemctl --user daemon-reload
     if command -v niri >/dev/null 2>&1; then niri msg action do-screen-transition --delay-ms 800 2>/dev/null || true; fi
-    for service in rh-swaybg rh-eww; do systemctl --user restart "$service.service" || true; done
+    for service in rh-swaybg rh-waybar; do systemctl --user restart "$service.service" || true; done
     makoctl reload
 }
 

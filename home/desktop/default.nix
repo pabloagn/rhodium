@@ -3,6 +3,7 @@
     ./bars
     ./cursors
     ./common
+    ./keyboard
     ./launchers
     ./lockscreen
     ./notifications
