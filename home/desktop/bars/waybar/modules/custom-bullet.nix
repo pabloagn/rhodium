@@ -1,7 +1,8 @@
 {
-  "custom/bullet" = {
-    format = "•";
-    tooltip = false;
+  waybarModules = {
+    "custom/bullet" = {
+      format = "•";
+      tooltip = false;
+    };
   };
 }
-

@@ -1,7 +1,8 @@
 {
-  "custom/separator" = {
-    format = " │ ";
-    tooltip = false;
+  waybarModules = {
+    "custom/separator" = {
+      format = " │ ";
+      tooltip = false;
+    };
   };
 }
-

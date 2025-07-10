@@ -1,5 +1,5 @@
 {lib, ...}: let
-  # --- Import Modules ---
+  # --- Import all modules ---
   moduleBacklight = import ./backlight.nix;
   moduleBattery = import ./battery.nix;
   moduleBluetooth = import ./bluetooth.nix;
@@ -35,7 +35,7 @@
   moduleCustomSeparator = import ./custom-separator.nix;
   moduleCustomBullet = import ./custom-bullet.nix;
 
-  # --- Collect All Modules Used In This Bar ---
+  # --- List of active modules ---
   usedModules = [
     moduleCustomClock
     moduleBattery
@@ -46,29 +46,43 @@
     moduleGroupThermals
     moduleCustomSeparator
   ];
-in {
-  # --- Waybar Configuration ---
-  programs.waybar.settings.mainBar =
-    lib.mkMerge
-    (
-      map (m: m.waybarModules) usedModules
-    )
-    // {
-      # Explicit module order
-      modules-left = ["niri/workspaces"];
-      modules-center = ["custom/clock"];
-      modules-right = [
-        "group/wifi-speed"
-        "group/thermals"
-        "battery"
-        "custom/separator"
-        "niri/language"
-        "keyboard-state#capslock"
-      ];
-    };
 
-  # --- Merge All Extras (assets, files, etc) ---
-  config = lib.mkMerge (
-    map (m: m.extraOptions or {}) usedModules
-  );
+  # --- Merge module-provided Waybar configuration ---
+  waybarModules =
+    lib.foldl lib.recursiveUpdate {} (map (m: m.waybarModules or {}) usedModules);
+
+  # --- Merge module-provided extras ---
+  extraOptions =
+    lib.foldl lib.recursiveUpdate {} (map (m: m.extraOptions or {}) usedModules);
+
+  # --- Base bar configuration ---
+  baseConfig = {
+    layer = "top";
+    position = "top";
+    height = 35;
+    margin-left = 12;
+    margin-right = 12;
+    margin-top = 10;
+    margin-bottom = 0;
+    spacing = 1;
+    reload_style_on_change = true;
+
+    modules-left = ["niri/workspaces"];
+    modules-center = ["custom/clock"];
+    modules-right = [
+      "group/wifi-speed"
+      "group/thermals"
+      "battery"
+      "custom/separator"
+      "niri/language"
+      "keyboard-state#capslock"
+    ];
+  };
+in {
+  config = {
+    inherit (extraOptions) xdg;
+
+    programs.waybar.settings.mainBar =
+      lib.recursiveUpdate baseConfig waybarModules;
+  };
 }

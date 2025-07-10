@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-tz_file="${XDG_BIN_HOME:-$HOME/.local/bin}/rh-waybar/clock/timezones.json"
+tz_file="${XDG_BIN_HOME:-$HOME/.local/bin}/waybar/modules/custom-clock/timezones.json"
 num_entries=$(jq 'length' "$tz_file")
 
 state_file="/tmp/waybar-clock.state"

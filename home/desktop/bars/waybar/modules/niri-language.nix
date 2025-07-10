@@ -1,6 +1,8 @@
 {
-  "niri/language" = {
-    format = "{short}";
-    format-alt = "{long}";
+  waybarModules = {
+    "niri/language" = {
+      format = "{short}";
+      format-alt = "{long}";
+    };
   };
 }

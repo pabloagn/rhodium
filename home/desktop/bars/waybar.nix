@@ -3,6 +3,10 @@
     enable = true;
   };
 
+  imports = [
+    ./waybar/modules
+  ];
+
   # --- Configs ---
   # xdg.configFile."waybar/config.jsonc" = {
   #   source = ./waybar/config.jsonc;

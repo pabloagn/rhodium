@@ -13,8 +13,8 @@
   };
 
   extraOptions = {
-    xdg.dataFile."waybar/modules/custom-clock/timezones.jsonc" = {
-      source = ./custom-clock/timezones.jsonc;
+    xdg.dataFile."waybar/modules/custom-clock/timezones.json" = {
+      source = ./custom-clock/timezones.json;
       force = true;
     };
   };
