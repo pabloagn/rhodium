@@ -1,0 +1,1 @@
+require("kmonad-vim").setup()

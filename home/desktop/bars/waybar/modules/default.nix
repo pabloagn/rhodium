@@ -68,18 +68,29 @@
 
   # --- Base bar configuration ---
   baseConfig = {
-    layer = "top";
-    position = "top";
+    # General
+    exclusive = true;
+    fixed-center = true;
     height = 35;
+    ipc = true;
+    layer = "top";
+    margin-bottom = 0;
     margin-left = 12;
     margin-right = 12;
     margin-top = 10;
-    margin-bottom = 0;
-    spacing = 1;
+    mode = "indivisible";
+    name = "mainJustine";
+    position = "top";
     reload_style_on_change = true;
+    spacing = 1;
 
-    modules-left = ["niri/workspaces"];
-    modules-center = ["custom/clock"];
+    # Modules
+    modules-left = [
+      "niri/workspaces"
+    ];
+    modules-center = [
+      "custom/clock"
+    ];
     modules-right = [
       "group/wifi-speed"
       "group/thermals"

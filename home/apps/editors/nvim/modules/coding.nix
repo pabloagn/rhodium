@@ -93,6 +93,13 @@
       #   config = sourceLuaFile "refactoring-nvim.lua";
       # }
 
+      # Support for Kmonad
+      {
+        plugin = kmonad-vim;
+        config = sourceLuaFile "kmonad-nvim.lua";
+      }
+
+
       # Snippets
       friendly-snippets # Lua snippets
       luasnip # Lua snippets engine
