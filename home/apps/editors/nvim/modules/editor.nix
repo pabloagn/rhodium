@@ -50,7 +50,8 @@
       }
       {
         plugin = flash-nvim; # Motion improvement
-        config = sourceLuaFile "flash-nvim.lua";
+        # TODO: Activate again, but check the config to be minimal and actually useful
+        # config = sourceLuaFile "flash-nvim.lua";
       }
       {
         plugin = harpoon2; # Pin files and buffers for quick switch
