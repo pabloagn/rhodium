@@ -3,76 +3,93 @@
   untar = "tar -xvf";
   untargz = "tar -xzvf";
   untarxz = "tar -xJvf";
-  
+
   # --- Clipboard ---
   y = "wl-copy"; # Yank
-  
+
   # --- Disk Usage ---
-  du = "dust";  # Better disk usage analyzer
-  df = "duf";  # Better df alternative
-  
+  du = "dust"; # Better disk usage analyzer
+  df = "duf"; # Better df alternative
+
   # --- Docker ---
   d = "docker";
   dc = "docker compose";
   dps = "docker ps --format 'table {{.Names}}\t{{.Status}}\t{{.Ports}}'";
-  
+
   # --- Editor ---
   vim = "nvim";
   vi = "nvim";
   v = "nvim";
-  
+
   # --- File Operations ---
-  cp = "cp -iv";  # Interactive & verbose copy
-  mv = "mv -iv";  # Interactive & verbose move
-  rm = "trash-put";  # Move to trash instead of delete
-  mkdir = "mkdir -pv";  # Create parent dirs & verbose
-  
+  cp = "cp -iv"; # Interactive & verbose copy
+  mv = "mv -iv"; # Interactive & verbose move
+  rm = "trash-put"; # Move to trash instead of delete
+  mkdir = "mkdir -pv"; # Create parent dirs & verbose
+
   # --- Fuzzy ---
   # fzd = "zi";
   # fzh = "fzf-history-widget";
-  
+
   # --- General ---
   cl = "clear";
   htop = "btm";
   neofetch = "fastfetch";
   nf = "fastfetch";
   "!!" = "sudo $history[1]";
-  
+
   # --- Git ---
-  gst = "git status"; # Check git repo status
   gad = "git add ."; # Stage all files under current dir
-  gcm = "cz commit"; # Create a new commit (commitizen)
   gbp = "cz bump"; # Bump version and update changelog (commitizen)
   gch = "cz changelog"; # Generate changelog (commitizen)
   gck = "cz check"; # Validate commit messages (commitizen)
-  gvr = "cz version"; # Show version information (commitizen)
+  gcm = "cz commit"; # Create a new commit (commitizen)
   gin = "cz init"; # Initialize Commitizen configuration (commitizen)
   gpu = "git push -u origin main"; # Push to main
   grm = "git rm -r --cached ."; # Remove remote cache
-  
+  gst = "git status"; # Check git repo status
+  gvr = "cz version"; # Show version information (commitizen)
+
   # --- History ---
   h = "history";
   hs = "history | grep";
   hsi = "history | grep -i";
   hist = "fzf-history-widget";
-  
+
   # --- Ides ---
   code = "code 2>/dev/null"; # Launch code cleanly
   cursor = "cursor 2>/dev/null"; # Launch cursor cleanly
-  
+
   # --- Jumpers ---
-  gh = "z $HOME";
-  gd = "z $HOME_DOWNLOADS";
-  gc = "z $XDG_CONFIG_HOME";
-  ge = "z $XDG_CACHE_HOME";
-  gr = "z $RHODIUM";
-  gp = "z $HOME_PROJECTS";
+  # Go to ->
   ga = "z $HOME_ACADEMIC";
+  gb = "z $XDG_BIN_HOME";
+  gc = "z $XDG_CONFIG_HOME";
+  gd = "z $HOME_DOWNLOADS";
+  ge = "z $XDG_CACHE_HOME";
+  gh = "z $HOME";
+  gp = "z $HOME_PROJECTS";
+  gr = "z $RHODIUM";
   gs = "z $HOME_SOLENOIDLABS";
-  gw = "z $HOME_PROFESSIONAL";
   gv = "z $HOME_VAULTS";
-  
+  gw = "z $HOME_PROFESSIONAL";
+
+  # --- Openers ---
+  # Go to; open ->
+  gal = "z $HOME_ACADEMIC; yy";
+  gbl = "z $XDG_BIN_HOME; yy";
+  gcl = "z $XDG_CONFIG_HOME; yy";
+  gdl = "z $HOME_DOWNLOADS; yy";
+  gel = "z $XDG_CACHE_HOME; yy";
+  ghl = "z $HOME; yy";
+  gpl = "z $HOME_PROJECTS; yy";
+  grl = "z $RHODIUM; yy";
+  gsl = "z $HOME_SOLENOIDLABS; yy";
+  gvl = "z $HOME_VAULTS; yy";
+  gwl = "z $HOME_PROFESSIONAL; yy";
+
   # --- List ---
+  # List ->
   ls = "eza -l";
   la = "eza -la";
   llc = "eza -1";
@@ -92,51 +109,52 @@
   lat5 = "eza -Ta -L=5";
   llty = "eza -T | wl-copy";
   laty = "eza -Ta | wl-copy";
-  
+
   # --- Navigation ---
+  # Change dir ->
   cd = "z";
   ".." = "cd ..";
   "..." = "cd ../..";
   "...." = "cd ../../..";
   "....." = "cd ../../../..";
-  
+
   # --- Network ---
-  ping = "gping";  # Graph ping with TUI
-  dig = "dog";  # Modern DNS lookup
-  ip = "ip -c";  # Colorized ip command
+  ping = "gping"; # Graph ping with TUI
+  dig = "dog"; # Modern DNS lookup
+  ip = "ip -c"; # Colorized ip command
   myip = "curl -s ifconfig.me";
-  
+
   # --- Process Management ---
-  ps = "procs";  # Modern ps replacement
-  kill = "fzf-kill-widget";  # Interactive process killer
-  
+  ps = "procs"; # Modern ps replacement
+  kill = "fzf-kill-widget"; # Interactive process killer
+
   # --- Quick Calculations ---
-  calc = "qalc";  # Or "bc -l"
-  
+  calc = "qalc"; # Or "bc -l"
+
   # --- Quick Edits ---
   bashrc = "nvim ~/.bashrc";
   zshrc = "nvim ~/.zshrc";
-  
+
   # --- Safety Nets ---
   chown = "chown --preserve-root";
   chmod = "chmod --preserve-root";
   chgrp = "chgrp --preserve-root";
-  
+
   # --- Search ---
   locate = "plocate";
   fda = "fd -Lu"; # Find All
-  
+
   # --- See-utils ---
   sa = "alias | fzf"; # See aliases
   sv = "env | sort | fzf"; # See environment vars
-  
+
   # --- System Info ---
-  free = "free -h";  # Human readable memory
-  
+  free = "free -h"; # Human readable memory
+
   # --- Time Savers ---
   now = "date +'%Y-%m-%d %H:%M:%S'";
   week = "date +%V";
-  
+
   # --- View ---
   cat = "bat";
   cata = "cat * | y"; # cat all and yank
