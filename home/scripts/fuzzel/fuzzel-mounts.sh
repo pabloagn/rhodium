@@ -3,7 +3,7 @@
 set -euo pipefail
 
 # --- Main Configuration ---
-APP_NAME="rh-mounts"
+APP_NAME="rh-fuzzel-mounts"
 APP_TITLE="Rhodium's Mounts Util"
 PROMPT="∩: "
 

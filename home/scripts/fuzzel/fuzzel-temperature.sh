@@ -3,9 +3,9 @@
 set -euo pipefail
 
 # --- Main Configuration ---
-APP_NAME="rh-color-temp"
+APP_NAME="rh-fuzzel-temperature"
 APP_TITLE="Rhodium's Display Temperature Util"
-PROMPT="ψ: "
+PROMPT="Δ: "
 
 # --- Imports ---
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../common/bootstrap.sh"

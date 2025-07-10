@@ -3,7 +3,7 @@
 set -euo pipefail
 
 # --- Main Configuration ---
-APP_NAME="rh-colors"
+APP_NAME="rh-fuzzel-colors"
 APP_TITLE="Rhodium's Color Utils"
 PROMPT="γ: "
 

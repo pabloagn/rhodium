@@ -3,7 +3,7 @@
 set -euo pipefail
 
 # --- Main Configuration ---
-APP_NAME="rh-launch"
+APP_NAME="rh-fuzzel-launch"
 APP_TITLE="Rhodium's Launcher"
 PROMPT="Λ: "
 

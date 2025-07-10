@@ -3,7 +3,7 @@
 set -euo pipefail
 
 # --- Main Configuration ---
-APP_NAME="rh-help"
+APP_NAME="rh-fuzzel-help"
 APP_TITLE="Rhodium Help"
 PROMPT="Π: "
 

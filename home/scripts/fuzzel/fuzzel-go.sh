@@ -2,16 +2,17 @@
 
 set -euo pipefail
 
-APP_NAME="rh-go"
+# --- Main Configuration ---
+APP_NAME="rh-fuzzel-go"
 APP_TITLE="Rhodium Go"
-
-PROMPT="(G) I|D|Y|W: "
+PROMPT="Γ (G) I|D|Y|W: "
 
 FUZZEL_WIDTH=120
 
 FIREFOX_PROFILE_PERSONAL="Personal"
 FIREFOX_PROFILE_MEDIA="Media"
 
+# --- Imports ---
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../common/bootstrap.sh"
 
 open_in_firefox() {

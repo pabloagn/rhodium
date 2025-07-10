@@ -96,7 +96,7 @@
       # Support for Kmonad
       {
         plugin = kmonad-vim;
-        config = sourceLuaFile "kmonad-nvim.lua";
+      # config = sourceLuaFile "kmonad-nvim.lua";
       }
 
 

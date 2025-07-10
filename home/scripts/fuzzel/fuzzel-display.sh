@@ -3,7 +3,7 @@
 set -euo pipefail
 
 # --- Main Configuration ---
-APP_NAME="rh-display"
+APP_NAME="rh-fuzzel-display"
 APP_TITLE="Rhodium's Display Menu"
 PROMPT="δ: "
 

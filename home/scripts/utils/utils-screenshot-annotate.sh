@@ -3,7 +3,7 @@
 set -euo pipefail
 
 # --- Main Configuration ---
-APP_NAME="rhodium-screenshot-annotate"
+APP_NAME="rh-util-screen-annotate"
 APP_TITLE="Rh Screenshot Annotate"
 
 # --- Imports ---

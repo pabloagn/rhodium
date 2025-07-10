@@ -1,20 +1,13 @@
 #!/usr/bin/env bash
-#
-# x-utils  — fuzzel “eXecute” menu for Rhodium system-management recipes
-#
-#   • Depends on: just, fuzzel, notify helper functions in common/bootstrap.sh
-#   • Uses the Justfile and scripts located under the RHODIUM dir
-#
-# ────────────────────────────────────────────────────────────────────────────
 
 set -euo pipefail
 
-# ── Configuration ───────────────────────────────────────────────────────────
-APP_NAME="x-utils"
-APP_TITLE="Rhodium System Management"
+# --- Configuration ---
+APP_NAME="rh-fuzzel-xecute"
+APP_TITLE="Rhodium's System Management (X-Ecute)"
 PROMPT="ξ: "
 
-# ── Validate environment ────────────────────────────────────────────────────
+# Validate Environment
 : "${RHODIUM:?The RHODIUM environment variable is not set}"
 [[ -d "$RHODIUM" ]] ||
     {
@@ -27,32 +20,30 @@ PROMPT="ξ: "
         exit 1
     }
 
-# ── Imports ─────────────────────────────────────────────────────────────────
+# --- Imports ---
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../common/bootstrap.sh"
 
-# ── Helper: run fuzzel ──────────────────────────────────────────────────────
+# --- Helpers ---
 run_fuzzel() {
     local prompt="$1" input="$2" extra="${3:-}"
     if [[ -z "$input" ]]; then
-        fuzzel "$(provide_fuzzel_mode)" $extra --prompt "$prompt"
+        fuzzel "$(provide_fuzzel_mode)" "$extra" --prompt "$prompt"
     else
-        printf '%s\n' "$input" | fuzzel "$(provide_fuzzel_mode)" $extra --prompt "$prompt"
+        printf '%s\n' "$input" | fuzzel "$(provide_fuzzel_mode)" "$extra" --prompt "$prompt"
     fi
 }
 
-# ── Helper: ask for free-text argument ──────────────────────────────────────
 ask_argument() {
     local prompt="$1"
     local ans
-    ans=$(run_fuzzel "$prompt" "") || return 1 # Esc ⇒ failure
-    [[ -n "$ans" ]] || return 1                # Empty ⇒ failure
+    ans=$(run_fuzzel "$prompt" "") || return 1
+    [[ -n "$ans" ]] || return 1
     printf '%s' "$ans"
 }
 
-# ── Helper: wrapper around just  (NEW: always cd into $RHODIUM) ─────────────
 run_just() {
     (
-        cd "$RHODIUM" # ⇦  run in the flake / Justfile directory
+        cd "$RHODIUM"
         local recipe="$1"
         shift
         notify "$APP_TITLE" "Running: just $recipe $*"
@@ -64,8 +55,7 @@ run_just() {
     )
 }
 
-# ── Parameterised recipe helpers ────────────────────────────────────────────
-# recipes that need a host
+# --- Parameterised Recipe Helpers ---
 for r in fast switch build boot dry dev; do
     eval "
 ${r}_recipe() {
@@ -93,18 +83,18 @@ gc_days_recipe() {
     run_just "gc-days" "$days"
 }
 
-# ── Single-shot recipes ─────────────────────────────────────────────────────
+# --- Single Shots ---
 simple_recipes=(update flake-info gc health generation check-backups orphans
     untracked clean-orphans clean-backups update-caches rollback
     fmt reload-services source-user-vars)
 
 for r in "${simple_recipes[@]}"; do
-    esc=${r//-/_} # hyphens → underscores for function name
+    esc=${r//-/_}
     eval "
 ${esc}_recipe() { run_just \"$r\"; }"
 done
 
-# ── Menu map  (label → function) ────────────────────────────────────────────
+# --- Menu Map ---
 declare -A menu_options=(
     ["$(provide_fuzzel_entry) Switch Fast (Rhodium)"]="fast_recipe"
     ["$(provide_fuzzel_entry) Switch (Rhodium)"]="switch_recipe"
@@ -132,7 +122,7 @@ declare -A menu_options=(
     ["$(provide_fuzzel_entry) Source User Vars (Rhodium)"]="source_user_vars_recipe"
 )
 
-# ── Main loop (persists until Esc / Exit) ───────────────────────────────────
+# --- Main Loop ---
 main() {
     while true; do
         local items=""

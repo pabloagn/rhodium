@@ -3,7 +3,7 @@
 set -euo pipefail
 
 # --- Main Configuration ---
-APP_NAME="rh-unicode"
+APP_NAME="rh-fuzzel-icons"
 APP_TITLE="Rhodium's Unicode Collection"
 PROMPT="∪: "
 

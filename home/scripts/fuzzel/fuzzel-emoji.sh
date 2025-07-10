@@ -3,7 +3,7 @@
 set -euo pipefail
 
 # --- Main Configuration ---
-APP_NAME="rh-emoji"
+APP_NAME="rh-fuzzel-emoji"
 APP_TITLE="Rhodium's Emoji Picker"
 PROMPT="ε: "
 

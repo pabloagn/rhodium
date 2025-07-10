@@ -3,8 +3,8 @@
 set -euo pipefail
 
 # --- Main Configuration ---
-APP_NAME="rh-colors"
-APP_TITLE="Rhodium's Color Utils"
+APP_NAME="rh-fuzzel-usb"
+APP_TITLE="Rhodium's USB Utils"
 PROMPT="μ: "
 
 FUZZEL_DMENU_BASE_ARGS="--dmenu"

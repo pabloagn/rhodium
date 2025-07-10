@@ -3,9 +3,9 @@
 set -euo pipefail
 
 # --- Main Configuration ---
-APP_NAME="rh-services"
+APP_NAME="rh-fuzzel-services"
 APP_TITLE="Rhodium's Service Manager"
-PROMPT="Σ: "
+PROMPT="σ: "
 
 # --- Imports ---
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../common/bootstrap.sh"

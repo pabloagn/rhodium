@@ -3,7 +3,7 @@
 set -euo pipefail
 
 # --- Main Configuration ---
-APP_NAME="rh-z"
+APP_NAME="rh-fuzzel-zutils"
 APP_TITLE="Rhodium's Z-Utils"
 PROMPT="ζ: "
 

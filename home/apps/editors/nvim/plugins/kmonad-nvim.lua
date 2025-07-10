@@ -1,1 +1,1 @@
-require("kmonad-vim").setup()
+require("kmonad/kmonad-vim").setup()

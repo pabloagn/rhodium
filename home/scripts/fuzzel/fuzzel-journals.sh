@@ -3,9 +3,9 @@
 set -euo pipefail
 
 # --- Main Configuration ---
-APP_NAME="rh-journals"
+APP_NAME="rh-fuzzel-journals"
 APP_TITLE="Rhodium's Journals"
-PROMPT="ͳ: "
+PROMPT="Φ: "
 
 MENU_LEN=5
 PADDING_ARGS_NIX_SEARCH="35 30 100"  # name, version, description

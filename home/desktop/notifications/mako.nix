@@ -112,6 +112,15 @@ in {
         format = "<b>■ %s</b>\\n%b";
       };
 
+      "app-name=niri" = {
+        background-color = "${c.color21}";
+        text-color = "${c.color23}";
+        border-color = "${c.color24}";
+        format = "<b>◌ %s</b>\\n%b";
+        default-timeout = notifTime.md;
+      };
+
+
       # --- System Notifications ---
       "app-name=notify-send" = {
         background-color = "${c.color21}";
@@ -155,7 +164,7 @@ in {
         text-color = "${c.color23}";
         border-color = "${c.color24}";
         format = "<b>⊹ %s</b>\\n%b";
-        default-timeout = 4000;
+        default-timeout = notifTime.lg;
       };
 
       # Volume notifications
@@ -164,7 +173,7 @@ in {
         text-color = "${c.color23}";
         border-color = "${c.color24}";
         format = "<b>♪</b> %b";
-        default-timeout = 3000;
+        default-timeout = notifTime.md;
       };
 
       # Brightness notifications
@@ -173,7 +182,7 @@ in {
         text-color = "${c.color23}";
         border-color = "${c.color24}";
         format = "<b>☀</b> %b";
-        default-timeout = 3000;
+        default-timeout = notifTime.md;
       };
 
       # Battery notifications
@@ -238,7 +247,7 @@ in {
         text-color = "${c.color23}";
         border-color = "${c.color24}";
         format = "<b>◌ %s</b>\\n%b";
-        default-timeout = 3000;
+        default-timeout = notifTime.md;
       };
 
       "app-name=spectacle" = {
@@ -246,7 +255,7 @@ in {
         text-color = "${c.color23}";
         border-color = "${c.color24}";
         format = "<b>◌ %s</b>\\n%b";
-        default-timeout = 3000;
+        default-timeout = notifTime.md;
       };
 
       # Git notifications
@@ -279,7 +288,7 @@ in {
         text-color = "${c.color23}";
         border-color = "${c.color24}";
         format = "<b>⊹ %s</b>\\n%b";
-        default-timeout = 5000;
+        default-timeout = notifTime.xl;
       };
 
       "app-name=rhythmbox" = {
@@ -287,7 +296,7 @@ in {
         text-color = "${c.color23}";
         border-color = "${c.color24}";
         format = "<b>♩ %s</b>\\n%b";
-        default-timeout = 5000;
+        default-timeout = notifTime.xl;
       };
 
       # File manager
@@ -327,7 +336,15 @@ in {
         text-color = "${c.color23}";
         border-color = "#2a2a2aFF";
         format = "<b>◌ %s</b>\\n%b";
-        default-timeout = 3000;
+        default-timeout = notifTime.md;
+      };
+
+      "app-name=rh-util-opacity" = {
+        background-color = "${c.color21}";
+        text-color = "${c.color23}";
+        border-color = "#2a2a2aFF";
+        format = "<b>◌ %s</b>\\n%b";
+        default-timeout = notifTime.md;
       };
 
       "app-name=rh-util-kill" = {
@@ -335,160 +352,216 @@ in {
         text-color = "${c.color22}";
         border-color = "${c.color22}";
         format = "<b>🗡 %s</b>\\n%b";
-        default-timeout = 4000;
+        default-timeout = notifTime.lg;
       };
 
       # --- Fuzzels ---
-      "app-name=rh-apps" = {
+      "app-name=rh-fuzzel-apps" = {
         background-color = "${c.color21}";
         text-color = "${c.color18}";
         border-color = "${c.color18}";
         format = "<b>λ %s</b>\\n%b";
-        default-timeout = 4000;
+        default-timeout = notifTime.lg;
       };
 
-      "app-name=rh-auth" = {
+      "app-name=rh-fuzzel-auth" = {
         background-color = "${c.color21}";
         text-color = "${c.color18}";
         border-color = "${c.color18}";
         format = "<b>α %s</b>\\n%b";
-        default-timeout = 4000;
+        default-timeout = notifTime.lg;
       };
 
-      "app-name=rh-bluetooth" = {
+      "app-name=rh-fuzzel-bluetooth" = {
         background-color = "${c.color21}";
         text-color = "${c.color18}";
         border-color = "${c.color18}";
         format = "<b>β %s</b>\\n%b";
-        default-timeout = 4000;
+        default-timeout = notifTime.lg;
       };
 
-      "app-name=rh-colors" = {
+      "app-name=rh-fuzzel-colors" = {
         background-color = "${c.color21}";
         text-color = "${c.color18}";
         border-color = "${c.color18}";
         format = "<b>γ %s</b>\\n%b";
-        default-timeout = 4000;
+        default-timeout = notifTime.lg;
       };
 
-      "app-name=rh-display" = {
+      "app-name=rh-fuzzel-display" = {
         background-color = "${c.color21}";
         text-color = "${c.color18}";
         border-color = "${c.color18}";
         format = "<b>δ %s</b>\\n%b";
-        default-timeout = 4000;
+        default-timeout = notifTime.lg;
       };
 
-      "app-name=rh-emoji" = {
+      "app-name=rh-fuzzel-emoji" = {
         background-color = "${c.color21}";
         text-color = "${c.color18}";
         border-color = "${c.color18}";
         format = "<b>ε %s</b>\\n%b";
-        default-timeout = 4000;
+        default-timeout = notifTime.lg;
       };
 
-      "app-name=rh-find" = {
+      "app-name=rh-fuzzel-find" = {
         background-color = "${c.color21}";
         text-color = "${c.color18}";
         border-color = "${c.color18}";
-        format = "<b>ƒ %s</b>\\n%b";
-        default-timeout = 4000;
+        format = "<b>󰊕 %s</b>\\n%b";
+        default-timeout = notifTime.lg;
       };
 
-      "app-name=rh-go" = {
+      "app-name=rh-fuzzel-go" = {
         background-color = "${c.color21}";
         text-color = "${c.color18}";
         border-color = "${c.color18}";
-        format = "<b>ϱ %s</b>\\n%b";
-        default-timeout = 4000;
+        format = "<b>Γ %s</b>\\n%b";
+        default-timeout = notifTime.lg;
       };
 
-      "app-name=rh-help" = {
+      "app-name=rh-fuzzel-help" = {
         background-color = "${c.color21}";
         text-color = "${c.color18}";
         border-color = "${c.color18}";
         format = "<b>Π %s</b>\\n%b";
-        default-timeout = 4000;
+        default-timeout = notifTime.lg;
       };
 
-      "app-name=rh-unicode" = {
+      "app-name=rh-fuzzel-icons" = {
         background-color = "${c.color21}";
         text-color = "${c.color18}";
         border-color = "${c.color18}";
-        format = "<b>Ι %s</b>\\n%b";
-        default-timeout = 4000;
+        format = "<b>∪ %s</b>\\n%b";
+        default-timeout = notifTime.lg;
       };
 
-      "app-name=rh-journals" = {
+      "app-name=rh-fuzzel-journals" = {
         background-color = "${c.color21}";
         text-color = "${c.color18}";
         border-color = "${c.color18}";
-        format = "<b>ͳ %s</b>\\n%b";
-        default-timeout = 4000;
+        format = "<b>Φ %s</b>\\n%b";
+        default-timeout = notifTime.lg;
       };
 
-      "app-name=rh-launch" = {
-        background-color = "${c.color21}";
-        text-color = "${c.color18}";
-        border-color = "${c.color18}";
-        format = "<b>Λ %s</b>\\n%b";
-        default-timeout = 4000;
-      };
-
-      "app-name=rh-mounts" = {
-        background-color = "${c.color21}";
-        text-color = "${c.color18}";
-        border-color = "${c.color18}";
-        format = "<b>Μ %s</b>\\n%b";
-        default-timeout = 4000;
-      };
-
-      "app-name=rh-power" = {
-        background-color = "${c.color21}";
-        text-color = "${c.color18}";
-        border-color = "${c.color18}";
-        format = "<b>Ω %s</b>\\n%b";
-        default-timeout = 4000;
-      };
-
-      "app-name=rh-services" = {
-        background-color = "${c.color21}";
-        text-color = "${c.color18}";
-        border-color = "${c.color18}";
-        format = "<b>Σ %s</b>\\n%b";
-        default-timeout = 4000;
-      };
-
-      "app-name=rh-color-temp" = {
+      "app-name=rh-fuzzel-kill" = {
         background-color = "${c.color21}";
         text-color = "${c.color18}";
         border-color = "${c.color18}";
         format = "<b>ψ %s</b>\\n%b";
-        default-timeout = 4000;
+        default-timeout = notifTime.lg;
       };
 
-      "app-name=rh-wifi" = {
+      "app-name=rh-fuzzel-launch" = {
+        background-color = "${c.color21}";
+        text-color = "${c.color18}";
+        border-color = "${c.color18}";
+        format = "<b>Λ %s</b>\\n%b";
+        default-timeout = notifTime.lg;
+      };
+
+      "app-name=rh-fuzzel-mounts" = {
+        background-color = "${c.color21}";
+        text-color = "${c.color18}";
+        border-color = "${c.color18}";
+        format = "<b>∩ %s</b>\\n%b";
+        default-timeout = notifTime.lg;
+      };
+
+      "app-name=rh-fuzzel-networking" = {
+        background-color = "${c.color21}";
+        text-color = "${c.color18}";
+        border-color = "${c.color18}";
+        format = "<b>η %s</b>\\n%b";
+        default-timeout = notifTime.lg;
+      };
+
+      "app-name=rh-fuzzel-power" = {
+        background-color = "${c.color21}";
+        text-color = "${c.color18}";
+        border-color = "${c.color18}";
+        format = "<b>Ω %s</b>\\n%b";
+        default-timeout = notifTime.lg;
+      };
+
+      "app-name=rh-fuzzel-query" = {
+        background-color = "${c.color21}";
+        text-color = "${c.color18}";
+        border-color = "${c.color18}";
+        format = "<b>ο %s</b>\\n%b";
+        default-timeout = notifTime.lg;
+      };
+
+      "app-name=rh-fuzzel-remote" = {
+        background-color = "${c.color21}";
+        text-color = "${c.color18}";
+        border-color = "${c.color18}";
+        format = "<b>ρ %s</b>\\n%b";
+        default-timeout = notifTime.lg;
+      };
+
+      "app-name=rh-fuzzel-services" = {
+        background-color = "${c.color21}";
+        text-color = "${c.color18}";
+        border-color = "${c.color18}";
+        format = "<b>σ %s</b>\\n%b";
+        default-timeout = notifTime.lg;
+      };
+
+      "app-name=rh-fuzzel-temperature" = {
+        background-color = "${c.color21}";
+        text-color = "${c.color18}";
+        border-color = "${c.color18}";
+        format = "<b>Δ %s</b>\\n%b";
+        default-timeout = notifTime.lg;
+      };
+
+      "app-name=rh-fuzzel-usb" = {
+        background-color = "${c.color21}";
+        text-color = "${c.color18}";
+        border-color = "${c.color18}";
+        format = "<b>μ %s</b>\\n%b";
+        default-timeout = notifTime.lg;
+      };
+
+      "app-name=rh-fuzzel-vaults" = {
+        background-color = "${c.color21}";
+        text-color = "${c.color18}";
+        border-color = "${c.color18}";
+        format = "<b>π %s</b>\\n%b";
+        default-timeout = notifTime.lg;
+      };
+
+      "app-name=rh-fuzzel-wifi" = {
         background-color = "${c.color21}";
         text-color = "${c.color18}";
         border-color = "${c.color18}";
         format = "<b>ω %s</b>\\n%b";
-        default-timeout = 4000;
+        default-timeout = notifTime.lg;
       };
 
-      "app-name=rh-xperiments" = {
+      "app-name=rh-fuzzel-xecute" = {
+        background-color = "${c.color21}";
+        text-color = "${c.color18}";
+        border-color = "${c.color18}";
+        format = "<b>ξ %s</b>\\n%b";
+        default-timeout = notifTime.lg;
+      };
+
+      "app-name=rh-fuzzel-yank" = {
         background-color = "${c.color21}";
         text-color = "${c.color18}";
         border-color = "${c.color18}";
         format = "<b>Ξ %s</b>\\n%b";
-        default-timeout = 4000;
+        default-timeout = notifTime.lg;
       };
 
-      "app-name=rh-z" = {
+      "app-name=rh-fuzzel-zutils" = {
         background-color = "${c.color21}";
         text-color = "${c.color18}";
         border-color = "${c.color18}";
         format = "<b>ζ %s</b>\\n%b";
-        default-timeout = 4000;
+        default-timeout = notifTime.lg;
       };
 
       # --- Rhodium Builds ---
@@ -497,7 +570,7 @@ in {
         text-color = "${c.color18}";
         border-color = "${c.color18}";
         format = "<b>λ %s</b>\\n%b";
-        default-timeout = 4000;
+        default-timeout = notifTime.lg;
       };
 
       # NOTE: This overrides my entire setup. It's forbidden here.

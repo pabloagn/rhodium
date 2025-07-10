@@ -3,9 +3,9 @@
 set -euo pipefail
 
 # --- Main Configuration ---
-APP_NAME="rh-xperiments"
-APP_TITLE="Rhodium's X-Periments"
-PROMPT="Υ: "
+APP_NAME="rh-fuzzel-yank"
+APP_TITLE="Rhodium's Yank"
+PROMPT="Ξ: "
 
 PADDING_ARGS_NIX_SEARCH="35 30 100"  # name, version, description
 
