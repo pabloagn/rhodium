@@ -37,14 +37,25 @@
 
   # --- List of active modules ---
   usedModules = [
-    moduleCustomClock
     moduleBattery
-    moduleNiriLanguage
-    moduleKeyboardStateCapslock
-    moduleNiriWorkspaces
-    moduleGroupWifiSpeed
-    moduleGroupThermals
+    moduleCustomBullet
+    moduleCustomClock
     moduleCustomSeparator
+    moduleCustomThmAmb
+    moduleCustomThmAmd
+    moduleCustomThmBati
+    moduleCustomThmBatv
+    moduleCustomThmCpu
+    moduleCustomThmFan
+    moduleCustomThmNvme
+    moduleCustomThmPwr
+    moduleGroupThermals
+    moduleGroupWifiSpeed
+    moduleKeyboardStateCapslock
+    moduleNetworkWifiDl
+    moduleNetworkWifiUl
+    moduleNiriLanguage
+    moduleNiriWorkspaces
   ];
 
   # --- Merge module-provided Waybar configuration ---

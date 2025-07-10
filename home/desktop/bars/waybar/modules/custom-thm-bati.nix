@@ -1,7 +1,7 @@
 {
   waybarModules = {
     "custom/thm-bati" = {
-      exec = "$XDG_BIN_HOME/waybar/waybar-thermals.sh bati";
+      exec = "$XDG_BIN_HOME/waybar/custom-thermals.sh bati";
       return-type = "json";
       format = "B {text}";
       tooltip = true;

@@ -1,7 +1,7 @@
 {
   waybarModules = {
     "custom/thm-amd" = {
-      exec = "$XDG_BIN_HOME/waybar/waybar-thermals.sh amd";
+      exec = "$XDG_BIN_HOME/waybar/custom-thermals.sh amd";
       return-type = "json";
       format = "G {text}";
       tooltip = true;
