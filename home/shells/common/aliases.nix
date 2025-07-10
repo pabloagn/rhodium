@@ -4,6 +4,9 @@
   untargz = "tar -xzvf";
   untarxz = "tar -xJvf";
 
+  # --- Niri ---
+  nms = "niri msg --json event-stream | jq '.'"; # Niri msg stream in json
+
   # --- Clipboard ---
   y = "wl-copy"; # Yank
 
@@ -27,16 +30,13 @@
   rm = "trash-put"; # Move to trash instead of delete
   mkdir = "mkdir -pv"; # Create parent dirs & verbose
 
-  # --- Fuzzy ---
-  # fzd = "zi";
-  # fzh = "fzf-history-widget";
-
   # --- General ---
-  cl = "clear";
-  htop = "btm";
-  neofetch = "fastfetch";
-  nf = "fastfetch";
-  "!!" = "sudo $history[1]";
+  cl = "clear"; # Clear previous commands
+  htop = "btm"; # Bottom
+  neofetch = "fastfetch"; # Fetch
+  nf = "fastfetch"; # Fetch
+  "!!" = "sudo $history[1]"; # Last command with sudo
+  notify-catch = ''dbus-monitor "interface='org.freedesktop.Notifications'"''; # Catch notificaton info sent by d-bus
 
   # --- Git ---
   gad = "git add ."; # Stage all files under current dir
@@ -46,14 +46,14 @@
   gcm = "cz commit"; # Create a new commit (commitizen)
   gin = "cz init"; # Initialize Commitizen configuration (commitizen)
   gpu = "git push -u origin main"; # Push to main
-  grm = "git rm -r --cached ."; # Remove remote cache
+  grm = "git rm -rf --cached ."; # Remove remote cache recursive force
   gst = "git status"; # Check git repo status
   gvr = "cz version"; # Show version information (commitizen)
 
   # --- History ---
-  h = "history";
-  hs = "history | grep";
-  hsi = "history | grep -i";
+  h = "fzf-history-widget"; # Interactive history search
+  hs = "history | rg"; # Ripgrep history
+  hsi = "history | rg -i"; # Grep history ignore case
   hist = "fzf-history-widget";
 
   # --- Ides ---
@@ -62,20 +62,21 @@
 
   # --- Jumpers ---
   # Go to ->
-  ga = "z $HOME_ACADEMIC";
-  gb = "z $XDG_BIN_HOME";
-  gc = "z $XDG_CONFIG_HOME";
-  gd = "z $HOME_DOWNLOADS";
-  ge = "z $XDG_CACHE_HOME";
-  gh = "z $HOME";
-  gp = "z $HOME_PROJECTS";
-  gr = "z $RHODIUM";
-  gs = "z $HOME_SOLENOIDLABS";
-  gv = "z $HOME_VAULTS";
-  gw = "z $HOME_PROFESSIONAL";
+  ga = "z $HOME_ACADEMIC"; # Go Academic
+  gb = "z $XDG_BIN_HOME"; # Go bin home
+  gc = "z $XDG_CONFIG_HOME"; # Go config home
+  gd = "z $HOME_DOWNLOADS"; # Go downloads
+  ge = "z $XDG_CACHE_HOME"; # Go cache home
+  gh = "z $HOME"; # Go home
+  gp = "z $HOME_PROJECTS"; # Go projects
+  gr = "z $RHODIUM"; # Go Rhodium
+  gs = "z $HOME_SOLENOIDLABS"; # Go SolenoidLabs
+  gv = "z $HOME_VAULTS"; # Go Obsidian Vaults
+  gw = "z $HOME_PROFESSIONAL"; # Go Professional
+  gi = "zi"; # Go interactive
 
   # --- Openers ---
-  # Go to; open ->
+  # Go to; list ->
   gal = "z $HOME_ACADEMIC; yy";
   gbl = "z $XDG_BIN_HOME; yy";
   gcl = "z $XDG_CONFIG_HOME; yy";

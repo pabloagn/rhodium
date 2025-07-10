@@ -1,5 +1,5 @@
 {...}: {
-  # ===== General =====
+  # --- General ---
   input = {
     cd_offset = [0 2 50 3];
     cd_origin = "top-center";
@@ -89,9 +89,9 @@
     enabled = false;
   };
 
-  # ===== Opener Definitions =====
+  # --- Opener Definitions ---
   opener = {
-    # --- Code Editors ---
+    # Code Editors
     edit = [
       {
         desc = "Edit with \$EDITOR";
@@ -137,7 +137,7 @@
       }
     ];
 
-    # --- Web Browsers (with new window flags) ---
+    # Web Browsers (with profiles & new window flags)
     browser-personal = [
       {
         desc = "Firefox (Personal)";
@@ -162,11 +162,12 @@
       }
     ];
 
-    # --- Image Viewers/Editors ---
+    # Image Viewers/Editors
     open = [
       {
         desc = "System default";
         for = "linux";
+        orphan = true;
         run = "xdg-open \"$1\"";
       }
     ];
@@ -175,6 +176,7 @@
       {
         desc = "imv (direct)";
         for = "unix";
+        orphan = true;
         run = "imv \"$@\"";
       }
     ];
@@ -183,6 +185,7 @@
       {
         desc = "ImageMagick (display)";
         for = "unix";
+        orphan = true;
         run = "display \"$@\"";
       }
     ];
@@ -191,15 +194,17 @@
       {
         desc = "GIMP";
         for = "unix";
+        orphan = true;
         run = "gimp \"$@\"";
       }
     ];
 
-    # --- File Managers ---
+    # File Managers
     thunar = [
       {
         desc = "Open in Thunar";
         for = "linux";
+        orphan = true;
         run = "thunar \"$@\"";
       }
     ];
@@ -208,11 +213,12 @@
       {
         desc = "Show in file manager";
         for = "linux";
+        orphan = true;
         run = "xdg-open \"$(dirname \"$1\")\"";
       }
     ];
 
-    # --- Media Players ---
+    # Media Players
     play = [
       {
         desc = "Play with mpv";
