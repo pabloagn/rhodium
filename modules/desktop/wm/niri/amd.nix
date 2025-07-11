@@ -9,6 +9,7 @@
 
   environment.sessionVariables = {
     WLR_NO_HARDWARE_CURSORS = "1"; # For invisible cursors
+    ELECTRON_OZONE_PLATFORM_HINT = "auto"; # Electron app flickering fix
     AMD_VULKAN_ICD = "RADV";
   };
 

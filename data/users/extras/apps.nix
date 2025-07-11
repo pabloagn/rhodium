@@ -140,7 +140,10 @@
       # NOTE: Use flags below if not using xwayland-satellite
       # args = ["--enable-features=UseOzonePlatform" "--ozone-platform=wayland"];
       # NOTE: Use flag below if using xwayland-satellite > 0.6
-      args = ["--force-device-scale-factor=1.5"];
+      # args = ["--force-device-scale-factor=1.5"];
+      # NOTE: Use no flags for latest beta release
+      # NOTE: This is only possible with env var: ELECTRON_OZONE_PLATFORM_HINT = "auto";
+      args = [];
       icon = "onepassword";
       description = "1Password";
     };
@@ -150,12 +153,12 @@
       icon = "bitwarden";
       description = "Bitwarden";
     };
-    protonpassword = {
-      binary = "proton-pass";
-      args = [];
-      icon = "proton";
-      description = "ProtonPass";
-    };
+    # protonpassword = {
+    #   binary = "proton-pass";
+    #   args = [];
+    #   icon = "proton";
+    #   description = "ProtonPass";
+    # };
     protonvpn = {
       binary = "protonvpn-app";
       args = [];
