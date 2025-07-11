@@ -7,7 +7,7 @@ lib.mapAttrs
       sub: val:
         val
         // {
-          name = "${top}-${sub}";
+          name = "rh-${top}-${sub}"; # NOTE: We use the rh- prefix for increased discoverability
           prompt = "${val.prompt}: ";
         }
     )

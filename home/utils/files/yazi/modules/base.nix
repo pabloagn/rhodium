@@ -162,6 +162,60 @@
       }
     ];
 
+    libreoffice-calc = [
+      {
+        desc = "LibreOffice Calc (Spreadsheets)";
+        for = "unix";
+        orphan = true;
+        run = "libreoffice --calc \"$@\"";
+      }
+    ];
+
+    libreoffice-writer = [
+      {
+        desc = "LibreOffice Writer (Documents)";
+        for = "unix";
+        orphan = true;
+        run = "libreoffice --writer \"$@\"";
+      }
+    ];
+
+    libreoffice-impress = [
+      {
+        desc = "LibreOffice Impress (Slides)";
+        for = "unix";
+        orphan = true;
+        run = "libreoffice --impress \"$@\"";
+      }
+    ];
+
+    libreoffice-draw = [
+      {
+        desc = "LibreOffice Draw (Diagrams)";
+        for = "unix";
+        orphan = true;
+        run = "libreoffice --draw \"$@\"";
+      }
+    ];
+
+    libreoffice-base = [
+      {
+        desc = "LibreOffice Base (Databases)";
+        for = "unix";
+        orphan = true;
+        run = "libreoffice --base \"$@\"";
+      }
+    ];
+
+    libreoffice-math = [
+      {
+        desc = "LibreOffice Math (Formulas)";
+        for = "unix";
+        orphan = true;
+        run = "libreoffice --math \"$@\"";
+      }
+    ];
+
     # Image Viewers/Editors
     open = [
       {
@@ -247,7 +301,7 @@
     ];
   };
 
-  # ===== Open Rules =====
+  # --- Open Rules ---
   open = {
     rules = [
       # --- Directories ---
@@ -297,12 +351,10 @@
         mime = "text/*";
         use = ["edit" "edit-helix" "edit-zed" "edit-nano" "edit-emacs" "reveal"];
       }
-
       {
         mime = "*/javascript";
         use = ["edit" "edit-helix" "edit-zed" "edit-nano" "edit-emacs" "reveal"];
       }
-
       {
         mime = "application/{json,x-ndjson}";
         use = ["edit" "edit-helix" "edit-zed" "edit-nano" "edit-emacs" "reveal"];
@@ -313,7 +365,6 @@
         mime = "image/*";
         use = ["open" "imv" "imagemagick" "gimp" "reveal"];
       }
-
       {
         mime = "{audio,video}/*";
         use = ["play" "vlc" "reveal"];
@@ -324,7 +375,6 @@
         mime = "application/{,g}zip";
         use = ["extract" "reveal"];
       }
-
       {
         mime = "application/x-{tar,bzip*,7z-compressed,xz,rar}";
         use = ["extract" "reveal"];
@@ -334,6 +384,90 @@
       {
         mime = "application/pdf";
         use = ["open" "reveal"];
+      }
+
+      # --- Tabular Data Files ---
+      {
+        name = "*.{csv,tsv,tab,psv}";
+        use = ["edit" "edit-helix" "edit-zed" "edit-nano" "edit-emacs" "libreoffice-calc" "reveal"];
+      }
+
+      # --- Text Files ---
+      {
+        name = "*.{txt,text,log,md,markdown,rst,tex}";
+        use = ["edit" "edit-helix" "edit-zed" "edit-nano" "edit-emacs" "reveal"];
+      }
+
+      # --- Office ---
+      # Documents
+      {
+        name = "*.{odt,doc,docx,rtf}";
+        use = ["libreoffice-writer" "onlyoffice" "reveal"];
+      }
+      {
+        mime = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
+        use = ["libreoffice-writer" "onlyoffice" "reveal"];
+      }
+      {
+        mime = "application/msword";
+        use = ["libreoffice-writer" "onlyoffice" "reveal"];
+      }
+      {
+        mime = "application/rtf";
+        use = ["libreoffice-writer" "onlyoffice" "reveal"];
+      }
+
+      # Spreadsheets
+      {
+        name = "*.{xls,xlsx,xlsm,xlsb,ods}";
+        use = ["libreoffice-calc" "onlyoffice" "reveal"];
+      }
+      {
+        mime = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+        use = ["libreoffice-calc" "onlyoffice" "reveal"];
+      }
+      {
+        mime = "application/vnd.ms-excel";
+        use = ["libreoffice-calc" "onlyoffice" "reveal"];
+      }
+      {
+        mime = "application/vnd.oasis.opendocument.spreadsheet";
+        use = ["libreoffice-calc" "onlyoffice" "reveal"];
+      }
+
+      # Presentations
+      {
+        name = "*.{odp,ppt,pptx}";
+        use = ["libreoffice-impress" "onlyoffice" "reveal"];
+      }
+      {
+        mime = "application/vnd.ms-powerpoint";
+        use = ["libreoffice-impress" "onlyoffice" "reveal"];
+      }
+      {
+        mime = "application/vnd.openxmlformats-officedocument.presentationml.presentation";
+        use = ["libreoffice-impress" "onlyoffice" "reveal"];
+      }
+      {
+        mime = "application/vnd.oasis.opendocument.presentation";
+        use = ["libreoffice-impress" "onlyoffice" "reveal"];
+      }
+
+      # Drawings
+      {
+        name = "*.{odg}";
+        use = ["libreoffice-draw" "gimp" "imagemagick" "reveal"];
+      }
+      # Math Formulas
+      {
+        name = "*.{odf}";
+        use = ["libreoffice-math" "reveal"];
+      }
+
+      # Libre Database Files
+      {
+        name = "*.{odb}";
+        use = ["libreoffice-base" "reveal"];
       }
 
       # --- Empty Files ---
