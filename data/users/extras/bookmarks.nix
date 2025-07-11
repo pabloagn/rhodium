@@ -526,10 +526,22 @@ in
       description = "Vercel";
       categories = [ categories.productivity ];
     };
-    aws = {
+    aws-main-root = {
       profile = "personal";
       url = "https://eu-north-1.console.aws.amazon.com/console";
-      description = "AWS Console - Main";
+      description = "AWS - Main Root Console";
+      categories = [ categories.productivity ];
+    };
+    aws-main-admin = {
+      profile = "personal";
+      url = "https://d-c367780191.awsapps.com/start/";
+      description = "AWS - Main Admin Console";
+      categories = [ categories.productivity ];
+    };
+    aws-main-buckets-rhodium = {
+      profile = "personal";
+      url = "https://eu-north-1.console.aws.amazon.com/s3/buckets/rhodium.rh?region=eu-north-1&bucketType=general&tab=objects";
+      description = "AWS - Main Buckets Rhodium.rh";
       categories = [ categories.productivity ];
     };
     whatsapp = {
