@@ -2,13 +2,11 @@
 
 set -euo pipefail
 
-# --- Main Configuration ---
-APP_NAME="rh-fuzzel-temperature"
-APP_TITLE="Rhodium's Display Temperature Util"
-PROMPT="Δ: "
-
 # --- Imports ---
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../common/bootstrap.sh"
+
+# --- Main Configuration ---
+load_metadata "fuzzel" "temperature"
 
 # --- Presets Menu Options ---
 options=(

@@ -2,16 +2,14 @@
 
 set -euo pipefail
 
+# --- Imports ---
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../common/bootstrap.sh"
+
 # --- Main Configuration ---
-APP_NAME="rh-fuzzel-journals"
-APP_TITLE="Rhodium's Journals"
-PROMPT="Φ: "
+load_metadata "fuzzel" "journals"
 
 MENU_LEN=5
 PADDING_ARGS_NIX_SEARCH="35 30 100"  # name, version, description
-
-# --- Imports ---
-source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../common/bootstrap.sh"
 
 # --- Options ---
 # Main menu options

@@ -2,18 +2,16 @@
 
 set -euo pipefail
 
+# --- Imports ---
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../common/bootstrap.sh"
+
 # --- Main Configuration ---
-APP_NAME="rh-fuzzel-go"
-APP_TITLE="Rhodium Go"
-PROMPT="Γ (G) I|D|Y|W: "
+load_metadata "fuzzel" "go"
 
 FUZZEL_WIDTH=120
 
 FIREFOX_PROFILE_PERSONAL="Personal"
 FIREFOX_PROFILE_MEDIA="Media"
-
-# --- Imports ---
-source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../common/bootstrap.sh"
 
 open_in_firefox() {
     local url="$1"

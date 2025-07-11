@@ -2,13 +2,11 @@
 
 set -euo pipefail
 
-# --- Main Configuration ---
-APP_NAME="rh-fuzzel-display"
-APP_TITLE="Rhodium's Display Menu"
-PROMPT="δ: "
-
 # --- Imports ---
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../common/bootstrap.sh"
+
+# --- Main Configuration ---
+load_metadata "fuzzel" "display"
 
 options=()
 

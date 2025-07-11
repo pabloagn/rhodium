@@ -79,3 +79,25 @@ get_fuzzel_line_count() {
     done
     echo "$count"
 }
+
+load_metadata() {
+    local group="$1"
+    local key="$2"
+    local metadata_file="${XDG_DATA_HOME:-$HOME/.local/share}/rhodium-utils/metadata.json"
+
+    if [[ ! -f "$metadata_file" ]]; then
+        echo "Metadata file not found: $metadata_file" >&2
+        return 1
+    fi
+
+    # Parse values using jq
+    APP_NAME=$(jq -r --arg g "$group" --arg k "$key" '.[$g][$k].name' "$metadata_file")
+    PROMPT=$(jq -r --arg g "$group" --arg k "$key" '.[$g][$k].prompt' "$metadata_file")
+    APP_TITLE=$(jq -r --arg g "$group" --arg k "$key" '.[$g][$k].title' "$metadata_file")
+
+    # Validate all were found
+    if [[ -z "$APP_NAME" || -z "$PROMPT" || -z "$APP_TITLE" || "$APP_NAME" == "null" ]]; then
+        echo "Failed to load metadata for $group/$key from $metadata_file" >&2
+        return 1
+    fi
+}

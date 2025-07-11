@@ -2,11 +2,6 @@
 
 set -euo pipefail
 
-# --- Configuration ---
-APP_NAME="rh-fuzzel-xecute"
-APP_TITLE="Rhodium's System Management (X-Ecute)"
-PROMPT="ξ: "
-
 # Validate Environment
 : "${RHODIUM:?The RHODIUM environment variable is not set}"
 [[ -d "$RHODIUM" ]] ||
@@ -22,6 +17,9 @@ PROMPT="ξ: "
 
 # --- Imports ---
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../common/bootstrap.sh"
+
+# --- Configuration ---
+load_metadata "fuzzel" "xecute"
 
 # --- Helpers ---
 run_fuzzel() {

@@ -2,19 +2,16 @@
 
 set -euo pipefail
 
-# --- Main Configuration ---
-APP_NAME="rh-fuzzel-services"
-APP_TITLE="Rhodium's Service Manager"
-PROMPT="σ: "
-
 # --- Imports ---
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../common/bootstrap.sh"
+
+# --- Main Configuration ---
+load_metadata "fuzzel" "services"
 
 # --- Configuration ---
 PADDING_ARGS="60 15 50" # service name, status, description
 
 # --- Helper Functions ---
-
 get_service_status() {
     local service="$1"
     systemctl --user is-active "$service" 2>/dev/null || echo "inactive"
@@ -180,7 +177,6 @@ show_service_actions() {
 }
 
 # --- Service Actions ---
-
 start_service() {
     local service="$1"
     notify "$APP_TITLE" "Starting $service..."

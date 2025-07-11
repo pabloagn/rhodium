@@ -2,19 +2,16 @@
 
 set -euo pipefail
 
-# --- Main Configuration ---
-APP_NAME="rh-fuzzel-yank"
-APP_TITLE="Rhodium's Yank"
-PROMPT="Ξ: "
-
-PADDING_ARGS_NIX_SEARCH="35 30 100"  # name, version, description
-
 # --- Imports ---
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../common/bootstrap.sh"
+
+# --- Main Configuration ---
+load_metadata "fuzzel" "yank"
 
 # --- Configuration ---
 MENU_LEN=5
 PADDING_ARGS="60 15 50" # service name, status, description
+PADDING_ARGS_NIX_SEARCH="35 30 100"  # name, version, description
 
 # --- Helper Functions ---
 

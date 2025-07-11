@@ -2,13 +2,11 @@
 
 set -euo pipefail
 
-# --- Main Configuration ---
-APP_NAME="rh-fuzzel-apps"
-APP_TITLE="Rhodium's Apps"
-PROMPT="λ: "
-
 # --- Imports ---
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../common/bootstrap.sh"
+
+# --- Main Configuration ---
+load_metadata "fuzzel" "apps"
 
 # --- Configuration ---
 PADDING_ARGS="35 20 20" # Column padding: name, type, categories

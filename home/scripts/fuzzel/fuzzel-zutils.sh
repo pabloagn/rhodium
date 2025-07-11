@@ -2,12 +2,11 @@
 
 set -euo pipefail
 
-# --- Main Configuration ---
-APP_NAME="rh-fuzzel-zutils"
-APP_TITLE="Rhodium's Z-Utils"
-PROMPT="ζ: "
-
+# --- Imports ---
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../common/bootstrap.sh"
+
+# --- Main Configuration ---
+load_metadata "fuzzel" "zutils"
 
 # Terminal configuration
 TERMINAL="${TERMINAL:-kitty}"

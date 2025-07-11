@@ -7,9 +7,10 @@
 COMMON_DIR="$(dirname "$(realpath "${BASH_SOURCE[0]}")")"
 source "${COMMON_DIR}/bootstrap.sh"
 
+# --- Metadata For Fuzzel Apps Cache ---
+load_metadata "fuzzel" "apps"
+
 # --- Variables for fuzzel-apps cache ---
-APP_NAME="rh-apps"
-APP_TITLE="Rhodium's Apps"
 PADDING_ARGS="35 20 20" # Column padding: name, type, categories
 
 # --- Function To Build Fuzzel-apps Cache ---

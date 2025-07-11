@@ -133,3 +133,7 @@ function is_system_directory() {
     local dirname="$1"
     [[ "$dirname" =~ ^(systemd|fontconfig|gtk-[0-9]|user-dirs|mimeapps|dconf|pulse)$ ]]
 }
+
+# --- Load Metadata ---
+
+

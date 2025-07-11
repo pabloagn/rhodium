@@ -7,9 +7,10 @@
 COMMON_DIR="$(dirname "$(realpath "${BASH_SOURCE[0]}")")"
 source "${COMMON_DIR}/bootstrap.sh"
 
+# --- Metadata For Fuzzel Apps Cache ---
+load_metadata "fuzzel" "launch"
+
 # --- Variables for fuzzel-launcher cache ---
-APP_NAME="rh-launch"
-APP_TITLE="Rhodium's Launcher"
 PADDING_ARGS="35 20 20" # Column padding: name, type, categories
 
 # --- Function To Build Fuzzel-launcher Cache ---
@@ -164,6 +165,3 @@ build_cache_launcher() {
     
     print_success "Fuzzel-launcher cache built (${#sorted_names[@]} apps)"
 }
-
-# Run the cache builder
-# build_cache_launcher

@@ -2,13 +2,11 @@
 
 set -euo pipefail
 
-# --- Main Configuration ---
-APP_NAME="rh-fuzzel-bluetooth"
-APP_TITLE="Rhodium's Bluetooth Utils"
-PROMPT="β: "
-
 # --- Imports ---
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../common/bootstrap.sh"
+
+# --- Main Configuration ---
+load_metadata "fuzzel" "bluetooth"
 
 declare -A menu_options=(
     ["$(provide_fuzzel_entry) Enable Bluetooth"]="enable_bluetooth"

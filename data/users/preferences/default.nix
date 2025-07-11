@@ -7,4 +7,5 @@ in {
   inherit (apps) apps profiles;
   inherit (behaviour) behaviour;
   inherit (theme) theme;
+  inherit metadata;
 }

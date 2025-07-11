@@ -2,13 +2,11 @@
 
 set -euo pipefail
 
-# --- Main Configuration ---
-APP_NAME="rh-fuzzel-wifi"
-APP_TITLE="Rhodium's WiFi Utils"
-PROMPT="ω: "
-
 # --- Imports ---
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../common/bootstrap.sh"
+
+# --- Main Configuration ---
+load_metadata "fuzzel" "wifi"
 
 # --- Configuration ---
 FUZZEL_DMENU_BASE_ARGS="--dmenu"

@@ -2,16 +2,14 @@
 
 set -euo pipefail
 
-# --- Main Configuration ---
-APP_NAME="rh-fuzzel-vaults"
-APP_TITLE="Rhodium's Vaults"
-PROMPT="π: "
-
 MENU_LEN=5
 PADDING_ARGS_NIX_SEARCH="35 30 100"  # name, version, description
 
 # --- Imports ---
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../common/bootstrap.sh"
+
+# --- Main Configuration ---
+load_metadata "fuzzel" "vaults"
 
 # --- Options ---
 # Main menu options

@@ -526,6 +526,12 @@ in
       description = "Vercel";
       categories = [ categories.productivity ];
     };
+    aws = {
+      profile = "personal";
+      url = "https://eu-north-1.console.aws.amazon.com/console";
+      description = "AWS Console - Main";
+      categories = [ categories.productivity ];
+    };
     whatsapp = {
       profile = "personal";
       url = "https://web.whatsapp.com/";

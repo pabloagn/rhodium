@@ -2,13 +2,11 @@
 
 set -euo pipefail
 
-# --- Main Configuration ---
-APP_NAME="rh-fuzzel-help"
-APP_TITLE="Rhodium Help"
-PROMPT="Π: "
-
 # --- Imports ---
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../common/bootstrap.sh"
+
+# --- Main Configuration ---
+load_metadata "fuzzel" "help"
 
 CONFIG_FILE="$XDG_CONFIG_HOME/niri/config.kdl"
 

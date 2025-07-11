@@ -2,18 +2,16 @@
 
 set -euo pipefail
 
+# --- Imports ---
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../common/bootstrap.sh"
+
 # --- Main Configuration ---
-APP_NAME="rh-fuzzel-icons"
-APP_TITLE="Rhodium's Unicode Collection"
-PROMPT="∪: "
+load_metadata "fuzzel" "icons"
 
 # --- Padding Configuration ---
 SYMBOL_PADDING=10
 NAME_PADDING=60
 CATEGORY_PADDING=30
-
-# --- Imports ---
-source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../common/bootstrap.sh"
 
 # --- Variables ---
 UNICODE_JSON_FILE="$HOME/.local/share/icons/icons.json"

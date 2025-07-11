@@ -2,16 +2,14 @@
 
 set -euo pipefail
 
+# --- Imports ---
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../common/bootstrap.sh"
+
 # --- Main Configuration ---
-APP_NAME="rh-fuzzel-usb"
-APP_TITLE="Rhodium's USB Utils"
-PROMPT="μ: "
+load_metadata "fuzzel" "usb"
 
 FUZZEL_DMENU_BASE_ARGS="--dmenu"
 MAX_DYNAMIC_LINES=15
-
-# --- Imports ---
-source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../common/bootstrap.sh"
 
 # USB device state cache
 DEVICE_STATE_DIR="/tmp/usb-device-states"

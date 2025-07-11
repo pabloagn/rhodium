@@ -2,13 +2,11 @@
 
 set -euo pipefail
 
-# --- Main Configuration ---
-APP_NAME="rh-fuzzel-emoji"
-APP_TITLE="Rhodium's Emoji Picker"
-PROMPT="ε: "
-
 # --- Imports ---
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../common/bootstrap.sh"
+
+# --- Main Configuration ---
+load_metadata "fuzzel" "emoji"
 
 # Define emoji list
 EMOJI_LIST=$(

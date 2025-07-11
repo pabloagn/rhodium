@@ -2,10 +2,11 @@
 
 set -euo pipefail
 
+# --- Imports ---
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../common/bootstrap.sh"
+
 # --- Main Configuration ---
-APP_NAME="rh-fuzzel-mounts"
-APP_TITLE="Rhodium's Mounts Util"
-PROMPT="∩: "
+load_metadata "fuzzel" "mounts"
 
 FUZZEL_DMENU_BASE_ARGS="--dmenu"
 MAX_DYNAMIC_LINES=15
@@ -17,9 +18,6 @@ TEMP_MOUNT="/tmp/fuzzel-mount-$$"
 # File manager command
 FILE_MANAGER="${FILE_MANAGER:-thunar}"
 TERMINAL="${TERMINAL:-kitty}"
-
-# --- Imports ---
-source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../common/bootstrap.sh"
 
 # Global options array
 options=()

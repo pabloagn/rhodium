@@ -8,11 +8,13 @@ set -euo pipefail
 
 # --- Configuration ---
 WALLPAPER_SRC_DIR="$XDG_DATA_HOME/wallpapers"
-APP_NAME="rh-display"
 PADDING_ARGS="20 35 15"
 
 COMMON_DIR="$(dirname "$(realpath "${BASH_SOURCE[0]}")")"
 source "${COMMON_DIR}/bootstrap.sh"
+
+# --- Metadata For Fuzzel Apps Cache ---
+load_metadata "fuzzel" "display"
 
 # --- Main Cache Building Function ---
 build_cache_wallpapers() {

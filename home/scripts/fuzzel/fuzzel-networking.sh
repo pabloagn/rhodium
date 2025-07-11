@@ -2,16 +2,14 @@
 
 set -euo pipefail
 
-# --- Main Configuration ---
-APP_NAME="rh-fuzzel-networking"
-APP_TITLE="Rhodium's Networking Utils"
-PROMPT="η: "
-
 MENU_LEN=5
-PADDING_ARGS_NIX_SEARCH="35 30 100"  # name, version, description
+PADDING_ARGS_NIX_SEARCH="35 30 100" # name, version, description
 
 # --- Imports ---
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../common/bootstrap.sh"
+
+# --- Main Configuration ---
+load_metadata "fuzzel" "networking"
 
 # --- Options ---
 # Main menu options
@@ -21,7 +19,3 @@ source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../common/bootstrap.sh"
 #     ["⊹ Find Nix Packages"]="find_nix_packages"
 #     ["⊹ List Derivations"]="list_derivations"
 # )
-
-
-
-

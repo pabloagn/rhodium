@@ -2,8 +2,9 @@
   imports = [
     ./assets.nix
     ./desktop.nix
-    ./fonts.nix
     ./env.nix
+    ./fonts.nix
+    ./metadata.nix
     ./scripts.nix
   ];
 }
