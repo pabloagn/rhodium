@@ -22,6 +22,11 @@
       desc = "Go to ./local/bin";
     }
     {
+      on = ["g" "e"];
+      run = "cd $DOTCONFIG_DOOM";
+      desc = "Go to ./config/doom";
+    }
+    {
       on = ["g" "u"];
       run = "cd $DEV_UTILS";
       desc = "Go to dev/utils";

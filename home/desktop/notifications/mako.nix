@@ -193,21 +193,6 @@ in {
         format = "<b>◙ %s</b>\\n%b";
       };
 
-      # Network notifications
-      "summary~=\"Network\"" = {
-        background-color = "${c.color21}";
-        text-color = "${c.color23}";
-        border-color = "${c.color24}";
-        format = "<b>⌽ %s</b>\\n%b";
-      };
-
-      "summary~=\"Wi-Fi\"" = {
-        background-color = "${c.color21}";
-        text-color = "${c.color23}";
-        border-color = "${c.color24}";
-        format = "<b>⌽ %s</b>\\n%b";
-      };
-
       # Email notifications
       "app-name=thunderbird" = {
         background-color = "#262626FF";
@@ -331,6 +316,14 @@ in {
       };
 
       # --- Custom Applications ---
+      "app-name=NetworkManager Applet" = {
+        background-color = "${c.color21}";
+        text-color = "${c.color23}";
+        border-color = "#2a2a2aFF";
+        format = "<b>◌ %s</b>\\n%b";
+        default-timeout = notifTime.md;
+      };
+
       "app-name=rh-util-screen-annotate" = {
         background-color = "${c.color21}";
         text-color = "${c.color23}";

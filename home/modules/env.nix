@@ -110,13 +110,13 @@ in {
     # - Here we include dotconfigs
     #   that are not managed declaratively through NixOS
     # - A good example is Doom Emacs
-    DOTCONFIG_DOOM = "${xdgDirs.configHome}/doom";
+    DOOMDIR = "${xdgDirs.configHome}/doom";
   };
 
   # Add directories to user's PATH
   home.sessionPath = [
     xdgDirs.binHome
-    "${xdgDirs.configHome}/emacs/bin"
+    "${homeDir}/.config/emacs/bin"
   ];
 
   # Set xdg custom dirs for userDirs

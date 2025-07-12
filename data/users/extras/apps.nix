@@ -31,7 +31,7 @@
       description = "VS Code";
     };
     emacs = {
-      binary = "emacs";
+      binary = "doom emacs";
       args = [];
       icon = "emacs";
       description = "Doom Emacs";

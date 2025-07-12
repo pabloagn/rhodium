@@ -1,19 +1,39 @@
 {...}: {
   icon = {
+    # --- Entire Filenames ---
     prepend_files = [
       {
         name = "justfile";
-        text = "";
+        text = "󱓞";
         fg = "#6B7E84";
       }
     ];
     prepend_dirs = [
-      # --- Rhodium Root ---
+      # --- Rhodium System ---
+      # Main Rhodium Dir
       {
         name = "rhodium";
         text = "λ";
         fg = "#BF3F42";
       }
+      # Rhodium Modules
+      {
+        name = "chiaroscuro.rh";
+        text = "󰊕";
+        fg = "#BF3F42";
+      }
+      {
+        name = "iridium.rh";
+        text = "󰊕";
+        fg = "#BF3F42";
+      }
+      {
+        name = "palladium.rh";
+        text = "󰊕";
+        fg = "#BF3F42";
+      }
+
+      # --- Projects ---
       {
         name = "kronos";
         text = "󰏉";
@@ -29,22 +49,6 @@
         text = "ψ";
         fg = "#BF3F42";
       }
-      {
-        name = "chiaroscuro.rh";
-        text = "τ";
-        fg = "#BF3F42";
-      }
-      {
-        name = "palladium.rh";
-        text = "󰊕";
-        fg = "#BF3F42";
-      }
-      {
-        name = "iridium.rh";
-        text = "󰊕";
-        fg = "#BF3F42";
-      }
-
       # --- Home Directories ---
       {
         name = "downloads";

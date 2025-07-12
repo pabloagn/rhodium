@@ -5,11 +5,11 @@ set -euo pipefail
 MENU_LEN=5
 PADDING_ARGS_NIX_SEARCH="35 30 100" # name, version, description
 
-# --- Main Configuration ---
-load_metadata "fuzzel" "find"
-
 # --- Imports ---
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../common/bootstrap.sh"
+
+# --- Main Configuration ---
+load_metadata "fuzzel" "find"
 
 # --- Options ---
 # Main menu options

@@ -62,19 +62,19 @@
 
   # --- Jumpers ---
   # Go to ->
+  gC = "z $XDG_CACHE_HOME"; # Go cache home
+  gD = "z $DOOMDIR"; # Go config Doom Emacs
   ga = "z $HOME_ACADEMIC"; # Go Academic
   gb = "z $XDG_BIN_HOME"; # Go bin home
   gc = "z $XDG_CONFIG_HOME"; # Go config home
   gd = "z $HOME_DOWNLOADS"; # Go downloads
-  # ge = "z $XDG_CACHE_HOME"; # Go cache home
-  ge = "z $DOTCONFIG_DOOM"; # Go config Doom Emacs
   gh = "z $HOME"; # Go home
+  gi = "zi"; # Go interactive
   gp = "z $HOME_PROJECTS"; # Go projects
   gr = "z $RHODIUM"; # Go Rhodium
   gs = "z $HOME_SOLENOIDLABS"; # Go SolenoidLabs
   gv = "z $HOME_VAULTS"; # Go Obsidian Vaults
   gw = "z $HOME_PROFESSIONAL"; # Go Professional
-  gi = "zi"; # Go interactive
 
   # --- Openers ---
   # Go to; list ->
