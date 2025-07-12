@@ -331,7 +331,7 @@ in {
       };
 
       # --- Custom Applications ---
-      "app-name=rh-util-screen-anotate" = {
+      "app-name=rh-util-screen-annotate" = {
         background-color = "${c.color21}";
         text-color = "${c.color23}";
         border-color = "#2a2a2aFF";
