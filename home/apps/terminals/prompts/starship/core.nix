@@ -34,6 +34,15 @@ in let
   colors = c;
 in {
   programs.starship.settings = {
+    # Custom Modules
+    custom.times = {
+      when = true;
+      command = ''echo $STARSHIP_CUSTOM_START $STARSHIP_CUSTOM_END'';
+      format = "[$output]($style) ◆ ";
+      style = "#A4A7A4";
+    };
+
+    # --- Main Modules ---
     username = {
       format = "[$user]($style)";
       show_always = true;
