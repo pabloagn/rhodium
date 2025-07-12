@@ -6,30 +6,44 @@
 }:
 with lib; let
   cfg = config.userExtraServices.rh-kmonad;
+
+  # helper kept OUTSIDE `config`
+  makeKmonadService = configFile: {
+    Unit = {
+      Description = "K-Monad";
+      PartOf = ["graphical-session.target"];
+      Wants = ["dbus-org.freedesktop.Notifications.service"];
+      After = [
+        "graphical-session-pre.target"
+        "dbus-org.freedesktop.Notifications.service"
+      ];
+    };
+    Service = {
+      Type = "simple";
+      ExecStart = ''
+        ${pkgs.kmonad}/bin/kmonad \
+          ${configFile} ${lib.concatStringsSep " " cfg.extraArgs}
+      '';
+      Restart = "on-failure";
+      RestartSec = 1;
+      Nice = "-5";
+    };
+    Install = {WantedBy = ["graphical-session.target"];};
+  };
 in {
   options.userExtraServices.rh-kmonad = {
     enable = mkEnableOption "Keyboard remapping with K-Monad";
 
-    # External (Keychron) layout
     configFile = mkOption {
       type = types.path;
-      default =
-        config.home.homeDirectory
-        + "/.config/kmonad/keychron.kbd";
-      description = ''
-        Absolute path of the *.kbd* file used for the external keyboard.
-      '';
+      default = config.home.homeDirectory + "/.config/kmonad/keychron.kbd";
+      description = "Absolute path of the *.kbd* file for the external keyboard.";
     };
 
-    # Internal (laptop-keyboard) layout
     internalConfigFile = mkOption {
       type = types.path;
-      default =
-        config.home.homeDirectory
-        + "/.config/kmonad/justine.kbd";
-      description = ''
-        Absolute path of the *.kbd* file used for the built-in keyboard.
-      '';
+      default = config.home.homeDirectory + "/.config/kmonad/justine.kbd";
+      description = "Absolute path of the *.kbd* file for the built-in keyboard.";
     };
 
     extraArgs = mkOption {
@@ -40,49 +54,12 @@ in {
   };
 
   config = mkIf cfg.enable {
-    # we need the binary
     home.packages = [pkgs.kmonad];
 
-    # ── Keychron ───────────────────────────────────────────────
-    systemd.user.services.rh-kmonad-keychron = {
-      Unit = {
-        Description = "K-Monad - Keychron";
-        PartOf = ["graphical-session.target"];
-        After = ["graphical-session-pre.target"];
-      };
-      Service = {
-        Type = "simple";
-        ExecStart = ''
-          ${pkgs.kmonad}/bin/kmonad \
-            ${cfg.configFile} \
-            ${lib.concatStringsSep " " cfg.extraArgs}
-        '';
-        Restart = "on-failure";
-        RestartSec = 1;
-        Nice = "-5";
-      };
-      Install = {WantedBy = ["graphical-session.target"];};
-    };
+    systemd.user.services.rh-kmonad-keychron =
+      makeKmonadService cfg.configFile;
 
-    # ── Justine ────────────────────────────────────────────
-    systemd.user.services.rh-kmonad-justine = {
-      Unit = {
-        Description = "K-Monad - Justine";
-        PartOf = ["graphical-session.target"];
-        After = ["graphical-session-pre.target"];
-      };
-      Service = {
-        Type = "simple";
-        ExecStart = ''
-          ${pkgs.kmonad}/bin/kmonad \
-            ${cfg.internalConfigFile} \
-            ${lib.concatStringsSep " " cfg.extraArgs}
-        '';
-        Restart = "on-failure";
-        RestartSec = 1;
-        Nice = "-5";
-      };
-      Install = {WantedBy = ["graphical-session.target"];};
-    };
+    systemd.user.services.rh-kmonad-justine =
+      makeKmonadService cfg.internalConfigFile;
   };
 }

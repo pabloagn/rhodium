@@ -87,7 +87,7 @@ in {
       on-button-middle = "dismiss";
       on-button-right = "dismiss-all";
       on-touch = "dismiss";
-      on-notify = "exec mpv /usr/share/sounds/freedesktop/stereo/message.oga --no-video --volume=50 2>/dev/null || true";
+      # on-notify = "exec mpv /usr/share/sounds/freedesktop/stereo/message.oga --no-video --volume=50 2>/dev/null || true";
 
       # --- App Overrides ---
       # Messaging applications
@@ -316,7 +316,7 @@ in {
       };
 
       # --- Custom Applications ---
-      "app-name=NetworkManager Applet" = {
+      "desktop-entry=org.freedesktop.network-manager-applet" = {
         background-color = "${c.color21}";
         text-color = "${c.color23}";
         border-color = "#2a2a2aFF";
@@ -566,7 +566,9 @@ in {
         default-timeout = notifTime.lg;
       };
 
-      # NOTE: This overrides my entire setup. It's forbidden here.
+      # NOTE:
+      # All these override my entire setup.
+      # They're forbidden and should never be used.
       # --- Urgency Styling ---
       # Low priority
       # "urgency=low" = {
