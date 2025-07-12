@@ -38,6 +38,15 @@
   # --- List of active modules ---
   usedModules = [
     moduleBattery
+    # TODO: 
+    moduleBacklight
+    moduleBluetooth
+    moduleCustomVpn
+    moduleCpu
+    moduleDisk
+    moduleMemory
+    moduleWireplumberSink
+    moduleWireplumberSource
     moduleCustomBullet
     moduleCustomClock
     moduleCustomSeparator
@@ -93,8 +102,16 @@
     ];
     modules-right = [
       "group/wifi-speed"
+      "custom/vpn"
+      "custom/separator"
       "group/thermals"
       "battery"
+      "cpu"
+      "memory"
+      "disk"
+      "custom/separator"
+      "backlight"
+      "wireplumber-sink"
       "custom/separator"
       "niri/language"
       "keyboard-state#capslock"
