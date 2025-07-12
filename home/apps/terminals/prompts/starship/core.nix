@@ -36,10 +36,11 @@ in {
   programs.starship.settings = {
     # Custom Modules
     custom.times = {
+      description="Display Execution Times (Start and End Time)";
+      command = "echo $STARSHIP_CUSTOM_START $STARSHIP_CUSTOM_END";
+      format = "[$output]($style)";
+      style = "#6F685D";
       when = true;
-      command = ''echo $STARSHIP_CUSTOM_START $STARSHIP_CUSTOM_END'';
-      format = "[$output]($style) ◆ ";
-      style = "#A4A7A4";
     };
 
     # --- Main Modules ---
