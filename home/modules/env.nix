@@ -104,10 +104,19 @@ in {
     LESSHISTFILE = "/dev/null";
     KEYTIMEOUT = "1";
     MOZ_ENABLE_WAYLAND = "1";
+
+    # Special Dotconfigs
+    # NOTE:
+    # - Here we include dotconfigs
+    #   that are not managed declaratively through NixOS
+    # - A good example is Doom Emacs
+    DOTCONFIG_DOOM = "${xdgDirs.configHome}/doom";
   };
 
+  # Add directories to user's PATH
   home.sessionPath = [
     xdgDirs.binHome
+    "${xdgDirs.configHome}/emacs/bin"
   ];
 
   # Set xdg custom dirs for userDirs

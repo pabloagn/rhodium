@@ -20,7 +20,7 @@
     cljfmt # Formatter
 
     # --- Common Lisp ---
-    sbcl # Common Lisp compiler
+    sbcl # Common Lisp compiler (Steel Bank Common Lisp)
 
     # --- Crystal ---
     crystalline

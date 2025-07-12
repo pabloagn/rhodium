@@ -66,7 +66,8 @@
   gb = "z $XDG_BIN_HOME"; # Go bin home
   gc = "z $XDG_CONFIG_HOME"; # Go config home
   gd = "z $HOME_DOWNLOADS"; # Go downloads
-  ge = "z $XDG_CACHE_HOME"; # Go cache home
+  # ge = "z $XDG_CACHE_HOME"; # Go cache home
+  ge = "z $DOTCONFIG_DOOM"; # Go config Doom Emacs
   gh = "z $HOME"; # Go home
   gp = "z $HOME_PROJECTS"; # Go projects
   gr = "z $RHODIUM"; # Go Rhodium

@@ -71,6 +71,9 @@
           echo -n " "
       end
 
+      source ~/.config/fish/functions/__starship_start_timer.fish
+      source ~/.config/fish/functions/__starship_end_timer.fish
+
       # Right prompt for git
       function fish_right_prompt
           set_color brblack
