@@ -24,7 +24,7 @@ require("conform").setup({
 		typescriptreact = { "prettierd", "prettier", stop_after_first = true },
 		typst = { "tinymist" },
 		latex = { "latexindent" },
-		nix = { "nixfmt", "alejandra" },
+		nix = { "nixfmt" },
 		ocaml = { "ocamlformat" },
 		scala = { "scalafmt" },
 		toml = { "taplo" },
