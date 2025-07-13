@@ -65,237 +65,247 @@
     # };
   };
 
-  outputs = {
-    self,
-    nixpkgs,
-    nixpkgs-unstable,
-    home-manager,
-    flake-parts,
-    sops-nix,
-    nur,
-    zen-browser,
-    kanso-nvim,
-    chiaroscuro,
-    rhodium-alloys,
-    iridium-rh,
-  } @ inputs: let
-    lib = nixpkgs.lib;
-    system = "x86_64-linux";
+  outputs =
+    {
+      self,
+      nixpkgs,
+      nixpkgs-unstable,
+      home-manager,
+      flake-parts,
+      sops-nix,
+      nur,
+      zen-browser,
+      kanso-nvim,
+      chiaroscuro,
+      rhodium-alloys,
+      iridium-rh,
+    }@inputs:
+    let
+      lib = nixpkgs.lib;
+      system = "x86_64-linux";
 
-    # Import overlays with inputs
-    overlaysWithInputs = import ./overlays {inherit inputs;};
+      # Import overlays with inputs
+      overlaysWithInputs = import ./overlays { inherit inputs; };
 
-    pkgs = import nixpkgs {
-      inherit system;
-      config = {
-        allowUnfree = true;
-        input-fonts.acceptLicense = true;
-        permittedInsecurePackages = [
-          "jitsi-meet-1.0.8043"
+      pkgs = import nixpkgs {
+        inherit system;
+        config = {
+          allowUnfree = true;
+          input-fonts.acceptLicense = true;
+          permittedInsecurePackages = [
+            "jitsi-meet-1.0.8043"
+          ];
+        };
+        overlays = [
+          nur.overlays.default
+          overlaysWithInputs.fonts
         ];
       };
-      overlays = [
-        nur.overlays.default
-        overlaysWithInputs.fonts
-      ];
-    };
 
-    pkgs-unstable = import nixpkgs-unstable {
-      inherit system;
-      config = {
-        allowUnfree = true;
+      pkgs-unstable = import nixpkgs-unstable {
+        inherit system;
+        config = {
+          allowUnfree = true;
+        };
+        overlays = [
+          nur.overlays.default
+          overlaysWithInputs.fonts
+        ];
       };
-      overlays = [
-        nur.overlays.default
-        overlaysWithInputs.fonts
-      ];
-    };
 
-    rhodiumLib = import ./lib {inherit lib pkgs;};
+      rhodiumLib = import ./lib { inherit lib pkgs; };
 
-    # Data paths
-    dataPath = ./data;
-    dataPathUsers = dataPath + "/users/";
-    dataPathUserExtras = dataPathUsers + "/extras/";
-    dataPathUserPreferences = dataPathUsers + "/preferences/";
-    dataPathHosts = dataPath + "/hosts/";
+      # Data paths
+      dataPath = ./data;
+      dataPathUsers = dataPath + "/users/";
+      dataPathUserExtras = dataPathUsers + "/extras/";
+      dataPathUserPreferences = dataPathUsers + "/preferences/";
+      dataPathHosts = dataPath + "/hosts/";
 
-    # Import user data
-    userData =
-      if builtins.pathExists (dataPathUsers + "/users.nix")
-      then (import (dataPathUsers + "/users.nix")).users
-      else {};
+      # Import user data
+      userData =
+        if builtins.pathExists (dataPathUsers + "/users.nix") then
+          (import (dataPathUsers + "/users.nix")).users
+        else
+          { };
 
-    # Import user preferences
-    userPreferences =
-      if builtins.pathExists dataPathUserPreferences
-      then (import dataPathUserPreferences)
-      else {};
+      # Import user preferences
+      userPreferences =
+        if builtins.pathExists dataPathUserPreferences then (import dataPathUserPreferences) else { };
 
-    # Import and pack all user extras data
-    userExtras = {
-      path = dataPathUserExtras;
+      # Import and pack all user extras data
+      userExtras = {
+        path = dataPathUserExtras;
 
-      bookmarksData =
-        if builtins.pathExists (dataPathUserExtras + "/bookmarks.nix")
-        then import (dataPathUserExtras + "/bookmarks.nix")
-        else {};
+        bookmarksData =
+          if builtins.pathExists (dataPathUserExtras + "/bookmarks.nix") then
+            import (dataPathUserExtras + "/bookmarks.nix")
+          else
+            { };
 
-      profilesData =
-        if builtins.pathExists (dataPathUserExtras + "/profiles.nix")
-        then import (dataPathUserExtras + "/profiles.nix")
-        else {};
+        profilesData =
+          if builtins.pathExists (dataPathUserExtras + "/profiles.nix") then
+            import (dataPathUserExtras + "/profiles.nix")
+          else
+            { };
 
-      appsData =
-        if builtins.pathExists (dataPathUserExtras + "/apps.nix")
-        then import (dataPathUserExtras + "/apps.nix")
-        else {};
-    };
+        appsData =
+          if builtins.pathExists (dataPathUserExtras + "/apps.nix") then
+            import (dataPathUserExtras + "/apps.nix")
+          else
+            { };
+      };
 
-    # Import host data
-    hostData =
-      if builtins.pathExists (dataPathHosts + "/hosts.nix")
-      then (import (dataPathHosts + "/hosts.nix")).hosts
-      else {};
+      # Import host data
+      hostData =
+        if builtins.pathExists (dataPathHosts + "/hosts.nix") then
+          (import (dataPathHosts + "/hosts.nix")).hosts
+        else
+          { };
 
-    # Theme selection
-    getThemeConfig = themeName: variant: let
-      themePath = ./home/assets/themes + "/${themeName}.nix";
-      themeConfig =
-        if builtins.pathExists themePath
-        then import themePath {inherit pkgs;}
-        else import ./home/assets/themes/chiaroscuro.nix {inherit pkgs;};
+      # Theme selection
+      getThemeConfig =
+        themeName: variant:
+        let
+          themePath = ./home/assets/themes + "/${themeName}.nix";
+          themeConfig =
+            if builtins.pathExists themePath then
+              import themePath { inherit pkgs; }
+            else
+              import ./home/assets/themes/chiaroscuro.nix { inherit pkgs; };
+        in
+        if variant == "light" && themeConfig.theme ? light then
+          themeConfig.theme.light
+        else
+          themeConfig.theme.dark;
+
+      # User's theme preferences with fallbacks
+      userThemeName = userPreferences.theme.name or "chiaroscuro";
+      userThemeVariant = userPreferences.theme.variant or "dark";
+      selectedTheme = getThemeConfig userThemeName userThemeVariant;
+
+      # TODO: Temporary theme imports
+      # While we have the complete theme module set up
+      targetTheme = import ./home/modules/themes.nix { inherit pkgs inputs; };
+
+      chiaroscuroTheme = inputs.chiaroscuro.themes.kanso-zen;
     in
-      if variant == "light" && themeConfig.theme ? light
-      then themeConfig.theme.light
-      else themeConfig.theme.dark;
+    {
+      # --- Overlays ---
+      overlays = import ./overlays;
 
-    # User's theme preferences with fallbacks
-    userThemeName = userPreferences.theme.name or "chiaroscuro";
-    userThemeVariant = userPreferences.theme.variant or "dark";
-    selectedTheme = getThemeConfig userThemeName userThemeVariant;
+      # --- Formatter ---
+      formatter.${system} = pkgs.nixfmt-rfc-style;
 
-    # TODO: Temporary theme imports
-    # While we have the complete theme module set up
-    targetTheme = import ./home/modules/themes.nix {inherit pkgs inputs;};
+      # --- Nixos ---
+      nixosConfigurations = {
+        # Host Entry
+        host_001 = lib.nixosSystem {
+          inherit system pkgs;
+          modules = [
+            ./hosts/host_001
+            home-manager.nixosModules.home-manager
+            {
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                backupFileExtension = "backup";
 
-    chiaroscuroTheme = inputs.chiaroscuro.themes.kanso-zen;
-  in {
-    # --- Overlays ---
-    overlays = import ./overlays;
+                users.${userData.user_001.username or "user_001"} = import ./users/user_001;
 
-    # --- Formatter ---
-    formatter.${system} = pkgs.nixfmt-rfc-style;
-
-    # --- Nixos ---
-    nixosConfigurations = {
-      # Host Entry
-      host_001 = lib.nixosSystem {
-        inherit system pkgs;
-        modules = [
-          ./hosts/host_001
-          home-manager.nixosModules.home-manager
-          {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              backupFileExtension = "backup";
-
-              users.${userData.user_001.username or "user_001"} = import ./users/user_001;
-
-              extraSpecialArgs = {
-                inherit
-                  pkgs-unstable
-                  inputs
-                  rhodiumLib
-                  userData
-                  ;
-                user = userData.user_001 or {};
-                host = hostData.host_001 or {};
-                theme = selectedTheme;
-                targetTheme = targetTheme; # TODO: This is temporary
-                chiaroscuroTheme = chiaroscuroTheme; # TODO: This is temporary
-                inherit userPreferences userExtras;
-                fishPlugins = rhodium-alloys.fish;
-                yaziPlugins = rhodium-alloys.yazi;
+                extraSpecialArgs = {
+                  inherit
+                    pkgs-unstable
+                    inputs
+                    rhodiumLib
+                    userData
+                    ;
+                  user = userData.user_001 or { };
+                  host = hostData.host_001 or { };
+                  theme = selectedTheme;
+                  targetTheme = targetTheme; # TODO: This is temporary
+                  chiaroscuroTheme = chiaroscuroTheme; # TODO: This is temporary
+                  inherit userPreferences userExtras;
+                  fishPlugins = rhodium-alloys.fish;
+                  yaziPlugins = rhodium-alloys.yazi;
+                };
               };
-            };
-          }
-        ];
-        specialArgs = {
-          inherit pkgs-unstable inputs rhodiumLib;
-          users = userData;
-          host = hostData.host_001 or {};
+            }
+          ];
+          specialArgs = {
+            inherit pkgs-unstable inputs rhodiumLib;
+            users = userData;
+            host = hostData.host_001 or { };
+          };
         };
-      };
 
-      # Host Entry
-      host_002 = lib.nixosSystem {
-        inherit system pkgs;
-        modules = [
-          ./hosts/host_002
-          home-manager.nixosModules.home-manager
-          {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              backupFileExtension = "backup";
+        # Host Entry
+        host_002 = lib.nixosSystem {
+          inherit system pkgs;
+          modules = [
+            ./hosts/host_002
+            home-manager.nixosModules.home-manager
+            {
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                backupFileExtension = "backup";
 
-              users.${userData.user_001.username or "user_001"} = import ./users/user_001;
+                users.${userData.user_001.username or "user_001"} = import ./users/user_001;
 
-              extraSpecialArgs = {
-                inherit
-                  pkgs-unstable
-                  inputs
-                  rhodiumLib
-                  userData
-                  ;
-                user = userData.user_001 or {};
-                host = hostData.host_002 or {};
-                theme = selectedTheme;
-                targetTheme = targetTheme; # TODO: This is temporary
-                inherit userPreferences userExtras;
-                fishPlugins = rhodium-alloys.fish;
-                yaziPlugins = rhodium-alloys.yazi;
+                extraSpecialArgs = {
+                  inherit
+                    pkgs-unstable
+                    inputs
+                    rhodiumLib
+                    userData
+                    ;
+                  user = userData.user_001 or { };
+                  host = hostData.host_002 or { };
+                  theme = selectedTheme;
+                  targetTheme = targetTheme; # TODO: This is temporary
+                  inherit userPreferences userExtras;
+                  fishPlugins = rhodium-alloys.fish;
+                  yaziPlugins = rhodium-alloys.yazi;
+                };
               };
-            };
-          }
-        ];
-        specialArgs = {
-          inherit pkgs-unstable inputs rhodiumLib;
-          users = userData;
-          host = hostData.host_002 or {};
+            }
+          ];
+          specialArgs = {
+            inherit pkgs-unstable inputs rhodiumLib;
+            users = userData;
+            host = hostData.host_002 or { };
+          };
         };
       };
-    };
 
-    # --- Standalone Home Configurations (testing) ---
-    homeConfigurations = {
-      user_001 = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        modules = [./users/user_001];
-        extraSpecialArgs = {
-          inherit
-            pkgs-unstable
-            inputs
-            rhodiumLib
-            userData
-            ;
-          user = userData.user_001 or {};
-          host = {};
-          theme = selectedTheme;
-          targetTheme = targetTheme; # TODO: This is temporary
-          inherit userPreferences userExtras;
-          fishPlugins = rhodium-alloys.fish;
-          yaziPlugins = rhodium-alloys.yazi;
+      # --- Standalone Home Configurations (testing) ---
+      homeConfigurations = {
+        user_001 = home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          modules = [ ./users/user_001 ];
+          extraSpecialArgs = {
+            inherit
+              pkgs-unstable
+              inputs
+              rhodiumLib
+              userData
+              ;
+            user = userData.user_001 or { };
+            host = { };
+            theme = selectedTheme;
+            targetTheme = targetTheme; # TODO: This is temporary
+            inherit userPreferences userExtras;
+            fishPlugins = rhodium-alloys.fish;
+            yaziPlugins = rhodium-alloys.yazi;
+          };
         };
       };
-    };
 
-    # --- Devshells ---
-    devShells.${system} = {
-      # Default
-      default = import ./devshells/nixos.nix {inherit pkgs inputs lib;};
+      # --- Devshells ---
+      devShells.${system} = {
+        # Default
+        default = import ./devshells/nixos.nix { inherit pkgs inputs lib; };
+      };
     };
-  };
 }

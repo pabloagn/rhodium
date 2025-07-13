@@ -2,6 +2,7 @@
 {
   home.packages = with pkgs; [
     # --- Dhall ---
-    dhall-lsp-server
+    dhall # Binary
+    dhall-lsp-server # Server
   ];
 }

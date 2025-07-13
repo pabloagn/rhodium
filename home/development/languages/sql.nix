@@ -2,8 +2,8 @@
 {
   home.packages = with pkgs; [
     # --- Sql ---
-    sqlfluff # Formatter
-    sqlite # Sqweallite
+    sqlfluff # Linter
+    sqlite # SQLite database
     sqls # SQL language server
   ];
 }

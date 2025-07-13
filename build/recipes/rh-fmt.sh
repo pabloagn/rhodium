@@ -16,7 +16,7 @@ source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../common/bootstrap.sh"
 function main() {
     notify "$APP_TITLE" "$RECIPE:\n${NOTIFY_BULLET} Formatting Nix files..."
     count=$(find "${FLAKE_PATH}" -name "*.nix" -type f | wc -l)
-    find "${FLAKE_PATH}" -name "*.nix" -type f -exec nixfmt-rfc-style {} +
+    find "${FLAKE_PATH}" -name "*.nix" -type f -exec nixfmt {} +
     notify "$APP_TITLE" "$RECIPE:\n${NOTIFY_BULLET} Formatted $count files"
 }
 

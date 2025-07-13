@@ -1,6 +1,7 @@
-{ ... }:
+{ pkgs, ... }:
 {
   imports = [
+    # --- Languages, Servers And Formatters ---
     ./bash.nix
     ./clojure.nix
     ./cmake.nix
@@ -9,7 +10,6 @@
     ./crystal.nix
     ./csharp.nix
     ./css.nix
-    ./default.nix
     ./deno.nix
     ./dhall.nix
     ./docker.nix
