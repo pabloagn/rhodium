@@ -21,6 +21,12 @@
         numpy # Numerical computing
         pandas # Data manipulation
         wcwidth # Terminal width calculations
+
+        # Doom Emacs Reqs
+        black
+        pyflakes
+        pipenv
+        pytest
       ]))
   ];
 }

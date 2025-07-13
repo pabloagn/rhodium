@@ -16,14 +16,17 @@
     cmake-format
 
     # --- Clojure ---
-    clojure-lsp
+    clojure-lsp # Server
     cljfmt # Formatter
+    clj-kondo # Linter
 
     # --- Common Lisp ---
     sbcl # Common Lisp compiler (Steel Bank Common Lisp)
 
     # --- Crystal ---
-    crystalline
+    crystal
+    icr
+    # crystalline
 
     # --- Css/html/json ---
     vscode-langservers-extracted # NOTE: Includes html, css, json, eslint
@@ -49,6 +52,7 @@
     # --- Elixir/erlang ---
     elixir-ls
     erlang-ls
+    erlfmt
 
     # --- Elm ---
     elmPackages.elm-format
@@ -81,6 +85,9 @@
     goimports-reviser
     gopls
     gofumpt
+    gomodifytags
+    gotests
+    gore
 
     # --- Graphql (as Nodepackage) ---
     nodePackages.graphql-language-service-cli
@@ -88,6 +95,8 @@
     # --- Haskell ---
     haskell-language-server
     haskellPackages.fourmolu # or haskellPackages.ormolu
+    haskellPackages.cabal-install
+    haskellPackages.hoogle
 
     # --- Java ---
     google-java-format
@@ -131,6 +140,10 @@
     # --- Ocaml ---
     ocamlPackages.ocaml-lsp
     ocamlPackages.ocamlformat
+    ocamlPackages.dune_3
+    ocamlPackages.utop
+    ocamlPackages.ocp-indent
+    ocamlPackages.merlin
 
     # --- Perl ---
     perlnavigator
@@ -148,6 +161,7 @@
     isort # Python import sorter
     pyright # Type checker
     ruff # Fast Python formatter/linter
+    poetry
 
     # --- R ---
     rPackages.styler
@@ -195,6 +209,7 @@
     yaml-language-server
 
     # --- Zig ---
+    zig # Language
     zls # Zig Language Server
   ];
 }

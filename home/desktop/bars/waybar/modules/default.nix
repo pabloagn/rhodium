@@ -111,7 +111,7 @@
       "disk"
       "custom/separator"
       "backlight"
-      "wireplumber-sink"
+      "wireplumber#sink"
       "custom/separator"
       "niri/language"
       "keyboard-state#capslock"
