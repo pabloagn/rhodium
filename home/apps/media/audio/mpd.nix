@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   services.mpd = {
     enable = true;
   };

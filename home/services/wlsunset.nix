@@ -4,9 +4,11 @@
   pkgs,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.userExtraServices.rh-wlsunset;
-in {
+in
+{
   options.userExtraServices.rh-wlsunset = {
     enable = mkEnableOption "Gamma correction for wayland supporting wlr-gamma-control-unstable-v1";
   };
@@ -15,8 +17,8 @@ in {
     systemd.user.services.rh-wlsunset = {
       Unit = {
         Description = "Gamma correction for wayland supporting wlr-gamma-control-unstable-v1";
-        PartOf = ["graphical-session.target"];
-        After = ["graphical-session-pre.target"];
+        PartOf = [ "graphical-session.target" ];
+        After = [ "graphical-session-pre.target" ];
         ConditionEnvironment = "WAYLAND_DISPLAY";
       };
 
@@ -28,7 +30,7 @@ in {
       };
 
       Install = {
-        WantedBy = ["graphical-session.target"];
+        WantedBy = [ "graphical-session.target" ];
       };
     };
   };

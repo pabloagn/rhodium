@@ -4,7 +4,8 @@
   pkgs,
   ...
 }:
-with lib; {
+with lib;
+{
   options = {
     programs.development.opsec = {
       enable = mkEnableOption "OpSec Suite";

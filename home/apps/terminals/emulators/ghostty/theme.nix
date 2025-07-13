@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   programs.ghostty = {
     themes = {
       chiaroscuro = {

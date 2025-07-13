@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   imports = [
     # ./auth.nix
     ./ssh.nix

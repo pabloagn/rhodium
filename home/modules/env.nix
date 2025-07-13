@@ -2,7 +2,8 @@
   config,
   userPreferences,
   ...
-}: let
+}:
+let
   homeDir = config.home.homeDirectory;
 
   dirs = {
@@ -43,7 +44,8 @@
     userBinRofi = "${xdgDirs.binHome}/rofi";
     userBinUtils = "${xdgDirs.binHome}/utils";
   };
-in {
+in
+{
   home.sessionVariables = {
     # App Preferences
     BROWSER = userPreferences.apps.browser;

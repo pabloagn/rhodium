@@ -4,10 +4,12 @@
   pkgs,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.userExtraServices.rh-swaybg;
   targetDir = "/var/tmp/current-wallpaper";
-in {
+in
+{
   options.userExtraServices.rh-swaybg = {
     enable = mkEnableOption "Wallpaper tool for Wayland compositors";
   };
@@ -16,8 +18,8 @@ in {
     systemd.user.services.rh-swaybg = {
       Unit = {
         Description = "Wallpaper daemon for Wayland";
-        PartOf = ["graphical-session.target"];
-        After = ["graphical-session-pre.target"];
+        PartOf = [ "graphical-session.target" ];
+        After = [ "graphical-session-pre.target" ];
       };
 
       Service = {
@@ -28,7 +30,7 @@ in {
       };
 
       Install = {
-        WantedBy = ["graphical-session.target"];
+        WantedBy = [ "graphical-session.target" ];
       };
     };
   };

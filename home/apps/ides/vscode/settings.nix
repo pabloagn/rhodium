@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   programs.vscode = {
     profiles = {
       default = {
@@ -74,14 +75,18 @@
           "editor.guides.bracketPairs" = "active";
           "editor.guides.bracketPairsHorizontal" = true;
           "editor.bracketPairColorization.independentColorPoolPerBracketType" = true;
-          "editor.rulers" = [80 120];
+          "editor.rulers" = [
+            80
+            120
+          ];
           "editor.linkedEditing" = true;
           "editor.suggest.insertMode" = "replace";
           "editor.inlineSuggest.enabled" = true;
           "editor.codeLens" = true;
           "editor.unicodeHighlight.ambiguousCharacters" = false;
           "editor.unicodeHighlight.invisibleCharacters" = true;
-          "editor.fontFamily" = "'BerkeleyMonoRh Nerd Font', 'JetBrainsMono Nerd Font', 'JetBrains Mono', 'FiraCode Nerd Font', 'Fira Code', Menlo, Monaco, 'Courier New', monospace";
+          "editor.fontFamily" =
+            "'BerkeleyMonoRh Nerd Font', 'JetBrainsMono Nerd Font', 'JetBrains Mono', 'FiraCode Nerd Font', 'Fira Code', Menlo, Monaco, 'Courier New', monospace";
           "editor.fontLigatures" = true;
           "editor.fontSize" = 14;
           "editor.lineHeight" = 1.6;
@@ -269,7 +274,7 @@
           "ruff.importStrategy" = "fromEnvironment";
           "python.testing.pytestEnabled" = true;
           "python.testing.unittestEnabled" = false;
-          "python.testing.pytestArgs" = ["tests"];
+          "python.testing.pytestArgs" = [ "tests" ];
           "python.analysis.diagnosticMode" = "openFilesOnly";
           "python.analysis.diagnosticSeverityOverrides" = {
             "reportMissingImports" = "none";
@@ -281,13 +286,13 @@
           "nix.serverSettings" = {
             "nil" = {
               "formatting" = {
-                "command" = ["nixpkgs-fmt"];
+                "command" = [ "nixpkgs-fmt" ];
               };
             };
           };
 
-          "Lua.diagnostics.globals" = ["vim"];
-          "Lua.workspace.library" = ["\${3rd}/love2d/library"];
+          "Lua.diagnostics.globals" = [ "vim" ];
+          "Lua.workspace.library" = [ "\${3rd}/love2d/library" ];
           "Lua.workspace.checkThirdParty" = false;
 
           # --- Spell Checker ---

@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   programs.nushell.extraConfig = ''
     # Define custom theme
     def chiaroscuro [] {

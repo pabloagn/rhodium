@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   programs.wezterm = {
     enable = false;
   };

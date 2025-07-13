@@ -1,7 +1,9 @@
-{config, ...}: let
-  aliases = import ./common/aliases.nix {};
-  functions = import ./common/functions.nix {};
-in {
+{ config, ... }:
+let
+  aliases = import ./common/aliases.nix { };
+  functions = import ./common/functions.nix { };
+in
+{
   programs.zsh = {
     enable = true;
     autosuggestion = {

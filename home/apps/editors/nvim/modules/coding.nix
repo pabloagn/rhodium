@@ -1,7 +1,8 @@
 {
   pkgs,
   sourceLuaFile,
-}: {
+}:
+{
   programs.neovim = {
     plugins = with pkgs.vimPlugins; [
       # Completion
@@ -96,9 +97,8 @@
       # Support for Kmonad
       {
         plugin = kmonad-vim;
-      # config = sourceLuaFile "kmonad-nvim.lua";
+        # config = sourceLuaFile "kmonad-nvim.lua";
       }
-
 
       # Snippets
       friendly-snippets # Lua snippets

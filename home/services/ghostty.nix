@@ -4,9 +4,11 @@
   pkgs,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.userExtraServices.rh-ghostty-daemon;
-in {
+in
+{
   options.userExtraServices.rh-ghostty-daemon = {
     enable = mkEnableOption "Ghostty terminal emulator daemon for instant startup";
   };
@@ -14,8 +16,8 @@ in {
     systemd.user.services.rh-ghostty-daemon = {
       Unit = {
         Description = "Ghostty terminal daemon";
-        PartOf = ["graphical-session.target"];
-        After = ["graphical-session-pre.target"];
+        PartOf = [ "graphical-session.target" ];
+        After = [ "graphical-session-pre.target" ];
       };
       Service = {
         Type = "exec";
@@ -27,7 +29,7 @@ in {
         ];
       };
       Install = {
-        WantedBy = ["graphical-session.target"];
+        WantedBy = [ "graphical-session.target" ];
       };
     };
   };

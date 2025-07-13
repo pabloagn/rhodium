@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   programs.btop.themes = {
     chiaroscuro = ''
       # Main background, empty for terminal default, need to be empty if you want transparent background

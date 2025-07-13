@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   programs.fish = {
     interactiveShellInit = ''
       # --- Atuin ---

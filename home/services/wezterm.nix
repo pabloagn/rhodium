@@ -4,9 +4,11 @@
   pkgs,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.userExtraServices.rh-wezterm-daemon;
-in {
+in
+{
   options.userExtraServices.rh-wezterm-daemon = {
     enable = mkEnableOption "WezTerm terminal daemon for instant startup";
   };
@@ -14,8 +16,8 @@ in {
     systemd.user.services.rh-wezterm-daemon = {
       Unit = {
         Description = "WezTerm terminal daemon";
-        PartOf = ["graphical-session.target"];
-        After = ["graphical-session-pre.target"];
+        PartOf = [ "graphical-session.target" ];
+        After = [ "graphical-session-pre.target" ];
       };
       Service = {
         Type = "exec";
@@ -28,7 +30,7 @@ in {
         ];
       };
       Install = {
-        WantedBy = ["graphical-session.target"];
+        WantedBy = [ "graphical-session.target" ];
       };
     };
     # Alias for opening new windows

@@ -2,7 +2,8 @@
   pkgs,
   sourceLuaFile,
   inputs,
-}: {
+}:
+{
   programs.neovim = {
     plugins = with pkgs.vimPlugins; [
       # Color Utilities

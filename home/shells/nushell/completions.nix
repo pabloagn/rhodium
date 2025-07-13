@@ -2,7 +2,8 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+{
   programs.nushell.extraConfig = ''
     # External completer for getting completions from external sources
     let carapace_completer = {|spans|

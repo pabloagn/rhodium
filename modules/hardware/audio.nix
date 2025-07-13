@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   environment.systemPackages = with pkgs; [
     pamixer # Pulseaudio command line mixer
     pavucontrol # GUI audio control

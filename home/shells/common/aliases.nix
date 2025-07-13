@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   # --- Archive Management ---
   untar = "tar -xvf";
   untargz = "tar -xzvf";

@@ -1,12 +1,17 @@
-{...}: {
+{ ... }:
+{
   mgr = {
     cwd = {
       fg = "#a9b1d6";
       italic = true;
     };
     # Hovered
-    hovered = {bg = "#292e42";};
-    preview_hovered = {bg = "#292e42";};
+    hovered = {
+      bg = "#292e42";
+    };
+    preview_hovered = {
+      bg = "#292e42";
+    };
     # Find
     find_keyword = {
       fg = "#16161e";
@@ -60,7 +65,9 @@
     };
     # Border
     border_symbol = "│";
-    border_style = {fg = "#7f849c";};
+    border_style = {
+      fg = "#7f849c";
+    };
     # Highlighting
     syntect_theme = "~/.config/yazi/tokyonight-night.tmTheme";
   };
@@ -104,44 +111,74 @@
       fg = "#a9b1d6";
       bold = true;
     };
-    progress_normal = {fg = "#1a1b26";};
-    progress_error = {fg = "#f7768e";};
+    progress_normal = {
+      fg = "#1a1b26";
+    };
+    progress_error = {
+      fg = "#f7768e";
+    };
     # Permissions
-    perm_type = {fg = "#7aa2f7";};
-    perm_read = {fg = "#e0af68";};
-    perm_write = {fg = "#f7768e";};
-    perm_exec = {fg = "#9ece6a";};
-    perm_sep = {fg = "#414868";};
+    perm_type = {
+      fg = "#7aa2f7";
+    };
+    perm_read = {
+      fg = "#e0af68";
+    };
+    perm_write = {
+      fg = "#f7768e";
+    };
+    perm_exec = {
+      fg = "#9ece6a";
+    };
+    perm_sep = {
+      fg = "#414868";
+    };
   };
 
   pick = {
     # border = { fg = "#7f849c"; };
-    border = {fg = "#27a1b9";};
+    border = {
+      fg = "#27a1b9";
+    };
     active = {
       fg = "#c0caf5";
       bg = "#283457";
     };
-    inactive = {fg = "#c0caf5";};
+    inactive = {
+      fg = "#c0caf5";
+    };
   };
 
   # Input
   input = {
     # border = { fg = "#7f849c"; };
-    border = {fg = "#0db9d7";};
-    title = {fg = "#0db9d7";};
-    value = {fg = "#9d7cd8";};
-    selected = {bg = "#283457";};
+    border = {
+      fg = "#0db9d7";
+    };
+    title = {
+      fg = "#0db9d7";
+    };
+    value = {
+      fg = "#9d7cd8";
+    };
+    selected = {
+      bg = "#283457";
+    };
   };
 
   # Completion
   completion = {
     # border = { fg = "#7f849c"; };
-    border = {fg = "#0db9d7";};
+    border = {
+      fg = "#0db9d7";
+    };
     active = {
       fg = "#c0caf5";
       bg = "#283457";
     };
-    inactive = {fg = "#c0caf5";};
+    inactive = {
+      fg = "#c0caf5";
+    };
     icon_file = "";
     icon_folder = "";
     icon_command = "";
@@ -150,8 +187,12 @@
   # Tasks
   tasks = {
     # border = { fg = "#7f849c"; };
-    border = {fg = "#27a1b9";};
-    title = {fg = "#27a1b9";};
+    border = {
+      fg = "#27a1b9";
+    };
+    title = {
+      fg = "#27a1b9";
+    };
     hovered = {
       fg = "#c0caf5";
       bg = "#283457";
@@ -161,36 +202,65 @@
   # Which
   which = {
     cols = 3;
-    mask = {bg = "#16161e";};
-    cand = {fg = "#7dcfff";};
-    rest = {fg = "#7aa2f7";};
-    desc = {fg = "#bb9af7";};
+    mask = {
+      bg = "#16161e";
+    };
+    cand = {
+      fg = "#7dcfff";
+    };
+    rest = {
+      fg = "#7aa2f7";
+    };
+    desc = {
+      fg = "#bb9af7";
+    };
     separator = " ➜ ";
-    separator_style = {fg = "#565f89";};
+    separator_style = {
+      fg = "#565f89";
+    };
   };
 
   # Confirm
   confirm = {
-    border = {fg = "#0db9d7";};
-    title = {fg = "#27a1b9";};
-    content = {};
-    list = {};
-    btn_yes = {bg = "#283457";};
-    btn_no = {};
-    btn_labels = ["  [Y]es  " "  (N)o  "];
+    border = {
+      fg = "#0db9d7";
+    };
+    title = {
+      fg = "#27a1b9";
+    };
+    content = { };
+    list = { };
+    btn_yes = {
+      bg = "#283457";
+    };
+    btn_no = { };
+    btn_labels = [
+      "  [Y]es  "
+      "  (N)o  "
+    ];
   };
 
   # Spot
   spot = {
-    border = {fg = "#27a1b9";};
-    title = {fg = "#27a1b9";};
+    border = {
+      fg = "#27a1b9";
+    };
+    title = {
+      fg = "#27a1b9";
+    };
   };
 
   # Notify
   notify = {
-    title_info = {fg = "#0db9d7";};
-    title_warn = {fg = "#e0af68";};
-    title_error = {fg = "#db4b4b";};
+    title_info = {
+      fg = "#0db9d7";
+    };
+    title_warn = {
+      fg = "#e0af68";
+    };
+    title_error = {
+      fg = "#db4b4b";
+    };
     icon_error = "";
     icon_warn = "";
     icon_info = "";
@@ -198,9 +268,15 @@
 
   # Help
   help = {
-    on = {fg = "#9ece6a";};
-    run = {fg = "#bb9af7";};
-    hovered = {bg = "#292e42";};
+    on = {
+      fg = "#9ece6a";
+    };
+    run = {
+      fg = "#bb9af7";
+    };
+    hovered = {
+      bg = "#292e42";
+    };
     footer = {
       fg = "#c0caf5";
       bg = "#1a1b26";

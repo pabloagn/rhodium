@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   imports = [
     ./functions.nix
     ./shell-init.nix

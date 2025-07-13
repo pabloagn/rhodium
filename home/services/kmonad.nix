@@ -4,15 +4,16 @@
   pkgs,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.userExtraServices.rh-kmonad;
 
   # helper kept OUTSIDE `config`
   makeKmonadService = configFile: {
     Unit = {
       Description = "K-Monad";
-      PartOf = ["graphical-session.target"];
-      Wants = ["dbus-org.freedesktop.Notifications.service"];
+      PartOf = [ "graphical-session.target" ];
+      Wants = [ "dbus-org.freedesktop.Notifications.service" ];
       After = [
         "graphical-session-pre.target"
         "dbus-org.freedesktop.Notifications.service"
@@ -28,9 +29,12 @@ with lib; let
       RestartSec = 1;
       Nice = "-5";
     };
-    Install = {WantedBy = ["graphical-session.target"];};
+    Install = {
+      WantedBy = [ "graphical-session.target" ];
+    };
   };
-in {
+in
+{
   options.userExtraServices.rh-kmonad = {
     enable = mkEnableOption "Keyboard remapping with K-Monad";
 
@@ -48,18 +52,16 @@ in {
 
     extraArgs = mkOption {
       type = types.listOf types.str;
-      default = [];
+      default = [ ];
       description = "Additional CLI arguments passed to kmonad.";
     };
   };
 
   config = mkIf cfg.enable {
-    home.packages = [pkgs.kmonad];
+    home.packages = [ pkgs.kmonad ];
 
-    systemd.user.services.rh-kmonad-keychron =
-      makeKmonadService cfg.configFile;
+    systemd.user.services.rh-kmonad-keychron = makeKmonadService cfg.configFile;
 
-    systemd.user.services.rh-kmonad-justine =
-      makeKmonadService cfg.internalConfigFile;
+    systemd.user.services.rh-kmonad-justine = makeKmonadService cfg.internalConfigFile;
   };
 }

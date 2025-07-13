@@ -1,7 +1,8 @@
 {
   pkgs,
   inputs,
-}: {
+}:
+{
   tokyonight_night = {
     src = pkgs.fetchFromGitHub {
       owner = "folke";

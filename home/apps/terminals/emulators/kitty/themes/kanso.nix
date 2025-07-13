@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   programs.kitty = {
     settings = {
       background_opacity = 1.0; # NOTE: This goes on top of the compositor's transparency

@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   programs.zed-editor = {
     userSettings = {
       languages = {
@@ -15,10 +16,10 @@
         };
 
         Nix = {
-          language_servers = ["nil"];
+          language_servers = [ "nil" ];
           formatter.external = {
             command = "nixpkgs-fmt";
-            arguments = [];
+            arguments = [ ];
           };
           format_on_save = "on";
         };
@@ -26,7 +27,7 @@
 
       lsp.nil = {
         binary.path = "nil";
-        binary.arguments = [];
+        binary.arguments = [ ];
       };
     };
   };

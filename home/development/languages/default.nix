@@ -1,7 +1,59 @@
-{...}: {
+{ ... }:
+{
   imports = [
-    ./languages.nix
-    ./packages.nix
-    ./servers.nix
+    ./bash.nix
+    ./clojure.nix
+    ./cmake.nix
+    ./commonlisp.nix
+    ./cpp.nix
+    ./crystal.nix
+    ./csharp.nix
+    ./css.nix
+    ./default.nix
+    ./deno.nix
+    ./dhall.nix
+    ./docker.nix
+    ./elixir.nix
+    ./elm.nix
+    ./emmet.nix
+    ./faust.nix
+    ./fennel.nix
+    ./fish.nix
+    ./fortran.nix
+    ./fsharp.nix
+    ./general.nix
+    ./glsl.nix
+    ./go.nix
+    ./graphql.nix
+    ./haskell.nix
+    ./java.nix
+    ./javascript.nix
+    ./just.nix
+    ./kdl.nix
+    ./kotlin.nix
+    ./latex.nix
+    ./lua.nix
+    ./markdown.nix
+    ./nix.nix
+    ./ocaml.nix
+    ./perl.nix
+    ./php.nix
+    ./prisma.nix
+    ./protobuf.nix
+    ./python.nix
+    ./r.nix
+    ./rust.nix
+    ./scala.nix
+    ./sql.nix
+    ./svelte.nix
+    ./swift.nix
+    ./tailwind.nix
+    ./terraform.nix
+    ./toml.nix
+    ./typst.nix
+    ./vue.nix
+    ./xml.nix
+    ./yaml.nix
+    ./zig.nix
   ];
 }

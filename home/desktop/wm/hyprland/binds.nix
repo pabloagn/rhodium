@@ -2,10 +2,12 @@
   host,
   userPreferences,
   ...
-}: let
+}:
+let
   preferredApps = userPreferences.apps;
   preferredBehaviour = userPreferences.behaviour;
-in {
+in
+{
   wayland.windowManager.hyprland.settings = {
     bind = [
       # Core

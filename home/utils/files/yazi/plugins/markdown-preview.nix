@@ -1,4 +1,5 @@
-{pkgs}: let
+{ pkgs }:
+let
   script = pkgs.writeShellScript "yazi-markdown-preview" ''
     #!${pkgs.runtimeShell}
     if ! command -v pandoc >/dev/null 2>&1; then
@@ -14,7 +15,8 @@
     (${pkgs.pandoc}/bin/pandoc -f markdown -t html --standalone "$FILE_PATH" 2>&1 | ${pkgs.w3m}/bin/w3m -T text/html -dump -cols "$WIDTH")
     exit $?
   '';
-in {
+in
+{
   source = script;
   executable = true;
 }

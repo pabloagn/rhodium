@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   programs.zed-editor = {
     userKeymaps = [
       {
@@ -28,7 +29,10 @@
           "ctrl-shift-enter" = "repl::Run"; # Run current cell/selection
           "shift-enter" = "repl::Run"; # Alternative binding like Jupyter
           "ctrl-shift-c" = "repl::ClearOutputs"; # Clear outputs
-          "alt-enter" = ["repl::Run" "editor::MoveDown"]; # Run and move to next line
+          "alt-enter" = [
+            "repl::Run"
+            "editor::MoveDown"
+          ]; # Run and move to next line
         };
       }
     ];

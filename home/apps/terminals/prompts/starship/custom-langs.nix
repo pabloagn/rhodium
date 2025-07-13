@@ -2,9 +2,11 @@
   config,
   rhodiumLib,
   ...
-}: let
+}:
+let
   viaIcon = "◆";
-in {
+in
+{
   programs.starship.settings = {
     custom = {
       clojure = {

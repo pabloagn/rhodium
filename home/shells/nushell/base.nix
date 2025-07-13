@@ -2,8 +2,9 @@
   config,
   lib,
   ...
-  # TODO: Fix all of this
-}: {
+# TODO: Fix all of this
+}:
+{
   programs.nushell = {
     # Set the default editor
     settings = {

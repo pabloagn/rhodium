@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   programs.thunar = {
     enable = true;
   };

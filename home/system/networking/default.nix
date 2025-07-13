@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   imports = [
     # ./pihole.nix
     # ./tailscale.nix
@@ -8,4 +9,3 @@
     ./vpn.nix
   ];
 }
-

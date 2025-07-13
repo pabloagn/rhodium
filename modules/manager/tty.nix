@@ -3,13 +3,15 @@
   lib,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.manager.tty;
-in {
+in
+{
   options.manager.tty = {
     enable = mkEnableOption "TTY-based login with X server";
   };
-  
+
   config = mkIf cfg.enable {
     services.xserver = {
       enable = true;

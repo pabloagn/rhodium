@@ -8,7 +8,8 @@
   userPreferences,
   host,
   ...
-}: {
+}:
+{
   imports = [
     # Themes
     ../../home/assets/themes
@@ -30,7 +31,12 @@
 
   # Pass args to all modules
   _module.args = {
-    inherit userExtras userPreferences rhodiumLib host;
+    inherit
+      userExtras
+      userPreferences
+      rhodiumLib
+      host
+      ;
   };
 
   # Theme configuration

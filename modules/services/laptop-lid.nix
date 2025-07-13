@@ -3,9 +3,11 @@
   lib,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.extraServices.laptopLid;
-in {
+in
+{
   options.extraServices.laptopLid = {
     enable = mkEnableOption "Custom laptop lid handling";
 

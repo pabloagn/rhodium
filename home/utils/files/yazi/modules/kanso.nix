@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   icon = {
     # --- Entire Filenames ---
     prepend_files = [
@@ -105,7 +106,7 @@
         text = "";
         fg = "#88A1AC";
       }
-    ]; #
+    ];
     prepend_exts = [
       {
         name = "yuck";
@@ -409,16 +410,24 @@
       fg = "#B98D7B";
       bg = "#B98D7B";
     };
-    cwd = {fg = "#E6C384";};
-    hovered = {reversed = true;};
-    preview_hovered = {reversed = true;};
+    cwd = {
+      fg = "#E6C384";
+    };
+    hovered = {
+      reversed = true;
+    };
+    preview_hovered = {
+      reversed = true;
+    };
     find_keyword = {
       fg = "#B98D7B";
       bg = "#090E13";
     };
-    find_position = {};
-    tab_active = {reversed = true;};
-    tab_inactive = {};
+    find_position = { };
+    tab_active = {
+      reversed = true;
+    };
+    tab_inactive = { };
     tab_width = 1;
     count_copied = {
       fg = "#090E13";
@@ -433,7 +442,9 @@
       bg = "#E6C384";
     };
     border_symbol = "│";
-    border_style = {fg = "#C5C9C7";};
+    border_style = {
+      fg = "#C5C9C7";
+    };
   };
 
   mode = {
@@ -489,55 +500,93 @@
       fg = "#090E13";
       bg = "#090E13";
     };
-    perm_type = {fg = "#87A987";};
-    perm_read = {fg = "#E6C384";};
-    perm_write = {fg = "#E46876";};
-    perm_exec = {fg = "#7AA89F";};
-    perm_sep = {fg = "#938AA9";};
+    perm_type = {
+      fg = "#87A987";
+    };
+    perm_read = {
+      fg = "#E6C384";
+    };
+    perm_write = {
+      fg = "#E46876";
+    };
+    perm_exec = {
+      fg = "#7AA89F";
+    };
+    perm_sep = {
+      fg = "#938AA9";
+    };
   };
 
   pick = {
-    border = {fg = "#7fb4ca";};
+    border = {
+      fg = "#7fb4ca";
+    };
     active = {
       fg = "#938AA9";
       bold = true;
     };
-    inactive = {};
+    inactive = { };
   };
 
   input = {
-    border = {fg = "#7fb4ca";};
-    title = {};
-    value = {};
-    selected = {reversed = true;};
+    border = {
+      fg = "#7fb4ca";
+    };
+    title = { };
+    value = { };
+    selected = {
+      reversed = true;
+    };
   };
 
   completion = {
-    border = {fg = "#7fb4ca";};
-    active = {reversed = true;};
-    inactive = {};
+    border = {
+      fg = "#7fb4ca";
+    };
+    active = {
+      reversed = true;
+    };
+    inactive = { };
   };
 
   tasks = {
-    border = {fg = "#7fb4ca";};
-    title = {};
-    hovered = {fg = "#938AA9";};
+    border = {
+      fg = "#7fb4ca";
+    };
+    title = { };
+    hovered = {
+      fg = "#938AA9";
+    };
   };
 
   which = {
     cols = 2;
     separator = " - ";
-    separator_style = {fg = "#A4A7A4";};
-    mask = {bg = "#090e13";};
-    rest = {fg = "#A4A7A4";};
-    cand = {fg = "#8EA4A2";};
-    desc = {fg = "#C5C9C7";};
+    separator_style = {
+      fg = "#A4A7A4";
+    };
+    mask = {
+      bg = "#090e13";
+    };
+    rest = {
+      fg = "#A4A7A4";
+    };
+    cand = {
+      fg = "#8EA4A2";
+    };
+    desc = {
+      fg = "#C5C9C7";
+    };
   };
 
   help = {
-    on = {fg = "#7AA89F";};
-    run = {fg = "#938AA9";};
-    desc = {};
+    on = {
+      fg = "#7AA89F";
+    };
+    run = {
+      fg = "#938AA9";
+    };
+    desc = { };
     hovered = {
       reversed = true;
       bold = true;
@@ -549,9 +598,15 @@
   };
 
   notify = {
-    title_info = {fg = "#87A987";};
-    title_warn = {fg = "#E6C384";};
-    title_error = {fg = "#E46876";};
+    title_info = {
+      fg = "#87A987";
+    };
+    title_warn = {
+      fg = "#E6C384";
+    };
+    title_error = {
+      fg = "#E46876";
+    };
   };
 
   filetype = {

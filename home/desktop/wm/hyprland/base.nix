@@ -2,10 +2,12 @@
   pkgs,
   userPreferences,
   ...
-}: let
+}:
+let
   keyboardRepeat = userPreferences.behaviour.keyboardRepeat;
   keyboardDelay = userPreferences.behaviour.keyboardDelay;
-in {
+in
+{
   home.packages = with pkgs; [
     hyprpolkitagent
     hyprland-qtutils
@@ -17,7 +19,7 @@ in {
     systemd = {
       enable = true;
       enableXdgAutostart = true;
-      variables = ["--all"];
+      variables = [ "--all" ];
     };
 
     xwayland = {

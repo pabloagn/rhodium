@@ -4,7 +4,12 @@
       node-type = "Audio/Source";
       format = "◌ {volume}% {icon}";
       format-muted = "◌ {volume}% [⌽]";
-      format-icons = ["[-]" "[=]" "[≡]" "[≣]"];
+      format-icons = [
+        "[-]"
+        "[=]"
+        "[≡]"
+        "[≣]"
+      ];
       on-click = "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle";
       on-click-right = "helvum";
       scroll-step = 1;

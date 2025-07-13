@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   environment.systemPackages = with pkgs; [
     blueman # GUI bluetooth manager
     bluez # Official linux protocol bluetooth stack
@@ -14,4 +15,3 @@
     blueman.enable = true;
   };
 }
-

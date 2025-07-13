@@ -1,4 +1,5 @@
-{...}: let
+{ ... }:
+let
   c = {
     # Normal
     color0 = "#0d0c0c";
@@ -29,13 +30,15 @@
   i = {
     icon01 = "◆";
   };
-in let
+in
+let
   viaColor = c.color18;
   colors = c;
-in {
+in
+{
   programs.starship.settings = {
     custom.rhodium = {
-      disabled=true;
+      disabled = true;
       command = "echo 'Rh'";
       when = "true";
       format = "[$output]($style) ${i.icon01} ";

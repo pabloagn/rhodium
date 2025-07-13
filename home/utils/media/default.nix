@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   home.packages = with pkgs; [
     # Image manipulation and viewing
     imagemagick # Image manipulation toolkit

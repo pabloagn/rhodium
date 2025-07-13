@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   imports = [
     # ./krusader.nix # The heavy-duty option
     # ./pcmanfm.nix # The efficient option

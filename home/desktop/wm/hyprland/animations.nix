@@ -1,4 +1,5 @@
-{...}: let
+{ ... }:
+let
   animationPresets = {
     # Slow
     slow = {
@@ -47,7 +48,8 @@
   };
 
   currentPreset = animationPresets.fast;
-in {
+in
+{
   wayland.windowManager.hyprland.settings = {
     animations = {
       enabled = true;

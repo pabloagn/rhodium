@@ -1,85 +1,128 @@
-{...}: {
+{ ... }:
+{
   mgr.prepend_keymap = [
     # GoToS
     {
-      on = ["g" "r"];
+      on = [
+        "g"
+        "r"
+      ];
       run = "cd $RHODIUM";
       desc = "Go to rhodium";
     }
     {
-      on = ["g" "h"];
+      on = [
+        "g"
+        "h"
+      ];
       run = "cd $HOME";
       desc = "Go to user home";
     }
     {
-      on = ["g" "H"];
+      on = [
+        "g"
+        "H"
+      ];
       run = "cd $XDG_CACHE_HOME";
       desc = "Go to .cache";
     }
     {
-      on = ["g" "b"];
+      on = [
+        "g"
+        "b"
+      ];
       run = "cd $XDG_BIN_HOME";
       desc = "Go to ./local/bin";
     }
     {
-      on = ["g" "e"];
+      on = [
+        "g"
+        "e"
+      ];
       run = "cd $DOTCONFIG_DOOM";
       desc = "Go to ./config/doom";
     }
     {
-      on = ["g" "u"];
+      on = [
+        "g"
+        "u"
+      ];
       run = "cd $DEV_UTILS";
       desc = "Go to dev/utils";
     }
     {
-      on = ["g" "p"];
+      on = [
+        "g"
+        "p"
+      ];
       run = ''shell -- ya emit cd "$(git rev-parse --show-toplevel)"'';
       desc = "Go to Project Root";
     }
     {
-      on = ["g" "A"];
+      on = [
+        "g"
+        "A"
+      ];
       run = "cd $HOME/.local/share/applications/";
       desc = "Go to .local/share/applications";
     }
     {
-      on = ["g" "a"];
+      on = [
+        "g"
+        "a"
+      ];
       run = "cd $HOME_ACADEMIC";
       desc = "Go to academic";
     }
     {
-      on = ["g" "d"];
+      on = [
+        "g"
+        "d"
+      ];
       run = "cd $HOME_DOWNLOADS";
       desc = "Go to downloads";
     }
     {
-      on = ["g" "s"];
+      on = [
+        "g"
+        "s"
+      ];
       run = "cd $HOME_SOLENOIDLABS";
       desc = "Go to solenoid-labs";
     }
     # Smarts
     {
-      on = ["F"];
+      on = [ "F" ];
       run = "plugin smart-filter";
       desc = "Smart Filter";
     }
     {
-      on = ["l"];
+      on = [ "l" ];
       run = "plugin smart-enter";
       desc = "Smart Enter";
     }
     # Renames
     {
-      on = ["r" "r"];
+      on = [
+        "r"
+        "r"
+      ];
       run = "rename --cursor=before_ext";
       desc = "Rename selected file(s)";
     }
     {
-      on = ["r" "a"];
+      on = [
+        "r"
+        "a"
+      ];
       run = "rename --empty=all --cursor=start";
       desc = "Rename clear selected file(s)";
     }
     {
-      on = ["r" "c"];
+      on = [
+        "r"
+        "c"
+      ];
       run = "rename --empty=stem --cursor=start";
       desc = "Rename change selected file(s)";
     }

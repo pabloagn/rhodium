@@ -1,4 +1,4 @@
-{pkgs, ...}:
+{ pkgs, ... }:
 # TODO: Dynamic
 {
   environment.systemPackages = with pkgs; [

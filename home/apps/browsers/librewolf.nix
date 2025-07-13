@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   programs.librewolf = {
     enable = false;
   };

@@ -1,6 +1,8 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   imports = [
     ./ncspot.nix
+    # ./puredata.nix
   ];
 
   home.packages = with pkgs; [
@@ -12,7 +14,12 @@
     playerctl
     spotify
     # spotify-player # Terminal spotify player that has feature parity with the official client
-    tidal-dl
+    tidal-dl # Downloader for tidal media
     tidal-hifi # Tidal GUI running on Electron
+
+    # --- Music Production ---
+    # vcv-rack
+    # supercollider
+    # csound
   ];
 }

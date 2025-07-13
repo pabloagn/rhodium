@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   imports = [
     ./gdm.nix
     # ./getty.nix

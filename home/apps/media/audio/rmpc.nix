@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   # TODO: Implement this
   programs.rmpc = {
     enable = true;

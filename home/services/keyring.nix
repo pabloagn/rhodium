@@ -4,9 +4,11 @@
   pkgs,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.userExtraServices.rh-system-keyring;
-in {
+in
+{
   options.userExtraServices.rh-system-keyring = {
     enable = mkEnableOption "System keyring for GUI applications";
   };
@@ -14,7 +16,10 @@ in {
   config = mkIf cfg.enable {
     services.gnome-keyring = {
       enable = true;
-      components = ["secrets" "pkcs11"];
+      components = [
+        "secrets"
+        "pkcs11"
+      ];
     };
 
     # Install seahorse for GUI management

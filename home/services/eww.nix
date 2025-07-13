@@ -3,9 +3,11 @@
   lib,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.userExtraServices.rh-eww;
-in {
+in
+{
   options.userExtraServices.rh-eww = {
     enable = mkEnableOption "Highly customizable widgets";
   };
@@ -14,13 +16,13 @@ in {
     systemd.user.services.rh-eww = {
       Unit = {
         Description = "ElKowar's Wacky Widgets";
-        PartOf = ["graphical-session.target"];
+        PartOf = [ "graphical-session.target" ];
       };
       Service = {
         Environment = [
           "PATH=${config.home.profileDirectory}/bin:/run/current-system/sw/bin"
         ];
-        
+
         # --- Main Service ---
         ExecStart = "${config.programs.eww.package}/bin/eww daemon --no-daemonize";
 
@@ -37,7 +39,7 @@ in {
       };
 
       Install = {
-        WantedBy = ["graphical-session.target"];
+        WantedBy = [ "graphical-session.target" ];
       };
     };
   };

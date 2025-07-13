@@ -2,7 +2,8 @@
   host,
   pkgs,
   ...
-}: {
+}:
+{
   imports = [
     ./hardware-configuration.nix
     ../../modules/boot/boot.nix
@@ -54,6 +55,9 @@
 
   # Extra Args
   # ---------------------------------
-  nix.settings.experimental-features = ["nix-command" "flakes"];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
   system.stateVersion = "24.05"; # NOTE: Original derivation
 }

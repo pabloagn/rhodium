@@ -1,3 +1,4 @@
-{inputs}: {
-  fonts = import ./fonts.nix {inherit inputs;};
+{ inputs }:
+{
+  fonts = import ./fonts.nix { inherit inputs; };
 }

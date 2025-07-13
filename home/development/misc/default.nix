@@ -4,7 +4,8 @@
   pkgs,
   ...
 }:
-with lib; {
+with lib;
+{
   options = {
     programs.development.misc = {
       enable = mkEnableOption "Misc development tools";

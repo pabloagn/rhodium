@@ -2,9 +2,11 @@
   config,
   pkgs,
   ...
-}: let
+}:
+let
   aliases = import ./common/aliases.nix;
-in {
+in
+{
   programs.bash = {
     enableCompletion = true;
     shellAliases = aliases;

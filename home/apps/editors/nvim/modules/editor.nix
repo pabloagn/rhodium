@@ -1,7 +1,8 @@
 {
   pkgs,
   sourceLuaFile,
-}: {
+}:
+{
   programs.neovim = {
     plugins = with pkgs.vimPlugins; [
       # Edit

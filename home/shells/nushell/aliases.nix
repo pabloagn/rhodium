@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   programs.nushell.shellAliases = {
     # List commands
     # ls = "eza -l";

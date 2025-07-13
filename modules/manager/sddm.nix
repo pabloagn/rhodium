@@ -4,13 +4,15 @@
   pkgs,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.manager.sddm;
-in {
+in
+{
   options.manager.sddm = {
     enable = mkEnableOption "SDDM display manager with custom configuration";
   };
-  
+
   config = mkIf cfg.enable {
     services.displayManager.sddm = {
       enable = true;
@@ -63,7 +65,7 @@ in {
     environment.etc."sddm/wallpaper.jpg".source = ../../home/assets/wallpapers/dante/wallpaper-01.jpg;
     services.xserver = {
       enable = true;
-      displayManager.sessionPackages = [pkgs.hyprland];
+      displayManager.sessionPackages = [ pkgs.hyprland ];
     };
     qt = {
       enable = true;

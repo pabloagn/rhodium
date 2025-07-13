@@ -4,9 +4,11 @@
   pkgs,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.userExtraServices.rh-neovim-daemon;
-in {
+in
+{
   options.userExtraServices.rh-neovim-daemon = {
     enable = mkEnableOption "Neovim daemon for instant startup";
     socketPath = mkOption {
@@ -19,8 +21,8 @@ in {
     systemd.user.services.rh-neovim-daemon = {
       Unit = {
         Description = "Neovim daemon";
-        PartOf = ["default.target"];
-        After = ["default.target"];
+        PartOf = [ "default.target" ];
+        After = [ "default.target" ];
       };
 
       Service = {
@@ -32,7 +34,7 @@ in {
       };
 
       Install = {
-        WantedBy = ["default.target"];
+        WantedBy = [ "default.target" ];
       };
 
     };

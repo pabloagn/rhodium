@@ -1,6 +1,7 @@
 let
   appHeader = "Rhodium";
-in {
+in
+{
   fuzzel = {
     apps = {
       title = "${appHeader}'s Apps";
@@ -108,4 +109,3 @@ in {
     };
   };
 }
-

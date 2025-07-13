@@ -4,9 +4,11 @@
   pkgs,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.userExtraServices.rh-waybar;
-in {
+in
+{
   options.userExtraServices.rh-waybar = {
     enable = mkEnableOption "Highly customizable Wayland bar";
   };
@@ -15,8 +17,8 @@ in {
     systemd.user.services.rh-waybar = {
       Unit = {
         Description = "Highly customizable Wayland bar";
-        PartOf = ["graphical-session.target"];
-        After = ["graphical-session-pre.target"];
+        PartOf = [ "graphical-session.target" ];
+        After = [ "graphical-session-pre.target" ];
       };
 
       Service = {
@@ -27,7 +29,7 @@ in {
       };
 
       Install = {
-        WantedBy = ["graphical-session.target"];
+        WantedBy = [ "graphical-session.target" ];
       };
     };
   };

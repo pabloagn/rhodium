@@ -5,7 +5,8 @@
   host,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.scripts;
 
   # Path to traverse
@@ -14,7 +15,7 @@ with lib; let
   # Folders to include
   validFolders = [
     "common"
-    "docker" 
+    "docker"
     "fuzzel"
     "launchers"
     "rdp"
@@ -26,17 +27,15 @@ with lib; let
   # Get the directory
   scriptFiles = builtins.readDir scriptsSourcePath;
 
-
   # Validate
-  isValidFolder = name: let
-    fileType = scriptsDir.${name};
-    isDirectory = fileType == "directory";
-    isValidName = builtins.elem name validFolders;
-  in
+  isValidFolder =
+    name:
+    let
+      fileType = scriptsDir.${name};
+      isDirectory = fileType == "directory";
+      isValidName = builtins.elem name validFolders;
+    in
     isDirectory && isValidName;
-
-
-
 
   # Get list of actual script files
   scriptNames = lib.filter isScript (builtins.attrNames scriptFiles);
@@ -50,11 +49,10 @@ with lib; let
   };
 
   # Generate static script symlinks
-  staticScriptLinks = lib.foldl' (acc: name: acc // (mkStaticScriptLink name)) {} scriptNames;
+  staticScriptLinks = lib.foldl' (acc: name: acc // (mkStaticScriptLink name)) { } scriptNames;
 
   # Host-specific monitor configuration
-  inherit
-    (host.mainMonitor)
+  inherit (host.mainMonitor)
     monitorID
     monitorResolution
     monitorRefreshRate
@@ -86,21 +84,9 @@ with lib; let
 
     # Host monitor configuration
     MAIN_MONITOR="${monitorID}"
-    MAIN_RESOLUTION="${
-      if monitorResolution != ""
-      then monitorResolution
-      else "preferred"
-    }"
-    MAIN_REFRESH="${
-      if monitorRefreshRate != ""
-      then "@${monitorRefreshRate}"
-      else ""
-    }"
-    MAIN_SCALE="${
-      if monitorScalingFactor != ""
-      then monitorScalingFactor
-      else "1.0"
-    }"
+    MAIN_RESOLUTION="${if monitorResolution != "" then monitorResolution else "preferred"}"
+    MAIN_REFRESH="${if monitorRefreshRate != "" then "@${monitorRefreshRate}" else ""}"
+    MAIN_SCALE="${if monitorScalingFactor != "" then monitorScalingFactor else "1.0"}"
 
     # Common external monitor
     EXTERNAL_MONITOR="HDMI-A-1"
@@ -161,7 +147,8 @@ with lib; let
   # Combine both types of scripts
   # allScriptLinks = staticScriptLinks // nixScriptLinks;
   allScriptLinks = staticScriptLinks;
-in {
+in
+{
   options.scripts = {
     enable = mkEnableOption "Link individual scripts to local bin path with executable permissions";
   };
@@ -170,7 +157,7 @@ in {
     home.file = allScriptLinks;
 
     # Ensure bin directory exists
-    home.activation.create-script-dirs = lib.hm.dag.entryAfter ["writeBoundary"] ''
+    home.activation.create-script-dirs = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
       mkdir -p "${config.home.sessionVariables.XDG_BIN_HOME}"
     '';
   };

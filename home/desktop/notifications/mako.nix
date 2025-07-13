@@ -1,4 +1,5 @@
-{...}: let
+{ ... }:
+let
   c = {
     # Normal
     color0 = "#0d0c0cff";
@@ -51,7 +52,8 @@
     xl = 96;
     xx = 120;
   };
-in {
+in
+{
   services.mako = {
     enable = true;
     settings = {
@@ -119,7 +121,6 @@ in {
         format = "<b>◌ %s</b>\\n%b";
         default-timeout = notifTime.md;
       };
-
 
       # --- System Notifications ---
       "app-name=notify-send" = {
@@ -330,6 +331,15 @@ in {
         border-color = "#2a2a2aFF";
         format = "<b>◌ %s</b>\\n%b";
         default-timeout = notifTime.md;
+      };
+
+      "app-name=rh-util-screen-ocr" = {
+        background-color = "${c.color21}";
+        text-color = "${c.color23}";
+        border-color = "#2a2a2aFF";
+        format = "<b>◌ %s</b>\\n%b";
+        default-timeout = notifTime.md;
+        on-button-left = "kitty --directory $HOME/pictures/ocr -e yazi";
       };
 
       "app-name=rh-util-opacity" = {

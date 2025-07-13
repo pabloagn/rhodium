@@ -8,7 +8,10 @@
         click-to-reveal = false;
         transition-left-to-right = true;
       };
-      modules = ["network#wifi-dl" "network#wifi-ul"];
+      modules = [
+        "network#wifi-dl"
+        "network#wifi-ul"
+      ];
     };
   };
 }

@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   programs.television = {
     enable = true;
 
@@ -48,12 +49,21 @@
 
       # Binds
       keybindings = {
-        select_next_entry = ["down" "ctrl-j"];
-        select_prev_entry = ["up" "ctrl-k"];
-        toggle_preview = ["ctrl-p"];
-        toggle_remote_control = ["ctrl-r"];
-        toggle_help = ["?"];
-        confirm_selection = ["enter" "ctrl-y"];
+        select_next_entry = [
+          "down"
+          "ctrl-j"
+        ];
+        select_prev_entry = [
+          "up"
+          "ctrl-k"
+        ];
+        toggle_preview = [ "ctrl-p" ];
+        toggle_remote_control = [ "ctrl-r" ];
+        toggle_help = [ "?" ];
+        confirm_selection = [
+          "enter"
+          "ctrl-y"
+        ];
       };
     };
   };

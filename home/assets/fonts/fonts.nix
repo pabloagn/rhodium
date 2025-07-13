@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   monospace = {
     # Rhodium Fonts
     # rhodium-fonts = {

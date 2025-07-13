@@ -4,9 +4,11 @@
   pkgs,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.userExtraServices.rh-firefox-preload;
-in {
+in
+{
   options.userExtraServices.rh-firefox-preload = {
     enable = mkEnableOption "Firefox preloader for faster startup";
   };
@@ -14,8 +16,8 @@ in {
     systemd.user.services.rh-firefox-preload = {
       Unit = {
         Description = "Firefox preloader";
-        PartOf = ["graphical-session.target"];
-        After = ["graphical-session-pre.target"];
+        PartOf = [ "graphical-session.target" ];
+        After = [ "graphical-session-pre.target" ];
       };
       Service = {
         Type = "exec";
@@ -32,7 +34,7 @@ in {
         ];
       };
       Install = {
-        WantedBy = ["graphical-session.target"];
+        WantedBy = [ "graphical-session.target" ];
       };
     };
   };

@@ -1,4 +1,5 @@
-{fishPlugins, ...}: {
+{ fishPlugins, ... }:
+{
   # TODO: Fix this
   programs.man.generateCaches = false;
 

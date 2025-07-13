@@ -2,9 +2,11 @@
   pkgs,
   userPreferences,
   ...
-}: let
+}:
+let
   cursorSize = userPreferences.behaviour.cursorSize;
-in {
+in
+{
   home.pointerCursor = {
     enable = true;
 

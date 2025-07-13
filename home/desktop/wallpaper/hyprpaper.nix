@@ -4,7 +4,8 @@
   userPreferences,
   host,
   ...
-}: let
+}:
+let
   wallpaperTheme = userPreferences.theme.wallpaper or "dante";
   wallpapersPath = "${config.xdg.dataHome}/wallpapers/${wallpaperTheme}";
 
@@ -24,7 +25,8 @@
 
   # All monitors use the same wallpaper
   wallpaperAssignments = map (monitor: "${monitor},${primaryWallpaper}") monitors;
-in {
+in
+{
   services.hyprpaper = {
     enable = true;
     settings = {

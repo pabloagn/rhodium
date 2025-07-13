@@ -1,11 +1,20 @@
-{...}: {
+{ ... }:
+{
   programs.helix.settings = {
     theme = "chiaroscuro";
 
     keys.normal = {
-      D = ["extend_to_line_bounds" "delete_selection"];
+      D = [
+        "extend_to_line_bounds"
+        "delete_selection"
+      ];
       "space" = {
-        space = ["save_selection" "select_all" "yank_main_selection_to_clipboard" "jump_backward"];
+        space = [
+          "save_selection"
+          "select_all"
+          "yank_main_selection_to_clipboard"
+          "jump_backward"
+        ];
       };
     };
 

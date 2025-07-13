@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   programs.skim = {
     enable = true;
   };

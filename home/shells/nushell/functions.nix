@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   programs.nushell.extraConfig = ''
     # Yazi wrapper for changing directory on exit
     def --env yy [...args] {

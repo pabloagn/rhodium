@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   programs = {
     neovim = {
       enable = true;

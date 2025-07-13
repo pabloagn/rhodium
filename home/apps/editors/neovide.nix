@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   programs.neovide = {
     enable = false;
     settings = {
@@ -21,7 +22,7 @@
 
       # --- Font Configuration ---
       font = {
-        normal = ["JetBrainsMono Nerd Font"];
+        normal = [ "JetBrainsMono Nerd Font" ];
         size = 12.0;
         hinting = "full";
         edging = "antialias";

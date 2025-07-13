@@ -2,9 +2,11 @@
   pkgs,
   userPreferences,
   ...
-}: let
+}:
+let
   dpiAdjustment = userPreferences.behaviour.dpiAdjustment;
-in {
+in
+{
   programs.rofi = {
     enable = true;
     package = pkgs.rofi;
@@ -16,6 +18,8 @@ in {
   };
 
   xdg.configFile = {
-    "rofi/themes/chiaroscuro.rasi" = {source = ./rofi/themes/chiaroscuro.rasi;};
+    "rofi/themes/chiaroscuro.rasi" = {
+      source = ./rofi/themes/chiaroscuro.rasi;
+    };
   };
 }

@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   imports = [
   ];
 
@@ -6,4 +7,3 @@
     duf # Yet another disk utility
   ];
 }
-

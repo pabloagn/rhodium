@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   imports = [
     ./bat.nix
     ./glow.nix
@@ -24,5 +25,6 @@
     miller # Like awk, sed, cut, join, and sort for data formats such as CSV, TSV, JSON,etc
     tree # Produce an indented directory tree view
     broot # Interactive tree view
+    rich-cli # CLI for Python's rich
   ];
 }

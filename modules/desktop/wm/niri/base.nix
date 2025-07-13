@@ -2,7 +2,8 @@
   pkgs,
   pkgs-unstable,
   ...
-}: {
+}:
+{
   environment.systemPackages = with pkgs; [
     wl-clipboard # Clipboard support
     wayland-utils # Wayland debugging tools

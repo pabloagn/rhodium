@@ -4,13 +4,15 @@
   pkgs,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.manager.regreet;
-in {
+in
+{
   options.manager.regreet = {
     enable = mkEnableOption "ReGreet display manager with custom configuration";
   };
-  
+
   config = mkIf cfg.enable {
     programs.regreet = {
       enable = true;
@@ -68,7 +70,7 @@ in {
     security.pam.services.greetd.enableGnomeKeyring = true;
     environment.etc."regreet/wallpaper-01.jpg".source =
       ../../home/assets/wallpapers/dante/wallpaper-01.jpg;
-    services.displayManager.sessionPackages = [pkgs.hyprland];
+    services.displayManager.sessionPackages = [ pkgs.hyprland ];
     environment.pathsToLink = [
       "/share/xsessions"
       "/share/wayland-sessions"

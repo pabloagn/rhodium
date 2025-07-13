@@ -1,46 +1,121 @@
-{...}: {
+{ ... }:
+{
   # --- General ---
   input = {
-    cd_offset = [0 2 50 3];
+    cd_offset = [
+      0
+      2
+      50
+      3
+    ];
     cd_origin = "top-center";
     cd_title = "Change directory:";
-    create_offset = [0 2 50 3];
+    create_offset = [
+      0
+      2
+      50
+      3
+    ];
     create_origin = "top-center";
-    create_title = ["Create:" "Create:"];
+    create_title = [
+      "Create:"
+      "Create:"
+    ];
     cursor_blink = false;
-    delete_offset = [0 2 50 3];
+    delete_offset = [
+      0
+      2
+      50
+      3
+    ];
     delete_origin = "top-center";
     delete_title = "Delete {n} selected file{s} permanently? (y/N)";
-    filter_offset = [0 2 50 3];
+    filter_offset = [
+      0
+      2
+      50
+      3
+    ];
     filter_origin = "top-center";
     filter_title = "Filter:";
-    find_offset = [0 2 50 3];
+    find_offset = [
+      0
+      2
+      50
+      3
+    ];
     find_origin = "top-center";
-    find_title = ["Find next:" "Find previous:"];
-    overwrite_offset = [0 2 50 3];
+    find_title = [
+      "Find next:"
+      "Find previous:"
+    ];
+    overwrite_offset = [
+      0
+      2
+      50
+      3
+    ];
     overwrite_origin = "top-center";
     overwrite_title = "Overwrite an existing file? (y/N)";
-    quit_offset = [0 2 50 3];
+    quit_offset = [
+      0
+      2
+      50
+      3
+    ];
     quit_origin = "top-center";
     quit_title = "{n} task{s} running, sure to quit? (y/N)";
-    rename_offset = [0 1 50 3];
+    rename_offset = [
+      0
+      1
+      50
+      3
+    ];
     rename_origin = "hovered";
     rename_title = "Rename:";
-    search_offset = [0 2 50 3];
+    search_offset = [
+      0
+      2
+      50
+      3
+    ];
     search_origin = "top-center";
     search_title = "Search via {n}:";
-    shell_offset = [0 2 50 3];
+    shell_offset = [
+      0
+      2
+      50
+      3
+    ];
     shell_origin = "top-center";
-    shell_title = ["Shell:" "Shell (block):"];
-    trash_offset = [0 2 50 3];
+    shell_title = [
+      "Shell:"
+      "Shell (block):"
+    ];
+    trash_offset = [
+      0
+      2
+      50
+      3
+    ];
     trash_origin = "top-center";
     trash_title = "Move {n} selected file{s} to trash? (y/N)";
   };
 
   mgr = {
     linemode = "none";
-    mouse_events = ["click" "scroll" "touch" "move" "drag"];
-    ratio = [1 4 3];
+    mouse_events = [
+      "click"
+      "scroll"
+      "touch"
+      "move"
+      "drag"
+    ];
+    ratio = [
+      1
+      4
+      3
+    ];
     scrolloff = 5;
     show_hidden = false;
     show_symlink = true;
@@ -52,7 +127,12 @@
   };
 
   select = {
-    open_offset = [0 1 50 7];
+    open_offset = [
+      0
+      1
+      50
+      7
+    ];
     open_origin = "hovered";
     open_title = "Open with:";
   };
@@ -64,7 +144,12 @@
     max_width = 2000;
     sixel_fraction = 15;
     tab_size = 2;
-    ueberzug_offset = [0 0 0 0];
+    ueberzug_offset = [
+      0
+      0
+      0
+      0
+    ];
     ueberzug_scale = 1;
     image_delay = 20;
   };
@@ -72,7 +157,10 @@
   tasks = {
     bizarre_retry = 5;
     image_alloc = 536870912;
-    image_bound = [0 0];
+    image_bound = [
+      0
+      0
+    ];
     macro_workers = 25;
     micro_workers = 10;
     suppress_preload = false;
@@ -307,179 +395,373 @@
       # --- Directories ---
       {
         name = "*/";
-        use = ["edit" "edit-helix" "edit-zed" "edit-nano" "edit-emacs" "thunar" "reveal"];
+        use = [
+          "edit"
+          "edit-helix"
+          "edit-zed"
+          "edit-nano"
+          "edit-emacs"
+          "thunar"
+          "reveal"
+        ];
       }
 
       # --- Code Files (by extension) ---
       {
         name = "*.{js,jsx,ts,tsx,py,rs,go,c,cpp,h,hpp,java,rb,php,lua,vim,sh,bash,zsh,fish,nu,Xresources,json,yaml,yml,toml,ini,conf,cfg}";
-        use = ["edit" "edit-helix" "edit-zed" "edit-nano" "edit-emacs" "reveal"];
+        use = [
+          "edit"
+          "edit-helix"
+          "edit-zed"
+          "edit-nano"
+          "edit-emacs"
+          "reveal"
+        ];
       }
       {
         name = "*.{md,markdown,rst,tex}";
-        use = ["edit" "edit-helix" "edit-zed" "edit-nano" "edit-emacs" "reveal"];
+        use = [
+          "edit"
+          "edit-helix"
+          "edit-zed"
+          "edit-nano"
+          "edit-emacs"
+          "reveal"
+        ];
       }
       {
         name = "*.{css,scss,sass,less}";
-        use = ["edit" "edit-helix" "edit-zed" "edit-nano" "edit-emacs" "reveal"];
+        use = [
+          "edit"
+          "edit-helix"
+          "edit-zed"
+          "edit-nano"
+          "edit-emacs"
+          "reveal"
+        ];
       }
       {
         name = "*.{xml,sql,graphql,proto}";
-        use = ["edit" "edit-helix" "edit-zed" "edit-nano" "edit-emacs" "reveal"];
+        use = [
+          "edit"
+          "edit-helix"
+          "edit-zed"
+          "edit-nano"
+          "edit-emacs"
+          "reveal"
+        ];
       }
 
       # --- HTML Files (special case with browsers) ---
       {
         name = "*.{html,htm,xhtml}";
-        use = ["edit" "edit-helix" "edit-zed" "edit-nano" "edit-emacs" "browser-personal" "browser-work" "browser-incognito" "reveal"];
+        use = [
+          "edit"
+          "edit-helix"
+          "edit-zed"
+          "edit-nano"
+          "edit-emacs"
+          "browser-personal"
+          "browser-work"
+          "browser-incognito"
+          "reveal"
+        ];
       }
 
       # --- SVG Files (special case - both image and code) ---
       {
         name = "*.svg";
-        use = ["open" "imagemagick" "gimp" "edit" "edit-helix" "edit-zed" "edit-nano" "edit-emacs" "reveal"];
+        use = [
+          "open"
+          "imagemagick"
+          "gimp"
+          "edit"
+          "edit-helix"
+          "edit-zed"
+          "edit-nano"
+          "edit-emacs"
+          "reveal"
+        ];
       }
 
       # --- Images (no edit options) ---
       {
         name = "*.{jpg,jpeg,png,gif,webp,bmp,ico,tiff,psd,avif,heic,heif}";
-        use = ["open" "imv" "imagemagick" "gimp" "reveal"];
+        use = [
+          "open"
+          "imv"
+          "imagemagick"
+          "gimp"
+          "reveal"
+        ];
       }
 
       # --- Code Files (by MIME type) ---
       {
         mime = "text/*";
-        use = ["edit" "edit-helix" "edit-zed" "edit-nano" "edit-emacs" "reveal"];
+        use = [
+          "edit"
+          "edit-helix"
+          "edit-zed"
+          "edit-nano"
+          "edit-emacs"
+          "reveal"
+        ];
       }
       {
         mime = "*/javascript";
-        use = ["edit" "edit-helix" "edit-zed" "edit-nano" "edit-emacs" "reveal"];
+        use = [
+          "edit"
+          "edit-helix"
+          "edit-zed"
+          "edit-nano"
+          "edit-emacs"
+          "reveal"
+        ];
       }
       {
         mime = "application/{json,x-ndjson}";
-        use = ["edit" "edit-helix" "edit-zed" "edit-nano" "edit-emacs" "reveal"];
+        use = [
+          "edit"
+          "edit-helix"
+          "edit-zed"
+          "edit-nano"
+          "edit-emacs"
+          "reveal"
+        ];
       }
 
       # --- Media Files ---
       {
         mime = "image/*";
-        use = ["open" "imv" "imagemagick" "gimp" "reveal"];
+        use = [
+          "open"
+          "imv"
+          "imagemagick"
+          "gimp"
+          "reveal"
+        ];
       }
       {
         mime = "{audio,video}/*";
-        use = ["play" "vlc" "reveal"];
+        use = [
+          "play"
+          "vlc"
+          "reveal"
+        ];
       }
 
       # --- Archives ---
       {
         mime = "application/{,g}zip";
-        use = ["extract" "reveal"];
+        use = [
+          "extract"
+          "reveal"
+        ];
       }
       {
         mime = "application/x-{tar,bzip*,7z-compressed,xz,rar}";
-        use = ["extract" "reveal"];
+        use = [
+          "extract"
+          "reveal"
+        ];
       }
 
       # --- PDFs ---
       {
         mime = "application/pdf";
-        use = ["open" "reveal"];
+        use = [
+          "open"
+          "reveal"
+        ];
       }
 
       # --- Tabular Data Files ---
       {
         name = "*.{csv,tsv,tab,psv}";
-        use = ["edit" "edit-helix" "edit-zed" "edit-nano" "edit-emacs" "libreoffice-calc" "reveal"];
+        use = [
+          "edit"
+          "edit-helix"
+          "edit-zed"
+          "edit-nano"
+          "edit-emacs"
+          "libreoffice-calc"
+          "reveal"
+        ];
       }
 
       # --- Text Files ---
       {
         name = "*.{txt,text,log,md,markdown,rst,tex}";
-        use = ["edit" "edit-helix" "edit-zed" "edit-nano" "edit-emacs" "reveal"];
+        use = [
+          "edit"
+          "edit-helix"
+          "edit-zed"
+          "edit-nano"
+          "edit-emacs"
+          "reveal"
+        ];
       }
 
       # --- Office ---
       # Documents
       {
         name = "*.{odt,doc,docx,rtf}";
-        use = ["libreoffice-writer" "onlyoffice" "reveal"];
+        use = [
+          "libreoffice-writer"
+          "onlyoffice"
+          "reveal"
+        ];
       }
       {
         mime = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
-        use = ["libreoffice-writer" "onlyoffice" "reveal"];
+        use = [
+          "libreoffice-writer"
+          "onlyoffice"
+          "reveal"
+        ];
       }
       {
         mime = "application/msword";
-        use = ["libreoffice-writer" "onlyoffice" "reveal"];
+        use = [
+          "libreoffice-writer"
+          "onlyoffice"
+          "reveal"
+        ];
       }
       {
         mime = "application/rtf";
-        use = ["libreoffice-writer" "onlyoffice" "reveal"];
+        use = [
+          "libreoffice-writer"
+          "onlyoffice"
+          "reveal"
+        ];
       }
 
       # Spreadsheets
       {
         name = "*.{xls,xlsx,xlsm,xlsb,ods}";
-        use = ["libreoffice-calc" "onlyoffice" "reveal"];
+        use = [
+          "libreoffice-calc"
+          "onlyoffice"
+          "reveal"
+        ];
       }
       {
         mime = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-        use = ["libreoffice-calc" "onlyoffice" "reveal"];
+        use = [
+          "libreoffice-calc"
+          "onlyoffice"
+          "reveal"
+        ];
       }
       {
         mime = "application/vnd.ms-excel";
-        use = ["libreoffice-calc" "onlyoffice" "reveal"];
+        use = [
+          "libreoffice-calc"
+          "onlyoffice"
+          "reveal"
+        ];
       }
       {
         mime = "application/vnd.oasis.opendocument.spreadsheet";
-        use = ["libreoffice-calc" "onlyoffice" "reveal"];
+        use = [
+          "libreoffice-calc"
+          "onlyoffice"
+          "reveal"
+        ];
       }
 
       # Presentations
       {
         name = "*.{odp,ppt,pptx}";
-        use = ["libreoffice-impress" "onlyoffice" "reveal"];
+        use = [
+          "libreoffice-impress"
+          "onlyoffice"
+          "reveal"
+        ];
       }
       {
         mime = "application/vnd.ms-powerpoint";
-        use = ["libreoffice-impress" "onlyoffice" "reveal"];
+        use = [
+          "libreoffice-impress"
+          "onlyoffice"
+          "reveal"
+        ];
       }
       {
         mime = "application/vnd.openxmlformats-officedocument.presentationml.presentation";
-        use = ["libreoffice-impress" "onlyoffice" "reveal"];
+        use = [
+          "libreoffice-impress"
+          "onlyoffice"
+          "reveal"
+        ];
       }
       {
         mime = "application/vnd.oasis.opendocument.presentation";
-        use = ["libreoffice-impress" "onlyoffice" "reveal"];
+        use = [
+          "libreoffice-impress"
+          "onlyoffice"
+          "reveal"
+        ];
       }
 
       # Drawings
       {
         name = "*.{odg}";
-        use = ["libreoffice-draw" "gimp" "imagemagick" "reveal"];
+        use = [
+          "libreoffice-draw"
+          "gimp"
+          "imagemagick"
+          "reveal"
+        ];
       }
       # Math Formulas
       {
         name = "*.{odf}";
-        use = ["libreoffice-math" "reveal"];
+        use = [
+          "libreoffice-math"
+          "reveal"
+        ];
       }
 
       # Libre Database Files
       {
         name = "*.{odb}";
-        use = ["libreoffice-base" "reveal"];
+        use = [
+          "libreoffice-base"
+          "reveal"
+        ];
       }
 
       # --- Empty Files ---
       {
         mime = "inode/x-empty";
-        use = ["edit" "edit-helix" "edit-zed" "edit-nano" "edit-emacs" "reveal"];
+        use = [
+          "edit"
+          "edit-helix"
+          "edit-zed"
+          "edit-nano"
+          "edit-emacs"
+          "reveal"
+        ];
       }
 
       # --- Catch-all Rule ---
       {
         name = "*";
-        use = ["edit" "edit-helix" "edit-zed" "edit-nano" "edit-emacs" "imv" "imagemagick" "gimp" "open" "reveal"];
+        use = [
+          "edit"
+          "edit-helix"
+          "edit-zed"
+          "edit-nano"
+          "edit-emacs"
+          "imv"
+          "imagemagick"
+          "gimp"
+          "open"
+          "reveal"
+        ];
       }
     ];
   };

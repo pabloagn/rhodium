@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   programs.hyprlock = {
     enable = true;
   };

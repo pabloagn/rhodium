@@ -1,17 +1,13 @@
-{lib}: let
+{ lib }:
+let
   luaFiles = builtins.readDir ./.;
 
   readLuaFile = name: builtins.readFile (./. + "/${name}");
 
   luaContent = lib.concatStringsSep "\n\n" (
-    lib.mapAttrsToList
-    (
-      name: type:
-        if type == "regular" && lib.hasSuffix ".lua" name
-        then readLuaFile name
-        else ""
-    )
-    luaFiles
+    lib.mapAttrsToList (
+      name: type: if type == "regular" && lib.hasSuffix ".lua" name then readLuaFile name else ""
+    ) luaFiles
   );
 
   # Remove empty strings from the result
@@ -19,4 +15,4 @@
     lib.filter (s: s != "") (lib.splitString "\n\n" luaContent)
   );
 in
-  cleanedContent
+cleanedContent

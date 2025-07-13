@@ -2,10 +2,12 @@
   user,
   pkgs,
   ...
-}: let
+}:
+let
   userfullName = user.fullName;
   userEmail = user.emailMain;
-in {
+in
+{
   home.packages = with pkgs; [
     commitizen # Commit rules for projects
     # gitea # Self-hostable web service for managing Git repositories

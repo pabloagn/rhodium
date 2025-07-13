@@ -2,7 +2,8 @@
   pkgs,
   pkgs-unstable,
   ...
-}: {
+}:
+{
   imports = [
     ./yazi/modules
   ];

@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   programs.nushell = {
     # Environment variables
     environmentVariables = {

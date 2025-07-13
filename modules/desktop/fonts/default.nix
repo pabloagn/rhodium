@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   fonts.packages = with pkgs; [
     # Monospace
     fira-code

@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   home.packages = with pkgs; [
     djv # Used to view EXR sequences
     exiv2 # Manage image metadata

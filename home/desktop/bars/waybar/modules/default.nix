@@ -1,4 +1,5 @@
-{lib, ...}: let
+{ lib, ... }:
+let
   # --- Import all modules ---
   moduleBacklight = import ./backlight.nix;
   moduleBattery = import ./battery.nix;
@@ -38,7 +39,7 @@
   # --- List of active modules ---
   usedModules = [
     moduleBattery
-    # TODO: 
+    # TODO:
     moduleBacklight
     moduleBluetooth
     moduleCustomVpn
@@ -68,12 +69,10 @@
   ];
 
   # --- Merge module-provided Waybar configuration ---
-  waybarModules =
-    lib.foldl lib.recursiveUpdate {} (map (m: m.waybarModules or {}) usedModules);
+  waybarModules = lib.foldl lib.recursiveUpdate { } (map (m: m.waybarModules or { }) usedModules);
 
   # --- Merge module-provided extras ---
-  extraOptions =
-    lib.foldl lib.recursiveUpdate {} (map (m: m.extraOptions or {}) usedModules);
+  extraOptions = lib.foldl lib.recursiveUpdate { } (map (m: m.extraOptions or { }) usedModules);
 
   # --- Base bar configuration ---
   baseConfig = {
@@ -117,11 +116,11 @@
       "keyboard-state#capslock"
     ];
   };
-in {
+in
+{
   config = {
     inherit (extraOptions) xdg;
 
-    programs.waybar.settings.mainBar =
-      lib.recursiveUpdate baseConfig waybarModules;
+    programs.waybar.settings.mainBar = lib.recursiveUpdate baseConfig waybarModules;
   };
 }

@@ -2,49 +2,58 @@
   editors = {
     editor-instance = {
       binary = "kitty";
-      args = ["-e" "nvim"];
+      args = [
+        "-e"
+        "nvim"
+      ];
       icon = "nvim";
       description = "Editor";
     };
     helix-instance = {
       binary = "kitty";
-      args = ["-e" "hx"];
+      args = [
+        "-e"
+        "hx"
+      ];
       icon = "helix";
       description = "Helix";
     };
     nvim-instance = {
       binary = "kitty";
-      args = ["-e" "nvim"];
+      args = [
+        "-e"
+        "nvim"
+      ];
       icon = "neovim";
       description = "Neovim";
     };
     zeditor = {
       binary = "zeditor";
-      args = [];
+      args = [ ];
       icon = "zeditor";
       description = "Zeditor";
     };
     code = {
       binary = "code";
-      args = [];
+      args = [ ];
       icon = "code";
       description = "VS Code";
     };
     emacs = {
       binary = "/home/pabloagn/.config/emacs/bin/doom";
-      args = ["emacs"];
+      args = [ "emacs" ];
       icon = "emacs";
       description = "Doom Emacs";
     };
     texmaker = {
       binary = "texmaker";
-      args = [];
+      args = [ ];
       icon = "texmaker";
       description = "Texmaker LaTeX Editor";
     };
     rstudio = {
       binary = "rstudio";
-      args = [];
+      args = [ ];
       icon = "rstudio";
       description = "RStudio IDE";
     };
@@ -59,7 +68,7 @@
     # };
     image-viewer = {
       binary = "imv";
-      args = [];
+      args = [ ];
       icon = "imv";
       description = "Image Viewer (Wayland)";
     };
@@ -68,13 +77,19 @@
   system = {
     bottom = {
       binary = "kitty";
-      args = ["-e" "btm"];
+      args = [
+        "-e"
+        "btm"
+      ];
       icon = "bottom";
       description = "Bottom (Htop)";
     };
     btop = {
       binary = "kitty";
-      args = ["-e" "btop"];
+      args = [
+        "-e"
+        "btop"
+      ];
       icon = "btop";
       description = "Btop Resource Monitor";
     };
@@ -83,55 +98,64 @@
   productivity = {
     yazi = {
       binary = "kitty";
-      args = ["-e" "yazi"];
+      args = [
+        "-e"
+        "yazi"
+      ];
       icon = "yazi";
       description = "Yazi in Kitty";
     };
     calcure = {
       binary = "kitty";
-      args = ["-e" "calcure"];
+      args = [
+        "-e"
+        "calcure"
+      ];
       icon = "calcure";
       description = "Calcure Calendar and Tasks";
     };
     qalc = {
       binary = "kitty";
-      args = ["-e" "qalc"];
+      args = [
+        "-e"
+        "qalc"
+      ];
       icon = "qalculate";
       description = "Qalculate CLI";
     };
     qalculate = {
       binary = "qalculate-gtk";
-      args = [];
+      args = [ ];
       icon = "qalculate";
       description = "Qalculate!";
     };
     qbittorrent = {
       binary = "qbittorrent";
-      args = [];
+      args = [ ];
       icon = "qbittorrent";
       description = "qBittorrent";
     };
     slack = {
       binary = "slack";
-      args = [];
+      args = [ ];
       icon = "slack";
       description = "Slack";
     };
     jitsimeet = {
       binary = "jitsi-meet";
-      args = [];
+      args = [ ];
       icon = "jitsi-meet";
       description = "Jitsi Meet";
     };
     zoomus = {
       binary = "zoom-us";
-      args = [];
+      args = [ ];
       icon = "zoom-us";
       description = "Zoom";
     };
     thunar = {
       binary = "thunar";
-      args = [];
+      args = [ ];
       icon = "thunar";
       description = "Thunar File Manager";
     };
@@ -143,13 +167,13 @@
       # args = ["--force-device-scale-factor=1.5"];
       # NOTE: Use no flags for latest beta release
       # NOTE: This is only possible with env var: ELECTRON_OZONE_PLATFORM_HINT = "auto";
-      args = [];
+      args = [ ];
       icon = "onepassword";
       description = "1Password";
     };
     bitwarden = {
       binary = "bitwarden";
-      args = [];
+      args = [ ];
       icon = "bitwarden";
       description = "Bitwarden";
     };
@@ -161,68 +185,71 @@
     # };
     protonvpn = {
       binary = "protonvpn-app";
-      args = [];
+      args = [ ];
       icon = "proton";
       description = "ProtonVPN GUI";
     };
     protonmail = {
       binary = "proton-mail";
-      args = [];
+      args = [ ];
       icon = "protonmail";
       description = "ProtonMail";
     };
     libreofficewriter = {
       binary = "libreoffice";
-      args = ["--writer"];
+      args = [ "--writer" ];
       icon = "libreoffice";
       description = "LibreOffice Writer";
     };
     libreofficecalc = {
       binary = "libreoffice";
-      args = ["--calc"];
+      args = [ "--calc" ];
       icon = "libreoffice";
       description = "LibreOffice Calc";
     };
     libreofficedraw = {
       binary = "libreoffice";
-      args = ["--draw"];
+      args = [ "--draw" ];
       icon = "libreoffice";
       description = "LibreOffice Draw";
     };
     libreofficeimpress = {
       binary = "libreoffice";
-      args = ["--impress"];
+      args = [ "--impress" ];
       icon = "libreoffice";
       description = "LibreOffice Impress";
     };
     libreofficebase = {
       binary = "libreoffice";
-      args = ["--base"];
+      args = [ "--base" ];
       icon = "libreoffice";
       description = "LibreOffice Base";
     };
     libreofficeglobal = {
       binary = "libreoffice";
-      args = ["--global"];
+      args = [ "--global" ];
       icon = "libreoffice";
       description = "LibreOffice Global Document";
     };
     libreofficemath = {
       binary = "libreoffice";
-      args = ["--math"];
+      args = [ "--math" ];
       icon = "libreoffice";
       description = "LibreOffice Math";
     };
     libreofficeweb = {
       binary = "libreoffice";
-      args = ["--web"];
+      args = [ "--web" ];
       icon = "libreoffice";
       description = "LibreOffice HTML Document";
     };
     standardnotes = {
       binary = "standardnotes";
       # NOTE: The flags below are required to work outside X11 (e.g., niri)
-      args = ["--enable-features=UseOzonePlatform" "--ozone-platform=wayland"];
+      args = [
+        "--enable-features=UseOzonePlatform"
+        "--ozone-platform=wayland"
+      ];
       # NOTE: The flags below are required to work in hyprland
       # args = ["--force-device-scale-factor=1.5"];
       icon = "standardnotes";
@@ -230,31 +257,35 @@
     };
     teams = {
       binary = "teams-for-linux";
-      args = [];
+      args = [ ];
       icon = "teams";
       description = "Teams";
     };
     zen = {
       binary = "zen";
-      args = [];
+      args = [ ];
       icon = "zen";
       description = "Zen Browser";
     };
     obsidian = {
       binary = "obsidian";
-      args = [];
+      args = [ ];
       icon = "obsidian";
       description = "Obsidian";
     };
     brave = {
       binary = "brave";
-      args = [""];
+      args = [ "" ];
       icon = "brave";
       description = "Brave";
     };
     firefox-incognito = {
       binary = "firefox";
-      args = ["-p" "Personal" "--private-window"];
+      args = [
+        "-p"
+        "Personal"
+        "--private-window"
+      ];
       icon = "firefox";
       description = "Firefox Incognito";
     };
@@ -263,43 +294,46 @@
   social = {
     signal-desktop = {
       binary = "signal-desktop";
-      args = [];
+      args = [ ];
       icon = "signal";
       description = "Signal Desktop";
     };
     telegram-desktop = {
       binary = "telegram-desktop";
-      args = [];
+      args = [ ];
       icon = "telegram";
       description = "Telegram Desktop";
     };
     discord = {
       binary = "discord";
-      args = [];
+      args = [ ];
       icon = "discord";
       description = "Discord";
     };
     discordo = {
       binary = "kitty";
-      args = ["-e" "discordo"];
+      args = [
+        "-e"
+        "discordo"
+      ];
       icon = "discord";
       description = "Discord TUI";
     };
     element-call = {
       binary = "element-call";
-      args = [];
+      args = [ ];
       icon = "element";
       description = "Element Call (Matrix)";
     };
     fluffychat = {
       binary = "fluffychat";
-      args = [];
+      args = [ ];
       icon = "fluffychat";
       description = "Fluffychat (Matrix)";
     };
     mastodon = {
       binary = "mastodon";
-      args = [];
+      args = [ ];
       icon = "mastodon";
       description = "Mastodon Client";
     };
@@ -308,31 +342,34 @@
   media = {
     spotify = {
       binary = "spotify";
-      args = [];
+      args = [ ];
       icon = "spotify";
       description = "Spotify GUI";
     };
     ncspot = {
       binary = "kitty";
-      args = ["-e" "ncspot"];
+      args = [
+        "-e"
+        "ncspot"
+      ];
       icon = "spotify";
       description = "Spotify TUI";
     };
     gimp = {
       binary = "gimp";
-      args = [];
+      args = [ ];
       icon = "gimp";
       description = "GIMP";
     };
     inkscape = {
       binary = "inkscape";
-      args = [];
+      args = [ ];
       icon = "inkscape";
       description = "InkScape";
     };
     obs = {
       binary = "obs";
-      args = [];
+      args = [ ];
       icon = "obs";
       description = "OBS Studio";
     };
@@ -341,13 +378,13 @@
   terminals = {
     kitty-instance = {
       binary = "kitty";
-      args = [];
+      args = [ ];
       icon = "kitty";
       description = "Kitty";
     };
     foot-instance = {
       binary = "foot";
-      args = [];
+      args = [ ];
       icon = "foot";
       description = "Foot";
     };
@@ -359,7 +396,7 @@
     # };
     ghostty-instance = {
       binary = "ghostty";
-      args = [];
+      args = [ ];
       icon = "ghostty";
       description = "Ghostty";
     };
@@ -368,25 +405,37 @@
   shells = {
     bash-shell = {
       binary = "kitty";
-      args = ["-e" "bash"];
+      args = [
+        "-e"
+        "bash"
+      ];
       icon = "bash";
       description = "Bash Shell";
     };
     zsh-shell = {
       binary = "kitty";
-      args = ["-e" "zsh"];
+      args = [
+        "-e"
+        "zsh"
+      ];
       icon = "zsh";
       description = "Zsh Shell";
     };
     fish-shell = {
       binary = "kitty";
-      args = ["-e" "fish"];
+      args = [
+        "-e"
+        "fish"
+      ];
       icon = "fish";
       description = "Fish Shell";
     };
     nu-shell = {
       binary = "kitty";
-      args = ["-e" "nu"];
+      args = [
+        "-e"
+        "nu"
+      ];
       icon = "nu";
       description = "Nu Shell";
     };
@@ -395,13 +444,19 @@
   multiplexers = {
     tmux-session = {
       binary = "kitty";
-      args = ["-e" "tmux"];
+      args = [
+        "-e"
+        "tmux"
+      ];
       icon = "tmux";
       description = "Tmux Session";
     };
     zellij = {
       binary = "kitty";
-      args = ["-e" "zellij"];
+      args = [
+        "-e"
+        "zellij"
+      ];
       icon = "zellij";
       description = "Zellij Session";
     };

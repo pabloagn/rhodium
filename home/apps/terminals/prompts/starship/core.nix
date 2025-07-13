@@ -1,4 +1,5 @@
-{...}: let
+{ ... }:
+let
   c = {
     # Normal
     color0 = "#0d0c0c";
@@ -29,14 +30,16 @@
   i = {
     icon01 = "◆";
   };
-in let
+in
+let
   viaColor = c.color18;
   colors = c;
-in {
+in
+{
   programs.starship.settings = {
     # Custom Modules
     custom.times = {
-      description="Display Execution Times (Start and End Time)";
+      description = "Display Execution Times (Start and End Time)";
       command = "echo $STARSHIP_CUSTOM_START $STARSHIP_CUSTOM_END";
       format = "[$output]($style)";
       style = "#6F685D";
@@ -142,10 +145,14 @@ in {
       format = "[$symbol$context( \\($namespace\\))]($style) ";
       style = "cyan bold";
       disabled = false;
-      detect_extensions = [];
-      detect_files = ["k8s.yaml" "kubernetes.yaml" ".kubeconfig"];
-      detect_folders = [".kube"];
-      detect_env_vars = ["KUBECONFIG"];
+      detect_extensions = [ ];
+      detect_files = [
+        "k8s.yaml"
+        "kubernetes.yaml"
+        ".kubeconfig"
+      ];
+      detect_folders = [ ".kube" ];
+      detect_env_vars = [ "KUBECONFIG" ];
     };
     vagrant = {
       symbol = " ";
@@ -298,9 +305,17 @@ in {
       style = "#9D72C0";
       disabled = false;
       symbol = " ";
-      detect_extensions = ["hs" "cabal" "hs-boot"];
-      detect_files = ["stack.yaml" "cabal.project" "package.yaml"];
-      detect_folders = [];
+      detect_extensions = [
+        "hs"
+        "cabal"
+        "hs-boot"
+      ];
+      detect_files = [
+        "stack.yaml"
+        "cabal.project"
+        "package.yaml"
+      ];
+      detect_folders = [ ];
     };
     haxe = {
       symbol = " ";
@@ -325,9 +340,12 @@ in {
       symbol = " ";
       style = "#C2736D";
       disabled = false;
-      detect_extensions = ["jl"];
-      detect_files = ["Project.toml" "Manifest.toml"];
-      detect_folders = [];
+      detect_extensions = [ "jl" ];
+      detect_files = [
+        "Project.toml"
+        "Manifest.toml"
+      ];
+      detect_folders = [ ];
     };
     kotlin = {
       symbol = " ";
@@ -340,9 +358,13 @@ in {
       format = "[${i.icon01}](${viaColor}) [$symbol($version )]($style)";
       style = "#2D4F67";
       disabled = false;
-      detect_extensions = ["lua"];
-      detect_files = [".luarc.json" ".luacheckrc" "stylua.toml"];
-      detect_folders = [];
+      detect_extensions = [ "lua" ];
+      detect_files = [
+        ".luarc.json"
+        ".luacheckrc"
+        "stylua.toml"
+      ];
+      detect_folders = [ ];
     };
     meson = {
       symbol = "󰔷 ";
@@ -379,18 +401,29 @@ in {
       symbol = " ";
       style = "#E6C384";
       disabled = false;
-      detect_extensions = ["ml" "mli" "re" "rei"];
-      detect_files = ["dune-project" "dune" "jbuild" ".merlin" "esy.lock"];
-      detect_folders = [];
+      detect_extensions = [
+        "ml"
+        "mli"
+        "re"
+        "rei"
+      ];
+      detect_files = [
+        "dune-project"
+        "dune"
+        "jbuild"
+        ".merlin"
+        "esy.lock"
+      ];
+      detect_folders = [ ];
     };
     odin = {
       format = "[${i.icon01}](${viaColor})[$symbol($version )]($style)";
       symbol = "󰹩 ";
       style = "#4d699b";
       disabled = false;
-      detect_extensions = ["odin"];
-      detect_files = ["ols.json"];
-      detect_folders = [];
+      detect_extensions = [ "odin" ];
+      detect_files = [ "ols.json" ];
+      detect_folders = [ ];
     };
     opa = {
       symbol = " ";
@@ -427,10 +460,18 @@ in {
       symbol = " ";
       style = "#c4b28a";
       disabled = false;
-      python_binary = ["python3" "python"];
-      detect_extensions = ["py"];
-      detect_files = ["setup.py" "pyproject.toml" "requirements.txt" "__init__.py"];
-      detect_folders = [];
+      python_binary = [
+        "python3"
+        "python"
+      ];
+      detect_extensions = [ "py" ];
+      detect_files = [
+        "setup.py"
+        "pyproject.toml"
+        "requirements.txt"
+        "__init__.py"
+      ];
+      detect_folders = [ ];
     };
     quarto = {
       symbol = " ";
@@ -455,9 +496,18 @@ in {
       symbol = "󰟔 ";
       style = "#497EFC";
       disabled = false;
-      detect_extensions = ["R" "Rd" "Rmd" "Rproj"];
-      detect_files = [".Rprofile" ".Rproj" "renv.lock"];
-      detect_folders = [];
+      detect_extensions = [
+        "R"
+        "Rd"
+        "Rmd"
+        "Rproj"
+      ];
+      detect_files = [
+        ".Rprofile"
+        ".Rproj"
+        "renv.lock"
+      ];
+      detect_folders = [ ];
     };
     ruby = {
       symbol = " ";
@@ -469,18 +519,28 @@ in {
       symbol = " ";
       style = "#c4746e";
       disabled = false;
-      detect_extensions = ["rs"];
-      detect_files = ["Cargo.toml" "Cargo.lock"];
-      detect_folders = [];
+      detect_extensions = [ "rs" ];
+      detect_files = [
+        "Cargo.toml"
+        "Cargo.lock"
+      ];
+      detect_folders = [ ];
     };
     scala = {
       format = "[${i.icon01}](${viaColor}) [$symbol($version )]($style)";
       symbol = " ";
       style = "#c4746e";
       disabled = false;
-      detect_extensions = ["scala" "sbt"];
-      detect_files = ["build.sbt" "build.sc" "project/build.properties"];
-      detect_folders = [];
+      detect_extensions = [
+        "scala"
+        "sbt"
+      ];
+      detect_files = [
+        "build.sbt"
+        "build.sc"
+        "project/build.properties"
+      ];
+      detect_folders = [ ];
     };
     solidity = {
       symbol = " ";
@@ -511,9 +571,15 @@ in {
       format = "[${i.icon01}](${viaColor}) [$symbol($version )]($style)";
       style = "#c4b28a";
       disabled = false;
-      detect_extensions = ["zig" "zon"];
-      detect_files = ["build.zig" "build.zig.zon"];
-      detect_folders = [];
+      detect_extensions = [
+        "zig"
+        "zon"
+      ];
+      detect_files = [
+        "build.zig"
+        "build.zig.zon"
+      ];
+      detect_folders = [ ];
     };
 
     # --- Shells ---

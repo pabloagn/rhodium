@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   programs.helix.languages = {
     language-server.rust-analyzer = {
       command = "rust-analyzer";
@@ -11,7 +12,7 @@
     };
     language-server."pyright-extended" = {
       command = "pyright-langserver";
-      args = ["--stdio"];
+      args = [ "--stdio" ];
     };
     language-server.texlab = {
       command = "texlab";
@@ -24,31 +25,34 @@
     };
     language-server.taplo = {
       command = "taplo";
-      args = ["lsp" "stdio"];
+      args = [
+        "lsp"
+        "stdio"
+      ];
     };
     language-server."yaml-language-server" = {
       command = "yaml-language-server";
-      args = ["--stdio"];
+      args = [ "--stdio" ];
     };
     language-server."typescript-language-server" = {
       command = "typescript-language-server";
-      args = ["--stdio"];
+      args = [ "--stdio" ];
     };
     language-server."tailwindcss-language-server" = {
       command = "tailwindcss-language-server";
-      args = ["--stdio"];
+      args = [ "--stdio" ];
     };
     language-server."vscode-html-language-server" = {
       command = "vscode-html-language-server";
-      args = ["--stdio"];
+      args = [ "--stdio" ];
     };
     language-server."vscode-css-language-server" = {
       command = "vscode-css-language-server";
-      args = ["--stdio"];
+      args = [ "--stdio" ];
     };
     language-server.bash-language-server = {
       command = "bash-language-server";
-      args = ["start"];
+      args = [ "start" ];
     };
     language-server.clangd = {
       command = "clangd";
@@ -64,11 +68,11 @@
     };
     language-server.haskell-language-server = {
       command = "haskell-language-server-wrapper";
-      args = ["--lsp"];
+      args = [ "--lsp" ];
     };
     language-server.intelephense = {
       command = "intelephense";
-      args = ["--stdio"];
+      args = [ "--stdio" ];
     };
     language-server.jdt-language-server = {
       command = "jdt-language-server";
@@ -78,7 +82,7 @@
     };
     language-server.marksman = {
       command = "marksman";
-      args = ["server"];
+      args = [ "server" ];
     };
     language-server.nixd = {
       command = "nixd";
@@ -88,11 +92,11 @@
     };
     language-server.omnisharp = {
       command = "omnisharp";
-      args = ["-lsp"];
+      args = [ "-lsp" ];
     };
     language-server.perlnavigator = {
       command = "perlnavigator";
-      args = ["--stdio"];
+      args = [ "--stdio" ];
     };
     language-server.sourcekit-lsp = {
       command = "sourcekit-lsp";

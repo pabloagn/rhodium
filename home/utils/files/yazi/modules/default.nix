@@ -3,13 +3,15 @@
   pkgs,
   pkgs-unstable,
   ...
-}: let
-  configBase = import ./base.nix {};
-  configKeymaps = import ./keymap.nix {};
-  configFiles = import ./files.nix {inherit pkgs;};
-  initLua = import ../plugins {inherit lib;};
-  theme = import ./kanso.nix {};
-in {
+}:
+let
+  configBase = import ./base.nix { };
+  configKeymaps = import ./keymap.nix { };
+  configFiles = import ./files.nix { inherit pkgs; };
+  initLua = import ../plugins { inherit lib; };
+  theme = import ./kanso.nix { };
+in
+{
   programs.yazi = {
     settings = configBase;
     theme = theme;

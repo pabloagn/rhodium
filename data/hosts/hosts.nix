@@ -8,7 +8,7 @@
         monitorResolution = "";
         monitorRefreshRate = "120";
         monitorScalingFactor = "1.5";
-        };
+      };
       defaultLocale = "";
     };
 
@@ -20,7 +20,7 @@
         monitorResolution = "1920x1080";
         monitorRefreshRate = "300";
         monitorScalingFactor = "1.0";
-        };
+      };
       defaultLocale = "";
     };
   };

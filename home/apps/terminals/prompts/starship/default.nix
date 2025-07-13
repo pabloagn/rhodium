@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   imports = [
     # --- Main Modules ---
     ./core.nix

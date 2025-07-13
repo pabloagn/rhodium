@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   programs.zed-editor = {
     userSettings = {
       # --- Appearance ---
@@ -29,7 +30,7 @@
       use_autoclose = true;
       use_auto_surround = true;
       vim_mode = true;
-      wrap_guides = [];
+      wrap_guides = [ ];
 
       # --- Features And Telemetry ---
       features = {

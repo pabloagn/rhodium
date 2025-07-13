@@ -1,4 +1,5 @@
-{targetTheme, ...}: {
+{ targetTheme, ... }:
+{
   programs.bat = {
     enable = true;
 

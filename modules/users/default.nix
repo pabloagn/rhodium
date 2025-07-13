@@ -2,16 +2,18 @@
   pkgs,
   users,
   ...
-}: let
+}:
+let
   user_001_data =
     users.user_001 or {
       username = "user";
       fullName = "Default User";
       email = "user@example.com";
       description = "Default User";
-      extraGroups = ["wheel"];
+      extraGroups = [ "wheel" ];
     };
-in {
+in
+{
   users.users."${user_001_data.username}" = {
     name = user_001_data.username;
     isNormalUser = user_001_data.isNormalUser or true;

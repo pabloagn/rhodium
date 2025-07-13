@@ -22,106 +22,115 @@
     };
   };
 
-  outputs = {
-    self,
-    nixpkgs,
-    flake-utils,
-    uv2nix,
-    pyproject-nix,
-    pyproject-build-systems,
-    ...
-  }:
-    flake-utils.lib.eachDefaultSystem (system: let
-      pkgs = nixpkgs.legacyPackages.${system};
-      inherit (nixpkgs) lib;
+  outputs =
+    {
+      self,
+      nixpkgs,
+      flake-utils,
+      uv2nix,
+      pyproject-nix,
+      pyproject-build-systems,
+      ...
+    }:
+    flake-utils.lib.eachDefaultSystem (
+      system:
+      let
+        pkgs = nixpkgs.legacyPackages.${system};
+        inherit (nixpkgs) lib;
 
-      pythonEnv = pkgs.python311.withPackages (ps:
-        with ps; [
-          numpy
-          scipy
-          pandas
-          matplotlib
-          seaborn
-          jupyter
-          jupyterlab
-          ipython
-          ipykernel
-          ipywidgets
-          openpyxl
-          # xlrd
-          # pyarrow
-          # fastparquet
-          # ruff
-          # flake8
-          # mypy
-          # pytest
-          # pytest-cov
-          # requests
-          # beautifulsoup4
-          # lxml
-          # tqdm
-          # click
-          # rich
-        ]);
-
-      uvWorkspace =
-        if builtins.pathExists ./uv.lock
-        then uv2nix.lib.workspace.loadWorkspace {workspaceRoot = ./.;}
-        else null;
-
-      uvOverlay =
-        if uvWorkspace != null
-        then uvWorkspace.mkPyprojectOverlay {sourcePreference = "wheel";}
-        else (_final: _prev: {});
-
-      pyprojectOverrides = _final: _prev: {};
-
-      uvPythonSet =
-        if uvWorkspace != null
-        then
-          (pkgs.callPackage pyproject-nix.build.packages {
-            python = pkgs.python311;
-          }).overrideScope
-          (lib.composeManyExtensions [
-            pyproject-build-systems.overlays.default
-            uvOverlay
-            pyprojectOverrides
-          ])
-        else null;
-
-      uvEnvironment =
-        if uvPythonSet != null
-        then uvPythonSet.mkVirtualEnv "ds-uv-env" uvWorkspace.deps.default
-        else null;
-    in {
-      devShells.default = pkgs.mkShell {
-        buildInputs = with pkgs;
-          [
-            pythonEnv
-            pkg-config
-            libffi
-            openssl
-            blas
-            lapack
-            gfortran
-            git
-            curl
-            which
-            uv
+        pythonEnv = pkgs.python311.withPackages (
+          ps: with ps; [
+            numpy
+            scipy
+            pandas
+            matplotlib
+            seaborn
+            jupyter
+            jupyterlab
+            ipython
+            ipykernel
+            ipywidgets
+            openpyxl
+            # xlrd
+            # pyarrow
+            # fastparquet
+            # ruff
+            # flake8
+            # mypy
+            # pytest
+            # pytest-cov
+            # requests
+            # beautifulsoup4
+            # lxml
+            # tqdm
+            # click
+            # rich
           ]
-          ++ lib.optionals (uvEnvironment != null) [uvEnvironment];
+        );
 
-        env =
-          {
-            UV_PYTHON_DOWNLOADS = "never";
-            UV_PYTHON = "${pkgs.python311}/bin/python";
-            MPLBACKEND = "Agg";
-          }
-          // lib.optionalAttrs pkgs.stdenv.isLinux {
-            LD_LIBRARY_PATH = lib.makeLibraryPath pkgs.pythonManylinuxPackages.manylinux1;
-          };
+        uvWorkspace =
+          if builtins.pathExists ./uv.lock then
+            uv2nix.lib.workspace.loadWorkspace { workspaceRoot = ./.; }
+          else
+            null;
 
-        shellHook = ''unset PYTHONPATH'';
-      };
-    });
+        uvOverlay =
+          if uvWorkspace != null then
+            uvWorkspace.mkPyprojectOverlay { sourcePreference = "wheel"; }
+          else
+            (_final: _prev: { });
+
+        pyprojectOverrides = _final: _prev: { };
+
+        uvPythonSet =
+          if uvWorkspace != null then
+            (pkgs.callPackage pyproject-nix.build.packages {
+              python = pkgs.python311;
+            }).overrideScope
+              (
+                lib.composeManyExtensions [
+                  pyproject-build-systems.overlays.default
+                  uvOverlay
+                  pyprojectOverrides
+                ]
+              )
+          else
+            null;
+
+        uvEnvironment =
+          if uvPythonSet != null then uvPythonSet.mkVirtualEnv "ds-uv-env" uvWorkspace.deps.default else null;
+      in
+      {
+        devShells.default = pkgs.mkShell {
+          buildInputs =
+            with pkgs;
+            [
+              pythonEnv
+              pkg-config
+              libffi
+              openssl
+              blas
+              lapack
+              gfortran
+              git
+              curl
+              which
+              uv
+            ]
+            ++ lib.optionals (uvEnvironment != null) [ uvEnvironment ];
+
+          env =
+            {
+              UV_PYTHON_DOWNLOADS = "never";
+              UV_PYTHON = "${pkgs.python311}/bin/python";
+              MPLBACKEND = "Agg";
+            }
+            // lib.optionalAttrs pkgs.stdenv.isLinux {
+              LD_LIBRARY_PATH = lib.makeLibraryPath pkgs.pythonManylinuxPackages.manylinux1;
+            };
+
+          shellHook = ''unset PYTHONPATH'';
+        };
+      }
+    );
 }

@@ -4,9 +4,11 @@
   pkgs,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.userExtraServices.rh-mako;
-in {
+in
+{
   options.userExtraServices.rh-mako = {
     enable = mkEnableOption "A lightweight Wayland notification daemon";
   };
@@ -15,8 +17,8 @@ in {
     systemd.user.services.rh-mako = {
       Unit = {
         Description = "Mako notification daemon";
-        PartOf = ["graphical-session.target"];
-        After = ["graphical-session-pre.target"];
+        PartOf = [ "graphical-session.target" ];
+        After = [ "graphical-session-pre.target" ];
       };
 
       Service = {
@@ -28,7 +30,7 @@ in {
       };
 
       Install = {
-        WantedBy = ["graphical-session.target"];
+        WantedBy = [ "graphical-session.target" ];
       };
     };
   };

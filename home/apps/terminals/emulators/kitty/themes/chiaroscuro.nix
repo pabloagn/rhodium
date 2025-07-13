@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   programs.kitty = {
     settings = {
       # Theme

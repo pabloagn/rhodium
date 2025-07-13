@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   imports = [
     ./thunar.nix
   ];

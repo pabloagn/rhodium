@@ -4,13 +4,15 @@
   pkgs,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.manager.gdm;
-in {
+in
+{
   options.manager.gdm = {
     enable = mkEnableOption "GDM display manager with custom configuration";
   };
-  
+
   config = mkIf cfg.enable {
     services.xserver = {
       enable = true;

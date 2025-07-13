@@ -77,13 +77,19 @@ in
       profile = "media";
       url = "https://1337x.to/";
       description = "1337x.to";
-      categories = [ categories.entertainment categories.torrenting ];
+      categories = [
+        categories.entertainment
+        categories.torrenting
+      ];
     };
     torrenting-thepiratebay = {
       profile = "media";
       url = "https://thepiratebay.org/index.html";
       description = "The Pirate Bay";
-      categories = [ categories.entertainment categories.torrenting ];
+      categories = [
+        categories.entertainment
+        categories.torrenting
+      ];
     };
     video-downloader = {
       profile = "media";
@@ -146,7 +152,10 @@ in
       profile = "personal";
       url = "https://www.allianz.com.mx/content/dam/onemarketing/iberolatam/allianz-mx/ahorro---plus/documentos---plus/Folleto%20-%20PLUS.pdf";
       description = "Allianz Plus PDF";
-      categories = [ categories.finance categories.reference ];
+      categories = [
+        categories.finance
+        categories.reference
+      ];
     };
     amazon-mexico = {
       profile = "personal";
@@ -164,13 +173,19 @@ in
       profile = "personal";
       url = "https://www.asciiart.eu/";
       description = "ASCII Art";
-      categories = [ categories.design categories.reference ];
+      categories = [
+        categories.design
+        categories.reference
+      ];
     };
     asciiart-imagetoascii = {
       profile = "personal";
       url = "https://www.asciiart.eu/image-to-ascii";
       description = "ASCII Art - Image to ASCII";
-      categories = [ categories.design categories.utils ];
+      categories = [
+        categories.design
+        categories.utils
+      ];
     };
     cloudflare = {
       profile = "personal";
@@ -182,7 +197,10 @@ in
       profile = "personal";
       url = "https://www.cloudping.info/";
       description = "Cloudping";
-      categories = [ categories.utils categories.reference ];
+      categories = [
+        categories.utils
+        categories.reference
+      ];
     };
     common-mimetypes = {
       profile = "personal";
@@ -242,31 +260,46 @@ in
       profile = "personal";
       url = "https://github.com/pabloagn/chiaroscuro";
       description = "GitHub Chiaroscuro";
-      categories = [ categories.productivity categories.repositories ];
+      categories = [
+        categories.productivity
+        categories.repositories
+      ];
     };
     github-phantom = {
       profile = "personal";
       url = "https://github.com/pabloagn/phantom";
       description = "GitHub Phantom";
-      categories = [ categories.productivity categories.repositories ];
+      categories = [
+        categories.productivity
+        categories.repositories
+      ];
     };
     github-rhodium = {
       profile = "personal";
       url = "https://github.com/pabloagn/rhodium";
       description = "GitHub Rhodium";
-      categories = [ categories.productivity categories.repositories ];
+      categories = [
+        categories.productivity
+        categories.repositories
+      ];
     };
     gnome-style-schemes = {
       profile = "personal";
       url = "https://wiki.gnome.org/Projects/GtkSourceView/StyleSchemes";
       description = "GNOME Style Schemes";
-      categories = [ categories.reference categories.design ];
+      categories = [
+        categories.reference
+        categories.design
+      ];
     };
     goodreads = {
       profile = "personal";
       url = "https://goodreads.com";
       description = "Goodreads";
-      categories = [ categories.entertainment categories.social ];
+      categories = [
+        categories.entertainment
+        categories.social
+      ];
     };
     google-advanced-search = {
       profile = "personal";
@@ -290,13 +323,19 @@ in
       profile = "personal";
       url = "https://www.inoreader.com/";
       description = "Inoreader";
-      categories = [ categories.news categories.productivity ];
+      categories = [
+        categories.news
+        categories.productivity
+      ];
     };
     letterboxd = {
       profile = "personal";
       url = "https://letterboxd.com/jk_huysmans/films/diary/";
       description = "Letterboxd - Diary";
-      categories = [ categories.entertainment categories.social ];
+      categories = [
+        categories.entertainment
+        categories.social
+      ];
     };
     linear = {
       profile = "personal";
@@ -314,7 +353,10 @@ in
       profile = "personal";
       url = "https://www.linkedin.com";
       description = "LinkedIn";
-      categories = [ categories.social categories.productivity ];
+      categories = [
+        categories.social
+        categories.productivity
+      ];
     };
     markdown-to-excel = {
       profile = "personal";
@@ -326,7 +368,10 @@ in
       profile = "personal";
       url = "https://medium.com";
       description = "Medium";
-      categories = [ categories.news categories.reference ];
+      categories = [
+        categories.news
+        categories.reference
+      ];
     };
     mercadolibre = {
       profile = "personal";
@@ -350,7 +395,10 @@ in
       profile = "personal";
       url = "https://www.nerdfonts.com/cheat-sheet";
       description = "NerdFonts Cheat Sheet";
-      categories = [ categories.reference categories.design ];
+      categories = [
+        categories.reference
+        categories.design
+      ];
     };
     nix-operators = {
       profile = "personal";
@@ -416,25 +464,37 @@ in
       profile = "personal";
       url = "https://pinterest.com";
       description = "Pinterest";
-      categories = [ categories.design categories.social ];
+      categories = [
+        categories.design
+        categories.social
+      ];
     };
     plainapp-fiio = {
       profile = "personal";
       url = "http://10.141.245.168:8080/";
       description = "PlainApp FiiO M11 Plus";
-      categories = [ categories.servers categories.entertainment ];
+      categories = [
+        categories.servers
+        categories.entertainment
+      ];
     };
     plainapp-oppo = {
       profile = "personal";
       url = "https://10.141.245.132:8443/";
       description = "PlainApp Oppo";
-      categories = [ categories.servers categories.entertainment ];
+      categories = [
+        categories.servers
+        categories.entertainment
+      ];
     };
     plex = {
       profile = "personal";
       url = "https://app.plex.tv/";
       description = "Plex";
-      categories = [ categories.entertainment categories.servers ];
+      categories = [
+        categories.entertainment
+        categories.servers
+      ];
     };
     preferences = {
       profile = "personal";
@@ -476,7 +536,10 @@ in
       profile = "personal";
       url = "https://reddit.com";
       description = "Reddit";
-      categories = [ categories.social categories.entertainment ];
+      categories = [
+        categories.social
+        categories.entertainment
+      ];
     };
     server-LME-QNAP-6S4R = {
       profile = "personal";
@@ -506,13 +569,19 @@ in
       profile = "personal";
       url = "https://terminal.sexy/";
       description = "Terminal.Sexy";
-      categories = [ categories.design categories.utils ];
+      categories = [
+        categories.design
+        categories.utils
+      ];
     };
     tvtime = {
       profile = "personal";
       url = "https://app.tvtime.com/welcome";
       description = "TV Time";
-      categories = [ categories.entertainment categories.social ];
+      categories = [
+        categories.entertainment
+        categories.social
+      ];
     };
     unsplash = {
       profile = "personal";
@@ -563,7 +632,10 @@ in
       profile = "solenoidlabs";
       url = "https://figma.com";
       description = "Figma";
-      categories = [ categories.design categories.productivity ];
+      categories = [
+        categories.design
+        categories.productivity
+      ];
     };
     github = {
       profile = "solenoidlabs";

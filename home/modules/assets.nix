@@ -4,10 +4,12 @@
   config,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.assets;
   repoAssetsPath = toString ../assets;
-in {
+in
+{
   options.assets = {
     icons.enable = mkEnableOption "Link icons directory to XDG data home";
     ascii.enable = mkEnableOption "Link ascii directory to XDG data home";
@@ -78,7 +80,7 @@ in {
     # }
     # Verification activation script
     {
-      home.activation.verify-assets = lib.hm.dag.entryAfter ["linkGeneration"] ''
+      home.activation.verify-assets = lib.hm.dag.entryAfter [ "linkGeneration" ] ''
         ${optionalString cfg.wallpapers.enable ''
           if [ -L "${config.xdg.dataHome}/wallpapers" ] && [ -e "${config.xdg.dataHome}/wallpapers" ]; then
             echo "✓ Wallpapers symlink verified"

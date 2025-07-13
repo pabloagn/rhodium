@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   programs.zed-editor = {
     userSettings = {
       "experimental.theme_overrides" = {

@@ -3,7 +3,8 @@
   pkgs,
   lib,
   ...
-}: {
+}:
+{
   virtualisation.vmVariant = {
     # VM resources
     virtualisation = {
@@ -17,11 +18,16 @@
       isNormalUser = true;
       initialPassword = "test";
       group = "vmtest";
-      extraGroups = ["wheel" "video" "audio" "networkmanager"];
+      extraGroups = [
+        "wheel"
+        "video"
+        "audio"
+        "networkmanager"
+      ];
       shell = pkgs.bash;
     };
 
-    users.groups.vmtest = {};
+    users.groups.vmtest = { };
 
     # Auto-login for VM
     services.xserver.displayManager.autoLogin = {
