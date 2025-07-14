@@ -339,7 +339,7 @@ in
         border-color = "#2a2a2aFF";
         format = "<b>◌ %s</b>\\n%b";
         default-timeout = notifTime.md;
-        on-button-left = "kitty --directory $HOME/pictures/ocr -e yazi";
+        # on-button-left = "kitty --directory $HOME/pictures/ocr -e yazi";
       };
 
       "app-name=rh-util-opacity" = {

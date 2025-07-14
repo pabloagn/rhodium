@@ -1,8 +1,18 @@
 { pkgs, ... }:
 {
   imports = [
+    ./csound
+    ./mpd.nix
+    ./ncmpc.nix
     ./ncspot.nix
     # ./puredata.nix
+    ./rmpc.nix
+    # ./sonicpi.nix
+    ./spotify.nix
+    # ./supercollider.nix
+    ./tidal.nix
+    # ./tidalcycles.nix
+    # ./vcv-rack.nix
   ];
 
   home.packages = with pkgs; [
@@ -12,14 +22,8 @@
     easyeffects # Equalizer for PipeWire
     helvum # GTK patchbay for PipeWire
     playerctl
-    spotify
-    # spotify-player # Terminal spotify player that has feature parity with the official client
-    tidal-dl # Downloader for tidal media
-    tidal-hifi # Tidal GUI running on Electron
 
     # --- Music Production ---
-    # vcv-rack
-    # supercollider
     # csound
   ];
 }

@@ -653,20 +653,43 @@ end, {
 	desc = "Replace buffer with clipboard",
 })
 
--- --- Smart Replace ---
--- vim.keymap.set({ "n", "v" }, "<leader>rv", functions.smart_replace, {
--- 	noremap = true,
--- 	silent = false,
--- 	desc = "Replace word/selection in buffer",
--- })
-
--- TODO: Pass to functions. For now this works good.
-vim.keymap.set(
-	{ "n", "v" }, -- normal & visual
-	"<leader>rr", -- space-r-r
-	[[<cmd>lua local w=vim.fn.mode():match("[vV]") and vim.fn.getreg("v")~="" and vim.fn.getreg("v") or vim.fn.expand("<cword>"); if w=="" then print("No word") else local n=vim.fn.input("Replace '"..w.."' with: ",w); if n~="" and n~=w then vim.cmd("%s/\\V\\<"..vim.fn.escape(w,"/\\.*$^~[]").."\\>/"..vim.fn.escape(n,"/\\&~").."/gc") end end<CR>]],
-	{ noremap = true, silent = true, desc = "Replace word / selection" }
-)
+-- TODO: Pass to functions
+vim.keymap.set({ "n", "v" }, "<leader>rr", function()
+	local mode = vim.fn.mode()
+	local target
+	if mode == "v" then
+		local start_pos = vim.fn.getpos("v")
+		local end_pos = vim.fn.getpos(".")
+		local line = vim.fn.getline(".")
+		target = line:sub(math.min(start_pos[3], end_pos[3]), math.max(start_pos[3], end_pos[3]))
+	else
+		local col = vim.fn.col(".")
+		local line = vim.fn.getline(".")
+		local char = line:sub(col, col)
+		if char:match("[%a%d]") then
+			local start = col
+			local end_ = col
+			while start > 1 and line:sub(start - 1, start - 1):match("[%a%d]") do
+				start = start - 1
+			end
+			while end_ < #line and line:sub(end_ + 1, end_ + 1):match("[%a%d]") do
+				end_ = end_ + 1
+			end
+			target = line:sub(start, end_)
+		else
+			target = char
+		end
+	end
+	vim.ui.input({ prompt = 'Replace "' .. target .. '" with: ' }, function(input)
+		if input then
+			vim.cmd("%s/" .. vim.fn.escape(target, "/\\.*$^~[]") .. "/" .. input .. "/g")
+		end
+	end)
+end, {
+	noremap = true,
+	silent = true,
+	desc = "Replace normal or visual smartly and with prompt to user",
+})
 
 -- --- Replace (spectre) ---
 vim.keymap.set("n", "<leader>rt", '<cmd>lua require("spectre").toggle()<CR>', {
