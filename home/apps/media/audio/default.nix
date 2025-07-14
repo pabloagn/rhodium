@@ -1,17 +1,16 @@
 { pkgs, ... }:
 {
   imports = [
-    ./csound
-    ./mpd.nix
+    ./csound.nix
     ./ncmpc.nix
     ./ncspot.nix
     # ./puredata.nix
     ./rmpc.nix
-    ./sonicpi.nix
+    # ./sonicpi.nix
     ./spotify.nix
-    # ./supercollider.nix
+    ./supercollider.nix
     ./tidal.nix
-    # ./tidalcycles.nix
+    ./tidalcycles.nix
     # ./vcv-rack.nix
   ];
 

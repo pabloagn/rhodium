@@ -8,7 +8,9 @@
   ];
 
   # rtkit
-  security.rtkit.enable = true; # NOTE: Required by PulseAudio and PipeWire to acquire realtime priority
+  security.rtkit = {
+    enable = true; # NOTE: Required by PulseAudio and PipeWire to acquire realtime priority
+  };
 
   # Pipewire
   services = {
@@ -22,6 +24,9 @@
       jack.enable = true;
       pulse.enable = true; # NOTE: Enable pulse from pipewire
       wireplumber.enable = true;
+    };
+    mpd = {
+      enable = true; # Flexible, powerful daemon for playing music
     };
   };
 }
