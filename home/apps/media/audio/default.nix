@@ -7,7 +7,7 @@
     ./ncspot.nix
     # ./puredata.nix
     ./rmpc.nix
-    # ./sonicpi.nix
+    ./sonicpi.nix
     ./spotify.nix
     # ./supercollider.nix
     ./tidal.nix
@@ -22,8 +22,5 @@
     easyeffects # Equalizer for PipeWire
     helvum # GTK patchbay for PipeWire
     playerctl
-
-    # --- Music Production ---
-    # csound
   ];
 }
