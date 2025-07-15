@@ -45,6 +45,7 @@
   extraServices = {
     asusKeyboardBacklight.enable = true;
     laptopLid.enable = true;
+    rh-kmonad.enable = true;
   };
 
   # Extra rules
