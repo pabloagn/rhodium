@@ -45,7 +45,7 @@
   # Extra rules
   extraRules = {
     keychronUdev.enable = true;
-    extraRules.hdmiAutoSwitch.enable = true;
+    hdmiAutoSwitch.enable = true;
   };
 
   # Garbage override
