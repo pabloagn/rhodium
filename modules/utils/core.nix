@@ -11,6 +11,7 @@
 
     # --- Core System Utilities ---
     coreutils # Basic GNU tools
+    coreutils-prefixed # Prefixed version of coreutils
     util-linux # Includes lscpu
     uutils-coreutils-noprefix # An improvement over coreutils
 

@@ -15,9 +15,13 @@ in
       type = types.path;
       default = config.home.homeDirectory + "/.config/kmonad/keychron.kbd";
     };
-    internalConfigFile = mkOption {
+    justineConfigFile = mkOption {
       type = types.path;
       default = config.home.homeDirectory + "/.config/kmonad/justine.kbd";
+    };
+    alexandriaConfigFile = mkOption {
+      type = types.path;
+      default = config.home.homeDirectory + "/.config/kmonad/alexandria.kbd";
     };
     extraArgs = mkOption {
       type = types.listOf types.str;
@@ -25,6 +29,23 @@ in
     };
   };
   config = mkIf cfg.enable {
+    systemd.user.services.rh-kmonad-alexandria = {
+      Unit.PartOf = [ "graphical-session.target" ];
+      Unit.Wants = [ "dbus-org.freedesktop.Notifications.service" ];
+      Unit.After = [
+        "graphical-session-pre.target"
+        "dbus-org.freedesktop.Notifications.service"
+      ];
+      Unit.ConditionPathExists = "/dev/input/event4";
+      Service.Type = "simple";
+      Service.ExecStart =
+        "${pkgs.kmonad}/bin/kmonad ${cfg.alexandriaConfigFile} " + (lib.concatStringsSep " " cfg.extraArgs);
+      Service.Restart = "on-failure";
+      Service.RestartSec = 1;
+      Service.Nice = -5;
+      Install.WantedBy = [ "graphical-session.target" ];
+    };
+
     systemd.user.services.rh-kmonad-justine = {
       Unit.PartOf = [ "graphical-session.target" ];
       Unit.Wants = [ "dbus-org.freedesktop.Notifications.service" ];
@@ -35,7 +56,7 @@ in
       Unit.ConditionPathExists = "/dev/input/by-path/platform-i8042-serio-0-event-kbd";
       Service.Type = "simple";
       Service.ExecStart =
-        "${pkgs.kmonad}/bin/kmonad ${cfg.internalConfigFile} " + (lib.concatStringsSep " " cfg.extraArgs);
+        "${pkgs.kmonad}/bin/kmonad ${cfg.justineConfigFile} " + (lib.concatStringsSep " " cfg.extraArgs);
       Service.Restart = "on-failure";
       Service.RestartSec = 1;
       Service.Nice = -5;

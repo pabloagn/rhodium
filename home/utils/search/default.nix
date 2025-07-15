@@ -4,7 +4,7 @@
     ./atuin.nix
     ./eza.nix
     ./fzf.nix
-    ./mcfly.nix
+    # ./mcfly.nix
     ./skim.nix # A fzf alternative written in rust
     ./television.nix # A telescope-inspired rust picker
   ];
