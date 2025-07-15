@@ -3,6 +3,10 @@
 with lib;
 
 {
+  # NOTE:
+  # For this to work, the following needs to be run:
+  #   sudo loginctl enable-linger {username}
+  # Where {username} = user name
   options.extraRules.keychronUdev.enable = mkEnableOption "Udev rule for Keychron V1 (exposes /dev/input/keychron_v1)";
 
   config = mkIf config.extraRules.keychronUdev.enable {
