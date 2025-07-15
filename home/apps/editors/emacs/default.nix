@@ -1,4 +1,7 @@
-{ ... }:
+{ pkgs, ... }:
 {
-  services.emacs.enable = true;
+  services.emacs = with pkgs; {
+    enable = true;
+    package = emacs-pgtk;
+  };
 }
