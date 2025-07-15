@@ -23,10 +23,6 @@ launch_app() {
     # Find corresponding file from cache
     filename=$(awk -F'\t' -v sel="$selected" '$1 == sel { print $2; exit }' "$CACHE_FILE")
 
-    # if [[ -n "$filename" ]]; then
-    #     gtk-launch "$(basename "$filename" .desktop)" &
-    # fi
-
     if [[ -n "$filename" ]]; then
         (gtk-launch "$(basename "$filename" .desktop)" || true) >/dev/null 2>&1 &
     fi

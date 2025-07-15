@@ -43,18 +43,18 @@ in
     };
 
     systemd.user.services.rh-kmonad-keychron = {
-      Unit.PartOf = [ "graphical-session.target" ];
-      Unit.Wants = [ "dbus-org.freedesktop.Notifications.service" ];
-      Unit.After = [
-        "graphical-session-pre.target"
-        "dbus-org.freedesktop.Notifications.service"
-      ];
-      Service.Type = "simple";
-      Service.ExecStartPre = "${pkgs.bash}/bin/bash -c 'until [ -e /dev/input/by-id/usb-Keychron_Keychron_V1-event-kbd ]; do sleep 0.5; done'";
-      Service.ExecStart =
-        "${pkgs.kmonad}/bin/kmonad ${cfg.configFile} " + (lib.concatStringsSep " " cfg.extraArgs);
-      Service.Restart = "no";
-      Service.Nice = -5;
+      Unit = {
+        Description = "KMonad – Keychron V1";
+        # Make sure it isn’t started unless the device is really there
+        ConditionPathExists = "/dev/input/by-id/usb-Keychron_Keychron_V1-event-kbd";
+      };
+
+      Service = {
+        Type = "simple";
+        ExecStart = "${pkgs.kmonad}/bin/kmonad ${cfg.configFile} " + lib.concatStringsSep " " cfg.extraArgs;
+        Restart = "on-failure";
+        Nice = -5;
+      };
     };
   };
 }
