@@ -17,26 +17,34 @@ let
       "graphical-session-pre.target"
       "dbus-org.freedesktop.Notifications.service"
     ];
+
+    # Ensure device exists before starting
+    Unit.ConditionPathExists = "/dev/input/by-id/usb-Keychron_Keychron_V1-event-kbd";
+
     Service.Type = "simple";
     Service.ExecStart =
       "${pkgs.kmonad}/bin/kmonad ${configFile} " + (lib.concatStringsSep " " cfg.extraArgs);
     Service.Restart = "on-failure";
     Service.RestartSec = 1;
     Service.Nice = -5;
-    Install.WantedBy = [ ];
+
+    Install.WantedBy = [ "default.target" ];
   };
 in
 {
   options.userExtraServices.rh-kmonad = {
-    enable = mkEnableOption "kmonad";
+    enable = mkEnableOption "KMonad user services";
+
     configFile = mkOption {
       type = types.path;
       default = config.home.homeDirectory + "/.config/kmonad/keychron.kbd";
     };
+
     internalConfigFile = mkOption {
       type = types.path;
       default = config.home.homeDirectory + "/.config/kmonad/justine.kbd";
     };
+
     extraArgs = mkOption {
       type = types.listOf types.str;
       default = [ ];
@@ -48,11 +56,7 @@ in
       Install.WantedBy = [ "graphical-session.target" ];
     };
 
-    systemd.user.services.rh-kmonad-keychron = (makeService cfg.configFile) // {
-      Unit.ConditionPathExists = "/dev/input/by-id/usb-Keychron_Keychron_V1-event-kbd";
-      Unit.After = [ "dev-input-keychron_v1.device" ];
-      Unit.BindsTo = [ "dev-input-keychron_v1.device" ];
-      Install.WantedBy = [ "dev-input-keychron_v1.device" ];
-    };
+    systemd.user.services.rh-kmonad-keychron = makeService cfg.configFile;
   };
 }
+

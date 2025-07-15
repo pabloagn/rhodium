@@ -9,12 +9,12 @@ in
 
     keychronConfigFile = mkOption {
       type = types.path;
-      description = "Config file for the external Keychron keyboard";
+      description = "KMonad config file for external Keychron keyboard";
     };
 
     internalConfigFile = mkOption {
       type = types.path;
-      description = "Config file for the internal keyboard";
+      description = "KMonad config file for internal keyboard";
     };
 
     extraArgs = mkOption {
@@ -26,10 +26,10 @@ in
   config = mkIf cfg.enable {
     systemd.services.rh-kmonad-keychron = {
       description = "KMonad for external Keychron keyboard";
-      wantedBy = [ "dev-input-keychron_v1.device" ];
-      bindsTo = [ "dev-input-keychron_v1.device" ];
-      after = [ "dev-input-keychron_v1.device" ];
-      unitConfig.ConditionPathExists = "/dev/input/keychron_v1";
+      wantedBy = [ "dev-input-by\\x2did-usb\\x2dKeychron_Keychron_V1\\x2devent\\x2dkbd.device" ];
+      bindsTo = [ "dev-input-by\\x2did-usb\\x2dKeychron_Keychron_V1\\x2devent\\x2dkbd.device" ];
+      after = [ "dev-input-by\\x2did-usb\\x2dKeychron_Keychron_V1\\x2devent\\x2dkbd.device" ];
+      unitConfig.ConditionPathExists = "/dev/input/by-id/usb-Keychron_Keychron_V1-event-kbd";
       serviceConfig = {
         ExecStart = "${pkgs.kmonad}/bin/kmonad ${toString cfg.keychronConfigFile} ${lib.concatStringsSep " " cfg.extraArgs}";
         Restart = "on-failure";

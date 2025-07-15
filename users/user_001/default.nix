@@ -60,7 +60,7 @@
   # NOTE: These are custom services located under home/services, and run as systemd daemons
   userExtraServices = {
     rh-eww.enable = false;
-    # rh-kmonad.enable = true;
+    rh-kmonad.enable = true;
     rh-mako.enable = false;
     rh-neovim-daemon.enable = false;
     rh-swaybg.enable = true;

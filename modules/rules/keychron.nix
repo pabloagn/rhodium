@@ -7,9 +7,11 @@ with lib;
 
   config = mkIf config.extraRules.keychronUdev.enable {
     services.udev.extraRules = ''
-      # Keychron V1 – create /dev/input/keychron_v1 and generate a systemd device unit
-      SUBSYSTEM=="input", ATTRS{idVendor}=="3434", ATTRS{idProduct}=="0311", \
-        SYMLINK+="input/keychron_v1", TAG+="systemd"
+      ACTION=="add", SUBSYSTEM=="input", KERNEL=="event*", \
+        ATTRS{idVendor}=="3434", ATTRS{idProduct}=="0311", \
+        ENV{ID_SEAT}=="seat0", \
+        TAG+="uaccess", \
+        ENV{SYSTEMD_USER_WANTS}="kmonad.service"
     '';
   };
 }
