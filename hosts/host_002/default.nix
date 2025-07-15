@@ -18,10 +18,13 @@
     ../../modules/integration
     ../../modules/virtualization
     ../../modules/apps
+    ../../modules/rules
     ../../modules/maintenance
     ../../modules/utils
   ];
 
+  # Base
+  # ---------------------------------
   # Kernel version
   boot.kernelPackages = pkgs.linuxPackages_6_12; # Courtesy of fucking NVIDIA, they dont support latest kernel yet.
 
@@ -31,6 +34,8 @@
     networkmanager.enable = true;
   };
 
+  # Modules
+  # ---------------------------------
   # Extra Services
   extraServices = {
     asusKeyboardBacklight.enable = false;
@@ -45,6 +50,7 @@
   };
 
   # Extra Args
+  # ---------------------------------
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"

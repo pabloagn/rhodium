@@ -7,7 +7,7 @@
     ./ghostty.nix
     ./keyring.nix
     ./kitty.nix
-    # ./kmonad.nix
+    ./kmonad.nix
     ./mako.nix
     ./neovim.nix
     ./swaybg.nix
