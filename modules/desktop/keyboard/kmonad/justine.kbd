@@ -1,0 +1,178 @@
+#|  ------------------------------------------------------------------------------------
+
+                                    Rhodium System
+                             |- Justine's KMonad Layout -|
+
+    ------------------------------------------------------------------------------------  |#
+
+#|  ------------------------------------------------------------------------------------
+
+    ++ Template
+
+    -| Since Lisps provide nice syntactic sugar, we'll make use of it.
+    -| All layouts must be defined using the exact format below:
+
+
+    (defsrc
+        caps  spc   lalt  ralt
+        a     b     c     d     e     f     g     h     i
+        j     k     l     m     n     o     p     q     r
+        s     t     u     v     w     x     y     z
+        1     2     3     4     5     6     7     8     9     0
+    )
+
+    -| Here is a blank canvas so you can yank and paste for new layers:
+
+    (deflayer base
+        _     _     _     _
+        _     _     _     _     _     _     _     _     _
+        _     _     _     _     _     _     _     _     _
+        _     _     _     _     _     _     _     _
+        _     _     _     _     _     _     _     _     _     _  
+    )
+
+    ------------------------------------------------------------------------------------  |#
+
+
+#|  ------------------------------------------------------------------------------------
+
+    ++ Useful Bits
+    Inherited from official documentation
+
+    KMonad's configuration language is styled on various lisps, like scheme or
+    Common Lisp. In a lisp, every statement is entered between '(' and ')'s. If
+    you are more used to Fortan style languages (python, ruby, C, Java, etc.), the
+    change is quite straightforward: the function name moves into the parentheses,
+    and you don't use commas to separate arguments. I.e.
+
+    This:     my_function(a, 3, "Alakazam")
+    Becomes:  (my_function a 3 "Alakazam")
+
+    The reason for this is because Lisp-style languages are very easy to parse and
+    write syntax-highlighters for.
+
+    We also provide standard Lisp syntax for comments:
+    - Block comments between: #| and its reverse
+    - Line comments following: ;;
+
+    Unlike standard lisp, a single ; does not denote a comment, but instead the
+    keycode for semicolon.
+
+    Also, as you might have noticed, whitespace is possible anywhere.
+
+    To check for syntax errors while editing, invoke kmonad with the -d option.
+
+    ------------------------------------------------------------------------------------ |#
+
+(defcfg
+    input  (device-file "/dev/input/by-path/platform-i8042-serio-0-event-kbd")
+    output (uinput-sink "kmonad-niri")
+    fallthrough true
+    allow-cmd  true
+    cmp-seq    ralt
+    cmp-seq-delay 5
+    key-seq-delay 5
+)
+
+(defsrc
+    caps  spc   lalt  ralt
+    a     b     c     d     e     f     g     h     i
+    j     k     l     m     n     o     p     q     r
+    s     t     u     v     w     x     y     z
+    1     2     3     4     5     6     7     8     9     0
+)
+
+(defalias
+    ;;    Layers
+    ;;    |- --------------------------------------------------------------------------- -|
+    ;;    |- --------------------------------------------------------------------------- -|
+    LN    (layer-toggle launcher)
+    UT    (layer-toggle utils)
+    NV    (layer-toggle nvim)
+    
+    ;;    Commands
+    ;;    |- --------------------------------------------------------------------------- -|
+    ;;    |- --------------------------------------------------------------------------- -|
+
+    ;;    Launcher [LN]
+    ;;    |- --------------------------------------------------------------------------- -|
+    ln_a  (cmd-button "$XDG_BIN_HOME/fuzzel/fuzzel-apps.sh")
+    ln_b  (cmd-button "$XDG_BIN_HOME/fuzzel/fuzzel-bluetooth.sh")
+    ln_c  (cmd-button "$XDG_BIN_HOME/fuzzel/fuzzel-colors.sh")
+    ln_d  (cmd-button "$XDG_BIN_HOME/fuzzel/fuzzel-display.sh")
+    ln_e  (cmd-button "$XDG_BIN_HOME/fuzzel/fuzzel-emoji.sh")
+    ln_f  (cmd-button "$XDG_BIN_HOME/fuzzel/fuzzel-find.sh")
+    ln_g  (cmd-button "$XDG_BIN_HOME/fuzzel/fuzzel-go.sh")
+    ln_h  (cmd-button "$XDG_BIN_HOME/fuzzel/fuzzel-help.sh")
+    ln_i  (cmd-button "$XDG_BIN_HOME/fuzzel/fuzzel-icons.sh")
+    ln_j  (cmd-button "$XDG_BIN_HOME/fuzzel/fuzzel-journals.sh")
+    ln_k  (cmd-button "$XDG_BIN_HOME/fuzzel/fuzzel-kill.sh")
+    ln_l  (cmd-button "$XDG_BIN_HOME/fuzzel/fuzzel-launch.sh")
+    ln_m  (cmd-button "$XDG_BIN_HOME/fuzzel/fuzzel-mounts.sh")
+    ln_n  (cmd-button "$XDG_BIN_HOME/fuzzel/fuzzel-networking.sh")
+    ln_o  (cmd-button "$XDG_BIN_HOME/fuzzel/fuzzel-o.sh")
+    ln_p  (cmd-button "$XDG_BIN_HOME/fuzzel/fuzzel-power.sh")
+    ln_q  (cmd-button "$XDG_BIN_HOME/fuzzel/fuzzel-query.sh")
+    ln_r  (cmd-button "$XDG_BIN_HOME/fuzzel/fuzzel-remote.sh")
+    ln_s  (cmd-button "$XDG_BIN_HOME/fuzzel/fuzzel-services.sh")
+    ln_t  (cmd-button "$XDG_BIN_HOME/fuzzel/fuzzel-temperature.sh")
+    ln_u  (cmd-button "$XDG_BIN_HOME/fuzzel/fuzzel-usb.sh")
+    ln_v  (cmd-button "$XDG_BIN_HOME/fuzzel/fuzzel-vaults.sh")
+    ln_w  (cmd-button "$XDG_BIN_HOME/fuzzel/fuzzel-wifi.sh")
+    ln_x  (cmd-button "$XDG_BIN_HOME/fuzzel/fuzzel-xecute.sh")
+    ln_y  (cmd-button "$XDG_BIN_HOME/fuzzel/fuzzel-yank.sh")
+    ln_z  (cmd-button "$XDG_BIN_HOME/fuzzel/fuzzel-zutils.sh")
+
+    tv_1  (cmd-button "$USERBIN_LAUNCHERS/launchers-television.sh files")
+    tv_2  (cmd-button "$USERBIN_LAUNCHERS/launchers-television.sh projects")
+    tv_3  (cmd-button "$USERBIN_LAUNCHERS/launchers-television.sh config")
+    tv_4  (cmd-button "$USERBIN_LAUNCHERS/launchers-television.sh git")
+    tv_5  (cmd-button "$USERBIN_LAUNCHERS/launchers-television.sh recent")
+    tv_6  (cmd-button "$USERBIN_LAUNCHERS/launchers-television.sh dotfiles")
+    tv_7  (cmd-button "$USERBIN_LAUNCHERS/launchers-television.sh rhodium")
+    tv_8  (cmd-button "$USERBIN_LAUNCHERS/launchers-television.sh processes")
+    tv_9  (cmd-button "$USERBIN_LAUNCHERS/launchers-television.sh docker")
+    tv_0  (cmd-button "$USERBIN_LAUNCHERS/launchers-television.sh logs")
+
+    ;;    NeoVim [NV]
+    ;;    |- --------------------------------------------------------------------------- -|
+    nv_r (tap-macro space r r)
+
+    ;;    Utils [UT]
+    ;;    |- --------------------------------------------------------------------------- -|
+    ut_w (cmd-button "$USERBIN_UTILS/utils-toggle-waybar.sh")
+)
+
+(deflayer base
+    @LN   _     _     _
+    _     _     _     _     _     _     _     _     _
+    _     _     _     _     _     _     _     _     _
+    _     _     _     _     _     _     _     _
+    _     _     _     _     _     _     _     _     _     _  
+)
+
+(deflayer launcher
+  _     @NV   @UT   @UT
+  @ln_a @ln_b @ln_c @ln_d @ln_e @ln_f @ln_g @ln_h @ln_i
+  @ln_j @ln_k @ln_l @ln_m @ln_n @ln_o @ln_p @ln_q @ln_r
+  @ln_s @ln_t @ln_u @ln_v @ln_w @ln_x @ln_y @ln_z
+  @tv_1 @tv_2 @tv_3 @tv_4 @tv_5 @tv_6 @tv_7 @tv_8 @tv_9 @tv_0
+)
+
+(deflayer utils
+  _     _     _     _
+  @ut_w _     _     _     _     _     _     _     _
+  _     _     _     _     _     _     _     _     _
+  _     _     _     _     _     _     _     _
+  _     _     _     _     _     _     _     _     _     _  
+)
+
+(deflayer nvim
+  _     _     _     _
+  @nv_r _     _     _     _     _     _     _     _
+  _     _     _     _     _     _     _     _     _
+  _     _     _     _     _     _     _     _
+  _     _     _     _     _     _     _     _     _     _  
+)
+
+

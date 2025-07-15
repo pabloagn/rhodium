@@ -41,11 +41,18 @@
     gdm.enable = false;
   };
 
+  environment.etc."kmonad/justine.kbd".source = ../../modules/desktop/keyboard/kmonad/justine.kbd;
+  environment.etc."kmonad/keychron.kbd".source = ../../modules/desktop/keyboard/kmonad/justine.kbd;
+
   # Extra Services
   extraServices = {
     asusKeyboardBacklight.enable = true;
     laptopLid.enable = true;
-    rh-kmonad.enable = true;
+    rh-kmonad = {
+      enable = true;
+      internalConfigFile = /etc/kmonad/justine.kbd;
+      keychronConfigFile = /etc/kmonad/keychron.kbd;
+    };
   };
 
   # Extra rules
