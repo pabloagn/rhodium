@@ -18,6 +18,7 @@
     ../../modules/integration
     ../../modules/virtualization
     ../../modules/apps
+    ../../modules/rules
     ../../modules/maintenance
     ../../modules/utils
   ];
@@ -44,6 +45,11 @@
   extraServices = {
     asusKeyboardBacklight.enable = true;
     laptopLid.enable = true;
+  };
+
+  # Extra rules
+  extraRules = {
+    keychronUdev.enable = true;
   };
 
   # Garbage override

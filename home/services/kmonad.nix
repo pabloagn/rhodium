@@ -1,17 +1,14 @@
 {
   config,
-  lib,
   pkgs,
+  lib,
   ...
 }:
-with lib;
 let
   cfg = config.userExtraServices.rh-kmonad;
-
-  # helper kept OUTSIDE `config`
   makeKmonadService = configFile: {
     Unit = {
-      Description = "K-Monad";
+      Description = "KMonad";
       PartOf = [ "graphical-session.target" ];
       Wants = [ "dbus-org.freedesktop.Notifications.service" ];
       After = [
@@ -21,47 +18,29 @@ let
     };
     Service = {
       Type = "simple";
-      ExecStart = ''
-        ${pkgs.kmonad}/bin/kmonad \
-          ${configFile} ${lib.concatStringsSep " " cfg.extraArgs}
-      '';
+      ExecStart = "${pkgs.kmonad}/bin/kmonad ${configFile} " + (lib.concatStringsSep " " cfg.extraArgs);
       Restart = "on-failure";
       RestartSec = 1;
-      Nice = "-5";
+      Nice = -5;
     };
     Install = {
-      WantedBy = [ "graphical-session.target" ];
+      WantedBy = [ ];
     };
   };
 in
 {
-  options.userExtraServices.rh-kmonad = {
-    enable = mkEnableOption "Keyboard remapping with K-Monad";
-
-    configFile = mkOption {
-      type = types.path;
-      default = config.home.homeDirectory + "/.config/kmonad/keychron.kbd";
-      description = "Absolute path of the *.kbd* file for the external keyboard.";
-    };
-
-    internalConfigFile = mkOption {
-      type = types.path;
-      default = config.home.homeDirectory + "/.config/kmonad/justine.kbd";
-      description = "Absolute path of the *.kbd* file for the built-in keyboard.";
-    };
-
-    extraArgs = mkOption {
-      type = types.listOf types.str;
-      default = [ ];
-      description = "Additional CLI arguments passed to kmonad.";
-    };
+  # Always‑on built‑in keyboard
+  systemd.user.services.rh-kmonad-justine = (makeKmonadService cfg.internalConfigFile) // {
+    Unit.Description = "KMonad – Built‑in Keyboard (justine)";
+    Install.WantedBy = [ "graphical-session.target" ];
   };
 
-  config = mkIf cfg.enable {
-    home.packages = [ pkgs.kmonad ];
-
-    systemd.user.services.rh-kmonad-keychron = makeKmonadService cfg.configFile;
-
-    systemd.user.services.rh-kmonad-justine = makeKmonadService cfg.internalConfigFile;
+  # Hot‑plug‑driven external keyboard
+  systemd.user.services.rh-kmonad-keychron = (makeKmonadService cfg.configFile) // {
+    Unit.Description = "KMonad – External Keyboard (Keychron V1)";
+    Unit.ConditionPathExists = "/dev/input/by-id/usb-Keychron_Keychron_V1-event-kbd";
+    Unit.After = [ "dev-input-keychron_v1.device" ];
+    Unit.BindsTo = [ "dev-input-keychron_v1.device" ];
+    Install.WantedBy = [ "dev-input-keychron_v1.device" ];
   };
 }
