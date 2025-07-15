@@ -67,6 +67,7 @@
     rh-system-keyring.enable = true;
     rh-waybar.enable = true;
     rh-wlsunset.enable = false;
+    rh-hdmiAutoSwitch.enable = true;
   };
 
   home = {

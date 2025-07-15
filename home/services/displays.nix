@@ -9,13 +9,11 @@ let
   cfg = config.userExtraServices.rh-hdmiAutoSwitch;
   
   hdmiConnectedScript = pkgs.writeShellScript "hdmi-connected" ''
-    #!/usr/bin/env bash
     export WAYLAND_DISPLAY=wayland-1
     ${pkgs.wlr-randr}/bin/wlr-randr --output eDP-1 --off
   '';
   
   hdmiDisconnectedScript = pkgs.writeShellScript "hdmi-disconnected" ''
-    #!/usr/bin/env bash
     export WAYLAND_DISPLAY=wayland-1
     ${pkgs.wlr-randr}/bin/wlr-randr --output eDP-1 --on
   '';

@@ -42,6 +42,12 @@
     laptopLid.enable = false;
   };
 
+  # Extra rules
+  extraRules = {
+    keychronUdev.enable = true;
+    extraRules.hdmiAutoSwitch.enable = true;
+  };
+
   # Garbage override
   maintenance.garbageCollection = {
     enable = true;
