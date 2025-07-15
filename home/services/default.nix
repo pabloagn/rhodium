@@ -2,6 +2,7 @@
 {
   imports = [
     ./astal.nix
+    ./displays.nix
     ./eww.nix
     ./firefox.nix
     ./ghostty.nix

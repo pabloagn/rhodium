@@ -59,4 +59,3 @@ in
     systemd.user.services.rh-kmonad-keychron = makeService cfg.configFile;
   };
 }
-
