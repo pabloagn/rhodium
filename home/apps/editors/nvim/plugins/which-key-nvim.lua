@@ -78,6 +78,12 @@ require("which-key").add({
 	{ "<leader>t", group = "♰ Trouble" },
 	{ "<leader>x", group = "✕ Noice" },
 	{ "<leader>z", group = "± Fold" },
+	{ "<leader><space>", group = "⊑ Toggle" },
+
+	-- Toggle subgroups
+	{ "<leader><space>n", desc = "№ Toggle line numbers" },
+	{ "<leader><space>v", desc = "⊞ Toggle visual line movement" },
+	{ "<leader><space>z", desc = "⊡ Toggle zen mode" },
 
 	-- Buffer subgroups
 	{ "<leader>bc", group = "⊗ Close" },
@@ -143,6 +149,7 @@ require("which-key").add({
 	{ "<leader>csd", desc = "⇄ Toggle TODO/DONE" },
 	{ "<leader>ct", desc = "✓ Insert TODO" },
 	{ "<leader>cw", desc = "⚠ Insert WARN" },
+	{ "<leader>ch", desc = "⊟ Insert comment header" },
 
 	-- --- Edit ---
 	{ "<leader>er", desc = "⊹ Replace buffer with clipboard" },
@@ -151,35 +158,34 @@ require("which-key").add({
 	{ "<leader>ii", desc = "→ Smart indent" },
 	{ "<leader>io", desc = "← Smart outdent" },
 
-    -- --- Lsp Actions ---
-    { "<leader>la", desc = "⌥ Code actions" },
-    { "<leader>lf", desc = "⌘ Format (Conform)" },
-    { "<leader>lh", desc = "◈ Show hover" },
-    { "<leader>lr", desc = "⊛ Rename symbol" },
+	-- --- Lsp Actions ---
+	{ "<leader>la", desc = "⌥ Code actions" },
+	{ "<leader>lf", desc = "⌘ Format (Conform)" },
+	{ "<leader>lh", desc = "◈ Show hover" },
+	{ "<leader>lr", desc = "⊛ Rename symbol" },
 
-    -- --- Lsp Navigation ---
-    { "gd", desc = "◆ Go to definition" },
-    { "gi", desc = "◊ Go to implementation" },
-    { "gr", desc = "◇ Go to references" },
-    { "gt", desc = "○ Go to type definition" },
+	-- --- Lsp Navigation ---
+	{ "gd", desc = "◆ Go to definition" },
+	{ "gi", desc = "◊ Go to implementation" },
+	{ "gr", desc = "◇ Go to references" },
+	{ "gt", desc = "○ Go to type definition" },
 
-	-- --- Replace (visual) ---
-	{ "<leader>rv", desc = "⍨ Replace visual selection", mode = "v" },
+	-- --- Replace (smart) ---
+	{ "<leader>rr", desc = "⍎ Replace smartly with prompt", mode = { "n", "v" } },
 
 	-- --- Replace (spectre) ---
 	{ "<leader>rf", desc = "◐ Search in current file" },
 	{ "<leader>rt", desc = "◎ Toggle Spectre" },
 	{ "<leader>rw", desc = "◉ Search current word" },
 
-
-    -- --- Diagnostics ---
-    { "<leader>db", desc = "≣ Show buffer diagnostics" },
-    { "<leader>dl", desc = "≡ Show line diagnostics" },
-    { "<leader>dv", desc = "◫ Toggle virtual text" },
-    { "[d", desc = "◂ Previous diagnostic" },
-    { "[e", desc = "◃ Previous error" },
-    { "]d", desc = "▸ Next diagnostic" },
-    { "]e", desc = "▹ Next error" },
+	-- --- Diagnostics ---
+	{ "<leader>db", desc = "≣ Show buffer diagnostics" },
+	{ "<leader>dl", desc = "≡ Show line diagnostics" },
+	{ "<leader>dv", desc = "◫ Toggle virtual text" },
+	{ "[d", desc = "◂ Previous diagnostic" },
+	{ "[e", desc = "◃ Previous error" },
+	{ "]d", desc = "▸ Next diagnostic" },
+	{ "]e", desc = "▹ Next error" },
 
 	-- --- Find/search ---
 	{ "<leader>fD", desc = "⊗ Diagnostics (all)" },
@@ -222,7 +228,6 @@ require("which-key").add({
 	{ "]h", desc = "⇢ Next Harpoon mark" },
 	{ "[h", desc = "⇠ Previous Harpoon mark" },
 
-
 	-- Jump (Flash)
 	{ "<leader>jl", desc = "⎯ Jump to line", mode = { "n", "x", "o" } },
 	{ "<leader>jw", desc = "◈ Jump to word beginning", mode = { "n", "x", "o" } },
@@ -241,6 +246,8 @@ require("which-key").add({
 	{ "<leader>p[", desc = "Previous mark" },
 	{ "<leader>p:", desc = "Preview mark" },
 	{ "<leader>pd", desc = "Delete mark (wait for letter)" },
+	{ "]m", desc = "▸ Next mark" },
+	{ "[m", desc = "◂ Previous mark" },
 
 	-- --- Trouble ---
 	{ "<leader>tb", desc = "◉ Buffer diagnostics" },
@@ -258,7 +265,6 @@ require("which-key").add({
 	{ "]T", desc = "▷ Next trouble item" },
 	{ "g[T", desc = "⇤ First trouble item" },
 	{ "g]T", desc = "⇥ Last trouble item" },
-
 
 	-- --- Treesitter ---
 	{ "<leader>z", desc = "± Toggle treesitter folding" },
@@ -288,12 +294,13 @@ require("which-key").add({
 	{ "<leader>bst", desc = "◪ Sort by tabs" },
 	{ "<leader>q", desc = "✗ Close without saving" },
 	{ "<leader>w", desc = "✓ Save and close" },
-	{ "A-S", desc = "◀ Previous buffer", mode = { "n", "v" } },
-	{ "A-s", desc = "▶ Next buffer", mode = { "n", "v" } },
+	{ "<M-s>", desc = "▶ Next buffer", mode = { "n", "v" } },
+	{ "<M-S>", desc = "◀ Previous buffer", mode = { "n", "v" } },
 
 	-- TODOs Navigation
 	{ "[t", desc = "◂ Previous todo comment" },
 	{ "]t", desc = "▸ Next todo comment" },
+	{ "]T", desc = "▸ Next task (priority)" },
 
 	-- Multicursor
 	{ "<C-a>", desc = "⊛ Find all", mode = "n" },

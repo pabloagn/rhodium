@@ -6,22 +6,74 @@ vim.g.mapleader = " " -- Leader
 vim.g.maplocalleader = " " -- Local leader
 
 -- --- General ---
--- TODO: Reassign this key to a more productive map
--- vim.keymap.set(
--- 	"n",
--- 	"<Leader><space>",
--- 	"<cmd>noh<CR>",
--- 	{ noremap = true, silent = true, desc = "Clear search highlight" }
--- )
 vim.keymap.set("n", "<Esc>", "<cmd>noh<CR>", { noremap = true, silent = true, desc = "Clear search highlight" })
+vim.keymap.set("n", "<Leader>y", ":%y+<CR>", { noremap = true, silent = true, desc = "Copy entire buffer to clip" })
+vim.keymap.set("n", "<Leader>D", ":%d+<CR>", { noremap = true, silent = true, desc = "Delete entire buffer" })
+
+-- --- Toggle (s) ---
+local visual_line_mode = false
+
+local function toggle_visual_line_movement()
+	visual_line_mode = not visual_line_mode
+
+	local filetypes = { "markdown", "text", "rst", "tex", "typst", "org" }
+	local current_ft = vim.bo.filetype
+
+	if vim.tbl_contains(filetypes, current_ft) then
+		if visual_line_mode then
+			vim.keymap.set({ "n", "v", "o", "x" }, "<Down>", "gj", { buffer = true, noremap = true, silent = true })
+			vim.keymap.set({ "n", "v", "o", "x" }, "<Up>", "gk", { buffer = true, noremap = true, silent = true })
+			vim.keymap.set({ "n", "v", "o", "x" }, "g<Down>", "j", { buffer = true, noremap = true, silent = true })
+			vim.keymap.set({ "n", "v", "o", "x" }, "g<Up>", "k", { buffer = true, noremap = true, silent = true })
+			print("Visual line movement enabled for " .. current_ft)
+		else
+			vim.keymap.del({ "n", "v", "o", "x" }, "<Down>", { buffer = true })
+			vim.keymap.del({ "n", "v", "o", "x" }, "<Up>", { buffer = true })
+			vim.keymap.del({ "n", "v", "o", "x" }, "g<Down>", { buffer = true })
+			vim.keymap.del({ "n", "v", "o", "x" }, "g<Up>", { buffer = true })
+			print("Visual line movement disabled for " .. current_ft)
+		end
+	else
+		print("Visual line movement only works for prose files (markdown, text, rst, tex, typst, org)")
+	end
+end
+
+-- Toggle family (<leader><space>)
+vim.keymap.set("n", "<leader><space>v", toggle_visual_line_movement, {
+	noremap = true,
+	silent = true,
+	desc = "Toggle visual line movement",
+})
+
+-- Line number toggle
 vim.keymap.set(
-	"n",
-	"<Leader>n",
+	{ "n", "v", "o", "x" },
+	"<leader><space>n",
 	"<cmd>set nu! rnu!<CR>",
 	{ noremap = true, silent = true, desc = "Toggle line numbers" }
 )
-vim.keymap.set("n", "<Leader>y", ":%y+<CR>", { noremap = true, silent = true, desc = "Copy entire buffer to clip" })
-vim.keymap.set("n", "<Leader>D", ":%d+<CR>", { noremap = true, silent = true, desc = "Delete entire buffer" })
+
+-- Zen mode toggle
+vim.keymap.set("n", "<leader><space>z", function()
+	require("zen-mode").toggle()
+end, {
+	noremap = true,
+	silent = true,
+	desc = "Toggle zen mode",
+})
+
+-- Auto-apply to prose files
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = { "markdown", "text", "rst", "tex", "typst", "org" },
+	callback = function()
+		if visual_line_mode then
+			vim.keymap.set({ "n", "v", "o", "x" }, "<Down>", "gj", { buffer = true, noremap = true, silent = true })
+			vim.keymap.set({ "n", "v", "o", "x" }, "<Up>", "gk", { buffer = true, noremap = true, silent = true })
+			vim.keymap.set({ "n", "v", "o", "x" }, "g<Down>", "j", { buffer = true, noremap = true, silent = true })
+			vim.keymap.set({ "n", "v", "o", "x" }, "g<Up>", "k", { buffer = true, noremap = true, silent = true })
+		end
+	end,
+})
 
 -- --- Harpoon ---
 -- File marking and navigation

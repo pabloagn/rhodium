@@ -2,6 +2,6 @@
 {
   services.emacs = with pkgs; {
     enable = true;
-    package = emacs-pgtk;
+    package = emacs;
   };
 }

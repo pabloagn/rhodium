@@ -23,6 +23,12 @@ in
     home = "/home/${user_001_data.username}";
   };
 
+  # NOTE: Required for devenv
+  nix.settings.trusted-users = [
+    "root"
+    "pabloagn"
+  ];
+
   home-manager.backupFileExtension = "backup"; # HACK: Required since hm activation was sometimes faulty
 
   users.defaultUserShell = pkgs.zsh; # Default shell for all users

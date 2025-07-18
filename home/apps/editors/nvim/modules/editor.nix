@@ -113,6 +113,10 @@
       #   plugin = tiny-inline-diagnostic-nvim; # Better inline diagnostics
       #   config = sourceLuaFile "tiny-inline-diagnostic-nvim.lua";
       # }
+      {
+        plugin = zen-mode-nvim; # Zen mode
+        config = sourceLuaFile "zen-mode-nvim.lua";
+      }
     ];
   };
 }

@@ -77,6 +77,9 @@
   gv = "z $HOME_VAULTS"; # Go Obsidian Vaults
   gw = "z $HOME_PROFESSIONAL"; # Go Professional
 
+  # Go to -> 2
+  gsg = "z $HOME_SOLENOIDLABS/glassflow"; # Go Solenoid Labs/Glassflow
+
   # --- Openers ---
   # Go to; list ->
   gal = "z $HOME_ACADEMIC; yy";

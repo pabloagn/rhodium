@@ -8,6 +8,11 @@
         text = "󱓞";
         fg = "#6B7E84";
       }
+      {
+        name = ".env.example";
+        text = "";
+        fg = "#6B7E84";
+      }
     ];
     prepend_dirs = [
       # --- Rhodium System ---
@@ -19,20 +24,25 @@
       }
       # Rhodium Modules
       {
-        name = "chiaroscuro.rh";
+        name = "*.rh";
         text = "󰊕";
         fg = "#BF3F42";
       }
-      {
-        name = "iridium.rh";
-        text = "󰊕";
-        fg = "#BF3F42";
-      }
-      {
-        name = "palladium.rh";
-        text = "󰊕";
-        fg = "#BF3F42";
-      }
+      # {
+      #   name = "chiaroscuro.rh";
+      #   text = "󰊕";
+      #   fg = "#BF3F42";
+      # }
+      # {
+      #   name = "iridium.rh";
+      #   text = "󰊕";
+      #   fg = "#BF3F42";
+      # }
+      # {
+      #   name = "palladium.rh";
+      #   text = "󰊕";
+      #   fg = "#BF3F42";
+      # }
 
       # --- Projects ---
       {

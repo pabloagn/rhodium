@@ -46,6 +46,7 @@
     mprocs # TUI tool to run multiple commands in parallel and show the output of each command separately
     presenterm # Terminal based slideshow tool
     hstr # Shell history suggest box (bound to <C-H> on Shell)
+    ispell # Interactive spell checker (used by Doom Emacs)
 
     # --- Navigation ---
     # wiki-tui # Simple and easy to use Wikipedia Text User Interface
