@@ -47,19 +47,23 @@ in
     };
 
     systemd.user.services.rh-kmonad-justine = {
-      Unit.PartOf = [ "graphical-session.target" ];
-      Unit.Wants = [ "dbus-org.freedesktop.Notifications.service" ];
-      Unit.After = [
-        "graphical-session-pre.target"
-        "dbus-org.freedesktop.Notifications.service"
-      ];
-      Unit.ConditionPathExists = "/dev/input/by-path/platform-i8042-serio-0-event-kbd";
-      Service.Type = "simple";
-      Service.ExecStart =
-        "${pkgs.kmonad}/bin/kmonad ${cfg.justineConfigFile} " + (lib.concatStringsSep " " cfg.extraArgs);
-      Service.Restart = "on-failure";
-      Service.RestartSec = 1;
-      Service.Nice = -5;
+      Unit = {
+        PartOf = [ "graphical-session.target" ];
+        Wants = [ "dbus-org.freedesktop.Notifications.service" ];
+        After = [
+          "graphical-session-pre.target"
+          "dbus-org.freedesktop.Notifications.service"
+        ];
+        ConditionPathExists = "/dev/input/by-path/platform-i8042-serio-0-event-kbd";
+      };
+      Service = {
+        Type = "simple";
+        ExecStart =
+          "${pkgs.kmonad}/bin/kmonad ${cfg.justineConfigFile} " + (lib.concatStringsSep " " cfg.extraArgs);
+        Restart = "on-failure";
+        RestartSec = 1;
+        Nice = -5;
+      };
       Install.WantedBy = [ "graphical-session.target" ];
     };
 

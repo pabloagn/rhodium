@@ -13,9 +13,87 @@ function M.get_hostname()
 	return "your-hostname"
 end
 
--- Dynamic username detection
+-- --- Dynamic Username Detection ---
 function M.get_username()
 	return os.getenv("USER") or "your-username"
+end
+
+-- --- Spectre ---
+function M.spectre_toggle()
+	require("spectre").toggle()
+end
+
+function M.spectre_open_visual_word()
+	require("spectre").open_visual({ select_word = true })
+end
+
+function M.spectre_open_visual()
+	require("spectre").open_visual()
+end
+
+function M.spectre_open_file_search()
+	require("spectre").open_file_search({ select_word = true })
+end
+
+-- TODO: Pending to order into cats
+function M.format_with_conform()
+	require("conform").format()
+end
+
+function M.find_todos_in_buffer()
+	require("telescope").extensions["todo-comments"].todo({ keywords = "FIX,TODO,PERF,TEST" })
+end
+
+function M.aerial_symbols()
+	require("telescope").extensions.aerial.aerial()
+end
+
+function M.trouble_toggle_diagnostics()
+	require("trouble").toggle("diagnostics")
+end
+
+function M.trouble_toggle_buffer_diagnostics()
+	require("trouble").toggle("diagnostics", { filter = { buf = 0 } })
+end
+
+function M.trouble_toggle_loclist()
+	require("trouble").toggle("loclist")
+end
+
+function M.trouble_toggle_references()
+	require("trouble").toggle("lsp_references")
+end
+
+function M.trouble_toggle_definitions()
+	require("trouble").toggle("lsp_definitions")
+end
+
+function M.trouble_toggle_implementations()
+	require("trouble").toggle("lsp_implementations")
+end
+
+function M.trouble_toggle_symbols()
+	require("trouble").toggle("symbols")
+end
+
+function M.trouble_close()
+	require("trouble").close()
+end
+
+function M.trouble_next()
+	require("trouble").next({ skip_groups = true, jump = true })
+end
+
+function M.trouble_prev()
+	require("trouble").prev({ skip_groups = true, jump = true })
+end
+
+function M.trouble_last()
+	require("trouble").last({ skip_groups = true, jump = true })
+end
+
+function M.trouble_first()
+	require("trouble").first({ skip_groups = true, jump = true })
 end
 
 -- --- Terminal Integration ---
@@ -336,18 +414,6 @@ function M.replace_visual_selection()
 	)
 end
 
--- Smart replace - detects context and chooses appropriate method
-function M.smart_replace()
-	local mode = vim.fn.mode()
-	if mode == "v" or mode == "V" or mode == "\22" then
-		-- Visual mode: replace selection
-		M.replace_visual_selection()
-	else
-		-- Normal mode: replace word under cursor
-		M.replace_word_under_cursor()
-	end
-end
-
 -- -----------------------------------------------------------------------------
 
 -- Pickers
@@ -378,6 +444,7 @@ function M.find_project_root()
 		"justfile",
 		".project",
 		".root",
+		".projectile",
 	}
 
 	local current_dir = vim.fn.expand("%:p:h")
@@ -434,6 +501,92 @@ function M.find_files_in_project()
 			{ title = "Project Files" }
 		)
 	end
+end
+
+-- Toggle folds smart
+function M.toggle_folds_smart()
+	local mode = vim.fn.mode()
+	local start_line, end_line
+
+	if mode:match("[vV]") then
+		start_line = vim.fn.line("'<")
+		end_line = vim.fn.line("'>")
+		vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", false)
+	else
+		start_line = vim.fn.line(".")
+		end_line = start_line
+	end
+
+	local is_closed = vim.fn.foldclosed(start_line) ~= -1
+
+	for lnum = start_line, end_line do
+		vim.cmd((is_closed and lnum .. "foldopen" or lnum .. "foldclose"))
+	end
+end
+
+-- Find TODOs in project root
+function M.find_todos_in_project()
+	local project_root = M.find_project_root()
+
+	if not project_root then
+		vim.notify("Could not find project root", vim.log.levels.WARN, { title = "Project Files" })
+		return
+	end
+
+	require("telescope").extensions["todo-comments"].todo({ cwd = project_root, keywords = "FIX,TODO,PERF,TEST" })
+end
+
+-- Live grep on current dir
+function M.live_grep_args()
+	require("telescope").extensions.live_grep_args.live_grep_args()
+end
+
+-- Live Grep in project root
+function M.live_grep_in_project()
+	local project_root = M.find_project_root()
+
+	if not project_root then
+		vim.notify("Could not find project root", vim.log.levels.WARN, { title = "Project Files" })
+		return
+	end
+
+	require("telescope").extensions.live_grep_args.live_grep_args({
+		search_dirs = { project_root },
+	})
+end
+
+-- Smart replace
+function M.smart_replace()
+	local mode = vim.fn.mode()
+	local target
+	if mode == "v" then
+		local start_pos = vim.fn.getpos("v")
+		local end_pos = vim.fn.getpos(".")
+		local line = vim.fn.getline(".")
+		target = line:sub(math.min(start_pos[3], end_pos[3]), math.max(start_pos[3], end_pos[3]))
+	else
+		local col = vim.fn.col(".")
+		local line = vim.fn.getline(".")
+		local char = line:sub(col, col)
+		if char:match("[%a%d]") then
+			local start = col
+			local end_ = col
+			while start > 1 and line:sub(start - 1, start - 1):match("[%a%d]") do
+				start = start - 1
+			end
+			while end_ < #line and line:sub(end_ + 1, end_ + 1):match("[%a%d]") do
+				end_ = end_ + 1
+			end
+			target = line:sub(start, end_)
+		else
+			target = char
+		end
+	end
+	vim.ui.input({ prompt = 'Replace "' .. target .. '" with: ' }, function(input)
+		if input then
+			vim.cmd("%s/" .. vim.fn.escape(target, "/\\.*$^~[]") .. "/" .. input .. "/g")
+		end
+	end)
 end
 
 -- Get comment string for current buffer

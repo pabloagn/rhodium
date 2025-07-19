@@ -36,6 +36,7 @@
     smartmontools # S.M.A.R.T. monitoring
     upower # D-Bus service for power management
     usbutils # lsusb
+    evtest # Live-test keyboards
 
     # --- Audio Tools ---
     alsa-utils # ALSA utilities
