@@ -37,6 +37,7 @@
     upower # D-Bus service for power management
     usbutils # lsusb
     evtest # Live-test keyboards
+    libinput # Handle inputs in Wayland
 
     # --- Audio Tools ---
     alsa-utils # ALSA utilities

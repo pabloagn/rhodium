@@ -4,7 +4,6 @@ let
   moduleBacklight = import ./backlight.nix;
   moduleBattery = import ./battery.nix;
   moduleBluetooth = import ./bluetooth.nix;
-  moduleClock = import ./clock.nix;
   moduleCpu = import ./cpu.nix;
   moduleCustomClock = import ./custom-clock.nix;
   moduleCustomRhodium = import ./custom-rhodium.nix;
@@ -113,7 +112,7 @@ let
       "wireplumber#sink"
       "custom/separator"
       "niri/language"
-      "keyboard-state#capslock"
+      # "keyboard-state#capslock"
     ];
   };
 in

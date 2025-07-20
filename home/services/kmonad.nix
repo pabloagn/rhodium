@@ -50,10 +50,11 @@ in
       Unit = {
         PartOf = [ "graphical-session.target" ];
         Wants = [ "dbus-org.freedesktop.Notifications.service" ];
-        After = [
-          "graphical-session-pre.target"
-          "dbus-org.freedesktop.Notifications.service"
-        ];
+        After = [ "graphical-session.target" ];
+        # After = [
+        #   "graphical-session-pre.target"
+        #   "dbus-org.freedesktop.Notifications.service"
+        # ];
         ConditionPathExists = "/dev/input/by-path/platform-i8042-serio-0-event-kbd";
       };
       Service = {
@@ -64,7 +65,9 @@ in
         RestartSec = 1;
         Nice = -5;
       };
-      Install.WantedBy = [ "graphical-session.target" ];
+      Install = {
+        WantedBy = [ "graphical-session.target" ];
+      };
     };
 
     systemd.user.services.rh-kmonad-keychron = {

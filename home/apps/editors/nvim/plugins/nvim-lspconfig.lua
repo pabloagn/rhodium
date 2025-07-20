@@ -174,20 +174,6 @@ require("lspconfig").texlab.setup({
 -- Lua
 require("lspconfig").lua_ls.setup({
 	capabilities = capabilities,
-	settings = {
-		Lua = {
-			diagnostics = {
-				globals = { "vim" }, -- avoid false positives
-			},
-			format = {
-				enable = true,
-				defaultConfig = {
-					indent_style = "space",
-					indent_size = "2",
-				},
-			},
-		},
-	},
 })
 
 -- Markdown

@@ -132,7 +132,6 @@
 
   # --- Process Management ---
   ps = "procs"; # Modern ps replacement
-  kill = "fzf-kill-widget"; # Interactive process killer
 
   # --- Quick Calculations ---
   calc = "qalc"; # Or "bc -l"
