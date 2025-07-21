@@ -37,6 +37,7 @@
       bsogood = "Bsogood";
       phantom = "TheHumanPalace";
       genai = "GenAI";
+      ultra = "Ultra";
       private = "Private";
     };
 

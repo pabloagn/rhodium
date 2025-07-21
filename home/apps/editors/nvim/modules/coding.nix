@@ -40,10 +40,10 @@
       #   plugin = crates-nvim;
       #   config = sourceLuaFile "crates-nvim.lua";
       # }
-      {
-        plugin = image-nvim;
-        config = sourceLuaFile "image-nvim.lua";
-      }
+      # {
+      #   plugin = image-nvim;
+      #   config = sourceLuaFile "image-nvim.lua";
+      # }
       {
         plugin = molten-nvim;
         config = sourceLuaFile "molten-nvim.lua";

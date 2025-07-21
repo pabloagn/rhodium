@@ -124,6 +124,8 @@ require("lspconfig").hls.setup({
 -- HTML
 require("lspconfig").html.setup({
 	capabilities = capabilities,
+	filetypes = { "html", "gohtmltmpl" },
+	root_dir = require("lspconfig").util.root_pattern("hugo.toml", "config.toml", ".git"),
 })
 
 -- Java
@@ -335,9 +337,9 @@ require("lspconfig").ts_ls.setup({
 require("lspconfig")["tinymist"].setup({
 	capabilities = capabilities,
 	settings = {
-        formatterMode = "typstyle",
-        exportPdf = "never",
-        semanticTokens = "disable"
+		formatterMode = "typstyle",
+		exportPdf = "never",
+		semanticTokens = "disable",
 	},
 })
 

@@ -1,6 +1,15 @@
 { ... }:
 {
   icon = {
+    prepend_globs = [
+      {
+        name = "*.rh/";
+        "if" = "dir";
+        text = "󰊕";
+        fg = "#BF3F42";
+      }
+    ];
+
     # --- Entire Filenames ---
     prepend_files = [
       {

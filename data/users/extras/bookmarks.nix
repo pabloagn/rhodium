@@ -338,13 +338,13 @@ in
       ];
     };
     linear = {
-      profile = "personal";
+      profile = "ultra";
       url = "https://linear.app/sanctum-black";
       description = "Linear";
       categories = [ categories.productivity ];
     };
     linear-rhodium = {
-      profile = "personal";
+      profile = "ultra";
       url = "https://linear.app/sanctum-black/project/0607-sys-prj-rhodium-3fc0956ba956/issues";
       description = "Linear Rhodium";
       categories = [ categories.productivity ];
