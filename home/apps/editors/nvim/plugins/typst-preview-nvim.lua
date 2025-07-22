@@ -1,49 +1,38 @@
 require("typst-preview").setup({
-	debug = false,
+  debug = false,
+  open_cmd = "firefox --new-window -P Ultra %s",
 
-	-- open_cmd = nil,
-    open_cmd = 'firefox --new-window -P Personal %s',
+  -- Custom port to open the preview server.
+  port = 63000,
 
-	-- Custom port to open the preview server. Default is random.
-	-- Example: port = 8000
-	port = 0,
+  -- Color inversion for dark/light modes
+  invert_colors = "never",
 
-	-- Setting this to 'always' will invert black and white in the preview
-	-- Setting this to 'auto' will invert depending if the browser has enable
-	-- dark mode
-	-- Setting this to '{"rest": "<option>","image": "<option>"}' will apply
-	-- your choice of color inversion to images and everything else
-	-- separately.
-	invert_colors = "never",
+  -- Whether the preview will follow the cursor in the source file
+  follow_cursor = true,
 
-	-- Whether the preview will follow the cursor in the source file
-	follow_cursor = true,
+  -- Paths to binaries for dependencies.
+  dependencies_bin = {
+    ["tinymist"] = nil,
+    ["websocat"] = nil,
+  },
 
-	-- Provide the path to binaries for dependencies.
-	-- Setting this will skip the download of the binary by the plugin.
-	-- Warning: Be aware that your version might be older than the one
-	-- required.
-	dependencies_bin = {
-		["tinymist"] = nil,
-		["websocat"] = nil,
-	},
+  -- A list of extra arguments (or nil) to be passed to previewer.
+  -- For example, extra_args = { "--input=ver=draft", "--ignore-system-fonts" }
+  extra_args = nil,
 
-	-- A list of extra arguments (or nil) to be passed to previewer.
-	-- For example, extra_args = { "--input=ver=draft", "--ignore-system-fonts" }
-	extra_args = nil,
+  -- This function will be called to determine the root of the typst project
+  get_root = function(path_of_main_file)
+    local root = os.getenv("TYPST_ROOT")
+    if root then
+      return root
+    end
+    return vim.fn.fnamemodify(path_of_main_file, ":p:h")
+  end,
 
-	-- This function will be called to determine the root of the typst project
-	get_root = function(path_of_main_file)
-		local root = os.getenv("TYPST_ROOT")
-		if root then
-			return root
-		end
-		return vim.fn.fnamemodify(path_of_main_file, ":p:h")
-	end,
-
-	-- This function will be called to determine the main file of the typst
-	-- project.
-	get_main_file = function(path_of_buffer)
-		return path_of_buffer
-	end,
+  -- This function will be called to determine the main file of the typst
+  -- project.
+  get_main_file = function(path_of_buffer)
+    return path_of_buffer
+  end,
 })
