@@ -228,6 +228,7 @@
                   inherit userPreferences userExtras;
                   fishPlugins = rhodium-alloys.fish;
                   yaziPlugins = rhodium-alloys.yazi;
+                  inherit (rhodiumLib.generators.moduleGenerators) mkModule mkPkgModule;
                 };
               };
             }

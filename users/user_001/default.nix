@@ -39,10 +39,12 @@
       ;
   };
 
-  # Theme configuration
+  # --- Theme Configuration ---
+  # TODO: Finish this
   theme = theme;
 
   # Asset linking
+  # TODO: Add semantic layer so we have clarity that this is a Rhodium module
   assets = {
     wallpapers.enable = true; # Symlink wallpapers to data dir
     colors.enable = true; # Symlink color packs to user data dir
@@ -70,11 +72,17 @@
     rh-hdmiAutoSwitch.enable = true;
   };
 
-  home.apps.media.audio = {
-    enable = true;
-    spotify.enable = true;
+  # --- Rh Home Modules ---
+  rh = {
+    apps.media.audio = {
+      spotify.enable = true;
+    };
+    development.languages = {
+      haskell.enable = true;
+    };
   };
 
+  # --- User Config ---
   home = {
     username = userData.user_001.username;
     homeDirectory = "/home/${userData.user_001.username}";

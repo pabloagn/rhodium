@@ -4,14 +4,14 @@
     ./csound.nix
     ./ncmpc.nix
     ./ncspot.nix
-    # ./puredata.nix
+    ./puredata.nix
     ./rmpc.nix
-    # ./sonicpi.nix
+    ./sonicpi.nix
     ./spotify.nix
     ./supercollider.nix
     ./tidal.nix
     ./tidalcycles.nix
-    # ./vcv-rack.nix
+    ./vcv-rack.nix
   ];
 
   home.packages = with pkgs; [
