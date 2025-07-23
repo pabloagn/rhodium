@@ -9,7 +9,6 @@
     ./misc
     ./ml
     ./opsec
-    ./utils
     ./versioning
   ];
 }

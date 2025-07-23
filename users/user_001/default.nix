@@ -70,6 +70,11 @@
     rh-hdmiAutoSwitch.enable = true;
   };
 
+  home.apps.media.audio = {
+    enable = true;
+    spotify.enable = true;
+  };
+
   home = {
     username = userData.user_001.username;
     homeDirectory = "/home/${userData.user_001.username}";

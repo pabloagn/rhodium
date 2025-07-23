@@ -77,6 +77,11 @@
       #   config = sourceLuaFile "nvim-lint.lua";
       # }
 
+      {
+        plugin = vim-go;
+        # config = sourceLuaFile "vim-go-nvim.lua";
+      }
+
       # Movement
       {
         plugin = multicursors-nvim;

@@ -1,7 +1,8 @@
-{ pkgs, ... }:
-{
-  home.packages = with pkgs; [
-    spotify
-    # spotify-player # Terminal spotify player that has feature parity with the official client
-  ];
+{ rhodiumLib, pkgs, ... }:
+
+rhodiumLib.generators.moduleGenerators.mkAutoModule {
+  name = "spotify";
+  description = "Spotify music streaming";
+  type = "package";
+  packages = with pkgs; [ spotify ];
 }

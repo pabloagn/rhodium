@@ -2,12 +2,13 @@
 {
   home.packages = with pkgs; [
     # --- Go ---
-    go # Go programming language compiler and toolchain
+    go
     goimports-reviser
     gopls
     gofumpt
     gomodifytags
     gotests
     gore
+    prettier-plugin-go-template
   ];
 }
