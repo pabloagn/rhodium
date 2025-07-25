@@ -20,6 +20,7 @@
     clementine
     easyeffects # Equalizer for PipeWire
     helvum # GTK patchbay for PipeWire
-    playerctl
+    playerctl # CLI util & lib for controlling audio
+    cavalier # Terminal audio visualizer
   ];
 }

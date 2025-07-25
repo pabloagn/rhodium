@@ -1,7 +1,8 @@
 { ... }:
 {
   imports = [
-    ./flatpak.nix
     ./appimage.nix
+    ./binaries.nix
+    ./flatpak.nix
   ];
 }
