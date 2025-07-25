@@ -5,6 +5,7 @@ source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../common/bootstrap.sh"
 load_metadata "fuzzel" "networking"
 
 VPN_CONFIG_DIR="/etc/wireguard"
+export SUDO_ASKPASS="$XDG_BIN_HOME"/fuzzel/fuzzel-askpass.sh
 
 declare -a options
 declare -A profile_files_map
@@ -24,7 +25,8 @@ is_profile_active() {
 connect_profile() {
     local profile="$1"
     notify_vpn "Connecting to $profile…"
-    if sudo wg-quick up "$profile"; then
+    sudo -A wg-quick up "$profile"
+    if sudo -A wg-quick up "$profile"; then
         notify_vpn "▲ Connected to $profile"
     else
         notify_vpn "✗ Failed to connect to $profile"
@@ -35,7 +37,7 @@ connect_profile() {
 disconnect_profile() {
     local profile="$1"
     notify_vpn "Disconnecting $profile…"
-    if sudo wg-quick down "$profile"; then
+    if sudo -A wg-quick down "$profile"; then
         notify_vpn "▼ Disconnected from $profile"
     else
         notify_vpn "✗ Failed to disconnect from $profile"
