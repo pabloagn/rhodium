@@ -52,6 +52,12 @@ in
       description = "GeminiAI";
       categories = [ categories.productivity ];
     };
+    lumo = {
+      profile = "genai";
+      url = "https://lumo.proton.me/";
+      description = "Lumo";
+      categories = [ categories.productivity ];
+    };
     perplexity = {
       profile = "genai";
       url = "https://www.perplexity.ai/";

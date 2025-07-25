@@ -64,7 +64,6 @@ let
         else
           "Utility;Application";
 
-      # Conditional X- fields based on entry type
       xFields =
         "X-Entry-Type=${entry.entryType}"
         + (
@@ -79,6 +78,9 @@ let
           else
             ""
         );
+
+      extraArgs =
+        if entry ? extraDesktopArgs then "\n" + lib.concatStringsSep "\n" entry.extraDesktopArgs else "";
     in
     ''
       [Desktop Entry]
@@ -90,7 +92,7 @@ let
       Terminal=false
       StartupNotify=true
       Version=1.0
-      ${xFields}
+      ${xFields}${extraArgs}
     '';
 
   # Create home.file entries for each desktop entry

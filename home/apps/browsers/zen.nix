@@ -46,7 +46,7 @@ in
 
   programs.zen-browser = {
     # TODO: Causing build problems due to native messaging host folder
-    enable = false;
+    enable = true;
     profiles = {
       personal = {
         name = "Personal";

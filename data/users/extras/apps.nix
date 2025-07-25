@@ -388,17 +388,12 @@
       icon = "foot";
       description = "Foot";
     };
-    # alacritty-instance = {
-    #   binary = "alacritty";
-    #   args = [];
-    #   icon = "alacritty";
-    #   description = "Alacritty";
-    # };
     ghostty-instance = {
-      binary = "ghostty";
+      binary = "env GTK_THEME=Adwaita:dark ghostty";
       args = [ ];
       icon = "ghostty";
       description = "Ghostty";
+      extraDesktopArgs = [ "StartupWMClass=ghostty" ];
     };
   };
 

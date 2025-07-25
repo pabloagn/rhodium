@@ -85,7 +85,7 @@ show_vpn_profiles() {
     local count
     count=$(get_fuzzel_line_count)
     local sel
-    sel=$(printf '%s\n' "${menu_labels[@]}" | fuzzel --dmenu --prompt="VPN Profiles" -l "$count")
+    sel=$(printf '%s\n' "${menu_labels[@]}" | fuzzel --dmenu --prompt="VPN Profiles: " -l "$count")
     [[ -n "$sel" && ! "$sel" =~ ^--- ]] && eval "${menu_commands[$sel]}"
 }
 
