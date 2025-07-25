@@ -1,27 +1,22 @@
-{ config, lib, ... }:
+{ lib, pkgs }:
+
+{ path, description, packages }:
 
 let
-  mkLangModule =
-    {
-      optionPath,
-      description,
-      packages,
-    }:
-    {
-      options =
-        lib.mkOption {
-          type = lib.types.attrsOf lib.types.anything;
-          default = { };
-        }
-        // lib.attrsets.setAttrByPath optionPath {
-          enable = lib.mkEnableOption description;
-        };
+  getCfg = config: lib.attrsets.getAttrFromPath path config;
+in
+{ config, ... }:
 
-      config = lib.mkIf (lib.attrsets.getAttrFromPath optionPath config) {
-        home.packages = packages;
-      };
-    };
+let
+  cfg = getCfg config;
 in
 {
-  inherit mkLangModule;
+  options = lib.attrsets.setAttrByPath path {
+    enable = lib.mkEnableOption description;
+  };
+
+  config = lib.mkIf cfg.enable {
+    home.packages = packages;
+  };
 }
+

@@ -25,6 +25,7 @@
     ../../home/development
     ../../home/security
     ../../home/shells
+    ../../home/system
     ../../home/utils
     ../../home/virtualization
   ];

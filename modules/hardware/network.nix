@@ -8,6 +8,7 @@
     networkmanagerapplet # GUI for setting up WiFi & Bluetooth
     wireguard-tools # Tools for the WireGuard secure network tunnel
     wireguard-ui # Web user interface to manage WireGuard setup
+    openresolv # Tool to interact with resolv.conf
   ];
   networking = {
     firewall.checkReversePath = false; # HACK: Required for VPN
