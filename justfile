@@ -11,45 +11,50 @@ flake_path := "."
 build_path := flake_path + "/build"
 recipes_path := build_path + "/recipes"
 
-# --- Default Recipe Shows Available Commands ---
+# --- Base ---
+# Show Available Commands
 default:
-    @just --list --unsorted
+  @just --list --unsorted
 
-# --- Recipes ---
-
-# Fast rebuild and switch with minimal output
-fast host:
+# --- Build / Deploy / Switch ---
+# Fast rebuild and switch (minimal output)
+switch-fast host:
     @{{recipes_path}}/rh-switch.sh "{{host}}" "fast"
 
-# Build and switch NixOS configuration
+# Rebuild and switch current system
 switch host:
     @{{recipes_path}}/rh-switch.sh "{{host}}"
 
-# Build without switching [test build]
+# Rebuild only (no switch)
 build host:
     @{{recipes_path}}/rh-build.sh "{{host}}" "build"
 
-# Rebuild and boot into new generation
+# Rebuild and prepare for boot
 boot host:
     @{{recipes_path}}/rh-build.sh "{{host}}" "boot"
 
-# Dry run - show what would be built
-dry host:
+# Dry-run build
+build-dry host:
     @{{recipes_path}}/rh-build.sh "{{host}}" "dry"
 
-# Development rebuild with verbose output
-dev host:
+# Development build (verbose)
+build-dev host:
     @{{recipes_path}}/rh-build.sh "{{host}}" "dev"
 
+# --- Flake & Input Management ---
 # Update all flake inputs
 update:
     @{{recipes_path}}/rh-update.sh
 
-# Update specific flake input
+# Update a specific flake input
 update-input input:
     @{{recipes_path}}/rh-update.sh "{{input}}"
 
-# Update nixpkgs-unstable input
+# Update stable nixpkgs
+update-stable:
+    @nix flake lock --update-input nixpkgs
+
+# Update unstable nixpkgs
 update-unstable:
     @nix flake lock --update-input nixpkgs-unstable
 
@@ -57,62 +62,70 @@ update-unstable:
 flake-info:
     @{{recipes_path}}/rh-flake-info.sh
 
-# Clean all garbage
+# --- Garbage Collection ---
+# Collect all garbage
 gc:
     @{{recipes_path}}/rh-gc.sh all
 
-# Remove old generations keeping N most recent [default: 5]
+# Keep last N generations
 gc-keep generations="5":
     @{{recipes_path}}/rh-gc.sh keep "{{generations}}"
 
-# Traditional time-based garbage collection
+# Remove generations older than N days
 gc-days days="7":
     @{{recipes_path}}/rh-gc.sh days "{{days}}"
 
-# Show system health status
-health:
-    @{{recipes_path}}/rh-health.sh
+# --- System Maintenance ---
+# Roll back to previous generation
+rollback:
+    @{{recipes_path}}/rh-rollback.sh
 
 # List current generation details
 generation:
     @{{recipes_path}}/rh-generation.sh
 
-# Check for backup files in config
-check-backups:
-    @{{recipes_path}}/rh-check-backups.sh
+# Check system health
+health:
+    @{{recipes_path}}/rh-health.sh
 
-# Find orphaned configuration files
-orphans:
-    @{{recipes_path}}/rh-orphans.sh
-
-# Check for untracked files in repository
-untracked:
-    @{{recipes_path}}/rh-untracked.sh
-
-# Remove orphaned configuration directories [interactive]
-clean-orphans:
-    @{{recipes_path}}/rh-clean-orphans.sh
-
-# Clean all backup files
-clean-backups:
-    @{{recipes_path}}/rh-clean-backups.sh
-
-# Update application caches
-update-caches:
-    @{{recipes_path}}/rh-update-caches.sh
-
-# Rollback to previous generation
-rollback:
-    @{{recipes_path}}/rh-rollback.sh
-
-# Format all nix files
-fmt:
-    @{{recipes_path}}/rh-fmt.sh
-
-# Reload user services
+# Reload user systemd services
 reload-services:
     @{{recipes_path}}/rh-reload-services.sh
 
 # Source user environment variables
 source-user-vars:
     @{{recipes_path}}/rh-source-vars.sh
+
+# Update application caches
+update-caches:
+    @{{recipes_path}}/rh-update-caches.sh
+
+# Format all .nix files
+fmt:
+    @{{recipes_path}}/rh-fmt.sh
+
+# --- File Hygiene & Diagnostics ---
+# Find config backup files
+find-backups:
+    @{{recipes_path}}/rh-check-backups.sh
+
+# Find orphaned config dirs
+find-orphans:
+    @{{recipes_path}}/rh-orphans.sh
+
+# Find untracked files
+find-untracked:
+    @{{recipes_path}}/rh-untracked.sh
+
+# Remove orphaned config dirs (interactive)
+clean-orphans:
+    @{{recipes_path}}/rh-clean-orphans.sh
+
+# Remove all backup files
+clean-backups:
+    @{{recipes_path}}/rh-clean-backups.sh
+
+# --- Help ---
+# Open Rhodium Docs on Browser
+docs:
+  @xdg-open "https://rhodium.solenoidlabs.com/docs" > /dev/null 2>&1 &  

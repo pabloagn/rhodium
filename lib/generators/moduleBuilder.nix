@@ -1,6 +1,10 @@
 { lib, pkgs }:
 
-{ path, description, packages }:
+{
+  path,
+  description,
+  packages,
+}:
 
 let
   getCfg = config: lib.attrsets.getAttrFromPath path config;
@@ -19,4 +23,3 @@ in
     home.packages = packages;
   };
 }
-

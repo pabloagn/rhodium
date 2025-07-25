@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC1091
 #
-# This script shows flake metadata
+# Shows flake metadata
 #
 
 # --- Main Configuration ---
@@ -10,11 +10,12 @@ APP_TITLE="Rhodium Build"
 RECIPE="rh-flake-info"
 
 # --- Imports ---
-source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../common/bootstrap.sh"
+COMMON_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../common"
+source "$COMMON_DIR/bootstrap.sh"
 
 # --- Functions ---
 function main() {
-    nix flake metadata "${FLAKE_PATH}"
+  nix flake metadata "${FLAKE_PATH}"
 }
 
 main "$@"
