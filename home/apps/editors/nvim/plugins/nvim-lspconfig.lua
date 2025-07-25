@@ -184,6 +184,24 @@ require("lspconfig").just.setup({
   capabilities = capabilities,
 })
 
+require("lspconfig").julia.setup({
+  capabilities = capabilities,
+  cmd = {
+    "julia",
+    "--startup-file=no",
+    "--history-file=no",
+    "-e",
+    [[
+    using LanguageServer, SymbolServer;
+    import Pkg;
+    env = dirname(Pkg.Types.Context().env.project_file);
+    server = LanguageServer.LanguageServerInstance(stdin, stdout, env, "");
+    server.runlinter = true;
+    run(server);
+  ]],
+  },
+})
+
 -- Kotlin
 require("lspconfig").kotlin_language_server.setup({
   capabilities = capabilities,

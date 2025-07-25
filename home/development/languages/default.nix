@@ -29,6 +29,7 @@
     ./java.nix
     ./javascript.nix
     ./just.nix
+    ./julia.nix
     ./kdl.nix
     ./kotlin.nix
     ./latex.nix
