@@ -2,7 +2,7 @@
   waybarModules = {
     "custom/vpn" = {
       interval = 5;
-      exec = "pgrep -a openvpn|grep -q tun && echo '' || echo ''";
+      exec = "$XDG_BIN_HOME/waybar/custom-vpn.sh";
       tooltip = true;
       tooltip-format = "⊫ VPN\n━━━━━━━━━━━━━━━━━━\n⊫ ⟶ Active\n⊯ ⟶ Inactive";
       on-click = "kitty -e nmtui";
