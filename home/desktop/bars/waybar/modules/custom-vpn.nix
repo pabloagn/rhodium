@@ -1,7 +1,7 @@
 {
   waybarModules = {
     "custom/vpn" = {
-      interval = 5;
+      interval = 1;
       exec = "$XDG_BIN_HOME/waybar/custom-vpn.sh";
       tooltip = true;
       tooltip-format = "⊫ VPN\n━━━━━━━━━━━━━━━━━━\n⊫ ⟶ Active\n⊯ ⟶ Inactive";

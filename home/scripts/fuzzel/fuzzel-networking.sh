@@ -28,8 +28,8 @@ connect_profile() {
     sudo -A wg-quick up "$profile"
     if sudo -A wg-quick up "$profile"; then
         notify_vpn "▲ Connected to $profile"
-    else
-        notify_vpn "✗ Failed to connect to $profile"
+    # else
+    #     notify_vpn "✗ Failed to connect to $profile"
     fi
     main
 }
@@ -39,8 +39,8 @@ disconnect_profile() {
     notify_vpn "Disconnecting $profile…"
     if sudo -A wg-quick down "$profile"; then
         notify_vpn "▼ Disconnected from $profile"
-    else
-        notify_vpn "✗ Failed to disconnect from $profile"
+    # else
+    #     notify_vpn "✗ Failed to disconnect from $profile"
     fi
     main
 }
@@ -90,12 +90,12 @@ show_vpn_profiles() {
 }
 
 main() {
-    options=("VPN ▸:show_vpn_profiles" "Utils ▸:noop" "Exit:noop")
+    options=("VPN:show_vpn_profiles" "Utils:noop" "Exit:noop")
     decorate_fuzzel_menu options
     local count
     count=$(get_fuzzel_line_count)
     local sel
-    sel=$(printf '%s\n' "${menu_labels[@]}" | fuzzel --dmenu --prompt="Network" -l "$count")
+    sel=$(printf '%s\n' "${menu_labels[@]}" | fuzzel --dmenu --prompt="$PROMPT" -l "$count")
     [[ -n "$sel" && ! "$sel" =~ ^--- ]] && eval "${menu_commands[$sel]}"
 }
 
