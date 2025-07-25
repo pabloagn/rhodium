@@ -14,7 +14,9 @@ COMMON_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../common"
 source "$COMMON_DIR/bootstrap.sh"
 
 # --- Functions ---
-has_nix_symlinks() { find "$1" -type l -exec readlink {} \; 2>/dev/null | grep -q "/nix/store/"; }
+has_nix_symlinks() {
+  find "$1" -type l -exec readlink {} \; 2>/dev/null | grep -q "/nix/store/"
+}
 
 get_package_names() {
   local tmpfile

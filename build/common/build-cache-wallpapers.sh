@@ -49,23 +49,18 @@ build_cache_wallpapers() {
       # name becomes "wallpaper-01"
       name=$(basename "$file" .jpg)
 
-      # Skip if the file is at the root of the source directory
       if [[ "$(dirname "$file")" == "$WALLPAPER_SRC_DIR" ]]; then
         continue
       fi
 
-      # Get dimensions using ImageMagick's identify (fast)
       dimensions=$(identify -format '%wx%h' "$file" 2>/dev/null || echo "N/A")
 
-      # Output tab-separated data for sorting
       printf '%s\t%s\t%s\t%s\n' "$collection" "$name" "$dimensions" "$file"
     done | sort -f -k1,1 -k2,2 | while IFS=$'\t' read -r collection name dimensions file; do
 
-      # Capitalize for display
       local collection_disp="${collection^}"
       local name_disp="${name^}"
 
-      # Build the padded, formatted string
       local formatted_text=""
       local parts=("$(provide_fuzzel_entry) $collection_disp" "$name_disp" "$dimensions")
       local num_parts=${#parts[@]}
@@ -79,13 +74,11 @@ build_cache_wallpapers() {
         else
           formatted_text+="$part"
         fi
-        # Add a space between columns (except at the very end)
         if ((i < num_parts - 1)); then
           formatted_text+=" "
         fi
       done
 
-      # Store the final formatted line and the full file path, separated by a tab
       printf '%s\t%s\n' "$formatted_text" "$file"
     done
   } >"$CACHE_FILE"

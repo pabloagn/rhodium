@@ -13,21 +13,18 @@ load_metadata "fuzzel" "launch"
 # --- Variables for fuzzel-launcher cache ---
 PADDING_ARGS="35 20 20" # Column padding: name, type, categories
 
-# --- Function To Build Fuzzel-launcher Cache ---
+# --- Build Fuzzel-launcher Cache ---
 build_cache_launcher() {
   local CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/$APP_NAME"
   local CACHE_FILE="$CACHE_DIR/formatted_apps.cache"
 
   print_pending "Building fuzzel-launcher cache..."
 
-  # Create cache directory
   mkdir -p "$CACHE_DIR"
 
-  # Parse padding arguments
   local -a paddings
   read -ra paddings <<<"$PADDING_ARGS"
 
-  # Get XDG data directories
   local data_dirs=()
   if [[ -n "$XDG_DATA_HOME" ]]; then
     data_dirs+=("$XDG_DATA_HOME")
@@ -65,13 +62,11 @@ build_cache_launcher() {
     fi
   done
 
-  # Parse all desktop files
   declare -A name_map generic_map cat_map hidden_map nodisplay_map
 
   for file in "${unique_files[@]}"; do
     [[ -f "$file" ]] || continue
 
-    # Parse the file in a single pass
     while IFS='=' read -r key value; do
       case "$key" in
       "Name")
@@ -96,7 +91,6 @@ build_cache_launcher() {
   # Filter out hidden/nodisplay entries and sort by name
   declare -A filtered_files
   for file in "${!name_map[@]}"; do
-    # Skip if Hidden=true or NoDisplay=true
     [[ "${hidden_map[$file]:-}" == "true" ]] && continue
     [[ "${nodisplay_map[$file]:-}" == "true" ]] && continue
     [[ -z "${name_map[$file]:-}" ]] && continue
@@ -104,10 +98,8 @@ build_cache_launcher() {
     filtered_files["${name_map[$file]}"]="$file"
   done
 
-  # Sort by name
   readarray -t sorted_names < <(printf '%s\n' "${!filtered_files[@]}" | sort -f)
 
-  # Build cache file
   {
     for name in "${sorted_names[@]}"; do
       file="${filtered_files[$name]}"
@@ -122,12 +114,10 @@ build_cache_launcher() {
       # Parse and format categories
       categories="${cat_map[$file]:-}"
       if [[ -n "$categories" ]]; then
-        # Take first few categories, remove trailing semicolons
         IFS=';' read -ra cat_array <<<"$categories"
         formatted_cats=""
         count=0
         for cat in "${cat_array[@]}"; do
-          # Skip empty entries and technical categories
           [[ -z "$cat" ]] && continue
           [[ "$cat" =~ ^(GTK|Qt|KDE|GNOME|X-) ]] && continue
 
@@ -158,7 +148,6 @@ build_cache_launcher() {
         fi
       done
 
-      # Store formatted line and filename separated by tab
       printf '%s\t%s\n' "$formatted_text" "$file"
     done
   } >"$CACHE_FILE"

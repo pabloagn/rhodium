@@ -36,32 +36,26 @@ copy_to_clipboard() {
   fi
 }
 
+# Add a blank space after the symbol
 provide_fuzzel_prompt() {
-  # Add a blank space after the symbol
   printf "%s " "$FUZZEL_PROMPT"
 }
 
+# Do not add blank space on this instance
 provide_fuzzel_entry() {
-  # Do not add blank space on this instance
   echo "$FUZZEL_ENTRY"
 }
 
+# Do not add blank space on this instance
 provide_fuzzel_mode() {
-  # Do not add blank space on this instance
   echo "--dmenu"
 }
 
+# Populate fuzzel menu from raw "Label:command" array
 decorate_fuzzel_menu() {
-  # Populate fuzzel menu from raw "Label:command" array
-  # Usage:
-  #   decorate_fuzzel_menu raw_array[@]
-  # After calling, two variables will be available:
-  #   - menu_labels (ordered list of decorated entries)
-  #   - menu_commands (map of decorated entries -> command names)
-
-  local -n raw_options="$1" # Reference to the input array
+  local -n raw_options="$1"
   menu_labels=()
-  declare -gA menu_commands=() # Global associative array
+  declare -gA menu_commands=()
 
   for entry in "${raw_options[@]}"; do
     local label="${entry%%:*}"
@@ -72,8 +66,8 @@ decorate_fuzzel_menu() {
   done
 }
 
+# Return the number of non-empty menu_labels (used for --lines argument)
 get_fuzzel_line_count() {
-  # Return the number of non-empty menu_labels (used for --lines argument)
   local count=0
   for label in "${menu_labels[@]}"; do
     [[ -n "$label" ]] && ((count++))

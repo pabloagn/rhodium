@@ -13,7 +13,7 @@ load_metadata "fuzzel" "apps"
 # --- Variables for fuzzel-apps cache ---
 PADDING_ARGS="35 20 20" # Column padding: name, type, categories
 
-# --- Function To Build Fuzzel-apps Cache ---
+# --- Build Fuzzel-apps Cache ---
 build_cache_apps() {
   local APP_DIR="$HOME/.local/share/applications"
   local CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/$APP_NAME"
@@ -21,21 +21,16 @@ build_cache_apps() {
 
   print_pending "Building fuzzel-apps cache..."
 
-  # Create cache directory
   mkdir -p "$CACHE_DIR"
 
-  # Parse padding arguments
   local -a paddings
   read -ra paddings <<<"$PADDING_ARGS"
 
-  # Parse all desktop files in a single pass
   declare -A name_map type_map cat_map
 
-  # Read all desktop files once and extract all fields
   for file in "$APP_DIR"/rh-*.desktop; do
     [[ -f "$file" ]] || continue
 
-    # Parse the file in a single pass
     while IFS='=' read -r key value; do
       case "$key" in
       "Name")
@@ -51,23 +46,19 @@ build_cache_apps() {
     done <"$file"
   done
 
-  # Sort files by name
   readarray -t sorted_files < <(
     for file in "${!name_map[@]}"; do
       printf '%s\t%s\n' "${name_map[$file]}" "$file"
     done | sort -k1,1 | cut -f2
   )
 
-  # Build cache file in sorted order
   {
     for file in "${sorted_files[@]}"; do
       name="${name_map[$file]}"
       entry_type="${type_map[$file]:-app}"
 
-      # Parse and format categories
       categories="${cat_map[$file]:-}"
       if [[ -n "$categories" ]]; then
-        # Split by semicolon, capitalize each, join with comma
         IFS=';' read -ra cat_array <<<"$categories"
         formatted_cats=""
         for cat in "${cat_array[@]}"; do
@@ -81,7 +72,6 @@ build_cache_apps() {
         categories="App"
       fi
 
-      # Build padded entry
       local formatted_text=""
       local parts=("$(provide_fuzzel_entry) $name" "${entry_type^}" "$categories")
       local num_parts=${#parts[@]}
@@ -100,7 +90,6 @@ build_cache_apps() {
         fi
       done
 
-      # Store formatted line and filename separated by tab
       printf '%s\t%s\n' "$formatted_text" "$file"
     done
   } >"$CACHE_FILE"
