@@ -1,2 +1,10 @@
 #!/usr/bin/env bash
-fuzzel -I --dmenu --password="*" --prompt-only "Password: " --cache /dev/null
+
+set -euo pipefail
+
+# --- Functions ---
+provide_prompt() {
+  fuzzel -I --dmenu --password="*" --prompt-only "Password: " --cache /dev/null
+}
+
+provide_prompt

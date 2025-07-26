@@ -184,22 +184,48 @@ require("lspconfig").just.setup({
   capabilities = capabilities,
 })
 
-require("lspconfig").julia.setup({
+-- require("lspconfig").julia.setup({
+--   capabilities = capabilities,
+--   cmd = {
+--     "julia",
+--     "--startup-file=no",
+--     "--history-file=no",
+--     "-e",
+--     [[
+--     using LanguageServer, SymbolServer;
+--     import Pkg;
+--     env = dirname(Pkg.Types.Context().env.project_file);
+--     server = LanguageServer.LanguageServerInstance(stdin, stdout, env, "");
+--     server.runlinter = true;
+--     run(server);
+--   ]],
+--   },
+-- })
+
+require("lspconfig").julials.setup({
   capabilities = capabilities,
-  cmd = {
-    "julia",
-    "--startup-file=no",
-    "--history-file=no",
-    "-e",
-    [[
-    using LanguageServer, SymbolServer;
-    import Pkg;
-    env = dirname(Pkg.Types.Context().env.project_file);
-    server = LanguageServer.LanguageServerInstance(stdin, stdout, env, "");
-    server.runlinter = true;
-    run(server);
-  ]],
-  },
+  -- Let the LSP auto-detect Julia and use the system Julia with packages
+  on_new_config = function(new_config, new_root_dir)
+    local julia = vim.fn.expand("julia")
+    if julia and julia ~= "" then
+      new_config.cmd = {
+        julia,
+        "--startup-file=no",
+        "--history-file=no",
+        "--project=" .. new_root_dir,
+        "-e",
+        [[
+          using Pkg;
+          Pkg.instantiate();
+          using LanguageServer, SymbolServer;
+          env = dirname(Pkg.Types.Context().env.project_file);
+          server = LanguageServer.LanguageServerInstance(stdin, stdout, env, "");
+          server.runlinter = true;
+          run(server);
+        ]],
+      }
+    end
+  end,
 })
 
 -- Kotlin

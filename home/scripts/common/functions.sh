@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Variables
+# --- Variables ---
 # Default app name if not set by including script
 : "${APP_NAME:=DefaultApp}"
 : "${APP_TITLE:=DefaultApp}"

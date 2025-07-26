@@ -41,6 +41,35 @@ build-dry host:
 build-dev host:
     @{{recipes_path}}/rh-build.sh "{{host}}" "dev"
 
+# Build for remote host
+build-remote host target:
+    @nix build .#nixosConfigurations.{{host}}.config.system.build.toplevel --builders "ssh://{{target}}"
+
+# Deploy to remote host
+deploy-remote host target:
+    @nixos-rebuild switch --flake .#{{host}} --target-host {{target}} --use-remote-sudo
+
+# --- Development & Testing ---
+# Check flake syntax and evaluate
+check:
+    @nix flake check --all-systems
+
+# Show what would be built without building
+show-derivation host:
+    @nix show-derivation .#nixosConfigurations.{{host}}.config.system.build.toplevel
+
+# Compare two generations
+diff-generations gen1 gen2:
+    @nix profile diff-closures --profile /nix/var/nix/profiles/system {{gen1}} {{gen2}}
+
+# Show flake dependency tree
+show-deps:
+    @nix flake show --all-systems
+
+# Profile build time
+profile-build host:
+    @{{recipes_path}}/rh-profile-build.sh "{{host}}"
+
 # --- Flake & Input Management ---
 # Update all flake inputs
 update:
@@ -88,6 +117,10 @@ generation:
 health:
     @{{recipes_path}}/rh-health.sh
 
+# Repair store
+repair-store:
+  sudo nix-store --verify --check-contents --repair
+
 # Reload user systemd services
 reload-services:
     @{{recipes_path}}/rh-reload-services.sh
@@ -103,6 +136,24 @@ update-caches:
 # Format all .nix files
 fmt:
     @{{recipes_path}}/rh-fmt.sh
+
+# --- Performance & Analysis ---
+# Show store size by path
+store-size:
+    @{{recipes_path}}/rh-store-size.sh
+
+# Find largest store paths
+largest-paths:
+    @{{recipes_path}}/rh-largest-paths.sh
+
+# --- Backup & Recovery ---
+# Export system configuration
+export-config host output="./system-backup.json":
+    @nix eval --json .#nixosConfigurations.{{host}}.config > {{output}}
+
+# Create hardware config backup
+backup-hardware:
+    @nixos-generate-config --show-hardware-config > hardware-backup.nix
 
 # --- File Hygiene & Diagnostics ---
 # Find config backup files
@@ -128,4 +179,4 @@ clean-backups:
 # --- Help ---
 # Open Rhodium Docs on Browser
 docs:
-  @xdg-open "https://rhodium.solenoidlabs.com/docs" > /dev/null 2>&1 &  
+  @xdg-open "https://rhodium.solenoidlabs.com/docs" > /dev/null 2>&1 &

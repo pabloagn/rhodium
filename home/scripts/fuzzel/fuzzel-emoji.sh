@@ -10,7 +10,7 @@ load_metadata "fuzzel" "emoji"
 
 # Define emoji list
 EMOJI_LIST=$(
-    cat <<EOF
+  cat <<EOF
 😀 Grinning Face
 😁 Beaming Face with Smiling Eyes
 😂 Face with Tears of Joy
@@ -283,22 +283,22 @@ EOF
 )
 
 pick_emoji() {
-    local chosen
-    chosen=$(echo "$EMOJI_LIST" | fuzzel --dmenu --prompt="$PROMPT" | awk '{print $1}')
+  local chosen
+  chosen=$(echo "$EMOJI_LIST" | fuzzel --dmenu --prompt="$PROMPT" | awk '{print $1}')
 
-    if [[ -n "$chosen" ]]; then
-        if copy_to_clipboard "$chosen"; then
-            notify "$APP_TITLE" "Emoji copied to clipboard: $chosen"
-        else
-            notify "$APP_TITLE" "Emoji selected: $chosen (failed to copy)"
-        fi
+  if [[ -n "$chosen" ]]; then
+    if copy_to_clipboard "$chosen"; then
+      notify "$APP_TITLE" "Emoji copied to clipboard: $chosen"
     else
-        notify "$APP_TITLE" "No emoji selected"
+      notify "$APP_TITLE" "Emoji selected: $chosen (failed to copy)"
     fi
+  else
+    notify "$APP_TITLE" "No emoji selected"
+  fi
 }
 
 main() {
-    pick_emoji
+  pick_emoji
 }
 
 main
