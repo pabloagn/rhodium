@@ -66,10 +66,16 @@
     #   icon = "feh";
     #   description = "Image Viewer (X11)";
     # };
+    # image-viewer = {
+    #   binary = "imv";
+    #   args = [ ];
+    #   icon = "imv";
+    #   description = "Image Viewer (Wayland)";
+    # };
     image-viewer = {
-      binary = "imv";
+      binary = "oculante";
       args = [ ];
-      icon = "imv";
+      icon = "oculante";
       description = "Image Viewer (Wayland)";
     };
   };

@@ -323,6 +323,24 @@
       }
     ];
 
+    oculante = [
+      {
+        desc = "oculante (direct)";
+        for = "unix";
+        orphan = true;
+        run = "oculante \"$@\"";
+      }
+    ];
+
+    swayimg = [
+      {
+        desc = "swayimg (direct)";
+        for = "unix";
+        orphan = true;
+        run = "swayimg \"$@\"";
+      }
+    ];
+
     imagemagick = [
       {
         desc = "ImageMagick (display)";
@@ -489,6 +507,8 @@
         name = "*.{jpg,jpeg,png,gif,webp,bmp,ico,tiff,psd,avif,heic,heif}";
         use = [
           "open"
+          "oculante"
+          "swayimg"
           "imv"
           "imagemagick"
           "gimp"
@@ -537,6 +557,8 @@
         use = [
           "open"
           "imv"
+          "oculante"
+          "swayimg"
           "imagemagick"
           "gimp"
           "reveal"
@@ -757,6 +779,8 @@
           "edit-nano"
           "edit-emacs"
           "imv"
+          "oculante"
+          "swayimg"
           "imagemagick"
           "gimp"
           "open"

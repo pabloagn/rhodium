@@ -64,6 +64,12 @@ in
       description = "PerplexityAI";
       categories = [ categories.productivity ];
     };
+    qwen = {
+      profile = "genai";
+      url = "https://chat.qwen.ai/";
+      description = "Qwen";
+      categories = [ categories.productivity ];
+    };
   };
 
   media = {
