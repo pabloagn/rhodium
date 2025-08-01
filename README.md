@@ -59,9 +59,3 @@ This hypermodular configuration combines the declarative power of Nix with 150+ 
     </div>
 </div>
 <br/>
-
-## <samp>⊹ GET RHODIUM</samp>
-
-```bash
-curl -L https://rhodium.solenoidlabs.com/install
-```

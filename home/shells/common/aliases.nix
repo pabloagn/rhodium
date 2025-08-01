@@ -73,7 +73,7 @@
   gi = "zi"; # Go interactive
   gp = "z $HOME_PROJECTS"; # Go projects
   gr = "z $RHODIUM"; # Go Rhodium
-  gs = "z $HOME_SOLENOIDLABS"; # Go SolenoidLabs
+  gS = "z $HOME_SOLENOIDLABS"; # Go SolenoidLabs
   gv = "z $HOME_VAULTS"; # Go Obsidian Vaults
   gw = "z $HOME_PROFESSIONAL"; # Go Professional
 
