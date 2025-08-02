@@ -1,6 +1,32 @@
 { ... }:
 {
   mgr.prepend_keymap = [
+    # Fuzzy
+    {
+      on = [
+        "f"
+        "f"
+      ];
+      run = "plugin fg -- fzf";
+      desc = "Search files by name (fg)";
+    }
+    {
+      on = [
+        "f"
+        "g"
+      ];
+      run = "plugin fr rg";
+      desc = "Search files by content using rg + fzf (fr)";
+    }
+    {
+      on = [
+        "f"
+        "G"
+      ];
+      run = "plugin fr rga";
+      desc = "Search files by content using rga + fzf (fr)";
+    }
+
     # GoToS
     {
       on = [

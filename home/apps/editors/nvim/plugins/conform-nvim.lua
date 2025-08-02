@@ -41,10 +41,22 @@ require("conform").setup({
     dhall = { "dhall" },
     prisma = { "prisma" },
     sql = { "sqlfluff" },
-    markdown = { "prettierd", "prettier" },
+    -- markdown = { "prettierd", "prettier" },
+    -- markdown = { "mdformat" },
+    markdown = { "markdownlint" },
   },
   lsp_fallback = true,
   formatters = {
+    markdownlint = {
+      command = "markdownlint-cli2",
+      args = { "--fix", "$FILENAME" },
+      stdin = false,
+    },
+    mdformat = {
+      command = "mdformat",
+      args = { "--wrap", "80", "--number", "--end-of-line", "lf", "-" },
+      stdin = true,
+    },
     typstfmt = {
       command = "typstfmt",
       stdin = true,

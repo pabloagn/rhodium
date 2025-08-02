@@ -37,6 +37,10 @@
         pipenv # Python dependency management tool
         pytest # Python testing framework
         grip # Preview READMEs from GitHub repos before committing
+
+        # --- Formatters ---
+        # mdformat # Markdown formatter
+        # mdformat-frontmatter # Ensure frontmatter is respected
       ]
     ))
   ];

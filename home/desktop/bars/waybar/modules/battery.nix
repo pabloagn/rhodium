@@ -2,8 +2,8 @@
   waybarModules = {
     battery = {
       interval = 1;
-      bat = "BAT0";
-      # bat = "BAT1";
+      # bat = "BAT0";
+      bat = "BAT1";
       states = {
         good = 95;
         warning = 30;
