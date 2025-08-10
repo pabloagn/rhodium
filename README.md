@@ -71,14 +71,14 @@ Just some of the preconfigured features for the system.
 
 <br/>
 <div align="center">
-    <img src="https://dvb0bsaug07xf.cloudfront.net/assets/screens/screen_001.png"/>
-    <img src="https://dvb0bsaug07xf.cloudfront.net/assets/screens/screen_002.png"/>
-    <img src="https://dvb0bsaug07xf.cloudfront.net/assets/screens/screen_003.png"/>
-    <img src="https://dvb0bsaug07xf.cloudfront.net/assets/screens/screen_004.png"/>
-    <img src="https://dvb0bsaug07xf.cloudfront.net/assets/screens/screen_005.png"/>
-    <img src="https://dvb0bsaug07xf.cloudfront.net/assets/screens/screen_006.png"/>
-    <img src="https://dvb0bsaug07xf.cloudfront.net/assets/screens/screen_007.png"/>
-    <img src="https://dvb0bsaug07xf.cloudfront.net/assets/screens/screen_008.png"/>
+    <img src="https://dvb0bsaug07xf.cloudfront.net/assets/screens/screen_001.jpg"/>
+    <img src="https://dvb0bsaug07xf.cloudfront.net/assets/screens/screen_002.jpg"/>
+    <img src="https://dvb0bsaug07xf.cloudfront.net/assets/screens/screen_003.jpg"/>
+    <img src="https://dvb0bsaug07xf.cloudfront.net/assets/screens/screen_004.jpg"/>
+    <img src="https://dvb0bsaug07xf.cloudfront.net/assets/screens/screen_005.jpg"/>
+    <img src="https://dvb0bsaug07xf.cloudfront.net/assets/screens/screen_006.jpg"/>
+    <img src="https://dvb0bsaug07xf.cloudfront.net/assets/screens/screen_007.jpg"/>
+    <img src="https://dvb0bsaug07xf.cloudfront.net/assets/screens/screen_008.jpg"/>
 </div>
 <br/>
 
@@ -86,6 +86,6 @@ Just some of the preconfigured features for the system.
 
 <p align="center">
   <a href="https://rhodium.solenoidlabs.com">
-    <img src="https://dvb0bsaug07xf.cloudfront.net/assets/site/icon.png" width="500px">
+    <img src="https://dvb0bsaug07xf.cloudfront.net/assets/site/icon.png" width="200px">
   </a>
 </p>
