@@ -1,4 +1,8 @@
-<p align="center"><img src="assets/logo.png" width=500px></p>
+<p align="center">
+  <a href="https://rhodium.solenoidlabs.com">
+    <img src="https://dvb0bsaug07xf.cloudfront.net/assets/site/logo.png" width="500px">
+  </a>
+</p>
 
 <p align="center"><em>A hypermodular NixOS system built to stand the test of time</em></p>
 
@@ -20,8 +24,8 @@
 <br/>
 <div align="center">───────  ⑄  ───────</div>
 <br/>
-<br/>
 
+<br/>
 <div align="center">
     <div id="docs">
         <p style="text-align:center;">
@@ -33,6 +37,7 @@
         <img src="https://img.shields.io/badge/∙ Contributions ∙-f2f2f2?style=for-the-badge"/></a>&nbsp&nbsp
     </div>
 </div>
+<br/>
 
 ## <samp>⊹ ABOUT</samp>
 
@@ -59,3 +64,28 @@ This hypermodular configuration combines the declarative power of Nix with 150+ 
     </div>
 </div>
 <br/>
+
+## <samp>⊹ SCREENS</samp>
+
+Just some of the preconfigured features for the system.
+
+<br/>
+<div align="center">
+    <img src="https://dvb0bsaug07xf.cloudfront.net/assets/screens/screen_001.png"/>
+    <img src="https://dvb0bsaug07xf.cloudfront.net/assets/screens/screen_002.png"/>
+    <img src="https://dvb0bsaug07xf.cloudfront.net/assets/screens/screen_003.png"/>
+    <img src="https://dvb0bsaug07xf.cloudfront.net/assets/screens/screen_004.png"/>
+    <img src="https://dvb0bsaug07xf.cloudfront.net/assets/screens/screen_005.png"/>
+    <img src="https://dvb0bsaug07xf.cloudfront.net/assets/screens/screen_006.png"/>
+    <img src="https://dvb0bsaug07xf.cloudfront.net/assets/screens/screen_007.png"/>
+    <img src="https://dvb0bsaug07xf.cloudfront.net/assets/screens/screen_008.png"/>
+</div>
+<br/>
+
+---
+
+<p align="center">
+  <a href="https://rhodium.solenoidlabs.com">
+    <img src="https://dvb0bsaug07xf.cloudfront.net/assets/site/icon.png" width="500px">
+  </a>
+</p>

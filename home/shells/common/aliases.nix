@@ -164,5 +164,6 @@
   cat = "bat";
   cata = "cat * | y"; # cat all and yank
   catr = "find . -type f | xargs -I {} sh -c 'echo \"{}\"; cat \"{}\"; echo \"-----\"' | wl-copy"; # cat all recursive and yank
+  headr = "find . -type f | xargs -I {} sh -c 'echo \"{}\"; head \"{}\"; echo \"-----\"' | wl-copy"; # head all recursive and yank
   lf = "yy";
 }
