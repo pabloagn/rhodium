@@ -86,6 +86,6 @@ Just some of the preconfigured features for the system.
 
 <p align="center">
   <a href="https://rhodium.solenoidlabs.com">
-    <img src="https://dvb0bsaug07xf.cloudfront.net/assets/site/icon.png" width="200px">
+    <img src="https://dvb0bsaug07xf.cloudfront.net/assets/site/icon.png" width="100px">
   </a>
 </p>
