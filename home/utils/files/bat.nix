@@ -1,17 +1,12 @@
-{ targetTheme, ... }:
+{ ... }:
 {
   programs.bat = {
     enable = true;
 
     themes = {
-      tokyonight_night = {
-        inherit (targetTheme.tokyonight_night) src;
-        file = targetTheme.tokyonight_night.files.bat;
-      };
-      kanso_zen = {
-        inherit (targetTheme.kanso-zen) src;
-        file = targetTheme.kanso-zen.files.bat;
-      };
+      kanso_zen = ./bat/kanso-zen.tmTheme;
+      catpuccin_mnocha = ./bat/catppuccin-mocha.tmTheme;
+      tokio_night = ./bat/tokyonight-night.tmTheme;
     };
 
     config = {
