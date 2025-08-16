@@ -4,9 +4,20 @@
     enable = true;
 
     themes = {
-      kanso_zen = ./bat/kanso-zen.tmTheme;
-      catpuccin_mnocha = ./bat/catppuccin-mocha.tmTheme;
-      tokio_night = ./bat/tokyonight-night.tmTheme;
+      kanso_zen = {
+        src = ./.;
+        file = "bat/kanso-zen.tmTheme";
+      };
+
+      catppuccin_mocha = {
+        src = ./.;
+        file = "bat/catppuccin-mocha.tmTheme";
+      };
+
+      tokyonight = {
+        src = ./.;
+        file = "bat/tokyonight-night.tmTheme";
+      };
     };
 
     config = {

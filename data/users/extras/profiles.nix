@@ -20,6 +20,10 @@
       profile = "academic";
       description = "Firefox Academic";
     };
+    segmentaim = {
+      profile = "segmentaim";
+      description = "Firefox Segmentaim";
+    };
     bsogood = {
       profile = "bsogood";
       description = "Firefox Bsogood";

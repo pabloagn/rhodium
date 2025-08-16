@@ -2,7 +2,7 @@
 {
   imports = [
     ./discord.nix
-    ./mastodon.nix
+    # ./mastodon.nix
     ./matrix.nix
     ./signal.nix
     ./telegram.nix

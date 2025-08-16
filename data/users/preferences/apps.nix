@@ -38,6 +38,7 @@
       phantom = "TheHumanPalace";
       genai = "GenAI";
       ultra = "Ultra";
+      segmentaim = "Segmentaim";
       private = "Private";
     };
 

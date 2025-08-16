@@ -33,10 +33,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # kanso-nvim = {
-    #   url = "github:pabloagn/kanso.nvim"; # NOTE: Personal fork
-    #   flake = false;
-    # };
+    kanso-nvim = {
+      url = "github:pabloagn/kanso.nvim"; # NOTE: Personal fork
+      flake = false;
+    };
 
     chiaroscuro = {
       url = "github:pabloagn/chiaroscuro.rht";
@@ -75,7 +75,7 @@
       sops-nix,
       nur,
       zen-browser,
-      # kanso-nvim,
+      kanso-nvim,
       chiaroscuro,
       rhodium-alloys,
       iridium-rh,
@@ -186,7 +186,7 @@
 
       # TODO: Temporary theme imports
       # While we have the complete theme module set up
-      # targetTheme = import ./home/modules/themes.nix { inherit pkgs inputs; };
+      targetTheme = import ./home/modules/themes.nix { inherit pkgs inputs; };
 
       chiaroscuroTheme = inputs.chiaroscuro.themes.kanso-zen;
     in
@@ -223,7 +223,7 @@
                   user = userData.user_001 or { };
                   host = hostData.host_001 or { };
                   theme = selectedTheme;
-                  # targetTheme = targetTheme; # TODO: This is temporary
+                  targetTheme = targetTheme; # TODO: This is temporary
                   chiaroscuroTheme = chiaroscuroTheme; # TODO: This is temporary
                   inherit userPreferences userExtras;
                   fishPlugins = rhodium-alloys.fish;
@@ -264,7 +264,7 @@
                   user = userData.user_001 or { };
                   host = hostData.host_002 or { };
                   theme = selectedTheme;
-                  # targetTheme = targetTheme; # TODO: This is temporary
+                  targetTheme = targetTheme; # TODO: This is temporary
                   inherit userPreferences userExtras;
                   fishPlugins = rhodium-alloys.fish;
                   yaziPlugins = rhodium-alloys.yazi;
@@ -295,7 +295,7 @@
             user = userData.user_001 or { };
             host = { };
             theme = selectedTheme;
-            # targetTheme = targetTheme; # TODO: This is temporary
+            targetTheme = targetTheme; # TODO: This is temporary
             inherit userPreferences userExtras;
             fishPlugins = rhodium-alloys.fish;
             yaziPlugins = rhodium-alloys.yazi;
