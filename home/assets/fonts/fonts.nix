@@ -466,6 +466,12 @@
       name = "Gelasio";
       style = "Serif";
     };
+    latin-modern = {
+      enable = true;
+      package = pkgs.lmodern;
+      name = "Latin Modern";
+      style = "Serif";
+    };
     libre-baskerville = {
       enable = true;
       package = pkgs.libre-baskerville;
