@@ -26,5 +26,7 @@
     tree # Produce an indented directory tree view
     broot # Interactive tree view
     rich-cli # CLI for Python's rich
+    csvkit # Toolkit for tabular file processing
+    xlsx2csv # Lightweight toolkit for tabular file processing
   ];
 }
