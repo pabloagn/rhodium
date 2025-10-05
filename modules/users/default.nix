@@ -21,6 +21,11 @@ in
     extraGroups = user_001_data.extraGroups;
     shell = pkgs.fish;
     home = "/home/${user_001_data.username}";
+    openssh = {
+      authorizedKeys.keys = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJGHxTVVJeq9L0J2K0XiT/z14A/8oE86QwCZJRnmZtxr pabloaguirrenck@protonmail.com"
+      ];
+    };
   };
 
   # NOTE: Required for devenv
