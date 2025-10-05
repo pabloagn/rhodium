@@ -1,0 +1,4 @@
+{ ... }:
+{
+  services.tailscale.enable = true;
+}
