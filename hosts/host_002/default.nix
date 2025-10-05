@@ -17,6 +17,7 @@
     ../../modules/desktop/wm/niri/intel.nix
     ../../modules/integration
     ../../modules/virtualization
+    ../../modules/virtualization/docker-nvidia.nix
     ../../modules/apps
     ../../modules/rules
     ../../modules/maintenance

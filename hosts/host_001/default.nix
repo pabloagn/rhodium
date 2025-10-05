@@ -17,6 +17,7 @@
     ../../modules/desktop/wm/niri/amd.nix
     ../../modules/integration
     ../../modules/virtualization
+    ../../modules/virtualization/docker-amd.nix
     ../../modules/apps
     ../../modules/rules
     ../../modules/maintenance

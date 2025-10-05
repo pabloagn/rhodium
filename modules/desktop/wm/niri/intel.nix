@@ -22,6 +22,11 @@
     open = true; # Use open kernel modules for Turing or later GPUs (RTX series)
     package = config.boot.kernelPackages.nvidiaPackages.stable;
     powerManagement.enable = true; # Enable power management (suspend/resume)
+    modesetting.enable = true;
+  };
+
+  hardware.nvidia-container-toolkit = {
+    enable = true;
   };
 
   environment.sessionVariables = {
