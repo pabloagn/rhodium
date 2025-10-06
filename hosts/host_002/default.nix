@@ -35,6 +35,37 @@
     networkmanager.enable = true;
   };
 
+  # --- Tailscale Client Configuration for Alexandria ---
+
+  # 1. Declaratively create the secret file during the system build.
+  #    This requires the source file to exist at the specified path before building.
+  environment.etc."nixos/secrets/tailscale-authkey" = {
+    source = "/home/pabloagn/alexandria-tailscale-authkey";
+    mode = "0400"; # Read-only for owner (root)
+    user = "root";
+    group = "root";
+  };
+
+  # 2. Configure the Tailscale client service.
+  services.tailscale = {
+    enable = true;
+    # Point the client to your self-hosted Headscale server.
+    loginServer = "https://headscale.rhodium.sh";
+  };
+
+  # 3. Modify the systemd service to automatically connect on startup.
+  systemd.services.tailscaled.serviceConfig = {
+    # After the tailscaled service starts, execute this command.
+    ExecStartPost = ''
+      ${pkgs.tailscale}/bin/tailscale up \
+        --authkey=file:/etc/nixos/secrets/tailscale-authkey \
+        --hostname=alexandria \
+        --ssh
+    '';
+  };
+
+  # ----------------------------------------------------
+
   # Modules
   # ---------------------------------
   # Extra Services
