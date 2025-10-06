@@ -26,6 +26,8 @@ let
   moduleNiriWorkspaces = import ./niri-workspaces.nix;
   moduleWireplumberSink = import ./wireplumber-sink.nix;
   moduleWireplumberSource = import ./wireplumber-source.nix;
+  moduleTray = import ./tray.nix;
+
 
   # --- Import Groups ---
   moduleGroupThermals = import ./group-thermals.nix;
@@ -65,6 +67,7 @@ let
     moduleNetworkWifiUl
     moduleNiriLanguage
     moduleNiriWorkspaces
+    moduleTray
   ];
 
   # --- Merge module-provided Waybar configuration ---
@@ -112,6 +115,9 @@ let
       "wireplumber#sink"
       "custom/separator"
       "niri/language"
+      "custom/separator"
+      "tray"
+
       # "keyboard-state#capslock"
     ];
   };
