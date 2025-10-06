@@ -22,6 +22,7 @@
     ../../modules/rules
     ../../modules/maintenance
     ../../modules/utils
+    ../../modules/network
   ];
 
   # Base
@@ -46,6 +47,11 @@
   extraServices = {
     asusKeyboardBacklight.enable = true;
     laptopLid.enable = true;
+  };
+
+  services.tailscale-client = {
+    enable = true;
+    loginServer = "https://alexandria.tailnet:8080";
   };
 
   # Extra rules
