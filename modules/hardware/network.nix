@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 {
   environment.systemPackages = with pkgs; [
     # Networking
@@ -10,7 +10,11 @@
     wireguard-ui # Web user interface to manage WireGuard setup
     openresolv # Tool to interact with resolv.conf
   ];
+  # networking = {
+  #   firewall.checkReversePath = false; # HACK: Required for VPN
+  # };
+
   networking = {
-    firewall.checkReversePath = false; # HACK: Required for VPN
+    firewall.checkReversePath = lib.mkForce "loose"; # HACK: Required for VPN
   };
 }

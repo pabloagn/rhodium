@@ -49,11 +49,6 @@
     laptopLid.enable = true;
   };
 
-  # services.tailscale-client = {
-  #   enable = true;
-  #   loginServer = "https://alexandria.tailnet:8080";
-  # };
-
   # Extra rules
   extraRules = {
     keychronUdev.enable = true;
