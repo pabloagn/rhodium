@@ -1,27 +1,45 @@
 require("kanso").setup({
-	bold = true, -- enable bold fonts
-	italics = true, -- enable italics
-	compile = false, -- enable compiling the colorscheme
-	undercurl = true, -- enable undercurls
-	commentStyle = { italic = true },
-	functionStyle = {},
-	keywordStyle = { italic = true },
-	statementStyle = {},
-	typeStyle = {},
-	transparent = true, -- match your current tokyonight setup
-	dimInactive = false, -- dim inactive window
-	terminalColors = true, -- define vim.g.terminal_color_{0,17}
-	colors = { -- add/modify theme and palette colors
-		palette = {},
-		theme = { zen = {}, pearl = {}, ink = {}, mist = {}, all = {} },
-	},
-	overrides = function(colors) -- add/modify highlights
-		return {}
-	end,
-	theme = "zen", -- Load "zen" theme (dark)
-	background = { -- map the value of 'background' option to a theme
-		dark = "zen", -- you can try "ink" or "mist"
-		light = "pearl", -- light theme option
-	},
+  bold = true,
+  italics = true,
+  compile = false,
+  undercurl = true,
+  commentStyle = { italic = true },
+  functionStyle = {},
+  keywordStyle = { italic = true },
+  statementStyle = {},
+  typeStyle = {},
+  transparent = true,
+  dimInactive = false,
+  terminalColors = true,
+  colors = {
+    palette = {},
+    theme = { zen = {}, pearl = {}, ink = {}, mist = {}, all = {} },
+  },
+  overrides = function(colors)
+    return {
+      -- Telescope
+      TelescopeNormal = { bg = "#0f1316", fg = "#DCE0E8" },
+      TelescopeBorder = { fg = "#22262d", bg = "#0f1316" },
+      TelescopePromptBorder = { fg = "#22262d", bg = "#0f1316" },
+      TelescopeResultsBorder = { fg = "#22262d", bg = "#0f1316" },
+      TelescopePreviewBorder = { fg = "#22262d", bg = "#0f1316" },
+      TelescopeSelection = { fg = "#DCE0E8", bg = "#1f272e" },
+      TelescopePromptPrefix = { fg = "#5c6066" },
+
+      -- WhichKey
+      WhichKeyNormal = { bg = "#090E13" },
+      WhichKeyBorder = { fg = "#22262D", bg = "#090E13" },
+      WhichKeyTitle = { bg = "#090E13" },
+
+      -- Noice
+      NoiceCmdlinePopup = { bg = "#0f1316", fg = "#c0caf5" },
+      NoiceCmdlinePopupBorder = { fg = "#5c6066", bg = "#0f1316" },
+    }
+  end,
+  theme = "zen",
+  background = {
+    dark = "zen",
+    light = "pearl",
+  },
 })
 vim.cmd("colorscheme kanso")
