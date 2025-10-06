@@ -311,7 +311,7 @@
       description = "Telegram Desktop";
     };
     discord = {
-      binary = "discord";
+      binary = "vesktop";
       args = [ ];
       icon = "discord";
       description = "Discord";
