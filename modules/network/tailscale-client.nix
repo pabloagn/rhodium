@@ -5,9 +5,12 @@
   ...
 }:
 {
+  # NOTE: Managed tailscale
+  # -------------------------------------------------------------------------------
   services.tailscale = {
     enable = true;
     openFirewall = true;
+    extraUpFlags = [ "--ssh" ];
   };
 
   # NOTE: Self-hosted headscale
