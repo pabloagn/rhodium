@@ -27,8 +27,14 @@
 
   # Base
   # ---------------------------------
-  # Kernel version (AMD follows latest)
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  # Kernel version
+  # BUG: Latest Kernel has fundamental issues with ASUS BIOS
+  # causing it to not get past EFI Stubs on boot (ACPI issue most likely)
+  # The issue was bypassed by booting the machine connected to AC
+  # using the NORMAL USB-C port (not the high-speed one)
+  # For now, we're pinning the Kernel to the latest stable on this host.
+  # boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages_6_12;
 
   # Host Configuration
   networking = {
