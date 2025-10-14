@@ -40,5 +40,9 @@
       profile = "private";
       description = "Firefox Private";
     };
+    littlejohn = {
+      profile = "littlejohn";
+      description = "Firefox Little John";
+    };
   };
 }

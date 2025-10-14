@@ -39,6 +39,7 @@
       genai = "GenAI";
       ultra = "Ultra";
       segmentaim = "Segmentaim";
+      littlejohn = "Little-John";
       private = "Private";
     };
 
