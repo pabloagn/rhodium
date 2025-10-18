@@ -4,7 +4,8 @@
   ];
 
   home.packages = with pkgs; [
-    gping # Better ping (includes graph)
     dogdns # Command line dns client
+    gping # Better ping (includes graph)
+    netscanner # TUI network scanner
   ];
 }

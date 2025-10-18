@@ -1,11 +1,11 @@
 { pkgs, ... }:
 {
   home.packages = with pkgs; [
-    # Image manipulation and viewing
-    imagemagick # Image manipulation toolkit
     chafa # Terminal image viewer
-    ffmpegthumbnailer # For video previews
     exiftool # Read and write metadata from and to images
+    ffmpegthumbnailer # For video previews
+    imagemagick # Image manipulation toolkit
+    libwebp # Tools for WebP images
     ueberzugpp # Write images on terminal on wayland (kitty, etc)
   ];
 }

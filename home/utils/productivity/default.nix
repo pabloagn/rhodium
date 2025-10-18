@@ -10,27 +10,27 @@
 
   home.packages = with pkgs; [
     # --- Screenshot And Image Tools ---
-    slurp # Interactive area selection
-    grim # Screenshot utility for Wayland
-    swappy # Screenshot annotation tool
-    hyprpicker # Color picker for hyprland
     # flameshot # Screenshot utility
+    grim # Screenshot utility for Wayland
+    gtk3 # Includes gtk-launch
+    hyprpicker # Color picker for hyprland
     satty
+    slurp # Interactive area selection
+    swappy # Screenshot annotation tool
     tesseract # OCR Engine
 
-    gtk3 # Includes gtk-launch
-
     # --- Clipboard Utilities ---
-    wl-clipboard # Wayland clipboard utilities
     clipman # Clipboard manager for Wayland
+    wl-clipboard # Wayland clipboard utilities
 
     # --- Utils ---
+    comma # Runs programs without installing them
+    fontforge # For font previews
+    ghostscript # Postscript interpreter
     mermaid-cli # Generation of mermaid diagrams in text
     pandoc # PDF manipulation
     poppler_utils # For PDF previews (pdftotext)
-    fontforge # For font previews
-    comma # Runs programs without installing them
-    ghostscript # Postscript interpreter
+    tui-journal # Rust TUI for note-taking
 
     # --- Documentation ---
     # tldr # Simplified and community-driven man pages
