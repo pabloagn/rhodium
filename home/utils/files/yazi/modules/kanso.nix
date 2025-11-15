@@ -128,6 +128,21 @@
     ];
     prepend_exts = [
       {
+        name = "j2";
+        text = "";
+        fg = "#C1C5C3";
+      }
+      {
+        name = "jinja";
+        text = "";
+        fg = "#C1C5C3";
+      }
+      {
+        name = "jinja2";
+        text = "";
+        fg = "#C1C5C3";
+      }
+      {
         name = "yuck";
         text = "󰒓";
         fg = "#6B7E84";

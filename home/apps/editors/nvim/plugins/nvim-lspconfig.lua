@@ -403,6 +403,12 @@ require("lspconfig").emmet_ls.setup({
   },
 })
 
+-- Jinja2
+require("lspconfig").jinja_lsp.setup({
+  capabilities = capabilities,
+  filetypes = { "jinja", "jinja2", "j2", "html.jinja", "html.j2" },
+})
+
 -- Tailwind CSS
 require("lspconfig").tailwindcss.setup({
   capabilities = capabilities,

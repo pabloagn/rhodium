@@ -28,6 +28,7 @@
     ./haskell.nix
     ./java.nix
     ./javascript.nix
+    ./jinja.nix
     ./just.nix
     ./julia.nix
     ./kdl.nix
