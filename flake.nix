@@ -10,6 +10,10 @@
       url = "github:NixOS/nixpkgs/nixos-unstable";
     };
 
+    nixpkgs-shell = {
+      url = "github:NixOS/nixpkgs/nixos-25.11";
+    };
+
     home-manager = {
       url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -59,6 +63,7 @@
       self,
       nixpkgs,
       nixpkgs-unstable,
+      nixpkgs-shell,
       home-manager,
       flake-parts,
       sops-nix,
@@ -100,6 +105,13 @@
           nur.overlays.default
           overlaysWithInputs.fonts
         ];
+      };
+
+      pkgs-shell = import nixpkgs-shell {
+        inherit system;
+        config = {
+          allowUnfree = true;
+        };
       };
 
       rhodiumLib = import ./lib { inherit lib pkgs; };
@@ -295,7 +307,7 @@
       # --- Devshells ---
       devShells.${system} = {
         # Default
-        default = import ./devshells/nixos.nix { inherit pkgs inputs lib; };
+        default = import ./devshells/nixos.nix { inherit pkgs-shell inputs lib; };
       };
     };
 }

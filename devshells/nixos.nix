@@ -1,6 +1,6 @@
-{ pkgs, ... }:
-pkgs.mkShell {
-  buildInputs = with pkgs; [
+{ pkgs-shell, ... }:
+pkgs-shell.mkShell {
+  buildInputs = with pkgs-shell; [
     # --- General Requirements ---
     nixpkgs-fmt
     nixd
@@ -17,5 +17,10 @@ pkgs.mkShell {
     # --- Requirements For Cache Building ---
     python3
     python3Packages.wcwidth
+
+    # --- Utils ---
+    claude-code
+    codex
+    gemini-cli
   ];
 }

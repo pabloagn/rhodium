@@ -37,21 +37,28 @@
   };
 
   # Desktop portals
+  # NOTE: Niri requires xdg-desktop-portal-gnome for screencasting (not wlr).
+  # The programs.niri module already adds xdg-desktop-portal-gnome and niri-portals.conf.
   xdg.portal = {
     enable = true;
-    wlr.enable = true;
+    # wlr.enable = true; # DISABLED: wlr portal doesn't work with Niri
     extraPortals = with pkgs; [
       xdg-desktop-portal-gtk
-      xdg-desktop-portal
-      xdg-desktop-portal-wlr
+      # xdg-desktop-portal # DISABLED: already pulled in by the niri module
+      # xdg-desktop-portal-wlr # DISABLED: Niri uses gnome portal for ScreenCast
       xdg-desktop-portal-termfilechooser # Portal for using TUIs as file pickers
     ];
-    config = {
-      common = {
-        default = "gtk";
-        "org.freedesktop.impl.portal.ScreenCast" = "wlr"; # NOTE: This is required for screensharing to work properly
-        "org.freedesktop.impl.portal.Screenshot" = "wlr";
-      };
-    };
+    # DISABLED: This config forced wlr for ScreenCast which doesn't work with Niri.
+    # The niri package provides niri-portals.conf which correctly routes to gnome.
+    # config = {
+    #   common = {
+    #     default = "gtk";
+    #     "org.freedesktop.impl.portal.ScreenCast" = "wlr";
+    #     "org.freedesktop.impl.portal.Screenshot" = "wlr";
+    #   };
+    # };
   };
+
+  # Required by xdg-desktop-portal-gnome for file chooser dialogs
+  services.dbus.packages = [ pkgs.nautilus ];
 }

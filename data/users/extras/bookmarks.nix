@@ -53,9 +53,15 @@ in
       categories = [ categories.productivity ];
     };
     gemini = {
+      profile = "genai-2";
+      url = "https://gemini.google.com/app";
+      description = "GeminiAI";
+      categories = [ categories.productivity ];
+    };
+    gemini-ai-studio = {
       profile = "genai";
       url = "https://aistudio.google.com/";
-      description = "GeminiAI";
+      description = "GeminiAI Studio";
       categories = [ categories.productivity ];
     };
     lumo = {
