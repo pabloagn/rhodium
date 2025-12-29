@@ -46,6 +46,12 @@ in
       description = "ClaudeAI";
       categories = [ categories.productivity ];
     };
+    claude-2 = {
+      profile = "genai-2";
+      url = "https://claude.ai";
+      description = "ClaudeAI 2";
+      categories = [ categories.productivity ];
+    };
     gemini = {
       profile = "genai";
       url = "https://aistudio.google.com/";

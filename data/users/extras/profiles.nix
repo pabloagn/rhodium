@@ -36,6 +36,14 @@
       profile = "genai";
       description = "Firefox GenAI Dev";
     };
+    genai-2 = {
+      profile = "genai-2";
+      description = "Firefox GenAI Dev 2";
+    };
+    amsterdam = {
+      profile = "amsterdam";
+      description = "Firefox Amsterdam";
+    };
     private = {
       profile = "private";
       description = "Firefox Private";
@@ -43,6 +51,10 @@
     littlejohn = {
       profile = "littlejohn";
       description = "Firefox Little John";
+    };
+    atmosphericai = {
+      profile = "atmosphericai";
+      description = "Firefox Atmospheric AI";
     };
   };
 }

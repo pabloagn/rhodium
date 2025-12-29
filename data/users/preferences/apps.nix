@@ -37,9 +37,12 @@
       bsogood = "Bsogood";
       phantom = "TheHumanPalace";
       genai = "GenAI";
+      genai-2 = "GenAI-2";
+      amsterdam = "Amsterdam";
       ultra = "Ultra";
       segmentaim = "Segmentaim";
       littlejohn = "Little-John";
+      atmosphericai = "AtmosphericAI";
       private = "Private";
     };
 
