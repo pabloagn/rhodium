@@ -10,6 +10,7 @@
       url = "github:NixOS/nixpkgs/nixos-unstable";
     };
 
+    # NOTE: We define a separate source for NixShells since we might want dev tools with newer nixos package versions without bumping entire derivation
     nixpkgs-shell = {
       url = "github:NixOS/nixpkgs/nixos-25.11";
     };
