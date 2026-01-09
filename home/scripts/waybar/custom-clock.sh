@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 entries=(
+    "AMS|Europe/Amsterdam"
     "BCN|Europe/Madrid"
     "BRL|Europe/Berlin"
     "GNV|Europe/Zurich"
