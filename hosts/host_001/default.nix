@@ -58,6 +58,7 @@
   # Extra rules
   extraRules = {
     keychronUdev.enable = true;
+    keychronQ3Udev.enable = true;
     hdmiAutoSwitch.enable = true;
   };
 
