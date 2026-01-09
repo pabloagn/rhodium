@@ -60,6 +60,7 @@
     keychronUdev.enable = true;
     keychronQ3Udev.enable = true;
     hdmiAutoSwitch.enable = true;
+    netgearA8000Udev.enable = true;
   };
 
   # Garbage override

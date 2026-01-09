@@ -14,6 +14,7 @@
     ./swaybg.nix
     ./waybar.nix
     ./wezterm.nix
+    ./wifi.nix
     ./wlsunset.nix
   ];
 }
