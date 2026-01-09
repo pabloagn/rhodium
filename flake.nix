@@ -57,6 +57,11 @@
       url = "git+ssh://git@github.com/pabloagn/iridium.rh.git";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    niri-flake = {
+      url = "github:sodiboo/niri-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -74,6 +79,7 @@
       chiaroscuro,
       rhodium-alloys,
       iridium-rh,
+      niri-flake,
     }@inputs:
     let
       lib = nixpkgs.lib;
@@ -208,6 +214,7 @@
           modules = [
             ./hosts/host_001
             home-manager.nixosModules.home-manager
+            niri-flake.nixosModules.niri
             {
               home-manager = {
                 useGlobalPkgs = true;
@@ -249,6 +256,7 @@
           modules = [
             ./hosts/host_002
             home-manager.nixosModules.home-manager
+            niri-flake.nixosModules.niri
             {
               home-manager = {
                 useGlobalPkgs = true;
@@ -287,7 +295,10 @@
       homeConfigurations = {
         user_001 = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
-          modules = [ ./users/user_001 ];
+          modules = [
+            ./users/user_001
+            niri-flake.homeModules.config
+          ];
           extraSpecialArgs = {
             inherit
               pkgs-unstable

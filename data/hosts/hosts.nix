@@ -5,7 +5,7 @@
       description = "Justine Host";
       mainMonitor = {
         monitorID = "eDP-1";
-        monitorResolution = "";
+        monitorResolution = "2880x1620";
         monitorRefreshRate = "120";
         monitorScalingFactor = "1.5";
       };
