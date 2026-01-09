@@ -28,5 +28,6 @@
     rich-cli # CLI for Python's rich
     csvkit # Toolkit for tabular file processing
     xlsx2csv # Lightweight toolkit for tabular file processing
+    duckdb # Embeddable SQL OLAP database (required for yazi duckdb plugin)
   ];
 }

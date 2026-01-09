@@ -446,12 +446,7 @@
     cwd = {
       fg = "#E6C384";
     };
-    hovered = {
-      reversed = true;
-    };
-    preview_hovered = {
-      reversed = true;
-    };
+    # hovered and preview_hovered moved to [indicator] section
     find_keyword = {
       fg = "#B98D7B";
       bg = "#090E13";
@@ -639,6 +634,20 @@
     };
     title_error = {
       fg = "#E46876";
+    };
+  };
+
+  indicator = {
+    # Square corners instead of rounded
+    padding = {
+      open = "█";
+      close = "█";
+    };
+    current = {
+      reversed = true;
+    };
+    preview = {
+      reversed = true;
     };
   };
 

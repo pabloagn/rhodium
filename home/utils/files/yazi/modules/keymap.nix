@@ -152,5 +152,17 @@
       run = "rename --empty=stem --cursor=start";
       desc = "Rename change selected file(s)";
     }
+
+    # DuckDB column scrolling (for CSV/TSV/Parquet preview)
+    {
+      on = [ "H" ];
+      run = "plugin duckdb -1";
+      desc = "DuckDB: scroll columns left";
+    }
+    {
+      on = [ "L" ];
+      run = "plugin duckdb +1";
+      desc = "DuckDB: scroll columns right";
+    }
   ];
 }

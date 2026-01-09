@@ -23,6 +23,7 @@ in
       duckdb = pkgs.yaziPlugins.duckdb;
       full-border = pkgs.yaziPlugins.full-border;
       git = pkgs-unstable.yaziPlugins.git;
+      glow = pkgs.yaziPlugins.glow;
       miller = pkgs.yaziPlugins.miller;
       mediainfo = pkgs.yaziPlugins.mediainfo;
       mount = pkgs.yaziPlugins.mount;
