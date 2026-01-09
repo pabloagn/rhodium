@@ -3,8 +3,7 @@
   icon = {
     prepend_globs = [
       {
-        name = "*.rh/";
-        "if" = "dir";
+        url = "*/*.rh/";
         text = "󰊕";
         fg = "#BF3F42";
       }

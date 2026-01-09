@@ -168,18 +168,21 @@ in
         focus-ring = {
           enable = true;
           width = 1;
-          inactive-color = "#505050";
-          active-gradient = {
-            from = "#E46876";
-            to = "#c4746e";
-            angle = 45;
-            relative-to = "workspace-view";
+          active = {
+            gradient = {
+              from = "#E46876";
+              to = "#c4746e";
+              angle = 45;
+              relative-to = "workspace-view";
+            };
           };
-          inactive-gradient = {
-            from = "#505050";
-            to = "#808080";
-            angle = 45;
-            relative-to = "workspace-view";
+          inactive = {
+            gradient = {
+              from = "#505050";
+              to = "#808080";
+              angle = 45;
+              relative-to = "workspace-view";
+            };
           };
         };
         shadow = {
@@ -202,18 +205,21 @@ in
         focus-ring = {
           enable = true;
           width = 1;
-          inactive-color = "#505050";
-          active-gradient = {
-            from = "#E46876";
-            to = "#c4746e";
-            angle = 45;
-            relative-to = "workspace-view";
+          active = {
+            gradient = {
+              from = "#E46876";
+              to = "#c4746e";
+              angle = 45;
+              relative-to = "workspace-view";
+            };
           };
-          inactive-gradient = {
-            from = "#505050";
-            to = "#808080";
-            angle = 45;
-            relative-to = "workspace-view";
+          inactive = {
+            gradient = {
+              from = "#505050";
+              to = "#808080";
+              angle = 45;
+              relative-to = "workspace-view";
+            };
           };
         };
         shadow = {
@@ -263,7 +269,7 @@ in
     prefer-no-csd = true;
 
     cursor = {
-      xcursor-size = 24;
+      size = 24;
       hide-after-inactive-ms = 2000;
     };
 
@@ -338,20 +344,28 @@ in
       focus-ring = {
         enable = false;
         width = 1;
-        active-color = "255 200 127 255";
-        inactive-color = "80 80 80 255";
+        active = {
+          color = "rgb(255 200 127)";
+        };
+        inactive = {
+          color = "rgb(80 80 80)";
+        };
       };
 
       border = {
         enable = false;
         width = 1;
-        active-gradient = {
-          from = "#090E13";
-          to = "#C14043";
-          angle = 45;
-          relative-to = "workspace-view";
+        active = {
+          gradient = {
+            from = "#090E13";
+            to = "#C14043";
+            angle = 45;
+            relative-to = "workspace-view";
+          };
         };
-        inactive-color = "#090D12";
+        inactive = {
+          color = "#090D12";
+        };
       };
 
       tab-indicator = {
@@ -362,21 +376,27 @@ in
         position = "left";
         gaps-between-tabs = 2;
         corner-radius = 0;
-        active-gradient = {
-          from = "#c4b28a";
-          to = "#c4746e";
-          angle = 45;
+        active = {
+          gradient = {
+            from = "#c4b28a";
+            to = "#c4746e";
+            angle = 45;
+          };
         };
-        inactive-gradient = {
-          from = "#0d0c0c";
-          to = "#808080";
-          angle = 45;
-          relative-to = "workspace-view";
+        inactive = {
+          gradient = {
+            from = "#0d0c0c";
+            to = "#808080";
+            angle = 45;
+            relative-to = "workspace-view";
+          };
         };
-        urgent-gradient = {
-          from = "#E46876";
-          to = "#c4746e";
-          angle = 45;
+        urgent = {
+          gradient = {
+            from = "#E46876";
+            to = "#c4746e";
+            angle = 45;
+          };
         };
       };
     };

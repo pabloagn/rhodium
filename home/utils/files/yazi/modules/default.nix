@@ -34,8 +34,8 @@ in
       smart-filter = pkgs.yaziPlugins.smart-filter;
       smart-paste = pkgs.yaziPlugins.smart-paste;
       toggle-pane = pkgs.yaziPlugins.toggle-pane;
-      yatline = pkgs.yaziPlugins.yatline;
-      yatline-githead = pkgs-unstable.yaziPlugins.yatline-githead;
+      # yatline = pkgs.yaziPlugins.yatline;  # Disabled: uses deprecated ya.truncate()
+      # yatline-githead = pkgs-unstable.yaziPlugins.yatline-githead;  # Disabled: depends on yatline
     };
   };
   xdg.configFile = configFiles;

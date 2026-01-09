@@ -92,8 +92,7 @@ in
     systemd.user.services.rh-kmonad-keychron-q3 = {
       Unit = {
         Description = "KMonad – Keychron Q3";
-        # Make sure it isn't started unless the device is really there
-        ConditionPathExists = "/dev/input/by-id/usb-Keychron_Keychron_Q3-event-kbd";
+        ConditionPathExists = "/dev/input/by-id/usb-Keychron_Keychron_Q3-if02-event-kbd";
       };
 
       Service = {

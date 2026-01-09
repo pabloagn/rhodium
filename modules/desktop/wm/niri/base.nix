@@ -30,6 +30,10 @@
 
   programs.niri = {
     enable = true;
+    # NOTE: Using nixpkgs niri instead of niri-flake package due to upstream
+    # build failures (issues #1501, #1515). The niri-flake's cargoInstallHook
+    # fails silently during install phase.
+    package = pkgs.niri;
   };
 
   services.dbus = {
