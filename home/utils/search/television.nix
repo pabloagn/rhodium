@@ -47,23 +47,20 @@
         };
       };
 
-      # Binds
+      # Binds (format: key = "action")
       keybindings = {
-        select_next_entry = [
-          "down"
-          "ctrl-j"
-        ];
-        select_prev_entry = [
-          "up"
-          "ctrl-k"
-        ];
-        toggle_preview = [ "ctrl-p" ];
-        toggle_remote_control = [ "ctrl-r" ];
-        toggle_help = [ "?" ];
-        confirm_selection = [
-          "enter"
-          "ctrl-y"
-        ];
+        # Navigation
+        down = "select_next_entry";
+        ctrl-j = "select_next_entry";
+        up = "select_prev_entry";
+        ctrl-k = "select_prev_entry";
+        # Selection
+        enter = "confirm_selection";
+        ctrl-y = "copy_entry_to_clipboard";
+        # Toggles
+        ctrl-p = "toggle_preview";
+        ctrl-r = "toggle_remote_control";
+        "?" = "toggle_help";
       };
     };
   };
