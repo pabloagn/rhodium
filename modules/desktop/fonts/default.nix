@@ -41,7 +41,7 @@
     liberation_ttf
     noto-fonts
     noto-fonts-cjk-sans
-    noto-fonts-emoji
+    noto-fonts-color-emoji
     work-sans
     roboto
     raleway

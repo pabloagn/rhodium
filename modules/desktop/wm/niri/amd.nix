@@ -15,16 +15,14 @@
   };
 
   # OpenGL options
+  # NOTE: RADV (Mesa's Vulkan driver for AMD) is enabled by default.
+  # amdvlk was removed from nixpkgs as AMD deprecated it.
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
     extraPackages = with pkgs; [
-      amdvlk
       rocmPackages.clr
       libvdpau-va-gl
-    ];
-    extraPackages32 = with pkgs.pkgsi686Linux; [
-      amdvlk
     ];
   };
 }

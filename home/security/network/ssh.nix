@@ -4,11 +4,11 @@
 
   programs.ssh = {
     enable = true;
-    addKeysToAgent = "yes";
-    extraConfig = ''
-      AddKeysToAgent yes
-      IdentityFile ~/.ssh/GitHub_NixOS
-    '';
+    enableDefaultConfig = false;
+    matchBlocks."*" = {
+      addKeysToAgent = "yes";
+      identityFile = [ "~/.ssh/GitHub_NixOS" ];
+    };
   };
 
   home.activation.installAuthorizedKeys = lib.hm.dag.entryAfter [ "writeBoundary" ] ''

@@ -48,7 +48,7 @@
     ./scala.nix
     ./sql.nix
     ./svelte.nix
-    ./swift.nix
+    # ./swift.nix # DISABLED: Swift 5.10.1 build broken in nixpkgs 25.11 (GCC 14 incompatibility)
     ./tailwind.nix
     ./terraform.nix
     ./toml.nix

@@ -1,13 +1,5 @@
 { pkgs, ... }:
 {
-  programs.thefuck = {
-    enable = true;
-    enableBashIntegration = true;
-    enableZshIntegration = true;
-    enableFishIntegration = true;
-    enableNushellIntegration = true;
-  };
-
   home.packages = with pkgs; [
     # --- Screenshot And Image Tools ---
     # flameshot # Screenshot utility
@@ -29,7 +21,7 @@
     ghostscript # Postscript interpreter
     mermaid-cli # Generation of mermaid diagrams in text
     pandoc # PDF manipulation
-    poppler_utils # For PDF previews (pdftotext)
+    poppler-utils # For PDF previews (pdftotext)
     tui-journal # Rust TUI for note-taking
 
     # --- Documentation ---

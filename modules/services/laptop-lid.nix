@@ -49,12 +49,10 @@ in
   };
 
   config = mkIf cfg.enable {
-    services.logind = {
-      extraConfig = ''
-        HandleLidSwitch=${cfg.handleLidSwitch}
-        HandleLidSwitchExternalPower=${cfg.handleLidSwitchExternalPower}
-        HandleLidSwitchDocked=${cfg.handleLidSwitchDocked}
-      '';
+    services.logind.settings.Login = {
+      HandleLidSwitch = cfg.handleLidSwitch;
+      HandleLidSwitchExternalPower = cfg.handleLidSwitchExternalPower;
+      HandleLidSwitchDocked = cfg.handleLidSwitchDocked;
     };
   };
 }

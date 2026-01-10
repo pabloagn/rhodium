@@ -242,7 +242,6 @@
             p.tree-sitter-idris
             p.tree-sitter-ini
             p.tree-sitter-inko
-            p.tree-sitter-ipkg
             p.tree-sitter-ispc
             p.tree-sitter-janet_simple
             p.tree-sitter-java

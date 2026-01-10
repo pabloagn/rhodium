@@ -26,7 +26,7 @@ final: prev: {
         # Moved _fontBuildData here to scope it locally to the buildPhase
         _fontBuildData = {
           berkeley = {
-            source = inputs.iridium-rh.packages.${prev.system}.berkeley-mono;
+            source = inputs.iridium-rh.packages.${prev.stdenv.hostPlatform.system}.berkeley-mono;
             fonts = {
               "BerkeleyMonoRh-Black-Oblique.ttf" = {
                 patch = true;
@@ -151,7 +151,7 @@ final: prev: {
             };
           };
           server = {
-            source = inputs.iridium-rh.packages.${prev.system}.server-mono;
+            source = inputs.iridium-rh.packages.${prev.stdenv.hostPlatform.system}.server-mono;
             fonts = {
               "ServerMono-Regular.otf" = {
                 patch = false;

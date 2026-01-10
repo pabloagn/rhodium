@@ -7,7 +7,7 @@
 }:
 let
   cfg = config.userExtraServices.rh-astal;
-  astalPkg = inputs.self.packages.${pkgs.system}.astal-widgets;
+  astalPkg = inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.astal-widgets;
 in
 {
   options.userExtraServices.rh-astal = {

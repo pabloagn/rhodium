@@ -5,7 +5,7 @@
 }:
 let
   userfullName = user.fullName;
-  userEmail = user.emailMain;
+  userEmailMain = user.emailMain;
 in
 {
   home.packages = with pkgs; [
@@ -15,10 +15,10 @@ in
 
   programs.git = {
     enable = true;
-    userName = userfullName;
-    userEmail = userEmail;
 
-    extraConfig = {
+    settings = {
+      user.name = userfullName;
+      user.email = userEmailMain;
       init.defaultBranch = "main";
     };
 
@@ -48,14 +48,15 @@ in
       "*.bak"
       ".cache/"
     ];
+  };
 
-    delta = {
-      enable = true; # View file diffs
-    };
+  programs.delta = {
+    enable = true;
+    enableGitIntegration = true;
+  };
 
-    riff = {
-      enable = false; # View file diffs. Either this or delta.
-    };
+  programs.riff = {
+    enable = false;
   };
 
   programs.gh = {

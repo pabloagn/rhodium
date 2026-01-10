@@ -139,7 +139,7 @@
     };
     ubuntu-mono = {
       enable = true;
-      package = pkgs.ubuntu_font_family;
+      package = pkgs.ubuntu-classic;
       name = "Ubuntu Mono";
       style = "Monospace";
     };
@@ -344,9 +344,9 @@
       name = "Noto Sans CJK";
       style = "Sans-serif";
     };
-    noto-fonts-emoji = {
+    noto-fonts-color-emoji = {
       enable = true;
-      package = pkgs.noto-fonts-emoji;
+      package = pkgs.noto-fonts-color-emoji;
       name = "Noto Emoji";
       style = "Sans-serif";
     };
@@ -406,7 +406,7 @@
     };
     ubuntu = {
       enable = true;
-      package = pkgs.ubuntu_font_family;
+      package = pkgs.ubuntu-classic;
       name = "Ubuntu";
       style = "Sans-serif";
     };
