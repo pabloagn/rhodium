@@ -5,7 +5,7 @@
     xorg.xev # xorg key registry
   ];
 
-  time.timeZone = "Europe/London"; # Time zone
+  time.timeZone = "Europe/Amsterdam"; # Time zone
   i18n.defaultLocale = "en_GB.UTF-8"; # Locale
 
   # Additional properties
