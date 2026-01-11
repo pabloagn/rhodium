@@ -22,5 +22,9 @@
     helvum # GTK patchbay for PipeWire
     playerctl # CLI util & lib for controlling audio
     cavalier # Terminal audio visualizer
+
+    # --- TUI Music Players ---
+    termusic # Feature-rich music player in Rust
+    cmus # Small, fast console music player
   ];
 }

@@ -1,7 +1,8 @@
 { pkgs, ... }:
 {
   home.packages = with pkgs; [
-    mastodon
+    # mastodon # Mastodon server (probably not needed locally)
+    tut # Mastodon TUI client
   ];
 }
 

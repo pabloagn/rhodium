@@ -11,6 +11,7 @@ in
   home.packages = with pkgs; [
     commitizen # Commit rules for projects
     serie # Rich TUI commit graph
+    tig # Text-mode interface for git
   ];
 
   programs.git = {

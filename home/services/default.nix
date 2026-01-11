@@ -2,6 +2,7 @@
 {
   imports = [
     ./astal.nix
+    ./brave.nix
     ./displays.nix
     ./eww.nix
     ./firefox.nix

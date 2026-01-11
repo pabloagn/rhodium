@@ -706,7 +706,7 @@ in
       description = "AirBnB";
       categories = [ categories.travel ];
     };
-    amazon = {
+    amazon-uk = {
       profile = "uk";
       url = "https://amazon.co.uk";
       description = "Amazon UK";
@@ -746,6 +746,15 @@ in
       profile = "uk";
       url = "https://www.tesco.com/groceries/";
       description = "Tesco";
+      categories = [ categories.shopping ];
+    };
+  };
+
+  amsterdam = {
+    amazon-nl = {
+      profile = "amsterdam";
+      url = "https://amazon.nl";
+      description = "Amazon Netherlands";
       categories = [ categories.shopping ];
     };
   };

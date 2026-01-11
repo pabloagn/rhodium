@@ -18,23 +18,46 @@ in
     keymap = configKeymaps;
     initLua = initLua;
     plugins = {
+      # --- Core Functionality ---
       chmod = pkgs-unstable.yaziPlugins.chmod;
       diff = pkgs-unstable.yaziPlugins.diff;
-      duckdb = pkgs-unstable.yaziPlugins.duckdb;
-      full-border = pkgs-unstable.yaziPlugins.full-border;
-      git = pkgs-unstable.yaziPlugins.git;
-      glow = pkgs-unstable.yaziPlugins.glow;
-      miller = pkgs-unstable.yaziPlugins.miller;
-      mediainfo = pkgs-unstable.yaziPlugins.mediainfo;
-      mount = pkgs-unstable.yaziPlugins.mount;
-      piper = pkgs-unstable.yaziPlugins.piper;
-      projects = pkgs-unstable.yaziPlugins.projects;
-      restore = pkgs-unstable.yaziPlugins.restore;
       sudo = pkgs-unstable.yaziPlugins.sudo;
+      restore = pkgs-unstable.yaziPlugins.restore;
+
+      # --- Navigation & Productivity ---
       smart-enter = pkgs-unstable.yaziPlugins.smart-enter;
       smart-filter = pkgs-unstable.yaziPlugins.smart-filter;
       smart-paste = pkgs-unstable.yaziPlugins.smart-paste;
+      jump-to-char = pkgs-unstable.yaziPlugins.jump-to-char;
+      relative-motions = pkgs-unstable.yaziPlugins.relative-motions;
+      projects = pkgs-unstable.yaziPlugins.projects;
+
+      # --- UI & Visual ---
+      full-border = pkgs-unstable.yaziPlugins.full-border;
       toggle-pane = pkgs-unstable.yaziPlugins.toggle-pane;
+
+      # --- Git Integration ---
+      git = pkgs-unstable.yaziPlugins.git;
+      lazygit = pkgs-unstable.yaziPlugins.lazygit;
+
+      # --- File Preview ---
+      duckdb = pkgs-unstable.yaziPlugins.duckdb;
+      miller = pkgs-unstable.yaziPlugins.miller;
+      glow = pkgs-unstable.yaziPlugins.glow;
+      piper = pkgs-unstable.yaziPlugins.piper;
+      mediainfo = pkgs-unstable.yaziPlugins.mediainfo;
+      rich-preview = pkgs-unstable.yaziPlugins.rich-preview;
+
+      # --- Archive & Compression ---
+      ouch = pkgs-unstable.yaziPlugins.ouch;
+      compress = pkgs-unstable.yaziPlugins.compress;
+
+      # --- System & Utilities ---
+      mount = pkgs-unstable.yaziPlugins.mount;
+      mime-ext = pkgs-unstable.yaziPlugins.mime-ext;
+
+      # --- Clipboard (Wayland) ---
+      wl-clipboard = pkgs-unstable.yaziPlugins.wl-clipboard;
     };
   };
   xdg.configFile = configFiles;

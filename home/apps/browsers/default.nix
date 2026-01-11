@@ -10,6 +10,10 @@
   home.packages = with pkgs; [
     brave
     tor
-    w3m
+
+    # --- Terminal Browsers ---
+    w3m # Text-mode WWW browser
+    lynx # Classic text browser
+    browsh # Modern text-based browser using Firefox
   ];
 }

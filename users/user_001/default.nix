@@ -62,7 +62,9 @@
   # Custom services
   # NOTE: These are custom services located under home/services, and run as systemd daemons
   userExtraServices = {
+    rh-brave-preload.enable = true; # vmtouch: lock Brave binaries in RAM for instant startup
     rh-eww.enable = false;
+    rh-firefox-preload.enable = true; # vmtouch: lock Firefox binaries in RAM for instant startup
     rh-kmonad.enable = true;
     rh-mako.enable = false;
     rh-neovim-daemon.enable = false;

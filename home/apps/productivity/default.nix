@@ -13,6 +13,10 @@
     calcure # Modern calcurse alternative
     # ulauncher # GUI-based launcher
 
+    # --- Task Management ---
+    taskwarrior3 # Comprehensive task management CLI
+    taskwarrior-tui # TUI for taskwarrior
+
     # --- Timers ---
     uair
     pom

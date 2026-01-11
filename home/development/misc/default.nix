@@ -1,20 +1,11 @@
+{ pkgs, ... }:
 {
-  config,
-  lib,
-  pkgs,
-  ...
-}:
-with lib;
-{
-  options = {
-    programs.development.misc = {
-      enable = mkEnableOption "Misc development tools";
-    };
-  };
+  home.packages = with pkgs; [
+    # --- API Clients ---
+    atac # Feature-full API client TUI in Rust
 
-  config = mkIf config.programs.development.misc.enable {
-    home.packages = with pkgs; [
-      postman
-    ];
-  };
+    # --- JSON Tools ---
+    jqp # Interactive jq playground
+    fx # Terminal JSON viewer & processor
+  ];
 }

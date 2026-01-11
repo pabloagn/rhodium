@@ -405,6 +405,35 @@
         run = "ya pub extract --list \"$@\"";
       }
     ];
+
+    # --- PDF Viewers ---
+    okular = [
+      {
+        desc = "Okular (Full-featured)";
+        for = "unix";
+        orphan = true;
+        run = "okular \"$@\"";
+      }
+    ];
+
+    zathura = [
+      {
+        desc = "Zathura (Vim-like, fast)";
+        for = "unix";
+        orphan = true;
+        run = "zathura \"$@\"";
+      }
+    ];
+
+    # --- Drag and Drop ---
+    dragon = [
+      {
+        desc = "Drag files (dragon-drop)";
+        for = "unix";
+        orphan = true;
+        run = "dragon -x -i -T \"$@\"";
+      }
+    ];
   };
 
   # --- Open Rules ---
@@ -593,6 +622,19 @@
       {
         mime = "application/pdf";
         use = [
+          "okular"
+          "zathura"
+          "libreoffice-draw"
+          "open"
+          "reveal"
+        ];
+      }
+      {
+        url = "*.pdf";
+        use = [
+          "okular"
+          "zathura"
+          "libreoffice-draw"
           "open"
           "reveal"
         ];
@@ -602,12 +644,33 @@
       {
         url = "*.{csv,tsv,tab,psv}";
         use = [
+          "libreoffice-calc"
           "edit"
           "edit-helix"
           "edit-zed"
           "edit-nano"
           "edit-emacs"
-          "libreoffice-calc"
+          "reveal"
+        ];
+      }
+      # Parquet files (data engineering)
+      {
+        url = "*.parquet";
+        use = [
+          "edit"
+          "reveal"
+        ];
+      }
+      # JSON/NDJSON files (structured data)
+      {
+        url = "*.{json,ndjson,jsonl}";
+        use = [
+          "edit"
+          "edit-helix"
+          "edit-zed"
+          "edit-nano"
+          "edit-emacs"
+          "browser-personal"
           "reveal"
         ];
       }
@@ -864,14 +927,14 @@
         run = "duckdb";
       }
 
-      # --- Markdown (glow via piper) ---
+      # --- Markdown (glow via piper with custom kanso style) ---
       {
         url = "*.md";
-        run = "piper -- CLICOLOR_FORCE=1 glow -w=$w -s=dark \"$1\"";
+        run = "piper -- CLICOLOR_FORCE=1 glow -w=$w -s=$HOME/.config/glow/kanso.json \"$1\"";
       }
       {
         url = "*.markdown";
-        run = "piper -- CLICOLOR_FORCE=1 glow -w=$w -s=dark \"$1\"";
+        run = "piper -- CLICOLOR_FORCE=1 glow -w=$w -s=$HOME/.config/glow/kanso.json \"$1\"";
       }
 
       # --- Archives (ouch) ---

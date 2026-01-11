@@ -29,5 +29,8 @@
     csvkit # Toolkit for tabular file processing
     xlsx2csv # Lightweight toolkit for tabular file processing
     duckdb # Embeddable SQL OLAP database (required for yazi duckdb plugin)
+    ranger # VIM-inspired file manager
+    xplr # Hackable, minimal file explorer
+    visidata # Terminal spreadsheet multitool for tabular data
   ];
 }
