@@ -1,139 +1,114 @@
+-- LSP Configuration using vim.lsp.config (Neovim 0.11+)
+-- See :help lspconfig-nvim-0.11 for migration details
+
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
-local functions = require("functions")
+
+-- Helper to define and enable an LSP server
+local function setup(name, config)
+  config = config or {}
+  config.capabilities = vim.tbl_deep_extend("force", capabilities, config.capabilities or {})
+  vim.lsp.config(name, config)
+  vim.lsp.enable(name)
+end
 
 -- Bash
-require("lspconfig").bashls.setup({
-  capabilities = capabilities,
-})
+setup("bashls")
 
 -- C/C++
-require("lspconfig").clangd.setup({
-  capabilities = capabilities,
-})
+setup("clangd")
 
 -- C#
-require("lspconfig").omnisharp.setup({
-  capabilities = capabilities,
-})
+setup("omnisharp")
 
 -- CMake
-require("lspconfig").cmake.setup({
-  capabilities = capabilities,
-})
+setup("cmake")
 
 -- Clojure
-require("lspconfig").clojure_lsp.setup({
-  capabilities = capabilities,
-})
+setup("clojure_lsp")
 
 -- Crystal
-require("lspconfig").crystalline.setup({
-  capabilities = capabilities,
-})
+setup("crystalline")
 
 -- CSS
-require("lspconfig").cssls.setup({
-  capabilities = capabilities,
-})
+setup("cssls")
 
 -- D language
-require("lspconfig").serve_d.setup({
-  capabilities = capabilities,
-})
-
--- -- Dart / Flutter
--- require 'lspconfig'.dartls.setup {
--- 	capabilities = capabilities,
--- }
+setup("serve_d")
 
 -- Deno (TypeScript/JavaScript alternative)
-require("lspconfig").denols.setup({
-  capabilities = capabilities,
-  root_dir = require("lspconfig").util.root_pattern("deno.json", "deno.jsonc"),
+setup("denols", {
+  root_dir = function(bufnr, on_dir)
+    local fname = vim.api.nvim_buf_get_name(bufnr)
+    local root = vim.fs.root(fname, { "deno.json", "deno.jsonc" })
+    if root then
+      on_dir(root)
+    end
+  end,
 })
 
 -- Dhall
-require("lspconfig").dhall_lsp_server.setup({
-  capabilities = capabilities,
-})
+setup("dhall_lsp_server")
 
 -- Docker
-require("lspconfig").dockerls.setup({
-  capabilities = capabilities,
-})
+setup("dockerls")
 
 -- Elixir
-require("lspconfig").elixirls.setup({
-  capabilities = capabilities,
+setup("elixirls", {
   cmd = { "elixir-ls" },
 })
 
 -- Elm
-require("lspconfig").elmls.setup({
-  capabilities = capabilities,
-})
+setup("elmls")
 
 -- F#
-require("lspconfig").fsautocomplete.setup({
-  capabilities = capabilities,
-})
+setup("fsautocomplete")
 
 -- Fennel
-require("lspconfig").fennel_ls.setup({
-  capabilities = capabilities,
-})
+setup("fennel_ls")
 
 -- Fish Shell
-require("lspconfig").fish_lsp.setup({
-  capabilities = capabilities,
+setup("fish_lsp", {
   cmd = { "fish-lsp", "start" },
   cmd_env = { fish_lsp_show_client_popups = false },
   filetypes = { "fish" },
 })
 
 -- Fortran
-require("lspconfig").fortls.setup({
-  capabilities = capabilities,
-})
+setup("fortls")
 
 -- Gleam
-require("lspconfig").gleam.setup({
-  capabilities = capabilities,
-})
+setup("gleam")
 
 -- GLSL
-require("lspconfig").glslls.setup({
-  capabilities = capabilities,
-})
+setup("glslls")
 
 -- Go
-require("lspconfig").gopls.setup({
-  capabilities = capabilities,
-})
+setup("gopls")
 
 -- GraphQL
-require("lspconfig").graphql.setup({
-  capabilities = capabilities,
-})
+setup("graphql")
 
 -- Haskell
-require("lspconfig").hls.setup({
-  capabilities = capabilities,
-})
+setup("hls")
 
 -- HTML
-require("lspconfig").html.setup({
-  capabilities = capabilities,
+setup("html", {
   filetypes = { "html", "gohtmltmpl", "htmldjango", "templ" },
-  root_dir = require("lspconfig").util.root_pattern(
-    "hugo.toml",
-    "hugo.yaml",
-    "hugo.json",
-    "config.toml",
-    "config.yaml",
-    "config.json",
-    ".git"
-  ),
+  root_dir = function(bufnr, on_dir)
+    local fname = vim.api.nvim_buf_get_name(bufnr)
+    local root = vim.fs.root(fname, {
+      "hugo.toml",
+      "hugo.yaml",
+      "hugo.json",
+      "config.toml",
+      "config.yaml",
+      "config.json",
+      ".git",
+    })
+    if root then
+      on_dir(root)
+    end
+  end,
   settings = {
     html = {
       format = {
@@ -150,13 +125,10 @@ require("lspconfig").html.setup({
 })
 
 -- Java
-require("lspconfig").jdtls.setup({
-  capabilities = capabilities,
-})
+setup("jdtls")
 
 -- JSON (with JSONC support)
-require("lspconfig").jsonls.setup({
-  capabilities = capabilities,
+setup("jsonls", {
   filetypes = { "json", "jsonc" },
   settings = {
     json = {
@@ -170,41 +142,13 @@ require("lspconfig").jsonls.setup({
   init_options = {
     provideFormatter = true,
   },
-  commands = {
-    JsonFormat = {
-      function()
-        vim.lsp.buf.format({ async = true })
-      end,
-    },
-  },
 })
 
 -- Just
-require("lspconfig").just.setup({
-  capabilities = capabilities,
-})
+setup("just")
 
--- require("lspconfig").julia.setup({
---   capabilities = capabilities,
---   cmd = {
---     "julia",
---     "--startup-file=no",
---     "--history-file=no",
---     "-e",
---     [[
---     using LanguageServer, SymbolServer;
---     import Pkg;
---     env = dirname(Pkg.Types.Context().env.project_file);
---     server = LanguageServer.LanguageServerInstance(stdin, stdout, env, "");
---     server.runlinter = true;
---     run(server);
---   ]],
---   },
--- })
-
-require("lspconfig").julials.setup({
-  capabilities = capabilities,
-  -- Let the LSP auto-detect Julia and use the system Julia with packages
+-- Julia
+setup("julials", {
   on_new_config = function(new_config, new_root_dir)
     local julia = vim.fn.expand("julia")
     if julia and julia ~= "" then
@@ -229,36 +173,22 @@ require("lspconfig").julials.setup({
 })
 
 -- Kotlin
-require("lspconfig").kotlin_language_server.setup({
-  capabilities = capabilities,
-})
+setup("kotlin_language_server")
 
 -- LaTeX
-require("lspconfig").texlab.setup({
-  capabilities = capabilities,
-})
+setup("texlab")
 
 -- Lua
-require("lspconfig").lua_ls.setup({
-  capabilities = capabilities,
-})
+setup("lua_ls")
 
 -- Markdown
-require("lspconfig").marksman.setup({
-  capabilities = capabilities,
-})
+setup("marksman")
 
 -- Nixd (Primary Nix LSP)
-require("lspconfig").nixd.setup({
-  capabilities = capabilities,
+setup("nixd", {
   settings = {
     nixd = {
-      -- Tell nixd to enable flake support and infer the flake.nix location
-      -- from the current working directory or nearest parent.
       flake = { enable = true },
-
-      -- Keep nixpkgs expr for general Nixpkgs options and completions
-      -- This is good for standard Nixpkgs options that aren't overridden.
       nixpkgs = {
         expr = "import <nixpkgs> { }",
       },
@@ -269,11 +199,11 @@ require("lspconfig").nixd.setup({
   },
 })
 
-require("lspconfig").nil_ls.setup({
-  capabilities = capabilities,
+-- Nil (Alternative Nix LSP)
+setup("nil_ls", {
   settings = {
     ["nil"] = {
-      flake = { autoArchive = true }, -- Nil uses `autoArchive = true` for flake inference
+      flake = { autoArchive = true },
       diagnostics = {
         ignored = { "unused_binding", "unused_with" },
         excludeFiles = { "*.generated.nix" },
@@ -292,29 +222,29 @@ vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(args)
     local client = vim.lsp.get_client_by_id(args.data.client_id)
     if client and (client.name == "nil_ls" or client.name == "nixd") then
-      client.server_capabilities.semanticTokensProvider = nil -- Disable semantic tokens for better performance
+      client.server_capabilities.semanticTokensProvider = nil
     end
   end,
 })
 
 -- Nushell
-require("lspconfig").nushell.setup({
-  capabilities = capabilities,
+setup("nushell", {
   cmd = { "nu", "--lsp" },
   filetypes = { "nu" },
-  root_dir = function(fname)
-    return vim.fs.root(fname, { ".git", "flake.nix", "pyproject.toml" })
+  root_dir = function(bufnr, on_dir)
+    local fname = vim.api.nvim_buf_get_name(bufnr)
+    local root = vim.fs.root(fname, { ".git", "flake.nix", "pyproject.toml" })
+    if root then
+      on_dir(root)
+    end
   end,
 })
 
 -- OCaml
-require("lspconfig").ocamllsp.setup({
-  capabilities = capabilities,
-})
+setup("ocamllsp")
 
 -- Odin
-require("lspconfig").ols.setup({
-  capabilities = capabilities,
+setup("ols", {
   init_options = {
     checker_args = "-strict-style",
     collections = {
@@ -324,63 +254,40 @@ require("lspconfig").ols.setup({
 })
 
 -- Perl
-require("lspconfig").perlnavigator.setup({
-  capabilities = capabilities,
-})
+setup("perlnavigator")
 
 -- PHP
-require("lspconfig").intelephense.setup({
-  capabilities = capabilities,
-})
+setup("intelephense")
 
 -- Prisma
-require("lspconfig").prismals.setup({
-  capabilities = capabilities,
-})
+setup("prismals")
 
 -- Protocol Buffers
-require("lspconfig").buf_ls.setup({
-  capabilities = capabilities,
-})
+setup("buf_ls")
 
 -- Python
-require("lspconfig").pyright.setup({
-  capabilities = capabilities,
-})
+setup("pyright")
 
 -- R
-require("lspconfig").r_language_server.setup({
-  capabilities = capabilities,
-})
+setup("r_language_server")
 
 -- Rust
-require("lspconfig").rust_analyzer.setup({
-  capabilities = capabilities,
-})
+setup("rust_analyzer")
 
 -- Scala
-require("lspconfig").metals.setup({
-  capabilities = capabilities,
-})
+setup("metals")
 
 -- SQL
-require("lspconfig").sqls.setup({
-  capabilities = capabilities,
-})
+setup("sqls")
 
 -- Svelte
-require("lspconfig").svelte.setup({
-  capabilities = capabilities,
-})
+setup("svelte")
 
 -- Swift
-require("lspconfig").sourcekit.setup({
-  capabilities = capabilities,
-})
+setup("sourcekit")
 
 -- EmmetLS (HTML expansion)
-require("lspconfig").emmet_ls.setup({
-  capabilities = capabilities,
+setup("emmet_ls", {
   filetypes = {
     "html",
     "gohtmltmpl",
@@ -404,14 +311,12 @@ require("lspconfig").emmet_ls.setup({
 })
 
 -- Jinja2
-require("lspconfig").jinja_lsp.setup({
-  capabilities = capabilities,
+setup("jinja_lsp", {
   filetypes = { "jinja", "jinja2", "j2", "html.jinja", "html.j2" },
 })
 
 -- Tailwind CSS
-require("lspconfig").tailwindcss.setup({
-  capabilities = capabilities,
+setup("tailwindcss", {
   filetypes = {
     "html",
     "gohtmltmpl",
@@ -427,7 +332,6 @@ require("lspconfig").tailwindcss.setup({
     tailwindCSS = {
       experimental = {
         classRegex = {
-          -- Hugo template class detection
           "class[\\s]*=[\\s]*[\"']([^\"']*)[\"']",
           'class[\\s]*=[\\s]*"([^"]*)"',
           "class[\\s]*=[\\s]*'([^']*)'",
@@ -438,23 +342,16 @@ require("lspconfig").tailwindcss.setup({
 })
 
 -- Terraform
-require("lspconfig").terraformls.setup({
-  capabilities = capabilities,
-})
+setup("terraformls")
 
 -- TOML
-require("lspconfig").taplo.setup({
-  capabilities = capabilities,
-})
+setup("taplo")
 
 -- TypeScript/JavaScript
-require("lspconfig").ts_ls.setup({
-  capabilities = capabilities,
-})
+setup("ts_ls")
 
 -- Typst
-require("lspconfig")["tinymist"].setup({
-  capabilities = capabilities,
+setup("tinymist", {
   settings = {
     formatterMode = "typstyle",
     exportPdf = "never",
@@ -463,21 +360,13 @@ require("lspconfig")["tinymist"].setup({
 })
 
 -- Vue (Volar for Vue 3)
-require("lspconfig").volar.setup({
-  capabilities = capabilities,
-})
+setup("volar")
 
 -- XML
-require("lspconfig").lemminx.setup({
-  capabilities = capabilities,
-})
+setup("lemminx")
 
 -- YAML
-require("lspconfig").yamlls.setup({
-  capabilities = capabilities,
-})
+setup("yamlls")
 
 -- Zig
-require("lspconfig").zls.setup({
-  capabilities = capabilities,
-})
+setup("zls")
