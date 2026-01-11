@@ -67,6 +67,7 @@ in
         dwt = true;
         dwtp = true;
         tap = true;
+        natural-scroll = true;
         accel-speed = -0.3;
         middle-emulation = true;
         scroll-factor = 1.0;
