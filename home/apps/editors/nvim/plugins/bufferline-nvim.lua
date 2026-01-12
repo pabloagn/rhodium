@@ -27,15 +27,14 @@ require("bufferline").setup({
 		middle_mouse_command = nil,
 		-- Visual settings
 		indicator = {
-			-- icon = "▎",
-			icon = " ",
+			icon = "│",
 			style = "icon",
 		},
-		buffer_close_icon = " 󰅖 ",
-		modified_icon = " ● ",
-		close_icon = "",
-		left_trunc_marker = "",
-		right_trunc_marker = "",
+		buffer_close_icon = "×",
+		modified_icon = "●",
+		close_icon = "×",
+		left_trunc_marker = "◂",
+		right_trunc_marker = "▸",
 		-- Layout
 		max_name_length = 30,
 		max_prefix_length = 15,
@@ -56,10 +55,9 @@ require("bufferline").setup({
 		show_tab_indicators = true,
 		show_duplicate_prefix = true,
 		persist_buffer_sort = true,
-		-- Separator styling
-		-- separator_style = "thin", -- "slant" | "slope" | "thick" | "thin" | { 'any', 'any' }
+		-- Separator styling (sharp, squared borders for sacred aesthetic)
 		separator_style = { "│", "│" },
-		enforce_regular_tabs = false,
+		enforce_regular_tabs = true,
 		always_show_bufferline = true,
 		-- Sorting
 		sort_by = "insert_after_current",
@@ -100,19 +98,77 @@ require("bufferline").setup({
 		},
 	},
 	highlights = {
+		-- Sacred Computer Aesthetic: Active tab (white bg, black text)
 		buffer_selected = {
+			fg = "#0f1316",
+			bg = "#DCE0E8",
 			bold = true,
 			italic = false,
 		},
-		-- indicator_selected = {
-		-- 	fg = "#80a0ff",
-		-- 	bg = "#1a1b26",
-		-- },
+		indicator_selected = {
+			fg = "#0f1316",
+			bg = "#DCE0E8",
+		},
 		close_button_selected = {
-			fg = "#393B44",
+			fg = "#0f1316",
+			bg = "#DCE0E8",
 		},
 		modified_selected = {
+			fg = "#0f1316",
+			bg = "#DCE0E8",
+		},
+		separator_selected = {
+			fg = "#5c6066",
+			bg = "#DCE0E8",
+		},
+		numbers_selected = {
+			fg = "#0f1316",
+			bg = "#DCE0E8",
+		},
+		diagnostic_selected = {
+			fg = "#0f1316",
+			bg = "#DCE0E8",
+		},
+		-- Sacred Computer Aesthetic: Inactive tabs (minimal, symmetrical)
+		buffer_visible = {
+			fg = "#7a8187",
+			bg = "#1a1e24",
+		},
+		close_button_visible = {
+			fg = "#5c6066",
+			bg = "#1a1e24",
+		},
+		modified_visible = {
 			fg = "#c4b28a",
+			bg = "#1a1e24",
+		},
+		separator_visible = {
+			fg = "#5c6066",
+			bg = "#1a1e24",
+		},
+		-- Sacred Computer Aesthetic: Background/inactive buffers
+		buffer = {
+			fg = "#5c6066",
+			bg = "#0f1316",
+		},
+		close_button = {
+			fg = "#393B44",
+			bg = "#0f1316",
+		},
+		modified = {
+			fg = "#c4b28a",
+			bg = "#0f1316",
+		},
+		separator = {
+			fg = "#5c6066",
+			bg = "#0f1316",
+		},
+		-- Fill and background
+		fill = {
+			bg = "#0f1316",
+		},
+		tab_separator = {
+			fg = "#5c6066",
 		},
 	},
 })
