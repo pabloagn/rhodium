@@ -37,6 +37,10 @@ let
 in
 {
   programs.starship.settings = {
+    # Global Settings
+    scan_timeout = 100; # Increase from default 30ms to avoid timeout warnings in large directories
+    command_timeout = 1000; # Increase from default 500ms for slow commands
+
     # Custom Modules
     custom.times = {
       description = "Display Execution Times (Start and End Time)";
