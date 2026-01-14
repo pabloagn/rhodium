@@ -207,29 +207,36 @@
       desc = "Show media info";
     }
 
+    # ===== Paste Operations =====
+    {
+      on = [ "p" ];
+      run = "plugin smart-paste";
+      desc = "Paste files";
+    }
+
     # ===== Projects =====
     {
-      on = [ "p" "s" ];
+      on = [ "P" "s" ];
       run = "plugin projects --save";
       desc = "Save current as project";
     }
     {
-      on = [ "p" "l" ];
+      on = [ "P" "l" ];
       run = "plugin projects --load";
       desc = "Load project";
     }
     {
-      on = [ "p" "d" ];
+      on = [ "P" "d" ];
       run = "plugin projects --delete";
       desc = "Delete project";
     }
     {
-      on = [ "p" "D" ];
+      on = [ "P" "D" ];
       run = "plugin projects --delete-all";
       desc = "Delete all projects";
     }
     {
-      on = [ "p" "m" ];
+      on = [ "P" "m" ];
       run = "plugin projects --merge";
       desc = "Merge with other projects";
     }
