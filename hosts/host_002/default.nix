@@ -41,6 +41,7 @@
   extraServices = {
     asusKeyboardBacklight.enable = false;
     laptopLid.enable = false;
+    avahi.enable = true;
   };
   extraRules = {
     keychronUdev.enable = true;
