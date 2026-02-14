@@ -513,7 +513,7 @@ in
     };
     plex = {
       profile = "personal";
-      url = "https://app.plex.tv/";
+      url = "http://192.168.178.141:32400/web/index.html#!";
       description = "Plex";
       categories = [
         categories.entertainment

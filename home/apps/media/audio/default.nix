@@ -26,5 +26,9 @@
     # --- TUI Music Players ---
     termusic # Feature-rich music player in Rust
     cmus # Small, fast console music player
+
+    # --- Roon ---
+    roon-tui # TUI remote control for Roon
+    roon-bridge # Roon audio output endpoint
   ];
 }
