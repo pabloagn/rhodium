@@ -379,6 +379,12 @@
       icon = "obs";
       description = "OBS Studio";
     };
+    plexamp = {
+      binary = "plexamp";
+      args = [ ];
+      icon = "plexamp";
+      description = "Plexamp";
+    };
   };
 
   terminals = {
