@@ -320,7 +320,7 @@
       # --- Devshells ---
       devShells.${system} = {
         # Default
-        default = import ./devshells/nixos.nix { inherit pkgs-shell inputs lib; };
+        default = import ./devshells/nixos.nix { inherit pkgs-shell pkgs-unstable inputs lib; };
       };
     };
 }

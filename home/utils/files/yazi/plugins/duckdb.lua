@@ -1,12 +1,8 @@
 -- DuckDB plugin configuration for structured data preview
--- Enhanced settings for expert-level data preview with colors and better column handling
+-- Uses "standard" mode to display actual data rows (not statistics)
 require("duckdb"):setup({
-	mode = "summary", -- "summary" shows statistics, "standard" shows data rows
+	mode = "standard", -- "standard" shows data rows, "summarized" shows statistics
 	cache_size = 1000, -- Increased cache for better performance
-	row_id = true, -- Show row numbers for easier navigation
-	minmax_column_width = 15, -- Minimum column width for readability
-	column_fit_factor = 8.0, -- Better column fitting in preview pane
-	header_style = "bold", -- Bold headers for better visibility
-	null_style = "dim", -- Dim NULL values
-	border_style = "rounded", -- Rounded borders for aesthetics
+	row_id = "dynamic", -- Show row numbers only when scrolling columns
+	column_fit_factor = 8.0, -- Average character space per column for display optimization
 })

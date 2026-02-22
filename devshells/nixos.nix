@@ -1,4 +1,4 @@
-{ pkgs-shell, ... }:
+{ pkgs-shell, pkgs-unstable, ... }:
 pkgs-shell.mkShell {
   buildInputs = with pkgs-shell; [
     # --- General Requirements ---
@@ -19,7 +19,7 @@ pkgs-shell.mkShell {
     python3Packages.wcwidth
 
     # --- Utils ---
-    claude-code
+    pkgs-unstable.claude-code
     codex
     gemini-cli
   ];

@@ -63,6 +63,10 @@ in
       title = "${appHeader}'s Networking Utils";
       prompt = "η";
     };
+    osmium = {
+      title = "${appHeader}'s Osmium";
+      prompt = "θ";
+    };
     power = {
       title = "${appHeader}'s Power Utils";
       prompt = "Ω";
