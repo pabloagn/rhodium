@@ -28,6 +28,14 @@
   # Base
   # ---------------------------------
   boot.kernelPackages = pkgs.linuxPackages_6_12;
+
+  # Intel WiFi + Bluetooth coexistence fix for audio dropouts
+  # Reference: https://wiki.nixos.org/wiki/Bluetooth
+  # This disables WiFi/BT coexistence which can cause Bluetooth audio issues
+  boot.extraModprobeConfig = ''
+    options iwlwifi bt_coex_active=0
+  '';
+
   networking = {
     hostName = host.hostname or "nixos";
     networkmanager.enable = true;

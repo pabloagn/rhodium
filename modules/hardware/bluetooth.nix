@@ -9,6 +9,18 @@
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = true;
+
+    # Bluetooth settings for better device support (AirPods, etc.)
+    # Reference: https://wiki.nixos.org/wiki/Bluetooth
+    settings = {
+      General = {
+        Experimental = true; # Required for battery reporting and some codecs
+        FastConnectable = true; # Faster reconnection (slightly higher power usage)
+      };
+      Policy = {
+        AutoEnable = true; # Auto-enable controller on boot
+      };
+    };
   };
 
   services = {
