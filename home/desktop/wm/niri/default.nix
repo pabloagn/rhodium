@@ -107,8 +107,10 @@ in
         };
       };
 
-      # External HDMI display (same config for both hosts)
-      "HDMI-A-1" = {
+      # External monitor: Dell U2725QE (4K 27")
+      # Using specific monitor identifier for reliable mode selection
+      # The monitor has multiple 60Hz modes; using exact identifier ensures preferred timing
+      "Dell Inc. DELL U2725QE G3L0G84" = {
         mode = {
           width = 3840;
           height = 2160;
