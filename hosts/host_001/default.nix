@@ -59,7 +59,7 @@
   extraRules = {
     keychronUdev.enable = true;
     keychronQ3Udev.enable = true;
-    hdmiAutoSwitch.enable = true;
+    hdmiAutoSwitch.enable = false;
     netgearA8000Udev.enable = true;
   };
 
