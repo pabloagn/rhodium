@@ -86,6 +86,10 @@ in
         Restart = "no";
         Nice = -5;
       };
+
+      Install = {
+        WantedBy = [ "graphical-session.target" ];
+      };
     };
 
     systemd.user.services.rh-kmonad-keychron-q3 = {
@@ -99,6 +103,10 @@ in
         ExecStart = "${pkgs.kmonad}/bin/kmonad ${cfg.keychronQ3ConfigFile} " + lib.concatStringsSep " " cfg.extraArgs;
         Restart = "no";
         Nice = -5;
+      };
+
+      Install = {
+        WantedBy = [ "graphical-session.target" ];
       };
     };
   };
