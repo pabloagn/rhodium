@@ -2,6 +2,7 @@
 {
   programs.waybar = {
     enable = true;
+    systemd.enable = true;
   };
 
   # Harden the waybar service: prevent flapping on monitor changes
