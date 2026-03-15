@@ -61,6 +61,7 @@
     keychronQ3Udev.enable = true;
     hdmiAutoSwitch.enable = false;
     netgearA8000Udev.enable = true;
+    bluetoothNoPowerSave.enable = true;
   };
 
   # Garbage override

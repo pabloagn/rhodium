@@ -77,14 +77,13 @@ in
     systemd.user.services.rh-kmonad-keychron = {
       Unit = {
         Description = "KMonad – Keychron V1";
-        # Make sure it isn't started unless the device is really there
         ConditionPathExists = "/dev/input/by-id/usb-Keychron_Keychron_V1-event-kbd";
       };
 
       Service = {
         Type = "simple";
         ExecStart = "${pkgs.kmonad}/bin/kmonad ${cfg.configFile} " + lib.concatStringsSep " " cfg.extraArgs;
-        Restart = "on-failure";
+        Restart = "no";
         Nice = -5;
       };
     };
@@ -98,7 +97,7 @@ in
       Service = {
         Type = "simple";
         ExecStart = "${pkgs.kmonad}/bin/kmonad ${cfg.keychronQ3ConfigFile} " + lib.concatStringsSep " " cfg.extraArgs;
-        Restart = "on-failure";
+        Restart = "no";
         Nice = -5;
       };
     };
