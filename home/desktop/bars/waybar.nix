@@ -4,6 +4,17 @@
     enable = true;
   };
 
+  # Harden the waybar service: prevent flapping on monitor changes
+  systemd.user.services.waybar = {
+    Service = {
+      RestartSec = 2;
+    };
+    Unit = {
+      StartLimitBurst = 5;
+      StartLimitIntervalSec = 30;
+    };
+  };
+
   imports = [
     ./waybar/modules
   ];
