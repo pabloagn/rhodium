@@ -31,6 +31,7 @@
     kernelParams = [
       "amdgpu.dc=1" # Enable Display Core for advanced color management
       "amdgpu.ppfeaturemask=0xffffffff" # Enable all power/display features
+      "amdgpu.dcdebugmask=0x12" # Disable PSR (0x10) + stutter (0x2) to prevent HDMI blanking
     ];
   };
 
