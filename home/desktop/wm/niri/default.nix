@@ -133,7 +133,9 @@ in
           refresh = 120.0;
         };
         scale = 1.5;
-        transform = "270";
+        transform = {
+          rotation = 90;
+        };
         position = {
           x = dellPositionX;
           y = 0;
