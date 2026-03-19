@@ -35,9 +35,11 @@ let
   refreshRate = toFloat mainMonitor.monitorRefreshRate;
   scaleFactor = toFloat mainMonitor.monitorScalingFactor;
 
-  # Calculate HDMI position based on main monitor settings
-  # Position = main_width / main_scale (logical pixels)
-  hdmiPositionX = builtins.floor (resolution.width / scaleFactor);
+  # Calculate external monitor positions based on main monitor settings
+  # MSI position = main_width / main_scale (logical pixels, right of laptop)
+  msiPositionX = builtins.floor (resolution.width / scaleFactor);
+  # Dell position = right of MSI (MSI logical width = 3440 at scale 1.0)
+  dellPositionX = msiPositionX + 3440;
 in
 {
   programs.niri.settings = {
@@ -107,18 +109,33 @@ in
         };
       };
 
-      # External monitor: Dell U2725QE (4K 27")
-      # Using specific monitor identifier for reliable mode selection
-      # The monitor has multiple 60Hz modes; using exact identifier ensures preferred timing
+      # External monitor 1 (center): MSI MAG 341CQP QD-OLED (34" ultrawide)
+      # 3440x1440 @ 59.973Hz, horizontal orientation
+      "Microstep MAG 341C OLED 0x01010101" = {
+        mode = {
+          width = 3440;
+          height = 1440;
+          refresh = 59.973;
+        };
+        scale = 1.0;
+        position = {
+          x = msiPositionX;
+          y = 0;
+        };
+      };
+
+      # External monitor 2 (right): Dell U2725QE (27" 4K)
+      # 3840x2160 @ 120Hz, portrait orientation (bottom-left)
       "Dell Inc. DELL U2725QE G3L0G84" = {
         mode = {
           width = 3840;
           height = 2160;
-          refresh = 60.0;
+          refresh = 120.0;
         };
         scale = 1.5;
+        transform = "270";
         position = {
-          x = hdmiPositionX;
+          x = dellPositionX;
           y = 0;
         };
       };
