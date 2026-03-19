@@ -51,6 +51,58 @@ wl_mirror_outputs() {
   notify "$APP_TITLE" "Mirroring initiated. Check ${target_output} for the mirrored view."
 }
 
+sweet_dreams() {
+  local niri_outputs
+  if ! niri_outputs=$(get_display_info); then
+    notify "$APP_TITLE" "Error: Could not get display info."
+    return 1
+  fi
+
+  local output_names
+  output_names=$(echo "$niri_outputs" | jq -r 'keys[]' 2>/dev/null || true)
+
+  local turned_off=0
+  for output_name in $output_names; do
+    [[ "$output_name" == eDP-* ]] && continue
+    if echo "$niri_outputs" | jq -e ".\"$output_name\".logical != null" >/dev/null 2>&1; then
+      wlr_randr_off "$output_name"
+      ((turned_off++)) || true
+    fi
+  done
+
+  if [[ $turned_off -eq 0 ]]; then
+    notify "$APP_TITLE" "No external monitors to turn off."
+  else
+    notify "$APP_TITLE" "Sweet dreams! Turned off $turned_off external monitor(s)."
+  fi
+}
+
+rise_and_shine() {
+  local niri_outputs
+  if ! niri_outputs=$(get_display_info); then
+    notify "$APP_TITLE" "Error: Could not get display info."
+    return 1
+  fi
+
+  local output_names
+  output_names=$(echo "$niri_outputs" | jq -r 'keys[]' 2>/dev/null || true)
+
+  local turned_on=0
+  for output_name in $output_names; do
+    [[ "$output_name" == eDP-* ]] && continue
+    if ! echo "$niri_outputs" | jq -e ".\"$output_name\".logical != null" >/dev/null 2>&1; then
+      wlr_randr_on "$output_name"
+      ((turned_on++)) || true
+    fi
+  done
+
+  if [[ $turned_on -eq 0 ]]; then
+    notify "$APP_TITLE" "All external monitors are already on."
+  else
+    notify "$APP_TITLE" "Rise & shine! Turned on $turned_on external monitor(s)."
+  fi
+}
+
 stop_all_mirrors() {
   notify "$APP_TITLE" "Stopping all mirror processes..."
   if pgrep -f "wl-mirror" >/dev/null; then
@@ -114,6 +166,10 @@ generate_menu_options() {
   local output_names_str
   output_names_str=$(echo "$niri_outputs" | jq -r 'keys[]' 2>/dev/null || true)
   local output_names=($output_names_str)
+
+  # Quick actions for all external monitors
+  options+=("Sweet Dreams:sweet_dreams")
+  options+=("Rise & Shine:rise_and_shine")
 
   declare -A output_status
 
