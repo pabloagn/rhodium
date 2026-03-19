@@ -115,7 +115,21 @@
       "Read(//sys/kernel/debug/**)",
       "Bash(find /home/pabloagn/dev/rhodium -type f -name \"*.nix\" -exec grep -l \"rule\\\\|dpms\\\\|backlight\\\\|brightness\" {} \\\\; 2>/dev/null | head -20)",
       "Bash(nix-store -q --requisites /run/current-system/sw)",
-      "Bash(nix-store -q --requisites /home/pabloagn/.nix-profile)"
+      "Bash(nix-store -q --requisites /home/pabloagn/.nix-profile)",
+      "WebFetch(domain:deepwiki.com)",
+      "WebFetch(domain:niri-wm.github.io)",
+      "Bash(gh search:*)",
+      "Bash(nix flake:*)",
+      "Bash(gh api:*)",
+      "Bash(SHELL=/bin/bash gh api repos/sodiboo/niri-flake/contents/docs.md --jq '.content' 2>/dev/null | base64 -d 2>/dev/null | grep -A 30 'workspaces' | head -80)",
+      "Bash(SHELL=/bin/bash gh api repos/sodiboo/niri-flake/contents/docs.md 2>&1 | head -20)",
+      "Bash(_ZO_DOCTOR=0 SHELL=/bin/bash /run/current-system/sw/bin/gh api repos/sodiboo/niri-flake/contents/docs.md 2>&1 | head -20)",
+      "Bash(/etc/profiles/per-user/pabloagn/bin/gh api:*)",
+      "Bash(ls /nix/store/*niri-flake-source* 2>/dev/null; find /nix/store -maxdepth 1 -name \"*sodiboo*\" 2>/dev/null | head -5; find /nix/store -maxdepth 1 -name \"*niri*\" -type d 2>/dev/null | head -10)",
+      "Bash(niri --version 2>&1 || niri -V 2>&1)",
+      "Bash(for d:*)",
+      "Bash(for f:*)",
+      "Bash(find /nix/store -maxdepth 1 -name \"*source*\" -type d 2>/dev/null | while read d; do if [ -f \"$d/flake.nix\" ] && grep -q \"sodiboo\\\\|niri-flake\\\\|scrollable-tiling\" \"$d/flake.nix\" 2>/dev/null; then if [ -d \"$d/docs\" ] || [ -f \"$d/settings.nix\" ] || find \"$d\" -maxdepth 2 -name \"*.nix\" -path \"*/home*\" 2>/dev/null | head -1 | grep -q .; then echo \"$d\"; fi; fi; done 2>/dev/null)"
     ]
   },
   "enableAllProjectMcpServers": true,

@@ -44,6 +44,47 @@ in
 {
   programs.niri.settings = {
     # ============================================================================
+    # Workspaces
+    # ============================================================================
+    # Named workspaces pinned to outputs so they survive monitor power off/on.
+    # Keys are prefixed for lexicographic ordering; `name` is the display name.
+    workspaces = {
+      # Laptop
+      "01-main" = {
+        name = "main";
+        open-on-output = "${mainMonitor.monitorID}";
+      };
+      "02-secondary" = {
+        name = "secondary";
+        open-on-output = "${mainMonitor.monitorID}";
+      };
+
+      # MSI ultrawide (center)
+      "03-browser" = {
+        name = "browser";
+        open-on-output = "Microstep MAG 341C OLED 0x01010101";
+      };
+      "04-dev" = {
+        name = "dev";
+        open-on-output = "Microstep MAG 341C OLED 0x01010101";
+      };
+      "05-media" = {
+        name = "media";
+        open-on-output = "Microstep MAG 341C OLED 0x01010101";
+      };
+
+      # Dell 4K (right, portrait)
+      "06-reference" = {
+        name = "reference";
+        open-on-output = "Dell Inc. DELL U2725QE G3L0G84";
+      };
+      "07-chat" = {
+        name = "chat";
+        open-on-output = "Dell Inc. DELL U2725QE G3L0G84";
+      };
+    };
+
+    # ============================================================================
     # Environment
     # ============================================================================
     # Required for xwayland-satellite X11 app compatibility
