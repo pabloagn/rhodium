@@ -166,22 +166,9 @@ in
       };
 
       # External monitor 2 (right): Dell U2725QE (27" 4K)
-      # 3840x2160 @ 120Hz, portrait orientation (bottom-left)
-      "Dell Inc. DELL U2725QE G3L0G84" = {
-        mode = {
-          width = 3840;
-          height = 2160;
-          refresh = 120.0;
-        };
-        scale = 1.5;
-        transform = {
-          rotation = 90;
-        };
-        position = {
-          x = dellPositionX;
-          y = 0;
-        };
-      };
+      # Configured via raw KDL node below (programs.niri.config) to include
+      # per-output layout with default-column-width = 1.0 (niri 25.11 feature
+      # not yet exposed by niri-flake settings module).
     };
 
     # ============================================================================
@@ -550,8 +537,8 @@ in
 
       # Window & Column Manipulation
       "Mod+C".action.close-window = [ ];
-      "Mod+Ctrl+C".action.spawn = [ "sh" "-c" "$USERBIN_UTILS/utils-kill.sh" ];
-      "Mod+Ctrl+O".action.spawn = [ "sh" "-c" "$USERBIN_UTILS/utils-opacity.sh" ];
+      "Mod+Ctrl+C".action.spawn-sh = "$USERBIN_UTILS/utils-kill.sh";
+      "Mod+Ctrl+O".action.spawn-sh = "$USERBIN_UTILS/utils-opacity.sh";
       "Mod+V".action.toggle-window-floating = [ ];
       "Mod+Shift+V".action.switch-focus-between-floating-and-tiling = [ ];
       "Mod+Comma".action.consume-or-expel-window-left = [ ];
@@ -583,6 +570,10 @@ in
       "Mod+Equal".action.set-column-width = "+10%";
       "Mod+Shift+Minus".action.set-window-height = "-10%";
       "Mod+Shift+Equal".action.set-window-height = "+10%";
+
+      # Monitor Navigation
+      "Mod+Alt+Left".action.focus-monitor-left = [ ];
+      "Mod+Alt+Right".action.focus-monitor-right = [ ];
 
       # Workspace Navigation (Dynamic)
       "Mod+Alt+Up".action.move-workspace-up = [ ];
@@ -619,17 +610,17 @@ in
       "Mod+B".action.spawn = [ "firefox" "-p" "Personal" ];
       "Mod+D".action.spawn = [ "kitty" "-e" "yazi" ];
       "Mod+E".action.spawn = [ "kitty" "-e" "nvim" ];
-      "Mod+Q".action.spawn = [ "sh" "-c" "$USERBIN_LAUNCHERS/launchers-qalc.sh" ];
+      "Mod+Q".action.spawn-sh = "$USERBIN_LAUNCHERS/launchers-qalc.sh";
 
       # Application Launchers (Secondary - Shift)
       "Mod+Shift+W".action.spawn = "ghostty";
       "Mod+Shift+B".action.spawn = "brave";
       "Mod+Shift+D".action.spawn = "thunar";
       "Mod+Shift+E".action.spawn = [ "emacsclient" "-c" ];
-      "Mod+Shift+Q".action.spawn = [ "sh" "-c" "$USERBIN_LAUNCHERS/launchers-qalculate.sh" ];
+      "Mod+Shift+Q".action.spawn-sh = "$USERBIN_LAUNCHERS/launchers-qalculate.sh";
 
       # Application Launchers (Tertiary - Ctrl)
-      "Mod+Ctrl+Q".action.spawn = [ "sh" "-c" "$USERBIN_LAUNCHERS/launchers-calcure.sh" ];
+      "Mod+Ctrl+Q".action.spawn-sh = "$USERBIN_LAUNCHERS/launchers-calcure.sh";
       "Mod+Ctrl+E".action.spawn = "zeditor";
 
       # Screenshots
@@ -639,9 +630,9 @@ in
       "Shift+Print".action.screenshot = [ ];
       "Mod+Alt+S".action.screenshot-window = [ ];
       "Ctrl+Print".action.screenshot-window = [ ];
-      "Mod+A".action.spawn = [ "sh" "-c" "$USERBIN_UTILS/utils-screenshot-annotate.sh" ];
-      "Alt+Print".action.spawn = [ "sh" "-c" "$USERBIN_UTILS/utils-screenshot-annotate.sh" ];
-      "Mod+Shift+A".action.spawn = [ "sh" "-c" "$USERBIN_UTILS/utils-ocr.sh" ];
+      "Mod+A".action.spawn-sh = "$USERBIN_UTILS/utils-screenshot-annotate.sh";
+      "Alt+Print".action.spawn-sh = "$USERBIN_UTILS/utils-screenshot-annotate.sh";
+      "Mod+Shift+A".action.spawn-sh = "$USERBIN_UTILS/utils-ocr.sh";
 
       # Mouse & Trackpad Scroll Bindings
       "Mod+WheelScrollDown" = {
@@ -708,4 +699,65 @@ in
       };
     };
   };
+
+  # Per-output layout overrides (niri 25.11 feature)
+  # The niri-flake settings module doesn't expose per-output layout yet,
+  # so we override the full Dell output node with layout included.
+  programs.niri.config = lib.mkAfter [
+    # Dell portrait monitor: full config + per-output layout (always full-width columns)
+    {
+      name = "output";
+      arguments = [ "Dell Inc. DELL U2725QE G3L0G84" ];
+      properties = { };
+      children = [
+        {
+          name = "scale";
+          arguments = [ 1.5 ];
+          properties = { };
+          children = [ ];
+        }
+        {
+          name = "transform";
+          arguments = [ "90" ];
+          properties = { };
+          children = [ ];
+        }
+        {
+          name = "position";
+          arguments = [ ];
+          properties = {
+            x = dellPositionX;
+            y = 0;
+          };
+          children = [ ];
+        }
+        {
+          name = "mode";
+          arguments = [ "3840x2160@120.000000" ];
+          properties = { };
+          children = [ ];
+        }
+        {
+          name = "layout";
+          arguments = [ ];
+          properties = { };
+          children = [
+            {
+              name = "default-column-width";
+              arguments = [ ];
+              properties = { };
+              children = [
+                {
+                  name = "proportion";
+                  arguments = [ 1.0 ];
+                  properties = { };
+                  children = [ ];
+                }
+              ];
+            }
+          ];
+        }
+      ];
+    }
+  ];
 }
