@@ -50,6 +50,7 @@
     asusKeyboardBacklight.enable = false;
     laptopLid.enable = false;
     avahi.enable = true;
+    plex.enable = true;
     roon.enable = true;
   };
   extraRules = {
