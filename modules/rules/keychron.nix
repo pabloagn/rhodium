@@ -23,6 +23,8 @@ with lib;
           ATTRS{idVendor}=="3434", ATTRS{idProduct}=="0311", \
           TAG+="systemd", \
           ENV{SYSTEMD_USER_WANTS}+="rh-kmonad-keychron.service"
+
+        KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="3434", ATTRS{idProduct}=="0311", MODE="0660", TAG+="uaccess"
       '';
     })
     (mkIf config.extraRules.keychronQ3Udev.enable {
@@ -36,6 +38,8 @@ with lib;
           ATTRS{idVendor}=="3434", ATTRS{idProduct}=="0121", \
           TAG+="systemd", \
           ENV{SYSTEMD_USER_WANTS}+="rh-kmonad-keychron-q3.service"
+
+        KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="3434", ATTRS{idProduct}=="0121", MODE="0660", TAG+="uaccess"
       '';
     })
   ];
