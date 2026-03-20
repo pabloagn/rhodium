@@ -5,8 +5,10 @@
     enableFishIntegration = true;
     enableZshIntegration = true;
     settings = {
-      auto_sync = false;
-      sync_enabled = false;
+      auto_sync = true;
+      sync_enabled = true;
+      sync_address = "http://alexandria:8888";
+      sync_frequency = "5m";
       search_mode = "fuzzy";
       filter_mode = "global";
       style = "full";

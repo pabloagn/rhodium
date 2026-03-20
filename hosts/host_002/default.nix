@@ -52,6 +52,7 @@
     avahi.enable = true;
     plex.enable = true;
     roon.enable = true;
+    atuinSync.enable = true;
   };
   extraRules = {
     keychronUdev.enable = true;
