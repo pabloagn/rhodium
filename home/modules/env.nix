@@ -107,6 +107,14 @@ in
     KEYTIMEOUT = "1";
     MOZ_ENABLE_WAYLAND = "1";
 
+    # DISABLED: These env vars do NOT work on NixOS.
+    # ELECTRON_EXTRA_LAUNCH_ARGS is Cypress-only (not native Electron).
+    # CHROMIUM_FLAGS is not read by NixOS wrappers.
+    # Verified: electron/electron repo has zero references to ELECTRON_EXTRA_LAUNCH_ARGS.
+    # If app-level GPU flags are needed, use symlinkJoin + wrapProgram per-package instead.
+    # CHROMIUM_FLAGS = "--disable-gpu-process-crash-limit";
+    # ELECTRON_EXTRA_LAUNCH_ARGS = "--disable-gpu-process-crash-limit";
+
     # Special Dotconfigs
     # NOTE:
     # - Here we include dotconfigs

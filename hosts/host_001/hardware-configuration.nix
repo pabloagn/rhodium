@@ -30,8 +30,20 @@
     # Wayland-related requirements
     kernelParams = [
       "amdgpu.dc=1" # Enable Display Core for advanced color management
-      "amdgpu.ppfeaturemask=0xffffffff" # Enable all power/display features
+      # "amdgpu.ppfeaturemask=0xffffffff" # Enable all power/display features
+      # DISABLED: ppfeaturemask=0xffffffff enables GFXOFF (bit 15) and aggressive power/clock
+      # gating, which makes the GPU unable to service DRM requests during transient PCI fabric
+      # disruptions (e.g. USB disconnect from ESD on Keychron Q3 metallic keyboard on the same
+      # PCI root 08.x as the GPU).
+      # See: coredumpctl list — every Slack/1Password SIGTRAP correlates with usb 3-2 disconnect.
+      # Refs: Arch Wiki AMDGPU, Electron #45862, kernel GFXOFF+PG patch for GFX9 APUs
+      # Bit math (verified against drivers/gpu/drm/amd/include/amd_shared.h):
+      #   Kernel default = 0xfff7bfff (bits 14 PP_OVERDRIVE and 19 PP_GFX_DCS OFF by design)
+      #   0xfff7bfff & ~0x8000 (GFXOFF, bit 15) & ~0x20000 (STUTTER, bit 17) = 0xfff53fff
+      "amdgpu.ppfeaturemask=0xfff53fff" # Kernel default minus GFXOFF (bit 15) and stutter (bit 17)
+      "amdgpu.runpm=0" # Explicitly disable runtime PM (redundant on APU but defense-in-depth)
       "amdgpu.dcdebugmask=0x12" # Disable PSR (0x10) + stutter (0x2) to prevent HDMI blanking
+      "usbcore.autosuspend=-1" # Disable USB autosuspend globally to reduce ESD sensitivity on xHCI
     ];
   };
 
