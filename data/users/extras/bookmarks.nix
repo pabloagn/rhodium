@@ -232,6 +232,12 @@ in
       description = "Common MIME Types";
       categories = [ categories.reference ];
     };
+    craft-docs = {
+      profile = "personal";
+      url = "https://docs.craft.do/";
+      description = "Craft Docs";
+      categories = [ categories.productivity ];
+    };
     downloads = {
       profile = "personal";
       url = "about:downloads";
