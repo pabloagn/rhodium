@@ -448,6 +448,15 @@
     };
   };
 
+  gaming = {
+    steam = {
+      binary = "steam";
+      args = [ ];
+      icon = "steam";
+      description = "Steam";
+    };
+  };
+
   multiplexers = {
     tmux-session = {
       binary = "kitty";
