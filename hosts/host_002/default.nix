@@ -23,6 +23,7 @@
     ../../modules/utils
     ../../modules/virtualization
     ../../modules/virtualization/docker-nvidia.nix
+    ../../modules/gaming/steam.nix
   ];
 
   # Base
