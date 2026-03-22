@@ -166,9 +166,24 @@ in
       };
 
       # External monitor 2 (right): Dell U2725QE (27" 4K)
-      # Configured via raw KDL node below (programs.niri.config) to include
-      # per-output layout with default-column-width = 1.0 (niri 25.11 feature
-      # not yet exposed by niri-flake settings module).
+      # 3840x2160 @ 120Hz, portrait orientation (90°)
+      # NOTE: Per-output layout (default-column-width) is not yet exposed by
+      # niri-flake settings module. If needed, set it via niri IPC or wait for
+      # upstream support. Do NOT set programs.niri.config — it completely
+      # overrides everything generated from programs.niri.settings.
+      "Dell Inc. DELL U2725QE G3L0G84" = {
+        mode = {
+          width = 3840;
+          height = 2160;
+          refresh = 120.0;
+        };
+        scale = 1.5;
+        transform.rotation = 90;
+        position = {
+          x = dellPositionX;
+          y = 0;
+        };
+      };
     };
 
     # ============================================================================
@@ -700,64 +715,4 @@ in
     };
   };
 
-  # Per-output layout overrides (niri 25.11 feature)
-  # The niri-flake settings module doesn't expose per-output layout yet,
-  # so we override the full Dell output node with layout included.
-  programs.niri.config = lib.mkAfter [
-    # Dell portrait monitor: full config + per-output layout (always full-width columns)
-    {
-      name = "output";
-      arguments = [ "Dell Inc. DELL U2725QE G3L0G84" ];
-      properties = { };
-      children = [
-        {
-          name = "scale";
-          arguments = [ 1.5 ];
-          properties = { };
-          children = [ ];
-        }
-        {
-          name = "transform";
-          arguments = [ "90" ];
-          properties = { };
-          children = [ ];
-        }
-        {
-          name = "position";
-          arguments = [ ];
-          properties = {
-            x = dellPositionX;
-            y = 0;
-          };
-          children = [ ];
-        }
-        {
-          name = "mode";
-          arguments = [ "3840x2160@120.000000" ];
-          properties = { };
-          children = [ ];
-        }
-        {
-          name = "layout";
-          arguments = [ ];
-          properties = { };
-          children = [
-            {
-              name = "default-column-width";
-              arguments = [ ];
-              properties = { };
-              children = [
-                {
-                  name = "proportion";
-                  arguments = [ 1.0 ];
-                  properties = { };
-                  children = [ ];
-                }
-              ];
-            }
-          ];
-        }
-      ];
-    }
-  ];
 }
