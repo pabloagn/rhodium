@@ -103,7 +103,7 @@
   };
 
   mgr = {
-    linemode = "none";
+    linemode = "size";
     mouse_events = [
       "click"
       "scroll"
