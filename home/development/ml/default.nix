@@ -2,7 +2,6 @@
   config,
   lib,
   pkgs,
-  pkgs-unstable,
   ...
 }:
 with lib;
@@ -13,7 +12,7 @@ with lib;
     };
   };
   config = mkIf config.programs.development.ml.enable {
-    home.packages = (with pkgs; [
+    home.packages = with pkgs; [
       # --- AI Agent Frameworks ---
       autogen # Framework for building autonomous AI agents
 
@@ -41,10 +40,6 @@ with lib;
       # --- Vector Databases ---
       milvus # Open-source vector database for similarity search
       qdrant # Vector database management for semantic search
-    ]) ++ (with pkgs-unstable; [
-      # --- AI Coding Assistants (Unstable) ---
-      claude-code # Anthropic's CLI for Claude
-      claude-monitor # Monitor for Claude Code sessions
-    ]);
+    ];
   };
 }
