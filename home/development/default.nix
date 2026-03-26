@@ -1,6 +1,7 @@
 { ... }:
 {
   imports = [
+    ./agents
     ./async
     ./cloud
     ./databases
