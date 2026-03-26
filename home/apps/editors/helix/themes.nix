@@ -361,6 +361,53 @@
           fg = border;
           modifiers = [ "bold" ];
         };
+
+        "ui.bufferline" = {
+          bg = bg;
+          fg = comment;
+        };
+        "ui.bufferline.active" = {
+          bg = bg-menu;
+          fg = fg;
+          modifiers = [ "bold" ];
+        };
+        "ui.bufferline.background" = {
+          bg = bg;
+        };
+
+        "ui.virtual.indent-guide" = {
+          fg = fg-gutter;
+        };
+        "ui.virtual.wrap" = {
+          fg = fg-gutter;
+        };
+
+        "ui.highlight" = {
+          bg = bg-selection;
+        };
+        "ui.picker.header" = {
+          fg = blue;
+          modifiers = [ "bold" ];
+        };
+        "ui.statusline.separator" = {
+          fg = fg-gutter;
+        };
+        "ui.cursorcolumn.primary" = {
+          bg = bg-menu;
+        };
+
+        "diagnostic.error.gutter" = {
+          fg = error;
+        };
+        "diagnostic.warning.gutter" = {
+          fg = yellow;
+        };
+        "diagnostic.info.gutter" = {
+          fg = info;
+        };
+        "diagnostic.hint.gutter" = {
+          fg = hint;
+        };
       };
   };
 }

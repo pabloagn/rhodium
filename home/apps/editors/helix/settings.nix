@@ -15,7 +15,24 @@
           "yank_main_selection_to_clipboard"
           "jump_backward"
         ];
+        "/" = "global_search";
       };
+      "C-d" = [
+        "half_page_down"
+        "align_view_center"
+      ];
+      "C-u" = [
+        "half_page_up"
+        "align_view_center"
+      ];
+      "C-s" = ":write";
+    };
+
+    keys.insert = {
+      "C-s" = [
+        "normal_mode"
+        ":write"
+      ];
     };
 
     # keys.select = {
@@ -54,8 +71,32 @@
       scrolloff = 8;
       true-color = true;
       undercurl = true;
+      color-modes = true;
+      end-of-line-diagnostics = "hint";
+      line-number = "relative";
+      trim-trailing-whitespace = true;
       smart-tab = {
         enable = true;
+      };
+      auto-save = {
+        focus-lost = true;
+        after-delay.enable = true;
+        after-delay.timeout = 5000;
+      };
+      inline-diagnostics = {
+        cursor-line = "warning";
+      };
+      soft-wrap = {
+        enable = true;
+        wrap-at-text-width = true;
+      };
+      search = {
+        smart-case = true;
+        wrap-around = true;
+      };
+      whitespace.render = {
+        tab = "all";
+        nbsp = "all";
       };
       cursor-shape = {
         insert = "bar";
@@ -112,6 +153,11 @@
         enable = true;
         auto-signature-help = true;
         display-inlay-hints = true;
+        display-messages = true;
+        display-progress-messages = true;
+        display-signature-help-docs = true;
+        display-color-swatches = true;
+        snippets = true;
       };
     };
   };
