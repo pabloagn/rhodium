@@ -6,6 +6,7 @@
     ./env.nix
     ./fonts.nix
     ./metadata.nix
+    ./osmium.nix
     ./scripts.nix
   ];
 }

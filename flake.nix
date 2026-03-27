@@ -163,6 +163,12 @@
             import (dataPathUserExtras + "/apps.nix")
           else
             { };
+
+        osmiumData =
+          if builtins.pathExists (dataPathUserExtras + "/osmium.nix") then
+            import (dataPathUserExtras + "/osmium.nix")
+          else
+            { };
       };
 
       # Import host data

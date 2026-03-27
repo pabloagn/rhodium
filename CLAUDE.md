@@ -19,7 +19,7 @@ Rhodium is a hypermodular, declarative NixOS system built using Nix flakes. It c
   - `data/users/users.nix`: User account definitions
   - `data/hosts/hosts.nix`: Host metadata (hostname, monitor config, etc.)
   - `data/users/preferences/`: User preferences (apps, behavior, metadata, theme)
-  - `data/users/extras/`: User-specific data (apps, bookmarks, profiles)
+  - `data/users/extras/`: User-specific data (apps, bookmarks, osmium services, profiles)
 - **`lib/`**: Custom Nix library functions (formatters, generators, parsers)
 - **`overlays/`**: Nix package overlays
 - **`build/recipes/`**: Shell scripts for system management (prefixed with `rh-`)
@@ -208,3 +208,13 @@ Provides helper functions available to all modules:
 - `parsers.luaParsers`: Lua configuration parsers
 
 Access in modules via the `rhodiumLib` argument.
+
+## Documentation
+
+The documentation for this repository lives in a separate repo at:
+
+```
+/home/pabloagn/dev/rhodium.rh
+```
+
+This is a Hugo site. Documentation content is in `content/docs/`. When making changes to Rhodium that affect documented behavior (scripts, keybindings, tools, architecture), the corresponding docs in `rhodium.rh` must also be updated.
